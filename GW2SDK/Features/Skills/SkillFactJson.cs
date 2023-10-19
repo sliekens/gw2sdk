@@ -138,8 +138,8 @@ public static class SkillFactJson
                 );
         }
 
-        RequiredMember<string> text = new("text");
-        RequiredMember<string> icon = new("icon");
+        RequiredMember text = new("text");
+        RequiredMember icon = new("icon");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -176,8 +176,8 @@ public static class SkillFactJson
 
         return new SkillFact
         {
-            Text = text.GetValue(),
-            Icon = icon.GetValue()
+            Text = text.Select(value => value.GetStringRequired()),
+            Icon = icon.Select(value => value.GetStringRequired())
         };
     }
 }

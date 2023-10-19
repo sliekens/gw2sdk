@@ -14,9 +14,9 @@ public static class BagJson
             return null;
         }
 
-        RequiredMember<int> id = new("id");
-        RequiredMember<int> size = new("size");
-        RequiredMember<Inventory> inventory = new("inventory");
+        RequiredMember id = new("id");
+        RequiredMember size = new("size");
+        RequiredMember inventory = new("inventory");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(id.Name))
@@ -39,8 +39,8 @@ public static class BagJson
 
         return new Bag
         {
-            Id = id.GetValue(),
-            Size = size.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
+            Size = size.Select(value => value.GetInt32()),
             Inventory = inventory.Select(value => value.GetInventory(missingMemberBehavior))
         };
     }

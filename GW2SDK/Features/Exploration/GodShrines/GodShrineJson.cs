@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.GodShrines;
@@ -12,13 +11,13 @@ public static class GodShrineJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<string> name = new("name");
-        RequiredMember<string> nameContested = new("name_contested");
-        RequiredMember<int> pointOfInterestId = new("poi_id");
-        RequiredMember<PointF> coordinates = new("coord");
-        RequiredMember<string> icon = new("icon");
-        RequiredMember<string> iconContested = new("icon_contested");
+        RequiredMember id = new("id");
+        RequiredMember name = new("name");
+        RequiredMember nameContested = new("name_contested");
+        RequiredMember pointOfInterestId = new("poi_id");
+        RequiredMember coordinates = new("coord");
+        RequiredMember icon = new("icon");
+        RequiredMember iconContested = new("icon_contested");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(id.Name))
@@ -57,13 +56,13 @@ public static class GodShrineJson
 
         return new GodShrine
         {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
-            NameContested = nameContested.GetValue(),
-            PointOfInterestId = pointOfInterestId.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
+            Name = name.Select(value => value.GetStringRequired()),
+            NameContested = nameContested.Select(value => value.GetStringRequired()),
+            PointOfInterestId = pointOfInterestId.Select(value => value.GetInt32()),
             Coordinates = coordinates.Select(value => value.GetCoordinateF(missingMemberBehavior)),
-            Icon = icon.GetValue(),
-            IconContested = iconContested.GetValue()
+            Icon = icon.Select(value => value.GetStringRequired()),
+            IconContested = iconContested.Select(value => value.GetStringRequired())
         };
     }
 }

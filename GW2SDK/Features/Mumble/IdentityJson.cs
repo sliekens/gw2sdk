@@ -11,17 +11,17 @@ public static class IdentityJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> name = new("name");
-        RequiredMember<ProfessionName> profession = new("profession");
-        RequiredMember<int> specializationId = new("spec");
-        RequiredMember<RaceName> race = new("race");
-        RequiredMember<int> mapId = new("map_id");
-        RequiredMember<int> map = new("map");
-        RequiredMember<long> worldId = new("world_id");
-        RequiredMember<int> teamColorId = new("team_color_id");
-        RequiredMember<bool> commander = new("commander");
-        RequiredMember<double> fieldOfView = new("fov");
-        RequiredMember<UiSize> uiSize = new("uisz");
+        RequiredMember name = new("name");
+        RequiredMember profession = new("profession");
+        RequiredMember specializationId = new("spec");
+        RequiredMember race = new("race");
+        RequiredMember mapId = new("map_id");
+        RequiredMember map = new("map");
+        RequiredMember worldId = new("world_id");
+        RequiredMember teamColorId = new("team_color_id");
+        RequiredMember commander = new("commander");
+        RequiredMember fieldOfView = new("fov");
+        RequiredMember uiSize = new("uisz");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -78,7 +78,7 @@ public static class IdentityJson
         if (missingMemberBehavior == MissingMemberBehavior.Error)
         {
             // The 'map' and 'map_id' seem to be redundant, but check my assumptions...
-            if (map.GetValue() != mapId.GetValue())
+            if (map.Select(value => value.GetInt32()) != mapId.Select(value => value.GetInt32()))
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember("map"));
             }
@@ -86,15 +86,15 @@ public static class IdentityJson
 
         return new Identity
         {
-            Name = name.GetValue(),
+            Name = name.Select(value => value.GetStringRequired()),
             Profession = profession.Select(value => (ProfessionName)value.GetInt32()),
-            SpecializationId = specializationId.GetValue(),
+            SpecializationId = specializationId.Select(value => value.GetInt32()),
             Race = race.Select(value => (RaceName)(value.GetInt32() + 1)),
-            MapId = mapId.GetValue(),
-            WorldId = worldId.GetValue(),
-            TeamColorId = teamColorId.GetValue(),
-            Commander = commander.GetValue(),
-            FieldOfView = fieldOfView.GetValue(),
+            MapId = mapId.Select(value => value.GetInt32()),
+            WorldId = worldId.Select(value => value.GetInt64()),
+            TeamColorId = teamColorId.Select(value => value.GetInt32()),
+            Commander = commander.Select(value => value.GetBoolean()),
+            FieldOfView = fieldOfView.Select(value => value.GetDouble()),
             UiSize = uiSize.Select(value => (UiSize)value.GetInt32())
         };
     }

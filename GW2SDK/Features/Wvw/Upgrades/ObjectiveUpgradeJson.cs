@@ -11,8 +11,8 @@ public static class ObjectiveUpgradeJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<UpgradeTier> tiers = new("tiers");
+        RequiredMember id = new("id");
+        RequiredMember tiers = new("tiers");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -32,7 +32,7 @@ public static class ObjectiveUpgradeJson
 
         return new ObjectiveUpgrade
         {
-            Id = id.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
             Tiers = tiers.SelectMany(value => value.GetUpgradeTier(missingMemberBehavior))
         };
     }

@@ -11,13 +11,13 @@ public static class AccountAchievementJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<int> current = new("current");
-        RequiredMember<int> max = new("max");
-        RequiredMember<bool> done = new("done");
-        OptionalMember<int> bits = new("bits");
-        NullableMember<int> repeated = new("repeated");
-        NullableMember<bool> unlocked = new("unlocked");
+        RequiredMember id = new("id");
+        RequiredMember current = new("current");
+        RequiredMember max = new("max");
+        RequiredMember done = new("done");
+        OptionalMember bits = new("bits");
+        NullableMember repeated = new("repeated");
+        NullableMember unlocked = new("unlocked");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -57,13 +57,13 @@ public static class AccountAchievementJson
 
         return new AccountAchievement
         {
-            Id = id.GetValue(),
-            Current = current.GetValue(),
-            Max = max.GetValue(),
-            Done = done.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
+            Current = current.Select(value => value.GetInt32()),
+            Max = max.Select(value => value.GetInt32()),
+            Done = done.Select(value => value.GetBoolean()),
             Bits = bits.SelectMany(value => value.GetInt32()),
-            Repeated = repeated.GetValue(),
-            Unlocked = unlocked.GetValue()
+            Repeated = repeated.Select(value => value.GetInt32()),
+            Unlocked = unlocked.Select(value => value.GetBoolean())
         };
     }
 }

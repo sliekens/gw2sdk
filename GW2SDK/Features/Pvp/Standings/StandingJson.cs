@@ -11,9 +11,9 @@ public static class StandingJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> seasonId = new("season_id");
-        RequiredMember<CurrentStanding> current = new("current");
-        RequiredMember<BestStanding> best = new("best");
+        RequiredMember seasonId = new("season_id");
+        RequiredMember current = new("current");
+        RequiredMember best = new("best");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -37,7 +37,7 @@ public static class StandingJson
 
         return new Standing
         {
-            SeasonId = seasonId.GetValue(),
+            SeasonId = seasonId.Select(value => value.GetStringRequired()),
             Current = current.Select(value => value.GetCurrentStanding(missingMemberBehavior)),
             Best = best.Select(value => value.GetBestStanding(missingMemberBehavior))
         };

@@ -11,14 +11,14 @@ public static class TraitSkillJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> name = new("name");
-        RequiredMember<TraitFact> facts = new("facts");
-        OptionalMember<CompoundTraitFact> traitedFacts = new("traited_facts");
-        RequiredMember<string> description = new("description");
-        RequiredMember<string> icon = new("icon");
-        RequiredMember<int> id = new("id");
-        RequiredMember<string> chatLink = new("chat_link");
-        OptionalMember<SkillCategoryName> categories = new("categories");
+        RequiredMember name = new("name");
+        RequiredMember facts = new("facts");
+        OptionalMember traitedFacts = new("traited_facts");
+        RequiredMember description = new("description");
+        RequiredMember icon = new("icon");
+        RequiredMember id = new("id");
+        RequiredMember chatLink = new("chat_link");
+        OptionalMember categories = new("categories");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(name.Name))
@@ -70,17 +70,17 @@ public static class TraitSkillJson
 
         return new TraitSkill
         {
-            Name = name.GetValue(),
+            Name = name.Select(value => value.GetStringRequired()),
             Facts = facts.SelectMany(
                 item => item.GetTraitFact(missingMemberBehavior, out _, out _)
             ),
             TraitedFacts =
                 traitedFacts.SelectMany(value => value.GetCompoundTraitFact(missingMemberBehavior)),
-            Description = description.GetValue(),
-            Icon = icon.GetValue(),
-            Id = id.GetValue(),
-            ChatLink = chatLink.GetValue(),
-            Categories = categories.GetValues(missingMemberBehavior)
+            Description = description.Select(value => value.GetStringRequired()),
+            Icon = icon.Select(value => value.GetStringRequired()),
+            Id = id.Select(value => value.GetInt32()),
+            ChatLink = chatLink.Select(value => value.GetStringRequired()),
+            Categories = categories.SelectMany(value => value.GetEnum<SkillCategoryName>(missingMemberBehavior))
         };
     }
 }

@@ -11,21 +11,21 @@ public static class AccountSummaryJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> id = new("id");
-        RequiredMember<string> name = new("name");
-        RequiredMember<TimeSpan> age = new("age");
-        RequiredMember<DateTimeOffset> lastModified = new("last_modified");
-        RequiredMember<int> world = new("world");
-        RequiredMember<string> guilds = new("guilds");
-        OptionalMember<string> guildLeader = new("guild_leader");
-        RequiredMember<DateTimeOffset> created = new("created");
-        RequiredMember<ProductName> access = new("access");
-        RequiredMember<bool> commander = new("commander");
-        NullableMember<int> fractalLevel = new("fractal_level");
-        NullableMember<int> dailyAp = new("daily_ap");
-        NullableMember<int> monthlyAp = new("monthly_ap");
-        NullableMember<int> wvwRank = new("wvw_rank");
-        NullableMember<int> buildStorageSlots = new("build_storage_slots");
+        RequiredMember id = new("id");
+        RequiredMember name = new("name");
+        RequiredMember age = new("age");
+        RequiredMember lastModified = new("last_modified");
+        RequiredMember world = new("world");
+        RequiredMember guilds = new("guilds");
+        OptionalMember guildLeader = new("guild_leader");
+        RequiredMember created = new("created");
+        RequiredMember access = new("access");
+        RequiredMember commander = new("commander");
+        NullableMember fractalLevel = new("fractal_level");
+        NullableMember dailyAp = new("daily_ap");
+        NullableMember monthlyAp = new("monthly_ap");
+        NullableMember wvwRank = new("wvw_rank");
+        NullableMember buildStorageSlots = new("build_storage_slots");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(id.Name))
@@ -96,21 +96,21 @@ public static class AccountSummaryJson
 
         return new AccountSummary
         {
-            Id = id.GetValue(),
-            DisplayName = name.GetValue(),
+            Id = id.Select(value => value.GetStringRequired()),
+            DisplayName = name.Select(value => value.GetStringRequired()),
             Age = age.Select(value => TimeSpan.FromSeconds(value.GetDouble())),
-            LastModified = lastModified.GetValue(),
-            WorldId = world.GetValue(),
+            LastModified = lastModified.Select(value => value.GetDateTimeOffset()),
+            WorldId = world.Select(value => value.GetInt32()),
             GuildIds = guilds.SelectMany(value => value.GetStringRequired()),
             LeaderOfGuildIds = guildLeader.SelectMany(value => value.GetStringRequired()),
-            Created = created.GetValue(),
-            Access = access.GetValues(missingMemberBehavior),
-            Commander = commander.GetValue(),
-            FractalLevel = fractalLevel.GetValue(),
-            DailyAchievementPoints = dailyAp.GetValue(),
-            MonthlyAchievementPoints = monthlyAp.GetValue(),
-            WvwRank = wvwRank.GetValue(),
-            BuildStorageSlots = buildStorageSlots.GetValue()
+            Created = created.Select(value => value.GetDateTimeOffset()),
+            Access = access.SelectMany(value => value.GetEnum<ProductName>(missingMemberBehavior)),
+            Commander = commander.Select(value => value.GetBoolean()),
+            FractalLevel = fractalLevel.Select(value => value.GetInt32()),
+            DailyAchievementPoints = dailyAp.Select(value => value.GetInt32()),
+            MonthlyAchievementPoints = monthlyAp.Select(value => value.GetInt32()),
+            WvwRank = wvwRank.Select(value => value.GetInt32()),
+            BuildStorageSlots = buildStorageSlots.Select(value => value.GetInt32())
         };
     }
 }

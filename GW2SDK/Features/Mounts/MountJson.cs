@@ -8,11 +8,11 @@ public static class MountJson
 {
     public static Mount GetMount(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<MountName> id = new("id");
-        RequiredMember<string> name = new("name");
-        RequiredMember<int> defaultSkin = new("default_skin");
-        RequiredMember<int> skins = new("skins");
-        RequiredMember<SkillReference> skills = new("skills");
+        RequiredMember id = new("id");
+        RequiredMember name = new("name");
+        RequiredMember defaultSkin = new("default_skin");
+        RequiredMember skins = new("skins");
+        RequiredMember skills = new("skills");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -45,8 +45,8 @@ public static class MountJson
         return new Mount
         {
             Id = id.Select(value => value.GetMountName(missingMemberBehavior)),
-            Name = name.GetValue(),
-            DefaultSkin = defaultSkin.GetValue(),
+            Name = name.Select(value => value.GetStringRequired()),
+            DefaultSkin = defaultSkin.Select(value => value.GetInt32()),
             Skins = skins.SelectMany(value => value.GetInt32()),
             Skills = skills.SelectMany(value => value.GetSkillReference(missingMemberBehavior))
         };

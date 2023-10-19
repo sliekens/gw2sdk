@@ -11,8 +11,8 @@ public static class MasteryRewardJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<MasteryRegionName> region = new("region");
+        RequiredMember id = new("id");
+        RequiredMember region = new("region");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
@@ -40,8 +40,8 @@ public static class MasteryRewardJson
 
         return new MasteryReward
         {
-            Id = id.GetValue(),
-            Region = region.GetValue(missingMemberBehavior)
+            Id = id.Select(value => value.GetInt32()),
+            Region = region.Select(value => value.GetEnum<MasteryRegionName>(missingMemberBehavior))
         };
     }
 }

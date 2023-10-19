@@ -16,31 +16,31 @@ public static class CharacterJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> name = new("name");
-        RequiredMember<RaceName> race = new("race");
-        RequiredMember<Gender> gender = new("gender");
-        RequiredMember<CharacterFlag> flags = new("flags");
-        RequiredMember<ProfessionName> profession = new("profession");
-        RequiredMember<int> level = new("level");
-        OptionalMember<string> guild = new("guild");
-        RequiredMember<TimeSpan> age = new("age");
-        RequiredMember<DateTimeOffset> lastModified = new("last_modified");
-        RequiredMember<DateTimeOffset> created = new("created");
-        RequiredMember<int> deaths = new("deaths");
-        RequiredMember<CraftingDiscipline> crafting = new("crafting");
-        NullableMember<int> title = new("title");
-        RequiredMember<string> backstory = new("backstory");
-        OptionalMember<WvwAbility> wvwAbilities = new("wvw_abilities");
-        NullableMember<int> buildTabsUnlocked = new("build_tabs_unlocked");
-        NullableMember<int> activeBuildTab = new("active_build_tab");
-        OptionalMember<BuildTab> buildTabs = new("build_tabs");
-        NullableMember<int> equipmentTabsUnlocked = new("equipment_tabs_unlocked");
-        NullableMember<int> activeEquipmentTab = new("active_equipment_tab");
-        OptionalMember<EquipmentItem> equipment = new("equipment");
-        OptionalMember<EquipmentTab> equipmentTabs = new("equipment_tabs");
-        OptionalMember<int> recipes = new("recipes");
-        OptionalMember<TrainingProgress> training = new("training");
-        OptionalMember<Bag?> bags = new("bags");
+        RequiredMember name = new("name");
+        RequiredMember race = new("race");
+        RequiredMember gender = new("gender");
+        RequiredMember flags = new("flags");
+        RequiredMember profession = new("profession");
+        RequiredMember level = new("level");
+        OptionalMember guild = new("guild");
+        RequiredMember age = new("age");
+        RequiredMember lastModified = new("last_modified");
+        RequiredMember created = new("created");
+        RequiredMember deaths = new("deaths");
+        RequiredMember crafting = new("crafting");
+        NullableMember title = new("title");
+        RequiredMember backstory = new("backstory");
+        OptionalMember wvwAbilities = new("wvw_abilities");
+        NullableMember buildTabsUnlocked = new("build_tabs_unlocked");
+        NullableMember activeBuildTab = new("active_build_tab");
+        OptionalMember buildTabs = new("build_tabs");
+        NullableMember equipmentTabsUnlocked = new("equipment_tabs_unlocked");
+        NullableMember activeEquipmentTab = new("active_equipment_tab");
+        OptionalMember equipment = new("equipment");
+        OptionalMember equipmentTabs = new("equipment_tabs");
+        OptionalMember recipes = new("recipes");
+        OptionalMember training = new("training");
+        OptionalMember bags = new("bags");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -152,28 +152,28 @@ public static class CharacterJson
 
         return new Character
         {
-            Name = name.GetValue(),
-            Race = race.GetValue(missingMemberBehavior),
-            Gender = gender.GetValue(missingMemberBehavior),
-            Flags = flags.GetValues(missingMemberBehavior),
-            Level = level.GetValue(),
-            GuildId = guild.GetValueOrEmpty(),
-            Profession = profession.GetValue(missingMemberBehavior),
+            Name = name.Select(value => value.GetStringRequired()),
+            Race = race.Select(value => value.GetEnum<RaceName>(missingMemberBehavior)),
+            Gender = gender.Select(value => value.GetEnum<Gender>(missingMemberBehavior)),
+            Flags = flags.SelectMany(value => value.GetEnum<CharacterFlag>(missingMemberBehavior)),
+            Level = level.Select(value => value.GetInt32()),
+            GuildId = guild.Select(value => value.GetString()) ?? "",
+            Profession = profession.Select(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
             Age = age.Select(value => TimeSpan.FromSeconds(value.GetDouble())),
-            LastModified = lastModified.GetValue(),
-            Created = created.GetValue(),
-            Deaths = deaths.GetValue(),
+            LastModified = lastModified.Select(value => value.GetDateTimeOffset()),
+            Created = created.Select(value => value.GetDateTimeOffset()),
+            Deaths = deaths.Select(value => value.GetInt32()),
             CraftingDisciplines =
                 crafting.SelectMany(value => value.GetCraftingDiscipline(missingMemberBehavior)),
-            TitleId = title.GetValue(),
+            TitleId = title.Select(value => value.GetInt32()),
             Backstory = backstory.SelectMany(value => value.GetStringRequired()),
             WvwAbilities =
                 wvwAbilities.SelectMany(value => value.GetWvwAbility(missingMemberBehavior)),
-            BuildTabsUnlocked = buildTabsUnlocked.GetValue(),
-            ActiveBuildTab = activeBuildTab.GetValue(),
+            BuildTabsUnlocked = buildTabsUnlocked.Select(value => value.GetInt32()),
+            ActiveBuildTab = activeBuildTab.Select(value => value.GetInt32()),
             BuildTabs = buildTabs.SelectMany(value => value.GetBuildTab(missingMemberBehavior)),
-            EquipmentTabsUnlocked = equipmentTabsUnlocked.GetValue(),
-            ActiveEquipmentTab = activeEquipmentTab.GetValue(),
+            EquipmentTabsUnlocked = equipmentTabsUnlocked.Select(value => value.GetInt32()),
+            ActiveEquipmentTab = activeEquipmentTab.Select(value => value.GetInt32()),
             Equipment =
                 equipment.SelectMany(value => value.GetEquipmentItem(missingMemberBehavior)),
             EquipmentTabs =

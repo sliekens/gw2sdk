@@ -15,10 +15,10 @@ public static class ComboFinisherTraitFactJson
     {
         requiresTrait = null;
         overrides = null;
-        OptionalMember<string> text = new("text");
-        OptionalMember<string> icon = new("icon");
-        RequiredMember<int> percent = new("percent");
-        RequiredMember<ComboFinisherName> finisherType = new("finisher_type");
+        OptionalMember text = new("text");
+        OptionalMember icon = new("icon");
+        RequiredMember percent = new("percent");
+        RequiredMember finisherType = new("finisher_type");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
@@ -62,10 +62,10 @@ public static class ComboFinisherTraitFactJson
 
         return new ComboFinisherTraitFact
         {
-            Text = text.GetValueOrEmpty(),
-            Icon = icon.GetValueOrEmpty(),
-            Percent = percent.GetValue(),
-            FinisherName = finisherType.GetValue(missingMemberBehavior)
+            Text = text.Select(value => value.GetString()) ?? "",
+            Icon = icon.Select(value => value.GetString()) ?? "",
+            Percent = percent.Select(value => value.GetInt32()),
+            FinisherName = finisherType.Select(value => value.GetEnum<ComboFinisherName>(missingMemberBehavior))
         };
     }
 }

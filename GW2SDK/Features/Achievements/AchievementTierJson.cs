@@ -11,8 +11,8 @@ public static class AchievementTierJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> count = new("count");
-        RequiredMember<int> points = new("points");
+        RequiredMember count = new("count");
+        RequiredMember points = new("points");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(count.Name))
@@ -31,8 +31,8 @@ public static class AchievementTierJson
 
         return new AchievementTier
         {
-            Count = count.GetValue(),
-            Points = points.GetValue()
+            Count = count.Select(value => value.GetInt32()),
+            Points = points.Select(value => value.GetInt32())
         };
     }
 }

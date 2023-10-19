@@ -11,10 +11,10 @@ public static class AchievementRefJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        OptionalMember<ProductRequirement> requiredAccess = new("required_access");
-        OptionalMember<AchievementFlag> flags = new("flags");
-        OptionalMember<LevelRequirement> level = new("level");
+        RequiredMember id = new("id");
+        OptionalMember requiredAccess = new("required_access");
+        OptionalMember flags = new("flags");
+        OptionalMember level = new("level");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -42,10 +42,10 @@ public static class AchievementRefJson
 
         return new AchievementRef
         {
-            Id = id.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
             RequiredAccess =
                 requiredAccess.Select(value => value.GetProductRequirement(missingMemberBehavior)),
-            Flags = flags.GetValues(missingMemberBehavior),
+            Flags = flags.SelectMany(value => value.GetEnum<AchievementFlag>(missingMemberBehavior)),
             Level = level.Select(value => value.GetLevelRequirement(missingMemberBehavior))
         };
     }

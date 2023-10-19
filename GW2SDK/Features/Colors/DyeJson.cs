@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Colors;
@@ -9,15 +8,15 @@ public static class DyeJson
 {
     public static Dye GetDye(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<string> name = new("name");
-        RequiredMember<Color> baseRgb = new("base_rgb");
-        RequiredMember<ColorInfo> cloth = new("cloth");
-        RequiredMember<ColorInfo> leather = new("leather");
-        RequiredMember<ColorInfo> metal = new("metal");
-        OptionalMember<ColorInfo> fur = new("fur");
-        NullableMember<int> itemId = new("item");
-        RequiredMember<ColorCategoryName> categories = new("categories");
+        RequiredMember id = new("id");
+        RequiredMember name = new("name");
+        RequiredMember baseRgb = new("base_rgb");
+        RequiredMember cloth = new("cloth");
+        RequiredMember leather = new("leather");
+        RequiredMember metal = new("metal");
+        OptionalMember fur = new("fur");
+        NullableMember itemId = new("item");
+        RequiredMember categories = new("categories");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -65,15 +64,15 @@ public static class DyeJson
 
         return new Dye
         {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
+            Name = name.Select(value => value.GetStringRequired()),
             BaseRgb = baseRgb.Select(value => value.GetColor(missingMemberBehavior)),
             Cloth = cloth.Select(value => value.GetColorInfo(missingMemberBehavior)),
             Leather = leather.Select(value => value.GetColorInfo(missingMemberBehavior)),
             Metal = metal.Select(value => value.GetColorInfo(missingMemberBehavior)),
             Fur = fur.Select(value => value.GetColorInfo(missingMemberBehavior)),
-            Item = itemId.GetValue(),
-            Categories = categories.GetValues(missingMemberBehavior)
+            Item = itemId.Select(value => value.GetInt32()),
+            Categories = categories.SelectMany(value => value.GetEnum<ColorCategoryName>(missingMemberBehavior))
         };
     }
 }

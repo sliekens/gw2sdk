@@ -8,17 +8,17 @@ public static class MatchJson
 {
     public static Match GetMatch(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<string> id = new("id");
-        RequiredMember<DateTimeOffset> startTime = new("start_time");
-        RequiredMember<DateTimeOffset> endTime = new("end_time");
-        RequiredMember<Distribution> scores = new("scores");
-        RequiredMember<Worlds> worlds = new("worlds");
-        RequiredMember<AllWorlds> allWorlds = new("all_worlds");
-        RequiredMember<Distribution> deaths = new("deaths");
-        RequiredMember<Distribution> kills = new("kills");
-        RequiredMember<Distribution> victoryPoints = new("victory_points");
-        RequiredMember<Skirmish> skirmishes = new("skirmishes");
-        RequiredMember<Map> maps = new("maps");
+        RequiredMember id = new("id");
+        RequiredMember startTime = new("start_time");
+        RequiredMember endTime = new("end_time");
+        RequiredMember scores = new("scores");
+        RequiredMember worlds = new("worlds");
+        RequiredMember allWorlds = new("all_worlds");
+        RequiredMember deaths = new("deaths");
+        RequiredMember kills = new("kills");
+        RequiredMember victoryPoints = new("victory_points");
+        RequiredMember skirmishes = new("skirmishes");
+        RequiredMember maps = new("maps");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -74,9 +74,9 @@ public static class MatchJson
 
         return new Match
         {
-            Id = id.GetValue(),
-            StartTime = startTime.GetValue(),
-            EndTime = endTime.GetValue(),
+            Id = id.Select(value => value.GetStringRequired()),
+            StartTime = startTime.Select(value => value.GetDateTimeOffset()),
+            EndTime = endTime.Select(value => value.GetDateTimeOffset()),
             Scores = scores.Select(value => value.GetDistribution(missingMemberBehavior)),
             Worlds = worlds.Select(value => value.GetWorlds(missingMemberBehavior)),
             AllWorlds = allWorlds.Select(value => value.GetAllWorlds(missingMemberBehavior)),

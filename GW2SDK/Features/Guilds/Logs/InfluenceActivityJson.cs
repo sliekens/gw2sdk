@@ -17,11 +17,11 @@ public static class InfluenceActivityJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<DateTimeOffset> time = new("time");
-        RequiredMember<InfluenceActivityKind> activity = new("activity");
-        RequiredMember<int> totalParticipants = new("total_participants");
-        RequiredMember<string> participants = new("participants");
+        RequiredMember id = new("id");
+        RequiredMember time = new("time");
+        RequiredMember activity = new("activity");
+        RequiredMember totalParticipants = new("total_participants");
+        RequiredMember participants = new("participants");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -62,10 +62,10 @@ public static class InfluenceActivityJson
 
         return new InfluenceActivity
         {
-            Id = id.GetValue(),
-            Time = time.GetValue(),
-            Activity = activity.GetValue(missingMemberBehavior),
-            TotalParticipants = totalParticipants.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
+            Time = time.Select(value => value.GetDateTimeOffset()),
+            Activity = activity.Select(value => value.GetEnum<InfluenceActivityKind>(missingMemberBehavior)),
+            TotalParticipants = totalParticipants.Select(value => value.GetInt32()),
             Participants = participants.SelectMany(value => value.GetStringRequired())
         };
     }

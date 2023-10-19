@@ -11,9 +11,9 @@ public static class GuildPermissionSummaryJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<GuildPermission> id = new("id");
-        RequiredMember<string> name = new("name");
-        RequiredMember<string> description = new("description");
+        RequiredMember id = new("id");
+        RequiredMember name = new("name");
+        RequiredMember description = new("description");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -37,9 +37,9 @@ public static class GuildPermissionSummaryJson
 
         return new GuildPermissionSummary
         {
-            Id = id.GetValue(missingMemberBehavior),
-            Name = name.GetValue(),
-            Description = description.GetValue()
+            Id = id.Select(value => value.GetEnum<GuildPermission>(missingMemberBehavior)),
+            Name = name.Select(value => value.GetStringRequired()),
+            Description = description.Select(value => value.GetStringRequired())
         };
     }
 }

@@ -8,7 +8,7 @@ public static class BuildJson
 {
     public static Build GetBuild(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<int> id = new("id");
+        RequiredMember id = new("id");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -22,6 +22,6 @@ public static class BuildJson
             }
         }
 
-        return new Build { Id = id.GetValue() };
+        return new Build { Id = id.Select(value => value.GetInt32()) };
     }
 }

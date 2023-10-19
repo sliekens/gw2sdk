@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Exploration.Maps;
 using GuildWars2.Json;
 
@@ -13,11 +12,11 @@ public static class RegionJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> name = new("name");
-        RequiredMember<Point> labelCoordinates = new("label_coord");
-        RequiredMember<Rectangle> continentRectangle = new("continent_rect");
-        RequiredMember<Dictionary<int, Map>> maps = new("maps");
-        RequiredMember<int> id = new("id");
+        RequiredMember name = new("name");
+        RequiredMember labelCoordinates = new("label_coord");
+        RequiredMember continentRectangle = new("continent_rect");
+        RequiredMember maps = new("maps");
+        RequiredMember id = new("id");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(name.Name))
@@ -48,8 +47,8 @@ public static class RegionJson
 
         return new Region
         {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
+            Name = name.Select(value => value.GetStringRequired()),
             LabelCoordinates =
                 labelCoordinates.Select(value => value.GetCoordinate(missingMemberBehavior)),
             ContinentRectangle =

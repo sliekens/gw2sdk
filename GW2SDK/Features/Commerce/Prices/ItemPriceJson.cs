@@ -11,12 +11,12 @@ public static class ItemPriceJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<bool> whitelisted = new("whitelisted");
-        RequiredMember<int> demand = new("quantity");
-        RequiredMember<int> bestBid = new("unit_price");
-        RequiredMember<int> supply = new("quantity");
-        RequiredMember<int> bestAsk = new("unit_price");
+        RequiredMember id = new("id");
+        RequiredMember whitelisted = new("whitelisted");
+        RequiredMember demand = new("quantity");
+        RequiredMember bestBid = new("unit_price");
+        RequiredMember supply = new("quantity");
+        RequiredMember bestAsk = new("unit_price");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -72,12 +72,12 @@ public static class ItemPriceJson
 
         return new ItemPrice
         {
-            Id = id.GetValue(),
-            Whitelisted = whitelisted.GetValue(),
-            TotalDemand = demand.GetValue(),
-            TotalSupply = supply.GetValue(),
-            BestBid = bestBid.GetValue(),
-            BestAsk = bestAsk.GetValue()
+            Id = id.Select(value => value.GetInt32()),
+            Whitelisted = whitelisted.Select(value => value.GetBoolean()),
+            TotalDemand = demand.Select(value => value.GetInt32()),
+            TotalSupply = supply.Select(value => value.GetInt32()),
+            BestBid = bestBid.Select(value => value.GetInt32()),
+            BestAsk = bestAsk.Select(value => value.GetInt32())
         };
     }
 }

@@ -11,11 +11,11 @@ public static class DailyAchievementGroupJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<DailyAchievement> pve = new("pve");
-        RequiredMember<DailyAchievement> pvp = new("pvp");
-        RequiredMember<DailyAchievement> wvw = new("wvw");
-        RequiredMember<DailyAchievement> fractals = new("fractals");
-        RequiredMember<DailyAchievement> special = new("special");
+        RequiredMember pve = new("pve");
+        RequiredMember pvp = new("pvp");
+        RequiredMember wvw = new("wvw");
+        RequiredMember fractals = new("fractals");
+        RequiredMember special = new("special");
 
         foreach (var member in json.EnumerateObject())
         {

@@ -11,12 +11,12 @@ public static class TransactionJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<long> id = new("id");
-        RequiredMember<int> itemId = new("item_id");
-        RequiredMember<Coin> price = new("price");
-        RequiredMember<int> quantity = new("quantity");
-        RequiredMember<DateTimeOffset> created = new("created");
-        RequiredMember<DateTimeOffset> purchased = new("purchased");
+        RequiredMember id = new("id");
+        RequiredMember itemId = new("item_id");
+        RequiredMember price = new("price");
+        RequiredMember quantity = new("quantity");
+        RequiredMember created = new("created");
+        RequiredMember purchased = new("purchased");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -52,12 +52,12 @@ public static class TransactionJson
 
         return new Transaction
         {
-            Id = id.GetValue(),
-            ItemId = itemId.GetValue(),
-            Price = price.GetValue(),
-            Quantity = quantity.GetValue(),
-            Created = created.GetValue(),
-            Executed = purchased.GetValue()
+            Id = id.Select(value => value.GetInt64()),
+            ItemId = itemId.Select(value => value.GetInt32()),
+            Price = price.Select(value => value.GetInt32()),
+            Quantity = quantity.Select(value => value.GetInt32()),
+            Created = created.Select(value => value.GetDateTimeOffset()),
+            Executed = purchased.Select(value => value.GetDateTimeOffset())
         };
     }
 }

@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Skills;
@@ -16,9 +16,9 @@ public static class RechargeSkillFactJson
         requiresTrait = null;
         overrides = null;
 
-        RequiredMember<string> text = new("text");
-        RequiredMember<string> icon = new("icon");
-        RequiredMember<double> value = new("value");
+        RequiredMember text = new("text");
+        RequiredMember icon = new("icon");
+        RequiredMember recharge = new("value");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -47,9 +47,9 @@ public static class RechargeSkillFactJson
             {
                 icon.Value = member.Value;
             }
-            else if (member.NameEquals(value.Name))
+            else if (member.NameEquals(recharge.Name))
             {
-                value.Value = member.Value;
+                recharge.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -59,9 +59,9 @@ public static class RechargeSkillFactJson
 
         return new RechargeSkillFact
         {
-            Text = text.GetValue(),
-            Icon = icon.GetValue(),
-            Value = value.GetValue()
+            Text = text.Select(value => value.GetStringRequired()),
+            Icon = icon.Select(value => value.GetStringRequired()),
+            Value = recharge.Select(value => value.GetDouble())
         };
     }
 }

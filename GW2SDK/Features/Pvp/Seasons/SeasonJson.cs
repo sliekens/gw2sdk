@@ -11,14 +11,14 @@ public static class SeasonJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> id = new("id");
-        RequiredMember<string> name = new("name");
-        RequiredMember<DateTime> start = new("start");
-        RequiredMember<DateTime> end = new("end");
-        RequiredMember<bool> active = new("active");
-        RequiredMember<Division> divisions = new("divisions");
-        OptionalMember<SeasonRank> ranks = new("ranks");
-        RequiredMember<LeaderboardGroup> leaderboards = new("leaderboards");
+        RequiredMember id = new("id");
+        RequiredMember name = new("name");
+        RequiredMember start = new("start");
+        RequiredMember end = new("end");
+        RequiredMember active = new("active");
+        RequiredMember divisions = new("divisions");
+        OptionalMember ranks = new("ranks");
+        RequiredMember leaderboards = new("leaderboards");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -62,11 +62,11 @@ public static class SeasonJson
 
         return new Season
         {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
+            Id = id.Select(value => value.GetStringRequired()),
+            Name = name.Select(value => value.GetStringRequired()),
             Start = start.Select(value => value.GetDateTime()),
             End = end.Select(value => value.GetDateTime()),
-            Active = active.GetValue(),
+            Active = active.Select(value => value.GetBoolean()),
             Divisions = divisions.SelectMany(value => value.GetDivision(missingMemberBehavior)),
             Ranks = ranks.SelectMany(value => value.GetSeasonRank(missingMemberBehavior)),
             Leaderboards =

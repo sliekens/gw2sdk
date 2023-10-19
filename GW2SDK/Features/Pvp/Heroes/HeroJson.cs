@@ -8,14 +8,14 @@ public static class HeroJson
 {
     public static Hero GetHero(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<string> id = new("id");
-        RequiredMember<string> name = new("name");
-        RequiredMember<string> description = new("description");
-        RequiredMember<string> type = new("type");
-        RequiredMember<HeroStats> stats = new("stats");
-        RequiredMember<string> overlay = new("overlay");
-        RequiredMember<string> underlay = new("underlay");
-        RequiredMember<HeroSkin> skins = new("skins");
+        RequiredMember id = new("id");
+        RequiredMember name = new("name");
+        RequiredMember description = new("description");
+        RequiredMember type = new("type");
+        RequiredMember stats = new("stats");
+        RequiredMember overlay = new("overlay");
+        RequiredMember underlay = new("underlay");
+        RequiredMember skins = new("skins");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -59,13 +59,13 @@ public static class HeroJson
 
         return new Hero
         {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
-            Description = description.GetValue(),
-            Type = type.GetValue(),
+            Id = id.Select(value => value.GetStringRequired()),
+            Name = name.Select(value => value.GetStringRequired()),
+            Description = description.Select(value => value.GetStringRequired()),
+            Type = type.Select(value => value.GetStringRequired()),
             Stats = stats.Select(value => value.GetHeroStats(missingMemberBehavior)),
-            Overlay = overlay.GetValue(),
-            Underlay = underlay.GetValue(),
+            Overlay = overlay.Select(value => value.GetStringRequired()),
+            Underlay = underlay.Select(value => value.GetStringRequired()),
             Skins = skins.SelectMany(value => value.GetHeroSkin(missingMemberBehavior))
         };
     }

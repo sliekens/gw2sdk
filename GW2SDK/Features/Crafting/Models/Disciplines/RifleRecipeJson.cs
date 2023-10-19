@@ -11,15 +11,15 @@ public static class RifleRecipeJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> outputItemId = new("output_item_id");
-        RequiredMember<int> outputItemCount = new("output_item_count");
-        RequiredMember<int> minRating = new("min_rating");
-        RequiredMember<TimeSpan> timeToCraft = new("time_to_craft_ms");
-        RequiredMember<CraftingDisciplineName> disciplines = new("disciplines");
-        RequiredMember<RecipeFlag> flags = new("flags");
-        RequiredMember<Ingredient> ingredients = new("ingredients");
-        RequiredMember<int> id = new("id");
-        RequiredMember<string> chatLink = new("chat_link");
+        RequiredMember outputItemId = new("output_item_id");
+        RequiredMember outputItemCount = new("output_item_count");
+        RequiredMember minRating = new("min_rating");
+        RequiredMember timeToCraft = new("time_to_craft_ms");
+        RequiredMember disciplines = new("disciplines");
+        RequiredMember flags = new("flags");
+        RequiredMember ingredients = new("ingredients");
+        RequiredMember id = new("id");
+        RequiredMember chatLink = new("chat_link");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
@@ -79,16 +79,16 @@ public static class RifleRecipeJson
 
         return new RifleRecipe
         {
-            Id = id.GetValue(),
-            OutputItemId = outputItemId.GetValue(),
-            OutputItemCount = outputItemCount.GetValue(),
-            MinRating = minRating.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
+            OutputItemId = outputItemId.Select(value => value.GetInt32()),
+            OutputItemCount = outputItemCount.Select(value => value.GetInt32()),
+            MinRating = minRating.Select(value => value.GetInt32()),
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-            Disciplines = disciplines.GetValues(missingMemberBehavior),
-            Flags = flags.GetValues(missingMemberBehavior),
+            Disciplines = disciplines.SelectMany(value => value.GetEnum<CraftingDisciplineName>(missingMemberBehavior)),
+            Flags = flags.SelectMany(value => value.GetEnum<RecipeFlag>(missingMemberBehavior)),
             Ingredients =
                 ingredients.SelectMany(value => value.GetIngredient(missingMemberBehavior)),
-            ChatLink = chatLink.GetValue()
+            ChatLink = chatLink.Select(value => value.GetStringRequired())
         };
     }
 }

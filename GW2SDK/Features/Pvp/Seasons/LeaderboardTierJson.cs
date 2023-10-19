@@ -11,10 +11,10 @@ public static class LeaderboardTierJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        OptionalMember<string> color = new("color");
-        OptionalMember<LeaderboardTierKind> type = new("type");
-        OptionalMember<string> name = new("name");
-        RequiredMember<LeaderboardTierRange> range = new("range");
+        OptionalMember color = new("color");
+        OptionalMember type = new("type");
+        OptionalMember name = new("name");
+        RequiredMember range = new("range");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -42,9 +42,9 @@ public static class LeaderboardTierJson
 
         return new LeaderboardTier
         {
-            Color = color.GetValueOrEmpty(),
-            Kind = type.GetValue(missingMemberBehavior),
-            Name = name.GetValueOrEmpty(),
+            Color = color.Select(value => value.GetString()) ?? "",
+            Kind = type.Select(value => value.GetEnum<LeaderboardTierKind>(missingMemberBehavior)),
+            Name = name.Select(value => value.GetString()) ?? "",
             Range = range.Select(value => value.GetLeaderboardTierRange(missingMemberBehavior))
         };
     }

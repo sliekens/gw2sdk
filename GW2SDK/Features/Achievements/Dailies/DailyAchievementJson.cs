@@ -11,9 +11,9 @@ public static class DailyAchievementJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<LevelRequirement> level = new("level");
-        OptionalMember<ProductRequirement> requiredAccess = new("required_access");
+        RequiredMember id = new("id");
+        RequiredMember level = new("level");
+        OptionalMember requiredAccess = new("required_access");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -37,7 +37,7 @@ public static class DailyAchievementJson
 
         return new DailyAchievement
         {
-            Id = id.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
             Level = level.Select(value => value.GetLevelRequirement(missingMemberBehavior)),
             RequiredAccess =
                 requiredAccess.Select(value => value.GetProductRequirement(missingMemberBehavior))

@@ -11,16 +11,16 @@ public static class SelectedModificationJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        NullableMember<int> agonyResistance = new("AgonyResistance");
-        NullableMember<int> boonDuration = new("BoonDuration");
-        NullableMember<int> conditionDamage = new("ConditionDamage");
-        NullableMember<int> conditionDuration = new("ConditionDuration");
-        NullableMember<int> critDamage = new("CritDamage");
-        NullableMember<int> healing = new("Healing");
-        NullableMember<int> power = new("Power");
-        NullableMember<int> precision = new("Precision");
-        NullableMember<int> toughness = new("Toughness");
-        NullableMember<int> vitality = new("Vitality");
+        NullableMember agonyResistance = new("AgonyResistance");
+        NullableMember boonDuration = new("BoonDuration");
+        NullableMember conditionDamage = new("ConditionDamage");
+        NullableMember conditionDuration = new("ConditionDuration");
+        NullableMember critDamage = new("CritDamage");
+        NullableMember healing = new("Healing");
+        NullableMember power = new("Power");
+        NullableMember precision = new("Precision");
+        NullableMember toughness = new("Toughness");
+        NullableMember vitality = new("Vitality");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(agonyResistance.Name))
@@ -71,16 +71,16 @@ public static class SelectedModificationJson
 
         return new SelectedModification
         {
-            AgonyResistance = agonyResistance.GetValue(),
-            BoonDuration = boonDuration.GetValue(),
-            ConditionDamage = conditionDamage.GetValue(),
-            ConditionDuration = conditionDuration.GetValue(),
-            CritDamage = critDamage.GetValue(),
-            Healing = healing.GetValue(),
-            Power = power.GetValue(),
-            Precision = precision.GetValue(),
-            Toughness = toughness.GetValue(),
-            Vitality = vitality.GetValue()
+            AgonyResistance = agonyResistance.Select(value => value.GetInt32()),
+            BoonDuration = boonDuration.Select(value => value.GetInt32()),
+            ConditionDamage = conditionDamage.Select(value => value.GetInt32()),
+            ConditionDuration = conditionDuration.Select(value => value.GetInt32()),
+            CritDamage = critDamage.Select(value => value.GetInt32()),
+            Healing = healing.Select(value => value.GetInt32()),
+            Power = power.Select(value => value.GetInt32()),
+            Precision = precision.Select(value => value.GetInt32()),
+            Toughness = toughness.Select(value => value.GetInt32()),
+            Vitality = vitality.Select(value => value.GetInt32())
         };
     }
 }

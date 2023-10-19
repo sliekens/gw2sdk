@@ -11,9 +11,9 @@ public static class SkillBarJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        NullableMember<int> heal = new("heal");
-        RequiredMember<int?> utilities = new("utilities");
-        NullableMember<int> elite = new("elite");
+        NullableMember heal = new("heal");
+        RequiredMember utilities = new("utilities");
+        NullableMember elite = new("elite");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -37,12 +37,12 @@ public static class SkillBarJson
 
         return new SkillBar
         {
-            Heal = heal.GetValue(),
+            Heal = heal.Select(value => value.GetInt32()),
             Utilities =
-                utilities.SelectMany(
+                utilities.SelectMany<int?>(
                     value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32()
                 ),
-            Elite = elite.GetValue()
+            Elite = elite.Select(value => value.GetInt32())
         };
     }
 }

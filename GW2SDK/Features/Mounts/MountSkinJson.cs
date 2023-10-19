@@ -11,11 +11,11 @@ public static class MountSkinJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<string> name = new("name");
-        RequiredMember<string> icon = new("icon");
-        RequiredMember<DyeSlot> dyeSlots = new("dye_slots");
-        RequiredMember<MountName> mount = new("mount");
+        RequiredMember id = new("id");
+        RequiredMember name = new("name");
+        RequiredMember icon = new("icon");
+        RequiredMember dyeSlots = new("dye_slots");
+        RequiredMember mount = new("mount");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -47,9 +47,9 @@ public static class MountSkinJson
 
         return new MountSkin
         {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
-            Icon = icon.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
+            Name = name.Select(value => value.GetStringRequired()),
+            Icon = icon.Select(value => value.GetStringRequired()),
             DyeSlots = dyeSlots.SelectMany(value => value.GetDyeSlot(missingMemberBehavior)),
             Mount = mount.Select(value => value.GetMountName(missingMemberBehavior))
         };

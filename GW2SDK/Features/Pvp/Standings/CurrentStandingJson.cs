@@ -11,13 +11,13 @@ public static class CurrentStandingJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> totalPoints = new("total_points");
-        RequiredMember<int> division = new("division");
-        RequiredMember<int> tier = new("tier");
-        RequiredMember<int> points = new("points");
-        RequiredMember<int> repeats = new("repeats");
-        NullableMember<int> rating = new("rating");
-        NullableMember<int> decay = new("decay");
+        RequiredMember totalPoints = new("total_points");
+        RequiredMember division = new("division");
+        RequiredMember tier = new("tier");
+        RequiredMember points = new("points");
+        RequiredMember repeats = new("repeats");
+        NullableMember rating = new("rating");
+        NullableMember decay = new("decay");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -57,13 +57,13 @@ public static class CurrentStandingJson
 
         return new CurrentStanding
         {
-            TotalPoints = totalPoints.GetValue(),
-            Division = division.GetValue(),
-            Tier = tier.GetValue(),
-            Points = points.GetValue(),
-            Repeats = repeats.GetValue(),
-            Rating = rating.GetValue(),
-            Decay = decay.GetValue()
+            TotalPoints = totalPoints.Select(value => value.GetInt32()),
+            Division = division.Select(value => value.GetInt32()),
+            Tier = tier.Select(value => value.GetInt32()),
+            Points = points.Select(value => value.GetInt32()),
+            Repeats = repeats.Select(value => value.GetInt32()),
+            Rating = rating.Select(value => value.GetInt32()),
+            Decay = decay.Select(value => value.GetInt32())
         };
     }
 }

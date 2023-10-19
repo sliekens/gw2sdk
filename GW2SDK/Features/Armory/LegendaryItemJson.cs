@@ -11,8 +11,8 @@ public static class LegendaryItemJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<int> maxCount = new("max_count");
+        RequiredMember id = new("id");
+        RequiredMember maxCount = new("max_count");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -32,8 +32,8 @@ public static class LegendaryItemJson
 
         return new LegendaryItem
         {
-            Id = id.GetValue(),
-            MaxCount = maxCount.GetValue()
+            Id = id.Select(value => value.GetInt32()),
+            MaxCount = maxCount.Select(value => value.GetInt32())
         };
     }
 }

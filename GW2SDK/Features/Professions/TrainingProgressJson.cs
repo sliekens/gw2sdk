@@ -11,9 +11,9 @@ public static class TrainingProgressJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<int> spent = new("spent");
-        RequiredMember<bool> done = new("done");
+        RequiredMember id = new("id");
+        RequiredMember spent = new("spent");
+        RequiredMember done = new("done");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -37,9 +37,9 @@ public static class TrainingProgressJson
 
         return new TrainingProgress
         {
-            Id = id.GetValue(),
-            Spent = spent.GetValue(),
-            Done = done.GetValue()
+            Id = id.Select(value => value.GetInt32()),
+            Spent = spent.Select(value => value.GetInt32()),
+            Done = done.Select(value => value.GetBoolean())
         };
     }
 }

@@ -11,17 +11,17 @@ public static class CharacterSummaryJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> name = new("name");
-        RequiredMember<RaceName> race = new("race");
-        RequiredMember<Gender> gender = new("gender");
-        RequiredMember<ProfessionName> profession = new("profession");
-        RequiredMember<int> level = new("level");
-        OptionalMember<string> guild = new("guild");
-        RequiredMember<TimeSpan> age = new("age");
-        RequiredMember<DateTimeOffset> lastModified = new("last_modified");
-        RequiredMember<DateTimeOffset> created = new("created");
-        RequiredMember<int> deaths = new("deaths");
-        NullableMember<int> title = new("title");
+        RequiredMember name = new("name");
+        RequiredMember race = new("race");
+        RequiredMember gender = new("gender");
+        RequiredMember profession = new("profession");
+        RequiredMember level = new("level");
+        OptionalMember guild = new("guild");
+        RequiredMember age = new("age");
+        RequiredMember lastModified = new("last_modified");
+        RequiredMember created = new("created");
+        RequiredMember deaths = new("deaths");
+        NullableMember title = new("title");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -77,17 +77,17 @@ public static class CharacterSummaryJson
 
         return new CharacterSummary
         {
-            Name = name.GetValue(),
-            Race = race.GetValue(missingMemberBehavior),
-            Gender = gender.GetValue(missingMemberBehavior),
-            Level = level.GetValue(),
-            GuildId = guild.GetValueOrEmpty(),
-            Profession = profession.GetValue(missingMemberBehavior),
+            Name = name.Select(value => value.GetStringRequired()),
+            Race = race.Select(value => value.GetEnum<RaceName>(missingMemberBehavior)),
+            Gender = gender.Select(value => value.GetEnum<Gender>(missingMemberBehavior)),
+            Level = level.Select(value => value.GetInt32()),
+            GuildId = guild.Select(value => value.GetString()) ?? "",
+            Profession = profession.Select(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
             Age = age.Select(value => TimeSpan.FromSeconds(value.GetDouble())),
-            LastModified = lastModified.GetValue(),
-            Created = created.GetValue(),
-            Deaths = deaths.GetValue(),
-            TitleId = title.GetValue()
+            LastModified = lastModified.Select(value => value.GetDateTimeOffset()),
+            Created = created.Select(value => value.GetDateTimeOffset()),
+            Deaths = deaths.Select(value => value.GetInt32()),
+            TitleId = title.Select(value => value.GetInt32())
         };
     }
 }

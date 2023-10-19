@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.PointsOfInterest;
@@ -12,12 +11,12 @@ public static class UnlockerPointOfInterestJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        OptionalMember<string> name = new("name");
-        RequiredMember<int> floor = new("floor");
-        RequiredMember<PointF> coordinates = new("coord");
-        RequiredMember<int> id = new("id");
-        RequiredMember<string> chatLink = new("chat_link");
-        RequiredMember<string> icon = new("icon");
+        OptionalMember name = new("name");
+        RequiredMember floor = new("floor");
+        RequiredMember coordinates = new("coord");
+        RequiredMember id = new("id");
+        RequiredMember chatLink = new("chat_link");
+        RequiredMember icon = new("icon");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
@@ -61,12 +60,12 @@ public static class UnlockerPointOfInterestJson
 
         return new UnlockerPointOfInterest
         {
-            Id = id.GetValue(),
-            Name = name.GetValueOrEmpty(),
-            Floor = floor.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
+            Name = name.Select(value => value.GetString()) ?? "",
+            Floor = floor.Select(value => value.GetInt32()),
             Coordinates = coordinates.Select(value => value.GetCoordinateF(missingMemberBehavior)),
-            ChatLink = chatLink.GetValue(),
-            Icon = icon.GetValue()
+            ChatLink = chatLink.Select(value => value.GetStringRequired()),
+            Icon = icon.Select(value => value.GetStringRequired())
         };
     }
 }

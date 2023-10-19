@@ -8,11 +8,11 @@ public static class PetJson
 {
     public static Pet GetPet(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<string> name = new("name");
-        RequiredMember<string> description = new("description");
-        RequiredMember<string> icon = new("icon");
-        RequiredMember<PetSkill> skills = new("skills");
+        RequiredMember id = new("id");
+        RequiredMember name = new("name");
+        RequiredMember description = new("description");
+        RequiredMember icon = new("icon");
+        RequiredMember skills = new("skills");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -44,10 +44,10 @@ public static class PetJson
 
         return new Pet
         {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
-            Description = description.GetValue(),
-            Icon = icon.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
+            Name = name.Select(value => value.GetStringRequired()),
+            Description = description.Select(value => value.GetStringRequired()),
+            Icon = icon.Select(value => value.GetStringRequired()),
             Skills = skills.SelectMany(value => value.GetPetSkill(missingMemberBehavior))
         };
     }

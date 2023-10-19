@@ -15,9 +15,9 @@ public static class RadiusTraitFactJson
     {
         requiresTrait = null;
         overrides = null;
-        OptionalMember<string> text = new("text");
-        OptionalMember<string> icon = new("icon");
-        RequiredMember<int> distance = new("distance");
+        OptionalMember text = new("text");
+        OptionalMember icon = new("icon");
+        RequiredMember distance = new("distance");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
@@ -57,9 +57,9 @@ public static class RadiusTraitFactJson
 
         return new RadiusTraitFact
         {
-            Text = text.GetValueOrEmpty(),
-            Icon = icon.GetValueOrEmpty(),
-            Distance = distance.GetValue()
+            Text = text.Select(value => value.GetString()) ?? "",
+            Icon = icon.Select(value => value.GetString()) ?? "",
+            Distance = distance.Select(value => value.GetInt32())
         };
     }
 }

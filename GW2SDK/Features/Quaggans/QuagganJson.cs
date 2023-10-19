@@ -11,8 +11,8 @@ public static class QuagganJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> id = new("id");
-        RequiredMember<string> url = new("url");
+        RequiredMember id = new("id");
+        RequiredMember url = new("url");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -32,8 +32,8 @@ public static class QuagganJson
 
         return new Quaggan
         {
-            Id = id.GetValue(),
-            PictureHref = url.GetValue()
+            Id = id.Select(value => value.GetStringRequired()),
+            PictureHref = url.Select(value => value.GetStringRequired())
         };
     }
 }

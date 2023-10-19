@@ -11,9 +11,9 @@ public static class UpgradeTierJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> name = new("name");
-        RequiredMember<int> yaksRequired = new("yaks_required");
-        RequiredMember<Upgrade> upgrades = new("upgrades");
+        RequiredMember name = new("name");
+        RequiredMember yaksRequired = new("yaks_required");
+        RequiredMember upgrades = new("upgrades");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -37,8 +37,8 @@ public static class UpgradeTierJson
 
         return new UpgradeTier
         {
-            Name = name.GetValue(),
-            YaksRequired = yaksRequired.GetValue(),
+            Name = name.Select(value => value.GetStringRequired()),
+            YaksRequired = yaksRequired.Select(value => value.GetInt32()),
             Upgrades = upgrades.SelectMany(value => value.GetUpgrade(missingMemberBehavior))
         };
     }

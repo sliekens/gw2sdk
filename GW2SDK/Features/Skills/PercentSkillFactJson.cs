@@ -16,9 +16,9 @@ public static class PercentSkillFactJson
         requiresTrait = null;
         overrides = null;
 
-        RequiredMember<string> text = new("text");
-        RequiredMember<string> icon = new("icon");
-        RequiredMember<double> percent = new("percent");
+        RequiredMember text = new("text");
+        RequiredMember icon = new("icon");
+        RequiredMember percent = new("percent");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -60,9 +60,9 @@ public static class PercentSkillFactJson
 
         return new PercentSkillFact
         {
-            Text = text.GetValue(),
-            Icon = icon.GetValue(),
-            Percent = percent.GetValue()
+            Text = text.Select(value => value.GetStringRequired()),
+            Icon = icon.Select(value => value.GetStringRequired()),
+            Percent = percent.Select(value => value.GetDouble())
         };
     }
 }

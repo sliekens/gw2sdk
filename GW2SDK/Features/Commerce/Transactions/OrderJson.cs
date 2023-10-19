@@ -8,11 +8,11 @@ public static class OrderJson
 {
     public static Order GetOrder(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<long> id = new("id");
-        RequiredMember<int> itemId = new("item_id");
-        RequiredMember<Coin> price = new("price");
-        RequiredMember<int> quantity = new("quantity");
-        RequiredMember<DateTimeOffset> created = new("created");
+        RequiredMember id = new("id");
+        RequiredMember itemId = new("item_id");
+        RequiredMember price = new("price");
+        RequiredMember quantity = new("quantity");
+        RequiredMember created = new("created");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -44,11 +44,11 @@ public static class OrderJson
 
         return new Order
         {
-            Id = id.GetValue(),
-            ItemId = itemId.GetValue(),
-            Price = price.GetValue(),
-            Quantity = quantity.GetValue(),
-            Created = created.GetValue()
+            Id = id.Select(value => value.GetInt64()),
+            ItemId = itemId.Select(value => value.GetInt32()),
+            Price = price.Select(value => value.GetInt32()),
+            Quantity = quantity.Select(value => value.GetInt32()),
+            Created = created.Select(value => value.GetDateTimeOffset())
         };
     }
 }

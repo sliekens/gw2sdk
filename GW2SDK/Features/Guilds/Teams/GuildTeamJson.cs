@@ -11,14 +11,14 @@ public static class GuildTeamJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<GuildTeamMember> members = new("members");
-        RequiredMember<string> name = new("name");
-        RequiredMember<GuildTeamState> state = new("state");
-        RequiredMember<Results> aggregate = new("aggregate");
-        RequiredMember<Ladders> ladders = new("ladders");
-        RequiredMember<Game> games = new("games");
-        OptionalMember<Season> seasons = new("seasons");
+        RequiredMember id = new("id");
+        RequiredMember members = new("members");
+        RequiredMember name = new("name");
+        RequiredMember state = new("state");
+        RequiredMember aggregate = new("aggregate");
+        RequiredMember ladders = new("ladders");
+        RequiredMember games = new("games");
+        OptionalMember seasons = new("seasons");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -62,10 +62,10 @@ public static class GuildTeamJson
 
         return new GuildTeam
         {
-            Id = id.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
             Members = members.SelectMany(value => value.GetGuildTeamMember(missingMemberBehavior)),
-            Name = name.GetValue(),
-            State = state.GetValue(missingMemberBehavior),
+            Name = name.Select(value => value.GetStringRequired()),
+            State = state.Select(value => value.GetEnum<GuildTeamState>(missingMemberBehavior)),
             Aggregate = aggregate.Select(value => value.GetResults(missingMemberBehavior)),
             Ladders = ladders.Select(value => value.GetLadders(missingMemberBehavior)),
             Games = games.SelectMany(value => value.GetGame(missingMemberBehavior)),

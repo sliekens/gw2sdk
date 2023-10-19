@@ -11,9 +11,9 @@ public static class GuildEmblemJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<GuildEmblemPart> background = new("background");
-        RequiredMember<GuildEmblemPart> foreground = new("foreground");
-        RequiredMember<GuildEmblemFlag> flags = new("flags");
+        RequiredMember background = new("background");
+        RequiredMember foreground = new("foreground");
+        RequiredMember flags = new("flags");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -39,7 +39,7 @@ public static class GuildEmblemJson
         {
             Background = background.Select(value => value.GetGuildEmblemPart(missingMemberBehavior)),
             Foreground = foreground.Select(value => value.GetGuildEmblemPart(missingMemberBehavior)),
-            Flags = flags.GetValues(missingMemberBehavior)
+            Flags = flags.SelectMany(value => value.GetEnum<GuildEmblemFlag>(missingMemberBehavior))
         };
     }
 }

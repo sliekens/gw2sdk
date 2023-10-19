@@ -11,10 +11,10 @@ public static class MapSummaryJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<MapKind> type = new("type");
-        RequiredMember<Distribution> deaths = new("deaths");
-        RequiredMember<Distribution> kills = new("kills");
+        RequiredMember id = new("id");
+        RequiredMember type = new("type");
+        RequiredMember deaths = new("deaths");
+        RequiredMember kills = new("kills");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -42,8 +42,8 @@ public static class MapSummaryJson
 
         return new MapSummary
         {
-            Id = id.GetValue(),
-            Kind = type.GetValue(missingMemberBehavior),
+            Id = id.Select(value => value.GetInt32()),
+            Kind = type.Select(value => value.GetEnum<MapKind>(missingMemberBehavior)),
             Deaths = deaths.Select(value => value.GetDistribution(missingMemberBehavior)),
             Kills = kills.Select(value => value.GetDistribution(missingMemberBehavior))
         };

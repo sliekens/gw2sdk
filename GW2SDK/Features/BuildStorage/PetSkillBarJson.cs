@@ -11,8 +11,8 @@ public static class PetSkillBarJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int?> terrestrial = new("terrestrial");
-        RequiredMember<int?> aquatic = new("aquatic");
+        RequiredMember terrestrial = new("terrestrial");
+        RequiredMember aquatic = new("aquatic");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -33,10 +33,10 @@ public static class PetSkillBarJson
         return new PetSkillBar
         {
             Terrestrial =
-                terrestrial.SelectMany(
+                terrestrial.SelectMany<int?>(
                     value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32()
                 ),
-            Aquatic = aquatic.SelectMany(
+            Aquatic = aquatic.SelectMany<int?>(
                 value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32()
             )
         };

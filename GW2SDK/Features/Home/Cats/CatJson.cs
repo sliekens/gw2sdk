@@ -8,8 +8,8 @@ public static class CatJson
 {
     public static Cat GetCat(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<string> hint = new("hint");
+        RequiredMember id = new("id");
+        RequiredMember hint = new("hint");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -29,8 +29,8 @@ public static class CatJson
 
         return new Cat
         {
-            Id = id.GetValue(),
-            Hint = hint.GetValue()
+            Id = id.Select(value => value.GetInt32()),
+            Hint = hint.Select(value => value.GetStringRequired())
         };
     }
 }

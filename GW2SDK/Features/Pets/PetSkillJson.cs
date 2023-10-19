@@ -11,7 +11,7 @@ public static class PetSkillJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
+        RequiredMember id = new("id");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -25,6 +25,6 @@ public static class PetSkillJson
             }
         }
 
-        return new PetSkill { Id = id.GetValue() };
+        return new PetSkill { Id = id.Select(value => value.GetInt32()) };
     }
 }

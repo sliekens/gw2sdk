@@ -8,15 +8,15 @@ public static class KeepJson
 {
     public static Keep GetKeep(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<string> id = new("id");
-        RequiredMember<TeamColor> owner = new("owner");
-        RequiredMember<DateTimeOffset> lastFlipped = new("last_flipped");
-        RequiredMember<int> pointsTick = new("points_tick");
-        RequiredMember<int> pointsCapture = new("points_capture");
-        OptionalMember<string> claimedBy = new("claimed_by");
-        NullableMember<DateTimeOffset> claimedAt = new("claimed_at");
-        OptionalMember<int> yaksDelivered = new("yaks_delivered");
-        OptionalMember<int> guildUpgrades = new("guild_upgrades");
+        RequiredMember id = new("id");
+        RequiredMember owner = new("owner");
+        RequiredMember lastFlipped = new("last_flipped");
+        RequiredMember pointsTick = new("points_tick");
+        RequiredMember pointsCapture = new("points_capture");
+        OptionalMember claimedBy = new("claimed_by");
+        NullableMember claimedAt = new("claimed_at");
+        OptionalMember yaksDelivered = new("yaks_delivered");
+        OptionalMember guildUpgrades = new("guild_upgrades");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -73,15 +73,15 @@ public static class KeepJson
 
         return new Keep
         {
-            Id = id.GetValue(),
-            Owner = owner.GetValue(missingMemberBehavior),
-            LastFlipped = lastFlipped.GetValue(),
-            PointsTick = pointsTick.GetValue(),
-            PointsCapture = pointsCapture.GetValue(),
-            ClaimedBy = claimedBy.GetValueOrEmpty(),
-            ClaimedAt = claimedAt.GetValue(),
-            YaksDelivered = yaksDelivered.GetValue(),
-            GuildUpgrades = guildUpgrades.GetValues()
+            Id = id.Select(value => value.GetStringRequired()),
+            Owner = owner.Select(value => value.GetEnum<TeamColor>(missingMemberBehavior)),
+            LastFlipped = lastFlipped.Select(value => value.GetDateTimeOffset()),
+            PointsTick = pointsTick.Select(value => value.GetInt32()),
+            PointsCapture = pointsCapture.Select(value => value.GetInt32()),
+            ClaimedBy = claimedBy.Select(value => value.GetString()) ?? "",
+            ClaimedAt = claimedAt.Select(value => value.GetDateTimeOffset()),
+            YaksDelivered = yaksDelivered.Select(value => value.GetInt32()),
+            GuildUpgrades = guildUpgrades.SelectMany(value => value.GetInt32()) ?? Array.Empty<int>()
         };
     }
 }

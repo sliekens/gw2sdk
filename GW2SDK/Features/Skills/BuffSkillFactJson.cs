@@ -16,12 +16,12 @@ public static class BuffSkillFactJson
         requiresTrait = null;
         overrides = null;
 
-        RequiredMember<string> text = new("text");
-        RequiredMember<string> icon = new("icon");
-        NullableMember<TimeSpan> duration = new("duration");
-        OptionalMember<string> status = new("status");
-        OptionalMember<string> description = new("description");
-        NullableMember<int> applyCount = new("apply_count");
+        RequiredMember text = new("text");
+        RequiredMember icon = new("icon");
+        NullableMember duration = new("duration");
+        OptionalMember status = new("status");
+        OptionalMember description = new("description");
+        NullableMember applyCount = new("apply_count");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -74,12 +74,12 @@ public static class BuffSkillFactJson
 
         return new BuffSkillFact
         {
-            Text = text.GetValue(),
-            Icon = icon.GetValue(),
+            Text = text.Select(value => value.GetStringRequired()),
+            Icon = icon.Select(value => value.GetStringRequired()),
             Duration = duration.Select(value => TimeSpan.FromSeconds(value.GetDouble())),
-            Status = status.GetValueOrEmpty(),
-            Description = description.GetValueOrEmpty(),
-            ApplyCount = applyCount.GetValue()
+            Status = status.Select(value => value.GetString()) ?? "",
+            Description = description.Select(value => value.GetString()) ?? "",
+            ApplyCount = applyCount.Select(value => value.GetInt32())
         };
     }
 }

@@ -15,10 +15,10 @@ public static class DamageTraitFactJson
     {
         requiresTrait = null;
         overrides = null;
-        OptionalMember<string> text = new("text");
-        OptionalMember<string> icon = new("icon");
-        RequiredMember<int> hitCount = new("hit_count");
-        RequiredMember<double> damageMultiplier = new("dmg_multiplier");
+        OptionalMember text = new("text");
+        OptionalMember icon = new("icon");
+        RequiredMember hitCount = new("hit_count");
+        RequiredMember damageMultiplier = new("dmg_multiplier");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
@@ -62,10 +62,10 @@ public static class DamageTraitFactJson
 
         return new DamageTraitFact
         {
-            Text = text.GetValueOrEmpty(),
-            Icon = icon.GetValueOrEmpty(),
-            HitCount = hitCount.GetValue(),
-            DamageMultiplier = damageMultiplier.GetValue()
+            Text = text.Select(value => value.GetString()) ?? "",
+            Icon = icon.Select(value => value.GetString()) ?? "",
+            HitCount = hitCount.Select(value => value.GetInt32()),
+            DamageMultiplier = damageMultiplier.Select(value => value.GetDouble())
         };
     }
 }

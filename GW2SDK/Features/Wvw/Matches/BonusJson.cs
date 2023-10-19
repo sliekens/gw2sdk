@@ -8,8 +8,8 @@ public static class BonusJson
 {
     public static Bonus GetBonus(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<BonusKind> type = new("type");
-        RequiredMember<TeamColor> owner = new("owner");
+        RequiredMember type = new("type");
+        RequiredMember owner = new("owner");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -29,8 +29,8 @@ public static class BonusJson
 
         return new Bonus
         {
-            Kind = type.GetValue(missingMemberBehavior),
-            Owner = owner.GetValue(missingMemberBehavior)
+            Kind = type.Select(value => value.GetEnum<BonusKind>(missingMemberBehavior)),
+            Owner = owner.Select(value => value.GetEnum<TeamColor>(missingMemberBehavior))
         };
     }
 }

@@ -11,9 +11,9 @@ public static class MasteryPointsTotalJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> region = new("region");
-        RequiredMember<int> spent = new("spent");
-        RequiredMember<int> earned = new("earned");
+        RequiredMember region = new("region");
+        RequiredMember spent = new("spent");
+        RequiredMember earned = new("earned");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -37,9 +37,9 @@ public static class MasteryPointsTotalJson
 
         return new MasteryPointsTotal
         {
-            Region = region.GetValue(),
-            Spent = spent.GetValue(),
-            Earned = earned.GetValue()
+            Region = region.Select(value => value.GetStringRequired()),
+            Spent = spent.Select(value => value.GetInt32()),
+            Earned = earned.Select(value => value.GetInt32())
         };
     }
 }

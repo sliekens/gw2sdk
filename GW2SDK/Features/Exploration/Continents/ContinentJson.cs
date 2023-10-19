@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Continents;
@@ -12,12 +11,12 @@ public static class ContinentJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> name = new("name");
-        RequiredMember<Size> continentDimensions = new("continent_dims");
-        RequiredMember<int> minZoom = new("min_zoom");
-        RequiredMember<int> maxZoom = new("max_zoom");
-        RequiredMember<int> floors = new("floors");
-        RequiredMember<int> id = new("id");
+        RequiredMember name = new("name");
+        RequiredMember continentDimensions = new("continent_dims");
+        RequiredMember minZoom = new("min_zoom");
+        RequiredMember maxZoom = new("max_zoom");
+        RequiredMember floors = new("floors");
+        RequiredMember id = new("id");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(name.Name))
@@ -52,12 +51,12 @@ public static class ContinentJson
 
         return new Continent
         {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
+            Name = name.Select(value => value.GetStringRequired()),
             ContinentDimensions =
                 continentDimensions.Select(value => value.GetDimensions(missingMemberBehavior)),
-            MinZoom = minZoom.GetValue(),
-            MaxZoom = maxZoom.GetValue(),
+            MinZoom = minZoom.Select(value => value.GetInt32()),
+            MaxZoom = maxZoom.Select(value => value.GetInt32()),
             Floors = floors.SelectMany(value => value.GetInt32())
         };
     }

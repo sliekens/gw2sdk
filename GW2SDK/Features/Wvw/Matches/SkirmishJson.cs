@@ -11,9 +11,9 @@ public static class SkirmishJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<Distribution> scores = new("scores");
-        RequiredMember<MapScores> mapScores = new("map_scores");
+        RequiredMember id = new("id");
+        RequiredMember scores = new("scores");
+        RequiredMember mapScores = new("map_scores");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -37,7 +37,7 @@ public static class SkirmishJson
 
         return new Skirmish
         {
-            Id = id.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
             Scores = scores.Select(value => value.GetDistribution(missingMemberBehavior)),
             MapScores = mapScores.SelectMany(value => value.GetMapScores(missingMemberBehavior))
         };

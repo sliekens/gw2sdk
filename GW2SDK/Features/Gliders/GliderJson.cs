@@ -11,13 +11,13 @@ public static class GliderJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        OptionalMember<int> unlockItems = new("unlock_items");
-        RequiredMember<int> order = new("order");
-        RequiredMember<string> icon = new("icon");
-        RequiredMember<string> name = new("name");
-        RequiredMember<string> description = new("description");
-        RequiredMember<int> defaultDyes = new("default_dyes");
+        RequiredMember id = new("id");
+        OptionalMember unlockItems = new("unlock_items");
+        RequiredMember order = new("order");
+        RequiredMember icon = new("icon");
+        RequiredMember name = new("name");
+        RequiredMember description = new("description");
+        RequiredMember defaultDyes = new("default_dyes");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -57,12 +57,12 @@ public static class GliderJson
 
         return new Glider
         {
-            Id = id.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
             UnlockItems = unlockItems.SelectMany(entry => entry.GetInt32()) ?? Array.Empty<int>(),
-            Order = order.GetValue(),
-            Icon = icon.GetValue(),
-            Name = name.GetValue(),
-            Description = description.GetValue(),
+            Order = order.Select(value => value.GetInt32()),
+            Icon = icon.Select(value => value.GetStringRequired()),
+            Name = name.Select(value => value.GetStringRequired()),
+            Description = description.Select(value => value.GetStringRequired()),
             DefaultDyes = defaultDyes.SelectMany(entry => entry.GetInt32())
         };
     }

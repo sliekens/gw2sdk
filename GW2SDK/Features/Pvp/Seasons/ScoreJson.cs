@@ -8,8 +8,8 @@ public static class ScoreJson
 {
     public static Score GetScore(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<string> id = new("id");
-        RequiredMember<int> value = new("value");
+        RequiredMember id = new("id");
+        RequiredMember score = new("value");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -17,9 +17,9 @@ public static class ScoreJson
             {
                 id.Value = member.Value;
             }
-            else if (member.NameEquals(value.Name))
+            else if (member.NameEquals(score.Name))
             {
-                value.Value = member.Value;
+                score.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -29,8 +29,8 @@ public static class ScoreJson
 
         return new Score
         {
-            Id = id.GetValue(),
-            Value = value.GetValue()
+            Id = id.Select(value => value.GetStringRequired()),
+            Value = score.Select(value => value.GetInt32())
         };
     }
 }

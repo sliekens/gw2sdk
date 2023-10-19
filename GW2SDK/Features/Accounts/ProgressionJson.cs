@@ -11,18 +11,18 @@ public static class ProgressionJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> id = new("id");
-        RequiredMember<int> value = new("value");
+        RequiredMember progressId = new("id");
+        RequiredMember progress = new("value");
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(id.Name))
+            if (member.NameEquals(progressId.Name))
             {
-                id.Value = member.Value;
+                progressId.Value = member.Value;
             }
-            else if (member.NameEquals(value.Name))
+            else if (member.NameEquals(progress.Name))
             {
-                value.Value = member.Value;
+                progress.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -32,8 +32,8 @@ public static class ProgressionJson
 
         return new Progression
         {
-            Id = id.GetValue(),
-            Value = value.GetValue()
+            Id = progressId.Select(value => value.GetStringRequired()),
+            Value = progress.Select(value => value.GetInt32())
         };
     }
 }

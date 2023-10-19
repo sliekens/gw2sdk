@@ -11,22 +11,22 @@ public static class UtilityJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> name = new("name");
-        OptionalMember<string> description = new("description");
-        RequiredMember<int> level = new("level");
-        RequiredMember<Rarity> rarity = new("rarity");
-        RequiredMember<Coin> vendorValue = new("vendor_value");
-        RequiredMember<GameType> gameTypes = new("game_types");
-        RequiredMember<ItemFlag> flags = new("flags");
-        RequiredMember<ItemRestriction> restrictions = new("restrictions");
-        RequiredMember<int> id = new("id");
-        RequiredMember<string> chatLink = new("chat_link");
-        OptionalMember<string> icon = new("icon");
-        NullableMember<TimeSpan> duration = new("duration_ms");
-        NullableMember<int> applyCount = new("apply_count");
-        OptionalMember<string> effectName = new("name");
-        OptionalMember<string> effectIcon = new("icon");
-        OptionalMember<string> effectDescription = new("description");
+        RequiredMember name = new("name");
+        OptionalMember description = new("description");
+        RequiredMember level = new("level");
+        RequiredMember rarity = new("rarity");
+        RequiredMember vendorValue = new("vendor_value");
+        RequiredMember gameTypes = new("game_types");
+        RequiredMember flags = new("flags");
+        RequiredMember restrictions = new("restrictions");
+        RequiredMember id = new("id");
+        RequiredMember chatLink = new("chat_link");
+        OptionalMember icon = new("icon");
+        NullableMember duration = new("duration_ms");
+        NullableMember applyCount = new("apply_count");
+        OptionalMember effectName = new("name");
+        OptionalMember effectIcon = new("icon");
+        OptionalMember effectDescription = new("description");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
@@ -129,22 +129,22 @@ public static class UtilityJson
 
         return new Utility
         {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
-            Description = description.GetValueOrEmpty(),
-            Level = level.GetValue(),
-            Rarity = rarity.GetValue(missingMemberBehavior),
-            VendorValue = vendorValue.GetValue(),
-            GameTypes = gameTypes.GetValues(missingMemberBehavior),
-            Flags = flags.GetValues(missingMemberBehavior),
-            Restrictions = restrictions.GetValues(missingMemberBehavior),
-            ChatLink = chatLink.GetValue(),
-            Icon = icon.GetValueOrNull(),
+            Id = id.Select(value => value.GetInt32()),
+            Name = name.Select(value => value.GetStringRequired()),
+            Description = description.Select(value => value.GetString()) ?? "",
+            Level = level.Select(value => value.GetInt32()),
+            Rarity = rarity.Select(value => value.GetEnum<Rarity>(missingMemberBehavior)),
+            VendorValue = vendorValue.Select(value => value.GetInt32()),
+            GameTypes = gameTypes.SelectMany(value => value.GetEnum<GameType>(missingMemberBehavior)),
+            Flags = flags.SelectMany(value => value.GetEnum<ItemFlag>(missingMemberBehavior)),
+            Restrictions = restrictions.SelectMany(value => value.GetEnum<ItemRestriction>(missingMemberBehavior)),
+            ChatLink = chatLink.Select(value => value.GetStringRequired()),
+            Icon = icon.Select(value => value.GetString()),
             Duration = duration.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-            ApplyCount = applyCount.GetValue(),
-            EffectName = effectName.GetValueOrEmpty(),
-            EffectIcon = effectIcon.GetValueOrNull(),
-            EffectDescription = effectDescription.GetValueOrEmpty()
+            ApplyCount = applyCount.Select(value => value.GetInt32()),
+            EffectName = effectName.Select(value => value.GetString()) ?? "",
+            EffectIcon = effectIcon.Select(value => value.GetString()),
+            EffectDescription = effectDescription.Select(value => value.GetString()) ?? ""
         };
     }
 }

@@ -11,8 +11,8 @@ public static class LeaderboardJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<LeaderboardSetting> settings = new("settings");
-        RequiredMember<LeaderboardScoring> scorings = new("scorings");
+        RequiredMember settings = new("settings");
+        RequiredMember scorings = new("scorings");
 
         foreach (var member in json.EnumerateObject())
         {

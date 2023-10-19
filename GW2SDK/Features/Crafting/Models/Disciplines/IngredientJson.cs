@@ -11,9 +11,9 @@ public static class IngredientJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<IngredientKind> type = new("type");
-        RequiredMember<int> id = new("id");
-        RequiredMember<int> count = new("count");
+        RequiredMember type = new("type");
+        RequiredMember id = new("id");
+        RequiredMember count = new("count");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(type.Name))
@@ -36,9 +36,9 @@ public static class IngredientJson
 
         return new Ingredient
         {
-            Kind = type.GetValue(missingMemberBehavior),
-            Id = id.GetValue(),
-            Count = count.GetValue()
+            Kind = type.Select(value => value.GetEnum<IngredientKind>(missingMemberBehavior)),
+            Id = id.Select(value => value.GetInt32()),
+            Count = count.Select(value => value.GetInt32())
         };
     }
 }

@@ -15,9 +15,9 @@ public static class ComboFieldTraitFactJson
     {
         requiresTrait = null;
         overrides = null;
-        OptionalMember<string> text = new("text");
-        OptionalMember<string> icon = new("icon");
-        RequiredMember<ComboFieldName> fieldType = new("field_type");
+        OptionalMember text = new("text");
+        OptionalMember icon = new("icon");
+        RequiredMember fieldType = new("field_type");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
@@ -57,9 +57,9 @@ public static class ComboFieldTraitFactJson
 
         return new ComboFieldTraitFact
         {
-            Text = text.GetValueOrEmpty(),
-            Icon = icon.GetValueOrEmpty(),
-            Field = fieldType.GetValue(missingMemberBehavior)
+            Text = text.Select(value => value.GetString()) ?? "",
+            Icon = icon.Select(value => value.GetString()) ?? "",
+            Field = fieldType.Select(value => value.GetEnum<ComboFieldName>(missingMemberBehavior))
         };
     }
 }

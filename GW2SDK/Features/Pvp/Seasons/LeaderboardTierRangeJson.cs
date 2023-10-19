@@ -11,8 +11,8 @@ public static class LeaderboardTierRangeJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<double> min = new("min");
-        RequiredMember<double> max = new("max");
+        RequiredMember min = new("min");
+        RequiredMember max = new("max");
 
         foreach (var member in json.EnumerateArray())
         {
@@ -32,8 +32,8 @@ public static class LeaderboardTierRangeJson
 
         return new LeaderboardTierRange
         {
-            Maximum = max.GetValue(),
-            Minimum = min.GetValue()
+            Maximum = max.Select(value => value.GetDouble()),
+            Minimum = min.Select(value => value.GetDouble())
         };
     }
 }

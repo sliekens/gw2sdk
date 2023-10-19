@@ -11,17 +11,17 @@ public static class ProfessionJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<ProfessionName> id = new("id");
-        RequiredMember<string> name = new("name");
-        RequiredMember<int> code = new("code");
-        RequiredMember<string> icon = new("icon");
-        RequiredMember<string> iconBig = new("icon_big");
-        RequiredMember<int> specializations = new("specializations");
-        RequiredMember<IDictionary<string, WeaponProficiency>> weapons = new("weapons");
-        RequiredMember<ProfessionFlag> flags = new("flags");
-        RequiredMember<SkillReference> skills = new("skills");
-        RequiredMember<Training> training = new("training");
-        RequiredMember<Dictionary<int, int>> skillsByPalette = new("skills_by_palette");
+        RequiredMember id = new("id");
+        RequiredMember name = new("name");
+        RequiredMember code = new("code");
+        RequiredMember icon = new("icon");
+        RequiredMember iconBig = new("icon_big");
+        RequiredMember specializations = new("specializations");
+        RequiredMember weapons = new("weapons");
+        RequiredMember flags = new("flags");
+        RequiredMember skills = new("skills");
+        RequiredMember training = new("training");
+        RequiredMember skillsByPalette = new("skills_by_palette");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(id.Name))
@@ -76,17 +76,17 @@ public static class ProfessionJson
 
         return new Profession
         {
-            Id = id.GetValue(missingMemberBehavior),
-            Name = name.GetValue(),
-            Code = code.GetValue(),
-            Icon = icon.GetValue(),
-            IconBig = iconBig.GetValue(),
+            Id = id.Select(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
+            Name = name.Select(value => value.GetStringRequired()),
+            Code = code.Select(value => value.GetInt32()),
+            Icon = icon.Select(value => value.GetStringRequired()),
+            IconBig = iconBig.Select(value => value.GetStringRequired()),
             Specializations = specializations.SelectMany(value => value.GetInt32()),
             Weapons =
                 weapons.Select(
                     value => value.GetMap(item => item.GetWeaponProficiency(missingMemberBehavior))
                 ),
-            Flags = flags.GetValues(missingMemberBehavior),
+            Flags = flags.SelectMany(value => value.GetEnum<ProfessionFlag>(missingMemberBehavior)),
             Skills = skills.SelectMany(value => value.GetSkillReference(missingMemberBehavior)),
             Training = training.SelectMany(value => value.GetTraining(missingMemberBehavior)),
             SkillsByPalette =

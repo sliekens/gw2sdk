@@ -11,10 +11,10 @@ public static class GuildUpgradeCostJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<GuildUpgradeCostKind> kind = new("type");
-        OptionalMember<string> name = new("name");
-        RequiredMember<int> count = new("count");
-        NullableMember<int> itemId = new("item_id");
+        RequiredMember kind = new("type");
+        OptionalMember name = new("name");
+        RequiredMember count = new("count");
+        NullableMember itemId = new("item_id");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -42,10 +42,10 @@ public static class GuildUpgradeCostJson
 
         return new GuildUpgradeCost
         {
-            Kind = kind.GetValue(missingMemberBehavior),
-            Name = name.GetValueOrEmpty(),
-            Count = count.GetValue(),
-            ItemId = itemId.GetValue()
+            Kind = kind.Select(value => value.GetEnum<GuildUpgradeCostKind>(missingMemberBehavior)),
+            Name = name.Select(value => value.GetString()) ?? "",
+            Count = count.Select(value => value.GetInt32()),
+            ItemId = itemId.Select(value => value.GetInt32())
         };
     }
 }

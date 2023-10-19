@@ -8,17 +8,17 @@ public static class TraitJson
 {
     public static Trait GetTrait(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<int> tier = new("tier");
-        RequiredMember<int> order = new("order");
-        RequiredMember<string> name = new("name");
-        OptionalMember<string> description = new("description");
-        RequiredMember<TraitSlot> slot = new("slot");
-        OptionalMember<TraitFact> facts = new("facts");
-        OptionalMember<CompoundTraitFact> traitedFacts = new("traited_facts");
-        OptionalMember<TraitSkill> skills = new("skills");
-        RequiredMember<int> specialization = new("specialization");
-        RequiredMember<string> icon = new("icon");
+        RequiredMember id = new("id");
+        RequiredMember tier = new("tier");
+        RequiredMember order = new("order");
+        RequiredMember name = new("name");
+        OptionalMember description = new("description");
+        RequiredMember slot = new("slot");
+        OptionalMember facts = new("facts");
+        OptionalMember traitedFacts = new("traited_facts");
+        OptionalMember skills = new("skills");
+        RequiredMember specialization = new("specialization");
+        RequiredMember icon = new("icon");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -74,14 +74,14 @@ public static class TraitJson
 
         return new Trait
         {
-            Id = id.GetValue(),
-            Tier = tier.GetValue(),
-            Order = order.GetValue(),
-            Name = name.GetValue(),
-            Description = description.GetValueOrEmpty(),
-            Slot = slot.GetValue(missingMemberBehavior),
-            Icon = icon.GetValue(),
-            SpezializationId = specialization.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
+            Tier = tier.Select(value => value.GetInt32()),
+            Order = order.Select(value => value.GetInt32()),
+            Name = name.Select(value => value.GetStringRequired()),
+            Description = description.Select(value => value.GetString()) ?? "",
+            Slot = slot.Select(value => value.GetEnum<TraitSlot>(missingMemberBehavior)),
+            Icon = icon.Select(value => value.GetStringRequired()),
+            SpezializationId = specialization.Select(value => value.GetInt32()),
             Facts = facts.SelectMany(
                 value => value.GetTraitFact(missingMemberBehavior, out _, out _)
             ),

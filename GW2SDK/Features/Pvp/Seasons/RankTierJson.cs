@@ -11,7 +11,7 @@ public static class RankTierJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> rating = new("rating");
+        RequiredMember rating = new("rating");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -25,6 +25,6 @@ public static class RankTierJson
             }
         }
 
-        return new RankTier { Rating = rating.GetValue() };
+        return new RankTier { Rating = rating.Select(value => value.GetInt32()) };
     }
 }

@@ -11,12 +11,12 @@ public static class LegendJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> id = new("id");
-        RequiredMember<int> code = new("code");
-        RequiredMember<int> swap = new("swap");
-        RequiredMember<int> heal = new("heal");
-        RequiredMember<int> elite = new("elite");
-        RequiredMember<int> utilities = new("utilities");
+        RequiredMember id = new("id");
+        RequiredMember code = new("code");
+        RequiredMember swap = new("swap");
+        RequiredMember heal = new("heal");
+        RequiredMember elite = new("elite");
+        RequiredMember utilities = new("utilities");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -52,11 +52,11 @@ public static class LegendJson
 
         return new Legend
         {
-            Id = id.GetValue(),
-            Code = code.GetValue(),
-            Swap = swap.GetValue(),
-            Heal = heal.GetValue(),
-            Elite = elite.GetValue(),
+            Id = id.Select(value => value.GetStringRequired()),
+            Code = code.Select(value => value.GetInt32()),
+            Swap = swap.Select(value => value.GetInt32()),
+            Heal = heal.Select(value => value.GetInt32()),
+            Elite = elite.Select(value => value.GetInt32()),
             Utilities = utilities.SelectMany(value => value.GetInt32())
         };
     }

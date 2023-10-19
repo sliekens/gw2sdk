@@ -4,7 +4,7 @@ using Array = System.Array;
 
 namespace GuildWars2.Json;
 
-internal ref struct NullableMember<T> where T : struct
+internal ref struct NullableMember
 {
     public JsonElement Value = default;
 
@@ -26,7 +26,7 @@ internal ref struct NullableMember<T> where T : struct
 
     internal ReadOnlySpan<char> Name { get; }
 
-    internal T? Select(Func<JsonElement, T?> resultSelector)
+    internal TValue? Select<TValue>(Func<JsonElement, TValue> resultSelector) where TValue : struct
     {
         if (IsUndefinedOrNull)
         {
@@ -46,11 +46,12 @@ internal ref struct NullableMember<T> where T : struct
         }
     }
 
-    internal IReadOnlyList<T?> SelectMany(Func<JsonElement, T?> resultSelector)
+    internal IReadOnlyList<TValue?> SelectMany<TValue>(Func<JsonElement, TValue?> resultSelector)
+        where TValue : struct
     {
         if (IsUndefinedOrNull)
         {
-            return Array.Empty<T?>();
+            return Array.Empty<TValue?>();
         }
 
         try

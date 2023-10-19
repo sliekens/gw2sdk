@@ -11,11 +11,11 @@ public static class GuildBankTabJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> upgradeId = new("upgrade_id");
-        RequiredMember<int> size = new("size");
-        RequiredMember<Coin> coins = new("coins");
-        OptionalMember<string> note = new("note");
-        RequiredMember<GuildBankSlot?> inventory = new("inventory");
+        RequiredMember upgradeId = new("upgrade_id");
+        RequiredMember size = new("size");
+        RequiredMember coins = new("coins");
+        OptionalMember note = new("note");
+        RequiredMember inventory = new("inventory");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -47,10 +47,10 @@ public static class GuildBankTabJson
 
         return new GuildBankTab
         {
-            UpgradeId = upgradeId.GetValue(),
-            Size = size.GetValue(),
-            Coins = coins.GetValue(),
-            Note = note.GetValueOrEmpty(),
+            UpgradeId = upgradeId.Select(value => value.GetInt32()),
+            Size = size.Select(value => value.GetInt32()),
+            Coins = coins.Select(value => value.GetInt32()),
+            Note = note.Select(value => value.GetString()) ?? "",
             Inventory = inventory.SelectMany(value => value.GetGuildBankSlot(missingMemberBehavior))
         };
     }

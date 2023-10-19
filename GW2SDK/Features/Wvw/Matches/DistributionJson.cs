@@ -11,9 +11,9 @@ public static class DistributionJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> red = new("red");
-        RequiredMember<int> blue = new("blue");
-        RequiredMember<int> green = new("green");
+        RequiredMember red = new("red");
+        RequiredMember blue = new("blue");
+        RequiredMember green = new("green");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -37,9 +37,9 @@ public static class DistributionJson
 
         return new Distribution
         {
-            Red = red.GetValue(),
-            Blue = blue.GetValue(),
-            Green = green.GetValue()
+            Red = red.Select(value => value.GetInt32()),
+            Blue = blue.Select(value => value.GetInt32()),
+            Green = green.Select(value => value.GetInt32())
         };
     }
 }

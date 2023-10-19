@@ -11,8 +11,8 @@ public static class ItemUpgradeJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<UpgradeType> upgrade = new("upgrade");
-        RequiredMember<int> itemId = new("item_id");
+        RequiredMember upgrade = new("upgrade");
+        RequiredMember itemId = new("item_id");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(upgrade.Name))
@@ -31,8 +31,8 @@ public static class ItemUpgradeJson
 
         return new ItemUpgrade
         {
-            Upgrade = upgrade.GetValue(missingMemberBehavior),
-            ItemId = itemId.GetValue()
+            Upgrade = upgrade.Select(value => value.GetEnum<UpgradeType>(missingMemberBehavior)),
+            ItemId = itemId.Select(value => value.GetInt32())
         };
     }
 }

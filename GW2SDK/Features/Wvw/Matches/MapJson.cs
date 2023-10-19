@@ -8,13 +8,13 @@ public static class MapJson
 {
     public static Map GetMap(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<MapKind> type = new("type");
-        RequiredMember<Distribution> scores = new("scores");
-        RequiredMember<Bonus> bonuses = new("bonuses");
-        RequiredMember<Objective> objectives = new("objectives");
-        RequiredMember<Distribution> deaths = new("deaths");
-        RequiredMember<Distribution> kills = new("kills");
+        RequiredMember id = new("id");
+        RequiredMember type = new("type");
+        RequiredMember scores = new("scores");
+        RequiredMember bonuses = new("bonuses");
+        RequiredMember objectives = new("objectives");
+        RequiredMember deaths = new("deaths");
+        RequiredMember kills = new("kills");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -54,8 +54,8 @@ public static class MapJson
 
         return new Map
         {
-            Id = id.GetValue(),
-            Kind = type.GetValue(missingMemberBehavior),
+            Id = id.Select(value => value.GetInt32()),
+            Kind = type.Select(value => value.GetEnum<MapKind>(missingMemberBehavior)),
             Scores = scores.Select(value => value.GetDistribution(missingMemberBehavior)),
             Bonuses = bonuses.SelectMany(value => value.GetBonus(missingMemberBehavior)),
             Objectives = objectives.SelectMany(value => value.GetObjective(missingMemberBehavior)),

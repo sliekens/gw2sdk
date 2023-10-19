@@ -11,8 +11,8 @@ public static class SelectedStatJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<SelectedModification> attributes = new("attributes");
+        RequiredMember id = new("id");
+        RequiredMember attributes = new("attributes");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(id.Name))
@@ -31,7 +31,7 @@ public static class SelectedStatJson
 
         return new SelectedStat
         {
-            Id = id.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
             Attributes =
                 attributes.Select(value => value.GetSelectedModification(missingMemberBehavior))
         };

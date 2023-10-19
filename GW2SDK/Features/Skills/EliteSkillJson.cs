@@ -11,28 +11,28 @@ public static class EliteSkillJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<string> name = new("name");
-        OptionalMember<SkillFact> facts = new("facts");
-        OptionalMember<TraitedSkillFact> traitedFacts = new("traited_facts");
-        RequiredMember<string> description = new("description");
-        OptionalMember<string> icon = new("icon");
-        NullableMember<WeaponType> weaponType = new("weapon_type");
-        OptionalMember<ProfessionName> professions = new("professions");
-        NullableMember<SkillSlot> slot = new("slot");
-        NullableMember<int> flipSkill = new("flip_skill");
-        NullableMember<int> nextChain = new("next_chain");
-        NullableMember<int> prevChain = new("prev_chain");
-        OptionalMember<int> transformSkills = new("transform_skills");
-        RequiredMember<SkillFlag> flags = new("flags");
-        NullableMember<int> specialization = new("specialization");
-        RequiredMember<string> chatLink = new("chat_link");
-        OptionalMember<SkillCategoryName> categories = new("categories");
-        OptionalMember<SkillReference> subskills = new("subskills");
-        OptionalMember<int> bundleSkills = new("bundle_skills");
-        NullableMember<Attunement> attunement = new("attunement");
-        NullableMember<int> cost = new("cost");
-        NullableMember<int> toolbeltSkill = new("toolbelt_skill");
+        RequiredMember id = new("id");
+        RequiredMember name = new("name");
+        OptionalMember facts = new("facts");
+        OptionalMember traitedFacts = new("traited_facts");
+        RequiredMember description = new("description");
+        OptionalMember icon = new("icon");
+        NullableMember weaponType = new("weapon_type");
+        OptionalMember professions = new("professions");
+        NullableMember slot = new("slot");
+        NullableMember flipSkill = new("flip_skill");
+        NullableMember nextChain = new("next_chain");
+        NullableMember prevChain = new("prev_chain");
+        OptionalMember transformSkills = new("transform_skills");
+        RequiredMember flags = new("flags");
+        NullableMember specialization = new("specialization");
+        RequiredMember chatLink = new("chat_link");
+        OptionalMember categories = new("categories");
+        OptionalMember subskills = new("subskills");
+        OptionalMember bundleSkills = new("bundle_skills");
+        NullableMember attunement = new("attunement");
+        NullableMember cost = new("cost");
+        NullableMember toolbeltSkill = new("toolbelt_skill");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -141,32 +141,32 @@ public static class EliteSkillJson
 
         return new EliteSkill
         {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
+            Name = name.Select(value => value.GetStringRequired()),
             Facts = facts.SelectMany(
                 value => value.GetSkillFact(missingMemberBehavior, out _, out _)
             ),
             TraitedFacts =
                 traitedFacts.SelectMany(value => value.GetTraitedSkillFact(missingMemberBehavior)),
-            Description = description.GetValue(),
-            Icon = icon.GetValueOrNull(),
-            WeaponType = weaponType.GetValue(missingMemberBehavior),
-            Professions = professions.GetValues(missingMemberBehavior),
-            Slot = slot.GetValue(missingMemberBehavior),
-            FlipSkill = flipSkill.GetValue(),
-            NextChain = nextChain.GetValue(),
-            PreviousChain = prevChain.GetValue(),
+            Description = description.Select(value => value.GetStringRequired()),
+            Icon = icon.Select(value => value.GetString()),
+            WeaponType = weaponType.Select(value => value.GetEnum<WeaponType>(missingMemberBehavior)),
+            Professions = professions.SelectMany(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
+            Slot = slot.Select(value => value.GetEnum<SkillSlot>(missingMemberBehavior)),
+            FlipSkill = flipSkill.Select(value => value.GetInt32()),
+            NextChain = nextChain.Select(value => value.GetInt32()),
+            PreviousChain = prevChain.Select(value => value.GetInt32()),
             TransformSkills = transformSkills.SelectMany(value => value.GetInt32()),
-            SkillFlag = flags.GetValues(missingMemberBehavior),
-            Specialization = specialization.GetValue(),
-            ChatLink = chatLink.GetValue(),
-            Categories = categories.GetValues(missingMemberBehavior),
+            SkillFlag = flags.SelectMany(value => value.GetEnum<SkillFlag>(missingMemberBehavior)),
+            Specialization = specialization.Select(value => value.GetInt32()),
+            ChatLink = chatLink.Select(value => value.GetStringRequired()),
+            Categories = categories.SelectMany(value => value.GetEnum<SkillCategoryName>(missingMemberBehavior)),
             Subskills =
                 subskills.SelectMany(value => value.GetSkillReference(missingMemberBehavior)),
             BundleSkills = bundleSkills.SelectMany(value => value.GetInt32()),
-            Attunement = attunement.GetValue(missingMemberBehavior),
-            Cost = cost.GetValue(),
-            ToolbeltSkill = toolbeltSkill.GetValue()
+            Attunement = attunement.Select(value => value.GetEnum<Attunement>(missingMemberBehavior)),
+            Cost = cost.Select(value => value.GetInt32()),
+            ToolbeltSkill = toolbeltSkill.Select(value => value.GetInt32())
         };
     }
 }

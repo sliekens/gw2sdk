@@ -11,8 +11,8 @@ public static class ScoreJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> red = new("red");
-        RequiredMember<int> blue = new("blue");
+        RequiredMember red = new("red");
+        RequiredMember blue = new("blue");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -32,8 +32,8 @@ public static class ScoreJson
 
         return new Score
         {
-            Red = red.GetValue(),
-            Blue = blue.GetValue()
+            Red = red.Select(value => value.GetInt32()),
+            Blue = blue.Select(value => value.GetInt32())
         };
     }
 }

@@ -11,8 +11,8 @@ public static class SkillObjectiveJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> cost = new("cost");
-        RequiredMember<int> skillId = new("skill_id");
+        RequiredMember cost = new("cost");
+        RequiredMember skillId = new("skill_id");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
@@ -40,8 +40,8 @@ public static class SkillObjectiveJson
 
         return new SkillObjective
         {
-            Cost = cost.GetValue(),
-            SkillId = skillId.GetValue()
+            Cost = cost.Select(value => value.GetInt32()),
+            SkillId = skillId.Select(value => value.GetInt32())
         };
     }
 }

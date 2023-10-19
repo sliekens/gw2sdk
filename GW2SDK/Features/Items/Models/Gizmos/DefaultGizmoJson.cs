@@ -11,19 +11,19 @@ public static class DefaultGizmoJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> name = new("name");
-        OptionalMember<string> description = new("description");
-        RequiredMember<int> level = new("level");
-        RequiredMember<Rarity> rarity = new("rarity");
-        RequiredMember<Coin> vendorValue = new("vendor_value");
-        RequiredMember<GameType> gameTypes = new("game_types");
-        RequiredMember<ItemFlag> flags = new("flags");
-        RequiredMember<ItemRestriction> restrictions = new("restrictions");
-        RequiredMember<int> id = new("id");
-        RequiredMember<string> chatLink = new("chat_link");
-        OptionalMember<string> icon = new("icon");
-        OptionalMember<int> vendorIds = new("vendor_ids");
-        NullableMember<int> guildUpgradeId = new("guild_upgrade_id");
+        RequiredMember name = new("name");
+        OptionalMember description = new("description");
+        RequiredMember level = new("level");
+        RequiredMember rarity = new("rarity");
+        RequiredMember vendorValue = new("vendor_value");
+        RequiredMember gameTypes = new("game_types");
+        RequiredMember flags = new("flags");
+        RequiredMember restrictions = new("restrictions");
+        RequiredMember id = new("id");
+        RequiredMember chatLink = new("chat_link");
+        OptionalMember icon = new("icon");
+        OptionalMember vendorIds = new("vendor_ids");
+        NullableMember guildUpgradeId = new("guild_upgrade_id");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
@@ -114,19 +114,19 @@ public static class DefaultGizmoJson
 
         return new DefaultGizmo
         {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
-            Description = description.GetValueOrEmpty(),
-            Level = level.GetValue(),
-            Rarity = rarity.GetValue(missingMemberBehavior),
-            VendorValue = vendorValue.GetValue(),
-            GameTypes = gameTypes.GetValues(missingMemberBehavior),
-            Flags = flags.GetValues(missingMemberBehavior),
-            Restrictions = restrictions.GetValues(missingMemberBehavior),
-            ChatLink = chatLink.GetValue(),
-            Icon = icon.GetValueOrNull(),
+            Id = id.Select(value => value.GetInt32()),
+            Name = name.Select(value => value.GetStringRequired()),
+            Description = description.Select(value => value.GetString()) ?? "",
+            Level = level.Select(value => value.GetInt32()),
+            Rarity = rarity.Select(value => value.GetEnum<Rarity>(missingMemberBehavior)),
+            VendorValue = vendorValue.Select(value => value.GetInt32()),
+            GameTypes = gameTypes.SelectMany(value => value.GetEnum<GameType>(missingMemberBehavior)),
+            Flags = flags.SelectMany(value => value.GetEnum<ItemFlag>(missingMemberBehavior)),
+            Restrictions = restrictions.SelectMany(value => value.GetEnum<ItemRestriction>(missingMemberBehavior)),
+            ChatLink = chatLink.Select(value => value.GetStringRequired()),
+            Icon = icon.Select(value => value.GetString()),
             VendorIds = vendorIds.SelectMany(value => value.GetInt32()),
-            GuildUpgradeId = guildUpgradeId.GetValue()
+            GuildUpgradeId = guildUpgradeId.Select(value => value.GetInt32())
         };
     }
 }

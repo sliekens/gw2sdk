@@ -11,10 +11,10 @@ public static class TrainingJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<TrainingCategory> category = new("category");
-        RequiredMember<string> name = new("name");
-        RequiredMember<TrainingObjective> track = new("track");
+        RequiredMember id = new("id");
+        RequiredMember category = new("category");
+        RequiredMember name = new("name");
+        RequiredMember track = new("track");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -42,9 +42,9 @@ public static class TrainingJson
 
         return new Training
         {
-            Id = id.GetValue(),
-            Category = category.GetValue(missingMemberBehavior),
-            Name = name.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
+            Category = category.Select(value => value.GetEnum<TrainingCategory>(missingMemberBehavior)),
+            Name = name.Select(value => value.GetStringRequired()),
             Track = track.SelectMany(value => value.GetTrainingObjective(missingMemberBehavior))
         };
     }

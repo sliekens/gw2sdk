@@ -11,10 +11,10 @@ public static class MaterialSlotJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<int> category = new("category");
-        OptionalMember<ItemBinding> binding = new("binding");
-        RequiredMember<int> count = new("count");
+        RequiredMember id = new("id");
+        RequiredMember category = new("category");
+        OptionalMember binding = new("binding");
+        RequiredMember count = new("count");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -42,10 +42,10 @@ public static class MaterialSlotJson
 
         return new MaterialSlot
         {
-            ItemId = id.GetValue(),
-            CategoryId = category.GetValue(),
-            Binding = binding.GetValue(missingMemberBehavior),
-            Count = count.GetValue()
+            ItemId = id.Select(value => value.GetInt32()),
+            CategoryId = category.Select(value => value.GetInt32()),
+            Binding = binding.Select(value => value.GetEnum<ItemBinding>(missingMemberBehavior)),
+            Count = count.Select(value => value.GetInt32())
         };
     }
 }

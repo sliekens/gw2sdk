@@ -8,14 +8,14 @@ public static class BuildJson
 {
     public static Build GetBuild(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<string> name = new("name");
-        RequiredMember<ProfessionName> profession = new("profession");
-        RequiredMember<Specialization> specializations = new("specializations");
-        RequiredMember<SkillBar> skills = new("skills");
-        RequiredMember<SkillBar> aquaticSkills = new("aquatic_skills");
-        OptionalMember<PetSkillBar> pets = new("pets");
-        OptionalMember<string?> legends = new("legends");
-        OptionalMember<string?> aquaticLegends = new("aquatic_legends");
+        RequiredMember name = new("name");
+        RequiredMember profession = new("profession");
+        RequiredMember specializations = new("specializations");
+        RequiredMember skills = new("skills");
+        RequiredMember aquaticSkills = new("aquatic_skills");
+        OptionalMember pets = new("pets");
+        OptionalMember legends = new("legends");
+        OptionalMember aquaticLegends = new("aquatic_legends");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -59,8 +59,8 @@ public static class BuildJson
 
         return new Build
         {
-            Name = name.GetValue(),
-            Profession = profession.GetValue(missingMemberBehavior),
+            Name = name.Select(value => value.GetStringRequired()),
+            Profession = profession.Select(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
             Specializations =
                 specializations.SelectMany(value => value.GetSpecialization(missingMemberBehavior)),
             Skills = skills.Select(value => value.GetSkillBar(missingMemberBehavior)),

@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Hearts;
@@ -9,12 +8,12 @@ public static class HeartJson
 {
     public static Heart GetHeart(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<string> objective = new("objective");
-        RequiredMember<int> level = new("level");
-        RequiredMember<PointF> coordinates = new("coord");
-        RequiredMember<PointF> boundaries = new("bounds");
-        RequiredMember<int> id = new("id");
-        RequiredMember<string> chatLink = new("chat_link");
+        RequiredMember objective = new("objective");
+        RequiredMember level = new("level");
+        RequiredMember coordinates = new("coord");
+        RequiredMember boundaries = new("bounds");
+        RequiredMember id = new("id");
+        RequiredMember chatLink = new("chat_link");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(objective.Name))
@@ -49,12 +48,12 @@ public static class HeartJson
 
         return new Heart
         {
-            Id = id.GetValue(),
-            Objective = objective.GetValue(),
-            Level = level.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
+            Objective = objective.Select(value => value.GetStringRequired()),
+            Level = level.Select(value => value.GetInt32()),
             Coordinates = coordinates.Select(value => value.GetCoordinateF(missingMemberBehavior)),
             Boundaries = boundaries.SelectMany(value => value.GetCoordinateF(missingMemberBehavior)),
-            ChatLink = chatLink.GetValue()
+            ChatLink = chatLink.Select(value => value.GetStringRequired())
         };
     }
 }

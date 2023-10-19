@@ -11,7 +11,7 @@ public static class CoinsRewardJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> coins = new("count");
+        RequiredMember coins = new("count");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
@@ -33,6 +33,6 @@ public static class CoinsRewardJson
             }
         }
 
-        return new CoinsReward { Coins = coins.GetValue() };
+        return new CoinsReward { Coins = coins.Select(value => value.GetInt32()) };
     }
 }

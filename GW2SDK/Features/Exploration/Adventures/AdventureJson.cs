@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Adventures;
@@ -12,10 +11,10 @@ public static class AdventureJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<PointF> coordinates = new("coord");
-        RequiredMember<string> id = new("id");
-        RequiredMember<string> name = new("name");
-        RequiredMember<string> description = new("description");
+        RequiredMember coordinates = new("coord");
+        RequiredMember id = new("id");
+        RequiredMember name = new("name");
+        RequiredMember description = new("description");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(coordinates.Name))
@@ -42,10 +41,10 @@ public static class AdventureJson
 
         return new Adventure
         {
-            Id = id.GetValue(),
+            Id = id.Select(value => value.GetStringRequired()),
             Coordinates = coordinates.Select(value => value.GetCoordinateF(missingMemberBehavior)),
-            Name = name.GetValue(),
-            Description = description.GetValue()
+            Name = name.Select(value => value.GetStringRequired()),
+            Description = description.Select(value => value.GetStringRequired())
         };
     }
 }

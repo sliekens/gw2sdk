@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.HeroChallenges;
@@ -12,10 +11,10 @@ public static class HeroChallengeJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<PointF> coordinates = new("coord");
+        RequiredMember coordinates = new("coord");
 
         // The 'id' is missing from hero points in End of Dragon maps
-        OptionalMember<string> id = new("id");
+        OptionalMember id = new("id");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(coordinates.Name))
@@ -34,7 +33,7 @@ public static class HeroChallengeJson
 
         return new HeroChallenge
         {
-            Id = id.GetValueOrEmpty(),
+            Id = id.Select(value => value.GetString()) ?? "",
             Coordinates = coordinates.Select(value => value.GetCoordinateF(missingMemberBehavior))
         };
     }

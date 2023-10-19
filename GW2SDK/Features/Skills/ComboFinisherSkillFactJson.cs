@@ -16,10 +16,10 @@ public static class ComboFinisherSkillFactJson
         requiresTrait = null;
         overrides = null;
 
-        RequiredMember<string> text = new("text");
-        RequiredMember<string> icon = new("icon");
-        RequiredMember<int> percent = new("percent");
-        RequiredMember<ComboFinisherName> finisherType = new("finisher_type");
+        RequiredMember text = new("text");
+        RequiredMember icon = new("icon");
+        RequiredMember percent = new("percent");
+        RequiredMember finisherType = new("finisher_type");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -68,10 +68,10 @@ public static class ComboFinisherSkillFactJson
 
         return new ComboFinisherSkillFact
         {
-            Text = text.GetValue(),
-            Icon = icon.GetValue(),
-            Percent = percent.GetValue(),
-            FinisherName = finisherType.GetValue(missingMemberBehavior)
+            Text = text.Select(value => value.GetStringRequired()),
+            Icon = icon.Select(value => value.GetStringRequired()),
+            Percent = percent.Select(value => value.GetInt32()),
+            FinisherName = finisherType.Select(value => value.GetEnum<ComboFinisherName>(missingMemberBehavior))
         };
 
         static bool IsDefaultInt32(JsonProperty jsonProperty)

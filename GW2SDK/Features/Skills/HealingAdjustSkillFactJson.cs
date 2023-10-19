@@ -16,9 +16,9 @@ public static class HealingAdjustSkillFactJson
         requiresTrait = null;
         overrides = null;
 
-        RequiredMember<string> text = new("text");
-        RequiredMember<string> icon = new("icon");
-        RequiredMember<int> hitCount = new("hit_count");
+        RequiredMember text = new("text");
+        RequiredMember icon = new("icon");
+        RequiredMember hitCount = new("hit_count");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -59,9 +59,9 @@ public static class HealingAdjustSkillFactJson
 
         return new HealingAdjustSkillFact
         {
-            Text = text.GetValue(),
-            Icon = icon.GetValue(),
-            HitCount = hitCount.GetValue()
+            Text = text.Select(value => value.GetStringRequired()),
+            Icon = icon.Select(value => value.GetStringRequired()),
+            HitCount = hitCount.Select(value => value.GetInt32())
         };
     }
 }

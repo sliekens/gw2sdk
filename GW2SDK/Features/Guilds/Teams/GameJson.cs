@@ -11,16 +11,16 @@ public static class GameJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> id = new("id");
-        RequiredMember<int> mapId = new("map_id");
-        RequiredMember<DateTimeOffset> started = new("started");
-        RequiredMember<DateTimeOffset> ended = new("ended");
-        RequiredMember<PvpResult> result = new("result");
-        RequiredMember<PvpTeamColor> team = new("team");
-        RequiredMember<PvpRatingType> ratingType = new("rating_type");
-        OptionalMember<int> ratingChange = new("rating_change");
-        OptionalMember<string> seasonId = new("season");
-        RequiredMember<Score> score = new("scores");
+        RequiredMember id = new("id");
+        RequiredMember mapId = new("map_id");
+        RequiredMember started = new("started");
+        RequiredMember ended = new("ended");
+        RequiredMember result = new("result");
+        RequiredMember team = new("team");
+        RequiredMember ratingType = new("rating_type");
+        OptionalMember ratingChange = new("rating_change");
+        OptionalMember seasonId = new("season");
+        RequiredMember score = new("scores");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -72,15 +72,15 @@ public static class GameJson
 
         return new Game
         {
-            Id = id.GetValue(),
-            MapId = mapId.GetValue(),
-            Started = started.GetValue(),
-            Ended = ended.GetValue(),
-            Result = result.GetValue(missingMemberBehavior),
-            Team = team.GetValue(missingMemberBehavior),
+            Id = id.Select(value => value.GetStringRequired()),
+            MapId = mapId.Select(value => value.GetInt32()),
+            Started = started.Select(value => value.GetDateTimeOffset()),
+            Ended = ended.Select(value => value.GetDateTimeOffset()),
+            Result = result.Select(value => value.GetEnum<PvpResult>(missingMemberBehavior)),
+            Team = team.Select(value => value.GetEnum<PvpTeamColor>(missingMemberBehavior)),
             RatingType = ratingType.Select(value => value.GetRatingType(missingMemberBehavior)),
-            RatingChange = ratingChange.GetValue(),
-            SeasonId = seasonId.GetValueOrNull(),
+            RatingChange = ratingChange.Select(value => value.GetInt32()),
+            SeasonId = seasonId.Select(value => value.GetString()),
             Score = score.Select(value => value.GetScore(missingMemberBehavior))
         };
 

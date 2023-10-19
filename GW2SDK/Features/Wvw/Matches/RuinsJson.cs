@@ -8,11 +8,11 @@ public static class RuinsJson
 {
     public static Ruins GetRuins(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<string> id = new("id");
-        RequiredMember<TeamColor> owner = new("owner");
-        RequiredMember<DateTimeOffset> lastFlipped = new("last_flipped");
-        RequiredMember<int> pointsTick = new("points_tick");
-        RequiredMember<int> pointsCapture = new("points_capture");
+        RequiredMember id = new("id");
+        RequiredMember owner = new("owner");
+        RequiredMember lastFlipped = new("last_flipped");
+        RequiredMember pointsTick = new("points_tick");
+        RequiredMember pointsCapture = new("points_capture");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -53,11 +53,11 @@ public static class RuinsJson
 
         return new Ruins
         {
-            Id = id.GetValue(),
-            Owner = owner.GetValue(missingMemberBehavior),
-            LastFlipped = lastFlipped.GetValue(),
-            PointsTick = pointsTick.GetValue(),
-            PointsCapture = pointsCapture.GetValue()
+            Id = id.Select(value => value.GetStringRequired()),
+            Owner = owner.Select(value => value.GetEnum<TeamColor>(missingMemberBehavior)),
+            LastFlipped = lastFlipped.Select(value => value.GetDateTimeOffset()),
+            PointsTick = pointsTick.Select(value => value.GetInt32()),
+            PointsCapture = pointsCapture.Select(value => value.GetInt32())
         };
     }
 }

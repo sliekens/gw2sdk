@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-using System.Numerics;
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Objectives;
@@ -13,17 +11,17 @@ public static class ObjectiveJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> id = new("id");
-        RequiredMember<string> name = new("name");
-        RequiredMember<int> sectorId = new("sector_id");
-        RequiredMember<ObjectiveKind> type = new("type");
-        RequiredMember<MapKind> mapType = new("map_type");
-        RequiredMember<int> mapId = new("map_id");
-        NullableMember<int> upgradeId = new("upgrade_id");
-        OptionalMember<Vector3> coordinates = new("coord");
-        NullableMember<PointF> labelCoordinates = new("label_coord");
-        OptionalMember<string> marker = new("marker");
-        RequiredMember<string> chatLink = new("chat_link");
+        RequiredMember id = new("id");
+        RequiredMember name = new("name");
+        RequiredMember sectorId = new("sector_id");
+        RequiredMember type = new("type");
+        RequiredMember mapType = new("map_type");
+        RequiredMember mapId = new("map_id");
+        NullableMember upgradeId = new("upgrade_id");
+        OptionalMember coordinates = new("coord");
+        NullableMember labelCoordinates = new("label_coord");
+        OptionalMember marker = new("marker");
+        RequiredMember chatLink = new("chat_link");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -79,18 +77,18 @@ public static class ObjectiveJson
 
         return new Objective
         {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
-            SectorId = sectorId.GetValue(),
-            Kind = type.GetValue(missingMemberBehavior),
-            MapKind = mapType.GetValue(missingMemberBehavior),
-            MapId = mapId.GetValue(),
-            UpgradeId = upgradeId.GetValue(),
+            Id = id.Select(value => value.GetStringRequired()),
+            Name = name.Select(value => value.GetStringRequired()),
+            SectorId = sectorId.Select(value => value.GetInt32()),
+            Kind = type.Select(value => value.GetEnum<ObjectiveKind>(missingMemberBehavior)),
+            MapKind = mapType.Select(value => value.GetEnum<MapKind>(missingMemberBehavior)),
+            MapId = mapId.Select(value => value.GetInt32()),
+            UpgradeId = upgradeId.Select(value => value.GetInt32()),
             Coordinates = coordinates.Select(value => value.GetCoordinate3(missingMemberBehavior)),
             LabelCoordinates =
                 labelCoordinates.Select(value => value.GetCoordinateF(missingMemberBehavior)),
-            MarkerHref = marker.GetValueOrEmpty(),
-            ChatLink = chatLink.GetValue()
+            MarkerHref = marker.Select(value => value.GetString()) ?? "",
+            ChatLink = chatLink.Select(value => value.GetStringRequired())
         };
     }
 }

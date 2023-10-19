@@ -11,8 +11,8 @@ public static class WvwAbilityJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<int> rank = new("rank");
+        RequiredMember id = new("id");
+        RequiredMember rank = new("rank");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -32,8 +32,8 @@ public static class WvwAbilityJson
 
         return new WvwAbility
         {
-            Id = id.GetValue(),
-            Rank = rank.GetValue()
+            Id = id.Select(value => value.GetInt32()),
+            Rank = rank.Select(value => value.GetInt32())
         };
     }
 }

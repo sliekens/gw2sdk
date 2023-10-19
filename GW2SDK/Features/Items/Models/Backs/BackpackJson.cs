@@ -11,25 +11,25 @@ public static class BackpackJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> name = new("name");
-        OptionalMember<string> description = new("description");
-        RequiredMember<int> level = new("level");
-        RequiredMember<Rarity> rarity = new("rarity");
-        RequiredMember<Coin> vendorValue = new("vendor_value");
-        RequiredMember<int> defaultSkin = new("default_skin");
-        RequiredMember<GameType> gameTypes = new("game_types");
-        RequiredMember<ItemFlag> flags = new("flags");
-        RequiredMember<ItemRestriction> restrictions = new("restrictions");
-        RequiredMember<int> id = new("id");
-        RequiredMember<string> chatLink = new("chat_link");
-        OptionalMember<string> icon = new("icon");
-        RequiredMember<InfusionSlot> infusionSlots = new("infusion_slots");
-        RequiredMember<double> attributeAdjustment = new("attribute_adjustment");
-        OptionalMember<InfixUpgrade> infixUpgrade = new("infix_upgrade");
-        NullableMember<int> suffixItemId = new("suffix_item_id");
-        OptionalMember<int> statChoices = new("stat_choices");
-        OptionalMember<ItemUpgrade> upgradesInto = new("upgrades_into");
-        OptionalMember<ItemUpgrade> upgradesFrom = new("upgrades_from");
+        RequiredMember name = new("name");
+        OptionalMember description = new("description");
+        RequiredMember level = new("level");
+        RequiredMember rarity = new("rarity");
+        RequiredMember vendorValue = new("vendor_value");
+        RequiredMember defaultSkin = new("default_skin");
+        RequiredMember gameTypes = new("game_types");
+        RequiredMember flags = new("flags");
+        RequiredMember restrictions = new("restrictions");
+        RequiredMember id = new("id");
+        RequiredMember chatLink = new("chat_link");
+        OptionalMember icon = new("icon");
+        RequiredMember infusionSlots = new("infusion_slots");
+        RequiredMember attributeAdjustment = new("attribute_adjustment");
+        OptionalMember infixUpgrade = new("infix_upgrade");
+        NullableMember suffixItemId = new("suffix_item_id");
+        OptionalMember statChoices = new("stat_choices");
+        OptionalMember upgradesInto = new("upgrades_into");
+        OptionalMember upgradesFrom = new("upgrades_from");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
@@ -135,23 +135,23 @@ public static class BackpackJson
 
         return new Backpack
         {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
-            Description = description.GetValueOrEmpty(),
-            Level = level.GetValue(),
-            Rarity = rarity.GetValue(missingMemberBehavior),
-            VendorValue = vendorValue.GetValue(),
-            DefaultSkin = defaultSkin.GetValue(),
-            GameTypes = gameTypes.GetValues(missingMemberBehavior),
-            Flags = flags.GetValues(missingMemberBehavior),
-            Restrictions = restrictions.GetValues(missingMemberBehavior),
-            ChatLink = chatLink.GetValue(),
-            Icon = icon.GetValueOrNull(),
+            Id = id.Select(value => value.GetInt32()),
+            Name = name.Select(value => value.GetStringRequired()),
+            Description = description.Select(value => value.GetString()) ?? "",
+            Level = level.Select(value => value.GetInt32()),
+            Rarity = rarity.Select(value => value.GetEnum<Rarity>(missingMemberBehavior)),
+            VendorValue = vendorValue.Select(value => value.GetInt32()),
+            DefaultSkin = defaultSkin.Select(value => value.GetInt32()),
+            GameTypes = gameTypes.SelectMany(value => value.GetEnum<GameType>(missingMemberBehavior)),
+            Flags = flags.SelectMany(value => value.GetEnum<ItemFlag>(missingMemberBehavior)),
+            Restrictions = restrictions.SelectMany(value => value.GetEnum<ItemRestriction>(missingMemberBehavior)),
+            ChatLink = chatLink.Select(value => value.GetStringRequired()),
+            Icon = icon.Select(value => value.GetString()),
             InfusionSlots =
                 infusionSlots.SelectMany(value => value.GetInfusionSlot(missingMemberBehavior)),
-            AttributeAdjustment = attributeAdjustment.GetValue(),
+            AttributeAdjustment = attributeAdjustment.Select(value => value.GetDouble()),
             Prefix = infixUpgrade.Select(value => value.GetInfixUpgrade(missingMemberBehavior)),
-            SuffixItemId = suffixItemId.GetValue(),
+            SuffixItemId = suffixItemId.Select(value => value.GetInt32()),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             UpgradesInto =
                 upgradesInto.SelectMany(value => value.GetItemUpgrade(missingMemberBehavior)),

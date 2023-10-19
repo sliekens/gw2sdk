@@ -9,8 +9,8 @@ public static class SizeJson
 {
     public static Size GetDimensions(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<int> width = new("[0]");
-        RequiredMember<int> height = new("[1]");
+        RequiredMember width = new("[0]");
+        RequiredMember height = new("[1]");
 
         foreach (var entry in json.EnumerateArray())
         {

@@ -11,8 +11,8 @@ public static class RaidWingJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> id = new("id");
-        RequiredMember<Encounter> events = new("events");
+        RequiredMember id = new("id");
+        RequiredMember events = new("events");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -32,7 +32,7 @@ public static class RaidWingJson
 
         return new RaidWing
         {
-            Id = id.GetValue(),
+            Id = id.Select(value => value.GetStringRequired()),
             Encounters = events.SelectMany(value => value.GetEncounter(missingMemberBehavior))
         };
     }

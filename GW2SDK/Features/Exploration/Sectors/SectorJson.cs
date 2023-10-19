@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Sectors;
@@ -12,12 +11,12 @@ public static class SectorJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        OptionalMember<string> name = new("name");
-        RequiredMember<int> level = new("level");
-        RequiredMember<PointF> coordinates = new("coord");
-        RequiredMember<PointF> boundaries = new("bounds");
-        RequiredMember<int> id = new("id");
-        RequiredMember<string> chatLink = new("chat_link");
+        OptionalMember name = new("name");
+        RequiredMember level = new("level");
+        RequiredMember coordinates = new("coord");
+        RequiredMember boundaries = new("bounds");
+        RequiredMember id = new("id");
+        RequiredMember chatLink = new("chat_link");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(name.Name))
@@ -52,12 +51,12 @@ public static class SectorJson
 
         return new Sector
         {
-            Id = id.GetValue(),
-            Name = name.GetValueOrEmpty(),
-            Level = level.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
+            Name = name.Select(value => value.GetString()) ?? "",
+            Level = level.Select(value => value.GetInt32()),
             Coordinates = coordinates.Select(value => value.GetCoordinateF(missingMemberBehavior)),
             Boundaries = boundaries.SelectMany(value => value.GetCoordinateF(missingMemberBehavior)),
-            ChatLink = chatLink.GetValue()
+            ChatLink = chatLink.Select(value => value.GetStringRequired())
         };
     }
 }

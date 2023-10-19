@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Traits;
@@ -15,10 +15,10 @@ public static class AttributeAdjustTraitFactJson
     {
         requiresTrait = null;
         overrides = null;
-        OptionalMember<string> text = new("text");
-        OptionalMember<string> icon = new("icon");
-        RequiredMember<int> value = new("value");
-        RequiredMember<AttributeAdjustTarget> target = new("target");
+        OptionalMember text = new("text");
+        OptionalMember icon = new("icon");
+        RequiredMember adjustment = new("value");
+        RequiredMember target = new("target");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
@@ -46,9 +46,9 @@ public static class AttributeAdjustTraitFactJson
             {
                 icon.Value = member.Value;
             }
-            else if (member.NameEquals(value.Name))
+            else if (member.NameEquals(adjustment.Name))
             {
-                value.Value = member.Value;
+                adjustment.Value = member.Value;
             }
             else if (member.NameEquals(target.Name))
             {
@@ -62,10 +62,10 @@ public static class AttributeAdjustTraitFactJson
 
         return new AttributeAdjustTraitFact
         {
-            Text = text.GetValueOrEmpty(),
-            Icon = icon.GetValueOrEmpty(),
-            Value = value.GetValue(),
-            Target = target.GetValue(missingMemberBehavior)
+            Text = text.Select(value => value.GetString()) ?? "",
+            Icon = icon.Select(value => value.GetString()) ?? "",
+            Value = adjustment.Select(value => value.GetInt32()),
+            Target = target.Select(value => value.GetEnum<AttributeAdjustTarget>(missingMemberBehavior))
         };
     }
 }

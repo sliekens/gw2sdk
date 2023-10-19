@@ -11,12 +11,12 @@ public static class MinipetJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<string> name = new("name");
-        OptionalMember<string> unlock = new("unlock");
-        RequiredMember<string> icon = new("icon");
-        RequiredMember<int> order = new("order");
-        RequiredMember<int> itemId = new("item_id");
+        RequiredMember id = new("id");
+        RequiredMember name = new("name");
+        OptionalMember unlock = new("unlock");
+        RequiredMember icon = new("icon");
+        RequiredMember order = new("order");
+        RequiredMember itemId = new("item_id");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -52,12 +52,12 @@ public static class MinipetJson
 
         return new Minipet
         {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
-            Unlock = unlock.GetValueOrEmpty(),
-            Icon = icon.GetValue(),
-            Order = order.GetValue(),
-            ItemId = itemId.GetValue()
+            Id = id.Select(value => value.GetInt32()),
+            Name = name.Select(value => value.GetStringRequired()),
+            Unlock = unlock.Select(value => value.GetString()) ?? "",
+            Icon = icon.Select(value => value.GetStringRequired()),
+            Order = order.Select(value => value.GetInt32()),
+            ItemId = itemId.Select(value => value.GetInt32())
         };
     }
 }

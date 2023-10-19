@@ -8,16 +8,16 @@ public static class StoryJson
 {
     public static Story GetStory(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<string> season = new("season");
-        RequiredMember<string> name = new("name");
-        RequiredMember<string> description = new("description");
-        RequiredMember<string> timeline = new("timeline");
-        RequiredMember<int> level = new("level");
-        OptionalMember<RaceName> races = new("races");
-        RequiredMember<int> order = new("order");
-        RequiredMember<Chapter> chapters = new("chapters");
-        OptionalMember<StoryFlag> flags = new("flags");
+        RequiredMember id = new("id");
+        RequiredMember season = new("season");
+        RequiredMember name = new("name");
+        RequiredMember description = new("description");
+        RequiredMember timeline = new("timeline");
+        RequiredMember level = new("level");
+        OptionalMember races = new("races");
+        RequiredMember order = new("order");
+        RequiredMember chapters = new("chapters");
+        OptionalMember flags = new("flags");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -69,16 +69,16 @@ public static class StoryJson
 
         return new Story
         {
-            Id = id.GetValue(),
-            SeasonId = season.GetValue(),
-            Name = name.GetValue(),
-            Description = description.GetValue(),
-            Timeline = timeline.GetValue(),
-            Level = level.GetValue(),
-            Races = races.GetValues(missingMemberBehavior),
-            Order = order.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
+            SeasonId = season.Select(value => value.GetStringRequired()),
+            Name = name.Select(value => value.GetStringRequired()),
+            Description = description.Select(value => value.GetStringRequired()),
+            Timeline = timeline.Select(value => value.GetStringRequired()),
+            Level = level.Select(value => value.GetInt32()),
+            Races = races.SelectMany(value => value.GetEnum<RaceName>(missingMemberBehavior)),
+            Order = order.Select(value => value.GetInt32()),
             Chapters = chapters.SelectMany(value => value.GetChapter(missingMemberBehavior)),
-            Flags = flags.GetValues(missingMemberBehavior) ?? Array.Empty<StoryFlag>()
+            Flags = flags.SelectMany(value => value.GetEnum<StoryFlag>(missingMemberBehavior)) ?? Array.Empty<StoryFlag>()
         };
     }
 }

@@ -11,7 +11,7 @@ public static class TitleRewardJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
+        RequiredMember id = new("id");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
@@ -33,6 +33,6 @@ public static class TitleRewardJson
             }
         }
 
-        return new TitleReward { Id = id.GetValue() };
+        return new TitleReward { Id = id.Select(value => value.GetInt32()) };
     }
 }

@@ -11,17 +11,17 @@ public static class DyeSlotInfoJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<DyeSlot?> @default = new("default");
-        OptionalMember<DyeSlot?> asuraFemale = new("AsuraFemale");
-        OptionalMember<DyeSlot?> asuraMale = new("AsuraMale");
-        OptionalMember<DyeSlot?> charrFemale = new("CharrFemale");
-        OptionalMember<DyeSlot?> charrMale = new("CharrMale");
-        OptionalMember<DyeSlot?> humanFemale = new("HumanFemale");
-        OptionalMember<DyeSlot?> humanMale = new("HumanMale");
-        OptionalMember<DyeSlot?> nornFemale = new("NornFemale");
-        OptionalMember<DyeSlot?> nornMale = new("NornMale");
-        OptionalMember<DyeSlot?> sylvariFemale = new("SylvariFemale");
-        OptionalMember<DyeSlot?> sylvariMale = new("SylvariMale");
+        RequiredMember @default = new("default");
+        OptionalMember asuraFemale = new("AsuraFemale");
+        OptionalMember asuraMale = new("AsuraMale");
+        OptionalMember charrFemale = new("CharrFemale");
+        OptionalMember charrMale = new("CharrMale");
+        OptionalMember humanFemale = new("HumanFemale");
+        OptionalMember humanMale = new("HumanMale");
+        OptionalMember nornFemale = new("NornFemale");
+        OptionalMember nornMale = new("NornMale");
+        OptionalMember sylvariFemale = new("SylvariFemale");
+        OptionalMember sylvariMale = new("SylvariMale");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(@default.Name))

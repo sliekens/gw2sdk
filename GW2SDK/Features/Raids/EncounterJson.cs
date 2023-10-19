@@ -11,8 +11,8 @@ public static class EncounterJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> id = new("id");
-        RequiredMember<EncounterKind> type = new("type");
+        RequiredMember id = new("id");
+        RequiredMember type = new("type");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -32,8 +32,8 @@ public static class EncounterJson
 
         return new Encounter
         {
-            Id = id.GetValue(),
-            Kind = type.GetValue(missingMemberBehavior)
+            Id = id.Select(value => value.GetStringRequired()),
+            Kind = type.Select(value => value.GetEnum<EncounterKind>(missingMemberBehavior))
         };
     }
 }

@@ -11,7 +11,7 @@ public static class CreatedSubtokenJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> subtoken = new("subtoken");
+        RequiredMember subtoken = new("subtoken");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -25,6 +25,6 @@ public static class CreatedSubtokenJson
             }
         }
 
-        return new CreatedSubtoken { Subtoken = subtoken.GetValue() };
+        return new CreatedSubtoken { Subtoken = subtoken.Select(value => value.GetStringRequired()) };
     }
 }

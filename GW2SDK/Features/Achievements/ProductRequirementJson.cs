@@ -11,8 +11,8 @@ public static class ProductRequirementJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<ProductName> product = new("product");
-        RequiredMember<AccessCondition> condition = new("condition");
+        RequiredMember product = new("product");
+        RequiredMember condition = new("condition");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -32,8 +32,8 @@ public static class ProductRequirementJson
 
         return new ProductRequirement
         {
-            Product = product.GetValue(missingMemberBehavior),
-            Condition = condition.GetValue(missingMemberBehavior)
+            Product = product.Select(value => value.GetEnum<ProductName>(missingMemberBehavior)),
+            Condition = condition.Select(value => value.GetEnum<AccessCondition>(missingMemberBehavior))
         };
     }
 }

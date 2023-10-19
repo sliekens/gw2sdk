@@ -11,10 +11,10 @@ public static class InviteDeclinedJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<DateTimeOffset> time = new("time");
-        RequiredMember<string> user = new("user");
-        RequiredMember<string> declinedBy = new("declined_by");
+        RequiredMember id = new("id");
+        RequiredMember time = new("time");
+        RequiredMember user = new("user");
+        RequiredMember declinedBy = new("declined_by");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -51,10 +51,10 @@ public static class InviteDeclinedJson
 
         return new InviteDeclined
         {
-            Id = id.GetValue(),
-            Time = time.GetValue(),
-            User = user.GetValue(),
-            DeclinedBy = declinedBy.GetValue()
+            Id = id.Select(value => value.GetInt32()),
+            Time = time.Select(value => value.GetDateTimeOffset()),
+            User = user.Select(value => value.GetStringRequired()),
+            DeclinedBy = declinedBy.Select(value => value.GetStringRequired())
         };
     }
 }

@@ -11,9 +11,9 @@ public static class SkillReferenceJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        NullableMember<Attunement> attunement = new("attunement");
-        NullableMember<Transformation> form = new("form");
+        RequiredMember id = new("id");
+        NullableMember attunement = new("attunement");
+        NullableMember form = new("form");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -37,9 +37,9 @@ public static class SkillReferenceJson
 
         return new SkillReference
         {
-            Id = id.GetValue(),
-            Attunement = attunement.GetValue(missingMemberBehavior),
-            Form = form.GetValue(missingMemberBehavior)
+            Id = id.Select(value => value.GetInt32()),
+            Attunement = attunement.Select(value => value.GetEnum<Attunement>(missingMemberBehavior)),
+            Form = form.Select(value => value.GetEnum<Transformation>(missingMemberBehavior))
         };
     }
 }

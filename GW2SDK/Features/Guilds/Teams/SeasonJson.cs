@@ -11,10 +11,10 @@ public static class SeasonJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> id = new("id");
-        RequiredMember<int> wins = new("wins");
-        RequiredMember<int> losses = new("losses");
-        RequiredMember<int> rating = new("rating");
+        RequiredMember id = new("id");
+        RequiredMember wins = new("wins");
+        RequiredMember losses = new("losses");
+        RequiredMember rating = new("rating");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -42,10 +42,10 @@ public static class SeasonJson
 
         return new Season
         {
-            Id = id.GetValue(),
-            Wins = wins.GetValue(),
-            Losses = losses.GetValue(),
-            Rating = rating.GetValue()
+            Id = id.Select(value => value.GetStringRequired()),
+            Wins = wins.Select(value => value.GetInt32()),
+            Losses = losses.Select(value => value.GetInt32()),
+            Rating = rating.Select(value => value.GetInt32())
         };
     }
 }

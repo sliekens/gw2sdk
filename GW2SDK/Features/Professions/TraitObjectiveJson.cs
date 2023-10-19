@@ -11,8 +11,8 @@ public static class TraitObjectiveJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> cost = new("cost");
-        RequiredMember<int> traitId = new("trait_id");
+        RequiredMember cost = new("cost");
+        RequiredMember traitId = new("trait_id");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
@@ -40,8 +40,8 @@ public static class TraitObjectiveJson
 
         return new TraitObjective
         {
-            Cost = cost.GetValue(),
-            TraitId = traitId.GetValue()
+            Cost = cost.Select(value => value.GetInt32()),
+            TraitId = traitId.Select(value => value.GetInt32())
         };
     }
 }

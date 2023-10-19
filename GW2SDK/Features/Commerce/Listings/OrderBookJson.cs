@@ -11,9 +11,9 @@ public static class OrderBookJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<OrderBookLine> demand = new("buys");
-        RequiredMember<OrderBookLine> supply = new("sells");
+        RequiredMember id = new("id");
+        RequiredMember demand = new("buys");
+        RequiredMember supply = new("sells");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -37,7 +37,7 @@ public static class OrderBookJson
 
         return new OrderBook
         {
-            Id = id.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
             Demand = demand.SelectMany(value => value.GetOrderBookLine(missingMemberBehavior)),
             Supply = supply.SelectMany(value => value.GetOrderBookLine(missingMemberBehavior))
         };

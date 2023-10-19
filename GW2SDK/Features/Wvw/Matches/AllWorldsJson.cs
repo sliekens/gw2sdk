@@ -11,9 +11,9 @@ public static class AllWorldsJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> red = new("red");
-        RequiredMember<int> blue = new("blue");
-        RequiredMember<int> green = new("green");
+        RequiredMember red = new("red");
+        RequiredMember blue = new("blue");
+        RequiredMember green = new("green");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -37,9 +37,9 @@ public static class AllWorldsJson
 
         return new AllWorlds
         {
-            Red = red.GetValues(),
-            Blue = blue.GetValues(),
-            Green = green.GetValues()
+            Red = red.SelectMany(value => value.GetInt32()),
+            Blue = blue.SelectMany(value => value.GetInt32()),
+            Green = green.SelectMany(value => value.GetInt32())
         };
     }
 }

@@ -11,10 +11,10 @@ public static class GuildRankJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> id = new("id");
-        RequiredMember<int> order = new("order");
-        RequiredMember<GuildPermission> permissions = new("permissions");
-        RequiredMember<string> iconHref = new("icon");
+        RequiredMember id = new("id");
+        RequiredMember order = new("order");
+        RequiredMember permissions = new("permissions");
+        RequiredMember iconHref = new("icon");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -42,10 +42,10 @@ public static class GuildRankJson
 
         return new GuildRank
         {
-            Id = id.GetValue(),
-            Order = order.GetValue(),
-            Permissions = permissions.GetValues(missingMemberBehavior),
-            IconHref = iconHref.GetValue()
+            Id = id.Select(value => value.GetStringRequired()),
+            Order = order.Select(value => value.GetInt32()),
+            Permissions = permissions.SelectMany(value => value.GetEnum<GuildPermission>(missingMemberBehavior)),
+            IconHref = iconHref.Select(value => value.GetStringRequired())
         };
     }
 }

@@ -19,9 +19,9 @@ public static class TokenInfoJson
                 return json.GetSubtokenInfo(missingMemberBehavior);
         }
 
-        RequiredMember<string> name = new("name");
-        RequiredMember<string> id = new("id");
-        RequiredMember<Permission> permissions = new("permissions");
+        RequiredMember name = new("name");
+        RequiredMember id = new("id");
+        RequiredMember permissions = new("permissions");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
@@ -53,9 +53,9 @@ public static class TokenInfoJson
 
         return new TokenInfo
         {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
-            Permissions = permissions.GetValues(missingMemberBehavior)
+            Id = id.Select(value => value.GetStringRequired()),
+            Name = name.Select(value => value.GetStringRequired()),
+            Permissions = permissions.SelectMany(value => value.GetEnum<Permission>(missingMemberBehavior))
         };
     }
 }

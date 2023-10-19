@@ -11,10 +11,10 @@ public static class NewMessageOfTheDayJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<DateTimeOffset> time = new("time");
-        RequiredMember<string> user = new("user");
-        RequiredMember<string> motd = new("motd");
+        RequiredMember id = new("id");
+        RequiredMember time = new("time");
+        RequiredMember user = new("user");
+        RequiredMember motd = new("motd");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -51,10 +51,10 @@ public static class NewMessageOfTheDayJson
 
         return new NewMessageOfTheDay
         {
-            Id = id.GetValue(),
-            Time = time.GetValue(),
-            User = user.GetValue(),
-            MessageOfTheDay = motd.GetValue()
+            Id = id.Select(value => value.GetInt32()),
+            Time = time.Select(value => value.GetDateTimeOffset()),
+            User = user.Select(value => value.GetStringRequired()),
+            MessageOfTheDay = motd.Select(value => value.GetStringRequired())
         };
     }
 }

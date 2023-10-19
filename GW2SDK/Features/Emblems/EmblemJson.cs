@@ -11,8 +11,8 @@ public static class EmblemJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<string> layers = new("layers");
+        RequiredMember id = new("id");
+        RequiredMember layers = new("layers");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -32,7 +32,7 @@ public static class EmblemJson
 
         return new Emblem
         {
-            Id = id.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
             Layers = layers.SelectMany(value => value.GetStringRequired())
         };
     }

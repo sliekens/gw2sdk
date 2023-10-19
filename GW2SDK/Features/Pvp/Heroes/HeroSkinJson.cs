@@ -11,11 +11,11 @@ public static class HeroSkinJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<string> name = new("name");
-        RequiredMember<string> icon = new("icon");
-        RequiredMember<bool> @default = new("default");
-        RequiredMember<int> unlockItems = new("unlock_items");
+        RequiredMember id = new("id");
+        RequiredMember name = new("name");
+        RequiredMember icon = new("icon");
+        RequiredMember @default = new("default");
+        RequiredMember unlockItems = new("unlock_items");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -47,10 +47,10 @@ public static class HeroSkinJson
 
         return new HeroSkin
         {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
-            Icon = icon.GetValue(),
-            Default = @default.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
+            Name = name.Select(value => value.GetStringRequired()),
+            Icon = icon.Select(value => value.GetStringRequired()),
+            Default = @default.Select(value => value.GetBoolean()),
             UnlockItemIds = unlockItems.SelectMany(value => value.GetInt32())
         };
     }

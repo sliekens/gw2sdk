@@ -11,11 +11,11 @@ public static class ResultsJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> wins = new("wins");
-        RequiredMember<int> losses = new("losses");
-        RequiredMember<int> desertions = new("desertions");
-        RequiredMember<int> byes = new("byes");
-        RequiredMember<int> forfeits = new("forfeits");
+        RequiredMember wins = new("wins");
+        RequiredMember losses = new("losses");
+        RequiredMember desertions = new("desertions");
+        RequiredMember byes = new("byes");
+        RequiredMember forfeits = new("forfeits");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -47,11 +47,11 @@ public static class ResultsJson
 
         return new Results
         {
-            Wins = wins.GetValue(),
-            Losses = losses.GetValue(),
-            Desertions = desertions.GetValue(),
-            Byes = byes.GetValue(),
-            Forfeits = forfeits.GetValue()
+            Wins = wins.Select(value => value.GetInt32()),
+            Losses = losses.Select(value => value.GetInt32()),
+            Desertions = desertions.Select(value => value.GetInt32()),
+            Byes = byes.Select(value => value.GetInt32()),
+            Forfeits = forfeits.Select(value => value.GetInt32())
         };
     }
 }

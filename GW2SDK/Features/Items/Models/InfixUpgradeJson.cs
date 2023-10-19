@@ -11,9 +11,9 @@ public static class InfixUpgradeJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<UpgradeAttribute> attributes = new("attributes");
-        OptionalMember<Buff> buff = new("buff");
+        RequiredMember id = new("id");
+        RequiredMember attributes = new("attributes");
+        OptionalMember buff = new("buff");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(id.Name))
@@ -36,7 +36,7 @@ public static class InfixUpgradeJson
 
         return new InfixUpgrade
         {
-            ItemstatsId = id.GetValue(),
+            ItemstatsId = id.Select(value => value.GetInt32()),
             Attributes =
                 attributes.SelectMany(value => value.GetUpgradeAttribute(missingMemberBehavior)),
             Buff = buff.Select(value => value.GetBuff(missingMemberBehavior))

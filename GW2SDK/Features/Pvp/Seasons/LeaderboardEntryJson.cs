@@ -11,13 +11,13 @@ public static class LeaderboardEntryJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> name = new("name");
-        OptionalMember<string> guildId = new("id");
-        OptionalMember<string> teamName = new("team");
-        NullableMember<int> teamId = new("team_id");
-        RequiredMember<int> rank = new("rank");
-        RequiredMember<DateTimeOffset> date = new("date");
-        RequiredMember<Score> scores = new("scores");
+        RequiredMember name = new("name");
+        OptionalMember guildId = new("id");
+        OptionalMember teamName = new("team");
+        NullableMember teamId = new("team_id");
+        RequiredMember rank = new("rank");
+        RequiredMember date = new("date");
+        RequiredMember scores = new("scores");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -57,12 +57,12 @@ public static class LeaderboardEntryJson
 
         return new LeaderboardEntry
         {
-            Name = name.GetValue(),
-            GuildId = guildId.GetValueOrEmpty(),
-            TeamName = teamName.GetValueOrEmpty(),
-            TeamId = teamId.GetValue(),
-            Rank = rank.GetValue(),
-            Date = date.GetValue(),
+            Name = name.Select(value => value.GetStringRequired()),
+            GuildId = guildId.Select(value => value.GetString()) ?? "",
+            TeamName = teamName.Select(value => value.GetString()) ?? "",
+            TeamId = teamId.Select(value => value.GetInt32()),
+            Rank = rank.Select(value => value.GetInt32()),
+            Date = date.Select(value => value.GetDateTimeOffset()),
             Scores = scores.SelectMany(value => value.GetScore(missingMemberBehavior))
         };
     }

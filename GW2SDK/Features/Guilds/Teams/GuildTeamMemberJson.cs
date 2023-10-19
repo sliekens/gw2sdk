@@ -11,8 +11,8 @@ public static class GuildTeamMemberJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> name = new("name");
-        RequiredMember<GuildTeamRole> role = new("role");
+        RequiredMember name = new("name");
+        RequiredMember role = new("role");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -32,8 +32,8 @@ public static class GuildTeamMemberJson
 
         return new GuildTeamMember
         {
-            Name = name.GetValue(),
-            Role = role.GetValue(missingMemberBehavior)
+            Name = name.Select(value => value.GetStringRequired()),
+            Role = role.Select(value => value.GetEnum<GuildTeamRole>(missingMemberBehavior))
         };
     }
 }

@@ -11,8 +11,8 @@ public static class UtilitySkillReferenceJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<SkillSlot> slot = new("slot");
+        RequiredMember id = new("id");
+        RequiredMember slot = new("slot");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -41,8 +41,8 @@ public static class UtilitySkillReferenceJson
 
         return new UtilitySkillReference
         {
-            Id = id.GetValue(),
-            Slot = slot.GetValue(missingMemberBehavior)
+            Id = id.Select(value => value.GetInt32()),
+            Slot = slot.Select(value => value.GetEnum<SkillSlot>(missingMemberBehavior))
         };
     }
 }

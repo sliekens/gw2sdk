@@ -11,9 +11,9 @@ public static class LeaderboardSettingJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> name = new("name");
-        RequiredMember<string> scoring = new("scoring");
-        RequiredMember<LeaderboardTier> tiers = new("tiers");
+        RequiredMember name = new("name");
+        RequiredMember scoring = new("scoring");
+        RequiredMember tiers = new("tiers");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -41,8 +41,8 @@ public static class LeaderboardSettingJson
 
         return new LeaderboardSetting
         {
-            Name = name.GetValue(),
-            ScoringId = scoring.GetValue(),
+            Name = name.Select(value => value.GetStringRequired()),
+            ScoringId = scoring.Select(value => value.GetStringRequired()),
             Tiers = tiers.SelectMany(value => value.GetLeaderboardTier(missingMemberBehavior))
         };
     }

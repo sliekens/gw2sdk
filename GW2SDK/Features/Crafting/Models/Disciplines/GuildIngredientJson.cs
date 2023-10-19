@@ -11,8 +11,8 @@ public static class GuildIngredientJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> upgradeId = new("upgrade_id");
-        RequiredMember<int> count = new("count");
+        RequiredMember upgradeId = new("upgrade_id");
+        RequiredMember count = new("count");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(upgradeId.Name))
@@ -31,8 +31,8 @@ public static class GuildIngredientJson
 
         return new GuildIngredient
         {
-            UpgradeId = upgradeId.GetValue(),
-            Count = count.GetValue()
+            UpgradeId = upgradeId.Select(value => value.GetInt32()),
+            Count = count.Select(value => value.GetInt32())
         };
     }
 }

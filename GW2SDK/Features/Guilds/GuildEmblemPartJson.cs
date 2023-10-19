@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Guilds;
@@ -11,8 +11,8 @@ public static class GuildEmblemPartJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<int> colors = new("colors");
+        RequiredMember id = new("id");
+        RequiredMember colors = new("colors");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -32,8 +32,8 @@ public static class GuildEmblemPartJson
 
         return new GuildEmblemPart
         {
-            Id = id.GetValue(),
-            Colors = colors.GetValues()
+            Id = id.Select(value => value.GetInt32()),
+            Colors = colors.SelectMany(value => value.GetInt32())
         };
     }
 }

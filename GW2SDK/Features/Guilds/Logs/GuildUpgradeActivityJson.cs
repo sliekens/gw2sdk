@@ -11,14 +11,14 @@ public static class GuildUpgradeActivityJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<DateTimeOffset> time = new("time");
-        OptionalMember<string> user = new("user");
-        RequiredMember<GuildUpgradeAction> action = new("action");
-        RequiredMember<int> upgradeId = new("upgrade_id");
-        NullableMember<int> recipeId = new("recipe_id");
-        NullableMember<int> itemId = new("item_id");
-        NullableMember<int> count = new("count");
+        RequiredMember id = new("id");
+        RequiredMember time = new("time");
+        OptionalMember user = new("user");
+        RequiredMember action = new("action");
+        RequiredMember upgradeId = new("upgrade_id");
+        NullableMember recipeId = new("recipe_id");
+        NullableMember itemId = new("item_id");
+        NullableMember count = new("count");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -71,14 +71,14 @@ public static class GuildUpgradeActivityJson
 
         return new GuildUpgradeActivity
         {
-            Id = id.GetValue(),
-            Time = time.GetValue(),
-            User = user.GetValueOrEmpty(),
-            Action = action.GetValue(missingMemberBehavior),
-            UpgradeId = upgradeId.GetValue(),
-            RecipeId = recipeId.GetValue(),
-            ItemId = itemId.GetValue(),
-            Count = count.GetValue()
+            Id = id.Select(value => value.GetInt32()),
+            Time = time.Select(value => value.GetDateTimeOffset()),
+            User = user.Select(value => value.GetString()) ?? "",
+            Action = action.Select(value => value.GetEnum<GuildUpgradeAction>(missingMemberBehavior)),
+            UpgradeId = upgradeId.Select(value => value.GetInt32()),
+            RecipeId = recipeId.Select(value => value.GetInt32()),
+            ItemId = itemId.Select(value => value.GetInt32()),
+            Count = count.Select(value => value.GetInt32())
         };
     }
 }

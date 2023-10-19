@@ -8,13 +8,13 @@ public static class RankJson
 {
     public static Rank GetRank(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<int> finisherId = new("finisher_id");
-        RequiredMember<string> name = new("name");
-        RequiredMember<string> icon = new("icon");
-        RequiredMember<int> minRank = new("min_rank");
-        RequiredMember<int> maxRank = new("max_rank");
-        RequiredMember<Level> levels = new("levels");
+        RequiredMember id = new("id");
+        RequiredMember finisherId = new("finisher_id");
+        RequiredMember name = new("name");
+        RequiredMember icon = new("icon");
+        RequiredMember minRank = new("min_rank");
+        RequiredMember maxRank = new("max_rank");
+        RequiredMember levels = new("levels");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -54,12 +54,12 @@ public static class RankJson
 
         return new Rank
         {
-            Id = id.GetValue(),
-            FinisherId = finisherId.GetValue(),
-            Name = name.GetValue(),
-            Icon = icon.GetValue(),
-            MinRank = minRank.GetValue(),
-            MaxRank = maxRank.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
+            FinisherId = finisherId.Select(value => value.GetInt32()),
+            Name = name.Select(value => value.GetStringRequired()),
+            Icon = icon.Select(value => value.GetStringRequired()),
+            MinRank = minRank.Select(value => value.GetInt32()),
+            MaxRank = maxRank.Select(value => value.GetInt32()),
             Levels = levels.SelectMany(value => value.GetLevel(missingMemberBehavior))
         };
     }

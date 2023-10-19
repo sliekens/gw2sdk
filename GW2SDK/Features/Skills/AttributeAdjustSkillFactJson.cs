@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Skills;
@@ -16,10 +16,10 @@ public static class AttributeAdjustSkillFactJson
         requiresTrait = null;
         overrides = null;
 
-        OptionalMember<string> text = new("text");
-        RequiredMember<string> icon = new("icon");
-        NullableMember<int> value = new("value");
-        RequiredMember<AttributeAdjustTarget> target = new("target");
+        OptionalMember text = new("text");
+        RequiredMember icon = new("icon");
+        NullableMember adjustment = new("value");
+        RequiredMember target = new("target");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -48,9 +48,9 @@ public static class AttributeAdjustSkillFactJson
             {
                 icon.Value = member.Value;
             }
-            else if (member.NameEquals(value.Name))
+            else if (member.NameEquals(adjustment.Name))
             {
-                value.Value = member.Value;
+                adjustment.Value = member.Value;
             }
             else if (member.NameEquals(target.Name))
             {
@@ -64,10 +64,10 @@ public static class AttributeAdjustSkillFactJson
 
         return new AttributeAdjustSkillFact
         {
-            Text = text.GetValueOrEmpty(),
-            Icon = icon.GetValue(),
-            Value = value.GetValue(),
-            Target = target.GetValue(missingMemberBehavior)
+            Text = text.Select(value => value.GetString()) ?? "",
+            Icon = icon.Select(value => value.GetStringRequired()),
+            Value = adjustment.Select(value => value.GetInt32()),
+            Target = target.Select(value => value.GetEnum<AttributeAdjustTarget>(missingMemberBehavior))
         };
     }
 }

@@ -8,11 +8,11 @@ public static class QuestJson
 {
     public static Quest GetQuest(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<string> name = new("name");
-        RequiredMember<int> level = new("level");
-        RequiredMember<int> story = new("story");
-        RequiredMember<Goal> goals = new("goals");
-        RequiredMember<int> id = new("id");
+        RequiredMember name = new("name");
+        RequiredMember level = new("level");
+        RequiredMember story = new("story");
+        RequiredMember goals = new("goals");
+        RequiredMember id = new("id");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -44,10 +44,10 @@ public static class QuestJson
 
         return new Quest
         {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
-            Level = level.GetValue(),
-            Story = story.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
+            Name = name.Select(value => value.GetStringRequired()),
+            Level = level.Select(value => value.GetInt32()),
+            Story = story.Select(value => value.GetInt32()),
             Goals = goals.SelectMany(value => value.GetGoal(missingMemberBehavior))
         };
     }

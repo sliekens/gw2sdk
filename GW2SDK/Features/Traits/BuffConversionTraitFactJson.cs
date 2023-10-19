@@ -15,11 +15,11 @@ public static class BuffConversionTraitFactJson
     {
         requiresTrait = null;
         overrides = null;
-        OptionalMember<string> text = new("text");
-        OptionalMember<string> icon = new("icon");
-        RequiredMember<int> percent = new("percent");
-        RequiredMember<AttributeAdjustTarget> source = new("source");
-        RequiredMember<AttributeAdjustTarget> target = new("target");
+        OptionalMember text = new("text");
+        OptionalMember icon = new("icon");
+        RequiredMember percent = new("percent");
+        RequiredMember source = new("source");
+        RequiredMember target = new("target");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
@@ -67,11 +67,11 @@ public static class BuffConversionTraitFactJson
 
         return new BuffConversionTraitFact
         {
-            Text = text.GetValueOrEmpty(),
-            Icon = icon.GetValueOrEmpty(),
-            Percent = percent.GetValue(),
-            Source = source.GetValue(missingMemberBehavior),
-            Target = target.GetValue(missingMemberBehavior)
+            Text = text.Select(value => value.GetString()) ?? "",
+            Icon = icon.Select(value => value.GetString()) ?? "",
+            Percent = percent.Select(value => value.GetInt32()),
+            Source = source.Select(value => value.GetEnum<AttributeAdjustTarget>(missingMemberBehavior)),
+            Target = target.Select(value => value.GetEnum<AttributeAdjustTarget>(missingMemberBehavior))
         };
     }
 }

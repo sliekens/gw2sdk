@@ -11,11 +11,11 @@ public static class CurrencyJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<string> name = new("name");
-        RequiredMember<string> description = new("description");
-        RequiredMember<int> order = new("order");
-        RequiredMember<string> icon = new("icon");
+        RequiredMember id = new("id");
+        RequiredMember name = new("name");
+        RequiredMember description = new("description");
+        RequiredMember order = new("order");
+        RequiredMember icon = new("icon");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -47,11 +47,11 @@ public static class CurrencyJson
 
         return new Currency
         {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
-            Description = description.GetValue(),
-            Order = order.GetValue(),
-            Icon = icon.GetValue()
+            Id = id.Select(value => value.GetInt32()),
+            Name = name.Select(value => value.GetStringRequired()),
+            Description = description.Select(value => value.GetStringRequired()),
+            Order = order.Select(value => value.GetInt32()),
+            Icon = icon.Select(value => value.GetStringRequired())
         };
     }
 }

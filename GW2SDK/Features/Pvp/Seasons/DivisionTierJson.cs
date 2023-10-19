@@ -11,7 +11,7 @@ public static class DivisionTierJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> points = new("points");
+        RequiredMember points = new("points");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -25,6 +25,6 @@ public static class DivisionTierJson
             }
         }
 
-        return new DivisionTier { Points = points.GetValue() };
+        return new DivisionTier { Points = points.Select(value => value.GetInt32()) };
     }
 }

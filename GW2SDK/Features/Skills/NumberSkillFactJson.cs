@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Skills;
@@ -16,9 +16,9 @@ public static class NumberSkillFactJson
         requiresTrait = null;
         overrides = null;
 
-        OptionalMember<string> text = new("text");
-        RequiredMember<string> icon = new("icon");
-        RequiredMember<int> value = new("value");
+        OptionalMember text = new("text");
+        RequiredMember icon = new("icon");
+        RequiredMember number = new("value");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -47,9 +47,9 @@ public static class NumberSkillFactJson
             {
                 icon.Value = member.Value;
             }
-            else if (member.NameEquals(value.Name))
+            else if (member.NameEquals(number.Name))
             {
-                value.Value = member.Value;
+                number.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -59,9 +59,9 @@ public static class NumberSkillFactJson
 
         return new NumberSkillFact
         {
-            Text = text.GetValueOrEmpty(),
-            Icon = icon.GetValue(),
-            Value = value.GetValue()
+            Text = text.Select(value => value.GetString()) ?? "",
+            Icon = icon.Select(value => value.GetStringRequired()),
+            Value = number.Select(value => value.GetInt32())
         };
     }
 }

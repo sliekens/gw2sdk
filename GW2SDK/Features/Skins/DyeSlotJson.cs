@@ -11,8 +11,8 @@ public static class DyeSlotJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> colorId = new("color_id");
-        RequiredMember<Material> material = new("material");
+        RequiredMember colorId = new("color_id");
+        RequiredMember material = new("material");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(colorId.Name))
@@ -31,8 +31,8 @@ public static class DyeSlotJson
 
         return new DyeSlot
         {
-            ColorId = colorId.GetValue(),
-            Material = material.GetValue(missingMemberBehavior)
+            ColorId = colorId.Select(value => value.GetInt32()),
+            Material = material.Select(value => value.GetEnum<Material>(missingMemberBehavior))
         };
     }
 }

@@ -11,11 +11,11 @@ public static class TreasuryDepositJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<DateTimeOffset> time = new("time");
-        RequiredMember<string> user = new("user");
-        RequiredMember<int> itemId = new("item_id");
-        RequiredMember<int> count = new("count");
+        RequiredMember id = new("id");
+        RequiredMember time = new("time");
+        RequiredMember user = new("user");
+        RequiredMember itemId = new("item_id");
+        RequiredMember count = new("count");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -56,11 +56,11 @@ public static class TreasuryDepositJson
 
         return new TreasuryDeposit
         {
-            Id = id.GetValue(),
-            Time = time.GetValue(),
-            User = user.GetValue(),
-            ItemId = itemId.GetValue(),
-            Count = count.GetValue()
+            Id = id.Select(value => value.GetInt32()),
+            Time = time.Select(value => value.GetDateTimeOffset()),
+            User = user.Select(value => value.GetStringRequired()),
+            ItemId = itemId.Select(value => value.GetInt32()),
+            Count = count.Select(value => value.GetInt32())
         };
     }
 }

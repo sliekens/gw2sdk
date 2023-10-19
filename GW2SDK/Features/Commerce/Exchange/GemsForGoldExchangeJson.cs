@@ -11,8 +11,8 @@ public static class GemsForGoldExchangeJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> coinsPerGem = new("coins_per_gem");
-        RequiredMember<int> quantity = new("quantity");
+        RequiredMember coinsPerGem = new("coins_per_gem");
+        RequiredMember quantity = new("quantity");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(coinsPerGem.Name))
@@ -31,8 +31,8 @@ public static class GemsForGoldExchangeJson
 
         return new GemsForGoldExchange
         {
-            CoinsPerGem = coinsPerGem.GetValue(),
-            CoinsToReceive = quantity.GetValue()
+            CoinsPerGem = coinsPerGem.Select(value => value.GetInt32()),
+            CoinsToReceive = quantity.Select(value => value.GetInt32())
         };
     }
 }

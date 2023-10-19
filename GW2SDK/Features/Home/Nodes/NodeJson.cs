@@ -8,7 +8,7 @@ public static class NodeJson
 {
     public static Node GetNode(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<string> id = new("id");
+        RequiredMember id = new("id");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -22,6 +22,6 @@ public static class NodeJson
             }
         }
 
-        return new Node { Id = id.GetValue() };
+        return new Node { Id = id.Select(value => value.GetStringRequired()) };
     }
 }

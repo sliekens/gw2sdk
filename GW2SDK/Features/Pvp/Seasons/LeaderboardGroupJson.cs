@@ -11,9 +11,9 @@ public static class LeaderboardGroupJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        OptionalMember<Leaderboard> ladder = new("ladder");
-        OptionalMember<Leaderboard> legendary = new("legendary");
-        OptionalMember<Leaderboard> guild = new("guild");
+        OptionalMember ladder = new("ladder");
+        OptionalMember legendary = new("legendary");
+        OptionalMember guild = new("guild");
 
         foreach (var member in json.EnumerateObject())
         {

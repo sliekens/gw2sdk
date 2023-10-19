@@ -18,17 +18,17 @@ public static class ItemSlotJson
             return null;
         }
 
-        RequiredMember<int> id = new("id");
-        RequiredMember<int> count = new("count");
-        NullableMember<int> charges = new("charges");
-        NullableMember<int> skin = new("skin");
-        OptionalMember<int> upgrades = new("upgrades");
-        OptionalMember<int> upgradeSlotIndices = new("upgrade_slot_indices");
-        OptionalMember<int> infusions = new("infusions");
-        OptionalMember<int?> dyes = new("dyes");
-        OptionalMember<ItemBinding> binding = new("binding");
-        OptionalMember<string> boundTo = new("bound_to");
-        OptionalMember<SelectedStat> stats = new("stats");
+        RequiredMember id = new("id");
+        RequiredMember count = new("count");
+        NullableMember charges = new("charges");
+        NullableMember skin = new("skin");
+        OptionalMember upgrades = new("upgrades");
+        OptionalMember upgradeSlotIndices = new("upgrade_slot_indices");
+        OptionalMember infusions = new("infusions");
+        OptionalMember dyes = new("dyes");
+        OptionalMember binding = new("binding");
+        OptionalMember boundTo = new("bound_to");
+        OptionalMember stats = new("stats");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -84,19 +84,19 @@ public static class ItemSlotJson
 
         return new ItemSlot
         {
-            Id = id.GetValue(),
-            Count = count.GetValue(),
-            Charges = charges.GetValue(),
-            Skin = skin.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
+            Count = count.Select(value => value.GetInt32()),
+            Charges = charges.Select(value => value.GetInt32()),
+            Skin = skin.Select(value => value.GetInt32()),
             Upgrades = upgrades.SelectMany(value => value.GetInt32()),
             UpgradeSlotIndices = upgradeSlotIndices.SelectMany(value => value.GetInt32()),
             Infusions = infusions.SelectMany(value => value.GetInt32()),
             Dyes =
-                dyes.SelectMany(
+                dyes.SelectMany<int?>(
                     value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32()
                 ),
-            Binding = binding.GetValue(missingMemberBehavior),
-            BoundTo = boundTo.GetValueOrEmpty(),
+            Binding = binding.Select(value => value.GetEnum<ItemBinding>(missingMemberBehavior)),
+            BoundTo = boundTo.Select(value => value.GetString()) ?? "",
             Stats = stats.Select(value => value.GetSelectedStat(missingMemberBehavior))
         };
     }

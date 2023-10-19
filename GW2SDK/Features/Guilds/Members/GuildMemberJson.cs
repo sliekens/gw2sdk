@@ -11,9 +11,9 @@ public static class GuildMemberJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> name = new("name");
-        RequiredMember<string> rank = new("rank");
-        NullableMember<DateTimeOffset> joined = new("joined");
+        RequiredMember name = new("name");
+        RequiredMember rank = new("rank");
+        NullableMember joined = new("joined");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -37,9 +37,9 @@ public static class GuildMemberJson
 
         return new GuildMember
         {
-            Name = name.GetValue(),
-            Rank = rank.GetValue(),
-            Joined = joined.GetValue()
+            Name = name.Select(value => value.GetStringRequired()),
+            Rank = rank.Select(value => value.GetStringRequired()),
+            Joined = joined.Select(value => value.GetDateTimeOffset())
         };
     }
 }

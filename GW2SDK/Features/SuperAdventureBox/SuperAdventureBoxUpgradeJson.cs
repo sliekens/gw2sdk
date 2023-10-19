@@ -11,8 +11,8 @@ public static class SuperAdventureBoxUpgradeJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        OptionalMember<string> name = new("name");
+        RequiredMember id = new("id");
+        OptionalMember name = new("name");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -32,8 +32,8 @@ public static class SuperAdventureBoxUpgradeJson
 
         return new SuperAdventureBoxUpgrade
         {
-            Id = id.GetValue(),
-            Name = name.GetValueOrEmpty()
+            Id = id.Select(value => value.GetInt32()),
+            Name = name.Select(value => value.GetString()) ?? ""
         };
     }
 }

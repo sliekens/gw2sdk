@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Meta;
@@ -8,10 +8,10 @@ public static class RouteJson
 {
     public static Route GetRoute(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<string> path = new("path");
-        RequiredMember<bool> lang = new("lang");
-        OptionalMember<bool> auth = new("auth");
-        RequiredMember<bool> active = new("active");
+        RequiredMember path = new("path");
+        RequiredMember lang = new("lang");
+        OptionalMember auth = new("auth");
+        RequiredMember active = new("active");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -39,10 +39,10 @@ public static class RouteJson
 
         return new Route
         {
-            Path = path.GetValue(),
-            Multilingual = lang.GetValue(),
-            RequiresAuthorization = auth.GetValue(),
-            Active = active.GetValue()
+            Path = path.Select(value => value.GetStringRequired()),
+            Multilingual = lang.Select(value => value.GetBoolean()),
+            RequiresAuthorization = auth.Select(value => value.GetBoolean()),
+            Active = active.Select(value => value.GetBoolean())
         };
     }
 }

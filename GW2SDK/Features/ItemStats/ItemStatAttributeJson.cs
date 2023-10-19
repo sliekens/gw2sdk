@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.ItemStats;
@@ -11,9 +11,9 @@ public static class ItemStatAttributeJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<UpgradeAttributeName> attribute = new("attribute");
-        RequiredMember<double> multiplier = new("multiplier");
-        RequiredMember<int> value = new("value");
+        RequiredMember attribute = new("attribute");
+        RequiredMember multiplier = new("multiplier");
+        RequiredMember amount = new("value");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -25,9 +25,9 @@ public static class ItemStatAttributeJson
             {
                 multiplier.Value = member.Value;
             }
-            else if (member.NameEquals(value.Name))
+            else if (member.NameEquals(amount.Name))
             {
-                value.Value = member.Value;
+                amount.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -37,9 +37,9 @@ public static class ItemStatAttributeJson
 
         return new ItemStatAttribute
         {
-            Attribute = attribute.GetValue(missingMemberBehavior),
-            Multiplier = multiplier.GetValue(),
-            Value = value.GetValue()
+            Attribute = attribute.Select(value => value.GetEnum<UpgradeAttributeName>(missingMemberBehavior)),
+            Multiplier = multiplier.Select(value => value.GetDouble()),
+            Value = amount.Select(value => value.GetInt32())
         };
     }
 }

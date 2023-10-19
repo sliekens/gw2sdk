@@ -11,8 +11,8 @@ public static class AbilityRankJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> cost = new("cost");
-        RequiredMember<string> effect = new("effect");
+        RequiredMember cost = new("cost");
+        RequiredMember effect = new("effect");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -32,8 +32,8 @@ public static class AbilityRankJson
 
         return new AbilityRank
         {
-            Cost = cost.GetValue(),
-            Effect = effect.GetValue()
+            Cost = cost.Select(value => value.GetInt32()),
+            Effect = effect.Select(value => value.GetStringRequired())
         };
     }
 }

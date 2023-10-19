@@ -11,13 +11,13 @@ public static class MasteryJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<string> name = new("name");
-        RequiredMember<string> requirement = new("requirement");
-        RequiredMember<int> order = new("order");
-        RequiredMember<string> background = new("background");
-        RequiredMember<MasteryRegionName> region = new("region");
-        RequiredMember<MasteryLevel> levels = new("levels");
+        RequiredMember id = new("id");
+        RequiredMember name = new("name");
+        RequiredMember requirement = new("requirement");
+        RequiredMember order = new("order");
+        RequiredMember background = new("background");
+        RequiredMember region = new("region");
+        RequiredMember levels = new("levels");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -57,12 +57,12 @@ public static class MasteryJson
 
         return new Mastery
         {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
-            Requirement = requirement.GetValue(),
-            Order = order.GetValue(),
-            Background = background.GetValue(),
-            Region = region.GetValue(missingMemberBehavior),
+            Id = id.Select(value => value.GetInt32()),
+            Name = name.Select(value => value.GetStringRequired()),
+            Requirement = requirement.Select(value => value.GetStringRequired()),
+            Order = order.Select(value => value.GetInt32()),
+            Background = background.Select(value => value.GetStringRequired()),
+            Region = region.Select(value => value.GetEnum<MasteryRegionName>(missingMemberBehavior)),
             Levels = levels.SelectMany(value => value.GetMasteryLevel(missingMemberBehavior))
         };
     }

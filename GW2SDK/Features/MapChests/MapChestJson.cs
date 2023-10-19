@@ -11,7 +11,7 @@ public static class MapChestJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> id = new("id");
+        RequiredMember id = new("id");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -25,6 +25,6 @@ public static class MapChestJson
             }
         }
 
-        return new MapChest { Id = id.GetValue() };
+        return new MapChest { Id = id.Select(value => value.GetStringRequired()) };
     }
 }

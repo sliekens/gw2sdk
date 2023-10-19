@@ -8,9 +8,9 @@ public static class WorldJson
 {
     public static World GetWorld(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<string> name = new("name");
-        RequiredMember<WorldPopulation> population = new("population");
+        RequiredMember id = new("id");
+        RequiredMember name = new("name");
+        RequiredMember population = new("population");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(id.Name))
@@ -33,9 +33,9 @@ public static class WorldJson
 
         return new World
         {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
-            Population = population.GetValue(missingMemberBehavior)
+            Id = id.Select(value => value.GetInt32()),
+            Name = name.Select(value => value.GetStringRequired()),
+            Population = population.Select(value => value.GetEnum<WorldPopulation>(missingMemberBehavior))
         };
     }
 }

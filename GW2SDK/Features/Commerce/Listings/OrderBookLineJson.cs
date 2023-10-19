@@ -11,9 +11,9 @@ public static class OrderBookLineJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> listings = new("listings");
-        RequiredMember<int> unitPrice = new("unit_price");
-        RequiredMember<int> quantity = new("quantity");
+        RequiredMember listings = new("listings");
+        RequiredMember unitPrice = new("unit_price");
+        RequiredMember quantity = new("quantity");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -37,9 +37,9 @@ public static class OrderBookLineJson
 
         return new OrderBookLine
         {
-            Listings = listings.GetValue(),
-            UnitPrice = unitPrice.GetValue(),
-            Quantity = quantity.GetValue()
+            Listings = listings.Select(value => value.GetInt32()),
+            UnitPrice = unitPrice.Select(value => value.GetInt32()),
+            Quantity = quantity.Select(value => value.GetInt32())
         };
     }
 }

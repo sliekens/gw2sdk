@@ -16,10 +16,10 @@ public static class DamageSkillFactJson
         requiresTrait = null;
         overrides = null;
 
-        RequiredMember<string> text = new("text");
-        RequiredMember<string> icon = new("icon");
-        RequiredMember<int> hitCount = new("hit_count");
-        RequiredMember<double> damageMultiplier = new("dmg_multiplier");
+        RequiredMember text = new("text");
+        RequiredMember icon = new("icon");
+        RequiredMember hitCount = new("hit_count");
+        RequiredMember damageMultiplier = new("dmg_multiplier");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -64,10 +64,10 @@ public static class DamageSkillFactJson
 
         return new DamageSkillFact
         {
-            Text = text.GetValue(),
-            Icon = icon.GetValue(),
-            HitCount = hitCount.GetValue(),
-            DamageMultiplier = damageMultiplier.GetValue()
+            Text = text.Select(value => value.GetStringRequired()),
+            Icon = icon.Select(value => value.GetStringRequired()),
+            HitCount = hitCount.Select(value => value.GetInt32()),
+            DamageMultiplier = damageMultiplier.Select(value => value.GetDouble())
         };
     }
 }

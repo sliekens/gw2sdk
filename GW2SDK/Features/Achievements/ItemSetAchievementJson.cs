@@ -11,18 +11,18 @@ public static class ItemSetAchievementJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        OptionalMember<string> icon = new("icon");
-        RequiredMember<string> name = new("name");
-        RequiredMember<string> description = new("description");
-        RequiredMember<string> requirement = new("requirement");
-        RequiredMember<string> lockedText = new("locked_text");
-        RequiredMember<AchievementFlag> flags = new("flags");
-        RequiredMember<AchievementTier> tiers = new("tiers");
-        OptionalMember<int> prerequisites = new("prerequisites");
-        OptionalMember<AchievementReward> rewards = new("rewards");
-        OptionalMember<AchievementBit> bits = new("bits");
-        NullableMember<int> pointCap = new("point_cap");
+        RequiredMember id = new("id");
+        OptionalMember icon = new("icon");
+        RequiredMember name = new("name");
+        RequiredMember description = new("description");
+        RequiredMember requirement = new("requirement");
+        RequiredMember lockedText = new("locked_text");
+        RequiredMember flags = new("flags");
+        RequiredMember tiers = new("tiers");
+        OptionalMember prerequisites = new("prerequisites");
+        OptionalMember rewards = new("rewards");
+        OptionalMember bits = new("bits");
+        NullableMember pointCap = new("point_cap");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -91,20 +91,20 @@ public static class ItemSetAchievementJson
 
         return new ItemSetAchievement
         {
-            Id = id.GetValue(),
-            Icon = icon.GetValueOrEmpty(),
-            Name = name.GetValue(),
-            Description = description.GetValue(),
-            Requirement = requirement.GetValue(),
-            LockedText = lockedText.GetValue(),
-            Flags = flags.GetValues(missingMemberBehavior),
+            Id = id.Select(value => value.GetInt32()),
+            Icon = icon.Select(value => value.GetString()) ?? "",
+            Name = name.Select(value => value.GetStringRequired()),
+            Description = description.Select(value => value.GetStringRequired()),
+            Requirement = requirement.Select(value => value.GetStringRequired()),
+            LockedText = lockedText.Select(value => value.GetStringRequired()),
+            Flags = flags.SelectMany(value => value.GetEnum<AchievementFlag>(missingMemberBehavior)),
             Tiers = tiers.SelectMany(value => value.GetAchievementTier(missingMemberBehavior)),
             Prerequisites = prerequisites.SelectMany(value => value.GetInt32()),
             Rewards = rewards.SelectMany(
                 value => value.GetAchievementReward(missingMemberBehavior)
             ),
             Bits = bits.SelectMany(value => value.GetAchievementBit(missingMemberBehavior)),
-            PointCap = pointCap.GetValue()
+            PointCap = pointCap.Select(value => value.GetInt32())
         };
     }
 }

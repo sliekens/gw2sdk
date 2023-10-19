@@ -21,7 +21,7 @@ public static class AccountLuckJson
         // The endpoint returns an array with a singular object containing the following:
         // id (string) – The string "luck".
         // value (number) – The amount of luck consumed
-        RequiredMember<int> value = new("value");
+        RequiredMember value = new("value");
 
         foreach (var member in json[0].EnumerateObject())
         {
@@ -44,6 +44,6 @@ public static class AccountLuckJson
             }
         }
 
-        return new AccountLuck { Luck = value.GetValue() };
+        return new AccountLuck { Luck = value.Select(luck => luck.GetInt32()) };
     }
 }

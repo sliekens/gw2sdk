@@ -11,9 +11,9 @@ public static class WeaponProficiencyJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        NullableMember<int> specialization = new("specialization");
-        RequiredMember<WeaponFlag> flags = new("flags");
-        RequiredMember<WeaponSkill> skills = new("skills");
+        NullableMember specialization = new("specialization");
+        RequiredMember flags = new("flags");
+        RequiredMember skills = new("skills");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -37,8 +37,8 @@ public static class WeaponProficiencyJson
 
         return new WeaponProficiency
         {
-            RequiredSpecialization = specialization.GetValue(),
-            Flags = flags.GetValues(missingMemberBehavior),
+            RequiredSpecialization = specialization.Select(value => value.GetInt32()),
+            Flags = flags.SelectMany(value => value.GetEnum<WeaponFlag>(missingMemberBehavior)),
             Skills = skills.SelectMany(value => value.GetWeaponSkill(missingMemberBehavior))
         };
     }

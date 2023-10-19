@@ -9,8 +9,8 @@ public static class RectangleJson
 {
     public static Rectangle GetMapRectangle(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<Point> southWest = new("[0]");
-        RequiredMember<Point> northEast = new("[1]");
+        RequiredMember southWest = new("[0]");
+        RequiredMember northEast = new("[1]");
 
         foreach (var entry in json.EnumerateArray())
         {
@@ -41,8 +41,8 @@ public static class RectangleJson
 
     public static Rectangle GetContinentRectangle(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<Point> northWest = new("[0]");
-        RequiredMember<Point> southEast = new("[1]");
+        RequiredMember northWest = new("[0]");
+        RequiredMember southEast = new("[1]");
 
         foreach (var entry in json.EnumerateArray())
         {

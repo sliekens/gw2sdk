@@ -11,9 +11,9 @@ public static class BuildTabJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> tab = new("tab");
-        RequiredMember<bool> isActive = new("is_active");
-        RequiredMember<Build> build = new("build");
+        RequiredMember tab = new("tab");
+        RequiredMember isActive = new("is_active");
+        RequiredMember build = new("build");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -37,8 +37,8 @@ public static class BuildTabJson
 
         return new BuildTab
         {
-            Tab = tab.GetValue(),
-            IsActive = isActive.GetValue(),
+            Tab = tab.Select(value => value.GetInt32()),
+            IsActive = isActive.Select(value => value.GetBoolean()),
             Build = build.Select(value => value.GetBuild(missingMemberBehavior))
         };
     }

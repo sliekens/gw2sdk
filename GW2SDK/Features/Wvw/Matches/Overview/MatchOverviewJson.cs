@@ -11,11 +11,11 @@ public static class MatchOverviewJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> id = new("id");
-        RequiredMember<Worlds> worlds = new("worlds");
-        RequiredMember<AllWorlds> allWorlds = new("all_worlds");
-        RequiredMember<DateTimeOffset> startTime = new("start_time");
-        RequiredMember<DateTimeOffset> endTime = new("end_time");
+        RequiredMember id = new("id");
+        RequiredMember worlds = new("worlds");
+        RequiredMember allWorlds = new("all_worlds");
+        RequiredMember startTime = new("start_time");
+        RequiredMember endTime = new("end_time");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -47,11 +47,11 @@ public static class MatchOverviewJson
 
         return new MatchOverview
         {
-            Id = id.GetValue(),
+            Id = id.Select(value => value.GetStringRequired()),
             Worlds = worlds.Select(value => value.GetWorlds(missingMemberBehavior)),
             AllWorlds = allWorlds.Select(value => value.GetAllWorlds(missingMemberBehavior)),
-            StartTime = startTime.GetValue(),
-            EndTime = endTime.GetValue()
+            StartTime = startTime.Select(value => value.GetDateTimeOffset()),
+            EndTime = endTime.Select(value => value.GetDateTimeOffset())
         };
     }
 }

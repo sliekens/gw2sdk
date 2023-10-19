@@ -11,8 +11,8 @@ public static class InfusionSlotJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<InfusionSlotFlag> flags = new("flags");
-        NullableMember<int> itemId = new("item_id");
+        RequiredMember flags = new("flags");
+        NullableMember itemId = new("item_id");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(flags.Name))
@@ -31,8 +31,8 @@ public static class InfusionSlotJson
 
         return new InfusionSlot
         {
-            Flags = flags.GetValues(missingMemberBehavior),
-            ItemId = itemId.GetValue()
+            Flags = flags.SelectMany(value => value.GetEnum<InfusionSlotFlag>(missingMemberBehavior)),
+            ItemId = itemId.Select(value => value.GetInt32())
         };
     }
 }

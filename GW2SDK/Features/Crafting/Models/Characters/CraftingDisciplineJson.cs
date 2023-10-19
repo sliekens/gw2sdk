@@ -11,9 +11,9 @@ public static class CraftingDisciplineJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<CraftingDisciplineName> discipline = new("discipline");
-        RequiredMember<int> rating = new("rating");
-        RequiredMember<bool> active = new("active");
+        RequiredMember discipline = new("discipline");
+        RequiredMember rating = new("rating");
+        RequiredMember active = new("active");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -37,9 +37,9 @@ public static class CraftingDisciplineJson
 
         return new CraftingDiscipline
         {
-            Discipline = discipline.GetValue(missingMemberBehavior),
-            Rating = rating.GetValue(),
-            Active = active.GetValue()
+            Discipline = discipline.Select(value => value.GetEnum<CraftingDisciplineName>(missingMemberBehavior)),
+            Rating = rating.Select(value => value.GetInt32()),
+            Active = active.Select(value => value.GetBoolean())
         };
     }
 }

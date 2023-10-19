@@ -11,13 +11,13 @@ public static class AchievementCategoryJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<string> name = new("name");
-        RequiredMember<string> description = new("description");
-        RequiredMember<int> order = new("order");
-        RequiredMember<string> icon = new("icon");
-        RequiredMember<AchievementRef> achievements = new("achievements");
-        OptionalMember<AchievementRef> tomorrow = new("tomorrow");
+        RequiredMember id = new("id");
+        RequiredMember name = new("name");
+        RequiredMember description = new("description");
+        RequiredMember order = new("order");
+        RequiredMember icon = new("icon");
+        RequiredMember achievements = new("achievements");
+        OptionalMember tomorrow = new("tomorrow");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -57,11 +57,11 @@ public static class AchievementCategoryJson
 
         return new AchievementCategory
         {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
-            Description = description.GetValue(),
-            Order = order.GetValue(),
-            Icon = icon.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
+            Name = name.Select(value => value.GetStringRequired()),
+            Description = description.Select(value => value.GetStringRequired()),
+            Order = order.Select(value => value.GetInt32()),
+            Icon = icon.Select(value => value.GetStringRequired()),
             Achievements =
                 achievements.SelectMany(item => item.GetAchievementRef(missingMemberBehavior)),
             Tomorrow = tomorrow.SelectMany(item => item.GetAchievementRef(missingMemberBehavior))

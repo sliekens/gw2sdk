@@ -11,12 +11,12 @@ public static class AccountStatsJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> pvpRank = new("pvp_rank");
-        RequiredMember<int> pvpRankPoints = new("pvp_rank_points");
-        RequiredMember<int> pvpRankRollovers = new("pvp_rank_rollovers");
-        RequiredMember<Results> aggregate = new("aggregate");
-        RequiredMember<Dictionary<ProfessionName, Results>> professions = new("professions");
-        RequiredMember<Ladders> ladders = new("ladders");
+        RequiredMember pvpRank = new("pvp_rank");
+        RequiredMember pvpRankPoints = new("pvp_rank_points");
+        RequiredMember pvpRankRollovers = new("pvp_rank_rollovers");
+        RequiredMember aggregate = new("aggregate");
+        RequiredMember professions = new("professions");
+        RequiredMember ladders = new("ladders");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -52,9 +52,9 @@ public static class AccountStatsJson
 
         return new AccountStats
         {
-            PvpRank = pvpRank.GetValue(),
-            PvpRankPoints = pvpRankPoints.GetValue(),
-            PvpRankRollovers = pvpRankRollovers.GetValue(),
+            PvpRank = pvpRank.Select(value => value.GetInt32()),
+            PvpRankPoints = pvpRankPoints.Select(value => value.GetInt32()),
+            PvpRankRollovers = pvpRankRollovers.Select(value => value.GetInt32()),
             Aggregate = aggregate.Select(value => value.GetResults(missingMemberBehavior)),
             Professions = professions.Value.EnumerateObject()
                 .ToDictionary(

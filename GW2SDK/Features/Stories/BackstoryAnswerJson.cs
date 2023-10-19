@@ -11,13 +11,13 @@ public static class BackstoryAnswerJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> id = new("id");
-        RequiredMember<string> title = new("title");
-        RequiredMember<string> description = new("description");
-        RequiredMember<string> journal = new("journal");
-        RequiredMember<int> question = new("question");
-        OptionalMember<ProfessionName> professions = new("professions");
-        OptionalMember<RaceName> races = new("races");
+        RequiredMember id = new("id");
+        RequiredMember title = new("title");
+        RequiredMember description = new("description");
+        RequiredMember journal = new("journal");
+        RequiredMember question = new("question");
+        OptionalMember professions = new("professions");
+        OptionalMember races = new("races");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(id.Name))
@@ -56,13 +56,13 @@ public static class BackstoryAnswerJson
 
         return new BackstoryAnswer
         {
-            Id = id.GetValue(),
-            Title = title.GetValue(),
-            Description = description.GetValue(),
-            Journal = journal.GetValue(),
-            Question = question.GetValue(),
-            Professions = professions.GetValues(missingMemberBehavior),
-            Races = races.GetValues(missingMemberBehavior)
+            Id = id.Select(value => value.GetStringRequired()),
+            Title = title.Select(value => value.GetStringRequired()),
+            Description = description.Select(value => value.GetStringRequired()),
+            Journal = journal.Select(value => value.GetStringRequired()),
+            Question = question.Select(value => value.GetInt32()),
+            Professions = professions.SelectMany(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
+            Races = races.SelectMany(value => value.GetEnum<RaceName>(missingMemberBehavior))
         };
     }
 }

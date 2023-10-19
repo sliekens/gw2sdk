@@ -11,17 +11,17 @@ public static class SpecializationJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<string> name = new("name");
-        RequiredMember<ProfessionName> profession = new("profession");
-        RequiredMember<bool> elite = new("elite");
-        RequiredMember<int> minorTraits = new("minor_traits");
-        RequiredMember<int> majorTraits = new("major_traits");
-        NullableMember<int> weaponTrait = new("weapon_trait");
-        RequiredMember<string> icon = new("icon");
-        RequiredMember<string> background = new("background");
-        OptionalMember<string> professionIconBig = new("profession_icon_big");
-        OptionalMember<string> professionIcon = new("profession_icon");
+        RequiredMember id = new("id");
+        RequiredMember name = new("name");
+        RequiredMember profession = new("profession");
+        RequiredMember elite = new("elite");
+        RequiredMember minorTraits = new("minor_traits");
+        RequiredMember majorTraits = new("major_traits");
+        NullableMember weaponTrait = new("weapon_trait");
+        RequiredMember icon = new("icon");
+        RequiredMember background = new("background");
+        OptionalMember professionIconBig = new("profession_icon_big");
+        OptionalMember professionIcon = new("profession_icon");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -77,17 +77,17 @@ public static class SpecializationJson
 
         return new Specialization
         {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
-            Profession = profession.GetValue(missingMemberBehavior),
-            Elite = elite.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
+            Name = name.Select(value => value.GetStringRequired()),
+            Profession = profession.Select(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
+            Elite = elite.Select(value => value.GetBoolean()),
             MinorTraits = minorTraits.SelectMany(value => value.GetInt32()),
             MajorTraits = majorTraits.SelectMany(value => value.GetInt32()),
-            WeaponTrait = weaponTrait.GetValue(),
-            Icon = icon.GetValue(),
-            Background = background.GetValue(),
-            ProfessionIconBig = professionIconBig.GetValueOrEmpty(),
-            ProfessionIcon = professionIcon.GetValueOrEmpty()
+            WeaponTrait = weaponTrait.Select(value => value.GetInt32()),
+            Icon = icon.Select(value => value.GetStringRequired()),
+            Background = background.Select(value => value.GetStringRequired()),
+            ProfessionIconBig = professionIconBig.Select(value => value.GetString()) ?? "",
+            ProfessionIcon = professionIcon.Select(value => value.GetString()) ?? ""
         };
     }
 }

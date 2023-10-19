@@ -11,9 +11,9 @@ public static class GuildTreasurySlotJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> itemId = new("item_id");
-        RequiredMember<int> count = new("count");
-        RequiredMember<CountNeededForUpgrade> countNeededForUpgrade = new("needed_by");
+        RequiredMember itemId = new("item_id");
+        RequiredMember count = new("count");
+        RequiredMember countNeededForUpgrade = new("needed_by");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -37,8 +37,8 @@ public static class GuildTreasurySlotJson
 
         return new GuildTreasurySlot
         {
-            ItemId = itemId.GetValue(),
-            Count = count.GetValue(),
+            ItemId = itemId.Select(value => value.GetInt32()),
+            Count = count.Select(value => value.GetInt32()),
             CountNeededForUpgrades = countNeededForUpgrade.SelectMany(
                 value => value.GetCountNeededForUpgrade(missingMemberBehavior)
             )

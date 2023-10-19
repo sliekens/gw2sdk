@@ -11,8 +11,8 @@ public static class DeliveryBoxJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<Coin> coins = new("coins");
-        RequiredMember<DeliveredItem> items = new("items");
+        RequiredMember coins = new("coins");
+        RequiredMember items = new("items");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -32,7 +32,7 @@ public static class DeliveryBoxJson
 
         return new DeliveryBox
         {
-            Coins = coins.GetValue(),
+            Coins = coins.Select(value => value.GetInt32()),
             Items = items.SelectMany(item => item.GetDeliveredItem(missingMemberBehavior))
         };
     }

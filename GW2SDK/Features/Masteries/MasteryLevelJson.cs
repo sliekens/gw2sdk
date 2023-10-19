@@ -11,12 +11,12 @@ public static class MasteryLevelJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> name = new("name");
-        RequiredMember<string> description = new("description");
-        RequiredMember<string> instruction = new("instruction");
-        RequiredMember<string> icon = new("icon");
-        RequiredMember<int> pointCost = new("point_cost");
-        RequiredMember<int> experienceCost = new("exp_cost");
+        RequiredMember name = new("name");
+        RequiredMember description = new("description");
+        RequiredMember instruction = new("instruction");
+        RequiredMember icon = new("icon");
+        RequiredMember pointCost = new("point_cost");
+        RequiredMember experienceCost = new("exp_cost");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -52,12 +52,12 @@ public static class MasteryLevelJson
 
         return new MasteryLevel
         {
-            Name = name.GetValue(),
-            Description = description.GetValue(),
-            Instruction = instruction.GetValue(),
-            Icon = icon.GetValue(),
-            PointCost = pointCost.GetValue(),
-            ExperienceCost = experienceCost.GetValue()
+            Name = name.Select(value => value.GetStringRequired()),
+            Description = description.Select(value => value.GetStringRequired()),
+            Instruction = instruction.Select(value => value.GetStringRequired()),
+            Icon = icon.Select(value => value.GetStringRequired()),
+            PointCost = pointCost.Select(value => value.GetInt32()),
+            ExperienceCost = experienceCost.Select(value => value.GetInt32())
         };
     }
 }

@@ -11,9 +11,9 @@ public static class UpgradeJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> name = new("name");
-        RequiredMember<string> description = new("description");
-        RequiredMember<string> icon = new("icon");
+        RequiredMember name = new("name");
+        RequiredMember description = new("description");
+        RequiredMember icon = new("icon");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -37,9 +37,9 @@ public static class UpgradeJson
 
         return new Upgrade
         {
-            Name = name.GetValue(),
-            Description = description.GetValue(),
-            IconHref = icon.GetValue()
+            Name = name.Select(value => value.GetStringRequired()),
+            Description = description.Select(value => value.GetStringRequired()),
+            IconHref = icon.Select(value => value.GetStringRequired())
         };
     }
 }

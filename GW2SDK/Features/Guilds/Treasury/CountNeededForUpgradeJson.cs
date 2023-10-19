@@ -11,8 +11,8 @@ public static class CountNeededForUpgradeJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> upgradeId = new("upgrade_id");
-        RequiredMember<int> count = new("count");
+        RequiredMember upgradeId = new("upgrade_id");
+        RequiredMember count = new("count");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -32,8 +32,8 @@ public static class CountNeededForUpgradeJson
 
         return new CountNeededForUpgrade
         {
-            UpgradeId = upgradeId.GetValue(),
-            Count = count.GetValue()
+            UpgradeId = upgradeId.Select(value => value.GetInt32()),
+            Count = count.Select(value => value.GetInt32())
         };
     }
 }

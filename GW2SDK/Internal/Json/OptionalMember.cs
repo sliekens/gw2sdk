@@ -3,7 +3,7 @@ using static System.Text.Json.JsonValueKind;
 
 namespace GuildWars2.Json;
 
-internal ref struct OptionalMember<T>
+internal ref struct OptionalMember
 {
     public JsonElement Value = default;
 
@@ -25,7 +25,7 @@ internal ref struct OptionalMember<T>
 
     internal ReadOnlySpan<char> Name { get; }
 
-    internal T? Select(Func<JsonElement, T?> resultSelector)
+    internal TValue? Select<TValue>(Func<JsonElement, TValue> resultSelector)
     {
         if (IsUndefinedOrNull)
         {
@@ -45,7 +45,7 @@ internal ref struct OptionalMember<T>
         }
     }
 
-    internal IReadOnlyList<T>? SelectMany(Func<JsonElement, T> resultSelector)
+    internal IReadOnlyList<TValue>? SelectMany<TValue>(Func<JsonElement, TValue> resultSelector)
     {
         if (IsUndefinedOrNull)
         {

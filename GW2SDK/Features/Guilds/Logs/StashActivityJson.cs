@@ -11,13 +11,13 @@ public static class StashActivityJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<DateTimeOffset> time = new("time");
-        RequiredMember<string> user = new("user");
-        RequiredMember<StashOperation> operation = new("operation");
-        RequiredMember<int> itemId = new("item_id");
-        RequiredMember<int> count = new("count");
-        RequiredMember<Coin> coins = new("coins");
+        RequiredMember id = new("id");
+        RequiredMember time = new("time");
+        RequiredMember user = new("user");
+        RequiredMember operation = new("operation");
+        RequiredMember itemId = new("item_id");
+        RequiredMember count = new("count");
+        RequiredMember coins = new("coins");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -66,13 +66,13 @@ public static class StashActivityJson
 
         return new StashActivity
         {
-            Id = id.GetValue(),
-            Time = time.GetValue(),
-            User = user.GetValue(),
-            Operation = operation.GetValue(missingMemberBehavior),
-            ItemId = itemId.GetValue(),
-            Count = count.GetValue(),
-            Coins = coins.GetValue()
+            Id = id.Select(value => value.GetInt32()),
+            Time = time.Select(value => value.GetDateTimeOffset()),
+            User = user.Select(value => value.GetStringRequired()),
+            Operation = operation.Select(value => value.GetEnum<StashOperation>(missingMemberBehavior)),
+            ItemId = itemId.Select(value => value.GetInt32()),
+            Count = count.Select(value => value.GetInt32()),
+            Coins = coins.Select(value => value.GetInt32())
         };
     }
 }

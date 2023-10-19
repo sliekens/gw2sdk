@@ -11,8 +11,8 @@ public static class MapScoresJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<MapKind> type = new("type");
-        RequiredMember<Distribution> scores = new("scores");
+        RequiredMember type = new("type");
+        RequiredMember scores = new("scores");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -32,7 +32,7 @@ public static class MapScoresJson
 
         return new MapScores
         {
-            Kind = type.GetValue(missingMemberBehavior),
+            Kind = type.Select(value => value.GetEnum<MapKind>(missingMemberBehavior)),
             Scores = scores.Select(value => value.GetDistribution(missingMemberBehavior))
         };
     }

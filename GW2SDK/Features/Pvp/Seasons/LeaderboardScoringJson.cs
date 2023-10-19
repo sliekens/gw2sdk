@@ -11,11 +11,11 @@ public static class LeaderboardScoringJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> id = new("id");
-        RequiredMember<string> type = new("type");
-        RequiredMember<string> description = new("description");
-        RequiredMember<string> name = new("name");
-        RequiredMember<string> ordering = new("ordering");
+        RequiredMember id = new("id");
+        RequiredMember type = new("type");
+        RequiredMember description = new("description");
+        RequiredMember name = new("name");
+        RequiredMember ordering = new("ordering");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -47,11 +47,11 @@ public static class LeaderboardScoringJson
 
         return new LeaderboardScoring
         {
-            Id = id.GetValue(),
-            Type = type.GetValue(),
-            Description = description.GetValue(),
-            Name = type.GetValue(),
-            Ordering = ordering.GetValue()
+            Id = id.Select(value => value.GetStringRequired()),
+            Type = type.Select(value => value.GetStringRequired()),
+            Description = description.Select(value => value.GetStringRequired()),
+            Name = type.Select(value => value.GetStringRequired()),
+            Ordering = ordering.Select(value => value.GetStringRequired())
         };
     }
 }

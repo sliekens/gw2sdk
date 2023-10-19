@@ -11,8 +11,8 @@ public static class MasteryPointsProgressJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<MasteryPointsTotal> totals = new("totals");
-        RequiredMember<int> unlocked = new("unlocked");
+        RequiredMember totals = new("totals");
+        RequiredMember unlocked = new("unlocked");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -33,7 +33,7 @@ public static class MasteryPointsProgressJson
         return new MasteryPointsProgress
         {
             Totals = totals.SelectMany(entry => entry.GetMasteryPointsTotal(missingMemberBehavior)),
-            Unlocked = unlocked.GetValues()
+            Unlocked = unlocked.SelectMany(value => value.GetInt32())
         };
     }
 }

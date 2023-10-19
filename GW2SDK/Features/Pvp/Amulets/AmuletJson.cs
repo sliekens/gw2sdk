@@ -11,10 +11,10 @@ public static class AmuletJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<string> name = new("name");
-        RequiredMember<string> icon = new("icon");
-        RequiredMember<Dictionary<AttributeAdjustTarget, int>> attributes = new("attributes");
+        RequiredMember id = new("id");
+        RequiredMember name = new("name");
+        RequiredMember icon = new("icon");
+        RequiredMember attributes = new("attributes");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -42,9 +42,9 @@ public static class AmuletJson
 
         return new Amulet
         {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
-            Icon = icon.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
+            Name = name.Select(value => value.GetStringRequired()),
+            Icon = icon.Select(value => value.GetStringRequired()),
             Attributes = attributes.Select(value => value.GetAttributes(missingMemberBehavior))
         };
     }

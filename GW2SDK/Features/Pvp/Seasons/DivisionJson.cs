@@ -11,12 +11,12 @@ public static class DivisionJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> name = new("name");
-        RequiredMember<DivisionFlag> flags = new("flags");
-        RequiredMember<string> largeIcon = new("large_icon");
-        RequiredMember<string> smallIcon = new("small_icon");
-        RequiredMember<string> pipIcon = new("pip_icon");
-        RequiredMember<DivisionTier> tiers = new("tiers");
+        RequiredMember name = new("name");
+        RequiredMember flags = new("flags");
+        RequiredMember largeIcon = new("large_icon");
+        RequiredMember smallIcon = new("small_icon");
+        RequiredMember pipIcon = new("pip_icon");
+        RequiredMember tiers = new("tiers");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -52,11 +52,11 @@ public static class DivisionJson
 
         return new Division
         {
-            Name = name.GetValue(),
-            Flags = flags.GetValues(missingMemberBehavior),
-            LargeIcon = largeIcon.GetValue(),
-            SmallIcon = smallIcon.GetValue(),
-            PipIcon = pipIcon.GetValue(),
+            Name = name.Select(value => value.GetStringRequired()),
+            Flags = flags.SelectMany(value => value.GetEnum<DivisionFlag>(missingMemberBehavior)),
+            LargeIcon = largeIcon.Select(value => value.GetStringRequired()),
+            SmallIcon = smallIcon.Select(value => value.GetStringRequired()),
+            PipIcon = pipIcon.Select(value => value.GetStringRequired()),
             Tiers = tiers.SelectMany(value => value.GetDivisionTier(missingMemberBehavior))
         };
     }

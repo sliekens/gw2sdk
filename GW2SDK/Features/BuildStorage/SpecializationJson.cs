@@ -11,8 +11,8 @@ public static class SpecializationJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        NullableMember<int> id = new("id");
-        RequiredMember<int?> traits = new("traits");
+        NullableMember id = new("id");
+        RequiredMember traits = new("traits");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -32,8 +32,8 @@ public static class SpecializationJson
 
         return new Specialization
         {
-            Id = id.GetValue(),
-            Traits = traits.SelectMany(
+            Id = id.Select(value => value.GetInt32()),
+            Traits = traits.SelectMany<int?>(
                 value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32()
             )
         };

@@ -11,9 +11,9 @@ public static class MemberJoinedJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<DateTimeOffset> time = new("time");
-        RequiredMember<string> user = new("user");
+        RequiredMember id = new("id");
+        RequiredMember time = new("time");
+        RequiredMember user = new("user");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -46,9 +46,9 @@ public static class MemberJoinedJson
 
         return new MemberJoined
         {
-            Id = id.GetValue(),
-            Time = time.GetValue(),
-            User = user.GetValue()
+            Id = id.Select(value => value.GetInt32()),
+            Time = time.Select(value => value.GetDateTimeOffset()),
+            User = user.Select(value => value.GetStringRequired())
         };
     }
 }

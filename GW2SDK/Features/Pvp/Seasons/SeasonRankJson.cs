@@ -11,12 +11,12 @@ public static class SeasonRankJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> name = new("name");
-        RequiredMember<string> description = new("description");
-        RequiredMember<string> icon = new("icon");
-        RequiredMember<string> overlay = new("overlay");
-        RequiredMember<string> smallOverlay = new("overlay_small");
-        RequiredMember<RankTier> tiers = new("tiers");
+        RequiredMember name = new("name");
+        RequiredMember description = new("description");
+        RequiredMember icon = new("icon");
+        RequiredMember overlay = new("overlay");
+        RequiredMember smallOverlay = new("overlay_small");
+        RequiredMember tiers = new("tiers");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -52,11 +52,11 @@ public static class SeasonRankJson
 
         return new SeasonRank
         {
-            Name = name.GetValue(),
-            Description = description.GetValue(),
-            Icon = icon.GetValue(),
-            Overlay = overlay.GetValue(),
-            SmallOverlay = smallOverlay.GetValue(),
+            Name = name.Select(value => value.GetStringRequired()),
+            Description = description.Select(value => value.GetStringRequired()),
+            Icon = icon.Select(value => value.GetStringRequired()),
+            Overlay = overlay.Select(value => value.GetStringRequired()),
+            SmallOverlay = smallOverlay.Select(value => value.GetStringRequired()),
             Tiers = tiers.SelectMany(value => value.GetRankTier(missingMemberBehavior))
         };
     }

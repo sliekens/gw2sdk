@@ -16,9 +16,9 @@ public static class ComboFieldSkillFactJson
         requiresTrait = null;
         overrides = null;
 
-        RequiredMember<string> text = new("text");
-        RequiredMember<string> icon = new("icon");
-        RequiredMember<ComboFieldName> fieldType = new("field_type");
+        RequiredMember text = new("text");
+        RequiredMember icon = new("icon");
+        RequiredMember fieldType = new("field_type");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -59,9 +59,9 @@ public static class ComboFieldSkillFactJson
 
         return new ComboFieldSkillFact
         {
-            Text = text.GetValue(),
-            Icon = icon.GetValue(),
-            Field = fieldType.GetValue(missingMemberBehavior)
+            Text = text.Select(value => value.GetStringRequired()),
+            Icon = icon.Select(value => value.GetStringRequired()),
+            Field = fieldType.Select(value => value.GetEnum<ComboFieldName>(missingMemberBehavior))
         };
     }
 }

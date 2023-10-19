@@ -11,11 +11,11 @@ public static class MatchScoresJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> id = new("id");
-        RequiredMember<Distribution> scores = new("scores");
-        RequiredMember<Distribution> victoryPoints = new("victory_points");
-        RequiredMember<Skirmish> skirmishes = new("skirmishes");
-        RequiredMember<MapSummary> maps = new("maps");
+        RequiredMember id = new("id");
+        RequiredMember scores = new("scores");
+        RequiredMember victoryPoints = new("victory_points");
+        RequiredMember skirmishes = new("skirmishes");
+        RequiredMember maps = new("maps");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -47,7 +47,7 @@ public static class MatchScoresJson
 
         return new MatchScores
         {
-            Id = id.GetValue(),
+            Id = id.Select(value => value.GetStringRequired()),
             Scores = scores.Select(value => value.GetDistribution(missingMemberBehavior)),
             VictoryPoints =
                 victoryPoints.Select(value => value.GetDistribution(missingMemberBehavior)),

@@ -15,12 +15,12 @@ public static class BuffTraitFactJson
     {
         requiresTrait = null;
         overrides = null;
-        OptionalMember<string> text = new("text");
-        OptionalMember<string> icon = new("icon");
-        NullableMember<TimeSpan> duration = new("duration");
-        OptionalMember<string> status = new("status");
-        OptionalMember<string> description = new("description");
-        NullableMember<int> applyCount = new("apply_count");
+        OptionalMember text = new("text");
+        OptionalMember icon = new("icon");
+        NullableMember duration = new("duration");
+        OptionalMember status = new("status");
+        OptionalMember description = new("description");
+        NullableMember applyCount = new("apply_count");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
@@ -72,12 +72,12 @@ public static class BuffTraitFactJson
 
         return new BuffTraitFact
         {
-            Text = text.GetValueOrEmpty(),
-            Icon = icon.GetValueOrEmpty(),
+            Text = text.Select(value => value.GetString()) ?? "",
+            Icon = icon.Select(value => value.GetString()) ?? "",
             Duration = duration.Select(value => TimeSpan.FromSeconds(value.GetDouble())),
-            Status = status.GetValueOrEmpty(),
-            Description = description.GetValueOrEmpty(),
-            ApplyCount = applyCount.GetValue()
+            Status = status.Select(value => value.GetString()) ?? "",
+            Description = description.Select(value => value.GetString()) ?? "",
+            ApplyCount = applyCount.Select(value => value.GetInt32())
         };
     }
 }

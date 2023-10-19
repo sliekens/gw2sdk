@@ -11,17 +11,17 @@ public static class BankBagJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<string> name = new("name");
-        RequiredMember<string> description = new("description");
-        RequiredMember<TimeSpan> buildTime = new("build_time");
-        RequiredMember<string> icon = new("icon");
-        RequiredMember<int> requiredLevel = new("required_level");
-        RequiredMember<int> experience = new("experience");
-        RequiredMember<int> prerequisites = new("prerequisites");
-        RequiredMember<int> maxItems = new("bag_max_items");
-        RequiredMember<int> maxCoins = new("bag_max_coins");
-        RequiredMember<GuildUpgradeCost> costs = new("costs");
+        RequiredMember id = new("id");
+        RequiredMember name = new("name");
+        RequiredMember description = new("description");
+        RequiredMember buildTime = new("build_time");
+        RequiredMember icon = new("icon");
+        RequiredMember requiredLevel = new("required_level");
+        RequiredMember experience = new("experience");
+        RequiredMember prerequisites = new("prerequisites");
+        RequiredMember maxItems = new("bag_max_items");
+        RequiredMember maxCoins = new("bag_max_coins");
+        RequiredMember costs = new("costs");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -86,17 +86,17 @@ public static class BankBagJson
 
         return new BankBag
         {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
-            Description = description.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
+            Name = name.Select(value => value.GetStringRequired()),
+            Description = description.Select(value => value.GetStringRequired()),
             BuildTime = buildTime.Select(value => TimeSpan.FromMinutes(value.GetDouble())),
-            Icon = icon.GetValue(),
-            RequiredLevel = requiredLevel.GetValue(),
-            Experience = experience.GetValue(),
+            Icon = icon.Select(value => value.GetStringRequired()),
+            RequiredLevel = requiredLevel.Select(value => value.GetInt32()),
+            Experience = experience.Select(value => value.GetInt32()),
             Prerequisites = prerequisites.SelectMany(value => value.GetInt32()),
             Costs = costs.SelectMany(value => value.GetGuildUpgradeCost(missingMemberBehavior)),
-            MaxItems = maxItems.GetValue(),
-            MaxCoins = maxCoins.GetValue()
+            MaxItems = maxItems.Select(value => value.GetInt32()),
+            MaxCoins = maxCoins.Select(value => value.GetInt32())
         };
     }
 }

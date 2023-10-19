@@ -8,23 +8,23 @@ public static class RuneJson
 {
     public static Rune GetRune(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<string> name = new("name");
-        OptionalMember<string> description = new("description");
-        RequiredMember<int> level = new("level");
-        RequiredMember<Rarity> rarity = new("rarity");
-        RequiredMember<Coin> vendorValue = new("vendor_value");
-        RequiredMember<GameType> gameTypes = new("game_types");
-        RequiredMember<ItemFlag> flags = new("flags");
-        RequiredMember<ItemRestriction> restrictions = new("restrictions");
-        RequiredMember<int> id = new("id");
-        RequiredMember<string> chatLink = new("chat_link");
-        OptionalMember<string> icon = new("icon");
-        RequiredMember<UpgradeComponentFlag> upgradeComponentFlags = new("flags");
-        RequiredMember<InfusionSlotFlag> infusionUpgradeFlags = new("infusion_upgrade_flags");
-        RequiredMember<double> attributeAdjustment = new("attribute_adjustment");
-        RequiredMember<InfixUpgrade> infixUpgrade = new("infix_upgrade");
-        RequiredMember<string> suffix = new("suffix");
-        OptionalMember<string> bonuses = new("bonuses");
+        RequiredMember name = new("name");
+        OptionalMember description = new("description");
+        RequiredMember level = new("level");
+        RequiredMember rarity = new("rarity");
+        RequiredMember vendorValue = new("vendor_value");
+        RequiredMember gameTypes = new("game_types");
+        RequiredMember flags = new("flags");
+        RequiredMember restrictions = new("restrictions");
+        RequiredMember id = new("id");
+        RequiredMember chatLink = new("chat_link");
+        OptionalMember icon = new("icon");
+        RequiredMember upgradeComponentFlags = new("flags");
+        RequiredMember infusionUpgradeFlags = new("infusion_upgrade_flags");
+        RequiredMember attributeAdjustment = new("attribute_adjustment");
+        RequiredMember infixUpgrade = new("infix_upgrade");
+        RequiredMember suffix = new("suffix");
+        OptionalMember bonuses = new("bonuses");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
@@ -131,22 +131,22 @@ public static class RuneJson
 
         return new Rune
         {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
-            Description = description.GetValueOrEmpty(),
-            Level = level.GetValue(),
-            Rarity = rarity.GetValue(missingMemberBehavior),
-            VendorValue = vendorValue.GetValue(),
-            GameTypes = gameTypes.GetValues(missingMemberBehavior),
-            Flags = flags.GetValues(missingMemberBehavior),
-            Restrictions = restrictions.GetValues(missingMemberBehavior),
-            ChatLink = chatLink.GetValue(),
-            Icon = icon.GetValueOrNull(),
-            UpgradeComponentFlags = upgradeComponentFlags.GetValues(missingMemberBehavior),
-            InfusionUpgradeFlags = infusionUpgradeFlags.GetValues(missingMemberBehavior),
-            AttributeAdjustment = attributeAdjustment.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
+            Name = name.Select(value => value.GetStringRequired()),
+            Description = description.Select(value => value.GetString()) ?? "",
+            Level = level.Select(value => value.GetInt32()),
+            Rarity = rarity.Select(value => value.GetEnum<Rarity>(missingMemberBehavior)),
+            VendorValue = vendorValue.Select(value => value.GetInt32()),
+            GameTypes = gameTypes.SelectMany(value => value.GetEnum<GameType>(missingMemberBehavior)),
+            Flags = flags.SelectMany(value => value.GetEnum<ItemFlag>(missingMemberBehavior)),
+            Restrictions = restrictions.SelectMany(value => value.GetEnum<ItemRestriction>(missingMemberBehavior)),
+            ChatLink = chatLink.Select(value => value.GetStringRequired()),
+            Icon = icon.Select(value => value.GetString()),
+            UpgradeComponentFlags = upgradeComponentFlags.SelectMany(value => value.GetEnum<UpgradeComponentFlag>(missingMemberBehavior)),
+            InfusionUpgradeFlags = infusionUpgradeFlags.SelectMany(value => value.GetEnum<InfusionSlotFlag>(missingMemberBehavior)),
+            AttributeAdjustment = attributeAdjustment.Select(value => value.GetDouble()),
             Suffix = infixUpgrade.Select(value => value.GetInfixUpgrade(missingMemberBehavior)),
-            SuffixName = suffix.GetValue(),
+            SuffixName = suffix.Select(value => value.GetStringRequired()),
             Bonuses = bonuses.SelectMany(value => value.GetStringRequired())
         };
     }

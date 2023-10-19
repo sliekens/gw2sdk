@@ -11,11 +11,11 @@ public static class AbilityJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<string> name = new("name");
-        RequiredMember<string> description = new("description");
-        RequiredMember<string> icon = new("icon");
-        RequiredMember<AbilityRank> ranks = new("ranks");
+        RequiredMember id = new("id");
+        RequiredMember name = new("name");
+        RequiredMember description = new("description");
+        RequiredMember icon = new("icon");
+        RequiredMember ranks = new("ranks");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -47,10 +47,10 @@ public static class AbilityJson
 
         return new Ability
         {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
-            Description = description.GetValue(),
-            Icon = icon.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
+            Name = name.Select(value => value.GetStringRequired()),
+            Description = description.Select(value => value.GetStringRequired()),
+            Icon = icon.Select(value => value.GetStringRequired()),
             Ranks = ranks.SelectMany(value => value.GetAbilityRank(missingMemberBehavior))
         };
     }

@@ -11,9 +11,9 @@ public static class UnlockedFinisherJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<bool> permanent = new("permanent");
-        NullableMember<int> quantity = new("quantity");
+        RequiredMember id = new("id");
+        RequiredMember permanent = new("permanent");
+        NullableMember quantity = new("quantity");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -37,9 +37,9 @@ public static class UnlockedFinisherJson
 
         return new UnlockedFinisher
         {
-            Id = id.GetValue(),
-            Permanent = permanent.GetValue(),
-            Quantity = quantity.GetValue()
+            Id = id.Select(value => value.GetInt32()),
+            Permanent = permanent.Select(value => value.GetBoolean()),
+            Quantity = quantity.Select(value => value.GetInt32())
         };
     }
 }

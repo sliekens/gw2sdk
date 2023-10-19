@@ -11,25 +11,25 @@ public static class ProfessionSkillJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<string> name = new("name");
-        OptionalMember<SkillFact> facts = new("facts");
-        OptionalMember<TraitedSkillFact> traitedFacts = new("traited_facts");
-        RequiredMember<string> description = new("description");
-        OptionalMember<string> icon = new("icon");
-        NullableMember<WeaponType> weaponType = new("weapon_type");
-        OptionalMember<ProfessionName> professions = new("professions");
-        NullableMember<SkillSlot> slot = new("slot");
-        NullableMember<int> flipSkill = new("flip_skill");
-        NullableMember<int> nextChain = new("next_chain");
-        NullableMember<int> prevChain = new("prev_chain");
-        OptionalMember<int> transformSkills = new("transform_skills");
-        RequiredMember<SkillFlag> flags = new("flags");
-        NullableMember<int> specialization = new("specialization");
-        RequiredMember<string> chatLink = new("chat_link");
-        OptionalMember<SkillCategoryName> categories = new("categories");
-        NullableMember<Attunement> attunement = new("attunement");
-        NullableMember<int> cost = new("cost");
+        RequiredMember id = new("id");
+        RequiredMember name = new("name");
+        OptionalMember facts = new("facts");
+        OptionalMember traitedFacts = new("traited_facts");
+        RequiredMember description = new("description");
+        OptionalMember icon = new("icon");
+        NullableMember weaponType = new("weapon_type");
+        OptionalMember professions = new("professions");
+        NullableMember slot = new("slot");
+        NullableMember flipSkill = new("flip_skill");
+        NullableMember nextChain = new("next_chain");
+        NullableMember prevChain = new("prev_chain");
+        OptionalMember transformSkills = new("transform_skills");
+        RequiredMember flags = new("flags");
+        NullableMember specialization = new("specialization");
+        RequiredMember chatLink = new("chat_link");
+        OptionalMember categories = new("categories");
+        NullableMember attunement = new("attunement");
+        NullableMember cost = new("cost");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -126,28 +126,28 @@ public static class ProfessionSkillJson
 
         return new ProfessionSkill
         {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
+            Name = name.Select(value => value.GetStringRequired()),
             Facts = facts.SelectMany(
                 value => value.GetSkillFact(missingMemberBehavior, out _, out _)
             ),
             TraitedFacts =
                 traitedFacts.SelectMany(value => value.GetTraitedSkillFact(missingMemberBehavior)),
-            Description = description.GetValue(),
-            Icon = icon.GetValueOrNull(),
-            WeaponType = weaponType.GetValue(missingMemberBehavior),
-            Professions = professions.GetValues(missingMemberBehavior),
-            Slot = slot.GetValue(missingMemberBehavior),
-            FlipSkill = flipSkill.GetValue(),
-            NextChain = nextChain.GetValue(),
-            PreviousChain = prevChain.GetValue(),
+            Description = description.Select(value => value.GetStringRequired()),
+            Icon = icon.Select(value => value.GetString()),
+            WeaponType = weaponType.Select(value => value.GetEnum<WeaponType>(missingMemberBehavior)),
+            Professions = professions.SelectMany(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
+            Slot = slot.Select(value => value.GetEnum<SkillSlot>(missingMemberBehavior)),
+            FlipSkill = flipSkill.Select(value => value.GetInt32()),
+            NextChain = nextChain.Select(value => value.GetInt32()),
+            PreviousChain = prevChain.Select(value => value.GetInt32()),
             TransformSkills = transformSkills.SelectMany(value => value.GetInt32()),
-            SkillFlag = flags.GetValues(missingMemberBehavior),
-            Specialization = specialization.GetValue(),
-            ChatLink = chatLink.GetValue(),
-            Categories = categories.GetValues(missingMemberBehavior),
-            Attunement = attunement.GetValue(missingMemberBehavior),
-            Cost = cost.GetValue()
+            SkillFlag = flags.SelectMany(value => value.GetEnum<SkillFlag>(missingMemberBehavior)),
+            Specialization = specialization.Select(value => value.GetInt32()),
+            ChatLink = chatLink.Select(value => value.GetStringRequired()),
+            Categories = categories.SelectMany(value => value.GetEnum<SkillCategoryName>(missingMemberBehavior)),
+            Attunement = attunement.Select(value => value.GetEnum<Attunement>(missingMemberBehavior)),
+            Cost = cost.Select(value => value.GetInt32())
         };
     }
 }

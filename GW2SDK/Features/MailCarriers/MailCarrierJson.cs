@@ -11,12 +11,12 @@ public static class MailCarrierJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<int> unlockItems = new("unlock_items");
-        RequiredMember<int> order = new("order");
-        RequiredMember<string> icon = new("icon");
-        RequiredMember<string> name = new("name");
-        RequiredMember<MailCarrierFlag> flags = new("flags");
+        RequiredMember id = new("id");
+        RequiredMember unlockItems = new("unlock_items");
+        RequiredMember order = new("order");
+        RequiredMember icon = new("icon");
+        RequiredMember name = new("name");
+        RequiredMember flags = new("flags");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -52,12 +52,12 @@ public static class MailCarrierJson
 
         return new MailCarrier
         {
-            Id = id.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
             UnlockItems = unlockItems.SelectMany(value => value.GetInt32()),
-            Order = order.GetValue(),
-            Icon = icon.GetValue(),
-            Name = name.GetValue(),
-            Flags = flags.GetValues(missingMemberBehavior)
+            Order = order.Select(value => value.GetInt32()),
+            Icon = icon.Select(value => value.GetStringRequired()),
+            Name = name.Select(value => value.GetStringRequired()),
+            Flags = flags.SelectMany(value => value.GetEnum<MailCarrierFlag>(missingMemberBehavior))
         };
     }
 }

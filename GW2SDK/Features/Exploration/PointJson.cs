@@ -9,8 +9,8 @@ public static class PointJson
 {
     public static Point GetCoordinate(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<int> x = new("[0]");
-        RequiredMember<int> y = new("[1]");
+        RequiredMember x = new("[0]");
+        RequiredMember y = new("[1]");
 
         foreach (var entry in json.EnumerateArray())
         {
@@ -36,8 +36,8 @@ public static class PointJson
 
     public static PointF GetCoordinateF(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<float> x = new("[0]");
-        RequiredMember<float> y = new("[1]");
+        RequiredMember x = new("[0]");
+        RequiredMember y = new("[1]");
 
         foreach (var entry in json.EnumerateArray())
         {

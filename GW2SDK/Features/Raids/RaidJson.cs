@@ -8,8 +8,8 @@ public static class RaidJson
 {
     public static Raid GetRaid(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<string> id = new("id");
-        RequiredMember<RaidWing> wings = new("wings");
+        RequiredMember id = new("id");
+        RequiredMember wings = new("wings");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -29,7 +29,7 @@ public static class RaidJson
 
         return new Raid
         {
-            Id = id.GetValue(),
+            Id = id.Select(value => value.GetStringRequired()),
             Wings = wings.SelectMany(value => value.GetRaidWing(missingMemberBehavior))
         };
     }

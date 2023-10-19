@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Items;
@@ -6,11 +6,11 @@ namespace GuildWars2.Items;
 [PublicAPI]
 public static class BuffJson
 {
-    public static Buff GetBuff(this JsonElement value, MissingMemberBehavior missingMemberBehavior)
+    public static Buff GetBuff(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<int> skillId = new("skill_id");
-        OptionalMember<string> description = new("description");
-        foreach (var member in value.EnumerateObject())
+        RequiredMember skillId = new("skill_id");
+        OptionalMember description = new("description");
+        foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(skillId.Name))
             {
@@ -28,8 +28,8 @@ public static class BuffJson
 
         return new Buff
         {
-            SkillId = skillId.GetValue(),
-            Description = description.GetValueOrEmpty()
+            SkillId = skillId.Select(value => value.GetInt32()),
+            Description = description.Select(value => value.GetString()) ?? ""
         };
     }
 }

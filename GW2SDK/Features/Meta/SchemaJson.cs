@@ -11,9 +11,9 @@ public static class SchemaJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> version = new("v");
+        RequiredMember version = new("v");
 
-        RequiredMember<string> description = new("desc");
+        RequiredMember description = new("desc");
 
         foreach (var member in jsonElement.EnumerateObject())
         {
@@ -33,8 +33,8 @@ public static class SchemaJson
 
         return new Schema
         {
-            Version = version.GetValue(),
-            Description = description.GetValue()
+            Version = version.Select(value => value.GetStringRequired()),
+            Description = description.Select(value => value.GetStringRequired())
         };
     }
 }

@@ -16,8 +16,8 @@ public static class GuildBankSlotJson
             return null;
         }
 
-        RequiredMember<int> itemId = new("id");
-        RequiredMember<int> count = new("count");
+        RequiredMember itemId = new("id");
+        RequiredMember count = new("count");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -37,8 +37,8 @@ public static class GuildBankSlotJson
 
         return new GuildBankSlot
         {
-            ItemId = itemId.GetValue(),
-            Count = count.GetValue()
+            ItemId = itemId.Select(value => value.GetInt32()),
+            Count = count.Select(value => value.GetInt32())
         };
     }
 }

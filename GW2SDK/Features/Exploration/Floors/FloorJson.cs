@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Exploration.Regions;
 using GuildWars2.Json;
 
@@ -10,12 +9,12 @@ public static class FloorJson
 {
     public static Floor GetFloor(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<Size> textureDimensions = new("texture_dims");
-        OptionalMember<Rectangle> clampedView = new("clamped_view");
-        RequiredMember<Dictionary<int, GuildWars2.Exploration.Regions.Region>> regions = new("regions");
+        RequiredMember textureDimensions = new("texture_dims");
+        OptionalMember clampedView = new("clamped_view");
+        RequiredMember regions = new("regions");
 
 
-        RequiredMember<int> id = new("id");
+        RequiredMember id = new("id");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(textureDimensions.Name))
@@ -42,7 +41,7 @@ public static class FloorJson
 
         return new Floor
         {
-            Id = id.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
             TextureDimensions =
                 textureDimensions.Select(value => value.GetDimensions(missingMemberBehavior)),
             ClampedView = clampedView.Select(value => value.GetContinentRectangle(missingMemberBehavior)),

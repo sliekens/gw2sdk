@@ -11,12 +11,12 @@ public static class RankChangeJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<DateTimeOffset> time = new("time");
-        RequiredMember<string> user = new("user");
-        OptionalMember<string> changedBy = new("changed_by");
-        RequiredMember<string> oldRank = new("old_rank");
-        RequiredMember<string> newRank = new("new_rank");
+        RequiredMember id = new("id");
+        RequiredMember time = new("time");
+        RequiredMember user = new("user");
+        OptionalMember changedBy = new("changed_by");
+        RequiredMember oldRank = new("old_rank");
+        RequiredMember newRank = new("new_rank");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -61,12 +61,12 @@ public static class RankChangeJson
 
         return new RankChange
         {
-            Id = id.GetValue(),
-            Time = time.GetValue(),
-            User = user.GetValue(),
-            ChangedBy = changedBy.GetValueOrEmpty(),
-            OldRank = oldRank.GetValue(),
-            NewRank = newRank.GetValue()
+            Id = id.Select(value => value.GetInt32()),
+            Time = time.Select(value => value.GetDateTimeOffset()),
+            User = user.Select(value => value.GetStringRequired()),
+            ChangedBy = changedBy.Select(value => value.GetString()) ?? "",
+            OldRank = oldRank.Select(value => value.GetStringRequired()),
+            NewRank = newRank.Select(value => value.GetStringRequired())
         };
     }
 }

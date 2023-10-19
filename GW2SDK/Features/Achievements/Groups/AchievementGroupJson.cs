@@ -11,11 +11,11 @@ public static class AchievementGroupJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> id = new("id");
-        RequiredMember<string> name = new("name");
-        RequiredMember<string> description = new("description");
-        RequiredMember<int> order = new("order");
-        RequiredMember<int> categories = new("categories");
+        RequiredMember id = new("id");
+        RequiredMember name = new("name");
+        RequiredMember description = new("description");
+        RequiredMember order = new("order");
+        RequiredMember categories = new("categories");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(id.Name))
@@ -46,10 +46,10 @@ public static class AchievementGroupJson
 
         return new AchievementGroup
         {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
-            Description = description.GetValue(),
-            Order = order.GetValue(),
+            Id = id.Select(value => value.GetStringRequired()),
+            Name = name.Select(value => value.GetStringRequired()),
+            Description = description.Select(value => value.GetStringRequired()),
+            Order = order.Select(value => value.GetInt32()),
             Categories = categories.SelectMany(value => value.GetInt32())
         };
     }

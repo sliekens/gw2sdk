@@ -11,12 +11,12 @@ public static class NoveltyJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<string> name = new("name");
-        OptionalMember<string> description = new("description");
-        RequiredMember<string> icon = new("icon");
-        RequiredMember<NoveltyKind> slot = new("slot");
-        RequiredMember<int> unlockItems = new("unlock_item");
+        RequiredMember id = new("id");
+        RequiredMember name = new("name");
+        OptionalMember description = new("description");
+        RequiredMember icon = new("icon");
+        RequiredMember slot = new("slot");
+        RequiredMember unlockItems = new("unlock_item");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -52,11 +52,11 @@ public static class NoveltyJson
 
         return new Novelty
         {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
-            Description = description.GetValueOrEmpty(),
-            Icon = icon.GetValue(),
-            Slot = slot.GetValue(missingMemberBehavior),
+            Id = id.Select(value => value.GetInt32()),
+            Name = name.Select(value => value.GetStringRequired()),
+            Description = description.Select(value => value.GetString()) ?? "",
+            Icon = icon.Select(value => value.GetStringRequired()),
+            Slot = slot.Select(value => value.GetEnum<NoveltyKind>(missingMemberBehavior)),
             UnlockItems = unlockItems.SelectMany(value => value.GetInt32())
         };
     }

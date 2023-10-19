@@ -35,8 +35,8 @@ public static class GuildLogJson
                 return json.GetGuildUpgradeActivity(missingMemberBehavior);
         }
 
-        RequiredMember<int> id = new("id");
-        RequiredMember<DateTimeOffset> time = new("time");
+        RequiredMember id = new("id");
+        RequiredMember time = new("time");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -65,8 +65,8 @@ public static class GuildLogJson
 
         return new GuildLog
         {
-            Id = id.GetValue(),
-            Time = time.GetValue()
+            Id = id.Select(value => value.GetInt32()),
+            Time = time.Select(value => value.GetDateTimeOffset())
         };
     }
 }

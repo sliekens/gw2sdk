@@ -11,10 +11,10 @@ public static class ProfessionSkillReferenceJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<SkillSlot> slot = new("slot");
-        NullableMember<ProfessionName> source = new("source");
-        NullableMember<Attunement> attunement = new("attunement");
+        RequiredMember id = new("id");
+        RequiredMember slot = new("slot");
+        NullableMember source = new("source");
+        NullableMember attunement = new("attunement");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -51,10 +51,10 @@ public static class ProfessionSkillReferenceJson
 
         return new ProfessionSkillReference
         {
-            Id = id.GetValue(),
-            Slot = slot.GetValue(missingMemberBehavior),
-            Source = source.GetValue(missingMemberBehavior),
-            Attunement = attunement.GetValue(missingMemberBehavior)
+            Id = id.Select(value => value.GetInt32()),
+            Slot = slot.Select(value => value.GetEnum<SkillSlot>(missingMemberBehavior)),
+            Source = source.Select(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
+            Attunement = attunement.Select(value => value.GetEnum<Attunement>(missingMemberBehavior))
         };
     }
 }

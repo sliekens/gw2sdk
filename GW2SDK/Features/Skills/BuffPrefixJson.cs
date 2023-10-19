@@ -11,10 +11,10 @@ public static class BuffPrefixJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> text = new("text");
-        RequiredMember<string> icon = new("icon");
-        OptionalMember<string> status = new("status");
-        OptionalMember<string> description = new("description");
+        RequiredMember text = new("text");
+        RequiredMember icon = new("icon");
+        OptionalMember status = new("status");
+        OptionalMember description = new("description");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(text.Name))
@@ -41,10 +41,10 @@ public static class BuffPrefixJson
 
         return new BuffPrefix
         {
-            Text = text.GetValue(),
-            Icon = icon.GetValue(),
-            Status = status.GetValueOrEmpty(),
-            Description = description.GetValueOrEmpty()
+            Text = text.Select(value => value.GetStringRequired()),
+            Icon = icon.Select(value => value.GetStringRequired()),
+            Status = status.Select(value => value.GetString()) ?? "",
+            Description = description.Select(value => value.GetString()) ?? ""
         };
     }
 }

@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Traits;
@@ -15,9 +15,9 @@ public static class RangeTraitFactJson
     {
         requiresTrait = null;
         overrides = null;
-        OptionalMember<string> text = new("text");
-        OptionalMember<string> icon = new("icon");
-        RequiredMember<int> value = new("value");
+        OptionalMember text = new("text");
+        OptionalMember icon = new("icon");
+        RequiredMember range = new("value");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
@@ -45,9 +45,9 @@ public static class RangeTraitFactJson
             {
                 icon.Value = member.Value;
             }
-            else if (member.NameEquals(value.Name))
+            else if (member.NameEquals(range.Name))
             {
-                value.Value = member.Value;
+                range.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -57,9 +57,9 @@ public static class RangeTraitFactJson
 
         return new RangeTraitFact
         {
-            Text = text.GetValueOrEmpty(),
-            Icon = icon.GetValueOrEmpty(),
-            Value = value.GetValue()
+            Text = text.Select(value => value.GetString()) ?? "",
+            Icon = icon.Select(value => value.GetString()) ?? "",
+            Value = range.Select(value => value.GetInt32())
         };
     }
 }

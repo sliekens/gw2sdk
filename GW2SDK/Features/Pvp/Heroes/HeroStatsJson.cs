@@ -11,9 +11,9 @@ public static class HeroStatsJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> offense = new("offense");
-        RequiredMember<int> defense = new("defense");
-        RequiredMember<int> speed = new("speed");
+        RequiredMember offense = new("offense");
+        RequiredMember defense = new("defense");
+        RequiredMember speed = new("speed");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -37,9 +37,9 @@ public static class HeroStatsJson
 
         return new HeroStats
         {
-            Offense = offense.GetValue(),
-            Defense = defense.GetValue(),
-            Speed = speed.GetValue()
+            Offense = offense.Select(value => value.GetInt32()),
+            Defense = defense.Select(value => value.GetInt32()),
+            Speed = speed.Select(value => value.GetInt32())
         };
     }
 }

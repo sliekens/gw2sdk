@@ -11,11 +11,11 @@ public static class BestStandingJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> totalPoints = new("total_points");
-        RequiredMember<int> division = new("division");
-        RequiredMember<int> tier = new("tier");
-        RequiredMember<int> points = new("points");
-        RequiredMember<int> repeats = new("repeats");
+        RequiredMember totalPoints = new("total_points");
+        RequiredMember division = new("division");
+        RequiredMember tier = new("tier");
+        RequiredMember points = new("points");
+        RequiredMember repeats = new("repeats");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -47,11 +47,11 @@ public static class BestStandingJson
 
         return new BestStanding
         {
-            TotalPoints = totalPoints.GetValue(),
-            Division = division.GetValue(),
-            Tier = tier.GetValue(),
-            Points = points.GetValue(),
-            Repeats = repeats.GetValue()
+            TotalPoints = totalPoints.Select(value => value.GetInt32()),
+            Division = division.Select(value => value.GetInt32()),
+            Tier = tier.Select(value => value.GetInt32()),
+            Points = points.Select(value => value.GetInt32()),
+            Repeats = repeats.Select(value => value.GetInt32())
         };
     }
 }

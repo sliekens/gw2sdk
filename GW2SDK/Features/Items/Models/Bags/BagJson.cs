@@ -8,19 +8,19 @@ public static class BagJson
 {
     public static Bag GetBag(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<string> name = new("name");
-        OptionalMember<string> description = new("description");
-        RequiredMember<int> level = new("level");
-        RequiredMember<Rarity> rarity = new("rarity");
-        RequiredMember<Coin> vendorValue = new("vendor_value");
-        RequiredMember<GameType> gameTypes = new("game_types");
-        RequiredMember<ItemFlag> flags = new("flags");
-        RequiredMember<ItemRestriction> restrictions = new("restrictions");
-        RequiredMember<int> id = new("id");
-        RequiredMember<string> chatLink = new("chat_link");
-        OptionalMember<string> icon = new("icon");
-        RequiredMember<bool> noSellOrSort = new("no_sell_or_sort");
-        RequiredMember<int> size = new("size");
+        RequiredMember name = new("name");
+        OptionalMember description = new("description");
+        RequiredMember level = new("level");
+        RequiredMember rarity = new("rarity");
+        RequiredMember vendorValue = new("vendor_value");
+        RequiredMember gameTypes = new("game_types");
+        RequiredMember flags = new("flags");
+        RequiredMember restrictions = new("restrictions");
+        RequiredMember id = new("id");
+        RequiredMember chatLink = new("chat_link");
+        OptionalMember icon = new("icon");
+        RequiredMember noSellOrSort = new("no_sell_or_sort");
+        RequiredMember size = new("size");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
@@ -102,19 +102,19 @@ public static class BagJson
 
         return new Bag
         {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
-            Description = description.GetValueOrEmpty(),
-            Level = level.GetValue(),
-            Rarity = rarity.GetValue(missingMemberBehavior),
-            VendorValue = vendorValue.GetValue(),
-            GameTypes = gameTypes.GetValues(missingMemberBehavior),
-            Flags = flags.GetValues(missingMemberBehavior),
-            Restrictions = restrictions.GetValues(missingMemberBehavior),
-            ChatLink = chatLink.GetValue(),
-            Icon = icon.GetValueOrNull(),
-            NoSellOrSort = noSellOrSort.GetValue(),
-            Size = size.GetValue()
+            Id = id.Select(value => value.GetInt32()),
+            Name = name.Select(value => value.GetStringRequired()),
+            Description = description.Select(value => value.GetString()) ?? "",
+            Level = level.Select(value => value.GetInt32()),
+            Rarity = rarity.Select(value => value.GetEnum<Rarity>(missingMemberBehavior)),
+            VendorValue = vendorValue.Select(value => value.GetInt32()),
+            GameTypes = gameTypes.SelectMany(value => value.GetEnum<GameType>(missingMemberBehavior)),
+            Flags = flags.SelectMany(value => value.GetEnum<ItemFlag>(missingMemberBehavior)),
+            Restrictions = restrictions.SelectMany(value => value.GetEnum<ItemRestriction>(missingMemberBehavior)),
+            ChatLink = chatLink.Select(value => value.GetStringRequired()),
+            Icon = icon.Select(value => value.GetString()),
+            NoSellOrSort = noSellOrSort.Select(value => value.GetBoolean()),
+            Size = size.Select(value => value.GetInt32())
         };
     }
 }

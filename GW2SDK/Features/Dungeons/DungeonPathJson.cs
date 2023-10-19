@@ -11,8 +11,8 @@ public static class DungeonPathJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> id = new("id");
-        RequiredMember<DungeonKind> kind = new("type");
+        RequiredMember id = new("id");
+        RequiredMember kind = new("type");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -32,8 +32,8 @@ public static class DungeonPathJson
 
         return new DungeonPath
         {
-            Id = id.GetValue(),
-            Kind = kind.GetValue(missingMemberBehavior)
+            Id = id.Select(value => value.GetStringRequired()),
+            Kind = kind.Select(value => value.GetEnum<DungeonKind>(missingMemberBehavior))
         };
     }
 }

@@ -132,8 +132,8 @@ public static class TraitFactJson
                 );
         }
 
-        OptionalMember<string> text = new("text");
-        OptionalMember<string> icon = new("icon");
+        OptionalMember text = new("text");
+        OptionalMember icon = new("icon");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
@@ -169,8 +169,8 @@ public static class TraitFactJson
 
         return new TraitFact
         {
-            Text = text.GetValueOrEmpty(),
-            Icon = icon.GetValueOrEmpty()
+            Text = text.Select(value => value.GetString()) ?? "",
+            Icon = icon.Select(value => value.GetString()) ?? ""
         };
     }
 }

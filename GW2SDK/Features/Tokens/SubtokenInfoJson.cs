@@ -11,12 +11,12 @@ public static class SubtokenInfoJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> name = new("name");
-        RequiredMember<string> id = new("id");
-        RequiredMember<Permission> permissions = new("permissions");
-        RequiredMember<DateTimeOffset> expiresAt = new("expires_at");
-        RequiredMember<DateTimeOffset> issuedAt = new("issued_at");
-        OptionalMember<Uri> urls = new("urls");
+        RequiredMember name = new("name");
+        RequiredMember id = new("id");
+        RequiredMember permissions = new("permissions");
+        RequiredMember expiresAt = new("expires_at");
+        RequiredMember issuedAt = new("issued_at");
+        OptionalMember urls = new("urls");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
@@ -60,11 +60,11 @@ public static class SubtokenInfoJson
 
         return new SubtokenInfo
         {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
-            Permissions = permissions.GetValues(missingMemberBehavior),
-            ExpiresAt = expiresAt.GetValue(),
-            IssuedAt = issuedAt.GetValue(),
+            Id = id.Select(value => value.GetStringRequired()),
+            Name = name.Select(value => value.GetStringRequired()),
+            Permissions = permissions.SelectMany(value => value.GetEnum<Permission>(missingMemberBehavior)),
+            ExpiresAt = expiresAt.Select(value => value.GetDateTimeOffset()),
+            IssuedAt = issuedAt.Select(value => value.GetDateTimeOffset()),
             Urls = urls.SelectMany(item => new Uri(item.GetStringRequired(), UriKind.Relative))
         };
     }

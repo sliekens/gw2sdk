@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Colors;
@@ -12,12 +11,12 @@ public static class ColorInfoJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> brightness = new("brightness");
-        RequiredMember<double> contrast = new("contrast");
-        RequiredMember<int> hue = new("hue");
-        RequiredMember<double> saturation = new("saturation");
-        RequiredMember<double> lightness = new("lightness");
-        RequiredMember<Color> rgb = new("rgb");
+        RequiredMember brightness = new("brightness");
+        RequiredMember contrast = new("contrast");
+        RequiredMember hue = new("hue");
+        RequiredMember saturation = new("saturation");
+        RequiredMember lightness = new("lightness");
+        RequiredMember rgb = new("rgb");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -53,11 +52,11 @@ public static class ColorInfoJson
 
         return new ColorInfo
         {
-            Brightness = brightness.GetValue(),
-            Contrast = contrast.GetValue(),
-            Hue = hue.GetValue(),
-            Saturation = saturation.GetValue(),
-            Lightness = lightness.GetValue(),
+            Brightness = brightness.Select(value => value.GetInt32()),
+            Contrast = contrast.Select(value => value.GetDouble()),
+            Hue = hue.Select(value => value.GetInt32()),
+            Saturation = saturation.Select(value => value.GetDouble()),
+            Lightness = lightness.Select(value => value.GetDouble()),
             Rgb = rgb.Select(value => value.GetColor(missingMemberBehavior))
         };
     }

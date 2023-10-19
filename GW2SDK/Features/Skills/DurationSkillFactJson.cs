@@ -16,9 +16,9 @@ public static class DurationSkillFactJson
         requiresTrait = null;
         overrides = null;
 
-        RequiredMember<string> text = new("text");
-        RequiredMember<string> icon = new("icon");
-        RequiredMember<TimeSpan> duration = new("duration");
+        RequiredMember text = new("text");
+        RequiredMember icon = new("icon");
+        RequiredMember duration = new("duration");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -59,8 +59,8 @@ public static class DurationSkillFactJson
 
         return new DurationSkillFact
         {
-            Text = text.GetValue(),
-            Icon = icon.GetValue(),
+            Text = text.Select(value => value.GetStringRequired()),
+            Icon = icon.Select(value => value.GetStringRequired()),
             Duration = duration.Select(value => TimeSpan.FromSeconds(value.GetDouble()))
         };
     }

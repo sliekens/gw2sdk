@@ -11,10 +11,10 @@ public static class SuperAdventureBoxZoneJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<SuperAdventureBoxMode> mode = new("mode");
-        RequiredMember<int> world = new("world");
-        RequiredMember<int> zone = new("zone");
+        RequiredMember id = new("id");
+        RequiredMember mode = new("mode");
+        RequiredMember world = new("world");
+        RequiredMember zone = new("zone");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -42,10 +42,10 @@ public static class SuperAdventureBoxZoneJson
 
         return new SuperAdventureBoxZone
         {
-            Id = id.GetValue(),
-            Mode = mode.GetValue(missingMemberBehavior),
-            World = world.GetValue(),
-            Zone = zone.GetValue()
+            Id = id.Select(value => value.GetInt32()),
+            Mode = mode.Select(value => value.GetEnum<SuperAdventureBoxMode>(missingMemberBehavior)),
+            World = world.Select(value => value.GetInt32()),
+            Zone = zone.Select(value => value.GetInt32())
         };
     }
 }

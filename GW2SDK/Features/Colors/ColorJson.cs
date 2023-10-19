@@ -12,9 +12,9 @@ public static class ColorJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> red = new("[0]");
-        RequiredMember<int> green = new("[1]");
-        RequiredMember<int> blue = new("[2]");
+        RequiredMember red = new("[0]");
+        RequiredMember green = new("[1]");
+        RequiredMember blue = new("[2]");
 
         foreach (var entry in json.EnumerateArray())
         {
@@ -37,9 +37,9 @@ public static class ColorJson
         }
 
         return Color.FromArgb(
-            red.GetValue(),
-            green.GetValue(),
-            blue.GetValue()
+            red.Select(value => value.GetInt32()),
+            green.Select(value => value.GetInt32()),
+            blue.Select(value => value.GetInt32())
         );
     }
 }

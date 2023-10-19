@@ -11,9 +11,9 @@ public static class PvpEquipmentJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        NullableMember<int> amulet = new("amulet");
-        NullableMember<int> rune = new("rune");
-        RequiredMember<int?> sigils = new("sigils");
+        NullableMember amulet = new("amulet");
+        NullableMember rune = new("rune");
+        RequiredMember sigils = new("sigils");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -37,9 +37,9 @@ public static class PvpEquipmentJson
 
         return new PvpEquipment
         {
-            AmuletId = amulet.GetValue(),
-            RuneId = rune.GetValue(),
-            SigilIds = sigils.SelectMany(
+            AmuletId = amulet.Select(value => value.GetInt32()),
+            RuneId = rune.Select(value => value.GetInt32()),
+            SigilIds = sigils.SelectMany<int?>(
                 value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32()
             )
         };

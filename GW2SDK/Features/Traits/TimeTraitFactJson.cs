@@ -15,9 +15,9 @@ public static class TimeTraitFactJson
     {
         requiresTrait = null;
         overrides = null;
-        OptionalMember<string> text = new("text");
-        OptionalMember<string> icon = new("icon");
-        RequiredMember<TimeSpan> duration = new("duration");
+        OptionalMember text = new("text");
+        OptionalMember icon = new("icon");
+        RequiredMember duration = new("duration");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
@@ -57,8 +57,8 @@ public static class TimeTraitFactJson
 
         return new TimeTraitFact
         {
-            Text = text.GetValueOrEmpty(),
-            Icon = icon.GetValueOrEmpty(),
+            Text = text.Select(value => value.GetString()) ?? "",
+            Icon = icon.Select(value => value.GetString()) ?? "",
             Duration = duration.Select(value => TimeSpan.FromSeconds(value.GetDouble()))
         };
     }

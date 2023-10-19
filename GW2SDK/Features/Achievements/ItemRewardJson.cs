@@ -11,8 +11,8 @@ public static class ItemRewardJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<int> count = new("count");
+        RequiredMember id = new("id");
+        RequiredMember count = new("count");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
@@ -40,8 +40,8 @@ public static class ItemRewardJson
 
         return new ItemReward
         {
-            Id = id.GetValue(),
-            Count = count.GetValue()
+            Id = id.Select(value => value.GetInt32()),
+            Count = count.Select(value => value.GetInt32())
         };
     }
 }

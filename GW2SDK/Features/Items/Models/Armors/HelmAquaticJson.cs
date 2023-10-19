@@ -11,25 +11,25 @@ public static class HelmAquaticJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> name = new("name");
-        OptionalMember<string> description = new("description");
-        RequiredMember<int> level = new("level");
-        RequiredMember<Rarity> rarity = new("rarity");
-        RequiredMember<Coin> vendorValue = new("vendor_value");
-        RequiredMember<int> defaultSkin = new("default_skin");
-        RequiredMember<GameType> gameTypes = new("game_types");
-        RequiredMember<ItemFlag> flags = new("flags");
-        RequiredMember<ItemRestriction> restrictions = new("restrictions");
-        RequiredMember<int> id = new("id");
-        RequiredMember<string> chatLink = new("chat_link");
-        OptionalMember<string> icon = new("icon");
-        RequiredMember<WeightClass> weightClass = new("weight_class");
-        RequiredMember<int> defense = new("defense");
-        RequiredMember<InfusionSlot> infusionSlots = new("infusion_slots");
-        RequiredMember<double> attributeAdjustment = new("attribute_adjustment");
-        OptionalMember<InfixUpgrade> infixUpgrade = new("infix_upgrade");
-        NullableMember<int> suffixItemId = new("suffix_item_id");
-        OptionalMember<int> statChoices = new("stat_choices");
+        RequiredMember name = new("name");
+        OptionalMember description = new("description");
+        RequiredMember level = new("level");
+        RequiredMember rarity = new("rarity");
+        RequiredMember vendorValue = new("vendor_value");
+        RequiredMember defaultSkin = new("default_skin");
+        RequiredMember gameTypes = new("game_types");
+        RequiredMember flags = new("flags");
+        RequiredMember restrictions = new("restrictions");
+        RequiredMember id = new("id");
+        RequiredMember chatLink = new("chat_link");
+        OptionalMember icon = new("icon");
+        RequiredMember weightClass = new("weight_class");
+        RequiredMember defense = new("defense");
+        RequiredMember infusionSlots = new("infusion_slots");
+        RequiredMember attributeAdjustment = new("attribute_adjustment");
+        OptionalMember infixUpgrade = new("infix_upgrade");
+        NullableMember suffixItemId = new("suffix_item_id");
+        OptionalMember statChoices = new("stat_choices");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
@@ -144,26 +144,26 @@ public static class HelmAquaticJson
 
         return new HelmAquatic
         {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
-            Description = description.GetValueOrEmpty(),
-            Level = level.GetValue(),
-            Rarity = rarity.GetValue(missingMemberBehavior),
-            VendorValue = vendorValue.GetValue(),
-            DefaultSkin = defaultSkin.GetValue(),
-            GameTypes = gameTypes.GetValues(missingMemberBehavior),
-            Flags = flags.GetValues(missingMemberBehavior),
-            Restrictions = restrictions.GetValues(missingMemberBehavior),
-            ChatLink = chatLink.GetValue(),
-            Icon = icon.GetValueOrNull(),
-            WeightClass = weightClass.GetValue(missingMemberBehavior),
-            Defense = defense.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
+            Name = name.Select(value => value.GetStringRequired()),
+            Description = description.Select(value => value.GetString()) ?? "",
+            Level = level.Select(value => value.GetInt32()),
+            Rarity = rarity.Select(value => value.GetEnum<Rarity>(missingMemberBehavior)),
+            VendorValue = vendorValue.Select(value => value.GetInt32()),
+            DefaultSkin = defaultSkin.Select(value => value.GetInt32()),
+            GameTypes = gameTypes.SelectMany(value => value.GetEnum<GameType>(missingMemberBehavior)),
+            Flags = flags.SelectMany(value => value.GetEnum<ItemFlag>(missingMemberBehavior)),
+            Restrictions = restrictions.SelectMany(value => value.GetEnum<ItemRestriction>(missingMemberBehavior)),
+            ChatLink = chatLink.Select(value => value.GetStringRequired()),
+            Icon = icon.Select(value => value.GetString()),
+            WeightClass = weightClass.Select(value => value.GetEnum<WeightClass>(missingMemberBehavior)),
+            Defense = defense.Select(value => value.GetInt32()),
             InfusionSlots =
                 infusionSlots.SelectMany(value => value.GetInfusionSlot(missingMemberBehavior)),
-            AttributeAdjustment = attributeAdjustment.GetValue(),
+            AttributeAdjustment = attributeAdjustment.Select(value => value.GetDouble()),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => value.GetInfixUpgrade(missingMemberBehavior)),
-            SuffixItemId = suffixItemId.GetValue()
+            SuffixItemId = suffixItemId.Select(value => value.GetInt32())
         };
     }
 }

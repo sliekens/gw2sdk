@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Exploration.Adventures;
 using GuildWars2.Exploration.GodShrines;
 using GuildWars2.Exploration.Hearts;
@@ -16,22 +15,22 @@ public static class MapJson
 {
     public static Map GetMap(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<string> name = new("name");
-        RequiredMember<int> minLevel = new("min_level");
-        RequiredMember<int> maxLevel = new("max_level");
-        RequiredMember<int> defaultFloor = new("default_floor");
-        OptionalMember<Point> labelCoordinates = new("label_coord");
-        RequiredMember<Rectangle> mapRectangle = new("map_rect");
-        RequiredMember<Rectangle> continentRectangle = new("continent_rect");
-        RequiredMember<Dictionary<int, PointOfInterest>> pointsOfInterest =
+        RequiredMember name = new("name");
+        RequiredMember minLevel = new("min_level");
+        RequiredMember maxLevel = new("max_level");
+        RequiredMember defaultFloor = new("default_floor");
+        OptionalMember labelCoordinates = new("label_coord");
+        RequiredMember mapRectangle = new("map_rect");
+        RequiredMember continentRectangle = new("continent_rect");
+        RequiredMember pointsOfInterest =
             new("points_of_interest");
-        OptionalMember<GodShrine> godShrines = new("god_shrines");
-        RequiredMember<Dictionary<int, Heart>> tasks = new("tasks");
-        RequiredMember<HeroChallenge> skillChallenges = new("skill_challenges");
-        RequiredMember<Dictionary<int, Sector>> sectors = new("sectors");
-        RequiredMember<Adventure> adventures = new("adventures");
-        RequiredMember<int> id = new("id");
-        RequiredMember<MasteryPoint> masteryPoints = new("mastery_points");
+        OptionalMember godShrines = new("god_shrines");
+        RequiredMember tasks = new("tasks");
+        RequiredMember skillChallenges = new("skill_challenges");
+        RequiredMember sectors = new("sectors");
+        RequiredMember adventures = new("adventures");
+        RequiredMember id = new("id");
+        RequiredMember masteryPoints = new("mastery_points");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(name.Name))
@@ -102,11 +101,11 @@ public static class MapJson
 
         return new Map
         {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
-            MinLevel = minLevel.GetValue(),
-            MaxLevel = maxLevel.GetValue(),
-            DefaultFloor = defaultFloor.GetValue(),
+            Id = id.Select(value => value.GetInt32()),
+            Name = name.Select(value => value.GetStringRequired()),
+            MinLevel = minLevel.Select(value => value.GetInt32()),
+            MaxLevel = maxLevel.Select(value => value.GetInt32()),
+            DefaultFloor = defaultFloor.Select(value => value.GetInt32()),
             LabelCoordinates =
                 labelCoordinates.Select(value => value.GetCoordinate(missingMemberBehavior)),
             MapRectangle = mapRectangle.Select(value => value.GetMapRectangle(missingMemberBehavior)),

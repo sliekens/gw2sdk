@@ -7,19 +7,11 @@ internal static class JsonElementExtensions
     /// <summary>Returns a string, or throws if the element is null or not a string.</summary>
     /// <param name="json">A String value.</param>
     /// <returns>The value of the JSON element as a non-null string (can be empty).</returns>
-    internal static string GetStringRequired(this JsonElement json)
-    {
-        var value = json.GetString();
-        if (value is null)
-        {
-            throw new InvalidOperationException(
-                $"The requested operation requires an element of type 'String', but the target element has type '{json.ValueKind}'."
-            );
-        }
-
-        return value;
-    }
-
+    internal static string GetStringRequired(this JsonElement json) =>
+        json.GetString()
+        ?? throw new InvalidOperationException(
+            $"The requested operation requires an element of type 'String', but the target element has type '{json.ValueKind}'."
+        );
 
     /// <summary>Converts a JSON array to a list.</summary>
     /// <typeparam name="TValue">The type of values in the list.</typeparam>

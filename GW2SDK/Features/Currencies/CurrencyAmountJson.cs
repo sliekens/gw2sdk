@@ -11,18 +11,18 @@ public static class CurrencyAmountJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<int> value = new("value");
+        RequiredMember currencyId = new("id");
+        RequiredMember amount = new("value");
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(id.Name))
+            if (member.NameEquals(currencyId.Name))
             {
-                id.Value = member.Value;
+                currencyId.Value = member.Value;
             }
-            else if (member.NameEquals(value.Name))
+            else if (member.NameEquals(amount.Name))
             {
-                value.Value = member.Value;
+                amount.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -32,8 +32,8 @@ public static class CurrencyAmountJson
 
         return new CurrencyAmount
         {
-            CurrencyId = id.GetValue(),
-            Amount = value.GetValue()
+            CurrencyId = currencyId.Select(value => value.GetInt32()),
+            Amount = amount.Select(value => value.GetInt32())
         };
     }
 }

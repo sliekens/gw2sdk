@@ -11,7 +11,7 @@ public static class LearnedRecipesJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> recipes = new("recipes");
+        RequiredMember recipes = new("recipes");
 
         foreach (var member in json.EnumerateObject())
         {

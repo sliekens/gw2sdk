@@ -11,8 +11,8 @@ public static class UpgradeAttributeJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<UpgradeAttributeName> attribute = new("attribute");
-        RequiredMember<int> modifier = new("modifier");
+        RequiredMember attribute = new("attribute");
+        RequiredMember modifier = new("modifier");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(attribute.Name))
@@ -31,8 +31,8 @@ public static class UpgradeAttributeJson
 
         return new UpgradeAttribute
         {
-            Attribute = attribute.GetValue(missingMemberBehavior),
-            Modifier = modifier.GetValue()
+            Attribute = attribute.Select(value => value.GetEnum<UpgradeAttributeName>(missingMemberBehavior)),
+            Modifier = modifier.Select(value => value.GetInt32())
         };
     }
 }

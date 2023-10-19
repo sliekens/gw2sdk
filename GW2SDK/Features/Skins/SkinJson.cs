@@ -20,13 +20,13 @@ public static class SkinJson
                 return json.GetWeaponSkin(missingMemberBehavior);
         }
 
-        RequiredMember<string> name = new("name");
-        OptionalMember<string> description = new("description");
-        RequiredMember<Rarity> rarity = new("rarity");
-        RequiredMember<SkinFlag> flags = new("flags");
-        RequiredMember<SkinRestriction> restrictions = new("restrictions");
-        RequiredMember<int> id = new("id");
-        OptionalMember<string> icon = new("icon");
+        RequiredMember name = new("name");
+        OptionalMember description = new("description");
+        RequiredMember rarity = new("rarity");
+        RequiredMember flags = new("flags");
+        RequiredMember restrictions = new("restrictions");
+        RequiredMember id = new("id");
+        OptionalMember icon = new("icon");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
@@ -74,13 +74,13 @@ public static class SkinJson
 
         return new Skin
         {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
-            Description = description.GetValueOrEmpty(),
-            Rarity = rarity.GetValue(missingMemberBehavior),
-            Flags = flags.GetValues(missingMemberBehavior),
-            Restrictions = restrictions.GetValues(missingMemberBehavior),
-            Icon = icon.GetValueOrNull()
+            Id = id.Select(value => value.GetInt32()),
+            Name = name.Select(value => value.GetStringRequired()),
+            Description = description.Select(value => value.GetString()) ?? "",
+            Rarity = rarity.Select(value => value.GetEnum<Rarity>(missingMemberBehavior)),
+            Flags = flags.SelectMany(value => value.GetEnum<SkinFlag>(missingMemberBehavior)),
+            Restrictions = restrictions.SelectMany(value => value.GetEnum<SkinRestriction>(missingMemberBehavior)),
+            Icon = icon.Select(value => value.GetString())
         };
     }
 }
