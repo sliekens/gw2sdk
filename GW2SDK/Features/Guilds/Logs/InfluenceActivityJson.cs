@@ -4,12 +4,6 @@ using GuildWars2.Json;
 namespace GuildWars2.Guilds.Logs;
 
 [PublicAPI]
-public enum InfluenceActivityKind
-{
-    Gifted = 1
-}
-
-[PublicAPI]
 public static class InfluenceActivityJson
 {
     public static InfluenceActivity GetInfluenceActivity(
