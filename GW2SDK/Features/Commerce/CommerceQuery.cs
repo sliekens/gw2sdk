@@ -182,7 +182,8 @@ public sealed class CommerceQuery
             progress,
             cancellationToken
         );
-
+        
+        // ReSharper disable once VariableHidesOuterVariable (intended, believe it or not)
         async Task<IReadOnlyCollection<OrderBook>> GetChunk(
             IReadOnlyCollection<int> chunk,
             CancellationToken cancellationToken
