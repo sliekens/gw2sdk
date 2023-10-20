@@ -11,33 +11,86 @@ public sealed class AssetCdnBuildRequest : IHttpRequest<Replica<Build>>
         CancellationToken cancellationToken
     )
     {
-        const string resource = "http://assetcdn.101.ArenaNetworks.com/latest64/101";
-        var latest64 = await httpClient
-#if NET
-            .GetStringAsync(resource, cancellationToken)
-#else
-            .GetStringAsync(resource)
-#endif
-            .ConfigureAwait(false);
+        return await Latest().ConfigureAwait(false)
+            ?? await Latest64().ConfigureAwait(false)
+            ?? throw new InvalidOperationException("Missing value.");
 
-        if (latest64 is null)
+        async Task<Replica<Build>?> Latest()
         {
-            throw new InvalidOperationException("Missing value.");
+            using var request = new HttpRequestMessage(
+                Get,
+                "http://assetcdn.101.ArenaNetworks.com/latest/101"
+            );
+            using var response = await httpClient.SendAsync(
+                    request,
+                    HttpCompletionOption.ResponseHeadersRead,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            if (!response.IsSuccessStatusCode)
+            {
+                return null;
+            }
+
+#if NET
+            var latest = await response.Content.ReadAsStringAsync(cancellationToken)
+                .ConfigureAwait(false);
+#else
+            var latest = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+#endif
+            var text = latest[..latest.IndexOf(' ')];
+            var value = new Build
+            {
+                Id = int.Parse(text, NumberStyles.None, NumberFormatInfo.InvariantInfo)
+            };
+            return new Replica<Build>
+            {
+                Value = value,
+                Date = response.Headers.Date.GetValueOrDefault(),
+                Expires = response.Content.Headers.Expires.GetValueOrDefault(),
+                LastModified = response.Content.Headers.LastModified.GetValueOrDefault(),
+                ResultContext = null,
+                PageContext = null
+            };
         }
 
-        var text = latest64.Substring(0, latest64.IndexOf(' '));
-        var value = new Build
+        async Task<Replica<Build>?> Latest64()
         {
-            Id = int.Parse(text, NumberStyles.None, NumberFormatInfo.InvariantInfo)
-        };
-        return new Replica<Build>
-        {
-            Value = value,
-            Date = DateTimeOffset.UtcNow, // TODO: better use real header
-            Expires = null,
-            LastModified = null,
-            ResultContext = null,
-            PageContext = null
-        };
+            using var request = new HttpRequestMessage(
+                Get,
+                "http://assetcdn.101.ArenaNetworks.com/latest64/101"
+            );
+            using var response = await httpClient.SendAsync(
+                    request,
+                    HttpCompletionOption.ResponseHeadersRead,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            if (!response.IsSuccessStatusCode)
+            {
+                return null;
+            }
+
+#if NET
+            var latest64 = await response.Content.ReadAsStringAsync(cancellationToken)
+                .ConfigureAwait(false);
+#else
+            var latest64 = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+#endif
+            var text = latest64[..latest64.IndexOf(' ')];
+            var value = new Build
+            {
+                Id = int.Parse(text, NumberStyles.None, NumberFormatInfo.InvariantInfo)
+            };
+            return new Replica<Build>
+            {
+                Value = value,
+                Date = response.Headers.Date.GetValueOrDefault(),
+                Expires = response.Content.Headers.Expires.GetValueOrDefault(),
+                LastModified = response.Content.Headers.LastModified.GetValueOrDefault(),
+                ResultContext = null,
+                PageContext = null
+            };
+        }
     }
 }
