@@ -13,7 +13,6 @@ public sealed class SuperAdventureBoxQuery
 
     #region v2/characters/:id/sab
 
-    [Scope(Permission.Characters, Permission.Progression)]
     public Task<Replica<SuperAdventureBoxProgress>> GetSuperAdventureBoxProgress(
         string characterId,
         string? accessToken,

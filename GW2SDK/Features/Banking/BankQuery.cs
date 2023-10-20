@@ -13,7 +13,6 @@ public sealed class BankQuery
 
     #region v2/account/bank
 
-    [Scope(Permission.Inventories)]
     public Task<Replica<Bank>> GetBank(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -32,7 +31,6 @@ public sealed class BankQuery
 
     #region v2/account/materials
 
-    [Scope(Permission.Inventories)]
     public Task<Replica<MaterialStorage>> GetMaterialStorage(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,

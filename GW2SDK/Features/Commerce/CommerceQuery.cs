@@ -20,7 +20,6 @@ public sealed class CommerceQuery
 
     #region v2/commerce/delivery
 
-    [Scope(Permission.TradingPost)]
     public Task<Replica<DeliveryBox>> GetDeliveryBox(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,

@@ -19,7 +19,6 @@ public sealed class WorldBossesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    [Scope(Permission.Progression)]
     public Task<Replica<HashSet<string>>> GetDefeatedWorldBosses(
         string? accessToken,
         CancellationToken cancellationToken = default

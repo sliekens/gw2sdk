@@ -2,7 +2,6 @@
 
 [PublicAPI]
 [DataTransferObject]
-[Scope(Permission.Account, Permission.Characters)]
 public sealed record CharacterSummary
 {
     /// <summary>The name of the current character.</summary>

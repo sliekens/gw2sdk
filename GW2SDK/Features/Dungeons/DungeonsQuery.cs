@@ -69,7 +69,6 @@ public sealed class DungeonsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    [Scope(Permission.Progression)]
     public Task<Replica<HashSet<string>>> GetCompletedPaths(
         string? accessToken,
         CancellationToken cancellationToken = default

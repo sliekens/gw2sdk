@@ -14,7 +14,6 @@ public sealed class DyesQuery
     #region v2/account/dyes
 
     /// <summary>Gets the IDs of the dyes unlocked by the current account.</summary>
-    [Scope(Permission.Unlocks)]
     public Task<Replica<HashSet<int>>> GetUnlockedDyesIndex(
         string? accessToken,
         CancellationToken cancellationToken = default

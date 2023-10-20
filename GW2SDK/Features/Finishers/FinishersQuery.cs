@@ -13,7 +13,6 @@ public sealed class FinishersQuery
 
     #region v2/account/finishers
 
-    [Scope(Permission.Unlocks)]
     public Task<Replica<HashSet<UnlockedFinisher>>> GetUnlockedFinishers(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,

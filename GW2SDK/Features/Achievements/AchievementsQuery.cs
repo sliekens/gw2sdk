@@ -171,7 +171,6 @@ public sealed class AchievementsQuery
 
     #region v2/account/achievements
 
-    [Scope(Permission.Progression)]
     public Task<Replica<AccountAchievement>> GetAccountAchievementById(
         int achievementId,
         string? accessToken,
@@ -187,7 +186,6 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    [Scope(Permission.Progression)]
     public Task<Replica<HashSet<AccountAchievement>>> GetAccountAchievementsByIds(
         IReadOnlyCollection<int> achievementIds,
         string? accessToken,
@@ -203,7 +201,6 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    [Scope(Permission.Progression)]
     public Task<Replica<HashSet<AccountAchievement>>> GetAccountAchievements(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -218,7 +215,6 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    [Scope(Permission.Progression)]
     public Task<Replica<HashSet<AccountAchievement>>> GetAccountAchievementsByPage(
         int pageIndex,
         int? pageSize,

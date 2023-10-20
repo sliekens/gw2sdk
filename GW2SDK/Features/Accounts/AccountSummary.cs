@@ -28,7 +28,6 @@ public sealed record AccountSummary
     public required IReadOnlyCollection<string> GuildIds { get; init; }
 
     /// <summary>The IDs of the guilds that the account is the leader of. Requires the 'guilds' scope.</summary>
-    [Scope(Permission.Guilds)]
     public required IReadOnlyCollection<string>? LeaderOfGuildIds { get; init; }
 
     /// <summary>The date and time when the account was created.</summary>
@@ -41,23 +40,18 @@ public sealed record AccountSummary
     public required bool Commander { get; init; }
 
     /// <summary>The account's personal fractal reward level. Requires the 'progression' scope.</summary>
-    [Scope(Permission.Progression)]
     public required int? FractalLevel { get; init; }
 
     /// <summary>The number of points gained in the Daily achievement category. Requires the 'progression' scope.</summary>
-    [Scope(Permission.Progression)]
     public required int? DailyAchievementPoints { get; init; }
 
     /// <summary>The number of points gained in the Monthly achievement category (historical). Requires the 'progression'
     /// scope.</summary>
-    [Scope(Permission.Progression)]
     public required int? MonthlyAchievementPoints { get; init; }
 
     /// <summary>The account's personal World vs. World rank. Requires the 'progression' scope.</summary>
-    [Scope(Permission.Progression)]
     public required int? WvwRank { get; init; }
 
     /// <summary>The count of unlocked build storage slots. Requires the 'builds' scope.</summary>
-    [Scope(Permission.Builds)]
     public required int? BuildStorageSlots { get; init; }
 }

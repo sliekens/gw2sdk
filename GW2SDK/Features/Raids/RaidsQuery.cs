@@ -13,7 +13,6 @@ public sealed class RaidsQuery
 
     #region v2/account/raids
 
-    [Scope(Permission.Progression)]
     public Task<Replica<HashSet<string>>> GetCompletedEncounters(
         string? accessToken,
         CancellationToken cancellationToken = default

@@ -13,7 +13,6 @@ public sealed class MinipetsQuery
 
     #region v2/account/minis
 
-    [Scope(Permission.Unlocks)]
     public Task<Replica<HashSet<int>>> GetUnlockedMinipets(
         string? accessToken,
         CancellationToken cancellationToken = default

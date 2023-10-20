@@ -13,7 +13,6 @@ public sealed class WalletQuery
 
     #region v2/account/wallet
 
-    [Scope(Permission.Wallet)]
     public Task<Replica<HashSet<CurrencyAmount>>> GetWallet(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,

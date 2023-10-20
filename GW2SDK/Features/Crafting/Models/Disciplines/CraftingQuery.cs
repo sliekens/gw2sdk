@@ -18,7 +18,6 @@ public sealed class CraftingQuery
 
     /// <summary>Gets the IDs of the recipes that were learned from recipe sheets. Unlocked recipes are automatically learned
     /// by characters once they reach the required crafting level.</summary>
-    [Scope(Permission.Unlocks)]
     public Task<Replica<HashSet<int>>> GetUnlockedRecipes(
         string? accessToken,
         CancellationToken cancellationToken = default
@@ -34,7 +33,6 @@ public sealed class CraftingQuery
 
     /// <summary>Gets the IDs of all the recipes that the current character has learned, excluding recipes from sheets for
     /// which the required crafting level is not reached.</summary>
-    [Scope(Permission.Characters, Permission.Inventories)]
     public Task<Replica<HashSet<int>>> GetLearnedRecipes(
         string characterId,
         string? accessToken,
@@ -66,7 +64,6 @@ public sealed class CraftingQuery
 
     #region v2/account/dailycrafting
 
-    [Scope(Permission.Progression)]
     public Task<Replica<HashSet<string>>> GetDailyRecipesOnCooldown(
         string? accessToken,
         CancellationToken cancellationToken = default

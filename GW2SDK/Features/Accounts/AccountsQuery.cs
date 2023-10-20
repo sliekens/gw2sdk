@@ -67,7 +67,6 @@ public sealed class AccountsQuery
 
     #region v2/characters/:id/core
 
-    [Scope(Permission.Account, Permission.Characters)]
     public Task<Replica<CharacterSummary>> GetCharacterSummary(
         string characterName,
         string? accessToken,
@@ -87,7 +86,6 @@ public sealed class AccountsQuery
 
     #region v2/characters
 
-    [Scope(Permission.Account, Permission.Characters)]
     public Task<Replica<HashSet<string>>> GetCharactersIndex(
         string? accessToken,
         CancellationToken cancellationToken = default
@@ -97,8 +95,6 @@ public sealed class AccountsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    [Scope(Permission.Account, Permission.Characters)]
-    [Scope(ScopeRequirement.Any, Permission.Builds, Permission.Inventories, Permission.Progression)]
     public Task<Replica<Character>> GetCharacterByName(
         string characterName,
         string? accessToken,
@@ -114,8 +110,6 @@ public sealed class AccountsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    [Scope(Permission.Account, Permission.Characters)]
-    [Scope(ScopeRequirement.Any, Permission.Builds, Permission.Inventories, Permission.Progression)]
     public Task<Replica<HashSet<Character>>> GetCharacters(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,

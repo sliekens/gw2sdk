@@ -13,7 +13,6 @@ public sealed class EmotesQuery
 
     #region v2/account/emotes
 
-    [Scope(Permission.Progression, Permission.Unlocks)]
     public Task<Replica<HashSet<string>>> GetUnlockedEmotes(
         string? accessToken,
         CancellationToken cancellationToken = default
