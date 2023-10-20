@@ -5,7 +5,7 @@ namespace GuildWars2.Http;
 [PublicAPI]
 public sealed record HttpRequestMessageTemplate(HttpMethod Method, string Path)
 {
-    private QueryBuilder queryBuilder = QueryBuilder.Empty;
+    private readonly QueryBuilder queryBuilder = QueryBuilder.Empty;
 
     public string? AcceptEncoding { get; init; }
 
