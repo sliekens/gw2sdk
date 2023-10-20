@@ -35,7 +35,7 @@ public sealed class MountsByNamesRequest : IHttpRequest<Replica<HashSet<Mount>>>
                     {
                         {
                             "ids",
-                            MountNames.Select(name => MountNameFormatter.FormatMountName(name))
+                            MountNames.Select(MountNameFormatter.FormatMountName)
                         },
                         { "v", SchemaVersion.Recommended }
                     },
