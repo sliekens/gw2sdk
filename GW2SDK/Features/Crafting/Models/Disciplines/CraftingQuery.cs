@@ -148,7 +148,7 @@ public sealed class CraftingQuery
     public IAsyncEnumerable<Recipe> GetRecipesBulk(
         IReadOnlyCollection<int> recipeIds,
         MissingMemberBehavior missingMemberBehavior = default,
-        int degreeOfParalllelism = BulkQuery.DefaultDegreeOfParallelism,
+        int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,
         int chunkSize = BulkQuery.DefaultChunkSize,
         IProgress<ResultContext>? progress = default,
         CancellationToken cancellationToken = default
@@ -157,7 +157,7 @@ public sealed class CraftingQuery
         return BulkQuery.QueryAsync(
             recipeIds,
             GetChunk,
-            degreeOfParalllelism,
+            degreeOfParallelism,
             chunkSize,
             progress,
             cancellationToken
@@ -176,7 +176,7 @@ public sealed class CraftingQuery
 
     public async IAsyncEnumerable<Recipe> GetRecipesBulk(
         MissingMemberBehavior missingMemberBehavior = default,
-        int degreeOfParalllelism = BulkQuery.DefaultDegreeOfParallelism,
+        int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,
         int chunkSize = BulkQuery.DefaultChunkSize,
         IProgress<ResultContext>? progress = default,
         [EnumeratorCancellation] CancellationToken cancellationToken = default
@@ -186,7 +186,7 @@ public sealed class CraftingQuery
         var producer = GetRecipesBulk(
             index.Value,
             missingMemberBehavior,
-            degreeOfParalllelism,
+            degreeOfParallelism,
             chunkSize,
             progress,
             cancellationToken

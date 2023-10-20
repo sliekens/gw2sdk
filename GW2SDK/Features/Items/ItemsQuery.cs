@@ -71,7 +71,7 @@ public sealed class ItemsQuery
         IReadOnlyCollection<int> itemIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
-        int degreeOfParalllelism = BulkQuery.DefaultDegreeOfParallelism,
+        int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,
         int chunkSize = BulkQuery.DefaultChunkSize,
         IProgress<ResultContext>? progress = default,
         CancellationToken cancellationToken = default
@@ -80,7 +80,7 @@ public sealed class ItemsQuery
         return BulkQuery.QueryAsync(
             itemIds,
             GetChunk,
-            degreeOfParalllelism,
+            degreeOfParallelism,
             chunkSize,
             progress,
             cancellationToken
@@ -104,7 +104,7 @@ public sealed class ItemsQuery
     public async IAsyncEnumerable<Item> GetItemsBulk(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
-        int degreeOfParalllelism = BulkQuery.DefaultDegreeOfParallelism,
+        int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,
         int chunkSize = BulkQuery.DefaultChunkSize,
         IProgress<ResultContext>? progress = default,
         [EnumeratorCancellation] CancellationToken cancellationToken = default
@@ -115,7 +115,7 @@ public sealed class ItemsQuery
             index.Value,
             language,
             missingMemberBehavior,
-            degreeOfParalllelism,
+            degreeOfParallelism,
             chunkSize,
             progress,
             cancellationToken

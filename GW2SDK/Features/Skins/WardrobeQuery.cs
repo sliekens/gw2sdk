@@ -85,7 +85,7 @@ public sealed class WardrobeQuery
         IReadOnlyCollection<int> skinIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
-        int degreeOfParalllelism = BulkQuery.DefaultDegreeOfParallelism,
+        int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,
         int chunkSize = BulkQuery.DefaultChunkSize,
         IProgress<ResultContext>? progress = default,
         CancellationToken cancellationToken = default
@@ -94,7 +94,7 @@ public sealed class WardrobeQuery
         return BulkQuery.QueryAsync(
             skinIds,
             GetChunk,
-            degreeOfParalllelism,
+            degreeOfParallelism,
             chunkSize,
             progress,
             cancellationToken
@@ -118,7 +118,7 @@ public sealed class WardrobeQuery
     public async IAsyncEnumerable<Skin> GetSkinsBulk(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
-        int degreeOfParalllelism = BulkQuery.DefaultDegreeOfParallelism,
+        int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,
         int chunkSize = BulkQuery.DefaultChunkSize,
         IProgress<ResultContext>? progress = default,
         [EnumeratorCancellation] CancellationToken cancellationToken = default
@@ -129,7 +129,7 @@ public sealed class WardrobeQuery
             index.Value,
             language,
             missingMemberBehavior,
-            degreeOfParalllelism,
+            degreeOfParallelism,
             chunkSize,
             progress,
             cancellationToken

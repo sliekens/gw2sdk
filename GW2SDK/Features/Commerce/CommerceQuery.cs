@@ -76,7 +76,7 @@ public sealed class CommerceQuery
     public IAsyncEnumerable<ItemPrice> GetItemPricesBulk(
         IReadOnlyCollection<int> itemIds,
         MissingMemberBehavior missingMemberBehavior = default,
-        int degreeOfParalllelism = BulkQuery.DefaultDegreeOfParallelism,
+        int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,
         int chunkSize = BulkQuery.DefaultChunkSize,
         IProgress<ResultContext>? progress = default,
         CancellationToken cancellationToken = default
@@ -85,7 +85,7 @@ public sealed class CommerceQuery
         return BulkQuery.QueryAsync(
             itemIds,
             GetChunk,
-            degreeOfParalllelism,
+            degreeOfParallelism,
             chunkSize,
             progress,
             cancellationToken
@@ -104,7 +104,7 @@ public sealed class CommerceQuery
 
     public async IAsyncEnumerable<ItemPrice> GetItemPricesBulk(
         MissingMemberBehavior missingMemberBehavior = default,
-        int degreeOfParalllelism = BulkQuery.DefaultDegreeOfParallelism,
+        int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,
         int chunkSize = BulkQuery.DefaultChunkSize,
         IProgress<ResultContext>? progress = default,
         [EnumeratorCancellation] CancellationToken cancellationToken = default
@@ -114,7 +114,7 @@ public sealed class CommerceQuery
         var producer = GetItemPricesBulk(
             index.Value,
             missingMemberBehavior,
-            degreeOfParalllelism,
+            degreeOfParallelism,
             chunkSize,
             progress,
             cancellationToken
@@ -167,7 +167,7 @@ public sealed class CommerceQuery
     public IAsyncEnumerable<OrderBook> GetOrderBooksBulk(
         IReadOnlyCollection<int> itemIds,
         MissingMemberBehavior missingMemberBehavior = default,
-        int degreeOfParalllelism = BulkQuery.DefaultDegreeOfParallelism,
+        int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,
         int chunkSize = BulkQuery.DefaultChunkSize,
         IProgress<ResultContext>? progress = default,
         CancellationToken cancellationToken = default
@@ -176,7 +176,7 @@ public sealed class CommerceQuery
         return BulkQuery.QueryAsync(
             itemIds,
             GetChunk,
-            degreeOfParalllelism,
+            degreeOfParallelism,
             chunkSize,
             progress,
             cancellationToken
@@ -195,7 +195,7 @@ public sealed class CommerceQuery
 
     public async IAsyncEnumerable<OrderBook> GetOrderBooksBulk(
         MissingMemberBehavior missingMemberBehavior = default,
-        int degreeOfParalllelism = BulkQuery.DefaultDegreeOfParallelism,
+        int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,
         int chunkSize = BulkQuery.DefaultChunkSize,
         IProgress<ResultContext>? progress = default,
         [EnumeratorCancellation] CancellationToken cancellationToken = default
@@ -205,7 +205,7 @@ public sealed class CommerceQuery
         var producer = GetOrderBooksBulk(
             index.Value,
             missingMemberBehavior,
-            degreeOfParalllelism,
+            degreeOfParallelism,
             chunkSize,
             progress,
             cancellationToken
