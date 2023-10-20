@@ -7,11 +7,7 @@ internal readonly ref struct OptionalMember
 {
     public readonly ReadOnlySpan<char> Name;
 
-    public readonly JsonElement Value = default;
-
-    public bool IsUndefined => Value.ValueKind == Undefined;
-
-    public bool IsUndefinedOrNull => IsUndefined || Value.ValueKind == Null;
+    private readonly JsonElement value = default;
 
     private OptionalMember(ReadOnlySpan<char> name)
     {
@@ -21,7 +17,7 @@ internal readonly ref struct OptionalMember
     private OptionalMember(ReadOnlySpan<char> name, JsonElement value)
     {
         Name = name;
-        Value = value;
+        this.value = value;
     }
 
     public static implicit operator OptionalMember(string name) => new(name.AsSpan());
@@ -31,14 +27,14 @@ internal readonly ref struct OptionalMember
 
     public TValue? Map<TValue>(Func<JsonElement, TValue> resultSelector)
     {
-        if (IsUndefinedOrNull)
+        if (value.ValueKind == Undefined || value.ValueKind == Null)
         {
             return default;
         }
 
         try
         {
-            return resultSelector(Value);
+            return resultSelector(value);
         }
         catch (Exception reason)
         {
