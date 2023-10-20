@@ -163,6 +163,7 @@ public sealed class CraftingQuery
             cancellationToken
         );
 
+        // ReSharper disable once VariableHidesOuterVariable (intended, believe it or not)
         async Task<IReadOnlyCollection<Recipe>> GetChunk(
             IReadOnlyCollection<int> chunk,
             CancellationToken cancellationToken
@@ -191,7 +192,7 @@ public sealed class CraftingQuery
             progress,
             cancellationToken
         );
-        await foreach (var recipe in producer.WithCancellation(cancellationToken)
+        await foreach (var recipe in producer
             .ConfigureAwait(false))
         {
             yield return recipe;

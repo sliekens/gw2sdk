@@ -124,6 +124,7 @@ public sealed class AchievementsQuery
             cancellationToken
         );
 
+        // ReSharper disable once VariableHidesOuterVariable (intended, believe it or not)
         async Task<IReadOnlyCollection<Achievement>> GetChunk(
             IReadOnlyCollection<int> chunk,
             CancellationToken cancellationToken
@@ -159,7 +160,7 @@ public sealed class AchievementsQuery
             progress,
             cancellationToken
         );
-        await foreach (var achievement in producer.WithCancellation(cancellationToken)
+        await foreach (var achievement in producer
             .ConfigureAwait(false))
         {
             yield return achievement;

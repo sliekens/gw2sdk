@@ -91,6 +91,7 @@ public sealed class CommerceQuery
             cancellationToken
         );
 
+        // ReSharper disable once VariableHidesOuterVariable (intended, believe it or not)
         async Task<IReadOnlyCollection<ItemPrice>> GetChunk(
             IReadOnlyCollection<int> chunk,
             CancellationToken cancellationToken
@@ -119,7 +120,7 @@ public sealed class CommerceQuery
             progress,
             cancellationToken
         );
-        await foreach (var itemPrice in producer.WithCancellation(cancellationToken)
+        await foreach (var itemPrice in producer
             .ConfigureAwait(false))
         {
             yield return itemPrice;
@@ -210,7 +211,7 @@ public sealed class CommerceQuery
             progress,
             cancellationToken
         );
-        await foreach (var orderBook in producer.WithCancellation(cancellationToken)
+        await foreach (var orderBook in producer
             .ConfigureAwait(false))
         {
             yield return orderBook;
