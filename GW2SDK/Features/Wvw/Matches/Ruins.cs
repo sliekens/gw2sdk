@@ -2,6 +2,4 @@
 
 [PublicAPI]
 [DataTransferObject]
-public sealed record Ruins : Objective
-{
-}
+public sealed record Ruins : Objective;

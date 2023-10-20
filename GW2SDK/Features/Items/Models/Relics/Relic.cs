@@ -1,6 +1,4 @@
 ﻿namespace GuildWars2.Items;
 
 [PublicAPI]
-public sealed record Relic : Item
-{
-}
+public sealed record Relic : Item;

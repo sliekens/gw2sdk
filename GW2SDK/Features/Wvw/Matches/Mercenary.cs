@@ -2,6 +2,4 @@
 
 [PublicAPI]
 [DataTransferObject]
-public sealed record Mercenary : Objective
-{
-}
+public sealed record Mercenary : Objective;

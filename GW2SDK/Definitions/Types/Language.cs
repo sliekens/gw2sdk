@@ -7,7 +7,7 @@ namespace GuildWars2;
 public sealed class Language
 {
     private static readonly Regex Alpha2Pattern = new(
-        @"^[a-z]{2}$",
+        "^[a-z]{2}$",
         RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled
     );
 

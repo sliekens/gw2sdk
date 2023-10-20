@@ -2,6 +2,4 @@
 
 [PublicAPI]
 [DataTransferObject]
-public sealed record Spawn : Objective
-{
-}
+public sealed record Spawn : Objective;
