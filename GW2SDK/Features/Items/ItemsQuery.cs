@@ -93,11 +93,12 @@ public sealed class ItemsQuery
         )
         {
             var result = await GetItemsByIds(
-                chunk,
-                language,
-                missingMemberBehavior,
-                cancellationToken
-            );
+                    chunk,
+                    language,
+                    missingMemberBehavior,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return result.Value;
         }
     }
@@ -121,8 +122,7 @@ public sealed class ItemsQuery
             progress,
             cancellationToken
         );
-        await foreach (var item in producer
-            .ConfigureAwait(false))
+        await foreach (var item in producer.ConfigureAwait(false))
         {
             yield return item;
         }

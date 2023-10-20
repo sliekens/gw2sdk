@@ -107,11 +107,12 @@ public sealed class WardrobeQuery
         )
         {
             var result = await GetSkinsByIds(
-                chunk,
-                language,
-                missingMemberBehavior,
-                cancellationToken
-            );
+                    chunk,
+                    language,
+                    missingMemberBehavior,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return result.Value;
         }
     }
@@ -135,8 +136,7 @@ public sealed class WardrobeQuery
             progress,
             cancellationToken
         );
-        await foreach (var skin in producer
-            .ConfigureAwait(false))
+        await foreach (var skin in producer.ConfigureAwait(false))
         {
             yield return skin;
         }
