@@ -36,10 +36,8 @@ public sealed record Quaggan
 ## Example JSON converter
 
 ``` csharp
-using System;
 using System.Text.Json;
 using GuildWars2.Json;
-using JetBrains.Annotations;
 
 namespace GuildWars2.Quaggans;
 
@@ -54,10 +52,13 @@ public static class QuagganJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        // Define all the members of the JSON data using RequiredMember,
-        // OptionalMember or (only for value types) NullableMember
-        RequiredMember id = new("id");
-        RequiredMember url = new("url");
+        // Define all the members of the JSON data using RequiredMember
+        RequiredMember id = "id";
+        RequiredMember url = "url";
+
+        // You can also use OptionalMember or NullableMember (for value types)
+        OptionalMember optional = "optional-field"; // default(T) when missing
+        NullableMember nullable = "nullable-field"; // Nullable<T> when missing
 
         // Iterate over all the properties of the JSON object
         foreach (var member in json.EnumerateObject())
@@ -81,11 +82,11 @@ public static class QuagganJson
         }
 
         // Create an instance of your record with all the values collected from the JsonElement
-        // The Select() method can throw an exception when no value is found for a RequiredMember 
+        // The Map() method can throw an InvalidOperationException when the RequiredMember is missing 
         return new Quaggan
         {
-            Id = id.Select(value => value.GetStringRequired()),
-            PictureHref = url.Select(value => value.GetStringRequired())
+            Id = id.Map(value => value.GetStringRequired()),
+            PictureHref = url.Map(value => value.GetStringRequired())
         };
     }
 }
