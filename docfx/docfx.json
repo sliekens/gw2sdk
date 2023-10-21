@@ -9,8 +9,8 @@
           ]
         }
       ],
-      "dest": "../docs/api",
-      "outputFormat": "markdown",
+      "dest": "api",
+      "outputFormat": "mref",
       "includePrivateMembers": false,
       "disableGitFeatures": false,
       "disableDefaultFilter": false,
@@ -25,12 +25,20 @@
     "content": [
       {
         "files": [
-          "api/**.md",
+          "api/**.yml",
           "api/toc.yml"
+        ]
+      },
+      {
+        "files": [
+          "guide/**.md",
+          "guide/**/toc.yml",
+          "toc.yml",
+          "*.md"
         ]
       }
     ],
-    "output": "_site",
+    "output": "../artifacts",
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],
     "template": [

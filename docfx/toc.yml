@@ -1,3 +1,4 @@
+- name: Getting started
+  href: guide/
 - name: API browser
   href: api/
-  homepage: api/index.md

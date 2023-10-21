@@ -39,7 +39,7 @@ jobs:
       - name: Generate API reference
         run: |
           dotnet tool restore
-          dotnet docfx metadata docfx/docfx.json
+          dotnet docfx docfx/docfx.json
 
       - name: Build site
         run: |

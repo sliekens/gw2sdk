@@ -1,0 +1,14 @@
+- name: Installation
+  href: install.md
+- name: Basic usage
+  href: usage.md
+- name: Translations
+  href: translations.md
+- name: Game Link
+  href: game-link.md
+- name: Using HTTP client factory
+  href: http-client-factory.md
+- name: Resiliency
+  href: resiliency.md
+- name: Feedback
+  href: feedback.md
