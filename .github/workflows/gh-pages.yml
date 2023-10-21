@@ -19,6 +19,9 @@ concurrency:
 jobs:
   build-docs:
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/sliekens/gw2sdk/devcontainer:latest
+      options: --user 1001
     permissions:
       contents: read
     steps:

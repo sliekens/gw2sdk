@@ -25,6 +25,12 @@
       "commands": [
         "dotnet-outdated"
       ]
+    },
+    "docfx": {
+      "version": "2.71.1",
+      "commands": [
+        "docfx"
+      ]
     }
   }
 }
