@@ -54,4 +54,4 @@ The **GW2SDK** project has the following development dependencies:
 - **Microsoft.NETFramework.ReferenceAssemblies** allows targeting .NET Framework without having the .NET Framework SDK installed.
 - **ReSharper Command Line Tools** (dotnet jb) is used for code cleanup.
 - **HttpRepl** (dotnet httprepl) is used to explore the API.
-- **VuePress** is used to generate the user documentation.
+- **Docfx** is used to generate the user documentation.
