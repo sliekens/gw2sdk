@@ -3,7 +3,8 @@ import { defaultTheme } from 'vuepress';
 export default {
   title: 'GW2SDK',
   description: 'A .NET code library for interacting with the Guild Wars 2 API and game client.',
-  base: '/gw2sdk/',
+  dest: '../artifacts/user-manual',
+  base: '/gw2sdk/user-manual/',
   theme: defaultTheme({
     repo: 'sliekens/gw2sdk',
     docsDir: 'docs',

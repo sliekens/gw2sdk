@@ -1,4 +1,4 @@
-name: Update GitHub Pages
+name: Publish GitHub Pages
 
 on:
   push:
@@ -44,7 +44,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: docs/.vuepress/dist
+          path: artifacts
 
   publish-docs:
     needs: build-docs
