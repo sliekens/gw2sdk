@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Currencies;
 
@@ -11,6 +11,7 @@ public class Currencies
 
         var actual = await sut.Wallet.GetCurrencies();
 
+        Assert.NotNull(actual.ResultContext);
         Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
         Assert.All(
             actual.Value,

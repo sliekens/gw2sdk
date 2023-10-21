@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Races;
 
@@ -11,6 +11,7 @@ public class Races
 
         var actual = await sut.Races.GetRaces();
 
+        Assert.NotNull(actual.ResultContext);
         Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
     }
 }

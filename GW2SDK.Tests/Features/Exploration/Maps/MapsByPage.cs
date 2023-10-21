@@ -16,6 +16,7 @@ public class MapsByPage
         var actual = await sut.Maps.GetMapsByPage(continentId, floorId, regionId, 0, 3);
 
         Assert.Equal(3, actual.Value.Count);
+        Assert.NotNull(actual.PageContext);
         Assert.Equal(3, actual.PageContext.PageSize);
         Assert.All(
             actual.Value,

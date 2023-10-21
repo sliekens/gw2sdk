@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Emblems;
 
@@ -12,6 +12,7 @@ public class BackgroundEmblems
         var actual = await sut.Emblems.GetBackgroundEmblems();
 
         Assert.NotEmpty(actual.Value);
+        Assert.NotNull(actual.ResultContext);
         Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
         Assert.All(
             actual.Value,

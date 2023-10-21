@@ -12,6 +12,7 @@ public class Abilities
         var actual = await sut.Wvw.GetAbilities();
 
         Assert.NotEmpty(actual.Value);
+        Assert.NotNull(actual.ResultContext);
         Assert.Equal(actual.Value.Count, actual.ResultContext.ResultCount);
         Assert.Equal(actual.Value.Count, actual.ResultContext.ResultTotal);
         Assert.All(

@@ -13,6 +13,7 @@ public class GuildUpgrades
         var actual = await sut.Guilds.GetGuildUpgrades();
 
         Assert.NotEmpty(actual.Value);
+        Assert.NotNull(actual.ResultContext);
         Assert.Equal(actual.Value.Count, actual.ResultContext.ResultCount);
         Assert.Equal(actual.Value.Count, actual.ResultContext.ResultTotal);
         Assert.All(

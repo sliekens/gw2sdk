@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Traits;
 
@@ -11,6 +11,7 @@ public class Traits
 
         var actual = await sut.Traits.GetTraits();
 
+        Assert.NotNull(actual.ResultContext);
         Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
         Assert.All(
             actual.Value,

@@ -29,6 +29,7 @@ public class PointsOfInterestByFilter
         );
 
         Assert.Equal(ids.Count, actual.Value.Count);
+        Assert.NotNull(actual.ResultContext);
         Assert.Equal(ids.Count, actual.ResultContext.ResultCount);
         actual.Value.All_have_ids();
         actual.Value.Some_have_names();

@@ -12,6 +12,7 @@ public class ProfessionsByPage
         var actual = await sut.Professions.GetProfessionsByPage(0, 3);
 
         Assert.Equal(3, actual.Value.Count);
+        Assert.NotNull(actual.PageContext);
         Assert.Equal(3, actual.PageContext.PageSize);
     }
 }

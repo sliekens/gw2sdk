@@ -12,8 +12,10 @@ public class LegendsByPage
         const int pageSize = 3;
         var actual = await sut.Legends.GetLegendsByPage(0, pageSize);
 
+        Assert.NotNull(actual.PageContext);
         Assert.Equal(pageSize, actual.PageContext.PageSize);
         Assert.Equal(pageSize, actual.Value.Count);
+        Assert.NotNull(actual.ResultContext);
         Assert.Equal(pageSize, actual.ResultContext.ResultCount);
         Assert.All(
             actual.Value,

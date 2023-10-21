@@ -13,7 +13,9 @@ public class OutfitsByPage
         var actual = await sut.Outfits.GetOutfitsByPage(0, pageSize);
 
         Assert.Equal(pageSize, actual.Value.Count);
+        Assert.NotNull(actual.PageContext);
         Assert.Equal(pageSize, actual.PageContext.PageSize);
+        Assert.NotNull(actual.ResultContext);
         Assert.Equal(pageSize, actual.ResultContext.ResultCount);
         Assert.All(
             actual.Value,

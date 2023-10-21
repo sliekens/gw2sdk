@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Achievements;
 
@@ -19,6 +19,7 @@ public class AchievementsByFilter
         var actual = await sut.Achievements.GetAchievementsByIds(ids);
 
         Assert.Equal(ids.Count, actual.Value.Count);
+        Assert.NotNull(actual.ResultContext);
         Assert.Equal(ids.Count, actual.ResultContext.ResultCount);
         Assert.All(
             actual.Value,

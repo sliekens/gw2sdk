@@ -12,8 +12,10 @@ public class ContinentsByPage
         const int pageSize = 3;
         var actual = await sut.Maps.GetContinentsByPage(0, pageSize);
 
+        Assert.NotNull(actual.PageContext);
         Assert.Equal(pageSize, actual.PageContext.PageSize);
         Assert.Equal(2, actual.Value.Count);
+        Assert.NotNull(actual.ResultContext);
         Assert.Equal(2, actual.ResultContext.ResultCount);
         Assert.All(
             actual.Value,

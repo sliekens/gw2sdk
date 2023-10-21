@@ -12,6 +12,7 @@ public class MatchesScoresIndex
         var actual = await sut.Wvw.GetMatchesScoresIndex();
 
         Assert.NotEmpty(actual.Value);
+        Assert.NotNull(actual.ResultContext);
         Assert.Equal(actual.Value.Count, actual.ResultContext.ResultCount);
         Assert.Equal(actual.Value.Count, actual.ResultContext.ResultTotal);
     }

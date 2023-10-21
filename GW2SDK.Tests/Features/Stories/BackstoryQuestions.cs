@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Stories;
 
@@ -11,6 +11,7 @@ public class BackstoryQuestions
 
         var actual = await sut.Stories.GetBackstoryQuestions();
 
+        Assert.NotNull(actual.ResultContext);
         Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
 
         Assert.All(

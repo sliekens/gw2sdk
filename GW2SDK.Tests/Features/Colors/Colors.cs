@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Colors;
 
@@ -11,6 +11,7 @@ public class Colors
 
         var actual = await sut.Dyes.GetColors();
 
+        Assert.NotNull(actual.ResultContext);
         Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
         Assert.All(
             actual.Value,

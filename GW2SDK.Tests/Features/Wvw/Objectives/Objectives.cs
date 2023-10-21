@@ -12,6 +12,7 @@ public class Objectives
         var actual = await sut.Wvw.GetObjectives();
 
         Assert.NotEmpty(actual.Value);
+        Assert.NotNull(actual.ResultContext);
         Assert.Equal(actual.Value.Count, actual.ResultContext.ResultCount);
         Assert.Equal(actual.Value.Count, actual.ResultContext.ResultTotal);
         Assert.All(

@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.MailCarriers;
 
@@ -12,6 +12,7 @@ public class MailCarriersByPage
         var actual = await sut.MailCarriers.GetMailCarriersByPage(0, 3);
 
         Assert.Equal(3, actual.Value.Count);
+        Assert.NotNull(actual.PageContext);
         Assert.Equal(3, actual.PageContext.PageSize);
     }
 }

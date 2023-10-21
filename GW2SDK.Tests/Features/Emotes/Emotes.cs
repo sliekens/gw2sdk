@@ -12,6 +12,7 @@ public class Emotes
         var actual = await sut.Emotes.GetEmotes();
 
         Assert.NotEmpty(actual.Value);
+        Assert.NotNull(actual.ResultContext);
         Assert.Equal(actual.Value.Count, actual.ResultContext.ResultCount);
         Assert.Equal(actual.Value.Count, actual.ResultContext.ResultTotal);
         Assert.All(

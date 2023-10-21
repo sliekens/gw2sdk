@@ -22,6 +22,7 @@ public class MapsByFilter
         var actual = await sut.Maps.GetMapsByIds(continentId, floorId, regionId, ids);
 
         Assert.Equal(ids.Count, actual.Value.Count);
+        Assert.NotNull(actual.ResultContext);
         Assert.Equal(ids.Count, actual.ResultContext.ResultCount);
         Assert.All(
             actual.Value,

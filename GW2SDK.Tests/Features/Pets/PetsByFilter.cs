@@ -19,6 +19,7 @@ public class PetsByFilter
         var actual = await sut.Pets.GetPetsByIds(ids);
 
         Assert.Equal(ids.Count, actual.Value.Count);
+        Assert.NotNull(actual.ResultContext);
         Assert.Equal(ids.Count, actual.ResultContext.ResultCount);
         Assert.All(
             actual.Value,

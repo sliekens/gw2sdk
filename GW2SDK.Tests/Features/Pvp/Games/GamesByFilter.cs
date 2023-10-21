@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pvp.Games;
 
@@ -17,6 +17,7 @@ public class GamesByFilter
         var actual = await sut.Pvp.GetGamesByIds(ids.Value, accessToken.Key);
 
         Assert.Equal(ids.Value.Count, actual.Value.Count);
+        Assert.NotNull(actual.ResultContext);
         Assert.Equal(ids.Value.Count, actual.ResultContext.ResultCount);
         Assert.All(
             actual.Value,

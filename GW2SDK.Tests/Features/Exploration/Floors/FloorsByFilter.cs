@@ -21,6 +21,7 @@ public class FloorsByFilter
         var actual = await sut.Maps.GetFloorsByIds(continentId, ids);
 
         Assert.Equal(ids.Count, actual.Value.Count);
+        Assert.NotNull(actual.ResultContext);
         Assert.Equal(ids.Count, actual.ResultContext.ResultCount);
         Assert.All(
             actual.Value,

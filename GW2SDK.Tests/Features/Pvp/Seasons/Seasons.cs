@@ -12,6 +12,7 @@ public class Seasons
         var actual = await sut.Pvp.GetSeasons();
 
         Assert.NotEmpty(actual.Value);
+        Assert.NotNull(actual.ResultContext);
         Assert.Equal(actual.Value.Count, actual.ResultContext.ResultCount);
         Assert.Equal(actual.Value.Count, actual.ResultContext.ResultTotal);
         Assert.All(

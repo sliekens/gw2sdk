@@ -12,6 +12,7 @@ public class Characters
 
         var actual = await sut.Accounts.GetCharacters(accessToken.Key);
 
+        Assert.NotNull(actual.ResultContext);
         Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
     }
 }

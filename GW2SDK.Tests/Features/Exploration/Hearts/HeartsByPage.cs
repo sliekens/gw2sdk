@@ -17,6 +17,7 @@ public class HeartsByPage
         var actual = await sut.Maps.GetHeartsByPage(continentId, floorId, regionId, mapId, 0, 3);
 
         Assert.Equal(3, actual.Value.Count);
+        Assert.NotNull(actual.PageContext);
         Assert.Equal(3, actual.PageContext.PageSize);
         actual.Value.All_have_ids();
         actual.Value.Some_have_objectives();
