@@ -4,8 +4,9 @@ on:
   push:
     branches: [main]
     paths:
-      - docs/**
       - .github/workflows/gh-pages.yml
+      - docfx.json
+      - docs/**
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -39,7 +40,7 @@ jobs:
       - name: Build documentation site
         run: |
           dotnet tool restore
-          dotnet docfx docs/docfx.json
+          dotnet docfx
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2

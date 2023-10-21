@@ -3,13 +3,13 @@
     {
       "src": [
         {
-          "src": "../GW2SDK",
+          "src": "GW2SDK",
           "files": [
             "GW2SDK.csproj"
           ]
         }
       ],
-      "dest": "api",
+      "dest": "docs/api",
       "outputFormat": "mref",
       "includePrivateMembers": false,
       "disableGitFeatures": false,
@@ -22,12 +22,17 @@
     }
   ],
   "build": {
+    "globalMetadata": {
+      "_appTitle": "GW2SDK"
+    },
     "content": [
       {
         "files": [
           "api/**.yml",
           "api/toc.yml"
-        ]
+        ],
+        "src": "docs",
+        "dest": ""
       },
       {
         "files": [
@@ -35,11 +40,21 @@
           "guide/**/toc.yml",
           "toc.yml",
           "*.md"
-        ]
+        ],
+        "src": "docs",
+        "dest": ""
       }
     ],
-    "output": "../artifacts",
-    "globalMetadataFiles": [],
+    "resource": [
+      {
+        "files": [
+          "images/**"
+        ],
+        "src": "docs",
+        "dest": ""
+      }
+    ],
+    "output": "artifacts",
     "fileMetadataFiles": [],
     "template": [
       "default",

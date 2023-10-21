@@ -10,7 +10,7 @@ The **GW2SDK.TestDataHelper** project contains a console application which is us
 
 The **wiki** folder contains a copy of this wiki. I use the wiki to document the development process, and to keep track of the decisions I make. It is not meant to be read by users of the library.
 
-The **docs** folder contains the source files for the user documentation. It is a VuePress project, which is a static site generator based on Vue.js. The user documentation is hosted on GitHub Pages, and the deployment is automated with GitHub Actions. The **package.json** file is used to define the dependencies of the user documentation. It allows `npm install` and `npm start` to be used to run a local copy of the user documentation. The documentation is available at <https://sliekens.github.io/gw2sdk/>.
+The **docs** folder contains the source files for the user documentation. It is a docfx project, which is a static site generator for building technical documentation. The user documentation is hosted on GitHub Pages, and the deployment is automated with GitHub Actions. The documentation is available at <https://sliekens.github.io/gw2sdk/>. You can view the documentation locally with `dotnet docfx --serve` from the root of the repository. (After you install docfx with `dotnet tool restore`.)
 
 The **samples** folder contains a few sample projects which demonstrate how to use the library. You can run them to see how the library works. Some samples like [Basic usage](https://sliekens.github.io/gw2sdk/guide/usage.html) are used in the user documentation.
 
