@@ -30,9 +30,6 @@ jobs:
         with:
           fetch-depth: 0 # (no limit)
           filter: blob:none
-          sparse-checkout: |
-            docs
-            samples
           fetch-tags: false
           show-progress: false
 
