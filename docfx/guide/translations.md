@@ -12,7 +12,7 @@ Currently the supported languages are:
 
 English is used if you don't specify any language, or if the specified language is not supported. Let's have a [discussion] if you think `CurrentUICulture` should always be used by default.
 
-@[code](../../samples/Translations/Program.cs)
+[!code-csharp[](../../samples/Translations/Program.cs)]
 
 Output
 

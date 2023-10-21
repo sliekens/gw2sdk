@@ -39,12 +39,12 @@ The [wiki] contains information for contributors. (The _docs_ directory contains
 [codespaces-badge]:https://github.com/codespaces/badge.svg
 [free]:https://docs.github.com/en/billing/managing-billing-for-github-codespaces/about-billing-for-github-codespaces#monthly-included-storage-and-core-hours-for-personal-accounts
 [github.dev]:https://github.dev/sliekens/gw2sdk
-[installation]:https://sliekens.github.io/gw2sdk/guide/install.html
-[introduction]:https://sliekens.github.io/gw2sdk/guide/
+[installation]:https://sliekens.github.io/gw2sdk/guide/install
+[introduction]:https://sliekens.github.io/gw2sdk/
 [new-discussion]:https://github.com/sliekens/gw2sdk/discussions/new/choose
 [new-issue]:https://github.com/sliekens/gw2sdk/issues/new
 [nuget-vpre-badge]:https://img.shields.io/nuget/vpre/GW2SDK
 [nuget]:https://www.nuget.org/packages/GW2SDK/
-[usage]:https://sliekens.github.io/gw2sdk/guide/usage.html
+[usage]:https://sliekens.github.io/gw2sdk/guide/usage
 [user manual]:https://sliekens.github.io/gw2sdk/
 [wiki]:https://github.com/sliekens/gw2sdk/wiki

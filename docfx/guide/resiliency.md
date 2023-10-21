@@ -10,7 +10,8 @@ To combat these issues, make your HttpClient more resilient with automatic retri
 
 I recommend at least adding some timeouts and automatic retries. Tweak as needed.
 
-@[code](../../samples/PollyUsage/Program.cs)
+[!code-csharp[](../../samples/PollyUsage/Program.cs)]
+
 
 ## MissingMemberBehavior
 

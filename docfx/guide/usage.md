@@ -6,7 +6,7 @@ The `Gw2Client` has a single dependency on `System.Net.Http.HttpClient` which yo
 
 A very simple console app might look like this.
 
-@[code cs{4-5,9,14,20}](../../samples/BasicUsage/Program.cs)
+[!code-csharp[](../../samples/BasicUsage/Program.cs?highlight=4-5,9,14,20)]
 
 Output
 

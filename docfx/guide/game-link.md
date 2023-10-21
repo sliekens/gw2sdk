@@ -53,7 +53,7 @@ var link = GameLink.Open(name: "OtherLink");
 
 Here is an example observer that prints each update to the console. The link provides map IDs and specialization IDs which refer to `/v2/maps` and `/v2/specializations`. The example uses the `Gw2Client` to query the API for the map and specialization names.
 
-@[code cs{22,41,45}](../../../../samples/Mumble/GameReporter.cs)
+[!code-csharp[](../../samples/Mumble/GameReporter.cs?highlight=22,41,45)]
 
 Example output:
 
