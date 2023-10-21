@@ -23,7 +23,8 @@
   ],
   "build": {
     "globalMetadata": {
-      "_appTitle": "GW2SDK"
+      "_appTitle": "GW2SDK",
+      "_appLogoPath": "images/logo-50x50.png"
     },
     "content": [
       {
