@@ -36,7 +36,7 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v3
 
-      - name: Generate API reference
+      - name: Build documentation site
         run: |
           dotnet tool restore
           dotnet docfx docfx/docfx.json
