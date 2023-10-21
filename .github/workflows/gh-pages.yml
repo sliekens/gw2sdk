@@ -41,11 +41,6 @@ jobs:
           dotnet tool restore
           dotnet docfx docfx/docfx.json
 
-      - name: Build site
-        run: |
-          npm ci --prefix docs
-          npm run build --prefix docs
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
