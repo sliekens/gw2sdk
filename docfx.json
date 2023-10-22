@@ -29,31 +29,28 @@
     },
     "content": [
       {
+        "src": "docs",
         "files": [
           "api/**.yml",
           "api/toc.yml"
-        ],
-        "src": "docs",
-        "dest": ""
+        ]
       },
       {
+        "src": "docs",
         "files": [
           "guide/**.md",
           "guide/**/toc.yml",
           "toc.yml",
           "*.md"
-        ],
-        "src": "docs",
-        "dest": ""
+        ]
       }
     ],
     "resource": [
       {
+        "src": "docs",
         "files": [
           "images/**"
-        ],
-        "src": "docs",
-        "dest": ""
+        ]
       }
     ],
     "output": "artifacts",
@@ -66,5 +63,31 @@
     "postProcessors": [],
     "keepFileLink": false,
     "disableGitFeatures": false
+  },
+  "pdf": {
+    "content": [
+      {
+        "src": "docs",
+        "files": [
+          "guide/**.md",
+          "guide/**/toc.yml",
+          "api/**.yml",
+          "api/toc.yml"
+        ]
+      }
+    ],
+    "resource": [
+      {
+        "files": [
+          "images/**"
+        ],
+        "src": "docs",
+        "dest": ""
+      }
+    ],
+    "output": "artifacts",
+    "wkhtmltopdf": {
+      "additionalArguments": "--enable-local-file-access"
+    }
   }
 }

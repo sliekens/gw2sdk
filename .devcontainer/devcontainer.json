@@ -10,6 +10,7 @@
       "dotnetRuntimeVersions": "7.0" // required by csdevkit
     },
     "./mono": {},
+    "./wkhtmltopdf": {},
     "ghcr.io/devcontainers/features/powershell:1": {}
   },
   "containerEnv": {
