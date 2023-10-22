@@ -26,6 +26,7 @@
     <MinVerDefaultPreReleaseIdentifiers>preview.0</MinVerDefaultPreReleaseIdentifiers>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>Guild Wars;gw;gw2;gw2api;gw2client;tp;tradingpost;trading post;mumble;mumblelink;arenanet;anet;api</PackageTags>
+    <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -51,7 +52,8 @@
   </Choose>
 
   <ItemGroup>
-    <None Include="../README.md" Pack="true" PackagePath="\" />
+    <None Include="../README.md" Pack="true" PackagePath="" />
+    <None Include="icon.png" Pack="true" PackagePath=""/>
   </ItemGroup>
 
   <ItemGroup>
