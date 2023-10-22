@@ -39,13 +39,13 @@ public sealed class QueryBuilder : IEnumerable
     public void Add(string key, string value)
     {
         EnsureMutable();
-        arguments.Add(new Argument(key, value.UrlEncoded()));
+        arguments.Add(new Argument(key, value));
     }
 
     public void Add(string key, IEnumerable<string> values)
     {
         EnsureMutable();
-        arguments.Add(new Argument(key, values.Select(value => value.UrlEncoded()).ToCsv()));
+        arguments.Add(new Argument(key, values.Select(value => value).ToCsv()));
     }
 
     public void Add(string key, IEnumerable<int> values)

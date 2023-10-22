@@ -9,7 +9,7 @@ internal class SchemaVersionHandler : DelegatingHandler
     {
         if (request.RequestUri?.Host == BaseAddress.DefaultUri.Host)
         {
-            var recommended = Uri.EscapeDataString(SchemaVersion.Recommended);
+            var recommended = SchemaVersion.Recommended;
             var version = request.RequestUri.Query.IndexOf(
                 "v=" + recommended,
                 StringComparison.Ordinal

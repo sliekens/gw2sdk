@@ -39,7 +39,5 @@ internal static class Strings
         }
     }
 
-    internal static string UrlEncoded(this string value) => Uri.EscapeDataString(value);
-
     internal static string ToCsv(this IEnumerable<string> values) => string.Join(",", values);
 }

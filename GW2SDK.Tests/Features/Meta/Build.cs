@@ -7,9 +7,15 @@ public class Build
     [Fact]
     public async Task Build_is_stuck()
     {
+        var builder = new UriBuilder(BaseAddress.DefaultUri)
+        {
+            Path = "v2/build",
+            Query = "v=" + SchemaVersion.Recommended
+        };
+
         // The API has been stuck on build 115267 since at least 2021-05-27
         using var http = Composer.Resolve<HttpClient>();
-        var actual = await http.GetStringAsync("v2/build?v=" + Uri.EscapeDataString(SchemaVersion.Recommended));
+        var actual = await http.GetStringAsync(builder.Uri);
         Assert.Contains("115267", actual);
     }
 
