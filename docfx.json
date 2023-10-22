@@ -25,6 +25,8 @@
     "globalMetadata": {
       "_appTitle": "GW2SDK",
       "_appLogoPath": "images/logo-50x50.png",
+      "_appFaviconPath": "images/logo-50x50.png",
+      "_appFooter": "Built with docfx, theme created by Singulink",
       "_enableSearch": true
     },
     "content": [
@@ -64,7 +66,7 @@
     "fileMetadataFiles": [],
     "template": [
       "default",
-      "modern",
+      "docs/templates/singulinkfx",
       "docs/template-options"
     ],
     "postProcessors": [],
