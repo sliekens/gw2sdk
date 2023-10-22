@@ -1,4 +1,6 @@
-﻿using GuildWars2.Items;
+﻿using System.Net.Http;
+using System.Threading.Tasks;
+using GuildWars2.Items;
 using Spectre.Console;
 
 namespace MostVersatileMaterials;

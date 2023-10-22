@@ -1,4 +1,8 @@
-﻿using GuildWars2;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using GuildWars2;
 using GuildWars2.Achievements;
 using GuildWars2.Achievements.Dailies;
 using Microsoft.Extensions.DependencyInjection;

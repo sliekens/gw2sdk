@@ -1,10 +1,11 @@
-﻿<!--EXTERNAL_PROPERTIES: GITHUB_ACTIONS-->
+<!--EXTERNAL_PROPERTIES: GITHUB_ACTIONS-->
 <!--EXTERNAL_PROPERTIES: SYMBOL_PACKAGE-->
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0;net462</TargetFrameworks>
     <RootNamespace>GuildWars2</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyTitle>GW2 Client SDK</AssemblyTitle>
     <Product>GW2SDK</Product>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>

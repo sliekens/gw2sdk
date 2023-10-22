@@ -1,4 +1,5 @@
-﻿using GuildWars2;
+﻿using System.Net.Http;
+using GuildWars2;
 using MostVersatileMaterials;
 using Spectre.Console;
 
