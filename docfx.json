@@ -15,7 +15,7 @@
       "disableGitFeatures": false,
       "disableDefaultFilter": false,
       "noRestore": false,
-      "namespaceLayout": "flattened",
+      "namespaceLayout": "nested",
       "memberLayout": "samePage",
       "enumSortOrder": "declaringOrder",
       "allowCompilationErrors": false
