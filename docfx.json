@@ -85,7 +85,7 @@
         "dest": ""
       }
     ],
-    "output": "artifacts",
+    "output": "artifacts/pdf",
     "wkhtmltopdf": {
       "additionalArguments": "--enable-local-file-access"
     }
