@@ -3,8 +3,7 @@ using GuildWars2.Pvp.Amulets;
 
 namespace GuildWars2.Pvp.Http;
 
-[PublicAPI]
-public sealed class AmuletByIdRequest : IHttpRequest<Replica<Amulet>>
+internal sealed class AmuletByIdRequest : IHttpRequest<Replica<Amulet>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/pvp/amulets") { AcceptEncoding = "gzip" };

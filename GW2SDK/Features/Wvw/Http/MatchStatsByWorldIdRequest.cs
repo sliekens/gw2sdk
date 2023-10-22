@@ -3,8 +3,7 @@ using GuildWars2.Wvw.Matches.Stats;
 
 namespace GuildWars2.Wvw.Http;
 
-[PublicAPI]
-public sealed class MatchStatsByWorldIdRequest : IHttpRequest<Replica<MatchStats>>
+internal sealed class MatchStatsByWorldIdRequest : IHttpRequest<Replica<MatchStats>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/wvw/matches/stats") { AcceptEncoding = "gzip" };

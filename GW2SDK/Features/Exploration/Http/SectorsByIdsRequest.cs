@@ -5,8 +5,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Http;
 
-[PublicAPI]
-public sealed class SectorsByIdsRequest : IHttpRequest<Replica<HashSet<Sector>>>
+internal sealed class SectorsByIdsRequest : IHttpRequest<Replica<HashSet<Sector>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(
         Get,

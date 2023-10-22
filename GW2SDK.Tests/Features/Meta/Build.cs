@@ -1,5 +1,4 @@
-﻿using GuildWars2.Meta.Http;
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Meta;
 
@@ -8,20 +7,22 @@ public class Build
     [Fact]
     public async Task Build_is_stuck()
     {
+        // The API has been stuck on build 115267 since at least 2021-05-27
         using var http = Composer.Resolve<HttpClient>();
-        var request = new BuildRequest();
-        var response = await request.SendAsync(http, CancellationToken.None);
-        var actual = response.Value;
-        Assert.Equal(115267, actual.Id);
+        var actual = await http.GetStringAsync("v2/build?v=" + Uri.EscapeDataString(SchemaVersion.Recommended));
+        Assert.Contains("115267", actual);
     }
 
     [Fact]
-    public async Task It_can_get_the_current_build()
+    public async Task Current_build_can_be_found()
     {
+        // A undocumented API is used to find the current build
+        // The same API is used by the Guild Wars 2 launcher to check for updates
+        // So in a sense, this is the "official" way to find the current build
         var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Meta.GetBuild();
 
-        Assert.True(actual.Value.Id >= 127440);
+        Assert.True(actual.Value.Id > 115267);
     }
 }

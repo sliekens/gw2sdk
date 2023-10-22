@@ -3,8 +3,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Achievements.Http;
 
-[PublicAPI]
-public sealed class AchievementGroupByIdRequest : IHttpRequest<Replica<AchievementGroup>>
+internal sealed class AchievementGroupByIdRequest : IHttpRequest<Replica<AchievementGroup>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/achievements/groups") { AcceptEncoding = "gzip" };

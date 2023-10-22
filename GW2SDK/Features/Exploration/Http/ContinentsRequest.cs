@@ -4,8 +4,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Http;
 
-[PublicAPI]
-public sealed class ContinentsRequest : IHttpRequest<Replica<HashSet<Continent>>>
+internal sealed class ContinentsRequest : IHttpRequest<Replica<HashSet<Continent>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/continents")
     {

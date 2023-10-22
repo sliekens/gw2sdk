@@ -2,8 +2,7 @@
 
 namespace GuildWars2.MapChests.Http;
 
-[PublicAPI]
-public sealed class MapChestByIdRequest : IHttpRequest<Replica<MapChest>>
+internal sealed class MapChestByIdRequest : IHttpRequest<Replica<MapChest>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/mapchests") { AcceptEncoding = "gzip" };

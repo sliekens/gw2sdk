@@ -2,8 +2,7 @@
 
 namespace GuildWars2.Colors.Http;
 
-[PublicAPI]
-public sealed class ColorByIdRequest : IHttpRequest<Replica<Dye>>
+internal sealed class ColorByIdRequest : IHttpRequest<Replica<Dye>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/colors")
     {

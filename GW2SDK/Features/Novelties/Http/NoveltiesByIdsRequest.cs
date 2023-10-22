@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Novelties.Http;
 
-[PublicAPI]
-public sealed class NoveltiesByIdsRequest : IHttpRequest<Replica<HashSet<Novelty>>>
+internal sealed class NoveltiesByIdsRequest : IHttpRequest<Replica<HashSet<Novelty>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/novelties") { AcceptEncoding = "gzip" };

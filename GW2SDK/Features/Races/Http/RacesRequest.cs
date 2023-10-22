@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Races.Http;
 
-[PublicAPI]
-public sealed class RacesRequest : IHttpRequest<Replica<HashSet<Race>>>
+internal sealed class RacesRequest : IHttpRequest<Replica<HashSet<Race>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/races")
     {

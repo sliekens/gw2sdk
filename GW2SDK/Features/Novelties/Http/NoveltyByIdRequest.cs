@@ -2,8 +2,7 @@
 
 namespace GuildWars2.Novelties.Http;
 
-[PublicAPI]
-public sealed class NoveltyByIdRequest : IHttpRequest<Replica<Novelty>>
+internal sealed class NoveltyByIdRequest : IHttpRequest<Replica<Novelty>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/novelties") { AcceptEncoding = "gzip" };

@@ -2,8 +2,7 @@
 
 namespace GuildWars2.Quests.Http;
 
-[PublicAPI]
-public sealed class QuestByIdRequest : IHttpRequest<Replica<Quest>>
+internal sealed class QuestByIdRequest : IHttpRequest<Replica<Quest>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/quests") { AcceptEncoding = "gzip" };

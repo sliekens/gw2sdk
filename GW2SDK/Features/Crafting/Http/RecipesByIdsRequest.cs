@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Crafting.Http;
 
-[PublicAPI]
-public sealed class RecipesByIdsRequest : IHttpRequest<Replica<HashSet<Recipe>>>
+internal sealed class RecipesByIdsRequest : IHttpRequest<Replica<HashSet<Recipe>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/recipes")
     {

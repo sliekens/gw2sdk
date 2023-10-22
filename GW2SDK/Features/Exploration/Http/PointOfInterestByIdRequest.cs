@@ -4,8 +4,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Exploration.Http;
 
-[PublicAPI]
-public sealed class PointOfInterestByIdRequest : IHttpRequest<Replica<PointOfInterest>>
+internal sealed class PointOfInterestByIdRequest : IHttpRequest<Replica<PointOfInterest>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(
         Get,

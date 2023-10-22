@@ -2,8 +2,7 @@
 
 namespace GuildWars2.SuperAdventureBox.Http;
 
-[PublicAPI]
-public sealed class
+internal sealed class
     SuperAdventureBoxProgressRequest : IHttpRequest<Replica<SuperAdventureBoxProgress>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/characters/:id/sab")

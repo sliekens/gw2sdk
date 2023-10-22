@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Stories.Http;
 
-[PublicAPI]
-public sealed class BackstoryAnswersByPageRequest : IHttpRequest<Replica<HashSet<BackstoryAnswer>>>
+internal sealed class BackstoryAnswersByPageRequest : IHttpRequest<Replica<HashSet<BackstoryAnswer>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/backstory/answers")
     {

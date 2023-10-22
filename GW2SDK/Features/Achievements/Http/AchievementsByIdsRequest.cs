@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Achievements.Http;
 
-[PublicAPI]
-public sealed class AchievementsByIdsRequest : IHttpRequest<Replica<HashSet<Achievement>>>
+internal sealed class AchievementsByIdsRequest : IHttpRequest<Replica<HashSet<Achievement>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/achievements")
     {

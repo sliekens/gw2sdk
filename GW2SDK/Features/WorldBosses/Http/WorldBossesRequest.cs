@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.WorldBosses.Http;
 
-[PublicAPI]
-public sealed class WorldBossesRequest : IHttpRequest<Replica<HashSet<string>>>
+internal sealed class WorldBossesRequest : IHttpRequest<Replica<HashSet<string>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/worldbosses")
     {

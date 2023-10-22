@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Legends.Http;
 
-[PublicAPI]
-public sealed class LegendsByPageRequest : IHttpRequest<Replica<HashSet<Legend>>>
+internal sealed class LegendsByPageRequest : IHttpRequest<Replica<HashSet<Legend>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/legends") { AcceptEncoding = "gzip" };

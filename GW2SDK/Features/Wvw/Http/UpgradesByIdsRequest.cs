@@ -4,8 +4,7 @@ using GuildWars2.Wvw.Upgrades;
 
 namespace GuildWars2.Wvw.Http;
 
-[PublicAPI]
-public sealed class UpgradesByIdsRequest : IHttpRequest<Replica<HashSet<ObjectiveUpgrade>>>
+internal sealed class UpgradesByIdsRequest : IHttpRequest<Replica<HashSet<ObjectiveUpgrade>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/wvw/upgrades") { AcceptEncoding = "gzip" };

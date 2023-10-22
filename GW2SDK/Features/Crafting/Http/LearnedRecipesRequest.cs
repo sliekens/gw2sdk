@@ -2,8 +2,7 @@
 
 namespace GuildWars2.Crafting.Http;
 
-[PublicAPI]
-public sealed class LearnedRecipesRequest : IHttpRequest<Replica<HashSet<int>>>
+internal sealed class LearnedRecipesRequest : IHttpRequest<Replica<HashSet<int>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/recipes")

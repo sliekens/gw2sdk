@@ -4,8 +4,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Achievements.Http;
 
-[PublicAPI]
-public sealed class
+internal sealed class
     AchievementGroupsByPageRequest : IHttpRequest<Replica<HashSet<AchievementGroup>>>
 {
     private static readonly HttpRequestMessageTemplate Template =

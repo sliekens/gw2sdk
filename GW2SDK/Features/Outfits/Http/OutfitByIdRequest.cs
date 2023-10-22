@@ -2,8 +2,7 @@
 
 namespace GuildWars2.Outfits.Http;
 
-[PublicAPI]
-public sealed class OutfitByIdRequest : IHttpRequest<Replica<Outfit>>
+internal sealed class OutfitByIdRequest : IHttpRequest<Replica<Outfit>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/outfits") { AcceptEncoding = "gzip" };

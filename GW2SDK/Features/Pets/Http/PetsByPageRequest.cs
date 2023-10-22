@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Pets.Http;
 
-[PublicAPI]
-public sealed class PetsByPageRequest : IHttpRequest<Replica<HashSet<Pet>>>
+internal sealed class PetsByPageRequest : IHttpRequest<Replica<HashSet<Pet>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/pets") { AcceptEncoding = "gzip" };

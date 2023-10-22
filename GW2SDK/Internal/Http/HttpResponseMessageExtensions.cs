@@ -3,8 +3,7 @@ using System.Text.Json;
 
 namespace GuildWars2.Http;
 
-[PublicAPI]
-public static class HttpResponseMessageExtensions
+internal static class HttpResponseMessageExtensions
 {
     public static async Task<JsonDocument> ReadAsJsonAsync(
         this HttpContent instance,

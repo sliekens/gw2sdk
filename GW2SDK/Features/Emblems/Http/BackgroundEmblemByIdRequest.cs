@@ -2,8 +2,7 @@
 
 namespace GuildWars2.Emblems.Http;
 
-[PublicAPI]
-public sealed class BackgroundEmblemByIdRequest : IHttpRequest<Replica<Emblem>>
+internal sealed class BackgroundEmblemByIdRequest : IHttpRequest<Replica<Emblem>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/emblem/backgrounds") { AcceptEncoding = "gzip" };

@@ -2,8 +2,7 @@
 
 namespace GuildWars2.BuildStorage.Http;
 
-[PublicAPI]
-public sealed class ActiveBuildTabRequest : IHttpRequest<Replica<BuildTab>>
+internal sealed class ActiveBuildTabRequest : IHttpRequest<Replica<BuildTab>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/buildtabs/active") { AcceptEncoding = "gzip" };

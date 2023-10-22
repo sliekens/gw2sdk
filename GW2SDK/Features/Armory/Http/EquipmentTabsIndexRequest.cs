@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Armory.Http;
 
-[PublicAPI]
-public sealed class EquipmentTabsIndexRequest : IHttpRequest<Replica<HashSet<int>>>
+internal sealed class EquipmentTabsIndexRequest : IHttpRequest<Replica<HashSet<int>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/equipmenttabs")

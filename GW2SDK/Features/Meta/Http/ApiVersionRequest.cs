@@ -2,8 +2,7 @@
 
 namespace GuildWars2.Meta.Http;
 
-[PublicAPI]
-public sealed class ApiVersionRequest : IHttpRequest<Replica<ApiVersion>>
+internal sealed class ApiVersionRequest : IHttpRequest<Replica<ApiVersion>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/:version.json")
     {

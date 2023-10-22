@@ -4,8 +4,7 @@ using GuildWars2.Pvp.Seasons;
 
 namespace GuildWars2.Pvp.Http;
 
-[PublicAPI]
-public sealed class LeaderboardEntriesRequest : IHttpRequest<Replica<HashSet<LeaderboardEntry>>>
+internal sealed class LeaderboardEntriesRequest : IHttpRequest<Replica<HashSet<LeaderboardEntry>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/pvp/seasons/:id/leaderboards/:board/:region") { AcceptEncoding = "gzip" };

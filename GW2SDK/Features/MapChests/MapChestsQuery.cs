@@ -20,7 +20,7 @@ public sealed class MapChestsQuery
         CancellationToken cancellationToken = default
     )
     {
-        var request = new ReceivedMapChestsRequests { AccessToken = accessToken };
+        var request = new ReceivedMapChestsRequest { AccessToken = accessToken };
         return request.SendAsync(http, cancellationToken);
     }
 

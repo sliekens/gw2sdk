@@ -3,8 +3,7 @@ using GuildWars2.Pvp.Stats;
 
 namespace GuildWars2.Pvp.Http;
 
-[PublicAPI]
-public sealed class StatsRequest : IHttpRequest<Replica<AccountStats>>
+internal sealed class StatsRequest : IHttpRequest<Replica<AccountStats>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/pvp/stats")
     {

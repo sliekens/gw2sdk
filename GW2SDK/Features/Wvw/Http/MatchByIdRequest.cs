@@ -3,8 +3,7 @@ using GuildWars2.Wvw.Matches;
 
 namespace GuildWars2.Wvw.Http;
 
-[PublicAPI]
-public sealed class MatchByIdRequest : IHttpRequest<Replica<Match>>
+internal sealed class MatchByIdRequest : IHttpRequest<Replica<Match>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/wvw/matches") { AcceptEncoding = "gzip" };

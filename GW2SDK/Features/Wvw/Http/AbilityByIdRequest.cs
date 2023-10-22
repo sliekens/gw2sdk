@@ -3,8 +3,7 @@ using GuildWars2.Wvw.Abilities;
 
 namespace GuildWars2.Wvw.Http;
 
-[PublicAPI]
-public sealed class AbilityByIdRequest : IHttpRequest<Replica<Ability>>
+internal sealed class AbilityByIdRequest : IHttpRequest<Replica<Ability>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/wvw/abilities") { AcceptEncoding = "gzip" };

@@ -2,8 +2,7 @@
 
 namespace GuildWars2.Stories.Http;
 
-[PublicAPI]
-public sealed class BackstoryQuestionByIdRequest : IHttpRequest<Replica<BackstoryQuestion>>
+internal sealed class BackstoryQuestionByIdRequest : IHttpRequest<Replica<BackstoryQuestion>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/backstory/questions") { AcceptEncoding = "gzip" };

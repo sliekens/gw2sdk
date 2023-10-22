@@ -2,8 +2,7 @@
 
 namespace GuildWars2.Professions.Http;
 
-[PublicAPI]
-public sealed class ProfessionByNameRequest : IHttpRequest<Replica<Profession>>
+internal sealed class ProfessionByNameRequest : IHttpRequest<Replica<Profession>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/professions")
     {

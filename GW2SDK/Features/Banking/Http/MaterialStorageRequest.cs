@@ -2,8 +2,7 @@
 
 namespace GuildWars2.Banking.Http;
 
-[PublicAPI]
-public sealed class MaterialStorageRequest : IHttpRequest<Replica<MaterialStorage>>
+internal sealed class MaterialStorageRequest : IHttpRequest<Replica<MaterialStorage>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/account/materials")
     {

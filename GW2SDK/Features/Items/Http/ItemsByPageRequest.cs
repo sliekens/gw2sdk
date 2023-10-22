@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items.Http;
 
-[PublicAPI]
-public sealed class ItemsByPageRequest : IHttpRequest<Replica<HashSet<Item>>>
+internal sealed class ItemsByPageRequest : IHttpRequest<Replica<HashSet<Item>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/items")
     {

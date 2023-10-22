@@ -4,8 +4,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Http;
 
-[PublicAPI]
-public sealed class GuildBankRequest : IHttpRequest<Replica<List<GuildBankTab>>>
+internal sealed class GuildBankRequest : IHttpRequest<Replica<List<GuildBankTab>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/guild/:id/stash") { AcceptEncoding = "gzip" };

@@ -3,8 +3,7 @@ using GuildWars2.Wvw.Objectives;
 
 namespace GuildWars2.Wvw.Http;
 
-[PublicAPI]
-public sealed class ObjectiveByIdRequest : IHttpRequest<Replica<Objective>>
+internal sealed class ObjectiveByIdRequest : IHttpRequest<Replica<Objective>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/wvw/objectives") { AcceptEncoding = "gzip" };

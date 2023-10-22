@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Files.Http;
 
-[PublicAPI]
-public sealed class FilesRequest : IHttpRequest<Replica<HashSet<Asset>>>
+internal sealed class FilesRequest : IHttpRequest<Replica<HashSet<Asset>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/files")
     {

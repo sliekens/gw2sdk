@@ -4,8 +4,7 @@ using GuildWars2.Wvw.Matches.Scores;
 
 namespace GuildWars2.Wvw.Http;
 
-[PublicAPI]
-public sealed class MatchesScoresByIdsRequest : IHttpRequest<Replica<HashSet<MatchScores>>>
+internal sealed class MatchesScoresByIdsRequest : IHttpRequest<Replica<HashSet<MatchScores>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/wvw/matches/scores") { AcceptEncoding = "gzip" };

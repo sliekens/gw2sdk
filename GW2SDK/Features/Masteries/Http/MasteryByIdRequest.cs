@@ -2,8 +2,7 @@
 
 namespace GuildWars2.Masteries.Http;
 
-[PublicAPI]
-public sealed class MasteryByIdRequest : IHttpRequest<Replica<Mastery>>
+internal sealed class MasteryByIdRequest : IHttpRequest<Replica<Mastery>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/masteries")
     {

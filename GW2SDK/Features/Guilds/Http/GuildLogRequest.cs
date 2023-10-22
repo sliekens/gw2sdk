@@ -4,8 +4,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Http;
 
-[PublicAPI]
-public sealed class GuildLogRequest : IHttpRequest<Replica<List<GuildLog>>>
+internal sealed class GuildLogRequest : IHttpRequest<Replica<List<GuildLog>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/guild/:id/log") { AcceptEncoding = "gzip" };

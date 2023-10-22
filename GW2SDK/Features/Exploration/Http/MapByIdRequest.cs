@@ -4,8 +4,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Exploration.Http;
 
-[PublicAPI]
-public sealed class MapByIdRequest : IHttpRequest<Replica<Map>>
+internal sealed class MapByIdRequest : IHttpRequest<Replica<Map>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/continents/:id/floors/:floor/regions/:region/maps")

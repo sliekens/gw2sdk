@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Http;
 
-[PublicAPI]
-public sealed class SeasonIndexRequest : IHttpRequest<Replica<HashSet<string>>>
+internal sealed class SeasonIndexRequest : IHttpRequest<Replica<HashSet<string>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/pvp/seasons")
     {

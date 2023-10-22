@@ -2,8 +2,7 @@
 
 namespace GuildWars2.Achievements.Http;
 
-[PublicAPI]
-public sealed class AchievementByIdRequest : IHttpRequest<Replica<Achievement>>
+internal sealed class AchievementByIdRequest : IHttpRequest<Replica<Achievement>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/achievements")
     {

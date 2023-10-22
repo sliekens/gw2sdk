@@ -4,8 +4,7 @@ using GuildWars2.Pvp.Standings;
 
 namespace GuildWars2.Pvp.Http;
 
-[PublicAPI]
-public sealed class StandingsRequest : IHttpRequest<Replica<HashSet<Standing>>>
+internal sealed class StandingsRequest : IHttpRequest<Replica<HashSet<Standing>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/pvp/standings")
     {

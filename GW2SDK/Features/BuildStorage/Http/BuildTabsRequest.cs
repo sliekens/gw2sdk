@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.BuildStorage.Http;
 
-[PublicAPI]
-public sealed class BuildTabsRequest : IHttpRequest<Replica<HashSet<BuildTab>>>
+internal sealed class BuildTabsRequest : IHttpRequest<Replica<HashSet<BuildTab>>>
 {
     // There is no ids=all support, but page=0 works
     private static readonly HttpRequestMessageTemplate Template =

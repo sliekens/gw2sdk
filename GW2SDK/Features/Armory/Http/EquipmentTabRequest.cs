@@ -3,8 +3,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Armory.Http;
 
-[PublicAPI]
-public sealed class EquipmentTabRequest : IHttpRequest<Replica<EquipmentTab>>
+internal sealed class EquipmentTabRequest : IHttpRequest<Replica<EquipmentTab>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/equipmenttabs/:tab") { AcceptEncoding = "gzip" };

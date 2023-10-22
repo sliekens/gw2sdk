@@ -4,8 +4,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Home.Http;
 
-[PublicAPI]
-public sealed class CatsByIdsRequest : IHttpRequest<Replica<HashSet<Cat>>>
+internal sealed class CatsByIdsRequest : IHttpRequest<Replica<HashSet<Cat>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/home/cats") { AcceptEncoding = "gzip" };

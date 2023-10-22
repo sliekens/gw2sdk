@@ -3,8 +3,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.BuildStorage.Http;
 
-[PublicAPI]
-public sealed class BuildTabRequest : IHttpRequest<Replica<BuildTab>>
+internal sealed class BuildTabRequest : IHttpRequest<Replica<BuildTab>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/buildtabs/:tab") { AcceptEncoding = "gzip" };

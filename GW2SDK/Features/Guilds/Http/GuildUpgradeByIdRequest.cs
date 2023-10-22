@@ -3,8 +3,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Guilds.Http;
 
-[PublicAPI]
-public sealed class GuildUpgradeByIdRequest : IHttpRequest<Replica<GuildUpgrade>>
+internal sealed class GuildUpgradeByIdRequest : IHttpRequest<Replica<GuildUpgrade>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/guild/upgrades") { AcceptEncoding = "gzip" };

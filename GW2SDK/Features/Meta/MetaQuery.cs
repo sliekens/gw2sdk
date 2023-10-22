@@ -30,10 +30,12 @@ public sealed class MetaQuery
         CancellationToken cancellationToken = default
     )
     {
-        // The public API doesn't work right
+        // The API has been stuck on build 115267 since at least 2021-05-27
         //var request = new BuildRequest { MissingMemberBehavior = missingMemberBehavior };
 
-        // Use this private API
+        // A undocumented API is used to find the current build
+        // The same API is used by the Guild Wars 2 launcher to check for updates
+        // So in a sense, this is the "official" way to find the current build
         var request = new AssetCdnBuildRequest();
 
         return request.SendAsync(http, cancellationToken);

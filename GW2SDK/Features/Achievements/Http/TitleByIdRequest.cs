@@ -3,8 +3,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Achievements.Http;
 
-[PublicAPI]
-public sealed class TitleByIdRequest : IHttpRequest<Replica<Title>>
+internal sealed class TitleByIdRequest : IHttpRequest<Replica<Title>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/titles")
     {

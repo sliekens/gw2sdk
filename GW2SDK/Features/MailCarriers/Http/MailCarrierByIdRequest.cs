@@ -2,8 +2,7 @@
 
 namespace GuildWars2.MailCarriers.Http;
 
-[PublicAPI]
-public sealed class MailCarrierByIdRequest : IHttpRequest<Replica<MailCarrier>>
+internal sealed class MailCarrierByIdRequest : IHttpRequest<Replica<MailCarrier>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/mailcarriers")
     {

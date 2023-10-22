@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Gliders.Http;
 
-[PublicAPI]
-public sealed class GlidersIndexRequest : IHttpRequest<Replica<HashSet<int>>>
+internal sealed class GlidersIndexRequest : IHttpRequest<Replica<HashSet<int>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/gliders")
     {

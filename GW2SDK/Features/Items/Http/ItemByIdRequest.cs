@@ -2,8 +2,7 @@
 
 namespace GuildWars2.Items.Http;
 
-[PublicAPI]
-public sealed class ItemByIdRequest : IHttpRequest<Replica<Item>>
+internal sealed class ItemByIdRequest : IHttpRequest<Replica<Item>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/items")
     {

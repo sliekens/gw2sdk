@@ -4,8 +4,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Commerce.Http;
 
-[PublicAPI]
-public sealed class ItemPricesByIdsRequest : IHttpRequest<Replica<HashSet<ItemPrice>>>
+internal sealed class ItemPricesByIdsRequest : IHttpRequest<Replica<HashSet<ItemPrice>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/commerce/prices")
     {

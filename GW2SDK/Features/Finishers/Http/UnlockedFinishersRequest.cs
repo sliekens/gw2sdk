@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Finishers.Http;
 
-[PublicAPI]
-public sealed class UnlockedFinishersRequest : IHttpRequest<Replica<HashSet<UnlockedFinisher>>>
+internal sealed class UnlockedFinishersRequest : IHttpRequest<Replica<HashSet<UnlockedFinisher>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/account/finishers")
     {

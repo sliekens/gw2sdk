@@ -2,8 +2,7 @@
 
 namespace GuildWars2.Http;
 
-[PublicAPI]
-public sealed record HttpRequestMessageTemplate(HttpMethod Method, string Path)
+internal sealed record HttpRequestMessageTemplate(HttpMethod Method, string Path)
 {
     private readonly QueryBuilder queryBuilder = QueryBuilder.Empty;
 

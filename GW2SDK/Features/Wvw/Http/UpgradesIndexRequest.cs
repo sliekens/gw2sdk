@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Http;
 
-[PublicAPI]
-public sealed class UpgradesIndexRequest : IHttpRequest<Replica<HashSet<int>>>
+internal sealed class UpgradesIndexRequest : IHttpRequest<Replica<HashSet<int>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/wvw/upgrades")
     {

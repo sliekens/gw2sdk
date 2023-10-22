@@ -2,8 +2,7 @@
 
 namespace GuildWars2.Legends.Http;
 
-[PublicAPI]
-public sealed class LegendByIdRequest : IHttpRequest<Replica<Legend>>
+internal sealed class LegendByIdRequest : IHttpRequest<Replica<Legend>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/legends") { AcceptEncoding = "gzip" };

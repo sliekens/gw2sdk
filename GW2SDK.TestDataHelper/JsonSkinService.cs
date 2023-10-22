@@ -1,4 +1,4 @@
-﻿using GuildWars2.Skins.Http;
+﻿using GuildWars2.Skins;
 
 namespace GuildWars2.TestDataHelper;
 
@@ -23,8 +23,11 @@ public class JsonSkinService
         return entries.Values.ToHashSet();
     }
 
-    private async Task<HashSet<int>> GetSkinIds() =>
-        await new SkinsIndexRequest().SendAsync(http, CancellationToken.None);
+    private async Task<HashSet<int>> GetSkinIds()
+    {
+        var wardrobe = new WardrobeQuery(http);
+        return await wardrobe.GetSkinsIndex();
+    }
 
     public IAsyncEnumerable<(int, string)> GetJsonSkinsByIds(
         IReadOnlyCollection<int> ids,

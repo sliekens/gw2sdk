@@ -2,8 +2,7 @@
 
 namespace GuildWars2.Quaggans.Http;
 
-[PublicAPI]
-public sealed class QuagganByIdRequest : IHttpRequest<Replica<Quaggan>>
+internal sealed class QuagganByIdRequest : IHttpRequest<Replica<Quaggan>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/quaggans")
     {

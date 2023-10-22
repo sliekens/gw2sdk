@@ -2,8 +2,7 @@
 
 namespace GuildWars2.Accounts.Http;
 
-[PublicAPI]
-public sealed class AccountRequest : IHttpRequest<Replica<AccountSummary>>
+internal sealed class AccountRequest : IHttpRequest<Replica<AccountSummary>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/account")
     {

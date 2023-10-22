@@ -3,8 +3,7 @@ using GuildWars2.Pvp.Seasons;
 
 namespace GuildWars2.Pvp.Http;
 
-[PublicAPI]
-public sealed class SeasonByIdRequest : IHttpRequest<Replica<Season>>
+internal sealed class SeasonByIdRequest : IHttpRequest<Replica<Season>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/pvp/seasons") { AcceptEncoding = "gzip" };

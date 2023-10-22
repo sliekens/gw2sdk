@@ -3,8 +3,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Achievements.Http;
 
-[PublicAPI]
-public sealed class DailyAchievementsRequest : IHttpRequest<Replica<DailyAchievementGroup>>
+internal sealed class DailyAchievementsRequest : IHttpRequest<Replica<DailyAchievementGroup>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/achievements/daily")
     {

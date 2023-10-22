@@ -4,8 +4,7 @@ using GuildWars2.Pvp.Amulets;
 
 namespace GuildWars2.Pvp.Http;
 
-[PublicAPI]
-public sealed class AmuletRequest : IHttpRequest<Replica<HashSet<Amulet>>>
+internal sealed class AmuletRequest : IHttpRequest<Replica<HashSet<Amulet>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/pvp/amulets")
     {

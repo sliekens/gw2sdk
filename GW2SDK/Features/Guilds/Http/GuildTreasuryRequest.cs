@@ -4,8 +4,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Http;
 
-[PublicAPI]
-public sealed class GuildTreasuryRequest : IHttpRequest<Replica<List<GuildTreasurySlot>>>
+internal sealed class GuildTreasuryRequest : IHttpRequest<Replica<List<GuildTreasurySlot>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/guild/:id/treasury") { AcceptEncoding = "gzip" };

@@ -2,8 +2,7 @@
 
 namespace GuildWars2.Tokens.Http;
 
-[PublicAPI]
-public sealed class TokenInfoRequest : IHttpRequest<Replica<TokenInfo>>
+internal sealed class TokenInfoRequest : IHttpRequest<Replica<TokenInfo>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/tokeninfo")
     {

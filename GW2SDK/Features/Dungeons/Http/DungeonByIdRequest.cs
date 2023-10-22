@@ -2,8 +2,7 @@
 
 namespace GuildWars2.Dungeons.Http;
 
-[PublicAPI]
-public sealed class DungeonByIdRequest : IHttpRequest<Replica<Dungeon>>
+internal sealed class DungeonByIdRequest : IHttpRequest<Replica<Dungeon>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/dungeons") { AcceptEncoding = "gzip" };

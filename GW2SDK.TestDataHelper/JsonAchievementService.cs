@@ -1,4 +1,4 @@
-﻿using GuildWars2.Achievements.Http;
+﻿using GuildWars2.Achievements;
 
 namespace GuildWars2.TestDataHelper;
 
@@ -23,8 +23,11 @@ public class JsonAchievementService
         return entries.Values.ToHashSet();
     }
 
-    private async Task<HashSet<int>> GetAchievementIds() =>
-        await new AchievementsIndexRequest().SendAsync(http, CancellationToken.None);
+    private async Task<HashSet<int>> GetAchievementIds()
+    {
+        var achievements = new AchievementsQuery(http);
+        return await achievements.GetAchievementsIndex();
+    }
 
     public IAsyncEnumerable<(int, string)> GetJsonAchievementsByIds(
         IReadOnlyCollection<int> ids,

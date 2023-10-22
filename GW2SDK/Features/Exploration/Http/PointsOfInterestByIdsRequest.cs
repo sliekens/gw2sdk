@@ -5,8 +5,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Http;
 
-[PublicAPI]
-public sealed class PointsOfInterestByIdsRequest : IHttpRequest<Replica<HashSet<PointOfInterest>>>
+internal sealed class PointsOfInterestByIdsRequest : IHttpRequest<Replica<HashSet<PointOfInterest>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(
         Get,

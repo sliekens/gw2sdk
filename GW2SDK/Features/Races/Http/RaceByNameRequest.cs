@@ -2,8 +2,7 @@
 
 namespace GuildWars2.Races.Http;
 
-[PublicAPI]
-public sealed class RaceByNameRequest : IHttpRequest<Replica<Race>>
+internal sealed class RaceByNameRequest : IHttpRequest<Replica<Race>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/races")
     {

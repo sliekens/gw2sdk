@@ -3,8 +3,7 @@ using static GuildWars2.Http.Gw2ResponseHeaderName;
 
 namespace GuildWars2.Http;
 
-[PublicAPI]
-public static class HttpResponseHeaderExtensions
+internal static class HttpResponseHeaderExtensions
 {
     public static ResultContext? GetResultContext(this HttpResponseHeaders instance)
     {

@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Mounts.Http;
 
-[PublicAPI]
-public sealed class OwnedMountsRequest : IHttpRequest<Replica<HashSet<MountName>>>
+internal sealed class OwnedMountsRequest : IHttpRequest<Replica<HashSet<MountName>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/account/mounts/types")

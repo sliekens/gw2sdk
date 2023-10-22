@@ -3,8 +3,7 @@ using GuildWars2.Pvp.Games;
 
 namespace GuildWars2.Pvp.Http;
 
-[PublicAPI]
-public sealed class GameByIdRequest : IHttpRequest<Replica<Game>>
+internal sealed class GameByIdRequest : IHttpRequest<Replica<Game>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/pvp/games") { AcceptEncoding = "gzip" };

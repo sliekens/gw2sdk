@@ -3,8 +3,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Exploration.Http;
 
-[PublicAPI]
-public sealed class MapSummaryByIdRequest : IHttpRequest<Replica<MapSummary>>
+internal sealed class MapSummaryByIdRequest : IHttpRequest<Replica<MapSummary>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/maps")
     {

@@ -1,4 +1,4 @@
-﻿using GuildWars2.Items.Http;
+﻿using GuildWars2.Items;
 
 namespace GuildWars2.TestDataHelper;
 
@@ -23,8 +23,11 @@ public class JsonItemService
         return entries.Values.ToHashSet();
     }
 
-    private async Task<HashSet<int>> GetItemsIndex() =>
-        await new ItemsIndexRequest().SendAsync(http, CancellationToken.None);
+    private async Task<HashSet<int>> GetItemsIndex()
+    {
+        var items = new ItemsQuery(http);
+        return await items.GetItemsIndex();
+    }
 
     public IAsyncEnumerable<(int, string)> GetJsonItemsByIds(
         IReadOnlyCollection<int> ids,

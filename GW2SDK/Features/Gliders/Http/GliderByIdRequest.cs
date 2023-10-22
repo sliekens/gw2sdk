@@ -2,8 +2,7 @@
 
 namespace GuildWars2.Gliders.Http;
 
-[PublicAPI]
-public sealed class GliderByIdRequest : IHttpRequest<Replica<Glider>>
+internal sealed class GliderByIdRequest : IHttpRequest<Replica<Glider>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/gliders") { AcceptEncoding = "gzip" };

@@ -3,8 +3,7 @@ using GuildWars2.Pvp.Ranks;
 
 namespace GuildWars2.Pvp.Http;
 
-[PublicAPI]
-public sealed class RankByIdRequest : IHttpRequest<Replica<Rank>>
+internal sealed class RankByIdRequest : IHttpRequest<Replica<Rank>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/pvp/ranks") { AcceptEncoding = "gzip" };

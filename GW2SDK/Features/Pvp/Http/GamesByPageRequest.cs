@@ -4,8 +4,7 @@ using GuildWars2.Pvp.Games;
 
 namespace GuildWars2.Pvp.Http;
 
-[PublicAPI]
-public sealed class GamesByPageRequest : IHttpRequest<Replica<HashSet<Game>>>
+internal sealed class GamesByPageRequest : IHttpRequest<Replica<HashSet<Game>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/pvp/games")
     {

@@ -2,8 +2,7 @@
 
 namespace GuildWars2.Masteries.Http;
 
-[PublicAPI]
-public sealed class MasteryPointsProgressRequest : IHttpRequest<Replica<MasteryPointsProgress>>
+internal sealed class MasteryPointsProgressRequest : IHttpRequest<Replica<MasteryPointsProgress>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/account/mastery/points")

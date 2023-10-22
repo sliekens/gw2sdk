@@ -2,8 +2,7 @@
 
 namespace GuildWars2.Crafting.Http;
 
-[PublicAPI]
-public sealed class
+internal sealed class
     LearnedCraftingDisciplinesRequest : IHttpRequest<Replica<LearnedCraftingDisciplines>>
 {
     private static readonly HttpRequestMessageTemplate Template =

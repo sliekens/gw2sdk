@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Stories.Http;
 
-[PublicAPI]
-public sealed class SeasonsByPageRequest : IHttpRequest<Replica<HashSet<Season>>>
+internal sealed class SeasonsByPageRequest : IHttpRequest<Replica<HashSet<Season>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/stories/seasons") { AcceptEncoding = "gzip" };

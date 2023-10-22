@@ -3,8 +3,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Commerce.Http;
 
-[PublicAPI]
-public sealed class ItemPriceByIdRequest : IHttpRequest<Replica<ItemPrice>>
+internal sealed class ItemPriceByIdRequest : IHttpRequest<Replica<ItemPrice>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/commerce/prices")
     {

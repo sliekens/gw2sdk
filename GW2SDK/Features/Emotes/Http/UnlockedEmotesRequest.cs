@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Emotes.Http;
 
-[PublicAPI]
-public sealed class UnlockedEmotesRequest : IHttpRequest<Replica<HashSet<string>>>
+internal sealed class UnlockedEmotesRequest : IHttpRequest<Replica<HashSet<string>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/account/emotes")
     {

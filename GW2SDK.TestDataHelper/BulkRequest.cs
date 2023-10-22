@@ -1,9 +1,10 @@
-﻿using System.Text.Json;
+﻿using System.IO.Compression;
+using System.Text.Json;
 using GuildWars2.Http;
 
 namespace GuildWars2.TestDataHelper;
 
-public class BulkRequest : IHttpRequest<JsonDocument>
+public class BulkRequest
 {
     private readonly string requestUri;
 
@@ -25,21 +26,25 @@ public class BulkRequest : IHttpRequest<JsonDocument>
             { "v", "3" }
         };
 
-        var requestTemplate = new HttpRequestMessageTemplate(HttpMethod.Get, requestUri)
-        {
-            Arguments = search,
-            AcceptEncoding = "gzip"
-        };
+        var message = new HttpRequestMessage(HttpMethod.Get, requestUri + search);
+        message.Headers.AcceptEncoding.ParseAdd("gzip");
 
         using var response = await httpClient.SendAsync(
-                requestTemplate,
+                message,
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
 
-        await response.EnsureResult(cancellationToken).ConfigureAwait(false);
+        response.EnsureSuccessStatusCode();
 
-        return await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var content = await response.Content.ReadAsStreamAsync(cancellationToken)
+            .ConfigureAwait(false);
+        content = new GZipStream(content, CompressionMode.Compress);
+        await using (content)
+        {
+            return await JsonDocument.ParseAsync(content, cancellationToken: cancellationToken)
+                .ConfigureAwait(false);
+        }
     }
 }

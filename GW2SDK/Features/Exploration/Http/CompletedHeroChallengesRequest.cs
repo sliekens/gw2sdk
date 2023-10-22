@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Http;
 
-[PublicAPI]
-public sealed class CompletedHeroChallengesRequest : IHttpRequest<Replica<HashSet<string>>>
+internal sealed class CompletedHeroChallengesRequest : IHttpRequest<Replica<HashSet<string>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/heropoints")

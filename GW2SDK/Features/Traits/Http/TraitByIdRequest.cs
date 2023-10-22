@@ -2,8 +2,7 @@
 
 namespace GuildWars2.Traits.Http;
 
-[PublicAPI]
-public sealed class TraitByIdRequest : IHttpRequest<Replica<Trait>>
+internal sealed class TraitByIdRequest : IHttpRequest<Replica<Trait>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/traits")
     {

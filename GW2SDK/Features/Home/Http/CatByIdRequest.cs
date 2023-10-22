@@ -3,8 +3,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Home.Http;
 
-[PublicAPI]
-public sealed class CatByIdRequest : IHttpRequest<Replica<Cat>>
+internal sealed class CatByIdRequest : IHttpRequest<Replica<Cat>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/home/cats") { AcceptEncoding = "gzip" };

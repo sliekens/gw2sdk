@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Quests.Http;
 
-[PublicAPI]
-public sealed class QuestsIndexRequest : IHttpRequest<Replica<HashSet<int>>>
+internal sealed class QuestsIndexRequest : IHttpRequest<Replica<HashSet<int>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/quests")
     {
