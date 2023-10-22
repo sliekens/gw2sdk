@@ -20,13 +20,17 @@
     <RepositoryType>git</RepositoryType>
     <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <EnablePackageValidation>true</EnablePackageValidation>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <MinVerTagPrefix>v</MinVerTagPrefix>
     <MinVerMinimumMajorMinor>1.0</MinVerMinimumMajorMinor>
     <MinVerDefaultPreReleaseIdentifiers>preview.0</MinVerDefaultPreReleaseIdentifiers>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>Guild Wars;gw;gw2;gw2api;gw2client;tp;tradingpost;trading post;mumble;mumblelink;arenanet;anet;api</PackageTags>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <EnablePackageValidation>true</EnablePackageValidation>
+    <PackageValidationBaselineVersion>1.0.0-preview.3</PackageValidationBaselineVersion>
   </PropertyGroup>
 
   <Choose>
