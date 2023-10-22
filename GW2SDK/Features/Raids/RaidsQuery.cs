@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Raids;
+﻿using GuildWars2.Raids.Http;
+
+namespace GuildWars2.Raids;
 
 [PublicAPI]
 public sealed class RaidsQuery

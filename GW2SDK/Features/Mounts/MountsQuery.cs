@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Mounts;
+﻿using GuildWars2.Mounts.Http;
+
+namespace GuildWars2.Mounts;
 
 [PublicAPI]
 public sealed class MountsQuery

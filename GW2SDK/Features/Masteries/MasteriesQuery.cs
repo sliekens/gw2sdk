@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Masteries;
+﻿using GuildWars2.Masteries.Http;
+
+namespace GuildWars2.Masteries;
 
 [PublicAPI]
 public sealed class MasteriesQuery

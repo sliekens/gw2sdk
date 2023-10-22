@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.ItemStats;
+﻿using GuildWars2.ItemStats.Http;
+
+namespace GuildWars2.ItemStats;
 
 [PublicAPI]
 public sealed class ItemStatsQuery

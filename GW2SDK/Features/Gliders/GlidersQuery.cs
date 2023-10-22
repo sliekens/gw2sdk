@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Gliders;
+﻿using GuildWars2.Gliders.Http;
+
+namespace GuildWars2.Gliders;
 
 [PublicAPI]
 public sealed class GlidersQuery

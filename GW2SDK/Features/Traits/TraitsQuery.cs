@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Traits;
+﻿using GuildWars2.Traits.Http;
+
+namespace GuildWars2.Traits;
 
 [PublicAPI]
 public sealed class TraitsQuery

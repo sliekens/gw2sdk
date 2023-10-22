@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Professions;
+﻿using GuildWars2.Professions.Http;
+
+namespace GuildWars2.Professions;
 
 [PublicAPI]
 public sealed class ProfessionsQuery

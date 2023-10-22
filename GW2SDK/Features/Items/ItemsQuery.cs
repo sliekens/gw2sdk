@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using GuildWars2.Items.Http;
 
 namespace GuildWars2.Items;
 

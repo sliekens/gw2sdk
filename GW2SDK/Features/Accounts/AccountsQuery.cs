@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Accounts;
+﻿using GuildWars2.Accounts.Http;
+
+namespace GuildWars2.Accounts;
 
 [PublicAPI]
 public sealed class AccountsQuery

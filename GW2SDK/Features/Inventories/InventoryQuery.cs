@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Inventories;
+﻿using GuildWars2.Inventories.Http;
+
+namespace GuildWars2.Inventories;
 
 [PublicAPI]
 public sealed class InventoryQuery

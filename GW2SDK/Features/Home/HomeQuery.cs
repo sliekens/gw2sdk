@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Home.Cats;
+using GuildWars2.Home.Http;
 using GuildWars2.Home.Nodes;
 
 namespace GuildWars2.Home;

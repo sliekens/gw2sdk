@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.WorldBosses;
+﻿using GuildWars2.WorldBosses.Http;
+
+namespace GuildWars2.WorldBosses;
 
 [PublicAPI]
 public sealed class WorldBossesQuery

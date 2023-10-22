@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Files;
+﻿using GuildWars2.Files.Http;
+
+namespace GuildWars2.Files;
 
 [PublicAPI]
 public sealed class FilesQuery

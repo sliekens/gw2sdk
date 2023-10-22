@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using GuildWars2.Meta.Http;
 
 namespace GuildWars2.Meta;
 

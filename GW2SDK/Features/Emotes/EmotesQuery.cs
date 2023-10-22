@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Emotes;
+﻿using GuildWars2.Emotes.Http;
+
+namespace GuildWars2.Emotes;
 
 [PublicAPI]
 public sealed class EmotesQuery

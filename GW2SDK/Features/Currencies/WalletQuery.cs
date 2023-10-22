@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Currencies;
+﻿using GuildWars2.Currencies.Http;
+
+namespace GuildWars2.Currencies;
 
 [PublicAPI]
 public sealed class WalletQuery

@@ -1,6 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using GuildWars2.Commerce.Delivery;
 using GuildWars2.Commerce.Exchange;
+using GuildWars2.Commerce.Http;
 using GuildWars2.Commerce.Listings;
 using GuildWars2.Commerce.Prices;
 using GuildWars2.Commerce.Transactions;

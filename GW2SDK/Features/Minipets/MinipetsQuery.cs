@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Minipets;
+﻿using GuildWars2.Minipets.Http;
+
+namespace GuildWars2.Minipets;
 
 [PublicAPI]
 public sealed class MinipetsQuery

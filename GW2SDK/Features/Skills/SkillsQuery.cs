@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Skills;
+﻿using GuildWars2.Skills.Http;
+
+namespace GuildWars2.Skills;
 
 [PublicAPI]
 public sealed class SkillsQuery

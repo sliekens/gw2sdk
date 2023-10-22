@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Pets;
+﻿using GuildWars2.Pets.Http;
+
+namespace GuildWars2.Pets;
 
 [PublicAPI]
 public sealed class PetsQuery

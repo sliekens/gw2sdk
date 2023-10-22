@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Legends;
+﻿using GuildWars2.Legends.Http;
+
+namespace GuildWars2.Legends;
 
 [PublicAPI]
 public sealed class LegendsQuery

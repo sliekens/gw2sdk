@@ -1,4 +1,4 @@
-using GuildWars2.Meta;
+﻿using GuildWars2.Meta.Http;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Meta;

@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Tokens;
+﻿using GuildWars2.Tokens.Http;
+
+namespace GuildWars2.Tokens;
 
 [PublicAPI]
 public sealed class TokenProvider

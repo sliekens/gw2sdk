@@ -1,4 +1,4 @@
-﻿using GuildWars2.Achievements;
+﻿using GuildWars2.Achievements.Http;
 
 namespace GuildWars2.TestDataHelper;
 

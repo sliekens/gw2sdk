@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Novelties;
+﻿using GuildWars2.Novelties.Http;
+
+namespace GuildWars2.Novelties;
 
 [PublicAPI]
 public sealed class NoveltiesQuery

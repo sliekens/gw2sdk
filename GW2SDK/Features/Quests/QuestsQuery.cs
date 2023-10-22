@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Quests;
+﻿using GuildWars2.Quests.Http;
+
+namespace GuildWars2.Quests;
 
 [PublicAPI]
 public sealed class QuestsQuery

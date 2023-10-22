@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Finishers;
+﻿using GuildWars2.Finishers.Http;
+
+namespace GuildWars2.Finishers;
 
 [PublicAPI]
 public sealed class FinishersQuery

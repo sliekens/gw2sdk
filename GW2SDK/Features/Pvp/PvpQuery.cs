@@ -1,6 +1,7 @@
 ﻿using GuildWars2.Pvp.Amulets;
 using GuildWars2.Pvp.Games;
 using GuildWars2.Pvp.Heroes;
+using GuildWars2.Pvp.Http;
 using GuildWars2.Pvp.Ranks;
 using GuildWars2.Pvp.Seasons;
 using GuildWars2.Pvp.Standings;

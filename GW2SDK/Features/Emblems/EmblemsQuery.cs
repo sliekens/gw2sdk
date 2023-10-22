@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Emblems;
+﻿using GuildWars2.Emblems.Http;
+
+namespace GuildWars2.Emblems;
 
 [PublicAPI]
 public sealed class EmblemsQuery

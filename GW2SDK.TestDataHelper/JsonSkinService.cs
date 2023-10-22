@@ -1,4 +1,4 @@
-﻿using GuildWars2.Skins;
+﻿using GuildWars2.Skins.Http;
 
 namespace GuildWars2.TestDataHelper;
 

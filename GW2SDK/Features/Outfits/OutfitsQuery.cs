@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Outfits;
+﻿using GuildWars2.Outfits.Http;
+
+namespace GuildWars2.Outfits;
 
 [PublicAPI]
 public sealed class OutfitsQuery

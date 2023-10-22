@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Banking;
+﻿using GuildWars2.Banking.Http;
+
+namespace GuildWars2.Banking;
 
 [PublicAPI]
 public sealed class BankQuery

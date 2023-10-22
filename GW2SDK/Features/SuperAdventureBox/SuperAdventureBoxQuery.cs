@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.SuperAdventureBox;
+﻿using GuildWars2.SuperAdventureBox.Http;
+
+namespace GuildWars2.SuperAdventureBox;
 
 [PublicAPI]
 public sealed class SuperAdventureBoxQuery

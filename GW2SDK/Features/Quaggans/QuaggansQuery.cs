@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Quaggans;
+﻿using GuildWars2.Quaggans.Http;
+
+namespace GuildWars2.Quaggans;
 
 [PublicAPI]
 public sealed class QuaggansQuery

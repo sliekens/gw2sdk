@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Stories;
+﻿using GuildWars2.Stories.Http;
+
+namespace GuildWars2.Stories;
 
 [PublicAPI]
 public sealed class StoriesQuery

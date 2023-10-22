@@ -1,9 +1,9 @@
 ﻿using GuildWars2.Guilds.Bank;
+using GuildWars2.Guilds.Http;
 using GuildWars2.Guilds.Logs;
 using GuildWars2.Guilds.Members;
 using GuildWars2.Guilds.Permissions;
 using GuildWars2.Guilds.Ranks;
-using GuildWars2.Guilds.Search;
 using GuildWars2.Guilds.Storage;
 using GuildWars2.Guilds.Teams;
 using GuildWars2.Guilds.Treasury;

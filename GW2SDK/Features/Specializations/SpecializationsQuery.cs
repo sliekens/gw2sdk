@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Specializations;
+﻿using GuildWars2.Specializations.Http;
+
+namespace GuildWars2.Specializations;
 
 [PublicAPI]
 public sealed class SpecializationsQuery

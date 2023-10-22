@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.BuildStorage;
+﻿using GuildWars2.BuildStorage.Http;
+
+namespace GuildWars2.BuildStorage;
 
 [PublicAPI]
 public sealed record BuildStorageQuery

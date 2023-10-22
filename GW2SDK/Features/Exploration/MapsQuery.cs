@@ -1,7 +1,7 @@
 ﻿using GuildWars2.Exploration.Continents;
 using GuildWars2.Exploration.Floors;
 using GuildWars2.Exploration.Hearts;
-using GuildWars2.Exploration.HeroChallenges;
+using GuildWars2.Exploration.Http;
 using GuildWars2.Exploration.Maps;
 using GuildWars2.Exploration.PointsOfInterest;
 using GuildWars2.Exploration.Regions;

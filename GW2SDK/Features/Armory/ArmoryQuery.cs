@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Armory;
+﻿using GuildWars2.Armory.Http;
+
+namespace GuildWars2.Armory;
 
 [PublicAPI]
 public sealed class ArmoryQuery

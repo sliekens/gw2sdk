@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Dungeons;
+﻿using GuildWars2.Dungeons.Http;
+
+namespace GuildWars2.Dungeons;
 
 [PublicAPI]
 public sealed class DungeonsQuery

@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.MailCarriers;
+﻿using GuildWars2.MailCarriers.Http;
+
+namespace GuildWars2.MailCarriers;
 
 [PublicAPI]
 public sealed class MailCarriersQuery

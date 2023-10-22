@@ -2,6 +2,7 @@
 using GuildWars2.Achievements.Categories;
 using GuildWars2.Achievements.Dailies;
 using GuildWars2.Achievements.Groups;
+using GuildWars2.Achievements.Http;
 using GuildWars2.Achievements.Titles;
 
 namespace GuildWars2.Achievements;

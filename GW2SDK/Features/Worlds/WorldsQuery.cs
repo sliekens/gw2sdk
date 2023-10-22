@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Worlds;
+﻿using GuildWars2.Worlds.Http;
+
+namespace GuildWars2.Worlds;
 
 [PublicAPI]
 public sealed class WorldsQuery

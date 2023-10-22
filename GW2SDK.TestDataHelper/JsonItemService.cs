@@ -1,4 +1,4 @@
-﻿using GuildWars2.Items;
+﻿using GuildWars2.Items.Http;
 
 namespace GuildWars2.TestDataHelper;
 

@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Races;
+﻿using GuildWars2.Races.Http;
+
+namespace GuildWars2.Races;
 
 [PublicAPI]
 public sealed class RacesQuery

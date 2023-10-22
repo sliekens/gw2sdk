@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.MapChests;
+﻿using GuildWars2.MapChests.Http;
+
+namespace GuildWars2.MapChests;
 
 [PublicAPI]
 public sealed class MapChestsQuery
