@@ -31,17 +31,24 @@
       {
         "src": "docs",
         "files": [
-          "api/**.yml",
-          "api/toc.yml"
+          "index.md",
+          "toc.yml"
         ]
       },
       {
-        "src": "docs",
+        "src": "docs/guide",
+        "dest": "guide",
         "files": [
-          "guide/**.md",
-          "guide/**/toc.yml",
-          "toc.yml",
-          "*.md"
+          "**.md",
+          "**/toc.yml"
+        ]
+      },
+      {
+        "src": "docs/api",
+        "dest": "api",
+        "files": [
+          "**.yml",
+          "toc.yml"
         ]
       }
     ],
@@ -67,22 +74,26 @@
   "pdf": {
     "content": [
       {
-        "src": "docs",
+        "src": "docs/guide",
         "files": [
-          "guide/**.md",
-          "guide/**/toc.yml",
-          "api/**.yml",
-          "api/toc.yml"
+          "**.md",
+          "**/toc.yml"
+        ]
+      },
+      {
+        "src": "docs/api",
+        "files": [
+          "**.yml",
+          "toc.yml"
         ]
       }
     ],
     "resource": [
       {
+        "src": "docs",
         "files": [
           "images/**"
-        ],
-        "src": "docs",
-        "dest": ""
+        ]
       }
     ],
     "output": "artifacts/pdf",
