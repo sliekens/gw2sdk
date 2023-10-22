@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Upgrades;
 
-[PublicAPI]
-public static class BankBagJson
+internal static class BankBagJson
 {
     public static BankBag GetBankBag(
         this JsonElement json,

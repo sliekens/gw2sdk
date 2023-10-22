@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Crafting;
 
-[PublicAPI]
-public static class CraftingDisciplineJson
+internal static class CraftingDisciplineJson
 {
     public static CraftingDiscipline GetCraftingDiscipline(
         this JsonElement json,

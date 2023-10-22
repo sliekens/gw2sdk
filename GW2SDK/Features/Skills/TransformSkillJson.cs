@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Skills;
 
-[PublicAPI]
-public static class TransformSkillJson
+internal static class TransformSkillJson
 {
     public static TransformSkill GetTransformSkill(
         this JsonElement json,

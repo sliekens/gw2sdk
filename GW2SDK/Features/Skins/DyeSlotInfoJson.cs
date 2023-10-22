@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Skins;
 
-[PublicAPI]
-public static class DyeSlotInfoJson
+internal static class DyeSlotInfoJson
 {
     public static DyeSlotInfo GetDyeSlotInfo(
         this JsonElement json,

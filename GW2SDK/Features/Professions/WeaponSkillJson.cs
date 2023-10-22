@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Professions;
 
-[PublicAPI]
-public static class WeaponSkillJson
+internal static class WeaponSkillJson
 {
     public static WeaponSkill GetWeaponSkill(
         this JsonElement json,

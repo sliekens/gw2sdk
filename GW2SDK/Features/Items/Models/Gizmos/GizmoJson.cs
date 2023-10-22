@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class GizmoJson
+internal static class GizmoJson
 {
     public static Gizmo GetGizmo(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

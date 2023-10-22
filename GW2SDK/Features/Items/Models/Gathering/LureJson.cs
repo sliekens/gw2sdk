@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class LureJson
+internal static class LureJson
 {
     public static Lure GetLure(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

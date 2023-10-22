@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class MinipetUnlockerJson
+internal static class MinipetUnlockerJson
 {
     public static MinipetUnlocker GetMinipetUnlocker(
         this JsonElement json,

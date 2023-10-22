@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Emotes;
 
-[PublicAPI]
-public static class EmoteJson
+internal static class EmoteJson
 {
     public static Emote GetEmote(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Upgrades;
 
-[PublicAPI]
-public static class ClaimableJson
+internal static class ClaimableJson
 {
     public static Claimable GetClaimable(
         this JsonElement json,

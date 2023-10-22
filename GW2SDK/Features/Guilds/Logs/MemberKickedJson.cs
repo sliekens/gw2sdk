@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Logs;
 
-[PublicAPI]
-public static class MemberKickedJson
+internal static class MemberKickedJson
 {
     public static MemberKicked GetMemberKicked(
         this JsonElement json,

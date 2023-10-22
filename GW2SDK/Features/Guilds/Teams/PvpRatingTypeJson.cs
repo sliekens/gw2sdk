@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Teams;
 
-[PublicAPI]
-public static class PvpRatingTypeJson
+internal static class PvpRatingTypeJson
 {
     public static PvpRatingType GetRatingType(
         this JsonElement json,

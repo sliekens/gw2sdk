@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Skins;
 
-[PublicAPI]
-public static class FocusSkinJson
+internal static class FocusSkinJson
 {
     public static FocusSkin GetFocusSkin(
         this JsonElement json,

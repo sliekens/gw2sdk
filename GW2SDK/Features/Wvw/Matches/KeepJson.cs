@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Matches;
 
-[PublicAPI]
-public static class KeepJson
+internal static class KeepJson
 {
     public static Keep GetKeep(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

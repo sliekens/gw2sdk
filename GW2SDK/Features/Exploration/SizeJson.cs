@@ -3,8 +3,7 @@ using System.Text.Json;
 
 namespace GuildWars2.Exploration;
 
-[PublicAPI]
-public static class SizeJson
+internal static class SizeJson
 {
     public static Size GetDimensions(
         this JsonElement json,

@@ -2,8 +2,7 @@
 
 namespace GuildWars2.Banking;
 
-[PublicAPI]
-public static class MaterialStorageJson
+internal static class MaterialStorageJson
 {
     public static MaterialStorage GetMaterialStorage(
         this JsonElement json,

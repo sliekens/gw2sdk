@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Upgrades;
 
-[PublicAPI]
-public static class QueueJson
+internal static class QueueJson
 {
     public static Queue GetQueue(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

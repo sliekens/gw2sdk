@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Skins;
 
-[PublicAPI]
-public static class MiningToolSkinJson
+internal static class MiningToolSkinJson
 {
     public static MiningToolSkin GetMiningToolSkin(
         this JsonElement json,

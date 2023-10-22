@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Colors;
 
-[PublicAPI]
-public static class DyeJson
+internal static class DyeJson
 {
     public static Dye GetDye(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

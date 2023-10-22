@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Adventures;
 
-[PublicAPI]
-public static class AdventureJson
+internal static class AdventureJson
 {
     public static Adventure GetAdventure(
         this JsonElement json,

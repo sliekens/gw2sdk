@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Inventories;
 
-[PublicAPI]
-public static class BagJson
+internal static class BagJson
 {
     public static Bag? GetBag(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

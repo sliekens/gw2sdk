@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Stories;
 
-[PublicAPI]
-public static class BackstoryQuestionJson
+internal static class BackstoryQuestionJson
 {
     public static BackstoryQuestion GetBackstoryQuestion(
         this JsonElement json,

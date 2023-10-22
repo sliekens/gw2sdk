@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Traits;
 
-[PublicAPI]
-public static class BuffTraitFactJson
+internal static class BuffTraitFactJson
 {
     public static BuffTraitFact GetBuffTraitFact(
         this JsonElement json,

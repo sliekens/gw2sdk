@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Crafting;
 
-[PublicAPI]
-public static class SwordRecipeJson
+internal static class SwordRecipeJson
 {
     public static SwordRecipe GetSwordRecipe(
         this JsonElement json,

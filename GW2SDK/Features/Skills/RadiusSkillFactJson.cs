@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Skills;
 
-[PublicAPI]
-public static class RadiusSkillFactJson
+internal static class RadiusSkillFactJson
 {
     public static RadiusSkillFact GetRadiusSkillFact(
         this JsonElement json,

@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Matches.Scores;
 
-[PublicAPI]
-public static class MatchScoresJson
+internal static class MatchScoresJson
 {
     public static MatchScores GetMatchScores(
         this JsonElement json,

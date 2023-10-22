@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class InfixUpgradeJson
+internal static class InfixUpgradeJson
 {
     public static InfixUpgrade GetInfixUpgrade(
         this JsonElement json,

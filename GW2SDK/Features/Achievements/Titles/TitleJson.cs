@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Achievements.Titles;
 
-[PublicAPI]
-public static class TitleJson
+internal static class TitleJson
 {
     public static Title GetTitle(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

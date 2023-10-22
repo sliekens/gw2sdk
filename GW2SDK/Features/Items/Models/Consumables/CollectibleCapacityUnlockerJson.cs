@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class CollectibleCapacityUnlockerJson
+internal static class CollectibleCapacityUnlockerJson
 {
     public static CollectibleCapacityUnlocker GetCollectibleCapacityUnlocker(
         this JsonElement json,

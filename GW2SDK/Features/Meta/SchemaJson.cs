@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Meta;
 
-[PublicAPI]
-public static class SchemaJson
+internal static class SchemaJson
 {
     public static Schema GetSchema(
         this JsonElement jsonElement,

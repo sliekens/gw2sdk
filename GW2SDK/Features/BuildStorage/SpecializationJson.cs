@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.BuildStorage;
 
-[PublicAPI]
-public static class SpecializationJson
+internal static class SpecializationJson
 {
     public static Specialization GetSpecialization(
         this JsonElement json,

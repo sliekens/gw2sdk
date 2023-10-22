@@ -43,7 +43,7 @@ public class DataTransferJsonTest : IClassFixture<AssemblyFixture>
                         Assert.Equal("Get" + dto.Name, info.Name);
                         Assert.True(info.IsPublic, $"{info.Name} must be public.");
                         Assert.Equal($"{dto.Name}Json", info.DeclaringType!.Name);
-                        Assert.True(info.DeclaringType!.IsPublic, $"{info.Name} must be public.");
+                        Assert.True(info.DeclaringType!.IsNotPublic, $"{info.Name} must be internal.");
                         Assert.True(
                             info.IsDefined(typeof(ExtensionAttribute), false),
                             $"{info.Name} must be an extension method."

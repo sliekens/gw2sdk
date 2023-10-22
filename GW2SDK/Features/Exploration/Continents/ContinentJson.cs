@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Continents;
 
-[PublicAPI]
-public static class ContinentJson
+internal static class ContinentJson
 {
     public static Continent GetContinent(
         this JsonElement json,

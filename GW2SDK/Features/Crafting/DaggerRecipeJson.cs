@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Crafting;
 
-[PublicAPI]
-public static class DaggerRecipeJson
+internal static class DaggerRecipeJson
 {
     public static DaggerRecipe GetDaggerRecipe(
         this JsonElement json,

@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Home.Cats;
 
-[PublicAPI]
-public static class CatJson
+internal static class CatJson
 {
     public static Cat GetCat(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

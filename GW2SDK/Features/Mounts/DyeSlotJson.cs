@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Mounts;
 
-[PublicAPI]
-public static class DyeSlotJson
+internal static class DyeSlotJson
 {
     public static DyeSlot GetDyeSlot(
         this JsonElement json,

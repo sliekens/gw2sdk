@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Traits;
 
-[PublicAPI]
-public static class DamageTraitFactJson
+internal static class DamageTraitFactJson
 {
     public static DamageTraitFact GetDamageTraitFact(
         this JsonElement json,

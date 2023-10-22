@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Tokens;
 
-[PublicAPI]
-public static class ApiKeyInfoJson
+internal static class ApiKeyInfoJson
 {
     public static ApiKeyInfo GetApiKeyInfo(
         this JsonElement json,

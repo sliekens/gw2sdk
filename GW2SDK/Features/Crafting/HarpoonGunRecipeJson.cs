@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Crafting;
 
-[PublicAPI]
-public static class HarpoonGunRecipeJson
+internal static class HarpoonGunRecipeJson
 {
     public static HarpoonGunRecipe GetHarpoonGunRecipe(
         this JsonElement json,

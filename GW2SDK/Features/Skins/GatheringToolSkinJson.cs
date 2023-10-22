@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Skins;
 
-[PublicAPI]
-public static class GatheringToolSkinJson
+internal static class GatheringToolSkinJson
 {
     public static GatheringToolSkin GetGatheringToolSkin(
         this JsonElement json,

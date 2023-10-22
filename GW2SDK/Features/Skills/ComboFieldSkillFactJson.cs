@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Skills;
 
-[PublicAPI]
-public static class ComboFieldSkillFactJson
+internal static class ComboFieldSkillFactJson
 {
     public static ComboFieldSkillFact GetComboFieldSkillFact(
         this JsonElement json,

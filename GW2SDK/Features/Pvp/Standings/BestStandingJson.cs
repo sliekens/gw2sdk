@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Standings;
 
-[PublicAPI]
-public static class BestStandingJson
+internal static class BestStandingJson
 {
     public static BestStanding GetBestStanding(
         this JsonElement json,

@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Skins;
 
-[PublicAPI]
-public static class DaggerSkinJson
+internal static class DaggerSkinJson
 {
     public static DaggerSkin GetDaggerSkin(
         this JsonElement json,

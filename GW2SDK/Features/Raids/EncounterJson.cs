@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Raids;
 
-[PublicAPI]
-public static class EncounterJson
+internal static class EncounterJson
 {
     public static Encounter GetEncounter(
         this JsonElement json,

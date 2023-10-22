@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class DyeUnlockerJson
+internal static class DyeUnlockerJson
 {
     public static DyeUnlocker GetDyeUnlocker(
         this JsonElement json,

@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Traits;
 
-[PublicAPI]
-public static class TraitJson
+internal static class TraitJson
 {
     public static Trait GetTrait(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

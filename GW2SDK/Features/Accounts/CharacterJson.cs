@@ -8,8 +8,7 @@ using GuildWars2.Professions;
 
 namespace GuildWars2.Accounts;
 
-[PublicAPI]
-public static class CharacterJson
+internal static class CharacterJson
 {
     public static Character GetCharacter(
         this JsonElement json,

@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Upgrades;
 
-[PublicAPI]
-public static class HubJson
+internal static class HubJson
 {
     public static Hub GetHub(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

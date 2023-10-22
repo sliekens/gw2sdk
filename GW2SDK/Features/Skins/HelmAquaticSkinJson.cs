@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Skins;
 
-[PublicAPI]
-public static class HelmAquaticSkinJson
+internal static class HelmAquaticSkinJson
 {
     public static HelmAquaticSkin GetHelmAquaticSkin(
         this JsonElement json,

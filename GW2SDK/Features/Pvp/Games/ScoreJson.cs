@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Games;
 
-[PublicAPI]
-public static class ScoreJson
+internal static class ScoreJson
 {
     public static Score GetScore(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

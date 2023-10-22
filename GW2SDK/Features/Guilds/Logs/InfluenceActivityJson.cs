@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Logs;
 
-[PublicAPI]
-public static class InfluenceActivityJson
+internal static class InfluenceActivityJson
 {
     public static InfluenceActivity GetInfluenceActivity(
         this JsonElement json,

@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Stats;
 
-[PublicAPI]
-public static class LaddersJson
+internal static class LaddersJson
 {
     public static Ladders GetLadders(
         this JsonElement json,

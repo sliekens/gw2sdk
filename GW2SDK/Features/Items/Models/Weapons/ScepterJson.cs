@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class ScepterJson
+internal static class ScepterJson
 {
     public static Scepter GetScepter(
         this JsonElement json,

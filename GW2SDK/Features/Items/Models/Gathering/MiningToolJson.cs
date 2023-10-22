@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class MiningToolJson
+internal static class MiningToolJson
 {
     public static MiningTool GetMiningTool(
         this JsonElement json,

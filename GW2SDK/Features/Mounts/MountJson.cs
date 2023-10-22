@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Mounts;
 
-[PublicAPI]
-public static class MountJson
+internal static class MountJson
 {
     public static Mount GetMount(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

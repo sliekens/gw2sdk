@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Professions;
 
-[PublicAPI]
-public static class ProfessionJson
+internal static class ProfessionJson
 {
     public static Profession GetProfession(
         this JsonElement json,

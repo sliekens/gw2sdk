@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Skills;
 
-[PublicAPI]
-public static class RechargeSkillFactJson
+internal static class RechargeSkillFactJson
 {
     public static RechargeSkillFact GetRechargeSkillFact(
         this JsonElement json,

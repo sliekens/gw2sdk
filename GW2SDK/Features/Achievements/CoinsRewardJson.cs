@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Achievements;
 
-[PublicAPI]
-public static class CoinsRewardJson
+internal static class CoinsRewardJson
 {
     public static CoinsReward GetCoinsReward(
         this JsonElement json,

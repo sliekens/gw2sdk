@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Worlds;
 
-[PublicAPI]
-public static class WorldJson
+internal static class WorldJson
 {
     public static World GetWorld(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

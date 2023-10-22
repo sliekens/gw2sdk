@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Armory;
 
-[PublicAPI]
-public static class EquipmentTabJson
+internal static class EquipmentTabJson
 {
     public static EquipmentTab GetEquipmentTab(
         this JsonElement json,

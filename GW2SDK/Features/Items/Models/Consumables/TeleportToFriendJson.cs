@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class TeleportToFriendJson
+internal static class TeleportToFriendJson
 {
     public static TeleportToFriend GetTeleportToFriend(
         this JsonElement json,

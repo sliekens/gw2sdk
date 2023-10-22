@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Treasury;
 
-[PublicAPI]
-public static class GuildTreasurySlotJson
+internal static class GuildTreasurySlotJson
 {
     public static GuildTreasurySlot GetGuildTreasurySlot(
         this JsonElement json,

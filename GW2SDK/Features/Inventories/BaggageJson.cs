@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Inventories;
 
-[PublicAPI]
-public static class BaggageJson
+internal static class BaggageJson
 {
     public static Baggage GetBaggage(
         this JsonElement json,

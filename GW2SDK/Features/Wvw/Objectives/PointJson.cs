@@ -4,8 +4,7 @@ using System.Text.Json;
 
 namespace GuildWars2.Wvw.Objectives;
 
-[PublicAPI]
-public static class PointJson
+internal static class PointJson
 {
     public static PointF GetCoordinateF(
         this JsonElement json,

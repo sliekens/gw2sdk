@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Logs;
 
-[PublicAPI]
-public static class GuildUpgradeActivityJson
+internal static class GuildUpgradeActivityJson
 {
     public static GuildUpgradeActivity GetGuildUpgradeActivity(
         this JsonElement json,

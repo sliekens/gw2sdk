@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class ForagingToolJson
+internal static class ForagingToolJson
 {
     public static ForagingTool GetForagingTool(
         this JsonElement json,

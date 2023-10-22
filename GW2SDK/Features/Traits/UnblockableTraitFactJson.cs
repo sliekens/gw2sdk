@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Traits;
 
-[PublicAPI]
-public static class UnblockableTraitFactJson
+internal static class UnblockableTraitFactJson
 {
     public static UnblockableTraitFact GetUnblockableTraitFact(
         this JsonElement json,

@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Upgrades;
 
-[PublicAPI]
-public static class AccumulatingCurrencyJson
+internal static class AccumulatingCurrencyJson
 {
     public static AccumulatingCurrency GetAccumulatingCurrency(
         this JsonElement json,

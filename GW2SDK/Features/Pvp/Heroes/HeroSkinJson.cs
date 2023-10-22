@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Heroes;
 
-[PublicAPI]
-public static class HeroSkinJson
+internal static class HeroSkinJson
 {
     public static HeroSkin GetHeroSkin(
         this JsonElement json,

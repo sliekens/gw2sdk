@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Logs;
 
-[PublicAPI]
-public static class MemberInvitedJson
+internal static class MemberInvitedJson
 {
     public static MemberInvited GetMemberInvited(
         this JsonElement json,

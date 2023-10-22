@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Matches;
 
-[PublicAPI]
-public static class BonusJson
+internal static class BonusJson
 {
     public static Bonus GetBonus(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

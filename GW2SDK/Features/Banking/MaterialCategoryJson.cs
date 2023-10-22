@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Banking;
 
-[PublicAPI]
-public static class MaterialCategoryJson
+internal static class MaterialCategoryJson
 {
     public static MaterialCategory GetMaterialCategory(
         this JsonElement json,

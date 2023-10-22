@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class BackpackJson
+internal static class BackpackJson
 {
     public static Backpack GetBackpack(
         this JsonElement json,

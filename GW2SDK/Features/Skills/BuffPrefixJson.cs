@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Skills;
 
-[PublicAPI]
-public static class BuffPrefixJson
+internal static class BuffPrefixJson
 {
     public static BuffPrefix GetBuffPrefix(
         this JsonElement json,

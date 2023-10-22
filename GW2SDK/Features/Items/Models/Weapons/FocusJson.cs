@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class FocusJson
+internal static class FocusJson
 {
     public static Focus GetFocus(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

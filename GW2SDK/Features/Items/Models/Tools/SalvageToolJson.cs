@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class SalvageToolJson
+internal static class SalvageToolJson
 {
     public static SalvageTool GetSalvageTool(
         this JsonElement json,

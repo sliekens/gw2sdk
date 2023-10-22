@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Skills;
 
-[PublicAPI]
-public static class PercentSkillFactJson
+internal static class PercentSkillFactJson
 {
     public static PercentSkillFact GetPercentSkillFact(
         this JsonElement json,

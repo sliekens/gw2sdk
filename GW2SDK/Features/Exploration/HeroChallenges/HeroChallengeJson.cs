@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.HeroChallenges;
 
-[PublicAPI]
-public static class HeroChallengeJson
+internal static class HeroChallengeJson
 {
     public static HeroChallenge GetHeroChallenge(
         this JsonElement json,

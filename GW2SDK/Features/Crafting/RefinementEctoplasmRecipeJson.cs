@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Crafting;
 
-[PublicAPI]
-public static class RefinementEctoplasmRecipeJson
+internal static class RefinementEctoplasmRecipeJson
 {
     public static RefinementEctoplasmRecipe GetRefinementEctoplasmRecipe(
         this JsonElement json,

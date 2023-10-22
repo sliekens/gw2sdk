@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Logs;
 
-[PublicAPI]
-public static class StashActivityJson
+internal static class StashActivityJson
 {
     public static StashActivity GetStashActivity(
         this JsonElement json,

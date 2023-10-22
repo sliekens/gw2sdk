@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Upgrades;
 
-[PublicAPI]
-public static class GuildUpgradeCostJson
+internal static class GuildUpgradeCostJson
 {
     public static GuildUpgradeCost GetGuildUpgradeCost(
         this JsonElement json,

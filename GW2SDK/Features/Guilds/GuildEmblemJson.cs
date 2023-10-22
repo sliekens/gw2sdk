@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds;
 
-[PublicAPI]
-public static class GuildEmblemJson
+internal static class GuildEmblemJson
 {
     public static GuildEmblem GetGuildEmblem(
         this JsonElement json,

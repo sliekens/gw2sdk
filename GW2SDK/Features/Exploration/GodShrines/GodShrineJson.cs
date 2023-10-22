@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.GodShrines;
 
-[PublicAPI]
-public static class GodShrineJson
+internal static class GodShrineJson
 {
     public static GodShrine GetGodShrine(
         this JsonElement json,

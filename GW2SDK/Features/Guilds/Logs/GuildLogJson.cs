@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Logs;
 
-[PublicAPI]
-public static class GuildLogJson
+internal static class GuildLogJson
 {
     public static GuildLog GetGuildLog(
         this JsonElement json,

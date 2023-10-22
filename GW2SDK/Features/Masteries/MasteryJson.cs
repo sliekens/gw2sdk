@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Masteries;
 
-[PublicAPI]
-public static class MasteryJson
+internal static class MasteryJson
 {
     public static Mastery GetMastery(
         this JsonElement json,

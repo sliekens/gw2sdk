@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Skins;
 
-[PublicAPI]
-public static class HammerSkinJson
+internal static class HammerSkinJson
 {
     public static HammerSkin GetHammerSkin(
         this JsonElement json,

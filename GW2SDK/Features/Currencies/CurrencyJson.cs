@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Currencies;
 
-[PublicAPI]
-public static class CurrencyJson
+internal static class CurrencyJson
 {
     public static Currency GetCurrency(
         this JsonElement json,

@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Treasury;
 
-[PublicAPI]
-public static class CountNeededForUpgradeJson
+internal static class CountNeededForUpgradeJson
 {
     public static CountNeededForUpgrade GetCountNeededForUpgrade(
         this JsonElement json,

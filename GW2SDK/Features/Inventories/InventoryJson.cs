@@ -2,8 +2,7 @@
 
 namespace GuildWars2.Inventories;
 
-[PublicAPI]
-public static class InventoryJson
+internal static class InventoryJson
 {
     public static Inventory GetInventory(
         this JsonElement json,

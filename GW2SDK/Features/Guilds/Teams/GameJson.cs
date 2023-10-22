@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Teams;
 
-[PublicAPI]
-public static class GameJson
+internal static class GameJson
 {
     public static Game GetGame(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

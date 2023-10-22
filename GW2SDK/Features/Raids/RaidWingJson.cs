@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Raids;
 
-[PublicAPI]
-public static class RaidWingJson
+internal static class RaidWingJson
 {
     public static RaidWing GetRaidWing(
         this JsonElement json,

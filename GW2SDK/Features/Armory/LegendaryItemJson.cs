@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Armory;
 
-[PublicAPI]
-public static class LegendaryItemJson
+internal static class LegendaryItemJson
 {
     public static LegendaryItem GetLegendaryItem(
         this JsonElement json,

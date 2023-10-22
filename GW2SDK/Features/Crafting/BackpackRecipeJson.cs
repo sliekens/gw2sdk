@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Crafting;
 
-[PublicAPI]
-public static class BackpackRecipeJson
+internal static class BackpackRecipeJson
 {
     public static BackpackRecipe GetBackpackRecipe(
         this JsonElement json,

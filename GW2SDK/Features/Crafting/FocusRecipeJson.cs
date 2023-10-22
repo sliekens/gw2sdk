@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Crafting;
 
-[PublicAPI]
-public static class FocusRecipeJson
+internal static class FocusRecipeJson
 {
     public static FocusRecipe GetFocusRecipe(
         this JsonElement json,

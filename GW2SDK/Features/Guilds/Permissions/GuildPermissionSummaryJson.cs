@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Permissions;
 
-[PublicAPI]
-public static class GuildPermissionSummaryJson
+internal static class GuildPermissionSummaryJson
 {
     public static GuildPermissionSummary GetGuildPermissionSummary(
         this JsonElement json,

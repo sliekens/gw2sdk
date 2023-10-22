@@ -4,8 +4,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Regions;
 
-[PublicAPI]
-public static class RegionJson
+internal static class RegionJson
 {
     public static Region GetRegion(
         this JsonElement json,

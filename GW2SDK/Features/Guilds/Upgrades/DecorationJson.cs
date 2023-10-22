@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Upgrades;
 
-[PublicAPI]
-public static class DecorationJson
+internal static class DecorationJson
 {
     public static Decoration GetDecoration(
         this JsonElement json,

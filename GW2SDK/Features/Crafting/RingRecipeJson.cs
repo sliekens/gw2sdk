@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Crafting;
 
-[PublicAPI]
-public static class RingRecipeJson
+internal static class RingRecipeJson
 {
     public static RingRecipe GetRingRecipe(
         this JsonElement json,

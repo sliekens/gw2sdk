@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class TridentJson
+internal static class TridentJson
 {
     public static Trident GetTrident(
         this JsonElement json,

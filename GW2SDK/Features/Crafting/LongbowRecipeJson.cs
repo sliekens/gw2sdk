@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Crafting;
 
-[PublicAPI]
-public static class LongbowRecipeJson
+internal static class LongbowRecipeJson
 {
     public static LongbowRecipe GetLongbowRecipe(
         this JsonElement json,

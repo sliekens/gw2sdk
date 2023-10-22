@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class TrophyJson
+internal static class TrophyJson
 {
     public static Trophy GetTrophy(
         this JsonElement json,

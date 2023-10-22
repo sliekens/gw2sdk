@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Accounts;
 
-[PublicAPI]
-public static class ProgressionJson
+internal static class ProgressionJson
 {
     public static Progression GetProgression(
         this JsonElement json,

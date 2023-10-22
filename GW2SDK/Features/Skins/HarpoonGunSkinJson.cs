@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Skins;
 
-[PublicAPI]
-public static class HarpoonGunSkinJson
+internal static class HarpoonGunSkinJson
 {
     public static HarpoonGunSkin GetHarpoonGunSkin(
         this JsonElement json,

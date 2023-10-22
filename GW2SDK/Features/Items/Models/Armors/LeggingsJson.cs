@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class LeggingsJson
+internal static class LeggingsJson
 {
     public static Leggings GetLeggings(
         this JsonElement json,

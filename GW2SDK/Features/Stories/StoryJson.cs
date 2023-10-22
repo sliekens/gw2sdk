@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Stories;
 
-[PublicAPI]
-public static class StoryJson
+internal static class StoryJson
 {
     public static Story GetStory(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

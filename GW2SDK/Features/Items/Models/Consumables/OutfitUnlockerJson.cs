@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class OutfitUnlockerJson
+internal static class OutfitUnlockerJson
 {
     public static OutfitUnlocker GetOutfitUnlocker(
         this JsonElement json,

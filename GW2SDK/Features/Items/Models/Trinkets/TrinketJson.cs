@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class TrinketJson
+internal static class TrinketJson
 {
     public static Trinket GetTrinket(
         this JsonElement json,

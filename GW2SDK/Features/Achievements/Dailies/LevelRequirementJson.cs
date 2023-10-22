@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Achievements.Dailies;
 
-[PublicAPI]
-public static class LevelRequirementJson
+internal static class LevelRequirementJson
 {
     public static LevelRequirement GetLevelRequirement(
         this JsonElement json,

@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Matches;
 
-[PublicAPI]
-public static class SpawnJson
+internal static class SpawnJson
 {
     public static Spawn GetSpawn(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

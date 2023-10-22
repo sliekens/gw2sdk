@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class FoodJson
+internal static class FoodJson
 {
     public static Food GetFood(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

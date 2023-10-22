@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Professions;
 
-[PublicAPI]
-public static class WeaponProficiencyJson
+internal static class WeaponProficiencyJson
 {
     public static WeaponProficiency GetWeaponProficiency(
         this JsonElement json,

@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Dungeons;
 
-[PublicAPI]
-public static class DungeonPathJson
+internal static class DungeonPathJson
 {
     public static DungeonPath GetDungeonPath(
         this JsonElement json,

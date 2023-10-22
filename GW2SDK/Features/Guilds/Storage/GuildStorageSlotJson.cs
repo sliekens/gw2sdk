@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Storage;
 
-[PublicAPI]
-public static class GuildStorageSlotJson
+internal static class GuildStorageSlotJson
 {
     public static GuildStorageSlot GetGuildStorageSlot(
         this JsonElement json,

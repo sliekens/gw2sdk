@@ -2,8 +2,7 @@
 
 namespace GuildWars2.Achievements.Categories;
 
-[PublicAPI]
-public static class LevelRequirementJson
+internal static class LevelRequirementJson
 {
     public static LevelRequirement GetLevelRequirement(
         this JsonElement json,

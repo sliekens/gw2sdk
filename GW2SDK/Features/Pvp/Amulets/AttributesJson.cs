@@ -2,8 +2,7 @@
 
 namespace GuildWars2.Pvp.Amulets;
 
-[PublicAPI]
-public static class AttributesJson
+internal static class AttributesJson
 {
     public static Dictionary<AttributeAdjustTarget, int> GetAttributes(
         this JsonElement json,

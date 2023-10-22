@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Achievements.Groups;
 
-[PublicAPI]
-public static class AchievementGroupJson
+internal static class AchievementGroupJson
 {
     public static AchievementGroup GetAchievementGroup(
         this JsonElement json,

@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Gliders;
 
-[PublicAPI]
-public static class GliderJson
+internal static class GliderJson
 {
     public static Glider GetGlider(
         this JsonElement json,

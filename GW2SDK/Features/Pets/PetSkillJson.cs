@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Pets;
 
-[PublicAPI]
-public static class PetSkillJson
+internal static class PetSkillJson
 {
     public static PetSkill GetPetSkill(
         this JsonElement json,

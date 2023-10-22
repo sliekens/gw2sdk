@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.MapChests;
 
-[PublicAPI]
-public static class MapChestJson
+internal static class MapChestJson
 {
     public static MapChest GetMapChest(
         this JsonElement json,

@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Upgrades;
 
-[PublicAPI]
-public static class ObjectiveUpgradeJson
+internal static class ObjectiveUpgradeJson
 {
     public static ObjectiveUpgrade GetObjectiveUpgrade(
         this JsonElement json,

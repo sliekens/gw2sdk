@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class PowerCoreJson
+internal static class PowerCoreJson
 {
     public static PowerCore GetPowerCore(
         this JsonElement json,

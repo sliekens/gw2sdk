@@ -3,8 +3,7 @@ using System.Text.Json;
 
 namespace GuildWars2.Exploration;
 
-[PublicAPI]
-public static class RectangleJson
+internal static class RectangleJson
 {
     public static Rectangle GetMapRectangle(
         this JsonElement json,

@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Achievements.Categories;
 
-[PublicAPI]
-public static class AchievementRefJson
+internal static class AchievementRefJson
 {
     public static AchievementRef GetAchievementRef(
         this JsonElement json,

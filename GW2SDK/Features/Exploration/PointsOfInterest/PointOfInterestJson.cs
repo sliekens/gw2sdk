@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.PointsOfInterest;
 
-[PublicAPI]
-public static class PointOfInterestJson
+internal static class PointOfInterestJson
 {
     public static PointOfInterest GetPointOfInterest(
         this JsonElement json,

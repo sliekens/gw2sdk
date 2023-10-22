@@ -2,8 +2,7 @@
 
 namespace GuildWars2.Achievements;
 
-[PublicAPI]
-public static class AchievementBitJson
+internal static class AchievementBitJson
 {
     public static AchievementBit GetAchievementBit(
         this JsonElement json,

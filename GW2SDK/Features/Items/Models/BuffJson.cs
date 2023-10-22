@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class BuffJson
+internal static class BuffJson
 {
     public static Buff GetBuff(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

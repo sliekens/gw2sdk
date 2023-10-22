@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Skins;
 
-[PublicAPI]
-public static class SmallBundleSkinJson
+internal static class SmallBundleSkinJson
 {
     public static SmallBundleSkin GetSmallBundleSkin(
         this JsonElement json,

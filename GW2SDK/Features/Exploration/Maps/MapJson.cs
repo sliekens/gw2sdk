@@ -10,8 +10,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Maps;
 
-[PublicAPI]
-public static class MapJson
+internal static class MapJson
 {
     public static Map GetMap(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Finishers;
 
-[PublicAPI]
-public static class UnlockedFinisherJson
+internal static class UnlockedFinisherJson
 {
     public static UnlockedFinisher GetUnlockedFinisher(
         this JsonElement json,

@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Standings;
 
-[PublicAPI]
-public static class CurrentStandingJson
+internal static class CurrentStandingJson
 {
     public static CurrentStanding GetCurrentStanding(
         this JsonElement json,

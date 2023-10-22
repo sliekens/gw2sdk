@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Upgrades;
 
-[PublicAPI]
-public static class BoostJson
+internal static class BoostJson
 {
     public static Boost GetBoost(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Traits;
 
-[PublicAPI]
-public static class StunBreakTraitFactJson
+internal static class StunBreakTraitFactJson
 {
     public static StunBreakTraitFact GetStunBreakTraitFact(
         this JsonElement json,

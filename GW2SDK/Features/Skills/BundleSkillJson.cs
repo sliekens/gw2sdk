@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Skills;
 
-[PublicAPI]
-public static class BundleSkillJson
+internal static class BundleSkillJson
 {
     public static BundleSkill GetBundleSkill(
         this JsonElement json,

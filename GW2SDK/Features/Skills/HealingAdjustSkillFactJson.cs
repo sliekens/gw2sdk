@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Skills;
 
-[PublicAPI]
-public static class HealingAdjustSkillFactJson
+internal static class HealingAdjustSkillFactJson
 {
     public static HealingAdjustSkillFact GetHealingAdjustSkillFact(
         this JsonElement json,

@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Matches;
 
-[PublicAPI]
-public static class AllWorldsJson
+internal static class AllWorldsJson
 {
     public static AllWorlds GetAllWorlds(
         this JsonElement json,

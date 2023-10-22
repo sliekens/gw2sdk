@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Traits;
 
-[PublicAPI]
-public static class ComboFinisherTraitFactJson
+internal static class ComboFinisherTraitFactJson
 {
     public static ComboFinisherTraitFact GetComboFinisherTraitFact(
         this JsonElement json,

@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class RingJson
+internal static class RingJson
 {
     public static Ring GetRing(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

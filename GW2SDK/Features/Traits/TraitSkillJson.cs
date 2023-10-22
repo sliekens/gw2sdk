@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Traits;
 
-[PublicAPI]
-public static class TraitSkillJson
+internal static class TraitSkillJson
 {
     public static TraitSkill GetTraitSkill(
         this JsonElement json,

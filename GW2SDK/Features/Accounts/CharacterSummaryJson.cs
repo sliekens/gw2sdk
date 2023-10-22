@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Accounts;
 
-[PublicAPI]
-public static class CharacterSummaryJson
+internal static class CharacterSummaryJson
 {
     public static CharacterSummary GetCharacterSummary(
         this JsonElement json,

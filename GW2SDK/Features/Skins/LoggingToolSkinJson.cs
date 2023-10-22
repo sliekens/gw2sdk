@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Skins;
 
-[PublicAPI]
-public static class LoggingToolSkinJson
+internal static class LoggingToolSkinJson
 {
     public static LoggingToolSkin GetLoggingToolSkin(
         this JsonElement json,

@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Skins;
 
-[PublicAPI]
-public static class MaceSkinJson
+internal static class MaceSkinJson
 {
     public static MaceSkin GetMaceSkin(
         this JsonElement json,

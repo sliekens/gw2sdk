@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Colors;
 
-[PublicAPI]
-public static class ColorInfoJson
+internal static class ColorInfoJson
 {
     public static ColorInfo GetColorInfo(
         this JsonElement json,

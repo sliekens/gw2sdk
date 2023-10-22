@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Crafting;
 
-[PublicAPI]
-public static class RefinementObsidianRecipeJson
+internal static class RefinementObsidianRecipeJson
 {
     public static RefinementObsidianRecipe GetRefinementObsidianRecipe(
         this JsonElement json,

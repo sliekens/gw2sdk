@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Stories;
 
-[PublicAPI]
-public static class ChapterJson
+internal static class ChapterJson
 {
     public static Chapter GetChapter(
         this JsonElement json,

@@ -3,8 +3,7 @@ using System.Text.Json;
 
 namespace GuildWars2.Colors;
 
-[PublicAPI]
-public static class ColorJson
+internal static class ColorJson
 {
     public static Color GetColor(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

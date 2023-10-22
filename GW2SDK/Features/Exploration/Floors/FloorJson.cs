@@ -4,8 +4,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Floors;
 
-[PublicAPI]
-public static class FloorJson
+internal static class FloorJson
 {
     public static Floor GetFloor(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

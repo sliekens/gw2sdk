@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class BankTabUnlockerJson
+internal static class BankTabUnlockerJson
 {
     public static BankTabUnlocker GetBankTabUnlocker(
         this JsonElement json,

@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Logs;
 
-[PublicAPI]
-public static class TreasuryDepositJson
+internal static class TreasuryDepositJson
 {
     public static TreasuryDeposit GetTreasuryDeposit(
         this JsonElement json,

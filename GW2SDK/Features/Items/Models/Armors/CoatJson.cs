@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class CoatJson
+internal static class CoatJson
 {
     public static Coat GetCoat(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

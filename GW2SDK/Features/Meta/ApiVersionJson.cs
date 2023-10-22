@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Meta;
 
-[PublicAPI]
-public static class ApiVersionJson
+internal static class ApiVersionJson
 {
     public static ApiVersion GetApiVersion(
         this JsonElement json,

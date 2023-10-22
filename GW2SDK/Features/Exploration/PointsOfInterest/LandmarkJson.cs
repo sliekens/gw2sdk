@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.PointsOfInterest;
 
-[PublicAPI]
-public static class LandmarkJson
+internal static class LandmarkJson
 {
     public static Landmark GetLandmark(
         this JsonElement json,

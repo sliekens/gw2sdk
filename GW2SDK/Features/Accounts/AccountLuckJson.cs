@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Accounts;
 
-[PublicAPI]
-public static class AccountLuckJson
+internal static class AccountLuckJson
 {
     public static AccountLuck GetAccountLuck(
         this JsonElement json,

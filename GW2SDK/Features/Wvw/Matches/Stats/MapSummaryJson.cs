@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Matches.Stats;
 
-[PublicAPI]
-public static class MapSummaryJson
+internal static class MapSummaryJson
 {
     public static MapSummary GetMapSummary(
         this JsonElement json,

@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Skills;
 
-[PublicAPI]
-public static class MonsterSkillJson
+internal static class MonsterSkillJson
 {
     public static MonsterSkill GetMonsterSkill(
         this JsonElement json,

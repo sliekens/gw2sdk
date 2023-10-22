@@ -3,8 +3,7 @@ using System.Text.Json;
 
 namespace GuildWars2.Exploration;
 
-[PublicAPI]
-public static class PointJson
+internal static class PointJson
 {
     public static Point GetCoordinate(
         this JsonElement json,

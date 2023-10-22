@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class LargeBundleJson
+internal static class LargeBundleJson
 {
     public static LargeBundle GetLargeBundle(
         this JsonElement json,

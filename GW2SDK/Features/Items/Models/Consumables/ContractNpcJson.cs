@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class ContractNpcJson
+internal static class ContractNpcJson
 {
     public static ContractNpc GetContractNpc(
         this JsonElement json,

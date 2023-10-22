@@ -2,8 +2,7 @@
 
 namespace GuildWars2.Professions;
 
-[PublicAPI]
-public static class SkillsByPaletteJson
+internal static class SkillsByPaletteJson
 {
     public static Dictionary<int, int> GetSkillsByPalette(
         this JsonElement json,

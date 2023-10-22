@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Mounts;
 
-[PublicAPI]
-public static class MountNameJson
+internal static class MountNameJson
 {
     public static MountName GetMountName(
         this JsonElement json,

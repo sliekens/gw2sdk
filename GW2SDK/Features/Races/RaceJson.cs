@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Races;
 
-[PublicAPI]
-public static class RaceJson
+internal static class RaceJson
 {
     public static Race GetRace(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

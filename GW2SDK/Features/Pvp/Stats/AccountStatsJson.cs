@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Stats;
 
-[PublicAPI]
-public static class AccountStatsJson
+internal static class AccountStatsJson
 {
     public static AccountStats GetAccountStats(
         this JsonElement json,

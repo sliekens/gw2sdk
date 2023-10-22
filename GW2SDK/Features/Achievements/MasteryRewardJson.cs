@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Achievements;
 
-[PublicAPI]
-public static class MasteryRewardJson
+internal static class MasteryRewardJson
 {
     public static MasteryReward GetMasteryReward(
         this JsonElement json,

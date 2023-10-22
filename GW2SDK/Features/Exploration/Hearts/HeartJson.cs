@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Hearts;
 
-[PublicAPI]
-public static class HeartJson
+internal static class HeartJson
 {
     public static Heart GetHeart(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Quaggans;
 
-[PublicAPI]
-public static class QuagganJson
+internal static class QuagganJson
 {
     public static Quaggan GetQuaggan(
         this JsonElement json,

@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Mounts;
 
-[PublicAPI]
-public static class MountSkinJson
+internal static class MountSkinJson
 {
     public static MountSkin GetMountSkin(
         this JsonElement json,

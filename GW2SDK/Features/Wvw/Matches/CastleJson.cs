@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Matches;
 
-[PublicAPI]
-public static class CastleJson
+internal static class CastleJson
 {
     public static Castle GetCastle(
         this JsonElement json,

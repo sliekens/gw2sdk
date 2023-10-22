@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Matches.Overview;
 
-[PublicAPI]
-public static class MatchOverviewJson
+internal static class MatchOverviewJson
 {
     public static MatchOverview GetMatchOverview(
         this JsonElement json,

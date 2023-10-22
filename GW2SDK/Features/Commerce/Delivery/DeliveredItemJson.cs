@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Commerce.Delivery;
 
-[PublicAPI]
-public static class DeliveredItemJson
+internal static class DeliveredItemJson
 {
     public static DeliveredItem GetDeliveredItem(
         this JsonElement json,

@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.SuperAdventureBox;
 
-[PublicAPI]
-public static class SuperAdventureBoxProgressJson
+internal static class SuperAdventureBoxProgressJson
 {
     public static SuperAdventureBoxProgress GetSuperAdventureBoxProgress(
         this JsonElement json,

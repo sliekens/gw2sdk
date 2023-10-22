@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Upgrades;
 
-[PublicAPI]
-public static class GuildHallExpeditionJson
+internal static class GuildHallExpeditionJson
 {
     public static GuildHallExpedition GetGuildHallExpedition(
         this JsonElement json,

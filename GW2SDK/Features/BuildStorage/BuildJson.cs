@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.BuildStorage;
 
-[PublicAPI]
-public static class BuildJson
+internal static class BuildJson
 {
     public static Build GetBuild(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

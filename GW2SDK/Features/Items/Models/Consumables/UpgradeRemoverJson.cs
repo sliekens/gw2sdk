@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class UpgradeRemoverJson
+internal static class UpgradeRemoverJson
 {
     public static UpgradeRemover GetUpgradeRemover(
         this JsonElement json,

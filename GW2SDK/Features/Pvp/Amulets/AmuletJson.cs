@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Amulets;
 
-[PublicAPI]
-public static class AmuletJson
+internal static class AmuletJson
 {
     public static Amulet GetAmulet(
         this JsonElement json,

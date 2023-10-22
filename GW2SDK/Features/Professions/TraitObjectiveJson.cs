@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Professions;
 
-[PublicAPI]
-public static class TraitObjectiveJson
+internal static class TraitObjectiveJson
 {
     public static TraitObjective GetTraitObjective(
         this JsonElement json,

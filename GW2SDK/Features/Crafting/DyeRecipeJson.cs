@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Crafting;
 
-[PublicAPI]
-public static class DyeRecipeJson
+internal static class DyeRecipeJson
 {
     public static DyeRecipe GetDyeRecipe(
         this JsonElement json,

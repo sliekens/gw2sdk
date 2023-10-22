@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class ContainerKeyJson
+internal static class ContainerKeyJson
 {
     public static ContainerKey GetContainerKey(
         this JsonElement json,

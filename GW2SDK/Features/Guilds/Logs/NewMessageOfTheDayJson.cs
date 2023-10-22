@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Logs;
 
-[PublicAPI]
-public static class NewMessageOfTheDayJson
+internal static class NewMessageOfTheDayJson
 {
     public static NewMessageOfTheDay GetNewMessageOfTheDay(
         this JsonElement json,

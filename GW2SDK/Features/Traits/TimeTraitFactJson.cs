@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Traits;
 
-[PublicAPI]
-public static class TimeTraitFactJson
+internal static class TimeTraitFactJson
 {
     public static TimeTraitFact GetTimeTraitFact(
         this JsonElement json,

@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class ToolJson
+internal static class ToolJson
 {
     public static Tool GetTool(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

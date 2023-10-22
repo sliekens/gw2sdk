@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class CraftingMaterialJson
+internal static class CraftingMaterialJson
 {
     public static CraftingMaterial GetCraftingMaterial(
         this JsonElement json,

@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Home.Nodes;
 
-[PublicAPI]
-public static class NodeJson
+internal static class NodeJson
 {
     public static Node GetNode(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

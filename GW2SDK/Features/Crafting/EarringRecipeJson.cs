@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Crafting;
 
-[PublicAPI]
-public static class EarringRecipeJson
+internal static class EarringRecipeJson
 {
     public static EarringRecipe GetEarringRecipe(
         this JsonElement json,

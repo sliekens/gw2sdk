@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Commerce.Listings;
 
-[PublicAPI]
-public static class OrderBookLineJson
+internal static class OrderBookLineJson
 {
     public static OrderBookLine GetOrderBookLine(
         this JsonElement json,

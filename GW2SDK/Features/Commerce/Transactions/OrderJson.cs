@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Commerce.Transactions;
 
-[PublicAPI]
-public static class OrderJson
+internal static class OrderJson
 {
     public static Order GetOrder(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Files;
 
-[PublicAPI]
-public static class AssetJson
+internal static class AssetJson
 {
     public static Asset GetAsset(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

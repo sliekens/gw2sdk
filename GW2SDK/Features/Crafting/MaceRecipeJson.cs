@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Crafting;
 
-[PublicAPI]
-public static class MaceRecipeJson
+internal static class MaceRecipeJson
 {
     public static MaceRecipe GetMaceRecipe(
         this JsonElement json,

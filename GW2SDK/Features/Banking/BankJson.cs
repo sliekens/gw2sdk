@@ -3,8 +3,7 @@ using GuildWars2.Inventories;
 
 namespace GuildWars2.Banking;
 
-[PublicAPI]
-public static class BankJson
+internal static class BankJson
 {
     public static Bank GetBank(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

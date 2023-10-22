@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Matches;
 
-[PublicAPI]
-public static class CampJson
+internal static class CampJson
 {
     public static Camp GetCamp(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

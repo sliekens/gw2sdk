@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Matches;
 
-[PublicAPI]
-public static class DistributionJson
+internal static class DistributionJson
 {
     public static Distribution GetDistribution(
         this JsonElement json,

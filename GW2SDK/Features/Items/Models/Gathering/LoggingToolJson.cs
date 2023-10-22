@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class LoggingToolJson
+internal static class LoggingToolJson
 {
     public static LoggingTool GetLoggingTool(
         this JsonElement json,

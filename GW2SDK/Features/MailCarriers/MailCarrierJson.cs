@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.MailCarriers;
 
-[PublicAPI]
-public static class MailCarrierJson
+internal static class MailCarrierJson
 {
     public static MailCarrier GetMailCarrier(
         this JsonElement json,

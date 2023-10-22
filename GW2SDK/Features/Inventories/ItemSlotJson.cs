@@ -4,8 +4,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Inventories;
 
-[PublicAPI]
-public static class ItemSlotJson
+internal static class ItemSlotJson
 {
     public static ItemSlot? GetItemSlot(
         this JsonElement json,

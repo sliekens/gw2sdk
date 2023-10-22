@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Quests;
 
-[PublicAPI]
-public static class QuestJson
+internal static class QuestJson
 {
     public static Quest GetQuest(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

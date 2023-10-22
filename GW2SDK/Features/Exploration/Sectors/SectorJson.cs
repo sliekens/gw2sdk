@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Sectors;
 
-[PublicAPI]
-public static class SectorJson
+internal static class SectorJson
 {
     public static Sector GetSector(
         this JsonElement json,

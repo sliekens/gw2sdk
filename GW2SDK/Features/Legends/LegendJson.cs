@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Legends;
 
-[PublicAPI]
-public static class LegendJson
+internal static class LegendJson
 {
     public static Legend GetLegend(
         this JsonElement json,

@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.BuildStorage;
 
-[PublicAPI]
-public static class SkillBarJson
+internal static class SkillBarJson
 {
     public static SkillBar GetSkillBar(
         this JsonElement json,

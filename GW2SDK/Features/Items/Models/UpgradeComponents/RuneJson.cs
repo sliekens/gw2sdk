@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class RuneJson
+internal static class RuneJson
 {
     public static Rune GetRune(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

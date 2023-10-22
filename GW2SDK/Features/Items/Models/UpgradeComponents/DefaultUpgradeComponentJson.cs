@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class DefaultUpgradeComponentJson
+internal static class DefaultUpgradeComponentJson
 {
     public static DefaultUpgradeComponent GetDefaultUpgradeComponent(
         this JsonElement json,

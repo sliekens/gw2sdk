@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Commerce.Exchange;
 
-[PublicAPI]
-public static class GemsForGoldExchangeJson
+internal static class GemsForGoldExchangeJson
 {
     public static GemsForGoldExchange GetGemsForGoldExchange(
         this JsonElement json,

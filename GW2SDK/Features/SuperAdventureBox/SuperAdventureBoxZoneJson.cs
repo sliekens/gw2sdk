@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.SuperAdventureBox;
 
-[PublicAPI]
-public static class SuperAdventureBoxZoneJson
+internal static class SuperAdventureBoxZoneJson
 {
     public static SuperAdventureBoxZone GetSuperAdventureBoxZone(
         this JsonElement json,

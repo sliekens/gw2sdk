@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Achievements.Dailies;
 
-[PublicAPI]
-public static class DailyAchievementJson
+internal static class DailyAchievementJson
 {
     public static DailyAchievement GetDailyAchievement(
         this JsonElement json,

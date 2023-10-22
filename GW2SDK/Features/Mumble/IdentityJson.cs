@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Mumble;
 
-[PublicAPI]
-public static class IdentityJson
+internal static class IdentityJson
 {
     public static Identity GetIdentity(
         this JsonElement json,

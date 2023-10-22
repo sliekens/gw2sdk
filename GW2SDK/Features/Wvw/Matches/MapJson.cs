@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Matches;
 
-[PublicAPI]
-public static class MapJson
+internal static class MapJson
 {
     public static Map GetMap(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

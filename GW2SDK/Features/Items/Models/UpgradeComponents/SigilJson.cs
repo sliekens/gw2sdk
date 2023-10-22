@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class SigilJson
+internal static class SigilJson
 {
     public static Sigil GetSigil(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

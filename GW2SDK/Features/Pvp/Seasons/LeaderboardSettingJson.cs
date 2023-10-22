@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Seasons;
 
-[PublicAPI]
-public static class LeaderboardSettingJson
+internal static class LeaderboardSettingJson
 {
     public static LeaderboardSetting GetLeaderboardSetting(
         this JsonElement json,

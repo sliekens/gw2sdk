@@ -2,8 +2,7 @@
 
 namespace GuildWars2.Traits;
 
-[PublicAPI]
-public static class CompoundTraitFactJson
+internal static class CompoundTraitFactJson
 {
     public static CompoundTraitFact GetCompoundTraitFact(
         this JsonElement json,

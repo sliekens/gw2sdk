@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.PointsOfInterest;
 
-[PublicAPI]
-public static class WaypointJson
+internal static class WaypointJson
 {
     public static Waypoint GetWaypoint(
         this JsonElement json,

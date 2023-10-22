@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Commerce.Prices;
 
-[PublicAPI]
-public static class ItemPriceJson
+internal static class ItemPriceJson
 {
     public static ItemPrice GetItemPrice(
         this JsonElement json,

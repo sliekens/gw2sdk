@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class BuildLoadoutTabUnlockerJson
+internal static class BuildLoadoutTabUnlockerJson
 {
     public static BuildLoadoutTabUnlocker GetBuildLoadoutTabUnlocker(
         this JsonElement json,

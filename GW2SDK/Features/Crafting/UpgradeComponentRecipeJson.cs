@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Crafting;
 
-[PublicAPI]
-public static class UpgradeComponentRecipeJson
+internal static class UpgradeComponentRecipeJson
 {
     public static UpgradeComponentRecipe GetUpgradeComponentRecipe(
         this JsonElement json,

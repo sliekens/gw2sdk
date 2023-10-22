@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class RelicJson
+internal static class RelicJson
 {
     public static Relic GetRelic(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

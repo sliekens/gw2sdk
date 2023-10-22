@@ -4,8 +4,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Armory;
 
-[PublicAPI]
-public static class EquipmentItemJson
+internal static class EquipmentItemJson
 {
     public static EquipmentItem GetEquipmentItem(
         this JsonElement json,

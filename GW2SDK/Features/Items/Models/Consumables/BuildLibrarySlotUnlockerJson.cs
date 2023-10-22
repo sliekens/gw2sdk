@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class BuildLibrarySlotUnlockerJson
+internal static class BuildLibrarySlotUnlockerJson
 {
     public static BuildLibrarySlotUnlocker GetBuildLibrarySlotUnlocker(
         this JsonElement json,

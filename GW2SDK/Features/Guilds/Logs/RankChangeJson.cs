@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Logs;
 
-[PublicAPI]
-public static class RankChangeJson
+internal static class RankChangeJson
 {
     public static RankChange GetRankChange(
         this JsonElement json,

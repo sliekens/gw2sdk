@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Crafting;
 
-[PublicAPI]
-public static class HelmRecipeJson
+internal static class HelmRecipeJson
 {
     public static HelmRecipe GetHelmRecipe(
         this JsonElement json,

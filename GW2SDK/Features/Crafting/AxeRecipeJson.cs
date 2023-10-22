@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Crafting;
 
-[PublicAPI]
-public static class AxeRecipeJson
+internal static class AxeRecipeJson
 {
     public static AxeRecipe GetAxeRecipe(
         this JsonElement json,

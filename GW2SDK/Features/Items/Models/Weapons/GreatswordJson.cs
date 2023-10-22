@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class GreatswordJson
+internal static class GreatswordJson
 {
     public static Greatsword GetGreatsword(
         this JsonElement json,

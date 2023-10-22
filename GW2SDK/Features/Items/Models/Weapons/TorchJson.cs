@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class TorchJson
+internal static class TorchJson
 {
     public static Torch GetTorch(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

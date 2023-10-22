@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.PointsOfInterest;
 
-[PublicAPI]
-public static class VistaJson
+internal static class VistaJson
 {
     public static Vista GetVista(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

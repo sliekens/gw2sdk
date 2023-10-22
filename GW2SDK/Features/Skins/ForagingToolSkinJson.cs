@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Skins;
 
-[PublicAPI]
-public static class ForagingToolSkinJson
+internal static class ForagingToolSkinJson
 {
     public static ForagingToolSkin GetForagingToolSkin(
         this JsonElement json,

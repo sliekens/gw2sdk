@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Achievements;
 
-[PublicAPI]
-public static class AchievementMinipetBitJson
+internal static class AchievementMinipetBitJson
 {
     public static AchievementMinipetBit GetAchievementMinipetBit(
         this JsonElement json,

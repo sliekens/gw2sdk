@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class GemJson
+internal static class GemJson
 {
     public static Gem GetGem(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

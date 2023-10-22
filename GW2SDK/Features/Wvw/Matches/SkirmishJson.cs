@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Matches;
 
-[PublicAPI]
-public static class SkirmishJson
+internal static class SkirmishJson
 {
     public static Skirmish GetSkirmish(
         this JsonElement json,

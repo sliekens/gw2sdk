@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Heroes;
 
-[PublicAPI]
-public static class HeroStatsJson
+internal static class HeroStatsJson
 {
     public static HeroStats GetHeroStats(
         this JsonElement json,

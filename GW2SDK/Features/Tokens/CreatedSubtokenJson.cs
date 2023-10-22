@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Tokens;
 
-[PublicAPI]
-public static class CreatedSubtokenJson
+internal static class CreatedSubtokenJson
 {
     public static CreatedSubtoken GetCreatedSubtoken(
         this JsonElement json,

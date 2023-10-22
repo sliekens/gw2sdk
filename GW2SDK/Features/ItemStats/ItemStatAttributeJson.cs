@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.ItemStats;
 
-[PublicAPI]
-public static class ItemStatAttributeJson
+internal static class ItemStatAttributeJson
 {
     public static ItemStatAttribute GetItemStatAttribute(
         this JsonElement json,

@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class AccessoryJson
+internal static class AccessoryJson
 {
     public static Accessory GetAccessory(
         this JsonElement json,

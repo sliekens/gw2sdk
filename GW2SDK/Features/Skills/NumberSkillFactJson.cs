@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Skills;
 
-[PublicAPI]
-public static class NumberSkillFactJson
+internal static class NumberSkillFactJson
 {
     public static NumberSkillFact GetNumberSkillFact(
         this JsonElement json,

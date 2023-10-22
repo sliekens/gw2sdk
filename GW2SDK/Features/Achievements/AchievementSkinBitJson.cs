@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Achievements;
 
-[PublicAPI]
-public static class AchievementSkinBitJson
+internal static class AchievementSkinBitJson
 {
     public static AchievementSkinBit GetAchievementSkinBit(
         this JsonElement json,

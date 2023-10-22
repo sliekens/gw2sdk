@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Skins;
 
-[PublicAPI]
-public static class CoatSkinJson
+internal static class CoatSkinJson
 {
     public static CoatSkin GetCoatSkin(
         this JsonElement json,

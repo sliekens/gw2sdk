@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class HammerJson
+internal static class HammerJson
 {
     public static Hammer GetHammer(
         this JsonElement json,

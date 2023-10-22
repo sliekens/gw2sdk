@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Commerce.Transactions;
 
-[PublicAPI]
-public static class TransactionJson
+internal static class TransactionJson
 {
     public static Transaction GetTransaction(
         this JsonElement json,

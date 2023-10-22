@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Seasons;
 
-[PublicAPI]
-public static class DivisionJson
+internal static class DivisionJson
 {
     public static Division GetDivision(
         this JsonElement json,

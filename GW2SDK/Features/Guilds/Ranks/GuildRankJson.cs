@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Ranks;
 
-[PublicAPI]
-public static class GuildRankJson
+internal static class GuildRankJson
 {
     public static GuildRank GetGuildRank(
         this JsonElement json,

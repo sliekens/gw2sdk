@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Skills;
 
-[PublicAPI]
-public static class HealSkillJson
+internal static class HealSkillJson
 {
     public static HealSkill GetHealSkill(
         this JsonElement json,

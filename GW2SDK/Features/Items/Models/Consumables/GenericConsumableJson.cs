@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class GenericConsumableJson
+internal static class GenericConsumableJson
 {
     public static GenericConsumable GetGenericConsumable(
         this JsonElement json,

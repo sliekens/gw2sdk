@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Abilities;
 
-[PublicAPI]
-public static class AbilityJson
+internal static class AbilityJson
 {
     public static Ability GetAbility(
         this JsonElement json,

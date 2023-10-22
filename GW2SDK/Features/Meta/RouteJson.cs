@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Meta;
 
-[PublicAPI]
-public static class RouteJson
+internal static class RouteJson
 {
     public static Route GetRoute(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

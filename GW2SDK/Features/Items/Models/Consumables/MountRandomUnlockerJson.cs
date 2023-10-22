@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class MountRandomUnlockerJson
+internal static class MountRandomUnlockerJson
 {
     public static MountRandomUnlocker GetMountRandomUnlocker(
         this JsonElement json,

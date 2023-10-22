@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Skills;
 
-[PublicAPI]
-public static class ToolbeltSkillJson
+internal static class ToolbeltSkillJson
 {
     public static ToolbeltSkill GetToolbeltSkill(
         this JsonElement json,

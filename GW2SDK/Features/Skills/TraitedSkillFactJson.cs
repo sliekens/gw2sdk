@@ -2,8 +2,7 @@ using System.Text.Json;
 
 namespace GuildWars2.Skills;
 
-[PublicAPI]
-public static class TraitedSkillFactJson
+internal static class TraitedSkillFactJson
 {
     public static TraitedSkillFact GetTraitedSkillFact(
         this JsonElement json,

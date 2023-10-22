@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Objectives;
 
-[PublicAPI]
-public static class ObjectiveJson
+internal static class ObjectiveJson
 {
     public static Objective GetObjective(
         this JsonElement json,

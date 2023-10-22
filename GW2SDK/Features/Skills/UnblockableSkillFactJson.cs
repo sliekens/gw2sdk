@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Skills;
 
-[PublicAPI]
-public static class UnblockableSkillFactJson
+internal static class UnblockableSkillFactJson
 {
     public static UnblockableSkillFact GetUnblockableSkillFact(
         this JsonElement json,

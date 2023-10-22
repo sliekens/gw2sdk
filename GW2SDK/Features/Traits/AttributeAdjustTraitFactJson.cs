@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Traits;
 
-[PublicAPI]
-public static class AttributeAdjustTraitFactJson
+internal static class AttributeAdjustTraitFactJson
 {
     public static AttributeAdjustTraitFact GetAttributeAdjustTraitFact(
         this JsonElement json,

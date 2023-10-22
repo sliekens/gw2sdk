@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Armory;
 
-[PublicAPI]
-public static class PvpEquipmentJson
+internal static class PvpEquipmentJson
 {
     public static PvpEquipment GetPvpEquipment(
         this JsonElement json,

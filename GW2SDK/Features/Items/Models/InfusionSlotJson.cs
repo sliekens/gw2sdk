@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class InfusionSlotJson
+internal static class InfusionSlotJson
 {
     public static InfusionSlot GetInfusionSlot(
         this JsonElement json,

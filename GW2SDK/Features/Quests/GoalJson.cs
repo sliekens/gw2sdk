@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Quests;
 
-[PublicAPI]
-public static class GoalJson
+internal static class GoalJson
 {
     public static Goal GetGoal(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {

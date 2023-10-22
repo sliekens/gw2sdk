@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class TransmutationJson
+internal static class TransmutationJson
 {
     public static Transmutation GetTransmutation(
         this JsonElement json,

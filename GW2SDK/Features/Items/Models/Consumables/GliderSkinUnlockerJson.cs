@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class GliderSkinUnlockerJson
+internal static class GliderSkinUnlockerJson
 {
     public static GliderSkinUnlocker GetGliderSkinUnlocker(
         this JsonElement json,

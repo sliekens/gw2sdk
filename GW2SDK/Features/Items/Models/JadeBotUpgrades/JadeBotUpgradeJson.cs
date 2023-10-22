@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class JadeBotUpgradeJson
+internal static class JadeBotUpgradeJson
 {
     public static JadeBotUpgrade GetJadeBotUpgrade(
         this JsonElement json,

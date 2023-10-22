@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Bank;
 
-[PublicAPI]
-public static class GuildBankSlotJson
+internal static class GuildBankSlotJson
 {
     public static GuildBankSlot? GetGuildBankSlot(
         this JsonElement json,

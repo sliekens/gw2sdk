@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Novelties;
 
-[PublicAPI]
-public static class NoveltyJson
+internal static class NoveltyJson
 {
     public static Novelty GetNovelty(
         this JsonElement json,

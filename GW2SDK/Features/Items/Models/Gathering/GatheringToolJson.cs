@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-[PublicAPI]
-public static class GatheringToolJson
+internal static class GatheringToolJson
 {
     public static GatheringTool GetGatheringTool(
         this JsonElement json,

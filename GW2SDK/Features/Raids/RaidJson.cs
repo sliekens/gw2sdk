@@ -3,8 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Raids;
 
-[PublicAPI]
-public static class RaidJson
+internal static class RaidJson
 {
     public static Raid GetRaid(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
