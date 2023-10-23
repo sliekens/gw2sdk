@@ -86,9 +86,10 @@
       },
       {
         "src": "docs/api",
+        "dest": "api",
         "files": [
           "**.yml",
-          "toc.yml"
+          "index.md"
         ]
       }
     ],
