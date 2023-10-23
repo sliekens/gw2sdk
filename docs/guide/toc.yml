@@ -1,5 +1,7 @@
+- name: Introduction
+  href: introduction.md
 - name: Installation
-  href: install.md
+  href: installation.md
 - name: Basic usage
   href: usage.md
 - name: Translations

@@ -53,7 +53,7 @@
         "dest": "api",
         "files": [
           "**.yml",
-          "toc.yml"
+          "index.md"
         ]
       }
     ],
