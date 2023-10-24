@@ -37,11 +37,9 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v3
 
-      - name: Install dotnet tools
-        run: dotnet tool restore
-
       - name: Build documentation site
         run: |
+          dotnet tool restore
           dotnet docfx metadata
           dotnet docfx build
 
