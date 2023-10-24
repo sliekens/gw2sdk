@@ -41,8 +41,7 @@ jobs:
         run: |
           dotnet tool restore
           dotnet tool list
-          dotnet docfx metadata
-          dotnet docfx build
+          dotnet docfx
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
