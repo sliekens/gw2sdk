@@ -1,42 +1,33 @@
 ﻿using System;
 using System.Net.Http;
 using GuildWars2;
+using GuildWars2.Commerce.Prices;
+using GuildWars2.Items;
 
 // Create a Gw2Client which requires an HttpClient
 using var httpClient = new HttpClient();
 var gw2 = new Gw2Client(httpClient);
 
-// Use the Gw2Client to access the API
-// For example, print the game version number
-var version = await gw2.Meta.GetBuild();
-Console.WriteLine($"The current game version is {version.Value.Id:N0}");
-Console.WriteLine();
+PrintHeader();
 
-// For example, print the current gem exchange rate for 100 gold
-var gems = await gw2.Commerce.ExchangeGoldForGems(new Coin(100, 0, 0));
-Console.WriteLine($"{gems.Value.GemsToReceive} gems cost 100 gold");
-Console.WriteLine($"1 gem costs {gems.Value.CoinsPerGem}");
-Console.WriteLine();
-
-// For example, print raids and their wings and encounters
-var raids = await gw2.Raids.GetRaids();
-foreach (var raid in raids.Value)
+// Get the trading post prices for all items in bulk
+await foreach (ItemPrice itemPrice in gw2.Commerce.GetItemPricesBulk())
 {
-    Console.WriteLine($"Raid: {raid.Id}");
+    // ItemPrice contains an Id, BestBid, and BestAsk
+    // Use the ID to get the item name
+    Item item = await gw2.Items.GetItemById(itemPrice.Id);
 
-    int wingNumber = 0;
-    foreach (var wing in raid.Wings)
-    {
-        wingNumber++;
-        Console.WriteLine($"  W{wingNumber}: {wing.Id}");
+    PrintRow(item.Name, itemPrice.BestBid, itemPrice.BestAsk);
+}
 
-        int encounterNumber = 0;
-        foreach (var encounter in wing.Encounters)
-        {
-            encounterNumber++;
-            Console.WriteLine($"    Encounter {encounterNumber}: {encounter.Id} ({encounter.Kind})");
-        }
-    }
+void PrintHeader()
+{
+    Console.WriteLine(new string('=', 160));
+    Console.WriteLine($"| {"Item",-50} | {"Highest buyer",-50} | {"Lowest seller",-50} |");
+    Console.WriteLine(new string('=', 160));
+}
 
-    Console.WriteLine();
+void PrintRow(string item, Coin highestBuyer, Coin lowestSeller)
+{
+    Console.WriteLine($"| {item,-50} | {highestBuyer,-50} | {lowestSeller,-50} |");
 }
