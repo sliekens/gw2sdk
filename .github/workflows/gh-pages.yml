@@ -39,9 +39,9 @@ jobs:
 
       - name: Build documentation site
         run: |
-          tree -fug -it $HOME
+          tree -ah -fug -it $HOME
           dotnet tool restore
-          tree -fug -it $HOME
+          tree -ah -fug -it $HOME
           dotnet tool list
           dotnet docfx
 
