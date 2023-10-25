@@ -5,8 +5,6 @@ Problems may arise from creating `new HttpClient()` instances with its parameter
 - Creating a _short-lived_ client each time can lead to socket exhaustion if you do it at scale
 - Creating a _long-lived_ client that is reused can lead to stale DNS problems
 
-(The DNS issue is less of a problem for the Guild Wars 2 API because it has a static IP, but keep it in mind.)
-
 To counter these issues, Microsoft recommends doing one of two things:
 
 1. Either use a _long-lived_ client and set `PooledConnectionLifetime` to a reasonable value (e.g. 2 minutes)
