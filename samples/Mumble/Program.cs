@@ -130,7 +130,7 @@ gameLink.Subscribe(
     stoppingToken
 );
 
-app.Run();
+await app.RunAsync(stoppingToken);
 
 IHost CreateApplication()
 {

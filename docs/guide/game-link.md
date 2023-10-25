@@ -97,10 +97,49 @@ It illustrates the following concepts:
 
 Example output:
 
-(Some lines were removed for brevity. I recommend to run this sample yourself to see the output in realtime.)
-
 ``` text
-TODO update me
+09:59:47.657 info: System.Net.Http.HttpClient.Gw2Client.LogicalHandler[100] Start processing HTTP request GET https://api.guildwars2.com/v2/maps?ids=all&v=2022-03-23T19:00:00.000Z
+09:59:47.703 info: System.Net.Http.HttpClient.Gw2Client.ClientHandler[100] Sending HTTP request GET https://api.guildwars2.com/v2/maps?ids=all&v=2022-03-23T19:00:00.000Z
+09:59:47.958 info: System.Net.Http.HttpClient.Gw2Client.ClientHandler[101] Received HTTP response headers after 250.0283ms - 200
+09:59:47.959 info: System.Net.Http.HttpClient.Gw2Client.LogicalHandler[101] End processing HTTP request after 317.3058ms - 200
+09:59:48.061 info: System.Net.Http.HttpClient.Gw2Client.LogicalHandler[100] Start processing HTTP request GET https://api.guildwars2.com/v2/specializations?ids=all&v=2022-03-23T19:00:00.000Z
+09:59:48.061 info: System.Net.Http.HttpClient.Gw2Client.ClientHandler[100] Sending HTTP request GET https://api.guildwars2.com/v2/specializations?ids=all&v=2022-03-23T19:00:00.000Z
+09:59:48.101 info: System.Net.Http.HttpClient.Gw2Client.ClientHandler[101] Received HTTP response headers after 39.319ms - 200
+09:59:48.101 info: System.Net.Http.HttpClient.Gw2Client.LogicalHandler[101] End processing HTTP request after 39.5207ms - 200
+09:59:48.136 info: GuildWars2.GameLink[0] [58914] Invert Control, the Human Engineer (Mechanist) is on Skyscale in Arborstone (PublicMini), Position: { Latitude = -856.519, Longitude = 570.44257, Elevation = 28.097889 }
+09:59:48.151 info: Microsoft.Hosting.Lifetime[0] Application started. Press Ctrl+C to shut down.
+09:59:48.151 info: Microsoft.Hosting.Lifetime[0] Hosting environment: Production
+09:59:48.151 info: Microsoft.Hosting.Lifetime[0] Content root path: X:\src\GW2SDK
+09:59:49.116 info: GuildWars2.GameLink[0] [58975] Invert Control, the Human Engineer (Mechanist) is on Skyscale in Arborstone (PublicMini), Position: { Latitude = -856.519, Longitude = 570.44257, Elevation = 28.097889 }
+09:59:50.114 info: GuildWars2.GameLink[0] [59034] Invert Control, the Human Engineer (Mechanist) is on Skyscale in Arborstone (PublicMini), Position: { Latitude = -856.519, Longitude = 570.44257, Elevation = 28.097889 }
+09:59:51.113 info: GuildWars2.GameLink[0] [59097] Invert Control, the Human Engineer (Mechanist) is on Skyscale in Arborstone (PublicMini), Position: { Latitude = -856.519, Longitude = 570.44257, Elevation = 28.097889 }
+09:59:52.123 info: GuildWars2.GameLink[0] [59160] Invert Control, the Human Engineer (Mechanist) is on Skyscale in Arborstone (PublicMini), Position: { Latitude = -856.519, Longitude = 570.44257, Elevation = 28.097889 }
+09:59:53.118 info: GuildWars2.GameLink[0] [59226] Invert Control, the Human Engineer (Mechanist) is on Skyscale in Arborstone (PublicMini), Position: { Latitude = -854.0615, Longitude = 568.6599, Elevation = 27.56997 }
+09:59:54.117 info: GuildWars2.GameLink[0] [59278] Invert Control, the Human Engineer (Mechanist) is on foot in Arborstone (PublicMini), Position: { Latitude = -844.7674, Longitude = 561.7398, Elevation = 22.347445 }
+09:59:55.125 info: GuildWars2.GameLink[0] [59333] Invert Control, the Human Engineer (Mechanist) is on foot in Arborstone (PublicMini), Position: { Latitude = -838.48975, Longitude = 556.62787, Elevation = 9.980106 }
+09:59:56.117 info: GuildWars2.GameLink[0] [59399] Invert Control, the Human Engineer (Mechanist) is on foot in Arborstone (PublicMini), Position: { Latitude = -833.0732, Longitude = 549.5106, Elevation = 2.9267163 }
+09:59:57.127 info: GuildWars2.GameLink[0] [59464] Invert Control, the Human Engineer (Mechanist) is on foot in Arborstone (PublicMini), Position: { Latitude = -826.98865, Longitude = 541.961, Elevation = 2.0309002 }
+09:59:58.126 info: GuildWars2.GameLink[0] [59521] Invert Control, the Human Engineer (Mechanist) is on foot in Arborstone (PublicMini), Position: { Latitude = -820.667, Longitude = 535.5705, Elevation = 2.1029532 }
+09:59:59.119 info: GuildWars2.GameLink[0] [59581] Invert Control, the Human Engineer (Mechanist) is on RollerBeetle in Arborstone (PublicMini), Position: { Latitude = -831.20386, Longitude = 537.6345, Elevation = 1.891227 }
+10:00:00.114 info: GuildWars2.GameLink[0] [59650] Invert Control, the Human Engineer (Mechanist) is on RollerBeetle in Arborstone (PublicMini), Position: { Latitude = -852.5697, Longitude = 552.98627, Elevation = -0.5047009 }
+10:00:01.114 info: GuildWars2.GameLink[0] [59725] Invert Control, the Human Engineer (Mechanist) is on RollerBeetle in Arborstone (PublicMini), Position: { Latitude = -880.77545, Longitude = 582.04364, Elevation = 12.155696 }
+10:00:02.124 info: GuildWars2.GameLink[0] [59808] Invert Control, the Human Engineer (Mechanist) is on RollerBeetle in Arborstone (PublicMini), Position: { Latitude = -912.4395, Longitude = 612.05066, Elevation = 11.06934 }
+10:00:03.123 info: GuildWars2.GameLink[0] [59886] Invert Control, the Human Engineer (Mechanist) is on foot in Arborstone (PublicMini), Position: { Latitude = -934.91766, Longitude = 633.8974, Elevation = 14.476834 }
+10:00:04.114 info: GuildWars2.GameLink[0] [59980] Invert Control, the Human Engineer (Mechanist) is looking at the map
+10:00:05.129 info: GuildWars2.GameLink[0] [60122] Invert Control, the Human Engineer (Mechanist) is looking at the map
+10:00:06.129 info: GuildWars2.GameLink[0] [60263] Invert Control, the Human Engineer (Mechanist) is looking at the map
+10:00:07.118 info: GuildWars2.GameLink[0] [60394] Invert Control, the Human Engineer (Mechanist) is looking at the map
+10:00:08.127 info: GuildWars2.GameLink[0] [60504] Invert Control, the Human Engineer (Mechanist) is typing
+10:00:09.126 info: GuildWars2.GameLink[0] [60619] Invert Control, the Human Engineer (Mechanist) is typing
+10:00:10.119 info: GuildWars2.GameLink[0] [60732] Invert Control, the Human Engineer (Mechanist) is typing
+10:00:11.118 info: GuildWars2.GameLink[0] [60846] Invert Control, the Human Engineer (Mechanist) is typing
+10:00:12.114 info: GuildWars2.GameLink[0] [60956] Invert Control, the Human Engineer (Mechanist) is typing
+10:00:13.127 info: GuildWars2.GameLink[0] [61072] Invert Control, the Human Engineer (Mechanist) is typing
+10:00:14.124 info: GuildWars2.GameLink[0] [61182] Invert Control, the Human Engineer (Mechanist) is typing
+10:00:15.126 info: GuildWars2.GameLink[0] [61289] Invert Control, the Human Engineer (Mechanist) is afk
+10:00:16.119 info: GuildWars2.GameLink[0] [61398] Invert Control, the Human Engineer (Mechanist) is afk
+10:00:17.117 info: GuildWars2.GameLink[0] [61511] Invert Control, the Human Engineer (Mechanist) is afk
+10:00:17.536 info: Microsoft.Hosting.Lifetime[0] Application is shutting down...
 ```
 
 [race]:https://wiki.guildwars2.com/wiki/Playable_races
