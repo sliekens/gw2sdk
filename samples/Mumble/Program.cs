@@ -1,35 +1,21 @@
 ﻿using System;
-using System.Globalization;
-using System.Text;
 using GuildWars2;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Mumble;
-
-Console.OutputEncoding = Encoding.UTF8;
-CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en");
-CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo("en");
 
 if (!GameLink.IsSupported())
 {
-    Console.WriteLine("This sample is only supported on Windows!");
-    return;
+    throw new PlatformNotSupportedException();
 }
 
-var builder = Host.CreateApplicationBuilder(args);
+var refreshInterval = TimeSpan.FromSeconds(1);
+using var gameLink = GameLink.Open(refreshInterval);
 
-builder.Services.AddHttpClient<Gw2Client>();
-builder.Services.AddHostedService<GameReporter>();
-builder.Logging.AddSimpleConsole(
-    options =>
+gameLink.Subscribe(
+    gameTick =>
     {
-        options.SingleLine = true;
-        options.TimestampFormat = "HH:mm:ss.fff ";
-        options.UseUtcTimestamp = true;
+        var player = gameTick.GetIdentity();
+        if (player is not null)
+        {
+            Console.WriteLine($"{player.Name} is ready to go!");
+        }
     }
 );
-
-var app = builder.Build();
-
-app.Run();
