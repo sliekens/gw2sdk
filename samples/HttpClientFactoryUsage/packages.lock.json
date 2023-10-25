@@ -46,6 +46,12 @@
           "Microsoft.Extensions.Options": "8.0.0-rc.2.23479.6"
         }
       },
+      "Pastel": {
+        "type": "Direct",
+        "requested": "[4.2.0, )",
+        "resolved": "4.2.0",
+        "contentHash": "0Nysn0i46mCOLlPDoZ3mnHHKFSNcKF3uWvsR5gx7ib+PWTEhDFWfXPE3Sj8AV37HzQjEZcvr9AgNGHiVW0yrEA=="
+      },
       "Microsoft.Extensions.Configuration": {
         "type": "Transitive",
         "resolved": "8.0.0-rc.2.23479.6",
