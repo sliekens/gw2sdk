@@ -24,11 +24,11 @@ var handler = new SocketsHttpHandler
 var sharedClient = new HttpClient(handler);
 ```
 
-> [!TIP]
+> [!NOTE]
 > The shared `HttpClient` is never disposed in this case, which is on purpose. It's intended to stay alive for the lifetime of the application.
 
-> [!NOTE]
-> The `SocketsHttpHandler` is not available in .NET Framework, only in .NET Core and .NET 5+.
+> [!WARNING]
+> This solution is unavailable for .NET Framework, the `SocketsHttpHandler` only exists for .NET Core and .NET 5+.
 
 ## Example: using Microsoft.Extensions.Http to manage the connection lifetime
 
