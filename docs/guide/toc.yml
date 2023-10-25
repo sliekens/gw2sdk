@@ -8,11 +8,11 @@
   href: usage-limits.md
 - name: Translations
   href: translations.md
-- name: Game Link
-  href: game-link.md
 - name: Using HTTP client factory
   href: http-client-factory.md
 - name: Resiliency
   href: resiliency.md
+- name: Game Link
+  href: game-link.md
 - name: Feedback
   href: feedback.md
