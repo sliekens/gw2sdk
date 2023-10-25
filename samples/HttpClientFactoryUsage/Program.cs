@@ -1,5 +1,4 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using GuildWars2;
 using GuildWars2.Colors;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,31 +6,24 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Pastel;
 
-var host = Host.CreateApplicationBuilder(args);
+var appBuilder = Host.CreateApplicationBuilder(args);
 
-// Use AddHttpClient to register the Gw2Client with the HttpClientFactory
-host.Services.AddHttpClient<Gw2Client>(
-    httpClient =>
-    {
-        // Here you can further configure the HttpClient
-        // e.g. you can set a different base address and a different timeout
-        httpClient.BaseAddress = BaseAddress.DefaultUri;
-        httpClient.Timeout = TimeSpan.FromSeconds(100);
-    }
-);
+// Set up the HTTP client factory
+appBuilder.Services.AddHttpClient<Gw2Client>();
 
-var app = host.Build();
+var app = appBuilder.Build();
 
+// Obtain a Gw2Client from the service provider, which uses the HTTP client factory
 var gw2 = app.Services.GetRequiredService<Gw2Client>();
 
-var colors = await gw2.Dyes.GetColors();
-
-foreach (var dye in colors.Value)
+// Some demo code to print dye colors, using Pastel to colorize the console output
+foreach (var dye in (await gw2.Dyes.GetColors()).Value)
 {
-    PrintRow(dye.Name, dye.Cloth.Rgb, dye.Leather.Rgb, dye.Metal.Rgb);
+    PrintColor(dye.Name, dye.Cloth.Rgb, dye.Leather.Rgb, dye.Metal.Rgb);
 }
 
-void PrintRow(string name, Color cloth, Color leather, Color metal)
+// Helper method to print a row of colors
+void PrintColor(string name, Color cloth, Color leather, Color metal)
 {
     app.Services.GetRequiredService<ILogger<Dye>>()
         .LogInformation(
