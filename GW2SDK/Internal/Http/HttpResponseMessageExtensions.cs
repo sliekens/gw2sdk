@@ -1,4 +1,5 @@
 ﻿using System.IO.Compression;
+using System.Net;
 using System.Text.Json;
 
 namespace GuildWars2.Http;
@@ -44,148 +45,51 @@ internal static class HttpResponseMessageExtensions
         CancellationToken cancellationToken
     )
     {
-        if ((int)instance.StatusCode >= 500)
+        if (instance.IsSuccessStatusCode)
         {
-            if (instance.Content.Headers.ContentType?.MediaType != "application/json")
-            {
-                throw new GatewayException(instance.StatusCode, instance.ReasonPhrase)
-                {
-                    Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
-                };
-            }
-
-            using var json = await instance.Content.ReadAsJsonAsync(cancellationToken)
-                .ConfigureAwait(false);
-            if (!json.RootElement.TryGetProperty("text", out var text))
-            {
-                throw new GatewayException(instance.StatusCode, instance.ReasonPhrase)
-                {
-                    Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
-                };
-            }
-
-            throw new GatewayException(instance.StatusCode, text.GetString())
-            {
-                Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
-            };
+            return;
         }
 
-        if (instance.StatusCode == NotFound)
+        var requestUri = instance.RequestMessage?.RequestUri?.ToString();
+        var reason = instance.ReasonPhrase;
+        if (instance.Content.Headers.ContentType?.MediaType == "application/json")
         {
-            if (instance.Content.Headers.ContentType?.MediaType != "application/json")
-            {
-                throw new ResourceNotFoundException(instance.ReasonPhrase)
-                {
-                    Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
-                };
-            }
-
             using var json = await instance.Content.ReadAsJsonAsync(cancellationToken)
                 .ConfigureAwait(false);
-            if (!json.RootElement.TryGetProperty("text", out var text))
+            if (json.RootElement.TryGetProperty("text", out var text))
             {
-                throw new ResourceNotFoundException(instance.ReasonPhrase)
-                {
-                    Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
-                };
+                reason = text.GetString();
             }
-
-            throw new ResourceNotFoundException(text.GetString())
-            {
-                Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
-            };
         }
 
-        if (instance.StatusCode == BadRequest)
+        switch (instance.StatusCode)
         {
-            if (instance.Content.Headers.ContentType?.MediaType != "application/json")
-            {
-                throw new ArgumentException(instance.ReasonPhrase)
+            case >= InternalServerError:
+                throw new GatewayException(instance.StatusCode, reason)
                 {
-                    Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
+                    Data = { ["RequestUri"] = requestUri }
                 };
-            }
-
-            using var json = await instance.Content.ReadAsJsonAsync(cancellationToken)
-                .ConfigureAwait(false);
-            if (!json.RootElement.TryGetProperty("text", out var text))
-            {
-                throw new ArgumentException(instance.ReasonPhrase)
+            case NotFound:
+                throw new ResourceNotFoundException(reason)
                 {
-                    Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
+                    Data = { ["RequestUri"] = requestUri }
                 };
-            }
-
-            var reason = text.GetString();
-            if (reason == "ErrTimeout")
-            {
-                // Sometimes the API responds with 400 Bad Request and message ErrTimeout
-                // That's not a user error and should be handled as 504 Gateway Timeout
-                throw new GatewayException(GatewayTimeout, reason)
+            case BadRequest:
+                throw new ArgumentException(reason) { Data = { ["RequestUri"] = requestUri } };
+            case Unauthorized or Forbidden:
+                throw new UnauthorizedOperationException(reason)
                 {
-                    Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
+                    Data = { ["RequestUri"] = requestUri }
                 };
-            }
-
-            throw new ArgumentException(reason)
-            {
-                Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
-            };
+            case TooManyRequests:
+                throw new TooManyRequestsException(reason)
+                {
+                    Data = { ["RequestUri"] = requestUri }
+                };
+            default:
+                // Throw a super generic, super useless error for cases that we missed
+                instance.EnsureSuccessStatusCode();
+                break;
         }
-
-        if (instance.StatusCode is Unauthorized or Forbidden)
-        {
-            if (instance.Content.Headers.ContentType?.MediaType != "application/json")
-            {
-                throw new UnauthorizedOperationException(instance.ReasonPhrase)
-                {
-                    Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
-                };
-            }
-
-            using var json = await instance.Content.ReadAsJsonAsync(cancellationToken)
-                .ConfigureAwait(false);
-            if (!json.RootElement.TryGetProperty("text", out var text))
-            {
-                throw new UnauthorizedOperationException(instance.ReasonPhrase)
-                {
-                    Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
-                };
-            }
-
-            throw new UnauthorizedOperationException(text.GetString())
-            {
-                Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
-            };
-        }
-
-        if (instance.StatusCode == TooManyRequests)
-        {
-            if (instance.Content.Headers.ContentType?.MediaType != "application/json")
-            {
-                throw new TooManyRequestsException(instance.ReasonPhrase)
-                {
-                    Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
-                };
-            }
-
-            using var json = await instance.Content.ReadAsJsonAsync(cancellationToken)
-                .ConfigureAwait(false);
-            if (!json.RootElement.TryGetProperty("text", out var text))
-            {
-                throw new TooManyRequestsException(instance.ReasonPhrase)
-                {
-                    Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
-                };
-            }
-
-            throw new TooManyRequestsException(text.GetString())
-            {
-                Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
-            };
-        }
-
-        // Throw a super generic, super useless error for cases that we missed
-        instance.EnsureSuccessStatusCode();
     }
 }
