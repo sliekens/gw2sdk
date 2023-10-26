@@ -1,4 +1,4 @@
-# HTTP client factories
+# Managing the lifetime of HttpClient
 
 Problems may arise from creating `new HttpClient()` instances with its parameterless constructor:
 

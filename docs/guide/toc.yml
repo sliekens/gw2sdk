@@ -1,18 +1,27 @@
 - name: Introduction
   href: introduction.md
-- name: Installation
-  href: installation.md
-- name: Basic usage
+  items:
+  - name: Introduction
+    href: introduction.md
+  - name: Installation
+    href: installation.md
+- name: Usage examples
   href: usage.md
-- name: Usage limits
-  href: usage-limits.md
-- name: Translations
-  href: translations.md
-- name: Using HTTP client factory
-  href: http-client-factory.md
-- name: Resiliency
-  href: resiliency.md
-- name: Game Link
-  href: game-link.md
+  items:
+  - name: Basic usage
+    href: usage.md
+  - name: Translations
+    href: translations.md
+  - name: Game Link
+    href: game-link.md
+- name: Error handling
+  href: http-client-lifetime.md
+  items:
+  - name: HttpClient lifetime
+    href: http-client-lifetime.md
+  - name: API Usage limits
+    href: usage-limits.md
+  - name: Resiliency with Polly
+    href: resiliency.md
 - name: Feedback
   href: feedback.md
