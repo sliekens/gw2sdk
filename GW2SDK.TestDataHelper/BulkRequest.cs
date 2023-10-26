@@ -40,7 +40,7 @@ public class BulkRequest
 
         var content = await response.Content.ReadAsStreamAsync(cancellationToken)
             .ConfigureAwait(false);
-        content = new GZipStream(content, CompressionMode.Compress);
+        content = new GZipStream(content, CompressionMode.Decompress);
         await using (content)
         {
             return await JsonDocument.ParseAsync(content, cancellationToken: cancellationToken)
