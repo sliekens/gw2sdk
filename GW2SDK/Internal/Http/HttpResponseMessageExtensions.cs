@@ -46,7 +46,25 @@ internal static class HttpResponseMessageExtensions
     {
         if ((int)instance.StatusCode >= 500)
         {
-            throw new GatewayException(instance.StatusCode, instance.ReasonPhrase)
+            if (instance.Content.Headers.ContentType?.MediaType != "application/json")
+            {
+                throw new GatewayException(instance.StatusCode, instance.ReasonPhrase)
+                {
+                    Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
+                };
+            }
+
+            using var json = await instance.Content.ReadAsJsonAsync(cancellationToken)
+                .ConfigureAwait(false);
+            if (!json.RootElement.TryGetProperty("text", out var text))
+            {
+                throw new GatewayException(instance.StatusCode, instance.ReasonPhrase)
+                {
+                    Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
+                };
+            }
+
+            throw new GatewayException(instance.StatusCode, text.GetString())
             {
                 Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
             };

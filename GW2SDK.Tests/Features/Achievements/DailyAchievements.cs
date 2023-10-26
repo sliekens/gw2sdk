@@ -1,4 +1,4 @@
-using GuildWars2.Http;
+﻿using GuildWars2.Http;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Achievements;
@@ -19,6 +19,6 @@ public class DailyAchievements
 
         // Unavailable due to Wizard Vault changes
         var reason = Assert.IsType<GatewayException>(e);
-        Assert.Equal("Service Unavailable", reason.Message);
+        Assert.Equal("API not active", reason.Message);
     }
 }
