@@ -22,9 +22,16 @@ Errors may also occur when deserializing the JSON (unmarshaling) to objects, whi
 
 To counter network problems, make your HttpClient more resilient with automatic retries, timeout and delay policies using Polly.
 
-See the full guide here: <https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests>
+I recommend at least adding some timeouts and automatic retries.
 
-I recommend at least adding some timeouts and automatic retries. Tweak as needed.
+This example has the following policies:
+
+- Wait when the rate limit is exceeded and then retry (until the HttpClient timeout is reached)
+- Wait and retry exactly once for Service Unavailable errors because they might be intentional
+- Hedge against internal server errors or gateway timeouts by performing immediate retries
+- Cancel and retry when a request hangs for 30 seconds
+
+Tweak as needed.
 
 [!code-csharp[](../../samples/PollyUsage/Program.cs)]
 
