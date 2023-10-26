@@ -36,7 +36,7 @@ In this example, a _short-lived_ client is obtained using `Microsoft.Extensions.
 
 [!code-csharp[](../../samples/HttpClientFactoryUsage/Program.cs)]
 
-## Additional sources
+## Additional resources
 
 More details on the fundamentals of `HttpClient` can be found here:
 

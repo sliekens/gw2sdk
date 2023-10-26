@@ -1,92 +1,151 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
+using System.Text.Json;
+using System.Threading.Tasks;
 using GuildWars2;
-using GuildWars2.Achievements;
-using GuildWars2.Achievements.Dailies;
+using GuildWars2.Commerce.Prices;
+using GuildWars2.Items;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Http.Resilience;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 using Polly;
-using Polly.Timeout;
+using Polly.Hedging;
+using Polly.Retry;
 using static System.Net.HttpStatusCode;
 
-var host = new HostBuilder().ConfigureServices(
-        services =>
-        {
-            services.AddHttpClient<Gw2Client>(
-                    httpClient =>
-                    {
-                        // Configure a timeout after which OperationCanceledException is thrown
-                        // The default timeout is 100 seconds, but it's not always enough for background work
-                        //  because requests can get stuck in a delayed retry-loop due to rate limiting
-                        httpClient.Timeout = TimeSpan.FromSeconds(600);
+var appBuilder = Host.CreateApplicationBuilder(args);
 
-                        // For user interactive apps, you want to set a lower timeout
-                        // to avoid long waiting periods when there are technical difficulties
-                        httpClient.Timeout = TimeSpan.FromSeconds(20);
-                    }
-                )
+var httpClientBuilder = appBuilder.Services.AddHttpClient<Gw2Client>(
+    static httpClient =>
+    {
+        // Configure a timeout after which OperationCanceledException is thrown
+        // The default timeout is 100 seconds, but it's not always enough for background work
+        //  because requests can get stuck in a delayed retry-loop due to rate limiting
+        httpClient.Timeout = TimeSpan.FromSeconds(600);
 
-                // The API has rate limiting (by IP address) so wait and retry when the server indicates too many requests
-                .AddPolicyHandler(
-                    Policy.HandleResult<HttpResponseMessage>(
-                            response => response.StatusCode == TooManyRequests
-                        )
-                        .WaitAndRetryAsync(10, _ => TimeSpan.FromSeconds(10))
-                )
+        // For user interactive apps, you want to set a lower timeout
+        // to avoid long waiting periods when there are technical difficulties
+        httpClient.Timeout = TimeSpan.FromSeconds(20);
+    }
+);
 
-                // The API can be disabled intentionally to avoid leaking spoilers, or it can be unavailable due to technical difficulties
-                // Since it's not easy to tell the difference, give it one retry
-                .AddPolicyHandler(
-                    Policy.HandleResult<HttpResponseMessage>(
-                            response => response.StatusCode == ServiceUnavailable
-                        )
-                        .RetryAsync()
-                )
+httpClientBuilder.AddResilienceHandler(
+    "api.guildwars2.com",
+    builder =>
+    {
+        builder.AddRetry(
+            new RetryStrategyOptions<HttpResponseMessage>
+            {
+                Name = "retries",
+                ShouldHandle = attempt => attempt.Outcome switch
+                {
+                    // Retry on too many requests
+                    { Result.StatusCode: TooManyRequests } => PredicateResult.True(),
 
-                // Assume internal errors are retryable (within reason)
-                .AddPolicyHandler(
-                    Policy.HandleResult<HttpResponseMessage>(
-                            response =>
-                                response.StatusCode is InternalServerError
-                                    or BadGateway
-                                    or GatewayTimeout
-                        )
-                        .RetryAsync(5)
-                )
+                    // Retry on Service Unavailable just once
+                    // because we don't know if it's intentional or due to technical difficulties
+                    { Result.StatusCode: ServiceUnavailable } when attempt.AttemptNumber == 0 =>
+                        PredicateResult.True(),
 
-                // Sometimes the API returns a Bad Request with an unknown error for perfectly valid requests
-                .AddPolicyHandler(
-                    Policy<HttpResponseMessage>
-                        .Handle<ArgumentException>(reason => reason.Message == "unknown error")
-                        .RetryAsync()
-                )
+                    _ => PredicateResult.False()
+                },
+                BackoffType = DelayBackoffType.Constant,
+                Delay = TimeSpan.FromSeconds(10),
+                UseJitter = true
+            }
+        );
 
-                // Abort each attempted request after max 30 seconds and perform retries (within reason)
-                .AddPolicyHandler(
-                    Policy<HttpResponseMessage>.Handle<TimeoutRejectedException>().RetryAsync(10)
-                )
-                .AddPolicyHandler(
-                    Policy.TimeoutAsync<HttpResponseMessage>(
-                        TimeSpan.FromSeconds(30),
-                        TimeoutStrategy.Optimistic
-                    )
-                );
-        }
-    )
-    .Build();
+        // API can be slow or misbehave, use a hedging strategy to retry without delay
+        builder.AddHedging(
+            new HedgingStrategyOptions<HttpResponseMessage>
+            {
+                Name = "hedging",
 
-var gw2 = host.Services.GetRequiredService<Gw2Client>();
-DailyAchievementGroup dailies = await gw2.Achievements.GetDailyAchievements();
-HashSet<Achievement> dailyFractals =
-    await gw2.Achievements.GetAchievementsByIds(
-        dailies.Fractals.Select(fractal => fractal.Id).ToList()
-    );
+                // If no response is received within 30 seconds, abort the in-flight request and retry
+                Delay = TimeSpan.FromSeconds(30),
+                ShouldHandle = async attempt => attempt.Outcome switch
+                {
+                    { Result.IsSuccessStatusCode: true } => false,
 
-Console.WriteLine("Daily fractals");
-Console.WriteLine("========================================");
-foreach (var fractal in dailyFractals)
+                    // The following replies are considered retryable without a back-off delay
+                    { Result.StatusCode: InternalServerError or BadGateway or GatewayTimeout } =>
+                        true,
+
+                    // Sometimes the API returns weird data, also treat as internal errors
+                    _ when await IsUnknownError(attempt) => true,
+
+                    _ => false
+                }
+            }
+        );
+    }
+);
+
+// Log only the failing requests to the console / terminal
+// In Visual Studio, you can view all requests in the Output window
+appBuilder.Logging.AddFilter<ConsoleLoggerProvider>("Polly", LogLevel.Warning);
+appBuilder.Logging.AddFilter<ConsoleLoggerProvider>(
+    "System.Net.Http.HttpClient.Gw2Client",
+    LogLevel.Warning
+);
+
+var app = appBuilder.Build();
+
+var gw2 = app.Services.GetRequiredService<Gw2Client>();
+
+PrintHeader();
+
+// Get the trading post prices for all items in bulk
+await foreach (ItemPrice itemPrice in gw2.Commerce.GetItemPricesBulk())
 {
-    Console.WriteLine("{0,-40}: {1}", fractal.Name, fractal.Requirement);
+    // ItemPrice contains an Id, BestBid, and BestAsk
+    // Use the ID to get the item name
+    Item item = await gw2.Items.GetItemById(itemPrice.Id);
+
+    PrintRow(item.Name, itemPrice.BestBid, itemPrice.BestAsk);
+}
+
+void PrintHeader()
+{
+    Console.WriteLine(new string('=', 160));
+    Console.WriteLine($"| {"Item",-50} | {"Highest buyer",-50} | {"Lowest seller",-50} |");
+    Console.WriteLine(new string('=', 160));
+}
+
+void PrintRow(string item, Coin highestBuyer, Coin lowestSeller)
+{
+    Console.WriteLine($"| {item,-50} | {highestBuyer,-50} | {lowestSeller,-50} |");
+}
+
+async Task<bool> IsUnknownError(HedgingPredicateArguments<HttpResponseMessage> attempt)
+{
+    if (attempt.Outcome.Result is null)
+    {
+        return false;
+    }
+
+    if (attempt.Outcome.Result.Content.Headers.ContentType?.MediaType != "application/json")
+    {
+        return true;
+    }
+
+    await using var content = await attempt.Outcome.Result.Content.ReadAsStreamAsync();
+    using var json = await JsonDocument.ParseAsync(content);
+    if (!json.RootElement.TryGetProperty("text", out var text))
+    {
+        return true;
+    }
+
+    return text.GetString() switch
+    {
+        "unknown error" => true,
+        "ErrBadData" => true,
+
+        // Sometimes you get an authentication error even though your API key is valid
+        // Treat this message as an internal error, because you get a different message if the API key is really invalid
+        "endpoint requires authentication" => true,
+        _ => false
+    };
 }
