@@ -78,6 +78,44 @@ httpClientBuilder.AddResilienceHandler(
                 }
             }
         );
+
+        async Task<bool> IsUnknownError(HedgingPredicateArguments<HttpResponseMessage> attempt)
+        {
+            if (attempt.Outcome.Result is null)
+            {
+                return false;
+            }
+
+            if (attempt.Outcome.Result.Content.Headers.ContentType?.MediaType != "application/json")
+            {
+                return true;
+            }
+
+            // IMPORTANT: buffer the content so it can be read multiple times if needed
+            await attempt.Outcome.Result.Content.LoadIntoBufferAsync();
+
+            // ALSO IMPORTANT: do not dispose the content stream
+            var content = await attempt.Outcome.Result.Content.ReadAsStreamAsync();
+            try
+            {
+                using var json = await JsonDocument.ParseAsync(content);
+                if (!json.RootElement.TryGetProperty("text", out var text))
+                {
+                    return true;
+                }
+
+                // Sometimes you get an authentication error even though your API key is valid
+                // Treat this message as an internal error, because you get a different message if the API key is really invalid
+                return text.GetString() is "endpoint requires authentication"
+                    or "unknown error"
+                    or "ErrBadData"
+                    or "ErrTimeout";
+            }
+            finally
+            {
+                content.Position = 0;
+            }
+        }
     }
 );
 
@@ -115,42 +153,4 @@ void PrintHeader()
 void PrintRow(string item, Coin highestBuyer, Coin lowestSeller)
 {
     Console.WriteLine($"| {item,-50} | {highestBuyer,-50} | {lowestSeller,-50} |");
-}
-
-async Task<bool> IsUnknownError(HedgingPredicateArguments<HttpResponseMessage> attempt)
-{
-    if (attempt.Outcome.Result is null)
-    {
-        return false;
-    }
-
-    if (attempt.Outcome.Result.Content.Headers.ContentType?.MediaType != "application/json")
-    {
-        return true;
-    }
-
-    // IMPORTANT: buffer the content so it can be read multiple times if needed
-    await attempt.Outcome.Result.Content.LoadIntoBufferAsync();
-
-    // ALSO IMPORTANT: do not dispose the content stream
-    var content = await attempt.Outcome.Result.Content.ReadAsStreamAsync();
-    try
-    {
-        using var json = await JsonDocument.ParseAsync(content);
-        if (!json.RootElement.TryGetProperty("text", out var text))
-        {
-            return true;
-        }
-
-        // Sometimes you get an authentication error even though your API key is valid
-        // Treat this message as an internal error, because you get a different message if the API key is really invalid
-        return text.GetString() is "endpoint requires authentication"
-            or "unknown error"
-            or "ErrBadData"
-            or "ErrTimeout";
-    }
-    finally
-    {
-        content.Position = 0;
-    }
 }

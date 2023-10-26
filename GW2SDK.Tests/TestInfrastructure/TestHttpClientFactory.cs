@@ -101,7 +101,7 @@ public class TestHttpClientFactory : IHttpClientFactory, IAsyncDisposable
                 // API can be slow or misbehave, use a hedging strategy to retry without delay
                 builder.AddHedging(
                     new HedgingStrategyOptions<HttpResponseMessage>
-                    { 
+                    {
                         // If no response is received within 30 seconds, abort the in-flight request and retry
                         Delay = TimeSpan.FromSeconds(30),
                         ShouldHandle = async attempt =>
