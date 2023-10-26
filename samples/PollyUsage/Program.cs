@@ -38,7 +38,6 @@ httpClientBuilder.AddResilienceHandler(
         builder.AddRetry(
             new RetryStrategyOptions<HttpResponseMessage>
             {
-                Name = "retries",
                 ShouldHandle = attempt => attempt.Outcome switch
                 {
                     // Retry on too many requests
@@ -51,6 +50,7 @@ httpClientBuilder.AddResilienceHandler(
 
                     _ => PredicateResult.False()
                 },
+                MaxRetryAttempts = 100,
                 BackoffType = DelayBackoffType.Constant,
                 Delay = TimeSpan.FromSeconds(10),
                 UseJitter = true
@@ -61,8 +61,6 @@ httpClientBuilder.AddResilienceHandler(
         builder.AddHedging(
             new HedgingStrategyOptions<HttpResponseMessage>
             {
-                Name = "hedging",
-
                 // If no response is received within 30 seconds, abort the in-flight request and retry
                 Delay = TimeSpan.FromSeconds(30),
                 ShouldHandle = async attempt => attempt.Outcome switch
@@ -131,21 +129,28 @@ async Task<bool> IsUnknownError(HedgingPredicateArguments<HttpResponseMessage> a
         return true;
     }
 
-    await using var content = await attempt.Outcome.Result.Content.ReadAsStreamAsync();
-    using var json = await JsonDocument.ParseAsync(content);
-    if (!json.RootElement.TryGetProperty("text", out var text))
-    {
-        return true;
-    }
+    // IMPORTANT: buffer the content so it can be read multiple times if needed
+    await attempt.Outcome.Result.Content.LoadIntoBufferAsync();
 
-    return text.GetString() switch
+    // ALSO IMPORTANT: do not dispose the content stream
+    var content = await attempt.Outcome.Result.Content.ReadAsStreamAsync();
+    try
     {
-        "unknown error" => true,
-        "ErrBadData" => true,
+        using var json = await JsonDocument.ParseAsync(content);
+        if (!json.RootElement.TryGetProperty("text", out var text))
+        {
+            return true;
+        }
 
         // Sometimes you get an authentication error even though your API key is valid
         // Treat this message as an internal error, because you get a different message if the API key is really invalid
-        "endpoint requires authentication" => true,
-        _ => false
-    };
+        return text.GetString() is "endpoint requires authentication"
+            or "unknown error"
+            or "ErrBadData"
+            or "ErrTimeout";
+    }
+    finally
+    {
+        content.Position = 0;
+    }
 }

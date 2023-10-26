@@ -1,7 +1,9 @@
-﻿using GuildWars2.Http;
+﻿using System.Text.Json;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Http.Resilience;
 using Polly;
-using Polly.Timeout;
+using Polly.Hedging;
+using Polly.Retry;
 using static System.Net.HttpStatusCode;
 
 #if NETFRAMEWORK
@@ -35,63 +37,138 @@ public class TestHttpClientFactory : IHttpClientFactory, IAsyncDisposable
 
         services.AddTransient<SchemaVersionHandler>();
 
-        services.AddHttpClient(
-                "GW2SDK",
-                http =>
-                {
-                    http.BaseAddress = baseAddress;
+        var httpClientBuilder = services.AddHttpClient(
+            "GW2SDK",
+            http =>
+            {
+                http.BaseAddress = baseAddress;
 
-                    // The default timeout is 100 seconds, but it's not always enough
-                    // Requests can get stuck in a delayed retry-loop due to rate limiting
-                    // A better solution might be to queue up requests
-                    //   (so that new requests have to wait until there are no more delayed requests)
-                    http.Timeout = TimeSpan.FromMinutes(5);
-                }
-            )
+                // The default timeout is 100 seconds, but it's not always enough
+                // Requests can get stuck in a delayed retry-loop due to rate limiting
+                // A better solution might be to queue up requests
+                //   (so that new requests have to wait until there are no more delayed requests)
+                http.Timeout = TimeSpan.FromMinutes(5);
+            }
+        );
 #if NET
-            .ConfigurePrimaryHttpMessageHandler(
-                () => new SocketsHttpHandler
-                {
-                    // Limit the number of open connections
-                    //   because we have many tests trying to use the API concurrently,
-                    //   resulting in a stupid amount of connections being opened
-                    // The desired effect is to open a smaller number of connections that are reused often
-                    MaxConnectionsPerServer = 100,
+        httpClientBuilder.ConfigurePrimaryHttpMessageHandler(
+            () => new SocketsHttpHandler
+            {
+                // Limit the number of open connections
+                //   because we have many tests trying to use the API concurrently,
+                //   resulting in a stupid amount of connections being opened
+                // The desired effect is to open a smaller number of connections that are reused often
+                MaxConnectionsPerServer = 100,
 
-                    // Creating a new connection shouldn't take more than 10 seconds
-                    ConnectTimeout = TimeSpan.FromSeconds(10),
-
-                    // Save bandwidth
-                    AutomaticDecompression = System.Net.DecompressionMethods.GZip
-                }
-            )
+                // Creating a new connection shouldn't take more than 10 seconds
+                ConnectTimeout = TimeSpan.FromSeconds(10)
+            }
+        );
 #else
-            .ConfigurePrimaryHttpMessageHandler(
-                () => new HttpClientHandler { MaxConnectionsPerServer = 100 }
-            )
+        httpClientBuilder.ConfigurePrimaryHttpMessageHandler(
+            () => new HttpClientHandler { MaxConnectionsPerServer = 100 }
+        );
 #endif
-            .AddHttpMessageHandler<SchemaVersionHandler>()
 
-            // The API has rate limiting (by IP address) so wait and retry when the server indicates too many requests
-            .AddPolicyHandler(Policy.HandleResult<HttpResponseMessage>(response => response.StatusCode == TooManyRequests).WaitAndRetryAsync(10, _ => TimeSpan.FromSeconds(10)))
+        httpClientBuilder.AddHttpMessageHandler<SchemaVersionHandler>();
 
-            // The API can be disabled intentionally to avoid leaking spoilers, or it can be unavailable due to technical difficulties
-            // Since it's not easy to tell the difference, give it one retry
-            .AddPolicyHandler(Policy.HandleResult<HttpResponseMessage>(response => response.StatusCode == ServiceUnavailable).WaitAndRetryAsync(10, _ => TimeSpan.FromSeconds(1)))
+        httpClientBuilder.AddResilienceHandler(
+            "api.guildwars2.com",
+            builder =>
+            {
+                builder.AddRetry(
+                    new RetryStrategyOptions<HttpResponseMessage>
+                    {
+                        ShouldHandle = attempt => attempt.Outcome switch
+                        {
+                            // Retry on too many requests
+                            { Result.StatusCode: TooManyRequests } => PredicateResult.True(),
 
-            // Assume internal errors are retryable (within reason)
-            .AddPolicyHandler(Policy.HandleResult<HttpResponseMessage>(response => response.StatusCode is InternalServerError or BadGateway or GatewayTimeout).WaitAndRetryAsync(10, _ => TimeSpan.FromSeconds(1)))
+                            // Retry on Service Unavailable just once
+                            // because we don't know if it's intentional or due to technical difficulties
+                            { Result.StatusCode: ServiceUnavailable } when attempt.AttemptNumber
+                                == 0 => PredicateResult.True(),
 
-            // Sometimes the API fails to validate the access token even though the token is valid
-            // This is retryable because real token errors result in a different error message, eg. "Invalid access token"
-            .AddPolicyHandler(Policy<HttpResponseMessage>.Handle<UnauthorizedOperationException>(reason => reason.Message == "endpoint requires authentication").WaitAndRetryAsync(10, _ => TimeSpan.FromSeconds(1)))
+                            _ => PredicateResult.False()
+                        },
+                        MaxRetryAttempts = 100,
+                        BackoffType = DelayBackoffType.Constant,
+                        Delay = TimeSpan.FromSeconds(10),
+                        UseJitter = true
+                    }
+                );
 
-            // Sometimes the API returns a Bad Request with an unknown error for perfectly valid requests
-            .AddPolicyHandler(Policy<HttpResponseMessage>.Handle<ArgumentException>(reason => reason.Message == "unknown error").WaitAndRetryAsync(1, _ => TimeSpan.FromSeconds(1)))
+                // API can be slow or misbehave, use a hedging strategy to retry without delay
+                builder.AddHedging(
+                    new HedgingStrategyOptions<HttpResponseMessage>
+                    { 
+                        // If no response is received within 30 seconds, abort the in-flight request and retry
+                        Delay = TimeSpan.FromSeconds(30),
+                        ShouldHandle = async attempt =>
+                        {
+                            return attempt.Outcome switch
+                            {
+                                { Result.IsSuccessStatusCode: true } => false,
 
-            // Abort each attempted request after max 30 seconds and perform retries (within reason)
-            .AddPolicyHandler(Policy<HttpResponseMessage>.Handle<TimeoutRejectedException>().RetryAsync(10))
-            .AddPolicyHandler(Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(30), TimeoutStrategy.Optimistic));
+                                // The following replies are considered retryable without a back-off delay
+                                {
+                                    Result.StatusCode: InternalServerError
+                                    or BadGateway
+                                    or GatewayTimeout
+                                } => true,
+
+                                // Sometimes the API returns weird data, also treat as internal errors
+                                _ when await IsUnknownError(attempt) => true,
+
+                                _ => false
+                            };
+
+                            static async Task<bool> IsUnknownError(
+                                HedgingPredicateArguments<HttpResponseMessage> attempt
+                            )
+                            {
+                                if (attempt.Outcome.Result is null)
+                                {
+                                    return false;
+                                }
+
+                                if (attempt.Outcome.Result.Content.Headers.ContentType?.MediaType
+                                    != "application/json")
+                                {
+                                    return true;
+                                }
+
+                                // IMPORTANT: buffer the content so it can be read multiple times if needed
+                                await attempt.Outcome.Result.Content.LoadIntoBufferAsync();
+
+                                // ALSO IMPORTANT: do not dispose the content stream
+                                var content =
+                                    await attempt.Outcome.Result.Content.ReadAsStreamAsync();
+                                try
+                                {
+                                    using var json = await JsonDocument.ParseAsync(content);
+                                    if (!json.RootElement.TryGetProperty("text", out var text))
+                                    {
+                                        return true;
+                                    }
+
+                                    // Sometimes you get an authentication error even though your API key is valid
+                                    // Treat this message as an internal error, because you get a different message if the API key is really invalid
+                                    return text.GetString() is "endpoint requires authentication"
+                                        or "unknown error"
+                                        or "ErrBadData"
+                                        or "ErrTimeout";
+                                }
+                                finally
+                                {
+                                    content.Position = 0;
+                                }
+                            }
+                        }
+                    }
+                );
+            }
+        );
 
         return services.BuildServiceProvider();
     }
