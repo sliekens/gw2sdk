@@ -2,15 +2,6 @@
   "version": 1,
   "dependencies": {
     "net8.0": {
-      "Microsoft.Extensions.DependencyInjection": {
-        "type": "Direct",
-        "requested": "[8.0.0-rc.2.23479.6, )",
-        "resolved": "8.0.0-rc.2.23479.6",
-        "contentHash": "pUD/Gjd0MTrWPD4/SnKazYQvky2EHEtPyGb3FWZkEPWAfYPFVVw5fMRTkfoBPivpWLuxEw4FNK7GX77xEErUQQ==",
-        "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0-rc.2.23479.6"
-        }
-      },
       "Microsoft.Extensions.Hosting": {
         "type": "Direct",
         "requested": "[8.0.0-rc.2.23479.6, )",
@@ -72,12 +63,6 @@
         "dependencies": {
           "System.Memory": "4.5.5"
         }
-      },
-      "System.Interactive": {
-        "type": "Direct",
-        "requested": "[6.0.1, )",
-        "resolved": "6.0.1",
-        "contentHash": "q2E+Rkj35aGIPdZFKoBfI46LU1hGLHrhg9diif3psaRFeiMwSYom0VI0XHIQFYtGHzq2g1+3awHvK+7YntfNIQ=="
       },
       "Microsoft.Bcl.TimeProvider": {
         "type": "Transitive",
@@ -178,6 +163,14 @@
           "Microsoft.Extensions.Configuration.Json": "8.0.0-rc.2.23479.6",
           "Microsoft.Extensions.FileProviders.Abstractions": "8.0.0-rc.2.23479.6",
           "Microsoft.Extensions.FileProviders.Physical": "8.0.0-rc.2.23479.6"
+        }
+      },
+      "Microsoft.Extensions.DependencyInjection": {
+        "type": "Transitive",
+        "resolved": "8.0.0-rc.2.23479.6",
+        "contentHash": "pUD/Gjd0MTrWPD4/SnKazYQvky2EHEtPyGb3FWZkEPWAfYPFVVw5fMRTkfoBPivpWLuxEw4FNK7GX77xEErUQQ==",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0-rc.2.23479.6"
         }
       },
       "Microsoft.Extensions.DependencyInjection.Abstractions": {

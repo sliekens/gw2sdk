@@ -74,15 +74,6 @@
           "Microsoft.NETFramework.ReferenceAssemblies.net481": "1.0.3"
         }
       },
-      "Microsoft.TestPlatform.ObjectModel": {
-        "type": "Direct",
-        "requested": "[17.9.0-preview-23503-02, )",
-        "resolved": "17.9.0-preview-23503-02",
-        "contentHash": "gfM4m3HAPuteorCvG9ug7+GcuDIDOQcHAvAHWjNaL5SUjqAhumH1B78M580NgI+sCs578bcmGsuawK9ZYQIiGQ==",
-        "dependencies": {
-          "System.Reflection.Metadata": "1.6.0"
-        }
-      },
       "Polly": {
         "type": "Direct",
         "requested": "[8.0.0, )",
@@ -264,6 +255,20 @@
         "type": "Transitive",
         "resolved": "1.0.3",
         "contentHash": "Vv/20vgHS7VglVOVh8J3Iz/MA+VYKVRp9f7r2qiKBMuzviTOmocG70yq0Q8T5OTmCONkEAIJwETD1zhEfLkAXQ=="
+      },
+      "Microsoft.TestPlatform.ObjectModel": {
+        "type": "Transitive",
+        "resolved": "17.7.2",
+        "contentHash": "aHzQWgDMVBnk39HhQVmn06w+YxzF1h2V5/M4WgrNQAn7q97GR4Si3vLRTDlmJo9nK/Nknce+H4tXx4gqOKyLeg==",
+        "dependencies": {
+          "NuGet.Frameworks": "6.5.0",
+          "System.Reflection.Metadata": "1.6.0"
+        }
+      },
+      "NuGet.Frameworks": {
+        "type": "Transitive",
+        "resolved": "6.5.0",
+        "contentHash": "QWINE2x3MbTODsWT1Gh71GaGb5icBz4chS8VYvTgsBnsi8esgN6wtHhydd7fvToWECYGq7T4cgBBDiKD/363fg=="
       },
       "Polly.Core": {
         "type": "Transitive",
@@ -493,15 +498,6 @@
           "Microsoft.NETFramework.ReferenceAssemblies.net461": "1.0.3"
         }
       },
-      "Microsoft.TestPlatform.ObjectModel": {
-        "type": "Direct",
-        "requested": "[17.9.0-preview-23503-02, )",
-        "resolved": "17.9.0-preview-23503-02",
-        "contentHash": "gfM4m3HAPuteorCvG9ug7+GcuDIDOQcHAvAHWjNaL5SUjqAhumH1B78M580NgI+sCs578bcmGsuawK9ZYQIiGQ==",
-        "dependencies": {
-          "System.Reflection.Metadata": "1.6.0"
-        }
-      },
       "Polly": {
         "type": "Direct",
         "requested": "[8.0.0, )",
@@ -710,6 +706,14 @@
         "type": "Transitive",
         "resolved": "1.0.3",
         "contentHash": "AmOJZwCqnOCNp6PPcf9joyogScWLtwy0M1WkqfEQ0M9nYwyDD7EX9ZjscKS5iYnyvteX7kzSKFCKt9I9dXA6mA=="
+      },
+      "Microsoft.TestPlatform.ObjectModel": {
+        "type": "Transitive",
+        "resolved": "17.9.0-preview-23503-02",
+        "contentHash": "gfM4m3HAPuteorCvG9ug7+GcuDIDOQcHAvAHWjNaL5SUjqAhumH1B78M580NgI+sCs578bcmGsuawK9ZYQIiGQ==",
+        "dependencies": {
+          "System.Reflection.Metadata": "1.6.0"
+        }
       },
       "Microsoft.TestPlatform.TestHost": {
         "type": "Transitive",
