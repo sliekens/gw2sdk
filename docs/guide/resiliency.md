@@ -1,4 +1,4 @@
-# Resiliency
+# Adding resiliency to your app
 
 There exists a wide category of network errors that you should handle in your application.
 
@@ -26,12 +26,12 @@ I recommend at least adding some timeouts and automatic retries.
 
 This example has the following policies:
 
-- Wait when the rate limit is exceeded and then retry (until the HttpClient timeout is reached)
-- Wait and retry exactly once for Service Unavailable errors because they might be intentional
-- Hedge against internal server errors or gateway timeouts by performing immediate retries
-- Cancel and retry when a request hangs for 30 seconds
+1. A Retry policy that performs delayed retries when the rate limit is exceeded or when there is a Service Unavailable error.
+2. A Hedging policy that performs an immediate retry when there is an internal server error or a gateway timeout.
 
-Tweak as needed.
+The example uses `Microsoft.Extensions.Http.Resilience` but it's not a requirement to use Polly. You could instead create a custom `DelegatingHandler` with `ResiliencePipelineBuilder<HttpResponseMessage>`.
+
+Tweak the `Gw2Resiliency` options as needed.
 
 [!code-csharp[](../../samples/PollyUsage/Program.cs)]
 
