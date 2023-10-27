@@ -1,82 +1,115 @@
 ﻿using System.IO.Compression;
 using System.Text;
+using GuildWars2;
+using GuildWars2.TestDataHelper;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Http.Resilience;
+using Microsoft.Extensions.Logging;
+using Polly;
 using Spectre.Console;
 
-namespace GuildWars2.TestDataHelper;
+var outDir = args[0];
 
-public class Program
-{
-    public static async Task Main(string outDir)
+Directory.CreateDirectory(outDir);
+
+var appBuilder = Host.CreateApplicationBuilder(args);
+
+appBuilder.Logging.ClearProviders();
+
+var httpClientBuilder = appBuilder.Services.AddHttpClient<Gw2Client>(
+        static httpClient =>
+        {
+            httpClient.Timeout = TimeSpan.FromSeconds(600);
+        }
+    )
+    .ConfigurePrimaryHttpMessageHandler(
+        () => new SocketsHttpHandler
+        {
+            // Creating a new connection shouldn't take more than 10 seconds
+            ConnectTimeout = TimeSpan.FromSeconds(10),
+            PooledConnectionLifetime = TimeSpan.FromMinutes(5),
+            MaxConnectionsPerServer = 1000
+        }
+    );
+
+httpClientBuilder.AddTypedClient<JsonAchievementService>()
+    .AddTypedClient<JsonItemService>()
+    .AddTypedClient<JsonRecipeService>()
+    .AddTypedClient<JsonSkinService>();
+
+httpClientBuilder.AddResilienceHandler(
+    "api.guildwars2.com",
+    resiliencePipelineBuilder =>
     {
-        Directory.CreateDirectory(outDir);
-        await using var services = new Container();
-
-        try
-        {
-            await AnsiConsole.Progress()
-                .StartAsync(
-                    async ctx =>
-                    {
-                        var achievements = ctx.AddTask("Downloading achievements.");
-                        await using (var file =
-                            CreateTextCompressed(Path.Combine(outDir, "achievements.json.gz")))
-                        {
-                            var service = services.Resolve<JsonAchievementService>();
-                            var documents =
-                                await service.GetAllJsonAchievements(Update(achievements));
-                            foreach (var document in documents)
-                            {
-                                await file.WriteLineAsync(document);
-                            }
-                        }
-
-                        var items = ctx.AddTask("Downloading items.");
-                        await using (var file =
-                            CreateTextCompressed(Path.Combine(outDir, "items.json.gz")))
-                        {
-                            var service = services.Resolve<JsonItemService>();
-                            var documents = await service.GetAllJsonItems(Update(items));
-                            foreach (var document in documents)
-                            {
-                                await file.WriteLineAsync(document);
-                            }
-                        }
-
-                        var recipes = ctx.AddTask("Downloading recipes.");
-                        await using (var file =
-                            CreateTextCompressed(Path.Combine(outDir, "recipes.json.gz")))
-                        {
-                            var service = services.Resolve<JsonRecipeService>();
-                            var documents = await service.GetAllJsonRecipes(Update(recipes));
-                            foreach (var document in documents)
-                            {
-                                await file.WriteLineAsync(document);
-                            }
-                        }
-
-                        var skins = ctx.AddTask("Downloading skins.");
-                        await using (var file =
-                            CreateTextCompressed(Path.Combine(outDir, "skins.json.gz")))
-                        {
-                            var service = services.Resolve<JsonSkinService>();
-                            var documents = await service.GetAllJsonSkins(Update(skins));
-                            foreach (var document in documents)
-                            {
-                                await file.WriteLineAsync(document);
-                            }
-                        }
-                    }
-                );
-        }
-        catch (Exception crash)
-        {
-            AnsiConsole.WriteException(crash);
-        }
+        resiliencePipelineBuilder.AddRetry(Gw2Resiliency.RetryStrategy);
+        resiliencePipelineBuilder.AddHedging(Gw2Resiliency.HedgingStrategy);
     }
+);
 
-    private static Progress<ResultContext> Update(ProgressTask progressTask) =>
-        new(c => progressTask.MaxValue(c.ResultTotal).Value(c.ResultCount));
+var app = appBuilder.Build();
 
-    private static StreamWriter CreateTextCompressed(string path) =>
-        new(new GZipStream(File.OpenWrite(path), CompressionMode.Compress), Encoding.UTF8);
+try
+{
+    await AnsiConsole.Progress()
+        .StartAsync(
+            async ctx =>
+            {
+                var achievements = ctx.AddTask("Downloading achievements.");
+                await using (var file =
+                    CreateTextCompressed(Path.Combine(outDir, "achievements.json.gz")))
+                {
+                    var service = app.Services.GetRequiredService<JsonAchievementService>();
+                    var documents = await service.GetAllJsonAchievements(Update(achievements));
+                    foreach (var document in documents)
+                    {
+                        await file.WriteLineAsync(document);
+                    }
+                }
+
+                var items = ctx.AddTask("Downloading items.");
+                await using (var file = CreateTextCompressed(Path.Combine(outDir, "items.json.gz")))
+                {
+                    var service = app.Services.GetRequiredService<JsonItemService>();
+                    var documents = await service.GetAllJsonItems(Update(items));
+                    foreach (var document in documents)
+                    {
+                        await file.WriteLineAsync(document);
+                    }
+                }
+
+                var recipes = ctx.AddTask("Downloading recipes.");
+                await using (var file =
+                    CreateTextCompressed(Path.Combine(outDir, "recipes.json.gz")))
+                {
+                    var service = app.Services.GetRequiredService<JsonRecipeService>();
+                    var documents = await service.GetAllJsonRecipes(Update(recipes));
+                    foreach (var document in documents)
+                    {
+                        await file.WriteLineAsync(document);
+                    }
+                }
+
+                var skins = ctx.AddTask("Downloading skins.");
+                await using (var file = CreateTextCompressed(Path.Combine(outDir, "skins.json.gz")))
+                {
+                    var service = app.Services.GetRequiredService<JsonSkinService>();
+                    var documents = await service.GetAllJsonSkins(Update(skins));
+                    foreach (var document in documents)
+                    {
+                        await file.WriteLineAsync(document);
+                    }
+                }
+            }
+        );
 }
+catch (Exception crash)
+{
+    AnsiConsole.WriteException(crash);
+}
+
+static Progress<ResultContext> Update(ProgressTask progressTask) =>
+    new(c => progressTask.MaxValue(c.ResultTotal).Value(c.ResultCount));
+
+static StreamWriter CreateTextCompressed(string path) =>
+    new(new GZipStream(File.OpenWrite(path), CompressionMode.Compress), Encoding.UTF8);
