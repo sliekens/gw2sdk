@@ -10,9 +10,24 @@ internal static class AccountLuckJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        // The response is an array due to the way luck is stored internally.
+        JsonElement luckObj = default;
+
+        foreach (var entry in json.EnumerateArray())
+        {
+            if (luckObj.ValueKind == JsonValueKind.Undefined)
+            {
+                luckObj = entry;
+            }
+            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            {
+                throw new InvalidOperationException(
+                    Strings.UnexpectedArrayLength(json.GetArrayLength())
+                );
+            }
+        }
+
         // If an account has no luck an empty array ([]) will be returned.
-        if (json.GetArrayLength() == 0)
+        if (luckObj.ValueKind == JsonValueKind.Undefined)
         {
             return new AccountLuck { Luck = 0 };
         }
@@ -21,8 +36,7 @@ internal static class AccountLuckJson
         // id (string) – The string "luck".
         // value (number) – The amount of luck consumed
         RequiredMember value = "value";
-
-        foreach (var member in json[0].EnumerateObject())
+        foreach (var member in luckObj.EnumerateObject())
         {
             if (member.NameEquals("id"))
             {

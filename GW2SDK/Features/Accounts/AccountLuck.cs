@@ -4,6 +4,7 @@
 [DataTransferObject]
 public sealed record AccountLuck
 {
+    /// <summary>The amount of luck consumed by the account.</summary>
     public required int Luck { get; init; }
 
     /// <summary>The percentage of Magic Find from Luck.</summary>

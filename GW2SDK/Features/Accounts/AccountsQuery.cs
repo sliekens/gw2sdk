@@ -51,6 +51,13 @@ public sealed class AccountsQuery
 
     #region v2/account/luck
 
+    /// <summary>
+    /// Retrieves the total amount of luck consumed on an account. This endpoint is only accessible with a valid API key.
+    /// </summary>
+    /// <param name="accessToken"></param>
+    /// <param name="missingMemberBehavior"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public Task<Replica<AccountLuck>> GetLuck(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
