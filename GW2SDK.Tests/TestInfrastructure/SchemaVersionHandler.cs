@@ -7,6 +7,11 @@ internal class SchemaVersionHandler : DelegatingHandler
         CancellationToken cancellationToken
     )
     {
+        // For testing, the latest schema version is used to detect API breaking changes
+        // For production builds, GW2SDK is locked to a specific schema version
+        // This handler does 2 things:
+        // - Throw an error if the request does not use the recommended schema version
+        // - Rewrite the request to use the latest schema version
         if (request.RequestUri?.Host == BaseAddress.DefaultUri.Host)
         {
             var recommended = SchemaVersion.Recommended;
