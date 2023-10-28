@@ -17,7 +17,7 @@ internal class SchemaVersionHandler : DelegatingHandler
             if (version == -1)
             {
                 throw new InvalidOperationException(
-                    "The request does not specify a schema version. Add a 'v' argument to the query string."
+                    "The request does not use the recommended schema version. Add a 'v' argument using SchemaVersion.Recommended."
                 );
             }
 
