@@ -8,9 +8,6 @@ public sealed record AchievementRef
     /// <summary>The achievement ID.</summary>
     public required int Id { get; init; }
 
-    /// <summary>Describes expansions requirements to access this achievement.</summary>
-    public required ProductRequirement? RequiredAccess { get; init; }
-
     /// <summary>Contains various modifiers that affect how achievements behave.</summary>
     public required AchievementFlags Flags { get; init; }
 

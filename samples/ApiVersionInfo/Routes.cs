@@ -45,8 +45,6 @@ internal static class Routes
         "/v2/account/worldbosses",
         "/v2/achievements",
         "/v2/achievements/categories",
-        "/v2/achievements/daily",
-        "/v2/achievements/daily/tomorrow",
         "/v2/achievements/groups",
         "/v2/backstory/answers",
         "/v2/backstory/questions",
@@ -160,7 +158,11 @@ internal static class Routes
         // WvW endpoints return nothing
         "/v2/wvw/matches/stats/:id/guilds/:guild_id",
         "/v2/wvw/matches/stats/:id/teams/:team/top/kdr",
-        "/v2/wvw/matches/stats/:id/teams/:team/top/kills"
+        "/v2/wvw/matches/stats/:id/teams/:team/top/kills",
+
+        // API not active since Wizard Vault was added
+        "/v2/achievements/daily",
+        "/v2/achievements/daily/tomorrow"
     };
 
     public static bool IsSupported(Route route) => Supported.Contains(route.Path);

@@ -42,8 +42,6 @@ internal static class AchievementRefJson
         return new AchievementRef
         {
             Id = id.Map(value => value.GetInt32()),
-            RequiredAccess =
-                requiredAccess.Map(value => value.GetProductRequirement(missingMemberBehavior)),
             Flags = flags.Map(values => values.GetAchievementFlags(missingMemberBehavior))
                 ?? new AchievementFlags
                 {

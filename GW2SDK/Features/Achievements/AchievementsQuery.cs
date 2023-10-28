@@ -1,6 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
 using GuildWars2.Achievements.Categories;
-using GuildWars2.Achievements.Dailies;
 using GuildWars2.Achievements.Groups;
 using GuildWars2.Achievements.Http;
 using GuildWars2.Achievements.Titles;
@@ -18,29 +17,6 @@ public sealed class AchievementsQuery
         this.http = http ?? throw new ArgumentNullException(nameof(http));
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
-
-    #region v2/achievements/daily
-
-    /// <summary>Retrieves information about achievements that thange on a daily basis.</summary>
-    /// <param name="day">Optionally lets you get tomorrow's achievements.</param>
-    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
-    /// <param name="cancellationToken">A token to cancel the request.</param>
-    /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<DailyAchievementGroup>> GetDailyAchievements(
-        Day day = Day.Today,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
-    {
-        DailyAchievementsRequest request = new()
-        {
-            Day = day,
-            MissingMemberBehavior = missingMemberBehavior
-        };
-        return request.SendAsync(http, cancellationToken);
-    }
-
-    #endregion v2/achievements/daily
 
     #region v2/account/titles
 
