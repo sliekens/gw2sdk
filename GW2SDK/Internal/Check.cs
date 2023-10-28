@@ -7,7 +7,7 @@ internal static class Check
 {
     internal static void String(
         string text,
-        [CallerArgumentExpression("text")] string parameterName = ""
+        [CallerArgumentExpression(nameof(text))] string parameterName = ""
     )
     {
         // ReSharper disable once ConditionIsAlwaysTrueOrFalse // don't trust NRT
@@ -24,7 +24,7 @@ internal static class Check
 
     internal static void Constant<TEnum>(
         TEnum value,
-        [CallerArgumentExpression("value")] string parameterName = ""
+        [CallerArgumentExpression(nameof(value))] string parameterName = ""
     ) where TEnum : struct, Enum
     {
 #if NET
@@ -39,13 +39,13 @@ internal static class Check
 
     internal static void Collection(
         IReadOnlyCollection<int> collection,
-        [CallerArgumentExpression("collection")] string parameterName = ""
+        [CallerArgumentExpression(nameof(collection))] string parameterName = ""
     ) =>
         EnsureCollectionNotNullOrEmpty(collection, parameterName);
 
     internal static void Collection<TEnum>(
         IReadOnlyCollection<TEnum> collection,
-        [CallerArgumentExpression("collection")] string parameterName = ""
+        [CallerArgumentExpression(nameof(collection))] string parameterName = ""
     ) where TEnum : struct, Enum
     {
         EnsureCollectionNotNullOrEmpty(collection, parameterName);
@@ -69,7 +69,7 @@ internal static class Check
 
     internal static void Collection(
         IReadOnlyCollection<string> collection,
-        [CallerArgumentExpression("collection")] string parameterName = ""
+        [CallerArgumentExpression(nameof(collection))] string parameterName = ""
     )
     {
         EnsureCollectionNotNullOrEmpty(collection, parameterName);
