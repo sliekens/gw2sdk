@@ -1,5 +1,6 @@
 ﻿namespace GuildWars2.Accounts;
 
+/// <summary>Short summary about a player character.</summary>
 [PublicAPI]
 [DataTransferObject]
 public sealed record CharacterSummary

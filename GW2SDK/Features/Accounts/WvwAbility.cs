@@ -1,5 +1,6 @@
 ﻿namespace GuildWars2.Accounts;
 
+/// <summary>Information about a character's WvW ability training progress.</summary>
 [PublicAPI]
 [DataTransferObject]
 public sealed record WvwAbility

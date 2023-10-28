@@ -2,6 +2,7 @@
 
 namespace GuildWars2.Accounts;
 
+/// <summary>Query methods for the account and characters on the account.</summary>
 [PublicAPI]
 public sealed class AccountsQuery
 {
@@ -15,6 +16,12 @@ public sealed class AccountsQuery
 
     #region v2/account
 
+    /// <summary>Retrieves information about an account like name, age, guild participations and so on. This endpoint is only
+    /// accessible with a valid access token.</summary>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<AccountSummary>> GetSummary(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -33,6 +40,11 @@ public sealed class AccountsQuery
 
     #region v2/account/progression
 
+    /// <summary>Retrieves information about purchased Fractal augmentations and luck on the account.</summary>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<HashSet<Progression>>> GetProgression(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -51,13 +63,12 @@ public sealed class AccountsQuery
 
     #region v2/account/luck
 
-    /// <summary>
-    /// Retrieves the total amount of luck consumed on an account. This endpoint is only accessible with a valid API key.
-    /// </summary>
-    /// <param name="accessToken"></param>
-    /// <param name="missingMemberBehavior"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
+    /// <summary>Retrieves the total amount of luck consumed on an account. This endpoint is only accessible with a valid
+    /// access token.</summary>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<AccountLuck>> GetLuck(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -76,6 +87,12 @@ public sealed class AccountsQuery
 
     #region v2/characters/:id/core
 
+    /// <summary>Retrieves a short summary of a character. This endpoint is only accessible with a valid access token.</summary>
+    /// <param name="characterName">A character name that belongs to the account associated with the access token.</param>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<CharacterSummary>> GetCharacterSummary(
         string characterName,
         string? accessToken,
@@ -95,6 +112,11 @@ public sealed class AccountsQuery
 
     #region v2/characters
 
+    /// <summary>Retrieves a list of character names associated with the account. This endpoint is only accessible with a valid
+    /// access token.</summary>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<HashSet<string>>> GetCharactersIndex(
         string? accessToken,
         CancellationToken cancellationToken = default
@@ -104,6 +126,12 @@ public sealed class AccountsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
+    /// <summary>Retrieves a detailed character description. This endpoint is only accessible with a valid access token.</summary>
+    /// <param name="characterName">A character name that belongs to the account associated with the access token.</param>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<Character>> GetCharacterByName(
         string characterName,
         string? accessToken,
@@ -119,6 +147,12 @@ public sealed class AccountsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
+    /// <summary>Retrieves a list of detailed character descriptions. This endpoint is only accessible with a valid access
+    /// token.</summary>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<HashSet<Character>>> GetCharacters(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,

@@ -6,6 +6,7 @@ using GuildWars2.Professions;
 
 namespace GuildWars2.Accounts;
 
+/// <summary>Information about a player character.</summary>
 [PublicAPI]
 [DataTransferObject]
 public sealed record Character
@@ -27,6 +28,7 @@ public sealed record Character
     /// <summary>The profession name of the current character.</summary>
     public required ProfessionName Profession { get; init; }
 
+    /// <summary>The character's level.</summary>
     public required int Level { get; init; }
 
     /// <summary>The current guild, or an empty string if the character is not currently representing a guild.</summary>
