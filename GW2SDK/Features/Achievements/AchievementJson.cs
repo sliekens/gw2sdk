@@ -15,7 +15,7 @@ internal static class AchievementJson
             case "Default":
                 return json.GetDefaultAchievement(missingMemberBehavior);
             case "ItemSet":
-                return json.GetItemSetAchievement(missingMemberBehavior);
+                return json.GetCollectionAchievement(missingMemberBehavior);
         }
 
         RequiredMember id = "id";

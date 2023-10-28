@@ -3,9 +3,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Achievements;
 
-internal static class ItemSetAchievementJson
+internal static class CollectionAchievementJson
 {
-    public static ItemSetAchievement GetItemSetAchievement(
+    public static CollectionAchievement GetCollectionAchievement(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -88,7 +88,7 @@ internal static class ItemSetAchievementJson
             }
         }
 
-        return new ItemSetAchievement
+        return new CollectionAchievement
         {
             Id = id.Map(value => value.GetInt32()),
             Icon = icon.Map(value => value.GetString()) ?? "",
