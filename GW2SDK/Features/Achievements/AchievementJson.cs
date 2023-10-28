@@ -12,8 +12,6 @@ internal static class AchievementJson
     {
         switch (json.GetProperty("type").GetString())
         {
-            case "Default":
-                return json.GetDefaultAchievement(missingMemberBehavior);
             case "ItemSet":
                 return json.GetCollectionAchievement(missingMemberBehavior);
         }
@@ -35,7 +33,7 @@ internal static class AchievementJson
         {
             if (member.Name == "type")
             {
-                if (missingMemberBehavior == MissingMemberBehavior.Error)
+                if (!member.Value.ValueEquals("Default"))
                 {
                     throw new InvalidOperationException(
                         Strings.UnexpectedDiscriminator(member.Value.GetString())
