@@ -19,31 +19,31 @@ internal static class BackstoryQuestionJson
         OptionalMember races = "races";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(id.Name))
+            if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(title.Name))
+            else if (member.Name == title.Name)
             {
                 title = member;
             }
-            else if (member.NameEquals(description.Name))
+            else if (member.Name == description.Name)
             {
                 description = member;
             }
-            else if (member.NameEquals(answers.Name))
+            else if (member.Name == answers.Name)
             {
                 answers = member;
             }
-            else if (member.NameEquals(order.Name))
+            else if (member.Name == order.Name)
             {
                 order = member;
             }
-            else if (member.NameEquals(professions.Name))
+            else if (member.Name == professions.Name)
             {
                 professions = member;
             }
-            else if (member.NameEquals(races.Name))
+            else if (member.Name == races.Name)
             {
                 races = member;
             }

@@ -5,25 +5,25 @@ namespace GuildWars2.Json;
 
 internal readonly ref struct OptionalMember
 {
-    public readonly ReadOnlySpan<char> Name;
+    public readonly string Name;
 
     private readonly JsonElement value = default;
 
-    private OptionalMember(ReadOnlySpan<char> name)
+    private OptionalMember(string name)
     {
         Name = name;
     }
 
-    private OptionalMember(ReadOnlySpan<char> name, JsonElement value)
+    private OptionalMember(string name, JsonElement value)
     {
         Name = name;
         this.value = value;
     }
 
-    public static implicit operator OptionalMember(string name) => new(name.AsSpan());
+    public static implicit operator OptionalMember(string name) => new(name);
 
     public static implicit operator OptionalMember(JsonProperty member) =>
-        new(member.Name.AsSpan(), member.Value);
+        new(member.Name, member.Value);
 
     public TValue? Map<TValue>(Func<JsonElement, TValue> resultSelector)
     {
@@ -38,10 +38,7 @@ internal readonly ref struct OptionalMember
         }
         catch (Exception reason)
         {
-            throw new InvalidOperationException(
-                $"Value for '{Name.ToString()}' is incompatible.",
-                reason
-            );
+            throw new InvalidOperationException($"Value for '{Name}' is incompatible.", reason);
         }
     }
 }

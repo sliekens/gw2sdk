@@ -21,35 +21,35 @@ internal static class SeasonJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(id.Name))
+            if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(name.Name))
+            else if (member.Name == name.Name)
             {
                 name = member;
             }
-            else if (member.NameEquals(start.Name))
+            else if (member.Name == start.Name)
             {
                 start = member;
             }
-            else if (member.NameEquals(end.Name))
+            else if (member.Name == end.Name)
             {
                 end = member;
             }
-            else if (member.NameEquals(active.Name))
+            else if (member.Name == active.Name)
             {
                 active = member;
             }
-            else if (member.NameEquals(divisions.Name))
+            else if (member.Name == divisions.Name)
             {
                 divisions = member;
             }
-            else if (member.NameEquals(ranks.Name))
+            else if (member.Name == ranks.Name)
             {
                 ranks = member;
             }
-            else if (member.NameEquals(leaderboards.Name))
+            else if (member.Name == leaderboards.Name)
             {
                 leaderboards = member;
             }

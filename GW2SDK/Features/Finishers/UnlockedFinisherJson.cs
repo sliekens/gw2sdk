@@ -16,15 +16,15 @@ internal static class UnlockedFinisherJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(id.Name))
+            if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(permanent.Name))
+            else if (member.Name == permanent.Name)
             {
                 permanent = member;
             }
-            else if (member.NameEquals(quantity.Name))
+            else if (member.Name == quantity.Name)
             {
                 quantity = member;
             }

@@ -15,11 +15,11 @@ internal static class PetSkillBarJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(terrestrial.Name))
+            if (member.Name == terrestrial.Name)
             {
                 terrestrial = member;
             }
-            else if (member.NameEquals(aquatic.Name))
+            else if (member.Name == aquatic.Name)
             {
                 aquatic = member;
             }

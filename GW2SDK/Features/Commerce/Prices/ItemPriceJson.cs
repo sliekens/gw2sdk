@@ -19,23 +19,23 @@ internal static class ItemPriceJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(id.Name))
+            if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(whitelisted.Name))
+            else if (member.Name == whitelisted.Name)
             {
                 whitelisted = member;
             }
-            else if (member.NameEquals("buys"))
+            else if (member.Name == "buys")
             {
                 foreach (var buy in member.Value.EnumerateObject())
                 {
-                    if (buy.NameEquals(demand.Name))
+                    if (buy.Name == demand.Name)
                     {
                         demand = buy;
                     }
-                    else if (buy.NameEquals(bestBid.Name))
+                    else if (buy.Name == bestBid.Name)
                     {
                         bestBid = buy;
                     }
@@ -45,15 +45,15 @@ internal static class ItemPriceJson
                     }
                 }
             }
-            else if (member.NameEquals("sells"))
+            else if (member.Name == "sells")
             {
                 foreach (var sell in member.Value.EnumerateObject())
                 {
-                    if (sell.NameEquals(supply.Name))
+                    if (sell.Name == supply.Name)
                     {
                         supply = sell;
                     }
-                    else if (sell.NameEquals(bestAsk.Name))
+                    else if (sell.Name == bestAsk.Name)
                     {
                         bestAsk = sell;
                     }

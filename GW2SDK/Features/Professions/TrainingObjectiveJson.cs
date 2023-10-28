@@ -21,7 +21,7 @@ internal static class TrainingObjectiveJson
         RequiredMember cost = "cost";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals("type"))
+            if (member.Name == "type")
             {
                 if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
@@ -30,7 +30,7 @@ internal static class TrainingObjectiveJson
                     );
                 }
             }
-            else if (member.NameEquals(cost.Name))
+            else if (member.Name == cost.Name)
             {
                 cost = member;
             }

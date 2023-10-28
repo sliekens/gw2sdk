@@ -20,31 +20,31 @@ internal static class MasteryJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(id.Name))
+            if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(name.Name))
+            else if (member.Name == name.Name)
             {
                 name = member;
             }
-            else if (member.NameEquals(requirement.Name))
+            else if (member.Name == requirement.Name)
             {
                 requirement = member;
             }
-            else if (member.NameEquals(order.Name))
+            else if (member.Name == order.Name)
             {
                 order = member;
             }
-            else if (member.NameEquals(background.Name))
+            else if (member.Name == background.Name)
             {
                 background = member;
             }
-            else if (member.NameEquals(region.Name))
+            else if (member.Name == region.Name)
             {
                 region = member;
             }
-            else if (member.NameEquals(levels.Name))
+            else if (member.Name == levels.Name)
             {
                 levels = member;
             }

@@ -17,19 +17,19 @@ internal static class SuperAdventureBoxZoneJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(id.Name))
+            if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(mode.Name))
+            else if (member.Name == mode.Name)
             {
                 mode = member;
             }
-            else if (member.NameEquals(world.Name))
+            else if (member.Name == world.Name)
             {
                 world = member;
             }
-            else if (member.NameEquals(zone.Name))
+            else if (member.Name == zone.Name)
             {
                 zone = member;
             }

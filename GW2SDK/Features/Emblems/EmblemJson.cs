@@ -15,11 +15,11 @@ internal static class EmblemJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(id.Name))
+            if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(layers.Name))
+            else if (member.Name == layers.Name)
             {
                 layers = member;
             }

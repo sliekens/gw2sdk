@@ -24,47 +24,47 @@ internal static class SpecializationJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(id.Name))
+            if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(name.Name))
+            else if (member.Name == name.Name)
             {
                 name = member;
             }
-            else if (member.NameEquals(profession.Name))
+            else if (member.Name == profession.Name)
             {
                 profession = member;
             }
-            else if (member.NameEquals(elite.Name))
+            else if (member.Name == elite.Name)
             {
                 elite = member;
             }
-            else if (member.NameEquals(minorTraits.Name))
+            else if (member.Name == minorTraits.Name)
             {
                 minorTraits = member;
             }
-            else if (member.NameEquals(majorTraits.Name))
+            else if (member.Name == majorTraits.Name)
             {
                 majorTraits = member;
             }
-            else if (member.NameEquals(weaponTrait.Name))
+            else if (member.Name == weaponTrait.Name)
             {
                 weaponTrait = member;
             }
-            else if (member.NameEquals(icon.Name))
+            else if (member.Name == icon.Name)
             {
                 icon = member;
             }
-            else if (member.NameEquals(background.Name))
+            else if (member.Name == background.Name)
             {
                 background = member;
             }
-            else if (member.NameEquals(professionIconBig.Name))
+            else if (member.Name == professionIconBig.Name)
             {
                 professionIconBig = member;
             }
-            else if (member.NameEquals(professionIcon.Name))
+            else if (member.Name == professionIcon.Name)
             {
                 professionIcon = member;
             }

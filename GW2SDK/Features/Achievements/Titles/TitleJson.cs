@@ -14,25 +14,25 @@ internal static class TitleJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(id.Name))
+            if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(name.Name))
+            else if (member.Name == name.Name)
             {
                 name = member;
             }
-            else if (member.NameEquals(achievements.Name))
+            else if (member.Name == achievements.Name)
             {
                 achievements = member;
             }
-            else if (member.NameEquals(achievementPointsRequired.Name))
+            else if (member.Name == achievementPointsRequired.Name)
             {
                 achievementPointsRequired = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
-                if (member.NameEquals("achievement"))
+                if (member.Name == "achievement")
                 {
                     // Obsolete because some titles can be unlocked by more than one achievement
                     continue;

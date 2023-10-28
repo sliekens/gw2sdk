@@ -25,55 +25,55 @@ internal static class MapSummaryJson
         RequiredMember continentRectangle = "continent_rect";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(id.Name))
+            if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(name.Name))
+            else if (member.Name == name.Name)
             {
                 name = member;
             }
-            else if (member.NameEquals(minLevel.Name))
+            else if (member.Name == minLevel.Name)
             {
                 minLevel = member;
             }
-            else if (member.NameEquals(maxLevel.Name))
+            else if (member.Name == maxLevel.Name)
             {
                 maxLevel = member;
             }
-            else if (member.NameEquals(defaultFloor.Name))
+            else if (member.Name == defaultFloor.Name)
             {
                 defaultFloor = member;
             }
-            else if (member.NameEquals(kind.Name))
+            else if (member.Name == kind.Name)
             {
                 kind = member;
             }
-            else if (member.NameEquals(floors.Name))
+            else if (member.Name == floors.Name)
             {
                 floors = member;
             }
-            else if (member.NameEquals(regionId.Name))
+            else if (member.Name == regionId.Name)
             {
                 regionId = member;
             }
-            else if (member.NameEquals(regionName.Name))
+            else if (member.Name == regionName.Name)
             {
                 regionName = member;
             }
-            else if (member.NameEquals(continentId.Name))
+            else if (member.Name == continentId.Name)
             {
                 continentId = member;
             }
-            else if (member.NameEquals(continentName.Name))
+            else if (member.Name == continentName.Name)
             {
                 continentName = member;
             }
-            else if (member.NameEquals(mapRectangle.Name))
+            else if (member.Name == mapRectangle.Name)
             {
                 mapRectangle = member;
             }
-            else if (member.NameEquals(continentRectangle.Name))
+            else if (member.Name == continentRectangle.Name)
             {
                 continentRectangle = member;
             }

@@ -18,15 +18,15 @@ internal static class BagJson
         RequiredMember inventory = "inventory";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(id.Name))
+            if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(size.Name))
+            else if (member.Name == size.Name)
             {
                 size = member;
             }
-            else if (member.NameEquals(inventory.Name))
+            else if (member.Name == inventory.Name)
             {
                 inventory = member;
             }

@@ -5,31 +5,31 @@ namespace GuildWars2.Json;
 
 internal readonly ref struct RequiredMember
 {
-    public readonly ReadOnlySpan<char> Name;
+    public readonly string Name;
 
     private readonly JsonElement value = default;
 
-    private RequiredMember(ReadOnlySpan<char> name)
+    private RequiredMember(string name)
     {
         Name = name;
     }
 
-    private RequiredMember(ReadOnlySpan<char> name, JsonElement value)
+    private RequiredMember(string name, JsonElement value)
     {
         Name = name;
         this.value = value;
     }
 
-    public static implicit operator RequiredMember(string name) => new(name.AsSpan());
+    public static implicit operator RequiredMember(string name) => new(name);
 
     public static implicit operator RequiredMember(JsonProperty member) =>
-        new(member.Name.AsSpan(), member.Value);
+        new(member.Name, member.Value);
 
     public TValue Map<TValue>(Func<JsonElement, TValue> resultSelector)
     {
         if (value.ValueKind == Undefined || value.ValueKind == Null)
         {
-            throw new InvalidOperationException($"Missing value for '{Name.ToString()}'.");
+            throw new InvalidOperationException($"Missing value for '{Name}'.");
         }
 
         try
@@ -38,10 +38,7 @@ internal readonly ref struct RequiredMember
         }
         catch (Exception reason)
         {
-            throw new InvalidOperationException(
-                $"Value for '{Name.ToString()}' is incompatible.",
-                reason
-            );
+            throw new InvalidOperationException($"Value for '{Name}' is incompatible.", reason);
         }
     }
 }

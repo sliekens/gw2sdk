@@ -15,27 +15,27 @@ internal static class HeartJson
         RequiredMember chatLink = "chat_link";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(objective.Name))
+            if (member.Name == objective.Name)
             {
                 objective = member;
             }
-            else if (member.NameEquals(level.Name))
+            else if (member.Name == level.Name)
             {
                 level = member;
             }
-            else if (member.NameEquals(coordinates.Name))
+            else if (member.Name == coordinates.Name)
             {
                 coordinates = member;
             }
-            else if (member.NameEquals(boundaries.Name))
+            else if (member.Name == boundaries.Name)
             {
                 boundaries = member;
             }
-            else if (member.NameEquals(id.Name))
+            else if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(chatLink.Name))
+            else if (member.Name == chatLink.Name)
             {
                 chatLink = member;
             }

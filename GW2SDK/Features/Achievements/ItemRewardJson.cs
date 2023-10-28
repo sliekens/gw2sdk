@@ -14,7 +14,7 @@ internal static class ItemRewardJson
         RequiredMember count = "count";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals("type"))
+            if (member.Name == "type")
             {
                 if (!member.Value.ValueEquals("Item"))
                 {
@@ -23,11 +23,11 @@ internal static class ItemRewardJson
                     );
                 }
             }
-            else if (member.NameEquals(id.Name))
+            else if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(count.Name))
+            else if (member.Name == count.Name)
             {
                 count = member;
             }

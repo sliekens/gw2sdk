@@ -14,7 +14,7 @@ internal static class CharacterBackstoryJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(backstory.Name))
+            if (member.Name == backstory.Name)
             {
                 backstory = member;
             }

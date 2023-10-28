@@ -18,23 +18,23 @@ internal static class GuildBankTabJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(upgradeId.Name))
+            if (member.Name == upgradeId.Name)
             {
                 upgradeId = member;
             }
-            else if (member.NameEquals(size.Name))
+            else if (member.Name == size.Name)
             {
                 size = member;
             }
-            else if (member.NameEquals(coins.Name))
+            else if (member.Name == coins.Name)
             {
                 coins = member;
             }
-            else if (member.NameEquals(note.Name))
+            else if (member.Name == note.Name)
             {
                 note = member;
             }
-            else if (member.NameEquals(inventory.Name))
+            else if (member.Name == inventory.Name)
             {
                 inventory = member;
             }

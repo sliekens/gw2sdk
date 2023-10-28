@@ -16,15 +16,15 @@ internal static class MapSummaryJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(id.Name))
+            if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(type.Name))
+            else if (member.Name == type.Name)
             {
                 type = member;
             }
-            else if (member.NameEquals(scores.Name))
+            else if (member.Name == scores.Name)
             {
                 scores = member;
             }

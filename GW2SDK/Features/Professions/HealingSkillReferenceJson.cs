@@ -15,7 +15,7 @@ internal static class HealingSkillReferenceJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals("type"))
+            if (member.Name == "type")
             {
                 if (!member.Value.ValueEquals("Heal"))
                 {
@@ -24,11 +24,11 @@ internal static class HealingSkillReferenceJson
                     );
                 }
             }
-            else if (member.NameEquals(id.Name))
+            else if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(slot.Name))
+            else if (member.Name == slot.Name)
             {
                 slot = member;
             }

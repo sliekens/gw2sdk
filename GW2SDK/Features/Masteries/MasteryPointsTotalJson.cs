@@ -16,15 +16,15 @@ internal static class MasteryPointsTotalJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(region.Name))
+            if (member.Name == region.Name)
             {
                 region = member;
             }
-            else if (member.NameEquals(spent.Name))
+            else if (member.Name == spent.Name)
             {
                 spent = member;
             }
-            else if (member.NameEquals(earned.Name))
+            else if (member.Name == earned.Name)
             {
                 earned = member;
             }

@@ -15,7 +15,7 @@ internal static class EliteSkillReferenceJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals("type"))
+            if (member.Name == "type")
             {
                 if (!member.Value.ValueEquals("Elite"))
                 {
@@ -24,11 +24,11 @@ internal static class EliteSkillReferenceJson
                     );
                 }
             }
-            else if (member.NameEquals(id.Name))
+            else if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(slot.Name))
+            else if (member.Name == slot.Name)
             {
                 slot = member;
             }

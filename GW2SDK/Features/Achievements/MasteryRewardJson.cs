@@ -14,7 +14,7 @@ internal static class MasteryRewardJson
         RequiredMember region = "region";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals("type"))
+            if (member.Name == "type")
             {
                 if (!member.Value.ValueEquals("Mastery"))
                 {
@@ -23,11 +23,11 @@ internal static class MasteryRewardJson
                     );
                 }
             }
-            else if (member.NameEquals(id.Name))
+            else if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(region.Name))
+            else if (member.Name == region.Name)
             {
                 region = member;
             }

@@ -19,27 +19,27 @@ internal static class DivisionJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(name.Name))
+            if (member.Name == name.Name)
             {
                 name = member;
             }
-            else if (member.NameEquals(flags.Name))
+            else if (member.Name == flags.Name)
             {
                 flags = member;
             }
-            else if (member.NameEquals(largeIcon.Name))
+            else if (member.Name == largeIcon.Name)
             {
                 largeIcon = member;
             }
-            else if (member.NameEquals(smallIcon.Name))
+            else if (member.Name == smallIcon.Name)
             {
                 smallIcon = member;
             }
-            else if (member.NameEquals(pipIcon.Name))
+            else if (member.Name == pipIcon.Name)
             {
                 pipIcon = member;
             }
-            else if (member.NameEquals(tiers.Name))
+            else if (member.Name == tiers.Name)
             {
                 tiers = member;
             }

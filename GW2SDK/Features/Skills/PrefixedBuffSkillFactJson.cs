@@ -25,7 +25,7 @@ internal static class PrefixedBuffSkillFactJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals("type"))
+            if (member.Name == "type")
             {
                 if (!member.Value.ValueEquals("PrefixedBuff"))
                 {
@@ -34,39 +34,39 @@ internal static class PrefixedBuffSkillFactJson
                     );
                 }
             }
-            else if (member.NameEquals("requires_trait"))
+            else if (member.Name == "requires_trait")
             {
                 requiresTrait = member.Value.GetInt32();
             }
-            else if (member.NameEquals("overrides"))
+            else if (member.Name == "overrides")
             {
                 overrides = member.Value.GetInt32();
             }
-            else if (member.NameEquals(text.Name))
+            else if (member.Name == text.Name)
             {
                 text = member;
             }
-            else if (member.NameEquals(icon.Name))
+            else if (member.Name == icon.Name)
             {
                 icon = member;
             }
-            else if (member.NameEquals(duration.Name))
+            else if (member.Name == duration.Name)
             {
                 duration = member;
             }
-            else if (member.NameEquals(status.Name))
+            else if (member.Name == status.Name)
             {
                 status = member;
             }
-            else if (member.NameEquals(description.Name))
+            else if (member.Name == description.Name)
             {
                 description = member;
             }
-            else if (member.NameEquals(applyCount.Name))
+            else if (member.Name == applyCount.Name)
             {
                 applyCount = member;
             }
-            else if (member.NameEquals(prefix.Name))
+            else if (member.Name == prefix.Name)
             {
                 prefix = member;
             }

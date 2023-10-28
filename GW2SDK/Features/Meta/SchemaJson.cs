@@ -16,11 +16,11 @@ internal static class SchemaJson
 
         foreach (var member in jsonElement.EnumerateObject())
         {
-            if (member.NameEquals(version.Name))
+            if (member.Name == version.Name)
             {
                 version = member;
             }
-            else if (member.NameEquals(description.Name))
+            else if (member.Name == description.Name)
             {
                 description = member;
             }

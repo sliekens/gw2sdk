@@ -14,7 +14,7 @@ internal static class BaggageJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(bags.Name))
+            if (member.Name == bags.Name)
             {
                 bags = member;
             }

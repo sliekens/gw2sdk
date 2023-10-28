@@ -14,11 +14,11 @@ internal static class AchievementTierJson
         RequiredMember points = "points";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(count.Name))
+            if (member.Name == count.Name)
             {
                 count = member;
             }
-            else if (member.NameEquals(points.Name))
+            else if (member.Name == points.Name)
             {
                 points = member;
             }

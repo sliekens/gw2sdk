@@ -20,31 +20,31 @@ internal static class CurrentStandingJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(totalPoints.Name))
+            if (member.Name == totalPoints.Name)
             {
                 totalPoints = member;
             }
-            else if (member.NameEquals(division.Name))
+            else if (member.Name == division.Name)
             {
                 division = member;
             }
-            else if (member.NameEquals(tier.Name))
+            else if (member.Name == tier.Name)
             {
                 tier = member;
             }
-            else if (member.NameEquals(points.Name))
+            else if (member.Name == points.Name)
             {
                 points = member;
             }
-            else if (member.NameEquals(repeats.Name))
+            else if (member.Name == repeats.Name)
             {
                 repeats = member;
             }
-            else if (member.NameEquals(rating.Name))
+            else if (member.Name == rating.Name)
             {
                 rating = member;
             }
-            else if (member.NameEquals(decay.Name))
+            else if (member.Name == decay.Name)
             {
                 decay = member;
             }

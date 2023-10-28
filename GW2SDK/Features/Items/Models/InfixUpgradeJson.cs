@@ -15,15 +15,15 @@ internal static class InfixUpgradeJson
         OptionalMember buff = "buff";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(id.Name))
+            if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(attributes.Name))
+            else if (member.Name == attributes.Name)
             {
                 attributes = member;
             }
-            else if (member.NameEquals(buff.Name))
+            else if (member.Name == buff.Name)
             {
                 buff = member;
             }

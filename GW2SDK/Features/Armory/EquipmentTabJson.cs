@@ -17,26 +17,26 @@ internal static class EquipmentTabJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(tab.Name))
+            if (member.Name == tab.Name)
             {
                 tab = member;
             }
-            else if (member.NameEquals(name.Name))
+            else if (member.Name == name.Name)
             {
                 name = member;
             }
-            else if (member.NameEquals("is_active"))
+            else if (member.Name == "is_active")
             {
                 // Ignore this because you should only use ActiveEquipmentTab
                 // => player.EquipmentTabs.Single(tab => tab.Tab == player.ActiveEquipmentTab);
 
                 // Otherwise you have to update two objects when the active tab changes and you can't do that atomically
             }
-            else if (member.NameEquals(equipment.Name))
+            else if (member.Name == equipment.Name)
             {
                 equipment = member;
             }
-            else if (member.NameEquals(pvpEquipment.Name))
+            else if (member.Name == pvpEquipment.Name)
             {
                 pvpEquipment = member;
             }

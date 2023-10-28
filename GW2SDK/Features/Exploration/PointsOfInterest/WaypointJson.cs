@@ -17,7 +17,7 @@ internal static class WaypointJson
         RequiredMember chatLink = "chat_link";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals("type"))
+            if (member.Name == "type")
             {
                 if (!member.Value.ValueEquals("waypoint"))
                 {
@@ -26,23 +26,23 @@ internal static class WaypointJson
                     );
                 }
             }
-            else if (member.NameEquals(name.Name))
+            else if (member.Name == name.Name)
             {
                 name = member;
             }
-            else if (member.NameEquals(floor.Name))
+            else if (member.Name == floor.Name)
             {
                 floor = member;
             }
-            else if (member.NameEquals(coordinates.Name))
+            else if (member.Name == coordinates.Name)
             {
                 coordinates = member;
             }
-            else if (member.NameEquals(id.Name))
+            else if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(chatLink.Name))
+            else if (member.Name == chatLink.Name)
             {
                 chatLink = member;
             }

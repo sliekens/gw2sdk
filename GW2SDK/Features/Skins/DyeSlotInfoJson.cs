@@ -23,51 +23,51 @@ internal static class DyeSlotInfoJson
         OptionalMember sylvariMale = "SylvariMale";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(@default.Name))
+            if (member.Name == @default.Name)
             {
                 @default = member;
             }
-            else if (member.NameEquals("overrides"))
+            else if (member.Name == "overrides")
             {
                 foreach (var @override in member.Value.EnumerateObject())
                 {
-                    if (@override.NameEquals(asuraFemale.Name))
+                    if (@override.Name == asuraFemale.Name)
                     {
                         asuraFemale = @override;
                     }
-                    else if (@override.NameEquals(asuraMale.Name))
+                    else if (@override.Name == asuraMale.Name)
                     {
                         asuraMale = @override;
                     }
-                    else if (@override.NameEquals(charrFemale.Name))
+                    else if (@override.Name == charrFemale.Name)
                     {
                         charrFemale = @override;
                     }
-                    else if (@override.NameEquals(charrMale.Name))
+                    else if (@override.Name == charrMale.Name)
                     {
                         charrMale = @override;
                     }
-                    else if (@override.NameEquals(humanFemale.Name))
+                    else if (@override.Name == humanFemale.Name)
                     {
                         humanFemale = @override;
                     }
-                    else if (@override.NameEquals(humanMale.Name))
+                    else if (@override.Name == humanMale.Name)
                     {
                         humanMale = @override;
                     }
-                    else if (@override.NameEquals(nornFemale.Name))
+                    else if (@override.Name == nornFemale.Name)
                     {
                         nornFemale = @override;
                     }
-                    else if (@override.NameEquals(nornMale.Name))
+                    else if (@override.Name == nornMale.Name)
                     {
                         nornMale = @override;
                     }
-                    else if (@override.NameEquals(sylvariFemale.Name))
+                    else if (@override.Name == sylvariFemale.Name)
                     {
                         sylvariFemale = @override;
                     }
-                    else if (@override.NameEquals(sylvariMale.Name))
+                    else if (@override.Name == sylvariMale.Name)
                     {
                         sylvariMale = @override;
                     }

@@ -14,7 +14,7 @@ internal static class DivisionTierJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(points.Name))
+            if (member.Name == points.Name)
             {
                 points = member;
             }

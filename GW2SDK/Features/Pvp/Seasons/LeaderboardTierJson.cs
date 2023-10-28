@@ -17,19 +17,19 @@ internal static class LeaderboardTierJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(color.Name))
+            if (member.Name == color.Name)
             {
                 color = member;
             }
-            else if (member.NameEquals(type.Name))
+            else if (member.Name == type.Name)
             {
                 type = member;
             }
-            else if (member.NameEquals(name.Name))
+            else if (member.Name == name.Name)
             {
                 name = member;
             }
-            else if (member.NameEquals(range.Name))
+            else if (member.Name == range.Name)
             {
                 range = member;
             }

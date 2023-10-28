@@ -17,7 +17,7 @@ internal static class ProfessionSkillReferenceJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals("type"))
+            if (member.Name == "type")
             {
                 if (!member.Value.ValueEquals("Profession"))
                 {
@@ -26,19 +26,19 @@ internal static class ProfessionSkillReferenceJson
                     );
                 }
             }
-            else if (member.NameEquals(id.Name))
+            else if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(slot.Name))
+            else if (member.Name == slot.Name)
             {
                 slot = member;
             }
-            else if (member.NameEquals(source.Name))
+            else if (member.Name == source.Name)
             {
                 source = member;
             }
-            else if (member.NameEquals(attunement.Name))
+            else if (member.Name == attunement.Name)
             {
                 attunement = member;
             }

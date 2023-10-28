@@ -22,43 +22,43 @@ internal static class SelectedModificationJson
         NullableMember vitality = "Vitality";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(agonyResistance.Name))
+            if (member.Name == agonyResistance.Name)
             {
                 agonyResistance = member;
             }
-            else if (member.NameEquals(boonDuration.Name))
+            else if (member.Name == boonDuration.Name)
             {
                 boonDuration = member;
             }
-            else if (member.NameEquals(conditionDamage.Name))
+            else if (member.Name == conditionDamage.Name)
             {
                 conditionDamage = member;
             }
-            else if (member.NameEquals(conditionDuration.Name))
+            else if (member.Name == conditionDuration.Name)
             {
                 conditionDuration = member;
             }
-            else if (member.NameEquals(critDamage.Name))
+            else if (member.Name == critDamage.Name)
             {
                 critDamage = member;
             }
-            else if (member.NameEquals(healing.Name))
+            else if (member.Name == healing.Name)
             {
                 healing = member;
             }
-            else if (member.NameEquals(power.Name))
+            else if (member.Name == power.Name)
             {
                 power = member;
             }
-            else if (member.NameEquals(precision.Name))
+            else if (member.Name == precision.Name)
             {
                 precision = member;
             }
-            else if (member.NameEquals(toughness.Name))
+            else if (member.Name == toughness.Name)
             {
                 toughness = member;
             }
-            else if (member.NameEquals(vitality.Name))
+            else if (member.Name == vitality.Name)
             {
                 vitality = member;
             }

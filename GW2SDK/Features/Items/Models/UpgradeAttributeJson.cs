@@ -14,11 +14,11 @@ internal static class UpgradeAttributeJson
         RequiredMember modifier = "modifier";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(attribute.Name))
+            if (member.Name == attribute.Name)
             {
                 attribute = member;
             }
-            else if (member.NameEquals(modifier.Name))
+            else if (member.Name == modifier.Name)
             {
                 modifier = member;
             }

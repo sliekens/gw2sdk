@@ -15,11 +15,11 @@ internal static class AbilityRankJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(cost.Name))
+            if (member.Name == cost.Name)
             {
                 cost = member;
             }
-            else if (member.NameEquals(effect.Name))
+            else if (member.Name == effect.Name)
             {
                 effect = member;
             }

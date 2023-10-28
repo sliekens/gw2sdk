@@ -15,15 +15,15 @@ internal static class IngredientJson
         RequiredMember count = "count";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(type.Name))
+            if (member.Name == type.Name)
             {
                 type = member;
             }
-            else if (member.NameEquals(id.Name))
+            else if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(count.Name))
+            else if (member.Name == count.Name)
             {
                 count = member;
             }

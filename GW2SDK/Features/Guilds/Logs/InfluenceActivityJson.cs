@@ -18,7 +18,7 @@ internal static class InfluenceActivityJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals("type"))
+            if (member.Name == "type")
             {
                 if (!member.Value.ValueEquals("influence"))
                 {
@@ -27,23 +27,23 @@ internal static class InfluenceActivityJson
                     );
                 }
             }
-            else if (member.NameEquals(id.Name))
+            else if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(time.Name))
+            else if (member.Name == time.Name)
             {
                 time = member;
             }
-            else if (member.NameEquals(activity.Name))
+            else if (member.Name == activity.Name)
             {
                 activity = member;
             }
-            else if (member.NameEquals(totalParticipants.Name))
+            else if (member.Name == totalParticipants.Name)
             {
                 totalParticipants = member;
             }
-            else if (member.NameEquals(participants.Name))
+            else if (member.Name == participants.Name)
             {
                 participants = member;
             }

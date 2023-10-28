@@ -19,7 +19,7 @@ internal static class RankChangeJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals("type"))
+            if (member.Name == "type")
             {
                 if (!member.Value.ValueEquals("rank_change"))
                 {
@@ -28,27 +28,27 @@ internal static class RankChangeJson
                     );
                 }
             }
-            else if (member.NameEquals(id.Name))
+            else if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(time.Name))
+            else if (member.Name == time.Name)
             {
                 time = member;
             }
-            else if (member.NameEquals(user.Name))
+            else if (member.Name == user.Name)
             {
                 user = member;
             }
-            else if (member.NameEquals(changedBy.Name))
+            else if (member.Name == changedBy.Name)
             {
                 changedBy = member;
             }
-            else if (member.NameEquals(oldRank.Name))
+            else if (member.Name == oldRank.Name)
             {
                 oldRank = member;
             }
-            else if (member.NameEquals(newRank.Name))
+            else if (member.Name == newRank.Name)
             {
                 newRank = member;
             }

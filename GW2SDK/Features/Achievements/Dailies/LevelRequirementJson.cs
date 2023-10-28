@@ -15,11 +15,11 @@ internal static class LevelRequirementJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(min.Name))
+            if (member.Name == min.Name)
             {
                 min = member;
             }
-            else if (member.NameEquals(max.Name))
+            else if (member.Name == max.Name)
             {
                 max = member;
             }

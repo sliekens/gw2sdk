@@ -18,35 +18,35 @@ internal static class HeroJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(id.Name))
+            if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(name.Name))
+            else if (member.Name == name.Name)
             {
                 name = member;
             }
-            else if (member.NameEquals(description.Name))
+            else if (member.Name == description.Name)
             {
                 description = member;
             }
-            else if (member.NameEquals(type.Name))
+            else if (member.Name == type.Name)
             {
                 type = member;
             }
-            else if (member.NameEquals(stats.Name))
+            else if (member.Name == stats.Name)
             {
                 stats = member;
             }
-            else if (member.NameEquals(overlay.Name))
+            else if (member.Name == overlay.Name)
             {
                 overlay = member;
             }
-            else if (member.NameEquals(underlay.Name))
+            else if (member.Name == underlay.Name)
             {
                 underlay = member;
             }
-            else if (member.NameEquals(skins.Name))
+            else if (member.Name == skins.Name)
             {
                 skins = member;
             }

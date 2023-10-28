@@ -16,15 +16,15 @@ internal static class OrderBookLineJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(listings.Name))
+            if (member.Name == listings.Name)
             {
                 listings = member;
             }
-            else if (member.NameEquals(unitPrice.Name))
+            else if (member.Name == unitPrice.Name)
             {
                 unitPrice = member;
             }
-            else if (member.NameEquals(quantity.Name))
+            else if (member.Name == quantity.Name)
             {
                 quantity = member;
             }

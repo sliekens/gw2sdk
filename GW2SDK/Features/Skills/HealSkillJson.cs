@@ -34,7 +34,7 @@ internal static class HealSkillJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals("type"))
+            if (member.Name == "type")
             {
                 if (!member.Value.ValueEquals("Heal"))
                 {
@@ -43,87 +43,87 @@ internal static class HealSkillJson
                     );
                 }
             }
-            else if (member.NameEquals(name.Name))
+            else if (member.Name == name.Name)
             {
                 name = member;
             }
-            else if (member.NameEquals(facts.Name))
+            else if (member.Name == facts.Name)
             {
                 facts = member;
             }
-            else if (member.NameEquals(traitedFacts.Name))
+            else if (member.Name == traitedFacts.Name)
             {
                 traitedFacts = member;
             }
-            else if (member.NameEquals(description.Name))
+            else if (member.Name == description.Name)
             {
                 description = member;
             }
-            else if (member.NameEquals(icon.Name))
+            else if (member.Name == icon.Name)
             {
                 icon = member;
             }
-            else if (member.NameEquals(weaponType.Name))
+            else if (member.Name == weaponType.Name)
             {
                 weaponType = member;
             }
-            else if (member.NameEquals(professions.Name))
+            else if (member.Name == professions.Name)
             {
                 professions = member;
             }
-            else if (member.NameEquals(slot.Name))
+            else if (member.Name == slot.Name)
             {
                 slot = member;
             }
-            else if (member.NameEquals(flipSkill.Name))
+            else if (member.Name == flipSkill.Name)
             {
                 flipSkill = member;
             }
-            else if (member.NameEquals(nextChain.Name))
+            else if (member.Name == nextChain.Name)
             {
                 nextChain = member;
             }
-            else if (member.NameEquals(prevChain.Name))
+            else if (member.Name == prevChain.Name)
             {
                 prevChain = member;
             }
-            else if (member.NameEquals(flags.Name))
+            else if (member.Name == flags.Name)
             {
                 flags = member;
             }
-            else if (member.NameEquals(specialization.Name))
+            else if (member.Name == specialization.Name)
             {
                 specialization = member;
             }
-            else if (member.NameEquals(id.Name))
+            else if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(chatLink.Name))
+            else if (member.Name == chatLink.Name)
             {
                 chatLink = member;
             }
-            else if (member.NameEquals(categories.Name))
+            else if (member.Name == categories.Name)
             {
                 categories = member;
             }
-            else if (member.NameEquals(subskills.Name))
+            else if (member.Name == subskills.Name)
             {
                 subskills = member;
             }
-            else if (member.NameEquals(bundleSkills.Name))
+            else if (member.Name == bundleSkills.Name)
             {
                 bundleSkills = member;
             }
-            else if (member.NameEquals(attunement.Name))
+            else if (member.Name == attunement.Name)
             {
                 attunement = member;
             }
-            else if (member.NameEquals(cost.Name))
+            else if (member.Name == cost.Name)
             {
                 cost = member;
             }
-            else if (member.NameEquals(toolbeltSkill.Name))
+            else if (member.Name == toolbeltSkill.Name)
             {
                 toolbeltSkill = member;
             }

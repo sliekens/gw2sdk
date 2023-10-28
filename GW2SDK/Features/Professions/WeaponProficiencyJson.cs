@@ -16,15 +16,15 @@ internal static class WeaponProficiencyJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(specialization.Name))
+            if (member.Name == specialization.Name)
             {
                 specialization = member;
             }
-            else if (member.NameEquals(flags.Name))
+            else if (member.Name == flags.Name)
             {
                 flags = member;
             }
-            else if (member.NameEquals(skills.Name))
+            else if (member.Name == skills.Name)
             {
                 skills = member;
             }

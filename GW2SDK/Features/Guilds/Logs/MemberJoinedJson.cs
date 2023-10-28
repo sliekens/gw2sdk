@@ -16,7 +16,7 @@ internal static class MemberJoinedJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals("type"))
+            if (member.Name == "type")
             {
                 if (!member.Value.ValueEquals("joined"))
                 {
@@ -25,15 +25,15 @@ internal static class MemberJoinedJson
                     );
                 }
             }
-            else if (member.NameEquals(id.Name))
+            else if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(time.Name))
+            else if (member.Name == time.Name)
             {
                 time = member;
             }
-            else if (member.NameEquals(user.Name))
+            else if (member.Name == user.Name)
             {
                 user = member;
             }

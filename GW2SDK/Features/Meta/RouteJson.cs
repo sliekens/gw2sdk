@@ -14,19 +14,19 @@ internal static class RouteJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(path.Name))
+            if (member.Name == path.Name)
             {
                 path = member;
             }
-            else if (member.NameEquals(lang.Name))
+            else if (member.Name == lang.Name)
             {
                 lang = member;
             }
-            else if (member.NameEquals(auth.Name))
+            else if (member.Name == auth.Name)
             {
                 auth = member;
             }
-            else if (member.NameEquals(active.Name))
+            else if (member.Name == active.Name)
             {
                 active = member;
             }

@@ -13,15 +13,15 @@ internal static class LevelJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(minLevel.Name))
+            if (member.Name == minLevel.Name)
             {
                 minLevel = member;
             }
-            else if (member.NameEquals(maxLevel.Name))
+            else if (member.Name == maxLevel.Name)
             {
                 maxLevel = member;
             }
-            else if (member.NameEquals(points.Name))
+            else if (member.Name == points.Name)
             {
                 points = member;
             }

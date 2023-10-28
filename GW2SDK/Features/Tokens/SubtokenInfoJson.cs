@@ -18,7 +18,7 @@ internal static class SubtokenInfoJson
         OptionalMember urls = "urls";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals("type"))
+            if (member.Name == "type")
             {
                 if (!member.Value.ValueEquals("Subtoken"))
                 {
@@ -27,27 +27,27 @@ internal static class SubtokenInfoJson
                     );
                 }
             }
-            else if (member.NameEquals(id.Name))
+            else if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(name.Name))
+            else if (member.Name == name.Name)
             {
                 name = member;
             }
-            else if (member.NameEquals(permissions.Name))
+            else if (member.Name == permissions.Name)
             {
                 permissions = member;
             }
-            else if (member.NameEquals(expiresAt.Name))
+            else if (member.Name == expiresAt.Name)
             {
                 expiresAt = member;
             }
-            else if (member.NameEquals(issuedAt.Name))
+            else if (member.Name == issuedAt.Name)
             {
                 issuedAt = member;
             }
-            else if (member.NameEquals(urls.Name))
+            else if (member.Name == urls.Name)
             {
                 urls = member;
             }

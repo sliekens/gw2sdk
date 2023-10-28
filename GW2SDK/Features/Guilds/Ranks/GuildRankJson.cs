@@ -17,19 +17,19 @@ internal static class GuildRankJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(id.Name))
+            if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(order.Name))
+            else if (member.Name == order.Name)
             {
                 order = member;
             }
-            else if (member.NameEquals(permissions.Name))
+            else if (member.Name == permissions.Name)
             {
                 permissions = member;
             }
-            else if (member.NameEquals(iconHref.Name))
+            else if (member.Name == iconHref.Name)
             {
                 iconHref = member;
             }

@@ -15,23 +15,23 @@ internal static class MountJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(id.Name))
+            if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(name.Name))
+            else if (member.Name == name.Name)
             {
                 name = member;
             }
-            else if (member.NameEquals(defaultSkin.Name))
+            else if (member.Name == defaultSkin.Name)
             {
                 defaultSkin = member;
             }
-            else if (member.NameEquals(skins.Name))
+            else if (member.Name == skins.Name)
             {
                 skins = member;
             }
-            else if (member.NameEquals(skills.Name))
+            else if (member.Name == skills.Name)
             {
                 skills = member;
             }

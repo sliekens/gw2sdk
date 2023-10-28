@@ -16,15 +16,15 @@ internal static class HeroStatsJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(offense.Name))
+            if (member.Name == offense.Name)
             {
                 offense = member;
             }
-            else if (member.NameEquals(defense.Name))
+            else if (member.Name == defense.Name)
             {
                 defense = member;
             }
-            else if (member.NameEquals(speed.Name))
+            else if (member.Name == speed.Name)
             {
                 speed = member;
             }

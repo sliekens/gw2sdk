@@ -16,11 +16,11 @@ internal static class HeroChallengeJson
         OptionalMember id = "id";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(coordinates.Name))
+            if (member.Name == coordinates.Name)
             {
                 coordinates = member;
             }
-            else if (member.NameEquals(id.Name))
+            else if (member.Name == id.Name)
             {
                 id = member;
             }

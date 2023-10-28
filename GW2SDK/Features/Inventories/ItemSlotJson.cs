@@ -31,47 +31,47 @@ internal static class ItemSlotJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(id.Name))
+            if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(count.Name))
+            else if (member.Name == count.Name)
             {
                 count = member;
             }
-            else if (member.NameEquals(charges.Name))
+            else if (member.Name == charges.Name)
             {
                 charges = member;
             }
-            else if (member.NameEquals(skin.Name))
+            else if (member.Name == skin.Name)
             {
                 skin = member;
             }
-            else if (member.NameEquals(upgrades.Name))
+            else if (member.Name == upgrades.Name)
             {
                 upgrades = member;
             }
-            else if (member.NameEquals(upgradeSlotIndices.Name))
+            else if (member.Name == upgradeSlotIndices.Name)
             {
                 upgradeSlotIndices = member;
             }
-            else if (member.NameEquals(infusions.Name))
+            else if (member.Name == infusions.Name)
             {
                 infusions = member;
             }
-            else if (member.NameEquals(dyes.Name))
+            else if (member.Name == dyes.Name)
             {
                 dyes = member;
             }
-            else if (member.NameEquals(binding.Name))
+            else if (member.Name == binding.Name)
             {
                 binding = member;
             }
-            else if (member.NameEquals(boundTo.Name))
+            else if (member.Name == boundTo.Name)
             {
                 boundTo = member;
             }
-            else if (member.NameEquals(stats.Name))
+            else if (member.Name == stats.Name)
             {
                 stats = member;
             }

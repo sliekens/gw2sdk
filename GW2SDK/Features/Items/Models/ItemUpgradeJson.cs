@@ -14,11 +14,11 @@ internal static class ItemUpgradeJson
         RequiredMember itemId = "item_id";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(upgrade.Name))
+            if (member.Name == upgrade.Name)
             {
                 upgrade = member;
             }
-            else if (member.NameEquals(itemId.Name))
+            else if (member.Name == itemId.Name)
             {
                 itemId = member;
             }

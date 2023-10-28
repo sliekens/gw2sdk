@@ -22,7 +22,7 @@ internal static class AttributeAdjustSkillFactJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals("type"))
+            if (member.Name == "type")
             {
                 if (!member.Value.ValueEquals("AttributeAdjust"))
                 {
@@ -31,27 +31,27 @@ internal static class AttributeAdjustSkillFactJson
                     );
                 }
             }
-            else if (member.NameEquals("requires_trait"))
+            else if (member.Name == "requires_trait")
             {
                 requiresTrait = member.Value.GetInt32();
             }
-            else if (member.NameEquals("overrides"))
+            else if (member.Name == "overrides")
             {
                 overrides = member.Value.GetInt32();
             }
-            else if (member.NameEquals(text.Name))
+            else if (member.Name == text.Name)
             {
                 text = member;
             }
-            else if (member.NameEquals(icon.Name))
+            else if (member.Name == icon.Name)
             {
                 icon = member;
             }
-            else if (member.NameEquals(adjustment.Name))
+            else if (member.Name == adjustment.Name)
             {
                 adjustment = member;
             }
-            else if (member.NameEquals(target.Name))
+            else if (member.Name == target.Name)
             {
                 target = member;
             }

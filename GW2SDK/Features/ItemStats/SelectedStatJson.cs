@@ -14,11 +14,11 @@ internal static class SelectedStatJson
         RequiredMember attributes = "attributes";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(id.Name))
+            if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(attributes.Name))
+            else if (member.Name == attributes.Name)
             {
                 attributes = member;
             }

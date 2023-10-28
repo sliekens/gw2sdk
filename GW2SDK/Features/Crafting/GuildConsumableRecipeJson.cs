@@ -23,7 +23,7 @@ internal static class GuildConsumableRecipeJson
         RequiredMember chatLink = "chat_link";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals("type"))
+            if (member.Name == "type")
             {
                 if (!member.Value.ValueEquals("GuildConsumable"))
                 {
@@ -32,51 +32,51 @@ internal static class GuildConsumableRecipeJson
                     );
                 }
             }
-            else if (member.NameEquals(outputItemId.Name))
+            else if (member.Name == outputItemId.Name)
             {
                 outputItemId = member;
             }
-            else if (member.NameEquals(outputItemCount.Name))
+            else if (member.Name == outputItemCount.Name)
             {
                 outputItemCount = member;
             }
-            else if (member.NameEquals(minRating.Name))
+            else if (member.Name == minRating.Name)
             {
                 minRating = member;
             }
-            else if (member.NameEquals(minRating.Name))
+            else if (member.Name == minRating.Name)
             {
                 minRating = member;
             }
-            else if (member.NameEquals(timeToCraft.Name))
+            else if (member.Name == timeToCraft.Name)
             {
                 timeToCraft = member;
             }
-            else if (member.NameEquals(disciplines.Name))
+            else if (member.Name == disciplines.Name)
             {
                 disciplines = member;
             }
-            else if (member.NameEquals(flags.Name))
+            else if (member.Name == flags.Name)
             {
                 flags = member;
             }
-            else if (member.NameEquals(ingredients.Name))
+            else if (member.Name == ingredients.Name)
             {
                 ingredients = member;
             }
-            else if (member.NameEquals(guildIngredients.Name))
+            else if (member.Name == guildIngredients.Name)
             {
                 guildIngredients = member;
             }
-            else if (member.NameEquals(outputUpgradeId.Name))
+            else if (member.Name == outputUpgradeId.Name)
             {
                 outputUpgradeId = member;
             }
-            else if (member.NameEquals(id.Name))
+            else if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(chatLink.Name))
+            else if (member.Name == chatLink.Name)
             {
                 chatLink = member;
             }

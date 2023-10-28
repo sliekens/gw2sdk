@@ -12,11 +12,11 @@ internal static class GoalJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(active.Name))
+            if (member.Name == active.Name)
             {
                 active = member;
             }
-            else if (member.NameEquals(complete.Name))
+            else if (member.Name == complete.Name)
             {
                 complete = member;
             }

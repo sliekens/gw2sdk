@@ -12,11 +12,11 @@ internal static class BonusJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(type.Name))
+            if (member.Name == type.Name)
             {
                 type = member;
             }
-            else if (member.NameEquals(owner.Name))
+            else if (member.Name == owner.Name)
             {
                 owner = member;
             }

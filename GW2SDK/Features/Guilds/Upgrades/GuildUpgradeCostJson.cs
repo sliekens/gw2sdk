@@ -17,19 +17,19 @@ internal static class GuildUpgradeCostJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(kind.Name))
+            if (member.Name == kind.Name)
             {
                 kind = member;
             }
-            else if (member.NameEquals(name.Name))
+            else if (member.Name == name.Name)
             {
                 name = member;
             }
-            else if (member.NameEquals(count.Name))
+            else if (member.Name == count.Name)
             {
                 count = member;
             }
-            else if (member.NameEquals(itemId.Name))
+            else if (member.Name == itemId.Name)
             {
                 itemId = member;
             }

@@ -22,7 +22,7 @@ internal static class CastleJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals("type"))
+            if (member.Name == "type")
             {
                 if (!member.Value.ValueEquals("Castle"))
                 {
@@ -31,39 +31,39 @@ internal static class CastleJson
                     );
                 }
             }
-            else if (member.NameEquals(id.Name))
+            else if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(owner.Name))
+            else if (member.Name == owner.Name)
             {
                 owner = member;
             }
-            else if (member.NameEquals(lastFlipped.Name))
+            else if (member.Name == lastFlipped.Name)
             {
                 lastFlipped = member;
             }
-            else if (member.NameEquals(pointsTick.Name))
+            else if (member.Name == pointsTick.Name)
             {
                 pointsTick = member;
             }
-            else if (member.NameEquals(pointsCapture.Name))
+            else if (member.Name == pointsCapture.Name)
             {
                 pointsCapture = member;
             }
-            else if (member.NameEquals(claimedBy.Name))
+            else if (member.Name == claimedBy.Name)
             {
                 claimedBy = member;
             }
-            else if (member.NameEquals(claimedAt.Name))
+            else if (member.Name == claimedAt.Name)
             {
                 claimedAt = member;
             }
-            else if (member.NameEquals(yaksDelivered.Name))
+            else if (member.Name == yaksDelivered.Name)
             {
                 yaksDelivered = member;
             }
-            else if (member.NameEquals(guildUpgrades.Name))
+            else if (member.Name == guildUpgrades.Name)
             {
                 guildUpgrades = member;
             }

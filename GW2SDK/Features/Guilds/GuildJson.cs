@@ -22,51 +22,51 @@ internal static class GuildJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(level.Name))
+            if (member.Name == level.Name)
             {
                 level = member;
             }
-            else if (member.NameEquals(motd.Name))
+            else if (member.Name == motd.Name)
             {
                 motd = member;
             }
-            else if (member.NameEquals(influence.Name))
+            else if (member.Name == influence.Name)
             {
                 influence = member;
             }
-            else if (member.NameEquals(aetherium.Name))
+            else if (member.Name == aetherium.Name)
             {
                 aetherium = member;
             }
-            else if (member.NameEquals(resonance.Name))
+            else if (member.Name == resonance.Name)
             {
                 resonance = member;
             }
-            else if (member.NameEquals(favor.Name))
+            else if (member.Name == favor.Name)
             {
                 favor = member;
             }
-            else if (member.NameEquals(memberCount.Name))
+            else if (member.Name == memberCount.Name)
             {
                 memberCount = member;
             }
-            else if (member.NameEquals(memberCapacity.Name))
+            else if (member.Name == memberCapacity.Name)
             {
                 memberCapacity = member;
             }
-            else if (member.NameEquals(id.Name))
+            else if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(name.Name))
+            else if (member.Name == name.Name)
             {
                 name = member;
             }
-            else if (member.NameEquals(tag.Name))
+            else if (member.Name == tag.Name)
             {
                 tag = member;
             }
-            else if (member.NameEquals(emblem.Name))
+            else if (member.Name == emblem.Name)
             {
                 emblem = member;
             }

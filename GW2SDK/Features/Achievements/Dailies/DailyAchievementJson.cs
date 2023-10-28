@@ -16,15 +16,15 @@ internal static class DailyAchievementJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(id.Name))
+            if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(level.Name))
+            else if (member.Name == level.Name)
             {
                 level = member;
             }
-            else if (member.NameEquals(requiredAccess.Name))
+            else if (member.Name == requiredAccess.Name)
             {
                 requiredAccess = member;
             }

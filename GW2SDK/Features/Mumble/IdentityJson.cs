@@ -24,47 +24,47 @@ internal static class IdentityJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(name.Name))
+            if (member.Name == name.Name)
             {
                 name = member;
             }
-            else if (member.NameEquals(profession.Name))
+            else if (member.Name == profession.Name)
             {
                 profession = member;
             }
-            else if (member.NameEquals(specializationId.Name))
+            else if (member.Name == specializationId.Name)
             {
                 specializationId = member;
             }
-            else if (member.NameEquals(race.Name))
+            else if (member.Name == race.Name)
             {
                 race = member;
             }
-            else if (member.NameEquals(mapId.Name))
+            else if (member.Name == mapId.Name)
             {
                 mapId = member;
             }
-            else if (member.NameEquals(worldId.Name))
+            else if (member.Name == worldId.Name)
             {
                 worldId = member;
             }
-            else if (member.NameEquals(teamColorId.Name))
+            else if (member.Name == teamColorId.Name)
             {
                 teamColorId = member;
             }
-            else if (member.NameEquals(commander.Name))
+            else if (member.Name == commander.Name)
             {
                 commander = member;
             }
-            else if (member.NameEquals(fieldOfView.Name))
+            else if (member.Name == fieldOfView.Name)
             {
                 fieldOfView = member;
             }
-            else if (member.NameEquals(uiSize.Name))
+            else if (member.Name == uiSize.Name)
             {
                 uiSize = member;
             }
-            else if (member.NameEquals(map.Name))
+            else if (member.Name == map.Name)
             {
                 map = member;
             }

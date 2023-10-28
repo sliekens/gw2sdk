@@ -13,7 +13,7 @@ internal static class AchievementTextBitJson
         RequiredMember text = "text";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals("type"))
+            if (member.Name == "type")
             {
                 if (!member.Value.ValueEquals("Text"))
                 {
@@ -22,7 +22,7 @@ internal static class AchievementTextBitJson
                     );
                 }
             }
-            else if (member.NameEquals(text.Name))
+            else if (member.Name == text.Name)
             {
                 text = member;
             }

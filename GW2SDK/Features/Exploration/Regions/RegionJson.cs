@@ -18,23 +18,23 @@ internal static class RegionJson
         RequiredMember id = "id";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(name.Name))
+            if (member.Name == name.Name)
             {
                 name = member;
             }
-            else if (member.NameEquals(labelCoordinates.Name))
+            else if (member.Name == labelCoordinates.Name)
             {
                 labelCoordinates = member;
             }
-            else if (member.NameEquals(continentRectangle.Name))
+            else if (member.Name == continentRectangle.Name)
             {
                 continentRectangle = member;
             }
-            else if (member.NameEquals(maps.Name))
+            else if (member.Name == maps.Name)
             {
                 maps = member;
             }
-            else if (member.NameEquals(id.Name))
+            else if (member.Name == id.Name)
             {
                 id = member;
             }

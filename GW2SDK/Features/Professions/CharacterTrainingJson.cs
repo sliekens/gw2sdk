@@ -14,7 +14,7 @@ internal static class CharacterTrainingJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(training.Name))
+            if (member.Name == training.Name)
             {
                 training = member;
             }

@@ -15,11 +15,11 @@ internal static class ObjectiveUpgradeJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(id.Name))
+            if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(tiers.Name))
+            else if (member.Name == tiers.Name)
             {
                 tiers = member;
             }

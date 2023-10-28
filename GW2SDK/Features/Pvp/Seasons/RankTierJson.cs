@@ -14,7 +14,7 @@ internal static class RankTierJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(rating.Name))
+            if (member.Name == rating.Name)
             {
                 rating = member;
             }

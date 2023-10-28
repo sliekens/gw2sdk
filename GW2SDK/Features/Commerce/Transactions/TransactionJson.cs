@@ -19,27 +19,27 @@ internal static class TransactionJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(id.Name))
+            if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(itemId.Name))
+            else if (member.Name == itemId.Name)
             {
                 itemId = member;
             }
-            else if (member.NameEquals(price.Name))
+            else if (member.Name == price.Name)
             {
                 price = member;
             }
-            else if (member.NameEquals(quantity.Name))
+            else if (member.Name == quantity.Name)
             {
                 quantity = member;
             }
-            else if (member.NameEquals(created.Name))
+            else if (member.Name == created.Name)
             {
                 created = member;
             }
-            else if (member.NameEquals(purchased.Name))
+            else if (member.Name == purchased.Name)
             {
                 purchased = member;
             }

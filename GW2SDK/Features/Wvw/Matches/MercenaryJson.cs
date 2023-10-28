@@ -18,7 +18,7 @@ internal static class MercenaryJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals("type"))
+            if (member.Name == "type")
             {
                 if (!member.Value.ValueEquals("Mercenary"))
                 {
@@ -27,23 +27,23 @@ internal static class MercenaryJson
                     );
                 }
             }
-            else if (member.NameEquals(id.Name))
+            else if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(owner.Name))
+            else if (member.Name == owner.Name)
             {
                 owner = member;
             }
-            else if (member.NameEquals(lastFlipped.Name))
+            else if (member.Name == lastFlipped.Name)
             {
                 lastFlipped = member;
             }
-            else if (member.NameEquals(pointsTick.Name))
+            else if (member.Name == pointsTick.Name)
             {
                 pointsTick = member;
             }
-            else if (member.NameEquals(pointsCapture.Name))
+            else if (member.Name == pointsCapture.Name)
             {
                 pointsCapture = member;
             }

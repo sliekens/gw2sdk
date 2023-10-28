@@ -15,11 +15,11 @@ internal static class WvwAbilityJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(id.Name))
+            if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(rank.Name))
+            else if (member.Name == rank.Name)
             {
                 rank = member;
             }

@@ -21,7 +21,7 @@ internal static class BootsSkinJson
         OptionalMember dyeSlots = "dye_slots";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals("type"))
+            if (member.Name == "type")
             {
                 if (!member.Value.ValueEquals("Armor"))
                 {
@@ -30,39 +30,39 @@ internal static class BootsSkinJson
                     );
                 }
             }
-            else if (member.NameEquals(name.Name))
+            else if (member.Name == name.Name)
             {
                 name = member;
             }
-            else if (member.NameEquals(description.Name))
+            else if (member.Name == description.Name)
             {
                 description = member;
             }
-            else if (member.NameEquals(rarity.Name))
+            else if (member.Name == rarity.Name)
             {
                 rarity = member;
             }
-            else if (member.NameEquals(flags.Name))
+            else if (member.Name == flags.Name)
             {
                 flags = member;
             }
-            else if (member.NameEquals(restrictions.Name))
+            else if (member.Name == restrictions.Name)
             {
                 restrictions = member;
             }
-            else if (member.NameEquals(id.Name))
+            else if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(icon.Name))
+            else if (member.Name == icon.Name)
             {
                 icon = member;
             }
-            else if (member.NameEquals("details"))
+            else if (member.Name == "details")
             {
                 foreach (var detail in member.Value.EnumerateObject())
                 {
-                    if (detail.NameEquals("type"))
+                    if (detail.Name == "type")
                     {
                         if (!detail.Value.ValueEquals("Boots"))
                         {
@@ -71,11 +71,11 @@ internal static class BootsSkinJson
                             );
                         }
                     }
-                    else if (detail.NameEquals(weightClass.Name))
+                    else if (detail.Name == weightClass.Name)
                     {
                         weightClass = detail;
                     }
-                    else if (detail.NameEquals(dyeSlots.Name))
+                    else if (detail.Name == dyeSlots.Name)
                     {
                         dyeSlots = detail;
                     }

@@ -13,15 +13,15 @@ internal static class EmoteJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(id.Name))
+            if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(commands.Name))
+            else if (member.Name == commands.Name)
             {
                 commands = member;
             }
-            else if (member.NameEquals(unlockItems.Name))
+            else if (member.Name == unlockItems.Name)
             {
                 unlockItems = member;
             }

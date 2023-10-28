@@ -14,7 +14,7 @@ internal static class LearnedCraftingDisciplinesJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(crafting.Name))
+            if (member.Name == crafting.Name)
             {
                 crafting = member;
             }

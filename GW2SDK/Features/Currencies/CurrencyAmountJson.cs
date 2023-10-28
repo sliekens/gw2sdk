@@ -15,11 +15,11 @@ internal static class CurrencyAmountJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(currencyId.Name))
+            if (member.Name == currencyId.Name)
             {
                 currencyId = member;
             }
-            else if (member.NameEquals(amount.Name))
+            else if (member.Name == amount.Name)
             {
                 amount = member;
             }

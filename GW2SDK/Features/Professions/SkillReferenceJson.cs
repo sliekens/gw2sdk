@@ -27,7 +27,7 @@ internal static class SkillReferenceJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals("type"))
+            if (member.Name == "type")
             {
                 if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
@@ -36,11 +36,11 @@ internal static class SkillReferenceJson
                     );
                 }
             }
-            else if (member.NameEquals(id.Name))
+            else if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(slot.Name))
+            else if (member.Name == slot.Name)
             {
                 slot = member;
             }

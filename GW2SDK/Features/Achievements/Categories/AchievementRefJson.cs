@@ -17,19 +17,19 @@ internal static class AchievementRefJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(id.Name))
+            if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(requiredAccess.Name))
+            else if (member.Name == requiredAccess.Name)
             {
                 requiredAccess = member;
             }
-            else if (member.NameEquals(flags.Name))
+            else if (member.Name == flags.Name)
             {
                 flags = member;
             }
-            else if (member.NameEquals(level.Name))
+            else if (member.Name == level.Name)
             {
                 level = member;
             }

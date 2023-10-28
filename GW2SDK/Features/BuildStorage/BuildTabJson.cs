@@ -16,15 +16,15 @@ internal static class BuildTabJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(tab.Name))
+            if (member.Name == tab.Name)
             {
                 tab = member;
             }
-            else if (member.NameEquals(build.Name))
+            else if (member.Name == build.Name)
             {
                 build = member;
             }
-            else if (member.NameEquals(isActive.Name))
+            else if (member.Name == isActive.Name)
             {
                 isActive = member;
             }

@@ -16,15 +16,15 @@ internal static class SuperAdventureBoxProgressJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(zones.Name))
+            if (member.Name == zones.Name)
             {
                 zones = member;
             }
-            else if (member.NameEquals(unlocks.Name))
+            else if (member.Name == unlocks.Name)
             {
                 unlocks = member;
             }
-            else if (member.NameEquals(songs.Name))
+            else if (member.Name == songs.Name)
             {
                 songs = member;
             }

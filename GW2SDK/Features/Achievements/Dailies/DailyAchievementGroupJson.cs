@@ -18,23 +18,23 @@ internal static class DailyAchievementGroupJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(pve.Name))
+            if (member.Name == pve.Name)
             {
                 pve = member;
             }
-            else if (member.NameEquals(pvp.Name))
+            else if (member.Name == pvp.Name)
             {
                 pvp = member;
             }
-            else if (member.NameEquals(wvw.Name))
+            else if (member.Name == wvw.Name)
             {
                 wvw = member;
             }
-            else if (member.NameEquals(fractals.Name))
+            else if (member.Name == fractals.Name)
             {
                 fractals = member;
             }
-            else if (member.NameEquals(special.Name))
+            else if (member.Name == special.Name)
             {
                 special = member;
             }

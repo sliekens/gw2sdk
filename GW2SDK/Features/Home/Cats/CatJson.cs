@@ -12,11 +12,11 @@ internal static class CatJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(id.Name))
+            if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(hint.Name))
+            else if (member.Name == hint.Name)
             {
                 hint = member;
             }

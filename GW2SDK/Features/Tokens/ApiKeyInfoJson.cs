@@ -15,7 +15,7 @@ internal static class ApiKeyInfoJson
         RequiredMember permissions = "permissions";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals("type"))
+            if (member.Name == "type")
             {
                 if (!member.Value.ValueEquals("APIKey"))
                 {
@@ -24,15 +24,15 @@ internal static class ApiKeyInfoJson
                     );
                 }
             }
-            else if (member.NameEquals(id.Name))
+            else if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(name.Name))
+            else if (member.Name == name.Name)
             {
                 name = member;
             }
-            else if (member.NameEquals(permissions.Name))
+            else if (member.Name == permissions.Name)
             {
                 permissions = member;
             }

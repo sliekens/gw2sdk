@@ -19,7 +19,7 @@ internal static class BoostJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals("type"))
+            if (member.Name == "type")
             {
                 if (!member.Value.ValueEquals("Boost"))
                 {
@@ -28,39 +28,39 @@ internal static class BoostJson
                     );
                 }
             }
-            else if (member.NameEquals(id.Name))
+            else if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(name.Name))
+            else if (member.Name == name.Name)
             {
                 name = member;
             }
-            else if (member.NameEquals(description.Name))
+            else if (member.Name == description.Name)
             {
                 description = member;
             }
-            else if (member.NameEquals(buildTime.Name))
+            else if (member.Name == buildTime.Name)
             {
                 buildTime = member;
             }
-            else if (member.NameEquals(icon.Name))
+            else if (member.Name == icon.Name)
             {
                 icon = member;
             }
-            else if (member.NameEquals(requiredLevel.Name))
+            else if (member.Name == requiredLevel.Name)
             {
                 requiredLevel = member;
             }
-            else if (member.NameEquals(experience.Name))
+            else if (member.Name == experience.Name)
             {
                 experience = member;
             }
-            else if (member.NameEquals(prerequisites.Name))
+            else if (member.Name == prerequisites.Name)
             {
                 prerequisites = member;
             }
-            else if (member.NameEquals(costs.Name))
+            else if (member.Name == costs.Name)
             {
                 costs = member;
             }

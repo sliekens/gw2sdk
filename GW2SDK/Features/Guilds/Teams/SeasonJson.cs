@@ -17,19 +17,19 @@ internal static class SeasonJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(id.Name))
+            if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(wins.Name))
+            else if (member.Name == wins.Name)
             {
                 wins = member;
             }
-            else if (member.NameEquals(losses.Name))
+            else if (member.Name == losses.Name)
             {
                 losses = member;
             }
-            else if (member.NameEquals(rating.Name))
+            else if (member.Name == rating.Name)
             {
                 rating = member;
             }

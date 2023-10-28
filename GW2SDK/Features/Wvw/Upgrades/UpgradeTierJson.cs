@@ -16,15 +16,15 @@ internal static class UpgradeTierJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(name.Name))
+            if (member.Name == name.Name)
             {
                 name = member;
             }
-            else if (member.NameEquals(yaksRequired.Name))
+            else if (member.Name == yaksRequired.Name)
             {
                 yaksRequired = member;
             }
-            else if (member.NameEquals(upgrades.Name))
+            else if (member.Name == upgrades.Name)
             {
                 upgrades = member;
             }

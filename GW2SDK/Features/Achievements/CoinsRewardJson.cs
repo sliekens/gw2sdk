@@ -13,7 +13,7 @@ internal static class CoinsRewardJson
         RequiredMember coins = "count";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals("type"))
+            if (member.Name == "type")
             {
                 if (!member.Value.ValueEquals("Coins"))
                 {
@@ -22,7 +22,7 @@ internal static class CoinsRewardJson
                     );
                 }
             }
-            else if (member.NameEquals(coins.Name))
+            else if (member.Name == coins.Name)
             {
                 coins = member;
             }

@@ -16,15 +16,15 @@ internal static class ItemStatAttributeJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(attribute.Name))
+            if (member.Name == attribute.Name)
             {
                 attribute = member;
             }
-            else if (member.NameEquals(multiplier.Name))
+            else if (member.Name == multiplier.Name)
             {
                 multiplier = member;
             }
-            else if (member.NameEquals(amount.Name))
+            else if (member.Name == amount.Name)
             {
                 amount = member;
             }

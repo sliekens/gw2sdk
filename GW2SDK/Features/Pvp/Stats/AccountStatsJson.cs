@@ -19,27 +19,27 @@ internal static class AccountStatsJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(pvpRank.Name))
+            if (member.Name == pvpRank.Name)
             {
                 pvpRank = member;
             }
-            else if (member.NameEquals(pvpRankPoints.Name))
+            else if (member.Name == pvpRankPoints.Name)
             {
                 pvpRankPoints = member;
             }
-            else if (member.NameEquals(pvpRankRollovers.Name))
+            else if (member.Name == pvpRankRollovers.Name)
             {
                 pvpRankRollovers = member;
             }
-            else if (member.NameEquals(aggregate.Name))
+            else if (member.Name == aggregate.Name)
             {
                 aggregate = member;
             }
-            else if (member.NameEquals(professions.Name))
+            else if (member.Name == professions.Name)
             {
                 professions = member;
             }
-            else if (member.NameEquals(ladders.Name))
+            else if (member.Name == ladders.Name)
             {
                 ladders = member;
             }

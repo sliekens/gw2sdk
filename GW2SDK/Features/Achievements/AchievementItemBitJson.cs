@@ -13,7 +13,7 @@ internal static class AchievementItemBitJson
         RequiredMember id = "id";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals("type"))
+            if (member.Name == "type")
             {
                 if (!member.Value.ValueEquals("Item"))
                 {
@@ -22,7 +22,7 @@ internal static class AchievementItemBitJson
                     );
                 }
             }
-            else if (member.NameEquals(id.Name))
+            else if (member.Name == id.Name)
             {
                 id = member;
             }

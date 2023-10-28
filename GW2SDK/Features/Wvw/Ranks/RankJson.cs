@@ -13,15 +13,15 @@ internal static class RankJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(id.Name))
+            if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(title.Name))
+            else if (member.Name == title.Name)
             {
                 title = member;
             }
-            else if (member.NameEquals(minRank.Name))
+            else if (member.Name == minRank.Name)
             {
                 minRank = member;
             }

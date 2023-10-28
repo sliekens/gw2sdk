@@ -43,103 +43,103 @@ internal static class CharacterJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(name.Name))
+            if (member.Name == name.Name)
             {
                 name = member;
             }
-            else if (member.NameEquals(race.Name))
+            else if (member.Name == race.Name)
             {
                 race = member;
             }
-            else if (member.NameEquals(gender.Name))
+            else if (member.Name == gender.Name)
             {
                 gender = member;
             }
-            else if (member.NameEquals(flags.Name))
+            else if (member.Name == flags.Name)
             {
                 flags = member;
             }
-            else if (member.NameEquals(profession.Name))
+            else if (member.Name == profession.Name)
             {
                 profession = member;
             }
-            else if (member.NameEquals(level.Name))
+            else if (member.Name == level.Name)
             {
                 level = member;
             }
-            else if (member.NameEquals(guild.Name))
+            else if (member.Name == guild.Name)
             {
                 guild = member;
             }
-            else if (member.NameEquals(age.Name))
+            else if (member.Name == age.Name)
             {
                 age = member;
             }
-            else if (member.NameEquals(lastModified.Name))
+            else if (member.Name == lastModified.Name)
             {
                 lastModified = member;
             }
-            else if (member.NameEquals(created.Name))
+            else if (member.Name == created.Name)
             {
                 created = member;
             }
-            else if (member.NameEquals(deaths.Name))
+            else if (member.Name == deaths.Name)
             {
                 deaths = member;
             }
-            else if (member.NameEquals(crafting.Name))
+            else if (member.Name == crafting.Name)
             {
                 crafting = member;
             }
-            else if (member.NameEquals(title.Name))
+            else if (member.Name == title.Name)
             {
                 title = member;
             }
-            else if (member.NameEquals(backstory.Name))
+            else if (member.Name == backstory.Name)
             {
                 backstory = member;
             }
-            else if (member.NameEquals(wvwAbilities.Name))
+            else if (member.Name == wvwAbilities.Name)
             {
                 wvwAbilities = member;
             }
-            else if (member.NameEquals(buildTabsUnlocked.Name))
+            else if (member.Name == buildTabsUnlocked.Name)
             {
                 buildTabsUnlocked = member;
             }
-            else if (member.NameEquals(activeBuildTab.Name))
+            else if (member.Name == activeBuildTab.Name)
             {
                 activeBuildTab = member;
             }
-            else if (member.NameEquals(buildTabs.Name))
+            else if (member.Name == buildTabs.Name)
             {
                 buildTabs = member;
             }
-            else if (member.NameEquals(equipmentTabsUnlocked.Name))
+            else if (member.Name == equipmentTabsUnlocked.Name)
             {
                 equipmentTabsUnlocked = member;
             }
-            else if (member.NameEquals(activeEquipmentTab.Name))
+            else if (member.Name == activeEquipmentTab.Name)
             {
                 activeEquipmentTab = member;
             }
-            else if (member.NameEquals(equipment.Name))
+            else if (member.Name == equipment.Name)
             {
                 equipment = member;
             }
-            else if (member.NameEquals(equipmentTabs.Name))
+            else if (member.Name == equipmentTabs.Name)
             {
                 equipmentTabs = member;
             }
-            else if (member.NameEquals(recipes.Name))
+            else if (member.Name == recipes.Name)
             {
                 recipes = member;
             }
-            else if (member.NameEquals(training.Name))
+            else if (member.Name == training.Name)
             {
                 training = member;
             }
-            else if (member.NameEquals(bags.Name))
+            else if (member.Name == bags.Name)
             {
                 bags = member;
             }

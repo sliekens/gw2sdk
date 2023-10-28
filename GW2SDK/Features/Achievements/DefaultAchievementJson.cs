@@ -25,7 +25,7 @@ internal static class DefaultAchievementJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals("type"))
+            if (member.Name == "type")
             {
                 if (!member.Value.ValueEquals("Default"))
                 {
@@ -34,51 +34,51 @@ internal static class DefaultAchievementJson
                     );
                 }
             }
-            else if (member.NameEquals(id.Name))
+            else if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(icon.Name))
+            else if (member.Name == icon.Name)
             {
                 icon = member;
             }
-            else if (member.NameEquals(name.Name))
+            else if (member.Name == name.Name)
             {
                 name = member;
             }
-            else if (member.NameEquals(description.Name))
+            else if (member.Name == description.Name)
             {
                 description = member;
             }
-            else if (member.NameEquals(requirement.Name))
+            else if (member.Name == requirement.Name)
             {
                 requirement = member;
             }
-            else if (member.NameEquals(lockedText.Name))
+            else if (member.Name == lockedText.Name)
             {
                 lockedText = member;
             }
-            else if (member.NameEquals(flags.Name))
+            else if (member.Name == flags.Name)
             {
                 flags = member;
             }
-            else if (member.NameEquals(tiers.Name))
+            else if (member.Name == tiers.Name)
             {
                 tiers = member;
             }
-            else if (member.NameEquals(prerequisites.Name))
+            else if (member.Name == prerequisites.Name)
             {
                 prerequisites = member;
             }
-            else if (member.NameEquals(rewards.Name))
+            else if (member.Name == rewards.Name)
             {
                 rewards = member;
             }
-            else if (member.NameEquals(bits.Name))
+            else if (member.Name == bits.Name)
             {
                 bits = member;
             }
-            else if (member.NameEquals(pointCap.Name))
+            else if (member.Name == pointCap.Name)
             {
                 pointCap = member;
             }

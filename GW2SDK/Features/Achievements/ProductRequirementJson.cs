@@ -15,11 +15,11 @@ internal static class ProductRequirementJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(product.Name))
+            if (member.Name == product.Name)
             {
                 product = member;
             }
-            else if (member.NameEquals(condition.Name))
+            else if (member.Name == condition.Name)
             {
                 condition = member;
             }

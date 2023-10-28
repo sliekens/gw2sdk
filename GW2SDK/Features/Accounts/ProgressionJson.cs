@@ -15,11 +15,11 @@ internal static class ProgressionJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(progressId.Name))
+            if (member.Name == progressId.Name)
             {
                 progressId = member;
             }
-            else if (member.NameEquals(progress.Name))
+            else if (member.Name == progress.Name)
             {
                 progress = member;
             }

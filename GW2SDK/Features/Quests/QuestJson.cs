@@ -15,23 +15,23 @@ internal static class QuestJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(name.Name))
+            if (member.Name == name.Name)
             {
                 name = member;
             }
-            else if (member.NameEquals(level.Name))
+            else if (member.Name == level.Name)
             {
                 level = member;
             }
-            else if (member.NameEquals(story.Name))
+            else if (member.Name == story.Name)
             {
                 story = member;
             }
-            else if (member.NameEquals(goals.Name))
+            else if (member.Name == goals.Name)
             {
                 goals = member;
             }
-            else if (member.NameEquals(id.Name))
+            else if (member.Name == id.Name)
             {
                 id = member;
             }

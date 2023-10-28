@@ -18,7 +18,7 @@ internal static class TreasuryDepositJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals("type"))
+            if (member.Name == "type")
             {
                 if (!member.Value.ValueEquals("treasury"))
                 {
@@ -27,23 +27,23 @@ internal static class TreasuryDepositJson
                     );
                 }
             }
-            else if (member.NameEquals(id.Name))
+            else if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(time.Name))
+            else if (member.Name == time.Name)
             {
                 time = member;
             }
-            else if (member.NameEquals(user.Name))
+            else if (member.Name == user.Name)
             {
                 user = member;
             }
-            else if (member.NameEquals(itemId.Name))
+            else if (member.Name == itemId.Name)
             {
                 itemId = member;
             }
-            else if (member.NameEquals(count.Name))
+            else if (member.Name == count.Name)
             {
                 count = member;
             }

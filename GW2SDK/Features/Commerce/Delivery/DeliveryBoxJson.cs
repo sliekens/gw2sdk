@@ -15,11 +15,11 @@ internal static class DeliveryBoxJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(coins.Name))
+            if (member.Name == coins.Name)
             {
                 coins = member;
             }
-            else if (member.NameEquals(items.Name))
+            else if (member.Name == items.Name)
             {
                 items = member;
             }

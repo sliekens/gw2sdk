@@ -20,31 +20,31 @@ internal static class AccountAchievementJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(id.Name))
+            if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(current.Name))
+            else if (member.Name == current.Name)
             {
                 current = member;
             }
-            else if (member.NameEquals(max.Name))
+            else if (member.Name == max.Name)
             {
                 max = member;
             }
-            else if (member.NameEquals(done.Name))
+            else if (member.Name == done.Name)
             {
                 done = member;
             }
-            else if (member.NameEquals(bits.Name))
+            else if (member.Name == bits.Name)
             {
                 bits = member;
             }
-            else if (member.NameEquals(repeated.Name))
+            else if (member.Name == repeated.Name)
             {
                 repeated = member;
             }
-            else if (member.NameEquals(unlocked.Name))
+            else if (member.Name == unlocked.Name)
             {
                 unlocked = member;
             }

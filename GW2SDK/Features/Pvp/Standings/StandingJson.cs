@@ -16,15 +16,15 @@ internal static class StandingJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(seasonId.Name))
+            if (member.Name == seasonId.Name)
             {
                 seasonId = member;
             }
-            else if (member.NameEquals(current.Name))
+            else if (member.Name == current.Name)
             {
                 current = member;
             }
-            else if (member.NameEquals(best.Name))
+            else if (member.Name == best.Name)
             {
                 best = member;
             }

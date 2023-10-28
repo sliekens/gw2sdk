@@ -20,43 +20,43 @@ internal static class StoryJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(id.Name))
+            if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(season.Name))
+            else if (member.Name == season.Name)
             {
                 season = member;
             }
-            else if (member.NameEquals(name.Name))
+            else if (member.Name == name.Name)
             {
                 name = member;
             }
-            else if (member.NameEquals(description.Name))
+            else if (member.Name == description.Name)
             {
                 description = member;
             }
-            else if (member.NameEquals(timeline.Name))
+            else if (member.Name == timeline.Name)
             {
                 timeline = member;
             }
-            else if (member.NameEquals(level.Name))
+            else if (member.Name == level.Name)
             {
                 level = member;
             }
-            else if (member.NameEquals(races.Name))
+            else if (member.Name == races.Name)
             {
                 races = member;
             }
-            else if (member.NameEquals(order.Name))
+            else if (member.Name == order.Name)
             {
                 order = member;
             }
-            else if (member.NameEquals(chapters.Name))
+            else if (member.Name == chapters.Name)
             {
                 chapters = member;
             }
-            else if (member.NameEquals(flags.Name))
+            else if (member.Name == flags.Name)
             {
                 flags = member;
             }

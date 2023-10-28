@@ -34,7 +34,7 @@ internal static class HarpoonGunJson
         NullableMember secondarySuffixItemId = "secondary_suffix_item_id";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals("type"))
+            if (member.Name == "type")
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
@@ -43,59 +43,59 @@ internal static class HarpoonGunJson
                     );
                 }
             }
-            else if (member.NameEquals(name.Name))
+            else if (member.Name == name.Name)
             {
                 name = member;
             }
-            else if (member.NameEquals(description.Name))
+            else if (member.Name == description.Name)
             {
                 description = member;
             }
-            else if (member.NameEquals(level.Name))
+            else if (member.Name == level.Name)
             {
                 level = member;
             }
-            else if (member.NameEquals(rarity.Name))
+            else if (member.Name == rarity.Name)
             {
                 rarity = member;
             }
-            else if (member.NameEquals(vendorValue.Name))
+            else if (member.Name == vendorValue.Name)
             {
                 vendorValue = member;
             }
-            else if (member.NameEquals(defaultSkin.Name))
+            else if (member.Name == defaultSkin.Name)
             {
                 defaultSkin = member;
             }
-            else if (member.NameEquals(gameTypes.Name))
+            else if (member.Name == gameTypes.Name)
             {
                 gameTypes = member;
             }
-            else if (member.NameEquals(flags.Name))
+            else if (member.Name == flags.Name)
             {
                 flags = member;
             }
-            else if (member.NameEquals(restrictions.Name))
+            else if (member.Name == restrictions.Name)
             {
                 restrictions = member;
             }
-            else if (member.NameEquals(id.Name))
+            else if (member.Name == id.Name)
             {
                 id = member;
             }
-            else if (member.NameEquals(chatLink.Name))
+            else if (member.Name == chatLink.Name)
             {
                 chatLink = member;
             }
-            else if (member.NameEquals(icon.Name))
+            else if (member.Name == icon.Name)
             {
                 icon = member;
             }
-            else if (member.NameEquals("details"))
+            else if (member.Name == "details")
             {
                 foreach (var detail in member.Value.EnumerateObject())
                 {
-                    if (detail.NameEquals("type"))
+                    if (detail.Name == "type")
                     {
                         if (!detail.Value.ValueEquals("Speargun"))
                         {
@@ -104,43 +104,43 @@ internal static class HarpoonGunJson
                             );
                         }
                     }
-                    else if (detail.NameEquals(damageType.Name))
+                    else if (detail.Name == damageType.Name)
                     {
                         damageType = detail;
                     }
-                    else if (detail.NameEquals(minPower.Name))
+                    else if (detail.Name == minPower.Name)
                     {
                         minPower = detail;
                     }
-                    else if (detail.NameEquals(maxPower.Name))
+                    else if (detail.Name == maxPower.Name)
                     {
                         maxPower = detail;
                     }
-                    else if (detail.NameEquals(defense.Name))
+                    else if (detail.Name == defense.Name)
                     {
                         defense = detail;
                     }
-                    else if (detail.NameEquals(infusionSlots.Name))
+                    else if (detail.Name == infusionSlots.Name)
                     {
                         infusionSlots = detail;
                     }
-                    else if (detail.NameEquals(attributeAdjustment.Name))
+                    else if (detail.Name == attributeAdjustment.Name)
                     {
                         attributeAdjustment = detail;
                     }
-                    else if (detail.NameEquals(statChoices.Name))
+                    else if (detail.Name == statChoices.Name)
                     {
                         statChoices = detail;
                     }
-                    else if (detail.NameEquals(infixUpgrade.Name))
+                    else if (detail.Name == infixUpgrade.Name)
                     {
                         infixUpgrade = detail;
                     }
-                    else if (detail.NameEquals(suffixItemId.Name))
+                    else if (detail.Name == suffixItemId.Name)
                     {
                         suffixItemId = detail;
                     }
-                    else if (detail.NameEquals(secondarySuffixItemId.Name))
+                    else if (detail.Name == secondarySuffixItemId.Name)
                     {
                         secondarySuffixItemId = detail;
                     }

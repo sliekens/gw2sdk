@@ -14,7 +14,7 @@ internal static class LearnedRecipesJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(recipes.Name))
+            if (member.Name == recipes.Name)
             {
                 recipes = member;
             }

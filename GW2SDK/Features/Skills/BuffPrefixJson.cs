@@ -16,19 +16,19 @@ internal static class BuffPrefixJson
         OptionalMember description = "description";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(text.Name))
+            if (member.Name == text.Name)
             {
                 text = member;
             }
-            else if (member.NameEquals(icon.Name))
+            else if (member.Name == icon.Name)
             {
                 icon = member;
             }
-            else if (member.NameEquals(status.Name))
+            else if (member.Name == status.Name)
             {
                 status = member;
             }
-            else if (member.NameEquals(description.Name))
+            else if (member.Name == description.Name)
             {
                 description = member;
             }

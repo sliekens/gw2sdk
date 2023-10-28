@@ -14,11 +14,11 @@ internal static class DyeSlotJson
         RequiredMember material = "material";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(colorId.Name))
+            if (member.Name == colorId.Name)
             {
                 colorId = member;
             }
-            else if (member.NameEquals(material.Name))
+            else if (member.Name == material.Name)
             {
                 material = member;
             }
