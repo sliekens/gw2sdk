@@ -53,8 +53,8 @@ Unhandled exception. GuildWars2.Http.TooManyRequestsException: too many requests
    at Program.<Main>(String[] args)
 ```
 
-## Too many requests?
+### Too many requests?
 
 This code is not optimized in the sense that it makes a request for each item individually inside the `foreach` loop. The API has a rate limit, so this code will fail with a `TooManyRequestsException` after a short while.
 
-More information about usage limits on the next page.
+More information about usage limits can be found in the error handling section with tips on how to solve them.
