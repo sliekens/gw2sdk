@@ -1,7 +1,7 @@
 ﻿namespace GuildWars2.Achievements;
 
 [PublicAPI]
-public sealed record MasteryReward : AchievementReward
+public sealed record MasteryPointReward : AchievementReward
 {
     public required int Id { get; init; }
 

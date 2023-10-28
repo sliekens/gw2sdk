@@ -3,9 +3,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Achievements;
 
-internal static class MasteryRewardJson
+internal static class MasteryPointRewardJson
 {
-    public static MasteryReward GetMasteryReward(
+    public static MasteryPointReward GetMasteryPointReward(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -37,7 +37,7 @@ internal static class MasteryRewardJson
             }
         }
 
-        return new MasteryReward
+        return new MasteryPointReward
         {
             Id = id.Map(value => value.GetInt32()),
             Region = region.Map(value => value.GetEnum<MasteryRegionName>(missingMemberBehavior))

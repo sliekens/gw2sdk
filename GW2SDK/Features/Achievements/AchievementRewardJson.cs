@@ -16,7 +16,7 @@ internal static class AchievementRewardJson
             case "Item":
                 return json.GetItemReward(missingMemberBehavior);
             case "Mastery":
-                return json.GetMasteryReward(missingMemberBehavior);
+                return json.GetMasteryPointReward(missingMemberBehavior);
             case "Title":
                 return json.GetTitleReward(missingMemberBehavior);
         }
