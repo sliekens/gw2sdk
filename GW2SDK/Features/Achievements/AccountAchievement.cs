@@ -20,7 +20,7 @@ public sealed record AccountAchievement
 
     public required bool Done { get; init; }
 
-    public required int? Repeated { get; init; }
+    public required int Repeated { get; init; }
 
-    public required bool? Unlocked { get; init; }
+    public required bool Unlocked { get; init; }
 }
