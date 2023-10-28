@@ -103,7 +103,9 @@ internal static class CollectionAchievementJson
                         value => value.GetAchievementTier(missingMemberBehavior)
                     )
                 ),
-            Prerequisites = prerequisites.Map(values => values.GetList(value => value.GetInt32())),
+            Prerequisites =
+                prerequisites.Map(values => values.GetList(value => value.GetInt32()))
+                ?? (IReadOnlyList<int>)Array.Empty<int>(),
             Rewards = rewards.Map(
                 values => values.GetList(value => value.GetAchievementReward(missingMemberBehavior))
             ),

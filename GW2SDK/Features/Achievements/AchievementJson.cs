@@ -102,17 +102,16 @@ internal static class AchievementJson
             Description = description.Map(value => value.GetStringRequired()),
             Requirement = requirement.Map(value => value.GetStringRequired()),
             LockedText = lockedText.Map(value => value.GetStringRequired()),
-            Flags =
-                flags.Map(
-                    values => values.GetAchievementFlags(missingMemberBehavior)
-                ),
+            Flags = flags.Map(values => values.GetAchievementFlags(missingMemberBehavior)),
             Tiers =
                 tiers.Map(
                     values => values.GetList(
                         value => value.GetAchievementTier(missingMemberBehavior)
                     )
                 ),
-            Prerequisites = prerequisites.Map(values => values.GetList(value => value.GetInt32())),
+            Prerequisites =
+                prerequisites.Map(values => values.GetList(value => value.GetInt32()))
+                ?? (IReadOnlyList<int>)Array.Empty<int>(),
             Rewards = rewards.Map(
                 values => values.GetList(value => value.GetAchievementReward(missingMemberBehavior))
             ),

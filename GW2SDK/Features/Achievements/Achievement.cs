@@ -40,7 +40,7 @@ public record Achievement
 
     public required IReadOnlyCollection<AchievementBit>? Bits { get; init; }
 
-    public required IReadOnlyCollection<int>? Prerequisites { get; init; }
+    public required IReadOnlyCollection<int> Prerequisites { get; init; }
 
     /// <remarks>Can be -1 for repeatable achievements that don't award points.</remarks>
     public required int? PointCap { get; init; }
