@@ -9,7 +9,7 @@ public sealed record AccountAchievement
     public required int Id { get; init; }
 
     /// <summary>The IDs of the achievement bits that have been completed.</summary>
-    public required IReadOnlyCollection<int>? Bits { get; init; }
+    public required IReadOnlyList<int>? Bits { get; init; }
 
     /// <summary>The current number of things completed. Context is required to understand this number. For example if it is a
     /// Slayer achievement, this would be the number of things already slayed.</summary>
