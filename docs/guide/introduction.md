@@ -8,13 +8,34 @@ The game client on Windows provides realtime information about the player's move
 
 ## Features
 
-GW2SDK has the following entrypoints:
+The SDK provides an interface to the Guild Wars 2 API and game client. It is designed to be easy to use and to provide a high level of performance.
+
+It provides the following features and benefits:
+
+- Asynchronous methods to query the API
+- Asynchronous methods to stream data from the game client
+- High performance, low-allocation JSON conversions with System.Text.Json
+- Type safety and nullability annotations for C# 8.0+
+- Pure C# implementation, no native dependencies
+- Cross-platform support for .NET Standard 2.0
+- Free and open source under the MIT license
+
+The package has the following entrypoint classes:
 
 - `GuildWars2.Gw2Client` provides access to the API,
 - `GuildWars2.GameLink` provides realtime information from the game client (Windows only)
 
-## Authentication
+## Platform support
 
-Many features require an access token to retrieve account information. It is necessary to go to <https://account.arena.net/applications>, create a New Key, and store it somewhere safely in your application data (not in source control).
+GW2SDK is compiled for .NET Standard 2.0 so it supports a wide range of platforms:
 
-You can use the TokenProvider class to validate an access token that you received from someone else. You can also use TokenProvider to create a subtoken with a shorter time-to-live or with fewer privileges. This is useful if you wish to give someone else limited access to your account. For example: if you build a modular application that can be extended with 3rd-party plugins, you may ask the user for a full-access master token and then create a subtoken for each plugin, giving it only the permissions it needs and the time it needs.
+- .NET Core 2.0+
+- .NET Framework 4.6.2+
+- Mono 5.4+
+- Xamarin.iOS 10.14+
+- Xamarin.Mac 3.8+
+- Xamarin.Android 8.0+
+- Universal Windows Platform 10.0.16299+
+- Unity 2018.1+
+
+Retrieving information from the game client is only supported on Windows due to the use of named memory-mapped files. It might work in Wine, but it has not been tested.
