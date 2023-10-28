@@ -96,13 +96,7 @@ internal static class CollectionAchievementJson
             Description = description.Map(value => value.GetStringRequired()),
             Requirement = requirement.Map(value => value.GetStringRequired()),
             LockedText = lockedText.Map(value => value.GetStringRequired()),
-            Flags =
-                flags.Map(
-                    values =>
-                        values.GetList(
-                            value => value.GetEnum<AchievementFlag>(missingMemberBehavior)
-                        )
-                ),
+            Flags = flags.Map(values => values.GetAchievementFlags(missingMemberBehavior)),
             Tiers =
                 tiers.Map(
                     values => values.GetList(

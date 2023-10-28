@@ -8,7 +8,7 @@ public sealed record AchievementRef
 
     public required ProductRequirement? RequiredAccess { get; init; }
 
-    public required IReadOnlyCollection<AchievementFlag2>? Flags { get; init; }
+    public required AchievementFlags Flags { get; init; }
 
     public required LevelRequirement? Level { get; init; }
 }

@@ -1,4 +1,4 @@
-using GuildWars2.Achievements;
+﻿using GuildWars2.Achievements;
 using GuildWars2.Achievements.Categories;
 using GuildWars2.Achievements.Groups;
 using GuildWars2.Achievements.Titles;
@@ -20,7 +20,11 @@ internal static class Invariants
     internal static void Has_LockedText(this Achievement actual) =>
         Assert.NotNull(actual.LockedText);
 
-    internal static void Has_flags(this Achievement actual) => Assert.NotEmpty(actual.Flags);
+    internal static void Has_flags(this Achievement actual)
+    {
+        Assert.NotNull(actual.Flags);
+        Assert.Empty(actual.Flags.Other);
+    }
 
     internal static void Has_tiers(this Achievement actual) => Assert.NotEmpty(actual.Tiers);
 
@@ -47,8 +51,7 @@ internal static class Invariants
         this Achievement actual
     )
     {
-        if (actual.Flags.Contains(AchievementFlag.Repeatable)
-            && actual.Tiers.All(tier => tier.Points == 0))
+        if (actual.Flags.Repeatable && actual.Tiers.All(tier => tier.Points == 0))
         {
             Assert.Equal(-1, actual.PointCap);
         }

@@ -104,10 +104,7 @@ internal static class AchievementJson
             LockedText = lockedText.Map(value => value.GetStringRequired()),
             Flags =
                 flags.Map(
-                    values =>
-                        values.GetList(
-                            value => value.GetEnum<AchievementFlag>(missingMemberBehavior)
-                        )
+                    values => values.GetAchievementFlags(missingMemberBehavior)
                 ),
             Tiers =
                 tiers.Map(

@@ -44,11 +44,13 @@ internal static class AchievementRefJson
             Id = id.Map(value => value.GetInt32()),
             RequiredAccess =
                 requiredAccess.Map(value => value.GetProductRequirement(missingMemberBehavior)),
-            Flags = flags.Map(
-                values => values.GetList(
-                    value => value.GetEnum<AchievementFlag2>(missingMemberBehavior)
-                )
-            ),
+            Flags = flags.Map(values => values.GetAchievementFlags(missingMemberBehavior))
+                ?? new AchievementFlags
+                {
+                    SpecialEvent = false,
+                    PvE = false,
+                    Other = Array.Empty<string>()
+                },
             Level = level.Map(value => value.GetLevelRequirement(missingMemberBehavior))
         };
     }

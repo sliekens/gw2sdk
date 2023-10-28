@@ -3,6 +3,13 @@
 <Suppressions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.AchievementFlag</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:GuildWars2.Achievements.DefaultAchievement</Target>
     <Left>lib/net462/GW2SDK.dll</Left>
     <Right>lib/net462/GW2SDK.dll</Right>
@@ -17,6 +24,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.AchievementFlag</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:GuildWars2.Achievements.DefaultAchievement</Target>
     <Left>lib/net6.0/GW2SDK.dll</Left>
     <Right>lib/net6.0/GW2SDK.dll</Right>
@@ -27,6 +41,13 @@
     <Target>T:GuildWars2.Achievements.ItemSetAchievement</Target>
     <Left>lib/net6.0/GW2SDK.dll</Left>
     <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.AchievementFlag</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
@@ -39,6 +60,48 @@
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:GuildWars2.Achievements.ItemSetAchievement</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Achievements.Achievement.get_Flags</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Achievements.Categories.AchievementRef.get_Flags</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Achievements.Achievement.get_Flags</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Achievements.Categories.AchievementRef.get_Flags</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Achievements.Achievement.get_Flags</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Achievements.Categories.AchievementRef.get_Flags</Target>
     <Left>lib/netstandard2.0/GW2SDK.dll</Left>
     <Right>lib/netstandard2.0/GW2SDK.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
