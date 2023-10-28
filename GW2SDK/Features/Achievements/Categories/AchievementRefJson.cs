@@ -46,7 +46,7 @@ internal static class AchievementRefJson
                 requiredAccess.Map(value => value.GetProductRequirement(missingMemberBehavior)),
             Flags = flags.Map(
                 values => values.GetList(
-                    value => value.GetEnum<AchievementFlag>(missingMemberBehavior)
+                    value => value.GetEnum<AchievementFlag2>(missingMemberBehavior)
                 )
             ),
             Level = level.Map(value => value.GetLevelRequirement(missingMemberBehavior))

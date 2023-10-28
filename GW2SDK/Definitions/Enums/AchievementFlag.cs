@@ -23,11 +23,5 @@ public enum AchievementFlag
 
     Permanent,
 
-    Weekly,
-
-    SpecialEvent,
-
-    PvE,
-
-    WvW
+    Weekly
 }
