@@ -1,6 +1,6 @@
 ﻿namespace GuildWars2.Achievements;
 
-/// <summary>The base type for information about an achievement. Cast it to a subtype </summary>
+/// <summary>Information about an achievement.</summary>
 [PublicAPI]
 [Inheritable]
 [DataTransferObject]
@@ -34,14 +34,26 @@ public record Achievement
     /// <summary>Contains various modifiers that affect how achievements behave.</summary>
     public required AchievementFlags Flags { get; init; }
 
+    /// <summary>Describes the tiers of the achievement. Each tier has a number of things you need to do to complete it and a
+    /// number of points awarded.</summary>
     public required IReadOnlyCollection<AchievementTier> Tiers { get; init; }
 
+    /// <summary>Describes the rewards for completing this achievement. The list type is abstact, the derived types are
+    /// <see cref="CoinsReward" />, <see cref="ItemReward" />, <see cref="MasteryPointReward" /> or <see cref="TitleReward" />.</summary>
     public required IReadOnlyCollection<AchievementReward>? Rewards { get; init; }
 
+    /// <summary>Describes the individual bits of progress that can be made. The list type is abstract. If the current
+    /// achievement is a <see cref="CollectionAchievement" /> then the list items are of type <see cref="AchievementItemBit" />
+    /// , <see cref="AchievementSkinBit" /> or <see cref="AchievementMinipetBit" />. For regular achievements, the type is
+    /// <see cref="AchievementTextBit" /> which is just a description of what is needed.</summary>
     public required IReadOnlyCollection<AchievementBit>? Bits { get; init; }
 
+    /// <summary>A list of achievement IDs which need to be completed before this achievement can be progressed.</summary>
+    /// <remarks>Typically contains a single ID or no IDs at all, but this might change.</remarks>
     public required IReadOnlyCollection<int> Prerequisites { get; init; }
 
-    /// <remarks>Can be -1 for repeatable achievements that don't award points.</remarks>
+    /// <summary>The maximum number of achievement points that can be obtained if this is a repeatable achievement. Check
+    /// whether the <see cref="Flags" /> contain the <see cref="AchievementFlags.Repeatable" /> flag.</summary>
+    /// <remarks> -1 for repeatable achievements that don't award points.</remarks>
     public required int? PointCap { get; init; }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace GuildWars2.Achievements.Categories;
+namespace GuildWars2.Achievements;
 
 internal static class LevelRequirementJson
 {

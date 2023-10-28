@@ -7,6 +7,7 @@ using GuildWars2.Achievements.Titles;
 
 namespace GuildWars2.Achievements;
 
+/// <summary>Query methods for achievements and titles in the game and achievement progress on the account.</summary>
 [PublicAPI]
 public sealed class AchievementsQuery
 {
@@ -20,6 +21,11 @@ public sealed class AchievementsQuery
 
     #region v2/achievements/daily
 
+    /// <summary>Retrieves information about achievements that thange on a daily basis.</summary>
+    /// <param name="day">Optionally lets you get tomorrow's achievements.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<DailyAchievementGroup>> GetDailyAchievements(
         Day day = Day.Today,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -38,6 +44,11 @@ public sealed class AchievementsQuery
 
     #region v2/account/titles
 
+    /// <summary>Retrieves the IDs of unlocked titles on the account. This endpoint is only accessible with a valid access
+    /// token.</summary>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<HashSet<int>>> GetUnlockedTitlesIndex(
         string? accessToken,
         CancellationToken cancellationToken = default
@@ -51,6 +62,9 @@ public sealed class AchievementsQuery
 
     #region v2/achievements
 
+    /// <summary>Retrieves the IDs of all achievements.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<HashSet<int>>> GetAchievementsIndex(
         CancellationToken cancellationToken = default
     )
@@ -59,6 +73,12 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
+    /// <summary>Retrieves an achievement by its ID.</summary>
+    /// <param name="achievementId">The achievement ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<Achievement>> GetAchievementById(
         int achievementId,
         Language? language = default,
@@ -74,6 +94,13 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
+    /// <summary>Retrieves achievements by their IDs.</summary>
+    /// <remarks>Limited to 200 IDs per request.</remarks>
+    /// <param name="achievementIds">The achievement IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<HashSet<Achievement>>> GetAchievementsByIds(
         IReadOnlyCollection<int> achievementIds,
         Language? language = default,
@@ -89,6 +116,13 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of achievements.</summary>
+    /// <param name="pageIndex">How many entries to skip.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<HashSet<Achievement>>> GetAchievementsByPage(
         int pageIndex,
         int? pageSize = default,
@@ -106,6 +140,16 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
+    /// <summary>Retrieves achievements by their IDs by chunking requests and executing them in parallel. Supports more than
+    /// 200 IDs.</summary>
+    /// <param name="achievementIds">The achievement IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="degreeOfParallelism">The maximum number of chunks to request in parallel.</param>
+    /// <param name="chunkSize">How many IDs to request per chunk.</param>
+    /// <param name="progress">A progress report provider.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request(s).</returns>
     public IAsyncEnumerable<Achievement> GetAchievementsBulk(
         IReadOnlyCollection<int> achievementIds,
         Language? language = default,
@@ -142,6 +186,14 @@ public sealed class AchievementsQuery
         }
     }
 
+    /// <summary>Retrieves all achievements by chunking requests and executing them in parallel.</summary>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="degreeOfParallelism">The maximum number of chunks to request in parallel.</param>
+    /// <param name="chunkSize">How many IDs to request per chunk.</param>
+    /// <param name="progress">A progress report provider.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request(s).</returns>
     public async IAsyncEnumerable<Achievement> GetAchievementsBulk(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -161,8 +213,7 @@ public sealed class AchievementsQuery
             progress,
             cancellationToken
         );
-        await foreach (var achievement in producer
-            .ConfigureAwait(false))
+        await foreach (var achievement in producer.ConfigureAwait(false))
         {
             yield return achievement;
         }
@@ -172,6 +223,13 @@ public sealed class AchievementsQuery
 
     #region v2/account/achievements
 
+    /// <summary>Retrieves achievement progress on the account by its ID. This endpoint is only accessible with a valid access
+    /// token.</summary>
+    /// <param name="achievementId">The achievement ID.</param>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<AccountAchievement>> GetAccountAchievementById(
         int achievementId,
         string? accessToken,
@@ -187,6 +245,13 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
+    /// <summary>Retrieves achievement progress on the account by their IDs. This endpoint is only accessible with a valid
+    /// access token</summary>
+    /// <param name="achievementIds">The achievement IDs.</param>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<HashSet<AccountAchievement>>> GetAccountAchievementsByIds(
         IReadOnlyCollection<int> achievementIds,
         string? accessToken,
@@ -202,6 +267,11 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
+    /// <summary>Retrieves all achievement progress on the account. This endpoint is only accessible with a valid access token</summary>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<HashSet<AccountAchievement>>> GetAccountAchievements(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -216,6 +286,14 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of achievement progress on the account. This endpoint is only accessible with a valid access
+    /// token</summary>
+    /// <param name="pageIndex">How many entries to skip.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<HashSet<AccountAchievement>>> GetAccountAchievementsByPage(
         int pageIndex,
         int? pageSize,
@@ -237,6 +315,11 @@ public sealed class AchievementsQuery
 
     #region v2/achievements/categories
 
+    /// <summary>Retrieves all achievement categories.</summary>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<HashSet<AchievementCategory>>> GetAchievementCategories(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -251,6 +334,9 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all achievement categories.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<HashSet<int>>> GetAchievementCategoriesIndex(
         CancellationToken cancellationToken = default
     )
@@ -259,6 +345,12 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
+    /// <summary>Retrieves an achievement category by its ID.</summary>
+    /// <param name="achievementCategoryId">the achievement category ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns></returns>
     public Task<Replica<AchievementCategory>> GetAchievementCategoryById(
         int achievementCategoryId,
         Language? language = default,
@@ -274,6 +366,12 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
+    /// <summary>Retrieves achievement categories by their IDs.</summary>
+    /// <param name="achievementCategoryIds">The achievement category IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns></returns>
     public Task<Replica<HashSet<AchievementCategory>>> GetAchievementCategoriesByIds(
         IReadOnlyCollection<int> achievementCategoryIds,
         Language? language = default,
@@ -289,6 +387,13 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of achievement categories.</summary>
+    /// <param name="pageIndex">How many entries to skip.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<HashSet<AchievementCategory>>> GetAchievementCategoriesByPage(
         int pageIndex,
         int? pageSize = default,
@@ -310,6 +415,11 @@ public sealed class AchievementsQuery
 
     #region v2/achievements/groups
 
+    /// <summary>Retrieves all achievement groups.</summary>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<HashSet<AchievementGroup>>> GetAchievementGroups(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -324,6 +434,9 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all achievement groups.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<HashSet<string>>> GetAchievementGroupsIndex(
         CancellationToken cancellationToken = default
     )
@@ -332,6 +445,12 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
+    /// <summary>Retrieves an achievement group by its ID.</summary>
+    /// <param name="achievementGroupId">The achievement group ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<AchievementGroup>> GetAchievementGroupById(
         string achievementGroupId,
         Language? language = default,
@@ -347,6 +466,12 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
+    /// <summary>Retrieves achievement groups by their IDs.</summary>
+    /// <param name="achievementGroupIds">The achievement group IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<HashSet<AchievementGroup>>> GetAchievementGroupsByIds(
         IReadOnlyCollection<string> achievementGroupIds,
         Language? language = default,
@@ -362,6 +487,13 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of achievement groups.</summary>
+    /// <param name="pageIndex">How many entries to skip.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<HashSet<AchievementGroup>>> GetAchievementGroupsByPage(
         int pageIndex,
         int? pageSize = default,
@@ -383,6 +515,11 @@ public sealed class AchievementsQuery
 
     #region v2/titles
 
+    /// <summary>Retrieves all titles.</summary>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<HashSet<Title>>> GetTitles(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -397,12 +534,21 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all titles.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<HashSet<int>>> GetTitlesIndex(CancellationToken cancellationToken = default)
     {
         TitlesIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
+    /// <summary>Retrieves a title by its ID.</summary>
+    /// <param name="titleId">The title ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<Title>> GetTitleById(
         int titleId,
         Language? language = default,
@@ -418,6 +564,12 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
+    /// <summary>Retrieves titles by their IDs.</summary>
+    /// <param name="titleIds">The title IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<HashSet<Title>>> GetTitlesByIds(
         IReadOnlyCollection<int> titleIds,
         Language? language = default,
@@ -433,6 +585,13 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of titles.</summary>
+    /// <param name="pageIndex">How many entries to skip.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<HashSet<Title>>> GetTitlesByPage(
         int pageIndex,
         int? pageSize = default,

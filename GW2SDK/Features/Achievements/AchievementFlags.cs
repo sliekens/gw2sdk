@@ -4,8 +4,8 @@
 [PublicAPI]
 public sealed record AchievementFlags
 {
-    /// <summary>The achievement is a meta-achievements like End of Dragons: Act 1 Mastery. Its icon is used for the
-    /// achievement category in the sidebar. This flag inherits the <see cref="MoveToTop" /> flag.</summary>
+    /// <summary>The achievement is a meta-achievements like End of Dragons: Act 1 Mastery. This flag inherits the
+    /// <see cref="MoveToTop" /> flag.</summary>
     public required bool CategoryDisplay { get; init; }
 
     /// <summary>The achievement progress is reset every day at midnight UTC.</summary>

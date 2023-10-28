@@ -1,14 +1,21 @@
 ﻿namespace GuildWars2.Achievements.Titles;
 
+/// <summary>Information about a title which can be obtained from achievements.</summary>
 [PublicAPI]
 [DataTransferObject]
 public sealed record Title
 {
+    /// <summary>The title ID.</summary>
     public required int Id { get; init; }
 
+    /// <summary>The title itself.</summary>
     public required string Name { get; init; }
 
+    /// <summary>A list of achievement IDs which award this title. Can be empty if the title is awarded by reaching some amount
+    /// of points instead.</summary>
+    /// <remarks>This is usually a single achievement, but some titles are obtained from multiple achievements.</remarks>
     public required IReadOnlyCollection<int>? Achievements { get; init; }
 
+    /// <summary>The amount of points which will grant this title if it is not an achievement reward.</summary>
     public required int? AchievementPointsRequired { get; init; }
 }
