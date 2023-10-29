@@ -77,10 +77,10 @@ public sealed record Character
     public required int? ActiveEquipmentTab { get; init; }
 
     /// <summary>All the equipment in the current character's armory.</summary>
-    public required IReadOnlyCollection<EquipmentItem>? Equipment { get; init; }
+    public required IReadOnlyList<EquipmentItem>? Equipment { get; init; }
 
     /// <summary>All the equipment tabs of the current character.</summary>
-    public required IReadOnlyCollection<EquipmentTab>? EquipmentTabs { get; init; }
+    public required IReadOnlyList<EquipmentTab>? EquipmentTabs { get; init; }
 
     /// <summary>The IDs of the recipes that the current character has unlocked.</summary>
     /// <summary>This includes unlocked recipes that are unavailable to the character's active crafting disciplines.</summary>
