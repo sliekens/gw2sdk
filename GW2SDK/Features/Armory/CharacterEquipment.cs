@@ -4,5 +4,5 @@
 public sealed record CharacterEquipment
 {
     /// <summary>All the equipment in the current character's armory.</summary>
-    public required IReadOnlyCollection<EquipmentItem>? Equipment { get; init; }
+    public required IReadOnlyList<EquipmentItem>? Equipment { get; init; }
 }

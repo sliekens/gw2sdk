@@ -11,5 +11,5 @@ public sealed record PvpEquipment
     public required int? RuneId { get; init; }
 
     /// <summary>The IDs of all equipped sigils.</summary>
-    public required IReadOnlyCollection<int?> SigilIds { get; init; }
+    public required IReadOnlyList<int?> SigilIds { get; init; }
 }
