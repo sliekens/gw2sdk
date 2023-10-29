@@ -93,7 +93,7 @@ public sealed class AchievementsQuery
     }
 
     /// <summary>Retrieves a page of achievements.</summary>
-    /// <param name="pageIndex">How many entries to skip.</param>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
     /// <param name="pageSize">How many entries to take.</param>
     /// <param name="language">The language to use for descriptions.</param>
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
@@ -264,7 +264,7 @@ public sealed class AchievementsQuery
 
     /// <summary>Retrieves a page of achievement progress on the account. This endpoint is only accessible with a valid access
     /// token</summary>
-    /// <param name="pageIndex">How many entries to skip.</param>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
     /// <param name="pageSize">How many entries to take.</param>
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
@@ -364,7 +364,7 @@ public sealed class AchievementsQuery
     }
 
     /// <summary>Retrieves a page of achievement categories.</summary>
-    /// <param name="pageIndex">How many entries to skip.</param>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
     /// <param name="pageSize">How many entries to take.</param>
     /// <param name="language">The language to use for descriptions.</param>
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
@@ -464,7 +464,7 @@ public sealed class AchievementsQuery
     }
 
     /// <summary>Retrieves a page of achievement groups.</summary>
-    /// <param name="pageIndex">How many entries to skip.</param>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
     /// <param name="pageSize">How many entries to take.</param>
     /// <param name="language">The language to use for descriptions.</param>
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
@@ -562,7 +562,7 @@ public sealed class AchievementsQuery
     }
 
     /// <summary>Retrieves a page of titles.</summary>
-    /// <param name="pageIndex">How many entries to skip.</param>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
     /// <param name="pageSize">How many entries to take.</param>
     /// <param name="language">The language to use for descriptions.</param>
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
