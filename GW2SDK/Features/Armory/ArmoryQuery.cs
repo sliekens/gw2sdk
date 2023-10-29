@@ -127,15 +127,21 @@ public sealed class ArmoryQuery
     /// <remarks>Expect there to be a delay after switching tabs in the game before this is reflected in the API.</remarks>
     /// <param name="characterName">A character name that belongs to the account associated with the access token.</param>
     /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<Replica<EquipmentTab>> GetActiveEquipmentTab(
         string characterName,
         string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        ActiveEquipmentTabRequest request = new(characterName) { AccessToken = accessToken };
+        ActiveEquipmentTabRequest request = new(characterName)
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
         return request.SendAsync(http, cancellationToken);
     }
 
