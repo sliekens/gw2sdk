@@ -15,7 +15,7 @@ internal sealed class BuildsByIdsRequest : IHttpRequest<Replica<HashSet<Build>>>
 
     public IReadOnlyCollection<int> BuildStorageIds { get; }
 
-    public string? AccessToken { get; init; }
+    public required string? AccessToken { get; init; }
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 

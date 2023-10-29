@@ -18,7 +18,7 @@ internal sealed class PurchasesRequest : IHttpRequest<Replica<HashSet<Transactio
 
     public int? PageSize { get; init; }
 
-    public string? AccessToken { get; init; }
+    public required string? AccessToken { get; init; }
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 

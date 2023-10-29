@@ -12,7 +12,7 @@ internal sealed class StandingsRequest : IHttpRequest<Replica<HashSet<Standing>>
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
     };
 
-    public string? AccessToken { get; init; }
+    public required string? AccessToken { get; init; }
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 

@@ -11,7 +11,7 @@ internal sealed class UnlockedFinishersRequest : IHttpRequest<Replica<HashSet<Un
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
     };
 
-    public string? AccessToken { get; init; }
+    public required string? AccessToken { get; init; }
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 

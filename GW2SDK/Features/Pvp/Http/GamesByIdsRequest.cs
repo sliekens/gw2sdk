@@ -24,7 +24,7 @@ internal sealed class GamesByIdsRequest : IHttpRequest<Replica<HashSet<Game>>>
 
     public IReadOnlyCollection<string> GameIds { get; }
 
-    public string? AccessToken { get; init; }
+    public required string? AccessToken { get; init; }
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 

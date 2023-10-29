@@ -16,7 +16,7 @@ internal sealed class GuildRanksRequest : IHttpRequest<Replica<List<GuildRank>>>
 
     public string Id { get; }
 
-    public string? AccessToken { get; init; }
+    public required string? AccessToken { get; init; }
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 

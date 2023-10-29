@@ -16,7 +16,7 @@ internal sealed class GuildTeamsRequest : IHttpRequest<Replica<List<GuildTeam>>>
 
     public string Id { get; }
 
-    public string? AccessToken { get; init; }
+    public required string? AccessToken { get; init; }
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 

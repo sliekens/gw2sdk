@@ -12,7 +12,7 @@ internal sealed class BuildStorageIndexRequest : IHttpRequest<Replica<HashSet<in
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
         };
 
-    public string? AccessToken { get; init; }
+    public required string? AccessToken { get; init; }
 
     public async Task<Replica<HashSet<int>>> SendAsync(
         HttpClient httpClient,

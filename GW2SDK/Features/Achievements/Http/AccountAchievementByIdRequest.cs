@@ -14,7 +14,7 @@ internal sealed class AccountAchievementByIdRequest : IHttpRequest<Replica<Accou
 
     public int AchievementId { get; }
 
-    public string? AccessToken { get; init; }
+    public required string? AccessToken { get; init; }
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 

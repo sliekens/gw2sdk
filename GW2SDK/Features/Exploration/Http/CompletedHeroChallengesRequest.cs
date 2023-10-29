@@ -19,7 +19,7 @@ internal sealed class CompletedHeroChallengesRequest : IHttpRequest<Replica<Hash
 
     public string CharacterName { get; }
 
-    public string? AccessToken { get; init; }
+    public required string? AccessToken { get; init; }
 
     public async Task<Replica<HashSet<string>>> SendAsync(
         HttpClient httpClient,

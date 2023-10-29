@@ -11,7 +11,7 @@ internal sealed class CharactersIndexRequest : IHttpRequest<Replica<HashSet<stri
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
     };
 
-    public string? AccessToken { get; init; }
+    public required string? AccessToken { get; init; }
 
     public async Task<Replica<HashSet<string>>> SendAsync(
         HttpClient httpClient,

@@ -10,7 +10,7 @@ internal sealed class BankRequest : IHttpRequest<Replica<Bank>>
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
     };
 
-    public string? AccessToken { get; init; }
+    public required string? AccessToken { get; init; }
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 

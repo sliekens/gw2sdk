@@ -16,7 +16,7 @@ internal sealed class GuildBankRequest : IHttpRequest<Replica<List<GuildBankTab>
 
     public string Id { get; }
 
-    public string? AccessToken { get; init; }
+    public required string? AccessToken { get; init; }
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 

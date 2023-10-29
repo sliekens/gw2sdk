@@ -14,7 +14,7 @@ internal sealed class ActiveEquipmentTabRequest : IHttpRequest<Replica<Equipment
 
     public string CharacterName { get; }
 
-    public string? AccessToken { get; init; }
+    public required string? AccessToken { get; init; }
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 

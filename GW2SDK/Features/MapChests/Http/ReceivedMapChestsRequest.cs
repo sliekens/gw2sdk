@@ -11,7 +11,7 @@ internal sealed class ReceivedMapChestsRequest : IHttpRequest<Replica<HashSet<st
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
     };
 
-    public string? AccessToken { get; init; }
+    public required string? AccessToken { get; init; }
 
     public async Task<Replica<HashSet<string>>> SendAsync(
         HttpClient httpClient,

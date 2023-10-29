@@ -19,7 +19,7 @@ internal sealed class UnlockedEquipmentTabsRequest : IHttpRequest<Replica<IReadO
 
     public string CharacterName { get; }
 
-    public string? AccessToken { get; init; }
+    public required string? AccessToken { get; init; }
 
     public async Task<Replica<IReadOnlyList<int>>> SendAsync(
         HttpClient httpClient,

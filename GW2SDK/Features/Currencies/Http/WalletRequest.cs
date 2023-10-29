@@ -11,7 +11,7 @@ internal sealed class WalletRequest : IHttpRequest<Replica<HashSet<CurrencyAmoun
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
     };
 
-    public string? AccessToken { get; init; }
+    public required string? AccessToken { get; init; }
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 

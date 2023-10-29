@@ -16,7 +16,7 @@ internal sealed class BuildStorageRequest : IHttpRequest<Replica<HashSet<Build>>
             }
         };
 
-    public string? AccessToken { get; init; }
+    public required string? AccessToken { get; init; }
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 

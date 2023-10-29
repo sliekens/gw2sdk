@@ -15,7 +15,7 @@ internal sealed class GameByIdRequest : IHttpRequest<Replica<Game>>
 
     public string GameId { get; }
 
-    public string? AccessToken { get; init; }
+    public required string? AccessToken { get; init; }
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 

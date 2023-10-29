@@ -16,7 +16,7 @@ internal sealed class GuildStorageRequest : IHttpRequest<Replica<List<GuildStora
 
     public string Id { get; }
 
-    public string? AccessToken { get; init; }
+    public required string? AccessToken { get; init; }
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 

@@ -15,7 +15,7 @@ internal sealed class CompletedGuildUpgradesRequest : IHttpRequest<Replica<HashS
 
     public string Id { get; }
 
-    public string? AccessToken { get; init; }
+    public required string? AccessToken { get; init; }
 
     public async Task<Replica<HashSet<int>>> SendAsync(
         HttpClient httpClient,

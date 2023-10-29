@@ -18,7 +18,7 @@ internal sealed class SalesRequest : IHttpRequest<Replica<HashSet<Transaction>>>
 
     public int? PageSize { get; init; }
 
-    public string? AccessToken { get; init; }
+    public required string? AccessToken { get; init; }
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 

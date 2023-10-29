@@ -18,7 +18,7 @@ internal sealed class BuildTabRequest : IHttpRequest<Replica<BuildTab>>
 
     public int Tab { get; }
 
-    public string? AccessToken { get; init; }
+    public required string? AccessToken { get; init; }
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
