@@ -11,7 +11,7 @@ public sealed record EquipmentTab
     public required string Name { get; init; }
 
     /// <summary>The selected equipment on this tab.</summary>
-    public required IReadOnlyList<EquipmentItem> Equipment { get; init; }
+    public required IReadOnlyList<EquipmentItem> EquippedItems { get; init; }
 
     /// <summary>The selected PvP equipment on this tab.</summary>
     public required PvpEquipment PvpEquipment { get; init; }

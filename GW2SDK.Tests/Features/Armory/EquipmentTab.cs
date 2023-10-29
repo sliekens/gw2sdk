@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Armory;
 
@@ -15,7 +15,7 @@ public class EquipmentTab
         var actual = await sut.Armory.GetEquipmentTab(character.Name, tab, accessToken.Key);
 
         Assert.NotNull(actual.Value);
-        Assert.NotEmpty(actual.Value.Equipment);
+        Assert.NotEmpty(actual.Value.EquippedItems);
         Assert.NotNull(actual.Value.PvpEquipment);
     }
 }

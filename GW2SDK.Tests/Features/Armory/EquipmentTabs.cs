@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Armory;
 
@@ -17,7 +17,7 @@ public class EquipmentTabs
         Assert.All(actual.Value, entry =>
         {
             Assert.NotNull(entry);
-            Assert.NotEmpty(entry.Equipment);
+            Assert.NotEmpty(entry.EquippedItems);
             Assert.NotNull(entry.PvpEquipment);
         });
     }
