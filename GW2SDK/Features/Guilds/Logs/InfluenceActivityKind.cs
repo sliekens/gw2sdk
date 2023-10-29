@@ -1,8 +1,7 @@
-﻿namespace GuildWars2.Guilds.Logs
+﻿namespace GuildWars2.Guilds.Logs;
+
+[PublicAPI]
+public enum InfluenceActivityKind
 {
-    [PublicAPI]
-    public enum InfluenceActivityKind
-    {
-        Gifted = 1
-    }
+    Gifted = 1
 }
