@@ -10,13 +10,13 @@ internal static class CharacterEquipmentJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember equipment = "equipment";
+        RequiredMember items = "equipment";
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == equipment.Name)
+            if (member.Name == items.Name)
             {
-                equipment = member;
+                items = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -26,7 +26,7 @@ internal static class CharacterEquipmentJson
 
         return new CharacterEquipment
         {
-            Equipment = equipment.Map(
+            Items = items.Map(
                 values => values.GetList(value => value.GetEquipmentItem(missingMemberBehavior))
             )
         };

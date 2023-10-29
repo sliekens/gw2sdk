@@ -3,6 +3,7 @@
 [PublicAPI]
 public sealed record CharacterEquipment
 {
-    /// <summary>All the equipment in the current character's armory.</summary>
-    public required IReadOnlyList<EquipmentItem>? Equipment { get; init; }
+    /// <summary>All the items equipped by the current character. This includes items from all equipment tabs, not just the
+    /// current tab.</summary>
+    public required IReadOnlyList<EquipmentItem>? Items { get; init; }
 }

@@ -35,7 +35,7 @@ internal static class CharacterJson
         OptionalMember buildTabs = "build_tabs";
         NullableMember equipmentTabsUnlocked = "equipment_tabs_unlocked";
         NullableMember activeEquipmentTab = "active_equipment_tab";
-        OptionalMember equipment = "equipment";
+        OptionalMember equippedItems = "equipment";
         OptionalMember equipmentTabs = "equipment_tabs";
         OptionalMember recipes = "recipes";
         OptionalMember training = "training";
@@ -123,9 +123,9 @@ internal static class CharacterJson
             {
                 activeEquipmentTab = member;
             }
-            else if (member.Name == equipment.Name)
+            else if (member.Name == equippedItems.Name)
             {
-                equipment = member;
+                equippedItems = member;
             }
             else if (member.Name == equipmentTabs.Name)
             {
@@ -186,8 +186,8 @@ internal static class CharacterJson
                 ),
             EquipmentTabsUnlocked = equipmentTabsUnlocked.Map(value => value.GetInt32()),
             ActiveEquipmentTab = activeEquipmentTab.Map(value => value.GetInt32()),
-            Equipment =
-                equipment.Map(
+            EquippedItems =
+                equippedItems.Map(
                     values => values.GetList(value => value.GetEquipmentItem(missingMemberBehavior))
                 ),
             EquipmentTabs =

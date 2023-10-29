@@ -76,8 +76,9 @@ public sealed record Character
     /// when switching the active build tab in the game.</remarks>
     public required int? ActiveEquipmentTab { get; init; }
 
-    /// <summary>All the equipment in the current character's armory.</summary>
-    public required IReadOnlyList<EquipmentItem>? Equipment { get; init; }
+    /// <summary>All the items equipped by the current character. This includes items from all equipment tabs, not just the
+    /// current tab.</summary>
+    public required IReadOnlyList<EquipmentItem>? EquippedItems { get; init; }
 
     /// <summary>All the equipment tabs of the current character.</summary>
     public required IReadOnlyList<EquipmentTab>? EquipmentTabs { get; init; }
