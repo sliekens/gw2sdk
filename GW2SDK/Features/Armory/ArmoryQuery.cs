@@ -63,10 +63,15 @@ public sealed class ArmoryQuery
         string characterName,
         int tab,
         string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        EquipmentTabRequest request = new(characterName, tab) { AccessToken = accessToken };
+        EquipmentTabRequest request = new(characterName, tab)
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
         return request.SendAsync(http, cancellationToken);
     }
 
