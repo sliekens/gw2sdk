@@ -16,10 +16,10 @@ public sealed record EquipmentItem
     public required EquipmentSlot? Slot { get; init; }
 
     /// <summary>The item IDs of runes or sigils in this item.</summary>
-    public required IReadOnlyList<int>? Upgrades { get; init; }
+    public required IReadOnlyList<int>? UpgradeItemIds { get; init; }
 
     /// <summary>The item IDs of infusions in this item.</summary>
-    public required IReadOnlyList<int>? Infusions { get; init; }
+    public required IReadOnlyList<int>? InfusionItemIds { get; init; }
 
     /// <summary>The skin ID.</summary>
     public required int? SkinId { get; init; }
@@ -41,5 +41,5 @@ public sealed record EquipmentItem
 
     // Always length 4
     /// <summary>The IDs of colors applied to the current item.</summary>
-    public required IReadOnlyList<int?>? Dyes { get; init; }
+    public required IReadOnlyList<int?>? DyeIds { get; init; }
 }

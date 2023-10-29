@@ -85,8 +85,8 @@ internal static class EquipmentItemJson
             Id = id.Map(value => value.GetInt32()),
             Count = count.Map(value => value.GetInt32()),
             Slot = slot.Map(value => value.GetEnum<EquipmentSlot>(missingMemberBehavior)),
-            Upgrades = upgrades.Map(values => values.GetList(value => value.GetInt32())),
-            Infusions = infusions.Map(values => values.GetList(value => value.GetInt32())),
+            UpgradeItemIds = upgrades.Map(values => values.GetList(value => value.GetInt32())),
+            InfusionItemIds = infusions.Map(values => values.GetList(value => value.GetInt32())),
             SkinId = skin.Map(value => value.GetInt32()),
             Stats = stats.Map(value => value.GetSelectedStat(missingMemberBehavior)),
             Binding = binding.Map(value => value.GetEnum<ItemBinding>(missingMemberBehavior)),
@@ -95,7 +95,7 @@ internal static class EquipmentItemJson
                 value => value.GetEnum<EquipmentLocation>(missingMemberBehavior)
             ),
             Tabs = tabs.Map(values => values.GetList(value => value.GetInt32())),
-            Dyes = dyes.Map(values => values.GetList(value => value.GetNullableInt32()))
+            DyeIds = dyes.Map(values => values.GetList(value => value.GetNullableInt32()))
         };
     }
 }
