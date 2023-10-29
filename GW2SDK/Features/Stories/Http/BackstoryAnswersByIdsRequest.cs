@@ -20,7 +20,7 @@ internal sealed class BackstoryAnswersByIdsRequest : IHttpRequest<Replica<HashSe
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<BackstoryAnswer>>> SendAsync(
         HttpClient httpClient,

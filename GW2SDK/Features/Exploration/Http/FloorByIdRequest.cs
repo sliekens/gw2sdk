@@ -21,7 +21,7 @@ internal sealed class FloorByIdRequest : IHttpRequest<Replica<Floor>>
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<Floor>> SendAsync(
         HttpClient httpClient,

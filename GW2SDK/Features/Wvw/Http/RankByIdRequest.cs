@@ -17,7 +17,7 @@ internal sealed class RankByIdRequest : IHttpRequest<Replica<Rank>>
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<Rank>> SendAsync(
         HttpClient httpClient,

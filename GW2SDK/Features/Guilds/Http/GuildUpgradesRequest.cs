@@ -18,7 +18,7 @@ internal sealed class GuildUpgradesRequest : IHttpRequest<Replica<HashSet<GuildU
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<GuildUpgrade>>> SendAsync(
         HttpClient httpClient,

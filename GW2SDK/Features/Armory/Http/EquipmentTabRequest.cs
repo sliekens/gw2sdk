@@ -20,7 +20,7 @@ internal sealed class EquipmentTabRequest : IHttpRequest<Replica<EquipmentTab>>
 
     public required string? AccessToken { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<EquipmentTab>> SendAsync(
         HttpClient httpClient,

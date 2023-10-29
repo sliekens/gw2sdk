@@ -18,7 +18,7 @@ internal sealed class CatsByPageRequest : IHttpRequest<Replica<HashSet<Cat>>>
 
     public int? PageSize { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Cat>>> SendAsync(
         HttpClient httpClient,

@@ -21,7 +21,7 @@ internal sealed class SkinsByPageRequest : IHttpRequest<Replica<HashSet<Skin>>>
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Skin>>> SendAsync(
         HttpClient httpClient,

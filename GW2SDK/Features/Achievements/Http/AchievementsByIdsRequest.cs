@@ -20,7 +20,7 @@ internal sealed class AchievementsByIdsRequest : IHttpRequest<Replica<HashSet<Ac
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Achievement>>> SendAsync(
         HttpClient httpClient,

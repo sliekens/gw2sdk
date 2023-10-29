@@ -17,7 +17,7 @@ internal sealed class AbilityByIdRequest : IHttpRequest<Replica<Ability>>
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<Ability>> SendAsync(
         HttpClient httpClient,

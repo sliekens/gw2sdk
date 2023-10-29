@@ -17,7 +17,7 @@ internal sealed class TokenInfoRequest : IHttpRequest<Replica<TokenInfo>>
 
     public string AccessToken { get; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<TokenInfo>> SendAsync(
         HttpClient httpClient,

@@ -14,7 +14,7 @@ internal sealed class OwnedMountsRequest : IHttpRequest<Replica<HashSet<MountNam
 
     public required string? AccessToken { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<MountName>>> SendAsync(
         HttpClient httpClient,

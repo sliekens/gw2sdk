@@ -16,7 +16,7 @@ internal sealed class MatchesScoresRequest : IHttpRequest<Replica<HashSet<MatchS
         }
     };
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<MatchScores>>> SendAsync(
         HttpClient httpClient,

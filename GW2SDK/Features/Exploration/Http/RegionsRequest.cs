@@ -30,7 +30,7 @@ internal sealed class RegionsRequest : IHttpRequest<Replica<HashSet<Region>>>
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Region>>> SendAsync(
         HttpClient httpClient,

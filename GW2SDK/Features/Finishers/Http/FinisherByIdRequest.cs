@@ -16,7 +16,7 @@ internal sealed class FinisherByIdRequest : IHttpRequest<Replica<Finisher>>
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<Finisher>> SendAsync(
         HttpClient httpClient,

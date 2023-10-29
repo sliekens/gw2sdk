@@ -15,7 +15,7 @@ internal sealed class MapChestsRequest : IHttpRequest<Replica<HashSet<MapChest>>
         }
     };
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<MapChest>>> SendAsync(
         HttpClient httpClient,

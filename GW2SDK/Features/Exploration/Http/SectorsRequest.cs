@@ -36,7 +36,7 @@ internal sealed class SectorsRequest : IHttpRequest<Replica<HashSet<Sector>>>
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Sector>>> SendAsync(
         HttpClient httpClient,

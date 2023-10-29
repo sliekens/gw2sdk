@@ -14,7 +14,7 @@ internal sealed class EmoteByIdRequest : IHttpRequest<Replica<Emote>>
 
     public string EmoteId { get; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<Emote>> SendAsync(
         HttpClient httpClient,

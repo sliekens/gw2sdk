@@ -19,7 +19,7 @@ internal sealed class QuaggansByPageRequest : IHttpRequest<Replica<HashSet<Quagg
 
     public int? PageSize { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Quaggan>>> SendAsync(
         HttpClient httpClient,

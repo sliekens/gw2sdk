@@ -20,7 +20,7 @@ internal sealed class SellOrdersRequest : IHttpRequest<Replica<HashSet<Order>>>
 
     public required string? AccessToken { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Order>>> SendAsync(
         HttpClient httpClient,

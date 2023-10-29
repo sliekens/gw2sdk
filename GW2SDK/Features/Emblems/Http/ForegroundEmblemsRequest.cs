@@ -8,7 +8,7 @@ internal sealed class ForegroundEmblemsRequest : IHttpRequest<Replica<HashSet<Em
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/emblem/foregrounds") { AcceptEncoding = "gzip" };
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Emblem>>> SendAsync(
         HttpClient httpClient,

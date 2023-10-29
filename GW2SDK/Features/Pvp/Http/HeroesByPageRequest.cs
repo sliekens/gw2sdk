@@ -20,7 +20,7 @@ internal sealed class HeroesByPageRequest : IHttpRequest<Replica<HashSet<Hero>>>
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Hero>>> SendAsync(
         HttpClient httpClient,

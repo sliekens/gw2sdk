@@ -14,7 +14,7 @@ internal sealed class FileByIdRequest : IHttpRequest<Replica<Asset>>
 
     public string FileId { get; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<Asset>> SendAsync(
         HttpClient httpClient,

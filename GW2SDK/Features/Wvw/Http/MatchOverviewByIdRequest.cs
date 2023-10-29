@@ -15,7 +15,7 @@ internal sealed class MatchOverviewByIdRequest : IHttpRequest<Replica<MatchOverv
 
     public string MatchId { get; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<MatchOverview>> SendAsync(
         HttpClient httpClient,

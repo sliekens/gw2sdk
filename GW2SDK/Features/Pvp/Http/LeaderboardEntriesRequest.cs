@@ -32,7 +32,7 @@ internal sealed class LeaderboardEntriesRequest : IHttpRequest<Replica<HashSet<L
 
     public int? PageSize { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<LeaderboardEntry>>> SendAsync(
         HttpClient httpClient,

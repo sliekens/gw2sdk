@@ -13,7 +13,7 @@ internal sealed class DeliveryRequest : IHttpRequest<Replica<DeliveryBox>>
 
     public required string? AccessToken { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<DeliveryBox>> SendAsync(
         HttpClient httpClient,

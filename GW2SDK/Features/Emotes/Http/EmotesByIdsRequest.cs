@@ -16,7 +16,7 @@ internal sealed class EmotesByIdsRequest : IHttpRequest<Replica<HashSet<Emote>>>
 
     public IReadOnlyCollection<string> EmoteIds { get; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Emote>>> SendAsync(
         HttpClient httpClient,

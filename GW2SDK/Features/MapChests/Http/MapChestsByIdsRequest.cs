@@ -16,7 +16,7 @@ internal sealed class MapChestsByIdsRequest : IHttpRequest<Replica<HashSet<MapCh
 
     public IReadOnlyCollection<string> MapChestIds { get; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<MapChest>>> SendAsync(
         HttpClient httpClient,

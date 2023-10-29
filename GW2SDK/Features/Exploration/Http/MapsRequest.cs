@@ -33,7 +33,7 @@ internal sealed class MapsRequest : IHttpRequest<Replica<HashSet<Map>>>
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Map>>> SendAsync(
         HttpClient httpClient,

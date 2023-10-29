@@ -15,7 +15,7 @@ internal sealed class CatByIdRequest : IHttpRequest<Replica<Cat>>
 
     public int CatId { get; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<Cat>> SendAsync(
         HttpClient httpClient,

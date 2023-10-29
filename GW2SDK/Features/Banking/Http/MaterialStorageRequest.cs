@@ -12,7 +12,7 @@ internal sealed class MaterialStorageRequest : IHttpRequest<Replica<MaterialStor
 
     public required string? AccessToken { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<MaterialStorage>> SendAsync(
         HttpClient httpClient,

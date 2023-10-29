@@ -21,7 +21,7 @@ internal sealed class ItemsByPageRequest : IHttpRequest<Replica<HashSet<Item>>>
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Item>>> SendAsync(
         HttpClient httpClient,

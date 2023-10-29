@@ -14,7 +14,7 @@ internal sealed class DungeonByIdRequest : IHttpRequest<Replica<Dungeon>>
 
     public string DungeonId { get; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<Dungeon>> SendAsync(
         HttpClient httpClient,

@@ -16,7 +16,7 @@ internal sealed class ActiveBuildTabRequest : IHttpRequest<Replica<BuildTab>>
 
     public required string? AccessToken { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<BuildTab>> SendAsync(
         HttpClient httpClient,

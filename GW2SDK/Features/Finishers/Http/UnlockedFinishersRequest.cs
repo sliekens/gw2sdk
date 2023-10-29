@@ -13,7 +13,7 @@ internal sealed class UnlockedFinishersRequest : IHttpRequest<Replica<HashSet<Un
 
     public required string? AccessToken { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<UnlockedFinisher>>> SendAsync(
         HttpClient httpClient,

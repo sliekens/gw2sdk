@@ -40,7 +40,7 @@ internal sealed class PointsOfInterestByIdsRequest : IHttpRequest<Replica<HashSe
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<PointOfInterest>>> SendAsync(
         HttpClient httpClient,

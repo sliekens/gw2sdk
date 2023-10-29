@@ -17,7 +17,7 @@ internal sealed class ApiVersionRequest : IHttpRequest<Replica<ApiVersion>>
 
     public string Version { get; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<ApiVersion>> SendAsync(
         HttpClient httpClient,

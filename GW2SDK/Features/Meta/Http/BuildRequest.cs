@@ -9,7 +9,7 @@ internal sealed class BuildRequest : IHttpRequest<Replica<Build>>
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
     };
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<Build>> SendAsync(
         HttpClient httpClient,

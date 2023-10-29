@@ -15,7 +15,7 @@ internal sealed class MatchByWorldIdRequest : IHttpRequest<Replica<Match>>
 
     public int WorldId { get; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<Match>> SendAsync(
         HttpClient httpClient,

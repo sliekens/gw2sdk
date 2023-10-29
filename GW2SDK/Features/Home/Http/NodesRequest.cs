@@ -16,7 +16,7 @@ internal sealed class NodesRequest : IHttpRequest<Replica<HashSet<Node>>>
         }
     };
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Node>>> SendAsync(
         HttpClient httpClient,

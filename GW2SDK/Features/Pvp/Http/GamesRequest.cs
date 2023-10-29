@@ -18,7 +18,7 @@ internal sealed class GamesRequest : IHttpRequest<Replica<HashSet<Game>>>
 
     public required string? AccessToken { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Game>>> SendAsync(
         HttpClient httpClient,

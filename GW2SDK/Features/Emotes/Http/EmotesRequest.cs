@@ -15,7 +15,7 @@ internal sealed class EmotesRequest : IHttpRequest<Replica<HashSet<Emote>>>
         }
     };
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Emote>>> SendAsync(
         HttpClient httpClient,

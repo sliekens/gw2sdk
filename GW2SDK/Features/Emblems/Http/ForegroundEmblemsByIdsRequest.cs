@@ -16,7 +16,7 @@ internal sealed class ForegroundEmblemsByIdsRequest : IHttpRequest<Replica<HashS
 
     public IReadOnlyCollection<int> ForegroundEmblemIds { get; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Emblem>>> SendAsync(
         HttpClient httpClient,

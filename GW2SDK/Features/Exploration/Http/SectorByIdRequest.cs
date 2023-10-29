@@ -32,7 +32,7 @@ internal sealed class SectorByIdRequest : IHttpRequest<Replica<Sector>>
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<Sector>> SendAsync(
         HttpClient httpClient,

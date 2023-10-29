@@ -12,7 +12,7 @@ internal sealed class AccountRequest : IHttpRequest<Replica<AccountSummary>>
 
     public required string? AccessToken { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<AccountSummary>> SendAsync(
         HttpClient httpClient,

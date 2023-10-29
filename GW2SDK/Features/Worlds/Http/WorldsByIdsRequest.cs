@@ -20,7 +20,7 @@ internal sealed class WorldsByIdsRequest : IHttpRequest<Replica<HashSet<World>>>
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<World>>> SendAsync(
         HttpClient httpClient,

@@ -18,7 +18,7 @@ internal sealed class AchievementByIdRequest : IHttpRequest<Replica<Achievement>
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<Achievement>> SendAsync(
         HttpClient httpClient,

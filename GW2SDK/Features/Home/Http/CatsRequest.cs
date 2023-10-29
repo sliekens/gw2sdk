@@ -16,7 +16,7 @@ internal sealed class CatsRequest : IHttpRequest<Replica<HashSet<Cat>>>
         }
     };
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Cat>>> SendAsync(
         HttpClient httpClient,

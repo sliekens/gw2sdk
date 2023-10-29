@@ -17,7 +17,7 @@ internal sealed class ForegroundEmblemsByPageRequest : IHttpRequest<Replica<Hash
 
     public int? PageSize { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Emblem>>> SendAsync(
         HttpClient httpClient,

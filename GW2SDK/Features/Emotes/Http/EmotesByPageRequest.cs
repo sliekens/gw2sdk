@@ -17,7 +17,7 @@ internal sealed class EmotesByPageRequest : IHttpRequest<Replica<HashSet<Emote>>
 
     public int? PageSize { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Emote>>> SendAsync(
         HttpClient httpClient,

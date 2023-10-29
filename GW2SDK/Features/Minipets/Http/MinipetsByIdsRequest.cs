@@ -18,7 +18,7 @@ internal sealed class MinipetsByIdsRequest : IHttpRequest<Replica<HashSet<Minipe
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Minipet>>> SendAsync(
         HttpClient httpClient,

@@ -17,7 +17,7 @@ internal sealed class FilesByPageRequest : IHttpRequest<Replica<HashSet<Asset>>>
 
     public int? PageSize { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Asset>>> SendAsync(
         HttpClient httpClient,

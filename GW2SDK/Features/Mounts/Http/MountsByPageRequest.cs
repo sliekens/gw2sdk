@@ -21,7 +21,7 @@ internal sealed class MountsByPageRequest : IHttpRequest<Replica<HashSet<Mount>>
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Mount>>> SendAsync(
         HttpClient httpClient,

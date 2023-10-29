@@ -22,7 +22,7 @@ internal sealed class CreateSubtokenRequest : IHttpRequest<Replica<CreatedSubtok
 
     public IReadOnlyCollection<string>? Urls { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<CreatedSubtoken>> SendAsync(
         HttpClient httpClient,

@@ -17,7 +17,7 @@ internal sealed class TraitsRequest : IHttpRequest<Replica<HashSet<Trait>>>
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Trait>>> SendAsync(
         HttpClient httpClient,

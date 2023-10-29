@@ -15,7 +15,7 @@ internal sealed class ExchangeGemsForGoldRequest : IHttpRequest<Replica<GemsForG
 
     public int GemsCount { get; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<GemsForGoldExchange>> SendAsync(
         HttpClient httpClient,

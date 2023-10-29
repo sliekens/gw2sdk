@@ -18,7 +18,7 @@ internal sealed class GuildRanksRequest : IHttpRequest<Replica<List<GuildRank>>>
 
     public required string? AccessToken { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<List<GuildRank>>> SendAsync(
         HttpClient httpClient,

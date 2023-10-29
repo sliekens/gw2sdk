@@ -19,7 +19,7 @@ internal sealed class MountByNameRequest : IHttpRequest<Replica<Mount>>
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<Mount>> SendAsync(
         HttpClient httpClient,

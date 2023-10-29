@@ -16,7 +16,7 @@ internal sealed class OutfitByIdRequest : IHttpRequest<Replica<Outfit>>
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<Outfit>> SendAsync(
         HttpClient httpClient,

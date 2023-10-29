@@ -19,7 +19,7 @@ internal sealed class ProfessionByNameRequest : IHttpRequest<Replica<Profession>
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<Profession>> SendAsync(
         HttpClient httpClient,

@@ -13,7 +13,7 @@ internal sealed class MasteryProgressRequest : IHttpRequest<Replica<HashSet<Mast
 
     public required string? AccessToken { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<MasteryProgress>>> SendAsync(
         HttpClient httpClient,

@@ -17,7 +17,7 @@ internal sealed class OrderBookByIdRequest : IHttpRequest<Replica<OrderBook>>
 
     public int ItemId { get; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<OrderBook>> SendAsync(
         HttpClient httpClient,

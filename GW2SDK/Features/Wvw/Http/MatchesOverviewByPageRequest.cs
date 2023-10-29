@@ -18,7 +18,7 @@ internal sealed class MatchesOverviewByPageRequest : IHttpRequest<Replica<HashSe
 
     public int? PageSize { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<MatchOverview>>> SendAsync(
         HttpClient httpClient,

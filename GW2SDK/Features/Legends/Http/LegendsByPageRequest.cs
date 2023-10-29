@@ -17,7 +17,7 @@ internal sealed class LegendsByPageRequest : IHttpRequest<Replica<HashSet<Legend
 
     public int? PageSize { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Legend>>> SendAsync(
         HttpClient httpClient,

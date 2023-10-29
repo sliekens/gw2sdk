@@ -18,7 +18,7 @@ internal sealed class ContinentsRequest : IHttpRequest<Replica<HashSet<Continent
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Continent>>> SendAsync(
         HttpClient httpClient,

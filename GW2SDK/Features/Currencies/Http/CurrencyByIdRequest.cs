@@ -18,7 +18,7 @@ internal sealed class CurrencyByIdRequest : IHttpRequest<Replica<Currency>>
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<Currency>> SendAsync(
         HttpClient httpClient,

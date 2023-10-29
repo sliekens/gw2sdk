@@ -16,7 +16,7 @@ internal sealed class BackgroundEmblemsByIdsRequest : IHttpRequest<Replica<HashS
 
     public IReadOnlyCollection<int> BackgroundEmblemIds { get; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Emblem>>> SendAsync(
         HttpClient httpClient,

@@ -17,7 +17,7 @@ internal sealed class RaidsByPageRequest : IHttpRequest<Replica<HashSet<Raid>>>
 
     public int? PageSize { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Raid>>> SendAsync(
         HttpClient httpClient,

@@ -19,7 +19,7 @@ internal sealed class OrderBooksByIdsRequest : IHttpRequest<Replica<HashSet<Orde
 
     public IReadOnlyCollection<int> ItemIds { get; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<OrderBook>>> SendAsync(
         HttpClient httpClient,

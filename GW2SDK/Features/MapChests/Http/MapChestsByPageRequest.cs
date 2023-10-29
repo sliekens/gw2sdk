@@ -17,7 +17,7 @@ internal sealed class MapChestsByPageRequest : IHttpRequest<Replica<HashSet<MapC
 
     public int? PageSize { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<MapChest>>> SendAsync(
         HttpClient httpClient,

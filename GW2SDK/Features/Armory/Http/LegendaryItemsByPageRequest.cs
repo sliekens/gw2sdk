@@ -19,7 +19,7 @@ internal sealed class LegendaryItemsByPageRequest : IHttpRequest<Replica<HashSet
 
     public int? PageSize { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<LegendaryItem>>> SendAsync(
         HttpClient httpClient,

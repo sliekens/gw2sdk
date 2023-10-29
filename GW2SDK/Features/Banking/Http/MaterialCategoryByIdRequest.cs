@@ -18,7 +18,7 @@ internal sealed class MaterialCategoryByIdRequest : IHttpRequest<Replica<Materia
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<MaterialCategory>> SendAsync(
         HttpClient httpClient,

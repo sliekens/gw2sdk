@@ -14,7 +14,7 @@ internal sealed class ForegroundEmblemByIdRequest : IHttpRequest<Replica<Emblem>
 
     public int ForegroundEmblemId { get; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<Emblem>> SendAsync(
         HttpClient httpClient,

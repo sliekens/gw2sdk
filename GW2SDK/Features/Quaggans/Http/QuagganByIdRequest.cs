@@ -16,7 +16,7 @@ internal sealed class QuagganByIdRequest : IHttpRequest<Replica<Quaggan>>
 
     public string QuagganId { get; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<Quaggan>> SendAsync(
         HttpClient httpClient,

@@ -15,7 +15,7 @@ internal sealed class RaidsRequest : IHttpRequest<Replica<HashSet<Raid>>>
         }
     };
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Raid>>> SendAsync(
         HttpClient httpClient,

@@ -16,7 +16,7 @@ internal sealed class QuestByIdRequest : IHttpRequest<Replica<Quest>>
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<Quest>> SendAsync(
         HttpClient httpClient,

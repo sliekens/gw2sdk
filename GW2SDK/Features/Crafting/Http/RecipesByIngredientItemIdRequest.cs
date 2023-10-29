@@ -17,7 +17,7 @@ internal sealed class RecipesByIngredientItemIdRequest : IHttpRequest<Replica<Ha
 
     public int IngredientItemId { get; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Recipe>>> SendAsync(
         HttpClient httpClient,

@@ -18,7 +18,7 @@ internal sealed class NoveltiesByIdsRequest : IHttpRequest<Replica<HashSet<Novel
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Novelty>>> SendAsync(
         HttpClient httpClient,

@@ -11,7 +11,7 @@ internal sealed class ProfessionNamesRequest : IHttpRequest<Replica<HashSet<Prof
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
     };
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<ProfessionName>>> SendAsync(
         HttpClient httpClient,

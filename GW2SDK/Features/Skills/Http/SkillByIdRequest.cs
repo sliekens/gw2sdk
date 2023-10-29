@@ -18,7 +18,7 @@ internal sealed class SkillByIdRequest : IHttpRequest<Replica<Skill>>
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<Skill>> SendAsync(
         HttpClient httpClient,

@@ -21,7 +21,7 @@ internal sealed class AchievementsByPageRequest : IHttpRequest<Replica<HashSet<A
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Achievement>>> SendAsync(
         HttpClient httpClient,

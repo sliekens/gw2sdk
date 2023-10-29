@@ -20,7 +20,7 @@ internal sealed class CharacterTrainingRequest : IHttpRequest<Replica<CharacterT
 
     public required string? AccessToken { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<CharacterTraining>> SendAsync(
         HttpClient httpClient,

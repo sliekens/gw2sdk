@@ -18,7 +18,7 @@ internal sealed class MailCarrierByIdRequest : IHttpRequest<Replica<MailCarrier>
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<MailCarrier>> SendAsync(
         HttpClient httpClient,

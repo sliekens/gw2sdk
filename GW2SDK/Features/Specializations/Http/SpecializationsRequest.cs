@@ -17,7 +17,7 @@ internal sealed class SpecializationsRequest : IHttpRequest<Replica<HashSet<Spec
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Specialization>>> SendAsync(
         HttpClient httpClient,

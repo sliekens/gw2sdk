@@ -18,7 +18,7 @@ internal sealed class MasteryByIdRequest : IHttpRequest<Replica<Mastery>>
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<Mastery>> SendAsync(
         HttpClient httpClient,

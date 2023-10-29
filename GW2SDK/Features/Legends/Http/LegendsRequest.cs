@@ -15,7 +15,7 @@ internal sealed class LegendsRequest : IHttpRequest<Replica<HashSet<Legend>>>
         }
     };
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Legend>>> SendAsync(
         HttpClient httpClient,

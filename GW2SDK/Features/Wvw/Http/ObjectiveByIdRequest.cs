@@ -17,7 +17,7 @@ internal sealed class ObjectiveByIdRequest : IHttpRequest<Replica<Objective>>
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<Objective>> SendAsync(
         HttpClient httpClient,

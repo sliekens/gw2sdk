@@ -18,7 +18,7 @@ internal sealed class ItemByIdRequest : IHttpRequest<Replica<Item>>
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<Item>> SendAsync(
         HttpClient httpClient,

@@ -32,7 +32,7 @@ internal sealed class HeartByIdRequest : IHttpRequest<Replica<Heart>>
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<Heart>> SendAsync(
         HttpClient httpClient,

@@ -17,7 +17,7 @@ internal sealed class UpgradeByIdRequest : IHttpRequest<Replica<ObjectiveUpgrade
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<ObjectiveUpgrade>> SendAsync(
         HttpClient httpClient,

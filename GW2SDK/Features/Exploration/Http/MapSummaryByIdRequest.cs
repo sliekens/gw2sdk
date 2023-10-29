@@ -19,7 +19,7 @@ internal sealed class MapSummaryByIdRequest : IHttpRequest<Replica<MapSummary>>
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<MapSummary>> SendAsync(
         HttpClient httpClient,

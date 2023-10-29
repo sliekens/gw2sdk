@@ -11,7 +11,7 @@ internal sealed class MountNamesRequest : IHttpRequest<Replica<HashSet<MountName
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
     };
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<MountName>>> SendAsync(
         HttpClient httpClient,

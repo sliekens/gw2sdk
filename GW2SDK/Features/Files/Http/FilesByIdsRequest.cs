@@ -18,7 +18,7 @@ internal sealed class FilesByIdsRequest : IHttpRequest<Replica<HashSet<Asset>>>
 
     public IReadOnlyCollection<string> FileIds { get; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Asset>>> SendAsync(
         HttpClient httpClient,

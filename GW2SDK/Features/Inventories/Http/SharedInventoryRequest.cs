@@ -12,7 +12,7 @@ internal sealed class SharedInventoryRequest : IHttpRequest<Replica<Inventory>>
 
     public required string? AccessToken { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<Inventory>> SendAsync(
         HttpClient httpClient,

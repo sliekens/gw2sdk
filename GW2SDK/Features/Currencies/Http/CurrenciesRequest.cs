@@ -17,7 +17,7 @@ internal sealed class CurrenciesRequest : IHttpRequest<Replica<HashSet<Currency>
 
     public Language? Language { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Currency>>> SendAsync(
         HttpClient httpClient,
