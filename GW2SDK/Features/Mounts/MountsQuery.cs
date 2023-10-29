@@ -21,8 +21,9 @@ public sealed class MountsQuery
         CancellationToken cancellationToken = default
     )
     {
-        OwnedMountsRequest request = new(accessToken)
+        OwnedMountsRequest request = new()
         {
+            AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(http, cancellationToken);
@@ -33,7 +34,10 @@ public sealed class MountsQuery
         CancellationToken cancellationToken = default
     )
     {
-        OwnedMountSkinsRequest request = new(accessToken);
+        OwnedMountSkinsRequest request = new()
+        {
+            AccessToken = accessToken
+        };
         return request.SendAsync(http, cancellationToken);
     }
 

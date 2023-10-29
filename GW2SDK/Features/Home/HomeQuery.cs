@@ -70,7 +70,10 @@ public sealed class HomeQuery
         CancellationToken cancellationToken = default
     )
     {
-        OwnedCatsIndexRequest request = new(accessToken);
+        OwnedCatsIndexRequest request = new()
+        {
+            AccessToken = accessToken
+        };
         return request.SendAsync(http, cancellationToken);
     }
 
@@ -96,7 +99,10 @@ public sealed class HomeQuery
         CancellationToken cancellationToken = default
     )
     {
-        OwnedNodesIndexRequest request = new(accessToken);
+        OwnedNodesIndexRequest request = new()
+        {
+            AccessToken = accessToken
+        };
         return request.SendAsync(http, cancellationToken);
     }
 }

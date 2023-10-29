@@ -11,12 +11,7 @@ internal sealed class OwnedNodesIndexRequest : IHttpRequest<Replica<HashSet<stri
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
     };
 
-    public OwnedNodesIndexRequest(string? accessToken)
-    {
-        AccessToken = accessToken;
-    }
-
-    public string? AccessToken { get; }
+    public string? AccessToken { get; init; }
 
     public async Task<Replica<HashSet<string>>> SendAsync(
         HttpClient httpClient,

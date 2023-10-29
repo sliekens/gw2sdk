@@ -12,12 +12,7 @@ internal sealed class OwnedMountSkinsRequest : IHttpRequest<Replica<HashSet<int>
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
         };
 
-    public OwnedMountSkinsRequest(string? accessToken)
-    {
-        AccessToken = accessToken;
-    }
-
-    public string? AccessToken { get; }
+    public string? AccessToken { get; init; }
 
     public async Task<Replica<HashSet<int>>> SendAsync(
         HttpClient httpClient,

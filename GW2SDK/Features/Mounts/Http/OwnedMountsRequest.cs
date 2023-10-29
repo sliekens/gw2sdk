@@ -12,12 +12,7 @@ internal sealed class OwnedMountsRequest : IHttpRequest<Replica<HashSet<MountNam
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
         };
 
-    public OwnedMountsRequest(string? accessToken)
-    {
-        AccessToken = accessToken;
-    }
-
-    public string? AccessToken { get; }
+    public string? AccessToken { get; init; }
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
