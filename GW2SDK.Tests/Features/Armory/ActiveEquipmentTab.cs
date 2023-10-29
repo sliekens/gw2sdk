@@ -14,7 +14,7 @@ public class ActiveEquipmentTab
         var actual = await sut.Armory.GetActiveEquipmentTab(character.Name, accessToken.Key);
 
         Assert.NotNull(actual.Value);
-        Assert.NotEmpty(actual.Value.EquippedItems);
+        Assert.NotEmpty(actual.Value.Items);
         Assert.NotNull(actual.Value.PvpEquipment);
     }
 }

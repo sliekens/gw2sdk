@@ -50,10 +50,9 @@ internal static class EquipmentTabJson
         {
             Tab = tab.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),
-            EquippedItems =
-                equipment.Map(
-                    values => values.GetList(value => value.GetEquipmentItem(missingMemberBehavior))
-                ),
+            Items = equipment.Map(
+                values => values.GetList(value => value.GetEquipmentItem(missingMemberBehavior))
+            ),
             PvpEquipment = pvpEquipment.Map(value => value.GetPvpEquipment(missingMemberBehavior))
         };
     }

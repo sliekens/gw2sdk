@@ -17,7 +17,7 @@ public class EquipmentTabs
         Assert.All(actual.Value, entry =>
         {
             Assert.NotNull(entry);
-            Assert.NotEmpty(entry.EquippedItems);
+            Assert.NotEmpty(entry.Items);
             Assert.NotNull(entry.PvpEquipment);
         });
     }
