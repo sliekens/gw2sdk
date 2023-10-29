@@ -426,10 +426,15 @@ public sealed class PvpQuery
 
     public Task<Replica<HashSet<string>>> GetGamesIndex(
         string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        GamesIndexRequest request = new() { AccessToken = accessToken };
+        GamesIndexRequest request = new()
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
         return request.SendAsync(http, cancellationToken);
     }
 

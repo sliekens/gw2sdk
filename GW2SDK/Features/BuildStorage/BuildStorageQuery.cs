@@ -103,30 +103,45 @@ public sealed record BuildStorageQuery
         string characterName,
         int tab,
         string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        BuildTabRequest request = new(characterName, tab) { AccessToken = accessToken };
+        BuildTabRequest request = new(characterName, tab)
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
         return request.SendAsync(http, cancellationToken);
     }
 
     public Task<Replica<HashSet<BuildTab>>> GetBuildTabs(
         string characterName,
         string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        BuildTabsRequest request = new(characterName) { AccessToken = accessToken };
+        BuildTabsRequest request = new(characterName)
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
         return request.SendAsync(http, cancellationToken);
     }
 
     public Task<Replica<BuildTab>> GetActiveBuildTab(
         string characterName,
         string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        ActiveBuildTabRequest request = new(characterName) { AccessToken = accessToken };
+        ActiveBuildTabRequest request = new(characterName)
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
         return request.SendAsync(http, cancellationToken);
     }
 
