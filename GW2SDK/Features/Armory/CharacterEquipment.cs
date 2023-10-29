@@ -1,5 +1,6 @@
 ﻿namespace GuildWars2.Armory;
 
+/// <summary>Information about items equipped on the character.</summary>
 [PublicAPI]
 public sealed record CharacterEquipment
 {

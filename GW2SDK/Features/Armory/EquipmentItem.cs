@@ -2,6 +2,7 @@
 
 namespace GuildWars2.Armory;
 
+/// <summary>Information about a single item in the character's armory.</summary>
 [PublicAPI]
 [DataTransferObject]
 public sealed record EquipmentItem
@@ -12,7 +13,7 @@ public sealed record EquipmentItem
     /// <summary>The number of this item in the armory (i.e. not currently active in any slot).</summary>
     public required int? Count { get; init; }
 
-    /// <summary>The slot where this item is equipped   .</summary>
+    /// <summary>The slot where this item is equipped.</summary>
     public required EquipmentSlot? Slot { get; init; }
 
     /// <summary>The item IDs of runes or sigils in this item.</summary>
