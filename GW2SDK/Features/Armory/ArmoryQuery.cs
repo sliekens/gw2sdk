@@ -40,8 +40,11 @@ public sealed class ArmoryQuery
         CancellationToken cancellationToken = default
     )
     {
-        BoundLegendaryItemsRequest request =
-            new(accessToken) { MissingMemberBehavior = missingMemberBehavior };
+        BoundLegendaryItemsRequest request = new()
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
         return request.SendAsync(http, cancellationToken);
     }
 
