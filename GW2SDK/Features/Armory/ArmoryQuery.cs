@@ -49,13 +49,13 @@ public sealed class ArmoryQuery
 
     #region v2/characters/:id/equipmenttabs
 
-    public Task<Replica<HashSet<int>>> GetEquipmentTabsIndex(
+    public Task<Replica<IReadOnlyList<int>>> GetUnlockedEquipmentTabs(
         string characterName,
         string? accessToken,
         CancellationToken cancellationToken = default
     )
     {
-        EquipmentTabsIndexRequest request = new(characterName) { AccessToken = accessToken };
+        UnlockedEquipmentTabsRequest request = new(characterName) { AccessToken = accessToken };
         return request.SendAsync(http, cancellationToken);
     }
 

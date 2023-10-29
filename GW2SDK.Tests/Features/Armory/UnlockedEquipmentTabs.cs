@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Tests.Features.Armory;
 
-public class EquipmentTabsIndex
+public class UnlockedEquipmentTabs
 {
     [Fact]
     public async Task Can_be_listed()
@@ -11,7 +11,7 @@ public class EquipmentTabsIndex
         var character = Composer.Resolve<TestCharacter>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Armory.GetEquipmentTabsIndex(character.Name, accessToken.Key);
+        var actual = await sut.Armory.GetUnlockedEquipmentTabs(character.Name, accessToken.Key);
 
         Assert.NotEmpty(actual.Value);
         Assert.NotNull(actual.ResultContext);
