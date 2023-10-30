@@ -7,7 +7,7 @@ public sealed record MaterialCategory
 
     public required string Name { get; init; }
 
-    public required IEnumerable<int> Items { get; init; }
+    public required IReadOnlyList<int> Items { get; init; }
 
     public required int Order { get; init; }
 }
