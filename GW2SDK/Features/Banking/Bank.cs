@@ -1,15 +1,11 @@
-﻿using System.Collections.ObjectModel;
-using GuildWars2.Inventories;
+﻿using GuildWars2.Inventories;
 
 namespace GuildWars2.Banking;
 
-/// <summary>The current account's bank, sorted by in-game order. Enumerated values can contain <c>null</c> when some item
-/// slots are empty.</summary>
+/// <summary>Information about the current account's bank.</summary>
 [PublicAPI]
-public sealed class Bank : ReadOnlyCollection<ItemSlot?>
+public sealed record Bank
 {
-    public Bank(IList<ItemSlot?> list)
-        : base(list)
-    {
-    }
+    /// <summary>The item slots in the bank. Empty slots are represented as <c>null</c>.</summary>
+    public required IReadOnlyList<ItemSlot?> Items { get; init; }
 }

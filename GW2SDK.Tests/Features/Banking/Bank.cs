@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Tests.Features.Banking;
 
-public class AccountBank
+public class Bank
 {
     [Fact]
     public async Task Contents_can_be_found()
@@ -16,7 +16,7 @@ public class AccountBank
         actual.Value.Has_multiple_of_30_slots();
 
         Assert.All(
-            actual.Value,
+            actual.Value.Items,
             slot =>
             {
                 slot?.Has_id();
