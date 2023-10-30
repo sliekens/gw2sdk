@@ -86,12 +86,12 @@ internal static class ItemSlotJson
             Id = id.Map(value => value.GetInt32()),
             Count = count.Map(value => value.GetInt32()),
             Charges = charges.Map(value => value.GetInt32()),
-            Skin = skin.Map(value => value.GetInt32()),
-            Upgrades = upgrades.Map(values => values.GetList(value => value.GetInt32())),
+            SkinId = skin.Map(value => value.GetInt32()),
+            UpgradeItemIds = upgrades.Map(values => values.GetList(value => value.GetInt32())),
             UpgradeSlotIndices =
                 upgradeSlotIndices.Map(values => values.GetList(value => value.GetInt32())),
-            Infusions = infusions.Map(values => values.GetList(value => value.GetInt32())),
-            Dyes = dyes.Map(values => values.GetList(value => value.GetNullableInt32())),
+            InfusionItemIds = infusions.Map(values => values.GetList(value => value.GetInt32())),
+            DyeIds = dyes.Map(values => values.GetList(value => value.GetNullableInt32())),
             Binding = binding.Map(value => value.GetEnum<ItemBinding>(missingMemberBehavior)),
             BoundTo = boundTo.Map(value => value.GetString()) ?? "",
             Stats = stats.Map(value => value.GetSelectedStat(missingMemberBehavior))
