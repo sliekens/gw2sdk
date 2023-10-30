@@ -19,10 +19,10 @@
 - name: Error handling
   href: http-client-lifetime.md
   items:
-  - name: HttpClient lifetime
-    href: http-client-lifetime.md
   - name: API Usage limits
     href: usage-limits.md
+  - name: HttpClient lifetime
+    href: http-client-lifetime.md
   - name: Resiliency with Polly
     href: resiliency.md
 - name: Feedback
