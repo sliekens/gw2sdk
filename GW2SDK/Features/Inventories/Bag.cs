@@ -1,5 +1,6 @@
 ﻿namespace GuildWars2.Inventories;
 
+/// <summary>Information about an equipped bag.</summary>
 [PublicAPI]
 [DataTransferObject]
 public sealed record Bag
@@ -10,7 +11,6 @@ public sealed record Bag
     /// <summary>The current bag's capacity.</summary>
     public required int Size { get; init; }
 
-    /// <summary>The current bag's inventory, sorted by in-game order. Enumerated values can contain <c>null</c> when some item
-    /// slots are empty.</summary>
+    /// <summary>The current bag's inventory.</summary>
     public required Inventory Inventory { get; init; }
 }

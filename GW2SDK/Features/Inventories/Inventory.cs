@@ -4,5 +4,6 @@
 [PublicAPI]
 public sealed record Inventory
 {
+    /// <summary>The item slots in the bag. Empty slots are represented as <c>null</c>.</summary>
     public required IReadOnlyList<ItemSlot?> Items { get; init; }
 }
