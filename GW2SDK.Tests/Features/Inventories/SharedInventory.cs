@@ -12,9 +12,9 @@ public class SharedInventory
 
         var actual = await sut.Inventory.GetSharedInventory(accessToken.Key);
 
-        Assert.NotEmpty(actual.Value);
+        Assert.NotEmpty(actual.Value.Items);
         Assert.All(
-            actual.Value,
+            actual.Value.Items,
             slot =>
             {
                 if (slot is not null)

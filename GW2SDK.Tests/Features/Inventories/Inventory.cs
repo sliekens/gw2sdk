@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Inventories;
 
@@ -23,9 +23,9 @@ public class Inventory
                 {
                     Assert.True(bag.Id > 0);
                     Assert.True(bag.Size > 0);
-                    Assert.Equal(bag.Size, bag.Inventory.Count);
+                    Assert.Equal(bag.Size, bag.Inventory.Items.Count);
                     Assert.All(
-                        bag.Inventory,
+                        bag.Inventory.Items,
                         slot =>
                         {
                             if (slot is not null)
