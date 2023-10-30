@@ -1,13 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿namespace GuildWars2.Banking;
 
-namespace GuildWars2.Banking;
-
-/// <summary>The current account's material storage, sorted by in-game order.</summary>
+/// <summary>Information about the current account's material storage.</summary>
 [PublicAPI]
-public sealed class MaterialStorage : ReadOnlyCollection<MaterialSlot>
+public sealed record MaterialStorage
 {
-    public MaterialStorage(IList<MaterialSlot> list)
-        : base(list)
-    {
-    }
+    public required IReadOnlyList<MaterialSlot> Materials { get; init; }
 }

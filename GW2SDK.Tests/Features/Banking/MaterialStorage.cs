@@ -12,9 +12,9 @@ public class MaterialStorage
 
         var actual = await sut.Bank.GetMaterialStorage(accessToken.Key);
 
-        Assert.NotEmpty(actual.Value);
+        Assert.NotEmpty(actual.Value.Materials);
         Assert.All(
-            actual.Value,
+            actual.Value.Materials,
             entry =>
             {
                 Assert.True(entry.ItemId > 0);
