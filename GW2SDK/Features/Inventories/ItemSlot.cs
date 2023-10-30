@@ -14,15 +14,15 @@ public sealed record ItemSlot
 
     public required int? SkinId { get; init; }
 
-    public required IReadOnlyCollection<int>? UpgradeItemIds { get; init; }
+    public required IReadOnlyList<int>? UpgradeItemIds { get; init; }
 
     /// <summary>Indicates which upgrade slots are in use. (0-based)</summary>
-    public required IReadOnlyCollection<int>? UpgradeSlotIndices { get; init; }
+    public required IReadOnlyList<int>? UpgradeSlotIndices { get; init; }
 
-    public required IReadOnlyCollection<int>? InfusionItemIds { get; init; }
+    public required IReadOnlyList<int>? InfusionItemIds { get; init; }
 
     // Always length 4
-    public required IReadOnlyCollection<int?>? DyeIds { get; init; }
+    public required IReadOnlyList<int?>? DyeIds { get; init; }
 
     public required ItemBinding Binding { get; init; }
 
