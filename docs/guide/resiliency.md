@@ -20,16 +20,16 @@ Errors may also occur when deserializing the JSON (unmarshaling) to objects, whi
 
 ## Use Polly
 
-To counter network problems, make your HttpClient more resilient with automatic retries, timeout and delay policies using Polly.
+To counter network problems, use Polly to make your HttpClient more resilient by adding automatic retries, timeout and delay strategies.
 
-I recommend at least adding some timeouts and automatic retries.
+I recommend adding at least some timeouts and automatic retries.
 
-This example has the following policies:
+This example has the following strategies:
 
-1. A Retry policy that performs delayed retries when the rate limit is exceeded or when there is a Service Unavailable error.
-2. A Hedging policy that performs an immediate retry when there is an internal server error or a gateway timeout.
+1. A Retry strategy that performs delayed retries when the rate limit is exceeded or when there is a Service Unavailable error.
+2. A Hedging strategy that performs an immediate retry when the API is slow to respond, when there is an internal server error or when there is a gateway timeout.
 
-The example uses `Microsoft.Extensions.Http.Resilience` but it's not a requirement to use Polly. You could instead create a custom `DelegatingHandler` with `ResiliencePipelineBuilder<HttpResponseMessage>`.
+The example uses `Microsoft.Extensions.Http.Resilience` but it's not a requirement to use Polly. You could instead create a custom `DelegatingHandler` with `ResiliencePipelineBuilder<HttpResponseMessage>`. A bit more on that on the next page.
 
 Tweak the `Gw2Resiliency` options as needed.
 
