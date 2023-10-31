@@ -46,14 +46,11 @@
           "System.IO.Hashing": "8.0.0-rc.2.23479.6"
         }
       },
-      "Polly": {
+      "Polly.Core": {
         "type": "Direct",
-        "requested": "[8.0.0, )",
-        "resolved": "8.0.0",
-        "contentHash": "vwIDGI+vUCrufIFi2IpN0EnMyKFRyKHCiJ47yQUvBtAkE76f8xgFjrI7cLmLWv4NwSXZH6DxUG088QmEuHwIFw==",
-        "dependencies": {
-          "Polly.Core": "8.0.0"
-        }
+        "requested": "[8.1.0, )",
+        "resolved": "8.1.0",
+        "contentHash": "M9Mlim+I9QNP/Hu6SuWMTUFnjQPvYViGk1IAJyvdl85zNedmos8Yzx74/xPa+TEi3uof3H1xQLwAzWebhEvEYw=="
       },
       "Spectre.Console": {
         "type": "Direct",
@@ -433,6 +430,14 @@
           "System.Diagnostics.DiagnosticSource": "8.0.0-rc.2.23479.6"
         }
       },
+      "Polly": {
+        "type": "Transitive",
+        "resolved": "8.0.0-beta.1",
+        "contentHash": "PH/MeMcgMd3p3PFrzXwvZE1SvURxLMgnttJ2kvp3S94e1ep9SzT2vbVkQgF7XhBdW6KZGCHWQCEuELRlIj5E3g==",
+        "dependencies": {
+          "Polly.Core": "8.0.0-beta.1"
+        }
+      },
       "Polly.Contrib.Simmy": {
         "type": "Transitive",
         "resolved": "0.3.0",
@@ -440,11 +445,6 @@
         "dependencies": {
           "Polly": "7.1.0"
         }
-      },
-      "Polly.Core": {
-        "type": "Transitive",
-        "resolved": "8.0.0",
-        "contentHash": "g+8HnRjFTs8Ujz4Si4slrVrEK9M92DjvF75WvNpnF/lbT8M3/xW+tuD2udTiv2KuOsFOsRfOcZ12PddizrtXVA=="
       },
       "Polly.Extensions": {
         "type": "Transitive",
