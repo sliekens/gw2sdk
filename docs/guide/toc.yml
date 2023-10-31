@@ -17,13 +17,15 @@
   - name: Game Link
     href: game-link.md
 - name: Error handling
-  href: http-client-lifetime.md
+  href: usage-limits.md
   items:
   - name: API Usage limits
     href: usage-limits.md
-  - name: HttpClient lifetime
-    href: http-client-lifetime.md
   - name: Resiliency with Polly
     href: resiliency.md
+  - name: HttpClient lifetime
+    href: http-client-lifetime.md
+  - name: MissingMemberBehavior
+    href: missing-member-behavior.md
 - name: Feedback
   href: feedback.md

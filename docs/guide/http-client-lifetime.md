@@ -14,7 +14,10 @@ To counter these issues, Microsoft recommends doing one of two things:
 
 In this example, a _long-lived_ client is created with a `PooledConnectionLifetime` of 2 minutes. The client is created once and reused for the lifetime of the application.
 
-This might be the easiest way to safely use `HttpClient`.
+> [!WARNING]
+> This solution is unavailable for .NET Framework, the `SocketsHttpHandler` only exists for .NET Core and .NET 5+.
+
+This is a simpler way to safely use `HttpClient` compared to using `Microsoft.Extensions.Http`.
 
 ``` csharp
 var handler = new SocketsHttpHandler
@@ -27,10 +30,47 @@ var sharedClient = new HttpClient(handler);
 > [!NOTE]
 > The shared `HttpClient` is never disposed in this case, which is on purpose. It's intended to stay alive for the lifetime of the application.
 
-> [!WARNING]
-> This solution is unavailable for .NET Framework, the `SocketsHttpHandler` only exists for .NET Core and .NET 5+.
+To use Polly with this simplified usage pattern, you would need to create a custom `DelegatingHandler` that contains a `ResiliencePipeline` and then use that in the `HttpClient` constructor.
+
+``` csharp
+
+var handler = new SocketsHttpHandler
+{
+    PooledConnectionLifetime = TimeSpan.FromMinutes(2)
+};
+
+var resilienceHandler = new ResilienceHandler(handler);
+var sharedClient = new HttpClient(resilienceHandler);
+
+public class ResilienceHandler : DelegatingHandler
+{
+    private readonly ResiliencePipeline<HttpResponseMessage> resiliencePipeline =
+        new ResiliencePipelineBuilder<HttpResponseMessage>()
+            .AddRetry(Gw2Resiliency.RetryStrategy)
+            .AddHedging(Gw2Resiliency.HedgingStrategy)
+            .Build();
+
+    public ResilienceHandler(HttpMessageHandler innerHandler)
+        : base(innerHandler)
+    {
+    }
+
+    protected override async Task<HttpResponseMessage> SendAsync(
+        HttpRequestMessage request,
+        CancellationToken cancellationToken
+    )
+    {
+        return await resiliencePipeline.ExecuteAsync(
+            async cancellationToken => await base.SendAsync(request, cancellationToken),
+            cancellationToken
+        );
+    }
+}
+```
 
 ## Example: using Microsoft.Extensions.Http to manage the connection lifetime
+
+You already saw an example of this on the previous page about resiliency with Polly, but here's another example that focuses on the lifetime management.
 
 In this example, a _short-lived_ client is obtained using `Microsoft.Extensions.Http`. The HTTP client factory manages the lifetime of the underlying connections for us. Disposing the `HttpClient` will not close the underlying connections, but it will make the connection available for reuse.
 
