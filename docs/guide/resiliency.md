@@ -10,9 +10,9 @@ In addition to the rate limit errors already discussed, expect other errors to o
 
 - DNS errors
 - Connection timeouts or interruptions
-- API offline for maintenance
 - API offline to prevent spoilers for new content
-- API offline due to other reasons
+- API offline for planned maintenance
+- API offline due to unplanned difficulties
 - API returning internal server errors
 - API returning unexpected data like HTML or XML instead of JSON
 
