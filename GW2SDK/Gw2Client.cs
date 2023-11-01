@@ -1,8 +1,6 @@
 ﻿using GuildWars2.Accounts;
 using GuildWars2.Achievements;
-using GuildWars2.Armory;
 using GuildWars2.Banking;
-using GuildWars2.BuildStorage;
 using GuildWars2.Colors;
 using GuildWars2.Commerce;
 using GuildWars2.Crafting;
@@ -10,6 +8,7 @@ using GuildWars2.Currencies;
 using GuildWars2.Dungeons;
 using GuildWars2.Emblems;
 using GuildWars2.Emotes;
+using GuildWars2.Equipment;
 using GuildWars2.Exploration;
 using GuildWars2.Files;
 using GuildWars2.Finishers;
@@ -63,11 +62,7 @@ public sealed class Gw2Client
 
     public AchievementsQuery Achievements => new(httpClient);
 
-    public ArmoryQuery Armory => new(httpClient);
-
     public BankQuery Bank => new(httpClient);
-
-    public BuildStorageQuery BuildStorage => new(httpClient);
 
     public CommerceQuery Commerce => new(httpClient);
 
@@ -80,6 +75,8 @@ public sealed class Gw2Client
     public EmblemsQuery Emblems => new(httpClient);
 
     public EmotesQuery Emotes => new(httpClient);
+
+    public EquipmentQuery Equipment => new(httpClient);
 
     public FilesQuery Files => new(httpClient);
 

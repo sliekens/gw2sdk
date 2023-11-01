@@ -1,10 +1,10 @@
 ﻿using System.Text.Json;
-using GuildWars2.Armory;
-using GuildWars2.BuildStorage;
 using GuildWars2.Crafting;
+using GuildWars2.Equipment;
 using GuildWars2.Inventories;
 using GuildWars2.Json;
 using GuildWars2.Professions;
+using GuildWars2.Skills;
 
 namespace GuildWars2.Accounts;
 

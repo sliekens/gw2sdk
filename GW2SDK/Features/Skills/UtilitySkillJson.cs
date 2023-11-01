@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using GuildWars2.Json;
+using GuildWars2.Skills.Facts;
 
 namespace GuildWars2.Skills;
 
