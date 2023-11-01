@@ -94,7 +94,7 @@ internal static class EquipmentItemJson
             Location = location.Map(
                 value => value.GetEnum<EquipmentLocation>(missingMemberBehavior)
             ),
-            Tabs = tabs.Map(values => values.GetList(value => value.GetInt32())),
+            TemplateNumbers = tabs.Map(values => values.GetList(value => value.GetInt32())),
             DyeIds = dyes.Map(values => values.GetList(value => value.GetNullableInt32()))
         };
     }

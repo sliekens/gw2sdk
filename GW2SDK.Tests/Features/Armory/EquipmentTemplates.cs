@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Tests.Features.Armory;
 
-public class UnlockedEquipmentTabs
+public class EquipmentTemplates
 {
     [Fact]
     public async Task Can_be_listed()
@@ -11,11 +11,14 @@ public class UnlockedEquipmentTabs
         var character = Composer.Resolve<TestCharacter>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Armory.GetUnlockedEquipmentTabs(character.Name, accessToken.Key);
+        var actual = await sut.Armory.GetEquipmentTemplates(character.Name, accessToken.Key);
 
         Assert.NotEmpty(actual.Value);
-        Assert.NotNull(actual.ResultContext);
-        Assert.Equal(actual.Value.Count, actual.ResultContext.ResultCount);
-        Assert.Equal(actual.Value.Count, actual.ResultContext.ResultTotal);
+        Assert.All(actual.Value, entry =>
+        {
+            Assert.NotNull(entry);
+            Assert.NotEmpty(entry.Items);
+            Assert.NotNull(entry.PvpEquipment);
+        });
     }
 }

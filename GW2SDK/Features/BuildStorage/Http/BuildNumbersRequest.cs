@@ -3,14 +3,21 @@ using GuildWars2.Json;
 
 namespace GuildWars2.BuildStorage.Http;
 
-internal sealed class BuildStorageIndexRequest : IHttpRequest<Replica<HashSet<int>>>
+internal sealed class BuildNumbersRequest : IHttpRequest<Replica<HashSet<int>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/account/buildstorage")
+        new(Get, "v2/characters/:id/buildtabs")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
         };
+
+    public BuildNumbersRequest(string characterName)
+    {
+        CharacterName = characterName;
+    }
+
+    public string CharacterName { get; }
 
     public required string? AccessToken { get; init; }
 
@@ -20,7 +27,11 @@ internal sealed class BuildStorageIndexRequest : IHttpRequest<Replica<HashSet<in
     )
     {
         using var response = await httpClient.SendAsync(
-                Template with { BearerToken = AccessToken },
+                Template with
+                {
+                    Path = Template.Path.Replace(":id", CharacterName),
+                    BearerToken = AccessToken
+                },
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )

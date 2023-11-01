@@ -37,10 +37,11 @@ public sealed record EquipmentItem
     /// <summary>Whether this item is currently equipped or stored in the (legendary) armory.</summary>
     public required EquipmentLocation Location { get; init; }
 
-    /// <summary>The equipment tab numbers where this item is (re)used.</summary>
-    public required IReadOnlyList<int>? Tabs { get; init; }
+    /// <summary>The equipment template numbers in which this item is (re)used.</summary>
+    public required IReadOnlyList<int>? TemplateNumbers { get; init; }
 
     // Always length 4
+    // TODO: check why ID can be null
     /// <summary>The IDs of colors applied to the current item.</summary>
     public required IReadOnlyList<int?>? DyeIds { get; init; }
 }

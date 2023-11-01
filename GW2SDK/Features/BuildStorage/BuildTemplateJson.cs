@@ -3,9 +3,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.BuildStorage;
 
-internal static class BuildTabJson
+internal static class BuildTemplateJson
 {
-    public static BuildTab GetBuildTab(
+    public static BuildTemplate GetBuildTemplate(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -34,9 +34,9 @@ internal static class BuildTabJson
             }
         }
 
-        return new BuildTab
+        return new BuildTemplate
         {
-            Tab = tab.Map(value => value.GetInt32()),
+            TabNumber = tab.Map(value => value.GetInt32()),
             IsActive = isActive.Map(value => value.GetBoolean()),
             Build = build.Map(value => value.GetBuild(missingMemberBehavior))
         };

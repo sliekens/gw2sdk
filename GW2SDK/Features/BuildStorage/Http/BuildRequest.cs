@@ -1,27 +1,28 @@
-﻿using GuildWars2.Http;
-using GuildWars2.Json;
+﻿using System.Globalization;
+using GuildWars2.Http;
 
 namespace GuildWars2.BuildStorage.Http;
 
-internal sealed class BuildTabsIndexRequest : IHttpRequest<Replica<HashSet<int>>>
+internal sealed class BuildRequest : IHttpRequest<Replica<BuildTemplate>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/characters/:id/buildtabs")
-        {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
-        };
+        new(Get, "v2/characters/:id/buildtabs/:tab") { AcceptEncoding = "gzip" };
 
-    public BuildTabsIndexRequest(string characterName)
+    public BuildRequest(string characterName, int tabNumber)
     {
         CharacterName = characterName;
+        TabNumber = tabNumber;
     }
 
     public string CharacterName { get; }
 
+    public int TabNumber { get; }
+
     public required string? AccessToken { get; init; }
 
-    public async Task<Replica<HashSet<int>>> SendAsync(
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
+
+    public async Task<Replica<BuildTemplate>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -29,7 +30,9 @@ internal sealed class BuildTabsIndexRequest : IHttpRequest<Replica<HashSet<int>>
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Path = Template.Path.Replace(":id", CharacterName),
+                    Path = Template.Path.Replace(":id", CharacterName)
+                        .Replace(":tab", TabNumber.ToString(CultureInfo.InvariantCulture)),
+                    Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } },
                     BearerToken = AccessToken
                 },
                 HttpCompletionOption.ResponseHeadersRead,
@@ -40,9 +43,9 @@ internal sealed class BuildTabsIndexRequest : IHttpRequest<Replica<HashSet<int>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        return new Replica<HashSet<int>>
+        return new Replica<BuildTemplate>
         {
-            Value = json.RootElement.GetSet(entry => entry.GetInt32()),
+            Value = json.RootElement.GetBuildTemplate(MissingMemberBehavior),
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

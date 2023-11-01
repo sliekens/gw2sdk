@@ -1,42 +1,38 @@
-﻿using GuildWars2.Http;
-using GuildWars2.Json;
+﻿using System.Globalization;
+using GuildWars2.Http;
 
-namespace GuildWars2.BuildStorage.Http;
+namespace GuildWars2.Armory.Http;
 
-internal sealed class BuildsByPageRequest : IHttpRequest<Replica<HashSet<Build>>>
+internal sealed class EquipmentTemplateRequest : IHttpRequest<Replica<EquipmentTemplate>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/account/buildstorage") { AcceptEncoding = "gzip" };
+        new(Get, "v2/characters/:id/equipmenttabs/:tab") { AcceptEncoding = "gzip" };
 
-    public BuildsByPageRequest(int pageIndex)
+    public EquipmentTemplateRequest(string characterName, int tab)
     {
-        PageIndex = pageIndex;
+        CharacterName = characterName;
+        Tab = tab;
     }
 
-    public int PageIndex { get; }
+    public string CharacterName { get; }
 
-    public int? PageSize { get; init; }
+    public int Tab { get; }
 
     public required string? AccessToken { get; init; }
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<Build>>> SendAsync(
+    public async Task<Replica<EquipmentTemplate>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new() { { "page", PageIndex } };
-        if (PageSize.HasValue)
-        {
-            search.Add("page_size", PageSize.Value);
-        }
-
-        search.Add("v", SchemaVersion.Recommended);
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = search,
+                    Path = Template.Path.Replace(":id", CharacterName)
+                        .Replace(":tab", Tab.ToString(CultureInfo.InvariantCulture)),
+                    Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } },
                     BearerToken = AccessToken
                 },
                 HttpCompletionOption.ResponseHeadersRead,
@@ -47,9 +43,9 @@ internal sealed class BuildsByPageRequest : IHttpRequest<Replica<HashSet<Build>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        return new Replica<HashSet<Build>>
+        return new Replica<EquipmentTemplate>
         {
-            Value = json.RootElement.GetSet(entry => entry.GetBuild(MissingMemberBehavior)),
+            Value = json.RootElement.GetEquipmentTemplate(MissingMemberBehavior),
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

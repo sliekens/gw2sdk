@@ -1,13 +1,13 @@
 ﻿using GuildWars2.Http;
 
-namespace GuildWars2.Armory.Http;
+namespace GuildWars2.BuildStorage.Http;
 
-internal sealed class ActiveEquipmentTabRequest : IHttpRequest<Replica<EquipmentTab>>
+internal sealed class ActiveBuildRequest : IHttpRequest<Replica<BuildTemplate>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/characters/:id/equipmenttabs/active") { AcceptEncoding = "gzip" };
+        new(Get, "v2/characters/:id/buildtabs/active") { AcceptEncoding = "gzip" };
 
-    public ActiveEquipmentTabRequest(string characterName)
+    public ActiveBuildRequest(string characterName)
     {
         CharacterName = characterName;
     }
@@ -18,7 +18,7 @@ internal sealed class ActiveEquipmentTabRequest : IHttpRequest<Replica<Equipment
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<EquipmentTab>> SendAsync(
+    public async Task<Replica<BuildTemplate>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -38,9 +38,9 @@ internal sealed class ActiveEquipmentTabRequest : IHttpRequest<Replica<Equipment
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        return new Replica<EquipmentTab>
+        return new Replica<BuildTemplate>
         {
-            Value = json.RootElement.GetEquipmentTab(MissingMemberBehavior),
+            Value = json.RootElement.GetBuildTemplate(MissingMemberBehavior),
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

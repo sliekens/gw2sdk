@@ -1,8 +1,8 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Armory;
+namespace GuildWars2.Tests.Features.BuildStorage;
 
-public class EquipmentTabs
+public class Builds
 {
     [Fact]
     public async Task Can_be_listed()
@@ -11,14 +11,13 @@ public class EquipmentTabs
         var character = Composer.Resolve<TestCharacter>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Armory.GetEquipmentTabs(character.Name, accessToken.Key);
+        var actual = await sut.BuildStorage.GetBuilds(character.Name, accessToken.Key);
 
         Assert.NotEmpty(actual.Value);
         Assert.All(actual.Value, entry =>
         {
             Assert.NotNull(entry);
-            Assert.NotEmpty(entry.Items);
-            Assert.NotNull(entry.PvpEquipment);
+            Assert.NotNull(entry.Build);
         });
     }
 }

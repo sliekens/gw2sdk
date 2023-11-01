@@ -1,32 +1,35 @@
 ﻿using GuildWars2.Http;
-using GuildWars2.Json;
 
-namespace GuildWars2.BuildStorage.Http;
+namespace GuildWars2.Armory.Http;
 
-internal sealed class BuildStorageRequest : IHttpRequest<Replica<HashSet<Build>>>
+internal sealed class ActiveEquipmentTemplateRequest : IHttpRequest<Replica<EquipmentTemplate>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/account/buildstorage")
-        {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder
-            {
-                { "ids", "all" },
-                { "v", SchemaVersion.Recommended }
-            }
-        };
+        new(Get, "v2/characters/:id/equipmenttabs/active") { AcceptEncoding = "gzip" };
+
+    public ActiveEquipmentTemplateRequest(string characterName)
+    {
+        CharacterName = characterName;
+    }
+
+    public string CharacterName { get; }
 
     public required string? AccessToken { get; init; }
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<Build>>> SendAsync(
+    public async Task<Replica<EquipmentTemplate>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
     {
         using var response = await httpClient.SendAsync(
-                Template with { BearerToken = AccessToken },
+                Template with
+                {
+                    Path = Template.Path.Replace(":id", CharacterName),
+                    Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } },
+                    BearerToken = AccessToken
+                },
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
@@ -35,9 +38,9 @@ internal sealed class BuildStorageRequest : IHttpRequest<Replica<HashSet<Build>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        return new Replica<HashSet<Build>>
+        return new Replica<EquipmentTemplate>
         {
-            Value = json.RootElement.GetSet(entry => entry.GetBuild(MissingMemberBehavior)),
+            Value = json.RootElement.GetEquipmentTemplate(MissingMemberBehavior),
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Tests.Features.BuildStorage;
 
-public class BuildStorage
+public class StoredBuilds
 {
     [Fact]
     public async Task Can_be_listed()
@@ -10,7 +10,7 @@ public class BuildStorage
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.BuildStorage.GetBuildStorage(accessToken.Key);
+        var actual = await sut.BuildStorage.GetStoredBuilds(accessToken.Key);
 
         Assert.NotEmpty(actual.Value);
         Assert.All(

@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Tests.Features.Armory;
 
-public class ActiveEquipmentTab
+public class ActiveEquipmentTemplate
 {
     [Fact]
     public async Task Can_be_found()
@@ -11,7 +11,7 @@ public class ActiveEquipmentTab
         var character = Composer.Resolve<TestCharacter>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Armory.GetActiveEquipmentTab(character.Name, accessToken.Key);
+        var actual = await sut.Armory.GetActiveEquipmentTemplate(character.Name, accessToken.Key);
 
         Assert.NotNull(actual.Value);
         Assert.NotEmpty(actual.Value.Items);

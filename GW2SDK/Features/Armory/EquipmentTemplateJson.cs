@@ -3,9 +3,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Armory;
 
-internal static class EquipmentTabJson
+internal static class EquipmentTemplateJson
 {
-    public static EquipmentTab GetEquipmentTab(
+    public static EquipmentTemplate GetEquipmentTemplate(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -46,9 +46,9 @@ internal static class EquipmentTabJson
             }
         }
 
-        return new EquipmentTab
+        return new EquipmentTemplate
         {
-            Tab = tab.Map(value => value.GetInt32()),
+            TabNumber = tab.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),
             Items = equipment.Map(
                 values => values.GetList(value => value.GetEquipmentItem(missingMemberBehavior))

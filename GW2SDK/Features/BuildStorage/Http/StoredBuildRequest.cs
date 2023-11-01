@@ -1,25 +1,24 @@
 ﻿using GuildWars2.Http;
-using GuildWars2.Json;
 
 namespace GuildWars2.BuildStorage.Http;
 
-internal sealed class BuildsByIdsRequest : IHttpRequest<Replica<HashSet<Build>>>
+internal sealed class StoredBuildRequest : IHttpRequest<Replica<Build>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/account/buildstorage") { AcceptEncoding = "gzip" };
 
-    public BuildsByIdsRequest(IReadOnlyCollection<int> buildStorageIds)
+    public StoredBuildRequest(int slotNumber)
     {
-        BuildStorageIds = buildStorageIds;
+        SlotNumber = slotNumber;
     }
 
-    public IReadOnlyCollection<int> BuildStorageIds { get; }
+    public int SlotNumber { get; }
 
     public required string? AccessToken { get; init; }
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<Build>>> SendAsync(
+    public async Task<Replica<Build>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -29,7 +28,7 @@ internal sealed class BuildsByIdsRequest : IHttpRequest<Replica<HashSet<Build>>>
                 {
                     Arguments = new QueryBuilder
                     {
-                        { "ids", BuildStorageIds },
+                        { "id", SlotNumber },
                         { "v", SchemaVersion.Recommended }
                     },
                     BearerToken = AccessToken
@@ -42,9 +41,9 @@ internal sealed class BuildsByIdsRequest : IHttpRequest<Replica<HashSet<Build>>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        return new Replica<HashSet<Build>>
+        return new Replica<Build>
         {
-            Value = json.RootElement.GetSet(entry => entry.GetBuild(MissingMemberBehavior)),
+            Value = json.RootElement.GetBuild(MissingMemberBehavior),
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

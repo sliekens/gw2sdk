@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Tests.Features.BuildStorage;
 
-public class BuildTabsIndex
+public class BuildNumbers
 {
     [Fact]
     public async Task Can_be_listed()
@@ -11,7 +11,7 @@ public class BuildTabsIndex
         var character = Composer.Resolve<TestCharacter>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.BuildStorage.GetBuildTabsIndex(character.Name, accessToken.Key);
+        var actual = await sut.BuildStorage.GetBuildNumbers(character.Name, accessToken.Key);
 
         Assert.NotEmpty(actual.Value);
         Assert.NotNull(actual.ResultContext);

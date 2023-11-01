@@ -31,9 +31,10 @@ internal static class PetSkillBarJson
 
         return new PetSkillBar
         {
-            Terrestrial =
+            SkillIds =
                 terrestrial.Map(values => values.GetList(value => value.GetNullableInt32())),
-            Aquatic = aquatic.Map(values => values.GetList(value => value.GetNullableInt32()))
+            AquaticSkillIds =
+                aquatic.Map(values => values.GetList(value => value.GetNullableInt32()))
         };
     }
 }

@@ -1,10 +1,13 @@
-namespace GuildWars2.BuildStorage;
+﻿namespace GuildWars2.BuildStorage;
 
+/// <summary>Information about the selected skills of a pet.</summary>
 [PublicAPI]
 [DataTransferObject]
 public sealed record PetSkillBar
 {
-    public required IReadOnlyCollection<int?> Terrestrial { get; init; }
+    /// <summary>The IDs of the pet skills for ground combat. Empty skill slots are represented as <c>null</c>/</summary>
+    public required IReadOnlyList<int?> SkillIds { get; init; }
 
-    public required IReadOnlyCollection<int?> Aquatic { get; init; }
+    /// <summary>The IDs of the pet skills for underwater combat. Empty skill slots are represented as <c>null</c>/</summary>
+    public required IReadOnlyList<int?> AquaticSkillIds { get; init; }
 }

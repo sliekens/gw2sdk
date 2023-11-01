@@ -1,13 +1,17 @@
 ﻿namespace GuildWars2.BuildStorage;
 
+/// <summary>Information about selected skills in a build.</summary>
 [PublicAPI]
 [DataTransferObject]
 public sealed record SkillBar
 {
-    public required int? Heal { get; init; }
+    /// <summary>The ID of the heal skill or <c>null</c> if no heal skill was selected.</summary>
+    public required int? HealSkillId { get; init; }
 
-    // Always length 3
-    public required IReadOnlyCollection<int?> Utilities { get; init; }
+    /// <summary>The IDs of the selected utility skills. This list is always length 3 because there are 3 utility skill slots
+    /// per build. Empty skill slots are represented as <c>null</c>.</summary>
+    public required IReadOnlyList<int?> UtilitySkillIds { get; init; }
 
-    public required int? Elite { get; init; }
+    /// <summary>The ID of the elite skill or <c>null</c> if no elite skill was selected.</summary>
+    public required int? EliteSkillId { get; init; }
 }

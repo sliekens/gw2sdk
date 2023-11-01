@@ -1,8 +1,8 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.BuildStorage;
 
-public class BuildStorageById
+public class StoredBuild
 {
     [Fact]
     public async Task Can_be_found()
@@ -10,9 +10,9 @@ public class BuildStorageById
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        const int id = 3;
+        const int slotNumber = 3;
 
-        var actual = await sut.BuildStorage.GetBuildStorageSpaceById(accessToken.Key, id);
+        var actual = await sut.BuildStorage.GetStoredBuild(slotNumber, accessToken.Key);
 
         Assert.NotNull(actual.Value);
         Assert.NotEmpty(actual.Value.Name);

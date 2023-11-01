@@ -66,13 +66,14 @@ public sealed class ArmoryQuery
 
     #region v2/characters/:id/equipmenttabs
 
-    /// <summary>Retrieves the tab numbers of unlocked equipment tabs of a character on the account. This endpoint is only
+    /// <summary>Retrieves the unlocked equipment template numbers of a character on the account. Each character has 2
+    /// templates unlocked initially, which can be expanded up to 8 with Equipment Template Expansions. This endpoint is only
     /// accessible with a valid access token.</summary>
     /// <param name="characterName">A character name that belongs to the account associated with the access token.</param>
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<IReadOnlyList<int>>> GetUnlockedEquipmentTabs(
+    public Task<Replica<IReadOnlyList<int>>> GetEquipmentTemplateNumbers(
         string characterName,
         string? accessToken,
         CancellationToken cancellationToken = default
@@ -82,23 +83,23 @@ public sealed class ArmoryQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    /// <summary>Retrieves an equipment tab of a character on the account. This endpoint is only accessible with a valid access
-    /// token.</summary>
+    /// <summary>Retrieves an equipment template of a character on the account. This endpoint is only accessible with a valid
+    /// access token.</summary>
     /// <param name="characterName">A character name that belongs to the account associated with the access token.</param>
-    /// <param name="tab">The number of the tab to fetch.</param>
+    /// <param name="templateNumber">The number of the template to fetch.</param>
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<EquipmentTab>> GetEquipmentTab(
+    public Task<Replica<EquipmentTemplate>> GetEquipmentTemplate(
         string characterName,
-        int tab,
+        int templateNumber,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        EquipmentTabRequest request = new(characterName, tab)
+        EquipmentTemplateRequest request = new(characterName, templateNumber)
         {
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
@@ -106,21 +107,21 @@ public sealed class ArmoryQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    /// <summary>Retrieves all unlocked equipment tabs of a character on the account. This endpoint is only accessible with a
-    /// valid access token.</summary>
+    /// <summary>Retrieves all unlocked equipment templates of a character on the account. This endpoint is only accessible
+    /// with a valid access token.</summary>
     /// <param name="characterName">A character name that belongs to the account associated with the access token.</param>
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<EquipmentTab>>> GetEquipmentTabs(
+    public Task<Replica<HashSet<EquipmentTemplate>>> GetEquipmentTemplates(
         string characterName,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        EquipmentTabsRequest request = new(characterName)
+        EquipmentTemplatesRequest request = new(characterName)
         {
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
@@ -136,14 +137,14 @@ public sealed class ArmoryQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<EquipmentTab>> GetActiveEquipmentTab(
+    public Task<Replica<EquipmentTemplate>> GetActiveEquipmentTemplate(
         string characterName,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        ActiveEquipmentTabRequest request = new(characterName)
+        ActiveEquipmentTemplateRequest request = new(characterName)
         {
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior

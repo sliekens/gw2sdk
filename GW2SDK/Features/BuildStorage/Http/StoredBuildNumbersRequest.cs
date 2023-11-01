@@ -1,35 +1,26 @@
 ﻿using GuildWars2.Http;
+using GuildWars2.Json;
 
 namespace GuildWars2.BuildStorage.Http;
 
-internal sealed class ActiveBuildTabRequest : IHttpRequest<Replica<BuildTab>>
+internal sealed class StoredBuildNumbersRequest : IHttpRequest<Replica<IReadOnlyList<int>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/characters/:id/buildtabs/active") { AcceptEncoding = "gzip" };
-
-    public ActiveBuildTabRequest(string characterName)
-    {
-        CharacterName = characterName;
-    }
-
-    public string CharacterName { get; }
+        new(Get, "v2/account/buildstorage")
+        {
+            AcceptEncoding = "gzip",
+            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+        };
 
     public required string? AccessToken { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
-    public async Task<Replica<BuildTab>> SendAsync(
+    public async Task<Replica<IReadOnlyList<int>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
     {
         using var response = await httpClient.SendAsync(
-                Template with
-                {
-                    Path = Template.Path.Replace(":id", CharacterName),
-                    Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } },
-                    BearerToken = AccessToken
-                },
+                Template with { BearerToken = AccessToken },
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
@@ -38,9 +29,9 @@ internal sealed class ActiveBuildTabRequest : IHttpRequest<Replica<BuildTab>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        return new Replica<BuildTab>
+        return new Replica<IReadOnlyList<int>>
         {
-            Value = json.RootElement.GetBuildTab(MissingMemberBehavior),
+            Value = json.RootElement.GetList(entry => entry.GetInt32()),
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

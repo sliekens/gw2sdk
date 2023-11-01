@@ -1,38 +1,32 @@
 ﻿using GuildWars2.Http;
+using GuildWars2.Json;
 
 namespace GuildWars2.BuildStorage.Http;
 
-internal sealed class BuildByIdRequest : IHttpRequest<Replica<Build>>
+internal sealed class StoredBuildsRequest : IHttpRequest<Replica<IReadOnlyList<Build>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/account/buildstorage") { AcceptEncoding = "gzip" };
-
-    public BuildByIdRequest(int buildStorageId)
-    {
-        BuildStorageId = buildStorageId;
-    }
-
-    public int BuildStorageId { get; }
+        new(Get, "v2/account/buildstorage")
+        {
+            AcceptEncoding = "gzip",
+            Arguments = new QueryBuilder
+            {
+                { "ids", "all" },
+                { "v", SchemaVersion.Recommended }
+            }
+        };
 
     public required string? AccessToken { get; init; }
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<Build>> SendAsync(
+    public async Task<Replica<IReadOnlyList<Build>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
     {
         using var response = await httpClient.SendAsync(
-                Template with
-                {
-                    Arguments = new QueryBuilder
-                    {
-                        { "id", BuildStorageId },
-                        { "v", SchemaVersion.Recommended }
-                    },
-                    BearerToken = AccessToken
-                },
+                Template with { BearerToken = AccessToken },
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
@@ -41,9 +35,9 @@ internal sealed class BuildByIdRequest : IHttpRequest<Replica<Build>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        return new Replica<Build>
+        return new Replica<IReadOnlyList<Build>>
         {
-            Value = json.RootElement.GetBuild(MissingMemberBehavior),
+            Value = json.RootElement.GetList(entry => entry.GetBuild(MissingMemberBehavior)),
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

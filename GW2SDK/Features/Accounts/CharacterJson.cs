@@ -178,21 +178,21 @@ internal static class CharacterJson
                 wvwAbilities.Map(
                     values => values.GetList(value => value.GetWvwAbility(missingMemberBehavior))
                 ),
-            BuildTabsUnlocked = buildTabsUnlocked.Map(value => value.GetInt32()),
-            ActiveBuildTab = activeBuildTab.Map(value => value.GetInt32()),
-            BuildTabs =
+            BuildTemplatesCount = buildTabsUnlocked.Map(value => value.GetInt32()),
+            ActiveBuildTemplateNumber = activeBuildTab.Map(value => value.GetInt32()),
+            BuildTemplates =
                 buildTabs.Map(
-                    values => values.GetList(value => value.GetBuildTab(missingMemberBehavior))
+                    values => values.GetList(value => value.GetBuildTemplate(missingMemberBehavior))
                 ),
-            EquipmentTabsUnlocked = equipmentTabsUnlocked.Map(value => value.GetInt32()),
-            ActiveEquipmentTab = activeEquipmentTab.Map(value => value.GetInt32()),
+            EquipmentTemplatesCount = equipmentTabsUnlocked.Map(value => value.GetInt32()),
+            ActiveEquipmentTemplateNumber = activeEquipmentTab.Map(value => value.GetInt32()),
             EquippedItems =
                 equippedItems.Map(
                     values => values.GetList(value => value.GetEquipmentItem(missingMemberBehavior))
                 ),
-            EquipmentTabs =
+            EquipmentTemplates =
                 equipmentTabs.Map(
-                    values => values.GetList(value => value.GetEquipmentTab(missingMemberBehavior))
+                    values => values.GetList(value => value.GetEquipmentTemplate(missingMemberBehavior))
                 ),
             Recipes = recipes.Map(values => values.GetList(value => value.GetInt32())),
             Training =

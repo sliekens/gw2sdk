@@ -1,26 +1,25 @@
 ﻿using GuildWars2.Http;
 using GuildWars2.Json;
 
-namespace GuildWars2.Armory.Http;
+namespace GuildWars2.BuildStorage.Http;
 
-internal sealed class EquipmentTabsRequest : IHttpRequest<Replica<HashSet<EquipmentTab>>>
+internal sealed class StoredBuildsByNumbersRequest : IHttpRequest<Replica<IReadOnlyList<Build>>>
 {
-    // There is no ids=all support, but page=0 works
     private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/characters/:id/equipmenttabs?page=0") { AcceptEncoding = "gzip" };
+        new(Get, "v2/account/buildstorage") { AcceptEncoding = "gzip" };
 
-    public EquipmentTabsRequest(string characterName)
+    public StoredBuildsByNumbersRequest(IReadOnlyCollection<int> slotNumbers)
     {
-        CharacterName = characterName;
+        SlotNumbers = slotNumbers;
     }
 
-    public string CharacterName { get; }
+    public IReadOnlyCollection<int> SlotNumbers { get; }
 
     public required string? AccessToken { get; init; }
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<EquipmentTab>>> SendAsync(
+    public async Task<Replica<IReadOnlyList<Build>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -28,8 +27,11 @@ internal sealed class EquipmentTabsRequest : IHttpRequest<Replica<HashSet<Equipm
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Path = Template.Path.Replace(":id", CharacterName),
-                    Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } },
+                    Arguments = new QueryBuilder
+                    {
+                        { "ids", SlotNumbers },
+                        { "v", SchemaVersion.Recommended }
+                    },
                     BearerToken = AccessToken
                 },
                 HttpCompletionOption.ResponseHeadersRead,
@@ -40,10 +42,9 @@ internal sealed class EquipmentTabsRequest : IHttpRequest<Replica<HashSet<Equipm
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        return new Replica<HashSet<EquipmentTab>>
+        return new Replica<IReadOnlyList<Build>>
         {
-            Value =
-                json.RootElement.GetSet(entry => entry.GetEquipmentTab(MissingMemberBehavior)),
+            Value = json.RootElement.GetList(entry => entry.GetBuild(MissingMemberBehavior)),
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

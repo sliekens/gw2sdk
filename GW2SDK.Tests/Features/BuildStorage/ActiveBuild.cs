@@ -1,8 +1,8 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.BuildStorage;
 
-public class ActiveBuildTab
+public class ActiveBuild
 {
     [Fact]
     public async Task Can_be_found()
@@ -11,7 +11,7 @@ public class ActiveBuildTab
         var character = Composer.Resolve<TestCharacter>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.BuildStorage.GetActiveBuildTab(character.Name, accessToken.Key);
+        var actual = await sut.BuildStorage.GetActiveBuild(character.Name, accessToken.Key);
 
         Assert.NotNull(actual.Value);
         Assert.NotNull(actual.Value.Build);
