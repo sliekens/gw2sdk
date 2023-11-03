@@ -1,4 +1,4 @@
-using GuildWars2.Meta;
+﻿using GuildWars2.Meta;
 
 namespace GuildWars2.Tests.Features.Meta;
 
@@ -57,6 +57,7 @@ internal static class Invariants
                 "/v2/account/home/cats",
                 "/v2/account/home/nodes",
                 "/v2/account/inventory",
+                "/v2/account/jadebots",
                 "/v2/account/legendaryarmory",
                 "/v2/account/luck",
                 "/v2/account/mail",
@@ -75,6 +76,7 @@ internal static class Invariants
                 "/v2/account/pvp/heroes",
                 "/v2/account/raids",
                 "/v2/account/recipes",
+                "/v2/account/skiffs",
                 "/v2/account/skins",
                 "/v2/account/titles",
                 "/v2/account/wallet",
@@ -144,6 +146,7 @@ internal static class Invariants
                 "/v2/home/nodes",
                 "/v2/items",
                 "/v2/itemstats",
+                "/v2/jadebots",
                 "/v2/legendaryarmory",
                 "/v2/legends",
                 "/v2/mailcarriers",
@@ -178,6 +181,7 @@ internal static class Invariants
                 "/v2/raids",
                 "/v2/recipes",
                 "/v2/recipes/search",
+                "/v2/skiffs",
                 "/v2/skills",
                 "/v2/skins",
                 "/v2/specializations",
