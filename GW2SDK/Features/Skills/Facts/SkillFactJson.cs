@@ -18,7 +18,7 @@ internal static class SkillFactJson
         // BUG: Life Force Cost is missing a type property but we can treat it as Percent
         if (!json.TryGetProperty("type", out var type) && json.TryGetProperty("percent", out _))
         {
-            return json.GetPercent(
+            return json.GetPercentage(
                 missingMemberBehavior,
                 out requiresTrait,
                 out overrides
@@ -28,7 +28,7 @@ internal static class SkillFactJson
         switch (type.GetString())
         {
             case "AttributeAdjust":
-                return json.GetAttributeAdjust(
+                return json.GetAttributeAdjustment(
                     missingMemberBehavior,
                     out requiresTrait,
                     out overrides
@@ -88,7 +88,7 @@ internal static class SkillFactJson
                     out overrides
                 );
             case "Percent":
-                return json.GetPercent(
+                return json.GetPercentage(
                     missingMemberBehavior,
                     out requiresTrait,
                     out overrides

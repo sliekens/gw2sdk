@@ -5,7 +5,7 @@ namespace GuildWars2.Skills.Facts;
 
 internal static class AttributeAdjustmentJson
 {
-    public static AttributeAdjustment GetAttributeAdjust(
+    public static AttributeAdjustment GetAttributeAdjustment(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior,
         out int? requiresTrait,

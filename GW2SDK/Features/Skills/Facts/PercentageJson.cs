@@ -5,7 +5,7 @@ namespace GuildWars2.Skills.Facts;
 
 internal static class PercentageJson
 {
-    public static Percentage GetPercent(
+    public static Percentage GetPercentage(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior,
         out int? requiresTrait,
