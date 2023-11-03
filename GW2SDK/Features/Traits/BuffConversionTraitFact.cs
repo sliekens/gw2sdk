@@ -6,7 +6,7 @@ public sealed record BuffConversionTraitFact : TraitFact
 {
     public required int Percent { get; init; }
 
-    public required AttributeAdjustTarget Source { get; init; }
+    public required AttributeAdjustmentTarget Source { get; init; }
 
-    public required AttributeAdjustTarget Target { get; init; }
+    public required AttributeAdjustmentTarget Target { get; init; }
 }

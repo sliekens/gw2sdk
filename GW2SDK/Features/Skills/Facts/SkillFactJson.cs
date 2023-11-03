@@ -18,7 +18,7 @@ internal static class SkillFactJson
         // BUG: Life Force Cost is missing a type property but we can treat it as Percent
         if (!json.TryGetProperty("type", out var type) && json.TryGetProperty("percent", out _))
         {
-            return json.GetPercentSkillFact(
+            return json.GetPercent(
                 missingMemberBehavior,
                 out requiresTrait,
                 out overrides
@@ -28,109 +28,109 @@ internal static class SkillFactJson
         switch (type.GetString())
         {
             case "AttributeAdjust":
-                return json.GetAttributeAdjustSkillFact(
+                return json.GetAttributeAdjust(
                     missingMemberBehavior,
                     out requiresTrait,
                     out overrides
                 );
             case "ComboField":
-                return json.GetComboFieldSkillFact(
+                return json.GetComboField(
                     missingMemberBehavior,
                     out requiresTrait,
                     out overrides
                 );
             case "ComboFinisher":
-                return json.GetComboFinisherSkillFact(
+                return json.GetComboFinisher(
                     missingMemberBehavior,
                     out requiresTrait,
                     out overrides
                 );
             case "Buff":
-                return json.GetBuffSkillFact(
+                return json.GetBuff(
                     missingMemberBehavior,
                     out requiresTrait,
                     out overrides
                 );
             case "Damage":
-                return json.GetDamageSkillFact(
+                return json.GetDamage(
                     missingMemberBehavior,
                     out requiresTrait,
                     out overrides
                 );
             case "Distance":
-                return json.GetDistanceSkillFact(
+                return json.GetDistance(
                     missingMemberBehavior,
                     out requiresTrait,
                     out overrides
                 );
             case "Duration":
-                return json.GetDurationSkillFact(
+                return json.GetDuration(
                     missingMemberBehavior,
                     out requiresTrait,
                     out overrides
                 );
             case "HealingAdjust":
-                return json.GetHealingAdjustSkillFact(
+                return json.GetHealingAdjust(
                     missingMemberBehavior,
                     out requiresTrait,
                     out overrides
                 );
             case "NoData":
-                return json.GetNoDataSkillFact(
+                return json.GetNoData(
                     missingMemberBehavior,
                     out requiresTrait,
                     out overrides
                 );
             case "Number":
-                return json.GetNumberSkillFact(
+                return json.GetNumber(
                     missingMemberBehavior,
                     out requiresTrait,
                     out overrides
                 );
             case "Percent":
-                return json.GetPercentSkillFact(
+                return json.GetPercent(
                     missingMemberBehavior,
                     out requiresTrait,
                     out overrides
                 );
             case "PrefixedBuff":
-                return json.GetPrefixedBuffSkillFact(
+                return json.GetPrefixedBuff(
                     missingMemberBehavior,
                     out requiresTrait,
                     out overrides
                 );
             case "Radius":
-                return json.GetRadiusSkillFact(
+                return json.GetRadius(
                     missingMemberBehavior,
                     out requiresTrait,
                     out overrides
                 );
             case "Range":
-                return json.GetRangeSkillFact(
+                return json.GetRange(
                     missingMemberBehavior,
                     out requiresTrait,
                     out overrides
                 );
             case "Recharge":
-                return json.GetRechargeSkillFact(
+                return json.GetRecharge(
                     missingMemberBehavior,
                     out requiresTrait,
                     out overrides
                 );
             case "StunBreak":
-                return json.GetStunBreakSkillFact(
+                return json.GetStunBreak(
                     missingMemberBehavior,
                     out requiresTrait,
                     out overrides
                 );
             case "Time":
-                return json.GetTimeSkillFact(
+                return json.GetTime(
                     missingMemberBehavior,
                     out requiresTrait,
                     out overrides
                 );
             case "Unblockable":
-                return json.GetUnblockableSkillFact(
+                return json.GetUnblockable(
                     missingMemberBehavior,
                     out requiresTrait,
                     out overrides

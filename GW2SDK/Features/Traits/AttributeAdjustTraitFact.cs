@@ -6,5 +6,5 @@ public sealed record AttributeAdjustTraitFact : TraitFact
 {
     public required int Value { get; init; }
 
-    public required AttributeAdjustTarget Target { get; init; }
+    public required AttributeAdjustmentTarget Target { get; init; }
 }

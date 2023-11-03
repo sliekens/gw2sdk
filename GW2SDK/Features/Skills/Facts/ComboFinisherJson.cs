@@ -1,11 +1,11 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
-namespace GuildWars2.Traits;
+namespace GuildWars2.Skills.Facts;
 
-internal static class AttributeAdjustTraitFactJson
+internal static class ComboFinisherJson
 {
-    public static AttributeAdjustTraitFact GetAttributeAdjustTraitFact(
+    public static ComboFinisher GetComboFinisher(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior,
         out int? requiresTrait,
@@ -14,20 +14,26 @@ internal static class AttributeAdjustTraitFactJson
     {
         requiresTrait = null;
         overrides = null;
-        OptionalMember text = "text";
-        OptionalMember icon = "icon";
-        RequiredMember adjustment = "value";
-        RequiredMember target = "target";
+
+        RequiredMember text = "text";
+        RequiredMember icon = "icon";
+        RequiredMember percent = "percent";
+        RequiredMember finisherType = "finisher_type";
+
         foreach (var member in json.EnumerateObject())
         {
             if (member.Name == "type")
             {
-                if (!member.Value.ValueEquals("AttributeAdjust"))
+                if (!member.Value.ValueEquals("ComboFinisher"))
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
                     );
                 }
+            }
+            else if (member.Name == "chance" && IsDefaultInt32(member))
+            {
+                // Ignore zero values, looks like unsanitized data
             }
             else if (member.Name == "requires_trait")
             {
@@ -45,13 +51,13 @@ internal static class AttributeAdjustTraitFactJson
             {
                 icon = member;
             }
-            else if (member.Name == adjustment.Name)
+            else if (member.Name == percent.Name)
             {
-                adjustment = member;
+                percent = member;
             }
-            else if (member.Name == target.Name)
+            else if (member.Name == finisherType.Name)
             {
-                target = member;
+                finisherType = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -59,14 +65,20 @@ internal static class AttributeAdjustTraitFactJson
             }
         }
 
-        return new AttributeAdjustTraitFact
+        return new ComboFinisher
         {
-            Text = text.Map(value => value.GetString()) ?? "",
-            Icon = icon.Map(value => value.GetString()) ?? "",
-            Value = adjustment.Map(value => value.GetInt32()),
-            Target = target.Map(
-                value => value.GetEnum<AttributeAdjustmentTarget>(missingMemberBehavior)
-            )
+            Text = text.Map(value => value.GetStringRequired()),
+            Icon = icon.Map(value => value.GetStringRequired()),
+            Percent = percent.Map(value => value.GetInt32()),
+            FinisherName =
+                finisherType.Map(value => value.GetEnum<ComboFinisherName>(missingMemberBehavior))
         };
+
+        static bool IsDefaultInt32(JsonProperty jsonProperty)
+        {
+            return jsonProperty.Value.ValueKind == JsonValueKind.Number
+                && jsonProperty.Value.TryGetInt32(out var value)
+                && value == 0;
+        }
     }
 }

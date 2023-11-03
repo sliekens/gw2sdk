@@ -70,10 +70,10 @@ internal static class BuffConversionTraitFactJson
             Icon = icon.Map(value => value.GetString()) ?? "",
             Percent = percent.Map(value => value.GetInt32()),
             Source = source.Map(
-                value => value.GetEnum<AttributeAdjustTarget>(missingMemberBehavior)
+                value => value.GetEnum<AttributeAdjustmentTarget>(missingMemberBehavior)
             ),
             Target = target.Map(
-                value => value.GetEnum<AttributeAdjustTarget>(missingMemberBehavior)
+                value => value.GetEnum<AttributeAdjustmentTarget>(missingMemberBehavior)
             )
         };
     }

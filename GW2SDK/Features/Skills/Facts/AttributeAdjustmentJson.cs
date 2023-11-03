@@ -1,11 +1,11 @@
 ﻿using System.Text.Json;
 using GuildWars2.Json;
 
-namespace GuildWars2.Traits;
+namespace GuildWars2.Skills.Facts;
 
-internal static class AttributeAdjustTraitFactJson
+internal static class AttributeAdjustmentJson
 {
-    public static AttributeAdjustTraitFact GetAttributeAdjustTraitFact(
+    public static AttributeAdjustment GetAttributeAdjust(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior,
         out int? requiresTrait,
@@ -14,10 +14,12 @@ internal static class AttributeAdjustTraitFactJson
     {
         requiresTrait = null;
         overrides = null;
+
         OptionalMember text = "text";
-        OptionalMember icon = "icon";
-        RequiredMember adjustment = "value";
+        RequiredMember icon = "icon";
+        NullableMember adjustment = "value";
         RequiredMember target = "target";
+
         foreach (var member in json.EnumerateObject())
         {
             if (member.Name == "type")
@@ -59,10 +61,10 @@ internal static class AttributeAdjustTraitFactJson
             }
         }
 
-        return new AttributeAdjustTraitFact
+        return new AttributeAdjustment
         {
             Text = text.Map(value => value.GetString()) ?? "",
-            Icon = icon.Map(value => value.GetString()) ?? "",
+            Icon = icon.Map(value => value.GetStringRequired()),
             Value = adjustment.Map(value => value.GetInt32()),
             Target = target.Map(
                 value => value.GetEnum<AttributeAdjustmentTarget>(missingMemberBehavior)

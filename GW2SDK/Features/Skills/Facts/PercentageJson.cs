@@ -1,11 +1,11 @@
 ﻿using System.Text.Json;
 using GuildWars2.Json;
 
-namespace GuildWars2.Traits;
+namespace GuildWars2.Skills.Facts;
 
-internal static class AttributeAdjustTraitFactJson
+internal static class PercentageJson
 {
-    public static AttributeAdjustTraitFact GetAttributeAdjustTraitFact(
+    public static Percentage GetPercent(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior,
         out int? requiresTrait,
@@ -14,15 +14,16 @@ internal static class AttributeAdjustTraitFactJson
     {
         requiresTrait = null;
         overrides = null;
-        OptionalMember text = "text";
-        OptionalMember icon = "icon";
-        RequiredMember adjustment = "value";
-        RequiredMember target = "target";
+
+        RequiredMember text = "text";
+        RequiredMember icon = "icon";
+        RequiredMember percent = "percent";
+
         foreach (var member in json.EnumerateObject())
         {
             if (member.Name == "type")
             {
-                if (!member.Value.ValueEquals("AttributeAdjust"))
+                if (!member.Value.ValueEquals("Percent"))
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
@@ -45,13 +46,10 @@ internal static class AttributeAdjustTraitFactJson
             {
                 icon = member;
             }
-            else if (member.Name == adjustment.Name)
+            else if (member.Name == percent.Name || member.Name == "value")
             {
-                adjustment = member;
-            }
-            else if (member.Name == target.Name)
-            {
-                target = member;
+                // Some use the name 'percent', some use 'value'... weird
+                percent = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -59,14 +57,11 @@ internal static class AttributeAdjustTraitFactJson
             }
         }
 
-        return new AttributeAdjustTraitFact
+        return new Percentage
         {
-            Text = text.Map(value => value.GetString()) ?? "",
-            Icon = icon.Map(value => value.GetString()) ?? "",
-            Value = adjustment.Map(value => value.GetInt32()),
-            Target = target.Map(
-                value => value.GetEnum<AttributeAdjustmentTarget>(missingMemberBehavior)
-            )
+            Text = text.Map(value => value.GetStringRequired()),
+            Icon = icon.Map(value => value.GetStringRequired()),
+            Percent = percent.Map(value => value.GetDouble())
         };
     }
 }

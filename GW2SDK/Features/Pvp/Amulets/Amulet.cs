@@ -10,5 +10,5 @@ public sealed record Amulet
 
     public required string Icon { get; init; }
 
-    public required IDictionary<AttributeAdjustTarget, int> Attributes { get; init; }
+    public required IDictionary<AttributeAdjustmentTarget, int> Attributes { get; init; }
 }

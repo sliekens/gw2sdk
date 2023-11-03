@@ -4,15 +4,15 @@ namespace GuildWars2.Pvp.Amulets;
 
 internal static class AttributesJson
 {
-    public static Dictionary<AttributeAdjustTarget, int> GetAttributes(
+    public static Dictionary<AttributeAdjustmentTarget, int> GetAttributes(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        var result = new Dictionary<AttributeAdjustTarget, int>(4);
+        var result = new Dictionary<AttributeAdjustmentTarget, int>(4);
         foreach (var member in json.EnumerateObject())
         {
-            if (Enum.TryParse(member.Name, false, out AttributeAdjustTarget name))
+            if (Enum.TryParse(member.Name, false, out AttributeAdjustmentTarget name))
             {
                 result[name] = member.Value.GetInt32();
             }
