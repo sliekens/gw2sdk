@@ -18,7 +18,7 @@ public class StoredBuildsByNumbers
         };
         ;
 
-        var actual = await sut.Skills.GetStoredBuilds(slotNumbers, accessToken.Key);
+        var actual = await sut.Builds.GetStoredBuilds(slotNumbers, accessToken.Key);
 
         Assert.NotEmpty(actual.Value);
         Assert.All(

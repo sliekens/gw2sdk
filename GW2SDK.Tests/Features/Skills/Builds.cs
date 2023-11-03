@@ -11,7 +11,7 @@ public class Builds
         var character = Composer.Resolve<TestCharacter>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Skills.GetBuilds(character.Name, accessToken.Key);
+        var actual = await sut.Builds.GetBuilds(character.Name, accessToken.Key);
 
         Assert.NotEmpty(actual.Value);
         Assert.All(actual.Value, entry =>

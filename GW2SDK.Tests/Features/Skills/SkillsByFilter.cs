@@ -16,7 +16,7 @@ public class SkillsByFilter
             39222
         };
 
-        var actual = await sut.Skills.GetSkillsByIds(ids);
+        var actual = await sut.Builds.GetSkillsByIds(ids);
 
         Assert.Collection(
             ids,

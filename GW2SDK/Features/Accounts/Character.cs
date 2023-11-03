@@ -1,8 +1,8 @@
-﻿using GuildWars2.Crafting;
+﻿using GuildWars2.Builds;
+using GuildWars2.Crafting;
 using GuildWars2.Equipment;
 using GuildWars2.Inventories;
 using GuildWars2.Professions;
-using GuildWars2.Skills;
 
 namespace GuildWars2.Accounts;
 

@@ -1,6 +1,7 @@
 ﻿using GuildWars2.Accounts;
 using GuildWars2.Achievements;
 using GuildWars2.Banking;
+using GuildWars2.Builds;
 using GuildWars2.Colors;
 using GuildWars2.Commerce;
 using GuildWars2.Crafting;
@@ -34,7 +35,6 @@ using GuildWars2.Quaggans;
 using GuildWars2.Quests;
 using GuildWars2.Races;
 using GuildWars2.Raids;
-using GuildWars2.Skills;
 using GuildWars2.Skins;
 using GuildWars2.Specializations;
 using GuildWars2.Stories;
@@ -63,6 +63,8 @@ public sealed class Gw2Client
     public AchievementsQuery Achievements => new(httpClient);
 
     public BankQuery Bank => new(httpClient);
+
+    public BuildsQuery Builds => new(httpClient);
 
     public CommerceQuery Commerce => new(httpClient);
 
@@ -125,8 +127,6 @@ public sealed class Gw2Client
     public QuestsQuery Quests => new(httpClient);
 
     public RacesQuery Races => new(httpClient);
-
-    public SkillsQuery Skills => new(httpClient);
 
     public SpecializationsQuery Specializations => new(httpClient);
 

@@ -9,7 +9,7 @@ public class Skills
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.Skills.GetSkills();
+        var actual = await sut.Builds.GetSkills();
 
         Assert.NotNull(actual.ResultContext);
         Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);

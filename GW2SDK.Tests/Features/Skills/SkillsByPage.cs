@@ -9,7 +9,7 @@ public class SkillsByPage
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.Skills.GetSkillsByPage(0, 3);
+        var actual = await sut.Builds.GetSkillsByPage(0, 3);
 
         Assert.Equal(3, actual.Value.Count);
         Assert.NotNull(actual.PageContext);

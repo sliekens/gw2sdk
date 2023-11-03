@@ -9,7 +9,7 @@ public class SkillsIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.Skills.GetSkillsIndex();
+        var actual = await sut.Builds.GetSkillsIndex();
 
         Assert.NotEmpty(actual.Value);
         Assert.NotNull(actual.ResultContext);

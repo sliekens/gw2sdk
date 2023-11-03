@@ -11,7 +11,7 @@ public class SkillById
 
         const int id = 61533;
 
-        var actual = await sut.Skills.GetSkillById(id);
+        var actual = await sut.Builds.GetSkillById(id);
 
         Assert.Equal(id, actual.Value.Id);
     }

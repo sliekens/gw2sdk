@@ -83,8 +83,4 @@
     <InternalsVisibleTo Include="$(AssemblyName).Tests" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\BuildStorage\" />
-  </ItemGroup>
-
 </Project>

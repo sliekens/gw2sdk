@@ -10,7 +10,7 @@ public class StoredBuildNumbers
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Skills.GetStoredBuildNumbers(accessToken.Key);
+        var actual = await sut.Builds.GetStoredBuildNumbers(accessToken.Key);
 
         Assert.NotEmpty(actual.Value);
         Assert.NotNull(actual.ResultContext);
