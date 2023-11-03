@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Skills;
+namespace GuildWars2.Tests.Features.Builds;
 
 public class StoredBuilds
 {

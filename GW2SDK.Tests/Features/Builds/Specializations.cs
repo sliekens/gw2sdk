@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Specializations;
+namespace GuildWars2.Tests.Features.Builds;
 
 public class Specializations
 {
@@ -9,7 +9,7 @@ public class Specializations
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.Specializations.GetSpecializations();
+        var actual = await sut.Builds.GetSpecializations();
 
         Assert.NotNull(actual.ResultContext);
         Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);

@@ -1,6 +1,6 @@
-using GuildWars2.Specializations;
+﻿using GuildWars2.Builds;
 
-namespace GuildWars2.Tests.Features.Specializations;
+namespace GuildWars2.Tests.Features.Builds;
 
 internal static class Invariants
 {
@@ -10,15 +10,15 @@ internal static class Invariants
     internal static void Name_is_not_empty(this Specialization actual) => Assert.NotEmpty(actual.Name);
 
     internal static void It_has_minor_traits(this Specialization actual) =>
-        Assert.NotEmpty(actual.MinorTraits);
+        Assert.NotEmpty(actual.MinorTraitIds);
 
     internal static void It_has_major_traits(this Specialization actual) =>
-        Assert.NotEmpty(actual.MajorTraits);
+        Assert.NotEmpty(actual.MajorTraitIds);
 
-    internal static void Icon_is_not_empty(this Specialization actual) => Assert.NotEmpty(actual.Icon);
+    internal static void Icon_is_not_empty(this Specialization actual) => Assert.NotEmpty(actual.IconHref);
 
     internal static void Background_is_not_empty(this Specialization actual) =>
-        Assert.NotEmpty(actual.Icon);
+        Assert.NotEmpty(actual.IconHref);
 
     internal static void Profession_icon_is_not_null(this Specialization actual) =>
         Assert.NotNull(actual.ProfessionIcon);

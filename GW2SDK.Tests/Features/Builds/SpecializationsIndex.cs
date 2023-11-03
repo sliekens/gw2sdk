@@ -1,17 +1,15 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Skills;
+namespace GuildWars2.Tests.Features.Builds;
 
-public class BuildNumbers
+public class SpecializationsIndex
 {
     [Fact]
     public async Task Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var character = Composer.Resolve<TestCharacter>();
-        var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Builds.GetBuildNumbers(character.Name, accessToken.Key);
+        var actual = await sut.Builds.GetSpecializationsIndex();
 
         Assert.NotEmpty(actual.Value);
         Assert.NotNull(actual.ResultContext);

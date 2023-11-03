@@ -64,7 +64,7 @@ internal static class BuildJson
             Specializations =
                 specializations.Map(
                     values => values.GetList(
-                        value => value.GetSpecialization(missingMemberBehavior)
+                        value => value.GetSelectedSpecialization(missingMemberBehavior)
                     )
                 ),
             Skills = skills.Map(value => value.GetSkillBar(missingMemberBehavior)),

@@ -1,7 +1,7 @@
 ﻿using GuildWars2.Http;
 using GuildWars2.Json;
 
-namespace GuildWars2.Specializations.Http;
+namespace GuildWars2.Builds.Http;
 
 internal sealed class SpecializationsByIdsRequest : IHttpRequest<Replica<HashSet<Specialization>>>
 {

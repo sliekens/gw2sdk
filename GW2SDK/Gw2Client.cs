@@ -36,7 +36,6 @@ using GuildWars2.Quests;
 using GuildWars2.Races;
 using GuildWars2.Raids;
 using GuildWars2.Skins;
-using GuildWars2.Specializations;
 using GuildWars2.Stories;
 using GuildWars2.SuperAdventureBox;
 using GuildWars2.Tokens;
@@ -127,8 +126,6 @@ public sealed class Gw2Client
     public QuestsQuery Quests => new(httpClient);
 
     public RacesQuery Races => new(httpClient);
-
-    public SpecializationsQuery Specializations => new(httpClient);
 
     public SuperAdventureBoxQuery SuperAdventureBox => new(httpClient);
 

@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Specializations;
+namespace GuildWars2.Tests.Features.Builds;
 
 public class SpecializationsByFilter
 {
@@ -16,7 +16,7 @@ public class SpecializationsByFilter
             3
         };
 
-        var actual = await sut.Specializations.GetSpecializationsByIds(ids);
+        var actual = await sut.Builds.GetSpecializationsByIds(ids);
 
         Assert.Collection(
             ids,

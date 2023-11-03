@@ -12,7 +12,7 @@ public sealed record Build
     public required ProfessionName Profession { get; init; }
 
     /// <summary>The specializations selected for this build.</summary>
-    public required IReadOnlyList<Specialization> Specializations { get; init; }
+    public required IReadOnlyList<SelectedSpecialization> Specializations { get; init; }
 
     /// <summary>The skills selected for this build.</summary>
     public required SkillBar Skills { get; init; }

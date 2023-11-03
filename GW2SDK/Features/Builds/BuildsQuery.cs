@@ -285,4 +285,59 @@ public sealed class BuildsQuery
     }
 
     #endregion v2/skills
+
+    #region v2/specializations
+
+    public Task<Replica<HashSet<Specialization>>> GetSpecializations(
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        SpecializationsRequest request = new()
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<HashSet<int>>> GetSpecializationsIndex(
+        CancellationToken cancellationToken = default
+    )
+    {
+        SpecializationsIndexRequest request = new();
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<Specialization>> GetSpecializationById(
+        int specializationId,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        SpecializationByIdRequest request = new(specializationId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<HashSet<Specialization>>> GetSpecializationsByIds(
+        IReadOnlyCollection<int> specializationIds,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        SpecializationsByIdsRequest request = new(specializationIds)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+    #endregion v2/specializations
 }

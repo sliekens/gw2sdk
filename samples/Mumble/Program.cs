@@ -25,7 +25,7 @@ var gw2 = app.GetService<Gw2Client>();
 var maps = (await gw2.Maps.GetMapSummaries(cancellationToken: stoppingToken))
     .Value.ToDictionary(map => map.Id);
 
-var specializations = (await gw2.Specializations.GetSpecializations(cancellationToken: stoppingToken))
+var specializations = (await gw2.Builds.GetSpecializations(cancellationToken: stoppingToken))
     .Value.ToDictionary(specialization => specialization.Id);
 
 // Initialize the shared memory link
