@@ -1,6 +1,6 @@
 ﻿namespace GuildWars2.Skills.Facts;
 
-/// <summary>A combofield that is placed by the skill.</summary>
+/// <summary>A combo field that is placed by the skill.</summary>
 [PublicAPI]
 public sealed record ComboField : SkillFact
 {

@@ -2,6 +2,7 @@
 
 namespace GuildWars2.Skills;
 
+/// <summary>Query methods for skills, build templates and builds in the build storage on the account.</summary>
 [PublicAPI]
 public sealed class SkillsQuery
 {
@@ -187,6 +188,11 @@ public sealed class SkillsQuery
 
     #region v2/skills
 
+    /// <summary>Retrieves all skills.</summary>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<HashSet<Skill>>> GetSkills(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -201,12 +207,21 @@ public sealed class SkillsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all skills.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<HashSet<int>>> GetSkillsIndex(CancellationToken cancellationToken = default)
     {
         SkillsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
+    /// <summary>Retrieves a skill by its ID.</summary>
+    /// <param name="skillId">The skill ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<Skill>> GetSkillById(
         int skillId,
         Language? language = default,
@@ -222,6 +237,13 @@ public sealed class SkillsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
+    /// <summary>Retrieves skills by their IDs.</summary>
+    /// <remarks>Limited to 200 IDs per request.</remarks>
+    /// <param name="skillIds">The skill IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<HashSet<Skill>>> GetSkillsByIds(
         IReadOnlyCollection<int> skillIds,
         Language? language = default,
@@ -237,6 +259,13 @@ public sealed class SkillsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of skills.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<HashSet<Skill>>> GetSkillsByPage(
         int pageIndex,
         int? pageSize = default,
