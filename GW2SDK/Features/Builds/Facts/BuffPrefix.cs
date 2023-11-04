@@ -1,6 +1,4 @@
-﻿using GuildWars2.Builds.Facts;
-
-namespace GuildWars2.Builds;
+﻿namespace GuildWars2.Builds.Facts;
 
 /// <summary>A precondition for a <see cref="Buff" />. The effect is only applied when the precondition is met.</summary>
 [PublicAPI]

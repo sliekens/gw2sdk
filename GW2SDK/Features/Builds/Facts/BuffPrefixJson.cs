@@ -1,7 +1,7 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
-namespace GuildWars2.Builds;
+namespace GuildWars2.Builds.Facts;
 
 internal static class BuffPrefixJson
 {
