@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Equipment.Http;
 
-internal sealed class UnlockedEquipmentTabsRequest : IHttpRequest<Replica<IReadOnlyList<int>>>
+internal sealed class UnlockedEquipmentTabsRequest : IHttpRequest2<IReadOnlyList<int>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/equipmenttabs")
@@ -21,7 +21,7 @@ internal sealed class UnlockedEquipmentTabsRequest : IHttpRequest<Replica<IReadO
 
     public required string? AccessToken { get; init; }
 
-    public async Task<Replica<IReadOnlyList<int>>> SendAsync(
+    public async Task<(IReadOnlyList<int> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -40,14 +40,7 @@ internal sealed class UnlockedEquipmentTabsRequest : IHttpRequest<Replica<IReadO
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        return new Replica<IReadOnlyList<int>>
-        {
-            Value = json.RootElement.GetList(entry => entry.GetInt32()),
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        var value = json.RootElement.GetList(entry => entry.GetInt32());
+        return (value, new MessageContext(response));
     }
 }

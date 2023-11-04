@@ -14,7 +14,7 @@ public class GuildLeaderboardEntries
         var actual = await sut.Pvp.GetLeaderboardEntries(seasonId, boardId, regionId, 0, 200);
 
         Assert.NotEmpty(actual.Value);
-        Assert.NotNull(actual.ResultContext);
-        Assert.NotNull(actual.PageContext);
+        Assert.NotNull(actual.Context.ResultContext);
+        Assert.NotNull(actual.Context.PageContext);
     }
 }

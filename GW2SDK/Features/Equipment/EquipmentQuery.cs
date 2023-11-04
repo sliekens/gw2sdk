@@ -23,7 +23,7 @@ public sealed class EquipmentQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<CharacterEquipment>> GetCharacterEquipment(
+    public Task<(CharacterEquipment Value, MessageContext Context)> GetCharacterEquipment(
         string characterName,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -48,7 +48,7 @@ public sealed class EquipmentQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<BoundLegendaryItem>>> GetBoundLegendaryItems(
+    public Task<(HashSet<BoundLegendaryItem> Value, MessageContext Context)> GetBoundLegendaryItems(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -73,7 +73,7 @@ public sealed class EquipmentQuery
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<IReadOnlyList<int>>> GetEquipmentTemplateNumbers(
+    public Task<(IReadOnlyList<int> Value, MessageContext Context)> GetEquipmentTemplateNumbers(
         string characterName,
         string? accessToken,
         CancellationToken cancellationToken = default
@@ -91,7 +91,7 @@ public sealed class EquipmentQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<EquipmentTemplate>> GetEquipmentTemplate(
+    public Task<(EquipmentTemplate Value, MessageContext Context)> GetEquipmentTemplate(
         string characterName,
         int templateNumber,
         string? accessToken,
@@ -114,7 +114,7 @@ public sealed class EquipmentQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<EquipmentTemplate>>> GetEquipmentTemplates(
+    public Task<(HashSet<EquipmentTemplate> Value, MessageContext Context)> GetEquipmentTemplates(
         string characterName,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -137,7 +137,7 @@ public sealed class EquipmentQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<EquipmentTemplate>> GetActiveEquipmentTemplate(
+    public Task<(EquipmentTemplate Value, MessageContext Context)> GetActiveEquipmentTemplate(
         string characterName,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -160,7 +160,7 @@ public sealed class EquipmentQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<LegendaryItem>>> GetLegendaryItems(
+    public Task<(HashSet<LegendaryItem> Value, MessageContext Context)> GetLegendaryItems(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -172,7 +172,7 @@ public sealed class EquipmentQuery
     /// <summary>Retrieves the IDs of all legendary items.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<int>>> GetLegendaryItemsIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetLegendaryItemsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -185,7 +185,7 @@ public sealed class EquipmentQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<LegendaryItem>> GetLegendaryItemById(
+    public Task<(LegendaryItem Value, MessageContext Context)> GetLegendaryItemById(
         int legendaryItemId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -204,7 +204,7 @@ public sealed class EquipmentQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<LegendaryItem>>> GetLegendaryItemsByIds(
+    public Task<(HashSet<LegendaryItem> Value, MessageContext Context)> GetLegendaryItemsByIds(
         IReadOnlyCollection<int> legendaryItemIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -223,7 +223,7 @@ public sealed class EquipmentQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<LegendaryItem>>> GetLegendaryItemsByPage(
+    public Task<(HashSet<LegendaryItem> Value, MessageContext Context)> GetLegendaryItemsByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,

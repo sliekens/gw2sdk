@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Professions.Http;
 
-internal sealed class ProfessionNamesRequest : IHttpRequest<Replica<HashSet<ProfessionName>>>
+internal sealed class ProfessionNamesRequest : IHttpRequest2<HashSet<ProfessionName>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/professions")
     {
@@ -13,7 +13,7 @@ internal sealed class ProfessionNamesRequest : IHttpRequest<Replica<HashSet<Prof
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<ProfessionName>>> SendAsync(
+    public async Task<(HashSet<ProfessionName> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -23,14 +23,6 @@ internal sealed class ProfessionNamesRequest : IHttpRequest<Replica<HashSet<Prof
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetProfessionName(MissingMemberBehavior));
-        return new Replica<HashSet<ProfessionName>>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

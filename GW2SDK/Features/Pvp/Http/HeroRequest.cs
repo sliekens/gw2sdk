@@ -4,7 +4,7 @@ using GuildWars2.Pvp.Heroes;
 
 namespace GuildWars2.Pvp.Http;
 
-internal sealed class HeroRequest : IHttpRequest<Replica<HashSet<Hero>>>
+internal sealed class HeroRequest : IHttpRequest2<HashSet<Hero>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/pvp/heroes")
     {
@@ -20,7 +20,7 @@ internal sealed class HeroRequest : IHttpRequest<Replica<HashSet<Hero>>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<Hero>>> SendAsync(
+    public async Task<(HashSet<Hero> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -30,14 +30,6 @@ internal sealed class HeroRequest : IHttpRequest<Replica<HashSet<Hero>>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetHero(MissingMemberBehavior));
-        return new Replica<HashSet<Hero>>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

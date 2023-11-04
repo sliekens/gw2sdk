@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Emblems.Http;
 
-internal sealed class BackgroundEmblemByIdRequest : IHttpRequest<Replica<Emblem>>
+internal sealed class BackgroundEmblemByIdRequest : IHttpRequest2<Emblem>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/emblem/backgrounds") { AcceptEncoding = "gzip" };
@@ -16,7 +16,7 @@ internal sealed class BackgroundEmblemByIdRequest : IHttpRequest<Replica<Emblem>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<Emblem>> SendAsync(
+    public async Task<(Emblem Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -38,14 +38,6 @@ internal sealed class BackgroundEmblemByIdRequest : IHttpRequest<Replica<Emblem>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetEmblem(MissingMemberBehavior);
-        return new Replica<Emblem>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

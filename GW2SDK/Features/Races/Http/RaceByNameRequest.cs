@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Races.Http;
 
-internal sealed class RaceByNameRequest : IHttpRequest<Replica<Race>>
+internal sealed class RaceByNameRequest : IHttpRequest2<Race>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/races")
     {
@@ -20,7 +20,7 @@ internal sealed class RaceByNameRequest : IHttpRequest<Replica<Race>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<Race>> SendAsync(
+    public async Task<(Race Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -43,14 +43,6 @@ internal sealed class RaceByNameRequest : IHttpRequest<Replica<Race>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetRace(MissingMemberBehavior);
-        return new Replica<Race>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

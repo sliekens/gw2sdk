@@ -15,7 +15,7 @@ public sealed class QuestsQuery
 
     #region v2/characters/:id/quests
 
-    public Task<Replica<HashSet<int>>> GetCharacterQuests(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetCharacterQuests(
         string characterName,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -34,7 +34,7 @@ public sealed class QuestsQuery
 
     #region v2/quests
 
-    public Task<Replica<HashSet<Quest>>> GetQuests(
+    public Task<(HashSet<Quest> Value, MessageContext Context)> GetQuests(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -48,13 +48,13 @@ public sealed class QuestsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetQuestsIndex(CancellationToken cancellationToken = default)
+    public Task<(HashSet<int> Value, MessageContext Context)> GetQuestsIndex(CancellationToken cancellationToken = default)
     {
         QuestsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Quest>> GetQuestById(
+    public Task<(Quest Value, MessageContext Context)> GetQuestById(
         int questId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -69,7 +69,7 @@ public sealed class QuestsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Quest>>> GetQuestsByIds(
+    public Task<(HashSet<Quest> Value, MessageContext Context)> GetQuestsByIds(
         IReadOnlyCollection<int> questIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -84,7 +84,7 @@ public sealed class QuestsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Quest>>> GetQuestsByPage(
+    public Task<(HashSet<Quest> Value, MessageContext Context)> GetQuestsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

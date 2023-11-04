@@ -26,7 +26,8 @@ public class JsonItemService
     private async Task<HashSet<int>> GetItemsIndex()
     {
         var items = new ItemsQuery(http);
-        return await items.GetItemsIndex();
+        var (ids, _) = await items.GetItemsIndex();
+        return ids;
     }
 
     public IAsyncEnumerable<(int, string)> GetJsonItemsByIds(

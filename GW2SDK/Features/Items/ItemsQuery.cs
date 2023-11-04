@@ -14,13 +14,13 @@ public sealed class ItemsQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<Replica<HashSet<int>>> GetItemsIndex(CancellationToken cancellationToken = default)
+    public Task<(HashSet<int> Value, MessageContext Context)> GetItemsIndex(CancellationToken cancellationToken = default)
     {
         var request = new ItemsIndexRequest();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Item>> GetItemById(
+    public Task<(Item Value, MessageContext Context)> GetItemById(
         int itemId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -35,7 +35,7 @@ public sealed class ItemsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Item>>> GetItemsByIds(
+    public Task<(HashSet<Item> Value, MessageContext Context)> GetItemsByIds(
         IReadOnlyCollection<int> itemIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -50,7 +50,7 @@ public sealed class ItemsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Item>>> GetItemsByPage(
+    public Task<(HashSet<Item> Value, MessageContext Context)> GetItemsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

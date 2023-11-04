@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Colors.Http;
 
-internal sealed class ColorsByPageRequest : IHttpRequest<Replica<HashSet<Dye>>>
+internal sealed class ColorsByPageRequest : IHttpRequest2<HashSet<Dye>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/colors")
     {
@@ -23,7 +23,7 @@ internal sealed class ColorsByPageRequest : IHttpRequest<Replica<HashSet<Dye>>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<Dye>>> SendAsync(
+    public async Task<(HashSet<Dye> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -49,14 +49,6 @@ internal sealed class ColorsByPageRequest : IHttpRequest<Replica<HashSet<Dye>>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetDye(MissingMemberBehavior));
-        return new Replica<HashSet<Dye>>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

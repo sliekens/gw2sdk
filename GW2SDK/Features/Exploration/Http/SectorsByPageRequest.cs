@@ -5,7 +5,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Http;
 
-internal sealed class SectorsByPageRequest : IHttpRequest<Replica<HashSet<Sector>>>
+internal sealed class SectorsByPageRequest : IHttpRequest2<HashSet<Sector>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(
         Get,
@@ -43,7 +43,7 @@ internal sealed class SectorsByPageRequest : IHttpRequest<Replica<HashSet<Sector
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<Sector>>> SendAsync(
+    public async Task<(HashSet<Sector> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -70,14 +70,6 @@ internal sealed class SectorsByPageRequest : IHttpRequest<Replica<HashSet<Sector
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetSector(MissingMemberBehavior));
-        return new Replica<HashSet<Sector>>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

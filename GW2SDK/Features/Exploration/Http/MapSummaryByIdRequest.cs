@@ -3,7 +3,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Exploration.Http;
 
-internal sealed class MapSummaryByIdRequest : IHttpRequest<Replica<MapSummary>>
+internal sealed class MapSummaryByIdRequest : IHttpRequest2<MapSummary>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/maps")
     {
@@ -21,7 +21,7 @@ internal sealed class MapSummaryByIdRequest : IHttpRequest<Replica<MapSummary>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<MapSummary>> SendAsync(
+    public async Task<(MapSummary Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -44,14 +44,6 @@ internal sealed class MapSummaryByIdRequest : IHttpRequest<Replica<MapSummary>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetMapSummary(MissingMemberBehavior);
-        return new Replica<MapSummary>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

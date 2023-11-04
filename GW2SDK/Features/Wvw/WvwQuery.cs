@@ -23,7 +23,7 @@ public sealed class WvwQuery
 
     #region v2/wvw/abilities
 
-    public Task<Replica<HashSet<Ability>>> GetAbilities(
+    public Task<(HashSet<Ability> Value, MessageContext Context)> GetAbilities(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -37,7 +37,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetAbilitiesIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetAbilitiesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -45,7 +45,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Ability>> GetAbilityById(
+    public Task<(Ability Value, MessageContext Context)> GetAbilityById(
         int abilityId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -60,7 +60,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Ability>>> GetAbilitiesByIds(
+    public Task<(HashSet<Ability> Value, MessageContext Context)> GetAbilitiesByIds(
         IReadOnlyCollection<int> abilityIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -75,7 +75,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Ability>>> GetAbilitiesByPage(
+    public Task<(HashSet<Ability> Value, MessageContext Context)> GetAbilitiesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -96,7 +96,7 @@ public sealed class WvwQuery
 
     #region v2/wvw/objectives
 
-    public Task<Replica<HashSet<Objective>>> GetObjectives(
+    public Task<(HashSet<Objective> Value, MessageContext Context)> GetObjectives(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -110,7 +110,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<string>>> GetObjectivesIndex(
+    public Task<(HashSet<string> Value, MessageContext Context)> GetObjectivesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -118,7 +118,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Objective>> GetObjectiveById(
+    public Task<(Objective Value, MessageContext Context)> GetObjectiveById(
         string objectiveId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -133,7 +133,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Objective>>> GetObjectivesByIds(
+    public Task<(HashSet<Objective> Value, MessageContext Context)> GetObjectivesByIds(
         IReadOnlyCollection<string> objectiveIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -148,7 +148,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Objective>>> GetObjectivesByPage(
+    public Task<(HashSet<Objective> Value, MessageContext Context)> GetObjectivesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -169,7 +169,7 @@ public sealed class WvwQuery
 
     #region v2/wvw/ranks
 
-    public Task<Replica<HashSet<Rank>>> GetRanks(
+    public Task<(HashSet<Rank> Value, MessageContext Context)> GetRanks(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -183,13 +183,13 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetRanksIndex(CancellationToken cancellationToken = default)
+    public Task<(HashSet<int> Value, MessageContext Context)> GetRanksIndex(CancellationToken cancellationToken = default)
     {
         RanksIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Rank>> GetRankById(
+    public Task<(Rank Value, MessageContext Context)> GetRankById(
         int rankId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -204,7 +204,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Rank>>> GetRanksByIds(
+    public Task<(HashSet<Rank> Value, MessageContext Context)> GetRanksByIds(
         IReadOnlyCollection<int> rankIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -219,7 +219,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Rank>>> GetRanksByPage(
+    public Task<(HashSet<Rank> Value, MessageContext Context)> GetRanksByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -240,7 +240,7 @@ public sealed class WvwQuery
 
     #region v2/wvw/upgrades
 
-    public Task<Replica<HashSet<ObjectiveUpgrade>>> GetUpgrades(
+    public Task<(HashSet<ObjectiveUpgrade> Value, MessageContext Context)> GetUpgrades(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -254,7 +254,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetUpgradesIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetUpgradesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -262,7 +262,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<ObjectiveUpgrade>> GetUpgradeById(
+    public Task<(ObjectiveUpgrade Value, MessageContext Context)> GetUpgradeById(
         int upgradeId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -277,7 +277,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<ObjectiveUpgrade>>> GetUpgradesByIds(
+    public Task<(HashSet<ObjectiveUpgrade> Value, MessageContext Context)> GetUpgradesByIds(
         IReadOnlyCollection<int> upgradeIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -292,7 +292,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<ObjectiveUpgrade>>> GetUpgradesByPage(
+    public Task<(HashSet<ObjectiveUpgrade> Value, MessageContext Context)> GetUpgradesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -313,7 +313,7 @@ public sealed class WvwQuery
 
     #region v2/wvw/matches
 
-    public Task<Replica<HashSet<Match>>> GetMatches(
+    public Task<(HashSet<Match> Value, MessageContext Context)> GetMatches(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -322,7 +322,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<string>>> GetMatchesIndex(
+    public Task<(HashSet<string> Value, MessageContext Context)> GetMatchesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -330,7 +330,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Match>> GetMatchById(
+    public Task<(Match Value, MessageContext Context)> GetMatchById(
         string matchId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -340,7 +340,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Match>>> GetMatchesByIds(
+    public Task<(HashSet<Match> Value, MessageContext Context)> GetMatchesByIds(
         IReadOnlyCollection<string> matchIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -353,7 +353,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Match>>> GetMatchesByPage(
+    public Task<(HashSet<Match> Value, MessageContext Context)> GetMatchesByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -368,7 +368,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Match>> GetMatchByWorldId(
+    public Task<(Match Value, MessageContext Context)> GetMatchByWorldId(
         int worldId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -385,7 +385,7 @@ public sealed class WvwQuery
 
     #region v2/wvw/matches/overview
 
-    public Task<Replica<HashSet<MatchOverview>>> GetMatchesOverview(
+    public Task<(HashSet<MatchOverview> Value, MessageContext Context)> GetMatchesOverview(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -394,7 +394,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<string>>> GetMatchesOverviewIndex(
+    public Task<(HashSet<string> Value, MessageContext Context)> GetMatchesOverviewIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -402,7 +402,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<MatchOverview>> GetMatchOverviewById(
+    public Task<(MatchOverview Value, MessageContext Context)> GetMatchOverviewById(
         string matchId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -415,7 +415,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<MatchOverview>>> GetMatchesOverviewByIds(
+    public Task<(HashSet<MatchOverview> Value, MessageContext Context)> GetMatchesOverviewByIds(
         IReadOnlyCollection<string> matchIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -428,7 +428,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<MatchOverview>>> GetMatchesOverviewByPage(
+    public Task<(HashSet<MatchOverview> Value, MessageContext Context)> GetMatchesOverviewByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -443,7 +443,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<MatchOverview>> GetMatchOverviewByWorldId(
+    public Task<(MatchOverview Value, MessageContext Context)> GetMatchOverviewByWorldId(
         int worldId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -460,7 +460,7 @@ public sealed class WvwQuery
 
     #region v2/wvw/matches/scores
 
-    public Task<Replica<HashSet<MatchScores>>> GetMatchesScores(
+    public Task<(HashSet<MatchScores> Value, MessageContext Context)> GetMatchesScores(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -469,7 +469,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<string>>> GetMatchesScoresIndex(
+    public Task<(HashSet<string> Value, MessageContext Context)> GetMatchesScoresIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -477,7 +477,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<MatchScores>> GetMatchScoresById(
+    public Task<(MatchScores Value, MessageContext Context)> GetMatchScoresById(
         string matchId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -490,7 +490,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<MatchScores>>> GetMatchesScoresByIds(
+    public Task<(HashSet<MatchScores> Value, MessageContext Context)> GetMatchesScoresByIds(
         IReadOnlyCollection<string> matchIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -503,7 +503,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<MatchScores>>> GetMatchesScoresByPage(
+    public Task<(HashSet<MatchScores> Value, MessageContext Context)> GetMatchesScoresByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -518,7 +518,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<MatchScores>> GetMatchScoresByWorldId(
+    public Task<(MatchScores Value, MessageContext Context)> GetMatchScoresByWorldId(
         int worldId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -535,7 +535,7 @@ public sealed class WvwQuery
 
     #region v2/wvw/matches/stats
 
-    public Task<Replica<HashSet<MatchStats>>> GetMatchesStats(
+    public Task<(HashSet<MatchStats> Value, MessageContext Context)> GetMatchesStats(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -544,7 +544,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<string>>> GetMatchesStatsIndex(
+    public Task<(HashSet<string> Value, MessageContext Context)> GetMatchesStatsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -552,7 +552,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<MatchStats>> GetMatchStatsById(
+    public Task<(MatchStats Value, MessageContext Context)> GetMatchStatsById(
         string matchId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -565,7 +565,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<MatchStats>>> GetMatchesStatsByIds(
+    public Task<(HashSet<MatchStats> Value, MessageContext Context)> GetMatchesStatsByIds(
         IReadOnlyCollection<string> matchIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -578,7 +578,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<MatchStats>>> GetMatchesStatsByPage(
+    public Task<(HashSet<MatchStats> Value, MessageContext Context)> GetMatchesStatsByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -593,7 +593,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<MatchStats>> GetMatchStatsByWorldId(
+    public Task<(MatchStats Value, MessageContext Context)> GetMatchStatsByWorldId(
         int worldId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default

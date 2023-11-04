@@ -13,7 +13,7 @@ public sealed class DungeonsQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<Replica<HashSet<string>>> GetDungeonsIndex(
+    public Task<(HashSet<string> Value, MessageContext Context)> GetDungeonsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -21,7 +21,7 @@ public sealed class DungeonsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Dungeon>> GetDungeonById(
+    public Task<(Dungeon Value, MessageContext Context)> GetDungeonById(
         string dungeonId,
         CancellationToken cancellationToken = default
     )
@@ -33,7 +33,7 @@ public sealed class DungeonsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Dungeon>>> GetDungeonsByIds(
+    public Task<(HashSet<Dungeon> Value, MessageContext Context)> GetDungeonsByIds(
         IReadOnlyCollection<string> dungeonIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -46,7 +46,7 @@ public sealed class DungeonsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Dungeon>>> GetDungeonsByPage(
+    public Task<(HashSet<Dungeon> Value, MessageContext Context)> GetDungeonsByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -62,7 +62,7 @@ public sealed class DungeonsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Dungeon>>> GetDungeons(
+    public Task<(HashSet<Dungeon> Value, MessageContext Context)> GetDungeons(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -71,7 +71,7 @@ public sealed class DungeonsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<string>>> GetCompletedPaths(
+    public Task<(HashSet<string> Value, MessageContext Context)> GetCompletedPaths(
         string? accessToken,
         CancellationToken cancellationToken = default
     )

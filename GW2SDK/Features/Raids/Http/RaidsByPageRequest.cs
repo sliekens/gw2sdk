@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Raids.Http;
 
-internal sealed class RaidsByPageRequest : IHttpRequest<Replica<HashSet<Raid>>>
+internal sealed class RaidsByPageRequest : IHttpRequest2<HashSet<Raid>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/raids") { AcceptEncoding = "gzip" };
@@ -19,7 +19,7 @@ internal sealed class RaidsByPageRequest : IHttpRequest<Replica<HashSet<Raid>>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<Raid>>> SendAsync(
+    public async Task<(HashSet<Raid> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -36,14 +36,6 @@ internal sealed class RaidsByPageRequest : IHttpRequest<Replica<HashSet<Raid>>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetRaid(MissingMemberBehavior));
-        return new Replica<HashSet<Raid>>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

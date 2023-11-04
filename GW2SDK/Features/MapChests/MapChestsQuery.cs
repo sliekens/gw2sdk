@@ -15,7 +15,7 @@ public sealed class MapChestsQuery
 
     #region v2/account/mapchests
 
-    public Task<Replica<HashSet<string>>> GetReceivedMapChests(
+    public Task<(HashSet<string> Value, MessageContext Context)> GetReceivedMapChests(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -28,7 +28,7 @@ public sealed class MapChestsQuery
 
     #region v2/mapchests
 
-    public Task<Replica<HashSet<string>>> GetMapChestsIndex(
+    public Task<(HashSet<string> Value, MessageContext Context)> GetMapChestsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -36,7 +36,7 @@ public sealed class MapChestsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<MapChest>> GetMapChestById(
+    public Task<(MapChest Value, MessageContext Context)> GetMapChestById(
         string mapChestId,
         CancellationToken cancellationToken = default
     )
@@ -48,7 +48,7 @@ public sealed class MapChestsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<MapChest>>> GetMapChestsByIds(
+    public Task<(HashSet<MapChest> Value, MessageContext Context)> GetMapChestsByIds(
         IReadOnlyCollection<string> mapChestIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -61,7 +61,7 @@ public sealed class MapChestsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<MapChest>>> GetMapChestsByPage(
+    public Task<(HashSet<MapChest> Value, MessageContext Context)> GetMapChestsByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -77,7 +77,7 @@ public sealed class MapChestsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<MapChest>>> GetMapChests(
+    public Task<(HashSet<MapChest> Value, MessageContext Context)> GetMapChests(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )

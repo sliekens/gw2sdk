@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Tokens.Http;
 
-internal sealed class TokenInfoRequest : IHttpRequest<Replica<TokenInfo>>
+internal sealed class TokenInfoRequest : IHttpRequest2<TokenInfo>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/tokeninfo")
     {
@@ -19,7 +19,7 @@ internal sealed class TokenInfoRequest : IHttpRequest<Replica<TokenInfo>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<TokenInfo>> SendAsync(
+    public async Task<(TokenInfo Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -29,14 +29,6 @@ internal sealed class TokenInfoRequest : IHttpRequest<Replica<TokenInfo>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetTokenInfo(MissingMemberBehavior);
-        return new Replica<TokenInfo>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

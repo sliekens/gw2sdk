@@ -26,7 +26,8 @@ public class JsonRecipeService
     private async Task<HashSet<int>> GetRecipeIds()
     {
         var crafting = new CraftingQuery(http);
-        return await crafting.GetRecipesIndex();
+        var (ids, _) = await crafting.GetRecipesIndex();
+        return ids;
     }
 
     public IAsyncEnumerable<(int, string)> GetJsonRecipesByIds(

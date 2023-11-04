@@ -4,7 +4,7 @@ using GuildWars2.Pvp.Seasons;
 
 namespace GuildWars2.Pvp.Http;
 
-internal sealed class LeaderboardEntriesRequest : IHttpRequest<Replica<HashSet<LeaderboardEntry>>>
+internal sealed class LeaderboardEntriesRequest : IHttpRequest2<HashSet<LeaderboardEntry>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/pvp/seasons/:id/leaderboards/:board/:region") { AcceptEncoding = "gzip" };
@@ -34,7 +34,7 @@ internal sealed class LeaderboardEntriesRequest : IHttpRequest<Replica<HashSet<L
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<LeaderboardEntry>>> SendAsync(
+    public async Task<(HashSet<LeaderboardEntry> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -60,14 +60,6 @@ internal sealed class LeaderboardEntriesRequest : IHttpRequest<Replica<HashSet<L
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetLeaderboardEntry(MissingMemberBehavior));
-        return new Replica<HashSet<LeaderboardEntry>>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

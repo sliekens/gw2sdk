@@ -4,7 +4,7 @@ using GuildWars2.Wvw.Abilities;
 
 namespace GuildWars2.Wvw.Http;
 
-internal sealed class AbilitiesByIdsRequest : IHttpRequest<Replica<HashSet<Ability>>>
+internal sealed class AbilitiesByIdsRequest : IHttpRequest2<HashSet<Ability>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/wvw/abilities") { AcceptEncoding = "gzip" };
@@ -21,7 +21,7 @@ internal sealed class AbilitiesByIdsRequest : IHttpRequest<Replica<HashSet<Abili
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<Ability>>> SendAsync(
+    public async Task<(HashSet<Ability> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -44,14 +44,6 @@ internal sealed class AbilitiesByIdsRequest : IHttpRequest<Replica<HashSet<Abili
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetAbility(MissingMemberBehavior));
-        return new Replica<HashSet<Ability>>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

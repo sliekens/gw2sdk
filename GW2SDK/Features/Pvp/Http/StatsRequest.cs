@@ -3,7 +3,7 @@ using GuildWars2.Pvp.Stats;
 
 namespace GuildWars2.Pvp.Http;
 
-internal sealed class StatsRequest : IHttpRequest<Replica<AccountStats>>
+internal sealed class StatsRequest : IHttpRequest2<AccountStats>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/pvp/stats")
     {
@@ -15,7 +15,7 @@ internal sealed class StatsRequest : IHttpRequest<Replica<AccountStats>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<AccountStats>> SendAsync(
+    public async Task<(AccountStats Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -26,14 +26,6 @@ internal sealed class StatsRequest : IHttpRequest<Replica<AccountStats>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
 
         var value = json.RootElement.GetAccountStats(MissingMemberBehavior);
-        return new Replica<AccountStats>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

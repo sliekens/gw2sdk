@@ -3,7 +3,7 @@ using GuildWars2.Wvw.Matches.Overview;
 
 namespace GuildWars2.Wvw.Http;
 
-internal sealed class MatchOverviewByWorldIdRequest : IHttpRequest<Replica<MatchOverview>>
+internal sealed class MatchOverviewByWorldIdRequest : IHttpRequest2<MatchOverview>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/wvw/matches/overview") { AcceptEncoding = "gzip" };
@@ -17,7 +17,7 @@ internal sealed class MatchOverviewByWorldIdRequest : IHttpRequest<Replica<Match
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<MatchOverview>> SendAsync(
+    public async Task<(MatchOverview Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -39,14 +39,6 @@ internal sealed class MatchOverviewByWorldIdRequest : IHttpRequest<Replica<Match
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetMatchOverview(MissingMemberBehavior);
-        return new Replica<MatchOverview>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

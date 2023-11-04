@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Builds.Http;
 
-internal sealed class SpecializationByIdRequest : IHttpRequest<Replica<Specialization>>
+internal sealed class SpecializationByIdRequest : IHttpRequest2<Specialization>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/specializations")
     {
@@ -20,7 +20,7 @@ internal sealed class SpecializationByIdRequest : IHttpRequest<Replica<Specializ
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<Specialization>> SendAsync(
+    public async Task<(Specialization Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -43,14 +43,6 @@ internal sealed class SpecializationByIdRequest : IHttpRequest<Replica<Specializ
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetSpecialization(MissingMemberBehavior);
-        return new Replica<Specialization>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

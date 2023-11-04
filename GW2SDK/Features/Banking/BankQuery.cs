@@ -21,7 +21,7 @@ public sealed class BankQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<Bank>> GetBank(
+    public Task<(Bank Value, MessageContext Context)> GetBank(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -44,7 +44,7 @@ public sealed class BankQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<MaterialStorage>> GetMaterialStorage(
+    public Task<(MaterialStorage Value, MessageContext Context)> GetMaterialStorage(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -67,7 +67,7 @@ public sealed class BankQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<MaterialCategory>>> GetMaterialCategories(
+    public Task<(HashSet<MaterialCategory> Value, MessageContext Context)> GetMaterialCategories(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -84,7 +84,7 @@ public sealed class BankQuery
     /// <summary>Retrieves the IDs of all material categories.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<int>>> GetMaterialCategoriesIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetMaterialCategoriesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -98,7 +98,7 @@ public sealed class BankQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<MaterialCategory>> GetMaterialCategoryById(
+    public Task<(MaterialCategory Value, MessageContext Context)> GetMaterialCategoryById(
         int materialCategoryId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -120,7 +120,7 @@ public sealed class BankQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<MaterialCategory>>> GetMaterialCategoriesByIds(
+    public Task<(HashSet<MaterialCategory> Value, MessageContext Context)> GetMaterialCategoriesByIds(
         IReadOnlyCollection<int> materialCategoryIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -142,7 +142,7 @@ public sealed class BankQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<MaterialCategory>>> GetMaterialCategoriesByPage(
+    public Task<(HashSet<MaterialCategory> Value, MessageContext Context)> GetMaterialCategoriesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

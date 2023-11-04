@@ -12,9 +12,9 @@ public class MapSummaries
         var actual = await sut.Maps.GetMapSummaries();
 
         Assert.NotEmpty(actual.Value);
-        Assert.NotNull(actual.ResultContext);
-        Assert.Equal(actual.Value.Count, actual.ResultContext.ResultCount);
-        Assert.Equal(actual.Value.Count, actual.ResultContext.ResultTotal);
+        Assert.NotNull(actual.Context.ResultContext);
+        Assert.Equal(actual.Value.Count, actual.Context.ResultContext.ResultCount);
+        Assert.Equal(actual.Value.Count, actual.Context.ResultContext.ResultTotal);
         Assert.All(
             actual.Value,
             entry =>

@@ -15,7 +15,7 @@ public sealed class HomeQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<Replica<HashSet<Cat>>> GetCats(
+    public Task<(HashSet<Cat> Value, MessageContext Context)> GetCats(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -24,13 +24,13 @@ public sealed class HomeQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetCatsIndex(CancellationToken cancellationToken = default)
+    public Task<(HashSet<int> Value, MessageContext Context)> GetCatsIndex(CancellationToken cancellationToken = default)
     {
         CatsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Cat>> GetCatById(
+    public Task<(Cat Value, MessageContext Context)> GetCatById(
         int catId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -40,7 +40,7 @@ public sealed class HomeQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Cat>>> GetCatsByIds(
+    public Task<(HashSet<Cat> Value, MessageContext Context)> GetCatsByIds(
         IReadOnlyCollection<int> catIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -50,7 +50,7 @@ public sealed class HomeQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Cat>>> GetCatsByPage(
+    public Task<(HashSet<Cat> Value, MessageContext Context)> GetCatsByPage(
         int pageIndex,
         int? pageSize,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -65,7 +65,7 @@ public sealed class HomeQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetOwnedCatsIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetOwnedCatsIndex(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -77,7 +77,7 @@ public sealed class HomeQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Node>>> GetNodes(
+    public Task<(HashSet<Node> Value, MessageContext Context)> GetNodes(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -86,7 +86,7 @@ public sealed class HomeQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<string>>> GetNodesIndex(
+    public Task<(HashSet<string> Value, MessageContext Context)> GetNodesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -94,7 +94,7 @@ public sealed class HomeQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<string>>> GetOwnedNodesIndex(
+    public Task<(HashSet<string> Value, MessageContext Context)> GetOwnedNodesIndex(
         string? accessToken,
         CancellationToken cancellationToken = default
     )

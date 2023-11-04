@@ -16,8 +16,8 @@ public class ContinentsIndex
             tyria => Assert.Equal(1, tyria),
             mists => Assert.Equal(2, mists)
         );
-        Assert.NotNull(actual.ResultContext);
-        Assert.Equal(actual.Value.Count, actual.ResultContext.ResultCount);
-        Assert.Equal(actual.Value.Count, actual.ResultContext.ResultTotal);
+        Assert.NotNull(actual.Context.ResultContext);
+        Assert.Equal(actual.Value.Count, actual.Context.ResultContext.ResultCount);
+        Assert.Equal(actual.Value.Count, actual.Context.ResultContext.ResultTotal);
     }
 }

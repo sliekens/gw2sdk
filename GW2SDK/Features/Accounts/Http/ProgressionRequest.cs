@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Accounts.Http;
 
-internal sealed class ProgressionRequest : IHttpRequest<Replica<HashSet<Progression>>>
+internal sealed class ProgressionRequest : IHttpRequest2<HashSet<Progression>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/account/progression")
     {
@@ -15,7 +15,7 @@ internal sealed class ProgressionRequest : IHttpRequest<Replica<HashSet<Progress
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<Progression>>> SendAsync(
+    public async Task<(HashSet<Progression> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -25,14 +25,6 @@ internal sealed class ProgressionRequest : IHttpRequest<Replica<HashSet<Progress
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetProgression(MissingMemberBehavior));
-        return new Replica<HashSet<Progression>>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

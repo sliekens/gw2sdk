@@ -15,7 +15,7 @@ public sealed class FinishersQuery
 
     #region v2/account/finishers
 
-    public Task<Replica<HashSet<UnlockedFinisher>>> GetUnlockedFinishers(
+    public Task<(HashSet<UnlockedFinisher> Value, MessageContext Context)> GetUnlockedFinishers(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -33,7 +33,7 @@ public sealed class FinishersQuery
 
     #region v2/finishers
 
-    public Task<Replica<HashSet<Finisher>>> GetFinishers(
+    public Task<(HashSet<Finisher> Value, MessageContext Context)> GetFinishers(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -47,7 +47,7 @@ public sealed class FinishersQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetFinishersIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetFinishersIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -55,7 +55,7 @@ public sealed class FinishersQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Finisher>> GetFinisherById(
+    public Task<(Finisher Value, MessageContext Context)> GetFinisherById(
         int finisherId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -70,7 +70,7 @@ public sealed class FinishersQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Finisher>>> GetFinishersByIds(
+    public Task<(HashSet<Finisher> Value, MessageContext Context)> GetFinishersByIds(
         IReadOnlyCollection<int> finisherIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -85,7 +85,7 @@ public sealed class FinishersQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Finisher>>> GetFinishersByPage(
+    public Task<(HashSet<Finisher> Value, MessageContext Context)> GetFinishersByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

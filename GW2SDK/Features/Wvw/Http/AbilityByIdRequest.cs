@@ -3,7 +3,7 @@ using GuildWars2.Wvw.Abilities;
 
 namespace GuildWars2.Wvw.Http;
 
-internal sealed class AbilityByIdRequest : IHttpRequest<Replica<Ability>>
+internal sealed class AbilityByIdRequest : IHttpRequest2<Ability>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/wvw/abilities") { AcceptEncoding = "gzip" };
@@ -19,7 +19,7 @@ internal sealed class AbilityByIdRequest : IHttpRequest<Replica<Ability>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<Ability>> SendAsync(
+    public async Task<(Ability Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -42,14 +42,6 @@ internal sealed class AbilityByIdRequest : IHttpRequest<Replica<Ability>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetAbility(MissingMemberBehavior);
-        return new Replica<Ability>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

@@ -3,7 +3,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Commerce.Http;
 
-internal sealed class OrderBookByIdRequest : IHttpRequest<Replica<OrderBook>>
+internal sealed class OrderBookByIdRequest : IHttpRequest2<OrderBook>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/commerce/listings")
     {
@@ -19,7 +19,7 @@ internal sealed class OrderBookByIdRequest : IHttpRequest<Replica<OrderBook>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<OrderBook>> SendAsync(
+    public async Task<(OrderBook Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -41,14 +41,6 @@ internal sealed class OrderBookByIdRequest : IHttpRequest<Replica<OrderBook>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetOrderBook(MissingMemberBehavior);
-        return new Replica<OrderBook>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

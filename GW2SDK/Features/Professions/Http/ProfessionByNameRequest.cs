@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Professions.Http;
 
-internal sealed class ProfessionByNameRequest : IHttpRequest<Replica<Profession>>
+internal sealed class ProfessionByNameRequest : IHttpRequest2<Profession>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/professions")
     {
@@ -21,7 +21,7 @@ internal sealed class ProfessionByNameRequest : IHttpRequest<Replica<Profession>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<Profession>> SendAsync(
+    public async Task<(Profession Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -44,14 +44,6 @@ internal sealed class ProfessionByNameRequest : IHttpRequest<Replica<Profession>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetProfession(MissingMemberBehavior);
-        return new Replica<Profession>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

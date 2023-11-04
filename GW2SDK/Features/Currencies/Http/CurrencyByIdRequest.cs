@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Currencies.Http;
 
-internal sealed class CurrencyByIdRequest : IHttpRequest<Replica<Currency>>
+internal sealed class CurrencyByIdRequest : IHttpRequest2<Currency>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/currencies")
     {
@@ -20,7 +20,7 @@ internal sealed class CurrencyByIdRequest : IHttpRequest<Replica<Currency>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<Currency>> SendAsync(
+    public async Task<(Currency Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -43,14 +43,6 @@ internal sealed class CurrencyByIdRequest : IHttpRequest<Replica<Currency>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetCurrency(MissingMemberBehavior);
-        return new Replica<Currency>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

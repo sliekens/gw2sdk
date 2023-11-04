@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Masteries.Http;
 
-internal sealed class MasteriesByIdsRequest : IHttpRequest<Replica<HashSet<Mastery>>>
+internal sealed class MasteriesByIdsRequest : IHttpRequest2<HashSet<Mastery>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/masteries")
     {
@@ -21,7 +21,7 @@ internal sealed class MasteriesByIdsRequest : IHttpRequest<Replica<HashSet<Maste
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<Mastery>>> SendAsync(
+    public async Task<(HashSet<Mastery> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -44,14 +44,6 @@ internal sealed class MasteriesByIdsRequest : IHttpRequest<Replica<HashSet<Maste
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetMastery(MissingMemberBehavior));
-        return new Replica<HashSet<Mastery>>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

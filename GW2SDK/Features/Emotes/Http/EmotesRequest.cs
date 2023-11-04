@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Emotes.Http;
 
-internal sealed class EmotesRequest : IHttpRequest<Replica<HashSet<Emote>>>
+internal sealed class EmotesRequest : IHttpRequest2<HashSet<Emote>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/emotes")
     {
@@ -17,7 +17,7 @@ internal sealed class EmotesRequest : IHttpRequest<Replica<HashSet<Emote>>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<Emote>>> SendAsync(
+    public async Task<(HashSet<Emote> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -27,14 +27,6 @@ internal sealed class EmotesRequest : IHttpRequest<Replica<HashSet<Emote>>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetEmote(MissingMemberBehavior));
-        return new Replica<HashSet<Emote>>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

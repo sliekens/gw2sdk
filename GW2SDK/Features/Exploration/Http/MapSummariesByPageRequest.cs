@@ -4,7 +4,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Http;
 
-internal sealed class MapSummariesByPageRequest : IHttpRequest<Replica<HashSet<MapSummary>>>
+internal sealed class MapSummariesByPageRequest : IHttpRequest2<HashSet<MapSummary>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/maps")
     {
@@ -24,7 +24,7 @@ internal sealed class MapSummariesByPageRequest : IHttpRequest<Replica<HashSet<M
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<MapSummary>>> SendAsync(
+    public async Task<(HashSet<MapSummary> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -50,14 +50,6 @@ internal sealed class MapSummariesByPageRequest : IHttpRequest<Replica<HashSet<M
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetMapSummary(MissingMemberBehavior));
-        return new Replica<HashSet<MapSummary>>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

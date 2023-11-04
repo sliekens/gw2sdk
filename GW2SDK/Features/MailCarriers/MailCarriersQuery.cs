@@ -13,7 +13,7 @@ public sealed class MailCarriersQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<Replica<HashSet<MailCarrier>>> GetMailCarriers(
+    public Task<(HashSet<MailCarrier> Value, MessageContext Context)> GetMailCarriers(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -27,7 +27,7 @@ public sealed class MailCarriersQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetMailCarriersIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetMailCarriersIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -35,7 +35,7 @@ public sealed class MailCarriersQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<MailCarrier>> GetMailCarrierById(
+    public Task<(MailCarrier Value, MessageContext Context)> GetMailCarrierById(
         int mailCarrierId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -50,7 +50,7 @@ public sealed class MailCarriersQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<MailCarrier>>> GetMailCarriersByIds(
+    public Task<(HashSet<MailCarrier> Value, MessageContext Context)> GetMailCarriersByIds(
         IReadOnlyCollection<int> mailCarrierIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -65,7 +65,7 @@ public sealed class MailCarriersQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<MailCarrier>>> GetMailCarriersByPage(
+    public Task<(HashSet<MailCarrier> Value, MessageContext Context)> GetMailCarriersByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -82,7 +82,7 @@ public sealed class MailCarriersQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetOwnedMailCarriers(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetOwnedMailCarriers(
         string? accessToken,
         CancellationToken cancellationToken = default
     )

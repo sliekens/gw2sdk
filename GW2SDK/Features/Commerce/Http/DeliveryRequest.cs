@@ -3,7 +3,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Commerce.Http;
 
-internal sealed class DeliveryRequest : IHttpRequest<Replica<DeliveryBox>>
+internal sealed class DeliveryRequest : IHttpRequest2<DeliveryBox>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/commerce/delivery")
     {
@@ -15,7 +15,7 @@ internal sealed class DeliveryRequest : IHttpRequest<Replica<DeliveryBox>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<DeliveryBox>> SendAsync(
+    public async Task<(DeliveryBox Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -25,14 +25,6 @@ internal sealed class DeliveryRequest : IHttpRequest<Replica<DeliveryBox>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetDeliveryBox(MissingMemberBehavior);
-        return new Replica<DeliveryBox>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

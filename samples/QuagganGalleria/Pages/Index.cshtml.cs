@@ -37,9 +37,9 @@ public class IndexModel : PageModel
     public async Task OnGet()
     {
         logger.LogInformation("Retrieving the Quaggans.");
-        var result = await quaggans.GetQuaggans();
-        Refreshed = result.Date;
-        Quaggans = result.Value.Select(
+        var (found, context) = await quaggans.GetQuaggans();
+        Refreshed = context.Date;
+        Quaggans = found.Select(
             (quaggan, index) => new QuagganViewModel
             {
                 Active = index == 0,

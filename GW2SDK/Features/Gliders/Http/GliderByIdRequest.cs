@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Gliders.Http;
 
-internal sealed class GliderByIdRequest : IHttpRequest<Replica<Glider>>
+internal sealed class GliderByIdRequest : IHttpRequest2<Glider>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/gliders") { AcceptEncoding = "gzip" };
@@ -18,7 +18,7 @@ internal sealed class GliderByIdRequest : IHttpRequest<Replica<Glider>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<Glider>> SendAsync(
+    public async Task<(Glider Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -41,14 +41,6 @@ internal sealed class GliderByIdRequest : IHttpRequest<Replica<Glider>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetGlider(MissingMemberBehavior);
-        return new Replica<Glider>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

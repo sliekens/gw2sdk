@@ -13,7 +13,7 @@ public sealed class LegendsQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<Replica<HashSet<string>>> GetLegendsIndex(
+    public Task<(HashSet<string> Value, MessageContext Context)> GetLegendsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -21,7 +21,7 @@ public sealed class LegendsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Legend>> GetLegendById(
+    public Task<(Legend Value, MessageContext Context)> GetLegendById(
         string legendId,
         CancellationToken cancellationToken = default
     )
@@ -33,7 +33,7 @@ public sealed class LegendsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Legend>>> GetLegendsByIds(
+    public Task<(HashSet<Legend> Value, MessageContext Context)> GetLegendsByIds(
         IReadOnlyCollection<string> legendIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -46,7 +46,7 @@ public sealed class LegendsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Legend>>> GetLegendsByPage(
+    public Task<(HashSet<Legend> Value, MessageContext Context)> GetLegendsByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -62,7 +62,7 @@ public sealed class LegendsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Legend>>> GetLegends(
+    public Task<(HashSet<Legend> Value, MessageContext Context)> GetLegends(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )

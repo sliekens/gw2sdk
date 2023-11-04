@@ -13,7 +13,7 @@ public sealed class TokenProvider
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<Replica<TokenInfo>> GetTokenInfo(
+    public Task<(TokenInfo Value, MessageContext Context)> GetTokenInfo(
         string accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -26,7 +26,7 @@ public sealed class TokenProvider
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<CreatedSubtoken>> CreateSubtoken(
+    public Task<(CreatedSubtoken Value, MessageContext Context)> CreateSubtoken(
         string accessToken,
         IReadOnlyCollection<Permission>? permissions = null,
         DateTimeOffset? absoluteExpirationDate = null,

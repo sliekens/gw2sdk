@@ -25,7 +25,7 @@ public sealed class AchievementsQuery
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<int>>> GetUnlockedTitlesIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedTitlesIndex(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -41,7 +41,7 @@ public sealed class AchievementsQuery
     /// <summary>Retrieves the IDs of all achievements.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<int>>> GetAchievementsIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetAchievementsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -55,7 +55,7 @@ public sealed class AchievementsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<Achievement>> GetAchievementById(
+    public Task<(Achievement Value, MessageContext Context)> GetAchievementById(
         int achievementId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -77,7 +77,7 @@ public sealed class AchievementsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<Achievement>>> GetAchievementsByIds(
+    public Task<(HashSet<Achievement> Value, MessageContext Context)> GetAchievementsByIds(
         IReadOnlyCollection<int> achievementIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -99,7 +99,7 @@ public sealed class AchievementsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<Achievement>>> GetAchievementsByPage(
+    public Task<(HashSet<Achievement> Value, MessageContext Context)> GetAchievementsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -206,7 +206,7 @@ public sealed class AchievementsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<AccountAchievement>> GetAccountAchievementById(
+    public Task<(AccountAchievement Value, MessageContext Context)> GetAccountAchievementById(
         int achievementId,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -228,7 +228,7 @@ public sealed class AchievementsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<AccountAchievement>>> GetAccountAchievementsByIds(
+    public Task<(HashSet<AccountAchievement> Value, MessageContext Context)> GetAccountAchievementsByIds(
         IReadOnlyCollection<int> achievementIds,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -248,7 +248,7 @@ public sealed class AchievementsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<AccountAchievement>>> GetAccountAchievements(
+    public Task<(HashSet<AccountAchievement> Value, MessageContext Context)> GetAccountAchievements(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -270,7 +270,7 @@ public sealed class AchievementsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<AccountAchievement>>> GetAccountAchievementsByPage(
+    public Task<(HashSet<AccountAchievement> Value, MessageContext Context)> GetAccountAchievementsByPage(
         int pageIndex,
         int? pageSize,
         string? accessToken,
@@ -296,7 +296,7 @@ public sealed class AchievementsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<AchievementCategory>>> GetAchievementCategories(
+    public Task<(HashSet<AchievementCategory> Value, MessageContext Context)> GetAchievementCategories(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -313,7 +313,7 @@ public sealed class AchievementsQuery
     /// <summary>Retrieves the IDs of all achievement categories.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<int>>> GetAchievementCategoriesIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetAchievementCategoriesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -327,7 +327,7 @@ public sealed class AchievementsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns></returns>
-    public Task<Replica<AchievementCategory>> GetAchievementCategoryById(
+    public Task<(AchievementCategory Value, MessageContext Context)> GetAchievementCategoryById(
         int achievementCategoryId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -348,7 +348,7 @@ public sealed class AchievementsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns></returns>
-    public Task<Replica<HashSet<AchievementCategory>>> GetAchievementCategoriesByIds(
+    public Task<(HashSet<AchievementCategory> Value, MessageContext Context)> GetAchievementCategoriesByIds(
         IReadOnlyCollection<int> achievementCategoryIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -370,7 +370,7 @@ public sealed class AchievementsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<AchievementCategory>>> GetAchievementCategoriesByPage(
+    public Task<(HashSet<AchievementCategory> Value, MessageContext Context)> GetAchievementCategoriesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -396,7 +396,7 @@ public sealed class AchievementsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<AchievementGroup>>> GetAchievementGroups(
+    public Task<(HashSet<AchievementGroup> Value, MessageContext Context)> GetAchievementGroups(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -413,7 +413,7 @@ public sealed class AchievementsQuery
     /// <summary>Retrieves the IDs of all achievement groups.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<string>>> GetAchievementGroupsIndex(
+    public Task<(HashSet<string> Value, MessageContext Context)> GetAchievementGroupsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -427,7 +427,7 @@ public sealed class AchievementsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<AchievementGroup>> GetAchievementGroupById(
+    public Task<(AchievementGroup Value, MessageContext Context)> GetAchievementGroupById(
         string achievementGroupId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -448,7 +448,7 @@ public sealed class AchievementsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<AchievementGroup>>> GetAchievementGroupsByIds(
+    public Task<(HashSet<AchievementGroup> Value, MessageContext Context)> GetAchievementGroupsByIds(
         IReadOnlyCollection<string> achievementGroupIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -470,7 +470,7 @@ public sealed class AchievementsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<AchievementGroup>>> GetAchievementGroupsByPage(
+    public Task<(HashSet<AchievementGroup> Value, MessageContext Context)> GetAchievementGroupsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -496,7 +496,7 @@ public sealed class AchievementsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<Title>>> GetTitles(
+    public Task<(HashSet<Title> Value, MessageContext Context)> GetTitles(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -513,7 +513,7 @@ public sealed class AchievementsQuery
     /// <summary>Retrieves the IDs of all titles.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<int>>> GetTitlesIndex(CancellationToken cancellationToken = default)
+    public Task<(HashSet<int> Value, MessageContext Context)> GetTitlesIndex(CancellationToken cancellationToken = default)
     {
         TitlesIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
@@ -525,7 +525,7 @@ public sealed class AchievementsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<Title>> GetTitleById(
+    public Task<(Title Value, MessageContext Context)> GetTitleById(
         int titleId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -546,7 +546,7 @@ public sealed class AchievementsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<Title>>> GetTitlesByIds(
+    public Task<(HashSet<Title> Value, MessageContext Context)> GetTitlesByIds(
         IReadOnlyCollection<int> titleIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -568,7 +568,7 @@ public sealed class AchievementsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<Title>>> GetTitlesByPage(
+    public Task<(HashSet<Title> Value, MessageContext Context)> GetTitlesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

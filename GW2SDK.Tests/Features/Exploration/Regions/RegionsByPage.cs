@@ -15,8 +15,8 @@ public class RegionsByPage
         var actual = await sut.Maps.GetRegionsByPage(continentId, floorId, 0, 3);
 
         Assert.Equal(3, actual.Value.Count);
-        Assert.NotNull(actual.PageContext);
-        Assert.Equal(3, actual.PageContext.PageSize);
+        Assert.NotNull(actual.Context.PageContext);
+        Assert.Equal(3, actual.Context.PageContext.PageSize);
         Assert.All(
             actual.Value,
             entry =>

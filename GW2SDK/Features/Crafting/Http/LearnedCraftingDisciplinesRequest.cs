@@ -3,7 +3,7 @@
 namespace GuildWars2.Crafting.Http;
 
 internal sealed class
-    LearnedCraftingDisciplinesRequest : IHttpRequest<Replica<LearnedCraftingDisciplines>>
+    LearnedCraftingDisciplinesRequest : IHttpRequest2<LearnedCraftingDisciplines>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/crafting")
@@ -23,7 +23,7 @@ internal sealed class
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<LearnedCraftingDisciplines>> SendAsync(
+    public async Task<(LearnedCraftingDisciplines Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -42,14 +42,6 @@ internal sealed class
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetLearnedCraftingDisciplines(MissingMemberBehavior);
-        return new Replica<LearnedCraftingDisciplines>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

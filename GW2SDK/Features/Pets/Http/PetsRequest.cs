@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Pets.Http;
 
-internal sealed class PetsRequest : IHttpRequest<Replica<HashSet<Pet>>>
+internal sealed class PetsRequest : IHttpRequest2<HashSet<Pet>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/pets")
     {
@@ -19,7 +19,7 @@ internal sealed class PetsRequest : IHttpRequest<Replica<HashSet<Pet>>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<Pet>>> SendAsync(
+    public async Task<(HashSet<Pet> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -29,14 +29,6 @@ internal sealed class PetsRequest : IHttpRequest<Replica<HashSet<Pet>>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetPet(MissingMemberBehavior));
-        return new Replica<HashSet<Pet>>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

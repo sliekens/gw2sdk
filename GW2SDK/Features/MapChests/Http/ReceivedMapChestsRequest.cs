@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.MapChests.Http;
 
-internal sealed class ReceivedMapChestsRequest : IHttpRequest<Replica<HashSet<string>>>
+internal sealed class ReceivedMapChestsRequest : IHttpRequest2<HashSet<string>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/account/mapchests")
     {
@@ -13,7 +13,7 @@ internal sealed class ReceivedMapChestsRequest : IHttpRequest<Replica<HashSet<st
 
     public required string? AccessToken { get; init; }
 
-    public async Task<Replica<HashSet<string>>> SendAsync(
+    public async Task<(HashSet<string> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -23,14 +23,6 @@ internal sealed class ReceivedMapChestsRequest : IHttpRequest<Replica<HashSet<st
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetStringRequired());
-        return new Replica<HashSet<string>>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

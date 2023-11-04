@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Equipment.Http;
 
-internal sealed class CharacterEquipmentRequest : IHttpRequest<Replica<CharacterEquipment>>
+internal sealed class CharacterEquipmentRequest : IHttpRequest2<CharacterEquipment>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/equipment") { AcceptEncoding = "gzip" };
@@ -18,7 +18,7 @@ internal sealed class CharacterEquipmentRequest : IHttpRequest<Replica<Character
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<CharacterEquipment>> SendAsync(
+    public async Task<(CharacterEquipment Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -38,14 +38,6 @@ internal sealed class CharacterEquipmentRequest : IHttpRequest<Replica<Character
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetCharacterEquipment(MissingMemberBehavior);
-        return new Replica<CharacterEquipment>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

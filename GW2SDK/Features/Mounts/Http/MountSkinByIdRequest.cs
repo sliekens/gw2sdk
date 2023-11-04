@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Mounts.Http;
 
-internal sealed class MountSkinByIdRequest : IHttpRequest<Replica<MountSkin>>
+internal sealed class MountSkinByIdRequest : IHttpRequest2<MountSkin>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/mounts/skins")
     {
@@ -20,7 +20,7 @@ internal sealed class MountSkinByIdRequest : IHttpRequest<Replica<MountSkin>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<MountSkin>> SendAsync(
+    public async Task<(MountSkin Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -43,14 +43,6 @@ internal sealed class MountSkinByIdRequest : IHttpRequest<Replica<MountSkin>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetMountSkin(MissingMemberBehavior);
-        return new Replica<MountSkin>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

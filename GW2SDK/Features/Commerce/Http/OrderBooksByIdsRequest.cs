@@ -4,7 +4,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Commerce.Http;
 
-internal sealed class OrderBooksByIdsRequest : IHttpRequest<Replica<HashSet<OrderBook>>>
+internal sealed class OrderBooksByIdsRequest : IHttpRequest2<HashSet<OrderBook>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/commerce/listings")
     {
@@ -21,7 +21,7 @@ internal sealed class OrderBooksByIdsRequest : IHttpRequest<Replica<HashSet<Orde
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<OrderBook>>> SendAsync(
+    public async Task<(HashSet<OrderBook> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -43,14 +43,6 @@ internal sealed class OrderBooksByIdsRequest : IHttpRequest<Replica<HashSet<Orde
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetOrderBook(MissingMemberBehavior));
-        return new Replica<HashSet<OrderBook>>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

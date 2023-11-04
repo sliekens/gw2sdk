@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Achievements.Http;
 
-internal sealed class AchievementsByPageRequest : IHttpRequest<Replica<HashSet<Achievement>>>
+internal sealed class AchievementsByPageRequest : IHttpRequest2<HashSet<Achievement>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/achievements")
     {
@@ -23,7 +23,7 @@ internal sealed class AchievementsByPageRequest : IHttpRequest<Replica<HashSet<A
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<Achievement>>> SendAsync(
+    public async Task<(HashSet<Achievement> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -49,14 +49,6 @@ internal sealed class AchievementsByPageRequest : IHttpRequest<Replica<HashSet<A
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetAchievement(MissingMemberBehavior));
-        return new Replica<HashSet<Achievement>>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

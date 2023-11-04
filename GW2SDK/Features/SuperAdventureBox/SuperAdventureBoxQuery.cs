@@ -15,7 +15,7 @@ public sealed class SuperAdventureBoxQuery
 
     #region v2/characters/:id/sab
 
-    public Task<Replica<SuperAdventureBoxProgress>> GetSuperAdventureBoxProgress(
+    public Task<(SuperAdventureBoxProgress Value, MessageContext Context)> GetSuperAdventureBoxProgress(
         string characterId,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,

@@ -13,7 +13,7 @@ public sealed class RacesQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<Replica<HashSet<Race>>> GetRaces(
+    public Task<(HashSet<Race> Value, MessageContext Context)> GetRaces(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -27,7 +27,7 @@ public sealed class RacesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<string>>> GetRacesIndex(
+    public Task<(HashSet<string> Value, MessageContext Context)> GetRacesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -35,7 +35,7 @@ public sealed class RacesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Race>> GetRaceByName(
+    public Task<(Race Value, MessageContext Context)> GetRaceByName(
         RaceName raceName,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -50,7 +50,7 @@ public sealed class RacesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Race>>> GetRacesByNames(
+    public Task<(HashSet<Race> Value, MessageContext Context)> GetRacesByNames(
         IReadOnlyCollection<RaceName> raceNames,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -65,7 +65,7 @@ public sealed class RacesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Race>>> GetRacesByPage(
+    public Task<(HashSet<Race> Value, MessageContext Context)> GetRacesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

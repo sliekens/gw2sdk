@@ -21,7 +21,7 @@ public sealed class CommerceQuery
 
     #region v2/commerce/delivery
 
-    public Task<Replica<DeliveryBox>> GetDeliveryBox(
+    public Task<(DeliveryBox Value, MessageContext Context)> GetDeliveryBox(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -39,7 +39,7 @@ public sealed class CommerceQuery
 
     #region v2/commerce/prices
 
-    public Task<Replica<HashSet<int>>> GetItemPricesIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetItemPricesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -47,7 +47,7 @@ public sealed class CommerceQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<ItemPrice>> GetItemPriceById(
+    public Task<(ItemPrice Value, MessageContext Context)> GetItemPriceById(
         int itemId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -60,7 +60,7 @@ public sealed class CommerceQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<ItemPrice>>> GetItemPricesByIds(
+    public Task<(HashSet<ItemPrice> Value, MessageContext Context)> GetItemPricesByIds(
         IReadOnlyCollection<int> itemIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -131,7 +131,7 @@ public sealed class CommerceQuery
 
     #region v2/commerce/listings
 
-    public Task<Replica<HashSet<int>>> GetOrderBooksIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetOrderBooksIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -139,7 +139,7 @@ public sealed class CommerceQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<OrderBook>> GetOrderBookById(
+    public Task<(OrderBook Value, MessageContext Context)> GetOrderBookById(
         int itemId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -152,7 +152,7 @@ public sealed class CommerceQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<OrderBook>>> GetOrderBooksByIds(
+    public Task<(HashSet<OrderBook> Value, MessageContext Context)> GetOrderBooksByIds(
         IReadOnlyCollection<int> itemIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -223,7 +223,7 @@ public sealed class CommerceQuery
 
     #region v2/commerce/exchange
 
-    public Task<Replica<GemsForGoldExchange>> ExchangeGemsForGold(
+    public Task<(GemsForGoldExchange Value, MessageContext Context)> ExchangeGemsForGold(
         int gemsCount,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -236,7 +236,7 @@ public sealed class CommerceQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<GoldForGemsExchange>> ExchangeGoldForGems(
+    public Task<(GoldForGemsExchange Value, MessageContext Context)> ExchangeGoldForGems(
         Coin coinsCount,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -253,7 +253,7 @@ public sealed class CommerceQuery
 
     #region v2/commerce/transactions
 
-    public Task<Replica<HashSet<Order>>> GetBuyOrders(
+    public Task<(HashSet<Order> Value, MessageContext Context)> GetBuyOrders(
         int pageIndex,
         int? pageSize,
         string? accessToken,
@@ -270,7 +270,7 @@ public sealed class CommerceQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Order>>> GetSellOrders(
+    public Task<(HashSet<Order> Value, MessageContext Context)> GetSellOrders(
         int pageIndex,
         int? pageSize,
         string? accessToken,
@@ -287,7 +287,7 @@ public sealed class CommerceQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Transaction>>> GetPurchases(
+    public Task<(HashSet<Transaction> Value, MessageContext Context)> GetPurchases(
         int pageIndex,
         int? pageSize,
         string? accessToken,
@@ -304,7 +304,7 @@ public sealed class CommerceQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Transaction>>> GetSales(
+    public Task<(HashSet<Transaction> Value, MessageContext Context)> GetSales(
         int pageIndex,
         int? pageSize,
         string? accessToken,

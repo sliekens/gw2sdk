@@ -15,7 +15,7 @@ public sealed class WalletQuery
 
     #region v2/account/wallet
 
-    public Task<Replica<HashSet<CurrencyAmount>>> GetWallet(
+    public Task<(HashSet<CurrencyAmount> Value, MessageContext Context)> GetWallet(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -33,7 +33,7 @@ public sealed class WalletQuery
 
     #region v2/currencies
 
-    public Task<Replica<HashSet<Currency>>> GetCurrencies(
+    public Task<(HashSet<Currency> Value, MessageContext Context)> GetCurrencies(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -47,7 +47,7 @@ public sealed class WalletQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetCurrenciesIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetCurrenciesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -55,7 +55,7 @@ public sealed class WalletQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Currency>> GetCurrencyById(
+    public Task<(Currency Value, MessageContext Context)> GetCurrencyById(
         int currencyId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -70,7 +70,7 @@ public sealed class WalletQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Currency>>> GetCurrenciesByIds(
+    public Task<(HashSet<Currency> Value, MessageContext Context)> GetCurrenciesByIds(
         IReadOnlyCollection<int> currencyIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -85,7 +85,7 @@ public sealed class WalletQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Currency>>> GetCurrenciesByPage(
+    public Task<(HashSet<Currency> Value, MessageContext Context)> GetCurrenciesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

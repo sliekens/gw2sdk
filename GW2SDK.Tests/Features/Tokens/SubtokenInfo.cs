@@ -54,7 +54,7 @@ public class SubtokenInfo
 
         Assert.True(subtokenPermissions.SetEquals(subtoken.Permissions));
 
-        AssertEx.Equal(createdSubtoken.Date, subtoken.IssuedAt, TimeSpan.FromSeconds(1));
+        AssertEx.Equal(createdSubtoken.Context.Date, subtoken.IssuedAt, TimeSpan.FromSeconds(1));
 
         // Truncate milliseconds: API uses 1 second precision
         var expectedExpiry = DateTimeOffset.FromUnixTimeSeconds(expiresAt.ToUnixTimeSeconds());

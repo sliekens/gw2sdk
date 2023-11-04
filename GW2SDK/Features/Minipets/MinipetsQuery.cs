@@ -15,7 +15,7 @@ public sealed class MinipetsQuery
 
     #region v2/account/minis
 
-    public Task<Replica<HashSet<int>>> GetUnlockedMinipets(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedMinipets(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -28,7 +28,7 @@ public sealed class MinipetsQuery
 
     #region v2/minis
 
-    public Task<Replica<HashSet<Minipet>>> GetMinipets(
+    public Task<(HashSet<Minipet> Value, MessageContext Context)> GetMinipets(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -42,7 +42,7 @@ public sealed class MinipetsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetMinipetsIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetMinipetsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -50,7 +50,7 @@ public sealed class MinipetsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Minipet>> GetMinipetById(
+    public Task<(Minipet Value, MessageContext Context)> GetMinipetById(
         int minipetId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -65,7 +65,7 @@ public sealed class MinipetsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Minipet>>> GetMinipetsByIds(
+    public Task<(HashSet<Minipet> Value, MessageContext Context)> GetMinipetsByIds(
         IReadOnlyCollection<int> minipetIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -80,7 +80,7 @@ public sealed class MinipetsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Minipet>>> GetMinipetsByPage(
+    public Task<(HashSet<Minipet> Value, MessageContext Context)> GetMinipetsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

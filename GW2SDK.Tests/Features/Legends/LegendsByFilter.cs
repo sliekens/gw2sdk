@@ -19,8 +19,8 @@ public class LegendsByFilter
         var actual = await sut.Legends.GetLegendsByIds(ids);
 
         Assert.Equal(ids.Count, actual.Value.Count);
-        Assert.NotNull(actual.ResultContext);
-        Assert.Equal(ids.Count, actual.ResultContext.ResultCount);
+        Assert.NotNull(actual.Context.ResultContext);
+        Assert.Equal(ids.Count, actual.Context.ResultContext.ResultCount);
         Assert.All(
             actual.Value,
             entry =>

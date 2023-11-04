@@ -22,7 +22,7 @@ public sealed class PvpQuery
 
     #region v2/pvp/seasons/:id/leaderboards
 
-    public Task<Replica<HashSet<string>>> GetLeaderboards(
+    public Task<(HashSet<string> Value, MessageContext Context)> GetLeaderboards(
         string seasonId,
         CancellationToken cancellationToken = default
     )
@@ -35,7 +35,7 @@ public sealed class PvpQuery
 
     #region v2/pvp/seasons/:id/leaderboards/:board
 
-    public Task<Replica<HashSet<string>>> GetLeaderboardRegions(
+    public Task<(HashSet<string> Value, MessageContext Context)> GetLeaderboardRegions(
         string seasonId,
         string boardId,
         CancellationToken cancellationToken = default
@@ -49,7 +49,7 @@ public sealed class PvpQuery
 
     #region v2/pvp/seasons/:id/leaderboards/:board/:region
 
-    public Task<Replica<HashSet<LeaderboardEntry>>> GetLeaderboardEntries(
+    public Task<(HashSet<LeaderboardEntry> Value, MessageContext Context)> GetLeaderboardEntries(
         string seasonId,
         string boardId,
         string regionId,
@@ -71,7 +71,7 @@ public sealed class PvpQuery
 
     #region v2/pvp/standings
 
-    public Task<Replica<HashSet<Standing>>> GetStandings(
+    public Task<(HashSet<Standing> Value, MessageContext Context)> GetStandings(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -89,7 +89,7 @@ public sealed class PvpQuery
 
     #region v2/pvp/stats
 
-    public Task<Replica<AccountStats>> GetStats(
+    public Task<(AccountStats Value, MessageContext Context)> GetStats(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -107,7 +107,7 @@ public sealed class PvpQuery
 
     #region v2/pvp/amulets
 
-    public Task<Replica<HashSet<Amulet>>> GetAmulets(
+    public Task<(HashSet<Amulet> Value, MessageContext Context)> GetAmulets(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -121,7 +121,7 @@ public sealed class PvpQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetAmuletsIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetAmuletsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -129,7 +129,7 @@ public sealed class PvpQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Amulet>> GetAmuletById(
+    public Task<(Amulet Value, MessageContext Context)> GetAmuletById(
         int amuletId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -144,7 +144,7 @@ public sealed class PvpQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Amulet>>> GetAmuletsByIds(
+    public Task<(HashSet<Amulet> Value, MessageContext Context)> GetAmuletsByIds(
         IReadOnlyCollection<int> amuletIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -159,7 +159,7 @@ public sealed class PvpQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Amulet>>> GetAmuletsByPage(
+    public Task<(HashSet<Amulet> Value, MessageContext Context)> GetAmuletsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -180,7 +180,7 @@ public sealed class PvpQuery
 
     #region v2/pvp/heroes
 
-    public Task<Replica<HashSet<Hero>>> GetHeroes(
+    public Task<(HashSet<Hero> Value, MessageContext Context)> GetHeroes(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -194,7 +194,7 @@ public sealed class PvpQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<string>>> GetHeroesIndex(
+    public Task<(HashSet<string> Value, MessageContext Context)> GetHeroesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -202,7 +202,7 @@ public sealed class PvpQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Hero>> GetHeroById(
+    public Task<(Hero Value, MessageContext Context)> GetHeroById(
         string heroId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -217,7 +217,7 @@ public sealed class PvpQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Hero>>> GetHeroesByIds(
+    public Task<(HashSet<Hero> Value, MessageContext Context)> GetHeroesByIds(
         IReadOnlyCollection<string> heroIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -232,7 +232,7 @@ public sealed class PvpQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Hero>>> GetHeroesByPage(
+    public Task<(HashSet<Hero> Value, MessageContext Context)> GetHeroesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -253,7 +253,7 @@ public sealed class PvpQuery
 
     #region v2/account/pvp/heroes
 
-    public Task<Replica<HashSet<int>>> GetUnlockedHeroesIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedHeroesIndex(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -266,7 +266,7 @@ public sealed class PvpQuery
 
     #region v2/pvp/ranks
 
-    public Task<Replica<HashSet<Rank>>> GetRanks(
+    public Task<(HashSet<Rank> Value, MessageContext Context)> GetRanks(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -280,13 +280,13 @@ public sealed class PvpQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetRanksIndex(CancellationToken cancellationToken = default)
+    public Task<(HashSet<int> Value, MessageContext Context)> GetRanksIndex(CancellationToken cancellationToken = default)
     {
         RankIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Rank>> GetRankById(
+    public Task<(Rank Value, MessageContext Context)> GetRankById(
         int rankId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -301,7 +301,7 @@ public sealed class PvpQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Rank>>> GetRanksByIds(
+    public Task<(HashSet<Rank> Value, MessageContext Context)> GetRanksByIds(
         IReadOnlyCollection<int> rankIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -316,7 +316,7 @@ public sealed class PvpQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Rank>>> GetRanksByPage(
+    public Task<(HashSet<Rank> Value, MessageContext Context)> GetRanksByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -337,7 +337,7 @@ public sealed class PvpQuery
 
     #region v2/pvp/seasons
 
-    public Task<Replica<HashSet<Season>>> GetSeasons(
+    public Task<(HashSet<Season> Value, MessageContext Context)> GetSeasons(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -351,7 +351,7 @@ public sealed class PvpQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<string>>> GetSeasonsIndex(
+    public Task<(HashSet<string> Value, MessageContext Context)> GetSeasonsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -359,7 +359,7 @@ public sealed class PvpQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Season>> GetSeasonById(
+    public Task<(Season Value, MessageContext Context)> GetSeasonById(
         string seasonId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -374,7 +374,7 @@ public sealed class PvpQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Season>>> GetSeasonsByIds(
+    public Task<(HashSet<Season> Value, MessageContext Context)> GetSeasonsByIds(
         IReadOnlyCollection<string> seasonIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -389,7 +389,7 @@ public sealed class PvpQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Season>>> GetSeasonsByPage(
+    public Task<(HashSet<Season> Value, MessageContext Context)> GetSeasonsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -410,7 +410,7 @@ public sealed class PvpQuery
 
     #region v2/pvp/games
 
-    public Task<Replica<HashSet<Game>>> GetGames(
+    public Task<(HashSet<Game> Value, MessageContext Context)> GetGames(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -424,7 +424,7 @@ public sealed class PvpQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<string>>> GetGamesIndex(
+    public Task<(HashSet<string> Value, MessageContext Context)> GetGamesIndex(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -438,7 +438,7 @@ public sealed class PvpQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Game>> GetGameById(
+    public Task<(Game Value, MessageContext Context)> GetGameById(
         string gameId,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -453,7 +453,7 @@ public sealed class PvpQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Game>>> GetGamesByIds(
+    public Task<(HashSet<Game> Value, MessageContext Context)> GetGamesByIds(
         IReadOnlyCollection<string> gameIds,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -468,7 +468,7 @@ public sealed class PvpQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Game>>> GetGamesByPage(
+    public Task<(HashSet<Game> Value, MessageContext Context)> GetGamesByPage(
         int pageIndex,
         int? pageSize = default,
         string? accessToken = default,

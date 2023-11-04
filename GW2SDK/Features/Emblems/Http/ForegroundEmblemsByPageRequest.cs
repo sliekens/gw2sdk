@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Emblems.Http;
 
-internal sealed class ForegroundEmblemsByPageRequest : IHttpRequest<Replica<HashSet<Emblem>>>
+internal sealed class ForegroundEmblemsByPageRequest : IHttpRequest2<HashSet<Emblem>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/emblem/foregrounds") { AcceptEncoding = "gzip" };
@@ -19,7 +19,7 @@ internal sealed class ForegroundEmblemsByPageRequest : IHttpRequest<Replica<Hash
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<Emblem>>> SendAsync(
+    public async Task<(HashSet<Emblem> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -36,14 +36,6 @@ internal sealed class ForegroundEmblemsByPageRequest : IHttpRequest<Replica<Hash
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetEmblem(MissingMemberBehavior));
-        return new Replica<HashSet<Emblem>>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

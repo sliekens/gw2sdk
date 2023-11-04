@@ -2,7 +2,7 @@
 
 namespace GuildWars2.ItemStats.Http;
 
-internal sealed class ItemStatByIdRequest : IHttpRequest<Replica<ItemStat>>
+internal sealed class ItemStatByIdRequest : IHttpRequest2<ItemStat>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/itemstats")
     {
@@ -20,7 +20,7 @@ internal sealed class ItemStatByIdRequest : IHttpRequest<Replica<ItemStat>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<ItemStat>> SendAsync(
+    public async Task<(ItemStat Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -43,14 +43,6 @@ internal sealed class ItemStatByIdRequest : IHttpRequest<Replica<ItemStat>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetItemStat(MissingMemberBehavior);
-        return new Replica<ItemStat>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

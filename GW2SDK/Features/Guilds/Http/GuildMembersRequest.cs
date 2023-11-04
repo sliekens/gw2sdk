@@ -4,7 +4,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Http;
 
-internal sealed class GuildMembersRequest : IHttpRequest<Replica<List<GuildMember>>>
+internal sealed class GuildMembersRequest : IHttpRequest2<List<GuildMember>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/guild/:id/members") { AcceptEncoding = "gzip" };
@@ -20,7 +20,7 @@ internal sealed class GuildMembersRequest : IHttpRequest<Replica<List<GuildMembe
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<List<GuildMember>>> SendAsync(
+    public async Task<(List<GuildMember> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -40,14 +40,6 @@ internal sealed class GuildMembersRequest : IHttpRequest<Replica<List<GuildMembe
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetList(entry => entry.GetGuildMember(MissingMemberBehavior));
-        return new Replica<List<GuildMember>>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

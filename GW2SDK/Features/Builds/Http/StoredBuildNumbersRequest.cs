@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Builds.Http;
 
-internal sealed class StoredBuildNumbersRequest : IHttpRequest<Replica<IReadOnlyList<int>>>
+internal sealed class StoredBuildNumbersRequest : IHttpRequest2<IReadOnlyList<int>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/account/buildstorage")
@@ -14,7 +14,7 @@ internal sealed class StoredBuildNumbersRequest : IHttpRequest<Replica<IReadOnly
 
     public required string? AccessToken { get; init; }
 
-    public async Task<Replica<IReadOnlyList<int>>> SendAsync(
+    public async Task<(IReadOnlyList<int> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -29,14 +29,7 @@ internal sealed class StoredBuildNumbersRequest : IHttpRequest<Replica<IReadOnly
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        return new Replica<IReadOnlyList<int>>
-        {
-            Value = json.RootElement.GetList(entry => entry.GetInt32()),
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        var value = json.RootElement.GetList(entry => entry.GetInt32());
+        return (value, new MessageContext(response));
     }
 }

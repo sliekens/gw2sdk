@@ -3,7 +3,7 @@
 namespace GuildWars2.SuperAdventureBox.Http;
 
 internal sealed class
-    SuperAdventureBoxProgressRequest : IHttpRequest<Replica<SuperAdventureBoxProgress>>
+    SuperAdventureBoxProgressRequest : IHttpRequest2<SuperAdventureBoxProgress>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/characters/:id/sab")
     {
@@ -22,7 +22,7 @@ internal sealed class
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<SuperAdventureBoxProgress>> SendAsync(
+    public async Task<(SuperAdventureBoxProgress Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -41,14 +41,6 @@ internal sealed class
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetSuperAdventureBoxProgress(MissingMemberBehavior);
-        return new Replica<SuperAdventureBoxProgress>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

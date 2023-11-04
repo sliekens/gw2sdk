@@ -23,8 +23,8 @@ public class SectorsByFilter
         var actual = await sut.Maps.GetSectorsByIds(continentId, floorId, regionId, mapId, ids);
 
         Assert.Equal(ids.Count, actual.Value.Count);
-        Assert.NotNull(actual.ResultContext);
-        Assert.Equal(ids.Count, actual.ResultContext.ResultCount);
+        Assert.NotNull(actual.Context.ResultContext);
+        Assert.Equal(ids.Count, actual.Context.ResultContext.ResultCount);
         actual.Value.All_have_ids();
         actual.Value.Some_have_names();
         actual.Value.All_have_chat_links();

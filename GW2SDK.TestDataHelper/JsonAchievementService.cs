@@ -26,7 +26,8 @@ public class JsonAchievementService
     private async Task<HashSet<int>> GetAchievementIds()
     {
         var achievements = new AchievementsQuery(http);
-        return await achievements.GetAchievementsIndex();
+        var (ids, _) = await achievements.GetAchievementsIndex();
+        return ids;
     }
 
     public IAsyncEnumerable<(int, string)> GetJsonAchievementsByIds(

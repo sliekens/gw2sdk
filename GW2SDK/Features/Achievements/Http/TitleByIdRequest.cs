@@ -3,7 +3,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Achievements.Http;
 
-internal sealed class TitleByIdRequest : IHttpRequest<Replica<Title>>
+internal sealed class TitleByIdRequest : IHttpRequest2<Title>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/titles")
     {
@@ -21,7 +21,7 @@ internal sealed class TitleByIdRequest : IHttpRequest<Replica<Title>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<Title>> SendAsync(
+    public async Task<(Title Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -43,14 +43,6 @@ internal sealed class TitleByIdRequest : IHttpRequest<Replica<Title>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetTitle(MissingMemberBehavior);
-        return new Replica<Title>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

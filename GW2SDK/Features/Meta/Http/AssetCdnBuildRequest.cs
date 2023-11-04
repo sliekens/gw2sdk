@@ -3,18 +3,22 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Meta.Http;
 
-internal sealed class AssetCdnBuildRequest : IHttpRequest<Replica<Build>>
+internal sealed class AssetCdnBuildRequest : IHttpRequest2<Build>
 {
-    public async Task<Replica<Build>> SendAsync(
+    public async Task<(Build Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
     {
-        return await Latest().ConfigureAwait(false)
-            ?? await Latest64().ConfigureAwait(false)
-            ?? throw new InvalidOperationException("Missing value.");
+        var (value, context) = await Latest().ConfigureAwait(false);
+        if (value is null)
+        {
+            (value, context) = await Latest64().ConfigureAwait(false);
+        }
 
-        async Task<Replica<Build>?> Latest()
+        return (value ?? throw new InvalidOperationException("Missing value."), context);
+
+        async Task<(Build? Value, MessageContext Context)> Latest()
         {
             using var request = new HttpRequestMessage(
                 Get,
@@ -28,7 +32,7 @@ internal sealed class AssetCdnBuildRequest : IHttpRequest<Replica<Build>>
                 .ConfigureAwait(false);
             if (!response.IsSuccessStatusCode)
             {
-                return null;
+                return (null, new MessageContext(response));
             }
 
 #if NET
@@ -42,18 +46,10 @@ internal sealed class AssetCdnBuildRequest : IHttpRequest<Replica<Build>>
             {
                 Id = int.Parse(text, NumberStyles.None, NumberFormatInfo.InvariantInfo)
             };
-            return new Replica<Build>
-            {
-                Value = value,
-                Date = response.Headers.Date.GetValueOrDefault(),
-                Expires = response.Content.Headers.Expires.GetValueOrDefault(),
-                LastModified = response.Content.Headers.LastModified.GetValueOrDefault(),
-                ResultContext = null,
-                PageContext = null
-            };
+            return (value, new MessageContext(response));
         }
 
-        async Task<Replica<Build>?> Latest64()
+        async Task<(Build? Value, MessageContext Context)> Latest64()
         {
             using var request = new HttpRequestMessage(
                 Get,
@@ -67,7 +63,7 @@ internal sealed class AssetCdnBuildRequest : IHttpRequest<Replica<Build>>
                 .ConfigureAwait(false);
             if (!response.IsSuccessStatusCode)
             {
-                return null;
+                return (null, new MessageContext(response));
             }
 
 #if NET
@@ -81,15 +77,7 @@ internal sealed class AssetCdnBuildRequest : IHttpRequest<Replica<Build>>
             {
                 Id = int.Parse(text, NumberStyles.None, NumberFormatInfo.InvariantInfo)
             };
-            return new Replica<Build>
-            {
-                Value = value,
-                Date = response.Headers.Date.GetValueOrDefault(),
-                Expires = response.Content.Headers.Expires.GetValueOrDefault(),
-                LastModified = response.Content.Headers.LastModified.GetValueOrDefault(),
-                ResultContext = null,
-                PageContext = null
-            };
+            return (value, new MessageContext(response));
         }
     }
 }

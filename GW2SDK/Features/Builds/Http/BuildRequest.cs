@@ -3,7 +3,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Builds.Http;
 
-internal sealed class BuildRequest : IHttpRequest<Replica<BuildTemplate>>
+internal sealed class BuildRequest : IHttpRequest2<BuildTemplate>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/buildtabs/:tab") { AcceptEncoding = "gzip" };
@@ -22,7 +22,7 @@ internal sealed class BuildRequest : IHttpRequest<Replica<BuildTemplate>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<BuildTemplate>> SendAsync(
+    public async Task<(BuildTemplate Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -42,14 +42,6 @@ internal sealed class BuildRequest : IHttpRequest<Replica<BuildTemplate>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetBuildTemplate(MissingMemberBehavior);
-        return new Replica<BuildTemplate>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

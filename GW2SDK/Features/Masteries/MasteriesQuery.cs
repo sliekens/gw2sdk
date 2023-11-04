@@ -15,7 +15,7 @@ public sealed class MasteriesQuery
 
     #region v2/account/masteries
 
-    public Task<Replica<HashSet<MasteryProgress>>> GetMasteryProgress(
+    public Task<(HashSet<MasteryProgress> Value, MessageContext Context)> GetMasteryProgress(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -32,7 +32,7 @@ public sealed class MasteriesQuery
 
     #region v2/account/mastery/points
 
-    public Task<Replica<MasteryPointsProgress>> GetMasteryPointsProgress(
+    public Task<(MasteryPointsProgress Value, MessageContext Context)> GetMasteryPointsProgress(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -49,7 +49,7 @@ public sealed class MasteriesQuery
 
     #region v2/masteries
 
-    public Task<Replica<HashSet<Mastery>>> GetMasteries(
+    public Task<(HashSet<Mastery> Value, MessageContext Context)> GetMasteries(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -63,7 +63,7 @@ public sealed class MasteriesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetMasteriesIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetMasteriesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -71,7 +71,7 @@ public sealed class MasteriesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Mastery>> GetMasteryById(
+    public Task<(Mastery Value, MessageContext Context)> GetMasteryById(
         int masteryId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -86,7 +86,7 @@ public sealed class MasteriesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Mastery>>> GetMasteriesByIds(
+    public Task<(HashSet<Mastery> Value, MessageContext Context)> GetMasteriesByIds(
         IReadOnlyCollection<int> masteryIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,

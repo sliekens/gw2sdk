@@ -3,7 +3,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Home.Http;
 
-internal sealed class CatByIdRequest : IHttpRequest<Replica<Cat>>
+internal sealed class CatByIdRequest : IHttpRequest2<Cat>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/home/cats") { AcceptEncoding = "gzip" };
@@ -17,7 +17,7 @@ internal sealed class CatByIdRequest : IHttpRequest<Replica<Cat>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<Cat>> SendAsync(
+    public async Task<(Cat Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -39,14 +39,6 @@ internal sealed class CatByIdRequest : IHttpRequest<Replica<Cat>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetCat(MissingMemberBehavior);
-        return new Replica<Cat>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

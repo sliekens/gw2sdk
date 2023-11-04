@@ -4,7 +4,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Http;
 
-internal sealed class GuildBankRequest : IHttpRequest<Replica<List<GuildBankTab>>>
+internal sealed class GuildBankRequest : IHttpRequest2<List<GuildBankTab>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/guild/:id/stash") { AcceptEncoding = "gzip" };
@@ -20,7 +20,7 @@ internal sealed class GuildBankRequest : IHttpRequest<Replica<List<GuildBankTab>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<List<GuildBankTab>>> SendAsync(
+    public async Task<(List<GuildBankTab> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -40,14 +40,6 @@ internal sealed class GuildBankRequest : IHttpRequest<Replica<List<GuildBankTab>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetList(entry => entry.GetGuildBankTab(MissingMemberBehavior));
-        return new Replica<List<GuildBankTab>>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

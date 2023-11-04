@@ -3,7 +3,7 @@ using GuildWars2.Pvp.Amulets;
 
 namespace GuildWars2.Pvp.Http;
 
-internal sealed class AmuletByIdRequest : IHttpRequest<Replica<Amulet>>
+internal sealed class AmuletByIdRequest : IHttpRequest2<Amulet>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/pvp/amulets") { AcceptEncoding = "gzip" };
@@ -19,7 +19,7 @@ internal sealed class AmuletByIdRequest : IHttpRequest<Replica<Amulet>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<Amulet>> SendAsync(
+    public async Task<(Amulet Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -42,14 +42,6 @@ internal sealed class AmuletByIdRequest : IHttpRequest<Replica<Amulet>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetAmulet(MissingMemberBehavior);
-        return new Replica<Amulet>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Inventories.Http;
 
-internal sealed class InventoryRequest : IHttpRequest<Replica<Baggage>>
+internal sealed class InventoryRequest : IHttpRequest2<Baggage>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/inventory")
@@ -22,7 +22,7 @@ internal sealed class InventoryRequest : IHttpRequest<Replica<Baggage>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<Baggage>> SendAsync(
+    public async Task<(Baggage Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -41,14 +41,6 @@ internal sealed class InventoryRequest : IHttpRequest<Replica<Baggage>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetBaggage(MissingMemberBehavior);
-        return new Replica<Baggage>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

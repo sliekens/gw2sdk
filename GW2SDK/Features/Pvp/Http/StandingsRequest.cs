@@ -4,7 +4,7 @@ using GuildWars2.Pvp.Standings;
 
 namespace GuildWars2.Pvp.Http;
 
-internal sealed class StandingsRequest : IHttpRequest<Replica<HashSet<Standing>>>
+internal sealed class StandingsRequest : IHttpRequest2<HashSet<Standing>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/pvp/standings")
     {
@@ -16,7 +16,7 @@ internal sealed class StandingsRequest : IHttpRequest<Replica<HashSet<Standing>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<Standing>>> SendAsync(
+    public async Task<(HashSet<Standing> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -27,14 +27,6 @@ internal sealed class StandingsRequest : IHttpRequest<Replica<HashSet<Standing>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
 
         var value = json.RootElement.GetSet(entry => entry.GetStanding(MissingMemberBehavior));
-        return new Replica<HashSet<Standing>>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

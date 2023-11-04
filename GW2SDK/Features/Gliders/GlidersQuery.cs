@@ -13,7 +13,7 @@ public sealed class GlidersQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<Replica<HashSet<Glider>>> GetGliders(
+    public Task<(HashSet<Glider> Value, MessageContext Context)> GetGliders(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -27,7 +27,7 @@ public sealed class GlidersQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetGlidersIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetGlidersIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -35,7 +35,7 @@ public sealed class GlidersQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Glider>> GetGliderById(
+    public Task<(Glider Value, MessageContext Context)> GetGliderById(
         int gliderId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -50,7 +50,7 @@ public sealed class GlidersQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Glider>>> GetGlidersByIds(
+    public Task<(HashSet<Glider> Value, MessageContext Context)> GetGlidersByIds(
         IReadOnlyCollection<int> gliderIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -65,7 +65,7 @@ public sealed class GlidersQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Glider>>> GetGlidersByPage(
+    public Task<(HashSet<Glider> Value, MessageContext Context)> GetGlidersByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

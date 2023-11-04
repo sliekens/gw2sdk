@@ -4,7 +4,7 @@ using GuildWars2.Pvp.Amulets;
 
 namespace GuildWars2.Pvp.Http;
 
-internal sealed class AmuletsByIdsRequest : IHttpRequest<Replica<HashSet<Amulet>>>
+internal sealed class AmuletsByIdsRequest : IHttpRequest2<HashSet<Amulet>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/pvp/amulets") { AcceptEncoding = "gzip" };
@@ -21,7 +21,7 @@ internal sealed class AmuletsByIdsRequest : IHttpRequest<Replica<HashSet<Amulet>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<Amulet>>> SendAsync(
+    public async Task<(HashSet<Amulet> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -44,14 +44,6 @@ internal sealed class AmuletsByIdsRequest : IHttpRequest<Replica<HashSet<Amulet>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetAmulet(MissingMemberBehavior));
-        return new Replica<HashSet<Amulet>>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

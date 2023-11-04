@@ -14,10 +14,10 @@ public class GuildUpgradesByPage
         var actual = await sut.Guilds.GetGuildUpgradesByPage(0, pageSize);
 
         Assert.Equal(pageSize, actual.Value.Count);
-        Assert.NotNull(actual.PageContext);
-        Assert.Equal(pageSize, actual.PageContext.PageSize);
-        Assert.NotNull(actual.ResultContext);
-        Assert.Equal(pageSize, actual.ResultContext.ResultCount);
+        Assert.NotNull(actual.Context.PageContext);
+        Assert.Equal(pageSize, actual.Context.PageContext.PageSize);
+        Assert.NotNull(actual.Context.ResultContext);
+        Assert.Equal(pageSize, actual.Context.ResultContext.ResultCount);
         Assert.All(
             actual.Value,
             entry =>

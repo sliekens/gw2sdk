@@ -17,8 +17,8 @@ public class GamesByFilter
         var actual = await sut.Pvp.GetGamesByIds(ids.Value, accessToken.Key);
 
         Assert.Equal(ids.Value.Count, actual.Value.Count);
-        Assert.NotNull(actual.ResultContext);
-        Assert.Equal(ids.Value.Count, actual.ResultContext.ResultCount);
+        Assert.NotNull(actual.Context.ResultContext);
+        Assert.Equal(ids.Value.Count, actual.Context.ResultContext.ResultCount);
         Assert.All(
             actual.Value,
             entry =>

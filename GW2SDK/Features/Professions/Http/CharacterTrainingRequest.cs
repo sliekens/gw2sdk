@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Professions.Http;
 
-internal sealed class CharacterTrainingRequest : IHttpRequest<Replica<CharacterTraining>>
+internal sealed class CharacterTrainingRequest : IHttpRequest2<CharacterTraining>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/training")
@@ -22,7 +22,7 @@ internal sealed class CharacterTrainingRequest : IHttpRequest<Replica<CharacterT
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<CharacterTraining>> SendAsync(
+    public async Task<(CharacterTraining Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -41,14 +41,6 @@ internal sealed class CharacterTrainingRequest : IHttpRequest<Replica<CharacterT
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetCharacterTraining(MissingMemberBehavior);
-        return new Replica<CharacterTraining>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

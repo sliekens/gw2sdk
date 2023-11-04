@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Dungeons.Http;
 
-internal sealed class DungeonsByPageRequest : IHttpRequest<Replica<HashSet<Dungeon>>>
+internal sealed class DungeonsByPageRequest : IHttpRequest2<HashSet<Dungeon>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/dungeons") { AcceptEncoding = "gzip" };
@@ -19,7 +19,7 @@ internal sealed class DungeonsByPageRequest : IHttpRequest<Replica<HashSet<Dunge
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<Dungeon>>> SendAsync(
+    public async Task<(HashSet<Dungeon> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -36,14 +36,6 @@ internal sealed class DungeonsByPageRequest : IHttpRequest<Replica<HashSet<Dunge
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetDungeon(MissingMemberBehavior));
-        return new Replica<HashSet<Dungeon>>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

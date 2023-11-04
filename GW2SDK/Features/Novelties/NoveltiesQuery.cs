@@ -15,7 +15,7 @@ public sealed class NoveltiesQuery
 
     #region v2/account/novelties
 
-    public Task<Replica<HashSet<int>>> GetUnlockedNoveltiesIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedNoveltiesIndex(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -28,7 +28,7 @@ public sealed class NoveltiesQuery
 
     #region v2/novelties
 
-    public Task<Replica<HashSet<Novelty>>> GetNovelties(
+    public Task<(HashSet<Novelty> Value, MessageContext Context)> GetNovelties(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -42,7 +42,7 @@ public sealed class NoveltiesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetNoveltiesIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetNoveltiesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -50,7 +50,7 @@ public sealed class NoveltiesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Novelty>> GetNoveltyById(
+    public Task<(Novelty Value, MessageContext Context)> GetNoveltyById(
         int noveltyId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -65,7 +65,7 @@ public sealed class NoveltiesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Novelty>>> GetNoveltiesByIds(
+    public Task<(HashSet<Novelty> Value, MessageContext Context)> GetNoveltiesByIds(
         IReadOnlyCollection<int> noveltyIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -80,7 +80,7 @@ public sealed class NoveltiesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Novelty>>> GetNoveltiesByPage(
+    public Task<(HashSet<Novelty> Value, MessageContext Context)> GetNoveltiesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

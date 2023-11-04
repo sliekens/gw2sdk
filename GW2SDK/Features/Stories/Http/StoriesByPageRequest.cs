@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Stories.Http;
 
-internal sealed class StoriesByPageRequest : IHttpRequest<Replica<HashSet<Story>>>
+internal sealed class StoriesByPageRequest : IHttpRequest2<HashSet<Story>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/stories") { AcceptEncoding = "gzip" };
@@ -21,7 +21,7 @@ internal sealed class StoriesByPageRequest : IHttpRequest<Replica<HashSet<Story>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<Story>>> SendAsync(
+    public async Task<(HashSet<Story> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -47,14 +47,6 @@ internal sealed class StoriesByPageRequest : IHttpRequest<Replica<HashSet<Story>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetStory(MissingMemberBehavior));
-        return new Replica<HashSet<Story>>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

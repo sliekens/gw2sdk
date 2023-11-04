@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Pets.Http;
 
-internal sealed class PetByIdRequest : IHttpRequest<Replica<Pet>>
+internal sealed class PetByIdRequest : IHttpRequest2<Pet>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/pets") { AcceptEncoding = "gzip" };
@@ -18,7 +18,7 @@ internal sealed class PetByIdRequest : IHttpRequest<Replica<Pet>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<Pet>> SendAsync(
+    public async Task<(Pet Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -41,14 +41,6 @@ internal sealed class PetByIdRequest : IHttpRequest<Replica<Pet>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetPet(MissingMemberBehavior);
-        return new Replica<Pet>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

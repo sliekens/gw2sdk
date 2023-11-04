@@ -154,7 +154,7 @@ internal class Program
         {
             // ItemPrice contains an Id, BestBid, and BestAsk
             // Use the ID to get the item name
-            Item item = await gw2.Items.GetItemById(itemPrice.Id);
+            var (item, _)= await gw2.Items.GetItemById(itemPrice.Id);
 
             PrintRow(item.Name, itemPrice.BestBid, itemPrice.BestAsk);
         }

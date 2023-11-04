@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Builds.Http;
 
-internal sealed class StoredBuildsRequest : IHttpRequest<Replica<IReadOnlyList<Build>>>
+internal sealed class StoredBuildsRequest : IHttpRequest2<IReadOnlyList<Build>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/account/buildstorage")
@@ -20,7 +20,7 @@ internal sealed class StoredBuildsRequest : IHttpRequest<Replica<IReadOnlyList<B
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<IReadOnlyList<Build>>> SendAsync(
+    public async Task<(IReadOnlyList<Build> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -35,14 +35,7 @@ internal sealed class StoredBuildsRequest : IHttpRequest<Replica<IReadOnlyList<B
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        return new Replica<IReadOnlyList<Build>>
-        {
-            Value = json.RootElement.GetList(entry => entry.GetBuild(MissingMemberBehavior)),
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        var value = json.RootElement.GetList(entry => entry.GetBuild(MissingMemberBehavior));
+        return (value, new MessageContext(response));
     }
 }

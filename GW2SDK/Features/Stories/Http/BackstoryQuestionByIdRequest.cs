@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Stories.Http;
 
-internal sealed class BackstoryQuestionByIdRequest : IHttpRequest<Replica<BackstoryQuestion>>
+internal sealed class BackstoryQuestionByIdRequest : IHttpRequest2<BackstoryQuestion>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/backstory/questions") { AcceptEncoding = "gzip" };
@@ -18,7 +18,7 @@ internal sealed class BackstoryQuestionByIdRequest : IHttpRequest<Replica<Backst
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<BackstoryQuestion>> SendAsync(
+    public async Task<(BackstoryQuestion Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -41,14 +41,6 @@ internal sealed class BackstoryQuestionByIdRequest : IHttpRequest<Replica<Backst
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetBackstoryQuestion(MissingMemberBehavior);
-        return new Replica<BackstoryQuestion>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

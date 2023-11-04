@@ -12,7 +12,7 @@ public class BackstoryQuestionsByPage
         var actual = await sut.Stories.GetBackstoryQuestionsByPage(0, 3);
 
         Assert.Equal(3, actual.Value.Count);
-        Assert.NotNull(actual.PageContext);
-        Assert.Equal(3, actual.PageContext.PageSize);
+        Assert.NotNull(actual.Context.PageContext);
+        Assert.Equal(3, actual.Context.PageContext.PageSize);
     }
 }

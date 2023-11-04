@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Equipment.Http;
 
-internal sealed class EquipmentTemplatesRequest : IHttpRequest<Replica<HashSet<EquipmentTemplate>>>
+internal sealed class EquipmentTemplatesRequest : IHttpRequest2<HashSet<EquipmentTemplate>>
 {
     // There is no ids=all support, but page=0 works
     private static readonly HttpRequestMessageTemplate Template =
@@ -20,7 +20,7 @@ internal sealed class EquipmentTemplatesRequest : IHttpRequest<Replica<HashSet<E
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<EquipmentTemplate>>> SendAsync(
+    public async Task<(HashSet<EquipmentTemplate> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -40,14 +40,6 @@ internal sealed class EquipmentTemplatesRequest : IHttpRequest<Replica<HashSet<E
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetEquipmentTemplate(MissingMemberBehavior));
-        return new Replica<HashSet<EquipmentTemplate>>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

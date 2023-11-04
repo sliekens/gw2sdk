@@ -12,8 +12,8 @@ public class ItemStatsByPage
         var actual = await sut.ItemStats.GetItemStatsByPage(0, 3);
 
         Assert.Equal(3, actual.Value.Count);
-        Assert.NotNull(actual.PageContext);
-        Assert.Equal(3, actual.PageContext.PageSize);
-        Assert.False(actual.PageContext.Next.IsEmpty);
+        Assert.NotNull(actual.Context.PageContext);
+        Assert.Equal(3, actual.Context.PageContext.PageSize);
+        Assert.False(actual.Context.PageContext.Next.IsEmpty);
     }
 }

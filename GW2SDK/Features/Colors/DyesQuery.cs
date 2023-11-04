@@ -16,7 +16,7 @@ public sealed class DyesQuery
     #region v2/account/dyes
 
     /// <summary>Gets the IDs of the dyes unlocked by the current account.</summary>
-    public Task<Replica<HashSet<int>>> GetUnlockedDyesIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedDyesIndex(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -29,7 +29,7 @@ public sealed class DyesQuery
 
     #region v2/colors
 
-    public Task<Replica<HashSet<Dye>>> GetColors(
+    public Task<(HashSet<Dye> Value, MessageContext Context)> GetColors(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -43,13 +43,13 @@ public sealed class DyesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetColorsIndex(CancellationToken cancellationToken = default)
+    public Task<(HashSet<int> Value, MessageContext Context)> GetColorsIndex(CancellationToken cancellationToken = default)
     {
         ColorsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Dye>> GetColorById(
+    public Task<(Dye Value, MessageContext Context)> GetColorById(
         int colorId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -64,7 +64,7 @@ public sealed class DyesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Dye>>> GetColorsByIds(
+    public Task<(HashSet<Dye> Value, MessageContext Context)> GetColorsByIds(
         IReadOnlyCollection<int> colorIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -79,7 +79,7 @@ public sealed class DyesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Dye>>> GetColorsByPage(
+    public Task<(HashSet<Dye> Value, MessageContext Context)> GetColorsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Meta.Http;
 
-internal sealed class BuildRequest : IHttpRequest<Replica<Build>>
+internal sealed class BuildRequest : IHttpRequest2<Build>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/build")
     {
@@ -11,7 +11,7 @@ internal sealed class BuildRequest : IHttpRequest<Replica<Build>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<Build>> SendAsync(
+    public async Task<(Build Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -21,14 +21,6 @@ internal sealed class BuildRequest : IHttpRequest<Replica<Build>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetBuild(MissingMemberBehavior);
-        return new Replica<Build>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

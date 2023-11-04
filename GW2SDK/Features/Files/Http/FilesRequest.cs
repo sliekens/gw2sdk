@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Files.Http;
 
-internal sealed class FilesRequest : IHttpRequest<Replica<HashSet<Asset>>>
+internal sealed class FilesRequest : IHttpRequest2<HashSet<Asset>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/files")
     {
@@ -17,7 +17,7 @@ internal sealed class FilesRequest : IHttpRequest<Replica<HashSet<Asset>>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<Asset>>> SendAsync(
+    public async Task<(HashSet<Asset> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -27,14 +27,6 @@ internal sealed class FilesRequest : IHttpRequest<Replica<HashSet<Asset>>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetAsset(MissingMemberBehavior));
-        return new Replica<HashSet<Asset>>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

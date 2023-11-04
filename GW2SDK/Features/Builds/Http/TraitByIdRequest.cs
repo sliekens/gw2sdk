@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Builds.Http;
 
-internal sealed class TraitByIdRequest : IHttpRequest<Replica<Trait>>
+internal sealed class TraitByIdRequest : IHttpRequest2<Trait>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/traits")
     {
@@ -20,7 +20,7 @@ internal sealed class TraitByIdRequest : IHttpRequest<Replica<Trait>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<Trait>> SendAsync(
+    public async Task<(Trait Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -43,14 +43,6 @@ internal sealed class TraitByIdRequest : IHttpRequest<Replica<Trait>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetTrait(MissingMemberBehavior);
-        return new Replica<Trait>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

@@ -19,8 +19,8 @@ public class AchievementsByFilter
         var actual = await sut.Achievements.GetAchievementsByIds(ids);
 
         Assert.Equal(ids.Count, actual.Value.Count);
-        Assert.NotNull(actual.ResultContext);
-        Assert.Equal(ids.Count, actual.ResultContext.ResultCount);
+        Assert.NotNull(actual.Context.ResultContext);
+        Assert.Equal(ids.Count, actual.Context.ResultContext.ResultCount);
         Assert.All(
             actual.Value,
             entry =>

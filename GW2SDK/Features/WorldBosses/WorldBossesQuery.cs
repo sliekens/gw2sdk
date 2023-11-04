@@ -13,7 +13,7 @@ public sealed class WorldBossesQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<Replica<HashSet<string>>> GetWorldBosses(
+    public Task<(HashSet<string> Value, MessageContext Context)> GetWorldBosses(
         CancellationToken cancellationToken = default
     )
     {
@@ -21,7 +21,7 @@ public sealed class WorldBossesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<string>>> GetDefeatedWorldBosses(
+    public Task<(HashSet<string> Value, MessageContext Context)> GetDefeatedWorldBosses(
         string? accessToken,
         CancellationToken cancellationToken = default
     )

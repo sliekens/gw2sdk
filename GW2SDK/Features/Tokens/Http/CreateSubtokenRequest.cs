@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Tokens.Http;
 
-internal sealed class CreateSubtokenRequest : IHttpRequest<Replica<CreatedSubtoken>>
+internal sealed class CreateSubtokenRequest : IHttpRequest2<CreatedSubtoken>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/createsubtoken")
     {
@@ -24,7 +24,7 @@ internal sealed class CreateSubtokenRequest : IHttpRequest<Replica<CreatedSubtok
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<CreatedSubtoken>> SendAsync(
+    public async Task<(CreatedSubtoken Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -60,14 +60,6 @@ internal sealed class CreateSubtokenRequest : IHttpRequest<Replica<CreatedSubtok
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetCreatedSubtoken(MissingMemberBehavior);
-        return new Replica<CreatedSubtoken>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

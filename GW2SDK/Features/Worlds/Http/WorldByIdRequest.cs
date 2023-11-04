@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Worlds.Http;
 
-internal sealed class WorldByIdRequest : IHttpRequest<Replica<World>>
+internal sealed class WorldByIdRequest : IHttpRequest2<World>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/worlds")
     {
@@ -20,7 +20,7 @@ internal sealed class WorldByIdRequest : IHttpRequest<Replica<World>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<World>> SendAsync(
+    public async Task<(World Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -43,14 +43,6 @@ internal sealed class WorldByIdRequest : IHttpRequest<Replica<World>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetWorld(MissingMemberBehavior);
-        return new Replica<World>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

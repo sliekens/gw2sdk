@@ -4,7 +4,7 @@ using GuildWars2.Wvw.Matches;
 
 namespace GuildWars2.Wvw.Http;
 
-internal sealed class MatchesByPageRequest : IHttpRequest<Replica<HashSet<Match>>>
+internal sealed class MatchesByPageRequest : IHttpRequest2<HashSet<Match>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/wvw/matches") { AcceptEncoding = "gzip" };
@@ -20,7 +20,7 @@ internal sealed class MatchesByPageRequest : IHttpRequest<Replica<HashSet<Match>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<Match>>> SendAsync(
+    public async Task<(HashSet<Match> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -37,14 +37,6 @@ internal sealed class MatchesByPageRequest : IHttpRequest<Replica<HashSet<Match>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetMatch(MissingMemberBehavior));
-        return new Replica<HashSet<Match>>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

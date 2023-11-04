@@ -3,7 +3,7 @@ using GuildWars2.Wvw.Ranks;
 
 namespace GuildWars2.Wvw.Http;
 
-internal sealed class RankByIdRequest : IHttpRequest<Replica<Rank>>
+internal sealed class RankByIdRequest : IHttpRequest2<Rank>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/wvw/ranks") { AcceptEncoding = "gzip" };
@@ -19,7 +19,7 @@ internal sealed class RankByIdRequest : IHttpRequest<Replica<Rank>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<Rank>> SendAsync(
+    public async Task<(Rank Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -42,14 +42,6 @@ internal sealed class RankByIdRequest : IHttpRequest<Replica<Rank>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetRank(MissingMemberBehavior);
-        return new Replica<Rank>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

@@ -5,7 +5,7 @@ using GuildWars2.Json;
 namespace GuildWars2.Achievements.Http;
 
 internal sealed class
-    AchievementCategoriesByIdsRequest : IHttpRequest<Replica<HashSet<AchievementCategory>>>
+    AchievementCategoriesByIdsRequest : IHttpRequest2<HashSet<AchievementCategory>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/achievements/categories") { AcceptEncoding = "gzip" };
@@ -22,7 +22,7 @@ internal sealed class
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<AchievementCategory>>> SendAsync(
+    public async Task<(HashSet<AchievementCategory> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -45,14 +45,6 @@ internal sealed class
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetAchievementCategory(MissingMemberBehavior));
-        return new Replica<HashSet<AchievementCategory>>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

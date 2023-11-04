@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Achievements.Http;
 
-internal sealed class AccountAchievementByIdRequest : IHttpRequest<Replica<AccountAchievement>>
+internal sealed class AccountAchievementByIdRequest : IHttpRequest2<AccountAchievement>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/account/achievements") { AcceptEncoding = "gzip" };
@@ -18,7 +18,7 @@ internal sealed class AccountAchievementByIdRequest : IHttpRequest<Replica<Accou
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<AccountAchievement>> SendAsync(
+    public async Task<(AccountAchievement Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -41,14 +41,6 @@ internal sealed class AccountAchievementByIdRequest : IHttpRequest<Replica<Accou
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetAccountAchievement(MissingMemberBehavior);
-        return new Replica<AccountAchievement>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

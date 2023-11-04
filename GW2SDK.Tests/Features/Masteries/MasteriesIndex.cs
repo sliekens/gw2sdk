@@ -12,8 +12,8 @@ public class MasteriesIndex
         var actual = await sut.Masteries.GetMasteriesIndex();
 
         Assert.NotEmpty(actual.Value);
-        Assert.NotNull(actual.ResultContext);
-        Assert.Equal(actual.Value.Count, actual.ResultContext.ResultCount);
-        Assert.Equal(actual.Value.Count, actual.ResultContext.ResultTotal);
+        Assert.NotNull(actual.Context.ResultContext);
+        Assert.Equal(actual.Value.Count, actual.Context.ResultContext.ResultCount);
+        Assert.Equal(actual.Value.Count, actual.Context.ResultContext.ResultTotal);
     }
 }

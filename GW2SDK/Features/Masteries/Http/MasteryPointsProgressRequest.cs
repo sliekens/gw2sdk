@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Masteries.Http;
 
-internal sealed class MasteryPointsProgressRequest : IHttpRequest<Replica<MasteryPointsProgress>>
+internal sealed class MasteryPointsProgressRequest : IHttpRequest2<MasteryPointsProgress>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/account/mastery/points")
@@ -15,7 +15,7 @@ internal sealed class MasteryPointsProgressRequest : IHttpRequest<Replica<Master
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<MasteryPointsProgress>> SendAsync(
+    public async Task<(MasteryPointsProgress Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -26,14 +26,6 @@ internal sealed class MasteryPointsProgressRequest : IHttpRequest<Replica<Master
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetMasteryPointsProgress(MissingMemberBehavior);
-        return new Replica<MasteryPointsProgress>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

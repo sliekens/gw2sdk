@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Crafting.Http;
 
-internal sealed class RecipeByIdRequest : IHttpRequest<Replica<Recipe>>
+internal sealed class RecipeByIdRequest : IHttpRequest2<Recipe>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/recipes")
     {
@@ -18,7 +18,7 @@ internal sealed class RecipeByIdRequest : IHttpRequest<Replica<Recipe>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<Recipe>> SendAsync(
+    public async Task<(Recipe Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -40,14 +40,6 @@ internal sealed class RecipeByIdRequest : IHttpRequest<Replica<Recipe>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetRecipe(MissingMemberBehavior);
-        return new Replica<Recipe>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

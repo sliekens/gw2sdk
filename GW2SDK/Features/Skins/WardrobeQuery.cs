@@ -16,7 +16,7 @@ public sealed class WardrobeQuery
 
     #region v2/account/skins
 
-    public Task<Replica<HashSet<int>>> GetUnlockedSkinsIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedSkinsIndex(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -29,13 +29,13 @@ public sealed class WardrobeQuery
 
     #region v2/skins
 
-    public Task<Replica<HashSet<int>>> GetSkinsIndex(CancellationToken cancellationToken = default)
+    public Task<(HashSet<int> Value, MessageContext Context)> GetSkinsIndex(CancellationToken cancellationToken = default)
     {
         SkinsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Skin>> GetSkinById(
+    public Task<(Skin Value, MessageContext Context)> GetSkinById(
         int skinId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -50,7 +50,7 @@ public sealed class WardrobeQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Skin>>> GetSkinsByIds(
+    public Task<(HashSet<Skin> Value, MessageContext Context)> GetSkinsByIds(
         IReadOnlyCollection<int> skinIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -65,7 +65,7 @@ public sealed class WardrobeQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Skin>>> GetSkinsByPage(
+    public Task<(HashSet<Skin> Value, MessageContext Context)> GetSkinsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Accounts.Http;
 
-internal sealed class AccountRequest : IHttpRequest<Replica<AccountSummary>>
+internal sealed class AccountRequest : IHttpRequest2<AccountSummary>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/account")
     {
@@ -14,7 +14,7 @@ internal sealed class AccountRequest : IHttpRequest<Replica<AccountSummary>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<AccountSummary>> SendAsync(
+    public async Task<(AccountSummary Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -24,14 +24,6 @@ internal sealed class AccountRequest : IHttpRequest<Replica<AccountSummary>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetAccountSummary(MissingMemberBehavior);
-        return new Replica<AccountSummary>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

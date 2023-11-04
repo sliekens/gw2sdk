@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Skins.Http;
 
-internal sealed class SkinByIdRequest : IHttpRequest<Replica<Skin>>
+internal sealed class SkinByIdRequest : IHttpRequest2<Skin>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/skins")
     {
@@ -20,7 +20,7 @@ internal sealed class SkinByIdRequest : IHttpRequest<Replica<Skin>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<Skin>> SendAsync(
+    public async Task<(Skin Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -43,14 +43,6 @@ internal sealed class SkinByIdRequest : IHttpRequest<Replica<Skin>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetSkin(MissingMemberBehavior);
-        return new Replica<Skin>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

@@ -27,7 +27,7 @@ public sealed class MapsQuery
     /// <param name="accessToken"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public Task<Replica<HashSet<string>>> GetCompletedHeroChallenges(
+    public Task<(HashSet<string> Value, MessageContext Context)> GetCompletedHeroChallenges(
         string characterName,
         string? accessToken,
         CancellationToken cancellationToken = default
@@ -41,7 +41,7 @@ public sealed class MapsQuery
 
     #region v2/continents
 
-    public Task<Replica<HashSet<Continent>>> GetContinents(
+    public Task<(HashSet<Continent> Value, MessageContext Context)> GetContinents(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -55,7 +55,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetContinentsIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetContinentsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -63,7 +63,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Continent>> GetContinentById(
+    public Task<(Continent Value, MessageContext Context)> GetContinentById(
         int continentId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -78,7 +78,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Continent>>> GetContinentsByIds(
+    public Task<(HashSet<Continent> Value, MessageContext Context)> GetContinentsByIds(
         IReadOnlyCollection<int> continentIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -93,7 +93,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Continent>>> GetContinentsByPage(
+    public Task<(HashSet<Continent> Value, MessageContext Context)> GetContinentsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -114,7 +114,7 @@ public sealed class MapsQuery
 
     #region v2/continents/:id/floors
 
-    public Task<Replica<HashSet<Floor>>> GetFloors(
+    public Task<(HashSet<Floor> Value, MessageContext Context)> GetFloors(
         int continentId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -129,7 +129,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetFloorsIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetFloorsIndex(
         int continentId,
         CancellationToken cancellationToken = default
     )
@@ -138,7 +138,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Floor>> GetFloorById(
+    public Task<(Floor Value, MessageContext Context)> GetFloorById(
         int continentId,
         int floorId,
         Language? language = default,
@@ -154,7 +154,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Floor>>> GetFloorsByIds(
+    public Task<(HashSet<Floor> Value, MessageContext Context)> GetFloorsByIds(
         int continentId,
         IReadOnlyCollection<int> floorIds,
         Language? language = default,
@@ -170,7 +170,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Floor>>> GetFloorsByPage(
+    public Task<(HashSet<Floor> Value, MessageContext Context)> GetFloorsByPage(
         int continentId,
         int pageIndex,
         int? pageSize = default,
@@ -192,7 +192,7 @@ public sealed class MapsQuery
 
     #region v2/continents/:id/floors/:floor/regions
 
-    public Task<Replica<HashSet<Region>>> GetRegions(
+    public Task<(HashSet<Region> Value, MessageContext Context)> GetRegions(
         int continentId,
         int floorId,
         Language? language = default,
@@ -208,7 +208,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetRegionsIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetRegionsIndex(
         int continentId,
         int floorId,
         CancellationToken cancellationToken = default
@@ -218,7 +218,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Region>> GetRegionById(
+    public Task<(Region Value, MessageContext Context)> GetRegionById(
         int continentId,
         int floorId,
         int regionId,
@@ -235,7 +235,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Region>>> GetRegionsByIds(
+    public Task<(HashSet<Region> Value, MessageContext Context)> GetRegionsByIds(
         int continentId,
         int floorId,
         IReadOnlyCollection<int> regionIds,
@@ -252,7 +252,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Region>>> GetRegionsByPage(
+    public Task<(HashSet<Region> Value, MessageContext Context)> GetRegionsByPage(
         int continentId,
         int floorId,
         int pageIndex,
@@ -275,7 +275,7 @@ public sealed class MapsQuery
 
     #region v2/continents/:id/floors/:floor/regions/:region/maps
 
-    public Task<Replica<HashSet<Map>>> GetMaps(
+    public Task<(HashSet<Map> Value, MessageContext Context)> GetMaps(
         int continentId,
         int floorId,
         int regionId,
@@ -292,7 +292,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetMapsIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetMapsIndex(
         int continentId,
         int floorId,
         int regionId,
@@ -303,7 +303,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Map>> GetMapById(
+    public Task<(Map Value, MessageContext Context)> GetMapById(
         int continentId,
         int floorId,
         int regionId,
@@ -321,7 +321,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Map>>> GetMapsByIds(
+    public Task<(HashSet<Map> Value, MessageContext Context)> GetMapsByIds(
         int continentId,
         int floorId,
         int regionId,
@@ -339,7 +339,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Map>>> GetMapsByPage(
+    public Task<(HashSet<Map> Value, MessageContext Context)> GetMapsByPage(
         int continentId,
         int floorId,
         int regionId,
@@ -363,7 +363,7 @@ public sealed class MapsQuery
 
     #region v2/continents/:id/floors/:floor/regions/:region/maps/:map/pois
 
-    public Task<Replica<HashSet<PointOfInterest>>> GetPointsOfInterest(
+    public Task<(HashSet<PointOfInterest> Value, MessageContext Context)> GetPointsOfInterest(
         int continentId,
         int floorId,
         int regionId,
@@ -381,7 +381,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetPointsOfInterestIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetPointsOfInterestIndex(
         int continentId,
         int floorId,
         int regionId,
@@ -393,7 +393,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<PointOfInterest>> GetPointOfInterestById(
+    public Task<(PointOfInterest Value, MessageContext Context)> GetPointOfInterestById(
         int continentId,
         int floorId,
         int regionId,
@@ -413,7 +413,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<PointOfInterest>>> GetPointsOfInterestByIds(
+    public Task<(HashSet<PointOfInterest> Value, MessageContext Context)> GetPointsOfInterestByIds(
         int continentId,
         int floorId,
         int regionId,
@@ -433,7 +433,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<PointOfInterest>>> GetPointsOfInterestByPage(
+    public Task<(HashSet<PointOfInterest> Value, MessageContext Context)> GetPointsOfInterestByPage(
         int continentId,
         int floorId,
         int regionId,
@@ -459,7 +459,7 @@ public sealed class MapsQuery
 
     #region v2/continents/:id/floors/:floor/regions/:region/maps/:map/tasks
 
-    public Task<Replica<HashSet<Heart>>> GetHearts(
+    public Task<(HashSet<Heart> Value, MessageContext Context)> GetHearts(
         int continentId,
         int floorId,
         int regionId,
@@ -477,7 +477,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetHeartsIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetHeartsIndex(
         int continentId,
         int floorId,
         int regionId,
@@ -489,7 +489,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Heart>> GetHeartById(
+    public Task<(Heart Value, MessageContext Context)> GetHeartById(
         int continentId,
         int floorId,
         int regionId,
@@ -508,7 +508,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Heart>>> GetHeartsByIds(
+    public Task<(HashSet<Heart> Value, MessageContext Context)> GetHeartsByIds(
         int continentId,
         int floorId,
         int regionId,
@@ -527,7 +527,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Heart>>> GetHeartsByPage(
+    public Task<(HashSet<Heart> Value, MessageContext Context)> GetHeartsByPage(
         int continentId,
         int floorId,
         int regionId,
@@ -552,7 +552,7 @@ public sealed class MapsQuery
 
     #region v2/continents/:id/floors/:floor/regions/:region/maps/:map/sectors
 
-    public Task<Replica<HashSet<Sector>>> GetSectors(
+    public Task<(HashSet<Sector> Value, MessageContext Context)> GetSectors(
         int continentId,
         int floorId,
         int regionId,
@@ -570,7 +570,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetSectorsIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetSectorsIndex(
         int continentId,
         int floorId,
         int regionId,
@@ -582,7 +582,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Sector>> GetSectorById(
+    public Task<(Sector Value, MessageContext Context)> GetSectorById(
         int continentId,
         int floorId,
         int regionId,
@@ -601,7 +601,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Sector>>> GetSectorsByIds(
+    public Task<(HashSet<Sector> Value, MessageContext Context)> GetSectorsByIds(
         int continentId,
         int floorId,
         int regionId,
@@ -620,7 +620,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Sector>>> GetSectorsByPage(
+    public Task<(HashSet<Sector> Value, MessageContext Context)> GetSectorsByPage(
         int continentId,
         int floorId,
         int regionId,
@@ -645,7 +645,7 @@ public sealed class MapsQuery
 
     #region v2/maps
 
-    public Task<Replica<HashSet<MapSummary>>> GetMapSummaries(
+    public Task<(HashSet<MapSummary> Value, MessageContext Context)> GetMapSummaries(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -659,7 +659,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetMapSummariesIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetMapSummariesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -667,7 +667,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<MapSummary>> GetMapSummaryById(
+    public Task<(MapSummary Value, MessageContext Context)> GetMapSummaryById(
         int mapId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -682,7 +682,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<MapSummary>>> MapSummariesByIds(
+    public Task<(HashSet<MapSummary> Value, MessageContext Context)> MapSummariesByIds(
         IReadOnlyCollection<int> mapIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -697,7 +697,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<MapSummary>>> MapSummariesByPage(
+    public Task<(HashSet<MapSummary> Value, MessageContext Context)> MapSummariesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

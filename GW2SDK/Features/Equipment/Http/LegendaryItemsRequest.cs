@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Equipment.Http;
 
-internal sealed class LegendaryItemsRequest : IHttpRequest<Replica<HashSet<LegendaryItem>>>
+internal sealed class LegendaryItemsRequest : IHttpRequest2<HashSet<LegendaryItem>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/legendaryarmory")
     {
@@ -17,7 +17,7 @@ internal sealed class LegendaryItemsRequest : IHttpRequest<Replica<HashSet<Legen
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<LegendaryItem>>> SendAsync(
+    public async Task<(HashSet<LegendaryItem> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -27,14 +27,6 @@ internal sealed class LegendaryItemsRequest : IHttpRequest<Replica<HashSet<Legen
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetLegendaryItem(MissingMemberBehavior));
-        return new Replica<HashSet<LegendaryItem>>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

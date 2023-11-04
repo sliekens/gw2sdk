@@ -15,7 +15,7 @@ public sealed class OutfitsQuery
 
     #region v2/account/outfits
 
-    public Task<Replica<HashSet<int>>> GetUnlockedOutfitsIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedOutfitsIndex(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -28,7 +28,7 @@ public sealed class OutfitsQuery
 
     #region v2/outfits
 
-    public Task<Replica<HashSet<Outfit>>> GetOutfits(
+    public Task<(HashSet<Outfit> Value, MessageContext Context)> GetOutfits(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -42,7 +42,7 @@ public sealed class OutfitsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetOutfitsIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetOutfitsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -50,7 +50,7 @@ public sealed class OutfitsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Outfit>> GetOutfitById(
+    public Task<(Outfit Value, MessageContext Context)> GetOutfitById(
         int outfitId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -65,7 +65,7 @@ public sealed class OutfitsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Outfit>>> GetOutfitsByIds(
+    public Task<(HashSet<Outfit> Value, MessageContext Context)> GetOutfitsByIds(
         IReadOnlyCollection<int> outfitIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -80,7 +80,7 @@ public sealed class OutfitsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Outfit>>> GetOutfitsByPage(
+    public Task<(HashSet<Outfit> Value, MessageContext Context)> GetOutfitsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

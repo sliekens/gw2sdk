@@ -3,7 +3,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Commerce.Http;
 
-internal sealed class ExchangeGoldForGemsRequest : IHttpRequest<Replica<GoldForGemsExchange>>
+internal sealed class ExchangeGoldForGemsRequest : IHttpRequest2<GoldForGemsExchange>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/commerce/exchange/coins") { AcceptEncoding = "gzip" };
@@ -17,7 +17,7 @@ internal sealed class ExchangeGoldForGemsRequest : IHttpRequest<Replica<GoldForG
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<GoldForGemsExchange>> SendAsync(
+    public async Task<(GoldForGemsExchange Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -39,14 +39,6 @@ internal sealed class ExchangeGoldForGemsRequest : IHttpRequest<Replica<GoldForG
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetGoldForGemsExchange(MissingMemberBehavior);
-        return new Replica<GoldForGemsExchange>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

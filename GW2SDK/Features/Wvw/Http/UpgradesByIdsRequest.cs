@@ -4,7 +4,7 @@ using GuildWars2.Wvw.Upgrades;
 
 namespace GuildWars2.Wvw.Http;
 
-internal sealed class UpgradesByIdsRequest : IHttpRequest<Replica<HashSet<ObjectiveUpgrade>>>
+internal sealed class UpgradesByIdsRequest : IHttpRequest2<HashSet<ObjectiveUpgrade>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/wvw/upgrades") { AcceptEncoding = "gzip" };
@@ -21,7 +21,7 @@ internal sealed class UpgradesByIdsRequest : IHttpRequest<Replica<HashSet<Object
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<ObjectiveUpgrade>>> SendAsync(
+    public async Task<(HashSet<ObjectiveUpgrade> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -44,14 +44,6 @@ internal sealed class UpgradesByIdsRequest : IHttpRequest<Replica<HashSet<Object
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetObjectiveUpgrade(MissingMemberBehavior));
-        return new Replica<HashSet<ObjectiveUpgrade>>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

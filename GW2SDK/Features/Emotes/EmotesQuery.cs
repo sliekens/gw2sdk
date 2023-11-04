@@ -15,7 +15,7 @@ public sealed class EmotesQuery
 
     #region v2/account/emotes
 
-    public Task<Replica<HashSet<string>>> GetUnlockedEmotes(
+    public Task<(HashSet<string> Value, MessageContext Context)> GetUnlockedEmotes(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -28,7 +28,7 @@ public sealed class EmotesQuery
 
     #region v2/emotes
 
-    public Task<Replica<HashSet<Emote>>> GetEmotes(
+    public Task<(HashSet<Emote> Value, MessageContext Context)> GetEmotes(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -37,7 +37,7 @@ public sealed class EmotesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<string>>> GetEmotesIndex(
+    public Task<(HashSet<string> Value, MessageContext Context)> GetEmotesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -45,7 +45,7 @@ public sealed class EmotesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Emote>> GetEmoteById(
+    public Task<(Emote Value, MessageContext Context)> GetEmoteById(
         string emoteId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -55,7 +55,7 @@ public sealed class EmotesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Emote>>> GetEmotesByIds(
+    public Task<(HashSet<Emote> Value, MessageContext Context)> GetEmotesByIds(
         IReadOnlyCollection<string> emoteIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -66,7 +66,7 @@ public sealed class EmotesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Emote>>> GetEmotesByPage(
+    public Task<(HashSet<Emote> Value, MessageContext Context)> GetEmotesByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,

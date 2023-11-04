@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Banking.Http;
 
-internal sealed class MaterialCategoryByIdRequest : IHttpRequest<Replica<MaterialCategory>>
+internal sealed class MaterialCategoryByIdRequest : IHttpRequest2<MaterialCategory>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/materials")
     {
@@ -20,7 +20,7 @@ internal sealed class MaterialCategoryByIdRequest : IHttpRequest<Replica<Materia
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<MaterialCategory>> SendAsync(
+    public async Task<(MaterialCategory Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -43,14 +43,6 @@ internal sealed class MaterialCategoryByIdRequest : IHttpRequest<Replica<Materia
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetMaterialCategory(MissingMemberBehavior);
-        return new Replica<MaterialCategory>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

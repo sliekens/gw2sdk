@@ -17,13 +17,13 @@ AnsiConsole.MarkupLine($"Gw2: [white on dodgerblue2]{build.Value.Id}[/]");
 var options = RouteOptions.Prompt();
 var routes = new RouteTable(options);
 
-ApiVersion v1 = await gw2.Meta.GetApiVersion("v1");
+var (v1, _) = await gw2.Meta.GetApiVersion("v1");
 foreach (var route in v1.Routes)
 {
     routes.AddRoute(route, v1.Languages);
 }
 
-ApiVersion v2 = await gw2.Meta.GetApiVersion();
+var (v2, _) = await gw2.Meta.GetApiVersion();
 foreach (var route in v2.Routes)
 {
     routes.AddRoute(route, v2.Languages);

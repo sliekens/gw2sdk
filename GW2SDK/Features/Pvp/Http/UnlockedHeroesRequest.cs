@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Http;
 
-internal sealed class UnlockedHeroesRequest : IHttpRequest<Replica<HashSet<int>>>
+internal sealed class UnlockedHeroesRequest : IHttpRequest2<HashSet<int>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/account/pvp/heroes")
     {
@@ -13,7 +13,7 @@ internal sealed class UnlockedHeroesRequest : IHttpRequest<Replica<HashSet<int>>
 
     public required string? AccessToken { get; init; }
 
-    public async Task<Replica<HashSet<int>>> SendAsync(
+    public async Task<(HashSet<int> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -23,14 +23,6 @@ internal sealed class UnlockedHeroesRequest : IHttpRequest<Replica<HashSet<int>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetInt32());
-        return new Replica<HashSet<int>>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

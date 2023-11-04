@@ -3,7 +3,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Commerce.Http;
 
-internal sealed class ItemPriceByIdRequest : IHttpRequest<Replica<ItemPrice>>
+internal sealed class ItemPriceByIdRequest : IHttpRequest2<ItemPrice>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/commerce/prices")
     {
@@ -19,7 +19,7 @@ internal sealed class ItemPriceByIdRequest : IHttpRequest<Replica<ItemPrice>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<ItemPrice>> SendAsync(
+    public async Task<(ItemPrice Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -41,14 +41,6 @@ internal sealed class ItemPriceByIdRequest : IHttpRequest<Replica<ItemPrice>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetItemPrice(MissingMemberBehavior);
-        return new Replica<ItemPrice>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

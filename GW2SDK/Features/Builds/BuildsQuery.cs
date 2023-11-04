@@ -22,7 +22,7 @@ public sealed class BuildsQuery
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<IReadOnlyList<int>>> GetStoredBuildNumbers(
+    public Task<(IReadOnlyList<int> Value, MessageContext Context)> GetStoredBuildNumbers(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -38,7 +38,7 @@ public sealed class BuildsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<Build>> GetStoredBuild(
+    public Task<(Build Value, MessageContext Context)> GetStoredBuild(
         int storageNumber,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -59,7 +59,7 @@ public sealed class BuildsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<IReadOnlyList<Build>>> GetStoredBuilds(
+    public Task<(IReadOnlyList<Build> Value, MessageContext Context)> GetStoredBuilds(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -80,7 +80,7 @@ public sealed class BuildsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<IReadOnlyList<Build>>> GetStoredBuilds(
+    public Task<(IReadOnlyList<Build> Value, MessageContext Context)> GetStoredBuilds(
         IReadOnlyCollection<int> storageNumbers,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -106,7 +106,7 @@ public sealed class BuildsQuery
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<int>>> GetBuildNumbers(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetBuildNumbers(
         string characterName,
         string? accessToken,
         CancellationToken cancellationToken = default
@@ -124,7 +124,7 @@ public sealed class BuildsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<BuildTemplate>> GetBuild(
+    public Task<(BuildTemplate Value, MessageContext Context)> GetBuild(
         int templateNumber,
         string characterName,
         string? accessToken,
@@ -147,7 +147,7 @@ public sealed class BuildsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<BuildTemplate>>> GetBuilds(
+    public Task<(HashSet<BuildTemplate> Value, MessageContext Context)> GetBuilds(
         string characterName,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -170,7 +170,7 @@ public sealed class BuildsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<BuildTemplate>> GetActiveBuild(
+    public Task<(BuildTemplate Value, MessageContext Context)> GetActiveBuild(
         string characterName,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -194,7 +194,7 @@ public sealed class BuildsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<Skill>>> GetSkills(
+    public Task<(HashSet<Skill> Value, MessageContext Context)> GetSkills(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -211,7 +211,7 @@ public sealed class BuildsQuery
     /// <summary>Retrieves the IDs of all skills.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<int>>> GetSkillsIndex(CancellationToken cancellationToken = default)
+    public Task<(HashSet<int> Value, MessageContext Context)> GetSkillsIndex(CancellationToken cancellationToken = default)
     {
         SkillsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
@@ -223,7 +223,7 @@ public sealed class BuildsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<Skill>> GetSkillById(
+    public Task<(Skill Value, MessageContext Context)> GetSkillById(
         int skillId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -245,7 +245,7 @@ public sealed class BuildsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<Skill>>> GetSkillsByIds(
+    public Task<(HashSet<Skill> Value, MessageContext Context)> GetSkillsByIds(
         IReadOnlyCollection<int> skillIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -267,7 +267,7 @@ public sealed class BuildsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<Skill>>> GetSkillsByPage(
+    public Task<(HashSet<Skill> Value, MessageContext Context)> GetSkillsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -293,7 +293,7 @@ public sealed class BuildsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<Specialization>>> GetSpecializations(
+    public Task<(HashSet<Specialization> Value, MessageContext Context)> GetSpecializations(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -310,7 +310,7 @@ public sealed class BuildsQuery
     /// <summary>Retrieves the IDs of all specializations.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<int>>> GetSpecializationsIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetSpecializationsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -324,7 +324,7 @@ public sealed class BuildsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<Specialization>> GetSpecializationById(
+    public Task<(Specialization Value, MessageContext Context)> GetSpecializationById(
         int specializationId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -346,7 +346,7 @@ public sealed class BuildsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<Specialization>>> GetSpecializationsByIds(
+    public Task<(HashSet<Specialization> Value, MessageContext Context)> GetSpecializationsByIds(
         IReadOnlyCollection<int> specializationIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -370,7 +370,7 @@ public sealed class BuildsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<Trait>>> GetTraits(
+    public Task<(HashSet<Trait> Value, MessageContext Context)> GetTraits(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -387,7 +387,7 @@ public sealed class BuildsQuery
     /// <summary>Retrieves the IDs of all traits.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<int>>> GetTraitsIndex(CancellationToken cancellationToken = default)
+    public Task<(HashSet<int> Value, MessageContext Context)> GetTraitsIndex(CancellationToken cancellationToken = default)
     {
         TraitsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
@@ -399,7 +399,7 @@ public sealed class BuildsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<Trait>> GetTraitById(
+    public Task<(Trait Value, MessageContext Context)> GetTraitById(
         int traitId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -421,7 +421,7 @@ public sealed class BuildsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<Trait>>> GetTraitsByIds(
+    public Task<(HashSet<Trait> Value, MessageContext Context)> GetTraitsByIds(
         IReadOnlyCollection<int> traitIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -443,7 +443,7 @@ public sealed class BuildsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<Trait>>> GetTraitsByPage(
+    public Task<(HashSet<Trait> Value, MessageContext Context)> GetTraitsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

@@ -15,7 +15,7 @@ public sealed class WorldsQuery
 
     #region v2/worlds
 
-    public Task<Replica<HashSet<World>>> GetWorlds(
+    public Task<(HashSet<World> Value, MessageContext Context)> GetWorlds(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -29,13 +29,13 @@ public sealed class WorldsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetWorldsIndex(CancellationToken cancellationToken = default)
+    public Task<(HashSet<int> Value, MessageContext Context)> GetWorldsIndex(CancellationToken cancellationToken = default)
     {
         WorldsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<World>> GetWorldById(
+    public Task<(World Value, MessageContext Context)> GetWorldById(
         int worldId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -50,7 +50,7 @@ public sealed class WorldsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<World>>> GetWorldsByIds(
+    public Task<(HashSet<World> Value, MessageContext Context)> GetWorldsByIds(
         IReadOnlyCollection<int> worldIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -65,7 +65,7 @@ public sealed class WorldsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<World>>> GetWorldsByPage(
+    public Task<(HashSet<World> Value, MessageContext Context)> GetWorldsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

@@ -12,8 +12,8 @@ public class NodesIndex
         var actual = await sut.Home.GetNodesIndex();
 
         Assert.NotEmpty(actual.Value);
-        Assert.NotNull(actual.ResultContext);
-        Assert.Equal(actual.Value.Count, actual.ResultContext.ResultCount);
-        Assert.Equal(actual.Value.Count, actual.ResultContext.ResultTotal);
+        Assert.NotNull(actual.Context.ResultContext);
+        Assert.Equal(actual.Value.Count, actual.Context.ResultContext.ResultCount);
+        Assert.Equal(actual.Value.Count, actual.Context.ResultContext.ResultTotal);
     }
 }

@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Mounts.Http;
 
-internal sealed class MountSkinsByIdsRequest : IHttpRequest<Replica<HashSet<MountSkin>>>
+internal sealed class MountSkinsByIdsRequest : IHttpRequest2<HashSet<MountSkin>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/mounts/skins")
     {
@@ -22,7 +22,7 @@ internal sealed class MountSkinsByIdsRequest : IHttpRequest<Replica<HashSet<Moun
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<MountSkin>>> SendAsync(
+    public async Task<(HashSet<MountSkin> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -45,14 +45,6 @@ internal sealed class MountSkinsByIdsRequest : IHttpRequest<Replica<HashSet<Moun
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetMountSkin(MissingMemberBehavior));
-        return new Replica<HashSet<MountSkin>>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

@@ -21,7 +21,7 @@ public sealed class InventoryQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<Inventory>> GetSharedInventory(
+    public Task<(Inventory Value, MessageContext Context)> GetSharedInventory(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -45,7 +45,7 @@ public sealed class InventoryQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<Baggage>> GetInventory(
+    public Task<(Baggage Value, MessageContext Context)> GetInventory(
         string characterName,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,

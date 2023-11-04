@@ -12,8 +12,8 @@ public class CatsByPage
         var actual = await sut.Home.GetCatsByPage(0, 3);
 
         Assert.Equal(3, actual.Value.Count);
-        Assert.NotNull(actual.PageContext);
-        Assert.Equal(3, actual.PageContext.PageSize);
+        Assert.NotNull(actual.Context.PageContext);
+        Assert.Equal(3, actual.Context.PageContext.PageSize);
         Assert.All(
             actual.Value,
             cat =>

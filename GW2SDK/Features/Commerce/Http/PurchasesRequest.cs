@@ -4,7 +4,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Commerce.Http;
 
-internal sealed class PurchasesRequest : IHttpRequest<Replica<HashSet<Transaction>>>
+internal sealed class PurchasesRequest : IHttpRequest2<HashSet<Transaction>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/commerce/transactions/history/buys") { AcceptEncoding = "gzip" };
@@ -22,7 +22,7 @@ internal sealed class PurchasesRequest : IHttpRequest<Replica<HashSet<Transactio
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<Transaction>>> SendAsync(
+    public async Task<(HashSet<Transaction> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -48,14 +48,6 @@ internal sealed class PurchasesRequest : IHttpRequest<Replica<HashSet<Transactio
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetTransaction(MissingMemberBehavior));
-        return new Replica<HashSet<Transaction>>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

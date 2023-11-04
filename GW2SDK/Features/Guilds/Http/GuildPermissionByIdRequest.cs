@@ -3,7 +3,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Guilds.Http;
 
-internal sealed class GuildPermissionByIdRequest : IHttpRequest<Replica<GuildPermissionSummary>>
+internal sealed class GuildPermissionByIdRequest : IHttpRequest2<GuildPermissionSummary>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/guild/permissions") { AcceptEncoding = "gzip" };
@@ -19,7 +19,7 @@ internal sealed class GuildPermissionByIdRequest : IHttpRequest<Replica<GuildPer
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<GuildPermissionSummary>> SendAsync(
+    public async Task<(GuildPermissionSummary Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -42,14 +42,6 @@ internal sealed class GuildPermissionByIdRequest : IHttpRequest<Replica<GuildPer
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetGuildPermissionSummary(MissingMemberBehavior);
-        return new Replica<GuildPermissionSummary>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

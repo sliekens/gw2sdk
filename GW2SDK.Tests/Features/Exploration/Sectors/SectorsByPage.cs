@@ -17,8 +17,8 @@ public class SectorsByPage
         var actual = await sut.Maps.GetSectorsByPage(continentId, floorId, regionId, mapId, 0, 3);
 
         Assert.Equal(3, actual.Value.Count);
-        Assert.NotNull(actual.PageContext);
-        Assert.Equal(3, actual.PageContext.PageSize);
+        Assert.NotNull(actual.Context.PageContext);
+        Assert.Equal(3, actual.Context.PageContext.PageSize);
         actual.Value.All_have_ids();
         actual.Value.Some_have_names();
         actual.Value.All_have_chat_links();

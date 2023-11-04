@@ -15,7 +15,7 @@ public sealed class RaidsQuery
 
     #region v2/account/raids
 
-    public Task<Replica<HashSet<string>>> GetCompletedEncounters(
+    public Task<(HashSet<string> Value, MessageContext Context)> GetCompletedEncounters(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -28,7 +28,7 @@ public sealed class RaidsQuery
 
     #region v2/raids
 
-    public Task<Replica<HashSet<string>>> GetRaidsIndex(
+    public Task<(HashSet<string> Value, MessageContext Context)> GetRaidsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -36,7 +36,7 @@ public sealed class RaidsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Raid>> GetRaidById(
+    public Task<(Raid Value, MessageContext Context)> GetRaidById(
         string raidId,
         CancellationToken cancellationToken = default
     )
@@ -48,7 +48,7 @@ public sealed class RaidsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Raid>>> GetRaidsByIds(
+    public Task<(HashSet<Raid> Value, MessageContext Context)> GetRaidsByIds(
         IReadOnlyCollection<string> raidIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -58,7 +58,7 @@ public sealed class RaidsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Raid>>> GetRaidsByPage(
+    public Task<(HashSet<Raid> Value, MessageContext Context)> GetRaidsByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -74,7 +74,7 @@ public sealed class RaidsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Raid>>> GetRaids(
+    public Task<(HashSet<Raid> Value, MessageContext Context)> GetRaids(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )

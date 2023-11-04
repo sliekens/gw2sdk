@@ -22,7 +22,7 @@ public sealed class AccountsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<AccountSummary>> GetSummary(
+    public Task<(AccountSummary Value, MessageContext Context)> GetSummary(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -45,7 +45,7 @@ public sealed class AccountsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<Progression>>> GetProgression(
+    public Task<(HashSet<Progression> Value, MessageContext Context)> GetProgression(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -69,7 +69,7 @@ public sealed class AccountsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<AccountLuck>> GetLuck(
+    public Task<(AccountLuck Value, MessageContext Context)> GetLuck(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -93,7 +93,7 @@ public sealed class AccountsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<CharacterSummary>> GetCharacterSummary(
+    public Task<(CharacterSummary Value, MessageContext Context)> GetCharacterSummary(
         string characterName,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -117,7 +117,7 @@ public sealed class AccountsQuery
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<string>>> GetCharactersIndex(
+    public Task<(HashSet<string> Value, MessageContext Context)> GetCharactersIndex(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -132,7 +132,7 @@ public sealed class AccountsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<Character>> GetCharacterByName(
+    public Task<(Character Value, MessageContext Context)> GetCharacterByName(
         string characterName,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -153,7 +153,7 @@ public sealed class AccountsQuery
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<Replica<HashSet<Character>>> GetCharacters(
+    public Task<(HashSet<Character> Value, MessageContext Context)> GetCharacters(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default

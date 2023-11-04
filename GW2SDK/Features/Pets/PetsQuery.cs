@@ -13,7 +13,7 @@ public sealed class PetsQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<Replica<HashSet<Pet>>> GetPets(
+    public Task<(HashSet<Pet> Value, MessageContext Context)> GetPets(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -27,13 +27,13 @@ public sealed class PetsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetPetsIndex(CancellationToken cancellationToken = default)
+    public Task<(HashSet<int> Value, MessageContext Context)> GetPetsIndex(CancellationToken cancellationToken = default)
     {
         PetsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Pet>> GetPetById(
+    public Task<(Pet Value, MessageContext Context)> GetPetById(
         int petId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -48,7 +48,7 @@ public sealed class PetsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Pet>>> GetPetsByIds(
+    public Task<(HashSet<Pet> Value, MessageContext Context)> GetPetsByIds(
         IReadOnlyCollection<int> petIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -63,7 +63,7 @@ public sealed class PetsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Pet>>> GetPetsByPage(
+    public Task<(HashSet<Pet> Value, MessageContext Context)> GetPetsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

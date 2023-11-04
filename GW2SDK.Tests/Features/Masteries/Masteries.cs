@@ -11,8 +11,8 @@ public class Masteries
 
         var actual = await sut.Masteries.GetMasteries();
 
-        Assert.NotNull(actual.ResultContext);
-        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
+        Assert.NotNull(actual.Context.ResultContext);
+        Assert.Equal(actual.Context.ResultContext.ResultTotal, actual.Value.Count);
         Assert.All(
             actual.Value,
             mastery =>

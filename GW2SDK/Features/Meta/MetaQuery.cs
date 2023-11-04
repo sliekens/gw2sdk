@@ -14,7 +14,7 @@ public sealed class MetaQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<Replica<ApiVersion>> GetApiVersion(
+    public Task<(ApiVersion Value, MessageContext Context)> GetApiVersion(
         string version = "v2",
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -25,7 +25,7 @@ public sealed class MetaQuery
     }
 
     [SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Public API")]
-    public Task<Replica<Build>> GetBuild(
+    public Task<(Build Value, MessageContext Context)> GetBuild(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )

@@ -13,7 +13,7 @@ public sealed class ProfessionsQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<Replica<HashSet<Profession>>> GetProfessions(
+    public Task<(HashSet<Profession> Value, MessageContext Context)> GetProfessions(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -27,7 +27,7 @@ public sealed class ProfessionsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<ProfessionName>>> GetProfessionNames(
+    public Task<(HashSet<ProfessionName> Value, MessageContext Context)> GetProfessionNames(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -36,7 +36,7 @@ public sealed class ProfessionsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Profession>> GetProfessionByName(
+    public Task<(Profession Value, MessageContext Context)> GetProfessionByName(
         ProfessionName professionName,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -51,7 +51,7 @@ public sealed class ProfessionsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Profession>>> GetProfessionsByNames(
+    public Task<(HashSet<Profession> Value, MessageContext Context)> GetProfessionsByNames(
         IReadOnlyCollection<ProfessionName> professionNames,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -66,7 +66,7 @@ public sealed class ProfessionsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Profession>>> GetProfessionsByPage(
+    public Task<(HashSet<Profession> Value, MessageContext Context)> GetProfessionsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -85,7 +85,7 @@ public sealed class ProfessionsQuery
 
     #region v2/characters/:id/training
 
-    public Task<Replica<CharacterTraining>> GetCharacterTraining(
+    public Task<(CharacterTraining Value, MessageContext Context)> GetCharacterTraining(
         string characterName,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,

@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Outfits.Http;
 
-internal sealed class OutfitsByIdsRequest : IHttpRequest<Replica<HashSet<Outfit>>>
+internal sealed class OutfitsByIdsRequest : IHttpRequest2<HashSet<Outfit>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/outfits") { AcceptEncoding = "gzip" };
@@ -20,7 +20,7 @@ internal sealed class OutfitsByIdsRequest : IHttpRequest<Replica<HashSet<Outfit>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<Outfit>>> SendAsync(
+    public async Task<(HashSet<Outfit> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -43,14 +43,6 @@ internal sealed class OutfitsByIdsRequest : IHttpRequest<Replica<HashSet<Outfit>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetOutfit(MissingMemberBehavior));
-        return new Replica<HashSet<Outfit>>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

@@ -4,7 +4,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Http;
 
-internal sealed class GuildUpgradesRequest : IHttpRequest<Replica<HashSet<GuildUpgrade>>>
+internal sealed class GuildUpgradesRequest : IHttpRequest2<HashSet<GuildUpgrade>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/guild/upgrades")
     {
@@ -20,7 +20,7 @@ internal sealed class GuildUpgradesRequest : IHttpRequest<Replica<HashSet<GuildU
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<GuildUpgrade>>> SendAsync(
+    public async Task<(HashSet<GuildUpgrade> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -30,14 +30,6 @@ internal sealed class GuildUpgradesRequest : IHttpRequest<Replica<HashSet<GuildU
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetGuildUpgrade(MissingMemberBehavior));
-        return new Replica<HashSet<GuildUpgrade>>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

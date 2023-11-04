@@ -12,8 +12,8 @@ public class ForegroundEmblems
         var actual = await sut.Emblems.GetForegroundEmblems();
 
         Assert.NotEmpty(actual.Value);
-        Assert.NotNull(actual.ResultContext);
-        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
+        Assert.NotNull(actual.Context.ResultContext);
+        Assert.Equal(actual.Context.ResultContext.ResultTotal, actual.Value.Count);
         Assert.All(
             actual.Value,
             emblem =>

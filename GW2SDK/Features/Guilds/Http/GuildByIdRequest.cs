@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Guilds.Http;
 
-internal sealed class GuildByIdRequest : IHttpRequest<Replica<Guild>>
+internal sealed class GuildByIdRequest : IHttpRequest2<Guild>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/guild/:id") { AcceptEncoding = "gzip" };
@@ -18,7 +18,7 @@ internal sealed class GuildByIdRequest : IHttpRequest<Replica<Guild>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<Guild>> SendAsync(
+    public async Task<(Guild Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -38,14 +38,6 @@ internal sealed class GuildByIdRequest : IHttpRequest<Replica<Guild>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
         var value = json.RootElement.GetGuild(MissingMemberBehavior);
-        return new Replica<Guild>
-        {
-            Value = value,
-            ResultContext = response.Headers.GetResultContext(),
-            PageContext = response.Headers.GetPageContext(),
-            Date = response.Headers.Date.GetValueOrDefault(),
-            Expires = response.Content.Headers.Expires,
-            LastModified = response.Content.Headers.LastModified
-        };
+        return (value, new MessageContext(response));
     }
 }

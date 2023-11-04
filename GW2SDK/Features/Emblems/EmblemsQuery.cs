@@ -15,7 +15,7 @@ public sealed class EmblemsQuery
 
     #region v2/emblem/foregrounds
 
-    public Task<Replica<HashSet<Emblem>>> GetForegroundEmblems(
+    public Task<(HashSet<Emblem> Value, MessageContext Context)> GetForegroundEmblems(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -24,7 +24,7 @@ public sealed class EmblemsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetForegroundEmblemsIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetForegroundEmblemsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -32,7 +32,7 @@ public sealed class EmblemsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Emblem>> GetForegroundEmblemById(
+    public Task<(Emblem Value, MessageContext Context)> GetForegroundEmblemById(
         int foregroundEmblemId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -43,7 +43,7 @@ public sealed class EmblemsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Emblem>>> GetForegroundEmblemsByIds(
+    public Task<(HashSet<Emblem> Value, MessageContext Context)> GetForegroundEmblemsByIds(
         IReadOnlyCollection<int> foregroundEmblemIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -54,7 +54,7 @@ public sealed class EmblemsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Emblem>>> GetForegroundEmblemsByPage(
+    public Task<(HashSet<Emblem> Value, MessageContext Context)> GetForegroundEmblemsByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -73,7 +73,7 @@ public sealed class EmblemsQuery
 
     #region v2/emblem/backgrounds
 
-    public Task<Replica<HashSet<Emblem>>> GetBackgroundEmblems(
+    public Task<(HashSet<Emblem> Value, MessageContext Context)> GetBackgroundEmblems(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -82,7 +82,7 @@ public sealed class EmblemsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetBackgroundEmblemsIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetBackgroundEmblemsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -90,7 +90,7 @@ public sealed class EmblemsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Emblem>> GetBackgroundEmblemById(
+    public Task<(Emblem Value, MessageContext Context)> GetBackgroundEmblemById(
         int backgroundEmblemId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -101,7 +101,7 @@ public sealed class EmblemsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Emblem>>> GetBackgroundEmblemsByIds(
+    public Task<(HashSet<Emblem> Value, MessageContext Context)> GetBackgroundEmblemsByIds(
         IReadOnlyCollection<int> backgroundEmblemIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -112,7 +112,7 @@ public sealed class EmblemsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Emblem>>> GetBackgroundEmblemsByPage(
+    public Task<(HashSet<Emblem> Value, MessageContext Context)> GetBackgroundEmblemsByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,

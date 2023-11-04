@@ -19,7 +19,7 @@ public sealed class CraftingQuery
 
     /// <summary>Gets the IDs of the recipes that were learned from recipe sheets. Unlocked recipes are automatically learned
     /// by characters once they reach the required crafting level.</summary>
-    public Task<Replica<HashSet<int>>> GetUnlockedRecipes(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedRecipes(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -34,7 +34,7 @@ public sealed class CraftingQuery
 
     /// <summary>Gets the IDs of all the recipes that the current character has learned, excluding recipes from sheets for
     /// which the required crafting level is not reached.</summary>
-    public Task<Replica<HashSet<int>>> GetLearnedRecipes(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetLearnedRecipes(
         string characterId,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -53,7 +53,7 @@ public sealed class CraftingQuery
 
     #region v2/dailycrafting
 
-    public Task<Replica<HashSet<string>>> GetDailyRecipes(
+    public Task<(HashSet<string> Value, MessageContext Context)> GetDailyRecipes(
         CancellationToken cancellationToken = default
     )
     {
@@ -65,7 +65,7 @@ public sealed class CraftingQuery
 
     #region v2/account/dailycrafting
 
-    public Task<Replica<HashSet<string>>> GetDailyRecipesOnCooldown(
+    public Task<(HashSet<string> Value, MessageContext Context)> GetDailyRecipesOnCooldown(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -78,7 +78,7 @@ public sealed class CraftingQuery
 
     #region v2/characters/:id/crafting
 
-    public Task<Replica<LearnedCraftingDisciplines>> GetLearnedCraftingDisciplines(
+    public Task<(LearnedCraftingDisciplines Value, MessageContext Context)> GetLearnedCraftingDisciplines(
         string characterName,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -97,7 +97,7 @@ public sealed class CraftingQuery
 
     #region v2/recipes
 
-    public Task<Replica<HashSet<int>>> GetRecipesIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetRecipesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -105,7 +105,7 @@ public sealed class CraftingQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Recipe>> GetRecipeById(
+    public Task<(Recipe Value, MessageContext Context)> GetRecipeById(
         int recipeId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -115,7 +115,7 @@ public sealed class CraftingQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Recipe>>> GetRecipesByIds(
+    public Task<(HashSet<Recipe> Value, MessageContext Context)> GetRecipesByIds(
         IReadOnlyCollection<int> recipeIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -128,7 +128,7 @@ public sealed class CraftingQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Recipe>>> GetRecipesByPage(
+    public Task<(HashSet<Recipe> Value, MessageContext Context)> GetRecipesByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -201,7 +201,7 @@ public sealed class CraftingQuery
 
     #region v2/recipes/search
 
-    public Task<Replica<HashSet<int>>> GetRecipesIndexByIngredientItemId(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetRecipesIndexByIngredientItemId(
         int ingredientItemId,
         CancellationToken cancellationToken = default
     )
@@ -210,7 +210,7 @@ public sealed class CraftingQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Recipe>>> GetRecipesByIngredientItemId(
+    public Task<(HashSet<Recipe> Value, MessageContext Context)> GetRecipesByIngredientItemId(
         int ingredientItemId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -223,7 +223,7 @@ public sealed class CraftingQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Recipe>>> GetRecipesByIngredientItemIdByPage(
+    public Task<(HashSet<Recipe> Value, MessageContext Context)> GetRecipesByIngredientItemIdByPage(
         int ingredientItemId,
         int pageIndex,
         int? pageSize = default,
@@ -239,7 +239,7 @@ public sealed class CraftingQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetRecipesIndexByOutputItemId(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetRecipesIndexByOutputItemId(
         int outputItemId,
         CancellationToken cancellationToken = default
     )
@@ -248,7 +248,7 @@ public sealed class CraftingQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Recipe>>> GetRecipesByOutputItemId(
+    public Task<(HashSet<Recipe> Value, MessageContext Context)> GetRecipesByOutputItemId(
         int outputItemId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -261,7 +261,7 @@ public sealed class CraftingQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Recipe>>> GetRecipesByOutputItemIdByPage(
+    public Task<(HashSet<Recipe> Value, MessageContext Context)> GetRecipesByOutputItemIdByPage(
         int outputItemId,
         int pageIndex,
         int? pageSize = default,
