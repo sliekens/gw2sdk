@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Builds.Facts;
@@ -21,7 +21,8 @@ internal static class PrefixedBuffJson
         OptionalMember status = "status";
         OptionalMember description = "description";
         NullableMember applyCount = "apply_count";
-        RequiredMember prefix = "prefix";
+        RequiredMember prefixIcon = "icon";
+        OptionalMember prefixStatus = "status";
 
         foreach (var member in json.EnumerateObject())
         {
@@ -66,9 +67,29 @@ internal static class PrefixedBuffJson
             {
                 applyCount = member;
             }
-            else if (member.Name == prefix.Name)
+            else if (member.Name == "prefix")
             {
-                prefix = member;
+                foreach (var prefixMember in member.Value.EnumerateObject())
+                {
+                    if (prefixMember.Name == prefixIcon.Name)
+                    {
+                        prefixIcon = prefixMember;
+                    }
+                    else if (prefixMember.Name == prefixStatus.Name)
+                    {
+                        prefixStatus = prefixMember;
+                    }
+                    else if (prefixMember.Name is "text" or "description")
+                    {
+                        // Discard useless text
+                    }
+                    else if (missingMemberBehavior == MissingMemberBehavior.Error)
+                    {
+                        throw new InvalidOperationException(
+                            Strings.UnexpectedMember(prefixMember.Name)
+                        );
+                    }
+                }
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -78,13 +99,14 @@ internal static class PrefixedBuffJson
 
         return new PrefixedBuff
         {
+            Precondition = prefixStatus.Map(value => value.GetString()) ?? "",
+            PrefixIconHref = prefixIcon.Map(value => value.GetStringRequired()),
             Text = text.Map(value => value.GetStringRequired()),
             IconHref = icon.Map(value => value.GetStringRequired()),
             Duration = duration.Map(value => TimeSpan.FromSeconds(value.GetDouble())),
             Status = status.Map(value => value.GetString()) ?? "",
             Description = description.Map(value => value.GetString()) ?? "",
-            ApplyCount = applyCount.Map(value => value.GetInt32()),
-            Prefix = prefix.Map(value => value.GetBuffPrefix(missingMemberBehavior))
+            ApplyCount = applyCount.Map(value => value.GetInt32())
         };
     }
 }
