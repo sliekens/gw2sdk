@@ -21,7 +21,7 @@ public sealed record EliteSkill : Skill
     /// this list.</summary>
     public required IReadOnlyList<int>? TransformSkillIds { get; init; }
 
-    /// <summary>If present, the skill is divided into subskills. For example some Elementalist skills behave differently based
-    /// on the current attunement and some Druid skills are different when in Celestial Avatar form.</summary>
-    public required IReadOnlyList<SkillReference>? SubskillIds { get; init; }
+    /// <summary>If present, the skill is divided into subskills with alternate functions. For example Elementalist glyps have
+    /// different effects based on the active attunement.</summary>
+    public required IReadOnlyList<Subskill>? SubskillIds { get; init; }
 }

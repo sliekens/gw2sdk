@@ -172,9 +172,7 @@ internal static class HealSkillJson
                 ),
             SubskillIds =
                 subskills.Map(
-                    values => values.GetList(
-                        value => value.GetSkillReference(missingMemberBehavior)
-                    )
+                    values => values.GetList(value => value.GetSubskill(missingMemberBehavior))
                 ),
             BundleSkillIds = bundleSkills.Map(values => values.GetList(value => value.GetInt32())),
             Attunement = attunement.Map(value => value.GetEnum<Attunement>(missingMemberBehavior)),

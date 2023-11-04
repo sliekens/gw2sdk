@@ -5,9 +5,7 @@ namespace GuildWars2.Builds;
 
 internal static class SkillFlagsJson
 {
-    public static SkillFlags GetSkillFlags(
-        this JsonElement json
-    )
+    public static SkillFlags GetSkillFlags(this JsonElement json)
     {
         var groundTargeted = false;
         var noUnderwater = false;

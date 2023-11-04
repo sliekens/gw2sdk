@@ -1,11 +1,11 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Builds;
 
-internal static class SkillReferenceJson
+internal static class SubskillJson
 {
-    public static SkillReference GetSkillReference(
+    public static Subskill GetSubskill(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -34,7 +34,7 @@ internal static class SkillReferenceJson
             }
         }
 
-        return new SkillReference
+        return new Subskill
         {
             Id = id.Map(value => value.GetInt32()),
             Attunement = attunement.Map(value => value.GetEnum<Attunement>(missingMemberBehavior)),
