@@ -42,11 +42,11 @@ internal sealed class MountByNameRequest : IHttpRequest<Replica<Mount>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetMount(MissingMemberBehavior);
         return new Replica<Mount>
         {
-            Value = json.RootElement.GetMount(MissingMemberBehavior),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

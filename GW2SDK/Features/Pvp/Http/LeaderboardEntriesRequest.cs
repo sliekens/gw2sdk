@@ -49,9 +49,7 @@ internal sealed class LeaderboardEntriesRequest : IHttpRequest<Replica<HashSet<L
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Path = Template.Path.Replace(":id", SeasonId)
-                        .Replace(":board", BoardId)
-                        .Replace(":region", RegionId),
+                    Path = Template.Path.Replace(":id", SeasonId).Replace(":board", BoardId).Replace(":region", RegionId),
                     Arguments = search
                 },
                 HttpCompletionOption.ResponseHeadersRead,
@@ -60,14 +58,11 @@ internal sealed class LeaderboardEntriesRequest : IHttpRequest<Replica<HashSet<L
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetSet(entry => entry.GetLeaderboardEntry(MissingMemberBehavior));
         return new Replica<HashSet<LeaderboardEntry>>
         {
-            Value =
-                json.RootElement.GetSet(
-                    entry => entry.GetLeaderboardEntry(MissingMemberBehavior)
-                ),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

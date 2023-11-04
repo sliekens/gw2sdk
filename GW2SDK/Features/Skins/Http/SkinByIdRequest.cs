@@ -41,11 +41,11 @@ internal sealed class SkinByIdRequest : IHttpRequest<Replica<Skin>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetSkin(MissingMemberBehavior);
         return new Replica<Skin>
         {
-            Value = json.RootElement.GetSkin(MissingMemberBehavior),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

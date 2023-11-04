@@ -38,12 +38,11 @@ internal sealed class GuildMembersRequest : IHttpRequest<Replica<List<GuildMembe
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetList(entry => entry.GetGuildMember(MissingMemberBehavior));
         return new Replica<List<GuildMember>>
         {
-            Value =
-                json.RootElement.GetList(entry => entry.GetGuildMember(MissingMemberBehavior)),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

@@ -47,12 +47,11 @@ internal sealed class AchievementsByPageRequest : IHttpRequest<Replica<HashSet<A
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetSet(entry => entry.GetAchievement(MissingMemberBehavior));
         return new Replica<HashSet<Achievement>>
         {
-            Value =
-                json.RootElement.GetSet(entry => entry.GetAchievement(MissingMemberBehavior)),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

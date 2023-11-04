@@ -39,11 +39,11 @@ internal sealed class BackstoryQuestionByIdRequest : IHttpRequest<Replica<Backst
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetBackstoryQuestion(MissingMemberBehavior);
         return new Replica<BackstoryQuestion>
         {
-            Value = json.RootElement.GetBackstoryQuestion(MissingMemberBehavior),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

@@ -48,11 +48,7 @@ internal sealed class PointOfInterestByIdRequest : IHttpRequest<Replica<PointOfI
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Path = Template.Path
-                        .Replace(":id", ContinentId.ToString(CultureInfo.InvariantCulture))
-                        .Replace(":floor", FloorId.ToString(CultureInfo.InvariantCulture))
-                        .Replace(":region", RegionId.ToString(CultureInfo.InvariantCulture))
-                        .Replace(":map", MapId.ToString(CultureInfo.InvariantCulture)),
+                    Path = Template.Path.Replace(":id", ContinentId.ToString(CultureInfo.InvariantCulture)).Replace(":floor", FloorId.ToString(CultureInfo.InvariantCulture)).Replace(":region", RegionId.ToString(CultureInfo.InvariantCulture)).Replace(":map", MapId.ToString(CultureInfo.InvariantCulture)),
                     Arguments = new QueryBuilder
                     {
                         { "id", PointOfInterestId },
@@ -66,11 +62,11 @@ internal sealed class PointOfInterestByIdRequest : IHttpRequest<Replica<PointOfI
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetPointOfInterest(MissingMemberBehavior);
         return new Replica<PointOfInterest>
         {
-            Value = json.RootElement.GetPointOfInterest(MissingMemberBehavior),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

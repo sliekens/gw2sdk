@@ -39,11 +39,11 @@ internal sealed class CatsByIdsRequest : IHttpRequest<Replica<HashSet<Cat>>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetSet(entry => entry.GetCat(MissingMemberBehavior));
         return new Replica<HashSet<Cat>>
         {
-            Value = json.RootElement.GetSet(entry => entry.GetCat(MissingMemberBehavior)),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

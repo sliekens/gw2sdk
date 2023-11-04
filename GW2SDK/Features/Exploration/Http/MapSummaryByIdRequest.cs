@@ -42,11 +42,11 @@ internal sealed class MapSummaryByIdRequest : IHttpRequest<Replica<MapSummary>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetMapSummary(MissingMemberBehavior);
         return new Replica<MapSummary>
         {
-            Value = json.RootElement.GetMapSummary(MissingMemberBehavior),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

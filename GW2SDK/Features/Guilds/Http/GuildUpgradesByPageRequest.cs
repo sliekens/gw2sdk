@@ -46,12 +46,11 @@ internal sealed class GuildUpgradesByPageRequest : IHttpRequest<Replica<HashSet<
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetSet(entry => entry.GetGuildUpgrade(MissingMemberBehavior));
         return new Replica<HashSet<GuildUpgrade>>
         {
-            Value =
-                json.RootElement.GetSet(entry => entry.GetGuildUpgrade(MissingMemberBehavior)),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

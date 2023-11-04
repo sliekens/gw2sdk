@@ -41,11 +41,11 @@ internal sealed class MailCarrierByIdRequest : IHttpRequest<Replica<MailCarrier>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetMailCarrier(MissingMemberBehavior);
         return new Replica<MailCarrier>
         {
-            Value = json.RootElement.GetMailCarrier(MissingMemberBehavior),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

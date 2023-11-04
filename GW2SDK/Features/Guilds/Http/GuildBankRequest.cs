@@ -38,12 +38,11 @@ internal sealed class GuildBankRequest : IHttpRequest<Replica<List<GuildBankTab>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetList(entry => entry.GetGuildBankTab(MissingMemberBehavior));
         return new Replica<List<GuildBankTab>>
         {
-            Value =
-                json.RootElement.GetList(entry => entry.GetGuildBankTab(MissingMemberBehavior)),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

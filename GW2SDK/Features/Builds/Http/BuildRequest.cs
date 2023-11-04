@@ -30,8 +30,7 @@ internal sealed class BuildRequest : IHttpRequest<Replica<BuildTemplate>>
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Path = Template.Path.Replace(":id", CharacterName)
-                        .Replace(":tab", TabNumber.ToString(CultureInfo.InvariantCulture)),
+                    Path = Template.Path.Replace(":id", CharacterName).Replace(":tab", TabNumber.ToString(CultureInfo.InvariantCulture)),
                     Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } },
                     BearerToken = AccessToken
                 },
@@ -41,11 +40,11 @@ internal sealed class BuildRequest : IHttpRequest<Replica<BuildTemplate>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetBuildTemplate(MissingMemberBehavior);
         return new Replica<BuildTemplate>
         {
-            Value = json.RootElement.GetBuildTemplate(MissingMemberBehavior),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

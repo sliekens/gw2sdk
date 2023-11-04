@@ -20,19 +20,14 @@ internal sealed class DeliveryRequest : IHttpRequest<Replica<DeliveryBox>>
         CancellationToken cancellationToken
     )
     {
-        using var response = await httpClient.SendAsync(
-                Template with { BearerToken = AccessToken },
-                HttpCompletionOption.ResponseHeadersRead,
-                cancellationToken
-            )
-            .ConfigureAwait(false);
+        using var response = await httpClient.SendAsync(Template with { BearerToken = AccessToken }, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetDeliveryBox(MissingMemberBehavior);
         return new Replica<DeliveryBox>
         {
-            Value = json.RootElement.GetDeliveryBox(MissingMemberBehavior),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

@@ -32,10 +32,7 @@ internal sealed class MountsByNamesRequest : IHttpRequest<Replica<HashSet<Mount>
                 {
                     Arguments = new QueryBuilder
                     {
-                        {
-                            "ids",
-                            MountNames.Select(MountNameFormatter.FormatMountName)
-                        },
+                        { "ids", MountNames.Select(MountNameFormatter.FormatMountName) },
                         { "v", SchemaVersion.Recommended }
                     },
                     AcceptLanguage = Language?.Alpha2Code
@@ -46,11 +43,11 @@ internal sealed class MountsByNamesRequest : IHttpRequest<Replica<HashSet<Mount>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetSet(entry => entry.GetMount(MissingMemberBehavior));
         return new Replica<HashSet<Mount>>
         {
-            Value = json.RootElement.GetSet(entry => entry.GetMount(MissingMemberBehavior)),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

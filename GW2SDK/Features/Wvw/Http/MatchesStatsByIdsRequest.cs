@@ -39,12 +39,11 @@ internal sealed class MatchesStatsByIdsRequest : IHttpRequest<Replica<HashSet<Ma
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetSet(entry => entry.GetMatchStats(MissingMemberBehavior));
         return new Replica<HashSet<MatchStats>>
         {
-            Value =
-                json.RootElement.GetSet(entry => entry.GetMatchStats(MissingMemberBehavior)),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

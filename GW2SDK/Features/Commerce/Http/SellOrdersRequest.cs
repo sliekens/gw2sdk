@@ -46,11 +46,11 @@ internal sealed class SellOrdersRequest : IHttpRequest<Replica<HashSet<Order>>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetSet(entry => entry.GetOrder(MissingMemberBehavior));
         return new Replica<HashSet<Order>>
         {
-            Value = json.RootElement.GetSet(entry => entry.GetOrder(MissingMemberBehavior)),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

@@ -41,11 +41,11 @@ internal sealed class ItemStatByIdRequest : IHttpRequest<Replica<ItemStat>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetItemStat(MissingMemberBehavior);
         return new Replica<ItemStat>
         {
-            Value = json.RootElement.GetItemStat(MissingMemberBehavior),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

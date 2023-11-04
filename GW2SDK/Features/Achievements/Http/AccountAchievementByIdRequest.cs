@@ -39,11 +39,11 @@ internal sealed class AccountAchievementByIdRequest : IHttpRequest<Replica<Accou
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetAccountAchievement(MissingMemberBehavior);
         return new Replica<AccountAchievement>
         {
-            Value = json.RootElement.GetAccountAchievement(MissingMemberBehavior),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

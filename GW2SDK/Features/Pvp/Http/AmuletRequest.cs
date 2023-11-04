@@ -25,19 +25,14 @@ internal sealed class AmuletRequest : IHttpRequest<Replica<HashSet<Amulet>>>
         CancellationToken cancellationToken
     )
     {
-        using var response = await httpClient.SendAsync(
-                Template with { AcceptLanguage = Language?.Alpha2Code },
-                HttpCompletionOption.ResponseHeadersRead,
-                cancellationToken
-            )
-            .ConfigureAwait(false);
+        using var response = await httpClient.SendAsync(Template with { AcceptLanguage = Language?.Alpha2Code }, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetSet(entry => entry.GetAmulet(MissingMemberBehavior));
         return new Replica<HashSet<Amulet>>
         {
-            Value = json.RootElement.GetSet(entry => entry.GetAmulet(MissingMemberBehavior)),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

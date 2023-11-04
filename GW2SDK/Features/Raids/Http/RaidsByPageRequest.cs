@@ -31,19 +31,14 @@ internal sealed class RaidsByPageRequest : IHttpRequest<Replica<HashSet<Raid>>>
         }
 
         search.Add("v", SchemaVersion.Recommended);
-        using var response = await httpClient.SendAsync(
-                Template with { Arguments = search },
-                HttpCompletionOption.ResponseHeadersRead,
-                cancellationToken
-            )
-            .ConfigureAwait(false);
+        using var response = await httpClient.SendAsync(Template with { Arguments = search }, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetSet(entry => entry.GetRaid(MissingMemberBehavior));
         return new Replica<HashSet<Raid>>
         {
-            Value = json.RootElement.GetSet(entry => entry.GetRaid(MissingMemberBehavior)),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

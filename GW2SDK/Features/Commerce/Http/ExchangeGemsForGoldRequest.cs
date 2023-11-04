@@ -37,11 +37,11 @@ internal sealed class ExchangeGemsForGoldRequest : IHttpRequest<Replica<GemsForG
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetGemsForGoldExchange(MissingMemberBehavior);
         return new Replica<GemsForGoldExchange>
         {
-            Value = json.RootElement.GetGemsForGoldExchange(MissingMemberBehavior),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

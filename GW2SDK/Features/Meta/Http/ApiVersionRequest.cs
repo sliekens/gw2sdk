@@ -24,19 +24,14 @@ internal sealed class ApiVersionRequest : IHttpRequest<Replica<ApiVersion>>
         CancellationToken cancellationToken
     )
     {
-        using var response = await httpClient.SendAsync(
-                Template with { Path = Template.Path.Replace(":version", Version) },
-                HttpCompletionOption.ResponseHeadersRead,
-                cancellationToken
-            )
-            .ConfigureAwait(false);
+        using var response = await httpClient.SendAsync(Template with { Path = Template.Path.Replace(":version", Version) }, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetApiVersion(MissingMemberBehavior);
         return new Replica<ApiVersion>
         {
-            Value = json.RootElement.GetApiVersion(MissingMemberBehavior),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

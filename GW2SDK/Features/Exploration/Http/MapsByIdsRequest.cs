@@ -47,10 +47,7 @@ internal sealed class MapsByIdsRequest : IHttpRequest<Replica<HashSet<Map>>>
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Path = Template.Path
-                        .Replace(":id", ContinentId.ToString(CultureInfo.InvariantCulture))
-                        .Replace(":floor", FloorId.ToString(CultureInfo.InvariantCulture))
-                        .Replace(":region", RegionId.ToString(CultureInfo.InvariantCulture)),
+                    Path = Template.Path.Replace(":id", ContinentId.ToString(CultureInfo.InvariantCulture)).Replace(":floor", FloorId.ToString(CultureInfo.InvariantCulture)).Replace(":region", RegionId.ToString(CultureInfo.InvariantCulture)),
                     Arguments = new QueryBuilder
                     {
                         { "ids", MapIds },
@@ -64,11 +61,11 @@ internal sealed class MapsByIdsRequest : IHttpRequest<Replica<HashSet<Map>>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetSet(entry => entry.GetMap(MissingMemberBehavior));
         return new Replica<HashSet<Map>>
         {
-            Value = json.RootElement.GetSet(entry => entry.GetMap(MissingMemberBehavior)),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

@@ -58,11 +58,7 @@ internal sealed class SectorsByPageRequest : IHttpRequest<Replica<HashSet<Sector
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Path = Template.Path
-                        .Replace(":id", ContinentId.ToString(CultureInfo.InvariantCulture))
-                        .Replace(":floor", FloorId.ToString(CultureInfo.InvariantCulture))
-                        .Replace(":region", RegionId.ToString(CultureInfo.InvariantCulture))
-                        .Replace(":map", MapId.ToString(CultureInfo.InvariantCulture)),
+                    Path = Template.Path.Replace(":id", ContinentId.ToString(CultureInfo.InvariantCulture)).Replace(":floor", FloorId.ToString(CultureInfo.InvariantCulture)).Replace(":region", RegionId.ToString(CultureInfo.InvariantCulture)).Replace(":map", MapId.ToString(CultureInfo.InvariantCulture)),
                     Arguments = search,
                     AcceptLanguage = Language?.Alpha2Code
                 },
@@ -72,11 +68,11 @@ internal sealed class SectorsByPageRequest : IHttpRequest<Replica<HashSet<Sector
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetSet(entry => entry.GetSector(MissingMemberBehavior));
         return new Replica<HashSet<Sector>>
         {
-            Value = json.RootElement.GetSet(entry => entry.GetSector(MissingMemberBehavior)),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

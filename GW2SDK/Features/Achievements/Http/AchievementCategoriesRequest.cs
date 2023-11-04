@@ -27,22 +27,14 @@ internal sealed class
         CancellationToken cancellationToken
     )
     {
-        using var response = await httpClient.SendAsync(
-                Template with { AcceptLanguage = Language?.Alpha2Code },
-                HttpCompletionOption.ResponseHeadersRead,
-                cancellationToken
-            )
-            .ConfigureAwait(false);
+        using var response = await httpClient.SendAsync(Template with { AcceptLanguage = Language?.Alpha2Code }, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetSet(entry => entry.GetAchievementCategory(MissingMemberBehavior));
         return new Replica<HashSet<AchievementCategory>>
         {
-            Value =
-                json.RootElement.GetSet(
-                    entry => entry.GetAchievementCategory(MissingMemberBehavior)
-                ),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

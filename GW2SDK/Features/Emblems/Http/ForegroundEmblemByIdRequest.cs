@@ -36,11 +36,11 @@ internal sealed class ForegroundEmblemByIdRequest : IHttpRequest<Replica<Emblem>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetEmblem(MissingMemberBehavior);
         return new Replica<Emblem>
         {
-            Value = json.RootElement.GetEmblem(MissingMemberBehavior),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

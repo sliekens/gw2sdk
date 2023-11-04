@@ -38,12 +38,11 @@ internal sealed class BuildsRequest : IHttpRequest<Replica<HashSet<BuildTemplate
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetSet(entry => entry.GetBuildTemplate(MissingMemberBehavior));
         return new Replica<HashSet<BuildTemplate>>
         {
-            Value =
-                json.RootElement.GetSet(entry => entry.GetBuildTemplate(MissingMemberBehavior)),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

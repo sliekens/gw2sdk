@@ -38,13 +38,11 @@ internal sealed class GuildRanksRequest : IHttpRequest<Replica<List<GuildRank>>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetList(entry => entry.GetGuildRank(MissingMemberBehavior)).OrderBy(rank => rank.Order).ToList();
         return new Replica<List<GuildRank>>
         {
-            Value = json.RootElement.GetList(entry => entry.GetGuildRank(MissingMemberBehavior))
-                .OrderBy(rank => rank.Order)
-                .ToList(),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

@@ -46,11 +46,11 @@ internal sealed class AmuletsByPageRequest : IHttpRequest<Replica<HashSet<Amulet
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetSet(entry => entry.GetAmulet(MissingMemberBehavior));
         return new Replica<HashSet<Amulet>>
         {
-            Value = json.RootElement.GetSet(entry => entry.GetAmulet(MissingMemberBehavior)),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

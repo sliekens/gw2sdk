@@ -40,11 +40,11 @@ internal sealed class FilesByIdsRequest : IHttpRequest<Replica<HashSet<Asset>>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetSet(entry => entry.GetAsset(MissingMemberBehavior));
         return new Replica<HashSet<Asset>>
         {
-            Value = json.RootElement.GetSet(entry => entry.GetAsset(MissingMemberBehavior)),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

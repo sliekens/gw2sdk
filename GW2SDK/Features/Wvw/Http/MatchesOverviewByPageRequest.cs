@@ -32,20 +32,14 @@ internal sealed class MatchesOverviewByPageRequest : IHttpRequest<Replica<HashSe
         }
 
         search.Add("v", SchemaVersion.Recommended);
-        using var response = await httpClient.SendAsync(
-                Template with { Arguments = search },
-                HttpCompletionOption.ResponseHeadersRead,
-                cancellationToken
-            )
-            .ConfigureAwait(false);
+        using var response = await httpClient.SendAsync(Template with { Arguments = search }, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetSet(entry => entry.GetMatchOverview(MissingMemberBehavior));
         return new Replica<HashSet<MatchOverview>>
         {
-            Value =
-                json.RootElement.GetSet(entry => entry.GetMatchOverview(MissingMemberBehavior)),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

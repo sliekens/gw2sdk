@@ -21,22 +21,14 @@ internal sealed class MasteryProgressRequest : IHttpRequest<Replica<HashSet<Mast
     )
     {
         var request = Template with { BearerToken = AccessToken };
-        using var response = await httpClient.SendAsync(
-                request,
-                HttpCompletionOption.ResponseHeadersRead,
-                cancellationToken
-            )
-            .ConfigureAwait(false);
+        using var response = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetSet(entry => entry.GetMasteryProgress(MissingMemberBehavior));
         return new Replica<HashSet<MasteryProgress>>
         {
-            Value =
-                json.RootElement.GetSet(
-                    entry => entry.GetMasteryProgress(MissingMemberBehavior)
-                ),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

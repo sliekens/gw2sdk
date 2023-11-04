@@ -38,11 +38,11 @@ internal sealed class QuagganByIdRequest : IHttpRequest<Replica<Quaggan>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetQuaggan(MissingMemberBehavior);
         return new Replica<Quaggan>
         {
-            Value = json.RootElement.GetQuaggan(MissingMemberBehavior),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

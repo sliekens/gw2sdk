@@ -41,11 +41,11 @@ internal sealed class ItemPricesByIdsRequest : IHttpRequest<Replica<HashSet<Item
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetSet(entry => entry.GetItemPrice(MissingMemberBehavior));
         return new Replica<HashSet<ItemPrice>>
         {
-            Value = json.RootElement.GetSet(entry => entry.GetItemPrice(MissingMemberBehavior)),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

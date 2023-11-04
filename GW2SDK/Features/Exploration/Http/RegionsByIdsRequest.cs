@@ -36,9 +36,7 @@ internal sealed class RegionsByIdsRequest : IHttpRequest<Replica<HashSet<Region>
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Path = Template.Path
-                        .Replace(":id", ContinentId.ToString(CultureInfo.InvariantCulture))
-                        .Replace(":floor", FloorId.ToString(CultureInfo.InvariantCulture)),
+                    Path = Template.Path.Replace(":id", ContinentId.ToString(CultureInfo.InvariantCulture)).Replace(":floor", FloorId.ToString(CultureInfo.InvariantCulture)),
                     Arguments = new QueryBuilder
                     {
                         { "ids", RegionIds },
@@ -52,11 +50,11 @@ internal sealed class RegionsByIdsRequest : IHttpRequest<Replica<HashSet<Region>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetSet(entry => entry.GetRegion(MissingMemberBehavior));
         return new Replica<HashSet<Region>>
         {
-            Value = json.RootElement.GetSet(entry => entry.GetRegion(MissingMemberBehavior)),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

@@ -40,12 +40,11 @@ internal sealed class LegendaryItemsByIdsRequest : IHttpRequest<Replica<HashSet<
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetSet(entry => entry.GetLegendaryItem(MissingMemberBehavior));
         return new Replica<HashSet<LegendaryItem>>
         {
-            Value =
-                json.RootElement.GetSet(entry => entry.GetLegendaryItem(MissingMemberBehavior)),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

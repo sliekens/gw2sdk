@@ -41,11 +41,11 @@ internal sealed class AchievementGroupByIdRequest : IHttpRequest<Replica<Achieve
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetAchievementGroup(MissingMemberBehavior);
         return new Replica<AchievementGroup>
         {
-            Value = json.RootElement.GetAchievementGroup(MissingMemberBehavior),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

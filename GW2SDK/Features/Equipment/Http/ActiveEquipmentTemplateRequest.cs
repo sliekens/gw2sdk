@@ -36,11 +36,11 @@ internal sealed class ActiveEquipmentTemplateRequest : IHttpRequest<Replica<Equi
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetEquipmentTemplate(MissingMemberBehavior);
         return new Replica<EquipmentTemplate>
         {
-            Value = json.RootElement.GetEquipmentTemplate(MissingMemberBehavior),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

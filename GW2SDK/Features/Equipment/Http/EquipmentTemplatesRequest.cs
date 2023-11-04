@@ -38,12 +38,11 @@ internal sealed class EquipmentTemplatesRequest : IHttpRequest<Replica<HashSet<E
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetSet(entry => entry.GetEquipmentTemplate(MissingMemberBehavior));
         return new Replica<HashSet<EquipmentTemplate>>
         {
-            Value =
-                json.RootElement.GetSet(entry => entry.GetEquipmentTemplate(MissingMemberBehavior)),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

@@ -39,11 +39,11 @@ internal sealed class CharacterTrainingRequest : IHttpRequest<Replica<CharacterT
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetCharacterTraining(MissingMemberBehavior);
         return new Replica<CharacterTraining>
         {
-            Value = json.RootElement.GetCharacterTraining(MissingMemberBehavior),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

@@ -39,12 +39,11 @@ internal sealed class MatchesOverviewByIdsRequest : IHttpRequest<Replica<HashSet
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        var value = json.RootElement.GetSet(entry => entry.GetMatchOverview(MissingMemberBehavior));
         return new Replica<HashSet<MatchOverview>>
         {
-            Value =
-                json.RootElement.GetSet(entry => entry.GetMatchOverview(MissingMemberBehavior)),
+            Value = value,
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
