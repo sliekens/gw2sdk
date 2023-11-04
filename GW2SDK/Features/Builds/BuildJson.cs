@@ -70,7 +70,7 @@ internal static class BuildJson
                 ),
             Skills = skills.Map(value => value.GetSkillBar(missingMemberBehavior)),
             AquaticSkills = aquaticSkills.Map(value => value.GetSkillBar(missingMemberBehavior)),
-            Pets = pets.Map(value => value.GetPetSkillBar(missingMemberBehavior)),
+            PetSkills = pets.Map(value => value.GetPetSkillBar(missingMemberBehavior)),
             Legends = legends.Map(values => values.GetList(value => value.GetString())),
             AquaticLegends =
                 aquaticLegends.Map(values => values.GetList(value => value.GetString()))

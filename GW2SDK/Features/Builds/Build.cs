@@ -20,8 +20,8 @@ public sealed record Build
     /// <summary>The underwater skills selected for this build.</summary>
     public required SkillBar AquaticSkills { get; init; }
 
-    /// <summary>The pets selected for this build. (Rangers only.)</summary>
-    public required PetSkillBar? Pets { get; init; }
+    /// <summary>The pet skills selected for this build. (Rangers only.)</summary>
+    public required PetSkillBar? PetSkills { get; init; }
 
     /// <summary>The legends selected for this build. (Revenants only.)</summary>
     public required IReadOnlyCollection<string?>? Legends { get; init; }
