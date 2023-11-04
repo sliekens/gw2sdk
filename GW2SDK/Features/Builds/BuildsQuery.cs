@@ -288,6 +288,11 @@ public sealed class BuildsQuery
 
     #region v2/specializations
 
+    /// <summary>Retrieves all specializations.</summary>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<HashSet<Specialization>>> GetSpecializations(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -302,6 +307,9 @@ public sealed class BuildsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all specializations.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<HashSet<int>>> GetSpecializationsIndex(
         CancellationToken cancellationToken = default
     )
@@ -310,6 +318,12 @@ public sealed class BuildsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
+    /// <summary>Retrieves a specialization by its ID.</summary>
+    /// <param name="specializationId">The specialization ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<Specialization>> GetSpecializationById(
         int specializationId,
         Language? language = default,
@@ -325,6 +339,13 @@ public sealed class BuildsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
+    /// <summary>Retrieves specializations by their IDs.</summary>
+    /// <remarks>Limited to 200 IDs per request.</remarks>
+    /// <param name="specializationIds">The specialization IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<HashSet<Specialization>>> GetSpecializationsByIds(
         IReadOnlyCollection<int> specializationIds,
         Language? language = default,
@@ -344,6 +365,11 @@ public sealed class BuildsQuery
 
     #region v2/traits
 
+    /// <summary>Retrieves all traits.</summary>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<HashSet<Trait>>> GetTraits(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -358,12 +384,21 @@ public sealed class BuildsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all traits.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<HashSet<int>>> GetTraitsIndex(CancellationToken cancellationToken = default)
     {
         TraitsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
+    /// <summary>Retrieves a trait by its ID.</summary>
+    /// <param name="traitId">The trait ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<Trait>> GetTraitById(
         int traitId,
         Language? language = default,
@@ -379,6 +414,13 @@ public sealed class BuildsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
+    /// <summary>Retrieves traits by their IDs.</summary>
+    /// <remarks>Limited to 200 IDs per request.</remarks>
+    /// <param name="traitIds">The trait IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<HashSet<Trait>>> GetTraitsByIds(
         IReadOnlyCollection<int> traitIds,
         Language? language = default,
@@ -394,6 +436,13 @@ public sealed class BuildsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of traits.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<Replica<HashSet<Trait>>> GetTraitsByPage(
         int pageIndex,
         int? pageSize = default,
