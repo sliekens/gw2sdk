@@ -1,41 +1,15 @@
 ﻿using System.Text.Json;
-using GuildWars2.Builds.Skills;
 using GuildWars2.Json;
 
-namespace GuildWars2.Builds;
+namespace GuildWars2.Builds.Skills;
 
-internal static class SkillJson
+internal static class LockedSkillJson
 {
-    public static Skill GetSkill(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static LockedSkill GetLockedSkill(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
-        // Unlike most models with a 'type' property, skills don't have always have it
-        if (json.TryGetProperty("type", out var type))
-        {
-            switch (type.GetString())
-            {
-                case "Bundle":
-                    return json.GetBundleSkill(missingMemberBehavior);
-                case "Elite":
-                    return json.GetEliteSkill(missingMemberBehavior);
-                case "Heal":
-                    return json.GetHealSkill(missingMemberBehavior);
-                case "Monster":
-                    return json.GetMonsterSkill(missingMemberBehavior);
-                case "Pet":
-                    return json.GetPetSkill(missingMemberBehavior);
-                case "Profession":
-                    return json.GetProfessionSkill(missingMemberBehavior);
-                case "Toolbelt":
-                    return json.GetToolbeltSkill(missingMemberBehavior);
-                case "Transform":
-                    return json.GetLockedSkill(missingMemberBehavior);
-                case "Utility":
-                    return json.GetUtilitySkill(missingMemberBehavior);
-                case "Weapon":
-                    return json.GetWeaponSkill(missingMemberBehavior);
-            }
-        }
-
         RequiredMember id = "id";
         RequiredMember name = "name";
         OptionalMember facts = "facts";
@@ -57,10 +31,10 @@ internal static class SkillJson
         {
             if (member.Name == "type")
             {
-                if (missingMemberBehavior == MissingMemberBehavior.Error)
+                if (!member.Value.ValueEquals("Transform"))
                 {
                     throw new InvalidOperationException(
-                        Strings.UnexpectedDiscriminator(member.Value.GetString())
+                        Strings.InvalidDiscriminator(member.Value.GetString())
                     );
                 }
             }
@@ -134,7 +108,7 @@ internal static class SkillJson
             }
         }
 
-        return new Skill
+        return new LockedSkill
         {
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),
