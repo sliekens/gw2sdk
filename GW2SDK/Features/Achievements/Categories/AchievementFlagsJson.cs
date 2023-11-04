@@ -5,10 +5,7 @@ namespace GuildWars2.Achievements.Categories;
 
 internal static class AchievementFlagsJson
 {
-    public static AchievementFlags GetAchievementFlags(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
-    )
+    public static AchievementFlags GetAchievementFlags(this JsonElement json)
     {
         var specialEvent = false;
         var pve = false;
@@ -23,7 +20,7 @@ internal static class AchievementFlagsJson
             {
                 pve = true;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else
             {
                 others ??= new List<string>();
                 others.Add(entry.GetStringRequired());

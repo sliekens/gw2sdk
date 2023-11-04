@@ -42,7 +42,7 @@ internal static class AchievementRefJson
         return new AchievementRef
         {
             Id = id.Map(value => value.GetInt32()),
-            Flags = flags.Map(values => values.GetAchievementFlags(missingMemberBehavior))
+            Flags = flags.Map(values => values.GetAchievementFlags())
                 ?? new AchievementFlags
                 {
                     SpecialEvent = false,

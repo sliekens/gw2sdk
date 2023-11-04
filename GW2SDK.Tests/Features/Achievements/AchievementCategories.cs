@@ -23,6 +23,12 @@ public class AchievementCategories
                 entry.Has_order();
                 entry.Has_icon();
                 entry.Has_achievements();
+
+                Assert.All(entry.Achievements,
+                    achievement =>
+                    {
+                        Assert.Empty(achievement.Flags.Other);
+                    });
             }
         );
     }
