@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Home.Http;
 
-internal sealed class OwnedNodesIndexRequest : IHttpRequest2<HashSet<string>>
+internal sealed class OwnedNodesIndexRequest : IHttpRequest<HashSet<string>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/account/home/nodes")
     {

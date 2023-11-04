@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Emotes.Http;
 
-internal sealed class EmotesByPageRequest : IHttpRequest2<HashSet<Emote>>
+internal sealed class EmotesByPageRequest : IHttpRequest<HashSet<Emote>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/emotes") { AcceptEncoding = "gzip" };

@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Dungeons.Http;
 
-internal sealed class DungeonByIdRequest : IHttpRequest2<Dungeon>
+internal sealed class DungeonByIdRequest : IHttpRequest<Dungeon>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/dungeons") { AcceptEncoding = "gzip" };

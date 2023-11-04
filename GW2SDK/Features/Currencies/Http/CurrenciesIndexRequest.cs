@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Currencies.Http;
 
-internal sealed class CurrenciesIndexRequest : IHttpRequest2<HashSet<int>>
+internal sealed class CurrenciesIndexRequest : IHttpRequest<HashSet<int>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/currencies")
     {

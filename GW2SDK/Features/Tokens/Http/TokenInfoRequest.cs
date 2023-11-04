@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Tokens.Http;
 
-internal sealed class TokenInfoRequest : IHttpRequest2<TokenInfo>
+internal sealed class TokenInfoRequest : IHttpRequest<TokenInfo>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/tokeninfo")
     {

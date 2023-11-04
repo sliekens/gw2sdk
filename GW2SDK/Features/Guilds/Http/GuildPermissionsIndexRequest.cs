@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Http;
 
-internal sealed class GuildPermissionsIndexRequest : IHttpRequest2<HashSet<string>>
+internal sealed class GuildPermissionsIndexRequest : IHttpRequest<HashSet<string>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/guild/permissions")
     {

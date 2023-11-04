@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Accounts.Http;
 
-internal sealed class ProgressionRequest : IHttpRequest2<HashSet<Progression>>
+internal sealed class ProgressionRequest : IHttpRequest<HashSet<Progression>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/account/progression")
     {

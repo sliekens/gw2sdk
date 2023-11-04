@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Crafting.Http;
 
-internal sealed class RecipesIndexByIngredientItemIdRequest : IHttpRequest2<HashSet<int>>
+internal sealed class RecipesIndexByIngredientItemIdRequest : IHttpRequest<HashSet<int>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/recipes/search")
     {

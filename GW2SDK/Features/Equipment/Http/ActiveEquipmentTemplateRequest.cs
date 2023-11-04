@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Equipment.Http;
 
-internal sealed class ActiveEquipmentTemplateRequest : IHttpRequest2<EquipmentTemplate>
+internal sealed class ActiveEquipmentTemplateRequest : IHttpRequest<EquipmentTemplate>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/equipmenttabs/active") { AcceptEncoding = "gzip" };

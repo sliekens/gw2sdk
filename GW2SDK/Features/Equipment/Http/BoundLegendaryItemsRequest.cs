@@ -4,7 +4,7 @@ using GuildWars2.Json;
 namespace GuildWars2.Equipment.Http;
 
 internal sealed class
-    BoundLegendaryItemsRequest : IHttpRequest2<HashSet<BoundLegendaryItem>>
+    BoundLegendaryItemsRequest : IHttpRequest<HashSet<BoundLegendaryItem>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/account/legendaryarmory")

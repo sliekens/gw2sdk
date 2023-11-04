@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Quests.Http;
 
-internal sealed class QuestByIdRequest : IHttpRequest2<Quest>
+internal sealed class QuestByIdRequest : IHttpRequest<Quest>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/quests") { AcceptEncoding = "gzip" };

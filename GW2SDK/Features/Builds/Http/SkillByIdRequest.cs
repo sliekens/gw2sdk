@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Builds.Http;
 
-internal sealed class SkillByIdRequest : IHttpRequest2<Skill>
+internal sealed class SkillByIdRequest : IHttpRequest<Skill>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/skills")
     {

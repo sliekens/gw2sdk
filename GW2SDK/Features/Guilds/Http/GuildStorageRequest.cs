@@ -4,7 +4,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Http;
 
-internal sealed class GuildStorageRequest : IHttpRequest2<List<GuildStorageSlot>>
+internal sealed class GuildStorageRequest : IHttpRequest<List<GuildStorageSlot>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/guild/:id/storage") { AcceptEncoding = "gzip" };

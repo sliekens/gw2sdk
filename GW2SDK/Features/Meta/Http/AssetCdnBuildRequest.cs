@@ -3,7 +3,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Meta.Http;
 
-internal sealed class AssetCdnBuildRequest : IHttpRequest2<Build>
+internal sealed class AssetCdnBuildRequest : IHttpRequest<Build>
 {
     public async Task<(Build Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,

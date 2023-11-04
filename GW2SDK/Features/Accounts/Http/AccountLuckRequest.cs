@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Accounts.Http;
 
-internal sealed class AccountLuckRequest : IHttpRequest2<AccountLuck>
+internal sealed class AccountLuckRequest : IHttpRequest<AccountLuck>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/account/luck")
     {

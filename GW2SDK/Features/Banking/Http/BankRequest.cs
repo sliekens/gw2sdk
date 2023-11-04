@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Banking.Http;
 
-internal sealed class BankRequest : IHttpRequest2<Bank>
+internal sealed class BankRequest : IHttpRequest<Bank>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/account/bank")
     {

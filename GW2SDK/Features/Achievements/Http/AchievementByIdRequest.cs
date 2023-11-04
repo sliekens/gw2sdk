@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Achievements.Http;
 
-internal sealed class AchievementByIdRequest : IHttpRequest2<Achievement>
+internal sealed class AchievementByIdRequest : IHttpRequest<Achievement>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/achievements")
     {

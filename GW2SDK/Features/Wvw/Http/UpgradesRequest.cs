@@ -4,7 +4,7 @@ using GuildWars2.Wvw.Upgrades;
 
 namespace GuildWars2.Wvw.Http;
 
-internal sealed class UpgradesRequest : IHttpRequest2<HashSet<ObjectiveUpgrade>>
+internal sealed class UpgradesRequest : IHttpRequest<HashSet<ObjectiveUpgrade>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/wvw/upgrades")
     {

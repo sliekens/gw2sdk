@@ -4,7 +4,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Http;
 
-internal sealed class ContinentsByPageRequest : IHttpRequest2<HashSet<Continent>>
+internal sealed class ContinentsByPageRequest : IHttpRequest<HashSet<Continent>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/continents")
     {

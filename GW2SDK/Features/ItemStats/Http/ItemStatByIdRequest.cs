@@ -2,7 +2,7 @@
 
 namespace GuildWars2.ItemStats.Http;
 
-internal sealed class ItemStatByIdRequest : IHttpRequest2<ItemStat>
+internal sealed class ItemStatByIdRequest : IHttpRequest<ItemStat>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/itemstats")
     {

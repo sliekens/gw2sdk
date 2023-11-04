@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Meta.Http;
 
-internal sealed class BuildRequest : IHttpRequest2<Build>
+internal sealed class BuildRequest : IHttpRequest<Build>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/build")
     {

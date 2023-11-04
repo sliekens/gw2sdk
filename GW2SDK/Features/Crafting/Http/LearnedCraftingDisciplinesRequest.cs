@@ -3,7 +3,7 @@
 namespace GuildWars2.Crafting.Http;
 
 internal sealed class
-    LearnedCraftingDisciplinesRequest : IHttpRequest2<LearnedCraftingDisciplines>
+    LearnedCraftingDisciplinesRequest : IHttpRequest<LearnedCraftingDisciplines>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/crafting")

@@ -4,7 +4,7 @@ using GuildWars2.Pvp.Seasons;
 
 namespace GuildWars2.Pvp.Http;
 
-internal sealed class SeasonsByIdsRequest : IHttpRequest2<HashSet<Season>>
+internal sealed class SeasonsByIdsRequest : IHttpRequest<HashSet<Season>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/pvp/seasons") { AcceptEncoding = "gzip" };

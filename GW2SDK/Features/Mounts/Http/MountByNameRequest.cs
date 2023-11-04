@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Mounts.Http;
 
-internal sealed class MountByNameRequest : IHttpRequest2<Mount>
+internal sealed class MountByNameRequest : IHttpRequest<Mount>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/mounts/types")
     {

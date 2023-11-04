@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Quaggans.Http;
 
-internal sealed class QuaggansIndexRequest : IHttpRequest2<HashSet<string>>
+internal sealed class QuaggansIndexRequest : IHttpRequest<HashSet<string>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/quaggans")
     {

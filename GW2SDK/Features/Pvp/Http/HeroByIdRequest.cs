@@ -3,7 +3,7 @@ using GuildWars2.Pvp.Heroes;
 
 namespace GuildWars2.Pvp.Http;
 
-internal sealed class HeroByIdRequest : IHttpRequest2<Hero>
+internal sealed class HeroByIdRequest : IHttpRequest<Hero>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/pvp/heroes") { AcceptEncoding = "gzip" };

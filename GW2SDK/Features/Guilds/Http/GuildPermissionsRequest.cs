@@ -4,7 +4,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Http;
 
-internal sealed class GuildPermissionsRequest : IHttpRequest2<HashSet<GuildPermissionSummary>>
+internal sealed class GuildPermissionsRequest : IHttpRequest<HashSet<GuildPermissionSummary>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/guild/permissions")
     {

@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Inventories.Http;
 
-internal sealed class SharedInventoryRequest : IHttpRequest2<Inventory>
+internal sealed class SharedInventoryRequest : IHttpRequest<Inventory>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/account/inventory")
     {

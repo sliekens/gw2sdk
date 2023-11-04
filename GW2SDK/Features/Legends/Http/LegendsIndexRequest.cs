@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Legends.Http;
 
-internal sealed class LegendsIndexRequest : IHttpRequest2<HashSet<string>>
+internal sealed class LegendsIndexRequest : IHttpRequest<HashSet<string>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/legends")
     {

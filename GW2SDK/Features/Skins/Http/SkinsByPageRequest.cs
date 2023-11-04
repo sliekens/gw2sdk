@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Skins.Http;
 
-internal sealed class SkinsByPageRequest : IHttpRequest2<HashSet<Skin>>
+internal sealed class SkinsByPageRequest : IHttpRequest<HashSet<Skin>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/skins")
     {

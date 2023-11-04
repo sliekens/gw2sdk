@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Professions.Http;
 
-internal sealed class ProfessionsByNamesRequest : IHttpRequest2<HashSet<Profession>>
+internal sealed class ProfessionsByNamesRequest : IHttpRequest<HashSet<Profession>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/professions")
     {

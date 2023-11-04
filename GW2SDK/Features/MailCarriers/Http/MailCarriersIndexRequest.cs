@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.MailCarriers.Http;
 
-internal sealed class MailCarriersIndexRequest : IHttpRequest2<HashSet<int>>
+internal sealed class MailCarriersIndexRequest : IHttpRequest<HashSet<int>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/mailcarriers")
     {

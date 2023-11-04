@@ -5,7 +5,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Http;
 
-internal sealed class HeartsByPageRequest : IHttpRequest2<HashSet<Heart>>
+internal sealed class HeartsByPageRequest : IHttpRequest<HashSet<Heart>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(
         Get,

@@ -4,7 +4,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Http;
 
-internal sealed class GuildUpgradesRequest : IHttpRequest2<HashSet<GuildUpgrade>>
+internal sealed class GuildUpgradesRequest : IHttpRequest<HashSet<GuildUpgrade>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/guild/upgrades")
     {

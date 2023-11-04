@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.MapChests.Http;
 
-internal sealed class MapChestsRequest : IHttpRequest2<HashSet<MapChest>>
+internal sealed class MapChestsRequest : IHttpRequest<HashSet<MapChest>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/mapchests")
     {

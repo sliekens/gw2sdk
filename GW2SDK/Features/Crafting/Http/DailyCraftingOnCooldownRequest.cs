@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Crafting.Http;
 
-internal sealed class DailyCraftingOnCooldownRequest : IHttpRequest2<HashSet<string>>
+internal sealed class DailyCraftingOnCooldownRequest : IHttpRequest<HashSet<string>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/account/dailycrafting")

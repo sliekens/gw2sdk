@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Stories.Http;
 
-internal sealed class StoryByIdRequest : IHttpRequest2<Story>
+internal sealed class StoryByIdRequest : IHttpRequest<Story>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/stories") { AcceptEncoding = "gzip" };

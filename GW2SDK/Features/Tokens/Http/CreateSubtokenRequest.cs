@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Tokens.Http;
 
-internal sealed class CreateSubtokenRequest : IHttpRequest2<CreatedSubtoken>
+internal sealed class CreateSubtokenRequest : IHttpRequest<CreatedSubtoken>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/createsubtoken")
     {

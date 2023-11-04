@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Builds.Http;
 
-internal sealed class SpecializationsByIdsRequest : IHttpRequest2<HashSet<Specialization>>
+internal sealed class SpecializationsByIdsRequest : IHttpRequest<HashSet<Specialization>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/specializations")
     {

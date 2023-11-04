@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Builds.Http;
 
-internal sealed class SpecializationByIdRequest : IHttpRequest2<Specialization>
+internal sealed class SpecializationByIdRequest : IHttpRequest<Specialization>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/specializations")
     {

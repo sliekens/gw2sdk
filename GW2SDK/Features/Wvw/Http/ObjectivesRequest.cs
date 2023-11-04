@@ -4,7 +4,7 @@ using GuildWars2.Wvw.Objectives;
 
 namespace GuildWars2.Wvw.Http;
 
-internal sealed class ObjectivesRequest : IHttpRequest2<HashSet<Objective>>
+internal sealed class ObjectivesRequest : IHttpRequest<HashSet<Objective>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/wvw/objectives")
     {

@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Http;
 
-internal sealed class GamesIndexRequest : IHttpRequest2<HashSet<string>>
+internal sealed class GamesIndexRequest : IHttpRequest<HashSet<string>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/pvp/games")
     {

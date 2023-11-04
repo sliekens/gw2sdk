@@ -2,5 +2,5 @@
 
 internal interface IHttpRequest<T>
 {
-    Task<T> SendAsync(HttpClient httpClient, CancellationToken cancellationToken);
+    Task<(T Value, MessageContext Context)> SendAsync(HttpClient httpClient, CancellationToken cancellationToken);
 }

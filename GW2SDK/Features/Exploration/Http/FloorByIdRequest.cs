@@ -4,7 +4,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Exploration.Http;
 
-internal sealed class FloorByIdRequest : IHttpRequest2<Floor>
+internal sealed class FloorByIdRequest : IHttpRequest<Floor>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/continents/:id/floors") { AcceptEncoding = "gzip" };

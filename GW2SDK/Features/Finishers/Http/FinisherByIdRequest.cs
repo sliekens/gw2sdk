@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Finishers.Http;
 
-internal sealed class FinisherByIdRequest : IHttpRequest2<Finisher>
+internal sealed class FinisherByIdRequest : IHttpRequest<Finisher>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/finishers") { AcceptEncoding = "gzip" };

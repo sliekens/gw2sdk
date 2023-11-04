@@ -3,7 +3,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Exploration.Http;
 
-internal sealed class ContinentByIdRequest : IHttpRequest2<Continent>
+internal sealed class ContinentByIdRequest : IHttpRequest<Continent>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/continents")
     {

@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Builds.Http;
 
-internal sealed class TraitByIdRequest : IHttpRequest2<Trait>
+internal sealed class TraitByIdRequest : IHttpRequest<Trait>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/traits")
     {

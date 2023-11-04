@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Commerce.Http;
 
-internal sealed class ItemPricesIndexRequest : IHttpRequest2<HashSet<int>>
+internal sealed class ItemPricesIndexRequest : IHttpRequest<HashSet<int>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/commerce/prices")
     {

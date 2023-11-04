@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Inventories.Http;
 
-internal sealed class InventoryRequest : IHttpRequest2<Baggage>
+internal sealed class InventoryRequest : IHttpRequest<Baggage>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/inventory")

@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.ItemStats.Http;
 
-internal sealed class ItemStatsByPageRequest : IHttpRequest2<HashSet<ItemStat>>
+internal sealed class ItemStatsByPageRequest : IHttpRequest<HashSet<ItemStat>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/itemstats")
     {

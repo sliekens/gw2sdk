@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Worlds.Http;
 
-internal sealed class WorldByIdRequest : IHttpRequest2<World>
+internal sealed class WorldByIdRequest : IHttpRequest<World>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/worlds")
     {

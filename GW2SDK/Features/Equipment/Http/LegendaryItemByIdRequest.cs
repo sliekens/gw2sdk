@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Equipment.Http;
 
-internal sealed class LegendaryItemByIdRequest : IHttpRequest2<LegendaryItem>
+internal sealed class LegendaryItemByIdRequest : IHttpRequest<LegendaryItem>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/legendaryarmory")
     {

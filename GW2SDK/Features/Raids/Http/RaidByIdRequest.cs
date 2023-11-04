@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Raids.Http;
 
-internal sealed class RaidByIdRequest : IHttpRequest2<Raid>
+internal sealed class RaidByIdRequest : IHttpRequest<Raid>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/raids") { AcceptEncoding = "gzip" };

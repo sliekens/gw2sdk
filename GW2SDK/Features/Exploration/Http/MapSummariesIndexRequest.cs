@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Http;
 
-internal sealed class MapSummariesIndexRequest : IHttpRequest2<HashSet<int>>
+internal sealed class MapSummariesIndexRequest : IHttpRequest<HashSet<int>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/maps")
     {

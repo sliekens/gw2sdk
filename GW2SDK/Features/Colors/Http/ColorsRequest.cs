@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Colors.Http;
 
-internal sealed class ColorsRequest : IHttpRequest2<HashSet<Dye>>
+internal sealed class ColorsRequest : IHttpRequest<HashSet<Dye>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/colors")
     {

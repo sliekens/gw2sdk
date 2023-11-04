@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Colors.Http;
 
-internal sealed class UnlockedDyesRequest : IHttpRequest2<HashSet<int>>
+internal sealed class UnlockedDyesRequest : IHttpRequest<HashSet<int>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/account/dyes")
     {

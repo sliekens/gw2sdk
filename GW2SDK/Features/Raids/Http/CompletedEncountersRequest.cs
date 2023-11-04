@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Raids.Http;
 
-internal sealed class CompletedEncountersRequest : IHttpRequest2<HashSet<string>>
+internal sealed class CompletedEncountersRequest : IHttpRequest<HashSet<string>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/account/raids")
     {

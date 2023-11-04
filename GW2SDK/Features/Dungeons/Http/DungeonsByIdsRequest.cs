@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Dungeons.Http;
 
-internal sealed class DungeonsByIdsRequest : IHttpRequest2<HashSet<Dungeon>>
+internal sealed class DungeonsByIdsRequest : IHttpRequest<HashSet<Dungeon>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/dungeons") { AcceptEncoding = "gzip" };

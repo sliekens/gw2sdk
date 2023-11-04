@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Masteries.Http;
 
-internal sealed class MasteryProgressRequest : IHttpRequest2<HashSet<MasteryProgress>>
+internal sealed class MasteryProgressRequest : IHttpRequest<HashSet<MasteryProgress>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/account/masteries")
     {

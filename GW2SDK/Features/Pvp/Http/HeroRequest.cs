@@ -4,7 +4,7 @@ using GuildWars2.Pvp.Heroes;
 
 namespace GuildWars2.Pvp.Http;
 
-internal sealed class HeroRequest : IHttpRequest2<HashSet<Hero>>
+internal sealed class HeroRequest : IHttpRequest<HashSet<Hero>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/pvp/heroes")
     {

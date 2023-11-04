@@ -3,7 +3,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Commerce.Http;
 
-internal sealed class OrderBookByIdRequest : IHttpRequest2<OrderBook>
+internal sealed class OrderBookByIdRequest : IHttpRequest<OrderBook>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/commerce/listings")
     {

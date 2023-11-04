@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Currencies.Http;
 
-internal sealed class CurrencyByIdRequest : IHttpRequest2<Currency>
+internal sealed class CurrencyByIdRequest : IHttpRequest<Currency>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/currencies")
     {

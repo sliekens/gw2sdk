@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Colors.Http;
 
-internal sealed class ColorByIdRequest : IHttpRequest2<Dye>
+internal sealed class ColorByIdRequest : IHttpRequest<Dye>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/colors")
     {

@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Equipment.Http;
 
-internal sealed class EquipmentTemplatesRequest : IHttpRequest2<HashSet<EquipmentTemplate>>
+internal sealed class EquipmentTemplatesRequest : IHttpRequest<HashSet<EquipmentTemplate>>
 {
     // There is no ids=all support, but page=0 works
     private static readonly HttpRequestMessageTemplate Template =

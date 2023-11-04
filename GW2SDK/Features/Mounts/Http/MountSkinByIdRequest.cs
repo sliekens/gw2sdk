@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Mounts.Http;
 
-internal sealed class MountSkinByIdRequest : IHttpRequest2<MountSkin>
+internal sealed class MountSkinByIdRequest : IHttpRequest<MountSkin>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/mounts/skins")
     {

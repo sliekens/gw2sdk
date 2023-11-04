@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Crafting.Http;
 
-internal sealed class RecipeByIdRequest : IHttpRequest2<Recipe>
+internal sealed class RecipeByIdRequest : IHttpRequest<Recipe>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/recipes")
     {

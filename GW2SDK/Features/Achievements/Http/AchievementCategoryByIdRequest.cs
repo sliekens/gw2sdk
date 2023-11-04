@@ -3,7 +3,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Achievements.Http;
 
-internal sealed class AchievementCategoryByIdRequest : IHttpRequest2<AchievementCategory>
+internal sealed class AchievementCategoryByIdRequest : IHttpRequest<AchievementCategory>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/achievements/categories") { AcceptEncoding = "gzip" };

@@ -4,7 +4,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Commerce.Http;
 
-internal sealed class BuyOrdersRequest : IHttpRequest2<HashSet<Order>>
+internal sealed class BuyOrdersRequest : IHttpRequest<HashSet<Order>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/commerce/transactions/current/buys") { AcceptEncoding = "gzip" };

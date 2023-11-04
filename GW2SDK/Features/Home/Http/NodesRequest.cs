@@ -4,7 +4,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Home.Http;
 
-internal sealed class NodesRequest : IHttpRequest2<HashSet<Node>>
+internal sealed class NodesRequest : IHttpRequest<HashSet<Node>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/home/nodes")
     {

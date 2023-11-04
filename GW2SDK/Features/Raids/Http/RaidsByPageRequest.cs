@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Raids.Http;
 
-internal sealed class RaidsByPageRequest : IHttpRequest2<HashSet<Raid>>
+internal sealed class RaidsByPageRequest : IHttpRequest<HashSet<Raid>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/raids") { AcceptEncoding = "gzip" };

@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Achievements.Http;
 
-internal sealed class AccountAchievementByIdRequest : IHttpRequest2<AccountAchievement>
+internal sealed class AccountAchievementByIdRequest : IHttpRequest<AccountAchievement>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/account/achievements") { AcceptEncoding = "gzip" };

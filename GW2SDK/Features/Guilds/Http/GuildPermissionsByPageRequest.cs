@@ -5,7 +5,7 @@ using GuildWars2.Json;
 namespace GuildWars2.Guilds.Http;
 
 internal sealed class
-    GuildPermissionsByPageRequest : IHttpRequest2<HashSet<GuildPermissionSummary>>
+    GuildPermissionsByPageRequest : IHttpRequest<HashSet<GuildPermissionSummary>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/guild/permissions") { AcceptEncoding = "gzip" };

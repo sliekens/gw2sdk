@@ -3,7 +3,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Guilds.Http;
 
-internal sealed class GuildPermissionByIdRequest : IHttpRequest2<GuildPermissionSummary>
+internal sealed class GuildPermissionByIdRequest : IHttpRequest<GuildPermissionSummary>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/guild/permissions") { AcceptEncoding = "gzip" };

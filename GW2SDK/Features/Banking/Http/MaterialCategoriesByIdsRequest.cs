@@ -4,7 +4,7 @@ using GuildWars2.Json;
 namespace GuildWars2.Banking.Http;
 
 internal sealed class
-    MaterialCategoriesByIdsRequest : IHttpRequest2<HashSet<MaterialCategory>>
+    MaterialCategoriesByIdsRequest : IHttpRequest<HashSet<MaterialCategory>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/materials")
     {

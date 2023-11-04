@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Builds.Http;
 
-internal sealed class BuildsRequest : IHttpRequest2<HashSet<BuildTemplate>>
+internal sealed class BuildsRequest : IHttpRequest<HashSet<BuildTemplate>>
 {
     // There is no ids=all support, but page=0 works
     private static readonly HttpRequestMessageTemplate Template =

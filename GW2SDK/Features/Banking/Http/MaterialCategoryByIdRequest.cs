@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Banking.Http;
 
-internal sealed class MaterialCategoryByIdRequest : IHttpRequest2<MaterialCategory>
+internal sealed class MaterialCategoryByIdRequest : IHttpRequest<MaterialCategory>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/materials")
     {

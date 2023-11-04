@@ -4,7 +4,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Http;
 
-internal sealed class GuildMembersRequest : IHttpRequest2<List<GuildMember>>
+internal sealed class GuildMembersRequest : IHttpRequest<List<GuildMember>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/guild/:id/members") { AcceptEncoding = "gzip" };

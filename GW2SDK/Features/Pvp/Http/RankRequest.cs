@@ -4,7 +4,7 @@ using GuildWars2.Pvp.Ranks;
 
 namespace GuildWars2.Pvp.Http;
 
-internal sealed class RankRequest : IHttpRequest2<HashSet<Rank>>
+internal sealed class RankRequest : IHttpRequest<HashSet<Rank>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/pvp/ranks")
     {

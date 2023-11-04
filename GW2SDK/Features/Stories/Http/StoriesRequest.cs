@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Stories.Http;
 
-internal sealed class StoriesRequest : IHttpRequest2<HashSet<Story>>
+internal sealed class StoriesRequest : IHttpRequest<HashSet<Story>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/stories")
     {

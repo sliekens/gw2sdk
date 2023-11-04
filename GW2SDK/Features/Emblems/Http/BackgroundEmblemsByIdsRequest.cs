@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Emblems.Http;
 
-internal sealed class BackgroundEmblemsByIdsRequest : IHttpRequest2<HashSet<Emblem>>
+internal sealed class BackgroundEmblemsByIdsRequest : IHttpRequest<HashSet<Emblem>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/emblem/backgrounds") { AcceptEncoding = "gzip" };

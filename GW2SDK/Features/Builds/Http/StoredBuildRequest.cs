@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Builds.Http;
 
-internal sealed class StoredBuildRequest : IHttpRequest2<Build>
+internal sealed class StoredBuildRequest : IHttpRequest<Build>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/account/buildstorage") { AcceptEncoding = "gzip" };

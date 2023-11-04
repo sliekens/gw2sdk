@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Emotes.Http;
 
-internal sealed class EmoteByIdRequest : IHttpRequest2<Emote>
+internal sealed class EmoteByIdRequest : IHttpRequest<Emote>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/emotes") { AcceptEncoding = "gzip" };

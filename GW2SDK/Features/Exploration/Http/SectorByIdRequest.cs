@@ -4,7 +4,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Exploration.Http;
 
-internal sealed class SectorByIdRequest : IHttpRequest2<Sector>
+internal sealed class SectorByIdRequest : IHttpRequest<Sector>
 {
     private static readonly HttpRequestMessageTemplate Template = new(
         Get,

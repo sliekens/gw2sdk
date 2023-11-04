@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Minipets.Http;
 
-internal sealed class MinipetsRequest : IHttpRequest2<HashSet<Minipet>>
+internal sealed class MinipetsRequest : IHttpRequest<HashSet<Minipet>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/minis")
     {

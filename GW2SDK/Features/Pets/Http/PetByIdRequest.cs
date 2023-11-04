@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Pets.Http;
 
-internal sealed class PetByIdRequest : IHttpRequest2<Pet>
+internal sealed class PetByIdRequest : IHttpRequest<Pet>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/pets") { AcceptEncoding = "gzip" };

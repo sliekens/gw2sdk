@@ -4,7 +4,7 @@ using GuildWars2.Wvw.Matches.Stats;
 
 namespace GuildWars2.Wvw.Http;
 
-internal sealed class MatchesStatsByIdsRequest : IHttpRequest2<HashSet<MatchStats>>
+internal sealed class MatchesStatsByIdsRequest : IHttpRequest<HashSet<MatchStats>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/wvw/matches/stats") { AcceptEncoding = "gzip" };

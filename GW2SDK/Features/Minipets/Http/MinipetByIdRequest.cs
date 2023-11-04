@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Minipets.Http;
 
-internal sealed class MinipetByIdRequest : IHttpRequest2<Minipet>
+internal sealed class MinipetByIdRequest : IHttpRequest<Minipet>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/minis") { AcceptEncoding = "gzip" };

@@ -4,7 +4,7 @@ using GuildWars2.Wvw.Abilities;
 
 namespace GuildWars2.Wvw.Http;
 
-internal sealed class AbilitiesByIdsRequest : IHttpRequest2<HashSet<Ability>>
+internal sealed class AbilitiesByIdsRequest : IHttpRequest<HashSet<Ability>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/wvw/abilities") { AcceptEncoding = "gzip" };

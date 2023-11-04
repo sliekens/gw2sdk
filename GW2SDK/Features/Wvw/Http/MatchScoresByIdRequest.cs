@@ -3,7 +3,7 @@ using GuildWars2.Wvw.Matches.Scores;
 
 namespace GuildWars2.Wvw.Http;
 
-internal sealed class MatchScoresByIdRequest : IHttpRequest2<MatchScores>
+internal sealed class MatchScoresByIdRequest : IHttpRequest<MatchScores>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/wvw/matches/scores") { AcceptEncoding = "gzip" };

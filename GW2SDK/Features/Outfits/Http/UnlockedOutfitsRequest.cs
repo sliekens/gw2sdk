@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Outfits.Http;
 
-internal sealed class UnlockedOutfitsRequest : IHttpRequest2<HashSet<int>>
+internal sealed class UnlockedOutfitsRequest : IHttpRequest<HashSet<int>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/account/outfits")
     {

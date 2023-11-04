@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Guilds.Http;
 
-internal sealed class GuildByIdRequest : IHttpRequest2<Guild>
+internal sealed class GuildByIdRequest : IHttpRequest<Guild>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/guild/:id") { AcceptEncoding = "gzip" };

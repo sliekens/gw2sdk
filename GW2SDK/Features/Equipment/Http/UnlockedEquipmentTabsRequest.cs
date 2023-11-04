@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Equipment.Http;
 
-internal sealed class UnlockedEquipmentTabsRequest : IHttpRequest2<IReadOnlyList<int>>
+internal sealed class UnlockedEquipmentTabsRequest : IHttpRequest<IReadOnlyList<int>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/equipmenttabs")

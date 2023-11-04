@@ -3,7 +3,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Commerce.Http;
 
-internal sealed class DeliveryRequest : IHttpRequest2<DeliveryBox>
+internal sealed class DeliveryRequest : IHttpRequest<DeliveryBox>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/commerce/delivery")
     {

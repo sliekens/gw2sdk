@@ -3,7 +3,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Commerce.Http;
 
-internal sealed class ExchangeGemsForGoldRequest : IHttpRequest2<GemsForGoldExchange>
+internal sealed class ExchangeGemsForGoldRequest : IHttpRequest<GemsForGoldExchange>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/commerce/exchange/gems") { AcceptEncoding = "gzip" };

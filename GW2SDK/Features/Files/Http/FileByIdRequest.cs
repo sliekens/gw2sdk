@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Files.Http;
 
-internal sealed class FileByIdRequest : IHttpRequest2<Asset>
+internal sealed class FileByIdRequest : IHttpRequest<Asset>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/files") { AcceptEncoding = "gzip" };

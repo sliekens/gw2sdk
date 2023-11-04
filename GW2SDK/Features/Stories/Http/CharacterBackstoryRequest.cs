@@ -2,7 +2,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Stories.Http;
 
-internal sealed class CharacterBackstoryRequest : IHttpRequest2<CharacterBackstory>
+internal sealed class CharacterBackstoryRequest : IHttpRequest<CharacterBackstory>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/backstory")

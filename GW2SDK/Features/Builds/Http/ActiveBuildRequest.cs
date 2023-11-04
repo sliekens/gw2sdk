@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Builds.Http;
 
-internal sealed class ActiveBuildRequest : IHttpRequest2<BuildTemplate>
+internal sealed class ActiveBuildRequest : IHttpRequest<BuildTemplate>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/buildtabs/active") { AcceptEncoding = "gzip" };

@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Http;
 
-internal sealed class ObjectivesIndexRequest : IHttpRequest2<HashSet<string>>
+internal sealed class ObjectivesIndexRequest : IHttpRequest<HashSet<string>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/wvw/objectives")
     {

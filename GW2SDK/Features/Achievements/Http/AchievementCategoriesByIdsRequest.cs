@@ -5,7 +5,7 @@ using GuildWars2.Json;
 namespace GuildWars2.Achievements.Http;
 
 internal sealed class
-    AchievementCategoriesByIdsRequest : IHttpRequest2<HashSet<AchievementCategory>>
+    AchievementCategoriesByIdsRequest : IHttpRequest<HashSet<AchievementCategory>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/achievements/categories") { AcceptEncoding = "gzip" };

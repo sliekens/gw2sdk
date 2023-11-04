@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Skins.Http;
 
-internal sealed class SkinByIdRequest : IHttpRequest2<Skin>
+internal sealed class SkinByIdRequest : IHttpRequest<Skin>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/skins")
     {

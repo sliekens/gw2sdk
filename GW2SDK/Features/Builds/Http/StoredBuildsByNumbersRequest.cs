@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Builds.Http;
 
-internal sealed class StoredBuildsByNumbersRequest : IHttpRequest2<IReadOnlyList<Build>>
+internal sealed class StoredBuildsByNumbersRequest : IHttpRequest<IReadOnlyList<Build>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/account/buildstorage") { AcceptEncoding = "gzip" };
