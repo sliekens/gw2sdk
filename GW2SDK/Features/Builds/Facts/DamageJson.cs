@@ -64,7 +64,7 @@ internal static class DamageJson
         return new Damage
         {
             Text = text.Map(value => value.GetStringRequired()),
-            Icon = icon.Map(value => value.GetStringRequired()),
+            IconHref = icon.Map(value => value.GetStringRequired()),
             HitCount = hitCount.Map(value => value.GetInt32()),
             DamageMultiplier = damageMultiplier.Map(value => value.GetDouble())
         };

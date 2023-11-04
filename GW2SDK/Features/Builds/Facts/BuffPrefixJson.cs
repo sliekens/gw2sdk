@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Builds.Facts;
@@ -41,7 +41,7 @@ internal static class BuffPrefixJson
         return new BuffPrefix
         {
             Text = text.Map(value => value.GetStringRequired()),
-            Icon = icon.Map(value => value.GetStringRequired()),
+            IconHref = icon.Map(value => value.GetStringRequired()),
             Status = status.Map(value => value.GetString()) ?? "",
             Description = description.Map(value => value.GetString()) ?? ""
         };

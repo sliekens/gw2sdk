@@ -59,7 +59,7 @@ internal static class RangeJson
         return new Range
         {
             Text = text.Map(value => value.GetStringRequired()),
-            Icon = icon.Map(value => value.GetStringRequired()),
+            IconHref = icon.Map(value => value.GetStringRequired()),
             Distance = range.Map(value => value.GetInt32())
         };
     }

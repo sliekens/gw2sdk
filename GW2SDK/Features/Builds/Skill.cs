@@ -17,15 +17,15 @@ public record Skill
     /// in the Facts namespace.</summary>
     public required IReadOnlyList<Fact>? Facts { get; init; }
 
-    /// <summary>Some specialization traits can alter skill <see cref="Facts" />, replacing behaviors with new behaviors. This
-    /// list contains overrides that apply when a certain trait is equipped.</summary>
+    /// <summary>Some specialization traits can alter this skill's <see cref="Facts" />, modifying their behavior or adding new
+    /// behaviors. This list contains the overrides that apply when a certain trait is equipped.</summary>
     public required IReadOnlyList<TraitedFact>? TraitedFacts { get; init; }
 
     /// <summary>The description as it appears in the tooltip of the skill.</summary>
     public required string Description { get; init; }
 
-    /// <summary>The icon as it appears in the tooltip of the skill.</summary>
-    public required string? Icon { get; init; }
+    /// <summary>The URL of the skill's icon.</summary>
+    public required string? IconHref { get; init; }
 
     /// <summary>Indicates the type of weapon associated with this skill. Typically this is the weapon you need to equip to
     /// access the skill. It is also used to indicate the weapon type of skills granted by bundles or transformations. If the

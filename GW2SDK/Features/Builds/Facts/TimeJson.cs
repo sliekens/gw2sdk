@@ -59,7 +59,7 @@ internal static class TimeJson
         return new Time
         {
             Text = text.Map(value => value.GetStringRequired()),
-            Icon = icon.Map(value => value.GetStringRequired()),
+            IconHref = icon.Map(value => value.GetStringRequired()),
             Duration = duration.Map(value => TimeSpan.FromSeconds(value.GetDouble()))
         };
     }

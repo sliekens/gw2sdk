@@ -59,7 +59,7 @@ internal static class NumberJson
         return new Number
         {
             Text = text.Map(value => value.GetString()) ?? "",
-            Icon = icon.Map(value => value.GetStringRequired()),
+            IconHref = icon.Map(value => value.GetStringRequired()),
             Value = number.Map(value => value.GetInt32())
         };
     }

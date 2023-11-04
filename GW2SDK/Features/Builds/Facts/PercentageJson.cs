@@ -60,7 +60,7 @@ internal static class PercentageJson
         return new Percentage
         {
             Text = text.Map(value => value.GetStringRequired()),
-            Icon = icon.Map(value => value.GetStringRequired()),
+            IconHref = icon.Map(value => value.GetStringRequired()),
             Percent = percent.Map(value => value.GetDouble())
         };
     }

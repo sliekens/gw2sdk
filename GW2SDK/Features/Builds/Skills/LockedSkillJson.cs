@@ -122,7 +122,7 @@ internal static class LockedSkillJson
                     values => values.GetList(value => value.GetTraitedFact(missingMemberBehavior))
                 ),
             Description = description.Map(value => value.GetStringRequired()),
-            Icon = icon.Map(value => value.GetString()),
+            IconHref = icon.Map(value => value.GetString()),
             WeaponType = weaponType.Map(value => value.GetEnum<WeaponType>(missingMemberBehavior)),
             Professions =
                 professions.Map(

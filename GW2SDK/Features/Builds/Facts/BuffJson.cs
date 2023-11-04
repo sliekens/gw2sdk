@@ -74,7 +74,7 @@ internal static class BuffJson
         return new Buff
         {
             Text = text.Map(value => value.GetStringRequired()),
-            Icon = icon.Map(value => value.GetStringRequired()),
+            IconHref = icon.Map(value => value.GetStringRequired()),
             Duration = duration.Map(value => TimeSpan.FromSeconds(value.GetDouble())),
             Status = status.Map(value => value.GetString()) ?? "",
             Description = description.Map(value => value.GetString()) ?? "",

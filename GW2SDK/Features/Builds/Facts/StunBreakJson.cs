@@ -58,7 +58,7 @@ internal static class StunBreakJson
         return new StunBreak
         {
             Text = text.Map(value => value.GetStringRequired()),
-            Icon = icon.Map(value => value.GetStringRequired())
+            IconHref = icon.Map(value => value.GetStringRequired())
         };
     }
 }

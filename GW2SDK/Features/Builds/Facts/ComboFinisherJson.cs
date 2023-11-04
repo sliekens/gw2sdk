@@ -68,7 +68,7 @@ internal static class ComboFinisherJson
         return new ComboFinisher
         {
             Text = text.Map(value => value.GetStringRequired()),
-            Icon = icon.Map(value => value.GetStringRequired()),
+            IconHref = icon.Map(value => value.GetStringRequired()),
             Percent = percent.Map(value => value.GetInt32()),
             FinisherName =
                 finisherType.Map(value => value.GetEnum<ComboFinisherName>(missingMemberBehavior))

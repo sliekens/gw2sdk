@@ -27,7 +27,7 @@ public sealed record Specialization
     /// elite specialization's weapon.</summary>
     public required int? WeaponTraitId { get; init; }
 
-    /// <summary>The specialization icon.</summary>
+    /// <summary>The URL of the specialization's icon.</summary>
     public required string IconHref { get; init; }
 
     /// <summary>The URL of the background image for this specialization.</summary>

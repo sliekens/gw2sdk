@@ -64,7 +64,7 @@ internal static class AttributeAdjustmentJson
         return new AttributeAdjustment
         {
             Text = text.Map(value => value.GetString()) ?? "",
-            Icon = icon.Map(value => value.GetStringRequired()),
+            IconHref = icon.Map(value => value.GetStringRequired()),
             Value = adjustment.Map(value => value.GetInt32()),
             Target = target.Map(
                 value => value.GetEnum<AttributeAdjustmentTarget>(missingMemberBehavior)

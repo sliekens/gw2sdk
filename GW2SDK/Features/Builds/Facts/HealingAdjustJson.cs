@@ -59,7 +59,7 @@ internal static class HealingAdjustJson
         return new HealingAdjust
         {
             Text = text.Map(value => value.GetStringRequired()),
-            Icon = icon.Map(value => value.GetStringRequired()),
+            IconHref = icon.Map(value => value.GetStringRequired()),
             HitCount = hitCount.Map(value => value.GetInt32())
         };
     }

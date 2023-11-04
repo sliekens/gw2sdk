@@ -59,7 +59,7 @@ internal static class DurationJson
         return new Duration
         {
             Text = text.Map(value => value.GetStringRequired()),
-            Icon = icon.Map(value => value.GetStringRequired()),
+            IconHref = icon.Map(value => value.GetStringRequired()),
             Length = duration.Map(value => TimeSpan.FromSeconds(value.GetDouble()))
         };
     }

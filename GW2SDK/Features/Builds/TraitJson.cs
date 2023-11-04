@@ -79,7 +79,7 @@ internal static class TraitJson
             Name = name.Map(value => value.GetStringRequired()),
             Description = description.Map(value => value.GetString()) ?? "",
             Slot = slot.Map(value => value.GetEnum<TraitSlot>(missingMemberBehavior)),
-            Icon = icon.Map(value => value.GetStringRequired()),
+            IconHref = icon.Map(value => value.GetStringRequired()),
             SpezializationId = specialization.Map(value => value.GetInt32()),
             Facts = facts.Map(
                 values => values.GetList(

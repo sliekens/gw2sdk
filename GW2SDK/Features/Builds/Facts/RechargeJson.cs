@@ -59,7 +59,7 @@ internal static class RechargeJson
         return new Recharge
         {
             Text = text.Map(value => value.GetStringRequired()),
-            Icon = icon.Map(value => value.GetStringRequired()),
+            IconHref = icon.Map(value => value.GetStringRequired()),
             Duration = recharge.Map(value => TimeSpan.FromSeconds(value.GetDouble()))
         };
     }

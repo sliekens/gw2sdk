@@ -54,7 +54,7 @@ internal static class NoDataJson
         return new NoData
         {
             Text = text.Map(value => value.GetStringRequired()),
-            Icon = icon.Map(value => value.GetStringRequired())
+            IconHref = icon.Map(value => value.GetStringRequired())
         };
     }
 }

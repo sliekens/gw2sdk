@@ -59,7 +59,7 @@ internal static class RadiusJson
         return new Radius
         {
             Text = text.Map(value => value.GetStringRequired()),
-            Icon = icon.Map(value => value.GetStringRequired()),
+            IconHref = icon.Map(value => value.GetStringRequired()),
             Distance = distance.Map(value => value.GetInt32())
         };
     }

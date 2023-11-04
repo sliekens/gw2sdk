@@ -59,7 +59,7 @@ internal static class ComboFieldJson
         return new ComboField
         {
             Text = text.Map(value => value.GetStringRequired()),
-            Icon = icon.Map(value => value.GetStringRequired()),
+            IconHref = icon.Map(value => value.GetStringRequired()),
             Field = fieldType.Map(value => value.GetEnum<ComboFieldName>(missingMemberBehavior))
         };
     }
