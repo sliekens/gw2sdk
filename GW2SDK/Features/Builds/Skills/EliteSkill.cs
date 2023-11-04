@@ -4,7 +4,7 @@
 [PublicAPI]
 public sealed record EliteSkill : Skill
 {
-    /// <summary>Used for engineer utility skills to indicate the associated toolbelt skill.</summary>
+    /// <summary>Used for engineer skills to indicate the ID of the associated toolbelt skill.</summary>
     public required int? ToolbeltSkillId { get; init; }
 
     /// <summary>Used for Elementalist skills to indicate which attunement this skill is associated with.</summary>
