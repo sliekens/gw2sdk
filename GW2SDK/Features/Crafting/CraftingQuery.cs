@@ -78,12 +78,13 @@ public sealed class CraftingQuery
 
     #region v2/characters/:id/crafting
 
-    public Task<(LearnedCraftingDisciplines Value, MessageContext Context)> GetLearnedCraftingDisciplines(
-        string characterName,
-        string? accessToken,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    public Task<(LearnedCraftingDisciplines Value, MessageContext Context)>
+        GetLearnedCraftingDisciplines(
+            string characterName,
+            string? accessToken,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
         LearnedCraftingDisciplinesRequest request = new(characterName)
         {
@@ -143,7 +144,7 @@ public sealed class CraftingQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public IAsyncEnumerable<Recipe> GetRecipesBulk(
+    public IAsyncEnumerable<(Recipe Value, MessageContext Context)> GetRecipesBulk(
         IReadOnlyCollection<int> recipeIds,
         MissingMemberBehavior missingMemberBehavior = default,
         int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,
@@ -162,18 +163,19 @@ public sealed class CraftingQuery
         );
 
         // ReSharper disable once VariableHidesOuterVariable (intended, believe it or not)
-        async Task<IReadOnlyCollection<Recipe>> GetChunk(
+        async Task<IReadOnlyCollection<(Recipe, MessageContext)>> GetChunk(
             IReadOnlyCollection<int> chunk,
             CancellationToken cancellationToken
         )
         {
-            var response = await GetRecipesByIds(chunk, missingMemberBehavior, cancellationToken)
-                .ConfigureAwait(false);
-            return response.Value;
+            var (values, context) =
+                await GetRecipesByIds(chunk, missingMemberBehavior, cancellationToken)
+                    .ConfigureAwait(false);
+            return values.Select(value => (value, context)).ToList();
         }
     }
 
-    public async IAsyncEnumerable<Recipe> GetRecipesBulk(
+    public async IAsyncEnumerable<(Recipe Value, MessageContext Context)> GetRecipesBulk(
         MissingMemberBehavior missingMemberBehavior = default,
         int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,
         int chunkSize = BulkQuery.DefaultChunkSize,
@@ -190,8 +192,7 @@ public sealed class CraftingQuery
             progress,
             cancellationToken
         );
-        await foreach (var recipe in producer
-            .ConfigureAwait(false))
+        await foreach (var recipe in producer.ConfigureAwait(false))
         {
             yield return recipe;
         }

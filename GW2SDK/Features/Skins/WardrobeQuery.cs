@@ -82,7 +82,7 @@ public sealed class WardrobeQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public IAsyncEnumerable<Skin> GetSkinsBulk(
+    public IAsyncEnumerable<(Skin Value, MessageContext Context)> GetSkinsBulk(
         IReadOnlyCollection<int> skinIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -102,23 +102,23 @@ public sealed class WardrobeQuery
         );
 
         // ReSharper disable once VariableHidesOuterVariable (intended, believe it or not)
-        async Task<IReadOnlyCollection<Skin>> GetChunk(
+        async Task<IReadOnlyCollection<(Skin, MessageContext) >> GetChunk(
             IReadOnlyCollection<int> chunk,
             CancellationToken cancellationToken
         )
         {
-            var result = await GetSkinsByIds(
+            var (values, context) = await GetSkinsByIds(
                     chunk,
                     language,
                     missingMemberBehavior,
                     cancellationToken
                 )
                 .ConfigureAwait(false);
-            return result.Value;
+            return values.Select(value => (value, context)).ToList();
         }
     }
 
-    public async IAsyncEnumerable<Skin> GetSkinsBulk(
+    public async IAsyncEnumerable<(Skin Value, MessageContext Context)> GetSkinsBulk(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,

@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Achievements;
 
@@ -13,7 +13,7 @@ public class Achievements
         //   but enumerating all entries is too expensive for a test
         // This code will actually try to fetch more than 600 entries
         //  but the extra requests will be cancelled when this test completes
-        await foreach (var actual in sut.Achievements.GetAchievementsBulk(degreeOfParallelism: 3).Take(600))
+        await foreach (var (actual, context) in sut.Achievements.GetAchievementsBulk(degreeOfParallelism: 3).Take(600))
         {
             actual.Has_id();
             actual.Has_name();
@@ -26,6 +26,7 @@ public class Achievements
             actual.Rewards_does_not_contain_null();
             actual.Bits_does_not_contain_null();
             actual.PointCap_is_negative_1_for_repeatable_achievements_without_points();
+            Assert.NotNull(context);
         }
     }
 }

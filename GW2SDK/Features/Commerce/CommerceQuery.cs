@@ -73,7 +73,7 @@ public sealed class CommerceQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public IAsyncEnumerable<ItemPrice> GetItemPricesBulk(
+    public IAsyncEnumerable<(ItemPrice Value, MessageContext Context)> GetItemPricesBulk(
         IReadOnlyCollection<int> itemIds,
         MissingMemberBehavior missingMemberBehavior = default,
         int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,
@@ -92,18 +92,19 @@ public sealed class CommerceQuery
         );
 
         // ReSharper disable once VariableHidesOuterVariable (intended, believe it or not)
-        async Task<IReadOnlyCollection<ItemPrice>> GetChunk(
+        async Task<IReadOnlyCollection<(ItemPrice, MessageContext)>> GetChunk(
             IReadOnlyCollection<int> chunk,
             CancellationToken cancellationToken
         )
         {
-            var response = await GetItemPricesByIds(chunk, missingMemberBehavior, cancellationToken)
-                .ConfigureAwait(false);
-            return response.Value;
+            var (values, context) =
+                await GetItemPricesByIds(chunk, missingMemberBehavior, cancellationToken)
+                    .ConfigureAwait(false);
+            return values.Select(value => (value, context)).ToList();
         }
     }
 
-    public async IAsyncEnumerable<ItemPrice> GetItemPricesBulk(
+    public async IAsyncEnumerable<(ItemPrice Value, MessageContext Context)> GetItemPricesBulk(
         MissingMemberBehavior missingMemberBehavior = default,
         int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,
         int chunkSize = BulkQuery.DefaultChunkSize,
@@ -120,8 +121,7 @@ public sealed class CommerceQuery
             progress,
             cancellationToken
         );
-        await foreach (var itemPrice in producer
-            .ConfigureAwait(false))
+        await foreach (var itemPrice in producer.ConfigureAwait(false))
         {
             yield return itemPrice;
         }
@@ -165,7 +165,7 @@ public sealed class CommerceQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public IAsyncEnumerable<OrderBook> GetOrderBooksBulk(
+    public IAsyncEnumerable<(OrderBook Value, MessageContext Context)> GetOrderBooksBulk(
         IReadOnlyCollection<int> itemIds,
         MissingMemberBehavior missingMemberBehavior = default,
         int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,
@@ -182,20 +182,21 @@ public sealed class CommerceQuery
             progress,
             cancellationToken
         );
-        
+
         // ReSharper disable once VariableHidesOuterVariable (intended, believe it or not)
-        async Task<IReadOnlyCollection<OrderBook>> GetChunk(
+        async Task<IReadOnlyCollection<(OrderBook, MessageContext)>> GetChunk(
             IReadOnlyCollection<int> chunk,
             CancellationToken cancellationToken
         )
         {
-            var response = await GetOrderBooksByIds(chunk, missingMemberBehavior, cancellationToken)
-                .ConfigureAwait(false);
-            return response.Value;
+            var (values, context) =
+                await GetOrderBooksByIds(chunk, missingMemberBehavior, cancellationToken)
+                    .ConfigureAwait(false);
+            return values.Select(value => (value, context)).ToList();
         }
     }
 
-    public async IAsyncEnumerable<OrderBook> GetOrderBooksBulk(
+    public async IAsyncEnumerable<(OrderBook Value, MessageContext Context)> GetOrderBooksBulk(
         MissingMemberBehavior missingMemberBehavior = default,
         int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,
         int chunkSize = BulkQuery.DefaultChunkSize,
@@ -212,8 +213,7 @@ public sealed class CommerceQuery
             progress,
             cancellationToken
         );
-        await foreach (var orderBook in producer
-            .ConfigureAwait(false))
+        await foreach (var orderBook in producer.ConfigureAwait(false))
         {
             yield return orderBook;
         }

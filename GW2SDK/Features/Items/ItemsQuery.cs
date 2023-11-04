@@ -14,7 +14,9 @@ public sealed class ItemsQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<(HashSet<int> Value, MessageContext Context)> GetItemsIndex(CancellationToken cancellationToken = default)
+    public Task<(HashSet<int> Value, MessageContext Context)> GetItemsIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         var request = new ItemsIndexRequest();
         return request.SendAsync(http, cancellationToken);
@@ -68,7 +70,7 @@ public sealed class ItemsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public IAsyncEnumerable<Item> GetItemsBulk(
+    public IAsyncEnumerable<(Item Value, MessageContext Context)> GetItemsBulk(
         IReadOnlyCollection<int> itemIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -88,23 +90,23 @@ public sealed class ItemsQuery
         );
 
         // ReSharper disable once VariableHidesOuterVariable (intended, believe it or not)
-        async Task<IReadOnlyCollection<Item>> GetChunk(
+        async Task<IReadOnlyCollection<(Item, MessageContext)>> GetChunk(
             IReadOnlyCollection<int> chunk,
             CancellationToken cancellationToken
         )
         {
-            var result = await GetItemsByIds(
+            var (values, context) = await GetItemsByIds(
                     chunk,
                     language,
                     missingMemberBehavior,
                     cancellationToken
                 )
                 .ConfigureAwait(false);
-            return result.Value;
+            return values.Select(value => (item: value, context)).ToList();
         }
     }
 
-    public async IAsyncEnumerable<Item> GetItemsBulk(
+    public async IAsyncEnumerable<(Item Value, MessageContext Context)> GetItemsBulk(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,
