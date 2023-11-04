@@ -1,7 +1,6 @@
 ﻿using System.Net.Http;
 using ApiVersionInfo;
 using GuildWars2;
-using GuildWars2.Meta;
 using Spectre.Console;
 
 // First configure the HttpClient
