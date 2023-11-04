@@ -47,7 +47,7 @@ internal static class AchievementRefJson
                 {
                     SpecialEvent = false,
                     PvE = false,
-                    Other = Array.Empty<string>()
+                    Other = Empty.ListOfString
                 },
             Level = level.Map(value => value.GetLevelRequirement(missingMemberBehavior))
         };

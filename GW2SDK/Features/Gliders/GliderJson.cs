@@ -59,7 +59,7 @@ internal static class GliderJson
             Id = id.Map(value => value.GetInt32()),
             UnlockItems =
                 unlockItems.Map(values => values.GetList(entry => entry.GetInt32()))
-                ?? new List<int>(),
+                ?? Empty.ListOfInt32,
             Order = order.Map(value => value.GetInt32()),
             Icon = icon.Map(value => value.GetStringRequired()),
             Name = name.Map(value => value.GetStringRequired()),

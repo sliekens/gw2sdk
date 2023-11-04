@@ -90,7 +90,7 @@ internal static class StoryJson
                         value => value.GetEnum<StoryFlag>(missingMemberBehavior)
                     )
                 )
-                ?? new List<StoryFlag>()
+                ?? Empty.List<StoryFlag>()
         };
     }
 }

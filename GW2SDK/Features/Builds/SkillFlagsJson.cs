@@ -31,7 +31,7 @@ internal static class SkillFlagsJson
         {
             GroundTargeted = groundTargeted,
             NoUnderwater = noUnderwater,
-            Other = others ?? (IReadOnlyCollection<string>)Array.Empty<string>()
+            Other = others ?? Empty.ListOfString
         };
     }
 }

@@ -87,7 +87,7 @@ internal static class AchievementFlagsJson
             Repeatable = repeatable,
             RequiresUnlock = requiresUnlock,
             Weekly = weekly,
-            Other = others ?? (IReadOnlyCollection<string>)Array.Empty<string>()
+            Other = others ?? Empty.ListOfString
         };
     }
 }

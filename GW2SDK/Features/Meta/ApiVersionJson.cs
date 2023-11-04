@@ -45,7 +45,7 @@ internal static class ApiVersionJson
             SchemaVersions = schemaVersions.Map(
                     values => values.GetList(value => value.GetSchema(missingMemberBehavior))
                 )
-                ?? new List<Schema>()
+                ?? Empty.List<Schema>()
         };
     }
 }

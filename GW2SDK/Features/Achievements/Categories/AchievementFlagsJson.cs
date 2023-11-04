@@ -31,7 +31,7 @@ internal static class AchievementFlagsJson
         {
             SpecialEvent = specialEvent,
             PvE = pve,
-            Other = others ?? (IReadOnlyCollection<string>)Array.Empty<string>()
+            Other = others ?? Empty.ListOfString
         };
     }
 }

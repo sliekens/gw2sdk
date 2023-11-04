@@ -78,7 +78,7 @@ internal static class GuildTeamJson
             Seasons = seasons.Map(
                     values => values.GetList(value => value.GetSeason(missingMemberBehavior))
                 )
-                ?? new List<Season>()
+                ?? Empty.List<Season>()
         };
     }
 }

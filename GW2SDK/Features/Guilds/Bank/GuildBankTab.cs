@@ -18,6 +18,5 @@ public sealed record GuildBankTab
     public required string Note { get; init; }
 
     /// <summary>The ordered list of item slots. Empty slots are represented as <c>null</c>.</summary>
-    public required IReadOnlyList<GuildBankSlot?> Inventory { get; init; } =
-        Array.Empty<GuildBankSlot>();
+    public required IReadOnlyList<GuildBankSlot?> Inventory { get; init; }
 }
