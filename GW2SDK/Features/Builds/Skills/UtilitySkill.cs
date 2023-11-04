@@ -5,7 +5,7 @@
 public sealed record UtilitySkill : Skill
 {
     /// <summary>Used for engineer utility skills to indicate the associated toolbelt skill.</summary>
-    public required int? ToolbeltSkill { get; init; }
+    public required int? ToolbeltSkillId { get; init; }
 
     /// <summary>Used for Elementalist skills to indicate which attunement this skill is associated with.</summary>
     public required Attunement? Attunement { get; init; }
@@ -15,7 +15,9 @@ public sealed record UtilitySkill : Skill
 
     /// <summary>If present, the current skill will give the player a bundle that replaces the weapon skills with the skill IDs
     /// in this list.</summary>
-    public required IReadOnlyCollection<int>? BundleSkills { get; init; }
+    public required IReadOnlyCollection<int>? BundleSkillIds { get; init; }
 
-    public required IReadOnlyCollection<SkillReference>? Subskills { get; init; }
+    /// <summary>If present, the skill is divided into subskills. For example some Elementalist skills behave differently based
+    /// on the current attunement and some Druid skills are different when in Celestial Avatar form.</summary>
+    public required IReadOnlyCollection<SkillReference>? SubskillIds { get; init; }
 }

@@ -56,15 +56,15 @@ public record Skill
 
     /// <summary>Used for skills that are replaced by another skill (flipped) when used, this indicates the ID of the new
     /// skill. For example, the Necromancer's "Reaper's Shroud" skill becomes "Exit Reaper's Shroud".</summary>
-    public required int? FlipSkill { get; init; }
+    public required int? FlipSkillId { get; init; }
 
     /// <summary>Used for skills that are part of a chain, this indicates the ID of the next skill in the chain.</summary>
-    public required int? NextChain { get; init; }
+    public required int? NextSkillId { get; init; }
 
     /// <summary>Used for skills that are part of a chain, this indicates the ID of the previous skill in the chain.</summary>
-    public required int? PreviousChain { get; init; }
+    public required int? PreviousSkillId { get; init; }
 
     /// <summary>The ID of which elite specialization is required to access this skill, or <c>null</c> if no elite
     /// specialization is required.</summary>
-    public required int? Specialization { get; init; }
+    public required int? SpecializationId { get; init; }
 }

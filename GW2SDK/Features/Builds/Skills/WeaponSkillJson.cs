@@ -164,16 +164,16 @@ internal static class WeaponSkillJson
             DualAttunement =
                 dualAttunement.Map(value => value.GetEnum<Attunement>(missingMemberBehavior)),
             Slot = slot.Map(value => value.GetEnum<SkillSlot>(missingMemberBehavior)),
-            FlipSkill = flipSkill.Map(value => value.GetInt32()),
-            NextChain = nextChain.Map(value => value.GetInt32()),
-            PreviousChain = prevChain.Map(value => value.GetInt32()),
+            FlipSkillId = flipSkill.Map(value => value.GetInt32()),
+            NextSkillId = nextChain.Map(value => value.GetInt32()),
+            PreviousSkillId = prevChain.Map(value => value.GetInt32()),
             SkillFlag =
                 flags.Map(
                     values => values.GetList(
                         value => value.GetEnum<SkillFlag>(missingMemberBehavior)
                     )
                 ),
-            Specialization = specialization.Map(value => value.GetInt32()),
+            SpecializationId = specialization.Map(value => value.GetInt32()),
             ChatLink = chatLink.Map(value => value.GetStringRequired()),
             Categories =
                 categories.Map(

@@ -157,16 +157,16 @@ internal static class UtilitySkillJson
                         )
                 ),
             Slot = slot.Map(value => value.GetEnum<SkillSlot>(missingMemberBehavior)),
-            FlipSkill = flipSkill.Map(value => value.GetInt32()),
-            NextChain = nextChain.Map(value => value.GetInt32()),
-            PreviousChain = prevChain.Map(value => value.GetInt32()),
+            FlipSkillId = flipSkill.Map(value => value.GetInt32()),
+            NextSkillId = nextChain.Map(value => value.GetInt32()),
+            PreviousSkillId = prevChain.Map(value => value.GetInt32()),
             SkillFlag =
                 flags.Map(
                     values => values.GetList(
                         value => value.GetEnum<SkillFlag>(missingMemberBehavior)
                     )
                 ),
-            Specialization = specialization.Map(value => value.GetInt32()),
+            SpecializationId = specialization.Map(value => value.GetInt32()),
             ChatLink = chatLink.Map(value => value.GetStringRequired()),
             Categories =
                 categories.Map(
@@ -175,15 +175,15 @@ internal static class UtilitySkillJson
                             value => value.GetEnum<SkillCategoryName>(missingMemberBehavior)
                         )
                 ),
-            Subskills =
+            SubskillIds =
                 subskills.Map(
                     values => values.GetList(
                         value => value.GetSkillReference(missingMemberBehavior)
                     )
                 ),
-            BundleSkills = bundleSkills.Map(values => values.GetList(value => value.GetInt32())),
+            BundleSkillIds = bundleSkills.Map(values => values.GetList(value => value.GetInt32())),
             Attunement = attunement.Map(value => value.GetEnum<Attunement>(missingMemberBehavior)),
-            ToolbeltSkill = toolbeltSkill.Map(value => value.GetInt32()),
+            ToolbeltSkillId = toolbeltSkill.Map(value => value.GetInt32()),
             Cost = cost.Map(value => value.GetInt32())
         };
     }
