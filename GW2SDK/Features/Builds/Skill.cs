@@ -15,11 +15,11 @@ public record Skill
     /// <summary>The list of skill behaviors. For example, if the current skill is a ranged attack, this list will contain a
     /// <see cref="Facts.Range" /> to indicate the maximum range. The list type is abstract, the derived types are documented
     /// in the Facts namespace.</summary>
-    public required IReadOnlyCollection<Fact>? Facts { get; init; }
+    public required IReadOnlyList<Fact>? Facts { get; init; }
 
     /// <summary>Some specialization traits can alter skill <see cref="Facts" />, replacing behaviors with new behaviors. This
     /// list contains overrides that apply when a certain trait is equipped.</summary>
-    public required IReadOnlyCollection<TraitedFact>? TraitedFacts { get; init; }
+    public required IReadOnlyList<TraitedFact>? TraitedFacts { get; init; }
 
     /// <summary>The description as it appears in the tooltip of the skill.</summary>
     public required string Description { get; init; }
@@ -37,7 +37,7 @@ public record Skill
     /// by bundles or transformations. If the skill has a parent skill then its list of profession restrictions should be used
     /// instead of this one. Otherwise an empty list should be interpreted as no restrictions. It can also be <c>null</c> for
     /// NPC skills or passive trait skills.</summary>
-    public required IReadOnlyCollection<ProfessionName>? Professions { get; init; }
+    public required IReadOnlyList<ProfessionName>? Professions { get; init; }
 
     /// <summary>Indicates which slot this skill may occupy. This property is <c>null</c> for NPC skills or passive trait
     /// skills.</summary>
@@ -51,7 +51,7 @@ public record Skill
     public required SkillFlags SkillFlags { get; init; }
 
     /// <summary>The skill category as displayed in the tooltip.</summary>
-    public required IReadOnlyCollection<SkillCategoryName>? Categories { get; init; }
+    public required IReadOnlyList<SkillCategoryName>? Categories { get; init; }
 
     /// <summary>Used for skills that are replaced by another skill (flipped) when used, this indicates the ID of the new
     /// skill. For example, the Necromancer's "Reaper's Shroud" skill becomes "Exit Reaper's Shroud".</summary>

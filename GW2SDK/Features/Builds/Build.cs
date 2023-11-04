@@ -24,8 +24,8 @@ public sealed record Build
     public required PetSkillBar? PetSkills { get; init; }
 
     /// <summary>The legends selected for this build. (Revenants only.)</summary>
-    public required IReadOnlyCollection<string?>? Legends { get; init; }
+    public required IReadOnlyList<string?>? Legends { get; init; }
 
     /// <summary>The underwater legends selected for this build. (Revenants only.)</summary>
-    public required IReadOnlyCollection<string?>? AquaticLegends { get; init; }
+    public required IReadOnlyList<string?>? AquaticLegends { get; init; }
 }

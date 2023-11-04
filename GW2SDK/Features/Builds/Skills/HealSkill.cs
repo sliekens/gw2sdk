@@ -15,9 +15,9 @@ public sealed record HealSkill : Skill
 
     /// <summary>If present, the current skill will give the player a bundle that replaces the weapon skills with the skill IDs
     /// in this list.</summary>
-    public required IReadOnlyCollection<int>? BundleSkillIds { get; init; }
+    public required IReadOnlyList<int>? BundleSkillIds { get; init; }
 
     /// <summary>If present, the skill is divided into subskills. For example some Elementalist skills behave differently based
     /// on the current attunement and some Druid skills are different when in Celestial Avatar form.</summary>
-    public required IReadOnlyCollection<SkillReference>? SubskillIds { get; init; }
+    public required IReadOnlyList<SkillReference>? SubskillIds { get; init; }
 }

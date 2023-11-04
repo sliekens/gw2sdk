@@ -18,10 +18,10 @@ public sealed record Specialization
     public required bool Elite { get; init; }
 
     /// <summary>The IDs of the traits which are always active.</summary>
-    public required IReadOnlyCollection<int> MinorTraitIds { get; init; }
+    public required IReadOnlyList<int> MinorTraitIds { get; init; }
 
     /// <summary>The IDs of the traits which can be selected.</summary>
-    public required IReadOnlyCollection<int> MajorTraitIds { get; init; }
+    public required IReadOnlyList<int> MajorTraitIds { get; init; }
 
     /// <summary>If this is an <see cref="Elite" /> specialization, this is the ID of the trait which lets the player wield the
     /// elite specialization's weapon.</summary>

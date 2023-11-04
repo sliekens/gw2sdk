@@ -16,11 +16,11 @@ public sealed record Trait
 
     public required TraitSlot Slot { get; init; }
 
-    public required IReadOnlyCollection<Fact>? Facts { get; init; }
+    public required IReadOnlyList<Fact>? Facts { get; init; }
 
-    public required IReadOnlyCollection<TraitedFact>? TraitedFacts { get; init; }
+    public required IReadOnlyList<TraitedFact>? TraitedFacts { get; init; }
 
-    public required IReadOnlyCollection<Skill>? Skills { get; init; }
+    public required IReadOnlyList<Skill>? Skills { get; init; }
 
     public required int SpezializationId { get; init; }
 
