@@ -39,7 +39,6 @@ using GuildWars2.Skins;
 using GuildWars2.Stories;
 using GuildWars2.SuperAdventureBox;
 using GuildWars2.Tokens;
-using GuildWars2.Traits;
 using GuildWars2.WorldBosses;
 using GuildWars2.Worlds;
 using GuildWars2.Wvw;
@@ -132,8 +131,6 @@ public sealed class Gw2Client
     public RaidsQuery Raids => new(httpClient);
 
     public StoriesQuery Stories => new(httpClient);
-
-    public TraitsQuery Traits => new(httpClient);
 
     public WalletQuery Wallet => new(httpClient);
 

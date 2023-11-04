@@ -1,0 +1,14 @@
+﻿namespace GuildWars2.Builds;
+
+/// <summary>An effect applied by the skill/trait.</summary>
+[PublicAPI]
+[Inheritable]
+[DataTransferObject]
+public record Fact
+{
+    /// <summary>A brief summary of the effect</summary>
+    public required string Text { get; init; }
+
+    /// <summary>The icon as it appears in the tooltip of the skill/trait.</summary>
+    public required string Icon { get; init; }
+}

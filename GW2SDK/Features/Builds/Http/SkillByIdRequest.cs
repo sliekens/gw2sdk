@@ -1,5 +1,4 @@
-﻿using GuildWars2.Builds.Skills;
-using GuildWars2.Http;
+﻿using GuildWars2.Http;
 
 namespace GuildWars2.Builds.Http;
 

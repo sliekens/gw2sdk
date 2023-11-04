@@ -63,9 +63,10 @@ internal static class BuildJson
                 profession.Map(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
             Specializations =
                 specializations.Map(
-                    values => values.GetList(
-                        value => value.GetSelectedSpecialization(missingMemberBehavior)
-                    )
+                    values =>
+                        values.GetList(
+                            value => value.GetSelectedSpecialization(missingMemberBehavior)
+                        )
                 ),
             Skills = skills.Map(value => value.GetSkillBar(missingMemberBehavior)),
             AquaticSkills = aquaticSkills.Map(value => value.GetSkillBar(missingMemberBehavior)),

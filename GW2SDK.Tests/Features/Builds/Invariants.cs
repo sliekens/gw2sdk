@@ -25,4 +25,7 @@ internal static class Invariants
 
     internal static void Big_profession_icon_is_not_null(this Specialization actual) =>
         Assert.NotNull(actual.ProfessionIconBig);
+
+    internal static void Id_is_positive(this Trait actual) =>
+        Assert.InRange(actual.Id, 1, int.MaxValue);
 }

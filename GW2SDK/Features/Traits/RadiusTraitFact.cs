@@ -1,8 +1,0 @@
-﻿namespace GuildWars2.Traits;
-
-[PublicAPI]
-[DataTransferObject]
-public sealed record RadiusTraitFact : TraitFact
-{
-    public required int Distance { get; init; }
-}

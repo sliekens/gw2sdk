@@ -1,8 +1,0 @@
-﻿namespace GuildWars2.Traits;
-
-[PublicAPI]
-[DataTransferObject]
-public sealed record PrefixedBuffTraitFact : BuffTraitFact
-{
-    public required BuffPrefix Prefix { get; init; }
-}

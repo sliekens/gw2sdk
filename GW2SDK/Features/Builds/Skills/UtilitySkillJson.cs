@@ -140,15 +140,11 @@ internal static class UtilitySkillJson
             Facts =
                 facts.Map(
                     values =>
-                        values.GetList(
-                            value => value.GetSkillFact(missingMemberBehavior, out _, out _)
-                        )
+                        values.GetList(value => value.GetFact(missingMemberBehavior, out _, out _))
                 ),
             TraitedFacts =
                 traitedFacts.Map(
-                    values => values.GetList(
-                        value => value.GetTraitedSkillFact(missingMemberBehavior)
-                    )
+                    values => values.GetList(value => value.GetTraitedFact(missingMemberBehavior))
                 ),
             Description = description.Map(value => value.GetStringRequired()),
             Icon = icon.Map(value => value.GetString()),
