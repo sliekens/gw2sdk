@@ -1,8 +1,37 @@
 # Basic usage
 
-The entry point for API access is `GuildWars2.Gw2Client`. From there you can use IntelliSense to discover resources.
+The entry point for API access is `GuildWars2.Gw2Client`. From there you can use IntelliSense to discover resources. The class consists of logical groups containing related sets of APIs. For example, all APIs pertaining to the trading post are grouped into `Gw2Client.Commerce` and all APIs pertaining to items are grouped into `Gw2Client.Items`.
 
 The `Gw2Client` has a single dependency on `System.Net.Http.HttpClient` which you must provide from your application code.
+
+The query methods on the `Gw2Client` return `Task` objects that you can use to await the result. The result is a tuple which contains 2 items:
+
+1. A strongly typed object that represents the body of the API response
+2. A `MessageContext` object which contains HTTP response message headers
+
+``` csharp
+using System;
+using System.Net.Http;
+using GuildWars2;
+
+using var httpClient = new HttpClient();
+
+var gw2 = new Gw2Client(httpClient);
+
+// Awaiting GetQuaggans results in a tuple of Quaggans and a MessageContext
+foreach (var (quaggans, context) in await gw2.Quaggans.GetQuaggans())
+{
+    Console.WriteLine(quaggan.Id);
+    Console.WriteLine(quaggan.PictureHref);
+}
+```
+
+With the first object being the most important, the second `MessageContext` object is mostly useful for debugging. Advanced users may use it to access caching-related response headers. For simple usage, use the discard operator `_` to throw it out the window.
+
+``` csharp
+// Discard the MessageContext if you don't need it
+var (quaggans, _) = await gw2.Quaggans.GetQuaggans();
+```
 
 ## Example: Print a table of best buy and sell offers of all tradable items
 
