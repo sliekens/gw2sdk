@@ -33,7 +33,7 @@ public sealed record Build
 
     /// <summary>Indicates whether <see cref="PetSkills" /> are present.</summary>
     [MemberNotNullWhen(true, nameof(PetSkills))]
-    public bool IsRangerBuild => Profession == ProfessionName.Revenant;
+    public bool IsRangerBuild => Profession == ProfessionName.Ranger;
 
     /// <summary>Indicates whether <see cref="Legends" /> and <see cref="AquaticLegends" /> are present.</summary>
     [MemberNotNullWhen(true, nameof(Legends), nameof(AquaticLegends))]
