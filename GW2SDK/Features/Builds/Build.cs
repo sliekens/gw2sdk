@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Builds;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace GuildWars2.Builds;
 
 /// <summary>Information about the skills and traits in the build.</summary>
 [PublicAPI]
@@ -28,4 +30,12 @@ public sealed record Build
 
     /// <summary>The underwater legends selected for this build. (Revenants only.)</summary>
     public required IReadOnlyList<string?>? AquaticLegends { get; init; }
+
+    /// <summary>Indicates whether <see cref="PetSkills" /> are present.</summary>
+    [MemberNotNullWhen(true, nameof(PetSkills))]
+    public bool IsRangerBuild => Profession == ProfessionName.Revenant;
+
+    /// <summary>Indicates whether <see cref="Legends" /> and <see cref="AquaticLegends" /> are present.</summary>
+    [MemberNotNullWhen(true, nameof(Legends), nameof(AquaticLegends))]
+    public bool IsRevenantBuild => Profession == ProfessionName.Revenant;
 }
