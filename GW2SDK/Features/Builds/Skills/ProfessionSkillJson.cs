@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using GuildWars2.Json;
 
-namespace GuildWars2.Builds;
+namespace GuildWars2.Builds.Skills;
 
 internal static class ProfessionSkillJson
 {
@@ -152,12 +152,7 @@ internal static class ProfessionSkillJson
             PreviousSkillId = prevChain.Map(value => value.GetInt32()),
             TransformSkills =
                 transformSkills.Map(values => values.GetList(value => value.GetInt32())),
-            SkillFlag =
-                flags.Map(
-                    values => values.GetList(
-                        value => value.GetEnum<SkillFlag>(missingMemberBehavior)
-                    )
-                ),
+            SkillFlags = flags.Map(value => value.GetSkillFlags()),
             SpecializationId = specialization.Map(value => value.GetInt32()),
             ChatLink = chatLink.Map(value => value.GetStringRequired()),
             Categories =

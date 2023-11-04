@@ -13,5 +13,11 @@ public class Skills
 
         Assert.NotNull(actual.ResultContext);
         Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
+
+        Assert.All(actual.Value,
+            skill =>
+            {
+                Assert.Empty(skill.SkillFlags.Other);
+            });
     }
 }

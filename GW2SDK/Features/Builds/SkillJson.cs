@@ -27,8 +27,6 @@ internal static class SkillJson
                     return json.GetProfessionSkill(missingMemberBehavior);
                 case "Toolbelt":
                     return json.GetToolbeltSkill(missingMemberBehavior);
-                //case "Transform":
-                //    return json.GetTransformSkill(missingMemberBehavior);
                 case "Utility":
                     return json.GetUtilitySkill(missingMemberBehavior);
                 case "Weapon":
@@ -161,12 +159,7 @@ internal static class SkillJson
             FlipSkillId = flipSkill.Map(value => value.GetInt32()),
             NextSkillId = nextChain.Map(value => value.GetInt32()),
             PreviousSkillId = prevChain.Map(value => value.GetInt32()),
-            SkillFlag =
-                flags.Map(
-                    values => values.GetList(
-                        value => value.GetEnum<SkillFlag>(missingMemberBehavior)
-                    )
-                ),
+            SkillFlags = flags.Map(value => value.GetSkillFlags()),
             SpecializationId = specialization.Map(value => value.GetInt32()),
             ChatLink = chatLink.Map(value => value.GetStringRequired()),
             Categories = categories.Map(

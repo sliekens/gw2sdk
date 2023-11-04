@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Builds;
+﻿namespace GuildWars2.Builds.Skills;
 
 /// <summary>Information about a skill belonging to a profession mechanic.</summary>
 [PublicAPI]

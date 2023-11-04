@@ -167,12 +167,7 @@ internal static class EliteSkillJson
             PreviousSkillId = prevChain.Map(value => value.GetInt32()),
             TransformSkillIds =
                 transformSkills.Map(values => values.GetList(value => value.GetInt32())),
-            SkillFlag =
-                flags.Map(
-                    values => values.GetList(
-                        value => value.GetEnum<SkillFlag>(missingMemberBehavior)
-                    )
-                ),
+            SkillFlags = flags.Map(value => value.GetSkillFlags()),
             SpecializationId = specialization.Map(value => value.GetInt32()),
             ChatLink = chatLink.Map(value => value.GetStringRequired()),
             Categories =

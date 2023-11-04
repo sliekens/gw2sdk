@@ -47,9 +47,8 @@ public record Skill
     /// messages.</summary>
     public required string ChatLink { get; init; }
 
-    // TODO: convert to class
     /// <summary>Contains various modifiers that affect how skills behave.</summary>
-    public required IReadOnlyCollection<SkillFlag> SkillFlag { get; init; }
+    public required SkillFlags SkillFlags { get; init; }
 
     /// <summary>The skill category as displayed in the tooltip.</summary>
     public required IReadOnlyCollection<SkillCategoryName>? Categories { get; init; }
