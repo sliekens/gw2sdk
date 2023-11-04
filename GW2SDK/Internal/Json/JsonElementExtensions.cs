@@ -27,7 +27,12 @@ internal static class JsonElementExtensions
     )
     {
         var values = new List<TValue>(json.GetArrayLength());
-        values.AddRange(json.EnumerateArray().Select(resultSelector));
+        var enumerator = json.EnumerateArray();
+        while (enumerator.MoveNext())
+        {
+            values.Add(resultSelector(enumerator.Current));
+        }
+
         return values;
     }
 
@@ -46,7 +51,12 @@ internal static class JsonElementExtensions
 #else
         var values = new HashSet<TValue>();
 #endif
-        values.UnionWith(json.EnumerateArray().Select(resultSelector));
+        var enumerator = json.EnumerateArray();
+        while (enumerator.MoveNext())
+        {
+            values.Add(resultSelector(enumerator.Current));
+        }
+
         return values;
     }
 
@@ -56,9 +66,11 @@ internal static class JsonElementExtensions
     )
     {
         var values = new Dictionary<string, TValue>();
-        foreach (var member in json.EnumerateObject())
+        var enumerator = json.EnumerateObject();
+        while (enumerator.MoveNext())
         {
-            values[member.Name] = resultSelector(member.Value);
+            values[enumerator.Current.Name] = resultSelector(enumerator.Current.Value);
+
         }
 
         return values;
