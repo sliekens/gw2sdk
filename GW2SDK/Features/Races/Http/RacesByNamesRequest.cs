@@ -32,7 +32,15 @@ internal sealed class RacesByNamesRequest : IHttpRequest<Replica<HashSet<Race>>>
                 {
                     Arguments = new QueryBuilder
                     {
-                        { "ids", RaceIds.Select(id => id.ToString()) },
+                        {
+                            "ids", RaceIds.Select(
+#if NET
+                                id => Enum.GetName(id)!
+#else
+                                id => Enum.GetName(typeof(RaceName), id)!
+#endif
+                            )
+                        },
                         { "v", SchemaVersion.Recommended }
                     },
                     AcceptLanguage = Language?.Alpha2Code

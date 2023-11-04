@@ -31,7 +31,7 @@ internal sealed class GuildUpgradesByIdsRequest : IHttpRequest<Replica<HashSet<G
                 {
                     Arguments = new QueryBuilder
                     {
-                        { "ids", GuildUpgradeIds.Select(id => id.ToString()) },
+                        { "ids", GuildUpgradeIds },
                         { "v", SchemaVersion.Recommended }
                     },
                     AcceptLanguage = Language?.Alpha2Code

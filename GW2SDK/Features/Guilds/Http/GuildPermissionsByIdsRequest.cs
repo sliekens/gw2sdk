@@ -32,7 +32,15 @@ internal sealed class
                 {
                     Arguments = new QueryBuilder
                     {
-                        { "ids", GuildPermissionIds.Select(id => id.ToString()) },
+                        {
+                            "ids", GuildPermissionIds.Select(
+#if NET
+                                id => Enum.GetName(id)!
+#else
+                                id => Enum.GetName(typeof(GuildPermission), id)!
+#endif
+                            )
+                        },
                         { "v", SchemaVersion.Recommended }
                     },
                     AcceptLanguage = Language?.Alpha2Code
