@@ -1,6 +1,7 @@
 ﻿using GuildWars2.Hero.Achievements;
 using GuildWars2.Hero.Builds;
 using GuildWars2.Hero.Equipment;
+using GuildWars2.Hero.Professions;
 
 namespace GuildWars2.Hero;
 
@@ -24,4 +25,7 @@ public sealed class HeroClient
 
     /// <inheritdoc cref="EquipmentQuery" />
     public EquipmentQuery Equipment => new(httpClient);
+
+    /// <inheritdoc cref="ProfessionsQuery" />
+    public ProfessionsQuery Professions => new(httpClient);
 }

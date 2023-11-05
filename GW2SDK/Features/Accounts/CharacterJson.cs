@@ -2,9 +2,9 @@
 using GuildWars2.Crafting;
 using GuildWars2.Hero.Builds;
 using GuildWars2.Hero.Equipment;
+using GuildWars2.Hero.Professions;
 using GuildWars2.Inventories;
 using GuildWars2.Json;
-using GuildWars2.Professions;
 
 namespace GuildWars2.Accounts;
 

@@ -27,7 +27,6 @@ using GuildWars2.Mounts;
 using GuildWars2.Novelties;
 using GuildWars2.Outfits;
 using GuildWars2.Pets;
-using GuildWars2.Professions;
 using GuildWars2.Pvp;
 using GuildWars2.Quaggans;
 using GuildWars2.Quests;
@@ -140,9 +139,6 @@ public sealed class Gw2Client
 
     /// <inheritdoc cref="PetsQuery" />
     public PetsQuery Pets => new(httpClient);
-
-    /// <inheritdoc cref="ProfessionsQuery" />
-    public ProfessionsQuery Professions => new(httpClient);
 
     /// <inheritdoc cref="PvpQuery" />
     public PvpQuery Pvp => new(httpClient);
