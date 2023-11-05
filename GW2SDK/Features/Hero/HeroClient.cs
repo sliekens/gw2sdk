@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Hero;
+﻿using GuildWars2.Hero.Equipment;
+
+namespace GuildWars2.Hero;
 
 /// <summary>Provides query methods for things you can find in the Hero panel.</summary>
 [PublicAPI]
@@ -12,5 +14,6 @@ public sealed class HeroClient
         this.httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-
+    /// <inheritdoc cref="EquipmentQuery" />
+    public EquipmentQuery Equipment => new(httpClient);
 }

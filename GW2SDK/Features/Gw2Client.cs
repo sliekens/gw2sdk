@@ -9,12 +9,12 @@ using GuildWars2.Currencies;
 using GuildWars2.Dungeons;
 using GuildWars2.Emblems;
 using GuildWars2.Emotes;
-using GuildWars2.Equipment;
 using GuildWars2.Exploration;
 using GuildWars2.Files;
 using GuildWars2.Finishers;
 using GuildWars2.Gliders;
 using GuildWars2.Guilds;
+using GuildWars2.Hero;
 using GuildWars2.Home;
 using GuildWars2.Inventories;
 using GuildWars2.Items;
@@ -89,9 +89,6 @@ public sealed class Gw2Client
     /// <inheritdoc cref="EmotesQuery" />
     public EmotesQuery Emotes => new(httpClient);
 
-    /// <inheritdoc cref="EquipmentQuery" />
-    public EquipmentQuery Equipment => new(httpClient);
-
     /// <inheritdoc cref="FilesQuery" />
     public FilesQuery Files => new(httpClient);
 
@@ -103,6 +100,9 @@ public sealed class Gw2Client
 
     /// <inheritdoc cref="GuildsQuery" />
     public GuildsQuery Guilds => new(httpClient);
+
+    /// <inheritdoc cref="HeroClient" />
+    public HeroClient Hero=> new(httpClient);
 
     /// <inheritdoc cref="HomeQuery" />
     public HomeQuery Home => new(httpClient);
