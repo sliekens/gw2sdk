@@ -16,13 +16,13 @@ public class AchievementsByFilter
             3
         };
 
-        var actual = await sut.Achievements.GetAchievementsByIds(ids);
+        var (actual, context) = await sut.Achievements.GetAchievementsByIds(ids);
 
-        Assert.Equal(ids.Count, actual.Value.Count);
-        Assert.NotNull(actual.Context.ResultContext);
-        Assert.Equal(ids.Count, actual.Context.ResultContext.ResultCount);
+        Assert.Equal(ids.Count, actual.Count);
+        Assert.NotNull(context.ResultContext);
+        Assert.Equal(ids.Count, context.ResultContext.ResultCount);
         Assert.All(
-            actual.Value,
+            actual,
             entry =>
             {
                 Assert.Contains(entry.Id, ids);

@@ -10,11 +10,11 @@ public class SharedInventory
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Inventory.GetSharedInventory(accessToken.Key);
+        var (actual, _) = await sut.Inventory.GetSharedInventory(accessToken.Key);
 
-        Assert.NotEmpty(actual.Value.Items);
+        Assert.NotEmpty(actual.Items);
         Assert.All(
-            actual.Value.Items,
+            actual.Items,
             slot =>
             {
                 if (slot is not null)

@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Home;
 
@@ -11,10 +11,10 @@ public class CatById
 
         const int id = 20;
 
-        var actual = await sut.Home.GetCatById(id);
+        var (actual, _) = await sut.Home.GetCatById(id);
 
-        Assert.NotNull(actual.Value);
-        Assert.Equal(20, actual.Value.Id);
-        Assert.Equal("necromancer", actual.Value.Hint);
+        Assert.NotNull(actual);
+        Assert.Equal(20, actual.Id);
+        Assert.Equal("necromancer", actual.Hint);
     }
 }

@@ -112,9 +112,9 @@ public sealed class CommerceQuery
         [EnumeratorCancellation] CancellationToken cancellationToken = default
     )
     {
-        var index = await GetItemPricesIndex(cancellationToken).ConfigureAwait(false);
+        var (value, _) = await GetItemPricesIndex(cancellationToken).ConfigureAwait(false);
         var producer = GetItemPricesBulk(
-            index.Value,
+            value,
             missingMemberBehavior,
             degreeOfParallelism,
             chunkSize,
@@ -204,9 +204,9 @@ public sealed class CommerceQuery
         [EnumeratorCancellation] CancellationToken cancellationToken = default
     )
     {
-        var index = await GetOrderBooksIndex(cancellationToken).ConfigureAwait(false);
+        var (value, _) = await GetOrderBooksIndex(cancellationToken).ConfigureAwait(false);
         var producer = GetOrderBooksBulk(
-            index.Value,
+            value,
             missingMemberBehavior,
             degreeOfParallelism,
             chunkSize,

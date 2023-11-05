@@ -12,14 +12,14 @@ public class Sectors
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.Maps.GetSectors(continentId, floorId, regionId, mapId);
+        var (actual, context) = await sut.Maps.GetSectors(continentId, floorId, regionId, mapId);
 
-        Assert.NotEmpty(actual.Value);
-        Assert.NotNull(actual.Context.ResultContext);
-        Assert.Equal(actual.Value.Count, actual.Context.ResultContext.ResultCount);
-        Assert.Equal(actual.Value.Count, actual.Context.ResultContext.ResultTotal);
-        actual.Value.All_have_ids();
-        actual.Value.Some_have_names();
-        actual.Value.All_have_chat_links();
+        Assert.NotEmpty(actual);
+        Assert.NotNull(context.ResultContext);
+        Assert.Equal(actual.Count, context.ResultContext.ResultCount);
+        Assert.Equal(actual.Count, context.ResultContext.ResultTotal);
+        actual.All_have_ids();
+        actual.Some_have_names();
+        actual.All_have_chat_links();
     }
 }

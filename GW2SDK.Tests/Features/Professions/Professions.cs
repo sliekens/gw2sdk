@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Professions;
 
@@ -9,12 +9,12 @@ public class Professions
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.Professions.GetProfessions();
+        var (actual, _) = await sut.Professions.GetProfessions();
 
-        Assert.Equal(Enum.GetNames(typeof(ProfessionName)).Length, actual.Value.Count);
+        Assert.Equal(Enum.GetNames(typeof(ProfessionName)).Length, actual.Count);
 
         Assert.All(
-            actual.Value,
+            actual,
             profession =>
             {
                 Assert.True(

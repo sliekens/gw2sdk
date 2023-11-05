@@ -11,12 +11,12 @@ public class ObjectiveById
 
         const string id = "1099-99";
 
-        var actual = await sut.Wvw.GetObjectiveById(id);
+        var (actual, _) = await sut.Wvw.GetObjectiveById(id);
 
-        Assert.Equal(id, actual.Value.Id);
-        actual.Value.Has_name();
-        actual.Value.Has_sector_id();
-        actual.Value.Has_map_id();
-        actual.Value.Has_chat_link();
+        Assert.Equal(id, actual.Id);
+        actual.Has_name();
+        actual.Has_sector_id();
+        actual.Has_map_id();
+        actual.Has_chat_link();
     }
 }

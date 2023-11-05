@@ -115,9 +115,9 @@ public sealed class ItemsQuery
         [EnumeratorCancellation] CancellationToken cancellationToken = default
     )
     {
-        var index = await GetItemsIndex(cancellationToken).ConfigureAwait(false);
+        var (value, _) = await GetItemsIndex(cancellationToken).ConfigureAwait(false);
         var producer = GetItemsBulk(
-            index.Value,
+            value,
             language,
             missingMemberBehavior,
             degreeOfParallelism,

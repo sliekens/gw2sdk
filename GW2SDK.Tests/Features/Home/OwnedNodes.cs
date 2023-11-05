@@ -10,9 +10,9 @@ public class OwnedNodes
         var sut = Composer.Resolve<Gw2Client>();
         var token = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Home.GetOwnedNodesIndex(token.Key);
+        var (actual, _) = await sut.Home.GetOwnedNodesIndex(token.Key);
 
-        Assert.NotEmpty(actual.Value);
-        Assert.All(actual.Value, id => Assert.NotEmpty(id));
+        Assert.NotEmpty(actual);
+        Assert.All(actual, id => Assert.NotEmpty(id));
     }
 }

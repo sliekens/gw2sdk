@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Mounts;
 
@@ -9,10 +9,10 @@ public class Mounts
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.Mounts.GetMounts();
+        var (actual, _) = await sut.Mounts.GetMounts();
 
         Assert.All(
-            actual.Value,
+            actual,
             mount =>
             {
                 Assert.True(

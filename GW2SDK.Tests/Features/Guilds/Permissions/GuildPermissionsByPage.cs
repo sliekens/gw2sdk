@@ -10,15 +10,15 @@ public class GuildPermissionsByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
-        var actual = await sut.Guilds.GetGuildPermissionsByPage(0, pageSize);
+        var (actual, context) = await sut.Guilds.GetGuildPermissionsByPage(0, pageSize);
 
-        Assert.Equal(pageSize, actual.Value.Count);
-        Assert.NotNull(actual.Context.PageContext);
-        Assert.Equal(pageSize, actual.Context.PageContext.PageSize);
-        Assert.NotNull(actual.Context.ResultContext);
-        Assert.Equal(pageSize, actual.Context.ResultContext.ResultCount);
+        Assert.Equal(pageSize, actual.Count);
+        Assert.NotNull(context.PageContext);
+        Assert.Equal(pageSize, context.PageContext.PageSize);
+        Assert.NotNull(context.ResultContext);
+        Assert.Equal(pageSize, context.ResultContext.ResultCount);
         Assert.All(
-            actual.Value,
+            actual,
             entry =>
             {
                 entry.Has_id();

@@ -10,12 +10,12 @@ public class ReceivedMapChests
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.MapChests.GetReceivedMapChests(accessToken.Key);
+        var (actual, _) = await sut.MapChests.GetReceivedMapChests(accessToken.Key);
 
         // Can be empty if you haven't done any map metas today
         // The best we can do is verify that there are no unexpected map chests
         Assert.All(
-            actual.Value,
+            actual,
             chest => Assert.Contains(
                 chest,
                 new[]

@@ -9,12 +9,12 @@ public class Colors
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.Dyes.GetColors();
+        var (actual, context) = await sut.Dyes.GetColors();
 
-        Assert.NotNull(actual.Context.ResultContext);
-        Assert.Equal(actual.Context.ResultContext.ResultTotal, actual.Value.Count);
+        Assert.NotNull(context.ResultContext);
+        Assert.Equal(context.ResultContext.ResultTotal, actual.Count);
         Assert.All(
-            actual.Value,
+            actual,
             color =>
             {
                 color.Base_rgb_contains_red_green_blue();

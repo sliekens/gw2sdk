@@ -12,9 +12,9 @@ public class StoredBuild
 
         const int slotNumber = 3;
 
-        var actual = await sut.Builds.GetStoredBuild(slotNumber, accessToken.Key);
+        var (actual, _) = await sut.Builds.GetStoredBuild(slotNumber, accessToken.Key);
 
-        Assert.NotNull(actual.Value);
-        Assert.NotEmpty(actual.Value.Name);
+        Assert.NotNull(actual);
+        Assert.NotEmpty(actual.Name);
     }
 }

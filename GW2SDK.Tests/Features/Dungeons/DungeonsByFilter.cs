@@ -16,13 +16,13 @@ public class DungeonsByFilter
             "citadel_of_flame"
         };
 
-        var actual = await sut.Dungeons.GetDungeonsByIds(ids);
+        var (actual, context) = await sut.Dungeons.GetDungeonsByIds(ids);
 
-        Assert.Equal(ids.Count, actual.Value.Count);
-        Assert.NotNull(actual.Context.ResultContext);
-        Assert.Equal(ids.Count, actual.Context.ResultContext.ResultCount);
+        Assert.Equal(ids.Count, actual.Count);
+        Assert.NotNull(context.ResultContext);
+        Assert.Equal(ids.Count, context.ResultContext.ResultCount);
         Assert.All(
-            actual.Value,
+            actual,
             entry =>
             {
                 Assert.Contains(entry.Id, ids);

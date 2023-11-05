@@ -11,8 +11,8 @@ public class StoryById
 
         const int id = 63;
 
-        var actual = await sut.Stories.GetStoryById(id);
+        var (actual, _) = await sut.Stories.GetStoryById(id);
 
-        Assert.Equal(id, actual.Value.Id);
+        Assert.Equal(id, actual.Id);
     }
 }

@@ -9,10 +9,10 @@ public class LegendaryItemsByPage
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.Equipment.GetLegendaryItemsByPage(0, 3);
+        var (actual, context) = await sut.Equipment.GetLegendaryItemsByPage(0, 3);
 
-        Assert.Equal(3, actual.Value.Count);
-        Assert.NotNull(actual.Context.PageContext);
-        Assert.Equal(3, actual.Context.PageContext.PageSize);
+        Assert.Equal(3, actual.Count);
+        Assert.NotNull(context.PageContext);
+        Assert.Equal(3, context.PageContext.PageSize);
     }
 }

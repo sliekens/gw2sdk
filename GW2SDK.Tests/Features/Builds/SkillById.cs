@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Builds;
 
@@ -11,8 +11,8 @@ public class SkillById
 
         const int id = 61533;
 
-        var actual = await sut.Builds.GetSkillById(id);
+        var (actual, _) = await sut.Builds.GetSkillById(id);
 
-        Assert.Equal(id, actual.Value.Id);
+        Assert.Equal(id, actual.Id);
     }
 }

@@ -11,10 +11,10 @@ public class LegendaryLeaderboardEntries
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.Pvp.GetLeaderboardEntries(seasonId, boardId, regionId, 0, 200);
+        var (actual, context) = await sut.Pvp.GetLeaderboardEntries(seasonId, boardId, regionId, 0, 200);
 
-        Assert.NotEmpty(actual.Value);
-        Assert.NotNull(actual.Context.ResultContext);
-        Assert.NotNull(actual.Context.PageContext);
+        Assert.NotEmpty(actual);
+        Assert.NotNull(context.ResultContext);
+        Assert.NotNull(context.PageContext);
     }
 }

@@ -11,14 +11,14 @@ public class GliderById
 
         const int id = 58;
 
-        var actual = await sut.Gliders.GetGliderById(id);
+        var (actual, _) = await sut.Gliders.GetGliderById(id);
 
-        Assert.Equal(id, actual.Value.Id);
-        actual.Value.Has_unlock_items();
-        actual.Value.Has_order();
-        actual.Value.Has_icon();
-        actual.Value.Has_name();
-        actual.Value.Has_description();
-        actual.Value.Has_default_dyes();
+        Assert.Equal(id, actual.Id);
+        actual.Has_unlock_items();
+        actual.Has_order();
+        actual.Has_icon();
+        actual.Has_name();
+        actual.Has_description();
+        actual.Has_default_dyes();
     }
 }

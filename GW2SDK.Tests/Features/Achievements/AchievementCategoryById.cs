@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Achievements;
 
@@ -11,14 +11,14 @@ public class AchievementCategoryById
 
         const int id = 1;
 
-        var actual = await sut.Achievements.GetAchievementCategoryById(id);
+        var (actual, _) = await sut.Achievements.GetAchievementCategoryById(id);
 
-        Assert.Equal(id, actual.Value.Id);
-        actual.Value.Has_name();
-        actual.Value.Has_description();
-        actual.Value.Has_order();
-        actual.Value.Has_icon();
-        actual.Value.Has_achievements();
+        Assert.Equal(id, actual.Id);
+        actual.Has_name();
+        actual.Has_description();
+        actual.Has_order();
+        actual.Has_icon();
+        actual.Has_achievements();
     }
 
 }

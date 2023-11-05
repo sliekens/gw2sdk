@@ -11,11 +11,11 @@ public class MatchScoresById
 
         const string id = "1-1";
 
-        var actual = await sut.Wvw.GetMatchScoresById(id);
+        var (actual, _) = await sut.Wvw.GetMatchScoresById(id);
 
-        Assert.Equal(id, actual.Value.Id);
-        actual.Value.Has_scores();
-        actual.Value.Has_victory_points();
-        actual.Value.Has_skirmishes();
+        Assert.Equal(id, actual.Id);
+        actual.Has_scores();
+        actual.Has_victory_points();
+        actual.Has_skirmishes();
     }
 }

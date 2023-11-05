@@ -9,12 +9,12 @@ public class Worlds
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.Worlds.GetWorlds();
+        var (actual, context) = await sut.Worlds.GetWorlds();
 
-        Assert.NotNull(actual.Context.ResultContext);
-        Assert.Equal(actual.Context.ResultContext.ResultTotal, actual.Value.Count);
+        Assert.NotNull(context.ResultContext);
+        Assert.Equal(context.ResultContext.ResultTotal, actual.Count);
         Assert.All(
-            actual.Value,
+            actual,
             world =>
             {
                 world.Id_is_positive();

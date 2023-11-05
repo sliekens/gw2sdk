@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.WorldBosses;
 
@@ -11,7 +11,7 @@ public class DefeatedWorldBosses
         var accessToken = Composer.Resolve<ApiKey>();
 
         // Resets each day, not easy to prove it works
-        var actual = await sut.WorldBosses.GetDefeatedWorldBosses(accessToken.Key);
+        var (actual, _) = await sut.WorldBosses.GetDefeatedWorldBosses(accessToken.Key);
 
         HashSet<string> expected = new()
         {
@@ -32,6 +32,6 @@ public class DefeatedWorldBosses
         };
 
         // The best we can do is verify that there are no unexpected bosses
-        Assert.Subset(expected, actual.Value);
+        Assert.Subset(expected, actual);
     }
 }

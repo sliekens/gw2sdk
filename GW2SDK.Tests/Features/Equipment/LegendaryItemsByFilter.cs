@@ -16,13 +16,13 @@ public class LegendaryItemsByFilter
             80111
         };
 
-        var actual = await sut.Equipment.GetLegendaryItemsByIds(ids);
+        var (actual, _) = await sut.Equipment.GetLegendaryItemsByIds(ids);
 
         Assert.Collection(
             ids,
-            first => Assert.Contains(actual.Value, found => found.Id == first),
-            second => Assert.Contains(actual.Value, found => found.Id == second),
-            third => Assert.Contains(actual.Value, found => found.Id == third)
+            first => Assert.Contains(actual, found => found.Id == first),
+            second => Assert.Contains(actual, found => found.Id == second),
+            third => Assert.Contains(actual, found => found.Id == third)
         );
     }
 }

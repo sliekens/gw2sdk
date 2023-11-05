@@ -10,17 +10,17 @@ public class Account
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKeyBasic>();
 
-        var actual = await sut.Accounts.GetSummary(accessToken.Key);
+        var (actual, _) = await sut.Accounts.GetSummary(accessToken.Key);
 
-        actual.Value.Name_is_never_empty();
-        actual.Value.Access_is_never_empty();
-        actual.Value.GuildLeader_requires_guilds_scope();
-        actual.Value.Access_is_never_none();
-        actual.Value.Age_is_never_zero();
-        actual.Value.FractalLevel_requires_progression_scope();
-        actual.Value.DailyAp_requires_progression_scope();
-        actual.Value.MonthlyAp_requires_progression_scope();
-        actual.Value.WvwRank_requires_progression_scope();
+        actual.Name_is_never_empty();
+        actual.Access_is_never_empty();
+        actual.GuildLeader_requires_guilds_scope();
+        actual.Access_is_never_none();
+        actual.Age_is_never_zero();
+        actual.FractalLevel_requires_progression_scope();
+        actual.DailyAp_requires_progression_scope();
+        actual.MonthlyAp_requires_progression_scope();
+        actual.WvwRank_requires_progression_scope();
     }
 
     [Fact]
@@ -29,17 +29,17 @@ public class Account
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Accounts.GetSummary(accessToken.Key);
+        var (actual, _) = await sut.Accounts.GetSummary(accessToken.Key);
 
-        actual.Value.Name_is_never_empty();
-        actual.Value.Access_is_never_empty();
-        actual.Value.Access_is_never_none();
-        actual.Value.GuildLeader_is_included_by_guilds_scope();
-        actual.Value.Age_is_never_zero();
-        actual.Value.Created_ShouldNotBeDefaultValue();
-        actual.Value.FractalLevel_is_included_by_progression_scope();
-        actual.Value.DailyAp_is_included_by_progression_scope();
-        actual.Value.MonthlyAp_is_included_by_progression_scope();
-        actual.Value.WvwRank_is_included_by_progression_scope();
+        actual.Name_is_never_empty();
+        actual.Access_is_never_empty();
+        actual.Access_is_never_none();
+        actual.GuildLeader_is_included_by_guilds_scope();
+        actual.Age_is_never_zero();
+        actual.Created_ShouldNotBeDefaultValue();
+        actual.FractalLevel_is_included_by_progression_scope();
+        actual.DailyAp_is_included_by_progression_scope();
+        actual.MonthlyAp_is_included_by_progression_scope();
+        actual.WvwRank_is_included_by_progression_scope();
     }
 }

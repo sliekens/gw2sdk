@@ -11,14 +11,14 @@ public class Regions
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.Maps.GetRegions(continentId, floorId);
+        var (actual, context) = await sut.Maps.GetRegions(continentId, floorId);
 
-        Assert.NotEmpty(actual.Value);
-        Assert.NotNull(actual.Context.ResultContext);
-        Assert.Equal(actual.Value.Count, actual.Context.ResultContext.ResultCount);
-        Assert.Equal(actual.Value.Count, actual.Context.ResultContext.ResultTotal);
+        Assert.NotEmpty(actual);
+        Assert.NotNull(context.ResultContext);
+        Assert.Equal(actual.Count, context.ResultContext.ResultCount);
+        Assert.Equal(actual.Count, context.ResultContext.ResultTotal);
         Assert.All(
-            actual.Value,
+            actual,
             entry =>
             {
                 entry.Has_id();

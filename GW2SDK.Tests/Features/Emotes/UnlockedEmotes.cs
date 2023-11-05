@@ -10,12 +10,12 @@ public class UnlockedEmotes
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Emotes.GetUnlockedEmotes(accessToken.Key);
+        var (actual, _) = await sut.Emotes.GetUnlockedEmotes(accessToken.Key);
 
         // Can be empty if you haven't unlocked any emotes
         // The best we can do is verify that there are no unexpected emotes
         Assert.All(
-            actual.Value,
+            actual,
             chest => Assert.Contains(
                 chest,
                 new[]

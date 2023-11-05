@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Mounts;
 
@@ -9,10 +9,10 @@ public class MountNames
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.Mounts.GetMountNames();
+        var (actual, _) = await sut.Mounts.GetMountNames();
 
         Assert.All(
-            actual.Value,
+            actual,
             name => Assert.True(Enum.IsDefined(typeof(MountName), name), "Enum.IsDefined(name)")
         );
     }

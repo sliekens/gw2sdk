@@ -16,13 +16,13 @@ public class FilesByFilter
             "map_stairs_up"
         };
 
-        var actual = await sut.Files.GetFilesByIds(ids);
+        var (actual, context) = await sut.Files.GetFilesByIds(ids);
 
-        Assert.Equal(ids.Count, actual.Value.Count);
-        Assert.NotNull(actual.Context.ResultContext);
-        Assert.Equal(ids.Count, actual.Context.ResultContext.ResultCount);
+        Assert.Equal(ids.Count, actual.Count);
+        Assert.NotNull(context.ResultContext);
+        Assert.Equal(ids.Count, context.ResultContext.ResultCount);
         Assert.All(
-            actual.Value,
+            actual,
             entry =>
             {
                 entry.Has_id();

@@ -11,11 +11,11 @@ public class CompletedHeroChallenges
         var character = Composer.Resolve<TestCharacter>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Maps.GetCompletedHeroChallenges(character.Name, accessToken.Key);
+        var (actual, _) = await sut.Maps.GetCompletedHeroChallenges(character.Name, accessToken.Key);
 
         // BUG: currently this data is unavailable :(
         // Change this back to Assert.NotEmpty once fixed
         // https://github.com/gw2-api/issues/issues/56
-        Assert.Empty(actual.Value);
+        Assert.Empty(actual);
     }
 }

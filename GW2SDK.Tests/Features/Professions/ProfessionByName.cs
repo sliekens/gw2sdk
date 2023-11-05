@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Professions;
 
@@ -11,8 +11,8 @@ public class ProfessionByName
 
         const ProfessionName name = ProfessionName.Engineer;
 
-        var actual = await sut.Professions.GetProfessionByName(name);
+        var (actual, _) = await sut.Professions.GetProfessionByName(name);
 
-        Assert.Equal(name, actual.Value.Id);
+        Assert.Equal(name, actual.Id);
     }
 }

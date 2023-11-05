@@ -10,9 +10,9 @@ public class UnlockedNovelties
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Novelties.GetUnlockedNoveltiesIndex(accessToken.Key);
+        var (actual, _) = await sut.Novelties.GetUnlockedNoveltiesIndex(accessToken.Key);
 
-        Assert.NotEmpty(actual.Value);
-        Assert.All(actual.Value, id => Assert.NotEqual(0, id));
+        Assert.NotEmpty(actual);
+        Assert.All(actual, id => Assert.NotEqual(0, id));
     }
 }

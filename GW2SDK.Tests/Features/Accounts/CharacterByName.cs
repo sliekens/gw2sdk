@@ -11,10 +11,10 @@ public class CharacterByName
         var character = Composer.Resolve<TestCharacter>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Accounts.GetCharacterByName(character.Name, accessToken.Key);
+        var (actual, _) = await sut.Accounts.GetCharacterByName(character.Name, accessToken.Key);
 
-        Assert.Equal(character.Name, actual.Value.Name);
-        Assert.Equal(character.Race, actual.Value.Race);
-        Assert.Equal(character.Profession, actual.Value.Profession);
+        Assert.Equal(character.Name, actual.Name);
+        Assert.Equal(character.Race, actual.Race);
+        Assert.Equal(character.Profession, actual.Profession);
     }
 }

@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Commerce.Prices;
 
@@ -12,14 +12,13 @@ public class ItemPriceById
 
         const int id = 24;
 
-        var actual = await sut.Commerce.GetItemPriceById(id);
+        var (actual, _) = await sut.Commerce.GetItemPriceById(id);
 
-        var value = actual.Value;
-        Assert.Equal(id, value.Id);
-        Assert.True(value.TotalSupply > 0);
-        Assert.True(value.BestAsk > 0);
-        Assert.True(value.TotalDemand > 0);
-        Assert.True(value.BestBid > 0);
-        Assert.Equal(value.BestAsk - value.BestBid, value.BidAskSpread);
+        Assert.Equal(id, actual.Id);
+        Assert.True(actual.TotalSupply > 0);
+        Assert.True(actual.BestAsk > 0);
+        Assert.True(actual.TotalDemand > 0);
+        Assert.True(actual.BestBid > 0);
+        Assert.Equal(actual.BestAsk - actual.BestBid, actual.BidAskSpread);
     }
 }

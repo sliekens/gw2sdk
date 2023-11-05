@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Races;
 
@@ -11,8 +11,8 @@ public class RaceByName
 
         const RaceName name = RaceName.Human;
 
-        var actual = await sut.Races.GetRaceByName(name);
+        var (actual, _) = await sut.Races.GetRaceByName(name);
 
-        Assert.Equal(name, actual.Value.Id);
+        Assert.Equal(name, actual.Id);
     }
 }

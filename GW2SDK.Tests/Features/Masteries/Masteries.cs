@@ -9,12 +9,12 @@ public class Masteries
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.Masteries.GetMasteries();
+        var (actual, context) = await sut.Masteries.GetMasteries();
 
-        Assert.NotNull(actual.Context.ResultContext);
-        Assert.Equal(actual.Context.ResultContext.ResultTotal, actual.Value.Count);
+        Assert.NotNull(context.ResultContext);
+        Assert.Equal(context.ResultContext.ResultTotal, actual.Count);
         Assert.All(
-            actual.Value,
+            actual,
             mastery =>
             {
                 mastery.Id_is_positive();

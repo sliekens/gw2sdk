@@ -12,7 +12,7 @@ public class LeaderboardRegions
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.Pvp.GetLeaderboardRegions(seasonId, boardId);
+        var (actual, _) = await sut.Pvp.GetLeaderboardRegions(seasonId, boardId);
 
         var expected = new HashSet<string>
         {
@@ -20,6 +20,6 @@ public class LeaderboardRegions
             "na"
         };
 
-        Assert.Equal(expected, actual.Value);
+        Assert.Equal(expected, actual);
     }
 }

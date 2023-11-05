@@ -10,9 +10,9 @@ public class OwnedMountSkins
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Mounts.GetOwnedMountSkins(accessToken.Key);
+        var (actual, _) = await sut.Mounts.GetOwnedMountSkins(accessToken.Key);
 
-        Assert.NotEmpty(actual.Value);
+        Assert.NotEmpty(actual);
     }
 
 }

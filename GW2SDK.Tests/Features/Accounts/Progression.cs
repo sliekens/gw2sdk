@@ -11,12 +11,12 @@ public class Progression
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Accounts.GetProgression(accessToken.Key);
+        var (actual, _) = await sut.Accounts.GetProgression(accessToken.Key);
 
-        Assert.Contains(actual.Value, progression => progression.Id == ProgressionKind.FractalAgonyImpedance && progression.Value > 0);
-        Assert.Contains(actual.Value, progression => progression.Id == ProgressionKind.FractalEmpowerment && progression.Value > 0);
-        Assert.Contains(actual.Value, progression => progression.Id == ProgressionKind.FractalKarmicRetribution && progression.Value > 0);
-        Assert.Contains(actual.Value, progression => progression.Id == ProgressionKind.FractalMistAttunement && progression.Value > 0);
-        Assert.Contains(actual.Value, progression => progression.Id == ProgressionKind.Luck && progression.Value > 100);
+        Assert.Contains(actual, progression => progression.Id == ProgressionKind.FractalAgonyImpedance && progression.Value > 0);
+        Assert.Contains(actual, progression => progression.Id == ProgressionKind.FractalEmpowerment && progression.Value > 0);
+        Assert.Contains(actual, progression => progression.Id == ProgressionKind.FractalKarmicRetribution && progression.Value > 0);
+        Assert.Contains(actual, progression => progression.Id == ProgressionKind.FractalMistAttunement && progression.Value > 0);
+        Assert.Contains(actual, progression => progression.Id == ProgressionKind.Luck && progression.Value > 100);
     }
 }

@@ -183,9 +183,9 @@ public sealed class CraftingQuery
         [EnumeratorCancellation] CancellationToken cancellationToken = default
     )
     {
-        var index = await GetRecipesIndex(cancellationToken).ConfigureAwait(false);
+        var (value, _) = await GetRecipesIndex(cancellationToken).ConfigureAwait(false);
         var producer = GetRecipesBulk(
-            index.Value,
+            value,
             missingMemberBehavior,
             degreeOfParallelism,
             chunkSize,

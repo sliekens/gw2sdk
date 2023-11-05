@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Skins;
 
@@ -16,13 +16,13 @@ public class SkinsByFilter
             3
         };
 
-        var actual = await sut.Wardrobe.GetSkinsByIds(ids);
+        var (actual, _) = await sut.Wardrobe.GetSkinsByIds(ids);
 
         Assert.Collection(
             ids,
-            first => Assert.Contains(actual.Value, found => found.Id == first),
-            second => Assert.Contains(actual.Value, found => found.Id == second),
-            third => Assert.Contains(actual.Value, found => found.Id == third)
+            first => Assert.Contains(actual, found => found.Id == first),
+            second => Assert.Contains(actual, found => found.Id == second),
+            third => Assert.Contains(actual, found => found.Id == third)
         );
     }
 }

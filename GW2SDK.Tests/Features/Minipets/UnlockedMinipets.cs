@@ -10,8 +10,8 @@ public class UnlockedMinipets
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Minipets.GetUnlockedMinipets(accessToken.Key);
+        var (actual, _) = await sut.Minipets.GetUnlockedMinipets(accessToken.Key);
 
-        Assert.NotEmpty(actual.Value);
+        Assert.NotEmpty(actual);
     }
 }

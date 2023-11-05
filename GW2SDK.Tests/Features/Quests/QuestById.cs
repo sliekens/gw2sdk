@@ -11,12 +11,12 @@ public class QuestById
 
         const int id = 15;
 
-        var actual = await sut.Quests.GetQuestById(id);
+        var (actual, _) = await sut.Quests.GetQuestById(id);
 
-        Assert.Equal(id, actual.Value.Id);
-        actual.Value.Has_name();
-        actual.Value.Has_level();
-        actual.Value.Has_story();
-        actual.Value.Has_goals();
+        Assert.Equal(id, actual.Id);
+        actual.Has_name();
+        actual.Has_level();
+        actual.Has_story();
+        actual.Has_goals();
     }
 }

@@ -9,11 +9,11 @@ public class ItemStatsByPage
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.ItemStats.GetItemStatsByPage(0, 3);
+        var (actual, context) = await sut.ItemStats.GetItemStatsByPage(0, 3);
 
-        Assert.Equal(3, actual.Value.Count);
-        Assert.NotNull(actual.Context.PageContext);
-        Assert.Equal(3, actual.Context.PageContext.PageSize);
-        Assert.False(actual.Context.PageContext.Next.IsEmpty);
+        Assert.Equal(3, actual.Count);
+        Assert.NotNull(context.PageContext);
+        Assert.Equal(3, context.PageContext.PageSize);
+        Assert.False(context.PageContext.Next.IsEmpty);
     }
 }

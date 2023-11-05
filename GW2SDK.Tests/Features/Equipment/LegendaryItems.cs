@@ -9,12 +9,12 @@ public class LegendaryItems
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.Equipment.GetLegendaryItems();
+        var (actual, context) = await sut.Equipment.GetLegendaryItems();
 
-        Assert.NotNull(actual.Context.ResultContext);
-        Assert.Equal(actual.Context.ResultContext.ResultTotal, actual.Value.Count);
+        Assert.NotNull(context.ResultContext);
+        Assert.Equal(context.ResultContext.ResultTotal, actual.Count);
         Assert.All(
-            actual.Value,
+            actual,
             entry =>
             {
                 Assert.True(entry.Id > 0);

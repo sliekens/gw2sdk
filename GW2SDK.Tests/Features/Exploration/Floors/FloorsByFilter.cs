@@ -18,13 +18,13 @@ public class FloorsByFilter
             2
         };
 
-        var actual = await sut.Maps.GetFloorsByIds(continentId, ids);
+        var (actual, context) = await sut.Maps.GetFloorsByIds(continentId, ids);
 
-        Assert.Equal(ids.Count, actual.Value.Count);
-        Assert.NotNull(actual.Context.ResultContext);
-        Assert.Equal(ids.Count, actual.Context.ResultContext.ResultCount);
+        Assert.Equal(ids.Count, actual.Count);
+        Assert.NotNull(context.ResultContext);
+        Assert.Equal(ids.Count, context.ResultContext.ResultCount);
         Assert.All(
-            actual.Value,
+            actual,
             entry =>
             {
                 entry.Has_texture_dimensions();

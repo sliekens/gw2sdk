@@ -11,9 +11,9 @@ public class ActiveBuild
         var character = Composer.Resolve<TestCharacter>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Builds.GetActiveBuild(character.Name, accessToken.Key);
+        var (actual, _) = await sut.Builds.GetActiveBuild(character.Name, accessToken.Key);
 
-        Assert.NotNull(actual.Value);
-        Assert.NotNull(actual.Value.Build);
+        Assert.NotNull(actual);
+        Assert.NotNull(actual.Build);
     }
 }

@@ -10,11 +10,11 @@ public class MasteryProgress
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Masteries.GetMasteryProgress(accessToken.Key);
+        var (actual, _) = await sut.Masteries.GetMasteryProgress(accessToken.Key);
 
-        Assert.NotEmpty(actual.Value);
+        Assert.NotEmpty(actual);
         Assert.All(
-            actual.Value,
+            actual,
             progress =>
             {
                 Assert.True(progress.Id > 0);

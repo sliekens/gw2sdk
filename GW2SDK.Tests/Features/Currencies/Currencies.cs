@@ -9,12 +9,12 @@ public class Currencies
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.Wallet.GetCurrencies();
+        var (actual, context) = await sut.Wallet.GetCurrencies();
 
-        Assert.NotNull(actual.Context.ResultContext);
-        Assert.Equal(actual.Context.ResultContext.ResultTotal, actual.Value.Count);
+        Assert.NotNull(context.ResultContext);
+        Assert.Equal(context.ResultContext.ResultTotal, actual.Count);
         Assert.All(
-            actual.Value,
+            actual,
             currency =>
             {
                 currency.Id_is_positive();

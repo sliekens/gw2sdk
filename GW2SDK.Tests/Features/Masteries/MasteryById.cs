@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Masteries;
 
@@ -11,8 +11,8 @@ public class MasteryById
 
         const int id = 1;
 
-        var actual = await sut.Masteries.GetMasteryById(id);
+        var (actual, _) = await sut.Masteries.GetMasteryById(id);
 
-        Assert.Equal(id, actual.Value.Id);
+        Assert.Equal(id, actual.Id);
     }
 }

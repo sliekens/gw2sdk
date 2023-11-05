@@ -12,14 +12,14 @@ public class GuildUpgradeById
 
         const int id = 43;
 
-        var actual = await sut.Guilds.GetGuildUpgradeById(id);
+        var (actual, _) = await sut.Guilds.GetGuildUpgradeById(id);
 
-        Assert.Equal(id, actual.Value.Id);
-        actual.Value.Has_name();
-        actual.Value.Has_description();
-        actual.Value.Has_icon();
-        actual.Value.Has_costs();
-        if (actual.Value is BankBag bankBag)
+        Assert.Equal(id, actual.Id);
+        actual.Has_name();
+        actual.Has_description();
+        actual.Has_icon();
+        actual.Has_costs();
+        if (actual is BankBag bankBag)
         {
             bankBag.Has_MaxItems();
             bankBag.Has_MaxCoins();

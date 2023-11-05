@@ -11,10 +11,10 @@ public class RankById
 
         const int id = 105;
 
-        var actual = await sut.Wvw.GetRankById(id);
+        var (actual, _) = await sut.Wvw.GetRankById(id);
 
-        Assert.Equal(id, actual.Value.Id);
-        actual.Value.Has_title();
-        actual.Value.Has_min_rank();
+        Assert.Equal(id, actual.Id);
+        actual.Has_title();
+        actual.Has_min_rank();
     }
 }

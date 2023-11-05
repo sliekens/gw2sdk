@@ -9,13 +9,13 @@ public class BackstoryQuestions
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.Stories.GetBackstoryQuestions();
+        var (actual, context) = await sut.Stories.GetBackstoryQuestions();
 
-        Assert.NotNull(actual.Context.ResultContext);
-        Assert.Equal(actual.Context.ResultContext.ResultTotal, actual.Value.Count);
+        Assert.NotNull(context.ResultContext);
+        Assert.Equal(context.ResultContext.ResultTotal, actual.Count);
 
         Assert.All(
-            actual.Value,
+            actual,
             question =>
             {
                 question.Id_is_positive();

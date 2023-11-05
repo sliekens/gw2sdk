@@ -11,11 +11,11 @@ public class MatchScoresByWorldId
 
         const int worldId = 2006;
 
-        var actual = await sut.Wvw.GetMatchScoresByWorldId(worldId);
+        var (actual, _) = await sut.Wvw.GetMatchScoresByWorldId(worldId);
 
-        actual.Value.Has_id();
-        actual.Value.Has_scores();
-        actual.Value.Has_victory_points();
-        actual.Value.Has_skirmishes();
+        actual.Has_id();
+        actual.Has_scores();
+        actual.Has_victory_points();
+        actual.Has_skirmishes();
     }
 }

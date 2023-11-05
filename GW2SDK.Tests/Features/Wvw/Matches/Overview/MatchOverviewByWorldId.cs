@@ -13,11 +13,11 @@ public class MatchOverviewByWorldId
 
         // Can fail on a Friday after reset
         // ---> GuildWars2.Http.ResourceNotFoundException : world not currently in a match
-        var actual = await sut.Wvw.GetMatchOverviewByWorldId(worldId);
+        var (actual, _) = await sut.Wvw.GetMatchOverviewByWorldId(worldId);
 
-        actual.Value.Has_id();
-        actual.Value.Has_start_time();
-        actual.Value.Has_end_time();
-        actual.Value.Includes_world(worldId);
+        actual.Has_id();
+        actual.Has_start_time();
+        actual.Has_end_time();
+        actual.Includes_world(worldId);
     }
 }

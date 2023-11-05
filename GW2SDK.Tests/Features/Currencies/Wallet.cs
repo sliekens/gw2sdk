@@ -9,8 +9,8 @@ public class Wallet
     {
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
-        var actual = await sut.Wallet.GetWallet(accessToken.Key);
-        var coins = actual.Value.Single(currency => currency.CurrencyId == 1);
+        var (actual, _) = await sut.Wallet.GetWallet(accessToken.Key);
+        var coins = actual.Single(currency => currency.CurrencyId == 1);
         Coin coinsAmount = coins.Amount;
         Assert.True(coinsAmount > 0);
     }

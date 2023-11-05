@@ -27,7 +27,7 @@ public class SubtokenInfo
             "/v2/characters/My Cool Character"
         };
 
-        var createdSubtoken = await sut.TokenProvider.CreateSubtoken(
+        var (createdSubtoken, context) = await sut.TokenProvider.CreateSubtoken(
             accessToken.Key,
             subtokenPermissions,
             expiresAt,
@@ -40,9 +40,9 @@ public class SubtokenInfo
         // I guess this is a clock synchronization problem, because adding a delay works
         await Task.Delay(3000);
 
-        var actual = await sut.TokenProvider.GetTokenInfo(createdSubtoken.Value.Subtoken);
+        var (actual, _) = await sut.TokenProvider.GetTokenInfo(createdSubtoken.Subtoken);
 
-        var subtoken = Assert.IsType<GuildWars2.Tokens.SubtokenInfo>(actual.Value);
+        var subtoken = Assert.IsType<GuildWars2.Tokens.SubtokenInfo>(actual);
 
         Assert.NotEmpty(subtoken.Id);
 
@@ -54,7 +54,7 @@ public class SubtokenInfo
 
         Assert.True(subtokenPermissions.SetEquals(subtoken.Permissions));
 
-        AssertEx.Equal(createdSubtoken.Context.Date, subtoken.IssuedAt, TimeSpan.FromSeconds(1));
+        AssertEx.Equal(context.Date, subtoken.IssuedAt, TimeSpan.FromSeconds(1));
 
         // Truncate milliseconds: API uses 1 second precision
         var expectedExpiry = DateTimeOffset.FromUnixTimeSeconds(expiresAt.ToUnixTimeSeconds());

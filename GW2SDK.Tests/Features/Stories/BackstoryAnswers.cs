@@ -9,13 +9,13 @@ public class BackstoryAnswers
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.Stories.GetBackstoryAnswers();
+        var (actual, context) = await sut.Stories.GetBackstoryAnswers();
 
-        Assert.NotNull(actual.Context.ResultContext);
-        Assert.Equal(actual.Context.ResultContext.ResultTotal, actual.Value.Count);
+        Assert.NotNull(context.ResultContext);
+        Assert.Equal(context.ResultContext.ResultTotal, actual.Count);
 
         Assert.All(
-            actual.Value,
+            actual,
             answer =>
             {
                 answer.Id_is_not_empty();

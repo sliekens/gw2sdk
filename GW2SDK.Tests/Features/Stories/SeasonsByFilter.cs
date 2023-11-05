@@ -16,13 +16,13 @@ public class SeasonsByFilter
             "215AAA0F-CDAC-4F93-86DA-C155A99B5784"
         };
 
-        var actual = await sut.Stories.GetSeasonsByIds(ids);
+        var (actual, context) = await sut.Stories.GetSeasonsByIds(ids);
 
-        Assert.Equal(ids.Count, actual.Value.Count);
-        Assert.NotNull(actual.Context.ResultContext);
-        Assert.Equal(ids.Count, actual.Context.ResultContext.ResultCount);
+        Assert.Equal(ids.Count, actual.Count);
+        Assert.NotNull(context.ResultContext);
+        Assert.Equal(ids.Count, context.ResultContext.ResultCount);
         Assert.All(
-            actual.Value,
+            actual,
             entry =>
             {
                 entry.Has_id();

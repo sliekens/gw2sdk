@@ -11,10 +11,10 @@ public class ActiveEquipmentTemplate
         var character = Composer.Resolve<TestCharacter>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Equipment.GetActiveEquipmentTemplate(character.Name, accessToken.Key);
+        var (actual, _) = await sut.Equipment.GetActiveEquipmentTemplate(character.Name, accessToken.Key);
 
-        Assert.NotNull(actual.Value);
-        Assert.NotEmpty(actual.Value.Items);
-        Assert.NotNull(actual.Value.PvpEquipment);
+        Assert.NotNull(actual);
+        Assert.NotEmpty(actual.Items);
+        Assert.NotNull(actual.PvpEquipment);
     }
 }

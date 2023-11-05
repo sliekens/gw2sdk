@@ -10,13 +10,13 @@ public class OwnedMailCarriers
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.MailCarriers.GetOwnedMailCarriers(accessToken.Key);
+        var (actual, _) = await sut.MailCarriers.GetOwnedMailCarriers(accessToken.Key);
 
-        Assert.NotEmpty(actual.Value);
+        Assert.NotEmpty(actual);
 
-        var carriers = await sut.MailCarriers.GetMailCarriersByIds(actual.Value);
+        var (carriers, _) = await sut.MailCarriers.GetMailCarriersByIds(actual);
 
-        Assert.Equal(actual.Value.Count, carriers.Value.Count);
-        Assert.All(carriers.Value, carrier => Assert.Contains(carrier.Id, actual.Value));
+        Assert.Equal(actual.Count, carriers.Count);
+        Assert.All(carriers, carrier => Assert.Contains(carrier.Id, actual));
     }
 }

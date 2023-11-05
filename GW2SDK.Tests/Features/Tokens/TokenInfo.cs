@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 using GuildWars2.Tokens;
 
 namespace GuildWars2.Tests.Features.Tokens;
@@ -11,9 +11,9 @@ public class TokenInfo
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.TokenProvider.GetTokenInfo(accessToken.Key);
+        var (actual, _) = await sut.TokenProvider.GetTokenInfo(accessToken.Key);
 
-        var apiKey = Assert.IsType<ApiKeyInfo>(actual.Value);
+        var apiKey = Assert.IsType<ApiKeyInfo>(actual);
 
         Assert.NotEmpty(apiKey.Id);
 

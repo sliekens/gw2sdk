@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Stories;
 
@@ -11,8 +11,8 @@ public class BackstoryQuestionById
 
         const int id = 7;
 
-        var actual = await sut.Stories.GetBackstoryQuestionById(id);
+        var (actual, _) = await sut.Stories.GetBackstoryQuestionById(id);
 
-        Assert.Equal(id, actual.Value.Id);
+        Assert.Equal(id, actual.Id);
     }
 }

@@ -11,11 +11,11 @@ public class MatchStatsByWorldId
 
         const int worldId = 2006;
 
-        var actual = await sut.Wvw.GetMatchStatsByWorldId(worldId);
+        var (actual, _) = await sut.Wvw.GetMatchStatsByWorldId(worldId);
 
-        actual.Value.Has_id();
-        actual.Value.Has_kills();
-        actual.Value.Has_deaths();
-        actual.Value.Has_maps();
+        actual.Has_id();
+        actual.Has_kills();
+        actual.Has_deaths();
+        actual.Has_maps();
     }
 }

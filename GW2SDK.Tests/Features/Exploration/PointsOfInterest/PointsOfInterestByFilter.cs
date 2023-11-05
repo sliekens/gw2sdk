@@ -20,7 +20,7 @@ public class PointsOfInterestByFilter
             556
         };
 
-        var actual = await sut.Maps.GetPointsOfInterestByIds(
+        var (actual, context) = await sut.Maps.GetPointsOfInterestByIds(
             continentId,
             floorId,
             regionId,
@@ -28,11 +28,11 @@ public class PointsOfInterestByFilter
             ids
         );
 
-        Assert.Equal(ids.Count, actual.Value.Count);
-        Assert.NotNull(actual.Context.ResultContext);
-        Assert.Equal(ids.Count, actual.Context.ResultContext.ResultCount);
-        actual.Value.All_have_ids();
-        actual.Value.Some_have_names();
-        actual.Value.All_have_chat_links();
+        Assert.Equal(ids.Count, actual.Count);
+        Assert.NotNull(context.ResultContext);
+        Assert.Equal(ids.Count, context.ResultContext.ResultCount);
+        actual.All_have_ids();
+        actual.Some_have_names();
+        actual.All_have_chat_links();
     }
 }

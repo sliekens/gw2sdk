@@ -11,8 +11,8 @@ public class CompletedPaths
         var accessToken = Composer.Resolve<ApiKey>();
 
         // Completed paths reset every day, play some dungeons to test this properly
-        var actual = await sut.Dungeons.GetCompletedPaths(accessToken.Key);
+        var (actual, _) = await sut.Dungeons.GetCompletedPaths(accessToken.Key);
 
-        Assert.All(actual.Value, entry => Assert.Contains(entry, ReferenceData.Paths));
+        Assert.All(actual, entry => Assert.Contains(entry, ReferenceData.Paths));
     }
 }

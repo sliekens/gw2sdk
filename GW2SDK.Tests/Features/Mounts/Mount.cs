@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Mounts;
 
@@ -11,8 +11,8 @@ public class Mount
 
         const MountName name = MountName.Skyscale;
 
-        var actual = await sut.Mounts.GetMountByName(name);
+        var (actual, _) = await sut.Mounts.GetMountByName(name);
 
-        Assert.Equal(name, actual.Value.Id);
+        Assert.Equal(name, actual.Id);
     }
 }

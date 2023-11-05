@@ -27,8 +27,8 @@ public class Build
         // So in a sense, this is the "official" way to find the current build
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.Meta.GetBuild();
+        var (actual, _) = await sut.Meta.GetBuild();
 
-        Assert.True(actual.Value.Id > 115267);
+        Assert.True(actual.Id > 115267);
     }
 }

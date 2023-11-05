@@ -9,9 +9,9 @@ public class MountSkins
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.Mounts.GetMountSkins();
+        var (actual, context) = await sut.Mounts.GetMountSkins();
 
-        Assert.NotNull(actual.Context.ResultContext);
-        Assert.Equal(actual.Context.ResultContext.ResultTotal, actual.Value.Count);
+        Assert.NotNull(context.ResultContext);
+        Assert.Equal(context.ResultContext.ResultTotal, actual.Count);
     }
 }

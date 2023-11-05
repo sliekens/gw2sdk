@@ -9,12 +9,12 @@ public class MailCarriers
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.MailCarriers.GetMailCarriers();
+        var (actual, context) = await sut.MailCarriers.GetMailCarriers();
 
-        Assert.NotNull(actual.Context.ResultContext);
-        Assert.Equal(actual.Context.ResultContext.ResultTotal, actual.Value.Count);
+        Assert.NotNull(context.ResultContext);
+        Assert.Equal(context.ResultContext.ResultTotal, actual.Count);
         Assert.All(
-            actual.Value,
+            actual,
             mailCarrier =>
             {
                 mailCarrier.Id_is_positive();

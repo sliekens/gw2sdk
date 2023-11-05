@@ -127,9 +127,9 @@ public sealed class WardrobeQuery
         [EnumeratorCancellation] CancellationToken cancellationToken = default
     )
     {
-        var index = await GetSkinsIndex(cancellationToken).ConfigureAwait(false);
+        var (value, _) = await GetSkinsIndex(cancellationToken).ConfigureAwait(false);
         var producer = GetSkinsBulk(
-            index.Value,
+            value,
             language,
             missingMemberBehavior,
             degreeOfParallelism,

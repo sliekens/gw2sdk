@@ -13,14 +13,14 @@ public class RecipesByIngredient
         var sut = Composer.Resolve<Gw2Client>();
 
         const int visionCrystal = 46746;
-        var actual = await sut.Crafting.GetRecipesByIngredientItemId(visionCrystal);
+        var (actual, context) = await sut.Crafting.GetRecipesByIngredientItemId(visionCrystal);
 
-        Assert.NotInRange(actual.Value.Count, 0, 200); // Greater than 200
-        Assert.NotNull(actual.Context.ResultContext);
-        Assert.Equal(actual.Context.ResultContext.ResultTotal, actual.Value.Count);
-        Assert.Equal(actual.Context.ResultContext.ResultTotal, actual.Context.ResultContext.ResultCount);
+        Assert.NotInRange(actual.Count, 0, 200); // Greater than 200
+        Assert.NotNull(context.ResultContext);
+        Assert.Equal(context.ResultContext.ResultTotal, actual.Count);
+        Assert.Equal(context.ResultContext.ResultTotal, context.ResultContext.ResultCount);
         Assert.All(
-            actual.Value,
+            actual,
             recipe => Assert.Contains(
                 recipe.Ingredients,
                 ingredient => ingredient.Id == visionCrystal

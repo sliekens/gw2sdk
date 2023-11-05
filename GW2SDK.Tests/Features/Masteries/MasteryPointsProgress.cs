@@ -10,47 +10,47 @@ public class MasteryPointsProgress
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Masteries.GetMasteryPointsProgress(accessToken.Key);
+        var (actual, _) = await sut.Masteries.GetMasteryPointsProgress(accessToken.Key);
 
-        Assert.NotNull(actual.Value);
-        Assert.Equal(actual.Value.Unlocked.Count, actual.Value.Totals.Sum(total => total.Earned));
+        Assert.NotNull(actual);
+        Assert.Equal(actual.Unlocked.Count, actual.Totals.Sum(total => total.Earned));
         Assert.Contains(
-            actual.Value.Totals,
+            actual.Totals,
             total => total.Region == "Central Tyria"
                 && total.Earned > 0
                 && total.Spent > 0
                 && total.Available <= total.Earned
         );
         Assert.Contains(
-            actual.Value.Totals,
+            actual.Totals,
             total => total.Region == "Heart of Thorns"
                 && total.Earned > 0
                 && total.Spent > 0
                 && total.Available <= total.Earned
         );
         Assert.Contains(
-            actual.Value.Totals,
+            actual.Totals,
             total => total.Region == "Path of Fire"
                 && total.Earned > 0
                 && total.Spent > 0
                 && total.Available <= total.Earned
         );
         Assert.Contains(
-            actual.Value.Totals,
+            actual.Totals,
             total => total.Region == "Icebrood Saga"
                 && total.Earned > 0
                 && total.Spent > 0
                 && total.Available <= total.Earned
         );
         Assert.Contains(
-            actual.Value.Totals,
+            actual.Totals,
             total => total.Region == "End of Dragons"
                 && total.Earned > 0
                 && total.Spent > 0
                 && total.Available <= total.Earned
         );
         Assert.Contains(
-            actual.Value.Totals,
+            actual.Totals,
             total => total.Region == "Secrets of the Obscure"
                 && total.Earned > 0
                 && total.Spent > 0

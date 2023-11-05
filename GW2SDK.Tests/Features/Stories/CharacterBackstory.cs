@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Stories;
 
@@ -11,12 +11,12 @@ public class CharacterBackstory
         var character = Composer.Resolve<TestCharacter>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Stories.GetCharacterBackstory(
+        var (actual, _) = await sut.Stories.GetCharacterBackstory(
             character.Name,
             accessToken.Key
         );
 
-        Assert.NotNull(actual.Value);
-        Assert.NotEmpty(actual.Value.Backstory);
+        Assert.NotNull(actual);
+        Assert.NotEmpty(actual.Backstory);
     }
 }

@@ -16,13 +16,13 @@ public class TraitsByFilter
             222
         };
 
-        var actual = await sut.Builds.GetTraitsByIds(ids);
+        var (actual, _) = await sut.Builds.GetTraitsByIds(ids);
 
         Assert.Collection(
             ids,
-            first => Assert.Contains(actual.Value, found => found.Id == first),
-            second => Assert.Contains(actual.Value, found => found.Id == second),
-            third => Assert.Contains(actual.Value, found => found.Id == third)
+            first => Assert.Contains(actual, found => found.Id == first),
+            second => Assert.Contains(actual, found => found.Id == second),
+            third => Assert.Contains(actual, found => found.Id == third)
         );
     }
 }

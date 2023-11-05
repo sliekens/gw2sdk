@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Emblems;
 
@@ -11,8 +11,8 @@ public class BackgroundEmblemById
 
         const int id = 1;
 
-        var actual = await sut.Emblems.GetBackgroundEmblemById(id);
+        var (actual, _) = await sut.Emblems.GetBackgroundEmblemById(id);
 
-        Assert.Equal(id, actual.Value.Id);
+        Assert.Equal(id, actual.Id);
     }
 }

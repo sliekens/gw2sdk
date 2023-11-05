@@ -20,13 +20,13 @@ public class HeartsByFilter
             3
         };
 
-        var actual = await sut.Maps.GetHeartsByIds(continentId, floorId, regionId, mapId, ids);
+        var (actual, context) = await sut.Maps.GetHeartsByIds(continentId, floorId, regionId, mapId, ids);
 
-        Assert.Equal(ids.Count, actual.Value.Count);
-        Assert.NotNull(actual.Context.ResultContext);
-        Assert.Equal(ids.Count, actual.Context.ResultContext.ResultCount);
-        actual.Value.All_have_ids();
-        actual.Value.Some_have_objectives();
-        actual.Value.All_have_chat_links();
+        Assert.Equal(ids.Count, actual.Count);
+        Assert.NotNull(context.ResultContext);
+        Assert.Equal(ids.Count, context.ResultContext.ResultCount);
+        actual.All_have_ids();
+        actual.Some_have_objectives();
+        actual.All_have_chat_links();
     }
 }

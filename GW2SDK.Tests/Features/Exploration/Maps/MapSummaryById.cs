@@ -12,9 +12,9 @@ public class MapSummaryById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.Maps.GetMapSummaryById(id);
+        var (actual, _) = await sut.Maps.GetMapSummaryById(id);
 
-        Assert.Equal(id, actual.Value.Id);
-        actual.Value.Has_name();
+        Assert.Equal(id, actual.Id);
+        actual.Has_name();
     }
 }

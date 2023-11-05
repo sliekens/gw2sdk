@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using GuildWars2;
 
 using var httpClient = new HttpClient();
@@ -12,13 +13,13 @@ CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo("de");
 
 // Typically you want to configure the user's preferred language (CurrentUICulture) as the default
 httpClient.DefaultRequestHeaders.AcceptLanguage.Add(
-    new System.Net.Http.Headers.StringWithQualityHeaderValue(Language.CurrentUICulture.Alpha2Code)
+    new StringWithQualityHeaderValue(Language.CurrentUICulture.Alpha2Code)
 );
 
-var mounts = await gw2.Mounts.GetMounts();
+var (mounts, _) = await gw2.Mounts.GetMounts();
 
 Console.WriteLine("Preferred language");
-foreach (var mount in mounts.Value)
+foreach (var mount in mounts)
 {
     Console.WriteLine("* {0}", mount.Name);
 }
@@ -40,10 +41,10 @@ foreach (var language in languages)
 {
     // Localizable endpoints accept an optional language parameter
     // When omitted, the default language is used (as specified in Accept-Language, or English if not specified)
-    mounts = await gw2.Mounts.GetMounts(language);
+    (mounts, _) = await gw2.Mounts.GetMounts(language);
 
     Console.WriteLine(language.CultureInfo.EnglishName);
-    foreach (var mount in mounts.Value)
+    foreach (var mount in mounts)
     {
         Console.WriteLine("* {0}", mount.Name);
     }
@@ -53,10 +54,10 @@ foreach (var language in languages)
 
 // Finally let's see what happens when an unsupported language is used
 var unsupportedLanguage = new Language("ko");
-mounts = await gw2.Mounts.GetMounts(unsupportedLanguage);
+(mounts, _) = await gw2.Mounts.GetMounts(unsupportedLanguage);
 
 Console.WriteLine(unsupportedLanguage.CultureInfo.EnglishName + " (unsupported)");
-foreach (var mount in mounts.Value)
+foreach (var mount in mounts)
 {
     Console.WriteLine("* {0}", mount.Name);
 }

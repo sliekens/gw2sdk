@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Commerce.Transactions;
 
@@ -10,8 +10,8 @@ public class Purchases
         var accessToken = Composer.Resolve<ApiKey>();
         var sut = Composer.Resolve<Gw2Client>();
 
-        var bids = await sut.Commerce.GetPurchases(0, 200, accessToken.Key);
+        var (purchases, _) = await sut.Commerce.GetPurchases(0, 200, accessToken.Key);
 
-        Assert.NotEmpty(bids.Value);
+        Assert.NotEmpty(purchases);
     }
 }

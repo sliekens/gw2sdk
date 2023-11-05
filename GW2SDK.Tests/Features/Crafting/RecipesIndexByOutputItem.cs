@@ -10,9 +10,9 @@ public class RecipesIndexByOutputItem
         var sut = Composer.Resolve<Gw2Client>();
 
         const int ironIngot = 19683;
-        var actual = await sut.Crafting.GetRecipesIndexByOutputItemId(ironIngot);
+        var (actual, _) = await sut.Crafting.GetRecipesIndexByOutputItemId(ironIngot);
 
         const int ironIngotRecipe = 19;
-        Assert.Contains(ironIngotRecipe, actual.Value);
+        Assert.Contains(ironIngotRecipe, actual);
     }
 }

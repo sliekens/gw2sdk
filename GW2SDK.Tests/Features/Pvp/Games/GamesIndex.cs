@@ -10,11 +10,11 @@ public class GamesIndex
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Pvp.GetGamesIndex(accessToken.Key);
+        var (actual, context) = await sut.Pvp.GetGamesIndex(accessToken.Key);
 
-        Assert.NotEmpty(actual.Value);
-        Assert.NotNull(actual.Context.ResultContext);
-        Assert.Equal(actual.Value.Count, actual.Context.ResultContext.ResultCount);
-        Assert.Equal(actual.Value.Count, actual.Context.ResultContext.ResultTotal);
+        Assert.NotEmpty(actual);
+        Assert.NotNull(context.ResultContext);
+        Assert.Equal(actual.Count, context.ResultContext.ResultCount);
+        Assert.Equal(actual.Count, context.ResultContext.ResultTotal);
     }
 }

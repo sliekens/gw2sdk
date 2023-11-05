@@ -13,8 +13,7 @@ public class DailyRecipes
         // This is not resistant to recipes being added to the game, so not great :)
         // For now I'll just maintain this by hand...
         // no clue how this can be solved without re-implementing the call to /v2/dailycrafting in test code (which makes the test pointless)
-        var referenceData = await sut.Crafting.GetDailyRecipes();
-        var dailyRecipes = referenceData.Value;
+        var (dailyRecipes, _) = await sut.Crafting.GetDailyRecipes();
 
         Assert.Equal(
             new[]
@@ -29,10 +28,10 @@ public class DailyRecipes
         );
 
         // Again this next method is not deterministic...
-        var actual = await sut.Crafting.GetDailyRecipesOnCooldown(accessToken.Key);
+        var (actual, _) = await sut.Crafting.GetDailyRecipesOnCooldown(accessToken.Key);
 
         // The best we can do is verify that there are no unexpected recipes
         // i.e. all recipes must be present in the reference data
-        Assert.All(actual.Value, recipeId => Assert.Contains(recipeId, dailyRecipes));
+        Assert.All(actual, recipeId => Assert.Contains(recipeId, dailyRecipes));
     }
 }

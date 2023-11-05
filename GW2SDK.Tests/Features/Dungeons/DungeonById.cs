@@ -11,9 +11,9 @@ public class DungeonById
 
         const string id = "citadel_of_flame";
 
-        var actual = await sut.Dungeons.GetDungeonById(id);
+        var (actual, _) = await sut.Dungeons.GetDungeonById(id);
 
-        Assert.Equal(id, actual.Value.Id);
-        actual.Value.Has_paths();
+        Assert.Equal(id, actual.Id);
+        actual.Has_paths();
     }
 }

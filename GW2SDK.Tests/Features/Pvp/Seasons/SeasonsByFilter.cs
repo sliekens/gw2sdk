@@ -16,13 +16,13 @@ public class SeasonsByFilter
             "D1777261-555B-4B72-A27E-BDC96EC393D5"
         };
 
-        var actual = await sut.Pvp.GetSeasonsByIds(ids);
+        var (actual, context) = await sut.Pvp.GetSeasonsByIds(ids);
 
-        Assert.Equal(ids.Count, actual.Value.Count);
-        Assert.NotNull(actual.Context.ResultContext);
-        Assert.Equal(ids.Count, actual.Context.ResultContext.ResultCount);
+        Assert.Equal(ids.Count, actual.Count);
+        Assert.NotNull(context.ResultContext);
+        Assert.Equal(ids.Count, context.ResultContext.ResultCount);
         Assert.All(
-            actual.Value,
+            actual,
             entry =>
             {
                 entry.Has_id();

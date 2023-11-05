@@ -16,13 +16,13 @@ public class HeroesByFilter
             "BEA79596-CA8B-4D46-9B9C-EA1B606BCF42"
         };
 
-        var actual = await sut.Pvp.GetHeroesByIds(ids);
+        var (actual, context) = await sut.Pvp.GetHeroesByIds(ids);
 
-        Assert.Equal(ids.Count, actual.Value.Count);
-        Assert.NotNull(actual.Context.ResultContext);
-        Assert.Equal(ids.Count, actual.Context.ResultContext.ResultCount);
+        Assert.Equal(ids.Count, actual.Count);
+        Assert.NotNull(context.ResultContext);
+        Assert.Equal(ids.Count, context.ResultContext.ResultCount);
         Assert.All(
-            actual.Value,
+            actual,
             entry =>
             {
                 entry.Has_id();

@@ -18,11 +18,11 @@ public class StoredBuildsByNumbers
         };
         ;
 
-        var actual = await sut.Builds.GetStoredBuilds(slotNumbers, accessToken.Key);
+        var (actual, _) = await sut.Builds.GetStoredBuilds(slotNumbers, accessToken.Key);
 
-        Assert.NotEmpty(actual.Value);
+        Assert.NotEmpty(actual);
         Assert.All(
-            actual.Value,
+            actual,
             space =>
             {
                 Assert.NotEmpty(space.Name);

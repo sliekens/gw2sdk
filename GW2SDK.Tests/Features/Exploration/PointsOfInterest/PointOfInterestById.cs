@@ -15,7 +15,7 @@ public class PointOfInterestById
         const int mapId = 26;
         const int pointOfInterestId = 554;
 
-        var actual = await sut.Maps.GetPointOfInterestById(
+        var (actual, _) = await sut.Maps.GetPointOfInterestById(
             continentId,
             floorId,
             regionId,
@@ -23,11 +23,11 @@ public class PointOfInterestById
             pointOfInterestId
         );
 
-        Assert.Equal(pointOfInterestId, actual.Value.Id);
-        Assert.Equal("Leaning Grade", actual.Value.Name);
-        Assert.Equal(1, actual.Value.Floor);
-        Assert.Equal(52657.7f, actual.Value.Coordinates.X);
-        Assert.Equal(32978.8f, actual.Value.Coordinates.Y);
-        Assert.Equal("[&BCoCAAA=]", actual.Value.ChatLink);
+        Assert.Equal(pointOfInterestId, actual.Id);
+        Assert.Equal("Leaning Grade", actual.Name);
+        Assert.Equal(1, actual.Floor);
+        Assert.Equal(52657.7f, actual.Coordinates.X);
+        Assert.Equal(32978.8f, actual.Coordinates.Y);
+        Assert.Equal("[&BCoCAAA=]", actual.ChatLink);
     }
 }

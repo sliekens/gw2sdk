@@ -12,10 +12,10 @@ public class EquipmentTemplate
         var accessToken = Composer.Resolve<ApiKey>();
 
         const int tab = 1;
-        var actual = await sut.Equipment.GetEquipmentTemplate(character.Name, tab, accessToken.Key);
+        var (actual, _) = await sut.Equipment.GetEquipmentTemplate(character.Name, tab, accessToken.Key);
 
-        Assert.NotNull(actual.Value);
-        Assert.NotEmpty(actual.Value.Items);
-        Assert.NotNull(actual.Value.PvpEquipment);
+        Assert.NotNull(actual);
+        Assert.NotEmpty(actual.Items);
+        Assert.NotNull(actual.PvpEquipment);
     }
 }

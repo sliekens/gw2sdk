@@ -11,13 +11,13 @@ public class FinisherById
 
         const int id = 58;
 
-        var actual = await sut.Finishers.GetFinisherById(id);
+        var (actual, _) = await sut.Finishers.GetFinisherById(id);
 
-        Assert.Equal(id, actual.Value.Id);
-        actual.Value.Has_unlock_details();
-        actual.Value.Has_unlock_items();
-        actual.Value.Has_order();
-        actual.Value.Has_icon();
-        actual.Value.Has_name();
+        Assert.Equal(id, actual.Id);
+        actual.Has_unlock_details();
+        actual.Has_unlock_items();
+        actual.Has_order();
+        actual.Has_icon();
+        actual.Has_name();
     }
 }

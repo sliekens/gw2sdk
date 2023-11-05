@@ -10,12 +10,12 @@ public class CompletedEncounters
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Raids.GetCompletedEncounters(accessToken.Key);
+        var (actual, _) = await sut.Raids.GetCompletedEncounters(accessToken.Key);
 
         // Can be empty if you haven't done any raids this week
         // The best we can do is verify that there are no unexpected encounters
         Assert.All(
-            actual.Value,
+            actual,
             chest => Assert.Contains(
                 chest,
                 new[]

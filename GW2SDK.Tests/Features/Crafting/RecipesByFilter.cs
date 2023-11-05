@@ -16,10 +16,10 @@ public class RecipesByFilter
             3
         };
 
-        var actual = await sut.Crafting.GetRecipesByIds(ids);
+        var (actual, _) = await sut.Crafting.GetRecipesByIds(ids);
 
         Assert.All(
-            actual.Value,
+            actual,
             entry =>
             {
                 entry.Has_id();

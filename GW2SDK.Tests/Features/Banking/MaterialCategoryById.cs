@@ -11,11 +11,11 @@ public class MaterialCategoryById
 
         const int id = 5;
 
-        var actual = await sut.Bank.GetMaterialCategoryById(id);
+        var (actual, _) = await sut.Bank.GetMaterialCategoryById(id);
 
-        Assert.Equal(id, actual.Value.Id);
-        actual.Value.Has_name();
-        actual.Value.Has_items();
-        actual.Value.Has_order();
+        Assert.Equal(id, actual.Id);
+        actual.Has_name();
+        actual.Has_items();
+        actual.Has_order();
     }
 }

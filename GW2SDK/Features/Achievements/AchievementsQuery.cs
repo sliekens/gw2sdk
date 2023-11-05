@@ -179,9 +179,9 @@ public sealed class AchievementsQuery
         [EnumeratorCancellation] CancellationToken cancellationToken = default
     )
     {
-        var index = await GetAchievementsIndex(cancellationToken).ConfigureAwait(false);
+        var (value, _) = await GetAchievementsIndex(cancellationToken).ConfigureAwait(false);
         var producer = GetAchievementsBulk(
-            index.Value,
+            value,
             language,
             missingMemberBehavior,
             degreeOfParallelism,

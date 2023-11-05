@@ -10,11 +10,11 @@ public class MaterialStorage
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Bank.GetMaterialStorage(accessToken.Key);
+        var (actual, _) = await sut.Bank.GetMaterialStorage(accessToken.Key);
 
-        Assert.NotEmpty(actual.Value.Materials);
+        Assert.NotEmpty(actual.Materials);
         Assert.All(
-            actual.Value.Materials,
+            actual.Materials,
             entry =>
             {
                 Assert.True(entry.ItemId > 0);

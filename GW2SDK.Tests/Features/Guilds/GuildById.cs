@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Guilds;
 
@@ -11,11 +11,11 @@ public class GuildById
         var accessToken = Composer.Resolve<ApiKey>();
         var guild = Composer.Resolve<TestGuild>();
 
-        var actual = await sut.Guilds.GetGuildById(guild.Id, accessToken.Key);
+        var (actual, _) = await sut.Guilds.GetGuildById(guild.Id, accessToken.Key);
 
-        Assert.NotNull(actual.Value);
-        Assert.Equal(guild.Id, actual.Value.Id);
-        Assert.Equal(guild.Name, actual.Value.Name);
-        Assert.Equal(guild.Tag, actual.Value.Tag);
+        Assert.NotNull(actual);
+        Assert.Equal(guild.Id, actual.Id);
+        Assert.Equal(guild.Name, actual.Name);
+        Assert.Equal(guild.Tag, actual.Tag);
     }
 }

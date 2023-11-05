@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Mounts;
 
@@ -11,8 +11,8 @@ public class MountSkinById
 
         const int id = 1;
 
-        var actual = await sut.Mounts.GetMountSkinById(id);
+        var (actual, _) = await sut.Mounts.GetMountSkinById(id);
 
-        Assert.Equal(id, actual.Value.Id);
+        Assert.Equal(id, actual.Id);
     }
 }

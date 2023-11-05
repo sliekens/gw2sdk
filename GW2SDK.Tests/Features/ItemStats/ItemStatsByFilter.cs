@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.ItemStats;
 
@@ -16,13 +16,13 @@ public class ItemStatsByFilter
             1566
         };
 
-        var actual = await sut.ItemStats.GetItemStatsByIds(ids);
+        var (actual, _) = await sut.ItemStats.GetItemStatsByIds(ids);
 
         Assert.Collection(
             ids,
-            first => Assert.Contains(actual.Value, found => found.Id == first),
-            second => Assert.Contains(actual.Value, found => found.Id == second),
-            third => Assert.Contains(actual.Value, found => found.Id == third)
+            first => Assert.Contains(actual, found => found.Id == first),
+            second => Assert.Contains(actual, found => found.Id == second),
+            third => Assert.Contains(actual, found => found.Id == third)
         );
     }
 }

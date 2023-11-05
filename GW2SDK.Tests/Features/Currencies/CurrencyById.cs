@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Currencies;
 
@@ -11,8 +11,8 @@ public class CurrencyById
 
         const int id = 1;
 
-        var actual = await sut.Wallet.GetCurrencyById(id);
+        var (actual, _) = await sut.Wallet.GetCurrencyById(id);
 
-        Assert.Equal(id, actual.Value.Id);
+        Assert.Equal(id, actual.Id);
     }
 }

@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Commerce.Listings;
 
@@ -11,23 +11,22 @@ public class OrderBookById
 
         const int id = 24;
 
-        var actual = await sut.Commerce.GetOrderBookById(id);
+        var (actual, _) = await sut.Commerce.GetOrderBookById(id);
 
-        var value = actual.Value;
-        Assert.Equal(id, value.Id);
+        Assert.Equal(id, actual.Id);
 
-        Assert.True(value.TotalSupply > 0);
-        Assert.True(value.BestAsk > Coin.Zero);
-        Assert.True(value.TotalDemand > 0);
-        Assert.True(value.BestBid > Coin.Zero);
-        Assert.Equal(value.BestAsk - value.BestBid, value.BidAskSpread);
+        Assert.True(actual.TotalSupply > 0);
+        Assert.True(actual.BestAsk > Coin.Zero);
+        Assert.True(actual.TotalDemand > 0);
+        Assert.True(actual.BestBid > Coin.Zero);
+        Assert.Equal(actual.BestAsk - actual.BestBid, actual.BidAskSpread);
 
-        Assert.Equal(value.TotalDemand, value.Demand.Sum(bid => bid.Quantity));
-        Assert.Equal(value.TotalSupply, value.Supply.Sum(ask => ask.Quantity));
+        Assert.Equal(actual.TotalDemand, actual.Demand.Sum(bid => bid.Quantity));
+        Assert.Equal(actual.TotalSupply, actual.Supply.Sum(ask => ask.Quantity));
 
-        Assert.NotEmpty(value.Supply);
+        Assert.NotEmpty(actual.Supply);
         Assert.All(
-            value.Supply,
+            actual.Supply,
             line =>
             {
                 Assert.True(line.UnitPrice > Coin.Zero);
@@ -36,9 +35,9 @@ public class OrderBookById
             }
         );
 
-        Assert.NotEmpty(value.Demand);
+        Assert.NotEmpty(actual.Demand);
         Assert.All(
-            value.Demand,
+            actual.Demand,
             line =>
             {
                 Assert.True(line.UnitPrice > Coin.Zero);

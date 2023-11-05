@@ -11,13 +11,13 @@ public class MatchByWorldId
 
         const int worldId = 2006;
 
-        var actual = await sut.Wvw.GetMatchByWorldId(worldId);
+        var (actual, _) = await sut.Wvw.GetMatchByWorldId(worldId);
 
-        actual.Value.Has_id();
-        actual.Value.Has_start_time();
-        actual.Value.Has_end_time();
+        actual.Has_id();
+        actual.Has_start_time();
+        actual.Has_end_time();
 
         // Can fail on a Friday after reset (which is a bit odd, you'd expect no result from GetMatchByWorldId)
-        actual.Value.Includes_world(worldId);
+        actual.Includes_world(worldId);
     }
 }

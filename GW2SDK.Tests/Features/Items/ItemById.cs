@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Items;
 
@@ -11,8 +11,8 @@ public class ItemById
 
         const int id = 24;
 
-        var actual = await sut.Items.GetItemById(id);
+        var (actual, _) = await sut.Items.GetItemById(id);
 
-        Assert.Equal(id, actual.Value.Id);
+        Assert.Equal(id, actual.Id);
     }
 }

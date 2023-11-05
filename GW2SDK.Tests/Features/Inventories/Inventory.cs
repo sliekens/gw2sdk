@@ -11,12 +11,12 @@ public class Inventory
         var character = Composer.Resolve<TestCharacter>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Inventory.GetInventory(character.Name, accessToken.Key);
+        var (actual, _) = await sut.Inventory.GetInventory(character.Name, accessToken.Key);
 
-        Assert.NotNull(actual.Value);
-        Assert.NotEmpty(actual.Value.Bags);
+        Assert.NotNull(actual);
+        Assert.NotEmpty(actual.Bags);
         Assert.All(
-            actual.Value.Bags,
+            actual.Bags,
             bag =>
             {
                 if (bag is not null)

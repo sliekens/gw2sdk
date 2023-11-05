@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Achievements;
 
@@ -12,9 +12,8 @@ public class AccountAchievementById
 
         const int id = 1;
 
-        var actual =
-            await sut.Achievements.GetAccountAchievementById(id, accessToken.Key);
+        var (actual, _) = await sut.Achievements.GetAccountAchievementById(id, accessToken.Key);
 
-        Assert.Equal(id, actual.Value.Id);
+        Assert.Equal(id, actual.Id);
     }
 }

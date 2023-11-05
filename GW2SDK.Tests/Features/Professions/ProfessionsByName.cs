@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Professions;
 
@@ -16,13 +16,13 @@ public class ProfessionsByName
             ProfessionName.Revenant
         };
 
-        var actual = await sut.Professions.GetProfessionsByNames(names);
+        var (actual, _) = await sut.Professions.GetProfessionsByNames(names);
 
         Assert.Collection(
             names,
-            first => Assert.Contains(actual.Value, found => found.Id == first),
-            second => Assert.Contains(actual.Value, found => found.Id == second),
-            third => Assert.Contains(actual.Value, found => found.Id == third)
+            first => Assert.Contains(actual, found => found.Id == first),
+            second => Assert.Contains(actual, found => found.Id == second),
+            third => Assert.Contains(actual, found => found.Id == third)
         );
     }
 }

@@ -16,13 +16,13 @@ public class GuildPermissionsByFilter
             GuildPermission.WithdrawCoinsTrove
         };
 
-        var actual = await sut.Guilds.GetGuildPermissionsByIds(ids);
+        var (actual, context) = await sut.Guilds.GetGuildPermissionsByIds(ids);
 
-        Assert.Equal(ids.Count, actual.Value.Count);
-        Assert.NotNull(actual.Context.ResultContext);
-        Assert.Equal(ids.Count, actual.Context.ResultContext.ResultCount);
+        Assert.Equal(ids.Count, actual.Count);
+        Assert.NotNull(context.ResultContext);
+        Assert.Equal(ids.Count, context.ResultContext.ResultCount);
         Assert.All(
-            actual.Value,
+            actual,
             entry =>
             {
                 entry.Has_id();

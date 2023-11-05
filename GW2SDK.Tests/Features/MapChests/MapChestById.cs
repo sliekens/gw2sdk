@@ -12,8 +12,8 @@ public class MapChestById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.MapChests.GetMapChestById(id);
+        var (actual, _) = await sut.MapChests.GetMapChestById(id);
 
-        Assert.Equal(id, actual.Value.Id);
+        Assert.Equal(id, actual.Id);
     }
 }

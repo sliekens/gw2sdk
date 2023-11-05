@@ -10,10 +10,10 @@ public class CharacterNames
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Accounts.GetCharactersIndex(accessToken.Key);
+        var (actual, _) = await sut.Accounts.GetCharactersIndex(accessToken.Key);
 
         var expected = Composer.Resolve<TestCharacter>().Name;
 
-        Assert.Contains(expected, actual.Value);
+        Assert.Contains(expected, actual);
     }
 }

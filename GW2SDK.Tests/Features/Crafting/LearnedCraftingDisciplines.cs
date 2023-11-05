@@ -11,14 +11,13 @@ public class LearnedCraftingDisciplines
         var character = Composer.Resolve<TestCharacter>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual =
-            await sut.Crafting.GetLearnedCraftingDisciplines(character.Name, accessToken.Key);
+        var (actual, _) = await sut.Crafting.GetLearnedCraftingDisciplines(character.Name, accessToken.Key);
 
-        Assert.NotEmpty(actual.Value.Disciplines);
+        Assert.NotEmpty(actual.Disciplines);
         Assert.All(
-            actual.Value.Disciplines,
+            actual.Disciplines,
             entry => Assert.True(Enum.IsDefined(typeof(CraftingDisciplineName), entry.Discipline))
         );
-        Assert.All(actual.Value.Disciplines, entry => Assert.True(entry.Rating > 0));
+        Assert.All(actual.Disciplines, entry => Assert.True(entry.Rating > 0));
     }
 }

@@ -11,12 +11,12 @@ public class MinipetById
 
         const int id = 1;
 
-        var actual = await sut.Minipets.GetMinipetById(id);
+        var (actual, _) = await sut.Minipets.GetMinipetById(id);
 
-        Assert.Equal(id, actual.Value.Id);
-        actual.Value.Has_name();
-        actual.Value.Has_icon();
-        actual.Value.Has_order();
-        actual.Value.Has_item_id();
+        Assert.Equal(id, actual.Id);
+        actual.Has_name();
+        actual.Has_icon();
+        actual.Has_order();
+        actual.Has_item_id();
     }
 }

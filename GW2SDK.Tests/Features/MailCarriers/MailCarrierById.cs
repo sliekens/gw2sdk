@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.MailCarriers;
 
@@ -11,8 +11,8 @@ public class MailCarrierById
 
         const int id = 1;
 
-        var actual = await sut.MailCarriers.GetMailCarrierById(id);
+        var (actual, _) = await sut.MailCarriers.GetMailCarrierById(id);
 
-        Assert.Equal(id, actual.Value.Id);
+        Assert.Equal(id, actual.Id);
     }
 }

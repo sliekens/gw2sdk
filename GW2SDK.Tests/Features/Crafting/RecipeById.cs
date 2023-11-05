@@ -11,8 +11,8 @@ public class RecipeById
 
         const int id = 1;
 
-        var actual = await sut.Crafting.GetRecipeById(id);
+        var (actual, _) = await sut.Crafting.GetRecipeById(id);
 
-        Assert.Equal(id, actual.Value.Id);
+        Assert.Equal(id, actual.Id);
     }
 }

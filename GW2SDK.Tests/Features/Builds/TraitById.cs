@@ -11,8 +11,8 @@ public class TraitById
 
         const int id = 214;
 
-        var actual = await sut.Builds.GetTraitById(id);
+        var (actual, _) = await sut.Builds.GetTraitById(id);
 
-        Assert.Equal(id, actual.Value.Id);
+        Assert.Equal(id, actual.Id);
     }
 }

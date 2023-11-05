@@ -16,13 +16,13 @@ public class SpecializationsByFilter
             3
         };
 
-        var actual = await sut.Builds.GetSpecializationsByIds(ids);
+        var (actual, _) = await sut.Builds.GetSpecializationsByIds(ids);
 
         Assert.Collection(
             ids,
-            first => Assert.Contains(actual.Value, found => found.Id == first),
-            second => Assert.Contains(actual.Value, found => found.Id == second),
-            third => Assert.Contains(actual.Value, found => found.Id == third)
+            first => Assert.Contains(actual, found => found.Id == first),
+            second => Assert.Contains(actual, found => found.Id == second),
+            third => Assert.Contains(actual, found => found.Id == third)
         );
     }
 }

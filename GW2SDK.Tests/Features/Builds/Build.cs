@@ -12,9 +12,9 @@ public class Build
         var accessToken = Composer.Resolve<ApiKey>();
 
         const int tab = 1;
-        var actual = await sut.Builds.GetBuild(tab, character.Name, accessToken.Key);
+        var (actual, _) = await sut.Builds.GetBuild(tab, character.Name, accessToken.Key);
 
-        Assert.NotNull(actual.Value);
-        Assert.NotNull(actual.Value.Build);
+        Assert.NotNull(actual);
+        Assert.NotNull(actual.Build);
     }
 }

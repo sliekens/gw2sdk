@@ -11,13 +11,13 @@ public class NoveltyById
 
         const int id = 1;
 
-        var actual = await sut.Novelties.GetNoveltyById(id);
+        var (actual, _) = await sut.Novelties.GetNoveltyById(id);
 
-        Assert.Equal(id, actual.Value.Id);
-        actual.Value.Has_name();
-        actual.Value.Has_description();
-        actual.Value.Has_icon();
-        actual.Value.Has_slot();
-        actual.Value.Has_unlock_items();
+        Assert.Equal(id, actual.Id);
+        actual.Has_name();
+        actual.Has_description();
+        actual.Has_icon();
+        actual.Has_slot();
+        actual.Has_unlock_items();
     }
 }

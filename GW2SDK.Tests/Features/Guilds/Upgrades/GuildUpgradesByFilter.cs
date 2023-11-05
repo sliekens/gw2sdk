@@ -17,13 +17,13 @@ public class GuildUpgradesByFilter
             167
         };
 
-        var actual = await sut.Guilds.GetGuildUpgradesByIds(ids);
+        var (actual, context) = await sut.Guilds.GetGuildUpgradesByIds(ids);
 
-        Assert.Equal(ids.Count, actual.Value.Count);
-        Assert.NotNull(actual.Context.ResultContext);
-        Assert.Equal(ids.Count, actual.Context.ResultContext.ResultCount);
+        Assert.Equal(ids.Count, actual.Count);
+        Assert.NotNull(context.ResultContext);
+        Assert.Equal(ids.Count, context.ResultContext.ResultCount);
         Assert.All(
-            actual.Value,
+            actual,
             entry =>
             {
                 entry.Has_id();

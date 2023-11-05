@@ -9,10 +9,10 @@ public class V2
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.Meta.GetApiVersion();
+        var (actual, _) = await sut.Meta.GetApiVersion();
 
-        actual.Value.There_are_no_newer_translations();
-        actual.Value.There_are_no_surprise_endpoints();
-        actual.Value.There_are_no_newer_schema_versions();
+        actual.There_are_no_newer_translations();
+        actual.There_are_no_surprise_endpoints();
+        actual.There_are_no_newer_schema_versions();
     }
 }

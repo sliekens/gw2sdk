@@ -11,9 +11,9 @@ public class QuagganById
 
         const string id = "present";
 
-        var actual = await sut.Quaggans.GetQuagganById(id);
+        var (actual, _) = await sut.Quaggans.GetQuagganById(id);
 
-        Assert.Equal(id, actual.Value.Id);
-        actual.Value.Quaggan_has_picture();
+        Assert.Equal(id, actual.Id);
+        actual.Quaggan_has_picture();
     }
 }

@@ -12,10 +12,10 @@ public class MapById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.Maps.GetMapById(continentId, floorId, regionId, mapId);
+        var (actual, _) = await sut.Maps.GetMapById(continentId, floorId, regionId, mapId);
 
         // TODO: complete validation
-        Assert.Equal(mapId, actual.Value.Id);
-        actual.Value.Has_name();
+        Assert.Equal(mapId, actual.Id);
+        actual.Has_name();
     }
 }

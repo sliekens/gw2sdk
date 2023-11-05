@@ -11,10 +11,10 @@ public class MatchOverviewById
 
         const string id = "1-1";
 
-        var actual = await sut.Wvw.GetMatchOverviewById(id);
+        var (actual, _) = await sut.Wvw.GetMatchOverviewById(id);
 
-        Assert.Equal(id, actual.Value.Id);
-        actual.Value.Has_start_time();
-        actual.Value.Has_end_time();
+        Assert.Equal(id, actual.Id);
+        actual.Has_start_time();
+        actual.Has_end_time();
     }
 }

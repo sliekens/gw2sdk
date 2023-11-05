@@ -11,14 +11,13 @@ public class SuperAdventureBoxProgress
         var character = Composer.Resolve<TestCharacter>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual =
-            await sut.SuperAdventureBox.GetSuperAdventureBoxProgress(
-                character.Name,
-                accessToken.Key
-            );
+        var (actual, _) = await sut.SuperAdventureBox.GetSuperAdventureBoxProgress(
+            character.Name,
+            accessToken.Key
+        );
 
-        Assert.NotEmpty(actual.Value.Zones);
-        Assert.NotEmpty(actual.Value.Unlocks);
-        Assert.NotEmpty(actual.Value.Songs);
+        Assert.NotEmpty(actual.Zones);
+        Assert.NotEmpty(actual.Unlocks);
+        Assert.NotEmpty(actual.Songs);
     }
 }

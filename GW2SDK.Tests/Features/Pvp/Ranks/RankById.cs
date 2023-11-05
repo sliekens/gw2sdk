@@ -11,11 +11,11 @@ public class RankById
 
         const int id = 4;
 
-        var actual = await sut.Pvp.GetRankById(id);
+        var (actual, _) = await sut.Pvp.GetRankById(id);
 
-        Assert.Equal(id, actual.Value.Id);
-        actual.Value.Has_name();
-        actual.Value.Has_icon();
-        actual.Value.Has_levels();
+        Assert.Equal(id, actual.Id);
+        actual.Has_name();
+        actual.Has_icon();
+        actual.Has_levels();
     }
 }

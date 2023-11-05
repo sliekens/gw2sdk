@@ -14,13 +14,13 @@ public class HeartsByPage
         const int regionId = 1;
         const int mapId = 26;
 
-        var actual = await sut.Maps.GetHeartsByPage(continentId, floorId, regionId, mapId, 0, 3);
+        var (actual, context) = await sut.Maps.GetHeartsByPage(continentId, floorId, regionId, mapId, 0, 3);
 
-        Assert.Equal(3, actual.Value.Count);
-        Assert.NotNull(actual.Context.PageContext);
-        Assert.Equal(3, actual.Context.PageContext.PageSize);
-        actual.Value.All_have_ids();
-        actual.Value.Some_have_objectives();
-        actual.Value.All_have_chat_links();
+        Assert.Equal(3, actual.Count);
+        Assert.NotNull(context.PageContext);
+        Assert.Equal(3, context.PageContext.PageSize);
+        actual.All_have_ids();
+        actual.Some_have_objectives();
+        actual.All_have_chat_links();
     }
 }

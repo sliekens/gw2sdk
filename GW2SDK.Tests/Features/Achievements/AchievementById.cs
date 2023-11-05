@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Achievements;
 
@@ -11,18 +11,18 @@ public class AchievementById
 
         const int id = 1;
 
-        var actual = await sut.Achievements.GetAchievementById(id);
+        var (actual, _) = await sut.Achievements.GetAchievementById(id);
 
-        Assert.Equal(id, actual.Value.Id);
-        actual.Value.Has_name();
-        actual.Value.Has_description();
-        actual.Value.Has_requirement();
-        actual.Value.Has_LockedText();
-        actual.Value.Has_flags();
-        actual.Value.Has_tiers();
-        actual.Value.Tiers_does_not_contain_null();
-        actual.Value.Rewards_does_not_contain_null();
-        actual.Value.Bits_does_not_contain_null();
-        actual.Value.PointCap_is_negative_1_for_repeatable_achievements_without_points();
+        Assert.Equal(id, actual.Id);
+        actual.Has_name();
+        actual.Has_description();
+        actual.Has_requirement();
+        actual.Has_LockedText();
+        actual.Has_flags();
+        actual.Has_tiers();
+        actual.Tiers_does_not_contain_null();
+        actual.Rewards_does_not_contain_null();
+        actual.Bits_does_not_contain_null();
+        actual.PointCap_is_negative_1_for_repeatable_achievements_without_points();
     }
 }

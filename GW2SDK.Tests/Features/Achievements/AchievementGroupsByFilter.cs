@@ -16,13 +16,13 @@ public class AchievementGroupsByFilter
             "B42E2379-9599-46CA-9D4A-40A27E192BBE"
         };
 
-        var actual = await sut.Achievements.GetAchievementGroupsByIds(ids);
+        var (actual, context) = await sut.Achievements.GetAchievementGroupsByIds(ids);
 
-        Assert.Equal(ids.Count, actual.Value.Count);
-        Assert.NotNull(actual.Context.ResultContext);
-        Assert.Equal(ids.Count, actual.Context.ResultContext.ResultCount);
+        Assert.Equal(ids.Count, actual.Count);
+        Assert.NotNull(context.ResultContext);
+        Assert.Equal(ids.Count, context.ResultContext.ResultCount);
         Assert.All(
-            actual.Value,
+            actual,
             entry =>
             {
                 Assert.Contains(entry.Id, ids);

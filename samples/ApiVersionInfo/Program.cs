@@ -10,9 +10,9 @@ using var http = new HttpClient();
 
 // Now you can create a Gw2Client with your HttpClient object
 var gw2 = new Gw2Client(http);
-var build = await gw2.Meta.GetBuild();
+var (value, _) = await gw2.Meta.GetBuild();
 
-AnsiConsole.MarkupLine($"Gw2: [white on dodgerblue2]{build.Value.Id}[/]");
+AnsiConsole.MarkupLine($"Gw2: [white on dodgerblue2]{value.Id}[/]");
 var options = RouteOptions.Prompt();
 var routes = new RouteTable(options);
 

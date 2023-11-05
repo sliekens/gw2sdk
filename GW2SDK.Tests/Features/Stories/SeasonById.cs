@@ -11,8 +11,8 @@ public class SeasonById
 
         const string id = "09766A86-D88D-4DF2-9385-259E9A8CA583";
 
-        var actual = await sut.Stories.GetSeasonById(id);
+        var (actual, _) = await sut.Stories.GetSeasonById(id);
 
-        Assert.Equal(id, actual.Value.Id);
+        Assert.Equal(id, actual.Id);
     }
 }

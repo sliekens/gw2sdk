@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Quests;
 
@@ -11,11 +11,11 @@ public class CharacterQuests
         var character = Composer.Resolve<TestCharacter>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Quests.GetCharacterQuests(
+        var (actual, _) = await sut.Quests.GetCharacterQuests(
             character.Name,
             accessToken.Key
         );
 
-        Assert.NotEmpty(actual.Value);
+        Assert.NotEmpty(actual);
     }
 }

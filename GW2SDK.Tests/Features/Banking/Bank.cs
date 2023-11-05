@@ -10,13 +10,13 @@ public class Bank
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Bank.GetBank(accessToken.Key);
+        var (actual, _) = await sut.Bank.GetBank(accessToken.Key);
 
-        actual.Value.Not_empty();
-        actual.Value.Has_multiple_of_30_slots();
+        actual.Not_empty();
+        actual.Has_multiple_of_30_slots();
 
         Assert.All(
-            actual.Value.Items,
+            actual.Items,
             slot =>
             {
                 slot?.Has_id();

@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Worlds;
 
@@ -11,8 +11,8 @@ public class WorldById
 
         const int id = 1001;
 
-        var actual = await sut.Worlds.GetWorldById(id);
+        var (actual, _) = await sut.Worlds.GetWorldById(id);
 
-        Assert.Equal(id, actual.Value.Id);
+        Assert.Equal(id, actual.Id);
     }
 }

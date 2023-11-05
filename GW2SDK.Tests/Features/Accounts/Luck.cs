@@ -10,10 +10,10 @@ public class Luck
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Accounts.GetLuck(accessToken.Key);
+        var (actual, _) = await sut.Accounts.GetLuck(accessToken.Key);
 
-        Assert.True(actual.Value.Luck > 0, "You have no luck today.");
-        Assert.Equal(300, actual.Value.MagicFind);
-        Assert.True(actual.Value.MagicFindWithoutLevelCap >= actual.Value.MagicFind);
+        Assert.True(actual.Luck > 0, "You have no luck today.");
+        Assert.Equal(300, actual.MagicFind);
+        Assert.True(actual.MagicFindWithoutLevelCap >= actual.MagicFind);
     }
 }

@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Skins;
 
@@ -11,8 +11,8 @@ public class SkinById
 
         const int id = 1;
 
-        var actual = await sut.Wardrobe.GetSkinById(id);
+        var (actual, _) = await sut.Wardrobe.GetSkinById(id);
 
-        Assert.Equal(id, actual.Value.Id);
+        Assert.Equal(id, actual.Id);
     }
 }

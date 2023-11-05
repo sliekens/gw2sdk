@@ -1,4 +1,4 @@
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Commerce;
 
@@ -10,9 +10,9 @@ public class DeliveryBox
         var accessToken = Composer.Resolve<ApiKey>();
         var sut = Composer.Resolve<Gw2Client>();
 
-        var deliveryBox = await sut.Commerce.GetDeliveryBox(accessToken.Key);
+        var (deliveryBox, _) = await sut.Commerce.GetDeliveryBox(accessToken.Key);
 
         // Step through with debugger to see if the values reflect your in-game delivery box
-        Assert.NotNull(deliveryBox.Value);
+        Assert.NotNull(deliveryBox);
     }
 }

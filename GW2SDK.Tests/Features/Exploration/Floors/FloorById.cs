@@ -16,12 +16,12 @@ public class FloorById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.Maps.GetFloorById(continentId, floorId);
+        var (actual, _) = await sut.Maps.GetFloorById(continentId, floorId);
 
-        Assert.Equal(floorId, actual.Value.Id);
-        actual.Value.Has_texture_dimensions();
-        actual.Value.Has_regions();
-        foreach (var (regionId, region) in actual.Value.Regions)
+        Assert.Equal(floorId, actual.Id);
+        actual.Has_texture_dimensions();
+        actual.Has_regions();
+        foreach (var (regionId, region) in actual.Regions)
         {
             Assert.Equal(regionId, region.Id);
             region.Has_name();

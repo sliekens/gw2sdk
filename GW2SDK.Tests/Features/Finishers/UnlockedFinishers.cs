@@ -10,11 +10,11 @@ public class UnlockedFinishers
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Finishers.GetUnlockedFinishers(accessToken.Key);
+        var (actual, _) = await sut.Finishers.GetUnlockedFinishers(accessToken.Key);
 
-        Assert.NotEmpty(actual.Value);
+        Assert.NotEmpty(actual);
         Assert.All(
-            actual.Value,
+            actual,
             entry =>
             {
                 Assert.True(entry.Id > 0);

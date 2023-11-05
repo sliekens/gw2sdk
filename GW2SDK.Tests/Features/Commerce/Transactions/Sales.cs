@@ -10,8 +10,8 @@ public class Sales
         var accessToken = Composer.Resolve<ApiKey>();
         var sut = Composer.Resolve<Gw2Client>();
 
-        var bids = await sut.Commerce.GetSales(0, 200, accessToken.Key);
+        var (sales, _) = await sut.Commerce.GetSales(0, 200, accessToken.Key);
 
-        Assert.NotEmpty(bids.Value);
+        Assert.NotEmpty(sales);
     }
 }
