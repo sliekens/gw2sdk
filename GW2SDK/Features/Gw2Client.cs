@@ -1,7 +1,6 @@
 ﻿using GuildWars2.Accounts;
 using GuildWars2.Achievements;
 using GuildWars2.Banking;
-using GuildWars2.Builds;
 using GuildWars2.Colors;
 using GuildWars2.Commerce;
 using GuildWars2.Crafting;
@@ -67,9 +66,6 @@ public sealed class Gw2Client
 
     /// <inheritdoc cref="BankQuery" />
     public BankQuery Bank => new(httpClient);
-
-    /// <inheritdoc cref="BuildsQuery" />
-    public BuildsQuery Builds => new(httpClient);
 
     /// <inheritdoc cref="CommerceQuery" />
     public CommerceQuery Commerce => new(httpClient);
