@@ -1,5 +1,4 @@
 ﻿using GuildWars2.Accounts;
-using GuildWars2.Achievements;
 using GuildWars2.Banking;
 using GuildWars2.Colors;
 using GuildWars2.Commerce;
@@ -60,9 +59,6 @@ public sealed class Gw2Client
 
     /// <inheritdoc cref="AccountsQuery" />
     public AccountsQuery Accounts => new(httpClient);
-
-    /// <inheritdoc cref="AchievementsQuery" />
-    public AchievementsQuery Achievements => new(httpClient);
 
     /// <inheritdoc cref="BankQuery" />
     public BankQuery Bank => new(httpClient);

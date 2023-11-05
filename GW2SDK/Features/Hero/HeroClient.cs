@@ -1,4 +1,5 @@
-﻿using GuildWars2.Hero.Builds;
+﻿using GuildWars2.Hero.Achievements;
+using GuildWars2.Hero.Builds;
 using GuildWars2.Hero.Equipment;
 
 namespace GuildWars2.Hero;
@@ -14,6 +15,9 @@ public sealed class HeroClient
         this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         this.httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
+
+    /// <inheritdoc cref="AchievementsQuery" />
+    public AchievementsQuery Achievements => new(httpClient);
 
     /// <inheritdoc cref="BuildsQuery" />
     public BuildsQuery Builds => new(httpClient);
