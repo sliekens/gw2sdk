@@ -1,8 +1,8 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Pvp.Heroes;
+namespace GuildWars2.Tests.Features.Pvp.MistChampions;
 
-public class HeroesByPage
+public class MistChampionsByPage
 {
     [Fact]
     public async Task Can_be_filtered_by_page()
@@ -10,7 +10,7 @@ public class HeroesByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
-        var (actual, context) = await sut.Pvp.GetHeroesByPage(0, pageSize);
+        var (actual, context) = await sut.Pvp.GetMistChampionByPage(0, pageSize);
 
         Assert.Equal(pageSize, actual.Count);
         Assert.NotNull(context.PageContext);

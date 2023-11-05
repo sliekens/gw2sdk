@@ -1,8 +1,8 @@
-﻿namespace GuildWars2.Pvp.Heroes;
+﻿namespace GuildWars2.Pvp.MistChampions;
 
 [PublicAPI]
 [DataTransferObject]
-public sealed record HeroStats
+public sealed record MistChampionStats
 {
     public required int Offense { get; init; }
 

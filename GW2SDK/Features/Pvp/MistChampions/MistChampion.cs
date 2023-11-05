@@ -1,8 +1,8 @@
-﻿namespace GuildWars2.Pvp.Heroes;
+﻿namespace GuildWars2.Pvp.MistChampions;
 
 [PublicAPI]
 [DataTransferObject]
-public sealed record Hero
+public sealed record MistChampion
 {
     public required string Id { get; init; }
 
@@ -12,11 +12,11 @@ public sealed record Hero
 
     public required string Type { get; init; }
 
-    public required HeroStats Stats { get; init; }
+    public required MistChampionStats Stats { get; init; }
 
     public required string Overlay { get; init; }
 
     public required string Underlay { get; init; }
 
-    public required IReadOnlyCollection<HeroSkin> Skins { get; init; }
+    public required IReadOnlyCollection<MistChampionSkin> Skins { get; init; }
 }

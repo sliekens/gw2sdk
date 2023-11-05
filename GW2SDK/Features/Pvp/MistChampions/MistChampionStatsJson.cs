@@ -1,11 +1,11 @@
 ﻿using System.Text.Json;
 using GuildWars2.Json;
 
-namespace GuildWars2.Pvp.Heroes;
+namespace GuildWars2.Pvp.MistChampions;
 
-internal static class HeroStatsJson
+internal static class MistChampionStatsJson
 {
-    public static HeroStats GetHeroStats(
+    public static MistChampionStats GetMistChampionStats(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -34,7 +34,7 @@ internal static class HeroStatsJson
             }
         }
 
-        return new HeroStats
+        return new MistChampionStats
         {
             Offense = offense.Map(value => value.GetInt32()),
             Defense = defense.Map(value => value.GetInt32()),

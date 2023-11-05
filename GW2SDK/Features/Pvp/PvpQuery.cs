@@ -1,7 +1,7 @@
 ﻿using GuildWars2.Pvp.Amulets;
 using GuildWars2.Pvp.Games;
-using GuildWars2.Pvp.Heroes;
 using GuildWars2.Pvp.Http;
+using GuildWars2.Pvp.MistChampions;
 using GuildWars2.Pvp.Ranks;
 using GuildWars2.Pvp.Seasons;
 using GuildWars2.Pvp.Standings;
@@ -180,13 +180,13 @@ public sealed class PvpQuery
 
     #region v2/pvp/heroes
 
-    public Task<(HashSet<Hero> Value, MessageContext Context)> GetHeroes(
+    public Task<(HashSet<MistChampion> Value, MessageContext Context)> GetMistChampions(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        HeroRequest request = new()
+        MistChampionsRequest request = new()
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -194,7 +194,7 @@ public sealed class PvpQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<(HashSet<string> Value, MessageContext Context)> GetHeroesIndex(
+    public Task<(HashSet<string> Value, MessageContext Context)> GetMistChampionsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -202,14 +202,14 @@ public sealed class PvpQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<(Hero Value, MessageContext Context)> GetHeroById(
+    public Task<(MistChampion Value, MessageContext Context)> GetMistChampionById(
         string heroId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        HeroByIdRequest request = new(heroId)
+        MistChampionByIdRequest request = new(heroId)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -217,14 +217,14 @@ public sealed class PvpQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<(HashSet<Hero> Value, MessageContext Context)> GetHeroesByIds(
+    public Task<(HashSet<MistChampion> Value, MessageContext Context)> GetMistChampionsByIds(
         IReadOnlyCollection<string> heroIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        HeroesByIdsRequest request = new(heroIds)
+        MistChampionsByIdsRequest request = new(heroIds)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -232,7 +232,7 @@ public sealed class PvpQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<(HashSet<Hero> Value, MessageContext Context)> GetHeroesByPage(
+    public Task<(HashSet<MistChampion> Value, MessageContext Context)> GetMistChampionByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -240,7 +240,7 @@ public sealed class PvpQuery
         CancellationToken cancellationToken = default
     )
     {
-        HeroesByPageRequest request = new(pageIndex)
+        MistChampionsByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             Language = language,

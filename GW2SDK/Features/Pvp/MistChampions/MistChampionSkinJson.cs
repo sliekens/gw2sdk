@@ -1,11 +1,11 @@
 ﻿using System.Text.Json;
 using GuildWars2.Json;
 
-namespace GuildWars2.Pvp.Heroes;
+namespace GuildWars2.Pvp.MistChampions;
 
-internal static class HeroSkinJson
+internal static class MistChampionSkinJson
 {
-    public static HeroSkin GetHeroSkin(
+    public static MistChampionSkin GetMistChampionSkin(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -44,7 +44,7 @@ internal static class HeroSkinJson
             }
         }
 
-        return new HeroSkin
+        return new MistChampionSkin
         {
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),

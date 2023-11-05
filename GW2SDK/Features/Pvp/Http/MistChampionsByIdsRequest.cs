@@ -1,25 +1,27 @@
 ﻿using GuildWars2.Http;
-using GuildWars2.Pvp.Heroes;
+using GuildWars2.Json;
+using GuildWars2.Pvp.MistChampions;
 
 namespace GuildWars2.Pvp.Http;
 
-internal sealed class HeroByIdRequest : IHttpRequest<Hero>
+internal sealed class MistChampionsByIdsRequest : IHttpRequest<HashSet<MistChampion>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/pvp/heroes") { AcceptEncoding = "gzip" };
 
-    public HeroByIdRequest(string heroId)
+    public MistChampionsByIdsRequest(IReadOnlyCollection<string> heroIds)
     {
-        HeroId = heroId;
+        Check.Collection(heroIds);
+        HeroIds = heroIds;
     }
 
-    public string HeroId { get; }
+    public IReadOnlyCollection<string> HeroIds { get; }
 
     public Language? Language { get; init; }
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<(Hero Value, MessageContext Context)> SendAsync(
+    public async Task<(HashSet<MistChampion> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -29,7 +31,7 @@ internal sealed class HeroByIdRequest : IHttpRequest<Hero>
                 {
                     Arguments = new QueryBuilder
                     {
-                        { "id", HeroId },
+                        { "ids", HeroIds },
                         { "v", SchemaVersion.Recommended }
                     },
                     AcceptLanguage = Language?.Alpha2Code
@@ -41,7 +43,7 @@ internal sealed class HeroByIdRequest : IHttpRequest<Hero>
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
-        var value = json.RootElement.GetHero(MissingMemberBehavior);
+        var value = json.RootElement.GetSet(entry => entry.GetMistChampion(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }
 }

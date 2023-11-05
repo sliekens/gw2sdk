@@ -1,19 +1,27 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Pvp.Heroes;
+namespace GuildWars2.Tests.Features.Pvp.MistChampions;
 
-public class HeroesIndex
+public class MistChampions
 {
     [Fact]
     public async Task Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Pvp.GetHeroesIndex();
+        var (actual, context) = await sut.Pvp.GetMistChampions();
 
         Assert.NotEmpty(actual);
         Assert.NotNull(context.ResultContext);
         Assert.Equal(actual.Count, context.ResultContext.ResultCount);
         Assert.Equal(actual.Count, context.ResultContext.ResultTotal);
+        Assert.All(
+            actual,
+            entry =>
+            {
+                entry.Has_id();
+                entry.Has_name();
+            }
+        );
     }
 }

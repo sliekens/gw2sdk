@@ -1,8 +1,9 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Pvp.Heroes;
+namespace GuildWars2.Tests.Features.Pvp.MistChampions;
 
-public class HeroesByFilter
+public class MistChampionByFilter
+
 {
     [Fact]
     public async Task Can_be_filtered_by_id()
@@ -16,7 +17,7 @@ public class HeroesByFilter
             "BEA79596-CA8B-4D46-9B9C-EA1B606BCF42"
         };
 
-        var (actual, context) = await sut.Pvp.GetHeroesByIds(ids);
+        var (actual, context) = await sut.Pvp.GetMistChampionsByIds(ids);
 
         Assert.Equal(ids.Count, actual.Count);
         Assert.NotNull(context.ResultContext);

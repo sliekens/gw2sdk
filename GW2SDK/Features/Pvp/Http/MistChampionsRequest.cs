@@ -1,10 +1,10 @@
 ﻿using GuildWars2.Http;
 using GuildWars2.Json;
-using GuildWars2.Pvp.Heroes;
+using GuildWars2.Pvp.MistChampions;
 
 namespace GuildWars2.Pvp.Http;
 
-internal sealed class HeroRequest : IHttpRequest<HashSet<Hero>>
+internal sealed class MistChampionsRequest : IHttpRequest<HashSet<MistChampion>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/pvp/heroes")
     {
@@ -20,7 +20,7 @@ internal sealed class HeroRequest : IHttpRequest<HashSet<Hero>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<(HashSet<Hero> Value, MessageContext Context)> SendAsync(
+    public async Task<(HashSet<MistChampion> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -29,7 +29,7 @@ internal sealed class HeroRequest : IHttpRequest<HashSet<Hero>>
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetHero(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetMistChampion(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }
 }

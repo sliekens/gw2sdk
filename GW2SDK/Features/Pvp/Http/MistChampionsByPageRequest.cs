@@ -1,39 +1,43 @@
 ﻿using GuildWars2.Http;
 using GuildWars2.Json;
-using GuildWars2.Pvp.Heroes;
+using GuildWars2.Pvp.MistChampions;
 
 namespace GuildWars2.Pvp.Http;
 
-internal sealed class HeroesByIdsRequest : IHttpRequest<HashSet<Hero>>
+internal sealed class MistChampionsByPageRequest : IHttpRequest<HashSet<MistChampion>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/pvp/heroes") { AcceptEncoding = "gzip" };
 
-    public HeroesByIdsRequest(IReadOnlyCollection<string> heroIds)
+    public MistChampionsByPageRequest(int pageIndex)
     {
-        Check.Collection(heroIds);
-        HeroIds = heroIds;
+        PageIndex = pageIndex;
     }
 
-    public IReadOnlyCollection<string> HeroIds { get; }
+    public int PageIndex { get; }
+
+    public int? PageSize { get; init; }
 
     public Language? Language { get; init; }
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<(HashSet<Hero> Value, MessageContext Context)> SendAsync(
+    public async Task<(HashSet<MistChampion> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
     {
+        QueryBuilder search = new() { { "page", PageIndex } };
+        if (PageSize.HasValue)
+        {
+            search.Add("page_size", PageSize.Value);
+        }
+
+        search.Add("v", SchemaVersion.Recommended);
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = new QueryBuilder
-                    {
-                        { "ids", HeroIds },
-                        { "v", SchemaVersion.Recommended }
-                    },
+                    Arguments = search,
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 HttpCompletionOption.ResponseHeadersRead,
@@ -43,7 +47,7 @@ internal sealed class HeroesByIdsRequest : IHttpRequest<HashSet<Hero>>
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetHero(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetMistChampion(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }
 }

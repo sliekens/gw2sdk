@@ -1,11 +1,11 @@
 ﻿using System.Text.Json;
 using GuildWars2.Json;
 
-namespace GuildWars2.Pvp.Heroes;
+namespace GuildWars2.Pvp.MistChampions;
 
-internal static class HeroJson
+internal static class MistChampionJson
 {
-    public static Hero GetHero(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static MistChampion GetMistChampion(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -56,17 +56,17 @@ internal static class HeroJson
             }
         }
 
-        return new Hero
+        return new MistChampion
         {
             Id = id.Map(value => value.GetStringRequired()),
             Name = name.Map(value => value.GetStringRequired()),
             Description = description.Map(value => value.GetStringRequired()),
             Type = type.Map(value => value.GetStringRequired()),
-            Stats = stats.Map(value => value.GetHeroStats(missingMemberBehavior)),
+            Stats = stats.Map(value => value.GetMistChampionStats(missingMemberBehavior)),
             Overlay = overlay.Map(value => value.GetStringRequired()),
             Underlay = underlay.Map(value => value.GetStringRequired()),
             Skins = skins.Map(
-                values => values.GetList(value => value.GetHeroSkin(missingMemberBehavior))
+                values => values.GetList(value => value.GetMistChampionSkin(missingMemberBehavior))
             )
         };
     }

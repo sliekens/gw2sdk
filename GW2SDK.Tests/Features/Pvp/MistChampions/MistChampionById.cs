@@ -1,8 +1,8 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Pvp.Heroes;
+namespace GuildWars2.Tests.Features.Pvp.MistChampions;
 
-public class HeroById
+public class MistChampionById
 {
     [Fact]
     public async Task Can_be_found()
@@ -11,7 +11,7 @@ public class HeroById
 
         const string id = "115C140F-C2F5-40EB-8EA2-C3773F2AE468";
 
-        var (actual, _) = await sut.Pvp.GetHeroById(id);
+        var (actual, _) = await sut.Pvp.GetMistChampionById(id);
 
         Assert.Equal(id, actual.Id);
         actual.Has_name();

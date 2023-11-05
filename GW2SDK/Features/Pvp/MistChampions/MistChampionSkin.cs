@@ -1,8 +1,8 @@
-﻿namespace GuildWars2.Pvp.Heroes;
+﻿namespace GuildWars2.Pvp.MistChampions;
 
 [PublicAPI]
 [DataTransferObject]
-public sealed record HeroSkin
+public sealed record MistChampionSkin
 {
     public required int Id { get; init; }
 
