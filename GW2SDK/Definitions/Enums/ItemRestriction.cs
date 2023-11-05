@@ -1,12 +1,17 @@
-﻿namespace GuildWars2;
+﻿using System.ComponentModel;
+
+namespace GuildWars2;
 
 /// <summary>A list of possible restrictions for items that are limited to some races, genders or professions.</summary>
 [PublicAPI]
+[DefaultValue(None)]
 public enum ItemRestriction
 {
+    None,
+
     #region Races
 
-    Asura = 1,
+    Asura,
 
     Charr,
 
@@ -28,7 +33,7 @@ public enum ItemRestriction
 
     #region Professions
 
-    Guardian = 1,
+    Guardian,
 
     Warrior,
 
