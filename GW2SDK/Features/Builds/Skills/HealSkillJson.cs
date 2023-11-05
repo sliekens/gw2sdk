@@ -28,7 +28,7 @@ internal static class HealSkillJson
         OptionalMember categories = "categories";
         OptionalMember subskills = "subskills";
         OptionalMember bundleSkills = "bundle_skills";
-        OptionalMember attunement = "attunement";
+        NullableMember attunement = "attunement";
         NullableMember cost = "cost";
         NullableMember toolbeltSkill = "toolbelt_skill";
 
