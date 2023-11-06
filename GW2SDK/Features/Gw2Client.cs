@@ -32,7 +32,6 @@ using GuildWars2.Quaggans;
 using GuildWars2.Quests;
 using GuildWars2.Races;
 using GuildWars2.Raids;
-using GuildWars2.Skins;
 using GuildWars2.Stories;
 using GuildWars2.SuperAdventureBox;
 using GuildWars2.Tokens;
@@ -43,8 +42,8 @@ using GuildWars2.Wvw;
 namespace GuildWars2;
 
 /// <summary>Provides query methods for the Guild Wars 2 API. This class consists of logical groups containing related sets
-/// of APIs. For example, all APIs pertaining to the trading post are grouped into <see cref="Commerce" /> and all APIs
-/// pertaining to skins are grouped into <see cref="Wardrobe" />.</summary>
+/// of APIs. For example, all APIs pertaining to the Hero panel are grouped into <see cref="Hero" /> and all APIs
+/// pertaining to the trading post are grouped into <see cref="Commerce" />.</summary>
 [PublicAPI]
 public sealed class Gw2Client
 {
@@ -93,7 +92,7 @@ public sealed class Gw2Client
     public GuildsQuery Guilds => new(httpClient);
 
     /// <inheritdoc cref="HeroClient" />
-    public HeroClient Hero=> new(httpClient);
+    public HeroClient Hero => new(httpClient);
 
     /// <inheritdoc cref="HomeQuery" />
     public HomeQuery Home => new(httpClient);
@@ -163,9 +162,6 @@ public sealed class Gw2Client
 
     /// <inheritdoc cref="WalletQuery" />
     public WalletQuery Wallet => new(httpClient);
-
-    /// <inheritdoc cref="WardrobeQuery" />
-    public WardrobeQuery Wardrobe => new(httpClient);
 
     /// <inheritdoc cref="WorldBossesQuery" />
     public WorldBossesQuery WorldBosses => new(httpClient);

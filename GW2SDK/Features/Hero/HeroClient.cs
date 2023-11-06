@@ -2,6 +2,7 @@
 using GuildWars2.Hero.Builds;
 using GuildWars2.Hero.Equipment;
 using GuildWars2.Hero.Training;
+using GuildWars2.Hero.Wardrobe;
 
 namespace GuildWars2.Hero;
 
@@ -28,4 +29,7 @@ public sealed class HeroClient
 
     /// <inheritdoc cref="TrainingQuery" />
     public TrainingQuery Training => new(httpClient);
+
+    /// <inheritdoc cref="WardrobeQuery" />
+    public WardrobeQuery Wardrobe => new(httpClient);
 }
