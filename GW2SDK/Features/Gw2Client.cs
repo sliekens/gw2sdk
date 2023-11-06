@@ -13,6 +13,7 @@ using GuildWars2.Finishers;
 using GuildWars2.Gliders;
 using GuildWars2.Guilds;
 using GuildWars2.Hero;
+using GuildWars2.Hero.Stories;
 using GuildWars2.Home;
 using GuildWars2.Inventories;
 using GuildWars2.Items;
@@ -32,7 +33,6 @@ using GuildWars2.Quaggans;
 using GuildWars2.Quests;
 using GuildWars2.Races;
 using GuildWars2.Raids;
-using GuildWars2.Stories;
 using GuildWars2.SuperAdventureBox;
 using GuildWars2.Tokens;
 using GuildWars2.WorldBosses;
@@ -156,9 +156,6 @@ public sealed class Gw2Client
 
     /// <inheritdoc cref="RaidsQuery" />
     public RaidsQuery Raids => new(httpClient);
-
-    /// <inheritdoc cref="StoriesQuery" />
-    public StoriesQuery Stories => new(httpClient);
 
     /// <inheritdoc cref="WalletQuery" />
     public WalletQuery Wallet => new(httpClient);
