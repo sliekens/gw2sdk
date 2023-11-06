@@ -2,7 +2,7 @@
 using GuildWars2.Crafting;
 using GuildWars2.Hero.Builds;
 using GuildWars2.Hero.Equipment;
-using GuildWars2.Hero.Professions;
+using GuildWars2.Hero.Training;
 using GuildWars2.Inventories;
 using GuildWars2.Json;
 
