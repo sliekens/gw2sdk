@@ -1,5 +1,4 @@
-﻿using GuildWars2.Banking;
-using GuildWars2.Commerce;
+﻿using GuildWars2.Commerce;
 using GuildWars2.Currencies;
 using GuildWars2.Dungeons;
 using GuildWars2.Emblems;
@@ -8,7 +7,6 @@ using GuildWars2.Files;
 using GuildWars2.Guilds;
 using GuildWars2.Hero;
 using GuildWars2.Home;
-using GuildWars2.Inventories;
 using GuildWars2.Items;
 using GuildWars2.ItemStats;
 using GuildWars2.Legends;
@@ -41,10 +39,7 @@ public sealed class Gw2Client
         this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         this.httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
-
-    /// <inheritdoc cref="BankQuery" />
-    public BankQuery Bank => new(httpClient);
-
+    
     /// <inheritdoc cref="CommerceQuery" />
     public CommerceQuery Commerce => new(httpClient);
 
@@ -65,9 +60,6 @@ public sealed class Gw2Client
 
     /// <inheritdoc cref="HomeQuery" />
     public HomeQuery Home => new(httpClient);
-
-    /// <inheritdoc cref="InventoryQuery" />
-    public InventoryQuery Inventory => new(httpClient);
 
     /// <inheritdoc cref="ItemsQuery" />
     public ItemsQuery Items => new(httpClient);

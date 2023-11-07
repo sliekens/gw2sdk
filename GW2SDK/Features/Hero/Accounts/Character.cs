@@ -1,8 +1,8 @@
 ﻿using GuildWars2.Hero.Builds;
 using GuildWars2.Hero.Crafting;
 using GuildWars2.Hero.Equipment;
+using GuildWars2.Hero.Inventories;
 using GuildWars2.Hero.Training;
-using GuildWars2.Inventories;
 
 namespace GuildWars2.Hero.Accounts;
 

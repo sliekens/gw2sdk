@@ -1,5 +1,6 @@
 ﻿using GuildWars2.Hero.Accounts;
 using GuildWars2.Hero.Achievements;
+using GuildWars2.Hero.Banking;
 using GuildWars2.Hero.Builds;
 using GuildWars2.Hero.Crafting;
 using GuildWars2.Hero.Dyes;
@@ -7,6 +8,7 @@ using GuildWars2.Hero.Emotes;
 using GuildWars2.Hero.Equipment;
 using GuildWars2.Hero.Finishers;
 using GuildWars2.Hero.Gliders;
+using GuildWars2.Hero.Inventories;
 using GuildWars2.Hero.MailCarriers;
 using GuildWars2.Hero.Masteries;
 using GuildWars2.Hero.Miniatures;
@@ -34,8 +36,12 @@ public sealed class HeroClient
     /// <inheritdoc cref="AccountQuery" />
     public AccountQuery Account => new(httpClient);
 
+
     /// <inheritdoc cref="AchievementsQuery" />
     public AchievementsQuery Achievements => new(httpClient);
+
+    /// <inheritdoc cref="BankQuery" />
+    public BankQuery Bank => new(httpClient);
 
     /// <inheritdoc cref="BuildsQuery" />
     public BuildsQuery Builds => new(httpClient);
@@ -58,6 +64,9 @@ public sealed class HeroClient
     /// <inheritdoc cref="GlidersQuery" />
     public GlidersQuery Gliders => new(httpClient);
     
+    /// <inheritdoc cref="InventoryQuery" />
+    public InventoryQuery Inventory => new(httpClient);
+
     /// <inheritdoc cref="MailCarriersQuery" />
     public MailCarriersQuery MailCarriers => new(httpClient);
 
