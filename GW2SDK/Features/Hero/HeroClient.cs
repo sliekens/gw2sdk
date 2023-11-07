@@ -1,5 +1,6 @@
 ﻿using GuildWars2.Hero.Achievements;
 using GuildWars2.Hero.Builds;
+using GuildWars2.Hero.Crafting;
 using GuildWars2.Hero.Equipment;
 using GuildWars2.Hero.Stories;
 using GuildWars2.Hero.Training;
@@ -24,6 +25,9 @@ public sealed class HeroClient
 
     /// <inheritdoc cref="BuildsQuery" />
     public BuildsQuery Builds => new(httpClient);
+
+    /// <inheritdoc cref="CraftingQuery" />
+    public CraftingQuery Crafting => new(httpClient);
 
     /// <inheritdoc cref="EquipmentQuery" />
     public EquipmentQuery Equipment => new(httpClient);

@@ -1,4 +1,4 @@
-﻿using GuildWars2.Crafting;
+﻿using GuildWars2.Hero.Crafting;
 
 namespace GuildWars2.TestDataHelper;
 

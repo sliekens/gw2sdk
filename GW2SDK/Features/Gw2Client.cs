@@ -2,7 +2,6 @@
 using GuildWars2.Banking;
 using GuildWars2.Colors;
 using GuildWars2.Commerce;
-using GuildWars2.Crafting;
 using GuildWars2.Currencies;
 using GuildWars2.Dungeons;
 using GuildWars2.Emblems;
@@ -13,7 +12,6 @@ using GuildWars2.Finishers;
 using GuildWars2.Gliders;
 using GuildWars2.Guilds;
 using GuildWars2.Hero;
-using GuildWars2.Hero.Stories;
 using GuildWars2.Home;
 using GuildWars2.Inventories;
 using GuildWars2.Items;
@@ -63,9 +61,6 @@ public sealed class Gw2Client
 
     /// <inheritdoc cref="CommerceQuery" />
     public CommerceQuery Commerce => new(httpClient);
-
-    /// <inheritdoc cref="CraftingQuery" />
-    public CraftingQuery Crafting => new(httpClient);
 
     /// <inheritdoc cref="DungeonsQuery" />
     public DungeonsQuery Dungeons => new(httpClient);

@@ -1,5 +1,5 @@
-﻿using GuildWars2.Crafting;
-using GuildWars2.Hero.Builds;
+﻿using GuildWars2.Hero.Builds;
+using GuildWars2.Hero.Crafting;
 using GuildWars2.Hero.Equipment;
 using GuildWars2.Hero.Training;
 using GuildWars2.Inventories;
