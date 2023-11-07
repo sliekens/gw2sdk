@@ -1,21 +1,21 @@
 ﻿using GuildWars2.Http;
-using GuildWars2.Json;
 
-namespace GuildWars2.Masteries.Http;
+namespace GuildWars2.Hero.Masteries.Http;
 
-internal sealed class MasteryProgressRequest : IHttpRequest<HashSet<MasteryProgress>>
+internal sealed class MasteryPointsProgressRequest : IHttpRequest<MasteryPointsProgress>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/account/masteries")
-    {
-        AcceptEncoding = "gzip",
-        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
-    };
+    private static readonly HttpRequestMessageTemplate Template =
+        new(Get, "v2/account/mastery/points")
+        {
+            AcceptEncoding = "gzip",
+            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+        };
 
     public required string? AccessToken { get; init; }
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<(HashSet<MasteryProgress> Value, MessageContext Context)> SendAsync(
+    public async Task<(MasteryPointsProgress Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -25,7 +25,7 @@ internal sealed class MasteryProgressRequest : IHttpRequest<HashSet<MasteryProgr
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetMasteryProgress(MissingMemberBehavior));
+        var value = json.RootElement.GetMasteryPointsProgress(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }
 }

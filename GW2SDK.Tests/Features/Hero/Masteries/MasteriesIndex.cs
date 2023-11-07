@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Masteries;
+namespace GuildWars2.Tests.Features.Hero.Masteries;
 
 public class MasteriesIndex
 {
@@ -9,7 +9,7 @@ public class MasteriesIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Masteries.GetMasteriesIndex();
+        var (actual, context) = await sut.Hero.Masteries.GetMasteriesIndex();
 
         Assert.NotEmpty(actual);
         Assert.NotNull(context.ResultContext);

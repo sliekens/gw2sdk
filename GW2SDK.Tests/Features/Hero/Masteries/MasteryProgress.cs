@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Masteries;
+namespace GuildWars2.Tests.Features.Hero.Masteries;
 
 public class MasteryProgress
 {
@@ -10,7 +10,7 @@ public class MasteryProgress
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var (actual, _) = await sut.Masteries.GetMasteryProgress(accessToken.Key);
+        var (actual, _) = await sut.Hero.Masteries.GetMasteryProgress(accessToken.Key);
 
         Assert.NotEmpty(actual);
         Assert.All(

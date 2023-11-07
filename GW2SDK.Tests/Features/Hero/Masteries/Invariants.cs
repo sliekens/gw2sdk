@@ -1,6 +1,6 @@
-using GuildWars2.Masteries;
+﻿using GuildWars2.Hero.Masteries;
 
-namespace GuildWars2.Tests.Features.Masteries;
+namespace GuildWars2.Tests.Features.Hero.Masteries;
 
 internal static class Invariants
 {

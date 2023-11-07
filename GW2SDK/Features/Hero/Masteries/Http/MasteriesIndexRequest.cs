@@ -1,7 +1,7 @@
 ﻿using GuildWars2.Http;
 using GuildWars2.Json;
 
-namespace GuildWars2.Masteries.Http;
+namespace GuildWars2.Hero.Masteries.Http;
 
 internal sealed class MasteriesIndexRequest : IHttpRequest<HashSet<int>>
 {

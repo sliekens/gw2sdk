@@ -1,7 +1,7 @@
 using System.Text.Json;
 using GuildWars2.Json;
 
-namespace GuildWars2.Masteries;
+namespace GuildWars2.Hero.Masteries;
 
 internal static class MasteryLevelJson
 {

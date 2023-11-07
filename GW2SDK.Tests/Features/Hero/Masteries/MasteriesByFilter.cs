@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Masteries;
+namespace GuildWars2.Tests.Features.Hero.Masteries;
 
 public class MasteriesByFilter
 {
@@ -16,7 +16,7 @@ public class MasteriesByFilter
             3
         };
 
-        var (actual, _) = await sut.Masteries.GetMasteriesByIds(ids);
+        var (actual, _) = await sut.Hero.Masteries.GetMasteriesByIds(ids);
 
         Assert.Collection(
             ids,

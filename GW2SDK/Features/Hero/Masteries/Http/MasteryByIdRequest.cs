@@ -1,27 +1,26 @@
 ﻿using GuildWars2.Http;
-using GuildWars2.Json;
 
-namespace GuildWars2.Masteries.Http;
+namespace GuildWars2.Hero.Masteries.Http;
 
-internal sealed class MasteriesByIdsRequest : IHttpRequest<HashSet<Mastery>>
+internal sealed class MasteryByIdRequest : IHttpRequest<Mastery>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/masteries")
     {
         AcceptEncoding = "gzip"
     };
 
-    public MasteriesByIdsRequest(IReadOnlyCollection<int> masteryIds)
+    public MasteryByIdRequest(int masteryId)
     {
-        MasteryIds = masteryIds;
+        MasteryId = masteryId;
     }
 
-    public IReadOnlyCollection<int> MasteryIds { get; }
+    public int MasteryId { get; }
 
     public Language? Language { get; init; }
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<(HashSet<Mastery> Value, MessageContext Context)> SendAsync(
+    public async Task<(Mastery Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -31,7 +30,7 @@ internal sealed class MasteriesByIdsRequest : IHttpRequest<HashSet<Mastery>>
                 {
                     Arguments = new QueryBuilder
                     {
-                        { "ids", MasteryIds },
+                        { "id", MasteryId },
                         { "v", SchemaVersion.Recommended }
                     },
                     AcceptLanguage = Language?.Alpha2Code
@@ -43,7 +42,7 @@ internal sealed class MasteriesByIdsRequest : IHttpRequest<HashSet<Mastery>>
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetMastery(MissingMemberBehavior));
+        var value = json.RootElement.GetMastery(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Masteries;
+﻿namespace GuildWars2.Hero.Masteries;
 
 [PublicAPI]
 [DataTransferObject]

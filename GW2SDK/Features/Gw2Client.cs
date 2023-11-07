@@ -19,7 +19,6 @@ using GuildWars2.ItemStats;
 using GuildWars2.Legends;
 using GuildWars2.MailCarriers;
 using GuildWars2.MapChests;
-using GuildWars2.Masteries;
 using GuildWars2.Meta;
 using GuildWars2.Minipets;
 using GuildWars2.Mounts;
@@ -112,9 +111,6 @@ public sealed class Gw2Client
 
     /// <inheritdoc cref="MapsQuery" />
     public MapsQuery Maps => new(httpClient);
-
-    /// <inheritdoc cref="MasteriesQuery" />
-    public MasteriesQuery Masteries => new(httpClient);
 
     /// <inheritdoc cref="MetaQuery" />
     public MetaQuery Meta => new(httpClient);
