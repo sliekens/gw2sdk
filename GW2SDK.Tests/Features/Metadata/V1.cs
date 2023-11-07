@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Meta;
+namespace GuildWars2.Tests.Features.Metadata;
 
 public class V1
 {
@@ -9,7 +9,7 @@ public class V1
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, _) = await sut.Meta.GetApiVersion("v1");
+        var (actual, _) = await sut.Metadata.GetApiVersion("v1");
 
         actual.There_are_no_newer_translations();
     }

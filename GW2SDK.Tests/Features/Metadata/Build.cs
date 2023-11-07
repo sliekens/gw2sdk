@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Meta;
+namespace GuildWars2.Tests.Features.Metadata;
 
 public class Build
 {
@@ -27,7 +27,7 @@ public class Build
         // So in a sense, this is the "official" way to find the current build
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, _) = await sut.Meta.GetBuild();
+        var (actual, _) = await sut.Metadata.GetBuild();
 
         Assert.True(actual.Id > 115267);
     }

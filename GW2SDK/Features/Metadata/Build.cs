@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Meta;
+﻿namespace GuildWars2.Metadata;
 
 [PublicAPI]
 [DataTransferObject]

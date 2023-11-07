@@ -1,14 +1,14 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using GuildWars2.Meta.Http;
+using GuildWars2.Metadata.Http;
 
-namespace GuildWars2.Meta;
+namespace GuildWars2.Metadata;
 
 [PublicAPI]
-public sealed class MetaQuery
+public sealed class MetadataQuery
 {
     private readonly HttpClient http;
 
-    public MetaQuery(HttpClient http)
+    public MetadataQuery(HttpClient http)
     {
         this.http = http ?? throw new ArgumentNullException(nameof(http));
         http.BaseAddress ??= BaseAddress.DefaultUri;

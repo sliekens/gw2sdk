@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Http;
 
-namespace GuildWars2.Meta.Http;
+namespace GuildWars2.Metadata.Http;
 
 internal sealed class BuildRequest : IHttpRequest<Build>
 {

@@ -13,7 +13,7 @@ using GuildWars2.Items;
 using GuildWars2.ItemStats;
 using GuildWars2.Legends;
 using GuildWars2.MapChests;
-using GuildWars2.Meta;
+using GuildWars2.Metadata;
 using GuildWars2.Pets;
 using GuildWars2.Pvp;
 using GuildWars2.Quaggans;
@@ -84,8 +84,8 @@ public sealed class Gw2Client
     /// <inheritdoc cref="MapsQuery" />
     public MapsQuery Maps => new(httpClient);
 
-    /// <inheritdoc cref="MetaQuery" />
-    public MetaQuery Meta => new(httpClient);
+    /// <inheritdoc cref="MetadataQuery" />
+    public MetadataQuery Metadata => new(httpClient);
 
     /// <inheritdoc cref="PetsQuery" />
     public PetsQuery Pets => new(httpClient);

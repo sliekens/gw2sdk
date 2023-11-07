@@ -1,7 +1,7 @@
 using System.Text.Json;
 using GuildWars2.Json;
 
-namespace GuildWars2.Meta;
+namespace GuildWars2.Metadata;
 
 internal static class SchemaJson
 {

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using GuildWars2.Meta;
 using Spectre.Console;
 using Spectre.Console.Rendering;
 

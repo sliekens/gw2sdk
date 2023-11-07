@@ -1095,6 +1095,41 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Meta.ApiVersion</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Meta.Build</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Meta.MetaQuery</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Meta.Route</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Meta.Schema</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:GuildWars2.Minipets.Minipet</Target>
     <Left>lib/net462/GW2SDK.dll</Left>
     <Right>lib/net462/GW2SDK.dll</Right>
@@ -2754,6 +2789,41 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Meta.ApiVersion</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Meta.Build</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Meta.MetaQuery</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Meta.Route</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Meta.Schema</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:GuildWars2.Minipets.Minipet</Target>
     <Left>lib/net6.0/GW2SDK.dll</Left>
     <Right>lib/net6.0/GW2SDK.dll</Right>
@@ -4413,6 +4483,41 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Meta.ApiVersion</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Meta.Build</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Meta.MetaQuery</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Meta.Route</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Meta.Schema</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:GuildWars2.Minipets.Minipet</Target>
     <Left>lib/netstandard2.0/GW2SDK.dll</Left>
     <Right>lib/netstandard2.0/GW2SDK.dll</Right>
@@ -5057,6 +5162,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Gw2Client.get_Meta</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Gw2Client.get_Minipets</Target>
     <Left>lib/net462/GW2SDK.dll</Left>
     <Right>lib/net462/GW2SDK.dll</Right>
@@ -5218,6 +5330,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Gw2Client.get_Meta</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Gw2Client.get_Minipets</Target>
     <Left>lib/net6.0/GW2SDK.dll</Left>
     <Right>lib/net6.0/GW2SDK.dll</Right>
@@ -5373,6 +5492,13 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Gw2Client.get_Masteries</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Gw2Client.get_Meta</Target>
     <Left>lib/netstandard2.0/GW2SDK.dll</Left>
     <Right>lib/netstandard2.0/GW2SDK.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>

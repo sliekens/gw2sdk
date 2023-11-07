@@ -1,6 +1,6 @@
-﻿using GuildWars2.Meta;
+﻿using GuildWars2.Metadata;
 
-namespace GuildWars2.Tests.Features.Meta;
+namespace GuildWars2.Tests.Features.Metadata;
 
 internal static class Invariants
 {
