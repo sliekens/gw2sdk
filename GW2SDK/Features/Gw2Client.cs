@@ -1,5 +1,4 @@
 ﻿using GuildWars2.Commerce;
-using GuildWars2.Currencies;
 using GuildWars2.Dungeons;
 using GuildWars2.Emblems;
 using GuildWars2.Exploration;
@@ -99,9 +98,6 @@ public sealed class Gw2Client
 
     /// <inheritdoc cref="RaidsQuery" />
     public RaidsQuery Raids => new(httpClient);
-
-    /// <inheritdoc cref="WalletQuery" />
-    public WalletQuery Wallet => new(httpClient);
 
     /// <inheritdoc cref="WorldBossesQuery" />
     public WorldBossesQuery WorldBosses => new(httpClient);

@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Currencies;
+namespace GuildWars2.Tests.Features.Hero.Currencies;
 
 public class CurrenciesIndex
 {
@@ -9,7 +9,7 @@ public class CurrenciesIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Wallet.GetCurrenciesIndex();
+        var (actual, context) = await sut.Hero.Wallet.GetCurrenciesIndex();
 
         Assert.NotEmpty(actual);
         Assert.NotNull(context.ResultContext);

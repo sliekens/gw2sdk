@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Currencies;
+﻿namespace GuildWars2.Hero.Currencies;
 
 [PublicAPI]
 [DataTransferObject]

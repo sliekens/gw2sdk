@@ -1,6 +1,6 @@
-using GuildWars2.Currencies;
+﻿using GuildWars2.Hero.Currencies;
 
-namespace GuildWars2.Tests.Features.Currencies;
+namespace GuildWars2.Tests.Features.Hero.Currencies;
 
 internal static class Invariants
 {

@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Currencies;
+namespace GuildWars2.Tests.Features.Hero.Currencies;
 
 public class Currencies
 {
@@ -9,7 +9,7 @@ public class Currencies
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Wallet.GetCurrencies();
+        var (actual, context) = await sut.Hero.Wallet.GetCurrencies();
 
         Assert.NotNull(context.ResultContext);
         Assert.Equal(context.ResultContext.ResultTotal, actual.Count);

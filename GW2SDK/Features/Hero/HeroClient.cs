@@ -3,6 +3,7 @@ using GuildWars2.Hero.Achievements;
 using GuildWars2.Hero.Banking;
 using GuildWars2.Hero.Builds;
 using GuildWars2.Hero.Crafting;
+using GuildWars2.Hero.Currencies;
 using GuildWars2.Hero.Dyes;
 using GuildWars2.Hero.Emotes;
 using GuildWars2.Hero.Equipment;
@@ -90,6 +91,9 @@ public sealed class HeroClient
 
     /// <inheritdoc cref="TrainingQuery" />
     public TrainingQuery Training => new(httpClient);
+
+    /// <inheritdoc cref="WalletQuery" />
+    public WalletQuery Wallet => new(httpClient);
 
     /// <inheritdoc cref="WardrobeQuery" />
     public WardrobeQuery Wardrobe => new(httpClient);

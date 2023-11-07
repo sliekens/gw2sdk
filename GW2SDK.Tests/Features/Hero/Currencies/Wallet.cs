@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Currencies;
+namespace GuildWars2.Tests.Features.Hero.Currencies;
 
 public class Wallet
 {
@@ -9,7 +9,7 @@ public class Wallet
     {
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
-        var (actual, _) = await sut.Wallet.GetWallet(accessToken.Key);
+        var (actual, _) = await sut.Hero.Wallet.GetWallet(accessToken.Key);
         var coins = actual.Single(currency => currency.CurrencyId == 1);
         Coin coinsAmount = coins.Amount;
         Assert.True(coinsAmount > 0);

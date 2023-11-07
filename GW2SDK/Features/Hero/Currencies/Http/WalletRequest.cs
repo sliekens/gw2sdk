@@ -1,7 +1,7 @@
 ﻿using GuildWars2.Http;
 using GuildWars2.Json;
 
-namespace GuildWars2.Currencies.Http;
+namespace GuildWars2.Hero.Currencies.Http;
 
 internal sealed class WalletRequest : IHttpRequest<HashSet<CurrencyAmount>>
 {

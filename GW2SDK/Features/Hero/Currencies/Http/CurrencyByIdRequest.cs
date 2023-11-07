@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Http;
 
-namespace GuildWars2.Currencies.Http;
+namespace GuildWars2.Hero.Currencies.Http;
 
 internal sealed class CurrencyByIdRequest : IHttpRequest<Currency>
 {

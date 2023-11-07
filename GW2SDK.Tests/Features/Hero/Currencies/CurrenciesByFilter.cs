@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Currencies;
+namespace GuildWars2.Tests.Features.Hero.Currencies;
 
 public class CurrenciesByFilter
 {
@@ -16,7 +16,7 @@ public class CurrenciesByFilter
             3
         };
 
-        var (actual, _) = await sut.Wallet.GetCurrenciesByIds(ids);
+        var (actual, _) = await sut.Hero.Wallet.GetCurrenciesByIds(ids);
 
         Assert.Collection(
             ids,
