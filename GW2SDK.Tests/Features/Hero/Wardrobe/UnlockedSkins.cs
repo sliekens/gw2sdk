@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Skins;
+namespace GuildWars2.Tests.Features.Hero.Wardrobe;
 
 public class UnlockedSkins
 {

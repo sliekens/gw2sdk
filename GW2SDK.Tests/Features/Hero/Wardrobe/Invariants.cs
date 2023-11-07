@@ -1,6 +1,6 @@
-﻿using GuildWars2.Hero.Wardrobe;
+using GuildWars2.Hero.Wardrobe;
 
-namespace GuildWars2.Tests.Features.Skins;
+namespace GuildWars2.Tests.Features.Hero.Wardrobe;
 
 internal static class Invariants
 {

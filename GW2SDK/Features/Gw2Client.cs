@@ -4,11 +4,8 @@ using GuildWars2.Commerce;
 using GuildWars2.Currencies;
 using GuildWars2.Dungeons;
 using GuildWars2.Emblems;
-using GuildWars2.Emotes;
 using GuildWars2.Exploration;
 using GuildWars2.Files;
-using GuildWars2.Finishers;
-using GuildWars2.Gliders;
 using GuildWars2.Guilds;
 using GuildWars2.Hero;
 using GuildWars2.Home;
@@ -16,13 +13,8 @@ using GuildWars2.Inventories;
 using GuildWars2.Items;
 using GuildWars2.ItemStats;
 using GuildWars2.Legends;
-using GuildWars2.MailCarriers;
 using GuildWars2.MapChests;
 using GuildWars2.Meta;
-using GuildWars2.Minipets;
-using GuildWars2.Mounts;
-using GuildWars2.Novelties;
-using GuildWars2.Outfits;
 using GuildWars2.Pets;
 using GuildWars2.Pvp;
 using GuildWars2.Quaggans;
@@ -66,18 +58,9 @@ public sealed class Gw2Client
     /// <inheritdoc cref="EmblemsQuery" />
     public EmblemsQuery Emblems => new(httpClient);
 
-    /// <inheritdoc cref="EmotesQuery" />
-    public EmotesQuery Emotes => new(httpClient);
-
     /// <inheritdoc cref="FilesQuery" />
     public FilesQuery Files => new(httpClient);
-
-    /// <inheritdoc cref="FinishersQuery" />
-    public FinishersQuery Finishers => new(httpClient);
-
-    /// <inheritdoc cref="GlidersQuery" />
-    public GlidersQuery Gliders => new(httpClient);
-
+    
     /// <inheritdoc cref="GuildsQuery" />
     public GuildsQuery Guilds => new(httpClient);
 
@@ -99,9 +82,6 @@ public sealed class Gw2Client
     /// <inheritdoc cref="LegendsQuery" />
     public LegendsQuery Legends => new(httpClient);
 
-    /// <inheritdoc cref="MailCarriersQuery" />
-    public MailCarriersQuery MailCarriers => new(httpClient);
-
     /// <inheritdoc cref="MapChestsQuery" />
     public MapChestsQuery MapChests => new(httpClient);
 
@@ -110,18 +90,6 @@ public sealed class Gw2Client
 
     /// <inheritdoc cref="MetaQuery" />
     public MetaQuery Meta => new(httpClient);
-
-    /// <inheritdoc cref="MinipetsQuery" />
-    public MinipetsQuery Minipets => new(httpClient);
-
-    /// <inheritdoc cref="MountsQuery" />
-    public MountsQuery Mounts => new(httpClient);
-
-    /// <inheritdoc cref="NoveltiesQuery" />
-    public NoveltiesQuery Novelties => new(httpClient);
-
-    /// <inheritdoc cref="OutfitsQuery" />
-    public OutfitsQuery Outfits => new(httpClient);
 
     /// <inheritdoc cref="PetsQuery" />
     public PetsQuery Pets => new(httpClient);

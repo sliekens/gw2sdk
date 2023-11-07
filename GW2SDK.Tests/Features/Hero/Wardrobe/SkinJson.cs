@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using GuildWars2.Hero.Wardrobe;
 
-namespace GuildWars2.Tests.Features.Skins;
+namespace GuildWars2.Tests.Features.Hero.Wardrobe;
 
 public class SkinJson : IClassFixture<SkinFixture>
 {
