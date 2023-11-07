@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace GuildWars2.Colors;
+namespace GuildWars2.Hero.Dyes;
 
 [PublicAPI]
 [DataTransferObject]

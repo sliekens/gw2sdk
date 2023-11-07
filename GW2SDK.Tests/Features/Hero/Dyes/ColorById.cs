@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Colors;
+namespace GuildWars2.Tests.Features.Hero.Dyes;
 
 public class ColorById
 {
@@ -11,7 +11,7 @@ public class ColorById
 
         const int id = 1;
 
-        var (actual, _) = await sut.Dyes.GetColorById(id);
+        var (actual, _) = await sut.Hero.Dyes.GetColorById(id);
 
         Assert.Equal(id, actual.Id);
     }

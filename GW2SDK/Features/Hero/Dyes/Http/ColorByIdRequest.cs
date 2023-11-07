@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Http;
 
-namespace GuildWars2.Colors.Http;
+namespace GuildWars2.Hero.Dyes.Http;
 
 internal sealed class ColorByIdRequest : IHttpRequest<Dye>
 {

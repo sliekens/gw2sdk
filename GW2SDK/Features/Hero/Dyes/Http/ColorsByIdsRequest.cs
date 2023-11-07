@@ -1,7 +1,7 @@
 ﻿using GuildWars2.Http;
 using GuildWars2.Json;
 
-namespace GuildWars2.Colors.Http;
+namespace GuildWars2.Hero.Dyes.Http;
 
 internal sealed class ColorsByIdsRequest : IHttpRequest<HashSet<Dye>>
 {

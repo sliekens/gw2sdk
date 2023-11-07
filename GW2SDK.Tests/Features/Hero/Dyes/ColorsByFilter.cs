@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Colors;
+namespace GuildWars2.Tests.Features.Hero.Dyes;
 
 public class ColorsByFilter
 {
@@ -16,7 +16,7 @@ public class ColorsByFilter
             3
         };
 
-        var (actual, _) = await sut.Dyes.GetColorsByIds(ids);
+        var (actual, _) = await sut.Hero.Dyes.GetColorsByIds(ids);
 
         Assert.Collection(
             ids,

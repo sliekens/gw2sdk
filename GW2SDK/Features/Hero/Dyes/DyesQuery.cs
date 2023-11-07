@@ -1,6 +1,6 @@
-﻿using GuildWars2.Colors.Http;
+﻿using GuildWars2.Hero.Dyes.Http;
 
-namespace GuildWars2.Colors;
+namespace GuildWars2.Hero.Dyes;
 
 [PublicAPI]
 public sealed class DyesQuery

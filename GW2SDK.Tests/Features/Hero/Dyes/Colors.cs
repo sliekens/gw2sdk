@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Colors;
+namespace GuildWars2.Tests.Features.Hero.Dyes;
 
 public class Colors
 {
@@ -9,7 +9,7 @@ public class Colors
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Dyes.GetColors();
+        var (actual, context) = await sut.Hero.Dyes.GetColors();
 
         Assert.NotNull(context.ResultContext);
         Assert.Equal(context.ResultContext.ResultTotal, actual.Count);

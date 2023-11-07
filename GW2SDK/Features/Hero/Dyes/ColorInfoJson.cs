@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using GuildWars2.Json;
 
-namespace GuildWars2.Colors;
+namespace GuildWars2.Hero.Dyes;
 
 internal static class ColorInfoJson
 {

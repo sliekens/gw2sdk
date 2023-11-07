@@ -1,6 +1,5 @@
 ﻿using GuildWars2.Accounts;
 using GuildWars2.Banking;
-using GuildWars2.Colors;
 using GuildWars2.Commerce;
 using GuildWars2.Currencies;
 using GuildWars2.Dungeons;
@@ -63,10 +62,7 @@ public sealed class Gw2Client
 
     /// <inheritdoc cref="DungeonsQuery" />
     public DungeonsQuery Dungeons => new(httpClient);
-
-    /// <inheritdoc cref="DyesQuery" />
-    public DyesQuery Dyes => new(httpClient);
-
+    
     /// <inheritdoc cref="EmblemsQuery" />
     public EmblemsQuery Emblems => new(httpClient);
 

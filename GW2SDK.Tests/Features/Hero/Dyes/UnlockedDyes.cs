@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Colors;
+namespace GuildWars2.Tests.Features.Hero.Dyes;
 
 public class UnlockedDyes
 {
@@ -10,7 +10,7 @@ public class UnlockedDyes
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var (actual, _) = await sut.Dyes.GetUnlockedDyesIndex(accessToken.Key);
+        var (actual, _) = await sut.Hero.Dyes.GetUnlockedDyesIndex(accessToken.Key);
 
         Assert.NotEmpty(actual);
         Assert.All(actual, id => Assert.NotEqual(0, id));

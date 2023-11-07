@@ -1,6 +1,6 @@
-using GuildWars2.Colors;
+﻿using GuildWars2.Hero.Dyes;
 
-namespace GuildWars2.Tests.Features.Colors;
+namespace GuildWars2.Tests.Features.Hero.Dyes;
 
 internal static class Invariants
 {
