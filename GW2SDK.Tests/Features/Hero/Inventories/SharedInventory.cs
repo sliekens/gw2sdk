@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Inventories;
+namespace GuildWars2.Tests.Features.Hero.Inventories;
 
 public class SharedInventory
 {

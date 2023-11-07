@@ -1,7 +1,7 @@
 ﻿using GuildWars2.Hero.Banking;
 using GuildWars2.Hero.Inventories;
 
-namespace GuildWars2.Tests.Features.Banking;
+namespace GuildWars2.Tests.Features.Hero.Banking;
 
 internal static class Invariants
 {

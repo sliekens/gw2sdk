@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Banking;
+namespace GuildWars2.Tests.Features.Hero.Banking;
 
 public class Bank
 {
