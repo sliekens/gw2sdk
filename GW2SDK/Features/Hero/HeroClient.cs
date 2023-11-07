@@ -1,4 +1,5 @@
-﻿using GuildWars2.Hero.Achievements;
+﻿using GuildWars2.Hero.Accounts;
+using GuildWars2.Hero.Achievements;
 using GuildWars2.Hero.Builds;
 using GuildWars2.Hero.Crafting;
 using GuildWars2.Hero.Dyes;
@@ -29,6 +30,9 @@ public sealed class HeroClient
         this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         this.httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
+
+    /// <inheritdoc cref="AccountQuery" />
+    public AccountQuery Account => new(httpClient);
 
     /// <inheritdoc cref="AchievementsQuery" />
     public AchievementsQuery Achievements => new(httpClient);

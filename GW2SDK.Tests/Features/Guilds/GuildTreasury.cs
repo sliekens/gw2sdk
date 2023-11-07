@@ -10,7 +10,7 @@ public class GuildTreasury
         var sut = Composer.Resolve<Gw2Client>();
         var guildLeader = Composer.Resolve<TestGuildLeader>();
 
-        var (account, _) = await sut.Accounts.GetSummary(guildLeader.Token);
+        var (account, _) = await sut.Hero.Account.GetSummary(guildLeader.Token);
         foreach (var guildId in account.LeaderOfGuildIds!)
         {
             var (actual, _) = await sut.Guilds.GetGuildTreasury(guildId, guildLeader.Token);

@@ -1,5 +1,4 @@
-﻿using GuildWars2.Accounts;
-using GuildWars2.Banking;
+﻿using GuildWars2.Banking;
 using GuildWars2.Commerce;
 using GuildWars2.Currencies;
 using GuildWars2.Dungeons;
@@ -42,9 +41,6 @@ public sealed class Gw2Client
         this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         this.httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
-
-    /// <inheritdoc cref="AccountsQuery" />
-    public AccountsQuery Accounts => new(httpClient);
 
     /// <inheritdoc cref="BankQuery" />
     public BankQuery Bank => new(httpClient);
