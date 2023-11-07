@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using GuildWars2.Metadata;
 
 namespace ApiVersionInfo;
 
