@@ -27,7 +27,17 @@ public class Floors
                 foreach (var (regionId, region) in entry.Regions)
                 {
                     Assert.Equal(regionId, region.Id);
-                    region.Has_name();
+
+                    if (continentId == 2 && entry.Id == 60 && regionId == 50)
+                    {
+                        // Convergens region name is empty
+                        Assert.Empty(region.Name);
+                    }
+                    else
+                    {
+                        region.Has_name();
+                    }
+
                     region.Has_maps();
 
                     // TODO: complete validation

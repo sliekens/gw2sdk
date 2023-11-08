@@ -18,14 +18,15 @@ public class Currencies
             currency =>
             {
                 currency.Id_is_positive();
-                currency.Name_is_not_empty();
-                if (currency.Id == 63)
+                if (currency.Id == 74)
                 {
-                    // Astral Acclaim is missing a tooltip
+                    // Unknown currency
+                    Assert.Empty(currency.Name);
                     Assert.Empty(currency.Description);
                 }
                 else
                 {
+                    currency.Name_is_not_empty();
                     currency.Description_is_not_empty();
                 }
 
