@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Guilds.Bank;
+using GuildWars2.Guilds.Emblems;
 using GuildWars2.Guilds.Http;
 using GuildWars2.Guilds.Logs;
 using GuildWars2.Guilds.Members;
@@ -201,13 +202,130 @@ public sealed class GuildsQuery
 
     #endregion v2/guild/:id/upgrades
 
-    #region v2/guild/permissions
+    #region v2/emblem/foregrounds
 
-    public Task<(HashSet<GuildPermissionSummary> Value, MessageContext Context)> GetGuildPermissions(
-        Language? language = default,
+    public Task<(HashSet<Emblem> Value, MessageContext Context)> GetForegroundEmblems(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
+    {
+        ForegroundEmblemsRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<(HashSet<int> Value, MessageContext Context)> GetForegroundEmblemsIndex(
+        CancellationToken cancellationToken = default
+    )
+    {
+        var request = new ForegroundEmblemsIndexRequest();
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<(Emblem Value, MessageContext Context)> GetForegroundEmblemById(
+        int foregroundEmblemId,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        ForegroundEmblemByIdRequest request =
+            new(foregroundEmblemId) { MissingMemberBehavior = missingMemberBehavior };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<(HashSet<Emblem> Value, MessageContext Context)> GetForegroundEmblemsByIds(
+        IReadOnlyCollection<int> foregroundEmblemIds,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        ForegroundEmblemsByIdsRequest request =
+            new(foregroundEmblemIds) { MissingMemberBehavior = missingMemberBehavior };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<(HashSet<Emblem> Value, MessageContext Context)> GetForegroundEmblemsByPage(
+        int pageIndex,
+        int? pageSize = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        ForegroundEmblemsByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
+    #region v2/emblem/backgrounds
+
+    public Task<(HashSet<Emblem> Value, MessageContext Context)> GetBackgroundEmblems(
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        BackgroundEmblemsRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<(HashSet<int> Value, MessageContext Context)> GetBackgroundEmblemsIndex(
+        CancellationToken cancellationToken = default
+    )
+    {
+        var request = new BackgroundEmblemsIndexRequest();
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<(Emblem Value, MessageContext Context)> GetBackgroundEmblemById(
+        int backgroundEmblemId,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        BackgroundEmblemByIdRequest request =
+            new(backgroundEmblemId) { MissingMemberBehavior = missingMemberBehavior };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<(HashSet<Emblem> Value, MessageContext Context)> GetBackgroundEmblemsByIds(
+        IReadOnlyCollection<int> backgroundEmblemIds,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        BackgroundEmblemsByIdsRequest request =
+            new(backgroundEmblemIds) { MissingMemberBehavior = missingMemberBehavior };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<(HashSet<Emblem> Value, MessageContext Context)> GetBackgroundEmblemsByPage(
+        int pageIndex,
+        int? pageSize = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        BackgroundEmblemsByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
+    #region v2/guild/permissions
+
+    public Task<(HashSet<GuildPermissionSummary> Value, MessageContext Context)>
+        GetGuildPermissions(
+            Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
         GuildPermissionsRequest request = new()
         {
@@ -240,12 +358,13 @@ public sealed class GuildsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<(HashSet<GuildPermissionSummary> Value, MessageContext Context)> GetGuildPermissionsByIds(
-        IReadOnlyCollection<GuildPermission> guildPermissionIds,
-        Language? language = default,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    public Task<(HashSet<GuildPermissionSummary> Value, MessageContext Context)>
+        GetGuildPermissionsByIds(
+            IReadOnlyCollection<GuildPermission> guildPermissionIds,
+            Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
         GuildPermissionsByIdsRequest request = new(guildPermissionIds)
         {
@@ -255,13 +374,14 @@ public sealed class GuildsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<(HashSet<GuildPermissionSummary> Value, MessageContext Context)> GetGuildPermissionsByPage(
-        int pageIndex,
-        int? pageSize = default,
-        Language? language = default,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    public Task<(HashSet<GuildPermissionSummary> Value, MessageContext Context)>
+        GetGuildPermissionsByPage(
+            int pageIndex,
+            int? pageSize = default,
+            Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
         GuildPermissionsByPageRequest request = new(pageIndex)
         {

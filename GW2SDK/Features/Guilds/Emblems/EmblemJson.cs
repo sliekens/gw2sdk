@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using GuildWars2.Json;
 
-namespace GuildWars2.Emblems;
+namespace GuildWars2.Guilds.Emblems;
 
 internal static class EmblemJson
 {

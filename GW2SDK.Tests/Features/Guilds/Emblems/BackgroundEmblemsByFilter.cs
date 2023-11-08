@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Emblems;
+namespace GuildWars2.Tests.Features.Guilds.Emblems;
 
 public class BackgroundEmblemsByFilter
 {
@@ -16,7 +16,7 @@ public class BackgroundEmblemsByFilter
             3
         };
 
-        var (actual, _) = await sut.Emblems.GetBackgroundEmblemsByIds(ids);
+        var (actual, _) = await sut.Guilds.GetBackgroundEmblemsByIds(ids);
 
         Assert.Equal(ids.Count, actual.Count);
         Assert.All(ids, id => Assert.Contains(id, actual.Select(value => value.Id)));

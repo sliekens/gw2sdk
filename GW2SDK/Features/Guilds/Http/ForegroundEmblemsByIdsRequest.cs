@@ -1,20 +1,21 @@
-﻿using GuildWars2.Http;
+﻿using GuildWars2.Guilds.Emblems;
+using GuildWars2.Http;
 using GuildWars2.Json;
 
-namespace GuildWars2.Emblems.Http;
+namespace GuildWars2.Guilds.Http;
 
-internal sealed class BackgroundEmblemsByIdsRequest : IHttpRequest<HashSet<Emblem>>
+internal sealed class ForegroundEmblemsByIdsRequest : IHttpRequest<HashSet<Emblem>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/emblem/backgrounds") { AcceptEncoding = "gzip" };
+        new(Get, "v2/emblem/foregrounds") { AcceptEncoding = "gzip" };
 
-    public BackgroundEmblemsByIdsRequest(IReadOnlyCollection<int> backgroundEmblemIds)
+    public ForegroundEmblemsByIdsRequest(IReadOnlyCollection<int> foregroundEmblemIds)
     {
-        Check.Collection(backgroundEmblemIds);
-        BackgroundEmblemIds = backgroundEmblemIds;
+        Check.Collection(foregroundEmblemIds);
+        ForegroundEmblemIds = foregroundEmblemIds;
     }
 
-    public IReadOnlyCollection<int> BackgroundEmblemIds { get; }
+    public IReadOnlyCollection<int> ForegroundEmblemIds { get; }
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
@@ -28,7 +29,7 @@ internal sealed class BackgroundEmblemsByIdsRequest : IHttpRequest<HashSet<Emble
                 {
                     Arguments = new QueryBuilder
                     {
-                        { "ids", BackgroundEmblemIds },
+                        { "ids", ForegroundEmblemIds },
                         { "v", SchemaVersion.Recommended }
                     }
                 },

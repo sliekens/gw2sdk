@@ -1,22 +1,25 @@
-﻿using GuildWars2.Http;
+﻿using GuildWars2.Guilds.Emblems;
+using GuildWars2.Http;
+using GuildWars2.Json;
 
-namespace GuildWars2.Emblems.Http;
+namespace GuildWars2.Guilds.Http;
 
-internal sealed class ForegroundEmblemByIdRequest : IHttpRequest<Emblem>
+internal sealed class BackgroundEmblemsByIdsRequest : IHttpRequest<HashSet<Emblem>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/emblem/foregrounds") { AcceptEncoding = "gzip" };
+        new(Get, "v2/emblem/backgrounds") { AcceptEncoding = "gzip" };
 
-    public ForegroundEmblemByIdRequest(int foregroundEmblemId)
+    public BackgroundEmblemsByIdsRequest(IReadOnlyCollection<int> backgroundEmblemIds)
     {
-        ForegroundEmblemId = foregroundEmblemId;
+        Check.Collection(backgroundEmblemIds);
+        BackgroundEmblemIds = backgroundEmblemIds;
     }
 
-    public int ForegroundEmblemId { get; }
+    public IReadOnlyCollection<int> BackgroundEmblemIds { get; }
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<(Emblem Value, MessageContext Context)> SendAsync(
+    public async Task<(HashSet<Emblem> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -26,7 +29,7 @@ internal sealed class ForegroundEmblemByIdRequest : IHttpRequest<Emblem>
                 {
                     Arguments = new QueryBuilder
                     {
-                        { "id", ForegroundEmblemId },
+                        { "ids", BackgroundEmblemIds },
                         { "v", SchemaVersion.Recommended }
                     }
                 },
@@ -37,7 +40,7 @@ internal sealed class ForegroundEmblemByIdRequest : IHttpRequest<Emblem>
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
-        var value = json.RootElement.GetEmblem(MissingMemberBehavior);
+        var value = json.RootElement.GetSet(entry => entry.GetEmblem(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }
 }

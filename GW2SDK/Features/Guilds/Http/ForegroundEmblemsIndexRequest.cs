@@ -1,7 +1,7 @@
 ﻿using GuildWars2.Http;
 using GuildWars2.Json;
 
-namespace GuildWars2.Emblems.Http;
+namespace GuildWars2.Guilds.Http;
 
 internal sealed class ForegroundEmblemsIndexRequest : IHttpRequest<HashSet<int>>
 {

@@ -1,9 +1,9 @@
 ﻿using GuildWars2.Commerce;
 using GuildWars2.Dungeons;
-using GuildWars2.Emblems;
 using GuildWars2.Exploration;
 using GuildWars2.Files;
 using GuildWars2.Guilds;
+using GuildWars2.Guilds.Emblems;
 using GuildWars2.Hero;
 using GuildWars2.Home;
 using GuildWars2.Items;
@@ -44,9 +44,6 @@ public sealed class Gw2Client
 
     /// <inheritdoc cref="DungeonsQuery" />
     public DungeonsQuery Dungeons => new(httpClient);
-    
-    /// <inheritdoc cref="EmblemsQuery" />
-    public EmblemsQuery Emblems => new(httpClient);
 
     /// <inheritdoc cref="FilesQuery" />
     public FilesQuery Files => new(httpClient);

@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Emblems;
+﻿namespace GuildWars2.Guilds.Emblems;
 
 [PublicAPI]
 [DataTransferObject]

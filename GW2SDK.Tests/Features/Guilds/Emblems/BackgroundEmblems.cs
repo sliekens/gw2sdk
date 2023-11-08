@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Emblems;
+namespace GuildWars2.Tests.Features.Guilds.Emblems;
 
 public class BackgroundEmblems
 {
@@ -9,7 +9,7 @@ public class BackgroundEmblems
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Emblems.GetBackgroundEmblems();
+        var (actual, context) = await sut.Guilds.GetBackgroundEmblems();
 
         Assert.NotEmpty(actual);
         Assert.NotNull(context.ResultContext);

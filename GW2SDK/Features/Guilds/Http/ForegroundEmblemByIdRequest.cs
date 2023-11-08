@@ -1,16 +1,23 @@
-﻿using GuildWars2.Http;
-using GuildWars2.Json;
+﻿using GuildWars2.Guilds.Emblems;
+using GuildWars2.Http;
 
-namespace GuildWars2.Emblems.Http;
+namespace GuildWars2.Guilds.Http;
 
-internal sealed class ForegroundEmblemsRequest : IHttpRequest<HashSet<Emblem>>
+internal sealed class ForegroundEmblemByIdRequest : IHttpRequest<Emblem>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/emblem/foregrounds") { AcceptEncoding = "gzip" };
 
+    public ForegroundEmblemByIdRequest(int foregroundEmblemId)
+    {
+        ForegroundEmblemId = foregroundEmblemId;
+    }
+
+    public int ForegroundEmblemId { get; }
+
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<(HashSet<Emblem> Value, MessageContext Context)> SendAsync(
+    public async Task<(Emblem Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -20,7 +27,7 @@ internal sealed class ForegroundEmblemsRequest : IHttpRequest<HashSet<Emblem>>
                 {
                     Arguments = new QueryBuilder
                     {
-                        { "ids", "all" },
+                        { "id", ForegroundEmblemId },
                         { "v", SchemaVersion.Recommended }
                     }
                 },
@@ -31,7 +38,7 @@ internal sealed class ForegroundEmblemsRequest : IHttpRequest<HashSet<Emblem>>
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetEmblem(MissingMemberBehavior));
+        var value = json.RootElement.GetEmblem(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }
 }

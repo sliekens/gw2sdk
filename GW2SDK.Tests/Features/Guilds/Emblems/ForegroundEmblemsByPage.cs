@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Emblems;
+namespace GuildWars2.Tests.Features.Guilds.Emblems;
 
 public class ForegroundEmblemsByPage
 {
@@ -9,7 +9,7 @@ public class ForegroundEmblemsByPage
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Emblems.GetForegroundEmblemsByPage(0, 3);
+        var (actual, context) = await sut.Guilds.GetForegroundEmblemsByPage(0, 3);
 
         Assert.Equal(3, actual.Count);
         Assert.NotNull(context.PageContext);
