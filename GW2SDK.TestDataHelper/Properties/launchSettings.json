@@ -2,7 +2,7 @@
   "profiles": {
     "GW2SDK.TestDataHelper": {
       "commandName": "Project",
-      "commandLineArgs": "--out-dir data"
+      "commandLineArgs": "data"
     }
   }
 }
