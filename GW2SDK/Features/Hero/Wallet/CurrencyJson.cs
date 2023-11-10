@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using GuildWars2.Json;
 
-namespace GuildWars2.Hero.Currencies;
+namespace GuildWars2.Hero.Wallet;
 
 internal static class CurrencyJson
 {

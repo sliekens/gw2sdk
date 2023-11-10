@@ -1,22 +1,23 @@
 ﻿using GuildWars2.Http;
 using GuildWars2.Json;
 
-namespace GuildWars2.Hero.Currencies.Http;
+namespace GuildWars2.Hero.Wallet.Http;
 
-internal sealed class CurrenciesByIdsRequest : IHttpRequest<HashSet<Currency>>
+internal sealed class CurrenciesByPageRequest : IHttpRequest<HashSet<Currency>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/currencies")
     {
         AcceptEncoding = "gzip"
     };
 
-    public CurrenciesByIdsRequest(IReadOnlyCollection<int> currencyIds)
+    public CurrenciesByPageRequest(int pageIndex)
     {
-        Check.Collection(currencyIds);
-        CurrencyIds = currencyIds;
+        PageIndex = pageIndex;
     }
 
-    public IReadOnlyCollection<int> CurrencyIds { get; }
+    public int PageIndex { get; }
+
+    public int? PageSize { get; init; }
 
     public Language? Language { get; init; }
 
@@ -27,14 +28,17 @@ internal sealed class CurrenciesByIdsRequest : IHttpRequest<HashSet<Currency>>
         CancellationToken cancellationToken
     )
     {
+        QueryBuilder search = new() { { "page", PageIndex } };
+        if (PageSize.HasValue)
+        {
+            search.Add("page_size", PageSize.Value);
+        }
+
+        search.Add("v", SchemaVersion.Recommended);
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = new QueryBuilder
-                    {
-                        { "ids", CurrencyIds },
-                        { "v", SchemaVersion.Recommended }
-                    },
+                    Arguments = search,
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 HttpCompletionOption.ResponseHeadersRead,

@@ -3,7 +3,6 @@ using GuildWars2.Hero.Achievements;
 using GuildWars2.Hero.Banking;
 using GuildWars2.Hero.Builds;
 using GuildWars2.Hero.Crafting;
-using GuildWars2.Hero.Currencies;
 using GuildWars2.Hero.Dyes;
 using GuildWars2.Hero.Emotes;
 using GuildWars2.Hero.Equipment;
@@ -18,6 +17,7 @@ using GuildWars2.Hero.Novelties;
 using GuildWars2.Hero.Outfits;
 using GuildWars2.Hero.StoryJournal;
 using GuildWars2.Hero.Training;
+using GuildWars2.Hero.Wallet;
 using GuildWars2.Hero.Wardrobe;
 
 namespace GuildWars2.Hero;

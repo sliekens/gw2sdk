@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Hero.Currencies;
+namespace GuildWars2.Tests.Features.Hero.Wallet;
 
 public class Currencies
 {

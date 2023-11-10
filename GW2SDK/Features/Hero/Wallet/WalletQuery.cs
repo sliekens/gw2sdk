@@ -1,6 +1,6 @@
-﻿using GuildWars2.Hero.Currencies.Http;
+﻿using GuildWars2.Hero.Wallet.Http;
 
-namespace GuildWars2.Hero.Currencies;
+namespace GuildWars2.Hero.Wallet;
 
 [PublicAPI]
 public sealed class WalletQuery
