@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 using GuildWars2;
-using GuildWars2.Hero.Dyes;
+using GuildWars2.Hero.Equipment.Dyes;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -17,7 +17,7 @@ var app = appBuilder.Build();
 var gw2 = app.Services.GetRequiredService<Gw2Client>();
 
 // Some demo code to print dye colors, using Pastel to colorize the console output
-foreach (var dye in (await gw2.Hero.Dyes.GetColors()).Value)
+foreach (var dye in (await gw2.Hero.Equipment.Dyes.GetColors()).Value)
 {
     PrintColor(dye.Name, dye.Cloth.Rgb, dye.Leather.Rgb, dye.Metal.Rgb);
 }

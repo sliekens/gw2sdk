@@ -1,4 +1,4 @@
-﻿using GuildWars2.Hero.Wardrobe;
+﻿using GuildWars2.Hero.Equipment.Wardrobe;
 
 namespace GuildWars2.TestDataHelper;
 

@@ -16,7 +16,7 @@ httpClient.DefaultRequestHeaders.AcceptLanguage.Add(
     new StringWithQualityHeaderValue(Language.CurrentUICulture.Alpha2Code)
 );
 
-var (mounts, _) = await gw2.Hero.Mounts.GetMounts();
+var (mounts, _) = await gw2.Hero.Equipment.Mounts.GetMounts();
 
 Console.WriteLine("Preferred language");
 foreach (var mount in mounts)
@@ -41,7 +41,7 @@ foreach (var language in languages)
 {
     // Localizable endpoints accept an optional language parameter
     // When omitted, the default language is used (as specified in Accept-Language, or English if not specified)
-    (mounts, _) = await gw2.Hero.Mounts.GetMounts(language);
+    (mounts, _) = await gw2.Hero.Equipment.Mounts.GetMounts(language);
 
     Console.WriteLine(language.CultureInfo.EnglishName);
     foreach (var mount in mounts)
@@ -54,7 +54,7 @@ foreach (var language in languages)
 
 // Finally let's see what happens when an unsupported language is used
 var unsupportedLanguage = new Language("ko");
-(mounts, _) = await gw2.Hero.Mounts.GetMounts(unsupportedLanguage);
+(mounts, _) = await gw2.Hero.Equipment.Mounts.GetMounts(unsupportedLanguage);
 
 Console.WriteLine(unsupportedLanguage.CultureInfo.EnglishName + " (unsupported)");
 foreach (var mount in mounts)

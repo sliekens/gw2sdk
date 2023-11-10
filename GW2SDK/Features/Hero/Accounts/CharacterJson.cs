@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using GuildWars2.Hero.Builds;
 using GuildWars2.Hero.Crafting;
-using GuildWars2.Hero.Equipment;
+using GuildWars2.Hero.Equipment.Templates;
 using GuildWars2.Hero.Inventories;
 using GuildWars2.Hero.Training;
 using GuildWars2.Json;
