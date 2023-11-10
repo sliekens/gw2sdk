@@ -16,7 +16,7 @@ using GuildWars2.Hero.Miniatures;
 using GuildWars2.Hero.Mounts;
 using GuildWars2.Hero.Novelties;
 using GuildWars2.Hero.Outfits;
-using GuildWars2.Hero.Stories;
+using GuildWars2.Hero.StoryJournal;
 using GuildWars2.Hero.Training;
 using GuildWars2.Hero.Wardrobe;
 
@@ -86,8 +86,8 @@ public sealed class HeroClient
     /// <inheritdoc cref="OutfitsQuery" />
     public OutfitsQuery Outfits => new(httpClient);
 
-    /// <inheritdoc cref="StoriesQuery" />
-    public StoriesQuery Stories => new(httpClient);
+    /// <inheritdoc cref="StoryJournal" />
+    public StoryJournalClient StoryJournal => new(httpClient);
 
     /// <inheritdoc cref="TrainingQuery" />
     public TrainingQuery Training => new(httpClient);

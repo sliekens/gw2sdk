@@ -1,8 +1,0 @@
-﻿namespace GuildWars2.Hero.Stories;
-
-[PublicAPI]
-[DataTransferObject]
-public sealed record Chapter
-{
-    public required string Name { get; init; }
-}
