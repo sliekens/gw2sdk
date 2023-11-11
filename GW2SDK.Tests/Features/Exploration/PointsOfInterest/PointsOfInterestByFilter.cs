@@ -20,7 +20,7 @@ public class PointsOfInterestByFilter
             556
         };
 
-        var (actual, context) = await sut.Maps.GetPointsOfInterestByIds(
+        var (actual, context) = await sut.Exploration.GetPointsOfInterestByIds(
             continentId,
             floorId,
             regionId,

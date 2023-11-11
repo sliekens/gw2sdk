@@ -20,7 +20,7 @@ public class SectorsByFilter
             515
         };
 
-        var (actual, context) = await sut.Maps.GetSectorsByIds(continentId, floorId, regionId, mapId, ids);
+        var (actual, context) = await sut.Exploration.GetSectorsByIds(continentId, floorId, regionId, mapId, ids);
 
         Assert.Equal(ids.Count, actual.Count);
         Assert.NotNull(context.ResultContext);

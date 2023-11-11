@@ -9,7 +9,7 @@ public class MapSummariesIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Maps.GetMapSummariesIndex();
+        var (actual, context) = await sut.Exploration.GetMapSummariesIndex();
 
         Assert.NotEmpty(actual);
         Assert.NotNull(context.ResultContext);

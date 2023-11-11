@@ -11,14 +11,14 @@ using Objective = GuildWars2.Wvw.Objectives.Objective;
 namespace GuildWars2.Wvw;
 
 [PublicAPI]
-public sealed class WvwQuery
+public sealed class WvwClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public WvwQuery(HttpClient http)
+    public WvwClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     #region v2/wvw/abilities
@@ -34,7 +34,7 @@ public sealed class WvwQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetAbilitiesIndex(
@@ -42,7 +42,7 @@ public sealed class WvwQuery
     )
     {
         AbilitiesIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Ability Value, MessageContext Context)> GetAbilityById(
@@ -57,7 +57,7 @@ public sealed class WvwQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Ability> Value, MessageContext Context)> GetAbilitiesByIds(
@@ -72,7 +72,7 @@ public sealed class WvwQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Ability> Value, MessageContext Context)> GetAbilitiesByPage(
@@ -89,7 +89,7 @@ public sealed class WvwQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -107,7 +107,7 @@ public sealed class WvwQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<string> Value, MessageContext Context)> GetObjectivesIndex(
@@ -115,7 +115,7 @@ public sealed class WvwQuery
     )
     {
         ObjectivesIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Objective Value, MessageContext Context)> GetObjectiveById(
@@ -130,7 +130,7 @@ public sealed class WvwQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Objective> Value, MessageContext Context)> GetObjectivesByIds(
@@ -145,7 +145,7 @@ public sealed class WvwQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Objective> Value, MessageContext Context)> GetObjectivesByPage(
@@ -162,7 +162,7 @@ public sealed class WvwQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -180,13 +180,13 @@ public sealed class WvwQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetRanksIndex(CancellationToken cancellationToken = default)
     {
         RanksIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Rank Value, MessageContext Context)> GetRankById(
@@ -201,7 +201,7 @@ public sealed class WvwQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Rank> Value, MessageContext Context)> GetRanksByIds(
@@ -216,7 +216,7 @@ public sealed class WvwQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Rank> Value, MessageContext Context)> GetRanksByPage(
@@ -233,7 +233,7 @@ public sealed class WvwQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -251,7 +251,7 @@ public sealed class WvwQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetUpgradesIndex(
@@ -259,7 +259,7 @@ public sealed class WvwQuery
     )
     {
         UpgradesIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(ObjectiveUpgrade Value, MessageContext Context)> GetUpgradeById(
@@ -274,7 +274,7 @@ public sealed class WvwQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<ObjectiveUpgrade> Value, MessageContext Context)> GetUpgradesByIds(
@@ -289,7 +289,7 @@ public sealed class WvwQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<ObjectiveUpgrade> Value, MessageContext Context)> GetUpgradesByPage(
@@ -306,7 +306,7 @@ public sealed class WvwQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -319,7 +319,7 @@ public sealed class WvwQuery
     )
     {
         MatchesRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<string> Value, MessageContext Context)> GetMatchesIndex(
@@ -327,7 +327,7 @@ public sealed class WvwQuery
     )
     {
         MatchesIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Match Value, MessageContext Context)> GetMatchById(
@@ -337,7 +337,7 @@ public sealed class WvwQuery
     )
     {
         MatchByIdRequest request = new(matchId) { MissingMemberBehavior = missingMemberBehavior };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Match> Value, MessageContext Context)> GetMatchesByIds(
@@ -350,7 +350,7 @@ public sealed class WvwQuery
         {
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Match> Value, MessageContext Context)> GetMatchesByPage(
@@ -365,7 +365,7 @@ public sealed class WvwQuery
             PageSize = pageSize,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Match Value, MessageContext Context)> GetMatchByWorldId(
@@ -378,7 +378,7 @@ public sealed class WvwQuery
         {
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -391,7 +391,7 @@ public sealed class WvwQuery
     )
     {
         MatchesOverviewRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<string> Value, MessageContext Context)> GetMatchesOverviewIndex(
@@ -399,7 +399,7 @@ public sealed class WvwQuery
     )
     {
         MatchesOverviewIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(MatchOverview Value, MessageContext Context)> GetMatchOverviewById(
@@ -412,7 +412,7 @@ public sealed class WvwQuery
         {
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<MatchOverview> Value, MessageContext Context)> GetMatchesOverviewByIds(
@@ -425,7 +425,7 @@ public sealed class WvwQuery
         {
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<MatchOverview> Value, MessageContext Context)> GetMatchesOverviewByPage(
@@ -440,7 +440,7 @@ public sealed class WvwQuery
             PageSize = pageSize,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(MatchOverview Value, MessageContext Context)> GetMatchOverviewByWorldId(
@@ -453,7 +453,7 @@ public sealed class WvwQuery
         {
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -466,7 +466,7 @@ public sealed class WvwQuery
     )
     {
         MatchesScoresRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<string> Value, MessageContext Context)> GetMatchesScoresIndex(
@@ -474,7 +474,7 @@ public sealed class WvwQuery
     )
     {
         MatchesScoresIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(MatchScores Value, MessageContext Context)> GetMatchScoresById(
@@ -487,7 +487,7 @@ public sealed class WvwQuery
         {
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<MatchScores> Value, MessageContext Context)> GetMatchesScoresByIds(
@@ -500,7 +500,7 @@ public sealed class WvwQuery
         {
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<MatchScores> Value, MessageContext Context)> GetMatchesScoresByPage(
@@ -515,7 +515,7 @@ public sealed class WvwQuery
             PageSize = pageSize,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(MatchScores Value, MessageContext Context)> GetMatchScoresByWorldId(
@@ -528,7 +528,7 @@ public sealed class WvwQuery
         {
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -541,7 +541,7 @@ public sealed class WvwQuery
     )
     {
         MatchesStatsRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<string> Value, MessageContext Context)> GetMatchesStatsIndex(
@@ -549,7 +549,7 @@ public sealed class WvwQuery
     )
     {
         MatchesStatsIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(MatchStats Value, MessageContext Context)> GetMatchStatsById(
@@ -562,7 +562,7 @@ public sealed class WvwQuery
         {
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<MatchStats> Value, MessageContext Context)> GetMatchesStatsByIds(
@@ -575,7 +575,7 @@ public sealed class WvwQuery
         {
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<MatchStats> Value, MessageContext Context)> GetMatchesStatsByPage(
@@ -590,7 +590,7 @@ public sealed class WvwQuery
             PageSize = pageSize,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(MatchStats Value, MessageContext Context)> GetMatchStatsByWorldId(
@@ -603,7 +603,7 @@ public sealed class WvwQuery
         {
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion

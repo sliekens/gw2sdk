@@ -3,14 +3,14 @@
 namespace GuildWars2.Raids;
 
 [PublicAPI]
-public sealed class RaidsQuery
+public sealed class RaidsClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public RaidsQuery(HttpClient http)
+    public RaidsClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     #region v2/account/raids
@@ -21,7 +21,7 @@ public sealed class RaidsQuery
     )
     {
         var request = new CompletedEncountersRequest { AccessToken = accessToken };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -33,7 +33,7 @@ public sealed class RaidsQuery
     )
     {
         RaidsIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Raid Value, MessageContext Context)> GetRaidById(
@@ -45,7 +45,7 @@ public sealed class RaidsQuery
         {
             MissingMemberBehavior = MissingMemberBehavior.Error
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Raid> Value, MessageContext Context)> GetRaidsByIds(
@@ -55,7 +55,7 @@ public sealed class RaidsQuery
     )
     {
         RaidsByIdsRequest request = new(raidIds) { MissingMemberBehavior = missingMemberBehavior };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Raid> Value, MessageContext Context)> GetRaidsByPage(
@@ -71,7 +71,7 @@ public sealed class RaidsQuery
             MissingMemberBehavior = missingMemberBehavior
         };
 
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Raid> Value, MessageContext Context)> GetRaids(
@@ -80,7 +80,7 @@ public sealed class RaidsQuery
     )
     {
         RaidsRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion

@@ -18,7 +18,7 @@ public class FloorsByFilter
             2
         };
 
-        var (actual, context) = await sut.Maps.GetFloorsByIds(continentId, ids);
+        var (actual, context) = await sut.Exploration.GetFloorsByIds(continentId, ids);
 
         Assert.Equal(ids.Count, actual.Count);
         Assert.NotNull(context.ResultContext);

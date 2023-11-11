@@ -3,14 +3,14 @@
 namespace GuildWars2.SuperAdventureBox;
 
 [PublicAPI]
-public sealed class SuperAdventureBoxQuery
+public sealed class SuperAdventureBoxClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public SuperAdventureBoxQuery(HttpClient http)
+    public SuperAdventureBoxClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     #region v2/characters/:id/sab
@@ -27,7 +27,7 @@ public sealed class SuperAdventureBoxQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion

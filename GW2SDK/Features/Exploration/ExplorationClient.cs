@@ -10,14 +10,14 @@ using GuildWars2.Exploration.Sectors;
 namespace GuildWars2.Exploration;
 
 [PublicAPI]
-public sealed class MapsQuery
+public sealed class ExplorationClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public MapsQuery(HttpClient http)
+    public ExplorationClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     #region v2/characters/:id/heropoints
@@ -34,7 +34,7 @@ public sealed class MapsQuery
     )
     {
         CompletedHeroChallengesRequest request = new(characterName) { AccessToken = accessToken };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -52,7 +52,7 @@ public sealed class MapsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetContinentsIndex(
@@ -60,7 +60,7 @@ public sealed class MapsQuery
     )
     {
         ContinentsIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Continent Value, MessageContext Context)> GetContinentById(
@@ -75,7 +75,7 @@ public sealed class MapsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Continent> Value, MessageContext Context)> GetContinentsByIds(
@@ -90,7 +90,7 @@ public sealed class MapsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Continent> Value, MessageContext Context)> GetContinentsByPage(
@@ -107,7 +107,7 @@ public sealed class MapsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -126,7 +126,7 @@ public sealed class MapsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetFloorsIndex(
@@ -135,7 +135,7 @@ public sealed class MapsQuery
     )
     {
         FloorsIndexRequest request = new(continentId);
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Floor Value, MessageContext Context)> GetFloorById(
@@ -151,7 +151,7 @@ public sealed class MapsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Floor> Value, MessageContext Context)> GetFloorsByIds(
@@ -167,7 +167,7 @@ public sealed class MapsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Floor> Value, MessageContext Context)> GetFloorsByPage(
@@ -185,7 +185,7 @@ public sealed class MapsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -205,7 +205,7 @@ public sealed class MapsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetRegionsIndex(
@@ -215,7 +215,7 @@ public sealed class MapsQuery
     )
     {
         RegionsIndexRequest request = new(continentId, floorId);
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Region Value, MessageContext Context)> GetRegionById(
@@ -232,7 +232,7 @@ public sealed class MapsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Region> Value, MessageContext Context)> GetRegionsByIds(
@@ -249,7 +249,7 @@ public sealed class MapsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Region> Value, MessageContext Context)> GetRegionsByPage(
@@ -268,7 +268,7 @@ public sealed class MapsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -289,7 +289,7 @@ public sealed class MapsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetMapsIndex(
@@ -300,7 +300,7 @@ public sealed class MapsQuery
     )
     {
         MapsIndexRequest request = new(continentId, floorId, regionId);
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Map Value, MessageContext Context)> GetMapById(
@@ -318,7 +318,7 @@ public sealed class MapsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Map> Value, MessageContext Context)> GetMapsByIds(
@@ -336,7 +336,7 @@ public sealed class MapsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Map> Value, MessageContext Context)> GetMapsByPage(
@@ -356,7 +356,7 @@ public sealed class MapsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -378,7 +378,7 @@ public sealed class MapsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetPointsOfInterestIndex(
@@ -390,7 +390,7 @@ public sealed class MapsQuery
     )
     {
         PointsOfInterestIndexRequest request = new(continentId, floorId, regionId, mapId);
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(PointOfInterest Value, MessageContext Context)> GetPointOfInterestById(
@@ -410,7 +410,7 @@ public sealed class MapsQuery
                 Language = language,
                 MissingMemberBehavior = missingMemberBehavior
             };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<PointOfInterest> Value, MessageContext Context)> GetPointsOfInterestByIds(
@@ -430,7 +430,7 @@ public sealed class MapsQuery
                 Language = language,
                 MissingMemberBehavior = missingMemberBehavior
             };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<PointOfInterest> Value, MessageContext Context)> GetPointsOfInterestByPage(
@@ -452,7 +452,7 @@ public sealed class MapsQuery
                 Language = language,
                 MissingMemberBehavior = missingMemberBehavior
             };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -474,7 +474,7 @@ public sealed class MapsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetHeartsIndex(
@@ -486,7 +486,7 @@ public sealed class MapsQuery
     )
     {
         HeartsIndexRequest request = new(continentId, floorId, regionId, mapId);
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Heart Value, MessageContext Context)> GetHeartById(
@@ -505,7 +505,7 @@ public sealed class MapsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Heart> Value, MessageContext Context)> GetHeartsByIds(
@@ -524,7 +524,7 @@ public sealed class MapsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Heart> Value, MessageContext Context)> GetHeartsByPage(
@@ -545,7 +545,7 @@ public sealed class MapsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -567,7 +567,7 @@ public sealed class MapsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetSectorsIndex(
@@ -579,7 +579,7 @@ public sealed class MapsQuery
     )
     {
         SectorsIndexRequest request = new(continentId, floorId, regionId, mapId);
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Sector Value, MessageContext Context)> GetSectorById(
@@ -598,7 +598,7 @@ public sealed class MapsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Sector> Value, MessageContext Context)> GetSectorsByIds(
@@ -617,7 +617,7 @@ public sealed class MapsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Sector> Value, MessageContext Context)> GetSectorsByPage(
@@ -638,7 +638,7 @@ public sealed class MapsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -656,7 +656,7 @@ public sealed class MapsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetMapSummariesIndex(
@@ -664,7 +664,7 @@ public sealed class MapsQuery
     )
     {
         MapSummariesIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(MapSummary Value, MessageContext Context)> GetMapSummaryById(
@@ -679,7 +679,7 @@ public sealed class MapsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<MapSummary> Value, MessageContext Context)> MapSummariesByIds(
@@ -694,7 +694,7 @@ public sealed class MapsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<MapSummary> Value, MessageContext Context)> MapSummariesByPage(
@@ -711,7 +711,7 @@ public sealed class MapsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion

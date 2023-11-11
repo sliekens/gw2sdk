@@ -22,7 +22,7 @@ if (!GameLink.IsSupported())
 // Prepare a dictionary of MapSummary and Specialization for later use
 var gw2 = app.GetService<Gw2Client>();
 
-var maps = (await gw2.Maps.GetMapSummaries(cancellationToken: stoppingToken))
+var maps = (await gw2.Exploration.GetMapSummaries(cancellationToken: stoppingToken))
     .Value.ToDictionary(map => map.Id);
 
 var specializations = (await gw2.Hero.Builds.GetSpecializations(cancellationToken: stoppingToken))

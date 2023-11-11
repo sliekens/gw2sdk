@@ -3,14 +3,14 @@
 namespace GuildWars2.ItemStats;
 
 [PublicAPI]
-public sealed class ItemStatsQuery
+public sealed class ItemStatsClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public ItemStatsQuery(HttpClient http)
+    public ItemStatsClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     public Task<(HashSet<ItemStat> Value, MessageContext Context)> GetItemStats(
@@ -24,7 +24,7 @@ public sealed class ItemStatsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetItemStatsIndex(
@@ -32,7 +32,7 @@ public sealed class ItemStatsQuery
     )
     {
         ItemStatsIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(ItemStat Value, MessageContext Context)> GetItemStatById(
@@ -47,7 +47,7 @@ public sealed class ItemStatsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<ItemStat> Value, MessageContext Context)> GetItemStatsByIds(
@@ -63,7 +63,7 @@ public sealed class ItemStatsQuery
             MissingMemberBehavior = missingMemberBehavior
         };
 
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<ItemStat> Value, MessageContext Context)> GetItemStatsByPage(
@@ -80,6 +80,6 @@ public sealed class ItemStatsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 }

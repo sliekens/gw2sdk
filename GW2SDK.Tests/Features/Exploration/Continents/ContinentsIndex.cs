@@ -9,7 +9,7 @@ public class ContinentsIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Maps.GetContinentsIndex();
+        var (actual, context) = await sut.Exploration.GetContinentsIndex();
 
         Assert.Collection(
             actual,

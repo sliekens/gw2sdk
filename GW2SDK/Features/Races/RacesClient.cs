@@ -3,14 +3,14 @@
 namespace GuildWars2.Races;
 
 [PublicAPI]
-public sealed class RacesQuery
+public sealed class RacesClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public RacesQuery(HttpClient http)
+    public RacesClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     public Task<(HashSet<Race> Value, MessageContext Context)> GetRaces(
@@ -24,7 +24,7 @@ public sealed class RacesQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<string> Value, MessageContext Context)> GetRacesIndex(
@@ -32,7 +32,7 @@ public sealed class RacesQuery
     )
     {
         RacesIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Race Value, MessageContext Context)> GetRaceByName(
@@ -47,7 +47,7 @@ public sealed class RacesQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Race> Value, MessageContext Context)> GetRacesByNames(
@@ -62,7 +62,7 @@ public sealed class RacesQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Race> Value, MessageContext Context)> GetRacesByPage(
@@ -79,6 +79,6 @@ public sealed class RacesQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 }

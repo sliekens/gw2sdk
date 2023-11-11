@@ -3,14 +3,14 @@
 namespace GuildWars2.Dungeons;
 
 [PublicAPI]
-public sealed class DungeonsQuery
+public sealed class DungeonsClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public DungeonsQuery(HttpClient http)
+    public DungeonsClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     public Task<(HashSet<string> Value, MessageContext Context)> GetDungeonsIndex(
@@ -18,7 +18,7 @@ public sealed class DungeonsQuery
     )
     {
         DungeonsIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Dungeon Value, MessageContext Context)> GetDungeonById(
@@ -30,7 +30,7 @@ public sealed class DungeonsQuery
         {
             MissingMemberBehavior = MissingMemberBehavior.Error
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Dungeon> Value, MessageContext Context)> GetDungeonsByIds(
@@ -43,7 +43,7 @@ public sealed class DungeonsQuery
         {
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Dungeon> Value, MessageContext Context)> GetDungeonsByPage(
@@ -59,7 +59,7 @@ public sealed class DungeonsQuery
             MissingMemberBehavior = missingMemberBehavior
         };
 
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Dungeon> Value, MessageContext Context)> GetDungeons(
@@ -68,7 +68,7 @@ public sealed class DungeonsQuery
     )
     {
         DungeonsRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<string> Value, MessageContext Context)> GetCompletedPaths(
@@ -77,6 +77,6 @@ public sealed class DungeonsQuery
     )
     {
         CompletedPathsRequest request = new() { AccessToken = accessToken };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 }

@@ -3,14 +3,14 @@
 namespace GuildWars2.Hero.Wallet;
 
 [PublicAPI]
-public sealed class WalletQuery
+public sealed class WalletClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public WalletQuery(HttpClient http)
+    public WalletClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     #region v2/account/wallet
@@ -26,7 +26,7 @@ public sealed class WalletQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -44,7 +44,7 @@ public sealed class WalletQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetCurrenciesIndex(
@@ -52,7 +52,7 @@ public sealed class WalletQuery
     )
     {
         CurrenciesIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Currency Value, MessageContext Context)> GetCurrencyById(
@@ -67,7 +67,7 @@ public sealed class WalletQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Currency> Value, MessageContext Context)> GetCurrenciesByIds(
@@ -82,7 +82,7 @@ public sealed class WalletQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Currency> Value, MessageContext Context)> GetCurrenciesByPage(
@@ -100,7 +100,7 @@ public sealed class WalletQuery
             MissingMemberBehavior = missingMemberBehavior
         };
 
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion

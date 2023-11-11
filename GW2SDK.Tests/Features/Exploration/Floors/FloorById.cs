@@ -16,7 +16,7 @@ public class FloorById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, _) = await sut.Maps.GetFloorById(continentId, floorId);
+        var (actual, _) = await sut.Exploration.GetFloorById(continentId, floorId);
 
         Assert.Equal(floorId, actual.Id);
         actual.Has_texture_dimensions();

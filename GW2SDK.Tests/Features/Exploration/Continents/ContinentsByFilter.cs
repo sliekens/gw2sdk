@@ -15,7 +15,7 @@ public class ContinentsByFilter
             2
         };
 
-        var (actual, context) = await sut.Maps.GetContinentsByIds(ids);
+        var (actual, context) = await sut.Exploration.GetContinentsByIds(ids);
 
         Assert.Equal(ids.Count, actual.Count);
         Assert.NotNull(context.ResultContext);

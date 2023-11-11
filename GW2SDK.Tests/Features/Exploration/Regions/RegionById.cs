@@ -12,7 +12,7 @@ public class RegionById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, _) = await sut.Maps.GetRegionById(continentId, floorId, regionId);
+        var (actual, _) = await sut.Exploration.GetRegionById(continentId, floorId, regionId);
 
         Assert.Equal(regionId, actual.Id);
         actual.Has_name();

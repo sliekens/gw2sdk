@@ -3,14 +3,14 @@
 namespace GuildWars2.Hero.Masteries;
 
 [PublicAPI]
-public sealed class MasteriesQuery
+public sealed class MasteriesClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public MasteriesQuery(HttpClient http)
+    public MasteriesClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     #region v2/account/masteries
@@ -25,7 +25,7 @@ public sealed class MasteriesQuery
             AccessToken = accessToken,
             MissingMemberBehavior = MissingMemberBehavior.Error
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/account/masteries
@@ -42,7 +42,7 @@ public sealed class MasteriesQuery
             AccessToken = accessToken,
             MissingMemberBehavior = MissingMemberBehavior.Error
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/account/mastery/points
@@ -60,7 +60,7 @@ public sealed class MasteriesQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetMasteriesIndex(
@@ -68,7 +68,7 @@ public sealed class MasteriesQuery
     )
     {
         MasteriesIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Mastery Value, MessageContext Context)> GetMasteryById(
@@ -83,7 +83,7 @@ public sealed class MasteriesQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Mastery> Value, MessageContext Context)> GetMasteriesByIds(
@@ -98,7 +98,7 @@ public sealed class MasteriesQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/masteries

@@ -12,7 +12,7 @@ public class RegionsByPage
         const int continentId = 1;
         const int floorId = 1;
 
-        var (actual, context) = await sut.Maps.GetRegionsByPage(continentId, floorId, 0, 3);
+        var (actual, context) = await sut.Exploration.GetRegionsByPage(continentId, floorId, 0, 3);
 
         Assert.Equal(3, actual.Count);
         Assert.NotNull(context.PageContext);

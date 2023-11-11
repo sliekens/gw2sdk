@@ -20,7 +20,7 @@ public class HeartsByFilter
             3
         };
 
-        var (actual, context) = await sut.Maps.GetHeartsByIds(continentId, floorId, regionId, mapId, ids);
+        var (actual, context) = await sut.Exploration.GetHeartsByIds(continentId, floorId, regionId, mapId, ids);
 
         Assert.Equal(ids.Count, actual.Count);
         Assert.NotNull(context.ResultContext);

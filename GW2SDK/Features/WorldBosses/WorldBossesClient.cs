@@ -3,14 +3,14 @@
 namespace GuildWars2.WorldBosses;
 
 [PublicAPI]
-public sealed class WorldBossesQuery
+public sealed class WorldBossesClient
 {
     private readonly HttpClient http;
 
-    public WorldBossesQuery(HttpClient http)
+    public WorldBossesClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.http = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     public Task<(HashSet<string> Value, MessageContext Context)> GetWorldBosses(

@@ -3,14 +3,14 @@
 namespace GuildWars2.Hero.Training;
 
 [PublicAPI]
-public sealed class TrainingQuery
+public sealed class TrainingClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public TrainingQuery(HttpClient http)
+    public TrainingClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     public Task<(HashSet<Profession> Value, MessageContext Context)> GetProfessions(
@@ -24,7 +24,7 @@ public sealed class TrainingQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<ProfessionName> Value, MessageContext Context)> GetProfessionNames(
@@ -33,7 +33,7 @@ public sealed class TrainingQuery
     )
     {
         ProfessionNamesRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Profession Value, MessageContext Context)> GetProfessionByName(
@@ -48,7 +48,7 @@ public sealed class TrainingQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Profession> Value, MessageContext Context)> GetProfessionsByNames(
@@ -63,7 +63,7 @@ public sealed class TrainingQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Profession> Value, MessageContext Context)> GetProfessionsByPage(
@@ -80,7 +80,7 @@ public sealed class TrainingQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #region v2/characters/:id/training
@@ -97,7 +97,7 @@ public sealed class TrainingQuery
             MissingMemberBehavior = missingMemberBehavior,
             AccessToken = accessToken
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion

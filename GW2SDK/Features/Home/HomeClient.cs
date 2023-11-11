@@ -5,14 +5,14 @@ using GuildWars2.Home.Nodes;
 namespace GuildWars2.Home;
 
 [PublicAPI]
-public sealed class HomeQuery
+public sealed class HomeClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public HomeQuery(HttpClient http)
+    public HomeClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     public Task<(HashSet<Cat> Value, MessageContext Context)> GetCats(
@@ -21,13 +21,13 @@ public sealed class HomeQuery
     )
     {
         CatsRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetCatsIndex(CancellationToken cancellationToken = default)
     {
         CatsIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Cat Value, MessageContext Context)> GetCatById(
@@ -37,7 +37,7 @@ public sealed class HomeQuery
     )
     {
         CatByIdRequest request = new(catId) { MissingMemberBehavior = missingMemberBehavior };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Cat> Value, MessageContext Context)> GetCatsByIds(
@@ -47,7 +47,7 @@ public sealed class HomeQuery
     )
     {
         CatsByIdsRequest request = new(catIds) { MissingMemberBehavior = missingMemberBehavior };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Cat> Value, MessageContext Context)> GetCatsByPage(
@@ -62,7 +62,7 @@ public sealed class HomeQuery
             PageSize = pageSize,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetOwnedCatsIndex(
@@ -74,7 +74,7 @@ public sealed class HomeQuery
         {
             AccessToken = accessToken
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Node> Value, MessageContext Context)> GetNodes(
@@ -83,7 +83,7 @@ public sealed class HomeQuery
     )
     {
         NodesRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<string> Value, MessageContext Context)> GetNodesIndex(
@@ -91,7 +91,7 @@ public sealed class HomeQuery
     )
     {
         NodesIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<string> Value, MessageContext Context)> GetOwnedNodesIndex(
@@ -103,6 +103,6 @@ public sealed class HomeQuery
         {
             AccessToken = accessToken
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 }

@@ -9,7 +9,7 @@ public class Continents
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Maps.GetContinents();
+        var (actual, context) = await sut.Exploration.GetContinents();
 
         Assert.NotEmpty(actual);
         Assert.NotNull(context.ResultContext);

@@ -9,7 +9,7 @@ public class MapSummaries
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Maps.GetMapSummaries();
+        var (actual, context) = await sut.Exploration.GetMapSummaries();
 
         Assert.NotEmpty(actual);
         Assert.NotNull(context.ResultContext);

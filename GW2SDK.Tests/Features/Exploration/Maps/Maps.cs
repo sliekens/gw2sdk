@@ -12,7 +12,7 @@ public class Maps
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Maps.GetMaps(continentId, floorId, regionId);
+        var (actual, context) = await sut.Exploration.GetMaps(continentId, floorId, regionId);
 
         Assert.NotEmpty(actual);
         Assert.NotNull(context.ResultContext);

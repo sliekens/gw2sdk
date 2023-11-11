@@ -10,7 +10,7 @@ public class MapSummariesByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
-        var (actual, context) = await sut.Maps.MapSummariesByPage(0, pageSize);
+        var (actual, context) = await sut.Exploration.MapSummariesByPage(0, pageSize);
 
         Assert.NotNull(context.PageContext);
         Assert.Equal(pageSize, context.PageContext.PageSize);

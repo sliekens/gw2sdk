@@ -11,7 +11,7 @@ public class ContinentById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, _) = await sut.Maps.GetContinentById(id);
+        var (actual, _) = await sut.Exploration.GetContinentById(id);
 
         Assert.Equal(id, actual.Id);
         actual.Has_name();

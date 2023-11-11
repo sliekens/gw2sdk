@@ -3,14 +3,14 @@
 namespace GuildWars2.Legends;
 
 [PublicAPI]
-public sealed class LegendsQuery
+public sealed class LegendsClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public LegendsQuery(HttpClient http)
+    public LegendsClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     public Task<(HashSet<string> Value, MessageContext Context)> GetLegendsIndex(
@@ -18,7 +18,7 @@ public sealed class LegendsQuery
     )
     {
         LegendsIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Legend Value, MessageContext Context)> GetLegendById(
@@ -30,7 +30,7 @@ public sealed class LegendsQuery
         {
             MissingMemberBehavior = MissingMemberBehavior.Error
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Legend> Value, MessageContext Context)> GetLegendsByIds(
@@ -43,7 +43,7 @@ public sealed class LegendsQuery
         {
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Legend> Value, MessageContext Context)> GetLegendsByPage(
@@ -59,7 +59,7 @@ public sealed class LegendsQuery
             MissingMemberBehavior = missingMemberBehavior
         };
 
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Legend> Value, MessageContext Context)> GetLegends(
@@ -68,6 +68,6 @@ public sealed class LegendsQuery
     )
     {
         LegendsRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 }

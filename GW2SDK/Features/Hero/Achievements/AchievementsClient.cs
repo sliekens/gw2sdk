@@ -8,14 +8,14 @@ namespace GuildWars2.Hero.Achievements;
 
 /// <summary>Query methods for achievements and titles in the game and achievement progress on the account.</summary>
 [PublicAPI]
-public sealed class AchievementsQuery
+public sealed class AchievementsClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public AchievementsQuery(HttpClient http)
+    public AchievementsClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     #region v2/account/titles
@@ -31,7 +31,7 @@ public sealed class AchievementsQuery
     )
     {
         UnlockedTitlesRequest request = new() { AccessToken = accessToken };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/account/titles
@@ -46,7 +46,7 @@ public sealed class AchievementsQuery
     )
     {
         AchievementsIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves an achievement by its ID.</summary>
@@ -67,7 +67,7 @@ public sealed class AchievementsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves achievements by their IDs.</summary>
@@ -89,7 +89,7 @@ public sealed class AchievementsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves a page of achievements.</summary>
@@ -113,7 +113,7 @@ public sealed class AchievementsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves achievements by their IDs by chunking requests and executing them in parallel. Supports more than
@@ -218,7 +218,7 @@ public sealed class AchievementsQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves achievement progress on the account by their IDs. This endpoint is only accessible with a valid
@@ -241,7 +241,7 @@ public sealed class AchievementsQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves all achievement progress on the account. This endpoint is only accessible with a valid access token</summary>
@@ -260,7 +260,7 @@ public sealed class AchievementsQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves a page of achievement progress on the account. This endpoint is only accessible with a valid access
@@ -286,7 +286,7 @@ public sealed class AchievementsQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/account/achievements
@@ -310,7 +310,7 @@ public sealed class AchievementsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves the IDs of all achievement categories.</summary>
@@ -321,7 +321,7 @@ public sealed class AchievementsQuery
     )
     {
         AchievementCategoriesIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves an achievement category by its ID.</summary>
@@ -342,7 +342,7 @@ public sealed class AchievementsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves achievement categories by their IDs.</summary>
@@ -364,7 +364,7 @@ public sealed class AchievementsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves a page of achievement categories.</summary>
@@ -389,7 +389,7 @@ public sealed class AchievementsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/achievements/categories
@@ -412,7 +412,7 @@ public sealed class AchievementsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves the IDs of all achievement groups.</summary>
@@ -423,7 +423,7 @@ public sealed class AchievementsQuery
     )
     {
         AchievementGroupsIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves an achievement group by its ID.</summary>
@@ -444,7 +444,7 @@ public sealed class AchievementsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves achievement groups by their IDs.</summary>
@@ -466,7 +466,7 @@ public sealed class AchievementsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves a page of achievement groups.</summary>
@@ -491,7 +491,7 @@ public sealed class AchievementsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/achievements/groups
@@ -514,7 +514,7 @@ public sealed class AchievementsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves the IDs of all titles.</summary>
@@ -525,7 +525,7 @@ public sealed class AchievementsQuery
     )
     {
         TitlesIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves a title by its ID.</summary>
@@ -546,7 +546,7 @@ public sealed class AchievementsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves titles by their IDs.</summary>
@@ -567,7 +567,7 @@ public sealed class AchievementsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves a page of titles.</summary>
@@ -591,7 +591,7 @@ public sealed class AchievementsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/titles

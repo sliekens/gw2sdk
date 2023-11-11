@@ -9,14 +9,14 @@ using GuildWars2.Commerce.Transactions;
 namespace GuildWars2.Commerce;
 
 [PublicAPI]
-public sealed class CommerceQuery
+public sealed class CommerceClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public CommerceQuery(HttpClient http)
+    public CommerceClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     #region v2/commerce/delivery
@@ -32,7 +32,7 @@ public sealed class CommerceQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -44,7 +44,7 @@ public sealed class CommerceQuery
     )
     {
         ItemPricesIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(ItemPrice Value, MessageContext Context)> GetItemPriceById(
@@ -57,7 +57,7 @@ public sealed class CommerceQuery
         {
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<ItemPrice> Value, MessageContext Context)> GetItemPricesByIds(
@@ -70,7 +70,7 @@ public sealed class CommerceQuery
         {
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public IAsyncEnumerable<(ItemPrice Value, MessageContext Context)> GetItemPricesBulk(
@@ -136,7 +136,7 @@ public sealed class CommerceQuery
     )
     {
         OrderBooksIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(OrderBook Value, MessageContext Context)> GetOrderBookById(
@@ -149,7 +149,7 @@ public sealed class CommerceQuery
         {
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<OrderBook> Value, MessageContext Context)> GetOrderBooksByIds(
@@ -162,7 +162,7 @@ public sealed class CommerceQuery
         {
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public IAsyncEnumerable<(OrderBook Value, MessageContext Context)> GetOrderBooksBulk(
@@ -233,7 +233,7 @@ public sealed class CommerceQuery
         {
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(GoldForGemsExchange Value, MessageContext Context)> ExchangeGoldForGems(
@@ -246,7 +246,7 @@ public sealed class CommerceQuery
         {
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -267,7 +267,7 @@ public sealed class CommerceQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Order> Value, MessageContext Context)> GetSellOrders(
@@ -284,7 +284,7 @@ public sealed class CommerceQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Transaction> Value, MessageContext Context)> GetPurchases(
@@ -301,7 +301,7 @@ public sealed class CommerceQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Transaction> Value, MessageContext Context)> GetSales(
@@ -318,7 +318,7 @@ public sealed class CommerceQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion

@@ -10,14 +10,14 @@ using GuildWars2.Pvp.Stats;
 namespace GuildWars2.Pvp;
 
 [PublicAPI]
-public sealed class PvpQuery
+public sealed class PvpClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public PvpQuery(HttpClient http)
+    public PvpClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     #region v2/pvp/seasons/:id/leaderboards
@@ -28,7 +28,7 @@ public sealed class PvpQuery
     )
     {
         LeaderboardsRequest request = new(seasonId);
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -42,7 +42,7 @@ public sealed class PvpQuery
     )
     {
         LeaderboardRegionsRequest request = new(seasonId, boardId);
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -64,7 +64,7 @@ public sealed class PvpQuery
             PageSize = pageSize,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -82,7 +82,7 @@ public sealed class PvpQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -100,7 +100,7 @@ public sealed class PvpQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -118,7 +118,7 @@ public sealed class PvpQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetAmuletsIndex(
@@ -126,7 +126,7 @@ public sealed class PvpQuery
     )
     {
         AmuletIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Amulet Value, MessageContext Context)> GetAmuletById(
@@ -141,7 +141,7 @@ public sealed class PvpQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Amulet> Value, MessageContext Context)> GetAmuletsByIds(
@@ -156,7 +156,7 @@ public sealed class PvpQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Amulet> Value, MessageContext Context)> GetAmuletsByPage(
@@ -173,7 +173,7 @@ public sealed class PvpQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -191,7 +191,7 @@ public sealed class PvpQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<string> Value, MessageContext Context)> GetMistChampionsIndex(
@@ -199,7 +199,7 @@ public sealed class PvpQuery
     )
     {
         HeroIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(MistChampion Value, MessageContext Context)> GetMistChampionById(
@@ -214,7 +214,7 @@ public sealed class PvpQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<MistChampion> Value, MessageContext Context)> GetMistChampionsByIds(
@@ -229,7 +229,7 @@ public sealed class PvpQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<MistChampion> Value, MessageContext Context)> GetMistChampionByPage(
@@ -246,7 +246,7 @@ public sealed class PvpQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -259,7 +259,7 @@ public sealed class PvpQuery
     )
     {
         UnlockedHeroesRequest request = new() { AccessToken = accessToken };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/account/pvp/heroes
@@ -277,13 +277,13 @@ public sealed class PvpQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetRanksIndex(CancellationToken cancellationToken = default)
     {
         RankIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Rank Value, MessageContext Context)> GetRankById(
@@ -298,7 +298,7 @@ public sealed class PvpQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Rank> Value, MessageContext Context)> GetRanksByIds(
@@ -313,7 +313,7 @@ public sealed class PvpQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Rank> Value, MessageContext Context)> GetRanksByPage(
@@ -330,7 +330,7 @@ public sealed class PvpQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -348,7 +348,7 @@ public sealed class PvpQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<string> Value, MessageContext Context)> GetSeasonsIndex(
@@ -356,7 +356,7 @@ public sealed class PvpQuery
     )
     {
         SeasonIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Season Value, MessageContext Context)> GetSeasonById(
@@ -371,7 +371,7 @@ public sealed class PvpQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Season> Value, MessageContext Context)> GetSeasonsByIds(
@@ -386,7 +386,7 @@ public sealed class PvpQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Season> Value, MessageContext Context)> GetSeasonsByPage(
@@ -403,7 +403,7 @@ public sealed class PvpQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -421,7 +421,7 @@ public sealed class PvpQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<string> Value, MessageContext Context)> GetGamesIndex(
@@ -435,7 +435,7 @@ public sealed class PvpQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Game Value, MessageContext Context)> GetGameById(
@@ -450,7 +450,7 @@ public sealed class PvpQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Game> Value, MessageContext Context)> GetGamesByIds(
@@ -465,7 +465,7 @@ public sealed class PvpQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Game> Value, MessageContext Context)> GetGamesByPage(
@@ -482,7 +482,7 @@ public sealed class PvpQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion

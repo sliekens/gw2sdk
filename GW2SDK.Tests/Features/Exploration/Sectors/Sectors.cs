@@ -12,7 +12,7 @@ public class Sectors
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Maps.GetSectors(continentId, floorId, regionId, mapId);
+        var (actual, context) = await sut.Exploration.GetSectors(continentId, floorId, regionId, mapId);
 
         Assert.NotEmpty(actual);
         Assert.NotNull(context.ResultContext);

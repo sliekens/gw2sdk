@@ -4,14 +4,14 @@ namespace GuildWars2.Hero.Banking;
 
 /// <summary>Query methods for the account bank and material storage.</summary>
 [PublicAPI]
-public sealed class BankQuery
+public sealed class BankClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public BankQuery(HttpClient http)
+    public BankClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     #region v2/account/bank
@@ -32,7 +32,7 @@ public sealed class BankQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -55,7 +55,7 @@ public sealed class BankQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -78,7 +78,7 @@ public sealed class BankQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves the IDs of all material categories.</summary>
@@ -89,7 +89,7 @@ public sealed class BankQuery
     )
     {
         MaterialCategoriesIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves a material category by its ID.</summary>
@@ -110,7 +110,7 @@ public sealed class BankQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves material categories by their IDs.</summary>
@@ -132,7 +132,7 @@ public sealed class BankQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves a page of material categories.</summary>
@@ -156,7 +156,7 @@ public sealed class BankQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion

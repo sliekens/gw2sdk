@@ -3,14 +3,14 @@
 namespace GuildWars2.MapChests;
 
 [PublicAPI]
-public sealed class MapChestsQuery
+public sealed class MapChestsClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public MapChestsQuery(HttpClient http)
+    public MapChestsClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     #region v2/account/mapchests
@@ -21,7 +21,7 @@ public sealed class MapChestsQuery
     )
     {
         var request = new ReceivedMapChestsRequest { AccessToken = accessToken };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -33,7 +33,7 @@ public sealed class MapChestsQuery
     )
     {
         MapChestsIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(MapChest Value, MessageContext Context)> GetMapChestById(
@@ -45,7 +45,7 @@ public sealed class MapChestsQuery
         {
             MissingMemberBehavior = MissingMemberBehavior.Error
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<MapChest> Value, MessageContext Context)> GetMapChestsByIds(
@@ -58,7 +58,7 @@ public sealed class MapChestsQuery
         {
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<MapChest> Value, MessageContext Context)> GetMapChestsByPage(
@@ -74,7 +74,7 @@ public sealed class MapChestsQuery
             MissingMemberBehavior = missingMemberBehavior
         };
 
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<MapChest> Value, MessageContext Context)> GetMapChests(
@@ -83,7 +83,7 @@ public sealed class MapChestsQuery
     )
     {
         MapChestsRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion

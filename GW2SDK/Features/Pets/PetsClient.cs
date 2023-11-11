@@ -3,14 +3,14 @@
 namespace GuildWars2.Pets;
 
 [PublicAPI]
-public sealed class PetsQuery
+public sealed class PetsClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public PetsQuery(HttpClient http)
+    public PetsClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     public Task<(HashSet<Pet> Value, MessageContext Context)> GetPets(
@@ -24,13 +24,13 @@ public sealed class PetsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetPetsIndex(CancellationToken cancellationToken = default)
     {
         PetsIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Pet Value, MessageContext Context)> GetPetById(
@@ -45,7 +45,7 @@ public sealed class PetsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Pet> Value, MessageContext Context)> GetPetsByIds(
@@ -60,7 +60,7 @@ public sealed class PetsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Pet> Value, MessageContext Context)> GetPetsByPage(
@@ -77,6 +77,6 @@ public sealed class PetsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 }

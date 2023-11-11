@@ -5,14 +5,14 @@ namespace GuildWars2.Hero.Builds;
 /// <summary>Query methods for build templates, skills, specializations, traits and builds in the build storage on the
 /// account.</summary>
 [PublicAPI]
-public sealed class BuildsQuery
+public sealed class BuildsClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public BuildsQuery(HttpClient http)
+    public BuildsClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     #region v2/account/buildstorage
@@ -28,7 +28,7 @@ public sealed class BuildsQuery
     )
     {
         StoredBuildNumbersRequest request = new() { AccessToken = accessToken };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves the build in the specified storage number on the account. This endpoint is only accessible with a
@@ -50,7 +50,7 @@ public sealed class BuildsQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves all builds in the build storage on the account. This endpoint is only accessible with a valid access
@@ -70,7 +70,7 @@ public sealed class BuildsQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves builds in the specified storage numbers on the account. This endpoint is only accessible with a
@@ -92,7 +92,7 @@ public sealed class BuildsQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/account/buildstorage
@@ -113,7 +113,7 @@ public sealed class BuildsQuery
     )
     {
         BuildNumbersRequest request = new(characterName) { AccessToken = accessToken };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves the specified build template of a character on the account. This endpoint is only accessible with a
@@ -137,7 +137,7 @@ public sealed class BuildsQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves all build templates of a character on the account. This endpoint is only accessible with a valid
@@ -159,7 +159,7 @@ public sealed class BuildsQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves the currently active build template of a character on the account. This endpoint is only accessible
@@ -182,7 +182,7 @@ public sealed class BuildsQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/characters/:id/buildtabs
@@ -205,7 +205,7 @@ public sealed class BuildsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves the IDs of all skills.</summary>
@@ -214,7 +214,7 @@ public sealed class BuildsQuery
     public Task<(HashSet<int> Value, MessageContext Context)> GetSkillsIndex(CancellationToken cancellationToken = default)
     {
         SkillsIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves a skill by its ID.</summary>
@@ -235,7 +235,7 @@ public sealed class BuildsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves skills by their IDs.</summary>
@@ -257,7 +257,7 @@ public sealed class BuildsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves a page of skills.</summary>
@@ -281,7 +281,7 @@ public sealed class BuildsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/skills
@@ -304,7 +304,7 @@ public sealed class BuildsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves the IDs of all specializations.</summary>
@@ -315,7 +315,7 @@ public sealed class BuildsQuery
     )
     {
         SpecializationsIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves a specialization by its ID.</summary>
@@ -336,7 +336,7 @@ public sealed class BuildsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves specializations by their IDs.</summary>
@@ -358,7 +358,7 @@ public sealed class BuildsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/specializations
@@ -381,7 +381,7 @@ public sealed class BuildsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves the IDs of all traits.</summary>
@@ -390,7 +390,7 @@ public sealed class BuildsQuery
     public Task<(HashSet<int> Value, MessageContext Context)> GetTraitsIndex(CancellationToken cancellationToken = default)
     {
         TraitsIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves a trait by its ID.</summary>
@@ -411,7 +411,7 @@ public sealed class BuildsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves traits by their IDs.</summary>
@@ -433,7 +433,7 @@ public sealed class BuildsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves a page of traits.</summary>
@@ -457,7 +457,7 @@ public sealed class BuildsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/traits

@@ -3,14 +3,14 @@
 namespace GuildWars2.Quaggans;
 
 [PublicAPI]
-public sealed class QuaggansQuery
+public sealed class QuaggansClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public QuaggansQuery(HttpClient http)
+    public QuaggansClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     public Task<(HashSet<Quaggan> Value, MessageContext Context)> GetQuaggans(
@@ -19,7 +19,7 @@ public sealed class QuaggansQuery
     )
     {
         QuaggansRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<string> Value, MessageContext Context)> GetQuaggansIndex(
@@ -27,7 +27,7 @@ public sealed class QuaggansQuery
     )
     {
         QuaggansIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Quaggan Value, MessageContext Context)> GetQuagganById(
@@ -40,7 +40,7 @@ public sealed class QuaggansQuery
         {
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Quaggan> Value, MessageContext Context)> GetQuaggansByIds(
@@ -51,7 +51,7 @@ public sealed class QuaggansQuery
     {
         QuaggansByIdsRequest request =
             new(quagganIds) { MissingMemberBehavior = missingMemberBehavior };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Quaggan> Value, MessageContext Context)> GetQuaggansByPage(
@@ -66,6 +66,6 @@ public sealed class QuaggansQuery
             PageSize = pageSize,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 }

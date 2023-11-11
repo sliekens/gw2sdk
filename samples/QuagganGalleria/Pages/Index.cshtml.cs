@@ -21,9 +21,9 @@ public class IndexModel : PageModel
 {
     private readonly ILogger<IndexModel> logger;
 
-    private readonly QuaggansQuery quaggans;
+    private readonly QuaggansClient quaggans;
 
-    public IndexModel(ILogger<IndexModel> logger, QuaggansQuery quaggans)
+    public IndexModel(ILogger<IndexModel> logger, QuaggansClient quaggans)
     {
         this.logger = logger;
         this.quaggans = quaggans;

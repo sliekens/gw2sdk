@@ -25,39 +25,39 @@ public sealed class HeroClient
         this.httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    /// <inheritdoc cref="AccountQuery" />
-    public AccountQuery Account => new(httpClient);
+    /// <inheritdoc cref="AccountClient" />
+    public AccountClient Account => new(httpClient);
 
-    /// <inheritdoc cref="AchievementsQuery" />
-    public AchievementsQuery Achievements => new(httpClient);
+    /// <inheritdoc cref="AchievementsClient" />
+    public AchievementsClient Achievements => new(httpClient);
 
-    /// <inheritdoc cref="BankQuery" />
-    public BankQuery Bank => new(httpClient);
+    /// <inheritdoc cref="BankClient" />
+    public BankClient Bank => new(httpClient);
 
-    /// <inheritdoc cref="BuildsQuery" />
-    public BuildsQuery Builds => new(httpClient);
+    /// <inheritdoc cref="BuildsClient" />
+    public BuildsClient Builds => new(httpClient);
 
-    /// <inheritdoc cref="CraftingQuery" />
-    public CraftingQuery Crafting => new(httpClient);
+    /// <inheritdoc cref="CraftingClient" />
+    public CraftingClient Crafting => new(httpClient);
 
-    /// <inheritdoc cref="EmotesQuery" />
-    public EmotesQuery Emotes => new(httpClient);
+    /// <inheritdoc cref="EmotesClient" />
+    public EmotesClient Emotes => new(httpClient);
 
     /// <inheritdoc cref="EquipmentClient" />
     public EquipmentClient Equipment=> new(httpClient);
 
-    /// <inheritdoc cref="InventoryQuery" />
-    public InventoryQuery Inventory => new(httpClient);
+    /// <inheritdoc cref="InventoryClient" />
+    public InventoryClient Inventory => new(httpClient);
 
-    /// <inheritdoc cref="MasteriesQuery" />
-    public MasteriesQuery Masteries => new(httpClient);
+    /// <inheritdoc cref="MasteriesClient" />
+    public MasteriesClient Masteries => new(httpClient);
 
     /// <inheritdoc cref="StoryJournal" />
     public StoryJournalClient StoryJournal => new(httpClient);
 
-    /// <inheritdoc cref="TrainingQuery" />
-    public TrainingQuery Training => new(httpClient);
+    /// <inheritdoc cref="TrainingClient" />
+    public TrainingClient Training => new(httpClient);
 
-    /// <inheritdoc cref="WalletQuery" />
-    public WalletQuery Wallet => new(httpClient);
+    /// <inheritdoc cref="WalletClient" />
+    public WalletClient Wallet => new(httpClient);
 }

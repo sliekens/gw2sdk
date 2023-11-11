@@ -3,14 +3,14 @@
 namespace GuildWars2.Worlds;
 
 [PublicAPI]
-public sealed class WorldsQuery
+public sealed class WorldsClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public WorldsQuery(HttpClient http)
+    public WorldsClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     #region v2/worlds
@@ -26,13 +26,13 @@ public sealed class WorldsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetWorldsIndex(CancellationToken cancellationToken = default)
     {
         WorldsIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(World Value, MessageContext Context)> GetWorldById(
@@ -47,7 +47,7 @@ public sealed class WorldsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<World> Value, MessageContext Context)> GetWorldsByIds(
@@ -62,7 +62,7 @@ public sealed class WorldsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<World> Value, MessageContext Context)> GetWorldsByPage(
@@ -79,7 +79,7 @@ public sealed class WorldsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion

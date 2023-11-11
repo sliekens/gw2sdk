@@ -37,69 +37,69 @@ public sealed class Gw2Client
         this.httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    /// <inheritdoc cref="CommerceQuery" />
-    public CommerceQuery Commerce => new(httpClient);
+    /// <inheritdoc cref="CommerceClient" />
+    public CommerceClient Commerce => new(httpClient);
 
-    /// <inheritdoc cref="DungeonsQuery" />
-    public DungeonsQuery Dungeons => new(httpClient);
+    /// <inheritdoc cref="DungeonsClient" />
+    public DungeonsClient Dungeons => new(httpClient);
 
-    /// <inheritdoc cref="FilesQuery" />
-    public FilesQuery Files => new(httpClient);
+    /// <inheritdoc cref="FilesClient" />
+    public FilesClient Files => new(httpClient);
 
-    /// <inheritdoc cref="GuildsQuery" />
-    public GuildsQuery Guilds => new(httpClient);
+    /// <inheritdoc cref="GuildsClient" />
+    public GuildsClient Guilds => new(httpClient);
 
     /// <inheritdoc cref="HeroClient" />
     public HeroClient Hero => new(httpClient);
 
-    /// <inheritdoc cref="HomeQuery" />
-    public HomeQuery Home => new(httpClient);
+    /// <inheritdoc cref="HomeClient" />
+    public HomeClient Home => new(httpClient);
 
-    /// <inheritdoc cref="ItemsQuery" />
-    public ItemsQuery Items => new(httpClient);
+    /// <inheritdoc cref="ItemsClient" />
+    public ItemsClient Items => new(httpClient);
 
-    /// <inheritdoc cref="ItemStatsQuery" />
-    public ItemStatsQuery ItemStats => new(httpClient);
+    /// <inheritdoc cref="ItemStatsClient" />
+    public ItemStatsClient ItemStats => new(httpClient);
 
-    /// <inheritdoc cref="LegendsQuery" />
-    public LegendsQuery Legends => new(httpClient);
+    /// <inheritdoc cref="LegendsClient" />
+    public LegendsClient Legends => new(httpClient);
 
-    /// <inheritdoc cref="MapChestsQuery" />
-    public MapChestsQuery MapChests => new(httpClient);
+    /// <inheritdoc cref="MapChestsClient" />
+    public MapChestsClient MapChests => new(httpClient);
 
-    /// <inheritdoc cref="MapsQuery" />
-    public MapsQuery Maps => new(httpClient);
+    /// <inheritdoc cref="ExplorationClient" />
+    public ExplorationClient Exploration => new(httpClient);
 
     /// <inheritdoc cref="MetadataQuery" />
     public MetadataQuery Metadata => new(httpClient);
 
-    /// <inheritdoc cref="PetsQuery" />
-    public PetsQuery Pets => new(httpClient);
+    /// <inheritdoc cref="PetsClient" />
+    public PetsClient Pets => new(httpClient);
 
-    /// <inheritdoc cref="PvpQuery" />
-    public PvpQuery Pvp => new(httpClient);
+    /// <inheritdoc cref="PvpClient" />
+    public PvpClient Pvp => new(httpClient);
 
-    /// <inheritdoc cref="QuaggansQuery" />
-    public QuaggansQuery Quaggans => new(httpClient);
+    /// <inheritdoc cref="QuaggansClient" />
+    public QuaggansClient Quaggans => new(httpClient);
 
-    /// <inheritdoc cref="RacesQuery" />
-    public RacesQuery Races => new(httpClient);
+    /// <inheritdoc cref="RacesClient" />
+    public RacesClient Races => new(httpClient);
 
-    /// <inheritdoc cref="RaidsQuery" />
-    public RaidsQuery Raids => new(httpClient);
+    /// <inheritdoc cref="RaidsClient" />
+    public RaidsClient Raids => new(httpClient);
 
-    /// <inheritdoc cref="SuperAdventureBoxQuery" />
-    public SuperAdventureBoxQuery SuperAdventureBox => new(httpClient);
+    /// <inheritdoc cref="SuperAdventureBoxClient" />
+    public SuperAdventureBoxClient SuperAdventureBox => new(httpClient);
 
     /// <inheritdoc cref="TokenClient" />
     public TokenClient Tokens => new(httpClient);
 
-    /// <inheritdoc cref="WorldBossesQuery" />
-    public WorldBossesQuery WorldBosses => new(httpClient);
+    /// <inheritdoc cref="WorldBossesClient" />
+    public WorldBossesClient WorldBosses => new(httpClient);
 
-    /// <inheritdoc cref="WorldsQuery" />
-    public WorldsQuery Worlds => new(httpClient);
+    /// <inheritdoc cref="WorldsClient" />
+    public WorldsClient Worlds => new(httpClient);
 
-    /// <inheritdoc cref="WvwQuery" />
-    public WvwQuery Wvw => new(httpClient);
+    /// <inheritdoc cref="WvwClient" />
+    public WvwClient Wvw => new(httpClient);
 }

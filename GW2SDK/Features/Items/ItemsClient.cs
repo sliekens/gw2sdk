@@ -4,14 +4,14 @@ using GuildWars2.Items.Http;
 namespace GuildWars2.Items;
 
 [PublicAPI]
-public sealed class ItemsQuery
+public sealed class ItemsClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public ItemsQuery(HttpClient http)
+    public ItemsClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetItemsIndex(
@@ -19,7 +19,7 @@ public sealed class ItemsQuery
     )
     {
         var request = new ItemsIndexRequest();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Item Value, MessageContext Context)> GetItemById(
@@ -34,7 +34,7 @@ public sealed class ItemsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Item> Value, MessageContext Context)> GetItemsByIds(
@@ -49,7 +49,7 @@ public sealed class ItemsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Item> Value, MessageContext Context)> GetItemsByPage(
@@ -67,7 +67,7 @@ public sealed class ItemsQuery
             MissingMemberBehavior = missingMemberBehavior
         };
 
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public IAsyncEnumerable<(Item Value, MessageContext Context)> GetItemsBulk(

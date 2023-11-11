@@ -15,7 +15,7 @@ public class PointOfInterestById
         const int mapId = 26;
         const int pointOfInterestId = 554;
 
-        var (actual, _) = await sut.Maps.GetPointOfInterestById(
+        var (actual, _) = await sut.Exploration.GetPointOfInterestById(
             continentId,
             floorId,
             regionId,

@@ -7,12 +7,12 @@ namespace GuildWars2.Hero.StoryJournal;
 [PublicAPI]
 public sealed class StoryJournalClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public StoryJournalClient(HttpClient http)
+    public StoryJournalClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     #region v2/characters/:id/backstory
@@ -29,7 +29,7 @@ public sealed class StoryJournalClient
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -47,7 +47,7 @@ public sealed class StoryJournalClient
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetBackstoryQuestionsIndex(
@@ -55,7 +55,7 @@ public sealed class StoryJournalClient
     )
     {
         BackstoryQuestionsIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(BackstoryQuestion Value, MessageContext Context)> GetBackstoryQuestionById(
@@ -70,7 +70,7 @@ public sealed class StoryJournalClient
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<BackstoryQuestion> Value, MessageContext Context)> GetBackstoryQuestionsByIds(
@@ -85,7 +85,7 @@ public sealed class StoryJournalClient
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<BackstoryQuestion> Value, MessageContext Context)> GetBackstoryQuestionsByPage(
@@ -102,7 +102,7 @@ public sealed class StoryJournalClient
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -120,7 +120,7 @@ public sealed class StoryJournalClient
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<string> Value, MessageContext Context)> GetBackstoryAnswersIndex(
@@ -128,7 +128,7 @@ public sealed class StoryJournalClient
     )
     {
         BackstoryAnswersIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(BackstoryAnswer Value, MessageContext Context)> GetBackstoryAnswerById(
@@ -143,7 +143,7 @@ public sealed class StoryJournalClient
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<BackstoryAnswer> Value, MessageContext Context)> GetBackstoryAnswersByIds(
@@ -158,7 +158,7 @@ public sealed class StoryJournalClient
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<BackstoryAnswer> Value, MessageContext Context)> GetBackstoryAnswersByPage(
@@ -175,7 +175,7 @@ public sealed class StoryJournalClient
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -193,7 +193,7 @@ public sealed class StoryJournalClient
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetStoriesIndex(
@@ -201,7 +201,7 @@ public sealed class StoryJournalClient
     )
     {
         StoriesIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Story Value, MessageContext Context)> GetStoryById(
@@ -216,7 +216,7 @@ public sealed class StoryJournalClient
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Story> Value, MessageContext Context)> GetStoriesByIds(
@@ -231,7 +231,7 @@ public sealed class StoryJournalClient
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Story> Value, MessageContext Context)> GetStoriesByPage(
@@ -248,7 +248,7 @@ public sealed class StoryJournalClient
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -266,7 +266,7 @@ public sealed class StoryJournalClient
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<string> Value, MessageContext Context)> GetSeasonsIndex(
@@ -274,7 +274,7 @@ public sealed class StoryJournalClient
     )
     {
         SeasonsIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Season Value, MessageContext Context)> GetSeasonById(
@@ -289,7 +289,7 @@ public sealed class StoryJournalClient
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Season> Value, MessageContext Context)> GetSeasonsByIds(
@@ -304,7 +304,7 @@ public sealed class StoryJournalClient
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Season> Value, MessageContext Context)> GetSeasonsByPage(
@@ -321,7 +321,7 @@ public sealed class StoryJournalClient
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -340,7 +340,7 @@ public sealed class StoryJournalClient
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/characters/:id/quests
@@ -358,13 +358,13 @@ public sealed class StoryJournalClient
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetQuestsIndex(CancellationToken cancellationToken = default)
     {
         QuestsIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Quest Value, MessageContext Context)> GetQuestById(
@@ -379,7 +379,7 @@ public sealed class StoryJournalClient
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Quest> Value, MessageContext Context)> GetQuestsByIds(
@@ -394,7 +394,7 @@ public sealed class StoryJournalClient
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Quest> Value, MessageContext Context)> GetQuestsByPage(
@@ -411,7 +411,7 @@ public sealed class StoryJournalClient
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/quests

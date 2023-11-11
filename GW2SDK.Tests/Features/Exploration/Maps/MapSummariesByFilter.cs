@@ -16,7 +16,7 @@ public class MapSummariesByFilter
             18
         };
 
-        var (actual, context) = await sut.Maps.MapSummariesByIds(ids);
+        var (actual, context) = await sut.Exploration.MapSummariesByIds(ids);
 
         Assert.Equal(ids.Count, actual.Count);
         Assert.NotNull(context.ResultContext);

@@ -12,7 +12,7 @@ public class FloorsByPage
 
         const int continentId = 1;
 
-        var (actual, context) = await sut.Maps.GetFloorsByPage(continentId, 0, 3);
+        var (actual, context) = await sut.Exploration.GetFloorsByPage(continentId, 0, 3);
 
         Assert.Equal(3, actual.Count);
         Assert.NotNull(context.PageContext);

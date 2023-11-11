@@ -11,7 +11,7 @@ public class FloorsIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Maps.GetFloorsIndex(continentId);
+        var (actual, context) = await sut.Exploration.GetFloorsIndex(continentId);
 
         Assert.NotEmpty(actual);
         Assert.NotNull(context.ResultContext);

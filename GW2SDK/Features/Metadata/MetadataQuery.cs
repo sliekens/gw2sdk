@@ -6,12 +6,12 @@ namespace GuildWars2.Metadata;
 [PublicAPI]
 public sealed class MetadataQuery
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public MetadataQuery(HttpClient http)
+    public MetadataQuery(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     public Task<(ApiVersion Value, MessageContext Context)> GetApiVersion(
@@ -21,7 +21,7 @@ public sealed class MetadataQuery
     )
     {
         ApiVersionRequest request = new(version) { MissingMemberBehavior = missingMemberBehavior };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     [SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Public API")]
@@ -38,6 +38,6 @@ public sealed class MetadataQuery
         // So in a sense, this is the "official" way to find the current build
         var request = new AssetCdnBuildRequest();
 
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 }

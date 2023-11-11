@@ -11,7 +11,7 @@ public class RegionsIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Maps.GetRegionsIndex(continentId, floorId);
+        var (actual, context) = await sut.Exploration.GetRegionsIndex(continentId, floorId);
 
         Assert.NotEmpty(actual);
         Assert.NotNull(context.ResultContext);

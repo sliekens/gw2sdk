@@ -13,14 +13,14 @@ using GuildWars2.Guilds.Upgrades;
 namespace GuildWars2.Guilds;
 
 [PublicAPI]
-public sealed class GuildsQuery
+public sealed class GuildsClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public GuildsQuery(HttpClient http)
+    public GuildsClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     #region v2/guild/search
@@ -31,7 +31,7 @@ public sealed class GuildsQuery
     )
     {
         GuildsByNameRequest request = new(name);
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/guild/search
@@ -50,7 +50,7 @@ public sealed class GuildsQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/guild/:id
@@ -69,7 +69,7 @@ public sealed class GuildsQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/guild/:id/log
@@ -88,7 +88,7 @@ public sealed class GuildsQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/guild/:id/ranks
@@ -107,7 +107,7 @@ public sealed class GuildsQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/guild/:id/members
@@ -126,7 +126,7 @@ public sealed class GuildsQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/guild/:id/teams
@@ -145,7 +145,7 @@ public sealed class GuildsQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/guild/:id/treasury
@@ -164,7 +164,7 @@ public sealed class GuildsQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/guild/:id/stash
@@ -183,7 +183,7 @@ public sealed class GuildsQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/guild/:id/storage
@@ -197,7 +197,7 @@ public sealed class GuildsQuery
     )
     {
         CompletedGuildUpgradesRequest request = new(guildId) { AccessToken = accessToken };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/guild/:id/upgrades
@@ -210,7 +210,7 @@ public sealed class GuildsQuery
     )
     {
         ForegroundEmblemsRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetForegroundEmblemsIndex(
@@ -218,7 +218,7 @@ public sealed class GuildsQuery
     )
     {
         var request = new ForegroundEmblemsIndexRequest();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Emblem Value, MessageContext Context)> GetForegroundEmblemById(
@@ -229,7 +229,7 @@ public sealed class GuildsQuery
     {
         ForegroundEmblemByIdRequest request =
             new(foregroundEmblemId) { MissingMemberBehavior = missingMemberBehavior };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Emblem> Value, MessageContext Context)> GetForegroundEmblemsByIds(
@@ -240,7 +240,7 @@ public sealed class GuildsQuery
     {
         ForegroundEmblemsByIdsRequest request =
             new(foregroundEmblemIds) { MissingMemberBehavior = missingMemberBehavior };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Emblem> Value, MessageContext Context)> GetForegroundEmblemsByPage(
@@ -255,7 +255,7 @@ public sealed class GuildsQuery
             PageSize = pageSize,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -268,7 +268,7 @@ public sealed class GuildsQuery
     )
     {
         BackgroundEmblemsRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetBackgroundEmblemsIndex(
@@ -276,7 +276,7 @@ public sealed class GuildsQuery
     )
     {
         var request = new BackgroundEmblemsIndexRequest();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Emblem Value, MessageContext Context)> GetBackgroundEmblemById(
@@ -287,7 +287,7 @@ public sealed class GuildsQuery
     {
         BackgroundEmblemByIdRequest request =
             new(backgroundEmblemId) { MissingMemberBehavior = missingMemberBehavior };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Emblem> Value, MessageContext Context)> GetBackgroundEmblemsByIds(
@@ -298,7 +298,7 @@ public sealed class GuildsQuery
     {
         BackgroundEmblemsByIdsRequest request =
             new(backgroundEmblemIds) { MissingMemberBehavior = missingMemberBehavior };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Emblem> Value, MessageContext Context)> GetBackgroundEmblemsByPage(
@@ -313,7 +313,7 @@ public sealed class GuildsQuery
             PageSize = pageSize,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -332,7 +332,7 @@ public sealed class GuildsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<string> Value, MessageContext Context)> GetGuildPermissionsIndex(
@@ -340,7 +340,7 @@ public sealed class GuildsQuery
     )
     {
         GuildPermissionsIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(GuildPermissionSummary Value, MessageContext Context)> GetGuildPermissionById(
@@ -355,7 +355,7 @@ public sealed class GuildsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<GuildPermissionSummary> Value, MessageContext Context)>
@@ -371,7 +371,7 @@ public sealed class GuildsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<GuildPermissionSummary> Value, MessageContext Context)>
@@ -389,7 +389,7 @@ public sealed class GuildsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/guild/permissions
@@ -407,7 +407,7 @@ public sealed class GuildsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetGuildUpgradesIndex(
@@ -415,7 +415,7 @@ public sealed class GuildsQuery
     )
     {
         GuildUpgradesIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(GuildUpgrade Value, MessageContext Context)> GetGuildUpgradeById(
@@ -430,7 +430,7 @@ public sealed class GuildsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<GuildUpgrade> Value, MessageContext Context)> GetGuildUpgradesByIds(
@@ -445,7 +445,7 @@ public sealed class GuildsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<GuildUpgrade> Value, MessageContext Context)> GetGuildUpgradesByPage(
@@ -462,7 +462,7 @@ public sealed class GuildsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/guild/upgrades

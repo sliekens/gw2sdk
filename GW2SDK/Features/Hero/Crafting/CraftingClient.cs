@@ -5,14 +5,14 @@ namespace GuildWars2.Hero.Crafting;
 
 /// <summary>Provides recipe search and crafting-related services.</summary>
 [PublicAPI]
-public sealed class CraftingQuery
+public sealed class CraftingClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public CraftingQuery(HttpClient http)
+    public CraftingClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     #region v2/account/recipes
@@ -25,7 +25,7 @@ public sealed class CraftingQuery
     )
     {
         UnlockedRecipesRequest request = new() { AccessToken = accessToken };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -46,7 +46,7 @@ public sealed class CraftingQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -58,7 +58,7 @@ public sealed class CraftingQuery
     )
     {
         DailyCraftingRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -71,7 +71,7 @@ public sealed class CraftingQuery
     )
     {
         DailyCraftingOnCooldownRequest request = new() { AccessToken = accessToken };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -91,7 +91,7 @@ public sealed class CraftingQuery
             MissingMemberBehavior = missingMemberBehavior,
             AccessToken = accessToken
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -103,7 +103,7 @@ public sealed class CraftingQuery
     )
     {
         RecipesIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Recipe Value, MessageContext Context)> GetRecipeById(
@@ -113,7 +113,7 @@ public sealed class CraftingQuery
     )
     {
         RecipeByIdRequest request = new(recipeId) { MissingMemberBehavior = missingMemberBehavior };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Recipe> Value, MessageContext Context)> GetRecipesByIds(
@@ -126,7 +126,7 @@ public sealed class CraftingQuery
         {
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Recipe> Value, MessageContext Context)> GetRecipesByPage(
@@ -141,7 +141,7 @@ public sealed class CraftingQuery
             PageSize = pageSize,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public IAsyncEnumerable<(Recipe Value, MessageContext Context)> GetRecipesBulk(
@@ -208,7 +208,7 @@ public sealed class CraftingQuery
     )
     {
         RecipesIndexByIngredientItemIdRequest request = new(ingredientItemId);
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Recipe> Value, MessageContext Context)> GetRecipesByIngredientItemId(
@@ -221,7 +221,7 @@ public sealed class CraftingQuery
         {
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Recipe> Value, MessageContext Context)> GetRecipesByIngredientItemIdByPage(
@@ -237,7 +237,7 @@ public sealed class CraftingQuery
             PageSize = pageSize,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetRecipesIndexByOutputItemId(
@@ -246,7 +246,7 @@ public sealed class CraftingQuery
     )
     {
         RecipesIndexByOutputItemIdRequest request = new(outputItemId);
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Recipe> Value, MessageContext Context)> GetRecipesByOutputItemId(
@@ -259,7 +259,7 @@ public sealed class CraftingQuery
         {
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Recipe> Value, MessageContext Context)> GetRecipesByOutputItemIdByPage(
@@ -275,7 +275,7 @@ public sealed class CraftingQuery
             PageSize = pageSize,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion

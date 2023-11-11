@@ -12,7 +12,7 @@ public class MapsIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Maps.GetMapsIndex(continentId, floorId, regionId);
+        var (actual, context) = await sut.Exploration.GetMapsIndex(continentId, floorId, regionId);
 
         Assert.NotEmpty(actual);
         Assert.NotNull(context.ResultContext);

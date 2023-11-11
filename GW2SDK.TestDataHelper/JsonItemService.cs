@@ -25,7 +25,7 @@ public class JsonItemService
 
     private async Task<HashSet<int>> GetItemsIndex()
     {
-        var items = new ItemsQuery(http);
+        var items = new ItemsClient(http);
         var (ids, _) = await items.GetItemsIndex();
         return ids;
     }

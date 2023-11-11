@@ -3,14 +3,14 @@
 namespace GuildWars2.Files;
 
 [PublicAPI]
-public sealed class FilesQuery
+public sealed class FilesClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public FilesQuery(HttpClient http)
+    public FilesClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     public Task<(HashSet<Asset> Value, MessageContext Context)> GetFiles(
@@ -19,7 +19,7 @@ public sealed class FilesQuery
     )
     {
         FilesRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<string> Value, MessageContext Context)> GetFilesIndex(
@@ -27,7 +27,7 @@ public sealed class FilesQuery
     )
     {
         FilesIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Asset Value, MessageContext Context)> GetFileById(
@@ -37,7 +37,7 @@ public sealed class FilesQuery
     )
     {
         FileByIdRequest request = new(fileId) { MissingMemberBehavior = missingMemberBehavior };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Asset> Value, MessageContext Context)> GetFilesByIds(
@@ -47,7 +47,7 @@ public sealed class FilesQuery
     )
     {
         FilesByIdsRequest request = new(fileIds) { MissingMemberBehavior = missingMemberBehavior };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Asset> Value, MessageContext Context)> GetFilesByPage(
@@ -63,6 +63,6 @@ public sealed class FilesQuery
             PageSize = pageSize,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 }

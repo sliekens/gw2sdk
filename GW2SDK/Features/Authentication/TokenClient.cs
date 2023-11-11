@@ -8,10 +8,10 @@ public sealed class TokenClient
 {
     private readonly HttpClient httpClient;
 
-    public TokenClient(HttpClient http)
+    public TokenClient(HttpClient httpClient)
     {
-        this.httpClient = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     /// <summary>Retrieves information about the current access token.</summary>

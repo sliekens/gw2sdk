@@ -4,14 +4,14 @@ namespace GuildWars2.Hero.Inventories;
 
 /// <summary>Query methods for bags and the shared inventory.</summary>
 [PublicAPI]
-public sealed class InventoryQuery
+public sealed class InventoryClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public InventoryQuery(HttpClient http)
+    public InventoryClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     #region v2/account/inventory
@@ -32,7 +32,7 @@ public sealed class InventoryQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/account/inventory
@@ -57,7 +57,7 @@ public sealed class InventoryQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/characters/:id/inventory

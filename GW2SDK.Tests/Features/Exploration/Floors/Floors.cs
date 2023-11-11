@@ -12,7 +12,7 @@ public class Floors
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Maps.GetFloors(continentId);
+        var (actual, context) = await sut.Exploration.GetFloors(continentId);
 
         Assert.NotEmpty(actual);
         Assert.NotNull(context.ResultContext);
