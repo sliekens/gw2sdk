@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using GuildWars2.Json;
 
-namespace GuildWars2.Hero.Achievements;
+namespace GuildWars2.Hero.Achievements.Bits;
 
 internal static class AchievementItemBitJson
 {

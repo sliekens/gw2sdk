@@ -1,11 +1,11 @@
 ﻿using System.Text.Json;
 using GuildWars2.Json;
 
-namespace GuildWars2.Hero.Achievements;
+namespace GuildWars2.Hero.Achievements.Bits;
 
-internal static class TitleRewardJson
+internal static class AchievementMinipetBitJson
 {
-    public static TitleReward GetTitleReward(
+    public static AchievementMinipetBit GetAchievementMinipetBit(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -15,7 +15,7 @@ internal static class TitleRewardJson
         {
             if (member.Name == "type")
             {
-                if (!member.Value.ValueEquals("Title"))
+                if (!member.Value.ValueEquals("Minipet"))
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
@@ -32,6 +32,6 @@ internal static class TitleRewardJson
             }
         }
 
-        return new TitleReward { Id = id.Map(value => value.GetInt32()) };
+        return new AchievementMinipetBit { Id = id.Map(value => value.GetInt32()) };
     }
 }

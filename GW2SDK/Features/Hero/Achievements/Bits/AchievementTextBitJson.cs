@@ -1,30 +1,30 @@
 ﻿using System.Text.Json;
 using GuildWars2.Json;
 
-namespace GuildWars2.Hero.Achievements;
+namespace GuildWars2.Hero.Achievements.Bits;
 
-internal static class CoinsRewardJson
+internal static class AchievementTextBitJson
 {
-    public static CoinsReward GetCoinsReward(
+    public static AchievementTextBit GetAchievementTextBit(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember coins = "count";
+        RequiredMember text = "text";
         foreach (var member in json.EnumerateObject())
         {
             if (member.Name == "type")
             {
-                if (!member.Value.ValueEquals("Coins"))
+                if (!member.Value.ValueEquals("Text"))
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
                     );
                 }
             }
-            else if (member.Name == coins.Name)
+            else if (member.Name == text.Name)
             {
-                coins = member;
+                text = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -32,6 +32,6 @@ internal static class CoinsRewardJson
             }
         }
 
-        return new CoinsReward { Coins = coins.Map(value => value.GetInt32()) };
+        return new AchievementTextBit { Text = text.Map(value => value.GetStringRequired()) };
     }
 }

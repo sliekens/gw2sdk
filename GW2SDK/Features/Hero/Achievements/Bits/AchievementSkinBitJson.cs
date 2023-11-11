@@ -1,22 +1,21 @@
 ﻿using System.Text.Json;
 using GuildWars2.Json;
 
-namespace GuildWars2.Hero.Achievements;
+namespace GuildWars2.Hero.Achievements.Bits;
 
-internal static class MasteryPointRewardJson
+internal static class AchievementSkinBitJson
 {
-    public static MasteryPointReward GetMasteryPointReward(
+    public static AchievementSkinBit GetAchievementSkinBit(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
     {
         RequiredMember id = "id";
-        RequiredMember region = "region";
         foreach (var member in json.EnumerateObject())
         {
             if (member.Name == "type")
             {
-                if (!member.Value.ValueEquals("Mastery"))
+                if (!member.Value.ValueEquals("Skin"))
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
@@ -27,20 +26,12 @@ internal static class MasteryPointRewardJson
             {
                 id = member;
             }
-            else if (member.Name == region.Name)
-            {
-                region = member;
-            }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
         }
 
-        return new MasteryPointReward
-        {
-            Id = id.Map(value => value.GetInt32()),
-            Region = region.Map(value => value.GetEnum<MasteryRegionName>(missingMemberBehavior))
-        };
+        return new AchievementSkinBit { Id = id.Map(value => value.GetInt32()) };
     }
 }

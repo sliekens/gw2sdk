@@ -1,11 +1,11 @@
 ﻿using System.Text.Json;
 using GuildWars2.Json;
 
-namespace GuildWars2.Hero.Achievements;
+namespace GuildWars2.Hero.Achievements.Rewards;
 
-internal static class AchievementSkinBitJson
+internal static class TitleRewardJson
 {
-    public static AchievementSkinBit GetAchievementSkinBit(
+    public static TitleReward GetTitleReward(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -15,7 +15,7 @@ internal static class AchievementSkinBitJson
         {
             if (member.Name == "type")
             {
-                if (!member.Value.ValueEquals("Skin"))
+                if (!member.Value.ValueEquals("Title"))
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
@@ -32,6 +32,6 @@ internal static class AchievementSkinBitJson
             }
         }
 
-        return new AchievementSkinBit { Id = id.Map(value => value.GetInt32()) };
+        return new TitleReward { Id = id.Map(value => value.GetInt32()) };
     }
 }

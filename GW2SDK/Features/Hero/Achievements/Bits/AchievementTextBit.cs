@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Achievements;
+﻿namespace GuildWars2.Hero.Achievements.Bits;
 
 /// <summary>Used by regular (not collection) achievements to describe something that needs to be done.</summary>
 [PublicAPI]

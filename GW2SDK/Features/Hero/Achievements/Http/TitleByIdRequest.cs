@@ -41,7 +41,8 @@ internal sealed class TitleByIdRequest : IHttpRequest<Title>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetTitle(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }

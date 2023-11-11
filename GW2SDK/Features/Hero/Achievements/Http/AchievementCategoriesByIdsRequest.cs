@@ -4,8 +4,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Achievements.Http;
 
-internal sealed class
-    AchievementCategoriesByIdsRequest : IHttpRequest<HashSet<AchievementCategory>>
+internal sealed class AchievementCategoriesByIdsRequest : IHttpRequest<HashSet<AchievementCategory>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/achievements/categories") { AcceptEncoding = "gzip" };
@@ -43,8 +42,10 @@ internal sealed class
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetAchievementCategory(MissingMemberBehavior));
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
+        var value =
+            json.RootElement.GetSet(entry => entry.GetAchievementCategory(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }
 }

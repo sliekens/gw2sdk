@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Achievements;
+﻿namespace GuildWars2.Hero.Achievements.Bits;
 
 /// <summary>Used in collection achievements to describe a skin that needs to be obtained.</summary>
 [PublicAPI]

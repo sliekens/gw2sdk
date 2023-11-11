@@ -47,8 +47,10 @@ internal sealed class
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetAchievementCategory(MissingMemberBehavior));
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
+        var value =
+            json.RootElement.GetSet(entry => entry.GetAchievementCategory(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }
 }

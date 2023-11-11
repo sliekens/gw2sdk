@@ -1,4 +1,7 @@
-﻿namespace GuildWars2.Hero.Achievements;
+﻿using GuildWars2.Hero.Achievements.Bits;
+using GuildWars2.Hero.Achievements.Rewards;
+
+namespace GuildWars2.Hero.Achievements;
 
 /// <summary>Information about an achievement.</summary>
 [PublicAPI]

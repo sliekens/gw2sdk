@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using GuildWars2.Hero.Achievements.Bits;
 
 namespace GuildWars2.Hero.Achievements;
 

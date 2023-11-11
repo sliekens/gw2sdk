@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Achievements;
+﻿namespace GuildWars2.Hero.Achievements.Rewards;
 
 /// <summary>A mastery point reward for completing an achievement.</summary>
 [PublicAPI]
