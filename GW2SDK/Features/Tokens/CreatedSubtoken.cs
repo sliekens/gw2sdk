@@ -1,8 +1,0 @@
-﻿namespace GuildWars2.Tokens;
-
-[PublicAPI]
-[DataTransferObject]
-public sealed record CreatedSubtoken
-{
-    public required string Subtoken { get; init; }
-}

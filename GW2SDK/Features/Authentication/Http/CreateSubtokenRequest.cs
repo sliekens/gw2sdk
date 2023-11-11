@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Http;
 
-namespace GuildWars2.Tokens.Http;
+namespace GuildWars2.Authentication.Http;
 
 internal sealed class CreateSubtokenRequest : IHttpRequest<CreatedSubtoken>
 {
@@ -20,7 +20,7 @@ internal sealed class CreateSubtokenRequest : IHttpRequest<CreatedSubtoken>
 
     public IReadOnlyCollection<Permission>? Permissions { get; init; }
 
-    public IReadOnlyCollection<string>? Urls { get; init; }
+    public IReadOnlyCollection<string>? AllowedUrls { get; init; }
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
@@ -30,7 +30,7 @@ internal sealed class CreateSubtokenRequest : IHttpRequest<CreatedSubtoken>
     )
     {
         QueryBuilder args = new();
-        if (Permissions is { Count: not 0 })
+        if (Permissions?.Count is not null and not 0)
         {
             args.Add("permissions", string.Join(",", Permissions).ToLowerInvariant());
         }
@@ -40,9 +40,9 @@ internal sealed class CreateSubtokenRequest : IHttpRequest<CreatedSubtoken>
             args.Add("expire", AbsoluteExpirationDate.Value.ToUniversalTime().ToString("s"));
         }
 
-        if (Urls is { Count: not 0 })
+        if (AllowedUrls?.Count is not null and not 0)
         {
-            args.Add("urls", string.Join(",", Urls));
+            args.Add("urls", string.Join(",", AllowedUrls));
         }
 
         args.Add("v", SchemaVersion.Recommended);
@@ -58,7 +58,8 @@ internal sealed class CreateSubtokenRequest : IHttpRequest<CreatedSubtoken>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetCreatedSubtoken(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }

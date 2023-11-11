@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Tokens;
+namespace GuildWars2.Tests.Features.Authentication;
 
 public class SubtokenInfo
 {
@@ -27,7 +27,7 @@ public class SubtokenInfo
             "/v2/characters/My Cool Character"
         };
 
-        var (createdSubtoken, context) = await sut.TokenProvider.CreateSubtoken(
+        var (createdSubtoken, context) = await sut.Tokens.CreateSubtoken(
             accessToken.Key,
             subtokenPermissions,
             expiresAt,
@@ -40,9 +40,9 @@ public class SubtokenInfo
         // I guess this is a clock synchronization problem, because adding a delay works
         await Task.Delay(3000);
 
-        var (actual, _) = await sut.TokenProvider.GetTokenInfo(createdSubtoken.Subtoken);
+        var (actual, _) = await sut.Tokens.GetTokenInfo(createdSubtoken.Subtoken);
 
-        var subtoken = Assert.IsType<GuildWars2.Tokens.SubtokenInfo>(actual);
+        var subtoken = Assert.IsType<GuildWars2.Authentication.SubtokenInfo>(actual);
 
         Assert.NotEmpty(subtoken.Id);
 

@@ -1,23 +1,15 @@
 ﻿using System.Text.Json;
 using GuildWars2.Json;
 
-namespace GuildWars2.Tokens;
+namespace GuildWars2.Authentication;
 
-internal static class TokenInfoJson
+internal static class ApiKeyInfoJson
 {
-    public static TokenInfo GetTokenInfo(
+    public static ApiKeyInfo GetApiKeyInfo(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        switch (json.GetProperty("type").GetString())
-        {
-            case "APIKey":
-                return json.GetApiKeyInfo(missingMemberBehavior);
-            case "Subtoken":
-                return json.GetSubtokenInfo(missingMemberBehavior);
-        }
-
         RequiredMember name = "name";
         RequiredMember id = "id";
         RequiredMember permissions = "permissions";
@@ -25,10 +17,10 @@ internal static class TokenInfoJson
         {
             if (member.Name == "type")
             {
-                if (missingMemberBehavior == MissingMemberBehavior.Error)
+                if (!member.Value.ValueEquals("APIKey"))
                 {
                     throw new InvalidOperationException(
-                        Strings.UnexpectedDiscriminator(member.Value.GetString())
+                        Strings.InvalidDiscriminator(member.Value.GetString())
                     );
                 }
             }
@@ -50,7 +42,7 @@ internal static class TokenInfoJson
             }
         }
 
-        return new TokenInfo
+        return new ApiKeyInfo
         {
             Id = id.Map(value => value.GetStringRequired()),
             Name = name.Map(value => value.GetStringRequired()),

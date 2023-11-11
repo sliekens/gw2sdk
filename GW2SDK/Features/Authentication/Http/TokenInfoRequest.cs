@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Http;
 
-namespace GuildWars2.Tokens.Http;
+namespace GuildWars2.Authentication.Http;
 
 internal sealed class TokenInfoRequest : IHttpRequest<TokenInfo>
 {

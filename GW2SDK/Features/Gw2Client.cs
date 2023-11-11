@@ -1,4 +1,5 @@
-﻿using GuildWars2.Commerce;
+﻿using GuildWars2.Authentication;
+using GuildWars2.Commerce;
 using GuildWars2.Dungeons;
 using GuildWars2.Exploration;
 using GuildWars2.Files;
@@ -16,7 +17,6 @@ using GuildWars2.Quaggans;
 using GuildWars2.Races;
 using GuildWars2.Raids;
 using GuildWars2.SuperAdventureBox;
-using GuildWars2.Tokens;
 using GuildWars2.WorldBosses;
 using GuildWars2.Worlds;
 using GuildWars2.Wvw;
@@ -85,11 +85,14 @@ public sealed class Gw2Client
     /// <inheritdoc cref="RacesQuery" />
     public RacesQuery Races => new(httpClient);
 
+    /// <inheritdoc cref="RaidsQuery" />
+    public RaidsQuery Raids => new(httpClient);
+
     /// <inheritdoc cref="SuperAdventureBoxQuery" />
     public SuperAdventureBoxQuery SuperAdventureBox => new(httpClient);
 
-    /// <inheritdoc cref="RaidsQuery" />
-    public RaidsQuery Raids => new(httpClient);
+    /// <inheritdoc cref="TokenClient" />
+    public TokenClient Tokens => new(httpClient);
 
     /// <inheritdoc cref="WorldBossesQuery" />
     public WorldBossesQuery WorldBosses => new(httpClient);
@@ -99,7 +102,4 @@ public sealed class Gw2Client
 
     /// <inheritdoc cref="WvwQuery" />
     public WvwQuery Wvw => new(httpClient);
-
-    /// <inheritdoc cref="TokenProvider" />
-    public TokenProvider TokenProvider => new(httpClient);
 }
