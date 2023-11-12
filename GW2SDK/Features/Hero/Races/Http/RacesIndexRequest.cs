@@ -1,7 +1,7 @@
 ﻿using GuildWars2.Http;
 using GuildWars2.Json;
 
-namespace GuildWars2.Races.Http;
+namespace GuildWars2.Hero.Races.Http;
 
 internal sealed class RacesIndexRequest : IHttpRequest<HashSet<string>>
 {

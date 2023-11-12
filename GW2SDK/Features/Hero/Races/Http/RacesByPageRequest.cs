@@ -1,22 +1,23 @@
 ﻿using GuildWars2.Http;
 using GuildWars2.Json;
 
-namespace GuildWars2.Races.Http;
+namespace GuildWars2.Hero.Races.Http;
 
-internal sealed class RacesByNamesRequest : IHttpRequest<HashSet<Race>>
+internal sealed class RacesByPageRequest : IHttpRequest<HashSet<Race>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/races")
     {
         AcceptEncoding = "gzip"
     };
 
-    public RacesByNamesRequest(IReadOnlyCollection<RaceName> raceIds)
+    public RacesByPageRequest(int pageIndex)
     {
-        Check.Collection(raceIds);
-        RaceIds = raceIds;
+        PageIndex = pageIndex;
     }
 
-    public IReadOnlyCollection<RaceName> RaceIds { get; }
+    public int PageIndex { get; }
+
+    public int? PageSize { get; init; }
 
     public Language? Language { get; init; }
 
@@ -27,22 +28,20 @@ internal sealed class RacesByNamesRequest : IHttpRequest<HashSet<Race>>
         CancellationToken cancellationToken
     )
     {
+        QueryBuilder search = new()
+        {
+            { "page", PageIndex },
+            { "v", SchemaVersion.Recommended }
+        };
+        if (PageSize.HasValue)
+        {
+            search.Add("page_size", PageSize.Value);
+        }
+
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = new QueryBuilder
-                    {
-                        {
-                            "ids", RaceIds.Select(
-#if NET
-                                id => Enum.GetName(id)!
-#else
-                                id => Enum.GetName(typeof(RaceName), id)!
-#endif
-                            )
-                        },
-                        { "v", SchemaVersion.Recommended }
-                    },
+                    Arguments = search,
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 HttpCompletionOption.ResponseHeadersRead,

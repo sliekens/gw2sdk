@@ -10,7 +10,6 @@ using GuildWars2.Metadata;
 using GuildWars2.Pve;
 using GuildWars2.Pvp;
 using GuildWars2.Quaggans;
-using GuildWars2.Races;
 using GuildWars2.Worlds;
 using GuildWars2.Wvw;
 
@@ -62,9 +61,6 @@ public sealed class Gw2Client
 
     /// <inheritdoc cref="QuaggansClient" />
     public QuaggansClient Quaggans => new(httpClient);
-
-    /// <inheritdoc cref="RacesClient" />
-    public RacesClient Races => new(httpClient);
 
     /// <inheritdoc cref="TokenClient" />
     public TokenClient Tokens => new(httpClient);

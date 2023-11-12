@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using GuildWars2.Json;
 
-namespace GuildWars2.Races;
+namespace GuildWars2.Hero.Races;
 
 internal static class RaceJson
 {

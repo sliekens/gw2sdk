@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Races;
+namespace GuildWars2.Tests.Features.Hero.Races;
 
 public class RacesByFilter
 {
@@ -16,7 +16,7 @@ public class RacesByFilter
             RaceName.Norn
         };
 
-        var (actual, _) = await sut.Races.GetRacesByNames(names);
+        var (actual, _) = await sut.Hero.Races.GetRacesByNames(names);
 
         Assert.Collection(
             names,

@@ -1,47 +1,38 @@
 ﻿using GuildWars2.Http;
-using GuildWars2.Json;
 
-namespace GuildWars2.Races.Http;
+namespace GuildWars2.Hero.Races.Http;
 
-internal sealed class RacesByPageRequest : IHttpRequest<HashSet<Race>>
+internal sealed class RaceByNameRequest : IHttpRequest<Race>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/races")
     {
         AcceptEncoding = "gzip"
     };
 
-    public RacesByPageRequest(int pageIndex)
+    public RaceByNameRequest(RaceName raceName)
     {
-        PageIndex = pageIndex;
+        RaceName = raceName;
     }
 
-    public int PageIndex { get; }
-
-    public int? PageSize { get; init; }
+    public RaceName RaceName { get; }
 
     public Language? Language { get; init; }
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<(HashSet<Race> Value, MessageContext Context)> SendAsync(
+    public async Task<(Race Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new()
-        {
-            { "page", PageIndex },
-            { "v", SchemaVersion.Recommended }
-        };
-        if (PageSize.HasValue)
-        {
-            search.Add("page_size", PageSize.Value);
-        }
-
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = search,
+                    Arguments = new QueryBuilder
+                    {
+                        { "id", RaceName.ToString() },
+                        { "v", SchemaVersion.Recommended }
+                    },
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 HttpCompletionOption.ResponseHeadersRead,
@@ -51,7 +42,7 @@ internal sealed class RacesByPageRequest : IHttpRequest<HashSet<Race>>
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetRace(MissingMemberBehavior));
+        var value = json.RootElement.GetRace(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }
 }

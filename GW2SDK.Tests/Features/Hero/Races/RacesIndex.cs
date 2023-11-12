@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Races;
+namespace GuildWars2.Tests.Features.Hero.Races;
 
 public class RacesIndex
 {
@@ -9,7 +9,7 @@ public class RacesIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Races.GetRacesIndex();
+        var (actual, context) = await sut.Hero.Races.GetRacesIndex();
 
         Assert.NotEmpty(actual);
         Assert.NotNull(context.ResultContext);

@@ -7,6 +7,7 @@ using GuildWars2.Hero.Emotes;
 using GuildWars2.Hero.Equipment;
 using GuildWars2.Hero.Inventories;
 using GuildWars2.Hero.Masteries;
+using GuildWars2.Hero.Races;
 using GuildWars2.Hero.StoryJournal;
 using GuildWars2.Hero.Training;
 using GuildWars2.Hero.Wallet;
@@ -51,6 +52,9 @@ public sealed class HeroClient
 
     /// <inheritdoc cref="MasteriesClient" />
     public MasteriesClient Masteries => new(httpClient);
+
+    /// <inheritdoc cref="RacesClient" />
+    public RacesClient Races => new(httpClient);
 
     /// <inheritdoc cref="StoryJournal" />
     public StoryJournalClient StoryJournal => new(httpClient);

@@ -1,26 +1,28 @@
 ﻿using GuildWars2.Http;
+using GuildWars2.Json;
 
-namespace GuildWars2.Races.Http;
+namespace GuildWars2.Hero.Races.Http;
 
-internal sealed class RaceByNameRequest : IHttpRequest<Race>
+internal sealed class RacesByNamesRequest : IHttpRequest<HashSet<Race>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/races")
     {
         AcceptEncoding = "gzip"
     };
 
-    public RaceByNameRequest(RaceName raceName)
+    public RacesByNamesRequest(IReadOnlyCollection<RaceName> raceIds)
     {
-        RaceName = raceName;
+        Check.Collection(raceIds);
+        RaceIds = raceIds;
     }
 
-    public RaceName RaceName { get; }
+    public IReadOnlyCollection<RaceName> RaceIds { get; }
 
     public Language? Language { get; init; }
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<(Race Value, MessageContext Context)> SendAsync(
+    public async Task<(HashSet<Race> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -30,7 +32,15 @@ internal sealed class RaceByNameRequest : IHttpRequest<Race>
                 {
                     Arguments = new QueryBuilder
                     {
-                        { "id", RaceName.ToString() },
+                        {
+                            "ids", RaceIds.Select(
+#if NET
+                                id => Enum.GetName(id)!
+#else
+                                id => Enum.GetName(typeof(RaceName), id)!
+#endif
+                            )
+                        },
                         { "v", SchemaVersion.Recommended }
                     },
                     AcceptLanguage = Language?.Alpha2Code
@@ -42,7 +52,7 @@ internal sealed class RaceByNameRequest : IHttpRequest<Race>
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
-        var value = json.RootElement.GetRace(MissingMemberBehavior);
+        var value = json.RootElement.GetSet(entry => entry.GetRace(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }
 }

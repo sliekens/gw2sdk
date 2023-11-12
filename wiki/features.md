@@ -67,6 +67,7 @@ mindmap
         (Wardrobe)
       (Inventory)
       (Masteries)
+      (Races)
       {{Story journal}}
         (Backstory)
         (Episodes)
@@ -94,7 +95,6 @@ mindmap
       (Standings)
       (Stats)
     (Quaggans)
-    (Races)
     (Worlds)
     {{WvW}}
       (Abilities)

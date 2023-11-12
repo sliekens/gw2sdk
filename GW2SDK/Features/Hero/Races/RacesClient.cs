@@ -1,6 +1,6 @@
-﻿using GuildWars2.Races.Http;
+﻿using GuildWars2.Hero.Races.Http;
 
-namespace GuildWars2.Races;
+namespace GuildWars2.Hero.Races;
 
 [PublicAPI]
 public sealed class RacesClient

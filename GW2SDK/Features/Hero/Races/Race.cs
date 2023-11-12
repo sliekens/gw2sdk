@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Races;
+﻿namespace GuildWars2.Hero.Races;
 
 [PublicAPI]
 [DataTransferObject]
