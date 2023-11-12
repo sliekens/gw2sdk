@@ -6,6 +6,7 @@ using GuildWars2.Mumble;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Mumble;
 
 // Using Microsoft.Extensions.Hosting is optional,
 // but it makes it easier to configure logging, dependency injection and cancellation
@@ -152,8 +153,14 @@ IHost CreateApplication()
     return host.Build();
 }
 
-public static class HostExtensions
+namespace Mumble
 {
-    public static T GetService<T>(this IHost app) where T : notnull => app.Services.GetRequiredService<T>();
-    public static CancellationToken GetStoppingToken(this IHost app) => app.GetService<IHostApplicationLifetime>().ApplicationStopping;
+    internal static class HostExtensions
+    {
+        public static T GetService<T>(this IHost app) where T : notnull =>
+            app.Services.GetRequiredService<T>();
+
+        public static CancellationToken GetStoppingToken(this IHost app) =>
+            app.GetService<IHostApplicationLifetime>().ApplicationStopping;
+    }
 }

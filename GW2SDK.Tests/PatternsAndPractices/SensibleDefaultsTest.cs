@@ -31,13 +31,10 @@ public class SensibleDefaultsTest : IClassFixture<AssemblyFixture>
             {
                 if (HasDefaultMember(type))
                 {
-                    var annotation = type.GetCustomAttribute<DefaultValueAttribute>();
-                    if (annotation is null)
-                    {
-                        throw new ApplicationException(
+                    var annotation = type.GetCustomAttribute<DefaultValueAttribute>()
+                        ?? throw new ApplicationException(
                             $"Enum '{type}' has an implicit default value, change its value or mark it as [DefaultValue]."
                         );
-                    }
 
                     if (annotation.Value is null || annotation.Value.GetType() != type)
                     {

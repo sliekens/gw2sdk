@@ -18,7 +18,7 @@ namespace GuildWars2.TestDataHelper;
 public static class Gw2Resiliency
 {
     // The API can return errors which can be fixed by a delayed retry
-    public static RetryStrategyOptions<HttpResponseMessage> RetryStrategy = new()
+    public static readonly RetryStrategyOptions<HttpResponseMessage> RetryStrategy = new()
     {
         MaxRetryAttempts = 100,
         Delay = TimeSpan.FromSeconds(30),
@@ -40,7 +40,7 @@ public static class Gw2Resiliency
 
     // The API can be slow or misbehave,
     // Use a hedging strategy to perform immediate retries
-    public static HedgingStrategyOptions<HttpResponseMessage> HedgingStrategy = new()
+    public static readonly HedgingStrategyOptions<HttpResponseMessage> HedgingStrategy = new()
     {
         // If no response is received within 10 seconds, start a second request (without cancelling the first one.)
         // As soon as either request completes, the other one is cancelled.

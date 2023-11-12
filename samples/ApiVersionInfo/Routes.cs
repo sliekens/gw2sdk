@@ -6,7 +6,7 @@ namespace ApiVersionInfo;
 internal static class Routes
 {
     /// <summary>Set of endpoints supported by GW2SDK.</summary>
-    private static readonly IReadOnlySet<string> Supported = new HashSet<string>
+    private static readonly HashSet<string> Supported = new()
     {
         "/v2/account",
         "/v2/account/achievements",
@@ -149,7 +149,7 @@ internal static class Routes
         "/v2/wvw/upgrades"
     };
 
-    private static readonly IReadOnlySet<string> Problematic = new HashSet<string>
+    private static readonly HashSet<string> Problematic = new()
     {
         // Superseded by /v2/characters/:id/buildtabs, the old skills and specializations might be wrong
         "/v2/characters/:id/skills",

@@ -58,7 +58,7 @@ public class BulkQueryTest
         // Ensuyre cancellation works in both scenarios where the query is chunked or not
         CancellationTokenSource cancellationTokenSource = new();
 
-        Task<IReadOnlyCollection<StubRecord>> GetChunk(
+        static Task<IReadOnlyCollection<StubRecord>> GetChunk(
             IReadOnlyCollection<int> chunk,
             CancellationToken cancellationToken
         )
