@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using GuildWars2.Json;
 
-namespace GuildWars2.ItemStats;
+namespace GuildWars2.Items.Stats;
 
 internal static class ItemStatAttributeJson
 {

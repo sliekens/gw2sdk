@@ -1,26 +1,28 @@
 ﻿using GuildWars2.Http;
+using GuildWars2.Json;
 
-namespace GuildWars2.ItemStats.Http;
+namespace GuildWars2.Items.Stats.Http;
 
-internal sealed class ItemStatByIdRequest : IHttpRequest<ItemStat>
+internal sealed class ItemStatsByIdsRequest : IHttpRequest<HashSet<ItemStat>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/itemstats")
     {
         AcceptEncoding = "gzip"
     };
 
-    public ItemStatByIdRequest(int itemStatId)
+    public ItemStatsByIdsRequest(IReadOnlyCollection<int> itemStatIds)
     {
-        ItemStatId = itemStatId;
+        Check.Collection(itemStatIds);
+        ItemStatIds = itemStatIds;
     }
 
-    public int ItemStatId { get; }
+    public IReadOnlyCollection<int> ItemStatIds { get; }
 
     public Language? Language { get; init; }
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<(ItemStat Value, MessageContext Context)> SendAsync(
+    public async Task<(HashSet<ItemStat> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -30,7 +32,7 @@ internal sealed class ItemStatByIdRequest : IHttpRequest<ItemStat>
                 {
                     Arguments = new QueryBuilder
                     {
-                        { "id", ItemStatId },
+                        { "ids", ItemStatIds },
                         { "v", SchemaVersion.Recommended }
                     },
                     AcceptLanguage = Language?.Alpha2Code
@@ -42,7 +44,7 @@ internal sealed class ItemStatByIdRequest : IHttpRequest<ItemStat>
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
-        var value = json.RootElement.GetItemStat(MissingMemberBehavior);
+        var value = json.RootElement.GetSet(entry => entry.GetItemStat(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.ItemStats;
+﻿namespace GuildWars2.Items.Stats;
 
 [PublicAPI]
 [DataTransferObject]

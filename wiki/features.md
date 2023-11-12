@@ -75,7 +75,7 @@ mindmap
       (Training)
       (Wallet)
     (Items)
-    (Item stats)
+      (Itemstats)
     {{PvE}}
       (Dungeons)
       {{Home}}

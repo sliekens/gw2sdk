@@ -1,7 +1,7 @@
 ﻿using GuildWars2.Http;
 using GuildWars2.Json;
 
-namespace GuildWars2.ItemStats.Http;
+namespace GuildWars2.Items.Stats.Http;
 
 internal sealed class ItemStatsIndexRequest : IHttpRequest<HashSet<int>>
 {

@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.ItemStats;
+namespace GuildWars2.Tests.Features.Items.Stats;
 
 public class ItemStatById
 {
@@ -11,7 +11,7 @@ public class ItemStatById
 
         const int id = 559;
 
-        var (actual, _) = await sut.ItemStats.GetItemStatById(id);
+        var (actual, _) = await sut.Items.GetItemStatById(id);
 
         Assert.Equal(id, actual.Id);
     }

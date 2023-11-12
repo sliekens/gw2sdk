@@ -1,28 +1,22 @@
 ﻿using System.Text.Json;
 using GuildWars2.Json;
 
-namespace GuildWars2.ItemStats;
+namespace GuildWars2.Hero.Equipment;
 
-internal static class ItemStatJson
+internal static class SelectedStatJson
 {
-    public static ItemStat GetItemStat(
+    public static SelectedStat GetSelectedStat(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
     {
         RequiredMember id = "id";
-        RequiredMember name = "name";
         RequiredMember attributes = "attributes";
-
         foreach (var member in json.EnumerateObject())
         {
             if (member.Name == id.Name)
             {
                 id = member;
-            }
-            else if (member.Name == name.Name)
-            {
-                name = member;
             }
             else if (member.Name == attributes.Name)
             {
@@ -34,12 +28,11 @@ internal static class ItemStatJson
             }
         }
 
-        return new ItemStat
+        return new SelectedStat
         {
             Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
             Attributes = attributes.Map(
-                values => values.GetList(value => value.GetItemStatAttribute(missingMemberBehavior))
+                value => value.GetSelectedModification(missingMemberBehavior)
             )
         };
     }

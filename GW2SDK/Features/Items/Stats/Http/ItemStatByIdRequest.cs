@@ -1,28 +1,26 @@
 ﻿using GuildWars2.Http;
-using GuildWars2.Json;
 
-namespace GuildWars2.ItemStats.Http;
+namespace GuildWars2.Items.Stats.Http;
 
-internal sealed class ItemStatsByIdsRequest : IHttpRequest<HashSet<ItemStat>>
+internal sealed class ItemStatByIdRequest : IHttpRequest<ItemStat>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/itemstats")
     {
         AcceptEncoding = "gzip"
     };
 
-    public ItemStatsByIdsRequest(IReadOnlyCollection<int> itemStatIds)
+    public ItemStatByIdRequest(int itemStatId)
     {
-        Check.Collection(itemStatIds);
-        ItemStatIds = itemStatIds;
+        ItemStatId = itemStatId;
     }
 
-    public IReadOnlyCollection<int> ItemStatIds { get; }
+    public int ItemStatId { get; }
 
     public Language? Language { get; init; }
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<(HashSet<ItemStat> Value, MessageContext Context)> SendAsync(
+    public async Task<(ItemStat Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -32,7 +30,7 @@ internal sealed class ItemStatsByIdsRequest : IHttpRequest<HashSet<ItemStat>>
                 {
                     Arguments = new QueryBuilder
                     {
-                        { "ids", ItemStatIds },
+                        { "id", ItemStatId },
                         { "v", SchemaVersion.Recommended }
                     },
                     AcceptLanguage = Language?.Alpha2Code
@@ -44,7 +42,7 @@ internal sealed class ItemStatsByIdsRequest : IHttpRequest<HashSet<ItemStat>>
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetItemStat(MissingMemberBehavior));
+        var value = json.RootElement.GetItemStat(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }
 }

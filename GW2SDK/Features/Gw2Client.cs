@@ -5,7 +5,6 @@ using GuildWars2.Files;
 using GuildWars2.Guilds;
 using GuildWars2.Hero;
 using GuildWars2.Items;
-using GuildWars2.ItemStats;
 using GuildWars2.Metadata;
 using GuildWars2.Pve;
 using GuildWars2.Pvp;
@@ -32,6 +31,9 @@ public sealed class Gw2Client
     /// <inheritdoc cref="CommerceClient" />
     public CommerceClient Commerce => new(httpClient);
 
+    /// <inheritdoc cref="ExplorationClient" />
+    public ExplorationClient Exploration => new(httpClient);
+
     /// <inheritdoc cref="FilesClient" />
     public FilesClient Files => new(httpClient);
 
@@ -43,12 +45,6 @@ public sealed class Gw2Client
 
     /// <inheritdoc cref="ItemsClient" />
     public ItemsClient Items => new(httpClient);
-
-    /// <inheritdoc cref="ItemStatsClient" />
-    public ItemStatsClient ItemStats => new(httpClient);
-
-    /// <inheritdoc cref="ExplorationClient" />
-    public ExplorationClient Exploration => new(httpClient);
 
     /// <inheritdoc cref="MetadataQuery" />
     public MetadataQuery Metadata => new(httpClient);

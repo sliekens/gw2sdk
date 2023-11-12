@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.ItemStats;
+namespace GuildWars2.Tests.Features.Items.Stats;
 
 public class ItemStatsByPage
 {
@@ -9,7 +9,7 @@ public class ItemStatsByPage
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.ItemStats.GetItemStatsByPage(0, 3);
+        var (actual, context) = await sut.Items.GetItemStatsByPage(0, 3);
 
         Assert.Equal(3, actual.Count);
         Assert.NotNull(context.PageContext);

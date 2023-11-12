@@ -1,4 +1,4 @@
-﻿using GuildWars2.ItemStats;
+﻿using GuildWars2.Hero.Equipment;
 
 namespace GuildWars2.Hero.Inventories;
 

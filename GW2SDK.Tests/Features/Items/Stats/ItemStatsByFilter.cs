@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.ItemStats;
+namespace GuildWars2.Tests.Features.Items.Stats;
 
 public class ItemStatsByFilter
 {
@@ -16,7 +16,7 @@ public class ItemStatsByFilter
             1566
         };
 
-        var (actual, _) = await sut.ItemStats.GetItemStatsByIds(ids);
+        var (actual, _) = await sut.Items.GetItemStatsByIds(ids);
 
         Assert.Collection(
             ids,
