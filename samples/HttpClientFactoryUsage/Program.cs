@@ -4,12 +4,22 @@ using GuildWars2.Hero.Equipment.Dyes;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 using Pastel;
 
 var appBuilder = Host.CreateApplicationBuilder(args);
 
 // Set up the HTTP client factory
 appBuilder.Services.AddHttpClient<Gw2Client>();
+
+// Configure logging
+appBuilder.Logging.AddSimpleConsole(
+    options =>
+    {
+        options.ColorBehavior = LoggerColorBehavior.Enabled;
+        options.SingleLine = true;
+    }
+);
 
 var app = appBuilder.Build();
 
@@ -27,6 +37,15 @@ void PrintColor(string name, Color cloth, Color leather, Color metal)
 {
     app.Services.GetRequiredService<ILogger<Dye>>()
         .LogInformation(
-            $"{name,-30} {"     ".Pastel(cloth).PastelBg(cloth),-25} {"     ".Pastel(leather).PastelBg(leather),-25} {"     ".Pastel(metal).PastelBg(metal),-25}"
+            "{name,-20} {Cloth,-25} {Leather,-25} {Metal,-25}",
+            name,
+            "  C  ".Pastel(Invert(cloth)).PastelBg(cloth),
+            "  L  ".Pastel(Invert(leather)).PastelBg(leather),
+            "  M  ".Pastel(Invert(metal)).PastelBg(metal)
         );
+
+    static Color Invert(Color color)
+    {
+        return Color.FromArgb(color.ToArgb() ^ 0xffffff);
+    }
 }
