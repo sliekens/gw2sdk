@@ -6,6 +6,7 @@ using GuildWars2.Hero.Equipment.Miniatures;
 using GuildWars2.Hero.Equipment.Mounts;
 using GuildWars2.Hero.Equipment.Novelties;
 using GuildWars2.Hero.Equipment.Outfits;
+using GuildWars2.Hero.Equipment.Skiffs;
 using GuildWars2.Hero.Equipment.Templates;
 using GuildWars2.Hero.Equipment.Wardrobe;
 
@@ -49,6 +50,9 @@ public sealed class EquipmentClient
 
     /// <inheritdoc cref="OutfitsClient" />
     public OutfitsClient Outfits => new(httpClient);
+
+    /// <inheritdoc cref="SkiffsClient" />
+    public SkiffsClient Skiffs => new(httpClient);
 
     /// <inheritdoc cref="WardrobeClient" />
     public WardrobeClient Wardrobe => new(httpClient);

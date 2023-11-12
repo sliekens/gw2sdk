@@ -1,7 +1,7 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
-namespace GuildWars2.Hero.Equipment.Wardrobe;
+namespace GuildWars2.Hero.Equipment;
 
 internal static class DyeSlotJson
 {
