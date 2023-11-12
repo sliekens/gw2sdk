@@ -53,7 +53,6 @@ public sealed class FilesClient
     public Task<(HashSet<Asset> Value, MessageContext Context)> GetFilesByPage(
         int pageIndex,
         int? pageSize = default,
-        Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
