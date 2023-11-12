@@ -13,7 +13,6 @@ mindmap
       (Gem exchange rates)
       (Trading post listings)
       (Delivery box)
-    (Dungeons)
     {{Exploration}}
       (Adventures)
       (Continents)
@@ -73,14 +72,19 @@ mindmap
         (Quests)
       (Training)
       (Wallet)
-    {{Home}}
-      (Cats)
-      (Nodes)
     (Items)
     (Item stats)
     (Legends)
-    (Map chests)
-    (Pets)
+    {{PvE}}
+      (Dungeons)
+      {{Home}}
+        (Cats)
+        (Nodes)
+      (Map chests)
+      (Pets)
+      (Raids)
+      (Super Adventure Box)
+      (World bosses)
     {{PvP}}
       (Amulets)
       (Games)
@@ -91,9 +95,6 @@ mindmap
       (Stats)
     (Quaggans)
     (Races)
-    (Raids)
-    (Super Adventure Box)
-    (World bosses)
     (Worlds)
     {{WvW}}
       (Abilities)
