@@ -23,33 +23,33 @@ public sealed class EquipmentClient
         this.httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    /// <inheritdoc cref="DyesQuery" />
-    public DyesQuery Dyes => new(httpClient);
+    /// <inheritdoc cref="DyesClient" />
+    public DyesClient Dyes => new(httpClient);
 
-    /// <inheritdoc cref="FinishersQuery" />
-    public FinishersQuery Finishers => new(httpClient);
+    /// <inheritdoc cref="FinishersClient" />
+    public FinishersClient Finishers => new(httpClient);
 
-    /// <inheritdoc cref="EquipmentQuery" />
-    public EquipmentQuery Equipment => new(httpClient);
+    /// <inheritdoc cref="EquipmentTemplatesClient" />
+    public EquipmentTemplatesClient Templates => new(httpClient);
 
-    /// <inheritdoc cref="GlidersQuery" />
-    public GlidersQuery Gliders => new(httpClient);
+    /// <inheritdoc cref="GlidersClient" />
+    public GlidersClient Gliders => new(httpClient);
 
-    /// <inheritdoc cref="MailCarriersQuery" />
-    public MailCarriersQuery MailCarriers => new(httpClient);
+    /// <inheritdoc cref="MailCarriersClient" />
+    public MailCarriersClient MailCarriers => new(httpClient);
 
-    /// <inheritdoc cref="MiniaturesQuery" />
-    public MiniaturesQuery Miniatures => new(httpClient);
+    /// <inheritdoc cref="MiniaturesClient" />
+    public MiniaturesClient Miniatures => new(httpClient);
 
-    /// <inheritdoc cref="MountsQuery" />
-    public MountsQuery Mounts => new(httpClient);
+    /// <inheritdoc cref="MountsClient" />
+    public MountsClient Mounts => new(httpClient);
 
-    /// <inheritdoc cref="NoveltiesQuery" />
-    public NoveltiesQuery Novelties => new(httpClient);
+    /// <inheritdoc cref="NoveltiesClient" />
+    public NoveltiesClient Novelties => new(httpClient);
 
-    /// <inheritdoc cref="OutfitsQuery" />
-    public OutfitsQuery Outfits => new(httpClient);
+    /// <inheritdoc cref="OutfitsClient" />
+    public OutfitsClient Outfits => new(httpClient);
 
-    /// <inheritdoc cref="WardrobeQuery" />
-    public WardrobeQuery Wardrobe => new(httpClient);
+    /// <inheritdoc cref="WardrobeClient" />
+    public WardrobeClient Wardrobe => new(httpClient);
 }

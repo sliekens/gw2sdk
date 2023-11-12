@@ -5,11 +5,11 @@ namespace GuildWars2.Pve.WorldBosses;
 [PublicAPI]
 public sealed class WorldBossesClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
     public WorldBossesClient(HttpClient httpClient)
     {
-        this.http = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
@@ -18,7 +18,7 @@ public sealed class WorldBossesClient
     )
     {
         WorldBossesRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<string> Value, MessageContext Context)> GetDefeatedWorldBosses(
@@ -27,6 +27,6 @@ public sealed class WorldBossesClient
     )
     {
         DefeatedWorldBossesRequest request = new() { AccessToken = accessToken };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 }

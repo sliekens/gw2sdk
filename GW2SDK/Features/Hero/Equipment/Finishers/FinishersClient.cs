@@ -3,14 +3,14 @@
 namespace GuildWars2.Hero.Equipment.Finishers;
 
 [PublicAPI]
-public sealed class FinishersQuery
+public sealed class FinishersClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public FinishersQuery(HttpClient http)
+    public FinishersClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     #region v2/account/finishers
@@ -26,7 +26,7 @@ public sealed class FinishersQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -44,7 +44,7 @@ public sealed class FinishersQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetFinishersIndex(
@@ -52,7 +52,7 @@ public sealed class FinishersQuery
     )
     {
         FinishersIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Finisher Value, MessageContext Context)> GetFinisherById(
@@ -67,7 +67,7 @@ public sealed class FinishersQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Finisher> Value, MessageContext Context)> GetFinishersByIds(
@@ -82,7 +82,7 @@ public sealed class FinishersQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Finisher> Value, MessageContext Context)> GetFinishersByPage(
@@ -99,7 +99,7 @@ public sealed class FinishersQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion

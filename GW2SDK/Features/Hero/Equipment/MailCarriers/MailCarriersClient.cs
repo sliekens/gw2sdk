@@ -3,14 +3,14 @@
 namespace GuildWars2.Hero.Equipment.MailCarriers;
 
 [PublicAPI]
-public sealed class MailCarriersQuery
+public sealed class MailCarriersClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public MailCarriersQuery(HttpClient http)
+    public MailCarriersClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     public Task<(HashSet<MailCarrier> Value, MessageContext Context)> GetMailCarriers(
@@ -24,7 +24,7 @@ public sealed class MailCarriersQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetMailCarriersIndex(
@@ -32,7 +32,7 @@ public sealed class MailCarriersQuery
     )
     {
         MailCarriersIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(MailCarrier Value, MessageContext Context)> GetMailCarrierById(
@@ -47,7 +47,7 @@ public sealed class MailCarriersQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<MailCarrier> Value, MessageContext Context)> GetMailCarriersByIds(
@@ -62,7 +62,7 @@ public sealed class MailCarriersQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<MailCarrier> Value, MessageContext Context)> GetMailCarriersByPage(
@@ -79,7 +79,7 @@ public sealed class MailCarriersQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetOwnedMailCarriers(
@@ -88,6 +88,6 @@ public sealed class MailCarriersQuery
     )
     {
         OwnedMailCarriersRequest request = new() { AccessToken = accessToken };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 }

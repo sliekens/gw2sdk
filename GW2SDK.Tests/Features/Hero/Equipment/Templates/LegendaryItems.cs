@@ -9,7 +9,7 @@ public class LegendaryItems
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.Equipment.Equipment.GetLegendaryItems();
+        var (actual, context) = await sut.Hero.Equipment.Templates.GetLegendaryItems();
 
         Assert.NotNull(context.ResultContext);
         Assert.Equal(context.ResultContext.ResultTotal, actual.Count);

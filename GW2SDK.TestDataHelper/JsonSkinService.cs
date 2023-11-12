@@ -25,7 +25,7 @@ public class JsonSkinService
 
     private async Task<HashSet<int>> GetSkinIds()
     {
-        var wardrobe = new WardrobeQuery(http);
+        var wardrobe = new WardrobeClient(http);
         var (ids, _) = await wardrobe.GetSkinsIndex();
         return ids;
     }

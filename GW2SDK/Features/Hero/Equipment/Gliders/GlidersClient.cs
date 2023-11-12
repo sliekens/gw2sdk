@@ -3,14 +3,14 @@
 namespace GuildWars2.Hero.Equipment.Gliders;
 
 [PublicAPI]
-public sealed class GlidersQuery
+public sealed class GlidersClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public GlidersQuery(HttpClient http)
+    public GlidersClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     public Task<(HashSet<Glider> Value, MessageContext Context)> GetGliders(
@@ -24,7 +24,7 @@ public sealed class GlidersQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetGlidersIndex(
@@ -32,7 +32,7 @@ public sealed class GlidersQuery
     )
     {
         GlidersIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Glider Value, MessageContext Context)> GetGliderById(
@@ -47,7 +47,7 @@ public sealed class GlidersQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Glider> Value, MessageContext Context)> GetGlidersByIds(
@@ -62,7 +62,7 @@ public sealed class GlidersQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Glider> Value, MessageContext Context)> GetGlidersByPage(
@@ -79,6 +79,6 @@ public sealed class GlidersQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 }

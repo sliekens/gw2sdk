@@ -3,14 +3,14 @@
 namespace GuildWars2.Hero.Equipment.Mounts;
 
 [PublicAPI]
-public sealed class MountsQuery
+public sealed class MountsClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public MountsQuery(HttpClient http)
+    public MountsClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     #region v2/account/mounts
@@ -26,7 +26,7 @@ public sealed class MountsQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetOwnedMountSkins(
@@ -38,7 +38,7 @@ public sealed class MountsQuery
         {
             AccessToken = accessToken
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -56,7 +56,7 @@ public sealed class MountsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<MountName> Value, MessageContext Context)> GetMountNames(
@@ -65,7 +65,7 @@ public sealed class MountsQuery
     )
     {
         MountNamesRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Mount Value, MessageContext Context)> GetMountByName(
@@ -80,7 +80,7 @@ public sealed class MountsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Mount> Value, MessageContext Context)> GetMountsByNames(
@@ -95,7 +95,7 @@ public sealed class MountsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Mount> Value, MessageContext Context)> GetMountsByPage(
@@ -112,7 +112,7 @@ public sealed class MountsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<MountSkin> Value, MessageContext Context)> GetMountSkins(
@@ -126,7 +126,7 @@ public sealed class MountsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetMountSkinsIndex(
@@ -134,7 +134,7 @@ public sealed class MountsQuery
     )
     {
         MountSkinsIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(MountSkin Value, MessageContext Context)> GetMountSkinById(
@@ -149,7 +149,7 @@ public sealed class MountsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<MountSkin> Value, MessageContext Context)> GetMountSkinsByIds(
@@ -164,7 +164,7 @@ public sealed class MountsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<MountSkin> Value, MessageContext Context)> GetMountSkinsByPage(
@@ -181,7 +181,7 @@ public sealed class MountsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion

@@ -3,14 +3,14 @@
 namespace GuildWars2.Hero.Equipment.Dyes;
 
 [PublicAPI]
-public sealed class DyesQuery
+public sealed class DyesClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public DyesQuery(HttpClient http)
+    public DyesClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     #region v2/account/dyes
@@ -22,7 +22,7 @@ public sealed class DyesQuery
     )
     {
         UnlockedDyesRequest request = new() { AccessToken = accessToken };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -40,13 +40,13 @@ public sealed class DyesQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetColorsIndex(CancellationToken cancellationToken = default)
     {
         ColorsIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Dye Value, MessageContext Context)> GetColorById(
@@ -61,7 +61,7 @@ public sealed class DyesQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Dye> Value, MessageContext Context)> GetColorsByIds(
@@ -76,7 +76,7 @@ public sealed class DyesQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Dye> Value, MessageContext Context)> GetColorsByPage(
@@ -93,7 +93,7 @@ public sealed class DyesQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion

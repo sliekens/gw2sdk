@@ -11,7 +11,7 @@ public class LegendaryItemById
 
         const int id = 80111;
 
-        var (actual, _) = await sut.Hero.Equipment.Equipment.GetLegendaryItemById(id);
+        var (actual, _) = await sut.Hero.Equipment.Templates.GetLegendaryItemById(id);
 
         Assert.Equal(id, actual.Id);
     }

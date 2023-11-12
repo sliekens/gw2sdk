@@ -3,14 +3,14 @@
 namespace GuildWars2.Hero.Equipment.Miniatures;
 
 [PublicAPI]
-public sealed class MiniaturesQuery
+public sealed class MiniaturesClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public MiniaturesQuery(HttpClient http)
+    public MiniaturesClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     #region v2/account/minis
@@ -21,7 +21,7 @@ public sealed class MiniaturesQuery
     )
     {
         var request = new UnlockedMinipetsRequest { AccessToken = accessToken };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
@@ -39,7 +39,7 @@ public sealed class MiniaturesQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetMinipetsIndex(
@@ -47,7 +47,7 @@ public sealed class MiniaturesQuery
     )
     {
         MinipetsIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Minipet Value, MessageContext Context)> GetMinipetById(
@@ -62,7 +62,7 @@ public sealed class MiniaturesQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Minipet> Value, MessageContext Context)> GetMinipetsByIds(
@@ -77,7 +77,7 @@ public sealed class MiniaturesQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Minipet> Value, MessageContext Context)> GetMinipetsByPage(
@@ -94,7 +94,7 @@ public sealed class MiniaturesQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion

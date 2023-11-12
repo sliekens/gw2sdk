@@ -4,14 +4,14 @@ namespace GuildWars2.Hero.Equipment.Templates;
 
 /// <summary>Query methods for items equipped by a character and legendary items on the account.</summary>
 [PublicAPI]
-public sealed class EquipmentQuery
+public sealed class EquipmentTemplatesClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public EquipmentQuery(HttpClient http)
+    public EquipmentTemplatesClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     #region v2/characters/:id/equipment
@@ -35,7 +35,7 @@ public sealed class EquipmentQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/characters/:id/equipment
@@ -59,7 +59,7 @@ public sealed class EquipmentQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/account/legendaryarmory
@@ -80,7 +80,7 @@ public sealed class EquipmentQuery
     )
     {
         UnlockedEquipmentTabsRequest request = new(characterName) { AccessToken = accessToken };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves an equipment template of a character on the account. This endpoint is only accessible with a valid
@@ -104,7 +104,7 @@ public sealed class EquipmentQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves all unlocked equipment templates of a character on the account. This endpoint is only accessible
@@ -126,7 +126,7 @@ public sealed class EquipmentQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves the currently active equipment tab of a character on the account. This endpoint is only accessible
@@ -149,7 +149,7 @@ public sealed class EquipmentQuery
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/characters/:id/equipmenttabs
@@ -166,7 +166,7 @@ public sealed class EquipmentQuery
     )
     {
         LegendaryItemsRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves the IDs of all legendary items.</summary>
@@ -177,7 +177,7 @@ public sealed class EquipmentQuery
     )
     {
         LegendaryItemsIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves a legendary item by its ID.</summary>
@@ -195,7 +195,7 @@ public sealed class EquipmentQuery
         {
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves legendary items by their IDs.</summary>
@@ -214,7 +214,7 @@ public sealed class EquipmentQuery
         {
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     /// <summary>Retrieves a page of legendary items.</summary>
@@ -235,7 +235,7 @@ public sealed class EquipmentQuery
             PageSize = pageSize,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/legendaryarmory

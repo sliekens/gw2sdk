@@ -9,7 +9,7 @@ public class LegendaryItemsIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.Equipment.Equipment.GetLegendaryItemsIndex();
+        var (actual, context) = await sut.Hero.Equipment.Templates.GetLegendaryItemsIndex();
 
         Assert.NotEmpty(actual);
         Assert.NotNull(context.ResultContext);

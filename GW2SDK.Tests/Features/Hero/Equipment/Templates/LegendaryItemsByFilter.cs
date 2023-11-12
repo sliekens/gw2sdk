@@ -16,7 +16,7 @@ public class LegendaryItemsByFilter
             80111
         };
 
-        var (actual, _) = await sut.Hero.Equipment.Equipment.GetLegendaryItemsByIds(ids);
+        var (actual, _) = await sut.Hero.Equipment.Templates.GetLegendaryItemsByIds(ids);
 
         Assert.Collection(
             ids,

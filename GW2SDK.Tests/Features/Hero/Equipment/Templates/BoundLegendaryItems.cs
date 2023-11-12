@@ -10,7 +10,7 @@ public class BoundLegendaryItems
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var (actual, _) = await sut.Hero.Equipment.Equipment.GetBoundLegendaryItems(accessToken.Key);
+        var (actual, _) = await sut.Hero.Equipment.Templates.GetBoundLegendaryItems(accessToken.Key);
 
         Assert.NotEmpty(actual);
     }

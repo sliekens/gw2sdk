@@ -11,7 +11,7 @@ public class EquipmentTemplates
         var character = Composer.Resolve<TestCharacter>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var (actual, _) = await sut.Hero.Equipment.Equipment.GetEquipmentTemplates(character.Name, accessToken.Key);
+        var (actual, _) = await sut.Hero.Equipment.Templates.GetEquipmentTemplates(character.Name, accessToken.Key);
 
         Assert.NotEmpty(actual);
         Assert.All(actual, entry =>

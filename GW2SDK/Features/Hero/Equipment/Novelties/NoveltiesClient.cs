@@ -3,14 +3,14 @@
 namespace GuildWars2.Hero.Equipment.Novelties;
 
 [PublicAPI]
-public sealed class NoveltiesQuery
+public sealed class NoveltiesClient
 {
-    private readonly HttpClient http;
+    private readonly HttpClient httpClient;
 
-    public NoveltiesQuery(HttpClient http)
+    public NoveltiesClient(HttpClient httpClient)
     {
-        this.http = http ?? throw new ArgumentNullException(nameof(http));
-        http.BaseAddress ??= BaseAddress.DefaultUri;
+        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     #region v2/account/novelties
@@ -21,7 +21,7 @@ public sealed class NoveltiesQuery
     )
     {
         UnlockedNoveltiesRequest request = new() { AccessToken = accessToken };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/account/novelties
@@ -39,7 +39,7 @@ public sealed class NoveltiesQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<int> Value, MessageContext Context)> GetNoveltiesIndex(
@@ -47,7 +47,7 @@ public sealed class NoveltiesQuery
     )
     {
         NoveltiesIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(Novelty Value, MessageContext Context)> GetNoveltyById(
@@ -62,7 +62,7 @@ public sealed class NoveltiesQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Novelty> Value, MessageContext Context)> GetNoveltiesByIds(
@@ -77,7 +77,7 @@ public sealed class NoveltiesQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     public Task<(HashSet<Novelty> Value, MessageContext Context)> GetNoveltiesByPage(
@@ -94,7 +94,7 @@ public sealed class NoveltiesQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
+        return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion v2/novelties
