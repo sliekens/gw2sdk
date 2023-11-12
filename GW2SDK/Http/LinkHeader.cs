@@ -55,8 +55,8 @@ public sealed class LinkHeader
     private static (string name, string value) ParseAttribute(ReadOnlySpan<char> input)
     {
         var splitIndex = input.IndexOf('=');
-        var name = input.Slice(0, splitIndex).Trim();
-        var value = input.Slice(splitIndex + 1).Trim();
+        var name = input[..splitIndex].Trim();
+        var value = input[(splitIndex + 1)..].Trim();
         return (name: name.ToString(), value.ToString());
     }
 
