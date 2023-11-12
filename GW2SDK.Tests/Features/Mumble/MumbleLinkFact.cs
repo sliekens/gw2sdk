@@ -1,6 +1,5 @@
-using System.IO.MemoryMappedFiles;
+﻿using System.IO.MemoryMappedFiles;
 
-#pragma warning disable CA1416
 namespace GuildWars2.Tests.Features.Mumble;
 
 public sealed class MumbleLinkFact : FactAttribute

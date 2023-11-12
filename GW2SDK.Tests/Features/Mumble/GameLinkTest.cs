@@ -1,9 +1,11 @@
-﻿#pragma warning disable CA1416
+﻿using System.Runtime.Versioning;
+
 namespace GuildWars2.Tests.Features.Mumble;
 
 public class GameLinkTest
 {
     [MumbleLinkFact]
+    [SupportedOSPlatform("windows")]
     public void Name_can_be_read_from_Mumble_link()
     {
         using var sut = GameLink.Open();
@@ -14,6 +16,7 @@ public class GameLinkTest
     }
 
     [MumbleLinkFact]
+    [SupportedOSPlatform("windows")]
     public async Task The_link_is_self_updating()
     {
         using var sut = GameLink.Open();
@@ -41,6 +44,7 @@ public class GameLinkTest
     }
 
     [MumbleLinkFact]
+    [SupportedOSPlatform("windows")]
     public void The_link_provides_context()
     {
         using var sut = GameLink.Open();
@@ -61,6 +65,7 @@ public class GameLinkTest
     }
 
     [MumbleLinkFact]
+    [SupportedOSPlatform("windows")]
     public void The_link_provides_identity()
     {
         using var sut = GameLink.Open();

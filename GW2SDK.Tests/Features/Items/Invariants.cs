@@ -1,12 +1,11 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using GuildWars2.Items;
+﻿using GuildWars2.Items;
 
 namespace GuildWars2.Tests.Features.Items;
 
-[SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
 internal static class Invariants
 {
-    internal static void Id_is_positive(this Item actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
+    internal static void Id_is_positive(this Item actual) =>
+        Assert.InRange(actual.Id, 1, int.MaxValue);
 
     internal static void Vendor_value_is_not_negative(this Item actual) =>
         Assert.InRange(actual.VendorValue.Amount, 0, int.MaxValue);

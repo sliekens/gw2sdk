@@ -22,8 +22,6 @@ SOFTWARE. */
 
 // ReSharper disable All
 
-#pragma warning disable 1591
-
 #nullable disable
 namespace JetBrains.Annotations
 {
