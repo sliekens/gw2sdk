@@ -2,6 +2,7 @@
 
 namespace GuildWars2.Worlds;
 
+/// <summary>Provides query methods for World (servers) names and population.</summary>
 [PublicAPI]
 public sealed class WorldsClient
 {
@@ -29,7 +30,9 @@ public sealed class WorldsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<int> Value, MessageContext Context)> GetWorldsIndex(CancellationToken cancellationToken = default)
+    public Task<(HashSet<int> Value, MessageContext Context)> GetWorldsIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         WorldsIndexRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);

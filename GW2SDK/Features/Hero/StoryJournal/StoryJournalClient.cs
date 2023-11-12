@@ -4,6 +4,7 @@ using GuildWars2.Hero.StoryJournal.Stories;
 
 namespace GuildWars2.Hero.StoryJournal;
 
+/// <summary>Provides query methods for the story progress and the backstory of a character.</summary>
 [PublicAPI]
 public sealed class StoryJournalClient
 {
@@ -33,6 +34,25 @@ public sealed class StoryJournalClient
     }
 
     #endregion
+
+    #region v2/characters/:id/quests
+
+    public Task<(HashSet<int> Value, MessageContext Context)> GetCharacterQuests(
+        string characterName,
+        string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        CharacterQuestsRequest request = new(characterName)
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(httpClient, cancellationToken);
+    }
+
+    #endregion v2/characters/:id/quests
 
     #region v2/backstory/questions
 
@@ -73,12 +93,13 @@ public sealed class StoryJournalClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<BackstoryQuestion> Value, MessageContext Context)> GetBackstoryQuestionsByIds(
-        IReadOnlyCollection<int> questionIds,
-        Language? language = default,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    public Task<(HashSet<BackstoryQuestion> Value, MessageContext Context)>
+        GetBackstoryQuestionsByIds(
+            IReadOnlyCollection<int> questionIds,
+            Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
         BackstoryQuestionsByIdsRequest request = new(questionIds)
         {
@@ -88,13 +109,14 @@ public sealed class StoryJournalClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<BackstoryQuestion> Value, MessageContext Context)> GetBackstoryQuestionsByPage(
-        int pageIndex,
-        int? pageSize = default,
-        Language? language = default,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    public Task<(HashSet<BackstoryQuestion> Value, MessageContext Context)>
+        GetBackstoryQuestionsByPage(
+            int pageIndex,
+            int? pageSize = default,
+            Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
         BackstoryQuestionsByPageRequest request = new(pageIndex)
         {
@@ -326,25 +348,6 @@ public sealed class StoryJournalClient
 
     #endregion
 
-    #region v2/characters/:id/quests
-
-    public Task<(HashSet<int> Value, MessageContext Context)> GetCharacterQuests(
-        string characterName,
-        string? accessToken,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
-    {
-        CharacterQuestsRequest request = new(characterName)
-        {
-            AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
-        };
-        return request.SendAsync(httpClient, cancellationToken);
-    }
-
-    #endregion v2/characters/:id/quests
-
     #region v2/quests
 
     public Task<(HashSet<Quest> Value, MessageContext Context)> GetQuests(
@@ -361,7 +364,9 @@ public sealed class StoryJournalClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<int> Value, MessageContext Context)> GetQuestsIndex(CancellationToken cancellationToken = default)
+    public Task<(HashSet<int> Value, MessageContext Context)> GetQuestsIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         QuestsIndexRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);

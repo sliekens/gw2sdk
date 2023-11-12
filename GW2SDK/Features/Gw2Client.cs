@@ -46,8 +46,8 @@ public sealed class Gw2Client
     /// <inheritdoc cref="ItemsClient" />
     public ItemsClient Items => new(httpClient);
 
-    /// <inheritdoc cref="MetadataQuery" />
-    public MetadataQuery Metadata => new(httpClient);
+    /// <inheritdoc cref="MetadataClient" />
+    public MetadataClient Metadata => new(httpClient);
 
     /// <inheritdoc cref="PveClient" />
     public PveClient Pve => new(httpClient);

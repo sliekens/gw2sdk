@@ -10,6 +10,7 @@ using Objective = GuildWars2.Wvw.Objectives.Objective;
 
 namespace GuildWars2.Wvw;
 
+/// <summary>Provides query methods for WvW matches, objectives, abilities, ranks, and upgrades.</summary>
 [PublicAPI]
 public sealed class WvwClient
 {
@@ -183,7 +184,9 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<int> Value, MessageContext Context)> GetRanksIndex(CancellationToken cancellationToken = default)
+    public Task<(HashSet<int> Value, MessageContext Context)> GetRanksIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         RanksIndexRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);

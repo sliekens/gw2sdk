@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Hero.Equipment.Templates;
 
-/// <summary>Query methods for items equipped by a character and legendary items on the account.</summary>
+/// <summary>Provides query methods for items equipped by a character and legendary items on the account.</summary>
 [PublicAPI]
 public sealed class EquipmentTemplatesClient
 {

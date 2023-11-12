@@ -2,6 +2,7 @@
 
 namespace GuildWars2.Hero.Equipment.Dyes;
 
+/// <summary>Provides query methods for dye colors and unlocked dyes.</summary>
 [PublicAPI]
 public sealed class DyesClient
 {
@@ -43,7 +44,9 @@ public sealed class DyesClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<int> Value, MessageContext Context)> GetColorsIndex(CancellationToken cancellationToken = default)
+    public Task<(HashSet<int> Value, MessageContext Context)> GetColorsIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         ColorsIndexRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);

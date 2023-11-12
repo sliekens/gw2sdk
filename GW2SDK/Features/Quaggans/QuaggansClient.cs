@@ -2,6 +2,7 @@
 
 namespace GuildWars2.Quaggans;
 
+/// <summary>Provides query methods for images of Quaggans.</summary>
 [PublicAPI]
 public sealed class QuaggansClient
 {

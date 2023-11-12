@@ -2,6 +2,7 @@
 
 namespace GuildWars2.Hero.Equipment.Outfits;
 
+/// <summary>Provides query methods for outfits and outfits unlocked on the account.</summary>
 [PublicAPI]
 public sealed class OutfitsClient
 {

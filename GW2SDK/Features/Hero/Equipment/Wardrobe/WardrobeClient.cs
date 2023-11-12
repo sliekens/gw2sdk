@@ -3,6 +3,7 @@ using GuildWars2.Hero.Equipment.Wardrobe.Http;
 
 namespace GuildWars2.Hero.Equipment.Wardrobe;
 
+/// <summary>Provides query methods for armor and weapon skins and skins unlocked on the account.</summary>
 [PublicAPI]
 public sealed class WardrobeClient
 {

@@ -14,7 +14,9 @@ using GuildWars2.Hero.Wallet;
 
 namespace GuildWars2.Hero;
 
-/// <summary>Provides query methods for things you can find in the Hero panel.</summary>
+/// <summary>Provides query methods for APIs related to the player account or character. This class consists of logical
+/// groups containing related sets of APIs. For example, all APIs pertaining to the achievements panel are grouped into
+/// <see cref="Achievements" /> and all APIs pertaining to crafting stations are grouped into <see cref="Crafting" />.</summary>
 [PublicAPI]
 public sealed class HeroClient
 {
@@ -45,7 +47,7 @@ public sealed class HeroClient
     public EmotesClient Emotes => new(httpClient);
 
     /// <inheritdoc cref="EquipmentClient" />
-    public EquipmentClient Equipment=> new(httpClient);
+    public EquipmentClient Equipment => new(httpClient);
 
     /// <inheritdoc cref="InventoryClient" />
     public InventoryClient Inventory => new(httpClient);

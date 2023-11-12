@@ -2,6 +2,7 @@
 
 namespace GuildWars2.Hero.Emotes;
 
+/// <summary>Provides query methods for emotes and unlocked emotes on the account.</summary>
 [PublicAPI]
 public sealed class EmotesClient
 {

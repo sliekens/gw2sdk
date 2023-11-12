@@ -2,6 +2,7 @@
 
 namespace GuildWars2.Pve.WorldBosses;
 
+/// <summary>Provides query methods for defeated world bosses.</summary>
 [PublicAPI]
 public sealed class WorldBossesClient
 {

@@ -1,46 +1,41 @@
-﻿using GuildWars2.Hero.Wallet.Http;
+﻿using GuildWars2.Hero.Equipment.JadeBots.Http;
 
-namespace GuildWars2.Hero.Wallet;
+namespace GuildWars2.Hero.Equipment.JadeBots;
 
-/// <summary>Provides query methods for currencies in the game and in the account wallet.</summary>
+/// <summary>Provides query methods for jade bot skins and skins unlocked on the account.</summary>
 [PublicAPI]
-public sealed class WalletClient
+public sealed class JadeBotsClient
 {
     private readonly HttpClient httpClient;
 
-    public WalletClient(HttpClient httpClient)
+    public JadeBotsClient(HttpClient httpClient)
     {
         this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    #region v2/account/wallet
+    #region v2/account/jadebots
 
-    public Task<(HashSet<CurrencyAmount> Value, MessageContext Context)> GetWallet(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedJadeBots(
         string? accessToken,
-        MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        WalletRequest request = new()
-        {
-            AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        var request = new UnlockedJadeBotsRequest { AccessToken = accessToken };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
     #endregion
 
-    #region v2/currencies
+    #region v2/jadebots
 
-    public Task<(HashSet<Currency> Value, MessageContext Context)> GetCurrencies(
+    public Task<(HashSet<JadeBot> Value, MessageContext Context)> GetJadeBots(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        CurrenciesRequest request = new()
+        JadeBotsRequest request = new()
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -48,22 +43,22 @@ public sealed class WalletClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<int> Value, MessageContext Context)> GetCurrenciesIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetJadeBotsIndex(
         CancellationToken cancellationToken = default
     )
     {
-        CurrenciesIndexRequest request = new();
+        JadeBotsIndexRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(Currency Value, MessageContext Context)> GetCurrencyById(
-        int currencyId,
+    public Task<(JadeBot Value, MessageContext Context)> GetJadeBotById(
+        int jadeBotId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        CurrencyByIdRequest request = new(currencyId)
+        JadeBotByIdRequest request = new(jadeBotId)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -71,14 +66,14 @@ public sealed class WalletClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<Currency> Value, MessageContext Context)> GetCurrenciesByIds(
-        IReadOnlyCollection<int> currencyIds,
+    public Task<(HashSet<JadeBot> Value, MessageContext Context)> GetJadeBotsByIds(
+        IReadOnlyCollection<int> jadeBotIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        CurrenciesByIdsRequest request = new(currencyIds)
+        JadeBotsByIdsRequest request = new(jadeBotIds)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -86,7 +81,7 @@ public sealed class WalletClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<Currency> Value, MessageContext Context)> GetCurrenciesByPage(
+    public Task<(HashSet<JadeBot> Value, MessageContext Context)> GetJadeBotsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -94,13 +89,12 @@ public sealed class WalletClient
         CancellationToken cancellationToken = default
     )
     {
-        CurrenciesByPageRequest request = new(pageIndex)
+        JadeBotsByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-
         return request.SendAsync(httpClient, cancellationToken);
     }
 

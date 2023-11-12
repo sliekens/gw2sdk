@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Authentication;
 
-/// <summary>Query methods for access token introspection and subtoken creation.</summary>
+/// <summary>Provides query methods for access token introspection and subtoken creation.</summary>
 [PublicAPI]
 public sealed class TokenClient
 {

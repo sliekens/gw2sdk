@@ -4,6 +4,7 @@ using GuildWars2.Pve.Home.Nodes;
 
 namespace GuildWars2.Pve.Home;
 
+/// <summary>Provides query methods for unlocked Home nodes and cats.</summary>
 [PublicAPI]
 public sealed class HomeClient
 {
@@ -24,7 +25,9 @@ public sealed class HomeClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<int> Value, MessageContext Context)> GetCatsIndex(CancellationToken cancellationToken = default)
+    public Task<(HashSet<int> Value, MessageContext Context)> GetCatsIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         CatsIndexRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);
@@ -70,10 +73,7 @@ public sealed class HomeClient
         CancellationToken cancellationToken = default
     )
     {
-        OwnedCatsIndexRequest request = new()
-        {
-            AccessToken = accessToken
-        };
+        OwnedCatsIndexRequest request = new() { AccessToken = accessToken };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -99,10 +99,7 @@ public sealed class HomeClient
         CancellationToken cancellationToken = default
     )
     {
-        OwnedNodesIndexRequest request = new()
-        {
-            AccessToken = accessToken
-        };
+        OwnedNodesIndexRequest request = new() { AccessToken = accessToken };
         return request.SendAsync(httpClient, cancellationToken);
     }
 }

@@ -3,12 +3,13 @@ using GuildWars2.Metadata.Http;
 
 namespace GuildWars2.Metadata;
 
+/// <summary>Provides query methods for game metadata and API metadata.</summary>
 [PublicAPI]
-public sealed class MetadataQuery
+public sealed class MetadataClient
 {
     private readonly HttpClient httpClient;
 
-    public MetadataQuery(HttpClient httpClient)
+    public MetadataClient(HttpClient httpClient)
     {
         this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         httpClient.BaseAddress ??= BaseAddress.DefaultUri;

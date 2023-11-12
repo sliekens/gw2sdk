@@ -8,7 +8,9 @@ using GuildWars2.Pve.WorldBosses;
 
 namespace GuildWars2.Pve;
 
-/// <summary>Provides query methods for things you can find in the Hero panel.</summary>
+/// <summary>Provides query methods for APIs related to open world gameplay (PvE). This class consists of logical groups
+/// containing related sets of APIs. For example, all APIs pertaining to dungeons are grouped into <see cref="Dungeons" />
+/// and all APIs pertaining to raids are grouped into <see cref="Raids" />.</summary>
 [PublicAPI]
 public sealed class PveClient
 {

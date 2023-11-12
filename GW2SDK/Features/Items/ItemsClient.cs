@@ -5,6 +5,7 @@ using GuildWars2.Items.Stats.Http;
 
 namespace GuildWars2.Items;
 
+/// <summary>Provides query methods for items and item stats.</summary>
 [PublicAPI]
 public sealed class ItemsClient
 {

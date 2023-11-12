@@ -2,6 +2,7 @@
 
 namespace GuildWars2.Pve.Pets;
 
+/// <summary>Provides query methods for Ranger pets.</summary>
 [PublicAPI]
 public sealed class PetsClient
 {
@@ -27,7 +28,9 @@ public sealed class PetsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<int> Value, MessageContext Context)> GetPetsIndex(CancellationToken cancellationToken = default)
+    public Task<(HashSet<int> Value, MessageContext Context)> GetPetsIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         PetsIndexRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);

@@ -1,6 +1,7 @@
 ﻿using GuildWars2.Hero.Equipment.Dyes;
 using GuildWars2.Hero.Equipment.Finishers;
 using GuildWars2.Hero.Equipment.Gliders;
+using GuildWars2.Hero.Equipment.JadeBots;
 using GuildWars2.Hero.Equipment.MailCarriers;
 using GuildWars2.Hero.Equipment.Miniatures;
 using GuildWars2.Hero.Equipment.Mounts;
@@ -12,7 +13,9 @@ using GuildWars2.Hero.Equipment.Wardrobe;
 
 namespace GuildWars2.Hero.Equipment;
 
-/// <summary>Provides query methods for things you can find in the Hero panel.</summary>
+/// <summary>Provides query methods for APIs related to equipment and cosmetic items. This class consists of logical groups
+/// containing related sets of APIs. For example, all APIs pertaining to equipment templates are grouped into
+/// <see cref="Templates" /> and all APIs pertaining to armor and weapon skins are grouped into <see cref="Wardrobe" />.</summary>
 [PublicAPI]
 public sealed class EquipmentClient
 {
@@ -35,6 +38,9 @@ public sealed class EquipmentClient
 
     /// <inheritdoc cref="GlidersClient" />
     public GlidersClient Gliders => new(httpClient);
+
+    /// <inheritdoc cref="JadeBotsClient" />
+    public JadeBotsClient JadeBots => new(httpClient);
 
     /// <inheritdoc cref="MailCarriersClient" />
     public MailCarriersClient MailCarriers => new(httpClient);

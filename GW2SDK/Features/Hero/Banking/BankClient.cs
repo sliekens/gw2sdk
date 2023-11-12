@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Hero.Banking;
 
-/// <summary>Query methods for the account bank and material storage.</summary>
+/// <summary>Provides query methods for the account bank and material storage.</summary>
 [PublicAPI]
 public sealed class BankClient
 {

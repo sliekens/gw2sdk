@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Hero.Accounts;
 
-/// <summary>Query methods for the account and characters on the account.</summary>
+/// <summary>Provides query methods for the account and characters on the account.</summary>
 [PublicAPI]
 public sealed class AccountClient
 {

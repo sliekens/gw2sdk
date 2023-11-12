@@ -2,6 +2,7 @@
 
 namespace GuildWars2.Hero.Equipment.MailCarriers;
 
+/// <summary>Provides query methods for mail carrier animations and animations unlocked on the account.</summary>
 [PublicAPI]
 public sealed class MailCarriersClient
 {

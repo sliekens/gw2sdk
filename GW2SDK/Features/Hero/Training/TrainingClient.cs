@@ -2,6 +2,7 @@
 
 namespace GuildWars2.Hero.Training;
 
+/// <summary>Provides query methods for skill and specialization training progress of a character.</summary>
 [PublicAPI]
 public sealed class TrainingClient
 {

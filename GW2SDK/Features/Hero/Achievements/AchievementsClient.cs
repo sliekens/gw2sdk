@@ -6,7 +6,7 @@ using GuildWars2.Hero.Achievements.Titles;
 
 namespace GuildWars2.Hero.Achievements;
 
-/// <summary>Query methods for achievements and titles in the game and achievement progress on the account.</summary>
+/// <summary>Provides query methods for achievements and titles in the game and achievement progress on the account.</summary>
 [PublicAPI]
 public sealed class AchievementsClient
 {

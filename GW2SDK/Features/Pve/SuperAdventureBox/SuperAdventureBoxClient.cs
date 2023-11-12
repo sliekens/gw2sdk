@@ -2,6 +2,7 @@
 
 namespace GuildWars2.Pve.SuperAdventureBox;
 
+/// <summary>Provides query methods for Super Adventure Box progress.</summary>
 [PublicAPI]
 public sealed class SuperAdventureBoxClient
 {
@@ -15,12 +16,13 @@ public sealed class SuperAdventureBoxClient
 
     #region v2/characters/:id/sab
 
-    public Task<(SuperAdventureBoxProgress Value, MessageContext Context)> GetSuperAdventureBoxProgress(
-        string characterId,
-        string? accessToken,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    public Task<(SuperAdventureBoxProgress Value, MessageContext Context)>
+        GetSuperAdventureBoxProgress(
+            string characterId,
+            string? accessToken,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
         var request = new SuperAdventureBoxProgressRequest(characterId)
         {

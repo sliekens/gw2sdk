@@ -2,6 +2,7 @@
 
 namespace GuildWars2.Hero.Equipment.Mounts;
 
+/// <summary>Provides query methods for mounts and mounts unlocked on the account.</summary>
 [PublicAPI]
 public sealed class MountsClient
 {

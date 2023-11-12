@@ -2,6 +2,7 @@
 
 namespace GuildWars2.Hero.Equipment.Gliders;
 
+/// <summary>Provides query methods for glider skins and skins unlocked on the account.</summary>
 [PublicAPI]
 public sealed class GlidersClient
 {

@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Hero.Inventories;
 
-/// <summary>Query methods for bags and the shared inventory.</summary>
+/// <summary>Provides query methods for bags and the shared inventory.</summary>
 [PublicAPI]
 public sealed class InventoryClient
 {

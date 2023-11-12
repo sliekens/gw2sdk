@@ -3,7 +3,7 @@ using GuildWars2.Hero.Crafting.Http;
 
 namespace GuildWars2.Hero.Crafting;
 
-/// <summary>Provides recipe search and crafting-related services.</summary>
+/// <summary>Provides query methods for recipes, recipe search, daily recipes and recipes unlocked on the account or character.</summary>
 [PublicAPI]
 public sealed class CraftingClient
 {

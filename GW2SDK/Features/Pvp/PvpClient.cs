@@ -9,6 +9,7 @@ using GuildWars2.Pvp.Stats;
 
 namespace GuildWars2.Pvp;
 
+/// <summary>Provides query methods for PvP matches, seasons, rank, leaderboards, equipment and mist chanpions.</summary>
 [PublicAPI]
 public sealed class PvpClient
 {
@@ -104,6 +105,19 @@ public sealed class PvpClient
     }
 
     #endregion
+
+    #region v2/account/pvp/heroes
+
+    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedHeroesIndex(
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        UnlockedHeroesRequest request = new() { AccessToken = accessToken };
+        return request.SendAsync(httpClient, cancellationToken);
+    }
+
+    #endregion v2/account/pvp/heroes
 
     #region v2/pvp/amulets
 
@@ -251,19 +265,6 @@ public sealed class PvpClient
 
     #endregion
 
-    #region v2/account/pvp/heroes
-
-    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedHeroesIndex(
-        string? accessToken,
-        CancellationToken cancellationToken = default
-    )
-    {
-        UnlockedHeroesRequest request = new() { AccessToken = accessToken };
-        return request.SendAsync(httpClient, cancellationToken);
-    }
-
-    #endregion v2/account/pvp/heroes
-
     #region v2/pvp/ranks
 
     public Task<(HashSet<Rank> Value, MessageContext Context)> GetRanks(
@@ -280,7 +281,9 @@ public sealed class PvpClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<int> Value, MessageContext Context)> GetRanksIndex(CancellationToken cancellationToken = default)
+    public Task<(HashSet<int> Value, MessageContext Context)> GetRanksIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         RankIndexRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);
