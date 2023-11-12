@@ -1,24 +1,22 @@
 ﻿using GuildWars2.Http;
-using GuildWars2.Json;
 
-namespace GuildWars2.Legends.Http;
+namespace GuildWars2.Hero.Builds.Http;
 
-internal sealed class LegendsByIdsRequest : IHttpRequest<HashSet<Legend>>
+internal sealed class LegendByIdRequest : IHttpRequest<Legend>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/legends") { AcceptEncoding = "gzip" };
 
-    public LegendsByIdsRequest(IReadOnlyCollection<string> legendIds)
+    public LegendByIdRequest(string legendId)
     {
-        Check.Collection(legendIds);
-        LegendIds = legendIds;
+        LegendId = legendId;
     }
 
-    public IReadOnlyCollection<string> LegendIds { get; }
+    public string LegendId { get; }
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<(HashSet<Legend> Value, MessageContext Context)> SendAsync(
+    public async Task<(Legend Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -28,7 +26,7 @@ internal sealed class LegendsByIdsRequest : IHttpRequest<HashSet<Legend>>
                 {
                     Arguments = new QueryBuilder
                     {
-                        { "ids", LegendIds },
+                        { "id", LegendId },
                         { "v", SchemaVersion.Recommended }
                     }
                 },
@@ -39,7 +37,7 @@ internal sealed class LegendsByIdsRequest : IHttpRequest<HashSet<Legend>>
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetLegend(MissingMemberBehavior));
+        var value = json.RootElement.GetLegend(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }
 }

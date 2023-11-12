@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Legends;
+﻿namespace GuildWars2.Hero.Builds;
 
 [PublicAPI]
 [DataTransferObject]

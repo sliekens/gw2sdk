@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Legends;
+namespace GuildWars2.Tests.Features.Hero.Builds;
 
 public class LegendsByPage
 {
@@ -10,7 +10,7 @@ public class LegendsByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
-        var (actual, context) = await sut.Legends.GetLegendsByPage(0, pageSize);
+        var (actual, context) = await sut.Hero.Builds.GetLegendsByPage(0, pageSize);
 
         Assert.NotNull(context.PageContext);
         Assert.Equal(pageSize, context.PageContext.PageSize);

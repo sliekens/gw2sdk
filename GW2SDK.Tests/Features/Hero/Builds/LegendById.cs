@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Legends;
+namespace GuildWars2.Tests.Features.Hero.Builds;
 
 public class LegendById
 {
@@ -12,7 +12,7 @@ public class LegendById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, _) = await sut.Legends.GetLegendById(id);
+        var (actual, _) = await sut.Hero.Builds.GetLegendById(id);
 
         Assert.Equal(id, actual.Id);
         actual.Has_code();

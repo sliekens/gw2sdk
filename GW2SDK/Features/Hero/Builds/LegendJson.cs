@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using GuildWars2.Json;
 
-namespace GuildWars2.Legends;
+namespace GuildWars2.Hero.Builds;
 
 internal static class LegendJson
 {

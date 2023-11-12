@@ -6,7 +6,6 @@ using GuildWars2.Guilds;
 using GuildWars2.Hero;
 using GuildWars2.Items;
 using GuildWars2.ItemStats;
-using GuildWars2.Legends;
 using GuildWars2.Metadata;
 using GuildWars2.Pve;
 using GuildWars2.Pvp;
@@ -48,9 +47,6 @@ public sealed class Gw2Client
 
     /// <inheritdoc cref="ItemStatsClient" />
     public ItemStatsClient ItemStats => new(httpClient);
-
-    /// <inheritdoc cref="LegendsClient" />
-    public LegendsClient Legends => new(httpClient);
 
     /// <inheritdoc cref="ExplorationClient" />
     public ExplorationClient Exploration => new(httpClient);

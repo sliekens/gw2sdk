@@ -47,6 +47,7 @@ mindmap
       {{Builds}}
         (Skills)
         (Traits)
+        (Legends)
         (Templates)
         (Storage)
       (Crafting)
@@ -74,7 +75,6 @@ mindmap
       (Wallet)
     (Items)
     (Item stats)
-    (Legends)
     {{PvE}}
       (Dungeons)
       {{Home}}

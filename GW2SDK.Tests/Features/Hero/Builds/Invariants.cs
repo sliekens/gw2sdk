@@ -28,4 +28,8 @@ internal static class Invariants
 
     internal static void Id_is_positive(this Trait actual) =>
         Assert.InRange(actual.Id, 1, int.MaxValue);
+
+    internal static void Has_id(this Legend actual) => Assert.NotEmpty(actual.Id);
+
+    internal static void Has_code(this Legend actual) => Assert.True(actual.Code > 0);
 }

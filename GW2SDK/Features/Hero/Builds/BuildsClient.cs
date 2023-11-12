@@ -2,8 +2,8 @@
 
 namespace GuildWars2.Hero.Builds;
 
-/// <summary>Query methods for build templates, skills, specializations, traits and builds in the build storage on the
-/// account.</summary>
+/// <summary>Query methods for build templates, skills, specializations, traits, legends (Revenant) and builds in the build
+/// storage on the account.</summary>
 [PublicAPI]
 public sealed class BuildsClient
 {
@@ -211,7 +211,9 @@ public sealed class BuildsClient
     /// <summary>Retrieves the IDs of all skills.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetSkillsIndex(CancellationToken cancellationToken = default)
+    public Task<(HashSet<int> Value, MessageContext Context)> GetSkillsIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         SkillsIndexRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);
@@ -387,7 +389,9 @@ public sealed class BuildsClient
     /// <summary>Retrieves the IDs of all traits.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetTraitsIndex(CancellationToken cancellationToken = default)
+    public Task<(HashSet<int> Value, MessageContext Context)> GetTraitsIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         TraitsIndexRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);
@@ -461,4 +465,66 @@ public sealed class BuildsClient
     }
 
     #endregion v2/traits
+
+    #region v2/legends
+
+    public Task<(HashSet<string> Value, MessageContext Context)> GetLegendsIndex(
+        CancellationToken cancellationToken = default
+    )
+    {
+        LegendsIndexRequest request = new();
+        return request.SendAsync(httpClient, cancellationToken);
+    }
+
+    public Task<(Legend Value, MessageContext Context)> GetLegendById(
+        string legendId,
+        CancellationToken cancellationToken = default
+    )
+    {
+        LegendByIdRequest request = new(legendId)
+        {
+            MissingMemberBehavior = MissingMemberBehavior.Error
+        };
+        return request.SendAsync(httpClient, cancellationToken);
+    }
+
+    public Task<(HashSet<Legend> Value, MessageContext Context)> GetLegendsByIds(
+        IReadOnlyCollection<string> legendIds,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        LegendsByIdsRequest request = new(legendIds)
+        {
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(httpClient, cancellationToken);
+    }
+
+    public Task<(HashSet<Legend> Value, MessageContext Context)> GetLegendsByPage(
+        int pageIndex,
+        int? pageSize = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        LegendsByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+
+        return request.SendAsync(httpClient, cancellationToken);
+    }
+
+    public Task<(HashSet<Legend> Value, MessageContext Context)> GetLegends(
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        LegendsRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
+        return request.SendAsync(httpClient, cancellationToken);
+    }
+
+    #endregion v2/legends
 }

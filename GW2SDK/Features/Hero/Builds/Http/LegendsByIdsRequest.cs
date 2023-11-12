@@ -1,21 +1,20 @@
 ﻿using GuildWars2.Http;
 using GuildWars2.Json;
 
-namespace GuildWars2.Legends.Http;
+namespace GuildWars2.Hero.Builds.Http;
 
-internal sealed class LegendsByPageRequest : IHttpRequest<HashSet<Legend>>
+internal sealed class LegendsByIdsRequest : IHttpRequest<HashSet<Legend>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/legends") { AcceptEncoding = "gzip" };
 
-    public LegendsByPageRequest(int pageIndex)
+    public LegendsByIdsRequest(IReadOnlyCollection<string> legendIds)
     {
-        PageIndex = pageIndex;
+        Check.Collection(legendIds);
+        LegendIds = legendIds;
     }
 
-    public int PageIndex { get; }
-
-    public int? PageSize { get; init; }
+    public IReadOnlyCollection<string> LegendIds { get; }
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
@@ -24,14 +23,19 @@ internal sealed class LegendsByPageRequest : IHttpRequest<HashSet<Legend>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new() { { "page", PageIndex } };
-        if (PageSize.HasValue)
-        {
-            search.Add("page_size", PageSize.Value);
-        }
-
-        search.Add("v", SchemaVersion.Recommended);
-        using var response = await httpClient.SendAsync(Template with { Arguments = search }, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+        using var response = await httpClient.SendAsync(
+                Template with
+                {
+                    Arguments = new QueryBuilder
+                    {
+                        { "ids", LegendIds },
+                        { "v", SchemaVersion.Recommended }
+                    }
+                },
+                HttpCompletionOption.ResponseHeadersRead,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
