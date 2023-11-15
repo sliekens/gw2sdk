@@ -16,13 +16,34 @@ public class WorldsByFilter
             1003
         };
 
-        var (actual, _) = await sut.Worlds.GetWorldsByIds(ids);
+        var (actual, context) = await sut.Worlds.GetWorldsByIds(ids);
 
-        Assert.Collection(
-            ids,
-            first => Assert.Contains(actual, found => found.Id == first),
-            second => Assert.Contains(actual, found => found.Id == second),
-            third => Assert.Contains(actual, found => found.Id == third)
-        );
+        Assert.All(ids,
+            id =>
+            {
+                var world = actual.Single(world => world.Id == id);
+                Assert.NotEmpty(world.Name);
+                if (world.Population != WorldPopulation.Full)
+                {
+                    switch (world.Population)
+                    {
+                        case WorldPopulation.Medium:
+                            Assert.Equal(500, world.TransferFee);
+                            break;
+                        case WorldPopulation.High:
+                            Assert.Equal(1000, world.TransferFee);
+                            break;
+                        case WorldPopulation.VeryHigh:
+                            Assert.Equal(1800, world.TransferFee);
+                            break;
+                        default:
+                            throw new Exception("Unexpected population type.");
+                    }
+                }
+            });
+
+        Assert.NotNull(context.ResultContext);
+        Assert.Equal(actual.Count, context.ResultContext.ResultCount);
+        Assert.NotEqual(actual.Count, context.ResultContext.ResultTotal);
     }
 }

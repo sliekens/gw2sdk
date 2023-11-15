@@ -11,16 +11,35 @@ public class Worlds
 
         var (actual, context) = await sut.Worlds.GetWorlds();
 
-        Assert.NotNull(context.ResultContext);
-        Assert.Equal(context.ResultContext.ResultTotal, actual.Count);
+        Assert.NotEmpty(actual);
         Assert.All(
             actual,
             world =>
             {
-                world.Id_is_positive();
-                world.Name_is_not_empty();
-                world.World_population_type_is_supported();
+                Assert.True(world.Id > 0);
+                Assert.NotEmpty(world.Name);
+                if (world.Population != WorldPopulation.Full)
+                {
+                    switch (world.Population)
+                    {
+                        case WorldPopulation.Medium:
+                            Assert.Equal(500, world.TransferFee);
+                            break;
+                        case WorldPopulation.High:
+                            Assert.Equal(1000, world.TransferFee);
+                            break;
+                        case WorldPopulation.VeryHigh:
+                            Assert.Equal(1800, world.TransferFee);
+                            break;
+                        default:
+                            throw new Exception("Unexpected population type.");
+                    }
+                }
             }
         );
+
+        Assert.NotNull(context.ResultContext);
+        Assert.Equal(context.ResultContext.ResultCount, actual.Count);
+        Assert.Equal(context.ResultContext.ResultTotal, actual.Count);
     }
 }

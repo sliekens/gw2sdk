@@ -12,8 +12,16 @@ public sealed record World
     public required string Name { get; init; }
 
     /// <summary>The population of the server. Transferring to a different world is only possible when it is not
-    /// <see cref="WorldPopulation.Full" />. The transfer cost will be calculated based on the population: 500 gems for
-    /// <see cref="WorldPopulation.Medium" />, 1000 gems for <see cref="WorldPopulation.High" /> and 1800 gems for
-    /// <see cref="WorldPopulation.VeryHigh" />.</summary>
+    /// <see cref="WorldPopulation.Full" />. The <see cref="TransferFee" /> will be calculated based on the population.</summary>
     public required WorldPopulation Population { get; init; }
+
+    /// <summary>The gem fee for transferring to this world.</summary>
+    public int TransferFee =>
+        Population switch
+        {
+            WorldPopulation.Medium => 500,
+            WorldPopulation.High => 1000,
+            WorldPopulation.VeryHigh => 1800,
+            _ => 0
+        };
 }
