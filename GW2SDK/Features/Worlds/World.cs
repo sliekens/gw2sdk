@@ -35,4 +35,14 @@ public sealed record World
             >= 2000 and < 3000 => WorldRegion.Europe,
             _ => WorldRegion.None
         };
+
+    /// <summary>The language associated with this world.</summary>
+    public Language Language =>
+        (Id / 100 % 10) switch
+        {
+            1 => Language.French,
+            2 => Language.German,
+            3 => Language.Spanish,
+            _ => Language.English
+        };
 }

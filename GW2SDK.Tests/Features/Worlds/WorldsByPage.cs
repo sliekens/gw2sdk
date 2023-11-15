@@ -37,6 +37,11 @@ public sealed class WorldsByPage
                 }
 
                 Assert.NotEqual(WorldRegion.None, world.Region);
+
+                if (world.Id >= 2100)
+                {
+                    Assert.NotEqual(Language.English, world.Language);
+                }
             }
         );
 
