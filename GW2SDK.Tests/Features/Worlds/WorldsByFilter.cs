@@ -40,6 +40,8 @@ public class WorldsByFilter
                             throw new Exception("Unexpected population type.");
                     }
                 }
+
+                Assert.NotEqual(WorldRegion.None, world.Region);
             });
 
         Assert.NotNull(context.ResultContext);

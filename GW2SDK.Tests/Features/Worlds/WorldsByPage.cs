@@ -35,6 +35,8 @@ public sealed class WorldsByPage
                             throw new Exception("Unexpected population type.");
                     }
                 }
+
+                Assert.NotEqual(WorldRegion.None, world.Region);
             }
         );
 

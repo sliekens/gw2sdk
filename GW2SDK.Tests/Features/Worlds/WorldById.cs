@@ -11,7 +11,7 @@ public class WorldById
 
         const int id = 1001;
 
-        var (actual, context) = await sut.Worlds.GetWorldById(id);
+        var (actual, _) = await sut.Worlds.GetWorldById(id);
 
         Assert.Equal(id, actual.Id);
         Assert.NotEmpty(actual.Name);
@@ -32,5 +32,7 @@ public class WorldById
                     throw new Exception("Unexpected population type.");
             }
         }
+
+        Assert.Equal(WorldRegion.NorthAmerica, actual.Region);
     }
 }

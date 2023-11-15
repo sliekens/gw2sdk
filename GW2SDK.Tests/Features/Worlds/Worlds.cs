@@ -35,6 +35,8 @@ public class Worlds
                             throw new Exception("Unexpected population type.");
                     }
                 }
+                
+                Assert.NotEqual(WorldRegion.None, world.Region);
             }
         );
 

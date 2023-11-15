@@ -24,4 +24,15 @@ public sealed record World
             WorldPopulation.VeryHigh => 1800,
             _ => 0
         };
+
+    /// <summary>Which region this world belongs to. This indicates the location of the data center that stores the account
+    /// information. Players from one region cannot join players from another region. Only chat and mail are shared between
+    /// regions.</summary>
+    public WorldRegion Region =>
+        Id switch
+        {
+            >= 1000 and < 2000 => WorldRegion.NorthAmerica,
+            >= 2000 and < 3000 => WorldRegion.Europe,
+            _ => WorldRegion.None
+        };
 }
