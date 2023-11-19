@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{63243B77-9
 		Directory.Build.targets = Directory.Build.targets
 		.config\dotnet-tools.json = .config\dotnet-tools.json
 		global.json = global.json
-		GW2SDK.sln.DotSettings = GW2SDK.sln.DotSettings
+		gw2sdk.sln.DotSettings = gw2sdk.sln.DotSettings
 		nuget.config = nuget.config
 		README.md = README.md
 	EndProjectSection

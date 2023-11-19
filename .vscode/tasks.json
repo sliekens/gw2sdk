@@ -17,21 +17,21 @@
       "label": "Code Cleanup (solution)",
       "detail": "Runs code cleanup on all files.",
       "type": "shell",
-      "command": "dotnet jb cleanupcode ${workspaceFolder}/GW2SDK.sln --verbosity=ERROR",
+      "command": "dotnet jb cleanupcode ${workspaceFolder}/gw2sdk.sln --verbosity=ERROR",
       "problemMatcher": []
     },
     {
       "label": "Code Cleanup (file)",
       "detail": "Runs code cleanup on the currently opened file.",
       "type": "shell",
-      "command": "dotnet jb cleanupcode ${workspaceFolder}/GW2SDK.sln --include=${relativeFile} --verbosity=ERROR",
+      "command": "dotnet jb cleanupcode ${workspaceFolder}/gw2sdk.sln --include=${relativeFile} --verbosity=ERROR",
       "problemMatcher": []
     },
     {
       "label": "Code Cleanup (directory)",
       "detail": "Runs code cleanup on the currently opened file and other files in the same directory or its subdirectories.",
       "type": "shell",
-      "command": "dotnet jb cleanupcode ${workspaceFolder}/GW2SDK.sln --include=${relativeFileDirname}/**/* --verbosity=ERROR",
+      "command": "dotnet jb cleanupcode ${workspaceFolder}/gw2sdk.sln --include=${relativeFileDirname}/**/* --verbosity=ERROR",
       "problemMatcher": []
     },
     {

@@ -26,7 +26,7 @@ The **Directory.Build.props** and **Directory.Build.targets** files are used to 
 
 The **.editorconfig** file is used to define common editor settings for all projects in the solution, such as the indentation style. It is used to ensure that the code style is consistent across editors.
 
-The **GW2SDK.sln.DotSettings** file is used to define common ReSharper settings for all projects in the solution. It is used when you execute the `dotnet jb cleanupcode` tool.
+The **gw2sdk.sln.DotSettings** file is used to define common ReSharper settings for all projects in the solution. It is used when you execute the `dotnet jb cleanupcode` tool.
 
 The **.gitattributes** file is used to define common Git settings for all projects in the solution, such as the line endings. It is used to ensure that the line endings are consistent across contributors.
 
