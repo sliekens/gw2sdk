@@ -1,5 +1,6 @@
 ﻿namespace GuildWars2;
 
+/// <summary>The base address of the Guild Wars 2 API.</summary>
 [PublicAPI]
 public static class BaseAddress
 {
