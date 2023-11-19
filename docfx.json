@@ -74,36 +74,5 @@
     "postProcessors": [],
     "keepFileLink": false,
     "disableGitFeatures": false
-  },
-  "pdf": {
-    "content": [
-      {
-        "src": "docs/guide",
-        "files": [
-          "**.md",
-          "**/toc.yml"
-        ]
-      },
-      {
-        "src": "docs/api",
-        "dest": "api",
-        "files": [
-          "**.yml",
-          "index.md"
-        ]
-      }
-    ],
-    "resource": [
-      {
-        "src": "docs",
-        "files": [
-          "images/**"
-        ]
-      }
-    ],
-    "output": "artifacts/pdf",
-    "wkhtmltopdf": {
-      "additionalArguments": "--enable-local-file-access"
-    }
   }
 }
