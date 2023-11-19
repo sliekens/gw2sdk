@@ -60,7 +60,7 @@ try
                     CreateTextCompressed(Path.Combine(outDir, "achievements.json.gz")))
                 {
                     var service = app.Services.GetRequiredService<JsonAchievementService>();
-                    var documents = await service.GetAllJsonAchievements(Update(achievements));
+                    var documents = await service.GetAllJsonAchievements(new ProgressAdapter(achievements));
                     foreach (var document in documents)
                     {
                         await file.WriteLineAsync(document);
@@ -71,7 +71,7 @@ try
                 await using (var file = CreateTextCompressed(Path.Combine(outDir, "items.json.gz")))
                 {
                     var service = app.Services.GetRequiredService<JsonItemService>();
-                    var documents = await service.GetAllJsonItems(Update(items));
+                    var documents = await service.GetAllJsonItems(new ProgressAdapter(items));
                     foreach (var document in documents)
                     {
                         await file.WriteLineAsync(document);
@@ -83,7 +83,7 @@ try
                     CreateTextCompressed(Path.Combine(outDir, "recipes.json.gz")))
                 {
                     var service = app.Services.GetRequiredService<JsonRecipeService>();
-                    var documents = await service.GetAllJsonRecipes(Update(recipes));
+                    var documents = await service.GetAllJsonRecipes(new ProgressAdapter(recipes));
                     foreach (var document in documents)
                     {
                         await file.WriteLineAsync(document);
@@ -94,7 +94,7 @@ try
                 await using (var file = CreateTextCompressed(Path.Combine(outDir, "skins.json.gz")))
                 {
                     var service = app.Services.GetRequiredService<JsonSkinService>();
-                    var documents = await service.GetAllJsonSkins(Update(skins));
+                    var documents = await service.GetAllJsonSkins(new ProgressAdapter(skins));
                     foreach (var document in documents)
                     {
                         await file.WriteLineAsync(document);
@@ -107,9 +107,6 @@ catch (Exception crash)
 {
     AnsiConsole.WriteException(crash);
 }
-
-static Progress<ResultContext> Update(ProgressTask progressTask) =>
-    new(c => progressTask.MaxValue(c.ResultTotal).Value(c.ResultCount));
 
 static StreamWriter CreateTextCompressed(string path) =>
     new(new GZipStream(File.OpenWrite(path), CompressionMode.Compress), Encoding.UTF8);

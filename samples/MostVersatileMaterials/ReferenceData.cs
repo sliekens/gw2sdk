@@ -93,8 +93,7 @@ public class ReferenceData
         progress.StartTask();
         try
         {
-            var report = new Progress<ResultContext>(ctx => UpdateProgress(ctx, progress));
-            return await craftingClient.GetRecipesBulk(progress: report)
+            return await craftingClient.GetRecipesBulk(progress: new ProgressAdapter(progress))
                 .Select(result => result.Value)
                 .OrderByDescending(recipe => recipe.Id)
                 .ToListAsync();
@@ -115,8 +114,7 @@ public class ReferenceData
 
         try
         {
-            var report = new Progress<ResultContext>(ctx => UpdateProgress(ctx, progress));
-            return await itemsClient.GetItemsBulk(itemIds, progress: report)
+            return await itemsClient.GetItemsBulk(itemIds, progress: new ProgressAdapter(progress))
                 .Select(result => result.Value)
                 .ToListAsync();
         }

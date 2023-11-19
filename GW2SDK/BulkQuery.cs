@@ -70,15 +70,15 @@ public static class BulkQuery
 
         progress?.Report(new ResultContext(resultTotal, resultCount));
 
-        // PERF: no need to create chunks if index does not exceed the chunk size
+        // PERF: no need to create chunks if keys do not exceed the chunk size
         if (keys.Count <= chunkSize)
         {
             var result = await bulkRequest(keys, cancellationToken).ConfigureAwait(false);
-            progress?.Report(new ResultContext(resultTotal, result.Count));
-            foreach (var record in result)
+            foreach (var value in result)
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                yield return record;
+                yield return value;
+                progress?.Report(new ResultContext(resultTotal, ++resultCount));
             }
 
             yield break;
@@ -100,12 +100,11 @@ public static class BulkQuery
             .OrderByCompletion()
             .WithCancellation(cancellationToken))
         {
-            resultCount += result.Count;
-            progress?.Report(new ResultContext(resultTotal, resultCount));
             foreach (var record in result)
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 yield return record;
+                progress?.Report(new ResultContext(resultTotal, ++resultCount));
             }
 
             limiter.Release();
