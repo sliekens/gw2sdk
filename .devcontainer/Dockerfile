@@ -1,1 +1,1 @@
-FROM mcr.microsoft.com/devcontainers/base:debian-11
+FROM mcr.microsoft.com/devcontainers/base:debian
