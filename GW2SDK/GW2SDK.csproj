@@ -33,7 +33,7 @@
 
   <PropertyGroup>
     <EnablePackageValidation>true</EnablePackageValidation>
-    <PackageValidationBaselineVersion>1.0.0-preview.9</PackageValidationBaselineVersion>
+    <PackageValidationBaselineVersion>1.0.0-preview.10</PackageValidationBaselineVersion>
   </PropertyGroup>
 
   <Choose>
