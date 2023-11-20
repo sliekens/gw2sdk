@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Tests.Features.Commerce.Exchange;
 
-public class GemsForGold
+public class ExchangeGemsToGold
 {
     [Fact]
     public async Task You_can_exchange_gems_for_gold()
@@ -11,9 +11,9 @@ public class GemsForGold
 
         const int gems = 800;
 
-        var (actual, _) = await sut.Commerce.ExchangeGemsForGold(gems);
+        var (actual, _) = await sut.Commerce.ExchangeGemsToGold(gems);
 
-        Assert.True(actual.CoinsToReceive > 10000, "800 gems should be worth some gold.");
-        Assert.True(actual.CoinsPerGem > 0, "Gems can't be free.");
+        Assert.True(actual.Gold > 10000, "800 gems should be worth some gold.");
+        Assert.True(actual.ExchangeRate > 0, "Gems can't be free.");
     }
 }

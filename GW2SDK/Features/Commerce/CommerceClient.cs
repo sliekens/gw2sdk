@@ -8,6 +8,7 @@ using GuildWars2.Commerce.Transactions;
 
 namespace GuildWars2.Commerce;
 
+/// <summary>Provides query methods for Black Lion Trading Company services.</summary>
 [PublicAPI]
 public sealed class CommerceClient
 {
@@ -21,6 +22,12 @@ public sealed class CommerceClient
 
     #region v2/commerce/delivery
 
+    /// <summary>Retrieves information about items and coins ready for pickup from the Black Lion Trading Company. This
+    /// endpoint is only accessible with a valid access token.</summary>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(DeliveryBox Value, MessageContext Context)> GetDeliveryBox(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -39,6 +46,9 @@ public sealed class CommerceClient
 
     #region v2/commerce/prices
 
+    /// <summary>Retrieves the item IDs of all items with listings on the trading post.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<int> Value, MessageContext Context)> GetItemPricesIndex(
         CancellationToken cancellationToken = default
     )
@@ -47,6 +57,11 @@ public sealed class CommerceClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the best price for an item by its ID.</summary>
+    /// <param name="itemId">The item ID.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(ItemPrice Value, MessageContext Context)> GetItemPriceById(
         int itemId,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -60,6 +75,12 @@ public sealed class CommerceClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the best price for items by their IDs.</summary>
+    /// <remarks>Limited to 200 IDs per request.</remarks>
+    /// <param name="itemIds">The item IDs.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<ItemPrice> Value, MessageContext Context)> GetItemPricesByIds(
         IReadOnlyCollection<int> itemIds,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -73,6 +94,15 @@ public sealed class CommerceClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the best price for items by their IDs by chunking requests and executing them in parallel. Supports
+    /// more than 200 IDs.</summary>
+    /// <param name="itemIds">The item IDs.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="degreeOfParallelism">The maximum number of chunks to request in parallel.</param>
+    /// <param name="chunkSize">How many IDs to request per chunk.</param>
+    /// <param name="progress">A progress report provider.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request(s).</returns>
     public IAsyncEnumerable<(ItemPrice Value, MessageContext Context)> GetItemPricesBulk(
         IReadOnlyCollection<int> itemIds,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -104,6 +134,13 @@ public sealed class CommerceClient
         }
     }
 
+    /// <summary>Retrieves all item prices by chunking requests and executing them in parallel.</summary>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="degreeOfParallelism">The maximum number of chunks to request in parallel.</param>
+    /// <param name="chunkSize">How many IDs to request per chunk.</param>
+    /// <param name="progress">A progress report provider.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request(s).</returns>
     public async IAsyncEnumerable<(ItemPrice Value, MessageContext Context)> GetItemPricesBulk(
         MissingMemberBehavior missingMemberBehavior = default,
         int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,
@@ -131,6 +168,9 @@ public sealed class CommerceClient
 
     #region v2/commerce/listings
 
+    /// <summary>Retrieves the item IDs of all items with listings on the trading post.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<int> Value, MessageContext Context)> GetOrderBooksIndex(
         CancellationToken cancellationToken = default
     )
@@ -139,6 +179,11 @@ public sealed class CommerceClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the demand and supply of an item by its ID.</summary>
+    /// <param name="itemId">The item ID.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(OrderBook Value, MessageContext Context)> GetOrderBookById(
         int itemId,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -152,6 +197,12 @@ public sealed class CommerceClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the demand and supply of items by their IDs.</summary>
+    /// <remarks>Limited to 200 IDs per request.</remarks>
+    /// <param name="itemIds">The item IDs.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<OrderBook> Value, MessageContext Context)> GetOrderBooksByIds(
         IReadOnlyCollection<int> itemIds,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -165,6 +216,15 @@ public sealed class CommerceClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the demand and supply of items by their IDs by chunking requests and executing them in parallel.
+    /// Supports more than 200 IDs.</summary>
+    /// <param name="itemIds">The item IDs.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="degreeOfParallelism">The maximum number of chunks to request in parallel.</param>
+    /// <param name="chunkSize">How many IDs to request per chunk.</param>
+    /// <param name="progress">A progress report provider.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request(s).</returns>
     public IAsyncEnumerable<(OrderBook Value, MessageContext Context)> GetOrderBooksBulk(
         IReadOnlyCollection<int> itemIds,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -196,6 +256,13 @@ public sealed class CommerceClient
         }
     }
 
+    /// <summary>Retrieves the demand and supply of all items by chunking requests and executing them in parallel.</summary>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="degreeOfParallelism">The maximum number of chunks to request in parallel.</param>
+    /// <param name="chunkSize">How many IDs to request per chunk.</param>
+    /// <param name="progress">A progress report provider.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request(s).</returns>
     public async IAsyncEnumerable<(OrderBook Value, MessageContext Context)> GetOrderBooksBulk(
         MissingMemberBehavior missingMemberBehavior = default,
         int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,
@@ -223,29 +290,33 @@ public sealed class CommerceClient
 
     #region v2/commerce/exchange
 
-    public Task<(GemsForGoldExchange Value, MessageContext Context)> ExchangeGemsForGold(
-        int gemsCount,
+    /// <summary>Retrieves the current exchange rate of gems to gold.</summary>
+    /// <param name="gems">The amount of gems to exchange for gold.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(GemsToGold Value, MessageContext Context)> ExchangeGemsToGold(
+        int gems,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        ExchangeGemsForGoldRequest request = new(gemsCount)
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        GemsToGoldRequest request = new(gems) { MissingMemberBehavior = missingMemberBehavior };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(GoldForGemsExchange Value, MessageContext Context)> ExchangeGoldForGems(
-        Coin coinsCount,
+    /// <summary>Retrieves the current exchange rate of gold to gems.</summary>
+    /// <param name="gold">The amount of gold to exchange for gems.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(GoldToGems Value, MessageContext Context)> ExchangeGoldToGems(
+        Coin gold,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        ExchangeGoldForGemsRequest request = new(coinsCount)
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        GoldToGemsRequest request = new(gold) { MissingMemberBehavior = missingMemberBehavior };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -253,6 +324,14 @@ public sealed class CommerceClient
 
     #region v2/commerce/transactions
 
+    /// <summary>Retrieves a page of current buy orders on the account. This endpoint is only accessible with a valid access
+    /// token.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Order> Value, MessageContext Context)> GetBuyOrders(
         int pageIndex,
         int? pageSize,
@@ -270,6 +349,14 @@ public sealed class CommerceClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of current sell orders on the account. This endpoint is only accessible with a valid access
+    /// token.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Order> Value, MessageContext Context)> GetSellOrders(
         int pageIndex,
         int? pageSize,
@@ -287,6 +374,14 @@ public sealed class CommerceClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of completed purchases on the account. This endpoint is only accessible with a valid access
+    /// token.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Transaction> Value, MessageContext Context)> GetPurchases(
         int pageIndex,
         int? pageSize,
@@ -304,6 +399,15 @@ public sealed class CommerceClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of completed sales on the account. This endpoint is only accessible with a valid access
+    /// token.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    /// <returns></returns>
     public Task<(HashSet<Transaction> Value, MessageContext Context)> GetSales(
         int pageIndex,
         int? pageSize,

@@ -45,7 +45,7 @@ internal static class OrderJson
         {
             Id = id.Map(value => value.GetInt64()),
             ItemId = itemId.Map(value => value.GetInt32()),
-            Price = price.Map(value => value.GetInt32()),
+            UnitPrice = price.Map(value => value.GetInt32()),
             Quantity = quantity.Map(value => value.GetInt32()),
             Created = created.Map(value => value.GetDateTimeOffset())
         };

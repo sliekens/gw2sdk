@@ -3,12 +3,12 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Commerce.Http;
 
-internal sealed class ExchangeGemsForGoldRequest : IHttpRequest<GemsForGoldExchange>
+internal sealed class GemsToGoldRequest : IHttpRequest<GemsToGold>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/commerce/exchange/gems") { AcceptEncoding = "gzip" };
 
-    public ExchangeGemsForGoldRequest(int gemsCount)
+    public GemsToGoldRequest(int gemsCount)
     {
         GemsCount = gemsCount;
     }
@@ -17,7 +17,7 @@ internal sealed class ExchangeGemsForGoldRequest : IHttpRequest<GemsForGoldExcha
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<(GemsForGoldExchange Value, MessageContext Context)> SendAsync(
+    public async Task<(GemsToGold Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -38,7 +38,7 @@ internal sealed class ExchangeGemsForGoldRequest : IHttpRequest<GemsForGoldExcha
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
-        var value = json.RootElement.GetGemsForGoldExchange(MissingMemberBehavior);
+        var value = json.RootElement.GetGemsToGold(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }
 }

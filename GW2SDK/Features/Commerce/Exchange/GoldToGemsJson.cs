@@ -3,9 +3,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Commerce.Exchange;
 
-internal static class GemsForGoldExchangeJson
+internal static class GoldToGemsJson
 {
-    public static GemsForGoldExchange GetGemsForGoldExchange(
+    public static GoldToGems GetGoldToGems(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -28,10 +28,10 @@ internal static class GemsForGoldExchangeJson
             }
         }
 
-        return new GemsForGoldExchange
+        return new GoldToGems
         {
-            CoinsPerGem = coinsPerGem.Map(value => value.GetInt32()),
-            CoinsToReceive = quantity.Map(value => value.GetInt32())
+            ExchangeRate = coinsPerGem.Map(value => value.GetInt32()),
+            Gems = quantity.Map(value => value.GetInt32())
         };
     }
 }
