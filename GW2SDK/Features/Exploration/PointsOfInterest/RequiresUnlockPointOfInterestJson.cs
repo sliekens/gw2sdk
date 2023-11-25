@@ -3,9 +3,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.PointsOfInterest;
 
-internal static class UnlockerPointOfInterestJson
+internal static class RequiresUnlockPointOfInterestJson
 {
-    public static UnlockerPointOfInterest GetUnlockerPointOfInterest(
+    public static RequiresUnlockPointOfInterest GetRequiresUnlockPointOfInterest(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -57,14 +57,14 @@ internal static class UnlockerPointOfInterestJson
             }
         }
 
-        return new UnlockerPointOfInterest
+        return new RequiresUnlockPointOfInterest
         {
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetString()) ?? "",
             Floor = floor.Map(value => value.GetInt32()),
             Coordinates = coordinates.Map(value => value.GetCoordinateF(missingMemberBehavior)),
             ChatLink = chatLink.Map(value => value.GetStringRequired()),
-            Icon = icon.Map(value => value.GetStringRequired())
+            IconHref = icon.Map(value => value.GetStringRequired())
         };
     }
 }

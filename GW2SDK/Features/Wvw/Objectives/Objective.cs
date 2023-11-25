@@ -27,5 +27,7 @@ public sealed record Objective
 
     public required string MarkerHref { get; init; }
 
+    /// <summary>The chat code of the objective. This can be used to link the objective in the chat, but also in guild or squad
+    /// messages.</summary>
     public required string ChatLink { get; init; }
 }

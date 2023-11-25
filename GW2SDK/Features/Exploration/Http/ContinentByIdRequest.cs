@@ -42,7 +42,8 @@ internal sealed class ContinentByIdRequest : IHttpRequest<Continent>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetContinent(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }

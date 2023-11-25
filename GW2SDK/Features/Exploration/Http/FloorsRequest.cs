@@ -37,7 +37,10 @@ internal sealed class FloorsRequest : IHttpRequest<HashSet<Floor>>
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Path = Template.Path.Replace(":id", ContinentId.ToString(CultureInfo.InvariantCulture)),
+                    Path = Template.Path.Replace(
+                        ":id",
+                        ContinentId.ToString(CultureInfo.InvariantCulture)
+                    ),
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 HttpCompletionOption.ResponseHeadersRead,
@@ -46,7 +49,8 @@ internal sealed class FloorsRequest : IHttpRequest<HashSet<Floor>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetFloor(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }

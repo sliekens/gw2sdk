@@ -50,7 +50,11 @@ internal sealed class SectorsByIdsRequest : IHttpRequest<HashSet<Sector>>
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Path = Template.Path.Replace(":id", ContinentId.ToString(CultureInfo.InvariantCulture)).Replace(":floor", FloorId.ToString(CultureInfo.InvariantCulture)).Replace(":region", RegionId.ToString(CultureInfo.InvariantCulture)).Replace(":map", MapId.ToString(CultureInfo.InvariantCulture)),
+                    Path = Template.Path
+                        .Replace(":id", ContinentId.ToString(CultureInfo.InvariantCulture))
+                        .Replace(":floor", FloorId.ToString(CultureInfo.InvariantCulture))
+                        .Replace(":region", RegionId.ToString(CultureInfo.InvariantCulture))
+                        .Replace(":map", MapId.ToString(CultureInfo.InvariantCulture)),
                     Arguments = new QueryBuilder
                     {
                         { "ids", SectorIds },
@@ -64,7 +68,8 @@ internal sealed class SectorsByIdsRequest : IHttpRequest<HashSet<Sector>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetSector(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }

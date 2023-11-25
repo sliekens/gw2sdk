@@ -21,5 +21,7 @@ public record Recipe
 
     public required IReadOnlyCollection<Ingredient> Ingredients { get; init; }
 
+    /// <summary>The chat code of the recipe. This can be used to link the recipe in the chat, but also in guild or squad
+    /// messages.</summary>
     public required string ChatLink { get; init; }
 }

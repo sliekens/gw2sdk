@@ -60,8 +60,8 @@ internal static class GodShrineJson
             NameContested = nameContested.Map(value => value.GetStringRequired()),
             PointOfInterestId = pointOfInterestId.Map(value => value.GetInt32()),
             Coordinates = coordinates.Map(value => value.GetCoordinateF(missingMemberBehavior)),
-            Icon = icon.Map(value => value.GetStringRequired()),
-            IconContested = iconContested.Map(value => value.GetStringRequired())
+            IconHref = icon.Map(value => value.GetStringRequired()),
+            IconContestedHref = iconContested.Map(value => value.GetStringRequired())
         };
     }
 }

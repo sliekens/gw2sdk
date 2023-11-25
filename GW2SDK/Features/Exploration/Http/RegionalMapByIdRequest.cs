@@ -4,7 +4,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Exploration.Http;
 
-internal sealed class MapByIdRequest : IHttpRequest<Map>
+internal sealed class RegionalMapByIdRequest : IHttpRequest<Map>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/continents/:id/floors/:floor/regions/:region/maps")
@@ -12,7 +12,7 @@ internal sealed class MapByIdRequest : IHttpRequest<Map>
             AcceptEncoding = "gzip"
         };
 
-    public MapByIdRequest(int continentId, int floorId, int regionId, int mapId)
+    public RegionalMapByIdRequest(int continentId, int floorId, int regionId, int mapId)
     {
         ContinentId = continentId;
         FloorId = floorId;
@@ -40,7 +40,10 @@ internal sealed class MapByIdRequest : IHttpRequest<Map>
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Path = Template.Path.Replace(":id", ContinentId.ToString(CultureInfo.InvariantCulture)).Replace(":floor", FloorId.ToString(CultureInfo.InvariantCulture)).Replace(":region", RegionId.ToString(CultureInfo.InvariantCulture)),
+                    Path = Template.Path
+                        .Replace(":id", ContinentId.ToString(CultureInfo.InvariantCulture))
+                        .Replace(":floor", FloorId.ToString(CultureInfo.InvariantCulture))
+                        .Replace(":region", RegionId.ToString(CultureInfo.InvariantCulture)),
                     Arguments = new QueryBuilder
                     {
                         { "id", MapId },
@@ -54,7 +57,8 @@ internal sealed class MapByIdRequest : IHttpRequest<Map>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetMap(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }

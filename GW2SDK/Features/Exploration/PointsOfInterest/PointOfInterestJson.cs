@@ -19,7 +19,7 @@ internal static class PointOfInterestJson
             case "vista":
                 return json.GetVista(missingMemberBehavior);
             case "unlock":
-                return json.GetUnlockerPointOfInterest(missingMemberBehavior);
+                return json.GetRequiresUnlockPointOfInterest(missingMemberBehavior);
         }
 
         OptionalMember name = "name";

@@ -1,11 +1,11 @@
 ﻿using System.Text.Json;
 using GuildWars2.Json;
 
-namespace GuildWars2.Exploration.MasteryPoints;
+namespace GuildWars2.Exploration.MasteryInsights;
 
-internal static class MasteryPointJson
+internal static class MasteryInsightJson
 {
-    public static MasteryPoint GetMasteryPoint(
+    public static MasteryInsight GetMasteryInsight(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -33,7 +33,7 @@ internal static class MasteryPointJson
             }
         }
 
-        return new MasteryPoint
+        return new MasteryInsight
         {
             Id = id.Map(value => value.GetInt32()),
             Coordinates = coordinates.Map(value => value.GetCoordinateF(missingMemberBehavior)),

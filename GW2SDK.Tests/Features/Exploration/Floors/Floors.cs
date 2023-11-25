@@ -30,7 +30,7 @@ public class Floors
 
                     if (continentId == 2 && entry.Id == 60 && regionId == 50)
                     {
-                        // Convergens region name is empty
+                        // Convergences region name is empty
                         Assert.Empty(region.Name);
                     }
                     else

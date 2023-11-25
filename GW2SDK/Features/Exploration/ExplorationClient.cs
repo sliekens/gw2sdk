@@ -9,6 +9,7 @@ using GuildWars2.Exploration.Sectors;
 
 namespace GuildWars2.Exploration;
 
+/// <summary>Provides query methods for maps and map features.</summary>
 [PublicAPI]
 public sealed class ExplorationClient
 {
@@ -22,11 +23,12 @@ public sealed class ExplorationClient
 
     #region v2/characters/:id/heropoints
 
-    /// <summary>Fetches the IDs of completed hero challenges.</summary>
-    /// <param name="characterName"></param>
-    /// <param name="accessToken"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
+    /// <summary>Retrieves the IDs of completed hero challenges on a character. This endpoint is only accessible with a valid
+    /// access token.</summary>
+    /// <param name="characterName">A character name that belongs to the account associated with the access token.</param>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<string> Value, MessageContext Context)> GetCompletedHeroChallenges(
         string characterName,
         string? accessToken,
@@ -41,6 +43,11 @@ public sealed class ExplorationClient
 
     #region v2/continents
 
+    /// <summary>Retrieves all continents.</summary>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Continent> Value, MessageContext Context)> GetContinents(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -55,6 +62,9 @@ public sealed class ExplorationClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all continents.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<int> Value, MessageContext Context)> GetContinentsIndex(
         CancellationToken cancellationToken = default
     )
@@ -63,6 +73,12 @@ public sealed class ExplorationClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a continent by its ID.</summary>
+    /// <param name="continentId">The continent ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(Continent Value, MessageContext Context)> GetContinentById(
         int continentId,
         Language? language = default,
@@ -78,6 +94,12 @@ public sealed class ExplorationClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves continents by their IDs.</summary>
+    /// <param name="continentIds">The continent IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Continent> Value, MessageContext Context)> GetContinentsByIds(
         IReadOnlyCollection<int> continentIds,
         Language? language = default,
@@ -93,6 +115,13 @@ public sealed class ExplorationClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of continents.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Continent> Value, MessageContext Context)> GetContinentsByPage(
         int pageIndex,
         int? pageSize = default,
@@ -114,6 +143,12 @@ public sealed class ExplorationClient
 
     #region v2/continents/:id/floors
 
+    /// <summary>Retrieves all floors of a continent.</summary>
+    /// <param name="continentId">The continent ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Floor> Value, MessageContext Context)> GetFloors(
         int continentId,
         Language? language = default,
@@ -129,6 +164,10 @@ public sealed class ExplorationClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves all floor IDs of a continent.</summary>
+    /// <param name="continentId">The continent ID.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<int> Value, MessageContext Context)> GetFloorsIndex(
         int continentId,
         CancellationToken cancellationToken = default
@@ -138,6 +177,13 @@ public sealed class ExplorationClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a floor by its ID.</summary>
+    /// <param name="continentId">The continent ID.</param>
+    /// <param name="floorId">The floor ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(Floor Value, MessageContext Context)> GetFloorById(
         int continentId,
         int floorId,
@@ -154,6 +200,13 @@ public sealed class ExplorationClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves floors by their IDs.</summary>
+    /// <param name="continentId">The continent ID.</param>
+    /// <param name="floorIds">The floor IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Floor> Value, MessageContext Context)> GetFloorsByIds(
         int continentId,
         IReadOnlyCollection<int> floorIds,
@@ -170,6 +223,14 @@ public sealed class ExplorationClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of floors.</summary>
+    /// <param name="continentId">The continent ID.</param>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Floor> Value, MessageContext Context)> GetFloorsByPage(
         int continentId,
         int pageIndex,
@@ -192,6 +253,13 @@ public sealed class ExplorationClient
 
     #region v2/continents/:id/floors/:floor/regions
 
+    /// <summary>Retrieves all regions on a floor.</summary>
+    /// <param name="continentId">The continent ID.</param>
+    /// <param name="floorId">The floor ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Region> Value, MessageContext Context)> GetRegions(
         int continentId,
         int floorId,
@@ -208,6 +276,11 @@ public sealed class ExplorationClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all regions on a floor.</summary>
+    /// <param name="continentId">The continent ID.</param>
+    /// <param name="floorId">The floor ID.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<int> Value, MessageContext Context)> GetRegionsIndex(
         int continentId,
         int floorId,
@@ -218,6 +291,14 @@ public sealed class ExplorationClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a region by its ID.</summary>
+    /// <param name="continentId">The continent ID.</param>
+    /// <param name="floorId">The floor ID.</param>
+    /// <param name="regionId">The region ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(Region Value, MessageContext Context)> GetRegionById(
         int continentId,
         int floorId,
@@ -235,6 +316,14 @@ public sealed class ExplorationClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves regions by their IDs.</summary>
+    /// <param name="continentId">The continent ID.</param>
+    /// <param name="floorId">The floor ID.</param>
+    /// <param name="regionIds">The region IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Region> Value, MessageContext Context)> GetRegionsByIds(
         int continentId,
         int floorId,
@@ -252,6 +341,15 @@ public sealed class ExplorationClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of regions.</summary>
+    /// <param name="continentId">The continent ID.</param>
+    /// <param name="floorId">The floor ID.</param>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Region> Value, MessageContext Context)> GetRegionsByPage(
         int continentId,
         int floorId,
@@ -275,6 +373,14 @@ public sealed class ExplorationClient
 
     #region v2/continents/:id/floors/:floor/regions/:region/maps
 
+    /// <summary>Retrieves all maps in a region.</summary>
+    /// <param name="continentId">The continent ID.</param>
+    /// <param name="floorId">The floor ID.</param>
+    /// <param name="regionId">The region ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Map> Value, MessageContext Context)> GetMaps(
         int continentId,
         int floorId,
@@ -284,7 +390,7 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        MapsRequest request = new(continentId, floorId, regionId)
+        RegionalMapsRequest request = new(continentId, floorId, regionId)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -292,6 +398,12 @@ public sealed class ExplorationClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all maps in a region.</summary>
+    /// <param name="continentId">The continent ID.</param>
+    /// <param name="floorId">The floor ID.</param>
+    /// <param name="regionId">The region ID.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<int> Value, MessageContext Context)> GetMapsIndex(
         int continentId,
         int floorId,
@@ -299,10 +411,19 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        MapsIndexRequest request = new(continentId, floorId, regionId);
+        RegionalMapsIndexRequest request = new(continentId, floorId, regionId);
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a map by its ID.</summary>
+    /// <param name="continentId">The continent ID.</param>
+    /// <param name="floorId">The floor ID.</param>
+    /// <param name="regionId">The region ID.</param>
+    /// <param name="mapId">The map ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(Map Value, MessageContext Context)> GetMapById(
         int continentId,
         int floorId,
@@ -313,7 +434,7 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        MapByIdRequest request = new(continentId, floorId, regionId, mapId)
+        RegionalMapByIdRequest request = new(continentId, floorId, regionId, mapId)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -321,6 +442,15 @@ public sealed class ExplorationClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves maps by their IDs.</summary>
+    /// <param name="continentId">The continent ID.</param>
+    /// <param name="floorId">The floor ID.</param>
+    /// <param name="regionId">The region ID.</param>
+    /// <param name="mapIds">The map IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Map> Value, MessageContext Context)> GetMapsByIds(
         int continentId,
         int floorId,
@@ -331,7 +461,7 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        MapsByIdsRequest request = new(continentId, floorId, regionId, mapIds)
+        RegionalMapsByIdsRequest request = new(continentId, floorId, regionId, mapIds)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -339,6 +469,16 @@ public sealed class ExplorationClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of maps.</summary>
+    /// <param name="continentId">The continent ID.</param>
+    /// <param name="floorId">The floor ID.</param>
+    /// <param name="regionId">The region ID.</param>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Map> Value, MessageContext Context)> GetMapsByPage(
         int continentId,
         int floorId,
@@ -350,7 +490,7 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        MapsByPageRequest request = new(continentId, floorId, regionId, pageIndex)
+        RegionalMapsByPageRequest request = new(continentId, floorId, regionId, pageIndex)
         {
             PageSize = pageSize,
             Language = language,
@@ -363,6 +503,15 @@ public sealed class ExplorationClient
 
     #region v2/continents/:id/floors/:floor/regions/:region/maps/:map/pois
 
+    /// <summary>Retrieves all points of interests on a map.</summary>
+    /// <param name="continentId">The continent ID.</param>
+    /// <param name="floorId">The floor ID.</param>
+    /// <param name="regionId">The region ID.</param>
+    /// <param name="mapId">The map ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<PointOfInterest> Value, MessageContext Context)> GetPointsOfInterest(
         int continentId,
         int floorId,
@@ -381,6 +530,13 @@ public sealed class ExplorationClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all points of interest on a map.</summary>
+    /// <param name="continentId">The continent ID.</param>
+    /// <param name="floorId">The floor ID.</param>
+    /// <param name="regionId">The region ID.</param>
+    /// <param name="mapId">The map ID.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<int> Value, MessageContext Context)> GetPointsOfInterestIndex(
         int continentId,
         int floorId,
@@ -393,6 +549,16 @@ public sealed class ExplorationClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a point of interest by its ID.</summary>
+    /// <param name="continentId">The continent ID.</param>
+    /// <param name="floorId">The floor ID.</param>
+    /// <param name="regionId">The region ID.</param>
+    /// <param name="mapId">The map ID.</param>
+    /// <param name="pointOfInterestId">the point of interest ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(PointOfInterest Value, MessageContext Context)> GetPointOfInterestById(
         int continentId,
         int floorId,
@@ -413,6 +579,16 @@ public sealed class ExplorationClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves points of interest by their IDs.</summary>
+    /// <param name="continentId">The continent ID.</param>
+    /// <param name="floorId">The floor ID.</param>
+    /// <param name="regionId">The region ID.</param>
+    /// <param name="mapId">The map ID.</param>
+    /// <param name="pointOfInterestIds">The point of interest IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<PointOfInterest> Value, MessageContext Context)> GetPointsOfInterestByIds(
         int continentId,
         int floorId,
@@ -433,6 +609,17 @@ public sealed class ExplorationClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of points of interest.</summary>
+    /// <param name="continentId">The continent ID.</param>
+    /// <param name="floorId">The floor ID.</param>
+    /// <param name="regionId">The region ID.</param>
+    /// <param name="mapId">The map ID.</param>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<PointOfInterest> Value, MessageContext Context)> GetPointsOfInterestByPage(
         int continentId,
         int floorId,
@@ -459,6 +646,15 @@ public sealed class ExplorationClient
 
     #region v2/continents/:id/floors/:floor/regions/:region/maps/:map/tasks
 
+    /// <summary>Retrieves all hearts on a map.</summary>
+    /// <param name="continentId">The continent ID.</param>
+    /// <param name="floorId">The floor ID.</param>
+    /// <param name="regionId">The region ID.</param>
+    /// <param name="mapId">The map ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Heart> Value, MessageContext Context)> GetHearts(
         int continentId,
         int floorId,
@@ -477,6 +673,13 @@ public sealed class ExplorationClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all hearts on a map.</summary>
+    /// <param name="continentId">The continent ID.</param>
+    /// <param name="floorId">The floor ID.</param>
+    /// <param name="regionId">The region ID.</param>
+    /// <param name="mapId">The map ID.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<int> Value, MessageContext Context)> GetHeartsIndex(
         int continentId,
         int floorId,
@@ -489,6 +692,16 @@ public sealed class ExplorationClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a heart by its ID.</summary>
+    /// <param name="continentId">The continent ID.</param>
+    /// <param name="floorId">The floor ID.</param>
+    /// <param name="regionId">The region ID.</param>
+    /// <param name="mapId">The map ID.</param>
+    /// <param name="heartId">The heart ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(Heart Value, MessageContext Context)> GetHeartById(
         int continentId,
         int floorId,
@@ -508,6 +721,16 @@ public sealed class ExplorationClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves hearts by their IDs.</summary>
+    /// <param name="continentId">The continent ID.</param>
+    /// <param name="floorId">The floor ID.</param>
+    /// <param name="regionId">The region ID.</param>
+    /// <param name="mapId">The map ID.</param>
+    /// <param name="heartIds">The heart IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Heart> Value, MessageContext Context)> GetHeartsByIds(
         int continentId,
         int floorId,
@@ -527,6 +750,17 @@ public sealed class ExplorationClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of hearts.</summary>
+    /// <param name="continentId">The continent ID.</param>
+    /// <param name="floorId">The floor ID.</param>
+    /// <param name="regionId">The region ID.</param>
+    /// <param name="mapId">The map ID.</param>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Heart> Value, MessageContext Context)> GetHeartsByPage(
         int continentId,
         int floorId,
@@ -552,6 +786,15 @@ public sealed class ExplorationClient
 
     #region v2/continents/:id/floors/:floor/regions/:region/maps/:map/sectors
 
+    /// <summary>Retrieves all sectors on a map.</summary>
+    /// <param name="continentId">The continent ID.</param>
+    /// <param name="floorId">The floor ID.</param>
+    /// <param name="regionId">The region ID.</param>
+    /// <param name="mapId">The map ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Sector> Value, MessageContext Context)> GetSectors(
         int continentId,
         int floorId,
@@ -570,6 +813,13 @@ public sealed class ExplorationClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all sectors on a map.</summary>
+    /// <param name="continentId">The continent ID.</param>
+    /// <param name="floorId">The floor ID.</param>
+    /// <param name="regionId">The region ID.</param>
+    /// <param name="mapId">The map ID.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<int> Value, MessageContext Context)> GetSectorsIndex(
         int continentId,
         int floorId,
@@ -582,6 +832,16 @@ public sealed class ExplorationClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a sector by its ID.</summary>
+    /// <param name="continentId">The continent ID.</param>
+    /// <param name="floorId">The floor ID.</param>
+    /// <param name="regionId">The region ID.</param>
+    /// <param name="mapId">The map ID.</param>
+    /// <param name="sectorId">The sector ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(Sector Value, MessageContext Context)> GetSectorById(
         int continentId,
         int floorId,
@@ -601,6 +861,16 @@ public sealed class ExplorationClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves sectors by their IDs.</summary>
+    /// <param name="continentId">The continent ID.</param>
+    /// <param name="floorId">The floor ID.</param>
+    /// <param name="regionId">The region ID.</param>
+    /// <param name="mapId">The map ID.</param>
+    /// <param name="sectorIds">The sector IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Sector> Value, MessageContext Context)> GetSectorsByIds(
         int continentId,
         int floorId,
@@ -620,6 +890,17 @@ public sealed class ExplorationClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of sectors.</summary>
+    /// <param name="continentId">The continent ID.</param>
+    /// <param name="floorId">The floor ID.</param>
+    /// <param name="regionId">The region ID.</param>
+    /// <param name="mapId">The map ID.</param>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Sector> Value, MessageContext Context)> GetSectorsByPage(
         int continentId,
         int floorId,
@@ -645,6 +926,11 @@ public sealed class ExplorationClient
 
     #region v2/maps
 
+    /// <summary>Retrieves a summary of all maps.</summary>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<MapSummary> Value, MessageContext Context)> GetMapSummaries(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -659,7 +945,10 @@ public sealed class ExplorationClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<int> Value, MessageContext Context)> GetMapSummariesIndex(
+    /// <summary>Retrieves the IDs of all maps.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(HashSet<int> Value, MessageContext Context)> GetMapsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -667,6 +956,12 @@ public sealed class ExplorationClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the summary of a map by its ID.</summary>
+    /// <param name="mapId">The map ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(MapSummary Value, MessageContext Context)> GetMapSummaryById(
         int mapId,
         Language? language = default,
@@ -682,6 +977,12 @@ public sealed class ExplorationClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the summary of maps by their IDs.</summary>
+    /// <param name="mapIds">The map IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<MapSummary> Value, MessageContext Context)> MapSummariesByIds(
         IReadOnlyCollection<int> mapIds,
         Language? language = default,
@@ -697,6 +998,13 @@ public sealed class ExplorationClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of map summaries.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<MapSummary> Value, MessageContext Context)> MapSummariesByPage(
         int pageIndex,
         int? pageSize = default,

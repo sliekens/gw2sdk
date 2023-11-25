@@ -5,7 +5,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Http;
 
-internal sealed class MapsByIdsRequest : IHttpRequest<HashSet<Map>>
+internal sealed class RegionalMapsByPageRequest : IHttpRequest<HashSet<Map>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/continents/:id/floors/:floor/regions/:region/maps")
@@ -13,18 +13,12 @@ internal sealed class MapsByIdsRequest : IHttpRequest<HashSet<Map>>
             AcceptEncoding = "gzip"
         };
 
-    public MapsByIdsRequest(
-        int continentId,
-        int floorId,
-        int regionId,
-        IReadOnlyCollection<int> mapIds
-    )
+    public RegionalMapsByPageRequest(int continentId, int floorId, int regionId, int pageIndex)
     {
-        Check.Collection(mapIds);
         ContinentId = continentId;
         FloorId = floorId;
         RegionId = regionId;
-        MapIds = mapIds;
+        PageIndex = pageIndex;
     }
 
     public int ContinentId { get; }
@@ -33,7 +27,9 @@ internal sealed class MapsByIdsRequest : IHttpRequest<HashSet<Map>>
 
     public int RegionId { get; }
 
-    public IReadOnlyCollection<int> MapIds { get; }
+    public int PageIndex { get; }
+
+    public int? PageSize { get; init; }
 
     public Language? Language { get; init; }
 
@@ -44,15 +40,21 @@ internal sealed class MapsByIdsRequest : IHttpRequest<HashSet<Map>>
         CancellationToken cancellationToken
     )
     {
+        QueryBuilder search = new() { { "page", PageIndex } };
+        if (PageSize.HasValue)
+        {
+            search.Add("page_size", PageSize.Value);
+        }
+
+        search.Add("v", SchemaVersion.Recommended);
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Path = Template.Path.Replace(":id", ContinentId.ToString(CultureInfo.InvariantCulture)).Replace(":floor", FloorId.ToString(CultureInfo.InvariantCulture)).Replace(":region", RegionId.ToString(CultureInfo.InvariantCulture)),
-                    Arguments = new QueryBuilder
-                    {
-                        { "ids", MapIds },
-                        { "v", SchemaVersion.Recommended }
-                    },
+                    Path = Template.Path
+                        .Replace(":id", ContinentId.ToString(CultureInfo.InvariantCulture))
+                        .Replace(":floor", FloorId.ToString(CultureInfo.InvariantCulture))
+                        .Replace(":region", RegionId.ToString(CultureInfo.InvariantCulture)),
+                    Arguments = search,
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 HttpCompletionOption.ResponseHeadersRead,
@@ -61,7 +63,8 @@ internal sealed class MapsByIdsRequest : IHttpRequest<HashSet<Map>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetMap(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }

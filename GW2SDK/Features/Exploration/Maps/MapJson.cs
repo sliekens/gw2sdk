@@ -3,7 +3,7 @@ using GuildWars2.Exploration.Adventures;
 using GuildWars2.Exploration.GodShrines;
 using GuildWars2.Exploration.Hearts;
 using GuildWars2.Exploration.HeroChallenges;
-using GuildWars2.Exploration.MasteryPoints;
+using GuildWars2.Exploration.MasteryInsights;
 using GuildWars2.Exploration.PointsOfInterest;
 using GuildWars2.Exploration.Sectors;
 using GuildWars2.Json;
@@ -138,8 +138,8 @@ internal static class MapJson
                 adventures.Map(
                     values => values.GetList(value => value.GetAdventure(missingMemberBehavior))
                 ),
-            MasteryPoints = masteryPoints.Map(
-                values => values.GetList(item => item.GetMasteryPoint(missingMemberBehavior))
+            MasteryInsights = masteryPoints.Map(
+                values => values.GetList(item => item.GetMasteryInsight(missingMemberBehavior))
             )
         };
     }

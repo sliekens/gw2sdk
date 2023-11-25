@@ -2,6 +2,7 @@
 
 namespace GuildWars2.Exploration.Maps;
 
+/// <summary>Provides a short summary of a map.</summary>
 [PublicAPI]
 [DataTransferObject]
 public sealed record MapSummary
