@@ -32,10 +32,10 @@ public sealed class TokenClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    /// <summary>Creates a new subtoken with the specified permissions, expiration and URL restrictions. If the parent token is
-    /// an API key, the subtoken will inherit the permissions of the API key but with an expiration date and optionally more
-    /// restricted permissions. If the parent token is a subtoken, the new subtoken will inherit the restrictions of the old
-    /// subtoken.</summary>
+    /// <summary>Creates a new access token with the specified permissions, expiration and URL restrictions. If the parent
+    /// token is an API key, the subtoken will inherit the permissions of the API key. The subtoken will always have an
+    /// expiration date and optionally more restricted permissions. If the parent token is also a subtoken, the new subtoken
+    /// will inherit the restrictions of the old subtoken.</summary>
     /// <remarks>A subtoken expires immediately when the API key it was created from is deleted.</remarks>
     /// <param name="accessToken">An API key or subtoken. If it is a subtoken, it must have permission to use
     /// /v2/createsubtoken.</param>
