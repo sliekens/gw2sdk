@@ -4,7 +4,6 @@ using GuildWars2;
 using GuildWars2.TestDataHelper;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Http.Resilience;
 using Microsoft.Extensions.Logging;
 using Polly;
 using Spectre.Console;

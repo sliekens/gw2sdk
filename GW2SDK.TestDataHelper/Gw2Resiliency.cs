@@ -83,14 +83,7 @@ public static class Gw2Resiliency
         try
         {
             using var json = await JsonDocument.ParseAsync(content);
-            if (!json.RootElement.TryGetProperty("text", out var text))
-            {
-                return null;
-            }
-
-            // Sometimes you get an authentication error even though your API key is valid
-            // Treat this message as an internal error, because you get a different message if the API key is really invalid
-            return text.GetString();
+            return json.RootElement.TryGetProperty("text", out var text) ? text.GetString() : null;
         }
         finally
         {
