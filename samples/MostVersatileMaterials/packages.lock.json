@@ -4,21 +4,21 @@
     "net8.0": {
       "Spectre.Console": {
         "type": "Direct",
-        "requested": "[0.47.0, )",
-        "resolved": "0.47.0",
-        "contentHash": "wz8mszcZr0cSOo8GyoG9e2DFW0SkMT8/n78Q/lIXX7EbCtHNXOoOKWpJ9Str+rCYtmQOGGyDutZzubrUHK/XkA==",
+        "requested": "[0.48.0, )",
+        "resolved": "0.48.0",
+        "contentHash": "4Mc1UT7Azgtyb8FyNwK5FZmoZbKuT5PmY7ZwaKUytjD5kGFMNBACpOZTwYtkuY377YkYtZYBeDDTJUwTW86QXw==",
         "dependencies": {
           "System.Memory": "4.5.5"
         }
       },
       "Spectre.Console.ImageSharp": {
         "type": "Direct",
-        "requested": "[0.47.0, )",
-        "resolved": "0.47.0",
-        "contentHash": "XtEzvhMZPdmDAhJ0ZgZDjgosj3y3M02f7mlfSrQaurmDJzyzxc6jeltRXr/knvXfWwuH6u2z5hN1wyQXlEBZvQ==",
+        "requested": "[0.48.0, )",
+        "resolved": "0.48.0",
+        "contentHash": "XFgFEXc/Ra09bEPeDBRL74cNq5OCn/d404+LozI/979BHdaWDMJ2wjT5Q9i4tZVZZhQKoKWQvfRe6utlRAGnRw==",
         "dependencies": {
           "SixLabors.ImageSharp": "2.1.3",
-          "Spectre.Console": "0.47.0"
+          "Spectre.Console": "0.48.0"
         }
       },
       "System.Linq.Async": {
