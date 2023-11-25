@@ -20,7 +20,7 @@ public sealed record AchievementCategory
     public required int Order { get; init; }
 
     /// <summary>The icon URI of the category.</summary>
-    public required string Icon { get; init; }
+    public required string IconHref { get; init; }
 
     /// <summary>The achievements in this category.</summary>
     /// <remarks>Can be empty.</remarks>

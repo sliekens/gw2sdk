@@ -141,7 +141,7 @@ internal static class ContainerJson
                         )
                 ),
             ChatLink = chatLink.Map(value => value.GetStringRequired()),
-            Icon = icon.Map(value => value.GetString())
+            IconHref = icon.Map(value => value.GetString())
         };
     }
 }

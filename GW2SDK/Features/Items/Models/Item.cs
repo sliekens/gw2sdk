@@ -29,5 +29,5 @@ public record Item
     /// <summary>The chat code of the item. This can be used to link the item in the chat, but also in guild or squad messages.</summary>
     public required string ChatLink { get; init; }
 
-    public required string? Icon { get; init; }
+    public required string? IconHref { get; init; }
 }

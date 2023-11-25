@@ -105,7 +105,7 @@ internal static class GreatswordSkinJson
                             value => value.GetEnum<SkinRestriction>(missingMemberBehavior)
                         )
                 ),
-            Icon = icon.Map(value => value.GetString()),
+            IconHref = icon.Map(value => value.GetString()),
             DamageType = damageType.Map(value => value.GetEnum<DamageType>(missingMemberBehavior))
         };
     }

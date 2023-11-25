@@ -56,7 +56,7 @@ internal static class RankJson
             Id = id.Map(value => value.GetInt32()),
             FinisherId = finisherId.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),
-            Icon = icon.Map(value => value.GetStringRequired()),
+            IconHref = icon.Map(value => value.GetStringRequired()),
             MinRank = minRank.Map(value => value.GetInt32()),
             MaxRank = maxRank.Map(value => value.GetInt32()),
             Levels = levels.Map(

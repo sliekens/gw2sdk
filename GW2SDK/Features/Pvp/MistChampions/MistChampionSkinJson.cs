@@ -48,7 +48,7 @@ internal static class MistChampionSkinJson
         {
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),
-            Icon = icon.Map(value => value.GetStringRequired()),
+            IconHref = icon.Map(value => value.GetStringRequired()),
             Default = @default.Map(value => value.GetBoolean()),
             UnlockItemIds = unlockItems.Map(values => values.GetList(value => value.GetInt32()))
         };

@@ -12,5 +12,5 @@ public sealed record Currency
 
     public required int Order { get; init; }
 
-    public required string Icon { get; init; }
+    public required string IconHref { get; init; }
 }

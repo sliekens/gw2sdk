@@ -54,7 +54,7 @@ internal static class NoveltyJson
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),
             Description = description.Map(value => value.GetString()) ?? "",
-            Icon = icon.Map(value => value.GetStringRequired()),
+            IconHref = icon.Map(value => value.GetStringRequired()),
             Slot = slot.Map(value => value.GetEnum<NoveltyKind>(missingMemberBehavior)),
             UnlockItems = unlockItems.Map(values => values.GetList(value => value.GetInt32()))
         };

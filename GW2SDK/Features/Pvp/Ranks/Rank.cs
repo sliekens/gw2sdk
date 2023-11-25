@@ -10,7 +10,7 @@ public sealed record Rank
 
     public required string Name { get; init; }
 
-    public required string Icon { get; init; }
+    public required string IconHref { get; init; }
 
     public required int MinRank { get; init; }
 

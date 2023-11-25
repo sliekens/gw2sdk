@@ -17,5 +17,5 @@ public record Skin
 
     public required Rarity Rarity { get; init; }
 
-    public required string? Icon { get; init; }
+    public required string? IconHref { get; init; }
 }

@@ -139,7 +139,7 @@ internal static class DefaultGizmoJson
                         )
                 ),
             ChatLink = chatLink.Map(value => value.GetStringRequired()),
-            Icon = icon.Map(value => value.GetString()),
+            IconHref = icon.Map(value => value.GetString()),
             VendorIds = vendorIds.Map(values => values.GetList(value => value.GetInt32())),
             GuildUpgradeId = guildUpgradeId.Map(value => value.GetInt32())
         };

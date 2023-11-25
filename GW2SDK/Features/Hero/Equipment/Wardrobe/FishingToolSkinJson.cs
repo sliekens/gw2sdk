@@ -99,7 +99,7 @@ internal static class FishingToolSkinJson
                         value => value.GetEnum<SkinRestriction>(missingMemberBehavior)
                     )
                 ),
-            Icon = icon.Map(value => value.GetString())
+            IconHref = icon.Map(value => value.GetString())
         };
     }
 }

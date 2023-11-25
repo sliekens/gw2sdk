@@ -54,7 +54,7 @@ internal static class MinipetJson
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),
             Unlock = unlock.Map(value => value.GetString()) ?? "",
-            Icon = icon.Map(value => value.GetStringRequired()),
+            IconHref = icon.Map(value => value.GetStringRequired()),
             Order = order.Map(value => value.GetInt32()),
             ItemId = itemId.Map(value => value.GetInt32())
         };

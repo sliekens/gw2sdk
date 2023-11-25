@@ -148,7 +148,7 @@ internal static class CraftingRecipeUnlockerJson
                         )
                 ),
             ChatLink = chatLink.Map(value => value.GetStringRequired()),
-            Icon = icon.Map(value => value.GetString()),
+            IconHref = icon.Map(value => value.GetString()),
             RecipeId = recipeId.Map(value => value.GetInt32()),
             ExtraRecipeIds = extraRecipeIds.Map(values => values.GetList(value => value.GetInt32()))
         };

@@ -110,7 +110,7 @@ internal static class ShouldersSkinJson
                             value => value.GetEnum<SkinRestriction>(missingMemberBehavior)
                         )
                 ),
-            Icon = icon.Map(value => value.GetString()),
+            IconHref = icon.Map(value => value.GetString()),
             WeightClass =
                 weightClass.Map(value => value.GetEnum<WeightClass>(missingMemberBehavior)),
             DyeSlots = dyeSlots.Map(value => value.GetDyeSlotInfo(missingMemberBehavior))

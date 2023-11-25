@@ -10,7 +10,7 @@ public sealed record Novelty
 
     public required string Description { get; init; }
 
-    public required string Icon { get; init; }
+    public required string IconHref { get; init; }
 
     public required NoveltyKind Slot { get; init; }
 

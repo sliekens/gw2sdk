@@ -17,7 +17,7 @@ public record Achievement
 
     /// <summary>The URI of the icon as it appears in the achievement panel.</summary>
     /// <remarks>Can be empty. Unfortunately many icons are missing.</remarks>
-    public required string Icon { get; init; }
+    public required string IconHref { get; init; }
 
     /// <summary>An informational description like where to start the achievement or a piece of trivia, as it appears in the
     /// achievement tooltip or details.</summary>

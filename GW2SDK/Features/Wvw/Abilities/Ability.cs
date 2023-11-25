@@ -10,7 +10,7 @@ public sealed record Ability
 
     public required string Description { get; init; }
 
-    public required string Icon { get; init; }
+    public required string IconHref { get; init; }
 
     public required IReadOnlyCollection<AbilityRank> Ranks { get; init; }
 }

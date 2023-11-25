@@ -11,7 +11,7 @@ internal static class Invariants
     internal static void Has_description(this Ability actual) =>
         Assert.NotEmpty(actual.Description);
 
-    internal static void Has_icon(this Ability actual) => Assert.NotEmpty(actual.Icon);
+    internal static void Has_icon(this Ability actual) => Assert.NotEmpty(actual.IconHref);
 
     internal static void Has_ranks(this Ability actual) => Assert.NotEmpty(actual.Ranks);
 }

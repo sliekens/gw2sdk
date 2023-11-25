@@ -13,7 +13,7 @@ public record GuildUpgrade
 
     public required TimeSpan BuildTime { get; init; }
 
-    public required string Icon { get; init; }
+    public required string IconHref { get; init; }
 
     public required int RequiredLevel { get; init; }
 

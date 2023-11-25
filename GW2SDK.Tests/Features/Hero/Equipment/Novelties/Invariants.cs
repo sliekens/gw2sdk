@@ -10,7 +10,7 @@ internal static class Invariants
 
     internal static void Has_description(this Novelty actual) => Assert.NotNull(actual.Description);
 
-    internal static void Has_icon(this Novelty actual) => Assert.NotEmpty(actual.Icon);
+    internal static void Has_icon(this Novelty actual) => Assert.NotEmpty(actual.IconHref);
 
     internal static void Has_slot(this Novelty actual) =>
         Assert.True(Enum.IsDefined(typeof(NoveltyKind), actual.Slot));

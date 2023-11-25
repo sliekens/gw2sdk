@@ -125,7 +125,7 @@ internal static class MinipetJson
                         )
                 ),
             ChatLink = chatLink.Map(value => value.GetStringRequired()),
-            Icon = icon.Map(value => value.GetString()),
+            IconHref = icon.Map(value => value.GetString()),
             MinipetId = minipetId.Map(value => value.GetInt32())
         };
     }

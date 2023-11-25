@@ -8,7 +8,7 @@ internal static class Invariants
 
     internal static void Has_name(this Rank actual) => Assert.NotEmpty(actual.Name);
 
-    internal static void Has_icon(this Rank actual) => Assert.NotEmpty(actual.Icon);
+    internal static void Has_icon(this Rank actual) => Assert.NotEmpty(actual.IconHref);
 
     internal static void Has_levels(this Rank actual) => Assert.NotEmpty(actual.Levels);
 }

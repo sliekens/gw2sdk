@@ -14,7 +14,7 @@ public sealed record Finisher
 
     public required int Order { get; init; }
 
-    public required string Icon { get; init; }
+    public required string IconHref { get; init; }
 
     public required string Name { get; init; }
 }

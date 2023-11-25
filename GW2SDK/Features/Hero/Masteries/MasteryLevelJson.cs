@@ -54,7 +54,7 @@ internal static class MasteryLevelJson
             Name = name.Map(value => value.GetStringRequired()),
             Description = description.Map(value => value.GetStringRequired()),
             Instruction = instruction.Map(value => value.GetStringRequired()),
-            Icon = icon.Map(value => value.GetStringRequired()),
+            IconHref = icon.Map(value => value.GetStringRequired()),
             PointCost = pointCost.Map(value => value.GetInt32()),
             ExperienceCost = experienceCost.Map(value => value.GetInt32())
         };

@@ -10,7 +10,7 @@ public sealed record Minipet
 
     public required string Unlock { get; init; }
 
-    public required string Icon { get; init; }
+    public required string IconHref { get; init; }
 
     public required int Order { get; init; }
 

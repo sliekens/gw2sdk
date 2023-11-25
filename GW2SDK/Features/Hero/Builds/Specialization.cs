@@ -34,8 +34,8 @@ public sealed record Specialization
     public required string BackgroundHref { get; init; }
 
     /// <summary>If this is an <see cref="Elite" /> specialization, this is the URL of the specialization's large icon.</summary>
-    public required string ProfessionIconBig { get; init; }
+    public required string ProfessionBigIconHref { get; init; }
 
     /// <summary>If this is an <see cref="Elite" /> specialization, this is the URL of the specialization's small icon.</summary>
-    public required string ProfessionIcon { get; init; }
+    public required string ProfessionIconHref { get; init; }
 }

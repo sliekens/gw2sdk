@@ -11,5 +11,5 @@ public sealed record Utility : Consumable
 
     public required string EffectDescription { get; init; }
 
-    public required string? EffectIcon { get; init; }
+    public required string? EffectIconHref { get; init; }
 }

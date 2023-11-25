@@ -54,7 +54,7 @@ internal static class MailCarrierJson
             Id = id.Map(value => value.GetInt32()),
             UnlockItems = unlockItems.Map(values => values.GetList(value => value.GetInt32())),
             Order = order.Map(value => value.GetInt32()),
-            Icon = icon.Map(value => value.GetStringRequired()),
+            IconHref = icon.Map(value => value.GetStringRequired()),
             Name = name.Map(value => value.GetStringRequired()),
             Flags = flags.Map(
                 values => values.GetList(

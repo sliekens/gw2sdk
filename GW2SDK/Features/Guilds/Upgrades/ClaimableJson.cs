@@ -79,7 +79,7 @@ internal static class ClaimableJson
             Name = name.Map(value => value.GetStringRequired()),
             Description = description.Map(value => value.GetStringRequired()),
             BuildTime = buildTime.Map(value => TimeSpan.FromMinutes(value.GetDouble())),
-            Icon = icon.Map(value => value.GetStringRequired()),
+            IconHref = icon.Map(value => value.GetStringRequired()),
             RequiredLevel = requiredLevel.Map(value => value.GetInt32()),
             Experience = experience.Map(value => value.GetInt32()),
             Prerequisites = prerequisites.Map(values => values.GetList(value => value.GetInt32())),

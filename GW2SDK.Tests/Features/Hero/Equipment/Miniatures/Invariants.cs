@@ -8,7 +8,7 @@ internal static class Invariants
 
     internal static void Has_name(this Minipet actual) => Assert.NotEmpty(actual.Name);
 
-    internal static void Has_icon(this Minipet actual) => Assert.NotEmpty(actual.Icon);
+    internal static void Has_icon(this Minipet actual) => Assert.NotEmpty(actual.IconHref);
 
     internal static void Has_order(this Minipet actual) => Assert.True(actual.Order >= 0);
 

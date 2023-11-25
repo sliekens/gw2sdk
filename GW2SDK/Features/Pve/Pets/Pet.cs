@@ -10,7 +10,7 @@ public sealed record Pet
 
     public required string Description { get; init; }
 
-    public required string Icon { get; init; }
+    public required string IconHref { get; init; }
 
     public required IReadOnlyCollection<PetSkill> Skills { get; init; }
 }

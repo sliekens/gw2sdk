@@ -50,7 +50,7 @@ internal static class CurrencyJson
             Name = name.Map(value => value.GetStringRequired()),
             Description = description.Map(value => value.GetStringRequired()),
             Order = order.Map(value => value.GetInt32()),
-            Icon = icon.Map(value => value.GetStringRequired())
+            IconHref = icon.Map(value => value.GetStringRequired())
         };
     }
 }

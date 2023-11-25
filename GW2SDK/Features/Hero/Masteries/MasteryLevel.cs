@@ -10,7 +10,7 @@ public sealed record MasteryLevel
 
     public required string Instruction { get; init; }
 
-    public required string Icon { get; init; }
+    public required string IconHref { get; init; }
 
     public required int PointCost { get; init; }
 

@@ -167,7 +167,7 @@ internal static class CoatJson
                         )
                 ),
             ChatLink = chatLink.Map(value => value.GetStringRequired()),
-            Icon = icon.Map(value => value.GetString()),
+            IconHref = icon.Map(value => value.GetString()),
             WeightClass =
                 weightClass.Map(value => value.GetEnum<WeightClass>(missingMemberBehavior)),
             Defense = defense.Map(value => value.GetInt32()),

@@ -53,7 +53,7 @@ internal static class SeasonRankJson
         {
             Name = name.Map(value => value.GetStringRequired()),
             Description = description.Map(value => value.GetStringRequired()),
-            Icon = icon.Map(value => value.GetStringRequired()),
+            IconHref = icon.Map(value => value.GetStringRequired()),
             Overlay = overlay.Map(value => value.GetStringRequired()),
             SmallOverlay = smallOverlay.Map(value => value.GetStringRequired()),
             Tiers = tiers.Map(

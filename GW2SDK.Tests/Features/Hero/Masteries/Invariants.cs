@@ -29,7 +29,7 @@ internal static class Invariants
     internal static void Instruction_is_not_empty(this MasteryLevel actual) =>
         Assert.NotEmpty(actual.Instruction);
 
-    internal static void Icon_is_not_empty(this MasteryLevel actual) => Assert.NotEmpty(actual.Icon);
+    internal static void Icon_is_not_empty(this MasteryLevel actual) => Assert.NotEmpty(actual.IconHref);
 
     internal static void Costs_points(this MasteryLevel actual) =>
         Assert.InRange(actual.PointCost, 1, int.MaxValue);

@@ -8,11 +8,11 @@ public sealed record Division
 
     public required IReadOnlyCollection<DivisionFlag> Flags { get; init; }
 
-    public required string LargeIcon { get; init; }
+    public required string LargeIconHref { get; init; }
 
-    public required string SmallIcon { get; init; }
+    public required string SmallIconHref { get; init; }
 
-    public required string PipIcon { get; init; }
+    public required string PipIconHref { get; init; }
 
     public required IReadOnlyCollection<DivisionTier> Tiers { get; init; }
 }

@@ -120,7 +120,7 @@ internal static class GatheringToolSkinJson
                         value => value.GetEnum<SkinRestriction>(missingMemberBehavior)
                     )
                 ),
-            Icon = icon.Map(value => value.GetString())
+            IconHref = icon.Map(value => value.GetString())
         };
     }
 }

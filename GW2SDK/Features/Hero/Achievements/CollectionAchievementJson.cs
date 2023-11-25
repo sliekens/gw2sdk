@@ -91,7 +91,7 @@ internal static class CollectionAchievementJson
         return new CollectionAchievement
         {
             Id = id.Map(value => value.GetInt32()),
-            Icon = icon.Map(value => value.GetString()) ?? "",
+            IconHref = icon.Map(value => value.GetString()) ?? "",
             Name = name.Map(value => value.GetStringRequired()),
             Description = description.Map(value => value.GetStringRequired()),
             Requirement = requirement.Map(value => value.GetStringRequired()),

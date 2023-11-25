@@ -182,7 +182,7 @@ internal static class SpearJson
                         )
                 ),
             ChatLink = chatLink.Map(value => value.GetStringRequired()),
-            Icon = icon.Map(value => value.GetString()),
+            IconHref = icon.Map(value => value.GetString()),
             DamageType = damageType.Map(value => value.GetEnum<DamageType>(missingMemberBehavior)),
             MinPower = minPower.Map(value => value.GetInt32()),
             MaxPower = maxPower.Map(value => value.GetInt32()),

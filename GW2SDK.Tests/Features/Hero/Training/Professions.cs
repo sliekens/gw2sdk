@@ -22,8 +22,8 @@ public class Professions
                     "Enum.IsDefined(profession.Id)"
                 );
                 Assert.NotEmpty(profession.Name);
-                Assert.NotEmpty(profession.Icon);
-                Assert.NotEmpty(profession.IconBig);
+                Assert.NotEmpty(profession.IconHref);
+                Assert.NotEmpty(profession.BigIconHref);
             }
         );
     }

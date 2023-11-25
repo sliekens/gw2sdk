@@ -78,8 +78,8 @@ internal static class ProfessionJson
             Id = id.Map(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
             Name = name.Map(value => value.GetStringRequired()),
             Code = code.Map(value => value.GetInt32()),
-            Icon = icon.Map(value => value.GetStringRequired()),
-            IconBig = iconBig.Map(value => value.GetStringRequired()),
+            IconHref = icon.Map(value => value.GetStringRequired()),
+            BigIconHref = iconBig.Map(value => value.GetStringRequired()),
             Specializations =
                 specializations.Map(values => values.GetList(value => value.GetInt32())),
             Weapons =

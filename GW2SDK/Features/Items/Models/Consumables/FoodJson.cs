@@ -151,11 +151,11 @@ internal static class FoodJson
                         )
                 ),
             ChatLink = chatLink.Map(value => value.GetStringRequired()),
-            Icon = icon.Map(value => value.GetString()),
+            IconHref = icon.Map(value => value.GetString()),
             Duration = duration.Map(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             ApplyCount = applyCount.Map(value => value.GetInt32()),
             EffectName = effectName.Map(value => value.GetString()) ?? "",
-            EffectIcon = effectIcon.Map(value => value.GetString()),
+            EffectIconHref = effectIcon.Map(value => value.GetString()),
             EffectDescription = effectDescription.Map(value => value.GetString()) ?? ""
         };
     }

@@ -57,9 +57,9 @@ internal static class DivisionJson
                     values =>
                         values.GetList(value => value.GetEnum<DivisionFlag>(missingMemberBehavior))
                 ),
-            LargeIcon = largeIcon.Map(value => value.GetStringRequired()),
-            SmallIcon = smallIcon.Map(value => value.GetStringRequired()),
-            PipIcon = pipIcon.Map(value => value.GetStringRequired()),
+            LargeIconHref = largeIcon.Map(value => value.GetStringRequired()),
+            SmallIconHref = smallIcon.Map(value => value.GetStringRequired()),
+            PipIconHref = pipIcon.Map(value => value.GetStringRequired()),
             Tiers = tiers.Map(
                 values => values.GetList(value => value.GetDivisionTier(missingMemberBehavior))
             )

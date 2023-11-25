@@ -11,9 +11,9 @@ public sealed record Profession
 
     public required int Code { get; init; }
 
-    public required string Icon { get; init; }
+    public required string IconHref { get; init; }
 
-    public required string IconBig { get; init; }
+    public required string BigIconHref { get; init; }
 
     public required IReadOnlyCollection<int> Specializations { get; init; }
 

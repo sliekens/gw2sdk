@@ -29,7 +29,7 @@ internal static class AssetJson
         return new Asset
         {
             Id = id.Map(value => value.GetStringRequired()),
-            Icon = icon.Map(value => value.GetStringRequired())
+            IconHref = icon.Map(value => value.GetStringRequired())
         };
     }
 }

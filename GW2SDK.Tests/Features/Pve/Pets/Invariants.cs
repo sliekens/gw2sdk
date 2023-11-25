@@ -10,7 +10,7 @@ internal static class Invariants
 
     internal static void Has_description(this Pet actual) => Assert.NotEmpty(actual.Description);
 
-    internal static void Has_icon(this Pet actual) => Assert.NotEmpty(actual.Icon);
+    internal static void Has_icon(this Pet actual) => Assert.NotEmpty(actual.IconHref);
 
     internal static void Has_skills(this Pet actual) => Assert.NotEmpty(actual.Skills);
 }

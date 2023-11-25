@@ -16,7 +16,7 @@ public class ItemCard
 
     public async Task Show(Item item)
     {
-        await using var ingredientIcon = await httpClient.GetStreamAsync(item.Icon!);
+        await using var ingredientIcon = await httpClient.GetStreamAsync(item.IconHref!);
         var itemTable = new Table().AddColumn("Icon")
             .AddColumn("Ingredient")
             .AddColumn("Description");

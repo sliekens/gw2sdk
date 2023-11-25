@@ -86,8 +86,8 @@ internal static class SpecializationJson
             WeaponTraitId = weaponTrait.Map(value => value.GetInt32()),
             IconHref = icon.Map(value => value.GetStringRequired()),
             BackgroundHref = background.Map(value => value.GetStringRequired()),
-            ProfessionIconBig = professionIconBig.Map(value => value.GetString()) ?? "",
-            ProfessionIcon = professionIcon.Map(value => value.GetString()) ?? ""
+            ProfessionBigIconHref = professionIconBig.Map(value => value.GetString()) ?? "",
+            ProfessionIconHref = professionIcon.Map(value => value.GetString()) ?? ""
         };
     }
 }

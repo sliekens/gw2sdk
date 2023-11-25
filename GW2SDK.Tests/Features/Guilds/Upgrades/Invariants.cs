@@ -11,7 +11,7 @@ internal static class Invariants
     internal static void Has_description(this GuildUpgrade actual) =>
         Assert.NotNull(actual.Description);
 
-    internal static void Has_icon(this GuildUpgrade actual) => Assert.NotEmpty(actual.Icon);
+    internal static void Has_icon(this GuildUpgrade actual) => Assert.NotEmpty(actual.IconHref);
 
     internal static void Has_costs(this GuildUpgrade actual) => Assert.NotNull(actual.Costs);
 

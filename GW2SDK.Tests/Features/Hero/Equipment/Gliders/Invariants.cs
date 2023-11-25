@@ -10,7 +10,7 @@ internal static class Invariants
 
     internal static void Has_order(this Glider actual) => Assert.True(actual.Order >= 0);
 
-    internal static void Has_icon(this Glider actual) => Assert.NotEmpty(actual.Icon);
+    internal static void Has_icon(this Glider actual) => Assert.NotEmpty(actual.IconHref);
 
     internal static void Has_name(this Glider actual) => Assert.NotEmpty(actual.Name);
 

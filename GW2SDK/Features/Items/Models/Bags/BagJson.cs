@@ -127,7 +127,7 @@ internal static class BagJson
                         )
                 ),
             ChatLink = chatLink.Map(value => value.GetStringRequired()),
-            Icon = icon.Map(value => value.GetString()),
+            IconHref = icon.Map(value => value.GetString()),
             NoSellOrSort = noSellOrSort.Map(value => value.GetBoolean()),
             Size = size.Map(value => value.GetInt32())
         };
