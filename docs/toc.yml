@@ -1,7 +1,8 @@
-# - name: Getting started
-#   href: guide/
-# - name: API browser
-#   href: api/
-#   homepage: api/index.md
+items:
+- name: Getting started
+  href: guide/
+- name: API browser
+  href: api/
+  homepage: api/index.md
 - name: GitHub
   href: https://github.com/sliekens/gw2sdk
