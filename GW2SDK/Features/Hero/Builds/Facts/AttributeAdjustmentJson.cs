@@ -18,7 +18,8 @@ internal static class AttributeAdjustmentJson
         OptionalMember text = "text";
         RequiredMember icon = "icon";
         NullableMember adjustment = "value";
-        RequiredMember target = "target";
+        NullableMember target = "target";
+        NullableMember hitCount = "hit_count";
 
         foreach (var member in json.EnumerateObject())
         {
@@ -55,6 +56,10 @@ internal static class AttributeAdjustmentJson
             {
                 target = member;
             }
+            else if (member.Name == hitCount.Name)
+            {
+                hitCount = member;
+            }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
@@ -68,7 +73,8 @@ internal static class AttributeAdjustmentJson
             Value = adjustment.Map(value => value.GetInt32()),
             Target = target.Map(
                 value => value.GetEnum<AttributeAdjustmentTarget>(missingMemberBehavior)
-            )
+            ),
+            HitCount = hitCount.Map(value => value.GetInt32())
         };
     }
 }
