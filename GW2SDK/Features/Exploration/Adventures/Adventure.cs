@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Exploration.Adventures;
 
-/// <summary>Information about an adventure.</summary>
+/// <summary>Information about an adventure, for example Roller beetle races.</summary>
 [PublicAPI]
 [DataTransferObject]
 public sealed record Adventure
