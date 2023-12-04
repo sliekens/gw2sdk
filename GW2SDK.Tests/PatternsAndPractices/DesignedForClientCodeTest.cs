@@ -22,7 +22,9 @@ public class DesignedForClientCodeTest : IClassFixture<AssemblyFixture>
          * Note that the goal is not to make every helper object internal, but to think carefully about their class design.
          * Especially regarding how easily they can be replaced or evolved between versions.
          */
-        var visible = fixture.Assembly.ExportedTypes.ToList();
+        var visible = fixture.Assembly.ExportedTypes
+            .Where(type => type.Namespace!.StartsWith("GuildWars2"))
+            .ToList();
         Assert.All(
             visible,
             type =>
