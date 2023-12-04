@@ -48,9 +48,7 @@ namespace JetBrains.Annotations;
     | AttributeTargets.Interface
     | AttributeTargets.GenericParameter
 )]
-internal sealed class CanBeNullAttribute : Attribute
-{
-}
+internal sealed class CanBeNullAttribute : Attribute;
 
 /// <summary>Indicates that the value of the marked element can never be <c>null</c>.</summary>
 /// <example>
@@ -71,9 +69,7 @@ internal sealed class CanBeNullAttribute : Attribute
     | AttributeTargets.Interface
     | AttributeTargets.GenericParameter
 )]
-internal sealed class NotNullAttribute : Attribute
-{
-}
+internal sealed class NotNullAttribute : Attribute;
 
 /// <summary>Can be applied to symbols of types derived from IEnumerable as well as to symbols of Task and Lazy classes to
 /// indicate that the value of a collection item, of the Task.Result property or of the Lazy.Value property can never be
@@ -96,9 +92,7 @@ internal sealed class NotNullAttribute : Attribute
     | AttributeTargets.Delegate
     | AttributeTargets.Field
 )]
-internal sealed class ItemNotNullAttribute : Attribute
-{
-}
+internal sealed class ItemNotNullAttribute : Attribute;
 
 /// <summary>Can be applied to symbols of types derived from IEnumerable as well as to symbols of Task and Lazy classes to
 /// indicate that the value of a collection item, of the Task.Result property or of the Lazy.Value property can be null.</summary>
@@ -121,9 +115,7 @@ internal sealed class ItemNotNullAttribute : Attribute
     | AttributeTargets.Delegate
     | AttributeTargets.Field
 )]
-internal sealed class ItemCanBeNullAttribute : Attribute
-{
-}
+internal sealed class ItemCanBeNullAttribute : Attribute;
 
 /// <summary>Indicates that the marked method builds string by the format pattern and (optional) arguments. The parameter,
 /// which contains the format string, should be given in constructor. The format string should be in
@@ -263,9 +255,7 @@ internal sealed class ValueRangeAttribute : Attribute
     | AttributeTargets.Method
     | AttributeTargets.Delegate
 )]
-internal sealed class NonNegativeValueAttribute : Attribute
-{
-}
+internal sealed class NonNegativeValueAttribute : Attribute;
 
 /// <summary>Indicates that the function argument should be a string literal and match one of the parameters of the caller
 /// function. For example, ReSharper annotates the parameter of <see cref="System.ArgumentNullException" />.</summary>
@@ -278,9 +268,7 @@ internal sealed class NonNegativeValueAttribute : Attribute
 /// </code>
 /// </example>
 [AttributeUsage(AttributeTargets.Parameter)]
-internal sealed class InvokerParameterNameAttribute : Attribute
-{
-}
+internal sealed class InvokerParameterNameAttribute : Attribute;
 
 /// <summary>Indicates that the method is contained in a type that implements
 /// <c>System.ComponentModel.INotifyPropertyChanged</c> interface and this method is used to notify that some property
@@ -441,9 +429,7 @@ internal sealed class LocalizationRequiredAttribute : Attribute
 /// </code>
 /// </example>
 [AttributeUsage(AttributeTargets.Interface | AttributeTargets.Class | AttributeTargets.Struct)]
-internal sealed class CannotApplyEqualityOperatorAttribute : Attribute
-{
-}
+internal sealed class CannotApplyEqualityOperatorAttribute : Attribute;
 
 /// <summary>When applied to a target attribute, specifies a requirement for any type marked with the target attribute to
 /// implement or inherit specific type or types.</summary>
@@ -606,9 +592,7 @@ internal sealed class PublicAPIAttribute : Attribute
 /// parameter is a delegate, indicates that delegate is executed while the method is executed. If the parameter is an
 /// enumerable, indicates that it is enumerated while the method is executed.</summary>
 [AttributeUsage(AttributeTargets.Parameter)]
-internal sealed class InstantHandleAttribute : Attribute
-{
-}
+internal sealed class InstantHandleAttribute : Attribute;
 
 /// <summary>Indicates that a method does not make any observable state changes. The same as
 /// <c>System.Diagnostics.Contracts.PureAttribute</c>.</summary>
@@ -622,9 +606,7 @@ internal sealed class InstantHandleAttribute : Attribute
 /// </code>
 /// </example>
 [AttributeUsage(AttributeTargets.Method)]
-internal sealed class PureAttribute : Attribute
-{
-}
+internal sealed class PureAttribute : Attribute;
 
 /// <summary>Indicates that the return value of the method invocation must be used.</summary>
 /// <remarks>Methods decorated with this attribute (in contrast to pure methods) might change state, but make no sense
@@ -672,9 +654,7 @@ internal sealed class MustUseReturnValueAttribute : Attribute
     | AttributeTargets.Struct
     | AttributeTargets.GenericParameter
 )]
-internal sealed class ProvidesContextAttribute : Attribute
-{
-}
+internal sealed class ProvidesContextAttribute : Attribute;
 
 /// <summary>Indicates that a parameter is a path to a file or a folder within a web project. Path can be relative or
 /// absolute, starting from web root (~).</summary>
@@ -713,9 +693,7 @@ internal sealed class PathReferenceAttribute : Attribute
 /// </code>
 /// </example>
 [AttributeUsage(AttributeTargets.Method)]
-internal sealed class SourceTemplateAttribute : Attribute
-{
-}
+internal sealed class SourceTemplateAttribute : Attribute;
 
 /// <summary>Allows specifying a macro for a parameter of a <see cref="SourceTemplateAttribute">source template</see>.</summary>
 /// <remarks>You can apply the attribute on the whole method or on any of its additional parameters. The macro expression
@@ -923,16 +901,12 @@ internal sealed class AspMvcControllerAttribute : Attribute
 [AttributeUsage(
     AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property
 )]
-internal sealed class AspMvcMasterAttribute : Attribute
-{
-}
+internal sealed class AspMvcMasterAttribute : Attribute;
 
 /// <summary>ASP.NET MVC attribute. Indicates that the marked parameter is an MVC model type. Use this attribute for custom
 /// wrappers similar to <c>System.Web.Mvc.Controller.View(String, Object)</c>.</summary>
 [AttributeUsage(AttributeTargets.Parameter)]
-internal sealed class AspMvcModelTypeAttribute : Attribute
-{
-}
+internal sealed class AspMvcModelTypeAttribute : Attribute;
 
 /// <summary>ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter is an MVC partial view. If
 /// applied to a method, the MVC partial view name is calculated implicitly from the context. Use this attribute for custom
@@ -943,42 +917,32 @@ internal sealed class AspMvcModelTypeAttribute : Attribute
     | AttributeTargets.Field
     | AttributeTargets.Property
 )]
-internal sealed class AspMvcPartialViewAttribute : Attribute
-{
-}
+internal sealed class AspMvcPartialViewAttribute : Attribute;
 
 /// <summary>ASP.NET MVC attribute. Allows disabling inspections for MVC views within a class or a method.</summary>
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-internal sealed class AspMvcSuppressViewErrorAttribute : Attribute
-{
-}
+internal sealed class AspMvcSuppressViewErrorAttribute : Attribute;
 
 /// <summary>ASP.NET MVC attribute. Indicates that a parameter is an MVC display template. Use this attribute for custom
 /// wrappers similar to <c>System.Web.Mvc.Html.DisplayExtensions.DisplayForModel(HtmlHelper, String)</c>.</summary>
 [AttributeUsage(
     AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property
 )]
-internal sealed class AspMvcDisplayTemplateAttribute : Attribute
-{
-}
+internal sealed class AspMvcDisplayTemplateAttribute : Attribute;
 
 /// <summary>ASP.NET MVC attribute. Indicates that the marked parameter is an MVC editor template. Use this attribute for
 /// custom wrappers similar to <c>System.Web.Mvc.Html.EditorExtensions.EditorForModel(HtmlHelper, String)</c>.</summary>
 [AttributeUsage(
     AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property
 )]
-internal sealed class AspMvcEditorTemplateAttribute : Attribute
-{
-}
+internal sealed class AspMvcEditorTemplateAttribute : Attribute;
 
 /// <summary>ASP.NET MVC attribute. Indicates that the marked parameter is an MVC template. Use this attribute for custom
 /// wrappers similar to <c>System.ComponentModel.DataAnnotations.UIHintAttribute(System.String)</c>.</summary>
 [AttributeUsage(
     AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property
 )]
-internal sealed class AspMvcTemplateAttribute : Attribute
-{
-}
+internal sealed class AspMvcTemplateAttribute : Attribute;
 
 /// <summary>ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter is an MVC view component. If
 /// applied to a method, the MVC view name is calculated implicitly from the context. Use this attribute for custom
@@ -989,17 +953,13 @@ internal sealed class AspMvcTemplateAttribute : Attribute
     | AttributeTargets.Field
     | AttributeTargets.Property
 )]
-internal sealed class AspMvcViewAttribute : Attribute
-{
-}
+internal sealed class AspMvcViewAttribute : Attribute;
 
 /// <summary>ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter is an MVC view component name.</summary>
 [AttributeUsage(
     AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property
 )]
-internal sealed class AspMvcViewComponentAttribute : Attribute
-{
-}
+internal sealed class AspMvcViewComponentAttribute : Attribute;
 
 /// <summary>ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter is an MVC view component view.
 /// If applied to a method, the MVC view component view name is default.</summary>
@@ -1009,9 +969,7 @@ internal sealed class AspMvcViewComponentAttribute : Attribute
     | AttributeTargets.Field
     | AttributeTargets.Property
 )]
-internal sealed class AspMvcViewComponentViewAttribute : Attribute
-{
-}
+internal sealed class AspMvcViewComponentViewAttribute : Attribute;
 
 /// <summary>ASP.NET MVC attribute. When applied to a parameter of an attribute, indicates that this parameter is an MVC
 /// action name.</summary>
@@ -1025,9 +983,7 @@ internal sealed class AspMvcViewComponentViewAttribute : Attribute
 /// </code>
 /// </example>
 [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Property)]
-internal sealed class AspMvcActionSelectorAttribute : Attribute
-{
-}
+internal sealed class AspMvcActionSelectorAttribute : Attribute;
 
 [AttributeUsage(
     AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.Field
@@ -1064,9 +1020,7 @@ internal sealed class HtmlAttributeValueAttribute : Attribute
 /// <summary>Razor attribute. Indicates that the marked parameter or method is a Razor section. Use this attribute for
 /// custom wrappers similar to <c>System.Web.WebPages.WebPageBase.RenderSection(String)</c>.</summary>
 [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method)]
-internal sealed class RazorSectionAttribute : Attribute
-{
-}
+internal sealed class RazorSectionAttribute : Attribute;
 
 /// <summary>Indicates how method, constructor invocation, or property access over collection type affects the contents of
 /// the collection. Use <see cref="CollectionAccessType" /> to specify the access type.</summary>
@@ -1127,9 +1081,7 @@ internal enum CollectionAccessType
 /// is satisfied. To set the condition, mark one of the parameters with <see cref="AssertionConditionAttribute" />
 /// attribute.</summary>
 [AttributeUsage(AttributeTargets.Method)]
-internal sealed class AssertionMethodAttribute : Attribute
-{
-}
+internal sealed class AssertionMethodAttribute : Attribute;
 
 /// <summary>Indicates the condition parameter of the assertion method. The method itself should be marked by
 /// <see cref="AssertionMethodAttribute" /> attribute. The mandatory argument of the attribute is the assertion type.</summary>
@@ -1165,17 +1117,13 @@ internal enum AssertionConditionType
 /// unconditionally throw exception.</summary>
 [Obsolete("Use [ContractAnnotation('=> halt')] instead")]
 [AttributeUsage(AttributeTargets.Method)]
-internal sealed class TerminatesProgramAttribute : Attribute
-{
-}
+internal sealed class TerminatesProgramAttribute : Attribute;
 
 /// <summary>Indicates that method is pure LINQ method, with postponed enumeration (like Enumerable.Select, .Where). This
 /// annotation allows inference of [InstantHandle] annotation for parameters of delegate type by analyzing LINQ method
 /// chains.</summary>
 [AttributeUsage(AttributeTargets.Method)]
-internal sealed class LinqTunnelAttribute : Attribute
-{
-}
+internal sealed class LinqTunnelAttribute : Attribute;
 
 /// <summary>Indicates that IEnumerable passed as a parameter is not enumerated. Use this annotation to suppress the
 /// 'Possible multiple enumeration of IEnumerable' inspection.</summary>
@@ -1194,17 +1142,13 @@ internal sealed class LinqTunnelAttribute : Attribute
 /// </code>
 /// </example>
 [AttributeUsage(AttributeTargets.Parameter)]
-internal sealed class NoEnumerationAttribute : Attribute
-{
-}
+internal sealed class NoEnumerationAttribute : Attribute;
 
 /// <summary>Indicates that the marked parameter is a regular expression pattern.</summary>
 [AttributeUsage(
     AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property
 )]
-internal sealed class RegexPatternAttribute : Attribute
-{
-}
+internal sealed class RegexPatternAttribute : Attribute;
 
 /// <summary>Prevents the Member Reordering feature from tossing members of the marked class.</summary>
 /// <remarks>The attribute must be mentioned in your member reordering patterns.</remarks>
@@ -1214,16 +1158,12 @@ internal sealed class RegexPatternAttribute : Attribute
     | AttributeTargets.Struct
     | AttributeTargets.Enum
 )]
-internal sealed class NoReorderAttribute : Attribute
-{
-}
+internal sealed class NoReorderAttribute : Attribute;
 
 /// <summary>XAML attribute. Indicates the type that has <c>ItemsSource</c> property and should be treated as
 /// <c>ItemsControl</c>-derived type, to enable inner items <c>DataContext</c> type resolve.</summary>
 [AttributeUsage(AttributeTargets.Class)]
-internal sealed class XamlItemsControlAttribute : Attribute
-{
-}
+internal sealed class XamlItemsControlAttribute : Attribute;
 
 /// <summary>XAML attribute. Indicates the property of some <c>BindingBase</c>-derived type, that is used to bind some item
 /// of <c>ItemsControl</c>-derived type. This annotation will enable the <c>DataContext</c> type resolve for XAML bindings
@@ -1231,9 +1171,7 @@ internal sealed class XamlItemsControlAttribute : Attribute
 /// <remarks>Property should have the tree ancestor of the <c>ItemsControl</c> type or marked with the
 /// <see cref="XamlItemsControlAttribute" /> attribute.</remarks>
 [AttributeUsage(AttributeTargets.Property)]
-internal sealed class XamlItemBindingOfItemsControlAttribute : Attribute
-{
-}
+internal sealed class XamlItemBindingOfItemsControlAttribute : Attribute;
 
 /// <summary>XAML attribute. Indicates the property of some <c>Style</c>-derived type, that is used to style items of
 /// <c>ItemsControl</c>-derived type. This annotation will enable the <c>DataContext</c> type resolve for XAML bindings for
@@ -1241,9 +1179,7 @@ internal sealed class XamlItemBindingOfItemsControlAttribute : Attribute
 /// <remarks>Property should have the tree ancestor of the <c>ItemsControl</c> type or marked with the
 /// <see cref="XamlItemsControlAttribute" /> attribute.</remarks>
 [AttributeUsage(AttributeTargets.Property)]
-internal sealed class XamlItemStyleOfItemsControlAttribute : Attribute
-{
-}
+internal sealed class XamlItemStyleOfItemsControlAttribute : Attribute;
 
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
 internal sealed class AspChildControlTypeAttribute : Attribute
@@ -1262,19 +1198,13 @@ internal sealed class AspChildControlTypeAttribute : Attribute
 }
 
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Method)]
-internal sealed class AspDataFieldAttribute : Attribute
-{
-}
+internal sealed class AspDataFieldAttribute : Attribute;
 
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Method)]
-internal sealed class AspDataFieldsAttribute : Attribute
-{
-}
+internal sealed class AspDataFieldsAttribute : Attribute;
 
 [AttributeUsage(AttributeTargets.Property)]
-internal sealed class AspMethodPropertyAttribute : Attribute
-{
-}
+internal sealed class AspMethodPropertyAttribute : Attribute;
 
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
 internal sealed class AspRequiredAttributeAttribute : Attribute
@@ -1361,27 +1291,17 @@ internal sealed class RazorPageBaseTypeAttribute : Attribute
 }
 
 [AttributeUsage(AttributeTargets.Method)]
-internal sealed class RazorHelperCommonAttribute : Attribute
-{
-}
+internal sealed class RazorHelperCommonAttribute : Attribute;
 
 [AttributeUsage(AttributeTargets.Property)]
-internal sealed class RazorLayoutAttribute : Attribute
-{
-}
+internal sealed class RazorLayoutAttribute : Attribute;
 
 [AttributeUsage(AttributeTargets.Method)]
-internal sealed class RazorWriteLiteralMethodAttribute : Attribute
-{
-}
+internal sealed class RazorWriteLiteralMethodAttribute : Attribute;
 
 [AttributeUsage(AttributeTargets.Method)]
-internal sealed class RazorWriteMethodAttribute : Attribute
-{
-}
+internal sealed class RazorWriteMethodAttribute : Attribute;
 
 [AttributeUsage(AttributeTargets.Parameter)]
-internal sealed class RazorWriteMethodParameterAttribute : Attribute
-{
-}
+internal sealed class RazorWriteMethodParameterAttribute : Attribute;
 #nullable restore
