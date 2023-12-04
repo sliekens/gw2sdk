@@ -55,25 +55,6 @@ public sealed class GuildsClient
 
     #endregion v2/guild/:id
 
-    #region v2/guild/:id/log
-
-    public Task<(List<GuildLog> Value, MessageContext Context)> GetGuildLog(
-        string guildId,
-        string? accessToken,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
-    {
-        GuildLogRequest request = new(guildId)
-        {
-            AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
-        };
-        return request.SendAsync(httpClient, cancellationToken);
-    }
-
-    #endregion v2/guild/:id/log
-
     #region v2/guild/:id/ranks
 
     public Task<(List<GuildRank> Value, MessageContext Context)> GetGuildRanks(
@@ -202,55 +183,93 @@ public sealed class GuildsClient
 
     #endregion v2/guild/:id/upgrades
 
+    #region v2/guild/:id/log
+
+    public Task<(List<GuildLogEntry> Value, MessageContext Context)> GetGuildLog(
+        string guildId,
+        string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        GuildLogRequest request = new(guildId)
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(httpClient, cancellationToken);
+    }
+
+    public Task<(List<GuildLogEntry> Value, MessageContext Context)> GetGuildLog(
+        string guildId,
+        int? sinceLogId,
+        string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        GuildLogRequest request = new(guildId)
+        {
+            Since = sinceLogId,
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(httpClient, cancellationToken);
+    }
+
+    #endregion v2/guild/:id/log
+
     #region v2/emblem/foregrounds
 
-    public Task<(HashSet<Emblem> Value, MessageContext Context)> GetForegroundEmblems(
+    public Task<(HashSet<EmblemForeground> Value, MessageContext Context)> GetEmblemForegrounds(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        ForegroundEmblemsRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
+        EmblemForegroundsRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<int> Value, MessageContext Context)> GetForegroundEmblemsIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetEmblemForegroundsIndex(
         CancellationToken cancellationToken = default
     )
     {
-        var request = new ForegroundEmblemsIndexRequest();
+        var request = new EmblemForegroundsIndexRequest();
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(Emblem Value, MessageContext Context)> GetForegroundEmblemById(
-        int foregroundEmblemId,
+    public Task<(EmblemForeground Value, MessageContext Context)> GetEmblemForegroundById(
+        int emblemForegroundId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        ForegroundEmblemByIdRequest request =
-            new(foregroundEmblemId) { MissingMemberBehavior = missingMemberBehavior };
+        EmblemForegroundByIdRequest request =
+            new(emblemForegroundId) { MissingMemberBehavior = missingMemberBehavior };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<Emblem> Value, MessageContext Context)> GetForegroundEmblemsByIds(
-        IReadOnlyCollection<int> foregroundEmblemIds,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    public Task<(HashSet<EmblemForeground> Value, MessageContext Context)>
+        GetEmblemForegroundsByIds(
+            IReadOnlyCollection<int> emblemForegroundIds,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
-        ForegroundEmblemsByIdsRequest request =
-            new(foregroundEmblemIds) { MissingMemberBehavior = missingMemberBehavior };
+        EmblemForegroundsByIdsRequest request =
+            new(emblemForegroundIds) { MissingMemberBehavior = missingMemberBehavior };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<Emblem> Value, MessageContext Context)> GetForegroundEmblemsByPage(
-        int pageIndex,
-        int? pageSize = default,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    public Task<(HashSet<EmblemForeground> Value, MessageContext Context)>
+        GetEmblemForegroundsByPage(
+            int pageIndex,
+            int? pageSize = default,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
-        ForegroundEmblemsByPageRequest request = new(pageIndex)
+        EmblemForegroundsByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             MissingMemberBehavior = missingMemberBehavior
@@ -262,53 +281,55 @@ public sealed class GuildsClient
 
     #region v2/emblem/backgrounds
 
-    public Task<(HashSet<Emblem> Value, MessageContext Context)> GetBackgroundEmblems(
+    public Task<(HashSet<EmblemBackground> Value, MessageContext Context)> GetEmblemBackgrounds(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        BackgroundEmblemsRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
+        EmblemBackgroundsRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<int> Value, MessageContext Context)> GetBackgroundEmblemsIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetEmblemBackgroundsIndex(
         CancellationToken cancellationToken = default
     )
     {
-        var request = new BackgroundEmblemsIndexRequest();
+        var request = new EmblemBackgroundsIndexRequest();
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(Emblem Value, MessageContext Context)> GetBackgroundEmblemById(
+    public Task<(EmblemBackground Value, MessageContext Context)> GetEmblemBackgroundById(
         int backgroundEmblemId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        BackgroundEmblemByIdRequest request =
+        EmblemBackgroundByIdRequest request =
             new(backgroundEmblemId) { MissingMemberBehavior = missingMemberBehavior };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<Emblem> Value, MessageContext Context)> GetBackgroundEmblemsByIds(
-        IReadOnlyCollection<int> backgroundEmblemIds,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    public Task<(HashSet<EmblemBackground> Value, MessageContext Context)>
+        GetEmblemBackgroundsByIds(
+            IReadOnlyCollection<int> backgroundEmblemIds,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
-        BackgroundEmblemsByIdsRequest request =
+        EmblemBackgroundsByIdsRequest request =
             new(backgroundEmblemIds) { MissingMemberBehavior = missingMemberBehavior };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<Emblem> Value, MessageContext Context)> GetBackgroundEmblemsByPage(
-        int pageIndex,
-        int? pageSize = default,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    public Task<(HashSet<EmblemBackground> Value, MessageContext Context)>
+        GetEmblemBackgroundsByPage(
+            int pageIndex,
+            int? pageSize = default,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
-        BackgroundEmblemsByPageRequest request = new(pageIndex)
+        EmblemBackgroundsByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             MissingMemberBehavior = missingMemberBehavior

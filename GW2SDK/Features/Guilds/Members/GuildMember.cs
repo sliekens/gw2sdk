@@ -1,11 +1,14 @@
 ﻿namespace GuildWars2.Guilds.Members;
 
+/// <summary>Information about a member of a guild.</summary>
 [PublicAPI]
 [DataTransferObject]
 public sealed record GuildMember
 {
+    /// <summary>The user ID of the member.</summary>
     public required string Name { get; init; }
 
+    /// <summary>The rank of the member.</summary>
     public required string Rank { get; init; }
 
     /// <summary>When the member joined the guild.</summary>

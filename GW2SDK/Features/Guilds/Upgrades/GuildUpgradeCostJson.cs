@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Upgrades;
 
@@ -10,28 +9,28 @@ internal static class GuildUpgradeCostJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember kind = "type";
-        OptionalMember name = "name";
-        RequiredMember count = "count";
-        NullableMember itemId = "item_id";
+        switch (json.GetProperty("type").GetString())
+        {
+            case "Coins":
+                return json.GetGuildUpgradeCoinsCost(missingMemberBehavior);
+            case "Collectible":
+                return json.GetGuildUpgradeCollectibleCost(missingMemberBehavior);
+            case "Currency":
+                return json.GetGuildUpgradeCurrencyCost(missingMemberBehavior);
+            case "Item":
+                return json.GetGuildUpgradeItemCost(missingMemberBehavior);
+        }
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == kind.Name)
+            if (member.Name == "type")
             {
-                kind = member;
-            }
-            else if (member.Name == name.Name)
-            {
-                name = member;
-            }
-            else if (member.Name == count.Name)
-            {
-                count = member;
-            }
-            else if (member.Name == itemId.Name)
-            {
-                itemId = member;
+                if (missingMemberBehavior == MissingMemberBehavior.Error)
+                {
+                    throw new InvalidOperationException(
+                        Strings.UnexpectedDiscriminator(member.Value.GetString())
+                    );
+                }
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -39,13 +38,6 @@ internal static class GuildUpgradeCostJson
             }
         }
 
-        return new GuildUpgradeCost
-        {
-            Kind =
-                kind.Map(value => value.GetEnum<GuildUpgradeCostKind>(missingMemberBehavior)),
-            Name = name.Map(value => value.GetString()) ?? "",
-            Count = count.Map(value => value.GetInt32()),
-            ItemId = itemId.Map(value => value.GetInt32())
-        };
+        return new GuildUpgradeCost();
     }
 }
