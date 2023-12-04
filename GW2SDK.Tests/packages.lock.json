@@ -87,12 +87,6 @@
           "System.ValueTuple": "4.5.0"
         }
       },
-      "PolySharp": {
-        "type": "Direct",
-        "requested": "[1.13.2, )",
-        "resolved": "1.13.2",
-        "contentHash": "XwNhfkr7IeUiH8AE4pzob8YioxfL6nxgAx+fHEeWCObY/NZuBMfWLh39FznXbneKvagiqeeI7quIvZ6P1eVaEA=="
-      },
       "System.Interactive": {
         "type": "Direct",
         "requested": "[6.0.1, )",
@@ -505,12 +499,6 @@
         "requested": "[8.2.0, )",
         "resolved": "8.2.0",
         "contentHash": "gnKp3+mxGFmkFs4eHcD9aex0JOF8zS1Y18c2A5ckXXTVqbs6XLcDyLKgSa/mUFqAnH3mn9+uVIM0RhAec/d3kA=="
-      },
-      "PolySharp": {
-        "type": "Direct",
-        "requested": "[1.13.2, )",
-        "resolved": "1.13.2",
-        "contentHash": "XwNhfkr7IeUiH8AE4pzob8YioxfL6nxgAx+fHEeWCObY/NZuBMfWLh39FznXbneKvagiqeeI7quIvZ6P1eVaEA=="
       },
       "System.Interactive": {
         "type": "Direct",
