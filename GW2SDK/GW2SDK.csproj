@@ -4,7 +4,6 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0;net462</TargetFrameworks>
-    <PolySharpIncludeRuntimeSupportedAttributes>true</PolySharpIncludeRuntimeSupportedAttributes>
     <RootNamespace>GuildWars2</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyTitle>GW2 Client SDK</AssemblyTitle>
@@ -15,6 +14,15 @@
     <NoWarn>$(NoWarn);CS1591</NoWarn>
     <!-- Missing XL comment for publicly visible type or member '' -->
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <!-- Polyfills -->
+  <PropertyGroup>
+    <!-- Add support for OSPlatform attributes (net5.0+) -->
+    <PolySharpIncludeRuntimeSupportedAttributes>true</PolySharpIncludeRuntimeSupportedAttributes>
+
+    <!-- InlineArrayAttribute polyfill has a problem with type visibility (visible outside assembly) -->
+    <PolySharpExcludeGeneratedTypes>System.Runtime.CompilerServices.InlineArrayAttribute</PolySharpExcludeGeneratedTypes>
   </PropertyGroup>
 
   <!-- NuGet properties -->
