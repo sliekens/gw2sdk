@@ -4,17 +4,12 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Http;
 
-internal sealed class GuildLogRequest : IHttpRequest<List<GuildLogEntry>>
+internal sealed class GuildLogRequest(string id) : IHttpRequest<List<GuildLogEntry>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/guild/:id/log") { AcceptEncoding = "gzip" };
 
-    public GuildLogRequest(string id)
-    {
-        Id = id;
-    }
-
-    public string Id { get; }
+    public string Id { get; } = id;
 
     public int? Since { get; init; }
 

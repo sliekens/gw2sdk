@@ -5,12 +5,7 @@ namespace GuildWars2.Tests.TestInfrastructure;
 // ReSharper disable once ClassNeverInstantiated.Global
 public class AssemblyFixture
 {
-    public AssemblyFixture()
-    {
-        Assembly = Assembly.Load("GW2SDK");
-    }
-
-    public Assembly Assembly { get; }
+    public Assembly Assembly { get; } = Assembly.Load("GW2SDK");
 
     public IEnumerable<Type> DataTransferObjects =>
         Assembly.DefinedTypes.Where(type => WithAttribute(type, "DataTransferObjectAttribute"));

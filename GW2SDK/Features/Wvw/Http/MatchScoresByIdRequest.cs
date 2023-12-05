@@ -3,17 +3,12 @@ using GuildWars2.Wvw.Matches.Scores;
 
 namespace GuildWars2.Wvw.Http;
 
-internal sealed class MatchScoresByIdRequest : IHttpRequest<MatchScores>
+internal sealed class MatchScoresByIdRequest(string matchId) : IHttpRequest<MatchScores>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/wvw/matches/scores") { AcceptEncoding = "gzip" };
 
-    public MatchScoresByIdRequest(string matchId)
-    {
-        MatchId = matchId;
-    }
-
-    public string MatchId { get; }
+    public string MatchId { get; } = matchId;
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 

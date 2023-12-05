@@ -2,19 +2,14 @@
 
 namespace GuildWars2.Hero.Equipment.Mounts.Http;
 
-internal sealed class MountSkinByIdRequest : IHttpRequest<MountSkin>
+internal sealed class MountSkinByIdRequest(int mountSkinId) : IHttpRequest<MountSkin>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/mounts/skins")
     {
         AcceptEncoding = "gzip"
     };
 
-    public MountSkinByIdRequest(int mountSkinId)
-    {
-        MountSkinId = mountSkinId;
-    }
-
-    public int MountSkinId { get; }
+    public int MountSkinId { get; } = mountSkinId;
 
     public Language? Language { get; init; }
 

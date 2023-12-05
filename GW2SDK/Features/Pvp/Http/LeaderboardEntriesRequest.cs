@@ -4,31 +4,23 @@ using GuildWars2.Pvp.Seasons;
 
 namespace GuildWars2.Pvp.Http;
 
-internal sealed class LeaderboardEntriesRequest : IHttpRequest<HashSet<LeaderboardEntry>>
+internal sealed class LeaderboardEntriesRequest(
+    string seasonId,
+    string boardId,
+    string regionId,
+    int pageIndex
+) : IHttpRequest<HashSet<LeaderboardEntry>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/pvp/seasons/:id/leaderboards/:board/:region") { AcceptEncoding = "gzip" };
 
-    public LeaderboardEntriesRequest(
-        string seasonId,
-        string boardId,
-        string regionId,
-        int pageIndex
-    )
-    {
-        SeasonId = seasonId;
-        BoardId = boardId;
-        RegionId = regionId;
-        PageIndex = pageIndex;
-    }
+    public string SeasonId { get; } = seasonId;
 
-    public string SeasonId { get; }
+    public string BoardId { get; } = boardId;
 
-    public string BoardId { get; }
+    public string RegionId { get; } = regionId;
 
-    public string RegionId { get; }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

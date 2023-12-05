@@ -4,17 +4,12 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Http;
 
-internal sealed class EmblemForegroundsByPageRequest : IHttpRequest<HashSet<EmblemForeground>>
+internal sealed class EmblemForegroundsByPageRequest(int pageIndex) : IHttpRequest<HashSet<EmblemForeground>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/emblem/foregrounds") { AcceptEncoding = "gzip" };
 
-    public EmblemForegroundsByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

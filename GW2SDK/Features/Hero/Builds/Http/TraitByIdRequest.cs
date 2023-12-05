@@ -2,19 +2,14 @@
 
 namespace GuildWars2.Hero.Builds.Http;
 
-internal sealed class TraitByIdRequest : IHttpRequest<Trait>
+internal sealed class TraitByIdRequest(int traitId) : IHttpRequest<Trait>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/traits")
     {
         AcceptEncoding = "gzip"
     };
 
-    public TraitByIdRequest(int traitId)
-    {
-        TraitId = traitId;
-    }
-
-    public int TraitId { get; }
+    public int TraitId { get; } = traitId;
 
     public Language? Language { get; init; }
 

@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Http;
 
-internal sealed class CompletedHeroChallengesRequest : IHttpRequest<HashSet<string>>
+internal sealed class CompletedHeroChallengesRequest(string characterName) : IHttpRequest<HashSet<string>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/heropoints")
@@ -12,12 +12,7 @@ internal sealed class CompletedHeroChallengesRequest : IHttpRequest<HashSet<stri
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
         };
 
-    public CompletedHeroChallengesRequest(string characterName)
-    {
-        CharacterName = characterName;
-    }
-
-    public string CharacterName { get; }
+    public string CharacterName { get; } = characterName;
 
     public required string? AccessToken { get; init; }
 

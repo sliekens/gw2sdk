@@ -2,19 +2,14 @@
 
 namespace GuildWars2.Hero.Achievements.Http;
 
-internal sealed class AchievementByIdRequest : IHttpRequest<Achievement>
+internal sealed class AchievementByIdRequest(int achievementId) : IHttpRequest<Achievement>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/achievements")
     {
         AcceptEncoding = "gzip"
     };
 
-    public AchievementByIdRequest(int achievementId)
-    {
-        AchievementId = achievementId;
-    }
-
-    public int AchievementId { get; }
+    public int AchievementId { get; } = achievementId;
 
     public Language? Language { get; init; }
 

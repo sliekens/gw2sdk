@@ -2,19 +2,14 @@
 
 namespace GuildWars2.Hero.Equipment.Dyes.Http;
 
-internal sealed class ColorByIdRequest : IHttpRequest<Dye>
+internal sealed class ColorByIdRequest(int colorId) : IHttpRequest<Dye>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/colors")
     {
         AcceptEncoding = "gzip"
     };
 
-    public ColorByIdRequest(int colorId)
-    {
-        ColorId = colorId;
-    }
-
-    public int ColorId { get; }
+    public int ColorId { get; } = colorId;
 
     public Language? Language { get; init; }
 

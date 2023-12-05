@@ -4,19 +4,14 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Http;
 
-internal sealed class ContinentsByPageRequest : IHttpRequest<HashSet<Continent>>
+internal sealed class ContinentsByPageRequest(int pageIndex) : IHttpRequest<HashSet<Continent>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/continents")
     {
         AcceptEncoding = "gzip"
     };
 
-    public ContinentsByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

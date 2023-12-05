@@ -3,19 +3,14 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Masteries.Http;
 
-internal sealed class MasteriesByIdsRequest : IHttpRequest<HashSet<Mastery>>
+internal sealed class MasteriesByIdsRequest(IReadOnlyCollection<int> masteryIds) : IHttpRequest<HashSet<Mastery>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/masteries")
     {
         AcceptEncoding = "gzip"
     };
 
-    public MasteriesByIdsRequest(IReadOnlyCollection<int> masteryIds)
-    {
-        MasteryIds = masteryIds;
-    }
-
-    public IReadOnlyCollection<int> MasteryIds { get; }
+    public IReadOnlyCollection<int> MasteryIds { get; } = masteryIds;
 
     public Language? Language { get; init; }
 

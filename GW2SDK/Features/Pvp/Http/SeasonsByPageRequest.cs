@@ -4,17 +4,12 @@ using GuildWars2.Pvp.Seasons;
 
 namespace GuildWars2.Pvp.Http;
 
-internal sealed class SeasonsByPageRequest : IHttpRequest<HashSet<Season>>
+internal sealed class SeasonsByPageRequest(int pageIndex) : IHttpRequest<HashSet<Season>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/pvp/seasons") { AcceptEncoding = "gzip" };
 
-    public SeasonsByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

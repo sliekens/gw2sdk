@@ -2,17 +2,12 @@
 
 namespace GuildWars2.Hero.Equipment.Novelties.Http;
 
-internal sealed class NoveltyByIdRequest : IHttpRequest<Novelty>
+internal sealed class NoveltyByIdRequest(int noveltyId) : IHttpRequest<Novelty>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/novelties") { AcceptEncoding = "gzip" };
 
-    public NoveltyByIdRequest(int noveltyId)
-    {
-        NoveltyId = noveltyId;
-    }
-
-    public int NoveltyId { get; }
+    public int NoveltyId { get; } = noveltyId;
 
     public Language? Language { get; init; }
 

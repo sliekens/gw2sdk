@@ -3,17 +3,12 @@ using GuildWars2.Wvw.Abilities;
 
 namespace GuildWars2.Wvw.Http;
 
-internal sealed class AbilityByIdRequest : IHttpRequest<Ability>
+internal sealed class AbilityByIdRequest(int abilityId) : IHttpRequest<Ability>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/wvw/abilities") { AcceptEncoding = "gzip" };
 
-    public AbilityByIdRequest(int abilityId)
-    {
-        AbilityId = abilityId;
-    }
-
-    public int AbilityId { get; }
+    public int AbilityId { get; } = abilityId;
 
     public Language? Language { get; init; }
 

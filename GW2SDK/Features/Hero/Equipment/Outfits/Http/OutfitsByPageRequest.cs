@@ -3,17 +3,12 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Outfits.Http;
 
-internal sealed class OutfitsByPageRequest : IHttpRequest<HashSet<Outfit>>
+internal sealed class OutfitsByPageRequest(int pageIndex) : IHttpRequest<HashSet<Outfit>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/outfits") { AcceptEncoding = "gzip" };
 
-    public OutfitsByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

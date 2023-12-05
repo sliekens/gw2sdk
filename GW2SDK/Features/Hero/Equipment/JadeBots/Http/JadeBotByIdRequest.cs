@@ -2,17 +2,12 @@
 
 namespace GuildWars2.Hero.Equipment.JadeBots.Http;
 
-internal sealed class JadeBotByIdRequest : IHttpRequest<JadeBot>
+internal sealed class JadeBotByIdRequest(int jadeBotId) : IHttpRequest<JadeBot>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/jadebots") { AcceptEncoding = "gzip" };
 
-    public JadeBotByIdRequest(int jadeBotId)
-    {
-        JadeBotId = jadeBotId;
-    }
-
-    public int JadeBotId { get; }
+    public int JadeBotId { get; } = jadeBotId;
 
     public Language? Language { get; init; }
 

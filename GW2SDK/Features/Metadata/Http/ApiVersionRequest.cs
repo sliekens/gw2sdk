@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Metadata.Http;
 
-internal sealed class ApiVersionRequest : IHttpRequest<ApiVersion>
+internal sealed class ApiVersionRequest(string version) : IHttpRequest<ApiVersion>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/:version.json")
     {
@@ -10,12 +10,7 @@ internal sealed class ApiVersionRequest : IHttpRequest<ApiVersion>
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
     };
 
-    public ApiVersionRequest(string version)
-    {
-        Version = version;
-    }
-
-    public string Version { get; }
+    public string Version { get; } = version;
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 

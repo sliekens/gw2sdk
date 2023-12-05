@@ -2,17 +2,12 @@
 
 namespace GuildWars2.Hero.Builds.Http;
 
-internal sealed class StoredBuildRequest : IHttpRequest<Build>
+internal sealed class StoredBuildRequest(int slotNumber) : IHttpRequest<Build>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/account/buildstorage") { AcceptEncoding = "gzip" };
 
-    public StoredBuildRequest(int slotNumber)
-    {
-        SlotNumber = slotNumber;
-    }
-
-    public int SlotNumber { get; }
+    public int SlotNumber { get; } = slotNumber;
 
     public required string? AccessToken { get; init; }
 

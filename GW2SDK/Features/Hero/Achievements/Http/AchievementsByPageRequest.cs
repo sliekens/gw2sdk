@@ -3,19 +3,14 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Achievements.Http;
 
-internal sealed class AchievementsByPageRequest : IHttpRequest<HashSet<Achievement>>
+internal sealed class AchievementsByPageRequest(int pageIndex) : IHttpRequest<HashSet<Achievement>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/achievements")
     {
         AcceptEncoding = "gzip"
     };
 
-    public AchievementsByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

@@ -3,19 +3,14 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Templates.Http;
 
-internal sealed class LegendaryItemsByPageRequest : IHttpRequest<HashSet<LegendaryItem>>
+internal sealed class LegendaryItemsByPageRequest(int pageIndex) : IHttpRequest<HashSet<LegendaryItem>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/legendaryarmory")
     {
         AcceptEncoding = "gzip"
     };
 
-    public LegendaryItemsByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

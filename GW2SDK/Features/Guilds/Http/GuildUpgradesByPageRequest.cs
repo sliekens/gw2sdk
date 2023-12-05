@@ -4,17 +4,12 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Http;
 
-internal sealed class GuildUpgradesByPageRequest : IHttpRequest<HashSet<GuildUpgrade>>
+internal sealed class GuildUpgradesByPageRequest(int pageIndex) : IHttpRequest<HashSet<GuildUpgrade>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/guild/upgrades") { AcceptEncoding = "gzip" };
 
-    public GuildUpgradesByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

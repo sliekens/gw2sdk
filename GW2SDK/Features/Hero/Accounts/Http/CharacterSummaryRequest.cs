@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Hero.Accounts.Http;
 
-internal sealed class CharacterSummaryRequest : IHttpRequest<CharacterSummary>
+internal sealed class CharacterSummaryRequest(string characterName) : IHttpRequest<CharacterSummary>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/characters/:id/core")
     {
@@ -10,12 +10,7 @@ internal sealed class CharacterSummaryRequest : IHttpRequest<CharacterSummary>
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
     };
 
-    public CharacterSummaryRequest(string characterName)
-    {
-        CharacterName = characterName;
-    }
-
-    public string CharacterName { get; }
+    public string CharacterName { get; } = characterName;
 
     public required string? AccessToken { get; init; }
 

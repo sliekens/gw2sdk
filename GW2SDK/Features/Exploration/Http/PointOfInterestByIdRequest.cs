@@ -4,37 +4,28 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Exploration.Http;
 
-internal sealed class PointOfInterestByIdRequest : IHttpRequest<PointOfInterest>
+internal sealed class PointOfInterestByIdRequest(
+    int continentId,
+    int floorId,
+    int regionId,
+    int mapId,
+    int pointOfInterestId
+) : IHttpRequest<PointOfInterest>
 {
     private static readonly HttpRequestMessageTemplate Template = new(
         Get,
         "v2/continents/:id/floors/:floor/regions/:region/maps/:map/pois"
     ) { AcceptEncoding = "gzip" };
 
-    public PointOfInterestByIdRequest(
-        int continentId,
-        int floorId,
-        int regionId,
-        int mapId,
-        int pointOfInterestId
-    )
-    {
-        ContinentId = continentId;
-        FloorId = floorId;
-        RegionId = regionId;
-        MapId = mapId;
-        PointOfInterestId = pointOfInterestId;
-    }
+    public int ContinentId { get; } = continentId;
 
-    public int ContinentId { get; }
+    public int FloorId { get; } = floorId;
 
-    public int FloorId { get; }
+    public int RegionId { get; } = regionId;
 
-    public int RegionId { get; }
+    public int MapId { get; } = mapId;
 
-    public int MapId { get; }
-
-    public int PointOfInterestId { get; }
+    public int PointOfInterestId { get; } = pointOfInterestId;
 
     public Language? Language { get; init; }
 

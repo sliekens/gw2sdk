@@ -3,19 +3,14 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Builds.Http;
 
-internal sealed class TraitsByPageRequest : IHttpRequest<HashSet<Trait>>
+internal sealed class TraitsByPageRequest(int pageIndex) : IHttpRequest<HashSet<Trait>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/traits")
     {
         AcceptEncoding = "gzip"
     };
 
-    public TraitsByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

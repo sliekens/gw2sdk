@@ -4,17 +4,12 @@ using GuildWars2.Wvw.Matches.Overview;
 
 namespace GuildWars2.Wvw.Http;
 
-internal sealed class MatchesOverviewByPageRequest : IHttpRequest<HashSet<MatchOverview>>
+internal sealed class MatchesOverviewByPageRequest(int pageIndex) : IHttpRequest<HashSet<MatchOverview>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/wvw/matches/overview") { AcceptEncoding = "gzip" };
 
-    public MatchesOverviewByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

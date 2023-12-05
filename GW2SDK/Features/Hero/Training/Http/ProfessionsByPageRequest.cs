@@ -3,19 +3,14 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Training.Http;
 
-internal sealed class ProfessionsByPageRequest : IHttpRequest<HashSet<Profession>>
+internal sealed class ProfessionsByPageRequest(int pageIndex) : IHttpRequest<HashSet<Profession>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/professions")
     {
         AcceptEncoding = "gzip"
     };
 
-    public ProfessionsByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

@@ -2,19 +2,14 @@
 
 namespace GuildWars2.Authentication.Http;
 
-internal sealed class CreateSubtokenRequest : IHttpRequest<CreatedSubtoken>
+internal sealed class CreateSubtokenRequest(string accessToken) : IHttpRequest<CreatedSubtoken>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/createsubtoken")
     {
         AcceptEncoding = "gzip"
     };
 
-    public CreateSubtokenRequest(string accessToken)
-    {
-        AccessToken = accessToken;
-    }
-
-    public string AccessToken { get; }
+    public string AccessToken { get; } = accessToken;
 
     public DateTimeOffset? AbsoluteExpirationDate { get; init; }
 

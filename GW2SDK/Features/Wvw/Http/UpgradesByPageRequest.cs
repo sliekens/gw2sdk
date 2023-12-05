@@ -4,17 +4,12 @@ using GuildWars2.Wvw.Upgrades;
 
 namespace GuildWars2.Wvw.Http;
 
-internal sealed class UpgradesByPageRequest : IHttpRequest<HashSet<ObjectiveUpgrade>>
+internal sealed class UpgradesByPageRequest(int pageIndex) : IHttpRequest<HashSet<ObjectiveUpgrade>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/wvw/upgrades") { AcceptEncoding = "gzip" };
 
-    public UpgradesByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

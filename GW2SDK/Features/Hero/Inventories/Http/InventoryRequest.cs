@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Hero.Inventories.Http;
 
-internal sealed class InventoryRequest : IHttpRequest<Baggage>
+internal sealed class InventoryRequest(string characterName) : IHttpRequest<Baggage>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/inventory")
@@ -11,12 +11,7 @@ internal sealed class InventoryRequest : IHttpRequest<Baggage>
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
         };
 
-    public InventoryRequest(string characterName)
-    {
-        CharacterName = characterName;
-    }
-
-    public string CharacterName { get; }
+    public string CharacterName { get; } = characterName;
 
     public required string? AccessToken { get; init; }
 

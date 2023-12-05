@@ -4,20 +4,14 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Exploration.Http;
 
-internal sealed class FloorByIdRequest : IHttpRequest<Floor>
+internal sealed class FloorByIdRequest(int continentId, int floorId) : IHttpRequest<Floor>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/continents/:id/floors") { AcceptEncoding = "gzip" };
 
-    public FloorByIdRequest(int continentId, int floorId)
-    {
-        ContinentId = continentId;
-        FloorId = floorId;
-    }
+    public int ContinentId { get; } = continentId;
 
-    public int ContinentId { get; }
-
-    public int FloorId { get; }
+    public int FloorId { get; } = floorId;
 
     public Language? Language { get; init; }
 

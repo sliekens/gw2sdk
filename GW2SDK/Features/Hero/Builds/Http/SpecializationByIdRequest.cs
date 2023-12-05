@@ -2,19 +2,14 @@
 
 namespace GuildWars2.Hero.Builds.Http;
 
-internal sealed class SpecializationByIdRequest : IHttpRequest<Specialization>
+internal sealed class SpecializationByIdRequest(int specializationId) : IHttpRequest<Specialization>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/specializations")
     {
         AcceptEncoding = "gzip"
     };
 
-    public SpecializationByIdRequest(int specializationId)
-    {
-        SpecializationId = specializationId;
-    }
-
-    public int SpecializationId { get; }
+    public int SpecializationId { get; } = specializationId;
 
     public Language? Language { get; init; }
 

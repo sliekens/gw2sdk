@@ -2,17 +2,12 @@
 
 namespace GuildWars2.Hero.Equipment.Finishers.Http;
 
-internal sealed class FinisherByIdRequest : IHttpRequest<Finisher>
+internal sealed class FinisherByIdRequest(int finisherId) : IHttpRequest<Finisher>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/finishers") { AcceptEncoding = "gzip" };
 
-    public FinisherByIdRequest(int finisherId)
-    {
-        FinisherId = finisherId;
-    }
-
-    public int FinisherId { get; }
+    public int FinisherId { get; } = finisherId;
 
     public Language? Language { get; init; }
 

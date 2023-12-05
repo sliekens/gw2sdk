@@ -2,17 +2,12 @@
 
 namespace GuildWars2.Hero.Equipment.Outfits.Http;
 
-internal sealed class OutfitByIdRequest : IHttpRequest<Outfit>
+internal sealed class OutfitByIdRequest(int outfitId) : IHttpRequest<Outfit>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/outfits") { AcceptEncoding = "gzip" };
 
-    public OutfitByIdRequest(int outfitId)
-    {
-        OutfitId = outfitId;
-    }
-
-    public int OutfitId { get; }
+    public int OutfitId { get; } = outfitId;
 
     public Language? Language { get; init; }
 

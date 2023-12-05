@@ -3,17 +3,12 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Builds.Http;
 
-internal sealed class LegendsByPageRequest : IHttpRequest<HashSet<Legend>>
+internal sealed class LegendsByPageRequest(int pageIndex) : IHttpRequest<HashSet<Legend>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/legends") { AcceptEncoding = "gzip" };
 
-    public LegendsByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

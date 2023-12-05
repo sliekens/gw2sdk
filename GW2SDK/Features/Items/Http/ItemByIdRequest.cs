@@ -2,19 +2,14 @@
 
 namespace GuildWars2.Items.Http;
 
-internal sealed class ItemByIdRequest : IHttpRequest<Item>
+internal sealed class ItemByIdRequest(int itemId) : IHttpRequest<Item>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/items")
     {
         AcceptEncoding = "gzip"
     };
 
-    public ItemByIdRequest(int itemId)
-    {
-        ItemId = itemId;
-    }
-
-    public int ItemId { get; }
+    public int ItemId { get; } = itemId;
 
     public Language? Language { get; init; }
 

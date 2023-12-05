@@ -4,17 +4,12 @@ using GuildWars2.Wvw.Objectives;
 
 namespace GuildWars2.Wvw.Http;
 
-internal sealed class ObjectivesByPageRequest : IHttpRequest<HashSet<Objective>>
+internal sealed class ObjectivesByPageRequest(int pageIndex) : IHttpRequest<HashSet<Objective>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/wvw/objectives") { AcceptEncoding = "gzip" };
 
-    public ObjectivesByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

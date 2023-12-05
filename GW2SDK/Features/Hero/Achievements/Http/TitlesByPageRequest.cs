@@ -4,19 +4,14 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Achievements.Http;
 
-internal sealed class TitlesByPageRequest : IHttpRequest<HashSet<Title>>
+internal sealed class TitlesByPageRequest(int pageIndex) : IHttpRequest<HashSet<Title>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/titles")
     {
         AcceptEncoding = "gzip"
     };
 
-    public TitlesByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

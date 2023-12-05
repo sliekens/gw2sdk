@@ -2,17 +2,12 @@
 
 namespace GuildWars2.Hero.Equipment.Miniatures.Http;
 
-internal sealed class MinipetByIdRequest : IHttpRequest<Minipet>
+internal sealed class MinipetByIdRequest(int minipetId) : IHttpRequest<Minipet>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/minis") { AcceptEncoding = "gzip" };
 
-    public MinipetByIdRequest(int minipetId)
-    {
-        MinipetId = minipetId;
-    }
-
-    public int MinipetId { get; }
+    public int MinipetId { get; } = minipetId;
 
     public Language? Language { get; init; }
 

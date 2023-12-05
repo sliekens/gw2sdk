@@ -2,17 +2,12 @@
 
 namespace GuildWars2.Pve.Raids.Http;
 
-internal sealed class RaidByIdRequest : IHttpRequest<Raid>
+internal sealed class RaidByIdRequest(string raidId) : IHttpRequest<Raid>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/raids") { AcceptEncoding = "gzip" };
 
-    public RaidByIdRequest(string raidId)
-    {
-        RaidId = raidId;
-    }
-
-    public string RaidId { get; }
+    public string RaidId { get; } = raidId;
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 

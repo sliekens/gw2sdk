@@ -3,20 +3,14 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Hero.Equipment.Templates.Http;
 
-internal sealed class EquipmentTemplateRequest : IHttpRequest<EquipmentTemplate>
+internal sealed class EquipmentTemplateRequest(string characterName, int tab) : IHttpRequest<EquipmentTemplate>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/equipmenttabs/:tab") { AcceptEncoding = "gzip" };
 
-    public EquipmentTemplateRequest(string characterName, int tab)
-    {
-        CharacterName = characterName;
-        Tab = tab;
-    }
+    public string CharacterName { get; } = characterName;
 
-    public string CharacterName { get; }
-
-    public int Tab { get; }
+    public int Tab { get; } = tab;
 
     public required string? AccessToken { get; init; }
 

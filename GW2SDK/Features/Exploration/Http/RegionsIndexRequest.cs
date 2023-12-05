@@ -4,7 +4,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Http;
 
-internal sealed class RegionsIndexRequest : IHttpRequest<HashSet<int>>
+internal sealed class RegionsIndexRequest(int continentId, int floorId) : IHttpRequest<HashSet<int>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/continents/:id/floors/:floor/regions")
@@ -13,15 +13,9 @@ internal sealed class RegionsIndexRequest : IHttpRequest<HashSet<int>>
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
         };
 
-    public RegionsIndexRequest(int continentId, int floorId)
-    {
-        ContinentId = continentId;
-        FloorId = floorId;
-    }
+    public int ContinentId { get; } = continentId;
 
-    public int ContinentId { get; }
-
-    public int FloorId { get; }
+    public int FloorId { get; } = floorId;
 
     public async Task<(HashSet<int> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,

@@ -5,31 +5,28 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Http;
 
-internal sealed class HeartsByPageRequest : IHttpRequest<HashSet<Heart>>
+internal sealed class HeartsByPageRequest(
+    int continentId,
+    int floorId,
+    int regionId,
+    int mapId,
+    int pageIndex
+) : IHttpRequest<HashSet<Heart>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(
         Get,
         "v2/continents/:id/floors/:floor/regions/:region/maps/:map/tasks"
     ) { AcceptEncoding = "gzip" };
 
-    public HeartsByPageRequest(int continentId, int floorId, int regionId, int mapId, int pageIndex)
-    {
-        ContinentId = continentId;
-        FloorId = floorId;
-        RegionId = regionId;
-        MapId = mapId;
-        PageIndex = pageIndex;
-    }
+    public int ContinentId { get; } = continentId;
 
-    public int ContinentId { get; }
+    public int FloorId { get; } = floorId;
 
-    public int FloorId { get; }
+    public int RegionId { get; } = regionId;
 
-    public int RegionId { get; }
+    public int MapId { get; } = mapId;
 
-    public int MapId { get; }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

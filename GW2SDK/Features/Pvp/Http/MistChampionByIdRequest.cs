@@ -3,17 +3,12 @@ using GuildWars2.Pvp.MistChampions;
 
 namespace GuildWars2.Pvp.Http;
 
-internal sealed class MistChampionByIdRequest : IHttpRequest<MistChampion>
+internal sealed class MistChampionByIdRequest(string heroId) : IHttpRequest<MistChampion>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/pvp/heroes") { AcceptEncoding = "gzip" };
 
-    public MistChampionByIdRequest(string heroId)
-    {
-        HeroId = heroId;
-    }
-
-    public string HeroId { get; }
+    public string HeroId { get; } = heroId;
 
     public Language? Language { get; init; }
 

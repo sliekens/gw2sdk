@@ -2,19 +2,14 @@
 
 namespace GuildWars2.Hero.Banking.Http;
 
-internal sealed class MaterialCategoryByIdRequest : IHttpRequest<MaterialCategory>
+internal sealed class MaterialCategoryByIdRequest(int materialCategoryId) : IHttpRequest<MaterialCategory>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/materials")
     {
         AcceptEncoding = "gzip"
     };
 
-    public MaterialCategoryByIdRequest(int materialCategoryId)
-    {
-        MaterialCategoryId = materialCategoryId;
-    }
-
-    public int MaterialCategoryId { get; }
+    public int MaterialCategoryId { get; } = materialCategoryId;
 
     public Language? Language { get; init; }
 

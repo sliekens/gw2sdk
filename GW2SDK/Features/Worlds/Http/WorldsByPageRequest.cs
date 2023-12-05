@@ -3,19 +3,14 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Worlds.Http;
 
-internal sealed class WorldsByPageRequest : IHttpRequest<HashSet<World>>
+internal sealed class WorldsByPageRequest(int pageIndex) : IHttpRequest<HashSet<World>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/worlds")
     {
         AcceptEncoding = "gzip"
     };
 
-    public WorldsByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

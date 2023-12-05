@@ -17,18 +17,8 @@ public class QuagganViewModel
     public string Id { get; set; } = "";
 }
 
-public class IndexModel : PageModel
+public class IndexModel(ILogger<IndexModel> logger, QuaggansClient quaggans) : PageModel
 {
-    private readonly ILogger<IndexModel> logger;
-
-    private readonly QuaggansClient quaggans;
-
-    public IndexModel(ILogger<IndexModel> logger, QuaggansClient quaggans)
-    {
-        this.logger = logger;
-        this.quaggans = quaggans;
-    }
-
     public DateTimeOffset Refreshed { get; set; }
 
     public IEnumerable<QuagganViewModel> Quaggans { get; set; } =

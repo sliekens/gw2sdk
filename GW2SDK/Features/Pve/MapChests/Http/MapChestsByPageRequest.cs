@@ -3,17 +3,12 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Pve.MapChests.Http;
 
-internal sealed class MapChestsByPageRequest : IHttpRequest<HashSet<MapChest>>
+internal sealed class MapChestsByPageRequest(int pageIndex) : IHttpRequest<HashSet<MapChest>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/mapchests") { AcceptEncoding = "gzip" };
 
-    public MapChestsByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

@@ -3,17 +3,12 @@ using GuildWars2.Pvp.Games;
 
 namespace GuildWars2.Pvp.Http;
 
-internal sealed class GameByIdRequest : IHttpRequest<Game>
+internal sealed class GameByIdRequest(string gameId) : IHttpRequest<Game>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/pvp/games") { AcceptEncoding = "gzip" };
 
-    public GameByIdRequest(string gameId)
-    {
-        GameId = gameId;
-    }
-
-    public string GameId { get; }
+    public string GameId { get; } = gameId;
 
     public required string? AccessToken { get; init; }
 

@@ -4,19 +4,14 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.StoryJournal.Http;
 
-internal sealed class BackstoryAnswersByPageRequest : IHttpRequest<HashSet<BackstoryAnswer>>
+internal sealed class BackstoryAnswersByPageRequest(int pageIndex) : IHttpRequest<HashSet<BackstoryAnswer>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/backstory/answers")
     {
         AcceptEncoding = "gzip"
     };
 
-    public BackstoryAnswersByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

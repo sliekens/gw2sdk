@@ -5,15 +5,8 @@ using static System.Reflection.BindingFlags;
 
 namespace GuildWars2.Tests.PatternsAndPractices;
 
-public class DataTransferJsonTest : IClassFixture<AssemblyFixture>
+public class DataTransferJsonTest(AssemblyFixture fixture) : IClassFixture<AssemblyFixture>
 {
-    public DataTransferJsonTest(AssemblyFixture fixture)
-    {
-        this.fixture = fixture;
-    }
-
-    private readonly AssemblyFixture fixture;
-
     // Could use a better name
     // The premise is that every JSON conversion should be an extension method for JsonElement
     // e.g. JsonDocument.RootElement.GetSomeRecord()

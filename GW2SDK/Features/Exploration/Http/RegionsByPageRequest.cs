@@ -5,23 +5,17 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Http;
 
-internal sealed class RegionsByPageRequest : IHttpRequest<HashSet<Region>>
+internal sealed class RegionsByPageRequest
+    (int continentId, int floorId, int pageIndex) : IHttpRequest<HashSet<Region>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/continents/:id/floors/:floor/regions") { AcceptEncoding = "gzip" };
 
-    public RegionsByPageRequest(int continentId, int floorId, int pageIndex)
-    {
-        ContinentId = continentId;
-        FloorId = floorId;
-        PageIndex = pageIndex;
-    }
+    public int ContinentId { get; } = continentId;
 
-    public int ContinentId { get; }
+    public int FloorId { get; } = floorId;
 
-    public int FloorId { get; }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

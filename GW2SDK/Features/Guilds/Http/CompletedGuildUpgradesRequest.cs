@@ -3,17 +3,12 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Http;
 
-internal sealed class CompletedGuildUpgradesRequest : IHttpRequest<HashSet<int>>
+internal sealed class CompletedGuildUpgradesRequest(string id) : IHttpRequest<HashSet<int>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/guild/:id/upgrades") { AcceptEncoding = "gzip" };
 
-    public CompletedGuildUpgradesRequest(string id)
-    {
-        Id = id;
-    }
-
-    public string Id { get; }
+    public string Id { get; } = id;
 
     public required string? AccessToken { get; init; }
 

@@ -3,7 +3,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Hero.StoryJournal.Http;
 
-internal sealed class CharacterBackstoryRequest : IHttpRequest<CharacterBackstory>
+internal sealed class CharacterBackstoryRequest(string characterName) : IHttpRequest<CharacterBackstory>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/backstory")
@@ -12,12 +12,7 @@ internal sealed class CharacterBackstoryRequest : IHttpRequest<CharacterBackstor
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
         };
 
-    public CharacterBackstoryRequest(string characterName)
-    {
-        CharacterName = characterName;
-    }
-
-    public string CharacterName { get; }
+    public string CharacterName { get; } = characterName;
 
     public required string? AccessToken { get; init; }
 

@@ -3,17 +3,12 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Pve.Pets.Http;
 
-internal sealed class PetsByPageRequest : IHttpRequest<HashSet<Pet>>
+internal sealed class PetsByPageRequest(int pageIndex) : IHttpRequest<HashSet<Pet>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/pets") { AcceptEncoding = "gzip" };
 
-    public PetsByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

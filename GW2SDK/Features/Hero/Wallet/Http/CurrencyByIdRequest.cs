@@ -2,19 +2,14 @@
 
 namespace GuildWars2.Hero.Wallet.Http;
 
-internal sealed class CurrencyByIdRequest : IHttpRequest<Currency>
+internal sealed class CurrencyByIdRequest(int currencyId) : IHttpRequest<Currency>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/currencies")
     {
         AcceptEncoding = "gzip"
     };
 
-    public CurrencyByIdRequest(int currencyId)
-    {
-        CurrencyId = currencyId;
-    }
-
-    public int CurrencyId { get; }
+    public int CurrencyId { get; } = currencyId;
 
     public Language? Language { get; init; }
 

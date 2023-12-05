@@ -3,17 +3,12 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Hero.StoryJournal.Http;
 
-internal sealed class QuestByIdRequest : IHttpRequest<Quest>
+internal sealed class QuestByIdRequest(int questId) : IHttpRequest<Quest>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/quests") { AcceptEncoding = "gzip" };
 
-    public QuestByIdRequest(int questId)
-    {
-        QuestId = questId;
-    }
-
-    public int QuestId { get; }
+    public int QuestId { get; } = questId;
 
     public Language? Language { get; init; }
 

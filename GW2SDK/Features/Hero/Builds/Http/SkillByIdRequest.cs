@@ -2,19 +2,14 @@
 
 namespace GuildWars2.Hero.Builds.Http;
 
-internal sealed class SkillByIdRequest : IHttpRequest<Skill>
+internal sealed class SkillByIdRequest(int skillId) : IHttpRequest<Skill>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/skills")
     {
         AcceptEncoding = "gzip"
     };
 
-    public SkillByIdRequest(int skillId)
-    {
-        SkillId = skillId;
-    }
-
-    public int SkillId { get; }
+    public int SkillId { get; } = skillId;
 
     public Language? Language { get; init; }
 

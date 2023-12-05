@@ -3,17 +3,12 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Commerce.Http;
 
-internal sealed class GemsToGoldRequest : IHttpRequest<GemsToGold>
+internal sealed class GemsToGoldRequest(int gemsCount) : IHttpRequest<GemsToGold>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/commerce/exchange/gems") { AcceptEncoding = "gzip" };
 
-    public GemsToGoldRequest(int gemsCount)
-    {
-        GemsCount = gemsCount;
-    }
-
-    public int GemsCount { get; }
+    public int GemsCount { get; } = gemsCount;
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 

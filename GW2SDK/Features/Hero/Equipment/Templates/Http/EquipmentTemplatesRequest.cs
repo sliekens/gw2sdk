@@ -3,18 +3,13 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Templates.Http;
 
-internal sealed class EquipmentTemplatesRequest : IHttpRequest<HashSet<EquipmentTemplate>>
+internal sealed class EquipmentTemplatesRequest(string characterName) : IHttpRequest<HashSet<EquipmentTemplate>>
 {
     // There is no ids=all support, but page=0 works
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/equipmenttabs?page=0") { AcceptEncoding = "gzip" };
 
-    public EquipmentTemplatesRequest(string characterName)
-    {
-        CharacterName = characterName;
-    }
-
-    public string CharacterName { get; }
+    public string CharacterName { get; } = characterName;
 
     public required string? AccessToken { get; init; }
 

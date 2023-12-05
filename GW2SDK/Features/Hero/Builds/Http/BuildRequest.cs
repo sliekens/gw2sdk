@@ -3,20 +3,14 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Hero.Builds.Http;
 
-internal sealed class BuildRequest : IHttpRequest<BuildTemplate>
+internal sealed class BuildRequest(string characterName, int tabNumber) : IHttpRequest<BuildTemplate>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/buildtabs/:tab") { AcceptEncoding = "gzip" };
 
-    public BuildRequest(string characterName, int tabNumber)
-    {
-        CharacterName = characterName;
-        TabNumber = tabNumber;
-    }
+    public string CharacterName { get; } = characterName;
 
-    public string CharacterName { get; }
-
-    public int TabNumber { get; }
+    public int TabNumber { get; } = tabNumber;
 
     public required string? AccessToken { get; init; }
 

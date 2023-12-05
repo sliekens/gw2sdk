@@ -2,17 +2,12 @@
 
 namespace GuildWars2.Pve.MapChests.Http;
 
-internal sealed class MapChestByIdRequest : IHttpRequest<MapChest>
+internal sealed class MapChestByIdRequest(string mapChestId) : IHttpRequest<MapChest>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/mapchests") { AcceptEncoding = "gzip" };
 
-    public MapChestByIdRequest(string mapChestId)
-    {
-        MapChestId = mapChestId;
-    }
-
-    public string MapChestId { get; }
+    public string MapChestId { get; } = mapChestId;
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 

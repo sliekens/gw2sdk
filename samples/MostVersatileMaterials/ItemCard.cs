@@ -5,15 +5,8 @@ using Spectre.Console;
 
 namespace MostVersatileMaterials;
 
-public class ItemCard
+public class ItemCard(HttpClient httpClient)
 {
-    private readonly HttpClient httpClient;
-
-    public ItemCard(HttpClient httpClient)
-    {
-        this.httpClient = httpClient;
-    }
-
     public async Task Show(Item item)
     {
         await using var ingredientIcon = await httpClient.GetStreamAsync(item.IconHref!);

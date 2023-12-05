@@ -4,15 +4,8 @@ using GuildWars2.Http;
 
 namespace GuildWars2.TestDataHelper;
 
-public class BulkRequest
+public class BulkRequest(string requestUri)
 {
-    private readonly string requestUri;
-
-    public BulkRequest(string requestUri)
-    {
-        this.requestUri = requestUri;
-    }
-
     public required IReadOnlyCollection<int> Ids { get; init; }
 
     public async Task<JsonDocument> SendAsync(

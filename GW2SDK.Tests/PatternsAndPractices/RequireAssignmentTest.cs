@@ -3,15 +3,8 @@ using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.PatternsAndPractices;
 
-public class RequireAssignmentTest : IClassFixture<AssemblyFixture>
+public class RequireAssignmentTest(AssemblyFixture fixture) : IClassFixture<AssemblyFixture>
 {
-    public RequireAssignmentTest(AssemblyFixture fixture)
-    {
-        this.fixture = fixture;
-    }
-
-    private readonly AssemblyFixture fixture;
-
     [Fact]
     public void Data_transfer_object_members_are_required()
     {

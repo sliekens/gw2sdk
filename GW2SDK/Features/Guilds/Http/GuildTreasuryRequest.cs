@@ -4,17 +4,12 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Http;
 
-internal sealed class GuildTreasuryRequest : IHttpRequest<List<GuildTreasurySlot>>
+internal sealed class GuildTreasuryRequest(string id) : IHttpRequest<List<GuildTreasurySlot>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/guild/:id/treasury") { AcceptEncoding = "gzip" };
 
-    public GuildTreasuryRequest(string id)
-    {
-        Id = id;
-    }
-
-    public string Id { get; }
+    public string Id { get; } = id;
 
     public required string? AccessToken { get; init; }
 

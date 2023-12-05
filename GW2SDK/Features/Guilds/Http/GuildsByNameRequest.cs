@@ -3,17 +3,12 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Http;
 
-internal sealed class GuildsByNameRequest : IHttpRequest<HashSet<string>>
+internal sealed class GuildsByNameRequest(string name) : IHttpRequest<HashSet<string>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/guild/search") { AcceptEncoding = "gzip" };
 
-    public GuildsByNameRequest(string name)
-    {
-        Name = name;
-    }
-
-    public string Name { get; }
+    public string Name { get; } = name;
 
     public async Task<(HashSet<string> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,

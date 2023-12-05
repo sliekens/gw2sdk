@@ -2,19 +2,14 @@
 
 namespace GuildWars2.Hero.Accounts.Http;
 
-internal sealed class CharacterByNameRequest : IHttpRequest<Character>
+internal sealed class CharacterByNameRequest(string characterName) : IHttpRequest<Character>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/characters")
     {
         AcceptEncoding = "gzip"
     };
 
-    public CharacterByNameRequest(string characterName)
-    {
-        CharacterName = characterName;
-    }
-
-    public string CharacterName { get; }
+    public string CharacterName { get; } = characterName;
 
     public required string? AccessToken { get; init; }
 

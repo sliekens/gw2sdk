@@ -5,7 +5,8 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Http;
 
-internal sealed class HeartsRequest : IHttpRequest<HashSet<Heart>>
+internal sealed class HeartsRequest
+    (int continentId, int floorId, int regionId, int mapId) : IHttpRequest<HashSet<Heart>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/continents/:id/floors/:floor/regions/:region/maps/:map/tasks")
@@ -18,21 +19,13 @@ internal sealed class HeartsRequest : IHttpRequest<HashSet<Heart>>
             }
         };
 
-    public HeartsRequest(int continentId, int floorId, int regionId, int mapId)
-    {
-        ContinentId = continentId;
-        FloorId = floorId;
-        RegionId = regionId;
-        MapId = mapId;
-    }
+    public int ContinentId { get; } = continentId;
 
-    public int ContinentId { get; }
+    public int FloorId { get; } = floorId;
 
-    public int FloorId { get; }
+    public int RegionId { get; } = regionId;
 
-    public int RegionId { get; }
-
-    public int MapId { get; }
+    public int MapId { get; } = mapId;
 
     public Language? Language { get; init; }
 

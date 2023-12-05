@@ -3,15 +3,8 @@ using GuildWars2.Items;
 
 namespace GuildWars2.Tests.Features.Items;
 
-public class ItemJson : IClassFixture<ItemFixture>
+public class ItemJson(ItemFixture fixture) : IClassFixture<ItemFixture>
 {
-    public ItemJson(ItemFixture fixture)
-    {
-        this.fixture = fixture;
-    }
-
-    private readonly ItemFixture fixture;
-
     [Fact]
     public void Items_can_be_created_from_json() =>
         Assert.All(

@@ -4,31 +4,28 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Exploration.Http;
 
-internal sealed class HeartByIdRequest : IHttpRequest<Heart>
+internal sealed class HeartByIdRequest(
+    int continentId,
+    int floorId,
+    int regionId,
+    int mapId,
+    int heartId
+) : IHttpRequest<Heart>
 {
     private static readonly HttpRequestMessageTemplate Template = new(
         Get,
         "v2/continents/:id/floors/:floor/regions/:region/maps/:map/tasks"
     ) { AcceptEncoding = "gzip" };
 
-    public HeartByIdRequest(int continentId, int floorId, int regionId, int mapId, int heartId)
-    {
-        ContinentId = continentId;
-        FloorId = floorId;
-        RegionId = regionId;
-        MapId = mapId;
-        HeartId = heartId;
-    }
+    public int ContinentId { get; } = continentId;
 
-    public int ContinentId { get; }
+    public int FloorId { get; } = floorId;
 
-    public int FloorId { get; }
+    public int RegionId { get; } = regionId;
 
-    public int RegionId { get; }
+    public int MapId { get; } = mapId;
 
-    public int MapId { get; }
-
-    public int HeartId { get; }
+    public int HeartId { get; } = heartId;
 
     public Language? Language { get; init; }
 

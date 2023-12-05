@@ -3,17 +3,12 @@ using GuildWars2.Wvw.Matches.Overview;
 
 namespace GuildWars2.Wvw.Http;
 
-internal sealed class MatchOverviewByIdRequest : IHttpRequest<MatchOverview>
+internal sealed class MatchOverviewByIdRequest(string matchId) : IHttpRequest<MatchOverview>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/wvw/matches/overview") { AcceptEncoding = "gzip" };
 
-    public MatchOverviewByIdRequest(string matchId)
-    {
-        MatchId = matchId;
-    }
-
-    public string MatchId { get; }
+    public string MatchId { get; } = matchId;
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 

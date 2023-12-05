@@ -3,15 +3,8 @@ using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.PatternsAndPractices;
 
-public class DesignedForClientCodeTest : IClassFixture<AssemblyFixture>
+public class DesignedForClientCodeTest(AssemblyFixture fixture) : IClassFixture<AssemblyFixture>
 {
-    public DesignedForClientCodeTest(AssemblyFixture fixture)
-    {
-        this.fixture = fixture;
-    }
-
-    private readonly AssemblyFixture fixture;
-
     [Fact]
     public void Every_visible_type_is_designed_for_client_code()
     {

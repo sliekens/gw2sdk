@@ -1,14 +1,9 @@
 ﻿namespace GuildWars2.Http;
 
 [PublicAPI]
-public sealed class LinkHeader
+public sealed class LinkHeader(IEnumerable<LinkHeaderValue> links)
 {
-    public LinkHeader(IEnumerable<LinkHeaderValue> links)
-    {
-        Links = links?.ToList().AsReadOnly() ?? throw new ArgumentNullException(nameof(links));
-    }
-
-    public IReadOnlyCollection<LinkHeaderValue> Links { get; }
+    public IReadOnlyCollection<LinkHeaderValue> Links { get; } = links?.ToList().AsReadOnly() ?? throw new ArgumentNullException(nameof(links));
 
     public static LinkHeader Parse(string input) => new(ParseImpl(input.AsSpan()));
 

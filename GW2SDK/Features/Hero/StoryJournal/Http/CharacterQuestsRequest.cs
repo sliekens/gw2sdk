@@ -1,9 +1,9 @@
-using GuildWars2.Http;
+﻿using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.StoryJournal.Http;
 
-internal sealed class CharacterQuestsRequest : IHttpRequest<HashSet<int>>
+internal sealed class CharacterQuestsRequest(string characterName) : IHttpRequest<HashSet<int>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/quests")
@@ -12,12 +12,7 @@ internal sealed class CharacterQuestsRequest : IHttpRequest<HashSet<int>>
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
         };
 
-    public CharacterQuestsRequest(string characterName)
-    {
-        CharacterName = characterName;
-    }
-
-    public string CharacterName { get; }
+    public string CharacterName { get; } = characterName;
 
     public required string? AccessToken { get; init; }
 

@@ -3,19 +3,14 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Mounts.Http;
 
-internal sealed class MountSkinsByPageRequest : IHttpRequest<HashSet<MountSkin>>
+internal sealed class MountSkinsByPageRequest(int pageIndex) : IHttpRequest<HashSet<MountSkin>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/mounts/skins")
     {
         AcceptEncoding = "gzip"
     };
 
-    public MountSkinsByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

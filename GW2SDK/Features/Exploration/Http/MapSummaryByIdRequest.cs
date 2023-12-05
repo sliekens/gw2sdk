@@ -3,19 +3,14 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Exploration.Http;
 
-internal sealed class MapSummaryByIdRequest : IHttpRequest<MapSummary>
+internal sealed class MapSummaryByIdRequest(int mapId) : IHttpRequest<MapSummary>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/maps")
     {
         AcceptEncoding = "gzip"
     };
 
-    public MapSummaryByIdRequest(int mapId)
-    {
-        MapId = mapId;
-    }
-
-    public int MapId { get; }
+    public int MapId { get; } = mapId;
 
     public Language? Language { get; init; }
 

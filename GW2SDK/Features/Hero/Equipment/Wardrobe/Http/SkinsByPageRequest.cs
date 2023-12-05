@@ -3,19 +3,14 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Wardrobe.Http;
 
-internal sealed class SkinsByPageRequest : IHttpRequest<HashSet<Skin>>
+internal sealed class SkinsByPageRequest(int pageIndex) : IHttpRequest<HashSet<Skin>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/skins")
     {
         AcceptEncoding = "gzip"
     };
 
-    public SkinsByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

@@ -3,17 +3,12 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.JadeBots.Http;
 
-internal sealed class JadeBotsByPageRequest : IHttpRequest<HashSet<JadeBot>>
+internal sealed class JadeBotsByPageRequest(int pageIndex) : IHttpRequest<HashSet<JadeBot>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/jadebots") { AcceptEncoding = "gzip" };
 
-    public JadeBotsByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

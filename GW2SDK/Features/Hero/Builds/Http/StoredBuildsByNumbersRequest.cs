@@ -3,17 +3,13 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Builds.Http;
 
-internal sealed class StoredBuildsByNumbersRequest : IHttpRequest<IReadOnlyList<Build>>
+internal sealed class StoredBuildsByNumbersRequest
+    (IReadOnlyCollection<int> slotNumbers) : IHttpRequest<IReadOnlyList<Build>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/account/buildstorage") { AcceptEncoding = "gzip" };
 
-    public StoredBuildsByNumbersRequest(IReadOnlyCollection<int> slotNumbers)
-    {
-        SlotNumbers = slotNumbers;
-    }
-
-    public IReadOnlyCollection<int> SlotNumbers { get; }
+    public IReadOnlyCollection<int> SlotNumbers { get; } = slotNumbers;
 
     public required string? AccessToken { get; init; }
 

@@ -2,17 +2,12 @@
 
 namespace GuildWars2.Hero.Builds.Http;
 
-internal sealed class ActiveBuildRequest : IHttpRequest<BuildTemplate>
+internal sealed class ActiveBuildRequest(string characterName) : IHttpRequest<BuildTemplate>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/buildtabs/active") { AcceptEncoding = "gzip" };
 
-    public ActiveBuildRequest(string characterName)
-    {
-        CharacterName = characterName;
-    }
-
-    public string CharacterName { get; }
+    public string CharacterName { get; } = characterName;
 
     public required string? AccessToken { get; init; }
 

@@ -2,19 +2,14 @@
 
 namespace GuildWars2.Quaggans.Http;
 
-internal sealed class QuagganByIdRequest : IHttpRequest<Quaggan>
+internal sealed class QuagganByIdRequest(string quagganId) : IHttpRequest<Quaggan>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/quaggans")
     {
         AcceptEncoding = "gzip"
     };
 
-    public QuagganByIdRequest(string quagganId)
-    {
-        QuagganId = quagganId;
-    }
-
-    public string QuagganId { get; }
+    public string QuagganId { get; } = quagganId;
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 

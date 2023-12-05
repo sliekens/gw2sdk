@@ -4,17 +4,12 @@ using GuildWars2.Pvp.Amulets;
 
 namespace GuildWars2.Pvp.Http;
 
-internal sealed class AmuletsByPageRequest : IHttpRequest<HashSet<Amulet>>
+internal sealed class AmuletsByPageRequest(int pageIndex) : IHttpRequest<HashSet<Amulet>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/pvp/amulets") { AcceptEncoding = "gzip" };
 
-    public AmuletsByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

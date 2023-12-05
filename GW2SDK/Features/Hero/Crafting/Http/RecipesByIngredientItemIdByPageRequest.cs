@@ -3,22 +3,17 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Crafting.Http;
 
-internal sealed class RecipesByIngredientItemIdByPageRequest : IHttpRequest<HashSet<Recipe>>
+internal sealed class RecipesByIngredientItemIdByPageRequest
+    (int ingredientItemId, int pageIndex) : IHttpRequest<HashSet<Recipe>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/recipes/search")
     {
         AcceptEncoding = "gzip"
     };
 
-    public RecipesByIngredientItemIdByPageRequest(int ingredientItemId, int pageIndex)
-    {
-        IngredientItemId = ingredientItemId;
-        PageIndex = pageIndex;
-    }
+    public int IngredientItemId { get; } = ingredientItemId;
 
-    public int IngredientItemId { get; }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

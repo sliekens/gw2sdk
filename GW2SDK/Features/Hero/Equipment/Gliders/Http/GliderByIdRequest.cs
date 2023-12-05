@@ -2,17 +2,12 @@
 
 namespace GuildWars2.Hero.Equipment.Gliders.Http;
 
-internal sealed class GliderByIdRequest : IHttpRequest<Glider>
+internal sealed class GliderByIdRequest(int gliderId) : IHttpRequest<Glider>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/gliders") { AcceptEncoding = "gzip" };
 
-    public GliderByIdRequest(int gliderId)
-    {
-        GliderId = gliderId;
-    }
-
-    public int GliderId { get; }
+    public int GliderId { get; } = gliderId;
 
     public Language? Language { get; init; }
 

@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Authentication.Http;
 
-internal sealed class TokenInfoRequest : IHttpRequest<TokenInfo>
+internal sealed class TokenInfoRequest(string accessToken) : IHttpRequest<TokenInfo>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/tokeninfo")
     {
@@ -10,12 +10,7 @@ internal sealed class TokenInfoRequest : IHttpRequest<TokenInfo>
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
     };
 
-    public TokenInfoRequest(string accessToken)
-    {
-        AccessToken = accessToken;
-    }
-
-    public string AccessToken { get; }
+    public string AccessToken { get; } = accessToken;
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 

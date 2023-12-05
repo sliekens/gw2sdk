@@ -3,17 +3,12 @@ using GuildWars2.Pve.Home.Cats;
 
 namespace GuildWars2.Pve.Home.Http;
 
-internal sealed class CatByIdRequest : IHttpRequest<Cat>
+internal sealed class CatByIdRequest(int catId) : IHttpRequest<Cat>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/home/cats") { AcceptEncoding = "gzip" };
 
-    public CatByIdRequest(int catId)
-    {
-        CatId = catId;
-    }
-
-    public int CatId { get; }
+    public int CatId { get; } = catId;
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 

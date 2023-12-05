@@ -3,17 +3,12 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Hero.StoryJournal.Http;
 
-internal sealed class BackstoryQuestionByIdRequest : IHttpRequest<BackstoryQuestion>
+internal sealed class BackstoryQuestionByIdRequest(int questionId) : IHttpRequest<BackstoryQuestion>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/backstory/questions") { AcceptEncoding = "gzip" };
 
-    public BackstoryQuestionByIdRequest(int questionId)
-    {
-        QuestionId = questionId;
-    }
-
-    public int QuestionId { get; }
+    public int QuestionId { get; } = questionId;
 
     public Language? Language { get; init; }
 

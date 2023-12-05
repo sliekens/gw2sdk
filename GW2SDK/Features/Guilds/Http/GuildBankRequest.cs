@@ -4,17 +4,12 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Http;
 
-internal sealed class GuildBankRequest : IHttpRequest<List<GuildBankTab>>
+internal sealed class GuildBankRequest(string id) : IHttpRequest<List<GuildBankTab>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/guild/:id/stash") { AcceptEncoding = "gzip" };
 
-    public GuildBankRequest(string id)
-    {
-        Id = id;
-    }
-
-    public string Id { get; }
+    public string Id { get; } = id;
 
     public required string? AccessToken { get; init; }
 

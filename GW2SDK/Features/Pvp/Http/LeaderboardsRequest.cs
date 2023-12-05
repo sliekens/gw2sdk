@@ -3,17 +3,12 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Http;
 
-internal sealed class LeaderboardsRequest : IHttpRequest<HashSet<string>>
+internal sealed class LeaderboardsRequest(string seasonId) : IHttpRequest<HashSet<string>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/pvp/seasons/:id/leaderboards") { AcceptEncoding = "gzip" };
 
-    public LeaderboardsRequest(string seasonId)
-    {
-        SeasonId = seasonId;
-    }
-
-    public string SeasonId { get; }
+    public string SeasonId { get; } = seasonId;
 
     public async Task<(HashSet<string> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,

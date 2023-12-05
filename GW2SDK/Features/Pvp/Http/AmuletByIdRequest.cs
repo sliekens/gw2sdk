@@ -3,17 +3,12 @@ using GuildWars2.Pvp.Amulets;
 
 namespace GuildWars2.Pvp.Http;
 
-internal sealed class AmuletByIdRequest : IHttpRequest<Amulet>
+internal sealed class AmuletByIdRequest(int amuletId) : IHttpRequest<Amulet>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/pvp/amulets") { AcceptEncoding = "gzip" };
 
-    public AmuletByIdRequest(int amuletId)
-    {
-        AmuletId = amuletId;
-    }
-
-    public int AmuletId { get; }
+    public int AmuletId { get; } = amuletId;
 
     public Language? Language { get; init; }
 

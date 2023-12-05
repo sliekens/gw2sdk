@@ -3,15 +3,8 @@ using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.PatternsAndPractices;
 
-public class DesignedForInheritanceTest : IClassFixture<AssemblyFixture>
+public class DesignedForInheritanceTest(AssemblyFixture fixture) : IClassFixture<AssemblyFixture>
 {
-    public DesignedForInheritanceTest(AssemblyFixture fixture)
-    {
-        this.fixture = fixture;
-    }
-
-    private readonly AssemblyFixture fixture;
-
     [Fact]
     public void Every_exported_class_is_designed_for_inheritance_or_sealed()
     {

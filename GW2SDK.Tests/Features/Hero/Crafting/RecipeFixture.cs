@@ -5,10 +5,5 @@ namespace GuildWars2.Tests.Features.Hero.Crafting;
 // ReSharper disable once ClassNeverInstantiated.Global
 public class RecipeFixture
 {
-    public RecipeFixture()
-    {
-        Recipes = FlatFileReader.Read("Data/recipes.json.gz").ToList().AsReadOnly();
-    }
-
-    public IReadOnlyCollection<string> Recipes { get; }
+    public IReadOnlyCollection<string> Recipes { get; } = FlatFileReader.Read("Data/recipes.json.gz").ToList().AsReadOnly();
 }

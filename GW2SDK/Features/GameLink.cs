@@ -197,18 +197,8 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable
         return new GameLink(link, refreshInterval);
     }
 
-    private class Subscription : IDisposable
+    private class Subscription(GameLink producer, IObserver<GameTick> observer) : IDisposable
     {
-        private readonly IObserver<GameTick> observer;
-
-        private readonly GameLink producer;
-
-        public Subscription(GameLink producer, IObserver<GameTick> observer)
-        {
-            this.producer = producer;
-            this.observer = observer;
-        }
-
         public void Dispose() => producer.subscribers.Remove(observer);
     }
 }

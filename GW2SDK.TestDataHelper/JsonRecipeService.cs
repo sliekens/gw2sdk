@@ -2,15 +2,8 @@
 
 namespace GuildWars2.TestDataHelper;
 
-public class JsonRecipeService
+public class JsonRecipeService(HttpClient http)
 {
-    private readonly HttpClient http;
-
-    public JsonRecipeService(HttpClient http)
-    {
-        this.http = http;
-    }
-
     public async Task<ISet<string>> GetAllJsonRecipes(IProgress<ResultContext> progress)
     {
         var ids = await GetRecipeIds().ConfigureAwait(false);

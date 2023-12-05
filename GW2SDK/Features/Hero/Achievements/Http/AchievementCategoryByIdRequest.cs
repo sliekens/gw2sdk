@@ -3,17 +3,12 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Hero.Achievements.Http;
 
-internal sealed class AchievementCategoryByIdRequest : IHttpRequest<AchievementCategory>
+internal sealed class AchievementCategoryByIdRequest(int achievementCategoryId) : IHttpRequest<AchievementCategory>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/achievements/categories") { AcceptEncoding = "gzip" };
 
-    public AchievementCategoryByIdRequest(int achievementCategoryId)
-    {
-        AchievementCategoryId = achievementCategoryId;
-    }
-
-    public int AchievementCategoryId { get; }
+    public int AchievementCategoryId { get; } = achievementCategoryId;
 
     public Language? Language { get; init; }
 

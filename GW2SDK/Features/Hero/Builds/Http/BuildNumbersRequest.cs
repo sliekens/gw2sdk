@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Builds.Http;
 
-internal sealed class BuildNumbersRequest : IHttpRequest<HashSet<int>>
+internal sealed class BuildNumbersRequest(string characterName) : IHttpRequest<HashSet<int>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/buildtabs")
@@ -12,12 +12,7 @@ internal sealed class BuildNumbersRequest : IHttpRequest<HashSet<int>>
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
         };
 
-    public BuildNumbersRequest(string characterName)
-    {
-        CharacterName = characterName;
-    }
-
-    public string CharacterName { get; }
+    public string CharacterName { get; } = characterName;
 
     public required string? AccessToken { get; init; }
 

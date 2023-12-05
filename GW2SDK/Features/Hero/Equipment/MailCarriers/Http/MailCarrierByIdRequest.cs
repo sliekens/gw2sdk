@@ -2,19 +2,14 @@
 
 namespace GuildWars2.Hero.Equipment.MailCarriers.Http;
 
-internal sealed class MailCarrierByIdRequest : IHttpRequest<MailCarrier>
+internal sealed class MailCarrierByIdRequest(int mailCarrierId) : IHttpRequest<MailCarrier>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/mailcarriers")
     {
         AcceptEncoding = "gzip"
     };
 
-    public MailCarrierByIdRequest(int mailCarrierId)
-    {
-        MailCarrierId = mailCarrierId;
-    }
-
-    public int MailCarrierId { get; }
+    public int MailCarrierId { get; } = mailCarrierId;
 
     public Language? Language { get; init; }
 

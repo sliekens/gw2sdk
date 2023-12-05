@@ -3,17 +3,12 @@ using GuildWars2.Wvw.Objectives;
 
 namespace GuildWars2.Wvw.Http;
 
-internal sealed class ObjectiveByIdRequest : IHttpRequest<Objective>
+internal sealed class ObjectiveByIdRequest(string objectiveId) : IHttpRequest<Objective>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/wvw/objectives") { AcceptEncoding = "gzip" };
 
-    public ObjectiveByIdRequest(string objectiveId)
-    {
-        ObjectiveId = objectiveId;
-    }
-
-    public string ObjectiveId { get; }
+    public string ObjectiveId { get; } = objectiveId;
 
     public Language? Language { get; init; }
 

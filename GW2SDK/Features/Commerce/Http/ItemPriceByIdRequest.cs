@@ -3,19 +3,14 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Commerce.Http;
 
-internal sealed class ItemPriceByIdRequest : IHttpRequest<ItemPrice>
+internal sealed class ItemPriceByIdRequest(int itemId) : IHttpRequest<ItemPrice>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/commerce/prices")
     {
         AcceptEncoding = "gzip"
     };
 
-    public ItemPriceByIdRequest(int itemId)
-    {
-        ItemId = itemId;
-    }
-
-    public int ItemId { get; }
+    public int ItemId { get; } = itemId;
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 

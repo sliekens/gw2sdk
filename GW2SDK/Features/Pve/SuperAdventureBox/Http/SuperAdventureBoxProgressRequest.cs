@@ -2,8 +2,7 @@
 
 namespace GuildWars2.Pve.SuperAdventureBox.Http;
 
-internal sealed class
-    SuperAdventureBoxProgressRequest : IHttpRequest<SuperAdventureBoxProgress>
+internal sealed class SuperAdventureBoxProgressRequest(string characterName) : IHttpRequest<SuperAdventureBoxProgress>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/characters/:id/sab")
     {
@@ -11,12 +10,7 @@ internal sealed class
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
     };
 
-    public SuperAdventureBoxProgressRequest(string characterName)
-    {
-        CharacterName = characterName;
-    }
-
-    public string CharacterName { get; }
+    public string CharacterName { get; } = characterName;
 
     public required string? AccessToken { get; init; }
 

@@ -3,17 +3,12 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Guilds.Http;
 
-internal sealed class EmblemBackgroundByIdRequest : IHttpRequest<EmblemBackground>
+internal sealed class EmblemBackgroundByIdRequest(int backgroundEmblemId) : IHttpRequest<EmblemBackground>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/emblem/backgrounds") { AcceptEncoding = "gzip" };
 
-    public EmblemBackgroundByIdRequest(int backgroundEmblemId)
-    {
-        BackgroundEmblemId = backgroundEmblemId;
-    }
-
-    public int BackgroundEmblemId { get; }
+    public int BackgroundEmblemId { get; } = backgroundEmblemId;
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 

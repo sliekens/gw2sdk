@@ -3,17 +3,12 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Finishers.Http;
 
-internal sealed class FinishersByPageRequest : IHttpRequest<HashSet<Finisher>>
+internal sealed class FinishersByPageRequest(int pageIndex) : IHttpRequest<HashSet<Finisher>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/finishers") { AcceptEncoding = "gzip" };
 
-    public FinishersByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

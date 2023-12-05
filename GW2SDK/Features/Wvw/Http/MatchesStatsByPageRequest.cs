@@ -4,17 +4,12 @@ using GuildWars2.Wvw.Matches.Stats;
 
 namespace GuildWars2.Wvw.Http;
 
-internal sealed class MatchesStatsByPageRequest : IHttpRequest<HashSet<MatchStats>>
+internal sealed class MatchesStatsByPageRequest(int pageIndex) : IHttpRequest<HashSet<MatchStats>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/wvw/matches/stats") { AcceptEncoding = "gzip" };
 
-    public MatchesStatsByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

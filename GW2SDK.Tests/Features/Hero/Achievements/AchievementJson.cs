@@ -3,15 +3,8 @@ using GuildWars2.Hero.Achievements;
 
 namespace GuildWars2.Tests.Features.Hero.Achievements;
 
-public class AchievementJson : IClassFixture<AchievementFixture>
+public class AchievementJson(AchievementFixture fixture) : IClassFixture<AchievementFixture>
 {
-    public AchievementJson(AchievementFixture fixture)
-    {
-        this.fixture = fixture;
-    }
-
-    private readonly AchievementFixture fixture;
-
     [Fact]
     public void Achievements_can_be_created_from_json() =>
         Assert.All(

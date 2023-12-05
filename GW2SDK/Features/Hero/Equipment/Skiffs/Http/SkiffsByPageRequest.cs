@@ -3,17 +3,12 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Skiffs.Http;
 
-internal sealed class SkiffsByPageRequest : IHttpRequest<HashSet<Skiff>>
+internal sealed class SkiffsByPageRequest(int pageIndex) : IHttpRequest<HashSet<Skiff>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/skiffs") { AcceptEncoding = "gzip" };
 
-    public SkiffsByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

@@ -3,17 +3,12 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Miniatures.Http;
 
-internal sealed class MinipetsByPageRequest : IHttpRequest<HashSet<Minipet>>
+internal sealed class MinipetsByPageRequest(int pageIndex) : IHttpRequest<HashSet<Minipet>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/minis") { AcceptEncoding = "gzip" };
 
-    public MinipetsByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

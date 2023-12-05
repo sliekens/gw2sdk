@@ -2,19 +2,14 @@
 
 namespace GuildWars2.Hero.Equipment.Templates.Http;
 
-internal sealed class LegendaryItemByIdRequest : IHttpRequest<LegendaryItem>
+internal sealed class LegendaryItemByIdRequest(int legendaryItemId) : IHttpRequest<LegendaryItem>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/legendaryarmory")
     {
         AcceptEncoding = "gzip"
     };
 
-    public LegendaryItemByIdRequest(int legendaryItemId)
-    {
-        LegendaryItemId = legendaryItemId;
-    }
-
-    public int LegendaryItemId { get; }
+    public int LegendaryItemId { get; } = legendaryItemId;
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 

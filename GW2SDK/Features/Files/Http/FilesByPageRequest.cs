@@ -3,17 +3,12 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Files.Http;
 
-internal sealed class FilesByPageRequest : IHttpRequest<HashSet<Asset>>
+internal sealed class FilesByPageRequest(int pageIndex) : IHttpRequest<HashSet<Asset>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/files") { AcceptEncoding = "gzip" };
 
-    public FilesByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

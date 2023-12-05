@@ -2,19 +2,14 @@
 
 namespace GuildWars2.Hero.Races.Http;
 
-internal sealed class RaceByNameRequest : IHttpRequest<Race>
+internal sealed class RaceByNameRequest(RaceName raceName) : IHttpRequest<Race>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/races")
     {
         AcceptEncoding = "gzip"
     };
 
-    public RaceByNameRequest(RaceName raceName)
-    {
-        RaceName = raceName;
-    }
-
-    public RaceName RaceName { get; }
+    public RaceName RaceName { get; } = raceName;
 
     public Language? Language { get; init; }
 

@@ -3,17 +3,12 @@ using GuildWars2.Wvw.Ranks;
 
 namespace GuildWars2.Wvw.Http;
 
-internal sealed class RankByIdRequest : IHttpRequest<Rank>
+internal sealed class RankByIdRequest(int rankId) : IHttpRequest<Rank>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/wvw/ranks") { AcceptEncoding = "gzip" };
 
-    public RankByIdRequest(int rankId)
-    {
-        RankId = rankId;
-    }
-
-    public int RankId { get; }
+    public int RankId { get; } = rankId;
 
     public Language? Language { get; init; }
 

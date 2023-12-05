@@ -2,19 +2,14 @@
 
 namespace GuildWars2.Hero.Masteries.Http;
 
-internal sealed class MasteryByIdRequest : IHttpRequest<Mastery>
+internal sealed class MasteryByIdRequest(int masteryId) : IHttpRequest<Mastery>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/masteries")
     {
         AcceptEncoding = "gzip"
     };
 
-    public MasteryByIdRequest(int masteryId)
-    {
-        MasteryId = masteryId;
-    }
-
-    public int MasteryId { get; }
+    public int MasteryId { get; } = masteryId;
 
     public Language? Language { get; init; }
 

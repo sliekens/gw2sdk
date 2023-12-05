@@ -2,17 +2,12 @@
 
 namespace GuildWars2.Hero.Equipment.Skiffs.Http;
 
-internal sealed class SkiffByIdRequest : IHttpRequest<Skiff>
+internal sealed class SkiffByIdRequest(int skiffId) : IHttpRequest<Skiff>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/skiffs") { AcceptEncoding = "gzip" };
 
-    public SkiffByIdRequest(int skiffId)
-    {
-        SkiffId = skiffId;
-    }
-
-    public int SkiffId { get; }
+    public int SkiffId { get; } = skiffId;
 
     public Language? Language { get; init; }
 

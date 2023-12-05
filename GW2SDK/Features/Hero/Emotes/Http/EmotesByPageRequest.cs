@@ -3,17 +3,12 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Emotes.Http;
 
-internal sealed class EmotesByPageRequest : IHttpRequest<HashSet<Emote>>
+internal sealed class EmotesByPageRequest(int pageIndex) : IHttpRequest<HashSet<Emote>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/emotes") { AcceptEncoding = "gzip" };
 
-    public EmotesByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

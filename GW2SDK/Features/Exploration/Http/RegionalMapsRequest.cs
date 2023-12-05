@@ -5,7 +5,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Http;
 
-internal sealed class RegionalMapsRequest : IHttpRequest<HashSet<Map>>
+internal sealed class RegionalMapsRequest(int continentId, int floorId, int regionId) : IHttpRequest<HashSet<Map>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/continents/:id/floors/:floor/regions/:region/maps")
@@ -18,18 +18,11 @@ internal sealed class RegionalMapsRequest : IHttpRequest<HashSet<Map>>
             }
         };
 
-    public RegionalMapsRequest(int continentId, int floorId, int regionId)
-    {
-        ContinentId = continentId;
-        FloorId = floorId;
-        RegionId = regionId;
-    }
+    public int ContinentId { get; } = continentId;
 
-    public int ContinentId { get; }
+    public int FloorId { get; } = floorId;
 
-    public int FloorId { get; }
-
-    public int RegionId { get; }
+    public int RegionId { get; } = regionId;
 
     public Language? Language { get; init; }
 

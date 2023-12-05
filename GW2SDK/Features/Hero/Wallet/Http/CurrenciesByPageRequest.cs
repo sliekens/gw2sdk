@@ -3,19 +3,14 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Wallet.Http;
 
-internal sealed class CurrenciesByPageRequest : IHttpRequest<HashSet<Currency>>
+internal sealed class CurrenciesByPageRequest(int pageIndex) : IHttpRequest<HashSet<Currency>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/currencies")
     {
         AcceptEncoding = "gzip"
     };
 
-    public CurrenciesByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

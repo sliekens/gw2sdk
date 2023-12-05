@@ -2,17 +2,12 @@
 
 namespace GuildWars2.Pve.Dungeons.Http;
 
-internal sealed class DungeonByIdRequest : IHttpRequest<Dungeon>
+internal sealed class DungeonByIdRequest(string dungeonId) : IHttpRequest<Dungeon>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/dungeons") { AcceptEncoding = "gzip" };
 
-    public DungeonByIdRequest(string dungeonId)
-    {
-        DungeonId = dungeonId;
-    }
-
-    public string DungeonId { get; }
+    public string DungeonId { get; } = dungeonId;
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 

@@ -3,17 +3,12 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Pve.Raids.Http;
 
-internal sealed class RaidsByPageRequest : IHttpRequest<HashSet<Raid>>
+internal sealed class RaidsByPageRequest(int pageIndex) : IHttpRequest<HashSet<Raid>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/raids") { AcceptEncoding = "gzip" };
 
-    public RaidsByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

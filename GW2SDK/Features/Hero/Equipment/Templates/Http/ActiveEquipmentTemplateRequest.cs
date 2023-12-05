@@ -2,17 +2,12 @@
 
 namespace GuildWars2.Hero.Equipment.Templates.Http;
 
-internal sealed class ActiveEquipmentTemplateRequest : IHttpRequest<EquipmentTemplate>
+internal sealed class ActiveEquipmentTemplateRequest(string characterName) : IHttpRequest<EquipmentTemplate>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/equipmenttabs/active") { AcceptEncoding = "gzip" };
 
-    public ActiveEquipmentTemplateRequest(string characterName)
-    {
-        CharacterName = characterName;
-    }
-
-    public string CharacterName { get; }
+    public string CharacterName { get; } = characterName;
 
     public required string? AccessToken { get; init; }
 

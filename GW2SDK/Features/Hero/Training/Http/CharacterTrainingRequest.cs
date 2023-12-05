@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Hero.Training.Http;
 
-internal sealed class CharacterTrainingRequest : IHttpRequest<CharacterTraining>
+internal sealed class CharacterTrainingRequest(string characterName) : IHttpRequest<CharacterTraining>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/training")
@@ -11,12 +11,7 @@ internal sealed class CharacterTrainingRequest : IHttpRequest<CharacterTraining>
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
         };
 
-    public CharacterTrainingRequest(string characterName)
-    {
-        CharacterName = characterName;
-    }
-
-    public string CharacterName { get; }
+    public string CharacterName { get; } = characterName;
 
     public required string? AccessToken { get; init; }
 

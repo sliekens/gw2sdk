@@ -2,19 +2,14 @@
 
 namespace GuildWars2.Hero.Equipment.Wardrobe.Http;
 
-internal sealed class SkinByIdRequest : IHttpRequest<Skin>
+internal sealed class SkinByIdRequest(int skinId) : IHttpRequest<Skin>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/skins")
     {
         AcceptEncoding = "gzip"
     };
 
-    public SkinByIdRequest(int skinId)
-    {
-        SkinId = skinId;
-    }
-
-    public int SkinId { get; }
+    public int SkinId { get; } = skinId;
 
     public Language? Language { get; init; }
 

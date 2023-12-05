@@ -2,17 +2,12 @@
 
 namespace GuildWars2.Hero.Emotes.Http;
 
-internal sealed class EmoteByIdRequest : IHttpRequest<Emote>
+internal sealed class EmoteByIdRequest(string emoteId) : IHttpRequest<Emote>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/emotes") { AcceptEncoding = "gzip" };
 
-    public EmoteByIdRequest(string emoteId)
-    {
-        EmoteId = emoteId;
-    }
-
-    public string EmoteId { get; }
+    public string EmoteId { get; } = emoteId;
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 

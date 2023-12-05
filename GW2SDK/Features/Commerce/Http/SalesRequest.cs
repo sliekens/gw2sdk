@@ -4,17 +4,12 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Commerce.Http;
 
-internal sealed class SalesRequest : IHttpRequest<HashSet<Transaction>>
+internal sealed class SalesRequest(int pageIndex) : IHttpRequest<HashSet<Transaction>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/commerce/transactions/history/sells") { AcceptEncoding = "gzip" };
 
-    public SalesRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

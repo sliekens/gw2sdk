@@ -5,19 +5,12 @@ using Spectre.Console.Rendering;
 
 namespace ApiVersionInfo;
 
-internal sealed class RouteTable : IRenderable
+internal sealed class RouteTable(RouteOptions routeOptions) : IRenderable
 {
-    private readonly RouteOptions routeOptions;
-
     private readonly Table table = new Table().AddColumn("Route")
         .AddColumn("Authorization")
         .AddColumn("Localization")
         .MinimalBorder();
-
-    public RouteTable(RouteOptions routeOptions)
-    {
-        this.routeOptions = routeOptions;
-    }
 
     public Measurement Measure(RenderOptions options, int maxWidth) =>
         ((IRenderable)table).Measure(options, maxWidth);

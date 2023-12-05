@@ -3,18 +3,12 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Banking.Http;
 
-internal sealed class
-    MaterialCategoriesByPageRequest : IHttpRequest<HashSet<MaterialCategory>>
+internal sealed class MaterialCategoriesByPageRequest(int pageIndex) : IHttpRequest<HashSet<MaterialCategory>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/materials") { AcceptEncoding = "gzip" };
 
-    public MaterialCategoriesByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

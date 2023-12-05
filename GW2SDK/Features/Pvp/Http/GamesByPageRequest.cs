@@ -4,7 +4,7 @@ using GuildWars2.Pvp.Games;
 
 namespace GuildWars2.Pvp.Http;
 
-internal sealed class GamesByPageRequest : IHttpRequest<HashSet<Game>>
+internal sealed class GamesByPageRequest(int pageIndex) : IHttpRequest<HashSet<Game>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/pvp/games")
     {
@@ -12,12 +12,7 @@ internal sealed class GamesByPageRequest : IHttpRequest<HashSet<Game>>
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
     };
 
-    public GamesByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; init; }
+    public int PageIndex { get; init; } = pageIndex;
 
     public int? PageSize { get; init; }
 

@@ -2,19 +2,14 @@
 
 namespace GuildWars2.Hero.Crafting.Http;
 
-internal sealed class RecipeByIdRequest : IHttpRequest<Recipe>
+internal sealed class RecipeByIdRequest(int recipeId) : IHttpRequest<Recipe>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/recipes")
     {
         AcceptEncoding = "gzip"
     };
 
-    public RecipeByIdRequest(int recipeId)
-    {
-        RecipeId = recipeId;
-    }
-
-    public int RecipeId { get; }
+    public int RecipeId { get; } = recipeId;
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 

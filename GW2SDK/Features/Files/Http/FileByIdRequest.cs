@@ -2,17 +2,12 @@
 
 namespace GuildWars2.Files.Http;
 
-internal sealed class FileByIdRequest : IHttpRequest<Asset>
+internal sealed class FileByIdRequest(string fileId) : IHttpRequest<Asset>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/files") { AcceptEncoding = "gzip" };
 
-    public FileByIdRequest(string fileId)
-    {
-        FileId = fileId;
-    }
-
-    public string FileId { get; }
+    public string FileId { get; } = fileId;
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 

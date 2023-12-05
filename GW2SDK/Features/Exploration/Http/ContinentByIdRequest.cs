@@ -3,19 +3,14 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Exploration.Http;
 
-internal sealed class ContinentByIdRequest : IHttpRequest<Continent>
+internal sealed class ContinentByIdRequest(int continentId) : IHttpRequest<Continent>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/continents")
     {
         AcceptEncoding = "gzip"
     };
 
-    public ContinentByIdRequest(int continentId)
-    {
-        ContinentId = continentId;
-    }
-
-    public int ContinentId { get; }
+    public int ContinentId { get; } = continentId;
 
     public Language? Language { get; init; }
 

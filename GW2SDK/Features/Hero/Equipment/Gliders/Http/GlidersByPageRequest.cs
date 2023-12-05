@@ -3,17 +3,12 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Gliders.Http;
 
-internal sealed class GlidersByPageRequest : IHttpRequest<HashSet<Glider>>
+internal sealed class GlidersByPageRequest(int pageIndex) : IHttpRequest<HashSet<Glider>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/gliders") { AcceptEncoding = "gzip" };
 
-    public GlidersByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

@@ -3,18 +3,13 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Builds.Http;
 
-internal sealed class BuildsRequest : IHttpRequest<HashSet<BuildTemplate>>
+internal sealed class BuildsRequest(string characterName) : IHttpRequest<HashSet<BuildTemplate>>
 {
     // There is no ids=all support, but page=0 works
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/buildtabs?page=0") { AcceptEncoding = "gzip" };
 
-    public BuildsRequest(string characterName)
-    {
-        CharacterName = characterName;
-    }
-
-    public string CharacterName { get; }
+    public string CharacterName { get; } = characterName;
 
     public required string? AccessToken { get; init; }
 

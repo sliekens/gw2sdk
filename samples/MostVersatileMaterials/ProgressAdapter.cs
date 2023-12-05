@@ -4,22 +4,15 @@ using Spectre.Console;
 
 namespace MostVersatileMaterials;
 
-public class ProgressAdapter : IProgress<ResultContext>
+public class ProgressAdapter(ProgressTask progress) : IProgress<ResultContext>
 {
-    private readonly ProgressTask progressTask;
-
-    public ProgressAdapter(ProgressTask progress)
-    {
-        this.progressTask = progress;
-    }
-
     public void Report(ResultContext value)
     {
-        if (value.ResultTotal != progressTask.MaxValue)
+        if (value.ResultTotal != progress.MaxValue)
         {
-            progressTask.MaxValue = value.ResultTotal;
+            progress.MaxValue = value.ResultTotal;
         }
 
-        progressTask.Value = value.ResultCount;
+        progress.Value = value.ResultCount;
     }
 }

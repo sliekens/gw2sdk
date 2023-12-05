@@ -3,19 +3,14 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.MailCarriers.Http;
 
-internal sealed class MailCarriersByPageRequest : IHttpRequest<HashSet<MailCarrier>>
+internal sealed class MailCarriersByPageRequest(int pageIndex) : IHttpRequest<HashSet<MailCarrier>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/mailcarriers")
     {
         AcceptEncoding = "gzip"
     };
 
-    public MailCarriersByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

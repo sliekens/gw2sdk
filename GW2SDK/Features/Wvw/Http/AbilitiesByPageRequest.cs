@@ -4,17 +4,12 @@ using GuildWars2.Wvw.Abilities;
 
 namespace GuildWars2.Wvw.Http;
 
-internal sealed class AbilitiesByPageRequest : IHttpRequest<HashSet<Ability>>
+internal sealed class AbilitiesByPageRequest(int pageIndex) : IHttpRequest<HashSet<Ability>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/wvw/abilities") { AcceptEncoding = "gzip" };
 
-    public AbilitiesByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

@@ -3,19 +3,14 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items.Stats.Http;
 
-internal sealed class ItemStatsByPageRequest : IHttpRequest<HashSet<ItemStat>>
+internal sealed class ItemStatsByPageRequest(int pageIndex) : IHttpRequest<HashSet<ItemStat>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/itemstats")
     {
         AcceptEncoding = "gzip"
     };
 
-    public ItemStatsByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

@@ -2,8 +2,7 @@
 
 namespace GuildWars2.Hero.Crafting.Http;
 
-internal sealed class
-    LearnedCraftingDisciplinesRequest : IHttpRequest<LearnedCraftingDisciplines>
+internal sealed class LearnedCraftingDisciplinesRequest(string characterName) : IHttpRequest<LearnedCraftingDisciplines>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/crafting")
@@ -12,12 +11,7 @@ internal sealed class
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
         };
 
-    public LearnedCraftingDisciplinesRequest(string characterName)
-    {
-        CharacterName = characterName;
-    }
-
-    public string CharacterName { get; }
+    public string CharacterName { get; } = characterName;
 
     public required string? AccessToken { get; init; }
 

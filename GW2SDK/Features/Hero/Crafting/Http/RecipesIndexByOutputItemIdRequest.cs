@@ -3,19 +3,14 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Crafting.Http;
 
-internal sealed class RecipesIndexByOutputItemIdRequest : IHttpRequest<HashSet<int>>
+internal sealed class RecipesIndexByOutputItemIdRequest(int outputItemId) : IHttpRequest<HashSet<int>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/recipes/search")
     {
         AcceptEncoding = "gzip"
     };
 
-    public RecipesIndexByOutputItemIdRequest(int outputItemId)
-    {
-        OutputItemId = outputItemId;
-    }
-
-    public int OutputItemId { get; }
+    public int OutputItemId { get; } = outputItemId;
 
     public async Task<(HashSet<int> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,

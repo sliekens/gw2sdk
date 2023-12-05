@@ -4,15 +4,8 @@ using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.PatternsAndPractices;
 
-public class SensibleDefaultsTest : IClassFixture<AssemblyFixture>
+public class SensibleDefaultsTest(AssemblyFixture fixture) : IClassFixture<AssemblyFixture>
 {
-    public SensibleDefaultsTest(AssemblyFixture fixture)
-    {
-        this.fixture = fixture;
-    }
-
-    private readonly AssemblyFixture fixture;
-
     [Fact]
     public void Every_default_enum_member_is_intentional()
     {

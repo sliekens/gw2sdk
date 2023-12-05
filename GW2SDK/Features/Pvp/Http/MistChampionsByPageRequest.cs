@@ -4,17 +4,12 @@ using GuildWars2.Pvp.MistChampions;
 
 namespace GuildWars2.Pvp.Http;
 
-internal sealed class MistChampionsByPageRequest : IHttpRequest<HashSet<MistChampion>>
+internal sealed class MistChampionsByPageRequest(int pageIndex) : IHttpRequest<HashSet<MistChampion>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/pvp/heroes") { AcceptEncoding = "gzip" };
 
-    public MistChampionsByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
+    public int PageIndex { get; } = pageIndex;
 
     public int? PageSize { get; init; }
 

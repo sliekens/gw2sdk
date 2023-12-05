@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Hero.Crafting.Http;
 
-internal sealed class LearnedRecipesRequest : IHttpRequest<HashSet<int>>
+internal sealed class LearnedRecipesRequest(string characterName) : IHttpRequest<HashSet<int>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/recipes")
@@ -11,12 +11,7 @@ internal sealed class LearnedRecipesRequest : IHttpRequest<HashSet<int>>
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
         };
 
-    public LearnedRecipesRequest(string characterName)
-    {
-        CharacterName = characterName;
-    }
-
-    public string CharacterName { get; }
+    public string CharacterName { get; } = characterName;
 
     public required string? AccessToken { get; init; }
 

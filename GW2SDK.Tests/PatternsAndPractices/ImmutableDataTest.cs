@@ -3,15 +3,8 @@ using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.PatternsAndPractices;
 
-public class ImmutableDataTest : IClassFixture<AssemblyFixture>
+public class ImmutableDataTest(AssemblyFixture fixture) : IClassFixture<AssemblyFixture>
 {
-    public ImmutableDataTest(AssemblyFixture fixture)
-    {
-        this.fixture = fixture;
-    }
-
-    private readonly AssemblyFixture fixture;
-
     [Fact]
     public void Data_objects_are_immutable()
     {

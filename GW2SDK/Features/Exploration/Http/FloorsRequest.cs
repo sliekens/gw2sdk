@@ -5,7 +5,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Http;
 
-internal sealed class FloorsRequest : IHttpRequest<HashSet<Floor>>
+internal sealed class FloorsRequest(int continentId) : IHttpRequest<HashSet<Floor>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/continents/:id/floors")
@@ -18,12 +18,7 @@ internal sealed class FloorsRequest : IHttpRequest<HashSet<Floor>>
             }
         };
 
-    public FloorsRequest(int continentId)
-    {
-        ContinentId = continentId;
-    }
-
-    public int ContinentId { get; }
+    public int ContinentId { get; } = continentId;
 
     public Language? Language { get; init; }
 

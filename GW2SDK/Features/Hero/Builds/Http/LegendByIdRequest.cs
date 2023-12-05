@@ -2,17 +2,12 @@
 
 namespace GuildWars2.Hero.Builds.Http;
 
-internal sealed class LegendByIdRequest : IHttpRequest<Legend>
+internal sealed class LegendByIdRequest(string legendId) : IHttpRequest<Legend>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/legends") { AcceptEncoding = "gzip" };
 
-    public LegendByIdRequest(string legendId)
-    {
-        LegendId = legendId;
-    }
-
-    public string LegendId { get; }
+    public string LegendId { get; } = legendId;
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
