@@ -9,10 +9,10 @@ public class GuildsByName
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, _) = await sut.Guilds.GetGuildsByName("noobs");
+        var (actual, _) = await sut.Guilds.GetGuildsByName("ArenaNet");
 
         var guild = Assert.Single(actual);
 
-        Assert.Equal("EFD3B9E7-CE5C-41B7-BE02-70F07E63BB49", guild);
+        Assert.Equal("4BBB52AA-D768-4FC6-8EDE-C299F2822F0F", guild);
     }
 }

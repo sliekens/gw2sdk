@@ -4,19 +4,18 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Http;
 
-internal sealed class
-    GuildPermissionsByIdsRequest : IHttpRequest<HashSet<GuildPermissionSummary>>
+internal sealed class GuildPermissionsByIdsRequest : IHttpRequest<HashSet<GuildPermissionSummary>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/guild/permissions") { AcceptEncoding = "gzip" };
 
-    public GuildPermissionsByIdsRequest(IReadOnlyCollection<GuildPermission> guildPermissionIds)
+    public GuildPermissionsByIdsRequest(IReadOnlyCollection<string> guildPermissionIds)
     {
         Check.Collection(guildPermissionIds);
         GuildPermissionIds = guildPermissionIds;
     }
 
-    public IReadOnlyCollection<GuildPermission> GuildPermissionIds { get; }
+    public IReadOnlyCollection<string> GuildPermissionIds { get; }
 
     public Language? Language { get; init; }
 
@@ -32,15 +31,7 @@ internal sealed class
                 {
                     Arguments = new QueryBuilder
                     {
-                        {
-                            "ids", GuildPermissionIds.Select(
-#if NET
-                                id => Enum.GetName(id)!
-#else
-                                id => Enum.GetName(typeof(GuildPermission), id)!
-#endif
-                            )
-                        },
+                        { "ids", GuildPermissionIds },
                         { "v", SchemaVersion.Recommended }
                     },
                     AcceptLanguage = Language?.Alpha2Code
@@ -51,8 +42,11 @@ internal sealed class
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetGuildPermissionSummary(MissingMemberBehavior));
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
+        var value = json.RootElement.GetSet(
+            entry => entry.GetGuildPermissionSummary(MissingMemberBehavior)
+        );
         return (value, new MessageContext(response));
     }
 }

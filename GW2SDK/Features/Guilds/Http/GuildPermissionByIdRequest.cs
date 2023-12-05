@@ -8,12 +8,12 @@ internal sealed class GuildPermissionByIdRequest : IHttpRequest<GuildPermissionS
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/guild/permissions") { AcceptEncoding = "gzip" };
 
-    public GuildPermissionByIdRequest(GuildPermission guildPermissionId)
+    public GuildPermissionByIdRequest(string guildPermissionId)
     {
         GuildPermissionId = guildPermissionId;
     }
 
-    public GuildPermission GuildPermissionId { get; }
+    public string GuildPermissionId { get; }
 
     public Language? Language { get; init; }
 
@@ -29,7 +29,7 @@ internal sealed class GuildPermissionByIdRequest : IHttpRequest<GuildPermissionS
                 {
                     Arguments = new QueryBuilder
                     {
-                        { "id", GuildPermissionId.ToString() },
+                        { "id", GuildPermissionId },
                         { "v", SchemaVersion.Recommended }
                     },
                     AcceptLanguage = Language?.Alpha2Code

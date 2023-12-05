@@ -44,12 +44,7 @@ internal static class GuildRankJson
             Id = id.Map(value => value.GetStringRequired()),
             Order = order.Map(value => value.GetInt32()),
             Permissions =
-                permissions.Map(
-                    values =>
-                        values.GetList(
-                            value => value.GetEnum<GuildPermission>(missingMemberBehavior)
-                        )
-                ),
+                permissions.Map(values => values.GetList(value => value.GetStringRequired())),
             IconHref = iconHref.Map(value => value.GetStringRequired())
         };
     }

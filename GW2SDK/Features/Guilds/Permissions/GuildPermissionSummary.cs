@@ -6,7 +6,7 @@
 public sealed record GuildPermissionSummary
 {
     /// <summary>The permission ID.</summary>
-    public required GuildPermission Id { get; init; }
+    public required string Id { get; init; }
 
     /// <summary>The name of the permission.</summary>
     public required string Name { get; init; }

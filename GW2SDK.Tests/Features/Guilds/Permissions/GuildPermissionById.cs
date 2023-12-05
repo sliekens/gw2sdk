@@ -9,7 +9,7 @@ public class GuildPermissionById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const GuildPermission id = GuildPermission.StartingRole;
+        const string id = "StartingRole";
 
         var (actual, _) = await sut.Guilds.GetGuildPermissionById(id);
 

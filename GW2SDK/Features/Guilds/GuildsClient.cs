@@ -25,6 +25,10 @@ public sealed class GuildsClient
 
     #region v2/guild/search
 
+    /// <summary>Retrieves a list of guild IDs that match the given name.</summary>
+    /// <param name="name">The name to search for.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<string> Value, MessageContext Context)> GetGuildsByName(
         string name,
         CancellationToken cancellationToken = default
@@ -38,6 +42,13 @@ public sealed class GuildsClient
 
     #region v2/guild/:id
 
+    /// <summary>Retrieves a guild by its ID. This endpoint is only accessible with a valid access token and the associated
+    /// account must be a member of the guild.</summary>
+    /// <param name="guildId">The guild ID.</param>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(Guild Value, MessageContext Context)> GetGuildById(
         string guildId,
         string? accessToken,
@@ -57,6 +68,13 @@ public sealed class GuildsClient
 
     #region v2/guild/:id/ranks
 
+    /// <summary>Retrieves the guild ranks of a guild by its ID. This endpoint is only accessible with a valid access token and
+    /// access is restricted to guild leaders.</summary>
+    /// <param name="guildId">The guild ID.</param>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(List<GuildRank> Value, MessageContext Context)> GetGuildRanks(
         string guildId,
         string? accessToken,
@@ -76,6 +94,13 @@ public sealed class GuildsClient
 
     #region v2/guild/:id/members
 
+    /// <summary>Retrieves guild members of a guild by its ID. This endpoint is only accessible with a valid access token and
+    /// access is restricted to guild leaders.</summary>
+    /// <param name="guildId">The guild ID.</param>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(List<GuildMember> Value, MessageContext Context)> GetGuildMembers(
         string guildId,
         string? accessToken,
@@ -95,6 +120,13 @@ public sealed class GuildsClient
 
     #region v2/guild/:id/teams
 
+    /// <summary>Retrieves PvP teams of a guild by its ID. This endpoint is only accessible with a valid access token and
+    /// access is restricted to guild leaders.</summary>
+    /// <param name="guildId">The guild ID.</param>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(List<GuildTeam> Value, MessageContext Context)> GetGuildTeams(
         string guildId,
         string? accessToken,
@@ -114,6 +146,13 @@ public sealed class GuildsClient
 
     #region v2/guild/:id/treasury
 
+    /// <summary>Retrieves the guild treasury of a guild by its ID. This endpoint is only accessible with a valid access token
+    /// and access is restricted to guild leaders.</summary>
+    /// <param name="guildId">The guild ID.</param>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(List<GuildTreasurySlot> Value, MessageContext Context)> GetGuildTreasury(
         string guildId,
         string? accessToken,
@@ -133,6 +172,13 @@ public sealed class GuildsClient
 
     #region v2/guild/:id/stash
 
+    /// <summary>Retrieves the guild vault of a guild by its ID. This endpoint is only accessible with a valid access token and
+    /// access is restricted to guild leaders.</summary>
+    /// <param name="guildId">The guild ID.</param>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(List<GuildBankTab> Value, MessageContext Context)> GetGuildBank(
         string guildId,
         string? accessToken,
@@ -152,6 +198,13 @@ public sealed class GuildsClient
 
     #region v2/guild/:id/storage
 
+    /// <summary>Retrieves the guild storage of a guild by its ID. This endpoint is only accessible with a valid access token
+    /// and access is restricted to guild leaders.</summary>
+    /// <param name="guildId">The guild ID.</param>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(List<GuildStorageSlot> Value, MessageContext Context)> GetGuildStorage(
         string guildId,
         string? accessToken,
@@ -171,6 +224,12 @@ public sealed class GuildsClient
 
     #region v2/guild/:id/upgrades
 
+    /// <summary>Retrieves the IDs of completed guild upgrades of a guild by its ID. This endpoint is only accessible with a
+    /// valid access token and access is restricted to guild leaders.</summary>
+    /// <param name="guildId">The guild ID.</param>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<int> Value, MessageContext Context)> GetCompletedGuildUpgrades(
         string guildId,
         string? accessToken,
@@ -185,6 +244,13 @@ public sealed class GuildsClient
 
     #region v2/guild/:id/log
 
+    /// <summary>Retrieves the logs of a guild by its ID. This endpoint is only accessible with a valid access token and access
+    /// is restricted to guild leaders.</summary>
+    /// <param name="guildId">The guild ID.</param>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(List<GuildLogEntry> Value, MessageContext Context)> GetGuildLog(
         string guildId,
         string? accessToken,
@@ -200,6 +266,14 @@ public sealed class GuildsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the logs of a guild by its ID, returning only newer logs than the one specified. This endpoint is
+    /// only accessible with a valid access token and access is restricted to guild leaders.</summary>
+    /// <param name="guildId">The guild ID.</param>
+    /// <param name="sinceLogId">The log ID to skip. This log and all older logs are excluded from the result.</param>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(List<GuildLogEntry> Value, MessageContext Context)> GetGuildLog(
         string guildId,
         int? sinceLogId,
@@ -221,6 +295,10 @@ public sealed class GuildsClient
 
     #region v2/emblem/foregrounds
 
+    /// <summary>Retrieves all emblem foregrounds.</summary>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<EmblemForeground> Value, MessageContext Context)> GetEmblemForegrounds(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -230,6 +308,9 @@ public sealed class GuildsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all emblem foregrounds.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<int> Value, MessageContext Context)> GetEmblemForegroundsIndex(
         CancellationToken cancellationToken = default
     )
@@ -238,6 +319,11 @@ public sealed class GuildsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves an emblem foreground by its ID.</summary>
+    /// <param name="emblemForegroundId">The emblem foreground ID.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(EmblemForeground Value, MessageContext Context)> GetEmblemForegroundById(
         int emblemForegroundId,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -249,6 +335,11 @@ public sealed class GuildsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves emblem foregrounds by their IDs.</summary>
+    /// <param name="emblemForegroundIds">The emblem foreground IDs.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<EmblemForeground> Value, MessageContext Context)>
         GetEmblemForegroundsByIds(
             IReadOnlyCollection<int> emblemForegroundIds,
@@ -261,6 +352,12 @@ public sealed class GuildsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of emblem foregrounds.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<EmblemForeground> Value, MessageContext Context)>
         GetEmblemForegroundsByPage(
             int pageIndex,
@@ -281,6 +378,10 @@ public sealed class GuildsClient
 
     #region v2/emblem/backgrounds
 
+    /// <summary>Retrieves all emblem backgrounds</summary>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<EmblemBackground> Value, MessageContext Context)> GetEmblemBackgrounds(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -290,6 +391,9 @@ public sealed class GuildsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all emblem backgrounds.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<int> Value, MessageContext Context)> GetEmblemBackgroundsIndex(
         CancellationToken cancellationToken = default
     )
@@ -298,6 +402,11 @@ public sealed class GuildsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves an emblem background by its ID.</summary>
+    /// <param name="backgroundEmblemId">The emblem background ID.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(EmblemBackground Value, MessageContext Context)> GetEmblemBackgroundById(
         int backgroundEmblemId,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -309,6 +418,11 @@ public sealed class GuildsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves emblem backgrounds by their IDs.</summary>
+    /// <param name="backgroundEmblemIds">The emblem background IDs.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<EmblemBackground> Value, MessageContext Context)>
         GetEmblemBackgroundsByIds(
             IReadOnlyCollection<int> backgroundEmblemIds,
@@ -321,6 +435,12 @@ public sealed class GuildsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of emblem backgrounds.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<EmblemBackground> Value, MessageContext Context)>
         GetEmblemBackgroundsByPage(
             int pageIndex,
@@ -341,6 +461,11 @@ public sealed class GuildsClient
 
     #region v2/guild/permissions
 
+    /// <summary>Retrieves all guild permissions.</summary>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<GuildPermissionSummary> Value, MessageContext Context)>
         GetGuildPermissions(
             Language? language = default,
@@ -356,6 +481,9 @@ public sealed class GuildsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all guild permissions.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<string> Value, MessageContext Context)> GetGuildPermissionsIndex(
         CancellationToken cancellationToken = default
     )
@@ -364,8 +492,14 @@ public sealed class GuildsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a guild permission by its ID.</summary>
+    /// <param name="guildPermissionId">The guild permission ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(GuildPermissionSummary Value, MessageContext Context)> GetGuildPermissionById(
-        GuildPermission guildPermissionId,
+        string guildPermissionId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -379,9 +513,15 @@ public sealed class GuildsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves guild permissions by their IDs.</summary>
+    /// <param name="guildPermissionIds">The guild permission IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<GuildPermissionSummary> Value, MessageContext Context)>
         GetGuildPermissionsByIds(
-            IReadOnlyCollection<GuildPermission> guildPermissionIds,
+            IReadOnlyCollection<string> guildPermissionIds,
             Language? language = default,
             MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
@@ -395,6 +535,13 @@ public sealed class GuildsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of guild permissions.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<GuildPermissionSummary> Value, MessageContext Context)>
         GetGuildPermissionsByPage(
             int pageIndex,
@@ -417,6 +564,11 @@ public sealed class GuildsClient
 
     #region v2/guild/upgrades
 
+    /// <summary>Retrieves all guild upgrades.</summary>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<GuildUpgrade> Value, MessageContext Context)> GetGuildUpgrades(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -431,6 +583,9 @@ public sealed class GuildsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all guild upgrades.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<int> Value, MessageContext Context)> GetGuildUpgradesIndex(
         CancellationToken cancellationToken = default
     )
@@ -439,6 +594,12 @@ public sealed class GuildsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a guild upgrade by its ID.</summary>
+    /// <param name="guildUpgradeId">The guild upgrade ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(GuildUpgrade Value, MessageContext Context)> GetGuildUpgradeById(
         int guildUpgradeId,
         Language? language = default,
@@ -454,6 +615,12 @@ public sealed class GuildsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves guild upgrades by their IDs.</summary>
+    /// <param name="guildUpgradeIds">The guild upgrade IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<GuildUpgrade> Value, MessageContext Context)> GetGuildUpgradesByIds(
         IReadOnlyCollection<int> guildUpgradeIds,
         Language? language = default,
@@ -469,6 +636,13 @@ public sealed class GuildsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of guild upgrades.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<GuildUpgrade> Value, MessageContext Context)> GetGuildUpgradesByPage(
         int pageIndex,
         int? pageSize = default,
