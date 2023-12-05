@@ -3,7 +3,9 @@
 /// <summary>An utility like String.Split, but for Spans. This should avoid allocations.</summary>
 internal ref struct CharSpanSplitter(ReadOnlySpan<char> value, char separator)
 {
-    public ReadOnlySpan<char> Current { get; private set; } = ReadOnlySpan<char>.Empty;
+    private ReadOnlySpan<char> value = value;
+
+	public ReadOnlySpan<char> Current { get; private set; }
 
     public bool MoveNext()
     {
