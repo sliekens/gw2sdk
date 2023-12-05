@@ -5,24 +5,23 @@ internal ref struct CharSpanSplitter(ReadOnlySpan<char> value, char separator)
 {
     private ReadOnlySpan<char> value = value;
 
-	public ReadOnlySpan<char> Current { get; private set; }
-
-    public bool MoveNext()
+    public bool MoveNext(out ReadOnlySpan<char> result)
     {
         if (value == ReadOnlySpan<char>.Empty)
         {
+            result = ReadOnlySpan<char>.Empty;
             return false;
         }
 
         var index = value.IndexOf(separator);
         if (index == -1)
         {
-            Current = value;
+            result = value;
             value = ReadOnlySpan<char>.Empty;
             return true;
         }
 
-        Current = value[..index];
+        result = value[..index];
         value = value[(index + 1)..];
         return true;
     }

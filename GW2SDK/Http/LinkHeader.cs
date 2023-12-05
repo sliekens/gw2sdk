@@ -11,12 +11,9 @@ public sealed class LinkHeader(IEnumerable<LinkHeaderValue> links)
     {
         var splitter = new CharSpanSplitter(input, ',');
         var items = new List<LinkHeaderValue>();
-        while (splitter.MoveNext())
+        while (splitter.MoveNext(out var result))
         {
-            if (!splitter.Current.IsEmpty)
-            {
-                items.Add(ParseLinkValue(splitter.Current));
-            }
+            items.Add(ParseLinkValue(result));
         }
 
         return items;
@@ -26,14 +23,16 @@ public sealed class LinkHeader(IEnumerable<LinkHeaderValue> links)
     {
         string href = "", rel = "";
         var splitter = new CharSpanSplitter(input, ';');
-        if (!splitter.MoveNext()) return new LinkHeaderValue(href, rel);
-        href = ParseUri(splitter.Current);
-        while (splitter.MoveNext())
+        if (splitter.MoveNext(out var result))
         {
-            var (name, value) = ParseAttribute(splitter.Current);
-            if (name == "rel")
+            href = ParseUri(result);
+            while (splitter.MoveNext(out result))
             {
-                rel = value;
+                var (name, value) = ParseAttribute(result);
+                if (name == "rel")
+                {
+                    rel = value;
+                }
             }
         }
 
