@@ -2,8 +2,8 @@
 
 namespace GuildWars2.Hero.Builds;
 
-/// <summary>Provides query methods for build templates, skills, specializations, traits, legends (Revenant) and builds in the build
-/// storage on the account.</summary>
+/// <summary>Provides query methods for build templates, skills, specializations, traits, legends (Revenant) and builds in
+/// the build storage on the account.</summary>
 [PublicAPI]
 public sealed class BuildsClient
 {
@@ -468,6 +468,9 @@ public sealed class BuildsClient
 
     #region v2/legends
 
+    /// <summary>Retrieves the IDs of all Revenant legends.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<string> Value, MessageContext Context)> GetLegendsIndex(
         CancellationToken cancellationToken = default
     )
@@ -476,6 +479,10 @@ public sealed class BuildsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a Revenant legend by its ID.</summary>
+    /// <param name="legendId">The legend ID.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(Legend Value, MessageContext Context)> GetLegendById(
         string legendId,
         CancellationToken cancellationToken = default
@@ -488,6 +495,11 @@ public sealed class BuildsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves Revenant legends by their IDs.</summary>
+    /// <param name="legendIds">The legend IDs.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Legend> Value, MessageContext Context)> GetLegendsByIds(
         IReadOnlyCollection<string> legendIds,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -501,6 +513,12 @@ public sealed class BuildsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of Revenant legends.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Legend> Value, MessageContext Context)> GetLegendsByPage(
         int pageIndex,
         int? pageSize = default,
@@ -517,6 +535,10 @@ public sealed class BuildsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves all Revenant legends.</summary>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Legend> Value, MessageContext Context)> GetLegends(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
