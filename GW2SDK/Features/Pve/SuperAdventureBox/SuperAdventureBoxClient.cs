@@ -18,13 +18,13 @@ public sealed class SuperAdventureBoxClient
 
     public Task<(SuperAdventureBoxProgress Value, MessageContext Context)>
         GetSuperAdventureBoxProgress(
-            string characterId,
+            string characterName,
             string? accessToken,
             MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
     {
-        var request = new SuperAdventureBoxProgressRequest(characterId)
+        var request = new SuperAdventureBoxProgressRequest(characterName)
         {
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
