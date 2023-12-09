@@ -24,7 +24,7 @@ public sealed record Character
     public required Gender Gender { get; init; }
 
     /// <summary>Additional facts about the current character that did not fit anywhere else.</summary>
-    public required IReadOnlyCollection<CharacterFlag> Flags { get; init; }
+    public required CharacterFlags Flags { get; init; }
 
     /// <summary>The profession name of the current character.</summary>
     public required ProfessionName Profession { get; init; }

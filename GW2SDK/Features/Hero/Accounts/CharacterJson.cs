@@ -1,6 +1,5 @@
 ﻿using System.Text.Json;
 using GuildWars2.Hero.Builds;
-using GuildWars2.Hero.Crafting;
 using GuildWars2.Hero.Crafting.Disciplines;
 using GuildWars2.Hero.Equipment.Templates;
 using GuildWars2.Hero.Inventories;
@@ -155,11 +154,7 @@ internal static class CharacterJson
             Name = name.Map(value => value.GetStringRequired()),
             Race = race.Map(value => value.GetEnum<RaceName>(missingMemberBehavior)),
             Gender = gender.Map(value => value.GetEnum<Gender>(missingMemberBehavior)),
-            Flags =
-                flags.Map(
-                    values =>
-                        values.GetList(value => value.GetEnum<CharacterFlag>(missingMemberBehavior))
-                ),
+            Flags = flags.Map(values => values.GetCharacterFlags()),
             Level = level.Map(value => value.GetInt32()),
             GuildId = guild.Map(value => value.GetString()) ?? "",
             Profession =
@@ -193,7 +188,9 @@ internal static class CharacterJson
                 ),
             EquipmentTemplates =
                 equipmentTabs.Map(
-                    values => values.GetList(value => value.GetEquipmentTemplate(missingMemberBehavior))
+                    values => values.GetList(
+                        value => value.GetEquipmentTemplate(missingMemberBehavior)
+                    )
                 ),
             Recipes = recipes.Map(values => values.GetList(value => value.GetInt32())),
             Training =
