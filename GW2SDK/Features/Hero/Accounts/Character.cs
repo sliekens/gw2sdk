@@ -1,5 +1,6 @@
 ﻿using GuildWars2.Hero.Builds;
 using GuildWars2.Hero.Crafting;
+using GuildWars2.Hero.Crafting.Disciplines;
 using GuildWars2.Hero.Equipment.Templates;
 using GuildWars2.Hero.Inventories;
 using GuildWars2.Hero.Training;

@@ -1,6 +1,4 @@
-﻿using GuildWars2.Hero.Inventories;
-
-namespace GuildWars2.Hero.Equipment.Templates;
+﻿namespace GuildWars2.Hero.Equipment.Templates;
 
 /// <summary>Information about a single item in the character's armory.</summary>
 [PublicAPI]

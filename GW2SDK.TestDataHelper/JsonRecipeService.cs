@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Hero.Crafting;
+using GuildWars2.Hero.Crafting.Recipes;
 
 namespace GuildWars2.TestDataHelper;
 
@@ -18,8 +19,8 @@ public class JsonRecipeService(HttpClient http)
 
     private async Task<HashSet<int>> GetRecipeIds()
     {
-        var crafting = new CraftingClient(http);
-        var (ids, _) = await crafting.GetRecipesIndex();
+        var recipes = new RecipesClient(http);
+        var (ids, _) = await recipes.GetRecipesIndex();
         return ids;
     }
 

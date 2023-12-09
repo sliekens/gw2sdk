@@ -1,0 +1,120 @@
+﻿using System.Text.Json;
+using GuildWars2.Hero.Crafting.Disciplines;
+using GuildWars2.Json;
+
+namespace GuildWars2.Hero.Crafting.Recipes;
+
+internal static class GuildConsumableRecipeJson
+{
+    public static GuildConsumableRecipe GetGuildConsumableRecipe(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
+    {
+        RequiredMember outputItemId = "output_item_id";
+        RequiredMember outputItemCount = "output_item_count";
+        RequiredMember minRating = "min_rating";
+        RequiredMember timeToCraft = "time_to_craft_ms";
+        RequiredMember disciplines = "disciplines";
+        RequiredMember flags = "flags";
+        RequiredMember ingredients = "ingredients";
+        OptionalMember guildIngredients = "guild_ingredients";
+        RequiredMember outputUpgradeId = "output_upgrade_id";
+        RequiredMember id = "id";
+        RequiredMember chatLink = "chat_link";
+        foreach (var member in json.EnumerateObject())
+        {
+            if (member.Name == "type")
+            {
+                if (!member.Value.ValueEquals("GuildConsumable"))
+                {
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                    );
+                }
+            }
+            else if (member.Name == outputItemId.Name)
+            {
+                outputItemId = member;
+            }
+            else if (member.Name == outputItemCount.Name)
+            {
+                outputItemCount = member;
+            }
+            else if (member.Name == minRating.Name)
+            {
+                minRating = member;
+            }
+            else if (member.Name == minRating.Name)
+            {
+                minRating = member;
+            }
+            else if (member.Name == timeToCraft.Name)
+            {
+                timeToCraft = member;
+            }
+            else if (member.Name == disciplines.Name)
+            {
+                disciplines = member;
+            }
+            else if (member.Name == flags.Name)
+            {
+                flags = member;
+            }
+            else if (member.Name == ingredients.Name)
+            {
+                ingredients = member;
+            }
+            else if (member.Name == guildIngredients.Name)
+            {
+                guildIngredients = member;
+            }
+            else if (member.Name == outputUpgradeId.Name)
+            {
+                outputUpgradeId = member;
+            }
+            else if (member.Name == id.Name)
+            {
+                id = member;
+            }
+            else if (member.Name == chatLink.Name)
+            {
+                chatLink = member;
+            }
+            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            {
+                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+            }
+        }
+
+        return new GuildConsumableRecipe
+        {
+            Id = id.Map(value => value.GetInt32()),
+            OutputItemId = outputItemId.Map(value => value.GetInt32()),
+            OutputItemCount = outputItemCount.Map(value => value.GetInt32()),
+            MinRating = minRating.Map(value => value.GetInt32()),
+            TimeToCraft = timeToCraft.Map(value => TimeSpan.FromMilliseconds(value.GetDouble())),
+            Disciplines =
+                disciplines.Map(
+                    values =>
+                        values.GetList(
+                            value => value.GetEnum<CraftingDisciplineName>(missingMemberBehavior)
+                        )
+                ),
+            Flags = flags.Map(values => values.GetRecipeFlags()),
+            Ingredients =
+                ingredients.Map(
+                    values => values.GetList(value => value.GetIngredient(missingMemberBehavior))
+                ),
+            GuildIngredients =
+                guildIngredients.Map(
+                    values => values.GetList(
+                        value => value.GetGuildIngredient(missingMemberBehavior)
+                    )
+                )
+                ?? Empty.List<GuildIngredient>(),
+            OutputUpgradeId = outputUpgradeId.Map(value => value.GetInt32()),
+            ChatLink = chatLink.Map(value => value.GetStringRequired())
+        };
+    }
+}

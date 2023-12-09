@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GuildWars2;
 using GuildWars2.Hero.Crafting;
+using GuildWars2.Hero.Crafting.Recipes;
 using GuildWars2.Items;
 using Spectre.Console;
 
@@ -42,7 +43,7 @@ public class ReferenceData
             new ProgressTaskSettings { AutoStart = false }
         );
 
-        var craftingRecipes = await GetRecipes(gw2.Hero.Crafting, recipesProgress);
+        var craftingRecipes = await GetRecipes(gw2.Hero.Crafting.Recipes, recipesProgress);
 
         var groupedByIngredient = craftingRecipes
             .SelectMany(
@@ -85,14 +86,14 @@ public class ReferenceData
     }
 
     private static async Task<List<Recipe>> GetRecipes(
-        CraftingClient craftingClient,
+        RecipesClient recipesClient,
         ProgressTask progress
     )
     {
         progress.StartTask();
         try
         {
-            return await craftingClient.GetRecipesBulk(progress: new ProgressAdapter(progress))
+            return await recipesClient.GetRecipesBulk(progress: new ProgressAdapter(progress))
                 .Select(result => result.Value)
                 .OrderByDescending(recipe => recipe.Id)
                 .ToListAsync();
