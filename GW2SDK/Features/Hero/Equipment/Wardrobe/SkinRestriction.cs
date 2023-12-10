@@ -1,4 +1,4 @@
-﻿namespace GuildWars2;
+﻿namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 [PublicAPI]
 public enum SkinRestriction
