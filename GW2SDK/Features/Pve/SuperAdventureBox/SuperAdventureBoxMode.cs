@@ -1,4 +1,4 @@
-﻿namespace GuildWars2;
+﻿namespace GuildWars2.Pve.SuperAdventureBox;
 
 [PublicAPI]
 public enum SuperAdventureBoxMode
