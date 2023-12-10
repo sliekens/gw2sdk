@@ -9,7 +9,7 @@ internal static class Invariants
 
     internal static void Non_default_carriers_can_be_unlocked(this MailCarrier actual)
     {
-        if (actual.Flags.SingleOrDefault() == MailCarrierFlag.Default)
+        if (actual.Flags.Default)
         {
             Assert.Empty(actual.UnlockItems);
         }

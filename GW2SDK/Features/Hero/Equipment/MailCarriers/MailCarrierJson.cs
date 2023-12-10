@@ -56,11 +56,7 @@ internal static class MailCarrierJson
             Order = order.Map(value => value.GetInt32()),
             IconHref = icon.Map(value => value.GetStringRequired()),
             Name = name.Map(value => value.GetStringRequired()),
-            Flags = flags.Map(
-                values => values.GetList(
-                    value => value.GetEnum<MailCarrierFlag>(missingMemberBehavior)
-                )
-            )
+            Flags = flags.Map(values => values.GetMailCarrierFlags())
         };
     }
 }

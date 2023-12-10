@@ -14,5 +14,5 @@ public sealed record MailCarrier
 
     public required string Name { get; init; }
 
-    public required IReadOnlyCollection<MailCarrierFlag> Flags { get; init; }
+    public required MailCarrierFlags Flags { get; init; }
 }
