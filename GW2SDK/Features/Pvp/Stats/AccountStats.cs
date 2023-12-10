@@ -1,3 +1,5 @@
+using GuildWars2.Hero;
+
 namespace GuildWars2.Pvp.Stats;
 
 [PublicAPI]

@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Mumble;
+﻿using GuildWars2.Hero;
+
+namespace GuildWars2.Mumble;
 
 [PublicAPI]
 [DataTransferObject]

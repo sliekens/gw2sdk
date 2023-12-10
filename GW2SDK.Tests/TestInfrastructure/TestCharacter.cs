@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero;
+
+namespace GuildWars2.Tests.TestInfrastructure;
 
 public sealed record TestCharacter
 {

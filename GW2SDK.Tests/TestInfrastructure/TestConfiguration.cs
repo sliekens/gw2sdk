@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using GuildWars2.Hero;
+using Microsoft.Extensions.Configuration;
 
 namespace GuildWars2.Tests.TestInfrastructure;
 

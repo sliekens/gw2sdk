@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using GuildWars2.Json;
 
-namespace GuildWars2.Hero.Training;
+namespace GuildWars2.Hero;
 
 internal static class ProfessionNameJson
 {

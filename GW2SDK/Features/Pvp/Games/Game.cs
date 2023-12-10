@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Pvp.Games;
+﻿using GuildWars2.Hero;
+
+namespace GuildWars2.Pvp.Games;
 
 [PublicAPI]
 [DataTransferObject]

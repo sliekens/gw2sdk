@@ -1,4 +1,4 @@
-﻿namespace GuildWars2;
+﻿namespace GuildWars2.Hero;
 
 /// <summary>The playable professions.</summary>
 [PublicAPI]
