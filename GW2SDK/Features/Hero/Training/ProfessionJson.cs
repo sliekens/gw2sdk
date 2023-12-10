@@ -87,13 +87,7 @@ internal static class ProfessionJson
                     value =>
                         value.GetMap(item => item.GetWeaponProficiency(missingMemberBehavior))
                 ),
-            Flags =
-                flags.Map(
-                    values =>
-                        values.GetList(
-                            value => value.GetEnum<ProfessionFlag>(missingMemberBehavior)
-                        )
-                ),
+            Flags = flags.Map(values => values.GetProfessionFlags()),
             Skills =
                 skills.Map(
                     values =>

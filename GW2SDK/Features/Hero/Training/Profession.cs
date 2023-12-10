@@ -19,7 +19,7 @@ public sealed record Profession
 
     public required IDictionary<string, WeaponProficiency> Weapons { get; init; }
 
-    public required IReadOnlyCollection<ProfessionFlag> Flags { get; init; }
+    public required ProfessionFlags Flags { get; init; }
 
     public required IReadOnlyCollection<SkillReference> Skills { get; init; }
 
