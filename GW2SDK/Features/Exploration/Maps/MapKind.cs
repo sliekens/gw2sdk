@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace GuildWars2;
+namespace GuildWars2.Exploration.Maps;
 
 /// <summary>The kind of maps in Guild Wars 2.</summary>
 [PublicAPI]

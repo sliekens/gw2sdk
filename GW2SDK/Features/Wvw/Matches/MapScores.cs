@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Wvw.Matches;
+﻿using GuildWars2.Exploration.Maps;
+
+namespace GuildWars2.Wvw.Matches;
 
 [PublicAPI]
 [DataTransferObject]

@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using System.Numerics;
+using GuildWars2.Exploration.Maps;
 
 namespace GuildWars2.Wvw.Objectives;
 
