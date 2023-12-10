@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Hero.StoryJournal.Stories;
+﻿using GuildWars2.Hero.Races;
+
+namespace GuildWars2.Hero.StoryJournal.Stories;
 
 [PublicAPI]
 [DataTransferObject]

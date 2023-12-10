@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Hero.StoryJournal.Backstory;
+﻿using GuildWars2.Hero.Races;
+
+namespace GuildWars2.Hero.StoryJournal.Backstory;
 
 [PublicAPI]
 [DataTransferObject]

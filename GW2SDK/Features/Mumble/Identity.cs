@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Hero;
+using GuildWars2.Hero.Races;
 
 namespace GuildWars2.Mumble;
 
