@@ -4,7 +4,7 @@
 [DataTransferObject]
 public sealed record InfusionSlot
 {
-    public required IReadOnlyCollection<InfusionSlotFlag> Flags { get; init; }
+    public required InfusionSlotFlags Flags { get; init; }
 
     public required int? ItemId { get; init; }
 }

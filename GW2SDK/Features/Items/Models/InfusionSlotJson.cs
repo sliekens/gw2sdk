@@ -30,11 +30,7 @@ internal static class InfusionSlotJson
 
         return new InfusionSlot
         {
-            Flags = flags.Map(
-                values => values.GetList(
-                    value => value.GetEnum<InfusionSlotFlag>(missingMemberBehavior)
-                )
-            ),
+            Flags = flags.Map(values => values.GetInfusionSlotFlags()),
             ItemId = itemId.Map(value => value.GetInt32())
         };
     }

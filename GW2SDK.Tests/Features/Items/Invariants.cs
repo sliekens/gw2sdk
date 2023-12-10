@@ -99,7 +99,9 @@ internal static class Invariants
     {
         foreach (var slot in actual.InfusionSlots)
         {
-            Assert.NotEmpty(slot.Flags);
+            Assert.NotNull(slot.Flags);
+            Assert.True(slot.Flags.Enrichment || slot.Flags.Infusion);
+            Assert.Empty(slot.Flags.Other);
         }
     }
 

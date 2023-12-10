@@ -163,12 +163,7 @@ internal static class DefaultUpgradeComponentJson
                         )
                 ),
             InfusionUpgradeFlags =
-                infusionUpgradeFlags.Map(
-                    values =>
-                        values.GetList(
-                            value => value.GetEnum<InfusionSlotFlag>(missingMemberBehavior)
-                        )
-                ),
+                infusionUpgradeFlags.Map(values => values.GetInfusionSlotFlags()),
             AttributeAdjustment = attributeAdjustment.Map(value => value.GetDouble()),
             Suffix = infixUpgrade.Map(value => value.GetInfixUpgrade(missingMemberBehavior)),
             SuffixName = suffix.Map(value => value.GetStringRequired()),
