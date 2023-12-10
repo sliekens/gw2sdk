@@ -108,12 +108,7 @@ internal static class GatheringToolSkinJson
             Name = name.Map(value => value.GetStringRequired()),
             Description = description.Map(value => value.GetString()) ?? "",
             Rarity = rarity.Map(value => value.GetEnum<Rarity>(missingMemberBehavior)),
-            Flags =
-                flags.Map(
-                    values => values.GetList(
-                        value => value.GetEnum<SkinFlag>(missingMemberBehavior)
-                    )
-                ),
+            Flags = flags.Map(values => values.GetSkinFlags()),
             Restrictions =
                 restrictions.Map(
                     values => values.GetList(

@@ -11,7 +11,7 @@ public record Skin
 
     public required string Description { get; init; }
 
-    public required IReadOnlyCollection<SkinFlag> Flags { get; init; }
+    public required SkinFlags Flags { get; init; }
 
     public required IReadOnlyCollection<SkinRestriction> Restrictions { get; init; }
 

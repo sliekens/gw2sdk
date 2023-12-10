@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Wardrobe;
@@ -68,12 +68,7 @@ internal static class BackpackSkinJson
             Name = name.Map(value => value.GetStringRequired()),
             Description = description.Map(value => value.GetString()) ?? "",
             Rarity = rarity.Map(value => value.GetEnum<Rarity>(missingMemberBehavior)),
-            Flags =
-                flags.Map(
-                    values => values.GetList(
-                        value => value.GetEnum<SkinFlag>(missingMemberBehavior)
-                    )
-                ),
+            Flags = flags.Map(values => values.GetSkinFlags()),
             Restrictions =
                 restrictions.Map(
                     values => values.GetList(
