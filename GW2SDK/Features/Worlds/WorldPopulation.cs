@@ -1,4 +1,4 @@
-﻿namespace GuildWars2;
+﻿namespace GuildWars2.Worlds;
 
 [PublicAPI]
 public enum WorldPopulation

@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Worlds;
 
 namespace GuildWars2.Tests.Features.Worlds;
 
