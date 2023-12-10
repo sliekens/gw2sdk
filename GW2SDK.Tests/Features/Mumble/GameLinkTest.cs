@@ -1,5 +1,6 @@
 ﻿using System.Runtime.Versioning;
 using GuildWars2.Hero.Equipment.Mounts;
+using GuildWars2.Mumble;
 
 namespace GuildWars2.Tests.Features.Mumble;
 
