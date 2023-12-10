@@ -1,4 +1,4 @@
-﻿namespace GuildWars2;
+﻿namespace GuildWars2.Authorization;
 
 [PublicAPI]
 public enum Permission

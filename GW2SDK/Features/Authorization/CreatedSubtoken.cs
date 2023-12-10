@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Authentication;
+﻿namespace GuildWars2.Authorization;
 
 /// <summary>The result of creating a new subtoken.</summary>
 [PublicAPI]

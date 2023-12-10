@@ -1,11 +1,11 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
-namespace GuildWars2.Authentication;
+namespace GuildWars2.Authorization;
 
-internal static class ApiKeyInfoJson
+internal static class SubtokenInfoJson
 {
-    public static ApiKeyInfo GetApiKeyInfo(
+    public static SubtokenInfo GetSubtokenInfo(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -13,11 +13,14 @@ internal static class ApiKeyInfoJson
         RequiredMember name = "name";
         RequiredMember id = "id";
         RequiredMember permissions = "permissions";
+        RequiredMember expiresAt = "expires_at";
+        RequiredMember issuedAt = "issued_at";
+        OptionalMember urls = "urls";
         foreach (var member in json.EnumerateObject())
         {
             if (member.Name == "type")
             {
-                if (!member.Value.ValueEquals("APIKey"))
+                if (!member.Value.ValueEquals("Subtoken"))
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
@@ -36,18 +39,40 @@ internal static class ApiKeyInfoJson
             {
                 permissions = member;
             }
+            else if (member.Name == expiresAt.Name)
+            {
+                expiresAt = member;
+            }
+            else if (member.Name == issuedAt.Name)
+            {
+                issuedAt = member;
+            }
+            else if (member.Name == urls.Name)
+            {
+                urls = member;
+            }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
         }
 
-        return new ApiKeyInfo
+        return new SubtokenInfo
         {
             Id = id.Map(value => value.GetStringRequired()),
             Name = name.Map(value => value.GetStringRequired()),
-            Permissions = permissions.Map(
-                values => values.GetList(value => value.GetEnum<Permission>(missingMemberBehavior))
+            Permissions =
+                permissions.Map(
+                    values => values.GetList(
+                        value => value.GetEnum<Permission>(missingMemberBehavior)
+                    )
+                ),
+            ExpiresAt = expiresAt.Map(value => value.GetDateTimeOffset()),
+            IssuedAt = issuedAt.Map(value => value.GetDateTimeOffset()),
+            Urls = urls.Map(
+                values => values.GetList(
+                    item => new Uri(item.GetStringRequired(), UriKind.Relative)
+                )
             )
         };
     }

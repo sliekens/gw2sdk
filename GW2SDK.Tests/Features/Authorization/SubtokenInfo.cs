@@ -1,6 +1,7 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Authorization;
+using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Authentication;
+namespace GuildWars2.Tests.Features.Authorization;
 
 public class SubtokenInfo
 {
@@ -42,7 +43,7 @@ public class SubtokenInfo
 
         var (actual, _) = await sut.Tokens.GetTokenInfo(createdSubtoken.Subtoken);
 
-        var subtoken = Assert.IsType<GuildWars2.Authentication.SubtokenInfo>(actual);
+        var subtoken = Assert.IsType<GuildWars2.Authorization.SubtokenInfo>(actual);
 
         Assert.NotEmpty(subtoken.Id);
 

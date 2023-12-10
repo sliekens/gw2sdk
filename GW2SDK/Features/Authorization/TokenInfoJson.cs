@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using GuildWars2.Json;
 
-namespace GuildWars2.Authentication;
+namespace GuildWars2.Authorization;
 
 internal static class TokenInfoJson
 {

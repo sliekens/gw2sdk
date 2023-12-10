@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Authentication;
+﻿namespace GuildWars2.Authorization;
 
 /// <summary>Information about the access token. This is a base type, derived types exist for API keys and subtokens. Cast
 /// objects of this type to the derived type for additional information</summary>

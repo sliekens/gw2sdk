@@ -1,6 +1,6 @@
-﻿using GuildWars2.Authentication.Http;
+﻿using GuildWars2.Authorization.Http;
 
-namespace GuildWars2.Authentication;
+namespace GuildWars2.Authorization;
 
 /// <summary>Provides query methods for access token introspection and subtoken creation.</summary>
 [PublicAPI]

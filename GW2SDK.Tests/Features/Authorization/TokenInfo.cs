@@ -1,7 +1,7 @@
-﻿using GuildWars2.Authentication;
+﻿using GuildWars2.Authorization;
 using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Authentication;
+namespace GuildWars2.Tests.Features.Authorization;
 
 public class TokenInfo
 {

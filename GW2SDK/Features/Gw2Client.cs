@@ -1,4 +1,4 @@
-﻿using GuildWars2.Authentication;
+﻿using GuildWars2.Authorization;
 using GuildWars2.Commerce;
 using GuildWars2.Exploration;
 using GuildWars2.Files;

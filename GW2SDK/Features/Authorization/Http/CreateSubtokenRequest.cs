@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Http;
 
-namespace GuildWars2.Authentication.Http;
+namespace GuildWars2.Authorization.Http;
 
 internal sealed class CreateSubtokenRequest(string accessToken) : IHttpRequest<CreatedSubtoken>
 {
