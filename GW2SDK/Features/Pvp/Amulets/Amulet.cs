@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Pvp.Amulets;
+﻿using GuildWars2.Hero;
+
+namespace GuildWars2.Pvp.Amulets;
 
 [PublicAPI]
 [DataTransferObject]
@@ -10,5 +12,5 @@ public sealed record Amulet
 
     public required string IconHref { get; init; }
 
-    public required IDictionary<AttributeAdjustmentTarget, int> Attributes { get; init; }
+    public required IDictionary<CombatAttribute, int> Attributes { get; init; }
 }
