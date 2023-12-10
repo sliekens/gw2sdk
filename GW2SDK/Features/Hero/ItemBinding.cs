@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace GuildWars2;
+namespace GuildWars2.Hero;
 
 [PublicAPI]
 [DefaultValue(None)]
