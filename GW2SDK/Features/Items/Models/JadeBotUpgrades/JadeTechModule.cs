@@ -1,4 +1,4 @@
 ﻿namespace GuildWars2.Items;
 
 [PublicAPI]
-public sealed record JadeBotUpgrade : Item;
+public sealed record JadeTechModule : Item;

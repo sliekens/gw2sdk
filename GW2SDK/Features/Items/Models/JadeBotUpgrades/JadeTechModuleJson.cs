@@ -3,9 +3,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-internal static class JadeBotUpgradeJson
+internal static class JadeTechModuleJson
 {
-    public static JadeBotUpgrade GetJadeBotUpgrade(
+    public static JadeTechModule GetJadeBotUpgrade(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -82,7 +82,7 @@ internal static class JadeBotUpgradeJson
             }
         }
 
-        return new JadeBotUpgrade
+        return new JadeTechModule
         {
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),
