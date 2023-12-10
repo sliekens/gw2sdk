@@ -35,7 +35,8 @@ internal static class HttpResponseMessageExtensions
     /// <summary>Throws an exception if the response does not contain a useful result.</summary>
     /// <param name="instance">The current response.</param>
     /// <param name="cancellationToken">Self-explanatory.</param>
-    /// <exception cref="GatewayException">Generic problem at the server (or an intermediary).</exception>
+    /// <exception cref="ServerProblemException">Generic problem at the server (or an intermediary).</exception>
+    /// <exception cref="TooManyRequestsException">API rate limit reached.</exception>
     /// <exception cref="ResourceNotFoundException">Not Found.</exception>
     /// <exception cref="ArgumentException">Bad Request.</exception>
     /// <exception cref="HttpRequestException">Any other unexpected error.</exception>
@@ -49,7 +50,6 @@ internal static class HttpResponseMessageExtensions
             return;
         }
 
-        var requestUri = instance.RequestMessage?.RequestUri?.ToString();
         var reason = instance.ReasonPhrase;
         if (instance.Content.Headers.ContentType?.MediaType == "application/json")
         {
@@ -64,29 +64,32 @@ internal static class HttpResponseMessageExtensions
         switch (instance.StatusCode)
         {
             case >= InternalServerError:
-                throw new GatewayException(instance.StatusCode, reason)
+                throw new ServerProblemException(instance.StatusCode, reason)
                 {
-                    Data = { ["RequestUri"] = requestUri }
-                };
-            case NotFound:
-                throw new ResourceNotFoundException(reason)
-                {
-                    Data = { ["RequestUri"] = requestUri }
-                };
-            case BadRequest:
-                throw new ArgumentException(reason) { Data = { ["RequestUri"] = requestUri } };
-            case Unauthorized or Forbidden:
-                throw new UnauthorizedOperationException(reason)
-                {
-                    Data = { ["RequestUri"] = requestUri }
+                    Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
                 };
             case TooManyRequests:
                 throw new TooManyRequestsException(reason)
                 {
-                    Data = { ["RequestUri"] = requestUri }
+                    Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
+                };
+            case NotFound:
+                throw new ResourceNotFoundException(reason)
+                {
+                    Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
+                };
+            case BadRequest:
+                throw new ArgumentException(reason)
+                {
+                    Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
+                };
+            case Unauthorized or Forbidden:
+                throw new UnauthorizedOperationException(reason)
+                {
+                    Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
                 };
             default:
-                // Throw a super generic, super useless error for cases that we missed
+                // Throw a super generic, super useless error for unexpected errors
                 instance.EnsureSuccessStatusCode();
                 break;
         }

@@ -4,20 +4,20 @@ namespace GuildWars2.Http;
 
 /// <summary>Thrown when a server returns a failure result (5xx).</summary>
 [PublicAPI]
-public sealed class GatewayException : Exception
+public sealed class ServerProblemException : Exception
 {
-    public GatewayException(HttpStatusCode statusCode)
+    public ServerProblemException(HttpStatusCode statusCode)
     {
         StatusCode = statusCode;
     }
 
-    public GatewayException(HttpStatusCode statusCode, string? message)
+    public ServerProblemException(HttpStatusCode statusCode, string? message)
         : base(message)
     {
         StatusCode = statusCode;
     }
 
-    public GatewayException(HttpStatusCode statusCode, string? message, Exception? inner)
+    public ServerProblemException(HttpStatusCode statusCode, string? message, Exception? inner)
         : base(message, inner)
     {
         StatusCode = statusCode;
