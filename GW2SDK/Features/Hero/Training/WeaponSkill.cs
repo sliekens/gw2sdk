@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Hero.Training;
+﻿using GuildWars2.Hero.Builds;
+
+namespace GuildWars2.Hero.Training;
 
 [PublicAPI]
 [DataTransferObject]

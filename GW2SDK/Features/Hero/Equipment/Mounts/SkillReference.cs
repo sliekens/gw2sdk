@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Hero.Equipment.Mounts;
+﻿using GuildWars2.Hero.Builds;
+
+namespace GuildWars2.Hero.Equipment.Mounts;
 
 [PublicAPI]
 [DataTransferObject]

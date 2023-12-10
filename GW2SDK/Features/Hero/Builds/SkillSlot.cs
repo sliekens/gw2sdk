@@ -1,4 +1,4 @@
-﻿namespace GuildWars2;
+﻿namespace GuildWars2.Hero.Builds;
 
 /// <summary>The skill slots for abilities which can be activated by the player.</summary>
 [PublicAPI]
