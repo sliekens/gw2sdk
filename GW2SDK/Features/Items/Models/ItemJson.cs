@@ -26,7 +26,7 @@ internal static class ItemJson
             case "Gizmo":
                 return json.GetGizmo(missingMemberBehavior);
             case "JadeTechModule":
-                return json.GetJadeBotUpgrade(missingMemberBehavior);
+                return json.GetJadeTechModule(missingMemberBehavior);
             case "Key":
                 return json.GetKey(missingMemberBehavior);
             case "MiniPet":

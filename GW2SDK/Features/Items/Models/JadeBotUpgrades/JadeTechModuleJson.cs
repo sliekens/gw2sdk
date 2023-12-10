@@ -5,7 +5,7 @@ namespace GuildWars2.Items;
 
 internal static class JadeTechModuleJson
 {
-    public static JadeTechModule GetJadeBotUpgrade(
+    public static JadeTechModule GetJadeTechModule(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
