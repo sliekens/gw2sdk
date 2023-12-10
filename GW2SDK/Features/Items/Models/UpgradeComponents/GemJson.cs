@@ -148,12 +148,7 @@ internal static class GemJson
             ChatLink = chatLink.Map(value => value.GetStringRequired()),
             IconHref = icon.Map(value => value.GetString()),
             UpgradeComponentFlags =
-                upgradeComponentFlags.Map(
-                    values =>
-                        values.GetList(
-                            value => value.GetEnum<UpgradeComponentFlag>(missingMemberBehavior)
-                        )
-                ),
+                upgradeComponentFlags.Map(values => values.GetUpgradeComponentFlags()),
             InfusionUpgradeFlags =
                 infusionUpgradeFlags.Map(values => values.GetInfusionSlotFlags()),
             AttributeAdjustment = attributeAdjustment.Map(value => value.GetDouble()),

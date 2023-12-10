@@ -4,7 +4,7 @@
 [Inheritable]
 public record UpgradeComponent : Item
 {
-    public required IReadOnlyCollection<UpgradeComponentFlag> UpgradeComponentFlags { get; init; }
+    public required UpgradeComponentFlags UpgradeComponentFlags { get; init; }
 
     public required InfusionSlotFlags InfusionUpgradeFlags { get; init; }
 

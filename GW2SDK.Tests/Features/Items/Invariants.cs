@@ -178,6 +178,7 @@ internal static class Invariants
         actual.Id_is_positive();
         actual.Vendor_value_is_not_negative();
         actual.Level_is_between_0_and_80();
+        Assert.Empty(actual.Flags.Other);
         switch (actual)
         {
             case Consumable consumable:
@@ -220,6 +221,10 @@ internal static class Invariants
                 break;
             case Minipet minipet:
                 minipet.MinipetId_is_positive();
+                break;
+            case UpgradeComponent upgradeComponent:
+                Assert.Empty(upgradeComponent.UpgradeComponentFlags.Other);
+                Assert.Empty(upgradeComponent.InfusionUpgradeFlags.Other);
                 break;
         }
     }
