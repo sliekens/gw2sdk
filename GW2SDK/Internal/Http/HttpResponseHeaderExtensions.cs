@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Headers;
+using GuildWars2.Http.Headers;
 using static GuildWars2.Http.Gw2ResponseHeaderName;
 
 namespace GuildWars2.Http;
@@ -67,8 +68,8 @@ internal static class HttpResponseHeaderExtensions
             var header = LinkHeader.Parse(links.Single());
             foreach (var link in header.Links)
             {
-                var href = new Hyperlink(link.Href);
-                switch (link.Rel)
+                var href = new Hyperlink(link.Target);
+                switch (link.RelationType)
                 {
                     case "previous":
                         previous = href;
