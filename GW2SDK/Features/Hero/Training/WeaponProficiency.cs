@@ -6,7 +6,7 @@ public sealed record WeaponProficiency
 {
     public required int? RequiredSpecialization { get; init; }
 
-    public required IReadOnlyCollection<WeaponFlag> Flags { get; init; }
+    public required WeaponFlags Flags { get; init; }
 
     public required IReadOnlyCollection<WeaponSkill> Skills { get; init; }
 }
