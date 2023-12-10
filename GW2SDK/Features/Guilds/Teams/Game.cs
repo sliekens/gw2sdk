@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Guilds.Teams;
+﻿using GuildWars2.Pvp.Games;
+
+namespace GuildWars2.Guilds.Teams;
 
 /// <summary>Information about a PvP game played as a team.</summary>
 [PublicAPI]

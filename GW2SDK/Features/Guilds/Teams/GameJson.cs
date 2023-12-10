@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using GuildWars2.Json;
+using GuildWars2.Pvp.Games;
 
 namespace GuildWars2.Guilds.Teams;
 
