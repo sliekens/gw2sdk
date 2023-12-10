@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace GuildWars2;
+namespace GuildWars2.Items;
 
 /// <summary>A list of possible restrictions for items that are limited to some races, genders or professions.</summary>
 [PublicAPI]
