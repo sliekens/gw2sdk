@@ -1,4 +1,4 @@
-﻿namespace GuildWars2;
+﻿namespace GuildWars2.Pve.Dungeons;
 
 [PublicAPI]
 public enum DungeonKind
