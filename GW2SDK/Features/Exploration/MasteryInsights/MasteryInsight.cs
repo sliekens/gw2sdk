@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using GuildWars2.Hero.Masteries;
 
 namespace GuildWars2.Exploration.MasteryInsights;
 
