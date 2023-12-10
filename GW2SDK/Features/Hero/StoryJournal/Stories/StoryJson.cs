@@ -85,12 +85,7 @@ internal static class StoryJson
                 chapters.Map(
                     values => values.GetList(value => value.GetChapter(missingMemberBehavior))
                 ),
-            Flags = flags.Map(
-                    values => values.GetList(
-                        value => value.GetEnum<StoryFlag>(missingMemberBehavior)
-                    )
-                )
-                ?? Empty.List<StoryFlag>()
+            Flags = flags.Map(values => values.GetStoryFlags()) ?? StoryFlags.None
         };
     }
 }

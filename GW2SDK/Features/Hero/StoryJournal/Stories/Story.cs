@@ -22,5 +22,5 @@ public sealed record Story
 
     public required IReadOnlyCollection<Chapter> Chapters { get; init; }
 
-    public required IReadOnlyCollection<StoryFlag> Flags { get; init; }
+    public required StoryFlags Flags { get; init; }
 }
