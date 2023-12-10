@@ -38,7 +38,14 @@ internal readonly ref struct OptionalMember
         }
         catch (Exception reason)
         {
-            throw new InvalidOperationException($"Value for '{Name}' is incompatible.", reason);
+            throw new InvalidOperationException($"Value for '{Name}' is incompatible.", reason)
+            {
+                Data =
+                {
+                    ["ValueKind"] = value.ValueKind.ToString(),
+                    ["Value"] = value.GetRawText()
+                }
+            };
         }
     }
 }
