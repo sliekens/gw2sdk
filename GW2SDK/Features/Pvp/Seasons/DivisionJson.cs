@@ -52,11 +52,7 @@ internal static class DivisionJson
         return new Division
         {
             Name = name.Map(value => value.GetStringRequired()),
-            Flags =
-                flags.Map(
-                    values =>
-                        values.GetList(value => value.GetEnum<DivisionFlag>(missingMemberBehavior))
-                ),
+            Flags = flags.Map(values => values.GetDivisionFlags()),
             LargeIconHref = largeIcon.Map(value => value.GetStringRequired()),
             SmallIconHref = smallIcon.Map(value => value.GetStringRequired()),
             PipIconHref = pipIcon.Map(value => value.GetStringRequired()),

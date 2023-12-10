@@ -6,7 +6,7 @@ public sealed record Division
 {
     public required string Name { get; init; }
 
-    public required IReadOnlyCollection<DivisionFlag> Flags { get; init; }
+    public required DivisionFlags Flags { get; init; }
 
     public required string LargeIconHref { get; init; }
 
