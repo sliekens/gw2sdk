@@ -1,5 +1,6 @@
-﻿namespace GuildWars2;
+﻿namespace GuildWars2.Hero.Accounts;
 
+/// <summary>Modifiers for characters.</summary>
 [PublicAPI]
 public sealed record CharacterFlags
 {

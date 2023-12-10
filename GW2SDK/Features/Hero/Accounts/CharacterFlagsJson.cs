@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using GuildWars2.Json;
 
-namespace GuildWars2;
+namespace GuildWars2.Hero.Accounts;
 
 internal static class CharacterFlagsJson
 {
