@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Hero.Equipment.Wardrobe;
+﻿using GuildWars2.Items;
+
+namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 [PublicAPI]
 [Inheritable]
