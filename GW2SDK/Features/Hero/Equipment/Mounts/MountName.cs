@@ -1,4 +1,4 @@
-﻿namespace GuildWars2;
+﻿namespace GuildWars2.Hero.Equipment.Mounts;
 
 [PublicAPI]
 public enum MountName
