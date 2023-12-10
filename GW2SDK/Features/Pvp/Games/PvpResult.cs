@@ -1,4 +1,4 @@
-﻿namespace GuildWars2;
+﻿namespace GuildWars2.Pvp.Games;
 
 /// <summary>The result of a PvP match.</summary>
 [PublicAPI]
