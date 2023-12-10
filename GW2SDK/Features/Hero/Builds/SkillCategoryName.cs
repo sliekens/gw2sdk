@@ -1,4 +1,4 @@
-﻿namespace GuildWars2;
+﻿namespace GuildWars2.Hero.Builds;
 
 /// <summary>Skills with similar behaviors are grouped into one of these categories. Many traits affect all skills in a
 /// certain category.</summary>
