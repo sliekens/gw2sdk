@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace GuildWars2;
+namespace GuildWars2.Hero.Accounts;
 
 /// <summary>The names of Guild Wars 2 products.</summary>
 [PublicAPI]
