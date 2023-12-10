@@ -137,7 +137,7 @@ public sealed class RecipesClient
     /// <param name="degreeOfParallelism">The maximum number of chunks to request in parallel.</param>
     /// <param name="chunkSize">How many IDs to request per chunk.</param>
     /// <param name="progress">A progress report provider.</param>
-    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <param name="cancellationToken">A token to cancel the request(s).</param>
     /// <returns>A task that represents the API request(s).</returns>
     public IAsyncEnumerable<(Recipe Value, MessageContext Context)> GetRecipesBulk(
         IReadOnlyCollection<int> recipeIds,
@@ -175,7 +175,7 @@ public sealed class RecipesClient
     /// <param name="degreeOfParallelism">The maximum number of chunks to request in parallel.</param>
     /// <param name="chunkSize">How many IDs to request per chunk.</param>
     /// <param name="progress">A progress report provider.</param>
-    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <param name="cancellationToken">A token to cancel the request(s).</param>
     /// <returns>A task that represents the API request(s).</returns>
     public async IAsyncEnumerable<(Recipe Value, MessageContext Context)> GetRecipesBulk(
         MissingMemberBehavior missingMemberBehavior = default,

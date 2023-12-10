@@ -124,7 +124,7 @@ public sealed class AchievementsClient
     /// <param name="degreeOfParallelism">The maximum number of chunks to request in parallel.</param>
     /// <param name="chunkSize">How many IDs to request per chunk.</param>
     /// <param name="progress">A progress report provider.</param>
-    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <param name="cancellationToken">A token to cancel the request(s).</param>
     /// <returns>A task that represents the API request(s).</returns>
     public IAsyncEnumerable<(Achievement Value, MessageContext Context)> GetAchievementsBulk(
         IReadOnlyCollection<int> achievementIds,
@@ -168,7 +168,7 @@ public sealed class AchievementsClient
     /// <param name="degreeOfParallelism">The maximum number of chunks to request in parallel.</param>
     /// <param name="chunkSize">How many IDs to request per chunk.</param>
     /// <param name="progress">A progress report provider.</param>
-    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <param name="cancellationToken">A token to cancel the request(s).</param>
     /// <returns>A task that represents the API request(s).</returns>
     public async IAsyncEnumerable<(Achievement Value, MessageContext Context)> GetAchievementsBulk(
         Language? language = default,

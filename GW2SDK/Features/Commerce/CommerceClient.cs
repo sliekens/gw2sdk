@@ -101,7 +101,7 @@ public sealed class CommerceClient
     /// <param name="degreeOfParallelism">The maximum number of chunks to request in parallel.</param>
     /// <param name="chunkSize">How many IDs to request per chunk.</param>
     /// <param name="progress">A progress report provider.</param>
-    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <param name="cancellationToken">A token to cancel the request(s).</param>
     /// <returns>A task that represents the API request(s).</returns>
     public IAsyncEnumerable<(ItemPrice Value, MessageContext Context)> GetItemPricesBulk(
         IReadOnlyCollection<int> itemIds,
@@ -139,7 +139,7 @@ public sealed class CommerceClient
     /// <param name="degreeOfParallelism">The maximum number of chunks to request in parallel.</param>
     /// <param name="chunkSize">How many IDs to request per chunk.</param>
     /// <param name="progress">A progress report provider.</param>
-    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <param name="cancellationToken">A token to cancel the request(s).</param>
     /// <returns>A task that represents the API request(s).</returns>
     public async IAsyncEnumerable<(ItemPrice Value, MessageContext Context)> GetItemPricesBulk(
         MissingMemberBehavior missingMemberBehavior = default,
@@ -223,7 +223,7 @@ public sealed class CommerceClient
     /// <param name="degreeOfParallelism">The maximum number of chunks to request in parallel.</param>
     /// <param name="chunkSize">How many IDs to request per chunk.</param>
     /// <param name="progress">A progress report provider.</param>
-    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <param name="cancellationToken">A token to cancel the request(s).</param>
     /// <returns>A task that represents the API request(s).</returns>
     public IAsyncEnumerable<(OrderBook Value, MessageContext Context)> GetOrderBooksBulk(
         IReadOnlyCollection<int> itemIds,
@@ -261,7 +261,7 @@ public sealed class CommerceClient
     /// <param name="degreeOfParallelism">The maximum number of chunks to request in parallel.</param>
     /// <param name="chunkSize">How many IDs to request per chunk.</param>
     /// <param name="progress">A progress report provider.</param>
-    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <param name="cancellationToken">A token to cancel the request(s).</param>
     /// <returns>A task that represents the API request(s).</returns>
     public async IAsyncEnumerable<(OrderBook Value, MessageContext Context)> GetOrderBooksBulk(
         MissingMemberBehavior missingMemberBehavior = default,
