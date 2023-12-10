@@ -147,12 +147,7 @@ internal static class BackpackJson
                         value => value.GetEnum<GameType>(missingMemberBehavior)
                     )
                 ),
-            Flags =
-                flags.Map(
-                    values => values.GetList(
-                        value => value.GetEnum<ItemFlag>(missingMemberBehavior)
-                    )
-                ),
+            Flags = flags.Map(values => values.GetItemFlags()),
             Restrictions =
                 restrictions.Map(
                     values =>

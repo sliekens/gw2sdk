@@ -20,8 +20,7 @@ public record Item
     /// <remarks>Can be empty.</remarks>
     public required IReadOnlyCollection<GameType> GameTypes { get; init; }
 
-    /// <remarks>Can be empty.</remarks>
-    public required IReadOnlyCollection<ItemFlag> Flags { get; init; }
+    public required ItemFlags Flags { get; init; }
 
     /// <remarks>Can be empty.</remarks>
     public required IReadOnlyCollection<ItemRestriction> Restrictions { get; init; }
