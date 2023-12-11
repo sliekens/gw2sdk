@@ -44,8 +44,10 @@ internal sealed class BackstoryAnswersByIdsRequest : IHttpRequest<HashSet<Backst
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => BackstoryAnswerJson.GetBackstoryAnswer(entry, MissingMemberBehavior));
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
+        var value =
+            json.RootElement.GetSet(entry => entry.GetBackstoryAnswer(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }
 }

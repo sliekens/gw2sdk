@@ -35,7 +35,8 @@ internal sealed class GuildUpgradeByIdRequest(int guildUpgradeId) : IHttpRequest
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetGuildUpgrade(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }

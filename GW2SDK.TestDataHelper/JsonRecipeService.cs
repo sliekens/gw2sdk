@@ -32,20 +32,21 @@ public class JsonRecipeService(HttpClient http)
         return BulkQuery.QueryAsync(
             ids,
             GetChunk,
-            degreeOfParallelism: 100,
+            100,
             progress: progress,
             cancellationToken: cancellationToken
         );
 
-        async Task<IReadOnlyCollection<(int, string)>> GetChunk(IReadOnlyCollection<int> chunk, CancellationToken cancellationToken)
+        async Task<IReadOnlyCollection<(int, string)>> GetChunk(
+            IReadOnlyCollection<int> chunk,
+            CancellationToken cancellationToken
+        )
         {
             var request = new BulkRequest("/v2/recipes") { Ids = chunk };
             var json = await request.SendAsync(http, cancellationToken);
             return json.Indent(false)
                 .RootElement.EnumerateArray()
-                .Select(
-                    item => (item.GetProperty("id").GetInt32(), item.ToString())
-                )
+                .Select(item => (item.GetProperty("id").GetInt32(), item.ToString()))
                 .ToList();
         }
     }

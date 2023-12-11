@@ -3,7 +3,8 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Guilds.Http;
 
-internal sealed class GuildPermissionByIdRequest(string guildPermissionId) : IHttpRequest<GuildPermissionSummary>
+internal sealed class GuildPermissionByIdRequest(string guildPermissionId)
+    : IHttpRequest<GuildPermissionSummary>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/guild/permissions") { AcceptEncoding = "gzip" };
@@ -35,7 +36,8 @@ internal sealed class GuildPermissionByIdRequest(string guildPermissionId) : IHt
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetGuildPermissionSummary(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }

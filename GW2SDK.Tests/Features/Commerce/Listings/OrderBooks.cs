@@ -13,7 +13,9 @@ public class OrderBooks
         //   but enumerating all entries is too expensive for a test
         // This code will actually try to fetch more than 600 entries
         //  but the extra requests will be cancelled when this test completes
-        await foreach (var (actual, context) in sut.Commerce.GetOrderBooksBulk(degreeOfParallelism: 3).Take(600))
+        await foreach (var (actual, context) in sut.Commerce
+            .GetOrderBooksBulk(degreeOfParallelism: 3)
+            .Take(600))
         {
             Assert.True(actual.Id > 0);
             if (actual.TotalSupply == 0)
@@ -68,5 +70,4 @@ public class OrderBooks
             Assert.NotNull(context);
         }
     }
-
 }

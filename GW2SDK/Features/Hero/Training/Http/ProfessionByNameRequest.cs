@@ -42,7 +42,8 @@ internal sealed class ProfessionByNameRequest : IHttpRequest<Profession>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetProfession(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }

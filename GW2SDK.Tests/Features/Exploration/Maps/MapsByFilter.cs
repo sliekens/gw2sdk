@@ -19,7 +19,8 @@ public class MapsByFilter
             28
         };
 
-        var (actual, context) = await sut.Exploration.GetMapsByIds(continentId, floorId, regionId, ids);
+        var (actual, context) =
+            await sut.Exploration.GetMapsByIds(continentId, floorId, regionId, ids);
 
         Assert.Equal(ids.Count, actual.Count);
         Assert.NotNull(context.ResultContext);

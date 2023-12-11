@@ -35,7 +35,8 @@ internal sealed class UpgradeByIdRequest(int upgradeId) : IHttpRequest<Objective
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetObjectiveUpgrade(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }

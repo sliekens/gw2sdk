@@ -35,7 +35,8 @@ internal sealed class MistChampionByIdRequest(string heroId) : IHttpRequest<Mist
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetMistChampion(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }

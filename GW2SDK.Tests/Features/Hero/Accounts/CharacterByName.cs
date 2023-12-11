@@ -11,7 +11,8 @@ public class CharacterByName
         var character = Composer.Resolve<TestCharacter>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var (actual, _) = await sut.Hero.Account.GetCharacterByName(character.Name, accessToken.Key);
+        var (actual, _) =
+            await sut.Hero.Account.GetCharacterByName(character.Name, accessToken.Key);
 
         Assert.Equal(character.Name, actual.Name);
         Assert.Equal(character.Race, actual.Race);

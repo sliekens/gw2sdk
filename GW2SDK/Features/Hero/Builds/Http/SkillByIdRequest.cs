@@ -36,7 +36,8 @@ internal sealed class SkillByIdRequest(int skillId) : IHttpRequest<Skill>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetSkill(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }

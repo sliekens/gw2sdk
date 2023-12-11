@@ -2,7 +2,8 @@
 
 namespace GuildWars2.Hero.Crafting.Disciplines.Http;
 
-internal sealed class LearnedCraftingDisciplinesRequest(string characterName) : IHttpRequest<LearnedCraftingDisciplines>
+internal sealed class LearnedCraftingDisciplinesRequest(string characterName)
+    : IHttpRequest<LearnedCraftingDisciplines>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/crafting")
@@ -34,7 +35,8 @@ internal sealed class LearnedCraftingDisciplinesRequest(string characterName) : 
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetLearnedCraftingDisciplines(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }

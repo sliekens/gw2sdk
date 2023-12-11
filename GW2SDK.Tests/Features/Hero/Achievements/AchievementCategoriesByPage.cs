@@ -10,7 +10,8 @@ public class AchievementCategoriesByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
-        var (actual, context) = await sut.Hero.Achievements.GetAchievementCategoriesByPage(0, pageSize);
+        var (actual, context) =
+            await sut.Hero.Achievements.GetAchievementCategoriesByPage(0, pageSize);
 
         Assert.Equal(pageSize, actual.Count);
         Assert.NotNull(context.PageContext);

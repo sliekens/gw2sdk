@@ -41,8 +41,10 @@ internal sealed class UpgradesByPageRequest(int pageIndex) : IHttpRequest<HashSe
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetObjectiveUpgrade(MissingMemberBehavior));
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
+        var value =
+            json.RootElement.GetSet(entry => entry.GetObjectiveUpgrade(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }
 }

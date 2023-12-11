@@ -11,7 +11,7 @@ public sealed class WorldsByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         var (actual, context) = await sut.Worlds.GetWorldsByPage(0, 3);
-        
+
         Assert.Equal(3, actual.Count);
         Assert.All(
             actual,

@@ -32,7 +32,8 @@ internal sealed class GemsToGoldRequest(int gemsCount) : IHttpRequest<GemsToGold
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetGemsToGold(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }

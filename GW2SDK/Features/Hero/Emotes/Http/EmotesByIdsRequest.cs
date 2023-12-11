@@ -38,7 +38,8 @@ internal sealed class EmotesByIdsRequest : IHttpRequest<HashSet<Emote>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetEmote(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }

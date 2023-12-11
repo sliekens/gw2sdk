@@ -161,7 +161,7 @@ public class CoinTest
         Coin sut = 1_00_00;
 
         var actual = -sut;
-        
+
         Assert.Equal(-1_00_00, actual.Amount);
     }
 

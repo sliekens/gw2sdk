@@ -14,10 +14,13 @@ public class Builds
         var (actual, _) = await sut.Hero.Builds.GetBuilds(character.Name, accessToken.Key);
 
         Assert.NotEmpty(actual);
-        Assert.All(actual, entry =>
-        {
-            Assert.NotNull(entry);
-            Assert.NotNull(entry.Build);
-        });
+        Assert.All(
+            actual,
+            entry =>
+            {
+                Assert.NotNull(entry);
+                Assert.NotNull(entry.Build);
+            }
+        );
     }
 }

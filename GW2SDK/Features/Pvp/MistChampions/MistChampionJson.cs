@@ -5,7 +5,10 @@ namespace GuildWars2.Pvp.MistChampions;
 
 internal static class MistChampionJson
 {
-    public static MistChampion GetMistChampion(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static MistChampion GetMistChampion(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember id = "id";
         RequiredMember name = "name";

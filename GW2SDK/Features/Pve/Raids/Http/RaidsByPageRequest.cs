@@ -26,10 +26,16 @@ internal sealed class RaidsByPageRequest(int pageIndex) : IHttpRequest<HashSet<R
         }
 
         search.Add("v", SchemaVersion.Recommended);
-        using var response = await httpClient.SendAsync(Template with { Arguments = search }, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+        using var response = await httpClient.SendAsync(
+                Template with { Arguments = search },
+                HttpCompletionOption.ResponseHeadersRead,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetRaid(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }

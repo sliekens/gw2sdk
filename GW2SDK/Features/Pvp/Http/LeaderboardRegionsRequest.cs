@@ -3,7 +3,8 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Http;
 
-internal sealed class LeaderboardRegionsRequest(string seasonId, string boardId) : IHttpRequest<HashSet<string>>
+internal sealed class LeaderboardRegionsRequest(string seasonId, string boardId)
+    : IHttpRequest<HashSet<string>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/pvp/seasons/:id/leaderboards/:board") { AcceptEncoding = "gzip" };
@@ -29,7 +30,8 @@ internal sealed class LeaderboardRegionsRequest(string seasonId, string boardId)
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetStringRequired());
         return (value, new MessageContext(response));
     }

@@ -4,7 +4,8 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Http;
 
-internal sealed class EmblemBackgroundsByPageRequest(int pageIndex) : IHttpRequest<HashSet<EmblemBackground>>
+internal sealed class EmblemBackgroundsByPageRequest(int pageIndex)
+    : IHttpRequest<HashSet<EmblemBackground>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/emblem/backgrounds") { AcceptEncoding = "gzip" };
@@ -27,11 +28,18 @@ internal sealed class EmblemBackgroundsByPageRequest(int pageIndex) : IHttpReque
         }
 
         search.Add("v", SchemaVersion.Recommended);
-        using var response = await httpClient.SendAsync(Template with { Arguments = search }, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+        using var response = await httpClient.SendAsync(
+                Template with { Arguments = search },
+                HttpCompletionOption.ResponseHeadersRead,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetEmblemBackground(MissingMemberBehavior));
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
+        var value =
+            json.RootElement.GetSet(entry => entry.GetEmblemBackground(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }
 }

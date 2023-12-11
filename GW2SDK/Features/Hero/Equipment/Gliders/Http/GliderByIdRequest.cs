@@ -34,7 +34,8 @@ internal sealed class GliderByIdRequest(int gliderId) : IHttpRequest<Glider>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetGlider(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }

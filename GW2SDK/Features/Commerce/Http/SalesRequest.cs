@@ -41,7 +41,8 @@ internal sealed class SalesRequest(int pageIndex) : IHttpRequest<HashSet<Transac
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetTransaction(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }

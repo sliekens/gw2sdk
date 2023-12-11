@@ -24,11 +24,17 @@ internal sealed class MasteriesRequest : IHttpRequest<HashSet<Mastery>>
         CancellationToken cancellationToken
     )
     {
-        using var response = await httpClient.SendAsync(Template with { AcceptLanguage = Language?.Alpha2Code }, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+        using var response = await httpClient.SendAsync(
+                Template with { AcceptLanguage = Language?.Alpha2Code },
+                HttpCompletionOption.ResponseHeadersRead,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => MasteryJson.GetMastery(entry, MissingMemberBehavior));
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
+        var value = json.RootElement.GetSet(entry => entry.GetMastery(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }
 }

@@ -20,7 +20,7 @@ internal static class ProfessionFlagsJson
             {
                 noRacialSkills = true;
             }
-        
+
             else
             {
                 others ??= new List<string>();

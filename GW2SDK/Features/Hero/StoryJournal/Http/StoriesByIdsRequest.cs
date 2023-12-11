@@ -42,8 +42,9 @@ internal sealed class StoriesByIdsRequest : IHttpRequest<HashSet<Story>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => StoryJson.GetStory(entry, MissingMemberBehavior));
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
+        var value = json.RootElement.GetSet(entry => entry.GetStory(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }
 }

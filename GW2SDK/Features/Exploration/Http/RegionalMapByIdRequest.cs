@@ -4,8 +4,8 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Exploration.Http;
 
-internal sealed class RegionalMapByIdRequest
-    (int continentId, int floorId, int regionId, int mapId) : IHttpRequest<Map>
+internal sealed class RegionalMapByIdRequest(int continentId, int floorId, int regionId, int mapId)
+    : IHttpRequest<Map>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/continents/:id/floors/:floor/regions/:region/maps")

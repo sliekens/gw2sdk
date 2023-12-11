@@ -31,7 +31,8 @@ internal sealed class RaidByIdRequest(string raidId) : IHttpRequest<Raid>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetRaid(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }

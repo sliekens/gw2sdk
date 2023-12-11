@@ -4,7 +4,8 @@ using GuildWars2.Pvp.MistChampions;
 
 namespace GuildWars2.Pvp.Http;
 
-internal sealed class MistChampionsByPageRequest(int pageIndex) : IHttpRequest<HashSet<MistChampion>>
+internal sealed class MistChampionsByPageRequest(int pageIndex)
+    : IHttpRequest<HashSet<MistChampion>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/pvp/heroes") { AcceptEncoding = "gzip" };
@@ -41,7 +42,8 @@ internal sealed class MistChampionsByPageRequest(int pageIndex) : IHttpRequest<H
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetMistChampion(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }

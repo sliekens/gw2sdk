@@ -21,7 +21,8 @@ internal static class Invariants
     internal static void Region_is_known(this Mastery actual) =>
         Assert.NotEqual(MasteryRegionName.Unknown, actual.Region);
 
-    internal static void Name_is_not_empty(this MasteryLevel actual) => Assert.NotEmpty(actual.Name);
+    internal static void Name_is_not_empty(this MasteryLevel actual) =>
+        Assert.NotEmpty(actual.Name);
 
     internal static void Description_is_not_empty(this MasteryLevel actual) =>
         Assert.NotEmpty(actual.Description);
@@ -29,7 +30,8 @@ internal static class Invariants
     internal static void Instruction_is_not_empty(this MasteryLevel actual) =>
         Assert.NotEmpty(actual.Instruction);
 
-    internal static void Icon_is_not_empty(this MasteryLevel actual) => Assert.NotEmpty(actual.IconHref);
+    internal static void Icon_is_not_empty(this MasteryLevel actual) =>
+        Assert.NotEmpty(actual.IconHref);
 
     internal static void Costs_points(this MasteryLevel actual) =>
         Assert.InRange(actual.PointCost, 1, int.MaxValue);

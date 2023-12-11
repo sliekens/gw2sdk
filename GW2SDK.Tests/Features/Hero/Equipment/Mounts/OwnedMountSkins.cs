@@ -14,5 +14,4 @@ public class OwnedMountSkins
 
         Assert.NotEmpty(actual);
     }
-
 }

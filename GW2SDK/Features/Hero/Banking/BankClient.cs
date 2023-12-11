@@ -120,12 +120,13 @@ public sealed class BankClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<MaterialCategory> Value, MessageContext Context)> GetMaterialCategoriesByIds(
-        IReadOnlyCollection<int> materialCategoryIds,
-        Language? language = default,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    public Task<(HashSet<MaterialCategory> Value, MessageContext Context)>
+        GetMaterialCategoriesByIds(
+            IReadOnlyCollection<int> materialCategoryIds,
+            Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
         MaterialCategoriesByIdsRequest request = new(materialCategoryIds)
         {
@@ -142,13 +143,14 @@ public sealed class BankClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<MaterialCategory> Value, MessageContext Context)> GetMaterialCategoriesByPage(
-        int pageIndex,
-        int? pageSize = default,
-        Language? language = default,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    public Task<(HashSet<MaterialCategory> Value, MessageContext Context)>
+        GetMaterialCategoriesByPage(
+            int pageIndex,
+            int? pageSize = default,
+            Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
         MaterialCategoriesByPageRequest request = new(pageIndex)
         {

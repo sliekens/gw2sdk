@@ -1,8 +1,6 @@
 ﻿namespace GuildWars2.Hero.Crafting.Disciplines;
 
-/// <summary>
-/// 
-/// </summary>
+/// <summary></summary>
 [PublicAPI]
 public enum CraftingDisciplineName
 {

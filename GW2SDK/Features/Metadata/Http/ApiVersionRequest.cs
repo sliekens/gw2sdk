@@ -19,10 +19,16 @@ internal sealed class ApiVersionRequest(string version) : IHttpRequest<ApiVersio
         CancellationToken cancellationToken
     )
     {
-        using var response = await httpClient.SendAsync(Template with { Path = Template.Path.Replace(":version", Version) }, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+        using var response = await httpClient.SendAsync(
+                Template with { Path = Template.Path.Replace(":version", Version) },
+                HttpCompletionOption.ResponseHeadersRead,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetApiVersion(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }

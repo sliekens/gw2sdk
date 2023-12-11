@@ -15,5 +15,6 @@ internal static class Invariants
     internal static void Order_is_positive(this Currency actual) =>
         Assert.InRange(actual.Order, 1, 1000);
 
-    internal static void Icon_is_not_empty(this Currency actual) => Assert.NotEmpty(actual.IconHref);
+    internal static void Icon_is_not_empty(this Currency actual) =>
+        Assert.NotEmpty(actual.IconHref);
 }

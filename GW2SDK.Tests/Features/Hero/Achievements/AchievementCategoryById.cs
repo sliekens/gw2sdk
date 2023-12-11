@@ -20,5 +20,4 @@ public class AchievementCategoryById
         actual.Has_icon();
         actual.Has_achievements();
     }
-
 }

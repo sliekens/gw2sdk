@@ -10,7 +10,7 @@ public class WorldBosses
         var sut = Composer.Resolve<Gw2Client>();
 
         var (actual, context) = await sut.Pve.WorldBosses.GetWorldBosses();
-        
+
         Assert.NotEmpty(actual);
         Assert.NotNull(context.ResultContext);
         Assert.Equal(actual.Count, context.ResultContext.ResultCount);

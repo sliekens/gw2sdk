@@ -17,7 +17,8 @@ public class AccountAchievementsByFilter
             3
         };
 
-        var (actual, context) = await sut.Hero.Achievements.GetAccountAchievementsByIds(ids, accessToken.Key);
+        var (actual, context) =
+            await sut.Hero.Achievements.GetAccountAchievementsByIds(ids, accessToken.Key);
 
         Assert.Equal(ids.Count, actual.Count);
         Assert.NotNull(context.ResultContext);

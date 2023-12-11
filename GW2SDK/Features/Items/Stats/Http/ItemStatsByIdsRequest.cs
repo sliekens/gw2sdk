@@ -43,7 +43,8 @@ internal sealed class ItemStatsByIdsRequest : IHttpRequest<HashSet<ItemStat>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetItemStat(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }

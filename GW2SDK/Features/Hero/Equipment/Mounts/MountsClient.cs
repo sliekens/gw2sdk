@@ -35,10 +35,7 @@ public sealed class MountsClient
         CancellationToken cancellationToken = default
     )
     {
-        OwnedMountSkinsRequest request = new()
-        {
-            AccessToken = accessToken
-        };
+        OwnedMountSkinsRequest request = new() { AccessToken = accessToken };
         return request.SendAsync(httpClient, cancellationToken);
     }
 

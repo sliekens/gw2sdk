@@ -33,8 +33,11 @@ internal sealed class GuildRanksRequest(string id) : IHttpRequest<List<GuildRank
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
-        var value = json.RootElement.GetList(entry => entry.GetGuildRank(MissingMemberBehavior)).OrderBy(rank => rank.Order).ToList();
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
+        var value = json.RootElement.GetList(entry => entry.GetGuildRank(MissingMemberBehavior))
+            .OrderBy(rank => rank.Order)
+            .ToList();
         return (value, new MessageContext(response));
     }
 }

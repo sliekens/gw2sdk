@@ -36,7 +36,8 @@ internal sealed class ItemByIdRequest(int itemId) : IHttpRequest<Item>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetItem(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }

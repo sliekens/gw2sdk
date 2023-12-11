@@ -3,7 +3,8 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Hero.Builds.Http;
 
-internal sealed class BuildRequest(string characterName, int tabNumber) : IHttpRequest<BuildTemplate>
+internal sealed class BuildRequest(string characterName, int tabNumber)
+    : IHttpRequest<BuildTemplate>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/buildtabs/:tab") { AcceptEncoding = "gzip" };
@@ -24,7 +25,8 @@ internal sealed class BuildRequest(string characterName, int tabNumber) : IHttpR
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Path = Template.Path.Replace(":id", CharacterName).Replace(":tab", TabNumber.ToString(CultureInfo.InvariantCulture)),
+                    Path = Template.Path.Replace(":id", CharacterName)
+                        .Replace(":tab", TabNumber.ToString(CultureInfo.InvariantCulture)),
                     Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } },
                     BearerToken = AccessToken
                 },
@@ -34,7 +36,8 @@ internal sealed class BuildRequest(string characterName, int tabNumber) : IHttpR
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetBuildTemplate(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }

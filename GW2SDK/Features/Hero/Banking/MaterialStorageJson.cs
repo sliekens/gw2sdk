@@ -9,5 +9,5 @@ internal static class MaterialStorageJson
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     ) =>
-        new () { Materials = json.GetList(value => value.GetMaterialSlot(missingMemberBehavior)) };
+        new() { Materials = json.GetList(value => value.GetMaterialSlot(missingMemberBehavior)) };
 }

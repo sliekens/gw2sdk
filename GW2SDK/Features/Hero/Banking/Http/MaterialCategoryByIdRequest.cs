@@ -2,7 +2,8 @@
 
 namespace GuildWars2.Hero.Banking.Http;
 
-internal sealed class MaterialCategoryByIdRequest(int materialCategoryId) : IHttpRequest<MaterialCategory>
+internal sealed class MaterialCategoryByIdRequest(int materialCategoryId)
+    : IHttpRequest<MaterialCategory>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/materials")
     {
@@ -36,7 +37,8 @@ internal sealed class MaterialCategoryByIdRequest(int materialCategoryId) : IHtt
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetMaterialCategory(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }

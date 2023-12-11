@@ -3,7 +3,8 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Masteries.Http;
 
-internal sealed class MasteriesByIdsRequest(IReadOnlyCollection<int> masteryIds) : IHttpRequest<HashSet<Mastery>>
+internal sealed class MasteriesByIdsRequest(IReadOnlyCollection<int> masteryIds)
+    : IHttpRequest<HashSet<Mastery>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/masteries")
     {
@@ -37,8 +38,9 @@ internal sealed class MasteriesByIdsRequest(IReadOnlyCollection<int> masteryIds)
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => MasteryJson.GetMastery(entry, MissingMemberBehavior));
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
+        var value = json.RootElement.GetSet(entry => entry.GetMastery(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }
 }

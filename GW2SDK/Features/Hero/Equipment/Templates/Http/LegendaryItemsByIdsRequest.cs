@@ -40,8 +40,9 @@ internal sealed class LegendaryItemsByIdsRequest : IHttpRequest<HashSet<Legendar
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => LegendaryItemJson.GetLegendaryItem(entry, MissingMemberBehavior));
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
+        var value = json.RootElement.GetSet(entry => entry.GetLegendaryItem(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }
 }

@@ -2,7 +2,8 @@
 
 namespace GuildWars2.Hero.Equipment.Templates.Http;
 
-internal sealed class CharacterEquipmentRequest(string characterName) : IHttpRequest<CharacterEquipment>
+internal sealed class CharacterEquipmentRequest(string characterName)
+    : IHttpRequest<CharacterEquipment>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/equipment") { AcceptEncoding = "gzip" };
@@ -31,7 +32,8 @@ internal sealed class CharacterEquipmentRequest(string characterName) : IHttpReq
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetCharacterEquipment(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }

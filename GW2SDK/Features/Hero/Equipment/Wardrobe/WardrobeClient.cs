@@ -30,7 +30,9 @@ public sealed class WardrobeClient
 
     #region v2/skins
 
-    public Task<(HashSet<int> Value, MessageContext Context)> GetSkinsIndex(CancellationToken cancellationToken = default)
+    public Task<(HashSet<int> Value, MessageContext Context)> GetSkinsIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         SkinsIndexRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);
@@ -103,7 +105,7 @@ public sealed class WardrobeClient
         );
 
         // ReSharper disable once VariableHidesOuterVariable (intended, believe it or not)
-        async Task<IReadOnlyCollection<(Skin, MessageContext) >> GetChunk(
+        async Task<IReadOnlyCollection<(Skin, MessageContext)>> GetChunk(
             IReadOnlyCollection<int> chunk,
             CancellationToken cancellationToken
         )

@@ -35,7 +35,8 @@ internal sealed class QuestByIdRequest(int questId) : IHttpRequest<Quest>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetQuest(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }

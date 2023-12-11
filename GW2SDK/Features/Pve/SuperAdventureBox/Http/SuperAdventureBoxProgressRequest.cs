@@ -2,7 +2,8 @@
 
 namespace GuildWars2.Pve.SuperAdventureBox.Http;
 
-internal sealed class SuperAdventureBoxProgressRequest(string characterName) : IHttpRequest<SuperAdventureBoxProgress>
+internal sealed class SuperAdventureBoxProgressRequest(string characterName)
+    : IHttpRequest<SuperAdventureBoxProgress>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/characters/:id/sab")
     {
@@ -33,7 +34,8 @@ internal sealed class SuperAdventureBoxProgressRequest(string characterName) : I
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetSuperAdventureBoxProgress(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }

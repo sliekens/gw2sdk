@@ -11,7 +11,8 @@ public class CharacterTraining
         var character = Composer.Resolve<TestCharacter>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var (actual, _) = await sut.Hero.Training.GetCharacterTraining(character.Name, accessToken.Key);
+        var (actual, _) =
+            await sut.Hero.Training.GetCharacterTraining(character.Name, accessToken.Key);
 
         // BUG: currently this data is unavailable :(
         // Change this back to Assert.NotEmpty once fixed

@@ -33,8 +33,10 @@ internal sealed class GuildStorageRequest(string id) : IHttpRequest<List<GuildSt
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
-        var value = json.RootElement.GetList(entry => entry.GetGuildStorageSlot(MissingMemberBehavior));
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
+        var value =
+            json.RootElement.GetList(entry => entry.GetGuildStorageSlot(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }
 }

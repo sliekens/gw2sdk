@@ -5,8 +5,7 @@ namespace GuildWars2.Tests.TestInfrastructure;
 public class ResilienceHandler(HttpMessageHandler innerHandler) : DelegatingHandler(innerHandler)
 {
     private readonly ResiliencePipeline<HttpResponseMessage> resiliencePipeline =
-        new ResiliencePipelineBuilder<HttpResponseMessage>()
-            .AddRetry(Gw2Resiliency.RetryStrategy)
+        new ResiliencePipelineBuilder<HttpResponseMessage>().AddRetry(Gw2Resiliency.RetryStrategy)
             .AddHedging(Gw2Resiliency.HedgingStrategy)
             .Build();
 

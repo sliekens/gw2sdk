@@ -13,7 +13,8 @@ internal static class Invariants
 
     internal static void Has_order(this MaterialCategory actual) => Assert.True(actual.Order >= 0);
 
-    public static void Not_empty(this GuildWars2.Hero.Banking.Bank actual) => Assert.NotEmpty(actual.Items);
+    public static void Not_empty(this GuildWars2.Hero.Banking.Bank actual) =>
+        Assert.NotEmpty(actual.Items);
 
     public static void Has_multiple_of_30_slots(this GuildWars2.Hero.Banking.Bank actual) =>
         Assert.Equal(0, actual.Items.Count % 30);

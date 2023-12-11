@@ -35,7 +35,8 @@ internal sealed class AbilityByIdRequest(int abilityId) : IHttpRequest<Ability>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetAbility(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }

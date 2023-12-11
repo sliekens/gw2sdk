@@ -4,5 +4,6 @@ namespace GuildWars2.Tests.Features.Hero.Equipment.Wardrobe;
 
 public class SkinFixture
 {
-    public IReadOnlyCollection<string> Skins { get; } = FlatFileReader.Read("Data/skins.json.gz").ToList().AsReadOnly();
+    public IReadOnlyCollection<string> Skins { get; } =
+        FlatFileReader.Read("Data/skins.json.gz").ToList().AsReadOnly();
 }

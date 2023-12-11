@@ -24,5 +24,6 @@ internal static class Invariants
     internal static void Order_is_not_negative(this MailCarrier actual) =>
         Assert.InRange(actual.Order, 0, 1000);
 
-    internal static void Icon_is_not_empty(this MailCarrier actual) => Assert.NotEmpty(actual.IconHref);
+    internal static void Icon_is_not_empty(this MailCarrier actual) =>
+        Assert.NotEmpty(actual.IconHref);
 }

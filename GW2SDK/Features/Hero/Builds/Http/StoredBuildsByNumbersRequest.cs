@@ -3,8 +3,8 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Builds.Http;
 
-internal sealed class StoredBuildsByNumbersRequest
-    (IReadOnlyCollection<int> slotNumbers) : IHttpRequest<IReadOnlyList<Build>>
+internal sealed class StoredBuildsByNumbersRequest(IReadOnlyCollection<int> slotNumbers)
+    : IHttpRequest<IReadOnlyList<Build>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/account/buildstorage") { AcceptEncoding = "gzip" };
@@ -38,7 +38,7 @@ internal sealed class StoredBuildsByNumbersRequest
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetList(entry => BuildJson.GetBuild(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetList(entry => entry.GetBuild(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }
 }

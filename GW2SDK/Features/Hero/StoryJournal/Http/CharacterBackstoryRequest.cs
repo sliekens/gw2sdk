@@ -3,7 +3,8 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Hero.StoryJournal.Http;
 
-internal sealed class CharacterBackstoryRequest(string characterName) : IHttpRequest<CharacterBackstory>
+internal sealed class CharacterBackstoryRequest(string characterName)
+    : IHttpRequest<CharacterBackstory>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/characters/:id/backstory")
@@ -35,7 +36,8 @@ internal sealed class CharacterBackstoryRequest(string characterName) : IHttpReq
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetCharacterBackstory(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }

@@ -31,7 +31,8 @@ internal sealed class MapChestByIdRequest(string mapChestId) : IHttpRequest<MapC
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetMapChest(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }

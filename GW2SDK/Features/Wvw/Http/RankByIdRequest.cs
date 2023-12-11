@@ -35,7 +35,8 @@ internal sealed class RankByIdRequest(int rankId) : IHttpRequest<Rank>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetRank(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }

@@ -4,7 +4,8 @@ using GuildWars2.Wvw.Matches.Overview;
 
 namespace GuildWars2.Wvw.Http;
 
-internal sealed class MatchesOverviewByPageRequest(int pageIndex) : IHttpRequest<HashSet<MatchOverview>>
+internal sealed class MatchesOverviewByPageRequest(int pageIndex)
+    : IHttpRequest<HashSet<MatchOverview>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/wvw/matches/overview") { AcceptEncoding = "gzip" };
@@ -27,10 +28,16 @@ internal sealed class MatchesOverviewByPageRequest(int pageIndex) : IHttpRequest
         }
 
         search.Add("v", SchemaVersion.Recommended);
-        using var response = await httpClient.SendAsync(Template with { Arguments = search }, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+        using var response = await httpClient.SendAsync(
+                Template with { Arguments = search },
+                HttpCompletionOption.ResponseHeadersRead,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetMatchOverview(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }

@@ -11,7 +11,12 @@ public class RecipesByIngredientByPage
 
         const int visionCrystal = 46746;
         const int pageSize = 3;
-        var (actual, context) = await sut.Hero.Crafting.Recipes.GetRecipesByIngredientItemIdByPage(visionCrystal, 0, pageSize);
+        var (actual, context) =
+            await sut.Hero.Crafting.Recipes.GetRecipesByIngredientItemIdByPage(
+                visionCrystal,
+                0,
+                pageSize
+            );
 
         Assert.Equal(pageSize, actual.Count);
         Assert.Equal(pageSize, actual.Count);

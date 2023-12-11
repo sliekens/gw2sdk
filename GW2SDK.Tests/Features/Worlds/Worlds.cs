@@ -36,7 +36,7 @@ public class Worlds
                             throw new Exception("Unexpected population type.");
                     }
                 }
-                
+
                 Assert.NotEqual(WorldRegion.None, world.Region);
 
                 if (world.Id >= 2100)

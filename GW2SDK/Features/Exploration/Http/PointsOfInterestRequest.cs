@@ -5,8 +5,8 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Http;
 
-internal sealed class PointsOfInterestRequest
-    (int continentId, int floorId, int regionId, int mapId) : IHttpRequest<HashSet<PointOfInterest>>
+internal sealed class PointsOfInterestRequest(int continentId, int floorId, int regionId, int mapId)
+    : IHttpRequest<HashSet<PointOfInterest>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/continents/:id/floors/:floor/regions/:region/maps/:map/pois")

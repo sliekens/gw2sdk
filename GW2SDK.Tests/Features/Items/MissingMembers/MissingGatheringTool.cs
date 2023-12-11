@@ -9,13 +9,13 @@ public class MissingGatheringTool
     public void Throws_by_default()
     {
         const string text = """
-            { 
-              "type": "Gathering",
-              "details": {
-                "type": "Hunting"
-              }
-            }
-            """;
+                            {
+                              "type": "Gathering",
+                              "details": {
+                                "type": "Hunting"
+                              }
+                            }
+                            """;
 
         using var json = JsonDocument.Parse(text);
 
@@ -33,22 +33,22 @@ public class MissingGatheringTool
     public void Uses_base_type_when_MissingMemberBehavior_is_Undefined()
     {
         const string text = """
-            { 
-              "type": "Gathering",
-              "details": {
-                "type": "Hunting"
-              },
-              "id": 0,
-              "name": "",
-              "level": 0,
-              "rarity": "",
-              "vendor_value": 0,
-              "game_types": [],
-              "flags": [],
-              "restrictions": [],
-              "chat_link": ""
-            }
-            """;
+                            {
+                              "type": "Gathering",
+                              "details": {
+                                "type": "Hunting"
+                              },
+                              "id": 0,
+                              "name": "",
+                              "level": 0,
+                              "rarity": "",
+                              "vendor_value": 0,
+                              "game_types": [],
+                              "flags": [],
+                              "restrictions": [],
+                              "chat_link": ""
+                            }
+                            """;
 
         using var json = JsonDocument.Parse(text);
 

@@ -26,5 +26,4 @@ public class MountsByFilter
             third => Assert.Contains(actual, found => found.Id == third)
         );
     }
-
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PollyUsage;
 
-static class Initializer
+internal static class Initializer
 {
     [ModuleInitializer]
     internal static void Initialize()

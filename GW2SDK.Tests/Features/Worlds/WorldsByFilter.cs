@@ -19,7 +19,8 @@ public class WorldsByFilter
 
         var (actual, context) = await sut.Worlds.GetWorldsByIds(ids);
 
-        Assert.All(ids,
+        Assert.All(
+            ids,
             id =>
             {
                 var world = actual.Single(world => world.Id == id);
@@ -43,7 +44,8 @@ public class WorldsByFilter
                 }
 
                 Assert.NotEqual(WorldRegion.None, world.Region);
-            });
+            }
+        );
 
         Assert.NotNull(context.ResultContext);
         Assert.Equal(actual.Count, context.ResultContext.ResultCount);

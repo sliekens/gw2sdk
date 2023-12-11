@@ -12,7 +12,8 @@ public class PointsOfInterestIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Exploration.GetPointsOfInterestIndex(continentId, floorId, regionId, mapId);
+        var (actual, context) =
+            await sut.Exploration.GetPointsOfInterestIndex(continentId, floorId, regionId, mapId);
 
         Assert.NotEmpty(actual);
         Assert.NotNull(context.ResultContext);

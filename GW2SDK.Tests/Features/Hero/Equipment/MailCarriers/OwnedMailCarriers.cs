@@ -10,7 +10,8 @@ public class OwnedMailCarriers
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var (actual, _) = await sut.Hero.Equipment.MailCarriers.GetOwnedMailCarriers(accessToken.Key);
+        var (actual, _) =
+            await sut.Hero.Equipment.MailCarriers.GetOwnedMailCarriers(accessToken.Key);
 
         Assert.NotEmpty(actual);
 

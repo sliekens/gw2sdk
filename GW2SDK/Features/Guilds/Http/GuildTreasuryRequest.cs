@@ -33,8 +33,10 @@ internal sealed class GuildTreasuryRequest(string id) : IHttpRequest<List<GuildT
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
-        var value = json.RootElement.GetList(entry => entry.GetGuildTreasurySlot(MissingMemberBehavior));
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
+        var value =
+            json.RootElement.GetList(entry => entry.GetGuildTreasurySlot(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }
 }

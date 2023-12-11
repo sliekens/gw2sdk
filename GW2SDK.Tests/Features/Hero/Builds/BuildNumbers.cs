@@ -11,7 +11,8 @@ public class BuildNumbers
         var character = Composer.Resolve<TestCharacter>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var (actual, context) = await sut.Hero.Builds.GetBuildNumbers(character.Name, accessToken.Key);
+        var (actual, context) =
+            await sut.Hero.Builds.GetBuildNumbers(character.Name, accessToken.Key);
 
         Assert.NotEmpty(actual);
         Assert.NotNull(context.ResultContext);

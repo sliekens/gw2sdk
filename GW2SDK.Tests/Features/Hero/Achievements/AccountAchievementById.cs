@@ -12,7 +12,8 @@ public class AccountAchievementById
 
         const int id = 1;
 
-        var (actual, _) = await sut.Hero.Achievements.GetAccountAchievementById(id, accessToken.Key);
+        var (actual, _) =
+            await sut.Hero.Achievements.GetAccountAchievementById(id, accessToken.Key);
 
         Assert.Equal(id, actual.Id);
     }

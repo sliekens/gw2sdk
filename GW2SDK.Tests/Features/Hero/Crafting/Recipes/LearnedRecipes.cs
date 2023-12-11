@@ -11,7 +11,8 @@ public class LearnedRecipes
         var character = Composer.Resolve<TestCharacter>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var (actual, _) = await sut.Hero.Crafting.Recipes.GetLearnedRecipes(character.Name, accessToken.Key);
+        var (actual, _) =
+            await sut.Hero.Crafting.Recipes.GetLearnedRecipes(character.Name, accessToken.Key);
 
         Assert.NotEmpty(actual);
         Assert.All(actual, id => Assert.NotEqual(0, id));

@@ -36,7 +36,8 @@ internal sealed class SpecializationByIdRequest(int specializationId) : IHttpReq
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetSpecialization(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }

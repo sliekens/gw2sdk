@@ -4,7 +4,6 @@ namespace GuildWars2.Tests.Features.Commerce.Prices;
 
 public class ItemPriceById
 {
-    
     [Fact]
     public async Task Can_be_found()
     {

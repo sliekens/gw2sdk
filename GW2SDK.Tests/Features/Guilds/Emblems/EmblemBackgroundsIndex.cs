@@ -16,5 +16,4 @@ public class EmblemBackgroundsIndex
         Assert.Equal(actual.Count, context.ResultContext.ResultCount);
         Assert.Equal(actual.Count, context.ResultContext.ResultTotal);
     }
-
 }

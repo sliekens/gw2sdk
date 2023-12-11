@@ -21,6 +21,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
 // ReSharper disable All
+
 #nullable disable
 #pragma warning disable 1591
 namespace JetBrains.Annotations;

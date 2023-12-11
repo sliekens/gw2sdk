@@ -13,7 +13,8 @@ public class MapsByPage
         const int floorId = 0;
         const int regionId = 1;
 
-        var (actual, context) = await sut.Exploration.GetMapsByPage(continentId, floorId, regionId, 0, 3);
+        var (actual, context) =
+            await sut.Exploration.GetMapsByPage(continentId, floorId, regionId, 0, 3);
 
         Assert.Equal(3, actual.Count);
         Assert.NotNull(context.PageContext);

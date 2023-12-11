@@ -35,7 +35,8 @@ internal sealed class AmuletByIdRequest(int amuletId) : IHttpRequest<Amulet>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetAmulet(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }

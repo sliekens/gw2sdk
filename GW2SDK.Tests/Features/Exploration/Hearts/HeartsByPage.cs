@@ -14,7 +14,14 @@ public class HeartsByPage
         const int regionId = 1;
         const int mapId = 26;
 
-        var (actual, context) = await sut.Exploration.GetHeartsByPage(continentId, floorId, regionId, mapId, 0, 3);
+        var (actual, context) = await sut.Exploration.GetHeartsByPage(
+            continentId,
+            floorId,
+            regionId,
+            mapId,
+            0,
+            3
+        );
 
         Assert.Equal(3, actual.Count);
         Assert.NotNull(context.PageContext);

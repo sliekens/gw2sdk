@@ -11,7 +11,8 @@ public class AccountAchievementsByPage
         var accessToken = Composer.Resolve<ApiKey>();
 
         const int pageSize = 3;
-        var (actual, context) = await sut.Hero.Achievements.GetAccountAchievementsByPage(0, pageSize, accessToken.Key);
+        var (actual, context) =
+            await sut.Hero.Achievements.GetAccountAchievementsByPage(0, pageSize, accessToken.Key);
 
         Assert.Equal(pageSize, actual.Count);
         Assert.NotNull(context.PageContext);

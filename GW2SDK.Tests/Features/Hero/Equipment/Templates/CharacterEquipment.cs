@@ -11,7 +11,11 @@ public class CharacterEquipment
         var character = Composer.Resolve<TestCharacter>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var (actual, _) = await sut.Hero.Equipment.Templates.GetCharacterEquipment(character.Name, accessToken.Key);
+        var (actual, _) =
+            await sut.Hero.Equipment.Templates.GetCharacterEquipment(
+                character.Name,
+                accessToken.Key
+            );
 
         Assert.NotNull(actual);
     }

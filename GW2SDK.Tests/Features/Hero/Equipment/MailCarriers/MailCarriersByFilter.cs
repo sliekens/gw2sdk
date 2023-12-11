@@ -25,5 +25,4 @@ public class MailCarriersByFilter
             third => Assert.Contains(actual, found => found.Id == third)
         );
     }
-
 }

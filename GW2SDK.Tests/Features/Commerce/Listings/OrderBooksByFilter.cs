@@ -25,5 +25,4 @@ public class OrderBooksByFilter
             third => Assert.Contains(actual, found => found.Id == third)
         );
     }
-
 }

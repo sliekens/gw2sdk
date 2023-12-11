@@ -43,8 +43,10 @@ internal sealed class SpecializationsByIdsRequest : IHttpRequest<HashSet<Special
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => SpecializationJson.GetSpecialization(entry, MissingMemberBehavior));
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
+        var value =
+            json.RootElement.GetSet(entry => entry.GetSpecialization(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }
 }

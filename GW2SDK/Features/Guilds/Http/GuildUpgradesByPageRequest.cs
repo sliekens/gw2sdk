@@ -4,7 +4,8 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Http;
 
-internal sealed class GuildUpgradesByPageRequest(int pageIndex) : IHttpRequest<HashSet<GuildUpgrade>>
+internal sealed class GuildUpgradesByPageRequest(int pageIndex)
+    : IHttpRequest<HashSet<GuildUpgrade>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/guild/upgrades") { AcceptEncoding = "gzip" };
@@ -41,7 +42,8 @@ internal sealed class GuildUpgradesByPageRequest(int pageIndex) : IHttpRequest<H
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetGuildUpgrade(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }

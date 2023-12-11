@@ -35,7 +35,7 @@ internal sealed class StoredBuildsRequest : IHttpRequest<IReadOnlyList<Build>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetList(entry => BuildJson.GetBuild(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetList(entry => entry.GetBuild(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }
 }

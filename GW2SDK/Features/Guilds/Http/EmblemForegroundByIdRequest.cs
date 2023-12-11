@@ -3,7 +3,8 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Guilds.Http;
 
-internal sealed class EmblemForegroundByIdRequest(int foregroundEmblemId) : IHttpRequest<EmblemForeground>
+internal sealed class EmblemForegroundByIdRequest(int foregroundEmblemId)
+    : IHttpRequest<EmblemForeground>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/emblem/foregrounds") { AcceptEncoding = "gzip" };
@@ -32,7 +33,8 @@ internal sealed class EmblemForegroundByIdRequest(int foregroundEmblemId) : IHtt
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetEmblemForeground(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }

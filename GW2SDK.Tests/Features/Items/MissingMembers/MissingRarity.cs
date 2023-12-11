@@ -9,19 +9,19 @@ public class MissingRarity
     public void Throws_by_default()
     {
         const string text = """
-            { 
-              "type": "Trophy",
-              "rarity": "Epic",
-              "id": 0,
-              "name": "",
-              "level": 0,
-              "vendor_value": 0,
-              "game_types": [],
-              "flags": [],
-              "restrictions": [],
-              "chat_link": ""
-            }
-            """;
+                            {
+                              "type": "Trophy",
+                              "rarity": "Epic",
+                              "id": 0,
+                              "name": "",
+                              "level": 0,
+                              "vendor_value": 0,
+                              "game_types": [],
+                              "flags": [],
+                              "restrictions": [],
+                              "chat_link": ""
+                            }
+                            """;
 
         using var json = JsonDocument.Parse(text);
 
@@ -40,19 +40,19 @@ public class MissingRarity
     public void Uses_generated_value_when_MissingMemberBehavior_is_Undefined()
     {
         const string text = """
-            { 
-              "type": "Trophy",
-              "rarity": "Epic",
-              "id": 0,
-              "name": "",
-              "level": 0,
-              "vendor_value": 0,
-              "game_types": [],
-              "flags": [],
-              "restrictions": [],
-              "chat_link": ""
-            }
-            """;
+                            {
+                              "type": "Trophy",
+                              "rarity": "Epic",
+                              "id": 0,
+                              "name": "",
+                              "level": 0,
+                              "vendor_value": 0,
+                              "game_types": [],
+                              "flags": [],
+                              "restrictions": [],
+                              "chat_link": ""
+                            }
+                            """;
 
         using var json = JsonDocument.Parse(text);
 

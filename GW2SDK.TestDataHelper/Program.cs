@@ -59,7 +59,8 @@ try
                     CreateTextCompressed(Path.Combine(outDir, "achievements.json.gz")))
                 {
                     var service = app.Services.GetRequiredService<JsonAchievementService>();
-                    var documents = await service.GetAllJsonAchievements(new ProgressAdapter(achievements));
+                    var documents =
+                        await service.GetAllJsonAchievements(new ProgressAdapter(achievements));
                     foreach (var document in documents)
                     {
                         await file.WriteLineAsync(document);
@@ -107,5 +108,10 @@ catch (Exception crash)
     AnsiConsole.WriteException(crash);
 }
 
-static StreamWriter CreateTextCompressed(string path) =>
-    new(new GZipStream(File.OpenWrite(path), CompressionMode.Compress), Encoding.UTF8);
+static StreamWriter CreateTextCompressed(string path)
+{
+    return new StreamWriter(
+        new GZipStream(File.OpenWrite(path), CompressionMode.Compress),
+        Encoding.UTF8
+    );
+}

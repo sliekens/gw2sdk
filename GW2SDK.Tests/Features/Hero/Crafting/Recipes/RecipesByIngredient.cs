@@ -13,7 +13,8 @@ public class RecipesByIngredient
         var sut = Composer.Resolve<Gw2Client>();
 
         const int visionCrystal = 46746;
-        var (actual, context) = await sut.Hero.Crafting.Recipes.GetRecipesByIngredientItemId(visionCrystal);
+        var (actual, context) =
+            await sut.Hero.Crafting.Recipes.GetRecipesByIngredientItemId(visionCrystal);
 
         Assert.NotInRange(actual.Count, 0, 200); // Greater than 200
         Assert.NotNull(context.ResultContext);

@@ -70,7 +70,6 @@ internal static class JsonElementExtensions
         while (enumerator.MoveNext())
         {
             values[enumerator.Current.Name] = resultSelector(enumerator.Current.Value);
-
         }
 
         return values;

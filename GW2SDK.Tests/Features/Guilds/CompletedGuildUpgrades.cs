@@ -13,7 +13,8 @@ public class CompletedGuildUpgrades
         var (account, _) = await sut.Hero.Account.GetSummary(guildLeader.Token);
         foreach (var guildId in account.LeaderOfGuildIds!)
         {
-            var (actual, _) = await sut.Guilds.GetCompletedGuildUpgrades(guildId, guildLeader.Token);
+            var (actual, _) =
+                await sut.Guilds.GetCompletedGuildUpgrades(guildId, guildLeader.Token);
 
             Assert.NotEmpty(actual);
         }

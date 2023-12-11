@@ -68,7 +68,8 @@ internal static class Invariants
     internal static void Has_description(this AchievementCategory actual) =>
         Assert.NotNull(actual.Description);
 
-    internal static void Has_icon(this AchievementCategory actual) => Assert.NotEmpty(actual.IconHref);
+    internal static void Has_icon(this AchievementCategory actual) =>
+        Assert.NotEmpty(actual.IconHref);
 
     internal static void Has_achievements(this AchievementCategory actual) =>
         Assert.NotNull(actual.Achievements);

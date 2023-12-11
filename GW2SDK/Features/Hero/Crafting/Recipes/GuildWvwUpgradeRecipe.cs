@@ -4,6 +4,7 @@
 [PublicAPI]
 public sealed record GuildWvwUpgradeRecipe : Recipe
 {
-    /// <summary>The guild upgrade ID of the crafted upgrade, or <c>null</c> if the recipe is for a component like Vial of Enchanted Water.</summary>
+    /// <summary>The guild upgrade ID of the crafted upgrade, or <c>null</c> if the recipe is for a component like Vial of
+    /// Enchanted Water.</summary>
     public required int? OutputUpgradeId { get; init; }
 }

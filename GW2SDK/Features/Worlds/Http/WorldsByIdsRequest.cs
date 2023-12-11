@@ -43,7 +43,8 @@ internal sealed class WorldsByIdsRequest : IHttpRequest<HashSet<World>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-        using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
         var value = json.RootElement.GetSet(entry => entry.GetWorld(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }
