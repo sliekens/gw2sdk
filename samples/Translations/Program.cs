@@ -28,14 +28,12 @@ Console.WriteLine();
 
 // Alternatively you can specify a language per request
 // See the default set of supported languages
-HashSet<Language> languages = new()
-{
-    Language.English,
-    Language.German,
-    Language.French,
-    Language.Spanish,
+HashSet<Language> languages =
+[
+    Language.English, Language.German,
+    Language.French, Language.Spanish,
     Language.Chinese
-};
+];
 
 foreach (var language in languages)
 {

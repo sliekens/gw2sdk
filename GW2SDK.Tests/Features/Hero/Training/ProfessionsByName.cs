@@ -10,12 +10,11 @@ public class ProfessionsByName
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<ProfessionName> names = new()
-        {
-            ProfessionName.Mesmer,
-            ProfessionName.Necromancer,
+        HashSet<ProfessionName> names =
+        [
+            ProfessionName.Mesmer, ProfessionName.Necromancer,
             ProfessionName.Revenant
-        };
+        ];
 
         var (actual, _) = await sut.Hero.Training.GetProfessionsByNames(names);
 

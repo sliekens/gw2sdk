@@ -9,12 +9,11 @@ public class EmotesByFilter
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<string> ids = new()
-        {
-            "geargrind",
-            "playdead",
+        HashSet<string> ids =
+        [
+            "geargrind", "playdead",
             "rockout"
-        };
+        ];
 
         var (actual, context) = await sut.Hero.Emotes.GetEmotesByIds(ids);
 

@@ -9,12 +9,11 @@ public class AmuletsByFilter
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<int> ids = new()
-        {
-            4,
-            8,
+        HashSet<int> ids =
+        [
+            4, 8,
             9
-        };
+        ];
 
         var (actual, context) = await sut.Pvp.GetAmuletsByIds(ids);
 

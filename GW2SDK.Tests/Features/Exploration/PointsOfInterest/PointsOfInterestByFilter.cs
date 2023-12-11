@@ -13,12 +13,11 @@ public class PointsOfInterestByFilter
         const int floorId = 0;
         const int regionId = 1;
         const int mapId = 26;
-        HashSet<int> ids = new()
-        {
-            554,
-            555,
+        HashSet<int> ids =
+        [
+            554, 555,
             556
-        };
+        ];
 
         var (actual, context) = await sut.Exploration.GetPointsOfInterestByIds(
             continentId,

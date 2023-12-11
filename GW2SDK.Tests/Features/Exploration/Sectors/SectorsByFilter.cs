@@ -13,12 +13,11 @@ public class SectorsByFilter
         const int floorId = 0;
         const int regionId = 1;
         const int mapId = 26;
-        HashSet<int> ids = new()
-        {
-            513,
-            514,
+        HashSet<int> ids =
+        [
+            513, 514,
             515
-        };
+        ];
 
         var (actual, context) = await sut.Exploration.GetSectorsByIds(
             continentId,

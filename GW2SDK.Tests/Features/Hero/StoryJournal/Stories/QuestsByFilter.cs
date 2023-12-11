@@ -9,12 +9,11 @@ public class QuestsByFilter
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<int> ids = new()
-        {
-            15,
-            16,
+        HashSet<int> ids =
+        [
+            15, 16,
             17
-        };
+        ];
 
         var (actual, context) = await sut.Hero.StoryJournal.GetQuestsByIds(ids);
 

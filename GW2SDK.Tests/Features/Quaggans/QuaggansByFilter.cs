@@ -9,12 +9,11 @@ public class QuaggansByFilter
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<string> ids = new()
-        {
-            "404",
-            "aloha",
+        HashSet<string> ids =
+        [
+            "404", "aloha",
             "attack"
-        };
+        ];
 
         var (actual, context) = await sut.Quaggans.GetQuaggansByIds(ids);
 

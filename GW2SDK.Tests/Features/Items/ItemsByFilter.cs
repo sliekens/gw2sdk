@@ -9,12 +9,11 @@ public class ItemsByFilter
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<int> ids = new()
-        {
-            24,
-            46,
+        HashSet<int> ids =
+        [
+            24, 46,
             56
-        };
+        ];
 
         var (actual, _) = await sut.Items.GetItemsByIds(ids);
 

@@ -16,7 +16,7 @@ public sealed class QueryBuilder : IEnumerable
 
     public QueryBuilder()
     {
-        arguments = new List<Argument>();
+        arguments = [];
     }
 
     public QueryBuilder(IEnumerable<Argument> arguments)

@@ -9,12 +9,11 @@ public class LegendsByFilter
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<string> ids = new()
-        {
-            "Legend1",
-            "Legend3",
+        HashSet<string> ids =
+        [
+            "Legend1", "Legend3",
             "Legend5"
-        };
+        ];
 
         var (actual, context) = await sut.Hero.Builds.GetLegendsByIds(ids);
 

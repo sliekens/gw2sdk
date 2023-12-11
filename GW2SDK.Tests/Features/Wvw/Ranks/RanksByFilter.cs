@@ -9,12 +9,11 @@ public class RanksByFilter
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<int> ids = new()
-        {
-            1,
-            2,
+        HashSet<int> ids =
+        [
+            1, 2,
             3
-        };
+        ];
 
         var (actual, context) = await sut.Wvw.GetRanksByIds(ids);
 

@@ -9,12 +9,11 @@ public class LegendaryItemsByFilter
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<int> ids = new()
-        {
-            83162,
-            93105,
+        HashSet<int> ids =
+        [
+            83162, 93105,
             80111
-        };
+        ];
 
         var (actual, _) = await sut.Hero.Equipment.Templates.GetLegendaryItemsByIds(ids);
 

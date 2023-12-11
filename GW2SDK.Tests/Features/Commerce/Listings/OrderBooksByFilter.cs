@@ -9,12 +9,11 @@ public class OrderBooksByFilter
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<int> ids = new()
-        {
-            24,
-            19699,
+        HashSet<int> ids =
+        [
+            24, 19699,
             35984
-        };
+        ];
 
         var (actual, _) = await sut.Commerce.GetOrderBooksByIds(ids);
 

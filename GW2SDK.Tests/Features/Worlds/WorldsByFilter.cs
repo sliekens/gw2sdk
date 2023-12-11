@@ -10,12 +10,11 @@ public class WorldsByFilter
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<int> ids = new()
-        {
-            1001,
-            1002,
+        HashSet<int> ids =
+        [
+            1001, 1002,
             1003
-        };
+        ];
 
         var (actual, context) = await sut.Worlds.GetWorldsByIds(ids);
 

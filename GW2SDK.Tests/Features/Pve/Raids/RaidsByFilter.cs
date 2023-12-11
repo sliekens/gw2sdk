@@ -9,12 +9,11 @@ public class RaidsByFilter
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<string> ids = new()
-        {
-            "forsaken_thicket",
-            "bastion_of_the_penitent",
+        HashSet<string> ids =
+        [
+            "forsaken_thicket", "bastion_of_the_penitent",
             "hall_of_chains"
-        };
+        ];
 
         var (actual, context) = await sut.Pve.Raids.GetRaidsByIds(ids);
 

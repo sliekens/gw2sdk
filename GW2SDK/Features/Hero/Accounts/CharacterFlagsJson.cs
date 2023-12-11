@@ -17,7 +17,7 @@ internal static class CharacterFlagsJson
             }
             else
             {
-                others ??= new List<string>();
+                others ??= [];
                 others.Add(entry.GetStringRequired());
             }
         }

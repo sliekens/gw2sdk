@@ -10,12 +10,11 @@ public class MountsByFilter
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<MountName> names = new()
-        {
-            MountName.Raptor,
-            MountName.Jackal,
+        HashSet<MountName> names =
+        [
+            MountName.Raptor, MountName.Jackal,
             MountName.Skimmer
-        };
+        ];
 
         var (actual, _) = await sut.Hero.Equipment.Mounts.GetMountsByNames(names);
 

@@ -22,7 +22,7 @@ internal static class AchievementFlagsJson
             }
             else
             {
-                others ??= new List<string>();
+                others ??= [];
                 others.Add(entry.GetStringRequired());
             }
         }

@@ -8,12 +8,11 @@ public class CatsByFilter
     public async Task Can_be_filtered_by_id()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        HashSet<int> ids = new()
-        {
-            1,
-            2,
+        HashSet<int> ids =
+        [
+            1, 2,
             3
-        };
+        ];
 
         var (actual, _) = await sut.Pve.Home.GetCatsByIds(ids);
 

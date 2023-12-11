@@ -9,12 +9,11 @@ public class MapChestsByFilter
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<string> ids = new()
-        {
-            "auric_basin_heros_choice_chest",
-            "crystal_oasis_heros_choice_chest",
+        HashSet<string> ids =
+        [
+            "auric_basin_heros_choice_chest", "crystal_oasis_heros_choice_chest",
             "domain_of_vabbi_heros_choice_chest"
-        };
+        ];
 
         var (actual, context) = await sut.Pve.MapChests.GetMapChestsByIds(ids);
 

@@ -23,7 +23,7 @@ internal static class InfusionSlotFlagsJson
 
             else
             {
-                others ??= new List<string>();
+                others ??= [];
                 others.Add(entry.GetStringRequired());
             }
         }

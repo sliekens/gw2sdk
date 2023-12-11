@@ -9,12 +9,11 @@ public class SeasonsByFilter
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<string> ids = new()
-        {
-            "09766A86-D88D-4DF2-9385-259E9A8CA583",
-            "A515A1D3-4BD7-4594-AE30-2C5D05FF5960",
+        HashSet<string> ids =
+        [
+            "09766A86-D88D-4DF2-9385-259E9A8CA583", "A515A1D3-4BD7-4594-AE30-2C5D05FF5960",
             "215AAA0F-CDAC-4F93-86DA-C155A99B5784"
-        };
+        ];
 
         var (actual, context) = await sut.Hero.StoryJournal.GetSeasonsByIds(ids);
 

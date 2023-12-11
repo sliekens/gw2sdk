@@ -9,12 +9,11 @@ public class DungeonsByFilter
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<string> ids = new()
-        {
-            "twilight_arbor",
-            "sorrows_embrace",
+        HashSet<string> ids =
+        [
+            "twilight_arbor", "sorrows_embrace",
             "citadel_of_flame"
-        };
+        ];
 
         var (actual, context) = await sut.Pve.Dungeons.GetDungeonsByIds(ids);
 

@@ -9,12 +9,11 @@ public class MapSummariesByFilter
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<int> ids = new()
-        {
-            15,
-            17,
+        HashSet<int> ids =
+        [
+            15, 17,
             18
-        };
+        ];
 
         var (actual, context) = await sut.Exploration.MapSummariesByIds(ids);
 

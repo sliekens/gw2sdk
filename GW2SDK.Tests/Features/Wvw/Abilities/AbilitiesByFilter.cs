@@ -9,12 +9,11 @@ public class AbilitiesByFilter
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<int> ids = new()
-        {
-            2,
-            3,
+        HashSet<int> ids =
+        [
+            2, 3,
             4
-        };
+        ];
 
         var (actual, context) = await sut.Wvw.GetAbilitiesByIds(ids);
 

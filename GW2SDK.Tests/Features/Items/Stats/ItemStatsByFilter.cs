@@ -9,12 +9,11 @@ public class ItemStatsByFilter
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<int> ids = new()
-        {
-            161,
-            559,
+        HashSet<int> ids =
+        [
+            161, 559,
             1566
-        };
+        ];
 
         var (actual, _) = await sut.Items.GetItemStatsByIds(ids);
 

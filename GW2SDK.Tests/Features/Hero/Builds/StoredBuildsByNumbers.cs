@@ -10,12 +10,11 @@ public class StoredBuildsByNumbers
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        HashSet<int> slotNumbers = new()
-        {
-            2,
-            3,
+        HashSet<int> slotNumbers =
+        [
+            2, 3,
             4
-        };
+        ];
         ;
 
         var (actual, _) = await sut.Hero.Builds.GetStoredBuilds(slotNumbers, accessToken.Key);

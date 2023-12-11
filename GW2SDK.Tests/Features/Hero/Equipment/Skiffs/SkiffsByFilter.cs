@@ -9,12 +9,11 @@ public class SkiffsByFilter
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<int> ids = new()
-        {
-            410,
-            413,
+        HashSet<int> ids =
+        [
+            410, 413,
             420
-        };
+        ];
 
         var (actual, context) = await sut.Hero.Equipment.Skiffs.GetSkiffsByIds(ids);
 

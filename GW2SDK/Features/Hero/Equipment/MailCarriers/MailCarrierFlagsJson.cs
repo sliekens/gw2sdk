@@ -17,7 +17,7 @@ internal static class MailCarrierFlagsJson
             }
             else
             {
-                others ??= new List<string>();
+                others ??= [];
                 others.Add(entry.GetStringRequired());
             }
         }

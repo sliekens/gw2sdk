@@ -24,7 +24,7 @@ internal sealed class CreateSubtokenRequest(string accessToken) : IHttpRequest<C
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder args = new();
+        QueryBuilder args = [];
         if (Permissions?.Count is not null and not 0)
         {
             args.Add("permissions", string.Join(",", Permissions).ToLowerInvariant());

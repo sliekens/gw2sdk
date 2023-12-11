@@ -22,7 +22,7 @@ internal static class RecipeFlagsJson
             }
             else
             {
-                others ??= new List<string>();
+                others ??= [];
                 others.Add(entry.GetStringRequired());
             }
         }

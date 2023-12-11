@@ -10,12 +10,11 @@ public class RacesByFilter
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<RaceName> names = new()
-        {
-            RaceName.Asura,
-            RaceName.Charr,
+        HashSet<RaceName> names =
+        [
+            RaceName.Asura, RaceName.Charr,
             RaceName.Norn
-        };
+        ];
 
         var (actual, _) = await sut.Hero.Races.GetRacesByNames(names);
 

@@ -9,12 +9,11 @@ public class ObjectivesByFilter
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<string> ids = new()
-        {
-            "1099-99",
-            "1143-99",
+        HashSet<string> ids =
+        [
+            "1099-99", "1143-99",
             "1102-99"
-        };
+        ];
 
         var (actual, context) = await sut.Wvw.GetObjectivesByIds(ids);
 

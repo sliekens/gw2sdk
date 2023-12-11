@@ -10,12 +10,11 @@ public class GuildUpgradesByFilter
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<int> ids = new()
-        {
-            260,
-            630,
+        HashSet<int> ids =
+        [
+            260, 630,
             167
-        };
+        ];
 
         var (actual, context) = await sut.Guilds.GetGuildUpgradesByIds(ids);
 

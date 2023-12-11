@@ -9,11 +9,7 @@ public class ContinentsByFilter
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<int> ids = new()
-        {
-            1,
-            2
-        };
+        HashSet<int> ids = [1, 2];
 
         var (actual, context) = await sut.Exploration.GetContinentsByIds(ids);
 

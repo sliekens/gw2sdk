@@ -9,12 +9,11 @@ public class BackstoryAnswersByFilter
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<string> ids = new()
-        {
-            "7-53",
-            "7-54",
+        HashSet<string> ids =
+        [
+            "7-53", "7-54",
             "7-55"
-        };
+        ];
 
         var (actual, _) = await sut.Hero.StoryJournal.GetBackstoryAnswersByIds(ids);
 

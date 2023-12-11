@@ -9,12 +9,11 @@ public class StoriesByFilter
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<int> ids = new()
-        {
-            9,
-            10,
+        HashSet<int> ids =
+        [
+            9, 10,
             11
-        };
+        ];
 
         var (actual, context) = await sut.Hero.StoryJournal.GetStoriesByIds(ids);
 

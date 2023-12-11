@@ -9,12 +9,11 @@ public class MaterialCategoriesByFilter
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<int> ids = new()
-        {
-            5,
-            6,
+        HashSet<int> ids =
+        [
+            5, 6,
             29
-        };
+        ];
 
         var (actual, context) = await sut.Hero.Bank.GetMaterialCategoriesByIds(ids);
 

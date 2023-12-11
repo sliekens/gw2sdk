@@ -11,12 +11,11 @@ public class RegionsByFilter
 
         const int continentId = 1;
         const int floorId = 0;
-        HashSet<int> ids = new()
-        {
-            1,
-            2,
+        HashSet<int> ids =
+        [
+            1, 2,
             3
-        };
+        ];
 
         var (actual, context) = await sut.Exploration.GetRegionsByIds(continentId, floorId, ids);
 

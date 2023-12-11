@@ -9,12 +9,11 @@ public class JadeBotsByFilter
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<int> ids = new()
-        {
-            3,
-            4,
+        HashSet<int> ids =
+        [
+            3, 4,
             5
-        };
+        ];
 
         var (actual, context) = await sut.Hero.Equipment.JadeBots.GetJadeBotsByIds(ids);
 

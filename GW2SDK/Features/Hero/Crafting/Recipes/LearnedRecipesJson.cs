@@ -24,6 +24,6 @@ internal static class LearnedRecipesJson
             }
         }
 
-        return new HashSet<int>(recipes.Map(values => values.GetList(value => value.GetInt32())));
+        return [..recipes.Map(values => values.GetList(value => value.GetInt32()))];
     }
 }

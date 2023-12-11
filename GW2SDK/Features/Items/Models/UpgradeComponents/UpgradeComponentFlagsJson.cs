@@ -127,7 +127,7 @@ internal static class UpgradeComponentFlagsJson
             }
             else
             {
-                others ??= new List<string>();
+                others ??= [];
                 others.Add(entry.GetStringRequired());
             }
         }

@@ -9,12 +9,11 @@ public class FilesByFilter
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<string> ids = new()
-        {
-            "map_complete",
-            "map_vendor_ecto",
+        HashSet<string> ids =
+        [
+            "map_complete", "map_vendor_ecto",
             "map_stairs_up"
-        };
+        ];
 
         var (actual, context) = await sut.Files.GetFilesByIds(ids);
 

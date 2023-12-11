@@ -14,7 +14,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable
     private readonly MumbleLink mumbleLink;
 
     /// <summary>A list of observers who want to receive realtime game state.</summary>
-    private readonly List<IObserver<GameTick>> subscribers = new();
+    private readonly List<IObserver<GameTick>> subscribers = [];
 
     /// <summary>A Timer is used to poll for changes to the shared memory as there is no push mechanism.</summary>
     private readonly Timer timer;

@@ -11,12 +11,11 @@ public class FloorsByFilter
         var sut = Composer.Resolve<Gw2Client>();
 
         const int continentId = 1;
-        HashSet<int> ids = new()
-        {
-            0,
-            1,
+        HashSet<int> ids =
+        [
+            0, 1,
             2
-        };
+        ];
 
         var (actual, context) = await sut.Exploration.GetFloorsByIds(continentId, ids);
 

@@ -12,12 +12,11 @@ public class MapsByFilter
         const int continentId = 1;
         const int floorId = 0;
         const int regionId = 1;
-        HashSet<int> ids = new()
-        {
-            26,
-            27,
+        HashSet<int> ids =
+        [
+            26, 27,
             28
-        };
+        ];
 
         var (actual, context) =
             await sut.Exploration.GetMapsByIds(continentId, floorId, regionId, ids);

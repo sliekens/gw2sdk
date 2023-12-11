@@ -21,12 +21,11 @@ public class SubtokenInfo
 
         var expiresAt = DateTimeOffset.UtcNow.AddDays(1);
 
-        List<string> urls = new()
-        {
-            "/v2/tokeninfo",
-            "/v2/account",
+        List<string> urls =
+        [
+            "/v2/tokeninfo", "/v2/account",
             "/v2/characters/My Cool Character"
-        };
+        ];
 
         var (createdSubtoken, context) = await sut.Tokens.CreateSubtoken(
             accessToken.Key,

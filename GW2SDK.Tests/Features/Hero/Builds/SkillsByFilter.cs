@@ -9,12 +9,11 @@ public class SkillsByFilter
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<int> ids = new()
-        {
-            1110,
-            12693,
+        HashSet<int> ids =
+        [
+            1110, 12693,
             39222
-        };
+        ];
 
         var (actual, _) = await sut.Hero.Builds.GetSkillsByIds(ids);
 

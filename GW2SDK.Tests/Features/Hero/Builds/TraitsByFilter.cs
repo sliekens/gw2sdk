@@ -9,12 +9,11 @@ public class TraitsByFilter
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<int> ids = new()
-        {
-            214,
-            221,
+        HashSet<int> ids =
+        [
+            214, 221,
             222
-        };
+        ];
 
         var (actual, _) = await sut.Hero.Builds.GetTraitsByIds(ids);
 

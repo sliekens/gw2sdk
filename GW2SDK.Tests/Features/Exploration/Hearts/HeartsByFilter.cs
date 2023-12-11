@@ -13,12 +13,11 @@ public class HeartsByFilter
         const int floorId = 0;
         const int regionId = 1;
         const int mapId = 26;
-        HashSet<int> ids = new()
-        {
-            1,
-            2,
+        HashSet<int> ids =
+        [
+            1, 2,
             3
-        };
+        ];
 
         var (actual, context) = await sut.Exploration.GetHeartsByIds(
             continentId,
