@@ -92,4 +92,10 @@
     <InternalsVisibleTo Include="$(AssemblyName).Tests" />
   </ItemGroup>
 
+  <Target Name="LinkPackageReleaseNotes" AfterTargets="MinVer">
+    <PropertyGroup>
+      <PackageReleaseNotes>https://github.com/sliekens/gw2sdk/releases/tag/$(MinVerTagPrefix)$(Version)</PackageReleaseNotes>
+    </PropertyGroup>
+  </Target>
+
 </Project>
