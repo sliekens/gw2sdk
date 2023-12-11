@@ -123,10 +123,4 @@ public class ReferenceData
             progress.StopTask();
         }
     }
-
-    private static void UpdateProgress(ResultContext ctx, ProgressTask progressTask)
-    {
-        progressTask.MaxValue(ctx.ResultTotal);
-        progressTask.Value(ctx.ResultCount);
-    }
 }
