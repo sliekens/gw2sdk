@@ -22,7 +22,7 @@ public enum MasteryRegionName
     /// <summary>Icebrood Saga masteries, blue.</summary>
     Tundra,
 
-    /// <summary>End of Dragons masteries, blue.</summary>
+    /// <summary>End of Dragons masteries, turquoise.</summary>
     Jade,
 
     /// <summary>Secrets of the Obscure masteries, yellow.</summary>
