@@ -3,7 +3,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net6.0;net462</TargetFrameworks>
+    <TargetFrameworks>$(TargetFrameworks);netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>$(TargetFrameworks);net462</TargetFrameworks>
+    <TargetFrameworks>$(TargetFrameworks);net6.0</TargetFrameworks>
+    <TargetFrameworks>$(TargetFrameworks);net8.0</TargetFrameworks>
     <RootNamespace>GuildWars2</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyTitle>GW2 Client SDK</AssemblyTitle>
