@@ -1,6 +1,8 @@
-﻿using System.IO.MemoryMappedFiles;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.IO.MemoryMappedFiles;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+using static System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes;
 
 namespace GuildWars2;
 
@@ -62,7 +64,8 @@ internal sealed class MumbleLink : IDisposable
         }
     }
 
-    public T GetValue<T>() where T : struct
+    public T GetValue<[DynamicallyAccessedMembers(PublicConstructors | NonPublicConstructors)] T>()
+        where T : struct
     {
         if (disposed)
         {

@@ -17,7 +17,8 @@ It provides the following features and benefits:
 - High performance, low-allocation JSON conversions with System.Text.Json
 - Type safety and nullability annotations for C# 8.0+
 - Pure C# implementation, no native dependencies
-- Cross-platform support for .NET Standard 2.0
+- Cross-platform support
+- AOT compilation support
 - Free and open source under the MIT license
 
 The package has the following entrypoint classes:
