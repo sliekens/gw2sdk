@@ -16,9 +16,15 @@ public enum MasteryRegionName
     /// <summary>Heart of Thorns masteries, green.</summary>
     Maguuma,
 
-    /// <summary>Path of Fire masteries, red.</summary>
+    /// <summary>Path of Fire masteries, purple.</summary>
     Desert,
 
     /// <summary>Icebrood Saga masteries, blue.</summary>
-    Tundra
+    Tundra,
+
+    /// <summary>End of Dragons masteries, blue.</summary>
+    Jade,
+
+    /// <summary>Secrets of the Obscure, yellow.</summary>
+    Sky
 }
