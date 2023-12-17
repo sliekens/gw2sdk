@@ -45,7 +45,7 @@ jobs:
         run: dotnet pack GW2SDK --configuration ${{ env.build-configuration }} --no-build --output artifacts
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: packages
           path: artifacts
@@ -58,7 +58,7 @@ jobs:
       name: github-packages
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: packages
           path: artifacts
