@@ -55,6 +55,13 @@ jobs:
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
 
+      - name: Upload test data on failure
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: test-data
+          path: GW2SDK.Tests/Data
+
   deploy-to-github-packages:
     name: Deploy to GitHub Packages
     needs: build
