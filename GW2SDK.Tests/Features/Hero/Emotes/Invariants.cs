@@ -8,5 +8,5 @@ internal static class Invariants
 
     internal static void Has_commands(this Emote actual) => Assert.NotEmpty(actual.Commands);
 
-    internal static void Has_unlock_items(this Emote actual) => Assert.NotEmpty(actual.UnlockItems);
+    internal static void Has_unlock_items(this Emote actual) => Assert.NotEmpty(actual.UnlockItemIds);
 }

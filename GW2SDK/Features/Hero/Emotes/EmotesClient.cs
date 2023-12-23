@@ -16,6 +16,11 @@ public sealed class EmotesClient
 
     #region v2/account/emotes
 
+    /// <summary>Retrieves the IDs of emotes unlocked on the account associated with the access token. This endpoint is only
+    /// accessible with a valid access token.</summary>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<string> Value, MessageContext Context)> GetUnlockedEmotes(
         string? accessToken,
         CancellationToken cancellationToken = default
@@ -29,6 +34,10 @@ public sealed class EmotesClient
 
     #region v2/emotes
 
+    /// <summary>Retrieves all emotes.</summary>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Emote> Value, MessageContext Context)> GetEmotes(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -38,6 +47,9 @@ public sealed class EmotesClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all emotes.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<string> Value, MessageContext Context)> GetEmotesIndex(
         CancellationToken cancellationToken = default
     )
@@ -46,6 +58,11 @@ public sealed class EmotesClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves an emote by its ID.</summary>
+    /// <param name="emoteId">The emote ID.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(Emote Value, MessageContext Context)> GetEmoteById(
         string emoteId,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -56,6 +73,11 @@ public sealed class EmotesClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves emotes by their IDs.</summary>
+    /// <param name="emoteIds">The emote IDs.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Emote> Value, MessageContext Context)> GetEmotesByIds(
         IReadOnlyCollection<string> emoteIds,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -67,6 +89,12 @@ public sealed class EmotesClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of emotes.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Emote> Value, MessageContext Context)> GetEmotesByPage(
         int pageIndex,
         int? pageSize = default,

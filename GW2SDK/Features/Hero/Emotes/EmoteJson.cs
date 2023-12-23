@@ -35,7 +35,7 @@ internal static class EmoteJson
         {
             Id = id.Map(value => value.GetStringRequired()),
             Commands = commands.Map(values => values.GetList(entry => entry.GetStringRequired())),
-            UnlockItems = unlockItems.Map(values => values.GetList(entry => entry.GetInt32()))
+            UnlockItemIds = unlockItems.Map(values => values.GetList(entry => entry.GetInt32()))
         };
     }
 }
