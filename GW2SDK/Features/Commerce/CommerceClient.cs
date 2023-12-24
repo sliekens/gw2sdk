@@ -407,7 +407,6 @@ public sealed class CommerceClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    /// <returns></returns>
     public Task<(HashSet<Transaction> Value, MessageContext Context)> GetSales(
         int pageIndex,
         int? pageSize,

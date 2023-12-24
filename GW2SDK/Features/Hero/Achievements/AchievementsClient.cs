@@ -329,7 +329,7 @@ public sealed class AchievementsClient
     /// <param name="language">The language to use for descriptions.</param>
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
-    /// <returns></returns>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(AchievementCategory Value, MessageContext Context)> GetAchievementCategoryById(
         int achievementCategoryId,
         Language? language = default,
@@ -350,7 +350,7 @@ public sealed class AchievementsClient
     /// <param name="language">The language to use for descriptions.</param>
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
-    /// <returns></returns>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<AchievementCategory> Value, MessageContext Context)>
         GetAchievementCategoriesByIds(
             IReadOnlyCollection<int> achievementCategoryIds,

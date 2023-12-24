@@ -20,7 +20,7 @@ internal static class JsonElementExtensions
     /// <typeparam name="TValue">The type of values in the list.</typeparam>
     /// <param name="json">The array element.</param>
     /// <param name="resultSelector">A function that converts each item in the array to its destination type.</param>
-    /// <returns></returns>
+    /// <returns>A list containing the converted results.</returns>
     internal static List<TValue> GetList<TValue>(
         this JsonElement json,
         Func<JsonElement, TValue> resultSelector
@@ -40,7 +40,7 @@ internal static class JsonElementExtensions
     /// <typeparam name="TValue">The type of values in the set.</typeparam>
     /// <param name="json">The array element.</param>
     /// <param name="resultSelector">A function that converts each item in the array to its destination type.</param>
-    /// <returns></returns>
+    /// <returns>A set containing the converted results.</returns>
     internal static HashSet<TValue> GetSet<TValue>(
         this JsonElement json,
         Func<JsonElement, TValue> resultSelector
