@@ -35,7 +35,7 @@ internal static class RaceJson
         {
             Id = id.Map(value => value.GetEnum<RaceName>(missingMemberBehavior)),
             Name = name.Map(value => value.GetStringRequired()),
-            Skills = skills.Map(values => values.GetList(value => value.GetInt32()))
+            SkillIds = skills.Map(values => values.GetList(value => value.GetInt32()))
         };
     }
 }

@@ -14,6 +14,11 @@ public sealed class RacesClient
         httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
+    /// <summary>Retrieves all races.</summary>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Race> Value, MessageContext Context)> GetRaces(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -28,6 +33,9 @@ public sealed class RacesClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all races.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<string> Value, MessageContext Context)> GetRacesIndex(
         CancellationToken cancellationToken = default
     )
@@ -36,6 +44,12 @@ public sealed class RacesClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a race by its name.</summary>
+    /// <param name="raceName">The race name.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(Race Value, MessageContext Context)> GetRaceByName(
         RaceName raceName,
         Language? language = default,
@@ -51,6 +65,12 @@ public sealed class RacesClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves races by their name.</summary>
+    /// <param name="raceNames">The race names.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Race> Value, MessageContext Context)> GetRacesByNames(
         IReadOnlyCollection<RaceName> raceNames,
         Language? language = default,
@@ -66,6 +86,13 @@ public sealed class RacesClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of races.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Race> Value, MessageContext Context)> GetRacesByPage(
         int pageIndex,
         int? pageSize = default,
