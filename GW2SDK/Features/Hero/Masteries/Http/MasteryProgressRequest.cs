@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Masteries.Http;
 
-internal sealed class MasteryProgressRequest : IHttpRequest<HashSet<MasteryProgress>>
+internal sealed class MasteryProgressRequest : IHttpRequest<HashSet<MasteryTrackProgress>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/account/masteries")
     {
@@ -15,7 +15,7 @@ internal sealed class MasteryProgressRequest : IHttpRequest<HashSet<MasteryProgr
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<(HashSet<MasteryProgress> Value, MessageContext Context)> SendAsync(
+    public async Task<(HashSet<MasteryTrackProgress> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -32,7 +32,7 @@ internal sealed class MasteryProgressRequest : IHttpRequest<HashSet<MasteryProgr
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
         var value =
-            json.RootElement.GetSet(entry => entry.GetMasteryProgress(MissingMemberBehavior));
+            json.RootElement.GetSet(entry => entry.GetMasteryTrackProgress(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }
 }

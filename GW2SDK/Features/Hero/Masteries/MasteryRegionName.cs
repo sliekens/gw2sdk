@@ -25,6 +25,6 @@ public enum MasteryRegionName
     /// <summary>End of Dragons masteries, turquoise.</summary>
     Jade,
 
-    /// <summary>Secrets of the Obscure masteries, yellow.</summary>
+    /// <summary>Secrets of the Obscure masteries, gold.</summary>
     Sky
 }

@@ -1,21 +1,25 @@
 ﻿namespace GuildWars2.Hero.Masteries;
 
+/// <summary>Information about a level of mastery within a mastery track, for example Gliding Basics.</summary>
 [PublicAPI]
 [DataTransferObject]
 public sealed record Mastery
 {
-    public required int Id { get; init; }
-
+    /// <summary>The name of the mastery.</summary>
     public required string Name { get; init; }
 
-    /// <remarks>Can be empty.</remarks>
-    public required string Requirement { get; init; }
+    /// <summary>Contains relevant information for players who have not yet unlocked the mastery.</summary>
+    public required string Description { get; init; }
 
-    public required int Order { get; init; }
+    /// <summary>Contains relevant information for players who have already unlocked the mastery.</summary>
+    public required string Instruction { get; init; }
 
-    public required string Background { get; init; }
+    /// <summary>The URL of the mastery's icon that appears in the masteries panel.</summary>
+    public required string IconHref { get; init; }
 
-    public required MasteryRegionName Region { get; init; }
+    /// <summary>The number of mastery points required to unlock the mastery.</summary>
+    public required int PointCost { get; init; }
 
-    public required IReadOnlyCollection<MasteryLevel> Levels { get; init; }
+    /// <summary>The amount of experience required to unlock the mastery.</summary>
+    public required int ExperienceCost { get; init; }
 }

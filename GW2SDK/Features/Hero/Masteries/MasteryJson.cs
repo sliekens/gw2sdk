@@ -10,43 +10,38 @@ internal static class MasteryJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = "id";
         RequiredMember name = "name";
-        RequiredMember requirement = "requirement";
-        RequiredMember order = "order";
-        RequiredMember background = "background";
-        RequiredMember region = "region";
-        RequiredMember levels = "levels";
+        RequiredMember description = "description";
+        RequiredMember instruction = "instruction";
+        RequiredMember icon = "icon";
+        RequiredMember pointCost = "point_cost";
+        RequiredMember experienceCost = "exp_cost";
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
-            {
-                id = member;
-            }
-            else if (member.Name == name.Name)
+            if (member.Name == name.Name)
             {
                 name = member;
             }
-            else if (member.Name == requirement.Name)
+            else if (member.Name == description.Name)
             {
-                requirement = member;
+                description = member;
             }
-            else if (member.Name == order.Name)
+            else if (member.Name == instruction.Name)
             {
-                order = member;
+                instruction = member;
             }
-            else if (member.Name == background.Name)
+            else if (member.Name == icon.Name)
             {
-                background = member;
+                icon = member;
             }
-            else if (member.Name == region.Name)
+            else if (member.Name == pointCost.Name)
             {
-                region = member;
+                pointCost = member;
             }
-            else if (member.Name == levels.Name)
+            else if (member.Name == experienceCost.Name)
             {
-                levels = member;
+                experienceCost = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -56,15 +51,12 @@ internal static class MasteryJson
 
         return new Mastery
         {
-            Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),
-            Requirement = requirement.Map(value => value.GetStringRequired()),
-            Order = order.Map(value => value.GetInt32()),
-            Background = background.Map(value => value.GetStringRequired()),
-            Region = region.Map(value => value.GetEnum<MasteryRegionName>(missingMemberBehavior)),
-            Levels = levels.Map(
-                values => values.GetList(value => value.GetMasteryLevel(missingMemberBehavior))
-            )
+            Description = description.Map(value => value.GetStringRequired()),
+            Instruction = instruction.Map(value => value.GetStringRequired()),
+            IconHref = icon.Map(value => value.GetStringRequired()),
+            PointCost = pointCost.Map(value => value.GetInt32()),
+            ExperienceCost = experienceCost.Map(value => value.GetInt32())
         };
     }
 }

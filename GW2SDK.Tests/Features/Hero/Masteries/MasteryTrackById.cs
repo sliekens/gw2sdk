@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Tests.Features.Hero.Masteries;
 
-public class MasteryById
+public class MasteryTrackById
 {
     [Fact]
     public async Task Can_be_found()
@@ -11,7 +11,7 @@ public class MasteryById
 
         const int id = 1;
 
-        var (actual, _) = await sut.Hero.Masteries.GetMasteryById(id);
+        var (actual, _) = await sut.Hero.Masteries.GetMasteryTrackById(id);
 
         Assert.Equal(id, actual.Id);
     }

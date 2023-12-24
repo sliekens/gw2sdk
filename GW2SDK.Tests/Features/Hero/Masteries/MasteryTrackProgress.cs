@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Tests.Features.Hero.Masteries;
 
-public class MasteryProgress
+public class MasteryTrackProgress
 {
     [Fact]
     public async Task Can_be_listed()
@@ -10,7 +10,7 @@ public class MasteryProgress
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var (actual, _) = await sut.Hero.Masteries.GetMasteryProgress(accessToken.Key);
+        var (actual, _) = await sut.Hero.Masteries.GetMasteryTrackProgress(accessToken.Key);
 
         Assert.NotEmpty(actual);
         Assert.All(

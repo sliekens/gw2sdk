@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Hero.Masteries.Http;
 
-internal sealed class MasteryByIdRequest(int masteryId) : IHttpRequest<Mastery>
+internal sealed class MasteryByIdRequest(int masteryId) : IHttpRequest<MasteryTrack>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/masteries")
     {
@@ -15,7 +15,7 @@ internal sealed class MasteryByIdRequest(int masteryId) : IHttpRequest<Mastery>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<(Mastery Value, MessageContext Context)> SendAsync(
+    public async Task<(MasteryTrack Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -38,7 +38,7 @@ internal sealed class MasteryByIdRequest(int masteryId) : IHttpRequest<Mastery>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetMastery(MissingMemberBehavior);
+        var value = json.RootElement.GetMasteryTrack(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }
 }

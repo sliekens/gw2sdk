@@ -3,9 +3,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Masteries;
 
-internal static class MasteryProgressJson
+internal static class MasteryTrackProgressJson
 {
-    public static MasteryProgress GetMasteryProgress(
+    public static MasteryTrackProgress GetMasteryTrackProgress(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -29,7 +29,7 @@ internal static class MasteryProgressJson
             }
         }
 
-        return new MasteryProgress
+        return new MasteryTrackProgress
         {
             Id = id.Map(value => value.GetInt32()),
             Level = level.Map(value => value.GetInt32())

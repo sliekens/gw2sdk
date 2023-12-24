@@ -16,10 +16,13 @@ public sealed class MasteriesClient
 
     #region v2/account/masteries
 
-    public Task<(HashSet<MasteryProgress> Value, MessageContext Context)> GetMasteryProgress(
-        string? accessToken,
-        CancellationToken cancellationToken = default
-    )
+    /// <summary>Retrieves mastery track progress on the account associated with the access token. This endpoint is only
+    /// accessible with a valid access token.</summary>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(HashSet<MasteryTrackProgress> Value, MessageContext Context)>
+        GetMasteryTrackProgress(string? accessToken, CancellationToken cancellationToken = default)
     {
         MasteryProgressRequest request = new()
         {
@@ -33,6 +36,11 @@ public sealed class MasteriesClient
 
     #region v2/account/mastery/points
 
+    /// <summary>Retrieves information about earned and spent mastery points on the account associated with the access token.
+    /// This endpoint is only accessible with a valid access token.</summary>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(MasteryPointsProgress Value, MessageContext Context)> GetMasteryPointsProgress(
         string? accessToken,
         CancellationToken cancellationToken = default
@@ -50,7 +58,12 @@ public sealed class MasteriesClient
 
     #region v2/masteries
 
-    public Task<(HashSet<Mastery> Value, MessageContext Context)> GetMasteries(
+    /// <summary>Retrieves all mastery tracks.</summary>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(HashSet<MasteryTrack> Value, MessageContext Context)> GetMasteryTracks(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -64,7 +77,10 @@ public sealed class MasteriesClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<int> Value, MessageContext Context)> GetMasteriesIndex(
+    /// <summary>Retrieves the IDs of all mastery tracks.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(HashSet<int> Value, MessageContext Context)> GetMasteryTracksIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -72,14 +88,20 @@ public sealed class MasteriesClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(Mastery Value, MessageContext Context)> GetMasteryById(
-        int masteryId,
+    /// <summary>Retrieves a mastery track by its ID.</summary>
+    /// <param name="masteryTrackId">The mastery track ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(MasteryTrack Value, MessageContext Context)> GetMasteryTrackById(
+        int masteryTrackId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MasteryByIdRequest request = new(masteryId)
+        MasteryByIdRequest request = new(masteryTrackId)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -87,14 +109,20 @@ public sealed class MasteriesClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<Mastery> Value, MessageContext Context)> GetMasteriesByIds(
-        IReadOnlyCollection<int> masteryIds,
+    /// <summary>Retrieves mastery tracks by their IDs.</summary>
+    /// <param name="masteryTrackIds">The mastery track IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(HashSet<MasteryTrack> Value, MessageContext Context)> GetMasteriesByIds(
+        IReadOnlyCollection<int> masteryTrackIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MasteriesByIdsRequest request = new(masteryIds)
+        MasteriesByIdsRequest request = new(masteryTrackIds)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
