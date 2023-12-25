@@ -1,8 +1,8 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Hero.StoryJournal.Backstory;
+namespace GuildWars2.Tests.Features.Hero.StoryJournal.BackgroundStories;
 
-public class CharacterBackstory
+public class CharacterBackgroundStory
 {
     [Fact]
     public async Task Can_be_listed()
@@ -11,12 +11,12 @@ public class CharacterBackstory
         var character = Composer.Resolve<TestCharacter>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var (actual, _) = await sut.Hero.StoryJournal.GetCharacterBackstory(
+        var (actual, _) = await sut.Hero.StoryJournal.GetCharacterBackgroundStory(
             character.Name,
             accessToken.Key
         );
 
         Assert.NotNull(actual);
-        Assert.NotEmpty(actual.Backstory);
+        Assert.NotEmpty(actual.AnswerIds);
     }
 }

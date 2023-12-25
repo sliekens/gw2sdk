@@ -1,8 +1,8 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Hero.StoryJournal.Backstory;
+namespace GuildWars2.Tests.Features.Hero.StoryJournal.BackgroundStories;
 
-public class BackstoryAnswerById
+public class BackgroundStoryAnswerById
 {
     [Fact]
     public async Task Can_be_found()
@@ -11,7 +11,7 @@ public class BackstoryAnswerById
 
         const string id = "7-53";
 
-        var (actual, _) = await sut.Hero.StoryJournal.GetBackstoryAnswerById(id);
+        var (actual, _) = await sut.Hero.StoryJournal.GetBackgroundStoryAnswerById(id);
 
         Assert.Equal(id, actual.Id);
     }

@@ -1,11 +1,12 @@
 ﻿using System.Text.Json;
+using GuildWars2.Hero.StoryJournal.Stories;
 using GuildWars2.Json;
 
-namespace GuildWars2.Hero.StoryJournal.Stories;
+namespace GuildWars2.Hero.StoryJournal.BackgroundStories;
 
-internal static class CharacterBackstoryJson
+internal static class CharacterBackgroundStoryJson
 {
-    public static CharacterBackstory GetCharacterBackstory(
+    public static CharacterBackgroundStory GetCharacterBackgroundStory(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -24,9 +25,9 @@ internal static class CharacterBackstoryJson
             }
         }
 
-        return new CharacterBackstory
+        return new CharacterBackgroundStory
         {
-            Backstory = backstory
+            AnswerIds = backstory
                 .Map(values => values.GetList(entry => entry.GetStringRequired()))
                 .ToList()
         };

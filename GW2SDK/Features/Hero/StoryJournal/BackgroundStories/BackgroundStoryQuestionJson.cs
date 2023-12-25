@@ -2,11 +2,11 @@
 using GuildWars2.Hero.Races;
 using GuildWars2.Json;
 
-namespace GuildWars2.Hero.StoryJournal.Backstory;
+namespace GuildWars2.Hero.StoryJournal.BackgroundStories;
 
-internal static class BackstoryQuestionJson
+internal static class BackgroundStoryQuestionJson
 {
-    public static BackstoryQuestion GetBackstoryQuestion(
+    public static BackgroundStoryQuestion GetBackgroundStoryQuestion(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -54,12 +54,12 @@ internal static class BackstoryQuestionJson
             }
         }
 
-        return new BackstoryQuestion
+        return new BackgroundStoryQuestion
         {
             Id = id.Map(value => value.GetInt32()),
             Title = title.Map(value => value.GetStringRequired()),
             Description = description.Map(value => value.GetStringRequired()),
-            Answers = answers.Map(values => values.GetList(value => value.GetStringRequired())),
+            AnswerIds = answers.Map(values => values.GetList(value => value.GetStringRequired())),
             Order = order.Map(value => value.GetInt32()),
             Professions =
                 professions.Map(
@@ -67,10 +67,23 @@ internal static class BackstoryQuestionJson
                         values.GetList(
                             value => value.GetEnum<ProfessionName>(missingMemberBehavior)
                         )
-                ),
+                )
+                ?? GetValues<ProfessionName>(),
             Races = races.Map(
-                values => values.GetList(value => value.GetEnum<RaceName>(missingMemberBehavior))
-            )
+                    values => values.GetList(
+                        value => value.GetEnum<RaceName>(missingMemberBehavior)
+                    )
+                )
+                ?? GetValues<RaceName>()
         };
+
+        static List<TEnum> GetValues<TEnum>() where TEnum : struct, Enum
+        {
+#if NET
+            return [..Enum.GetValues<TEnum>()];
+#else
+            return [.. Enum.GetValues(typeof(TEnum)).Cast<TEnum>()];
+#endif
+        }
     }
 }

@@ -2,11 +2,11 @@
 using GuildWars2.Hero.Races;
 using GuildWars2.Json;
 
-namespace GuildWars2.Hero.StoryJournal.Backstory;
+namespace GuildWars2.Hero.StoryJournal.BackgroundStories;
 
-internal static class BackstoryAnswerJson
+internal static class BackgroundStoryAnswerJson
 {
-    public static BackstoryAnswer GetBackstoryAnswer(
+    public static BackgroundStoryAnswer GetBackgroundStoryAnswer(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -54,23 +54,36 @@ internal static class BackstoryAnswerJson
             }
         }
 
-        return new BackstoryAnswer
+        return new BackgroundStoryAnswer
         {
             Id = id.Map(value => value.GetStringRequired()),
             Title = title.Map(value => value.GetStringRequired()),
             Description = description.Map(value => value.GetStringRequired()),
             Journal = journal.Map(value => value.GetStringRequired()),
-            Question = question.Map(value => value.GetInt32()),
+            QuestionId = question.Map(value => value.GetInt32()),
             Professions =
                 professions.Map(
                     values =>
                         values.GetList(
                             value => value.GetEnum<ProfessionName>(missingMemberBehavior)
                         )
-                ),
+                )
+                ?? GetValues<ProfessionName>(),
             Races = races.Map(
-                values => values.GetList(value => value.GetEnum<RaceName>(missingMemberBehavior))
-            )
+                    values => values.GetList(
+                        value => value.GetEnum<RaceName>(missingMemberBehavior)
+                    )
+                )
+                ?? GetValues<RaceName>()
         };
+
+        static List<TEnum> GetValues<TEnum>() where TEnum : struct, Enum
+        {
+#if NET
+            return [..Enum.GetValues<TEnum>()];
+#else
+            return [.. Enum.GetValues(typeof(TEnum)).Cast<TEnum>()];
+#endif
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿using GuildWars2.Hero.StoryJournal.Backstory;
+﻿using GuildWars2.Hero.StoryJournal.BackgroundStories;
 using GuildWars2.Hero.StoryJournal.Http;
 using GuildWars2.Hero.StoryJournal.Stories;
 
@@ -18,12 +18,20 @@ public sealed class StoryJournalClient
 
     #region v2/characters/:id/backstory
 
-    public Task<(CharacterBackstory Value, MessageContext Context)> GetCharacterBackstory(
-        string characterName,
-        string? accessToken,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    /// <summary>Retrieves the background story of a character on the account associated with the access token. This endpoint
+    /// is only accessible with a valid access token.</summary>
+    /// <param name="characterName">A character name that belongs to the account associated with the access token.</param>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(CharacterBackgroundStory Value, MessageContext Context)>
+        GetCharacterBackgroundStory(
+            string characterName,
+            string? accessToken,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
         CharacterBackstoryRequest request = new(characterName)
         {
@@ -56,13 +64,19 @@ public sealed class StoryJournalClient
 
     #region v2/backstory/questions
 
-    public Task<(HashSet<BackstoryQuestion> Value, MessageContext Context)> GetBackstoryQuestions(
-        Language? language = default,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    /// <summary>Retrieves all background story questions.</summary>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(HashSet<BackgroundStoryQuestion> Value, MessageContext Context)>
+        GetBackgroundStoryQuestions(
+            Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
-        BackstoryQuestionsRequest request = new()
+        BackstoryQuestionRequest request = new()
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -70,7 +84,10 @@ public sealed class StoryJournalClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<int> Value, MessageContext Context)> GetBackstoryQuestionsIndex(
+    /// <summary>Retrieves the IDs of all background story questions.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(HashSet<int> Value, MessageContext Context)> GetBackgroundStoryQuestionsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -78,12 +95,19 @@ public sealed class StoryJournalClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(BackstoryQuestion Value, MessageContext Context)> GetBackstoryQuestionById(
-        int questionId,
-        Language? language = default,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    /// <summary>Retrieves a background story question by its ID.</summary>
+    /// <param name="questionId">the background story question ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(BackgroundStoryQuestion Value, MessageContext Context)>
+        GetBackgroundStoryQuestionById(
+            int questionId,
+            Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
         BackstoryQuestionByIdRequest request = new(questionId)
         {
@@ -93,8 +117,14 @@ public sealed class StoryJournalClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<BackstoryQuestion> Value, MessageContext Context)>
-        GetBackstoryQuestionsByIds(
+    /// <summary>Retrieves background story questions by their IDs.</summary>
+    /// <param name="questionIds">the background story question IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(HashSet<BackgroundStoryQuestion> Value, MessageContext Context)>
+        GetBackgroundStoryQuestionsByIds(
             IReadOnlyCollection<int> questionIds,
             Language? language = default,
             MissingMemberBehavior missingMemberBehavior = default,
@@ -109,8 +139,15 @@ public sealed class StoryJournalClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<BackstoryQuestion> Value, MessageContext Context)>
-        GetBackstoryQuestionsByPage(
+    /// <summary>Retrieves a page of background story questions.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(HashSet<BackgroundStoryQuestion> Value, MessageContext Context)>
+        GetBackgroundStoryQuestionsByPage(
             int pageIndex,
             int? pageSize = default,
             Language? language = default,
@@ -131,11 +168,17 @@ public sealed class StoryJournalClient
 
     #region v2/backstory/answers
 
-    public Task<(HashSet<BackstoryAnswer> Value, MessageContext Context)> GetBackstoryAnswers(
-        Language? language = default,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    /// <summary>Retrieves all background story answers.</summary>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(HashSet<BackgroundStoryAnswer> Value, MessageContext Context)>
+        GetBackgroundStoryAnswers(
+            Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
         BackstoryAnswersRequest request = new()
         {
@@ -145,7 +188,10 @@ public sealed class StoryJournalClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<string> Value, MessageContext Context)> GetBackstoryAnswersIndex(
+    /// <summary>Retrieves the IDs of all background story answers.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(HashSet<string> Value, MessageContext Context)> GetBackgroundStoryAnswersIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -153,7 +199,13 @@ public sealed class StoryJournalClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(BackstoryAnswer Value, MessageContext Context)> GetBackstoryAnswerById(
+    /// <summary>Retrieves a background story answer by its ID.</summary>
+    /// <param name="answerId">The background story answer ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(BackgroundStoryAnswer Value, MessageContext Context)> GetBackgroundStoryAnswerById(
         string answerId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -168,12 +220,19 @@ public sealed class StoryJournalClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<BackstoryAnswer> Value, MessageContext Context)> GetBackstoryAnswersByIds(
-        IReadOnlyCollection<string> answerIds,
-        Language? language = default,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    /// <summary>Retrieves background story answers by their IDs.</summary>
+    /// <param name="answerIds">The background story answer IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(HashSet<BackgroundStoryAnswer> Value, MessageContext Context)>
+        GetBackgroundStoryAnswersByIds(
+            IReadOnlyCollection<string> answerIds,
+            Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
         BackstoryAnswersByIdsRequest request = new(answerIds)
         {
@@ -183,13 +242,21 @@ public sealed class StoryJournalClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<BackstoryAnswer> Value, MessageContext Context)> GetBackstoryAnswersByPage(
-        int pageIndex,
-        int? pageSize = default,
-        Language? language = default,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    /// <summary>Retrieves a page of background story answers.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(HashSet<BackgroundStoryAnswer> Value, MessageContext Context)>
+        GetBackgroundStoryAnswersByPage(
+            int pageIndex,
+            int? pageSize = default,
+            Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
         BackstoryAnswersByPageRequest request = new(pageIndex)
         {

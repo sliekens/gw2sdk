@@ -1,21 +1,21 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Hero.StoryJournal.Backstory;
+namespace GuildWars2.Tests.Features.Hero.StoryJournal.BackgroundStories;
 
-public class BackstoryAnswersByFilter
+public class BackgroundStoryQuestionsByFilter
 {
     [Fact]
     public async Task Can_be_filtered_by_id()
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<string> ids =
+        HashSet<int> ids =
         [
-            "7-53", "7-54",
-            "7-55"
+            7, 10,
+            11
         ];
 
-        var (actual, _) = await sut.Hero.StoryJournal.GetBackstoryAnswersByIds(ids);
+        var (actual, _) = await sut.Hero.StoryJournal.GetBackgroundStoryQuestionsByIds(ids);
 
         Assert.Collection(
             ids,

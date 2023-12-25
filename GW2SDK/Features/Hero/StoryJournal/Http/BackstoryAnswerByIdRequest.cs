@@ -1,9 +1,10 @@
-﻿using GuildWars2.Hero.StoryJournal.Backstory;
+﻿using GuildWars2.Hero.StoryJournal.BackgroundStories;
 using GuildWars2.Http;
 
 namespace GuildWars2.Hero.StoryJournal.Http;
 
-internal sealed class BackstoryAnswerByIdRequest(string answerId) : IHttpRequest<BackstoryAnswer>
+internal sealed class BackstoryAnswerByIdRequest(string answerId)
+    : IHttpRequest<BackgroundStoryAnswer>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/backstory/answers")
     {
@@ -16,7 +17,7 @@ internal sealed class BackstoryAnswerByIdRequest(string answerId) : IHttpRequest
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<(BackstoryAnswer Value, MessageContext Context)> SendAsync(
+    public async Task<(BackgroundStoryAnswer Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -41,7 +42,7 @@ internal sealed class BackstoryAnswerByIdRequest(string answerId) : IHttpRequest
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetBackstoryAnswer(MissingMemberBehavior);
+        var value = json.RootElement.GetBackgroundStoryAnswer(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }
 }
