@@ -52,6 +52,7 @@ public class DataTransferJsonTest(AssemblyFixture fixture) : IClassFixture<Assem
                             typeof(MissingMemberBehavior),
                             info.GetParameters().Skip(1).FirstOrDefault()?.ParameterType
                         );
+                        Assert.Equal(dto.Namespace, info.DeclaringType.Namespace);
                     }
                 );
             }
