@@ -2,27 +2,15 @@
 using GuildWars2.Hero.Builds;
 using GuildWars2.Json;
 
-namespace GuildWars2.Hero.Training;
+namespace GuildWars2.Hero.Training.Skills;
 
-internal static class SkillReferenceJson
+internal static class UtilitySkillSummaryJson
 {
-    public static SkillReference GetSkillReference(
+    public static UtilitySkillSummary GetUtilitySkillSummary(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        switch (json.GetProperty("type").GetString())
-        {
-            case "Profession":
-                return json.GetProfessionSkillReference(missingMemberBehavior);
-            case "Heal":
-                return json.GetHealingSkillReference(missingMemberBehavior);
-            case "Utility":
-                return json.GetUtilitySkillReference(missingMemberBehavior);
-            case "Elite":
-                return json.GetEliteSkillReference(missingMemberBehavior);
-        }
-
         RequiredMember id = "id";
         RequiredMember slot = "slot";
 
@@ -30,10 +18,10 @@ internal static class SkillReferenceJson
         {
             if (member.Name == "type")
             {
-                if (missingMemberBehavior == MissingMemberBehavior.Error)
+                if (!member.Value.ValueEquals("Utility"))
                 {
                     throw new InvalidOperationException(
-                        Strings.UnexpectedDiscriminator(member.Value.GetString())
+                        Strings.InvalidDiscriminator(member.Value.GetString())
                     );
                 }
             }
@@ -51,7 +39,7 @@ internal static class SkillReferenceJson
             }
         }
 
-        return new SkillReference
+        return new UtilitySkillSummary
         {
             Id = id.Map(value => value.GetInt32()),
             Slot = slot.Map(value => value.GetEnum<SkillSlot>(missingMemberBehavior))

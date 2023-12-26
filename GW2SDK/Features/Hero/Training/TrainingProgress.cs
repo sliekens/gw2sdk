@@ -1,10 +1,11 @@
 ﻿namespace GuildWars2.Hero.Training;
 
+/// <summary>Information about the number of hero points spent in a training track.</summary>
 [PublicAPI]
 [DataTransferObject]
 public sealed record TrainingProgress
 {
-    /// <summary>The ID of the current training track. Related data can be resolved from <see cref="Profession.Training" />.</summary>
+    /// <summary>The ID of the training track.</summary>
     public required int Id { get; init; }
 
     /// <summary>The number of hero points spent in this track.</summary>

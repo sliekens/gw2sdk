@@ -1,22 +1,22 @@
 ﻿using System.Text.Json;
 using GuildWars2.Json;
 
-namespace GuildWars2.Hero.Training;
+namespace GuildWars2.Hero.Training.Objectives;
 
-internal static class TraitObjectiveJson
+internal static class SkillObjectiveJson
 {
-    public static TraitObjective GetTraitObjective(
+    public static SkillObjective GetSkillObjective(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
     {
         RequiredMember cost = "cost";
-        RequiredMember traitId = "trait_id";
+        RequiredMember skillId = "skill_id";
         foreach (var member in json.EnumerateObject())
         {
             if (member.Name == "type")
             {
-                if (!member.Value.ValueEquals("Trait"))
+                if (!member.Value.ValueEquals("Skill"))
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
@@ -27,9 +27,9 @@ internal static class TraitObjectiveJson
             {
                 cost = member;
             }
-            else if (member.Name == traitId.Name)
+            else if (member.Name == skillId.Name)
             {
-                traitId = member;
+                skillId = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -37,10 +37,10 @@ internal static class TraitObjectiveJson
             }
         }
 
-        return new TraitObjective
+        return new SkillObjective
         {
             Cost = cost.Map(value => value.GetInt32()),
-            TraitId = traitId.Map(value => value.GetInt32())
+            SkillId = skillId.Map(value => value.GetInt32())
         };
     }
 }

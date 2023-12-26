@@ -2,11 +2,11 @@
 using GuildWars2.Hero.Builds;
 using GuildWars2.Json;
 
-namespace GuildWars2.Hero.Training;
+namespace GuildWars2.Hero.Training.Skills;
 
-internal static class HealingSkillReferenceJson
+internal static class HealingSkillSummaryJson
 {
-    public static HealingSkillReference GetHealingSkillReference(
+    public static HealingSkillSummary GetHealingSkillSummary(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -39,7 +39,7 @@ internal static class HealingSkillReferenceJson
             }
         }
 
-        return new HealingSkillReference
+        return new HealingSkillSummary
         {
             Id = id.Map(value => value.GetInt32()),
             Slot = slot.Map(value => value.GetEnum<SkillSlot>(missingMemberBehavior))

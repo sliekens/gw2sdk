@@ -43,7 +43,7 @@ internal static class SkillsByPaletteJson
                 }
             }
 
-            map[left.GetInt32()] = right.GetInt32();
+            map.Add(left.GetInt32(), right.GetInt32());
         }
 
         return map;

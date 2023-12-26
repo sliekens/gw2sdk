@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using GuildWars2.Hero.Builds;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Training;
@@ -80,18 +81,21 @@ internal static class ProfessionJson
             Code = code.Map(value => value.GetInt32()),
             IconHref = icon.Map(value => value.GetStringRequired()),
             BigIconHref = iconBig.Map(value => value.GetStringRequired()),
-            Specializations =
+            SpecializationIds =
                 specializations.Map(values => values.GetList(value => value.GetInt32())),
             Weapons =
                 weapons.Map(
                     value =>
-                        value.GetMap(item => item.GetWeaponProficiency(missingMemberBehavior))
+                        value.GetMap(
+                            GetWeaponType,
+                            item => item.GetWeaponProficiency(missingMemberBehavior)
+                        )
                 ),
             Flags = flags.Map(values => values.GetProfessionFlags()),
             Skills =
                 skills.Map(
                     values =>
-                        values.GetList(value => value.GetSkillReference(missingMemberBehavior))
+                        values.GetList(value => value.GetSkillSummary(missingMemberBehavior))
                 ),
             Training =
                 training.Map(
@@ -100,5 +104,14 @@ internal static class ProfessionJson
             SkillsByPalette =
                 skillsByPalette.Map(value => value.GetSkillsByPalette(missingMemberBehavior))
         };
+
+        static WeaponType GetWeaponType(string text)
+        {
+#if NET
+            return Enum.Parse<WeaponType>(text);
+#else
+            return (WeaponType)Enum.Parse(typeof(WeaponType), text);
+#endif
+        }
     }
 }

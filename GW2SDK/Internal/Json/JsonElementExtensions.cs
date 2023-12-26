@@ -75,6 +75,22 @@ internal static class JsonElementExtensions
         return values;
     }
 
+    internal static Dictionary<TKey, TValue> GetMap<TKey, TValue>(
+        this JsonElement json,
+        Func<string, TKey> keySelector,
+        Func<JsonElement, TValue> resultSelector
+    ) where TKey : notnull
+    {
+        var values = new Dictionary<TKey, TValue>();
+        var enumerator = json.EnumerateObject();
+        while (enumerator.MoveNext())
+        {
+            values[keySelector(enumerator.Current.Name)] = resultSelector(enumerator.Current.Value);
+        }
+
+        return values;
+    }
+
     internal static TEnum GetEnum<TEnum>(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior

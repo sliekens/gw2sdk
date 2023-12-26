@@ -2,11 +2,11 @@
 using GuildWars2.Hero.Builds;
 using GuildWars2.Json;
 
-namespace GuildWars2.Hero.Training;
+namespace GuildWars2.Hero.Training.Skills;
 
-internal static class EliteSkillReferenceJson
+internal static class EliteSkillSummaryJson
 {
-    public static EliteSkillReference GetEliteSkillReference(
+    public static EliteSkillSummary GetEliteSkillSummary(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -39,7 +39,7 @@ internal static class EliteSkillReferenceJson
             }
         }
 
-        return new EliteSkillReference
+        return new EliteSkillSummary
         {
             Id = id.Map(value => value.GetInt32()),
             Slot = slot.Map(value => value.GetEnum<SkillSlot>(missingMemberBehavior))
