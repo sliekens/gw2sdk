@@ -2,24 +2,19 @@
 
 namespace GuildWars2.Tests.Features.Hero.StoryJournal.Stories;
 
-public class QuestsByFilter
+public class StorySteps
 {
     [Fact]
-    public async Task Can_be_filtered_by_id()
+    public async Task Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<int> ids =
-        [
-            15, 16,
-            17
-        ];
+        var (actual, context) = await sut.Hero.StoryJournal.GetStorySteps();
 
-        var (actual, context) = await sut.Hero.StoryJournal.GetQuestsByIds(ids);
-
-        Assert.Equal(ids.Count, actual.Count);
+        Assert.NotEmpty(actual);
         Assert.NotNull(context.ResultContext);
-        Assert.Equal(ids.Count, context.ResultContext.ResultCount);
+        Assert.Equal(actual.Count, context.ResultContext.ResultCount);
+        Assert.Equal(actual.Count, context.ResultContext.ResultTotal);
         Assert.All(
             actual,
             entry =>

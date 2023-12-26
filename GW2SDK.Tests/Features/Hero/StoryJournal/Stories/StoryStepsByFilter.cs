@@ -2,21 +2,24 @@
 
 namespace GuildWars2.Tests.Features.Hero.StoryJournal.Stories;
 
-public class QuestsByPage
+public class StoryStepsByFilter
 {
     [Fact]
-    public async Task Can_be_filtered_by_page()
+    public async Task Can_be_filtered_by_id()
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int pageSize = 3;
-        var (actual, context) = await sut.Hero.StoryJournal.GetQuestsByPage(0, pageSize);
+        HashSet<int> ids =
+        [
+            15, 16,
+            17
+        ];
 
-        Assert.Equal(pageSize, actual.Count);
-        Assert.NotNull(context.PageContext);
-        Assert.Equal(pageSize, context.PageContext.PageSize);
+        var (actual, context) = await sut.Hero.StoryJournal.GetStoryStepsByIds(ids);
+
+        Assert.Equal(ids.Count, actual.Count);
         Assert.NotNull(context.ResultContext);
-        Assert.Equal(pageSize, context.ResultContext.ResultCount);
+        Assert.Equal(ids.Count, context.ResultContext.ResultCount);
         Assert.All(
             actual,
             entry =>

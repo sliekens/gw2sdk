@@ -45,7 +45,14 @@ public sealed class StoryJournalClient
 
     #region v2/characters/:id/quests
 
-    public Task<(HashSet<int> Value, MessageContext Context)> GetCharacterQuests(
+    /// <summary>Retrieves the IDs of story steps which have been completed by a character on the account associated with the
+    /// access token. This endpoint is only accessible with a valid access token.</summary>
+    /// <param name="characterName">A character name that belongs to the account associated with the access token.</param>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(HashSet<int> Value, MessageContext Context)> GetCompletedStorySteps(
         string characterName,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -471,7 +478,12 @@ public sealed class StoryJournalClient
 
     #region v2/quests
 
-    public Task<(HashSet<Quest> Value, MessageContext Context)> GetQuests(
+    /// <summary>Retrieves all story steps.</summary>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(HashSet<StoryStep> Value, MessageContext Context)> GetStorySteps(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -485,7 +497,10 @@ public sealed class StoryJournalClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<int> Value, MessageContext Context)> GetQuestsIndex(
+    /// <summary>Retrieves the IDs of all story steps.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(HashSet<int> Value, MessageContext Context)> GetStoryStepsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -493,14 +508,20 @@ public sealed class StoryJournalClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(Quest Value, MessageContext Context)> GetQuestById(
-        int questId,
+    /// <summary>Retrieves a story step by its ID.</summary>
+    /// <param name="storyStepId"></param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(StoryStep Value, MessageContext Context)> GetStoryStepById(
+        int storyStepId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        QuestByIdRequest request = new(questId)
+        QuestByIdRequest request = new(storyStepId)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -508,14 +529,20 @@ public sealed class StoryJournalClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<Quest> Value, MessageContext Context)> GetQuestsByIds(
-        IReadOnlyCollection<int> questIds,
+    /// <summary>Retrieves story steps by their IDs.</summary>
+    /// <param name="storyStepIds">The story step IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(HashSet<StoryStep> Value, MessageContext Context)> GetStoryStepsByIds(
+        IReadOnlyCollection<int> storyStepIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        QuestsByIdsRequest request = new(questIds)
+        QuestsByIdsRequest request = new(storyStepIds)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -523,7 +550,14 @@ public sealed class StoryJournalClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<Quest> Value, MessageContext Context)> GetQuestsByPage(
+    /// <summary>Retrieves a page of story steps.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(HashSet<StoryStep> Value, MessageContext Context)> GetStoryStepsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

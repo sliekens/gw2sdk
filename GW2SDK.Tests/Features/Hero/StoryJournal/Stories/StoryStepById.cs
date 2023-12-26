@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Tests.Features.Hero.StoryJournal.Stories;
 
-public class QuestById
+public class StoryStepById
 {
     [Fact]
     public async Task Can_be_found()
@@ -11,7 +11,7 @@ public class QuestById
 
         const int id = 15;
 
-        var (actual, _) = await sut.Hero.StoryJournal.GetQuestById(id);
+        var (actual, _) = await sut.Hero.StoryJournal.GetStoryStepById(id);
 
         Assert.Equal(id, actual.Id);
         actual.Has_name();

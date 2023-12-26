@@ -3,9 +3,12 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.StoryJournal.Stories;
 
-internal static class GoalJson
+internal static class ObjectiveJson
 {
-    public static Goal GetGoal(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Objective GetObjective(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember active = "active";
         RequiredMember complete = "complete";
@@ -26,7 +29,7 @@ internal static class GoalJson
             }
         }
 
-        return new Goal
+        return new Objective
         {
             Active = active.Map(value => value.GetStringRequired()),
             Complete = complete.Map(value => value.GetStringRequired())

@@ -3,9 +3,12 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.StoryJournal.Stories;
 
-internal static class QuestJson
+internal static class StoryStepJson
 {
-    public static Quest GetQuest(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static StoryStep GetStoryStep(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember name = "name";
         RequiredMember level = "level";
@@ -41,14 +44,14 @@ internal static class QuestJson
             }
         }
 
-        return new Quest
+        return new StoryStep
         {
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),
             Level = level.Map(value => value.GetInt32()),
-            Story = story.Map(value => value.GetInt32()),
-            Goals = goals.Map(
-                values => values.GetList(value => value.GetGoal(missingMemberBehavior))
+            StoryId = story.Map(value => value.GetInt32()),
+            Objectives = goals.Map(
+                values => values.GetList(value => value.GetObjective(missingMemberBehavior))
             )
         };
     }

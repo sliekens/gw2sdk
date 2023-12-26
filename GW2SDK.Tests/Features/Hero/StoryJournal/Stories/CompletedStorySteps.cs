@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Tests.Features.Hero.StoryJournal.Stories;
 
-public class CharacterQuests
+public class CompletedStorySteps
 {
     [Fact]
     public async Task Can_be_listed()
@@ -11,7 +11,7 @@ public class CharacterQuests
         var character = Composer.Resolve<TestCharacter>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var (actual, _) = await sut.Hero.StoryJournal.GetCharacterQuests(
+        var (actual, _) = await sut.Hero.StoryJournal.GetCompletedStorySteps(
             character.Name,
             accessToken.Key
         );

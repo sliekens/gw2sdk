@@ -3,7 +3,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Hero.StoryJournal.Http;
 
-internal sealed class QuestByIdRequest(int questId) : IHttpRequest<Quest>
+internal sealed class QuestByIdRequest(int questId) : IHttpRequest<StoryStep>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/quests") { AcceptEncoding = "gzip" };
@@ -14,7 +14,7 @@ internal sealed class QuestByIdRequest(int questId) : IHttpRequest<Quest>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<(Quest Value, MessageContext Context)> SendAsync(
+    public async Task<(StoryStep Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -37,7 +37,7 @@ internal sealed class QuestByIdRequest(int questId) : IHttpRequest<Quest>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetQuest(MissingMemberBehavior);
+        var value = json.RootElement.GetStoryStep(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }
 }
