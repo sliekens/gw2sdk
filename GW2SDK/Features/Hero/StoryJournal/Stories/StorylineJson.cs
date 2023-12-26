@@ -3,9 +3,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.StoryJournal.Stories;
 
-internal static class SeasonJson
+internal static class StorylineJson
 {
-    public static Storyline GetSeason(
+    public static Storyline GetStoryline(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )

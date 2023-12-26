@@ -44,7 +44,7 @@ internal sealed class SeasonsByIdsRequest : IHttpRequest<HashSet<Storyline>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetSeason(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetStoryline(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }
 }
