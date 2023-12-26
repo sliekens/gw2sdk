@@ -1,7 +1,7 @@
 ﻿namespace GuildWars2.Guilds.Logs;
 
 /// <summary>An entry in the guild's log, used for audit purposes. This class is the base type for all log entries. Cast
-/// log entries to a more derived type to access their properties.</summary>
+/// objects of this type to a more specific type to access more properties.</summary>
 [PublicAPI]
 [DataTransferObject]
 [Inheritable]

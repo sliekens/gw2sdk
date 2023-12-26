@@ -3,7 +3,7 @@
 namespace GuildWars2.Exploration.PointsOfInterest;
 
 /// <summary>Information about a notable location on the map, such as a vista, a point of interest, a hero challenge, or an
-/// adventure. This class is the base type for all of those. Cast to a more specific type to access the properties.</summary>
+/// adventure. This class is the base type. Cast objects of this type to a more specific type to access more properties.</summary>
 [PublicAPI]
 [Inheritable]
 [DataTransferObject]

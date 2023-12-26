@@ -20,10 +20,10 @@ public sealed record GodShrine
     /// <summary>The name of the god shrine when it is contested.</summary>
     public required string NameContested { get; init; }
 
-    /// <summary>The icon of the god shrine when it is uncontested.</summary>
+    /// <summary>The icon URL of the god shrine when it is uncontested.</summary>
     public required string IconHref { get; init; }
 
-    /// <summary>The icon of the god shrine when it is contested.</summary>
+    /// <summary>The icon URL of the god shrine when it is contested.</summary>
     public required string IconContestedHref { get; init; }
 
     /// <summary>The map coordinates of the god shrine.</summary>

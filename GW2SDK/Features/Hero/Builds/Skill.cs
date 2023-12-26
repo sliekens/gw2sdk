@@ -1,6 +1,6 @@
 ﻿namespace GuildWars2.Hero.Builds;
 
-/// <summary>The base type for skills.</summary>
+/// <summary>The base type for skills. Cast objects of this type to a more specific type to access more properties.</summary>
 [PublicAPI]
 [Inheritable]
 [DataTransferObject]
@@ -27,7 +27,7 @@ public record Skill
     /// <summary>The URL of the skill's icon.</summary>
     public required string? IconHref { get; init; }
 
-    /// <summary>Indicates the type of weapon associated with this skill. Typically this is the weapon you need to equip to
+    /// <summary>Indicates the type of weapon associated with this skill. This is typically the weapon you need to equip to
     /// access the skill. It is also used to indicate the weapon type of skills granted by bundles or transformations. If the
     /// skill is not associated with any weapon, like pet skills, this property is <see cref="WeaponType.None" />. It can also
     /// be <c>null</c> for NPC skills or passive trait skills.</summary>
@@ -35,7 +35,7 @@ public record Skill
 
     /// <summary>Indicates profession restrictions for this skill. This list can be empty for stolen skills or skills granted
     /// by bundles or transformations. If the skill has a parent skill then its list of profession restrictions should be used
-    /// instead of this one. Otherwise an empty list should be interpreted as no restrictions. It can also be <c>null</c> for
+    /// instead of this one. Otherwise, an empty list should be interpreted as no restrictions. It can also be <c>null</c> for
     /// NPC skills or passive trait skills.</summary>
     public required IReadOnlyList<ProfessionName>? Professions { get; init; }
 

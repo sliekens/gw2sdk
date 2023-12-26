@@ -13,9 +13,9 @@ public sealed record WeaponSkill : Skill
     /// <summary>Used for Revenant, Warrior and Druid skills to indicate their cost.</summary>
     public required int? Cost { get; init; }
 
-    /// <summary>Indicates which off-hand weapon must be equipped to access this Dual Wield skill.</summary>
+    /// <summary>Used for Dual Wield skills to indicate which off-hand weapon must be equipped.</summary>
     public required Offhand? Offhand { get; init; }
 
-    /// <summary>Indicates the Initiative cost for thief skills.</summary>
+    /// <summary>Used for Thief skills to indicates the Initiative cost.</summary>
     public required int? Initiative { get; init; }
 }

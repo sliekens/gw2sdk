@@ -1,6 +1,6 @@
 ﻿namespace GuildWars2.Hero.Builds.Skills;
 
-/// <summary>An utility skill.</summary>
+/// <summary>A utility skill.</summary>
 [PublicAPI]
 public sealed record UtilitySkill : Skill
 {

@@ -1,5 +1,6 @@
 ﻿namespace GuildWars2.Hero.Builds;
 
+/// <summary>The weapon types.</summary>
 [PublicAPI]
 public enum WeaponType
 {

@@ -8,7 +8,7 @@ public sealed record Legend
     /// <summary>The legend ID.</summary>
     public required string Id { get; init; }
 
-    /// <summary>The legend numeric code, which is mainly used in chat links instead of the real <see cref="Id" />.</summary>
+    /// <summary>The legend's code which is used in build template chat links.</summary>
     public required int Code { get; init; }
 
     /// <summary>The skill ID of the legend's swap skill.</summary>
