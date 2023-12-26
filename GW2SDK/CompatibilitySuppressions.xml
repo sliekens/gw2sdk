@@ -682,6 +682,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Training.Profession.set_Specializations(System.Collections.Generic.IReadOnlyCollection{System.Int32})</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Training.Training.get_Track</Target>
     <Left>lib/net462/GW2SDK.dll</Left>
     <Right>lib/net462/GW2SDK.dll</Right>
@@ -1060,6 +1067,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Training.Profession.set_Specializations(System.Collections.Generic.IReadOnlyCollection{System.Int32})</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Training.Training.get_Track</Target>
     <Left>lib/net6.0/GW2SDK.dll</Left>
     <Right>lib/net6.0/GW2SDK.dll</Right>
@@ -1432,6 +1446,13 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Training.Profession.get_Weapons</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Training.Profession.set_Specializations(System.Collections.Generic.IReadOnlyCollection{System.Int32})</Target>
     <Left>lib/netstandard2.0/GW2SDK.dll</Left>
     <Right>lib/netstandard2.0/GW2SDK.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
