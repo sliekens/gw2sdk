@@ -3,7 +3,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Hero.StoryJournal.Http;
 
-internal sealed class SeasonByIdRequest(string seasonId) : IHttpRequest<Season>
+internal sealed class SeasonByIdRequest(string seasonId) : IHttpRequest<Storyline>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/stories/seasons") { AcceptEncoding = "gzip" };
@@ -14,7 +14,7 @@ internal sealed class SeasonByIdRequest(string seasonId) : IHttpRequest<Season>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<(Season Value, MessageContext Context)> SendAsync(
+    public async Task<(Storyline Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )

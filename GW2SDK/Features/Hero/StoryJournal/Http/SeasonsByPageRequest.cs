@@ -4,7 +4,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.StoryJournal.Http;
 
-internal sealed class SeasonsByPageRequest(int pageIndex) : IHttpRequest<HashSet<Season>>
+internal sealed class SeasonsByPageRequest(int pageIndex) : IHttpRequest<HashSet<Storyline>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/stories/seasons") { AcceptEncoding = "gzip" };
@@ -17,7 +17,7 @@ internal sealed class SeasonsByPageRequest(int pageIndex) : IHttpRequest<HashSet
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<(HashSet<Season> Value, MessageContext Context)> SendAsync(
+    public async Task<(HashSet<Storyline> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )

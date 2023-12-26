@@ -271,6 +271,11 @@ public sealed class StoryJournalClient
 
     #region v2/stories
 
+    /// <summary>Retrieves all stories.</summary>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Story> Value, MessageContext Context)> GetStories(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -285,6 +290,9 @@ public sealed class StoryJournalClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all stories.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<int> Value, MessageContext Context)> GetStoriesIndex(
         CancellationToken cancellationToken = default
     )
@@ -293,6 +301,12 @@ public sealed class StoryJournalClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a story by its ID.</summary>
+    /// <param name="storyId">The story ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(Story Value, MessageContext Context)> GetStoryById(
         int storyId,
         Language? language = default,
@@ -308,6 +322,12 @@ public sealed class StoryJournalClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves stories by their IDs.</summary>
+    /// <param name="storyIds">The story IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Story> Value, MessageContext Context)> GetStoriesByIds(
         IReadOnlyCollection<int> storyIds,
         Language? language = default,
@@ -323,6 +343,13 @@ public sealed class StoryJournalClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of stories.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Story> Value, MessageContext Context)> GetStoriesByPage(
         int pageIndex,
         int? pageSize = default,
@@ -344,7 +371,12 @@ public sealed class StoryJournalClient
 
     #region v2/stories/seasons
 
-    public Task<(HashSet<Season> Value, MessageContext Context)> GetSeasons(
+    /// <summary>Retrieves all storylines.</summary>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(HashSet<Storyline> Value, MessageContext Context)> GetStorylines(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -358,7 +390,10 @@ public sealed class StoryJournalClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<string> Value, MessageContext Context)> GetSeasonsIndex(
+    /// <summary>Retrieves the IDs of all storylines.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(HashSet<string> Value, MessageContext Context)> GetStorylinesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -366,14 +401,20 @@ public sealed class StoryJournalClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(Season Value, MessageContext Context)> GetSeasonById(
-        string seasonId,
+    /// <summary>Retrieves a storyline by its ID.</summary>
+    /// <param name="storylineId"></param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(Storyline Value, MessageContext Context)> GetStorylineById(
+        string storylineId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        SeasonByIdRequest request = new(seasonId)
+        SeasonByIdRequest request = new(storylineId)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -381,14 +422,20 @@ public sealed class StoryJournalClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<Season> Value, MessageContext Context)> GetSeasonsByIds(
-        IReadOnlyCollection<string> seasonIds,
+    /// <summary>Retrieves storylines by their IDs.</summary>
+    /// <param name="storylineIds"></param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(HashSet<Storyline> Value, MessageContext Context)> GetStorylinesByIds(
+        IReadOnlyCollection<string> storylineIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        SeasonsByIdsRequest request = new(seasonIds)
+        SeasonsByIdsRequest request = new(storylineIds)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -396,7 +443,14 @@ public sealed class StoryJournalClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<Season> Value, MessageContext Context)> GetSeasonsByPage(
+    /// <summary>Retrieves a page of storylines.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(HashSet<Storyline> Value, MessageContext Context)> GetStorylinesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.StoryJournal.Http;
 
 internal static class SeasonJson
 {
-    public static Season GetSeason(
+    public static Storyline GetSeason(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -40,7 +40,7 @@ internal static class SeasonJson
             }
         }
 
-        return new Season
+        return new Storyline
         {
             Id = id.Map(value => value.GetStringRequired()),
             Name = name.Map(value => value.GetStringRequired()),

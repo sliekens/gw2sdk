@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Tests.Features.Hero.StoryJournal.Stories;
 
-public class SeasonsByFilter
+public class StorylinesByFilter
 {
     [Fact]
     public async Task Can_be_filtered_by_id()
@@ -15,7 +15,7 @@ public class SeasonsByFilter
             "215AAA0F-CDAC-4F93-86DA-C155A99B5784"
         ];
 
-        var (actual, context) = await sut.Hero.StoryJournal.GetSeasonsByIds(ids);
+        var (actual, context) = await sut.Hero.StoryJournal.GetStorylinesByIds(ids);
 
         Assert.Equal(ids.Count, actual.Count);
         Assert.NotNull(context.ResultContext);

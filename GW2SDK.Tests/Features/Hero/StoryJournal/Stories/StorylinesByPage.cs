@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Tests.Features.Hero.StoryJournal.Stories;
 
-public class SeasonsByPage
+public class StorylinesByPage
 {
     [Fact]
     public async Task Can_be_filtered_by_page()
@@ -10,7 +10,7 @@ public class SeasonsByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
-        var (actual, context) = await sut.Hero.StoryJournal.GetSeasonsByPage(0, pageSize);
+        var (actual, context) = await sut.Hero.StoryJournal.GetStorylinesByPage(0, pageSize);
 
         Assert.Equal(pageSize, actual.Count);
         Assert.NotNull(context.PageContext);

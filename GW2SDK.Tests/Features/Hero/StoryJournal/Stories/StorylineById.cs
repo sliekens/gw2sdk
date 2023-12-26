@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Tests.Features.Hero.StoryJournal.Stories;
 
-public class SeasonById
+public class StorylineById
 {
     [Fact]
     public async Task Can_be_found()
@@ -11,7 +11,7 @@ public class SeasonById
 
         const string id = "09766A86-D88D-4DF2-9385-259E9A8CA583";
 
-        var (actual, _) = await sut.Hero.StoryJournal.GetSeasonById(id);
+        var (actual, _) = await sut.Hero.StoryJournal.GetStorylineById(id);
 
         Assert.Equal(id, actual.Id);
     }

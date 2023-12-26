@@ -70,7 +70,7 @@ internal static class StoryJson
         return new Story
         {
             Id = id.Map(value => value.GetInt32()),
-            SeasonId = season.Map(value => value.GetStringRequired()),
+            StorylineId = season.Map(value => value.GetStringRequired()),
             Name = name.Map(value => value.GetStringRequired()),
             Description = description.Map(value => value.GetStringRequired()),
             Timeline = timeline.Map(value => value.GetStringRequired()),
@@ -80,7 +80,8 @@ internal static class StoryJson
                     values => values.GetList(
                         value => value.GetEnum<RaceName>(missingMemberBehavior)
                     )
-                ),
+                )
+                ?? GetValues<RaceName>(),
             Order = order.Map(value => value.GetInt32()),
             Chapters =
                 chapters.Map(
@@ -88,5 +89,14 @@ internal static class StoryJson
                 ),
             Flags = flags.Map(values => values.GetStoryFlags()) ?? StoryFlags.None
         };
+
+        static List<TEnum> GetValues<TEnum>() where TEnum : struct, Enum
+        {
+#if NET
+            return [.. Enum.GetValues<TEnum>()];
+#else
+            return [.. Enum.GetValues(typeof(TEnum)).Cast<TEnum>()];
+#endif
+        }
     }
 }

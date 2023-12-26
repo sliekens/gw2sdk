@@ -2,14 +2,14 @@
 
 namespace GuildWars2.Tests.Features.Hero.StoryJournal.Stories;
 
-public class Seasons
+public class Storylines
 {
     [Fact]
     public async Task Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.StoryJournal.GetSeasons();
+        var (actual, context) = await sut.Hero.StoryJournal.GetStorylines();
 
         Assert.NotEmpty(actual);
         Assert.NotNull(context.ResultContext);
