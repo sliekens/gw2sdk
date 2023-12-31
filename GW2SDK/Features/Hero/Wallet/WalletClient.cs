@@ -16,6 +16,12 @@ public sealed class WalletClient
 
     #region v2/account/wallet
 
+    /// <summary>Retrieves the amount of currency in the wallet of the account associated with the access token. This endpoint
+    /// is only accessible with a valid access token.</summary>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<CurrencyAmount> Value, MessageContext Context)> GetWallet(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -34,6 +40,11 @@ public sealed class WalletClient
 
     #region v2/currencies
 
+    /// <summary>Retrieves all currencies.</summary>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Currency> Value, MessageContext Context)> GetCurrencies(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -48,6 +59,9 @@ public sealed class WalletClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all currencies.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<int> Value, MessageContext Context)> GetCurrenciesIndex(
         CancellationToken cancellationToken = default
     )
@@ -56,6 +70,12 @@ public sealed class WalletClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a currency by its ID.</summary>
+    /// <param name="currencyId">The currency ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(Currency Value, MessageContext Context)> GetCurrencyById(
         int currencyId,
         Language? language = default,
@@ -71,6 +91,12 @@ public sealed class WalletClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves currencies by their IDs.</summary>
+    /// <param name="currencyIds">The currency IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Currency> Value, MessageContext Context)> GetCurrenciesByIds(
         IReadOnlyCollection<int> currencyIds,
         Language? language = default,
@@ -86,6 +112,13 @@ public sealed class WalletClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of currencies.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Currency> Value, MessageContext Context)> GetCurrenciesByPage(
         int pageIndex,
         int? pageSize = default,
