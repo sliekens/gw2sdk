@@ -61,6 +61,12 @@ internal static class DyeJson
             }
         }
 
+        // The API puts all hues, materials, and color sets into the same array,
+        // which is uncomfortable, so split them into properties
+        var (hue, material, set) =
+            categories.Map(value => value.GetCategories(missingMemberBehavior));
+
+        // the first element is the hue, second is material, third is color set
         return new Dye
         {
             Id = id.Map(value => value.GetInt32()),
@@ -70,12 +76,10 @@ internal static class DyeJson
             Leather = leather.Map(value => value.GetColorInfo(missingMemberBehavior)),
             Metal = metal.Map(value => value.GetColorInfo(missingMemberBehavior)),
             Fur = fur.Map(value => value.GetColorInfo(missingMemberBehavior)),
-            Item = itemId.Map(value => value.GetInt32()),
-            Categories = categories.Map(
-                values => values.GetList(
-                    value => value.GetEnum<ColorCategoryName>(missingMemberBehavior)
-                )
-            )
+            ItemId = itemId.Map(value => value.GetInt32()),
+            Hue = hue,
+            Material = material,
+            Set = set
         };
     }
 }
