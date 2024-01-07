@@ -25,6 +25,9 @@ public class AchievementJson(AchievementFixture fixture) : IClassFixture<Achieve
                 actual.Rewards_does_not_contain_null();
                 actual.Bits_does_not_contain_null();
                 actual.PointCap_is_negative_1_for_repeatable_achievements_without_points();
+
+                var chatLink = actual.GetChatLink();
+                Assert.Equal(actual.Id, chatLink.AchievementId);
             }
         );
 }

@@ -292,4 +292,14 @@ public class CoinTest
         var reason = Assert.Throws<ArgumentException>("obj", CompareToString);
         Assert.StartsWith("Object must be of type Coin", reason.Message);
     }
+
+    [Fact]
+    public void Coins_can_be_linked_in_chat()
+    {
+        Coin sut = 1_00_00;
+
+        var actual = sut.GetChatLink();
+
+        Assert.Equal(sut.Amount, actual.Coins.Amount);
+    }
 }

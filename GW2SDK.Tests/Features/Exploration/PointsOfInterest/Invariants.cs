@@ -14,5 +14,13 @@ public static class Invariants
     }
 
     internal static void All_have_chat_links(this IReadOnlyCollection<PointOfInterest> entries) =>
-        Assert.All(entries, actual => Assert.NotEmpty(actual.ChatLink));
+        Assert.All(
+            entries,
+            actual =>
+            {
+                var chatLink = actual.GetChatLink();
+                Assert.Equal(actual.Id, chatLink.PointOfInterestId);
+                Assert.Equal(actual.ChatLink, chatLink.ToString());
+            }
+        );
 }

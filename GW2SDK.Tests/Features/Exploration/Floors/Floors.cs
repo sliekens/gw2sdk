@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.Features.Exploration.Regions;
+﻿using GuildWars2.Tests.Features.Exploration.PointsOfInterest;
+using GuildWars2.Tests.Features.Exploration.Regions;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Exploration.Floors;
@@ -44,6 +45,9 @@ public class Floors
                     foreach (var (mapId, map) in region.Maps)
                     {
                         Assert.Equal(mapId, map.Id);
+
+                        map.PointsOfInterest.Values.All_have_ids();
+                        map.PointsOfInterest.Values.All_have_chat_links();
                     }
                 }
             }

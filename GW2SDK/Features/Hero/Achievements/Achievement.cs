@@ -1,4 +1,5 @@
-﻿using GuildWars2.Hero.Achievements.Bits;
+﻿using GuildWars2.Chat;
+using GuildWars2.Hero.Achievements.Bits;
 using GuildWars2.Hero.Achievements.Rewards;
 
 namespace GuildWars2.Hero.Achievements;
@@ -59,4 +60,8 @@ public record Achievement
     /// whether the <see cref="Flags" /> contain the <see cref="AchievementFlags.Repeatable" /> flag.</summary>
     /// <remarks> -1 for repeatable achievements that don't award points.</remarks>
     public required int? PointCap { get; init; }
+
+    /// <summary>Gets a chat link object for this achievement.</summary>
+    /// <returns>The chat link as an object.</returns>
+    public AchievementLink GetChatLink() => new() { AchievementId = Id };
 }

@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using GuildWars2.Chat;
 
 namespace GuildWars2.Exploration.GodShrines;
 
@@ -28,4 +29,8 @@ public sealed record GodShrine
 
     /// <summary>The map coordinates of the god shrine.</summary>
     public required PointF Coordinates { get; init; }
+
+    /// <summary>Gets a chat link object for this god shrine.</summary>
+    /// <returns>The chat link as an object.</returns>
+    public PointOfInterestLink GetChatLink() => new() { PointOfInterestId = Id };
 }

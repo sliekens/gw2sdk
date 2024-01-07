@@ -1,4 +1,5 @@
-﻿using GuildWars2.Hero.Equipment;
+﻿using GuildWars2.Chat;
+using GuildWars2.Hero.Equipment;
 
 namespace GuildWars2.Hero.Inventories;
 
@@ -42,4 +43,16 @@ public sealed record ItemSlot
 
     /// <summary>The attribute combination for items with selectable stats.</summary>
     public required SelectedStat? Stats { get; init; }
+
+    /// <summary>Gets a chat link object for this item slot.</summary>
+    /// <returns>The chat link as an object.</returns>
+    public ItemLink GetChatLink() =>
+        new()
+        {
+            ItemId = Id,
+            Count = Count,
+            SkinId = SkinId,
+            SuffixItemId = SuffixItemId,
+            SecondarySuffixItemId = SecondarySuffixItemId
+        };
 }

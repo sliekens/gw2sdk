@@ -1,4 +1,5 @@
-﻿#if !NET
+﻿using GuildWars2.Chat;
+#if !NET
 using System.Text;
 #endif
 
@@ -73,6 +74,8 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
     public static implicit operator int(Coin coin) => coin.Amount;
 
     public static implicit operator Coin(int quantity) => new(quantity);
+
+    public CoinLink GetChatLink() => new() { Coins = this };
 
     public override string ToString()
     {

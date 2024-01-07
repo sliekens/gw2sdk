@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using GuildWars2.Chat;
 
 namespace GuildWars2.Exploration.PointsOfInterest;
 
@@ -24,4 +25,8 @@ public record PointOfInterest
     /// <summary>The chat code of the point of interest. This can be used to link the location in the chat, but also in guild
     /// or squad messages.</summary>
     public required string ChatLink { get; init; }
+
+    /// <summary>Gets a chat link object for this point of interest.</summary>
+    /// <returns>The chat link as an object.</returns>
+    public PointOfInterestLink GetChatLink() => new() { PointOfInterestId = Id };
 }

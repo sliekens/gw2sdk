@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Items;
+﻿using GuildWars2.Chat;
+
+namespace GuildWars2.Items;
 
 [PublicAPI]
 [Inheritable]
@@ -29,4 +31,16 @@ public record Item
     public required string ChatLink { get; init; }
 
     public required string? IconHref { get; init; }
+
+    /// <summary>Gets a chat link object for this item.</summary>
+    /// <returns>The chat link as an object.</returns>
+    public ItemLink GetChatLink() =>
+        new()
+        {
+            ItemId = Id,
+            Count = 1,
+            SkinId = null,
+            SuffixItemId = null,
+            SecondarySuffixItemId = null
+        };
 }

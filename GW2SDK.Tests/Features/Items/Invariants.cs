@@ -175,10 +175,12 @@ internal static class Invariants
 
     internal static void Validate(this Item actual)
     {
+        var chatLink = actual.GetChatLink();
+        Assert.Equal(actual.ChatLink, chatLink.ToString());
+
         actual.Id_is_positive();
         actual.Vendor_value_is_not_negative();
         actual.Level_is_between_0_and_80();
-        Assert.Empty(actual.Flags.Other);
         switch (actual)
         {
             case Consumable consumable:

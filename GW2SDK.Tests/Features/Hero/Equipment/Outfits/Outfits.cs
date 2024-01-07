@@ -23,6 +23,9 @@ public class Outfits
                 entry.Has_name();
                 entry.Has_icon();
                 entry.Has_unlock_items();
+
+                var chatLink = entry.GetChatLink();
+                Assert.Equal(entry.Id, chatLink.OutfitId);
             }
         );
     }

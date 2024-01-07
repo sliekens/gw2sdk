@@ -1,4 +1,5 @@
-﻿using GuildWars2.Hero.Crafting.Disciplines;
+﻿using GuildWars2.Chat;
+using GuildWars2.Hero.Crafting.Disciplines;
 
 namespace GuildWars2.Hero.Crafting.Recipes;
 
@@ -36,4 +37,8 @@ public record Recipe
     /// <summary>The chat code of the recipe. This can be used to link the recipe in the chat, but also in guild or squad
     /// messages.</summary>
     public required string ChatLink { get; init; }
+
+    /// <summary>Gets a chat link object for this recipe.</summary>
+    /// <returns>The chat link as an object.</returns>
+    public RecipeLink GetChatLink() => new() { RecipeId = Id };
 }

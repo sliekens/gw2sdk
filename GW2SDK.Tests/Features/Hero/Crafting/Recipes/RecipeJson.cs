@@ -22,6 +22,10 @@ public class RecipeJson
                 actual.Has_item_count();
                 actual.Has_min_rating_between_0_and_500();
                 actual.Has_time_to_craft();
+
+                var chatLink = actual.GetChatLink();
+                Assert.Equal(actual.Id, chatLink.RecipeId);
+                Assert.Equal(actual.ChatLink, chatLink.ToString());
             }
         );
     }

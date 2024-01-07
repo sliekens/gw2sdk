@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Hero.Builds;
+﻿using GuildWars2.Chat;
+
+namespace GuildWars2.Hero.Builds;
 
 /// <summary>The base type for skills. Cast objects of this type to a more specific type to access more properties.</summary>
 [PublicAPI]
@@ -66,4 +68,8 @@ public record Skill
     /// <summary>The ID of which elite specialization is required to access this skill, or <c>null</c> if no elite
     /// specialization is required.</summary>
     public required int? SpecializationId { get; init; }
+
+    /// <summary>Gets a chat link object for this skill.</summary>
+    /// <returns>The chat link as an object.</returns>
+    public SkillLink GetChatLink() => new() { SkillId = Id };
 }

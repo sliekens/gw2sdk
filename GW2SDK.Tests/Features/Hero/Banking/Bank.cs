@@ -19,8 +19,16 @@ public class Bank
             actual.Items,
             slot =>
             {
-                slot?.Has_id();
-                slot?.Has_count();
+                if (slot is not null)
+                {
+                    slot.Has_id();
+                    slot.Has_count();
+                    var chatLink = slot.GetChatLink();
+                    Assert.Equal(slot.Count, chatLink.Count);
+                    Assert.Equal(slot.SkinId, chatLink.SkinId);
+                    Assert.Equal(slot.SuffixItemId, chatLink.SuffixItemId);
+                    Assert.Equal(slot.SecondarySuffixItemId, chatLink.SecondarySuffixItemId);
+                }
             }
         );
     }

@@ -63,13 +63,15 @@ The [wiki] contains information for contributors. The _docs_ directory contains 
 ## Additional resources
 
 - [Codecov][codecov] contains test coverage reports
-- [Guild Wars 2 wiki][api] contains API endpoint documentation
+- [Guild Wars 2 wiki: API][api] contains API endpoint documentation
+- [Guild Wars 2 wiki: chat link format][chatlinks] contains the format of chat links
 - <https://api.guildwars2.com/v2> contains an overview of API endpoints
 - <https://api.guildwars2.com/v2.json?v=latest> contains API endpoints, schema versions and changelog in machine-readable format
 
 [//]:# (add links to the section below)
 [actions]:https://github.com/sliekens/gw2sdk/actions?query=workflow%3A%22Continuous+Integration%22
 [api]:https://wiki.guildwars2.com/wiki/API:Main
+[chatlinks]:https://wiki.guildwars2.com/wiki/Chat_link_format
 [ci-badge]:https://github.com/sliekens/gw2sdk/actions/workflows/ci.yml/badge.svg
 [codecov-badge]:https://codecov.io/gh/sliekens/gw2sdk/branch/main/graph/badge.svg?token=2ZTDBRWWLR
 [codecov]:https://codecov.io/gh/sliekens/gw2sdk
