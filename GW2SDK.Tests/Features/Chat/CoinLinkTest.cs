@@ -8,8 +8,9 @@ public class CoinLinkTest
     [InlineData("[&AQAAAAA=]", 0)]
     [InlineData("[&AQEAAAA=]", 1)]
     [InlineData("[&AdsnAAA=]", 10203)]
-    public void Can_marshal_coin_links(string chatLink, Coin coins)
+    public void Can_marshal_coin_links(string chatLink, int amount)
     {
+        var coins = new Coin(amount);
         var sut = CoinLink.Parse(chatLink);
 
         var actual = sut.ToString();
