@@ -21,11 +21,11 @@ public sealed record ItemSlot
     /// <c>null</c>.</summary>
     public required int? SkinId { get; init; }
 
-    /// <summary>The item IDs of runes or sigils in this item.</summary>
-    public required IReadOnlyList<int>? UpgradeItemIds { get; init; }
+    /// <summary>If present, indicates the item ID of an upgrade component.</summary>
+    public required int? SuffixItemId { get; init; }
 
-    /// <summary>The slot occupied by the upgrade at the corresponding position in <see cref="UpgradeItemIds" />. Starts at 0.</summary>
-    public required IReadOnlyList<int>? UpgradeSlotIndices { get; init; }
+    /// <summary>If present, indicates the item ID of an upgrade component in the second slot of a two-handed weapon.</summary>
+    public required int? SecondarySuffixItemId { get; init; }
 
     /// <summary>The item IDs of infusions in this item.</summary>
     public required IReadOnlyList<int>? InfusionItemIds { get; init; }

@@ -81,15 +81,36 @@ internal static class ItemSlotJson
             }
         }
 
+        int? suffixItemId = null, secondarySuffixItemId = null;
+        if (upgrades.Map(values => values.GetList(value => value.GetInt32())) is { } ids)
+        {
+            var indices =
+                upgradeSlotIndices.Map(values => values.GetList(value => value.GetInt32()))!;
+            for (var i = 0; i < ids.Count; i++)
+            {
+                var upgradeId = ids[i];
+                switch (indices[i])
+                {
+                    case 0:
+                        suffixItemId = upgradeId;
+                        break;
+                    case 1:
+                        secondarySuffixItemId = upgradeId;
+                        break;
+                    default:
+                        throw new InvalidOperationException(Strings.UnexpectedArrayLength(ids.Count));
+                }
+            }
+        }
+
         return new ItemSlot
         {
             Id = id.Map(value => value.GetInt32()),
             Count = count.Map(value => value.GetInt32()),
             Charges = charges.Map(value => value.GetInt32()),
             SkinId = skin.Map(value => value.GetInt32()),
-            UpgradeItemIds = upgrades.Map(values => values.GetList(value => value.GetInt32())),
-            UpgradeSlotIndices =
-                upgradeSlotIndices.Map(values => values.GetList(value => value.GetInt32())),
+            SuffixItemId = suffixItemId,
+            SecondarySuffixItemId = secondarySuffixItemId,
             InfusionItemIds = infusions.Map(values => values.GetList(value => value.GetInt32())),
             DyeIds = dyes.Map(values => values.GetList(value => value.GetNullableInt32())),
             Binding = binding.Map(value => value.GetEnum<ItemBinding>(missingMemberBehavior)),
