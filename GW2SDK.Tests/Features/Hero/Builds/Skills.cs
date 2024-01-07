@@ -19,6 +19,9 @@ public class Skills
             skill =>
             {
                 Assert.Empty(skill.SkillFlags.Other);
+                
+                var chatLink = skill.GetChatLink();
+                Assert.Equal(skill.Id, chatLink.SkillId);
             }
         );
     }
