@@ -9,31 +9,31 @@ public sealed record SelectedSpecialization
     public required int Id { get; init; }
 
     /// <summary>The ID of the first selected trait for this specialization, or <c>null</c> if no trait was selected.</summary>
-    public required int? TraitId1 { get; init; }
+    public required int? AdeptTraitId { get; init; }
 
     /// <summary>The ID of the second selected trait for this specialization, or <c>null</c> if no trait was selected.</summary>
-    public required int? TraitId2 { get; init; }
+    public required int? MasterTraitId { get; init; }
 
     /// <summary>The ID of the third selected trait for this specialization, or <c>null</c> if no trait was selected.</summary>
-    public required int? TraitId3 { get; init; }
+    public required int? GrandmasterTraitId { get; init; }
 
     /// <summary>Gets the IDs of the selected traits.</summary>
     /// <returns>The IDs of the selected traits.</returns>
     public IEnumerable<int> SelectedTraitIds()
     {
-        if (TraitId1.HasValue)
+        if (AdeptTraitId.HasValue)
         {
-            yield return TraitId1.Value;
+            yield return AdeptTraitId.Value;
         }
 
-        if (TraitId2.HasValue)
+        if (MasterTraitId.HasValue)
         {
-            yield return TraitId2.Value;
+            yield return MasterTraitId.Value;
         }
 
-        if (TraitId3.HasValue)
+        if (GrandmasterTraitId.HasValue)
         {
-            yield return TraitId3.Value;
+            yield return GrandmasterTraitId.Value;
         }
     }
 }
