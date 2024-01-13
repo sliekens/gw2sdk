@@ -20,6 +20,14 @@ internal ref struct LinkBuffer(Span<byte> buffer)
 
     public void WriteUInt8(byte value) => Buffer[length++] = value;
 
+    public ushort ReadUInt16() => (ushort)(Buffer[length++] | (Buffer[length++] << 8));
+
+    public void WriteUInt16(ushort value)
+    {
+        Buffer[length++] = (byte)(value & 0xFF);
+        Buffer[length++] = (byte)((value >> 8) & 0xFF);
+    }
+
     public int ReadUInt24() =>
         Buffer[length++] | (Buffer[length++] << 8) | (Buffer[length++] << 16);
 
