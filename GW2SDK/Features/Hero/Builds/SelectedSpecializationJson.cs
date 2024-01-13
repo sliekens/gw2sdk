@@ -29,13 +29,13 @@ internal static class SelectedSpecializationJson
             }
         }
 
-        var traitIds = traits.Map(values => values.GetTraitIds(missingMemberBehavior));
+        var (TraitId1, TraitId2, TraitId3) = traits.Map(values => values.GetTraitIds(missingMemberBehavior));
         return new SelectedSpecialization
         {
             Id = id.Map(value => value.GetInt32()),
-            TraitId1 = traitIds.TraitId,
-            TraitId2 = traitIds.TraitId2,
-            TraitId3 = traitIds.TraitId3
+            TraitId1 = TraitId1,
+            TraitId2 = TraitId2,
+            TraitId3 = TraitId3
         };
     }
 }
