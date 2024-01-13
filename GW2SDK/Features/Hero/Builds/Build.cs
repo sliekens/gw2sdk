@@ -41,4 +41,19 @@ public sealed record Build
     /// <summary>Indicates whether <see cref="Legends" /> are present.</summary>
     [MemberNotNullWhen(true, nameof(Legends))]
     public bool IsRevenantBuild => Profession == ProfessionName.Revenant;
+
+    /// <summary>Gets the IDs of the selected skills.</summary>
+    /// <returns>The IDs of the selected skills.</returns>
+    public IEnumerable<int> SelectedSkillIds()
+    {
+        foreach (var id in Skills.SelectedSkillIds())
+        {
+            yield return id;
+        }
+
+        foreach (var id in AquaticSkills.SelectedSkillIds())
+        {
+            yield return id;
+        }
+    }
 }
