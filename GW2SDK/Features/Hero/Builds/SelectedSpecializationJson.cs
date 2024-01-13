@@ -5,18 +5,27 @@ namespace GuildWars2.Hero.Builds;
 
 internal static class SelectedSpecializationJson
 {
-    public static SelectedSpecialization GetSelectedSpecialization(
+    public static SelectedSpecialization? GetSelectedSpecialization(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        NullableMember id = "id";
+        // The API returns "id": null if no specialization is selected, but treat it as required anyway
+        RequiredMember id = "id";
         RequiredMember traits = "traits";
 
         foreach (var member in json.EnumerateObject())
         {
             if (member.Name == id.Name)
             {
+                // The API returns { "id": null } if no specialization is selected
+                // It's more clear to make the entire object null
+                if (member.Value.ValueKind == JsonValueKind.Null)
+                {
+                    return null;
+                }
+
+
                 id = member;
             }
             else if (member.Name == traits.Name)

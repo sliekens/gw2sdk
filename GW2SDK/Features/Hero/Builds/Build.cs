@@ -13,25 +13,25 @@ public sealed record Build
     /// <summary>The profession that can use this build.</summary>
     public required ProfessionName Profession { get; init; }
 
-    /// <summary>The first selected specialization for this build.</summary>
+    /// <summary>The first selected specialization, or <c>null</c> if no specialization was selected.</summary>
     public required SelectedSpecialization? Specialization1 { get; init; }
 
-    /// <summary>The second selected specialization for this build.</summary>
+    /// <summary>The second selected specialization, or <c>null</c> if no specialization was selected.</summary>
     public required SelectedSpecialization? Specialization2 { get; init; }
 
-    /// <summary>The third selected specialization for this build.</summary>
+    /// <summary>The third selected specialization, or <c>null</c> if no specialization was selected.</summary>
     public required SelectedSpecialization? Specialization3 { get; init; }
 
-    /// <summary>The skills selected for this build.</summary>
+    /// <summary>The selected skills.</summary>
     public required SkillBar Skills { get; init; }
 
-    /// <summary>The underwater skills selected for this build.</summary>
+    /// <summary>The selected skills for underwater.</summary>
     public required SkillBar AquaticSkills { get; init; }
 
-    /// <summary>The pets selected for this build. (Rangers only.)</summary>
+    /// <summary>The selected pets for Rangers, or <c>null</c> for other professions.</summary>
     public required SelectedPets? Pets { get; init; }
 
-    /// <summary>The legends selected for this build. (Revenants only.)</summary>
+    /// <summary>The selected legends for Revenants, or <c>null</c> for other professions.</summary>
     public required SelectedLegends? Legends { get; init; }
 
     /// <summary>Indicates whether <see cref="Pets" /> are present.</summary>

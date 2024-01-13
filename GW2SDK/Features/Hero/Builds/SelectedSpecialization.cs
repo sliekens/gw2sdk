@@ -5,8 +5,8 @@
 [DataTransferObject]
 public sealed record SelectedSpecialization
 {
-    /// <summary>The specialization ID, or <c>null</c> if no specialization was selected.</summary>
-    public required int? Id { get; init; }
+    /// <summary>The specialization ID.</summary>
+    public required int Id { get; init; }
 
     /// <summary>The ID of the first selected trait for this specialization, or <c>null</c> if no trait was selected.</summary>
     public required int? TraitId1 { get; init; }
