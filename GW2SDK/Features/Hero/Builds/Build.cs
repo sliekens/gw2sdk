@@ -62,6 +62,26 @@ public sealed record Build
         }
     }
 
+    /// <summary>Gets the IDs of the selected traits.</summary>
+    /// <returns>The IDs of the selected traits.</returns>
+    public IEnumerable<int> SelectedTraitIds()
+    {
+        foreach (var id in Specialization1?.SelectedTraitIds() ?? [])
+        {
+            yield return id;
+        }
+
+        foreach (var id in Specialization2?.SelectedTraitIds() ?? [])
+        {
+            yield return id;
+        }
+
+        foreach (var id in Specialization3?.SelectedTraitIds() ?? [])
+        {
+            yield return id;
+        }
+    }
+
     /// <summary>Gets the IDs of the selected skills.</summary>
     /// <returns>The IDs of the selected skills.</returns>
     public IEnumerable<int> SelectedSkillIds()
