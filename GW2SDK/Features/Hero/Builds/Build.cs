@@ -13,8 +13,14 @@ public sealed record Build
     /// <summary>The profession that can use this build.</summary>
     public required ProfessionName Profession { get; init; }
 
-    /// <summary>The specializations selected for this build.</summary>
-    public required IReadOnlyList<SelectedSpecialization> Specializations { get; init; }
+    /// <summary>The first selected specialization for this build.</summary>
+    public required SelectedSpecialization? Specialization { get; init; }
+
+    /// <summary>The second selected specialization for this build.</summary>
+    public required SelectedSpecialization? Specialization2 { get; init; }
+
+    /// <summary>The third selected specialization for this build.</summary>
+    public required SelectedSpecialization? Specialization3 { get; init; }
 
     /// <summary>The skills selected for this build.</summary>
     public required SkillBar Skills { get; init; }

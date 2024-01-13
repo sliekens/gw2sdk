@@ -56,18 +56,15 @@ internal static class BuildJson
             }
         }
 
+        var selectedSpecializations = specializations.Map(values => values.GetSelectedSpecializations(missingMemberBehavior));
         return new Build
         {
             Name = name.Map(value => value.GetStringRequired()),
             Profession =
                 profession.Map(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
-            Specializations =
-                specializations.Map(
-                    values =>
-                        values.GetList(
-                            value => value.GetSelectedSpecialization(missingMemberBehavior)
-                        )
-                ),
+            Specialization = selectedSpecializations.Specialization,
+            Specialization2 = selectedSpecializations.Specialization2,
+            Specialization3 = selectedSpecializations.Specialization3,
             Skills = skills.Map(value => value.GetSkillBar(missingMemberBehavior)),
             AquaticSkills = aquaticSkills.Map(value => value.GetSkillBar(missingMemberBehavior)),
             PetSkills = pets.Map(value => value.GetPetSkillBar(missingMemberBehavior)),
