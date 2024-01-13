@@ -42,6 +42,26 @@ public sealed record Build
     [MemberNotNullWhen(true, nameof(Legends))]
     public bool IsRevenantBuild => Profession == ProfessionName.Revenant;
 
+    /// <summary>Gets the IDs of the selected specializations.</summary>
+    /// <returns>The IDs of the selected specializations.</returns>
+    public IEnumerable<int> SelectedSpecializationIds()
+    {
+        if (Specialization1 is not null)
+        {
+            yield return Specialization1.Id;
+        }
+
+        if (Specialization2 is not null)
+        {
+            yield return Specialization2.Id;
+        }
+
+        if (Specialization3 is not null)
+        {
+            yield return Specialization3.Id;
+        }
+    }
+
     /// <summary>Gets the IDs of the selected skills.</summary>
     /// <returns>The IDs of the selected skills.</returns>
     public IEnumerable<int> SelectedSkillIds()
