@@ -9,7 +9,7 @@ public sealed record SelectedSpecialization
     public required int? Id { get; init; }
 
     /// <summary>The ID of the first selected trait for this specialization, or <c>null</c> if no trait was selected.</summary>
-    public required int? TraitId { get; init; }
+    public required int? TraitId1 { get; init; }
 
     /// <summary>The ID of the second selected trait for this specialization, or <c>null</c> if no trait was selected.</summary>
     public required int? TraitId2 { get; init; }
@@ -21,9 +21,9 @@ public sealed record SelectedSpecialization
     /// <returns>The IDs of the selected traits.</returns>
     public IEnumerable<int> SelectedTraitIds()
     {
-        if (TraitId.HasValue)
+        if (TraitId1.HasValue)
         {
-            yield return TraitId.Value;
+            yield return TraitId1.Value;
         }
 
         if (TraitId2.HasValue)

@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Builds;
 
 internal static class PetIdsJson
 {
-    public static (int? PetId, int? PetId2) GetPetIds(
+    public static (int? PetId1, int? PetId2) GetPetIds(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )

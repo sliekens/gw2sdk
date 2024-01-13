@@ -33,7 +33,7 @@ internal static class SelectedSpecializationJson
         return new SelectedSpecialization
         {
             Id = id.Map(value => value.GetInt32()),
-            TraitId = traitIds.TraitId,
+            TraitId1 = traitIds.TraitId,
             TraitId2 = traitIds.TraitId2,
             TraitId3 = traitIds.TraitId3
         };

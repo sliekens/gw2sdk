@@ -9,7 +9,7 @@ public sealed record SkillBar
     public required int? HealSkillId { get; init; }
 
     /// <summary>The ID of the first utility skill or <c>null</c> if no utility skill was selected.</summary>
-    public required int? UtilitySkillId { get; init; }
+    public required int? UtilitySkillId1 { get; init; }
 
     /// <summary>The ID of the second utility skill or <c>null</c> if no utility skill was selected.</summary>
     public required int? UtilitySkillId2 { get; init; }
@@ -29,9 +29,9 @@ public sealed record SkillBar
             yield return HealSkillId.Value;
         }
 
-        if (UtilitySkillId.HasValue)
+        if (UtilitySkillId1.HasValue)
         {
-            yield return UtilitySkillId.Value;
+            yield return UtilitySkillId1.Value;
         }
 
         if (UtilitySkillId2.HasValue)

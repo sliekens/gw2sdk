@@ -38,7 +38,7 @@ internal static class SkillBarJson
         return new SkillBar
         {
             HealSkillId = heal.Map(value => value.GetInt32()),
-            UtilitySkillId = utilitySkills.UtilitySkillId,
+            UtilitySkillId1 = utilitySkills.UtilitySkillId,
             UtilitySkillId2 = utilitySkills.UtilitySkillId2,
             UtilitySkillId3 = utilitySkills.UtilitySkillId3,
             EliteSkillId = elite.Map(value => value.GetInt32())

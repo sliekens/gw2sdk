@@ -23,7 +23,7 @@ public class StoredBuilds
                     Enum.IsDefined(typeof(ProfessionName), space.Profession),
                     "Enum.IsDefined(space.Profession)"
                 );
-                Assert.True(space.Specialization?.Id is null or > 0);
+                Assert.True(space.Specialization1?.Id is null or > 0);
                 Assert.True(space.Specialization2?.Id is null or > 0);
                 Assert.True(space.Specialization3?.Id is null or > 0);
                 Assert.NotNull(space.Skills);

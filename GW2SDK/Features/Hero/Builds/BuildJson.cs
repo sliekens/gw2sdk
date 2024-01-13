@@ -56,7 +56,7 @@ internal static class BuildJson
             }
         }
 
-        var selectedSpecializations = specializations.Map(values => values.GetSelectedSpecializations(missingMemberBehavior));
+        var (Specialization1, Specialization2, Specialization3) = specializations.Map(values => values.GetSelectedSpecializations(missingMemberBehavior));
         var legendIds = legends.Map(values => values.GetLegendIds(missingMemberBehavior));
         var aquaticLegendIds = aquaticLegends.Map(values => values.GetLegendIds(missingMemberBehavior));
         return new Build
@@ -64,9 +64,9 @@ internal static class BuildJson
             Name = name.Map(value => value.GetStringRequired()),
             Profession =
                 profession.Map(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
-            Specialization = selectedSpecializations.Specialization,
-            Specialization2 = selectedSpecializations.Specialization2,
-            Specialization3 = selectedSpecializations.Specialization3,
+            Specialization1 = Specialization1,
+            Specialization2 = Specialization2,
+            Specialization3 = Specialization3,
             Skills = skills.Map(value => value.GetSkillBar(missingMemberBehavior)),
             AquaticSkills = aquaticSkills.Map(value => value.GetSkillBar(missingMemberBehavior)),
             Pets = pets.Map(value => value.GetSelectedPets(missingMemberBehavior)),
@@ -74,9 +74,9 @@ internal static class BuildJson
             {
                 (not null, not null) => new SelectedLegends
                 {
-                    Terrestrial1 = legendIds.Value.LegendId,
+                    Terrestrial1 = legendIds.Value.LegendId1,
                     Terrestrial2 = legendIds.Value.LegendId2,
-                    Aquatic1 = aquaticLegendIds.Value.LegendId,
+                    Aquatic1 = aquaticLegendIds.Value.LegendId1,
                     Aquatic2 = aquaticLegendIds.Value.LegendId2
                 },
                 _ => null

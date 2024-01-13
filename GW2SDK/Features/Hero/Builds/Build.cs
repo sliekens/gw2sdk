@@ -14,7 +14,7 @@ public sealed record Build
     public required ProfessionName Profession { get; init; }
 
     /// <summary>The first selected specialization for this build.</summary>
-    public required SelectedSpecialization? Specialization { get; init; }
+    public required SelectedSpecialization? Specialization1 { get; init; }
 
     /// <summary>The second selected specialization for this build.</summary>
     public required SelectedSpecialization? Specialization2 { get; init; }

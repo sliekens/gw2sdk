@@ -4,7 +4,7 @@ namespace GuildWars2.Hero.Builds;
 
 internal static class LegendIdsJson
 {
-    public static (string? LegendId, string? LegendId2) GetLegendIds(
+    public static (string? LegendId1, string? LegendId2) GetLegendIds(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
