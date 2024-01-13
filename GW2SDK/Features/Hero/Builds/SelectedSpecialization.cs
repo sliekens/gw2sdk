@@ -5,10 +5,35 @@
 [DataTransferObject]
 public sealed record SelectedSpecialization
 {
-    /// <summary>The specialization ID or <c>null</c> if no specialization was selected.</summary>
+    /// <summary>The specialization ID, or <c>null</c> if no specialization was selected.</summary>
     public required int? Id { get; init; }
 
-    /// <summary>The IDs of the selected traits. This list is always length 3 because there are 3 trait slots per
-    /// specialization. Empty trait slots are represented as <c>null</c>.</summary>
-    public required IReadOnlyList<int?> TraitIds { get; init; }
+    /// <summary>The ID of the first selected trait for this specialization, or <c>null</c> if no trait was selected.</summary>
+    public required int? TraitId { get; init; }
+
+    /// <summary>The ID of the second selected trait for this specialization, or <c>null</c> if no trait was selected.</summary>
+    public required int? TraitId2 { get; init; }
+
+    /// <summary>The ID of the third selected trait for this specialization, or <c>null</c> if no trait was selected.</summary>
+    public required int? TraitId3 { get; init; }
+
+    /// <summary>Gets the IDs of the selected traits.</summary>
+    /// <returns>The IDs of the selected traits.</returns>
+    public IEnumerable<int> SelectedTraitIds()
+    {
+        if (TraitId.HasValue)
+        {
+            yield return TraitId.Value;
+        }
+
+        if (TraitId2.HasValue)
+        {
+            yield return TraitId2.Value;
+        }
+
+        if (TraitId3.HasValue)
+        {
+            yield return TraitId3.Value;
+        }
+    }
 }
