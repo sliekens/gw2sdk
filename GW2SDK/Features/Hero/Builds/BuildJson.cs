@@ -69,7 +69,7 @@ internal static class BuildJson
             Specialization3 = selectedSpecializations.Specialization3,
             Skills = skills.Map(value => value.GetSkillBar(missingMemberBehavior)),
             AquaticSkills = aquaticSkills.Map(value => value.GetSkillBar(missingMemberBehavior)),
-            PetSkills = pets.Map(value => value.GetPetSkillBar(missingMemberBehavior)),
+            Pets = pets.Map(value => value.GetSelectedPets(missingMemberBehavior)),
             Legends = (legendIds, aquaticLegendIds) switch
             {
                 (not null, not null) => new SelectedLegends

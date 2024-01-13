@@ -3,9 +3,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Builds;
 
-internal static class PetSkillBarJson
+internal static class SelectedPetsJson
 {
-    public static PetSkillBar GetPetSkillBar(
+    public static SelectedPets GetSelectedPets(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -29,12 +29,14 @@ internal static class PetSkillBarJson
             }
         }
 
-        return new PetSkillBar
+        var (terrestrial1, terrestrial2) = terrestrial.Map(values => values.GetPetIds(missingMemberBehavior));
+        var (aquatic1, aquatic2) = aquatic.Map(values => values.GetPetIds(missingMemberBehavior));
+        return new SelectedPets
         {
-            SkillIds =
-                terrestrial.Map(values => values.GetList(value => value.GetNullableInt32())),
-            AquaticSkillIds =
-                aquatic.Map(values => values.GetList(value => value.GetNullableInt32()))
+            Terrestrial1 = terrestrial1,
+            Terrestrial2 = terrestrial2,
+            Aquatic1 = terrestrial1,
+            Aquatic2 = terrestrial2
         };
     }
 }

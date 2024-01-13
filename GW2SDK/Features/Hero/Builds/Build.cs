@@ -28,14 +28,14 @@ public sealed record Build
     /// <summary>The underwater skills selected for this build.</summary>
     public required SkillBar AquaticSkills { get; init; }
 
-    /// <summary>The pet skills selected for this build. (Rangers only.)</summary>
-    public required PetSkillBar? PetSkills { get; init; }
+    /// <summary>The pets selected for this build. (Rangers only.)</summary>
+    public required SelectedPets? Pets { get; init; }
 
     /// <summary>The legends selected for this build. (Revenants only.)</summary>
     public required SelectedLegends? Legends { get; init; }
 
-    /// <summary>Indicates whether <see cref="PetSkills" /> are present.</summary>
-    [MemberNotNullWhen(true, nameof(PetSkills))]
+    /// <summary>Indicates whether <see cref="Pets" /> are present.</summary>
+    [MemberNotNullWhen(true, nameof(Pets))]
     public bool IsRangerBuild => Profession == ProfessionName.Ranger;
 
     /// <summary>Indicates whether <see cref="Legends" /> are present.</summary>
