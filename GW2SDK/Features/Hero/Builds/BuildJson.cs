@@ -13,8 +13,8 @@ internal static class BuildJson
         RequiredMember skills = "skills";
         RequiredMember aquaticSkills = "aquatic_skills";
         OptionalMember pets = "pets";
-        OptionalMember legends = "legends";
-        OptionalMember aquaticLegends = "aquatic_legends";
+        NullableMember legends = "legends";
+        NullableMember aquaticLegends = "aquatic_legends";
 
         foreach (var member in json.EnumerateObject())
         {
@@ -57,6 +57,8 @@ internal static class BuildJson
         }
 
         var selectedSpecializations = specializations.Map(values => values.GetSelectedSpecializations(missingMemberBehavior));
+        var legendIds = legends.Map(values => values.GetLegendIds(missingMemberBehavior));
+        var aquaticLegendIds = aquaticLegends.Map(values => values.GetLegendIds(missingMemberBehavior));
         return new Build
         {
             Name = name.Map(value => value.GetStringRequired()),
@@ -68,9 +70,17 @@ internal static class BuildJson
             Skills = skills.Map(value => value.GetSkillBar(missingMemberBehavior)),
             AquaticSkills = aquaticSkills.Map(value => value.GetSkillBar(missingMemberBehavior)),
             PetSkills = pets.Map(value => value.GetPetSkillBar(missingMemberBehavior)),
-            Legends = legends.Map(values => values.GetList(value => value.GetString())),
-            AquaticLegends =
-                aquaticLegends.Map(values => values.GetList(value => value.GetString()))
+            Legends = (legendIds, aquaticLegendIds) switch
+            {
+                (not null, not null) => new SelectedLegends
+                {
+                    Terrestrial1 = legendIds.Value.LegendId,
+                    Terrestrial2 = legendIds.Value.LegendId2,
+                    Aquatic1 = aquaticLegendIds.Value.LegendId,
+                    Aquatic2 = aquaticLegendIds.Value.LegendId2
+                },
+                _ => null
+            }
         };
     }
 }
