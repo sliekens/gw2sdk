@@ -34,11 +34,13 @@ internal static class SkillBarJson
             }
         }
 
+        var utilitySkills = utilities.Map(values => values.GetUtilitySkillIds(missingMemberBehavior));
         return new SkillBar
         {
             HealSkillId = heal.Map(value => value.GetInt32()),
-            UtilitySkillIds =
-                utilities.Map(values => values.GetList(value => value.GetNullableInt32())),
+            UtilitySkillId = utilitySkills.UtilitySkillId,
+            UtilitySkillId2 = utilitySkills.UtilitySkillId2,
+            UtilitySkillId3 = utilitySkills.UtilitySkillId3,
             EliteSkillId = elite.Map(value => value.GetInt32())
         };
     }
