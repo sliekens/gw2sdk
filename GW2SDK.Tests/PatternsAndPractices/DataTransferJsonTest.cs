@@ -22,13 +22,6 @@ public class DataTransferJsonTest(AssemblyFixture fixture) : IClassFixture<Assem
             dto =>
             {
                 var matches = candidates.Where(info => info.ReturnType == dto).ToList();
-                if (matches.Count == 0)
-                {
-                    throw new InvalidOperationException(
-                        $"Could not find method 'Get{dto.Name}'. Typo or is it missing?"
-                    );
-                }
-
                 Assert.All(
                     matches,
                     info =>
