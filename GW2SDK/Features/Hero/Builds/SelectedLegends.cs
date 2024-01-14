@@ -8,12 +8,12 @@ public sealed record SelectedLegends
     /// <summary>The ID of the first selected legend, or <c>null</c> if no legend was selected.</summary>
     public required string? Terrestrial1 { get; init; }
 
-    /// <summary>The ID of the selected selected legend, or <c>null</c> if no legend was selected.</summary>
+    /// <summary>The ID of the other selected legend, or <c>null</c> if no legend was selected.</summary>
     public required string? Terrestrial2 { get; init; }
 
     /// <summary>The ID of the first selected legend for underwater, or <c>null</c> if no legend was selected.</summary>
     public required string? Aquatic1 { get; init; }
 
-    /// <summary>The ID of the second selected legend for underwater, or <c>null</c> if no legend was selected.</summary>
+    /// <summary>The ID of the other selected legend for underwater, or <c>null</c> if no legend was selected.</summary>
     public required string? Aquatic2 { get; init; }
 }

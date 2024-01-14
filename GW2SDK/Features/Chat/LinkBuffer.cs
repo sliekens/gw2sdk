@@ -16,6 +16,10 @@ internal ref struct LinkBuffer(Span<byte> buffer)
     /// <returns>The index of the skipped byte.</returns>
     public int Skip() => ++length - 1;
 
+    public void Padding(int length) => this.length += length;
+
+    public bool EndOfFile => length >= Buffer.Length;
+
     public byte ReadUInt8() => Buffer[length++];
 
     public void WriteUInt8(byte value) => Buffer[length++] = value;
