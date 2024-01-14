@@ -57,8 +57,8 @@ internal static class BuildJson
         }
 
         var (Specialization1, Specialization2, Specialization3) = specializations.Map(values => values.GetSelectedSpecializations(missingMemberBehavior));
-        var legendIds = legends.Map(values => values.GetLegendIds(missingMemberBehavior));
-        var aquaticLegendIds = aquaticLegends.Map(values => values.GetLegendIds(missingMemberBehavior));
+        var legendIds = legends.Map(values => values.GetLegendIds(Specialization1, Specialization2, Specialization3, missingMemberBehavior));
+        var aquaticLegendIds = aquaticLegends.Map(values => values.GetLegendIds(Specialization1, Specialization2, Specialization3, missingMemberBehavior));
         return new Build
         {
             Name = name.Map(value => value.GetStringRequired()),
