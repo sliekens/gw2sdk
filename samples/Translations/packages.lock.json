@@ -2,6 +2,11 @@
   "version": 1,
   "dependencies": {
     "net8.0": {
+      "Microsoft.NET.ILLink.Tasks": {
+        "type": "Transitive",
+        "resolved": "8.0.1",
+        "contentHash": "ADdJXuKNjwZDfBmybMnpvwd5CK3gp92WkWqqeQhW4W+q4MO3Qaa9QyW2DcFLAvCDMcCWxT5hRXqGdv13oon7nA=="
+      },
       "System.Text.Encodings.Web": {
         "type": "Transitive",
         "resolved": "8.0.0",
@@ -18,6 +23,7 @@
       "gw2sdk": {
         "type": "Project",
         "dependencies": {
+          "Microsoft.NET.ILLink.Tasks": "[8.0.1, )",
           "System.Text.Json": "[8.0.1, )"
         }
       }

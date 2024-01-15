@@ -430,6 +430,11 @@
         "resolved": "2.3.2",
         "contentHash": "Oh1qXXFdJFcHozvb4H6XYLf2W0meZFuG0A+TfapFPj9z5fd4vxiARGEhAaLj/6XWQaMYIv4SH/9Q6H78Hw0E2Q=="
       },
+      "Microsoft.NET.ILLink.Tasks": {
+        "type": "Transitive",
+        "resolved": "8.0.1",
+        "contentHash": "ADdJXuKNjwZDfBmybMnpvwd5CK3gp92WkWqqeQhW4W+q4MO3Qaa9QyW2DcFLAvCDMcCWxT5hRXqGdv13oon7nA=="
+      },
       "Polly.Extensions": {
         "type": "Transitive",
         "resolved": "8.2.0",
@@ -481,6 +486,7 @@
       "gw2sdk": {
         "type": "Project",
         "dependencies": {
+          "Microsoft.NET.ILLink.Tasks": "[8.0.1, )",
           "System.Text.Json": "[8.0.1, )"
         }
       }
