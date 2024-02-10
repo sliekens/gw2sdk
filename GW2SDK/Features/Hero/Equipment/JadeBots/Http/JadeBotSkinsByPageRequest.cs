@@ -1,31 +1,37 @@
 ﻿using GuildWars2.Http;
+using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.JadeBots.Http;
 
-internal sealed class JadeBotByIdRequest(int jadeBotId) : IHttpRequest<JadeBot>
+internal sealed class JadeBotSkinsByPageRequest(int pageIndex) : IHttpRequest<HashSet<JadeBotSkin>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/jadebots") { AcceptEncoding = "gzip" };
 
-    public int JadeBotId { get; } = jadeBotId;
+    public int PageIndex { get; } = pageIndex;
+
+    public int? PageSize { get; init; }
 
     public Language? Language { get; init; }
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<(JadeBot Value, MessageContext Context)> SendAsync(
+    public async Task<(HashSet<JadeBotSkin> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
     {
+        QueryBuilder search = new() { { "page", PageIndex } };
+        if (PageSize.HasValue)
+        {
+            search.Add("page_size", PageSize.Value);
+        }
+
+        search.Add("v", SchemaVersion.Recommended);
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = new QueryBuilder
-                    {
-                        { "id", JadeBotId },
-                        { "v", SchemaVersion.Recommended }
-                    },
+                    Arguments = search,
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 HttpCompletionOption.ResponseHeadersRead,
@@ -36,7 +42,7 @@ internal sealed class JadeBotByIdRequest(int jadeBotId) : IHttpRequest<JadeBot>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetJadeBot(MissingMemberBehavior);
+        var value = json.RootElement.GetSet(entry => entry.GetJadeBotSkin(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }
 }

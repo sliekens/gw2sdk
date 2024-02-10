@@ -2,14 +2,14 @@
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.JadeBots;
 
-public class JadeBots
+public class JadeBotSkins
 {
     [Fact]
     public async Task Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.Equipment.JadeBots.GetJadeBots();
+        var (actual, context) = await sut.Hero.Equipment.JadeBots.GetJadeBotSkins();
 
         Assert.NotEmpty(actual);
         Assert.NotNull(context.ResultContext);

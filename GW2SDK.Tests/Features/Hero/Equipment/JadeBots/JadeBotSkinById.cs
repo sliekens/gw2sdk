@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.JadeBots;
 
-public class JadeBotById
+public class JadeBotSkinById
 {
     [Fact]
     public async Task Can_be_found()
@@ -11,7 +11,7 @@ public class JadeBotById
 
         const int id = 2;
 
-        var (actual, _) = await sut.Hero.Equipment.JadeBots.GetJadeBotById(id);
+        var (actual, _) = await sut.Hero.Equipment.JadeBots.GetJadeBotSkinById(id);
 
         Assert.Equal(id, actual.Id);
         actual.Has_name();

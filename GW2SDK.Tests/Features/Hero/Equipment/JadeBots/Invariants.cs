@@ -4,13 +4,13 @@ namespace GuildWars2.Tests.Features.Hero.Equipment.JadeBots;
 
 internal static class Invariants
 {
-    internal static void Has_id(this JadeBot actual) => Assert.True(actual.Id > 0);
+    internal static void Has_id(this JadeBotSkin actual) => Assert.True(actual.Id > 0);
 
-    internal static void Has_name(this JadeBot actual) => Assert.NotEmpty(actual.Name);
+    internal static void Has_name(this JadeBotSkin actual) => Assert.NotEmpty(actual.Name);
 
-    internal static void Has_description(this JadeBot actual) =>
+    internal static void Has_description(this JadeBotSkin actual) =>
         Assert.NotEmpty(actual.Description);
 
-    internal static void Has_unlock_item(this JadeBot actual) =>
+    internal static void Has_unlock_item(this JadeBotSkin actual) =>
         Assert.True(actual.UnlockItemId > 0);
 }

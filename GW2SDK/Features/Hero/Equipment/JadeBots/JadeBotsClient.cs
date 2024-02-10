@@ -16,7 +16,7 @@ public sealed class JadeBotsClient
 
     #region v2/account/jadebots
 
-    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedJadeBots(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedJadeBotSkins(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -29,13 +29,13 @@ public sealed class JadeBotsClient
 
     #region v2/jadebots
 
-    public Task<(HashSet<JadeBot> Value, MessageContext Context)> GetJadeBots(
+    public Task<(HashSet<JadeBotSkin> Value, MessageContext Context)> GetJadeBotSkins(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JadeBotsRequest request = new()
+        JadeBotSkinsRequest request = new()
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -43,22 +43,22 @@ public sealed class JadeBotsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<int> Value, MessageContext Context)> GetJadeBotsIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetJadeBotSkinsIndex(
         CancellationToken cancellationToken = default
     )
     {
-        JadeBotsIndexRequest request = new();
+        JadeBotSkinsIndexRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(JadeBot Value, MessageContext Context)> GetJadeBotById(
-        int jadeBotId,
+    public Task<(JadeBotSkin Value, MessageContext Context)> GetJadeBotSkinById(
+        int jadeBotSkinId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JadeBotByIdRequest request = new(jadeBotId)
+        JadeBotSkinByIdRequest request = new(jadeBotSkinId)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -66,14 +66,14 @@ public sealed class JadeBotsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<JadeBot> Value, MessageContext Context)> GetJadeBotsByIds(
-        IReadOnlyCollection<int> jadeBotIds,
+    public Task<(HashSet<JadeBotSkin> Value, MessageContext Context)> GetJadeBotSkinsByIds(
+        IReadOnlyCollection<int> jadeBotSkinIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JadeBotsByIdsRequest request = new(jadeBotIds)
+        JadeBotSkinsByIdsRequest request = new(jadeBotSkinIds)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -81,7 +81,7 @@ public sealed class JadeBotsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<JadeBot> Value, MessageContext Context)> GetJadeBotsByPage(
+    public Task<(HashSet<JadeBotSkin> Value, MessageContext Context)> GetJadeBotSkinsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -89,7 +89,7 @@ public sealed class JadeBotsClient
         CancellationToken cancellationToken = default
     )
     {
-        JadeBotsByPageRequest request = new(pageIndex)
+        JadeBotSkinsByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             Language = language,

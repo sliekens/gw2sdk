@@ -3,9 +3,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.JadeBots;
 
-internal static class JadeBotJson
+internal static class JadeBotSkinJson
 {
-    public static JadeBot GetJadeBot(
+    public static JadeBotSkin GetJadeBotSkin(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -39,7 +39,7 @@ internal static class JadeBotJson
             }
         }
 
-        return new JadeBot
+        return new JadeBotSkin
         {
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),

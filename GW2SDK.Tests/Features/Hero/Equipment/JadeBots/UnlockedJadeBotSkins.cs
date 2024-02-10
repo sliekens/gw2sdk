@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.JadeBots;
 
-public class UnlockedJadeBots
+public class UnlockedJadeBotSkins
 {
     [Fact]
     public async Task Can_be_listed()
@@ -10,7 +10,7 @@ public class UnlockedJadeBots
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var (actual, _) = await sut.Hero.Equipment.JadeBots.GetUnlockedJadeBots(accessToken.Key);
+        var (actual, _) = await sut.Hero.Equipment.JadeBots.GetUnlockedJadeBotSkins(accessToken.Key);
 
         Assert.NotNull(actual);
     }

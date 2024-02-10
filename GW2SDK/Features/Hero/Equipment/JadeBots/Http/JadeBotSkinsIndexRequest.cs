@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.JadeBots.Http;
 
-internal sealed class JadeBotsIndexRequest : IHttpRequest<HashSet<int>>
+internal sealed class JadeBotSkinsIndexRequest : IHttpRequest<HashSet<int>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/jadebots")
     {
