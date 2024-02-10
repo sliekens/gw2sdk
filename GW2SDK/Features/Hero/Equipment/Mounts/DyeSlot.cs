@@ -4,7 +4,7 @@
 [DataTransferObject]
 public sealed record DyeSlot
 {
-    public required int ColorId { get; init; }
+    public required int DyeId { get; init; }
 
     public required Material Material { get; init; }
 }

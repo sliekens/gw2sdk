@@ -30,7 +30,7 @@ internal static class DyeSlotJson
 
         return new DyeSlot
         {
-            ColorId = colorId.Map(value => value.GetInt32()),
+            DyeId = colorId.Map(value => value.GetInt32()),
             Material = material.Map(value => value.GetEnum<Material>(missingMemberBehavior))
         };
     }
