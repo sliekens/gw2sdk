@@ -1,25 +1,44 @@
 ﻿namespace GuildWars2.Hero.Equipment.Mounts;
 
+/// <summary>The mount types.</summary>
 [PublicAPI]
 public enum MountName
 {
-    Griffon = 1,
+    /// <summary>Swift, strong, and agile, raptors are stalwart explorers and great companions for exploring the far reaches of
+    /// the Crystal Desert.</summary>
+    Raptor = 1,
 
-    Jackal = 11,
+    /// <summary>Springers are bounding beasts whose powerful legs easily maneuver them through the craggy landscapes of the
+    /// Desert Highlands and beyond.</summary>
+    Springer,
 
-    Raptor = 21,
+    /// <summary>The graceful movements of the skimmer allow it to float above land and water, which is especially useful on
+    /// the Elon River and other hazardous parts of the desert.</summary>
+    Skimmer,
 
-    RollerBeetle = 31,
+    /// <summary>A magical construct formed by fusing the unbound energy of the Forgotten with the very stones and sand of the
+    /// Crystal Desert.</summary>
+    Jackal,
 
-    Skiff = 41,
+    /// <summary>A once-humble scarab beetle, bulked up to phenomenal size and strength by asuran science.</summary>
+    RollerBeetle,
 
-    Skimmer = 51,
+    /// <summary>Glorious and noble beasts, the art of taming griffons for flight has only been recently recovered.</summary>
+    Griffon,
 
-    Skyscale = 61,
+    /// <summary>Trained for battle and siege warfare, the warclaw knows no fear.</summary>
+    Warclaw,
 
-    Springer = 71,
+    /// <summary>Thanks to your training, your skyscale now has an instinctive bond with you and a desire to soar to new
+    /// heights across Tyria.</summary>
+    Skyscale,
 
-    Turtle = 81,
+    /// <summary>Your personal skiff is your home away from home on the waves. Explore, relax, and ferry your whole party! Drop
+    /// anchor to fish, walk around, and more.</summary>
+    Skiff,
 
-    Warclaw = 91
+    /// <summary>The Luxon Armada’s descendants have raised and trained these massive turtles for over two hundred years. Each
+    /// mount can bear two riders: one to handle the Turtle, and another to operate the weapons strapped to its shell. Raise
+    /// your own walking war machine and take a friend out for combat adventures!</summary>
+    SiegeTurtle
 }

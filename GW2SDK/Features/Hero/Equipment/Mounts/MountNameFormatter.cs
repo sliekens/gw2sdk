@@ -19,7 +19,7 @@ public static class MountNameFormatter
             MountName.Springer => "springer",
             MountName.Warclaw => "warclaw",
             MountName.Skiff => "skiff",
-            MountName.Turtle => "turtle",
+            MountName.SiegeTurtle => "turtle",
             _ => throw new NotSupportedException("Could not format mount name.")
         };
 }

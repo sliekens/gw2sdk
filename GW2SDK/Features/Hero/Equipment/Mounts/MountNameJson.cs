@@ -21,7 +21,7 @@ internal static class MountNameJson
             "skyscale" => MountName.Skyscale,
             "springer" => MountName.Springer,
             "warclaw" => MountName.Warclaw,
-            "turtle" => MountName.Turtle,
+            "turtle" => MountName.SiegeTurtle,
             _ when missingMemberBehavior is MissingMemberBehavior.Error =>
                 throw new InvalidOperationException(Strings.UnexpectedMember(text)),
             _ => (MountName)text.GetDeterministicHashCode()
