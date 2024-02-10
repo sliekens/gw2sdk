@@ -53,7 +53,7 @@ internal static class MiniatureJson
         {
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),
-            Unlock = unlock.Map(value => value.GetString()) ?? "",
+            LockedText = unlock.Map(value => value.GetString()) ?? "",
             IconHref = icon.Map(value => value.GetStringRequired()),
             Order = order.Map(value => value.GetInt32()),
             ItemId = itemId.Map(value => value.GetInt32())
