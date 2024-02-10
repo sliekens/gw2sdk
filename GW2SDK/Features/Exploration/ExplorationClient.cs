@@ -983,7 +983,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<MapSummary> Value, MessageContext Context)> MapSummariesByIds(
+    public Task<(HashSet<MapSummary> Value, MessageContext Context)> GetMapSummariesByIds(
         IReadOnlyCollection<int> mapIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -1005,7 +1005,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<MapSummary> Value, MessageContext Context)> MapSummariesByPage(
+    public Task<(HashSet<MapSummary> Value, MessageContext Context)> GetMapSummariesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
