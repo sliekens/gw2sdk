@@ -8,13 +8,13 @@ internal sealed class GliderSkinsByIdsRequest : IHttpRequest<HashSet<GliderSkin>
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/gliders") { AcceptEncoding = "gzip" };
 
-    public GliderSkinsByIdsRequest(IReadOnlyCollection<int> gliderIds)
+    public GliderSkinsByIdsRequest(IReadOnlyCollection<int> gliderSkinIds)
     {
-        Check.Collection(gliderIds);
-        GliderIds = gliderIds;
+        Check.Collection(gliderSkinIds);
+        GliderSkinIds = gliderSkinIds;
     }
 
-    public IReadOnlyCollection<int> GliderIds { get; }
+    public IReadOnlyCollection<int> GliderSkinIds { get; }
 
     public Language? Language { get; init; }
 
@@ -30,7 +30,7 @@ internal sealed class GliderSkinsByIdsRequest : IHttpRequest<HashSet<GliderSkin>
                 {
                     Arguments = new QueryBuilder
                     {
-                        { "ids", GliderIds },
+                        { "ids", GliderSkinIds },
                         { "v", SchemaVersion.Recommended }
                     },
                     AcceptLanguage = Language?.Alpha2Code

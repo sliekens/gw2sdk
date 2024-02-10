@@ -2,12 +2,12 @@
 
 namespace GuildWars2.Hero.Equipment.Gliders.Http;
 
-internal sealed class GliderSkinByIdRequest(int gliderId) : IHttpRequest<GliderSkin>
+internal sealed class GliderSkinByIdRequest(int gliderSkinId) : IHttpRequest<GliderSkin>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/gliders") { AcceptEncoding = "gzip" };
 
-    public int GliderId { get; } = gliderId;
+    public int GliderSkinId { get; } = gliderSkinId;
 
     public Language? Language { get; init; }
 
@@ -23,7 +23,7 @@ internal sealed class GliderSkinByIdRequest(int gliderId) : IHttpRequest<GliderS
                 {
                     Arguments = new QueryBuilder
                     {
-                        { "id", GliderId },
+                        { "id", GliderSkinId },
                         { "v", SchemaVersion.Recommended }
                     },
                     AcceptLanguage = Language?.Alpha2Code
