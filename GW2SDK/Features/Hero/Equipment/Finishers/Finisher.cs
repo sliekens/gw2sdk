@@ -20,5 +20,6 @@ public sealed record Finisher
     /// <summary>The URL of the finisher icon.</summary>
     public required string IconHref { get; init; }
 
+    /// <summary>The name of the finisher.</summary>
     public required string Name { get; init; }
 }

@@ -16,6 +16,12 @@ public sealed class FinishersClient
 
     #region v2/account/finishers
 
+    /// <summary>Retrieves the IDs and quantities of finishers unlocked on the account associated with the access token. This
+    /// endpoint is only accessible with a valid access token.</summary>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<UnlockedFinisher> Value, MessageContext Context)> GetUnlockedFinishers(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -34,6 +40,11 @@ public sealed class FinishersClient
 
     #region v2/finishers
 
+    /// <summary>Retrieves all finishers.</summary>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Finisher> Value, MessageContext Context)> GetFinishers(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -48,6 +59,9 @@ public sealed class FinishersClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all finishers.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<int> Value, MessageContext Context)> GetFinishersIndex(
         CancellationToken cancellationToken = default
     )
@@ -56,6 +70,12 @@ public sealed class FinishersClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a finisher by its ID.</summary>
+    /// <param name="finisherId">The finisher ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(Finisher Value, MessageContext Context)> GetFinisherById(
         int finisherId,
         Language? language = default,
@@ -71,6 +91,12 @@ public sealed class FinishersClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves finishers by their IDs.</summary>
+    /// <param name="finisherIds">The finisher IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Finisher> Value, MessageContext Context)> GetFinishersByIds(
         IReadOnlyCollection<int> finisherIds,
         Language? language = default,
@@ -86,6 +112,13 @@ public sealed class FinishersClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of finishers.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Finisher> Value, MessageContext Context)> GetFinishersByPage(
         int pageIndex,
         int? pageSize = default,
