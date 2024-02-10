@@ -10,7 +10,7 @@ internal static class Invariants
         Assert.NotNull(actual.UnlockDetails);
 
     internal static void Has_unlock_items(this Finisher actual) =>
-        Assert.NotNull(actual.UnlockItems);
+        Assert.NotNull(actual.UnlockItemIds);
 
     internal static void Has_order(this Finisher actual) => Assert.True(actual.Order >= 0);
 

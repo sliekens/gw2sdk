@@ -16,5 +16,5 @@ internal static class Invariants
         Assert.True(Enum.IsDefined(typeof(NoveltyKind), actual.Slot));
 
     internal static void Has_unlock_items(this Novelty actual) =>
-        Assert.NotEmpty(actual.UnlockItems);
+        Assert.NotEmpty(actual.UnlockItemIds);
 }

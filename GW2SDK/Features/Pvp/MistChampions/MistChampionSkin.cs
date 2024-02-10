@@ -12,5 +12,6 @@ public sealed record MistChampionSkin
 
     public required bool Default { get; init; }
 
+    /// <summary>The IDs of the items that unlock the mist champion skin when consumed.</summary>
     public required IReadOnlyCollection<int> UnlockItemIds { get; init; }
 }

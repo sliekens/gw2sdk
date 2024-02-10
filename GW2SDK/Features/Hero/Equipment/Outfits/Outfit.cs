@@ -12,7 +12,8 @@ public sealed record Outfit
 
     public required string IconHref { get; init; }
 
-    public required IReadOnlyCollection<int> UnlockItems { get; init; }
+    /// <summary>The IDs of the items that unlock the outfit when consumed.</summary>
+    public required IReadOnlyCollection<int> UnlockItemIds { get; init; }
 
     /// <summary>Gets a chat link object for this outfit.</summary>
     /// <returns>The chat link as an object.</returns>

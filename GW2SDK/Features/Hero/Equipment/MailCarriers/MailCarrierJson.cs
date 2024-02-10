@@ -52,7 +52,7 @@ internal static class MailCarrierJson
         return new MailCarrier
         {
             Id = id.Map(value => value.GetInt32()),
-            UnlockItems = unlockItems.Map(values => values.GetList(value => value.GetInt32())),
+            UnlockItemIds = unlockItems.Map(values => values.GetList(value => value.GetInt32())),
             Order = order.Map(value => value.GetInt32()),
             IconHref = icon.Map(value => value.GetStringRequired()),
             Name = name.Map(value => value.GetStringRequired()),

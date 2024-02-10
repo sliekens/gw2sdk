@@ -11,11 +11,11 @@ internal static class Invariants
     {
         if (actual.Flags.Default)
         {
-            Assert.Empty(actual.UnlockItems);
+            Assert.Empty(actual.UnlockItemIds);
         }
         else
         {
-            Assert.NotEmpty(actual.UnlockItems);
+            Assert.NotEmpty(actual.UnlockItemIds);
         }
     }
 

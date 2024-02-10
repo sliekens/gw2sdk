@@ -44,7 +44,7 @@ internal static class OutfitJson
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),
             IconHref = icon.Map(value => value.GetStringRequired()),
-            UnlockItems = unlockItems.Map(values => values.GetList(value => value.GetInt32()))
+            UnlockItemIds = unlockItems.Map(values => values.GetList(value => value.GetInt32()))
         };
     }
 }

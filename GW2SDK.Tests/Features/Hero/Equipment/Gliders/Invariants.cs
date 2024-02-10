@@ -6,7 +6,7 @@ internal static class Invariants
 {
     internal static void Has_id(this Glider actual) => Assert.True(actual.Id > 0);
 
-    internal static void Has_unlock_items(this Glider actual) => Assert.NotNull(actual.UnlockItems);
+    internal static void Has_unlock_items(this Glider actual) => Assert.NotNull(actual.UnlockItemIds);
 
     internal static void Has_order(this Glider actual) => Assert.True(actual.Order >= 0);
 

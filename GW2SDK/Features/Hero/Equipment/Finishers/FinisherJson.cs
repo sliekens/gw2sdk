@@ -53,7 +53,7 @@ internal static class FinisherJson
         {
             Id = id.Map(value => value.GetInt32()),
             UnlockDetails = unlockDetails.Map(value => value.GetStringRequired()),
-            UnlockItems = unlockItems.Map(values => values.GetList(entry => entry.GetInt32())),
+            UnlockItemIds = unlockItems.Map(values => values.GetList(entry => entry.GetInt32())),
             Order = order.Map(value => value.GetInt32()),
             IconHref = icon.Map(value => value.GetStringRequired()),
             Name = name.Map(value => value.GetStringRequired())

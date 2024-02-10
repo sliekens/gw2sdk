@@ -56,7 +56,7 @@ internal static class NoveltyJson
             Description = description.Map(value => value.GetString()) ?? "",
             IconHref = icon.Map(value => value.GetStringRequired()),
             Slot = slot.Map(value => value.GetEnum<NoveltyKind>(missingMemberBehavior)),
-            UnlockItems = unlockItems.Map(values => values.GetList(value => value.GetInt32()))
+            UnlockItemIds = unlockItems.Map(values => values.GetList(value => value.GetInt32()))
         };
     }
 }

@@ -14,5 +14,6 @@ public sealed record Novelty
 
     public required NoveltyKind Slot { get; init; }
 
-    public required IReadOnlyCollection<int> UnlockItems { get; init; }
+    /// <summary>The IDs of the items that unlock the novelty when consumed.</summary>
+    public required IReadOnlyCollection<int> UnlockItemIds { get; init; }
 }
