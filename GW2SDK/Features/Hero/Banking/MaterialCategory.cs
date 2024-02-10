@@ -13,6 +13,6 @@ public sealed record MaterialCategory
     /// <summary>The IDs of the items in this category.</summary>
     public required IReadOnlyList<int> Items { get; init; }
 
-    /// <summary>The order of this category in the material storage. Categories are sorted by this value in ascending order.</summary>
+    /// <summary>The display order of this category in the material storage.</summary>
     public required int Order { get; init; }
 }

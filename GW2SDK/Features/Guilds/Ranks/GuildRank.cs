@@ -8,7 +8,7 @@ public sealed record GuildRank
     /// <summary>The rank ID.</summary>
     public required string Id { get; init; }
 
-    /// <summary>The display order of the rank.</summary>
+    /// <summary>The display order of the rank in the guild ranks panel.</summary>
     public required int Order { get; init; }
 
     /// <summary>The permissions assigned to the rank.</summary>

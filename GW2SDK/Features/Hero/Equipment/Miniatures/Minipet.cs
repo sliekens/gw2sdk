@@ -12,6 +12,7 @@ public sealed record Minipet
 
     public required string IconHref { get; init; }
 
+    /// <summary>The display order of the miniature in the equipment panel.</summary>
     public required int Order { get; init; }
 
     public required int ItemId { get; init; }

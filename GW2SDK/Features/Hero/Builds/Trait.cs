@@ -17,8 +17,7 @@ public sealed record Trait
     /// elite specialization weapon.</summary>
     public required int Tier { get; init; }
 
-    /// <summary>The sort order of the trait. This determines the order in which traits are displayed in the build template
-    /// panel.</summary>
+    /// <summary>The display order of the trait in the build template panel.</summary>
     public required int Order { get; init; }
 
     /// <summary>The name of the trait as it appears in the tooltip.</summary>

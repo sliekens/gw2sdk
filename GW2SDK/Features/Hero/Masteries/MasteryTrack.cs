@@ -15,7 +15,7 @@ public sealed record MasteryTrack
     public required string Requirement { get; init; }
 
     /// <summary>The display order of the mastery track within its region.</summary>
-    /// <remarks>To use this property effectively, first group mastery tracks by <see cref="Region" />, then sort by order.</remarks>
+    /// <remarks>To sort mastery tracks, first group by <see cref="Region" />, then sort by this property.</remarks>
     public required int Order { get; init; }
 
     /// <summary>The URI of the mastery track background image as it appears in the masteries panel.</summary>

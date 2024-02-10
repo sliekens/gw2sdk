@@ -15,8 +15,7 @@ public sealed record AchievementCategory
     /// <remarks>Can be empty.</remarks>
     public required string Description { get; init; }
 
-    /// <summary>The sort order of the category. This determines the order in which categories are displayed in the sidebar of
-    /// the achievement panel.</summary>
+    /// <summary>The display order of the category in the sidebar of the achievement panel.</summary>
     public required int Order { get; init; }
 
     /// <summary>The icon URI of the category.</summary>

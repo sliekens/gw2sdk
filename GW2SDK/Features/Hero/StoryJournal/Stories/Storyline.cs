@@ -11,7 +11,7 @@ public sealed record Storyline
     /// <summary>The storyline name.</summary>
     public required string Name { get; init; }
 
-    /// <summary>The display order of the storyline within the story journal.</summary>
+    /// <summary>The display order of the storyline in the story journal.</summary>
     public required int Order { get; init; }
 
     /// <summary>The IDs of the stories that belong to this storyline.</summary>
