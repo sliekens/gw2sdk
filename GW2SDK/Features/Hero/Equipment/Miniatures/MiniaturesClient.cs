@@ -16,12 +16,12 @@ public sealed class MiniaturesClient
 
     #region v2/account/minis
 
-    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedMinipets(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedMiniatures(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
     {
-        var request = new UnlockedMinipetsRequest { AccessToken = accessToken };
+        var request = new UnlockedMiniaturesRequest { AccessToken = accessToken };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -29,13 +29,13 @@ public sealed class MiniaturesClient
 
     #region v2/minis
 
-    public Task<(HashSet<Minipet> Value, MessageContext Context)> GetMinipets(
+    public Task<(HashSet<Miniature> Value, MessageContext Context)> GetMiniatures(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MinipetsRequest request = new()
+        MiniaturesRequest request = new()
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -43,22 +43,22 @@ public sealed class MiniaturesClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<int> Value, MessageContext Context)> GetMinipetsIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetMiniaturesIndex(
         CancellationToken cancellationToken = default
     )
     {
-        MinipetsIndexRequest request = new();
+        MiniaturesIndexRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(Minipet Value, MessageContext Context)> GetMinipetById(
-        int minipetId,
+    public Task<(Miniature Value, MessageContext Context)> GetMiniatureById(
+        int miniatureId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MinipetByIdRequest request = new(minipetId)
+        MiniatureByIdRequest request = new(miniatureId)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -66,14 +66,14 @@ public sealed class MiniaturesClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<Minipet> Value, MessageContext Context)> GetMinipetsByIds(
-        IReadOnlyCollection<int> minipetIds,
+    public Task<(HashSet<Miniature> Value, MessageContext Context)> GetMiniaturesByIds(
+        IReadOnlyCollection<int> miniatureIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MinipetsByIdsRequest request = new(minipetIds)
+        MiniaturesByIdsRequest request = new(miniatureIds)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -81,7 +81,7 @@ public sealed class MiniaturesClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<Minipet> Value, MessageContext Context)> GetMinipetsByPage(
+    public Task<(HashSet<Miniature> Value, MessageContext Context)> GetMiniaturesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -89,7 +89,7 @@ public sealed class MiniaturesClient
         CancellationToken cancellationToken = default
     )
     {
-        MinipetsByPageRequest request = new(pageIndex)
+        MiniaturesByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             Language = language,

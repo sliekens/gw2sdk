@@ -2,19 +2,24 @@
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Miniatures;
 
-public class Minipets
+public class MiniaturesByFilter
 {
     [Fact]
-    public async Task Can_be_listed()
+    public async Task Can_be_filtered_by_id()
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.Equipment.Miniatures.GetMinipets();
+        HashSet<int> ids =
+        [
+            1, 2,
+            3
+        ];
 
-        Assert.NotEmpty(actual);
+        var (actual, context) = await sut.Hero.Equipment.Miniatures.GetMiniaturesByIds(ids);
+
+        Assert.Equal(ids.Count, actual.Count);
         Assert.NotNull(context.ResultContext);
-        Assert.Equal(actual.Count, context.ResultContext.ResultCount);
-        Assert.Equal(actual.Count, context.ResultContext.ResultTotal);
+        Assert.Equal(ids.Count, context.ResultContext.ResultCount);
         Assert.All(
             actual,
             entry =>

@@ -3,9 +3,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Miniatures;
 
-internal static class MinipetJson
+internal static class MiniatureJson
 {
-    public static Minipet GetMinipet(
+    public static Miniature GetMiniature(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -49,7 +49,7 @@ internal static class MinipetJson
             }
         }
 
-        return new Minipet
+        return new Miniature
         {
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),

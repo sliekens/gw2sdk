@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Miniatures;
 
-public class MinipetById
+public class MiniatureById
 {
     [Fact]
     public async Task Can_be_found()
@@ -11,7 +11,7 @@ public class MinipetById
 
         const int id = 1;
 
-        var (actual, _) = await sut.Hero.Equipment.Miniatures.GetMinipetById(id);
+        var (actual, _) = await sut.Hero.Equipment.Miniatures.GetMiniatureById(id);
 
         Assert.Equal(id, actual.Id);
         actual.Has_name();

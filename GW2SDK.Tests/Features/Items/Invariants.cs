@@ -170,8 +170,8 @@ internal static class Invariants
     internal static void Has_charges(this SalvageTool actual) =>
         Assert.InRange(actual.Charges, 1, 255);
 
-    internal static void MinipetId_is_positive(this Minipet actual) =>
-        Assert.InRange(actual.MinipetId, 1, int.MaxValue);
+    internal static void MiniatureId_is_positive(this Miniature actual) =>
+        Assert.InRange(actual.MiniatureId, 1, int.MaxValue);
 
     internal static void Validate(this Item actual)
     {
@@ -221,8 +221,8 @@ internal static class Invariants
             case SalvageTool salvageTool:
                 salvageTool.Has_charges();
                 break;
-            case Minipet minipet:
-                minipet.MinipetId_is_positive();
+            case Miniature miniature:
+                miniature.MiniatureId_is_positive();
                 break;
             case UpgradeComponent upgradeComponent:
                 Assert.Empty(upgradeComponent.UpgradeComponentFlags.Other);

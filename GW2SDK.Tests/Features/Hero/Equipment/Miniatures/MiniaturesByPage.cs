@@ -2,24 +2,21 @@
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Miniatures;
 
-public class MinipetsByFilter
+public class MiniaturesByPage
 {
     [Fact]
-    public async Task Can_be_filtered_by_id()
+    public async Task Can_be_filtered_by_page()
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<int> ids =
-        [
-            1, 2,
-            3
-        ];
+        const int pageSize = 3;
+        var (actual, context) = await sut.Hero.Equipment.Miniatures.GetMiniaturesByPage(0, pageSize);
 
-        var (actual, context) = await sut.Hero.Equipment.Miniatures.GetMinipetsByIds(ids);
-
-        Assert.Equal(ids.Count, actual.Count);
+        Assert.Equal(pageSize, actual.Count);
+        Assert.NotNull(context.PageContext);
+        Assert.Equal(pageSize, context.PageContext.PageSize);
         Assert.NotNull(context.ResultContext);
-        Assert.Equal(ids.Count, context.ResultContext.ResultCount);
+        Assert.Equal(pageSize, context.ResultContext.ResultCount);
         Assert.All(
             actual,
             entry =>

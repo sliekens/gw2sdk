@@ -3,9 +3,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-internal static class MinipetJson
+internal static class MiniatureJson
 {
-    public static Minipet GetMinipet(
+    public static Miniature GetMiniature(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -97,7 +97,7 @@ internal static class MinipetJson
             }
         }
 
-        return new Minipet
+        return new Miniature
         {
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),
@@ -121,7 +121,7 @@ internal static class MinipetJson
                 ),
             ChatLink = chatLink.Map(value => value.GetStringRequired()),
             IconHref = icon.Map(value => value.GetString()),
-            MinipetId = minipetId.Map(value => value.GetInt32())
+            MiniatureId = minipetId.Map(value => value.GetInt32())
         };
     }
 }

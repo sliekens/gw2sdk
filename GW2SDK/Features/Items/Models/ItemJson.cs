@@ -30,7 +30,7 @@ internal static class ItemJson
             case "Key":
                 return json.GetKey(missingMemberBehavior);
             case "MiniPet":
-                return json.GetMinipet(missingMemberBehavior);
+                return json.GetMiniature(missingMemberBehavior);
             case "PowerCore":
                 return json.GetPowerCore(missingMemberBehavior);
             case "Relic":

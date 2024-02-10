@@ -48,7 +48,7 @@ public record Achievement
 
     /// <summary>Describes the individual bits of progress that can be made. The list type is abstract. If the current
     /// achievement is a <see cref="CollectionAchievement" /> then the list items are of type <see cref="AchievementItemBit" />
-    /// , <see cref="AchievementSkinBit" /> or <see cref="AchievementMinipetBit" />. For regular achievements, the type is
+    /// , <see cref="AchievementSkinBit" /> or <see cref="AchievementMiniatureBit" />. For regular achievements, the type is
     /// <see cref="AchievementTextBit" /> which is just a description of what is needed.</summary>
     public required IReadOnlyList<AchievementBit>? Bits { get; init; }
 

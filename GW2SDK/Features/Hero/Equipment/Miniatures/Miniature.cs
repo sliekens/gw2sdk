@@ -2,7 +2,7 @@
 
 [PublicAPI]
 [DataTransferObject]
-public sealed record Minipet
+public sealed record Miniature
 {
     public required int Id { get; init; }
 

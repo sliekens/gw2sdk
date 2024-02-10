@@ -19,7 +19,7 @@ internal static class AchievementBitJson
                 case "Text":
                     return json.GetAchievementTextBit(missingMemberBehavior);
                 case "Minipet":
-                    return json.GetAchievementMinipetBit(missingMemberBehavior);
+                    return json.GetAchievementMiniatureBit(missingMemberBehavior);
                 case "Item":
                     return json.GetAchievementItemBit(missingMemberBehavior);
                 case "Skin":

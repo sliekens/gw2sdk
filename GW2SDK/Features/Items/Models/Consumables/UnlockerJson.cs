@@ -37,7 +37,7 @@ internal static class UnlockerJson
             case "JadeBotSkin":
                 return json.GetJadeBotSkinUnlocker(missingMemberBehavior);
             case "Minipet":
-                return json.GetMinipetUnlocker(missingMemberBehavior);
+                return json.GetMiniatureUnlocker(missingMemberBehavior);
             case "Ms":
                 return json.GetMsUnlocker(missingMemberBehavior);
             case "Outfit":

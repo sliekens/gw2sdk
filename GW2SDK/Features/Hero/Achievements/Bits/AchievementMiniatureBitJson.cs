@@ -3,9 +3,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Achievements.Bits;
 
-internal static class AchievementMinipetBitJson
+internal static class AchievementMiniatureBitJson
 {
-    public static AchievementMinipetBit GetAchievementMinipetBit(
+    public static AchievementMiniatureBit GetAchievementMiniatureBit(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -32,6 +32,6 @@ internal static class AchievementMinipetBitJson
             }
         }
 
-        return new AchievementMinipetBit { Id = id.Map(value => value.GetInt32()) };
+        return new AchievementMiniatureBit { Id = id.Map(value => value.GetInt32()) };
     }
 }

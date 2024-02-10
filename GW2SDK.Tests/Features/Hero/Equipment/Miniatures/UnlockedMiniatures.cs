@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Miniatures;
 
-public class UnlockedMinipets
+public class UnlockedMiniatures
 {
     [Fact]
     public async Task Can_be_listed()
@@ -10,7 +10,7 @@ public class UnlockedMinipets
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var (actual, _) = await sut.Hero.Equipment.Miniatures.GetUnlockedMinipets(accessToken.Key);
+        var (actual, _) = await sut.Hero.Equipment.Miniatures.GetUnlockedMiniatures(accessToken.Key);
 
         Assert.NotEmpty(actual);
     }
