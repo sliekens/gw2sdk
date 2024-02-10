@@ -22,5 +22,5 @@ public sealed record GliderSkin
     public required string Description { get; init; }
 
     /// <remarks>Can be empty.</remarks>
-    public required IReadOnlyCollection<int> DefaultDyes { get; init; }
+    public required IReadOnlyCollection<int> DefaultDyeIds { get; init; }
 }

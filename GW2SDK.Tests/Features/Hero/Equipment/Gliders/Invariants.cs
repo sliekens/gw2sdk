@@ -16,5 +16,5 @@ internal static class Invariants
 
     internal static void Has_description(this GliderSkin actual) => Assert.NotNull(actual.Description);
 
-    internal static void Has_default_dyes(this GliderSkin actual) => Assert.NotNull(actual.DefaultDyes);
+    internal static void Has_default_dyes(this GliderSkin actual) => Assert.NotNull(actual.DefaultDyeIds);
 }
