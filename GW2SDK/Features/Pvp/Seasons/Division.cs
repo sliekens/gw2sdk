@@ -8,10 +8,13 @@ public sealed record Division
 
     public required DivisionFlags Flags { get; init; }
 
+    /// <summary>The URL of the large division icon.</summary>
     public required string LargeIconHref { get; init; }
 
+    /// <summary>The URL of the small division icon.</summary>
     public required string SmallIconHref { get; init; }
 
+    /// <summary>The URL of the pip icon.</summary>
     public required string PipIconHref { get; init; }
 
     public required IReadOnlyCollection<DivisionTier> Tiers { get; init; }

@@ -19,7 +19,7 @@ public record GuildUpgrade
     /// <summary>The processing time of the guild upgrade.</summary>
     public required TimeSpan BuildTime { get; init; }
 
-    /// <summary>The icon URL of the guild upgrade.</summary>
+    /// <summary>The URL of the guild upgrade icon.</summary>
     public required string IconHref { get; init; }
 
     /// <summary>The minimum guild level require to unlock the guild upgrade.</summary>

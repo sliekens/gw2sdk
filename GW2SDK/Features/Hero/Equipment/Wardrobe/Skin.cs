@@ -19,5 +19,6 @@ public record Skin
 
     public required Rarity Rarity { get; init; }
 
+    /// <summary>The URL of the skin icon.</summary>
     public required string? IconHref { get; init; }
 }

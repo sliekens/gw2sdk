@@ -23,19 +23,21 @@ public sealed record Specialization
     /// <summary>The IDs of the traits which can be selected.</summary>
     public required IReadOnlyList<int> MajorTraitIds { get; init; }
 
-    /// <summary>If this is an <see cref="Elite" /> specialization, this is the ID of the trait which lets the player wield the
-    /// elite specialization's weapon.</summary>
+    /// <summary>The ID of the trait which lets the player wield an elite specialization weapon.</summary>
+    /// <remarks>Only <see cref="Elite"/> specializations have weapon traits.</remarks>
     public required int? WeaponTraitId { get; init; }
 
-    /// <summary>The URL of the specialization's icon.</summary>
+    /// <summary>The URL of the specialization icon.</summary>
     public required string IconHref { get; init; }
 
     /// <summary>The URL of the background image for this specialization.</summary>
     public required string BackgroundHref { get; init; }
 
-    /// <summary>If this is an <see cref="Elite" /> specialization, this is the URL of the specialization's large icon.</summary>
+    /// <summary>The URL of the large profession icon.</summary>
+    /// <remarks>Only <see cref="Elite"/> specializations have profession icons.</remarks>
     public required string ProfessionBigIconHref { get; init; }
 
-    /// <summary>If this is an <see cref="Elite" /> specialization, this is the URL of the specialization's small icon.</summary>
+    /// <summary>The URL of the small profession icon.</summary>
+    /// <remarks>Only <see cref="Elite"/> specializations have profession icons.</remarks>
     public required string ProfessionIconHref { get; init; }
 }

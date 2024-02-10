@@ -17,6 +17,6 @@ public sealed record Currency
     /// <summary>The display order of the currency in the wallet panel.</summary>
     public required int Order { get; init; }
 
-    /// <summary>The icon URL of the currency.</summary>
+    /// <summary>The URL of the currency icon.</summary>
     public required string IconHref { get; init; }
 }

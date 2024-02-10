@@ -11,5 +11,6 @@ public sealed record Utility : Consumable
 
     public required string EffectDescription { get; init; }
 
+    /// <summary>The URL of the utility effect icon.</summary>
     public required string? EffectIconHref { get; init; }
 }

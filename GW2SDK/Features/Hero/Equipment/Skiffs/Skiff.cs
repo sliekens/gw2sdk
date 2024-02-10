@@ -11,7 +11,7 @@ public sealed record Skiff
     /// <summary>The skiff name.</summary>
     public required string Name { get; init; }
 
-    /// <summary>The skiff icon URL.</summary>
+    /// <summary>The URL of the skiff icon.</summary>
     public required string IconHref { get; init; }
 
     /// <summary>The default colors of the skiff.</summary>

@@ -16,8 +16,8 @@ public record Achievement
     /// <summary>The name of the achievement as it appears in the achievement panel.</summary>
     public required string Name { get; init; }
 
-    /// <summary>The URI of the icon as it appears in the achievement panel.</summary>
-    /// <remarks>Can be empty. Unfortunately many icons are missing.</remarks>
+    /// <summary>The URL of the achievement icon as it appears in the achievement panel.</summary>
+    /// <remarks>Can be empty. Unfortunately, many icons are missing.</remarks>
     public required string IconHref { get; init; }
 
     /// <summary>An informational description like where to start the achievement or a piece of trivia, as it appears in the

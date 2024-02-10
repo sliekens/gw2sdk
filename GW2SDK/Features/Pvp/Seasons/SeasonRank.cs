@@ -8,6 +8,7 @@ public sealed record SeasonRank
 
     public required string Description { get; init; }
 
+    /// <summary>The URL of the season rank icon.</summary>
     public required string IconHref { get; init; }
 
     public required string Overlay { get; init; }

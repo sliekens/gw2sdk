@@ -18,7 +18,7 @@ public sealed record AchievementCategory
     /// <summary>The display order of the category in the sidebar of the achievement panel.</summary>
     public required int Order { get; init; }
 
-    /// <summary>The icon URI of the category.</summary>
+    /// <summary>The URL of the category icon as it appears in the achievement panel.</summary>
     public required string IconHref { get; init; }
 
     /// <summary>The achievements in this category.</summary>

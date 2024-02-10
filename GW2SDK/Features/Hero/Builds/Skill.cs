@@ -26,7 +26,7 @@ public record Skill
     /// <summary>The description as it appears in the tooltip of the skill.</summary>
     public required string Description { get; init; }
 
-    /// <summary>The URL of the skill's icon.</summary>
+    /// <summary>The URL of the skill icon.</summary>
     public required string? IconHref { get; init; }
 
     /// <summary>Indicates the type of weapon associated with this skill. This is typically the weapon you need to equip to

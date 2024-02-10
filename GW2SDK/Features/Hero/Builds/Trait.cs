@@ -44,6 +44,6 @@ public sealed record Trait
     /// <summary>The ID of the specialization this trait belongs to.</summary>
     public required int SpezializationId { get; init; }
 
-    /// <summary>The URL of the trait's icon.</summary>
+    /// <summary>The URL of the trait icon.</summary>
     public required string IconHref { get; init; }
 }

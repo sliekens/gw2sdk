@@ -14,7 +14,7 @@ public sealed record Mastery
     /// <summary>Contains relevant information for players who have already unlocked the mastery.</summary>
     public required string Instruction { get; init; }
 
-    /// <summary>The URL of the mastery's icon that appears in the masteries panel.</summary>
+    /// <summary>The URL of the mastery icon that appears in the masteries panel.</summary>
     public required string IconHref { get; init; }
 
     /// <summary>The number of mastery points required to unlock the mastery.</summary>

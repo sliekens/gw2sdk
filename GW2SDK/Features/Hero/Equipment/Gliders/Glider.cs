@@ -12,6 +12,7 @@ public sealed record Glider
     /// <summary>The display order of the glider in the equipment panel.</summary>
     public required int Order { get; init; }
 
+    /// <summary>The URL of the glider icon.</summary>
     public required string IconHref { get; init; }
 
     public required string Name { get; init; }

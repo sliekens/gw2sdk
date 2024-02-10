@@ -17,6 +17,7 @@ public sealed record Finisher
     /// <summary>The display order of the finisher in the equipment panel.</summary>
     public required int Order { get; init; }
 
+    /// <summary>The URL of the finisher icon.</summary>
     public required string IconHref { get; init; }
 
     public required string Name { get; init; }

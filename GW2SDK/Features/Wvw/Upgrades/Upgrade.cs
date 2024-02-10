@@ -8,5 +8,6 @@ public sealed record Upgrade
 
     public required string Description { get; init; }
 
+    /// <summary>The URL of the WvW upgrade icon.</summary>
     public required string IconHref { get; init; }
 }

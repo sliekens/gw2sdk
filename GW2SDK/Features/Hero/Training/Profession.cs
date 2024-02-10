@@ -16,10 +16,10 @@ public sealed record Profession
     /// <summary>The profession's code which is used in build template chat links.</summary>
     public required int Code { get; init; }
 
-    /// <summary>The profession's small icon URL.</summary>
+    /// <summary>The URL of the small profession icon.</summary>
     public required string IconHref { get; init; }
 
-    /// <summary>The profession's large icon URL.</summary>
+    /// <summary>The URL of the large profession icon.</summary>
     public required string BigIconHref { get; init; }
 
     /// <summary>The IDs of the specializations that belong to this profession.</summary>

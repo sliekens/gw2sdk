@@ -10,6 +10,7 @@ public sealed record Minipet
 
     public required string Unlock { get; init; }
 
+    /// <summary>The URL of the miniature icon.</summary>
     public required string IconHref { get; init; }
 
     /// <summary>The display order of the miniature in the equipment panel.</summary>

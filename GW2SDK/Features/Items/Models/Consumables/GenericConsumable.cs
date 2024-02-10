@@ -11,6 +11,7 @@ public sealed record GenericConsumable : Consumable
 
     public required string EffectDescription { get; init; }
 
+    /// <summary>The URL of the consumable effect icon.</summary>
     public required string? EffectIconHref { get; init; }
 
     public required int? GuildUpgradeId { get; init; }

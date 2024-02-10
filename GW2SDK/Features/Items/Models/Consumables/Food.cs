@@ -11,5 +11,6 @@ public sealed record Food : Consumable
 
     public required string EffectDescription { get; init; }
 
+    /// <summary>The URL of the food effect icon.</summary>
     public required string? EffectIconHref { get; init; }
 }

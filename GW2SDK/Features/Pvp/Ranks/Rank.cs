@@ -10,6 +10,7 @@ public sealed record Rank
 
     public required string Name { get; init; }
 
+    /// <summary>The URL of the rank icon.</summary>
     public required string IconHref { get; init; }
 
     public required int MinRank { get; init; }

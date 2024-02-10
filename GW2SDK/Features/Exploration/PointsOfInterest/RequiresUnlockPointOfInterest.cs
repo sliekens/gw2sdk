@@ -4,6 +4,6 @@
 [PublicAPI]
 public sealed record RequiresUnlockPointOfInterest : PointOfInterest
 {
-    /// <summary>The icon URL of the point of interest.</summary>
+    /// <summary>The URL of the point of interest icon.</summary>
     public required string IconHref { get; init; }
 }

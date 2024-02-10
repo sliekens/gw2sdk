@@ -10,6 +10,7 @@ public sealed record Ability
 
     public required string Description { get; init; }
 
+    /// <summary>The URL of the ability icon.</summary>
     public required string IconHref { get; init; }
 
     public required IReadOnlyCollection<AbilityRank> Ranks { get; init; }

@@ -14,6 +14,6 @@ public sealed record GuildRank
     /// <summary>The permissions assigned to the rank.</summary>
     public required IReadOnlyList<string> Permissions { get; init; }
 
-    /// <summary>The icon URL of the rank.</summary>
+    /// <summary>The URL of the rank icon.</summary>
     public required string IconHref { get; init; }
 }

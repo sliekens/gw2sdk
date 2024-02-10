@@ -8,6 +8,7 @@ public sealed record MountSkin
 
     public required string Name { get; init; }
 
+    /// <summary>The URL of the mount skin icon.</summary>
     public required string IconHref { get; init; }
 
     public required IReadOnlyCollection<DyeSlot> DyeSlots { get; init; }
