@@ -14,6 +14,13 @@ public sealed class GlidersClient
         httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
+    #region v2/gliders
+
+    /// <summary>Retrieves all glider skins.</summary>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<GliderSkin> Value, MessageContext Context)> GetGliderSkins(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -28,6 +35,9 @@ public sealed class GlidersClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all glider skins.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<int> Value, MessageContext Context)> GetGliderSkinsIndex(
         CancellationToken cancellationToken = default
     )
@@ -36,6 +46,12 @@ public sealed class GlidersClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a glider skin by its ID.</summary>
+    /// <param name="gliderSkinId">The glider skin ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(GliderSkin Value, MessageContext Context)> GetGliderSkinById(
         int gliderSkinId,
         Language? language = default,
@@ -51,6 +67,12 @@ public sealed class GlidersClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves glider skins by their IDs.</summary>
+    /// <param name="gliderSkinIds">The glider skin IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<GliderSkin> Value, MessageContext Context)> GetGliderSkinsByIds(
         IReadOnlyCollection<int> gliderSkinIds,
         Language? language = default,
@@ -66,6 +88,13 @@ public sealed class GlidersClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of glider skins.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<GliderSkin> Value, MessageContext Context)> GetGliderSkinsByPage(
         int pageIndex,
         int? pageSize = default,
@@ -82,4 +111,6 @@ public sealed class GlidersClient
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
+
+    #endregion v2/gliders
 }
