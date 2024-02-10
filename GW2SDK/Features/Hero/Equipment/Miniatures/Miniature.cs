@@ -1,11 +1,14 @@
 ﻿namespace GuildWars2.Hero.Equipment.Miniatures;
 
+/// <summary>Information about a miniature.</summary>
 [PublicAPI]
 [DataTransferObject]
 public sealed record Miniature
 {
+    /// <summary>The miniature ID.</summary>
     public required int Id { get; init; }
 
+    /// <summary>The name of the miniature.</summary>
     public required string Name { get; init; }
 
     /// <summary>A description of how to obtain the miniature, as it appears in the tooltip of a locked miniature.</summary>
@@ -17,5 +20,6 @@ public sealed record Miniature
     /// <summary>The display order of the miniature in the equipment panel.</summary>
     public required int Order { get; init; }
 
+    /// <summary>The ID of the item that summons the miniature.</summary>
     public required int ItemId { get; init; }
 }
