@@ -1,12 +1,13 @@
 ﻿namespace GuildWars2.Hero.Equipment.Gliders;
 
+/// <summary>Information about a glider skin.</summary>
 [PublicAPI]
 [DataTransferObject]
-public sealed record Glider
+public sealed record GliderSkin
 {
     public required int Id { get; init; }
 
-    /// <summary>The IDs of the items that unlock the glider when consumed.</summary>
+    /// <summary>The IDs of the items that unlock the glider skin when consumed.</summary>
     public required IReadOnlyCollection<int> UnlockItemIds { get; init; }
 
     /// <summary>The display order of the glider in the equipment panel.</summary>

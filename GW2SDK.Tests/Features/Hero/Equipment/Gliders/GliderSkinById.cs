@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Gliders;
 
-public class GliderById
+public class GliderSkinById
 {
     [Fact]
     public async Task Can_be_found()
@@ -11,7 +11,7 @@ public class GliderById
 
         const int id = 58;
 
-        var (actual, _) = await sut.Hero.Equipment.Gliders.GetGliderById(id);
+        var (actual, _) = await sut.Hero.Equipment.Gliders.GetGliderSkinById(id);
 
         Assert.Equal(id, actual.Id);
         actual.Has_unlock_items();

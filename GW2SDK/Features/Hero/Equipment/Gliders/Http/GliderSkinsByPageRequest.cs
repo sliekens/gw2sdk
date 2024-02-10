@@ -1,31 +1,37 @@
 ﻿using GuildWars2.Http;
+using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Gliders.Http;
 
-internal sealed class GliderByIdRequest(int gliderId) : IHttpRequest<Glider>
+internal sealed class GliderSkinsByPageRequest(int pageIndex) : IHttpRequest<HashSet<GliderSkin>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/gliders") { AcceptEncoding = "gzip" };
 
-    public int GliderId { get; } = gliderId;
+    public int PageIndex { get; } = pageIndex;
+
+    public int? PageSize { get; init; }
 
     public Language? Language { get; init; }
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<(Glider Value, MessageContext Context)> SendAsync(
+    public async Task<(HashSet<GliderSkin> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
     {
+        QueryBuilder search = new() { { "page", PageIndex } };
+        if (PageSize.HasValue)
+        {
+            search.Add("page_size", PageSize.Value);
+        }
+
+        search.Add("v", SchemaVersion.Recommended);
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = new QueryBuilder
-                    {
-                        { "id", GliderId },
-                        { "v", SchemaVersion.Recommended }
-                    },
+                    Arguments = search,
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 HttpCompletionOption.ResponseHeadersRead,
@@ -36,7 +42,7 @@ internal sealed class GliderByIdRequest(int gliderId) : IHttpRequest<Glider>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetGlider(MissingMemberBehavior);
+        var value = json.RootElement.GetSet(entry => entry.GetGliderSkin(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }
 }

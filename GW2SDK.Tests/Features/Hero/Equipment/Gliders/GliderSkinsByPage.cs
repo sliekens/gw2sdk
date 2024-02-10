@@ -2,24 +2,21 @@
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Gliders;
 
-public class GlidersByFilter
+public class GliderSkinsByPage
 {
     [Fact]
-    public async Task Can_be_filtered_by_id()
+    public async Task Can_be_filtered_by_page()
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<int> ids =
-        [
-            1, 38,
-            74
-        ];
+        const int pageSize = 3;
+        var (actual, context) = await sut.Hero.Equipment.Gliders.GetGliderSkinsByPage(0, pageSize);
 
-        var (actual, context) = await sut.Hero.Equipment.Gliders.GetGlidersByIds(ids);
-
-        Assert.Equal(ids.Count, actual.Count);
+        Assert.Equal(pageSize, actual.Count);
+        Assert.NotNull(context.PageContext);
+        Assert.Equal(pageSize, context.PageContext.PageSize);
         Assert.NotNull(context.ResultContext);
-        Assert.Equal(ids.Count, context.ResultContext.ResultCount);
+        Assert.Equal(pageSize, context.ResultContext.ResultCount);
         Assert.All(
             actual,
             entry =>

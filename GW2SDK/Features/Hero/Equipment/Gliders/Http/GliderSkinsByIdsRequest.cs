@@ -3,12 +3,12 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Gliders.Http;
 
-internal sealed class GlidersByIdsRequest : IHttpRequest<HashSet<Glider>>
+internal sealed class GliderSkinsByIdsRequest : IHttpRequest<HashSet<GliderSkin>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/gliders") { AcceptEncoding = "gzip" };
 
-    public GlidersByIdsRequest(IReadOnlyCollection<int> gliderIds)
+    public GliderSkinsByIdsRequest(IReadOnlyCollection<int> gliderIds)
     {
         Check.Collection(gliderIds);
         GliderIds = gliderIds;
@@ -20,7 +20,7 @@ internal sealed class GlidersByIdsRequest : IHttpRequest<HashSet<Glider>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<(HashSet<Glider> Value, MessageContext Context)> SendAsync(
+    public async Task<(HashSet<GliderSkin> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -43,7 +43,7 @@ internal sealed class GlidersByIdsRequest : IHttpRequest<HashSet<Glider>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetGlider(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetGliderSkin(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }
 }

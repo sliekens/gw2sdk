@@ -14,13 +14,13 @@ public sealed class GlidersClient
         httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<(HashSet<Glider> Value, MessageContext Context)> GetGliders(
+    public Task<(HashSet<GliderSkin> Value, MessageContext Context)> GetGliderSkins(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        GlidersRequest request = new()
+        GliderSkinsRequest request = new()
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -28,22 +28,22 @@ public sealed class GlidersClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<int> Value, MessageContext Context)> GetGlidersIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetGliderSkinsIndex(
         CancellationToken cancellationToken = default
     )
     {
-        GlidersIndexRequest request = new();
+        GliderSkinsIndexRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(Glider Value, MessageContext Context)> GetGliderById(
-        int gliderId,
+    public Task<(GliderSkin Value, MessageContext Context)> GetGliderSkinById(
+        int gliderSkinId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        GliderByIdRequest request = new(gliderId)
+        GliderSkinByIdRequest request = new(gliderSkinId)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -51,14 +51,14 @@ public sealed class GlidersClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<Glider> Value, MessageContext Context)> GetGlidersByIds(
-        IReadOnlyCollection<int> gliderIds,
+    public Task<(HashSet<GliderSkin> Value, MessageContext Context)> GetGliderSkinsByIds(
+        IReadOnlyCollection<int> gliderSkinIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        GlidersByIdsRequest request = new(gliderIds)
+        GliderSkinsByIdsRequest request = new(gliderSkinIds)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -66,7 +66,7 @@ public sealed class GlidersClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<Glider> Value, MessageContext Context)> GetGlidersByPage(
+    public Task<(HashSet<GliderSkin> Value, MessageContext Context)> GetGliderSkinsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -74,7 +74,7 @@ public sealed class GlidersClient
         CancellationToken cancellationToken = default
     )
     {
-        GlidersByPageRequest request = new(pageIndex)
+        GliderSkinsByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             Language = language,

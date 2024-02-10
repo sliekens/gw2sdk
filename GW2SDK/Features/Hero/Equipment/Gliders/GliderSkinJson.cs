@@ -3,9 +3,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Gliders;
 
-internal static class GliderJson
+internal static class GliderSkinJson
 {
-    public static Glider GetGlider(
+    public static GliderSkin GetGliderSkin(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -54,7 +54,7 @@ internal static class GliderJson
             }
         }
 
-        return new Glider
+        return new GliderSkin
         {
             Id = id.Map(value => value.GetInt32()),
             UnlockItemIds =
