@@ -68,12 +68,12 @@ public sealed class HomeClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<int> Value, MessageContext Context)> GetOwnedCatsIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedCatsIndex(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
     {
-        OwnedCatsIndexRequest request = new() { AccessToken = accessToken };
+        UnlockedCatsIndexRequest request = new() { AccessToken = accessToken };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -94,12 +94,12 @@ public sealed class HomeClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<string> Value, MessageContext Context)> GetOwnedNodesIndex(
+    public Task<(HashSet<string> Value, MessageContext Context)> GetUnlockedNodesIndex(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
     {
-        OwnedNodesIndexRequest request = new() { AccessToken = accessToken };
+        UnlockedNodesIndexRequest request = new() { AccessToken = accessToken };
         return request.SendAsync(httpClient, cancellationToken);
     }
 }

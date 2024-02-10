@@ -16,13 +16,13 @@ public sealed class MountsClient
 
     #region v2/account/mounts
 
-    public Task<(HashSet<MountName> Value, MessageContext Context)> GetOwnedMounts(
+    public Task<(HashSet<MountName> Value, MessageContext Context)> GetUnlockedMounts(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        OwnedMountsRequest request = new()
+        UnlockedMountsRequest request = new()
         {
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
@@ -30,12 +30,12 @@ public sealed class MountsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<int> Value, MessageContext Context)> GetOwnedMountSkins(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedMountSkins(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
     {
-        OwnedMountSkinsRequest request = new() { AccessToken = accessToken };
+        UnlockedMountSkinsRequest request = new() { AccessToken = accessToken };
         return request.SendAsync(httpClient, cancellationToken);
     }
 

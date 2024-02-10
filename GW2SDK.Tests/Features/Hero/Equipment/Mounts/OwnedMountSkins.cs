@@ -2,15 +2,15 @@
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Mounts;
 
-public class OwnedMountSkins
+public class UnlockedMountSkins
 {
     [Fact]
-    public async Task Owned_mount_skins_can_be_found()
+    public async Task Unlocked_mount_skins_can_be_found()
     {
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var (actual, _) = await sut.Hero.Equipment.Mounts.GetOwnedMountSkins(accessToken.Key);
+        var (actual, _) = await sut.Hero.Equipment.Mounts.GetUnlockedMountSkins(accessToken.Key);
 
         Assert.NotEmpty(actual);
     }

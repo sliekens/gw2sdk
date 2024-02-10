@@ -83,12 +83,12 @@ public sealed class MailCarriersClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<int> Value, MessageContext Context)> GetOwnedMailCarriers(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedMailCarriers(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
     {
-        OwnedMailCarriersRequest request = new() { AccessToken = accessToken };
+        UnlockedMailCarriersRequest request = new() { AccessToken = accessToken };
         return request.SendAsync(httpClient, cancellationToken);
     }
 }

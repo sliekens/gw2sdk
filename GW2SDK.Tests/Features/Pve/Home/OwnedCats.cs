@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Tests.Features.Pve.Home;
 
-public class OwnedCats
+public class UnlockedCats
 {
     [Fact]
     public async Task Can_be_listed()
@@ -10,7 +10,7 @@ public class OwnedCats
         var sut = Composer.Resolve<Gw2Client>();
         var token = Composer.Resolve<ApiKey>();
 
-        var (actual, _) = await sut.Pve.Home.GetOwnedCatsIndex(token.Key);
+        var (actual, _) = await sut.Pve.Home.GetUnlockedCatsIndex(token.Key);
 
         Assert.NotEmpty(actual);
         Assert.All(actual, id => Assert.True(id > 0));

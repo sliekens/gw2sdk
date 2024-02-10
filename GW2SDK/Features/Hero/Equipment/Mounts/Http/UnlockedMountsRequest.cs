@@ -1,12 +1,12 @@
 ﻿using GuildWars2.Http;
 using GuildWars2.Json;
 
-namespace GuildWars2.Hero.Equipment.MailCarriers.Http;
+namespace GuildWars2.Hero.Equipment.Mounts.Http;
 
-internal sealed class OwnedMailCarriersRequest : IHttpRequest<HashSet<int>>
+internal sealed class UnlockedMountsRequest : IHttpRequest<HashSet<MountName>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/account/mailcarriers")
+        new(Get, "v2/account/mounts/types")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
@@ -14,7 +14,9 @@ internal sealed class OwnedMailCarriersRequest : IHttpRequest<HashSet<int>>
 
     public required string? AccessToken { get; init; }
 
-    public async Task<(HashSet<int> Value, MessageContext Context)> SendAsync(
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
+
+    public async Task<(HashSet<MountName> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -29,7 +31,7 @@ internal sealed class OwnedMailCarriersRequest : IHttpRequest<HashSet<int>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetInt32());
+        var value = json.RootElement.GetSet(entry => entry.GetMountName(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }
 }

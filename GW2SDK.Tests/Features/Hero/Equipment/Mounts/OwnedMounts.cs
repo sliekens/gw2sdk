@@ -2,15 +2,15 @@
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Mounts;
 
-public class OwnedMounts
+public class UnlockedMounts
 {
     [Fact]
-    public async Task Owned_mounts_can_be_found()
+    public async Task Unlocked_mounts_can_be_found()
     {
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var (actual, _) = await sut.Hero.Equipment.Mounts.GetOwnedMounts(accessToken.Key);
+        var (actual, _) = await sut.Hero.Equipment.Mounts.GetUnlockedMounts(accessToken.Key);
 
         Assert.NotEmpty(actual);
     }

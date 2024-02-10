@@ -1,20 +1,19 @@
 ﻿using GuildWars2.Http;
 using GuildWars2.Json;
 
-namespace GuildWars2.Hero.Equipment.Mounts.Http;
+namespace GuildWars2.Pve.Home.Http;
 
-internal sealed class OwnedMountSkinsRequest : IHttpRequest<HashSet<int>>
+internal sealed class UnlockedNodesIndexRequest : IHttpRequest<HashSet<string>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/account/mounts/skins")
-        {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
-        };
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/account/home/nodes")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+    };
 
     public required string? AccessToken { get; init; }
 
-    public async Task<(HashSet<int> Value, MessageContext Context)> SendAsync(
+    public async Task<(HashSet<string> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -29,7 +28,7 @@ internal sealed class OwnedMountSkinsRequest : IHttpRequest<HashSet<int>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetInt32());
+        var value = json.RootElement.GetSet(entry => entry.GetStringRequired());
         return (value, new MessageContext(response));
     }
 }
