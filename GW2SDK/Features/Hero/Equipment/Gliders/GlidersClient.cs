@@ -14,6 +14,24 @@ public sealed class GlidersClient
         httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
+    #region v2/account/gliders
+
+    /// <summary>Retrieves the IDs of glider skins unlocked on the account associated with the access token. This endpoint is
+    /// only accessible with a valid access token.</summary>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedGliderSkins(
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var request = new UnlockedGliderSkinsRequest { AccessToken = accessToken };
+        return request.SendAsync(httpClient, cancellationToken);
+    }
+
+    #endregion v2/account/gliders
+
     #region v2/gliders
 
     /// <summary>Retrieves all glider skins.</summary>
