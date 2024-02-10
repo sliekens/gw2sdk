@@ -7,7 +7,7 @@ internal static class Invariants
     internal static void Has_id(this Finisher actual) => Assert.True(actual.Id > 0);
 
     internal static void Has_unlock_details(this Finisher actual) =>
-        Assert.NotNull(actual.UnlockDetails);
+        Assert.NotNull(actual.LockedText);
 
     internal static void Has_unlock_items(this Finisher actual) =>
         Assert.NotNull(actual.UnlockItemIds);

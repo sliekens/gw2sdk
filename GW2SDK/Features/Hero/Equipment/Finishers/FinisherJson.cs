@@ -52,7 +52,7 @@ internal static class FinisherJson
         return new Finisher
         {
             Id = id.Map(value => value.GetInt32()),
-            UnlockDetails = unlockDetails.Map(value => value.GetStringRequired()),
+            LockedText = unlockDetails.Map(value => value.GetStringRequired()),
             UnlockItemIds = unlockItems.Map(values => values.GetList(entry => entry.GetInt32())),
             Order = order.Map(value => value.GetInt32()),
             IconHref = icon.Map(value => value.GetStringRequired()),
