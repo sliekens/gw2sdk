@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using GuildWars2.Hero.Equipment.Dyes;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Templates;
@@ -94,7 +95,11 @@ internal static class EquipmentItemJson
                 value => value.GetEnum<EquipmentLocation>(missingMemberBehavior)
             ),
             TemplateNumbers = tabs.Map(values => values.GetList(value => value.GetInt32())),
-            DyeColorIds = dyes.Map(values => values.GetList(value => value.GetNullableInt32()))
+            DyeColorIds =
+                dyes.Map(
+                    values => values.GetList(value => value.GetNullableInt32() ?? Dye.DyeRemoverId)
+                )
+                ?? Empty.ListOfInt32
         };
     }
 }

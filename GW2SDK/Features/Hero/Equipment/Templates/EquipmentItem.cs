@@ -38,6 +38,6 @@ public sealed record EquipmentItem
     /// <summary>The equipment template numbers in which this item is (re)used.</summary>
     public required IReadOnlyList<int>? TemplateNumbers { get; init; }
 
-    /// <summary>The color IDs of dyes applied to the current item.</summary>
-    public required IReadOnlyList<int?>? DyeColorIds { get; init; }
+    /// <summary>The color IDs of dyes applied to the item.</summary>
+    public required IReadOnlyList<int> DyeColorIds { get; init; }
 }
