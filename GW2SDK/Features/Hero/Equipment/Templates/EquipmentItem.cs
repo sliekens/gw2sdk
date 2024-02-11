@@ -38,8 +38,6 @@ public sealed record EquipmentItem
     /// <summary>The equipment template numbers in which this item is (re)used.</summary>
     public required IReadOnlyList<int>? TemplateNumbers { get; init; }
 
-    // Always length 4
-    // TODO: check why ID can be null
-    /// <summary>The IDs of colors applied to the current item.</summary>
-    public required IReadOnlyList<int?>? DyeIds { get; init; }
+    /// <summary>The color IDs of dyes applied to the current item.</summary>
+    public required IReadOnlyList<int?>? DyeColorIds { get; init; }
 }
