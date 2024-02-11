@@ -16,6 +16,11 @@ public sealed class NoveltiesClient
 
     #region v2/account/novelties
 
+    /// <summary>Retrieves the IDs of novelties unlocked on the account associated with the access token. This endpoint is only
+    /// accessible with a valid access token.</summary>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedNovelties(
         string? accessToken,
         CancellationToken cancellationToken = default
@@ -29,6 +34,11 @@ public sealed class NoveltiesClient
 
     #region v2/novelties
 
+    /// <summary>Retrieves all novelties.</summary>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Novelty> Value, MessageContext Context)> GetNovelties(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -43,6 +53,9 @@ public sealed class NoveltiesClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all novelties.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<int> Value, MessageContext Context)> GetNoveltiesIndex(
         CancellationToken cancellationToken = default
     )
@@ -51,6 +64,12 @@ public sealed class NoveltiesClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a novelty by its ID.</summary>
+    /// <param name="noveltyId">The novelty ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(Novelty Value, MessageContext Context)> GetNoveltyById(
         int noveltyId,
         Language? language = default,
@@ -66,6 +85,12 @@ public sealed class NoveltiesClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves novelties by their IDs.</summary>
+    /// <param name="noveltyIds">The novelty IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Novelty> Value, MessageContext Context)> GetNoveltiesByIds(
         IReadOnlyCollection<int> noveltyIds,
         Language? language = default,
@@ -81,6 +106,13 @@ public sealed class NoveltiesClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of novelties.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Novelty> Value, MessageContext Context)> GetNoveltiesByPage(
         int pageIndex,
         int? pageSize = default,
