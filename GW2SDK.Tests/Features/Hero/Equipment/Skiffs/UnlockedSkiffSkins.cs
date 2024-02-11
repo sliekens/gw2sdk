@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Skiffs;
 
-public class UnlockedSkiffs
+public class UnlockedSkiffSkins
 {
     [Fact]
     public async Task Can_be_listed()
@@ -10,7 +10,7 @@ public class UnlockedSkiffs
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var (actual, _) = await sut.Hero.Equipment.Skiffs.GetUnlockedSkiffs(accessToken.Key);
+        var (actual, _) = await sut.Hero.Equipment.Skiffs.GetUnlockedSkiffSkins(accessToken.Key);
 
         Assert.NotEmpty(actual);
     }

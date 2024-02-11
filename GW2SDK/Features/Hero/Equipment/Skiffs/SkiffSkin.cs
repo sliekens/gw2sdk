@@ -3,7 +3,7 @@
 /// <summary>Information about a Skiff.</summary>
 [PublicAPI]
 [DataTransferObject]
-public sealed record Skiff
+public sealed record SkiffSkin
 {
     /// <summary>The skiff ID.</summary>
     public required int Id { get; init; }

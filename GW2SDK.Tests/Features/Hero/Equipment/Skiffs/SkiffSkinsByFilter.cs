@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Skiffs;
 
-public class SkiffsByFilter
+public class SkiffSkinsByFilter
 {
     [Fact]
     public async Task Can_be_filtered_by_id()
@@ -15,7 +15,7 @@ public class SkiffsByFilter
             420
         ];
 
-        var (actual, context) = await sut.Hero.Equipment.Skiffs.GetSkiffsByIds(ids);
+        var (actual, context) = await sut.Hero.Equipment.Skiffs.GetSkiffSkinsByIds(ids);
 
         Assert.Equal(ids.Count, actual.Count);
         Assert.NotNull(context.ResultContext);

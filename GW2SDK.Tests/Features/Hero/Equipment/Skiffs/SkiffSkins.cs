@@ -2,21 +2,19 @@
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Skiffs;
 
-public class SkiffsByPage
+public class SkiffSkins
 {
     [Fact]
-    public async Task Can_be_filtered_by_page()
+    public async Task Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int pageSize = 3;
-        var (actual, context) = await sut.Hero.Equipment.Skiffs.GetSkiffsByPage(0, pageSize);
+        var (actual, context) = await sut.Hero.Equipment.Skiffs.GetSkiffSkins();
 
-        Assert.Equal(pageSize, actual.Count);
-        Assert.NotNull(context.PageContext);
-        Assert.Equal(pageSize, context.PageContext.PageSize);
+        Assert.NotEmpty(actual);
         Assert.NotNull(context.ResultContext);
-        Assert.Equal(pageSize, context.ResultContext.ResultCount);
+        Assert.Equal(actual.Count, context.ResultContext.ResultCount);
+        Assert.Equal(actual.Count, context.ResultContext.ResultTotal);
         Assert.All(
             actual,
             entry =>

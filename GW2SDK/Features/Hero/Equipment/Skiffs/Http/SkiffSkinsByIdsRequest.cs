@@ -1,19 +1,26 @@
 ﻿using GuildWars2.Http;
+using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Skiffs.Http;
 
-internal sealed class SkiffByIdRequest(int skiffId) : IHttpRequest<Skiff>
+internal sealed class SkiffSkinsByIdsRequest : IHttpRequest<HashSet<SkiffSkin>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/skiffs") { AcceptEncoding = "gzip" };
 
-    public int SkiffId { get; } = skiffId;
+    public SkiffSkinsByIdsRequest(IReadOnlyCollection<int> skiffSkinIds)
+    {
+        Check.Collection(skiffSkinIds);
+        SkiffSkinIds = skiffSkinIds;
+    }
+
+    public IReadOnlyCollection<int> SkiffSkinIds { get; }
 
     public Language? Language { get; init; }
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<(Skiff Value, MessageContext Context)> SendAsync(
+    public async Task<(HashSet<SkiffSkin> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -23,7 +30,7 @@ internal sealed class SkiffByIdRequest(int skiffId) : IHttpRequest<Skiff>
                 {
                     Arguments = new QueryBuilder
                     {
-                        { "id", SkiffId },
+                        { "ids", SkiffSkinIds },
                         { "v", SchemaVersion.Recommended }
                     },
                     AcceptLanguage = Language?.Alpha2Code
@@ -36,7 +43,7 @@ internal sealed class SkiffByIdRequest(int skiffId) : IHttpRequest<Skiff>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSkiff(MissingMemberBehavior);
+        var value = json.RootElement.GetSet(entry => entry.GetSkiffSkin(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }
 }

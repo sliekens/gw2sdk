@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Skiffs;
 
-public class SkiffById
+public class SkiffSkinById
 {
     [Fact]
     public async Task Can_be_found()
@@ -11,7 +11,7 @@ public class SkiffById
 
         const int id = 410;
 
-        var (actual, _) = await sut.Hero.Equipment.Skiffs.GetSkiffById(id);
+        var (actual, _) = await sut.Hero.Equipment.Skiffs.GetSkiffSkinById(id);
 
         Assert.Equal(id, actual.Id);
         actual.Has_name();

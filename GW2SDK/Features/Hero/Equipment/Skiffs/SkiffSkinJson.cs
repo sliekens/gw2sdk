@@ -3,9 +3,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Skiffs;
 
-internal static class SkiffJson
+internal static class SkiffSkinJson
 {
-    public static Skiff GetSkiff(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static SkiffSkin GetSkiffSkin(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -36,7 +36,7 @@ internal static class SkiffJson
             }
         }
 
-        return new Skiff
+        return new SkiffSkin
         {
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),

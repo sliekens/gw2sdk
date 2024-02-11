@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Skiffs.Http;
 
-internal sealed class SkiffsIndexRequest : IHttpRequest<HashSet<int>>
+internal sealed class SkiffSkinsIndexRequest : IHttpRequest<HashSet<int>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/skiffs")
     {

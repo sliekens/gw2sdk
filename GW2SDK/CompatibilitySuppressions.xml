@@ -45,6 +45,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Hero.Equipment.Skiffs.Skiff</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:GuildWars2.Hero.Masteries.MasteryLevel</Target>
     <Left>lib/net462/GW2SDK.dll</Left>
     <Right>lib/net462/GW2SDK.dll</Right>
@@ -206,6 +213,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Hero.Equipment.Skiffs.Skiff</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:GuildWars2.Hero.Masteries.MasteryLevel</Target>
     <Left>lib/net6.0/GW2SDK.dll</Left>
     <Right>lib/net6.0/GW2SDK.dll</Right>
@@ -361,6 +375,13 @@
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:GuildWars2.Hero.Equipment.Miniatures.Minipet</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Hero.Equipment.Skiffs.Skiff</Target>
     <Left>lib/netstandard2.0/GW2SDK.dll</Left>
     <Right>lib/netstandard2.0/GW2SDK.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -893,6 +914,48 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Equipment.Outfits.OutfitsClient.GetUnlockedOutfitsIndex(System.String,System.Threading.CancellationToken)</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Skiffs.SkiffsClient.GetSkiffById(System.Int32,GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Threading.CancellationToken)</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Skiffs.SkiffsClient.GetSkiffs(GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Threading.CancellationToken)</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Skiffs.SkiffsClient.GetSkiffsByIds(System.Collections.Generic.IReadOnlyCollection{System.Int32},GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Threading.CancellationToken)</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Skiffs.SkiffsClient.GetSkiffsByPage(System.Int32,System.Nullable{System.Int32},GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Threading.CancellationToken)</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Skiffs.SkiffsClient.GetSkiffsIndex(System.Threading.CancellationToken)</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Skiffs.SkiffsClient.GetUnlockedSkiffs(System.String,System.Threading.CancellationToken)</Target>
     <Left>lib/net462/GW2SDK.dll</Left>
     <Right>lib/net462/GW2SDK.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -1739,6 +1802,48 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Skiffs.SkiffsClient.GetSkiffById(System.Int32,GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Threading.CancellationToken)</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Skiffs.SkiffsClient.GetSkiffs(GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Threading.CancellationToken)</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Skiffs.SkiffsClient.GetSkiffsByIds(System.Collections.Generic.IReadOnlyCollection{System.Int32},GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Threading.CancellationToken)</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Skiffs.SkiffsClient.GetSkiffsByPage(System.Int32,System.Nullable{System.Int32},GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Threading.CancellationToken)</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Skiffs.SkiffsClient.GetSkiffsIndex(System.Threading.CancellationToken)</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Skiffs.SkiffsClient.GetUnlockedSkiffs(System.String,System.Threading.CancellationToken)</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Equipment.Wardrobe.WardrobeClient.GetUnlockedSkinsIndex(System.String,System.Threading.CancellationToken)</Target>
     <Left>lib/net6.0/GW2SDK.dll</Left>
     <Right>lib/net6.0/GW2SDK.dll</Right>
@@ -2573,6 +2678,48 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Equipment.Outfits.OutfitsClient.GetUnlockedOutfitsIndex(System.String,System.Threading.CancellationToken)</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Skiffs.SkiffsClient.GetSkiffById(System.Int32,GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Threading.CancellationToken)</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Skiffs.SkiffsClient.GetSkiffs(GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Threading.CancellationToken)</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Skiffs.SkiffsClient.GetSkiffsByIds(System.Collections.Generic.IReadOnlyCollection{System.Int32},GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Threading.CancellationToken)</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Skiffs.SkiffsClient.GetSkiffsByPage(System.Int32,System.Nullable{System.Int32},GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Threading.CancellationToken)</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Skiffs.SkiffsClient.GetSkiffsIndex(System.Threading.CancellationToken)</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Skiffs.SkiffsClient.GetUnlockedSkiffs(System.String,System.Threading.CancellationToken)</Target>
     <Left>lib/netstandard2.0/GW2SDK.dll</Left>
     <Right>lib/netstandard2.0/GW2SDK.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>

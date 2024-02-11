@@ -16,12 +16,12 @@ public sealed class SkiffsClient
 
     #region v2/account/skiffs
 
-    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedSkiffs(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedSkiffSkins(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
     {
-        var request = new UnlockedSkiffsRequest { AccessToken = accessToken };
+        var request = new UnlockedSkiffSkinsRequest { AccessToken = accessToken };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -29,13 +29,13 @@ public sealed class SkiffsClient
 
     #region v2/skiffs
 
-    public Task<(HashSet<Skiff> Value, MessageContext Context)> GetSkiffs(
+    public Task<(HashSet<SkiffSkin> Value, MessageContext Context)> GetSkiffSkins(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        SkiffsRequest request = new()
+        SkiffSkinsRequest request = new()
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -43,22 +43,22 @@ public sealed class SkiffsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<int> Value, MessageContext Context)> GetSkiffsIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetSkiffSkinsIndex(
         CancellationToken cancellationToken = default
     )
     {
-        SkiffsIndexRequest request = new();
+        SkiffSkinsIndexRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(Skiff Value, MessageContext Context)> GetSkiffById(
-        int skiffId,
+    public Task<(SkiffSkin Value, MessageContext Context)> GetSkiffSkinById(
+        int skiffSkinId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        SkiffByIdRequest request = new(skiffId)
+        SkiffSkinByIdRequest request = new(skiffSkinId)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -66,14 +66,14 @@ public sealed class SkiffsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<Skiff> Value, MessageContext Context)> GetSkiffsByIds(
-        IReadOnlyCollection<int> skiffIds,
+    public Task<(HashSet<SkiffSkin> Value, MessageContext Context)> GetSkiffSkinsByIds(
+        IReadOnlyCollection<int> skiffSkinIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        SkiffsByIdsRequest request = new(skiffIds)
+        SkiffSkinsByIdsRequest request = new(skiffSkinIds)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -81,7 +81,7 @@ public sealed class SkiffsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<Skiff> Value, MessageContext Context)> GetSkiffsByPage(
+    public Task<(HashSet<SkiffSkin> Value, MessageContext Context)> GetSkiffSkinsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -89,7 +89,7 @@ public sealed class SkiffsClient
         CancellationToken cancellationToken = default
     )
     {
-        SkiffsByPageRequest request = new(pageIndex)
+        SkiffSkinsByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             Language = language,
