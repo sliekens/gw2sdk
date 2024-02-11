@@ -15,7 +15,7 @@ public sealed record EquipmentItem
     public required EquipmentSlot? Slot { get; init; }
 
     /// <summary>The item IDs of runes or sigils in this item.</summary>
-    public required IReadOnlyList<int>? UpgradeItemIds { get; init; }
+    public required IReadOnlyList<int> UpgradeItemIds { get; init; }
 
     /// <summary>The item IDs of infusions in this item.</summary>
     public required IReadOnlyList<int>? InfusionItemIds { get; init; }
