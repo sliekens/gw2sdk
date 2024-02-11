@@ -25,5 +25,5 @@ public sealed record GliderSkin
     public required string Description { get; init; }
 
     /// <summary>The IDs of the dyes applied by default.</summary>
-    public required IReadOnlyCollection<int> DefaultDyeIds { get; init; }
+    public required IReadOnlyList<int> DefaultDyeIds { get; init; }
 }
