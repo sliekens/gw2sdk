@@ -16,12 +16,12 @@ public sealed class DyesClient
 
     #region v2/account/dyes
 
-    /// <summary>Retrieves the IDs of dyes unlocked on the account associated with the access token. This endpoint is only
+    /// <summary>Retrieves the color IDs of dyes unlocked on the account associated with the access token. This endpoint is only
     /// accessible with a valid access token.</summary>
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedDyes(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedColors(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
