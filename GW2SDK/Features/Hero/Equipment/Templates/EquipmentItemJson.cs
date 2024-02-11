@@ -88,7 +88,9 @@ internal static class EquipmentItemJson
             UpgradeItemIds =
                 upgrades.Map(values => values.GetList(value => value.GetInt32()))
                 ?? Empty.ListOfInt32,
-            InfusionItemIds = infusions.Map(values => values.GetList(value => value.GetInt32())),
+            InfusionItemIds =
+                infusions.Map(values => values.GetList(value => value.GetInt32()))
+                ?? Empty.ListOfInt32,
             SkinId = skin.Map(value => value.GetInt32()),
             Stats = stats.Map(value => value.GetSelectedStat(missingMemberBehavior)),
             Binding = binding.Map(value => value.GetEnum<ItemBinding>(missingMemberBehavior)),
