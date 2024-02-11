@@ -16,7 +16,7 @@ public sealed class OutfitsClient
 
     #region v2/account/outfits
 
-    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedOutfitsIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedOutfits(
         string? accessToken,
         CancellationToken cancellationToken = default
     )

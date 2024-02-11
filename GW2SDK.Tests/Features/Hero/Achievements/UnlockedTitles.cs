@@ -10,7 +10,7 @@ public class UnlockedTitles
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var (actual, _) = await sut.Hero.Achievements.GetUnlockedTitlesIndex(accessToken.Key);
+        var (actual, _) = await sut.Hero.Achievements.GetUnlockedTitles(accessToken.Key);
 
         Assert.NotEmpty(actual);
         Assert.All(actual, id => Assert.NotEqual(0, id));

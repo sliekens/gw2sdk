@@ -25,7 +25,7 @@ public sealed class AchievementsClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedTitlesIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedTitles(
         string? accessToken,
         CancellationToken cancellationToken = default
     )

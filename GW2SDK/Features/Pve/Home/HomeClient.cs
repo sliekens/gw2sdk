@@ -68,7 +68,7 @@ public sealed class HomeClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedCatsIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedCats(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -94,7 +94,7 @@ public sealed class HomeClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<string> Value, MessageContext Context)> GetUnlockedNodesIndex(
+    public Task<(HashSet<string> Value, MessageContext Context)> GetUnlockedNodes(
         string? accessToken,
         CancellationToken cancellationToken = default
     )

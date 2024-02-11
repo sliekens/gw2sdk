@@ -17,7 +17,7 @@ public sealed class WardrobeClient
 
     #region v2/account/skins
 
-    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedSkinsIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedSkins(
         string? accessToken,
         CancellationToken cancellationToken = default
     )

@@ -108,7 +108,7 @@ public sealed class PvpClient
 
     #region v2/account/pvp/heroes
 
-    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedHeroesIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedMistChampions(
         string? accessToken,
         CancellationToken cancellationToken = default
     )

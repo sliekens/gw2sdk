@@ -16,7 +16,7 @@ public sealed class NoveltiesClient
 
     #region v2/account/novelties
 
-    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedNoveltiesIndex(
+    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedNovelties(
         string? accessToken,
         CancellationToken cancellationToken = default
     )

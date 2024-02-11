@@ -10,7 +10,7 @@ public class UnlockedDyes
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var (actual, _) = await sut.Hero.Equipment.Dyes.GetUnlockedDyesIndex(accessToken.Key);
+        var (actual, _) = await sut.Hero.Equipment.Dyes.GetUnlockedDyes(accessToken.Key);
 
         Assert.NotEmpty(actual);
         Assert.All(actual, id => Assert.NotEqual(0, id));
