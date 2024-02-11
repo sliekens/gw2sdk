@@ -31,9 +31,8 @@ public sealed record ItemSlot
     /// <summary>The item IDs of infusions in this item.</summary>
     public required IReadOnlyList<int>? InfusionItemIds { get; init; }
 
-    // Always length 4
-    /// <summary>The IDs of colors applied to the current item.</summary>
-    public required IReadOnlyList<int?>? DyeIds { get; init; }
+    /// <summary>The color IDs of the dyes applied to the current item.</summary>
+    public required IReadOnlyList<int?>? DyeColorIds { get; init; }
 
     /// <summary>Whether this item is bound.</summary>
     public required ItemBinding Binding { get; init; }
