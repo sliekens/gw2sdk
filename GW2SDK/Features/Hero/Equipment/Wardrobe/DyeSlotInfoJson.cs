@@ -85,117 +85,30 @@ internal static class DyeSlotInfoJson
             }
         }
 
-        // The dye slot arrays can contain Null to represent the default color, so this is ugly
-        // Perhaps there is a better way to model it with a Null Object pattern?
         return new DyeSlotInfo
         {
-            Default =
-                @default.Map(
-                    values =>
-                        values.GetList(
-                            value =>
-                                value.ValueKind == JsonValueKind.Null
-                                    ? null
-                                    : value.GetDyeSlot(missingMemberBehavior)
-                        )
-                ),
-            AsuraFemale =
-                asuraFemale.Map(
-                    values =>
-                        values.GetList(
-                            value =>
-                                value.ValueKind == JsonValueKind.Null
-                                    ? null
-                                    : value.GetDyeSlot(missingMemberBehavior)
-                        )
-                ),
-            AsuraMale =
-                asuraMale.Map(
-                    values =>
-                        values.GetList(
-                            value =>
-                                value.ValueKind == JsonValueKind.Null
-                                    ? null
-                                    : value.GetDyeSlot(missingMemberBehavior)
-                        )
-                ),
-            CharrFemale =
-                charrFemale.Map(
-                    values =>
-                        values.GetList(
-                            value =>
-                                value.ValueKind == JsonValueKind.Null
-                                    ? null
-                                    : value.GetDyeSlot(missingMemberBehavior)
-                        )
-                ),
-            CharrMale =
-                charrMale.Map(
-                    values =>
-                        values.GetList(
-                            value =>
-                                value.ValueKind == JsonValueKind.Null
-                                    ? null
-                                    : value.GetDyeSlot(missingMemberBehavior)
-                        )
-                ),
-            HumanFemale =
-                humanFemale.Map(
-                    values =>
-                        values.GetList(
-                            value =>
-                                value.ValueKind == JsonValueKind.Null
-                                    ? null
-                                    : value.GetDyeSlot(missingMemberBehavior)
-                        )
-                ),
-            HumanMale =
-                humanMale.Map(
-                    values =>
-                        values.GetList(
-                            value =>
-                                value.ValueKind == JsonValueKind.Null
-                                    ? null
-                                    : value.GetDyeSlot(missingMemberBehavior)
-                        )
-                ),
-            NornFemale =
-                nornFemale.Map(
-                    values =>
-                        values.GetList(
-                            value =>
-                                value.ValueKind == JsonValueKind.Null
-                                    ? null
-                                    : value.GetDyeSlot(missingMemberBehavior)
-                        )
-                ),
-            NornMale =
-                nornMale.Map(
-                    values =>
-                        values.GetList(
-                            value =>
-                                value.ValueKind == JsonValueKind.Null
-                                    ? null
-                                    : value.GetDyeSlot(missingMemberBehavior)
-                        )
-                ),
-            SylvariFemale =
-                sylvariFemale.Map(
-                    values =>
-                        values.GetList(
-                            value =>
-                                value.ValueKind == JsonValueKind.Null
-                                    ? null
-                                    : value.GetDyeSlot(missingMemberBehavior)
-                        )
-                ),
-            SylvariMale = sylvariMale.Map(
-                values => values.GetList(
-                    value => value.ValueKind == JsonValueKind.Null
-                        ? null
-                        : value.GetDyeSlot(missingMemberBehavior)
-                )
-            )
+            Default = @default.Map(GetDyeSlots),
+            AsuraFemale = asuraFemale.Map(GetDyeSlots),
+            AsuraMale = asuraMale.Map(GetDyeSlots),
+            CharrFemale = charrFemale.Map(GetDyeSlots),
+            CharrMale = charrMale.Map(GetDyeSlots),
+            HumanFemale = humanFemale.Map(GetDyeSlots),
+            HumanMale = humanMale.Map(GetDyeSlots),
+            NornFemale = nornFemale.Map(GetDyeSlots),
+            NornMale = nornMale.Map(GetDyeSlots),
+            SylvariFemale = sylvariFemale.Map(GetDyeSlots),
+            SylvariMale = sylvariMale.Map(GetDyeSlots)
         };
+
+        List<DyeSlot?> GetDyeSlots(JsonElement values)
+        {
+            // The dye slot arrays can contain Null to represent the default color, so this is ugly
+            // Perhaps there is a better way to model it with a Null Object pattern?
+            return values.GetList(
+                value => value.ValueKind == JsonValueKind.Null
+                    ? null
+                    : value.GetDyeSlot(missingMemberBehavior)
+            );
+        }
     }
 }

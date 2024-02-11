@@ -4,25 +4,25 @@
 [DataTransferObject]
 public sealed record DyeSlotInfo
 {
-    public required IReadOnlyCollection<DyeSlot?> Default { get; init; }
+    public required IReadOnlyList<DyeSlot?> Default { get; init; }
 
-    public required IReadOnlyCollection<DyeSlot?>? AsuraFemale { get; init; }
+    public required IReadOnlyList<DyeSlot?>? AsuraFemale { get; init; }
 
-    public required IReadOnlyCollection<DyeSlot?>? AsuraMale { get; init; }
+    public required IReadOnlyList<DyeSlot?>? AsuraMale { get; init; }
 
-    public required IReadOnlyCollection<DyeSlot?>? CharrFemale { get; init; }
+    public required IReadOnlyList<DyeSlot?>? CharrFemale { get; init; }
 
-    public required IReadOnlyCollection<DyeSlot?>? CharrMale { get; init; }
+    public required IReadOnlyList<DyeSlot?>? CharrMale { get; init; }
 
-    public required IReadOnlyCollection<DyeSlot?>? HumanFemale { get; init; }
+    public required IReadOnlyList<DyeSlot?>? HumanFemale { get; init; }
 
-    public required IReadOnlyCollection<DyeSlot?>? HumanMale { get; init; }
+    public required IReadOnlyList<DyeSlot?>? HumanMale { get; init; }
 
-    public required IReadOnlyCollection<DyeSlot?>? NornFemale { get; init; }
+    public required IReadOnlyList<DyeSlot?>? NornFemale { get; init; }
 
-    public required IReadOnlyCollection<DyeSlot?>? NornMale { get; init; }
+    public required IReadOnlyList<DyeSlot?>? NornMale { get; init; }
 
-    public required IReadOnlyCollection<DyeSlot?>? SylvariFemale { get; init; }
+    public required IReadOnlyList<DyeSlot?>? SylvariFemale { get; init; }
 
-    public required IReadOnlyCollection<DyeSlot?>? SylvariMale { get; init; }
+    public required IReadOnlyList<DyeSlot?>? SylvariMale { get; init; }
 }
