@@ -64,7 +64,7 @@ internal static class GliderSkinJson
             IconHref = icon.Map(value => value.GetStringRequired()),
             Name = name.Map(value => value.GetStringRequired()),
             Description = description.Map(value => value.GetStringRequired()),
-            DefaultDyeIds = defaultDyes.Map(values => values.GetList(entry => entry.GetInt32()))
+            DefaultDyeColorIds = defaultDyes.Map(values => values.GetList(entry => entry.GetInt32()))
         };
     }
 }

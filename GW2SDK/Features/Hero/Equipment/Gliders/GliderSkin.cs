@@ -24,6 +24,6 @@ public sealed record GliderSkin
     /// <remarks>Can be empty.</remarks>
     public required string Description { get; init; }
 
-    /// <summary>The IDs of the dyes applied by default.</summary>
-    public required IReadOnlyList<int> DefaultDyeIds { get; init; }
+    /// <summary>The color IDs of the dyes applied by default.</summary>
+    public required IReadOnlyList<int> DefaultDyeColorIds { get; init; }
 }
