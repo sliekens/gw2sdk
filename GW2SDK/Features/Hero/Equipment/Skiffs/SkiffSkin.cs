@@ -1,19 +1,19 @@
 ﻿namespace GuildWars2.Hero.Equipment.Skiffs;
 
-/// <summary>Information about a Skiff.</summary>
+/// <summary>Information about a skiff skin.</summary>
 [PublicAPI]
 [DataTransferObject]
 public sealed record SkiffSkin
 {
-    /// <summary>The skiff ID.</summary>
+    /// <summary>The skiff skin ID.</summary>
     public required int Id { get; init; }
 
-    /// <summary>The skiff name.</summary>
+    /// <summary>The name of the skiff skin.</summary>
     public required string Name { get; init; }
 
-    /// <summary>The URL of the skiff icon.</summary>
+    /// <summary>The URL of the skiff skin icon.</summary>
     public required string IconHref { get; init; }
 
-    /// <summary>The default colors of the skiff.</summary>
+    /// <summary>The dyes applied by default.</summary>
     public required IReadOnlyList<DyeSlot> DyeSlots { get; init; }
 }

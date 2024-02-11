@@ -16,6 +16,11 @@ public sealed class SkiffsClient
 
     #region v2/account/skiffs
 
+    /// <summary>Retrieves the IDs of skiff skins unlocked on the account associated with the access token. This endpoint is
+    /// only accessible with a valid access token.</summary>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedSkiffSkins(
         string? accessToken,
         CancellationToken cancellationToken = default
@@ -29,6 +34,11 @@ public sealed class SkiffsClient
 
     #region v2/skiffs
 
+    /// <summary>Retrieves all skiff skins.</summary>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<SkiffSkin> Value, MessageContext Context)> GetSkiffSkins(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -43,6 +53,9 @@ public sealed class SkiffsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all skiff skins.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<int> Value, MessageContext Context)> GetSkiffSkinsIndex(
         CancellationToken cancellationToken = default
     )
@@ -51,6 +64,12 @@ public sealed class SkiffsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a skiff skin by its ID.</summary>
+    /// <param name="skiffSkinId">The skiff skin ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(SkiffSkin Value, MessageContext Context)> GetSkiffSkinById(
         int skiffSkinId,
         Language? language = default,
@@ -66,6 +85,12 @@ public sealed class SkiffsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves skiff skins by their IDs.</summary>
+    /// <param name="skiffSkinIds">The skiff skin IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<SkiffSkin> Value, MessageContext Context)> GetSkiffSkinsByIds(
         IReadOnlyCollection<int> skiffSkinIds,
         Language? language = default,
@@ -81,6 +106,13 @@ public sealed class SkiffsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of skiff skins.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<SkiffSkin> Value, MessageContext Context)> GetSkiffSkinsByPage(
         int pageIndex,
         int? pageSize = default,
