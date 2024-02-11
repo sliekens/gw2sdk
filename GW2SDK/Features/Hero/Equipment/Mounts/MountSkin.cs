@@ -15,7 +15,7 @@ public sealed record MountSkin
     public required string IconHref { get; init; }
 
     /// <summary>The dyes applied by default.</summary>
-    public required IReadOnlyCollection<DyeSlot> DyeSlots { get; init; }
+    public required IReadOnlyList<DyeSlot> DyeSlots { get; init; }
 
     /// <summary>The mount associated with the skin.</summary>
     public required MountName Mount { get; init; }
