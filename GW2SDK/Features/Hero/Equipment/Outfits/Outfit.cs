@@ -2,12 +2,15 @@
 
 namespace GuildWars2.Hero.Equipment.Outfits;
 
+/// <summary>Information about an outfit.</summary>
 [PublicAPI]
 [DataTransferObject]
 public sealed record Outfit
 {
+    /// <summary>The outfit ID.</summary>
     public required int Id { get; init; }
 
+    /// <summary>The name of the outfit.</summary>
     public required string Name { get; init; }
 
     /// <summary>The URL of the outfit icon.</summary>
