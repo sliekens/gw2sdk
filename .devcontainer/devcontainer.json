@@ -6,8 +6,8 @@
   },
   "features": {
     "ghcr.io/devcontainers/features/dotnet:2": {
-      "version": "8.0",
-      "dotnetRuntimeVersions": "7.0" // required by csdevkit
+      "version": "8.0.2xx",
+      "dotnetRuntimeVersions": "7.0"
     },
     "./mono": {},
     "ghcr.io/devcontainers/features/powershell:1": {}
