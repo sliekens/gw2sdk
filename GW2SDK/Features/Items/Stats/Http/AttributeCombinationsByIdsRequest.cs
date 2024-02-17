@@ -1,21 +1,28 @@
 ﻿using GuildWars2.Http;
+using GuildWars2.Json;
 
 namespace GuildWars2.Items.Stats.Http;
 
-internal sealed class ItemStatByIdRequest(int itemStatId) : IHttpRequest<ItemStat>
+internal sealed class AttributeCombinationsByIdsRequest : IHttpRequest<HashSet<AttributeCombination>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/itemstats")
     {
         AcceptEncoding = "gzip"
     };
 
-    public int ItemStatId { get; } = itemStatId;
+    public AttributeCombinationsByIdsRequest(IReadOnlyCollection<int> itemStatIds)
+    {
+        Check.Collection(itemStatIds);
+        ItemStatIds = itemStatIds;
+    }
+
+    public IReadOnlyCollection<int> ItemStatIds { get; }
 
     public Language? Language { get; init; }
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<(ItemStat Value, MessageContext Context)> SendAsync(
+    public async Task<(HashSet<AttributeCombination> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -25,7 +32,7 @@ internal sealed class ItemStatByIdRequest(int itemStatId) : IHttpRequest<ItemSta
                 {
                     Arguments = new QueryBuilder
                     {
-                        { "id", ItemStatId },
+                        { "ids", ItemStatIds },
                         { "v", SchemaVersion.Recommended }
                     },
                     AcceptLanguage = Language?.Alpha2Code
@@ -38,7 +45,7 @@ internal sealed class ItemStatByIdRequest(int itemStatId) : IHttpRequest<ItemSta
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetItemStat(MissingMemberBehavior);
+        var value = json.RootElement.GetSet(entry => entry.GetAttributeCombination(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }
 }

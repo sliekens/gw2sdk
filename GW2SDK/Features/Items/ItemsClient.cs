@@ -140,13 +140,13 @@ public sealed class ItemsClient
 
     #region v2/itemstats
 
-    public Task<(HashSet<ItemStat> Value, MessageContext Context)> GetItemStats(
+    public Task<(HashSet<AttributeCombination> Value, MessageContext Context)> GetAttributeCombinations(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        ItemStatsRequest request = new()
+        AttributeCombinationsRequest request = new()
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -162,14 +162,14 @@ public sealed class ItemsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(ItemStat Value, MessageContext Context)> GetItemStatById(
+    public Task<(AttributeCombination Value, MessageContext Context)> GetAttributeCombinationById(
         int itemStatId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        ItemStatByIdRequest request = new(itemStatId)
+        AttributeCombinationByIdRequest request = new(itemStatId)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -177,14 +177,14 @@ public sealed class ItemsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<ItemStat> Value, MessageContext Context)> GetItemStatsByIds(
+    public Task<(HashSet<AttributeCombination> Value, MessageContext Context)> GetAttributeCombinationsByIds(
         IReadOnlyCollection<int> itemStatIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        ItemStatsByIdsRequest request = new(itemStatIds)
+        AttributeCombinationsByIdsRequest request = new(itemStatIds)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -193,7 +193,7 @@ public sealed class ItemsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<ItemStat> Value, MessageContext Context)> GetItemStatsByPage(
+    public Task<(HashSet<AttributeCombination> Value, MessageContext Context)> GetAttributeCombinationByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -201,7 +201,7 @@ public sealed class ItemsClient
         CancellationToken cancellationToken = default
     )
     {
-        ItemStatsByPageRequest request = new(pageIndex)
+        AttributeCombinationsByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             Language = language,

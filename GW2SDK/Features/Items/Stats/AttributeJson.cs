@@ -4,9 +4,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items.Stats;
 
-internal static class ItemStatAttributeJson
+internal static class AttributeJson
 {
-    public static ItemStatAttribute GetItemStatAttribute(
+    public static Attribute GetAttribute(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -35,9 +35,9 @@ internal static class ItemStatAttributeJson
             }
         }
 
-        return new ItemStatAttribute
+        return new Attribute
         {
-            Attribute = attribute.Map(value => value.GetAttributeName(missingMemberBehavior)),
+            Name = attribute.Map(value => value.GetAttributeName(missingMemberBehavior)),
             Multiplier = multiplier.Map(value => value.GetDouble()),
             Value = amount.Map(value => value.GetInt32())
         };

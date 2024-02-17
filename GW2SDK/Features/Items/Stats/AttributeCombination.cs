@@ -2,11 +2,11 @@
 
 [PublicAPI]
 [DataTransferObject]
-public sealed record ItemStat
+public sealed record AttributeCombination
 {
     public required int Id { get; init; }
 
     public required string Name { get; init; }
 
-    public required IReadOnlyCollection<ItemStatAttribute> Attributes { get; init; }
+    public required IReadOnlyCollection<Attribute> Attributes { get; init; }
 }

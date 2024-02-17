@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items.Stats.Http;
 
-internal sealed class ItemStatsRequest : IHttpRequest<HashSet<ItemStat>>
+internal sealed class AttributeCombinationsRequest : IHttpRequest<HashSet<AttributeCombination>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/itemstats")
     {
@@ -19,7 +19,7 @@ internal sealed class ItemStatsRequest : IHttpRequest<HashSet<ItemStat>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<(HashSet<ItemStat> Value, MessageContext Context)> SendAsync(
+    public async Task<(HashSet<AttributeCombination> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -34,7 +34,7 @@ internal sealed class ItemStatsRequest : IHttpRequest<HashSet<ItemStat>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetItemStat(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetAttributeCombination(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }
 }

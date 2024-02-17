@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Tests.Features.Items.Stats;
 
-public class ItemStatById
+public class AttributeCombinationById
 {
     [Fact]
     public async Task Can_be_found()
@@ -11,7 +11,7 @@ public class ItemStatById
 
         const int id = 559;
 
-        var (actual, _) = await sut.Items.GetItemStatById(id);
+        var (actual, _) = await sut.Items.GetAttributeCombinationById(id);
 
         Assert.Equal(id, actual.Id);
     }

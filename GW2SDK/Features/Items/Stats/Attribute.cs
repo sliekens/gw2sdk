@@ -4,9 +4,9 @@ namespace GuildWars2.Items.Stats;
 
 [PublicAPI]
 [DataTransferObject]
-public sealed record ItemStatAttribute
+public sealed record Attribute
 {
-    public required AttributeName Attribute { get; init; }
+    public required AttributeName Name { get; init; }
 
     public required double Multiplier { get; init; }
 
