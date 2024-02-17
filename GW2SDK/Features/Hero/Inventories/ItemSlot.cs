@@ -29,7 +29,7 @@ public sealed record ItemSlot
     public required int? SecondarySuffixItemId { get; init; }
 
     /// <summary>The item IDs of infusions in this item.</summary>
-    public required IReadOnlyList<int>? InfusionItemIds { get; init; }
+    public required IReadOnlyList<int> InfusionItemIds { get; init; }
 
     /// <summary>The color IDs of the dyes applied to the current item.</summary>
     public required IReadOnlyList<int> DyeColorIds { get; init; }

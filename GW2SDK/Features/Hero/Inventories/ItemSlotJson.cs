@@ -113,7 +113,9 @@ internal static class ItemSlotJson
             SkinId = skin.Map(value => value.GetInt32()),
             SuffixItemId = suffixItemId,
             SecondarySuffixItemId = secondarySuffixItemId,
-            InfusionItemIds = infusions.Map(values => values.GetList(value => value.GetInt32())),
+            InfusionItemIds =
+                infusions.Map(values => values.GetList(value => value.GetInt32()))
+                ?? Empty.ListOfInt32,
             DyeColorIds =
                 dyes.Map(values => values.GetList(value => value.GetInt32())) ?? Empty.ListOfInt32,
             Binding = binding.Map(value => value.GetEnum<ItemBinding>(missingMemberBehavior)),
