@@ -31,10 +31,7 @@ internal static class UpgradeAttributeJson
 
         return new UpgradeAttribute
         {
-            Attribute =
-                attribute.Map(
-                    value => value.GetEnum<AttributeName>(missingMemberBehavior)
-                ),
+            Attribute = attribute.Map(value => value.GetAttributeName(missingMemberBehavior)),
             Modifier = modifier.Map(value => value.GetInt32())
         };
     }

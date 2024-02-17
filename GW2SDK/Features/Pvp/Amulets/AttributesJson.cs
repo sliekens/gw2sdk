@@ -13,7 +13,24 @@ internal static class AttributesJson
         var result = new Dictionary<AttributeName, int>(4);
         foreach (var member in json.EnumerateObject())
         {
-            if (Enum.TryParse(member.Name, false, out AttributeName name))
+            // Somemetimes the old attribute names (or partial names) are used in the API
+            if (member.NameEquals("BoonDuration"))
+            {
+                result[AttributeName.Concentration] = member.Value.GetInt32();
+            }
+            else if (member.NameEquals("CritDamage"))
+            {
+                result[AttributeName.Ferocity] = member.Value.GetInt32();
+            }
+            else if (member.NameEquals("ConditionDuration"))
+            {
+                result[AttributeName.Expertise] = member.Value.GetInt32();
+            }
+            else if (member.NameEquals("Healing"))
+            {
+                result[AttributeName.HealingPower] = member.Value.GetInt32();
+            }
+            else if (Enum.TryParse(member.Name, false, out AttributeName name))
             {
                 result[name] = member.Value.GetInt32();
             }

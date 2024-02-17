@@ -71,11 +71,11 @@ internal static class AttributeCombinationJson
         return new AttributeCombination
         {
             AgonyResistance = agonyResistance.Map(value => value.GetInt32()),
-            BoonDuration = boonDuration.Map(value => value.GetInt32()),
+            Concentration = boonDuration.Map(value => value.GetInt32()),
             ConditionDamage = conditionDamage.Map(value => value.GetInt32()),
-            ConditionDuration = conditionDuration.Map(value => value.GetInt32()),
-            CritDamage = critDamage.Map(value => value.GetInt32()),
-            Healing = healing.Map(value => value.GetInt32()),
+            Expertise = conditionDuration.Map(value => value.GetInt32()),
+            Ferocity = critDamage.Map(value => value.GetInt32()),
+            HealingPower = healing.Map(value => value.GetInt32()),
             Power = power.Map(value => value.GetInt32()),
             Precision = precision.Map(value => value.GetInt32()),
             Toughness = toughness.Map(value => value.GetInt32()),

@@ -71,7 +71,7 @@ internal static class AttributeAdjustmentJson
             Text = text.Map(value => value.GetString()) ?? "",
             IconHref = icon.Map(value => value.GetStringRequired()),
             Value = adjustment.Map(value => value.GetInt32()),
-            Target = target.Map(value => value.GetEnum<AttributeName>(missingMemberBehavior)),
+            Target = target.Map(value => value.GetAttributeName(missingMemberBehavior)),
             HitCount = hitCount.Map(value => value.GetInt32())
         };
     }

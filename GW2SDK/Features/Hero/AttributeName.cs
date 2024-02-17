@@ -12,19 +12,19 @@ public enum AttributeName
     None,
 
     /// <summary>Concentration increases outgoing boon duration, including boons applied to self. Secondary attribute.</summary>
-    BoonDuration,
+    Concentration,
 
     /// <summary>Ferocity increases outgoing critical damage. Secondary attribute.</summary>
-    CritDamage,
+    Ferocity,
 
     /// <summary>Condition damage increases outgoing condition damage. Secondary attribute.</summary>
     ConditionDamage,
 
     /// <summary>Expertise increases outgoing condition duration. Secondary attribute.</summary>
-    ConditionDuration,
+    Expertise,
 
-    /// <summary>Healing power increases outgoing healing, including self heals. Secondary attribute.</summary>
-    Healing,
+    /// <summary>Healing power increases outgoing healing, including self-heals. Secondary attribute.</summary>
+    HealingPower,
 
     /// <summary>Precision increases critical chance. Primary attribute.</summary>
     Precision,

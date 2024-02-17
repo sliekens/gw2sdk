@@ -7,7 +7,7 @@ public sealed record AttributeAdjustment : Fact
     /// <summary>The amount by which the attribute is modified, based on a level 80 character.</summary>
     public required int? Value { get; init; }
 
-    /// <summary>The attribute that is modified. If the target is  <see cref="AttributeName.Healing" /> then the
+    /// <summary>The attribute that is modified. If the target is  <see cref="AttributeName.HealingPower" /> then the
     /// <see cref="Value" /> is the amount of health that is recovered.</summary>
     public required AttributeName? Target { get; init; }
 
