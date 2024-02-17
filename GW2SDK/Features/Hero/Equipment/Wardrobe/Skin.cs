@@ -1,4 +1,5 @@
-﻿using GuildWars2.Items;
+﻿using GuildWars2.Hero.Races;
+using GuildWars2.Items;
 
 namespace GuildWars2.Hero.Equipment.Wardrobe;
 
@@ -15,7 +16,7 @@ public record Skin
 
     public required SkinFlags Flags { get; init; }
 
-    public required IReadOnlyCollection<SkinRestriction> Restrictions { get; init; }
+    public required IReadOnlyCollection<RaceName> Restrictions { get; init; }
 
     public required Rarity Rarity { get; init; }
 

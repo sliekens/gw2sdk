@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using GuildWars2.Hero.Races;
 using GuildWars2.Items;
 using GuildWars2.Json;
 
@@ -92,7 +93,7 @@ internal static class ForagingToolSkinJson
             Restrictions =
                 restrictions.Map(
                     values => values.GetList(
-                        value => value.GetEnum<SkinRestriction>(missingMemberBehavior)
+                        value => value.GetEnum<RaceName>(missingMemberBehavior)
                     )
                 ),
             IconHref = icon.Map(value => value.GetString())

@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using GuildWars2.Hero.Races;
 using GuildWars2.Items;
 using GuildWars2.Json;
 
@@ -96,10 +97,9 @@ internal static class TridentSkinJson
             Flags = flags.Map(values => values.GetSkinFlags()),
             Restrictions =
                 restrictions.Map(
-                    values =>
-                        values.GetList(
-                            value => value.GetEnum<SkinRestriction>(missingMemberBehavior)
-                        )
+                    values => values.GetList(
+                        value => value.GetEnum<RaceName>(missingMemberBehavior)
+                    )
                 ),
             IconHref = icon.Map(value => value.GetString()),
             DamageType = damageType.Map(value => value.GetEnum<DamageType>(missingMemberBehavior))
