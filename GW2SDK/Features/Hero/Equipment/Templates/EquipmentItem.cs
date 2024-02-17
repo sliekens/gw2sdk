@@ -36,7 +36,7 @@ public sealed record EquipmentItem
     public required EquipmentLocation Location { get; init; }
 
     /// <summary>The equipment template numbers in which this item is (re)used.</summary>
-    public required IReadOnlyList<int>? TemplateNumbers { get; init; }
+    public required IReadOnlyList<int> TemplateNumbers { get; init; }
 
     /// <summary>The color IDs of dyes applied to the item.</summary>
     public required IReadOnlyList<int> DyeColorIds { get; init; }
