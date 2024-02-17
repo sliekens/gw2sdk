@@ -5,7 +5,7 @@
 [DataTransferObject]
 public sealed record SelectedAttributeCombination
 {
-    /// <summary>The ID of the combination which can be used to look up its name.</summary>
+    /// <summary>The ID of the combination which can be used to look up its name and base stats.</summary>
     public required int Id { get; init; }
 
     /// <summary>The effective attributes of the selected combination.</summary>

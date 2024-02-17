@@ -13,7 +13,7 @@ internal static class AttributeJson
     {
         RequiredMember attribute = "attribute";
         RequiredMember multiplier = "multiplier";
-        RequiredMember amount = "value";
+        RequiredMember value = "value";
 
         foreach (var member in json.EnumerateObject())
         {
@@ -25,9 +25,9 @@ internal static class AttributeJson
             {
                 multiplier = member;
             }
-            else if (member.Name == amount.Name)
+            else if (member.Name == value.Name)
             {
-                amount = member;
+                value = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -39,7 +39,7 @@ internal static class AttributeJson
         {
             Name = attribute.Map(value => value.GetAttributeName(missingMemberBehavior)),
             Multiplier = multiplier.Map(value => value.GetDouble()),
-            Value = amount.Map(value => value.GetInt32())
+            Value = value.Map(value => value.GetInt32())
         };
     }
 }
