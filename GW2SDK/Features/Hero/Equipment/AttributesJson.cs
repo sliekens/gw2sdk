@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment;
 
@@ -12,30 +13,28 @@ internal static class AttributesJson
         var result = new Dictionary<AttributeName, int>(4);
         foreach (var member in json.EnumerateObject())
         {
+            var value = member.Value.GetInt32();
+
             // Somemetimes the old attribute names (or partial names) are used in the API
             if (member.NameEquals("BoonDuration"))
             {
-                result[AttributeName.Concentration] = member.Value.GetInt32();
+                result[AttributeName.Concentration] = value;
             }
             else if (member.NameEquals("CritDamage"))
             {
-                result[AttributeName.Ferocity] = member.Value.GetInt32();
+                result[AttributeName.Ferocity] = value;
             }
             else if (member.NameEquals("ConditionDuration"))
             {
-                result[AttributeName.Expertise] = member.Value.GetInt32();
+                result[AttributeName.Expertise] = value;
             }
             else if (member.NameEquals("Healing"))
             {
-                result[AttributeName.HealingPower] = member.Value.GetInt32();
+                result[AttributeName.HealingPower] = value;
             }
-            else if (Enum.TryParse(member.Name, false, out AttributeName name))
+            else
             {
-                result[name] = member.Value.GetInt32();
-            }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
-            {
-                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                result[json.GetEnum<AttributeName>(missingMemberBehavior)] = value;
             }
         }
 
