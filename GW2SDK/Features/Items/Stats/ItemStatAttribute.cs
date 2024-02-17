@@ -6,7 +6,7 @@ namespace GuildWars2.Items.Stats;
 [DataTransferObject]
 public sealed record ItemStatAttribute
 {
-    public required CombatAttribute Attribute { get; init; }
+    public required AttributeName Attribute { get; init; }
 
     public required double Multiplier { get; init; }
 

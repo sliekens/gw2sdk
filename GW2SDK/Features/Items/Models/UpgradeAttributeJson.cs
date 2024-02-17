@@ -33,7 +33,7 @@ internal static class UpgradeAttributeJson
         {
             Attribute =
                 attribute.Map(
-                    value => value.GetEnum<CombatAttribute>(missingMemberBehavior)
+                    value => value.GetEnum<AttributeName>(missingMemberBehavior)
                 ),
             Modifier = modifier.Map(value => value.GetInt32())
         };

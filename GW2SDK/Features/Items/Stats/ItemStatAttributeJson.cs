@@ -39,7 +39,7 @@ internal static class ItemStatAttributeJson
         {
             Attribute =
                 attribute.Map(
-                    value => value.GetEnum<CombatAttribute>(missingMemberBehavior)
+                    value => value.GetEnum<AttributeName>(missingMemberBehavior)
                 ),
             Multiplier = multiplier.Map(value => value.GetDouble()),
             Value = amount.Map(value => value.GetInt32())

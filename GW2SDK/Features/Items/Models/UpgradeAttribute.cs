@@ -6,7 +6,7 @@ namespace GuildWars2.Items;
 [DataTransferObject]
 public sealed record UpgradeAttribute
 {
-    public required CombatAttribute Attribute { get; init; }
+    public required AttributeName Attribute { get; init; }
 
     public required int Modifier { get; init; }
 }

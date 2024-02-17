@@ -69,8 +69,8 @@ internal static class AttributeConversionJson
             Text = text.Map(value => value.GetString()) ?? "",
             IconHref = icon.Map(value => value.GetString()) ?? "",
             Percent = percent.Map(value => value.GetInt32()),
-            Source = source.Map(value => value.GetEnum<CombatAttribute>(missingMemberBehavior)),
-            Target = target.Map(value => value.GetEnum<CombatAttribute>(missingMemberBehavior))
+            Source = source.Map(value => value.GetEnum<AttributeName>(missingMemberBehavior)),
+            Target = target.Map(value => value.GetEnum<AttributeName>(missingMemberBehavior))
         };
     }
 }

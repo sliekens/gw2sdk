@@ -13,5 +13,5 @@ public sealed record Amulet
     /// <summary>The URL of the amulet icon.</summary>
     public required string IconHref { get; init; }
 
-    public required IDictionary<CombatAttribute, int> Attributes { get; init; }
+    public required IDictionary<AttributeName, int> Attributes { get; init; }
 }
