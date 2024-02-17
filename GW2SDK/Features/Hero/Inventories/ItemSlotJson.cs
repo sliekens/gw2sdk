@@ -98,7 +98,9 @@ internal static class ItemSlotJson
                         secondarySuffixItemId = upgradeId;
                         break;
                     default:
-                        throw new InvalidOperationException(Strings.UnexpectedArrayLength(ids.Count));
+                        throw new InvalidOperationException(
+                            Strings.UnexpectedArrayLength(ids.Count)
+                        );
                 }
             }
         }
@@ -112,7 +114,8 @@ internal static class ItemSlotJson
             SuffixItemId = suffixItemId,
             SecondarySuffixItemId = secondarySuffixItemId,
             InfusionItemIds = infusions.Map(values => values.GetList(value => value.GetInt32())),
-            DyeColorIds = dyes.Map(values => values.GetList(value => value.GetNullableInt32())),
+            DyeColorIds =
+                dyes.Map(values => values.GetList(value => value.GetInt32())) ?? Empty.ListOfInt32,
             Binding = binding.Map(value => value.GetEnum<ItemBinding>(missingMemberBehavior)),
             BoundTo = boundTo.Map(value => value.GetString()) ?? "",
             Stats = stats.Map(value => value.GetSelectedStat(missingMemberBehavior))
