@@ -1,4 +1,5 @@
-using System.Text.Json;
+﻿using System.Text.Json;
+using GuildWars2.Hero;
 using GuildWars2.Json;
 
 namespace GuildWars2.Items;
@@ -32,7 +33,7 @@ internal static class UpgradeAttributeJson
         {
             Attribute =
                 attribute.Map(
-                    value => value.GetEnum<UpgradeAttributeName>(missingMemberBehavior)
+                    value => value.GetEnum<CombatAttribute>(missingMemberBehavior)
                 ),
             Modifier = modifier.Map(value => value.GetInt32())
         };

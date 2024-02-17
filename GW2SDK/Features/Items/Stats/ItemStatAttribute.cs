@@ -1,10 +1,12 @@
-﻿namespace GuildWars2.Items.Stats;
+﻿using GuildWars2.Hero;
+
+namespace GuildWars2.Items.Stats;
 
 [PublicAPI]
 [DataTransferObject]
 public sealed record ItemStatAttribute
 {
-    public required UpgradeAttributeName Attribute { get; init; }
+    public required CombatAttribute Attribute { get; init; }
 
     public required double Multiplier { get; init; }
 

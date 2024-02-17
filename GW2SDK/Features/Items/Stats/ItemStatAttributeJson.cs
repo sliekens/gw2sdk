@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using GuildWars2.Hero;
 using GuildWars2.Json;
 
 namespace GuildWars2.Items.Stats;
@@ -38,7 +39,7 @@ internal static class ItemStatAttributeJson
         {
             Attribute =
                 attribute.Map(
-                    value => value.GetEnum<UpgradeAttributeName>(missingMemberBehavior)
+                    value => value.GetEnum<CombatAttribute>(missingMemberBehavior)
                 ),
             Multiplier = multiplier.Map(value => value.GetDouble()),
             Value = amount.Map(value => value.GetInt32())

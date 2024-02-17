@@ -36,5 +36,9 @@ public enum CombatAttribute
     Power,
 
     /// <summary>Vitality increases health. Primary attribute.</summary>
-    Vitality
+    Vitality,
+
+    /// <summary>Agony Resistance improves resistance against Agony; only relevant inside Fractals of the Mists. Special
+    /// attribute.</summary>
+    AgonyResistance
 }
