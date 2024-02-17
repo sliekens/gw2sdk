@@ -1,7 +1,6 @@
 ﻿using System.Text.Json;
-using GuildWars2.Hero;
 
-namespace GuildWars2.Pvp.Amulets;
+namespace GuildWars2.Hero.Equipment;
 
 internal static class AttributesJson
 {

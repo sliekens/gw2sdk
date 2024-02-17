@@ -31,9 +31,7 @@ internal static class SelectedAttributeCombinationJson
         return new SelectedAttributeCombination
         {
             Id = id.Map(value => value.GetInt32()),
-            Attributes = attributes.Map(
-                value => value.GetAttributeCombination(missingMemberBehavior)
-            )
+            Attributes = attributes.Map(value => value.GetAttributes(missingMemberBehavior))
         };
     }
 }

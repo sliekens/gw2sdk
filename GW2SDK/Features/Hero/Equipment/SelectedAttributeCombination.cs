@@ -8,6 +8,6 @@ public sealed record SelectedAttributeCombination
     /// <summary>The ID of the combination which can be used to look up its name.</summary>
     public required int Id { get; init; }
 
-    /// <summary>The attributes of the selected combination.</summary>
-    public required AttributeCombination Attributes { get; init; }
+    /// <summary>The effective attributes of the selected combination.</summary>
+    public required IDictionary<AttributeName, int> Attributes { get; init; }
 }
