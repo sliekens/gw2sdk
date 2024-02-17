@@ -2,10 +2,10 @@
 
 // TODO: use modern stat names
 
-/// <summary>A combination of item stats.</summary>
+/// <summary>A combination of item attributes like Power, Precision, Ferocity.</summary>
 [PublicAPI]
 [DataTransferObject]
-public sealed record SelectedModification
+public sealed record AttributeCombination
 {
     /// <summary>The Agony Resistance attribute modifier.</summary>
     public required int? AgonyResistance { get; init; }

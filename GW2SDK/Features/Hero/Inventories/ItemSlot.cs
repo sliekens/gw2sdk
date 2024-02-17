@@ -40,8 +40,8 @@ public sealed record ItemSlot
     /// <summary>The name of the character if the item is soulbound.</summary>
     public required string BoundTo { get; init; }
 
-    /// <summary>The attribute combination for items with selectable stats.</summary>
-    public required SelectedStat? Stats { get; init; }
+    /// <summary>The selected attribute combination for equipment with selectable stats.</summary>
+    public required SelectedAttributeCombination? Stats { get; init; }
 
     /// <summary>Gets a chat link object for this item slot.</summary>
     /// <returns>The chat link as an object.</returns>

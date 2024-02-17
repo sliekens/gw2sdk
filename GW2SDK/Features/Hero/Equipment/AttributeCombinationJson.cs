@@ -3,9 +3,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment;
 
-internal static class SelectedModificationJson
+internal static class AttributeCombinationJson
 {
-    public static SelectedModification GetSelectedModification(
+    public static AttributeCombination GetAttributeCombination(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -68,7 +68,7 @@ internal static class SelectedModificationJson
             }
         }
 
-        return new SelectedModification
+        return new AttributeCombination
         {
             AgonyResistance = agonyResistance.Map(value => value.GetInt32()),
             BoonDuration = boonDuration.Map(value => value.GetInt32()),

@@ -23,8 +23,8 @@ public sealed record EquipmentItem
     /// <summary>The skin ID.</summary>
     public required int? SkinId { get; init; }
 
-    /// <summary>The attribute combination for items with selectable stats.</summary>
-    public required SelectedStat? Stats { get; init; }
+    /// <summary>The selected attribute combination for equipment with selectable stats.</summary>
+    public required SelectedAttributeCombination? Stats { get; init; }
 
     /// <summary>Whether this item is bound.</summary>
     public required ItemBinding Binding { get; init; }
