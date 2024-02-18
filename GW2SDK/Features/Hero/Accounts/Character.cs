@@ -2,8 +2,8 @@
 using GuildWars2.Hero.Crafting.Disciplines;
 using GuildWars2.Hero.Equipment.Templates;
 using GuildWars2.Hero.Inventories;
-using GuildWars2.Hero.Races;
 using GuildWars2.Hero.Training;
+using static GuildWars2.Hero.BodyType;
 
 namespace GuildWars2.Hero.Accounts;
 
@@ -12,6 +12,13 @@ namespace GuildWars2.Hero.Accounts;
 [DataTransferObject]
 public sealed record Character
 {
+    /// <summary>The names of all body types.</summary>
+    public static readonly IReadOnlyList<BodyType> AllBodyTypes = new List<BodyType>
+    {
+        Female,
+        Male
+    }.AsReadOnly();
+
     /// <summary>The name of the current character.</summary>
     /// <remarks>This can be changed later with a Black Lion contract.</remarks>
     public required string Name { get; init; }

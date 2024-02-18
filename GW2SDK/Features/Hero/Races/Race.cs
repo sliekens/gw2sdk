@@ -1,10 +1,22 @@
-﻿namespace GuildWars2.Hero.Races;
+﻿using static GuildWars2.Hero.RaceName;
+
+namespace GuildWars2.Hero.Races;
 
 /// <summary>Information about one of the playable races.</summary>
 [PublicAPI]
 [DataTransferObject]
 public sealed record Race
 {
+    /// <summary>The names of all races.</summary>
+    public static readonly IReadOnlyList<RaceName> AllRaces = new List<RaceName>
+    {
+        Asura,
+        Charr,
+        Human,
+        Norn,
+        Sylvari
+    }.AsReadOnly();
+
     /// <summary>The race ID.</summary>
     public required RaceName Id { get; init; }
 

@@ -1,5 +1,8 @@
 ﻿using System.Text.Json;
 using GuildWars2.Hero;
+using GuildWars2.Hero.Accounts;
+using GuildWars2.Hero.Races;
+using GuildWars2.Hero.Training;
 using static GuildWars2.Hero.ProfessionName;
 using static GuildWars2.Hero.RaceName;
 using static GuildWars2.Hero.BodyType;
@@ -8,35 +11,6 @@ namespace GuildWars2.Items;
 
 internal static class RestrictionsJson
 {
-    private static readonly IReadOnlyList<RaceName> AllRaces = new List<RaceName>
-    {
-        Asura,
-        Charr,
-        Human,
-        Norn,
-        Sylvari
-    }.AsReadOnly();
-
-    private static readonly IReadOnlyList<ProfessionName> AllProfessions =
-        new List<ProfessionName>
-        {
-            Elementalist,
-            Engineer,
-            Guardian,
-            Mesmer,
-            Necromancer,
-            Ranger,
-            Revenant,
-            Thief,
-            Warrior
-        }.AsReadOnly();
-
-    private static readonly IReadOnlyList<BodyType> AllBodyTypes = new List<BodyType>
-    {
-        Female,
-        Male
-    }.AsReadOnly();
-
     public static (IReadOnlyList<RaceName> Races, IReadOnlyList<ProfessionName> Professions,
         IReadOnlyList<BodyType> BodyTypes) GetRestrictions(
             this JsonElement json,
@@ -135,6 +109,7 @@ internal static class RestrictionsJson
             }
         }
 
-        return (races ?? AllRaces, professions ?? AllProfessions, bodyTypes ?? AllBodyTypes);
+        return (races ?? Race.AllRaces, professions ?? Profession.AllProfessions,
+            bodyTypes ?? Character.AllBodyTypes);
     }
 }

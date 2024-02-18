@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Hero.Builds;
+using static GuildWars2.Hero.ProfessionName;
 
 namespace GuildWars2.Hero.Training;
 
@@ -7,6 +8,20 @@ namespace GuildWars2.Hero.Training;
 [DataTransferObject]
 public sealed record Profession
 {
+    /// <summary>The names of all professions.</summary>
+    public static readonly IReadOnlyList<ProfessionName> AllProfessions = new List<ProfessionName>
+    {
+        Elementalist,
+        Engineer,
+        Guardian,
+        Mesmer,
+        Necromancer,
+        Ranger,
+        Revenant,
+        Thief,
+        Warrior
+    }.AsReadOnly();
+
     /// <summary>The profession ID.</summary>
     public required ProfessionName Id { get; init; }
 
