@@ -107,6 +107,10 @@ internal static class RestrictionsJson
                 bodyTypes ??= [];
                 bodyTypes.Add(Male);
             }
+            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            {
+                throw new InvalidOperationException(Strings.UnexpectedEnum(entry.GetRawText()));
+            }
         }
 
         return (races ?? Race.AllRaces, professions ?? Profession.AllProfessions,

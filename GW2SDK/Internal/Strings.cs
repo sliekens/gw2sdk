@@ -6,6 +6,9 @@ internal static class Strings
     internal static string UnexpectedMember(string memberName) =>
         $"Unexpected member '{memberName}'.";
 
+    internal static string UnexpectedEnum(string memberName) =>
+        $"Unexpected enum member '{memberName}'.";
+
     internal static string UnexpectedArrayLength(int length) =>
         $"Unexpected array length [{length}].";
 
