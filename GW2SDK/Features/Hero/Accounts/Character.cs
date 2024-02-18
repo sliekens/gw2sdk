@@ -19,9 +19,9 @@ public sealed record Character
     /// <summary>The race selected during creation of the current character.</summary>
     public required RaceName Race { get; init; }
 
-    /// <summary>Whether the character is male or female.</summary>
+    /// <summary>The character's appearance.</summary>
     /// <remarks>This can be changed later with a Black Lion contract.</remarks>
-    public required Gender Gender { get; init; }
+    public required BodyType BodyType { get; init; }
 
     /// <summary>Additional facts about the current character that did not fit anywhere else.</summary>
     public required CharacterFlags Flags { get; init; }

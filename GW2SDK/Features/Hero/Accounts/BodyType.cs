@@ -2,11 +2,11 @@
 
 /// <summary>The body types of characters.</summary>
 [PublicAPI]
-public enum Gender
+public enum BodyType
 {
-    /// <summary>Female characters.</summary>
+    /// <summary>Female body type.</summary>
     Female = 1,
 
-    /// <summary>Male characters</summary>
+    /// <summary>Male body type.</summary>
     Male
 }

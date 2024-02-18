@@ -79,7 +79,7 @@ internal static class CharacterSummaryJson
         {
             Name = name.Map(value => value.GetStringRequired()),
             Race = race.Map(value => value.GetEnum<RaceName>(missingMemberBehavior)),
-            Gender = gender.Map(value => value.GetEnum<Gender>(missingMemberBehavior)),
+            BodyType = gender.Map(value => value.GetEnum<BodyType>(missingMemberBehavior)),
             Level = level.Map(value => value.GetInt32()),
             GuildId = guild.Map(value => value.GetString()) ?? "",
             Profession =
