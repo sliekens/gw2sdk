@@ -24,7 +24,7 @@ public enum WeaponType
 
     Shield,
 
-    Speargun,
+    HarpoonGun,
 
     Greatsword,
 

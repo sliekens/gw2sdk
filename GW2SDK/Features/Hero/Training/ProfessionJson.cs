@@ -107,6 +107,11 @@ internal static class ProfessionJson
 
         static WeaponType GetWeaponType(string text)
         {
+            // The old name for harpoon gun is used in the API
+            if (string.Equals("Speargun", text, StringComparison.Ordinal))
+            {
+                return WeaponType.HarpoonGun;
+            }
 #if NET
             return Enum.Parse<WeaponType>(text);
 #else

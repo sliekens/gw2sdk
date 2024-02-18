@@ -153,7 +153,7 @@ internal static class EliteSkillJson
                 ),
             Description = description.Map(value => value.GetStringRequired()),
             IconHref = icon.Map(value => value.GetString()),
-            WeaponType = weaponType.Map(value => value.GetEnum<WeaponType>(missingMemberBehavior)),
+            WeaponType = weaponType.Map(value => value.GetWeaponType(missingMemberBehavior)),
             Professions =
                 professions.Map(
                     values =>
