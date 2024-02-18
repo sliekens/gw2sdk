@@ -9,7 +9,7 @@ GW2SDK provides classes for interacting with the Guild Wars 2 API and game clien
 
 ## How to use
 
-How to use the `Gw2Client` to fetch the current prices of all tradable items in the game:
+You can use the `Gw2Client` for many different purposes, such as fetching the current prices of all tradable items in the game, or the `GameLink` to receive realtime information from the game client. Below are some examples of how to use the `Gw2Client` and `GameLink` to fetch information about the game and the player's account.
 
 ``` csharp
 using System;
@@ -66,10 +66,9 @@ internal class Gw2ClientProgram
 
 ```
 
-How to use the `GameLink` to print the player's name and current map to the console:
+The `GameLink` can be used to receive realtime information from the game client. Below is an example of how to use the `GameLink` to receive information about the player's current character and the current map.
 
 ``` csharp
-using GuildWars2;
 using System;
 using System.Linq;
 using System.Net.Http;
