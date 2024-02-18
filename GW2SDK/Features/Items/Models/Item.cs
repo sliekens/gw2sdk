@@ -1,4 +1,7 @@
 ﻿using GuildWars2.Chat;
+using GuildWars2.Hero;
+using GuildWars2.Hero.Accounts;
+using GuildWars2.Hero.Races;
 
 namespace GuildWars2.Items;
 
@@ -24,8 +27,14 @@ public record Item
 
     public required ItemFlags Flags { get; init; }
 
-    /// <remarks>Can be empty.</remarks>
-    public required IReadOnlyCollection<ItemRestriction> Restrictions { get; init; }
+    /// <summary>The race(s) that can use the item.</summary>
+    public required IReadOnlyCollection<RaceName> Races { get; init; }
+
+    /// <summary>The profession(s) that can use the item.</summary>
+    public required IReadOnlyCollection<ProfessionName> Professions { get; init; }
+
+    /// <summary>The body type(s) that can use the item.</summary>
+    public required IReadOnlyCollection<BodyType> BodyTypes { get; init; }
 
     /// <summary>The chat code of the item. This can be used to link the item in the chat, but also in guild or squad messages.</summary>
     public required string ChatLink { get; init; }

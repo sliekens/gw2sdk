@@ -98,6 +98,8 @@ internal static class BoozeJson
             }
         }
 
+        var (races, professions, bodyTypes) =
+            restrictions.Map(value => value.GetRestrictions(missingMemberBehavior));
         return new Booze
         {
             Id = id.Map(value => value.GetInt32()),
@@ -113,13 +115,9 @@ internal static class BoozeJson
                     )
                 ),
             Flags = flags.Map(values => values.GetItemFlags()),
-            Restrictions =
-                restrictions.Map(
-                    values =>
-                        values.GetList(
-                            value => value.GetEnum<ItemRestriction>(missingMemberBehavior)
-                        )
-                ),
+            Races = races,
+            Professions = professions,
+            BodyTypes = bodyTypes,
             ChatLink = chatLink.Map(value => value.GetStringRequired()),
             IconHref = icon.Map(value => value.GetString())
         };

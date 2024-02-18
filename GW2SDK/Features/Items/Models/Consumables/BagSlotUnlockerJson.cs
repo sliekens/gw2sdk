@@ -110,6 +110,8 @@ internal static class BagSlotUnlockerJson
             }
         }
 
+        var (races, professions, bodyTypes) =
+            restrictions.Map(value => value.GetRestrictions(missingMemberBehavior));
         return new BagSlotUnlocker
         {
             Id = id.Map(value => value.GetInt32()),
@@ -125,13 +127,9 @@ internal static class BagSlotUnlockerJson
                     )
                 ),
             Flags = flags.Map(values => values.GetItemFlags()),
-            Restrictions =
-                restrictions.Map(
-                    values =>
-                        values.GetList(
-                            value => value.GetEnum<ItemRestriction>(missingMemberBehavior)
-                        )
-                ),
+            Races = races,
+            Professions = professions,
+            BodyTypes = bodyTypes,
             ChatLink = chatLink.Map(value => value.GetStringRequired()),
             IconHref = icon.Map(value => value.GetString())
         };

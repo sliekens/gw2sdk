@@ -17,6 +17,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Items.ItemRestriction</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:GuildWars2.Hero.Accounts.Gender</Target>
     <Left>lib/net6.0/GW2SDK.dll</Left>
     <Right>lib/net6.0/GW2SDK.dll</Right>
@@ -25,6 +32,13 @@
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:GuildWars2.Hero.Races.RaceName</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Items.ItemRestriction</Target>
     <Left>lib/net6.0/GW2SDK.dll</Left>
     <Right>lib/net6.0/GW2SDK.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -39,6 +53,13 @@
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:GuildWars2.Hero.Races.RaceName</Target>
+    <Left>lib/net8.0/GW2SDK.dll</Left>
+    <Right>lib/net8.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Items.ItemRestriction</Target>
     <Left>lib/net8.0/GW2SDK.dll</Left>
     <Right>lib/net8.0/GW2SDK.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -53,6 +74,13 @@
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:GuildWars2.Hero.Races.RaceName</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Items.ItemRestriction</Target>
     <Left>lib/netstandard2.0/GW2SDK.dll</Left>
     <Right>lib/netstandard2.0/GW2SDK.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -158,6 +186,20 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.StoryJournal.Stories.Story.get_Races</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Items.Item.get_Restrictions</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Items.Item.set_Restrictions(System.Collections.Generic.IReadOnlyCollection{GuildWars2.Items.ItemRestriction})</Target>
     <Left>lib/net462/GW2SDK.dll</Left>
     <Right>lib/net462/GW2SDK.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -276,6 +318,20 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Items.Item.get_Restrictions</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Items.Item.set_Restrictions(System.Collections.Generic.IReadOnlyCollection{GuildWars2.Items.ItemRestriction})</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Mumble.Identity.get_Race</Target>
     <Left>lib/net6.0/GW2SDK.dll</Left>
     <Right>lib/net6.0/GW2SDK.dll</Right>
@@ -388,6 +444,20 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Items.Item.get_Restrictions</Target>
+    <Left>lib/net8.0/GW2SDK.dll</Left>
+    <Right>lib/net8.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Items.Item.set_Restrictions(System.Collections.Generic.IReadOnlyCollection{GuildWars2.Items.ItemRestriction})</Target>
+    <Left>lib/net8.0/GW2SDK.dll</Left>
+    <Right>lib/net8.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Mumble.Identity.get_Race</Target>
     <Left>lib/net8.0/GW2SDK.dll</Left>
     <Right>lib/net8.0/GW2SDK.dll</Right>
@@ -494,6 +564,20 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.StoryJournal.Stories.Story.get_Races</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Items.Item.get_Restrictions</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Items.Item.set_Restrictions(System.Collections.Generic.IReadOnlyCollection{GuildWars2.Items.ItemRestriction})</Target>
     <Left>lib/netstandard2.0/GW2SDK.dll</Left>
     <Right>lib/netstandard2.0/GW2SDK.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
