@@ -14,8 +14,11 @@ public sealed record EquipmentItem
     /// <summary>The slot where this item is equipped.</summary>
     public required EquipmentSlot? Slot { get; init; }
 
-    /// <summary>The item IDs of runes or sigils in this item.</summary>
-    public required IReadOnlyList<int> UpgradeItemIds { get; init; }
+    /// <summary>If present, indicates the item ID of an upgrade component.</summary>
+    public required int? SuffixItemId { get; init; }
+
+    /// <summary>If present, indicates the item ID of an upgrade component in the second slot of a two-handed weapon.</summary>
+    public required int? SecondarySuffixItemId { get; init; }
 
     /// <summary>The item IDs of infusions in this item.</summary>
     public required IReadOnlyList<int> InfusionItemIds { get; init; }

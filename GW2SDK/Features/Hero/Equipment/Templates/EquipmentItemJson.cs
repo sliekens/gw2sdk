@@ -80,14 +80,35 @@ internal static class EquipmentItemJson
             }
         }
 
+        int? suffixItemId = null, secondarySuffixItemId = null;
+        if (upgrades.Map(values => values.GetList(value => value.GetInt32())) is { } ids)
+        {
+            for (var i = 0; i < ids.Count; i++)
+            {
+                var upgradeId = ids[i];
+                switch (i)
+                {
+                    case 0:
+                        suffixItemId = upgradeId;
+                        break;
+                    case 1:
+                        secondarySuffixItemId = upgradeId;
+                        break;
+                    default:
+                        throw new InvalidOperationException(
+                            Strings.UnexpectedArrayLength(ids.Count)
+                        );
+                }
+            }
+        }
+
         return new EquipmentItem
         {
             Id = id.Map(value => value.GetInt32()),
             Count = count.Map(value => value.GetInt32()),
             Slot = slot.Map(value => value.GetEnum<EquipmentSlot>(missingMemberBehavior)),
-            UpgradeItemIds =
-                upgrades.Map(values => values.GetList(value => value.GetInt32()))
-                ?? Empty.ListOfInt32,
+            SuffixItemId = suffixItemId,
+            SecondarySuffixItemId = secondarySuffixItemId,
             InfusionItemIds =
                 infusions.Map(values => values.GetList(value => value.GetInt32()))
                 ?? Empty.ListOfInt32,
