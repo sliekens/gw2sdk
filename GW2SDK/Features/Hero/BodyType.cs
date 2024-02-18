@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Accounts;
+﻿namespace GuildWars2.Hero;
 
 /// <summary>The body types of characters.</summary>
 [PublicAPI]

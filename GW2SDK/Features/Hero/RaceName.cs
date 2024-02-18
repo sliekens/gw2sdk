@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Races;
+﻿namespace GuildWars2.Hero;
 
 /// <summary>The playable races.</summary>
 [PublicAPI]
