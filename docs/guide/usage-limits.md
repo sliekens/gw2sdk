@@ -14,9 +14,13 @@ The best way to deal with the API rate limits is to avoid hitting them in the fi
 - Use batching
 - use throttling
 
+### Caching
+
 You should cache any data that is static or rarely changes, such as items, recipes, maps, etc. and only redownload them from the API when your cache becomes stale. You can use various tools and libraries to implement caching in your application, such as a MemoryCache or a distributed cache like Redis.
 
 The Guild Wars 2 API primarily uses the `Last-Modified` or `Expires` headers to indicate the age or freshness of the data. You can use these headers to determine when to refresh your cache. At the time of writing, there is no good caching library for .NET that supports these headers, so you will have to implement your own caching logic.
+
+### Batching
 
 Batching is a technique that allows you to combine multiple requests into one single request, by using comma-separated values in the query parameters. This can reduce the number of requests. For example, instead of making 10 requests to get 10 different items by their IDs, you can make one request with all 10 IDs in the query parameter: /v2/items?ids=1,2,3,...,10
 
@@ -29,6 +33,8 @@ GW2SDK supports batching by allowing you to pass multiple IDs to the `GetItemsBy
 > Methods for bulk expansion are provided which can be used with more than 200 IDs.
 > 
 > For example, you can use `Gw2Client.Items.GetItemsBulk(Enumerable.Range(1, 1000).ToList())` to get 1000 items by their ids. This will fan out into 5 requests, each with 200 IDs, which will be executed in parallel. The result is an `IAsyncEnumerable<Item>` which you can iterate with `await foreach`
+
+### Throttling
 
 Throttling is a technique that limits the rate at which you make requests to the API. For example, instead of making 10 requests per second, you can make 1 request per second. You can implement throttling using various methods, such as timers, queues, or libraries.
 
@@ -44,12 +50,16 @@ GW2SDK does not by default handle API rate limit errors, because rate limit hand
 
 If you encounter a Too Many Requests error, you should handle it gracefully in your application. Here are some suggestions on how to do that:
 
-Non-interactive applications (background jobs, message queue handlers, etc.):
+### Interactive applications
 
-- Retry the request after a reasonable delay. You can use a backoff strategy to increase the delay between retries, to avoid hitting the rate limit again.
-- Monitor and log the rate limit errors, and analyze them to identify the root cause and possible solutions.
-
-Interactive applications (apps, websites, chat bots, command line tools etc.):
+User apps, websites, chat bots, command line tools etc.:
 
 - Show an appropriate message to the user, informing them that the data is temporarily unavailable and asking them to try again later.
 - You can also provide alternative options or fallback data, such as cached data or default values, to keep the user engaged and satisfied.
+
+### Non-interactive applications
+
+background jobs, message queue handlers, etc.:
+
+- Retry the request after a reasonable delay. You can use a backoff strategy to increase the delay between retries, to avoid hitting the rate limit again.
+- Monitor and log the rate limit errors, and analyze them to identify the root cause and possible solutions.
