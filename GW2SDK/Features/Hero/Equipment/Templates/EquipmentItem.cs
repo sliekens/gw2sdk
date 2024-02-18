@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Hero.Equipment.Templates;
+﻿using GuildWars2.Chat;
+
+namespace GuildWars2.Hero.Equipment.Templates;
 
 /// <summary>Information about a single item in the character's armory.</summary>
 [PublicAPI]
@@ -43,4 +45,15 @@ public sealed record EquipmentItem
 
     /// <summary>The color IDs of dyes applied to the item.</summary>
     public required IReadOnlyList<int> DyeColorIds { get; init; }
+
+    /// <summary>Gets a chat link object for this item.</summary>
+    /// <returns>The chat link as an object.</returns>
+    public ItemLink GetChatLink() =>
+        new()
+        {
+            ItemId = Id,
+            SkinId = SkinId,
+            SuffixItemId = SuffixItemId,
+            SecondarySuffixItemId = SecondarySuffixItemId
+        };
 }
