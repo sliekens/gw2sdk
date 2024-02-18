@@ -11,8 +11,12 @@ A .NET code library for interacting with the Guild Wars 2 API and game client.
 - [Introduction] to features in the SDK
 - [Installation] instructions for NuGet packages
 - [Basic usage][usage] example for working with the SDK
-- [GitHub Discussions][new-discussion] for feedback and questions
+- [API documentation][api-docs] for the SDK
+
+To give feedback:
+
 - [GitHub Issues][new-issue] for bug reports and feature requests
+- [GitHub Discussions][new-discussion] for other feedback or questions
 
 ## Features
 
@@ -80,6 +84,7 @@ The [wiki] contains information for contributors. The _docs_ directory contains 
 [github.dev]:https://github.dev/sliekens/gw2sdk
 [installation]:https://sliekens.github.io/gw2sdk/guide/installation
 [introduction]:https://sliekens.github.io/gw2sdk/guide/introduction
+[api-docs]:https://sliekens.github.io/gw2sdk/api/GuildWars2.html
 [new-discussion]:https://github.com/sliekens/gw2sdk/discussions/new/choose
 [new-issue]:https://github.com/sliekens/gw2sdk/issues/new
 [nuget-vpre-badge]:https://img.shields.io/nuget/vpre/GW2SDK
