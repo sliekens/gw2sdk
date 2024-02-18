@@ -12,6 +12,12 @@ internal static class Invariants
 
     internal static void Level_is_between_0_and_80(this Item actual) =>
         Assert.InRange(actual.Level, 0, 80);
+    internal static void Has_body_types(this Item actual) =>
+        Assert.NotEmpty(actual.BodyTypes);
+    internal static void Has_races(this Item actual) =>
+        Assert.NotEmpty(actual.Races);
+    internal static void Has_professions(this Item actual) =>
+        Assert.NotEmpty(actual.Professions);
 
     internal static void Min_power_is_not_negative(this Weapon actual) =>
         Assert.InRange(actual.MinPower, 0, int.MaxValue);
@@ -181,6 +187,9 @@ internal static class Invariants
         actual.Id_is_positive();
         actual.Vendor_value_is_not_negative();
         actual.Level_is_between_0_and_80();
+        actual.Has_body_types();
+        actual.Has_races();
+        actual.Has_professions();
         switch (actual)
         {
             case Consumable consumable:
