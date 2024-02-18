@@ -8,19 +8,19 @@ public sealed record ItemLink : Link
     public required int ItemId { get; init; }
 
     /// <summary>The number of items in the slot.</summary>
-    public required int Count { get; init; }
+    public int Count { get; init; } = 1;
 
     /// <summary>The skin ID of the item if the item is transmuted.</summary>
     /// <remarks>Only valid for weapons, armor and back items.</remarks>
-    public required int? SkinId { get; init; }
+    public int? SkinId { get; init; }
 
     /// <summary>The item ID of the upgrade component if the item is upgraded.</summary>
     /// <remarks>Only valid for weapons, armor, back items and trinkets.</remarks>
-    public required int? SuffixItemId { get; init; }
+    public int? SuffixItemId { get; init; }
 
     /// <summary>The item ID of the second upgrade component if the item is upgraded.</summary>
     /// <remarks>Only valid for two-handed weapons.</remarks>
-    public required int? SecondarySuffixItemId { get; init; }
+    public int? SecondarySuffixItemId { get; init; }
 
     /// <inheritdoc />
     public override string ToString()

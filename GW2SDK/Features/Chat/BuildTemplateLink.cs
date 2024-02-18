@@ -7,49 +7,68 @@ namespace GuildWars2.Chat;
 [PublicAPI]
 public sealed record BuildTemplateLink : Link
 {
-
     /// <summary>The profession.</summary>
     public required ProfessionName Profession { get; init; }
 
     /// <summary>The first specialization.</summary>
-    public required Specialization? Specialization1 { get; init; }
+    public Specialization? Specialization1 { get; init; }
 
     /// <summary>The second specialization.</summary>
-    public required Specialization? Specialization2 { get; init; }
+    public Specialization? Specialization2 { get; init; }
 
     /// <summary>The third specialization.</summary>
-    public required Specialization? Specialization3 { get; init; }
+    public Specialization? Specialization3 { get; init; }
 
+    /// <summary>The selected skills.</summary>
     public required SkillPalette Skills { get; init; }
 
+    /// <summary>The selected sklls while underwater.</summary>
     public required SkillPalette AquaticSkills { get; init; }
 
-    public required SelectedPets? Pets { get; init; }
+    /// <summary>The selected pet skills (Ranger only).</summary>
+    public SelectedPets? Pets { get; init; }
 
-    public required Legends? Legends { get; init; }
+    /// <summary>The selected legends (Revenant only).</summary>
+    public Legends? Legends { get; init; }
 
-    public required WeaponType Weapon1 { get; init; }
+    /// <summary>The first kind of weapon used in this build.</summary>
+    public WeaponType Weapon1 { get; init; }
 
-    public required WeaponType Weapon2 { get; init; }
+    /// <summary>The second kind of weapon used in this build.</summary>
+    public WeaponType Weapon2 { get; init; }
 
-    public required WeaponType Weapon3 { get; init; }
-
+    /// <summary>The third kind of weapon used in this build.</summary>
+    public WeaponType Weapon3 { get; init; }
 
     /// <summary>Gets the build represented by this chat link.</summary>
-    /// <param name="gw2Client">An API client to fetch the build.</param> 
+    /// <param name="gw2Client">An API client to fetch the build.</param>
     /// <param name="language">The language to use for descriptions.</param>
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<Build> GetBuild(Gw2Client gw2Client, Language? language = default, MissingMemberBehavior missingMemberBehavior = default, CancellationToken cancellationToken = default)
+    public async Task<Build> GetBuild(
+        Gw2Client gw2Client,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
     {
-        var (profession, _) = await gw2Client.Hero.Training.GetProfessionByName(Profession, language, missingMemberBehavior, cancellationToken);
+        var (profession, _) = await gw2Client.Hero.Training.GetProfessionByName(
+            Profession,
+            language,
+            missingMemberBehavior,
+            cancellationToken
+        );
         var specializations = new Dictionary<int, Hero.Builds.Specialization>();
         var selectedSpecializationIds = SelectedSpecializationIds().ToList();
         if (selectedSpecializationIds.Any())
         {
-            (specializations, _) = await gw2Client.Hero.Builds
-                .GetSpecializationsByIds(selectedSpecializationIds, language, missingMemberBehavior, cancellationToken)
+            (specializations, _) = await gw2Client.Hero.Builds.GetSpecializationsByIds(
+                    selectedSpecializationIds,
+                    language,
+                    missingMemberBehavior,
+                    cancellationToken
+                )
                 .AsDictionary(x => x.Id);
         }
 
@@ -128,12 +147,13 @@ public sealed record BuildTemplateLink : Link
                 UtilitySkillId1 = SkillByPalette(skills.Utility1),
                 UtilitySkillId2 = SkillByPalette(skills.Utility2),
                 UtilitySkillId3 = SkillByPalette(skills.Utility3),
-                EliteSkillId = SkillByPalette(skills.Elite),
+                EliteSkillId = SkillByPalette(skills.Elite)
             };
 
             int? SkillByPalette(int? paletteId)
             {
-                if (paletteId.HasValue && profession.SkillsByPalette.TryGetValue(paletteId.Value, out var skillId))
+                if (paletteId.HasValue
+                    && profession.SkillsByPalette.TryGetValue(paletteId.Value, out var skillId))
                 {
                     return skillId;
                 }
@@ -286,7 +306,9 @@ public sealed record BuildTemplateLink : Link
 
             var (_, adeptTrait, masterTrait, grandmasterTrait) = specialization.Value;
 
-            return (byte)((byte)adeptTrait | ((byte)masterTrait << 2) | ((byte)grandmasterTrait << 4));
+            return (byte)((byte)adeptTrait
+                | ((byte)masterTrait << 2)
+                | ((byte)grandmasterTrait << 4));
         }
 
         static byte Weapon(WeaponType weapon)
@@ -385,8 +407,21 @@ public sealed record BuildTemplateLink : Link
                 InactiveTerrestrialLegend = NullIfZero(inactiveTerrestrialLegend),
                 ActiveAquaticLegend = NullIfZero(activeAquaticLegend),
                 InactiveAquaticLegend = NullIfZero(inactiveAquaticLegend),
-                InactiveTerrestrialSkills = SkillPalette(default, inactiveTerrestrialUtilitySkill1, inactiveTerrestrialUtilitySkill2, inactiveTerrestrialUtilitySkill3, default),
-                InactiveAquaticSkills = SkillPalette(default, inactiveAquaticUtilitySkill1, inactiveAquaticUtilitySkill2, inactiveAquaticUtilitySkill3, default)
+                InactiveTerrestrialSkills =
+                    SkillPalette(
+                        default,
+                        inactiveTerrestrialUtilitySkill1,
+                        inactiveTerrestrialUtilitySkill2,
+                        inactiveTerrestrialUtilitySkill3,
+                        default
+                    ),
+                InactiveAquaticSkills = SkillPalette(
+                    default,
+                    inactiveAquaticUtilitySkill1,
+                    inactiveAquaticUtilitySkill2,
+                    inactiveAquaticUtilitySkill3,
+                    default
+                )
             };
         }
         else
@@ -421,7 +456,7 @@ public sealed record BuildTemplateLink : Link
             var skillOverrides = buffer.ReadUInt8();
             for (var i = 0; i < skillOverrides; i++)
             {
-                // Not supported at this time
+                // TODO: add support for skill overrides (weapon)
                 buffer.Padding(4);
             }
         }
@@ -432,8 +467,21 @@ public sealed record BuildTemplateLink : Link
             Specialization1 = Specialization(specializationId1, traits1),
             Specialization2 = Specialization(specializationId2, traits2),
             Specialization3 = Specialization(specializationId3, traits3),
-            Skills = SkillPalette(healSkill, utilitySkill1, utilitySkill2, utilitySkill3, eliteSkill),
-            AquaticSkills = SkillPalette(healAquaticSkill, utilityAquaticSkill1, utilityAquaticSkill2, utilityAquaticSkill3, eliteAquaticSkill),
+            Skills = SkillPalette(
+                healSkill,
+                utilitySkill1,
+                utilitySkill2,
+                utilitySkill3,
+                eliteSkill
+            ),
+            AquaticSkills =
+                SkillPalette(
+                    healAquaticSkill,
+                    utilityAquaticSkill1,
+                    utilityAquaticSkill2,
+                    utilityAquaticSkill3,
+                    eliteAquaticSkill
+                ),
             Pets = pets,
             Legends = legends,
             Weapon1 = weapon1,
@@ -471,12 +519,27 @@ public sealed record BuildTemplateLink : Link
             return new Specialization(specializationId, adeptTrait, masterTrait, grandmasterTrait);
         }
 
-        static SkillPalette SkillPalette(ushort heal, ushort utility1, ushort utility2, ushort utility3, ushort elite)
+        static SkillPalette SkillPalette(
+            ushort heal,
+            ushort utility1,
+            ushort utility2,
+            ushort utility3,
+            ushort elite
+        )
         {
-            return new SkillPalette(NullIfZero(heal), NullIfZero(utility1), NullIfZero(utility2), NullIfZero(utility3), NullIfZero(elite));
+            return new SkillPalette(
+                NullIfZero(heal),
+                NullIfZero(utility1),
+                NullIfZero(utility2),
+                NullIfZero(utility3),
+                NullIfZero(elite)
+            );
         }
 
-        static int? NullIfZero(int value) => value == 0 ? null : value;
+        static int? NullIfZero(int value)
+        {
+            return value == 0 ? null : value;
+        }
 
         static WeaponType Weapon(int weaponId)
         {
