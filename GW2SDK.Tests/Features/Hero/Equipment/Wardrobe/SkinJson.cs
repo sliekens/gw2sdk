@@ -16,6 +16,7 @@ public class SkinJson(SkinFixture fixture) : IClassFixture<SkinFixture>
                 var actual = document.RootElement.GetSkin(MissingMemberBehavior.Error);
 
                 actual.Has_id();
+                actual.Has_races();
             }
         );
 }

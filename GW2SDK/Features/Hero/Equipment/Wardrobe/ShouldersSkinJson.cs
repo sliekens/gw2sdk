@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-using GuildWars2.Hero.Races;
 using GuildWars2.Items;
 using GuildWars2.Json;
 
@@ -100,12 +99,7 @@ internal static class ShouldersSkinJson
             Description = description.Map(value => value.GetString()) ?? "",
             Rarity = rarity.Map(value => value.GetEnum<Rarity>(missingMemberBehavior)),
             Flags = flags.Map(values => values.GetSkinFlags()),
-            Restrictions =
-                restrictions.Map(
-                    values => values.GetList(
-                        value => value.GetEnum<RaceName>(missingMemberBehavior)
-                    )
-                ),
+            Races = restrictions.Map(values => values.GetRestrictions(missingMemberBehavior)),
             IconHref = icon.Map(value => value.GetString()),
             WeightClass =
                 weightClass.Map(value => value.GetEnum<WeightClass>(missingMemberBehavior)),
