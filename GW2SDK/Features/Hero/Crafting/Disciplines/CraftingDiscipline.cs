@@ -1,5 +1,6 @@
 ﻿namespace GuildWars2.Hero.Crafting.Disciplines;
 
+/// <summary>Information about a character's crafting discipline.</summary>
 [PublicAPI]
 public sealed record CraftingDiscipline
 {

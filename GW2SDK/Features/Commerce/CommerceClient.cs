@@ -14,6 +14,8 @@ public sealed class CommerceClient
 {
     private readonly HttpClient httpClient;
 
+    /// <summary>Initializes a new instance of the <see cref="CommerceClient" /> class.</summary>
+    /// <param name="httpClient">The HTTP client used for making API requests.</param>
     public CommerceClient(HttpClient httpClient)
     {
         this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));

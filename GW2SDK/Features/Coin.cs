@@ -151,8 +151,8 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
     /// <returns>The chat link representation of the current instance of <see cref="Coin" />.</returns>
     public CoinLink GetChatLink() => new() { Coins = this };
 
-    /// <summary>Returns the current <see cref="Coin" /> value formatted for display, (for example) 12 gold, 34 silver, 56 copper.</summary>
-    /// <returns>A string that represents the current instance of <see cref="Coin" />.</returns>
+    /// <summary>Gets the string representation of the <see cref="Coin" /> value.</summary>
+    /// <returns>Returns the current <see cref="Coin" /> value formatted for display, (for example) 12 gold, 34 silver, 56 copper.</returns>
     public override string ToString()
     {
         if (Amount == 0)

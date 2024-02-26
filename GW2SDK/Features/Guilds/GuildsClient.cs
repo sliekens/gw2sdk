@@ -12,11 +12,14 @@ using GuildWars2.Guilds.Upgrades;
 
 namespace GuildWars2.Guilds;
 
+/// <summary>Provides query methods for guilds (permissions, ranks, members, teams, bank, upgrades, logs) and guild emblems.</summary>
 [PublicAPI]
 public sealed class GuildsClient
 {
     private readonly HttpClient httpClient;
 
+    /// <summary>Initializes a new instance of the <see cref="GuildsClient" /> class.</summary>
+    /// <param name="httpClient">The HTTP client used for making API requests.</param>
     public GuildsClient(HttpClient httpClient)
     {
         this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));

@@ -1,5 +1,4 @@
 ﻿using GuildWars2.Hero.StoryJournal.BackgroundStories;
-using GuildWars2.Hero.StoryJournal.Stories;
 using GuildWars2.Http;
 
 namespace GuildWars2.Hero.StoryJournal.Http;

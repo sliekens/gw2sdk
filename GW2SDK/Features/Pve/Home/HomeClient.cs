@@ -10,6 +10,8 @@ public sealed class HomeClient
 {
     private readonly HttpClient httpClient;
 
+    /// <summary>Initializes a new instance of the <see cref="HomeClient" /> class.</summary>
+    /// <param name="httpClient">The HTTP client used for making API requests.</param>
     public HomeClient(HttpClient httpClient)
     {
         this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));

@@ -1,5 +1,4 @@
 ﻿using GuildWars2.Hero;
-using GuildWars2.Hero.Races;
 using Microsoft.Extensions.Configuration;
 
 namespace GuildWars2.Tests.TestInfrastructure;

@@ -6,6 +6,8 @@ namespace GuildWars2;
 [PublicAPI]
 public sealed record MessageContext
 {
+    /// <summary>Initializes a new instance of the <see cref="MessageContext" /> class.</summary>
+    /// <param name="response">The HTTP response message.</param>
     public MessageContext(HttpResponseMessage response)
     {
         Date = response.Headers.Date.GetValueOrDefault();

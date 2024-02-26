@@ -1,6 +1,4 @@
-﻿using GuildWars2.Hero.Races;
-
-namespace GuildWars2.Hero.Accounts;
+﻿namespace GuildWars2.Hero.Accounts;
 
 /// <summary>Short summary about a player character.</summary>
 [PublicAPI]
@@ -21,6 +19,7 @@ public sealed record CharacterSummary
     /// <summary>The profession name of the current character.</summary>
     public required ProfessionName Profession { get; init; }
 
+    /// <summary>The character's level.</summary>
     public required int Level { get; init; }
 
     /// <summary>The current guild, or an empty string if the character is not currently representing a guild.</summary>

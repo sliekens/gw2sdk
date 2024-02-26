@@ -1,5 +1,4 @@
-﻿using GuildWars2.Hero.Races;
-using GuildWars2.Items;
+﻿using GuildWars2.Items;
 
 namespace GuildWars2.Hero.Equipment.Wardrobe;
 

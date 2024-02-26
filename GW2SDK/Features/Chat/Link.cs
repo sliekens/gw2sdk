@@ -1,6 +1,4 @@
-﻿using System.Buffers;
-
-namespace GuildWars2.Chat;
+﻿namespace GuildWars2.Chat;
 
 /// <summary>The base type for chat links.</summary>
 [PublicAPI]

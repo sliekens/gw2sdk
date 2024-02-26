@@ -55,6 +55,7 @@ public sealed record Character
     /// <summary>The number of times the current character was fully defeated.</summary>
     public required int Deaths { get; init; }
 
+    /// <summary>The crafting disciplines of the current character.</summary>
     public required IReadOnlyCollection<CraftingDiscipline> CraftingDisciplines { get; init; }
 
     /// <summary>The selected title ID of the current character.</summary>

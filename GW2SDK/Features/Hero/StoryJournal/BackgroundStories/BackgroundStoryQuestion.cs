@@ -1,6 +1,4 @@
-﻿using GuildWars2.Hero.Races;
-
-namespace GuildWars2.Hero.StoryJournal.BackgroundStories;
+﻿namespace GuildWars2.Hero.StoryJournal.BackgroundStories;
 
 /// <summary>Information about a background story question which is asked during character creation.</summary>
 [PublicAPI]

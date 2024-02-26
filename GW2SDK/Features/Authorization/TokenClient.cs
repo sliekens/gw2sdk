@@ -8,6 +8,8 @@ public sealed class TokenClient
 {
     private readonly HttpClient httpClient;
 
+    /// <summary>Initializes a new instance of the <see cref="TokenClient" /> class.</summary>
+    /// <param name="httpClient">The HTTP client used for making API requests.</param>
     public TokenClient(HttpClient httpClient)
     {
         this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));

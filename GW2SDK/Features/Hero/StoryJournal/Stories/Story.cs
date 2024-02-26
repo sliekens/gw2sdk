@@ -1,6 +1,4 @@
-﻿using GuildWars2.Hero.Races;
-
-namespace GuildWars2.Hero.StoryJournal.Stories;
+﻿namespace GuildWars2.Hero.StoryJournal.Stories;
 
 /// <summary>Information about a story within a storyline.</summary>
 [PublicAPI]

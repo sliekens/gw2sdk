@@ -1,6 +1,4 @@
-﻿using GuildWars2.Hero.Races;
-
-namespace GuildWars2.Hero.StoryJournal.BackgroundStories;
+﻿namespace GuildWars2.Hero.StoryJournal.BackgroundStories;
 
 /// <summary>Information about an answer to a background story question.</summary>
 [PublicAPI]
@@ -16,6 +14,7 @@ public sealed record BackgroundStoryAnswer
     /// <summary>The answer text.</summary>
     public required string Description { get; init; }
 
+    /// <summary>The text that is displayed in the character's biography when this answer is chosen.</summary>
     public required string Journal { get; init; }
 
     /// <summary>The ID of the background story question that this answer belongs to.</summary>

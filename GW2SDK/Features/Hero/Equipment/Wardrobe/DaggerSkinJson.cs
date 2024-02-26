@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-using GuildWars2.Hero.Races;
 using GuildWars2.Items;
 using GuildWars2.Json;
 
