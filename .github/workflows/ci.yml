@@ -8,9 +8,10 @@ on:
     branches: [main]
   schedule:
     - cron: '0 18 * * *'
-
+  
 env:
   SYMBOL_PACKAGE: false
+  DOTNET_TEST_TFM: net8.0
 
 jobs:
   build:
@@ -38,7 +39,7 @@ jobs:
         run: dotnet run --configuration ${{ env.build-configuration }}  --project GW2SDK.TestDataHelper -- GW2SDK.Tests/Data
 
       - name: Test
-        run: dotnet test --collect:"XPlat Code Coverage" --settings coverlet.runsettings --no-restore
+        run: dotnet test --framework $DOTNET_TEST_TFM --collect:"XPlat Code Coverage" --settings coverlet.runsettings --no-restore
         env:
           ApiKeyBasic: ${{ secrets.API_TOKEN_BASIC }}
           ApiKey: ${{ secrets.API_TOKEN_FULL }}
