@@ -1,14 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <!--
-      Test .NET on all platforms but test .NET Framework only on Windows,
-      because Mono on Linux is just too unreliable:
-      tests crash with strange errors like 'BadImageFormatException: Method has zero rva'
-      which to me is just utter nonsense.
-      -->
-    <TargetFrameworks>net8.0</TargetFrameworks>
-    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('Windows'))">$(TargetFrameworks);net481</TargetFrameworks>
+    <TargetFrameworks>net8.0;net481</TargetFrameworks>
     <UserSecretsId>a8ab34fc-ca23-453c-b913-59b025c2b48e</UserSecretsId>
     <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
