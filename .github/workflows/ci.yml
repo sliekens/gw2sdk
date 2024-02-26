@@ -9,6 +9,10 @@ on:
   schedule:
     - cron: '0 18 * * *'
 
+concurrency:
+  group: ci
+  cancel-in-progress: true
+
 env:
   SYMBOL_PACKAGE: false
   DOTNET_TEST_TFM: net8.0
