@@ -11,8 +11,7 @@ public class MailCarriers
 
         var (actual, context) = await sut.Hero.Equipment.MailCarriers.GetMailCarriers();
 
-        Assert.NotNull(context.ResultContext);
-        Assert.Equal(context.ResultContext.ResultTotal, actual.Count);
+        Assert.Equal(actual.Count, context.ResultTotal);
         Assert.All(
             actual,
             mailCarrier =>

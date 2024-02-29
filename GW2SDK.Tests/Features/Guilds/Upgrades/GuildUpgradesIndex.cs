@@ -12,8 +12,7 @@ public class GuildUpgradesIndex
         var (actual, context) = await sut.Guilds.GetGuildUpgradesIndex();
 
         Assert.NotEmpty(actual);
-        Assert.NotNull(context.ResultContext);
-        Assert.Equal(actual.Count, context.ResultContext.ResultCount);
-        Assert.Equal(actual.Count, context.ResultContext.ResultTotal);
+        Assert.Equal(actual.Count, context.ResultCount);
+        Assert.Equal(actual.Count, context.ResultTotal);
     }
 }

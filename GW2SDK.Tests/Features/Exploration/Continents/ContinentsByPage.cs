@@ -12,11 +12,10 @@ public class ContinentsByPage
         const int pageSize = 3;
         var (actual, context) = await sut.Exploration.GetContinentsByPage(0, pageSize);
 
-        Assert.NotNull(context.PageContext);
-        Assert.Equal(pageSize, context.PageContext.PageSize);
+        Assert.NotNull(context.Links);
+        Assert.Equal(pageSize, context.PageSize);
         Assert.Equal(2, actual.Count);
-        Assert.NotNull(context.ResultContext);
-        Assert.Equal(2, context.ResultContext.ResultCount);
+        Assert.Equal(2, context.ResultCount);
         Assert.All(
             actual,
             entry =>

@@ -45,9 +45,8 @@ public class Worlds
                 }
             }
         );
-
-        Assert.NotNull(context.ResultContext);
-        Assert.Equal(context.ResultContext.ResultCount, actual.Count);
-        Assert.Equal(context.ResultContext.ResultTotal, actual.Count);
+        
+        Assert.Equal(actual.Count, context.ResultCount);
+        Assert.Equal(actual.Count, context.ResultTotal);
     }
 }

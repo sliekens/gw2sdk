@@ -13,8 +13,11 @@ public sealed record MessageContext
         Date = response.Headers.Date.GetValueOrDefault();
         Expires = response.Content.Headers.Expires;
         LastModified = response.Content.Headers.LastModified;
-        ResultContext = response.Headers.GetResultContext();
-        PageContext = response.Headers.GetPageContext();
+        ResultCount = response.Headers.GetResultCount();
+        ResultTotal = response.Headers.GetResultTotal();
+        PageSize = response.Headers.GetPageSize();
+        PageTotal = response.Headers.GetPageTotal();
+        Links = response.Headers.GetLink();
     }
 
     /// <summary>The date and time at which the message was originated.</summary>
@@ -30,9 +33,18 @@ public sealed record MessageContext
     /// may use the <see cref="Date" /> value instead for the calculation.</summary>
     public DateTimeOffset? LastModified { get; }
 
-    /// <summary>When the value is a collection, contains context about the collection.</summary>
-    public ResultContext? ResultContext { get; }
+    /// <summary>When the response is a (sub)set, this value indicates the size of the subset.</summary>
+    public int? ResultCount { get; }
 
-    /// <summary>When the value is a page, contains context about this page and other pages.</summary>
-    public PageContext? PageContext { get; }
+    /// <summary>When the response is a (sub)set, this value indicates the total size of the set.</summary>
+    public int? ResultTotal { get; }
+
+    /// <summary>When the response is a page, this value indicates the maximum number of items per page.</summary>
+    public int? PageSize { get; }
+
+    /// <summary>When the response is a page, this value indicates the total number of pages.</summary>
+    public int? PageTotal { get; }
+
+    /// <summary>When the response is a page, this value contains links to related pages.</summary>
+    public Link? Links { get; }
 }

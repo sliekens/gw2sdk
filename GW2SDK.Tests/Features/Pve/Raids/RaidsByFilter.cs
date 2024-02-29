@@ -18,8 +18,7 @@ public class RaidsByFilter
         var (actual, context) = await sut.Pve.Raids.GetRaidsByIds(ids);
 
         Assert.Equal(ids.Count, actual.Count);
-        Assert.NotNull(context.ResultContext);
-        Assert.Equal(ids.Count, context.ResultContext.ResultCount);
+        Assert.Equal(ids.Count, context.ResultCount);
         Assert.All(
             actual,
             entry =>

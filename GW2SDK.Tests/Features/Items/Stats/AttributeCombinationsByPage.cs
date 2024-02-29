@@ -12,8 +12,7 @@ public class AttributeCombinationsByPage
         var (actual, context) = await sut.Items.GetAttributeCombinationByPage(0, 3);
 
         Assert.Equal(3, actual.Count);
-        Assert.NotNull(context.PageContext);
-        Assert.Equal(3, context.PageContext.PageSize);
-        Assert.False(context.PageContext.Next.IsEmpty);
+        Assert.Equal(3, context.PageSize);
+        Assert.False(context.Links.Next.IsEmpty);
     }
 }

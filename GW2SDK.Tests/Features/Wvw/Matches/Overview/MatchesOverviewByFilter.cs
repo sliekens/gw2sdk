@@ -18,8 +18,7 @@ public class MatchesOverviewByFilter
         var (actual, context) = await sut.Wvw.GetMatchesOverviewByIds(ids);
 
         Assert.Equal(ids.Count, actual.Count);
-        Assert.NotNull(context.ResultContext);
-        Assert.Equal(ids.Count, context.ResultContext.ResultCount);
+        Assert.Equal(ids.Count, context.ResultCount);
         Assert.All(
             actual,
             entry =>

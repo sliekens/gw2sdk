@@ -14,8 +14,7 @@ public class WorldsIndex
         Assert.NotEmpty(actual);
         Assert.All(actual, id => Assert.True(id > 0));
 
-        Assert.NotNull(context.ResultContext);
-        Assert.Equal(actual.Count, context.ResultContext.ResultCount);
-        Assert.Equal(actual.Count, context.ResultContext.ResultTotal);
+        Assert.Equal(actual.Count, context.ResultCount);
+        Assert.Equal(actual.Count, context.ResultTotal);
     }
 }

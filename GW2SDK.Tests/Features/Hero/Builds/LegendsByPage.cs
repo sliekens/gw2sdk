@@ -12,11 +12,10 @@ public class LegendsByPage
         const int pageSize = 3;
         var (actual, context) = await sut.Hero.Builds.GetLegendsByPage(0, pageSize);
 
-        Assert.NotNull(context.PageContext);
-        Assert.Equal(pageSize, context.PageContext.PageSize);
+        Assert.NotNull(context.Links);
+        Assert.Equal(pageSize, context.PageSize);
         Assert.Equal(pageSize, actual.Count);
-        Assert.NotNull(context.ResultContext);
-        Assert.Equal(pageSize, context.ResultContext.ResultCount);
+        Assert.Equal(pageSize, context.ResultCount);
         Assert.All(
             actual,
             entry =>

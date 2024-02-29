@@ -12,9 +12,8 @@ public class Miniatures
         var (actual, context) = await sut.Hero.Equipment.Miniatures.GetMiniatures();
 
         Assert.NotEmpty(actual);
-        Assert.NotNull(context.ResultContext);
-        Assert.Equal(actual.Count, context.ResultContext.ResultCount);
-        Assert.Equal(actual.Count, context.ResultContext.ResultTotal);
+        Assert.Equal(actual.Count, context.ResultCount);
+        Assert.Equal(actual.Count, context.ResultTotal);
         Assert.All(
             actual,
             entry =>

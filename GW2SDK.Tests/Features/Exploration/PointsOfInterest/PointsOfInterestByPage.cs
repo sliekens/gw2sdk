@@ -24,8 +24,7 @@ public class PointsOfInterestByPage
         );
 
         Assert.Equal(3, actual.Count);
-        Assert.NotNull(context.PageContext);
-        Assert.Equal(3, context.PageContext.PageSize);
+        Assert.Equal(3, context.PageSize);
         actual.All_have_ids();
         actual.Some_have_names();
         actual.All_have_chat_links();

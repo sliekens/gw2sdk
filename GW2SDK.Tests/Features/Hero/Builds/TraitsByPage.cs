@@ -12,7 +12,6 @@ public class TraitsByPage
         var (actual, context) = await sut.Hero.Builds.GetTraitsByPage(0, 3);
 
         Assert.Equal(3, actual.Count);
-        Assert.NotNull(context.PageContext);
-        Assert.Equal(3, context.PageContext.PageSize);
+        Assert.Equal(3, context.PageSize);
     }
 }

@@ -13,10 +13,9 @@ public class MatchesScoresByPage
         var (actual, context) = await sut.Wvw.GetMatchesScoresByPage(0, pageSize);
 
         Assert.Equal(pageSize, actual.Count);
-        Assert.NotNull(context.PageContext);
-        Assert.Equal(pageSize, context.PageContext.PageSize);
-        Assert.NotNull(context.ResultContext);
-        Assert.Equal(pageSize, context.ResultContext.ResultCount);
+        Assert.NotNull(context.Links);
+        Assert.Equal(pageSize, context.PageSize);
+        Assert.Equal(pageSize, context.ResultCount);
         Assert.All(
             actual,
             entry =>

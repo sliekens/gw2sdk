@@ -6,90 +6,70 @@ namespace GuildWars2.Http;
 
 internal static class HttpResponseHeaderExtensions
 {
-    public static ResultContext? GetResultContext(this HttpResponseHeaders instance)
+    public static int? GetResultCount(this HttpResponseHeaders instance) =>
+        instance.GetInt32(ResultCount);
+
+    public static int? GetResultTotal(this HttpResponseHeaders instance) =>
+        instance.GetInt32(ResultTotal);
+
+    public static int? GetPageSize(this HttpResponseHeaders instance) =>
+        instance.GetInt32(PageSize);
+
+    public static int? GetPageTotal(this HttpResponseHeaders instance) =>
+        instance.GetInt32(PageTotal);
+
+    public static Link? GetLink(this HttpResponseHeaders instance)
     {
-        if (instance is null) throw new ArgumentNullException(nameof(instance));
-        int resultTotal, resultCount;
-        if (instance.TryGetValues(ResultTotal, out var resultTotals))
-        {
-            // Assume that there is exactly one value for this header
-            resultTotal = int.Parse(resultTotals.Single());
-        }
-        else
-        {
-            return null;
-        }
-
-        if (instance.TryGetValues(ResultCount, out var resultCounts))
-        {
-            // Assume that there is exactly one value for this header
-            resultCount = int.Parse(resultCounts.Single());
-        }
-        else
-        {
-            return null;
-        }
-
-        return new ResultContext(resultTotal, resultCount);
-    }
-
-    public static PageContext? GetPageContext(this HttpResponseHeaders instance)
-    {
-        if (instance is null) throw new ArgumentNullException(nameof(instance));
-        int pageTotal, pageSize;
         Hyperlink previous = Hyperlink.None,
             next = Hyperlink.None,
             self = Hyperlink.None,
             first = Hyperlink.None,
             last = Hyperlink.None;
-        if (instance.TryGetValues(PageTotal, out var pageTotals))
+        if (instance.TryGetValues(Gw2ResponseHeaderName.Link, out var values))
         {
-            // Assume that there is exactly one value for this header
-            pageTotal = int.Parse(pageTotals.Single());
-        }
-        else
-        {
-            return null;
-        }
-
-        if (instance.TryGetValues(PageSize, out var pageSizes))
-        {
-            // Assume that there is exactly one value for this header
-            pageSize = int.Parse(pageSizes.Single());
-        }
-        else
-        {
-            return null;
-        }
-
-        if (instance.TryGetValues(Link, out var links))
-        {
-            // Assume that there is exactly one value for this header
-            var header = LinkHeader.Parse(links.Single());
-            foreach (var link in header.Links)
+            foreach (var value in values)
             {
-                var href = new Hyperlink(link.Target);
-                switch (link.RelationType)
+                var header = LinkHeader.Parse(value);
+                foreach (var link in header.Links)
                 {
-                    case "previous":
-                        previous = href;
-                        break;
-                    case "next":
-                        next = href;
-                        break;
-                    case "self":
-                        self = href;
-                        break;
-                    case "first":
-                        first = href;
-                        break;
-                    case "last":
-                        last = href;
-                        break;
+                    var href = new Hyperlink(link.Target);
+                    switch (link.RelationType)
+                    {
+                        case "previous" when previous.IsEmpty:
+                            previous = href;
+                            break;
+                        case "next" when next.IsEmpty:
+                            next = href;
+                            break;
+                        case "self" when self.IsEmpty:
+                            self = href;
+                            break;
+                        case "first" when first.IsEmpty:
+                            first = href;
+                            break;
+                        case "last" when last.IsEmpty:
+                            last = href;
+                            break;
+                    }
                 }
+            }
+
+            return new Link(first, self, last, previous, next);
+        }
+
+        return null;
+    }
+
+    private static int? GetInt32(this HttpResponseHeaders instance, string headerName)
+    {
+        if (instance.TryGetValues(headerName, out var values))
+        {
+            foreach (var value in values)
+            {
+                if (int.TryParse(value, out var int32)) return int32;
             }
         }
 
-        return new PageContext(pageTotal, pageSize, first, self, last, previous, next);
+        return null;
     }
 }

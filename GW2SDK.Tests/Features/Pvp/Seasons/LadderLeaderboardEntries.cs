@@ -15,7 +15,7 @@ public class LadderLeaderboardEntries
             await sut.Pvp.GetLeaderboardEntries(seasonId, boardId, regionId, 0, 200);
 
         Assert.NotEmpty(actual);
-        Assert.NotNull(context.ResultContext);
-        Assert.NotNull(context.PageContext);
+        Assert.Equal(actual.Count, context.ResultCount);
+        Assert.NotNull(context.Links);
     }
 }

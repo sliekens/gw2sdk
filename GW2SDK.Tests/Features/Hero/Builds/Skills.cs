@@ -11,15 +11,14 @@ public class Skills
 
         var (actual, context) = await sut.Hero.Builds.GetSkills();
 
-        Assert.NotNull(context.ResultContext);
-        Assert.Equal(context.ResultContext.ResultTotal, actual.Count);
+        Assert.Equal(actual.Count, context.ResultTotal);
 
         Assert.All(
             actual,
             skill =>
             {
                 Assert.Empty(skill.SkillFlags.Other);
-                
+
                 var chatLink = skill.GetChatLink();
                 Assert.Equal(skill.Id, chatLink.SkillId);
             }

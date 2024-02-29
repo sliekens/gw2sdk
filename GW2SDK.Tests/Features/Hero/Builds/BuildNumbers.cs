@@ -15,8 +15,7 @@ public class BuildNumbers
             await sut.Hero.Builds.GetBuildNumbers(character.Name, accessToken.Key);
 
         Assert.NotEmpty(actual);
-        Assert.NotNull(context.ResultContext);
-        Assert.Equal(actual.Count, context.ResultContext.ResultCount);
-        Assert.Equal(actual.Count, context.ResultContext.ResultTotal);
+        Assert.Equal(actual.Count, context.ResultCount);
+        Assert.Equal(actual.Count, context.ResultTotal);
     }
 }

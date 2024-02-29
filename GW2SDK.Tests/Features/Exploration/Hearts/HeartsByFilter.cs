@@ -28,8 +28,7 @@ public class HeartsByFilter
         );
 
         Assert.Equal(ids.Count, actual.Count);
-        Assert.NotNull(context.ResultContext);
-        Assert.Equal(ids.Count, context.ResultContext.ResultCount);
+        Assert.Equal(ids.Count, context.ResultCount);
         actual.All_have_ids();
         actual.Some_have_objectives();
         actual.All_have_chat_links();

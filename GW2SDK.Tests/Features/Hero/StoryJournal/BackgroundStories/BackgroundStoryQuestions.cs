@@ -11,8 +11,7 @@ public class BackgroundStoryQuestions
 
         var (actual, context) = await sut.Hero.StoryJournal.GetBackgroundStoryQuestions();
 
-        Assert.NotNull(context.ResultContext);
-        Assert.Equal(context.ResultContext.ResultTotal, actual.Count);
+        Assert.Equal(actual.Count, context.ResultTotal);
 
         Assert.All(
             actual,

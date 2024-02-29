@@ -46,7 +46,6 @@ public sealed class WorldsByPage
             }
         );
 
-        Assert.NotNull(context.PageContext);
-        Assert.Equal(3, context.PageContext.PageSize);
+        Assert.Equal(3, context.PageSize);
     }
 }

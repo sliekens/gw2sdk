@@ -11,7 +11,6 @@ public class Races
 
         var (actual, context) = await sut.Hero.Races.GetRaces();
 
-        Assert.NotNull(context.ResultContext);
-        Assert.Equal(context.ResultContext.ResultTotal, actual.Count);
+        Assert.Equal(actual.Count, context.ResultTotal);
     }
 }
