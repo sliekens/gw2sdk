@@ -1,18 +1,14 @@
-using System;
+﻿using System;
 using GuildWars2;
 using Spectre.Console;
 
 namespace MostVersatileMaterials;
 
-public class ProgressAdapter(ProgressTask progress) : IProgress<ResultContext>
+public class ProgressAdapter(ProgressTask progress) : IProgress<BulkProgress>
 {
-    public void Report(ResultContext value)
+    public void Report(BulkProgress value)
     {
-        if (value.ResultTotal != progress.MaxValue)
-        {
-            progress.MaxValue = value.ResultTotal;
-        }
-
+        progress.MaxValue = value.ResultTotal;
         progress.Value = value.ResultCount;
     }
 }

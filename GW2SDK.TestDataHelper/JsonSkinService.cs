@@ -4,7 +4,7 @@ namespace GuildWars2.TestDataHelper;
 
 public class JsonSkinService(HttpClient http)
 {
-    public async Task<ISet<string>> GetAllJsonSkins(IProgress<ResultContext> progress)
+    public async Task<ISet<string>> GetAllJsonSkins(IProgress<BulkProgress> progress)
     {
         var ids = await GetSkinIds().ConfigureAwait(false);
         var entries = new SortedDictionary<int, string>();
@@ -25,7 +25,7 @@ public class JsonSkinService(HttpClient http)
 
     public IAsyncEnumerable<(int, string)> GetJsonSkinsByIds(
         IReadOnlyCollection<int> ids,
-        IProgress<ResultContext>? progress = default,
+        IProgress<BulkProgress>? progress = default,
         CancellationToken cancellationToken = default
     )
     {

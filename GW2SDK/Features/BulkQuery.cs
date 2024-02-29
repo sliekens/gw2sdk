@@ -38,7 +38,7 @@ public static class BulkQuery
         BulkRequest<TKey, TValue> bulkRequest,
         int degreeOfParallelism = DefaultDegreeOfParallelism,
         int chunkSize = DefaultChunkSize,
-        IProgress<ResultContext>? progress = default,
+        IProgress<BulkProgress>? progress = default,
         [EnumeratorCancellation] CancellationToken cancellationToken = default
     )
     {
@@ -68,7 +68,7 @@ public static class BulkQuery
         var resultCount = 0;
         var resultTotal = keys.Count;
 
-        progress?.Report(new ResultContext(resultTotal, resultCount));
+        progress?.Report(new BulkProgress(resultTotal, resultCount));
 
         // PERF: no need to create chunks if keys do not exceed the chunk size
         if (keys.Count <= chunkSize)
@@ -78,7 +78,7 @@ public static class BulkQuery
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 yield return value;
-                progress?.Report(new ResultContext(resultTotal, ++resultCount));
+                progress?.Report(new BulkProgress(resultTotal, ++resultCount));
             }
 
             yield break;
@@ -104,7 +104,7 @@ public static class BulkQuery
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 yield return record;
-                progress?.Report(new ResultContext(resultTotal, ++resultCount));
+                progress?.Report(new BulkProgress(resultTotal, ++resultCount));
             }
 
             limiter.Release();

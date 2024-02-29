@@ -31,6 +31,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.ResultContext</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:GuildWars2.Hero.Accounts.Gender</Target>
     <Left>lib/net6.0/GW2SDK.dll</Left>
     <Right>lib/net6.0/GW2SDK.dll</Right>
@@ -59,6 +66,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.ResultContext</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:GuildWars2.Hero.Accounts.Gender</Target>
     <Left>lib/net8.0/GW2SDK.dll</Left>
     <Right>lib/net8.0/GW2SDK.dll</Right>
@@ -87,6 +101,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.ResultContext</Target>
+    <Left>lib/net8.0/GW2SDK.dll</Left>
+    <Right>lib/net8.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:GuildWars2.Hero.Accounts.Gender</Target>
     <Left>lib/netstandard2.0/GW2SDK.dll</Left>
     <Right>lib/netstandard2.0/GW2SDK.dll</Right>
@@ -111,6 +132,48 @@
     <Target>T:GuildWars2.PageContext</Target>
     <Left>lib/netstandard2.0/GW2SDK.dll</Left>
     <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.ResultContext</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.BulkQuery.QueryAsync``2(System.Collections.Generic.IReadOnlyCollection{``0},GuildWars2.BulkRequest{``0,``1},System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Commerce.CommerceClient.GetItemPricesBulk(GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Commerce.CommerceClient.GetItemPricesBulk(System.Collections.Generic.IReadOnlyCollection{System.Int32},GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Commerce.CommerceClient.GetOrderBooksBulk(GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Commerce.CommerceClient.GetOrderBooksBulk(System.Collections.Generic.IReadOnlyCollection{System.Int32},GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
@@ -157,6 +220,34 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Achievements.AchievementsClient.GetAchievementsBulk(GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Achievements.AchievementsClient.GetAchievementsBulk(System.Collections.Generic.IReadOnlyCollection{System.Int32},GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Crafting.Recipes.RecipesClient.GetRecipesBulk(GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Crafting.Recipes.RecipesClient.GetRecipesBulk(System.Collections.Generic.IReadOnlyCollection{System.Int32},GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Equipment.Templates.EquipmentItem.get_UpgradeItemIds</Target>
     <Left>lib/net462/GW2SDK.dll</Left>
     <Right>lib/net462/GW2SDK.dll</Right>
@@ -179,6 +270,20 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Equipment.Wardrobe.Skin.set_Restrictions(System.Collections.Generic.IReadOnlyList{GuildWars2.Hero.Races.RaceName})</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Wardrobe.WardrobeClient.GetSkinsBulk(GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Wardrobe.WardrobeClient.GetSkinsBulk(System.Collections.Generic.IReadOnlyCollection{System.Int32},GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
     <Left>lib/net462/GW2SDK.dll</Left>
     <Right>lib/net462/GW2SDK.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -235,6 +340,20 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Items.Item.set_Restrictions(System.Collections.Generic.IReadOnlyCollection{GuildWars2.Items.ItemRestriction})</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Items.ItemsClient.GetItemsBulk(GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Items.ItemsClient.GetItemsBulk(System.Collections.Generic.IReadOnlyCollection{System.Int32},GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
     <Left>lib/net462/GW2SDK.dll</Left>
     <Right>lib/net462/GW2SDK.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -269,6 +388,41 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.BulkQuery.QueryAsync``2(System.Collections.Generic.IReadOnlyCollection{``0},GuildWars2.BulkRequest{``0,``1},System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Commerce.CommerceClient.GetItemPricesBulk(GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Commerce.CommerceClient.GetItemPricesBulk(System.Collections.Generic.IReadOnlyCollection{System.Int32},GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Commerce.CommerceClient.GetOrderBooksBulk(GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Commerce.CommerceClient.GetOrderBooksBulk(System.Collections.Generic.IReadOnlyCollection{System.Int32},GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Accounts.Character.get_Gender</Target>
     <Left>lib/net6.0/GW2SDK.dll</Left>
     <Right>lib/net6.0/GW2SDK.dll</Right>
@@ -311,6 +465,34 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Achievements.AchievementsClient.GetAchievementsBulk(GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Achievements.AchievementsClient.GetAchievementsBulk(System.Collections.Generic.IReadOnlyCollection{System.Int32},GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Crafting.Recipes.RecipesClient.GetRecipesBulk(GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Crafting.Recipes.RecipesClient.GetRecipesBulk(System.Collections.Generic.IReadOnlyCollection{System.Int32},GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Equipment.Templates.EquipmentItem.get_UpgradeItemIds</Target>
     <Left>lib/net6.0/GW2SDK.dll</Left>
     <Right>lib/net6.0/GW2SDK.dll</Right>
@@ -333,6 +515,20 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Equipment.Wardrobe.Skin.set_Restrictions(System.Collections.Generic.IReadOnlyList{GuildWars2.Hero.Races.RaceName})</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Wardrobe.WardrobeClient.GetSkinsBulk(GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Wardrobe.WardrobeClient.GetSkinsBulk(System.Collections.Generic.IReadOnlyCollection{System.Int32},GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
     <Left>lib/net6.0/GW2SDK.dll</Left>
     <Right>lib/net6.0/GW2SDK.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -389,6 +585,20 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Items.Item.set_Restrictions(System.Collections.Generic.IReadOnlyCollection{GuildWars2.Items.ItemRestriction})</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Items.ItemsClient.GetItemsBulk(GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Items.ItemsClient.GetItemsBulk(System.Collections.Generic.IReadOnlyCollection{System.Int32},GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
     <Left>lib/net6.0/GW2SDK.dll</Left>
     <Right>lib/net6.0/GW2SDK.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -423,6 +633,41 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.BulkQuery.QueryAsync``2(System.Collections.Generic.IReadOnlyCollection{``0},GuildWars2.BulkRequest{``0,``1},System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/net8.0/GW2SDK.dll</Left>
+    <Right>lib/net8.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Commerce.CommerceClient.GetItemPricesBulk(GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/net8.0/GW2SDK.dll</Left>
+    <Right>lib/net8.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Commerce.CommerceClient.GetItemPricesBulk(System.Collections.Generic.IReadOnlyCollection{System.Int32},GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/net8.0/GW2SDK.dll</Left>
+    <Right>lib/net8.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Commerce.CommerceClient.GetOrderBooksBulk(GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/net8.0/GW2SDK.dll</Left>
+    <Right>lib/net8.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Commerce.CommerceClient.GetOrderBooksBulk(System.Collections.Generic.IReadOnlyCollection{System.Int32},GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/net8.0/GW2SDK.dll</Left>
+    <Right>lib/net8.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Accounts.Character.get_Gender</Target>
     <Left>lib/net8.0/GW2SDK.dll</Left>
     <Right>lib/net8.0/GW2SDK.dll</Right>
@@ -465,6 +710,34 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Achievements.AchievementsClient.GetAchievementsBulk(GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/net8.0/GW2SDK.dll</Left>
+    <Right>lib/net8.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Achievements.AchievementsClient.GetAchievementsBulk(System.Collections.Generic.IReadOnlyCollection{System.Int32},GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/net8.0/GW2SDK.dll</Left>
+    <Right>lib/net8.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Crafting.Recipes.RecipesClient.GetRecipesBulk(GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/net8.0/GW2SDK.dll</Left>
+    <Right>lib/net8.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Crafting.Recipes.RecipesClient.GetRecipesBulk(System.Collections.Generic.IReadOnlyCollection{System.Int32},GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/net8.0/GW2SDK.dll</Left>
+    <Right>lib/net8.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Equipment.Templates.EquipmentItem.get_UpgradeItemIds</Target>
     <Left>lib/net8.0/GW2SDK.dll</Left>
     <Right>lib/net8.0/GW2SDK.dll</Right>
@@ -487,6 +760,20 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Equipment.Wardrobe.Skin.set_Restrictions(System.Collections.Generic.IReadOnlyList{GuildWars2.Hero.Races.RaceName})</Target>
+    <Left>lib/net8.0/GW2SDK.dll</Left>
+    <Right>lib/net8.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Wardrobe.WardrobeClient.GetSkinsBulk(GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/net8.0/GW2SDK.dll</Left>
+    <Right>lib/net8.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Wardrobe.WardrobeClient.GetSkinsBulk(System.Collections.Generic.IReadOnlyCollection{System.Int32},GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
     <Left>lib/net8.0/GW2SDK.dll</Left>
     <Right>lib/net8.0/GW2SDK.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -543,6 +830,20 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Items.Item.set_Restrictions(System.Collections.Generic.IReadOnlyCollection{GuildWars2.Items.ItemRestriction})</Target>
+    <Left>lib/net8.0/GW2SDK.dll</Left>
+    <Right>lib/net8.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Items.ItemsClient.GetItemsBulk(GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/net8.0/GW2SDK.dll</Left>
+    <Right>lib/net8.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Items.ItemsClient.GetItemsBulk(System.Collections.Generic.IReadOnlyCollection{System.Int32},GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
     <Left>lib/net8.0/GW2SDK.dll</Left>
     <Right>lib/net8.0/GW2SDK.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -577,6 +878,41 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.BulkQuery.QueryAsync``2(System.Collections.Generic.IReadOnlyCollection{``0},GuildWars2.BulkRequest{``0,``1},System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Commerce.CommerceClient.GetItemPricesBulk(GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Commerce.CommerceClient.GetItemPricesBulk(System.Collections.Generic.IReadOnlyCollection{System.Int32},GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Commerce.CommerceClient.GetOrderBooksBulk(GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Commerce.CommerceClient.GetOrderBooksBulk(System.Collections.Generic.IReadOnlyCollection{System.Int32},GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Accounts.Character.get_Gender</Target>
     <Left>lib/netstandard2.0/GW2SDK.dll</Left>
     <Right>lib/netstandard2.0/GW2SDK.dll</Right>
@@ -619,6 +955,34 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Achievements.AchievementsClient.GetAchievementsBulk(GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Achievements.AchievementsClient.GetAchievementsBulk(System.Collections.Generic.IReadOnlyCollection{System.Int32},GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Crafting.Recipes.RecipesClient.GetRecipesBulk(GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Crafting.Recipes.RecipesClient.GetRecipesBulk(System.Collections.Generic.IReadOnlyCollection{System.Int32},GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Equipment.Templates.EquipmentItem.get_UpgradeItemIds</Target>
     <Left>lib/netstandard2.0/GW2SDK.dll</Left>
     <Right>lib/netstandard2.0/GW2SDK.dll</Right>
@@ -641,6 +1005,20 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Equipment.Wardrobe.Skin.set_Restrictions(System.Collections.Generic.IReadOnlyList{GuildWars2.Hero.Races.RaceName})</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Wardrobe.WardrobeClient.GetSkinsBulk(GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Wardrobe.WardrobeClient.GetSkinsBulk(System.Collections.Generic.IReadOnlyCollection{System.Int32},GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
     <Left>lib/netstandard2.0/GW2SDK.dll</Left>
     <Right>lib/netstandard2.0/GW2SDK.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -697,6 +1075,20 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Items.Item.set_Restrictions(System.Collections.Generic.IReadOnlyCollection{GuildWars2.Items.ItemRestriction})</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Items.ItemsClient.GetItemsBulk(GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Items.ItemsClient.GetItemsBulk(System.Collections.Generic.IReadOnlyCollection{System.Int32},GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
     <Left>lib/netstandard2.0/GW2SDK.dll</Left>
     <Right>lib/netstandard2.0/GW2SDK.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>

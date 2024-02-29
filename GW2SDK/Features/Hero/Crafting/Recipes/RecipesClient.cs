@@ -146,7 +146,7 @@ public sealed class RecipesClient
         MissingMemberBehavior missingMemberBehavior = default,
         int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,
         int chunkSize = BulkQuery.DefaultChunkSize,
-        IProgress<ResultContext>? progress = default,
+        IProgress<BulkProgress>? progress = default,
         CancellationToken cancellationToken = default
     )
     {
@@ -183,7 +183,7 @@ public sealed class RecipesClient
         MissingMemberBehavior missingMemberBehavior = default,
         int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,
         int chunkSize = BulkQuery.DefaultChunkSize,
-        IProgress<ResultContext>? progress = default,
+        IProgress<BulkProgress>? progress = default,
         [EnumeratorCancellation] CancellationToken cancellationToken = default
     )
     {

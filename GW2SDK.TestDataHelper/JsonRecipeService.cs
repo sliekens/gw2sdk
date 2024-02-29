@@ -4,7 +4,7 @@ namespace GuildWars2.TestDataHelper;
 
 public class JsonRecipeService(HttpClient http)
 {
-    public async Task<ISet<string>> GetAllJsonRecipes(IProgress<ResultContext> progress)
+    public async Task<ISet<string>> GetAllJsonRecipes(IProgress<BulkProgress> progress)
     {
         var ids = await GetRecipeIds().ConfigureAwait(false);
         var entries = new SortedDictionary<int, string>();
@@ -25,7 +25,7 @@ public class JsonRecipeService(HttpClient http)
 
     public IAsyncEnumerable<(int, string)> GetJsonRecipesByIds(
         IReadOnlyCollection<int> ids,
-        IProgress<ResultContext>? progress = default,
+        IProgress<BulkProgress>? progress = default,
         CancellationToken cancellationToken = default
     )
     {

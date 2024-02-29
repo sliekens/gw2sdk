@@ -4,7 +4,7 @@ namespace GuildWars2.TestDataHelper;
 
 public class JsonItemService(HttpClient http)
 {
-    public async Task<ISet<string>> GetAllJsonItems(IProgress<ResultContext> progress)
+    public async Task<ISet<string>> GetAllJsonItems(IProgress<BulkProgress> progress)
     {
         var ids = await GetItemsIndex().ConfigureAwait(false);
         var entries = new SortedDictionary<int, string>();
@@ -25,7 +25,7 @@ public class JsonItemService(HttpClient http)
 
     public IAsyncEnumerable<(int, string)> GetJsonItemsByIds(
         IReadOnlyCollection<int> ids,
-        IProgress<ResultContext>? progress = default,
+        IProgress<BulkProgress>? progress = default,
         CancellationToken cancellationToken = default
     )
     {
