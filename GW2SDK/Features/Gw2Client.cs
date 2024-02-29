@@ -9,6 +9,7 @@ using GuildWars2.Metadata;
 using GuildWars2.Pve;
 using GuildWars2.Pvp;
 using GuildWars2.Quaggans;
+using GuildWars2.WizardsVault;
 using GuildWars2.Worlds;
 using GuildWars2.Wvw;
 
@@ -68,4 +69,7 @@ public sealed class Gw2Client
 
     /// <inheritdoc cref="WvwClient" />
     public WvwClient Wvw => new(httpClient);
+
+    /// <inheritdoc cref="WizardsVaultClient" />
+    public WizardsVaultClient WizardsVault => new(httpClient);
 }
