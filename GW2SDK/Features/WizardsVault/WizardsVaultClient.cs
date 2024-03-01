@@ -2,6 +2,8 @@
 using GuildWars2.WizardsVault.AstralRewards.Http;
 using GuildWars2.WizardsVault.Objectives;
 using GuildWars2.WizardsVault.Objectives.Http;
+using GuildWars2.WizardsVault.Seasons;
+using GuildWars2.WizardsVault.Seasons.Http;
 
 namespace GuildWars2.WizardsVault;
 
@@ -18,6 +20,30 @@ public sealed class WizardsVaultClient
         this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
+
+    #region v2/wizardsvault
+
+    /// <summary>Retrieves the current Wizard's Vault season.</summary>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(Season Value, MessageContext Context)> GetSeason(
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        SeasonRequest request = new()
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(httpClient, cancellationToken);
+    }
+
+
+    #endregion v2/wizardsvault
 
     #region v2/account/wizardsvault/listings
 
