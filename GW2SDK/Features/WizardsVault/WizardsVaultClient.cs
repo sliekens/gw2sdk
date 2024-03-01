@@ -42,11 +42,16 @@ public sealed class WizardsVaultClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-
     #endregion v2/wizardsvault
 
     #region v2/account/wizardsvault/listings
 
+    /// <summary>Retrieves the rewards purchased on the account associated with the access token. This endpoint is only
+    /// accessible with a valid access token.</summary>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<PurchasedAstralReward> Value, MessageContext Context)>
         GetPurchasedAstralRewards(
             string? accessToken,
@@ -66,6 +71,12 @@ public sealed class WizardsVaultClient
 
     #region v2/account/wizardsvault/daily
 
+    /// <summary>Retrieves today's objectives and progress made on the account associated with the access token. This endpoint
+    /// is only accessible with a valid access token.</summary>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(DailyObjectivesProgress Value, MessageContext Context)> GetDailyObjectivesProgress(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -84,6 +95,12 @@ public sealed class WizardsVaultClient
 
     #region v2/account/wizardsvault/weekly
 
+    /// <summary>Retrieves this week's objectives and progress made on the account associated with the access token. This
+    /// endpoint is only accessible with a valid access token.</summary>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(WeeklyObjectivesProgress Value, MessageContext Context)>
         GetWeeklyObjectivesProgress(
             string? accessToken,
@@ -103,6 +120,12 @@ public sealed class WizardsVaultClient
 
     #region v2/account/wizardsvault/special
 
+    /// <summary>Retrieves special objectives and progress made on the account associated with the access token. This endpoint
+    /// is only accessible with a valid access token.</summary>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(SpecialObjectivesProgress Value, MessageContext Context)>
         GetSpecialObjectivesProgress(
             string? accessToken,
