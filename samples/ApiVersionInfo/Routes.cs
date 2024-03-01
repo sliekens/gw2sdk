@@ -88,21 +88,24 @@ internal static class Routes
         //"/v2/wizardsvault/objectives",
     ];
 
-    private static readonly HashSet<string> Problematic =
-    [
-        "/v2/characters/:id/skills", "/v2/characters/:id/specializations",
-
-        // WvW endpoints return nothing
-
-        "/v2/wvw/matches/stats/:id/guilds/:guild_id",
-        "/v2/wvw/matches/stats/:id/teams/:team/top/kdr",
-        "/v2/wvw/matches/stats/:id/teams/:team/top/kills",
-
-        // API not active since Wizard's Vault was added
-        "/v2/achievements/daily", "/v2/achievements/daily/tomorrow"
-    ];
-
     public static bool IsSupported(Route route) => Supported.Contains(route.Path);
 
-    public static bool IsProblematic(Route route) => Problematic.Contains(route.Path);
+    public static bool IsObsolete(Route route) =>
+        route.Path
+
+            // Replaced by build tabs
+            is "/v2/characters/:id/skills"
+            or "/v2/characters/:id/specializations"
+
+            // Replaced by Wizard's Vault
+            or "/v2/achievements/daily"
+            or "/v2/achievements/daily/tomorrow";
+
+    public static bool IsProblematic(Route route) =>
+        route.Path
+
+            // WvW endpoints return nothing
+            is "/v2/wvw/matches/stats/:id/guilds/:guild_id"
+            or "/v2/wvw/matches/stats/:id/teams/:team/top/kdr"
+            or "/v2/wvw/matches/stats/:id/teams/:team/top/kills";
 }

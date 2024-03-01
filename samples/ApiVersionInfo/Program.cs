@@ -34,7 +34,7 @@ foreach (var schemaVersion in v2.SchemaVersions)
     changes.AddRow(schemaVersion);
 }
 
-AnsiConsole.WriteLine("Highlighted routes are supported by GW2SDK. Dim routes are disabled.");
+AnsiConsole.WriteLine("Highlighted routes are supported by GW2SDK. Dimmed routes are unavailable.");
 
 AnsiConsole.Write(routes);
 AnsiConsole.Write(new Rule("Notable changes").LeftJustified());
