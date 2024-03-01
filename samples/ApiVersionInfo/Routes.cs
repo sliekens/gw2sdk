@@ -79,7 +79,13 @@ internal static class Routes
         "/v2/wvw/abilities", "/v2/wvw/matches",
         "/v2/wvw/matches/overview", "/v2/wvw/matches/scores",
         "/v2/wvw/matches/stats", "/v2/wvw/objectives",
-        "/v2/wvw/ranks", "/v2/wvw/upgrades"
+        "/v2/wvw/ranks", "/v2/wvw/upgrades",
+        "/v2/wizardsvault/listings", "/v2/account/wizardsvault/listings"
+
+        //"/v2/account/wizardsvault/daily",
+        //"/v2/account/wizardsvault/special",
+        //"/v2/account/wizardsvault/weekly",
+        //"/v2/wizardsvault/objectives",
     ];
 
     private static readonly HashSet<string> Problematic =
@@ -92,7 +98,7 @@ internal static class Routes
         "/v2/wvw/matches/stats/:id/teams/:team/top/kdr",
         "/v2/wvw/matches/stats/:id/teams/:team/top/kills",
 
-        // API not active since Wizard Vault was added
+        // API not active since Wizard's Vault was added
         "/v2/achievements/daily", "/v2/achievements/daily/tomorrow"
     ];
 
