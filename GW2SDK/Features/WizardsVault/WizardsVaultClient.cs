@@ -1,5 +1,7 @@
 ﻿using GuildWars2.WizardsVault.AstralRewards;
 using GuildWars2.WizardsVault.AstralRewards.Http;
+using GuildWars2.WizardsVault.Objectives;
+using GuildWars2.WizardsVault.Objectives.Http;
 
 namespace GuildWars2.WizardsVault;
 
@@ -135,4 +137,104 @@ public sealed class WizardsVaultClient
     }
 
     #endregion v2/wizardsvault/listings
+
+    #region v2/wizardsvault/objectives
+
+    /// <summary>Retrieves all objectives.</summary>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(HashSet<Objective> Value, MessageContext Context)> GetObjectives(
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        ObjectivesRequest request = new()
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(httpClient, cancellationToken);
+    }
+
+    /// <summary>Retrieves the IDs of all objectives.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(HashSet<int> Value, MessageContext Context)> GetObjectivesIndex(
+        CancellationToken cancellationToken = default
+    )
+    {
+        ObjectivesIndexRequest request = new();
+        return request.SendAsync(httpClient, cancellationToken);
+    }
+
+    /// <summary>Retrieves a reward by its ID.</summary>
+    /// <param name="objectiveId">The reward ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(Objective Value, MessageContext Context)> GetObjectiveById(
+        int objectiveId,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        ObjectiveByIdRequest request = new(objectiveId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(httpClient, cancellationToken);
+    }
+
+    /// <summary>Retrieves objectives by their IDs.</summary>
+    /// <param name="objectiveIds">The reward IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(HashSet<Objective> Value, MessageContext Context)> GetObjectivesByIds(
+        IReadOnlyCollection<int> objectiveIds,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        ObjectivesByIdsRequest request = new(objectiveIds)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(httpClient, cancellationToken);
+    }
+
+    /// <summary>Retrieves a page of objectives.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(HashSet<Objective> Value, MessageContext Context)> GetObjectivesByPage(
+        int pageIndex,
+        int? pageSize = default,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        ObjectivesByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(httpClient, cancellationToken);
+    }
+
+    #endregion v2/wizardsvault/objectives
 }
