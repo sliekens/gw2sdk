@@ -1,8 +1,7 @@
 ﻿using GuildWars2.Http;
 using GuildWars2.Json;
-using GuildWars2.WizardsVault.AstralRewards;
 
-namespace GuildWars2.WizardsVault.Http;
+namespace GuildWars2.WizardsVault.AstralRewards.Http;
 
 internal sealed class PurchasedAstralRewardsRequest : IHttpRequest<HashSet<PurchasedAstralReward>>
 {
@@ -32,7 +31,9 @@ internal sealed class PurchasedAstralRewardsRequest : IHttpRequest<HashSet<Purch
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetPurchasedAstralReward(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(
+            entry => entry.GetPurchasedAstralReward(MissingMemberBehavior)
+        );
         return (value, new MessageContext(response));
     }
 }

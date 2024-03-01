@@ -3,18 +3,20 @@ using GuildWars2.WizardsVault;
 
 namespace GuildWars2.Tests.Features.WizardsVault;
 
-public class PurchasedAstralRewards
+public class AstralRewardsByPage
 {
     [Fact]
-    public async Task Can_be_listed()
+    public async Task Can_be_filtered_by_page()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = Composer.Resolve<ApiKey>();
 
-        var (actual, context) = await sut.WizardsVault.GetPurchasedAstralRewards(accessToken.Key);
+        const int pageSize = 3;
+        var (actual, context) = await sut.WizardsVault.GetAstralRewardsByPage(0, pageSize);
 
-        Assert.Equal(actual.Count, context.ResultCount);
-
+        Assert.Equal(pageSize, actual.Count);
+        Assert.NotNull(context.Links);
+        Assert.Equal(pageSize, context.PageSize);
+        Assert.Equal(pageSize, context.ResultCount);
         Assert.All(
             actual,
             reward =>
@@ -24,16 +26,6 @@ public class PurchasedAstralRewards
                 Assert.True(reward.ItemCount > 0);
                 Assert.True(reward.Cost > 0);
                 Assert.True(Enum.IsDefined(typeof(RewardKind), reward.Kind));
-                if (reward.PurchaseLimit.HasValue)
-                {
-                    Assert.NotNull(reward.Purchased);
-                    Assert.True(reward.PurchaseLimit > 0);
-                    Assert.InRange(reward.Purchased.Value, 0, reward.PurchaseLimit.Value);
-                }
-                else
-                {
-                    Assert.Null(reward.Purchased);
-                }
 
                 var chatLink = reward.GetChatLink();
                 Assert.Equal(reward.ItemId, chatLink.ItemId);

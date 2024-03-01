@@ -3,18 +3,23 @@ using GuildWars2.WizardsVault;
 
 namespace GuildWars2.Tests.Features.WizardsVault;
 
-public class PurchasedAstralRewards
+public class AstralRewardsByFilter
 {
     [Fact]
-    public async Task Can_be_listed()
+    public async Task Can_be_filtered_by_id()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = Composer.Resolve<ApiKey>();
 
-        var (actual, context) = await sut.WizardsVault.GetPurchasedAstralRewards(accessToken.Key);
+        HashSet<int> ids =
+        [
+            1, 2,
+            3
+        ];
 
-        Assert.Equal(actual.Count, context.ResultCount);
+        var (actual, context) = await sut.WizardsVault.GetAstralRewardsByIds(ids);
 
+        Assert.Equal(ids.Count, actual.Count);
+        Assert.Equal(ids.Count, context.ResultCount);
         Assert.All(
             actual,
             reward =>
@@ -24,16 +29,6 @@ public class PurchasedAstralRewards
                 Assert.True(reward.ItemCount > 0);
                 Assert.True(reward.Cost > 0);
                 Assert.True(Enum.IsDefined(typeof(RewardKind), reward.Kind));
-                if (reward.PurchaseLimit.HasValue)
-                {
-                    Assert.NotNull(reward.Purchased);
-                    Assert.True(reward.PurchaseLimit > 0);
-                    Assert.InRange(reward.Purchased.Value, 0, reward.PurchaseLimit.Value);
-                }
-                else
-                {
-                    Assert.Null(reward.Purchased);
-                }
 
                 var chatLink = reward.GetChatLink();
                 Assert.Equal(reward.ItemId, chatLink.ItemId);
