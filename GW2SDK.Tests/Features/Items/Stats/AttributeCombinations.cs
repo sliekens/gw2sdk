@@ -11,6 +11,6 @@ public class AttributeCombinations
 
         var (actual, context) = await sut.Items.GetAttributeCombinations();
 
-        Assert.Equal(actual.Count, context.ResultTotal);
+        Assert.Equal(context.ResultTotal, actual.Count);
     }
 }

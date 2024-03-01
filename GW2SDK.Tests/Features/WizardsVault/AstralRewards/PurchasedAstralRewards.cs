@@ -13,7 +13,7 @@ public class PurchasedAstralRewards
 
         var (actual, context) = await sut.WizardsVault.GetPurchasedAstralRewards(accessToken.Key);
 
-        Assert.Equal(actual.Count, context.ResultCount);
+        Assert.Equal(context.ResultCount, actual.Count);
 
         Assert.All(
             actual,

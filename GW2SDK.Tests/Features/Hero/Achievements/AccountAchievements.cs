@@ -12,7 +12,7 @@ public class AccountAchievements
 
         var (actual, context) = await sut.Hero.Achievements.GetAccountAchievements(accessToken.Key);
 
-        Assert.Equal(actual.Count, context.ResultTotal);
+        Assert.Equal(context.ResultTotal, actual.Count);
 
         Assert.All(
             actual,

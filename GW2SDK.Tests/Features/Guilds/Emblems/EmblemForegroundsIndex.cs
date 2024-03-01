@@ -12,7 +12,7 @@ public class EmblemForegroundsIndex
         var (actual, context) = await sut.Guilds.GetEmblemForegroundsIndex();
 
         Assert.NotEmpty(actual);
-        Assert.Equal(actual.Count, context.ResultCount);
-        Assert.Equal(actual.Count, context.ResultTotal);
+        Assert.Equal(context.ResultCount, actual.Count);
+        Assert.Equal(context.ResultTotal, actual.Count);
     }
 }

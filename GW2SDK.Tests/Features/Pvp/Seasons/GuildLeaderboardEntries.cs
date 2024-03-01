@@ -15,7 +15,7 @@ public class GuildLeaderboardEntries
             await sut.Pvp.GetLeaderboardEntries(seasonId, boardId, regionId, 0, 200);
 
         Assert.NotEmpty(actual);
-        Assert.Equal(actual.Count, context.ResultCount);
+        Assert.Equal(context.ResultCount, actual.Count);
         Assert.NotNull(context.Links);
     }
 }

@@ -12,7 +12,7 @@ public class Nodes
         var (actual, context) = await sut.Pve.Home.GetNodes();
 
         Assert.NotEmpty(actual);
-        Assert.Equal(actual.Count, context.ResultTotal);
+        Assert.Equal(context.ResultTotal, actual.Count);
         Assert.All(
             actual,
             node =>

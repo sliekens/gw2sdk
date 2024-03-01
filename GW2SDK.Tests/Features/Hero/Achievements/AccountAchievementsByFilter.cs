@@ -20,7 +20,7 @@ public class AccountAchievementsByFilter
             await sut.Hero.Achievements.GetAccountAchievementsByIds(ids, accessToken.Key);
 
         Assert.Equal(ids.Count, actual.Count);
-        Assert.Equal(ids.Count, context.ResultCount);
+        Assert.Equal(context.ResultCount, actual.Count);
         Assert.All(
             actual,
             entry =>

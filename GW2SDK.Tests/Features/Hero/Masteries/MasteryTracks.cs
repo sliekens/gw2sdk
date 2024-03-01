@@ -11,7 +11,7 @@ public class MasteryTracks
 
         var (actual, context) = await sut.Hero.Masteries.GetMasteryTracks();
 
-        Assert.Equal(actual.Count, context.ResultTotal);
+        Assert.Equal(context.ResultTotal, actual.Count);
         Assert.All(
             actual,
             mastery =>

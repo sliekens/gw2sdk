@@ -18,7 +18,7 @@ public class FilesByFilter
         var (actual, context) = await sut.Files.GetFilesByIds(ids);
 
         Assert.Equal(ids.Count, actual.Count);
-        Assert.Equal(ids.Count, context.ResultCount);
+        Assert.Equal(context.ResultCount, actual.Count);
         Assert.All(
             actual,
             entry =>

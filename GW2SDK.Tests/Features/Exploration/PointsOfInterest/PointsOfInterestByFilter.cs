@@ -28,7 +28,7 @@ public class PointsOfInterestByFilter
         );
 
         Assert.Equal(ids.Count, actual.Count);
-        Assert.Equal(ids.Count, context.ResultCount);
+        Assert.Equal(context.ResultCount, actual.Count);
         actual.All_have_ids();
         actual.Some_have_names();
         actual.All_have_chat_links();

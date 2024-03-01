@@ -18,7 +18,7 @@ public class MapSummariesByFilter
         var (actual, context) = await sut.Exploration.GetMapSummariesByIds(ids);
 
         Assert.Equal(ids.Count, actual.Count);
-        Assert.Equal(ids.Count, context.ResultCount);
+        Assert.Equal(context.ResultCount, actual.Count);
         Assert.All(
             actual,
             entry =>

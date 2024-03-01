@@ -18,7 +18,7 @@ public class MiniaturesByFilter
         var (actual, context) = await sut.Hero.Equipment.Miniatures.GetMiniaturesByIds(ids);
 
         Assert.Equal(ids.Count, actual.Count);
-        Assert.Equal(ids.Count, context.ResultCount);
+        Assert.Equal(context.ResultCount, actual.Count);
         Assert.All(
             actual,
             entry =>

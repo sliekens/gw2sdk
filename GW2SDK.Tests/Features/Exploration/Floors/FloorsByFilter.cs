@@ -20,7 +20,7 @@ public class FloorsByFilter
         var (actual, context) = await sut.Exploration.GetFloorsByIds(continentId, ids);
 
         Assert.Equal(ids.Count, actual.Count);
-        Assert.Equal(ids.Count, context.ResultCount);
+        Assert.Equal(context.ResultCount, actual.Count);
         Assert.All(
             actual,
             entry =>

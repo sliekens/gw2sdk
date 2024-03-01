@@ -11,7 +11,7 @@ public class Specializations
 
         var (actual, context) = await sut.Hero.Builds.GetSpecializations();
 
-        Assert.Equal(actual.Count, context.ResultTotal);
+        Assert.Equal(context.ResultTotal, actual.Count);
         Assert.All(
             actual,
             specialization =>

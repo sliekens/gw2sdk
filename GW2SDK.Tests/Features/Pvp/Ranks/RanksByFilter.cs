@@ -18,7 +18,7 @@ public class RanksByFilter
         var (actual, context) = await sut.Pvp.GetRanksByIds(ids);
 
         Assert.Equal(ids.Count, actual.Count);
-        Assert.Equal(ids.Count, context.ResultCount);
+        Assert.Equal(context.ResultCount, actual.Count);
         Assert.All(
             actual,
             entry =>

@@ -14,7 +14,7 @@ public class RegionsIndex
         var (actual, context) = await sut.Exploration.GetRegionsIndex(continentId, floorId);
 
         Assert.NotEmpty(actual);
-        Assert.Equal(actual.Count, context.ResultCount);
-        Assert.Equal(actual.Count, context.ResultTotal);
+        Assert.Equal(context.ResultCount, actual.Count);
+        Assert.Equal(context.ResultTotal, actual.Count);
     }
 }

@@ -12,7 +12,7 @@ public class Cats
         var (actual, context) = await sut.Pve.Home.GetCats();
 
         Assert.NotEmpty(actual);
-        Assert.Equal(actual.Count, context.ResultTotal);
+        Assert.Equal(context.ResultTotal, actual.Count);
         Assert.All(
             actual,
             cat =>

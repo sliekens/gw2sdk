@@ -15,7 +15,7 @@ public class ContinentsByPage
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);
         Assert.Equal(2, actual.Count);
-        Assert.Equal(2, context.ResultCount);
+        Assert.Equal(context.ResultCount, 2);
         Assert.All(
             actual,
             entry =>

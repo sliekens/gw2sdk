@@ -46,6 +46,6 @@ public class WorldsByFilter
             }
         );
 
-        Assert.Equal(actual.Count, context.ResultCount);
+        Assert.Equal(context.ResultCount, actual.Count);
     }
 }

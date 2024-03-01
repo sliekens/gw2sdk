@@ -18,7 +18,7 @@ public class DungeonsByFilter
         var (actual, context) = await sut.Pve.Dungeons.GetDungeonsByIds(ids);
 
         Assert.Equal(ids.Count, actual.Count);
-        Assert.Equal(ids.Count, context.ResultCount);
+        Assert.Equal(context.ResultCount, actual.Count);
         Assert.All(
             actual,
             entry =>

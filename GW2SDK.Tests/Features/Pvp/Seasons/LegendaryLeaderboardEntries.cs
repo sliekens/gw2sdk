@@ -15,8 +15,8 @@ public class LegendaryLeaderboardEntries
             await sut.Pvp.GetLeaderboardEntries(seasonId, boardId, regionId, 0, 200);
 
         Assert.NotEmpty(actual);
-        Assert.Equal(actual.Count, context.ResultCount);
-        Assert.Equal(actual.Count, context.ResultTotal);
+        Assert.Equal(context.ResultCount, actual.Count);
+        Assert.Equal(context.ResultTotal, actual.Count);
         Assert.NotNull(context.Links);
     }
 }

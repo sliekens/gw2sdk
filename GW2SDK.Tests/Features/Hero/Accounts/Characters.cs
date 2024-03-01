@@ -12,6 +12,6 @@ public class Characters
 
         var (actual, context) = await sut.Hero.Account.GetCharacters(accessToken.Key);
 
-        Assert.Equal(actual.Count, context.ResultTotal);
+        Assert.Equal(context.ResultTotal, actual.Count);
     }
 }

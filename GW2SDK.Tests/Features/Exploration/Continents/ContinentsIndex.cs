@@ -12,7 +12,7 @@ public class ContinentsIndex
         var (actual, context) = await sut.Exploration.GetContinentsIndex();
 
         Assert.Collection(actual, tyria => Assert.Equal(1, tyria), mists => Assert.Equal(2, mists));
-        Assert.Equal(actual.Count, context.ResultCount);
-        Assert.Equal(actual.Count, context.ResultTotal);
+        Assert.Equal(context.ResultCount, actual.Count);
+        Assert.Equal(context.ResultTotal, actual.Count);
     }
 }

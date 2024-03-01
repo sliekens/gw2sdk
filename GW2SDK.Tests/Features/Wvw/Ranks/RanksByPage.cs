@@ -15,7 +15,7 @@ public class RanksByPage
         Assert.Equal(pageSize, actual.Count);
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);
-        Assert.Equal(pageSize, context.ResultCount);
+        Assert.Equal(context.ResultCount, pageSize);
         Assert.All(
             actual,
             entry =>

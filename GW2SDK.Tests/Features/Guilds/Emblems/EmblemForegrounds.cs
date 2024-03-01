@@ -12,7 +12,7 @@ public class EmblemForegrounds
         var (actual, context) = await sut.Guilds.GetEmblemForegrounds();
 
         Assert.NotEmpty(actual);
-        Assert.Equal(actual.Count, context.ResultTotal);
+        Assert.Equal(context.ResultTotal, actual.Count);
         Assert.All(
             actual,
             emblem =>

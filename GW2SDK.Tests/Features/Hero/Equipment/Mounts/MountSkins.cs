@@ -11,6 +11,6 @@ public class MountSkins
 
         var (actual, context) = await sut.Hero.Equipment.Mounts.GetMountSkins();
 
-        Assert.Equal(actual.Count, context.ResultTotal);
+        Assert.Equal(context.ResultTotal, actual.Count);
     }
 }

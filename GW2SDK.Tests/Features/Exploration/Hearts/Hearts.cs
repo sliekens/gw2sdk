@@ -16,8 +16,8 @@ public class Hearts
             await sut.Exploration.GetHearts(continentId, floorId, regionId, mapId);
 
         Assert.NotEmpty(actual);
-        Assert.Equal(actual.Count, context.ResultCount);
-        Assert.Equal(actual.Count, context.ResultTotal);
+        Assert.Equal(context.ResultCount, actual.Count);
+        Assert.Equal(context.ResultTotal, actual.Count);
         actual.All_have_ids();
         actual.Some_have_objectives();
         actual.All_have_chat_links();

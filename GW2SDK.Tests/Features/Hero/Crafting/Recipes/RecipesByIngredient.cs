@@ -17,8 +17,8 @@ public class RecipesByIngredient
             await sut.Hero.Crafting.Recipes.GetRecipesByIngredientItemId(visionCrystal);
 
         Assert.NotInRange(actual.Count, 0, 200); // Greater than 200
-        Assert.Equal(actual.Count, context.ResultCount);
-        Assert.Equal(actual.Count, context.ResultTotal);
+        Assert.Equal(context.ResultCount, actual.Count);
+        Assert.Equal(context.ResultTotal, actual.Count);
         Assert.All(
             actual,
             recipe => Assert.Contains(
