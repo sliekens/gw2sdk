@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.WizardsVault;
+namespace GuildWars2.Tests.Features.WizardsVault.AstralRewards;
 
 public class AstralRewardsIndex
 {

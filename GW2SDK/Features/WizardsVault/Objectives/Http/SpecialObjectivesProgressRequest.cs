@@ -1,32 +1,27 @@
 ﻿using GuildWars2.Http;
-using GuildWars2.Json;
 
-namespace GuildWars2.WizardsVault.AstralRewards.Http;
+namespace GuildWars2.WizardsVault.Objectives.Http;
 
-internal sealed class AstralRewardsRequest : IHttpRequest<HashSet<AstralReward>>
+internal sealed class SpecialObjectivesProgressRequest : IHttpRequest<SpecialObjectivesProgress>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/wizardsvault/listings")
+        new(Get, "v2/account/wizardsvault/special")
         {
             AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder
-            {
-                { "ids", "all" },
-                { "v", SchemaVersion.Recommended }
-            }
+            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
         };
 
-    public Language? Language { get; init; }
+    public required string? AccessToken { get; init; }
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<(HashSet<AstralReward> Value, MessageContext Context)> SendAsync(
+    public async Task<(SpecialObjectivesProgress Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
     {
         using var response = await httpClient.SendAsync(
-                Template with { AcceptLanguage = Language?.Alpha2Code },
+                Template with { BearerToken = AccessToken },
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
@@ -35,7 +30,7 @@ internal sealed class AstralRewardsRequest : IHttpRequest<HashSet<AstralReward>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetAstralReward(MissingMemberBehavior));
+        var value = json.RootElement.GetSpecialObjectivesProgress(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }
 }

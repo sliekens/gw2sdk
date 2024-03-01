@@ -21,15 +21,16 @@ public sealed record PurchasedAstralReward
     /// <summary>The Astral Acclaim cost of the reward.</summary>
     public required int Cost { get; init; }
 
-    /// <summary>The number of times the reward has been purchased during the current season, or <c>null</c> if there is no limit, then purchases are not counted.</summary>
+    /// <summary>The number of times the reward has been purchased during the current season, or <c>null</c> if there is no
+    /// limit, then purchases are not counted.</summary>
     public required int? Purchased { get; init; }
 
-    /// <summary>The maximum number of times the reward can be purchased during the current season, or <c>null</c> if there is no limit.</summary>
+    /// <summary>The maximum number of times the reward can be purchased during the current season, or <c>null</c> if there is
+    /// no limit.</summary>
     public required int? PurchaseLimit { get; init; }
 
-    /// <summary>
-    /// The number of times the reward can still be purchased during the current season, or <c>null</c> if there is no limit.
-    /// </summary>
+    /// <summary>The number of times the reward can still be purchased during the current season, or <c>null</c> if there is no
+    /// limit.</summary>
     public int? Available => PurchaseLimit - Purchased;
 
     /// <summary>Gets an item chat link object for this astral reward.</summary>

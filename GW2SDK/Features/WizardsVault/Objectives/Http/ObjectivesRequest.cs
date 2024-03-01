@@ -5,15 +5,16 @@ namespace GuildWars2.WizardsVault.Objectives.Http;
 
 internal sealed class ObjectivesRequest : IHttpRequest<HashSet<Objective>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/wizardsvault/objectives")
-    {
-        AcceptEncoding = "gzip",
-        Arguments = new QueryBuilder
+    private static readonly HttpRequestMessageTemplate Template =
+        new(Get, "v2/wizardsvault/objectives")
         {
-            { "ids", "all" },
-            { "v", SchemaVersion.Recommended }
-        }
-    };
+            AcceptEncoding = "gzip",
+            Arguments = new QueryBuilder
+            {
+                { "ids", "all" },
+                { "v", SchemaVersion.Recommended }
+            }
+        };
 
     public Language? Language { get; init; }
 

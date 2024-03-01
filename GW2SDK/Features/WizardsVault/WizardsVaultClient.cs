@@ -38,6 +38,62 @@ public sealed class WizardsVaultClient
 
     #endregion v2/account/wizardsvault/listings
 
+    #region v2/account/wizardsvault/daily
+
+    public Task<(DailyObjectivesProgress Value, MessageContext Context)> GetDailyObjectivesProgress(
+        string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        DailyObjectivesProgressRequest request = new()
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(httpClient, cancellationToken);
+    }
+
+    #endregion v2/account/wizardsvault/daily
+
+    #region v2/account/wizardsvault/weekly
+
+    public Task<(WeeklyObjectivesProgress Value, MessageContext Context)>
+        GetWeeklyObjectivesProgress(
+            string? accessToken,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
+    {
+        WeeklyObjectivesProgressRequest request = new()
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(httpClient, cancellationToken);
+    }
+
+    #endregion v2/account/wizardsvault/weekly
+
+    #region v2/account/wizardsvault/special
+
+    public Task<(SpecialObjectivesProgress Value, MessageContext Context)>
+        GetSpecialObjectivesProgress(
+            string? accessToken,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
+    {
+        SpecialObjectivesProgressRequest request = new()
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(httpClient, cancellationToken);
+    }
+
+    #endregion v2/account/wizardsvault/weekly
+
     #region v2/wizardsvault/listings
 
     /// <summary>Retrieves all rewards.</summary>

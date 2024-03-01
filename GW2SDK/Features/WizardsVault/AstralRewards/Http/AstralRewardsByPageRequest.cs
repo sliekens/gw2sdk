@@ -3,7 +3,8 @@ using GuildWars2.Json;
 
 namespace GuildWars2.WizardsVault.AstralRewards.Http;
 
-internal sealed class AstralRewardsByPageRequest(int pageIndex) : IHttpRequest<HashSet<AstralReward>>
+internal sealed class AstralRewardsByPageRequest(int pageIndex)
+    : IHttpRequest<HashSet<AstralReward>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/wizardsvault/listings") { AcceptEncoding = "gzip" };

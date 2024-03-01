@@ -17,6 +17,6 @@ public class ObjectiveById
         Assert.Equal(id, actual.Id);
         Assert.NotEmpty(actual.Title);
         Assert.True(Enum.IsDefined(typeof(ObjectiveTrack), actual.Track));
-        Assert.True(actual.Acclaim > 0);
+        Assert.True(actual.RewardAcclaim > 0);
     }
 }

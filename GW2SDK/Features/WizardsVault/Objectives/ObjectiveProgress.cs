@@ -1,9 +1,9 @@
 ﻿namespace GuildWars2.WizardsVault.Objectives;
 
-/// <summary>Information about a Wizard's Vault objective.</summary>
+/// <summary>Information about progress towards completing a Wizard's Vault objective.</summary>
 [PublicAPI]
 [DataTransferObject]
-public sealed record Objective
+public sealed record ObjectiveProgress
 {
     /// <summary>The objective ID.</summary>
     public required int Id { get; init; }
@@ -16,4 +16,13 @@ public sealed record Objective
 
     /// <summary>The amount of Astral Acclaim that is awarded for completing the objective.</summary>
     public required int RewardAcclaim { get; init; }
+
+    /// <summary>The amount of progress made so far.</summary>
+    public required int Progress { get; init; }
+
+    /// <summary>The amount of progress required to complete the objective.</summary>
+    public required int Goal { get; init; }
+
+    /// <summary>Whether the objective reward was claimed.</summary>
+    public required bool Claimed { get; init; }
 }

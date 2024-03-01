@@ -1,8 +1,7 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 using GuildWars2.WizardsVault;
-using Xunit;
 
-namespace GuildWars2.Tests.Features.WizardsVault;
+namespace GuildWars2.Tests.Features.WizardsVault.AstralRewards;
 
 public class AstralRewardById
 {

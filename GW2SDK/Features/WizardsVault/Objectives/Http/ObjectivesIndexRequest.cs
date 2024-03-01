@@ -5,11 +5,12 @@ namespace GuildWars2.WizardsVault.Objectives.Http;
 
 internal sealed class ObjectivesIndexRequest : IHttpRequest<HashSet<int>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/wizardsvault/objectives")
-    {
-        AcceptEncoding = "gzip",
-        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
-    };
+    private static readonly HttpRequestMessageTemplate Template =
+        new(Get, "v2/wizardsvault/objectives")
+        {
+            AcceptEncoding = "gzip",
+            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+        };
 
     public async Task<(HashSet<int> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,

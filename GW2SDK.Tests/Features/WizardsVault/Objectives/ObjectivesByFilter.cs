@@ -22,12 +22,12 @@ public class ObjectivesByFilter
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.All(
             actual,
-            reward =>
+            objective =>
             {
-                Assert.True(reward.Id > 0);
-                Assert.NotEmpty(reward.Title);
-                Assert.True(Enum.IsDefined(typeof(ObjectiveTrack), reward.Track));
-                Assert.True(reward.Acclaim > 0);
+                Assert.True(objective.Id > 0);
+                Assert.NotEmpty(objective.Title);
+                Assert.True(Enum.IsDefined(typeof(ObjectiveTrack), objective.Track));
+                Assert.True(objective.RewardAcclaim > 0);
             }
         );
     }
