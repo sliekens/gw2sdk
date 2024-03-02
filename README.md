@@ -12,6 +12,7 @@ A .NET code library for interacting with the Guild Wars 2 API and game client.
 - [Installation] instructions for NuGet packages
 - [Basic usage][usage] example for working with the SDK
 - [API documentation][api-docs] for the SDK
+- [API key management][applications] for the Guild Wars 2 API
 
 To give feedback:
 
@@ -92,3 +93,4 @@ The [wiki] contains information for contributors. The _docs_ directory contains 
 [usage]:https://sliekens.github.io/gw2sdk/guide/usage
 [documentation]:https://sliekens.github.io/gw2sdk/
 [wiki]:https://github.com/sliekens/gw2sdk/wiki
+[applications]:https://account.arena.net/applications
