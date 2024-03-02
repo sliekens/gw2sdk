@@ -14,7 +14,7 @@ public record Weapon : Item
 
     public required int Defense { get; init; }
 
-    public required IReadOnlyCollection<InfusionSlot> InfusionSlots { get; init; }
+    public required IReadOnlyList<InfusionSlot> InfusionSlots { get; init; }
 
     public required double AttributeAdjustment { get; init; }
 

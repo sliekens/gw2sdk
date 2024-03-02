@@ -4,7 +4,7 @@
 [Inheritable]
 public record Trinket : Item
 {
-    public required IReadOnlyCollection<InfusionSlot> InfusionSlots { get; init; }
+    public required IReadOnlyList<InfusionSlot> InfusionSlots { get; init; }
 
     public required double AttributeAdjustment { get; init; }
 
