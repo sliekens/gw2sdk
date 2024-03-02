@@ -24,5 +24,5 @@ public record Weapon : Item
 
     public required int? SecondarySuffixItemId { get; init; }
 
-    public required IReadOnlyCollection<int>? StatChoices { get; init; }
+    public required IReadOnlyList<int>? StatChoices { get; init; }
 }
