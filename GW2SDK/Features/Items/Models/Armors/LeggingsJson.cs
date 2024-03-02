@@ -151,7 +151,7 @@ internal static class LeggingsJson
             Level = level.Map(value => value.GetInt32()),
             Rarity = rarity.Map(value => value.GetEnum<Rarity>(missingMemberBehavior)),
             VendorValue = vendorValue.Map(value => value.GetInt32()),
-            DefaultSkin = defaultSkin.Map(value => value.GetInt32()),
+            DefaultSkinId = defaultSkin.Map(value => value.GetInt32()),
             GameTypes =
                 gameTypes.Map(
                     values => values.GetList(

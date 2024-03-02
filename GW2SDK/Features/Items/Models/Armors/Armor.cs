@@ -4,7 +4,7 @@
 [Inheritable]
 public record Armor : Item
 {
-    public required int DefaultSkin { get; init; }
+    public required int DefaultSkinId { get; init; }
 
     public required WeightClass WeightClass { get; init; }
 
