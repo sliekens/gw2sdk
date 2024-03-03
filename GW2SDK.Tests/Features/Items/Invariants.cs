@@ -39,7 +39,7 @@ internal static class Invariants
     {
         if (actual.Prefix is not null)
         {
-            Assert.All(actual.Prefix.Attributes, attribute => Assert.True(attribute.Modifier >= 1));
+            Assert.All(actual.Prefix.Attributes, attribute => Assert.True(attribute.Value >= 1));
         }
     }
 
@@ -67,7 +67,7 @@ internal static class Invariants
     {
         if (actual.Prefix is not null)
         {
-            Assert.All(actual.Prefix.Attributes, attribute => Assert.True(attribute.Modifier >= 1));
+            Assert.All(actual.Prefix.Attributes, attribute => Assert.True(attribute.Value >= 1));
         }
     }
 
@@ -116,7 +116,7 @@ internal static class Invariants
     {
         if (actual.Prefix is not null)
         {
-            Assert.All(actual.Prefix.Attributes, attribute => Assert.True(attribute.Modifier >= 1));
+            Assert.All(actual.Prefix.Attributes, attribute => Assert.True(attribute.Value >= 1));
         }
     }
 
