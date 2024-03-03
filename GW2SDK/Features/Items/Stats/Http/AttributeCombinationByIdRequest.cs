@@ -2,14 +2,14 @@
 
 namespace GuildWars2.Items.Stats.Http;
 
-internal sealed class AttributeCombinationByIdRequest(int itemStatId) : IHttpRequest<AttributeCombination>
+internal sealed class AttributeCombinationByIdRequest(int attributeCombinationId) : IHttpRequest<AttributeCombination>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/itemstats")
     {
         AcceptEncoding = "gzip"
     };
 
-    public int ItemStatId { get; } = itemStatId;
+    public int AttributeCombinationId { get; } = attributeCombinationId;
 
     public Language? Language { get; init; }
 
@@ -25,7 +25,7 @@ internal sealed class AttributeCombinationByIdRequest(int itemStatId) : IHttpReq
                 {
                     Arguments = new QueryBuilder
                     {
-                        { "id", ItemStatId },
+                        { "id", AttributeCombinationId },
                         { "v", SchemaVersion.Recommended }
                     },
                     AcceptLanguage = Language?.Alpha2Code

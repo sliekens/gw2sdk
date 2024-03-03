@@ -35,7 +35,7 @@ internal static class InfixUpgradeJson
 
         return new InfixUpgrade
         {
-            ItemstatsId = id.Map(value => value.GetInt32()),
+            AttributeCombinationId = id.Map(value => value.GetInt32()),
             Attributes =
                 attributes.Map(
                     values => values.GetList(

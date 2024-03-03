@@ -4,7 +4,7 @@
 [DataTransferObject]
 public sealed record InfixUpgrade
 {
-    public required int ItemstatsId { get; init; }
+    public required int AttributeCombinationId { get; init; }
 
     public required IReadOnlyCollection<UpgradeAttribute> Attributes { get; init; }
 

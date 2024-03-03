@@ -10,13 +10,13 @@ internal sealed class AttributeCombinationsByIdsRequest : IHttpRequest<HashSet<A
         AcceptEncoding = "gzip"
     };
 
-    public AttributeCombinationsByIdsRequest(IReadOnlyCollection<int> itemStatIds)
+    public AttributeCombinationsByIdsRequest(IReadOnlyCollection<int> attributeCombinationIds)
     {
-        Check.Collection(itemStatIds);
-        ItemStatIds = itemStatIds;
+        Check.Collection(attributeCombinationIds);
+        AttributeCombinationIds = attributeCombinationIds;
     }
 
-    public IReadOnlyCollection<int> ItemStatIds { get; }
+    public IReadOnlyCollection<int> AttributeCombinationIds { get; }
 
     public Language? Language { get; init; }
 
@@ -32,7 +32,7 @@ internal sealed class AttributeCombinationsByIdsRequest : IHttpRequest<HashSet<A
                 {
                     Arguments = new QueryBuilder
                     {
-                        { "ids", ItemStatIds },
+                        { "ids", AttributeCombinationIds },
                         { "v", SchemaVersion.Recommended }
                     },
                     AcceptLanguage = Language?.Alpha2Code

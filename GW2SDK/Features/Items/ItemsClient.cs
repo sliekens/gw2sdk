@@ -166,13 +166,13 @@ public sealed class ItemsClient
     }
 
     public Task<(AttributeCombination Value, MessageContext Context)> GetAttributeCombinationById(
-        int itemStatId,
+        int attributeCombinationId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        AttributeCombinationByIdRequest request = new(itemStatId)
+        AttributeCombinationByIdRequest request = new(attributeCombinationId)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -182,13 +182,13 @@ public sealed class ItemsClient
 
     public Task<(HashSet<AttributeCombination> Value, MessageContext Context)>
         GetAttributeCombinationsByIds(
-            IReadOnlyCollection<int> itemStatIds,
+            IReadOnlyCollection<int> attributeCombinationIds,
             Language? language = default,
             MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
     {
-        AttributeCombinationsByIdsRequest request = new(itemStatIds)
+        AttributeCombinationsByIdsRequest request = new(attributeCombinationIds)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior

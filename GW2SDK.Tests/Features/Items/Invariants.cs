@@ -31,7 +31,7 @@ internal static class Invariants
     {
         if (actual.Prefix is not null)
         {
-            Assert.True(actual.Prefix.ItemstatsId >= 1);
+            Assert.True(actual.Prefix.AttributeCombinationId >= 1);
         }
     }
 
@@ -59,7 +59,7 @@ internal static class Invariants
     {
         if (actual.Prefix is not null)
         {
-            Assert.True(actual.Prefix.ItemstatsId >= 1);
+            Assert.True(actual.Prefix.AttributeCombinationId >= 1);
         }
     }
 
@@ -108,7 +108,7 @@ internal static class Invariants
     {
         if (actual.Prefix is not null)
         {
-            Assert.True(actual.Prefix.ItemstatsId >= 1);
+            Assert.True(actual.Prefix.AttributeCombinationId >= 1);
         }
     }
 
