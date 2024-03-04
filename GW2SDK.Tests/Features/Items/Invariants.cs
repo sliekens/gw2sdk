@@ -29,47 +29,38 @@ internal static class Invariants
 
     internal static void Infix_upgrade_id_is_positive(this Weapon actual)
     {
-        if (actual.Prefix is not null)
+        if (actual.AttributeCombinationId is not null)
         {
-            Assert.True(actual.Prefix.AttributeCombinationId >= 1);
+            Assert.True(actual.AttributeCombinationId >= 1);
         }
     }
 
-    internal static void Infix_upgrade_modifiers_are_positive(this Weapon actual)
-    {
-        if (actual.Prefix is not null)
-        {
-            Assert.All(actual.Prefix.Attributes, attribute => Assert.True(attribute.Value >= 1));
-        }
-    }
+    internal static void Infix_upgrade_modifiers_are_positive(this Weapon actual) =>
+        Assert.All(actual.Attributes, attribute => Assert.True(attribute.Value >= 1));
 
     internal static void Prefix_and_stat_choices_are_mutually_exclusive(this Weapon actual)
     {
-        if (actual.Prefix is not null)
+        if (actual.AttributeCombinationId.HasValue)
         {
             Assert.Null(actual.StatChoices);
         }
         else if (actual.StatChoices is not null)
         {
-            Assert.Null(actual.Prefix);
+            Assert.Null(actual.AttributeCombinationId);
+            Assert.Empty(actual.Attributes);
         }
     }
 
     internal static void Infix_upgrade_id_is_positive(this Backpack actual)
     {
-        if (actual.Prefix is not null)
+        if (actual.AttributeCombinationId.HasValue)
         {
-            Assert.True(actual.Prefix.AttributeCombinationId >= 1);
+            Assert.True(actual.AttributeCombinationId >= 1);
         }
     }
 
-    internal static void Infix_upgrade_modifiers_are_positive(this Backpack actual)
-    {
-        if (actual.Prefix is not null)
-        {
-            Assert.All(actual.Prefix.Attributes, attribute => Assert.True(attribute.Value >= 1));
-        }
-    }
+    internal static void Infix_upgrade_modifiers_are_positive(this Backpack actual) =>
+        Assert.All(actual.Attributes, attribute => Assert.True(attribute.Value >= 1));
 
     internal static void Suffix_item_id_is_null_or_positive(this Backpack actual)
     {
@@ -81,13 +72,14 @@ internal static class Invariants
 
     internal static void Prefix_and_stat_choices_are_mutually_exclusive(this Backpack actual)
     {
-        if (actual.Prefix is not null)
+        if (actual.AttributeCombinationId.HasValue)
         {
             Assert.Null(actual.StatChoices);
         }
         else if (actual.StatChoices is not null)
         {
-            Assert.Null(actual.Prefix);
+            Assert.Null(actual.AttributeCombinationId);
+            Assert.Empty(actual.Attributes);
         }
     }
 
@@ -106,19 +98,14 @@ internal static class Invariants
 
     internal static void Infix_upgrade_id_is_positive(this Armor actual)
     {
-        if (actual.Prefix is not null)
+        if (actual.AttributeCombinationId.HasValue)
         {
-            Assert.True(actual.Prefix.AttributeCombinationId >= 1);
+            Assert.True(actual.AttributeCombinationId >= 1);
         }
     }
 
-    internal static void Infix_upgrade_modifiers_are_positive(this Armor actual)
-    {
-        if (actual.Prefix is not null)
-        {
-            Assert.All(actual.Prefix.Attributes, attribute => Assert.True(attribute.Value >= 1));
-        }
-    }
+    internal static void Infix_upgrade_modifiers_are_positive(this Armor actual) =>
+        Assert.All(actual.Attributes, attribute => Assert.True(attribute.Value >= 1));
 
     internal static void Suffix_item_id_is_null_or_positive(this Armor actual)
     {
@@ -138,25 +125,27 @@ internal static class Invariants
 
     internal static void Prefix_and_stat_choices_are_mutually_exclusive(this Armor actual)
     {
-        if (actual.Prefix is not null)
+        if (actual.AttributeCombinationId.HasValue)
         {
             Assert.Null(actual.StatChoices);
         }
         else if (actual.StatChoices is not null)
         {
-            Assert.Null(actual.Prefix);
+            Assert.Null(actual.AttributeCombinationId);
+            Assert.Empty(actual.Attributes);
         }
     }
 
     internal static void Prefix_and_stat_choices_are_mutually_exclusive(this Trinket actual)
     {
-        if (actual.Prefix is not null)
+        if (actual.AttributeCombinationId.HasValue)
         {
             Assert.Null(actual.StatChoices);
         }
         else if (actual.StatChoices is not null)
         {
-            Assert.Null(actual.Prefix);
+            Assert.Null(actual.AttributeCombinationId);
+            Assert.Empty(actual.Attributes);
         }
     }
 

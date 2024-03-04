@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using GuildWars2.Hero;
 using GuildWars2.Json;
 
 namespace GuildWars2.Items;
@@ -29,7 +30,9 @@ internal static class PistolJson
         RequiredMember infusionSlots = "infusion_slots";
         RequiredMember attributeAdjustment = "attribute_adjustment";
         OptionalMember statChoices = "stat_choices";
-        OptionalMember infixUpgrade = "infix_upgrade";
+        NullableMember infixUpgradeId = "id";
+        OptionalMember infixUpgradeAttributes = "attributes";
+        OptionalMember infixUpgradeBuff = "buff";
         NullableMember suffixItemId = "suffix_item_id";
         NullableMember secondarySuffixItemId = "secondary_suffix_item_id";
         foreach (var member in json.EnumerateObject())
@@ -132,9 +135,29 @@ internal static class PistolJson
                     {
                         statChoices = detail;
                     }
-                    else if (detail.Name == infixUpgrade.Name)
+                    else if (detail.Name == "infix_upgrade")
                     {
-                        infixUpgrade = detail;
+                        foreach (var infix in detail.Value.EnumerateObject())
+                        {
+                            if (infix.Name == infixUpgradeId.Name)
+                            {
+                                infixUpgradeId = infix;
+                            }
+                            else if (infix.Name == infixUpgradeAttributes.Name)
+                            {
+                                infixUpgradeAttributes = infix;
+                            }
+                            else if (infix.Name == infixUpgradeBuff.Name)
+                            {
+                                infixUpgradeBuff = infix;
+                            }
+                            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+                            {
+                                throw new InvalidOperationException(
+                                    Strings.UnexpectedMember(infix.Name)
+                                );
+                            }
+                        }
                     }
                     else if (detail.Name == suffixItemId.Name)
                     {
@@ -189,7 +212,11 @@ internal static class PistolJson
                 ),
             AttributeAdjustment = attributeAdjustment.Map(value => value.GetDouble()),
             StatChoices = statChoices.Map(values => values.GetList(value => value.GetInt32())),
-            Prefix = infixUpgrade.Map(value => value.GetInfixUpgrade(missingMemberBehavior)),
+            AttributeCombinationId = infixUpgradeId.Map(value => value.GetInt32()),
+            Attributes =
+                infixUpgradeAttributes.Map(values => values.GetAttributes(missingMemberBehavior))
+                ?? new Dictionary<AttributeName, int>(0),
+            Buff = infixUpgradeBuff.Map(value => value.GetBuff(missingMemberBehavior)),
             SuffixItemId = suffixItemId.Map(value => value.GetInt32()),
             SecondarySuffixItemId = secondarySuffixItemId.Map(value => value.GetInt32())
         };

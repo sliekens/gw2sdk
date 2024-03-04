@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Items;
+﻿using GuildWars2.Hero;
+
+namespace GuildWars2.Items;
 
 [PublicAPI]
 [Inheritable]
@@ -18,7 +20,11 @@ public record Weapon : Item
 
     public required double AttributeAdjustment { get; init; }
 
-    public required InfixUpgrade? Prefix { get; init; }
+    public required int? AttributeCombinationId { get; init; }
+
+    public required IDictionary<AttributeName, int> Attributes { get; init; }
+
+    public required Buff? Buff { get; init; }
 
     public required int? SuffixItemId { get; init; }
 

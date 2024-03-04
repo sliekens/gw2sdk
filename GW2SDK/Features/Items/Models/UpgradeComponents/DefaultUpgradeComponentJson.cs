@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using GuildWars2.Hero;
 using GuildWars2.Json;
 
 namespace GuildWars2.Items;
@@ -24,7 +25,9 @@ internal static class DefaultUpgradeComponentJson
         RequiredMember upgradeComponentFlags = "flags";
         RequiredMember infusionUpgradeFlags = "infusion_upgrade_flags";
         RequiredMember attributeAdjustment = "attribute_adjustment";
-        RequiredMember infixUpgrade = "infix_upgrade";
+        NullableMember infixUpgradeId = "id";
+        OptionalMember infixUpgradeAttributes = "attributes";
+        OptionalMember infixUpgradeBuff = "buff";
         RequiredMember suffix = "suffix";
         OptionalMember bonuses = "bonuses";
         foreach (var member in json.EnumerateObject())
@@ -107,9 +110,29 @@ internal static class DefaultUpgradeComponentJson
                     {
                         attributeAdjustment = detail;
                     }
-                    else if (detail.Name == infixUpgrade.Name)
+                    else if (detail.Name == "infix_upgrade")
                     {
-                        infixUpgrade = detail;
+                        foreach (var infix in detail.Value.EnumerateObject())
+                        {
+                            if (infix.Name == infixUpgradeId.Name)
+                            {
+                                infixUpgradeId = infix;
+                            }
+                            else if (infix.Name == infixUpgradeAttributes.Name)
+                            {
+                                infixUpgradeAttributes = infix;
+                            }
+                            else if (infix.Name == infixUpgradeBuff.Name)
+                            {
+                                infixUpgradeBuff = infix;
+                            }
+                            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+                            {
+                                throw new InvalidOperationException(
+                                    Strings.UnexpectedMember(infix.Name)
+                                );
+                            }
+                        }
                     }
                     else if (detail.Name == suffix.Name)
                     {
@@ -158,7 +181,11 @@ internal static class DefaultUpgradeComponentJson
             InfusionUpgradeFlags =
                 infusionUpgradeFlags.Map(values => values.GetInfusionSlotFlags()),
             AttributeAdjustment = attributeAdjustment.Map(value => value.GetDouble()),
-            Suffix = infixUpgrade.Map(value => value.GetInfixUpgrade(missingMemberBehavior)),
+            AttributeCombinationId = infixUpgradeId.Map(value => value.GetInt32()),
+            Attributes =
+                infixUpgradeAttributes.Map(values => values.GetAttributes(missingMemberBehavior))
+                ?? new Dictionary<AttributeName, int>(0),
+            Buff = infixUpgradeBuff.Map(value => value.GetBuff(missingMemberBehavior)),
             SuffixName = suffix.Map(value => value.GetStringRequired()),
             Bonuses = bonuses.Map(values => values.GetList(value => value.GetStringRequired()))
         };
