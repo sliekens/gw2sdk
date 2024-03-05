@@ -13,14 +13,15 @@ internal static class UpgradeComponentJson
     {
         switch (json.GetProperty("details").GetProperty("type").GetString())
         {
-            case "Default":
-                return json.GetDefaultUpgradeComponent(missingMemberBehavior);
             case "Gem":
                 return json.GetGem(missingMemberBehavior);
             case "Rune":
+            case "Default" when json.GetProperty("details").TryGetProperty("bonuses", out _):
                 return json.GetRune(missingMemberBehavior);
             case "Sigil":
                 return json.GetSigil(missingMemberBehavior);
+            case "Default":
+                return json.GetDefaultUpgradeComponent(missingMemberBehavior);
         }
 
         RequiredMember name = "name";

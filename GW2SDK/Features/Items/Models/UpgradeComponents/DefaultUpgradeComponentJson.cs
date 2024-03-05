@@ -29,7 +29,6 @@ internal static class DefaultUpgradeComponentJson
         OptionalMember infixUpgradeAttributes = "attributes";
         OptionalMember infixUpgradeBuff = "buff";
         RequiredMember suffix = "suffix";
-        OptionalMember bonuses = "bonuses";
         foreach (var member in json.EnumerateObject())
         {
             if (member.Name == "type")
@@ -138,10 +137,6 @@ internal static class DefaultUpgradeComponentJson
                     {
                         suffix = detail;
                     }
-                    else if (detail.Name == bonuses.Name)
-                    {
-                        bonuses = detail;
-                    }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
                         throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
@@ -186,8 +181,7 @@ internal static class DefaultUpgradeComponentJson
                 infixUpgradeAttributes.Map(values => values.GetAttributes(missingMemberBehavior))
                 ?? new Dictionary<AttributeName, int>(0),
             Buff = infixUpgradeBuff.Map(value => value.GetBuff(missingMemberBehavior)),
-            SuffixName = suffix.Map(value => value.GetStringRequired()),
-            Bonuses = bonuses.Map(values => values.GetList(value => value.GetStringRequired()))
+            SuffixName = suffix.Map(value => value.GetStringRequired())
         };
     }
 }
