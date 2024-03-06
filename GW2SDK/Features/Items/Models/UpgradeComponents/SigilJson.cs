@@ -87,7 +87,8 @@ internal static class SigilJson
                 {
                     if (detail.Name == "type")
                     {
-                        if (!detail.Value.ValueEquals("Sigil"))
+                        // PvP sigils have type set to Default :(
+                        if (!detail.Value.ValueEquals("Sigil") && !detail.Value.ValueEquals("Default"))
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())

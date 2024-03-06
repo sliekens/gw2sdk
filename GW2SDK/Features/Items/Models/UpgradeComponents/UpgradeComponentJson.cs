@@ -6,6 +6,9 @@ namespace GuildWars2.Items;
 
 internal static class UpgradeComponentJson
 {
+    private static bool IsPvpItem(this JsonElement json) => json.GetProperty("game_types")[0].GetString() == "Pvp";
+    private static bool HasFlags(this JsonElement json, int count) => json.GetProperty("details").GetProperty("flags").GetArrayLength() == count;
+
     public static UpgradeComponent GetUpgradeComponent(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
@@ -16,9 +19,10 @@ internal static class UpgradeComponentJson
             case "Gem":
                 return json.GetGem(missingMemberBehavior);
             case "Rune":
-            case "Default" when json.GetProperty("details").TryGetProperty("bonuses", out _):
+            case "Default" when json.IsPvpItem() && json.HasFlags(3):
                 return json.GetRune(missingMemberBehavior);
             case "Sigil":
+            case "Default" when json.IsPvpItem() && json.HasFlags(19):
                 return json.GetSigil(missingMemberBehavior);
             case "Default":
                 return json.GetDefaultUpgradeComponent(missingMemberBehavior);

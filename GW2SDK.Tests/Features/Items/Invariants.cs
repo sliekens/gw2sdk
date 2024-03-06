@@ -215,6 +215,20 @@ internal static class Invariants
             case UpgradeComponent upgradeComponent:
                 Assert.Empty(upgradeComponent.UpgradeComponentFlags.Other);
                 Assert.Empty(upgradeComponent.InfusionUpgradeFlags.Other);
+
+                // There is a workaround in place for PvP runes and sigils not being classified as such
+                if (upgradeComponent.GameTypes.Contains(GameType.Pvp))
+                {
+                    if (upgradeComponent.Name.Contains("Rune"))
+                    {
+                        Assert.IsType<Rune>(upgradeComponent);
+                    }
+
+                    if (upgradeComponent.Name.Contains("Sigil"))
+                    {
+                        Assert.IsType<Sigil>(upgradeComponent);
+                    }
+                }
                 break;
         }
     }
