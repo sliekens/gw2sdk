@@ -5,7 +5,7 @@ namespace GuildWars2.Items;
 [PublicAPI]
 public sealed record Backpack : Item
 {
-    public required int DefaultSkin { get; init; }
+    public required int DefaultSkinId { get; init; }
 
     public required IReadOnlyList<InfusionSlot> InfusionSlots { get; init; }
 
