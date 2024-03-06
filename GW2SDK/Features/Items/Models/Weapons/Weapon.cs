@@ -6,7 +6,7 @@ namespace GuildWars2.Items;
 [Inheritable]
 public record Weapon : Item
 {
-    public required int DefaultSkin { get; init; }
+    public required int DefaultSkinId { get; init; }
 
     public required DamageType DamageType { get; init; }
 
