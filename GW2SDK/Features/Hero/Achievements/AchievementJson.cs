@@ -33,7 +33,8 @@ internal static class AchievementJson
         {
             if (member.Name == "type")
             {
-                if (!member.Value.ValueEquals("Default"))
+                if (missingMemberBehavior == MissingMemberBehavior.Error
+                    && !member.Value.ValueEquals("Default"))
                 {
                     throw new InvalidOperationException(
                         Strings.UnexpectedDiscriminator(member.Value.GetString())
