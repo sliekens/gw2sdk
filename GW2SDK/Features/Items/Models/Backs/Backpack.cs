@@ -19,7 +19,7 @@ public sealed record Backpack : Item
 
     public required int? SuffixItemId { get; init; }
 
-    public required IReadOnlyList<int>? StatChoices { get; init; }
+    public required IReadOnlyList<int> StatChoices { get; init; }
 
     public required IReadOnlyCollection<ItemUpgrade>? UpgradesInto { get; init; }
 

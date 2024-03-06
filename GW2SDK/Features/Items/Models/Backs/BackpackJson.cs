@@ -189,7 +189,9 @@ internal static class BackpackJson
                 ?? new Dictionary<AttributeName, int>(0),
             Buff = infixUpgradeBuff.Map(value => value.GetBuff(missingMemberBehavior)),
             SuffixItemId = suffixItemId.Map(value => value.GetInt32()),
-            StatChoices = statChoices.Map(values => values.GetList(value => value.GetInt32())),
+            StatChoices =
+                statChoices.Map(values => values.GetList(value => value.GetInt32()))
+                ?? Empty.ListOfInt32,
             UpgradesInto =
                 upgradesInto.Map(
                     values => values.GetList(value => value.GetItemUpgrade(missingMemberBehavior))
