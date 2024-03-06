@@ -1,6 +1,4 @@
-﻿using GuildWars2.Hero;
-
-namespace GuildWars2.Items;
+﻿namespace GuildWars2.Hero;
 
 /// <summary>The weight classes of armor.</summary>
 [PublicAPI]

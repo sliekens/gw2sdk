@@ -59,6 +59,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Items.WeightClass</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:GuildWars2.PageContext</Target>
     <Left>lib/net462/GW2SDK.dll</Left>
     <Right>lib/net462/GW2SDK.dll</Right>
@@ -129,6 +136,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Items.WeightClass</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:GuildWars2.PageContext</Target>
     <Left>lib/net6.0/GW2SDK.dll</Left>
     <Right>lib/net6.0/GW2SDK.dll</Right>
@@ -199,6 +213,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Items.WeightClass</Target>
+    <Left>lib/net8.0/GW2SDK.dll</Left>
+    <Right>lib/net8.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:GuildWars2.PageContext</Target>
     <Left>lib/net8.0/GW2SDK.dll</Left>
     <Right>lib/net8.0/GW2SDK.dll</Right>
@@ -263,6 +284,13 @@
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:GuildWars2.Items.UpgradeAttribute</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Items.WeightClass</Target>
     <Left>lib/netstandard2.0/GW2SDK.dll</Left>
     <Right>lib/netstandard2.0/GW2SDK.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -402,6 +430,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Wardrobe.ArmorSkin.get_WeightClass</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Equipment.Wardrobe.Skin.get_Restrictions</Target>
     <Left>lib/net462/GW2SDK.dll</Left>
     <Right>lib/net462/GW2SDK.dll</Right>
@@ -494,6 +529,13 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Items.Armor.get_StatChoices</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Items.Armor.get_WeightClass</Target>
     <Left>lib/net462/GW2SDK.dll</Left>
     <Right>lib/net462/GW2SDK.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -794,6 +836,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Wardrobe.ArmorSkin.get_WeightClass</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Equipment.Wardrobe.Skin.get_Restrictions</Target>
     <Left>lib/net6.0/GW2SDK.dll</Left>
     <Right>lib/net6.0/GW2SDK.dll</Right>
@@ -886,6 +935,13 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Items.Armor.get_StatChoices</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Items.Armor.get_WeightClass</Target>
     <Left>lib/net6.0/GW2SDK.dll</Left>
     <Right>lib/net6.0/GW2SDK.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -1186,6 +1242,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Wardrobe.ArmorSkin.get_WeightClass</Target>
+    <Left>lib/net8.0/GW2SDK.dll</Left>
+    <Right>lib/net8.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Equipment.Wardrobe.Skin.get_Restrictions</Target>
     <Left>lib/net8.0/GW2SDK.dll</Left>
     <Right>lib/net8.0/GW2SDK.dll</Right>
@@ -1278,6 +1341,13 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Items.Armor.get_StatChoices</Target>
+    <Left>lib/net8.0/GW2SDK.dll</Left>
+    <Right>lib/net8.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Items.Armor.get_WeightClass</Target>
     <Left>lib/net8.0/GW2SDK.dll</Left>
     <Right>lib/net8.0/GW2SDK.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -1578,6 +1648,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Wardrobe.ArmorSkin.get_WeightClass</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Equipment.Wardrobe.Skin.get_Restrictions</Target>
     <Left>lib/netstandard2.0/GW2SDK.dll</Left>
     <Right>lib/netstandard2.0/GW2SDK.dll</Right>
@@ -1670,6 +1747,13 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Items.Armor.get_StatChoices</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Items.Armor.get_WeightClass</Target>
     <Left>lib/netstandard2.0/GW2SDK.dll</Left>
     <Right>lib/netstandard2.0/GW2SDK.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
