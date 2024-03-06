@@ -12,8 +12,6 @@ internal static class ContainerJson
     {
         switch (json.GetProperty("details").GetProperty("type").GetString())
         {
-            case "Default":
-                return json.GetDefaultContainer(missingMemberBehavior);
             case "GiftBox":
                 return json.GetGiftBox(missingMemberBehavior);
             case "Immediate":
@@ -94,10 +92,11 @@ internal static class ContainerJson
                 {
                     if (detail.Name == "type")
                     {
-                        if (missingMemberBehavior == MissingMemberBehavior.Error)
+                        if (missingMemberBehavior == MissingMemberBehavior.Error
+                            && !detail.Value.ValueEquals("Default"))
                         {
                             throw new InvalidOperationException(
-                                Strings.UnexpectedDiscriminator(detail.Value.GetString())
+                                Strings.UnexpectedDiscriminator(member.Value.GetString())
                             );
                         }
                     }

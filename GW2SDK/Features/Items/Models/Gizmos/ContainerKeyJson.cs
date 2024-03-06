@@ -122,7 +122,9 @@ internal static class ContainerKeyJson
             Professions = professions,
             BodyTypes = bodyTypes,
             ChatLink = chatLink.Map(value => value.GetStringRequired()),
-            IconHref = icon.Map(value => value.GetString())
+            IconHref = icon.Map(value => value.GetString()),
+            VendorIds = Empty.ListOfInt32,
+            GuildUpgradeId = null
         };
     }
 }

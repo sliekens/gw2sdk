@@ -2,4 +2,9 @@
 
 [PublicAPI]
 [Inheritable]
-public record Gizmo : Item;
+public record Gizmo : Item
+{
+    public required IReadOnlyCollection<int>? VendorIds { get; init; }
+
+    public required int? GuildUpgradeId { get; init; }
+}

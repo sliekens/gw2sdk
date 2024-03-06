@@ -6,8 +6,11 @@ namespace GuildWars2.Items;
 
 internal static class UpgradeComponentJson
 {
-    private static bool IsPvpItem(this JsonElement json) => json.GetProperty("game_types")[0].GetString() == "Pvp";
-    private static bool HasFlags(this JsonElement json, int count) => json.GetProperty("details").GetProperty("flags").GetArrayLength() == count;
+    private static bool IsPvpItem(this JsonElement json) =>
+        json.GetProperty("game_types")[0].GetString() == "Pvp";
+
+    private static bool HasFlags(this JsonElement json, int count) =>
+        json.GetProperty("details").GetProperty("flags").GetArrayLength() == count;
 
     public static UpgradeComponent GetUpgradeComponent(
         this JsonElement json,
@@ -24,8 +27,6 @@ internal static class UpgradeComponentJson
             case "Sigil":
             case "Default" when json.IsPvpItem() && json.HasFlags(19):
                 return json.GetSigil(missingMemberBehavior);
-            case "Default":
-                return json.GetDefaultUpgradeComponent(missingMemberBehavior);
         }
 
         RequiredMember name = "name";
@@ -107,7 +108,8 @@ internal static class UpgradeComponentJson
                 {
                     if (detail.Name == "type")
                     {
-                        if (missingMemberBehavior == MissingMemberBehavior.Error)
+                        if (missingMemberBehavior == MissingMemberBehavior.Error
+                            && !detail.Value.ValueEquals("Default"))
                         {
                             throw new InvalidOperationException(
                                 Strings.UnexpectedDiscriminator(detail.Value.GetString())

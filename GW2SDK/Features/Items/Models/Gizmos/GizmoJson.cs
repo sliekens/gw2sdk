@@ -11,8 +11,6 @@ internal static class GizmoJson
         {
             case "ContainerKey":
                 return json.GetContainerKey(missingMemberBehavior);
-            case "Default":
-                return json.GetDefaultGizmo(missingMemberBehavior);
             case "RentableContractNpc":
                 return json.GetRentableContractNpc(missingMemberBehavior);
             case "UnlimitedConsumable":
@@ -30,6 +28,8 @@ internal static class GizmoJson
         RequiredMember id = "id";
         RequiredMember chatLink = "chat_link";
         OptionalMember icon = "icon";
+        OptionalMember vendorIds = "vendor_ids";
+        NullableMember guildUpgradeId = "guild_upgrade_id";
         foreach (var member in json.EnumerateObject())
         {
             if (member.Name == "type")
@@ -91,12 +91,21 @@ internal static class GizmoJson
                 {
                     if (detail.Name == "type")
                     {
-                        if (missingMemberBehavior == MissingMemberBehavior.Error)
+                        if (missingMemberBehavior == MissingMemberBehavior.Error
+                            && !detail.Value.ValueEquals("Default"))
                         {
                             throw new InvalidOperationException(
-                                Strings.UnexpectedDiscriminator(detail.Value.GetString())
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
                             );
                         }
+                    }
+                    else if (detail.Name == vendorIds.Name)
+                    {
+                        vendorIds = detail;
+                    }
+                    else if (detail.Name == guildUpgradeId.Name)
+                    {
+                        guildUpgradeId = detail;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -131,7 +140,9 @@ internal static class GizmoJson
             Professions = professions,
             BodyTypes = bodyTypes,
             ChatLink = chatLink.Map(value => value.GetStringRequired()),
-            IconHref = icon.Map(value => value.GetString())
+            IconHref = icon.Map(value => value.GetString()),
+            VendorIds = vendorIds.Map(values => values.GetList(value => value.GetInt32())),
+            GuildUpgradeId = guildUpgradeId.Map(value => value.GetInt32())
         };
     }
 }

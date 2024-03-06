@@ -89,7 +89,8 @@ internal static class RuneJson
                     if (detail.Name == "type")
                     {
                         // PvP runes have type set to Default :(
-                        if (!detail.Value.ValueEquals("Rune") && !detail.Value.ValueEquals("Default"))
+                        if (!detail.Value.ValueEquals("Rune")
+                            && !detail.Value.ValueEquals("Default"))
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
@@ -188,6 +189,4 @@ internal static class RuneJson
             Bonuses = bonuses.Map(values => values.GetList(value => value.GetStringRequired()))
         };
     }
-
-
 }
