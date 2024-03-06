@@ -115,21 +115,13 @@ internal static class Invariants
         }
     }
 
-    internal static void Stat_choices_are_null_or_not_empty(this Armor actual)
-    {
-        if (actual.StatChoices is int[])
-        {
-            Assert.NotEmpty(actual.StatChoices);
-        }
-    }
-
     internal static void Prefix_and_stat_choices_are_mutually_exclusive(this Armor actual)
     {
         if (actual.AttributeCombinationId.HasValue)
         {
-            Assert.Null(actual.StatChoices);
+            Assert.Empty(actual.StatChoices);
         }
-        else if (actual.StatChoices is not null)
+        else if (actual.StatChoices.Count > 0)
         {
             Assert.Null(actual.AttributeCombinationId);
             Assert.Empty(actual.Attributes);
@@ -199,7 +191,6 @@ internal static class Invariants
                 armor.Infix_upgrade_id_is_positive();
                 armor.Infix_upgrade_modifiers_are_positive();
                 armor.Suffix_item_id_is_null_or_positive();
-                armor.Stat_choices_are_null_or_not_empty();
                 armor.Infusion_slot_flags_is_not_empty();
                 armor.Prefix_and_stat_choices_are_mutually_exclusive();
                 break;

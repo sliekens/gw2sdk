@@ -195,7 +195,9 @@ internal static class LeggingsJson
                     values => values.GetList(value => value.GetInfusionSlot(missingMemberBehavior))
                 ),
             AttributeAdjustment = attributeAdjustment.Map(value => value.GetDouble()),
-            StatChoices = statChoices.Map(values => values.GetList(value => value.GetInt32())),
+            StatChoices =
+                statChoices.Map(values => values.GetList(value => value.GetInt32()))
+                ?? Empty.ListOfInt32,
             AttributeCombinationId = infixUpgradeId.Map(value => value.GetInt32()),
             Attributes =
                 infixUpgradeAttributes.Map(values => values.GetAttributes(missingMemberBehavior))
