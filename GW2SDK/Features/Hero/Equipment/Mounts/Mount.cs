@@ -12,7 +12,7 @@ public sealed record Mount
     public required string Name { get; init; }
 
     /// <summary>The ID of the default mount skin.</summary>
-    public required int DefaultSkin { get; init; }
+    public required int DefaultSkinId { get; init; }
 
     /// <summary>The IDs of the mount skins associated with the mount.</summary>
     public required IReadOnlyCollection<int> SkinIds { get; init; }
