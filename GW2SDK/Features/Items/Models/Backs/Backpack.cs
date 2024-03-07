@@ -21,7 +21,7 @@ public sealed record Backpack : Item
 
     public required IReadOnlyList<int> StatChoices { get; init; }
 
-    public required IReadOnlyCollection<ItemUpgrade>? UpgradesInto { get; init; }
+    public required IReadOnlyCollection<ItemUpgrade> UpgradesInto { get; init; }
 
-    public required IReadOnlyCollection<ItemUpgrade>? UpgradesFrom { get; init; }
+    public required IReadOnlyCollection<ItemUpgrade> UpgradesFrom { get; init; }
 }

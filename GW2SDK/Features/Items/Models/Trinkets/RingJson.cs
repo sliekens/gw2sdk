@@ -195,10 +195,12 @@ internal static class RingJson
             UpgradesInto =
                 upgradesInto.Map(
                     values => values.GetList(value => value.GetItemUpgrade(missingMemberBehavior))
-                ),
+                )
+                ?? Empty.List<ItemUpgrade>(),
             UpgradesFrom = upgradesFrom.Map(
-                values => values.GetList(value => value.GetItemUpgrade(missingMemberBehavior))
-            )
+                    values => values.GetList(value => value.GetItemUpgrade(missingMemberBehavior))
+                )
+                ?? Empty.List<ItemUpgrade>()
         };
     }
 }

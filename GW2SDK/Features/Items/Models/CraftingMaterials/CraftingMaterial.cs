@@ -3,5 +3,5 @@
 [PublicAPI]
 public sealed record CraftingMaterial : Item
 {
-    public required IReadOnlyCollection<ItemUpgrade>? UpgradesInto { get; init; }
+    public required IReadOnlyCollection<ItemUpgrade> UpgradesInto { get; init; }
 }
