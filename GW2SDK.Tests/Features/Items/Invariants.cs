@@ -42,7 +42,7 @@ internal static class Invariants
     {
         if (actual.AttributeCombinationId.HasValue)
         {
-            Assert.Null(actual.StatChoices);
+            Assert.Empty(actual.StatChoices);
         }
         else if (actual.StatChoices is not null)
         {
@@ -74,7 +74,7 @@ internal static class Invariants
     {
         if (actual.AttributeCombinationId.HasValue)
         {
-            Assert.Null(actual.StatChoices);
+            Assert.Empty(actual.StatChoices);
         }
         else if (actual.StatChoices is not null)
         {
@@ -132,7 +132,7 @@ internal static class Invariants
     {
         if (actual.AttributeCombinationId.HasValue)
         {
-            Assert.Null(actual.StatChoices);
+            Assert.Empty(actual.StatChoices);
         }
         else if (actual.StatChoices is not null)
         {
