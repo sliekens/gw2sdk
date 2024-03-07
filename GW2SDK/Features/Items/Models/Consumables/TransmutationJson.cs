@@ -128,7 +128,7 @@ internal static class TransmutationJson
             BodyTypes = bodyTypes,
             ChatLink = chatLink.Map(value => value.GetStringRequired()),
             IconHref = icon.Map(value => value.GetString()),
-            Skins = skins.Map(values => values.GetList(value => value.GetInt32()))
+            SkinIds = skins.Map(values => values.GetList(value => value.GetInt32()))
         };
     }
 }

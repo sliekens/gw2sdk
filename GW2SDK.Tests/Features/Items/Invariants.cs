@@ -142,7 +142,7 @@ internal static class Invariants
     }
 
     internal static void Skins_are_not_empty(this Transmutation actual) =>
-        Assert.NotEmpty(actual.Skins);
+        Assert.NotEmpty(actual.SkinIds);
 
     internal static void Has_charges(this SalvageTool actual) =>
         Assert.InRange(actual.Charges, 1, 250);

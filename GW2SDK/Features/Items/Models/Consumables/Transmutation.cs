@@ -3,5 +3,5 @@
 [PublicAPI]
 public sealed record Transmutation : Consumable
 {
-    public required IReadOnlyCollection<int> Skins { get; init; }
+    public required IReadOnlyCollection<int> SkinIds { get; init; }
 }
