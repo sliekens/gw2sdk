@@ -39,7 +39,7 @@ internal static class UnlockerJson
             case "Minipet":
                 return json.GetMiniatureUnlocker(missingMemberBehavior);
             case "Ms":
-                return json.GetMsUnlocker(missingMemberBehavior);
+                return json.GetMountSkinUnlocker(missingMemberBehavior);
             case "Outfit":
                 return json.GetOutfitUnlocker(missingMemberBehavior);
             case "SharedSlot":
