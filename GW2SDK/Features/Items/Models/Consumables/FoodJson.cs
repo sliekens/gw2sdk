@@ -23,6 +23,8 @@ internal static class FoodJson
         OptionalMember effectName = "name";
         OptionalMember effectIcon = "icon";
         OptionalMember effectDescription = "description";
+        var hasEffect = false;
+
         foreach (var member in json.EnumerateObject())
         {
             if (member.Name == "type")
@@ -94,22 +96,27 @@ internal static class FoodJson
                     else if (detail.Name == duration.Name)
                     {
                         duration = detail;
+                        hasEffect = true;
                     }
                     else if (detail.Name == applyCount.Name)
                     {
                         applyCount = detail;
+                        hasEffect = true;
                     }
                     else if (detail.Name == effectName.Name)
                     {
                         effectName = detail;
+                        hasEffect = true;
                     }
                     else if (detail.Name == effectIcon.Name)
                     {
                         effectIcon = detail;
+                        hasEffect = true;
                     }
                     else if (detail.Name == effectDescription.Name)
                     {
                         effectDescription = detail;
+                        hasEffect = true;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -145,11 +152,18 @@ internal static class FoodJson
             BodyTypes = bodyTypes,
             ChatLink = chatLink.Map(value => value.GetStringRequired()),
             IconHref = icon.Map(value => value.GetString()),
-            Duration = duration.Map(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-            ApplyCount = applyCount.Map(value => value.GetInt32()),
-            EffectName = effectName.Map(value => value.GetString()) ?? "",
-            EffectIconHref = effectIcon.Map(value => value.GetString()),
-            EffectDescription = effectDescription.Map(value => value.GetString()) ?? ""
+            Effect = hasEffect
+                ? new Effect
+                {
+                    Name = effectName.Map(value => value.GetString()) ?? "",
+                    Description = effectDescription.Map(value => value.GetString()) ?? "",
+                    Duration =
+                        duration.Map(value => TimeSpan.FromMilliseconds(value.GetDouble()))
+                        ?? TimeSpan.Zero,
+                    ApplyCount = applyCount.Map(value => value.GetInt32()) ?? 0,
+                    IconHref = effectIcon.Map(value => value.GetString()) ?? ""
+                }
+                : default
         };
     }
 }
