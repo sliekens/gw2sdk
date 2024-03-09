@@ -29,7 +29,7 @@ internal static class ConsumableJson
             case "Immediate":
                 return json.GetService(missingMemberBehavior);
             case "MountRandomUnlock":
-                return json.GetMountRandomUnlocker(missingMemberBehavior);
+                return json.GetMountLicense(missingMemberBehavior);
             case "RandomUnlock":
                 return json.GetRandomUnlocker(missingMemberBehavior);
             case "TeleportToFriend":
