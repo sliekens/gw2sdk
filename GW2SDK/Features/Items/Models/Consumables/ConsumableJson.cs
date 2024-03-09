@@ -27,7 +27,7 @@ internal static class ConsumableJson
             case "Halloween":
                 return json.GetHalloweenConsumable(missingMemberBehavior);
             case "Immediate":
-                return json.GetImmediateConsumable(missingMemberBehavior);
+                return json.GetService(missingMemberBehavior);
             case "MountRandomUnlock":
                 return json.GetMountRandomUnlocker(missingMemberBehavior);
             case "RandomUnlock":

@@ -1,7 +1,7 @@
 ﻿namespace GuildWars2.Items;
 
 [PublicAPI]
-public sealed record ImmediateConsumable : Consumable
+public sealed record Service : Consumable
 {
     public required TimeSpan? Duration { get; init; }
 

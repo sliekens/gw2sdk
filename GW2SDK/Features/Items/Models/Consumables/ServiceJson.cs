@@ -3,9 +3,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-internal static class ImmediateConsumableJson
+internal static class ServiceJson
 {
-    public static ImmediateConsumable GetImmediateConsumable(
+    public static Service GetService(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -133,7 +133,7 @@ internal static class ImmediateConsumableJson
 
         var (races, professions, bodyTypes) =
             restrictions.Map(value => value.GetRestrictions(missingMemberBehavior));
-        return new ImmediateConsumable
+        return new Service
         {
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),
