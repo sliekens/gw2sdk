@@ -39,7 +39,7 @@ internal static class ConsumableJson
             case "Unlock":
                 return json.GetUnlocker(missingMemberBehavior);
             case "UpgradeRemoval":
-                return json.GetUpgradeRemover(missingMemberBehavior);
+                return json.GetUpgradeExtractor(missingMemberBehavior);
             case "Utility":
                 return json.GetUtility(missingMemberBehavior);
         }
