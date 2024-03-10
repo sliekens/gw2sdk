@@ -21,7 +21,7 @@ public class AnsiConsoleLogger : ILogger
 
         var message = formatter(state, null);
 
-        AnsiConsole.MarkupLine($"[grey][[{DateTime.Now:HH:mm:ss} {eventId}]][/] {message}");
+        AnsiConsole.Markup($"[grey][[{DateTime.Now:HH:mm:ss} {eventId}]][/] {message}");
         if (exception != null)
         {
             AnsiConsole.WriteException(exception);
