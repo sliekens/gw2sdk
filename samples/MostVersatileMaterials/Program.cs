@@ -12,6 +12,7 @@ try
 
     do
     {
+        AnsiConsole.Clear();
 
         var ingredient = ItemPicker.Prompt(referenceData.Ingredients);
 
