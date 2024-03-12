@@ -29,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Translations", "samples\Tra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PackageReadme", "samples\PackageReadme\PackageReadme.csproj", "{69FC5CC8-8365-4AB1-A379-5BC7E0796207}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GW2SDK.Profiling", "GW2SDK.Profiling\GW2SDK.Profiling.csproj", "{787D05A8-12E5-4124-90A2-FD30F6418900}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,10 @@ Global
 		{69FC5CC8-8365-4AB1-A379-5BC7E0796207}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69FC5CC8-8365-4AB1-A379-5BC7E0796207}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69FC5CC8-8365-4AB1-A379-5BC7E0796207}.Release|Any CPU.Build.0 = Release|Any CPU
+		{787D05A8-12E5-4124-90A2-FD30F6418900}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{787D05A8-12E5-4124-90A2-FD30F6418900}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{787D05A8-12E5-4124-90A2-FD30F6418900}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{787D05A8-12E5-4124-90A2-FD30F6418900}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
