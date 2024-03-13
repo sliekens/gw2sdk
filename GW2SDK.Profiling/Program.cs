@@ -2,9 +2,13 @@
 // VS2022 has a built-in profiler (alt + F2), so I'm using that to see how the library performs 
 
 using GuildWars2;
+using Microsoft.Extensions.DependencyInjection;
 
-using var httpClient = new HttpClient();
-var gw2Client = new Gw2Client(httpClient);
+var services = new ServiceCollection();
+var httpClientBuilder = services.AddHttpClient<Gw2Client>();
+httpClientBuilder.AddStandardResilienceHandler();
+httpClientBuilder.AddStandardHedgingHandler();
+var gw2Client = services.BuildServiceProvider().GetRequiredService<Gw2Client>();
 
 await foreach (var (recipe, _) in gw2Client.Hero.Crafting.Recipes.GetRecipesBulk())
 {
