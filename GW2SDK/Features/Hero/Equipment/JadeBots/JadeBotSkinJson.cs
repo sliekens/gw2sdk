@@ -17,19 +17,19 @@ internal static class JadeBotSkinJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == name.Name)
+            else if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == description.Name)
+            else if (description.Match(member))
             {
                 description = member;
             }
-            else if (member.Name == unlockItem.Name)
+            else if (unlockItem.Match(member))
             {
                 unlockItem = member;
             }

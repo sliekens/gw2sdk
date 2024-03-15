@@ -12,11 +12,11 @@ internal static class RaidJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == wings.Name)
+            else if (wings.Match(member))
             {
                 wings = member;
             }

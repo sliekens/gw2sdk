@@ -27,23 +27,23 @@ internal static class InfluenceActivityJson
                     );
                 }
             }
-            else if (member.Name == id.Name)
+            else if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == time.Name)
+            else if (time.Match(member))
             {
                 time = member;
             }
-            else if (member.Name == activity.Name)
+            else if (activity.Match(member))
             {
                 activity = member;
             }
-            else if (member.Name == totalParticipants.Name)
+            else if (totalParticipants.Match(member))
             {
                 totalParticipants = member;
             }
-            else if (member.Name == participants.Name)
+            else if (participants.Match(member))
             {
                 participants = member;
             }

@@ -21,47 +21,47 @@ internal static class MatchJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == startTime.Name)
+            else if (startTime.Match(member))
             {
                 startTime = member;
             }
-            else if (member.Name == endTime.Name)
+            else if (endTime.Match(member))
             {
                 endTime = member;
             }
-            else if (member.Name == scores.Name)
+            else if (scores.Match(member))
             {
                 scores = member;
             }
-            else if (member.Name == worlds.Name)
+            else if (worlds.Match(member))
             {
                 worlds = member;
             }
-            else if (member.Name == allWorlds.Name)
+            else if (allWorlds.Match(member))
             {
                 allWorlds = member;
             }
-            else if (member.Name == deaths.Name)
+            else if (deaths.Match(member))
             {
                 deaths = member;
             }
-            else if (member.Name == kills.Name)
+            else if (kills.Match(member))
             {
                 kills = member;
             }
-            else if (member.Name == victoryPoints.Name)
+            else if (victoryPoints.Match(member))
             {
                 victoryPoints = member;
             }
-            else if (member.Name == skirmishes.Name)
+            else if (skirmishes.Match(member))
             {
                 skirmishes = member;
             }
-            else if (member.Name == maps.Name)
+            else if (maps.Match(member))
             {
                 maps = member;
             }

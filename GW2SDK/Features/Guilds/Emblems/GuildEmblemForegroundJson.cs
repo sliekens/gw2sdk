@@ -15,11 +15,11 @@ internal static class GuildEmblemForegroundJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == colors.Name)
+            else if (colors.Match(member))
             {
                 colors = member;
             }

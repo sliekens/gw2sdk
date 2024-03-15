@@ -28,39 +28,39 @@ internal static class TowerJson
                     );
                 }
             }
-            else if (member.Name == id.Name)
+            else if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == owner.Name)
+            else if (owner.Match(member))
             {
                 owner = member;
             }
-            else if (member.Name == lastFlipped.Name)
+            else if (lastFlipped.Match(member))
             {
                 lastFlipped = member;
             }
-            else if (member.Name == pointsTick.Name)
+            else if (pointsTick.Match(member))
             {
                 pointsTick = member;
             }
-            else if (member.Name == pointsCapture.Name)
+            else if (pointsCapture.Match(member))
             {
                 pointsCapture = member;
             }
-            else if (member.Name == claimedBy.Name)
+            else if (claimedBy.Match(member))
             {
                 claimedBy = member;
             }
-            else if (member.Name == claimedAt.Name)
+            else if (claimedAt.Match(member))
             {
                 claimedAt = member;
             }
-            else if (member.Name == yaksDelivered.Name)
+            else if (yaksDelivered.Match(member))
             {
                 yaksDelivered = member;
             }
-            else if (member.Name == guildUpgrades.Name)
+            else if (guildUpgrades.Match(member))
             {
                 guildUpgrades = member;
             }

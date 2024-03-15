@@ -16,15 +16,15 @@ internal static class ApiVersionJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == languages.Name)
+            if (languages.Match(member))
             {
                 languages = member;
             }
-            else if (member.Name == routes.Name)
+            else if (routes.Match(member))
             {
                 routes = member;
             }
-            else if (member.Name == schemaVersions.Name)
+            else if (schemaVersions.Match(member))
             {
                 schemaVersions = member;
             }

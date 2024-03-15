@@ -43,91 +43,91 @@ internal static class WeaponSkillJson
                     );
                 }
             }
-            else if (member.Name == name.Name)
+            else if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == facts.Name)
+            else if (facts.Match(member))
             {
                 facts = member;
             }
-            else if (member.Name == traitedFacts.Name)
+            else if (traitedFacts.Match(member))
             {
                 traitedFacts = member;
             }
-            else if (member.Name == description.Name)
+            else if (description.Match(member))
             {
                 description = member;
             }
-            else if (member.Name == icon.Name)
+            else if (icon.Match(member))
             {
                 icon = member;
             }
-            else if (member.Name == weaponType.Name)
+            else if (weaponType.Match(member))
             {
                 weaponType = member;
             }
-            else if (member.Name == professions.Name)
+            else if (professions.Match(member))
             {
                 professions = member;
             }
-            else if (member.Name == slot.Name)
+            else if (slot.Match(member))
             {
                 slot = member;
             }
-            else if (member.Name == flipSkill.Name)
+            else if (flipSkill.Match(member))
             {
                 flipSkill = member;
             }
-            else if (member.Name == nextChain.Name)
+            else if (nextChain.Match(member))
             {
                 nextChain = member;
             }
-            else if (member.Name == prevChain.Name)
+            else if (prevChain.Match(member))
             {
                 prevChain = member;
             }
-            else if (member.Name == flags.Name)
+            else if (flags.Match(member))
             {
                 flags = member;
             }
-            else if (member.Name == specialization.Name)
+            else if (specialization.Match(member))
             {
                 specialization = member;
             }
-            else if (member.Name == id.Name)
+            else if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == chatLink.Name)
+            else if (chatLink.Match(member))
             {
                 chatLink = member;
             }
-            else if (member.Name == categories.Name)
+            else if (categories.Match(member))
             {
                 categories = member;
             }
-            else if (member.Name == attunement.Name)
+            else if (attunement.Match(member))
             {
                 attunement = member;
             }
-            else if (member.Name == dualAttunement.Name)
+            else if (dualAttunement.Match(member))
             {
                 dualAttunement = member;
             }
-            else if (member.Name == specialization.Name)
+            else if (specialization.Match(member))
             {
                 specialization = member;
             }
-            else if (member.Name == cost.Name)
+            else if (cost.Match(member))
             {
                 cost = member;
             }
-            else if (member.Name == offhand.Name)
+            else if (offhand.Match(member))
             {
                 offhand = member;
             }
-            else if (member.Name == initiative.Name)
+            else if (initiative.Match(member))
             {
                 initiative = member;
             }

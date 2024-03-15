@@ -17,31 +17,31 @@ internal static class RankJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == finisherId.Name)
+            else if (finisherId.Match(member))
             {
                 finisherId = member;
             }
-            else if (member.Name == name.Name)
+            else if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == icon.Name)
+            else if (icon.Match(member))
             {
                 icon = member;
             }
-            else if (member.Name == minRank.Name)
+            else if (minRank.Match(member))
             {
                 minRank = member;
             }
-            else if (member.Name == maxRank.Name)
+            else if (maxRank.Match(member))
             {
                 maxRank = member;
             }
-            else if (member.Name == levels.Name)
+            else if (levels.Match(member))
             {
                 levels = member;
             }

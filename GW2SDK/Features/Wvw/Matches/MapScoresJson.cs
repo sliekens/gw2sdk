@@ -16,11 +16,11 @@ internal static class MapScoresJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == type.Name)
+            if (type.Match(member))
             {
                 type = member;
             }
-            else if (member.Name == scores.Name)
+            else if (scores.Match(member))
             {
                 scores = member;
             }

@@ -19,31 +19,31 @@ internal static class GodShrineJson
         RequiredMember iconContested = "icon_contested";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == name.Name)
+            else if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == nameContested.Name)
+            else if (nameContested.Match(member))
             {
                 nameContested = member;
             }
-            else if (member.Name == pointOfInterestId.Name)
+            else if (pointOfInterestId.Match(member))
             {
                 pointOfInterestId = member;
             }
-            else if (member.Name == coordinates.Name)
+            else if (coordinates.Match(member))
             {
                 coordinates = member;
             }
-            else if (member.Name == icon.Name)
+            else if (icon.Match(member))
             {
                 icon = member;
             }
-            else if (member.Name == iconContested.Name)
+            else if (iconContested.Match(member))
             {
                 iconContested = member;
             }

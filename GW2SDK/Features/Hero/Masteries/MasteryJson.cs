@@ -19,27 +19,27 @@ internal static class MasteryJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == name.Name)
+            if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == description.Name)
+            else if (description.Match(member))
             {
                 description = member;
             }
-            else if (member.Name == instruction.Name)
+            else if (instruction.Match(member))
             {
                 instruction = member;
             }
-            else if (member.Name == icon.Name)
+            else if (icon.Match(member))
             {
                 icon = member;
             }
-            else if (member.Name == pointCost.Name)
+            else if (pointCost.Match(member))
             {
                 pointCost = member;
             }
-            else if (member.Name == experienceCost.Name)
+            else if (experienceCost.Match(member))
             {
                 experienceCost = member;
             }

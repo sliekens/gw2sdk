@@ -20,31 +20,31 @@ internal static class ObjectiveProgressJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == title.Name)
+            else if (title.Match(member))
             {
                 title = member;
             }
-            else if (member.Name == track.Name)
+            else if (track.Match(member))
             {
                 track = member;
             }
-            else if (member.Name == acclaim.Name)
+            else if (acclaim.Match(member))
             {
                 acclaim = member;
             }
-            else if (member.Name == progressCurrent.Name)
+            else if (progressCurrent.Match(member))
             {
                 progressCurrent = member;
             }
-            else if (member.Name == progressComplete.Name)
+            else if (progressComplete.Match(member))
             {
                 progressComplete = member;
             }
-            else if (member.Name == claimed.Name)
+            else if (claimed.Match(member))
             {
                 claimed = member;
             }

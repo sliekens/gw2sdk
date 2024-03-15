@@ -5,36 +5,38 @@ namespace GuildWars2.Json;
 
 internal readonly ref struct NullableMember
 {
-    public readonly string Name;
+    private readonly string? name;
 
-    private readonly JsonElement value = default;
+    private readonly JsonProperty member;
 
     private NullableMember(string name)
     {
-        Name = name;
+        this.name = name;
+    }
+    private NullableMember(JsonProperty member)
+    {
+        this.member = member;
     }
 
-    private NullableMember(string name, JsonElement value)
-    {
-        Name = name;
-        this.value = value;
-    }
+    public string Name => name ?? member.Name;
 
     public static implicit operator NullableMember(string name) => new(name);
 
-    public static implicit operator NullableMember(JsonProperty member) =>
-        new(member.Name, member.Value);
+    public static implicit operator NullableMember(JsonProperty member) => new(member);
+
+    public bool Match(JsonProperty property) =>
+        member.Value.ValueKind == Undefined && property.NameEquals(name);
 
     public TValue? Map<TValue>(Func<JsonElement, TValue> resultSelector) where TValue : struct
     {
-        if (value.ValueKind == Undefined || value.ValueKind == Null)
+        if (member.Value.ValueKind == Undefined || member.Value.ValueKind == Null)
         {
             return default;
         }
 
         try
         {
-            return resultSelector(value);
+            return resultSelector(member.Value);
         }
         catch (Exception reason)
         {
@@ -42,8 +44,8 @@ internal readonly ref struct NullableMember
             {
                 Data =
                 {
-                    ["ValueKind"] = value.ValueKind.ToString(),
-                    ["Value"] = value.GetRawText()
+                    ["ValueKind"] = member.Value.ValueKind.ToString(),
+                    ["Value"] = member.Value.GetRawText()
                 }
             };
         }

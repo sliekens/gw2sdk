@@ -18,23 +18,23 @@ internal static class StoryStepJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == name.Name)
+            if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == level.Name)
+            else if (level.Match(member))
             {
                 level = member;
             }
-            else if (member.Name == story.Name)
+            else if (story.Match(member))
             {
                 story = member;
             }
-            else if (member.Name == goals.Name)
+            else if (goals.Match(member))
             {
                 goals = member;
             }
-            else if (member.Name == id.Name)
+            else if (id.Match(member))
             {
                 id = member;
             }

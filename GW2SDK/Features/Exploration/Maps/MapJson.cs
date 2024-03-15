@@ -31,63 +31,63 @@ internal static class MapJson
         RequiredMember masteryPoints = "mastery_points";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == name.Name)
+            if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == minLevel.Name)
+            else if (minLevel.Match(member))
             {
                 minLevel = member;
             }
-            else if (member.Name == maxLevel.Name)
+            else if (maxLevel.Match(member))
             {
                 maxLevel = member;
             }
-            else if (member.Name == defaultFloor.Name)
+            else if (defaultFloor.Match(member))
             {
                 defaultFloor = member;
             }
-            else if (member.Name == labelCoordinates.Name)
+            else if (labelCoordinates.Match(member))
             {
                 labelCoordinates = member;
             }
-            else if (member.Name == mapRectangle.Name)
+            else if (mapRectangle.Match(member))
             {
                 mapRectangle = member;
             }
-            else if (member.Name == continentRectangle.Name)
+            else if (continentRectangle.Match(member))
             {
                 continentRectangle = member;
             }
-            else if (member.Name == pointsOfInterest.Name)
+            else if (pointsOfInterest.Match(member))
             {
                 pointsOfInterest = member;
             }
-            else if (member.Name == godShrines.Name)
+            else if (godShrines.Match(member))
             {
                 godShrines = member;
             }
-            else if (member.Name == tasks.Name)
+            else if (tasks.Match(member))
             {
                 tasks = member;
             }
-            else if (member.Name == skillChallenges.Name)
+            else if (skillChallenges.Match(member))
             {
                 skillChallenges = member;
             }
-            else if (member.Name == sectors.Name)
+            else if (sectors.Match(member))
             {
                 sectors = member;
             }
-            else if (member.Name == adventures.Name)
+            else if (adventures.Match(member))
             {
                 adventures = member;
             }
-            else if (member.Name == id.Name)
+            else if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == masteryPoints.Name)
+            else if (masteryPoints.Match(member))
             {
                 masteryPoints = member;
             }

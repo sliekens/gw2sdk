@@ -19,31 +19,31 @@ internal static class BackgroundStoryAnswerJson
         OptionalMember races = "races";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == title.Name)
+            else if (title.Match(member))
             {
                 title = member;
             }
-            else if (member.Name == description.Name)
+            else if (description.Match(member))
             {
                 description = member;
             }
-            else if (member.Name == journal.Name)
+            else if (journal.Match(member))
             {
                 journal = member;
             }
-            else if (member.Name == question.Name)
+            else if (question.Match(member))
             {
                 question = member;
             }
-            else if (member.Name == professions.Name)
+            else if (professions.Match(member))
             {
                 professions = member;
             }
-            else if (member.Name == races.Name)
+            else if (races.Match(member))
             {
                 races = member;
             }

@@ -14,7 +14,7 @@ internal static class CreatedSubtokenJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == subtoken.Name)
+            if (subtoken.Match(member))
             {
                 subtoken = member;
             }

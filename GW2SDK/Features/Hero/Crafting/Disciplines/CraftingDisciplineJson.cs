@@ -16,15 +16,15 @@ internal static class CraftingDisciplineJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == discipline.Name)
+            if (discipline.Match(member))
             {
                 discipline = member;
             }
-            else if (member.Name == rating.Name)
+            else if (rating.Match(member))
             {
                 rating = member;
             }
-            else if (member.Name == active.Name)
+            else if (active.Match(member))
             {
                 active = member;
             }

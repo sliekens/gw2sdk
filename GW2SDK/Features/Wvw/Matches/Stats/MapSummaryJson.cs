@@ -18,19 +18,19 @@ internal static class MapSummaryJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == type.Name)
+            else if (type.Match(member))
             {
                 type = member;
             }
-            else if (member.Name == deaths.Name)
+            else if (deaths.Match(member))
             {
                 deaths = member;
             }
-            else if (member.Name == kills.Name)
+            else if (kills.Match(member))
             {
                 kills = member;
             }

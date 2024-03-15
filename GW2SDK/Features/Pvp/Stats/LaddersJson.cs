@@ -20,31 +20,31 @@ internal static class LaddersJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == none.Name)
+            if (none.Match(member))
             {
                 none = member;
             }
-            else if (member.Name == unranked.Name)
+            else if (unranked.Match(member))
             {
                 unranked = member;
             }
-            else if (member.Name == ranked.Name)
+            else if (ranked.Match(member))
             {
                 ranked = member;
             }
-            else if (member.Name == ranked2v2.Name)
+            else if (ranked2v2.Match(member))
             {
                 ranked2v2 = member;
             }
-            else if (member.Name == ranked3v3.Name)
+            else if (ranked3v3.Match(member))
             {
                 ranked3v3 = member;
             }
-            else if (member.Name == soloArenaRated.Name)
+            else if (soloArenaRated.Match(member))
             {
                 soloArenaRated = member;
             }
-            else if (member.Name == teamArenaRated.Name)
+            else if (teamArenaRated.Match(member))
             {
                 teamArenaRated = member;
             }

@@ -19,27 +19,27 @@ internal static class MiniatureJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == name.Name)
+            else if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == unlock.Name)
+            else if (unlock.Match(member))
             {
                 unlock = member;
             }
-            else if (member.Name == icon.Name)
+            else if (icon.Match(member))
             {
                 icon = member;
             }
-            else if (member.Name == order.Name)
+            else if (order.Match(member))
             {
                 order = member;
             }
-            else if (member.Name == itemId.Name)
+            else if (itemId.Match(member))
             {
                 itemId = member;
             }

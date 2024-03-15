@@ -38,11 +38,11 @@ internal static class SkillSummaryJson
                     );
                 }
             }
-            else if (member.Name == id.Name)
+            else if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == slot.Name)
+            else if (slot.Match(member))
             {
                 slot = member;
             }

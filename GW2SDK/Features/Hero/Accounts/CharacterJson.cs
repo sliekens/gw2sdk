@@ -43,103 +43,103 @@ internal static class CharacterJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == name.Name)
+            if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == race.Name)
+            else if (race.Match(member))
             {
                 race = member;
             }
-            else if (member.Name == gender.Name)
+            else if (gender.Match(member))
             {
                 gender = member;
             }
-            else if (member.Name == flags.Name)
+            else if (flags.Match(member))
             {
                 flags = member;
             }
-            else if (member.Name == profession.Name)
+            else if (profession.Match(member))
             {
                 profession = member;
             }
-            else if (member.Name == level.Name)
+            else if (level.Match(member))
             {
                 level = member;
             }
-            else if (member.Name == guild.Name)
+            else if (guild.Match(member))
             {
                 guild = member;
             }
-            else if (member.Name == age.Name)
+            else if (age.Match(member))
             {
                 age = member;
             }
-            else if (member.Name == lastModified.Name)
+            else if (lastModified.Match(member))
             {
                 lastModified = member;
             }
-            else if (member.Name == created.Name)
+            else if (created.Match(member))
             {
                 created = member;
             }
-            else if (member.Name == deaths.Name)
+            else if (deaths.Match(member))
             {
                 deaths = member;
             }
-            else if (member.Name == crafting.Name)
+            else if (crafting.Match(member))
             {
                 crafting = member;
             }
-            else if (member.Name == title.Name)
+            else if (title.Match(member))
             {
                 title = member;
             }
-            else if (member.Name == backstory.Name)
+            else if (backstory.Match(member))
             {
                 backstory = member;
             }
-            else if (member.Name == wvwAbilities.Name)
+            else if (wvwAbilities.Match(member))
             {
                 wvwAbilities = member;
             }
-            else if (member.Name == buildTabsUnlocked.Name)
+            else if (buildTabsUnlocked.Match(member))
             {
                 buildTabsUnlocked = member;
             }
-            else if (member.Name == activeBuildTab.Name)
+            else if (activeBuildTab.Match(member))
             {
                 activeBuildTab = member;
             }
-            else if (member.Name == buildTabs.Name)
+            else if (buildTabs.Match(member))
             {
                 buildTabs = member;
             }
-            else if (member.Name == equipmentTabsUnlocked.Name)
+            else if (equipmentTabsUnlocked.Match(member))
             {
                 equipmentTabsUnlocked = member;
             }
-            else if (member.Name == activeEquipmentTab.Name)
+            else if (activeEquipmentTab.Match(member))
             {
                 activeEquipmentTab = member;
             }
-            else if (member.Name == equippedItems.Name)
+            else if (equippedItems.Match(member))
             {
                 equippedItems = member;
             }
-            else if (member.Name == equipmentTabs.Name)
+            else if (equipmentTabs.Match(member))
             {
                 equipmentTabs = member;
             }
-            else if (member.Name == recipes.Name)
+            else if (recipes.Match(member))
             {
                 recipes = member;
             }
-            else if (member.Name == training.Name)
+            else if (training.Match(member))
             {
                 training = member;
             }
-            else if (member.Name == bags.Name)
+            else if (bags.Match(member))
             {
                 bags = member;
             }

@@ -34,51 +34,51 @@ internal static class CollectionAchievementJson
                     );
                 }
             }
-            else if (member.Name == id.Name)
+            else if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == icon.Name)
+            else if (icon.Match(member))
             {
                 icon = member;
             }
-            else if (member.Name == name.Name)
+            else if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == description.Name)
+            else if (description.Match(member))
             {
                 description = member;
             }
-            else if (member.Name == requirement.Name)
+            else if (requirement.Match(member))
             {
                 requirement = member;
             }
-            else if (member.Name == lockedText.Name)
+            else if (lockedText.Match(member))
             {
                 lockedText = member;
             }
-            else if (member.Name == flags.Name)
+            else if (flags.Match(member))
             {
                 flags = member;
             }
-            else if (member.Name == tiers.Name)
+            else if (tiers.Match(member))
             {
                 tiers = member;
             }
-            else if (member.Name == prerequisites.Name)
+            else if (prerequisites.Match(member))
             {
                 prerequisites = member;
             }
-            else if (member.Name == rewards.Name)
+            else if (rewards.Match(member))
             {
                 rewards = member;
             }
-            else if (member.Name == bits.Name)
+            else if (bits.Match(member))
             {
                 bits = member;
             }
-            else if (member.Name == pointCap.Name)
+            else if (pointCap.Match(member))
             {
                 pointCap = member;
             }

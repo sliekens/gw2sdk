@@ -31,39 +31,39 @@ internal static class LegendaryComponentRecipeJson
                     );
                 }
             }
-            else if (member.Name == outputItemId.Name)
+            else if (outputItemId.Match(member))
             {
                 outputItemId = member;
             }
-            else if (member.Name == outputItemCount.Name)
+            else if (outputItemCount.Match(member))
             {
                 outputItemCount = member;
             }
-            else if (member.Name == minRating.Name)
+            else if (minRating.Match(member))
             {
                 minRating = member;
             }
-            else if (member.Name == timeToCraft.Name)
+            else if (timeToCraft.Match(member))
             {
                 timeToCraft = member;
             }
-            else if (member.Name == disciplines.Name)
+            else if (disciplines.Match(member))
             {
                 disciplines = member;
             }
-            else if (member.Name == flags.Name)
+            else if (flags.Match(member))
             {
                 flags = member;
             }
-            else if (member.Name == ingredients.Name)
+            else if (ingredients.Match(member))
             {
                 ingredients = member;
             }
-            else if (member.Name == id.Name)
+            else if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == chatLink.Name)
+            else if (chatLink.Match(member))
             {
                 chatLink = member;
             }

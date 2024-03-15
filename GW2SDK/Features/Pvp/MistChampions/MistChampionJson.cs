@@ -21,35 +21,35 @@ internal static class MistChampionJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == name.Name)
+            else if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == description.Name)
+            else if (description.Match(member))
             {
                 description = member;
             }
-            else if (member.Name == type.Name)
+            else if (type.Match(member))
             {
                 type = member;
             }
-            else if (member.Name == stats.Name)
+            else if (stats.Match(member))
             {
                 stats = member;
             }
-            else if (member.Name == overlay.Name)
+            else if (overlay.Match(member))
             {
                 overlay = member;
             }
-            else if (member.Name == underlay.Name)
+            else if (underlay.Match(member))
             {
                 underlay = member;
             }
-            else if (member.Name == skins.Name)
+            else if (skins.Match(member))
             {
                 skins = member;
             }

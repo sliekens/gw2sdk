@@ -24,47 +24,47 @@ internal static class CharacterSummaryJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == name.Name)
+            if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == race.Name)
+            else if (race.Match(member))
             {
                 race = member;
             }
-            else if (member.Name == gender.Name)
+            else if (gender.Match(member))
             {
                 gender = member;
             }
-            else if (member.Name == profession.Name)
+            else if (profession.Match(member))
             {
                 profession = member;
             }
-            else if (member.Name == level.Name)
+            else if (level.Match(member))
             {
                 level = member;
             }
-            else if (member.Name == guild.Name)
+            else if (guild.Match(member))
             {
                 guild = member;
             }
-            else if (member.Name == age.Name)
+            else if (age.Match(member))
             {
                 age = member;
             }
-            else if (member.Name == lastModified.Name)
+            else if (lastModified.Match(member))
             {
                 lastModified = member;
             }
-            else if (member.Name == created.Name)
+            else if (created.Match(member))
             {
                 created = member;
             }
-            else if (member.Name == deaths.Name)
+            else if (deaths.Match(member))
             {
                 deaths = member;
             }
-            else if (member.Name == title.Name)
+            else if (title.Match(member))
             {
                 title = member;
             }

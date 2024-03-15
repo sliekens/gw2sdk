@@ -15,11 +15,11 @@ internal static class GuildTeamMemberJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == name.Name)
+            if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == role.Name)
+            else if (role.Match(member))
             {
                 role = member;
             }

@@ -19,27 +19,27 @@ internal static class ColorInfoJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == brightness.Name)
+            if (brightness.Match(member))
             {
                 brightness = member;
             }
-            else if (member.Name == contrast.Name)
+            else if (contrast.Match(member))
             {
                 contrast = member;
             }
-            else if (member.Name == hue.Name)
+            else if (hue.Match(member))
             {
                 hue = member;
             }
-            else if (member.Name == saturation.Name)
+            else if (saturation.Match(member))
             {
                 saturation = member;
             }
-            else if (member.Name == lightness.Name)
+            else if (lightness.Match(member))
             {
                 lightness = member;
             }
-            else if (member.Name == rgb.Name)
+            else if (rgb.Match(member))
             {
                 rgb = member;
             }

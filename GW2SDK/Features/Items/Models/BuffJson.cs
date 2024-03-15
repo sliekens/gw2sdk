@@ -11,11 +11,11 @@ internal static class BuffJson
         OptionalMember description = "description";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == skillId.Name)
+            if (skillId.Match(member))
             {
                 skillId = member;
             }
-            else if (member.Name == description.Name)
+            else if (description.Match(member))
             {
                 description = member;
             }

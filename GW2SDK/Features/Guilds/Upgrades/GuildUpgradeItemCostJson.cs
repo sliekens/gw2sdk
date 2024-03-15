@@ -25,15 +25,15 @@ internal static class GuildUpgradeItemCostJson
                     );
                 }
             }
-            else if (member.Name == name.Name)
+            else if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == count.Name)
+            else if (count.Match(member))
             {
                 count = member;
             }
-            else if (member.Name == itemId.Name)
+            else if (itemId.Match(member))
             {
                 itemId = member;
             }

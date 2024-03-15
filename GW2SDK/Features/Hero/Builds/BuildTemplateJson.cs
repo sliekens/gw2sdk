@@ -16,15 +16,15 @@ internal static class BuildTemplateJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == tab.Name)
+            if (tab.Match(member))
             {
                 tab = member;
             }
-            else if (member.Name == build.Name)
+            else if (build.Match(member))
             {
                 build = member;
             }
-            else if (member.Name == isActive.Name)
+            else if (isActive.Match(member))
             {
                 isActive = member;
             }

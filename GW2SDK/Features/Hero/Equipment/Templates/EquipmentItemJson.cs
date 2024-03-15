@@ -26,51 +26,51 @@ internal static class EquipmentItemJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == count.Name)
+            else if (count.Match(member))
             {
                 count = member;
             }
-            else if (member.Name == slot.Name)
+            else if (slot.Match(member))
             {
                 slot = member;
             }
-            else if (member.Name == upgrades.Name)
+            else if (upgrades.Match(member))
             {
                 upgrades = member;
             }
-            else if (member.Name == infusions.Name)
+            else if (infusions.Match(member))
             {
                 infusions = member;
             }
-            else if (member.Name == skin.Name)
+            else if (skin.Match(member))
             {
                 skin = member;
             }
-            else if (member.Name == stats.Name)
+            else if (stats.Match(member))
             {
                 stats = member;
             }
-            else if (member.Name == binding.Name)
+            else if (binding.Match(member))
             {
                 binding = member;
             }
-            else if (member.Name == boundTo.Name)
+            else if (boundTo.Match(member))
             {
                 boundTo = member;
             }
-            else if (member.Name == location.Name)
+            else if (location.Match(member))
             {
                 location = member;
             }
-            else if (member.Name == tabs.Name)
+            else if (tabs.Match(member))
             {
                 tabs = member;
             }
-            else if (member.Name == dyes.Name)
+            else if (dyes.Match(member))
             {
                 dyes = member;
             }

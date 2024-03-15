@@ -14,11 +14,11 @@ internal static class GemsToGoldJson
         RequiredMember quantity = "quantity";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == coinsPerGem.Name)
+            if (coinsPerGem.Match(member))
             {
                 coinsPerGem = member;
             }
-            else if (member.Name == quantity.Name)
+            else if (quantity.Match(member))
             {
                 quantity = member;
             }

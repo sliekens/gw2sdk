@@ -27,23 +27,23 @@ internal static class MercenaryJson
                     );
                 }
             }
-            else if (member.Name == id.Name)
+            else if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == owner.Name)
+            else if (owner.Match(member))
             {
                 owner = member;
             }
-            else if (member.Name == lastFlipped.Name)
+            else if (lastFlipped.Match(member))
             {
                 lastFlipped = member;
             }
-            else if (member.Name == pointsTick.Name)
+            else if (pointsTick.Match(member))
             {
                 pointsTick = member;
             }
-            else if (member.Name == pointsCapture.Name)
+            else if (pointsCapture.Match(member))
             {
                 pointsCapture = member;
             }

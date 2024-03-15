@@ -15,11 +15,11 @@ internal static class LegendaryItemJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == maxCount.Name)
+            else if (maxCount.Match(member))
             {
                 maxCount = member;
             }

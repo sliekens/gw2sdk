@@ -14,19 +14,19 @@ internal static class TitleJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == name.Name)
+            else if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == achievements.Name)
+            else if (achievements.Match(member))
             {
                 achievements = member;
             }
-            else if (member.Name == achievementPointsRequired.Name)
+            else if (achievementPointsRequired.Match(member))
             {
                 achievementPointsRequired = member;
             }

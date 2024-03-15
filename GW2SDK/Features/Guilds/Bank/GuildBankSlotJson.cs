@@ -20,11 +20,11 @@ internal static class GuildBankSlotJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == itemId.Name)
+            if (itemId.Match(member))
             {
                 itemId = member;
             }
-            else if (member.Name == count.Name)
+            else if (count.Match(member))
             {
                 count = member;
             }

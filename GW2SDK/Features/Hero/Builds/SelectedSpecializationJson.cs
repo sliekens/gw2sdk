@@ -16,7 +16,7 @@ internal static class SelectedSpecializationJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 // The API returns { "id": null } if no specialization is selected
                 // It's more clear to make the entire object null
@@ -28,7 +28,7 @@ internal static class SelectedSpecializationJson
 
                 id = member;
             }
-            else if (member.Name == traits.Name)
+            else if (traits.Match(member))
             {
                 traits = member;
             }

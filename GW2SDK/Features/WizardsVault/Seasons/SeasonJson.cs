@@ -18,23 +18,23 @@ internal static class SeasonJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == title.Name)
+            if (title.Match(member))
             {
                 title = member;
             }
-            else if (member.Name == start.Name)
+            else if (start.Match(member))
             {
                 start = member;
             }
-            else if (member.Name == end.Name)
+            else if (end.Match(member))
             {
                 end = member;
             }
-            else if (member.Name == listings.Name)
+            else if (listings.Match(member))
             {
                 listings = member;
             }
-            else if (member.Name == objectives.Name)
+            else if (objectives.Match(member))
             {
                 objectives = member;
             }

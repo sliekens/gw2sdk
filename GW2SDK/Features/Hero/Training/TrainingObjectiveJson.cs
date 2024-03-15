@@ -31,7 +31,7 @@ internal static class TrainingObjectiveJson
                     );
                 }
             }
-            else if (member.Name == cost.Name)
+            else if (cost.Match(member))
             {
                 cost = member;
             }

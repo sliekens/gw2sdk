@@ -30,35 +30,35 @@ internal static class GuildUpgradeActivityJson
                     );
                 }
             }
-            else if (member.Name == id.Name)
+            else if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == time.Name)
+            else if (time.Match(member))
             {
                 time = member;
             }
-            else if (member.Name == user.Name)
+            else if (user.Match(member))
             {
                 user = member;
             }
-            else if (member.Name == action.Name)
+            else if (action.Match(member))
             {
                 action = member;
             }
-            else if (member.Name == upgradeId.Name)
+            else if (upgradeId.Match(member))
             {
                 upgradeId = member;
             }
-            else if (member.Name == recipeId.Name)
+            else if (recipeId.Match(member))
             {
                 recipeId = member;
             }
-            else if (member.Name == itemId.Name)
+            else if (itemId.Match(member))
             {
                 itemId = member;
             }
-            else if (member.Name == count.Name)
+            else if (count.Match(member))
             {
                 count = member;
             }

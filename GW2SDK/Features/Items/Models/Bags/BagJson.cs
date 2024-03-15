@@ -31,47 +31,47 @@ internal static class BagJson
                     );
                 }
             }
-            else if (member.Name == name.Name)
+            else if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == description.Name)
+            else if (description.Match(member))
             {
                 description = member;
             }
-            else if (member.Name == level.Name)
+            else if (level.Match(member))
             {
                 level = member;
             }
-            else if (member.Name == rarity.Name)
+            else if (rarity.Match(member))
             {
                 rarity = member;
             }
-            else if (member.Name == vendorValue.Name)
+            else if (vendorValue.Match(member))
             {
                 vendorValue = member;
             }
-            else if (member.Name == gameTypes.Name)
+            else if (gameTypes.Match(member))
             {
                 gameTypes = member;
             }
-            else if (member.Name == flags.Name)
+            else if (flags.Match(member))
             {
                 flags = member;
             }
-            else if (member.Name == restrictions.Name)
+            else if (restrictions.Match(member))
             {
                 restrictions = member;
             }
-            else if (member.Name == id.Name)
+            else if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == chatLink.Name)
+            else if (chatLink.Match(member))
             {
                 chatLink = member;
             }
-            else if (member.Name == icon.Name)
+            else if (icon.Match(member))
             {
                 icon = member;
             }
@@ -79,11 +79,11 @@ internal static class BagJson
             {
                 foreach (var detail in member.Value.EnumerateObject())
                 {
-                    if (detail.Name == noSellOrSort.Name)
+                    if (noSellOrSort.Match(detail))
                     {
                         noSellOrSort = detail;
                     }
-                    else if (detail.Name == size.Name)
+                    else if (size.Match(detail))
                     {
                         size = detail;
                     }

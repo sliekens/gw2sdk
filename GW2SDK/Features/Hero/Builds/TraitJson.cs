@@ -21,47 +21,47 @@ internal static class TraitJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == tier.Name)
+            else if (tier.Match(member))
             {
                 tier = member;
             }
-            else if (member.Name == order.Name)
+            else if (order.Match(member))
             {
                 order = member;
             }
-            else if (member.Name == name.Name)
+            else if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == description.Name)
+            else if (description.Match(member))
             {
                 description = member;
             }
-            else if (member.Name == slot.Name)
+            else if (slot.Match(member))
             {
                 slot = member;
             }
-            else if (member.Name == facts.Name)
+            else if (facts.Match(member))
             {
                 facts = member;
             }
-            else if (member.Name == traitedFacts.Name)
+            else if (traitedFacts.Match(member))
             {
                 traitedFacts = member;
             }
-            else if (member.Name == skills.Name)
+            else if (skills.Match(member))
             {
                 skills = member;
             }
-            else if (member.Name == specialization.Name)
+            else if (specialization.Match(member))
             {
                 specialization = member;
             }
-            else if (member.Name == icon.Name)
+            else if (icon.Match(member))
             {
                 icon = member;
             }

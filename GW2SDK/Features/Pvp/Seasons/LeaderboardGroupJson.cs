@@ -16,15 +16,15 @@ internal static class LeaderboardGroupJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == ladder.Name)
+            if (ladder.Match(member))
             {
                 ladder = member;
             }
-            else if (member.Name == legendary.Name)
+            else if (legendary.Match(member))
             {
                 legendary = member;
             }
-            else if (member.Name == guild.Name)
+            else if (guild.Match(member))
             {
                 guild = member;
             }

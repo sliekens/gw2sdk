@@ -18,27 +18,27 @@ internal static class SectorJson
         RequiredMember chatLink = "chat_link";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == name.Name)
+            if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == level.Name)
+            else if (level.Match(member))
             {
                 level = member;
             }
-            else if (member.Name == coordinates.Name)
+            else if (coordinates.Match(member))
             {
                 coordinates = member;
             }
-            else if (member.Name == boundaries.Name)
+            else if (boundaries.Match(member))
             {
                 boundaries = member;
             }
-            else if (member.Name == id.Name)
+            else if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == chatLink.Name)
+            else if (chatLink.Match(member))
             {
                 chatLink = member;
             }

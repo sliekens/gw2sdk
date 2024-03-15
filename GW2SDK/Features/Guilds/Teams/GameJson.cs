@@ -21,43 +21,43 @@ internal static class GameJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == mapId.Name)
+            else if (mapId.Match(member))
             {
                 mapId = member;
             }
-            else if (member.Name == started.Name)
+            else if (started.Match(member))
             {
                 started = member;
             }
-            else if (member.Name == ended.Name)
+            else if (ended.Match(member))
             {
                 ended = member;
             }
-            else if (member.Name == result.Name)
+            else if (result.Match(member))
             {
                 result = member;
             }
-            else if (member.Name == team.Name)
+            else if (team.Match(member))
             {
                 team = member;
             }
-            else if (member.Name == ratingType.Name)
+            else if (ratingType.Match(member))
             {
                 ratingType = member;
             }
-            else if (member.Name == ratingChange.Name)
+            else if (ratingChange.Match(member))
             {
                 ratingChange = member;
             }
-            else if (member.Name == seasonId.Name)
+            else if (seasonId.Match(member))
             {
                 seasonId = member;
             }
-            else if (member.Name == score.Name)
+            else if (score.Match(member))
             {
                 score = member;
             }

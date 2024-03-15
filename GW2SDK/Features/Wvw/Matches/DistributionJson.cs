@@ -16,15 +16,15 @@ internal static class DistributionJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == red.Name)
+            if (red.Match(member))
             {
                 red = member;
             }
-            else if (member.Name == blue.Name)
+            else if (blue.Match(member))
             {
                 blue = member;
             }
-            else if (member.Name == green.Name)
+            else if (green.Match(member))
             {
                 green = member;
             }

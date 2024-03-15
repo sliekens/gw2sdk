@@ -15,11 +15,11 @@ internal static class CountNeededForUpgradeJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == upgradeId.Name)
+            if (upgradeId.Match(member))
             {
                 upgradeId = member;
             }
-            else if (member.Name == count.Name)
+            else if (count.Match(member))
             {
                 count = member;
             }

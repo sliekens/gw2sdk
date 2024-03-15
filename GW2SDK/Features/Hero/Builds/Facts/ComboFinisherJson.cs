@@ -43,19 +43,19 @@ internal static class ComboFinisherJson
             {
                 overrides = member.Value.GetInt32();
             }
-            else if (member.Name == text.Name)
+            else if (text.Match(member))
             {
                 text = member;
             }
-            else if (member.Name == icon.Name)
+            else if (icon.Match(member))
             {
                 icon = member;
             }
-            else if (member.Name == percent.Name)
+            else if (percent.Match(member))
             {
                 percent = member;
             }
-            else if (member.Name == finisherType.Name)
+            else if (finisherType.Match(member))
             {
                 finisherType = member;
             }

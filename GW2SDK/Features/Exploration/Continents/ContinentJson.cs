@@ -18,27 +18,27 @@ internal static class ContinentJson
         RequiredMember id = "id";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == name.Name)
+            if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == continentDimensions.Name)
+            else if (continentDimensions.Match(member))
             {
                 continentDimensions = member;
             }
-            else if (member.Name == minZoom.Name)
+            else if (minZoom.Match(member))
             {
                 minZoom = member;
             }
-            else if (member.Name == maxZoom.Name)
+            else if (maxZoom.Match(member))
             {
                 maxZoom = member;
             }
-            else if (member.Name == floors.Name)
+            else if (floors.Match(member))
             {
                 floors = member;
             }
-            else if (member.Name == id.Name)
+            else if (id.Match(member))
             {
                 id = member;
             }

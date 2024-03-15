@@ -16,15 +16,15 @@ internal static class TrainingProgressJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == spent.Name)
+            else if (spent.Match(member))
             {
                 spent = member;
             }
-            else if (member.Name == done.Name)
+            else if (done.Match(member))
             {
                 done = member;
             }

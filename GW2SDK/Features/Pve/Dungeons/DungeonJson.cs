@@ -15,11 +15,11 @@ internal static class DungeonJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == paths.Name)
+            else if (paths.Match(member))
             {
                 paths = member;
             }

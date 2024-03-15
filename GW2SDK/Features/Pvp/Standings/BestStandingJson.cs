@@ -18,23 +18,23 @@ internal static class BestStandingJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == totalPoints.Name)
+            if (totalPoints.Match(member))
             {
                 totalPoints = member;
             }
-            else if (member.Name == division.Name)
+            else if (division.Match(member))
             {
                 division = member;
             }
-            else if (member.Name == tier.Name)
+            else if (tier.Match(member))
             {
                 tier = member;
             }
-            else if (member.Name == points.Name)
+            else if (points.Match(member))
             {
                 points = member;
             }
-            else if (member.Name == repeats.Name)
+            else if (repeats.Match(member))
             {
                 repeats = member;
             }

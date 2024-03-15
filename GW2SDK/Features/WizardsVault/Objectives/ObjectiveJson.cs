@@ -17,19 +17,19 @@ internal static class ObjectiveJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == title.Name)
+            else if (title.Match(member))
             {
                 title = member;
             }
-            else if (member.Name == track.Name)
+            else if (track.Match(member))
             {
                 track = member;
             }
-            else if (member.Name == acclaim.Name)
+            else if (acclaim.Match(member))
             {
                 acclaim = member;
             }

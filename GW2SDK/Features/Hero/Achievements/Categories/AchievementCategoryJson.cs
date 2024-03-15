@@ -20,31 +20,31 @@ internal static class AchievementCategoryJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == name.Name)
+            else if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == description.Name)
+            else if (description.Match(member))
             {
                 description = member;
             }
-            else if (member.Name == order.Name)
+            else if (order.Match(member))
             {
                 order = member;
             }
-            else if (member.Name == icon.Name)
+            else if (icon.Match(member))
             {
                 icon = member;
             }
-            else if (member.Name == achievements.Name)
+            else if (achievements.Match(member))
             {
                 achievements = member;
             }
-            else if (member.Name == tomorrow.Name)
+            else if (tomorrow.Match(member))
             {
                 tomorrow = member;
             }

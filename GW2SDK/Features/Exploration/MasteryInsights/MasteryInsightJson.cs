@@ -16,15 +16,15 @@ internal static class MasteryInsightJson
         RequiredMember region = "region";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == coordinates.Name)
+            if (coordinates.Match(member))
             {
                 coordinates = member;
             }
-            else if (member.Name == id.Name)
+            else if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == region.Name)
+            else if (region.Match(member))
             {
                 region = member;
             }

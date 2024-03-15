@@ -37,47 +37,47 @@ internal static class GemJson
                     );
                 }
             }
-            else if (member.Name == name.Name)
+            else if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == description.Name)
+            else if (description.Match(member))
             {
                 description = member;
             }
-            else if (member.Name == level.Name)
+            else if (level.Match(member))
             {
                 level = member;
             }
-            else if (member.Name == rarity.Name)
+            else if (rarity.Match(member))
             {
                 rarity = member;
             }
-            else if (member.Name == vendorValue.Name)
+            else if (vendorValue.Match(member))
             {
                 vendorValue = member;
             }
-            else if (member.Name == gameTypes.Name)
+            else if (gameTypes.Match(member))
             {
                 gameTypes = member;
             }
-            else if (member.Name == flags.Name)
+            else if (flags.Match(member))
             {
                 flags = member;
             }
-            else if (member.Name == restrictions.Name)
+            else if (restrictions.Match(member))
             {
                 restrictions = member;
             }
-            else if (member.Name == id.Name)
+            else if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == chatLink.Name)
+            else if (chatLink.Match(member))
             {
                 chatLink = member;
             }
-            else if (member.Name == icon.Name)
+            else if (icon.Match(member))
             {
                 icon = member;
             }
@@ -94,15 +94,15 @@ internal static class GemJson
                             );
                         }
                     }
-                    else if (detail.Name == upgradeComponentFlags.Name)
+                    else if (upgradeComponentFlags.Match(detail))
                     {
                         upgradeComponentFlags = detail;
                     }
-                    else if (detail.Name == infusionUpgradeFlags.Name)
+                    else if (infusionUpgradeFlags.Match(detail))
                     {
                         infusionUpgradeFlags = detail;
                     }
-                    else if (detail.Name == attributeAdjustment.Name)
+                    else if (attributeAdjustment.Match(detail))
                     {
                         attributeAdjustment = detail;
                     }
@@ -110,15 +110,15 @@ internal static class GemJson
                     {
                         foreach (var infix in detail.Value.EnumerateObject())
                         {
-                            if (infix.Name == infixUpgradeId.Name)
+                            if (infixUpgradeId.Match(infix))
                             {
                                 infixUpgradeId = infix;
                             }
-                            else if (infix.Name == infixUpgradeAttributes.Name)
+                            else if (infixUpgradeAttributes.Match(infix))
                             {
                                 infixUpgradeAttributes = infix;
                             }
-                            else if (infix.Name == infixUpgradeBuff.Name)
+                            else if (infixUpgradeBuff.Match(infix))
                             {
                                 infixUpgradeBuff = infix;
                             }
@@ -130,7 +130,7 @@ internal static class GemJson
                             }
                         }
                     }
-                    else if (detail.Name == suffix.Name)
+                    else if (suffix.Match(detail))
                     {
                         suffix = detail;
                     }

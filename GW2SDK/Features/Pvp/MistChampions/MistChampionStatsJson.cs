@@ -16,15 +16,15 @@ internal static class MistChampionStatsJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == offense.Name)
+            if (offense.Match(member))
             {
                 offense = member;
             }
-            else if (member.Name == defense.Name)
+            else if (defense.Match(member))
             {
                 defense = member;
             }
-            else if (member.Name == speed.Name)
+            else if (speed.Match(member))
             {
                 speed = member;
             }

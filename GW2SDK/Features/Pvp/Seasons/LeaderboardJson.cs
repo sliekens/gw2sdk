@@ -15,11 +15,11 @@ internal static class LeaderboardJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == settings.Name)
+            if (settings.Match(member))
             {
                 settings = member;
             }
-            else if (member.Name == scorings.Name)
+            else if (scorings.Match(member))
             {
                 scorings = member;
             }

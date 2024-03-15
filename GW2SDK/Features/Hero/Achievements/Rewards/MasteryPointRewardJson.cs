@@ -24,11 +24,11 @@ internal static class MasteryPointRewardJson
                     );
                 }
             }
-            else if (member.Name == id.Name)
+            else if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == region.Name)
+            else if (region.Match(member))
             {
                 region = member;
             }

@@ -28,39 +28,39 @@ internal static class HubJson
                     );
                 }
             }
-            else if (member.Name == id.Name)
+            else if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == name.Name)
+            else if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == description.Name)
+            else if (description.Match(member))
             {
                 description = member;
             }
-            else if (member.Name == buildTime.Name)
+            else if (buildTime.Match(member))
             {
                 buildTime = member;
             }
-            else if (member.Name == icon.Name)
+            else if (icon.Match(member))
             {
                 icon = member;
             }
-            else if (member.Name == requiredLevel.Name)
+            else if (requiredLevel.Match(member))
             {
                 requiredLevel = member;
             }
-            else if (member.Name == experience.Name)
+            else if (experience.Match(member))
             {
                 experience = member;
             }
-            else if (member.Name == prerequisites.Name)
+            else if (prerequisites.Match(member))
             {
                 prerequisites = member;
             }
-            else if (member.Name == costs.Name)
+            else if (costs.Match(member))
             {
                 costs = member;
             }

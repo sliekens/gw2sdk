@@ -17,19 +17,19 @@ internal static class MatchStatsJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == deaths.Name)
+            else if (deaths.Match(member))
             {
                 deaths = member;
             }
-            else if (member.Name == kills.Name)
+            else if (kills.Match(member))
             {
                 kills = member;
             }
-            else if (member.Name == maps.Name)
+            else if (maps.Match(member))
             {
                 maps = member;
             }

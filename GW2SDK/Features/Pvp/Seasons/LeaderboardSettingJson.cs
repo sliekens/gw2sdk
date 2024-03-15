@@ -16,7 +16,7 @@ internal static class LeaderboardSettingJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == name.Name)
+            if (name.Match(member))
             {
                 name = member;
             }
@@ -24,11 +24,11 @@ internal static class LeaderboardSettingJson
             {
                 // Ignore, seems to be always null
             }
-            else if (member.Name == scoring.Name)
+            else if (scoring.Match(member))
             {
                 scoring = member;
             }
-            else if (member.Name == tiers.Name)
+            else if (tiers.Match(member))
             {
                 tiers = member;
             }

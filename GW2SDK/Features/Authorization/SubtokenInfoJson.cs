@@ -27,27 +27,27 @@ internal static class SubtokenInfoJson
                     );
                 }
             }
-            else if (member.Name == id.Name)
+            else if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == name.Name)
+            else if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == permissions.Name)
+            else if (permissions.Match(member))
             {
                 permissions = member;
             }
-            else if (member.Name == expiresAt.Name)
+            else if (expiresAt.Match(member))
             {
                 expiresAt = member;
             }
-            else if (member.Name == issuedAt.Name)
+            else if (issuedAt.Match(member))
             {
                 issuedAt = member;
             }
-            else if (member.Name == urls.Name)
+            else if (urls.Match(member))
             {
                 urls = member;
             }

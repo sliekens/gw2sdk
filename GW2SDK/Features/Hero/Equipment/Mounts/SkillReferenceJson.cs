@@ -16,11 +16,11 @@ internal static class SkillReferenceJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == slot.Name)
+            else if (slot.Match(member))
             {
                 slot = member;
             }

@@ -15,11 +15,11 @@ internal static class RaidWingJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == events.Name)
+            else if (events.Match(member))
             {
                 events = member;
             }

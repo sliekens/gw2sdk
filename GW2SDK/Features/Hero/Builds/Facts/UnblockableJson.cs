@@ -37,11 +37,11 @@ internal static class UnblockableJson
             {
                 overrides = member.Value.GetInt32();
             }
-            else if (member.Name == text.Name)
+            else if (text.Match(member))
             {
                 text = member;
             }
-            else if (member.Name == icon.Name)
+            else if (icon.Match(member))
             {
                 icon = member;
             }

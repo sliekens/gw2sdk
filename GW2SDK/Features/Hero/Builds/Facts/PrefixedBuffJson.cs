@@ -43,27 +43,27 @@ internal static class PrefixedBuffJson
             {
                 overrides = member.Value.GetInt32();
             }
-            else if (member.Name == text.Name)
+            else if (text.Match(member))
             {
                 text = member;
             }
-            else if (member.Name == icon.Name)
+            else if (icon.Match(member))
             {
                 icon = member;
             }
-            else if (member.Name == duration.Name)
+            else if (duration.Match(member))
             {
                 duration = member;
             }
-            else if (member.Name == status.Name)
+            else if (status.Match(member))
             {
                 status = member;
             }
-            else if (member.Name == description.Name)
+            else if (description.Match(member))
             {
                 description = member;
             }
-            else if (member.Name == applyCount.Name)
+            else if (applyCount.Match(member))
             {
                 applyCount = member;
             }
@@ -71,11 +71,11 @@ internal static class PrefixedBuffJson
             {
                 foreach (var prefixMember in member.Value.EnumerateObject())
                 {
-                    if (prefixMember.Name == prefixIcon.Name)
+                    if (prefixIcon.Match(prefixMember))
                     {
                         prefixIcon = prefixMember;
                     }
-                    else if (prefixMember.Name == prefixStatus.Name)
+                    else if (prefixStatus.Match(prefixMember))
                     {
                         prefixStatus = prefixMember;
                     }

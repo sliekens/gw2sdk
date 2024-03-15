@@ -19,27 +19,27 @@ internal static class LegendJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == swap.Name)
+            else if (swap.Match(member))
             {
                 swap = member;
             }
-            else if (member.Name == code.Name)
+            else if (code.Match(member))
             {
                 code = member;
             }
-            else if (member.Name == heal.Name)
+            else if (heal.Match(member))
             {
                 heal = member;
             }
-            else if (member.Name == elite.Name)
+            else if (elite.Match(member))
             {
                 elite = member;
             }
-            else if (member.Name == utilities.Name)
+            else if (utilities.Match(member))
             {
                 utilities = member;
             }

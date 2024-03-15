@@ -30,31 +30,31 @@ internal static class PistolSkinJson
                     );
                 }
             }
-            else if (member.Name == name.Name)
+            else if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == description.Name)
+            else if (description.Match(member))
             {
                 description = member;
             }
-            else if (member.Name == rarity.Name)
+            else if (rarity.Match(member))
             {
                 rarity = member;
             }
-            else if (member.Name == flags.Name)
+            else if (flags.Match(member))
             {
                 flags = member;
             }
-            else if (member.Name == restrictions.Name)
+            else if (restrictions.Match(member))
             {
                 restrictions = member;
             }
-            else if (member.Name == id.Name)
+            else if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == icon.Name)
+            else if (icon.Match(member))
             {
                 icon = member;
             }
@@ -71,7 +71,7 @@ internal static class PistolSkinJson
                             );
                         }
                     }
-                    else if (detail.Name == damageType.Name)
+                    else if (damageType.Match(detail))
                     {
                         damageType = detail;
                     }

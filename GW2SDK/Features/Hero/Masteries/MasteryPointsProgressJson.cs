@@ -15,11 +15,11 @@ internal static class MasteryPointsProgressJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == totals.Name)
+            if (totals.Match(member))
             {
                 totals = member;
             }
-            else if (member.Name == unlocked.Name)
+            else if (unlocked.Match(member))
             {
                 unlocked = member;
             }

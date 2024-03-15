@@ -20,31 +20,31 @@ internal static class LeaderboardEntryJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == name.Name)
+            if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == guildId.Name)
+            else if (guildId.Match(member))
             {
                 guildId = member;
             }
-            else if (member.Name == teamName.Name)
+            else if (teamName.Match(member))
             {
                 teamName = member;
             }
-            else if (member.Name == teamId.Name)
+            else if (teamId.Match(member))
             {
                 teamId = member;
             }
-            else if (member.Name == rank.Name)
+            else if (rank.Match(member))
             {
                 rank = member;
             }
-            else if (member.Name == date.Name)
+            else if (date.Match(member))
             {
                 date = member;
             }
-            else if (member.Name == scores.Name)
+            else if (scores.Match(member))
             {
                 scores = member;
             }

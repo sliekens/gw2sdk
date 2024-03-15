@@ -16,15 +16,15 @@ internal static class SubskillJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == attunement.Name)
+            else if (attunement.Match(member))
             {
                 attunement = member;
             }
-            else if (member.Name == form.Name)
+            else if (form.Match(member))
             {
                 form = member;
             }

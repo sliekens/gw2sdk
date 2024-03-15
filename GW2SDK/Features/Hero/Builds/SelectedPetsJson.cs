@@ -15,11 +15,11 @@ internal static class SelectedPetsJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == terrestrial.Name)
+            if (terrestrial.Match(member))
             {
                 terrestrial = member;
             }
-            else if (member.Name == aquatic.Name)
+            else if (aquatic.Match(member))
             {
                 aquatic = member;
             }

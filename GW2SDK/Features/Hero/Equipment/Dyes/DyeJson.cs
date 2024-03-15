@@ -19,39 +19,39 @@ internal static class DyeJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == name.Name)
+            else if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == baseRgb.Name)
+            else if (baseRgb.Match(member))
             {
                 baseRgb = member;
             }
-            else if (member.Name == cloth.Name)
+            else if (cloth.Match(member))
             {
                 cloth = member;
             }
-            else if (member.Name == leather.Name)
+            else if (leather.Match(member))
             {
                 leather = member;
             }
-            else if (member.Name == metal.Name)
+            else if (metal.Match(member))
             {
                 metal = member;
             }
-            else if (member.Name == fur.Name)
+            else if (fur.Match(member))
             {
                 fur = member;
             }
-            else if (member.Name == itemId.Name)
+            else if (itemId.Match(member))
             {
                 itemId = member;
             }
-            else if (member.Name == categories.Name)
+            else if (categories.Match(member))
             {
                 categories = member;
             }

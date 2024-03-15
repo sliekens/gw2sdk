@@ -27,63 +27,63 @@ internal static class AccountSummaryJson
         NullableMember buildStorageSlots = "build_storage_slots";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == name.Name)
+            else if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == age.Name)
+            else if (age.Match(member))
             {
                 age = member;
             }
-            else if (member.Name == lastModified.Name)
+            else if (lastModified.Match(member))
             {
                 lastModified = member;
             }
-            else if (member.Name == world.Name)
+            else if (world.Match(member))
             {
                 world = member;
             }
-            else if (member.Name == guilds.Name)
+            else if (guilds.Match(member))
             {
                 guilds = member;
             }
-            else if (member.Name == guildLeader.Name)
+            else if (guildLeader.Match(member))
             {
                 guildLeader = member;
             }
-            else if (member.Name == created.Name)
+            else if (created.Match(member))
             {
                 created = member;
             }
-            else if (member.Name == access.Name)
+            else if (access.Match(member))
             {
                 access = member;
             }
-            else if (member.Name == commander.Name)
+            else if (commander.Match(member))
             {
                 commander = member;
             }
-            else if (member.Name == fractalLevel.Name)
+            else if (fractalLevel.Match(member))
             {
                 fractalLevel = member;
             }
-            else if (member.Name == dailyAp.Name)
+            else if (dailyAp.Match(member))
             {
                 dailyAp = member;
             }
-            else if (member.Name == monthlyAp.Name)
+            else if (monthlyAp.Match(member))
             {
                 monthlyAp = member;
             }
-            else if (member.Name == wvwRank.Name)
+            else if (wvwRank.Match(member))
             {
                 wvwRank = member;
             }
-            else if (member.Name == buildStorageSlots.Name)
+            else if (buildStorageSlots.Match(member))
             {
                 buildStorageSlots = member;
             }

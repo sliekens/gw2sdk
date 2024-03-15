@@ -23,11 +23,11 @@ internal static class TraitObjectiveJson
                     );
                 }
             }
-            else if (member.Name == cost.Name)
+            else if (cost.Match(member))
             {
                 cost = member;
             }
-            else if (member.Name == traitId.Name)
+            else if (traitId.Match(member))
             {
                 traitId = member;
             }

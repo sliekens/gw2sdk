@@ -47,7 +47,7 @@ internal static class AccountLuckJson
                     );
                 }
             }
-            else if (member.Name == value.Name)
+            else if (value.Match(member))
             {
                 value = member;
             }

@@ -17,19 +17,19 @@ internal static class MaterialSlotJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == category.Name)
+            else if (category.Match(member))
             {
                 category = member;
             }
-            else if (member.Name == binding.Name)
+            else if (binding.Match(member))
             {
                 binding = member;
             }
-            else if (member.Name == count.Name)
+            else if (count.Match(member))
             {
                 count = member;
             }

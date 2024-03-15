@@ -40,23 +40,23 @@ internal static class AttributeAdjustmentJson
             {
                 overrides = member.Value.GetInt32();
             }
-            else if (member.Name == text.Name)
+            else if (text.Match(member))
             {
                 text = member;
             }
-            else if (member.Name == icon.Name)
+            else if (icon.Match(member))
             {
                 icon = member;
             }
-            else if (member.Name == adjustment.Name)
+            else if (adjustment.Match(member))
             {
                 adjustment = member;
             }
-            else if (member.Name == target.Name)
+            else if (target.Match(member))
             {
                 target = member;
             }
-            else if (member.Name == hitCount.Name)
+            else if (hitCount.Match(member))
             {
                 hitCount = member;
             }

@@ -27,23 +27,23 @@ internal static class TreasuryDepositJson
                     );
                 }
             }
-            else if (member.Name == id.Name)
+            else if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == time.Name)
+            else if (time.Match(member))
             {
                 time = member;
             }
-            else if (member.Name == user.Name)
+            else if (user.Match(member))
             {
                 user = member;
             }
-            else if (member.Name == itemId.Name)
+            else if (itemId.Match(member))
             {
                 itemId = member;
             }
-            else if (member.Name == count.Name)
+            else if (count.Match(member))
             {
                 count = member;
             }

@@ -16,15 +16,15 @@ internal static class AttributeCombinationJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == name.Name)
+            else if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == attributes.Name)
+            else if (attributes.Match(member))
             {
                 attributes = member;
             }

@@ -15,11 +15,11 @@ internal static class ObjectiveJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == active.Name)
+            if (active.Match(member))
             {
                 active = member;
             }
-            else if (member.Name == complete.Name)
+            else if (complete.Match(member))
             {
                 complete = member;
             }

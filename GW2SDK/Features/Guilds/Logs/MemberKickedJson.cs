@@ -26,19 +26,19 @@ internal static class MemberKickedJson
                     );
                 }
             }
-            else if (member.Name == id.Name)
+            else if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == time.Name)
+            else if (time.Match(member))
             {
                 time = member;
             }
-            else if (member.Name == user.Name)
+            else if (user.Match(member))
             {
                 user = member;
             }
-            else if (member.Name == kickedBy.Name)
+            else if (kickedBy.Match(member))
             {
                 kickedBy = member;
             }

@@ -41,27 +41,27 @@ internal static class BuffJson
             {
                 overrides = member.Value.GetInt32();
             }
-            else if (member.Name == text.Name)
+            else if (text.Match(member))
             {
                 text = member;
             }
-            else if (member.Name == icon.Name)
+            else if (icon.Match(member))
             {
                 icon = member;
             }
-            else if (member.Name == duration.Name)
+            else if (duration.Match(member))
             {
                 duration = member;
             }
-            else if (member.Name == status.Name)
+            else if (status.Match(member))
             {
                 status = member;
             }
-            else if (member.Name == description.Name)
+            else if (description.Match(member))
             {
                 description = member;
             }
-            else if (member.Name == applyCount.Name)
+            else if (applyCount.Match(member))
             {
                 applyCount = member;
             }

@@ -15,11 +15,11 @@ internal static class QuagganJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == url.Name)
+            else if (url.Match(member))
             {
                 url = member;
             }

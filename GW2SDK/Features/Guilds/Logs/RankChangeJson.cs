@@ -28,27 +28,27 @@ internal static class RankChangeJson
                     );
                 }
             }
-            else if (member.Name == id.Name)
+            else if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == time.Name)
+            else if (time.Match(member))
             {
                 time = member;
             }
-            else if (member.Name == user.Name)
+            else if (user.Match(member))
             {
                 user = member;
             }
-            else if (member.Name == changedBy.Name)
+            else if (changedBy.Match(member))
             {
                 changedBy = member;
             }
-            else if (member.Name == oldRank.Name)
+            else if (oldRank.Match(member))
             {
                 oldRank = member;
             }
-            else if (member.Name == newRank.Name)
+            else if (newRank.Match(member))
             {
                 newRank = member;
             }

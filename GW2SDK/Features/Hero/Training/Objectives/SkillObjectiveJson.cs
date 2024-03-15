@@ -23,11 +23,11 @@ internal static class SkillObjectiveJson
                     );
                 }
             }
-            else if (member.Name == cost.Name)
+            else if (cost.Match(member))
             {
                 cost = member;
             }
-            else if (member.Name == skillId.Name)
+            else if (skillId.Match(member))
             {
                 skillId = member;
             }

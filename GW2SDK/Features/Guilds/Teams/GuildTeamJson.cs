@@ -21,35 +21,35 @@ internal static class GuildTeamJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == members.Name)
+            else if (members.Match(member))
             {
                 members = member;
             }
-            else if (member.Name == name.Name)
+            else if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == state.Name)
+            else if (state.Match(member))
             {
                 state = member;
             }
-            else if (member.Name == aggregate.Name)
+            else if (aggregate.Match(member))
             {
                 aggregate = member;
             }
-            else if (member.Name == ladders.Name)
+            else if (ladders.Match(member))
             {
                 ladders = member;
             }
-            else if (member.Name == games.Name)
+            else if (games.Match(member))
             {
                 games = member;
             }
-            else if (member.Name == seasons.Name)
+            else if (seasons.Match(member))
             {
                 seasons = member;
             }

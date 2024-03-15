@@ -17,19 +17,19 @@ internal static class TrainingJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == category.Name)
+            else if (category.Match(member))
             {
                 category = member;
             }
-            else if (member.Name == name.Name)
+            else if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == track.Name)
+            else if (track.Match(member))
             {
                 track = member;
             }

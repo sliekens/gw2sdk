@@ -5,36 +5,38 @@ namespace GuildWars2.Json;
 
 internal readonly ref struct RequiredMember
 {
-    public readonly string Name;
+    private readonly string? name;
 
-    private readonly JsonElement value = default;
+    private readonly JsonProperty member;
 
     private RequiredMember(string name)
     {
-        Name = name;
+        this.name = name;
+    }
+    private RequiredMember(JsonProperty member)
+    {
+        this.member = member;
     }
 
-    private RequiredMember(string name, JsonElement value)
-    {
-        Name = name;
-        this.value = value;
-    }
+    public string Name => name ?? member.Name;
 
     public static implicit operator RequiredMember(string name) => new(name);
 
-    public static implicit operator RequiredMember(JsonProperty member) =>
-        new(member.Name, member.Value);
+    public static implicit operator RequiredMember(JsonProperty member) => new(member);
+
+    public bool Match(JsonProperty property) =>
+        member.Value.ValueKind == Undefined && property.NameEquals(name);
 
     public TValue Map<TValue>(Func<JsonElement, TValue> resultSelector)
     {
-        if (value.ValueKind == Undefined || value.ValueKind == Null)
+        if (member.Value.ValueKind == Undefined || member.Value.ValueKind == Null)
         {
             throw new InvalidOperationException($"Missing value for '{Name}'.");
         }
 
         try
         {
-            return resultSelector(value);
+            return resultSelector(member.Value);
         }
         catch (Exception reason)
         {
@@ -42,8 +44,8 @@ internal readonly ref struct RequiredMember
             {
                 Data =
                 {
-                    ["ValueKind"] = value.ValueKind.ToString(),
-                    ["Value"] = value.GetRawText()
+                    ["ValueKind"] = member.Value.ValueKind.ToString(),
+                    ["Value"] = member.Value.GetRawText()
                 }
             };
         }

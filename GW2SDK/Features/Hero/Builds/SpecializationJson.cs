@@ -24,47 +24,47 @@ internal static class SpecializationJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == name.Name)
+            else if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == profession.Name)
+            else if (profession.Match(member))
             {
                 profession = member;
             }
-            else if (member.Name == elite.Name)
+            else if (elite.Match(member))
             {
                 elite = member;
             }
-            else if (member.Name == minorTraits.Name)
+            else if (minorTraits.Match(member))
             {
                 minorTraits = member;
             }
-            else if (member.Name == majorTraits.Name)
+            else if (majorTraits.Match(member))
             {
                 majorTraits = member;
             }
-            else if (member.Name == weaponTrait.Name)
+            else if (weaponTrait.Match(member))
             {
                 weaponTrait = member;
             }
-            else if (member.Name == icon.Name)
+            else if (icon.Match(member))
             {
                 icon = member;
             }
-            else if (member.Name == background.Name)
+            else if (background.Match(member))
             {
                 background = member;
             }
-            else if (member.Name == professionIconBig.Name)
+            else if (professionIconBig.Match(member))
             {
                 professionIconBig = member;
             }
-            else if (member.Name == professionIcon.Name)
+            else if (professionIcon.Match(member))
             {
                 professionIcon = member;
             }

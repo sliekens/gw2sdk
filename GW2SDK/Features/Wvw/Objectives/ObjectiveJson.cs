@@ -25,47 +25,47 @@ internal static class ObjectiveJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == name.Name)
+            else if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == sectorId.Name)
+            else if (sectorId.Match(member))
             {
                 sectorId = member;
             }
-            else if (member.Name == type.Name)
+            else if (type.Match(member))
             {
                 type = member;
             }
-            else if (member.Name == mapType.Name)
+            else if (mapType.Match(member))
             {
                 mapType = member;
             }
-            else if (member.Name == mapId.Name)
+            else if (mapId.Match(member))
             {
                 mapId = member;
             }
-            else if (member.Name == upgradeId.Name)
+            else if (upgradeId.Match(member))
             {
                 upgradeId = member;
             }
-            else if (member.Name == coordinates.Name)
+            else if (coordinates.Match(member))
             {
                 coordinates = member;
             }
-            else if (member.Name == labelCoordinates.Name)
+            else if (labelCoordinates.Match(member))
             {
                 labelCoordinates = member;
             }
-            else if (member.Name == marker.Name)
+            else if (marker.Match(member))
             {
                 marker = member;
             }
-            else if (member.Name == chatLink.Name)
+            else if (chatLink.Match(member))
             {
                 chatLink = member;
             }

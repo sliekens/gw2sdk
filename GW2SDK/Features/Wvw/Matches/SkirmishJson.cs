@@ -16,15 +16,15 @@ internal static class SkirmishJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == scores.Name)
+            else if (scores.Match(member))
             {
                 scores = member;
             }
-            else if (member.Name == mapScores.Name)
+            else if (mapScores.Match(member))
             {
                 mapScores = member;
             }

@@ -18,31 +18,31 @@ internal static class MapJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == type.Name)
+            else if (type.Match(member))
             {
                 type = member;
             }
-            else if (member.Name == scores.Name)
+            else if (scores.Match(member))
             {
                 scores = member;
             }
-            else if (member.Name == bonuses.Name)
+            else if (bonuses.Match(member))
             {
                 bonuses = member;
             }
-            else if (member.Name == objectives.Name)
+            else if (objectives.Match(member))
             {
                 objectives = member;
             }
-            else if (member.Name == deaths.Name)
+            else if (deaths.Match(member))
             {
                 deaths = member;
             }
-            else if (member.Name == kills.Name)
+            else if (kills.Match(member))
             {
                 kills = member;
             }

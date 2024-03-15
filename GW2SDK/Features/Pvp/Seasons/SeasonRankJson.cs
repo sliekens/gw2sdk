@@ -19,27 +19,27 @@ internal static class SeasonRankJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == name.Name)
+            if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == description.Name)
+            else if (description.Match(member))
             {
                 description = member;
             }
-            else if (member.Name == icon.Name)
+            else if (icon.Match(member))
             {
                 icon = member;
             }
-            else if (member.Name == overlay.Name)
+            else if (overlay.Match(member))
             {
                 overlay = member;
             }
-            else if (member.Name == smallOverlay.Name)
+            else if (smallOverlay.Match(member))
             {
                 smallOverlay = member;
             }
-            else if (member.Name == tiers.Name)
+            else if (tiers.Match(member))
             {
                 tiers = member;
             }

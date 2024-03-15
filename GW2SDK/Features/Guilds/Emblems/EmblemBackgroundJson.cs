@@ -15,11 +15,11 @@ internal static class EmblemBackgroundJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == layers.Name)
+            else if (layers.Match(member))
             {
                 layers = member;
             }

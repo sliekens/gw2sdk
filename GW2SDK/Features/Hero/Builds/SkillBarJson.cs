@@ -16,15 +16,15 @@ internal static class SkillBarJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == heal.Name)
+            if (heal.Match(member))
             {
                 heal = member;
             }
-            else if (member.Name == utilities.Name)
+            else if (utilities.Match(member))
             {
                 utilities = member;
             }
-            else if (member.Name == elite.Name)
+            else if (elite.Match(member))
             {
                 elite = member;
             }

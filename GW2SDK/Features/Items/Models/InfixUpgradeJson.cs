@@ -18,11 +18,11 @@ internal static class InfixUpgradeJson
             RequiredMember modifier = "modifier";
             foreach (var member in entry.EnumerateObject())
             {
-                if (member.Name == attribute.Name)
+                if (attribute.Match(member))
                 {
                     attribute = member;
                 }
-                else if (member.Name == modifier.Name)
+                else if (modifier.Match(member))
                 {
                     modifier = member;
                 }

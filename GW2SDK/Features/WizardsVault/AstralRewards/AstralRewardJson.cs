@@ -18,23 +18,23 @@ internal static class AstralRewardJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == itemId.Name)
+            else if (itemId.Match(member))
             {
                 itemId = member;
             }
-            else if (member.Name == itemCount.Name)
+            else if (itemCount.Match(member))
             {
                 itemCount = member;
             }
-            else if (member.Name == type.Name)
+            else if (type.Match(member))
             {
                 type = member;
             }
-            else if (member.Name == cost.Name)
+            else if (cost.Match(member))
             {
                 cost = member;
             }

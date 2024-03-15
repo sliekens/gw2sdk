@@ -18,23 +18,23 @@ internal static class ResultsJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == wins.Name)
+            if (wins.Match(member))
             {
                 wins = member;
             }
-            else if (member.Name == losses.Name)
+            else if (losses.Match(member))
             {
                 losses = member;
             }
-            else if (member.Name == desertions.Name)
+            else if (desertions.Match(member))
             {
                 desertions = member;
             }
-            else if (member.Name == byes.Name)
+            else if (byes.Match(member))
             {
                 byes = member;
             }
-            else if (member.Name == forfeits.Name)
+            else if (forfeits.Match(member))
             {
                 forfeits = member;
             }

@@ -22,7 +22,7 @@ internal static class AchievementMiniatureBitJson
                     );
                 }
             }
-            else if (member.Name == id.Name)
+            else if (id.Match(member))
             {
                 id = member;
             }

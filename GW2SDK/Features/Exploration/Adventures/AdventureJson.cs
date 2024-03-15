@@ -16,19 +16,19 @@ internal static class AdventureJson
         RequiredMember description = "description";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == coordinates.Name)
+            if (coordinates.Match(member))
             {
                 coordinates = member;
             }
-            else if (member.Name == id.Name)
+            else if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == name.Name)
+            else if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == description.Name)
+            else if (description.Match(member))
             {
                 description = member;
             }

@@ -15,19 +15,19 @@ internal static class FloorJson
         RequiredMember id = "id";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == textureDimensions.Name)
+            if (textureDimensions.Match(member))
             {
                 textureDimensions = member;
             }
-            else if (member.Name == clampedView.Name)
+            else if (clampedView.Match(member))
             {
                 clampedView = member;
             }
-            else if (member.Name == regions.Name)
+            else if (regions.Match(member))
             {
                 regions = member;
             }
-            else if (member.Name == id.Name)
+            else if (id.Match(member))
             {
                 id = member;
             }

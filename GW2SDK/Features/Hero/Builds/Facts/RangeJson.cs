@@ -38,15 +38,15 @@ internal static class RangeJson
             {
                 overrides = member.Value.GetInt32();
             }
-            else if (member.Name == text.Name)
+            else if (text.Match(member))
             {
                 text = member;
             }
-            else if (member.Name == icon.Name)
+            else if (icon.Match(member))
             {
                 icon = member;
             }
-            else if (member.Name == range.Name)
+            else if (range.Match(member))
             {
                 range = member;
             }

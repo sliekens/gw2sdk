@@ -27,19 +27,19 @@ internal static class ProfessionSkillSummaryJson
                     );
                 }
             }
-            else if (member.Name == id.Name)
+            else if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == slot.Name)
+            else if (slot.Match(member))
             {
                 slot = member;
             }
-            else if (member.Name == source.Name)
+            else if (source.Match(member))
             {
                 source = member;
             }
-            else if (member.Name == attunement.Name)
+            else if (attunement.Match(member))
             {
                 attunement = member;
             }

@@ -17,15 +17,15 @@ internal static class AttributeJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == attribute.Name)
+            if (attribute.Match(member))
             {
                 attribute = member;
             }
-            else if (member.Name == multiplier.Name)
+            else if (multiplier.Match(member))
             {
                 multiplier = member;
             }
-            else if (member.Name == value.Name)
+            else if (value.Match(member))
             {
                 value = member;
             }

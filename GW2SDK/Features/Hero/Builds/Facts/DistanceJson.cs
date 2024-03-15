@@ -38,15 +38,15 @@ internal static class DistanceJson
             {
                 overrides = member.Value.GetInt32();
             }
-            else if (member.Name == text.Name)
+            else if (text.Match(member))
             {
                 text = member;
             }
-            else if (member.Name == icon.Name)
+            else if (icon.Match(member))
             {
                 icon = member;
             }
-            else if (member.Name == distance.Name)
+            else if (distance.Match(member))
             {
                 distance = member;
             }

@@ -24,47 +24,47 @@ internal static class ProfessionJson
         RequiredMember skillsByPalette = "skills_by_palette";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == name.Name)
+            else if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == code.Name)
+            else if (code.Match(member))
             {
                 code = member;
             }
-            else if (member.Name == icon.Name)
+            else if (icon.Match(member))
             {
                 icon = member;
             }
-            else if (member.Name == iconBig.Name)
+            else if (iconBig.Match(member))
             {
                 iconBig = member;
             }
-            else if (member.Name == specializations.Name)
+            else if (specializations.Match(member))
             {
                 specializations = member;
             }
-            else if (member.Name == weapons.Name)
+            else if (weapons.Match(member))
             {
                 weapons = member;
             }
-            else if (member.Name == flags.Name)
+            else if (flags.Match(member))
             {
                 flags = member;
             }
-            else if (member.Name == skills.Name)
+            else if (skills.Match(member))
             {
                 skills = member;
             }
-            else if (member.Name == training.Name)
+            else if (training.Match(member))
             {
                 training = member;
             }
-            else if (member.Name == skillsByPalette.Name)
+            else if (skillsByPalette.Match(member))
             {
                 skillsByPalette = member;
             }

@@ -18,23 +18,23 @@ internal static class MatchOverviewJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == worlds.Name)
+            else if (worlds.Match(member))
             {
                 worlds = member;
             }
-            else if (member.Name == allWorlds.Name)
+            else if (allWorlds.Match(member))
             {
                 allWorlds = member;
             }
-            else if (member.Name == startTime.Name)
+            else if (startTime.Match(member))
             {
                 startTime = member;
             }
-            else if (member.Name == endTime.Name)
+            else if (endTime.Match(member))
             {
                 endTime = member;
             }

@@ -14,11 +14,11 @@ internal static class InfusionSlotJson
         NullableMember itemId = "item_id";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == flags.Name)
+            if (flags.Match(member))
             {
                 flags = member;
             }
-            else if (member.Name == itemId.Name)
+            else if (itemId.Match(member))
             {
                 itemId = member;
             }

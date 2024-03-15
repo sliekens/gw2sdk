@@ -19,27 +19,27 @@ internal static class FinisherJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == unlockDetails.Name)
+            else if (unlockDetails.Match(member))
             {
                 unlockDetails = member;
             }
-            else if (member.Name == unlockItems.Name)
+            else if (unlockItems.Match(member))
             {
                 unlockItems = member;
             }
-            else if (member.Name == order.Name)
+            else if (order.Match(member))
             {
                 order = member;
             }
-            else if (member.Name == icon.Name)
+            else if (icon.Match(member))
             {
                 icon = member;
             }
-            else if (member.Name == name.Name)
+            else if (name.Match(member))
             {
                 name = member;
             }

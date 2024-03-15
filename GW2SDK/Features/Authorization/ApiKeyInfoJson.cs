@@ -24,15 +24,15 @@ internal static class ApiKeyInfoJson
                     );
                 }
             }
-            else if (member.Name == id.Name)
+            else if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == name.Name)
+            else if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == permissions.Name)
+            else if (permissions.Match(member))
             {
                 permissions = member;
             }

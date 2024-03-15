@@ -17,11 +17,11 @@ internal static class EquipmentTemplateJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == tab.Name)
+            if (tab.Match(member))
             {
                 tab = member;
             }
-            else if (member.Name == name.Name)
+            else if (name.Match(member))
             {
                 name = member;
             }
@@ -32,11 +32,11 @@ internal static class EquipmentTemplateJson
 
                 // Otherwise you have to update two objects when the active tab changes and you can't do that atomically
             }
-            else if (member.Name == equipment.Name)
+            else if (equipment.Match(member))
             {
                 equipment = member;
             }
-            else if (member.Name == pvpEquipment.Name)
+            else if (pvpEquipment.Match(member))
             {
                 pvpEquipment = member;
             }

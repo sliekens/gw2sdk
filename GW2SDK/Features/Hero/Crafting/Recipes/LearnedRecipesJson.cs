@@ -14,7 +14,7 @@ internal static class LearnedRecipesJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == recipes.Name)
+            if (recipes.Match(member))
             {
                 recipes = member;
             }
@@ -24,6 +24,6 @@ internal static class LearnedRecipesJson
             }
         }
 
-        return [..recipes.Map(values => values.GetList(value => value.GetInt32()))];
+        return [.. recipes.Map(values => values.GetList(value => value.GetInt32()))];
     }
 }

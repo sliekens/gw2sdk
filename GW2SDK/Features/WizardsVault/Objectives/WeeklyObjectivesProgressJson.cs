@@ -19,27 +19,27 @@ internal static class WeeklyObjectivesProgressJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == metaProgressCurrent.Name)
+            if (metaProgressCurrent.Match(member))
             {
                 metaProgressCurrent = member;
             }
-            else if (member.Name == metaProgressComplete.Name)
+            else if (metaProgressComplete.Match(member))
             {
                 metaProgressComplete = member;
             }
-            else if (member.Name == metaRewardItemId.Name)
+            else if (metaRewardItemId.Match(member))
             {
                 metaRewardItemId = member;
             }
-            else if (member.Name == metaRewardAstral.Name)
+            else if (metaRewardAstral.Match(member))
             {
                 metaRewardAstral = member;
             }
-            else if (member.Name == metaRewardClaimed.Name)
+            else if (metaRewardClaimed.Match(member))
             {
                 metaRewardClaimed = member;
             }
-            else if (member.Name == objectives.Name)
+            else if (objectives.Match(member))
             {
                 objectives = member;
             }

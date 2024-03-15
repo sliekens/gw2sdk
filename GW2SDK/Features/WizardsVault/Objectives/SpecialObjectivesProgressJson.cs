@@ -14,7 +14,7 @@ internal static class SpecialObjectivesProgressJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == objectives.Name)
+            if (objectives.Match(member))
             {
                 objectives = member;
             }

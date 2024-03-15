@@ -23,51 +23,51 @@ internal static class GuildJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == level.Name)
+            if (level.Match(member))
             {
                 level = member;
             }
-            else if (member.Name == motd.Name)
+            else if (motd.Match(member))
             {
                 motd = member;
             }
-            else if (member.Name == influence.Name)
+            else if (influence.Match(member))
             {
                 influence = member;
             }
-            else if (member.Name == aetherium.Name)
+            else if (aetherium.Match(member))
             {
                 aetherium = member;
             }
-            else if (member.Name == resonance.Name)
+            else if (resonance.Match(member))
             {
                 resonance = member;
             }
-            else if (member.Name == favor.Name)
+            else if (favor.Match(member))
             {
                 favor = member;
             }
-            else if (member.Name == memberCount.Name)
+            else if (memberCount.Match(member))
             {
                 memberCount = member;
             }
-            else if (member.Name == memberCapacity.Name)
+            else if (memberCapacity.Match(member))
             {
                 memberCapacity = member;
             }
-            else if (member.Name == id.Name)
+            else if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == name.Name)
+            else if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == tag.Name)
+            else if (tag.Match(member))
             {
                 tag = member;
             }
-            else if (member.Name == emblem.Name)
+            else if (emblem.Match(member))
             {
                 emblem = member;
             }

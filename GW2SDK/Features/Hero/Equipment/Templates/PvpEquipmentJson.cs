@@ -16,15 +16,15 @@ internal static class PvpEquipmentJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == amulet.Name)
+            if (amulet.Match(member))
             {
                 amulet = member;
             }
-            else if (member.Name == rune.Name)
+            else if (rune.Match(member))
             {
                 rune = member;
             }
-            else if (member.Name == sigils.Name)
+            else if (sigils.Match(member))
             {
                 sigils = member;
             }

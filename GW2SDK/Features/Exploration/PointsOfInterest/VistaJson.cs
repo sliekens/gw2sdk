@@ -23,23 +23,23 @@ internal static class VistaJson
                     );
                 }
             }
-            else if (member.Name == name.Name)
+            else if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == floor.Name)
+            else if (floor.Match(member))
             {
                 floor = member;
             }
-            else if (member.Name == coordinates.Name)
+            else if (coordinates.Match(member))
             {
                 coordinates = member;
             }
-            else if (member.Name == id.Name)
+            else if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == chatLink.Name)
+            else if (chatLink.Match(member))
             {
                 chatLink = member;
             }

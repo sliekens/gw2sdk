@@ -15,23 +15,23 @@ internal static class OrderJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == itemId.Name)
+            else if (itemId.Match(member))
             {
                 itemId = member;
             }
-            else if (member.Name == price.Name)
+            else if (price.Match(member))
             {
                 price = member;
             }
-            else if (member.Name == quantity.Name)
+            else if (quantity.Match(member))
             {
                 quantity = member;
             }
-            else if (member.Name == created.Name)
+            else if (created.Match(member))
             {
                 created = member;
             }

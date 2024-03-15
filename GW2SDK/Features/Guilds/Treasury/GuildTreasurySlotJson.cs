@@ -16,15 +16,15 @@ internal static class GuildTreasurySlotJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == itemId.Name)
+            if (itemId.Match(member))
             {
                 itemId = member;
             }
-            else if (member.Name == count.Name)
+            else if (count.Match(member))
             {
                 count = member;
             }
-            else if (member.Name == countNeededForUpgrade.Name)
+            else if (countNeededForUpgrade.Match(member))
             {
                 countNeededForUpgrade = member;
             }

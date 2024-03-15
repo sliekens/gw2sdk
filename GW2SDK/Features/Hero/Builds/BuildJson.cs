@@ -18,35 +18,35 @@ internal static class BuildJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == name.Name)
+            if (name.Match(member))
             {
                 name = member;
             }
-            else if (member.Name == profession.Name)
+            else if (profession.Match(member))
             {
                 profession = member;
             }
-            else if (member.Name == specializations.Name)
+            else if (specializations.Match(member))
             {
                 specializations = member;
             }
-            else if (member.Name == skills.Name)
+            else if (skills.Match(member))
             {
                 skills = member;
             }
-            else if (member.Name == aquaticSkills.Name)
+            else if (aquaticSkills.Match(member))
             {
                 aquaticSkills = member;
             }
-            else if (member.Name == pets.Name)
+            else if (pets.Match(member))
             {
                 pets = member;
             }
-            else if (member.Name == legends.Name)
+            else if (legends.Match(member))
             {
                 legends = member;
             }
-            else if (member.Name == aquaticLegends.Name)
+            else if (aquaticLegends.Match(member))
             {
                 aquaticLegends = member;
             }

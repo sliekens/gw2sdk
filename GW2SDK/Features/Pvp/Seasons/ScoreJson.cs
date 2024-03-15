@@ -12,11 +12,11 @@ internal static class ScoreJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == id.Name)
+            if (id.Match(member))
             {
                 id = member;
             }
-            else if (member.Name == score.Name)
+            else if (score.Match(member))
             {
                 score = member;
             }

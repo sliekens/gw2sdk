@@ -22,7 +22,7 @@ internal static class CoinsRewardJson
                     );
                 }
             }
-            else if (member.Name == coins.Name)
+            else if (coins.Match(member))
             {
                 coins = member;
             }
