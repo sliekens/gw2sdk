@@ -45,10 +45,6 @@ internal static class GuildDecorationRecipeJson
             {
                 minRating = member;
             }
-            else if (member.Name == minRating.Name)
-            {
-                minRating = member;
-            }
             else if (member.Name == timeToCraft.Name)
             {
                 timeToCraft = member;

@@ -43,10 +43,6 @@ internal static class ShortbowRecipeJson
             {
                 minRating = member;
             }
-            else if (member.Name == minRating.Name)
-            {
-                minRating = member;
-            }
             else if (member.Name == timeToCraft.Name)
             {
                 timeToCraft = member;
