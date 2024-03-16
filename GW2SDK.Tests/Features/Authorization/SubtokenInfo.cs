@@ -56,7 +56,8 @@ public class SubtokenInfo
 
         Assert.True(subtokenPermissions.SetEquals(subtoken.Permissions));
 
-		Assert.InRange(subtoken.IssuedAt, notBefore, context.Date);
+		// Allow 5 seconds clock skew
+        Assert.InRange(subtoken.IssuedAt, notBefore.AddSeconds(-5), context.Date);
 
         Assert.Equal(expiresAt, subtoken.ExpiresAt);
 
