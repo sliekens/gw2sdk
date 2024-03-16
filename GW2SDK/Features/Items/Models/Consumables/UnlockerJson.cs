@@ -31,7 +31,7 @@ internal static class UnlockerJson
             case "Dye":
                 return json.GetDyeUnlocker(missingMemberBehavior);
             case "GearLoadoutTab":
-                return json.GetGearLoadoutTabUnlocker(missingMemberBehavior);
+                return json.GetEquipmentTemplateExpansion(missingMemberBehavior);
             case "GliderSkin":
                 return json.GetGliderSkinUnlocker(missingMemberBehavior);
             case "JadeBotSkin":
