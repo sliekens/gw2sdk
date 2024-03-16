@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Hero.Equipment.JadeBots;
+﻿using GuildWars2.Chat;
+
+namespace GuildWars2.Hero.Equipment.JadeBots;
 
 /// <summary>Information about a jade bot skin.</summary>
 [PublicAPI]
@@ -16,4 +18,8 @@ public sealed record JadeBotSkin
 
     /// <summary>The ID of the item which grants this jade bot skin when consumed.</summary>
     public required int UnlockItemId { get; init; }
+
+    /// <summary>Gets a chat link object for this jade bot skin (unlock item).</summary>
+    /// <returns>The chat link as an object.</returns>
+    public ItemLink GetChatLink() => new() { ItemId = UnlockItemId };
 }
