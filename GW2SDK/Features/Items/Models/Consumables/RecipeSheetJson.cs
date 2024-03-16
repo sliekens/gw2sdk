@@ -3,9 +3,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-internal static class CraftingRecipeUnlockerJson
+internal static class RecipeSheetJson
 {
-    public static CraftingRecipeUnlocker GetCraftingRecipeUnlocker(
+    public static RecipeSheet GetRecipeSheet(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -122,7 +122,7 @@ internal static class CraftingRecipeUnlockerJson
 
         var (races, professions, bodyTypes) =
             restrictions.Map(value => value.GetRestrictions(missingMemberBehavior));
-        return new CraftingRecipeUnlocker
+        return new RecipeSheet
         {
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),

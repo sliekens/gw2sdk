@@ -1,7 +1,7 @@
 ﻿namespace GuildWars2.Items;
 
 [PublicAPI]
-public sealed record CraftingRecipeUnlocker : Unlocker
+public sealed record RecipeSheet : Unlocker
 {
     public required int RecipeId { get; init; }
 

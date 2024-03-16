@@ -27,7 +27,7 @@ internal static class UnlockerJson
             case "Content":
                 return json.GetContentUnlocker(missingMemberBehavior);
             case "CraftingRecipe":
-                return json.GetCraftingRecipeUnlocker(missingMemberBehavior);
+                return json.GetRecipeSheet(missingMemberBehavior);
             case "Dye":
                 return json.GetDyeUnlocker(missingMemberBehavior);
             case "GearLoadoutTab":
