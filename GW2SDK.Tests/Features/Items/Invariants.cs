@@ -171,6 +171,7 @@ internal static class Invariants
                         break;
                     case RecipeSheet recipe:
                         Assert.True(recipe.Id > 0);
+                        Assert.NotNull(recipe.ExtraRecipeIds);
                         var link = recipe.GetRecipeChatLink();
                         Assert.Equal(recipe.RecipeId, link.RecipeId);
                         break;

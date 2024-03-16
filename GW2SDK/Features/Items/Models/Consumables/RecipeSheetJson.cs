@@ -144,6 +144,7 @@ internal static class RecipeSheetJson
             IconHref = icon.Map(value => value.GetString()),
             RecipeId = recipeId.Map(value => value.GetInt32()),
             ExtraRecipeIds = extraRecipeIds.Map(values => values.GetList(value => value.GetInt32()))
+                ?? Empty.ListOfInt32
         };
     }
 }
