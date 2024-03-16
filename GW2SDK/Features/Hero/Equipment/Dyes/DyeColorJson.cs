@@ -3,9 +3,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Dyes;
 
-internal static class DyeJson
+internal static class DyeColorJson
 {
-    public static Dye GetDye(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static DyeColor GetDyeColor(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -67,7 +67,7 @@ internal static class DyeJson
             categories.Map(value => value.GetCategories(missingMemberBehavior));
 
         // the first element is the hue, second is material, third is color set
-        return new Dye
+        return new DyeColor
         {
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),

@@ -35,7 +35,7 @@ foreach (var dye in (await gw2.Hero.Equipment.Dyes.GetColors()).Value)
 // Helper method to print a row of colors
 void PrintColor(string name, Color cloth, Color leather, Color metal)
 {
-    app.Services.GetRequiredService<ILogger<Dye>>()
+    app.Services.GetRequiredService<ILogger<DyeColor>>()
         .LogInformation(
             "{name,-20} {Cloth,-25} {Leather,-25} {Metal,-25}",
             name,

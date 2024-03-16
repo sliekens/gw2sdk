@@ -124,7 +124,9 @@ internal static class EquipmentItemJson
                 tabs.Map(values => values.GetList(value => value.GetInt32())) ?? Empty.ListOfInt32,
             DyeColorIds =
                 dyes.Map(
-                    values => values.GetList(value => value.GetNullableInt32() ?? Dye.DyeRemoverId)
+                    values => values.GetList(
+                        value => value.GetNullableInt32() ?? DyeColor.DyeRemoverId
+                    )
                 )
                 ?? Empty.ListOfInt32
         };

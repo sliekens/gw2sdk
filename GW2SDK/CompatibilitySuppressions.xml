@@ -10,6 +10,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Hero.Equipment.Dyes.Dye</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:GuildWars2.Hero.Races.RaceName</Target>
     <Left>lib/net462/GW2SDK.dll</Left>
     <Right>lib/net462/GW2SDK.dll</Right>
@@ -171,6 +178,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Hero.Equipment.Dyes.Dye</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:GuildWars2.Hero.Races.RaceName</Target>
     <Left>lib/net6.0/GW2SDK.dll</Left>
     <Right>lib/net6.0/GW2SDK.dll</Right>
@@ -332,6 +346,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Hero.Equipment.Dyes.Dye</Target>
+    <Left>lib/net8.0/GW2SDK.dll</Left>
+    <Right>lib/net8.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:GuildWars2.Hero.Races.RaceName</Target>
     <Left>lib/net8.0/GW2SDK.dll</Left>
     <Right>lib/net8.0/GW2SDK.dll</Right>
@@ -487,6 +508,13 @@
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:GuildWars2.Hero.Accounts.Gender</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Hero.Equipment.Dyes.Dye</Target>
     <Left>lib/netstandard2.0/GW2SDK.dll</Left>
     <Right>lib/netstandard2.0/GW2SDK.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -746,6 +774,34 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Crafting.Recipes.RecipesClient.GetRecipesBulk(System.Collections.Generic.IReadOnlyCollection{System.Int32},GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Dyes.DyesClient.GetColorById(System.Int32,GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Threading.CancellationToken)</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Dyes.DyesClient.GetColors(GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Threading.CancellationToken)</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Dyes.DyesClient.GetColorsByIds(System.Collections.Generic.IReadOnlyCollection{System.Int32},GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Threading.CancellationToken)</Target>
+    <Left>lib/net462/GW2SDK.dll</Left>
+    <Right>lib/net462/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Dyes.DyesClient.GetColorsByPage(System.Int32,System.Nullable{System.Int32},GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Threading.CancellationToken)</Target>
     <Left>lib/net462/GW2SDK.dll</Left>
     <Right>lib/net462/GW2SDK.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -1424,6 +1480,34 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Dyes.DyesClient.GetColorById(System.Int32,GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Threading.CancellationToken)</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Dyes.DyesClient.GetColors(GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Threading.CancellationToken)</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Dyes.DyesClient.GetColorsByIds(System.Collections.Generic.IReadOnlyCollection{System.Int32},GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Threading.CancellationToken)</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Dyes.DyesClient.GetColorsByPage(System.Int32,System.Nullable{System.Int32},GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Threading.CancellationToken)</Target>
+    <Left>lib/net6.0/GW2SDK.dll</Left>
+    <Right>lib/net6.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Equipment.Mounts.Mount.get_DefaultSkin</Target>
     <Left>lib/net6.0/GW2SDK.dll</Left>
     <Right>lib/net6.0/GW2SDK.dll</Right>
@@ -2096,6 +2180,34 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Dyes.DyesClient.GetColorById(System.Int32,GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Threading.CancellationToken)</Target>
+    <Left>lib/net8.0/GW2SDK.dll</Left>
+    <Right>lib/net8.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Dyes.DyesClient.GetColors(GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Threading.CancellationToken)</Target>
+    <Left>lib/net8.0/GW2SDK.dll</Left>
+    <Right>lib/net8.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Dyes.DyesClient.GetColorsByIds(System.Collections.Generic.IReadOnlyCollection{System.Int32},GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Threading.CancellationToken)</Target>
+    <Left>lib/net8.0/GW2SDK.dll</Left>
+    <Right>lib/net8.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Dyes.DyesClient.GetColorsByPage(System.Int32,System.Nullable{System.Int32},GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Threading.CancellationToken)</Target>
+    <Left>lib/net8.0/GW2SDK.dll</Left>
+    <Right>lib/net8.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Equipment.Mounts.Mount.get_DefaultSkin</Target>
     <Left>lib/net8.0/GW2SDK.dll</Left>
     <Right>lib/net8.0/GW2SDK.dll</Right>
@@ -2762,6 +2874,34 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Crafting.Recipes.RecipesClient.GetRecipesBulk(System.Collections.Generic.IReadOnlyCollection{System.Int32},GuildWars2.MissingMemberBehavior,System.Int32,System.Int32,System.IProgress{GuildWars2.ResultContext},System.Threading.CancellationToken)</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Dyes.DyesClient.GetColorById(System.Int32,GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Threading.CancellationToken)</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Dyes.DyesClient.GetColors(GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Threading.CancellationToken)</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Dyes.DyesClient.GetColorsByIds(System.Collections.Generic.IReadOnlyCollection{System.Int32},GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Threading.CancellationToken)</Target>
+    <Left>lib/netstandard2.0/GW2SDK.dll</Left>
+    <Right>lib/netstandard2.0/GW2SDK.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Dyes.DyesClient.GetColorsByPage(System.Int32,System.Nullable{System.Int32},GuildWars2.Language,GuildWars2.MissingMemberBehavior,System.Threading.CancellationToken)</Target>
     <Left>lib/netstandard2.0/GW2SDK.dll</Left>
     <Right>lib/netstandard2.0/GW2SDK.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>

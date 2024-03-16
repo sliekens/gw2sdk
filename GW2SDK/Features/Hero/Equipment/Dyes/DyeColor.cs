@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Equipment.Dyes;
 /// <summary>Information about a dye color.</summary>
 [PublicAPI]
 [DataTransferObject]
-public sealed record Dye
+public sealed record DyeColor
 {
     /// <summary>The color ID of Dye Remover.</summary>
     public const int DyeRemoverId = 1;

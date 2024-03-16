@@ -36,12 +36,12 @@ public sealed class DyesClient
 
     #region v2/colors
 
-    /// <summary>Retrieves all colors.</summary>
+    /// <summary>Retrieves all dye colors.</summary>
     /// <param name="language">The language to use for descriptions.</param>
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Dye> Value, MessageContext Context)> GetColors(
+    public Task<(HashSet<DyeColor> Value, MessageContext Context)> GetColors(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -55,7 +55,7 @@ public sealed class DyesClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    /// <summary>Retrieves the IDs of all colors.</summary>
+    /// <summary>Retrieves the IDs of all dye colors.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<int> Value, MessageContext Context)> GetColorsIndex(
@@ -66,13 +66,13 @@ public sealed class DyesClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    /// <summary>Retrieves a color by its ID.</summary>
-    /// <param name="colorId">The color ID.</param>
+    /// <summary>Retrieves a dye color by its ID.</summary>
+    /// <param name="colorId">The dye color ID.</param>
     /// <param name="language">The language to use for descriptions.</param>
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(Dye Value, MessageContext Context)> GetColorById(
+    public Task<(DyeColor Value, MessageContext Context)> GetColorById(
         int colorId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -87,13 +87,13 @@ public sealed class DyesClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    /// <summary>Retrieves colors by their IDs.</summary>
-    /// <param name="colorIds">The color IDs.</param>
+    /// <summary>Retrieves dye colors by their IDs.</summary>
+    /// <param name="colorIds">The dye color IDs.</param>
     /// <param name="language">The language to use for descriptions.</param>
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Dye> Value, MessageContext Context)> GetColorsByIds(
+    public Task<(HashSet<DyeColor> Value, MessageContext Context)> GetColorsByIds(
         IReadOnlyCollection<int> colorIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -108,14 +108,14 @@ public sealed class DyesClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    /// <summary>Retrieves a page of colors.</summary>
+    /// <summary>Retrieves a page of dye colors.</summary>
     /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
     /// <param name="pageSize">How many entries to take.</param>
     /// <param name="language">The language to use for descriptions.</param>
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Dye> Value, MessageContext Context)> GetColorsByPage(
+    public Task<(HashSet<DyeColor> Value, MessageContext Context)> GetColorsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

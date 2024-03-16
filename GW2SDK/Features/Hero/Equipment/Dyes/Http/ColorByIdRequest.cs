@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Hero.Equipment.Dyes.Http;
 
-internal sealed class ColorByIdRequest(int colorId) : IHttpRequest<Dye>
+internal sealed class ColorByIdRequest(int colorId) : IHttpRequest<DyeColor>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/colors")
     {
@@ -15,7 +15,7 @@ internal sealed class ColorByIdRequest(int colorId) : IHttpRequest<Dye>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<(Dye Value, MessageContext Context)> SendAsync(
+    public async Task<(DyeColor Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -38,7 +38,7 @@ internal sealed class ColorByIdRequest(int colorId) : IHttpRequest<Dye>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetDye(MissingMemberBehavior);
+        var value = json.RootElement.GetDyeColor(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }
 }

@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Dyes.Http;
 
-internal sealed class ColorsRequest : IHttpRequest<HashSet<Dye>>
+internal sealed class ColorsRequest : IHttpRequest<HashSet<DyeColor>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/colors")
     {
@@ -19,7 +19,7 @@ internal sealed class ColorsRequest : IHttpRequest<HashSet<Dye>>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<(HashSet<Dye> Value, MessageContext Context)> SendAsync(
+    public async Task<(HashSet<DyeColor> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -34,7 +34,7 @@ internal sealed class ColorsRequest : IHttpRequest<HashSet<Dye>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetDye(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetDyeColor(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }
 }
