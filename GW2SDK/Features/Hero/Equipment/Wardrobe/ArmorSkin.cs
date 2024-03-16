@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 /// <summary>Information about an armor skin.</summary>
 [PublicAPI]
 [Inheritable]
-public record ArmorSkin : Skin
+public record ArmorSkin : EquipmentSkin
 {
     /// <summary>The weight class which indicates which professions can wear this armor skin.</summary>
     public required WeightClass WeightClass { get; init; }

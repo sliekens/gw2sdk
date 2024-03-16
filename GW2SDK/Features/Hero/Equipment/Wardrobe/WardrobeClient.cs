@@ -54,7 +54,7 @@ public sealed class WardrobeClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(Skin Value, MessageContext Context)> GetSkinById(
+    public Task<(EquipmentSkin Value, MessageContext Context)> GetSkinById(
         int skinId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -76,7 +76,7 @@ public sealed class WardrobeClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Skin> Value, MessageContext Context)> GetSkinsByIds(
+    public Task<(HashSet<EquipmentSkin> Value, MessageContext Context)> GetSkinsByIds(
         IReadOnlyCollection<int> skinIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -98,7 +98,7 @@ public sealed class WardrobeClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Skin> Value, MessageContext Context)> GetSkinsByPage(
+    public Task<(HashSet<EquipmentSkin> Value, MessageContext Context)> GetSkinsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -125,7 +125,7 @@ public sealed class WardrobeClient
     /// <param name="progress">A progress report provider.</param>
     /// <param name="cancellationToken">A token to cancel the request(s).</param>
     /// <returns>A task that represents the API request(s).</returns>
-    public IAsyncEnumerable<(Skin Value, MessageContext Context)> GetSkinsBulk(
+    public IAsyncEnumerable<(EquipmentSkin Value, MessageContext Context)> GetSkinsBulk(
         IReadOnlyCollection<int> skinIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -145,7 +145,7 @@ public sealed class WardrobeClient
         );
 
         // ReSharper disable once VariableHidesOuterVariable (intended, believe it or not)
-        async Task<IReadOnlyCollection<(Skin, MessageContext)>> GetChunk(
+        async Task<IReadOnlyCollection<(EquipmentSkin, MessageContext)>> GetChunk(
             IReadOnlyCollection<int> chunk,
             CancellationToken cancellationToken
         )
@@ -169,7 +169,7 @@ public sealed class WardrobeClient
     /// <param name="progress">A progress report provider.</param>
     /// <param name="cancellationToken">A token to cancel the request(s).</param>
     /// <returns>A task that represents the API request(s).</returns>
-    public async IAsyncEnumerable<(Skin Value, MessageContext Context)> GetSkinsBulk(
+    public async IAsyncEnumerable<(EquipmentSkin Value, MessageContext Context)> GetSkinsBulk(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,

@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Wardrobe.Http;
 
-internal sealed class SkinsByPageRequest(int pageIndex) : IHttpRequest<HashSet<Skin>>
+internal sealed class SkinsByPageRequest(int pageIndex) : IHttpRequest<HashSet<EquipmentSkin>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/skins")
     {
@@ -18,7 +18,7 @@ internal sealed class SkinsByPageRequest(int pageIndex) : IHttpRequest<HashSet<S
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<(HashSet<Skin> Value, MessageContext Context)> SendAsync(
+    public async Task<(HashSet<EquipmentSkin> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -44,7 +44,7 @@ internal sealed class SkinsByPageRequest(int pageIndex) : IHttpRequest<HashSet<S
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetSkin(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetEquipmentSkin(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }
 }

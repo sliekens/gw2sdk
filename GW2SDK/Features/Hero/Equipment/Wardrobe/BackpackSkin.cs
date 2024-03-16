@@ -2,4 +2,4 @@
 
 /// <summary>Information about a backpack skin.</summary>
 [PublicAPI]
-public sealed record BackpackSkin : Skin;
+public sealed record BackpackSkin : EquipmentSkin;

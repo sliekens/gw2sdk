@@ -4,9 +4,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Wardrobe;
 
-internal static class SkinJson
+internal static class EquipmentSkinJson
 {
-    public static Skin GetSkin(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static EquipmentSkin GetEquipmentSkin(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         switch (json.GetProperty("type").GetString())
         {
@@ -72,7 +72,7 @@ internal static class SkinJson
             }
         }
 
-        return new Skin
+        return new EquipmentSkin
         {
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),

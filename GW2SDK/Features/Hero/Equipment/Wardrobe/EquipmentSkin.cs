@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 [PublicAPI]
 [Inheritable]
 [DataTransferObject]
-public record Skin
+public record EquipmentSkin
 {
     /// <summary>The skin ID.</summary>
     public required int Id { get; init; }

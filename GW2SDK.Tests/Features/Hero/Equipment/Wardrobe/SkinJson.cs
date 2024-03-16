@@ -13,7 +13,7 @@ public class SkinJson(SkinFixture fixture) : IClassFixture<SkinFixture>
             {
                 using var document = JsonDocument.Parse(json);
 
-                var actual = document.RootElement.GetSkin(MissingMemberBehavior.Error);
+                var actual = document.RootElement.GetEquipmentSkin(MissingMemberBehavior.Error);
 
                 actual.Has_id();
                 actual.Has_races();

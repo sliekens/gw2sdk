@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Hero.Equipment.Wardrobe.Http;
 
-internal sealed class SkinByIdRequest(int skinId) : IHttpRequest<Skin>
+internal sealed class SkinByIdRequest(int skinId) : IHttpRequest<EquipmentSkin>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/skins")
     {
@@ -15,7 +15,7 @@ internal sealed class SkinByIdRequest(int skinId) : IHttpRequest<Skin>
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<(Skin Value, MessageContext Context)> SendAsync(
+    public async Task<(EquipmentSkin Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -38,7 +38,7 @@ internal sealed class SkinByIdRequest(int skinId) : IHttpRequest<Skin>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSkin(MissingMemberBehavior);
+        var value = json.RootElement.GetEquipmentSkin(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }
 }

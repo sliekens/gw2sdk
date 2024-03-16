@@ -3,4 +3,4 @@
 /// <summary>Information about a gathering tool skin.</summary>
 [PublicAPI]
 [Inheritable]
-public record GatheringToolSkin : Skin;
+public record GatheringToolSkin : EquipmentSkin;
