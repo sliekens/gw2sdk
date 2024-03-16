@@ -19,7 +19,8 @@ public class SubtokenInfo
             subtokenPermissions.Add(permission);
         }
 
-        var expiresAt = DateTimeOffset.UtcNow.AddDays(1);
+        var creationTime = DateTimeOffset.UtcNow;
+        var expiresAt = creationTime.AddDays(1);
 
         List<string> urls =
         [
@@ -54,7 +55,7 @@ public class SubtokenInfo
 
         Assert.True(subtokenPermissions.SetEquals(subtoken.Permissions));
 
-        AssertEx.Equal(context.Date, subtoken.IssuedAt, TimeSpan.FromSeconds(1));
+        Assert.InRange(subtoken.IssuedAt, creationTime, context.Date);
 
         // Truncate milliseconds: API uses 1 second precision
         var expectedExpiry = DateTimeOffset.FromUnixTimeSeconds(expiresAt.ToUnixTimeSeconds());
