@@ -3,9 +3,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-internal static class DyeUnlockerJson
+internal static class DyeJson
 {
-    public static DyeUnlocker GetDyeUnlocker(
+    public static Dye GetDye(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -117,7 +117,7 @@ internal static class DyeUnlockerJson
 
         var (races, professions, bodyTypes) =
             restrictions.Map(value => value.GetRestrictions(missingMemberBehavior));
-        return new DyeUnlocker
+        return new Dye
         {
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),

@@ -1,7 +1,7 @@
 ﻿namespace GuildWars2.Items;
 
 [PublicAPI]
-public sealed record DyeUnlocker : Unlocker
+public sealed record Dye : Unlocker
 {
     public required int ColorId { get; init; }
 }

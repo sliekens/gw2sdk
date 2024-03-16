@@ -29,7 +29,7 @@ internal static class UnlockerJson
             case "CraftingRecipe":
                 return json.GetRecipeSheet(missingMemberBehavior);
             case "Dye":
-                return json.GetDyeUnlocker(missingMemberBehavior);
+                return json.GetDye(missingMemberBehavior);
             case "GearLoadoutTab":
                 return json.GetEquipmentTemplateExpansion(missingMemberBehavior);
             case "GliderSkin":
