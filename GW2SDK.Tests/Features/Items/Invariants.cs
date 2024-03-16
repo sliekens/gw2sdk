@@ -172,8 +172,16 @@ internal static class Invariants
                     case RecipeSheet recipe:
                         Assert.True(recipe.Id > 0);
                         Assert.NotNull(recipe.ExtraRecipeIds);
-                        var link = recipe.GetRecipeChatLink();
-                        Assert.Equal(recipe.RecipeId, link.RecipeId);
+                        var recipeLink = recipe.GetRecipeChatLink();
+                        Assert.Equal(recipe.RecipeId, recipeLink.RecipeId);
+                        foreach (var (extraRecipeId, extraRecipeLink) in recipe.ExtraRecipeIds.Zip(
+                                recipe.GetExtraRecipeChatLinks(),
+                                (extraRecipeId, extraRecipeLink) => (extraRecipeId, extraRecipeLink)
+                            ))
+                        {
+                            Assert.Equal(extraRecipeId, extraRecipeLink.RecipeId);
+                        }
+
                         break;
                 }
 
@@ -226,6 +234,7 @@ internal static class Invariants
                         Assert.IsType<Sigil>(upgradeComponent);
                     }
                 }
+
                 break;
         }
     }
