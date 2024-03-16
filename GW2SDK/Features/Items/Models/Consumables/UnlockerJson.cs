@@ -17,7 +17,7 @@ internal static class UnlockerJson
             case "BankTab":
                 return json.GetBankTabExpansion(missingMemberBehavior);
             case "BuildLibrarySlot":
-                return json.GetBuildLibrarySlotUnlocker(missingMemberBehavior);
+                return json.GetBuildStorageExpansion(missingMemberBehavior);
             case "BuildLoadoutTab":
                 return json.GetBuildLoadoutTabUnlocker(missingMemberBehavior);
             case "Champion":

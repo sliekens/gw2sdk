@@ -3,9 +3,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-internal static class BuildLibrarySlotUnlockerJson
+internal static class BuildStorageExpansionJson
 {
-    public static BuildLibrarySlotUnlocker GetBuildLibrarySlotUnlocker(
+    public static BuildStorageExpansion GetBuildStorageExpansion(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -112,7 +112,7 @@ internal static class BuildLibrarySlotUnlockerJson
 
         var (races, professions, bodyTypes) =
             restrictions.Map(value => value.GetRestrictions(missingMemberBehavior));
-        return new BuildLibrarySlotUnlocker
+        return new BuildStorageExpansion
         {
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),
