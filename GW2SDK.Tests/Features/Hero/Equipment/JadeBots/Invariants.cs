@@ -8,8 +8,18 @@ internal static class Invariants
 
     internal static void Has_name(this JadeBotSkin actual) => Assert.NotEmpty(actual.Name);
 
-    internal static void Has_description(this JadeBotSkin actual) =>
-        Assert.NotEmpty(actual.Description);
+    internal static void Has_description(this JadeBotSkin actual)
+    {
+        // Missing descriptionfor Roundtail Dragon
+        if (actual.Id == 6)
+        {
+            Assert.Empty(actual.Description);
+        }
+        else
+        {
+            Assert.NotEmpty(actual.Description);
+        }
+    }
 
     internal static void Has_unlock_item(this JadeBotSkin actual) =>
         Assert.True(actual.UnlockItemId > 0);
