@@ -169,6 +169,11 @@ internal static class Invariants
                     case Transmutation transmutation:
                         transmutation.Skins_are_not_empty();
                         break;
+                    case RecipeSheet recipe:
+                        Assert.True(recipe.Id > 0);
+                        var link = recipe.GetRecipeChatLink();
+                        Assert.Equal(recipe.RecipeId, link.RecipeId);
+                        break;
                 }
 
                 break;
