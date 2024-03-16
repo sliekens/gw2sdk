@@ -3,9 +3,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-internal static class BuildLoadoutTabUnlockerJson
+internal static class BuildTemplateExpansionJson
 {
-    public static BuildLoadoutTabUnlocker GetBuildLoadoutTabUnlocker(
+    public static BuildTemplateExpansion GetBuildTemplateExpansion(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -112,7 +112,7 @@ internal static class BuildLoadoutTabUnlockerJson
 
         var (races, professions, bodyTypes) =
             restrictions.Map(value => value.GetRestrictions(missingMemberBehavior));
-        return new BuildLoadoutTabUnlocker
+        return new BuildTemplateExpansion
         {
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),
