@@ -13,7 +13,7 @@ internal static class UnlockerJson
         switch (json.GetProperty("details").GetProperty("unlock_type").GetString())
         {
             case "BagSlot":
-                return json.GetBagSlotUnlocker(missingMemberBehavior);
+                return json.GetBagSlotExpansion(missingMemberBehavior);
             case "BankTab":
                 return json.GetBankTabUnlocker(missingMemberBehavior);
             case "BuildLibrarySlot":

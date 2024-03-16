@@ -3,9 +3,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-internal static class BagSlotUnlockerJson
+internal static class BagSlotExpansionJson
 {
-    public static BagSlotUnlocker GetBagSlotUnlocker(
+    public static BagSlotExpansion GetBagSlotExpansion(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -112,7 +112,7 @@ internal static class BagSlotUnlockerJson
 
         var (races, professions, bodyTypes) =
             restrictions.Map(value => value.GetRestrictions(missingMemberBehavior));
-        return new BagSlotUnlocker
+        return new BagSlotExpansion
         {
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),
