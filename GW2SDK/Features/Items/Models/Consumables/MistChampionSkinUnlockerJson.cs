@@ -3,9 +3,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-internal static class ChampionUnlockerJson
+internal static class MistChampionSkinUnlockerJson
 {
-    public static ChampionUnlocker GetChampionUnlocker(
+    public static MistChampionSkinUnlocker GetMistChampionSkinUnlocker(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -112,7 +112,7 @@ internal static class ChampionUnlockerJson
 
         var (races, professions, bodyTypes) =
             restrictions.Map(value => value.GetRestrictions(missingMemberBehavior));
-        return new ChampionUnlocker
+        return new MistChampionSkinUnlocker
         {
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),

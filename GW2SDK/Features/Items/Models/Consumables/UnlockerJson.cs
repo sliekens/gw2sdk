@@ -21,7 +21,7 @@ internal static class UnlockerJson
             case "BuildLoadoutTab":
                 return json.GetBuildTemplateExpansion(missingMemberBehavior);
             case "Champion":
-                return json.GetChampionUnlocker(missingMemberBehavior);
+                return json.GetMistChampionSkinUnlocker(missingMemberBehavior);
             case "CollectibleCapacity":
                 return json.GetStorageExpander(missingMemberBehavior);
             case "Content":
