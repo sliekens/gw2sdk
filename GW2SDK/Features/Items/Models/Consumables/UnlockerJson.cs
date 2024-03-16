@@ -23,7 +23,7 @@ internal static class UnlockerJson
             case "Champion":
                 return json.GetChampionUnlocker(missingMemberBehavior);
             case "CollectibleCapacity":
-                return json.GetCollectibleCapacityUnlocker(missingMemberBehavior);
+                return json.GetStorageExpander(missingMemberBehavior);
             case "Content":
                 return json.GetContentUnlocker(missingMemberBehavior);
             case "CraftingRecipe":

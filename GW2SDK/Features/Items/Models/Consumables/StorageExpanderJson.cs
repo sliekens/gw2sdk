@@ -3,9 +3,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-internal static class CollectibleCapacityUnlockerJson
+internal static class StorageExpanderJson
 {
-    public static CollectibleCapacityUnlocker GetCollectibleCapacityUnlocker(
+    public static StorageExpander GetStorageExpander(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -112,7 +112,7 @@ internal static class CollectibleCapacityUnlockerJson
 
         var (races, professions, bodyTypes) =
             restrictions.Map(value => value.GetRestrictions(missingMemberBehavior));
-        return new CollectibleCapacityUnlocker
+        return new StorageExpander
         {
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),
