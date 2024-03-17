@@ -2,6 +2,12 @@
   "version": 2,
   "dependencies": {
     "net8.0": {
+      "Microsoft.Build.CopyOnWrite": {
+        "type": "Direct",
+        "requested": "[1.0.302, )",
+        "resolved": "1.0.302",
+        "contentHash": "eFkCskXKAJ/QbWwYW7me5xOiQSnteodJhK+slsiJ8odb1BPNvEU7H2/2GGTMKzQ/GOl5hs3tmhJum9HjxPTE/Q=="
+      },
       "Microsoft.NETFramework.ReferenceAssemblies.net461": {
         "type": "Transitive",
         "resolved": "1.0.3",

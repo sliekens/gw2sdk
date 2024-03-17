@@ -1,7 +1,13 @@
 {
-  "version": 1,
+  "version": 2,
   "dependencies": {
     ".NETFramework,Version=v4.6.2": {
+      "Microsoft.Build.CopyOnWrite": {
+        "type": "Direct",
+        "requested": "[1.0.302, )",
+        "resolved": "1.0.302",
+        "contentHash": "eFkCskXKAJ/QbWwYW7me5xOiQSnteodJhK+slsiJ8odb1BPNvEU7H2/2GGTMKzQ/GOl5hs3tmhJum9HjxPTE/Q=="
+      },
       "Microsoft.NET.ILLink.Tasks": {
         "type": "Direct",
         "requested": "[8.0.2, )",
@@ -113,6 +119,12 @@
       }
     },
     ".NETStandard,Version=v2.0": {
+      "Microsoft.Build.CopyOnWrite": {
+        "type": "Direct",
+        "requested": "[1.0.302, )",
+        "resolved": "1.0.302",
+        "contentHash": "eFkCskXKAJ/QbWwYW7me5xOiQSnteodJhK+slsiJ8odb1BPNvEU7H2/2GGTMKzQ/GOl5hs3tmhJum9HjxPTE/Q=="
+      },
       "Microsoft.NET.ILLink.Tasks": {
         "type": "Direct",
         "requested": "[8.0.2, )",
@@ -226,6 +238,12 @@
       }
     },
     "net6.0": {
+      "Microsoft.Build.CopyOnWrite": {
+        "type": "Direct",
+        "requested": "[1.0.302, )",
+        "resolved": "1.0.302",
+        "contentHash": "eFkCskXKAJ/QbWwYW7me5xOiQSnteodJhK+slsiJ8odb1BPNvEU7H2/2GGTMKzQ/GOl5hs3tmhJum9HjxPTE/Q=="
+      },
       "Microsoft.NET.ILLink.Analyzers": {
         "type": "Direct",
         "requested": "[7.0.100-1.23211.1, )",
@@ -289,6 +307,12 @@
       }
     },
     "net8.0": {
+      "Microsoft.Build.CopyOnWrite": {
+        "type": "Direct",
+        "requested": "[1.0.302, )",
+        "resolved": "1.0.302",
+        "contentHash": "eFkCskXKAJ/QbWwYW7me5xOiQSnteodJhK+slsiJ8odb1BPNvEU7H2/2GGTMKzQ/GOl5hs3tmhJum9HjxPTE/Q=="
+      },
       "Microsoft.NET.ILLink.Tasks": {
         "type": "Direct",
         "requested": "[8.0.2, )",

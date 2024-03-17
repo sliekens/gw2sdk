@@ -8,6 +8,12 @@
         "resolved": "6.0.1",
         "contentHash": "q/8r0muHlF7TbhMUTBAk43KteZYG2ECV96pbzkToQwgjp3BvbS766svUcO6va+cohWOkigeBWmHs0Vu5vQnESA=="
       },
+      "Microsoft.Build.CopyOnWrite": {
+        "type": "Direct",
+        "requested": "[1.0.302, )",
+        "resolved": "1.0.302",
+        "contentHash": "eFkCskXKAJ/QbWwYW7me5xOiQSnteodJhK+slsiJ8odb1BPNvEU7H2/2GGTMKzQ/GOl5hs3tmhJum9HjxPTE/Q=="
+      },
       "Microsoft.Extensions.Configuration.EnvironmentVariables": {
         "type": "Direct",
         "requested": "[8.0.0, )",
@@ -449,6 +455,12 @@
         "requested": "[6.0.1, )",
         "resolved": "6.0.1",
         "contentHash": "q/8r0muHlF7TbhMUTBAk43KteZYG2ECV96pbzkToQwgjp3BvbS766svUcO6va+cohWOkigeBWmHs0Vu5vQnESA=="
+      },
+      "Microsoft.Build.CopyOnWrite": {
+        "type": "Direct",
+        "requested": "[1.0.302, )",
+        "resolved": "1.0.302",
+        "contentHash": "eFkCskXKAJ/QbWwYW7me5xOiQSnteodJhK+slsiJ8odb1BPNvEU7H2/2GGTMKzQ/GOl5hs3tmhJum9HjxPTE/Q=="
       },
       "Microsoft.Extensions.Configuration.EnvironmentVariables": {
         "type": "Direct",
