@@ -1,13 +1,13 @@
 ﻿namespace GuildWars2.Chat;
 
-/// <summary>Represents an item slot chat link.</summary>
+/// <summary>Represents an item (stack) chat link.</summary>
 [PublicAPI]
 public sealed record ItemLink : Link
 {
     /// <summary>The item ID.</summary>
     public required int ItemId { get; init; }
 
-    /// <summary>The number of items in the slot.</summary>
+    /// <summary>The number of items in the stack.</summary>
     public int Count { get; init; } = 1;
 
     /// <summary>The skin ID of the item if the item is transmuted.</summary>

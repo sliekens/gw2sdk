@@ -1,6 +1,6 @@
 ﻿namespace GuildWars2.Chat;
 
-/// <summary>Represents a point of interest chat link.</summary>
+/// <summary>Represents a skill chat link.</summary>
 [PublicAPI]
 public sealed record SkillLink : Link
 {
