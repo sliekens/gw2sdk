@@ -3,9 +3,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-internal static class PickaxeJson
+internal static class MiningPickJson
 {
-    public static Pickaxe GetPickaxe(
+    public static MiningPick GetMiningPick(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -103,7 +103,7 @@ internal static class PickaxeJson
 
         var (races, professions, bodyTypes) =
             restrictions.Map(value => value.GetRestrictions(missingMemberBehavior));
-        return new Pickaxe
+        return new MiningPick
         {
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),

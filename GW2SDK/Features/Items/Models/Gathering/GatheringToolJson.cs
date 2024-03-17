@@ -21,7 +21,7 @@ internal static class GatheringToolJson
             case "Lure":
                 return json.GetLure(missingMemberBehavior);
             case "Mining":
-                return json.GetPickaxe(missingMemberBehavior);
+                return json.GetMiningPick(missingMemberBehavior);
         }
 
         RequiredMember name = "name";
