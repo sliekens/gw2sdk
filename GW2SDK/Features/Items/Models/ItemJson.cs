@@ -27,8 +27,6 @@ internal static class ItemJson
                 return json.GetGizmo(missingMemberBehavior);
             case "JadeTechModule":
                 return json.GetJadeTechModule(missingMemberBehavior);
-            case "Key":
-                return json.GetKey(missingMemberBehavior);
             case "MiniPet":
                 return json.GetMiniature(missingMemberBehavior);
             case "PowerCore":
@@ -39,7 +37,8 @@ internal static class ItemJson
                 return json.GetTool(missingMemberBehavior);
             case "Trinket":
                 return json.GetTrinket(missingMemberBehavior);
-            case "Trophy":
+            case "Trophy" or "Key":
+                // Key acts as a Trophy, and there is only one (Florid Bouquet), so treat it as a Trophy
                 return json.GetTrophy(missingMemberBehavior);
             case "UpgradeComponent":
                 return json.GetUpgradeComponent(missingMemberBehavior);

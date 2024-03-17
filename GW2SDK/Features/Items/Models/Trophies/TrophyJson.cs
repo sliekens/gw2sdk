@@ -25,7 +25,8 @@ internal static class TrophyJson
         {
             if (member.NameEquals("type"))
             {
-                if (!member.Value.ValueEquals("Trophy"))
+                // Key acts as a Trophy, and there is only one (Florid Bouquet), so treat it as a Trophy
+                if (!member.Value.ValueEquals("Trophy") && !member.Value.ValueEquals("Key"))
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
