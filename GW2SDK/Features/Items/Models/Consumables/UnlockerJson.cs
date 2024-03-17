@@ -43,7 +43,7 @@ internal static class UnlockerJson
             case "Outfit":
                 return json.GetOutfitUnlocker(missingMemberBehavior);
             case "SharedSlot":
-                return json.GetSharedSlotUnlocker(missingMemberBehavior);
+                return json.GetSharedInventorySlot(missingMemberBehavior);
         }
 
         RequiredMember name = "name";
