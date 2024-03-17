@@ -339,9 +339,4 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 
-# vuepress build output
-docs/.vuepress/dist/
-docs/.vuepress/.temp/
-docs/.vuepress/.cache/
-
 reports/*
