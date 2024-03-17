@@ -27,7 +27,7 @@ internal static class DyeSlotInfoJson
             {
                 @default = member;
             }
-            else if (member.Name == "overrides")
+            else if (member.NameEquals("overrides"))
             {
                 foreach (var @override in member.Value.EnumerateObject())
                 {

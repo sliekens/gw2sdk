@@ -24,7 +24,7 @@ internal static class MiniatureJson
         RequiredMember minipetId = "minipet_id";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == "type")
+            if (member.NameEquals("type"))
             {
                 if (!member.Value.ValueEquals("MiniPet"))
                 {
@@ -77,7 +77,7 @@ internal static class MiniatureJson
             {
                 icon = member;
             }
-            else if (member.Name == "details")
+            else if (member.NameEquals("details"))
             {
                 foreach (var detail in member.Value.EnumerateObject())
                 {

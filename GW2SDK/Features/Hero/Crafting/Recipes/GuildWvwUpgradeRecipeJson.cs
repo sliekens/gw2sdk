@@ -23,7 +23,7 @@ internal static class GuildWvwUpgradeRecipeJson
         RequiredMember chatLink = "chat_link";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == "type")
+            if (member.NameEquals("type"))
             {
                 if (!member.Value.ValueEquals("GuildConsumableWvw"))
                 {

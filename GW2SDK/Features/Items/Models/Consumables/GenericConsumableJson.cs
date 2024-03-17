@@ -31,7 +31,7 @@ internal static class GenericConsumableJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == "type")
+            if (member.NameEquals("type"))
             {
                 if (!member.Value.ValueEquals("Consumable"))
                 {
@@ -84,11 +84,11 @@ internal static class GenericConsumableJson
             {
                 icon = member;
             }
-            else if (member.Name == "details")
+            else if (member.NameEquals("details"))
             {
                 foreach (var detail in member.Value.EnumerateObject())
                 {
-                    if (detail.Name == "type")
+                    if (detail.NameEquals("type"))
                     {
                         if (!detail.Value.ValueEquals("Generic"))
                         {

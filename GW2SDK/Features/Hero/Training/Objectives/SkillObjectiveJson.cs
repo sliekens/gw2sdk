@@ -14,7 +14,7 @@ internal static class SkillObjectiveJson
         RequiredMember skillId = "skill_id";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == "type")
+            if (member.NameEquals("type"))
             {
                 if (!member.Value.ValueEquals("Skill"))
                 {

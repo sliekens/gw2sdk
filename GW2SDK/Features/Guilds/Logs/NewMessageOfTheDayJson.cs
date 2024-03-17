@@ -17,7 +17,7 @@ internal static class NewMessageOfTheDayJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == "type")
+            if (member.NameEquals("type"))
             {
                 if (!member.Value.ValueEquals("motd"))
                 {

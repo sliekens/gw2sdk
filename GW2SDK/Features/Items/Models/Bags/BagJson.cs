@@ -22,7 +22,7 @@ internal static class BagJson
         RequiredMember size = "size";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == "type")
+            if (member.NameEquals("type"))
             {
                 if (!member.Value.ValueEquals("Bag"))
                 {
@@ -75,7 +75,7 @@ internal static class BagJson
             {
                 icon = member;
             }
-            else if (member.Name == "details")
+            else if (member.NameEquals("details"))
             {
                 foreach (var detail in member.Value.EnumerateObject())
                 {

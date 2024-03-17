@@ -19,7 +19,7 @@ internal static class TowerJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == "type")
+            if (member.NameEquals("type"))
             {
                 if (!member.Value.ValueEquals("Tower"))
                 {

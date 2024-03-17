@@ -23,7 +23,7 @@ internal static class TokenInfoJson
         RequiredMember permissions = "permissions";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == "type")
+            if (member.NameEquals("type"))
             {
                 if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {

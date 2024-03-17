@@ -89,7 +89,7 @@ internal static class FactJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == "type")
+            if (member.NameEquals("type"))
             {
                 if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
@@ -98,11 +98,11 @@ internal static class FactJson
                     );
                 }
             }
-            else if (member.Name == "requires_trait")
+            else if (member.NameEquals("requires_trait"))
             {
                 requiresTrait = member.Value.GetInt32();
             }
-            else if (member.Name == "overrides")
+            else if (member.NameEquals("overrides"))
             {
                 overrides = member.Value.GetInt32();
             }

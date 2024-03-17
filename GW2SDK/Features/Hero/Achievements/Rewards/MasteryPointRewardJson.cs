@@ -15,7 +15,7 @@ internal static class MasteryPointRewardJson
         RequiredMember region = "region";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == "type")
+            if (member.NameEquals("type"))
             {
                 if (!member.Value.ValueEquals("Mastery"))
                 {

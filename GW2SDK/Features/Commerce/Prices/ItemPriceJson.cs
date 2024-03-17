@@ -27,7 +27,7 @@ internal static class ItemPriceJson
             {
                 whitelisted = member;
             }
-            else if (member.Name == "buys")
+            else if (member.NameEquals("buys"))
             {
                 foreach (var buy in member.Value.EnumerateObject())
                 {
@@ -45,7 +45,7 @@ internal static class ItemPriceJson
                     }
                 }
             }
-            else if (member.Name == "sells")
+            else if (member.NameEquals("sells"))
             {
                 foreach (var sell in member.Value.EnumerateObject())
                 {

@@ -25,7 +25,7 @@ internal static class EquipmentTemplateJson
             {
                 name = member;
             }
-            else if (member.Name == "is_active")
+            else if (member.NameEquals("is_active"))
             {
                 // Ignore this because you should only use ActiveEquipmentTab
                 // => player.EquipmentTabs.Single(tab => tab.Tab == player.ActiveEquipmentTab);

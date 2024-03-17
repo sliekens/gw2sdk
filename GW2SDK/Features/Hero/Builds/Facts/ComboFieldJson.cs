@@ -21,7 +21,7 @@ internal static class ComboFieldJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == "type")
+            if (member.NameEquals("type"))
             {
                 if (!member.Value.ValueEquals("ComboField"))
                 {
@@ -30,11 +30,11 @@ internal static class ComboFieldJson
                     );
                 }
             }
-            else if (member.Name == "requires_trait")
+            else if (member.NameEquals("requires_trait"))
             {
                 requiresTrait = member.Value.GetInt32();
             }
-            else if (member.Name == "overrides")
+            else if (member.NameEquals("overrides"))
             {
                 overrides = member.Value.GetInt32();
             }

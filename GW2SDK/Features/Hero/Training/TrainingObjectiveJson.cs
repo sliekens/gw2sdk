@@ -22,7 +22,7 @@ internal static class TrainingObjectiveJson
         RequiredMember cost = "cost";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == "type")
+            if (member.NameEquals("type"))
             {
                 if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {

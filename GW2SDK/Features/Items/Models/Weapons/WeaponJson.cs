@@ -87,7 +87,7 @@ internal static class WeaponJson
         NullableMember secondarySuffixItemId = "secondary_suffix_item_id";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == "type")
+            if (member.NameEquals("type"))
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
@@ -144,11 +144,11 @@ internal static class WeaponJson
             {
                 icon = member;
             }
-            else if (member.Name == "details")
+            else if (member.NameEquals("details"))
             {
                 foreach (var detail in member.Value.EnumerateObject())
                 {
-                    if (detail.Name == "type")
+                    if (detail.NameEquals("type"))
                     {
                         if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
@@ -185,7 +185,7 @@ internal static class WeaponJson
                     {
                         statChoices = detail;
                     }
-                    else if (detail.Name == "infix_upgrade")
+                    else if (detail.NameEquals("infix_upgrade"))
                     {
                         foreach (var infix in detail.Value.EnumerateObject())
                         {

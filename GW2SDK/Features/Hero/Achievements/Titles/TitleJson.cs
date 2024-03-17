@@ -32,7 +32,7 @@ internal static class TitleJson
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
-                if (member.Name == "achievement")
+                if (member.NameEquals("achievement"))
                 {
                     // Obsolete because some titles can be unlocked by more than one achievement
                     continue;

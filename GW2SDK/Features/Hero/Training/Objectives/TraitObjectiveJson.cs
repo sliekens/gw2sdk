@@ -14,7 +14,7 @@ internal static class TraitObjectiveJson
         RequiredMember traitId = "trait_id";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == "type")
+            if (member.NameEquals("type"))
             {
                 if (!member.Value.ValueEquals("Trait"))
                 {

@@ -24,7 +24,7 @@ internal static class GuildConsumableRecipeJson
         RequiredMember chatLink = "chat_link";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == "type")
+            if (member.NameEquals("type"))
             {
                 if (!member.Value.ValueEquals("GuildConsumable"))
                 {

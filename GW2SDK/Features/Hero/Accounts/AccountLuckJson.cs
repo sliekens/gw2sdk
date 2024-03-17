@@ -38,7 +38,7 @@ internal static class AccountLuckJson
         RequiredMember value = "value";
         foreach (var member in luckObj.EnumerateObject())
         {
-            if (member.Name == "id")
+            if (member.NameEquals("id"))
             {
                 if (!member.Value.ValueEquals("luck"))
                 {

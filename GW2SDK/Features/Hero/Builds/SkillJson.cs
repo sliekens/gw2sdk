@@ -55,7 +55,7 @@ internal static class SkillJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == "type")
+            if (member.NameEquals("type"))
             {
                 if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {

@@ -20,7 +20,7 @@ internal static class UnblockableJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == "type")
+            if (member.NameEquals("type"))
             {
                 if (!member.Value.ValueEquals("Unblockable"))
                 {
@@ -29,11 +29,11 @@ internal static class UnblockableJson
                     );
                 }
             }
-            else if (member.Name == "requires_trait")
+            else if (member.NameEquals("requires_trait"))
             {
                 requiresTrait = member.Value.GetInt32();
             }
-            else if (member.Name == "overrides")
+            else if (member.NameEquals("overrides"))
             {
                 overrides = member.Value.GetInt32();
             }
@@ -45,7 +45,7 @@ internal static class UnblockableJson
             {
                 icon = member;
             }
-            else if (member.Name == "value" && member.Value.GetBoolean())
+            else if (member.NameEquals("value") && member.Value.GetBoolean())
             {
                 // Always true, ignore
             }

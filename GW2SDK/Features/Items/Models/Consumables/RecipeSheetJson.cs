@@ -25,7 +25,7 @@ internal static class RecipeSheetJson
         OptionalMember extraRecipeIds = "extra_recipe_ids";
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == "type")
+            if (member.NameEquals("type"))
             {
                 if (!member.Value.ValueEquals("Consumable"))
                 {
@@ -78,11 +78,11 @@ internal static class RecipeSheetJson
             {
                 icon = member;
             }
-            else if (member.Name == "details")
+            else if (member.NameEquals("details"))
             {
                 foreach (var detail in member.Value.EnumerateObject())
                 {
-                    if (detail.Name == "type")
+                    if (detail.NameEquals("type"))
                     {
                         if (!detail.Value.ValueEquals("Unlock"))
                         {
@@ -91,7 +91,7 @@ internal static class RecipeSheetJson
                             );
                         }
                     }
-                    else if (detail.Name == "unlock_type")
+                    else if (detail.NameEquals("unlock_type"))
                     {
                         if (!detail.Value.ValueEquals("CraftingRecipe"))
                         {

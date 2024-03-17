@@ -26,7 +26,7 @@ internal static class PrefixedBuffJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == "type")
+            if (member.NameEquals("type"))
             {
                 if (!member.Value.ValueEquals("PrefixedBuff"))
                 {
@@ -35,11 +35,11 @@ internal static class PrefixedBuffJson
                     );
                 }
             }
-            else if (member.Name == "requires_trait")
+            else if (member.NameEquals("requires_trait"))
             {
                 requiresTrait = member.Value.GetInt32();
             }
-            else if (member.Name == "overrides")
+            else if (member.NameEquals("overrides"))
             {
                 overrides = member.Value.GetInt32();
             }
@@ -67,7 +67,7 @@ internal static class PrefixedBuffJson
             {
                 applyCount = member;
             }
-            else if (member.Name == "prefix")
+            else if (member.NameEquals("prefix"))
             {
                 foreach (var prefixMember in member.Value.EnumerateObject())
                 {

@@ -19,7 +19,7 @@ internal static class QueueJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == "type")
+            if (member.NameEquals("type"))
             {
                 if (!member.Value.ValueEquals("Queue"))
                 {

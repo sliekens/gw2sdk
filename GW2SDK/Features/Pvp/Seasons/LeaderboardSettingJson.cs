@@ -20,7 +20,7 @@ internal static class LeaderboardSettingJson
             {
                 name = member;
             }
-            else if (member.Name == "duration" && member.Value.ValueKind == JsonValueKind.Null)
+            else if (member.NameEquals("duration") && member.Value.ValueKind == JsonValueKind.Null)
             {
                 // Ignore, seems to be always null
             }

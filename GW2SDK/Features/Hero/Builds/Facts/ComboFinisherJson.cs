@@ -22,7 +22,7 @@ internal static class ComboFinisherJson
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.Name == "type")
+            if (member.NameEquals("type"))
             {
                 if (!member.Value.ValueEquals("ComboFinisher"))
                 {
@@ -31,15 +31,15 @@ internal static class ComboFinisherJson
                     );
                 }
             }
-            else if (member.Name == "chance" && IsDefaultInt32(member))
+            else if (member.NameEquals("chance") && IsDefaultInt32(member))
             {
                 // Ignore zero values, looks like unsanitized data
             }
-            else if (member.Name == "requires_trait")
+            else if (member.NameEquals("requires_trait"))
             {
                 requiresTrait = member.Value.GetInt32();
             }
-            else if (member.Name == "overrides")
+            else if (member.NameEquals("overrides"))
             {
                 overrides = member.Value.GetInt32();
             }
