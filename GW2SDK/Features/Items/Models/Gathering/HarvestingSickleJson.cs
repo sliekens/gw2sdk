@@ -3,9 +3,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-internal static class ForagingToolJson
+internal static class HarvestingSickleJson
 {
-    public static ForagingTool GetForagingTool(
+    public static HarvestingSickle GetHarvestingSickle(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -103,7 +103,7 @@ internal static class ForagingToolJson
 
         var (races, professions, bodyTypes) =
             restrictions.Map(value => value.GetRestrictions(missingMemberBehavior));
-        return new ForagingTool
+        return new HarvestingSickle
         {
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),

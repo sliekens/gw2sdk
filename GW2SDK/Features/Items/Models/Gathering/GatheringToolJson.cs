@@ -15,7 +15,7 @@ internal static class GatheringToolJson
             case "Bait":
                 return json.GetBait(missingMemberBehavior);
             case "Foraging":
-                return json.GetForagingTool(missingMemberBehavior);
+                return json.GetHarvestingSickle(missingMemberBehavior);
             case "Logging":
                 return json.GetLoggingTool(missingMemberBehavior);
             case "Lure":
