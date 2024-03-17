@@ -123,7 +123,6 @@ internal static class UnlimitedConsumableJson
             BodyTypes = bodyTypes,
             ChatLink = chatLink.Map(value => value.GetStringRequired()),
             IconHref = icon.Map(value => value.GetString()),
-            VendorIds = Empty.ListOfInt32,
             GuildUpgradeId = null
         };
     }

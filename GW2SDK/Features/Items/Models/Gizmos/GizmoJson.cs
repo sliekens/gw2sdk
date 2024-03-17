@@ -28,7 +28,6 @@ internal static class GizmoJson
         RequiredMember id = "id";
         RequiredMember chatLink = "chat_link";
         OptionalMember icon = "icon";
-        OptionalMember vendorIds = "vendor_ids";
         NullableMember guildUpgradeId = "guild_upgrade_id";
         foreach (var member in json.EnumerateObject())
         {
@@ -99,13 +98,16 @@ internal static class GizmoJson
                             );
                         }
                     }
-                    else if (vendorIds.Match(detail))
-                    {
-                        vendorIds = detail;
-                    }
                     else if (guildUpgradeId.Match(detail))
                     {
                         guildUpgradeId = detail;
+                    }
+                    else if (detail.NameEquals("vendor_ids"))
+                    {
+                        // Ignored since /v2/vendors is not active
+                        // and I noticed that the data is not consistent
+                        // some items that open a vendor panel are missing this field (e.g. Collector's Edition Sandstorm)
+                        // some items with multiple vendor tabs are missing vendor ids for one or more tabs (e.g. Ley-Energy Matter Converter)
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -141,7 +143,6 @@ internal static class GizmoJson
             BodyTypes = bodyTypes,
             ChatLink = chatLink.Map(value => value.GetStringRequired()),
             IconHref = icon.Map(value => value.GetString()),
-            VendorIds = vendorIds.Map(values => values.GetList(value => value.GetInt32())),
             GuildUpgradeId = guildUpgradeId.Map(value => value.GetInt32())
         };
     }
