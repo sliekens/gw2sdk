@@ -17,7 +17,7 @@ internal static class ContainerJson
             case "Immediate":
                 return json.GetImmediateContainer(missingMemberBehavior);
             case "OpenUI":
-                return json.GetOpenUiContainer(missingMemberBehavior);
+                return json.GetBlackLionChest(missingMemberBehavior);
         }
 
         RequiredMember name = "name";

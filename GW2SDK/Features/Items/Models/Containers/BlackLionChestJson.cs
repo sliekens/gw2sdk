@@ -3,9 +3,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-internal static class OpenUiContainerJson
+internal static class BlackLionChestJson
 {
-    public static OpenUiContainer GetOpenUiContainer(
+    public static BlackLionChest GetBlackLionChest(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -103,7 +103,7 @@ internal static class OpenUiContainerJson
 
         var (races, professions, bodyTypes) =
             restrictions.Map(value => value.GetRestrictions(missingMemberBehavior));
-        return new OpenUiContainer
+        return new BlackLionChest
         {
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),
