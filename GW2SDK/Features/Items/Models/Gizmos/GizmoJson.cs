@@ -10,7 +10,7 @@ internal static class GizmoJson
         switch (json.GetProperty("details").GetProperty("type").GetString())
         {
             case "ContainerKey":
-                return json.GetContainerKey(missingMemberBehavior);
+                return json.GetBlackLionChestKey(missingMemberBehavior);
             case "RentableContractNpc":
                 return json.GetRentableContractNpc(missingMemberBehavior);
             case "UnlimitedConsumable":
