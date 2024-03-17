@@ -3,9 +3,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-internal static class GliderSkinUnlockerJson
+internal static class GliderJson
 {
-    public static GliderSkinUnlocker GetGliderSkinUnlocker(
+    public static Glider GetGlider(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -112,7 +112,7 @@ internal static class GliderSkinUnlockerJson
 
         var (races, professions, bodyTypes) =
             restrictions.Map(value => value.GetRestrictions(missingMemberBehavior));
-        return new GliderSkinUnlocker
+        return new Glider
         {
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),
