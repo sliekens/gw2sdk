@@ -1,8 +1,9 @@
-﻿using GuildWars2.Items;
+﻿using GuildWars2.Chat;
+using GuildWars2.Items;
 
 namespace GuildWars2.Hero.Equipment.Wardrobe;
 
-/// <summary>Information about an item skin.</summary>
+/// <summary>Information about an equipment skin.</summary>
 [PublicAPI]
 [Inheritable]
 [DataTransferObject]
@@ -28,4 +29,8 @@ public record EquipmentSkin
 
     /// <summary>The URL of the skin icon.</summary>
     public required string? IconHref { get; init; }
+
+    /// <summary>Gets a chat link object for this skin.</summary>
+    /// <returns>The chat link as an object.</returns>
+    public SkinLink GetChatLink() => new() { SkinId = Id };
 }

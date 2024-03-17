@@ -14,9 +14,11 @@ public class SkinJson(SkinFixture fixture) : IClassFixture<SkinFixture>
                 using var document = JsonDocument.Parse(json);
 
                 var actual = document.RootElement.GetEquipmentSkin(MissingMemberBehavior.Error);
+                var link = actual.GetChatLink();
 
                 actual.Has_id();
                 actual.Has_races();
+                Assert.Equal(actual.Id, link.SkinId);
             }
         );
 }
