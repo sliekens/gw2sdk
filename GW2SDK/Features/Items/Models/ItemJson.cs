@@ -34,7 +34,7 @@ internal static class ItemJson
             case "Relic":
                 return json.GetRelic(missingMemberBehavior);
             case "Tool":
-                return json.GetTool(missingMemberBehavior);
+                return json.GetSalvageTool(missingMemberBehavior);
             case "Trinket":
                 return json.GetTrinket(missingMemberBehavior);
             case "Trophy" or "Key":
