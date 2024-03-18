@@ -24,7 +24,7 @@ public sealed record Backpack : Item
     /// <summary>The effective stats of the item.</summary>
     public required IDictionary<AttributeName, int> Attributes { get; init; }
 
-    /// <summary>The ID of the upgrade component in the upgrade slot, if any.</summary>
+    /// <summary>The effect which is applied to the player when the item is equipped.</summary>
     public required Buff? Buff { get; init; }
 
     /// <summary>The ID of the upgrade component in the upgrade slot, if any.</summary>
