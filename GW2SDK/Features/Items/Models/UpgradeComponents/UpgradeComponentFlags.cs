@@ -2,7 +2,7 @@
 
 /// <summary>Modifiers for upgrade components.</summary>
 [PublicAPI]
-public sealed record UpgradeComponentFlags
+public sealed record UpgradeComponentFlags : Flags
 {
     public required bool HeavyArmor { get; init; }
 
@@ -49,7 +49,4 @@ public sealed record UpgradeComponentFlags
     public required bool Trinket { get; init; }
 
     public required bool Warhorn { get; init; }
-
-    /// <summary>Other undocumented flags. If you find out what they mean, please open an issue or a pull request.</summary>
-    public required IReadOnlyCollection<string> Other { get; init; }
 }

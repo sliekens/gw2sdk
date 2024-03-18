@@ -2,7 +2,7 @@
 
 /// <summary>Modifiers for achievements.</summary>
 [PublicAPI]
-public sealed record AchievementFlags
+public sealed record AchievementFlags : Flags
 {
     /// <summary>The achievement is a meta-achievements like End of Dragons: Act 1 Mastery. This flag inherits the
     /// <see cref="MoveToTop" /> flag.</summary>
@@ -38,7 +38,4 @@ public sealed record AchievementFlags
 
     /// <summary>The achievement progress is reset every week on Monday at 7:30am UTC.</summary>
     public required bool Weekly { get; init; }
-
-    /// <summary>Other undocumented flags. If you find out what they mean, please open an issue or a pull request.</summary>
-    public required IReadOnlyCollection<string> Other { get; init; }
 }

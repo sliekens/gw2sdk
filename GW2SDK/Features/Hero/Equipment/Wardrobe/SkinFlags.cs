@@ -2,7 +2,7 @@
 
 /// <summary>Modifiers for skins.</summary>
 [PublicAPI]
-public sealed record SkinFlags
+public sealed record SkinFlags : Flags
 {
     /// <summary>Whether the skin is hidden until it is unlocked.</summary>
     public required bool HideIfLocked { get; init; }
@@ -15,7 +15,4 @@ public sealed record SkinFlags
 
     /// <summary>Whether the skin can be found in the wardrobe panel.</summary>
     public required bool ShowInWardrobe { get; init; }
-
-    /// <summary>Other undocumented flags. If you find out what they mean, please open an issue or a pull request.</summary>
-    public required IReadOnlyCollection<string> Other { get; init; }
 }

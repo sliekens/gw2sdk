@@ -2,7 +2,7 @@
 
 /// <summary>Modifiers for items.</summary>
 [PublicAPI]
-public sealed record ItemFlags
+public sealed record ItemFlags : Flags
 {
     /// <summary>Whether the item becomes account bound when used.</summary>
     public required bool AccountBindOnUse { get; init; }
@@ -51,7 +51,4 @@ public sealed record ItemFlags
 
     /// <summary>Whether the item is unique, preventing the player from equipping more than one.</summary>
     public required bool Unique { get; init; }
-
-    /// <summary>Other undocumented flags. If you find out what they mean, please open an issue or a pull request.</summary>
-    public required IReadOnlyCollection<string> Other { get; init; }
 }

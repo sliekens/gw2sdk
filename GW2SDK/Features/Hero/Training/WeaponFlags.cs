@@ -2,7 +2,7 @@
 
 /// <summary>Modifiers for weapons.</summary>
 [PublicAPI]
-public sealed record WeaponFlags
+public sealed record WeaponFlags : Flags
 {
     /// <summary>Whether the weapon can be equipped in mainhand.</summary>
     public required bool Mainhand { get; init; }
@@ -15,7 +15,4 @@ public sealed record WeaponFlags
 
     /// <summary>Whether the weapon is used underwater.</summary>
     public required bool Aquatic { get; init; }
-
-    /// <summary>Other undocumented flags. If you find out what they mean, please open an issue or a pull request.</summary>
-    public required IReadOnlyCollection<string> Other { get; init; }
 }
