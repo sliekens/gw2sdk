@@ -4,4 +4,6 @@
 public sealed record SalvageTool : Item
 {
     public required int Charges { get; init; }
+
+    public bool Unbreakable => Charges == 1 && Flags.DeleteWarning;
 }
