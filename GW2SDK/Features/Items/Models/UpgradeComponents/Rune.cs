@@ -1,5 +1,6 @@
 ﻿namespace GuildWars2.Items;
 
+/// <summary>Information about a rune, which is used to upgrade armor.</summary>
 [PublicAPI]
 public sealed record Rune : UpgradeComponent
 {

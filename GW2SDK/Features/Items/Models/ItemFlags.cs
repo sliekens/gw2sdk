@@ -13,6 +13,7 @@ public sealed record ItemFlags : Flags
     /// <summary>Whether the item is attuned. Attuned equipment gains one extra infusion slot.</summary>
     public required bool Attuned { get; init; }
 
+    /// <summary>Whether the item can be bulk consumed (e.g. by right-clicking the item stack and selecting "Use All").</summary>
     public required bool BulkConsume { get; init; }
 
     /// <summary>Whether attempting to delete the item shows a confirmation dialog.</summary>
@@ -32,7 +33,7 @@ public sealed record ItemFlags : Flags
     /// <summary>Whether the item can be salvaged.</summary>
     public required bool NoSalvage { get; init; }
 
-    /// <summary>Whether the item can be sold to a merchant.</summary>
+    /// <summary>Whether the item is hidden from sell-to-vendor lists.</summary>
     public required bool NoSell { get; init; }
 
     /// <summary>Whether the item can be upgraded with an upgrade component.</summary>
@@ -47,6 +48,7 @@ public sealed record ItemFlags : Flags
     /// <summary>Whether the item is always soulbound.</summary>
     public required bool Soulbound { get; init; }
 
+    /// <summary>Whether the item is a tonic.</summary>
     public required bool Tonic { get; init; }
 
     /// <summary>Whether the item is unique, preventing the player from equipping more than one.</summary>
