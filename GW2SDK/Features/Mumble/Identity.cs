@@ -13,7 +13,9 @@ public sealed record Identity
     /// <summary>The current character's profession.</summary>
     public required ProfessionName Profession { get; init; }
 
-    /// <summary>The ID of the current character's (third) specialization slot.</summary>
+    /// <summary>The ID of the current character's Elite specialization slot.</summary>
+    /// <remarks>The third specialization slot is the Elite slot, which is available starting at level 71. Elite
+    /// specializations can only be used in this slot, but the slot itself can contain any specialization.</remarks>
     public required int SpecializationId { get; init; }
 
     /// <summary>The current character's race.</summary>
