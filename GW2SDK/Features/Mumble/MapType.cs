@@ -4,7 +4,6 @@ namespace GuildWars2.Mumble;
 
 /// <summary>The map types used in the MumbleLink API.</summary>
 [PublicAPI]
-[Flags]
 [DefaultValue(Redirect)]
 public enum MapType : uint
 {
