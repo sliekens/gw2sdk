@@ -4,6 +4,7 @@ namespace GuildWars2.WizardsVault.AstralRewards;
 
 /// <summary>Information about a reward in the Wizard's Vault.</summary>
 [PublicAPI]
+[DataTransferObject]
 public sealed record PurchasedAstralReward
 {
     /// <summary>The reward ID.</summary>

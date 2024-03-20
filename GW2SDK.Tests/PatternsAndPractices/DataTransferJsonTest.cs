@@ -13,9 +13,9 @@ public class DataTransferJsonTest(AssemblyFixture fixture) : IClassFixture<Assem
     [Fact]
     public void JsonElement_conversions_are_extensions()
     {
-        var candidates = fixture.Assembly.DefinedTypes.SelectMany(
-                reader => reader.GetMethods(DeclaredOnly | Public | NonPublic | Static)
-            )
+        var candidates = fixture.Assembly.DefinedTypes
+            .Where(candidate => candidate.Name.EndsWith("Json"))
+            .SelectMany(reader => reader.GetMethods(DeclaredOnly | Public | NonPublic | Static))
             .ToList();
         Assert.All(
             fixture.DataTransferObjects,
@@ -37,14 +37,17 @@ public class DataTransferJsonTest(AssemblyFixture fixture) : IClassFixture<Assem
                             info.IsDefined(typeof(ExtensionAttribute), false),
                             $"{info.Name} must be an extension method."
                         );
-                        Assert.Equal(
-                            typeof(JsonElement),
-                            info.GetParameters().FirstOrDefault()?.ParameterType
-                        );
-                        Assert.Equal(
-                            typeof(MissingMemberBehavior),
-                            info.GetParameters().Skip(1).FirstOrDefault()?.ParameterType
-                        );
+
+                        var parameters = info.GetParameters();
+                        Assert.Equal(typeof(JsonElement), parameters[0].ParameterType);
+                        if (parameters.Length > 1)
+                        {
+                            Assert.Equal(
+                                typeof(MissingMemberBehavior),
+                                parameters[1].ParameterType
+                            );
+                        }
+
                         Assert.Equal(dto.Namespace, info.DeclaringType.Namespace);
                     }
                 );

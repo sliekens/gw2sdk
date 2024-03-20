@@ -4,6 +4,7 @@ namespace GuildWars2;
 
 /// <summary>The base type for flags objects.</summary>
 [PublicAPI]
+[DataTransferObject]
 public abstract record Flags
 {
     /// <summary>Other undocumented flags. If you find out what they mean, please open an issue or a pull request.</summary>
