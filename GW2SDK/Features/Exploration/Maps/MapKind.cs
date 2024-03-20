@@ -7,7 +7,7 @@ namespace GuildWars2.Exploration.Maps;
 [DefaultValue(Unknown)]
 public enum MapKind
 {
-    /// <summary>An unknown map kind, probably only used for new maps.</summary>
+    /// <summary>An unknown map kind.</summary>
     Unknown,
 
     /// <summary>An open world map.</summary>
@@ -17,7 +17,7 @@ public enum MapKind
     /// dungeons, fractals, strike missions and raids.</summary>
     Instance,
 
-    /// <summary>A jump puzzle map.</summary>
+    /// <summary>The Obsidian Sanctum jumping puzzle map (World vs. World).</summary>
     JumpPuzzle,
 
     /// <summary>The starter zone of a new character.</summary>
@@ -26,18 +26,18 @@ public enum MapKind
     /// <summary>A structured PvP map.</summary>
     Pvp,
 
-    /// <summary>(WvW) Eternal Battlegrounds.</summary>
+    /// <summary>Eternal Battlegrounds (World vs. World).</summary>
     Center,
 
-    /// <summary>(WvW) Red Borderlands.</summary>
+    /// <summary>Red Borderlands (World vs. World).</summary>
     RedHome,
 
-    /// <summary>(WvW) Blue Borderlands.</summary>
+    /// <summary>Blue Borderlands (World vs. World).</summary>
     BlueHome,
 
-    /// <summary>(WvW) Green Borderlands.</summary>
+    /// <summary>Green Borderlands (World vs. World).</summary>
     GreenHome,
 
-    /// <summary>(WvW) Edge of the Mists.</summary>
+    /// <summary>Edge of the Mists (World vs. World).</summary>
     EdgeOfTheMists
 }
