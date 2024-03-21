@@ -9,16 +9,19 @@ internal static class GuildUpgradeCostJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        switch (json.GetProperty("type").GetString())
+        if (json.TryGetProperty("type", out var discriminator))
         {
-            case "Coins":
-                return json.GetGuildUpgradeCoinsCost(missingMemberBehavior);
-            case "Collectible":
-                return json.GetGuildUpgradeCollectibleCost(missingMemberBehavior);
-            case "Currency":
-                return json.GetGuildUpgradeCurrencyCost(missingMemberBehavior);
-            case "Item":
-                return json.GetGuildUpgradeItemCost(missingMemberBehavior);
+            switch (discriminator.GetString())
+            {
+                case "Coins":
+                    return json.GetGuildUpgradeCoinsCost(missingMemberBehavior);
+                case "Collectible":
+                    return json.GetGuildUpgradeCollectibleCost(missingMemberBehavior);
+                case "Currency":
+                    return json.GetGuildUpgradeCurrencyCost(missingMemberBehavior);
+                case "Item":
+                    return json.GetGuildUpgradeItemCost(missingMemberBehavior);
+            }
         }
 
         foreach (var member in json.EnumerateObject())

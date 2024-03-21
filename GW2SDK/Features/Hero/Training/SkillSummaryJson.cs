@@ -12,16 +12,19 @@ internal static class SkillSummaryJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        switch (json.GetProperty("type").GetString())
+        if (json.TryGetProperty("type", out var discriminator))
         {
-            case "Profession":
-                return json.GetProfessionSkillSummary(missingMemberBehavior);
-            case "Heal":
-                return json.GetHealingSkillSummary(missingMemberBehavior);
-            case "Utility":
-                return json.GetUtilitySkillSummary(missingMemberBehavior);
-            case "Elite":
-                return json.GetEliteSkillSummary(missingMemberBehavior);
+            switch (discriminator.GetString())
+            {
+                case "Profession":
+                    return json.GetProfessionSkillSummary(missingMemberBehavior);
+                case "Heal":
+                    return json.GetHealingSkillSummary(missingMemberBehavior);
+                case "Utility":
+                    return json.GetUtilitySkillSummary(missingMemberBehavior);
+                case "Elite":
+                    return json.GetEliteSkillSummary(missingMemberBehavior);
+            }
         }
 
         RequiredMember id = "id";

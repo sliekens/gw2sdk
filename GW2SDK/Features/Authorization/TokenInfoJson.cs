@@ -10,12 +10,15 @@ internal static class TokenInfoJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        switch (json.GetProperty("type").GetString())
+        if (json.TryGetProperty("type", out var discriminator))
         {
-            case "APIKey":
-                return json.GetApiKeyInfo(missingMemberBehavior);
-            case "Subtoken":
-                return json.GetSubtokenInfo(missingMemberBehavior);
+            switch (discriminator.GetString())
+            {
+                case "APIKey":
+                    return json.GetApiKeyInfo(missingMemberBehavior);
+                case "Subtoken":
+                    return json.GetSubtokenInfo(missingMemberBehavior);
+            }
         }
 
         RequiredMember name = "name";

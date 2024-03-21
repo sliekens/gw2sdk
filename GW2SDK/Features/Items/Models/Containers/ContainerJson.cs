@@ -10,14 +10,20 @@ internal static class ContainerJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        switch (json.GetProperty("details").GetProperty("type").GetString())
+        if (json.TryGetProperty("details", out var discriminator))
         {
-            case "GiftBox":
-                return json.GetGiftBox(missingMemberBehavior);
-            case "Immediate":
-                return json.GetImmediateContainer(missingMemberBehavior);
-            case "OpenUI":
-                return json.GetBlackLionChest(missingMemberBehavior);
+            if (discriminator.TryGetProperty("type", out var subtype))
+            {
+                switch (subtype.GetString())
+                {
+                    case "GiftBox":
+                        return json.GetGiftBox(missingMemberBehavior);
+                    case "Immediate":
+                        return json.GetImmediateContainer(missingMemberBehavior);
+                    case "OpenUI":
+                        return json.GetBlackLionChest(missingMemberBehavior);
+                }
+            }
         }
 
         RequiredMember name = "name";

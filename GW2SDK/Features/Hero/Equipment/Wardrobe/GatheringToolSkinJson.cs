@@ -11,16 +11,22 @@ internal static class GatheringToolSkinJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        switch (json.GetProperty("details").GetProperty("type").GetString())
+        if (json.TryGetProperty("details", out var discriminator))
         {
-            case "Fishing":
-                return json.GetFishingToolSkin(missingMemberBehavior);
-            case "Foraging":
-                return json.GetForagingToolSkin(missingMemberBehavior);
-            case "Logging":
-                return json.GetLoggingToolSkin(missingMemberBehavior);
-            case "Mining":
-                return json.GetMiningToolSkin(missingMemberBehavior);
+            if (discriminator.TryGetProperty("type", out var subtype))
+            {
+                switch (subtype.GetString())
+                {
+                    case "Fishing":
+                        return json.GetFishingToolSkin(missingMemberBehavior);
+                    case "Foraging":
+                        return json.GetForagingToolSkin(missingMemberBehavior);
+                    case "Logging":
+                        return json.GetLoggingToolSkin(missingMemberBehavior);
+                    case "Mining":
+                        return json.GetMiningToolSkin(missingMemberBehavior);
+                }
+            }
         }
 
         RequiredMember name = "name";

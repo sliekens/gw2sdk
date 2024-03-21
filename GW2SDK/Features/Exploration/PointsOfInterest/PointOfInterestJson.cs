@@ -10,16 +10,19 @@ internal static class PointOfInterestJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        switch (json.GetProperty("type").GetString())
+        if (json.TryGetProperty("type", out var discriminator))
         {
-            case "landmark":
-                return json.GetLandmark(missingMemberBehavior);
-            case "waypoint":
-                return json.GetWaypoint(missingMemberBehavior);
-            case "vista":
-                return json.GetVista(missingMemberBehavior);
-            case "unlock":
-                return json.GetRequiresUnlockPointOfInterest(missingMemberBehavior);
+            switch (discriminator.GetString())
+            {
+                case "landmark":
+                    return json.GetLandmark(missingMemberBehavior);
+                case "waypoint":
+                    return json.GetWaypoint(missingMemberBehavior);
+                case "vista":
+                    return json.GetVista(missingMemberBehavior);
+                case "unlock":
+                    return json.GetRequiresUnlockPointOfInterest(missingMemberBehavior);
+            }
         }
 
         OptionalMember name = "name";

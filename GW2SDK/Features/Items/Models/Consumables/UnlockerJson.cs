@@ -10,40 +10,46 @@ internal static class UnlockerJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        switch (json.GetProperty("details").GetProperty("unlock_type").GetString())
+        if (json.TryGetProperty("details", out var discriminator))
         {
-            case "BagSlot":
-                return json.GetBagSlotExpansion(missingMemberBehavior);
-            case "BankTab":
-                return json.GetBankTabExpansion(missingMemberBehavior);
-            case "BuildLibrarySlot":
-                return json.GetBuildStorageExpansion(missingMemberBehavior);
-            case "BuildLoadoutTab":
-                return json.GetBuildTemplateExpansion(missingMemberBehavior);
-            case "Champion":
-                return json.GetMistChampionSkinUnlocker(missingMemberBehavior);
-            case "CollectibleCapacity":
-                return json.GetStorageExpander(missingMemberBehavior);
-            case "Content":
-                return json.GetContentUnlocker(missingMemberBehavior);
-            case "CraftingRecipe":
-                return json.GetRecipeSheet(missingMemberBehavior);
-            case "Dye":
-                return json.GetDye(missingMemberBehavior);
-            case "GearLoadoutTab":
-                return json.GetEquipmentTemplateExpansion(missingMemberBehavior);
-            case "GliderSkin":
-                return json.GetGliderSkinUnlocker(missingMemberBehavior);
-            case "JadeBotSkin":
-                return json.GetJadeBotSkinUnlocker(missingMemberBehavior);
-            case "Minipet":
-                return json.GetMiniatureUnlocker(missingMemberBehavior);
-            case "Ms":
-                return json.GetMountSkinUnlocker(missingMemberBehavior);
-            case "Outfit":
-                return json.GetOutfitUnlocker(missingMemberBehavior);
-            case "SharedSlot":
-                return json.GetSharedInventorySlot(missingMemberBehavior);
+            if (discriminator.TryGetProperty("unlock_type", out var subtype))
+            {
+                switch (subtype.GetString())
+                {
+                    case "BagSlot":
+                        return json.GetBagSlotExpansion(missingMemberBehavior);
+                    case "BankTab":
+                        return json.GetBankTabExpansion(missingMemberBehavior);
+                    case "BuildLibrarySlot":
+                        return json.GetBuildStorageExpansion(missingMemberBehavior);
+                    case "BuildLoadoutTab":
+                        return json.GetBuildTemplateExpansion(missingMemberBehavior);
+                    case "Champion":
+                        return json.GetMistChampionSkinUnlocker(missingMemberBehavior);
+                    case "CollectibleCapacity":
+                        return json.GetStorageExpander(missingMemberBehavior);
+                    case "Content":
+                        return json.GetContentUnlocker(missingMemberBehavior);
+                    case "CraftingRecipe":
+                        return json.GetRecipeSheet(missingMemberBehavior);
+                    case "Dye":
+                        return json.GetDye(missingMemberBehavior);
+                    case "GearLoadoutTab":
+                        return json.GetEquipmentTemplateExpansion(missingMemberBehavior);
+                    case "GliderSkin":
+                        return json.GetGliderSkinUnlocker(missingMemberBehavior);
+                    case "JadeBotSkin":
+                        return json.GetJadeBotSkinUnlocker(missingMemberBehavior);
+                    case "Minipet":
+                        return json.GetMiniatureUnlocker(missingMemberBehavior);
+                    case "Ms":
+                        return json.GetMountSkinUnlocker(missingMemberBehavior);
+                    case "Outfit":
+                        return json.GetOutfitUnlocker(missingMemberBehavior);
+                    case "SharedSlot":
+                        return json.GetSharedInventorySlot(missingMemberBehavior);
+                }
+            }
         }
 
         RequiredMember name = "name";

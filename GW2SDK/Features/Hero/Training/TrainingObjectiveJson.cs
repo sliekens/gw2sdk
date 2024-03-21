@@ -11,12 +11,15 @@ internal static class TrainingObjectiveJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        switch (json.GetProperty("type").GetString())
+        if (json.TryGetProperty("type", out var discriminator))
         {
-            case "Skill":
-                return json.GetSkillObjective(missingMemberBehavior);
-            case "Trait":
-                return json.GetTraitObjective(missingMemberBehavior);
+            switch (discriminator.GetString())
+            {
+                case "Skill":
+                    return json.GetSkillObjective(missingMemberBehavior);
+                case "Trait":
+                    return json.GetTraitObjective(missingMemberBehavior);
+            }
         }
 
         RequiredMember cost = "cost";

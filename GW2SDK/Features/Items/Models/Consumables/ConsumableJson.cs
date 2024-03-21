@@ -10,38 +10,44 @@ internal static class ConsumableJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        switch (json.GetProperty("details").GetProperty("type").GetString())
+        if (json.TryGetProperty("details", out var discriminator))
         {
-            case "AppearanceChange":
-                return json.GetAppearanceChanger(missingMemberBehavior);
-            case "Booze":
-                return json.GetBooze(missingMemberBehavior);
-            case "ContractNpc":
-                return json.GetContractNpc(missingMemberBehavior);
-            case "Currency":
-                return json.GetCurrency(missingMemberBehavior);
-            case "Food":
-                return json.GetFood(missingMemberBehavior);
-            case "Generic":
-                return json.GetGenericConsumable(missingMemberBehavior);
-            case "Halloween":
-                return json.GetHalloweenConsumable(missingMemberBehavior);
-            case "Immediate":
-                return json.GetService(missingMemberBehavior);
-            case "MountRandomUnlock":
-                return json.GetMountLicense(missingMemberBehavior);
-            case "RandomUnlock":
-                return json.GetRandomUnlocker(missingMemberBehavior);
-            case "TeleportToFriend":
-                return json.GetTeleportToFriend(missingMemberBehavior);
-            case "Transmutation":
-                return json.GetTransmutation(missingMemberBehavior);
-            case "Unlock":
-                return json.GetUnlocker(missingMemberBehavior);
-            case "UpgradeRemoval":
-                return json.GetUpgradeExtractor(missingMemberBehavior);
-            case "Utility":
-                return json.GetUtility(missingMemberBehavior);
+            if (discriminator.TryGetProperty("type", out var subtype))
+            {
+                switch (subtype.GetString())
+                {
+                    case "AppearanceChange":
+                        return json.GetAppearanceChanger(missingMemberBehavior);
+                    case "Booze":
+                        return json.GetBooze(missingMemberBehavior);
+                    case "ContractNpc":
+                        return json.GetContractNpc(missingMemberBehavior);
+                    case "Currency":
+                        return json.GetCurrency(missingMemberBehavior);
+                    case "Food":
+                        return json.GetFood(missingMemberBehavior);
+                    case "Generic":
+                        return json.GetGenericConsumable(missingMemberBehavior);
+                    case "Halloween":
+                        return json.GetHalloweenConsumable(missingMemberBehavior);
+                    case "Immediate":
+                        return json.GetService(missingMemberBehavior);
+                    case "MountRandomUnlock":
+                        return json.GetMountLicense(missingMemberBehavior);
+                    case "RandomUnlock":
+                        return json.GetRandomUnlocker(missingMemberBehavior);
+                    case "TeleportToFriend":
+                        return json.GetTeleportToFriend(missingMemberBehavior);
+                    case "Transmutation":
+                        return json.GetTransmutation(missingMemberBehavior);
+                    case "Unlock":
+                        return json.GetUnlocker(missingMemberBehavior);
+                    case "UpgradeRemoval":
+                        return json.GetUpgradeExtractor(missingMemberBehavior);
+                    case "Utility":
+                        return json.GetUtility(missingMemberBehavior);
+                }
+            }
         }
 
         RequiredMember name = "name";

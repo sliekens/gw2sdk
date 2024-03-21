@@ -7,14 +7,20 @@ internal static class GizmoJson
 {
     public static Gizmo GetGizmo(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        switch (json.GetProperty("details").GetProperty("type").GetString())
+        if (json.TryGetProperty("details", out var discriminator))
         {
-            case "ContainerKey":
-                return json.GetBlackLionChestKey(missingMemberBehavior);
-            case "RentableContractNpc":
-                return json.GetRentableContractNpc(missingMemberBehavior);
-            case "UnlimitedConsumable":
-                return json.GetUnlimitedConsumable(missingMemberBehavior);
+            if (discriminator.TryGetProperty("type", out var subtype))
+            {
+                switch (subtype.GetString())
+                {
+                    case "ContainerKey":
+                        return json.GetBlackLionChestKey(missingMemberBehavior);
+                    case "RentableContractNpc":
+                        return json.GetRentableContractNpc(missingMemberBehavior);
+                    case "UnlimitedConsumable":
+                        return json.GetUnlimitedConsumable(missingMemberBehavior);
+                }
+            }
         }
 
         RequiredMember name = "name";

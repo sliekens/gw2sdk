@@ -10,10 +10,13 @@ internal static class AchievementJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        switch (json.GetProperty("type").GetString())
+        if (json.TryGetProperty("type", out var discriminator))
         {
-            case "ItemSet":
-                return json.GetCollectionAchievement(missingMemberBehavior);
+            switch (discriminator.GetString())
+            {
+                case "ItemSet":
+                    return json.GetCollectionAchievement(missingMemberBehavior);
+            }
         }
 
         RequiredMember id = "id";

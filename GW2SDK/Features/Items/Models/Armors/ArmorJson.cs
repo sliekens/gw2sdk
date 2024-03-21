@@ -8,22 +8,28 @@ internal static class ArmorJson
 {
     public static Armor GetArmor(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        switch (json.GetProperty("details").GetProperty("type").GetString())
+        if (json.TryGetProperty("details", out var discriminator))
         {
-            case "Boots":
-                return json.GetBoots(missingMemberBehavior);
-            case "Coat":
-                return json.GetCoat(missingMemberBehavior);
-            case "Gloves":
-                return json.GetGloves(missingMemberBehavior);
-            case "Helm":
-                return json.GetHelm(missingMemberBehavior);
-            case "HelmAquatic":
-                return json.GetHelmAquatic(missingMemberBehavior);
-            case "Leggings":
-                return json.GetLeggings(missingMemberBehavior);
-            case "Shoulders":
-                return json.GetShoulders(missingMemberBehavior);
+            if (discriminator.TryGetProperty("type", out var subtype))
+            {
+                switch (subtype.GetString())
+                {
+                    case "Boots":
+                        return json.GetBoots(missingMemberBehavior);
+                    case "Coat":
+                        return json.GetCoat(missingMemberBehavior);
+                    case "Gloves":
+                        return json.GetGloves(missingMemberBehavior);
+                    case "Helm":
+                        return json.GetHelm(missingMemberBehavior);
+                    case "HelmAquatic":
+                        return json.GetHelmAquatic(missingMemberBehavior);
+                    case "Leggings":
+                        return json.GetLeggings(missingMemberBehavior);
+                    case "Shoulders":
+                        return json.GetShoulders(missingMemberBehavior);
+                }
+            }
         }
 
         RequiredMember name = "name";

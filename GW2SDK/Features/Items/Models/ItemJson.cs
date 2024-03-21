@@ -7,43 +7,46 @@ internal static class ItemJson
 {
     public static Item GetItem(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        switch (json.GetProperty("type").GetString())
+        if (json.TryGetProperty("type", out var discriminator))
         {
-            case "Armor":
-                return json.GetArmor(missingMemberBehavior);
-            case "Back":
-                return json.GetBackpack(missingMemberBehavior);
-            case "Bag":
-                return json.GetBag(missingMemberBehavior);
-            case "Consumable":
-                return json.GetConsumable(missingMemberBehavior);
-            case "Container":
-                return json.GetContainer(missingMemberBehavior);
-            case "CraftingMaterial":
-                return json.GetCraftingMaterial(missingMemberBehavior);
-            case "Gathering":
-                return json.GetGatheringTool(missingMemberBehavior);
-            case "Gizmo":
-                return json.GetGizmo(missingMemberBehavior);
-            case "JadeTechModule":
-                return json.GetJadeTechModule(missingMemberBehavior);
-            case "MiniPet":
-                return json.GetMiniature(missingMemberBehavior);
-            case "PowerCore":
-                return json.GetPowerCore(missingMemberBehavior);
-            case "Relic":
-                return json.GetRelic(missingMemberBehavior);
-            case "Tool":
-                return json.GetSalvageTool(missingMemberBehavior);
-            case "Trinket":
-                return json.GetTrinket(missingMemberBehavior);
-            case "Trophy" or "Key":
-                // Key acts as a Trophy, and there is only one (Florid Bouquet), so treat it as a Trophy
-                return json.GetTrophy(missingMemberBehavior);
-            case "UpgradeComponent":
-                return json.GetUpgradeComponent(missingMemberBehavior);
-            case "Weapon":
-                return json.GetWeapon(missingMemberBehavior);
+            switch (discriminator.GetString())
+            {
+                case "Armor":
+                    return json.GetArmor(missingMemberBehavior);
+                case "Back":
+                    return json.GetBackpack(missingMemberBehavior);
+                case "Bag":
+                    return json.GetBag(missingMemberBehavior);
+                case "Consumable":
+                    return json.GetConsumable(missingMemberBehavior);
+                case "Container":
+                    return json.GetContainer(missingMemberBehavior);
+                case "CraftingMaterial":
+                    return json.GetCraftingMaterial(missingMemberBehavior);
+                case "Gathering":
+                    return json.GetGatheringTool(missingMemberBehavior);
+                case "Gizmo":
+                    return json.GetGizmo(missingMemberBehavior);
+                case "JadeTechModule":
+                    return json.GetJadeTechModule(missingMemberBehavior);
+                case "MiniPet":
+                    return json.GetMiniature(missingMemberBehavior);
+                case "PowerCore":
+                    return json.GetPowerCore(missingMemberBehavior);
+                case "Relic":
+                    return json.GetRelic(missingMemberBehavior);
+                case "Tool":
+                    return json.GetSalvageTool(missingMemberBehavior);
+                case "Trinket":
+                    return json.GetTrinket(missingMemberBehavior);
+                case "Trophy" or "Key":
+                    // Key acts as a Trophy, and there is only one (Florid Bouquet), so treat it as a Trophy
+                    return json.GetTrophy(missingMemberBehavior);
+                case "UpgradeComponent":
+                    return json.GetUpgradeComponent(missingMemberBehavior);
+                case "Weapon":
+                    return json.GetWeapon(missingMemberBehavior);
+            }
         }
 
         RequiredMember name = "name";

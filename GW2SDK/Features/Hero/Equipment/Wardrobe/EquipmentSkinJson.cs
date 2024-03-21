@@ -8,16 +8,19 @@ internal static class EquipmentSkinJson
 {
     public static EquipmentSkin GetEquipmentSkin(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        switch (json.GetProperty("type").GetString())
+        if (json.TryGetProperty("type", out var discriminator))
         {
-            case "Armor":
-                return json.GetArmorSkin(missingMemberBehavior);
-            case "Back":
-                return json.GetBackpackSkin(missingMemberBehavior);
-            case "Gathering":
-                return json.GetGatheringToolSkin(missingMemberBehavior);
-            case "Weapon":
-                return json.GetWeaponSkin(missingMemberBehavior);
+            switch (discriminator.GetString())
+            {
+                case "Armor":
+                    return json.GetArmorSkin(missingMemberBehavior);
+                case "Back":
+                    return json.GetBackpackSkin(missingMemberBehavior);
+                case "Gathering":
+                    return json.GetGatheringToolSkin(missingMemberBehavior);
+                case "Weapon":
+                    return json.GetWeaponSkin(missingMemberBehavior);
+            }
         }
 
         RequiredMember name = "name";

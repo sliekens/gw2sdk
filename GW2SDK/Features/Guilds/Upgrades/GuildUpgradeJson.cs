@@ -10,30 +10,33 @@ internal static class GuildUpgradeJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        switch (json.GetProperty("type").GetString())
+        if (json.TryGetProperty("type", out var discriminator))
         {
-            case "AccumulatingCurrency":
-                return json.GetAccumulatingCurrency(missingMemberBehavior);
-            case "BankBag":
-                return json.GetBankBag(missingMemberBehavior);
-            case "Boost":
-                return json.GetBoost(missingMemberBehavior);
-            case "Claimable":
-                return json.GetClaimable(missingMemberBehavior);
-            case "Consumable":
-                return json.GetConsumable(missingMemberBehavior);
-            case "Decoration":
-                return json.GetDecoration(missingMemberBehavior);
-            case "GuildHall":
-                return json.GetGuildHall(missingMemberBehavior);
-            case "GuildHallExpedition":
-                return json.GetGuildHallExpedition(missingMemberBehavior);
-            case "Hub":
-                return json.GetHub(missingMemberBehavior);
-            case "Queue":
-                return json.GetQueue(missingMemberBehavior);
-            case "Unlock":
-                return json.GetUnlock(missingMemberBehavior);
+            switch (discriminator.GetString())
+            {
+                case "AccumulatingCurrency":
+                    return json.GetAccumulatingCurrency(missingMemberBehavior);
+                case "BankBag":
+                    return json.GetBankBag(missingMemberBehavior);
+                case "Boost":
+                    return json.GetBoost(missingMemberBehavior);
+                case "Claimable":
+                    return json.GetClaimable(missingMemberBehavior);
+                case "Consumable":
+                    return json.GetConsumable(missingMemberBehavior);
+                case "Decoration":
+                    return json.GetDecoration(missingMemberBehavior);
+                case "GuildHall":
+                    return json.GetGuildHall(missingMemberBehavior);
+                case "GuildHallExpedition":
+                    return json.GetGuildHallExpedition(missingMemberBehavior);
+                case "Hub":
+                    return json.GetHub(missingMemberBehavior);
+                case "Queue":
+                    return json.GetQueue(missingMemberBehavior);
+                case "Unlock":
+                    return json.GetUnlock(missingMemberBehavior);
+            }
         }
 
         RequiredMember id = "id";

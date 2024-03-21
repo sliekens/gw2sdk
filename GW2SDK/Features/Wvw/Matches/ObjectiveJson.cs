@@ -10,22 +10,25 @@ internal static class ObjectiveJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        switch (json.GetProperty("type").GetString())
+        if (json.TryGetProperty("type", out var discriminator))
         {
-            case "Camp":
-                return json.GetCamp(missingMemberBehavior);
-            case "Castle":
-                return json.GetCastle(missingMemberBehavior);
-            case "Keep":
-                return json.GetKeep(missingMemberBehavior);
-            case "Mercenary":
-                return json.GetMercenary(missingMemberBehavior);
-            case "Ruins":
-                return json.GetRuins(missingMemberBehavior);
-            case "Spawn":
-                return json.GetSpawn(missingMemberBehavior);
-            case "Tower":
-                return json.GetTower(missingMemberBehavior);
+            switch (discriminator.GetString())
+            {
+                case "Camp":
+                    return json.GetCamp(missingMemberBehavior);
+                case "Castle":
+                    return json.GetCastle(missingMemberBehavior);
+                case "Keep":
+                    return json.GetKeep(missingMemberBehavior);
+                case "Mercenary":
+                    return json.GetMercenary(missingMemberBehavior);
+                case "Ruins":
+                    return json.GetRuins(missingMemberBehavior);
+                case "Spawn":
+                    return json.GetSpawn(missingMemberBehavior);
+                case "Tower":
+                    return json.GetTower(missingMemberBehavior);
+            }
         }
 
         RequiredMember id = "id";

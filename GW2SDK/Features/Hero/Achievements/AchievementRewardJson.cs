@@ -10,16 +10,19 @@ internal static class AchievementRewardJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        switch (json.GetProperty("type").GetString())
+        if (json.TryGetProperty("type", out var discriminator))
         {
-            case "Coins":
-                return json.GetCoinsReward(missingMemberBehavior);
-            case "Item":
-                return json.GetItemReward(missingMemberBehavior);
-            case "Mastery":
-                return json.GetMasteryPointReward(missingMemberBehavior);
-            case "Title":
-                return json.GetTitleReward(missingMemberBehavior);
+            switch (discriminator.GetString())
+            {
+                case "Coins":
+                    return json.GetCoinsReward(missingMemberBehavior);
+                case "Item":
+                    return json.GetItemReward(missingMemberBehavior);
+                case "Mastery":
+                    return json.GetMasteryPointReward(missingMemberBehavior);
+                case "Title":
+                    return json.GetTitleReward(missingMemberBehavior);
+            }
         }
 
         // ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator

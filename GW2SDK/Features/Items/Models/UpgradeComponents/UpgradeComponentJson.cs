@@ -6,27 +6,67 @@ namespace GuildWars2.Items;
 
 internal static class UpgradeComponentJson
 {
-    private static bool IsPvpItem(this JsonElement json) =>
-        json.GetProperty("game_types")[0].GetString() == "Pvp";
+    private static bool IsPvpItem(this JsonElement json)
+    {
+        if (!json.TryGetProperty("game_types", out var gameTypes))
+        {
+            return false;
+        }
 
-    private static bool HasFlags(this JsonElement json, int count) =>
-        json.GetProperty("details").GetProperty("flags").GetArrayLength() == count;
+        if (gameTypes.ValueKind != JsonValueKind.Array)
+        {
+            return false;
+        }
+
+        if (gameTypes.GetArrayLength() == 0)
+        {
+            return false;
+        }
+
+        return gameTypes[0].GetString() == "Pvp";
+    }
+
+    private static bool HasFlags(this JsonElement json, int count)
+    {
+        if (!json.TryGetProperty("details", out var details))
+        {
+            return false;
+        }
+
+        if (!details.TryGetProperty("flags", out var flags))
+        {
+            return false;
+        }
+
+        if (flags.ValueKind != JsonValueKind.Array)
+        {
+            return false;
+        }
+
+        return flags.GetArrayLength() == count;
+    }
 
     public static UpgradeComponent GetUpgradeComponent(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        switch (json.GetProperty("details").GetProperty("type").GetString())
+        if (json.TryGetProperty("details", out var discriminator))
         {
-            case "Gem":
-                return json.GetGem(missingMemberBehavior);
-            case "Rune":
-            case "Default" when json.IsPvpItem() && json.HasFlags(3):
-                return json.GetRune(missingMemberBehavior);
-            case "Sigil":
-            case "Default" when json.IsPvpItem() && json.HasFlags(19):
-                return json.GetSigil(missingMemberBehavior);
+            if (discriminator.TryGetProperty("type", out var subtype))
+            {
+                switch (subtype.GetString())
+                {
+                    case "Gem":
+                        return json.GetGem(missingMemberBehavior);
+                    case "Rune":
+                    case "Default" when json.IsPvpItem() && json.HasFlags(3):
+                        return json.GetRune(missingMemberBehavior);
+                    case "Sigil":
+                    case "Default" when json.IsPvpItem() && json.HasFlags(19):
+                        return json.GetSigil(missingMemberBehavior);
+                }
+            }
         }
 
         RequiredMember name = "name";

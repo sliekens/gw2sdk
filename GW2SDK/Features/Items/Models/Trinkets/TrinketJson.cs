@@ -11,14 +11,20 @@ internal static class TrinketJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        switch (json.GetProperty("details").GetProperty("type").GetString())
+        if (json.TryGetProperty("details", out var discriminator))
         {
-            case "Accessory":
-                return json.GetAccessory(missingMemberBehavior);
-            case "Amulet":
-                return json.GetAmulet(missingMemberBehavior);
-            case "Ring":
-                return json.GetRing(missingMemberBehavior);
+            if (discriminator.TryGetProperty("type", out var subtype))
+            {
+                switch (subtype.GetString())
+                {
+                    case "Accessory":
+                        return json.GetAccessory(missingMemberBehavior);
+                    case "Amulet":
+                        return json.GetAmulet(missingMemberBehavior);
+                    case "Ring":
+                        return json.GetRing(missingMemberBehavior);
+                }
+            }
         }
 
         RequiredMember name = "name";

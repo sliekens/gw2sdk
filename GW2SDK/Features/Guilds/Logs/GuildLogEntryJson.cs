@@ -10,28 +10,31 @@ internal static class GuildLogEntryJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        switch (json.GetProperty("type").GetString())
+        if (json.TryGetProperty("type", out var discriminator))
         {
-            case "influence":
-                return json.GetInfluenceActivity(missingMemberBehavior);
-            case "invite_declined":
-                return json.GetInviteDeclined(missingMemberBehavior);
-            case "invited":
-                return json.GetMemberInvited(missingMemberBehavior);
-            case "joined":
-                return json.GetMemberJoined(missingMemberBehavior);
-            case "kick":
-                return json.GetMemberKicked(missingMemberBehavior);
-            case "motd":
-                return json.GetNewMessageOfTheDay(missingMemberBehavior);
-            case "rank_change":
-                return json.GetRankChange(missingMemberBehavior);
-            case "stash":
-                return json.GetGuildBankActivity(missingMemberBehavior);
-            case "treasury":
-                return json.GetTreasuryDeposit(missingMemberBehavior);
-            case "upgrade":
-                return json.GetGuildUpgradeActivity(missingMemberBehavior);
+            switch (discriminator.GetString())
+            {
+                case "influence":
+                    return json.GetInfluenceActivity(missingMemberBehavior);
+                case "invite_declined":
+                    return json.GetInviteDeclined(missingMemberBehavior);
+                case "invited":
+                    return json.GetMemberInvited(missingMemberBehavior);
+                case "joined":
+                    return json.GetMemberJoined(missingMemberBehavior);
+                case "kick":
+                    return json.GetMemberKicked(missingMemberBehavior);
+                case "motd":
+                    return json.GetNewMessageOfTheDay(missingMemberBehavior);
+                case "rank_change":
+                    return json.GetRankChange(missingMemberBehavior);
+                case "stash":
+                    return json.GetGuildBankActivity(missingMemberBehavior);
+                case "treasury":
+                    return json.GetTreasuryDeposit(missingMemberBehavior);
+                case "upgrade":
+                    return json.GetGuildUpgradeActivity(missingMemberBehavior);
+            }
         }
 
         RequiredMember id = "id";

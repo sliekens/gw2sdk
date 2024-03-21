@@ -11,22 +11,28 @@ internal static class ArmorSkinJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        switch (json.GetProperty("details").GetProperty("type").GetString())
+        if (json.TryGetProperty("details", out var discriminator))
         {
-            case "Boots":
-                return json.GetBootsSkin(missingMemberBehavior);
-            case "Coat":
-                return json.GetCoatSkin(missingMemberBehavior);
-            case "Gloves":
-                return json.GetGlovesSkin(missingMemberBehavior);
-            case "Helm":
-                return json.GetHelmSkin(missingMemberBehavior);
-            case "HelmAquatic":
-                return json.GetHelmAquaticSkin(missingMemberBehavior);
-            case "Leggings":
-                return json.GetLeggingsSkin(missingMemberBehavior);
-            case "Shoulders":
-                return json.GetShouldersSkin(missingMemberBehavior);
+            if (discriminator.TryGetProperty("type", out var subtype))
+            {
+                switch (subtype.GetString())
+                {
+                    case "Boots":
+                        return json.GetBootsSkin(missingMemberBehavior);
+                    case "Coat":
+                        return json.GetCoatSkin(missingMemberBehavior);
+                    case "Gloves":
+                        return json.GetGlovesSkin(missingMemberBehavior);
+                    case "Helm":
+                        return json.GetHelmSkin(missingMemberBehavior);
+                    case "HelmAquatic":
+                        return json.GetHelmAquaticSkin(missingMemberBehavior);
+                    case "Leggings":
+                        return json.GetLeggingsSkin(missingMemberBehavior);
+                    case "Shoulders":
+                        return json.GetShouldersSkin(missingMemberBehavior);
+                }
+            }
         }
 
         RequiredMember name = "name";

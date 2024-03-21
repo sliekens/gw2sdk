@@ -11,54 +11,60 @@ internal static class WeaponJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        switch (json.GetProperty("details").GetProperty("type").GetString())
+        if (json.TryGetProperty("details", out var discriminator))
         {
-            case "Axe":
-                return json.GetAxe(missingMemberBehavior);
-            case "Dagger":
-                return json.GetDagger(missingMemberBehavior);
-            case "Focus":
-                return json.GetFocus(missingMemberBehavior);
-            case "Greatsword":
-                return json.GetGreatsword(missingMemberBehavior);
-            case "Hammer":
-                return json.GetHammer(missingMemberBehavior);
-            case "Harpoon":
-                return json.GetSpear(missingMemberBehavior);
-            case "LargeBundle":
-                return json.GetLargeBundle(missingMemberBehavior);
-            case "LongBow":
-                return json.GetLongbow(missingMemberBehavior);
-            case "Mace":
-                return json.GetMace(missingMemberBehavior);
-            case "Pistol":
-                return json.GetPistol(missingMemberBehavior);
-            case "Rifle":
-                return json.GetRifle(missingMemberBehavior);
-            case "Scepter":
-                return json.GetScepter(missingMemberBehavior);
-            case "Shield":
-                return json.GetShield(missingMemberBehavior);
-            case "ShortBow":
-                return json.GetShortbow(missingMemberBehavior);
-            case "SmallBundle":
-                return json.GetSmallBundle(missingMemberBehavior);
-            case "Speargun":
-                return json.GetHarpoonGun(missingMemberBehavior);
-            case "Staff":
-                return json.GetStaff(missingMemberBehavior);
-            case "Sword":
-                return json.GetSword(missingMemberBehavior);
-            case "Torch":
-                return json.GetTorch(missingMemberBehavior);
-            case "Toy":
-                return json.GetToy(missingMemberBehavior);
-            case "ToyTwoHanded":
-                return json.GetToyTwoHanded(missingMemberBehavior);
-            case "Trident":
-                return json.GetTrident(missingMemberBehavior);
-            case "Warhorn":
-                return json.GetWarhorn(missingMemberBehavior);
+            if (discriminator.TryGetProperty("type", out var subtype))
+            {
+                switch (subtype.GetString())
+                {
+                    case "Axe":
+                        return json.GetAxe(missingMemberBehavior);
+                    case "Dagger":
+                        return json.GetDagger(missingMemberBehavior);
+                    case "Focus":
+                        return json.GetFocus(missingMemberBehavior);
+                    case "Greatsword":
+                        return json.GetGreatsword(missingMemberBehavior);
+                    case "Hammer":
+                        return json.GetHammer(missingMemberBehavior);
+                    case "Harpoon":
+                        return json.GetSpear(missingMemberBehavior);
+                    case "LargeBundle":
+                        return json.GetLargeBundle(missingMemberBehavior);
+                    case "LongBow":
+                        return json.GetLongbow(missingMemberBehavior);
+                    case "Mace":
+                        return json.GetMace(missingMemberBehavior);
+                    case "Pistol":
+                        return json.GetPistol(missingMemberBehavior);
+                    case "Rifle":
+                        return json.GetRifle(missingMemberBehavior);
+                    case "Scepter":
+                        return json.GetScepter(missingMemberBehavior);
+                    case "Shield":
+                        return json.GetShield(missingMemberBehavior);
+                    case "ShortBow":
+                        return json.GetShortbow(missingMemberBehavior);
+                    case "SmallBundle":
+                        return json.GetSmallBundle(missingMemberBehavior);
+                    case "Speargun":
+                        return json.GetHarpoonGun(missingMemberBehavior);
+                    case "Staff":
+                        return json.GetStaff(missingMemberBehavior);
+                    case "Sword":
+                        return json.GetSword(missingMemberBehavior);
+                    case "Torch":
+                        return json.GetTorch(missingMemberBehavior);
+                    case "Toy":
+                        return json.GetToy(missingMemberBehavior);
+                    case "ToyTwoHanded":
+                        return json.GetToyTwoHanded(missingMemberBehavior);
+                    case "Trident":
+                        return json.GetTrident(missingMemberBehavior);
+                    case "Warhorn":
+                        return json.GetWarhorn(missingMemberBehavior);
+                }
+            }
         }
 
         RequiredMember name = "name";
