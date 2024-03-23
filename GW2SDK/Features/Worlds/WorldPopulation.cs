@@ -1,6 +1,7 @@
 ﻿namespace GuildWars2.Worlds;
 
 /// <summary>The population levels of a world in Guild Wars 2.</summary>
+[PublicAPI]
 public enum WorldPopulation
 {
     /// <summary>A world with a low population.</summary>
