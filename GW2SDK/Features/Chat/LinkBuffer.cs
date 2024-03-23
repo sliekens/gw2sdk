@@ -16,7 +16,7 @@ internal ref struct LinkBuffer(Span<byte> buffer)
     /// <returns>The index of the skipped byte.</returns>
     public int Skip() => ++length - 1;
 
-    public void Padding(int length) => this.length += length;
+    public void Padding(int count) => length += count;
 
     public bool EndOfFile => length >= Buffer.Length;
 
@@ -61,6 +61,7 @@ internal ref struct LinkBuffer(Span<byte> buffer)
 #if NET
         return Wrapped(Convert.ToBase64String(Buffer[..length]));
 #else
+
         // Unfortunately there is no Convert.ToBase64String overload that takes a Span<byte> in older .NET,
         // but we can use ArrayPool to avoid allocating a new array
         var arr = ArrayPool<byte>.Shared.Rent(length);
