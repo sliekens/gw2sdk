@@ -18,7 +18,7 @@ internal static class ObjectiveJson
         RequiredMember mapType = "map_type";
         RequiredMember mapId = "map_id";
         NullableMember upgradeId = "upgrade_id";
-        OptionalMember coordinates = "coord";
+        NullableMember coordinates = "coord";
         NullableMember labelCoordinates = "label_coord";
         OptionalMember marker = "marker";
         RequiredMember chatLink = "chat_link";
