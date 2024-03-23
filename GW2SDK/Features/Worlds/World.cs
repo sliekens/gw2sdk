@@ -12,10 +12,13 @@ public sealed record World
     public required string Name { get; init; }
 
     /// <summary>The population of the server. Transferring to a different world is only possible when it is not
-    /// <see cref="WorldPopulation.Full" />. The <see cref="TransferFee" /> will be calculated based on the population.</summary>
+    /// <see cref="WorldPopulation.Full" />.</summary>
+    /// <remarks>Exact player counts are unavailable.</remarks>
     public required WorldPopulation Population { get; init; }
 
-    /// <summary>The gem fee for transferring to this world.</summary>
+    /// <summary>The gem fee for transferring to this world. These fees are based on the old WvW system based on home worlds,
+    /// where the fee is based on the <see cref="Population" />. After the World Restructuring update, transferring to any
+    /// world costs a flat 500 gems.</summary>
     public int TransferFee =>
         Population switch
         {
