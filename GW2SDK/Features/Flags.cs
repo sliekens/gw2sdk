@@ -10,6 +10,8 @@ public abstract record Flags
     /// <summary>Other undocumented flags. If you find out what they mean, please open an issue or a pull request.</summary>
     public required IReadOnlyList<string> Other { get; init; }
 
+    /// <summary>Returns a string that represents the enabled flags.</summary>
+    /// <returns>A string that represents the enabled flags.</returns>
     public sealed override string ToString()
     {
         var flags = string.Join(
