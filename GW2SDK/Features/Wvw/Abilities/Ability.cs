@@ -13,5 +13,5 @@ public sealed record Ability
     /// <summary>The URL of the ability icon.</summary>
     public required string IconHref { get; init; }
 
-    public required IReadOnlyCollection<AbilityRank> Ranks { get; init; }
+    public required IReadOnlyList<AbilityRank> Ranks { get; init; }
 }
