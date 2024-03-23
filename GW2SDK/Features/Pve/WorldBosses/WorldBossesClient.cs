@@ -16,6 +16,9 @@ public sealed class WorldBossesClient
         httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
+    /// <summary>Retrieves the IDs of all world bosses.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<string> Value, MessageContext Context)> GetWorldBosses(
         CancellationToken cancellationToken = default
     )
@@ -24,6 +27,11 @@ public sealed class WorldBossesClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all world bosses which have been defeated by the account since the last server reset.
+    /// This endpoint is only accessible with a valid access token.</summary>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<string> Value, MessageContext Context)> GetDefeatedWorldBosses(
         string? accessToken,
         CancellationToken cancellationToken = default
