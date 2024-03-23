@@ -6,5 +6,5 @@ public sealed record ObjectiveUpgrade
 {
     public required int Id { get; init; }
 
-    public required IReadOnlyCollection<UpgradeTier> Tiers { get; init; }
+    public required IReadOnlyList<UpgradeTier> Tiers { get; init; }
 }
