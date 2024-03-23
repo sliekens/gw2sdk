@@ -27,7 +27,7 @@ public sealed record Objective
 
     public required PointF? LabelCoordinates { get; init; }
 
-    public required string MarkerHref { get; init; }
+    public required string MarkerIconHref { get; init; }
 
     /// <summary>The chat code of the objective. This can be used to link the objective in the chat, but also in guild or squad
     /// messages.</summary>

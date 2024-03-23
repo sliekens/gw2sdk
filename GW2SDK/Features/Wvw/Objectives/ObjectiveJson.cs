@@ -87,7 +87,7 @@ internal static class ObjectiveJson
             Coordinates = coordinates.Map(value => value.GetCoordinate3(missingMemberBehavior)),
             LabelCoordinates =
                 labelCoordinates.Map(value => value.GetCoordinateF(missingMemberBehavior)),
-            MarkerHref = marker.Map(value => value.GetString()) ?? "",
+            MarkerIconHref = marker.Map(value => value.GetString()) ?? "",
             ChatLink = chatLink.Map(value => value.GetStringRequired())
         };
     }
