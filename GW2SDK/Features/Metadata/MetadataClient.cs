@@ -17,6 +17,11 @@ public sealed class MetadataClient
         httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
+    /// <summary>Retrieves information about an API version, either v1 or v2.</summary>
+    /// <param name="version">The API version.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(ApiVersion Value, MessageContext Context)> GetApiVersion(
         string version = "v2",
         MissingMemberBehavior missingMemberBehavior = default,
@@ -27,6 +32,10 @@ public sealed class MetadataClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the latest build ID of the game client.</summary>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     [SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Public API")]
     public Task<(Build Value, MessageContext Context)> GetBuild(
         MissingMemberBehavior missingMemberBehavior = default,
