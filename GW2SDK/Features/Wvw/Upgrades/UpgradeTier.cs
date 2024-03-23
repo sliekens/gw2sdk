@@ -8,5 +8,5 @@ public sealed record UpgradeTier
 
     public required int YaksRequired { get; init; }
 
-    public required IReadOnlyCollection<Upgrade> Upgrades { get; init; }
+    public required IReadOnlyList<Upgrade> Upgrades { get; init; }
 }
