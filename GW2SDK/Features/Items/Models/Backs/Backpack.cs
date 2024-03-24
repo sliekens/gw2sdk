@@ -34,10 +34,10 @@ public sealed record Backpack : Item
     /// with selectable stats.</summary>
     public required IReadOnlyList<int> StatChoices { get; init; }
 
-    /// <summary>The IDs of other items that the current item can be upgraded into. Each item in the collection represents a possible
-    /// upgrade path.</summary>
-    public required IReadOnlyCollection<ItemUpgrade> UpgradesInto { get; init; }
+    /// <summary>If the current item can be infused, this collection contains the IDs of the infused variations of the current
+    /// item. Each item in the collection represents a possible upgrade path.</summary>
+    public required IReadOnlyCollection<InfusionSlotUpgradePath> UpgradesInto { get; init; }
 
-    /// <summary>The IDs of other items that can be upgraded into the current item.</summary>
-    public required IReadOnlyCollection<ItemUpgrade> UpgradesFrom { get; init; }
+    /// <summary>If the current item is infused, this collection contains the IDs of the non-infused variations.</summary>
+    public required IReadOnlyCollection<InfusionSlotUpgradePath> UpgradesFrom { get; init; }
 }

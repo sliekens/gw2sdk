@@ -194,13 +194,13 @@ internal static class BackpackJson
                 ?? Empty.ListOfInt32,
             UpgradesInto =
                 upgradesInto.Map(
-                    values => values.GetList(value => value.GetItemUpgrade(missingMemberBehavior))
+                    values => values.GetList(value => value.GetInfusionSlotUpgradePath(missingMemberBehavior))
                 )
-                ?? Empty.List<ItemUpgrade>(),
+                ?? Empty.List<InfusionSlotUpgradePath>(),
             UpgradesFrom = upgradesFrom.Map(
-                    values => values.GetList(value => value.GetItemUpgrade(missingMemberBehavior))
+                    values => values.GetList(value => value.GetInfusionSlotUpgradePath(missingMemberBehavior))
                 )
-                ?? Empty.List<ItemUpgrade>(),
+                ?? Empty.List<InfusionSlotUpgradePath>(),
         };
     }
 }

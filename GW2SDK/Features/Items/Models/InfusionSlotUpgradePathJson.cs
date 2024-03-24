@@ -1,11 +1,11 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-internal static class ItemUpgradeJson
+internal static class InfusionSlotUpgradePathJson
 {
-    public static ItemUpgrade GetItemUpgrade(
+    public static InfusionSlotUpgradePath GetInfusionSlotUpgradePath(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -28,7 +28,7 @@ internal static class ItemUpgradeJson
             }
         }
 
-        return new ItemUpgrade
+        return new InfusionSlotUpgradePath
         {
             Upgrade = upgrade.Map(value => value.GetEnum<UpgradeType>(missingMemberBehavior)),
             ItemId = itemId.Map(value => value.GetInt32())

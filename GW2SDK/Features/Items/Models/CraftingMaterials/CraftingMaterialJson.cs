@@ -110,9 +110,9 @@ internal static class CraftingMaterialJson
             ChatLink = chatLink.Map(value => value.GetStringRequired()),
             IconHref = icon.Map(value => value.GetString()),
             UpgradesInto = upgradesInto.Map(
-                    values => values.GetList(value => value.GetItemUpgrade(missingMemberBehavior))
+                    values => values.GetList(value => value.GetInfusionSlotUpgradePath(missingMemberBehavior))
                 )
-                ?? Empty.List<ItemUpgrade>()
+                ?? Empty.List<InfusionSlotUpgradePath>()
         };
     }
 }

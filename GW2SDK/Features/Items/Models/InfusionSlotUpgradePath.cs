@@ -2,7 +2,7 @@
 
 [PublicAPI]
 [DataTransferObject]
-public sealed record ItemUpgrade
+public sealed record InfusionSlotUpgradePath
 {
     public required UpgradeType Upgrade { get; init; }
 
