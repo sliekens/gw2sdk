@@ -1,25 +1,29 @@
 ﻿using GuildWars2.Http;
 using GuildWars2.Json;
 
-namespace GuildWars2.Pve.Home.Http;
+namespace GuildWars2.Pve.Home.Cats.Http;
 
-internal sealed class UnlockedNodesIndexRequest : IHttpRequest<HashSet<string>>
+internal sealed class CatsRequest : IHttpRequest<HashSet<Cat>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/account/home/nodes")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/home/cats")
     {
         AcceptEncoding = "gzip",
-        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+        Arguments = new QueryBuilder
+        {
+            { "ids", "all" },
+            { "v", SchemaVersion.Recommended }
+        }
     };
 
-    public required string? AccessToken { get; init; }
+    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<(HashSet<string> Value, MessageContext Context)> SendAsync(
+    public async Task<(HashSet<Cat> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
     {
         using var response = await httpClient.SendAsync(
-                Template with { BearerToken = AccessToken },
+                Template,
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
@@ -28,7 +32,7 @@ internal sealed class UnlockedNodesIndexRequest : IHttpRequest<HashSet<string>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetStringRequired());
+        var value = json.RootElement.GetSet(entry => entry.GetCat(MissingMemberBehavior));
         return (value, new MessageContext(response));
     }
 }

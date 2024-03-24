@@ -1,7 +1,7 @@
 ﻿using GuildWars2.Http;
 using GuildWars2.Json;
 
-namespace GuildWars2.Pve.Home.Http;
+namespace GuildWars2.Pve.Home.Cats.Http;
 
 internal sealed class CatsIndexRequest : IHttpRequest<HashSet<int>>
 {

@@ -1,25 +1,17 @@
 ﻿using GuildWars2.Http;
-using GuildWars2.Json;
-using GuildWars2.Pve.Home.Cats;
 
-namespace GuildWars2.Pve.Home.Http;
+namespace GuildWars2.Pve.Home.Cats.Http;
 
-internal sealed class CatsByIdsRequest : IHttpRequest<HashSet<Cat>>
+internal sealed class CatByIdRequest(int catId) : IHttpRequest<Cat>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/home/cats") { AcceptEncoding = "gzip" };
 
-    public CatsByIdsRequest(IReadOnlyCollection<int> catIds)
-    {
-        Check.Collection(catIds);
-        CatIds = catIds;
-    }
-
-    public IReadOnlyCollection<int> CatIds { get; }
+    public int CatId { get; } = catId;
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<(HashSet<Cat> Value, MessageContext Context)> SendAsync(
+    public async Task<(Cat Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -29,7 +21,7 @@ internal sealed class CatsByIdsRequest : IHttpRequest<HashSet<Cat>>
                 {
                     Arguments = new QueryBuilder
                     {
-                        { "ids", CatIds },
+                        { "id", CatId },
                         { "v", SchemaVersion.Recommended }
                     }
                 },
@@ -41,7 +33,7 @@ internal sealed class CatsByIdsRequest : IHttpRequest<HashSet<Cat>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetCat(MissingMemberBehavior));
+        var value = json.RootElement.GetCat(MissingMemberBehavior);
         return (value, new MessageContext(response));
     }
 }

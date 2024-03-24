@@ -1,8 +1,7 @@
 ﻿using GuildWars2.Http;
 using GuildWars2.Json;
-using GuildWars2.Pve.Home.Nodes;
 
-namespace GuildWars2.Pve.Home.Http;
+namespace GuildWars2.Pve.Home.Nodes.Http;
 
 internal sealed class NodesRequest : IHttpRequest<HashSet<Node>>
 {

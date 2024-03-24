@@ -1,17 +1,20 @@
 ﻿using GuildWars2.Http;
 using GuildWars2.Json;
-using GuildWars2.Pve.Home.Cats;
 
-namespace GuildWars2.Pve.Home.Http;
+namespace GuildWars2.Pve.Home.Cats.Http;
 
-internal sealed class CatsByPageRequest(int pageIndex) : IHttpRequest<HashSet<Cat>>
+internal sealed class CatsByIdsRequest : IHttpRequest<HashSet<Cat>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/home/cats") { AcceptEncoding = "gzip" };
 
-    public int PageIndex { get; } = pageIndex;
+    public CatsByIdsRequest(IReadOnlyCollection<int> catIds)
+    {
+        Check.Collection(catIds);
+        CatIds = catIds;
+    }
 
-    public int? PageSize { get; init; }
+    public IReadOnlyCollection<int> CatIds { get; }
 
     public required MissingMemberBehavior MissingMemberBehavior { get; init; }
 
@@ -20,15 +23,15 @@ internal sealed class CatsByPageRequest(int pageIndex) : IHttpRequest<HashSet<Ca
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new() { { "page", PageIndex } };
-        if (PageSize.HasValue)
-        {
-            search.Add("page_size", PageSize.Value);
-        }
-
-        search.Add("v", SchemaVersion.Recommended);
         using var response = await httpClient.SendAsync(
-                Template with { Arguments = search },
+                Template with
+                {
+                    Arguments = new QueryBuilder
+                    {
+                        { "ids", CatIds },
+                        { "v", SchemaVersion.Recommended }
+                    }
+                },
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )

@@ -1,6 +1,7 @@
 ﻿using GuildWars2.Pve.Home.Cats;
-using GuildWars2.Pve.Home.Http;
+using GuildWars2.Pve.Home.Cats.Http;
 using GuildWars2.Pve.Home.Nodes;
+using GuildWars2.Pve.Home.Nodes.Http;
 
 namespace GuildWars2.Pve.Home;
 

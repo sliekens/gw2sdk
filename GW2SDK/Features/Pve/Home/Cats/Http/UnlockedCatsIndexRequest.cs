@@ -1,23 +1,25 @@
 ﻿using GuildWars2.Http;
 using GuildWars2.Json;
 
-namespace GuildWars2.Pve.Home.Http;
+namespace GuildWars2.Pve.Home.Cats.Http;
 
-internal sealed class NodesIndexRequest : IHttpRequest<HashSet<string>>
+internal sealed class UnlockedCatsIndexRequest : IHttpRequest<HashSet<int>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/home/nodes")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/account/home/cats")
     {
         AcceptEncoding = "gzip",
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
     };
 
-    public async Task<(HashSet<string> Value, MessageContext Context)> SendAsync(
+    public required string? AccessToken { get; init; }
+
+    public async Task<(HashSet<int> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
     {
         using var response = await httpClient.SendAsync(
-                Template,
+                Template with { BearerToken = AccessToken },
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
@@ -26,7 +28,7 @@ internal sealed class NodesIndexRequest : IHttpRequest<HashSet<string>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetStringRequired());
+        var value = json.RootElement.GetSet(entry => entry.GetInt32());
         return (value, new MessageContext(response));
     }
 }
