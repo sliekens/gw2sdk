@@ -19,6 +19,48 @@ public sealed class HomeClient
         httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
+    #region v2/account/home/cats
+
+    /// <summary>Retrieves the IDs of home cats unlocked on the account associated with the access token. This endpoint is only
+    /// accessible with a valid access token.</summary>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedCats(
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        UnlockedCatsIndexRequest request = new() { AccessToken = accessToken };
+        return request.SendAsync(httpClient, cancellationToken);
+    }
+
+    #endregion v2/account/home/cats
+
+    #region v2/account/home/nodes
+
+    /// <summary>Retrieves the IDs of home gathering nodes unlocked on the account associated with the access token. This
+    /// endpoint is only accessible with a valid access token.</summary>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public Task<(HashSet<string> Value, MessageContext Context)> GetUnlockedNodes(
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        UnlockedNodesIndexRequest request = new() { AccessToken = accessToken };
+        return request.SendAsync(httpClient, cancellationToken);
+    }
+
+    #endregion v2/account/home/nodes
+
+    #region v2/home/cats
+
+    /// <summary>Retrieves all home cats.</summary>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Cat> Value, MessageContext Context)> GetCats(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -28,6 +70,9 @@ public sealed class HomeClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all home cats.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<int> Value, MessageContext Context)> GetCatsIndex(
         CancellationToken cancellationToken = default
     )
@@ -36,6 +81,11 @@ public sealed class HomeClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a home cat by its ID.</summary>
+    /// <param name="catId">The outfit ID.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(Cat Value, MessageContext Context)> GetCatById(
         int catId,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -46,6 +96,11 @@ public sealed class HomeClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves home cats by their IDs.</summary>
+    /// <param name="catIds">The cat IDs.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Cat> Value, MessageContext Context)> GetCatsByIds(
         IReadOnlyCollection<int> catIds,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -56,6 +111,12 @@ public sealed class HomeClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of home cats.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Cat> Value, MessageContext Context)> GetCatsByPage(
         int pageIndex,
         int? pageSize,
@@ -71,15 +132,14 @@ public sealed class HomeClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedCats(
-        string? accessToken,
-        CancellationToken cancellationToken = default
-    )
-    {
-        UnlockedCatsIndexRequest request = new() { AccessToken = accessToken };
-        return request.SendAsync(httpClient, cancellationToken);
-    }
+    #endregion v2/home/cats
 
+    #region v2/home/nodes
+
+    /// <summary>Retrieves all home gathering nodes.</summary>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Node> Value, MessageContext Context)> GetNodes(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -89,6 +149,9 @@ public sealed class HomeClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all home gathering nodes.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<string> Value, MessageContext Context)> GetNodesIndex(
         CancellationToken cancellationToken = default
     )
@@ -96,6 +159,12 @@ public sealed class HomeClient
         NodesIndexRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);
     }
+
+    /// <summary>Retrieves a home gathering node by its ID.</summary>
+    /// <param name="nodeId">The node ID.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(Node Value, MessageContext Context)> GetNodeById(
         string nodeId,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -106,6 +175,11 @@ public sealed class HomeClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves home gathering nodes by their IDs.</summary>
+    /// <param name="nodeIds">The node IDs.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Node> Value, MessageContext Context)> GetNodesByIds(
         IReadOnlyCollection<string> nodeIds,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -116,6 +190,12 @@ public sealed class HomeClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of home gathering nodes.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Node> Value, MessageContext Context)> GetNodesByPage(
         int pageIndex,
         int? pageSize,
@@ -131,12 +211,5 @@ public sealed class HomeClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    public Task<(HashSet<string> Value, MessageContext Context)> GetUnlockedNodes(
-        string? accessToken,
-        CancellationToken cancellationToken = default
-    )
-    {
-        UnlockedNodesIndexRequest request = new() { AccessToken = accessToken };
-        return request.SendAsync(httpClient, cancellationToken);
-    }
+    #endregion v2/home/nodes
 }
