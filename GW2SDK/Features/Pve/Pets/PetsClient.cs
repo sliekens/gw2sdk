@@ -16,6 +16,11 @@ public sealed class PetsClient
         httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
+    /// <summary>Retrieves all pets.</summary>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Pet> Value, MessageContext Context)> GetPets(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -30,6 +35,9 @@ public sealed class PetsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all pets.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<int> Value, MessageContext Context)> GetPetsIndex(
         CancellationToken cancellationToken = default
     )
@@ -38,6 +46,12 @@ public sealed class PetsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a pet by its ID.</summary>
+    /// <param name="petId">The pet ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(Pet Value, MessageContext Context)> GetPetById(
         int petId,
         Language? language = default,
@@ -53,6 +67,12 @@ public sealed class PetsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves pets by their IDs.</summary>
+    /// <param name="petIds">The pet IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Pet> Value, MessageContext Context)> GetPetsByIds(
         IReadOnlyCollection<int> petIds,
         Language? language = default,
@@ -68,6 +88,13 @@ public sealed class PetsClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of pets.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Pet> Value, MessageContext Context)> GetPetsByPage(
         int pageIndex,
         int? pageSize = default,
