@@ -27,7 +27,7 @@ public sealed class WorldBossesClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
-    /// <summary>Retrieves the IDs of all world bosses which have been defeated by the account since the last server reset.
+    /// <summary>Retrieves the IDs of all world bosses that have been defeated by the account since the last server reset.
     /// This endpoint is only accessible with a valid access token.</summary>
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
