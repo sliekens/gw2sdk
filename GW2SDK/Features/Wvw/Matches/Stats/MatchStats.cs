@@ -10,5 +10,5 @@ public sealed record MatchStats
 
     public required Distribution Kills { get; init; }
 
-    public required IReadOnlyCollection<object> Maps { get; init; }
+    public required IReadOnlyCollection<MapSummary> Maps { get; init; }
 }
