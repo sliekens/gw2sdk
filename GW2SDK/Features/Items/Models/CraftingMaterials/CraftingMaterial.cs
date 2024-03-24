@@ -4,7 +4,7 @@
 [PublicAPI]
 public sealed record CraftingMaterial : Item
 {
-    /// <summary>If the current material is used to infuse equipment, this collection contains the IDs of the infused items.
-    /// Each item in the collection represents a possible upgrade path.</summary>
+    /// <summary>If the current material is used in a Mystic Forge recipe to infuse equipment, this collection contains the IDs
+    /// of the infused items. Each item in the collection represents a possible upgrade path.</summary>
     public required IReadOnlyCollection<InfusionSlotUpgradePath> UpgradesInto { get; init; }
 }

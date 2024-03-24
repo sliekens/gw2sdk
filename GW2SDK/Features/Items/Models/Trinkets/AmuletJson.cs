@@ -29,8 +29,6 @@ internal static class AmuletJson
         OptionalMember infixUpgradeBuff = "buff";
         NullableMember suffixItemId = "suffix_item_id";
         OptionalMember statChoices = "stat_choices";
-        OptionalMember upgradesInto = "upgrades_into";
-        OptionalMember upgradesFrom = "upgrades_from";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
@@ -85,14 +83,6 @@ internal static class AmuletJson
             else if (icon.Match(member))
             {
                 icon = member;
-            }
-            else if (upgradesInto.Match(member))
-            {
-                upgradesInto = member;
-            }
-            else if (upgradesFrom.Match(member))
-            {
-                upgradesFrom = member;
             }
             else if (member.NameEquals("details"))
             {
@@ -194,16 +184,7 @@ internal static class AmuletJson
                 infixUpgradeAttributes.Map(values => values.GetAttributes(missingMemberBehavior))
                 ?? new Dictionary<AttributeName, int>(0),
             Buff = infixUpgradeBuff.Map(value => value.GetBuff(missingMemberBehavior)),
-            SuffixItemId = suffixItemId.Map(value => value.GetInt32()),
-            UpgradesInto =
-                upgradesInto.Map(
-                    values => values.GetList(value => value.GetInfusionSlotUpgradePath(missingMemberBehavior))
-                )
-                ?? Empty.List<InfusionSlotUpgradePath>(),
-            UpgradesFrom = upgradesFrom.Map(
-                    values => values.GetList(value => value.GetInfusionSlotUpgradePath(missingMemberBehavior))
-                )
-                ?? Empty.List<InfusionSlotUpgradePath>()
+            SuffixItemId = suffixItemId.Map(value => value.GetInt32())
         };
     }
 }

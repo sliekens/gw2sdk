@@ -32,12 +32,4 @@ public record Trinket : Item
     /// <summary>The IDs of the attribute combinations that can be chosen for the item. This property is only used for items
     /// with selectable stats.</summary>
     public required IReadOnlyList<int> StatChoices { get; init; }
-
-    /// <summary>If the current item can be infused or attuned, this collection contains the IDs of the infused/attuned
-    /// variations of the current item. Each item in the collection represents a possible upgrade path.</summary>
-    public required IReadOnlyCollection<InfusionSlotUpgradePath> UpgradesInto { get; init; }
-
-    /// <summary>If the current item is infused or attuned, this collection contains the IDs of the uninfused/unattuned
-    /// variations.</summary>
-    public required IReadOnlyCollection<InfusionSlotUpgradePath> UpgradesFrom { get; init; }
 }
