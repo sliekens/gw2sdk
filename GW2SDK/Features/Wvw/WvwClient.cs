@@ -26,6 +26,11 @@ public sealed class WvwClient
 
     #region v2/wvw/abilities
 
+    /// <summary>Retrieves all World Abilities.</summary>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Ability> Value, MessageContext Context)> GetAbilities(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -40,6 +45,9 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all World Abilities.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<int> Value, MessageContext Context)> GetAbilitiesIndex(
         CancellationToken cancellationToken = default
     )
@@ -48,6 +56,12 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a World Ability by its ID.</summary>
+    /// <param name="abilityId">The World Ability ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(Ability Value, MessageContext Context)> GetAbilityById(
         int abilityId,
         Language? language = default,
@@ -63,6 +77,12 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves World Abilities by their IDs.</summary>
+    /// <param name="abilityIds">The World Ability IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Ability> Value, MessageContext Context)> GetAbilitiesByIds(
         IReadOnlyCollection<int> abilityIds,
         Language? language = default,
@@ -78,6 +98,13 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of World Abilities.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Ability> Value, MessageContext Context)> GetAbilitiesByPage(
         int pageIndex,
         int? pageSize = default,
@@ -99,6 +126,11 @@ public sealed class WvwClient
 
     #region v2/wvw/objectives
 
+    /// <summary>Retrieves all WvW objectives.</summary>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Objective> Value, MessageContext Context)> GetObjectives(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -113,6 +145,9 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all WvW objectives.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<string> Value, MessageContext Context)> GetObjectivesIndex(
         CancellationToken cancellationToken = default
     )
@@ -121,6 +156,12 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a WvW objective by its ID.</summary>
+    /// <param name="objectiveId">The WvW objective ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(Objective Value, MessageContext Context)> GetObjectiveById(
         string objectiveId,
         Language? language = default,
@@ -136,6 +177,12 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves WvW objectives by their IDs.</summary>
+    /// <param name="objectiveIds">The WvW objective IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Objective> Value, MessageContext Context)> GetObjectivesByIds(
         IReadOnlyCollection<string> objectiveIds,
         Language? language = default,
@@ -151,6 +198,13 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of WvW objectives.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Objective> Value, MessageContext Context)> GetObjectivesByPage(
         int pageIndex,
         int? pageSize = default,
@@ -172,6 +226,11 @@ public sealed class WvwClient
 
     #region v2/wvw/ranks
 
+    /// <summary>Retrieves all World Ranks.</summary>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Rank> Value, MessageContext Context)> GetRanks(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -186,6 +245,9 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all World Ranks.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<int> Value, MessageContext Context)> GetRanksIndex(
         CancellationToken cancellationToken = default
     )
@@ -194,6 +256,12 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a World Rank by its ID.</summary>
+    /// <param name="rankId">The World Rank ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(Rank Value, MessageContext Context)> GetRankById(
         int rankId,
         Language? language = default,
@@ -209,6 +277,12 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves World Ranks by their IDs.</summary>
+    /// <param name="rankIds">The World Rank IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Rank> Value, MessageContext Context)> GetRanksByIds(
         IReadOnlyCollection<int> rankIds,
         Language? language = default,
@@ -224,6 +298,13 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of World Ranks.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Rank> Value, MessageContext Context)> GetRanksByPage(
         int pageIndex,
         int? pageSize = default,
@@ -245,6 +326,11 @@ public sealed class WvwClient
 
     #region v2/wvw/upgrades
 
+    /// <summary>Retrieves all WvW objective upgrades.</summary>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<ObjectiveUpgrade> Value, MessageContext Context)> GetUpgrades(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -259,6 +345,9 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all WvW objective upgrades.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<int> Value, MessageContext Context)> GetUpgradesIndex(
         CancellationToken cancellationToken = default
     )
@@ -267,6 +356,12 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a WvW objective upgrade by its ID.</summary>
+    /// <param name="upgradeId">The upgrade ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(ObjectiveUpgrade Value, MessageContext Context)> GetUpgradeById(
         int upgradeId,
         Language? language = default,
@@ -282,6 +377,12 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves WvW objective upgrades by their IDs.</summary>
+    /// <param name="upgradeIds">The upgrade IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<ObjectiveUpgrade> Value, MessageContext Context)> GetUpgradesByIds(
         IReadOnlyCollection<int> upgradeIds,
         Language? language = default,
@@ -297,6 +398,13 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of WvW objective upgrades.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<ObjectiveUpgrade> Value, MessageContext Context)> GetUpgradesByPage(
         int pageIndex,
         int? pageSize = default,
@@ -318,6 +426,10 @@ public sealed class WvwClient
 
     #region v2/wvw/matches
 
+    /// <summary>Retrieves all WvW matches.</summary>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Match> Value, MessageContext Context)> GetMatches(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -327,6 +439,9 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all WvW matches.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<string> Value, MessageContext Context)> GetMatchesIndex(
         CancellationToken cancellationToken = default
     )
@@ -335,6 +450,11 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a WvW match by its ID.</summary>
+    /// <param name="matchId">The match ID.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(Match Value, MessageContext Context)> GetMatchById(
         string matchId,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -345,6 +465,11 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves WvW matches by their IDs.</summary>
+    /// <param name="matchIds">The match IDs.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Match> Value, MessageContext Context)> GetMatchesByIds(
         IReadOnlyCollection<string> matchIds,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -358,6 +483,12 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of WvW matches.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Match> Value, MessageContext Context)> GetMatchesByPage(
         int pageIndex,
         int? pageSize = default,
@@ -373,6 +504,11 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a WvW match by one of the participating world IDs.</summary>
+    /// <param name="worldId">The world ID.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(Match Value, MessageContext Context)> GetMatchByWorldId(
         int worldId,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -390,6 +526,10 @@ public sealed class WvwClient
 
     #region v2/wvw/matches/overview
 
+    /// <summary>Retrieves all WvW matches.</summary>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<MatchOverview> Value, MessageContext Context)> GetMatchesOverview(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -399,6 +539,9 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all WvW matches.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<string> Value, MessageContext Context)> GetMatchesOverviewIndex(
         CancellationToken cancellationToken = default
     )
@@ -407,6 +550,11 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a WvW match by its ID.</summary>
+    /// <param name="matchId">The match ID.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(MatchOverview Value, MessageContext Context)> GetMatchOverviewById(
         string matchId,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -420,6 +568,11 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves WvW matches by their IDs.</summary>
+    /// <param name="matchIds">The match IDs.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<MatchOverview> Value, MessageContext Context)> GetMatchesOverviewByIds(
         IReadOnlyCollection<string> matchIds,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -433,6 +586,12 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of WvW matches.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<MatchOverview> Value, MessageContext Context)> GetMatchesOverviewByPage(
         int pageIndex,
         int? pageSize = default,
@@ -448,6 +607,11 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a WvW match by one of the participating world IDs.</summary>
+    /// <param name="worldId">The world ID.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(MatchOverview Value, MessageContext Context)> GetMatchOverviewByWorldId(
         int worldId,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -465,6 +629,10 @@ public sealed class WvwClient
 
     #region v2/wvw/matches/scores
 
+    /// <summary>Retrieves all WvW matches.</summary>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<MatchScores> Value, MessageContext Context)> GetMatchesScores(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -474,6 +642,9 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all WvW matches.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<string> Value, MessageContext Context)> GetMatchesScoresIndex(
         CancellationToken cancellationToken = default
     )
@@ -482,6 +653,11 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a WvW match by its ID.</summary>
+    /// <param name="matchId">The match ID.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(MatchScores Value, MessageContext Context)> GetMatchScoresById(
         string matchId,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -495,6 +671,11 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves WvW matches by their IDs.</summary>
+    /// <param name="matchIds">The match IDs.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<MatchScores> Value, MessageContext Context)> GetMatchesScoresByIds(
         IReadOnlyCollection<string> matchIds,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -508,6 +689,12 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of WvW matches.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<MatchScores> Value, MessageContext Context)> GetMatchesScoresByPage(
         int pageIndex,
         int? pageSize = default,
@@ -523,6 +710,11 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a WvW match by one of the participating world IDs.</summary>
+    /// <param name="worldId">The world ID.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(MatchScores Value, MessageContext Context)> GetMatchScoresByWorldId(
         int worldId,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -540,6 +732,10 @@ public sealed class WvwClient
 
     #region v2/wvw/matches/stats
 
+    /// <summary>Retrieves all WvW matches.</summary>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<MatchStats> Value, MessageContext Context)> GetMatchesStats(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -549,6 +745,9 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all WvW matches.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<string> Value, MessageContext Context)> GetMatchesStatsIndex(
         CancellationToken cancellationToken = default
     )
@@ -557,6 +756,11 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a WvW match by its ID.</summary>
+    /// <param name="matchId">The match ID.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(MatchStats Value, MessageContext Context)> GetMatchStatsById(
         string matchId,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -570,6 +774,11 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves WvW matches by their IDs.</summary>
+    /// <param name="matchIds">The match IDs.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<MatchStats> Value, MessageContext Context)> GetMatchesStatsByIds(
         IReadOnlyCollection<string> matchIds,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -583,6 +792,12 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of WvW matches.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<MatchStats> Value, MessageContext Context)> GetMatchesStatsByPage(
         int pageIndex,
         int? pageSize = default,
@@ -598,6 +813,11 @@ public sealed class WvwClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a WvW match by one of the participating world IDs.</summary>
+    /// <param name="worldId">The world ID.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(MatchStats Value, MessageContext Context)> GetMatchStatsByWorldId(
         int worldId,
         MissingMemberBehavior missingMemberBehavior = default,
