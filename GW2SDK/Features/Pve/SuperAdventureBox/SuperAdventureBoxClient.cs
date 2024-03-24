@@ -18,6 +18,13 @@ public sealed class SuperAdventureBoxClient
 
     #region v2/characters/:id/sab
 
+    /// <summary>Retrieves the Super Adventure Box progress of a character on the account associated with the access token.
+    /// This endpoint is only accessible with a valid access token.</summary>
+    /// <param name="characterName">A character name that belongs to the account associated with the access token.</param>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(SuperAdventureBoxProgress Value, MessageContext Context)>
         GetSuperAdventureBoxProgress(
             string characterName,
