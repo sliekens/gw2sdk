@@ -16,6 +16,10 @@ public sealed class QuaggansClient
         httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
+    /// <summary>Retrieves all quaggans.</summary>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Quaggan> Value, MessageContext Context)> GetQuaggans(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -25,6 +29,9 @@ public sealed class QuaggansClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves the IDs of all quaggans.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<string> Value, MessageContext Context)> GetQuaggansIndex(
         CancellationToken cancellationToken = default
     )
@@ -33,6 +40,11 @@ public sealed class QuaggansClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a quaggan by its ID.</summary>
+    /// <param name="quagganId">The quaggan ID.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(Quaggan Value, MessageContext Context)> GetQuagganById(
         string quagganId,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -46,6 +58,11 @@ public sealed class QuaggansClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves quaggans by their IDs.</summary>
+    /// <param name="quagganIds">The quaggan IDs.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Quaggan> Value, MessageContext Context)> GetQuaggansByIds(
         IReadOnlyCollection<string> quagganIds,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -57,6 +74,12 @@ public sealed class QuaggansClient
         return request.SendAsync(httpClient, cancellationToken);
     }
 
+    /// <summary>Retrieves a page of quaggans.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Quaggan> Value, MessageContext Context)> GetQuaggansByPage(
         int pageIndex,
         int? pageSize = default,
