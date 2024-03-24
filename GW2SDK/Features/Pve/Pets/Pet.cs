@@ -13,5 +13,5 @@ public sealed record Pet
     /// <summary>The URL of the pet icon.</summary>
     public required string IconHref { get; init; }
 
-    public required IReadOnlyCollection<PetSkill> Skills { get; init; }
+    public required IReadOnlyList<PetSkill> Skills { get; init; }
 }
