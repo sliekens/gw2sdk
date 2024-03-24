@@ -3,9 +3,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-internal static class InfusionSlotUpgradePathJson
+internal static class InfusionSlotUpgradeSourceJson
 {
-    public static InfusionSlotUpgradePath GetInfusionSlotUpgradePath(
+    public static InfusionSlotUpgradeSource GetInfusionSlotUpgradeSource(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -28,7 +28,7 @@ internal static class InfusionSlotUpgradePathJson
             }
         }
 
-        return new InfusionSlotUpgradePath
+        return new InfusionSlotUpgradeSource
         {
             Upgrade = upgrade.Map(
                 value => value.GetEnum<InfusionSlotUpgradeKind>(missingMemberBehavior)

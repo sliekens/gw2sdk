@@ -39,5 +39,5 @@ public sealed record Backpack : Item
     public required IReadOnlyCollection<InfusionSlotUpgradePath> UpgradesInto { get; init; }
 
     /// <summary>If the current back item is infused, this collection contains the IDs of possible source items.</summary>
-    public required IReadOnlyCollection<InfusionSlotUpgradePath> UpgradesFrom { get; init; }
+    public required IReadOnlyCollection<InfusionSlotUpgradeSource> UpgradesFrom { get; init; }
 }

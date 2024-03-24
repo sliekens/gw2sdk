@@ -9,5 +9,5 @@ public sealed record Ring : Trinket
     public required IReadOnlyCollection<InfusionSlotUpgradePath> UpgradesInto { get; init; }
 
     /// <summary>If the current ring is infused or attuned, this collection contains the IDs of possible source items.</summary>
-    public required IReadOnlyCollection<InfusionSlotUpgradePath> UpgradesFrom { get; init; }
+    public required IReadOnlyCollection<InfusionSlotUpgradeSource> UpgradesFrom { get; init; }
 }

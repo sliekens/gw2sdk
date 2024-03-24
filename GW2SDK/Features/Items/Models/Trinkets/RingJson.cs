@@ -194,13 +194,18 @@ internal static class RingJson
             SuffixItemId = suffixItemId.Map(value => value.GetInt32()),
             UpgradesInto =
                 upgradesInto.Map(
-                    values => values.GetList(value => value.GetInfusionSlotUpgradePath(missingMemberBehavior))
+                    values =>
+                        values.GetList(
+                            value => value.GetInfusionSlotUpgradePath(missingMemberBehavior)
+                        )
                 )
                 ?? Empty.List<InfusionSlotUpgradePath>(),
             UpgradesFrom = upgradesFrom.Map(
-                    values => values.GetList(value => value.GetInfusionSlotUpgradePath(missingMemberBehavior))
+                    values => values.GetList(
+                        value => value.GetInfusionSlotUpgradeSource(missingMemberBehavior)
+                    )
                 )
-                ?? Empty.List<InfusionSlotUpgradePath>()
+                ?? Empty.List<InfusionSlotUpgradeSource>()
         };
     }
 }
