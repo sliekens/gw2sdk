@@ -6,5 +6,5 @@ public sealed record Quaggan
 {
     public required string Id { get; init; }
 
-    public required string PictureHref { get; init; }
+    public required string ImageHref { get; init; }
 }

@@ -14,6 +14,6 @@ public class QuagganById
         var (actual, _) = await sut.Quaggans.GetQuagganById(id);
 
         Assert.Equal(id, actual.Id);
-        actual.Quaggan_has_picture();
+        actual.Quaggan_has_image();
     }
 }

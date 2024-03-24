@@ -21,7 +21,7 @@ public class QuaggansByPage
             entry =>
             {
                 entry.Id_is_not_empty();
-                entry.Quaggan_has_picture();
+                entry.Quaggan_has_image();
             }
         );
     }

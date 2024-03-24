@@ -12,7 +12,7 @@ public class QuagganViewModel
 {
     public bool Active { get; set; }
 
-    public string PictureHref { get; set; } = "";
+    public string ImageHref { get; set; } = "";
 
     public string Id { get; set; } = "";
 }
@@ -34,7 +34,7 @@ public class IndexModel(ILogger<IndexModel> logger, QuaggansClient quaggans) : P
             {
                 Active = index == 0,
                 Id = quaggan.Id,
-                PictureHref = quaggan.PictureHref
+                ImageHref = quaggan.ImageHref
             }
         );
     }

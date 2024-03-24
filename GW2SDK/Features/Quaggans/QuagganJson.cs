@@ -32,7 +32,7 @@ internal static class QuagganJson
         return new Quaggan
         {
             Id = id.Map(value => value.GetStringRequired()),
-            PictureHref = url.Map(value => value.GetStringRequired())
+            ImageHref = url.Map(value => value.GetStringRequired())
         };
     }
 }
