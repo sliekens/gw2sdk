@@ -1,7 +1,7 @@
 ﻿namespace GuildWars2.Items;
 
 [PublicAPI]
-public enum UpgradeType
+public enum InfusionSlotUpgradeKind
 {
     Attunement = 1,
 

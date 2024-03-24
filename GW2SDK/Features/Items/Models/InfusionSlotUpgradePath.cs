@@ -4,7 +4,7 @@
 [DataTransferObject]
 public sealed record InfusionSlotUpgradePath
 {
-    public required UpgradeType Upgrade { get; init; }
+    public required InfusionSlotUpgradeKind Upgrade { get; init; }
 
     public required int ItemId { get; init; }
 }
