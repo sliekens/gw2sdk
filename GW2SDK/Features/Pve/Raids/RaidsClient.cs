@@ -41,12 +41,13 @@ public sealed class RaidsClient
 
     public Task<(Raid Value, MessageContext Context)> GetRaidById(
         string raidId,
+        MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
         RaidByIdRequest request = new(raidId)
         {
-            MissingMemberBehavior = MissingMemberBehavior.Error
+            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }

@@ -41,12 +41,13 @@ public sealed class MapChestsClient
 
     public Task<(MapChest Value, MessageContext Context)> GetMapChestById(
         string mapChestId,
+        MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
         MapChestByIdRequest request = new(mapChestId)
         {
-            MissingMemberBehavior = MissingMemberBehavior.Error
+            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }

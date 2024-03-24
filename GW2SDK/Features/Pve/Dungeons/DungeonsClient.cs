@@ -26,12 +26,13 @@ public sealed class DungeonsClient
 
     public Task<(Dungeon Value, MessageContext Context)> GetDungeonById(
         string dungeonId,
+        MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
         DungeonByIdRequest request = new(dungeonId)
         {
-            MissingMemberBehavior = MissingMemberBehavior.Error
+            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }

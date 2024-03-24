@@ -21,15 +21,20 @@ public sealed class MasteriesClient
     /// <summary>Retrieves mastery track progress on the account associated with the access token. This endpoint is only
     /// accessible with a valid access token.</summary>
     /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<MasteryTrackProgress> Value, MessageContext Context)>
-        GetMasteryTrackProgress(string? accessToken, CancellationToken cancellationToken = default)
+        GetMasteryTrackProgress(
+            string? accessToken,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
         MasteryProgressRequest request = new()
         {
             AccessToken = accessToken,
-            MissingMemberBehavior = MissingMemberBehavior.Error
+            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -41,17 +46,19 @@ public sealed class MasteriesClient
     /// <summary>Retrieves information about earned and spent mastery points on the account associated with the access token.
     /// This endpoint is only accessible with a valid access token.</summary>
     /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(MasteryPointsProgress Value, MessageContext Context)> GetMasteryPointsProgress(
         string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
         MasteryPointsProgressRequest request = new()
         {
             AccessToken = accessToken,
-            MissingMemberBehavior = MissingMemberBehavior.Error
+            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }

@@ -483,16 +483,18 @@ public sealed class BuildsClient
 
     /// <summary>Retrieves a Revenant legend by its ID.</summary>
     /// <param name="legendId">The legend ID.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(Legend Value, MessageContext Context)> GetLegendById(
         string legendId,
+        MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
         LegendByIdRequest request = new(legendId)
         {
-            MissingMemberBehavior = MissingMemberBehavior.Error
+            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
