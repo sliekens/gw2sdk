@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Pve.Home;
+namespace GuildWars2.Tests.Features.Pve.Home.Cats;
 
 public class CatById
 {
@@ -14,7 +14,7 @@ public class CatById
         var (actual, _) = await sut.Pve.Home.GetCatById(id);
 
         Assert.NotNull(actual);
-        Assert.Equal(20, actual.Id);
+        Assert.Equal(id, actual.Id);
         Assert.Equal("necromancer", actual.Hint);
     }
 }

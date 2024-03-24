@@ -1,20 +1,20 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Pve.Home;
+namespace GuildWars2.Tests.Features.Pve.Home.Nodes;
 
-public class CatsByFilter
+public class NodesByFilter
 {
     [Fact]
     public async Task Can_be_filtered_by_id()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        HashSet<int> ids =
+        HashSet<string> ids =
         [
-            1, 2,
-            3
+            "garden_plot_01", "garden_plot_02",
+            "garden_plot_03"
         ];
 
-        var (actual, _) = await sut.Pve.Home.GetCatsByIds(ids);
+        var (actual, _) = await sut.Pve.Home.GetNodesByIds(ids);
 
         Assert.Collection(
             ids,

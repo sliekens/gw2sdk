@@ -96,6 +96,40 @@ public sealed class HomeClient
         NodesIndexRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);
     }
+    public Task<(Node Value, MessageContext Context)> GetNodeById(
+        string nodeId,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        NodeByIdRequest request = new(nodeId) { MissingMemberBehavior = missingMemberBehavior };
+        return request.SendAsync(httpClient, cancellationToken);
+    }
+
+    public Task<(HashSet<Node> Value, MessageContext Context)> GetNodesByIds(
+        IReadOnlyCollection<string> nodeIds,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        NodesByIdsRequest request = new(nodeIds) { MissingMemberBehavior = missingMemberBehavior };
+        return request.SendAsync(httpClient, cancellationToken);
+    }
+
+    public Task<(HashSet<Node> Value, MessageContext Context)> GetNodesByPage(
+        int pageIndex,
+        int? pageSize,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        NodesByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(httpClient, cancellationToken);
+    }
 
     public Task<(HashSet<string> Value, MessageContext Context)> GetUnlockedNodes(
         string? accessToken,

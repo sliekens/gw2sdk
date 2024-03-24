@@ -1,18 +1,18 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Pve.Home;
+namespace GuildWars2.Tests.Features.Pve.Home.Cats;
 
-public class Cats
+public class CatsByPage
 {
     [Fact]
-    public async Task Can_be_listed()
+    public async Task Can_be_filtered_by_page()
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Pve.Home.GetCats();
+        var (actual, context) = await sut.Pve.Home.GetCatsByPage(0, 3);
 
-        Assert.NotEmpty(actual);
-        Assert.Equal(context.ResultTotal, actual.Count);
+        Assert.Equal(3, actual.Count);
+        Assert.Equal(3, context.PageSize);
         Assert.All(
             actual,
             cat =>
