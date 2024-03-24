@@ -3,7 +3,7 @@
 namespace GuildWars2.Items;
 
 /// <summary>Information about an armor item. This type is the base type for all armor. Cast objects of this type to a more
-/// specific type to access more properties</summary>
+/// specific type to access more properties.</summary>
 [PublicAPI]
 [Inheritable]
 public record Armor : Item
