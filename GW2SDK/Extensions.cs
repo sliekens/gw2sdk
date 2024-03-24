@@ -1,4 +1,6 @@
-﻿namespace GuildWars2;
+﻿using System.Runtime.CompilerServices;
+
+namespace GuildWars2;
 
 /// <summary>Miscellaneous extension methods.</summary>
 [PublicAPI]
@@ -27,4 +29,22 @@ public static class Extensions
     /// <returns>A new task that returns only the value.</returns>
     public static Task<T> ValueOnly<T>(this Task<(T, MessageContext)> task) =>
         task.ContinueWith(t => t.Result.Item1);
+
+    /// <summary>Returns a new IAsyncEnumerable that only returns the value of the original IAsyncEnumerable, discarding the
+    /// message context.</summary>
+    /// <typeparam name="T">The type of the value returned by the original IAsyncEnumerable.</typeparam>
+    /// <param name="source">The original IAsyncEnumerable, which returns a tuple of the value and also the message context.</param>
+    /// <param name="cancellationToken">A token to cancel the enumeration.</param>
+    /// <returns>A new IAsyncEnumerable that returns only the value.</returns>
+    public static async IAsyncEnumerable<T> ValueOnly<T>(
+        this IAsyncEnumerable<(T, MessageContext)> source,
+        [EnumeratorCancellation] CancellationToken cancellationToken = default
+    )
+    {
+        await foreach (var (value, _) in source.WithCancellation(cancellationToken)
+            .ConfigureAwait(false))
+        {
+            yield return value;
+        }
+    }
 }
