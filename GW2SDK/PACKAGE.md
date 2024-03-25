@@ -48,9 +48,7 @@ internal class Gw2ClientProgram
             ================================================================================================================================================================
              */
             Console.WriteLine(new string('=', 160));
-            Console.WriteLine($"| {"Item",-50} | {"Highest buyer",-50} | {"Low
-
-        void PrintTableHeader()est seller",-50} |");
+            Console.WriteLine($"| {"Item",-50} | {"Highest buyer",-50} | {"Lowest seller",-50} |");
             Console.WriteLine(new string('=', 160));
         }
 
@@ -63,7 +61,6 @@ internal class Gw2ClientProgram
         }
     }
 }
-
 ```
 
 The `GameLink` can be used to receive realtime information from the game client. Below is an example of how to use the `GameLink` to receive information about the player's current character and the current map.
