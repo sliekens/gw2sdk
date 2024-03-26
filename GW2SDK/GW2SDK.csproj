@@ -69,7 +69,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.ILLink.Tasks"  />
+    <PackageReference Include="Microsoft.NET.ILLink.Tasks" />
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" />
     <PackageReference Include="MinVer" />
     <PackageReference Include="PolySharp" />

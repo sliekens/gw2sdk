@@ -1,11 +1,17 @@
 ﻿using GuildWars2.Pvp.Amulets;
+using GuildWars2.Pvp.Amulets.Http;
 using GuildWars2.Pvp.Games;
-using GuildWars2.Pvp.Http;
+using GuildWars2.Pvp.Games.Http;
 using GuildWars2.Pvp.MistChampions;
+using GuildWars2.Pvp.MistChampions.Http;
 using GuildWars2.Pvp.Ranks;
+using GuildWars2.Pvp.Ranks.Http;
 using GuildWars2.Pvp.Seasons;
+using GuildWars2.Pvp.Seasons.Http;
 using GuildWars2.Pvp.Standings;
+using GuildWars2.Pvp.Standings.Http;
 using GuildWars2.Pvp.Stats;
+using GuildWars2.Pvp.Stats.Http;
 
 namespace GuildWars2.Pvp;
 
