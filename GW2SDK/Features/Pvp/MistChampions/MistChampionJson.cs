@@ -66,8 +66,8 @@ internal static class MistChampionJson
             Description = description.Map(value => value.GetStringRequired()),
             Type = type.Map(value => value.GetStringRequired()),
             Stats = stats.Map(value => value.GetMistChampionStats(missingMemberBehavior)),
-            Overlay = overlay.Map(value => value.GetStringRequired()),
-            Underlay = underlay.Map(value => value.GetStringRequired()),
+            OverlayImageHref = overlay.Map(value => value.GetStringRequired()),
+            UnderlayImageHref = underlay.Map(value => value.GetStringRequired()),
             Skins = skins.Map(
                 values => values.GetList(value => value.GetMistChampionSkin(missingMemberBehavior))
             )

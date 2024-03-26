@@ -14,9 +14,9 @@ public sealed record MistChampion
 
     public required MistChampionStats Stats { get; init; }
 
-    public required string Overlay { get; init; }
+    public required string OverlayImageHref { get; init; }
 
-    public required string Underlay { get; init; }
+    public required string UnderlayImageHref { get; init; }
 
     public required IReadOnlyCollection<MistChampionSkin> Skins { get; init; }
 }
