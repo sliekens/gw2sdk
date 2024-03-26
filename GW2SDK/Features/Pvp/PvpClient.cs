@@ -121,7 +121,7 @@ public sealed class PvpClient
         CancellationToken cancellationToken = default
     )
     {
-        UnlockedHeroesRequest request = new() { AccessToken = accessToken };
+        UnlockedMistChampionsRequest request = new() { AccessToken = accessToken };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -220,7 +220,7 @@ public sealed class PvpClient
         CancellationToken cancellationToken = default
     )
     {
-        HeroIndexRequest request = new();
+        MistChampionsIndexRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);
     }
 
