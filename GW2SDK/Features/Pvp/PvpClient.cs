@@ -225,13 +225,13 @@ public sealed class PvpClient
     }
 
     public Task<(MistChampion Value, MessageContext Context)> GetMistChampionById(
-        string heroId,
+        string mistChampionId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MistChampionByIdRequest request = new(heroId)
+        MistChampionByIdRequest request = new(mistChampionId)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -240,13 +240,13 @@ public sealed class PvpClient
     }
 
     public Task<(HashSet<MistChampion> Value, MessageContext Context)> GetMistChampionsByIds(
-        IReadOnlyCollection<string> heroIds,
+        IReadOnlyCollection<string> mistChampionIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MistChampionsByIdsRequest request = new(heroIds)
+        MistChampionsByIdsRequest request = new(mistChampionIds)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
