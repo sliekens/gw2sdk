@@ -17,5 +17,5 @@ public sealed record Division
     /// <summary>The URL of the pip icon.</summary>
     public required string PipIconHref { get; init; }
 
-    public required IReadOnlyCollection<DivisionTier> Tiers { get; init; }
+    public required IReadOnlyList<DivisionTier> Tiers { get; init; }
 }
