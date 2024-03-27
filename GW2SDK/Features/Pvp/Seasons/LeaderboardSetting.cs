@@ -8,5 +8,5 @@ public sealed record LeaderboardSetting
 
     public required string ScoringId { get; init; }
 
-    public required IReadOnlyCollection<LeaderboardTier> Tiers { get; init; }
+    public required IReadOnlyList<LeaderboardTier> Tiers { get; init; }
 }

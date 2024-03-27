@@ -6,5 +6,5 @@ public sealed record Leaderboard
 {
     public required LeaderboardSetting Settings { get; init; }
 
-    public required IReadOnlyCollection<LeaderboardScoring> Scorings { get; init; }
+    public required IReadOnlyList<LeaderboardScoring> Scorings { get; init; }
 }

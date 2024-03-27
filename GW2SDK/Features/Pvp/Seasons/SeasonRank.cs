@@ -15,5 +15,5 @@ public sealed record SeasonRank
 
     public required string SmallOverlay { get; init; }
 
-    public required IReadOnlyCollection<RankTier> Tiers { get; init; }
+    public required IReadOnlyList<RankTier> Tiers { get; init; }
 }

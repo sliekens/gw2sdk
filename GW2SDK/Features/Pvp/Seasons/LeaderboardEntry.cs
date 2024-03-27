@@ -16,5 +16,5 @@ public sealed record LeaderboardEntry
 
     public required DateTimeOffset Date { get; init; }
 
-    public required IReadOnlyCollection<Score> Scores { get; init; }
+    public required IReadOnlyList<Score> Scores { get; init; }
 }
