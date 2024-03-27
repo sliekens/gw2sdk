@@ -49,7 +49,7 @@ internal static class LeaderboardScoringJson
             Id = id.Map(value => value.GetStringRequired()),
             Type = type.Map(value => value.GetStringRequired()),
             Description = description.Map(value => value.GetStringRequired()),
-            Name = type.Map(value => value.GetStringRequired()),
+            Name = name.Map(value => value.GetStringRequired()),
             Ordering = ordering.Map(value => value.GetStringRequired())
         };
     }
