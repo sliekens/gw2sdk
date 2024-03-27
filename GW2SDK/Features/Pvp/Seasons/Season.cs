@@ -14,7 +14,7 @@ public sealed record Season
 
     public required bool Active { get; init; }
 
-    public required IReadOnlyCollection<Division> Divisions { get; init; }
+    public required IReadOnlyList<Division> Divisions { get; init; }
 
     public required IReadOnlyCollection<SeasonRank>? Ranks { get; init; }
 
