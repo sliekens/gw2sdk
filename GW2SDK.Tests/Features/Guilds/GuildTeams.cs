@@ -16,6 +16,17 @@ public class GuildTeams
             var (actual, _) = await sut.Guilds.GetGuildTeams(guildId, guildLeader.Token);
 
             Assert.NotNull(actual);
+            Assert.All(actual,
+                entry =>
+                {
+                    Assert.True(entry.Id > 0);
+                    Assert.NotEmpty(entry.Name);
+                    Assert.All(entry.Games,
+                        game =>
+                        {
+                            Assert.True(game.RatingType.IsDefined());
+                        });
+                });
         }
     }
 }

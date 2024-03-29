@@ -29,7 +29,7 @@ public sealed record Game
     public required ProfessionName Profession { get; init; }
 
     /// <summary>The rating type of the game.</summary>
-    public required PvpRatingType RatingType { get; init; }
+    public required Extensible<PvpRatingType> RatingType { get; init; }
 
     /// <summary>The skill rating increase or decrease of the account after the game.</summary>
     public required int RatingChange { get; init; }

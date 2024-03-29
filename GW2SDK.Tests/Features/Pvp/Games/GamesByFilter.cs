@@ -22,7 +22,8 @@ public class GamesByFilter
             actual,
             entry =>
             {
-                entry.Has_id();
+                Assert.NotEmpty(entry.Id);
+                Assert.True(entry.RatingType.IsDefined());
             }
         );
     }

@@ -82,7 +82,7 @@ internal static class GameJson
             Team = team.Map(value => value.GetEnum<PvpTeamColor>(missingMemberBehavior)),
             Profession =
                 profession.Map(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
-            RatingType = ratingType.Map(value => value.GetRatingType(missingMemberBehavior)),
+            RatingType = ratingType.Map(value => value.GetRatingType()),
             RatingChange = ratingChange.Map(value => value.GetInt32()),
             SeasonId = seasonId.Map(value => value.GetString()),
             Score = score.Map(value => value.GetScore(missingMemberBehavior))

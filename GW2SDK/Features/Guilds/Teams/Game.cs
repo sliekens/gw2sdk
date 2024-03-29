@@ -26,7 +26,7 @@ public sealed record Game
     public required PvpTeamColor Team { get; init; }
 
     /// <summary>The game mode.</summary>
-    public required PvpRatingType RatingType { get; init; }
+    public required Extensible<PvpRatingType> RatingType { get; init; }
 
     /// <summary>The team rating change.</summary>
     public required int RatingChange { get; init; }

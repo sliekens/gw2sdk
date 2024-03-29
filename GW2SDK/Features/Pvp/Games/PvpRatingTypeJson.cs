@@ -5,10 +5,7 @@ namespace GuildWars2.Pvp.Games;
 
 internal static class PvpRatingTypeJson
 {
-    public static PvpRatingType GetRatingType(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
-    )
+    public static Extensible<PvpRatingType> GetRatingType(this JsonElement json)
     {
         var text = json.GetStringRequired();
         return text switch
@@ -19,9 +16,7 @@ internal static class PvpRatingTypeJson
             "3v3Ranked" => PvpRatingType.Ranked3v3,
             "Unranked" => PvpRatingType.Unranked,
             "Placeholder" => PvpRatingType.Placeholder,
-            _ when missingMemberBehavior is MissingMemberBehavior.Error =>
-                throw new InvalidOperationException(Strings.UnexpectedMember(text)),
-            _ => (PvpRatingType)text.GetDeterministicHashCode()
+            _ => new Extensible<PvpRatingType>(text)
         };
     }
 }
