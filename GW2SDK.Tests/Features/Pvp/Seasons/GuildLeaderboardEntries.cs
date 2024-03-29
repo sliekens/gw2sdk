@@ -17,5 +17,11 @@ public class GuildLeaderboardEntries
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.NotNull(context.Links);
+
+        Assert.All(actual,
+            entry =>
+            {
+                Assert.NotEmpty(entry.GuildId);
+            });
     }
 }
