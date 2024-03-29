@@ -82,7 +82,7 @@ public sealed class HomeClient
     }
 
     /// <summary>Retrieves a home cat by its ID.</summary>
-    /// <param name="catId">The outfit ID.</param>
+    /// <param name="catId">The cat ID.</param>
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
