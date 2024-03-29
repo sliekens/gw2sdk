@@ -31,7 +31,7 @@ public sealed class PvpClient
 
     #region v2/pvp/seasons/:id/leaderboards
 
-    public Task<(HashSet<string> Value, MessageContext Context)> GetLeaderboards(
+    public Task<(HashSet<string> Value, MessageContext Context)> GetLeaderboardIds(
         string seasonId,
         CancellationToken cancellationToken = default
     )
