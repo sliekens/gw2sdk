@@ -27,18 +27,46 @@ public struct Extensible<TEnum>(string Name) where TEnum : Enum
     /// <inheritdoc />
     public override string ToString() => Name ?? default(TEnum)!.ToString();
 
-    /// <summary>Determines whether two Extensible objects are equal.</summary>
+    /// <summary>Determines whether two enums are equal.</summary>
     /// <param name="left">The first Extensible object to compare.</param>
     /// <param name="right">The second Extensible object to compare.</param>
     /// <returns><c>true</c> if the two objects are equal; otherwise, <c>false</c>.</returns>
     public static bool operator ==(Extensible<TEnum> left, Extensible<TEnum> right) =>
         left.Equals(right);
 
-    /// <summary>Determines whether two Extensible objects are not equal.</summary>
+    /// <summary>Determines whether two enums are not equal.</summary>
     /// <param name="left">The first Extensible object to compare.</param>
     /// <param name="right">The second Extensible object to compare.</param>
     /// <returns><c>true</c> if the two objects are not equal; otherwise, <c>false</c>.</returns>
     public static bool operator !=(Extensible<TEnum> left, Extensible<TEnum> right) =>
+        !left.Equals(right);
+
+    /// <summary>Determines whether two enums are equal.</summary>
+    /// <param name="left">The first Extensible object to compare.</param>
+    /// <param name="right">The second Extensible object to compare.</param>
+    /// <returns><c>true</c> if the two objects are equal; otherwise, <c>false</c>.</returns>
+    public static bool operator ==(Extensible<TEnum> left, TEnum right) =>
+        left.Equals(right);
+
+    /// <summary>Determines whether two enums are not equal.</summary>
+    /// <param name="left">The first Extensible object to compare.</param>
+    /// <param name="right">The second Extensible object to compare.</param>
+    /// <returns><c>true</c> if the two objects are not equal; otherwise, <c>false</c>.</returns>
+    public static bool operator !=(Extensible<TEnum> left, TEnum right) =>
+        !left.Equals(right);
+
+    /// <summary>Determines whether two enums are equal.</summary>
+    /// <param name="left">The first Extensible object to compare.</param>
+    /// <param name="right">The second Extensible object to compare.</param>
+    /// <returns><c>true</c> if the two objects are equal; otherwise, <c>false</c>.</returns>
+    public static bool operator ==(Extensible<TEnum> left, string right) =>
+        left.Equals(right);
+
+    /// <summary>Determines whether two enums are not equal.</summary>
+    /// <param name="left">The first Extensible object to compare.</param>
+    /// <param name="right">The second Extensible object to compare.</param>
+    /// <returns><c>true</c> if the two objects are not equal; otherwise, <c>false</c>.</returns>
+    public static bool operator !=(Extensible<TEnum> left, string right) =>
         !left.Equals(right);
 
     /// <summary>Implicitly converts a string to an instance of the Extensible enum class.</summary>
