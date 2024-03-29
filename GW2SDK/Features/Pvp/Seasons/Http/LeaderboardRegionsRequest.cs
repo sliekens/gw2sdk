@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Seasons.Http;
 
-internal sealed class LeaderboardRegionsRequest(string seasonId, string boardId)
+internal sealed class LeaderboardRegionsRequest(string seasonId, string boardType)
     : IHttpRequest<HashSet<string>>
 {
     private static readonly HttpRequestMessageTemplate Template =
@@ -11,7 +11,7 @@ internal sealed class LeaderboardRegionsRequest(string seasonId, string boardId)
 
     public string SeasonId { get; } = seasonId;
 
-    public string BoardId { get; } = boardId;
+    public string BoardType { get; } = boardType;
 
     public async Task<(HashSet<string> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
@@ -21,7 +21,7 @@ internal sealed class LeaderboardRegionsRequest(string seasonId, string boardId)
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Path = Template.Path.Replace(":id", SeasonId).Replace(":board", BoardId),
+                    Path = Template.Path.Replace(":id", SeasonId).Replace(":board", BoardType),
                     Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
                 },
                 HttpCompletionOption.ResponseHeadersRead,
