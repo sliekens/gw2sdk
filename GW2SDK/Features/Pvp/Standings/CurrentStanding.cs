@@ -25,4 +25,7 @@ public sealed record CurrentStanding
 
     /// <summary>The current skill rating decay of the player due to inactivity.</summary>
     public required int? Decay { get; init; }
+
+    /// <summary>The effective skill rating of the player used for matchmaking.</summary>
+    public int? EffectiveRating => Rating - Decay;
 }
