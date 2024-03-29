@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Standings;
@@ -46,10 +46,10 @@ internal static class BestStandingJson
 
         return new BestStanding
         {
-            TotalPoints = totalPoints.Map(value => value.GetInt32()),
+            TotalPips = totalPoints.Map(value => value.GetInt32()),
             Division = division.Map(value => value.GetInt32()),
             Tier = tier.Map(value => value.GetInt32()),
-            Points = points.Map(value => value.GetInt32()),
+            Pips = points.Map(value => value.GetInt32()),
             Repeats = repeats.Map(value => value.GetInt32())
         };
     }
