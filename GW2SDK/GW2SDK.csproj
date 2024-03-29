@@ -12,12 +12,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyTitle>GW2 Client SDK</AssemblyTitle>
     <Product>GW2SDK</Product>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <WarningsNotAsErrors>$(WarningsNotAsErrors);0618</WarningsNotAsErrors>
-    <!-- Member is obsolete -->
-    <NoWarn>$(NoWarn);CS1591</NoWarn>
-    <!-- Missing XL comment for publicly visible type or member '' -->
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <!-- Polyfills -->
@@ -84,6 +80,10 @@
 
   <ItemGroup>
     <InternalsVisibleTo Include="$(AssemblyName).Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\Pvp\Amulets\Http\" />
   </ItemGroup>
 
   <Target Name="LinkPackageReleaseNotes" AfterTargets="MinVer">
