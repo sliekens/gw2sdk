@@ -16,7 +16,7 @@ public sealed record Season
 
     public required IReadOnlyList<Division> Divisions { get; init; }
 
-    public required IReadOnlyList<SeasonRank>? Ranks { get; init; }
+    public required IReadOnlyList<SkillBadge>? Ranks { get; init; }
 
     public required LeaderboardGroup Leaderboards { get; init; }
 }

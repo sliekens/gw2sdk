@@ -2,7 +2,7 @@
 
 [PublicAPI]
 [DataTransferObject]
-public sealed record SeasonRank
+public sealed record SkillBadge
 {
     public required string Name { get; init; }
 

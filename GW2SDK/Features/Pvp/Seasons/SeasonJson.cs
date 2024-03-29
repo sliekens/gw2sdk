@@ -72,7 +72,7 @@ internal static class SeasonJson
                 ),
             Ranks =
                 ranks.Map(
-                    values => values.GetList(value => value.GetSeasonRank(missingMemberBehavior))
+                    values => values.GetList(value => value.GetSkillBadge(missingMemberBehavior))
                 ),
             Leaderboards =
                 leaderboards.Map(value => value.GetLeaderboardGroup(missingMemberBehavior))

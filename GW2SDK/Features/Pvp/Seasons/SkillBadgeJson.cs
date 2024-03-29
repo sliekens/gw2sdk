@@ -3,9 +3,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Seasons;
 
-internal static class SeasonRankJson
+internal static class SkillBadgeJson
 {
-    public static SeasonRank GetSeasonRank(
+    public static SkillBadge GetSkillBadge(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -49,7 +49,7 @@ internal static class SeasonRankJson
             }
         }
 
-        return new SeasonRank
+        return new SkillBadge
         {
             Name = name.Map(value => value.GetStringRequired()),
             Description = description.Map(value => value.GetStringRequired()),
