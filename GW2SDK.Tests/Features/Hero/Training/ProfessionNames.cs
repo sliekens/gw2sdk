@@ -15,10 +15,7 @@ public class ProfessionNames
         Assert.Equal(Enum.GetNames(typeof(ProfessionName)).Length, actual.Count);
         Assert.All(
             actual,
-            name => Assert.True(
-                Enum.IsDefined(typeof(ProfessionName), name),
-                "Enum.IsDefined(name)"
-            )
+            name => Assert.True(name.IsDefined())
         );
     }
 }

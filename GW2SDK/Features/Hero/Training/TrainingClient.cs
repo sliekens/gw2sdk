@@ -63,15 +63,12 @@ public sealed class TrainingClient
     }
 
     /// <summary>Retrieves the names of all professions.</summary>
-    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<ProfessionName> Value, MessageContext Context)> GetProfessionNames(
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    public Task<(HashSet<Extensible<ProfessionName>> Value, MessageContext Context)>
+        GetProfessionNames(CancellationToken cancellationToken = default)
     {
-        ProfessionNamesRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
+        ProfessionNamesRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);
     }
 

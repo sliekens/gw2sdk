@@ -91,6 +91,9 @@ internal static class JsonElementExtensions
         return values;
     }
 
+    internal static Extensible<TEnum> GetEnum<TEnum>(this JsonElement json) where TEnum : Enum =>
+        new(json.GetStringRequired());
+
     internal static TEnum GetEnum<TEnum>(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior

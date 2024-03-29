@@ -3,7 +3,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Training.Http;
 
-internal sealed class ProfessionNamesRequest : IHttpRequest<HashSet<ProfessionName>>
+internal sealed class ProfessionNamesRequest : IHttpRequest<HashSet<Extensible<ProfessionName>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/professions")
     {
@@ -11,12 +11,8 @@ internal sealed class ProfessionNamesRequest : IHttpRequest<HashSet<ProfessionNa
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
     };
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
-    public async Task<(HashSet<ProfessionName> Value, MessageContext Context)> SendAsync(
-        HttpClient httpClient,
-        CancellationToken cancellationToken
-    )
+    public async Task<(HashSet<Extensible<ProfessionName>> Value, MessageContext Context)>
+        SendAsync(HttpClient httpClient, CancellationToken cancellationToken)
     {
         using var response = await httpClient.SendAsync(
                 Template,
@@ -28,8 +24,7 @@ internal sealed class ProfessionNamesRequest : IHttpRequest<HashSet<ProfessionNa
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value =
-            json.RootElement.GetSet(entry => entry.GetProfessionName(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetEnum<ProfessionName>());
         return (value, new MessageContext(response));
     }
 }
