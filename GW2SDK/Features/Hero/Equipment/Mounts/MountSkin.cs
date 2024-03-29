@@ -18,5 +18,5 @@ public sealed record MountSkin
     public required IReadOnlyList<DyeSlot> DyeSlots { get; init; }
 
     /// <summary>The mount associated with the skin.</summary>
-    public required MountName Mount { get; init; }
+    public required Extensible<MountName> Mount { get; init; }
 }

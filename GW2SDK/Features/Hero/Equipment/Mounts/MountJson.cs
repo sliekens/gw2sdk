@@ -43,7 +43,7 @@ internal static class MountJson
 
         return new Mount
         {
-            Id = id.Map(value => value.GetMountName(missingMemberBehavior)),
+            Id = id.Map(value => value.GetMountName()),
             Name = name.Map(value => value.GetStringRequired()),
             DefaultSkinId = defaultSkin.Map(value => value.GetInt32()),
             SkinIds = skins.Map(values => values.GetList(value => value.GetInt32())),

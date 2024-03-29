@@ -5,9 +5,8 @@ namespace GuildWars2.Hero.Equipment.Mounts;
 
 internal static class MountNameJson
 {
-    public static MountName GetMountName(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+    public static Extensible<MountName> GetMountName(
+        this JsonElement json
     )
     {
         var text = json.GetStringRequired();
@@ -22,9 +21,7 @@ internal static class MountNameJson
             "springer" => MountName.Springer,
             "warclaw" => MountName.Warclaw,
             "turtle" => MountName.SiegeTurtle,
-            _ when missingMemberBehavior is MissingMemberBehavior.Error =>
-                throw new InvalidOperationException(Strings.UnexpectedMember(text)),
-            _ => (MountName)text.GetDeterministicHashCode()
+            _ => new Extensible<MountName>(text)
         };
     }
 }

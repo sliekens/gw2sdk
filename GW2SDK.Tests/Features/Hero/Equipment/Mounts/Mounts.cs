@@ -1,5 +1,4 @@
-﻿using GuildWars2.Hero.Equipment.Mounts;
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Mounts;
 
@@ -16,10 +15,7 @@ public class Mounts
             actual,
             mount =>
             {
-                Assert.True(
-                    Enum.IsDefined(typeof(MountName), mount.Id),
-                    "Enum.IsDefined(mount.Id)"
-                );
+                Assert.True(mount.Id.IsDefined());
                 Assert.NotEmpty(mount.Name);
             }
         );

@@ -53,7 +53,7 @@ internal static class MountSkinJson
                 dyeSlots.Map(
                     values => values.GetList(value => value.GetDyeSlot(missingMemberBehavior))
                 ),
-            Mount = mount.Map(value => value.GetMountName(missingMemberBehavior))
+            Mount = mount.Map(value => value.GetMountName())
         };
     }
 }

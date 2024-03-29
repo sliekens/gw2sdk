@@ -6,7 +6,7 @@
 public sealed record Mount
 {
     /// <summary>The mount ID.</summary>
-    public required MountName Id { get; init; }
+    public required Extensible<MountName> Id { get; init; }
 
     /// <summary>The mount name.</summary>
     public required string Name { get; init; }

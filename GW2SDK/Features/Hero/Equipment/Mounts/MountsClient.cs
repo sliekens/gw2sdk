@@ -21,19 +21,16 @@ public sealed class MountsClient
     /// <summary>Retrieves the IDs of mounts unlocked on the account associated with the access token. This endpoint is only
     /// accessible with a valid access token.</summary>
     /// <param name="accessToken">An API key or subtoken.</param>
-    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<MountName> Value, MessageContext Context)> GetUnlockedMounts(
+    public Task<(HashSet<Extensible<MountName>> Value, MessageContext Context)> GetUnlockedMounts(
         string? accessToken,
-        MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
         UnlockedMountsRequest request = new()
         {
-            AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
+            AccessToken = accessToken
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -76,15 +73,13 @@ public sealed class MountsClient
     }
 
     /// <summary>Retrieves the names of all mounts.</summary>
-    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<MountName> Value, MessageContext Context)> GetMountNames(
-        MissingMemberBehavior missingMemberBehavior = default,
+    public Task<(HashSet<Extensible<MountName>> Value, MessageContext Context)> GetMountNames(
         CancellationToken cancellationToken = default
     )
     {
-        MountNamesRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
+        MountNamesRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);
     }
 
