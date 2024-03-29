@@ -2,7 +2,7 @@
 
 [PublicAPI]
 [DataTransferObject]
-public sealed record RankTier
+public sealed record SkillBadgeTier
 {
     public required int Rating { get; init; }
 }

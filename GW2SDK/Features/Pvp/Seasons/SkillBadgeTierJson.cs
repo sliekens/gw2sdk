@@ -3,9 +3,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Seasons;
 
-internal static class RankTierJson
+internal static class SkillBadgeTierJson
 {
-    public static RankTier GetRankTier(
+    public static SkillBadgeTier GetSkillBadgeTier(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -24,6 +24,6 @@ internal static class RankTierJson
             }
         }
 
-        return new RankTier { Rating = rating.Map(value => value.GetInt32()) };
+        return new SkillBadgeTier { Rating = rating.Map(value => value.GetInt32()) };
     }
 }

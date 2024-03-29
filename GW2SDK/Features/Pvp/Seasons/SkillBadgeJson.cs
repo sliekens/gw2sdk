@@ -57,7 +57,7 @@ internal static class SkillBadgeJson
             Overlay = overlay.Map(value => value.GetStringRequired()),
             SmallOverlay = smallOverlay.Map(value => value.GetStringRequired()),
             Tiers = tiers.Map(
-                values => values.GetList(value => value.GetRankTier(missingMemberBehavior))
+                values => values.GetList(value => value.GetSkillBadgeTier(missingMemberBehavior))
             )
         };
     }

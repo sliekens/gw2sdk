@@ -15,5 +15,5 @@ public sealed record SkillBadge
 
     public required string SmallOverlay { get; init; }
 
-    public required IReadOnlyList<RankTier> Tiers { get; init; }
+    public required IReadOnlyList<SkillBadgeTier> Tiers { get; init; }
 }
