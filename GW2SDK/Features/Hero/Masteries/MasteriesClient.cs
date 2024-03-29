@@ -124,7 +124,7 @@ public sealed class MasteriesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<MasteryTrack> Value, MessageContext Context)> GetMasteriesByIds(
+    public Task<(HashSet<MasteryTrack> Value, MessageContext Context)> GetMasteryTracksByIds(
         IReadOnlyCollection<int> masteryTrackIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,

@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Tests.Features.Hero.Masteries;
 
-public class MasteriesByFilter
+public class MasteryTracksByFilter
 {
     [Fact]
     public async Task Can_be_filtered_by_id()
@@ -15,7 +15,7 @@ public class MasteriesByFilter
             3
         ];
 
-        var (actual, _) = await sut.Hero.Masteries.GetMasteriesByIds(ids);
+        var (actual, _) = await sut.Hero.Masteries.GetMasteryTracksByIds(ids);
 
         Assert.Collection(
             ids,
