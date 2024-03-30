@@ -140,11 +140,11 @@ internal class Program
         PrintHeader();
 
         // Get the trading post prices for all items in bulk
-        await foreach (var (itemPrice, _) in gw2.Commerce.GetItemPricesBulk())
+        await foreach (var itemPrice in gw2.Commerce.GetItemPricesBulk().ValueOnly())
         {
             // ItemPrice contains an Id, BestBid, and BestAsk
             // Use the ID to get the item name
-            var (item, _) = await gw2.Items.GetItemById(itemPrice.Id);
+            var item = await gw2.Items.GetItemById(itemPrice.Id).ValueOnly();
 
             PrintRow(item.Name, itemPrice.BestBid, itemPrice.BestAsk);
         }

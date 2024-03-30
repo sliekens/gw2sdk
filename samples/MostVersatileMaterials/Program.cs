@@ -63,8 +63,8 @@ try
                         inputItemIds,
                         progress: new ConsoleProgressUpdater(inputItemsProgress)
                     )
-                    .Select(result => result.Value)
-                    .ToListAsync();
+                    .ValueOnly()
+                    .ToDictionaryAsync(item => item.Id);
 
                 // Fetch all output items
                 var outputItemsProgress = ctx.AddTask("Fetching output items");
@@ -75,8 +75,8 @@ try
                         outputItemIds,
                         progress: new ConsoleProgressUpdater(outputItemsProgress)
                     )
-                    .Select(result => result.Value)
-                    .ToListAsync();
+                    .ValueOnly()
+                    .ToDictionaryAsync(item => item.Id);
 
                 // The progress bar doesn't reach 100% because the API doesn't return all output items (yeah, it's pretty broken)
                 // anyway, fake it until you make it
@@ -85,8 +85,8 @@ try
                 return new ReferenceData
                 {
                     Recipes = recipes,
-                    InputItems = inputItems.ToDictionary(item => item.Id),
-                    OutputItems = outputItems.ToDictionary(item => item.Id)
+                    InputItems = inputItems,
+                    OutputItems = outputItems
                 };
             }
         );

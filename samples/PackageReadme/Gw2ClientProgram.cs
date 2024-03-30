@@ -17,10 +17,10 @@ internal class Gw2ClientProgram
         PrintTableHeader();
 
         // Fetch the current prices of all items
-        await foreach (var (itemPrice, _) in gw2.Commerce.GetItemPricesBulk())
+        await foreach (var itemPrice in gw2.Commerce.GetItemPricesBulk().ValueOnly())
         {
             // The item price contains the item's ID, which can be used to fetch the item's name
-            var (item, _) = await gw2.Items.GetItemById(itemPrice.Id);
+            var item = await gw2.Items.GetItemById(itemPrice.Id).ValueOnly();
 
             // Print the item's name and its current highest buyer and lowest seller
             PrintTableRow(item.Name, itemPrice.BestBid, itemPrice.BestAsk);

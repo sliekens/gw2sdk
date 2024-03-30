@@ -27,7 +27,7 @@ var app = appBuilder.Build();
 var gw2 = app.Services.GetRequiredService<Gw2Client>();
 
 // Some demo code to print dye colors, using Pastel to colorize the console output
-foreach (var dye in (await gw2.Hero.Equipment.Dyes.GetColors()).Value)
+foreach (var dye in await gw2.Hero.Equipment.Dyes.GetColors().ValueOnly())
 {
     PrintColor(dye.Name, dye.Cloth.Rgb, dye.Leather.Rgb, dye.Metal.Rgb);
 }

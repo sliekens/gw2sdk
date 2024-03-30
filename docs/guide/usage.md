@@ -26,20 +26,42 @@ foreach (var (quaggans, context) in await gw2.Quaggans.GetQuaggans())
 }
 ```
 
-With the first object being the most important, the second `MessageContext` object is mostly useful for debugging. Advanced users may use it to access caching-related response headers. For simple usage, use the discard operator `_` to throw it out the window.
+The first item of the tuple contains the requested data. The second `MessageContext` object contains metadata from HTTP response headers. Advanced users might use it to access caching-related response headers. For simple usage, use the discard operator `_`.
 
 ``` csharp
 // Discard the MessageContext if you don't need it
 var (quaggans, _) = await gw2.Quaggans.GetQuaggans();
 ```
 
-## Example: Print a table of best buy and sell offers of all tradable items
+You can also use the `ValueOnly()` extension method to discard the `MessageContext` object. This is just a convenience method to make the code more readable.
+
+``` csharp
+var quaggans = await gw2.Quaggans.GetQuaggans().ValueOnly();
+```
+
+### Cross-referencing data from multiple sources
+
+The API returns highly normalized data, which means that you often need to make multiple requests to get all the data you need. For example, to print a table of trading post items with their best buy and sell offers, you need to make a request to the item prices API and then cross-reference it with the item details API to get the item names. This is a common pattern in the Guild Wars 2 API.
+
+There is a helper method `AsDictionary()` that you can use to make cross-referencing easier in some cases.
+
+``` csharp
+// Create a dictionary of maps keyed by their ID (and discard the MessageContext)
+var maps = await gw2.Exploration.GetMapSummaries()
+    .AsDictionary(map => map.Id)
+    .ValueOnly();
+
+// Now you can easily access maps by their ID
+MapSummary queensdale = maps[15];
+```
+
+## Example: print a table of best buy and sell offers of all tradable items
 
 This sample illustrates the following concepts:
 
 1. How to use the `Gw2Client` to access the item prices API
-2. How to use `await foreach` to iterate over a stream of item prices
-3. How to use the Id property to access the item details API
+2. How to use `await foreach` to iterate over a stream of values
+3. How to use the `Id` property to access the item details API
 4. What happens if you make too many requests
 
 [!code-csharp[](../../samples/BasicUsage/Program.cs)]
@@ -86,4 +108,4 @@ Unhandled exception. GuildWars2.Http.TooManyRequestsException: too many requests
 
 This code is not optimized in the sense that it makes a request for each item individually inside the `foreach` loop. The API has a rate limit, so this code will fail with a `TooManyRequestsException` after a short while.
 
-More information about usage limits can be found in the error handling section with tips on how to solve them.
+More information about usage limits can be found in the error handling section of this site, with tips on how to solve them.
