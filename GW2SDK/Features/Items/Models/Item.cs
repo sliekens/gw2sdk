@@ -23,7 +23,7 @@ public record Item
     public required int Level { get; init; }
 
     /// <summary>The item rarity.</summary>
-    public required Rarity Rarity { get; init; }
+    public required Extensible<Rarity> Rarity { get; init; }
 
     /// <summary>The unit price of the item when sold to a merchant. Items will not appear in a sell-to-vendor list when this
     /// value is <see cref="Coin.Zero" />, or when the <see cref="ItemFlags.NoSell" /> flag is set.</summary>
@@ -31,7 +31,7 @@ public record Item
 
     /// <summary>The game types in which the items can be used.</summary>
     /// <remarks>Can be empty.</remarks>
-    public required IReadOnlyCollection<GameType> GameTypes { get; init; }
+    public required IReadOnlyCollection<Extensible<GameType>> GameTypes { get; init; }
 
     /// <summary>Contains various modifiers.</summary>
     public required ItemFlags Flags { get; init; }

@@ -18,7 +18,7 @@ public sealed record Race
     }.AsReadOnly();
 
     /// <summary>The race ID.</summary>
-    public required RaceName Id { get; init; }
+    public required Extensible<RaceName> Id { get; init; }
 
     /// <summary>The list of racial skill IDs. Each race has 6 unique skills which are healing, utility or elite skills. The
     /// racial skills can be used by any profession except Revenant.</summary>

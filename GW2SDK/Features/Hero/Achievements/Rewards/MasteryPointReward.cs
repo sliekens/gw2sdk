@@ -10,5 +10,5 @@ public sealed record MasteryPointReward : AchievementReward
     public required int Id { get; init; }
 
     /// <summary>The region to which this mastery point belongs. Affects the mastery point icon.</summary>
-    public required MasteryRegionName Region { get; init; }
+    public required Extensible<MasteryRegionName> Region { get; init; }
 }

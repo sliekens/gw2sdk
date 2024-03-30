@@ -11,7 +11,7 @@ public record Objective
     public required string Id { get; init; }
 
     /// <summary>The color of the team that claimed the objective.</summary>
-    public required TeamColor Owner { get; init; }
+    public required Extensible<TeamColor> Owner { get; init; }
 
     /// <summary>The date and time when the objective last changed owners.</summary>
     public required DateTimeOffset LastFlipped { get; init; }

@@ -14,8 +14,5 @@ public class MatchStatsById
         var (actual, _) = await sut.Wvw.GetMatchStatsById(id);
 
         Assert.Equal(id, actual.Id);
-        actual.Has_kills();
-        actual.Has_deaths();
-        actual.Has_maps();
     }
 }

@@ -11,5 +11,5 @@ public sealed record SkillReference
     public required int Id { get; init; }
 
     /// <summary>The slot occupied by the skill.</summary>
-    public required SkillSlot Slot { get; init; }
+    public required Extensible<SkillSlot> Slot { get; init; }
 }

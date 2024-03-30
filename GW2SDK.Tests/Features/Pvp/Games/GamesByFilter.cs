@@ -18,13 +18,5 @@ public class GamesByFilter
 
         Assert.Equal(ids.Count, actual.Count);
         Assert.Equal(context.ResultCount, actual.Count);
-        Assert.All(
-            actual,
-            entry =>
-            {
-                Assert.NotEmpty(entry.Id);
-                Assert.True(entry.RatingType.IsDefined());
-            }
-        );
     }
 }

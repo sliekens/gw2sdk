@@ -14,8 +14,6 @@ public class MapById
 
         var (actual, _) = await sut.Exploration.GetMapById(continentId, floorId, regionId, mapId);
 
-        // TODO: complete validation
         Assert.Equal(mapId, actual.Id);
-        actual.Has_name();
     }
 }

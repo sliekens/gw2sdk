@@ -87,12 +87,12 @@ internal static class RelicJson
             Name = name.Map(value => value.GetStringRequired()),
             Description = description.Map(value => value.GetString()) ?? "",
             Level = level.Map(value => value.GetInt32()),
-            Rarity = rarity.Map(value => value.GetEnum<Rarity>(missingMemberBehavior)),
+            Rarity = rarity.Map(value => value.GetEnum<Rarity>()),
             VendorValue = vendorValue.Map(value => value.GetInt32()),
             GameTypes =
                 gameTypes.Map(
                     values => values.GetList(
-                        value => value.GetEnum<GameType>(missingMemberBehavior)
+                        value => value.GetEnum<GameType>()
                     )
                 ),
             Flags = flags.Map(values => values.GetItemFlags()),

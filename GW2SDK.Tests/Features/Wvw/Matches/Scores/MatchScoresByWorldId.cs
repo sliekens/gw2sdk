@@ -13,9 +13,6 @@ public class MatchScoresByWorldId
 
         var (actual, _) = await sut.Wvw.GetMatchScoresByWorldId(worldId);
 
-        actual.Has_id();
-        actual.Has_scores();
-        actual.Has_victory_points();
-        actual.Has_skirmishes();
+        Assert.NotNull(actual);
     }
 }

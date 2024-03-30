@@ -118,7 +118,7 @@ internal static class ItemSlotJson
                 ?? Empty.ListOfInt32,
             DyeColorIds =
                 dyes.Map(values => values.GetList(value => value.GetInt32())) ?? Empty.ListOfInt32,
-            Binding = binding.Map(value => value.GetEnum<ItemBinding>(missingMemberBehavior)),
+            Binding = binding.Map(value => value.GetEnum<ItemBinding>()),
             BoundTo = boundTo.Map(value => value.GetString()) ?? "",
             Stats = stats.Map(value => value.GetSelectedAttributeCombination(missingMemberBehavior))
         };

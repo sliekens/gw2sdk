@@ -42,7 +42,7 @@ internal static class HealingSkillSummaryJson
         return new HealingSkillSummary
         {
             Id = id.Map(value => value.GetInt32()),
-            Slot = slot.Map(value => value.GetEnum<SkillSlot>(missingMemberBehavior))
+            Slot = slot.Map(value => value.GetEnum<SkillSlot>())
         };
     }
 }

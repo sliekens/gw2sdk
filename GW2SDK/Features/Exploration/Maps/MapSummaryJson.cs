@@ -90,7 +90,7 @@ internal static class MapSummaryJson
             MinLevel = minLevel.Map(value => value.GetInt32()),
             MaxLevel = maxLevel.Map(value => value.GetInt32()),
             DefaultFloor = defaultFloor.Map(value => value.GetInt32()),
-            Kind = kind.Map(value => value.GetEnum<MapKind>(missingMemberBehavior)),
+            Kind = kind.Map(value => value.GetEnum<MapKind>()),
             Floors = floors.Map(values => values.GetList(value => value.GetInt32())),
             RegionId = regionId.Map(value => value.GetInt32()),
             RegionName = regionName.Map(value => value.GetString()) ?? "",

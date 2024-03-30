@@ -12,7 +12,7 @@ public sealed record ObjectiveProgress
     public required string Title { get; init; }
 
     /// <summary>The track that the objective is associated with.</summary>
-    public required ObjectiveTrack Track { get; init; }
+    public required Extensible<ObjectiveTrack> Track { get; init; }
 
     /// <summary>The amount of Astral Acclaim that is awarded for completing the objective.</summary>
     public required int RewardAcclaim { get; init; }

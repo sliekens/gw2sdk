@@ -153,10 +153,10 @@ internal static class HealSkillJson
                 professions.Map(
                     values =>
                         values.GetList(
-                            value => value.GetEnum<ProfessionName>(missingMemberBehavior)
+                            value => value.GetEnum<ProfessionName>()
                         )
                 ),
-            Slot = slot.Map(value => value.GetEnum<SkillSlot>(missingMemberBehavior)),
+            Slot = slot.Map(value => value.GetEnum<SkillSlot>()),
             FlipSkillId = flipSkill.Map(value => value.GetInt32()),
             NextSkillId = nextChain.Map(value => value.GetInt32()),
             PreviousSkillId = prevChain.Map(value => value.GetInt32()),
@@ -167,7 +167,7 @@ internal static class HealSkillJson
                 categories.Map(
                     values =>
                         values.GetList(
-                            value => value.GetEnum<SkillCategoryName>(missingMemberBehavior)
+                            value => value.GetEnum<SkillCategoryName>()
                         )
                 ),
             SubskillIds =
@@ -175,7 +175,7 @@ internal static class HealSkillJson
                     values => values.GetList(value => value.GetSubskill(missingMemberBehavior))
                 ),
             BundleSkillIds = bundleSkills.Map(values => values.GetList(value => value.GetInt32())),
-            Attunement = attunement.Map(value => value.GetEnum<Attunement>(missingMemberBehavior)),
+            Attunement = attunement.Map(value => value.GetEnum<Attunement>()),
             Cost = cost.Map(value => value.GetInt32()),
             ToolbeltSkillId = toolbeltSkill.Map(value => value.GetInt32())
         };

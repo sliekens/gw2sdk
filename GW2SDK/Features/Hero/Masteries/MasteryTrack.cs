@@ -23,7 +23,7 @@ public sealed record MasteryTrack
 
     /// <summary>The region to which this mastery track belongs. The mastery track can only be progressed by earning experience
     /// in the region indicated by this property.</summary>
-    public required MasteryRegionName Region { get; init; }
+    public required Extensible<MasteryRegionName> Region { get; init; }
 
     /// <summary>The levels of mastery that can be progressed within this mastery track.</summary>
     public required IReadOnlyList<Mastery> Masteries { get; init; }

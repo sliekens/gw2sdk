@@ -23,7 +23,7 @@ public class AstralRewards
                 Assert.True(reward.ItemId > 0);
                 Assert.True(reward.ItemCount > 0);
                 Assert.True(reward.Cost > 0);
-                Assert.True(Enum.IsDefined(typeof(RewardKind), reward.Kind));
+                Assert.True(reward.Kind.IsDefined());
 
                 var chatLink = reward.GetChatLink();
                 Assert.Equal(reward.ItemId, chatLink.ItemId);

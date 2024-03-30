@@ -24,7 +24,7 @@ public sealed record Story
     public required int Level { get; init; }
 
     /// <summary>The races that can play this story.</summary>
-    public required IReadOnlyCollection<RaceName> Races { get; init; }
+    public required IReadOnlyCollection<Extensible<RaceName>> Races { get; init; }
 
     /// <summary>The display order of the story in the story journal.</summary>
     public required int Order { get; init; }

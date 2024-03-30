@@ -5,7 +5,7 @@ namespace GuildWars2.Hero;
 
 internal static class AttributeNameJson
 {
-    public static AttributeName GetAttributeName(
+    public static Extensible<AttributeName> GetAttributeName(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -31,6 +31,6 @@ internal static class AttributeNameJson
             return AttributeName.HealingPower;
         }
 
-        return json.GetEnum<AttributeName>(missingMemberBehavior);
+        return json.GetEnum<AttributeName>();
     }
 }

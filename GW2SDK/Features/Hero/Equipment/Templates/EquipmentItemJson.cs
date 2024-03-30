@@ -106,7 +106,7 @@ internal static class EquipmentItemJson
         {
             Id = id.Map(value => value.GetInt32()),
             Count = count.Map(value => value.GetInt32()),
-            Slot = slot.Map(value => value.GetEnum<EquipmentSlot>(missingMemberBehavior)),
+            Slot = slot.Map(value => value.GetEnum<EquipmentSlot>()),
             SuffixItemId = suffixItemId,
             SecondarySuffixItemId = secondarySuffixItemId,
             InfusionItemIds =
@@ -115,10 +115,10 @@ internal static class EquipmentItemJson
             SkinId = skin.Map(value => value.GetInt32()),
             Stats =
                 stats.Map(value => value.GetSelectedAttributeCombination(missingMemberBehavior)),
-            Binding = binding.Map(value => value.GetEnum<ItemBinding>(missingMemberBehavior)),
+            Binding = binding.Map(value => value.GetEnum<ItemBinding>()),
             BoundTo = boundTo.Map(value => value.GetString()) ?? "",
             Location = location.Map(
-                value => value.GetEnum<EquipmentLocation>(missingMemberBehavior)
+                value => value.GetEnum<EquipmentLocation>()
             ),
             TemplateNumbers =
                 tabs.Map(values => values.GetList(value => value.GetInt32())) ?? Empty.ListOfInt32,

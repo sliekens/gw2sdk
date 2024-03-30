@@ -16,22 +16,5 @@ public class AchievementsByPage
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);
         Assert.Equal(context.ResultCount, pageSize);
-        Assert.All(
-            actual,
-            entry =>
-            {
-                entry.Has_id();
-                entry.Has_name();
-                entry.Has_description();
-                entry.Has_requirement();
-                entry.Has_LockedText();
-                entry.Has_flags();
-                entry.Has_tiers();
-                entry.Tiers_does_not_contain_null();
-                entry.Rewards_does_not_contain_null();
-                entry.Bits_does_not_contain_null();
-                entry.PointCap_is_negative_1_for_repeatable_achievements_without_points();
-            }
-        );
     }
 }

@@ -157,13 +157,13 @@ internal static class WeaponSkillJson
                 professions.Map(
                     values =>
                         values.GetList(
-                            value => value.GetEnum<ProfessionName>(missingMemberBehavior)
+                            value => value.GetEnum<ProfessionName>()
                         )
                 ),
-            Attunement = attunement.Map(value => value.GetEnum<Attunement>(missingMemberBehavior)),
+            Attunement = attunement.Map(value => value.GetEnum<Attunement>()),
             DualAttunement =
-                dualAttunement.Map(value => value.GetEnum<Attunement>(missingMemberBehavior)),
-            Slot = slot.Map(value => value.GetEnum<SkillSlot>(missingMemberBehavior)),
+                dualAttunement.Map(value => value.GetEnum<Attunement>()),
+            Slot = slot.Map(value => value.GetEnum<SkillSlot>()),
             FlipSkillId = flipSkill.Map(value => value.GetInt32()),
             NextSkillId = nextChain.Map(value => value.GetInt32()),
             PreviousSkillId = prevChain.Map(value => value.GetInt32()),
@@ -174,11 +174,11 @@ internal static class WeaponSkillJson
                 categories.Map(
                     values =>
                         values.GetList(
-                            value => value.GetEnum<SkillCategoryName>(missingMemberBehavior)
+                            value => value.GetEnum<SkillCategoryName>()
                         )
                 ),
             Cost = cost.Map(value => value.GetInt32()),
-            Offhand = offhand.Map(value => value.GetEnum<Offhand>(missingMemberBehavior)),
+            Offhand = offhand.Map(value => value.GetEnum<Offhand>()),
             Initiative = initiative.Map(value => value.GetInt32())
         };
     }

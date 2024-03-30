@@ -20,13 +20,13 @@ public sealed record Game
     public required DateTimeOffset Ended { get; init; }
 
     /// <summary>The outcome of the game for the team the account was on.</summary>
-    public required PvpResult Result { get; init; }
+    public required Extensible<PvpResult> Result { get; init; }
 
     /// <summary>The team color the account was on.</summary>
-    public required PvpTeamColor Team { get; init; }
+    public required Extensible<PvpTeamColor> Team { get; init; }
 
     /// <summary>The profession of the character the account was playing.</summary>
-    public required ProfessionName Profession { get; init; }
+    public required Extensible<ProfessionName> Profession { get; init; }
 
     /// <summary>The rating type of the game.</summary>
     public required Extensible<PvpRatingType> RatingType { get; init; }

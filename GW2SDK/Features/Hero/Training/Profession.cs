@@ -23,7 +23,7 @@ public sealed record Profession
     }.AsReadOnly();
 
     /// <summary>The profession ID.</summary>
-    public required ProfessionName Id { get; init; }
+    public required Extensible<ProfessionName> Id { get; init; }
 
     /// <summary>The profession name.</summary>
     public required string Name { get; init; }
@@ -42,7 +42,7 @@ public sealed record Profession
 
     /// <summary>Information about weapons that can be trained by this profession, the required specialization, and the weapon
     /// skills associated with a weapon.</summary>
-    public required IDictionary<WeaponType, WeaponProficiency> Weapons { get; init; }
+    public required IDictionary<Extensible<WeaponType>, WeaponProficiency> Weapons { get; init; }
 
     /// <summary>Contains various modifiers for the profession.</summary>
     public required ProfessionFlags Flags { get; init; }

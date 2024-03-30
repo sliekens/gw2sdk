@@ -43,9 +43,9 @@ internal static class WeaponSkillJson
         return new WeaponSkill
         {
             Id = id.Map(value => value.GetInt32()),
-            Slot = slot.Map(value => value.GetEnum<SkillSlot>(missingMemberBehavior)),
-            Offhand = offhand.Map(value => value.GetEnum<Offhand>(missingMemberBehavior)),
-            Attunement = attunement.Map(value => value.GetEnum<Attunement>(missingMemberBehavior))
+            Slot = slot.Map(value => value.GetEnum<SkillSlot>()),
+            Offhand = offhand.Map(value => value.GetEnum<Offhand>()),
+            Attunement = attunement.Map(value => value.GetEnum<Attunement>())
         };
     }
 }

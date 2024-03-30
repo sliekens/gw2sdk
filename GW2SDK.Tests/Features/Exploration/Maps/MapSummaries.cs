@@ -18,8 +18,9 @@ public class MapSummaries
             actual,
             entry =>
             {
-                entry.Has_id();
-                entry.Has_name();
+                Assert.True(entry.Id > 0);
+                Assert.NotEmpty(entry.Name);
+                Assert.True(entry.Kind.IsDefined());
             }
         );
     }

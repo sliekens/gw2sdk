@@ -1,5 +1,4 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
-using GuildWars2.WizardsVault;
 
 namespace GuildWars2.Tests.Features.WizardsVault.Objectives;
 
@@ -21,7 +20,7 @@ public class SpecialObjectivesProgress
             {
                 Assert.True(objective.Id > 0);
                 Assert.NotEmpty(objective.Title);
-                Assert.True(Enum.IsDefined(typeof(ObjectiveTrack), objective.Track));
+                Assert.True(objective.Track.IsDefined());
                 Assert.True(objective.RewardAcclaim > 0);
             }
         );

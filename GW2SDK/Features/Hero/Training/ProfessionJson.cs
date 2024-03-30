@@ -76,7 +76,7 @@ internal static class ProfessionJson
 
         return new Profession
         {
-            Id = id.Map(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
+            Id = id.Map(value => value.GetEnum<ProfessionName>()),
             Name = name.Map(value => value.GetStringRequired()),
             Code = code.Map(value => value.GetInt32()),
             IconHref = icon.Map(value => value.GetStringRequired()),
@@ -105,7 +105,7 @@ internal static class ProfessionJson
                 skillsByPalette.Map(value => value.GetSkillsByPalette(missingMemberBehavior))
         };
 
-        static WeaponType GetWeaponType(string text)
+        static Extensible<WeaponType> GetWeaponType(string text)
         {
             // The old name for harpoon gun is used in the API
             if (string.Equals("Speargun", text, StringComparison.Ordinal))

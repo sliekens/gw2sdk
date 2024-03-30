@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Equipment.Dyes;
 
 internal static class CategoriesJson
 {
-    public static (Hue hue, Material material, ColorSet set) GetCategories(
+    public static (Extensible<Hue> hue, Extensible<Material> material, Extensible<ColorSet> set) GetCategories(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -41,8 +41,8 @@ internal static class CategoriesJson
             }
         }
 
-        return (hue: hue.GetEnum<Hue>(missingMemberBehavior),
-            material: material.GetEnum<Material>(missingMemberBehavior),
-            set: set.GetEnum<ColorSet>(missingMemberBehavior));
+        return (hue: hue.GetEnum<Hue>(),
+            material: material.GetEnum<Material>(),
+            set: set.GetEnum<ColorSet>());
     }
 }

@@ -79,7 +79,7 @@ internal static class SpecializationJson
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),
             Profession =
-                profession.Map(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
+                profession.Map(value => value.GetEnum<ProfessionName>()),
             Elite = elite.Map(value => value.GetBoolean()),
             MinorTraitIds = minorTraits.Map(values => values.GetList(value => value.GetInt32())),
             MajorTraitIds = majorTraits.Map(values => values.GetList(value => value.GetInt32())),

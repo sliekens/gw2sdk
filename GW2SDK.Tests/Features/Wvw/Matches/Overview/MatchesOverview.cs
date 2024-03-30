@@ -18,9 +18,9 @@ public class MatchesOverview
             actual,
             entry =>
             {
-                entry.Has_id();
-                entry.Has_start_time();
-                entry.Has_end_time();
+                Assert.NotEmpty(entry.Id);
+                Assert.True(entry.StartTime > DateTimeOffset.MinValue);
+                Assert.True(entry.EndTime > entry.StartTime);
             }
         );
     }

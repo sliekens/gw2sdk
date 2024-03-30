@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Authorization;
@@ -64,7 +64,7 @@ internal static class SubtokenInfoJson
             Permissions =
                 permissions.Map(
                     values => values.GetList(
-                        value => value.GetEnum<Permission>(missingMemberBehavior)
+                        value => value.GetEnum<Permission>()
                     )
                 ),
             ExpiresAt = expiresAt.Map(value => value.GetDateTimeOffset()),

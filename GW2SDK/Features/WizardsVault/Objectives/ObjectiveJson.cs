@@ -43,7 +43,7 @@ internal static class ObjectiveJson
         {
             Id = id.Map(value => value.GetInt32()),
             Title = title.Map(value => value.GetStringRequired()),
-            Track = track.Map(value => value.GetEnum<ObjectiveTrack>(missingMemberBehavior)),
+            Track = track.Map(value => value.GetEnum<ObjectiveTrack>()),
             RewardAcclaim = acclaim.Map(value => value.GetInt32())
         };
     }

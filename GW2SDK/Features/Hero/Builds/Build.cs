@@ -11,7 +11,7 @@ public sealed record Build
     public required string Name { get; init; }
 
     /// <summary>The profession that can use this build.</summary>
-    public required ProfessionName Profession { get; init; }
+    public required Extensible<ProfessionName> Profession { get; init; }
 
     /// <summary>The first selected specialization, or <c>null</c> if no specialization was selected.</summary>
     public required SelectedSpecialization? Specialization1 { get; init; }

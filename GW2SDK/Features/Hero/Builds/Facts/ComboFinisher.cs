@@ -8,5 +8,5 @@ public sealed record ComboFinisher : Fact
     public required int Percent { get; init; }
 
     /// <summary>The kind of combo finisher effect applied by the skill.</summary>
-    public required ComboFinisherName FinisherName { get; init; }
+    public required Extensible<ComboFinisherName> FinisherName { get; init; }
 }

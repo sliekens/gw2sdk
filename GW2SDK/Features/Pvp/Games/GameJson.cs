@@ -78,10 +78,10 @@ internal static class GameJson
             MapId = mapId.Map(value => value.GetInt32()),
             Started = started.Map(value => value.GetDateTimeOffset()),
             Ended = ended.Map(value => value.GetDateTimeOffset()),
-            Result = result.Map(value => value.GetEnum<PvpResult>(missingMemberBehavior)),
-            Team = team.Map(value => value.GetEnum<PvpTeamColor>(missingMemberBehavior)),
+            Result = result.Map(value => value.GetEnum<PvpResult>()),
+            Team = team.Map(value => value.GetEnum<PvpTeamColor>()),
             Profession =
-                profession.Map(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
+                profession.Map(value => value.GetEnum<ProfessionName>()),
             RatingType = ratingType.Map(value => value.GetRatingType()),
             RatingChange = ratingChange.Map(value => value.GetInt32()),
             SeasonId = seasonId.Map(value => value.GetString()),

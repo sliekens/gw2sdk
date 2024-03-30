@@ -43,7 +43,7 @@ internal static class MaterialSlotJson
         {
             ItemId = id.Map(value => value.GetInt32()),
             CategoryId = category.Map(value => value.GetInt32()),
-            Binding = binding.Map(value => value.GetEnum<ItemBinding>(missingMemberBehavior)),
+            Binding = binding.Map(value => value.GetEnum<ItemBinding>()),
             Count = count.Map(value => value.GetInt32())
         };
     }

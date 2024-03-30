@@ -64,19 +64,19 @@ internal static class BackgroundStoryQuestionJson
                 professions.Map(
                     values =>
                         values.GetList(
-                            value => value.GetEnum<ProfessionName>(missingMemberBehavior)
+                            value => value.GetEnum<ProfessionName>()
                         )
                 )
                 ?? GetValues<ProfessionName>(),
             Races = races.Map(
                     values => values.GetList(
-                        value => value.GetEnum<RaceName>(missingMemberBehavior)
+                        value => value.GetEnum<RaceName>()
                     )
                 )
                 ?? GetValues<RaceName>()
         };
 
-        static List<TEnum> GetValues<TEnum>() where TEnum : struct, Enum
+        static List<Extensible<TEnum>> GetValues<TEnum>() where TEnum : struct, Enum
         {
 #if NET
             return [..Enum.GetValues<TEnum>()];

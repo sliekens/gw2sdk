@@ -11,8 +11,8 @@ public sealed record AttributeConversion : Fact
 
     /// <summary>The attribute that is used to calculate by how much to increase the <see cref="Target" /> attribute. (The
     /// source attribute is not decreased.)</summary>
-    public required AttributeName Source { get; init; }
+    public required Extensible<AttributeName> Source { get; init; }
 
     /// <summary>The attribute that is increased by the <see cref="Percent" /> of the <see cref="Source" /> attribute.</summary>
-    public required AttributeName Target { get; init; }
+    public required Extensible<AttributeName> Target { get; init; }
 }

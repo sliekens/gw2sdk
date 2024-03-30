@@ -72,7 +72,7 @@ internal static class MasteryPointsTotalJson
                     }
 
                     // No matches? Could be a new region, or maybe they fixed the API to use the correct region names
-                    return value.GetEnum<MasteryRegionName>(missingMemberBehavior);
+                    return value.GetEnum<MasteryRegionName>();
                 }
             ),
             Spent = spent.Map(value => value.GetInt32()),

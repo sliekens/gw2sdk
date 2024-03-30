@@ -21,7 +21,7 @@ public class Objectives
             {
                 Assert.True(objective.Id > 0);
                 Assert.NotEmpty(objective.Title);
-                Assert.True(Enum.IsDefined(typeof(ObjectiveTrack), objective.Track));
+                Assert.True(objective.Track.IsDefined());
                 Assert.True(objective.RewardAcclaim > 0);
             }
         );

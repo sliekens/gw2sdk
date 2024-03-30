@@ -91,43 +91,7 @@ internal static class JsonElementExtensions
         return values;
     }
 
-    internal static Extensible<TEnum> GetEnum<TEnum>(this JsonElement json) where TEnum : Enum =>
+    internal static Extensible<TEnum> GetEnum<TEnum>(this JsonElement json)
+        where TEnum : struct, Enum =>
         new(json.GetStringRequired());
-
-    internal static TEnum GetEnum<TEnum>(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
-    ) where TEnum : struct, Enum =>
-        missingMemberBehavior == MissingMemberBehavior.Error
-            ? Parse<TEnum>(json.GetStringRequired())
-            : TryHardParse<TEnum>(json.GetStringRequired());
-
-    /// <summary>A variation on Enum.TryParse() that tries harder.</summary>
-    /// <typeparam name="TEnum">The type of Enum to parse.</typeparam>
-    /// <param name="name">The name of a member of the Enum.</param>
-    /// <returns>The Enum value of the member with the specified name.</returns>
-    private static TEnum TryHardParse<TEnum>(string name) where TEnum : struct, Enum
-    {
-        if (Enum.TryParse(name, true, out TEnum result))
-        {
-            return result;
-        }
-
-        // When parsing fails, treat the value as a constant where the name is unknown
-        // i.e. unique strings receive a unique value
-        //      and duplicate strings receive the same value
-        // (Using hash code is not perfect because of collissions, but it's good enough.)
-        // The actual value should be treated as an opaque value
-        return (TEnum)Enum.ToObject(typeof(TEnum), name.GetDeterministicHashCode());
-    }
-
-    private static TEnum Parse<TEnum>(string name) where TEnum : struct, Enum
-    {
-        if (!Enum.TryParse(name, true, out TEnum value))
-        {
-            throw new InvalidOperationException(Strings.UnexpectedMember(name));
-        }
-
-        return value;
-    }
 }

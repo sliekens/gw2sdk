@@ -6,7 +6,7 @@
 public sealed record Ingredient
 {
     /// <summary>The type of ingredient.</summary>
-    public required IngredientKind Kind { get; init; }
+    public required Extensible<IngredientKind> Kind { get; init; }
 
     /// <summary>The ingredient ID. This can be an item ID, currency ID or guild upgrade ID, depending on the ingredient kind.</summary>
     public required int Id { get; init; }

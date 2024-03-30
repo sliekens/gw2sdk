@@ -6,7 +6,7 @@
 public sealed record InfluenceActivity : GuildLogEntry
 {
     /// <summary>The nature of the influence activity.</summary>
-    public required InfluenceActivityKind Activity { get; init; }
+    public required Extensible<InfluenceActivityKind> Activity { get; init; }
 
     /// <summary>How many members participated in the activity.</summary>
     public required int TotalParticipants { get; init; }

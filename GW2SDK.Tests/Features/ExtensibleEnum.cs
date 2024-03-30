@@ -40,9 +40,11 @@ public class ExtensibleEnum
     }
 
     [Fact]
-    public void Converts_null_to_default_enum_value()
+    public void Converts_default_to_default_enum_value()
     {
         Extensible<MissingMemberBehavior> extensible = default;
+        Assert.True(extensible.IsDefined());
+        Assert.Equal(MissingMemberBehavior.Error, extensible.ToEnum());
         Assert.Equal("Error", extensible.ToString());
     }
 
@@ -81,4 +83,21 @@ public class ExtensibleEnum
         Assert.True(left == right);
         Assert.True(right == left);
     }
+
+    [Fact]
+    public void Converts_names_to_enum()
+    {
+        var extensible = new Extensible<Rarity>(nameof(Rarity.Legendary));
+        var actual = extensible.ToEnum();
+        Assert.Equal(Rarity.Legendary, actual);
+    }
+
+    [Fact]
+    public void Converts_unknown_names_to_null()
+    {
+        var extensible = new Extensible<Rarity>("Mythical");
+        var actual = extensible.ToEnum();
+        Assert.Null(actual);
+    }
+
 }

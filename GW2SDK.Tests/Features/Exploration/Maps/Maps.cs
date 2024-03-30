@@ -21,9 +21,15 @@ public class Maps
             actual,
             entry =>
             {
-                // TODO: complete validation
-                entry.Has_id();
-                entry.Has_name();
+                Assert.True(entry.Id > 0);
+                Assert.NotEmpty(entry.Name);
+                Assert.All(entry.MasteryInsights,
+                    insight =>
+                    {
+                        Assert.True(insight.Id > 0);
+                        Assert.True(insight.Region.IsDefined());
+                        Assert.False(insight.Coordinates.IsEmpty);
+                    });
             }
         );
     }

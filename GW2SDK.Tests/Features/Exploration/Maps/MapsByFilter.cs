@@ -23,14 +23,5 @@ public class MapsByFilter
 
         Assert.Equal(ids.Count, actual.Count);
         Assert.Equal(context.ResultCount, actual.Count);
-        Assert.All(
-            actual,
-            entry =>
-            {
-                // TODO: complete validation
-                entry.Has_id();
-                entry.Has_name();
-            }
-        );
     }
 }

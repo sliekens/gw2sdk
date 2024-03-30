@@ -76,7 +76,7 @@ internal static class CastleJson
         return new Castle
         {
             Id = id.Map(value => value.GetStringRequired()),
-            Owner = owner.Map(value => value.GetEnum<TeamColor>(missingMemberBehavior)),
+            Owner = owner.Map(value => value.GetEnum<TeamColor>()),
             LastFlipped = lastFlipped.Map(value => value.GetDateTimeOffset()),
             PointsTick = pointsTick.Map(value => value.GetInt32()),
             PointsCapture = pointsCapture.Map(value => value.GetInt32()),

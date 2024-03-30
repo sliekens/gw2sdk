@@ -18,12 +18,12 @@ public class Novelties
             actual,
             entry =>
             {
-                entry.Has_id();
-                entry.Has_name();
-                entry.Has_description();
-                entry.Has_icon();
-                entry.Has_slot();
-                entry.Has_unlock_items();
+                Assert.True(entry.Id > 0);
+                Assert.NotEmpty(entry.Name);
+                Assert.NotNull(entry.Description);
+                Assert.NotEmpty(entry.IconHref);
+                Assert.True(entry.Slot.IsDefined());
+                Assert.NotEmpty(entry.UnlockItemIds);
             }
         );
     }

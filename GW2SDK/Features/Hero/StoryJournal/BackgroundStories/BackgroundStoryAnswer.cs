@@ -21,8 +21,8 @@ public sealed record BackgroundStoryAnswer
     public required int QuestionId { get; init; }
 
     /// <summary>The races that can give this answer.</summary>
-    public required IReadOnlyCollection<RaceName> Races { get; init; }
+    public required IReadOnlyCollection<Extensible<RaceName>> Races { get; init; }
 
     /// <summary>The professions that can give this answer.</summary>
-    public required IReadOnlyCollection<ProfessionName> Professions { get; init; }
+    public required IReadOnlyCollection<Extensible<ProfessionName>> Professions { get; init; }
 }

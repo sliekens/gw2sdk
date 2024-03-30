@@ -14,7 +14,7 @@ public sealed record EquipmentItem
     public required int? Count { get; init; }
 
     /// <summary>The slot where this item is equipped.</summary>
-    public required EquipmentSlot? Slot { get; init; }
+    public required Extensible<EquipmentSlot>? Slot { get; init; }
 
     /// <summary>If present, indicates the item ID of an upgrade component.</summary>
     public required int? SuffixItemId { get; init; }
@@ -32,13 +32,13 @@ public sealed record EquipmentItem
     public required SelectedAttributeCombination? Stats { get; init; }
 
     /// <summary>Whether this item is bound.</summary>
-    public required ItemBinding Binding { get; init; }
+    public required Extensible<ItemBinding> Binding { get; init; }
 
     /// <summary>The name of the character if the item is soulbound.</summary>
     public required string BoundTo { get; init; }
 
     /// <summary>Whether this item is currently equipped or stored in the (legendary) armory.</summary>
-    public required EquipmentLocation Location { get; init; }
+    public required Extensible<EquipmentLocation> Location { get; init; }
 
     /// <summary>The equipment template numbers in which this item is (re)used.</summary>
     public required IReadOnlyList<int> TemplateNumbers { get; init; }

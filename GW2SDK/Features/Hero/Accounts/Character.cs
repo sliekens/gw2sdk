@@ -24,17 +24,17 @@ public sealed record Character
     public required string Name { get; init; }
 
     /// <summary>The race selected during creation of the current character.</summary>
-    public required RaceName Race { get; init; }
+    public required Extensible<RaceName> Race { get; init; }
 
     /// <summary>The character's appearance.</summary>
     /// <remarks>This can be changed later with a Black Lion contract.</remarks>
-    public required BodyType BodyType { get; init; }
+    public required Extensible<BodyType> BodyType { get; init; }
 
     /// <summary>Additional facts about the current character that did not fit anywhere else.</summary>
     public required CharacterFlags Flags { get; init; }
 
     /// <summary>The profession name of the current character.</summary>
-    public required ProfessionName Profession { get; init; }
+    public required Extensible<ProfessionName> Profession { get; init; }
 
     /// <summary>The character's level.</summary>
     public required int Level { get; init; }

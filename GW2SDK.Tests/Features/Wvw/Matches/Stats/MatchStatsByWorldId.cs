@@ -13,9 +13,6 @@ public class MatchStatsByWorldId
 
         var (actual, _) = await sut.Wvw.GetMatchStatsByWorldId(worldId);
 
-        actual.Has_id();
-        actual.Has_kills();
-        actual.Has_deaths();
-        actual.Has_maps();
+        Assert.NotNull(actual);
     }
 }

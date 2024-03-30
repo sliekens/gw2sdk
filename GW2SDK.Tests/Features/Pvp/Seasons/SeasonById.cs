@@ -14,6 +14,5 @@ public class SeasonById
         var (actual, _) = await sut.Pvp.GetSeasonById(id);
 
         Assert.Equal(id, actual.Id);
-        actual.Has_name();
     }
 }

@@ -19,16 +19,11 @@ public class ObjectivesByFilter
 
         Assert.Equal(ids.Count, actual.Count);
         Assert.Equal(context.ResultCount, actual.Count);
-        Assert.All(
-            actual,
-            entry =>
-            {
-                entry.Has_id();
-                entry.Has_name();
-                entry.Has_sector_id();
-                entry.Has_map_id();
-                entry.Has_chat_link();
-            }
+        Assert.Collection(
+            ids,
+            first => Assert.Contains(actual, found => found.Id == first),
+            second => Assert.Contains(actual, found => found.Id == second),
+            third => Assert.Contains(actual, found => found.Id == third)
         );
     }
 }

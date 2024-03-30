@@ -12,7 +12,7 @@ public sealed record Specialization
     public required string Name { get; init; }
 
     /// <summary>The profession that can use this specialization.</summary>
-    public required ProfessionName Profession { get; init; }
+    public required Extensible<ProfessionName> Profession { get; init; }
 
     /// <summary>Whether this is an elite specialization.</summary>
     public required bool Elite { get; init; }

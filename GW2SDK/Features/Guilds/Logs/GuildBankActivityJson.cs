@@ -70,7 +70,7 @@ internal static class GuildBankActivityJson
             User = user.Map(value => value.GetStringRequired()),
             Operation =
                 operation.Map(
-                    value => value.GetEnum<GuildBankOperationKind>(missingMemberBehavior)
+                    value => value.GetEnum<GuildBankOperationKind>()
                 ),
             ItemId = itemId.Map(value => value.GetInt32()),
             Count = count.Map(value => value.GetInt32()),

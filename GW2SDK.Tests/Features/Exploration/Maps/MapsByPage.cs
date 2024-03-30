@@ -18,14 +18,5 @@ public class MapsByPage
 
         Assert.Equal(3, actual.Count);
         Assert.Equal(3, context.PageSize);
-        Assert.All(
-            actual,
-            entry =>
-            {
-                // TODO: complete validation
-                entry.Has_id();
-                entry.Has_name();
-            }
-        );
     }
 }

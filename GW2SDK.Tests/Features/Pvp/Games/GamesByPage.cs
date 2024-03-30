@@ -17,13 +17,5 @@ public class GamesByPage
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);
         Assert.Equal(context.ResultCount, pageSize);
-        Assert.All(
-            actual,
-            entry =>
-            {
-                Assert.NotEmpty(entry.Id);
-                Assert.True(entry.RatingType.IsDefined());
-            }
-        );
     }
 }

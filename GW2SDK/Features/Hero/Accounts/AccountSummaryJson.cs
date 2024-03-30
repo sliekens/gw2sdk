@@ -107,7 +107,7 @@ internal static class AccountSummaryJson
             Access =
                 access.Map(
                     values => values.GetList(
-                        value => value.GetEnum<ProductName>(missingMemberBehavior)
+                        value => value.GetEnum<ProductName>()
                     )
                 ),
             Commander = commander.Map(value => value.GetBoolean()),

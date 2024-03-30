@@ -78,7 +78,7 @@ internal static class TraitJson
             Order = order.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),
             Description = description.Map(value => value.GetString()) ?? "",
-            Slot = slot.Map(value => value.GetEnum<TraitSlot>(missingMemberBehavior)),
+            Slot = slot.Map(value => value.GetEnum<TraitSlot>()),
             IconHref = icon.Map(value => value.GetStringRequired()),
             SpezializationId = specialization.Map(value => value.GetInt32()),
             Facts = facts.Map(

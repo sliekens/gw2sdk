@@ -13,5 +13,5 @@ public record SkillSummary
     public required int Id { get; init; }
 
     /// <summary>The slot in which the skill can be equipped.</summary>
-    public required SkillSlot Slot { get; init; }
+    public required Extensible<SkillSlot> Slot { get; init; }
 }

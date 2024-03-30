@@ -32,7 +32,7 @@ internal static class GuildTeamMemberJson
         return new GuildTeamMember
         {
             Name = name.Map(value => value.GetStringRequired()),
-            Role = role.Map(value => value.GetEnum<GuildTeamRole>(missingMemberBehavior))
+            Role = role.Map(value => value.GetEnum<GuildTeamRole>())
         };
     }
 }

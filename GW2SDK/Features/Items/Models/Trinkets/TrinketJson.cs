@@ -173,12 +173,12 @@ internal static class TrinketJson
             Name = name.Map(value => value.GetStringRequired()),
             Description = description.Map(value => value.GetString()) ?? "",
             Level = level.Map(value => value.GetInt32()),
-            Rarity = rarity.Map(value => value.GetEnum<Rarity>(missingMemberBehavior)),
+            Rarity = rarity.Map(value => value.GetEnum<Rarity>()),
             VendorValue = vendorValue.Map(value => value.GetInt32()),
             GameTypes =
                 gameTypes.Map(
                     values => values.GetList(
-                        value => value.GetEnum<GameType>(missingMemberBehavior)
+                        value => value.GetEnum<GameType>()
                     )
                 ),
             Flags = flags.Map(values => values.GetItemFlags()),
@@ -198,7 +198,7 @@ internal static class TrinketJson
             AttributeCombinationId = infixUpgradeId.Map(value => value.GetInt32()),
             Attributes =
                 infixUpgradeAttributes.Map(values => values.GetAttributes(missingMemberBehavior))
-                ?? new Dictionary<AttributeName, int>(0),
+                ?? new Dictionary<Extensible<AttributeName>, int>(0),
             Buff = infixUpgradeBuff.Map(value => value.GetBuff(missingMemberBehavior)),
             SuffixItemId = suffixItemId.Map(value => value.GetInt32())
         };

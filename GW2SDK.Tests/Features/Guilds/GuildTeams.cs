@@ -20,10 +20,19 @@ public class GuildTeams
                 entry =>
                 {
                     Assert.True(entry.Id > 0);
+                    Assert.True(entry.State.IsDefined());
                     Assert.NotEmpty(entry.Name);
+                    Assert.All(entry.Members,
+                        member =>
+                        {
+                            Assert.NotEmpty(member.Name);
+                            Assert.True(member.Role.IsDefined());
+                        });
                     Assert.All(entry.Games,
                         game =>
                         {
+                            Assert.True(game.Result.IsDefined());
+                            Assert.True(game.Team.IsDefined());
                             Assert.True(game.RatingType.IsDefined());
                         });
                 });

@@ -9,7 +9,7 @@ public sealed record GuildUpgradeActivity : GuildLogEntry
     public required string User { get; init; }
 
     /// <summary>The action performed.</summary>
-    public required GuildUpgradeAction Action { get; init; }
+    public required Extensible<GuildUpgradeAction> Action { get; init; }
 
     /// <summary>The guild upgrade ID.</summary>
     public required int UpgradeId { get; init; }

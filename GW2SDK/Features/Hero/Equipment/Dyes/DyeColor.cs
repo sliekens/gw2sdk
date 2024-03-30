@@ -35,11 +35,11 @@ public sealed record DyeColor
     public required int? ItemId { get; init; }
 
     /// <summary>The color category to which the dye belongs.</summary>
-    public required Hue Hue { get; init; }
+    public required Extensible<Hue> Hue { get; init; }
 
     /// <summary>The material category to which the dye belongs.</summary>
-    public required Material Material { get; init; }
+    public required Extensible<Material> Material { get; init; }
 
     /// <summary>The set to which the dye belongs.</summary>
-    public required ColorSet Set { get; init; }
+    public required Extensible<ColorSet> Set { get; init; }
 }

@@ -16,16 +16,5 @@ public class ObjectivesByPage
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);
         Assert.Equal(context.ResultCount, pageSize);
-        Assert.All(
-            actual,
-            entry =>
-            {
-                entry.Has_id();
-                entry.Has_name();
-                entry.Has_sector_id();
-                entry.Has_map_id();
-                entry.Has_chat_link();
-            }
-        );
     }
 }

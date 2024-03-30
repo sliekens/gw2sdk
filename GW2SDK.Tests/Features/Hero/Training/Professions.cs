@@ -18,10 +18,7 @@ public class Professions
             actual,
             profession =>
             {
-                Assert.True(
-                    Enum.IsDefined(typeof(ProfessionName), profession.Id),
-                    "Enum.IsDefined(profession.Id)"
-                );
+                Assert.True(profession.Id.IsDefined());
                 Assert.NotEmpty(profession.Name);
                 Assert.NotEmpty(profession.IconHref);
                 Assert.NotEmpty(profession.BigIconHref);

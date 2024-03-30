@@ -58,7 +58,7 @@ internal static class InfluenceActivityJson
             Id = id.Map(value => value.GetInt32()),
             Time = time.Map(value => value.GetDateTimeOffset()),
             Activity =
-                activity.Map(value => value.GetEnum<InfluenceActivityKind>(missingMemberBehavior)),
+                activity.Map(value => value.GetEnum<InfluenceActivityKind>()),
             TotalParticipants = totalParticipants.Map(value => value.GetInt32()),
             Participants =
                 participants.Map(values => values.GetList(value => value.GetStringRequired()))

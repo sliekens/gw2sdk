@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Masteries;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Masteries;
 
@@ -16,22 +17,23 @@ public class MasteryTracks
             actual,
             mastery =>
             {
-                mastery.Id_is_positive();
-                mastery.Name_is_not_empty();
-                mastery.Requirement_is_not_null();
-                mastery.Order_is_not_negative();
-                mastery.Background_is_not_empty();
-                mastery.Region_is_known();
+                Assert.True(mastery.Id > 0);
+                Assert.NotEmpty(mastery.Name);
+                Assert.NotNull(mastery.Requirement);
+                Assert.InRange(mastery.Order, 0, int.MaxValue);
+                Assert.NotEmpty(mastery.BackgroundHref);
+                Assert.True(mastery.Region.IsDefined());
+                Assert.NotEqual(MasteryRegionName.Unknown, mastery.Region);
                 Assert.All(
                     mastery.Masteries,
                     level =>
                     {
-                        level.Name_is_not_empty();
-                        level.Description_is_not_empty();
-                        level.Instruction_is_not_empty();
-                        level.Icon_is_not_empty();
-                        level.Costs_points();
-                        level.Costs_experience();
+                        Assert.NotEmpty(level.Name);
+                        Assert.NotEmpty(level.Description);
+                        Assert.NotEmpty(level.Instruction);
+                        Assert.NotEmpty(level.IconHref);
+                        Assert.True(level.PointCost > 0);
+                        Assert.True(level.ExperienceCost > 0);
                     }
                 );
             }

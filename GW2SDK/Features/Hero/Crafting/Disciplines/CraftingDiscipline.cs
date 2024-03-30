@@ -5,7 +5,7 @@
 public sealed record CraftingDiscipline
 {
     /// <summary>The name of the current crafting discipline.</summary>
-    public required CraftingDisciplineName Discipline { get; init; }
+    public required Extensible<CraftingDisciplineName> Discipline { get; init; }
 
     /// <summary>The level of progression.</summary>
     public required int Rating { get; init; }

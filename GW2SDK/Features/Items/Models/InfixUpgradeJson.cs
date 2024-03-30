@@ -6,12 +6,12 @@ namespace GuildWars2.Items;
 
 internal static class InfixUpgradeJson
 {
-    public static IDictionary<AttributeName, int> GetAttributes(
+    public static IDictionary<Extensible<AttributeName>, int> GetAttributes(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        var attributes = new Dictionary<AttributeName, int>(json.GetArrayLength());
+        var attributes = new Dictionary<Extensible<AttributeName>, int>(json.GetArrayLength());
         foreach (var entry in json.EnumerateArray())
         {
             RequiredMember attribute = "attribute";

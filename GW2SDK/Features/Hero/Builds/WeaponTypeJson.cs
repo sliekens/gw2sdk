@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Builds;
 
 internal static class WeaponTypeJson
 {
-    public static WeaponType GetWeaponType(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Extensible<WeaponType> GetWeaponType(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         // The old name for harpoon gun is used in the API
         if (json.ValueEquals("Speargun"))
@@ -14,6 +14,6 @@ internal static class WeaponTypeJson
         }
 
         // Otherwise the enum value matches the string value
-        return json.GetEnum<WeaponType>(missingMemberBehavior);
+        return json.GetEnum<WeaponType>();
     }
 }

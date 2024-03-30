@@ -16,8 +16,8 @@ public class Items
         await foreach (var (actual, context) in sut.Items.GetItemsBulk(degreeOfParallelism: 3)
             .Take(600))
         {
-            actual.Validate();
             Assert.NotNull(context);
+            Assert.NotNull(actual);
         }
     }
 }

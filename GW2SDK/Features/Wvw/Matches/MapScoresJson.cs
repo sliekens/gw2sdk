@@ -32,7 +32,7 @@ internal static class MapScoresJson
 
         return new MapScores
         {
-            Kind = type.Map(value => value.GetEnum<MapKind>(missingMemberBehavior)),
+            Kind = type.Map(value => value.GetEnum<MapKind>()),
             Scores = scores.Map(value => value.GetDistribution(missingMemberBehavior))
         };
     }

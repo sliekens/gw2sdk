@@ -17,8 +17,8 @@ public class Skins
             .GetSkinsBulk(degreeOfParallelism: 3)
             .Take(600))
         {
-            actual.Has_id();
             Assert.NotNull(context);
+            Assert.NotNull(actual);
         }
     }
 }

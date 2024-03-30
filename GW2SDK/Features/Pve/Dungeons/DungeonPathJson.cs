@@ -32,7 +32,7 @@ internal static class DungeonPathJson
         return new DungeonPath
         {
             Id = id.Map(value => value.GetStringRequired()),
-            Kind = kind.Map(value => value.GetEnum<DungeonKind>(missingMemberBehavior))
+            Kind = kind.Map(value => value.GetEnum<DungeonKind>())
         };
     }
 }

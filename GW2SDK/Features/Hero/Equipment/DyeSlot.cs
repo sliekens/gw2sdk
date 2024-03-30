@@ -9,5 +9,5 @@ public sealed record DyeSlot
     public required int ColorId { get; init; }
 
     /// <summary>The material of the dye slot. Each dye has a different RGB value depending on the material.</summary>
-    public required Material Material { get; init; }
+    public required Extensible<Material> Material { get; init; }
 }

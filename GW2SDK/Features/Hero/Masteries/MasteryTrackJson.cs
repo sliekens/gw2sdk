@@ -61,7 +61,7 @@ internal static class MasteryTrackJson
             Requirement = requirement.Map(value => value.GetStringRequired()),
             Order = order.Map(value => value.GetInt32()),
             BackgroundHref = background.Map(value => value.GetStringRequired()),
-            Region = region.Map(value => value.GetEnum<MasteryRegionName>(missingMemberBehavior)),
+            Region = region.Map(value => value.GetEnum<MasteryRegionName>()),
             Masteries = levels.Map(
                 values => values.GetList(value => value.GetMastery(missingMemberBehavior))
             )

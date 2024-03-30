@@ -32,7 +32,7 @@ internal static class EncounterJson
         return new Encounter
         {
             Id = id.Map(value => value.GetStringRequired()),
-            Kind = type.Map(value => value.GetEnum<EncounterKind>(missingMemberBehavior))
+            Kind = type.Map(value => value.GetEnum<EncounterKind>())
         };
     }
 }

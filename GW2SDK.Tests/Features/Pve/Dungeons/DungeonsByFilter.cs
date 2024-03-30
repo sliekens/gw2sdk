@@ -19,21 +19,5 @@ public class DungeonsByFilter
 
         Assert.Equal(ids.Count, actual.Count);
         Assert.Equal(context.ResultCount, actual.Count);
-        Assert.All(
-            actual,
-            entry =>
-            {
-                Assert.Contains(entry.Id, ids);
-                entry.Has_paths();
-                Assert.All(
-                    entry.Paths,
-                    path =>
-                    {
-                        path.Has_id();
-                        path.Has_kind();
-                    }
-                );
-            }
-        );
     }
 }

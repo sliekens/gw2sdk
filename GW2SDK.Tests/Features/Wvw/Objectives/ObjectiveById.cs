@@ -14,9 +14,5 @@ public class ObjectiveById
         var (actual, _) = await sut.Wvw.GetObjectiveById(id);
 
         Assert.Equal(id, actual.Id);
-        actual.Has_name();
-        actual.Has_sector_id();
-        actual.Has_map_id();
-        actual.Has_chat_link();
     }
 }

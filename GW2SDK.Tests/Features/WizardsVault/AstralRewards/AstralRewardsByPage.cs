@@ -1,5 +1,4 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
-using GuildWars2.WizardsVault;
 
 namespace GuildWars2.Tests.Features.WizardsVault.AstralRewards;
 
@@ -17,20 +16,5 @@ public class AstralRewardsByPage
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);
         Assert.Equal(context.ResultCount, pageSize);
-        Assert.All(
-            actual,
-            reward =>
-            {
-                Assert.True(reward.Id > 0);
-                Assert.True(reward.ItemId > 0);
-                Assert.True(reward.ItemCount > 0);
-                Assert.True(reward.Cost > 0);
-                Assert.True(Enum.IsDefined(typeof(RewardKind), reward.Kind));
-
-                var chatLink = reward.GetChatLink();
-                Assert.Equal(reward.ItemId, chatLink.ItemId);
-                Assert.Equal(reward.ItemCount, chatLink.Count);
-            }
-        );
     }
 }

@@ -52,9 +52,9 @@ internal static class ProfessionSkillSummaryJson
         return new ProfessionSkillSummary
         {
             Id = id.Map(value => value.GetInt32()),
-            Slot = slot.Map(value => value.GetEnum<SkillSlot>(missingMemberBehavior)),
-            Source = source.Map(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
-            Attunement = attunement.Map(value => value.GetEnum<Attunement>(missingMemberBehavior))
+            Slot = slot.Map(value => value.GetEnum<SkillSlot>()),
+            Source = source.Map(value => value.GetEnum<ProfessionName>()),
+            Attunement = attunement.Map(value => value.GetEnum<Attunement>())
         };
     }
 }

@@ -18,14 +18,14 @@ public class Dungeons
             actual,
             entry =>
             {
-                entry.Has_id();
-                entry.Has_paths();
+                Assert.NotEmpty(entry.Id);
+                Assert.NotEmpty(entry.Paths);
                 Assert.All(
                     entry.Paths,
                     path =>
                     {
-                        path.Has_id();
-                        path.Has_kind();
+                        Assert.NotEmpty(path.Id);
+                        Assert.True(path.Kind.IsDefined());
                     }
                 );
             }

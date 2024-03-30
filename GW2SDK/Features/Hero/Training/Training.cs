@@ -14,7 +14,7 @@ public sealed record Training
 
     /// <summary>Indicates whether the training track unlocks skills, core specializations (traits) or elite specializations
     /// (both skills and traits).</summary>
-    public required TrainingCategory Category { get; init; }
+    public required Extensible<TrainingCategory> Category { get; init; }
 
     /// <summary>The objectives within the training track. The list type is abstract, the derived types are documented in the
     /// Objectives namespace.</summary>

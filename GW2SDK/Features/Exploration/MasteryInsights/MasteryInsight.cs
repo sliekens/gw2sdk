@@ -12,7 +12,7 @@ public sealed record MasteryInsight
     public required int Id { get; init; }
 
     /// <summary>The associated region.</summary>
-    public required MasteryRegionName Region { get; init; }
+    public required Extensible<MasteryRegionName> Region { get; init; }
 
     /// <summary>The map coordinates of the mastery insight.</summary>
     public required PointF Coordinates { get; init; }

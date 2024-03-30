@@ -27,7 +27,7 @@ public sealed record Trait
     public required string Description { get; init; }
 
     /// <summary>Indicates whether it is a minor trait (always active) or a major trait (only active if the trait is selected).</summary>
-    public required TraitSlot Slot { get; init; }
+    public required Extensible<TraitSlot> Slot { get; init; }
 
     /// <summary>The list of trait behaviors. For example, if the current trait grants a boon, this list will contain a
     /// <see cref="Buff" /> fact describing the boon. The list type is abstract, the derived types are documented in the Facts

@@ -31,7 +31,7 @@ internal static class InfusionSlotUpgradePathJson
         return new InfusionSlotUpgradePath
         {
             Upgrade = upgrade.Map(
-                value => value.GetEnum<InfusionSlotUpgradeKind>(missingMemberBehavior)
+                value => value.GetEnum<InfusionSlotUpgradeKind>()
             ),
             ItemId = itemId.Map(value => value.GetInt32())
         };

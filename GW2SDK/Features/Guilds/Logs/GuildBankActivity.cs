@@ -9,7 +9,7 @@ public sealed record GuildBankActivity : GuildLogEntry
     public required string User { get; init; }
 
     /// <summary>The kind of operation performed.</summary>
-    public required GuildBankOperationKind Operation { get; init; }
+    public required Extensible<GuildBankOperationKind> Operation { get; init; }
 
     /// <summary>The item ID of the item transaction, or 0 if this was a <see cref="Coins" /> transaction.</summary>
     public required int ItemId { get; init; }

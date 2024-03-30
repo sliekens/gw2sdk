@@ -1,5 +1,4 @@
-﻿using GuildWars2.Hero;
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Builds;
 
@@ -19,10 +18,7 @@ public class StoredBuilds
             space =>
             {
                 Assert.NotNull(space.Name);
-                Assert.True(
-                    Enum.IsDefined(typeof(ProfessionName), space.Profession),
-                    "Enum.IsDefined(space.Profession)"
-                );
+                Assert.True(space.Profession.IsDefined());
                 Assert.True(space.Specialization1?.Id is null or > 0);
                 Assert.True(space.Specialization2?.Id is null or > 0);
                 Assert.True(space.Specialization3?.Id is null or > 0);

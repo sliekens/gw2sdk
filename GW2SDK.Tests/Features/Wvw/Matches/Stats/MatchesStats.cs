@@ -18,10 +18,16 @@ public class MatchesStats
             actual,
             entry =>
             {
-                entry.Has_id();
-                entry.Has_kills();
-                entry.Has_deaths();
-                entry.Has_maps();
+                Assert.NotEmpty(entry.Id);
+                Assert.NotNull(entry.Kills);
+                Assert.NotNull(entry.Deaths);
+                Assert.NotEmpty(entry.Maps);
+                Assert.All(entry.Maps,
+                    map =>
+                    {
+                        Assert.True(map.Id > 0);
+                        Assert.True(map.Kind.IsDefined());
+                    });
             }
         );
     }

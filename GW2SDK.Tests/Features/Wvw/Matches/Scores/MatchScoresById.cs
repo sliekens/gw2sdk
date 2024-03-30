@@ -14,8 +14,5 @@ public class MatchScoresById
         var (actual, _) = await sut.Wvw.GetMatchScoresById(id);
 
         Assert.Equal(id, actual.Id);
-        actual.Has_scores();
-        actual.Has_victory_points();
-        actual.Has_skirmishes();
     }
 }

@@ -26,7 +26,7 @@ public record Recipe
     public required TimeSpan TimeToCraft { get; init; }
 
     /// <summary>The crafting disciplines that can use this recipe.</summary>
-    public required IReadOnlyCollection<CraftingDisciplineName> Disciplines { get; init; }
+    public required IReadOnlyCollection<Extensible<CraftingDisciplineName>> Disciplines { get; init; }
 
     /// <summary>Contains various modifiers.</summary>
     public required RecipeFlags Flags { get; init; }

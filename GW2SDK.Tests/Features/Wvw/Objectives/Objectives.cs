@@ -18,11 +18,18 @@ public class Objectives
             actual,
             entry =>
             {
-                entry.Has_id();
-                entry.Has_name();
-                entry.Has_sector_id();
-                entry.Has_map_id();
-                entry.Has_chat_link();
+                Assert.NotEmpty(entry.Id);
+                Assert.NotEmpty(entry.Name);
+                Assert.True(entry.Kind.IsDefined());
+                Assert.True(entry.SectorId > 0);
+                Assert.True(entry.MapId > 0);
+                Assert.True(entry.MapKind.IsDefined());
+
+                var chatLink = entry.GetChatLink();
+                Assert.NotEmpty(entry.ChatLink);
+                Assert.Equal(entry.ChatLink, chatLink.ToString());
+                Assert.Equal(entry.MapId, chatLink.MapId);
+                Assert.Equal(entry.Id, $"{chatLink.MapId}-{chatLink.ObjectiveId}");
             }
         );
     }

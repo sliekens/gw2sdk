@@ -14,6 +14,5 @@ public class DungeonById
         var (actual, _) = await sut.Pve.Dungeons.GetDungeonById(id);
 
         Assert.Equal(id, actual.Id);
-        actual.Has_paths();
     }
 }

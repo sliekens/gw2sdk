@@ -6,8 +6,8 @@
 public sealed record Bonus
 {
     /// <summary>The bonus kind.</summary>
-    public required BonusKind Kind { get; init; }
+    public required Extensible<BonusKind> Kind { get; init; }
 
     /// <summary>The color of the team that owns the bonus.</summary>
-    public required TeamColor Owner { get; init; }
+    public required Extensible<TeamColor> Owner { get; init; }
 }

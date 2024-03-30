@@ -97,12 +97,12 @@ internal static class GlovesSkinJson
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),
             Description = description.Map(value => value.GetString()) ?? "",
-            Rarity = rarity.Map(value => value.GetEnum<Rarity>(missingMemberBehavior)),
+            Rarity = rarity.Map(value => value.GetEnum<Rarity>()),
             Flags = flags.Map(values => values.GetSkinFlags()),
             Races = restrictions.Map(values => values.GetRestrictions(missingMemberBehavior)),
             IconHref = icon.Map(value => value.GetString()),
             WeightClass =
-                weightClass.Map(value => value.GetEnum<WeightClass>(missingMemberBehavior)),
+                weightClass.Map(value => value.GetEnum<WeightClass>()),
             DyeSlots = dyeSlots.Map(value => value.GetDyeSlotInfo(missingMemberBehavior))
         };
     }

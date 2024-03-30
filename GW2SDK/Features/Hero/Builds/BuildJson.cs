@@ -63,7 +63,7 @@ internal static class BuildJson
         {
             Name = name.Map(value => value.GetStringRequired()),
             Profession =
-                profession.Map(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
+                profession.Map(value => value.GetEnum<ProfessionName>()),
             Specialization1 = Specialization1,
             Specialization2 = Specialization2,
             Specialization3 = Specialization3,

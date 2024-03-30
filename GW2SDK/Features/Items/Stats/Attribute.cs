@@ -8,7 +8,7 @@ namespace GuildWars2.Items.Stats;
 public sealed record Attribute
 {
     /// <summary>The name of the attribute.</summary>
-    public required AttributeName Name { get; init; }
+    public required Extensible<AttributeName> Name { get; init; }
 
     /// <summary>The multiplier for the attribute. To calculate the final item stats, multiply an item's Attribute Adjustment value
     /// with this multiplier, then add the result to the base <see cref="Value" />.</summary>

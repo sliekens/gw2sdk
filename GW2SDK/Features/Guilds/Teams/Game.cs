@@ -20,10 +20,10 @@ public sealed record Game
     public required DateTimeOffset Ended { get; init; }
 
     /// <summary>The result of the game.</summary>
-    public required PvpResult Result { get; init; }
+    public required Extensible<PvpResult> Result { get; init; }
 
     /// <summary>The color of the team.</summary>
-    public required PvpTeamColor Team { get; init; }
+    public required Extensible<PvpTeamColor> Team { get; init; }
 
     /// <summary>The game mode.</summary>
     public required Extensible<PvpRatingType> RatingType { get; init; }

@@ -9,5 +9,5 @@ public sealed record DungeonPath
     public required string Id { get; init; }
 
     /// <summary>The kind of path (stoy or explorable).</summary>
-    public required DungeonKind Kind { get; init; }
+    public required Extensible<DungeonKind> Kind { get; init; }
 }

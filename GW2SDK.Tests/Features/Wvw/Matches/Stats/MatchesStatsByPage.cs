@@ -16,15 +16,5 @@ public class MatchesStatsByPage
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);
         Assert.Equal(context.ResultCount, pageSize);
-        Assert.All(
-            actual,
-            entry =>
-            {
-                entry.Has_id();
-                entry.Has_kills();
-                entry.Has_deaths();
-                entry.Has_maps();
-            }
-        );
     }
 }

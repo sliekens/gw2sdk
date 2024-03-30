@@ -16,13 +16,5 @@ public class MapSummariesByPage
         Assert.Equal(pageSize, context.PageSize);
         Assert.Equal(pageSize, actual.Count);
         Assert.Equal(context.ResultCount, pageSize);
-        Assert.All(
-            actual,
-            entry =>
-            {
-                entry.Has_id();
-                entry.Has_name();
-            }
-        );
     }
 }

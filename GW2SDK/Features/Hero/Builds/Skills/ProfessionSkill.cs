@@ -5,7 +5,7 @@
 public sealed record ProfessionSkill : Skill
 {
     /// <summary>Used for Elementalist skills to indicate which attunement this skill is associated with.</summary>
-    public required Attunement? Attunement { get; init; }
+    public required Extensible<Attunement>? Attunement { get; init; }
 
     /// <summary>Used for Revenant, Warrior and Druid skills to indicate their cost.</summary>
     public required int? Cost { get; init; }

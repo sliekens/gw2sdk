@@ -38,7 +38,7 @@ internal static class MasteryInsightJson
         {
             Id = id.Map(value => value.GetInt32()),
             Coordinates = coordinates.Map(value => value.GetCoordinateF(missingMemberBehavior)),
-            Region = region.Map(value => value.GetEnum<MasteryRegionName>(missingMemberBehavior))
+            Region = region.Map(value => value.GetEnum<MasteryRegionName>())
         };
     }
 }

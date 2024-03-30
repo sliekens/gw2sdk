@@ -9,5 +9,5 @@ public sealed record GuildTeamMember
     public required string Name { get; init; }
 
     /// <summary>The member's team role.</summary>
-    public required GuildTeamRole Role { get; init; }
+    public required Extensible<GuildTeamRole> Role { get; init; }
 }

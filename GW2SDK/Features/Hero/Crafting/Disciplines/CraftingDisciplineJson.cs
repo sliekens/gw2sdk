@@ -38,7 +38,7 @@ internal static class CraftingDisciplineJson
         {
             Discipline =
                 discipline.Map(
-                    value => value.GetEnum<CraftingDisciplineName>(missingMemberBehavior)
+                    value => value.GetEnum<CraftingDisciplineName>()
                 ),
             Rating = rating.Map(value => value.GetInt32()),
             Active = active.Map(value => value.GetBoolean())

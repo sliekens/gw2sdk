@@ -5,5 +5,5 @@
 public sealed record ComboField : Fact
 {
     /// <summary>The kind of field that is created.</summary>
-    public required ComboFieldName Field { get; init; }
+    public required Extensible<ComboFieldName> Field { get; init; }
 }

@@ -9,7 +9,7 @@ public sealed record SuperAdventureBoxZone
     public required int Id { get; init; }
 
     /// <summary>The difficulty of the zone.</summary>
-    public required SuperAdventureBoxMode Mode { get; init; }
+    public required Extensible<SuperAdventureBoxMode> Mode { get; init; }
 
     /// <summary>The world number.</summary>
     public required int World { get; init; }

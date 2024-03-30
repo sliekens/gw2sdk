@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Guilds.Logs;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Guilds;
 
@@ -16,6 +17,24 @@ public class GuildLog
             var (actual, _) = await sut.Guilds.GetGuildLog(guildId, guildLeader.Token);
 
             Assert.NotEmpty(actual);
+            Assert.All(actual,
+                entry =>
+                {
+                    Assert.True(entry.Id > 0);
+                    Assert.True(entry.Time > DateTimeOffset.MinValue);
+                    switch (entry)
+                    {
+                        case GuildBankActivity guildBankActivity:
+                            Assert.True(guildBankActivity.Operation.IsDefined());
+                            break;
+                        case GuildUpgradeActivity guildUpgradeActivity:
+                            Assert.True(guildUpgradeActivity.Action.IsDefined());
+                            break;
+                        case InfluenceActivity influenceActivity:
+                            Assert.True(influenceActivity.Activity.IsDefined());
+                            break;
+                    }
+                });
 
             // While we are here, check the ability to use a log ID as a skip token
             if (actual.Count > 3)

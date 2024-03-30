@@ -11,7 +11,7 @@ internal static class LeaderboardTierJson
     )
     {
         OptionalMember color = "color";
-        OptionalMember type = "type";
+        NullableMember type = "type";
         OptionalMember name = "name";
         RequiredMember range = "range";
 
@@ -42,7 +42,7 @@ internal static class LeaderboardTierJson
         return new LeaderboardTier
         {
             Color = color.Map(value => value.GetString()) ?? "",
-            Kind = type.Map(value => value.GetEnum<LeaderboardTierKind>(missingMemberBehavior)),
+            Kind = type.Map(value => value.GetEnum<LeaderboardTierKind>()),
             Name = name.Map(value => value.GetString()) ?? "",
             Range = range.Map(value => value.GetLeaderboardTierRange(missingMemberBehavior))
         };

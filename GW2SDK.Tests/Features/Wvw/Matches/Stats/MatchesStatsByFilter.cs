@@ -19,15 +19,11 @@ public class MatchesStatsByFilter
 
         Assert.Equal(ids.Count, actual.Count);
         Assert.Equal(context.ResultCount, actual.Count);
-        Assert.All(
-            actual,
-            entry =>
-            {
-                entry.Has_id();
-                entry.Has_kills();
-                entry.Has_deaths();
-                entry.Has_maps();
-            }
+        Assert.Collection(
+            ids,
+            first => Assert.Contains(actual, found => found.Id == first),
+            second => Assert.Contains(actual, found => found.Id == second),
+            third => Assert.Contains(actual, found => found.Id == third)
         );
     }
 }

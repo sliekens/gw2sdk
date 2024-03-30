@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using System.Diagnostics;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pvp.Seasons;
 
@@ -18,8 +19,52 @@ public class Seasons
             actual,
             entry =>
             {
-                entry.Has_id();
-                entry.Has_name();
+                Assert.NotEmpty(entry.Id);
+                Assert.NotEmpty(entry.Name);
+                if (entry.Leaderboards.Legendary is not null)
+                {
+                    Assert.Empty(entry.Leaderboards.Legendary.Settings.Name);
+                    Assert.NotEmpty(entry.Leaderboards.Legendary.Settings.ScoringId);
+                    Assert.All(entry.Leaderboards.Legendary.Settings.Tiers,
+                        tier =>
+                        {
+                            Assert.Empty(tier.Name);
+                            if (tier.Kind.HasValue)
+                            {
+                                Assert.True(tier.Kind.Value.IsDefined());
+                            }
+                        });
+                }
+
+                if (entry.Leaderboards.Guild is not null)
+                {
+                    Assert.Empty(entry.Leaderboards.Guild.Settings.Name);
+                    Assert.NotEmpty(entry.Leaderboards.Guild.Settings.ScoringId);
+                    Assert.All(entry.Leaderboards.Guild.Settings.Tiers,
+                        tier =>
+                        {
+                            Assert.NotEmpty(tier.Name);
+                            if (tier.Kind.HasValue)
+                            {
+                                Assert.True(tier.Kind.Value.IsDefined());
+                            }
+                        });
+                }
+
+                if (entry.Leaderboards.Ladder is not null)
+                {
+                    Assert.Empty(entry.Leaderboards.Ladder.Settings.Name);
+                    Assert.NotEmpty(entry.Leaderboards.Ladder.Settings.ScoringId);
+                    Assert.All(entry.Leaderboards.Ladder.Settings.Tiers,
+                        tier =>
+                        {
+                            Assert.Empty(tier.Name);
+                            if (tier.Kind.HasValue)
+                            {
+                                Assert.True(tier.Kind.Value.IsDefined());
+                            }
+                        });
+                }
             }
         );
     }

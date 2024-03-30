@@ -43,7 +43,7 @@ internal static class TrainingJson
         {
             Id = id.Map(value => value.GetInt32()),
             Category =
-                category.Map(value => value.GetEnum<TrainingCategory>(missingMemberBehavior)),
+                category.Map(value => value.GetEnum<TrainingCategory>()),
             Name = name.Map(value => value.GetStringRequired()),
             Track = track.Map(
                 values => values.GetList(value => value.GetTrainingObjective(missingMemberBehavior))

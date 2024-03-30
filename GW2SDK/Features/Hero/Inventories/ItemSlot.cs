@@ -35,7 +35,7 @@ public sealed record ItemSlot
     public required IReadOnlyList<int> DyeColorIds { get; init; }
 
     /// <summary>Whether this item is bound.</summary>
-    public required ItemBinding Binding { get; init; }
+    public required Extensible<ItemBinding> Binding { get; init; }
 
     /// <summary>The name of the character if the item is soulbound.</summary>
     public required string BoundTo { get; init; }

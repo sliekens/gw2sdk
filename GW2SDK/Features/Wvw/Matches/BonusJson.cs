@@ -28,8 +28,8 @@ internal static class BonusJson
 
         return new Bonus
         {
-            Kind = type.Map(value => value.GetEnum<BonusKind>(missingMemberBehavior)),
-            Owner = owner.Map(value => value.GetEnum<TeamColor>(missingMemberBehavior))
+            Kind = type.Map(value => value.GetEnum<BonusKind>()),
+            Owner = owner.Map(value => value.GetEnum<TeamColor>())
         };
     }
 }

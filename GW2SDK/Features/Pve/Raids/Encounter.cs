@@ -9,5 +9,5 @@ public sealed record Encounter
     public required string Id { get; init; }
 
     /// <summary>The kind of encounter: checkpoint or boss.</summary>
-    public required EncounterKind Kind { get; init; }
+    public required Extensible<EncounterKind> Kind { get; init; }
 }

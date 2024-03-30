@@ -14,7 +14,5 @@ public class MatchOverviewById
         var (actual, _) = await sut.Wvw.GetMatchOverviewById(id);
 
         Assert.Equal(id, actual.Id);
-        actual.Has_start_time();
-        actual.Has_end_time();
     }
 }

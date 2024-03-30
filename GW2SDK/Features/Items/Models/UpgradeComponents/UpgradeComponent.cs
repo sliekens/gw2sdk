@@ -23,7 +23,7 @@ public record UpgradeComponent : Item
     public required int? AttributeCombinationId { get; init; }
 
     /// <summary>The effective stats of the item.</summary>
-    public required IDictionary<AttributeName, int> Attributes { get; init; }
+    public required IDictionary<Extensible<AttributeName>, int> Attributes { get; init; }
 
     /// <summary>The effect which is applied to the player when the item is equipped.</summary>
     public required Buff? Buff { get; init; }

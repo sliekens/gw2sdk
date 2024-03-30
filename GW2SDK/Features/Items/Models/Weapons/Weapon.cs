@@ -13,7 +13,7 @@ public record Weapon : Item
 
     /// <summary>The type of damage dealt by the weapon. It is a purely visual effect and does not affect the damage
     /// calculation.</summary>
-    public required DamageType DamageType { get; init; }
+    public required Extensible<DamageType> DamageType { get; init; }
 
     /// <summary>The minimum power used to calculate strike damage. Strike damage is calculated based a random number between
     /// <see cref="MinPower" /> and <see cref="MaxPower" />.</summary>
@@ -40,7 +40,7 @@ public record Weapon : Item
     public required int? AttributeCombinationId { get; init; }
 
     /// <summary>The effective stats of the item.</summary>
-    public required IDictionary<AttributeName, int> Attributes { get; init; }
+    public required IDictionary<Extensible<AttributeName>, int> Attributes { get; init; }
 
     /// <summary>The effect which is applied to the player when the item is equipped.</summary>
     public required Buff? Buff { get; init; }

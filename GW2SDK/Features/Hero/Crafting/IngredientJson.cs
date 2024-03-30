@@ -35,7 +35,7 @@ internal static class IngredientJson
 
         return new Ingredient
         {
-            Kind = type.Map(value => value.GetEnum<IngredientKind>(missingMemberBehavior)),
+            Kind = type.Map(value => value.GetEnum<IngredientKind>()),
             Id = id.Map(value => value.GetInt32()),
             Count = count.Map(value => value.GetInt32())
         };

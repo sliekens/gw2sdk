@@ -34,7 +34,7 @@ public sealed record AccountSummary
     public required DateTimeOffset Created { get; init; }
 
     /// <summary>Indicates what content can be accessed with this account.</summary>
-    public required IReadOnlyCollection<ProductName> Access { get; init; }
+    public required IReadOnlyCollection<Extensible<ProductName>> Access { get; init; }
 
     /// <summary>Indicates if the account has unlocked the commander tag.</summary>
     public required bool Commander { get; init; }

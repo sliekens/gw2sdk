@@ -41,7 +41,7 @@ internal static class MasteryPointRewardJson
         return new MasteryPointReward
         {
             Id = id.Map(value => value.GetInt32()),
-            Region = region.Map(value => value.GetEnum<MasteryRegionName>(missingMemberBehavior))
+            Region = region.Map(value => value.GetEnum<MasteryRegionName>())
         };
     }
 }

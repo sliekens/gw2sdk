@@ -25,7 +25,7 @@ public record EquipmentSkin
     public required IReadOnlyList<RaceName> Races { get; init; }
 
     /// <summary>The item rarity of the skin.</summary>
-    public required Rarity Rarity { get; init; }
+    public required Extensible<Rarity> Rarity { get; init; }
 
     /// <summary>The URL of the skin icon.</summary>
     public required string? IconHref { get; init; }

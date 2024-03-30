@@ -23,7 +23,7 @@ public sealed record MapSummary
     public required int DefaultFloor { get; init; }
 
     /// <summary>The kind of map.</summary>
-    public required MapKind Kind { get; init; }
+    public required Extensible<MapKind> Kind { get; init; }
 
     /// <summary>The floors of the map.</summary>
     public required IReadOnlyCollection<int> Floors { get; init; }

@@ -77,7 +77,7 @@ internal static class StoryJson
             Races =
                 races.Map(
                     values => values.GetList(
-                        value => value.GetEnum<RaceName>(missingMemberBehavior)
+                        value => value.GetEnum<RaceName>()
                     )
                 )
                 ?? GetValues<RaceName>(),
@@ -89,7 +89,7 @@ internal static class StoryJson
             Flags = flags.Map(values => values.GetStoryFlags()) ?? StoryFlags.None
         };
 
-        static List<TEnum> GetValues<TEnum>() where TEnum : struct, Enum
+        static List<Extensible<TEnum>> GetValues<TEnum>() where TEnum : struct, Enum
         {
 #if NET
             return [.. Enum.GetValues<TEnum>()];

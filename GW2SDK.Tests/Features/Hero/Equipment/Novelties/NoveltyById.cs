@@ -14,10 +14,5 @@ public class NoveltyById
         var (actual, _) = await sut.Hero.Equipment.Novelties.GetNoveltyById(id);
 
         Assert.Equal(id, actual.Id);
-        actual.Has_name();
-        actual.Has_description();
-        actual.Has_icon();
-        actual.Has_slot();
-        actual.Has_unlock_items();
     }
 }

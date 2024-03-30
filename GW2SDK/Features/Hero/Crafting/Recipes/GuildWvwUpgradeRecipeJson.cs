@@ -89,7 +89,7 @@ internal static class GuildWvwUpgradeRecipeJson
                 disciplines.Map(
                     values =>
                         values.GetList(
-                            value => value.GetEnum<CraftingDisciplineName>(missingMemberBehavior)
+                            value => value.GetEnum<CraftingDisciplineName>()
                         )
                 ),
             Flags = flags.Map(values => values.GetRecipeFlags()),

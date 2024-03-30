@@ -14,5 +14,5 @@ public record TokenInfo
     public required string Name { get; init; }
 
     /// <summary>The allowed permissions.</summary>
-    public required IReadOnlyCollection<Permission> Permissions { get; init; }
+    public required IReadOnlyCollection<Extensible<Permission>> Permissions { get; init; }
 }

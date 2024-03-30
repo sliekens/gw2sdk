@@ -20,10 +20,10 @@ public sealed record Objective
     public required int SectorId { get; init; }
 
     /// <summary>The kind of the objective.</summary>
-    public required ObjectiveKind Kind { get; init; }
+    public required Extensible<ObjectiveKind> Kind { get; init; }
 
     /// <summary>The map kind of the map that contains the objective.</summary>
-    public required MapKind MapKind { get; init; }
+    public required Extensible<MapKind> MapKind { get; init; }
 
     /// <summary>The ID of the map that contains the objective. This can be used to look up the map in the maps endpoint.</summary>
     public required int MapId { get; init; }

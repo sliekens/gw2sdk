@@ -17,7 +17,7 @@ public sealed record PurchasedAstralReward
     public required int ItemCount { get; init; }
 
     /// <summary>The kind of reward.</summary>
-    public required RewardKind Kind { get; init; }
+    public required Extensible<RewardKind> Kind { get; init; }
 
     /// <summary>The Astral Acclaim cost of the reward.</summary>
     public required int Cost { get; init; }

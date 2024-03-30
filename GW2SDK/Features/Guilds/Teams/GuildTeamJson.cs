@@ -69,7 +69,7 @@ internal static class GuildTeamJson
                     )
                 ),
             Name = name.Map(value => value.GetStringRequired()),
-            State = state.Map(value => value.GetEnum<GuildTeamState>(missingMemberBehavior)),
+            State = state.Map(value => value.GetEnum<GuildTeamState>()),
             Aggregate = aggregate.Map(value => value.GetResults(missingMemberBehavior)),
             Ladders = ladders.Map(value => value.GetLadders(missingMemberBehavior)),
             Games = games.Map(

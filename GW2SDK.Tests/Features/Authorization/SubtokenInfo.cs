@@ -54,7 +54,7 @@ public class SubtokenInfo
         // If this key leaks to the outside world, it still can't be (ab)used to login with GW2BLTC.com or similar sites
         Assert.Equal("GW2SDK-Full", subtoken.Name);
 
-        Assert.True(subtokenPermissions.SetEquals(subtoken.Permissions));
+        Assert.True(subtokenPermissions.SetEquals(subtoken.Permissions.Select(p => p.ToEnum().GetValueOrDefault())));
 
 		// Allow 5 seconds clock skew
         Assert.InRange(subtoken.IssuedAt, notBefore.AddSeconds(-5), context.Date);

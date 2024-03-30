@@ -154,10 +154,10 @@ internal static class SkillJson
                 professions.Map(
                     values =>
                         values.GetList(
-                            value => value.GetEnum<ProfessionName>(missingMemberBehavior)
+                            value => value.GetEnum<ProfessionName>()
                         )
                 ),
-            Slot = slot.Map(value => value.GetEnum<SkillSlot>(missingMemberBehavior)),
+            Slot = slot.Map(value => value.GetEnum<SkillSlot>()),
             FlipSkillId = flipSkill.Map(value => value.GetInt32()),
             NextSkillId = nextChain.Map(value => value.GetInt32()),
             PreviousSkillId = prevChain.Map(value => value.GetInt32()),
@@ -166,7 +166,7 @@ internal static class SkillJson
             ChatLink = chatLink.Map(value => value.GetStringRequired()),
             Categories = categories.Map(
                 values => values.GetList(
-                    value => value.GetEnum<SkillCategoryName>(missingMemberBehavior)
+                    value => value.GetEnum<SkillCategoryName>()
                 )
             )
         };

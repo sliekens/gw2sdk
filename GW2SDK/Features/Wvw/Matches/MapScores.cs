@@ -8,7 +8,7 @@ namespace GuildWars2.Wvw.Matches;
 public sealed record MapScores
 {
     /// <summary>The map kind.</summary>
-    public required MapKind Kind { get; init; }
+    public required Extensible<MapKind> Kind { get; init; }
 
     /// <summary>The scores of the teams on this map.</summary>
     public required Distribution Scores { get; init; }

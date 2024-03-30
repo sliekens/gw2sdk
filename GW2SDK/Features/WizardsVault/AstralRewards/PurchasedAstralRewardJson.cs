@@ -59,7 +59,7 @@ internal static class PurchasedAstralRewardJson
             Id = id.Map(value => value.GetInt32()),
             ItemId = itemId.Map(value => value.GetInt32()),
             ItemCount = itemCount.Map(value => value.GetInt32()),
-            Kind = type.Map(value => value.GetEnum<RewardKind>(missingMemberBehavior)),
+            Kind = type.Map(value => value.GetEnum<RewardKind>()),
             Cost = cost.Map(value => value.GetInt32()),
             Purchased = purchased.Map(value => value.GetInt32()),
             PurchaseLimit = purchaseLimit.Map(value => value.GetInt32())

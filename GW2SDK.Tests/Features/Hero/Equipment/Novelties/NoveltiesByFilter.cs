@@ -19,17 +19,5 @@ public class NoveltiesByFilter
 
         Assert.Equal(ids.Count, actual.Count);
         Assert.Equal(context.ResultCount, actual.Count);
-        Assert.All(
-            actual,
-            entry =>
-            {
-                entry.Has_id();
-                entry.Has_name();
-                entry.Has_description();
-                entry.Has_icon();
-                entry.Has_slot();
-                entry.Has_unlock_items();
-            }
-        );
     }
 }

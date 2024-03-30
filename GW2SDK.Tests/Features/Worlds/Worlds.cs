@@ -21,7 +21,7 @@ public class Worlds
                 Assert.NotEmpty(world.Name);
                 if (world.Population != WorldPopulation.Full)
                 {
-                    switch (world.Population)
+                    switch (world.Population.ToEnum())
                     {
                         case WorldPopulation.Medium:
                             Assert.Equal(500, world.TransferFee);

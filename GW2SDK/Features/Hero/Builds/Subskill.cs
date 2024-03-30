@@ -10,8 +10,8 @@ public sealed record Subskill
     public required int Id { get; init; }
 
     /// <summary>Used for Elementalist skills with alternate function based on the active attunement.</summary>
-    public required Attunement? Attunement { get; init; }
+    public required Extensible<Attunement>? Attunement { get; init; }
 
     /// <summary>Used for Druid skills with alternate function based on the active transformation.</summary>
-    public required Transformation? Form { get; init; }
+    public required Extensible<Transformation>? Form { get; init; }
 }

@@ -12,7 +12,7 @@ public record Armor : Item
     public required int DefaultSkinId { get; init; }
 
     /// <summary>The weight class of the armor.</summary>
-    public required WeightClass WeightClass { get; init; }
+    public required Extensible<WeightClass> WeightClass { get; init; }
 
     /// <summary>The defense rating of the armor. Defense adds together with Toughness to give the Armor attribute, which
     /// reduces incoming strike damage.</summary>
@@ -31,7 +31,7 @@ public record Armor : Item
     public required int? AttributeCombinationId { get; init; }
 
     /// <summary>The effective stats of the item.</summary>
-    public required IDictionary<AttributeName, int> Attributes { get; init; }
+    public required IDictionary<Extensible<AttributeName>, int> Attributes { get; init; }
 
     /// <summary>The effect which is applied to the player when the item is equipped.</summary>
     public required Buff? Buff { get; init; }

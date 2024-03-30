@@ -55,7 +55,7 @@ internal static class MapJson
         return new Map
         {
             Id = id.Map(value => value.GetInt32()),
-            Kind = type.Map(value => value.GetEnum<MapKind>(missingMemberBehavior)),
+            Kind = type.Map(value => value.GetEnum<MapKind>()),
             Scores = scores.Map(value => value.GetDistribution(missingMemberBehavior)),
             Bonuses =
                 bonuses.Map(

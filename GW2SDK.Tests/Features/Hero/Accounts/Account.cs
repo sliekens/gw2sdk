@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Accounts;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Accounts;
 
@@ -12,15 +13,20 @@ public class Account
 
         var (actual, _) = await sut.Hero.Account.GetSummary(accessToken.Key);
 
-        actual.Name_is_never_empty();
-        actual.Access_is_never_empty();
-        actual.GuildLeader_requires_guilds_scope();
-        actual.Access_is_never_none();
-        actual.Age_is_never_zero();
-        actual.FractalLevel_requires_progression_scope();
-        actual.DailyAp_requires_progression_scope();
-        actual.MonthlyAp_requires_progression_scope();
-        actual.WvwRank_requires_progression_scope();
+        Assert.NotEmpty(actual.DisplayName);
+        Assert.NotEmpty(actual.Access);
+        Assert.All(actual.Access,
+            product =>
+            {
+                Assert.True(product.IsDefined());
+                Assert.NotEqual(ProductName.None, product);
+            });
+        Assert.NotEqual(TimeSpan.Zero, actual.Age);
+        Assert.Null(actual.LeaderOfGuildIds);
+        Assert.Null(actual.FractalLevel);
+        Assert.Null(actual.DailyAchievementPoints);
+        Assert.Null(actual.MonthlyAchievementPoints);
+        Assert.Null(actual.WvwRank);
     }
 
     [Fact]
@@ -31,15 +37,20 @@ public class Account
 
         var (actual, _) = await sut.Hero.Account.GetSummary(accessToken.Key);
 
-        actual.Name_is_never_empty();
-        actual.Access_is_never_empty();
-        actual.Access_is_never_none();
-        actual.GuildLeader_is_included_by_guilds_scope();
-        actual.Age_is_never_zero();
-        actual.Created_ShouldNotBeDefaultValue();
-        actual.FractalLevel_is_included_by_progression_scope();
-        actual.DailyAp_is_included_by_progression_scope();
-        actual.MonthlyAp_is_included_by_progression_scope();
-        actual.WvwRank_is_included_by_progression_scope();
+        Assert.NotEmpty(actual.DisplayName);
+        Assert.NotEmpty(actual.Access);
+        Assert.All(actual.Access,
+            product =>
+            {
+                Assert.True(product.IsDefined());
+                Assert.NotEqual(ProductName.None, product);
+            });
+        Assert.NotNull(actual.LeaderOfGuildIds);
+        Assert.NotEqual(TimeSpan.Zero, actual.Age);
+        Assert.NotEqual(default, actual.Created);
+        Assert.NotNull(actual.FractalLevel);
+        Assert.NotNull(actual.DailyAchievementPoints);
+        Assert.NotNull(actual.MonthlyAchievementPoints);
+        Assert.NotNull(actual.WvwRank);
     }
 }

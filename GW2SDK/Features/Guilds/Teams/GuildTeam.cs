@@ -15,7 +15,7 @@ public sealed record GuildTeam
     public required string Name { get; init; }
 
     /// <summary>The active state of the team.</summary>
-    public required GuildTeamState State { get; init; }
+    public required Extensible<GuildTeamState> State { get; init; }
 
     /// <summary>The aggregated wins and losses of the team.</summary>
     public required Results Aggregate { get; init; }
