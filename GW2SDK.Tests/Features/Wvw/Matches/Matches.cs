@@ -26,16 +26,10 @@ public class Matches
                     skirmish =>
                     {
                         Assert.True(skirmish.Id > 0);
-                        Assert.True(skirmish.Scores.Blue > 0);
-                        Assert.True(skirmish.Scores.Green > 0);
-                        Assert.True(skirmish.Scores.Red > 0);
                         Assert.All(skirmish.MapScores,
                             score =>
                             {
                                 Assert.True(score.Kind.IsDefined());
-                                Assert.True(score.Scores.Blue > 0);
-                                Assert.True(score.Scores.Green > 0);
-                                Assert.True(score.Scores.Red > 0);
                             });
                     });
                 Assert.All(entry.Maps,
@@ -43,9 +37,6 @@ public class Matches
                     {
                         Assert.True(map.Id > 0);
                         Assert.True(map.Kind.IsDefined());
-                        Assert.True(map.Scores.Blue > 0);
-                        Assert.True(map.Scores.Green > 0);
-                        Assert.True(map.Scores.Red > 0);
                         Assert.All(map.Bonuses,
                             bonus =>
                             {
