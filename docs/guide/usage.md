@@ -19,11 +19,16 @@ using var httpClient = new HttpClient();
 var gw2 = new Gw2Client(httpClient);
 
 // Awaiting GetQuaggans results in a tuple of Quaggans and a MessageContext
-foreach (var (quaggans, context) in await gw2.Quaggans.GetQuaggans())
+
+var (quaggans, context) = await gw2.Quaggans.GetQuaggans();
+foreach (var quaggan in quaggans)
 {
     Console.WriteLine(quaggan.Id);
-    Console.WriteLine(quaggan.PictureHref);
+    Console.WriteLine(quaggan.ImageHref);
 }
+
+Console.WriteLine("Found " + context.ResultCount + " Quaggans");
+Console.WriteLine("Generated on " + context.Date);
 ```
 
 The first item of the tuple contains the requested data. The second `MessageContext` object contains metadata from HTTP response headers. Advanced users might use it to access caching-related response headers. For simple usage, use the discard operator `_`.
