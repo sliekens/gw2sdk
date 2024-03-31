@@ -17,5 +17,9 @@ public class CharacterSummary
         Assert.Equal(character.Name, actual.Name);
         Assert.Equal(character.Race, actual.Race);
         Assert.Equal(character.Profession, actual.Profession);
+        Assert.True(actual.Level > 0);
+        Assert.True(actual.Age > TimeSpan.Zero);
+        Assert.True(actual.LastModified > DateTimeOffset.MinValue);
+        Assert.True(actual.Created > DateTimeOffset.MinValue);
     }
 }
