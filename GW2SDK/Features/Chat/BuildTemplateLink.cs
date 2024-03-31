@@ -69,7 +69,7 @@ public sealed record BuildTemplateLink : Link
                     missingMemberBehavior,
                     cancellationToken
                 )
-                .AsDictionary(x => x.Id);
+                .AsDictionary(static specialization => specialization.Id);
         }
 
         return new Build
@@ -171,7 +171,7 @@ public sealed record BuildTemplateLink : Link
 
             var (legends, _) = await gw2Client.Hero.Builds
                 .GetLegends(missingMemberBehavior, cancellationToken)
-                .AsDictionary(legend => legend.Code);
+                .AsDictionary(static legend => legend.Code);
 
             return new SelectedLegends
             {

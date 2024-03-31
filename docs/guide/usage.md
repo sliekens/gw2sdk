@@ -19,7 +19,6 @@ using var httpClient = new HttpClient();
 var gw2 = new Gw2Client(httpClient);
 
 // Awaiting GetQuaggans results in a tuple of Quaggans and a MessageContext
-
 var (quaggans, context) = await gw2.Quaggans.GetQuaggans();
 foreach (var quaggan in quaggans)
 {
@@ -53,7 +52,7 @@ There is a helper method `AsDictionary()` that you can use to make cross-referen
 ``` csharp
 // Create a dictionary of maps keyed by their ID (and discard the MessageContext)
 var maps = await gw2.Exploration.GetMapSummaries()
-    .AsDictionary(map => map.Id)
+    .AsDictionary(static map => map.Id)
     .ValueOnly();
 
 // Now you can easily access maps by their ID

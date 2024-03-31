@@ -24,11 +24,11 @@ if (!GameLink.IsSupported())
 var gw2 = app.GetService<Gw2Client>();
 
 var maps = await gw2.Exploration.GetMapSummaries(cancellationToken: stoppingToken)
-    .AsDictionary(map => map.Id)
+    .AsDictionary(static map => map.Id)
     .ValueOnly();
 
 var specializations = await gw2.Hero.Builds.GetSpecializations()
-    .AsDictionary(specialization => specialization.Id)
+    .AsDictionary(static specialization => specialization.Id)
     .ValueOnly();
 
 // Initialize the shared memory link

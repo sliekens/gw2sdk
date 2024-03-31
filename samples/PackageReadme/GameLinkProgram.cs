@@ -22,7 +22,7 @@ internal class GameLinkProgram
         using var http = new HttpClient();
         var gw2 = new Gw2Client(http);
         var maps = await gw2.Exploration.GetMapSummaries()
-            .AsDictionary(map => map.Id)
+            .AsDictionary(static map => map.Id)
             .ValueOnly();
 
         // Choose an interval to indicate how often you want to receive fresh data from the game
