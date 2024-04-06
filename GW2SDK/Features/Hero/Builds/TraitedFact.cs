@@ -8,7 +8,7 @@ public sealed record TraitedFact
     /// <summary>The ID of the trait that must be active to benefits from this <see cref="Fact" />.</summary>
     public required int RequiresTrait { get; init; }
 
-    /// <summary>If present, it is the list index of an existing fact to override with this <see cref="Fact" />. Otherwise it
+    /// <summary>If present, it is the list index of an existing fact to override with this <see cref="Fact" />. Otherwise, it
     /// should be added to the list without overriding.</summary>
     public required int? Overrides { get; init; }
 

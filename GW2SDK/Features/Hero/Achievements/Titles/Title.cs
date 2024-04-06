@@ -11,9 +11,9 @@ public sealed record Title
     /// <summary>The title itself.</summary>
     public required string Name { get; init; }
 
-    /// <summary>A list of achievement IDs which award this title. Can be empty if the title is awarded by reaching some amount
+    /// <summary>A list of achievement IDs which award this title. Can be null if the title is awarded by reaching some amount
     /// of points instead.</summary>
-    /// <remarks>This is usually a single achievement, but some titles are obtained from multiple achievements.</remarks>
+    /// <remarks>This is usually a single achievement, but some titles are awarded by multiple achievements.</remarks>
     public required IReadOnlyList<int>? Achievements { get; init; }
 
     /// <summary>The amount of points which will grant this title if it is not an achievement reward.</summary>
