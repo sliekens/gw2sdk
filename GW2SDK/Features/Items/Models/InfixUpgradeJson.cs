@@ -32,7 +32,7 @@ internal static class InfixUpgradeJson
                 }
             }
 
-            var key = attribute.Map(value => value.GetAttributeName(missingMemberBehavior));
+            var key = attribute.Map(value => value.GetAttributeName());
             var value = modifier.Map(value => value.GetInt32());
             attributes.Add(key, value);
         }

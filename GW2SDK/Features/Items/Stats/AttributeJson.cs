@@ -37,7 +37,7 @@ internal static class AttributeJson
 
         return new Attribute
         {
-            Name = attribute.Map(value => value.GetAttributeName(missingMemberBehavior)),
+            Name = attribute.Map(value => value.GetAttributeName()),
             Multiplier = multiplier.Map(value => value.GetDouble()),
             Value = value.Map(value => value.GetInt32())
         };

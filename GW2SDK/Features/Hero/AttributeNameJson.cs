@@ -6,8 +6,7 @@ namespace GuildWars2.Hero;
 internal static class AttributeNameJson
 {
     public static Extensible<AttributeName> GetAttributeName(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         // Somemetimes the old attribute names (or partial names) are used in the API
