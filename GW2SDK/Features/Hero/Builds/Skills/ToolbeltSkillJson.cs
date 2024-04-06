@@ -122,15 +122,10 @@ internal static class ToolbeltSkillJson
                     values => values.GetList(value => value.GetTraitedFact(missingMemberBehavior))
                 ),
             Description = description.Map(value => value.GetStringRequired()),
-            IconHref = icon.Map(value => value.GetString()),
+            IconHref = icon.Map(value => value.GetString()) ?? "",
             WeaponType = weaponType.Map(value => value.GetWeaponType(missingMemberBehavior)),
             Professions =
-                professions.Map(
-                    values =>
-                        values.GetList(
-                            value => value.GetEnum<ProfessionName>()
-                        )
-                ),
+                professions.Map(values => values.GetList(value => value.GetEnum<ProfessionName>())),
             Slot = slot.Map(value => value.GetEnum<SkillSlot>()),
             FlipSkillId = flipSkill.Map(value => value.GetInt32()),
             NextSkillId = nextChain.Map(value => value.GetInt32()),
@@ -139,9 +134,7 @@ internal static class ToolbeltSkillJson
             SpecializationId = specialization.Map(value => value.GetInt32()),
             ChatLink = chatLink.Map(value => value.GetStringRequired()),
             Categories = categories.Map(
-                values => values.GetList(
-                    value => value.GetEnum<SkillCategoryName>()
-                )
+                values => values.GetList(value => value.GetEnum<SkillCategoryName>())
             )
         };
     }
