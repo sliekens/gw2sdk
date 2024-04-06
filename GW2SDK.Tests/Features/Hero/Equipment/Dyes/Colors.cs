@@ -31,6 +31,12 @@ public class Colors
                 Assert.True(color.Hue.IsDefined());
                 Assert.True(color.Material.IsDefined());
                 Assert.True(color.Set.IsDefined());
+
+                if (color.ItemId.HasValue)
+                {
+                    var link = color.GetChatLink();
+                    Assert.Equal(color.ItemId, link?.ItemId);
+                }
             }
         );
     }

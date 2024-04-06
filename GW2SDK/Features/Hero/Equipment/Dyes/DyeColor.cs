@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using GuildWars2.Chat;
 
 namespace GuildWars2.Hero.Equipment.Dyes;
 
@@ -42,4 +43,9 @@ public sealed record DyeColor
 
     /// <summary>The set to which the dye belongs.</summary>
     public required Extensible<ColorSet> Set { get; init; }
+
+    /// <summary>Gets a chat link object for this item.</summary>
+    /// <returns>The chat link as an object.</returns>
+    public ItemLink? GetChatLink() =>
+        ItemId.HasValue ? new ItemLink { ItemId = ItemId.Value } : null;
 }
