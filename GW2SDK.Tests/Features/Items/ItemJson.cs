@@ -20,9 +20,13 @@ public class ItemJson(ItemFixture fixture) : IClassFixture<ItemFixture>
                 Assert.True(actual.Rarity.IsDefined());
                 Assert.True(actual.VendorValue.Amount >= 0);
                 Assert.InRange(actual.Level, 0, 80);
-                Assert.NotEmpty(actual.BodyTypes);
-                Assert.NotEmpty(actual.Races);
-                Assert.NotEmpty(actual.Professions);
+                Assert.NotEmpty(actual.Restrictions.BodyTypes);
+                Assert.All(actual.Restrictions.BodyTypes, type => Assert.True(type.IsDefined()));
+                Assert.NotEmpty(actual.Restrictions.Races);
+                Assert.All(actual.Restrictions.Races, race => Assert.True(race.IsDefined()));
+                Assert.NotEmpty(actual.Restrictions.Professions);
+                Assert.Empty(actual.Restrictions.Other);
+                Assert.All(actual.Restrictions.Professions, profession => Assert.True(profession.IsDefined()));
                 Assert.All(actual.GameTypes, gameType => Assert.True(gameType.IsDefined()));
                 switch (actual)
                 {

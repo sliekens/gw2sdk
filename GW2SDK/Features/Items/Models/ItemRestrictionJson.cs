@@ -9,17 +9,16 @@ using static GuildWars2.Hero.BodyType;
 
 namespace GuildWars2.Items;
 
-internal static class RestrictionsJson
+internal static class ItemRestrictionJson
 {
-    public static (IReadOnlyList<RaceName> Races, IReadOnlyList<ProfessionName> Professions,
-        IReadOnlyList<BodyType> BodyTypes) GetRestrictions(
-            this JsonElement json,
-            MissingMemberBehavior missingMemberBehavior
-        )
+    public static ItemRestriction GetItemRestriction(
+        this JsonElement json
+    )
     {
-        List<RaceName>? races = null;
-        List<ProfessionName>? professions = null;
-        List<BodyType>? bodyTypes = null;
+        List<Extensible<RaceName>>? races = null;
+        List<Extensible<ProfessionName>>? professions = null;
+        List<Extensible<BodyType>>? bodyTypes = null;
+        List<string>? other = null;
         foreach (var entry in json.EnumerateArray())
         {
             if (entry.ValueEquals(nameof(Asura)))
@@ -107,13 +106,23 @@ internal static class RestrictionsJson
                 bodyTypes ??= [];
                 bodyTypes.Add(Male);
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else
             {
-                throw new InvalidOperationException(Strings.UnexpectedEnum(entry.GetRawText()));
+                var restriction = entry.GetString();
+                if (!string.IsNullOrEmpty(restriction))
+                {
+                    other ??= [];
+                    other.Add(restriction!);
+                }
             }
         }
 
-        return (races ?? Race.AllRaces, professions ?? Profession.AllProfessions,
-            bodyTypes ?? Character.AllBodyTypes);
+        return new ItemRestriction
+        {
+            Races = races ?? Race.AllRaces,
+            Professions = professions ?? Profession.AllProfessions,
+            BodyTypes = Character.AllBodyTypes,
+            Other = other ?? Empty.ListOfString
+        };
     }
 }

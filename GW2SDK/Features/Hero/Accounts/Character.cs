@@ -13,11 +13,12 @@ namespace GuildWars2.Hero.Accounts;
 public sealed record Character
 {
     /// <summary>The names of all body types.</summary>
-    public static readonly IReadOnlyList<BodyType> AllBodyTypes = new List<BodyType>
-    {
-        Female,
-        Male
-    }.AsReadOnly();
+    public static readonly IReadOnlyList<Extensible<BodyType>> AllBodyTypes =
+        new List<Extensible<BodyType>>
+        {
+            Female,
+            Male
+        }.AsReadOnly();
 
     /// <summary>The name of the current character.</summary>
     /// <remarks>This can be changed later with a Black Lion contract.</remarks>

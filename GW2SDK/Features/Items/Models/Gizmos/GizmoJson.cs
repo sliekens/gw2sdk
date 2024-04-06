@@ -127,8 +127,6 @@ internal static class GizmoJson
             }
         }
 
-        var (races, professions, bodyTypes) =
-            restrictions.Map(value => value.GetRestrictions(missingMemberBehavior));
         return new Gizmo
         {
             Id = id.Map(value => value.GetInt32()),
@@ -144,9 +142,7 @@ internal static class GizmoJson
                     )
                 ),
             Flags = flags.Map(values => values.GetItemFlags()),
-            Races = races,
-            Professions = professions,
-            BodyTypes = bodyTypes,
+            Restrictions = restrictions.Map(value => value.GetItemRestriction()),
             ChatLink = chatLink.Map(value => value.GetStringRequired()),
             IconHref = icon.Map(value => value.GetString()),
             GuildUpgradeId = guildUpgradeId.Map(value => value.GetInt32())

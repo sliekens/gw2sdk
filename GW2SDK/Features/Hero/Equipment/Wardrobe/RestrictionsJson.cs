@@ -5,12 +5,11 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 internal static class RestrictionsJson
 {
-    public static IReadOnlyList<RaceName> GetRestrictions(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+    public static IReadOnlyList<Extensible<RaceName>> GetRestrictions(
+        this JsonElement json
     )
     {
-        List<RaceName>? races = null;
+        List<Extensible<RaceName>>? races = null;
         foreach (var entry in json.EnumerateArray())
         {
             if (entry.ValueEquals(nameof(RaceName.Asura)))
@@ -43,9 +42,14 @@ internal static class RestrictionsJson
                 races ??= [];
                 races.Add(RaceName.Norn);
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else
             {
-                throw new InvalidOperationException(Strings.UnexpectedEnum(entry.GetRawText()));
+                var restriction = entry.GetString();
+                if (!string.IsNullOrEmpty(restriction))
+                {
+                    races ??= [];
+                    races.Add(new Extensible<RaceName>(restriction!));
+                }
             }
         }
 

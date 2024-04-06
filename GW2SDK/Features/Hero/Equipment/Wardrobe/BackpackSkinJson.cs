@@ -70,7 +70,7 @@ internal static class BackpackSkinJson
             Description = description.Map(value => value.GetString()) ?? "",
             Rarity = rarity.Map(value => value.GetEnum<Rarity>()),
             Flags = flags.Map(values => values.GetSkinFlags()),
-            Races = restrictions.Map(values => values.GetRestrictions(missingMemberBehavior)),
+            Races = restrictions.Map(values => values.GetRestrictions()),
             IconHref = icon.Map(value => value.GetString())
         };
     }

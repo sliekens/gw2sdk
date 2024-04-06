@@ -106,8 +106,6 @@ internal static class SalvageToolJson
             }
         }
 
-        var (races, professions, bodyTypes) =
-            restrictions.Map(value => value.GetRestrictions(missingMemberBehavior));
         return new SalvageTool
         {
             Id = id.Map(value => value.GetInt32()),
@@ -123,9 +121,7 @@ internal static class SalvageToolJson
                     )
                 ),
             Flags = flags.Map(values => values.GetItemFlags()),
-            Races = races,
-            Professions = professions,
-            BodyTypes = bodyTypes,
+            Restrictions = restrictions.Map(value => value.GetItemRestriction()),
             ChatLink = chatLink.Map(value => value.GetStringRequired()),
             IconHref = icon.Map(value => value.GetString()),
             Charges = charges.Map(value => value.GetInt32())

@@ -156,7 +156,7 @@ internal static class UtilitySkillJson
             Professions =
                 professionRestrictions.Count > 0
                     ? professionRestrictions
-                    : Profession.AllProfessions2,
+                    : Profession.AllProfessions,
             Slot = slot.Map(value => value.GetEnum<SkillSlot>()),
             FlipSkillId = flipSkill.Map(value => value.GetInt32()),
             NextSkillId = nextChain.Map(value => value.GetInt32()),

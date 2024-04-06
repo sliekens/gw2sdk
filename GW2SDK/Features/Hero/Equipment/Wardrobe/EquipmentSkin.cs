@@ -22,7 +22,7 @@ public record EquipmentSkin
     public required SkinFlags Flags { get; init; }
 
     /// <summary>The races required to use the skin.</summary>
-    public required IReadOnlyList<RaceName> Races { get; init; }
+    public required IReadOnlyList<Extensible<RaceName>> Races { get; init; }
 
     /// <summary>The item rarity of the skin.</summary>
     public required Extensible<Rarity> Rarity { get; init; }

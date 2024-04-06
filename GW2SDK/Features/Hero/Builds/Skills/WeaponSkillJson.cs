@@ -160,7 +160,7 @@ internal static class WeaponSkillJson
             Professions =
                 professionRestrictions.Count > 0
                     ? professionRestrictions
-                    : Profession.AllProfessions2,
+                    : Profession.AllProfessions,
             Attunement = attunement.Map(value => value.GetEnum<Attunement>()),
             DualAttunement = dualAttunement.Map(value => value.GetEnum<Attunement>()),
             Slot = slot.Map(value => value.GetEnum<SkillSlot>()),

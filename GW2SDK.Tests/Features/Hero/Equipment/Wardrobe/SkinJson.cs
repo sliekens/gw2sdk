@@ -18,6 +18,7 @@ public class SkinJson(SkinFixture fixture) : IClassFixture<SkinFixture>
 
                 Assert.True(actual.Id > 0);
                 Assert.NotEmpty(actual.Races);
+                Assert.All(actual.Races, race => Assert.True(race.IsDefined()));
                 Assert.Equal(actual.Id, link.SkinId);
                 Assert.True(actual.Rarity.IsDefined());
 

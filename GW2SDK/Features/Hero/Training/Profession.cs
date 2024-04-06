@@ -9,21 +9,7 @@ namespace GuildWars2.Hero.Training;
 public sealed record Profession
 {
     /// <summary>The names of all professions.</summary>
-    public static readonly IReadOnlyList<ProfessionName> AllProfessions = new List<ProfessionName>
-    {
-        Elementalist,
-        Engineer,
-        Guardian,
-        Mesmer,
-        Necromancer,
-        Ranger,
-        Revenant,
-        Thief,
-        Warrior
-    }.AsReadOnly();
-
-    /// <summary>The names of all professions.</summary>
-    public static readonly IReadOnlyList<Extensible<ProfessionName>> AllProfessions2 =
+    public static readonly IReadOnlyList<Extensible<ProfessionName>> AllProfessions =
         new List<Extensible<ProfessionName>>
         {
             Elementalist,
