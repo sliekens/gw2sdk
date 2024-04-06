@@ -11,8 +11,8 @@ public class GuildPermissionsIndex
 
         var (actual, context) = await sut.Guilds.GetGuildPermissionsIndex();
 
-        Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
+        Assert.NotEmpty(actual);
     }
 }

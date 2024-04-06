@@ -11,8 +11,9 @@ public class ExchangeGoldToGems
 
         Coin coins = new(100, 0, 0);
 
-        var (actual, _) = await sut.Commerce.ExchangeGoldToGems(coins);
+        var (actual, context) = await sut.Commerce.ExchangeGoldToGems(coins);
 
+        Assert.NotNull(context);
         Assert.True(actual.Gems > 0, "100 gold should be worth some gems.");
         Assert.True(actual.ExchangeRate > 0, "Gems can't be free.");
     }

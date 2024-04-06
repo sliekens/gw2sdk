@@ -11,8 +11,8 @@ public class SeasonsIndex
 
         var (actual, context) = await sut.Pvp.GetSeasonsIndex();
 
-        Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
+        Assert.NotEmpty(actual);
     }
 }

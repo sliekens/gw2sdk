@@ -15,8 +15,11 @@ public class TraitsByFilter
             222
         ];
 
-        var (actual, _) = await sut.Hero.Builds.GetTraitsByIds(ids);
+        var (actual, context) = await sut.Hero.Builds.GetTraitsByIds(ids);
 
+        Assert.Equal(ids.Count, context.ResultCount);
+        Assert.True(context.ResultTotal > ids.Count);
+        Assert.Equal(ids.Count, actual.Count);
         Assert.Collection(
             ids,
             first => Assert.Contains(actual, found => found.Id == first),

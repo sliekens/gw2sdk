@@ -17,6 +17,7 @@ public class OrderBooks
             .GetOrderBooksBulk(degreeOfParallelism: 3)
             .Take(600))
         {
+            Assert.NotNull(context);
             Assert.True(actual.Id > 0);
             if (actual.TotalSupply == 0)
             {
@@ -66,8 +67,6 @@ public class OrderBooks
             {
                 Assert.Equal(actual.BestAsk - actual.BestBid, actual.BidAskSpread);
             }
-
-            Assert.NotNull(context);
         }
     }
 }

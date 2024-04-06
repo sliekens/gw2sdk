@@ -11,11 +11,9 @@ public class JadeBotSkinById
 
         const int id = 2;
 
-        var (actual, _) = await sut.Hero.Equipment.JadeBots.GetJadeBotSkinById(id);
+        var (actual, context) = await sut.Hero.Equipment.JadeBots.GetJadeBotSkinById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
-        actual.Has_name();
-        actual.Has_description();
-        actual.Has_unlock_item();
     }
 }

@@ -11,8 +11,9 @@ public class StoryById
 
         const int id = 63;
 
-        var (actual, _) = await sut.Hero.StoryJournal.GetStoryById(id);
+        var (actual, context) = await sut.Hero.StoryJournal.GetStoryById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }
 }

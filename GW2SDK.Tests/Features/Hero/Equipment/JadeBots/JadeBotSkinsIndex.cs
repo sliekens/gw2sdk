@@ -11,8 +11,8 @@ public class JadeBotSkinsIndex
 
         var (actual, context) = await sut.Hero.Equipment.JadeBots.GetJadeBotSkinsIndex();
 
-        Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
+        Assert.NotEmpty(actual);
     }
 }

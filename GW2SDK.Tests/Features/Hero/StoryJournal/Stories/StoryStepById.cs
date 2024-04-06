@@ -11,12 +11,9 @@ public class StoryStepById
 
         const int id = 15;
 
-        var (actual, _) = await sut.Hero.StoryJournal.GetStoryStepById(id);
+        var (actual, context) = await sut.Hero.StoryJournal.GetStoryStepById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
-        actual.Has_name();
-        actual.Has_level();
-        actual.Has_story();
-        actual.Has_goals();
     }
 }

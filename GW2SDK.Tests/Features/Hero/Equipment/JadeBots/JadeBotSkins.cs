@@ -18,10 +18,20 @@ public class JadeBotSkins
             actual,
             entry =>
             {
-                entry.Has_id();
-                entry.Has_name();
-                entry.Has_description();
-                entry.Has_unlock_item();
+                Assert.True(entry.Id > 0);
+                Assert.NotEmpty(entry.Name);
+
+                // Missing descriptionfor Roundtail Dragon
+                if (entry.Id == 6)
+                {
+                    Assert.Empty(entry.Description);
+                }
+                else
+                {
+                    Assert.NotEmpty(entry.Description);
+                }
+
+                Assert.True(entry.UnlockItemId > 0);
             }
         );
     }

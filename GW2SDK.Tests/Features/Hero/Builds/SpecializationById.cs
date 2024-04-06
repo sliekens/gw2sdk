@@ -11,8 +11,9 @@ public class SpecializationById
 
         const int id = 1;
 
-        var (actual, _) = await sut.Hero.Builds.GetSpecializationById(id);
+        var (actual, context) = await sut.Hero.Builds.GetSpecializationById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }
 }

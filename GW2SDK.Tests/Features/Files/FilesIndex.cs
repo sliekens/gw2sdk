@@ -11,8 +11,8 @@ public class FilesIndex
 
         var (actual, context) = await sut.Files.GetFilesIndex();
 
-        Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
+        Assert.NotEmpty(actual);
     }
 }

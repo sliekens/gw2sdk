@@ -11,8 +11,8 @@ public class LegendaryItemsIndex
 
         var (actual, context) = await sut.Hero.Equipment.Templates.GetLegendaryItemsIndex();
 
-        Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
+        Assert.NotEmpty(actual);
     }
 }

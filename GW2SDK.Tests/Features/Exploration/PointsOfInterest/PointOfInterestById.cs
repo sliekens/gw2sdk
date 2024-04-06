@@ -15,7 +15,7 @@ public class PointOfInterestById
         const int mapId = 26;
         const int pointOfInterestId = 554;
 
-        var (actual, _) = await sut.Exploration.GetPointOfInterestById(
+        var (actual, context) = await sut.Exploration.GetPointOfInterestById(
             continentId,
             floorId,
             regionId,
@@ -23,6 +23,7 @@ public class PointOfInterestById
             pointOfInterestId
         );
 
+        Assert.NotNull(context);
         Assert.Equal(pointOfInterestId, actual.Id);
         Assert.Equal("Leaning Grade", actual.Name);
         Assert.Equal(1, actual.Floor);

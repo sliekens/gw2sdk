@@ -17,16 +17,14 @@ public class GuildPermissionsByFilter
 
         var (actual, context) = await sut.Guilds.GetGuildPermissionsByIds(ids);
 
+        Assert.Equal(ids.Count, context.ResultCount);
+        Assert.True(context.ResultTotal > ids.Count);
         Assert.Equal(ids.Count, actual.Count);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.All(
-            actual,
-            entry =>
-            {
-                entry.Has_id();
-                entry.Has_name();
-                entry.Has_description();
-            }
+        Assert.Collection(
+            ids,
+            first => Assert.Contains(actual, found => found.Id == first),
+            second => Assert.Contains(actual, found => found.Id == second),
+            third => Assert.Contains(actual, found => found.Id == third)
         );
     }
 }

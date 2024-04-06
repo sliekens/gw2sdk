@@ -11,25 +11,50 @@ public class AchievementCategories
 
         var (actual, context) = await sut.Hero.Achievements.GetAchievementCategories();
 
-        Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
+        Assert.NotEmpty(actual);
         Assert.All(
             actual,
             entry =>
             {
-                entry.Has_id();
-                entry.Has_order();
-                entry.Has_icon();
-                entry.Has_achievements();
+                Assert.True(entry.Id > 0);
+                Assert.True(entry.Order >= 0);
+                Assert.NotEmpty(entry.IconHref);
+                Assert.NotNull(entry.Achievements);
 
                 Assert.All(
                     entry.Achievements,
                     achievement =>
                     {
+                        Assert.True(achievement.Id > 0);
                         Assert.Empty(achievement.Flags.Other);
+                        if (achievement.Level is not null)
+                        {
+                            Assert.InRange(achievement.Level.Min, 1, 80);
+                            Assert.InRange(achievement.Level.Max, 1, 80);
+                            Assert.True(achievement.Level.Max >= achievement.Level.Min);
+                        }
                     }
                 );
+
+                if (entry.Tomorrow is not null)
+                {
+                    Assert.All(
+                        entry.Tomorrow,
+                        achievement =>
+                        {
+                            Assert.True(achievement.Id > 0);
+                            Assert.Empty(achievement.Flags.Other);
+                            if (achievement.Level is not null)
+                            {
+                                Assert.InRange(achievement.Level.Min, 1, 80);
+                                Assert.InRange(achievement.Level.Max, 1, 80);
+                                Assert.True(achievement.Level.Max >= achievement.Level.Min);
+                            }
+                        }
+                    );
+                }
             }
         );
     }

@@ -12,8 +12,8 @@ public class Bank
 
         var (actual, _) = await sut.Hero.Bank.GetBank(accessToken.Key);
 
-        actual.Not_empty();
-        actual.Has_multiple_of_30_slots();
+        Assert.NotEmpty(actual.Items);
+        Assert.Equal(0, actual.Items.Count % 30);
 
         Assert.All(
             actual.Items,
@@ -21,8 +21,8 @@ public class Bank
             {
                 if (slot is not null)
                 {
-                    slot.Has_id();
-                    slot.Has_count();
+                    Assert.True(slot.Id > 0);
+                    Assert.True(slot.Count > 0);
                     var chatLink = slot.GetChatLink();
                     Assert.Equal(slot.Count, chatLink.Count);
                     Assert.Equal(slot.SkinId, chatLink.SkinId);

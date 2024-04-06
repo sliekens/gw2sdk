@@ -18,10 +18,11 @@ public class MaterialCategories
             actual,
             entry =>
             {
-                entry.Has_id();
-                entry.Has_name();
-                entry.Has_items();
-                entry.Has_order();
+                Assert.True(entry.Id > 0);
+                Assert.NotEmpty(entry.Name);
+                Assert.NotEmpty(entry.Items);
+                Assert.All(entry.Items, item => Assert.True(item > 0));
+                Assert.True(entry.Order >= 0);
             }
         );
     }

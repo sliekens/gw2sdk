@@ -11,8 +11,8 @@ public class AttributeCombinationsIndex
 
         var (actual, context) = await sut.Items.GetAttributeCombinationsIndex();
 
-        Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
+        Assert.NotEmpty(actual);
     }
 }

@@ -22,28 +22,36 @@ public class Matches
                 Assert.NotEmpty(entry.Id);
                 Assert.True(entry.StartTime > DateTimeOffset.MinValue);
                 Assert.True(entry.EndTime > entry.StartTime);
-                Assert.All(entry.Skirmishes,
+                Assert.All(
+                    entry.Skirmishes,
                     skirmish =>
                     {
                         Assert.True(skirmish.Id > 0);
-                        Assert.All(skirmish.MapScores,
+                        Assert.All(
+                            skirmish.MapScores,
                             score =>
                             {
                                 Assert.True(score.Kind.IsDefined());
-                            });
-                    });
-                Assert.All(entry.Maps,
+                            }
+                        );
+                    }
+                );
+                Assert.All(
+                    entry.Maps,
                     map =>
                     {
                         Assert.True(map.Id > 0);
                         Assert.True(map.Kind.IsDefined());
-                        Assert.All(map.Bonuses,
+                        Assert.All(
+                            map.Bonuses,
                             bonus =>
                             {
                                 Assert.True(bonus.Kind.IsDefined());
                                 Assert.True(bonus.Owner.IsDefined());
-                            });
-                        Assert.All(map.Objectives,
+                            }
+                        );
+                        Assert.All(
+                            map.Objectives,
                             objective =>
                             {
                                 Assert.NotEmpty(objective.Id);
@@ -54,8 +62,10 @@ public class Matches
                                     Assert.True(objective.PointsCapture > 0);
                                     Assert.True(objective.PointsTick > 0);
                                 }
-                            });
-                    });
+                            }
+                        );
+                    }
+                );
             }
         );
     }

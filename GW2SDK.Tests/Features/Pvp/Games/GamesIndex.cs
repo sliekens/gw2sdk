@@ -12,8 +12,8 @@ public class GamesIndex
 
         var (actual, context) = await sut.Pvp.GetGamesIndex(accessToken.Key);
 
-        Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
+        Assert.NotEmpty(actual);
     }
 }

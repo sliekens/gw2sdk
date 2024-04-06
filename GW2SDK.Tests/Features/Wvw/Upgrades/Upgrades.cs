@@ -18,8 +18,8 @@ public class Upgrades
             actual,
             entry =>
             {
-                entry.Has_id();
-                entry.Has_tiers();
+                Assert.True(entry.Id > 0);
+                Assert.NotEmpty(entry.Tiers);
             }
         );
     }

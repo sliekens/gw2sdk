@@ -11,8 +11,9 @@ public class MasteryTrackById
 
         const int id = 1;
 
-        var (actual, _) = await sut.Hero.Masteries.GetMasteryTrackById(id);
+        var (actual, context) = await sut.Hero.Masteries.GetMasteryTrackById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }
 }

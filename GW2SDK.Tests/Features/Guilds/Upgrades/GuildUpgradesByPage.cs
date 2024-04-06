@@ -1,5 +1,4 @@
-﻿using GuildWars2.Guilds.Upgrades;
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Guilds.Upgrades;
 
@@ -13,25 +12,12 @@ public class GuildUpgradesByPage
         const int pageSize = 3;
         var (actual, context) = await sut.Guilds.GetGuildUpgradesByPage(0, pageSize);
 
-        Assert.Equal(pageSize, actual.Count);
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);
-        Assert.Equal(context.ResultCount, pageSize);
-        Assert.All(
-            actual,
-            entry =>
-            {
-                entry.Has_id();
-                entry.Has_name();
-                entry.Has_description();
-                entry.Has_icon();
-                entry.Has_costs();
-                if (entry is BankBag bankBag)
-                {
-                    bankBag.Has_MaxItems();
-                    bankBag.Has_MaxCoins();
-                }
-            }
-        );
+        Assert.Equal(pageSize, context.ResultCount);
+        Assert.True(context.PageTotal > 0);
+        Assert.True(context.ResultTotal > 0);
+        Assert.Equal(pageSize, actual.Count);
+        Assert.All(actual, Assert.NotNull);
     }
 }

@@ -17,15 +17,14 @@ public class FilesByFilter
 
         var (actual, context) = await sut.Files.GetFilesByIds(ids);
 
+        Assert.Equal(ids.Count, context.ResultCount);
+        Assert.True(context.ResultTotal > ids.Count);
         Assert.Equal(ids.Count, actual.Count);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.All(
-            actual,
-            entry =>
-            {
-                entry.Has_id();
-                entry.Has_icon();
-            }
+        Assert.Collection(
+            ids,
+            first => Assert.Contains(actual, found => found.Id == first),
+            second => Assert.Contains(actual, found => found.Id == second),
+            third => Assert.Contains(actual, found => found.Id == third)
         );
     }
 }

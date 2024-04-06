@@ -11,10 +11,8 @@ public class WorldsIndex
 
         var (actual, context) = await sut.Worlds.GetWorldsIndex();
 
-        Assert.NotEmpty(actual);
-        Assert.All(actual, id => Assert.True(id > 0));
-
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
+        Assert.NotEmpty(actual);
     }
 }

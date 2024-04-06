@@ -11,8 +11,9 @@ public class StorylineById
 
         const string id = "09766A86-D88D-4DF2-9385-259E9A8CA583";
 
-        var (actual, _) = await sut.Hero.StoryJournal.GetStorylineById(id);
+        var (actual, context) = await sut.Hero.StoryJournal.GetStorylineById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }
 }

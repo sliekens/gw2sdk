@@ -13,12 +13,18 @@ public class LinkHeaderTest
 
         Assert.Collection(
             actual.Links,
-            rel => rel.IsLink("previous", "/v2/colors?page=117&page_size=5"),
-            rel => rel.IsLink("next", "/v2/colors?page=119&page_size=5"),
-            rel => rel.IsLink("self", "/v2/colors?page=118&page_size=5"),
-            rel => rel.IsLink("first", "/v2/colors?page=0&page_size=5"),
-            rel => rel.IsLink("last", "/v2/colors?page=119&page_size=5")
+            rel => IsLink(rel, "previous", "/v2/colors?page=117&page_size=5"),
+            rel => IsLink(rel, "next", "/v2/colors?page=119&page_size=5"),
+            rel => IsLink(rel, "self", "/v2/colors?page=118&page_size=5"),
+            rel => IsLink(rel, "first", "/v2/colors?page=0&page_size=5"),
+            rel => IsLink(rel, "last", "/v2/colors?page=119&page_size=5")
         );
+
+        static void IsLink(LinkValue actual, string relationType, string target)
+        {
+            Assert.Equal(relationType, actual.RelationType);
+            Assert.Equal(target, actual.Target);
+        }
     }
 
     [Fact]

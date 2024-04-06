@@ -14,19 +14,10 @@ public class ContinentsByPage
 
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);
+        Assert.Equal(2, context.ResultCount);
+        Assert.True(context.PageTotal > 0);
+        Assert.True(context.ResultTotal > 0);
         Assert.Equal(2, actual.Count);
-        Assert.Equal(context.ResultCount, 2);
-        Assert.All(
-            actual,
-            entry =>
-            {
-                entry.Has_id();
-                entry.Has_name();
-                entry.Has_dimensions();
-                entry.Has_min_zoom();
-                entry.Has_max_zoom();
-                entry.Has_floors();
-            }
-        );
+        Assert.All(actual, Assert.NotNull);
     }
 }

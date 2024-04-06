@@ -15,8 +15,11 @@ public class ItemPricesByFilter
             35984
         ];
 
-        var (actual, _) = await sut.Commerce.GetItemPricesByIds(ids);
+        var (actual, context) = await sut.Commerce.GetItemPricesByIds(ids);
 
+        Assert.Equal(ids.Count, context.ResultCount);
+        Assert.True(context.ResultTotal > ids.Count);
+        Assert.Equal(ids.Count, actual.Count);
         Assert.Collection(
             ids,
             first => Assert.Contains(actual, found => found.Id == first),

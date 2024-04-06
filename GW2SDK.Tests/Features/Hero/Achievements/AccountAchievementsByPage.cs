@@ -14,16 +14,12 @@ public class AccountAchievementsByPage
         var (actual, context) =
             await sut.Hero.Achievements.GetAccountAchievementsByPage(0, pageSize, accessToken.Key);
 
-        Assert.Equal(pageSize, actual.Count);
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);
-        Assert.Equal(context.ResultCount, pageSize);
-        Assert.All(
-            actual,
-            entry =>
-            {
-                entry.Has_id();
-            }
-        );
+        Assert.Equal(pageSize, context.ResultCount);
+        Assert.True(context.PageTotal > 0);
+        Assert.True(context.ResultTotal > 0);
+        Assert.Equal(pageSize, actual.Count);
+        Assert.All(actual, Assert.NotNull);
     }
 }

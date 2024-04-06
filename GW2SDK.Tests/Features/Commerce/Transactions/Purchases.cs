@@ -10,8 +10,10 @@ public class Purchases
         var accessToken = Composer.Resolve<ApiKey>();
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (purchases, _) = await sut.Commerce.GetPurchases(0, 200, accessToken.Key);
+        var (purchases, context) = await sut.Commerce.GetPurchases(0, 200, accessToken.Key);
 
+        // Step through with debugger to see if the values reflect your in-game transactions
+        Assert.NotNull(context);
         Assert.NotEmpty(purchases);
     }
 }

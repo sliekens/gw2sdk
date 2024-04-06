@@ -11,13 +11,9 @@ public class ContinentById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, _) = await sut.Exploration.GetContinentById(id);
+        var (actual, context) = await sut.Exploration.GetContinentById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
-        actual.Has_name();
-        actual.Has_dimensions();
-        actual.Has_min_zoom();
-        actual.Has_max_zoom();
-        actual.Has_floors();
     }
 }

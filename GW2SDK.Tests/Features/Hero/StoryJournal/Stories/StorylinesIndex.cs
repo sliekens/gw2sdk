@@ -11,8 +11,8 @@ public class StorylinesIndex
 
         var (actual, context) = await sut.Hero.StoryJournal.GetStorylinesIndex();
 
-        Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
+        Assert.NotEmpty(actual);
     }
 }

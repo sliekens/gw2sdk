@@ -13,10 +13,12 @@ public class UnlockedMounts
         var (actual, _) = await sut.Hero.Equipment.Mounts.GetUnlockedMounts(accessToken.Key);
 
         Assert.NotEmpty(actual);
-        Assert.All(actual,
+        Assert.All(
+            actual,
             entry =>
             {
                 Assert.True(entry.IsDefined());
-            });
+            }
+        );
     }
 }

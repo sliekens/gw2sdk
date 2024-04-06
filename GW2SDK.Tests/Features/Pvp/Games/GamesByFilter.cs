@@ -11,12 +11,26 @@ public class GamesByFilter
         var accessToken = Composer.Resolve<ApiKey>();
 
         // No way other way to get a game ID than to list them all first
-        var (ids, _) = await sut.Pvp.GetGamesIndex(accessToken.Key);
+        var ids = await sut.Pvp.GetGamesIndex(accessToken.Key).ValueOnly();
 
         // Now that we have game IDs, we can get the games
         var (actual, context) = await sut.Pvp.GetGamesByIds(ids, accessToken.Key);
 
+        Assert.Equal(ids.Count, context.ResultCount);
+        Assert.Equal(ids.Count, context.ResultTotal);
         Assert.Equal(ids.Count, actual.Count);
-        Assert.Equal(context.ResultCount, actual.Count);
+        Assert.Collection(
+            ids,
+            first => Assert.Contains(actual, found => found.Id == first),
+            second => Assert.Contains(actual, found => found.Id == second),
+            third => Assert.Contains(actual, found => found.Id == third),
+            fourth => Assert.Contains(actual, found => found.Id == fourth),
+            fifth => Assert.Contains(actual, found => found.Id == fifth),
+            sixth => Assert.Contains(actual, found => found.Id == sixth),
+            seventh => Assert.Contains(actual, found => found.Id == seventh),
+            eighth => Assert.Contains(actual, found => found.Id == eighth),
+            nineth => Assert.Contains(actual, found => found.Id == nineth),
+            tenth => Assert.Contains(actual, found => found.Id == tenth)
+        );
     }
 }

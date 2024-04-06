@@ -17,19 +17,14 @@ public class AchievementCategoriesByFilter
 
         var (actual, context) = await sut.Hero.Achievements.GetAchievementCategoriesByIds(ids);
 
+        Assert.Equal(ids.Count, context.ResultCount);
+        Assert.True(context.ResultTotal > ids.Count);
         Assert.Equal(ids.Count, actual.Count);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.All(
-            actual,
-            entry =>
-            {
-                Assert.Contains(entry.Id, ids);
-                entry.Has_name();
-                entry.Has_description();
-                entry.Has_order();
-                entry.Has_icon();
-                entry.Has_achievements();
-            }
+        Assert.Collection(
+            ids,
+            first => Assert.Contains(actual, found => found.Id == first),
+            second => Assert.Contains(actual, found => found.Id == second),
+            third => Assert.Contains(actual, found => found.Id == third)
         );
     }
 }

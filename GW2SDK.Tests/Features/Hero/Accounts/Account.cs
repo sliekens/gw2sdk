@@ -15,12 +15,14 @@ public class Account
 
         Assert.NotEmpty(actual.DisplayName);
         Assert.NotEmpty(actual.Access);
-        Assert.All(actual.Access,
+        Assert.All(
+            actual.Access,
             product =>
             {
                 Assert.True(product.IsDefined());
                 Assert.NotEqual(ProductName.None, product);
-            });
+            }
+        );
         Assert.NotEqual(TimeSpan.Zero, actual.Age);
         Assert.Null(actual.LeaderOfGuildIds);
         Assert.Null(actual.FractalLevel);
@@ -39,12 +41,14 @@ public class Account
 
         Assert.NotEmpty(actual.DisplayName);
         Assert.NotEmpty(actual.Access);
-        Assert.All(actual.Access,
+        Assert.All(
+            actual.Access,
             product =>
             {
                 Assert.True(product.IsDefined());
                 Assert.NotEqual(ProductName.None, product);
-            });
+            }
+        );
         Assert.NotNull(actual.LeaderOfGuildIds);
         Assert.NotEqual(TimeSpan.Zero, actual.Age);
         Assert.NotEqual(default, actual.Created);

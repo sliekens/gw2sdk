@@ -11,8 +11,9 @@ public class AstralRewardById
 
         const int id = 1;
 
-        var (actual, _) = await sut.WizardsVault.GetAstralRewardById(id);
+        var (actual, context) = await sut.WizardsVault.GetAstralRewardById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }
 }

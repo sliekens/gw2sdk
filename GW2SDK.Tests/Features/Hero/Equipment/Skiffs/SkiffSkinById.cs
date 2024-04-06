@@ -11,11 +11,9 @@ public class SkiffSkinById
 
         const int id = 410;
 
-        var (actual, _) = await sut.Hero.Equipment.Skiffs.GetSkiffSkinById(id);
+        var (actual, context) = await sut.Hero.Equipment.Skiffs.GetSkiffSkinById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
-        actual.Has_name();
-        actual.Has_icon();
-        actual.Has_dye_slots();
     }
 }

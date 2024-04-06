@@ -18,12 +18,14 @@ public class LadderLeaderboardEntries
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.NotNull(context.Links);
 
-        Assert.All(actual,
+        Assert.All(
+            actual,
             entry =>
             {
                 Assert.Empty(entry.GuildId);
                 Assert.Empty(entry.TeamName);
                 Assert.Null(entry.TeamId);
-            });
+            }
+        );
     }
 }

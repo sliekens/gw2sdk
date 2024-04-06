@@ -1,5 +1,4 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
-using GuildWars2.WizardsVault;
 
 namespace GuildWars2.Tests.Features.WizardsVault.AstralRewards;
 

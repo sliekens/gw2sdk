@@ -18,8 +18,8 @@ public class MistChampions
             actual,
             entry =>
             {
-                entry.Has_id();
-                entry.Has_name();
+                Assert.NotEmpty(entry.Id);
+                Assert.NotEmpty(entry.Name);
             }
         );
     }

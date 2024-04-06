@@ -11,8 +11,8 @@ public class QuaggansIndex
 
         var (actual, context) = await sut.Quaggans.GetQuaggansIndex();
 
-        Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
+        Assert.NotEmpty(actual);
     }
 }

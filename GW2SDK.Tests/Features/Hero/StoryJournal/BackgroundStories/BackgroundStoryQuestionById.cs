@@ -11,8 +11,9 @@ public class BackgroundStoryQuestionById
 
         const int id = 7;
 
-        var (actual, _) = await sut.Hero.StoryJournal.GetBackgroundStoryQuestionById(id);
+        var (actual, context) = await sut.Hero.StoryJournal.GetBackgroundStoryQuestionById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }
 }

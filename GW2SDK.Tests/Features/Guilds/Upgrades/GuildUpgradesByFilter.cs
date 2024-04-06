@@ -1,5 +1,4 @@
-﻿using GuildWars2.Guilds.Upgrades;
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Guilds.Upgrades;
 
@@ -18,23 +17,14 @@ public class GuildUpgradesByFilter
 
         var (actual, context) = await sut.Guilds.GetGuildUpgradesByIds(ids);
 
+        Assert.Equal(ids.Count, context.ResultCount);
+        Assert.True(context.ResultTotal > ids.Count);
         Assert.Equal(ids.Count, actual.Count);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.All(
-            actual,
-            entry =>
-            {
-                entry.Has_id();
-                entry.Has_name();
-                entry.Has_description();
-                entry.Has_icon();
-                entry.Has_costs();
-                if (entry is BankBag bankBag)
-                {
-                    bankBag.Has_MaxItems();
-                    bankBag.Has_MaxCoins();
-                }
-            }
+        Assert.Collection(
+            ids,
+            first => Assert.Contains(actual, found => found.Id == first),
+            second => Assert.Contains(actual, found => found.Id == second),
+            third => Assert.Contains(actual, found => found.Id == third)
         );
     }
 }

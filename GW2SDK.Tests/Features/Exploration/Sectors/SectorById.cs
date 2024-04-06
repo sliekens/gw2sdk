@@ -15,7 +15,7 @@ public class SectorById
         const int mapId = 26;
         const int sectorId = 513;
 
-        var (actual, _) = await sut.Exploration.GetSectorById(
+        var (actual, context) = await sut.Exploration.GetSectorById(
             continentId,
             floorId,
             regionId,
@@ -23,6 +23,7 @@ public class SectorById
             sectorId
         );
 
+        Assert.NotNull(context);
         Assert.Equal(sectorId, actual.Id);
     }
 }

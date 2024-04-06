@@ -18,10 +18,10 @@ public class Amulets
             actual,
             entry =>
             {
-                entry.Has_id();
-                entry.Has_name();
-                entry.Has_icon();
-                entry.Has_attributes();
+                Assert.True(entry.Id > 0);
+                Assert.NotEmpty(entry.Name);
+                Assert.NotEmpty(entry.IconHref);
+                Assert.NotEmpty(entry.Attributes);
             }
         );
     }

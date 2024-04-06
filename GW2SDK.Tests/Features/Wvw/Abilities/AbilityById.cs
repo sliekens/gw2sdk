@@ -11,12 +11,9 @@ public class AbilityById
 
         const int id = 26;
 
-        var (actual, _) = await sut.Wvw.GetAbilityById(id);
+        var (actual, context) = await sut.Wvw.GetAbilityById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
-        actual.Has_name();
-        actual.Has_description();
-        actual.Has_icon();
-        actual.Has_ranks();
     }
 }

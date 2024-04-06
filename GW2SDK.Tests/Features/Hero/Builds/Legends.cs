@@ -18,8 +18,8 @@ public class Legends
             actual,
             entry =>
             {
-                entry.Has_id();
-                entry.Has_code();
+                Assert.NotEmpty(entry.Id);
+                Assert.True(entry.Code > 0);
             }
         );
     }

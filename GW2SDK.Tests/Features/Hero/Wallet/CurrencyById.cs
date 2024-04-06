@@ -11,8 +11,9 @@ public class CurrencyById
 
         const int id = 1;
 
-        var (actual, _) = await sut.Hero.Wallet.GetCurrencyById(id);
+        var (actual, context) = await sut.Hero.Wallet.GetCurrencyById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }
 }

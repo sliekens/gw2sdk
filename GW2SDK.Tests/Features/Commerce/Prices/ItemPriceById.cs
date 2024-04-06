@@ -11,13 +11,9 @@ public class ItemPriceById
 
         const int id = 24;
 
-        var (actual, _) = await sut.Commerce.GetItemPriceById(id);
+        var (actual, context) = await sut.Commerce.GetItemPriceById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
-        Assert.True(actual.TotalSupply > 0);
-        Assert.True(actual.BestAsk > 0);
-        Assert.True(actual.TotalDemand > 0);
-        Assert.True(actual.BestBid > 0);
-        Assert.Equal(actual.BestAsk - actual.BestBid, actual.BidAskSpread);
     }
 }

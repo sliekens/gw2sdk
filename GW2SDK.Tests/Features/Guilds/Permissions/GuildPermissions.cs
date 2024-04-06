@@ -18,9 +18,9 @@ public class GuildPermissions
             actual,
             entry =>
             {
-                entry.Has_id();
-                entry.Has_name();
-                entry.Has_description();
+                Assert.NotEmpty(entry.Id);
+                Assert.NotEmpty(entry.Name);
+                Assert.NotEmpty(entry.Description);
             }
         );
     }

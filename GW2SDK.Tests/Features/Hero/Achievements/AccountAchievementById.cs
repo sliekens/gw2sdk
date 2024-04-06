@@ -12,9 +12,10 @@ public class AccountAchievementById
 
         const int id = 1;
 
-        var (actual, _) =
+        var (actual, context) =
             await sut.Hero.Achievements.GetAccountAchievementById(id, accessToken.Key);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }
 }

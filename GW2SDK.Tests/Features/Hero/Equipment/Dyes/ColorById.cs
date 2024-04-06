@@ -11,8 +11,9 @@ public class ColorById
 
         const int id = 1;
 
-        var (actual, _) = await sut.Hero.Equipment.Dyes.GetColorById(id);
+        var (actual, context) = await sut.Hero.Equipment.Dyes.GetColorById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }
 }

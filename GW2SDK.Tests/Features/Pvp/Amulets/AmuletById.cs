@@ -11,11 +11,9 @@ public class AmuletById
 
         const int id = 4;
 
-        var (actual, _) = await sut.Pvp.GetAmuletById(id);
+        var (actual, context) = await sut.Pvp.GetAmuletById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
-        actual.Has_name();
-        actual.Has_icon();
-        actual.Has_attributes();
     }
 }

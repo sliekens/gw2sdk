@@ -11,8 +11,8 @@ public class SkiffSkinsIndex
 
         var (actual, context) = await sut.Hero.Equipment.Skiffs.GetSkiffSkinsIndex();
 
-        Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
+        Assert.NotEmpty(actual);
     }
 }

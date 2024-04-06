@@ -16,7 +16,21 @@ public class Colors
             actual,
             color =>
             {
-                color.Base_rgb_contains_red_green_blue();
+                Assert.True(color.Id > 0);
+                Assert.NotEmpty(color.Name);
+                Assert.False(color.BaseRgb.IsEmpty);
+                Assert.False(color.Cloth.Rgb.IsEmpty);
+                Assert.False(color.Leather.Rgb.IsEmpty);
+                Assert.False(color.Metal.Rgb.IsEmpty);
+
+                if (color.Fur is not null)
+                {
+                    Assert.False(color.Fur.Rgb.IsEmpty);
+                }
+
+                Assert.True(color.Hue.IsDefined());
+                Assert.True(color.Material.IsDefined());
+                Assert.True(color.Set.IsDefined());
             }
         );
     }

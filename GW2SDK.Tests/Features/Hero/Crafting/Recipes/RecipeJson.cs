@@ -17,11 +17,23 @@ public class RecipeJson
                 using var document = JsonDocument.Parse(json);
                 var actual = document.RootElement.GetRecipe(MissingMemberBehavior.Error);
 
-                actual.Has_id();
-                actual.Has_output_item_id();
-                actual.Has_item_count();
-                actual.Has_min_rating_between_0_and_500();
-                actual.Has_time_to_craft();
+                Assert.True(actual.Id > 0);
+                Assert.True(actual.OutputItemId >= 1);
+                Assert.True(actual.OutputItemCount >= 1);
+                Assert.InRange(actual.MinRating, 0, 500);
+                Assert.True(actual.TimeToCraft.Ticks >= 1);
+                Assert.All(actual.Disciplines, discipline => Assert.True(discipline.IsDefined()));
+                Assert.Empty(actual.Flags.Other);
+
+                Assert.All(
+                    actual.Ingredients,
+                    ingredient =>
+                    {
+                        Assert.True(ingredient.Kind.IsDefined());
+                        Assert.True(ingredient.Id > 0);
+                        Assert.True(ingredient.Count > 0);
+                    }
+                );
 
                 var chatLink = actual.GetChatLink();
                 Assert.Equal(actual.Id, chatLink.RecipeId);

@@ -10,7 +10,8 @@ public class UnlockedJadeBotSkins
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var (actual, _) = await sut.Hero.Equipment.JadeBots.GetUnlockedJadeBotSkins(accessToken.Key);
+        var (actual, _) =
+            await sut.Hero.Equipment.JadeBots.GetUnlockedJadeBotSkins(accessToken.Key);
 
         Assert.NotNull(actual);
     }

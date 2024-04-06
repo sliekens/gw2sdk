@@ -11,8 +11,9 @@ public class ItemById
 
         const int id = 24;
 
-        var (actual, _) = await sut.Items.GetItemById(id);
+        var (actual, context) = await sut.Items.GetItemById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }
 }

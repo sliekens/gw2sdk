@@ -18,11 +18,11 @@ public class StorySteps
             actual,
             entry =>
             {
-                entry.Has_id();
-                entry.Has_name();
-                entry.Has_level();
-                entry.Has_story();
-                entry.Has_goals();
+                Assert.True(entry.Id > 0);
+                Assert.NotEmpty(entry.Name);
+                Assert.True(entry.Level > 0);
+                Assert.True(entry.StoryId > 0);
+                Assert.NotEmpty(entry.Objectives);
             }
         );
     }

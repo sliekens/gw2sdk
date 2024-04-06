@@ -99,5 +99,4 @@ public class ExtensibleEnum
         var actual = extensible.ToEnum();
         Assert.Null(actual);
     }
-
 }

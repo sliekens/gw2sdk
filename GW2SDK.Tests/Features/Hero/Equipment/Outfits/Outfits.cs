@@ -18,10 +18,10 @@ public class Outfits
             actual,
             entry =>
             {
-                entry.Has_id();
-                entry.Has_name();
-                entry.Has_icon();
-                entry.Has_unlock_items();
+                Assert.True(entry.Id > 0);
+                Assert.NotEmpty(entry.Name);
+                Assert.NotEmpty(entry.IconHref);
+                Assert.NotEmpty(entry.UnlockItemIds);
 
                 var chatLink = entry.GetChatLink();
                 Assert.Equal(entry.Id, chatLink.OutfitId);

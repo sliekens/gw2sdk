@@ -11,8 +11,9 @@ public class WorldById
 
         const int id = 1001;
 
-        var (actual, _) = await sut.Worlds.GetWorldById(id);
+        var (actual, context) = await sut.Worlds.GetWorldById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }
 }

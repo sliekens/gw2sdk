@@ -11,10 +11,9 @@ public class EmoteById
 
         const string id = "rockout";
 
-        var (actual, _) = await sut.Hero.Emotes.GetEmoteById(id);
+        var (actual, context) = await sut.Hero.Emotes.GetEmoteById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
-        actual.Has_commands();
-        actual.Has_unlock_items();
     }
 }

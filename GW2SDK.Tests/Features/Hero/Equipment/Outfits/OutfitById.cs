@@ -11,11 +11,9 @@ public class OutfitById
 
         const int id = 1;
 
-        var (actual, _) = await sut.Hero.Equipment.Outfits.GetOutfitById(id);
+        var (actual, context) = await sut.Hero.Equipment.Outfits.GetOutfitById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
-        actual.Has_name();
-        actual.Has_icon();
-        actual.Has_unlock_items();
     }
 }

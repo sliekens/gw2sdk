@@ -18,11 +18,11 @@ public class Abilities
             actual,
             entry =>
             {
-                entry.Has_id();
-                entry.Has_name();
-                entry.Has_description();
-                entry.Has_icon();
-                entry.Has_ranks();
+                Assert.True(entry.Id > 0);
+                Assert.NotEmpty(entry.Name);
+                Assert.NotEmpty(entry.Description);
+                Assert.NotEmpty(entry.IconHref);
+                Assert.NotEmpty(entry.Ranks);
             }
         );
     }

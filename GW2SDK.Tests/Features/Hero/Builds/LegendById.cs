@@ -12,9 +12,9 @@ public class LegendById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, _) = await sut.Hero.Builds.GetLegendById(id);
+        var (actual, context) = await sut.Hero.Builds.GetLegendById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
-        actual.Has_code();
     }
 }

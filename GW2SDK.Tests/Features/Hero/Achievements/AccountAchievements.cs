@@ -12,13 +12,17 @@ public class AccountAchievements
 
         var (actual, context) = await sut.Hero.Achievements.GetAccountAchievements(accessToken.Key);
 
+        Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
-
+        Assert.NotEmpty(actual);
         Assert.All(
             actual,
             achievement =>
             {
-                achievement.Has_id();
+                Assert.True(achievement.Id > 0);
+                Assert.True(achievement.Current >= 0);
+                Assert.True(achievement.Max >= 0);
+                Assert.True(achievement.Repeated >= 0);
             }
         );
     }

@@ -20,7 +20,7 @@ public class MasteryTracks
                 Assert.True(mastery.Id > 0);
                 Assert.NotEmpty(mastery.Name);
                 Assert.NotNull(mastery.Requirement);
-                Assert.InRange(mastery.Order, 0, int.MaxValue);
+                Assert.True(mastery.Order >= 0);
                 Assert.NotEmpty(mastery.BackgroundHref);
                 Assert.True(mastery.Region.IsDefined());
                 Assert.NotEqual(MasteryRegionName.Unknown, mastery.Region);

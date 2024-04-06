@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using System.Drawing;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Exploration.Continents;
 
@@ -11,19 +12,19 @@ public class Continents
 
         var (actual, context) = await sut.Exploration.GetContinents();
 
-        Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
+        Assert.NotEmpty(actual);
         Assert.All(
             actual,
             entry =>
             {
-                entry.Has_id();
-                entry.Has_name();
-                entry.Has_dimensions();
-                entry.Has_min_zoom();
-                entry.Has_max_zoom();
-                entry.Has_floors();
+                Assert.True(entry.Id > 0);
+                Assert.NotEmpty(entry.Name);
+                Assert.NotEqual(Size.Empty, entry.ContinentDimensions);
+                Assert.True(entry.MinZoom >= 0);
+                Assert.True(entry.MaxZoom > entry.MinZoom);
+                Assert.NotEmpty(entry.Floors);
             }
         );
     }

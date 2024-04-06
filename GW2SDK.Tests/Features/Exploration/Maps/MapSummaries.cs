@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using System.Drawing;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Exploration.Maps;
 
@@ -20,7 +21,14 @@ public class MapSummaries
             {
                 Assert.True(entry.Id > 0);
                 Assert.NotEmpty(entry.Name);
+                Assert.True(entry.MinLevel >= 0);
+                Assert.True(entry.MaxLevel >= entry.MinLevel);
                 Assert.True(entry.Kind.IsDefined());
+                Assert.NotEmpty(entry.Floors);
+                Assert.NotNull(entry.RegionName);
+                Assert.NotNull(entry.ContinentName);
+                Assert.NotEqual(Rectangle.Empty, entry.MapRectangle);
+                Assert.NotEqual(Rectangle.Empty, entry.ContinentRectangle);
             }
         );
     }

@@ -1,5 +1,4 @@
-﻿using GuildWars2.Tests.Features.Exploration.Regions;
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Exploration.Floors;
 
@@ -16,22 +15,9 @@ public class FloorById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, _) = await sut.Exploration.GetFloorById(continentId, floorId);
+        var (actual, context) = await sut.Exploration.GetFloorById(continentId, floorId);
 
+        Assert.NotNull(context);
         Assert.Equal(floorId, actual.Id);
-        actual.Has_texture_dimensions();
-        actual.Has_regions();
-        foreach (var (regionId, region) in actual.Regions)
-        {
-            Assert.Equal(regionId, region.Id);
-            region.Has_name();
-            region.Has_maps();
-
-            // TODO: complete validation
-            foreach (var (mapId, map) in region.Maps)
-            {
-                Assert.Equal(mapId, map.Id);
-            }
-        }
     }
 }

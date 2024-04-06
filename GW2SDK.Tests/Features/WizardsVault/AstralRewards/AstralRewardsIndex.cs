@@ -11,8 +11,8 @@ public class AstralRewardsIndex
 
         var (actual, context) = await sut.WizardsVault.GetAstralRewardsIndex();
 
-        Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
+        Assert.NotEmpty(actual);
     }
 }

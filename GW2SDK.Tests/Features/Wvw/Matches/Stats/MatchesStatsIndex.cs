@@ -11,8 +11,8 @@ public class MatchesStatsIndex
 
         var (actual, context) = await sut.Wvw.GetMatchesStatsIndex();
 
-        Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
+        Assert.NotEmpty(actual);
     }
 }

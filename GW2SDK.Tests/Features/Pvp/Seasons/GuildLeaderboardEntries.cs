@@ -18,10 +18,12 @@ public class GuildLeaderboardEntries
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.NotNull(context.Links);
 
-        Assert.All(actual,
+        Assert.All(
+            actual,
             entry =>
             {
                 Assert.NotEmpty(entry.GuildId);
-            });
+            }
+        );
     }
 }

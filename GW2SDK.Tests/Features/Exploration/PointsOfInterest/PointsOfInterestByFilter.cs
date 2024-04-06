@@ -27,10 +27,14 @@ public class PointsOfInterestByFilter
             ids
         );
 
+        Assert.Equal(ids.Count, context.ResultCount);
+        Assert.True(context.ResultTotal > ids.Count);
         Assert.Equal(ids.Count, actual.Count);
-        Assert.Equal(context.ResultCount, actual.Count);
-        actual.All_have_ids();
-        actual.Some_have_names();
-        actual.All_have_chat_links();
+        Assert.Collection(
+            ids,
+            first => Assert.Contains(actual, found => found.Id == first),
+            second => Assert.Contains(actual, found => found.Id == second),
+            third => Assert.Contains(actual, found => found.Id == third)
+        );
     }
 }

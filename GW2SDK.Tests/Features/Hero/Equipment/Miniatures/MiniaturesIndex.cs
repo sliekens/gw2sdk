@@ -11,8 +11,8 @@ public class MiniaturesIndex
 
         var (actual, context) = await sut.Hero.Equipment.Miniatures.GetMiniaturesIndex();
 
-        Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
+        Assert.NotEmpty(actual);
     }
 }

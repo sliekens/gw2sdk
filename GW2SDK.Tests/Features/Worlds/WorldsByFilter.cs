@@ -1,5 +1,4 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
-using GuildWars2.Worlds;
 
 namespace GuildWars2.Tests.Features.Worlds;
 
@@ -18,7 +17,9 @@ public class WorldsByFilter
 
         var (actual, context) = await sut.Worlds.GetWorldsByIds(ids);
 
-        Assert.Equal(context.ResultCount, actual.Count);
+        Assert.Equal(ids.Count, context.ResultCount);
+        Assert.True(context.ResultTotal > ids.Count);
+        Assert.Equal(ids.Count, actual.Count);
         Assert.Collection(
             ids,
             first => Assert.Contains(actual, found => found.Id == first),

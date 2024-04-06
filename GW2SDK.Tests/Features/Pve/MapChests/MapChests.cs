@@ -18,7 +18,7 @@ public class MapChests
             actual,
             entry =>
             {
-                entry.Has_id();
+                Assert.NotEmpty(entry.Id);
             }
         );
     }

@@ -11,8 +11,8 @@ public class RecipesIndex
 
         var (actual, context) = await sut.Hero.Crafting.Recipes.GetRecipesIndex();
 
-        Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
+        Assert.NotEmpty(actual);
     }
 }

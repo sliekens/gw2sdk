@@ -11,8 +11,8 @@ public class TraitsIndex
 
         var (actual, context) = await sut.Hero.Builds.GetTraitsIndex();
 
-        Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
+        Assert.NotEmpty(actual);
     }
 }

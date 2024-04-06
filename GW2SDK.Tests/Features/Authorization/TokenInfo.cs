@@ -25,6 +25,9 @@ public class TokenInfo
 
         var expectedPermissions = Enum.GetValues(typeof(Permission)).Cast<Permission>().ToHashSet();
 
-        Assert.Equal(expectedPermissions, apiKey.Permissions.Select(p => p.ToEnum().GetValueOrDefault()).ToHashSet());
+        Assert.Equal(
+            expectedPermissions,
+            apiKey.Permissions.Select(p => p.ToEnum().GetValueOrDefault()).ToHashSet()
+        );
     }
 }

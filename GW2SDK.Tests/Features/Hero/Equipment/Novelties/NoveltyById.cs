@@ -11,8 +11,9 @@ public class NoveltyById
 
         const int id = 1;
 
-        var (actual, _) = await sut.Hero.Equipment.Novelties.GetNoveltyById(id);
+        var (actual, context) = await sut.Hero.Equipment.Novelties.GetNoveltyById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }
 }

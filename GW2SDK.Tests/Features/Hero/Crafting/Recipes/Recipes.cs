@@ -17,12 +17,8 @@ public class Recipes
             .GetRecipesBulk(degreeOfParallelism: 3)
             .Take(600))
         {
-            actual.Has_id();
-            actual.Has_output_item_id();
-            actual.Has_item_count();
-            actual.Has_min_rating_between_0_and_500();
-            actual.Has_time_to_craft();
             Assert.NotNull(context);
+            Assert.NotNull(actual);
         }
     }
 }

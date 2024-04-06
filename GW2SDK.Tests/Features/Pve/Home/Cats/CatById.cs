@@ -11,9 +11,9 @@ public class CatById
 
         const int id = 20;
 
-        var (actual, _) = await sut.Pve.Home.GetCatById(id);
+        var (actual, context) = await sut.Pve.Home.GetCatById(id);
 
-        Assert.NotNull(actual);
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
         Assert.Equal("necromancer", actual.Hint);
     }

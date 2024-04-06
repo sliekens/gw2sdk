@@ -11,24 +11,16 @@ public class RegionsByPage
 
         const int continentId = 1;
         const int floorId = 1;
+        const int pageSize = 3;
+        var (actual, context) =
+            await sut.Exploration.GetRegionsByPage(continentId, floorId, 0, pageSize);
 
-        var (actual, context) = await sut.Exploration.GetRegionsByPage(continentId, floorId, 0, 3);
-
-        Assert.Equal(3, actual.Count);
-        Assert.Equal(3, context.PageSize);
-        Assert.All(
-            actual,
-            entry =>
-            {
-                entry.Has_id();
-                entry.Has_name();
-                entry.Has_maps();
-                foreach (var (mapId, map) in entry.Maps)
-                {
-                    // TODO: complete validation
-                    Assert.Equal(mapId, map.Id);
-                }
-            }
-        );
+        Assert.NotNull(context.Links);
+        Assert.Equal(pageSize, context.PageSize);
+        Assert.Equal(pageSize, context.ResultCount);
+        Assert.True(context.PageTotal > 0);
+        Assert.True(context.ResultTotal > 0);
+        Assert.Equal(pageSize, actual.Count);
+        Assert.All(actual, Assert.NotNull);
     }
 }

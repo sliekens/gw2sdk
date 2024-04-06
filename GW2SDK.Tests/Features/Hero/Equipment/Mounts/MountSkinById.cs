@@ -11,8 +11,9 @@ public class MountSkinById
 
         const int id = 1;
 
-        var (actual, _) = await sut.Hero.Equipment.Mounts.GetMountSkinById(id);
+        var (actual, context) = await sut.Hero.Equipment.Mounts.GetMountSkinById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }
 }

@@ -12,20 +12,12 @@ public class StoryStepsByPage
         const int pageSize = 3;
         var (actual, context) = await sut.Hero.StoryJournal.GetStoryStepsByPage(0, pageSize);
 
-        Assert.Equal(pageSize, actual.Count);
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);
-        Assert.Equal(context.ResultCount, pageSize);
-        Assert.All(
-            actual,
-            entry =>
-            {
-                entry.Has_id();
-                entry.Has_name();
-                entry.Has_level();
-                entry.Has_story();
-                entry.Has_goals();
-            }
-        );
+        Assert.Equal(pageSize, context.ResultCount);
+        Assert.True(context.PageTotal > 0);
+        Assert.True(context.ResultTotal > 0);
+        Assert.Equal(pageSize, actual.Count);
+        Assert.All(actual, Assert.NotNull);
     }
 }

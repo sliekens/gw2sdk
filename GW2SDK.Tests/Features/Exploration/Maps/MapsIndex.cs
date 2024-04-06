@@ -14,9 +14,9 @@ public class MapsIndex
 
         var (actual, context) = await sut.Exploration.GetMapsIndex(continentId, floorId, regionId);
 
-        Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
+        Assert.NotEmpty(actual);
     }
 
     [Fact]
@@ -26,8 +26,8 @@ public class MapsIndex
 
         var (actual, context) = await sut.Exploration.GetMapsIndex();
 
-        Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
+        Assert.NotEmpty(actual);
     }
 }

@@ -11,8 +11,9 @@ public class AttributeCombinationById
 
         const int id = 559;
 
-        var (actual, _) = await sut.Items.GetAttributeCombinationById(id);
+        var (actual, context) = await sut.Items.GetAttributeCombinationById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }
 }

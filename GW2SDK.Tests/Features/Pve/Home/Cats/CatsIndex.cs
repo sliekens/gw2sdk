@@ -11,8 +11,8 @@ public class CatsIndex
 
         var (actual, context) = await sut.Pve.Home.GetCatsIndex();
 
-        Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
+        Assert.NotEmpty(actual);
     }
 }

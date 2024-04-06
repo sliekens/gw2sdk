@@ -11,8 +11,8 @@ public class ItemsIndex
 
         var (actual, context) = await sut.Items.GetItemsIndex();
 
-        Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
+        Assert.NotEmpty(actual);
     }
 }

@@ -15,9 +15,16 @@ public class EmblemForegroundsByFilter
             3
         ];
 
-        var (actual, _) = await sut.Guilds.GetEmblemForegroundsByIds(ids);
+        var (actual, context) = await sut.Guilds.GetEmblemForegroundsByIds(ids);
 
+        Assert.Equal(ids.Count, context.ResultCount);
+        Assert.True(context.ResultTotal > ids.Count);
         Assert.Equal(ids.Count, actual.Count);
-        Assert.All(ids, id => Assert.Contains(id, actual.Select(value => value.Id)));
+        Assert.Collection(
+            ids,
+            first => Assert.Contains(actual, found => found.Id == first),
+            second => Assert.Contains(actual, found => found.Id == second),
+            third => Assert.Contains(actual, found => found.Id == third)
+        );
     }
 }

@@ -18,13 +18,13 @@ public class GliderSkins
             actual,
             entry =>
             {
-                entry.Has_id();
-                entry.Has_unlock_items();
-                entry.Has_order();
-                entry.Has_icon();
-                entry.Has_name();
-                entry.Has_description();
-                entry.Has_default_dyes();
+                Assert.True(entry.Id > 0);
+                Assert.NotNull(entry.UnlockItemIds);
+                Assert.True(entry.Order >= 0);
+                Assert.NotEmpty(entry.IconHref);
+                Assert.NotEmpty(entry.Name);
+                Assert.NotNull(entry.Description);
+                Assert.NotNull(entry.DefaultDyeColorIds);
             }
         );
     }

@@ -11,11 +11,9 @@ public class MaterialCategoryById
 
         const int id = 5;
 
-        var (actual, _) = await sut.Hero.Bank.GetMaterialCategoryById(id);
+        var (actual, context) = await sut.Hero.Bank.GetMaterialCategoryById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
-        actual.Has_name();
-        actual.Has_items();
-        actual.Has_order();
     }
 }

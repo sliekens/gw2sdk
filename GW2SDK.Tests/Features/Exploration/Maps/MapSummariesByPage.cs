@@ -14,7 +14,10 @@ public class MapSummariesByPage
 
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);
+        Assert.Equal(pageSize, context.ResultCount);
+        Assert.True(context.PageTotal > 0);
+        Assert.True(context.ResultTotal > 0);
         Assert.Equal(pageSize, actual.Count);
-        Assert.Equal(context.ResultCount, pageSize);
+        Assert.All(actual, Assert.NotNull);
     }
 }

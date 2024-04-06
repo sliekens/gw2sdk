@@ -17,10 +17,10 @@ public class BackgroundStoryQuestions
             actual,
             question =>
             {
-                question.Id_is_positive();
-                question.Title_is_not_null();
-                question.Description_is_not_empty();
-                question.Has_3_to_8_answers();
+                Assert.True(question.Id >= 1);
+                Assert.NotNull(question.Title);
+                Assert.NotEmpty(question.Description);
+                Assert.InRange(question.AnswerIds.Count, 3, 8);
             }
         );
     }

@@ -11,9 +11,9 @@ public class FileById
 
         const string id = "map_vendor_ecto";
 
-        var (actual, _) = await sut.Files.GetFileById(id);
+        var (actual, context) = await sut.Files.GetFileById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
-        actual.Has_icon();
     }
 }

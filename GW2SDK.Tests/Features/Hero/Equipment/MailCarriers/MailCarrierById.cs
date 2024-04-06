@@ -11,8 +11,9 @@ public class MailCarrierById
 
         const int id = 1;
 
-        var (actual, _) = await sut.Hero.Equipment.MailCarriers.GetMailCarrierById(id);
+        var (actual, context) = await sut.Hero.Equipment.MailCarriers.GetMailCarrierById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }
 }

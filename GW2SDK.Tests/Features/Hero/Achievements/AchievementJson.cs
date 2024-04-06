@@ -27,7 +27,8 @@ public class AchievementJson(AchievementFixture fixture) : IClassFixture<Achieve
                 Assert.DoesNotContain(null, actual.Tiers);
                 if (actual.Rewards is not null)
                 {
-                    Assert.All(actual.Rewards,
+                    Assert.All(
+                        actual.Rewards,
                         reward =>
                         {
                             Assert.NotNull(reward);
@@ -48,7 +49,8 @@ public class AchievementJson(AchievementFixture fixture) : IClassFixture<Achieve
                                     Assert.True(titleReward.Id > 0);
                                     break;
                             }
-                        });
+                        }
+                    );
                 }
 
                 if (actual.Bits is not null)

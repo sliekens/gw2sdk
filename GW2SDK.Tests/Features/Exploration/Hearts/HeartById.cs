@@ -15,7 +15,7 @@ public class HeartById
         const int mapId = 26;
         const int heartId = 2;
 
-        var (actual, _) = await sut.Exploration.GetHeartById(
+        var (actual, context) = await sut.Exploration.GetHeartById(
             continentId,
             floorId,
             regionId,
@@ -23,6 +23,7 @@ public class HeartById
             heartId
         );
 
+        Assert.NotNull(context);
         Assert.Equal(heartId, actual.Id);
     }
 }

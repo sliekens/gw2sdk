@@ -18,8 +18,8 @@ public class Quaggans
             actual,
             entry =>
             {
-                entry.Id_is_not_empty();
-                entry.Quaggan_has_image();
+                Assert.NotEmpty(entry.Id);
+                Assert.True(Uri.IsWellFormedUriString(entry.ImageHref, UriKind.Absolute));
             }
         );
     }

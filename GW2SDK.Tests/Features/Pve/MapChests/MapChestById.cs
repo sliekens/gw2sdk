@@ -12,8 +12,9 @@ public class MapChestById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, _) = await sut.Pve.MapChests.GetMapChestById(id);
+        var (actual, context) = await sut.Pve.MapChests.GetMapChestById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }
 }

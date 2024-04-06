@@ -14,23 +14,9 @@ public class Maps
 
         var (actual, context) = await sut.Exploration.GetMaps(continentId, floorId, regionId);
 
-        Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(
-            actual,
-            entry =>
-            {
-                Assert.True(entry.Id > 0);
-                Assert.NotEmpty(entry.Name);
-                Assert.All(entry.MasteryInsights,
-                    insight =>
-                    {
-                        Assert.True(insight.Id > 0);
-                        Assert.True(insight.Region.IsDefined());
-                        Assert.False(insight.Coordinates.IsEmpty);
-                    });
-            }
-        );
+        Assert.NotEmpty(actual);
+        Assert.All(actual, Assert.NotNull);
     }
 }

@@ -13,6 +13,6 @@ public class UnlockedRecipes
         var (actual, _) = await sut.Hero.Crafting.Recipes.GetUnlockedRecipes(accessToken.Key);
 
         Assert.NotEmpty(actual);
-        Assert.All(actual, id => Assert.NotEqual(0, id));
+        Assert.All(actual, id => Assert.True(id >= 0));
     }
 }

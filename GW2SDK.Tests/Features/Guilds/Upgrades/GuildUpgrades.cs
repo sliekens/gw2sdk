@@ -19,15 +19,15 @@ public class GuildUpgrades
             actual,
             entry =>
             {
-                entry.Has_id();
-                entry.Has_name();
-                entry.Has_description();
-                entry.Has_icon();
-                entry.Has_costs();
+                Assert.True(entry.Id > 0);
+                Assert.NotNull(entry.Name);
+                Assert.NotNull(entry.Description);
+                Assert.NotEmpty(entry.IconHref);
+                Assert.NotNull(entry.Costs);
                 if (entry is BankBag bankBag)
                 {
-                    bankBag.Has_MaxItems();
-                    bankBag.Has_MaxCoins();
+                    Assert.True(bankBag.MaxItems > 0);
+                    Assert.True(bankBag.MaxCoins > 0);
                 }
             }
         );

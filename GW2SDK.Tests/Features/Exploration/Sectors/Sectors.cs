@@ -15,11 +15,9 @@ public class Sectors
         var (actual, context) =
             await sut.Exploration.GetSectors(continentId, floorId, regionId, mapId);
 
-        Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
-        actual.All_have_ids();
-        actual.Some_have_names();
-        actual.All_have_chat_links();
+        Assert.NotEmpty(actual);
+        Assert.All(actual, Assert.NotNull);
     }
 }

@@ -12,15 +12,9 @@ public class RegionById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, _) = await sut.Exploration.GetRegionById(continentId, floorId, regionId);
+        var (actual, context) = await sut.Exploration.GetRegionById(continentId, floorId, regionId);
 
+        Assert.NotNull(context);
         Assert.Equal(regionId, actual.Id);
-        actual.Has_name();
-        actual.Has_maps();
-        foreach (var (mapId, map) in actual.Maps)
-        {
-            // TODO: complete validation
-            Assert.Equal(mapId, map.Id);
-        }
     }
 }

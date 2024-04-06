@@ -17,7 +17,8 @@ public class GuildLog
             var (actual, _) = await sut.Guilds.GetGuildLog(guildId, guildLeader.Token);
 
             Assert.NotEmpty(actual);
-            Assert.All(actual,
+            Assert.All(
+                actual,
                 entry =>
                 {
                     Assert.True(entry.Id > 0);
@@ -34,7 +35,8 @@ public class GuildLog
                             Assert.True(influenceActivity.Activity.IsDefined());
                             break;
                     }
-                });
+                }
+            );
 
             // While we are here, check the ability to use a log ID as a skip token
             if (actual.Count > 3)

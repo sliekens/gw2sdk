@@ -13,9 +13,6 @@ public class ProfessionNames
         var (actual, _) = await sut.Hero.Training.GetProfessionNames();
 
         Assert.Equal(Enum.GetNames(typeof(ProfessionName)).Length, actual.Count);
-        Assert.All(
-            actual,
-            name => Assert.True(name.IsDefined())
-        );
+        Assert.All(actual, name => Assert.True(name.IsDefined()));
     }
 }

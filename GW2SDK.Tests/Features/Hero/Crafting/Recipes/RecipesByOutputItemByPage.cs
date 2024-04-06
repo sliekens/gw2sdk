@@ -10,10 +10,17 @@ public class RecipesByOutputItemByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         const int ironIngot = 19683;
-        var (actual, _) =
-            await sut.Hero.Crafting.Recipes.GetRecipesByOutputItemIdByPage(ironIngot, 0, 20);
+        const int pageSize = 3;
+        var (actual, context) =
+            await sut.Hero.Crafting.Recipes.GetRecipesByOutputItemIdByPage(ironIngot, 0, pageSize);
 
         const int ironIngotRecipe = 19;
-        Assert.Contains(actual, recipe => recipe.Id == ironIngotRecipe);
+        Assert.NotNull(context.Links);
+        Assert.Equal(pageSize, context.PageSize);
+        Assert.Equal(1, context.ResultCount);
+        Assert.Equal(1, context.PageTotal);
+        Assert.Equal(1, context.ResultTotal);
+        var found = Assert.Single(actual);
+        Assert.Equal(ironIngotRecipe, found.Id);
     }
 }

@@ -18,9 +18,9 @@ public class Ranks
             actual,
             entry =>
             {
-                entry.Has_id();
-                entry.Has_title();
-                entry.Has_min_rank();
+                Assert.True(entry.Id > 0);
+                Assert.NotEmpty(entry.Title);
+                Assert.True(entry.MinRank > 0);
             }
         );
     }

@@ -11,8 +11,9 @@ public class MatchById
 
         const string id = "1-1";
 
-        var (actual, _) = await sut.Wvw.GetMatchById(id);
+        var (actual, context) = await sut.Wvw.GetMatchById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }
 }

@@ -11,9 +11,9 @@ public class UpgradeById
 
         const int id = 57;
 
-        var (actual, _) = await sut.Wvw.GetUpgradeById(id);
+        var (actual, context) = await sut.Wvw.GetUpgradeById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
-        actual.Has_tiers();
     }
 }

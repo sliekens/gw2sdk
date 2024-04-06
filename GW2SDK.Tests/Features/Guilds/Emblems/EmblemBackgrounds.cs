@@ -11,15 +11,16 @@ public class EmblemBackgrounds
 
         var (actual, context) = await sut.Guilds.GetEmblemBackgrounds();
 
-        Assert.NotEmpty(actual);
+        Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
+        Assert.NotEmpty(actual);
         Assert.All(
             actual,
             emblem =>
             {
                 Assert.True(emblem.Id > 0);
                 Assert.NotEmpty(emblem.Layers);
-                Assert.All(emblem.Layers, url => Assert.NotEmpty(url));
+                Assert.All(emblem.Layers, Assert.NotEmpty);
             }
         );
     }

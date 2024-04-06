@@ -16,8 +16,11 @@ public class RacesByFilter
             RaceName.Norn
         ];
 
-        var (actual, _) = await sut.Hero.Races.GetRacesByNames(names);
+        var (actual, context) = await sut.Hero.Races.GetRacesByNames(names);
 
+        Assert.Equal(names.Count, context.ResultCount);
+        Assert.True(context.ResultTotal > names.Count);
+        Assert.Equal(names.Count, actual.Count);
         Assert.Collection(
             names,
             first => Assert.Contains(actual, found => found.Id == first),

@@ -11,9 +11,9 @@ public class NodeById
 
         const string id = "bauble_gathering_system";
 
-        var (actual, _) = await sut.Pve.Home.GetNodeById(id);
+        var (actual, context) = await sut.Pve.Home.GetNodeById(id);
 
-        Assert.NotNull(actual);
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }
 }

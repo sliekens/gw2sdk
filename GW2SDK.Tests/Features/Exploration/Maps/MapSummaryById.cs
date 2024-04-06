@@ -12,8 +12,9 @@ public class MapSummaryById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, _) = await sut.Exploration.GetMapSummaryById(id);
+        var (actual, context) = await sut.Exploration.GetMapSummaryById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }
 }

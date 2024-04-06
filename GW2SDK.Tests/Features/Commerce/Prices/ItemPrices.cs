@@ -17,6 +17,7 @@ public class ItemPrices
             .GetItemPricesBulk(degreeOfParallelism: 3)
             .Take(600))
         {
+            Assert.NotNull(context);
             Assert.True(actual.Id > 0);
             if (actual.TotalSupply == 0)
             {
@@ -44,8 +45,6 @@ public class ItemPrices
             {
                 Assert.Equal(actual.BestAsk - actual.BestBid, actual.BidAskSpread);
             }
-
-            Assert.NotNull(context);
         }
     }
 }

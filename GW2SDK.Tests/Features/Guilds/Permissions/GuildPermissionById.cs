@@ -11,10 +11,9 @@ public class GuildPermissionById
 
         const string id = "StartingRole";
 
-        var (actual, _) = await sut.Guilds.GetGuildPermissionById(id);
+        var (actual, context) = await sut.Guilds.GetGuildPermissionById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
-        actual.Has_name();
-        actual.Has_description();
     }
 }

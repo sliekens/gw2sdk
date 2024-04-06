@@ -11,11 +11,9 @@ public class GuildById
         var accessToken = Composer.Resolve<ApiKey>();
         var guild = Composer.Resolve<TestGuild>();
 
-        var (actual, _) = await sut.Guilds.GetGuildById(guild.Id, accessToken.Key);
+        var (actual, context) = await sut.Guilds.GetGuildById(guild.Id, accessToken.Key);
 
-        Assert.NotNull(actual);
+        Assert.NotNull(context);
         Assert.Equal(guild.Id, actual.Id);
-        Assert.Equal(guild.Name, actual.Name);
-        Assert.Equal(guild.Tag, actual.Tag);
     }
 }

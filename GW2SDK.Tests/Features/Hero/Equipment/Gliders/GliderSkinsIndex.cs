@@ -11,8 +11,8 @@ public class GliderSkinsIndex
 
         var (actual, context) = await sut.Hero.Equipment.Gliders.GetGliderSkinsIndex();
 
-        Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
+        Assert.NotEmpty(actual);
     }
 }

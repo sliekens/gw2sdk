@@ -16,11 +16,19 @@ public class MailCarriers
             actual,
             mailCarrier =>
             {
-                mailCarrier.Id_is_positive();
-                mailCarrier.Non_default_carriers_can_be_unlocked();
-                mailCarrier.Order_is_not_negative();
-                mailCarrier.Icon_is_not_empty();
-                mailCarrier.Name_is_not_empty();
+                Assert.True(mailCarrier.Id >= 1);
+                if (mailCarrier.Flags.Default)
+                {
+                    Assert.Empty(mailCarrier.UnlockItemIds);
+                }
+                else
+                {
+                    Assert.NotEmpty(mailCarrier.UnlockItemIds);
+                }
+
+                Assert.InRange(mailCarrier.Order, 0, 1000);
+                Assert.NotEmpty(mailCarrier.IconHref);
+                Assert.NotEmpty(mailCarrier.Name);
             }
         );
     }

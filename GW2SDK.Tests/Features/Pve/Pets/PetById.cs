@@ -11,12 +11,9 @@ public class PetById
 
         const int id = 1;
 
-        var (actual, _) = await sut.Pve.Pets.GetPetById(id);
+        var (actual, context) = await sut.Pve.Pets.GetPetById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
-        actual.Has_name();
-        actual.Has_description();
-        actual.Has_icon();
-        actual.Has_skills();
     }
 }

@@ -11,8 +11,9 @@ public class SkillById
 
         const int id = 61533;
 
-        var (actual, _) = await sut.Hero.Builds.GetSkillById(id);
+        var (actual, context) = await sut.Hero.Builds.GetSkillById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }
 }

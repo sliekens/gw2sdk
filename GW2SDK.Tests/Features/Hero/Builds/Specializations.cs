@@ -16,14 +16,15 @@ public class Specializations
             actual,
             specialization =>
             {
-                specialization.Id_is_positive();
-                specialization.Name_is_not_empty();
-                specialization.It_has_minor_traits();
-                specialization.It_has_major_traits();
-                specialization.Icon_is_not_empty();
-                specialization.Background_is_not_empty();
-                specialization.Big_profession_icon_is_not_null();
-                specialization.Profession_icon_is_not_null();
+                Assert.True(specialization.Id >= 1);
+                Assert.NotEmpty(specialization.Name);
+                Assert.True(specialization.Profession.IsDefined());
+                Assert.NotEmpty(specialization.MinorTraitIds);
+                Assert.NotEmpty(specialization.MajorTraitIds);
+                Assert.NotEmpty(specialization.IconHref);
+                Assert.NotEmpty(specialization.IconHref);
+                Assert.NotNull(specialization.ProfessionBigIconHref);
+                Assert.NotNull(specialization.ProfessionIconHref);
             }
         );
     }

@@ -11,8 +11,8 @@ public class DungeonsIndex
 
         var (actual, context) = await sut.Pve.Dungeons.GetDungeonsIndex();
 
-        Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
+        Assert.NotEmpty(actual);
     }
 }

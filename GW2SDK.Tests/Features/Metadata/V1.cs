@@ -11,6 +11,22 @@ public class V1
 
         var (actual, _) = await sut.Metadata.GetApiVersion("v1");
 
-        actual.There_are_no_newer_translations();
+        Assert.All(
+            actual.Languages,
+            language =>
+            {
+                Assert.Contains(
+                    language,
+                    new[]
+                    {
+                        "en",
+                        "es",
+                        "de",
+                        "fr",
+                        "zh"
+                    }
+                );
+            }
+        );
     }
 }

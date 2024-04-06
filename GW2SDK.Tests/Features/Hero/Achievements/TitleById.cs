@@ -11,10 +11,9 @@ public class TitleById
 
         const int id = 1;
 
-        var (actual, _) = await sut.Hero.Achievements.GetTitleById(id);
+        var (actual, context) = await sut.Hero.Achievements.GetTitleById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
-        actual.Has_name();
-        actual.Can_be_unlocked_by_achievements();
     }
 }

@@ -15,8 +15,11 @@ public class OrderBooksByFilter
             35984
         ];
 
-        var (actual, _) = await sut.Commerce.GetOrderBooksByIds(ids);
+        var (actual, context) = await sut.Commerce.GetOrderBooksByIds(ids);
 
+        Assert.Equal(ids.Count, context.ResultCount);
+        Assert.True(context.ResultTotal > ids.Count);
+        Assert.Equal(ids.Count, actual.Count);
         Assert.Collection(
             ids,
             first => Assert.Contains(actual, found => found.Id == first),

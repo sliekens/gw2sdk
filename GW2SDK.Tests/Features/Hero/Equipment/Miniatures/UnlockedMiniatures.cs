@@ -10,7 +10,8 @@ public class UnlockedMiniatures
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var (actual, _) = await sut.Hero.Equipment.Miniatures.GetUnlockedMiniatures(accessToken.Key);
+        var (actual, _) =
+            await sut.Hero.Equipment.Miniatures.GetUnlockedMiniatures(accessToken.Key);
 
         Assert.NotEmpty(actual);
     }

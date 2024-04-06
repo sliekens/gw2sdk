@@ -19,6 +19,7 @@ public class MaterialStorage
             {
                 Assert.True(entry.ItemId > 0);
                 Assert.True(entry.CategoryId > 0);
+                Assert.True(entry.Binding.IsDefined());
                 Assert.True(entry.Count >= 0);
             }
         );

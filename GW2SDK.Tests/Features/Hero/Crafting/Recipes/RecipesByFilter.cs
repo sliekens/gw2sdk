@@ -15,18 +15,16 @@ public class RecipesByFilter
             3
         ];
 
-        var (actual, _) = await sut.Hero.Crafting.Recipes.GetRecipesByIds(ids);
+        var (actual, context) = await sut.Hero.Crafting.Recipes.GetRecipesByIds(ids);
 
-        Assert.All(
-            actual,
-            entry =>
-            {
-                entry.Has_id();
-                entry.Has_output_item_id();
-                entry.Has_item_count();
-                entry.Has_min_rating_between_0_and_500();
-                entry.Has_time_to_craft();
-            }
+        Assert.Equal(ids.Count, context.ResultCount);
+        Assert.True(context.ResultTotal > ids.Count);
+        Assert.Equal(ids.Count, actual.Count);
+        Assert.Collection(
+            ids,
+            first => Assert.Contains(actual, found => found.Id == first),
+            second => Assert.Contains(actual, found => found.Id == second),
+            third => Assert.Contains(actual, found => found.Id == third)
         );
     }
 }

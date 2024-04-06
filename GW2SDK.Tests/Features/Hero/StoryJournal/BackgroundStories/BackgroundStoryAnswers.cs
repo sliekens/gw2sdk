@@ -17,11 +17,11 @@ public class BackgroundStoryAnswers
             actual,
             answer =>
             {
-                answer.Id_is_not_empty();
-                answer.Title_is_not_null();
-                answer.Description_is_not_empty();
-                answer.Journal_is_not_empty();
-                answer.Has_a_question();
+                Assert.NotEmpty(answer.Id);
+                Assert.NotNull(answer.Title);
+                Assert.NotEmpty(answer.Description);
+                Assert.NotEmpty(answer.Journal);
+                Assert.InRange(answer.QuestionId, 1, 999);
             }
         );
     }

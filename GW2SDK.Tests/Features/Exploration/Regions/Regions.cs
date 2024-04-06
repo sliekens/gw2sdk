@@ -13,22 +13,9 @@ public class Regions
 
         var (actual, context) = await sut.Exploration.GetRegions(continentId, floorId);
 
-        Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(
-            actual,
-            entry =>
-            {
-                entry.Has_id();
-                entry.Has_name();
-                entry.Has_maps();
-                foreach (var (mapId, map) in entry.Maps)
-                {
-                    // TODO: complete validation
-                    Assert.Equal(mapId, map.Id);
-                }
-            }
-        );
+        Assert.NotEmpty(actual);
+        Assert.All(actual, Assert.NotNull);
     }
 }

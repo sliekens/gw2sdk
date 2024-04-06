@@ -11,10 +11,12 @@ public class MountNames
 
         var (actual, _) = await sut.Hero.Equipment.Mounts.GetMountNames();
 
-        Assert.All(actual,
+        Assert.All(
+            actual,
             entry =>
             {
                 Assert.True(entry.IsDefined());
-            });
+            }
+        );
     }
 }

@@ -22,12 +22,14 @@ public class MatchesStats
                 Assert.NotNull(entry.Kills);
                 Assert.NotNull(entry.Deaths);
                 Assert.NotEmpty(entry.Maps);
-                Assert.All(entry.Maps,
+                Assert.All(
+                    entry.Maps,
                     map =>
                     {
                         Assert.True(map.Id > 0);
                         Assert.True(map.Kind.IsDefined());
-                    });
+                    }
+                );
             }
         );
     }

@@ -11,12 +11,9 @@ public class MiniatureById
 
         const int id = 1;
 
-        var (actual, _) = await sut.Hero.Equipment.Miniatures.GetMiniatureById(id);
+        var (actual, context) = await sut.Hero.Equipment.Miniatures.GetMiniatureById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
-        actual.Has_name();
-        actual.Has_icon();
-        actual.Has_order();
-        actual.Has_item_id();
     }
 }

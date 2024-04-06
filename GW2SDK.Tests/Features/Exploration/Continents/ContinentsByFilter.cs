@@ -13,19 +13,13 @@ public class ContinentsByFilter
 
         var (actual, context) = await sut.Exploration.GetContinentsByIds(ids);
 
+        Assert.Equal(ids.Count, context.ResultCount);
+        Assert.Equal(ids.Count, context.ResultTotal);
         Assert.Equal(ids.Count, actual.Count);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.All(
-            actual,
-            entry =>
-            {
-                entry.Has_id();
-                entry.Has_name();
-                entry.Has_dimensions();
-                entry.Has_min_zoom();
-                entry.Has_max_zoom();
-                entry.Has_floors();
-            }
+        Assert.Collection(
+            ids,
+            first => Assert.Contains(actual, found => found.Id == first),
+            second => Assert.Contains(actual, found => found.Id == second)
         );
     }
 }

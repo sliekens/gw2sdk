@@ -11,12 +11,13 @@ public class GameById
         var accessToken = Composer.Resolve<ApiKey>();
 
         // No way other way to get a game ID than to list them all first
-        var (gamesIndex, _) = await sut.Pvp.GetGamesIndex(accessToken.Key);
-        var game = gamesIndex.First();
+        var gamesIndex = await sut.Pvp.GetGamesIndex(accessToken.Key).ValueOnly();
+        var gameId = gamesIndex.First();
 
         // Now that we have a game ID, we can get the game
-        var (actual, _) = await sut.Pvp.GetGameById(game, accessToken.Key);
+        var (actual, context) = await sut.Pvp.GetGameById(gameId, accessToken.Key);
 
-        Assert.Equal(game, actual.Id);
+        Assert.NotNull(context);
+        Assert.Equal(gameId, actual.Id);
     }
 }

@@ -11,8 +11,9 @@ public class EmblemForegroundById
 
         const int id = 1;
 
-        var (actual, _) = await sut.Guilds.GetEmblemForegroundById(id);
+        var (actual, context) = await sut.Guilds.GetEmblemForegroundById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }
 }

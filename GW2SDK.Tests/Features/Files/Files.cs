@@ -11,15 +11,15 @@ public class Files
 
         var (actual, context) = await sut.Files.GetFiles();
 
-        Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
+        Assert.NotEmpty(actual);
         Assert.All(
             actual,
             entry =>
             {
-                entry.Has_id();
-                entry.Has_icon();
+                Assert.NotEmpty(entry.Id);
+                Assert.NotEmpty(entry.IconHref);
             }
         );
     }

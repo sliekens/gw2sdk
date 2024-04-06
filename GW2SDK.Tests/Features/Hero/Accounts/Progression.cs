@@ -15,27 +15,24 @@ public class Progression
 
         Assert.Contains(
             actual,
-            progression => progression.Id == ProgressionKind.FractalAgonyImpedance
-                && progression.Value > 0
+            progression => progression is { Id: ProgressionKind.FractalAgonyImpedance, Value: > 0 }
         );
         Assert.Contains(
             actual,
-            progression => progression.Id == ProgressionKind.FractalEmpowerment
-                && progression.Value > 0
+            progression => progression is { Id: ProgressionKind.FractalEmpowerment, Value: > 0 }
         );
         Assert.Contains(
             actual,
-            progression => progression.Id == ProgressionKind.FractalKarmicRetribution
-                && progression.Value > 0
+            progression =>
+                progression is { Id: ProgressionKind.FractalKarmicRetribution, Value: > 0 }
         );
         Assert.Contains(
             actual,
-            progression => progression.Id == ProgressionKind.FractalMistAttunement
-                && progression.Value > 0
+            progression => progression is { Id: ProgressionKind.FractalMistAttunement, Value: > 0 }
         );
         Assert.Contains(
             actual,
-            progression => progression.Id == ProgressionKind.Luck && progression.Value > 100
+            progression => progression is { Id: ProgressionKind.Luck, Value: > 100 }
         );
     }
 }

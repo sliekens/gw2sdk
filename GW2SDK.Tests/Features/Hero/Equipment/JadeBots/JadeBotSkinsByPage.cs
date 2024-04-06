@@ -10,21 +10,15 @@ public class JadeBotSkinsByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
-        var (actual, context) = await sut.Hero.Equipment.JadeBots.GetJadeBotSkinsByPage(0, pageSize);
+        var (actual, context) =
+            await sut.Hero.Equipment.JadeBots.GetJadeBotSkinsByPage(0, pageSize);
 
-        Assert.Equal(pageSize, actual.Count);
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);
-        Assert.Equal(context.ResultCount, pageSize);
-        Assert.All(
-            actual,
-            entry =>
-            {
-                entry.Has_id();
-                entry.Has_name();
-                entry.Has_description();
-                entry.Has_unlock_item();
-            }
-        );
+        Assert.Equal(pageSize, context.ResultCount);
+        Assert.True(context.PageTotal > 0);
+        Assert.True(context.ResultTotal > 0);
+        Assert.Equal(pageSize, actual.Count);
+        Assert.All(actual, Assert.NotNull);
     }
 }

@@ -16,7 +16,7 @@ public class Currencies
             actual,
             currency =>
             {
-                currency.Id_is_positive();
+                Assert.True(currency.Id >= 1);
                 if (currency.Id == 74)
                 {
                     // Unknown currency
@@ -25,12 +25,12 @@ public class Currencies
                 }
                 else
                 {
-                    currency.Name_is_not_empty();
-                    currency.Description_is_not_empty();
+                    Assert.NotEmpty(currency.Name);
+                    Assert.NotEmpty(currency.Description);
                 }
 
-                currency.Order_is_positive();
-                currency.Icon_is_not_empty();
+                Assert.InRange(currency.Order, 1, 1000);
+                Assert.NotEmpty(currency.IconHref);
             }
         );
     }

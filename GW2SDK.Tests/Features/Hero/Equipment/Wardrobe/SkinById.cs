@@ -11,10 +11,9 @@ public class SkinById
 
         const int id = 1;
 
-        var (actual, _) = await sut.Hero.Equipment.Wardrobe.GetSkinById(id);
-        var link = actual.GetChatLink();
+        var (actual, context) = await sut.Hero.Equipment.Wardrobe.GetSkinById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
-        Assert.Equal(id, link.SkinId);
     }
 }

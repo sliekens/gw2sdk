@@ -10,8 +10,10 @@ public class SellOrders
         var accessToken = Composer.Resolve<ApiKey>();
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (offers, _) = await sut.Commerce.GetSellOrders(0, 200, accessToken.Key);
+        var (offers, context) = await sut.Commerce.GetSellOrders(0, 200, accessToken.Key);
 
+        // Step through with debugger to see if the values reflect your in-game transactions
+        Assert.NotNull(context);
         Assert.NotNull(offers);
     }
 }

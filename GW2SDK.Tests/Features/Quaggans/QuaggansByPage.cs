@@ -12,17 +12,12 @@ public class QuaggansByPage
         const int pageSize = 3;
         var (actual, context) = await sut.Quaggans.GetQuaggansByPage(0, pageSize);
 
-        Assert.Equal(pageSize, actual.Count);
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);
-        Assert.Equal(context.ResultCount, pageSize);
-        Assert.All(
-            actual,
-            entry =>
-            {
-                entry.Id_is_not_empty();
-                entry.Quaggan_has_image();
-            }
-        );
+        Assert.Equal(pageSize, context.ResultCount);
+        Assert.True(context.PageTotal > 0);
+        Assert.True(context.ResultTotal > 0);
+        Assert.Equal(pageSize, actual.Count);
+        Assert.All(actual, Assert.NotNull);
     }
 }

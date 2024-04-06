@@ -11,8 +11,8 @@ public class ColorsIndex
 
         var (actual, context) = await sut.Hero.Equipment.Dyes.GetColorsIndex();
 
-        Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
+        Assert.NotEmpty(actual);
     }
 }

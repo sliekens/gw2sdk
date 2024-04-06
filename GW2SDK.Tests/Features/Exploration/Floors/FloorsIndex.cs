@@ -13,8 +13,8 @@ public class FloorsIndex
 
         var (actual, context) = await sut.Exploration.GetFloorsIndex(continentId);
 
-        Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
+        Assert.NotEmpty(actual);
     }
 }

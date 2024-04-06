@@ -18,12 +18,13 @@ public class Finishers
             actual,
             entry =>
             {
-                entry.Has_id();
-                entry.Has_unlock_details();
-                entry.Has_unlock_items();
-                entry.Has_order();
-                entry.Has_icon();
-                entry.Has_name();
+                Assert.True(entry.Id > 0);
+                Assert.NotNull(entry.LockedText);
+                Assert.NotNull(entry.UnlockItemIds);
+                Assert.All(entry.UnlockItemIds, id => Assert.True(id > 0));
+                Assert.True(entry.Order >= 0);
+                Assert.NotEmpty(entry.IconHref);
+                Assert.NotEmpty(entry.Name);
             }
         );
     }

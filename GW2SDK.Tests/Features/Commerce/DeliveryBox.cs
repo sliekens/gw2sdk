@@ -10,9 +10,10 @@ public class DeliveryBox
         var accessToken = Composer.Resolve<ApiKey>();
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (deliveryBox, _) = await sut.Commerce.GetDeliveryBox(accessToken.Key);
+        var (deliveryBox, context) = await sut.Commerce.GetDeliveryBox(accessToken.Key);
 
         // Step through with debugger to see if the values reflect your in-game delivery box
+        Assert.NotNull(context);
         Assert.NotNull(deliveryBox);
     }
 }

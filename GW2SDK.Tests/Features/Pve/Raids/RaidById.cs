@@ -11,8 +11,9 @@ public class RaidById
 
         const string id = "forsaken_thicket";
 
-        var (actual, _) = await sut.Pve.Raids.GetRaidById(id);
+        var (actual, context) = await sut.Pve.Raids.GetRaidById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }
 }

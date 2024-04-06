@@ -9,17 +9,15 @@ public class NodesByPage
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Pve.Home.GetNodesByPage(0, 3);
+        const int pageSize = 3;
+        var (actual, context) = await sut.Pve.Home.GetNodesByPage(0, pageSize);
 
-        Assert.Equal(3, actual.Count);
-        Assert.Equal(3, context.PageSize);
-        Assert.All(
-            actual,
-            node =>
-            {
-                Assert.NotNull(node);
-                Assert.NotEmpty(node.Id);
-            }
-        );
+        Assert.NotNull(context.Links);
+        Assert.Equal(pageSize, context.PageSize);
+        Assert.Equal(pageSize, context.ResultCount);
+        Assert.True(context.PageTotal > 0);
+        Assert.True(context.ResultTotal > 0);
+        Assert.Equal(pageSize, actual.Count);
+        Assert.All(actual, Assert.NotNull);
     }
 }

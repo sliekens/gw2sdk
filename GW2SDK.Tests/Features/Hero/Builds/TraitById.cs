@@ -11,8 +11,9 @@ public class TraitById
 
         const int id = 214;
 
-        var (actual, _) = await sut.Hero.Builds.GetTraitById(id);
+        var (actual, context) = await sut.Hero.Builds.GetTraitById(id);
 
+        Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }
 }

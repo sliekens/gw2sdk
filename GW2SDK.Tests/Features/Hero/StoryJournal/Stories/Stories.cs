@@ -18,7 +18,7 @@ public class Stories
             actual,
             entry =>
             {
-                entry.Has_id();
+                Assert.True(entry.Id > 0);
             }
         );
     }
