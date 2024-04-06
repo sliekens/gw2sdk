@@ -5,7 +5,7 @@
 public enum SuperAdventureBoxMode
 {
     /// <summary>The easiest difficulty mode.</summary>
-    Infantile = 1,
+    Exploration = 1,
 
     /// <summary>The normal difficulty mode.</summary>
     Normal,
