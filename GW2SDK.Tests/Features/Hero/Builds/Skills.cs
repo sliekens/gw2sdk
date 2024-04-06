@@ -1,7 +1,9 @@
 ﻿using GuildWars2.Hero;
 using GuildWars2.Hero.Builds;
+using GuildWars2.Hero.Builds.Facts;
 using GuildWars2.Hero.Builds.Skills;
 using GuildWars2.Tests.TestInfrastructure;
+using Range = GuildWars2.Hero.Builds.Facts.Range;
 
 namespace GuildWars2.Tests.Features.Hero.Builds;
 
@@ -205,6 +207,190 @@ public class Skills
                     Assert.NotNull(skill.Name);
                     Assert.NotNull(skill.Description);
                     Assert.NotNull(skill.IconHref);
+                }
+
+                if (skill.Facts is not null)
+                {
+                    Assert.All(
+                        skill.Facts,
+                        fact =>
+                        {
+                            Assert.NotNull(fact.Text);
+                            Assert.NotEmpty(fact.IconHref);
+
+                            switch (fact)
+                            {
+                                case AttributeAdjustment attributeAdjustment:
+                                    if (attributeAdjustment.Target.HasValue)
+                                    {
+                                        Assert.True(attributeAdjustment.Target.Value.IsDefined());
+                                    }
+
+                                    if (attributeAdjustment.Value.HasValue)
+                                    {
+                                        Assert.True(attributeAdjustment.Value.Value > 0);
+                                    }
+
+                                    if (attributeAdjustment.HitCount.HasValue)
+                                    {
+                                        Assert.True(attributeAdjustment.HitCount.Value > 0);
+                                    }
+
+                                    break;
+                                case AttributeConversion attributeConversion:
+                                    Assert.True(attributeConversion.Percent > 0);
+                                    Assert.True(attributeConversion.Source.IsDefined());
+                                    Assert.True(attributeConversion.Target.IsDefined());
+                                    Assert.NotEqual(
+                                        attributeConversion.Source,
+                                        attributeConversion.Target
+                                    );
+                                    break;
+                                case Buff buff:
+                                    Assert.NotEmpty(buff.Status);
+                                    Assert.NotNull(buff.Description);
+
+                                    if (buff.ApplyCount.HasValue)
+                                    {
+                                        Assert.True(buff.ApplyCount.Value >= 0);
+                                    }
+
+                                    if (buff.Duration.HasValue)
+                                    {
+                                        Assert.True(buff.Duration.Value >= TimeSpan.Zero);
+                                    }
+
+                                    break;
+                                case ComboField comboField:
+                                    Assert.True(comboField.Field.IsDefined());
+                                    break;
+                                case ComboFinisher comboFinisher:
+                                    Assert.True(comboFinisher.Percent > 0);
+                                    Assert.True(comboFinisher.FinisherName.IsDefined());
+                                    break;
+                                case Damage damage:
+                                    Assert.True(damage.HitCount > 0);
+                                    Assert.True(damage.DamageMultiplier > 0);
+                                    break;
+                                case Distance distance:
+                                    Assert.True(distance.Length >= 0);
+                                    break;
+                                case Duration duration:
+                                    Assert.True(duration.Length > TimeSpan.Zero);
+                                    break;
+                                case HealingAdjust adjustment:
+                                    Assert.True(adjustment.HitCount > 0);
+                                    break;
+                                case Number number:
+                                    Assert.True(number.Value >= 0);
+                                    break;
+                                case Radius radius:
+                                    Assert.True(radius.Distance > 0);
+                                    break;
+                                case Range range:
+                                    Assert.True(range.Distance > 0);
+                                    break;
+                                case Recharge recharge:
+                                    Assert.True(recharge.Duration > TimeSpan.Zero);
+                                    break;
+                                case Time time:
+                                    Assert.True(time.Duration >= TimeSpan.Zero);
+                                    break;
+                            }
+                        }
+                    );
+                }
+
+                if (skill.TraitedFacts is not null)
+                {
+                    Assert.All(
+                        skill.TraitedFacts,
+                        fact =>
+                        {
+                            Assert.True(fact.RequiresTrait > 0);
+                            Assert.NotNull(fact.Fact.Text);
+                            Assert.NotEmpty(fact.Fact.IconHref);
+                            switch (fact.Fact)
+                            {
+                                case AttributeAdjustment attributeAdjustment:
+                                    if (attributeAdjustment.Target.HasValue)
+                                    {
+                                        Assert.True(attributeAdjustment.Target.Value.IsDefined());
+                                    }
+
+                                    if (attributeAdjustment.Value.HasValue)
+                                    {
+                                        Assert.True(attributeAdjustment.Value.Value > 0);
+                                    }
+
+                                    if (attributeAdjustment.HitCount.HasValue)
+                                    {
+                                        Assert.True(attributeAdjustment.HitCount.Value > 0);
+                                    }
+
+                                    break;
+                                case AttributeConversion attributeConversion:
+                                    Assert.True(attributeConversion.Percent > 0);
+                                    Assert.True(attributeConversion.Source.IsDefined());
+                                    Assert.True(attributeConversion.Target.IsDefined());
+                                    Assert.NotEqual(
+                                        attributeConversion.Source,
+                                        attributeConversion.Target
+                                    );
+                                    break;
+                                case Buff buff:
+                                    Assert.NotNull(buff.Status);
+                                    Assert.NotNull(buff.Description);
+
+                                    if (buff.ApplyCount.HasValue)
+                                    {
+                                        Assert.True(buff.ApplyCount.Value >= 0);
+                                    }
+
+                                    if (buff.Duration.HasValue)
+                                    {
+                                        Assert.True(buff.Duration.Value >= TimeSpan.Zero);
+                                    }
+
+                                    break;
+                                case ComboField comboField:
+                                    Assert.True(comboField.Field.IsDefined());
+                                    break;
+                                case ComboFinisher comboFinisher:
+                                    Assert.True(comboFinisher.Percent > 0);
+                                    Assert.True(comboFinisher.FinisherName.IsDefined());
+                                    break;
+                                case Damage damage:
+                                    Assert.True(damage.HitCount > 0);
+                                    Assert.True(damage.DamageMultiplier > 0);
+                                    break;
+                                case Distance distance:
+                                    Assert.True(distance.Length >= 0);
+                                    break;
+                                case Duration duration:
+                                    Assert.True(duration.Length > TimeSpan.Zero);
+                                    break;
+                                case HealingAdjust adjustment:
+                                    Assert.True(adjustment.HitCount > 0);
+                                    break;
+                                case Number number:
+                                    Assert.True(number.Value >= 0);
+                                    break;
+                                case Radius radius:
+                                    Assert.True(radius.Distance > 0);
+                                    break;
+                                case Range range:
+                                    Assert.True(range.Distance > 0);
+                                    break;
+                                case Recharge recharge:
+                                    Assert.True(recharge.Duration > TimeSpan.Zero);
+                                    break;
+                                case Time time:
+                                    Assert.True(time.Duration >= TimeSpan.Zero);
+                                    break;
+                            }
+                        }
+                    );
                 }
             }
         );
