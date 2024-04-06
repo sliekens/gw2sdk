@@ -2,7 +2,7 @@
 
 /// <summary>Information about a skill belonging to a profession mechanic.</summary>
 [PublicAPI]
-public sealed record ProfessionSkill : Skill
+public sealed record ProfessionSkill : ActionSkill
 {
     /// <summary>Used for Elementalist skills to indicate which attunement this skill is associated with.</summary>
     public required Extensible<Attunement>? Attunement { get; init; }

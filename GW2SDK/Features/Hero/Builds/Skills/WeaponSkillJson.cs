@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using GuildWars2.Hero.Training;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Builds.Skills;
@@ -16,9 +17,9 @@ internal static class WeaponSkillJson
         OptionalMember traitedFacts = "traited_facts";
         RequiredMember description = "description";
         OptionalMember icon = "icon";
-        NullableMember weaponType = "weapon_type";
-        OptionalMember professions = "professions";
-        NullableMember slot = "slot";
+        RequiredMember weaponType = "weapon_type";
+        RequiredMember professions = "professions";
+        RequiredMember slot = "slot";
         NullableMember flipSkill = "flip_skill";
         NullableMember nextChain = "next_chain";
         NullableMember prevChain = "prev_chain";
@@ -137,6 +138,9 @@ internal static class WeaponSkillJson
             }
         }
 
+        var professionRestrictions = professions.Map(
+            values => values.GetList(value => value.GetEnum<ProfessionName>())
+        );
         return new WeaponSkill
         {
             Id = id.Map(value => value.GetInt32()),
@@ -154,7 +158,9 @@ internal static class WeaponSkillJson
             IconHref = icon.Map(value => value.GetString()) ?? "",
             WeaponType = weaponType.Map(value => value.GetWeaponType(missingMemberBehavior)),
             Professions =
-                professions.Map(values => values.GetList(value => value.GetEnum<ProfessionName>())),
+                professionRestrictions.Count > 0
+                    ? professionRestrictions
+                    : Profession.AllProfessions2,
             Attunement = attunement.Map(value => value.GetEnum<Attunement>()),
             DualAttunement = dualAttunement.Map(value => value.GetEnum<Attunement>()),
             Slot = slot.Map(value => value.GetEnum<SkillSlot>()),
@@ -167,7 +173,8 @@ internal static class WeaponSkillJson
             Categories =
                 categories.Map(
                     values => values.GetList(value => value.GetEnum<SkillCategoryName>())
-                ),
+                )
+                ?? Empty.List<Extensible<SkillCategoryName>>(),
             Cost = cost.Map(value => value.GetInt32()),
             Offhand = offhand.Map(value => value.GetEnum<Offhand>()),
             Initiative = initiative.Map(value => value.GetInt32())

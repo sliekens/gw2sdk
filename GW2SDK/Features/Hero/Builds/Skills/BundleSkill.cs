@@ -2,4 +2,4 @@
 
 /// <summary>A bundle skill.</summary>
 [PublicAPI]
-public sealed record BundleSkill : Skill;
+public sealed record BundleSkill : ActionSkill;

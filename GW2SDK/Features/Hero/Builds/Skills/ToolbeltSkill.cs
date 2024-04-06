@@ -2,4 +2,4 @@
 
 /// <summary>An engineer's toolbelt skill.</summary>
 [PublicAPI]
-public sealed record ToolbeltSkill : Skill;
+public sealed record ToolbeltSkill : ActionSkill;

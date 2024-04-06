@@ -22,6 +22,21 @@ public sealed record Profession
         Warrior
     }.AsReadOnly();
 
+    /// <summary>The names of all professions.</summary>
+    public static readonly IReadOnlyList<Extensible<ProfessionName>> AllProfessions2 =
+        new List<Extensible<ProfessionName>>
+        {
+            Elementalist,
+            Engineer,
+            Guardian,
+            Mesmer,
+            Necromancer,
+            Ranger,
+            Revenant,
+            Thief,
+            Warrior
+        }.AsReadOnly();
+
     /// <summary>The profession ID.</summary>
     public required Extensible<ProfessionName> Id { get; init; }
 

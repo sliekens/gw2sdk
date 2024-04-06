@@ -42,14 +42,7 @@ internal static class SkillJson
         OptionalMember traitedFacts = "traited_facts";
         RequiredMember description = "description";
         OptionalMember icon = "icon";
-        NullableMember weaponType = "weapon_type";
-        OptionalMember professions = "professions";
-        NullableMember slot = "slot";
-        NullableMember flipSkill = "flip_skill";
-        NullableMember nextChain = "next_chain";
-        NullableMember prevChain = "prev_chain";
         RequiredMember flags = "flags";
-        NullableMember specialization = "specialization";
         RequiredMember chatLink = "chat_link";
         OptionalMember categories = "categories";
 
@@ -84,37 +77,9 @@ internal static class SkillJson
             {
                 icon = member;
             }
-            else if (weaponType.Match(member))
-            {
-                weaponType = member;
-            }
-            else if (professions.Match(member))
-            {
-                professions = member;
-            }
-            else if (slot.Match(member))
-            {
-                slot = member;
-            }
-            else if (flipSkill.Match(member))
-            {
-                flipSkill = member;
-            }
-            else if (nextChain.Match(member))
-            {
-                nextChain = member;
-            }
-            else if (prevChain.Match(member))
-            {
-                prevChain = member;
-            }
             else if (flags.Match(member))
             {
                 flags = member;
-            }
-            else if (specialization.Match(member))
-            {
-                specialization = member;
             }
             else if (id.Match(member))
             {
@@ -149,19 +114,12 @@ internal static class SkillJson
                 ),
             Description = description.Map(value => value.GetStringRequired()),
             IconHref = icon.Map(value => value.GetString()) ?? "",
-            WeaponType = weaponType.Map(value => value.GetWeaponType(missingMemberBehavior)),
-            Professions =
-                professions.Map(values => values.GetList(value => value.GetEnum<ProfessionName>())),
-            Slot = slot.Map(value => value.GetEnum<SkillSlot>()),
-            FlipSkillId = flipSkill.Map(value => value.GetInt32()),
-            NextSkillId = nextChain.Map(value => value.GetInt32()),
-            PreviousSkillId = prevChain.Map(value => value.GetInt32()),
             SkillFlags = flags.Map(value => value.GetSkillFlags()),
-            SpecializationId = specialization.Map(value => value.GetInt32()),
             ChatLink = chatLink.Map(value => value.GetStringRequired()),
             Categories = categories.Map(
-                values => values.GetList(value => value.GetEnum<SkillCategoryName>())
-            )
+                    values => values.GetList(value => value.GetEnum<SkillCategoryName>())
+                )
+                ?? Empty.List<Extensible<SkillCategoryName>>()
         };
     }
 }

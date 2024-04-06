@@ -2,7 +2,7 @@
 
 /// <summary>A weapon skill.</summary>
 [PublicAPI]
-public sealed record WeaponSkill : Skill
+public sealed record WeaponSkill : ActionSkill
 {
     /// <summary>Used for Elementalist skills to indicate which attunement this skill is associated with.</summary>
     public required Extensible<Attunement>? Attunement { get; init; }

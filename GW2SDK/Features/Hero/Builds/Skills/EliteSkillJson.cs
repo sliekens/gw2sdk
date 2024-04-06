@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using GuildWars2.Hero.Training;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Builds.Skills;
@@ -16,9 +17,9 @@ internal static class EliteSkillJson
         OptionalMember traitedFacts = "traited_facts";
         RequiredMember description = "description";
         OptionalMember icon = "icon";
-        NullableMember weaponType = "weapon_type";
-        OptionalMember professions = "professions";
-        NullableMember slot = "slot";
+        RequiredMember weaponType = "weapon_type";
+        RequiredMember professions = "professions";
+        RequiredMember slot = "slot";
         NullableMember flipSkill = "flip_skill";
         NullableMember nextChain = "next_chain";
         NullableMember prevChain = "prev_chain";
@@ -138,6 +139,9 @@ internal static class EliteSkillJson
             }
         }
 
+        var professionRestrictions = professions.Map(
+            values => values.GetList(value => value.GetEnum<ProfessionName>())
+        );
         return new EliteSkill
         {
             Id = id.Map(value => value.GetInt32()),
@@ -155,7 +159,9 @@ internal static class EliteSkillJson
             IconHref = icon.Map(value => value.GetString()) ?? "",
             WeaponType = weaponType.Map(value => value.GetWeaponType(missingMemberBehavior)),
             Professions =
-                professions.Map(values => values.GetList(value => value.GetEnum<ProfessionName>())),
+                professionRestrictions.Count > 0
+                    ? professionRestrictions
+                    : Profession.AllProfessions2,
             Slot = slot.Map(value => value.GetEnum<SkillSlot>()),
             FlipSkillId = flipSkill.Map(value => value.GetInt32()),
             NextSkillId = nextChain.Map(value => value.GetInt32()),
@@ -168,7 +174,8 @@ internal static class EliteSkillJson
             Categories =
                 categories.Map(
                     values => values.GetList(value => value.GetEnum<SkillCategoryName>())
-                ),
+                )
+                ?? Empty.List<Extensible<SkillCategoryName>>(),
             SubskillIds =
                 subskills.Map(
                     values => values.GetList(value => value.GetSubskill(missingMemberBehavior))
