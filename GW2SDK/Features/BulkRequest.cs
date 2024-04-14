@@ -8,6 +8,6 @@
 /// <returns>The collection of values found.</returns>
 [PublicAPI]
 public delegate Task<IReadOnlyCollection<TValue>> BulkRequest<in TKey, TValue>(
-    IReadOnlyCollection<TKey> keys,
+    IEnumerable<TKey> keys,
     CancellationToken cancellationToken = default
 );

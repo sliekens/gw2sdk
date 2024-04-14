@@ -94,13 +94,13 @@ public sealed class SkiffsClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<SkiffSkin> Value, MessageContext Context)> GetSkiffSkinsByIds(
-        IReadOnlyCollection<int> skiffSkinIds,
+        IEnumerable<int> skiffSkinIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        SkiffSkinsByIdsRequest request = new(skiffSkinIds)
+        SkiffSkinsByIdsRequest request = new(skiffSkinIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior

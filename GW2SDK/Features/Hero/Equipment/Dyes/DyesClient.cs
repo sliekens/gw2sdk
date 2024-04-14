@@ -94,13 +94,13 @@ public sealed class DyesClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<DyeColor> Value, MessageContext Context)> GetColorsByIds(
-        IReadOnlyCollection<int> colorIds,
+        IEnumerable<int> colorIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        ColorsByIdsRequest request = new(colorIds)
+        ColorsByIdsRequest request = new(colorIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior

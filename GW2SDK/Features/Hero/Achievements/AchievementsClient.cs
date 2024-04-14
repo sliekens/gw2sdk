@@ -80,13 +80,13 @@ public sealed class AchievementsClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Achievement> Value, MessageContext Context)> GetAchievementsByIds(
-        IReadOnlyCollection<int> achievementIds,
+        IEnumerable<int> achievementIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        AchievementsByIdsRequest request = new(achievementIds)
+        AchievementsByIdsRequest request = new(achievementIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -129,7 +129,7 @@ public sealed class AchievementsClient
     /// <param name="cancellationToken">A token to cancel the request(s).</param>
     /// <returns>A task that represents the API request(s).</returns>
     public IAsyncEnumerable<(Achievement Value, MessageContext Context)> GetAchievementsBulk(
-        IReadOnlyCollection<int> achievementIds,
+        IEnumerable<int> achievementIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,
@@ -149,7 +149,7 @@ public sealed class AchievementsClient
 
         // ReSharper disable once VariableHidesOuterVariable (intended, believe it or not)
         async Task<IReadOnlyCollection<(Achievement, MessageContext)>> GetChunk(
-            IReadOnlyCollection<int> chunk,
+            IEnumerable<int> chunk,
             CancellationToken cancellationToken
         )
         {
@@ -232,13 +232,13 @@ public sealed class AchievementsClient
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<AccountAchievement> Value, MessageContext Context)>
         GetAccountAchievementsByIds(
-            IReadOnlyCollection<int> achievementIds,
+            IEnumerable<int> achievementIds,
             string? accessToken,
             MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
     {
-        AccountAchievementsByIdsRequest request = new(achievementIds)
+        AccountAchievementsByIdsRequest request = new(achievementIds.ToList())
         {
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
@@ -355,13 +355,13 @@ public sealed class AchievementsClient
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<AchievementCategory> Value, MessageContext Context)>
         GetAchievementCategoriesByIds(
-            IReadOnlyCollection<int> achievementCategoryIds,
+            IEnumerable<int> achievementCategoryIds,
             Language? language = default,
             MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
     {
-        AchievementCategoriesByIdsRequest request = new(achievementCategoryIds)
+        AchievementCategoriesByIdsRequest request = new(achievementCategoryIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -457,13 +457,13 @@ public sealed class AchievementsClient
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<AchievementGroup> Value, MessageContext Context)>
         GetAchievementGroupsByIds(
-            IReadOnlyCollection<string> achievementGroupIds,
+            IEnumerable<string> achievementGroupIds,
             Language? language = default,
             MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
     {
-        AchievementGroupsByIdsRequest request = new(achievementGroupIds)
+        AchievementGroupsByIdsRequest request = new(achievementGroupIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -558,13 +558,13 @@ public sealed class AchievementsClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Title> Value, MessageContext Context)> GetTitlesByIds(
-        IReadOnlyCollection<int> titleIds,
+        IEnumerable<int> titleIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        TitlesByIdsRequest request = new(titleIds)
+        TitlesByIdsRequest request = new(titleIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior

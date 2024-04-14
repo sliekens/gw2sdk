@@ -24,7 +24,7 @@ public class JsonItemService(HttpClient http)
     }
 
     public IAsyncEnumerable<(int, string)> GetJsonItemsByIds(
-        IReadOnlyCollection<int> ids,
+        IEnumerable<int> ids,
         IProgress<BulkProgress>? progress = default,
         CancellationToken cancellationToken = default
     )
@@ -37,11 +37,11 @@ public class JsonItemService(HttpClient http)
         );
 
         async Task<IReadOnlyCollection<(int, string)>> GetChunk(
-            IReadOnlyCollection<int> chunk,
+            IEnumerable<int> chunk,
             CancellationToken cancellationToken
         )
         {
-            var request = new BulkRequest("/v2/items") { Ids = chunk };
+            var request = new BulkRequest("/v2/items") { Ids = chunk.ToList() };
             var json = await request.SendAsync(http, cancellationToken);
             return json.Indent(false)
                 .RootElement.EnumerateArray()

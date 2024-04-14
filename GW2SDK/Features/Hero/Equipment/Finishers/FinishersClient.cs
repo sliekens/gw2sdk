@@ -100,13 +100,13 @@ public sealed class FinishersClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Finisher> Value, MessageContext Context)> GetFinishersByIds(
-        IReadOnlyCollection<int> finisherIds,
+        IEnumerable<int> finisherIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        FinishersByIdsRequest request = new(finisherIds)
+        FinishersByIdsRequest request = new(finisherIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior

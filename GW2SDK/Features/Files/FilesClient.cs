@@ -61,12 +61,12 @@ public sealed class FilesClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Asset> Value, MessageContext Context)> GetFilesByIds(
-        IReadOnlyCollection<string> fileIds,
+        IEnumerable<string> fileIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        FilesByIdsRequest request = new(fileIds) { MissingMemberBehavior = missingMemberBehavior };
+        FilesByIdsRequest request = new(fileIds.ToList()) { MissingMemberBehavior = missingMemberBehavior };
         return request.SendAsync(httpClient, cancellationToken);
     }
 

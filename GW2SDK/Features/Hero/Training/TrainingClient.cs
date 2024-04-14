@@ -100,13 +100,13 @@ public sealed class TrainingClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Profession> Value, MessageContext Context)> GetProfessionsByNames(
-        IReadOnlyCollection<ProfessionName> professionNames,
+        IEnumerable<ProfessionName> professionNames,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        ProfessionsByNamesRequest request = new(professionNames)
+        ProfessionsByNamesRequest request = new(professionNames.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior

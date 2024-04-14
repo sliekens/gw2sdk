@@ -207,12 +207,12 @@ public sealed class EquipmentTemplatesClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<LegendaryItem> Value, MessageContext Context)> GetLegendaryItemsByIds(
-        IReadOnlyCollection<int> legendaryItemIds,
+        IEnumerable<int> legendaryItemIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        LegendaryItemsByIdsRequest request = new(legendaryItemIds)
+        LegendaryItemsByIdsRequest request = new(legendaryItemIds.ToList())
         {
             MissingMemberBehavior = missingMemberBehavior
         };

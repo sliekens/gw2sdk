@@ -74,13 +74,13 @@ public sealed class RacesClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Race> Value, MessageContext Context)> GetRacesByNames(
-        IReadOnlyCollection<RaceName> raceNames,
+        IEnumerable<RaceName> raceNames,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        RacesByNamesRequest request = new(raceNames)
+        RacesByNamesRequest request = new(raceNames.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior

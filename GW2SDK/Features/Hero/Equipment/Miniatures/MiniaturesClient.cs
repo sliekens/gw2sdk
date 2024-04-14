@@ -94,13 +94,13 @@ public sealed class MiniaturesClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Miniature> Value, MessageContext Context)> GetMiniaturesByIds(
-        IReadOnlyCollection<int> miniatureIds,
+        IEnumerable<int> miniatureIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MiniaturesByIdsRequest request = new(miniatureIds)
+        MiniaturesByIdsRequest request = new(miniatureIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior

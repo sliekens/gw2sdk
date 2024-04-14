@@ -203,13 +203,13 @@ public sealed class WizardsVaultClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<AstralReward> Value, MessageContext Context)> GetAstralRewardsByIds(
-        IReadOnlyCollection<int> astralRewardIds,
+        IEnumerable<int> astralRewardIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        AstralRewardsByIdsRequest request = new(astralRewardIds)
+        AstralRewardsByIdsRequest request = new(astralRewardIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -303,13 +303,13 @@ public sealed class WizardsVaultClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Objective> Value, MessageContext Context)> GetObjectivesByIds(
-        IReadOnlyCollection<int> objectiveIds,
+        IEnumerable<int> objectiveIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        ObjectivesByIdsRequest request = new(objectiveIds)
+        ObjectivesByIdsRequest request = new(objectiveIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior

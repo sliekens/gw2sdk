@@ -99,12 +99,12 @@ public sealed class RecipesClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Recipe> Value, MessageContext Context)> GetRecipesByIds(
-        IReadOnlyCollection<int> recipeIds,
+        IEnumerable<int> recipeIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        RecipesByIdsRequest request = new(recipeIds)
+        RecipesByIdsRequest request = new(recipeIds.ToList())
         {
             MissingMemberBehavior = missingMemberBehavior
         };
@@ -142,7 +142,7 @@ public sealed class RecipesClient
     /// <param name="cancellationToken">A token to cancel the request(s).</param>
     /// <returns>A task that represents the API request(s).</returns>
     public IAsyncEnumerable<(Recipe Value, MessageContext Context)> GetRecipesBulk(
-        IReadOnlyCollection<int> recipeIds,
+        IEnumerable<int> recipeIds,
         MissingMemberBehavior missingMemberBehavior = default,
         int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,
         int chunkSize = BulkQuery.DefaultChunkSize,
@@ -161,7 +161,7 @@ public sealed class RecipesClient
 
         // ReSharper disable once VariableHidesOuterVariable (intended, believe it or not)
         async Task<IReadOnlyCollection<(Recipe, MessageContext)>> GetChunk(
-            IReadOnlyCollection<int> chunk,
+            IEnumerable<int> chunk,
             CancellationToken cancellationToken
         )
         {

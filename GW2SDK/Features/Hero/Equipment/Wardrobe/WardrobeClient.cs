@@ -77,13 +77,13 @@ public sealed class WardrobeClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<EquipmentSkin> Value, MessageContext Context)> GetSkinsByIds(
-        IReadOnlyCollection<int> skinIds,
+        IEnumerable<int> skinIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        SkinsByIdsRequest request = new(skinIds)
+        SkinsByIdsRequest request = new(skinIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -126,7 +126,7 @@ public sealed class WardrobeClient
     /// <param name="cancellationToken">A token to cancel the request(s).</param>
     /// <returns>A task that represents the API request(s).</returns>
     public IAsyncEnumerable<(EquipmentSkin Value, MessageContext Context)> GetSkinsBulk(
-        IReadOnlyCollection<int> skinIds,
+        IEnumerable<int> skinIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,
@@ -146,7 +146,7 @@ public sealed class WardrobeClient
 
         // ReSharper disable once VariableHidesOuterVariable (intended, believe it or not)
         async Task<IReadOnlyCollection<(EquipmentSkin, MessageContext)>> GetChunk(
-            IReadOnlyCollection<int> chunk,
+            IEnumerable<int> chunk,
             CancellationToken cancellationToken
         )
         {

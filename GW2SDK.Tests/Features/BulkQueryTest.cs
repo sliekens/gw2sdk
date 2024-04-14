@@ -11,7 +11,7 @@ public class BulkQueryTest
         CancellationTokenSource cancellationTokenSource = new();
 
         static Task<IReadOnlyCollection<StubRecord>> GetChunk(
-            IReadOnlyCollection<int> chunk,
+            IEnumerable<int> chunk,
             CancellationToken cancellationToken
         )
         {
@@ -56,7 +56,7 @@ public class BulkQueryTest
         var index = Enumerable.Range(1, 1000).ToHashSet();
 
         Task<IReadOnlyCollection<StubRecord>> GetChunk(
-            IReadOnlyCollection<int> chunk,
+            IEnumerable<int> chunk,
             CancellationToken cancellationToken
         )
         {
@@ -81,14 +81,15 @@ public class BulkQueryTest
         var index = Enumerable.Range(1, 100).ToList();
 
         Task<IReadOnlyCollection<StubRecord>> GetChunk(
-            IReadOnlyCollection<int> chunk,
+            IEnumerable<int> chunk,
             CancellationToken cancellationToken
         )
         {
             cancellationToken.ThrowIfCancellationRequested();
-            Assert.Equal(index, chunk);
+            var keys = chunk.ToList();
+            Assert.Equal(index, keys);
             IReadOnlyCollection<StubRecord>
-                result = chunk.Select(id => new StubRecord(id)).ToList();
+                result = keys.Select(id => new StubRecord(id)).ToList();
             return Task.FromResult(result);
         }
 

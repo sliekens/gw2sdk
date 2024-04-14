@@ -76,13 +76,13 @@ public sealed class WorldsClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<World> Value, MessageContext Context)> GetWorldsByIds(
-        IReadOnlyCollection<int> worldIds,
+        IEnumerable<int> worldIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        WorldsByIdsRequest request = new(worldIds)
+        WorldsByIdsRequest request = new(worldIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior

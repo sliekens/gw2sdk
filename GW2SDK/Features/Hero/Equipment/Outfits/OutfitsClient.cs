@@ -94,13 +94,13 @@ public sealed class OutfitsClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Outfit> Value, MessageContext Context)> GetOutfitsByIds(
-        IReadOnlyCollection<int> outfitIds,
+        IEnumerable<int> outfitIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        OutfitsByIdsRequest request = new(outfitIds)
+        OutfitsByIdsRequest request = new(outfitIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior

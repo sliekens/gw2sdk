@@ -102,12 +102,12 @@ public sealed class HomeClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Cat> Value, MessageContext Context)> GetCatsByIds(
-        IReadOnlyCollection<int> catIds,
+        IEnumerable<int> catIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        CatsByIdsRequest request = new(catIds) { MissingMemberBehavior = missingMemberBehavior };
+        CatsByIdsRequest request = new(catIds.ToList()) { MissingMemberBehavior = missingMemberBehavior };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -181,12 +181,12 @@ public sealed class HomeClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Node> Value, MessageContext Context)> GetNodesByIds(
-        IReadOnlyCollection<string> nodeIds,
+        IEnumerable<string> nodeIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        NodesByIdsRequest request = new(nodeIds) { MissingMemberBehavior = missingMemberBehavior };
+        NodesByIdsRequest request = new(nodeIds.ToList()) { MissingMemberBehavior = missingMemberBehavior };
         return request.SendAsync(httpClient, cancellationToken);
     }
 

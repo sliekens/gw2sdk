@@ -61,13 +61,13 @@ public sealed class ItemsClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Item> Value, MessageContext Context)> GetItemsByIds(
-        IReadOnlyCollection<int> itemIds,
+        IEnumerable<int> itemIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        ItemsByIdsRequest request = new(itemIds)
+        ItemsByIdsRequest request = new(itemIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -111,7 +111,7 @@ public sealed class ItemsClient
     /// <param name="cancellationToken">A token to cancel the request(s).</param>
     /// <returns>A task that represents the API request(s).</returns>
     public IAsyncEnumerable<(Item Value, MessageContext Context)> GetItemsBulk(
-        IReadOnlyCollection<int> itemIds,
+        IEnumerable<int> itemIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,
@@ -131,7 +131,7 @@ public sealed class ItemsClient
 
         // ReSharper disable once VariableHidesOuterVariable (intended, believe it or not)
         async Task<IReadOnlyCollection<(Item, MessageContext)>> GetChunk(
-            IReadOnlyCollection<int> chunk,
+            IEnumerable<int> chunk,
             CancellationToken cancellationToken
         )
         {
@@ -243,13 +243,13 @@ public sealed class ItemsClient
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<AttributeCombination> Value, MessageContext Context)>
         GetAttributeCombinationsByIds(
-            IReadOnlyCollection<int> attributeCombinationIds,
+            IEnumerable<int> attributeCombinationIds,
             Language? language = default,
             MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
     {
-        AttributeCombinationsByIdsRequest request = new(attributeCombinationIds)
+        AttributeCombinationsByIdsRequest request = new(attributeCombinationIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior

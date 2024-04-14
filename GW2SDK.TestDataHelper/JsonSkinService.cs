@@ -24,7 +24,7 @@ public class JsonSkinService(HttpClient http)
     }
 
     public IAsyncEnumerable<(int, string)> GetJsonSkinsByIds(
-        IReadOnlyCollection<int> ids,
+        IEnumerable<int> ids,
         IProgress<BulkProgress>? progress = default,
         CancellationToken cancellationToken = default
     )
@@ -37,11 +37,11 @@ public class JsonSkinService(HttpClient http)
         );
 
         async Task<IReadOnlyCollection<(int, string)>> GetChunk(
-            IReadOnlyCollection<int> chunk,
+            IEnumerable<int> chunk,
             CancellationToken cancellationToken
         )
         {
-            var request = new BulkRequest("/v2/skins") { Ids = chunk };
+            var request = new BulkRequest("/v2/skins") { Ids = chunk.ToList() };
             var json = await request.SendAsync(http, cancellationToken);
             return json.Indent(false)
                 .RootElement.EnumerateArray()

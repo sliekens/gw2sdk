@@ -74,13 +74,13 @@ public sealed class PetsClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Pet> Value, MessageContext Context)> GetPetsByIds(
-        IReadOnlyCollection<int> petIds,
+        IEnumerable<int> petIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        PetsByIdsRequest request = new(petIds)
+        PetsByIdsRequest request = new(petIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior

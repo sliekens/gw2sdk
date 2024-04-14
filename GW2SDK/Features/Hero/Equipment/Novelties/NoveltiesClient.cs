@@ -94,13 +94,13 @@ public sealed class NoveltiesClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Novelty> Value, MessageContext Context)> GetNoveltiesByIds(
-        IReadOnlyCollection<int> noveltyIds,
+        IEnumerable<int> noveltyIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        NoveltiesByIdsRequest request = new(noveltyIds)
+        NoveltiesByIdsRequest request = new(noveltyIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior

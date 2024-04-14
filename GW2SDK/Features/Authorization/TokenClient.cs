@@ -57,18 +57,18 @@ public sealed class TokenClient
     /// <returns>A task that represents the API request.</returns>
     public Task<(CreatedSubtoken Value, MessageContext Context)> CreateSubtoken(
         string accessToken,
-        IReadOnlyCollection<Permission>? permissions = null,
+        IEnumerable<Permission>? permissions = null,
         DateTimeOffset? absoluteExpirationDate = null,
-        IReadOnlyCollection<string>? allowedUrls = null,
+        IEnumerable<string>? allowedUrls = null,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
         CreateSubtokenRequest request = new(accessToken)
         {
-            Permissions = permissions,
+            Permissions = permissions?.ToList(),
             AbsoluteExpirationDate = absoluteExpirationDate,
-            AllowedUrls = allowedUrls,
+            AllowedUrls = allowedUrls?.ToList(),
             MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);

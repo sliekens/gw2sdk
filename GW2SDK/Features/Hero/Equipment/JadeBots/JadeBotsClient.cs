@@ -94,13 +94,13 @@ public sealed class JadeBotsClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<JadeBotSkin> Value, MessageContext Context)> GetJadeBotSkinsByIds(
-        IReadOnlyCollection<int> jadeBotSkinIds,
+        IEnumerable<int> jadeBotSkinIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JadeBotSkinsByIdsRequest request = new(jadeBotSkinIds)
+        JadeBotSkinsByIdsRequest request = new(jadeBotSkinIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior

@@ -64,13 +64,12 @@ public sealed class QuaggansClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Quaggan> Value, MessageContext Context)> GetQuaggansByIds(
-        IReadOnlyCollection<string> quagganIds,
+        IEnumerable<string> quagganIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        QuaggansByIdsRequest request =
-            new(quagganIds) { MissingMemberBehavior = missingMemberBehavior };
+        QuaggansByIdsRequest request = new(quagganIds.ToList()) { MissingMemberBehavior = missingMemberBehavior };
         return request.SendAsync(httpClient, cancellationToken);
     }
 

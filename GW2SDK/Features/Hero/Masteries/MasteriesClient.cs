@@ -125,13 +125,13 @@ public sealed class MasteriesClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<MasteryTrack> Value, MessageContext Context)> GetMasteryTracksByIds(
-        IReadOnlyCollection<int> masteryTrackIds,
+        IEnumerable<int> masteryTrackIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MasteriesByIdsRequest request = new(masteryTrackIds)
+        MasteriesByIdsRequest request = new(masteryTrackIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior

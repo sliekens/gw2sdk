@@ -134,13 +134,13 @@ public sealed class StoryJournalClient
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<BackgroundStoryQuestion> Value, MessageContext Context)>
         GetBackgroundStoryQuestionsByIds(
-            IReadOnlyCollection<int> questionIds,
+            IEnumerable<int> questionIds,
             Language? language = default,
             MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
     {
-        BackstoryQuestionsByIdsRequest request = new(questionIds)
+        BackstoryQuestionsByIdsRequest request = new(questionIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -237,13 +237,13 @@ public sealed class StoryJournalClient
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<BackgroundStoryAnswer> Value, MessageContext Context)>
         GetBackgroundStoryAnswersByIds(
-            IReadOnlyCollection<string> answerIds,
+            IEnumerable<string> answerIds,
             Language? language = default,
             MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
     {
-        BackstoryAnswersByIdsRequest request = new(answerIds)
+        BackstoryAnswersByIdsRequest request = new(answerIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -338,13 +338,13 @@ public sealed class StoryJournalClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Story> Value, MessageContext Context)> GetStoriesByIds(
-        IReadOnlyCollection<int> storyIds,
+        IEnumerable<int> storyIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        StoriesByIdsRequest request = new(storyIds)
+        StoriesByIdsRequest request = new(storyIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -438,13 +438,13 @@ public sealed class StoryJournalClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Storyline> Value, MessageContext Context)> GetStorylinesByIds(
-        IReadOnlyCollection<string> storylineIds,
+        IEnumerable<string> storylineIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        SeasonsByIdsRequest request = new(storylineIds)
+        SeasonsByIdsRequest request = new(storylineIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -538,13 +538,13 @@ public sealed class StoryJournalClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<StoryStep> Value, MessageContext Context)> GetStoryStepsByIds(
-        IReadOnlyCollection<int> storyStepIds,
+        IEnumerable<int> storyStepIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        QuestsByIdsRequest request = new(storyStepIds)
+        QuestsByIdsRequest request = new(storyStepIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior

@@ -71,12 +71,12 @@ public sealed class RaidsClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Raid> Value, MessageContext Context)> GetRaidsByIds(
-        IReadOnlyCollection<string> raidIds,
+        IEnumerable<string> raidIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        RaidsByIdsRequest request = new(raidIds) { MissingMemberBehavior = missingMemberBehavior };
+        RaidsByIdsRequest request = new(raidIds.ToList()) { MissingMemberBehavior = missingMemberBehavior };
         return request.SendAsync(httpClient, cancellationToken);
     }
 

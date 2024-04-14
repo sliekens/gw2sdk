@@ -71,12 +71,12 @@ public sealed class MapChestsClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<MapChest> Value, MessageContext Context)> GetMapChestsByIds(
-        IReadOnlyCollection<string> mapChestIds,
+        IEnumerable<string> mapChestIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MapChestsByIdsRequest request = new(mapChestIds)
+        MapChestsByIdsRequest request = new(mapChestIds.ToList())
         {
             MissingMemberBehavior = missingMemberBehavior
         };

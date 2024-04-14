@@ -222,13 +222,13 @@ public sealed class PvpClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Amulet> Value, MessageContext Context)> GetAmuletsByIds(
-        IReadOnlyCollection<int> amuletIds,
+        IEnumerable<int> amuletIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        AmuletsByIdsRequest request = new(amuletIds)
+        AmuletsByIdsRequest request = new(amuletIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -322,13 +322,13 @@ public sealed class PvpClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<MistChampion> Value, MessageContext Context)> GetMistChampionsByIds(
-        IReadOnlyCollection<string> mistChampionIds,
+        IEnumerable<string> mistChampionIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MistChampionsByIdsRequest request = new(mistChampionIds)
+        MistChampionsByIdsRequest request = new(mistChampionIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -422,13 +422,13 @@ public sealed class PvpClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Rank> Value, MessageContext Context)> GetRanksByIds(
-        IReadOnlyCollection<int> rankIds,
+        IEnumerable<int> rankIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        RanksByIdsRequest request = new(rankIds)
+        RanksByIdsRequest request = new(rankIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -522,13 +522,13 @@ public sealed class PvpClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Season> Value, MessageContext Context)> GetSeasonsByIds(
-        IReadOnlyCollection<string> seasonIds,
+        IEnumerable<string> seasonIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        SeasonsByIdsRequest request = new(seasonIds)
+        SeasonsByIdsRequest request = new(seasonIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -632,13 +632,13 @@ public sealed class PvpClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Game> Value, MessageContext Context)> GetGamesByIds(
-        IReadOnlyCollection<string> gameIds,
+        IEnumerable<string> gameIds,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        GamesByIdsRequest request = new(gameIds)
+        GamesByIdsRequest request = new(gameIds.ToList())
         {
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior

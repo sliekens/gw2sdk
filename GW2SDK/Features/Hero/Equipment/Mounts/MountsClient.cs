@@ -111,13 +111,13 @@ public sealed class MountsClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Mount> Value, MessageContext Context)> GetMountsByNames(
-        IReadOnlyCollection<MountName> mountNames,
+        IEnumerable<MountName> mountNames,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MountsByNamesRequest request = new(mountNames)
+        MountsByNamesRequest request = new(mountNames.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -211,13 +211,13 @@ public sealed class MountsClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<MountSkin> Value, MessageContext Context)> GetMountSkinsByIds(
-        IReadOnlyCollection<int> mountSkinIds,
+        IEnumerable<int> mountSkinIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MountSkinsByIdsRequest request = new(mountSkinIds)
+        MountSkinsByIdsRequest request = new(mountSkinIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior

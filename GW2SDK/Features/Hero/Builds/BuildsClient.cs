@@ -83,13 +83,13 @@ public sealed class BuildsClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(IReadOnlyList<Build> Value, MessageContext Context)> GetStoredBuilds(
-        IReadOnlyCollection<int> storageNumbers,
+        IEnumerable<int> storageNumbers,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        StoredBuildsByNumbersRequest request = new(storageNumbers)
+        StoredBuildsByNumbersRequest request = new(storageNumbers.ToList())
         {
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
@@ -250,13 +250,13 @@ public sealed class BuildsClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Skill> Value, MessageContext Context)> GetSkillsByIds(
-        IReadOnlyCollection<int> skillIds,
+        IEnumerable<int> skillIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        SkillsByIdsRequest request = new(skillIds)
+        SkillsByIdsRequest request = new(skillIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -351,13 +351,13 @@ public sealed class BuildsClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Specialization> Value, MessageContext Context)> GetSpecializationsByIds(
-        IReadOnlyCollection<int> specializationIds,
+        IEnumerable<int> specializationIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        SpecializationsByIdsRequest request = new(specializationIds)
+        SpecializationsByIdsRequest request = new(specializationIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -428,13 +428,13 @@ public sealed class BuildsClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Trait> Value, MessageContext Context)> GetTraitsByIds(
-        IReadOnlyCollection<int> traitIds,
+        IEnumerable<int> traitIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        TraitsByIdsRequest request = new(traitIds)
+        TraitsByIdsRequest request = new(traitIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -505,12 +505,12 @@ public sealed class BuildsClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Legend> Value, MessageContext Context)> GetLegendsByIds(
-        IReadOnlyCollection<string> legendIds,
+        IEnumerable<string> legendIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        LegendsByIdsRequest request = new(legendIds)
+        LegendsByIdsRequest request = new(legendIds.ToList())
         {
             MissingMemberBehavior = missingMemberBehavior
         };

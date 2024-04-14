@@ -345,13 +345,12 @@ public sealed class GuildsClient
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<EmblemForeground> Value, MessageContext Context)>
         GetEmblemForegroundsByIds(
-            IReadOnlyCollection<int> emblemForegroundIds,
+            IEnumerable<int> emblemForegroundIds,
             MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
     {
-        EmblemForegroundsByIdsRequest request =
-            new(emblemForegroundIds) { MissingMemberBehavior = missingMemberBehavior };
+        EmblemForegroundsByIdsRequest request = new(emblemForegroundIds.ToList()) { MissingMemberBehavior = missingMemberBehavior };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -428,13 +427,12 @@ public sealed class GuildsClient
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<EmblemBackground> Value, MessageContext Context)>
         GetEmblemBackgroundsByIds(
-            IReadOnlyCollection<int> backgroundEmblemIds,
+            IEnumerable<int> backgroundEmblemIds,
             MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
     {
-        EmblemBackgroundsByIdsRequest request =
-            new(backgroundEmblemIds) { MissingMemberBehavior = missingMemberBehavior };
+        EmblemBackgroundsByIdsRequest request = new(backgroundEmblemIds.ToList()) { MissingMemberBehavior = missingMemberBehavior };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -524,13 +522,13 @@ public sealed class GuildsClient
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<GuildPermissionSummary> Value, MessageContext Context)>
         GetGuildPermissionsByIds(
-            IReadOnlyCollection<string> guildPermissionIds,
+            IEnumerable<string> guildPermissionIds,
             Language? language = default,
             MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
     {
-        GuildPermissionsByIdsRequest request = new(guildPermissionIds)
+        GuildPermissionsByIdsRequest request = new(guildPermissionIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -625,13 +623,13 @@ public sealed class GuildsClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<GuildUpgrade> Value, MessageContext Context)> GetGuildUpgradesByIds(
-        IReadOnlyCollection<int> guildUpgradeIds,
+        IEnumerable<int> guildUpgradeIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        GuildUpgradesByIdsRequest request = new(guildUpgradeIds)
+        GuildUpgradesByIdsRequest request = new(guildUpgradeIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior

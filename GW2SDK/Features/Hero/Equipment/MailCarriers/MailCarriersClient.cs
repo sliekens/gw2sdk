@@ -94,13 +94,13 @@ public sealed class MailCarriersClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<MailCarrier> Value, MessageContext Context)> GetMailCarriersByIds(
-        IReadOnlyCollection<int> mailCarrierIds,
+        IEnumerable<int> mailCarrierIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MailCarriersByIdsRequest request = new(mailCarrierIds)
+        MailCarriersByIdsRequest request = new(mailCarrierIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior

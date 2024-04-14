@@ -100,13 +100,13 @@ public sealed class WalletClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Currency> Value, MessageContext Context)> GetCurrenciesByIds(
-        IReadOnlyCollection<int> currencyIds,
+        IEnumerable<int> currencyIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        CurrenciesByIdsRequest request = new(currencyIds)
+        CurrenciesByIdsRequest request = new(currencyIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior

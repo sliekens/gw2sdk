@@ -103,13 +103,13 @@ public sealed class ExplorationClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Continent> Value, MessageContext Context)> GetContinentsByIds(
-        IReadOnlyCollection<int> continentIds,
+        IEnumerable<int> continentIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        ContinentsByIdsRequest request = new(continentIds)
+        ContinentsByIdsRequest request = new(continentIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -211,13 +211,13 @@ public sealed class ExplorationClient
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Floor> Value, MessageContext Context)> GetFloorsByIds(
         int continentId,
-        IReadOnlyCollection<int> floorIds,
+        IEnumerable<int> floorIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        FloorsByIdsRequest request = new(continentId, floorIds)
+        FloorsByIdsRequest request = new(continentId, floorIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -329,13 +329,13 @@ public sealed class ExplorationClient
     public Task<(HashSet<Region> Value, MessageContext Context)> GetRegionsByIds(
         int continentId,
         int floorId,
-        IReadOnlyCollection<int> regionIds,
+        IEnumerable<int> regionIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        RegionsByIdsRequest request = new(continentId, floorId, regionIds)
+        RegionsByIdsRequest request = new(continentId, floorId, regionIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -457,13 +457,13 @@ public sealed class ExplorationClient
         int continentId,
         int floorId,
         int regionId,
-        IReadOnlyCollection<int> mapIds,
+        IEnumerable<int> mapIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        RegionalMapsByIdsRequest request = new(continentId, floorId, regionId, mapIds)
+        RegionalMapsByIdsRequest request = new(continentId, floorId, regionId, mapIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -596,18 +596,17 @@ public sealed class ExplorationClient
         int floorId,
         int regionId,
         int mapId,
-        IReadOnlyCollection<int> pointOfInterestIds,
+        IEnumerable<int> pointOfInterestIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        PointsOfInterestByIdsRequest request =
-            new(continentId, floorId, regionId, mapId, pointOfInterestIds)
-            {
-                Language = language,
-                MissingMemberBehavior = missingMemberBehavior
-            };
+        PointsOfInterestByIdsRequest request = new(continentId, floorId, regionId, mapId, pointOfInterestIds.ToList())
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -738,13 +737,13 @@ public sealed class ExplorationClient
         int floorId,
         int regionId,
         int mapId,
-        IReadOnlyCollection<int> heartIds,
+        IEnumerable<int> heartIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        HeartsByIdsRequest request = new(continentId, floorId, regionId, mapId, heartIds)
+        HeartsByIdsRequest request = new(continentId, floorId, regionId, mapId, heartIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -878,13 +877,13 @@ public sealed class ExplorationClient
         int floorId,
         int regionId,
         int mapId,
-        IReadOnlyCollection<int> sectorIds,
+        IEnumerable<int> sectorIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        SectorsByIdsRequest request = new(continentId, floorId, regionId, mapId, sectorIds)
+        SectorsByIdsRequest request = new(continentId, floorId, regionId, mapId, sectorIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -986,13 +985,13 @@ public sealed class ExplorationClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<MapSummary> Value, MessageContext Context)> GetMapSummariesByIds(
-        IReadOnlyCollection<int> mapIds,
+        IEnumerable<int> mapIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MapSummariesByIdsRequest request = new(mapIds)
+        MapSummariesByIdsRequest request = new(mapIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior

@@ -71,12 +71,12 @@ public sealed class DungeonsClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Dungeon> Value, MessageContext Context)> GetDungeonsByIds(
-        IReadOnlyCollection<string> dungeonIds,
+        IEnumerable<string> dungeonIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        DungeonsByIdsRequest request = new(dungeonIds)
+        DungeonsByIdsRequest request = new(dungeonIds.ToList())
         {
             MissingMemberBehavior = missingMemberBehavior
         };

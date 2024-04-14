@@ -81,13 +81,12 @@ public sealed class EmotesClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Emote> Value, MessageContext Context)> GetEmotesByIds(
-        IReadOnlyCollection<string> emoteIds,
+        IEnumerable<string> emoteIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        EmotesByIdsRequest request =
-            new(emoteIds) { MissingMemberBehavior = missingMemberBehavior };
+        EmotesByIdsRequest request = new(emoteIds.ToList()) { MissingMemberBehavior = missingMemberBehavior };
         return request.SendAsync(httpClient, cancellationToken);
     }
 

@@ -94,13 +94,13 @@ public sealed class GlidersClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<GliderSkin> Value, MessageContext Context)> GetGliderSkinsByIds(
-        IReadOnlyCollection<int> gliderSkinIds,
+        IEnumerable<int> gliderSkinIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        GliderSkinsByIdsRequest request = new(gliderSkinIds)
+        GliderSkinsByIdsRequest request = new(gliderSkinIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior

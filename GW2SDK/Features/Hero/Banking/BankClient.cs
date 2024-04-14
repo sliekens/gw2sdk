@@ -124,13 +124,13 @@ public sealed class BankClient
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<MaterialCategory> Value, MessageContext Context)>
         GetMaterialCategoriesByIds(
-            IReadOnlyCollection<int> materialCategoryIds,
+            IEnumerable<int> materialCategoryIds,
             Language? language = default,
             MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
     {
-        MaterialCategoriesByIdsRequest request = new(materialCategoryIds)
+        MaterialCategoriesByIdsRequest request = new(materialCategoryIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior

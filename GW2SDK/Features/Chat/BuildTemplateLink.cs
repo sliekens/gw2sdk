@@ -53,23 +53,26 @@ public sealed record BuildTemplateLink : Link
         CancellationToken cancellationToken = default
     )
     {
-        var (profession, _) = await gw2Client.Hero.Training.GetProfessionByName(
-            Profession,
-            language,
-            missingMemberBehavior,
-            cancellationToken
-        );
+        var profession = await gw2Client.Hero.Training.GetProfessionByName(
+                Profession,
+                language,
+                missingMemberBehavior,
+                cancellationToken
+            )
+            .ValueOnly()
+            .ConfigureAwait(false);
         var specializations = new Dictionary<int, Hero.Builds.Specialization>();
-        var selectedSpecializationIds = SelectedSpecializationIds().ToList();
-        if (selectedSpecializationIds.Any())
+        if (SelectedSpecializationIds().Any())
         {
-            (specializations, _) = await gw2Client.Hero.Builds.GetSpecializationsByIds(
-                    selectedSpecializationIds,
+            specializations = await gw2Client.Hero.Builds.GetSpecializationsByIds(
+                    SelectedSpecializationIds(),
                     language,
                     missingMemberBehavior,
                     cancellationToken
                 )
-                .AsDictionary(static specialization => specialization.Id);
+                .AsDictionary(static specialization => specialization.Id)
+                .ValueOnly()
+                .ConfigureAwait(false);
         }
 
         return new Build
@@ -82,7 +85,7 @@ public sealed record BuildTemplateLink : Link
             Skills = SkillBar(Skills),
             AquaticSkills = SkillBar(AquaticSkills),
             Pets = Pets,
-            Legends = await Legends()
+            Legends = await Legends().ConfigureAwait(false)
         };
 
         IEnumerable<int> SelectedSpecializationIds()
@@ -171,7 +174,8 @@ public sealed record BuildTemplateLink : Link
 
             var (legends, _) = await gw2Client.Hero.Builds
                 .GetLegends(missingMemberBehavior, cancellationToken)
-                .AsDictionary(static legend => legend.Code);
+                .AsDictionary(static legend => legend.Code)
+                .ConfigureAwait(false);
 
             return new SelectedLegends
             {

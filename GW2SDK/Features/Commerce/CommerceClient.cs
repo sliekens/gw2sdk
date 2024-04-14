@@ -84,12 +84,12 @@ public sealed class CommerceClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<ItemPrice> Value, MessageContext Context)> GetItemPricesByIds(
-        IReadOnlyCollection<int> itemIds,
+        IEnumerable<int> itemIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        ItemPricesByIdsRequest request = new(itemIds)
+        ItemPricesByIdsRequest request = new(itemIds.ToList())
         {
             MissingMemberBehavior = missingMemberBehavior
         };
@@ -106,7 +106,7 @@ public sealed class CommerceClient
     /// <param name="cancellationToken">A token to cancel the request(s).</param>
     /// <returns>A task that represents the API request(s).</returns>
     public IAsyncEnumerable<(ItemPrice Value, MessageContext Context)> GetItemPricesBulk(
-        IReadOnlyCollection<int> itemIds,
+        IEnumerable<int> itemIds,
         MissingMemberBehavior missingMemberBehavior = default,
         int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,
         int chunkSize = BulkQuery.DefaultChunkSize,
@@ -125,7 +125,7 @@ public sealed class CommerceClient
 
         // ReSharper disable once VariableHidesOuterVariable (intended, believe it or not)
         async Task<IReadOnlyCollection<(ItemPrice, MessageContext)>> GetChunk(
-            IReadOnlyCollection<int> chunk,
+            IEnumerable<int> chunk,
             CancellationToken cancellationToken
         )
         {
@@ -206,12 +206,12 @@ public sealed class CommerceClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<OrderBook> Value, MessageContext Context)> GetOrderBooksByIds(
-        IReadOnlyCollection<int> itemIds,
+        IEnumerable<int> itemIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        OrderBooksByIdsRequest request = new(itemIds)
+        OrderBooksByIdsRequest request = new(itemIds.ToList())
         {
             MissingMemberBehavior = missingMemberBehavior
         };
@@ -228,7 +228,7 @@ public sealed class CommerceClient
     /// <param name="cancellationToken">A token to cancel the request(s).</param>
     /// <returns>A task that represents the API request(s).</returns>
     public IAsyncEnumerable<(OrderBook Value, MessageContext Context)> GetOrderBooksBulk(
-        IReadOnlyCollection<int> itemIds,
+        IEnumerable<int> itemIds,
         MissingMemberBehavior missingMemberBehavior = default,
         int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,
         int chunkSize = BulkQuery.DefaultChunkSize,
@@ -247,7 +247,7 @@ public sealed class CommerceClient
 
         // ReSharper disable once VariableHidesOuterVariable (intended, believe it or not)
         async Task<IReadOnlyCollection<(OrderBook, MessageContext)>> GetChunk(
-            IReadOnlyCollection<int> chunk,
+            IEnumerable<int> chunk,
             CancellationToken cancellationToken
         )
         {

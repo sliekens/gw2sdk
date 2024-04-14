@@ -84,13 +84,13 @@ public sealed class WvwClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Ability> Value, MessageContext Context)> GetAbilitiesByIds(
-        IReadOnlyCollection<int> abilityIds,
+        IEnumerable<int> abilityIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        AbilitiesByIdsRequest request = new(abilityIds)
+        AbilitiesByIdsRequest request = new(abilityIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -184,13 +184,13 @@ public sealed class WvwClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Objective> Value, MessageContext Context)> GetObjectivesByIds(
-        IReadOnlyCollection<string> objectiveIds,
+        IEnumerable<string> objectiveIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        ObjectivesByIdsRequest request = new(objectiveIds)
+        ObjectivesByIdsRequest request = new(objectiveIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -284,13 +284,13 @@ public sealed class WvwClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Rank> Value, MessageContext Context)> GetRanksByIds(
-        IReadOnlyCollection<int> rankIds,
+        IEnumerable<int> rankIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        RanksByIdsRequest request = new(rankIds)
+        RanksByIdsRequest request = new(rankIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -384,13 +384,13 @@ public sealed class WvwClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<ObjectiveUpgrade> Value, MessageContext Context)> GetUpgradesByIds(
-        IReadOnlyCollection<int> upgradeIds,
+        IEnumerable<int> upgradeIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        UpgradesByIdsRequest request = new(upgradeIds)
+        UpgradesByIdsRequest request = new(upgradeIds.ToList())
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -471,12 +471,12 @@ public sealed class WvwClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<Match> Value, MessageContext Context)> GetMatchesByIds(
-        IReadOnlyCollection<string> matchIds,
+        IEnumerable<string> matchIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MatchesByIdsRequest request = new(matchIds)
+        MatchesByIdsRequest request = new(matchIds.ToList())
         {
             MissingMemberBehavior = missingMemberBehavior
         };
@@ -574,12 +574,12 @@ public sealed class WvwClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<MatchOverview> Value, MessageContext Context)> GetMatchesOverviewByIds(
-        IReadOnlyCollection<string> matchIds,
+        IEnumerable<string> matchIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MatchesOverviewByIdsRequest request = new(matchIds)
+        MatchesOverviewByIdsRequest request = new(matchIds.ToList())
         {
             MissingMemberBehavior = missingMemberBehavior
         };
@@ -677,12 +677,12 @@ public sealed class WvwClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<MatchScores> Value, MessageContext Context)> GetMatchesScoresByIds(
-        IReadOnlyCollection<string> matchIds,
+        IEnumerable<string> matchIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MatchesScoresByIdsRequest request = new(matchIds)
+        MatchesScoresByIdsRequest request = new(matchIds.ToList())
         {
             MissingMemberBehavior = missingMemberBehavior
         };
@@ -780,12 +780,12 @@ public sealed class WvwClient
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public Task<(HashSet<MatchStats> Value, MessageContext Context)> GetMatchesStatsByIds(
-        IReadOnlyCollection<string> matchIds,
+        IEnumerable<string> matchIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MatchesStatsByIdsRequest request = new(matchIds)
+        MatchesStatsByIdsRequest request = new(matchIds.ToList())
         {
             MissingMemberBehavior = missingMemberBehavior
         };
