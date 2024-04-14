@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Accounts;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Accounts;
 internal static class ProgressionJson
 {
     public static Progression GetProgression(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember progressId = "id";
@@ -23,7 +22,7 @@ internal static class ProgressionJson
             {
                 progress = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -31,8 +30,8 @@ internal static class ProgressionJson
 
         return new Progression
         {
-            Id = progressId.Map(value => value.GetStringRequired()),
-            Value = progress.Map(value => value.GetInt32())
+            Id = progressId.Map(static value => value.GetStringRequired()),
+            Value = progress.Map(static value => value.GetInt32())
         };
     }
 }

@@ -11,8 +11,7 @@ internal sealed class NoveltyByIdRequest(int noveltyId) : IHttpRequest<Novelty>
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(Novelty Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -36,7 +35,7 @@ internal sealed class NoveltyByIdRequest(int noveltyId) : IHttpRequest<Novelty>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetNovelty(MissingMemberBehavior);
+        var value = json.RootElement.GetNovelty();
         return (value, new MessageContext(response));
     }
 }

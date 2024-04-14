@@ -1,11 +1,12 @@
-﻿using System.Drawing;
+using System.Drawing;
 using System.Text.Json;
+using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Dyes;
 
 internal static class ColorJson
 {
-    public static Color GetColor(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Color GetColor(this JsonElement json)
     {
         JsonElement red = default;
         JsonElement green = default;
@@ -25,7 +26,7 @@ internal static class ColorJson
             {
                 blue = entry;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(
                     Strings.UnexpectedArrayLength(json.GetArrayLength())

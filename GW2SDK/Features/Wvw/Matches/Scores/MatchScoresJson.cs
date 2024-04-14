@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Matches.Scores;
@@ -6,8 +6,7 @@ namespace GuildWars2.Wvw.Matches.Scores;
 internal static class MatchScoresJson
 {
     public static MatchScores GetMatchScores(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -38,7 +37,7 @@ internal static class MatchScoresJson
             {
                 maps = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -46,16 +45,14 @@ internal static class MatchScoresJson
 
         return new MatchScores
         {
-            Id = id.Map(value => value.GetStringRequired()),
-            Scores = scores.Map(value => value.GetDistribution(missingMemberBehavior)),
+            Id = id.Map(static value => value.GetStringRequired()),
+            Scores = scores.Map(static value => value.GetDistribution()),
             VictoryPoints =
-                victoryPoints.Map(value => value.GetDistribution(missingMemberBehavior)),
+                victoryPoints.Map(static value => value.GetDistribution()),
             Skirmishes =
-                skirmishes.Map(
-                    values => values.GetList(value => value.GetSkirmish(missingMemberBehavior))
+                skirmishes.Map(static values => values.GetList(static value => value.GetSkirmish())
                 ),
-            Maps = maps.Map(
-                values => values.GetList(value => value.GetMapSummary(missingMemberBehavior))
+            Maps = maps.Map(static values => values.GetList(static value => value.GetMapSummary())
             )
         };
     }

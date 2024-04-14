@@ -19,8 +19,7 @@ internal sealed class SeasonsByIdsRequest : IHttpRequest<HashSet<Storyline>>
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<Storyline> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -44,7 +43,7 @@ internal sealed class SeasonsByIdsRequest : IHttpRequest<HashSet<Storyline>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetStoryline(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(static entry => entry.GetStoryline());
         return (value, new MessageContext(response));
     }
 }

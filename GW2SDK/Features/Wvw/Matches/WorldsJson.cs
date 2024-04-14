@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Matches;
@@ -6,8 +6,7 @@ namespace GuildWars2.Wvw.Matches;
 internal static class WorldsJson
 {
     public static Worlds GetWorlds(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember red = "red";
@@ -28,7 +27,7 @@ internal static class WorldsJson
             {
                 green = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -36,9 +35,9 @@ internal static class WorldsJson
 
         return new Worlds
         {
-            Red = red.Map(value => value.GetInt32()),
-            Blue = blue.Map(value => value.GetInt32()),
-            Green = green.Map(value => value.GetInt32())
+            Red = red.Map(static value => value.GetInt32()),
+            Blue = blue.Map(static value => value.GetInt32()),
+            Green = green.Map(static value => value.GetInt32())
         };
     }
 }

@@ -1,4 +1,5 @@
-﻿using GuildWars2.WizardsVault.AstralRewards;
+﻿using GuildWars2.Json;
+using GuildWars2.WizardsVault.AstralRewards;
 using GuildWars2.WizardsVault.AstralRewards.Http;
 using GuildWars2.WizardsVault.Objectives;
 using GuildWars2.WizardsVault.Objectives.Http;
@@ -34,10 +35,10 @@ public sealed class WizardsVaultClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         SeasonRequest request = new()
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -59,10 +60,10 @@ public sealed class WizardsVaultClient
             CancellationToken cancellationToken = default
         )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         PurchasedAstralRewardsRequest request = new()
         {
             AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -83,10 +84,10 @@ public sealed class WizardsVaultClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         DailyObjectivesProgressRequest request = new()
         {
             AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -108,10 +109,10 @@ public sealed class WizardsVaultClient
             CancellationToken cancellationToken = default
         )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         WeeklyObjectivesProgressRequest request = new()
         {
             AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -133,10 +134,10 @@ public sealed class WizardsVaultClient
             CancellationToken cancellationToken = default
         )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         SpecialObjectivesProgressRequest request = new()
         {
             AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -156,10 +157,10 @@ public sealed class WizardsVaultClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         AstralRewardsRequest request = new()
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -188,10 +189,10 @@ public sealed class WizardsVaultClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         AstralRewardByIdRequest request = new(astralRewardId)
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -209,10 +210,10 @@ public sealed class WizardsVaultClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         AstralRewardsByIdsRequest request = new(astralRewardIds.ToList())
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -232,11 +233,11 @@ public sealed class WizardsVaultClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         AstralRewardsByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -256,10 +257,10 @@ public sealed class WizardsVaultClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         ObjectivesRequest request = new()
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -288,10 +289,10 @@ public sealed class WizardsVaultClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         ObjectiveByIdRequest request = new(objectiveId)
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -309,10 +310,10 @@ public sealed class WizardsVaultClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         ObjectivesByIdsRequest request = new(objectiveIds.ToList())
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -332,11 +333,11 @@ public sealed class WizardsVaultClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         ObjectivesByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }

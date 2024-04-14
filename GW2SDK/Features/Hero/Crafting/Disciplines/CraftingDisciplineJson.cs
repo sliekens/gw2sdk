@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Crafting.Disciplines;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Crafting.Disciplines;
 internal static class CraftingDisciplineJson
 {
     public static CraftingDiscipline GetCraftingDiscipline(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember discipline = "discipline";
@@ -28,7 +27,7 @@ internal static class CraftingDisciplineJson
             {
                 active = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -37,11 +36,10 @@ internal static class CraftingDisciplineJson
         return new CraftingDiscipline
         {
             Discipline =
-                discipline.Map(
-                    value => value.GetEnum<CraftingDisciplineName>()
+                discipline.Map(static value => value.GetEnum<CraftingDisciplineName>()
                 ),
-            Rating = rating.Map(value => value.GetInt32()),
-            Active = active.Map(value => value.GetBoolean())
+            Rating = rating.Map(static value => value.GetInt32()),
+            Active = active.Map(static value => value.GetBoolean())
         };
     }
 }

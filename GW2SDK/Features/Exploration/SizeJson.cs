@@ -1,13 +1,13 @@
 ﻿using System.Drawing;
 using System.Text.Json;
+using GuildWars2.Json;
 
 namespace GuildWars2.Exploration;
 
 internal static class SizeJson
 {
     public static Size GetDimensions(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         JsonElement width = default;
@@ -23,7 +23,7 @@ internal static class SizeJson
             {
                 height = entry;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(
                     Strings.UnexpectedArrayLength(json.GetArrayLength())

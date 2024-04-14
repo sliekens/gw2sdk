@@ -1,4 +1,5 @@
-﻿using GuildWars2.Pve.MapChests.Http;
+﻿using GuildWars2.Json;
+using GuildWars2.Pve.MapChests.Http;
 
 namespace GuildWars2.Pve.MapChests;
 
@@ -58,10 +59,8 @@ public sealed class MapChestsClient
         CancellationToken cancellationToken = default
     )
     {
-        MapChestByIdRequest request = new(mapChestId)
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        MapChestByIdRequest request = new(mapChestId);
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -76,10 +75,8 @@ public sealed class MapChestsClient
         CancellationToken cancellationToken = default
     )
     {
-        MapChestsByIdsRequest request = new(mapChestIds.ToList())
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        MapChestsByIdsRequest request = new(mapChestIds.ToList());
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -96,10 +93,10 @@ public sealed class MapChestsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         MapChestsByPageRequest request = new(pageIndex)
         {
-            PageSize = pageSize,
-            MissingMemberBehavior = missingMemberBehavior
+            PageSize = pageSize
         };
 
         return request.SendAsync(httpClient, cancellationToken);
@@ -114,7 +111,8 @@ public sealed class MapChestsClient
         CancellationToken cancellationToken = default
     )
     {
-        MapChestsRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        MapChestsRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);
     }
 

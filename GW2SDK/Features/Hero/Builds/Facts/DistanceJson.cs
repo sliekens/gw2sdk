@@ -7,7 +7,6 @@ internal static class DistanceJson
 {
     public static Distance GetDistance(
         this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior,
         out int? requiresTrait,
         out int? overrides
     )
@@ -50,7 +49,7 @@ internal static class DistanceJson
             {
                 distance = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -58,9 +57,9 @@ internal static class DistanceJson
 
         return new Distance
         {
-            Text = text.Map(value => value.GetStringRequired()),
-            IconHref = icon.Map(value => value.GetStringRequired()),
-            Length = distance.Map(value => value.GetInt32())
+            Text = text.Map(static value => value.GetStringRequired()),
+            IconHref = icon.Map(static value => value.GetStringRequired()),
+            Length = distance.Map(static value => value.GetInt32())
         };
     }
 }

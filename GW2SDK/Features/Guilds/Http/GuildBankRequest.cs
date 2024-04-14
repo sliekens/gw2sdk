@@ -13,8 +13,7 @@ internal sealed class GuildBankRequest(string id) : IHttpRequest<List<GuildBankT
 
     public required string? AccessToken { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(List<GuildBankTab> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -35,7 +34,7 @@ internal sealed class GuildBankRequest(string id) : IHttpRequest<List<GuildBankT
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetList(entry => entry.GetGuildBankTab(MissingMemberBehavior));
+        var value = json.RootElement.GetList(static entry => entry.GetGuildBankTab());
         return (value, new MessageContext(response));
     }
 }

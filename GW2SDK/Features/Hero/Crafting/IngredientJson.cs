@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Crafting;
 internal static class IngredientJson
 {
     public static Ingredient GetIngredient(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember type = "type";
@@ -27,7 +26,7 @@ internal static class IngredientJson
             {
                 count = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -35,9 +34,9 @@ internal static class IngredientJson
 
         return new Ingredient
         {
-            Kind = type.Map(value => value.GetEnum<IngredientKind>()),
-            Id = id.Map(value => value.GetInt32()),
-            Count = count.Map(value => value.GetInt32())
+            Kind = type.Map(static value => value.GetEnum<IngredientKind>()),
+            Id = id.Map(static value => value.GetInt32()),
+            Count = count.Map(static value => value.GetInt32())
         };
     }
 }

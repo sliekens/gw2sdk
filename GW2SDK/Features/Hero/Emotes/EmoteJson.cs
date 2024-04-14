@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Emotes;
 
 internal static class EmoteJson
 {
-    public static Emote GetEmote(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Emote GetEmote(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember commands = "commands";
@@ -25,7 +25,7 @@ internal static class EmoteJson
             {
                 unlockItems = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -33,9 +33,13 @@ internal static class EmoteJson
 
         return new Emote
         {
-            Id = id.Map(value => value.GetStringRequired()),
-            Commands = commands.Map(values => values.GetList(entry => entry.GetStringRequired())),
-            UnlockItemIds = unlockItems.Map(values => values.GetList(entry => entry.GetInt32()))
+            Id = id.Map(static value => value.GetStringRequired()),
+            Commands =
+                commands.Map(
+                    static values => values.GetList(static value => value.GetStringRequired())
+                ),
+            UnlockItemIds =
+                unlockItems.Map(static values => values.GetList(static value => value.GetInt32()))
         };
     }
 }

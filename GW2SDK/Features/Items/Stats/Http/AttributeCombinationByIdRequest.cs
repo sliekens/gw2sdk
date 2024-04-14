@@ -13,8 +13,7 @@ internal sealed class AttributeCombinationByIdRequest(int attributeCombinationId
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(AttributeCombination Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -38,7 +37,7 @@ internal sealed class AttributeCombinationByIdRequest(int attributeCombinationId
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetAttributeCombination(MissingMemberBehavior);
+        var value = json.RootElement.GetAttributeCombination();
         return (value, new MessageContext(response));
     }
 }

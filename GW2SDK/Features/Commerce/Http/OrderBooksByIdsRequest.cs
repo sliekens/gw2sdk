@@ -19,8 +19,7 @@ internal sealed class OrderBooksByIdsRequest : IHttpRequest<HashSet<OrderBook>>
 
     public IReadOnlyCollection<int> ItemIds { get; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<OrderBook> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -43,7 +42,7 @@ internal sealed class OrderBooksByIdsRequest : IHttpRequest<HashSet<OrderBook>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetOrderBook(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(static entry => entry.GetOrderBook());
         return (value, new MessageContext(response));
     }
 }

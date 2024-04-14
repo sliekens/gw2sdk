@@ -12,7 +12,7 @@ namespace GuildWars2.Exploration.Maps;
 
 internal static class MapJson
 {
-    public static Map GetMap(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Map GetMap(this JsonElement json)
     {
         RequiredMember name = "name";
         RequiredMember minLevel = "min_level";
@@ -91,7 +91,7 @@ internal static class MapJson
             {
                 masteryPoints = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -99,47 +99,47 @@ internal static class MapJson
 
         return new Map
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
-            MinLevel = minLevel.Map(value => value.GetInt32()),
-            MaxLevel = maxLevel.Map(value => value.GetInt32()),
-            DefaultFloor = defaultFloor.Map(value => value.GetInt32()),
-            LabelCoordinates =
-                labelCoordinates.Map(value => value.GetCoordinate(missingMemberBehavior)),
-            MapRectangle = mapRectangle.Map(value => value.GetMapRectangle(missingMemberBehavior)),
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            MinLevel = minLevel.Map(static value => value.GetInt32()),
+            MaxLevel = maxLevel.Map(static value => value.GetInt32()),
+            DefaultFloor = defaultFloor.Map(static value => value.GetInt32()),
+            LabelCoordinates = labelCoordinates.Map(static value => value.GetCoordinate()),
+            MapRectangle = mapRectangle.Map(static value => value.GetMapRectangle()),
             ContinentRectangle =
-                continentRectangle.Map(value => value.GetContinentRectangle(missingMemberBehavior)),
+                continentRectangle.Map(static value => value.GetContinentRectangle()),
             PointsOfInterest =
                 pointsOfInterest.Map(
-                    value =>
-                        value.GetMap(entry => entry.GetPointOfInterest(missingMemberBehavior))
+                    static value =>
+                        value.GetMap(static entry => entry.GetPointOfInterest())
                             .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
                 ),
             GodShrines =
                 godShrines.Map(
-                    values => values.GetList(value => value.GetGodShrine(missingMemberBehavior))
+                    static values => values.GetList(static value => value.GetGodShrine())
                 ),
             Hearts =
                 tasks.Map(
-                    value =>
-                        value.GetMap(entry => entry.GetHeart(missingMemberBehavior))
+                    static value =>
+                        value.GetMap(static entry => entry.GetHeart())
                             .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
                 ),
             HeroChallenges =
                 skillChallenges.Map(
-                    values => values.GetList(value => value.GetHeroChallenge(missingMemberBehavior))
+                    static values => values.GetList(static value => value.GetHeroChallenge())
                 ),
-            Sectors = sectors.Map(
-                value =>
-                    value.GetMap(entry => entry.GetSector(missingMemberBehavior))
-                        .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
-            ),
+            Sectors =
+                sectors.Map(
+                    static value =>
+                        value.GetMap(static entry => entry.GetSector())
+                            .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
+                ),
             Adventures =
                 adventures.Map(
-                    values => values.GetList(value => value.GetAdventure(missingMemberBehavior))
+                    static values => values.GetList(static value => value.GetAdventure())
                 ),
             MasteryInsights = masteryPoints.Map(
-                values => values.GetList(item => item.GetMasteryInsight(missingMemberBehavior))
+                static values => values.GetList(static value => value.GetMasteryInsight())
             )
         };
     }

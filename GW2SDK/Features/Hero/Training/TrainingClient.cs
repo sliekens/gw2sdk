@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Hero.Training.Http;
+using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Training;
 
@@ -31,9 +32,9 @@ public sealed class TrainingClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         CharacterTrainingRequest request = new(characterName)
         {
-            MissingMemberBehavior = missingMemberBehavior,
             AccessToken = accessToken
         };
         return request.SendAsync(httpClient, cancellationToken);
@@ -54,10 +55,10 @@ public sealed class TrainingClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         ProfessionsRequest request = new()
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -85,10 +86,10 @@ public sealed class TrainingClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         ProfessionByNameRequest request = new(professionName)
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -106,10 +107,10 @@ public sealed class TrainingClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         ProfessionsByNamesRequest request = new(professionNames.ToList())
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -129,11 +130,11 @@ public sealed class TrainingClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         ProfessionsByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }

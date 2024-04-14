@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Accounts;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Accounts;
 internal static class AccountLuckJson
 {
     public static AccountLuck GetAccountLuck(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         JsonElement luckObj = default;
@@ -18,7 +17,7 @@ internal static class AccountLuckJson
             {
                 luckObj = entry;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(
                     Strings.UnexpectedArrayLength(json.GetArrayLength())
@@ -51,12 +50,12 @@ internal static class AccountLuckJson
             {
                 value = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
         }
 
-        return new AccountLuck { Luck = value.Map(luck => luck.GetInt32()) };
+        return new AccountLuck { Luck = value.Map(static luck => luck.GetInt32()) };
     }
 }

@@ -1,11 +1,11 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Dyes;
 
 internal static class DyeColorJson
 {
-    public static DyeColor GetDyeColor(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static DyeColor GetDyeColor(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -55,7 +55,7 @@ internal static class DyeColorJson
             {
                 categories = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -64,19 +64,19 @@ internal static class DyeColorJson
         // The API puts all hues, materials, and color sets into the same array,
         // which is uncomfortable, so split them into properties
         var (hue, material, set) =
-            categories.Map(value => value.GetCategories(missingMemberBehavior));
+            categories.Map(static value => value.GetCategories());
 
         // the first element is the hue, second is material, third is color set
         return new DyeColor
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
-            BaseRgb = baseRgb.Map(value => value.GetColor(missingMemberBehavior)),
-            Cloth = cloth.Map(value => value.GetColorInfo(missingMemberBehavior)),
-            Leather = leather.Map(value => value.GetColorInfo(missingMemberBehavior)),
-            Metal = metal.Map(value => value.GetColorInfo(missingMemberBehavior)),
-            Fur = fur.Map(value => value.GetColorInfo(missingMemberBehavior)),
-            ItemId = itemId.Map(value => value.GetInt32()),
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            BaseRgb = baseRgb.Map(static value => value.GetColor()),
+            Cloth = cloth.Map(static value => value.GetColorInfo()),
+            Leather = leather.Map(static value => value.GetColorInfo()),
+            Metal = metal.Map(static value => value.GetColorInfo()),
+            Fur = fur.Map(static value => value.GetColorInfo()),
+            ItemId = itemId.Map(static value => value.GetInt32()),
             Hue = hue,
             Material = material,
             Set = set

@@ -16,8 +16,7 @@ internal sealed class CurrenciesByPageRequest(int pageIndex) : IHttpRequest<Hash
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<Currency> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -44,7 +43,7 @@ internal sealed class CurrenciesByPageRequest(int pageIndex) : IHttpRequest<Hash
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetCurrency(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(static entry => entry.GetCurrency());
         return (value, new MessageContext(response));
     }
 }

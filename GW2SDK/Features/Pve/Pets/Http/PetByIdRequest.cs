@@ -11,8 +11,7 @@ internal sealed class PetByIdRequest(int petId) : IHttpRequest<Pet>
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(Pet Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -36,7 +35,7 @@ internal sealed class PetByIdRequest(int petId) : IHttpRequest<Pet>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetPet(MissingMemberBehavior);
+        var value = json.RootElement.GetPet();
         return (value, new MessageContext(response));
     }
 }

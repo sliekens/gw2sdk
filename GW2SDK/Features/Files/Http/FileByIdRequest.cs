@@ -9,8 +9,7 @@ internal sealed class FileByIdRequest(string fileId) : IHttpRequest<Asset>
 
     public string FileId { get; } = fileId;
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(Asset Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -33,7 +32,7 @@ internal sealed class FileByIdRequest(string fileId) : IHttpRequest<Asset>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetAsset(MissingMemberBehavior);
+        var value = json.RootElement.GetAsset();
         return (value, new MessageContext(response));
     }
 }

@@ -13,8 +13,7 @@ internal sealed class ColorByIdRequest(int colorId) : IHttpRequest<DyeColor>
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(DyeColor Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -38,7 +37,7 @@ internal sealed class ColorByIdRequest(int colorId) : IHttpRequest<DyeColor>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetDyeColor(MissingMemberBehavior);
+        var value = json.RootElement.GetDyeColor();
         return (value, new MessageContext(response));
     }
 }

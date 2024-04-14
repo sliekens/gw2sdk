@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Authorization.Http;
+using GuildWars2.Json;
 
 namespace GuildWars2.Authorization;
 
@@ -27,10 +28,8 @@ public sealed class TokenClient
         CancellationToken cancellationToken = default
     )
     {
-        TokenInfoRequest request = new(accessToken)
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        TokenInfoRequest request = new(accessToken);
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -64,12 +63,12 @@ public sealed class TokenClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         CreateSubtokenRequest request = new(accessToken)
         {
             Permissions = permissions?.ToList(),
             AbsoluteExpirationDate = absoluteExpirationDate,
             AllowedUrls = allowedUrls?.ToList(),
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }

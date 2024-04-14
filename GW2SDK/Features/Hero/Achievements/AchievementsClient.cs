@@ -3,6 +3,7 @@ using GuildWars2.Hero.Achievements.Categories;
 using GuildWars2.Hero.Achievements.Groups;
 using GuildWars2.Hero.Achievements.Http;
 using GuildWars2.Hero.Achievements.Titles;
+using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Achievements;
 
@@ -64,10 +65,10 @@ public sealed class AchievementsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         AchievementByIdRequest request = new(achievementId)
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -86,10 +87,10 @@ public sealed class AchievementsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         AchievementsByIdsRequest request = new(achievementIds.ToList())
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -109,11 +110,11 @@ public sealed class AchievementsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         AchievementsByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -215,10 +216,10 @@ public sealed class AchievementsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         AccountAchievementByIdRequest request = new(achievementId)
         {
             AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -238,10 +239,10 @@ public sealed class AchievementsClient
             CancellationToken cancellationToken = default
         )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         AccountAchievementsByIdsRequest request = new(achievementIds.ToList())
         {
             AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -257,10 +258,10 @@ public sealed class AchievementsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         AccountAchievementsRequest request = new()
         {
             AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -282,11 +283,11 @@ public sealed class AchievementsClient
             CancellationToken cancellationToken = default
         )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         AccountAchievementsByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -307,10 +308,10 @@ public sealed class AchievementsClient
             CancellationToken cancellationToken = default
         )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         AchievementCategoriesRequest request = new()
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -339,10 +340,10 @@ public sealed class AchievementsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         AchievementCategoryByIdRequest request = new(achievementCategoryId)
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -361,10 +362,10 @@ public sealed class AchievementsClient
             CancellationToken cancellationToken = default
         )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         AchievementCategoriesByIdsRequest request = new(achievementCategoryIds.ToList())
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -385,11 +386,11 @@ public sealed class AchievementsClient
             CancellationToken cancellationToken = default
         )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         AchievementCategoriesByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -409,10 +410,10 @@ public sealed class AchievementsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         AchievementGroupsRequest request = new()
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -441,10 +442,10 @@ public sealed class AchievementsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         AchievementGroupByIdRequest request = new(achievementGroupId)
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -463,10 +464,10 @@ public sealed class AchievementsClient
             CancellationToken cancellationToken = default
         )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         AchievementGroupsByIdsRequest request = new(achievementGroupIds.ToList())
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -487,11 +488,11 @@ public sealed class AchievementsClient
             CancellationToken cancellationToken = default
         )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         AchievementGroupsByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -511,10 +512,10 @@ public sealed class AchievementsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         TitlesRequest request = new()
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -543,10 +544,10 @@ public sealed class AchievementsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         TitleByIdRequest request = new(titleId)
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -564,10 +565,10 @@ public sealed class AchievementsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         TitlesByIdsRequest request = new(titleIds.ToList())
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -587,11 +588,11 @@ public sealed class AchievementsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         TitlesByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }

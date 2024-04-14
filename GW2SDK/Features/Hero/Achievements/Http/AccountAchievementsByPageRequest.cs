@@ -15,8 +15,7 @@ internal sealed class AccountAchievementsByPageRequest(int pageIndex)
 
     public required string? AccessToken { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<AccountAchievement> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -44,7 +43,7 @@ internal sealed class AccountAchievementsByPageRequest(int pageIndex)
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
         var value =
-            json.RootElement.GetSet(entry => entry.GetAccountAchievement(MissingMemberBehavior));
+            json.RootElement.GetSet(static entry => entry.GetAccountAchievement());
         return (value, new MessageContext(response));
     }
 }

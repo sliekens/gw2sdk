@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Seasons;
@@ -6,8 +6,7 @@ namespace GuildWars2.Pvp.Seasons;
 internal static class LeaderboardJson
 {
     public static Leaderboard GetLeaderboard(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember settings = "settings";
@@ -23,7 +22,7 @@ internal static class LeaderboardJson
             {
                 scorings = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -32,10 +31,8 @@ internal static class LeaderboardJson
         return new Leaderboard
         {
             Settings =
-                settings.Map(value => value.GetLeaderboardSetting(missingMemberBehavior)),
-            Scorings = scorings.Map(
-                values => values.GetList(
-                    value => value.GetLeaderboardScoring(missingMemberBehavior)
+                settings.Map(static value => value.GetLeaderboardSetting()),
+            Scorings = scorings.Map(static values => values.GetList(static value => value.GetLeaderboardScoring()
                 )
             )
         };

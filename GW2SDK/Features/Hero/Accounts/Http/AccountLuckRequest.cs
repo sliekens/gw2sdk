@@ -12,8 +12,7 @@ internal sealed class AccountLuckRequest : IHttpRequest<AccountLuck>
 
     public required string? AccessToken { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(AccountLuck Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -29,7 +28,7 @@ internal sealed class AccountLuckRequest : IHttpRequest<AccountLuck>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetAccountLuck(MissingMemberBehavior);
+        var value = json.RootElement.GetAccountLuck();
         return (value, new MessageContext(response));
     }
 }

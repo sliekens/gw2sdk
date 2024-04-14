@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Builds;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Builds;
 internal static class SubskillJson
 {
     public static Subskill GetSubskill(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -28,7 +27,7 @@ internal static class SubskillJson
             {
                 form = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -36,9 +35,9 @@ internal static class SubskillJson
 
         return new Subskill
         {
-            Id = id.Map(value => value.GetInt32()),
-            Attunement = attunement.Map(value => value.GetEnum<Attunement>()),
-            Form = form.Map(value => value.GetEnum<Transformation>())
+            Id = id.Map(static value => value.GetInt32()),
+            Attunement = attunement.Map(static value => value.GetEnum<Attunement>()),
+            Form = form.Map(static value => value.GetEnum<Transformation>())
         };
     }
 }

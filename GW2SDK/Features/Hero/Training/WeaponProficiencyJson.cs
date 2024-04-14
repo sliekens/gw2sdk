@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Training;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Training;
 internal static class WeaponProficiencyJson
 {
     public static WeaponProficiency GetWeaponProficiency(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         NullableMember specialization = "specialization";
@@ -28,7 +27,7 @@ internal static class WeaponProficiencyJson
             {
                 skills = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -36,10 +35,9 @@ internal static class WeaponProficiencyJson
 
         return new WeaponProficiency
         {
-            RequiredSpecialization = specialization.Map(value => value.GetInt32()),
-            Flags = flags.Map(values => values.GetWeaponFlags()),
-            Skills = skills.Map(
-                values => values.GetList(value => value.GetWeaponSkill(missingMemberBehavior))
+            RequiredSpecialization = specialization.Map(static value => value.GetInt32()),
+            Flags = flags.Map(static values => values.GetWeaponFlags()),
+            Skills = skills.Map(static values => values.GetList(static value => value.GetWeaponSkill())
             )
         };
     }

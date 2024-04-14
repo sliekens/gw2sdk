@@ -9,8 +9,7 @@ internal sealed class RaidByIdRequest(string raidId) : IHttpRequest<Raid>
 
     public string RaidId { get; } = raidId;
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(Raid Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -33,7 +32,7 @@ internal sealed class RaidByIdRequest(string raidId) : IHttpRequest<Raid>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetRaid(MissingMemberBehavior);
+        var value = json.RootElement.GetRaid();
         return (value, new MessageContext(response));
     }
 }

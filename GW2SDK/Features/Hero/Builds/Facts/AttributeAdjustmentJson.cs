@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Builds.Facts;
@@ -7,7 +7,6 @@ internal static class AttributeAdjustmentJson
 {
     public static AttributeAdjustment GetAttributeAdjustment(
         this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior,
         out int? requiresTrait,
         out int? overrides
     )
@@ -60,7 +59,7 @@ internal static class AttributeAdjustmentJson
             {
                 hitCount = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -68,11 +67,11 @@ internal static class AttributeAdjustmentJson
 
         return new AttributeAdjustment
         {
-            Text = text.Map(value => value.GetString()) ?? "",
-            IconHref = icon.Map(value => value.GetStringRequired()),
-            Value = adjustment.Map(value => value.GetInt32()),
-            Target = target.Map(value => value.GetAttributeName()),
-            HitCount = hitCount.Map(value => value.GetInt32())
+            Text = text.Map(static value => value.GetString()) ?? "",
+            IconHref = icon.Map(static value => value.GetStringRequired()),
+            Value = adjustment.Map(static value => value.GetInt32()),
+            Target = target.Map(static value => value.GetAttributeName()),
+            HitCount = hitCount.Map(static value => value.GetInt32())
         };
     }
 }

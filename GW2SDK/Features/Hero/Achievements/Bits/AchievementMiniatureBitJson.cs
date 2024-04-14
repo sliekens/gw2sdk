@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Achievements.Bits;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Achievements.Bits;
 internal static class AchievementMiniatureBitJson
 {
     public static AchievementMiniatureBit GetAchievementMiniatureBit(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -26,12 +25,12 @@ internal static class AchievementMiniatureBitJson
             {
                 id = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
         }
 
-        return new AchievementMiniatureBit { Id = id.Map(value => value.GetInt32()) };
+        return new AchievementMiniatureBit { Id = id.Map(static value => value.GetInt32()) };
     }
 }

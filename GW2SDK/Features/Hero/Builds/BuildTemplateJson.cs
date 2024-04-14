@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Builds;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Builds;
 internal static class BuildTemplateJson
 {
     public static BuildTemplate GetBuildTemplate(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember tab = "tab";
@@ -28,7 +27,7 @@ internal static class BuildTemplateJson
             {
                 isActive = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -36,9 +35,9 @@ internal static class BuildTemplateJson
 
         return new BuildTemplate
         {
-            TabNumber = tab.Map(value => value.GetInt32()),
-            IsActive = isActive.Map(value => value.GetBoolean()),
-            Build = build.Map(value => value.GetBuild(missingMemberBehavior))
+            TabNumber = tab.Map(static value => value.GetInt32()),
+            IsActive = isActive.Map(static value => value.GetBoolean()),
+            Build = build.Map(static value => value.GetBuild())
         };
     }
 }

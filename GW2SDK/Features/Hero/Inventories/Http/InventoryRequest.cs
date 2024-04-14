@@ -15,8 +15,7 @@ internal sealed class InventoryRequest(string characterName) : IHttpRequest<Bagg
 
     public required string? AccessToken { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(Baggage Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -36,7 +35,7 @@ internal sealed class InventoryRequest(string characterName) : IHttpRequest<Bagg
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetBaggage(MissingMemberBehavior);
+        var value = json.RootElement.GetBaggage();
         return (value, new MessageContext(response));
     }
 }

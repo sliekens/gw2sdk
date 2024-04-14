@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Items;
@@ -6,8 +6,7 @@ namespace GuildWars2.Items;
 internal static class InfusionSlotJson
 {
     public static InfusionSlot GetInfusionSlot(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember flags = "flags";
@@ -22,7 +21,7 @@ internal static class InfusionSlotJson
             {
                 itemId = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -30,8 +29,8 @@ internal static class InfusionSlotJson
 
         return new InfusionSlot
         {
-            Flags = flags.Map(values => values.GetInfusionSlotFlags()),
-            ItemId = itemId.Map(value => value.GetInt32())
+            Flags = flags.Map(static values => values.GetInfusionSlotFlags()),
+            ItemId = itemId.Map(static value => value.GetInt32())
         };
     }
 }

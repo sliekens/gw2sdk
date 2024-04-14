@@ -27,7 +27,7 @@ internal readonly ref struct NullableMember
     public bool Match(JsonProperty property) =>
         member.Value.ValueKind == Undefined && property.NameEquals(name);
 
-    public TValue? Map<TValue>(Func<JsonElement, TValue> resultSelector) where TValue : struct
+    public TValue? Map<TValue>(Func<JsonElement, TValue> transform) where TValue : struct
     {
         if (member.Value.ValueKind == Undefined || member.Value.ValueKind == Null)
         {
@@ -36,7 +36,7 @@ internal readonly ref struct NullableMember
 
         try
         {
-            return resultSelector(member.Value);
+            return transform(member.Value);
         }
         catch (Exception reason)
         {

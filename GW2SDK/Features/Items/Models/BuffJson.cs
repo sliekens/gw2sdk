@@ -1,11 +1,11 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
 internal static class BuffJson
 {
-    public static Buff GetBuff(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Buff GetBuff(this JsonElement json)
     {
         RequiredMember skillId = "skill_id";
         OptionalMember description = "description";
@@ -19,7 +19,7 @@ internal static class BuffJson
             {
                 description = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -27,8 +27,8 @@ internal static class BuffJson
 
         return new Buff
         {
-            SkillId = skillId.Map(value => value.GetInt32()),
-            Description = description.Map(value => value.GetString()) ?? ""
+            SkillId = skillId.Map(static value => value.GetInt32()),
+            Description = description.Map(static value => value.GetString()) ?? ""
         };
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Achievements.Groups;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Achievements.Groups;
 internal static class AchievementGroupJson
 {
     public static AchievementGroup GetAchievementGroup(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -37,7 +36,7 @@ internal static class AchievementGroupJson
             {
                 categories = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -45,11 +44,11 @@ internal static class AchievementGroupJson
 
         return new AchievementGroup
         {
-            Id = id.Map(value => value.GetStringRequired()),
-            Name = name.Map(value => value.GetStringRequired()),
-            Description = description.Map(value => value.GetStringRequired()),
-            Order = order.Map(value => value.GetInt32()),
-            Categories = categories.Map(values => values.GetList(value => value.GetInt32()))
+            Id = id.Map(static value => value.GetStringRequired()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            Description = description.Map(static value => value.GetStringRequired()),
+            Order = order.Map(static value => value.GetInt32()),
+            Categories = categories.Map(static values => values.GetList(static value => value.GetInt32()))
         };
     }
 }

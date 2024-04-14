@@ -11,8 +11,7 @@ internal sealed class SkiffSkinByIdRequest(int skiffSkinId) : IHttpRequest<Skiff
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(SkiffSkin Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -36,7 +35,7 @@ internal sealed class SkiffSkinByIdRequest(int skiffSkinId) : IHttpRequest<Skiff
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSkiffSkin(MissingMemberBehavior);
+        var value = json.RootElement.GetSkiffSkin();
         return (value, new MessageContext(response));
     }
 }

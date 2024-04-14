@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Builds;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Builds;
 internal static class PetIdsJson
 {
     public static (int? PetId1, int? PetId2) GetPetIds(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         JsonElement first = default;
@@ -23,7 +22,7 @@ internal static class PetIdsJson
             {
                 second = entry;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(
                     Strings.UnexpectedArrayLength(json.GetArrayLength())

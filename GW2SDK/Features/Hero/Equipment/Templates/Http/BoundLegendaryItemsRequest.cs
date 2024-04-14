@@ -17,8 +17,7 @@ internal sealed class BoundLegendaryItemsRequest : IHttpRequest<HashSet<BoundLeg
 
     public required string? AccessToken { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<BoundLegendaryItem> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -35,7 +34,7 @@ internal sealed class BoundLegendaryItemsRequest : IHttpRequest<HashSet<BoundLeg
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
         var value =
-            json.RootElement.GetSet(entry => entry.GetBoundLegendaryItem(MissingMemberBehavior));
+            json.RootElement.GetSet(static entry => entry.GetBoundLegendaryItem());
         return (value, new MessageContext(response));
     }
 }

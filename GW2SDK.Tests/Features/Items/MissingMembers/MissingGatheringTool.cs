@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using GuildWars2.Items;
+using GuildWars2.Json;
 
 namespace GuildWars2.Tests.Features.Items.MissingMembers;
 
@@ -19,14 +20,15 @@ public class MissingGatheringTool
 
         using var json = JsonDocument.Parse(text);
 
-        Item Act()
-        {
-            return json.RootElement.GetItem(default);
-        }
-
         var actual = Assert.ThrowsAny<InvalidOperationException>(Act);
 
         Assert.Equal("Unexpected discriminator value 'Hunting'.", actual.Message);
+        return;
+
+        Item Act()
+        {
+            return json.RootElement.GetItem();
+        }
     }
 
     [Fact]
@@ -52,7 +54,8 @@ public class MissingGatheringTool
 
         using var json = JsonDocument.Parse(text);
 
-        var actual = json.RootElement.GetItem(MissingMemberBehavior.Undefined);
+        JsonOptions.MissingMemberBehavior = MissingMemberBehavior.Undefined;
+        var actual = json.RootElement.GetItem();
 
         Assert.IsType<GatheringTool>(actual);
     }

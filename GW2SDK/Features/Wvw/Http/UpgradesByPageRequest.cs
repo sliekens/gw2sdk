@@ -15,8 +15,7 @@ internal sealed class UpgradesByPageRequest(int pageIndex) : IHttpRequest<HashSe
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<ObjectiveUpgrade> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -44,7 +43,7 @@ internal sealed class UpgradesByPageRequest(int pageIndex) : IHttpRequest<HashSe
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
         var value =
-            json.RootElement.GetSet(entry => entry.GetObjectiveUpgrade(MissingMemberBehavior));
+            json.RootElement.GetSet(static entry => entry.GetObjectiveUpgrade());
         return (value, new MessageContext(response));
     }
 }

@@ -11,8 +11,7 @@ internal sealed class LegendaryItemByIdRequest(int legendaryItemId) : IHttpReque
 
     public int LegendaryItemId { get; } = legendaryItemId;
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(LegendaryItem Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -35,7 +34,7 @@ internal sealed class LegendaryItemByIdRequest(int legendaryItemId) : IHttpReque
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetLegendaryItem(MissingMemberBehavior);
+        var value = json.RootElement.GetLegendaryItem();
         return (value, new MessageContext(response));
     }
 }

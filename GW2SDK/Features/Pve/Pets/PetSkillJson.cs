@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Pve.Pets;
@@ -6,8 +6,7 @@ namespace GuildWars2.Pve.Pets;
 internal static class PetSkillJson
 {
     public static PetSkill GetPetSkill(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -18,12 +17,12 @@ internal static class PetSkillJson
             {
                 id = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
         }
 
-        return new PetSkill { Id = id.Map(value => value.GetInt32()) };
+        return new PetSkill { Id = id.Map(static value => value.GetInt32()) };
     }
 }

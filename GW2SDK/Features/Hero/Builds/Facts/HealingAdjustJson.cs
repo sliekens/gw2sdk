@@ -7,7 +7,6 @@ internal static class HealingAdjustJson
 {
     public static HealingAdjust GetHealingAdjust(
         this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior,
         out int? requiresTrait,
         out int? overrides
     )
@@ -50,7 +49,7 @@ internal static class HealingAdjustJson
             {
                 hitCount = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -58,9 +57,9 @@ internal static class HealingAdjustJson
 
         return new HealingAdjust
         {
-            Text = text.Map(value => value.GetStringRequired()),
-            IconHref = icon.Map(value => value.GetStringRequired()),
-            HitCount = hitCount.Map(value => value.GetInt32())
+            Text = text.Map(static value => value.GetStringRequired()),
+            IconHref = icon.Map(static value => value.GetStringRequired()),
+            HitCount = hitCount.Map(static value => value.GetInt32())
         };
     }
 }

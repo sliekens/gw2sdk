@@ -13,8 +13,7 @@ internal sealed class MailCarrierByIdRequest(int mailCarrierId) : IHttpRequest<M
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(MailCarrier Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -38,7 +37,7 @@ internal sealed class MailCarrierByIdRequest(int mailCarrierId) : IHttpRequest<M
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetMailCarrier(MissingMemberBehavior);
+        var value = json.RootElement.GetMailCarrier();
         return (value, new MessageContext(response));
     }
 }

@@ -5,10 +5,7 @@ namespace GuildWars2.Pve.SuperAdventureBox;
 
 internal static class SuperAdventureBoxProgressJson
 {
-    public static SuperAdventureBoxProgress GetSuperAdventureBoxProgress(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
-    )
+    public static SuperAdventureBoxProgress GetSuperAdventureBoxProgress(this JsonElement json)
     {
         RequiredMember zones = "zones";
         RequiredMember unlocks = "unlocks";
@@ -28,7 +25,7 @@ internal static class SuperAdventureBoxProgressJson
             {
                 songs = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -38,22 +35,17 @@ internal static class SuperAdventureBoxProgressJson
         {
             Zones =
                 zones.Map(
-                    values =>
-                        values.GetList(
-                            entry => entry.GetSuperAdventureBoxZone(missingMemberBehavior)
-                        )
+                    static values =>
+                        values.GetList(static value => value.GetSuperAdventureBoxZone())
                 ),
             Unlocks =
                 unlocks.Map(
-                    values =>
-                        values.GetList(
-                            entry => entry.GetSuperAdventureBoxUpgrade(missingMemberBehavior)
-                        )
+                    static values =>
+                        values.GetList(static value => value.GetSuperAdventureBoxUpgrade())
                 ),
             Songs = songs.Map(
-                values => values.GetList(
-                    entry => entry.GetSuperAdventureBoxSong(missingMemberBehavior)
-                )
+                static values =>
+                    values.GetList(static value => value.GetSuperAdventureBoxSong())
             )
         };
     }

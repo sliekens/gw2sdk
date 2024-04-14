@@ -6,8 +6,7 @@ namespace GuildWars2.Guilds.Teams;
 internal static class ResultsJson
 {
     public static Results GetResults(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember wins = "wins";
@@ -38,7 +37,7 @@ internal static class ResultsJson
             {
                 forfeits = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -46,11 +45,11 @@ internal static class ResultsJson
 
         return new Results
         {
-            Wins = wins.Map(value => value.GetInt32()),
-            Losses = losses.Map(value => value.GetInt32()),
-            Desertions = desertions.Map(value => value.GetInt32()),
-            Byes = byes.Map(value => value.GetInt32()),
-            Forfeits = forfeits.Map(value => value.GetInt32())
+            Wins = wins.Map(static value => value.GetInt32()),
+            Losses = losses.Map(static value => value.GetInt32()),
+            Desertions = desertions.Map(static value => value.GetInt32()),
+            Byes = byes.Map(static value => value.GetInt32()),
+            Forfeits = forfeits.Map(static value => value.GetInt32())
         };
     }
 }

@@ -18,8 +18,7 @@ internal sealed class AccountAchievementsByIdsRequest : IHttpRequest<HashSet<Acc
 
     public required string? AccessToken { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<AccountAchievement> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -44,7 +43,7 @@ internal sealed class AccountAchievementsByIdsRequest : IHttpRequest<HashSet<Acc
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
         var value =
-            json.RootElement.GetSet(entry => entry.GetAccountAchievement(MissingMemberBehavior));
+            json.RootElement.GetSet(static entry => entry.GetAccountAchievement());
         return (value, new MessageContext(response));
     }
 }

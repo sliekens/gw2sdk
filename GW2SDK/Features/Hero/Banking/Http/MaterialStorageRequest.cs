@@ -12,8 +12,7 @@ internal sealed class MaterialStorageRequest : IHttpRequest<MaterialStorage>
 
     public required string? AccessToken { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(MaterialStorage Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -29,7 +28,7 @@ internal sealed class MaterialStorageRequest : IHttpRequest<MaterialStorage>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetMaterialStorage(MissingMemberBehavior);
+        var value = json.RootElement.GetMaterialStorage();
         return (value, new MessageContext(response));
     }
 }

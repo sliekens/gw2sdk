@@ -11,8 +11,7 @@ internal sealed class FinisherByIdRequest(int finisherId) : IHttpRequest<Finishe
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(Finisher Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -36,7 +35,7 @@ internal sealed class FinisherByIdRequest(int finisherId) : IHttpRequest<Finishe
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetFinisher(MissingMemberBehavior);
+        var value = json.RootElement.GetFinisher();
         return (value, new MessageContext(response));
     }
 }

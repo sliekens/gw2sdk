@@ -9,8 +9,7 @@ internal sealed class LegendByIdRequest(string legendId) : IHttpRequest<Legend>
 
     public string LegendId { get; } = legendId;
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(Legend Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -33,7 +32,7 @@ internal sealed class LegendByIdRequest(string legendId) : IHttpRequest<Legend>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetLegend(MissingMemberBehavior);
+        var value = json.RootElement.GetLegend();
         return (value, new MessageContext(response));
     }
 }

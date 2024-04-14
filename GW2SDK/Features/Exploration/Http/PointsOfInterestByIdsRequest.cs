@@ -40,8 +40,7 @@ internal sealed class PointsOfInterestByIdsRequest : IHttpRequest<HashSet<PointO
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<PointOfInterest> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -71,7 +70,7 @@ internal sealed class PointsOfInterestByIdsRequest : IHttpRequest<HashSet<PointO
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
         var value =
-            json.RootElement.GetSet(entry => entry.GetPointOfInterest(MissingMemberBehavior));
+            json.RootElement.GetSet(static entry => entry.GetPointOfInterest());
         return (value, new MessageContext(response));
     }
 }

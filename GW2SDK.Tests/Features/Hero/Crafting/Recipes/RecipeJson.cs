@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using GuildWars2.Hero.Crafting.Recipes;
+using GuildWars2.Json;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Crafting.Recipes;
@@ -15,7 +16,9 @@ public class RecipeJson
             json =>
             {
                 using var document = JsonDocument.Parse(json);
-                var actual = document.RootElement.GetRecipe(MissingMemberBehavior.Error);
+
+                JsonOptions.MissingMemberBehavior = MissingMemberBehavior.Error;
+                var actual = document.RootElement.GetRecipe();
 
                 Assert.True(actual.Id > 0);
                 Assert.True(actual.OutputItemId >= 1);

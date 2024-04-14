@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Hero.Builds;
 using GuildWars2.Json;
 
@@ -7,8 +7,7 @@ namespace GuildWars2.Hero.Training.Skills;
 internal static class EliteSkillSummaryJson
 {
     public static EliteSkillSummary GetEliteSkillSummary(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -33,7 +32,7 @@ internal static class EliteSkillSummaryJson
             {
                 slot = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -41,8 +40,8 @@ internal static class EliteSkillSummaryJson
 
         return new EliteSkillSummary
         {
-            Id = id.Map(value => value.GetInt32()),
-            Slot = slot.Map(value => value.GetEnum<SkillSlot>())
+            Id = id.Map(static value => value.GetInt32()),
+            Slot = slot.Map(static value => value.GetEnum<SkillSlot>())
         };
     }
 }

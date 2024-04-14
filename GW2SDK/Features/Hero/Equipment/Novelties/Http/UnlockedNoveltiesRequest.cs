@@ -28,7 +28,7 @@ internal sealed class UnlockedNoveltiesRequest : IHttpRequest<HashSet<int>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetInt32());
+        var value = json.RootElement.GetSet(static entry => entry.GetInt32());
         return (value, new MessageContext(response));
     }
 }

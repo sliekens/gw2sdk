@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.GodShrines;
@@ -6,8 +6,7 @@ namespace GuildWars2.Exploration.GodShrines;
 internal static class GodShrineJson
 {
     public static GodShrine GetGodShrine(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -47,7 +46,7 @@ internal static class GodShrineJson
             {
                 iconContested = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -55,13 +54,13 @@ internal static class GodShrineJson
 
         return new GodShrine
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
-            NameContested = nameContested.Map(value => value.GetStringRequired()),
-            PointOfInterestId = pointOfInterestId.Map(value => value.GetInt32()),
-            Coordinates = coordinates.Map(value => value.GetCoordinateF(missingMemberBehavior)),
-            IconHref = icon.Map(value => value.GetStringRequired()),
-            IconContestedHref = iconContested.Map(value => value.GetStringRequired())
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            NameContested = nameContested.Map(static value => value.GetStringRequired()),
+            PointOfInterestId = pointOfInterestId.Map(static value => value.GetInt32()),
+            Coordinates = coordinates.Map(static value => value.GetCoordinateF()),
+            IconHref = icon.Map(static value => value.GetStringRequired()),
+            IconContestedHref = iconContested.Map(static value => value.GetStringRequired())
         };
     }
 }

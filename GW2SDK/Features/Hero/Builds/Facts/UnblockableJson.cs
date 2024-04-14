@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Builds.Facts;
@@ -7,7 +7,6 @@ internal static class UnblockableJson
 {
     public static Unblockable GetUnblockable(
         this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior,
         out int? requiresTrait,
         out int? overrides
     )
@@ -49,7 +48,7 @@ internal static class UnblockableJson
             {
                 // Always true, ignore
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -57,8 +56,8 @@ internal static class UnblockableJson
 
         return new Unblockable
         {
-            Text = text.Map(value => value.GetStringRequired()),
-            IconHref = icon.Map(value => value.GetStringRequired())
+            Text = text.Map(static value => value.GetStringRequired()),
+            IconHref = icon.Map(static value => value.GetStringRequired())
         };
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.WizardsVault.Objectives;
@@ -6,8 +6,7 @@ namespace GuildWars2.WizardsVault.Objectives;
 internal static class SpecialObjectivesProgressJson
 {
     public static SpecialObjectivesProgress GetSpecialObjectivesProgress(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember objectives = "objectives";
@@ -18,7 +17,7 @@ internal static class SpecialObjectivesProgressJson
             {
                 objectives = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -26,9 +25,7 @@ internal static class SpecialObjectivesProgressJson
 
         return new SpecialObjectivesProgress
         {
-            Objectives = objectives.Map(
-                values => values.GetList(
-                    value => value.GetObjectiveProgress(missingMemberBehavior)
+            Objectives = objectives.Map(static values => values.GetList(static value => value.GetObjectiveProgress()
                 )
             )
         };

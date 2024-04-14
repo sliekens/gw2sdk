@@ -13,8 +13,7 @@ internal sealed class StoredBuildsByNumbersRequest(IReadOnlyCollection<int> slot
 
     public required string? AccessToken { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(IReadOnlyList<Build> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -38,7 +37,7 @@ internal sealed class StoredBuildsByNumbersRequest(IReadOnlyCollection<int> slot
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetList(entry => entry.GetBuild(MissingMemberBehavior));
+        var value = json.RootElement.GetList(static entry => entry.GetBuild());
         return (value, new MessageContext(response));
     }
 }

@@ -1,11 +1,11 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Builds;
 
 internal static class TraitIdsJson
 {
-    public static (int? AdeptTraitId, int? MasterTraitId, int? GrandmasterTraitId) GetTraitIds(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static (int? AdeptTraitId, int? MasterTraitId, int? GrandmasterTraitId) GetTraitIds(this JsonElement json)
     {
         JsonElement first = default;
         JsonElement second = default;
@@ -25,7 +25,7 @@ internal static class TraitIdsJson
             {
                 third = entry;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(
                     Strings.UnexpectedArrayLength(json.GetArrayLength())

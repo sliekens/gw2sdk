@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Hero;
 using GuildWars2.Json;
 
@@ -7,8 +7,7 @@ namespace GuildWars2.Items;
 internal static class InfixUpgradeJson
 {
     public static IDictionary<Extensible<AttributeName>, int> GetAttributes(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         var attributes = new Dictionary<Extensible<AttributeName>, int>(json.GetArrayLength());
@@ -26,14 +25,14 @@ internal static class InfixUpgradeJson
                 {
                     modifier = member;
                 }
-                else if (missingMemberBehavior == MissingMemberBehavior.Error)
+                else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                 {
                     throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
-            var key = attribute.Map(value => value.GetAttributeName());
-            var value = modifier.Map(value => value.GetInt32());
+            var key = attribute.Map(static value => value.GetAttributeName());
+            var value = modifier.Map(static value => value.GetInt32());
             attributes.Add(key, value);
         }
 

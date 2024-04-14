@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Equipment.Templates;
 internal static class LegendaryItemJson
 {
     public static LegendaryItem GetLegendaryItem(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -23,7 +22,7 @@ internal static class LegendaryItemJson
             {
                 maxCount = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -31,8 +30,8 @@ internal static class LegendaryItemJson
 
         return new LegendaryItem
         {
-            Id = id.Map(value => value.GetInt32()),
-            MaxCount = maxCount.Map(value => value.GetInt32())
+            Id = id.Map(static value => value.GetInt32()),
+            MaxCount = maxCount.Map(static value => value.GetInt32())
         };
     }
 }

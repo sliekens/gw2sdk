@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Hero.Equipment.Templates.Http;
+using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Templates;
 
@@ -32,10 +33,10 @@ public sealed class EquipmentTemplatesClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         CharacterEquipmentRequest request = new(characterName)
         {
             AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -56,10 +57,10 @@ public sealed class EquipmentTemplatesClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         BoundLegendaryItemsRequest request = new()
         {
             AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -101,10 +102,10 @@ public sealed class EquipmentTemplatesClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         EquipmentTemplateRequest request = new(characterName, templateNumber)
         {
             AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -123,10 +124,10 @@ public sealed class EquipmentTemplatesClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         EquipmentTemplatesRequest request = new(characterName)
         {
             AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -146,10 +147,10 @@ public sealed class EquipmentTemplatesClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         ActiveEquipmentTemplateRequest request = new(characterName)
         {
             AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -167,7 +168,8 @@ public sealed class EquipmentTemplatesClient
         CancellationToken cancellationToken = default
     )
     {
-        LegendaryItemsRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        LegendaryItemsRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -193,10 +195,8 @@ public sealed class EquipmentTemplatesClient
         CancellationToken cancellationToken = default
     )
     {
-        LegendaryItemByIdRequest request = new(legendaryItemId)
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        LegendaryItemByIdRequest request = new(legendaryItemId);
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -212,10 +212,8 @@ public sealed class EquipmentTemplatesClient
         CancellationToken cancellationToken = default
     )
     {
-        LegendaryItemsByIdsRequest request = new(legendaryItemIds.ToList())
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        LegendaryItemsByIdsRequest request = new(legendaryItemIds.ToList());
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -232,10 +230,10 @@ public sealed class EquipmentTemplatesClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         LegendaryItemsByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }

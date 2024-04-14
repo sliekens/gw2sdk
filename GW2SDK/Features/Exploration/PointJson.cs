@@ -1,13 +1,13 @@
 ﻿using System.Drawing;
 using System.Text.Json;
+using GuildWars2.Json;
 
 namespace GuildWars2.Exploration;
 
 internal static class PointJson
 {
     public static Point GetCoordinate(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         JsonElement x = default;
@@ -23,7 +23,7 @@ internal static class PointJson
             {
                 y = entry;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(
                     Strings.UnexpectedArrayLength(json.GetArrayLength())
@@ -35,8 +35,7 @@ internal static class PointJson
     }
 
     public static PointF GetCoordinateF(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         JsonElement x = default;
@@ -52,7 +51,7 @@ internal static class PointJson
             {
                 y = entry;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(
                     Strings.UnexpectedArrayLength(json.GetArrayLength())

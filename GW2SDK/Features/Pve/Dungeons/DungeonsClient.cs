@@ -1,4 +1,5 @@
-﻿using GuildWars2.Pve.Dungeons.Http;
+﻿using GuildWars2.Json;
+using GuildWars2.Pve.Dungeons.Http;
 
 namespace GuildWars2.Pve.Dungeons;
 
@@ -58,10 +59,8 @@ public sealed class DungeonsClient
         CancellationToken cancellationToken = default
     )
     {
-        DungeonByIdRequest request = new(dungeonId)
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        DungeonByIdRequest request = new(dungeonId);
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -76,10 +75,8 @@ public sealed class DungeonsClient
         CancellationToken cancellationToken = default
     )
     {
-        DungeonsByIdsRequest request = new(dungeonIds.ToList())
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        DungeonsByIdsRequest request = new(dungeonIds.ToList());
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -96,10 +93,10 @@ public sealed class DungeonsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         DungeonsByPageRequest request = new(pageIndex)
         {
-            PageSize = pageSize,
-            MissingMemberBehavior = missingMemberBehavior
+            PageSize = pageSize
         };
 
         return request.SendAsync(httpClient, cancellationToken);
@@ -114,7 +111,8 @@ public sealed class DungeonsClient
         CancellationToken cancellationToken = default
     )
     {
-        DungeonsRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        DungeonsRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);
     }
 

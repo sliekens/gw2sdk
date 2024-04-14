@@ -6,7 +6,7 @@ namespace GuildWars2.Guilds;
 
 internal static class GuildJson
 {
-    public static Guild GetGuild(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Guild GetGuild(this JsonElement json)
     {
         RequiredMember level = "level";
         RequiredMember motd = "motd";
@@ -71,7 +71,7 @@ internal static class GuildJson
             {
                 emblem = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -79,18 +79,18 @@ internal static class GuildJson
 
         return new Guild
         {
-            Level = level.Map(value => value.GetInt32()),
-            MessageOfTheDay = motd.Map(value => value.GetStringRequired()),
-            Influence = influence.Map(value => value.GetInt32()),
-            Aetherium = aetherium.Map(value => value.GetInt32()),
-            Resonance = resonance.Map(value => value.GetInt32()),
-            Favor = favor.Map(value => value.GetInt32()),
-            MemberCount = memberCount.Map(value => value.GetInt32()),
-            MemberCapacity = memberCapacity.Map(value => value.GetInt32()),
-            Id = id.Map(value => value.GetStringRequired()),
-            Name = name.Map(value => value.GetStringRequired()),
-            Tag = tag.Map(value => value.GetStringRequired()),
-            Emblem = emblem.Map(value => value.GetGuildEmblem(missingMemberBehavior))
+            Level = level.Map(static value => value.GetInt32()),
+            MessageOfTheDay = motd.Map(static value => value.GetStringRequired()),
+            Influence = influence.Map(static value => value.GetInt32()),
+            Aetherium = aetherium.Map(static value => value.GetInt32()),
+            Resonance = resonance.Map(static value => value.GetInt32()),
+            Favor = favor.Map(static value => value.GetInt32()),
+            MemberCount = memberCount.Map(static value => value.GetInt32()),
+            MemberCapacity = memberCapacity.Map(static value => value.GetInt32()),
+            Id = id.Map(static value => value.GetStringRequired()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            Tag = tag.Map(static value => value.GetStringRequired()),
+            Emblem = emblem.Map(static value => value.GetGuildEmblem())
         };
     }
 }

@@ -1,11 +1,11 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Files;
 
 internal static class AssetJson
 {
-    public static Asset GetAsset(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Asset GetAsset(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember icon = "icon";
@@ -20,7 +20,7 @@ internal static class AssetJson
             {
                 icon = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -28,8 +28,8 @@ internal static class AssetJson
 
         return new Asset
         {
-            Id = id.Map(value => value.GetStringRequired()),
-            IconHref = icon.Map(value => value.GetStringRequired())
+            Id = id.Map(static value => value.GetStringRequired()),
+            IconHref = icon.Map(static value => value.GetStringRequired())
         };
     }
 }

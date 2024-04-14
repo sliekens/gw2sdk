@@ -19,8 +19,7 @@ internal sealed class GuildPermissionsByIdsRequest : IHttpRequest<HashSet<GuildP
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<GuildPermissionSummary> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -45,7 +44,7 @@ internal sealed class GuildPermissionsByIdsRequest : IHttpRequest<HashSet<GuildP
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
         var value = json.RootElement.GetSet(
-            entry => entry.GetGuildPermissionSummary(MissingMemberBehavior)
+            entry => entry.GetGuildPermissionSummary()
         );
         return (value, new MessageContext(response));
     }

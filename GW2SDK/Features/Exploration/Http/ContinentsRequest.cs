@@ -18,8 +18,7 @@ internal sealed class ContinentsRequest : IHttpRequest<HashSet<Continent>>
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<Continent> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -35,7 +34,7 @@ internal sealed class ContinentsRequest : IHttpRequest<HashSet<Continent>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetContinent(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(static entry => entry.GetContinent());
         return (value, new MessageContext(response));
     }
 }

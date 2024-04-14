@@ -17,8 +17,7 @@ internal sealed class CreateSubtokenRequest(string accessToken) : IHttpRequest<C
 
     public IReadOnlyCollection<string>? AllowedUrls { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(CreatedSubtoken Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -55,7 +54,7 @@ internal sealed class CreateSubtokenRequest(string accessToken) : IHttpRequest<C
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetCreatedSubtoken(MissingMemberBehavior);
+        var value = json.RootElement.GetCreatedSubtoken();
         return (value, new MessageContext(response));
     }
 }

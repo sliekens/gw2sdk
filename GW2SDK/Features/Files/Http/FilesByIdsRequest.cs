@@ -18,8 +18,7 @@ internal sealed class FilesByIdsRequest : IHttpRequest<HashSet<Asset>>
 
     public IReadOnlyCollection<string> FileIds { get; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<Asset> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -42,7 +41,7 @@ internal sealed class FilesByIdsRequest : IHttpRequest<HashSet<Asset>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetAsset(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(static entry => entry.GetAsset());
         return (value, new MessageContext(response));
     }
 }

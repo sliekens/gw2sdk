@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Builds;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Builds;
 internal static class LegendJson
 {
     public static Legend GetLegend(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -43,7 +42,7 @@ internal static class LegendJson
             {
                 utilities = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -51,12 +50,12 @@ internal static class LegendJson
 
         return new Legend
         {
-            Id = id.Map(value => value.GetStringRequired()),
-            Code = code.Map(value => value.GetInt32()),
-            Swap = swap.Map(value => value.GetInt32()),
-            Heal = heal.Map(value => value.GetInt32()),
-            Elite = elite.Map(value => value.GetInt32()),
-            Utilities = utilities.Map(values => values.GetList(value => value.GetInt32()))
+            Id = id.Map(static value => value.GetStringRequired()),
+            Code = code.Map(static value => value.GetInt32()),
+            Swap = swap.Map(static value => value.GetInt32()),
+            Heal = heal.Map(static value => value.GetInt32()),
+            Elite = elite.Map(static value => value.GetInt32()),
+            Utilities = utilities.Map(static values => values.GetList(static value => value.GetInt32()))
         };
     }
 }

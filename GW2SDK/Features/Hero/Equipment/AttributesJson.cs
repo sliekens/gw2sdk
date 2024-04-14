@@ -1,12 +1,12 @@
-﻿using System.Text.Json;
+using System.Text.Json;
+using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment;
 
 internal static class AttributesJson
 {
     public static Dictionary<AttributeName, int> GetAttributes(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         var result = new Dictionary<AttributeName, int>(4);
@@ -53,7 +53,7 @@ internal static class AttributesJson
             {
                 result[AttributeName.AgonyResistance] = member.Value.GetInt32();
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }

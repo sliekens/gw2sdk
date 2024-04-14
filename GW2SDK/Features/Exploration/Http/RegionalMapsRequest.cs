@@ -27,8 +27,7 @@ internal sealed class RegionalMapsRequest(int continentId, int floorId, int regi
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<Map> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -51,7 +50,7 @@ internal sealed class RegionalMapsRequest(int continentId, int floorId, int regi
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetMap(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(static entry => entry.GetMap());
         return (value, new MessageContext(response));
     }
 }

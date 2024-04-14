@@ -16,8 +16,7 @@ internal sealed class MountSkinsByPageRequest(int pageIndex) : IHttpRequest<Hash
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<MountSkin> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -44,7 +43,7 @@ internal sealed class MountSkinsByPageRequest(int pageIndex) : IHttpRequest<Hash
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetMountSkin(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(static entry => entry.GetMountSkin());
         return (value, new MessageContext(response));
     }
 }

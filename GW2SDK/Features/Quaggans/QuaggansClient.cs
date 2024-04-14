@@ -1,4 +1,5 @@
-﻿using GuildWars2.Quaggans.Http;
+﻿using GuildWars2.Json;
+using GuildWars2.Quaggans.Http;
 
 namespace GuildWars2.Quaggans;
 
@@ -25,7 +26,8 @@ public sealed class QuaggansClient
         CancellationToken cancellationToken = default
     )
     {
-        QuaggansRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        QuaggansRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -51,10 +53,8 @@ public sealed class QuaggansClient
         CancellationToken cancellationToken = default
     )
     {
-        QuagganByIdRequest request = new(quagganId)
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        QuagganByIdRequest request = new(quagganId);
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -69,7 +69,8 @@ public sealed class QuaggansClient
         CancellationToken cancellationToken = default
     )
     {
-        QuaggansByIdsRequest request = new(quagganIds.ToList()) { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        QuaggansByIdsRequest request = new(quagganIds.ToList());
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -86,10 +87,10 @@ public sealed class QuaggansClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         QuaggansByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }

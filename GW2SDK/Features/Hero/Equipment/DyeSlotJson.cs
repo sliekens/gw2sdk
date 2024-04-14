@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Equipment;
 internal static class DyeSlotJson
 {
     public static DyeSlot GetDyeSlot(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember colorId = "color_id";
@@ -22,7 +21,7 @@ internal static class DyeSlotJson
             {
                 material = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -30,8 +29,8 @@ internal static class DyeSlotJson
 
         return new DyeSlot
         {
-            ColorId = colorId.Map(value => value.GetInt32()),
-            Material = material.Map(value => value.GetEnum<Material>())
+            ColorId = colorId.Map(static value => value.GetInt32()),
+            Material = material.Map(static value => value.GetEnum<Material>())
         };
     }
 }

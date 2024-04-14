@@ -1,11 +1,11 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Pve.Pets;
 
 internal static class PetJson
 {
-    public static Pet GetPet(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Pet GetPet(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -35,7 +35,7 @@ internal static class PetJson
             {
                 skills = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -43,12 +43,11 @@ internal static class PetJson
 
         return new Pet
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
-            Description = description.Map(value => value.GetStringRequired()),
-            IconHref = icon.Map(value => value.GetStringRequired()),
-            Skills = skills.Map(
-                values => values.GetList(value => value.GetPetSkill(missingMemberBehavior))
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            Description = description.Map(static value => value.GetStringRequired()),
+            IconHref = icon.Map(static value => value.GetStringRequired()),
+            Skills = skills.Map(static values => values.GetList(static value => value.GetPetSkill())
             )
         };
     }

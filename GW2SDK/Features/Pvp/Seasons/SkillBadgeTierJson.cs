@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Seasons;
@@ -6,8 +6,7 @@ namespace GuildWars2.Pvp.Seasons;
 internal static class SkillBadgeTierJson
 {
     public static SkillBadgeTier GetSkillBadgeTier(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember rating = "rating";
@@ -18,12 +17,12 @@ internal static class SkillBadgeTierJson
             {
                 rating = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
         }
 
-        return new SkillBadgeTier { Rating = rating.Map(value => value.GetInt32()) };
+        return new SkillBadgeTier { Rating = rating.Map(static value => value.GetInt32()) };
     }
 }

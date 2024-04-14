@@ -5,10 +5,7 @@ namespace GuildWars2.Authorization;
 
 internal static class SubtokenInfoJson
 {
-    public static SubtokenInfo GetSubtokenInfo(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
-    )
+    public static SubtokenInfo GetSubtokenInfo(this JsonElement json)
     {
         RequiredMember name = "name";
         RequiredMember id = "id";
@@ -51,7 +48,7 @@ internal static class SubtokenInfoJson
             {
                 urls = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -59,19 +56,17 @@ internal static class SubtokenInfoJson
 
         return new SubtokenInfo
         {
-            Id = id.Map(value => value.GetStringRequired()),
-            Name = name.Map(value => value.GetStringRequired()),
+            Id = id.Map(static value => value.GetStringRequired()),
+            Name = name.Map(static value => value.GetStringRequired()),
             Permissions =
                 permissions.Map(
-                    values => values.GetList(
-                        value => value.GetEnum<Permission>()
-                    )
+                    static values => values.GetList(static value => value.GetEnum<Permission>())
                 ),
-            ExpiresAt = expiresAt.Map(value => value.GetDateTimeOffset()),
-            IssuedAt = issuedAt.Map(value => value.GetDateTimeOffset()),
+            ExpiresAt = expiresAt.Map(static value => value.GetDateTimeOffset()),
+            IssuedAt = issuedAt.Map(static value => value.GetDateTimeOffset()),
             Urls = urls.Map(
-                values => values.GetList(
-                    item => new Uri(item.GetStringRequired(), UriKind.Relative)
+                static values => values.GetList(
+                    static value => new Uri(value.GetStringRequired(), UriKind.Relative)
                 )
             )
         };

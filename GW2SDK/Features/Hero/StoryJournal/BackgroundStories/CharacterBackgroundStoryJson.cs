@@ -5,10 +5,7 @@ namespace GuildWars2.Hero.StoryJournal.BackgroundStories;
 
 internal static class CharacterBackgroundStoryJson
 {
-    public static CharacterBackgroundStory GetCharacterBackgroundStory(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
-    )
+    public static CharacterBackgroundStory GetCharacterBackgroundStory(this JsonElement json)
     {
         RequiredMember backstory = "backstory";
 
@@ -18,7 +15,7 @@ internal static class CharacterBackgroundStoryJson
             {
                 backstory = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -26,9 +23,9 @@ internal static class CharacterBackgroundStoryJson
 
         return new CharacterBackgroundStory
         {
-            AnswerIds = backstory
-                .Map(values => values.GetList(entry => entry.GetStringRequired()))
-                .ToList()
+            AnswerIds = backstory.Map(
+                static values => values.GetList(static value => value.GetStringRequired())
+            )
         };
     }
 }

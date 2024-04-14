@@ -1,11 +1,11 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Worlds;
 
 internal static class WorldJson
 {
-    public static World GetWorld(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static World GetWorld(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -24,7 +24,7 @@ internal static class WorldJson
             {
                 population = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -32,10 +32,9 @@ internal static class WorldJson
 
         return new World
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
-            Population = population.Map(
-                value => value.GetEnum<WorldPopulation>()
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            Population = population.Map(static value => value.GetEnum<WorldPopulation>()
             )
         };
     }

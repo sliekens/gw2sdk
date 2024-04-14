@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Pve.SuperAdventureBox;
@@ -6,8 +6,7 @@ namespace GuildWars2.Pve.SuperAdventureBox;
 internal static class SuperAdventureBoxZoneJson
 {
     public static SuperAdventureBoxZone GetSuperAdventureBoxZone(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -33,7 +32,7 @@ internal static class SuperAdventureBoxZoneJson
             {
                 zone = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -41,15 +40,14 @@ internal static class SuperAdventureBoxZoneJson
 
         return new SuperAdventureBoxZone
         {
-            Id = id.Map(value => value.GetInt32()),
-            Mode = mode.Map(
-                value =>
+            Id = id.Map(static value => value.GetInt32()),
+            Mode = mode.Map(static value =>
                     value.ValueEquals("infantile") // Infantile was renamed to Exploration
                         ? SuperAdventureBoxMode.Exploration
                         : value.GetEnum<SuperAdventureBoxMode>()
             ),
-            World = world.Map(value => value.GetInt32()),
-            Zone = zone.Map(value => value.GetInt32())
+            World = world.Map(static value => value.GetInt32()),
+            Zone = zone.Map(static value => value.GetInt32())
         };
     }
 }

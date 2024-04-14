@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Authorization;
@@ -6,8 +6,7 @@ namespace GuildWars2.Authorization;
 internal static class TokenInfoJson
 {
     public static TokenInfo GetTokenInfo(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         if (json.TryGetProperty("type", out var discriminator))
@@ -15,9 +14,9 @@ internal static class TokenInfoJson
             switch (discriminator.GetString())
             {
                 case "APIKey":
-                    return json.GetApiKeyInfo(missingMemberBehavior);
+                    return json.GetApiKeyInfo();
                 case "Subtoken":
-                    return json.GetSubtokenInfo(missingMemberBehavior);
+                    return json.GetSubtokenInfo();
             }
         }
 
@@ -28,7 +27,7 @@ internal static class TokenInfoJson
         {
             if (member.NameEquals("type"))
             {
-                if (missingMemberBehavior == MissingMemberBehavior.Error)
+                if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                 {
                     throw new InvalidOperationException(
                         Strings.UnexpectedDiscriminator(member.Value.GetString())
@@ -47,7 +46,7 @@ internal static class TokenInfoJson
             {
                 permissions = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -55,10 +54,9 @@ internal static class TokenInfoJson
 
         return new TokenInfo
         {
-            Id = id.Map(value => value.GetStringRequired()),
-            Name = name.Map(value => value.GetStringRequired()),
-            Permissions = permissions.Map(
-                values => values.GetList(value => value.GetEnum<Permission>())
+            Id = id.Map(static value => value.GetStringRequired()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            Permissions = permissions.Map(static values => values.GetList(static value => value.GetEnum<Permission>())
             )
         };
     }

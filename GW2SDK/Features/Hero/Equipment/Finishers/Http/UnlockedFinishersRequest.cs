@@ -13,8 +13,7 @@ internal sealed class UnlockedFinishersRequest : IHttpRequest<HashSet<UnlockedFi
 
     public required string? AccessToken { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<UnlockedFinisher> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -31,7 +30,7 @@ internal sealed class UnlockedFinishersRequest : IHttpRequest<HashSet<UnlockedFi
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
         var value =
-            json.RootElement.GetSet(entry => entry.GetUnlockedFinisher(MissingMemberBehavior));
+            json.RootElement.GetSet(static entry => entry.GetUnlockedFinisher());
         return (value, new MessageContext(response));
     }
 }

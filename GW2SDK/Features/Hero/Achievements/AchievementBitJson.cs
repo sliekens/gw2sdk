@@ -1,13 +1,13 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Hero.Achievements.Bits;
+using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Achievements;
 
 internal static class AchievementBitJson
 {
     public static AchievementBit GetAchievementBit(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         // BUG: some achievement bits don't have a type property, see https://github.com/arenanet/api-cdi/issues/670
@@ -17,20 +17,20 @@ internal static class AchievementBitJson
             switch (type.GetString())
             {
                 case "Text":
-                    return json.GetAchievementTextBit(missingMemberBehavior);
+                    return json.GetAchievementTextBit();
                 case "Minipet":
-                    return json.GetAchievementMiniatureBit(missingMemberBehavior);
+                    return json.GetAchievementMiniatureBit();
                 case "Item":
-                    return json.GetAchievementItemBit(missingMemberBehavior);
+                    return json.GetAchievementItemBit();
                 case "Skin":
-                    return json.GetAchievementSkinBit(missingMemberBehavior);
+                    return json.GetAchievementSkinBit();
             }
         }
 
         // ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
         foreach (var member in json.EnumerateObject())
         {
-            if (missingMemberBehavior == MissingMemberBehavior.Error)
+            if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }

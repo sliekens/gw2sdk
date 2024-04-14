@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Hero.Builds;
 using GuildWars2.Hero.Training.Skills;
 using GuildWars2.Json;
@@ -8,8 +8,7 @@ namespace GuildWars2.Hero.Training;
 internal static class SkillSummaryJson
 {
     public static SkillSummary GetSkillSummary(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         if (json.TryGetProperty("type", out var discriminator))
@@ -17,13 +16,13 @@ internal static class SkillSummaryJson
             switch (discriminator.GetString())
             {
                 case "Profession":
-                    return json.GetProfessionSkillSummary(missingMemberBehavior);
+                    return json.GetProfessionSkillSummary();
                 case "Heal":
-                    return json.GetHealingSkillSummary(missingMemberBehavior);
+                    return json.GetHealingSkillSummary();
                 case "Utility":
-                    return json.GetUtilitySkillSummary(missingMemberBehavior);
+                    return json.GetUtilitySkillSummary();
                 case "Elite":
-                    return json.GetEliteSkillSummary(missingMemberBehavior);
+                    return json.GetEliteSkillSummary();
             }
         }
 
@@ -34,7 +33,7 @@ internal static class SkillSummaryJson
         {
             if (member.NameEquals("type"))
             {
-                if (missingMemberBehavior == MissingMemberBehavior.Error)
+                if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                 {
                     throw new InvalidOperationException(
                         Strings.UnexpectedDiscriminator(member.Value.GetString())
@@ -49,7 +48,7 @@ internal static class SkillSummaryJson
             {
                 slot = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -57,8 +56,8 @@ internal static class SkillSummaryJson
 
         return new SkillSummary
         {
-            Id = id.Map(value => value.GetInt32()),
-            Slot = slot.Map(value => value.GetEnum<SkillSlot>())
+            Id = id.Map(static value => value.GetInt32()),
+            Slot = slot.Map(static value => value.GetEnum<SkillSlot>())
         };
     }
 }

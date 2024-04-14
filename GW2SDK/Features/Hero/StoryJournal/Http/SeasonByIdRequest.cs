@@ -12,8 +12,7 @@ internal sealed class SeasonByIdRequest(string seasonId) : IHttpRequest<Storylin
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(Storyline Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -37,7 +36,7 @@ internal sealed class SeasonByIdRequest(string seasonId) : IHttpRequest<Storylin
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetStoryline(MissingMemberBehavior);
+        var value = json.RootElement.GetStoryline();
         return (value, new MessageContext(response));
     }
 }

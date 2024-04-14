@@ -17,8 +17,7 @@ internal sealed class MatchesStatsByIdsRequest : IHttpRequest<HashSet<MatchStats
 
     public IReadOnlyCollection<string> MatchIds { get; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<MatchStats> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -41,7 +40,7 @@ internal sealed class MatchesStatsByIdsRequest : IHttpRequest<HashSet<MatchStats
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetMatchStats(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(static entry => entry.GetMatchStats());
         return (value, new MessageContext(response));
     }
 }

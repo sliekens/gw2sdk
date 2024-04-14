@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Files.Http;
+using GuildWars2.Json;
 
 namespace GuildWars2.Files;
 
@@ -25,7 +26,8 @@ public sealed class FilesClient
         CancellationToken cancellationToken = default
     )
     {
-        FilesRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        FilesRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -51,7 +53,8 @@ public sealed class FilesClient
         CancellationToken cancellationToken = default
     )
     {
-        FileByIdRequest request = new(fileId) { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        FileByIdRequest request = new(fileId);
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -66,7 +69,8 @@ public sealed class FilesClient
         CancellationToken cancellationToken = default
     )
     {
-        FilesByIdsRequest request = new(fileIds.ToList()) { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        FilesByIdsRequest request = new(fileIds.ToList());
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -83,10 +87,10 @@ public sealed class FilesClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         FilesByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }

@@ -14,8 +14,7 @@ internal sealed class MapSummaryByIdRequest(int mapId) : IHttpRequest<MapSummary
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(MapSummary Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -39,7 +38,7 @@ internal sealed class MapSummaryByIdRequest(int mapId) : IHttpRequest<MapSummary
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetMapSummary(MissingMemberBehavior);
+        var value = json.RootElement.GetMapSummary();
         return (value, new MessageContext(response));
     }
 }

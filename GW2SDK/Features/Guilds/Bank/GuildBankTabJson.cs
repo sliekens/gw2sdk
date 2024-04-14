@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Bank;
@@ -6,8 +6,7 @@ namespace GuildWars2.Guilds.Bank;
 internal static class GuildBankTabJson
 {
     public static GuildBankTab GetGuildBankTab(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember upgradeId = "upgrade_id";
@@ -38,7 +37,7 @@ internal static class GuildBankTabJson
             {
                 inventory = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -46,12 +45,11 @@ internal static class GuildBankTabJson
 
         return new GuildBankTab
         {
-            UpgradeId = upgradeId.Map(value => value.GetInt32()),
-            Size = size.Map(value => value.GetInt32()),
-            Coins = coins.Map(value => value.GetInt32()),
-            Note = note.Map(value => value.GetString()) ?? "",
-            Inventory = inventory.Map(
-                values => values.GetList(value => value.GetGuildBankSlot(missingMemberBehavior))
+            UpgradeId = upgradeId.Map(static value => value.GetInt32()),
+            Size = size.Map(static value => value.GetInt32()),
+            Coins = coins.Map(static value => value.GetInt32()),
+            Note = note.Map(static value => value.GetString()) ?? "",
+            Inventory = inventory.Map(static values => values.GetList(static value => value.GetGuildBankSlot())
             )
         };
     }

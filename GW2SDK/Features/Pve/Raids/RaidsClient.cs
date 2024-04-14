@@ -1,4 +1,5 @@
-﻿using GuildWars2.Pve.Raids.Http;
+﻿using GuildWars2.Json;
+using GuildWars2.Pve.Raids.Http;
 
 namespace GuildWars2.Pve.Raids;
 
@@ -58,10 +59,8 @@ public sealed class RaidsClient
         CancellationToken cancellationToken = default
     )
     {
-        RaidByIdRequest request = new(raidId)
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        RaidByIdRequest request = new(raidId);
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -76,7 +75,8 @@ public sealed class RaidsClient
         CancellationToken cancellationToken = default
     )
     {
-        RaidsByIdsRequest request = new(raidIds.ToList()) { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        RaidsByIdsRequest request = new(raidIds.ToList());
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -93,10 +93,10 @@ public sealed class RaidsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         RaidsByPageRequest request = new(pageIndex)
         {
-            PageSize = pageSize,
-            MissingMemberBehavior = missingMemberBehavior
+            PageSize = pageSize
         };
 
         return request.SendAsync(httpClient, cancellationToken);
@@ -111,7 +111,8 @@ public sealed class RaidsClient
         CancellationToken cancellationToken = default
     )
     {
-        RaidsRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        RaidsRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);
     }
 

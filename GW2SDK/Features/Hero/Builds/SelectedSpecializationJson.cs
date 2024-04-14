@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Builds;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Builds;
 internal static class SelectedSpecializationJson
 {
     public static SelectedSpecialization? GetSelectedSpecialization(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         // The API returns "id": null if no specialization is selected, but treat it as required anyway
@@ -32,16 +31,16 @@ internal static class SelectedSpecializationJson
             {
                 traits = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
         }
 
-        var (adept, master, grandmaster) = traits.Map(values => values.GetTraitIds(missingMemberBehavior));
+        var (adept, master, grandmaster) = traits.Map(static values => values.GetTraitIds());
         return new SelectedSpecialization
         {
-            Id = id.Map(value => value.GetInt32()),
+            Id = id.Map(static value => value.GetInt32()),
             AdeptTraitId = adept,
             MasterTraitId = master,
             GrandmasterTraitId = grandmaster

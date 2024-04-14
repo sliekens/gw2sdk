@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Seasons;
@@ -6,8 +6,7 @@ namespace GuildWars2.Pvp.Seasons;
 internal static class DivisionTierJson
 {
     public static DivisionTier GetDivisionTier(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember points = "points";
@@ -18,12 +17,12 @@ internal static class DivisionTierJson
             {
                 points = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
         }
 
-        return new DivisionTier { Points = points.Map(value => value.GetInt32()) };
+        return new DivisionTier { Points = points.Map(static value => value.GetInt32()) };
     }
 }

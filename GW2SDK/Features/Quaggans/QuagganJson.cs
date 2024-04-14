@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Quaggans;
@@ -6,8 +6,7 @@ namespace GuildWars2.Quaggans;
 internal static class QuagganJson
 {
     public static Quaggan GetQuaggan(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -23,7 +22,7 @@ internal static class QuagganJson
             {
                 url = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -31,8 +30,8 @@ internal static class QuagganJson
 
         return new Quaggan
         {
-            Id = id.Map(value => value.GetStringRequired()),
-            ImageHref = url.Map(value => value.GetStringRequired())
+            Id = id.Map(static value => value.GetStringRequired()),
+            ImageHref = url.Map(static value => value.GetStringRequired())
         };
     }
 }

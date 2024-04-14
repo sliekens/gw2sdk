@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Inventories;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Inventories;
 internal static class BaggageJson
 {
     public static Baggage GetBaggage(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember bags = "bags";
@@ -18,7 +17,7 @@ internal static class BaggageJson
             {
                 bags = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -26,8 +25,7 @@ internal static class BaggageJson
 
         return new Baggage
         {
-            Bags = bags.Map(
-                values => values.GetList(value => value.GetBag(missingMemberBehavior))
+            Bags = bags.Map(static values => values.GetList(static value => value.GetBag())
             )
         };
     }

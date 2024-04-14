@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Seasons;
@@ -6,8 +6,7 @@ namespace GuildWars2.Pvp.Seasons;
 internal static class SeasonJson
 {
     public static Season GetSeason(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -53,7 +52,7 @@ internal static class SeasonJson
             {
                 leaderboards = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -61,21 +60,19 @@ internal static class SeasonJson
 
         return new Season
         {
-            Id = id.Map(value => value.GetStringRequired()),
-            Name = name.Map(value => value.GetStringRequired()),
-            Start = start.Map(value => value.GetDateTime()),
-            End = end.Map(value => value.GetDateTime()),
-            Active = active.Map(value => value.GetBoolean()),
+            Id = id.Map(static value => value.GetStringRequired()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            Start = start.Map(static value => value.GetDateTime()),
+            End = end.Map(static value => value.GetDateTime()),
+            Active = active.Map(static value => value.GetBoolean()),
             Divisions =
-                divisions.Map(
-                    values => values.GetList(value => value.GetDivision(missingMemberBehavior))
+                divisions.Map(static values => values.GetList(static value => value.GetDivision())
                 ),
             Ranks =
-                ranks.Map(
-                    values => values.GetList(value => value.GetSkillBadge(missingMemberBehavior))
+                ranks.Map(static values => values.GetList(static value => value.GetSkillBadge())
                 ),
             Leaderboards =
-                leaderboards.Map(value => value.GetLeaderboardGroup(missingMemberBehavior))
+                leaderboards.Map(static value => value.GetLeaderboardGroup())
         };
     }
 }

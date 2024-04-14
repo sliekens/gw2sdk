@@ -18,8 +18,7 @@ internal sealed class BackstoryAnswersRequest : IHttpRequest<HashSet<BackgroundS
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<BackgroundStoryAnswer> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -36,7 +35,7 @@ internal sealed class BackstoryAnswersRequest : IHttpRequest<HashSet<BackgroundS
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
         var value = json.RootElement.GetSet(
-            entry => entry.GetBackgroundStoryAnswer(MissingMemberBehavior)
+            entry => entry.GetBackgroundStoryAnswer()
         );
         return (value, new MessageContext(response));
     }

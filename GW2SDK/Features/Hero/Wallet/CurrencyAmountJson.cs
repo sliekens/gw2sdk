@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Wallet;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Wallet;
 internal static class CurrencyAmountJson
 {
     public static CurrencyAmount GetCurrencyAmount(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember currencyId = "id";
@@ -23,7 +22,7 @@ internal static class CurrencyAmountJson
             {
                 amount = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -31,8 +30,8 @@ internal static class CurrencyAmountJson
 
         return new CurrencyAmount
         {
-            CurrencyId = currencyId.Map(value => value.GetInt32()),
-            Amount = amount.Map(value => value.GetInt32())
+            CurrencyId = currencyId.Map(static value => value.GetInt32()),
+            Amount = amount.Map(static value => value.GetInt32())
         };
     }
 }

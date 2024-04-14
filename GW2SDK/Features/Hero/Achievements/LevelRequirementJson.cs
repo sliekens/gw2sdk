@@ -1,12 +1,12 @@
-﻿using System.Text.Json;
+using System.Text.Json;
+using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Achievements;
 
 internal static class LevelRequirementJson
 {
     public static LevelRequirement GetLevelRequirement(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         JsonElement min = default;
@@ -22,7 +22,7 @@ internal static class LevelRequirementJson
             {
                 max = entry;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(
                     Strings.UnexpectedArrayLength(json.GetArrayLength())

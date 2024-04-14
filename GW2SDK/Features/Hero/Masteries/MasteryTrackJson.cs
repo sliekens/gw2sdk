@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Masteries;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Masteries;
 internal static class MasteryTrackJson
 {
     public static MasteryTrack GetMasteryTrack(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -48,7 +47,7 @@ internal static class MasteryTrackJson
             {
                 levels = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -56,14 +55,13 @@ internal static class MasteryTrackJson
 
         return new MasteryTrack
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
-            Requirement = requirement.Map(value => value.GetStringRequired()),
-            Order = order.Map(value => value.GetInt32()),
-            BackgroundHref = background.Map(value => value.GetStringRequired()),
-            Region = region.Map(value => value.GetEnum<MasteryRegionName>()),
-            Masteries = levels.Map(
-                values => values.GetList(value => value.GetMastery(missingMemberBehavior))
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            Requirement = requirement.Map(static value => value.GetStringRequired()),
+            Order = order.Map(static value => value.GetInt32()),
+            BackgroundHref = background.Map(static value => value.GetStringRequired()),
+            Region = region.Map(static value => value.GetEnum<MasteryRegionName>()),
+            Masteries = levels.Map(static values => values.GetList(static value => value.GetMastery())
             )
         };
     }

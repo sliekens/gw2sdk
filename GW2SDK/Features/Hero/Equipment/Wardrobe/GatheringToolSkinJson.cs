@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Items;
 using GuildWars2.Json;
 
@@ -7,8 +7,7 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 internal static class GatheringToolSkinJson
 {
     public static GatheringToolSkin GetGatheringToolSkin(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         if (json.TryGetProperty("details", out var discriminator))
@@ -18,13 +17,13 @@ internal static class GatheringToolSkinJson
                 switch (subtype.GetString())
                 {
                     case "Fishing":
-                        return json.GetFishingToolSkin(missingMemberBehavior);
+                        return json.GetFishingToolSkin();
                     case "Foraging":
-                        return json.GetForagingToolSkin(missingMemberBehavior);
+                        return json.GetForagingToolSkin();
                     case "Logging":
-                        return json.GetLoggingToolSkin(missingMemberBehavior);
+                        return json.GetLoggingToolSkin();
                     case "Mining":
-                        return json.GetMiningToolSkin(missingMemberBehavior);
+                        return json.GetMiningToolSkin();
                 }
             }
         }
@@ -90,20 +89,20 @@ internal static class GatheringToolSkinJson
                             break;
                         }
 
-                        if (missingMemberBehavior == MissingMemberBehavior.Error)
+                        if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                         {
                             throw new InvalidOperationException(
                                 Strings.UnexpectedDiscriminator(discriminatorValue)
                             );
                         }
                     }
-                    else if (missingMemberBehavior == MissingMemberBehavior.Error)
+                    else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                     {
                         throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                     }
                 }
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -111,13 +110,13 @@ internal static class GatheringToolSkinJson
 
         return new GatheringToolSkin
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
-            Description = description.Map(value => value.GetString()) ?? "",
-            Rarity = rarity.Map(value => value.GetEnum<Rarity>()),
-            Flags = flags.Map(values => values.GetSkinFlags()),
-            Races = restrictions.Map(values => values.GetRestrictions()),
-            IconHref = icon.Map(value => value.GetString())
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            Description = description.Map(static value => value.GetString()) ?? "",
+            Rarity = rarity.Map(static value => value.GetEnum<Rarity>()),
+            Flags = flags.Map(static values => values.GetSkinFlags()),
+            Races = restrictions.Map(static values => values.GetRestrictions()),
+            IconHref = icon.Map(static value => value.GetString())
         };
     }
 }

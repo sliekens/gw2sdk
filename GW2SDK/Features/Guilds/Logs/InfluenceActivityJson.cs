@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Logs;
@@ -6,8 +6,7 @@ namespace GuildWars2.Guilds.Logs;
 internal static class InfluenceActivityJson
 {
     public static InfluenceActivity GetInfluenceActivity(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -47,7 +46,7 @@ internal static class InfluenceActivityJson
             {
                 participants = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -55,13 +54,13 @@ internal static class InfluenceActivityJson
 
         return new InfluenceActivity
         {
-            Id = id.Map(value => value.GetInt32()),
-            Time = time.Map(value => value.GetDateTimeOffset()),
+            Id = id.Map(static value => value.GetInt32()),
+            Time = time.Map(static value => value.GetDateTimeOffset()),
             Activity =
-                activity.Map(value => value.GetEnum<InfluenceActivityKind>()),
-            TotalParticipants = totalParticipants.Map(value => value.GetInt32()),
+                activity.Map(static value => value.GetEnum<InfluenceActivityKind>()),
+            TotalParticipants = totalParticipants.Map(static value => value.GetInt32()),
             Participants =
-                participants.Map(values => values.GetList(value => value.GetStringRequired()))
+                participants.Map(static values => values.GetList(static value => value.GetStringRequired()))
         };
     }
 }

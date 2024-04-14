@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Logs;
@@ -6,8 +6,7 @@ namespace GuildWars2.Guilds.Logs;
 internal static class GuildUpgradeActivityJson
 {
     public static GuildUpgradeActivity GetGuildUpgradeActivity(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -62,7 +61,7 @@ internal static class GuildUpgradeActivityJson
             {
                 count = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -70,14 +69,14 @@ internal static class GuildUpgradeActivityJson
 
         return new GuildUpgradeActivity
         {
-            Id = id.Map(value => value.GetInt32()),
-            Time = time.Map(value => value.GetDateTimeOffset()),
-            User = user.Map(value => value.GetString()) ?? "",
-            Action = action.Map(value => value.GetEnum<GuildUpgradeAction>()),
-            UpgradeId = upgradeId.Map(value => value.GetInt32()),
-            RecipeId = recipeId.Map(value => value.GetInt32()),
-            ItemId = itemId.Map(value => value.GetInt32()),
-            Count = count.Map(value => value.GetInt32())
+            Id = id.Map(static value => value.GetInt32()),
+            Time = time.Map(static value => value.GetDateTimeOffset()),
+            User = user.Map(static value => value.GetString()) ?? "",
+            Action = action.Map(static value => value.GetEnum<GuildUpgradeAction>()),
+            UpgradeId = upgradeId.Map(static value => value.GetInt32()),
+            RecipeId = recipeId.Map(static value => value.GetInt32()),
+            ItemId = itemId.Map(static value => value.GetInt32()),
+            Count = count.Map(static value => value.GetInt32())
         };
     }
 }

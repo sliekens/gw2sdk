@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Logs;
@@ -6,8 +6,7 @@ namespace GuildWars2.Guilds.Logs;
 internal static class GuildBankActivityJson
 {
     public static GuildBankActivity GetGuildBankActivity(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -57,7 +56,7 @@ internal static class GuildBankActivityJson
             {
                 coins = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -65,16 +64,15 @@ internal static class GuildBankActivityJson
 
         return new GuildBankActivity
         {
-            Id = id.Map(value => value.GetInt32()),
-            Time = time.Map(value => value.GetDateTimeOffset()),
-            User = user.Map(value => value.GetStringRequired()),
+            Id = id.Map(static value => value.GetInt32()),
+            Time = time.Map(static value => value.GetDateTimeOffset()),
+            User = user.Map(static value => value.GetStringRequired()),
             Operation =
-                operation.Map(
-                    value => value.GetEnum<GuildBankOperationKind>()
+                operation.Map(static value => value.GetEnum<GuildBankOperationKind>()
                 ),
-            ItemId = itemId.Map(value => value.GetInt32()),
-            Count = count.Map(value => value.GetInt32()),
-            Coins = coins.Map(value => value.GetInt32())
+            ItemId = itemId.Map(static value => value.GetInt32()),
+            Count = count.Map(static value => value.GetInt32()),
+            Coins = coins.Map(static value => value.GetInt32())
         };
     }
 }

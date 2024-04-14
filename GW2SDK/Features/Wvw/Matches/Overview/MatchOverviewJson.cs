@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Matches.Overview;
@@ -6,8 +6,7 @@ namespace GuildWars2.Wvw.Matches.Overview;
 internal static class MatchOverviewJson
 {
     public static MatchOverview GetMatchOverview(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -38,7 +37,7 @@ internal static class MatchOverviewJson
             {
                 endTime = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -46,11 +45,11 @@ internal static class MatchOverviewJson
 
         return new MatchOverview
         {
-            Id = id.Map(value => value.GetStringRequired()),
-            Worlds = worlds.Map(value => value.GetWorlds(missingMemberBehavior)),
-            AllWorlds = allWorlds.Map(value => value.GetAllWorlds(missingMemberBehavior)),
-            StartTime = startTime.Map(value => value.GetDateTimeOffset()),
-            EndTime = endTime.Map(value => value.GetDateTimeOffset())
+            Id = id.Map(static value => value.GetStringRequired()),
+            Worlds = worlds.Map(static value => value.GetWorlds()),
+            AllWorlds = allWorlds.Map(static value => value.GetAllWorlds()),
+            StartTime = startTime.Map(static value => value.GetDateTimeOffset()),
+            EndTime = endTime.Map(static value => value.GetDateTimeOffset())
         };
     }
 }

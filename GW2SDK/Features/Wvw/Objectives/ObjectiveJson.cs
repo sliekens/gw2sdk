@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Exploration.Maps;
 using GuildWars2.Json;
 
@@ -7,8 +7,7 @@ namespace GuildWars2.Wvw.Objectives;
 internal static class ObjectiveJson
 {
     public static Objective GetObjective(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -69,7 +68,7 @@ internal static class ObjectiveJson
             {
                 chatLink = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -77,18 +76,18 @@ internal static class ObjectiveJson
 
         return new Objective
         {
-            Id = id.Map(value => value.GetStringRequired()),
-            Name = name.Map(value => value.GetStringRequired()),
-            SectorId = sectorId.Map(value => value.GetInt32()),
-            Kind = type.Map(value => value.GetEnum<ObjectiveKind>()),
-            MapKind = mapType.Map(value => value.GetEnum<MapKind>()),
-            MapId = mapId.Map(value => value.GetInt32()),
-            UpgradeId = upgradeId.Map(value => value.GetInt32()),
-            Coordinates = coordinates.Map(value => value.GetCoordinate3(missingMemberBehavior)),
+            Id = id.Map(static value => value.GetStringRequired()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            SectorId = sectorId.Map(static value => value.GetInt32()),
+            Kind = type.Map(static value => value.GetEnum<ObjectiveKind>()),
+            MapKind = mapType.Map(static value => value.GetEnum<MapKind>()),
+            MapId = mapId.Map(static value => value.GetInt32()),
+            UpgradeId = upgradeId.Map(static value => value.GetInt32()),
+            Coordinates = coordinates.Map(static value => value.GetCoordinate3()),
             LabelCoordinates =
-                labelCoordinates.Map(value => value.GetCoordinateF(missingMemberBehavior)),
-            MarkerIconHref = marker.Map(value => value.GetString()) ?? "",
-            ChatLink = chatLink.Map(value => value.GetStringRequired())
+                labelCoordinates.Map(static value => value.GetCoordinateF()),
+            MarkerIconHref = marker.Map(static value => value.GetString()) ?? "",
+            ChatLink = chatLink.Map(static value => value.GetStringRequired())
         };
     }
 }

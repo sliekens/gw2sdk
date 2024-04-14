@@ -12,8 +12,7 @@ internal sealed class RecipesByOutputItemIdRequest(int outputItemId) : IHttpRequ
 
     public int OutputItemId { get; } = outputItemId;
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<Recipe> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -34,7 +33,7 @@ internal sealed class RecipesByOutputItemIdRequest(int outputItemId) : IHttpRequ
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetRecipe(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(static entry => entry.GetRecipe());
         return (value, new MessageContext(response));
     }
 }

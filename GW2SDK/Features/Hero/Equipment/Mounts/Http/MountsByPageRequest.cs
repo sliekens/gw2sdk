@@ -16,8 +16,7 @@ internal sealed class MountsByPageRequest(int pageIndex) : IHttpRequest<HashSet<
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<Mount> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -44,7 +43,7 @@ internal sealed class MountsByPageRequest(int pageIndex) : IHttpRequest<HashSet<
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetMount(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(static entry => entry.GetMount());
         return (value, new MessageContext(response));
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Items;
 using GuildWars2.Json;
 
@@ -7,8 +7,7 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 internal static class WeaponSkinJson
 {
     public static WeaponSkin GetWeaponSkin(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         if (json.TryGetProperty("details", out var discriminator))
@@ -18,51 +17,51 @@ internal static class WeaponSkinJson
                 switch (subtype.GetString())
                 {
                     case "Axe":
-                        return json.GetAxeSkin(missingMemberBehavior);
+                        return json.GetAxeSkin();
                     case "Dagger":
-                        return json.GetDaggerSkin(missingMemberBehavior);
+                        return json.GetDaggerSkin();
                     case "Focus":
-                        return json.GetFocusSkin(missingMemberBehavior);
+                        return json.GetFocusSkin();
                     case "Greatsword":
-                        return json.GetGreatswordSkin(missingMemberBehavior);
+                        return json.GetGreatswordSkin();
                     case "Hammer":
-                        return json.GetHammerSkin(missingMemberBehavior);
+                        return json.GetHammerSkin();
                     case "LargeBundle":
-                        return json.GetLargeBundleSkin(missingMemberBehavior);
+                        return json.GetLargeBundleSkin();
                     case "Longbow":
-                        return json.GetLongbowSkin(missingMemberBehavior);
+                        return json.GetLongbowSkin();
                     case "Mace":
-                        return json.GetMaceSkin(missingMemberBehavior);
+                        return json.GetMaceSkin();
                     case "Pistol":
-                        return json.GetPistolSkin(missingMemberBehavior);
+                        return json.GetPistolSkin();
                     case "Rifle":
-                        return json.GetRifleSkin(missingMemberBehavior);
+                        return json.GetRifleSkin();
                     case "Scepter":
-                        return json.GetScepterSkin(missingMemberBehavior);
+                        return json.GetScepterSkin();
                     case "Shield":
-                        return json.GetShieldSkin(missingMemberBehavior);
+                        return json.GetShieldSkin();
                     case "Shortbow":
-                        return json.GetShortbowSkin(missingMemberBehavior);
+                        return json.GetShortbowSkin();
                     case "SmallBundle":
-                        return json.GetSmallBundleSkin(missingMemberBehavior);
+                        return json.GetSmallBundleSkin();
                     case "Spear":
-                        return json.GetSpearSkin(missingMemberBehavior);
+                        return json.GetSpearSkin();
                     case "Speargun":
-                        return json.GetHarpoonGunSkin(missingMemberBehavior);
+                        return json.GetHarpoonGunSkin();
                     case "Staff":
-                        return json.GetStaffSkin(missingMemberBehavior);
+                        return json.GetStaffSkin();
                     case "Sword":
-                        return json.GetSwordSkin(missingMemberBehavior);
+                        return json.GetSwordSkin();
                     case "Torch":
-                        return json.GetTorchSkin(missingMemberBehavior);
+                        return json.GetTorchSkin();
                     case "Toy":
-                        return json.GetToySkin(missingMemberBehavior);
+                        return json.GetToySkin();
                     case "ToyTwoHanded":
-                        return json.GetToyTwoHandedSkin(missingMemberBehavior);
+                        return json.GetToyTwoHandedSkin();
                     case "Trident":
-                        return json.GetTridentSkin(missingMemberBehavior);
+                        return json.GetTridentSkin();
                     case "Warhorn":
-                        return json.GetWarhornSkin(missingMemberBehavior);
+                        return json.GetWarhornSkin();
                 }
             }
         }
@@ -120,7 +119,7 @@ internal static class WeaponSkinJson
                 {
                     if (detail.NameEquals("type"))
                     {
-                        if (missingMemberBehavior == MissingMemberBehavior.Error)
+                        if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                         {
                             throw new InvalidOperationException(
                                 Strings.UnexpectedDiscriminator(detail.Value.GetString())
@@ -131,13 +130,13 @@ internal static class WeaponSkinJson
                     {
                         damageType = detail;
                     }
-                    else if (missingMemberBehavior == MissingMemberBehavior.Error)
+                    else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                     {
                         throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                     }
                 }
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -145,14 +144,14 @@ internal static class WeaponSkinJson
 
         return new WeaponSkin
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
-            Description = description.Map(value => value.GetString()) ?? "",
-            Rarity = rarity.Map(value => value.GetEnum<Rarity>()),
-            Flags = flags.Map(values => values.GetSkinFlags()),
-            Races = restrictions.Map(values => values.GetRestrictions()),
-            IconHref = icon.Map(value => value.GetString()),
-            DamageType = damageType.Map(value => value.GetEnum<DamageType>())
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            Description = description.Map(static value => value.GetString()) ?? "",
+            Rarity = rarity.Map(static value => value.GetEnum<Rarity>()),
+            Flags = flags.Map(static values => values.GetSkinFlags()),
+            Races = restrictions.Map(static values => values.GetRestrictions()),
+            IconHref = icon.Map(static value => value.GetString()),
+            DamageType = damageType.Map(static value => value.GetEnum<DamageType>())
         };
     }
 }

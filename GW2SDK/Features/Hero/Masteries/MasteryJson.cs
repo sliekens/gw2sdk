@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Masteries;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Masteries;
 internal static class MasteryJson
 {
     public static Mastery GetMastery(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember name = "name";
@@ -43,7 +42,7 @@ internal static class MasteryJson
             {
                 experienceCost = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -51,12 +50,12 @@ internal static class MasteryJson
 
         return new Mastery
         {
-            Name = name.Map(value => value.GetStringRequired()),
-            Description = description.Map(value => value.GetStringRequired()),
-            Instruction = instruction.Map(value => value.GetStringRequired()),
-            IconHref = icon.Map(value => value.GetStringRequired()),
-            PointCost = pointCost.Map(value => value.GetInt32()),
-            ExperienceCost = experienceCost.Map(value => value.GetInt32())
+            Name = name.Map(static value => value.GetStringRequired()),
+            Description = description.Map(static value => value.GetStringRequired()),
+            Instruction = instruction.Map(static value => value.GetStringRequired()),
+            IconHref = icon.Map(static value => value.GetStringRequired()),
+            PointCost = pointCost.Map(static value => value.GetInt32()),
+            ExperienceCost = experienceCost.Map(static value => value.GetInt32())
         };
     }
 }

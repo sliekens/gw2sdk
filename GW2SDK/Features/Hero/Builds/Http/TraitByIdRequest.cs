@@ -13,8 +13,7 @@ internal sealed class TraitByIdRequest(int traitId) : IHttpRequest<Trait>
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(Trait Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -38,7 +37,7 @@ internal sealed class TraitByIdRequest(int traitId) : IHttpRequest<Trait>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetTrait(MissingMemberBehavior);
+        var value = json.RootElement.GetTrait();
         return (value, new MessageContext(response));
     }
 }

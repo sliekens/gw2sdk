@@ -1,11 +1,11 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Ranks;
 
 internal static class RankJson
 {
-    public static Rank GetRank(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Rank GetRank(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember title = "title";
@@ -25,7 +25,7 @@ internal static class RankJson
             {
                 minRank = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -33,9 +33,9 @@ internal static class RankJson
 
         return new Rank
         {
-            Id = id.Map(value => value.GetInt32()),
-            Title = title.Map(value => value.GetStringRequired()),
-            MinRank = minRank.Map(value => value.GetInt32())
+            Id = id.Map(static value => value.GetInt32()),
+            Title = title.Map(static value => value.GetStringRequired()),
+            MinRank = minRank.Map(static value => value.GetInt32())
         };
     }
 }

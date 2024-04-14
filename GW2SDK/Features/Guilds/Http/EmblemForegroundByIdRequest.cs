@@ -11,8 +11,7 @@ internal sealed class EmblemForegroundByIdRequest(int foregroundEmblemId)
 
     public int ForegroundEmblemId { get; } = foregroundEmblemId;
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(EmblemForeground Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -35,7 +34,7 @@ internal sealed class EmblemForegroundByIdRequest(int foregroundEmblemId)
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetEmblemForeground(MissingMemberBehavior);
+        var value = json.RootElement.GetEmblemForeground();
         return (value, new MessageContext(response));
     }
 }

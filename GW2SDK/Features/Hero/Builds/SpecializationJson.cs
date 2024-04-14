@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Builds;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Builds;
 internal static class SpecializationJson
 {
     public static Specialization GetSpecialization(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -68,7 +67,7 @@ internal static class SpecializationJson
             {
                 professionIcon = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -76,18 +75,18 @@ internal static class SpecializationJson
 
         return new Specialization
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
             Profession =
-                profession.Map(value => value.GetEnum<ProfessionName>()),
-            Elite = elite.Map(value => value.GetBoolean()),
-            MinorTraitIds = minorTraits.Map(values => values.GetList(value => value.GetInt32())),
-            MajorTraitIds = majorTraits.Map(values => values.GetList(value => value.GetInt32())),
-            WeaponTraitId = weaponTrait.Map(value => value.GetInt32()),
-            IconHref = icon.Map(value => value.GetStringRequired()),
-            BackgroundHref = background.Map(value => value.GetStringRequired()),
-            ProfessionBigIconHref = professionIconBig.Map(value => value.GetString()) ?? "",
-            ProfessionIconHref = professionIcon.Map(value => value.GetString()) ?? ""
+                profession.Map(static value => value.GetEnum<ProfessionName>()),
+            Elite = elite.Map(static value => value.GetBoolean()),
+            MinorTraitIds = minorTraits.Map(static values => values.GetList(static value => value.GetInt32())),
+            MajorTraitIds = majorTraits.Map(static values => values.GetList(static value => value.GetInt32())),
+            WeaponTraitId = weaponTrait.Map(static value => value.GetInt32()),
+            IconHref = icon.Map(static value => value.GetStringRequired()),
+            BackgroundHref = background.Map(static value => value.GetStringRequired()),
+            ProfessionBigIconHref = professionIconBig.Map(static value => value.GetString()) ?? "",
+            ProfessionIconHref = professionIcon.Map(static value => value.GetString()) ?? ""
         };
     }
 }

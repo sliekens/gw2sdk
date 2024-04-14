@@ -47,8 +47,7 @@ internal static class UpgradeComponentJson
     }
 
     public static UpgradeComponent GetUpgradeComponent(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         if (json.TryGetProperty("details", out var discriminator))
@@ -58,13 +57,13 @@ internal static class UpgradeComponentJson
                 switch (subtype.GetString())
                 {
                     case "Gem":
-                        return json.GetGem(missingMemberBehavior);
+                        return json.GetGem();
                     case "Rune":
                     case "Default" when json.IsPvpItem() && json.HasFlags(3):
-                        return json.GetRune(missingMemberBehavior);
+                        return json.GetRune();
                     case "Sigil":
                     case "Default" when json.IsPvpItem() && json.HasFlags(19):
-                        return json.GetSigil(missingMemberBehavior);
+                        return json.GetSigil();
                 }
             }
         }
@@ -148,7 +147,7 @@ internal static class UpgradeComponentJson
                 {
                     if (detail.NameEquals("type"))
                     {
-                        if (missingMemberBehavior == MissingMemberBehavior.Error
+                        if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error
                             && !detail.Value.ValueEquals("Default"))
                         {
                             throw new InvalidOperationException(
@@ -184,7 +183,7 @@ internal static class UpgradeComponentJson
                             {
                                 infixUpgradeBuff = infix;
                             }
-                            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+                            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                             {
                                 throw new InvalidOperationException(
                                     Strings.UnexpectedMember(infix.Name)
@@ -196,13 +195,13 @@ internal static class UpgradeComponentJson
                     {
                         suffix = detail;
                     }
-                    else if (missingMemberBehavior == MissingMemberBehavior.Error)
+                    else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                     {
                         throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                     }
                 }
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -210,33 +209,31 @@ internal static class UpgradeComponentJson
 
         return new UpgradeComponent
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
-            Description = description.Map(value => value.GetString()) ?? "",
-            Level = level.Map(value => value.GetInt32()),
-            Rarity = rarity.Map(value => value.GetEnum<Rarity>()),
-            VendorValue = vendorValue.Map(value => value.GetInt32()),
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            Description = description.Map(static value => value.GetString()) ?? "",
+            Level = level.Map(static value => value.GetInt32()),
+            Rarity = rarity.Map(static value => value.GetEnum<Rarity>()),
+            VendorValue = vendorValue.Map(static value => value.GetInt32()),
             GameTypes =
-                gameTypes.Map(
-                    values => values.GetList(
-                        value => value.GetEnum<GameType>()
+                gameTypes.Map(static values => values.GetList(static value => value.GetEnum<GameType>()
                     )
                 ),
-            Flags = flags.Map(values => values.GetItemFlags()),
-            Restrictions = restrictions.Map(value => value.GetItemRestriction()),
-            ChatLink = chatLink.Map(value => value.GetStringRequired()),
-            IconHref = icon.Map(value => value.GetString()),
+            Flags = flags.Map(static values => values.GetItemFlags()),
+            Restrictions = restrictions.Map(static value => value.GetItemRestriction()),
+            ChatLink = chatLink.Map(static value => value.GetStringRequired()),
+            IconHref = icon.Map(static value => value.GetString()),
             UpgradeComponentFlags =
-                upgradeComponentFlags.Map(values => values.GetUpgradeComponentFlags()),
+                upgradeComponentFlags.Map(static values => values.GetUpgradeComponentFlags()),
             InfusionUpgradeFlags =
-                infusionUpgradeFlags.Map(values => values.GetInfusionSlotFlags()),
-            AttributeAdjustment = attributeAdjustment.Map(value => value.GetDouble()),
-            AttributeCombinationId = infixUpgradeId.Map(value => value.GetInt32()),
+                infusionUpgradeFlags.Map(static values => values.GetInfusionSlotFlags()),
+            AttributeAdjustment = attributeAdjustment.Map(static value => value.GetDouble()),
+            AttributeCombinationId = infixUpgradeId.Map(static value => value.GetInt32()),
             Attributes =
-                infixUpgradeAttributes.Map(values => values.GetAttributes(missingMemberBehavior))
+                infixUpgradeAttributes.Map(static values => values.GetAttributes())
                 ?? new Dictionary<Extensible<AttributeName>, int>(0),
-            Buff = infixUpgradeBuff.Map(value => value.GetBuff(missingMemberBehavior)),
-            SuffixName = suffix.Map(value => value.GetStringRequired())
+            Buff = infixUpgradeBuff.Map(static value => value.GetBuff()),
+            SuffixName = suffix.Map(static value => value.GetStringRequired())
         };
     }
 }

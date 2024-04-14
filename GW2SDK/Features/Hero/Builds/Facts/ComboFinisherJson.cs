@@ -7,7 +7,6 @@ internal static class ComboFinisherJson
 {
     public static ComboFinisher GetComboFinisher(
         this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior,
         out int? requiresTrait,
         out int? overrides
     )
@@ -59,7 +58,7 @@ internal static class ComboFinisherJson
             {
                 finisherType = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -67,11 +66,11 @@ internal static class ComboFinisherJson
 
         return new ComboFinisher
         {
-            Text = text.Map(value => value.GetStringRequired()),
-            IconHref = icon.Map(value => value.GetStringRequired()),
-            Percent = percent.Map(value => value.GetInt32()),
+            Text = text.Map(static value => value.GetStringRequired()),
+            IconHref = icon.Map(static value => value.GetStringRequired()),
+            Percent = percent.Map(static value => value.GetInt32()),
             FinisherName =
-                finisherType.Map(value => value.GetEnum<ComboFinisherName>())
+                finisherType.Map(static value => value.GetEnum<ComboFinisherName>())
         };
 
         static bool IsDefaultInt32(JsonProperty jsonProperty)

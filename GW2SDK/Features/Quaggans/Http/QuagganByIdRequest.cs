@@ -11,8 +11,7 @@ internal sealed class QuagganByIdRequest(string quagganId) : IHttpRequest<Quagga
 
     public string QuagganId { get; } = quagganId;
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(Quaggan Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -35,7 +34,7 @@ internal sealed class QuagganByIdRequest(string quagganId) : IHttpRequest<Quagga
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetQuaggan(MissingMemberBehavior);
+        var value = json.RootElement.GetQuaggan();
         return (value, new MessageContext(response));
     }
 }

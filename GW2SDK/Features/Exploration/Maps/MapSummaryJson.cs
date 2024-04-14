@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Maps;
@@ -6,8 +6,7 @@ namespace GuildWars2.Exploration.Maps;
 internal static class MapSummaryJson
 {
     public static MapSummary GetMapSummary(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -77,7 +76,7 @@ internal static class MapSummaryJson
             {
                 continentRectangle = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -85,20 +84,20 @@ internal static class MapSummaryJson
 
         return new MapSummary
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
-            MinLevel = minLevel.Map(value => value.GetInt32()),
-            MaxLevel = maxLevel.Map(value => value.GetInt32()),
-            DefaultFloor = defaultFloor.Map(value => value.GetInt32()),
-            Kind = kind.Map(value => value.GetEnum<MapKind>()),
-            Floors = floors.Map(values => values.GetList(value => value.GetInt32())),
-            RegionId = regionId.Map(value => value.GetInt32()),
-            RegionName = regionName.Map(value => value.GetString()) ?? "",
-            ContinentId = continentId.Map(value => value.GetInt32()),
-            ContinentName = continentName.Map(value => value.GetString()) ?? "",
-            MapRectangle = mapRectangle.Map(value => value.GetMapRectangle(missingMemberBehavior)),
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            MinLevel = minLevel.Map(static value => value.GetInt32()),
+            MaxLevel = maxLevel.Map(static value => value.GetInt32()),
+            DefaultFloor = defaultFloor.Map(static value => value.GetInt32()),
+            Kind = kind.Map(static value => value.GetEnum<MapKind>()),
+            Floors = floors.Map(static values => values.GetList(static value => value.GetInt32())),
+            RegionId = regionId.Map(static value => value.GetInt32()),
+            RegionName = regionName.Map(static value => value.GetString()) ?? "",
+            ContinentId = continentId.Map(static value => value.GetInt32()),
+            ContinentName = continentName.Map(static value => value.GetString()) ?? "",
+            MapRectangle = mapRectangle.Map(static value => value.GetMapRectangle()),
             ContinentRectangle =
-                continentRectangle.Map(value => value.GetContinentRectangle(missingMemberBehavior))
+                continentRectangle.Map(static value => value.GetContinentRectangle())
         };
     }
 }

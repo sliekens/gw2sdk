@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Crafting.Recipes;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Crafting.Recipes;
 internal static class LearnedRecipesJson
 {
     public static HashSet<int> GetLearnedRecipes(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember recipes = "recipes";
@@ -18,12 +17,12 @@ internal static class LearnedRecipesJson
             {
                 recipes = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
         }
 
-        return [.. recipes.Map(values => values.GetList(value => value.GetInt32()))];
+        return [.. recipes.Map(static values => values.GetList(static value => value.GetInt32()))];
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.MistChampions;
@@ -6,8 +6,7 @@ namespace GuildWars2.Pvp.MistChampions;
 internal static class MistChampionJson
 {
     public static MistChampion GetMistChampion(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -53,7 +52,7 @@ internal static class MistChampionJson
             {
                 skins = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -61,15 +60,14 @@ internal static class MistChampionJson
 
         return new MistChampion
         {
-            Id = id.Map(value => value.GetStringRequired()),
-            Name = name.Map(value => value.GetStringRequired()),
-            Description = description.Map(value => value.GetStringRequired()),
-            Type = type.Map(value => value.GetStringRequired()),
-            Stats = stats.Map(value => value.GetMistChampionStats(missingMemberBehavior)),
-            OverlayImageHref = overlay.Map(value => value.GetStringRequired()),
-            UnderlayImageHref = underlay.Map(value => value.GetStringRequired()),
-            Skins = skins.Map(
-                values => values.GetList(value => value.GetMistChampionSkin(missingMemberBehavior))
+            Id = id.Map(static value => value.GetStringRequired()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            Description = description.Map(static value => value.GetStringRequired()),
+            Type = type.Map(static value => value.GetStringRequired()),
+            Stats = stats.Map(static value => value.GetMistChampionStats()),
+            OverlayImageHref = overlay.Map(static value => value.GetStringRequired()),
+            UnderlayImageHref = underlay.Map(static value => value.GetStringRequired()),
+            Skins = skins.Map(static values => values.GetList(static value => value.GetMistChampionSkin())
             )
         };
     }

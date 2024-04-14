@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Hero;
 using GuildWars2.Json;
 
@@ -7,8 +7,7 @@ namespace GuildWars2.Items;
 internal static class WeaponJson
 {
     public static Weapon GetWeapon(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         if (json.TryGetProperty("details", out var discriminator))
@@ -18,51 +17,51 @@ internal static class WeaponJson
                 switch (subtype.GetString())
                 {
                     case "Axe":
-                        return json.GetAxe(missingMemberBehavior);
+                        return json.GetAxe();
                     case "Dagger":
-                        return json.GetDagger(missingMemberBehavior);
+                        return json.GetDagger();
                     case "Focus":
-                        return json.GetFocus(missingMemberBehavior);
+                        return json.GetFocus();
                     case "Greatsword":
-                        return json.GetGreatsword(missingMemberBehavior);
+                        return json.GetGreatsword();
                     case "Hammer":
-                        return json.GetHammer(missingMemberBehavior);
+                        return json.GetHammer();
                     case "Harpoon":
-                        return json.GetSpear(missingMemberBehavior);
+                        return json.GetSpear();
                     case "LargeBundle":
-                        return json.GetLargeBundle(missingMemberBehavior);
+                        return json.GetLargeBundle();
                     case "LongBow":
-                        return json.GetLongbow(missingMemberBehavior);
+                        return json.GetLongbow();
                     case "Mace":
-                        return json.GetMace(missingMemberBehavior);
+                        return json.GetMace();
                     case "Pistol":
-                        return json.GetPistol(missingMemberBehavior);
+                        return json.GetPistol();
                     case "Rifle":
-                        return json.GetRifle(missingMemberBehavior);
+                        return json.GetRifle();
                     case "Scepter":
-                        return json.GetScepter(missingMemberBehavior);
+                        return json.GetScepter();
                     case "Shield":
-                        return json.GetShield(missingMemberBehavior);
+                        return json.GetShield();
                     case "ShortBow":
-                        return json.GetShortbow(missingMemberBehavior);
+                        return json.GetShortbow();
                     case "SmallBundle":
-                        return json.GetSmallBundle(missingMemberBehavior);
+                        return json.GetSmallBundle();
                     case "Speargun":
-                        return json.GetHarpoonGun(missingMemberBehavior);
+                        return json.GetHarpoonGun();
                     case "Staff":
-                        return json.GetStaff(missingMemberBehavior);
+                        return json.GetStaff();
                     case "Sword":
-                        return json.GetSword(missingMemberBehavior);
+                        return json.GetSword();
                     case "Torch":
-                        return json.GetTorch(missingMemberBehavior);
+                        return json.GetTorch();
                     case "Toy":
-                        return json.GetToy(missingMemberBehavior);
+                        return json.GetToy();
                     case "ToyTwoHanded":
-                        return json.GetToyTwoHanded(missingMemberBehavior);
+                        return json.GetToyTwoHanded();
                     case "Trident":
-                        return json.GetTrident(missingMemberBehavior);
+                        return json.GetTrident();
                     case "Warhorn":
-                        return json.GetWarhorn(missingMemberBehavior);
+                        return json.GetWarhorn();
                 }
             }
         }
@@ -156,7 +155,7 @@ internal static class WeaponJson
                 {
                     if (detail.NameEquals("type"))
                     {
-                        if (missingMemberBehavior == MissingMemberBehavior.Error)
+                        if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                         {
                             throw new InvalidOperationException(
                                 Strings.UnexpectedDiscriminator(detail.Value.GetString())
@@ -207,7 +206,7 @@ internal static class WeaponJson
                             {
                                 infixUpgradeBuff = infix;
                             }
-                            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+                            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                             {
                                 throw new InvalidOperationException(
                                     Strings.UnexpectedMember(infix.Name)
@@ -223,13 +222,13 @@ internal static class WeaponJson
                     {
                         secondarySuffixItemId = detail;
                     }
-                    else if (missingMemberBehavior == MissingMemberBehavior.Error)
+                    else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                     {
                         throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                     }
                 }
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -237,42 +236,39 @@ internal static class WeaponJson
 
         return new Weapon
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
-            Description = description.Map(value => value.GetString()) ?? "",
-            Level = level.Map(value => value.GetInt32()),
-            Rarity = rarity.Map(value => value.GetEnum<Rarity>()),
-            VendorValue = vendorValue.Map(value => value.GetInt32()),
-            DefaultSkinId = defaultSkin.Map(value => value.GetInt32()),
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            Description = description.Map(static value => value.GetString()) ?? "",
+            Level = level.Map(static value => value.GetInt32()),
+            Rarity = rarity.Map(static value => value.GetEnum<Rarity>()),
+            VendorValue = vendorValue.Map(static value => value.GetInt32()),
+            DefaultSkinId = defaultSkin.Map(static value => value.GetInt32()),
             GameTypes =
-                gameTypes.Map(
-                    values => values.GetList(
-                        value => value.GetEnum<GameType>()
+                gameTypes.Map(static values => values.GetList(static value => value.GetEnum<GameType>()
                     )
                 ),
-            Flags = flags.Map(values => values.GetItemFlags()),
-            Restrictions = restrictions.Map(value => value.GetItemRestriction()),
-            ChatLink = chatLink.Map(value => value.GetStringRequired()),
-            IconHref = icon.Map(value => value.GetString()),
-            DamageType = damageType.Map(value => value.GetEnum<DamageType>()),
-            MinPower = minPower.Map(value => value.GetInt32()),
-            MaxPower = maxPower.Map(value => value.GetInt32()),
-            Defense = defense.Map(value => value.GetInt32()),
+            Flags = flags.Map(static values => values.GetItemFlags()),
+            Restrictions = restrictions.Map(static value => value.GetItemRestriction()),
+            ChatLink = chatLink.Map(static value => value.GetStringRequired()),
+            IconHref = icon.Map(static value => value.GetString()),
+            DamageType = damageType.Map(static value => value.GetEnum<DamageType>()),
+            MinPower = minPower.Map(static value => value.GetInt32()),
+            MaxPower = maxPower.Map(static value => value.GetInt32()),
+            Defense = defense.Map(static value => value.GetInt32()),
             InfusionSlots =
-                infusionSlots.Map(
-                    values => values.GetList(value => value.GetInfusionSlot(missingMemberBehavior))
+                infusionSlots.Map(static values => values.GetList(static value => value.GetInfusionSlot())
                 ),
-            AttributeAdjustment = attributeAdjustment.Map(value => value.GetDouble()),
+            AttributeAdjustment = attributeAdjustment.Map(static value => value.GetDouble()),
             StatChoices =
-                statChoices.Map(values => values.GetList(value => value.GetInt32()))
+                statChoices.Map(static values => values.GetList(static value => value.GetInt32()))
                 ?? Empty.ListOfInt32,
-            AttributeCombinationId = infixUpgradeId.Map(value => value.GetInt32()),
+            AttributeCombinationId = infixUpgradeId.Map(static value => value.GetInt32()),
             Attributes =
-                infixUpgradeAttributes.Map(values => values.GetAttributes(missingMemberBehavior))
+                infixUpgradeAttributes.Map(static values => values.GetAttributes())
                 ?? new Dictionary<Extensible<AttributeName>, int>(0),
-            Buff = infixUpgradeBuff.Map(value => value.GetBuff(missingMemberBehavior)),
-            SuffixItemId = suffixItemId.Map(value => value.GetInt32()),
-            SecondarySuffixItemId = secondarySuffixItemId.Map(value => value.GetInt32())
+            Buff = infixUpgradeBuff.Map(static value => value.GetBuff()),
+            SuffixItemId = suffixItemId.Map(static value => value.GetInt32()),
+            SecondarySuffixItemId = secondarySuffixItemId.Map(static value => value.GetInt32())
         };
     }
 }

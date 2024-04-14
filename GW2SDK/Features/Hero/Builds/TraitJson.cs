@@ -1,11 +1,11 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Builds;
 
 internal static class TraitJson
 {
-    public static Trait GetTrait(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Trait GetTrait(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember tier = "tier";
@@ -65,7 +65,7 @@ internal static class TraitJson
             {
                 icon = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -73,25 +73,21 @@ internal static class TraitJson
 
         return new Trait
         {
-            Id = id.Map(value => value.GetInt32()),
-            Tier = tier.Map(value => value.GetInt32()),
-            Order = order.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
-            Description = description.Map(value => value.GetString()) ?? "",
-            Slot = slot.Map(value => value.GetEnum<TraitSlot>()),
-            IconHref = icon.Map(value => value.GetStringRequired()),
-            SpezializationId = specialization.Map(value => value.GetInt32()),
-            Facts = facts.Map(
-                values => values.GetList(
-                    value => value.GetFact(missingMemberBehavior, out _, out _)
+            Id = id.Map(static value => value.GetInt32()),
+            Tier = tier.Map(static value => value.GetInt32()),
+            Order = order.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            Description = description.Map(static value => value.GetString()) ?? "",
+            Slot = slot.Map(static value => value.GetEnum<TraitSlot>()),
+            IconHref = icon.Map(static value => value.GetStringRequired()),
+            SpezializationId = specialization.Map(static value => value.GetInt32()),
+            Facts = facts.Map(static values => values.GetList(static value => value.GetFact( out _, out _)
                 )
             ),
             TraitedFacts =
-                traitedFacts.Map(
-                    values => values.GetList(value => value.GetTraitedFact(missingMemberBehavior))
+                traitedFacts.Map(static values => values.GetList(static value => value.GetTraitedFact())
                 ),
-            Skills = skills.Map(
-                values => values.GetList(value => value.GetSkill(missingMemberBehavior))
+            Skills = skills.Map(static values => values.GetList(static value => value.GetSkill())
             )
         };
     }

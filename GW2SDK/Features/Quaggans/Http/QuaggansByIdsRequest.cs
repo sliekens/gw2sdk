@@ -18,8 +18,7 @@ internal sealed class QuaggansByIdsRequest : IHttpRequest<HashSet<Quaggan>>
 
     public IReadOnlyCollection<string> QuagganIds { get; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<Quaggan> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -42,7 +41,7 @@ internal sealed class QuaggansByIdsRequest : IHttpRequest<HashSet<Quaggan>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetQuaggan(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(static entry => entry.GetQuaggan());
         return (value, new MessageContext(response));
     }
 }

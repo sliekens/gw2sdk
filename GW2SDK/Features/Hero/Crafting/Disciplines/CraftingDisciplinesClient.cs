@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Hero.Crafting.Disciplines.Http;
+using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Crafting.Disciplines;
 
@@ -33,9 +34,9 @@ public sealed class CraftingDisciplinesClient
             CancellationToken cancellationToken = default
         )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         LearnedCraftingDisciplinesRequest request = new(characterName)
         {
-            MissingMemberBehavior = missingMemberBehavior,
             AccessToken = accessToken
         };
         return request.SendAsync(httpClient, cancellationToken);

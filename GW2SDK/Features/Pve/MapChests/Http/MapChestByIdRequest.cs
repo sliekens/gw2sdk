@@ -9,8 +9,7 @@ internal sealed class MapChestByIdRequest(string mapChestId) : IHttpRequest<MapC
 
     public string MapChestId { get; } = mapChestId;
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(MapChest Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -33,7 +32,7 @@ internal sealed class MapChestByIdRequest(string mapChestId) : IHttpRequest<MapC
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetMapChest(MissingMemberBehavior);
+        var value = json.RootElement.GetMapChest();
         return (value, new MessageContext(response));
     }
 }

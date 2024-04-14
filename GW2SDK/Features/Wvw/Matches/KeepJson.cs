@@ -1,11 +1,11 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Matches;
 
 internal static class KeepJson
 {
-    public static Keep GetKeep(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Keep GetKeep(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember owner = "owner";
@@ -64,7 +64,7 @@ internal static class KeepJson
             {
                 guildUpgrades = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -72,15 +72,15 @@ internal static class KeepJson
 
         return new Keep
         {
-            Id = id.Map(value => value.GetStringRequired()),
-            Owner = owner.Map(value => value.GetEnum<TeamColor>()),
-            LastFlipped = lastFlipped.Map(value => value.GetDateTimeOffset()),
-            PointsTick = pointsTick.Map(value => value.GetInt32()),
-            PointsCapture = pointsCapture.Map(value => value.GetInt32()),
-            ClaimedBy = claimedBy.Map(value => value.GetString()) ?? "",
-            ClaimedAt = claimedAt.Map(value => value.GetDateTimeOffset()),
-            YaksDelivered = yaksDelivered.Map(value => value.GetInt32()),
-            GuildUpgrades = guildUpgrades.Map(values => values.GetList(value => value.GetInt32()))
+            Id = id.Map(static value => value.GetStringRequired()),
+            Owner = owner.Map(static value => value.GetEnum<TeamColor>()),
+            LastFlipped = lastFlipped.Map(static value => value.GetDateTimeOffset()),
+            PointsTick = pointsTick.Map(static value => value.GetInt32()),
+            PointsCapture = pointsCapture.Map(static value => value.GetInt32()),
+            ClaimedBy = claimedBy.Map(static value => value.GetString()) ?? "",
+            ClaimedAt = claimedAt.Map(static value => value.GetDateTimeOffset()),
+            YaksDelivered = yaksDelivered.Map(static value => value.GetInt32()),
+            GuildUpgrades = guildUpgrades.Map(static values => values.GetList(static value => value.GetInt32()))
                 ?? Empty.ListOfInt32
         };
     }

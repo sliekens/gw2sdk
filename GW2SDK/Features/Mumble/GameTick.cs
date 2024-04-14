@@ -1,6 +1,7 @@
 ﻿using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Text.Json;
+using GuildWars2.Json;
 
 namespace GuildWars2.Mumble;
 
@@ -76,7 +77,8 @@ public readonly record struct GameTick
         try
         {
             using var json = JsonDocument.Parse(Identity);
-            return json.RootElement.GetIdentity(missingMemberBehavior);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            return json.RootElement.GetIdentity();
         }
         catch (JsonException)
         {

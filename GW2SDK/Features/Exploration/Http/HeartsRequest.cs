@@ -29,8 +29,7 @@ internal sealed class HeartsRequest(int continentId, int floorId, int regionId, 
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<Heart> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -54,7 +53,7 @@ internal sealed class HeartsRequest(int continentId, int floorId, int regionId, 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetHeart(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(static entry => entry.GetHeart());
         return (value, new MessageContext(response));
     }
 }

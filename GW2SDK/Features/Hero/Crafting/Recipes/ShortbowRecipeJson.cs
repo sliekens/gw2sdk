@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Hero.Crafting.Disciplines;
 using GuildWars2.Json;
 
@@ -7,8 +7,7 @@ namespace GuildWars2.Hero.Crafting.Recipes;
 internal static class ShortbowRecipeJson
 {
     public static ShortbowRecipe GetShortbowRecipe(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember outputItemId = "output_item_id";
@@ -67,7 +66,7 @@ internal static class ShortbowRecipeJson
             {
                 chatLink = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -75,24 +74,21 @@ internal static class ShortbowRecipeJson
 
         return new ShortbowRecipe
         {
-            Id = id.Map(value => value.GetInt32()),
-            OutputItemId = outputItemId.Map(value => value.GetInt32()),
-            OutputItemCount = outputItemCount.Map(value => value.GetInt32()),
-            MinRating = minRating.Map(value => value.GetInt32()),
-            TimeToCraft = timeToCraft.Map(value => TimeSpan.FromMilliseconds(value.GetDouble())),
+            Id = id.Map(static value => value.GetInt32()),
+            OutputItemId = outputItemId.Map(static value => value.GetInt32()),
+            OutputItemCount = outputItemCount.Map(static value => value.GetInt32()),
+            MinRating = minRating.Map(static value => value.GetInt32()),
+            TimeToCraft = timeToCraft.Map(static value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines =
-                disciplines.Map(
-                    values =>
-                        values.GetList(
-                            value => value.GetEnum<CraftingDisciplineName>()
+                disciplines.Map(static values =>
+                        values.GetList(static value => value.GetEnum<CraftingDisciplineName>()
                         )
                 ),
-            Flags = flags.Map(values => values.GetRecipeFlags()),
+            Flags = flags.Map(static values => values.GetRecipeFlags()),
             Ingredients =
-                ingredients.Map(
-                    values => values.GetList(value => value.GetIngredient(missingMemberBehavior))
+                ingredients.Map(static values => values.GetList(static value => value.GetIngredient())
                 ),
-            ChatLink = chatLink.Map(value => value.GetStringRequired())
+            ChatLink = chatLink.Map(static value => value.GetStringRequired())
         };
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Logs;
@@ -6,8 +6,7 @@ namespace GuildWars2.Guilds.Logs;
 internal static class RankChangeJson
 {
     public static RankChange GetRankChange(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -52,7 +51,7 @@ internal static class RankChangeJson
             {
                 newRank = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -60,12 +59,12 @@ internal static class RankChangeJson
 
         return new RankChange
         {
-            Id = id.Map(value => value.GetInt32()),
-            Time = time.Map(value => value.GetDateTimeOffset()),
-            User = user.Map(value => value.GetStringRequired()),
-            ChangedBy = changedBy.Map(value => value.GetString()) ?? "",
-            OldRank = oldRank.Map(value => value.GetStringRequired()),
-            NewRank = newRank.Map(value => value.GetStringRequired())
+            Id = id.Map(static value => value.GetInt32()),
+            Time = time.Map(static value => value.GetDateTimeOffset()),
+            User = user.Map(static value => value.GetStringRequired()),
+            ChangedBy = changedBy.Map(static value => value.GetString()) ?? "",
+            OldRank = oldRank.Map(static value => value.GetStringRequired()),
+            NewRank = newRank.Map(static value => value.GetStringRequired())
         };
     }
 }

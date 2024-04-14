@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Hero;
 using GuildWars2.Json;
 
@@ -7,8 +7,7 @@ namespace GuildWars2.Items;
 internal static class ShieldJson
 {
     public static Shield GetShield(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember name = "name";
@@ -151,7 +150,7 @@ internal static class ShieldJson
                             {
                                 infixUpgradeBuff = infix;
                             }
-                            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+                            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                             {
                                 throw new InvalidOperationException(
                                     Strings.UnexpectedMember(infix.Name)
@@ -167,13 +166,13 @@ internal static class ShieldJson
                     {
                         secondarySuffixItemId = detail;
                     }
-                    else if (missingMemberBehavior == MissingMemberBehavior.Error)
+                    else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                     {
                         throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                     }
                 }
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -181,42 +180,39 @@ internal static class ShieldJson
 
         return new Shield
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
-            Description = description.Map(value => value.GetString()) ?? "",
-            Level = level.Map(value => value.GetInt32()),
-            Rarity = rarity.Map(value => value.GetEnum<Rarity>()),
-            VendorValue = vendorValue.Map(value => value.GetInt32()),
-            DefaultSkinId = defaultSkin.Map(value => value.GetInt32()),
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            Description = description.Map(static value => value.GetString()) ?? "",
+            Level = level.Map(static value => value.GetInt32()),
+            Rarity = rarity.Map(static value => value.GetEnum<Rarity>()),
+            VendorValue = vendorValue.Map(static value => value.GetInt32()),
+            DefaultSkinId = defaultSkin.Map(static value => value.GetInt32()),
             GameTypes =
-                gameTypes.Map(
-                    values => values.GetList(
-                        value => value.GetEnum<GameType>()
+                gameTypes.Map(static values => values.GetList(static value => value.GetEnum<GameType>()
                     )
                 ),
-            Flags = flags.Map(values => values.GetItemFlags()),
-            Restrictions = restrictions.Map(value => value.GetItemRestriction()),
-            ChatLink = chatLink.Map(value => value.GetStringRequired()),
-            IconHref = icon.Map(value => value.GetString()),
-            DamageType = damageType.Map(value => value.GetEnum<DamageType>()),
-            MinPower = minPower.Map(value => value.GetInt32()),
-            MaxPower = maxPower.Map(value => value.GetInt32()),
-            Defense = defense.Map(value => value.GetInt32()),
+            Flags = flags.Map(static values => values.GetItemFlags()),
+            Restrictions = restrictions.Map(static value => value.GetItemRestriction()),
+            ChatLink = chatLink.Map(static value => value.GetStringRequired()),
+            IconHref = icon.Map(static value => value.GetString()),
+            DamageType = damageType.Map(static value => value.GetEnum<DamageType>()),
+            MinPower = minPower.Map(static value => value.GetInt32()),
+            MaxPower = maxPower.Map(static value => value.GetInt32()),
+            Defense = defense.Map(static value => value.GetInt32()),
             InfusionSlots =
-                infusionSlots.Map(
-                    values => values.GetList(value => value.GetInfusionSlot(missingMemberBehavior))
+                infusionSlots.Map(static values => values.GetList(static value => value.GetInfusionSlot())
                 ),
-            AttributeAdjustment = attributeAdjustment.Map(value => value.GetDouble()),
+            AttributeAdjustment = attributeAdjustment.Map(static value => value.GetDouble()),
             StatChoices =
-                statChoices.Map(values => values.GetList(value => value.GetInt32()))
+                statChoices.Map(static values => values.GetList(static value => value.GetInt32()))
                 ?? Empty.ListOfInt32,
-            AttributeCombinationId = infixUpgradeId.Map(value => value.GetInt32()),
+            AttributeCombinationId = infixUpgradeId.Map(static value => value.GetInt32()),
             Attributes =
-                infixUpgradeAttributes.Map(values => values.GetAttributes(missingMemberBehavior))
+                infixUpgradeAttributes.Map(static values => values.GetAttributes())
                 ?? new Dictionary<Extensible<AttributeName>, int>(0),
-            Buff = infixUpgradeBuff.Map(value => value.GetBuff(missingMemberBehavior)),
-            SuffixItemId = suffixItemId.Map(value => value.GetInt32()),
-            SecondarySuffixItemId = secondarySuffixItemId.Map(value => value.GetInt32())
+            Buff = infixUpgradeBuff.Map(static value => value.GetBuff()),
+            SuffixItemId = suffixItemId.Map(static value => value.GetInt32()),
+            SecondarySuffixItemId = secondarySuffixItemId.Map(static value => value.GetInt32())
         };
     }
 }

@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Hero.Inventories.Http;
+using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Inventories;
 
@@ -29,10 +30,10 @@ public sealed class InventoryClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         SharedInventoryRequest request = new()
         {
             AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -54,10 +55,10 @@ public sealed class InventoryClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         InventoryRequest request = new(characterName)
         {
             AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }

@@ -12,8 +12,7 @@ internal sealed class ActiveEquipmentTemplateRequest(string characterName)
 
     public required string? AccessToken { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(EquipmentTemplate Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -34,7 +33,7 @@ internal sealed class ActiveEquipmentTemplateRequest(string characterName)
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetEquipmentTemplate(MissingMemberBehavior);
+        var value = json.RootElement.GetEquipmentTemplate();
         return (value, new MessageContext(response));
     }
 }

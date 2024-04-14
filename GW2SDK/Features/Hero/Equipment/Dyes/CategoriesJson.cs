@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Dyes;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Equipment.Dyes;
 internal static class CategoriesJson
 {
     public static (Extensible<Hue> hue, Extensible<Material> material, Extensible<ColorSet> set) GetCategories(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         if (json.GetArrayLength() == 0)
@@ -33,7 +32,7 @@ internal static class CategoriesJson
             {
                 set = entry;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(
                     Strings.UnexpectedArrayLength(json.GetArrayLength())

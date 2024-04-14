@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Upgrades;
@@ -6,8 +6,7 @@ namespace GuildWars2.Guilds.Upgrades;
 internal static class GuildUpgradeCurrencyCostJson
 {
     public static GuildUpgradeCurrencyCost GetGuildUpgradeCurrencyCost(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember name = "name";
@@ -32,7 +31,7 @@ internal static class GuildUpgradeCurrencyCostJson
             {
                 count = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -40,8 +39,8 @@ internal static class GuildUpgradeCurrencyCostJson
 
         return new GuildUpgradeCurrencyCost
         {
-            Name = name.Map(value => value.GetString()) ?? "",
-            Count = count.Map(value => value.GetInt32())
+            Name = name.Map(static value => value.GetString()) ?? "",
+            Count = count.Map(static value => value.GetInt32())
         };
     }
 }

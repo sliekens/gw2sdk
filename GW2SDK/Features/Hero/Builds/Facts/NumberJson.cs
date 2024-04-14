@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Builds.Facts;
@@ -7,7 +7,6 @@ internal static class NumberJson
 {
     public static Number GetNumber(
         this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior,
         out int? requiresTrait,
         out int? overrides
     )
@@ -50,7 +49,7 @@ internal static class NumberJson
             {
                 number = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -58,9 +57,9 @@ internal static class NumberJson
 
         return new Number
         {
-            Text = text.Map(value => value.GetString()) ?? "",
-            IconHref = icon.Map(value => value.GetStringRequired()),
-            Value = number.Map(value => value.GetInt32())
+            Text = text.Map(static value => value.GetString()) ?? "",
+            IconHref = icon.Map(static value => value.GetStringRequired()),
+            Value = number.Map(static value => value.GetInt32())
         };
     }
 }

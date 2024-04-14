@@ -1,5 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using GuildWars2.Hero.Equipment.Wardrobe.Http;
+using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Wardrobe;
 
@@ -61,10 +62,10 @@ public sealed class WardrobeClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         SkinByIdRequest request = new(skinId)
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -83,10 +84,10 @@ public sealed class WardrobeClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         SkinsByIdsRequest request = new(skinIds.ToList())
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -106,11 +107,11 @@ public sealed class WardrobeClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         SkinsByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }

@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Training;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Training;
 internal static class CharacterTrainingJson
 {
     public static CharacterTraining GetCharacterTraining(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember training = "training";
@@ -18,7 +17,7 @@ internal static class CharacterTrainingJson
             {
                 training = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -26,9 +25,7 @@ internal static class CharacterTrainingJson
 
         return new CharacterTraining
         {
-            Training = training.Map(
-                values => values.GetList(
-                    value => value.GetTrainingProgress(missingMemberBehavior)
+            Training = training.Map(static values => values.GetList(static value => value.GetTrainingProgress()
                 )
             )
         };

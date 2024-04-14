@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Hero.Equipment.MailCarriers.Http;
+using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.MailCarriers;
 
@@ -47,10 +48,10 @@ public sealed class MailCarriersClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         MailCarriersRequest request = new()
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -79,10 +80,10 @@ public sealed class MailCarriersClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         MailCarrierByIdRequest request = new(mailCarrierId)
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -100,10 +101,10 @@ public sealed class MailCarriersClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         MailCarriersByIdsRequest request = new(mailCarrierIds.ToList())
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -123,11 +124,11 @@ public sealed class MailCarriersClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         MailCarriersByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }

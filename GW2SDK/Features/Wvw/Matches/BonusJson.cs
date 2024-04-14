@@ -1,11 +1,11 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Matches;
 
 internal static class BonusJson
 {
-    public static Bonus GetBonus(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Bonus GetBonus(this JsonElement json)
     {
         RequiredMember type = "type";
         RequiredMember owner = "owner";
@@ -20,7 +20,7 @@ internal static class BonusJson
             {
                 owner = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -28,8 +28,8 @@ internal static class BonusJson
 
         return new Bonus
         {
-            Kind = type.Map(value => value.GetEnum<BonusKind>()),
-            Owner = owner.Map(value => value.GetEnum<TeamColor>())
+            Kind = type.Map(static value => value.GetEnum<BonusKind>()),
+            Owner = owner.Map(static value => value.GetEnum<TeamColor>())
         };
     }
 }

@@ -23,8 +23,7 @@ internal sealed class LeaderboardEntriesRequest(
 
     public int? PageSize { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<LeaderboardEntry> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -54,7 +53,7 @@ internal sealed class LeaderboardEntriesRequest(
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
         var value =
-            json.RootElement.GetSet(entry => entry.GetLeaderboardEntry(MissingMemberBehavior));
+            json.RootElement.GetSet(static entry => entry.GetLeaderboardEntry());
         return (value, new MessageContext(response));
     }
 }

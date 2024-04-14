@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Banking;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Banking;
 internal static class MaterialStorageJson
 {
     public static MaterialStorage GetMaterialStorage(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     ) =>
-        new() { Materials = json.GetList(value => value.GetMaterialSlot(missingMemberBehavior)) };
+        new() { Materials = json.GetList(static value => value.GetMaterialSlot()) };
 }

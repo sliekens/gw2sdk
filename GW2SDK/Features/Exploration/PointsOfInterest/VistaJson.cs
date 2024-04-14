@@ -1,11 +1,11 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.PointsOfInterest;
 
 internal static class VistaJson
 {
-    public static Vista GetVista(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Vista GetVista(this JsonElement json)
     {
         OptionalMember name = "name";
         RequiredMember floor = "floor";
@@ -43,7 +43,7 @@ internal static class VistaJson
             {
                 chatLink = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -51,11 +51,11 @@ internal static class VistaJson
 
         return new Vista
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetString()) ?? "",
-            Floor = floor.Map(value => value.GetInt32()),
-            Coordinates = coordinates.Map(value => value.GetCoordinateF(missingMemberBehavior)),
-            ChatLink = chatLink.Map(value => value.GetStringRequired())
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetString()) ?? "",
+            Floor = floor.Map(static value => value.GetInt32()),
+            Coordinates = coordinates.Map(static value => value.GetCoordinateF()),
+            ChatLink = chatLink.Map(static value => value.GetStringRequired())
         };
     }
 }

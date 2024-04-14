@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Hero.Equipment.Outfits.Http;
+using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Outfits;
 
@@ -47,10 +48,10 @@ public sealed class OutfitsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         OutfitsRequest request = new()
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -79,10 +80,10 @@ public sealed class OutfitsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         OutfitByIdRequest request = new(outfitId)
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -100,10 +101,10 @@ public sealed class OutfitsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         OutfitsByIdsRequest request = new(outfitIds.ToList())
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -123,11 +124,11 @@ public sealed class OutfitsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         OutfitsByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }

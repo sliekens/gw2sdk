@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Items;
@@ -6,8 +6,7 @@ namespace GuildWars2.Items;
 internal static class GatheringToolJson
 {
     public static GatheringTool GetGatheringTool(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         if (json.TryGetProperty("details", out var discriminator))
@@ -17,15 +16,15 @@ internal static class GatheringToolJson
                 switch (subtype.GetString())
                 {
                     case "Bait":
-                        return json.GetBait(missingMemberBehavior);
+                        return json.GetBait();
                     case "Foraging":
-                        return json.GetHarvestingSickle(missingMemberBehavior);
+                        return json.GetHarvestingSickle();
                     case "Logging":
-                        return json.GetLoggingAxe(missingMemberBehavior);
+                        return json.GetLoggingAxe();
                     case "Lure":
-                        return json.GetLure(missingMemberBehavior);
+                        return json.GetLure();
                     case "Mining":
-                        return json.GetMiningPick(missingMemberBehavior);
+                        return json.GetMiningPick();
                 }
             }
         }
@@ -102,20 +101,20 @@ internal static class GatheringToolJson
                 {
                     if (detail.NameEquals("type"))
                     {
-                        if (missingMemberBehavior == MissingMemberBehavior.Error)
+                        if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                         {
                             throw new InvalidOperationException(
                                 Strings.UnexpectedDiscriminator(detail.Value.GetString())
                             );
                         }
                     }
-                    else if (missingMemberBehavior == MissingMemberBehavior.Error)
+                    else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                     {
                         throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                     }
                 }
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -123,22 +122,20 @@ internal static class GatheringToolJson
 
         return new GatheringTool
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
-            Description = description.Map(value => value.GetString()) ?? "",
-            Level = level.Map(value => value.GetInt32()),
-            Rarity = rarity.Map(value => value.GetEnum<Rarity>()),
-            VendorValue = vendorValue.Map(value => value.GetInt32()),
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            Description = description.Map(static value => value.GetString()) ?? "",
+            Level = level.Map(static value => value.GetInt32()),
+            Rarity = rarity.Map(static value => value.GetEnum<Rarity>()),
+            VendorValue = vendorValue.Map(static value => value.GetInt32()),
             GameTypes =
-                gameTypes.Map(
-                    values => values.GetList(
-                        value => value.GetEnum<GameType>()
+                gameTypes.Map(static values => values.GetList(static value => value.GetEnum<GameType>()
                     )
                 ),
-            Flags = flags.Map(values => values.GetItemFlags()),
-            Restrictions = restrictions.Map(value => value.GetItemRestriction()),
-            ChatLink = chatLink.Map(value => value.GetStringRequired()),
-            IconHref = icon.Map(value => value.GetString())
+            Flags = flags.Map(static values => values.GetItemFlags()),
+            Restrictions = restrictions.Map(static value => value.GetItemRestriction()),
+            ChatLink = chatLink.Map(static value => value.GetStringRequired()),
+            IconHref = icon.Map(static value => value.GetString())
         };
     }
 }

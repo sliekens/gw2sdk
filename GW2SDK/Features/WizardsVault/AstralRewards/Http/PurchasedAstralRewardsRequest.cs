@@ -14,8 +14,7 @@ internal sealed class PurchasedAstralRewardsRequest : IHttpRequest<HashSet<Purch
 
     public required string? AccessToken { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<PurchasedAstralReward> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -32,7 +31,7 @@ internal sealed class PurchasedAstralRewardsRequest : IHttpRequest<HashSet<Purch
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
         var value = json.RootElement.GetSet(
-            entry => entry.GetPurchasedAstralReward(MissingMemberBehavior)
+            entry => entry.GetPurchasedAstralReward()
         );
         return (value, new MessageContext(response));
     }

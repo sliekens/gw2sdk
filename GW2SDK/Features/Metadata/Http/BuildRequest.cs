@@ -9,8 +9,7 @@ internal sealed class BuildRequest : IHttpRequest<Build>
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
     };
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(Build Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -26,7 +25,7 @@ internal sealed class BuildRequest : IHttpRequest<Build>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetBuild(MissingMemberBehavior);
+        var value = json.RootElement.GetBuild();
         return (value, new MessageContext(response));
     }
 }

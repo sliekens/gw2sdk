@@ -17,8 +17,7 @@ internal sealed class OutfitsRequest : IHttpRequest<HashSet<Outfit>>
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<Outfit> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -34,7 +33,7 @@ internal sealed class OutfitsRequest : IHttpRequest<HashSet<Outfit>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetOutfit(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(static entry => entry.GetOutfit());
         return (value, new MessageContext(response));
     }
 }

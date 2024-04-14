@@ -20,8 +20,7 @@ internal sealed class CurrenciesByIdsRequest : IHttpRequest<HashSet<Currency>>
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<Currency> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -45,7 +44,7 @@ internal sealed class CurrenciesByIdsRequest : IHttpRequest<HashSet<Currency>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetCurrency(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(static entry => entry.GetCurrency());
         return (value, new MessageContext(response));
     }
 }

@@ -5,10 +5,7 @@ namespace GuildWars2.Hero.Masteries;
 
 internal static class MasteryPointsProgressJson
 {
-    public static MasteryPointsProgress GetMasteryPointsProgress(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
-    )
+    public static MasteryPointsProgress GetMasteryPointsProgress(this JsonElement json)
     {
         RequiredMember totals = "totals";
         RequiredMember unlocked = "unlocked";
@@ -23,7 +20,7 @@ internal static class MasteryPointsProgressJson
             {
                 unlocked = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -31,11 +28,14 @@ internal static class MasteryPointsProgressJson
 
         return new MasteryPointsProgress
         {
-            Totals = totals.Map(
-                values =>
-                    values.GetList(entry => entry.GetMasteryPointsTotal(missingMemberBehavior))
-            ),
-            Unlocked = unlocked.Map(values => values.GetList(value => value.GetInt32()))
+            Totals =
+                totals.Map(
+                    static values =>
+                        values.GetList(static value => value.GetMasteryPointsTotal())
+                ),
+            Unlocked = unlocked.Map(
+                static values => values.GetList(static value => value.GetInt32())
+            )
         };
     }
 }

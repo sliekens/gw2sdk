@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using GuildWars2.Hero.Achievements;
 using GuildWars2.Hero.Achievements.Rewards;
+using GuildWars2.Json;
 
 namespace GuildWars2.Tests.Features.Hero.Achievements;
 
@@ -14,7 +15,8 @@ public class AchievementJson(AchievementFixture fixture) : IClassFixture<Achieve
             {
                 using var document = JsonDocument.Parse(json);
 
-                var actual = document.RootElement.GetAchievement(MissingMemberBehavior.Error);
+                JsonOptions.MissingMemberBehavior = MissingMemberBehavior.Error;
+                var actual = document.RootElement.GetAchievement();
 
                 Assert.True(actual.Id > 0);
                 Assert.NotEmpty(actual.Name);

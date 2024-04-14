@@ -15,8 +15,7 @@ internal sealed class BuildRequest(string characterName, int tabNumber)
 
     public required string? AccessToken { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(BuildTemplate Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -38,7 +37,7 @@ internal sealed class BuildRequest(string characterName, int tabNumber)
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetBuildTemplate(MissingMemberBehavior);
+        var value = json.RootElement.GetBuildTemplate();
         return (value, new MessageContext(response));
     }
 }

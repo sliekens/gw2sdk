@@ -1,11 +1,11 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Achievements.Titles;
 
 internal static class TitleJson
 {
-    public static Title GetTitle(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Title GetTitle(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -30,7 +30,7 @@ internal static class TitleJson
             {
                 achievementPointsRequired = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 if (member.NameEquals("achievement"))
                 {
@@ -44,10 +44,10 @@ internal static class TitleJson
 
         return new Title
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
-            Achievements = achievements.Map(values => values.GetList(value => value.GetInt32())),
-            AchievementPointsRequired = achievementPointsRequired.Map(value => value.GetInt32())
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            Achievements = achievements.Map(static values => values.GetList(static value => value.GetInt32())),
+            AchievementPointsRequired = achievementPointsRequired.Map(static value => value.GetInt32())
         };
     }
 }

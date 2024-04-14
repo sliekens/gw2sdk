@@ -16,8 +16,7 @@ internal sealed class CatsByIdsRequest : IHttpRequest<HashSet<Cat>>
 
     public IReadOnlyCollection<int> CatIds { get; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<Cat> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -40,7 +39,7 @@ internal sealed class CatsByIdsRequest : IHttpRequest<HashSet<Cat>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetCat(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(static entry => entry.GetCat());
         return (value, new MessageContext(response));
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Hero.Builds;
 using GuildWars2.Json;
 
@@ -7,8 +7,7 @@ namespace GuildWars2.Hero.Training;
 internal static class ProfessionJson
 {
     public static Profession GetProfession(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -68,7 +67,7 @@ internal static class ProfessionJson
             {
                 skillsByPalette = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -76,33 +75,30 @@ internal static class ProfessionJson
 
         return new Profession
         {
-            Id = id.Map(value => value.GetEnum<ProfessionName>()),
-            Name = name.Map(value => value.GetStringRequired()),
-            Code = code.Map(value => value.GetInt32()),
-            IconHref = icon.Map(value => value.GetStringRequired()),
-            BigIconHref = iconBig.Map(value => value.GetStringRequired()),
+            Id = id.Map(static value => value.GetEnum<ProfessionName>()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            Code = code.Map(static value => value.GetInt32()),
+            IconHref = icon.Map(static value => value.GetStringRequired()),
+            BigIconHref = iconBig.Map(static value => value.GetStringRequired()),
             SpecializationIds =
-                specializations.Map(values => values.GetList(value => value.GetInt32())),
+                specializations.Map(static values => values.GetList(static value => value.GetInt32())),
             Weapons =
-                weapons.Map(
-                    value =>
+                weapons.Map(static value =>
                         value.GetMap(
                             GetWeaponType,
-                            item => item.GetWeaponProficiency(missingMemberBehavior)
+                            item => item.GetWeaponProficiency()
                         )
                 ),
-            Flags = flags.Map(values => values.GetProfessionFlags()),
+            Flags = flags.Map(static values => values.GetProfessionFlags()),
             Skills =
-                skills.Map(
-                    values =>
-                        values.GetList(value => value.GetSkillSummary(missingMemberBehavior))
+                skills.Map(static values =>
+                        values.GetList(static value => value.GetSkillSummary())
                 ),
             Training =
-                training.Map(
-                    values => values.GetList(value => value.GetTraining(missingMemberBehavior))
+                training.Map(static values => values.GetList(static value => value.GetTraining())
                 ),
             SkillsByPalette =
-                skillsByPalette.Map(value => value.GetSkillsByPalette(missingMemberBehavior))
+                skillsByPalette.Map(static value => value.GetSkillsByPalette())
         };
 
         static Extensible<WeaponType> GetWeaponType(string text)

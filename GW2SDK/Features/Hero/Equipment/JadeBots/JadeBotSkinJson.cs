@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.JadeBots;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Equipment.JadeBots;
 internal static class JadeBotSkinJson
 {
     public static JadeBotSkin GetJadeBotSkin(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -33,7 +32,7 @@ internal static class JadeBotSkinJson
             {
                 unlockItem = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -41,10 +40,10 @@ internal static class JadeBotSkinJson
 
         return new JadeBotSkin
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
-            Description = description.Map(value => value.GetStringRequired()),
-            UnlockItemId = unlockItem.Map(value => value.GetInt32())
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            Description = description.Map(static value => value.GetStringRequired()),
+            UnlockItemId = unlockItem.Map(static value => value.GetInt32())
         };
     }
 }

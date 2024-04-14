@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Achievements;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Achievements;
 internal static class AchievementTierJson
 {
     public static AchievementTier GetAchievementTier(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember count = "count";
@@ -22,7 +21,7 @@ internal static class AchievementTierJson
             {
                 points = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -30,8 +29,8 @@ internal static class AchievementTierJson
 
         return new AchievementTier
         {
-            Count = count.Map(value => value.GetInt32()),
-            Points = points.Map(value => value.GetInt32())
+            Count = count.Map(static value => value.GetInt32()),
+            Points = points.Map(static value => value.GetInt32())
         };
     }
 }

@@ -12,8 +12,7 @@ internal sealed class UpgradeByIdRequest(int upgradeId) : IHttpRequest<Objective
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(ObjectiveUpgrade Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -37,7 +36,7 @@ internal sealed class UpgradeByIdRequest(int upgradeId) : IHttpRequest<Objective
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetObjectiveUpgrade(MissingMemberBehavior);
+        var value = json.RootElement.GetObjectiveUpgrade();
         return (value, new MessageContext(response));
     }
 }

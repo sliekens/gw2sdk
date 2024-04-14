@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.WizardsVault.Seasons;
@@ -6,8 +6,7 @@ namespace GuildWars2.WizardsVault.Seasons;
 internal static class SeasonJson
 {
     public static Season GetSeason(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember title = "title";
@@ -38,7 +37,7 @@ internal static class SeasonJson
             {
                 objectives = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -46,11 +45,11 @@ internal static class SeasonJson
 
         return new Season
         {
-            Title = title.Map(value => value.GetStringRequired()),
-            Start = start.Map(value => value.GetDateTimeOffset()),
-            End = end.Map(value => value.GetDateTimeOffset()),
-            AstralRewardIds = listings.Map(values => values.GetSet(value => value.GetInt32())),
-            ObjectiveIds = objectives.Map(values => values.GetSet(value => value.GetInt32()))
+            Title = title.Map(static value => value.GetStringRequired()),
+            Start = start.Map(static value => value.GetDateTimeOffset()),
+            End = end.Map(static value => value.GetDateTimeOffset()),
+            AstralRewardIds = listings.Map(static values => values.GetSet(static value => value.GetInt32())),
+            ObjectiveIds = objectives.Map(static values => values.GetSet(static value => value.GetInt32()))
         };
     }
 }

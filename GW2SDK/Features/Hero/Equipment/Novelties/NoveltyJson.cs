@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Novelties;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Equipment.Novelties;
 internal static class NoveltyJson
 {
     public static Novelty GetNovelty(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -43,7 +42,7 @@ internal static class NoveltyJson
             {
                 unlockItems = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -51,12 +50,12 @@ internal static class NoveltyJson
 
         return new Novelty
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
-            Description = description.Map(value => value.GetString()) ?? "",
-            IconHref = icon.Map(value => value.GetStringRequired()),
-            Slot = slot.Map(value => value.GetEnum<NoveltyKind>()),
-            UnlockItemIds = unlockItems.Map(values => values.GetList(value => value.GetInt32()))
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            Description = description.Map(static value => value.GetString()) ?? "",
+            IconHref = icon.Map(static value => value.GetStringRequired()),
+            Slot = slot.Map(static value => value.GetEnum<NoveltyKind>()),
+            UnlockItemIds = unlockItems.Map(static values => values.GetList(static value => value.GetInt32()))
         };
     }
 }

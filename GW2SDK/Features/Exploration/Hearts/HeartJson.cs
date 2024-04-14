@@ -1,11 +1,11 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Hearts;
 
 internal static class HeartJson
 {
-    public static Heart GetHeart(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Heart GetHeart(this JsonElement json)
     {
         RequiredMember objective = "objective";
         RequiredMember level = "level";
@@ -39,7 +39,7 @@ internal static class HeartJson
             {
                 chatLink = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -47,15 +47,14 @@ internal static class HeartJson
 
         return new Heart
         {
-            Id = id.Map(value => value.GetInt32()),
-            Objective = objective.Map(value => value.GetStringRequired()),
-            Level = level.Map(value => value.GetInt32()),
-            Coordinates = coordinates.Map(value => value.GetCoordinateF(missingMemberBehavior)),
+            Id = id.Map(static value => value.GetInt32()),
+            Objective = objective.Map(static value => value.GetStringRequired()),
+            Level = level.Map(static value => value.GetInt32()),
+            Coordinates = coordinates.Map(static value => value.GetCoordinateF()),
             Boundaries =
-                boundaries.Map(
-                    values => values.GetList(value => value.GetCoordinateF(missingMemberBehavior))
+                boundaries.Map(static values => values.GetList(static value => value.GetCoordinateF())
                 ),
-            ChatLink = chatLink.Map(value => value.GetStringRequired())
+            ChatLink = chatLink.Map(static value => value.GetStringRequired())
         };
     }
 }

@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Hero.Wallet.Http;
+using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Wallet;
 
@@ -30,10 +31,10 @@ public sealed class WalletClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         WalletRequest request = new()
         {
             AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -53,10 +54,10 @@ public sealed class WalletClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         CurrenciesRequest request = new()
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -85,10 +86,10 @@ public sealed class WalletClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         CurrencyByIdRequest request = new(currencyId)
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -106,10 +107,10 @@ public sealed class WalletClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         CurrenciesByIdsRequest request = new(currencyIds.ToList())
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -129,11 +130,11 @@ public sealed class WalletClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         CurrenciesByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
+            Language = language
         };
 
         return request.SendAsync(httpClient, cancellationToken);

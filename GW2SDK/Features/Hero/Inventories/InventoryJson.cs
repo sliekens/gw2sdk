@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Inventories;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Inventories;
 internal static class InventoryJson
 {
     public static Inventory GetInventory(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     ) =>
-        new() { Items = json.GetList(value => value.GetItemSlot(missingMemberBehavior)) };
+        new() { Items = json.GetList(static value => value.GetItemSlot()) };
 }

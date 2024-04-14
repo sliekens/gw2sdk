@@ -11,8 +11,7 @@ internal sealed class ActiveBuildRequest(string characterName) : IHttpRequest<Bu
 
     public required string? AccessToken { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(BuildTemplate Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -33,7 +32,7 @@ internal sealed class ActiveBuildRequest(string characterName) : IHttpRequest<Bu
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetBuildTemplate(MissingMemberBehavior);
+        var value = json.RootElement.GetBuildTemplate();
         return (value, new MessageContext(response));
     }
 }

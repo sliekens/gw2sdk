@@ -19,8 +19,7 @@ internal sealed class ItemPricesByIdsRequest : IHttpRequest<HashSet<ItemPrice>>
 
     public IReadOnlyCollection<int> ItemIds { get; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<ItemPrice> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -43,7 +42,7 @@ internal sealed class ItemPricesByIdsRequest : IHttpRequest<HashSet<ItemPrice>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetItemPrice(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(static entry => entry.GetItemPrice());
         return (value, new MessageContext(response));
     }
 }

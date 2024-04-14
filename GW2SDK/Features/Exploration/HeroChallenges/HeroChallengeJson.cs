@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.HeroChallenges;
@@ -6,8 +6,7 @@ namespace GuildWars2.Exploration.HeroChallenges;
 internal static class HeroChallengeJson
 {
     public static HeroChallenge GetHeroChallenge(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember coordinates = "coord";
@@ -24,7 +23,7 @@ internal static class HeroChallengeJson
             {
                 id = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -32,8 +31,8 @@ internal static class HeroChallengeJson
 
         return new HeroChallenge
         {
-            Id = id.Map(value => value.GetString()) ?? "",
-            Coordinates = coordinates.Map(value => value.GetCoordinateF(missingMemberBehavior))
+            Id = id.Map(static value => value.GetString()) ?? "",
+            Coordinates = coordinates.Map(static value => value.GetCoordinateF())
         };
     }
 }

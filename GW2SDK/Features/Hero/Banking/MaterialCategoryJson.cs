@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Banking;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Banking;
 internal static class MaterialCategoryJson
 {
     public static MaterialCategory GetMaterialCategory(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -33,7 +32,7 @@ internal static class MaterialCategoryJson
             {
                 order = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -41,10 +40,10 @@ internal static class MaterialCategoryJson
 
         return new MaterialCategory
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
-            Items = items.Map(values => values.GetList(value => value.GetInt32())),
-            Order = order.Map(value => value.GetInt32())
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            Items = items.Map(static values => values.GetList(static value => value.GetInt32())),
+            Order = order.Map(static value => value.GetInt32())
         };
     }
 }

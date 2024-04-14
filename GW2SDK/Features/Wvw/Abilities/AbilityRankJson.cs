@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Abilities;
@@ -6,8 +6,7 @@ namespace GuildWars2.Wvw.Abilities;
 internal static class AbilityRankJson
 {
     public static AbilityRank GetAbilityRank(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember cost = "cost";
@@ -23,7 +22,7 @@ internal static class AbilityRankJson
             {
                 effect = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -31,8 +30,8 @@ internal static class AbilityRankJson
 
         return new AbilityRank
         {
-            Cost = cost.Map(value => value.GetInt32()),
-            Effect = effect.Map(value => value.GetStringRequired())
+            Cost = cost.Map(static value => value.GetInt32()),
+            Effect = effect.Map(static value => value.GetStringRequired())
         };
     }
 }

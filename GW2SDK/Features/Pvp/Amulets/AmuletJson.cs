@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Hero.Equipment;
 using GuildWars2.Json;
 
@@ -7,8 +7,7 @@ namespace GuildWars2.Pvp.Amulets;
 internal static class AmuletJson
 {
     public static Amulet GetAmulet(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -34,7 +33,7 @@ internal static class AmuletJson
             {
                 attributes = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -42,10 +41,10 @@ internal static class AmuletJson
 
         return new Amulet
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
-            IconHref = icon.Map(value => value.GetStringRequired()),
-            Attributes = attributes.Map(value => value.GetAttributes(missingMemberBehavior))
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            IconHref = icon.Map(static value => value.GetStringRequired()),
+            Attributes = attributes.Map(static value => value.GetAttributes())
         };
     }
 }

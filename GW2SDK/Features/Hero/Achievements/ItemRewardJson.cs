@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Achievements;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Achievements;
 internal static class ItemRewardJson
 {
     public static ItemReward GetItemReward(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -31,7 +30,7 @@ internal static class ItemRewardJson
             {
                 count = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -39,8 +38,8 @@ internal static class ItemRewardJson
 
         return new ItemReward
         {
-            Id = id.Map(value => value.GetInt32()),
-            Count = count.Map(value => value.GetInt32())
+            Id = id.Map(static value => value.GetInt32()),
+            Count = count.Map(static value => value.GetInt32())
         };
     }
 }

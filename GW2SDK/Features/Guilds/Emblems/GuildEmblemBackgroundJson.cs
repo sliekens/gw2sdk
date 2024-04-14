@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Emblems;
@@ -6,8 +6,7 @@ namespace GuildWars2.Guilds.Emblems;
 internal static class GuildEmblemBackgroundJson
 {
     public static GuildEmblemBackground GetGuildEmblemBackground(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -23,7 +22,7 @@ internal static class GuildEmblemBackgroundJson
             {
                 colors = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -31,8 +30,8 @@ internal static class GuildEmblemBackgroundJson
 
         return new GuildEmblemBackground
         {
-            Id = id.Map(value => value.GetInt32()),
-            ColorIds = colors.Map(values => values.GetList(value => value.GetInt32()))
+            Id = id.Map(static value => value.GetInt32()),
+            ColorIds = colors.Map(static values => values.GetList(static value => value.GetInt32()))
         };
     }
 }

@@ -17,8 +17,7 @@ internal sealed class SpecializationsRequest : IHttpRequest<HashSet<Specializati
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<Specialization> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -35,7 +34,7 @@ internal sealed class SpecializationsRequest : IHttpRequest<HashSet<Specializati
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
         var value =
-            json.RootElement.GetSet(entry => entry.GetSpecialization(MissingMemberBehavior));
+            json.RootElement.GetSet(static entry => entry.GetSpecialization());
         return (value, new MessageContext(response));
     }
 }

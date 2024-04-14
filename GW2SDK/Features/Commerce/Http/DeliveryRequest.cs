@@ -13,8 +13,7 @@ internal sealed class DeliveryRequest : IHttpRequest<DeliveryBox>
 
     public required string? AccessToken { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(DeliveryBox Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -30,7 +29,7 @@ internal sealed class DeliveryRequest : IHttpRequest<DeliveryBox>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetDeliveryBox(MissingMemberBehavior);
+        var value = json.RootElement.GetDeliveryBox();
         return (value, new MessageContext(response));
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Banking;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Banking;
 internal static class MaterialSlotJson
 {
     public static MaterialSlot GetMaterialSlot(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -33,7 +32,7 @@ internal static class MaterialSlotJson
             {
                 count = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -41,10 +40,10 @@ internal static class MaterialSlotJson
 
         return new MaterialSlot
         {
-            ItemId = id.Map(value => value.GetInt32()),
-            CategoryId = category.Map(value => value.GetInt32()),
-            Binding = binding.Map(value => value.GetEnum<ItemBinding>()),
-            Count = count.Map(value => value.GetInt32())
+            ItemId = id.Map(static value => value.GetInt32()),
+            CategoryId = category.Map(static value => value.GetInt32()),
+            Binding = binding.Map(static value => value.GetEnum<ItemBinding>()),
+            Count = count.Map(static value => value.GetInt32())
         };
     }
 }

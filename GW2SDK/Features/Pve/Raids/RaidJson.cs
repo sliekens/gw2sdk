@@ -1,11 +1,11 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Pve.Raids;
 
 internal static class RaidJson
 {
-    public static Raid GetRaid(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Raid GetRaid(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember wings = "wings";
@@ -20,7 +20,7 @@ internal static class RaidJson
             {
                 wings = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -28,9 +28,8 @@ internal static class RaidJson
 
         return new Raid
         {
-            Id = id.Map(value => value.GetStringRequired()),
-            Wings = wings.Map(
-                values => values.GetList(value => value.GetRaidWing(missingMemberBehavior))
+            Id = id.Map(static value => value.GetStringRequired()),
+            Wings = wings.Map(static values => values.GetList(static value => value.GetRaidWing())
             )
         };
     }

@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Builds;
 
 internal static class BuildJson
 {
-    public static Build GetBuild(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Build GetBuild(this JsonElement json)
     {
         RequiredMember name = "name";
         RequiredMember profession = "profession";
@@ -50,26 +50,28 @@ internal static class BuildJson
             {
                 aquaticLegends = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
         }
 
-        var (Specialization1, Specialization2, Specialization3) = specializations.Map(values => values.GetSelectedSpecializations(missingMemberBehavior));
-        var legendIds = legends.Map(values => values.GetLegendIds(Specialization1, Specialization2, Specialization3, missingMemberBehavior));
-        var aquaticLegendIds = aquaticLegends.Map(values => values.GetLegendIds(Specialization1, Specialization2, Specialization3, missingMemberBehavior));
+        var (Specialization1, Specialization2, Specialization3) =
+            specializations.Map(static values => values.GetSelectedSpecializations());
+        var legendIds = legends.Map(values => values.GetLegendIds(Specialization1, Specialization2, Specialization3)
+        );
+        var aquaticLegendIds = aquaticLegends.Map(values => values.GetLegendIds(Specialization1, Specialization2, Specialization3)
+        );
         return new Build
         {
-            Name = name.Map(value => value.GetStringRequired()),
-            Profession =
-                profession.Map(value => value.GetEnum<ProfessionName>()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            Profession = profession.Map(static value => value.GetEnum<ProfessionName>()),
             Specialization1 = Specialization1,
             Specialization2 = Specialization2,
             Specialization3 = Specialization3,
-            Skills = skills.Map(value => value.GetSkillBar(missingMemberBehavior)),
-            AquaticSkills = aquaticSkills.Map(value => value.GetSkillBar(missingMemberBehavior)),
-            Pets = pets.Map(value => value.GetSelectedPets(missingMemberBehavior)),
+            Skills = skills.Map(static value => value.GetSkillBar()),
+            AquaticSkills = aquaticSkills.Map(static value => value.GetSkillBar()),
+            Pets = pets.Map(static value => value.GetSelectedPets()),
             Legends = (legendIds, aquaticLegendIds) switch
             {
                 (not null, not null) => new SelectedLegends

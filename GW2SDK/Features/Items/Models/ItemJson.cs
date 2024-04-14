@@ -1,51 +1,51 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
 internal static class ItemJson
 {
-    public static Item GetItem(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Item GetItem(this JsonElement json)
     {
         if (json.TryGetProperty("type", out var discriminator))
         {
             switch (discriminator.GetString())
             {
                 case "Armor":
-                    return json.GetArmor(missingMemberBehavior);
+                    return json.GetArmor();
                 case "Back":
-                    return json.GetBackpack(missingMemberBehavior);
+                    return json.GetBackpack();
                 case "Bag":
-                    return json.GetBag(missingMemberBehavior);
+                    return json.GetBag();
                 case "Consumable":
-                    return json.GetConsumable(missingMemberBehavior);
+                    return json.GetConsumable();
                 case "Container":
-                    return json.GetContainer(missingMemberBehavior);
+                    return json.GetContainer();
                 case "CraftingMaterial":
-                    return json.GetCraftingMaterial(missingMemberBehavior);
+                    return json.GetCraftingMaterial();
                 case "Gathering":
-                    return json.GetGatheringTool(missingMemberBehavior);
+                    return json.GetGatheringTool();
                 case "Gizmo":
-                    return json.GetGizmo(missingMemberBehavior);
+                    return json.GetGizmo();
                 case "JadeTechModule":
-                    return json.GetJadeTechModule(missingMemberBehavior);
+                    return json.GetJadeTechModule();
                 case "MiniPet":
-                    return json.GetMiniature(missingMemberBehavior);
+                    return json.GetMiniature();
                 case "PowerCore":
-                    return json.GetPowerCore(missingMemberBehavior);
+                    return json.GetPowerCore();
                 case "Relic":
-                    return json.GetRelic(missingMemberBehavior);
+                    return json.GetRelic();
                 case "Tool":
-                    return json.GetSalvageTool(missingMemberBehavior);
+                    return json.GetSalvageTool();
                 case "Trinket":
-                    return json.GetTrinket(missingMemberBehavior);
+                    return json.GetTrinket();
                 case "Trophy" or "Key":
                     // Key acts as a Trophy, and there is only one (Florid Bouquet), so treat it as a Trophy
-                    return json.GetTrophy(missingMemberBehavior);
+                    return json.GetTrophy();
                 case "UpgradeComponent":
-                    return json.GetUpgradeComponent(missingMemberBehavior);
+                    return json.GetUpgradeComponent();
                 case "Weapon":
-                    return json.GetWeapon(missingMemberBehavior);
+                    return json.GetWeapon();
             }
         }
 
@@ -64,7 +64,7 @@ internal static class ItemJson
         {
             if (member.NameEquals("type"))
             {
-                if (missingMemberBehavior == MissingMemberBehavior.Error)
+                if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                 {
                     throw new InvalidOperationException(
                         Strings.UnexpectedDiscriminator(member.Value.GetString())
@@ -115,7 +115,7 @@ internal static class ItemJson
             {
                 icon = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -123,22 +123,20 @@ internal static class ItemJson
         
         return new Item
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
-            Description = description.Map(value => value.GetString()) ?? "",
-            Level = level.Map(value => value.GetInt32()),
-            Rarity = rarity.Map(value => value.GetEnum<Rarity>()),
-            VendorValue = vendorValue.Map(value => value.GetInt32()),
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            Description = description.Map(static value => value.GetString()) ?? "",
+            Level = level.Map(static value => value.GetInt32()),
+            Rarity = rarity.Map(static value => value.GetEnum<Rarity>()),
+            VendorValue = vendorValue.Map(static value => value.GetInt32()),
             GameTypes =
-                gameTypes.Map(
-                    values => values.GetList(
-                        value => value.GetEnum<GameType>()
+                gameTypes.Map(static values => values.GetList(static value => value.GetEnum<GameType>()
                     )
                 ),
-            Flags = flags.Map(values => values.GetItemFlags()),
-            Restrictions = restrictions.Map(value => value.GetItemRestriction()),
-            ChatLink = chatLink.Map(value => value.GetStringRequired()),
-            IconHref = icon.Map(value => value.GetString())
+            Flags = flags.Map(static values => values.GetItemFlags()),
+            Restrictions = restrictions.Map(static value => value.GetItemRestriction()),
+            ChatLink = chatLink.Map(static value => value.GetStringRequired()),
+            IconHref = icon.Map(static value => value.GetString())
         };
     }
 }

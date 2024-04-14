@@ -1,11 +1,11 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Metadata;
 
 internal static class RouteJson
 {
-    public static Route GetRoute(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Route GetRoute(this JsonElement json)
     {
         RequiredMember path = "path";
         RequiredMember lang = "lang";
@@ -30,7 +30,7 @@ internal static class RouteJson
             {
                 active = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -38,10 +38,10 @@ internal static class RouteJson
 
         return new Route
         {
-            Path = path.Map(value => value.GetStringRequired()),
-            Multilingual = lang.Map(value => value.GetBoolean()),
-            RequiresAuthorization = auth.Map(value => value.GetBoolean()),
-            Active = active.Map(value => value.GetBoolean())
+            Path = path.Map(static value => value.GetStringRequired()),
+            Multilingual = lang.Map(static value => value.GetBoolean()),
+            RequiresAuthorization = auth.Map(static value => value.GetBoolean()),
+            Active = active.Map(static value => value.GetBoolean())
         };
     }
 }

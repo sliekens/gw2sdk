@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Logs;
@@ -6,8 +6,7 @@ namespace GuildWars2.Guilds.Logs;
 internal static class GuildLogEntryJson
 {
     public static GuildLogEntry GetGuildLogEntry(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         if (json.TryGetProperty("type", out var discriminator))
@@ -15,25 +14,25 @@ internal static class GuildLogEntryJson
             switch (discriminator.GetString())
             {
                 case "influence":
-                    return json.GetInfluenceActivity(missingMemberBehavior);
+                    return json.GetInfluenceActivity();
                 case "invite_declined":
-                    return json.GetInviteDeclined(missingMemberBehavior);
+                    return json.GetInviteDeclined();
                 case "invited":
-                    return json.GetMemberInvited(missingMemberBehavior);
+                    return json.GetMemberInvited();
                 case "joined":
-                    return json.GetMemberJoined(missingMemberBehavior);
+                    return json.GetMemberJoined();
                 case "kick":
-                    return json.GetMemberKicked(missingMemberBehavior);
+                    return json.GetMemberKicked();
                 case "motd":
-                    return json.GetNewMessageOfTheDay(missingMemberBehavior);
+                    return json.GetNewMessageOfTheDay();
                 case "rank_change":
-                    return json.GetRankChange(missingMemberBehavior);
+                    return json.GetRankChange();
                 case "stash":
-                    return json.GetGuildBankActivity(missingMemberBehavior);
+                    return json.GetGuildBankActivity();
                 case "treasury":
-                    return json.GetTreasuryDeposit(missingMemberBehavior);
+                    return json.GetTreasuryDeposit();
                 case "upgrade":
-                    return json.GetGuildUpgradeActivity(missingMemberBehavior);
+                    return json.GetGuildUpgradeActivity();
             }
         }
 
@@ -44,7 +43,7 @@ internal static class GuildLogEntryJson
         {
             if (member.NameEquals("type"))
             {
-                if (missingMemberBehavior == MissingMemberBehavior.Error)
+                if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                 {
                     throw new InvalidOperationException(
                         Strings.UnexpectedDiscriminator(member.Value.GetString())
@@ -59,7 +58,7 @@ internal static class GuildLogEntryJson
             {
                 time = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -67,8 +66,8 @@ internal static class GuildLogEntryJson
 
         return new GuildLogEntry
         {
-            Id = id.Map(value => value.GetInt32()),
-            Time = time.Map(value => value.GetDateTimeOffset())
+            Id = id.Map(static value => value.GetInt32()),
+            Time = time.Map(static value => value.GetDateTimeOffset())
         };
     }
 }

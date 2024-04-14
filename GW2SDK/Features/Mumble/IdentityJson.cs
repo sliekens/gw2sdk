@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Hero;
 using GuildWars2.Json;
 
@@ -7,8 +7,7 @@ namespace GuildWars2.Mumble;
 internal static class IdentityJson
 {
     public static Identity GetIdentity(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember name = "name";
@@ -69,16 +68,16 @@ internal static class IdentityJson
             {
                 map = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
         }
 
-        if (missingMemberBehavior == MissingMemberBehavior.Error)
+        if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
         {
             // The 'map' and 'map_id' seem to be redundant, but check my assumptions...
-            if (map.Map(value => value.GetInt32()) != mapId.Map(value => value.GetInt32()))
+            if (map.Map(static value => value.GetInt32()) != mapId.Map(static value => value.GetInt32()))
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember("map"));
             }
@@ -86,16 +85,16 @@ internal static class IdentityJson
 
         return new Identity
         {
-            Name = name.Map(value => value.GetStringRequired()),
-            Profession = profession.Map(value => (ProfessionName)value.GetInt32()),
-            SpecializationId = specializationId.Map(value => value.GetInt32()),
-            Race = race.Map(value => (RaceName)(value.GetInt32() + 1)),
-            MapId = mapId.Map(value => value.GetInt32()),
-            WorldId = worldId.Map(value => value.GetInt64()),
-            TeamColorId = teamColorId.Map(value => value.GetInt32()),
-            Commander = commander.Map(value => value.GetBoolean()),
-            FieldOfView = fieldOfView.Map(value => value.GetDouble()),
-            UiSize = uiSize.Map(value => (UiSize)value.GetInt32())
+            Name = name.Map(static value => value.GetStringRequired()),
+            Profession = profession.Map(static value => (ProfessionName)value.GetInt32()),
+            SpecializationId = specializationId.Map(static value => value.GetInt32()),
+            Race = race.Map(static value => (RaceName)(value.GetInt32() + 1)),
+            MapId = mapId.Map(static value => value.GetInt32()),
+            WorldId = worldId.Map(static value => value.GetInt64()),
+            TeamColorId = teamColorId.Map(static value => value.GetInt32()),
+            Commander = commander.Map(static value => value.GetBoolean()),
+            FieldOfView = fieldOfView.Map(static value => value.GetDouble()),
+            UiSize = uiSize.Map(static value => (UiSize)value.GetInt32())
         };
     }
 }

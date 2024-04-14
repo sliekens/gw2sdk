@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Masteries;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Masteries;
 internal static class MasteryTrackProgressJson
 {
     public static MasteryTrackProgress GetMasteryTrackProgress(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -23,7 +22,7 @@ internal static class MasteryTrackProgressJson
             {
                 level = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -31,8 +30,8 @@ internal static class MasteryTrackProgressJson
 
         return new MasteryTrackProgress
         {
-            Id = id.Map(value => value.GetInt32()),
-            Level = level.Map(value => value.GetInt32())
+            Id = id.Map(static value => value.GetInt32()),
+            Level = level.Map(static value => value.GetInt32())
         };
     }
 }

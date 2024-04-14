@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Hero.Equipment.JadeBots.Http;
+using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.JadeBots;
 
@@ -47,10 +48,10 @@ public sealed class JadeBotsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         JadeBotSkinsRequest request = new()
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -79,10 +80,10 @@ public sealed class JadeBotsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         JadeBotSkinByIdRequest request = new(jadeBotSkinId)
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -100,10 +101,10 @@ public sealed class JadeBotsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         JadeBotSkinsByIdsRequest request = new(jadeBotSkinIds.ToList())
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -123,11 +124,11 @@ public sealed class JadeBotsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         JadeBotSkinsByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }

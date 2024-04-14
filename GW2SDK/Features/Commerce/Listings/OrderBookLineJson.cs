@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Commerce.Listings;
@@ -6,8 +6,7 @@ namespace GuildWars2.Commerce.Listings;
 internal static class OrderBookLineJson
 {
     public static OrderBookLine GetOrderBookLine(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember listings = "listings";
@@ -28,7 +27,7 @@ internal static class OrderBookLineJson
             {
                 quantity = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -36,9 +35,9 @@ internal static class OrderBookLineJson
 
         return new OrderBookLine
         {
-            Listings = listings.Map(value => value.GetInt32()),
-            UnitPrice = unitPrice.Map(value => value.GetInt32()),
-            Quantity = quantity.Map(value => value.GetInt32())
+            Listings = listings.Map(static value => value.GetInt32()),
+            UnitPrice = unitPrice.Map(static value => value.GetInt32()),
+            Quantity = quantity.Map(static value => value.GetInt32())
         };
     }
 }

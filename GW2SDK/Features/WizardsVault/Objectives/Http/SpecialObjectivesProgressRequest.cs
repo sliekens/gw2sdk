@@ -13,8 +13,7 @@ internal sealed class SpecialObjectivesProgressRequest : IHttpRequest<SpecialObj
 
     public required string? AccessToken { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(SpecialObjectivesProgress Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -30,7 +29,7 @@ internal sealed class SpecialObjectivesProgressRequest : IHttpRequest<SpecialObj
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSpecialObjectivesProgress(MissingMemberBehavior);
+        var value = json.RootElement.GetSpecialObjectivesProgress();
         return (value, new MessageContext(response));
     }
 }

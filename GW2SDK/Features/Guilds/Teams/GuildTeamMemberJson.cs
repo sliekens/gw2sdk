@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Teams;
@@ -6,8 +6,7 @@ namespace GuildWars2.Guilds.Teams;
 internal static class GuildTeamMemberJson
 {
     public static GuildTeamMember GetGuildTeamMember(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember name = "name";
@@ -23,7 +22,7 @@ internal static class GuildTeamMemberJson
             {
                 role = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -31,8 +30,8 @@ internal static class GuildTeamMemberJson
 
         return new GuildTeamMember
         {
-            Name = name.Map(value => value.GetStringRequired()),
-            Role = role.Map(value => value.GetEnum<GuildTeamRole>())
+            Name = name.Map(static value => value.GetStringRequired()),
+            Role = role.Map(static value => value.GetEnum<GuildTeamRole>())
         };
     }
 }

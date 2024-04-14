@@ -6,6 +6,7 @@ using GuildWars2.Exploration.Maps;
 using GuildWars2.Exploration.PointsOfInterest;
 using GuildWars2.Exploration.Regions;
 using GuildWars2.Exploration.Sectors;
+using GuildWars2.Json;
 
 namespace GuildWars2.Exploration;
 
@@ -56,11 +57,8 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        ContinentsRequest request = new()
-        {
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        ContinentsRequest request = new() { Language = language };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -88,11 +86,8 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        ContinentByIdRequest request = new(continentId)
-        {
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        ContinentByIdRequest request = new(continentId) { Language = language };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -109,11 +104,8 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        ContinentsByIdsRequest request = new(continentIds.ToList())
-        {
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        ContinentsByIdsRequest request = new(continentIds.ToList()) { Language = language };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -132,11 +124,11 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         ContinentsByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
+            Language = language
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -158,11 +150,8 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        FloorsRequest request = new(continentId)
-        {
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        FloorsRequest request = new(continentId) { Language = language };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -194,11 +183,8 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        FloorByIdRequest request = new(continentId, floorId)
-        {
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        FloorByIdRequest request = new(continentId, floorId) { Language = language };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -217,11 +203,8 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        FloorsByIdsRequest request = new(continentId, floorIds.ToList())
-        {
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        FloorsByIdsRequest request = new(continentId, floorIds.ToList()) { Language = language };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -242,11 +225,11 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         FloorsByPageRequest request = new(continentId, pageIndex)
         {
             PageSize = pageSize,
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
+            Language = language
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -270,11 +253,8 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        RegionsRequest request = new(continentId, floorId)
-        {
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        RegionsRequest request = new(continentId, floorId) { Language = language };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -310,11 +290,8 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        RegionByIdRequest request = new(continentId, floorId, regionId)
-        {
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        RegionByIdRequest request = new(continentId, floorId, regionId) { Language = language };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -335,10 +312,10 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         RegionsByIdsRequest request = new(continentId, floorId, regionIds.ToList())
         {
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
+            Language = language
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -362,11 +339,11 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         RegionsByPageRequest request = new(continentId, floorId, pageIndex)
         {
             PageSize = pageSize,
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
+            Language = language
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -392,11 +369,8 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        RegionalMapsRequest request = new(continentId, floorId, regionId)
-        {
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        RegionalMapsRequest request = new(continentId, floorId, regionId) { Language = language };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -436,10 +410,10 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         RegionalMapByIdRequest request = new(continentId, floorId, regionId, mapId)
         {
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
+            Language = language
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -463,11 +437,9 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        RegionalMapsByIdsRequest request = new(continentId, floorId, regionId, mapIds.ToList())
-        {
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        RegionalMapsByIdsRequest request =
+            new(continentId, floorId, regionId, mapIds.ToList()) { Language = language };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -492,11 +464,11 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         RegionalMapsByPageRequest request = new(continentId, floorId, regionId, pageIndex)
         {
             PageSize = pageSize,
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
+            Language = language
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -524,10 +496,10 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         PointsOfInterestRequest request = new(continentId, floorId, regionId, mapId)
         {
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
+            Language = language
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -572,12 +544,9 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         PointOfInterestByIdRequest request =
-            new(continentId, floorId, regionId, mapId, pointOfInterestId)
-            {
-                Language = language,
-                MissingMemberBehavior = missingMemberBehavior
-            };
+            new(continentId, floorId, regionId, mapId, pointOfInterestId) { Language = language };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -602,11 +571,14 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        PointsOfInterestByIdsRequest request = new(continentId, floorId, regionId, mapId, pointOfInterestIds.ToList())
-        {
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        PointsOfInterestByIdsRequest request = new(
+            continentId,
+            floorId,
+            regionId,
+            mapId,
+            pointOfInterestIds.ToList()
+        ) { Language = language };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -633,12 +605,12 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         PointsOfInterestByPageRequest request =
             new(continentId, floorId, regionId, mapId, pageIndex)
             {
                 PageSize = pageSize,
-                Language = language,
-                MissingMemberBehavior = missingMemberBehavior
+                Language = language
             };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -666,11 +638,8 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        HeartsRequest request = new(continentId, floorId, regionId, mapId)
-        {
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        HeartsRequest request = new(continentId, floorId, regionId, mapId) { Language = language };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -714,11 +683,9 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        HeartByIdRequest request = new(continentId, floorId, regionId, mapId, heartId)
-        {
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        HeartByIdRequest request =
+            new(continentId, floorId, regionId, mapId, heartId) { Language = language };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -743,11 +710,9 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        HeartsByIdsRequest request = new(continentId, floorId, regionId, mapId, heartIds.ToList())
-        {
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        HeartsByIdsRequest request =
+            new(continentId, floorId, regionId, mapId, heartIds.ToList()) { Language = language };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -774,11 +739,11 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         HeartsByPageRequest request = new(continentId, floorId, regionId, mapId, pageIndex)
         {
             PageSize = pageSize,
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
+            Language = language
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -806,11 +771,8 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        SectorsRequest request = new(continentId, floorId, regionId, mapId)
-        {
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        SectorsRequest request = new(continentId, floorId, regionId, mapId) { Language = language };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -854,11 +816,9 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        SectorByIdRequest request = new(continentId, floorId, regionId, mapId, sectorId)
-        {
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        SectorByIdRequest request =
+            new(continentId, floorId, regionId, mapId, sectorId) { Language = language };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -883,11 +843,9 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        SectorsByIdsRequest request = new(continentId, floorId, regionId, mapId, sectorIds.ToList())
-        {
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        SectorsByIdsRequest request =
+            new(continentId, floorId, regionId, mapId, sectorIds.ToList()) { Language = language };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -914,11 +872,11 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         SectorsByPageRequest request = new(continentId, floorId, regionId, mapId, pageIndex)
         {
             PageSize = pageSize,
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
+            Language = language
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -938,11 +896,8 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        MapSummariesRequest request = new()
-        {
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        MapSummariesRequest request = new() { Language = language };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -970,11 +925,8 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        MapSummaryByIdRequest request = new(mapId)
-        {
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        MapSummaryByIdRequest request = new(mapId) { Language = language };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -991,11 +943,8 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        MapSummariesByIdsRequest request = new(mapIds.ToList())
-        {
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        MapSummariesByIdsRequest request = new(mapIds.ToList()) { Language = language };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -1014,11 +963,11 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         MapSummariesByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
+            Language = language
         };
         return request.SendAsync(httpClient, cancellationToken);
     }

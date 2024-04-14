@@ -14,8 +14,7 @@ internal sealed class ContinentByIdRequest(int continentId) : IHttpRequest<Conti
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(Continent Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -39,7 +38,7 @@ internal sealed class ContinentByIdRequest(int continentId) : IHttpRequest<Conti
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetContinent(MissingMemberBehavior);
+        var value = json.RootElement.GetContinent();
         return (value, new MessageContext(response));
     }
 }

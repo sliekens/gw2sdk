@@ -12,8 +12,7 @@ internal sealed class BankRequest : IHttpRequest<Bank>
 
     public required string? AccessToken { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(Bank Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -29,7 +28,7 @@ internal sealed class BankRequest : IHttpRequest<Bank>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetBank(MissingMemberBehavior);
+        var value = json.RootElement.GetBank();
         return (value, new MessageContext(response));
     }
 }

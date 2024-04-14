@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Finishers;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Equipment.Finishers;
 internal static class UnlockedFinisherJson
 {
     public static UnlockedFinisher GetUnlockedFinisher(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -28,7 +27,7 @@ internal static class UnlockedFinisherJson
             {
                 quantity = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -36,9 +35,9 @@ internal static class UnlockedFinisherJson
 
         return new UnlockedFinisher
         {
-            Id = id.Map(value => value.GetInt32()),
-            Permanent = permanent.Map(value => value.GetBoolean()),
-            Quantity = quantity.Map(value => value.GetInt32())
+            Id = id.Map(static value => value.GetInt32()),
+            Permanent = permanent.Map(static value => value.GetBoolean()),
+            Quantity = quantity.Map(static value => value.GetInt32())
         };
     }
 }

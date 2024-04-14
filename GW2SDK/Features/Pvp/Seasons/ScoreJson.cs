@@ -1,11 +1,11 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Seasons;
 
 internal static class ScoreJson
 {
-    public static Score GetScore(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Score GetScore(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember score = "value";
@@ -20,7 +20,7 @@ internal static class ScoreJson
             {
                 score = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -28,8 +28,8 @@ internal static class ScoreJson
 
         return new Score
         {
-            Id = id.Map(value => value.GetStringRequired()),
-            Value = score.Map(value => value.GetInt32())
+            Id = id.Map(static value => value.GetStringRequired()),
+            Value = score.Map(static value => value.GetInt32())
         };
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Teams;
@@ -6,8 +6,7 @@ namespace GuildWars2.Guilds.Teams;
 internal static class LaddersJson
 {
     public static Ladders GetLadders(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         OptionalMember none = "none";
@@ -48,7 +47,7 @@ internal static class LaddersJson
             {
                 teamArenaRated = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -56,13 +55,13 @@ internal static class LaddersJson
 
         return new Ladders
         {
-            None = none.Map(value => value.GetResults(missingMemberBehavior)),
-            Unranked = unranked.Map(value => value.GetResults(missingMemberBehavior)),
-            Ranked = ranked.Map(value => value.GetResults(missingMemberBehavior)),
-            Ranked2v2 = ranked2v2.Map(value => value.GetResults(missingMemberBehavior)),
-            Ranked3v3 = ranked3v3.Map(value => value.GetResults(missingMemberBehavior)),
-            SoloArenaRated = soloArenaRated.Map(value => value.GetResults(missingMemberBehavior)),
-            TeamArenaRated = teamArenaRated.Map(value => value.GetResults(missingMemberBehavior))
+            None = none.Map(static value => value.GetResults()),
+            Unranked = unranked.Map(static value => value.GetResults()),
+            Ranked = ranked.Map(static value => value.GetResults()),
+            Ranked2v2 = ranked2v2.Map(static value => value.GetResults()),
+            Ranked3v3 = ranked3v3.Map(static value => value.GetResults()),
+            SoloArenaRated = soloArenaRated.Map(static value => value.GetResults()),
+            TeamArenaRated = teamArenaRated.Map(static value => value.GetResults())
         };
     }
 }

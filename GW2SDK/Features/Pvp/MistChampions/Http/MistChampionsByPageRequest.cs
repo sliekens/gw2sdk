@@ -15,8 +15,7 @@ internal sealed class MistChampionsByPageRequest(int pageIndex)
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<MistChampion> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -43,7 +42,7 @@ internal sealed class MistChampionsByPageRequest(int pageIndex)
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetMistChampion(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(static entry => entry.GetMistChampion());
         return (value, new MessageContext(response));
     }
 }

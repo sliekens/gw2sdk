@@ -12,8 +12,7 @@ internal sealed class ApiVersionRequest(string version) : IHttpRequest<ApiVersio
 
     public string Version { get; } = version;
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(ApiVersion Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -29,7 +28,7 @@ internal sealed class ApiVersionRequest(string version) : IHttpRequest<ApiVersio
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetApiVersion(MissingMemberBehavior);
+        var value = json.RootElement.GetApiVersion();
         return (value, new MessageContext(response));
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Bank;
@@ -6,8 +6,7 @@ namespace GuildWars2.Guilds.Bank;
 internal static class GuildBankSlotJson
 {
     public static GuildBankSlot? GetGuildBankSlot(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         if (json.ValueKind == JsonValueKind.Null)
@@ -28,7 +27,7 @@ internal static class GuildBankSlotJson
             {
                 count = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -36,8 +35,8 @@ internal static class GuildBankSlotJson
 
         return new GuildBankSlot
         {
-            ItemId = itemId.Map(value => value.GetInt32()),
-            Count = count.Map(value => value.GetInt32())
+            ItemId = itemId.Map(static value => value.GetInt32()),
+            Count = count.Map(static value => value.GetInt32())
         };
     }
 }

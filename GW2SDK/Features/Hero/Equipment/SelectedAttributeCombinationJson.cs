@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Equipment;
 internal static class SelectedAttributeCombinationJson
 {
     public static SelectedAttributeCombination GetSelectedAttributeCombination(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -22,7 +21,7 @@ internal static class SelectedAttributeCombinationJson
             {
                 attributes = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -30,8 +29,8 @@ internal static class SelectedAttributeCombinationJson
 
         return new SelectedAttributeCombination
         {
-            Id = id.Map(value => value.GetInt32()),
-            Attributes = attributes.Map(value => value.GetAttributes(missingMemberBehavior))
+            Id = id.Map(static value => value.GetInt32()),
+            Attributes = attributes.Map(static value => value.GetAttributes())
         };
     }
 }

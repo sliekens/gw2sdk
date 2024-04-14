@@ -2,6 +2,7 @@
 using GuildWars2.Items.Http;
 using GuildWars2.Items.Stats;
 using GuildWars2.Items.Stats.Http;
+using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
@@ -45,10 +46,10 @@ public sealed class ItemsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         ItemByIdRequest request = new(itemId)
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -67,10 +68,10 @@ public sealed class ItemsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         ItemsByIdsRequest request = new(itemIds.ToList())
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -90,11 +91,11 @@ public sealed class ItemsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         ItemsByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
+            Language = language
         };
 
         return request.SendAsync(httpClient, cancellationToken);
@@ -206,10 +207,10 @@ public sealed class ItemsClient
             CancellationToken cancellationToken = default
         )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         AttributeCombinationsRequest request = new()
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -227,10 +228,10 @@ public sealed class ItemsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         AttributeCombinationByIdRequest request = new(attributeCombinationId)
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -249,10 +250,10 @@ public sealed class ItemsClient
             CancellationToken cancellationToken = default
         )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         AttributeCombinationsByIdsRequest request = new(attributeCombinationIds.ToList())
         {
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
+            Language = language
         };
 
         return request.SendAsync(httpClient, cancellationToken);
@@ -274,11 +275,11 @@ public sealed class ItemsClient
             CancellationToken cancellationToken = default
         )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         AttributeCombinationsByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }

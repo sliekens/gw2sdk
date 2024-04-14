@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Hero.Equipment.Skiffs.Http;
+using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Skiffs;
 
@@ -47,10 +48,10 @@ public sealed class SkiffsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         SkiffSkinsRequest request = new()
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -79,10 +80,10 @@ public sealed class SkiffsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         SkiffSkinByIdRequest request = new(skiffSkinId)
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -100,10 +101,10 @@ public sealed class SkiffsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         SkiffSkinsByIdsRequest request = new(skiffSkinIds.ToList())
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -123,11 +124,11 @@ public sealed class SkiffsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         SkiffSkinsByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }

@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Hero.Training.Objectives;
 using GuildWars2.Json;
 
@@ -7,8 +7,7 @@ namespace GuildWars2.Hero.Training;
 internal static class TrainingObjectiveJson
 {
     public static TrainingObjective GetTrainingObjective(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         if (json.TryGetProperty("type", out var discriminator))
@@ -16,9 +15,9 @@ internal static class TrainingObjectiveJson
             switch (discriminator.GetString())
             {
                 case "Skill":
-                    return json.GetSkillObjective(missingMemberBehavior);
+                    return json.GetSkillObjective();
                 case "Trait":
-                    return json.GetTraitObjective(missingMemberBehavior);
+                    return json.GetTraitObjective();
             }
         }
 
@@ -27,7 +26,7 @@ internal static class TrainingObjectiveJson
         {
             if (member.NameEquals("type"))
             {
-                if (missingMemberBehavior == MissingMemberBehavior.Error)
+                if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                 {
                     throw new InvalidOperationException(
                         Strings.UnexpectedDiscriminator(member.Value.GetString())
@@ -38,12 +37,12 @@ internal static class TrainingObjectiveJson
             {
                 cost = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
         }
 
-        return new TrainingObjective { Cost = cost.Map(value => value.GetInt32()) };
+        return new TrainingObjective { Cost = cost.Map(static value => value.GetInt32()) };
     }
 }

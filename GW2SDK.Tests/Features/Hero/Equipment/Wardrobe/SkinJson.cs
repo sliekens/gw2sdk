@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using GuildWars2.Hero.Equipment.Wardrobe;
+using GuildWars2.Json;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Wardrobe;
 
@@ -13,7 +14,8 @@ public class SkinJson(SkinFixture fixture) : IClassFixture<SkinFixture>
             {
                 using var document = JsonDocument.Parse(json);
 
-                var actual = document.RootElement.GetEquipmentSkin(MissingMemberBehavior.Error);
+                JsonOptions.MissingMemberBehavior = MissingMemberBehavior.Error;
+                var actual = document.RootElement.GetEquipmentSkin();
                 var link = actual.GetChatLink();
 
                 Assert.True(actual.Id > 0);

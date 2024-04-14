@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Seasons;
@@ -6,8 +6,7 @@ namespace GuildWars2.Pvp.Seasons;
 internal static class SkillBadgeJson
 {
     public static SkillBadge GetSkillBadge(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember name = "name";
@@ -43,7 +42,7 @@ internal static class SkillBadgeJson
             {
                 tiers = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -51,13 +50,12 @@ internal static class SkillBadgeJson
 
         return new SkillBadge
         {
-            Name = name.Map(value => value.GetStringRequired()),
-            Description = description.Map(value => value.GetStringRequired()),
-            IconHref = icon.Map(value => value.GetStringRequired()),
-            Overlay = overlay.Map(value => value.GetStringRequired()),
-            SmallOverlay = smallOverlay.Map(value => value.GetStringRequired()),
-            Tiers = tiers.Map(
-                values => values.GetList(value => value.GetSkillBadgeTier(missingMemberBehavior))
+            Name = name.Map(static value => value.GetStringRequired()),
+            Description = description.Map(static value => value.GetStringRequired()),
+            IconHref = icon.Map(static value => value.GetStringRequired()),
+            Overlay = overlay.Map(static value => value.GetStringRequired()),
+            SmallOverlay = smallOverlay.Map(static value => value.GetStringRequired()),
+            Tiers = tiers.Map(static values => values.GetList(static value => value.GetSkillBadgeTier())
             )
         };
     }

@@ -13,8 +13,7 @@ internal sealed class WalletRequest : IHttpRequest<HashSet<CurrencyAmount>>
 
     public required string? AccessToken { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<CurrencyAmount> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -30,7 +29,7 @@ internal sealed class WalletRequest : IHttpRequest<HashSet<CurrencyAmount>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(item => item.GetCurrencyAmount(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(static entry => entry.GetCurrencyAmount());
         return (value, new MessageContext(response));
     }
 }

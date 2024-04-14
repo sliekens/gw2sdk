@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Items;
@@ -6,8 +6,7 @@ namespace GuildWars2.Items;
 internal static class ConsumableJson
 {
     public static Consumable GetConsumable(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         if (json.TryGetProperty("details", out var discriminator))
@@ -17,35 +16,35 @@ internal static class ConsumableJson
                 switch (subtype.GetString())
                 {
                     case "AppearanceChange":
-                        return json.GetAppearanceChanger(missingMemberBehavior);
+                        return json.GetAppearanceChanger();
                     case "Booze":
-                        return json.GetBooze(missingMemberBehavior);
+                        return json.GetBooze();
                     case "ContractNpc":
-                        return json.GetContractNpc(missingMemberBehavior);
+                        return json.GetContractNpc();
                     case "Currency":
-                        return json.GetCurrency(missingMemberBehavior);
+                        return json.GetCurrency();
                     case "Food":
-                        return json.GetFood(missingMemberBehavior);
+                        return json.GetFood();
                     case "Generic":
-                        return json.GetGenericConsumable(missingMemberBehavior);
+                        return json.GetGenericConsumable();
                     case "Halloween":
-                        return json.GetHalloweenConsumable(missingMemberBehavior);
+                        return json.GetHalloweenConsumable();
                     case "Immediate":
-                        return json.GetService(missingMemberBehavior);
+                        return json.GetService();
                     case "MountRandomUnlock":
-                        return json.GetMountLicense(missingMemberBehavior);
+                        return json.GetMountLicense();
                     case "RandomUnlock":
-                        return json.GetRandomUnlocker(missingMemberBehavior);
+                        return json.GetRandomUnlocker();
                     case "TeleportToFriend":
-                        return json.GetTeleportToFriend(missingMemberBehavior);
+                        return json.GetTeleportToFriend();
                     case "Transmutation":
-                        return json.GetTransmutation(missingMemberBehavior);
+                        return json.GetTransmutation();
                     case "Unlock":
-                        return json.GetUnlocker(missingMemberBehavior);
+                        return json.GetUnlocker();
                     case "UpgradeRemoval":
-                        return json.GetUpgradeExtractor(missingMemberBehavior);
+                        return json.GetUpgradeExtractor();
                     case "Utility":
-                        return json.GetUtility(missingMemberBehavior);
+                        return json.GetUtility();
                 }
             }
         }
@@ -122,20 +121,20 @@ internal static class ConsumableJson
                 {
                     if (detail.NameEquals("type"))
                     {
-                        if (missingMemberBehavior == MissingMemberBehavior.Error)
+                        if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                         {
                             throw new InvalidOperationException(
                                 Strings.UnexpectedDiscriminator(detail.Value.GetString())
                             );
                         }
                     }
-                    else if (missingMemberBehavior == MissingMemberBehavior.Error)
+                    else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                     {
                         throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                     }
                 }
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -143,22 +142,20 @@ internal static class ConsumableJson
 
         return new Consumable
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
-            Description = description.Map(value => value.GetString()) ?? "",
-            Level = level.Map(value => value.GetInt32()),
-            Rarity = rarity.Map(value => value.GetEnum<Rarity>()),
-            VendorValue = vendorValue.Map(value => value.GetInt32()),
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            Description = description.Map(static value => value.GetString()) ?? "",
+            Level = level.Map(static value => value.GetInt32()),
+            Rarity = rarity.Map(static value => value.GetEnum<Rarity>()),
+            VendorValue = vendorValue.Map(static value => value.GetInt32()),
             GameTypes =
-                gameTypes.Map(
-                    values => values.GetList(
-                        value => value.GetEnum<GameType>()
+                gameTypes.Map(static values => values.GetList(static value => value.GetEnum<GameType>()
                     )
                 ),
-            Flags = flags.Map(values => values.GetItemFlags()),
-            Restrictions = restrictions.Map(value => value.GetItemRestriction()),
-            ChatLink = chatLink.Map(value => value.GetStringRequired()),
-            IconHref = icon.Map(value => value.GetString())
+            Flags = flags.Map(static values => values.GetItemFlags()),
+            Restrictions = restrictions.Map(static value => value.GetItemRestriction()),
+            ChatLink = chatLink.Map(static value => value.GetStringRequired()),
+            IconHref = icon.Map(static value => value.GetString())
         };
     }
 }

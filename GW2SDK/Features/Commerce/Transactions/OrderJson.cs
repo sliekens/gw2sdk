@@ -1,11 +1,11 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Commerce.Transactions;
 
 internal static class OrderJson
 {
-    public static Order GetOrder(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Order GetOrder(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember itemId = "item_id";
@@ -35,7 +35,7 @@ internal static class OrderJson
             {
                 created = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -43,11 +43,11 @@ internal static class OrderJson
 
         return new Order
         {
-            Id = id.Map(value => value.GetInt64()),
-            ItemId = itemId.Map(value => value.GetInt32()),
-            UnitPrice = price.Map(value => value.GetInt32()),
-            Quantity = quantity.Map(value => value.GetInt32()),
-            Created = created.Map(value => value.GetDateTimeOffset())
+            Id = id.Map(static value => value.GetInt64()),
+            ItemId = itemId.Map(static value => value.GetInt32()),
+            UnitPrice = price.Map(static value => value.GetInt32()),
+            Quantity = quantity.Map(static value => value.GetInt32()),
+            Created = created.Map(static value => value.GetDateTimeOffset())
         };
     }
 }

@@ -9,8 +9,7 @@ internal sealed class EmblemForegroundsRequest : IHttpRequest<HashSet<EmblemFore
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/emblem/foregrounds") { AcceptEncoding = "gzip" };
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<EmblemForeground> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -34,7 +33,7 @@ internal sealed class EmblemForegroundsRequest : IHttpRequest<HashSet<EmblemFore
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
         var value =
-            json.RootElement.GetSet(entry => entry.GetEmblemForeground(MissingMemberBehavior));
+            json.RootElement.GetSet(static entry => entry.GetEmblemForeground());
         return (value, new MessageContext(response));
     }
 }

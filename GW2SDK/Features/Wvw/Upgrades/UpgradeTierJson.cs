@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Upgrades;
@@ -6,8 +6,7 @@ namespace GuildWars2.Wvw.Upgrades;
 internal static class UpgradeTierJson
 {
     public static UpgradeTier GetUpgradeTier(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember name = "name";
@@ -28,7 +27,7 @@ internal static class UpgradeTierJson
             {
                 upgrades = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -36,10 +35,9 @@ internal static class UpgradeTierJson
 
         return new UpgradeTier
         {
-            Name = name.Map(value => value.GetStringRequired()),
-            YaksRequired = yaksRequired.Map(value => value.GetInt32()),
-            Upgrades = upgrades.Map(
-                values => values.GetList(value => value.GetUpgrade(missingMemberBehavior))
+            Name = name.Map(static value => value.GetStringRequired()),
+            YaksRequired = yaksRequired.Map(static value => value.GetInt32()),
+            Upgrades = upgrades.Map(static values => values.GetList(static value => value.GetUpgrade())
             )
         };
     }

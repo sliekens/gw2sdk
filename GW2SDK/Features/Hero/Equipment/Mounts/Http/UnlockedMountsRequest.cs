@@ -29,7 +29,7 @@ internal sealed class UnlockedMountsRequest : IHttpRequest<HashSet<Extensible<Mo
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetMountName());
+        var value = json.RootElement.GetSet(static entry => entry.GetMountName());
         return (value, new MessageContext(response));
     }
 }

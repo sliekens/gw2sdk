@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Achievements.Categories;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Achievements.Categories;
 internal static class AchievementRefJson
 {
     public static AchievementRef GetAchievementRef(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -33,7 +32,7 @@ internal static class AchievementRefJson
             {
                 level = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -41,15 +40,15 @@ internal static class AchievementRefJson
 
         return new AchievementRef
         {
-            Id = id.Map(value => value.GetInt32()),
-            Flags = flags.Map(values => values.GetAchievementFlags())
+            Id = id.Map(static value => value.GetInt32()),
+            Flags = flags.Map(static values => values.GetAchievementFlags())
                 ?? new AchievementFlags
                 {
                     SpecialEvent = false,
                     PvE = false,
                     Other = Empty.ListOfString
                 },
-            Level = level.Map(value => value.GetLevelRequirement(missingMemberBehavior))
+            Level = level.Map(static value => value.GetLevelRequirement())
         };
     }
 }

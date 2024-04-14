@@ -1,11 +1,11 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Builds;
 
 internal static class UtilitySkillIdsJson
 {
-    public static (int? UtilitySkillId, int? UtilitySkillId2, int? UtilitySkillId3) GetUtilitySkillIds(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static (int? UtilitySkillId, int? UtilitySkillId2, int? UtilitySkillId3) GetUtilitySkillIds(this JsonElement json)
     {
         JsonElement first = default;
         JsonElement second = default;
@@ -25,7 +25,7 @@ internal static class UtilitySkillIdsJson
             {
                 third = entry;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(
                     Strings.UnexpectedArrayLength(json.GetArrayLength())

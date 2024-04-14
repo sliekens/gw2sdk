@@ -13,8 +13,7 @@ internal sealed class MatchesScoresByPageRequest(int pageIndex) : IHttpRequest<H
 
     public int? PageSize { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<MatchScores> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -37,7 +36,7 @@ internal sealed class MatchesScoresByPageRequest(int pageIndex) : IHttpRequest<H
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetMatchScores(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(static entry => entry.GetMatchScores());
         return (value, new MessageContext(response));
     }
 }

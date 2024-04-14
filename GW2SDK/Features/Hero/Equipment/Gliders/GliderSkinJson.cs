@@ -5,10 +5,7 @@ namespace GuildWars2.Hero.Equipment.Gliders;
 
 internal static class GliderSkinJson
 {
-    public static GliderSkin GetGliderSkin(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
-    )
+    public static GliderSkin GetGliderSkin(this JsonElement json)
     {
         RequiredMember id = "id";
         OptionalMember unlockItems = "unlock_items";
@@ -48,7 +45,7 @@ internal static class GliderSkinJson
             {
                 defaultDyes = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -56,15 +53,16 @@ internal static class GliderSkinJson
 
         return new GliderSkin
         {
-            Id = id.Map(value => value.GetInt32()),
+            Id = id.Map(static value => value.GetInt32()),
             UnlockItemIds =
-                unlockItems.Map(values => values.GetList(entry => entry.GetInt32()))
+                unlockItems.Map(static values => values.GetList(static value => value.GetInt32()))
                 ?? Empty.ListOfInt32,
-            Order = order.Map(value => value.GetInt32()),
-            IconHref = icon.Map(value => value.GetStringRequired()),
-            Name = name.Map(value => value.GetStringRequired()),
-            Description = description.Map(value => value.GetStringRequired()),
-            DefaultDyeColorIds = defaultDyes.Map(values => values.GetList(entry => entry.GetInt32()))
+            Order = order.Map(static value => value.GetInt32()),
+            IconHref = icon.Map(static value => value.GetStringRequired()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            Description = description.Map(static value => value.GetStringRequired()),
+            DefaultDyeColorIds =
+                defaultDyes.Map(static values => values.GetList(static value => value.GetInt32()))
         };
     }
 }

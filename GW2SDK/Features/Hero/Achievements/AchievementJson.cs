@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Achievements;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Achievements;
 internal static class AchievementJson
 {
     public static Achievement GetAchievement(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         if (json.TryGetProperty("type", out var discriminator))
@@ -15,7 +14,7 @@ internal static class AchievementJson
             switch (discriminator.GetString())
             {
                 case "ItemSet":
-                    return json.GetCollectionAchievement(missingMemberBehavior);
+                    return json.GetCollectionAchievement();
             }
         }
 
@@ -36,7 +35,7 @@ internal static class AchievementJson
         {
             if (member.NameEquals("type"))
             {
-                if (missingMemberBehavior == MissingMemberBehavior.Error
+                if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error
                     && !member.Value.ValueEquals("Default"))
                 {
                     throw new InvalidOperationException(
@@ -92,7 +91,7 @@ internal static class AchievementJson
             {
                 pointCap = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -100,29 +99,25 @@ internal static class AchievementJson
 
         return new Achievement
         {
-            Id = id.Map(value => value.GetInt32()),
-            IconHref = icon.Map(value => value.GetString()) ?? "",
-            Name = name.Map(value => value.GetStringRequired()),
-            Description = description.Map(value => value.GetStringRequired()),
-            Requirement = requirement.Map(value => value.GetStringRequired()),
-            LockedText = lockedText.Map(value => value.GetStringRequired()),
-            Flags = flags.Map(values => values.GetAchievementFlags()),
+            Id = id.Map(static value => value.GetInt32()),
+            IconHref = icon.Map(static value => value.GetString()) ?? "",
+            Name = name.Map(static value => value.GetStringRequired()),
+            Description = description.Map(static value => value.GetStringRequired()),
+            Requirement = requirement.Map(static value => value.GetStringRequired()),
+            LockedText = lockedText.Map(static value => value.GetStringRequired()),
+            Flags = flags.Map(static values => values.GetAchievementFlags()),
             Tiers =
-                tiers.Map(
-                    values => values.GetList(
-                        value => value.GetAchievementTier(missingMemberBehavior)
+                tiers.Map(static values => values.GetList(static value => value.GetAchievementTier()
                     )
                 ),
             Prerequisites =
-                prerequisites.Map(values => values.GetList(value => value.GetInt32()))
+                prerequisites.Map(static values => values.GetList(static value => value.GetInt32()))
                 ?? Empty.ListOfInt32,
-            Rewards = rewards.Map(
-                values => values.GetList(value => value.GetAchievementReward(missingMemberBehavior))
+            Rewards = rewards.Map(static values => values.GetList(static value => value.GetAchievementReward())
             ),
-            Bits = bits.Map(
-                values => values.GetList(value => value.GetAchievementBit(missingMemberBehavior))
+            Bits = bits.Map(static values => values.GetList(static value => value.GetAchievementBit())
             ),
-            PointCap = pointCap.Map(value => value.GetInt32())
+            PointCap = pointCap.Map(static value => value.GetInt32())
         };
     }
 }

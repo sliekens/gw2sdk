@@ -7,7 +7,6 @@ internal static class NoDataJson
 {
     public static NoData GetNoData(
         this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior,
         out int? requiresTrait,
         out int? overrides
     )
@@ -45,7 +44,7 @@ internal static class NoDataJson
             {
                 icon = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -53,8 +52,8 @@ internal static class NoDataJson
 
         return new NoData
         {
-            Text = text.Map(value => value.GetStringRequired()),
-            IconHref = icon.Map(value => value.GetStringRequired())
+            Text = text.Map(static value => value.GetStringRequired()),
+            IconHref = icon.Map(static value => value.GetStringRequired())
         };
     }
 }

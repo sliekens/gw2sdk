@@ -19,8 +19,7 @@ internal sealed class MountByNameRequest : IHttpRequest<Mount>
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(Mount Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -44,7 +43,7 @@ internal sealed class MountByNameRequest : IHttpRequest<Mount>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetMount(MissingMemberBehavior);
+        var value = json.RootElement.GetMount();
         return (value, new MessageContext(response));
     }
 }

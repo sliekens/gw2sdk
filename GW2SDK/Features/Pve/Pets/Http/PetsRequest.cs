@@ -17,8 +17,7 @@ internal sealed class PetsRequest : IHttpRequest<HashSet<Pet>>
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<Pet> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -34,7 +33,7 @@ internal sealed class PetsRequest : IHttpRequest<HashSet<Pet>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetPet(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(static entry => entry.GetPet());
         return (value, new MessageContext(response));
     }
 }

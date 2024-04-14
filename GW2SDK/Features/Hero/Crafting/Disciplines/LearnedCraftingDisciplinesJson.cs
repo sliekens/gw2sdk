@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Crafting.Disciplines;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Crafting.Disciplines;
 internal static class LearnedCraftingDisciplinesJson
 {
     public static LearnedCraftingDisciplines GetLearnedCraftingDisciplines(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember crafting = "crafting";
@@ -18,7 +17,7 @@ internal static class LearnedCraftingDisciplinesJson
             {
                 crafting = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -26,9 +25,7 @@ internal static class LearnedCraftingDisciplinesJson
 
         return new LearnedCraftingDisciplines
         {
-            Disciplines = crafting.Map(
-                values => values.GetList(
-                    value => value.GetCraftingDiscipline(missingMemberBehavior)
+            Disciplines = crafting.Map(static values => values.GetList(static value => value.GetCraftingDiscipline()
                 )
             )
         };

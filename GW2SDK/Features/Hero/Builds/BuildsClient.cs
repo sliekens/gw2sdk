@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Hero.Builds.Http;
+using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Builds;
 
@@ -47,10 +48,10 @@ public sealed class BuildsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         StoredBuildRequest request = new(storageNumber)
         {
             AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -67,10 +68,10 @@ public sealed class BuildsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         StoredBuildsRequest request = new()
         {
             AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -89,10 +90,10 @@ public sealed class BuildsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         StoredBuildsByNumbersRequest request = new(storageNumbers.ToList())
         {
             AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -134,10 +135,10 @@ public sealed class BuildsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         BuildRequest request = new(characterName, templateNumber)
         {
             AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -156,10 +157,10 @@ public sealed class BuildsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         BuildsRequest request = new(characterName)
         {
             AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -179,10 +180,10 @@ public sealed class BuildsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         ActiveBuildRequest request = new(characterName)
         {
             AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -202,10 +203,10 @@ public sealed class BuildsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         SkillsRequest request = new()
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -234,10 +235,10 @@ public sealed class BuildsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         SkillByIdRequest request = new(skillId)
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -256,10 +257,10 @@ public sealed class BuildsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         SkillsByIdsRequest request = new(skillIds.ToList())
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -279,11 +280,11 @@ public sealed class BuildsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         SkillsByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -303,10 +304,10 @@ public sealed class BuildsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         SpecializationsRequest request = new()
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -335,10 +336,10 @@ public sealed class BuildsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         SpecializationByIdRequest request = new(specializationId)
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -357,10 +358,10 @@ public sealed class BuildsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         SpecializationsByIdsRequest request = new(specializationIds.ToList())
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -380,10 +381,10 @@ public sealed class BuildsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         TraitsRequest request = new()
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -412,10 +413,10 @@ public sealed class BuildsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         TraitByIdRequest request = new(traitId)
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -434,10 +435,10 @@ public sealed class BuildsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         TraitsByIdsRequest request = new(traitIds.ToList())
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -457,11 +458,11 @@ public sealed class BuildsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         TraitsByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -492,10 +493,8 @@ public sealed class BuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        LegendByIdRequest request = new(legendId)
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        LegendByIdRequest request = new(legendId);
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -510,10 +509,8 @@ public sealed class BuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        LegendsByIdsRequest request = new(legendIds.ToList())
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        LegendsByIdsRequest request = new(legendIds.ToList());
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -530,10 +527,10 @@ public sealed class BuildsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         LegendsByPageRequest request = new(pageIndex)
         {
-            PageSize = pageSize,
-            MissingMemberBehavior = missingMemberBehavior
+            PageSize = pageSize
         };
 
         return request.SendAsync(httpClient, cancellationToken);
@@ -548,7 +545,8 @@ public sealed class BuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        LegendsRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        LegendsRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);
     }
 

@@ -15,8 +15,7 @@ internal sealed class MaterialCategoriesByPageRequest(int pageIndex)
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<MaterialCategory> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -44,7 +43,7 @@ internal sealed class MaterialCategoriesByPageRequest(int pageIndex)
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
         var value =
-            json.RootElement.GetSet(entry => entry.GetMaterialCategory(MissingMemberBehavior));
+            json.RootElement.GetSet(static entry => entry.GetMaterialCategory());
         return (value, new MessageContext(response));
     }
 }

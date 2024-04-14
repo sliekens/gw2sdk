@@ -1,11 +1,11 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Matches;
 
 internal static class MatchJson
 {
-    public static Match GetMatch(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Match GetMatch(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember startTime = "start_time";
@@ -65,7 +65,7 @@ internal static class MatchJson
             {
                 maps = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -73,21 +73,20 @@ internal static class MatchJson
 
         return new Match
         {
-            Id = id.Map(value => value.GetStringRequired()),
-            StartTime = startTime.Map(value => value.GetDateTimeOffset()),
-            EndTime = endTime.Map(value => value.GetDateTimeOffset()),
-            Scores = scores.Map(value => value.GetDistribution(missingMemberBehavior)),
-            Worlds = worlds.Map(value => value.GetWorlds(missingMemberBehavior)),
-            AllWorlds = allWorlds.Map(value => value.GetAllWorlds(missingMemberBehavior)),
-            Deaths = deaths.Map(value => value.GetDistribution(missingMemberBehavior)),
-            Kills = kills.Map(value => value.GetDistribution(missingMemberBehavior)),
+            Id = id.Map(static value => value.GetStringRequired()),
+            StartTime = startTime.Map(static value => value.GetDateTimeOffset()),
+            EndTime = endTime.Map(static value => value.GetDateTimeOffset()),
+            Scores = scores.Map(static value => value.GetDistribution()),
+            Worlds = worlds.Map(static value => value.GetWorlds()),
+            AllWorlds = allWorlds.Map(static value => value.GetAllWorlds()),
+            Deaths = deaths.Map(static value => value.GetDistribution()),
+            Kills = kills.Map(static value => value.GetDistribution()),
             VictoryPoints =
-                victoryPoints.Map(value => value.GetDistribution(missingMemberBehavior)),
+                victoryPoints.Map(static value => value.GetDistribution()),
             Skirmishes =
-                skirmishes.Map(
-                    values => values.GetList(value => value.GetSkirmish(missingMemberBehavior))
+                skirmishes.Map(static values => values.GetList(static value => value.GetSkirmish())
                 ),
-            Maps = maps.Map(values => values.GetList(value => value.GetMap(missingMemberBehavior)))
+            Maps = maps.Map(static values => values.GetList(static value => value.GetMap()))
         };
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Wardrobe;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 internal static class DyeSlotInfoJson
 {
     public static DyeSlotInfo GetDyeSlotInfo(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember @default = "default";
@@ -71,7 +70,7 @@ internal static class DyeSlotInfoJson
                     {
                         sylvariMale = @override;
                     }
-                    else if (missingMemberBehavior == MissingMemberBehavior.Error)
+                    else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                     {
                         throw new InvalidOperationException(
                             Strings.UnexpectedMember(@override.Name)
@@ -79,7 +78,7 @@ internal static class DyeSlotInfoJson
                     }
                 }
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -100,14 +99,14 @@ internal static class DyeSlotInfoJson
             SylvariMale = sylvariMale.Map(GetDyeSlots)
         };
 
-        List<DyeSlot?> GetDyeSlots(JsonElement values)
+        static List<DyeSlot?> GetDyeSlots(JsonElement values)
         {
             // The dye slot arrays can contain Null to represent the default color, so this is ugly
             // Perhaps there is a better way to model it with a Null Object pattern?
             return values.GetList(
-                value => value.ValueKind == JsonValueKind.Null
+                static value => value.ValueKind == JsonValueKind.Null
                     ? null
-                    : value.GetDyeSlot(missingMemberBehavior)
+                    : value.GetDyeSlot()
             );
         }
     }

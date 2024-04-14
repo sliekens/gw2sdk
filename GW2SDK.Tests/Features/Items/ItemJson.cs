@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using GuildWars2.Items;
+using GuildWars2.Json;
 
 namespace GuildWars2.Tests.Features.Items;
 
@@ -12,7 +13,9 @@ public class ItemJson(ItemFixture fixture) : IClassFixture<ItemFixture>
             json =>
             {
                 using var document = JsonDocument.Parse(json);
-                var actual = document.RootElement.GetItem(MissingMemberBehavior.Error);
+
+                JsonOptions.MissingMemberBehavior = MissingMemberBehavior.Error;
+                var actual = document.RootElement.GetItem();
                 var chatLink = actual.GetChatLink();
                 Assert.Equal(actual.ChatLink, chatLink.ToString());
 

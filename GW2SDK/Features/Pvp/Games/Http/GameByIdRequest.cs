@@ -11,8 +11,7 @@ internal sealed class GameByIdRequest(string gameId) : IHttpRequest<Game>
 
     public required string? AccessToken { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(Game Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -36,7 +35,7 @@ internal sealed class GameByIdRequest(string gameId) : IHttpRequest<Game>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetGame(MissingMemberBehavior);
+        var value = json.RootElement.GetGame();
         return (value, new MessageContext(response));
     }
 }

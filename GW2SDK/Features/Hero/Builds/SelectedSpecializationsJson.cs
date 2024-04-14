@@ -1,10 +1,11 @@
-﻿using System.Text.Json;
+using System.Text.Json;
+using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Builds;
 
 internal static class SelectedSpecializationsJson
 {
-    public static (SelectedSpecialization? Specialization1, SelectedSpecialization? Specialization2, SelectedSpecialization? Specialization3) GetSelectedSpecializations(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static (SelectedSpecialization? Specialization1, SelectedSpecialization? Specialization2, SelectedSpecialization? Specialization3) GetSelectedSpecializations(this JsonElement json)
     {
         JsonElement first = default;
         JsonElement second = default;
@@ -24,7 +25,7 @@ internal static class SelectedSpecializationsJson
             {
                 third = entry;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(
                     Strings.UnexpectedArrayLength(json.GetArrayLength())
@@ -32,6 +33,6 @@ internal static class SelectedSpecializationsJson
             }
         }
 
-        return (first.GetSelectedSpecialization(missingMemberBehavior), second.GetSelectedSpecialization(missingMemberBehavior), third.GetSelectedSpecialization(missingMemberBehavior));
+        return (first.GetSelectedSpecialization(), second.GetSelectedSpecialization(), third.GetSelectedSpecialization());
     }
 }

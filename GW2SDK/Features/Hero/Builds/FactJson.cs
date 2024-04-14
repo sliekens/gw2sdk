@@ -6,12 +6,7 @@ namespace GuildWars2.Hero.Builds;
 
 internal static class FactJson
 {
-    public static Fact GetFact(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior,
-        out int? requiresTrait,
-        out int? overrides
-    )
+    public static Fact GetFact(this JsonElement json, out int? requiresTrait, out int? overrides)
     {
         requiresTrait = null;
         overrides = null;
@@ -21,99 +16,51 @@ internal static class FactJson
             switch (discriminator.GetString())
             {
                 case "AttributeAdjust":
-                    return json.GetAttributeAdjustment(
-                        missingMemberBehavior,
-                        out requiresTrait,
-                        out overrides
-                    );
+                    return json.GetAttributeAdjustment(out requiresTrait, out overrides);
                 case "Buff":
-                    return json.GetBuff(missingMemberBehavior, out requiresTrait, out overrides);
+                    return json.GetBuff(out requiresTrait, out overrides);
                 case "BuffConversion": // Traits only it seems
-                    return json.GetAttributeConversion(
-                        missingMemberBehavior,
-                        out requiresTrait,
-                        out overrides
-                    );
+                    return json.GetAttributeConversion(out requiresTrait, out overrides);
                 case "ComboField":
-                    return json.GetComboField(
-                        missingMemberBehavior,
-                        out requiresTrait,
-                        out overrides
-                    );
+                    return json.GetComboField(out requiresTrait, out overrides);
                 case "ComboFinisher":
-                    return json.GetComboFinisher(
-                        missingMemberBehavior,
-                        out requiresTrait,
-                        out overrides
-                    );
+                    return json.GetComboFinisher(out requiresTrait, out overrides);
                 case "Damage":
-                    return json.GetDamage(missingMemberBehavior, out requiresTrait, out overrides);
+                    return json.GetDamage(out requiresTrait, out overrides);
                 case "Distance":
-                    return json.GetDistance(
-                        missingMemberBehavior,
-                        out requiresTrait,
-                        out overrides
-                    );
+                    return json.GetDistance(out requiresTrait, out overrides);
                 case "Duration":
-                    return json.GetDuration(
-                        missingMemberBehavior,
-                        out requiresTrait,
-                        out overrides
-                    );
+                    return json.GetDuration(out requiresTrait, out overrides);
                 case "HealingAdjust":
-                    return json.GetHealingAdjust(
-                        missingMemberBehavior,
-                        out requiresTrait,
-                        out overrides
-                    );
+                    return json.GetHealingAdjust(out requiresTrait, out overrides);
                 case "NoData":
-                    return json.GetNoData(missingMemberBehavior, out requiresTrait, out overrides);
+                    return json.GetNoData(out requiresTrait, out overrides);
                 case "Number":
-                    return json.GetNumber(missingMemberBehavior, out requiresTrait, out overrides);
+                    return json.GetNumber(out requiresTrait, out overrides);
                 case "Percent":
-                    return json.GetPercentage(
-                        missingMemberBehavior,
-                        out requiresTrait,
-                        out overrides
-                    );
+                    return json.GetPercentage(out requiresTrait, out overrides);
                 case "PrefixedBuff":
-                    return json.GetPrefixedBuff(
-                        missingMemberBehavior,
-                        out requiresTrait,
-                        out overrides
-                    );
+                    return json.GetPrefixedBuff(out requiresTrait, out overrides);
                 case "Radius":
-                    return json.GetRadius(missingMemberBehavior, out requiresTrait, out overrides);
+                    return json.GetRadius(out requiresTrait, out overrides);
                 case "Range":
-                    return json.GetRange(missingMemberBehavior, out requiresTrait, out overrides);
+                    return json.GetRange(out requiresTrait, out overrides);
                 case "Recharge":
-                    return json.GetRecharge(
-                        missingMemberBehavior,
-                        out requiresTrait,
-                        out overrides
-                    );
+                    return json.GetRecharge(out requiresTrait, out overrides);
                 case "StunBreak":
-                    return json.GetStunBreak(
-                        missingMemberBehavior,
-                        out requiresTrait,
-                        out overrides
-                    );
+                    return json.GetStunBreak(out requiresTrait, out overrides);
                 case "Time":
-                    return json.GetTime(missingMemberBehavior, out requiresTrait, out overrides);
+                    return json.GetTime(out requiresTrait, out overrides);
                 case "Unblockable":
-                    return json.GetUnblockable(
-                        missingMemberBehavior,
-                        out requiresTrait,
-                        out overrides
-                    );
+                    return json.GetUnblockable(out requiresTrait, out overrides);
             }
         }
 
-        // BUG: Life Force Cost is missing a type property but we can treat it as Percent
+        // BUG: Life Force Cost is missing a type property, but we can treat it as Percent
         if (discriminator.ValueKind == JsonValueKind.Undefined
             && json.TryGetProperty("percent", out _))
         {
-            return json.GetPercentage(missingMemberBehavior, out requiresTrait, out overrides);
+            return json.GetPercentage(out requiresTrait, out overrides);
         }
 
         RequiredMember text = "text";
@@ -123,7 +70,7 @@ internal static class FactJson
         {
             if (member.NameEquals("type"))
             {
-                if (missingMemberBehavior == MissingMemberBehavior.Error)
+                if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                 {
                     throw new InvalidOperationException(
                         Strings.UnexpectedDiscriminator(member.Value.GetString())
@@ -146,7 +93,7 @@ internal static class FactJson
             {
                 icon = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -154,8 +101,8 @@ internal static class FactJson
 
         return new Fact
         {
-            Text = text.Map(value => value.GetStringRequired()),
-            IconHref = icon.Map(value => value.GetStringRequired())
+            Text = text.Map(static value => value.GetStringRequired()),
+            IconHref = icon.Map(static value => value.GetStringRequired())
         };
     }
 }

@@ -18,8 +18,7 @@ internal sealed class RanksByIdsRequest : IHttpRequest<HashSet<Rank>>
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<Rank> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -43,7 +42,7 @@ internal sealed class RanksByIdsRequest : IHttpRequest<HashSet<Rank>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetRank(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(static entry => entry.GetRank());
         return (value, new MessageContext(response));
     }
 }

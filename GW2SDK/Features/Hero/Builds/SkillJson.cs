@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Hero.Builds.Skills;
 using GuildWars2.Json;
 
@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Builds;
 
 internal static class SkillJson
 {
-    public static Skill GetSkill(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Skill GetSkill(this JsonElement json)
     {
         // Unlike most models with a 'type' property, skills don't always have it
         if (json.TryGetProperty("type", out var type))
@@ -14,25 +14,25 @@ internal static class SkillJson
             switch (type.GetString())
             {
                 case "Bundle":
-                    return json.GetBundleSkill(missingMemberBehavior);
+                    return json.GetBundleSkill();
                 case "Elite":
-                    return json.GetEliteSkill(missingMemberBehavior);
+                    return json.GetEliteSkill();
                 case "Heal":
-                    return json.GetHealSkill(missingMemberBehavior);
+                    return json.GetHealSkill();
                 case "Monster":
-                    return json.GetMonsterSkill(missingMemberBehavior);
+                    return json.GetMonsterSkill();
                 case "Pet":
-                    return json.GetPetSkill(missingMemberBehavior);
+                    return json.GetPetSkill();
                 case "Profession":
-                    return json.GetProfessionSkill(missingMemberBehavior);
+                    return json.GetProfessionSkill();
                 case "Toolbelt":
-                    return json.GetToolbeltSkill(missingMemberBehavior);
+                    return json.GetToolbeltSkill();
                 case "Transform":
-                    return json.GetLockedSkill(missingMemberBehavior);
+                    return json.GetLockedSkill();
                 case "Utility":
-                    return json.GetUtilitySkill(missingMemberBehavior);
+                    return json.GetUtilitySkill();
                 case "Weapon":
-                    return json.GetWeaponSkill(missingMemberBehavior);
+                    return json.GetWeaponSkill();
             }
         }
 
@@ -50,7 +50,7 @@ internal static class SkillJson
         {
             if (member.NameEquals("type"))
             {
-                if (missingMemberBehavior == MissingMemberBehavior.Error)
+                if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                 {
                     throw new InvalidOperationException(
                         Strings.UnexpectedDiscriminator(member.Value.GetString())
@@ -93,7 +93,7 @@ internal static class SkillJson
             {
                 categories = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -101,23 +101,20 @@ internal static class SkillJson
 
         return new Skill
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
             Facts =
-                facts.Map(
-                    values =>
-                        values.GetList(value => value.GetFact(missingMemberBehavior, out _, out _))
+                facts.Map(static values =>
+                        values.GetList(static value => value.GetFact(out _, out _))
                 ),
             TraitedFacts =
-                traitedFacts.Map(
-                    values => values.GetList(value => value.GetTraitedFact(missingMemberBehavior))
+                traitedFacts.Map(static values => values.GetList(static value => value.GetTraitedFact())
                 ),
-            Description = description.Map(value => value.GetStringRequired()),
-            IconHref = icon.Map(value => value.GetString()) ?? "",
-            SkillFlags = flags.Map(value => value.GetSkillFlags()),
-            ChatLink = chatLink.Map(value => value.GetStringRequired()),
-            Categories = categories.Map(
-                    values => values.GetList(value => value.GetEnum<SkillCategoryName>())
+            Description = description.Map(static value => value.GetStringRequired()),
+            IconHref = icon.Map(static value => value.GetString()) ?? "",
+            SkillFlags = flags.Map(static value => value.GetSkillFlags()),
+            ChatLink = chatLink.Map(static value => value.GetStringRequired()),
+            Categories = categories.Map(static values => values.GetList(static value => value.GetEnum<SkillCategoryName>())
                 )
                 ?? Empty.List<Extensible<SkillCategoryName>>()
         };

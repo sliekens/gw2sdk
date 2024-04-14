@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.StoryJournal.Stories;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.StoryJournal.Stories;
 internal static class ChapterJson
 {
     public static Chapter GetChapter(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember name = "name";
@@ -18,12 +17,12 @@ internal static class ChapterJson
             {
                 name = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
         }
 
-        return new Chapter { Name = name.Map(value => value.GetStringRequired()) };
+        return new Chapter { Name = name.Map(static value => value.GetStringRequired()) };
     }
 }

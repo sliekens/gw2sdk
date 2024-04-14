@@ -13,8 +13,7 @@ internal sealed class CurrencyByIdRequest(int currencyId) : IHttpRequest<Currenc
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(Currency Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -38,7 +37,7 @@ internal sealed class CurrencyByIdRequest(int currencyId) : IHttpRequest<Currenc
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetCurrency(MissingMemberBehavior);
+        var value = json.RootElement.GetCurrency();
         return (value, new MessageContext(response));
     }
 }

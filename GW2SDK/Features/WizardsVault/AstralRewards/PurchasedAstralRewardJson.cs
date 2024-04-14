@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.WizardsVault.AstralRewards;
@@ -6,8 +6,7 @@ namespace GuildWars2.WizardsVault.AstralRewards;
 internal static class PurchasedAstralRewardJson
 {
     public static PurchasedAstralReward GetPurchasedAstralReward(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -48,7 +47,7 @@ internal static class PurchasedAstralRewardJson
             {
                 purchaseLimit = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -56,13 +55,13 @@ internal static class PurchasedAstralRewardJson
 
         return new PurchasedAstralReward
         {
-            Id = id.Map(value => value.GetInt32()),
-            ItemId = itemId.Map(value => value.GetInt32()),
-            ItemCount = itemCount.Map(value => value.GetInt32()),
-            Kind = type.Map(value => value.GetEnum<RewardKind>()),
-            Cost = cost.Map(value => value.GetInt32()),
-            Purchased = purchased.Map(value => value.GetInt32()),
-            PurchaseLimit = purchaseLimit.Map(value => value.GetInt32())
+            Id = id.Map(static value => value.GetInt32()),
+            ItemId = itemId.Map(static value => value.GetInt32()),
+            ItemCount = itemCount.Map(static value => value.GetInt32()),
+            Kind = type.Map(static value => value.GetEnum<RewardKind>()),
+            Cost = cost.Map(static value => value.GetInt32()),
+            Purchased = purchased.Map(static value => value.GetInt32()),
+            PurchaseLimit = purchaseLimit.Map(static value => value.GetInt32())
         };
     }
 }

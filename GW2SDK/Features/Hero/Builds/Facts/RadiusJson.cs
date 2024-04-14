@@ -7,7 +7,6 @@ internal static class RadiusJson
 {
     public static Radius GetRadius(
         this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior,
         out int? requiresTrait,
         out int? overrides
     )
@@ -50,7 +49,7 @@ internal static class RadiusJson
             {
                 distance = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -58,9 +57,9 @@ internal static class RadiusJson
 
         return new Radius
         {
-            Text = text.Map(value => value.GetStringRequired()),
-            IconHref = icon.Map(value => value.GetStringRequired()),
-            Distance = distance.Map(value => value.GetInt32())
+            Text = text.Map(static value => value.GetStringRequired()),
+            IconHref = icon.Map(static value => value.GetStringRequired()),
+            Distance = distance.Map(static value => value.GetInt32())
         };
     }
 }

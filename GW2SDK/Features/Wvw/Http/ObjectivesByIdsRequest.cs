@@ -19,8 +19,7 @@ internal sealed class ObjectivesByIdsRequest : IHttpRequest<HashSet<Objective>>
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<Objective> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -44,7 +43,7 @@ internal sealed class ObjectivesByIdsRequest : IHttpRequest<HashSet<Objective>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetObjective(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(static entry => entry.GetObjective());
         return (value, new MessageContext(response));
     }
 }

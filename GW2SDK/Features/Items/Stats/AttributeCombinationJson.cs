@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Items.Stats;
@@ -6,8 +6,7 @@ namespace GuildWars2.Items.Stats;
 internal static class AttributeCombinationJson
 {
     public static AttributeCombination GetAttributeCombination(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -28,7 +27,7 @@ internal static class AttributeCombinationJson
             {
                 attributes = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -36,10 +35,9 @@ internal static class AttributeCombinationJson
 
         return new AttributeCombination
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
-            Attributes = attributes.Map(
-                values => values.GetList(value => value.GetAttribute(missingMemberBehavior))
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            Attributes = attributes.Map(static values => values.GetList(static value => value.GetAttribute())
             )
         };
     }

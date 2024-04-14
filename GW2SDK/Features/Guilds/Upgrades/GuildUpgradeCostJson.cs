@@ -1,12 +1,12 @@
-﻿using System.Text.Json;
+using System.Text.Json;
+using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Upgrades;
 
 internal static class GuildUpgradeCostJson
 {
     public static GuildUpgradeCost GetGuildUpgradeCost(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         if (json.TryGetProperty("type", out var discriminator))
@@ -14,13 +14,13 @@ internal static class GuildUpgradeCostJson
             switch (discriminator.GetString())
             {
                 case "Coins":
-                    return json.GetGuildUpgradeCoinsCost(missingMemberBehavior);
+                    return json.GetGuildUpgradeCoinsCost();
                 case "Collectible":
-                    return json.GetGuildUpgradeCollectibleCost(missingMemberBehavior);
+                    return json.GetGuildUpgradeCollectibleCost();
                 case "Currency":
-                    return json.GetGuildUpgradeCurrencyCost(missingMemberBehavior);
+                    return json.GetGuildUpgradeCurrencyCost();
                 case "Item":
-                    return json.GetGuildUpgradeItemCost(missingMemberBehavior);
+                    return json.GetGuildUpgradeItemCost();
             }
         }
 
@@ -28,14 +28,14 @@ internal static class GuildUpgradeCostJson
         {
             if (member.NameEquals("type"))
             {
-                if (missingMemberBehavior == MissingMemberBehavior.Error)
+                if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                 {
                     throw new InvalidOperationException(
                         Strings.UnexpectedDiscriminator(member.Value.GetString())
                     );
                 }
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }

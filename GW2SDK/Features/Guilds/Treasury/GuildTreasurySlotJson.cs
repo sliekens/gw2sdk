@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Treasury;
@@ -6,8 +6,7 @@ namespace GuildWars2.Guilds.Treasury;
 internal static class GuildTreasurySlotJson
 {
     public static GuildTreasurySlot GetGuildTreasurySlot(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember itemId = "item_id";
@@ -28,7 +27,7 @@ internal static class GuildTreasurySlotJson
             {
                 countNeededForUpgrade = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -36,11 +35,9 @@ internal static class GuildTreasurySlotJson
 
         return new GuildTreasurySlot
         {
-            ItemId = itemId.Map(value => value.GetInt32()),
-            Count = count.Map(value => value.GetInt32()),
-            CountNeededForUpgrades = countNeededForUpgrade.Map(
-                values => values.GetList(
-                    value => value.GetCountNeededForUpgrade(missingMemberBehavior)
+            ItemId = itemId.Map(static value => value.GetInt32()),
+            Count = count.Map(static value => value.GetInt32()),
+            CountNeededForUpgrades = countNeededForUpgrade.Map(static values => values.GetList(static value => value.GetCountNeededForUpgrade()
                 )
             )
         };

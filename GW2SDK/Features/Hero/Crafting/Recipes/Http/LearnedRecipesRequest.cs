@@ -15,8 +15,7 @@ internal sealed class LearnedRecipesRequest(string characterName) : IHttpRequest
 
     public required string? AccessToken { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<int> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -36,7 +35,7 @@ internal sealed class LearnedRecipesRequest(string characterName) : IHttpRequest
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetLearnedRecipes(MissingMemberBehavior);
+        var value = json.RootElement.GetLearnedRecipes();
         return (value, new MessageContext(response));
     }
 }

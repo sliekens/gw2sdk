@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Members;
@@ -6,8 +6,7 @@ namespace GuildWars2.Guilds.Members;
 internal static class GuildMemberJson
 {
     public static GuildMember GetGuildMember(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember name = "name";
@@ -28,7 +27,7 @@ internal static class GuildMemberJson
             {
                 joined = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -36,9 +35,9 @@ internal static class GuildMemberJson
 
         return new GuildMember
         {
-            Name = name.Map(value => value.GetStringRequired()),
-            Rank = rank.Map(value => value.GetStringRequired()),
-            Joined = joined.Map(value => value.GetDateTimeOffset())
+            Name = name.Map(static value => value.GetStringRequired()),
+            Rank = rank.Map(static value => value.GetStringRequired()),
+            Joined = joined.Map(static value => value.GetDateTimeOffset())
         };
     }
 }

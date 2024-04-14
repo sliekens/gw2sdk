@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Dyes;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Equipment.Dyes;
 internal static class ColorInfoJson
 {
     public static ColorInfo GetColorInfo(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember brightness = "brightness";
@@ -43,7 +42,7 @@ internal static class ColorInfoJson
             {
                 rgb = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -51,12 +50,12 @@ internal static class ColorInfoJson
 
         return new ColorInfo
         {
-            Brightness = brightness.Map(value => value.GetInt32()),
-            Contrast = contrast.Map(value => value.GetDouble()),
-            Hue = hue.Map(value => value.GetInt32()),
-            Saturation = saturation.Map(value => value.GetDouble()),
-            Lightness = lightness.Map(value => value.GetDouble()),
-            Rgb = rgb.Map(value => value.GetColor(missingMemberBehavior))
+            Brightness = brightness.Map(static value => value.GetInt32()),
+            Contrast = contrast.Map(static value => value.GetDouble()),
+            Hue = hue.Map(static value => value.GetInt32()),
+            Saturation = saturation.Map(static value => value.GetDouble()),
+            Lightness = lightness.Map(static value => value.GetDouble()),
+            Rgb = rgb.Map(static value => value.GetColor())
         };
     }
 }

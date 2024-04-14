@@ -18,8 +18,7 @@ internal sealed class AchievementGroupByIdRequest : IHttpRequest<AchievementGrou
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(AchievementGroup Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -43,7 +42,7 @@ internal sealed class AchievementGroupByIdRequest : IHttpRequest<AchievementGrou
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetAchievementGroup(MissingMemberBehavior);
+        var value = json.RootElement.GetAchievementGroup();
         return (value, new MessageContext(response));
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Exploration.Maps;
 using GuildWars2.Json;
 
@@ -7,8 +7,7 @@ namespace GuildWars2.Wvw.Matches;
 internal static class MapScoresJson
 {
     public static MapScores GetMapScores(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember type = "type";
@@ -24,7 +23,7 @@ internal static class MapScoresJson
             {
                 scores = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -32,8 +31,8 @@ internal static class MapScoresJson
 
         return new MapScores
         {
-            Kind = type.Map(value => value.GetEnum<MapKind>()),
-            Scores = scores.Map(value => value.GetDistribution(missingMemberBehavior))
+            Kind = type.Map(static value => value.GetEnum<MapKind>()),
+            Scores = scores.Map(static value => value.GetDistribution())
         };
     }
 }

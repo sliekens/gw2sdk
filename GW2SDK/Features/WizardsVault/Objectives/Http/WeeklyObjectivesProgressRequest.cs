@@ -13,8 +13,7 @@ internal sealed class WeeklyObjectivesProgressRequest : IHttpRequest<WeeklyObjec
 
     public required string? AccessToken { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(WeeklyObjectivesProgress Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -30,7 +29,7 @@ internal sealed class WeeklyObjectivesProgressRequest : IHttpRequest<WeeklyObjec
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetWeeklyObjectivesProgress(MissingMemberBehavior);
+        var value = json.RootElement.GetWeeklyObjectivesProgress();
         return (value, new MessageContext(response));
     }
 }

@@ -13,8 +13,7 @@ internal sealed class MasteryPointsProgressRequest : IHttpRequest<MasteryPointsP
 
     public required string? AccessToken { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(MasteryPointsProgress Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -31,7 +30,7 @@ internal sealed class MasteryPointsProgressRequest : IHttpRequest<MasteryPointsP
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetMasteryPointsProgress(MissingMemberBehavior);
+        var value = json.RootElement.GetMasteryPointsProgress();
         return (value, new MessageContext(response));
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Exploration.Maps;
 using GuildWars2.Json;
 
@@ -7,8 +7,7 @@ namespace GuildWars2.Exploration.Regions;
 internal static class RegionJson
 {
     public static Region GetRegion(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember name = "name";
@@ -38,7 +37,7 @@ internal static class RegionJson
             {
                 id = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -46,14 +45,13 @@ internal static class RegionJson
 
         return new Region
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
             LabelCoordinates =
-                labelCoordinates.Map(value => value.GetCoordinate(missingMemberBehavior)),
+                labelCoordinates.Map(static value => value.GetCoordinate()),
             ContinentRectangle =
-                continentRectangle.Map(value => value.GetContinentRectangle(missingMemberBehavior)),
-            Maps = maps.Map(
-                value => value.GetMap(entry => entry.GetMap(missingMemberBehavior))
+                continentRectangle.Map(static value => value.GetContinentRectangle()),
+            Maps = maps.Map(static value => value.GetMap(static entry => entry.GetMap())
                     .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
             )
         };

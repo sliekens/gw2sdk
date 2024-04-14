@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.WizardsVault.AstralRewards;
@@ -6,8 +6,7 @@ namespace GuildWars2.WizardsVault.AstralRewards;
 internal static class AstralRewardJson
 {
     public static AstralReward GetAstralReward(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -38,7 +37,7 @@ internal static class AstralRewardJson
             {
                 cost = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -46,11 +45,11 @@ internal static class AstralRewardJson
 
         return new AstralReward
         {
-            Id = id.Map(value => value.GetInt32()),
-            ItemId = itemId.Map(value => value.GetInt32()),
-            ItemCount = itemCount.Map(value => value.GetInt32()),
-            Kind = type.Map(value => value.GetEnum<RewardKind>()),
-            Cost = cost.Map(value => value.GetInt32())
+            Id = id.Map(static value => value.GetInt32()),
+            ItemId = itemId.Map(static value => value.GetInt32()),
+            ItemCount = itemCount.Map(static value => value.GetInt32()),
+            Kind = type.Map(static value => value.GetEnum<RewardKind>()),
+            Cost = cost.Map(static value => value.GetInt32())
         };
     }
 }

@@ -1,11 +1,11 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.StoryJournal.Stories;
 
 internal static class StoryJson
 {
-    public static Story GetStory(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Story GetStory(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember season = "season";
@@ -60,7 +60,7 @@ internal static class StoryJson
             {
                 flags = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -68,25 +68,22 @@ internal static class StoryJson
 
         return new Story
         {
-            Id = id.Map(value => value.GetInt32()),
-            StorylineId = season.Map(value => value.GetStringRequired()),
-            Name = name.Map(value => value.GetStringRequired()),
-            Description = description.Map(value => value.GetStringRequired()),
-            Timeline = timeline.Map(value => value.GetStringRequired()),
-            Level = level.Map(value => value.GetInt32()),
+            Id = id.Map(static value => value.GetInt32()),
+            StorylineId = season.Map(static value => value.GetStringRequired()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            Description = description.Map(static value => value.GetStringRequired()),
+            Timeline = timeline.Map(static value => value.GetStringRequired()),
+            Level = level.Map(static value => value.GetInt32()),
             Races =
-                races.Map(
-                    values => values.GetList(
-                        value => value.GetEnum<RaceName>()
+                races.Map(static values => values.GetList(static value => value.GetEnum<RaceName>()
                     )
                 )
                 ?? GetValues<RaceName>(),
-            Order = order.Map(value => value.GetInt32()),
+            Order = order.Map(static value => value.GetInt32()),
             Chapters =
-                chapters.Map(
-                    values => values.GetList(value => value.GetChapter(missingMemberBehavior))
+                chapters.Map(static values => values.GetList(static value => value.GetChapter())
                 ),
-            Flags = flags.Map(values => values.GetStoryFlags()) ?? StoryFlags.None
+            Flags = flags.Map(static values => values.GetStoryFlags()) ?? StoryFlags.None
         };
 
         static List<Extensible<TEnum>> GetValues<TEnum>() where TEnum : struct, Enum

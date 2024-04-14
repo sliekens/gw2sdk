@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Crafting;
 internal static class GuildIngredientJson
 {
     public static GuildIngredient GetGuildIngredient(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember upgradeId = "upgrade_id";
@@ -22,7 +21,7 @@ internal static class GuildIngredientJson
             {
                 count = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -30,8 +29,8 @@ internal static class GuildIngredientJson
 
         return new GuildIngredient
         {
-            UpgradeId = upgradeId.Map(value => value.GetInt32()),
-            Count = count.Map(value => value.GetInt32())
+            UpgradeId = upgradeId.Map(static value => value.GetInt32()),
+            Count = count.Map(static value => value.GetInt32())
         };
     }
 }

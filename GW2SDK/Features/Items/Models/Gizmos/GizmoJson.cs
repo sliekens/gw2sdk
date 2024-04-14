@@ -5,7 +5,7 @@ namespace GuildWars2.Items;
 
 internal static class GizmoJson
 {
-    public static Gizmo GetGizmo(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Gizmo GetGizmo(this JsonElement json)
     {
         if (json.TryGetProperty("details", out var discriminator))
         {
@@ -14,11 +14,11 @@ internal static class GizmoJson
                 switch (subtype.GetString())
                 {
                     case "ContainerKey":
-                        return json.GetBlackLionChestKey(missingMemberBehavior);
+                        return json.GetBlackLionChestKey();
                     case "RentableContractNpc":
-                        return json.GetRentableContractNpc(missingMemberBehavior);
+                        return json.GetRentableContractNpc();
                     case "UnlimitedConsumable":
-                        return json.GetUnlimitedConsumable(missingMemberBehavior);
+                        return json.GetUnlimitedConsumable();
                 }
             }
         }
@@ -96,7 +96,7 @@ internal static class GizmoJson
                 {
                     if (detail.NameEquals("type"))
                     {
-                        if (missingMemberBehavior == MissingMemberBehavior.Error
+                        if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error
                             && !detail.Value.ValueEquals("Default"))
                         {
                             throw new InvalidOperationException(
@@ -115,13 +115,13 @@ internal static class GizmoJson
                         // some items that open a vendor panel are missing this field (e.g. Collector's Edition Sandstorm)
                         // some items with multiple vendor tabs are missing vendor ids for one or more tabs (e.g. Ley-Energy Matter Converter)
                     }
-                    else if (missingMemberBehavior == MissingMemberBehavior.Error)
+                    else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                     {
                         throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                     }
                 }
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -129,23 +129,21 @@ internal static class GizmoJson
 
         return new Gizmo
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
-            Description = description.Map(value => value.GetString()) ?? "",
-            Level = level.Map(value => value.GetInt32()),
-            Rarity = rarity.Map(value => value.GetEnum<Rarity>()),
-            VendorValue = vendorValue.Map(value => value.GetInt32()),
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            Description = description.Map(static value => value.GetString()) ?? "",
+            Level = level.Map(static value => value.GetInt32()),
+            Rarity = rarity.Map(static value => value.GetEnum<Rarity>()),
+            VendorValue = vendorValue.Map(static value => value.GetInt32()),
             GameTypes =
-                gameTypes.Map(
-                    values => values.GetList(
-                        value => value.GetEnum<GameType>()
+                gameTypes.Map(static values => values.GetList(static value => value.GetEnum<GameType>()
                     )
                 ),
-            Flags = flags.Map(values => values.GetItemFlags()),
-            Restrictions = restrictions.Map(value => value.GetItemRestriction()),
-            ChatLink = chatLink.Map(value => value.GetStringRequired()),
-            IconHref = icon.Map(value => value.GetString()),
-            GuildUpgradeId = guildUpgradeId.Map(value => value.GetInt32())
+            Flags = flags.Map(static values => values.GetItemFlags()),
+            Restrictions = restrictions.Map(static value => value.GetItemRestriction()),
+            ChatLink = chatLink.Map(static value => value.GetStringRequired()),
+            IconHref = icon.Map(static value => value.GetString()),
+            GuildUpgradeId = guildUpgradeId.Map(static value => value.GetInt32())
         };
     }
 }

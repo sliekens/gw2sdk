@@ -9,8 +9,7 @@ internal sealed class NodeByIdRequest(string nodeId) : IHttpRequest<Node>
 
     public string NodeId { get; } = nodeId;
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(Node Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -33,7 +32,7 @@ internal sealed class NodeByIdRequest(string nodeId) : IHttpRequest<Node>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetNode(MissingMemberBehavior);
+        var value = json.RootElement.GetNode();
         return (value, new MessageContext(response));
     }
 }

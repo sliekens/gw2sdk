@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Hero.Banking.Http;
+using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Banking;
 
@@ -29,10 +30,10 @@ public sealed class BankClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         BankRequest request = new()
         {
             AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -52,10 +53,10 @@ public sealed class BankClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         MaterialStorageRequest request = new()
         {
             AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -75,10 +76,10 @@ public sealed class BankClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         MaterialCategoriesRequest request = new()
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -107,10 +108,10 @@ public sealed class BankClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         MaterialCategoryByIdRequest request = new(materialCategoryId)
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -130,10 +131,10 @@ public sealed class BankClient
             CancellationToken cancellationToken = default
         )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         MaterialCategoriesByIdsRequest request = new(materialCategoryIds.ToList())
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -154,11 +155,11 @@ public sealed class BankClient
             CancellationToken cancellationToken = default
         )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         MaterialCategoriesByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }

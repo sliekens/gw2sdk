@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Upgrades;
@@ -6,8 +6,7 @@ namespace GuildWars2.Guilds.Upgrades;
 internal static class ClaimableJson
 {
     public static Claimable GetClaimable(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -67,7 +66,7 @@ internal static class ClaimableJson
             {
                 costs = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -75,16 +74,15 @@ internal static class ClaimableJson
 
         return new Claimable
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
-            Description = description.Map(value => value.GetStringRequired()),
-            BuildTime = buildTime.Map(value => TimeSpan.FromMinutes(value.GetDouble())),
-            IconHref = icon.Map(value => value.GetStringRequired()),
-            RequiredLevel = requiredLevel.Map(value => value.GetInt32()),
-            Experience = experience.Map(value => value.GetInt32()),
-            Prerequisites = prerequisites.Map(values => values.GetList(value => value.GetInt32())),
-            Costs = costs.Map(
-                values => values.GetList(value => value.GetGuildUpgradeCost(missingMemberBehavior))
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            Description = description.Map(static value => value.GetStringRequired()),
+            BuildTime = buildTime.Map(static value => TimeSpan.FromMinutes(value.GetDouble())),
+            IconHref = icon.Map(static value => value.GetStringRequired()),
+            RequiredLevel = requiredLevel.Map(static value => value.GetInt32()),
+            Experience = experience.Map(static value => value.GetInt32()),
+            Prerequisites = prerequisites.Map(static values => values.GetList(static value => value.GetInt32())),
+            Costs = costs.Map(static values => values.GetList(static value => value.GetGuildUpgradeCost())
             )
         };
     }

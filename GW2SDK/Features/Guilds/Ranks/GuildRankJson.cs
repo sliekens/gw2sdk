@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Ranks;
@@ -6,8 +6,7 @@ namespace GuildWars2.Guilds.Ranks;
 internal static class GuildRankJson
 {
     public static GuildRank GetGuildRank(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -33,7 +32,7 @@ internal static class GuildRankJson
             {
                 iconHref = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -41,11 +40,11 @@ internal static class GuildRankJson
 
         return new GuildRank
         {
-            Id = id.Map(value => value.GetStringRequired()),
-            Order = order.Map(value => value.GetInt32()),
+            Id = id.Map(static value => value.GetStringRequired()),
+            Order = order.Map(static value => value.GetInt32()),
             Permissions =
-                permissions.Map(values => values.GetList(value => value.GetStringRequired())),
-            IconHref = iconHref.Map(value => value.GetStringRequired())
+                permissions.Map(static values => values.GetList(static value => value.GetStringRequired())),
+            IconHref = iconHref.Map(static value => value.GetStringRequired())
         };
     }
 }

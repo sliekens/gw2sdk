@@ -15,8 +15,7 @@ internal sealed class BackstoryAnswerByIdRequest(string answerId)
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(BackgroundStoryAnswer Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -42,7 +41,7 @@ internal sealed class BackstoryAnswerByIdRequest(string answerId)
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetBackgroundStoryAnswer(MissingMemberBehavior);
+        var value = json.RootElement.GetBackgroundStoryAnswer();
         return (value, new MessageContext(response));
     }
 }

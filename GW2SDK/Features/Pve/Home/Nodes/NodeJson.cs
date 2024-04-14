@@ -1,11 +1,11 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Pve.Home.Nodes;
 
 internal static class NodeJson
 {
-    public static Node GetNode(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Node GetNode(this JsonElement json)
     {
         RequiredMember id = "id";
 
@@ -15,12 +15,12 @@ internal static class NodeJson
             {
                 id = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
         }
 
-        return new Node { Id = id.Map(value => value.GetStringRequired()) };
+        return new Node { Id = id.Map(static value => value.GetStringRequired()) };
     }
 }

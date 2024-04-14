@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Hero.Training;
 using GuildWars2.Json;
 
@@ -7,8 +7,7 @@ namespace GuildWars2.Hero.Builds.Skills;
 internal static class UtilitySkillJson
 {
     public static UtilitySkill GetUtilitySkill(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -128,55 +127,50 @@ internal static class UtilitySkillJson
             {
                 cost = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
         }
 
-        var professionRestrictions = professions.Map(
-            values => values.GetList(value => value.GetEnum<ProfessionName>())
+        var professionRestrictions = professions.Map(static values => values.GetList(static value => value.GetEnum<ProfessionName>())
         );
         return new UtilitySkill
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
             Facts =
-                facts.Map(
-                    values =>
-                        values.GetList(value => value.GetFact(missingMemberBehavior, out _, out _))
+                facts.Map(static values =>
+                        values.GetList(static value => value.GetFact( out _, out _))
                 ),
             TraitedFacts =
-                traitedFacts.Map(
-                    values => values.GetList(value => value.GetTraitedFact(missingMemberBehavior))
+                traitedFacts.Map(static values => values.GetList(static value => value.GetTraitedFact())
                 ),
-            Description = description.Map(value => value.GetStringRequired()),
-            IconHref = icon.Map(value => value.GetString()) ?? "",
-            WeaponType = weaponType.Map(value => value.GetWeaponType(missingMemberBehavior)),
+            Description = description.Map(static value => value.GetStringRequired()),
+            IconHref = icon.Map(static value => value.GetString()) ?? "",
+            WeaponType = weaponType.Map(static value => value.GetWeaponType()),
             Professions =
                 professionRestrictions.Count > 0
                     ? professionRestrictions
                     : Profession.AllProfessions,
-            Slot = slot.Map(value => value.GetEnum<SkillSlot>()),
-            FlipSkillId = flipSkill.Map(value => value.GetInt32()),
-            NextSkillId = nextChain.Map(value => value.GetInt32()),
-            PreviousSkillId = prevChain.Map(value => value.GetInt32()),
-            SkillFlags = flags.Map(value => value.GetSkillFlags()),
-            SpecializationId = specialization.Map(value => value.GetInt32()),
-            ChatLink = chatLink.Map(value => value.GetStringRequired()),
+            Slot = slot.Map(static value => value.GetEnum<SkillSlot>()),
+            FlipSkillId = flipSkill.Map(static value => value.GetInt32()),
+            NextSkillId = nextChain.Map(static value => value.GetInt32()),
+            PreviousSkillId = prevChain.Map(static value => value.GetInt32()),
+            SkillFlags = flags.Map(static value => value.GetSkillFlags()),
+            SpecializationId = specialization.Map(static value => value.GetInt32()),
+            ChatLink = chatLink.Map(static value => value.GetStringRequired()),
             Categories =
-                categories.Map(
-                    values => values.GetList(value => value.GetEnum<SkillCategoryName>())
+                categories.Map(static values => values.GetList(static value => value.GetEnum<SkillCategoryName>())
                 )
                 ?? Empty.List<Extensible<SkillCategoryName>>(),
             SubskillIds =
-                subskills.Map(
-                    values => values.GetList(value => value.GetSubskill(missingMemberBehavior))
+                subskills.Map(static values => values.GetList(static value => value.GetSubskill())
                 ),
-            BundleSkillIds = bundleSkills.Map(values => values.GetList(value => value.GetInt32())),
-            Attunement = attunement.Map(value => value.GetEnum<Attunement>()),
-            ToolbeltSkillId = toolbeltSkill.Map(value => value.GetInt32()),
-            Cost = cost.Map(value => value.GetInt32())
+            BundleSkillIds = bundleSkills.Map(static values => values.GetList(static value => value.GetInt32())),
+            Attunement = attunement.Map(static value => value.GetEnum<Attunement>()),
+            ToolbeltSkillId = toolbeltSkill.Map(static value => value.GetInt32()),
+            Cost = cost.Map(static value => value.GetInt32())
         };
     }
 }

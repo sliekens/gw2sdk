@@ -1,5 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using GuildWars2.Hero.Crafting.Recipes.Http;
+using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Crafting.Recipes;
 
@@ -54,10 +55,10 @@ public sealed class RecipesClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         LearnedRecipesRequest request = new(characterName)
         {
             AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -88,7 +89,8 @@ public sealed class RecipesClient
         CancellationToken cancellationToken = default
     )
     {
-        RecipeByIdRequest request = new(recipeId) { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        RecipeByIdRequest request = new(recipeId);
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -104,10 +106,8 @@ public sealed class RecipesClient
         CancellationToken cancellationToken = default
     )
     {
-        RecipesByIdsRequest request = new(recipeIds.ToList())
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        RecipesByIdsRequest request = new(recipeIds.ToList());
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -124,10 +124,10 @@ public sealed class RecipesClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         RecipesByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -230,10 +230,8 @@ public sealed class RecipesClient
         CancellationToken cancellationToken = default
     )
     {
-        RecipesByIngredientItemIdRequest request = new(ingredientItemId)
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        RecipesByIngredientItemIdRequest request = new(ingredientItemId);
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -252,10 +250,10 @@ public sealed class RecipesClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         RecipesByIngredientItemIdByPageRequest request = new(ingredientItemId, pageIndex)
         {
             PageSize = pageSize,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -284,10 +282,8 @@ public sealed class RecipesClient
         CancellationToken cancellationToken = default
     )
     {
-        RecipesByOutputItemIdRequest request = new(outputItemId)
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        RecipesByOutputItemIdRequest request = new(outputItemId);
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -306,10 +302,10 @@ public sealed class RecipesClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         RecipesByOutputItemIdByPageRequest request = new(outputItemId, pageIndex)
         {
             PageSize = pageSize,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }

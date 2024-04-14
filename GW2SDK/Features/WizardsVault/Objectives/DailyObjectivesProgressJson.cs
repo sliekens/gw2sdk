@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.WizardsVault.Objectives;
@@ -6,8 +6,7 @@ namespace GuildWars2.WizardsVault.Objectives;
 internal static class DailyObjectivesProgressJson
 {
     public static DailyObjectivesProgress GetDailyObjectivesProgress(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember metaProgressCurrent = "meta_progress_current";
@@ -43,7 +42,7 @@ internal static class DailyObjectivesProgressJson
             {
                 objectives = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -51,14 +50,12 @@ internal static class DailyObjectivesProgressJson
 
         return new DailyObjectivesProgress
         {
-            Progress = metaProgressCurrent.Map(value => value.GetInt32()),
-            Goal = metaProgressComplete.Map(value => value.GetInt32()),
-            RewardItemId = metaRewardItemId.Map(value => value.GetInt32()),
-            RewardAcclaim = metaRewardAstral.Map(value => value.GetInt32()),
-            Claimed = metaRewardClaimed.Map(value => value.GetBoolean()),
-            Objectives = objectives.Map(
-                values => values.GetList(
-                    value => value.GetObjectiveProgress(missingMemberBehavior)
+            Progress = metaProgressCurrent.Map(static value => value.GetInt32()),
+            Goal = metaProgressComplete.Map(static value => value.GetInt32()),
+            RewardItemId = metaRewardItemId.Map(static value => value.GetInt32()),
+            RewardAcclaim = metaRewardAstral.Map(static value => value.GetInt32()),
+            Claimed = metaRewardClaimed.Map(static value => value.GetBoolean()),
+            Objectives = objectives.Map(static values => values.GetList(static value => value.GetObjectiveProgress()
                 )
             )
         };

@@ -12,8 +12,7 @@ internal sealed class SeasonRequest : IHttpRequest<Season>
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(Season Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -29,7 +28,7 @@ internal sealed class SeasonRequest : IHttpRequest<Season>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSeason(MissingMemberBehavior);
+        var value = json.RootElement.GetSeason();
         return (value, new MessageContext(response));
     }
 }

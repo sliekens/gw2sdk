@@ -16,8 +16,7 @@ internal sealed class LegendsByIdsRequest : IHttpRequest<HashSet<Legend>>
 
     public IReadOnlyCollection<string> LegendIds { get; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<Legend> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -40,7 +39,7 @@ internal sealed class LegendsByIdsRequest : IHttpRequest<HashSet<Legend>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetLegend(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(static entry => entry.GetLegend());
         return (value, new MessageContext(response));
     }
 }

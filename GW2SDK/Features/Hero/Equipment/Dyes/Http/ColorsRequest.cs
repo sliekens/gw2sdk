@@ -17,8 +17,7 @@ internal sealed class ColorsRequest : IHttpRequest<HashSet<DyeColor>>
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<DyeColor> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -34,7 +33,7 @@ internal sealed class ColorsRequest : IHttpRequest<HashSet<DyeColor>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetDyeColor(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(static entry => entry.GetDyeColor());
         return (value, new MessageContext(response));
     }
 }

@@ -12,8 +12,7 @@ internal sealed class TokenInfoRequest(string accessToken) : IHttpRequest<TokenI
 
     public string AccessToken { get; } = accessToken;
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(TokenInfo Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -29,7 +28,7 @@ internal sealed class TokenInfoRequest(string accessToken) : IHttpRequest<TokenI
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetTokenInfo(MissingMemberBehavior);
+        var value = json.RootElement.GetTokenInfo();
         return (value, new MessageContext(response));
     }
 }

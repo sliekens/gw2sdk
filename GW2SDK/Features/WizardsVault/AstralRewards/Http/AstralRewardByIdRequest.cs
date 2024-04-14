@@ -11,8 +11,7 @@ internal sealed class AstralRewardByIdRequest(int astralRewardId) : IHttpRequest
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(AstralReward Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -36,7 +35,7 @@ internal sealed class AstralRewardByIdRequest(int astralRewardId) : IHttpRequest
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetAstralReward(MissingMemberBehavior);
+        var value = json.RootElement.GetAstralReward();
         return (value, new MessageContext(response));
     }
 }

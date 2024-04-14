@@ -26,8 +26,7 @@ internal sealed class RegionsByIdsRequest : IHttpRequest<HashSet<Region>>
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<Region> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -54,7 +53,7 @@ internal sealed class RegionsByIdsRequest : IHttpRequest<HashSet<Region>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetRegion(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(static entry => entry.GetRegion());
         return (value, new MessageContext(response));
     }
 }

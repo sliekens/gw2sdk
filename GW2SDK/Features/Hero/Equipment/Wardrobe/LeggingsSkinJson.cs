@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Items;
 using GuildWars2.Json;
 
@@ -7,8 +7,7 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 internal static class LeggingsSkinJson
 {
     public static LeggingsSkin GetLeggingsSkin(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember name = "name";
@@ -80,13 +79,13 @@ internal static class LeggingsSkinJson
                     {
                         dyeSlots = detail;
                     }
-                    else if (missingMemberBehavior == MissingMemberBehavior.Error)
+                    else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                     {
                         throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                     }
                 }
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -94,16 +93,16 @@ internal static class LeggingsSkinJson
 
         return new LeggingsSkin
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
-            Description = description.Map(value => value.GetString()) ?? "",
-            Rarity = rarity.Map(value => value.GetEnum<Rarity>()),
-            Flags = flags.Map(values => values.GetSkinFlags()),
-            Races = restrictions.Map(values => values.GetRestrictions()),
-            IconHref = icon.Map(value => value.GetString()),
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            Description = description.Map(static value => value.GetString()) ?? "",
+            Rarity = rarity.Map(static value => value.GetEnum<Rarity>()),
+            Flags = flags.Map(static values => values.GetSkinFlags()),
+            Races = restrictions.Map(static values => values.GetRestrictions()),
+            IconHref = icon.Map(static value => value.GetString()),
             WeightClass =
-                weightClass.Map(value => value.GetEnum<WeightClass>()),
-            DyeSlots = dyeSlots.Map(value => value.GetDyeSlotInfo(missingMemberBehavior))
+                weightClass.Map(static value => value.GetEnum<WeightClass>()),
+            DyeSlots = dyeSlots.Map(static value => value.GetDyeSlotInfo())
         };
     }
 }

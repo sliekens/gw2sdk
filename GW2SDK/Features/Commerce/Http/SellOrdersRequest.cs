@@ -15,8 +15,7 @@ internal sealed class SellOrdersRequest(int pageIndex) : IHttpRequest<HashSet<Or
 
     public required string? AccessToken { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<Order> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -43,7 +42,7 @@ internal sealed class SellOrdersRequest(int pageIndex) : IHttpRequest<HashSet<Or
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetOrder(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(static entry => entry.GetOrder());
         return (value, new MessageContext(response));
     }
 }

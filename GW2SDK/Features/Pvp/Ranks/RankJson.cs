@@ -1,11 +1,11 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Ranks;
 
 internal static class RankJson
 {
-    public static Rank GetRank(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Rank GetRank(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember finisherId = "finisher_id";
@@ -45,7 +45,7 @@ internal static class RankJson
             {
                 levels = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -53,14 +53,13 @@ internal static class RankJson
 
         return new Rank
         {
-            Id = id.Map(value => value.GetInt32()),
-            FinisherId = finisherId.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
-            IconHref = icon.Map(value => value.GetStringRequired()),
-            MinRank = minRank.Map(value => value.GetInt32()),
-            MaxRank = maxRank.Map(value => value.GetInt32()),
-            Levels = levels.Map(
-                values => values.GetList(value => value.GetLevel(missingMemberBehavior))
+            Id = id.Map(static value => value.GetInt32()),
+            FinisherId = finisherId.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            IconHref = icon.Map(static value => value.GetStringRequired()),
+            MinRank = minRank.Map(static value => value.GetInt32()),
+            MaxRank = maxRank.Map(static value => value.GetInt32()),
+            Levels = levels.Map(static values => values.GetList(static value => value.GetLevel())
             )
         };
     }

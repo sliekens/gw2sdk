@@ -13,8 +13,7 @@ internal sealed class GuildMembersRequest(string id) : IHttpRequest<List<GuildMe
 
     public required string? AccessToken { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(List<GuildMember> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -35,7 +34,7 @@ internal sealed class GuildMembersRequest(string id) : IHttpRequest<List<GuildMe
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetList(entry => entry.GetGuildMember(MissingMemberBehavior));
+        var value = json.RootElement.GetList(static entry => entry.GetGuildMember());
         return (value, new MessageContext(response));
     }
 }

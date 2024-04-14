@@ -1,11 +1,11 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Metadata;
 
 internal static class BuildJson
 {
-    public static Build GetBuild(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Build GetBuild(this JsonElement json)
     {
         RequiredMember id = "id";
 
@@ -15,12 +15,12 @@ internal static class BuildJson
             {
                 id = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
         }
 
-        return new Build { Id = id.Map(value => value.GetInt32()) };
+        return new Build { Id = id.Map(static value => value.GetInt32()) };
     }
 }

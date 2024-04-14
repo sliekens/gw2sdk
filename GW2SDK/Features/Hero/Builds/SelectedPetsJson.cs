@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Builds;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Builds;
 internal static class SelectedPetsJson
 {
     public static SelectedPets GetSelectedPets(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember terrestrial = "terrestrial";
@@ -23,14 +22,14 @@ internal static class SelectedPetsJson
             {
                 aquatic = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
         }
 
-        var (terrestrial1, terrestrial2) = terrestrial.Map(values => values.GetPetIds(missingMemberBehavior));
-        var (aquatic1, aquatic2) = aquatic.Map(values => values.GetPetIds(missingMemberBehavior));
+        var (terrestrial1, terrestrial2) = terrestrial.Map(static values => values.GetPetIds());
+        var (aquatic1, aquatic2) = aquatic.Map(static values => values.GetPetIds());
         return new SelectedPets
         {
             Terrestrial1 = terrestrial1,

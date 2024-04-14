@@ -5,6 +5,7 @@ using GuildWars2.Commerce.Http;
 using GuildWars2.Commerce.Listings;
 using GuildWars2.Commerce.Prices;
 using GuildWars2.Commerce.Transactions;
+using GuildWars2.Json;
 
 namespace GuildWars2.Commerce;
 
@@ -36,10 +37,10 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         DeliveryRequest request = new()
         {
             AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -70,10 +71,8 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        ItemPriceByIdRequest request = new(itemId)
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        ItemPriceByIdRequest request = new(itemId);
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -89,10 +88,8 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        ItemPricesByIdsRequest request = new(itemIds.ToList())
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        ItemPricesByIdsRequest request = new(itemIds.ToList());
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -192,10 +189,8 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        OrderBookByIdRequest request = new(itemId)
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        OrderBookByIdRequest request = new(itemId);
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -211,10 +206,8 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        OrderBooksByIdsRequest request = new(itemIds.ToList())
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        OrderBooksByIdsRequest request = new(itemIds.ToList());
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -303,7 +296,8 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        GemsToGoldRequest request = new(gems) { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        GemsToGoldRequest request = new(gems);
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -318,7 +312,8 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        GoldToGemsRequest request = new(gold) { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        GoldToGemsRequest request = new(gold);
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -342,11 +337,11 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         BuyOrdersRequest request = new(pageIndex)
         {
             PageSize = pageSize,
-            AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
+            AccessToken = accessToken
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -367,11 +362,11 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         SellOrdersRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -392,11 +387,11 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         PurchasesRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -417,11 +412,11 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         SalesRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }

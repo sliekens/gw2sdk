@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Authorization;
@@ -6,8 +6,7 @@ namespace GuildWars2.Authorization;
 internal static class ApiKeyInfoJson
 {
     public static ApiKeyInfo GetApiKeyInfo(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember name = "name";
@@ -36,7 +35,7 @@ internal static class ApiKeyInfoJson
             {
                 permissions = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -44,10 +43,9 @@ internal static class ApiKeyInfoJson
 
         return new ApiKeyInfo
         {
-            Id = id.Map(value => value.GetStringRequired()),
-            Name = name.Map(value => value.GetStringRequired()),
-            Permissions = permissions.Map(
-                values => values.GetList(value => value.GetEnum<Permission>())
+            Id = id.Map(static value => value.GetStringRequired()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            Permissions = permissions.Map(static values => values.GetList(static value => value.GetEnum<Permission>())
             )
         };
     }

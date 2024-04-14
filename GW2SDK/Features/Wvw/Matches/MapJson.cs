@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Exploration.Maps;
 using GuildWars2.Json;
 
@@ -6,7 +6,7 @@ namespace GuildWars2.Wvw.Matches;
 
 internal static class MapJson
 {
-    public static Map GetMap(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Map GetMap(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember type = "type";
@@ -46,7 +46,7 @@ internal static class MapJson
             {
                 kills = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -54,19 +54,17 @@ internal static class MapJson
 
         return new Map
         {
-            Id = id.Map(value => value.GetInt32()),
-            Kind = type.Map(value => value.GetEnum<MapKind>()),
-            Scores = scores.Map(value => value.GetDistribution(missingMemberBehavior)),
+            Id = id.Map(static value => value.GetInt32()),
+            Kind = type.Map(static value => value.GetEnum<MapKind>()),
+            Scores = scores.Map(static value => value.GetDistribution()),
             Bonuses =
-                bonuses.Map(
-                    values => values.GetList(value => value.GetBonus(missingMemberBehavior))
+                bonuses.Map(static values => values.GetList(static value => value.GetBonus())
                 ),
             Objectives =
-                objectives.Map(
-                    values => values.GetList(value => value.GetObjective(missingMemberBehavior))
+                objectives.Map(static values => values.GetList(static value => value.GetObjective())
                 ),
-            Deaths = deaths.Map(value => value.GetDistribution(missingMemberBehavior)),
-            Kills = kills.Map(value => value.GetDistribution(missingMemberBehavior))
+            Deaths = deaths.Map(static value => value.GetDistribution()),
+            Kills = kills.Map(static value => value.GetDistribution())
         };
     }
 }

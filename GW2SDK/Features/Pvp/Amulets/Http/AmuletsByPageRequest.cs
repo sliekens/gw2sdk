@@ -14,8 +14,7 @@ internal sealed class AmuletsByPageRequest(int pageIndex) : IHttpRequest<HashSet
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<Amulet> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -42,7 +41,7 @@ internal sealed class AmuletsByPageRequest(int pageIndex) : IHttpRequest<HashSet
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetAmulet(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(static entry => entry.GetAmulet());
         return (value, new MessageContext(response));
     }
 }

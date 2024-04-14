@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Seasons;
@@ -6,8 +6,7 @@ namespace GuildWars2.Pvp.Seasons;
 internal static class LeaderboardEntryJson
 {
     public static LeaderboardEntry GetLeaderboardEntry(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember name = "name";
@@ -48,7 +47,7 @@ internal static class LeaderboardEntryJson
             {
                 scores = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -56,14 +55,13 @@ internal static class LeaderboardEntryJson
 
         return new LeaderboardEntry
         {
-            Name = name.Map(value => value.GetStringRequired()),
-            GuildId = guildId.Map(value => value.GetString()) ?? "",
-            TeamName = teamName.Map(value => value.GetString()) ?? "",
-            TeamId = teamId.Map(value => value.GetInt32()),
-            Rank = rank.Map(value => value.GetInt32()),
-            Date = date.Map(value => value.GetDateTimeOffset()),
-            Scores = scores.Map(
-                values => values.GetList(value => value.GetScore(missingMemberBehavior))
+            Name = name.Map(static value => value.GetStringRequired()),
+            GuildId = guildId.Map(static value => value.GetString()) ?? "",
+            TeamName = teamName.Map(static value => value.GetString()) ?? "",
+            TeamId = teamId.Map(static value => value.GetInt32()),
+            Rank = rank.Map(static value => value.GetInt32()),
+            Date = date.Map(static value => value.GetDateTimeOffset()),
+            Scores = scores.Map(static values => values.GetList(static value => value.GetScore())
             )
         };
     }

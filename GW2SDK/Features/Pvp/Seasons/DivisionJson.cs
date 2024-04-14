@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Seasons;
@@ -6,8 +6,7 @@ namespace GuildWars2.Pvp.Seasons;
 internal static class DivisionJson
 {
     public static Division GetDivision(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember name = "name";
@@ -43,7 +42,7 @@ internal static class DivisionJson
             {
                 tiers = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -51,13 +50,12 @@ internal static class DivisionJson
 
         return new Division
         {
-            Name = name.Map(value => value.GetStringRequired()),
-            Flags = flags.Map(values => values.GetDivisionFlags()),
-            LargeIconHref = largeIcon.Map(value => value.GetStringRequired()),
-            SmallIconHref = smallIcon.Map(value => value.GetStringRequired()),
-            PipIconHref = pipIcon.Map(value => value.GetStringRequired()),
-            Tiers = tiers.Map(
-                values => values.GetList(value => value.GetDivisionTier(missingMemberBehavior))
+            Name = name.Map(static value => value.GetStringRequired()),
+            Flags = flags.Map(static values => values.GetDivisionFlags()),
+            LargeIconHref = largeIcon.Map(static value => value.GetStringRequired()),
+            SmallIconHref = smallIcon.Map(static value => value.GetStringRequired()),
+            PipIconHref = pipIcon.Map(static value => value.GetStringRequired()),
+            Tiers = tiers.Map(static values => values.GetList(static value => value.GetDivisionTier())
             )
         };
     }

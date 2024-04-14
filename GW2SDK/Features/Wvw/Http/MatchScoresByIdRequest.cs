@@ -10,8 +10,7 @@ internal sealed class MatchScoresByIdRequest(string matchId) : IHttpRequest<Matc
 
     public string MatchId { get; } = matchId;
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(MatchScores Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -34,7 +33,7 @@ internal sealed class MatchScoresByIdRequest(string matchId) : IHttpRequest<Matc
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetMatchScores(MissingMemberBehavior);
+        var value = json.RootElement.GetMatchScores();
         return (value, new MessageContext(response));
     }
 }

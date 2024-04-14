@@ -16,8 +16,7 @@ internal sealed class ItemsByPageRequest(int pageIndex) : IHttpRequest<HashSet<I
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<Item> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -44,7 +43,7 @@ internal sealed class ItemsByPageRequest(int pageIndex) : IHttpRequest<HashSet<I
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetItem(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(static entry => entry.GetItem());
         return (value, new MessageContext(response));
     }
 }

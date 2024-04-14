@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.MailCarriers;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Equipment.MailCarriers;
 internal static class MailCarrierJson
 {
     public static MailCarrier GetMailCarrier(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -43,7 +42,7 @@ internal static class MailCarrierJson
             {
                 flags = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -51,12 +50,12 @@ internal static class MailCarrierJson
 
         return new MailCarrier
         {
-            Id = id.Map(value => value.GetInt32()),
-            UnlockItemIds = unlockItems.Map(values => values.GetList(value => value.GetInt32())),
-            Order = order.Map(value => value.GetInt32()),
-            IconHref = icon.Map(value => value.GetStringRequired()),
-            Name = name.Map(value => value.GetStringRequired()),
-            Flags = flags.Map(values => values.GetMailCarrierFlags())
+            Id = id.Map(static value => value.GetInt32()),
+            UnlockItemIds = unlockItems.Map(static values => values.GetList(static value => value.GetInt32())),
+            Order = order.Map(static value => value.GetInt32()),
+            IconHref = icon.Map(static value => value.GetStringRequired()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            Flags = flags.Map(static values => values.GetMailCarrierFlags())
         };
     }
 }

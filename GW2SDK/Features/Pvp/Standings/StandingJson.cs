@@ -6,8 +6,7 @@ namespace GuildWars2.Pvp.Standings;
 internal static class StandingJson
 {
     public static Standing GetStanding(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember seasonId = "season_id";
@@ -28,7 +27,7 @@ internal static class StandingJson
             {
                 best = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -36,9 +35,9 @@ internal static class StandingJson
 
         return new Standing
         {
-            SeasonId = seasonId.Map(value => value.GetStringRequired()),
-            Current = current.Map(value => value.GetCurrentStanding(missingMemberBehavior)),
-            Best = best.Map(value => value.GetBestStanding(missingMemberBehavior))
+            SeasonId = seasonId.Map(static value => value.GetStringRequired()),
+            Current = current.Map(static value => value.GetCurrentStanding()),
+            Best = best.Map(static value => value.GetBestStanding())
         };
     }
 }

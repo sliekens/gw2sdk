@@ -1,11 +1,11 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Races;
 
 internal static class RaceJson
 {
-    public static Race GetRace(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Race GetRace(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -25,7 +25,7 @@ internal static class RaceJson
             {
                 skills = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -33,9 +33,9 @@ internal static class RaceJson
 
         return new Race
         {
-            Id = id.Map(value => value.GetEnum<RaceName>()),
-            Name = name.Map(value => value.GetStringRequired()),
-            SkillIds = skills.Map(values => values.GetList(value => value.GetInt32()))
+            Id = id.Map(static value => value.GetEnum<RaceName>()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            SkillIds = skills.Map(static values => values.GetList(static value => value.GetInt32()))
         };
     }
 }

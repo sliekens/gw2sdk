@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Training.Objectives;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Training.Objectives;
 internal static class TraitObjectiveJson
 {
     public static TraitObjective GetTraitObjective(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember cost = "cost";
@@ -31,7 +30,7 @@ internal static class TraitObjectiveJson
             {
                 traitId = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -39,8 +38,8 @@ internal static class TraitObjectiveJson
 
         return new TraitObjective
         {
-            Cost = cost.Map(value => value.GetInt32()),
-            TraitId = traitId.Map(value => value.GetInt32())
+            Cost = cost.Map(static value => value.GetInt32()),
+            TraitId = traitId.Map(static value => value.GetInt32())
         };
     }
 }

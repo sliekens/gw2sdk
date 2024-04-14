@@ -13,8 +13,7 @@ internal sealed class GuildTreasuryRequest(string id) : IHttpRequest<List<GuildT
 
     public required string? AccessToken { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(List<GuildTreasurySlot> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -36,7 +35,7 @@ internal sealed class GuildTreasuryRequest(string id) : IHttpRequest<List<GuildT
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
         var value =
-            json.RootElement.GetList(entry => entry.GetGuildTreasurySlot(MissingMemberBehavior));
+            json.RootElement.GetList(static entry => entry.GetGuildTreasurySlot());
         return (value, new MessageContext(response));
     }
 }

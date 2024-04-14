@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.MistChampions;
@@ -6,8 +6,7 @@ namespace GuildWars2.Pvp.MistChampions;
 internal static class MistChampionSkinJson
 {
     public static MistChampionSkin GetMistChampionSkin(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -38,7 +37,7 @@ internal static class MistChampionSkinJson
             {
                 unlockItems = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -46,11 +45,11 @@ internal static class MistChampionSkinJson
 
         return new MistChampionSkin
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
-            IconHref = icon.Map(value => value.GetStringRequired()),
-            Default = @default.Map(value => value.GetBoolean()),
-            UnlockItemIds = unlockItems.Map(values => values.GetList(value => value.GetInt32()))
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            IconHref = icon.Map(static value => value.GetStringRequired()),
+            Default = @default.Map(static value => value.GetBoolean()),
+            UnlockItemIds = unlockItems.Map(static values => values.GetList(static value => value.GetInt32()))
         };
     }
 }

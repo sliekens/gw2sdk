@@ -11,8 +11,7 @@ internal sealed class JadeBotSkinByIdRequest(int jadeBotSkinId) : IHttpRequest<J
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(JadeBotSkin Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -36,7 +35,7 @@ internal sealed class JadeBotSkinByIdRequest(int jadeBotSkinId) : IHttpRequest<J
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetJadeBotSkin(MissingMemberBehavior);
+        var value = json.RootElement.GetJadeBotSkin();
         return (value, new MessageContext(response));
     }
 }

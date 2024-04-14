@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Commerce.Exchange;
@@ -6,8 +6,7 @@ namespace GuildWars2.Commerce.Exchange;
 internal static class GemsToGoldJson
 {
     public static GemsToGold GetGemsToGold(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember coinsPerGem = "coins_per_gem";
@@ -22,7 +21,7 @@ internal static class GemsToGoldJson
             {
                 quantity = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -30,8 +29,8 @@ internal static class GemsToGoldJson
 
         return new GemsToGold
         {
-            ExchangeRate = coinsPerGem.Map(value => value.GetInt32()),
-            Gold = quantity.Map(value => value.GetInt32())
+            ExchangeRate = coinsPerGem.Map(static value => value.GetInt32()),
+            Gold = quantity.Map(static value => value.GetInt32())
         };
     }
 }

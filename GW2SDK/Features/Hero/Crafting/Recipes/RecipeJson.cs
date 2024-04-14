@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Hero.Crafting.Disciplines;
 using GuildWars2.Json;
 
@@ -7,8 +7,7 @@ namespace GuildWars2.Hero.Crafting.Recipes;
 internal static class RecipeJson
 {
     public static Recipe GetRecipe(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         if (json.TryGetProperty("type", out var discriminator))
@@ -16,109 +15,109 @@ internal static class RecipeJson
             switch (discriminator.GetString())
             {
                 case "Amulet":
-                    return json.GetAmuletRecipe(missingMemberBehavior);
+                    return json.GetAmuletRecipe();
                 case "Axe":
-                    return json.GetAxeRecipe(missingMemberBehavior);
+                    return json.GetAxeRecipe();
                 case "Backpack":
-                    return json.GetBackpackRecipe(missingMemberBehavior);
+                    return json.GetBackpackRecipe();
                 case "Bag":
-                    return json.GetBagRecipe(missingMemberBehavior);
+                    return json.GetBagRecipe();
                 case "Boots":
-                    return json.GetBootsRecipe(missingMemberBehavior);
+                    return json.GetBootsRecipe();
                 case "Bulk":
-                    return json.GetBulkRecipe(missingMemberBehavior);
+                    return json.GetBulkRecipe();
                 case "Coat":
-                    return json.GetCoatRecipe(missingMemberBehavior);
+                    return json.GetCoatRecipe();
                 case "Component":
-                    return json.GetComponentRecipe(missingMemberBehavior);
+                    return json.GetComponentRecipe();
                 case "Consumable":
-                    return json.GetConsumableRecipe(missingMemberBehavior);
+                    return json.GetConsumableRecipe();
                 case "Dagger":
-                    return json.GetDaggerRecipe(missingMemberBehavior);
+                    return json.GetDaggerRecipe();
                 case "Dessert":
-                    return json.GetDessertRecipe(missingMemberBehavior);
+                    return json.GetDessertRecipe();
                 case "Dye":
-                    return json.GetDyeRecipe(missingMemberBehavior);
+                    return json.GetDyeRecipe();
                 case "Earring":
-                    return json.GetEarringRecipe(missingMemberBehavior);
+                    return json.GetEarringRecipe();
                 case "Feast":
-                    return json.GetFeastRecipe(missingMemberBehavior);
+                    return json.GetFeastRecipe();
                 case "Focus":
-                    return json.GetFocusRecipe(missingMemberBehavior);
+                    return json.GetFocusRecipe();
                 case "Gloves":
-                    return json.GetGlovesRecipe(missingMemberBehavior);
+                    return json.GetGlovesRecipe();
                 case "Greatsword":
-                    return json.GetGreatswordRecipe(missingMemberBehavior);
+                    return json.GetGreatswordRecipe();
                 case "GuildConsumable":
-                    return json.GetGuildConsumableRecipe(missingMemberBehavior);
+                    return json.GetGuildConsumableRecipe();
                 case "GuildConsumableWvw":
-                    return json.GetGuildWvwUpgradeRecipe(missingMemberBehavior);
+                    return json.GetGuildWvwUpgradeRecipe();
                 case "GuildDecoration":
-                    return json.GetGuildDecorationRecipe(missingMemberBehavior);
+                    return json.GetGuildDecorationRecipe();
                 case "Hammer":
-                    return json.GetHammerRecipe(missingMemberBehavior);
+                    return json.GetHammerRecipe();
                 case "Harpoon":
-                    return json.GetSpearRecipe(missingMemberBehavior);
+                    return json.GetSpearRecipe();
                 case "Helm":
-                    return json.GetHeadgearRecipe(missingMemberBehavior);
+                    return json.GetHeadgearRecipe();
                 case "IngredientCooking":
-                    return json.GetIngredientCookingRecipe(missingMemberBehavior);
+                    return json.GetIngredientCookingRecipe();
                 case "Inscription":
-                    return json.GetInscriptionRecipe(missingMemberBehavior);
+                    return json.GetInscriptionRecipe();
                 case "Insignia":
-                    return json.GetInsigniaRecipe(missingMemberBehavior);
+                    return json.GetInsigniaRecipe();
                 case "LegendaryComponent":
-                    return json.GetLegendaryComponentRecipe(missingMemberBehavior);
+                    return json.GetLegendaryComponentRecipe();
                 case "Leggings":
-                    return json.GetLeggingsRecipe(missingMemberBehavior);
+                    return json.GetLeggingsRecipe();
                 case "LongBow":
-                    return json.GetLongbowRecipe(missingMemberBehavior);
+                    return json.GetLongbowRecipe();
                 case "Mace":
-                    return json.GetMaceRecipe(missingMemberBehavior);
+                    return json.GetMaceRecipe();
                 case "Meal":
-                    return json.GetMealRecipe(missingMemberBehavior);
+                    return json.GetMealRecipe();
                 case "Pistol":
-                    return json.GetPistolRecipe(missingMemberBehavior);
+                    return json.GetPistolRecipe();
                 case "Potion":
-                    return json.GetPotionRecipe(missingMemberBehavior);
+                    return json.GetPotionRecipe();
                 case "Refinement":
-                    return json.GetRefinementRecipe(missingMemberBehavior);
+                    return json.GetRefinementRecipe();
                 case "RefinementEctoplasm":
-                    return json.GetRefinementEctoplasmRecipe(missingMemberBehavior);
+                    return json.GetRefinementEctoplasmRecipe();
                 case "RefinementObsidian":
-                    return json.GetRefinementObsidianRecipe(missingMemberBehavior);
+                    return json.GetRefinementObsidianRecipe();
                 case "Rifle":
-                    return json.GetRifleRecipe(missingMemberBehavior);
+                    return json.GetRifleRecipe();
                 case "Ring":
-                    return json.GetRingRecipe(missingMemberBehavior);
+                    return json.GetRingRecipe();
                 case "Scepter":
-                    return json.GetScepterRecipe(missingMemberBehavior);
+                    return json.GetScepterRecipe();
                 case "Seasoning":
-                    return json.GetSeasoningRecipe(missingMemberBehavior);
+                    return json.GetSeasoningRecipe();
                 case "Shield":
-                    return json.GetShieldRecipe(missingMemberBehavior);
+                    return json.GetShieldRecipe();
                 case "ShortBow":
-                    return json.GetShortbowRecipe(missingMemberBehavior);
+                    return json.GetShortbowRecipe();
                 case "Shoulders":
-                    return json.GetShouldersRecipe(missingMemberBehavior);
+                    return json.GetShouldersRecipe();
                 case "Snack":
-                    return json.GetSnackRecipe(missingMemberBehavior);
+                    return json.GetSnackRecipe();
                 case "Soup":
-                    return json.GetSoupRecipe(missingMemberBehavior);
+                    return json.GetSoupRecipe();
                 case "Speargun":
-                    return json.GetHarpoonGunRecipe(missingMemberBehavior);
+                    return json.GetHarpoonGunRecipe();
                 case "Staff":
-                    return json.GetStaffRecipe(missingMemberBehavior);
+                    return json.GetStaffRecipe();
                 case "Sword":
-                    return json.GetSwordRecipe(missingMemberBehavior);
+                    return json.GetSwordRecipe();
                 case "Torch":
-                    return json.GetTorchRecipe(missingMemberBehavior);
+                    return json.GetTorchRecipe();
                 case "Trident":
-                    return json.GetTridentRecipe(missingMemberBehavior);
+                    return json.GetTridentRecipe();
                 case "UpgradeComponent":
-                    return json.GetUpgradeComponentRecipe(missingMemberBehavior);
+                    return json.GetUpgradeComponentRecipe();
                 case "Warhorn":
-                    return json.GetWarhornRecipe(missingMemberBehavior);
+                    return json.GetWarhornRecipe();
             }
         }
 
@@ -135,7 +134,7 @@ internal static class RecipeJson
         {
             if (member.NameEquals("type"))
             {
-                if (missingMemberBehavior == MissingMemberBehavior.Error)
+                if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                 {
                     throw new InvalidOperationException(
                         Strings.UnexpectedDiscriminator(member.Value.GetString())
@@ -178,7 +177,7 @@ internal static class RecipeJson
             {
                 chatLink = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -186,24 +185,21 @@ internal static class RecipeJson
 
         return new Recipe
         {
-            Id = id.Map(value => value.GetInt32()),
-            OutputItemId = outputItemId.Map(value => value.GetInt32()),
-            OutputItemCount = outputItemCount.Map(value => value.GetInt32()),
-            MinRating = minRating.Map(value => value.GetInt32()),
-            TimeToCraft = timeToCraft.Map(value => TimeSpan.FromMilliseconds(value.GetDouble())),
+            Id = id.Map(static value => value.GetInt32()),
+            OutputItemId = outputItemId.Map(static value => value.GetInt32()),
+            OutputItemCount = outputItemCount.Map(static value => value.GetInt32()),
+            MinRating = minRating.Map(static value => value.GetInt32()),
+            TimeToCraft = timeToCraft.Map(static value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines =
-                disciplines.Map(
-                    values =>
-                        values.GetList(
-                            value => value.GetEnum<CraftingDisciplineName>()
+                disciplines.Map(static values =>
+                        values.GetList(static value => value.GetEnum<CraftingDisciplineName>()
                         )
                 ),
-            Flags = flags.Map(values => values.GetRecipeFlags()),
+            Flags = flags.Map(static values => values.GetRecipeFlags()),
             Ingredients =
-                ingredients.Map(
-                    values => values.GetList(value => value.GetIngredient(missingMemberBehavior))
+                ingredients.Map(static values => values.GetList(static value => value.GetIngredient())
                 ),
-            ChatLink = chatLink.Map(value => value.GetStringRequired())
+            ChatLink = chatLink.Map(static value => value.GetStringRequired())
         };
     }
 }

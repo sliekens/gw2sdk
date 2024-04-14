@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Masteries;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Masteries;
 internal static class MasteryPointsTotalJson
 {
     public static MasteryPointsTotal GetMasteryPointsTotal(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember region = "region";
@@ -28,7 +27,7 @@ internal static class MasteryPointsTotalJson
             {
                 earned = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -36,8 +35,7 @@ internal static class MasteryPointsTotalJson
 
         return new MasteryPointsTotal
         {
-            Region = region.Map(
-                value =>
+            Region = region.Map(static value =>
                 {
                     // For some reason the API now returns story journal names instead of the region names as it was originally designed
                     // As a workaround, map the story journal names to the region names
@@ -75,8 +73,8 @@ internal static class MasteryPointsTotalJson
                     return value.GetEnum<MasteryRegionName>();
                 }
             ),
-            Spent = spent.Map(value => value.GetInt32()),
-            Earned = earned.Map(value => value.GetInt32())
+            Spent = spent.Map(static value => value.GetInt32()),
+            Earned = earned.Map(static value => value.GetInt32())
         };
     }
 }

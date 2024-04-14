@@ -13,8 +13,7 @@ internal sealed class WorldByIdRequest(int worldId) : IHttpRequest<World>
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(World Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -38,7 +37,7 @@ internal sealed class WorldByIdRequest(int worldId) : IHttpRequest<World>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetWorld(MissingMemberBehavior);
+        var value = json.RootElement.GetWorld();
         return (value, new MessageContext(response));
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Matches.Stats;
@@ -6,8 +6,7 @@ namespace GuildWars2.Wvw.Matches.Stats;
 internal static class MatchStatsJson
 {
     public static MatchStats GetMatchStats(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -33,7 +32,7 @@ internal static class MatchStatsJson
             {
                 maps = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -41,11 +40,10 @@ internal static class MatchStatsJson
 
         return new MatchStats
         {
-            Id = id.Map(value => value.GetStringRequired()),
-            Deaths = deaths.Map(value => value.GetDistribution(missingMemberBehavior)),
-            Kills = kills.Map(value => value.GetDistribution(missingMemberBehavior)),
-            Maps = maps.Map(
-                values => values.GetList(value => value.GetMapSummary(missingMemberBehavior))
+            Id = id.Map(static value => value.GetStringRequired()),
+            Deaths = deaths.Map(static value => value.GetDistribution()),
+            Kills = kills.Map(static value => value.GetDistribution()),
+            Maps = maps.Map(static values => values.GetList(static value => value.GetMapSummary())
             )
         };
     }

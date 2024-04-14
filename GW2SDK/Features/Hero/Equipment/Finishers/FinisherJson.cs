@@ -5,10 +5,7 @@ namespace GuildWars2.Hero.Equipment.Finishers;
 
 internal static class FinisherJson
 {
-    public static Finisher GetFinisher(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
-    )
+    public static Finisher GetFinisher(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember unlockDetails = "unlock_details";
@@ -43,7 +40,7 @@ internal static class FinisherJson
             {
                 name = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -51,12 +48,13 @@ internal static class FinisherJson
 
         return new Finisher
         {
-            Id = id.Map(value => value.GetInt32()),
-            LockedText = unlockDetails.Map(value => value.GetStringRequired()),
-            UnlockItemIds = unlockItems.Map(values => values.GetList(entry => entry.GetInt32())),
-            Order = order.Map(value => value.GetInt32()),
-            IconHref = icon.Map(value => value.GetStringRequired()),
-            Name = name.Map(value => value.GetStringRequired())
+            Id = id.Map(static value => value.GetInt32()),
+            LockedText = unlockDetails.Map(static value => value.GetStringRequired()),
+            UnlockItemIds =
+                unlockItems.Map(static values => values.GetList(static value => value.GetInt32())),
+            Order = order.Map(static value => value.GetInt32()),
+            IconHref = icon.Map(static value => value.GetStringRequired()),
+            Name = name.Map(static value => value.GetStringRequired())
         };
     }
 }

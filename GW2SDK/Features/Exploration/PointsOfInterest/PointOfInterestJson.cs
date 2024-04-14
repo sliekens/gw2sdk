@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.PointsOfInterest;
@@ -6,8 +6,7 @@ namespace GuildWars2.Exploration.PointsOfInterest;
 internal static class PointOfInterestJson
 {
     public static PointOfInterest GetPointOfInterest(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         if (json.TryGetProperty("type", out var discriminator))
@@ -15,13 +14,13 @@ internal static class PointOfInterestJson
             switch (discriminator.GetString())
             {
                 case "landmark":
-                    return json.GetLandmark(missingMemberBehavior);
+                    return json.GetLandmark();
                 case "waypoint":
-                    return json.GetWaypoint(missingMemberBehavior);
+                    return json.GetWaypoint();
                 case "vista":
-                    return json.GetVista(missingMemberBehavior);
+                    return json.GetVista();
                 case "unlock":
-                    return json.GetRequiresUnlockPointOfInterest(missingMemberBehavior);
+                    return json.GetRequiresUnlockPointOfInterest();
             }
         }
 
@@ -34,7 +33,7 @@ internal static class PointOfInterestJson
         {
             if (member.NameEquals("type"))
             {
-                if (missingMemberBehavior == MissingMemberBehavior.Error)
+                if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                 {
                     throw new InvalidOperationException(
                         Strings.UnexpectedDiscriminator(member.Value.GetString())
@@ -61,7 +60,7 @@ internal static class PointOfInterestJson
             {
                 chatLink = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -69,11 +68,11 @@ internal static class PointOfInterestJson
 
         return new PointOfInterest
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetString()) ?? "",
-            Floor = floor.Map(value => value.GetInt32()),
-            Coordinates = coordinates.Map(value => value.GetCoordinateF(missingMemberBehavior)),
-            ChatLink = chatLink.Map(value => value.GetStringRequired())
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetString()) ?? "",
+            Floor = floor.Map(static value => value.GetInt32()),
+            Coordinates = coordinates.Map(static value => value.GetCoordinateF()),
+            ChatLink = chatLink.Map(static value => value.GetStringRequired())
         };
     }
 }

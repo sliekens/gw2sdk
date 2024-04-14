@@ -19,8 +19,7 @@ internal sealed class AchievementGroupsByIdsRequest : IHttpRequest<HashSet<Achie
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<AchievementGroup> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -45,7 +44,7 @@ internal sealed class AchievementGroupsByIdsRequest : IHttpRequest<HashSet<Achie
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
         var value =
-            json.RootElement.GetSet(entry => entry.GetAchievementGroup(MissingMemberBehavior));
+            json.RootElement.GetSet(static entry => entry.GetAchievementGroup());
         return (value, new MessageContext(response));
     }
 }

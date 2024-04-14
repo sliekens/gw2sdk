@@ -1,11 +1,11 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Ranks;
 
 internal static class LevelJson
 {
-    public static Level GetLevel(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Level GetLevel(this JsonElement json)
     {
         RequiredMember minLevel = "min_rank";
         RequiredMember maxLevel = "max_rank";
@@ -25,7 +25,7 @@ internal static class LevelJson
             {
                 points = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -33,9 +33,9 @@ internal static class LevelJson
 
         return new Level
         {
-            MinRank = minLevel.Map(value => value.GetInt32()),
-            MaxRank = maxLevel.Map(value => value.GetInt32()),
-            Points = points.Map(value => value.GetInt32())
+            MinRank = minLevel.Map(static value => value.GetInt32()),
+            MaxRank = maxLevel.Map(static value => value.GetInt32()),
+            Points = points.Map(static value => value.GetInt32())
         };
     }
 }

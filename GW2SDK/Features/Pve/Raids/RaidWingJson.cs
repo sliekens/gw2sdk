@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Pve.Raids;
@@ -6,8 +6,7 @@ namespace GuildWars2.Pve.Raids;
 internal static class RaidWingJson
 {
     public static RaidWing GetRaidWing(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -23,7 +22,7 @@ internal static class RaidWingJson
             {
                 events = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -31,9 +30,8 @@ internal static class RaidWingJson
 
         return new RaidWing
         {
-            Id = id.Map(value => value.GetStringRequired()),
-            Encounters = events.Map(
-                values => values.GetList(value => value.GetEncounter(missingMemberBehavior))
+            Id = id.Map(static value => value.GetStringRequired()),
+            Encounters = events.Map(static values => values.GetList(static value => value.GetEncounter())
             )
         };
     }

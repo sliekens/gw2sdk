@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Hero.Builds;
 using GuildWars2.Json;
 
@@ -7,8 +7,7 @@ namespace GuildWars2.Hero.Training.Skills;
 internal static class ProfessionSkillSummaryJson
 {
     public static ProfessionSkillSummary GetProfessionSkillSummary(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -43,7 +42,7 @@ internal static class ProfessionSkillSummaryJson
             {
                 attunement = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -51,10 +50,10 @@ internal static class ProfessionSkillSummaryJson
 
         return new ProfessionSkillSummary
         {
-            Id = id.Map(value => value.GetInt32()),
-            Slot = slot.Map(value => value.GetEnum<SkillSlot>()),
-            Source = source.Map(value => value.GetEnum<ProfessionName>()),
-            Attunement = attunement.Map(value => value.GetEnum<Attunement>())
+            Id = id.Map(static value => value.GetInt32()),
+            Slot = slot.Map(static value => value.GetEnum<SkillSlot>()),
+            Source = source.Map(static value => value.GetEnum<ProfessionName>()),
+            Attunement = attunement.Map(static value => value.GetEnum<Attunement>())
         };
     }
 }

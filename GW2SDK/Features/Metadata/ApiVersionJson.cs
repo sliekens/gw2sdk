@@ -6,8 +6,7 @@ namespace GuildWars2.Metadata;
 internal static class ApiVersionJson
 {
     public static ApiVersion GetApiVersion(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember languages = "langs";
@@ -28,7 +27,7 @@ internal static class ApiVersionJson
             {
                 schemaVersions = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -37,13 +36,11 @@ internal static class ApiVersionJson
         return new ApiVersion
         {
             Languages =
-                languages.Map(values => values.GetList(value => value.GetStringRequired())),
+                languages.Map(static values => values.GetList(static value => value.GetStringRequired())),
             Routes =
-                routes.Map(
-                    values => values.GetList(value => value.GetRoute(missingMemberBehavior))
+                routes.Map(static values => values.GetList(static value => value.GetRoute())
                 ),
-            SchemaVersions = schemaVersions.Map(
-                    values => values.GetList(value => value.GetSchema(missingMemberBehavior))
+            SchemaVersions = schemaVersions.Map(static values => values.GetList(static value => value.GetSchema())
                 )
                 ?? Empty.List<Schema>()
         };

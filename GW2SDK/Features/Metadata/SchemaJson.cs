@@ -1,14 +1,11 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Metadata;
 
 internal static class SchemaJson
 {
-    public static Schema GetSchema(
-        this JsonElement jsonElement,
-        MissingMemberBehavior missingMemberBehavior
-    )
+    public static Schema GetSchema(this JsonElement jsonElement)
     {
         RequiredMember version = "v";
 
@@ -24,7 +21,7 @@ internal static class SchemaJson
             {
                 description = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -32,8 +29,8 @@ internal static class SchemaJson
 
         return new Schema
         {
-            Version = version.Map(value => value.GetStringRequired()),
-            Description = description.Map(value => value.GetStringRequired())
+            Version = version.Map(static value => value.GetStringRequired()),
+            Description = description.Map(static value => value.GetStringRequired())
         };
     }
 }

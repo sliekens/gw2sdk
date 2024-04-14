@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Mounts;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Equipment.Mounts;
 internal static class MountSkinJson
 {
     public static MountSkin GetMountSkin(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -38,7 +37,7 @@ internal static class MountSkinJson
             {
                 mount = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -46,14 +45,13 @@ internal static class MountSkinJson
 
         return new MountSkin
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
-            IconHref = icon.Map(value => value.GetStringRequired()),
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            IconHref = icon.Map(static value => value.GetStringRequired()),
             DyeSlots =
-                dyeSlots.Map(
-                    values => values.GetList(value => value.GetDyeSlot(missingMemberBehavior))
+                dyeSlots.Map(static values => values.GetList(static value => value.GetDyeSlot())
                 ),
-            Mount = mount.Map(value => value.GetMountName())
+            Mount = mount.Map(static value => value.GetMountName())
         };
     }
 }

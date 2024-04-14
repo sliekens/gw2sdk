@@ -17,8 +17,7 @@ internal sealed class EmblemForegroundsByIdsRequest : IHttpRequest<HashSet<Emble
 
     public IReadOnlyCollection<int> ForegroundEmblemIds { get; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<EmblemForeground> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -42,7 +41,7 @@ internal sealed class EmblemForegroundsByIdsRequest : IHttpRequest<HashSet<Emble
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
         var value =
-            json.RootElement.GetSet(entry => entry.GetEmblemForeground(MissingMemberBehavior));
+            json.RootElement.GetSet(static entry => entry.GetEmblemForeground());
         return (value, new MessageContext(response));
     }
 }

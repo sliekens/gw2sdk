@@ -17,8 +17,7 @@ internal sealed class CharacterBackstoryRequest(string characterName)
 
     public required string? AccessToken { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(CharacterBackgroundStory Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -38,7 +37,7 @@ internal sealed class CharacterBackstoryRequest(string characterName)
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetCharacterBackgroundStory(MissingMemberBehavior);
+        var value = json.RootElement.GetCharacterBackgroundStory();
         return (value, new MessageContext(response));
     }
 }

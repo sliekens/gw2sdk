@@ -16,8 +16,7 @@ internal sealed class LearnedCraftingDisciplinesRequest(string characterName)
 
     public required string? AccessToken { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(LearnedCraftingDisciplines Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -37,7 +36,7 @@ internal sealed class LearnedCraftingDisciplinesRequest(string characterName)
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetLearnedCraftingDisciplines(MissingMemberBehavior);
+        var value = json.RootElement.GetLearnedCraftingDisciplines();
         return (value, new MessageContext(response));
     }
 }

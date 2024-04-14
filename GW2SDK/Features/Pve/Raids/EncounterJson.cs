@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Pve.Raids;
@@ -6,8 +6,7 @@ namespace GuildWars2.Pve.Raids;
 internal static class EncounterJson
 {
     public static Encounter GetEncounter(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -23,7 +22,7 @@ internal static class EncounterJson
             {
                 type = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -31,8 +30,8 @@ internal static class EncounterJson
 
         return new Encounter
         {
-            Id = id.Map(value => value.GetStringRequired()),
-            Kind = type.Map(value => value.GetEnum<EncounterKind>())
+            Id = id.Map(static value => value.GetStringRequired()),
+            Kind = type.Map(static value => value.GetEnum<EncounterKind>())
         };
     }
 }

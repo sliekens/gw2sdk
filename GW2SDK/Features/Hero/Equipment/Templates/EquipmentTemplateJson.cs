@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Templates;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Equipment.Templates;
 internal static class EquipmentTemplateJson
 {
     public static EquipmentTemplate GetEquipmentTemplate(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember tab = "tab";
@@ -40,7 +39,7 @@ internal static class EquipmentTemplateJson
             {
                 pvpEquipment = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -48,12 +47,11 @@ internal static class EquipmentTemplateJson
 
         return new EquipmentTemplate
         {
-            TabNumber = tab.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
-            Items = equipment.Map(
-                values => values.GetList(value => value.GetEquipmentItem(missingMemberBehavior))
+            TabNumber = tab.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            Items = equipment.Map(static values => values.GetList(static value => value.GetEquipmentItem())
             ),
-            PvpEquipment = pvpEquipment.Map(value => value.GetPvpEquipment(missingMemberBehavior))
+            PvpEquipment = pvpEquipment.Map(static value => value.GetPvpEquipment())
         };
     }
 }

@@ -1,4 +1,5 @@
-﻿using GuildWars2.Pve.SuperAdventureBox.Http;
+﻿using GuildWars2.Json;
+using GuildWars2.Pve.SuperAdventureBox.Http;
 
 namespace GuildWars2.Pve.SuperAdventureBox;
 
@@ -33,10 +34,10 @@ public sealed class SuperAdventureBoxClient
             CancellationToken cancellationToken = default
         )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         var request = new SuperAdventureBoxProgressRequest(characterName)
         {
             AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }

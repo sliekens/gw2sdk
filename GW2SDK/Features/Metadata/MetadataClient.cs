@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using GuildWars2.Json;
 using GuildWars2.Metadata.Http;
 
 namespace GuildWars2.Metadata;
@@ -28,7 +29,8 @@ public sealed class MetadataClient
         CancellationToken cancellationToken = default
     )
     {
-        ApiVersionRequest request = new(version) { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        ApiVersionRequest request = new(version);
         return request.SendAsync(httpClient, cancellationToken);
     }
 

@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.MistChampions;
@@ -6,8 +6,7 @@ namespace GuildWars2.Pvp.MistChampions;
 internal static class MistChampionStatsJson
 {
     public static MistChampionStats GetMistChampionStats(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember offense = "offense";
@@ -28,7 +27,7 @@ internal static class MistChampionStatsJson
             {
                 speed = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -36,9 +35,9 @@ internal static class MistChampionStatsJson
 
         return new MistChampionStats
         {
-            Offense = offense.Map(value => value.GetInt32()),
-            Defense = defense.Map(value => value.GetInt32()),
-            Speed = speed.Map(value => value.GetInt32())
+            Offense = offense.Map(static value => value.GetInt32()),
+            Defense = defense.Map(static value => value.GetInt32()),
+            Speed = speed.Map(static value => value.GetInt32())
         };
     }
 }

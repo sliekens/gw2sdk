@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Hero;
 using GuildWars2.Json;
 
@@ -6,7 +6,7 @@ namespace GuildWars2.Pvp.Games;
 
 internal static class GameJson
 {
-    public static Game GetGame(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Game GetGame(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember mapId = "map_id";
@@ -66,7 +66,7 @@ internal static class GameJson
             {
                 score = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -74,18 +74,18 @@ internal static class GameJson
 
         return new Game
         {
-            Id = id.Map(value => value.GetStringRequired()),
-            MapId = mapId.Map(value => value.GetInt32()),
-            Started = started.Map(value => value.GetDateTimeOffset()),
-            Ended = ended.Map(value => value.GetDateTimeOffset()),
-            Result = result.Map(value => value.GetEnum<PvpResult>()),
-            Team = team.Map(value => value.GetEnum<PvpTeamColor>()),
+            Id = id.Map(static value => value.GetStringRequired()),
+            MapId = mapId.Map(static value => value.GetInt32()),
+            Started = started.Map(static value => value.GetDateTimeOffset()),
+            Ended = ended.Map(static value => value.GetDateTimeOffset()),
+            Result = result.Map(static value => value.GetEnum<PvpResult>()),
+            Team = team.Map(static value => value.GetEnum<PvpTeamColor>()),
             Profession =
-                profession.Map(value => value.GetEnum<ProfessionName>()),
-            RatingType = ratingType.Map(value => value.GetRatingType()),
-            RatingChange = ratingChange.Map(value => value.GetInt32()),
-            SeasonId = seasonId.Map(value => value.GetString()),
-            Score = score.Map(value => value.GetScore(missingMemberBehavior))
+                profession.Map(static value => value.GetEnum<ProfessionName>()),
+            RatingType = ratingType.Map(static value => value.GetRatingType()),
+            RatingChange = ratingChange.Map(static value => value.GetInt32()),
+            SeasonId = seasonId.Map(static value => value.GetString()),
+            Score = score.Map(static value => value.GetScore())
         };
     }
 }

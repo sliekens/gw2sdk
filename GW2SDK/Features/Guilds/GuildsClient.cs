@@ -9,10 +9,12 @@ using GuildWars2.Guilds.Storage;
 using GuildWars2.Guilds.Teams;
 using GuildWars2.Guilds.Treasury;
 using GuildWars2.Guilds.Upgrades;
+using GuildWars2.Json;
 
 namespace GuildWars2.Guilds;
 
-/// <summary>Provides query methods for guilds (permissions, ranks, members, teams, bank, upgrades, logs) and guild emblems.</summary>
+/// <summary>Provides query methods for guilds (permissions, ranks, members, teams, bank, upgrades, logs) and guild
+/// emblems.</summary>
 [PublicAPI]
 public sealed class GuildsClient
 {
@@ -59,11 +61,8 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        GuildByIdRequest request = new(guildId)
-        {
-            AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        GuildByIdRequest request = new(guildId) { AccessToken = accessToken };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -85,11 +84,8 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        GuildRanksRequest request = new(guildId)
-        {
-            AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        GuildRanksRequest request = new(guildId) { AccessToken = accessToken };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -111,11 +107,8 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        GuildMembersRequest request = new(guildId)
-        {
-            AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        GuildMembersRequest request = new(guildId) { AccessToken = accessToken };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -137,11 +130,8 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        GuildTeamsRequest request = new(guildId)
-        {
-            AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        GuildTeamsRequest request = new(guildId) { AccessToken = accessToken };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -163,11 +153,8 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        GuildTreasuryRequest request = new(guildId)
-        {
-            AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        GuildTreasuryRequest request = new(guildId) { AccessToken = accessToken };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -189,11 +176,8 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        GuildBankRequest request = new(guildId)
-        {
-            AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        GuildBankRequest request = new(guildId) { AccessToken = accessToken };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -215,11 +199,8 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        GuildStorageRequest request = new(guildId)
-        {
-            AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        GuildStorageRequest request = new(guildId) { AccessToken = accessToken };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -261,11 +242,8 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        GuildLogRequest request = new(guildId)
-        {
-            AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        GuildLogRequest request = new(guildId) { AccessToken = accessToken };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -285,11 +263,11 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         GuildLogRequest request = new(guildId)
         {
             Since = sinceLogId,
-            AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
+            AccessToken = accessToken
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -307,7 +285,8 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        EmblemForegroundsRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        EmblemForegroundsRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -333,8 +312,8 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        EmblemForegroundByIdRequest request =
-            new(emblemForegroundId) { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        EmblemForegroundByIdRequest request = new(emblemForegroundId);
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -350,7 +329,8 @@ public sealed class GuildsClient
             CancellationToken cancellationToken = default
         )
     {
-        EmblemForegroundsByIdsRequest request = new(emblemForegroundIds.ToList()) { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        EmblemForegroundsByIdsRequest request = new(emblemForegroundIds.ToList());
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -368,11 +348,8 @@ public sealed class GuildsClient
             CancellationToken cancellationToken = default
         )
     {
-        EmblemForegroundsByPageRequest request = new(pageIndex)
-        {
-            PageSize = pageSize,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        EmblemForegroundsByPageRequest request = new(pageIndex) { PageSize = pageSize };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -389,7 +366,8 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        EmblemBackgroundsRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        EmblemBackgroundsRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -415,8 +393,8 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        EmblemBackgroundByIdRequest request =
-            new(backgroundEmblemId) { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        EmblemBackgroundByIdRequest request = new(backgroundEmblemId);
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -432,7 +410,8 @@ public sealed class GuildsClient
             CancellationToken cancellationToken = default
         )
     {
-        EmblemBackgroundsByIdsRequest request = new(backgroundEmblemIds.ToList()) { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        EmblemBackgroundsByIdsRequest request = new(backgroundEmblemIds.ToList());
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -450,11 +429,8 @@ public sealed class GuildsClient
             CancellationToken cancellationToken = default
         )
     {
-        EmblemBackgroundsByPageRequest request = new(pageIndex)
-        {
-            PageSize = pageSize,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        EmblemBackgroundsByPageRequest request = new(pageIndex) { PageSize = pageSize };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -474,11 +450,8 @@ public sealed class GuildsClient
             CancellationToken cancellationToken = default
         )
     {
-        GuildPermissionsRequest request = new()
-        {
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        GuildPermissionsRequest request = new() { Language = language };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -506,11 +479,8 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        GuildPermissionByIdRequest request = new(guildPermissionId)
-        {
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        GuildPermissionByIdRequest request = new(guildPermissionId) { Language = language };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -528,10 +498,10 @@ public sealed class GuildsClient
             CancellationToken cancellationToken = default
         )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         GuildPermissionsByIdsRequest request = new(guildPermissionIds.ToList())
         {
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
+            Language = language
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -552,11 +522,11 @@ public sealed class GuildsClient
             CancellationToken cancellationToken = default
         )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         GuildPermissionsByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
+            Language = language
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -576,11 +546,8 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        GuildUpgradesRequest request = new()
-        {
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        GuildUpgradesRequest request = new() { Language = language };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -608,11 +575,8 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        GuildUpgradeByIdRequest request = new(guildUpgradeId)
-        {
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        GuildUpgradeByIdRequest request = new(guildUpgradeId) { Language = language };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -629,11 +593,8 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        GuildUpgradesByIdsRequest request = new(guildUpgradeIds.ToList())
-        {
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        GuildUpgradesByIdsRequest request = new(guildUpgradeIds.ToList()) { Language = language };
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -652,11 +613,11 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         GuildUpgradesByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
+            Language = language
         };
         return request.SendAsync(httpClient, cancellationToken);
     }

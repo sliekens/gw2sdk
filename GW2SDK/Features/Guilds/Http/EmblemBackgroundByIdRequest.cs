@@ -11,8 +11,7 @@ internal sealed class EmblemBackgroundByIdRequest(int backgroundEmblemId)
 
     public int BackgroundEmblemId { get; } = backgroundEmblemId;
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(EmblemBackground Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -35,7 +34,7 @@ internal sealed class EmblemBackgroundByIdRequest(int backgroundEmblemId)
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetEmblemBackground(MissingMemberBehavior);
+        var value = json.RootElement.GetEmblemBackground();
         return (value, new MessageContext(response));
     }
 }

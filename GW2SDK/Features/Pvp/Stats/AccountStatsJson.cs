@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Hero;
 using GuildWars2.Json;
 
@@ -7,8 +7,7 @@ namespace GuildWars2.Pvp.Stats;
 internal static class AccountStatsJson
 {
     public static AccountStats GetAccountStats(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember pvpRank = "pvp_rank";
@@ -44,7 +43,7 @@ internal static class AccountStatsJson
             {
                 ladders = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -52,18 +51,17 @@ internal static class AccountStatsJson
 
         return new AccountStats
         {
-            PvpRank = pvpRank.Map(value => value.GetInt32()),
-            PvpRankPoints = pvpRankPoints.Map(value => value.GetInt32()),
-            PvpRankRollovers = pvpRankRollovers.Map(value => value.GetInt32()),
-            Aggregate = aggregate.Map(value => value.GetResults(missingMemberBehavior)),
-            Professions = professions.Map(
-                value => value.EnumerateObject()
+            PvpRank = pvpRank.Map(static value => value.GetInt32()),
+            PvpRankPoints = pvpRankPoints.Map(static value => value.GetInt32()),
+            PvpRankRollovers = pvpRankRollovers.Map(static value => value.GetInt32()),
+            Aggregate = aggregate.Map(static value => value.GetResults()),
+            Professions = professions.Map(static value => value.EnumerateObject()
                     .ToDictionary(
                         pair => (ProfessionName)Enum.Parse(typeof(ProfessionName), pair.Name, true),
-                        pair => pair.Value.GetResults(missingMemberBehavior)
+                        pair => pair.Value.GetResults()
                     )
             ),
-            Ladders = ladders.Map(value => value.GetLadders(missingMemberBehavior))
+            Ladders = ladders.Map(static value => value.GetLadders())
         };
     }
 }

@@ -1,11 +1,11 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Mounts;
 
 internal static class MountJson
 {
-    public static Mount GetMount(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Mount GetMount(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -35,7 +35,7 @@ internal static class MountJson
             {
                 skills = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -43,12 +43,11 @@ internal static class MountJson
 
         return new Mount
         {
-            Id = id.Map(value => value.GetMountName()),
-            Name = name.Map(value => value.GetStringRequired()),
-            DefaultSkinId = defaultSkin.Map(value => value.GetInt32()),
-            SkinIds = skins.Map(values => values.GetList(value => value.GetInt32())),
-            Skills = skills.Map(
-                values => values.GetList(value => value.GetSkillReference(missingMemberBehavior))
+            Id = id.Map(static value => value.GetMountName()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            DefaultSkinId = defaultSkin.Map(static value => value.GetInt32()),
+            SkinIds = skins.Map(static values => values.GetList(static value => value.GetInt32())),
+            Skills = skills.Map(static values => values.GetList(static value => value.GetSkillReference())
             )
         };
     }

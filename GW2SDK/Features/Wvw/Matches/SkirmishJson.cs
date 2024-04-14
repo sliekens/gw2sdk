@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Matches;
@@ -6,8 +6,7 @@ namespace GuildWars2.Wvw.Matches;
 internal static class SkirmishJson
 {
     public static Skirmish GetSkirmish(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -28,7 +27,7 @@ internal static class SkirmishJson
             {
                 mapScores = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -36,10 +35,9 @@ internal static class SkirmishJson
 
         return new Skirmish
         {
-            Id = id.Map(value => value.GetInt32()),
-            Scores = scores.Map(value => value.GetDistribution(missingMemberBehavior)),
-            MapScores = mapScores.Map(
-                values => values.GetList(value => value.GetMapScores(missingMemberBehavior))
+            Id = id.Map(static value => value.GetInt32()),
+            Scores = scores.Map(static value => value.GetDistribution()),
+            MapScores = mapScores.Map(static values => values.GetList(static value => value.GetMapScores())
             )
         };
     }

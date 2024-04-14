@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Builds.Facts;
@@ -7,7 +7,6 @@ internal static class AttributeConversionJson
 {
     public static AttributeConversion GetAttributeConversion(
         this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior,
         out int? requiresTrait,
         out int? overrides
     )
@@ -58,7 +57,7 @@ internal static class AttributeConversionJson
             {
                 target = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -66,11 +65,11 @@ internal static class AttributeConversionJson
 
         return new AttributeConversion
         {
-            Text = text.Map(value => value.GetString()) ?? "",
-            IconHref = icon.Map(value => value.GetString()) ?? "",
-            Percent = percent.Map(value => value.GetInt32()),
-            Source = source.Map(value => value.GetAttributeName()),
-            Target = target.Map(value => value.GetAttributeName())
+            Text = text.Map(static value => value.GetString()) ?? "",
+            IconHref = icon.Map(static value => value.GetString()) ?? "",
+            Percent = percent.Map(static value => value.GetInt32()),
+            Source = source.Map(static value => value.GetAttributeName()),
+            Target = target.Map(static value => value.GetAttributeName())
         };
     }
 }

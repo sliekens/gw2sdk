@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Templates;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Equipment.Templates;
 internal static class PvpEquipmentJson
 {
     public static PvpEquipment GetPvpEquipment(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         NullableMember amulet = "amulet";
@@ -28,7 +27,7 @@ internal static class PvpEquipmentJson
             {
                 sigils = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -36,9 +35,9 @@ internal static class PvpEquipmentJson
 
         return new PvpEquipment
         {
-            AmuletId = amulet.Map(value => value.GetInt32()),
-            RuneId = rune.Map(value => value.GetInt32()),
-            SigilIds = sigils.Map(values => values.GetList(value => value.GetNullableInt32()))
+            AmuletId = amulet.Map(static value => value.GetInt32()),
+            RuneId = rune.Map(static value => value.GetInt32()),
+            SigilIds = sigils.Map(static values => values.GetList(static value => value.GetNullableInt32()))
         };
     }
 }

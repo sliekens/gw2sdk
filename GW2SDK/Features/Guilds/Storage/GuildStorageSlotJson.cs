@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Storage;
@@ -6,8 +6,7 @@ namespace GuildWars2.Guilds.Storage;
 internal static class GuildStorageSlotJson
 {
     public static GuildStorageSlot GetGuildStorageSlot(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember itemId = "id";
@@ -23,7 +22,7 @@ internal static class GuildStorageSlotJson
             {
                 count = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -31,8 +30,8 @@ internal static class GuildStorageSlotJson
 
         return new GuildStorageSlot
         {
-            ItemId = itemId.Map(value => value.GetInt32()),
-            Count = count.Map(value => value.GetInt32())
+            ItemId = itemId.Map(static value => value.GetInt32()),
+            Count = count.Map(static value => value.GetInt32())
         };
     }
 }

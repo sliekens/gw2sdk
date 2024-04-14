@@ -1,4 +1,5 @@
-﻿using GuildWars2.Wvw.Abilities;
+﻿using GuildWars2.Json;
+using GuildWars2.Wvw.Abilities;
 using GuildWars2.Wvw.Http;
 using GuildWars2.Wvw.Matches;
 using GuildWars2.Wvw.Matches.Overview;
@@ -37,10 +38,10 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         AbilitiesRequest request = new()
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -69,10 +70,10 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         AbilityByIdRequest request = new(abilityId)
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -90,10 +91,10 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         AbilitiesByIdsRequest request = new(abilityIds.ToList())
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -113,11 +114,11 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         AbilitiesByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -137,10 +138,10 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         ObjectivesRequest request = new()
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -169,10 +170,10 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         ObjectiveByIdRequest request = new(objectiveId)
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -190,10 +191,10 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         ObjectivesByIdsRequest request = new(objectiveIds.ToList())
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -213,11 +214,11 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         ObjectivesByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -237,10 +238,10 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         RanksRequest request = new()
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -269,10 +270,10 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         RankByIdRequest request = new(rankId)
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -290,10 +291,10 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         RanksByIdsRequest request = new(rankIds.ToList())
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -313,11 +314,11 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         RanksByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -337,10 +338,10 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         UpgradesRequest request = new()
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -369,10 +370,10 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         UpgradeByIdRequest request = new(upgradeId)
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -390,10 +391,10 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         UpgradesByIdsRequest request = new(upgradeIds.ToList())
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -413,11 +414,11 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         UpgradesByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -435,7 +436,8 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        MatchesRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        MatchesRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -461,7 +463,8 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        MatchByIdRequest request = new(matchId) { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        MatchByIdRequest request = new(matchId);
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -476,10 +479,8 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        MatchesByIdsRequest request = new(matchIds.ToList())
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        MatchesByIdsRequest request = new(matchIds.ToList());
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -496,10 +497,10 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         MatchesByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -515,10 +516,8 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        MatchByWorldIdRequest request = new(worldId)
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        MatchByWorldIdRequest request = new(worldId);
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -535,7 +534,8 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        MatchesOverviewRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        MatchesOverviewRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -561,10 +561,8 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        MatchOverviewByIdRequest request = new(matchId)
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        MatchOverviewByIdRequest request = new(matchId);
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -579,10 +577,8 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        MatchesOverviewByIdsRequest request = new(matchIds.ToList())
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        MatchesOverviewByIdsRequest request = new(matchIds.ToList());
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -599,10 +595,10 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         MatchesOverviewByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -618,10 +614,8 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        MatchOverviewByWorldIdRequest request = new(worldId)
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        MatchOverviewByWorldIdRequest request = new(worldId);
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -638,7 +632,8 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        MatchesScoresRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        MatchesScoresRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -664,10 +659,8 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        MatchScoresByIdRequest request = new(matchId)
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        MatchScoresByIdRequest request = new(matchId);
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -682,10 +675,8 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        MatchesScoresByIdsRequest request = new(matchIds.ToList())
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        MatchesScoresByIdsRequest request = new(matchIds.ToList());
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -702,10 +693,10 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         MatchesScoresByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -721,10 +712,8 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        MatchScoresByWorldIdRequest request = new(worldId)
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        MatchScoresByWorldIdRequest request = new(worldId);
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -741,7 +730,8 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        MatchesStatsRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        MatchesStatsRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -767,10 +757,8 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        MatchStatsByIdRequest request = new(matchId)
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        MatchStatsByIdRequest request = new(matchId);
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -785,10 +773,8 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        MatchesStatsByIdsRequest request = new(matchIds.ToList())
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        MatchesStatsByIdsRequest request = new(matchIds.ToList());
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -805,10 +791,10 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         MatchesStatsByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -824,10 +810,8 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        MatchStatsByWorldIdRequest request = new(worldId)
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        MatchStatsByWorldIdRequest request = new(worldId);
         return request.SendAsync(httpClient, cancellationToken);
     }
 

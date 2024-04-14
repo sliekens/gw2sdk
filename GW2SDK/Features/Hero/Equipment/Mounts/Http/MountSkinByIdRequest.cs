@@ -13,8 +13,7 @@ internal sealed class MountSkinByIdRequest(int mountSkinId) : IHttpRequest<Mount
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(MountSkin Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -38,7 +37,7 @@ internal sealed class MountSkinByIdRequest(int mountSkinId) : IHttpRequest<Mount
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetMountSkin(MissingMemberBehavior);
+        var value = json.RootElement.GetMountSkin();
         return (value, new MessageContext(response));
     }
 }

@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Hero.Emotes.Http;
+using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Emotes;
 
@@ -45,7 +46,8 @@ public sealed class EmotesClient
         CancellationToken cancellationToken = default
     )
     {
-        EmotesRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        EmotesRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -71,7 +73,8 @@ public sealed class EmotesClient
         CancellationToken cancellationToken = default
     )
     {
-        EmoteByIdRequest request = new(emoteId) { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        EmoteByIdRequest request = new(emoteId);
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -86,7 +89,8 @@ public sealed class EmotesClient
         CancellationToken cancellationToken = default
     )
     {
-        EmotesByIdsRequest request = new(emoteIds.ToList()) { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        EmotesByIdsRequest request = new(emoteIds.ToList());
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -103,10 +107,10 @@ public sealed class EmotesClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         EmotesByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }

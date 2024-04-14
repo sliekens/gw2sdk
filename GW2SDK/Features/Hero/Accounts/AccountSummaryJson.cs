@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Accounts;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Accounts;
 internal static class AccountSummaryJson
 {
     public static AccountSummary GetAccountSummary(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -87,7 +86,7 @@ internal static class AccountSummaryJson
             {
                 buildStorageSlots = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -95,27 +94,25 @@ internal static class AccountSummaryJson
 
         return new AccountSummary
         {
-            Id = id.Map(value => value.GetStringRequired()),
-            DisplayName = name.Map(value => value.GetStringRequired()),
-            Age = age.Map(value => TimeSpan.FromSeconds(value.GetDouble())),
-            LastModified = lastModified.Map(value => value.GetDateTimeOffset()),
-            WorldId = world.Map(value => value.GetInt32()),
-            GuildIds = guilds.Map(values => values.GetList(value => value.GetStringRequired())),
+            Id = id.Map(static value => value.GetStringRequired()),
+            DisplayName = name.Map(static value => value.GetStringRequired()),
+            Age = age.Map(static value => TimeSpan.FromSeconds(value.GetDouble())),
+            LastModified = lastModified.Map(static value => value.GetDateTimeOffset()),
+            WorldId = world.Map(static value => value.GetInt32()),
+            GuildIds = guilds.Map(static values => values.GetList(static value => value.GetStringRequired())),
             LeaderOfGuildIds =
-                guildLeader.Map(values => values.GetList(value => value.GetStringRequired())),
-            Created = created.Map(value => value.GetDateTimeOffset()),
+                guildLeader.Map(static values => values.GetList(static value => value.GetStringRequired())),
+            Created = created.Map(static value => value.GetDateTimeOffset()),
             Access =
-                access.Map(
-                    values => values.GetList(
-                        value => value.GetEnum<ProductName>()
+                access.Map(static values => values.GetList(static value => value.GetEnum<ProductName>()
                     )
                 ),
-            Commander = commander.Map(value => value.GetBoolean()),
-            FractalLevel = fractalLevel.Map(value => value.GetInt32()),
-            DailyAchievementPoints = dailyAp.Map(value => value.GetInt32()),
-            MonthlyAchievementPoints = monthlyAp.Map(value => value.GetInt32()),
-            WvwRank = wvwRank.Map(value => value.GetInt32()),
-            BuildStorageSlots = buildStorageSlots.Map(value => value.GetInt32())
+            Commander = commander.Map(static value => value.GetBoolean()),
+            FractalLevel = fractalLevel.Map(static value => value.GetInt32()),
+            DailyAchievementPoints = dailyAp.Map(static value => value.GetInt32()),
+            MonthlyAchievementPoints = monthlyAp.Map(static value => value.GetInt32()),
+            WvwRank = wvwRank.Map(static value => value.GetInt32()),
+            BuildStorageSlots = buildStorageSlots.Map(static value => value.GetInt32())
         };
     }
 }

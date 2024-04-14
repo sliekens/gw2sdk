@@ -1,13 +1,13 @@
 ﻿using System.Drawing;
 using System.Text.Json;
+using GuildWars2.Json;
 
 namespace GuildWars2.Exploration;
 
 internal static class RectangleJson
 {
     public static Rectangle GetMapRectangle(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         JsonElement southWest = default;
@@ -23,7 +23,7 @@ internal static class RectangleJson
             {
                 northEast = entry;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(
                     Strings.UnexpectedArrayLength(json.GetArrayLength())
@@ -31,8 +31,8 @@ internal static class RectangleJson
             }
         }
 
-        var sw = southWest.GetCoordinate(missingMemberBehavior);
-        var ne = northEast.GetCoordinate(missingMemberBehavior);
+        var sw = southWest.GetCoordinate();
+        var ne = northEast.GetCoordinate();
 
         return new Rectangle(
             sw.X, // The x-coordinate of the upper-left corner of the rectangle
@@ -43,8 +43,7 @@ internal static class RectangleJson
     }
 
     public static Rectangle GetContinentRectangle(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         JsonElement northWest = default;
@@ -60,7 +59,7 @@ internal static class RectangleJson
             {
                 southEast = entry;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(
                     Strings.UnexpectedArrayLength(json.GetArrayLength())
@@ -68,8 +67,8 @@ internal static class RectangleJson
             }
         }
 
-        var nw = northWest.GetCoordinate(missingMemberBehavior);
-        var se = southEast.GetCoordinate(missingMemberBehavior);
+        var nw = northWest.GetCoordinate();
+        var se = southEast.GetCoordinate();
 
         return new Rectangle(
             nw.X, // The x-coordinate of the upper-left corner of the rectangle

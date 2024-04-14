@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Hero.Equipment.Dyes;
 using GuildWars2.Json;
 
@@ -7,8 +7,7 @@ namespace GuildWars2.Hero.Equipment.Templates;
 internal static class EquipmentItemJson
 {
     public static EquipmentItem GetEquipmentItem(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -74,14 +73,14 @@ internal static class EquipmentItemJson
             {
                 dyes = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
         }
 
         int? suffixItemId = null, secondarySuffixItemId = null;
-        if (upgrades.Map(values => values.GetList(value => value.GetInt32())) is { } ids)
+        if (upgrades.Map(static values => values.GetList(static value => value.GetInt32())) is { } ids)
         {
             for (var i = 0; i < ids.Count; i++)
             {
@@ -104,28 +103,25 @@ internal static class EquipmentItemJson
 
         return new EquipmentItem
         {
-            Id = id.Map(value => value.GetInt32()),
-            Count = count.Map(value => value.GetInt32()),
-            Slot = slot.Map(value => value.GetEnum<EquipmentSlot>()),
+            Id = id.Map(static value => value.GetInt32()),
+            Count = count.Map(static value => value.GetInt32()),
+            Slot = slot.Map(static value => value.GetEnum<EquipmentSlot>()),
             SuffixItemId = suffixItemId,
             SecondarySuffixItemId = secondarySuffixItemId,
             InfusionItemIds =
-                infusions.Map(values => values.GetList(value => value.GetInt32()))
+                infusions.Map(static values => values.GetList(static value => value.GetInt32()))
                 ?? Empty.ListOfInt32,
-            SkinId = skin.Map(value => value.GetInt32()),
+            SkinId = skin.Map(static value => value.GetInt32()),
             Stats =
-                stats.Map(value => value.GetSelectedAttributeCombination(missingMemberBehavior)),
-            Binding = binding.Map(value => value.GetEnum<ItemBinding>()),
-            BoundTo = boundTo.Map(value => value.GetString()) ?? "",
-            Location = location.Map(
-                value => value.GetEnum<EquipmentLocation>()
+                stats.Map(static value => value.GetSelectedAttributeCombination()),
+            Binding = binding.Map(static value => value.GetEnum<ItemBinding>()),
+            BoundTo = boundTo.Map(static value => value.GetString()) ?? "",
+            Location = location.Map(static value => value.GetEnum<EquipmentLocation>()
             ),
             TemplateNumbers =
-                tabs.Map(values => values.GetList(value => value.GetInt32())) ?? Empty.ListOfInt32,
+                tabs.Map(static values => values.GetList(static value => value.GetInt32())) ?? Empty.ListOfInt32,
             DyeColorIds =
-                dyes.Map(
-                    values => values.GetList(
-                        value => value.GetNullableInt32() ?? DyeColor.DyeRemoverId
+                dyes.Map(static values => values.GetList(static value => value.GetNullableInt32() ?? DyeColor.DyeRemoverId
                     )
                 )
                 ?? Empty.ListOfInt32

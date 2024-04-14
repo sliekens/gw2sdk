@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.StoryJournal.BackgroundStories;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.StoryJournal.BackgroundStories;
 internal static class BackgroundStoryAnswerJson
 {
     public static BackgroundStoryAnswer GetBackgroundStoryAnswer(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -47,7 +46,7 @@ internal static class BackgroundStoryAnswerJson
             {
                 races = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -55,22 +54,18 @@ internal static class BackgroundStoryAnswerJson
 
         return new BackgroundStoryAnswer
         {
-            Id = id.Map(value => value.GetStringRequired()),
-            Title = title.Map(value => value.GetStringRequired()),
-            Description = description.Map(value => value.GetStringRequired()),
-            Journal = journal.Map(value => value.GetStringRequired()),
-            QuestionId = question.Map(value => value.GetInt32()),
+            Id = id.Map(static value => value.GetStringRequired()),
+            Title = title.Map(static value => value.GetStringRequired()),
+            Description = description.Map(static value => value.GetStringRequired()),
+            Journal = journal.Map(static value => value.GetStringRequired()),
+            QuestionId = question.Map(static value => value.GetInt32()),
             Professions =
-                professions.Map(
-                    values =>
-                        values.GetList(
-                            value => value.GetEnum<ProfessionName>()
+                professions.Map(static values =>
+                        values.GetList(static value => value.GetEnum<ProfessionName>()
                         )
                 )
                 ?? GetValues<ProfessionName>(),
-            Races = races.Map(
-                    values => values.GetList(
-                        value => value.GetEnum<RaceName>()
+            Races = races.Map(static values => values.GetList(static value => value.GetEnum<RaceName>()
                     )
                 )
                 ?? GetValues<RaceName>()

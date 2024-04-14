@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Exploration.Regions;
 using GuildWars2.Json;
 
@@ -6,7 +6,7 @@ namespace GuildWars2.Exploration.Floors;
 
 internal static class FloorJson
 {
-    public static Floor GetFloor(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Floor GetFloor(this JsonElement json)
     {
         RequiredMember textureDimensions = "texture_dims";
         OptionalMember clampedView = "clamped_view";
@@ -31,7 +31,7 @@ internal static class FloorJson
             {
                 id = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -39,13 +39,12 @@ internal static class FloorJson
 
         return new Floor
         {
-            Id = id.Map(value => value.GetInt32()),
+            Id = id.Map(static value => value.GetInt32()),
             TextureDimensions =
-                textureDimensions.Map(value => value.GetDimensions(missingMemberBehavior)),
+                textureDimensions.Map(static value => value.GetDimensions()),
             ClampedView =
-                clampedView.Map(value => value.GetContinentRectangle(missingMemberBehavior)),
-            Regions = regions.Map(
-                value => value.GetMap(entry => entry.GetRegion(missingMemberBehavior))
+                clampedView.Map(static value => value.GetContinentRectangle()),
+            Regions = regions.Map(static value => value.GetMap(static entry => entry.GetRegion())
                     .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
             )
         };

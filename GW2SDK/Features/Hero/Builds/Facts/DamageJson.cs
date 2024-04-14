@@ -7,7 +7,6 @@ internal static class DamageJson
 {
     public static Damage GetDamage(
         this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior,
         out int? requiresTrait,
         out int? overrides
     )
@@ -55,7 +54,7 @@ internal static class DamageJson
             {
                 damageMultiplier = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -63,10 +62,10 @@ internal static class DamageJson
 
         return new Damage
         {
-            Text = text.Map(value => value.GetStringRequired()),
-            IconHref = icon.Map(value => value.GetStringRequired()),
-            HitCount = hitCount.Map(value => value.GetInt32()),
-            DamageMultiplier = damageMultiplier.Map(value => value.GetDouble())
+            Text = text.Map(static value => value.GetStringRequired()),
+            IconHref = icon.Map(static value => value.GetStringRequired()),
+            HitCount = hitCount.Map(static value => value.GetInt32()),
+            DamageMultiplier = damageMultiplier.Map(static value => value.GetDouble())
         };
     }
 }

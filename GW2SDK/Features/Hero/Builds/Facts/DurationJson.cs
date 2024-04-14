@@ -7,7 +7,6 @@ internal static class DurationJson
 {
     public static Duration GetDuration(
         this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior,
         out int? requiresTrait,
         out int? overrides
     )
@@ -50,7 +49,7 @@ internal static class DurationJson
             {
                 duration = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -58,9 +57,9 @@ internal static class DurationJson
 
         return new Duration
         {
-            Text = text.Map(value => value.GetStringRequired()),
-            IconHref = icon.Map(value => value.GetStringRequired()),
-            Length = duration.Map(value => TimeSpan.FromSeconds(value.GetDouble()))
+            Text = text.Map(static value => value.GetStringRequired()),
+            IconHref = icon.Map(static value => value.GetStringRequired()),
+            Length = duration.Map(static value => TimeSpan.FromSeconds(value.GetDouble()))
         };
     }
 }

@@ -13,8 +13,7 @@ internal sealed class ItemByIdRequest(int itemId) : IHttpRequest<Item>
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(Item Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -38,7 +37,7 @@ internal sealed class ItemByIdRequest(int itemId) : IHttpRequest<Item>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetItem(MissingMemberBehavior);
+        var value = json.RootElement.GetItem();
         return (value, new MessageContext(response));
     }
 }

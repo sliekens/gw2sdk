@@ -32,7 +32,7 @@ internal sealed class GuildsByNameRequest(string name) : IHttpRequest<HashSet<st
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetStringRequired());
+        var value = json.RootElement.GetSet(static entry => entry.GetStringRequired());
         return (value, new MessageContext(response));
     }
 }

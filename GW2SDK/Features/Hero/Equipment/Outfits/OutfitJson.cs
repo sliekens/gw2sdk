@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Outfits;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Equipment.Outfits;
 internal static class OutfitJson
 {
     public static Outfit GetOutfit(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -33,7 +32,7 @@ internal static class OutfitJson
             {
                 unlockItems = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -41,10 +40,10 @@ internal static class OutfitJson
 
         return new Outfit
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
-            IconHref = icon.Map(value => value.GetStringRequired()),
-            UnlockItemIds = unlockItems.Map(values => values.GetList(value => value.GetInt32()))
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            IconHref = icon.Map(static value => value.GetStringRequired()),
+            UnlockItemIds = unlockItems.Map(static values => values.GetList(static value => value.GetInt32()))
         };
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Achievements.Bits;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Achievements.Bits;
 internal static class AchievementTextBitJson
 {
     public static AchievementTextBit GetAchievementTextBit(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember text = "text";
@@ -26,12 +25,12 @@ internal static class AchievementTextBitJson
             {
                 text = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
         }
 
-        return new AchievementTextBit { Text = text.Map(value => value.GetStringRequired()) };
+        return new AchievementTextBit { Text = text.Map(static value => value.GetStringRequired()) };
     }
 }

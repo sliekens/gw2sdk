@@ -13,8 +13,7 @@ internal sealed class StandingsRequest : IHttpRequest<HashSet<Standing>>
 
     public required string? AccessToken { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<Standing> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -31,7 +30,7 @@ internal sealed class StandingsRequest : IHttpRequest<HashSet<Standing>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetStanding(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(static entry => entry.GetStanding());
         return (value, new MessageContext(response));
     }
 }

@@ -9,8 +9,7 @@ internal sealed class EmblemBackgroundsRequest : IHttpRequest<HashSet<EmblemBack
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/emblem/backgrounds") { AcceptEncoding = "gzip" };
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<EmblemBackground> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -34,7 +33,7 @@ internal sealed class EmblemBackgroundsRequest : IHttpRequest<HashSet<EmblemBack
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
         var value =
-            json.RootElement.GetSet(entry => entry.GetEmblemBackground(MissingMemberBehavior));
+            json.RootElement.GetSet(static entry => entry.GetEmblemBackground());
         return (value, new MessageContext(response));
     }
 }

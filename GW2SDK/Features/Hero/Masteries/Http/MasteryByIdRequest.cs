@@ -13,8 +13,7 @@ internal sealed class MasteryByIdRequest(int masteryId) : IHttpRequest<MasteryTr
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(MasteryTrack Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -38,7 +37,7 @@ internal sealed class MasteryByIdRequest(int masteryId) : IHttpRequest<MasteryTr
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetMasteryTrack(MissingMemberBehavior);
+        var value = json.RootElement.GetMasteryTrack();
         return (value, new MessageContext(response));
     }
 }

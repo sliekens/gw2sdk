@@ -27,7 +27,7 @@ internal readonly ref struct OptionalMember
     public bool Match(JsonProperty property) =>
         member.Value.ValueKind == Undefined && property.NameEquals(name);
 
-    public TValue? Map<TValue>(Func<JsonElement, TValue> resultSelector)
+    public TValue? Map<TValue>(Func<JsonElement, TValue> transform)
     {
         if (member.Value.ValueKind == Undefined || member.Value.ValueKind == Null)
         {
@@ -36,7 +36,7 @@ internal readonly ref struct OptionalMember
 
         try
         {
-            return resultSelector(member.Value);
+            return transform(member.Value);
         }
         catch (Exception reason)
         {

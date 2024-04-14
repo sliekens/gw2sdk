@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Pve.Dungeons;
@@ -6,8 +6,7 @@ namespace GuildWars2.Pve.Dungeons;
 internal static class DungeonJson
 {
     public static Dungeon GetDungeon(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -23,7 +22,7 @@ internal static class DungeonJson
             {
                 paths = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -31,9 +30,8 @@ internal static class DungeonJson
 
         return new Dungeon
         {
-            Id = id.Map(value => value.GetStringRequired()),
-            Paths = paths.Map(
-                values => values.GetList(value => value.GetDungeonPath(missingMemberBehavior))
+            Id = id.Map(static value => value.GetStringRequired()),
+            Paths = paths.Map(static values => values.GetList(static value => value.GetDungeonPath())
             )
         };
     }

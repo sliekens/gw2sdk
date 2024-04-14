@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Achievements;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.Achievements;
 internal static class AccountAchievementJson
 {
     public static AccountAchievement GetAccountAchievement(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -48,7 +47,7 @@ internal static class AccountAchievementJson
             {
                 unlocked = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -56,13 +55,13 @@ internal static class AccountAchievementJson
 
         return new AccountAchievement
         {
-            Id = id.Map(value => value.GetInt32()),
-            Current = current.Map(value => value.GetInt32()),
-            Max = max.Map(value => value.GetInt32()),
-            Done = done.Map(value => value.GetBoolean()),
-            Bits = bits.Map(values => values.GetList(value => value.GetInt32())),
-            Repeated = repeated.Map(value => value.GetInt32()).GetValueOrDefault(),
-            Unlocked = unlocked.Map(value => value.GetBoolean()).GetValueOrDefault(true)
+            Id = id.Map(static value => value.GetInt32()),
+            Current = current.Map(static value => value.GetInt32()),
+            Max = max.Map(static value => value.GetInt32()),
+            Done = done.Map(static value => value.GetBoolean()),
+            Bits = bits.Map(static values => values.GetList(static value => value.GetInt32())),
+            Repeated = repeated.Map(static value => value.GetInt32()).GetValueOrDefault(),
+            Unlocked = unlocked.Map(static value => value.GetBoolean()).GetValueOrDefault(true)
         };
     }
 }

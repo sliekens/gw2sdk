@@ -9,8 +9,7 @@ internal sealed class EmoteByIdRequest(string emoteId) : IHttpRequest<Emote>
 
     public string EmoteId { get; } = emoteId;
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(Emote Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -33,7 +32,7 @@ internal sealed class EmoteByIdRequest(string emoteId) : IHttpRequest<Emote>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetEmote(MissingMemberBehavior);
+        var value = json.RootElement.GetEmote();
         return (value, new MessageContext(response));
     }
 }

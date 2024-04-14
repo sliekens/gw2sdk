@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Builds.Facts;
@@ -7,7 +7,6 @@ internal static class BuffJson
 {
     public static Buff GetBuff(
         this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior,
         out int? requiresTrait,
         out int? overrides
     )
@@ -65,7 +64,7 @@ internal static class BuffJson
             {
                 applyCount = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -73,12 +72,12 @@ internal static class BuffJson
 
         return new Buff
         {
-            Text = text.Map(value => value.GetStringRequired()),
-            IconHref = icon.Map(value => value.GetStringRequired()),
-            Duration = duration.Map(value => TimeSpan.FromSeconds(value.GetDouble())),
-            Status = status.Map(value => value.GetString()) ?? "",
-            Description = description.Map(value => value.GetString()) ?? "",
-            ApplyCount = applyCount.Map(value => value.GetInt32())
+            Text = text.Map(static value => value.GetStringRequired()),
+            IconHref = icon.Map(static value => value.GetStringRequired()),
+            Duration = duration.Map(static value => TimeSpan.FromSeconds(value.GetDouble())),
+            Status = status.Map(static value => value.GetString()) ?? "",
+            Description = description.Map(static value => value.GetString()) ?? "",
+            ApplyCount = applyCount.Map(static value => value.GetInt32())
         };
     }
 }

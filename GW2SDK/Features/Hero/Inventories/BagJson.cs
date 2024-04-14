@@ -1,11 +1,11 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Inventories;
 
 internal static class BagJson
 {
-    public static Bag? GetBag(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Bag? GetBag(this JsonElement json)
     {
         // Empty slots are represented as null -- but maybe we should use a Null Object pattern here
         if (json.ValueKind == JsonValueKind.Null)
@@ -30,7 +30,7 @@ internal static class BagJson
             {
                 inventory = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -38,9 +38,9 @@ internal static class BagJson
 
         return new Bag
         {
-            Id = id.Map(value => value.GetInt32()),
-            Size = size.Map(value => value.GetInt32()),
-            Inventory = inventory.Map(value => value.GetInventory(missingMemberBehavior))
+            Id = id.Map(static value => value.GetInt32()),
+            Size = size.Map(static value => value.GetInt32()),
+            Inventory = inventory.Map(static value => value.GetInventory())
         };
     }
 }

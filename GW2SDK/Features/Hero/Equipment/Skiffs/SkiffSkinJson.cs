@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Equipment.Skiffs;
 
 internal static class SkiffSkinJson
 {
-    public static SkiffSkin GetSkiffSkin(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static SkiffSkin GetSkiffSkin(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -30,7 +30,7 @@ internal static class SkiffSkinJson
             {
                 dyeSlots = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -38,12 +38,10 @@ internal static class SkiffSkinJson
 
         return new SkiffSkin
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
-            IconHref = icon.Map(value => value.GetStringRequired()),
-            DyeSlots = dyeSlots.Map(
-                value => value.GetList(item => item.GetDyeSlot(missingMemberBehavior))
-            )
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            IconHref = icon.Map(static value => value.GetStringRequired()),
+            DyeSlots = dyeSlots.Map(static value => value.GetList(static value => value.GetDyeSlot()))
         };
     }
 }

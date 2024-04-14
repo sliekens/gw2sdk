@@ -10,8 +10,7 @@ internal sealed class GoldToGemsRequest(int coinsCount) : IHttpRequest<GoldToGem
 
     public int CoinsCount { get; } = coinsCount;
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(GoldToGems Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -34,7 +33,7 @@ internal sealed class GoldToGemsRequest(int coinsCount) : IHttpRequest<GoldToGem
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetGoldToGems(MissingMemberBehavior);
+        var value = json.RootElement.GetGoldToGems();
         return (value, new MessageContext(response));
     }
 }

@@ -14,8 +14,7 @@ internal sealed class MiniaturesByPageRequest(int pageIndex) : IHttpRequest<Hash
 
     public Language? Language { get; init; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<Miniature> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -42,7 +41,7 @@ internal sealed class MiniaturesByPageRequest(int pageIndex) : IHttpRequest<Hash
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetMiniature(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(static entry => entry.GetMiniature());
         return (value, new MessageContext(response));
     }
 }

@@ -16,8 +16,7 @@ internal sealed class RaidsByIdsRequest : IHttpRequest<HashSet<Raid>>
 
     public IReadOnlyCollection<string> RaidIds { get; }
 
-    public required MissingMemberBehavior MissingMemberBehavior { get; init; }
-
+    
     public async Task<(HashSet<Raid> Value, MessageContext Context)> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
@@ -40,7 +39,7 @@ internal sealed class RaidsByIdsRequest : IHttpRequest<HashSet<Raid>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetRaid(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(static entry => entry.GetRaid());
         return (value, new MessageContext(response));
     }
 }

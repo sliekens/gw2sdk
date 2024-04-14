@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.StoryJournal.Stories;
@@ -6,8 +6,7 @@ namespace GuildWars2.Hero.StoryJournal.Stories;
 internal static class StoryStepJson
 {
     public static StoryStep GetStoryStep(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
+        this JsonElement json
     )
     {
         RequiredMember name = "name";
@@ -38,7 +37,7 @@ internal static class StoryStepJson
             {
                 id = member;
             }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
@@ -46,12 +45,11 @@ internal static class StoryStepJson
 
         return new StoryStep
         {
-            Id = id.Map(value => value.GetInt32()),
-            Name = name.Map(value => value.GetStringRequired()),
-            Level = level.Map(value => value.GetInt32()),
-            StoryId = story.Map(value => value.GetInt32()),
-            Objectives = goals.Map(
-                values => values.GetList(value => value.GetObjective(missingMemberBehavior))
+            Id = id.Map(static value => value.GetInt32()),
+            Name = name.Map(static value => value.GetStringRequired()),
+            Level = level.Map(static value => value.GetInt32()),
+            StoryId = story.Map(static value => value.GetInt32()),
+            Objectives = goals.Map(static values => values.GetList(static value => value.GetObjective())
             )
         };
     }

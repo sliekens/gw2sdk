@@ -24,7 +24,7 @@ internal sealed class ProfessionNamesRequest : IHttpRequest<HashSet<Extensible<P
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        var value = json.RootElement.GetSet(entry => entry.GetEnum<ProfessionName>());
+        var value = json.RootElement.GetSet(static entry => entry.GetEnum<ProfessionName>());
         return (value, new MessageContext(response));
     }
 }

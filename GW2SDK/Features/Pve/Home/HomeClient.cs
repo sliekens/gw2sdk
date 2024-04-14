@@ -1,4 +1,5 @@
-﻿using GuildWars2.Pve.Home.Cats;
+﻿using GuildWars2.Json;
+using GuildWars2.Pve.Home.Cats;
 using GuildWars2.Pve.Home.Cats.Http;
 using GuildWars2.Pve.Home.Nodes;
 using GuildWars2.Pve.Home.Nodes.Http;
@@ -66,7 +67,8 @@ public sealed class HomeClient
         CancellationToken cancellationToken = default
     )
     {
-        CatsRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        CatsRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -92,7 +94,8 @@ public sealed class HomeClient
         CancellationToken cancellationToken = default
     )
     {
-        CatByIdRequest request = new(catId) { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        CatByIdRequest request = new(catId);
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -107,7 +110,8 @@ public sealed class HomeClient
         CancellationToken cancellationToken = default
     )
     {
-        CatsByIdsRequest request = new(catIds.ToList()) { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        CatsByIdsRequest request = new(catIds.ToList());
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -124,10 +128,10 @@ public sealed class HomeClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         CatsByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
@@ -145,7 +149,8 @@ public sealed class HomeClient
         CancellationToken cancellationToken = default
     )
     {
-        NodesRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        NodesRequest request = new();
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -171,7 +176,8 @@ public sealed class HomeClient
         CancellationToken cancellationToken = default
     )
     {
-        NodeByIdRequest request = new(nodeId) { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        NodeByIdRequest request = new(nodeId);
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -186,7 +192,8 @@ public sealed class HomeClient
         CancellationToken cancellationToken = default
     )
     {
-        NodesByIdsRequest request = new(nodeIds.ToList()) { MissingMemberBehavior = missingMemberBehavior };
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+        NodesByIdsRequest request = new(nodeIds.ToList());
         return request.SendAsync(httpClient, cancellationToken);
     }
 
@@ -203,10 +210,10 @@ public sealed class HomeClient
         CancellationToken cancellationToken = default
     )
     {
+        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
         NodesByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
-            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(httpClient, cancellationToken);
     }
