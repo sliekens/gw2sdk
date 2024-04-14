@@ -32,7 +32,6 @@ public class JsonRecipeService(HttpClient http)
         return BulkQuery.QueryAsync(
             ids,
             GetChunk,
-            100,
             progress: progress,
             cancellationToken: cancellationToken
         );

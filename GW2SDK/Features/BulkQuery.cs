@@ -34,7 +34,7 @@ public static class BulkQuery
     /// <exception cref="ArgumentOutOfRangeException">Thrown when <paramref name="chunkSize" /> is less than 1 or greater than
     /// 200, or when <paramref name="degreeOfParallelism" /> is less than 1.</exception>
     public static async IAsyncEnumerable<TValue> QueryAsync<TKey, TValue>(
-        IReadOnlyCollection<TKey> keys,
+        IEnumerable<TKey> keys,
         BulkRequest<TKey, TValue> bulkRequest,
         int degreeOfParallelism = DefaultDegreeOfParallelism,
         int chunkSize = DefaultChunkSize,
@@ -42,7 +42,8 @@ public static class BulkQuery
         [EnumeratorCancellation] CancellationToken cancellationToken = default
     )
     {
-        if (keys.Count == 0)
+        var keysList = keys.ToList();
+        if (keysList.Count == 0)
         {
             throw new ArgumentException("The keys collection cannot be empty.", nameof(keys));
         }
@@ -66,14 +67,14 @@ public static class BulkQuery
         }
 
         var resultCount = 0;
-        var resultTotal = keys.Count;
+        var resultTotal = keysList.Count;
 
         progress?.Report(new BulkProgress(resultTotal, resultCount));
 
         // PERF: no need to create chunks if keys do not exceed the chunk size
-        if (keys.Count <= chunkSize)
+        if (keysList.Count <= chunkSize)
         {
-            var result = await bulkRequest(keys, cancellationToken).ConfigureAwait(false);
+            var result = await bulkRequest(keysList, cancellationToken).ConfigureAwait(false);
             foreach (var value in result)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -84,30 +85,32 @@ public static class BulkQuery
             yield break;
         }
 
-        // Split the index into smaller chunks to avoid hitting the 200 item limit
-        var chunks = Chunk(keys.ToList(), chunkSize);
-
-        // Proceed with the queries in parallel, but limit the number of concurrent queries
         using SemaphoreSlim limiter = new(degreeOfParallelism);
-        await foreach (var result in chunks.Select(
+        var chunks = Chunk(keysList, chunkSize);
+        var tasks = chunks.Select(
                 async chunk =>
                 {
                     await limiter.WaitAsync(cancellationToken).ConfigureAwait(false);
-                    return await bulkRequest(chunk, cancellationToken).ConfigureAwait(false);
+                    try
+                    {
+                        return await bulkRequest(chunk, cancellationToken).ConfigureAwait(false);
+                    }
+                    finally
+                    {
+                        limiter.Release();
+                    }
                 }
             )
-            .ToList()
-            .OrderByCompletion()
-            .WithCancellation(cancellationToken))
+            .ToList();
+        foreach (var bucket in tasks.Interleave())
         {
-            foreach (var record in result)
+            var task = await bucket.ConfigureAwait(false);
+            foreach (var value in task.Result)
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                yield return record;
                 progress?.Report(new BulkProgress(resultTotal, ++resultCount));
+                yield return value;
             }
-
-            limiter.Release();
         }
 
         static IEnumerable<List<TKey>> Chunk(List<TKey> index, int size)

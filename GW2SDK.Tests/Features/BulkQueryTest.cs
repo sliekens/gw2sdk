@@ -78,7 +78,7 @@ public class BulkQueryTest
     public async Task Small_queries_are_not_chunked()
     {
         // Simulate 100 records
-        var index = Enumerable.Range(1, 100).ToHashSet();
+        var index = Enumerable.Range(1, 100).ToList();
 
         Task<IReadOnlyCollection<StubRecord>> GetChunk(
             IReadOnlyCollection<int> chunk,
@@ -86,7 +86,7 @@ public class BulkQueryTest
         )
         {
             cancellationToken.ThrowIfCancellationRequested();
-            Assert.Same(index, chunk);
+            Assert.Equal(index, chunk);
             IReadOnlyCollection<StubRecord>
                 result = chunk.Select(id => new StubRecord(id)).ToList();
             return Task.FromResult(result);
