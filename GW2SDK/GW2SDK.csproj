@@ -81,11 +81,7 @@
   <ItemGroup>
     <InternalsVisibleTo Include="$(AssemblyName).Tests" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Features\Pvp\Amulets\Http\" />
-  </ItemGroup>
-
+  
   <Target Name="LinkPackageReleaseNotes" AfterTargets="MinVer">
     <PropertyGroup>
       <PackageReleaseNotes>https://github.com/sliekens/gw2sdk/releases/tag/$(MinVerTagPrefix)$(Version)</PackageReleaseNotes>
