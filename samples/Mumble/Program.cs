@@ -123,6 +123,7 @@ gameLink.Subscribe(
     err =>
     {
         logger.LogError(err, "Something went wrong.");
+        app.StopAsync();
     },
 
     // OnComplete callback runs when you unsubscribe or when the GameLink is being disposed
@@ -133,7 +134,13 @@ gameLink.Subscribe(
     stoppingToken
 );
 
-await app.RunAsync(stoppingToken);
+try
+{
+    await app.RunAsync(stoppingToken);
+}
+catch (OperationCanceledException)
+{
+}
 
 IHost CreateApplication()
 {
