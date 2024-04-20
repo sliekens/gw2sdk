@@ -50,13 +50,17 @@ gameLink.Subscribe(
             return;
         }
 
-        var specialization = "no specialization";
-        if (specializations.TryGetValue(identity.SpecializationId, out var found))
+        var currentSpecialization = "no specialization";
+        if (specializations.TryGetValue(identity.SpecializationId, out var specialization))
         {
-            specialization = found.Name;
+            currentSpecialization = specialization.Name;
         }
 
-        var map = maps[identity.MapId];
+        var currentMap = "an unknown map";
+        if (maps.TryGetValue(identity.MapId, out var map))
+        {
+            currentMap = map.Name;
+        }
 
         var title = $"the {identity.Race} {identity.Profession}";
         if (!tick.Context.UiState.HasFlag(UiState.GameHasFocus))
@@ -66,7 +70,7 @@ gameLink.Subscribe(
                 tick.UiTick,
                 identity.Name,
                 title,
-                specialization
+                currentSpecialization
             );
         }
         else if (tick.Context.UiState.HasFlag(UiState.TextboxHasFocus))
@@ -76,7 +80,7 @@ gameLink.Subscribe(
                 tick.UiTick,
                 identity.Name,
                 title,
-                specialization
+                currentSpecialization
             );
         }
         else if (tick.Context.UiState.HasFlag(UiState.IsMapOpen))
@@ -86,7 +90,7 @@ gameLink.Subscribe(
                 tick.UiTick,
                 identity.Name,
                 title,
-                specialization
+                currentSpecialization
             );
         }
         else if (tick.Context.UiState.HasFlag(UiState.IsInCombat))
@@ -96,7 +100,7 @@ gameLink.Subscribe(
                 tick.UiTick,
                 identity.Name,
                 title,
-                specialization
+                currentSpecialization
             );
         }
         else
@@ -107,9 +111,9 @@ gameLink.Subscribe(
                 tick.UiTick,
                 identity.Name,
                 title,
-                specialization,
+                currentSpecialization,
                 transport,
-                map.Name,
+                currentMap,
                 tick.Context.MapType.ToString(),
                 tick.AvatarPosition.X,
                 tick.AvatarPosition.Z,
