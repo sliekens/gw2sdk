@@ -4,23 +4,13 @@ namespace GuildWars2.Http;
 
 internal sealed record HttpRequestMessageTemplate(HttpMethod Method, string Path)
 {
-    private readonly QueryBuilder queryBuilder = QueryBuilder.Empty;
-
     public string? AcceptEncoding { get; init; }
 
     public string? AcceptLanguage { get; init; }
 
     public string? BearerToken { get; init; }
 
-    public QueryBuilder Arguments
-    {
-        get => queryBuilder;
-        init
-        {
-            queryBuilder = value;
-            queryBuilder.Freeze();
-        }
-    }
+    public QueryBuilder? Arguments { get; init; }
 
     public HttpRequestMessage Compile()
     {

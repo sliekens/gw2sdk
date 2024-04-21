@@ -16,30 +16,6 @@ public class QueryBuilderTest
     }
 
     [Fact]
-    public void A_frozen_builder_is_immutable()
-    {
-        var sut = new QueryBuilder();
-
-        sut.Freeze();
-
-        Assert.ThrowsAny<InvalidOperationException>(() => sut.Add("key", "value"));
-    }
-
-    [Fact]
-    public void A_cloned_builder_is_mutable()
-    {
-        var immutable = new QueryBuilder();
-
-        immutable.Freeze();
-
-        var sut = immutable.Clone();
-
-        sut.Add("key", "value");
-
-        Assert.Equal("?key=value", sut.Build());
-    }
-
-    [Fact]
     public void Value_type_can_be_string()
     {
         var sut = new QueryBuilder { { "key", "value" } };
