@@ -11,9 +11,6 @@ public sealed class QueryBuilder : IEnumerable
 {
     private readonly List<Argument> arguments = [];
 
-    /// <summary>Gets the number of arguments in the <see cref="QueryBuilder" />.</summary>
-    public int Count => arguments.Count;
-
     IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)arguments).GetEnumerator();
 
     /// <summary>Adds an argument with the specified key and value to the <see cref="QueryBuilder" />.</summary>

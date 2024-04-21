@@ -11,7 +11,6 @@ public class QueryBuilderTest
 
         var actual = sut.Build();
 
-        Assert.Equal(0, sut.Count);
         Assert.Equal("", actual);
     }
 
@@ -47,7 +46,6 @@ public class QueryBuilderTest
 
         var actual = sut.Build();
 
-        Assert.Equal(3, sut.Count);
         Assert.Equal("?key1=first&key2=second&key3=third", actual);
     }
 
