@@ -4,7 +4,8 @@ using Argument = System.Collections.Generic.KeyValuePair<string, string>;
 
 namespace GuildWars2.Http;
 
-/// <summary>Used to build a query string, e.g. <c><![CDATA[ids=1,2,3&lang=fr&v=latest]]></c>. Not meant to be used directly.</summary>
+/// <summary>Used to build a query string, e.g. <c><![CDATA[ids=1,2,3&lang=fr&v=latest]]></c>. Not meant to be used
+/// directly.</summary>
 [PublicAPI]
 public sealed class QueryBuilder : IEnumerable
 {
@@ -17,38 +18,27 @@ public sealed class QueryBuilder : IEnumerable
     /// <returns>An enumerator that can be used to iterate through the <see cref="QueryBuilder" /> arguments.</returns>
     public IEnumerator GetEnumerator() => ((IEnumerable)arguments).GetEnumerator();
 
+    /// <summary>Adds an argument with the specified key and value to the <see cref="QueryBuilder" />.</summary>
+    /// <param name="key">The key of the argument.</param>
+    /// <param name="value">The value of the argument.</param>
+    public void Add(string key, int value) => arguments.Add(new Argument(key, ToString(value)));
 
     /// <summary>Adds an argument with the specified key and value to the <see cref="QueryBuilder" />.</summary>
     /// <param name="key">The key of the argument.</param>
     /// <param name="value">The value of the argument.</param>
-    public void Add(string key, int value)
-    {
-        arguments.Add(new Argument(key, ToString(value)));
-    }
-
-    /// <summary>Adds an argument with the specified key and value to the <see cref="QueryBuilder" />.</summary>
-    /// <param name="key">The key of the argument.</param>
-    /// <param name="value">The value of the argument.</param>
-    public void Add(string key, string value)
-    {
-        arguments.Add(new Argument(key, value));
-    }
+    public void Add(string key, string value) => arguments.Add(new Argument(key, value));
 
     /// <summary>Adds an argument with the specified key and values to the <see cref="QueryBuilder" />.</summary>
     /// <param name="key">The key of the argument.</param>
     /// <param name="values">The values of the argument.</param>
-    public void Add(string key, IEnumerable<string> values)
-    {
+    public void Add(string key, IEnumerable<string> values) =>
         arguments.Add(new Argument(key, values.Select(value => value).ToCsv()));
-    }
 
     /// <summary>Adds an argument with the specified key and values to the <see cref="QueryBuilder" />.</summary>
     /// <param name="key">The key of the argument.</param>
     /// <param name="values">The values of the argument.</param>
-    public void Add(string key, IEnumerable<int> values)
-    {
+    public void Add(string key, IEnumerable<int> values) =>
         arguments.Add(new Argument(key, ToString(values).ToCsv()));
-    }
 
     /// <summary>Builds the query string from the arguments in the <see cref="QueryBuilder" />.</summary>
     /// <returns>The built query string.</returns>
