@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Diagnostics;
 using static System.Globalization.NumberFormatInfo;
 using Argument = System.Collections.Generic.KeyValuePair<string, string>;
 
@@ -7,6 +8,7 @@ namespace GuildWars2.Http;
 /// <summary>Used to build a query string, e.g. <c><![CDATA[ids=1,2,3&lang=fr&v=latest]]></c>. Not meant to be used
 /// directly.</summary>
 [PublicAPI]
+[DebuggerDisplay("{Build()}")]
 public sealed class QueryBuilder : IEnumerable
 {
     private readonly List<Argument> arguments = [];
