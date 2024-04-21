@@ -11,75 +11,65 @@ public sealed class QueryBuilder : IEnumerable
 {
     private readonly List<Argument> arguments = [];
 
+    private int queryLength;
+
     IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)arguments).GetEnumerator();
 
     /// <summary>Adds an argument with the specified key and value to the <see cref="QueryBuilder" />.</summary>
     /// <param name="key">The key of the argument.</param>
     /// <param name="value">The value of the argument.</param>
-    public void Add(string key, int value) => arguments.Add(new Argument(key, ToString(value)));
+    public void Add(string key, string value)
+    {
+        arguments.Add(new Argument(key, value));
+
+        // Length of '?key=value' (or '&key=value')
+        queryLength += key.Length + value.Length + 2;
+    }
 
     /// <summary>Adds an argument with the specified key and value to the <see cref="QueryBuilder" />.</summary>
     /// <param name="key">The key of the argument.</param>
     /// <param name="value">The value of the argument.</param>
-    public void Add(string key, string value) => arguments.Add(new Argument(key, value));
+    public void Add(string key, int value) => Add(key, ToString(value));
 
     /// <summary>Adds an argument with the specified key and values to the <see cref="QueryBuilder" />.</summary>
     /// <param name="key">The key of the argument.</param>
     /// <param name="values">The values of the argument.</param>
     public void Add(string key, IEnumerable<string> values) =>
-        arguments.Add(new Argument(key, values.Select(value => value).ToCsv()));
+        Add(key, values.Select(value => value).ToCsv());
 
     /// <summary>Adds an argument with the specified key and values to the <see cref="QueryBuilder" />.</summary>
     /// <param name="key">The key of the argument.</param>
     /// <param name="values">The values of the argument.</param>
-    public void Add(string key, IEnumerable<int> values) =>
-        arguments.Add(new Argument(key, ToString(values).ToCsv()));
+    public void Add(string key, IEnumerable<int> values) => Add(key, ToString(values).ToCsv());
 
     /// <summary>Builds the query string from the arguments in the <see cref="QueryBuilder" />.</summary>
     /// <returns>The built query string.</returns>
     public string Build()
     {
-        if (arguments.Count == 0)
+        if (queryLength == 0)
         {
             return "";
-        }
-
-        var queryLength = 0;
-        foreach (var (key, value) in arguments)
-        {
-            // Length of '?key=value' (or '&key=value')
-            queryLength += key.Length + value.Length + 2;
         }
 
 #if NET
         return string.Create(
             queryLength,
             arguments,
-            (buffer, state) =>
+            static (buffer, state) =>
             {
                 var position = 0;
                 foreach (var (key, value) in state)
                 {
-                    if (position == 0)
-                    {
-                        buffer[position++] = '?';
-                    }
-                    else
-                    {
-                        buffer[position++] = '&';
-                    }
-
-                    foreach (var c in key)
-                    {
-                        buffer[position++] = c;
-                    }
+                    var delimiter = position == 0 ? '?' : '&';
+                    buffer[position++] = delimiter;
+                   
+                    key.CopyTo(buffer[position..]);
+                    position += key.Length;
 
                     buffer[position++] = '=';
 
-                    foreach (var c in value)
-                    {
-                        buffer[position++] = c;
-                    }
+                    value.CopyTo(buffer[position..]);
+                    position += value.Length;
                 }
             }
         );
@@ -88,26 +78,16 @@ public sealed class QueryBuilder : IEnumerable
         var position = 0;
         foreach (var (key, value) in arguments)
         {
-            if (position == 0)
-            {
-                buffer[position++] = '?';
-            }
-            else
-            {
-                buffer[position++] = '&';
-            }
+            var delimiter = position == 0 ? '?' : '&';
+            buffer[position++] = delimiter;
 
-            foreach (var c in key)
-            {
-                buffer[position++] = c;
-            }
+            key.AsSpan().CopyTo(buffer[position..]);
+            position += key.Length;
 
             buffer[position++] = '=';
 
-            foreach (var c in value)
-            {
-                buffer[position++] = c;
-            }
+            value.AsSpan().CopyTo(buffer[position..]);
+            position += value.Length;
         }
 
         return buffer.ToString();
