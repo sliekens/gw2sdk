@@ -14,9 +14,7 @@ public sealed class QueryBuilder : IEnumerable
     /// <summary>Gets the number of arguments in the <see cref="QueryBuilder" />.</summary>
     public int Count => arguments.Count;
 
-    /// <summary>Returns an enumerator that iterates through the <see cref="QueryBuilder" /> arguments.</summary>
-    /// <returns>An enumerator that can be used to iterate through the <see cref="QueryBuilder" /> arguments.</returns>
-    public IEnumerator GetEnumerator() => ((IEnumerable)arguments).GetEnumerator();
+    IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)arguments).GetEnumerator();
 
     /// <summary>Adds an argument with the specified key and value to the <see cref="QueryBuilder" />.</summary>
     /// <param name="key">The key of the argument.</param>
