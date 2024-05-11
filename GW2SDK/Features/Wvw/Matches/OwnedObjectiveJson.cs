@@ -1,12 +1,35 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Matches;
 
-internal static class SpawnJson
+internal static class OwnedObjectiveJson
 {
-    public static Spawn GetSpawn(this JsonElement json)
+    public static OwnedObjective GetOwnedObjective(
+        this JsonElement json
+    )
     {
+        if (json.TryGetProperty("type", out var discriminator))
+        {
+            switch (discriminator.GetString())
+            {
+                case "Camp":
+                    return json.GetOwnedCamp();
+                case "Castle":
+                    return json.GetOwnedCastle();
+                case "Keep":
+                    return json.GetOwnedKeep();
+                case "Mercenary":
+                    return json.GetOwnedMercenary();
+                case "Ruins":
+                    return json.GetOwnedRuins();
+                case "Spawn":
+                    return json.GetOwnedSpawn();
+                case "Tower":
+                    return json.GetOwnedTower();
+            }
+        }
+
         RequiredMember id = "id";
         RequiredMember owner = "owner";
         RequiredMember lastFlipped = "last_flipped";
@@ -17,10 +40,10 @@ internal static class SpawnJson
         {
             if (member.NameEquals("type"))
             {
-                if (!member.Value.ValueEquals("Spawn"))
+                if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                 {
                     throw new InvalidOperationException(
-                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        Strings.UnexpectedDiscriminator(member.Value.GetString())
                     );
                 }
             }
@@ -50,7 +73,7 @@ internal static class SpawnJson
             }
         }
 
-        return new Spawn
+        return new OwnedObjective
         {
             Id = id.Map(static value => value.GetStringRequired()),
             Owner = owner.Map(static value => value.GetEnum<TeamColor>()),

@@ -57,7 +57,7 @@ public class Matches
                                 Assert.NotEmpty(objective.Id);
                                 Assert.True(objective.LastFlipped > DateTimeOffset.MinValue);
                                 Assert.True(objective.Owner.IsDefined());
-                                if (objective is not Spawn and not Mercenary and not Ruins)
+                                if (objective is not OwnedSpawn and not OwnedMercenary and not OwnedRuins)
                                 {
                                     Assert.True(objective.PointsCapture > 0);
                                     Assert.True(objective.PointsTick > 0);

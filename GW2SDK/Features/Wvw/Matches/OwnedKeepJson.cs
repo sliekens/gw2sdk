@@ -1,11 +1,11 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Matches;
 
-internal static class CampJson
+internal static class OwnedKeepJson
 {
-    public static Camp GetCamp(this JsonElement json)
+    public static OwnedKeep GetOwnedKeep(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember owner = "owner";
@@ -21,7 +21,7 @@ internal static class CampJson
         {
             if (member.NameEquals("type"))
             {
-                if (!member.Value.ValueEquals("Camp"))
+                if (!member.Value.ValueEquals("Keep"))
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
@@ -70,7 +70,7 @@ internal static class CampJson
             }
         }
 
-        return new Camp
+        return new OwnedKeep
         {
             Id = id.Map(static value => value.GetStringRequired()),
             Owner = owner.Map(static value => value.GetEnum<TeamColor>()),

@@ -1,9 +1,9 @@
 ﻿namespace GuildWars2.Wvw.Matches;
 
-/// <summary>Information about a keep.</summary>
+/// <summary>Information about the ownership of a keep.</summary>
 [PublicAPI]
 [DataTransferObject]
-public sealed record Keep : Objective
+public sealed record OwnedKeep : OwnedObjective
 {
     /// <summary>The ID of the guild that claimed the keep.</summary>
     public required string ClaimedBy { get; init; }

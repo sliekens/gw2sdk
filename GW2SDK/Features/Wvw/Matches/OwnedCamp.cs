@@ -1,9 +1,9 @@
 ﻿namespace GuildWars2.Wvw.Matches;
 
-/// <summary>Information about a camp.</summary>
+/// <summary>Information about the ownership of a camp.</summary>
 [PublicAPI]
 [DataTransferObject]
-public sealed record Camp : Objective
+public sealed record OwnedCamp : OwnedObjective
 {
     /// <summary>The ID of the guild that claimed the camp.</summary>
     public required string ClaimedBy { get; init; }

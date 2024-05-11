@@ -20,7 +20,7 @@ public sealed record Map
     public required IReadOnlyCollection<Bonus> Bonuses { get; init; }
 
     /// <summary>The objectives in this map and who claimed them.</summary>
-    public required IReadOnlyCollection<Objective> Objectives { get; init; }
+    public required IReadOnlyCollection<OwnedObjective> Objectives { get; init; }
 
     /// <summary>The deaths distribution of the teams on this map.</summary>
     public required Distribution Deaths { get; init; }

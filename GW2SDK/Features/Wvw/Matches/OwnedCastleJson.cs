@@ -1,11 +1,13 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Matches;
 
-internal static class KeepJson
+internal static class OwnedCastleJson
 {
-    public static Keep GetKeep(this JsonElement json)
+    public static OwnedCastle GetOwnedCastle(
+        this JsonElement json
+    )
     {
         RequiredMember id = "id";
         RequiredMember owner = "owner";
@@ -21,7 +23,7 @@ internal static class KeepJson
         {
             if (member.NameEquals("type"))
             {
-                if (!member.Value.ValueEquals("Keep"))
+                if (!member.Value.ValueEquals("Castle"))
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
@@ -70,7 +72,7 @@ internal static class KeepJson
             }
         }
 
-        return new Keep
+        return new OwnedCastle
         {
             Id = id.Map(static value => value.GetStringRequired()),
             Owner = owner.Map(static value => value.GetEnum<TeamColor>()),

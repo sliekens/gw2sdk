@@ -1,11 +1,9 @@
 ﻿namespace GuildWars2.Wvw.Matches;
 
-/// <summary>
-/// Information about a castle.
-/// </summary>
+/// <summary>Information about the ownership of a castle.</summary>
 [PublicAPI]
 [DataTransferObject]
-public sealed record Castle : Objective
+public sealed record OwnedCastle : OwnedObjective
 {
     /// <summary>The ID of the guild that claimed the castle.</summary>
     public required string ClaimedBy { get; init; }

@@ -1,27 +1,23 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Matches;
 
-internal static class TowerJson
+internal static class OwnedSpawnJson
 {
-    public static Tower GetTower(this JsonElement json)
+    public static OwnedSpawn GetOwnedSpawn(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember owner = "owner";
         RequiredMember lastFlipped = "last_flipped";
         RequiredMember pointsTick = "points_tick";
         RequiredMember pointsCapture = "points_capture";
-        OptionalMember claimedBy = "claimed_by";
-        NullableMember claimedAt = "claimed_at";
-        OptionalMember yaksDelivered = "yaks_delivered";
-        OptionalMember guildUpgrades = "guild_upgrades";
 
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {
-                if (!member.Value.ValueEquals("Tower"))
+                if (!member.Value.ValueEquals("Spawn"))
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
@@ -48,40 +44,19 @@ internal static class TowerJson
             {
                 pointsCapture = member;
             }
-            else if (claimedBy.Match(member))
-            {
-                claimedBy = member;
-            }
-            else if (claimedAt.Match(member))
-            {
-                claimedAt = member;
-            }
-            else if (yaksDelivered.Match(member))
-            {
-                yaksDelivered = member;
-            }
-            else if (guildUpgrades.Match(member))
-            {
-                guildUpgrades = member;
-            }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
         }
 
-        return new Tower
+        return new OwnedSpawn
         {
             Id = id.Map(static value => value.GetStringRequired()),
             Owner = owner.Map(static value => value.GetEnum<TeamColor>()),
             LastFlipped = lastFlipped.Map(static value => value.GetDateTimeOffset()),
             PointsTick = pointsTick.Map(static value => value.GetInt32()),
-            PointsCapture = pointsCapture.Map(static value => value.GetInt32()),
-            ClaimedBy = claimedBy.Map(static value => value.GetString()) ?? "",
-            ClaimedAt = claimedAt.Map(static value => value.GetDateTimeOffset()),
-            YaksDelivered = yaksDelivered.Map(static value => value.GetInt32()),
-            GuildUpgrades = guildUpgrades.Map(static values => values.GetList(static value => value.GetInt32()))
-                ?? Empty.ListOfInt32
+            PointsCapture = pointsCapture.Map(static value => value.GetInt32())
         };
     }
 }

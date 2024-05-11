@@ -1,9 +1,9 @@
 ﻿namespace GuildWars2.Wvw.Matches;
 
-/// <summary>Information about a tower.</summary>
+/// <summary>Information about the ownership of a tower.</summary>
 [PublicAPI]
 [DataTransferObject]
-public sealed record Tower : Objective
+public sealed record OwnedTower : OwnedObjective
 {
     /// <summary>The ID of the guild that claimed the tower.</summary>
     public required string ClaimedBy { get; init; }

@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Exploration.Maps;
 using GuildWars2.Json;
 
@@ -61,7 +61,7 @@ internal static class MapJson
                 bonuses.Map(static values => values.GetList(static value => value.GetBonus())
                 ),
             Objectives =
-                objectives.Map(static values => values.GetList(static value => value.GetObjective())
+                objectives.Map(static values => values.GetList(static value => value.GetOwnedObjective())
                 ),
             Deaths = deaths.Map(static value => value.GetDistribution()),
             Kills = kills.Map(static value => value.GetDistribution())

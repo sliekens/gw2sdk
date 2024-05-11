@@ -1,11 +1,13 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Matches;
 
-internal static class RuinsJson
+internal static class OwnedMercenaryJson
 {
-    public static Ruins GetRuins(this JsonElement json)
+    public static OwnedMercenary GetOwnedMercenary(
+        this JsonElement json
+    )
     {
         RequiredMember id = "id";
         RequiredMember owner = "owner";
@@ -17,7 +19,7 @@ internal static class RuinsJson
         {
             if (member.NameEquals("type"))
             {
-                if (!member.Value.ValueEquals("Ruins"))
+                if (!member.Value.ValueEquals("Mercenary"))
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
@@ -50,7 +52,7 @@ internal static class RuinsJson
             }
         }
 
-        return new Ruins
+        return new OwnedMercenary
         {
             Id = id.Map(static value => value.GetStringRequired()),
             Owner = owner.Map(static value => value.GetEnum<TeamColor>()),
