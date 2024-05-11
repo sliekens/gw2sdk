@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Equipment.MailCarriers;
 
 internal static class MailCarrierJson
 {
-    public static MailCarrier GetMailCarrier(
-        this JsonElement json
-    )
+    public static MailCarrier GetMailCarrier(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember unlockItems = "unlock_items";
@@ -51,7 +49,8 @@ internal static class MailCarrierJson
         return new MailCarrier
         {
             Id = id.Map(static value => value.GetInt32()),
-            UnlockItemIds = unlockItems.Map(static values => values.GetList(static value => value.GetInt32())),
+            UnlockItemIds =
+                unlockItems.Map(static values => values.GetList(static value => value.GetInt32())),
             Order = order.Map(static value => value.GetInt32()),
             IconHref = icon.Map(static value => value.GetStringRequired()),
             Name = name.Map(static value => value.GetStringRequired()),

@@ -5,9 +5,7 @@ namespace GuildWars2.Authorization;
 
 internal static class TokenInfoJson
 {
-    public static TokenInfo GetTokenInfo(
-        this JsonElement json
-    )
+    public static TokenInfo GetTokenInfo(this JsonElement json)
     {
         if (json.TryGetProperty("type", out var discriminator))
         {
@@ -56,7 +54,8 @@ internal static class TokenInfoJson
         {
             Id = id.Map(static value => value.GetStringRequired()),
             Name = name.Map(static value => value.GetStringRequired()),
-            Permissions = permissions.Map(static values => values.GetList(static value => value.GetEnum<Permission>())
+            Permissions = permissions.Map(
+                static values => values.GetList(static value => value.GetEnum<Permission>())
             )
         };
     }

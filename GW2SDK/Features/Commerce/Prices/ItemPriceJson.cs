@@ -5,9 +5,7 @@ namespace GuildWars2.Commerce.Prices;
 
 internal static class ItemPriceJson
 {
-    public static ItemPrice GetItemPrice(
-        this JsonElement json
-    )
+    public static ItemPrice GetItemPrice(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember whitelisted = "whitelisted";

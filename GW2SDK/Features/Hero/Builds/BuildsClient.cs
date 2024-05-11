@@ -1,4 +1,4 @@
-﻿using GuildWars2.Hero.Builds.Http;
+﻿using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Builds;
@@ -25,13 +25,21 @@ public sealed class BuildsClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(IReadOnlyList<int> Value, MessageContext Context)> GetStoredBuildNumbers(
+    public async Task<(IReadOnlyList<int> Value, MessageContext Context)> GetStoredBuildNumbers(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
     {
-        StoredBuildNumbersRequest request = new() { AccessToken = accessToken };
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/account/buildstorage", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetList(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the build in the specified storage number on the account. This endpoint is only accessible with a
@@ -41,19 +49,25 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(Build Value, MessageContext Context)> GetStoredBuild(
+    public async Task<(Build Value, MessageContext Context)> GetStoredBuild(
         int storageNumber,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        StoredBuildRequest request = new(storageNumber)
+        var query = new QueryBuilder();
+        query.AddId(storageNumber);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/account/buildstorage", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            AccessToken = accessToken,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetBuild();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves all builds in the build storage on the account. This endpoint is only accessible with a valid access
@@ -62,18 +76,24 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(IReadOnlyList<Build> Value, MessageContext Context)> GetStoredBuilds(
+    public async Task<(IReadOnlyList<Build> Value, MessageContext Context)> GetStoredBuilds(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        StoredBuildsRequest request = new()
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/account/buildstorage", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            AccessToken = accessToken,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetList(static entry => entry.GetBuild());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves builds in the specified storage numbers on the account. This endpoint is only accessible with a
@@ -83,19 +103,25 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(IReadOnlyList<Build> Value, MessageContext Context)> GetStoredBuilds(
+    public async Task<(IReadOnlyList<Build> Value, MessageContext Context)> GetStoredBuilds(
         IEnumerable<int> storageNumbers,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        StoredBuildsByNumbersRequest request = new(storageNumbers.ToList())
+        var query = new QueryBuilder();
+        query.AddIds(storageNumbers);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/account/buildstorage", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            AccessToken = accessToken,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetList(static entry => entry.GetBuild());
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/account/buildstorage
@@ -109,14 +135,22 @@ public sealed class BuildsClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetBuildNumbers(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetBuildNumbers(
         string characterName,
         string? accessToken,
         CancellationToken cancellationToken = default
     )
     {
-        BuildNumbersRequest request = new(characterName) { AccessToken = accessToken };
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet($"v2/characters/{characterName}/buildtabs", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the specified build template of a character on the account. This endpoint is only accessible with a
@@ -127,7 +161,7 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(BuildTemplate Value, MessageContext Context)> GetBuild(
+    public async Task<(BuildTemplate Value, MessageContext Context)> GetBuild(
         int templateNumber,
         string characterName,
         string? accessToken,
@@ -135,12 +169,17 @@ public sealed class BuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        BuildRequest request = new(characterName, templateNumber)
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet($"v2/characters/{characterName}/buildtabs/{templateNumber}", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            AccessToken = accessToken,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetBuildTemplate();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves all build templates of a character on the account. This endpoint is only accessible with a valid
@@ -150,19 +189,30 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<BuildTemplate> Value, MessageContext Context)> GetBuilds(
+    public async Task<(HashSet<BuildTemplate> Value, MessageContext Context)> GetBuilds(
         string characterName,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        BuildsRequest request = new(characterName)
+        // There is no ids=all support, but page=0 works
+        var query = new QueryBuilder();
+        query.AddPage(0, null);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet(
+            $"v2/characters/{characterName}/buildtabs",
+            query,
+            accessToken
+        );
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            AccessToken = accessToken,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetBuildTemplate());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the currently active build template of a character on the account. This endpoint is only accessible
@@ -173,19 +223,24 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(BuildTemplate Value, MessageContext Context)> GetActiveBuild(
+    public async Task<(BuildTemplate Value, MessageContext Context)> GetActiveBuild(
         string characterName,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        ActiveBuildRequest request = new(characterName)
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet($"v2/characters/{characterName}/buildtabs/active", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            AccessToken = accessToken,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetBuildTemplate();
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/characters/:id/buildtabs
@@ -197,29 +252,44 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Skill> Value, MessageContext Context)> GetSkills(
+    public async Task<(HashSet<Skill> Value, MessageContext Context)> GetSkills(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        SkillsRequest request = new()
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/skills", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetSkill());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the IDs of all skills.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetSkillsIndex(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetSkillsIndex(
         CancellationToken cancellationToken = default
     )
     {
-        SkillsIndexRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/skills", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a skill by its ID.</summary>
@@ -228,19 +298,26 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(Skill Value, MessageContext Context)> GetSkillById(
+    public async Task<(Skill Value, MessageContext Context)> GetSkillById(
         int skillId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        SkillByIdRequest request = new(skillId)
+        var query = new QueryBuilder();
+        query.AddId(skillId);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/skills", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSkill();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves skills by their IDs.</summary>
@@ -250,19 +327,26 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Skill> Value, MessageContext Context)> GetSkillsByIds(
+    public async Task<(HashSet<Skill> Value, MessageContext Context)> GetSkillsByIds(
         IEnumerable<int> skillIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        SkillsByIdsRequest request = new(skillIds.ToList())
+        var query = new QueryBuilder();
+        query.AddIds(skillIds);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/skills", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetSkill());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of skills.</summary>
@@ -272,7 +356,7 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Skill> Value, MessageContext Context)> GetSkillsByPage(
+    public async Task<(HashSet<Skill> Value, MessageContext Context)> GetSkillsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -280,13 +364,19 @@ public sealed class BuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        SkillsByPageRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/skills", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetSkill());
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/skills
@@ -298,29 +388,44 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Specialization> Value, MessageContext Context)> GetSpecializations(
+    public async Task<(HashSet<Specialization> Value, MessageContext Context)> GetSpecializations(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        SpecializationsRequest request = new()
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/specializations", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetSpecialization());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the IDs of all specializations.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetSpecializationsIndex(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetSpecializationsIndex(
         CancellationToken cancellationToken = default
     )
     {
-        SpecializationsIndexRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/specializations", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a specialization by its ID.</summary>
@@ -329,19 +434,26 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(Specialization Value, MessageContext Context)> GetSpecializationById(
+    public async Task<(Specialization Value, MessageContext Context)> GetSpecializationById(
         int specializationId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        SpecializationByIdRequest request = new(specializationId)
+        var query = new QueryBuilder();
+        query.AddId(specializationId);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/specializations", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSpecialization();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves specializations by their IDs.</summary>
@@ -351,19 +463,27 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Specialization> Value, MessageContext Context)> GetSpecializationsByIds(
-        IEnumerable<int> specializationIds,
-        Language? language = default,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    public async Task<(HashSet<Specialization> Value, MessageContext Context)>
+        GetSpecializationsByIds(
+            IEnumerable<int> specializationIds,
+            Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        SpecializationsByIdsRequest request = new(specializationIds.ToList())
+        var query = new QueryBuilder();
+        query.AddIds(specializationIds);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/specializations", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetSpecialization());
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/specializations
@@ -375,29 +495,44 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Trait> Value, MessageContext Context)> GetTraits(
+    public async Task<(HashSet<Trait> Value, MessageContext Context)> GetTraits(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        TraitsRequest request = new()
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/traits", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetTrait());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the IDs of all traits.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetTraitsIndex(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetTraitsIndex(
         CancellationToken cancellationToken = default
     )
     {
-        TraitsIndexRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/traits", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a trait by its ID.</summary>
@@ -406,19 +541,26 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(Trait Value, MessageContext Context)> GetTraitById(
+    public async Task<(Trait Value, MessageContext Context)> GetTraitById(
         int traitId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        TraitByIdRequest request = new(traitId)
+        var query = new QueryBuilder();
+        query.AddId(traitId);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/traits", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetTrait();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves traits by their IDs.</summary>
@@ -428,19 +570,26 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Trait> Value, MessageContext Context)> GetTraitsByIds(
+    public async Task<(HashSet<Trait> Value, MessageContext Context)> GetTraitsByIds(
         IEnumerable<int> traitIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        TraitsByIdsRequest request = new(traitIds.ToList())
+        var query = new QueryBuilder();
+        query.AddIds(traitIds);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/traits", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetTrait());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of traits.</summary>
@@ -450,7 +599,7 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Trait> Value, MessageContext Context)> GetTraitsByPage(
+    public async Task<(HashSet<Trait> Value, MessageContext Context)> GetTraitsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -458,13 +607,19 @@ public sealed class BuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        TraitsByPageRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/traits", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetTrait());
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/traits
@@ -474,12 +629,20 @@ public sealed class BuildsClient
     /// <summary>Retrieves the IDs of all Revenant legends.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<string> Value, MessageContext Context)> GetLegendsIndex(
+    public async Task<(HashSet<string> Value, MessageContext Context)> GetLegendsIndex(
         CancellationToken cancellationToken = default
     )
     {
-        LegendsIndexRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/legends", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a Revenant legend by its ID.</summary>
@@ -487,15 +650,24 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(Legend Value, MessageContext Context)> GetLegendById(
+    public async Task<(Legend Value, MessageContext Context)> GetLegendById(
         string legendId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        LegendByIdRequest request = new(legendId);
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddId(legendId);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/legends", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetLegend();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves Revenant legends by their IDs.</summary>
@@ -503,15 +675,24 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Legend> Value, MessageContext Context)> GetLegendsByIds(
+    public async Task<(HashSet<Legend> Value, MessageContext Context)> GetLegendsByIds(
         IEnumerable<string> legendIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        LegendsByIdsRequest request = new(legendIds.ToList());
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddIds(legendIds);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/legends", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetLegend());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of Revenant legends.</summary>
@@ -520,34 +701,48 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Legend> Value, MessageContext Context)> GetLegendsByPage(
+    public async Task<(HashSet<Legend> Value, MessageContext Context)> GetLegendsByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        LegendsByPageRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/legends", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize
-        };
-
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetLegend());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves all Revenant legends.</summary>
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Legend> Value, MessageContext Context)> GetLegends(
+    public async Task<(HashSet<Legend> Value, MessageContext Context)> GetLegends(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        LegendsRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/legends", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetLegend());
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/legends

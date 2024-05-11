@@ -5,9 +5,7 @@ namespace GuildWars2.Exploration.PointsOfInterest;
 
 internal static class WaypointJson
 {
-    public static Waypoint GetWaypoint(
-        this JsonElement json
-    )
+    public static Waypoint GetWaypoint(this JsonElement json)
     {
         OptionalMember name = "name";
         RequiredMember floor = "floor";

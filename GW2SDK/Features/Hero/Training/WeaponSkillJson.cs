@@ -6,9 +6,7 @@ namespace GuildWars2.Hero.Training;
 
 internal static class WeaponSkillJson
 {
-    public static WeaponSkill GetWeaponSkill(
-        this JsonElement json
-    )
+    public static WeaponSkill GetWeaponSkill(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember slot = "slot";

@@ -6,9 +6,7 @@ namespace GuildWars2.Hero.Training;
 
 internal static class ProfessionJson
 {
-    public static Profession GetProfession(
-        this JsonElement json
-    )
+    public static Profession GetProfession(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -81,24 +79,21 @@ internal static class ProfessionJson
             IconHref = icon.Map(static value => value.GetStringRequired()),
             BigIconHref = iconBig.Map(static value => value.GetStringRequired()),
             SpecializationIds =
-                specializations.Map(static values => values.GetList(static value => value.GetInt32())),
+                specializations.Map(
+                    static values => values.GetList(static value => value.GetInt32())
+                ),
             Weapons =
-                weapons.Map(static value =>
-                        value.GetMap(
-                            GetWeaponType,
-                            item => item.GetWeaponProficiency()
-                        )
+                weapons.Map(
+                    static value => value.GetMap(GetWeaponType, item => item.GetWeaponProficiency())
                 ),
             Flags = flags.Map(static values => values.GetProfessionFlags()),
             Skills =
-                skills.Map(static values =>
-                        values.GetList(static value => value.GetSkillSummary())
+                skills.Map(
+                    static values => values.GetList(static value => value.GetSkillSummary())
                 ),
             Training =
-                training.Map(static values => values.GetList(static value => value.GetTraining())
-                ),
-            SkillsByPalette =
-                skillsByPalette.Map(static value => value.GetSkillsByPalette())
+                training.Map(static values => values.GetList(static value => value.GetTraining())),
+            SkillsByPalette = skillsByPalette.Map(static value => value.GetSkillsByPalette())
         };
 
         static Extensible<WeaponType> GetWeaponType(string text)

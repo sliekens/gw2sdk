@@ -5,9 +5,7 @@ namespace GuildWars2.Guilds.Permissions;
 
 internal static class GuildPermissionSummaryJson
 {
-    public static GuildPermissionSummary GetGuildPermissionSummary(
-        this JsonElement json
-    )
+    public static GuildPermissionSummary GetGuildPermissionSummary(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";

@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Hero.StoryJournal.BackgroundStories;
-using GuildWars2.Hero.StoryJournal.Http;
 using GuildWars2.Hero.StoryJournal.Stories;
+using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.StoryJournal;
@@ -28,7 +28,7 @@ public sealed class StoryJournalClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(CharacterBackgroundStory Value, MessageContext Context)>
+    public async Task<(CharacterBackgroundStory Value, MessageContext Context)>
         GetCharacterBackgroundStory(
             string characterName,
             string? accessToken,
@@ -36,12 +36,17 @@ public sealed class StoryJournalClient
             CancellationToken cancellationToken = default
         )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        CharacterBackstoryRequest request = new(characterName)
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet($"v2/characters/{characterName}/backstory", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            AccessToken = accessToken,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetCharacterBackgroundStory();
+            return (value, response.Context);
+        }
     }
 
     #endregion
@@ -55,19 +60,23 @@ public sealed class StoryJournalClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetCompletedStorySteps(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetCompletedStorySteps(
         string characterName,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        CharacterQuestsRequest request = new(characterName)
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet($"v2/characters/{characterName}/quests", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            AccessToken = accessToken,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/characters/:id/quests
@@ -79,30 +88,47 @@ public sealed class StoryJournalClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<BackgroundStoryQuestion> Value, MessageContext Context)>
+    public async Task<(HashSet<BackgroundStoryQuestion> Value, MessageContext Context)>
         GetBackgroundStoryQuestions(
             Language? language = default,
             MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        BackstoryQuestionRequest request = new()
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/backstory/questions", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value =
+                response.Json.RootElement.GetSet(
+                    static entry => entry.GetBackgroundStoryQuestion()
+                );
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the IDs of all background story questions.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetBackgroundStoryQuestionsIndex(
-        CancellationToken cancellationToken = default
-    )
+    public async Task<(HashSet<int> Value, MessageContext Context)>
+        GetBackgroundStoryQuestionsIndex(CancellationToken cancellationToken = default)
     {
-        BackstoryQuestionsIndexRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/backstory/questions", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a background story question by its ID.</summary>
@@ -111,7 +137,7 @@ public sealed class StoryJournalClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(BackgroundStoryQuestion Value, MessageContext Context)>
+    public async Task<(BackgroundStoryQuestion Value, MessageContext Context)>
         GetBackgroundStoryQuestionById(
             int questionId,
             Language? language = default,
@@ -119,12 +145,19 @@ public sealed class StoryJournalClient
             CancellationToken cancellationToken = default
         )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        BackstoryQuestionByIdRequest request = new(questionId)
+        var query = new QueryBuilder();
+        query.AddId(questionId);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/backstory/questions", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetBackgroundStoryQuestion();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves background story questions by their IDs.</summary>
@@ -133,7 +166,7 @@ public sealed class StoryJournalClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<BackgroundStoryQuestion> Value, MessageContext Context)>
+    public async Task<(HashSet<BackgroundStoryQuestion> Value, MessageContext Context)>
         GetBackgroundStoryQuestionsByIds(
             IEnumerable<int> questionIds,
             Language? language = default,
@@ -141,12 +174,22 @@ public sealed class StoryJournalClient
             CancellationToken cancellationToken = default
         )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        BackstoryQuestionsByIdsRequest request = new(questionIds.ToList())
+        var query = new QueryBuilder();
+        query.AddIds(questionIds);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/backstory/questions", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value =
+                response.Json.RootElement.GetSet(
+                    static entry => entry.GetBackgroundStoryQuestion()
+                );
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of background story questions.</summary>
@@ -156,7 +199,7 @@ public sealed class StoryJournalClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<BackgroundStoryQuestion> Value, MessageContext Context)>
+    public async Task<(HashSet<BackgroundStoryQuestion> Value, MessageContext Context)>
         GetBackgroundStoryQuestionsByPage(
             int pageIndex,
             int? pageSize = default,
@@ -165,13 +208,22 @@ public sealed class StoryJournalClient
             CancellationToken cancellationToken = default
         )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        BackstoryQuestionsByPageRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/backstory/questions", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value =
+                response.Json.RootElement.GetSet(
+                    static entry => entry.GetBackgroundStoryQuestion()
+                );
+            return (value, response.Context);
+        }
     }
 
     #endregion
@@ -183,30 +235,45 @@ public sealed class StoryJournalClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<BackgroundStoryAnswer> Value, MessageContext Context)>
+    public async Task<(HashSet<BackgroundStoryAnswer> Value, MessageContext Context)>
         GetBackgroundStoryAnswers(
             Language? language = default,
             MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        BackstoryAnswersRequest request = new()
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/backstory/answers", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetBackgroundStoryAnswer());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the IDs of all background story answers.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<string> Value, MessageContext Context)> GetBackgroundStoryAnswersIndex(
-        CancellationToken cancellationToken = default
-    )
+    public async Task<(HashSet<string> Value, MessageContext Context)>
+        GetBackgroundStoryAnswersIndex(CancellationToken cancellationToken = default)
     {
-        BackstoryAnswersIndexRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/backstory/answers", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a background story answer by its ID.</summary>
@@ -215,19 +282,27 @@ public sealed class StoryJournalClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(BackgroundStoryAnswer Value, MessageContext Context)> GetBackgroundStoryAnswerById(
-        string answerId,
-        Language? language = default,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    public async Task<(BackgroundStoryAnswer Value, MessageContext Context)>
+        GetBackgroundStoryAnswerById(
+            string answerId,
+            Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        BackstoryAnswerByIdRequest request = new(answerId)
+        var query = new QueryBuilder();
+        query.AddId(answerId);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/backstory/answers", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetBackgroundStoryAnswer();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves background story answers by their IDs.</summary>
@@ -236,7 +311,7 @@ public sealed class StoryJournalClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<BackgroundStoryAnswer> Value, MessageContext Context)>
+    public async Task<(HashSet<BackgroundStoryAnswer> Value, MessageContext Context)>
         GetBackgroundStoryAnswersByIds(
             IEnumerable<string> answerIds,
             Language? language = default,
@@ -244,12 +319,20 @@ public sealed class StoryJournalClient
             CancellationToken cancellationToken = default
         )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        BackstoryAnswersByIdsRequest request = new(answerIds.ToList())
+        var query = new QueryBuilder();
+        query.AddIds(answerIds);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/backstory/answers", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetBackgroundStoryAnswer());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of background story answers.</summary>
@@ -259,7 +342,7 @@ public sealed class StoryJournalClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<BackgroundStoryAnswer> Value, MessageContext Context)>
+    public async Task<(HashSet<BackgroundStoryAnswer> Value, MessageContext Context)>
         GetBackgroundStoryAnswersByPage(
             int pageIndex,
             int? pageSize = default,
@@ -268,13 +351,20 @@ public sealed class StoryJournalClient
             CancellationToken cancellationToken = default
         )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        BackstoryAnswersByPageRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/backstory/answers", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetBackgroundStoryAnswer());
+            return (value, response.Context);
+        }
     }
 
     #endregion
@@ -286,29 +376,44 @@ public sealed class StoryJournalClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Story> Value, MessageContext Context)> GetStories(
+    public async Task<(HashSet<Story> Value, MessageContext Context)> GetStories(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        StoriesRequest request = new()
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/stories", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetStory());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the IDs of all stories.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetStoriesIndex(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetStoriesIndex(
         CancellationToken cancellationToken = default
     )
     {
-        StoriesIndexRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/stories", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a story by its ID.</summary>
@@ -317,19 +422,26 @@ public sealed class StoryJournalClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(Story Value, MessageContext Context)> GetStoryById(
+    public async Task<(Story Value, MessageContext Context)> GetStoryById(
         int storyId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        StoryByIdRequest request = new(storyId)
+        var query = new QueryBuilder();
+        query.AddId(storyId);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/stories", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetStory();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves stories by their IDs.</summary>
@@ -338,19 +450,26 @@ public sealed class StoryJournalClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Story> Value, MessageContext Context)> GetStoriesByIds(
+    public async Task<(HashSet<Story> Value, MessageContext Context)> GetStoriesByIds(
         IEnumerable<int> storyIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        StoriesByIdsRequest request = new(storyIds.ToList())
+        var query = new QueryBuilder();
+        query.AddIds(storyIds);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/stories", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetStory());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of stories.</summary>
@@ -360,7 +479,7 @@ public sealed class StoryJournalClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Story> Value, MessageContext Context)> GetStoriesByPage(
+    public async Task<(HashSet<Story> Value, MessageContext Context)> GetStoriesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -368,13 +487,19 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        StoriesByPageRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/stories", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetStory());
+            return (value, response.Context);
+        }
     }
 
     #endregion
@@ -386,29 +511,44 @@ public sealed class StoryJournalClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Storyline> Value, MessageContext Context)> GetStorylines(
+    public async Task<(HashSet<Storyline> Value, MessageContext Context)> GetStorylines(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        SeasonsRequest request = new()
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/stories/seasons", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetStoryline());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the IDs of all storylines.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<string> Value, MessageContext Context)> GetStorylinesIndex(
+    public async Task<(HashSet<string> Value, MessageContext Context)> GetStorylinesIndex(
         CancellationToken cancellationToken = default
     )
     {
-        SeasonsIndexRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/stories/seasons", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a storyline by its ID.</summary>
@@ -417,19 +557,26 @@ public sealed class StoryJournalClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(Storyline Value, MessageContext Context)> GetStorylineById(
+    public async Task<(Storyline Value, MessageContext Context)> GetStorylineById(
         string storylineId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        SeasonByIdRequest request = new(storylineId)
+        var query = new QueryBuilder();
+        query.AddId(storylineId);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/stories/seasons", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetStoryline();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves storylines by their IDs.</summary>
@@ -438,19 +585,26 @@ public sealed class StoryJournalClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Storyline> Value, MessageContext Context)> GetStorylinesByIds(
+    public async Task<(HashSet<Storyline> Value, MessageContext Context)> GetStorylinesByIds(
         IEnumerable<string> storylineIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        SeasonsByIdsRequest request = new(storylineIds.ToList())
+        var query = new QueryBuilder();
+        query.AddIds(storylineIds);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/stories/seasons", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetStoryline());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of storylines.</summary>
@@ -460,7 +614,7 @@ public sealed class StoryJournalClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Storyline> Value, MessageContext Context)> GetStorylinesByPage(
+    public async Task<(HashSet<Storyline> Value, MessageContext Context)> GetStorylinesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -468,13 +622,19 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        SeasonsByPageRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/stories/seasons", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetStoryline());
+            return (value, response.Context);
+        }
     }
 
     #endregion
@@ -486,29 +646,44 @@ public sealed class StoryJournalClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<StoryStep> Value, MessageContext Context)> GetStorySteps(
+    public async Task<(HashSet<StoryStep> Value, MessageContext Context)> GetStorySteps(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        QuestsRequest request = new()
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/quests", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetStoryStep());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the IDs of all story steps.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetStoryStepsIndex(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetStoryStepsIndex(
         CancellationToken cancellationToken = default
     )
     {
-        QuestsIndexRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/quests", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a story step by its ID.</summary>
@@ -517,19 +692,26 @@ public sealed class StoryJournalClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(StoryStep Value, MessageContext Context)> GetStoryStepById(
+    public async Task<(StoryStep Value, MessageContext Context)> GetStoryStepById(
         int storyStepId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        QuestByIdRequest request = new(storyStepId)
+        var query = new QueryBuilder();
+        query.AddId(storyStepId);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/quests", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetStoryStep();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves story steps by their IDs.</summary>
@@ -538,19 +720,26 @@ public sealed class StoryJournalClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<StoryStep> Value, MessageContext Context)> GetStoryStepsByIds(
+    public async Task<(HashSet<StoryStep> Value, MessageContext Context)> GetStoryStepsByIds(
         IEnumerable<int> storyStepIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        QuestsByIdsRequest request = new(storyStepIds.ToList())
+        var query = new QueryBuilder();
+        query.AddIds(storyStepIds);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/quests", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetStoryStep());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of story steps.</summary>
@@ -560,7 +749,7 @@ public sealed class StoryJournalClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<StoryStep> Value, MessageContext Context)> GetStoryStepsByPage(
+    public async Task<(HashSet<StoryStep> Value, MessageContext Context)> GetStoryStepsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -568,13 +757,19 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        QuestsByPageRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/quests", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetStoryStep());
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/quests

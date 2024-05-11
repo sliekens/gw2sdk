@@ -6,9 +6,7 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 internal static class ScepterSkinJson
 {
-    public static ScepterSkin GetScepterSkin(
-        this JsonElement json
-    )
+    public static ScepterSkin GetScepterSkin(this JsonElement json)
     {
         RequiredMember name = "name";
         OptionalMember description = "description";

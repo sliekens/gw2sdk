@@ -5,9 +5,7 @@ namespace GuildWars2.Guilds.Bank;
 
 internal static class GuildBankSlotJson
 {
-    public static GuildBankSlot? GetGuildBankSlot(
-        this JsonElement json
-    )
+    public static GuildBankSlot? GetGuildBankSlot(this JsonElement json)
     {
         if (json.ValueKind == JsonValueKind.Null)
         {

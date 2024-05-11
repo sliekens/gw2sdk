@@ -5,9 +5,7 @@ namespace GuildWars2.Pve.SuperAdventureBox;
 
 internal static class SuperAdventureBoxUpgradeJson
 {
-    public static SuperAdventureBoxUpgrade GetSuperAdventureBoxUpgrade(
-        this JsonElement json
-    )
+    public static SuperAdventureBoxUpgrade GetSuperAdventureBoxUpgrade(this JsonElement json)
     {
         RequiredMember id = "id";
         OptionalMember name = "name";

@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Equipment.Dyes;
 
 internal static class ColorInfoJson
 {
-    public static ColorInfo GetColorInfo(
-        this JsonElement json
-    )
+    public static ColorInfo GetColorInfo(this JsonElement json)
     {
         RequiredMember brightness = "brightness";
         RequiredMember contrast = "contrast";

@@ -1,5 +1,5 @@
-﻿using GuildWars2.Json;
-using GuildWars2.Worlds.Http;
+﻿using GuildWars2.Http;
+using GuildWars2.Json;
 
 namespace GuildWars2.Worlds;
 
@@ -24,29 +24,44 @@ public sealed class WorldsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<World> Value, MessageContext Context)> GetWorlds(
+    public async Task<(HashSet<World> Value, MessageContext Context)> GetWorlds(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        WorldsRequest request = new()
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/worlds", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetWorld());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the IDs of all worlds.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetWorldsIndex(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetWorldsIndex(
         CancellationToken cancellationToken = default
     )
     {
-        WorldsIndexRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/worlds", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a world by its ID.</summary>
@@ -55,19 +70,26 @@ public sealed class WorldsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(World Value, MessageContext Context)> GetWorldById(
+    public async Task<(World Value, MessageContext Context)> GetWorldById(
         int worldId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        WorldByIdRequest request = new(worldId)
+        var query = new QueryBuilder();
+        query.AddId(worldId);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/worlds", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetWorld();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves worlds by their IDs.</summary>
@@ -76,19 +98,26 @@ public sealed class WorldsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<World> Value, MessageContext Context)> GetWorldsByIds(
+    public async Task<(HashSet<World> Value, MessageContext Context)> GetWorldsByIds(
         IEnumerable<int> worldIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        WorldsByIdsRequest request = new(worldIds.ToList())
+        var query = new QueryBuilder();
+        query.AddIds(worldIds);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/worlds", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetWorld());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of worlds.</summary>
@@ -98,7 +127,7 @@ public sealed class WorldsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<World> Value, MessageContext Context)> GetWorldsByPage(
+    public async Task<(HashSet<World> Value, MessageContext Context)> GetWorldsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -106,13 +135,19 @@ public sealed class WorldsClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        WorldsByPageRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/worlds", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetWorld());
+            return (value, response.Context);
+        }
     }
 
     #endregion

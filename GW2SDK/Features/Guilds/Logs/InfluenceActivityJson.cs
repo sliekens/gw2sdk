@@ -5,9 +5,7 @@ namespace GuildWars2.Guilds.Logs;
 
 internal static class InfluenceActivityJson
 {
-    public static InfluenceActivity GetInfluenceActivity(
-        this JsonElement json
-    )
+    public static InfluenceActivity GetInfluenceActivity(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember time = "time";
@@ -56,11 +54,11 @@ internal static class InfluenceActivityJson
         {
             Id = id.Map(static value => value.GetInt32()),
             Time = time.Map(static value => value.GetDateTimeOffset()),
-            Activity =
-                activity.Map(static value => value.GetEnum<InfluenceActivityKind>()),
+            Activity = activity.Map(static value => value.GetEnum<InfluenceActivityKind>()),
             TotalParticipants = totalParticipants.Map(static value => value.GetInt32()),
-            Participants =
-                participants.Map(static values => values.GetList(static value => value.GetStringRequired()))
+            Participants = participants.Map(
+                static values => values.GetList(static value => value.GetStringRequired())
+            )
         };
     }
 }

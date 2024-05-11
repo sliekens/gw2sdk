@@ -1,13 +1,11 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Matches;
 
 internal static class OwnedMercenaryJson
 {
-    public static OwnedMercenary GetOwnedMercenary(
-        this JsonElement json
-    )
+    public static OwnedMercenary GetOwnedMercenary(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember owner = "owner";

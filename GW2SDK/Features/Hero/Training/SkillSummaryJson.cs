@@ -7,9 +7,7 @@ namespace GuildWars2.Hero.Training;
 
 internal static class SkillSummaryJson
 {
-    public static SkillSummary GetSkillSummary(
-        this JsonElement json
-    )
+    public static SkillSummary GetSkillSummary(this JsonElement json)
     {
         if (json.TryGetProperty("type", out var discriminator))
         {

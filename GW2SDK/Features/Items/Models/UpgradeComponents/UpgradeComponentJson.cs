@@ -46,9 +46,7 @@ internal static class UpgradeComponentJson
         return flags.GetArrayLength() == count;
     }
 
-    public static UpgradeComponent GetUpgradeComponent(
-        this JsonElement json
-    )
+    public static UpgradeComponent GetUpgradeComponent(this JsonElement json)
     {
         if (json.TryGetProperty("details", out var discriminator))
         {
@@ -183,7 +181,8 @@ internal static class UpgradeComponentJson
                             {
                                 infixUpgradeBuff = infix;
                             }
-                            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
+                            else if (JsonOptions.MissingMemberBehavior
+                                == MissingMemberBehavior.Error)
                             {
                                 throw new InvalidOperationException(
                                     Strings.UnexpectedMember(infix.Name)
@@ -216,8 +215,8 @@ internal static class UpgradeComponentJson
             Rarity = rarity.Map(static value => value.GetEnum<Rarity>()),
             VendorValue = vendorValue.Map(static value => value.GetInt32()),
             GameTypes =
-                gameTypes.Map(static values => values.GetList(static value => value.GetEnum<GameType>()
-                    )
+                gameTypes.Map(
+                    static values => values.GetList(static value => value.GetEnum<GameType>())
                 ),
             Flags = flags.Map(static values => values.GetItemFlags()),
             Restrictions = restrictions.Map(static value => value.GetItemRestriction()),

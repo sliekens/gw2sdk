@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Achievements.Rewards;
 
 internal static class CoinsRewardJson
 {
-    public static CoinsReward GetCoinsReward(
-        this JsonElement json
-    )
+    public static CoinsReward GetCoinsReward(this JsonElement json)
     {
         RequiredMember coins = "count";
         foreach (var member in json.EnumerateObject())

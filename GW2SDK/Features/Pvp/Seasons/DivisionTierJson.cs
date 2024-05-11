@@ -5,9 +5,7 @@ namespace GuildWars2.Pvp.Seasons;
 
 internal static class DivisionTierJson
 {
-    public static DivisionTier GetDivisionTier(
-        this JsonElement json
-    )
+    public static DivisionTier GetDivisionTier(this JsonElement json)
     {
         RequiredMember points = "points";
 

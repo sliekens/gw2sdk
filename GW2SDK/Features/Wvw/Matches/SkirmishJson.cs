@@ -5,9 +5,7 @@ namespace GuildWars2.Wvw.Matches;
 
 internal static class SkirmishJson
 {
-    public static Skirmish GetSkirmish(
-        this JsonElement json
-    )
+    public static Skirmish GetSkirmish(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember scores = "scores";
@@ -37,7 +35,8 @@ internal static class SkirmishJson
         {
             Id = id.Map(static value => value.GetInt32()),
             Scores = scores.Map(static value => value.GetDistribution()),
-            MapScores = mapScores.Map(static values => values.GetList(static value => value.GetMapScores())
+            MapScores = mapScores.Map(
+                static values => values.GetList(static value => value.GetMapScores())
             )
         };
     }

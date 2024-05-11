@@ -6,9 +6,7 @@ namespace GuildWars2.Items;
 
 internal static class InfixUpgradeJson
 {
-    public static IDictionary<Extensible<AttributeName>, int> GetAttributes(
-        this JsonElement json
-    )
+    public static IDictionary<Extensible<AttributeName>, int> GetAttributes(this JsonElement json)
     {
         var attributes = new Dictionary<Extensible<AttributeName>, int>(json.GetArrayLength());
         foreach (var entry in json.EnumerateArray())

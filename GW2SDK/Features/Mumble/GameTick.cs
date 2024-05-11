@@ -65,9 +65,7 @@ public readonly record struct GameTick
     /// <summary>Gets the identity object from the JSON string.</summary>
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <returns>The player's identity.</returns>
-    public Identity? GetIdentity(
-        MissingMemberBehavior missingMemberBehavior = default
-    )
+    public Identity? GetIdentity(MissingMemberBehavior missingMemberBehavior = default)
     {
         if (string.IsNullOrEmpty(Identity))
         {

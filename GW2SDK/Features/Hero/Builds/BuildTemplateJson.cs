@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Builds;
 
 internal static class BuildTemplateJson
 {
-    public static BuildTemplate GetBuildTemplate(
-        this JsonElement json
-    )
+    public static BuildTemplate GetBuildTemplate(this JsonElement json)
     {
         RequiredMember tab = "tab";
         RequiredMember isActive = "is_active";

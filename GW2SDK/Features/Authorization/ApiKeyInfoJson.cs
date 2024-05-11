@@ -5,9 +5,7 @@ namespace GuildWars2.Authorization;
 
 internal static class ApiKeyInfoJson
 {
-    public static ApiKeyInfo GetApiKeyInfo(
-        this JsonElement json
-    )
+    public static ApiKeyInfo GetApiKeyInfo(this JsonElement json)
     {
         RequiredMember name = "name";
         RequiredMember id = "id";
@@ -45,7 +43,8 @@ internal static class ApiKeyInfoJson
         {
             Id = id.Map(static value => value.GetStringRequired()),
             Name = name.Map(static value => value.GetStringRequired()),
-            Permissions = permissions.Map(static values => values.GetList(static value => value.GetEnum<Permission>())
+            Permissions = permissions.Map(
+                static values => values.GetList(static value => value.GetEnum<Permission>())
             )
         };
     }

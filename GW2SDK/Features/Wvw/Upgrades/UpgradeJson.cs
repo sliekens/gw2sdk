@@ -5,9 +5,7 @@ namespace GuildWars2.Wvw.Upgrades;
 
 internal static class UpgradeJson
 {
-    public static Upgrade GetUpgrade(
-        this JsonElement json
-    )
+    public static Upgrade GetUpgrade(this JsonElement json)
     {
         RequiredMember name = "name";
         RequiredMember description = "description";

@@ -5,9 +5,7 @@ namespace GuildWars2.Wvw.Matches;
 
 internal static class WorldsJson
 {
-    public static Worlds GetWorlds(
-        this JsonElement json
-    )
+    public static Worlds GetWorlds(this JsonElement json)
     {
         RequiredMember red = "red";
         RequiredMember blue = "blue";

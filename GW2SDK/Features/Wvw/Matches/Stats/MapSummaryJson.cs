@@ -6,9 +6,7 @@ namespace GuildWars2.Wvw.Matches.Stats;
 
 internal static class MapSummaryJson
 {
-    public static MapSummary GetMapSummary(
-        this JsonElement json
-    )
+    public static MapSummary GetMapSummary(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember type = "type";

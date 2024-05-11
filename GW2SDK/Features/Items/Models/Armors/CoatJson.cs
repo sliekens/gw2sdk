@@ -133,7 +133,8 @@ internal static class CoatJson
                             {
                                 infixUpgradeBuff = infix;
                             }
-                            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
+                            else if (JsonOptions.MissingMemberBehavior
+                                == MissingMemberBehavior.Error)
                             {
                                 throw new InvalidOperationException(
                                     Strings.UnexpectedMember(infix.Name)
@@ -171,18 +172,18 @@ internal static class CoatJson
             VendorValue = vendorValue.Map(static value => value.GetInt32()),
             DefaultSkinId = defaultSkin.Map(static value => value.GetInt32()),
             GameTypes =
-                gameTypes.Map(static values => values.GetList(static value => value.GetEnum<GameType>()
-                    )
+                gameTypes.Map(
+                    static values => values.GetList(static value => value.GetEnum<GameType>())
                 ),
             Flags = flags.Map(static values => values.GetItemFlags()),
             Restrictions = restrictions.Map(static value => value.GetItemRestriction()),
             ChatLink = chatLink.Map(static value => value.GetStringRequired()),
             IconHref = icon.Map(static value => value.GetString()),
-            WeightClass =
-                weightClass.Map(static value => value.GetEnum<WeightClass>()),
+            WeightClass = weightClass.Map(static value => value.GetEnum<WeightClass>()),
             Defense = defense.Map(static value => value.GetInt32()),
             InfusionSlots =
-                infusionSlots.Map(static values => values.GetList(static value => value.GetInfusionSlot())
+                infusionSlots.Map(
+                    static values => values.GetList(static value => value.GetInfusionSlot())
                 ),
             AttributeAdjustment = attributeAdjustment.Map(static value => value.GetDouble()),
             StatChoices =

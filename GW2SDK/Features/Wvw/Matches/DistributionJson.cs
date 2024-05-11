@@ -5,9 +5,7 @@ namespace GuildWars2.Wvw.Matches;
 
 internal static class DistributionJson
 {
-    public static Distribution GetDistribution(
-        this JsonElement json
-    )
+    public static Distribution GetDistribution(this JsonElement json)
     {
         RequiredMember red = "red";
         RequiredMember blue = "blue";

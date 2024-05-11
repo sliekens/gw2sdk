@@ -5,9 +5,7 @@ namespace GuildWars2.Guilds.Emblems;
 
 internal static class EmblemForegroundJson
 {
-    public static EmblemForeground GetEmblemForeground(
-        this JsonElement json
-    )
+    public static EmblemForeground GetEmblemForeground(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember layers = "layers";
@@ -31,7 +29,9 @@ internal static class EmblemForegroundJson
         return new EmblemForeground
         {
             Id = id.Map(static value => value.GetInt32()),
-            Layers = layers.Map(static values => values.GetList(static value => value.GetStringRequired()))
+            Layers = layers.Map(
+                static values => values.GetList(static value => value.GetStringRequired())
+            )
         };
     }
 }

@@ -5,9 +5,7 @@ namespace GuildWars2.WizardsVault.Objectives;
 
 internal static class SpecialObjectivesProgressJson
 {
-    public static SpecialObjectivesProgress GetSpecialObjectivesProgress(
-        this JsonElement json
-    )
+    public static SpecialObjectivesProgress GetSpecialObjectivesProgress(this JsonElement json)
     {
         RequiredMember objectives = "objectives";
 
@@ -25,8 +23,8 @@ internal static class SpecialObjectivesProgressJson
 
         return new SpecialObjectivesProgress
         {
-            Objectives = objectives.Map(static values => values.GetList(static value => value.GetObjectiveProgress()
-                )
+            Objectives = objectives.Map(
+                static values => values.GetList(static value => value.GetObjectiveProgress())
             )
         };
     }

@@ -5,9 +5,7 @@ namespace GuildWars2.Guilds.Logs;
 
 internal static class GuildUpgradeActivityJson
 {
-    public static GuildUpgradeActivity GetGuildUpgradeActivity(
-        this JsonElement json
-    )
+    public static GuildUpgradeActivity GetGuildUpgradeActivity(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember time = "time";

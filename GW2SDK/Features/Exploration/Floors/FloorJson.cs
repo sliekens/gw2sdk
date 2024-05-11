@@ -40,11 +40,10 @@ internal static class FloorJson
         return new Floor
         {
             Id = id.Map(static value => value.GetInt32()),
-            TextureDimensions =
-                textureDimensions.Map(static value => value.GetDimensions()),
-            ClampedView =
-                clampedView.Map(static value => value.GetContinentRectangle()),
-            Regions = regions.Map(static value => value.GetMap(static entry => entry.GetRegion())
+            TextureDimensions = textureDimensions.Map(static value => value.GetDimensions()),
+            ClampedView = clampedView.Map(static value => value.GetContinentRectangle()),
+            Regions = regions.Map(
+                static value => value.GetMap(static entry => entry.GetRegion())
                     .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
             )
         };

@@ -6,9 +6,7 @@ namespace GuildWars2.Hero.Training.Skills;
 
 internal static class ProfessionSkillSummaryJson
 {
-    public static ProfessionSkillSummary GetProfessionSkillSummary(
-        this JsonElement json
-    )
+    public static ProfessionSkillSummary GetProfessionSkillSummary(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember slot = "slot";

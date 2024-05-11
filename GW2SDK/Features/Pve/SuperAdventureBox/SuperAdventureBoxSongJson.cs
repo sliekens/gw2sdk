@@ -5,9 +5,7 @@ namespace GuildWars2.Pve.SuperAdventureBox;
 
 internal static class SuperAdventureBoxSongJson
 {
-    public static SuperAdventureBoxSong GetSuperAdventureBoxSong(
-        this JsonElement json
-    )
+    public static SuperAdventureBoxSong GetSuperAdventureBoxSong(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";

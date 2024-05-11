@@ -6,9 +6,7 @@ namespace GuildWars2.Exploration.Regions;
 
 internal static class RegionJson
 {
-    public static Region GetRegion(
-        this JsonElement json
-    )
+    public static Region GetRegion(this JsonElement json)
     {
         RequiredMember name = "name";
         RequiredMember labelCoordinates = "label_coord";
@@ -47,11 +45,11 @@ internal static class RegionJson
         {
             Id = id.Map(static value => value.GetInt32()),
             Name = name.Map(static value => value.GetStringRequired()),
-            LabelCoordinates =
-                labelCoordinates.Map(static value => value.GetCoordinate()),
+            LabelCoordinates = labelCoordinates.Map(static value => value.GetCoordinate()),
             ContinentRectangle =
                 continentRectangle.Map(static value => value.GetContinentRectangle()),
-            Maps = maps.Map(static value => value.GetMap(static entry => entry.GetMap())
+            Maps = maps.Map(
+                static value => value.GetMap(static entry => entry.GetMap())
                     .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
             )
         };

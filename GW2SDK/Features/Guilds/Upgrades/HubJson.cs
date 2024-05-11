@@ -79,8 +79,12 @@ internal static class HubJson
             IconHref = icon.Map(static value => value.GetStringRequired()),
             RequiredLevel = requiredLevel.Map(static value => value.GetInt32()),
             Experience = experience.Map(static value => value.GetInt32()),
-            Prerequisites = prerequisites.Map(static values => values.GetList(static value => value.GetInt32())),
-            Costs = costs.Map(static values => values.GetList(static value => value.GetGuildUpgradeCost())
+            Prerequisites =
+                prerequisites.Map(
+                    static values => values.GetList(static value => value.GetInt32())
+                ),
+            Costs = costs.Map(
+                static values => values.GetList(static value => value.GetGuildUpgradeCost())
             )
         };
     }

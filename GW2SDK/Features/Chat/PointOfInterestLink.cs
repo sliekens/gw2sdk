@@ -30,7 +30,10 @@ public sealed record PointOfInterestLink : Link
         var buffer = new LinkBuffer(bytes);
         if (buffer.ReadUInt8() != LinkHeader.PointOfInterest)
         {
-            throw new ArgumentException("Expected a point of interest chat link.", nameof(chatLink));
+            throw new ArgumentException(
+                "Expected a point of interest chat link.",
+                nameof(chatLink)
+            );
         }
 
         var pointOfInterestId = buffer.ReadInt32();

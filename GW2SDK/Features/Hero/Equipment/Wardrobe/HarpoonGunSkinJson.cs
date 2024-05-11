@@ -6,9 +6,7 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 internal static class HarpoonGunSkinJson
 {
-    public static HarpoonGunSkin GetHarpoonGunSkin(
-        this JsonElement json
-    )
+    public static HarpoonGunSkin GetHarpoonGunSkin(this JsonElement json)
     {
         RequiredMember name = "name";
         OptionalMember description = "description";

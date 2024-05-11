@@ -5,9 +5,7 @@ namespace GuildWars2.Guilds.Upgrades;
 
 internal static class GuildHallExpeditionJson
 {
-    public static GuildHallExpedition GetGuildHallExpedition(
-        this JsonElement json
-    )
+    public static GuildHallExpedition GetGuildHallExpedition(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -81,8 +79,12 @@ internal static class GuildHallExpeditionJson
             IconHref = icon.Map(static value => value.GetStringRequired()),
             RequiredLevel = requiredLevel.Map(static value => value.GetInt32()),
             Experience = experience.Map(static value => value.GetInt32()),
-            Prerequisites = prerequisites.Map(static values => values.GetList(static value => value.GetInt32())),
-            Costs = costs.Map(static values => values.GetList(static value => value.GetGuildUpgradeCost())
+            Prerequisites =
+                prerequisites.Map(
+                    static values => values.GetList(static value => value.GetInt32())
+                ),
+            Costs = costs.Map(
+                static values => values.GetList(static value => value.GetGuildUpgradeCost())
             )
         };
     }

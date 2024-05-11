@@ -1,4 +1,4 @@
-﻿using GuildWars2.Hero.Banking.Http;
+﻿using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Banking;
@@ -24,18 +24,23 @@ public sealed class BankClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(Bank Value, MessageContext Context)> GetBank(
+    public async Task<(Bank Value, MessageContext Context)> GetBank(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        BankRequest request = new()
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/account/bank", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            AccessToken = accessToken,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetBank();
+            return (value, response.Context);
+        }
     }
 
     #endregion
@@ -47,18 +52,23 @@ public sealed class BankClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(MaterialStorage Value, MessageContext Context)> GetMaterialStorage(
+    public async Task<(MaterialStorage Value, MessageContext Context)> GetMaterialStorage(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        MaterialStorageRequest request = new()
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/account/materials", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            AccessToken = accessToken,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetMaterialStorage();
+            return (value, response.Context);
+        }
     }
 
     #endregion
@@ -70,29 +80,46 @@ public sealed class BankClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<MaterialCategory> Value, MessageContext Context)> GetMaterialCategories(
-        Language? language = default,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    public async Task<(HashSet<MaterialCategory> Value, MessageContext Context)>
+        GetMaterialCategories(
+            Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        MaterialCategoriesRequest request = new()
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/materials", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetMaterialCategory());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the IDs of all material categories.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetMaterialCategoriesIndex(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetMaterialCategoriesIndex(
         CancellationToken cancellationToken = default
     )
     {
-        MaterialCategoriesIndexRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/materials", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a material category by its ID.</summary>
@@ -101,19 +128,26 @@ public sealed class BankClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(MaterialCategory Value, MessageContext Context)> GetMaterialCategoryById(
+    public async Task<(MaterialCategory Value, MessageContext Context)> GetMaterialCategoryById(
         int materialCategoryId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        MaterialCategoryByIdRequest request = new(materialCategoryId)
+        var query = new QueryBuilder();
+        query.AddId(materialCategoryId);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/materials", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetMaterialCategory();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves material categories by their IDs.</summary>
@@ -123,7 +157,7 @@ public sealed class BankClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<MaterialCategory> Value, MessageContext Context)>
+    public async Task<(HashSet<MaterialCategory> Value, MessageContext Context)>
         GetMaterialCategoriesByIds(
             IEnumerable<int> materialCategoryIds,
             Language? language = default,
@@ -131,12 +165,20 @@ public sealed class BankClient
             CancellationToken cancellationToken = default
         )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        MaterialCategoriesByIdsRequest request = new(materialCategoryIds.ToList())
+        var query = new QueryBuilder();
+        query.AddIds(materialCategoryIds);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/materials", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetMaterialCategory());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of material categories.</summary>
@@ -146,7 +188,7 @@ public sealed class BankClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<MaterialCategory> Value, MessageContext Context)>
+    public async Task<(HashSet<MaterialCategory> Value, MessageContext Context)>
         GetMaterialCategoriesByPage(
             int pageIndex,
             int? pageSize = default,
@@ -155,13 +197,20 @@ public sealed class BankClient
             CancellationToken cancellationToken = default
         )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        MaterialCategoriesByPageRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/materials", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetMaterialCategory());
+            return (value, response.Context);
+        }
     }
 
     #endregion

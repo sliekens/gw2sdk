@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Equipment.Mounts;
 
 internal static class MountSkinJson
 {
-    public static MountSkin GetMountSkin(
-        this JsonElement json
-    )
+    public static MountSkin GetMountSkin(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -49,8 +47,7 @@ internal static class MountSkinJson
             Name = name.Map(static value => value.GetStringRequired()),
             IconHref = icon.Map(static value => value.GetStringRequired()),
             DyeSlots =
-                dyeSlots.Map(static values => values.GetList(static value => value.GetDyeSlot())
-                ),
+                dyeSlots.Map(static values => values.GetList(static value => value.GetDyeSlot())),
             Mount = mount.Map(static value => value.GetMountName())
         };
     }

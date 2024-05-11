@@ -148,7 +148,8 @@ internal static class ToyJson
                             {
                                 infixUpgradeBuff = infix;
                             }
-                            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
+                            else if (JsonOptions.MissingMemberBehavior
+                                == MissingMemberBehavior.Error)
                             {
                                 throw new InvalidOperationException(
                                     Strings.UnexpectedMember(infix.Name)
@@ -186,8 +187,8 @@ internal static class ToyJson
             VendorValue = vendorValue.Map(static value => value.GetInt32()),
             DefaultSkinId = defaultSkin.Map(static value => value.GetInt32()),
             GameTypes =
-                gameTypes.Map(static values => values.GetList(static value => value.GetEnum<GameType>()
-                    )
+                gameTypes.Map(
+                    static values => values.GetList(static value => value.GetEnum<GameType>())
                 ),
             Flags = flags.Map(static values => values.GetItemFlags()),
             Restrictions = restrictions.Map(static value => value.GetItemRestriction()),
@@ -198,7 +199,8 @@ internal static class ToyJson
             MaxPower = maxPower.Map(static value => value.GetInt32()),
             Defense = defense.Map(static value => value.GetInt32()),
             InfusionSlots =
-                infusionSlots.Map(static values => values.GetList(static value => value.GetInfusionSlot())
+                infusionSlots.Map(
+                    static values => values.GetList(static value => value.GetInfusionSlot())
                 ),
             AttributeAdjustment = attributeAdjustment.Map(static value => value.GetDouble()),
             StatChoices =

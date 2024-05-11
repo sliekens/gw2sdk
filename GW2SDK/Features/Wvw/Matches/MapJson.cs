@@ -58,10 +58,10 @@ internal static class MapJson
             Kind = type.Map(static value => value.GetEnum<MapKind>()),
             Scores = scores.Map(static value => value.GetDistribution()),
             Bonuses =
-                bonuses.Map(static values => values.GetList(static value => value.GetBonus())
-                ),
+                bonuses.Map(static values => values.GetList(static value => value.GetBonus())),
             Objectives =
-                objectives.Map(static values => values.GetList(static value => value.GetOwnedObjective())
+                objectives.Map(
+                    static values => values.GetList(static value => value.GetOwnedObjective())
                 ),
             Deaths = deaths.Map(static value => value.GetDistribution()),
             Kills = kills.Map(static value => value.GetDistribution())

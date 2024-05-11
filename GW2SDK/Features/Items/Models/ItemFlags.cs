@@ -25,7 +25,8 @@ public sealed record ItemFlags : Flags
     /// <summary>Whether the item is infused. Infused equipment gains one extra infusion slot.</summary>
     public required bool Infused { get; init; }
 
-    /// <summary>Unknown flag. The name suggests that the item is only usable by monsters, but some player items also have this flag.</summary>
+    /// <summary>Unknown flag. The name suggests that the item is only usable by monsters, but some player items also have this
+    /// flag.</summary>
     public required bool MonsterOnly { get; init; }
 
     /// <summary>Whether the item can be used in the mystic forge.</summary>

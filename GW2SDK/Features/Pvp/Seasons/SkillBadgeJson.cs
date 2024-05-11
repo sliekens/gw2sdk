@@ -5,9 +5,7 @@ namespace GuildWars2.Pvp.Seasons;
 
 internal static class SkillBadgeJson
 {
-    public static SkillBadge GetSkillBadge(
-        this JsonElement json
-    )
+    public static SkillBadge GetSkillBadge(this JsonElement json)
     {
         RequiredMember name = "name";
         RequiredMember description = "description";
@@ -55,7 +53,8 @@ internal static class SkillBadgeJson
             IconHref = icon.Map(static value => value.GetStringRequired()),
             Overlay = overlay.Map(static value => value.GetStringRequired()),
             SmallOverlay = smallOverlay.Map(static value => value.GetStringRequired()),
-            Tiers = tiers.Map(static values => values.GetList(static value => value.GetSkillBadgeTier())
+            Tiers = tiers.Map(
+                static values => values.GetList(static value => value.GetSkillBadgeTier())
             )
         };
     }

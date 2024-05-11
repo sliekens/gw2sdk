@@ -7,9 +7,7 @@ namespace GuildWars2.Wvw.Objectives;
 
 internal static class PointJson
 {
-    public static PointF GetCoordinateF(
-        this JsonElement json
-    )
+    public static PointF GetCoordinateF(this JsonElement json)
     {
         JsonElement x = default;
         JsonElement y = default;
@@ -35,9 +33,7 @@ internal static class PointJson
         return new PointF(x.GetSingle(), y.GetSingle());
     }
 
-    public static Vector3 GetCoordinate3(
-        this JsonElement json
-    )
+    public static Vector3 GetCoordinate3(this JsonElement json)
     {
         JsonElement x = default;
         JsonElement y = default;

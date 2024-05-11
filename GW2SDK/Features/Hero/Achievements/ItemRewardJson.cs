@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Achievements;
 
 internal static class ItemRewardJson
 {
-    public static ItemReward GetItemReward(
-        this JsonElement json
-    )
+    public static ItemReward GetItemReward(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember count = "count";

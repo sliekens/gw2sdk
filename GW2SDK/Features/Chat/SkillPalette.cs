@@ -7,4 +7,10 @@ namespace GuildWars2.Chat;
 /// <param name="Utility3">The third utility skill palette ID.</param>
 /// <param name="Elite">The elite skill palette ID.</param>
 [PublicAPI]
-public record struct SkillPalette(int? Heal, int? Utility1, int? Utility2, int? Utility3, int? Elite);
+public record struct SkillPalette(
+    int? Heal,
+    int? Utility1,
+    int? Utility2,
+    int? Utility3,
+    int? Elite
+);

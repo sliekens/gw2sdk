@@ -1,8 +1,7 @@
-﻿using GuildWars2.Json;
+﻿using GuildWars2.Http;
+using GuildWars2.Json;
 using GuildWars2.Pve.Home.Cats;
-using GuildWars2.Pve.Home.Cats.Http;
 using GuildWars2.Pve.Home.Nodes;
-using GuildWars2.Pve.Home.Nodes.Http;
 
 namespace GuildWars2.Pve.Home;
 
@@ -27,13 +26,21 @@ public sealed class HomeClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedCats(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedCats(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
     {
-        UnlockedCatsIndexRequest request = new() { AccessToken = accessToken };
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/account/home/cats", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/account/home/cats
@@ -45,13 +52,21 @@ public sealed class HomeClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<string> Value, MessageContext Context)> GetUnlockedNodes(
+    public async Task<(HashSet<string> Value, MessageContext Context)> GetUnlockedNodes(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
     {
-        UnlockedNodesIndexRequest request = new() { AccessToken = accessToken };
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/account/home/nodes", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/account/home/nodes
@@ -62,25 +77,42 @@ public sealed class HomeClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Cat> Value, MessageContext Context)> GetCats(
+    public async Task<(HashSet<Cat> Value, MessageContext Context)> GetCats(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        CatsRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/home/cats", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetCat());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the IDs of all home cats.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetCatsIndex(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetCatsIndex(
         CancellationToken cancellationToken = default
     )
     {
-        CatsIndexRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/home/cats", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a home cat by its ID.</summary>
@@ -88,15 +120,24 @@ public sealed class HomeClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(Cat Value, MessageContext Context)> GetCatById(
+    public async Task<(Cat Value, MessageContext Context)> GetCatById(
         int catId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        CatByIdRequest request = new(catId);
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddId(catId);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/home/cats", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetCat();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves home cats by their IDs.</summary>
@@ -104,15 +145,24 @@ public sealed class HomeClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Cat> Value, MessageContext Context)> GetCatsByIds(
+    public async Task<(HashSet<Cat> Value, MessageContext Context)> GetCatsByIds(
         IEnumerable<int> catIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        CatsByIdsRequest request = new(catIds.ToList());
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddIds(catIds);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/home/cats", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetCat());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of home cats.</summary>
@@ -121,19 +171,25 @@ public sealed class HomeClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Cat> Value, MessageContext Context)> GetCatsByPage(
+    public async Task<(HashSet<Cat> Value, MessageContext Context)> GetCatsByPage(
         int pageIndex,
         int? pageSize,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        CatsByPageRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/home/cats", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetCat());
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/home/cats
@@ -144,25 +200,42 @@ public sealed class HomeClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Node> Value, MessageContext Context)> GetNodes(
+    public async Task<(HashSet<Node> Value, MessageContext Context)> GetNodes(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        NodesRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/home/nodes", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetNode());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the IDs of all home gathering nodes.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<string> Value, MessageContext Context)> GetNodesIndex(
+    public async Task<(HashSet<string> Value, MessageContext Context)> GetNodesIndex(
         CancellationToken cancellationToken = default
     )
     {
-        NodesIndexRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/home/nodes", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a home gathering node by its ID.</summary>
@@ -170,15 +243,24 @@ public sealed class HomeClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(Node Value, MessageContext Context)> GetNodeById(
+    public async Task<(Node Value, MessageContext Context)> GetNodeById(
         string nodeId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        NodeByIdRequest request = new(nodeId);
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddId(nodeId);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/home/nodes", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetNode();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves home gathering nodes by their IDs.</summary>
@@ -186,15 +268,24 @@ public sealed class HomeClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Node> Value, MessageContext Context)> GetNodesByIds(
+    public async Task<(HashSet<Node> Value, MessageContext Context)> GetNodesByIds(
         IEnumerable<string> nodeIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        NodesByIdsRequest request = new(nodeIds.ToList());
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddIds(nodeIds);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/home/nodes", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetNode());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of home gathering nodes.</summary>
@@ -203,19 +294,25 @@ public sealed class HomeClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Node> Value, MessageContext Context)> GetNodesByPage(
+    public async Task<(HashSet<Node> Value, MessageContext Context)> GetNodesByPage(
         int pageIndex,
         int? pageSize,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        NodesByPageRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/home/nodes", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetNode());
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/home/nodes

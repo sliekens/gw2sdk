@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Equipment.Novelties;
 
 internal static class NoveltyJson
 {
-    public static Novelty GetNovelty(
-        this JsonElement json
-    )
+    public static Novelty GetNovelty(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -55,7 +53,8 @@ internal static class NoveltyJson
             Description = description.Map(static value => value.GetString()) ?? "",
             IconHref = icon.Map(static value => value.GetStringRequired()),
             Slot = slot.Map(static value => value.GetEnum<NoveltyKind>()),
-            UnlockItemIds = unlockItems.Map(static values => values.GetList(static value => value.GetInt32()))
+            UnlockItemIds =
+                unlockItems.Map(static values => values.GetList(static value => value.GetInt32()))
         };
     }
 }

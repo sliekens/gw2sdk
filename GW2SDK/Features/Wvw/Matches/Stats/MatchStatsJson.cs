@@ -5,9 +5,7 @@ namespace GuildWars2.Wvw.Matches.Stats;
 
 internal static class MatchStatsJson
 {
-    public static MatchStats GetMatchStats(
-        this JsonElement json
-    )
+    public static MatchStats GetMatchStats(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember deaths = "deaths";
@@ -43,8 +41,7 @@ internal static class MatchStatsJson
             Id = id.Map(static value => value.GetStringRequired()),
             Deaths = deaths.Map(static value => value.GetDistribution()),
             Kills = kills.Map(static value => value.GetDistribution()),
-            Maps = maps.Map(static values => values.GetList(static value => value.GetMapSummary())
-            )
+            Maps = maps.Map(static values => values.GetList(static value => value.GetMapSummary()))
         };
     }
 }

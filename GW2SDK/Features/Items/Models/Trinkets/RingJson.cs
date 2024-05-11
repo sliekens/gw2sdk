@@ -128,7 +128,8 @@ internal static class RingJson
                             {
                                 infixUpgradeBuff = infix;
                             }
-                            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
+                            else if (JsonOptions.MissingMemberBehavior
+                                == MissingMemberBehavior.Error)
                             {
                                 throw new InvalidOperationException(
                                     Strings.UnexpectedMember(infix.Name)
@@ -165,15 +166,16 @@ internal static class RingJson
             Rarity = rarity.Map(static value => value.GetEnum<Rarity>()),
             VendorValue = vendorValue.Map(static value => value.GetInt32()),
             GameTypes =
-                gameTypes.Map(static values => values.GetList(static value => value.GetEnum<GameType>()
-                    )
+                gameTypes.Map(
+                    static values => values.GetList(static value => value.GetEnum<GameType>())
                 ),
             Flags = flags.Map(static values => values.GetItemFlags()),
             Restrictions = restrictions.Map(static value => value.GetItemRestriction()),
             ChatLink = chatLink.Map(static value => value.GetStringRequired()),
             IconHref = icon.Map(static value => value.GetString()),
             InfusionSlots =
-                infusionSlots.Map(static values => values.GetList(static value => value.GetInfusionSlot())
+                infusionSlots.Map(
+                    static values => values.GetList(static value => value.GetInfusionSlot())
                 ),
             AttributeAdjustment = attributeAdjustment.Map(static value => value.GetDouble()),
             StatChoices =
@@ -186,13 +188,15 @@ internal static class RingJson
             Buff = infixUpgradeBuff.Map(static value => value.GetBuff()),
             SuffixItemId = suffixItemId.Map(static value => value.GetInt32()),
             UpgradesInto =
-                upgradesInto.Map(static values =>
-                        values.GetList(static value => value.GetInfusionSlotUpgradePath()
-                        )
+                upgradesInto.Map(
+                    static values =>
+                        values.GetList(static value => value.GetInfusionSlotUpgradePath())
                 )
                 ?? Empty.List<InfusionSlotUpgradePath>(),
-            UpgradesFrom = upgradesFrom.Map(static values => values.GetList(static value => value.GetInfusionSlotUpgradeSource()
-                    )
+            UpgradesFrom =
+                upgradesFrom.Map(
+                    static values =>
+                        values.GetList(static value => value.GetInfusionSlotUpgradeSource())
                 )
                 ?? Empty.List<InfusionSlotUpgradeSource>()
         };

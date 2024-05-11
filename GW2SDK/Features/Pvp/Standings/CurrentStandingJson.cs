@@ -5,9 +5,7 @@ namespace GuildWars2.Pvp.Standings;
 
 internal static class CurrentStandingJson
 {
-    public static CurrentStanding GetCurrentStanding(
-        this JsonElement json
-    )
+    public static CurrentStanding GetCurrentStanding(this JsonElement json)
     {
         RequiredMember totalPoints = "total_points";
         RequiredMember division = "division";

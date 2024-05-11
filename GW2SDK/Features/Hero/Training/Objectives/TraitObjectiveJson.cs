@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Training.Objectives;
 
 internal static class TraitObjectiveJson
 {
-    public static TraitObjective GetTraitObjective(
-        this JsonElement json
-    )
+    public static TraitObjective GetTraitObjective(this JsonElement json)
     {
         RequiredMember cost = "cost";
         RequiredMember traitId = "trait_id";

@@ -1,4 +1,4 @@
-﻿using GuildWars2.Hero.Equipment.MailCarriers.Http;
+﻿using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.MailCarriers;
@@ -24,13 +24,21 @@ public sealed class MailCarriersClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedMailCarriers(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedMailCarriers(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
     {
-        UnlockedMailCarriersRequest request = new() { AccessToken = accessToken };
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/account/mailcarriers", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/account/mailcarriers
@@ -42,29 +50,44 @@ public sealed class MailCarriersClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<MailCarrier> Value, MessageContext Context)> GetMailCarriers(
+    public async Task<(HashSet<MailCarrier> Value, MessageContext Context)> GetMailCarriers(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        MailCarriersRequest request = new()
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/mailcarriers", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetMailCarrier());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the IDs of all mail carriers.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetMailCarriersIndex(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetMailCarriersIndex(
         CancellationToken cancellationToken = default
     )
     {
-        MailCarriersIndexRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/mailcarriers", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a mail carrier by its ID.</summary>
@@ -73,19 +96,26 @@ public sealed class MailCarriersClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(MailCarrier Value, MessageContext Context)> GetMailCarrierById(
+    public async Task<(MailCarrier Value, MessageContext Context)> GetMailCarrierById(
         int mailCarrierId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        MailCarrierByIdRequest request = new(mailCarrierId)
+        var query = new QueryBuilder();
+        query.AddId(mailCarrierId);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/mailcarriers", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetMailCarrier();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves mail carriers by their IDs.</summary>
@@ -94,19 +124,26 @@ public sealed class MailCarriersClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<MailCarrier> Value, MessageContext Context)> GetMailCarriersByIds(
+    public async Task<(HashSet<MailCarrier> Value, MessageContext Context)> GetMailCarriersByIds(
         IEnumerable<int> mailCarrierIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        MailCarriersByIdsRequest request = new(mailCarrierIds.ToList())
+        var query = new QueryBuilder();
+        query.AddIds(mailCarrierIds);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/mailcarriers", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetMailCarrier());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of mail carriers.</summary>
@@ -116,7 +153,7 @@ public sealed class MailCarriersClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<MailCarrier> Value, MessageContext Context)> GetMailCarriersByPage(
+    public async Task<(HashSet<MailCarrier> Value, MessageContext Context)> GetMailCarriersByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -124,13 +161,19 @@ public sealed class MailCarriersClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        MailCarriersByPageRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/mailcarriers", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetMailCarrier());
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/mailcarriers

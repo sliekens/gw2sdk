@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Builds;
 
 internal static class SelectedPetsJson
 {
-    public static SelectedPets GetSelectedPets(
-        this JsonElement json
-    )
+    public static SelectedPets GetSelectedPets(this JsonElement json)
     {
         RequiredMember terrestrial = "terrestrial";
         RequiredMember aquatic = "aquatic";

@@ -1,4 +1,4 @@
-﻿using GuildWars2.Hero.Equipment.Templates.Http;
+﻿using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Templates;
@@ -26,19 +26,24 @@ public sealed class EquipmentTemplatesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(CharacterEquipment Value, MessageContext Context)> GetCharacterEquipment(
+    public async Task<(CharacterEquipment Value, MessageContext Context)> GetCharacterEquipment(
         string characterName,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        CharacterEquipmentRequest request = new(characterName)
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet($"v2/characters/{characterName}/equipment", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            AccessToken = accessToken,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetCharacterEquipment();
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/characters/:id/equipment
@@ -51,18 +56,26 @@ public sealed class EquipmentTemplatesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<BoundLegendaryItem> Value, MessageContext Context)> GetBoundLegendaryItems(
-        string? accessToken,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    public async Task<(HashSet<BoundLegendaryItem> Value, MessageContext Context)>
+        GetBoundLegendaryItems(
+            string? accessToken,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        BoundLegendaryItemsRequest request = new()
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/account/legendaryarmory", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            AccessToken = accessToken,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetBoundLegendaryItem());
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/account/legendaryarmory
@@ -76,14 +89,23 @@ public sealed class EquipmentTemplatesClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(IReadOnlyList<int> Value, MessageContext Context)> GetEquipmentTemplateNumbers(
-        string characterName,
-        string? accessToken,
-        CancellationToken cancellationToken = default
-    )
+    public async Task<(IReadOnlyList<int> Value, MessageContext Context)>
+        GetEquipmentTemplateNumbers(
+            string characterName,
+            string? accessToken,
+            CancellationToken cancellationToken = default
+        )
     {
-        UnlockedEquipmentTabsRequest request = new(characterName) { AccessToken = accessToken };
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet($"v2/characters/{characterName}/equipmenttabs", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetList(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves an equipment template of a character on the account. This endpoint is only accessible with a valid
@@ -94,7 +116,7 @@ public sealed class EquipmentTemplatesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(EquipmentTemplate Value, MessageContext Context)> GetEquipmentTemplate(
+    public async Task<(EquipmentTemplate Value, MessageContext Context)> GetEquipmentTemplate(
         string characterName,
         int templateNumber,
         string? accessToken,
@@ -102,12 +124,17 @@ public sealed class EquipmentTemplatesClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        EquipmentTemplateRequest request = new(characterName, templateNumber)
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet($"v2/characters/{characterName}/equipmenttabs/{templateNumber}", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            AccessToken = accessToken,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetEquipmentTemplate();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves all unlocked equipment templates of a character on the account. This endpoint is only accessible
@@ -117,19 +144,32 @@ public sealed class EquipmentTemplatesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<EquipmentTemplate> Value, MessageContext Context)> GetEquipmentTemplates(
-        string characterName,
-        string? accessToken,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    public async Task<(HashSet<EquipmentTemplate> Value, MessageContext Context)>
+        GetEquipmentTemplates(
+            string characterName,
+            string? accessToken,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        EquipmentTemplatesRequest request = new(characterName)
+        // There is no ids=all support, but page=0 works
+        var query = new QueryBuilder();
+        query.AddPage(0, null);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet(
+            $"v2/characters/{characterName}/equipmenttabs",
+            query,
+            accessToken
+        );
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            AccessToken = accessToken,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetEquipmentTemplate());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the currently active equipment tab of a character on the account. This endpoint is only accessible
@@ -140,19 +180,24 @@ public sealed class EquipmentTemplatesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(EquipmentTemplate Value, MessageContext Context)> GetActiveEquipmentTemplate(
+    public async Task<(EquipmentTemplate Value, MessageContext Context)> GetActiveEquipmentTemplate(
         string characterName,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        ActiveEquipmentTemplateRequest request = new(characterName)
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet($"v2/characters/{characterName}/equipmenttabs/active", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            AccessToken = accessToken,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetEquipmentTemplate();
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/characters/:id/equipmenttabs
@@ -163,25 +208,42 @@ public sealed class EquipmentTemplatesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<LegendaryItem> Value, MessageContext Context)> GetLegendaryItems(
+    public async Task<(HashSet<LegendaryItem> Value, MessageContext Context)> GetLegendaryItems(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        LegendaryItemsRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/legendaryarmory", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetLegendaryItem());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the IDs of all legendary items.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetLegendaryItemsIndex(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetLegendaryItemsIndex(
         CancellationToken cancellationToken = default
     )
     {
-        LegendaryItemsIndexRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/legendaryarmory", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a legendary item by its ID.</summary>
@@ -189,15 +251,24 @@ public sealed class EquipmentTemplatesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(LegendaryItem Value, MessageContext Context)> GetLegendaryItemById(
+    public async Task<(LegendaryItem Value, MessageContext Context)> GetLegendaryItemById(
         int legendaryItemId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        LegendaryItemByIdRequest request = new(legendaryItemId);
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddId(legendaryItemId);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/legendaryarmory", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetLegendaryItem();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves legendary items by their IDs.</summary>
@@ -206,15 +277,25 @@ public sealed class EquipmentTemplatesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<LegendaryItem> Value, MessageContext Context)> GetLegendaryItemsByIds(
-        IEnumerable<int> legendaryItemIds,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    public async Task<(HashSet<LegendaryItem> Value, MessageContext Context)>
+        GetLegendaryItemsByIds(
+            IEnumerable<int> legendaryItemIds,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        LegendaryItemsByIdsRequest request = new(legendaryItemIds.ToList());
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddIds(legendaryItemIds);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/legendaryarmory", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetLegendaryItem());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of legendary items.</summary>
@@ -223,19 +304,26 @@ public sealed class EquipmentTemplatesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<LegendaryItem> Value, MessageContext Context)> GetLegendaryItemsByPage(
-        int pageIndex,
-        int? pageSize = default,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    public async Task<(HashSet<LegendaryItem> Value, MessageContext Context)>
+        GetLegendaryItemsByPage(
+            int pageIndex,
+            int? pageSize = default,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        LegendaryItemsByPageRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/legendaryarmory", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetLegendaryItem());
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/legendaryarmory

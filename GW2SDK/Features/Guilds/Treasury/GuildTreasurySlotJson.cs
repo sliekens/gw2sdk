@@ -5,9 +5,7 @@ namespace GuildWars2.Guilds.Treasury;
 
 internal static class GuildTreasurySlotJson
 {
-    public static GuildTreasurySlot GetGuildTreasurySlot(
-        this JsonElement json
-    )
+    public static GuildTreasurySlot GetGuildTreasurySlot(this JsonElement json)
     {
         RequiredMember itemId = "item_id";
         RequiredMember count = "count";
@@ -37,8 +35,8 @@ internal static class GuildTreasurySlotJson
         {
             ItemId = itemId.Map(static value => value.GetInt32()),
             Count = count.Map(static value => value.GetInt32()),
-            CountNeededForUpgrades = countNeededForUpgrade.Map(static values => values.GetList(static value => value.GetCountNeededForUpgrade()
-                )
+            CountNeededForUpgrades = countNeededForUpgrade.Map(
+                static values => values.GetList(static value => value.GetCountNeededForUpgrade())
             )
         };
     }

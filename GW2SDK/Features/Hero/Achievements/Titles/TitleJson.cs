@@ -46,8 +46,10 @@ internal static class TitleJson
         {
             Id = id.Map(static value => value.GetInt32()),
             Name = name.Map(static value => value.GetStringRequired()),
-            Achievements = achievements.Map(static values => values.GetList(static value => value.GetInt32())),
-            AchievementPointsRequired = achievementPointsRequired.Map(static value => value.GetInt32())
+            Achievements =
+                achievements.Map(static values => values.GetList(static value => value.GetInt32())),
+            AchievementPointsRequired =
+                achievementPointsRequired.Map(static value => value.GetInt32())
         };
     }
 }

@@ -5,7 +5,8 @@ namespace GuildWars2.Hero.Builds;
 
 internal static class UtilitySkillIdsJson
 {
-    public static (int? UtilitySkillId, int? UtilitySkillId2, int? UtilitySkillId3) GetUtilitySkillIds(this JsonElement json)
+    public static (int? UtilitySkillId, int? UtilitySkillId2, int? UtilitySkillId3)
+        GetUtilitySkillIds(this JsonElement json)
     {
         JsonElement first = default;
         JsonElement second = default;

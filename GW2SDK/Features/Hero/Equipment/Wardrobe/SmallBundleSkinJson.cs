@@ -6,9 +6,7 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 internal static class SmallBundleSkinJson
 {
-    public static SmallBundleSkin GetSmallBundleSkin(
-        this JsonElement json
-    )
+    public static SmallBundleSkin GetSmallBundleSkin(this JsonElement json)
     {
         RequiredMember name = "name";
         OptionalMember description = "description";

@@ -5,9 +5,7 @@ namespace GuildWars2.Guilds.Teams;
 
 internal static class SeasonJson
 {
-    public static Season GetSeason(
-        this JsonElement json
-    )
+    public static Season GetSeason(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember wins = "wins";

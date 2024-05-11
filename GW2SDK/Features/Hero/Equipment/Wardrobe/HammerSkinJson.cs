@@ -6,9 +6,7 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 internal static class HammerSkinJson
 {
-    public static HammerSkin GetHammerSkin(
-        this JsonElement json
-    )
+    public static HammerSkin GetHammerSkin(this JsonElement json)
     {
         RequiredMember name = "name";
         OptionalMember description = "description";

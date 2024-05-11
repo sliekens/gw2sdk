@@ -5,9 +5,7 @@ namespace GuildWars2.Wvw.Abilities;
 
 internal static class AbilityJson
 {
-    public static Ability GetAbility(
-        this JsonElement json
-    )
+    public static Ability GetAbility(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -49,7 +47,8 @@ internal static class AbilityJson
             Name = name.Map(static value => value.GetStringRequired()),
             Description = description.Map(static value => value.GetStringRequired()),
             IconHref = icon.Map(static value => value.GetStringRequired()),
-            Ranks = ranks.Map(static values => values.GetList(static value => value.GetAbilityRank())
+            Ranks = ranks.Map(
+                static values => values.GetList(static value => value.GetAbilityRank())
             )
         };
     }

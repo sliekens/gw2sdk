@@ -6,9 +6,7 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 internal static class TorchSkinJson
 {
-    public static TorchSkin GetTorchSkin(
-        this JsonElement json
-    )
+    public static TorchSkin GetTorchSkin(this JsonElement json)
     {
         RequiredMember name = "name";
         OptionalMember description = "description";

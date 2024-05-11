@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Equipment;
 
 internal static class DyeSlotJson
 {
-    public static DyeSlot GetDyeSlot(
-        this JsonElement json
-    )
+    public static DyeSlot GetDyeSlot(this JsonElement json)
     {
         RequiredMember colorId = "color_id";
         RequiredMember material = "material";

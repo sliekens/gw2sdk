@@ -6,9 +6,7 @@ namespace GuildWars2.Exploration;
 
 internal static class SizeJson
 {
-    public static Size GetDimensions(
-        this JsonElement json
-    )
+    public static Size GetDimensions(this JsonElement json)
     {
         JsonElement width = default;
         JsonElement height = default;

@@ -5,9 +5,7 @@ namespace GuildWars2.Exploration.GodShrines;
 
 internal static class GodShrineJson
 {
-    public static GodShrine GetGodShrine(
-        this JsonElement json
-    )
+    public static GodShrine GetGodShrine(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";

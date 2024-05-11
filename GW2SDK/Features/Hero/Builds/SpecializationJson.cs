@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Builds;
 
 internal static class SpecializationJson
 {
-    public static Specialization GetSpecialization(
-        this JsonElement json
-    )
+    public static Specialization GetSpecialization(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -77,11 +75,12 @@ internal static class SpecializationJson
         {
             Id = id.Map(static value => value.GetInt32()),
             Name = name.Map(static value => value.GetStringRequired()),
-            Profession =
-                profession.Map(static value => value.GetEnum<ProfessionName>()),
+            Profession = profession.Map(static value => value.GetEnum<ProfessionName>()),
             Elite = elite.Map(static value => value.GetBoolean()),
-            MinorTraitIds = minorTraits.Map(static values => values.GetList(static value => value.GetInt32())),
-            MajorTraitIds = majorTraits.Map(static values => values.GetList(static value => value.GetInt32())),
+            MinorTraitIds =
+                minorTraits.Map(static values => values.GetList(static value => value.GetInt32())),
+            MajorTraitIds =
+                majorTraits.Map(static values => values.GetList(static value => value.GetInt32())),
             WeaponTraitId = weaponTrait.Map(static value => value.GetInt32()),
             IconHref = icon.Map(static value => value.GetStringRequired()),
             BackgroundHref = background.Map(static value => value.GetStringRequired()),

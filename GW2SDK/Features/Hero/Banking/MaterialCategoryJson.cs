@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Banking;
 
 internal static class MaterialCategoryJson
 {
-    public static MaterialCategory GetMaterialCategory(
-        this JsonElement json
-    )
+    public static MaterialCategory GetMaterialCategory(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";

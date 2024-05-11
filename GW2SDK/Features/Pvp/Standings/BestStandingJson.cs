@@ -5,9 +5,7 @@ namespace GuildWars2.Pvp.Standings;
 
 internal static class BestStandingJson
 {
-    public static BestStanding GetBestStanding(
-        this JsonElement json
-    )
+    public static BestStanding GetBestStanding(this JsonElement json)
     {
         RequiredMember totalPoints = "total_points";
         RequiredMember division = "division";

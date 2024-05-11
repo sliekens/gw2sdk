@@ -1,4 +1,4 @@
-﻿using GuildWars2.Hero.Races.Http;
+﻿using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Races;
@@ -22,29 +22,44 @@ public sealed class RacesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Race> Value, MessageContext Context)> GetRaces(
+    public async Task<(HashSet<Race> Value, MessageContext Context)> GetRaces(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        RacesRequest request = new()
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/races", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetRace());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the IDs of all races.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<string> Value, MessageContext Context)> GetRacesIndex(
+    public async Task<(HashSet<string> Value, MessageContext Context)> GetRacesIndex(
         CancellationToken cancellationToken = default
     )
     {
-        RacesIndexRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/races", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a race by its name.</summary>
@@ -53,19 +68,26 @@ public sealed class RacesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(Race Value, MessageContext Context)> GetRaceByName(
+    public async Task<(Race Value, MessageContext Context)> GetRaceByName(
         RaceName raceName,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        RaceByNameRequest request = new(raceName)
+        var query = new QueryBuilder();
+        query.AddId(raceName.ToString());
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/races", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetRace();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves races by their name.</summary>
@@ -74,19 +96,26 @@ public sealed class RacesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Race> Value, MessageContext Context)> GetRacesByNames(
+    public async Task<(HashSet<Race> Value, MessageContext Context)> GetRacesByNames(
         IEnumerable<RaceName> raceNames,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        RacesByNamesRequest request = new(raceNames.ToList())
+        var query = new QueryBuilder();
+        query.AddIds(raceNames.Select(value => value.ToString()));
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/races", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetRace());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of races.</summary>
@@ -96,7 +125,7 @@ public sealed class RacesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Race> Value, MessageContext Context)> GetRacesByPage(
+    public async Task<(HashSet<Race> Value, MessageContext Context)> GetRacesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -104,12 +133,18 @@ public sealed class RacesClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        RacesByPageRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/races", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetRace());
+            return (value, response.Context);
+        }
     }
 }

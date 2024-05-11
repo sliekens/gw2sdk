@@ -1,13 +1,11 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Matches;
 
 internal static class OwnedCastleJson
 {
-    public static OwnedCastle GetOwnedCastle(
-        this JsonElement json
-    )
+    public static OwnedCastle GetOwnedCastle(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember owner = "owner";
@@ -82,7 +80,8 @@ internal static class OwnedCastleJson
             ClaimedBy = claimedBy.Map(static value => value.GetString()) ?? "",
             ClaimedAt = claimedAt.Map(static value => value.GetDateTimeOffset()),
             YaksDelivered = yaksDelivered.Map(static value => value.GetInt32()),
-            GuildUpgrades = guildUpgrades.Map(static values => values.GetList(static value => value.GetInt32()))
+            GuildUpgrades =
+                guildUpgrades.Map(static values => values.GetList(static value => value.GetInt32()))
                 ?? Empty.ListOfInt32
         };
     }

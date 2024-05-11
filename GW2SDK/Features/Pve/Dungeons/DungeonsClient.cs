@@ -1,5 +1,5 @@
-﻿using GuildWars2.Json;
-using GuildWars2.Pve.Dungeons.Http;
+﻿using GuildWars2.Http;
+using GuildWars2.Json;
 
 namespace GuildWars2.Pve.Dungeons;
 
@@ -24,13 +24,21 @@ public sealed class DungeonsClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<string> Value, MessageContext Context)> GetCompletedPaths(
+    public async Task<(HashSet<string> Value, MessageContext Context)> GetCompletedPaths(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
     {
-        CompletedPathsRequest request = new() { AccessToken = accessToken };
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/account/dungeons", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/account/dungeons
@@ -40,12 +48,20 @@ public sealed class DungeonsClient
     /// <summary>Retrieves the IDs of all dungeons.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<string> Value, MessageContext Context)> GetDungeonsIndex(
+    public async Task<(HashSet<string> Value, MessageContext Context)> GetDungeonsIndex(
         CancellationToken cancellationToken = default
     )
     {
-        DungeonsIndexRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/dungeons", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a dungeon by its ID.</summary>
@@ -53,15 +69,24 @@ public sealed class DungeonsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(Dungeon Value, MessageContext Context)> GetDungeonById(
+    public async Task<(Dungeon Value, MessageContext Context)> GetDungeonById(
         string dungeonId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        DungeonByIdRequest request = new(dungeonId);
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddId(dungeonId);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/dungeons", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetDungeon();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves dungeons by their IDs.</summary>
@@ -69,15 +94,24 @@ public sealed class DungeonsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Dungeon> Value, MessageContext Context)> GetDungeonsByIds(
+    public async Task<(HashSet<Dungeon> Value, MessageContext Context)> GetDungeonsByIds(
         IEnumerable<string> dungeonIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        DungeonsByIdsRequest request = new(dungeonIds.ToList());
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddIds(dungeonIds);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/dungeons", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetDungeon());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of dungeons.</summary>
@@ -86,34 +120,48 @@ public sealed class DungeonsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Dungeon> Value, MessageContext Context)> GetDungeonsByPage(
+    public async Task<(HashSet<Dungeon> Value, MessageContext Context)> GetDungeonsByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        DungeonsByPageRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/dungeons", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize
-        };
-
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetDungeon());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves all dungeons.</summary>
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Dungeon> Value, MessageContext Context)> GetDungeons(
+    public async Task<(HashSet<Dungeon> Value, MessageContext Context)> GetDungeons(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        DungeonsRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/dungeons", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetDungeon());
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/dungeons

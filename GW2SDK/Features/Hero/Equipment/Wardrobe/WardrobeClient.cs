@@ -1,5 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
-using GuildWars2.Hero.Equipment.Wardrobe.Http;
+using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Wardrobe;
@@ -25,13 +25,21 @@ public sealed class WardrobeClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedSkins(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedSkins(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
     {
-        UnlockedSkinsRequest request = new() { AccessToken = accessToken };
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/account/skins", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/account/skins
@@ -41,12 +49,20 @@ public sealed class WardrobeClient
     /// <summary>Retrieves the IDs of all skins.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetSkinsIndex(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetSkinsIndex(
         CancellationToken cancellationToken = default
     )
     {
-        SkinsIndexRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/skins", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a skin by its ID.</summary>
@@ -55,19 +71,26 @@ public sealed class WardrobeClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(EquipmentSkin Value, MessageContext Context)> GetSkinById(
+    public async Task<(EquipmentSkin Value, MessageContext Context)> GetSkinById(
         int skinId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        SkinByIdRequest request = new(skinId)
+        var query = new QueryBuilder();
+        query.AddId(skinId);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/skins", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetEquipmentSkin();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves skins by their IDs.</summary>
@@ -77,19 +100,26 @@ public sealed class WardrobeClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<EquipmentSkin> Value, MessageContext Context)> GetSkinsByIds(
+    public async Task<(HashSet<EquipmentSkin> Value, MessageContext Context)> GetSkinsByIds(
         IEnumerable<int> skinIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        SkinsByIdsRequest request = new(skinIds.ToList())
+        var query = new QueryBuilder();
+        query.AddIds(skinIds);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/skins", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetEquipmentSkin());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of skins.</summary>
@@ -99,7 +129,7 @@ public sealed class WardrobeClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<EquipmentSkin> Value, MessageContext Context)> GetSkinsByPage(
+    public async Task<(HashSet<EquipmentSkin> Value, MessageContext Context)> GetSkinsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -107,17 +137,22 @@ public sealed class WardrobeClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        SkinsByPageRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/skins", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetEquipmentSkin());
+            return (value, response.Context);
+        }
     }
 
-    /// <summary>Retrieves skins by their IDs by chunking requests and executing them in parallel. Supports more than
-    /// 200 IDs.</summary>
+    /// <summary>Retrieves skins by their IDs by chunking requests and executing them in parallel. Supports more than 200 IDs.</summary>
     /// <param name="skinIds">The skin IDs.</param>
     /// <param name="language">The language to use for descriptions.</param>
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>

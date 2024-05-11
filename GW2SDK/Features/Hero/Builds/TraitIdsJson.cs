@@ -5,7 +5,9 @@ namespace GuildWars2.Hero.Builds;
 
 internal static class TraitIdsJson
 {
-    public static (int? AdeptTraitId, int? MasterTraitId, int? GrandmasterTraitId) GetTraitIds(this JsonElement json)
+    public static (int? AdeptTraitId, int? MasterTraitId, int? GrandmasterTraitId) GetTraitIds(
+        this JsonElement json
+    )
     {
         JsonElement first = default;
         JsonElement second = default;

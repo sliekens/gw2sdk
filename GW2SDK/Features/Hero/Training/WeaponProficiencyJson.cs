@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Training;
 
 internal static class WeaponProficiencyJson
 {
-    public static WeaponProficiency GetWeaponProficiency(
-        this JsonElement json
-    )
+    public static WeaponProficiency GetWeaponProficiency(this JsonElement json)
     {
         NullableMember specialization = "specialization";
         RequiredMember flags = "flags";
@@ -37,7 +35,8 @@ internal static class WeaponProficiencyJson
         {
             RequiredSpecialization = specialization.Map(static value => value.GetInt32()),
             Flags = flags.Map(static values => values.GetWeaponFlags()),
-            Skills = skills.Map(static values => values.GetList(static value => value.GetWeaponSkill())
+            Skills = skills.Map(
+                static values => values.GetList(static value => value.GetWeaponSkill())
             )
         };
     }

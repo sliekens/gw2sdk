@@ -5,9 +5,7 @@ namespace GuildWars2.Guilds.Logs;
 
 internal static class GuildLogEntryJson
 {
-    public static GuildLogEntry GetGuildLogEntry(
-        this JsonElement json
-    )
+    public static GuildLogEntry GetGuildLogEntry(this JsonElement json)
     {
         if (json.TryGetProperty("type", out var discriminator))
         {

@@ -5,9 +5,7 @@ namespace GuildWars2.Pve.MapChests;
 
 internal static class MapChestJson
 {
-    public static MapChest GetMapChest(
-        this JsonElement json
-    )
+    public static MapChest GetMapChest(this JsonElement json)
     {
         RequiredMember id = "id";
 

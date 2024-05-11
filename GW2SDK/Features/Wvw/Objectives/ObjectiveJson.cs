@@ -6,9 +6,7 @@ namespace GuildWars2.Wvw.Objectives;
 
 internal static class ObjectiveJson
 {
-    public static Objective GetObjective(
-        this JsonElement json
-    )
+    public static Objective GetObjective(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -84,8 +82,7 @@ internal static class ObjectiveJson
             MapId = mapId.Map(static value => value.GetInt32()),
             UpgradeId = upgradeId.Map(static value => value.GetInt32()),
             Coordinates = coordinates.Map(static value => value.GetCoordinate3()),
-            LabelCoordinates =
-                labelCoordinates.Map(static value => value.GetCoordinateF()),
+            LabelCoordinates = labelCoordinates.Map(static value => value.GetCoordinateF()),
             MarkerIconHref = marker.Map(static value => value.GetString()) ?? "",
             ChatLink = chatLink.Map(static value => value.GetStringRequired())
         };

@@ -5,9 +5,7 @@ namespace GuildWars2.Wvw.Matches.Scores;
 
 internal static class MatchScoresJson
 {
-    public static MatchScores GetMatchScores(
-        this JsonElement json
-    )
+    public static MatchScores GetMatchScores(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember scores = "scores";
@@ -47,13 +45,12 @@ internal static class MatchScoresJson
         {
             Id = id.Map(static value => value.GetStringRequired()),
             Scores = scores.Map(static value => value.GetDistribution()),
-            VictoryPoints =
-                victoryPoints.Map(static value => value.GetDistribution()),
+            VictoryPoints = victoryPoints.Map(static value => value.GetDistribution()),
             Skirmishes =
-                skirmishes.Map(static values => values.GetList(static value => value.GetSkirmish())
+                skirmishes.Map(
+                    static values => values.GetList(static value => value.GetSkirmish())
                 ),
-            Maps = maps.Map(static values => values.GetList(static value => value.GetMapSummary())
-            )
+            Maps = maps.Map(static values => values.GetList(static value => value.GetMapSummary()))
         };
     }
 }

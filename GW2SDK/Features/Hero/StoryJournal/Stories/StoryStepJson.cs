@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.StoryJournal.Stories;
 
 internal static class StoryStepJson
 {
-    public static StoryStep GetStoryStep(
-        this JsonElement json
-    )
+    public static StoryStep GetStoryStep(this JsonElement json)
     {
         RequiredMember name = "name";
         RequiredMember level = "level";
@@ -49,8 +47,8 @@ internal static class StoryStepJson
             Name = name.Map(static value => value.GetStringRequired()),
             Level = level.Map(static value => value.GetInt32()),
             StoryId = story.Map(static value => value.GetInt32()),
-            Objectives = goals.Map(static values => values.GetList(static value => value.GetObjective())
-            )
+            Objectives =
+                goals.Map(static values => values.GetList(static value => value.GetObjective()))
         };
     }
 }

@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Achievements.Bits;
 
 internal static class AchievementMiniatureBitJson
 {
-    public static AchievementMiniatureBit GetAchievementMiniatureBit(
-        this JsonElement json
-    )
+    public static AchievementMiniatureBit GetAchievementMiniatureBit(this JsonElement json)
     {
         RequiredMember id = "id";
         foreach (var member in json.EnumerateObject())

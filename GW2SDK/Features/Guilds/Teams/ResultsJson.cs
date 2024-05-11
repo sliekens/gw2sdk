@@ -5,9 +5,7 @@ namespace GuildWars2.Guilds.Teams;
 
 internal static class ResultsJson
 {
-    public static Results GetResults(
-        this JsonElement json
-    )
+    public static Results GetResults(this JsonElement json)
     {
         RequiredMember wins = "wins";
         RequiredMember losses = "losses";

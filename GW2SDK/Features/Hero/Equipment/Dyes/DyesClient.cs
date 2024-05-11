@@ -1,4 +1,4 @@
-﻿using GuildWars2.Hero.Equipment.Dyes.Http;
+﻿using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Dyes;
@@ -19,18 +19,26 @@ public sealed class DyesClient
 
     #region v2/account/dyes
 
-    /// <summary>Retrieves the color IDs of dyes unlocked on the account associated with the access token. This endpoint is only
-    /// accessible with a valid access token.</summary>
+    /// <summary>Retrieves the color IDs of dyes unlocked on the account associated with the access token. This endpoint is
+    /// only accessible with a valid access token.</summary>
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedColors(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedColors(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
     {
-        UnlockedDyesRequest request = new() { AccessToken = accessToken };
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/account/dyes", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     #endregion
@@ -42,29 +50,44 @@ public sealed class DyesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<DyeColor> Value, MessageContext Context)> GetColors(
+    public async Task<(HashSet<DyeColor> Value, MessageContext Context)> GetColors(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        ColorsRequest request = new()
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/colors", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetDyeColor());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the IDs of all dye colors.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetColorsIndex(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetColorsIndex(
         CancellationToken cancellationToken = default
     )
     {
-        ColorsIndexRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/colors", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a dye color by its ID.</summary>
@@ -73,19 +96,26 @@ public sealed class DyesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(DyeColor Value, MessageContext Context)> GetColorById(
+    public async Task<(DyeColor Value, MessageContext Context)> GetColorById(
         int colorId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        ColorByIdRequest request = new(colorId)
+        var query = new QueryBuilder();
+        query.AddId(colorId);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/colors", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetDyeColor();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves dye colors by their IDs.</summary>
@@ -94,19 +124,26 @@ public sealed class DyesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<DyeColor> Value, MessageContext Context)> GetColorsByIds(
+    public async Task<(HashSet<DyeColor> Value, MessageContext Context)> GetColorsByIds(
         IEnumerable<int> colorIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        ColorsByIdsRequest request = new(colorIds.ToList())
+        var query = new QueryBuilder();
+        query.AddIds(colorIds);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/colors", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetDyeColor());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of dye colors.</summary>
@@ -116,7 +153,7 @@ public sealed class DyesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<DyeColor> Value, MessageContext Context)> GetColorsByPage(
+    public async Task<(HashSet<DyeColor> Value, MessageContext Context)> GetColorsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -124,13 +161,19 @@ public sealed class DyesClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        ColorsByPageRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/colors", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetDyeColor());
+            return (value, response.Context);
+        }
     }
 
     #endregion

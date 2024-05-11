@@ -6,9 +6,7 @@ namespace GuildWars2.Hero.Crafting.Recipes;
 
 internal static class RecipeJson
 {
-    public static Recipe GetRecipe(
-        this JsonElement json
-    )
+    public static Recipe GetRecipe(this JsonElement json)
     {
         if (json.TryGetProperty("type", out var discriminator))
         {
@@ -189,15 +187,17 @@ internal static class RecipeJson
             OutputItemId = outputItemId.Map(static value => value.GetInt32()),
             OutputItemCount = outputItemCount.Map(static value => value.GetInt32()),
             MinRating = minRating.Map(static value => value.GetInt32()),
-            TimeToCraft = timeToCraft.Map(static value => TimeSpan.FromMilliseconds(value.GetDouble())),
+            TimeToCraft =
+                timeToCraft.Map(static value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines =
-                disciplines.Map(static values =>
-                        values.GetList(static value => value.GetEnum<CraftingDisciplineName>()
-                        )
+                disciplines.Map(
+                    static values =>
+                        values.GetList(static value => value.GetEnum<CraftingDisciplineName>())
                 ),
             Flags = flags.Map(static values => values.GetRecipeFlags()),
             Ingredients =
-                ingredients.Map(static values => values.GetList(static value => value.GetIngredient())
+                ingredients.Map(
+                    static values => values.GetList(static value => value.GetIngredient())
                 ),
             ChatLink = chatLink.Map(static value => value.GetStringRequired())
         };

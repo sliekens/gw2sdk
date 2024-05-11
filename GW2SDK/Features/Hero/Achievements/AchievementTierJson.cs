@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Achievements;
 
 internal static class AchievementTierJson
 {
-    public static AchievementTier GetAchievementTier(
-        this JsonElement json
-    )
+    public static AchievementTier GetAchievementTier(this JsonElement json)
     {
         RequiredMember count = "count";
         RequiredMember points = "points";

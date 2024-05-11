@@ -6,9 +6,7 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 internal static class ForagingToolSkinJson
 {
-    public static ForagingToolSkin GetForagingToolSkin(
-        this JsonElement json
-    )
+    public static ForagingToolSkin GetForagingToolSkin(this JsonElement json)
     {
         RequiredMember name = "name";
         OptionalMember description = "description";

@@ -6,9 +6,7 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 internal static class ShouldersSkinJson
 {
-    public static ShouldersSkin GetShouldersSkin(
-        this JsonElement json
-    )
+    public static ShouldersSkin GetShouldersSkin(this JsonElement json)
     {
         RequiredMember name = "name";
         OptionalMember description = "description";
@@ -100,8 +98,7 @@ internal static class ShouldersSkinJson
             Flags = flags.Map(static values => values.GetSkinFlags()),
             Races = restrictions.Map(static values => values.GetRestrictions()),
             IconHref = icon.Map(static value => value.GetString()),
-            WeightClass =
-                weightClass.Map(static value => value.GetEnum<WeightClass>()),
+            WeightClass = weightClass.Map(static value => value.GetEnum<WeightClass>()),
             DyeSlots = dyeSlots.Map(static value => value.GetDyeSlotInfo())
         };
     }

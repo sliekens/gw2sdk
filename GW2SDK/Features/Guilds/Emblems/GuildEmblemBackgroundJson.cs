@@ -5,9 +5,7 @@ namespace GuildWars2.Guilds.Emblems;
 
 internal static class GuildEmblemBackgroundJson
 {
-    public static GuildEmblemBackground GetGuildEmblemBackground(
-        this JsonElement json
-    )
+    public static GuildEmblemBackground GetGuildEmblemBackground(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember colors = "colors";

@@ -5,9 +5,7 @@ namespace GuildWars2.Exploration.PointsOfInterest;
 
 internal static class LandmarkJson
 {
-    public static Landmark GetLandmark(
-        this JsonElement json
-    )
+    public static Landmark GetLandmark(this JsonElement json)
     {
         OptionalMember name = "name";
         RequiredMember floor = "floor";

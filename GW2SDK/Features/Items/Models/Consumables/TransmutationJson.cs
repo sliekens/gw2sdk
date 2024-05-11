@@ -5,9 +5,7 @@ namespace GuildWars2.Items;
 
 internal static class TransmutationJson
 {
-    public static Transmutation GetTransmutation(
-        this JsonElement json
-    )
+    public static Transmutation GetTransmutation(this JsonElement json)
     {
         RequiredMember name = "name";
         OptionalMember description = "description";
@@ -114,8 +112,8 @@ internal static class TransmutationJson
             Rarity = rarity.Map(static value => value.GetEnum<Rarity>()),
             VendorValue = vendorValue.Map(static value => value.GetInt32()),
             GameTypes =
-                gameTypes.Map(static values => values.GetList(static value => value.GetEnum<GameType>()
-                    )
+                gameTypes.Map(
+                    static values => values.GetList(static value => value.GetEnum<GameType>())
                 ),
             Flags = flags.Map(static values => values.GetItemFlags()),
             Restrictions = restrictions.Map(static value => value.GetItemRestriction()),

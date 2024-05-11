@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.StoryJournal.Stories;
 
 internal static class ObjectiveJson
 {
-    public static Objective GetObjective(
-        this JsonElement json
-    )
+    public static Objective GetObjective(this JsonElement json)
     {
         RequiredMember active = "active";
         RequiredMember complete = "complete";

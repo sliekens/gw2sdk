@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Builds;
 
 internal static class LegendJson
 {
-    public static Legend GetLegend(
-        this JsonElement json
-    )
+    public static Legend GetLegend(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember code = "code";
@@ -55,7 +53,9 @@ internal static class LegendJson
             Swap = swap.Map(static value => value.GetInt32()),
             Heal = heal.Map(static value => value.GetInt32()),
             Elite = elite.Map(static value => value.GetInt32()),
-            Utilities = utilities.Map(static values => values.GetList(static value => value.GetInt32()))
+            Utilities = utilities.Map(
+                static values => values.GetList(static value => value.GetInt32())
+            )
         };
     }
 }

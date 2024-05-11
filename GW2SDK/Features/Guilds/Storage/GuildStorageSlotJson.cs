@@ -5,9 +5,7 @@ namespace GuildWars2.Guilds.Storage;
 
 internal static class GuildStorageSlotJson
 {
-    public static GuildStorageSlot GetGuildStorageSlot(
-        this JsonElement json
-    )
+    public static GuildStorageSlot GetGuildStorageSlot(this JsonElement json)
     {
         RequiredMember itemId = "id";
         RequiredMember count = "count";

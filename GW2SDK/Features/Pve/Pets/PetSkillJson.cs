@@ -5,9 +5,7 @@ namespace GuildWars2.Pve.Pets;
 
 internal static class PetSkillJson
 {
-    public static PetSkill GetPetSkill(
-        this JsonElement json
-    )
+    public static PetSkill GetPetSkill(this JsonElement json)
     {
         RequiredMember id = "id";
 

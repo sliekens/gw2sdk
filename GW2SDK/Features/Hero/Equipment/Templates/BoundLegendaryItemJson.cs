@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Equipment.Templates;
 
 internal static class BoundLegendaryItemJson
 {
-    public static BoundLegendaryItem GetBoundLegendaryItem(
-        this JsonElement json
-    )
+    public static BoundLegendaryItem GetBoundLegendaryItem(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember count = "count";

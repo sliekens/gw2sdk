@@ -6,9 +6,7 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 internal static class ShortbowSkinJson
 {
-    public static ShortbowSkin GetShortbowSkin(
-        this JsonElement json
-    )
+    public static ShortbowSkin GetShortbowSkin(this JsonElement json)
     {
         RequiredMember name = "name";
         OptionalMember description = "description";

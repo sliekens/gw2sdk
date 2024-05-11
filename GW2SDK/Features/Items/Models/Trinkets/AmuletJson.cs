@@ -6,9 +6,7 @@ namespace GuildWars2.Items;
 
 internal static class AmuletJson
 {
-    public static Amulet GetAmulet(
-        this JsonElement json
-    )
+    public static Amulet GetAmulet(this JsonElement json)
     {
         RequiredMember name = "name";
         OptionalMember description = "description";
@@ -120,7 +118,8 @@ internal static class AmuletJson
                             {
                                 infixUpgradeBuff = infix;
                             }
-                            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
+                            else if (JsonOptions.MissingMemberBehavior
+                                == MissingMemberBehavior.Error)
                             {
                                 throw new InvalidOperationException(
                                     Strings.UnexpectedMember(infix.Name)
@@ -157,15 +156,16 @@ internal static class AmuletJson
             Rarity = rarity.Map(static value => value.GetEnum<Rarity>()),
             VendorValue = vendorValue.Map(static value => value.GetInt32()),
             GameTypes =
-                gameTypes.Map(static values => values.GetList(static value => value.GetEnum<GameType>()
-                    )
+                gameTypes.Map(
+                    static values => values.GetList(static value => value.GetEnum<GameType>())
                 ),
             Flags = flags.Map(static values => values.GetItemFlags()),
             Restrictions = restrictions.Map(static value => value.GetItemRestriction()),
             ChatLink = chatLink.Map(static value => value.GetStringRequired()),
             IconHref = icon.Map(static value => value.GetString()),
             InfusionSlots =
-                infusionSlots.Map(static values => values.GetList(static value => value.GetInfusionSlot())
+                infusionSlots.Map(
+                    static values => values.GetList(static value => value.GetInfusionSlot())
                 ),
             AttributeAdjustment = attributeAdjustment.Map(static value => value.GetDouble()),
             StatChoices =

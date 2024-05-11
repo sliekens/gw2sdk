@@ -5,9 +5,7 @@ namespace GuildWars2.Wvw.Matches.Overview;
 
 internal static class MatchOverviewJson
 {
-    public static MatchOverview GetMatchOverview(
-        this JsonElement json
-    )
+    public static MatchOverview GetMatchOverview(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember worlds = "worlds";

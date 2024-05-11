@@ -5,7 +5,8 @@ namespace GuildWars2.Hero.Builds;
 
 internal static class SelectedSpecializationsJson
 {
-    public static (SelectedSpecialization? Specialization1, SelectedSpecialization? Specialization2, SelectedSpecialization? Specialization3) GetSelectedSpecializations(this JsonElement json)
+    public static (SelectedSpecialization? Specialization1, SelectedSpecialization? Specialization2,
+        SelectedSpecialization? Specialization3) GetSelectedSpecializations(this JsonElement json)
     {
         JsonElement first = default;
         JsonElement second = default;
@@ -33,6 +34,7 @@ internal static class SelectedSpecializationsJson
             }
         }
 
-        return (first.GetSelectedSpecialization(), second.GetSelectedSpecialization(), third.GetSelectedSpecialization());
+        return (first.GetSelectedSpecialization(), second.GetSelectedSpecialization(),
+            third.GetSelectedSpecialization());
     }
 }

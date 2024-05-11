@@ -5,9 +5,7 @@ namespace GuildWars2.Commerce.Exchange;
 
 internal static class GemsToGoldJson
 {
-    public static GemsToGold GetGemsToGold(
-        this JsonElement json
-    )
+    public static GemsToGold GetGemsToGold(this JsonElement json)
     {
         RequiredMember coinsPerGem = "coins_per_gem";
         RequiredMember quantity = "quantity";

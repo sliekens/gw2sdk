@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Achievements.Rewards;
 
 internal static class TitleRewardJson
 {
-    public static TitleReward GetTitleReward(
-        this JsonElement json
-    )
+    public static TitleReward GetTitleReward(this JsonElement json)
     {
         RequiredMember id = "id";
         foreach (var member in json.EnumerateObject())

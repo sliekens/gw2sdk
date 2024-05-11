@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Achievements;
 
 internal static class CollectionAchievementJson
 {
-    public static CollectionAchievement GetCollectionAchievement(
-        this JsonElement json
-    )
+    public static CollectionAchievement GetCollectionAchievement(this JsonElement json)
     {
         RequiredMember id = "id";
         OptionalMember icon = "icon";
@@ -97,15 +95,18 @@ internal static class CollectionAchievementJson
             LockedText = lockedText.Map(static value => value.GetStringRequired()),
             Flags = flags.Map(static values => values.GetAchievementFlags()),
             Tiers =
-                tiers.Map(static values => values.GetList(static value => value.GetAchievementTier()
-                    )
+                tiers.Map(
+                    static values => values.GetList(static value => value.GetAchievementTier())
                 ),
             Prerequisites =
                 prerequisites.Map(static values => values.GetList(static value => value.GetInt32()))
                 ?? Empty.ListOfInt32,
-            Rewards = rewards.Map(static values => values.GetList(static value => value.GetAchievementReward())
-            ),
-            Bits = bits.Map(static values => values.GetList(static value => value.GetAchievementBit())
+            Rewards =
+                rewards.Map(
+                    static values => values.GetList(static value => value.GetAchievementReward())
+                ),
+            Bits = bits.Map(
+                static values => values.GetList(static value => value.GetAchievementBit())
             ),
             PointCap = pointCap.Map(static value => value.GetInt32())
         };

@@ -5,9 +5,7 @@ namespace GuildWars2.Guilds.Logs;
 
 internal static class MemberJoinedJson
 {
-    public static MemberJoined GetMemberJoined(
-        this JsonElement json
-    )
+    public static MemberJoined GetMemberJoined(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember time = "time";

@@ -1,4 +1,4 @@
-﻿using GuildWars2.Hero.Equipment.Miniatures.Http;
+﻿using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Miniatures;
@@ -24,13 +24,21 @@ public sealed class MiniaturesClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedMiniatures(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedMiniatures(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
     {
-        var request = new UnlockedMiniaturesRequest { AccessToken = accessToken };
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/account/minis", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     #endregion
@@ -42,29 +50,44 @@ public sealed class MiniaturesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Miniature> Value, MessageContext Context)> GetMiniatures(
+    public async Task<(HashSet<Miniature> Value, MessageContext Context)> GetMiniatures(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        MiniaturesRequest request = new()
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/minis", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetMiniature());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the IDs of all miniatures.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetMiniaturesIndex(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetMiniaturesIndex(
         CancellationToken cancellationToken = default
     )
     {
-        MiniaturesIndexRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/minis", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a miniature by its ID.</summary>
@@ -73,19 +96,26 @@ public sealed class MiniaturesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(Miniature Value, MessageContext Context)> GetMiniatureById(
+    public async Task<(Miniature Value, MessageContext Context)> GetMiniatureById(
         int miniatureId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        MiniatureByIdRequest request = new(miniatureId)
+        var query = new QueryBuilder();
+        query.AddId(miniatureId);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/minis", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetMiniature();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves miniatures by their IDs.</summary>
@@ -94,19 +124,26 @@ public sealed class MiniaturesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Miniature> Value, MessageContext Context)> GetMiniaturesByIds(
+    public async Task<(HashSet<Miniature> Value, MessageContext Context)> GetMiniaturesByIds(
         IEnumerable<int> miniatureIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        MiniaturesByIdsRequest request = new(miniatureIds.ToList())
+        var query = new QueryBuilder();
+        query.AddIds(miniatureIds);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/minis", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetMiniature());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of miniatures.</summary>
@@ -116,7 +153,7 @@ public sealed class MiniaturesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Miniature> Value, MessageContext Context)> GetMiniaturesByPage(
+    public async Task<(HashSet<Miniature> Value, MessageContext Context)> GetMiniaturesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -124,13 +161,19 @@ public sealed class MiniaturesClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        MiniaturesByPageRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/minis", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetMiniature());
+            return (value, response.Context);
+        }
     }
 
     #endregion

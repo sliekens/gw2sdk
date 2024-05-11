@@ -6,9 +6,7 @@ namespace GuildWars2.Exploration;
 
 internal static class RectangleJson
 {
-    public static Rectangle GetMapRectangle(
-        this JsonElement json
-    )
+    public static Rectangle GetMapRectangle(this JsonElement json)
     {
         JsonElement southWest = default;
         JsonElement northEast = default;
@@ -42,9 +40,7 @@ internal static class RectangleJson
         );
     }
 
-    public static Rectangle GetContinentRectangle(
-        this JsonElement json
-    )
+    public static Rectangle GetContinentRectangle(this JsonElement json)
     {
         JsonElement northWest = default;
         JsonElement southEast = default;

@@ -125,7 +125,8 @@ internal static class RuneJson
                             {
                                 infixUpgradeBuff = infix;
                             }
-                            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
+                            else if (JsonOptions.MissingMemberBehavior
+                                == MissingMemberBehavior.Error)
                             {
                                 throw new InvalidOperationException(
                                     Strings.UnexpectedMember(infix.Name)
@@ -162,8 +163,8 @@ internal static class RuneJson
             Rarity = rarity.Map(static value => value.GetEnum<Rarity>()),
             VendorValue = vendorValue.Map(static value => value.GetInt32()),
             GameTypes =
-                gameTypes.Map(static values => values.GetList(static value => value.GetEnum<GameType>()
-                    )
+                gameTypes.Map(
+                    static values => values.GetList(static value => value.GetEnum<GameType>())
                 ),
             Flags = flags.Map(static values => values.GetItemFlags()),
             Restrictions = restrictions.Map(static value => value.GetItemRestriction()),
@@ -180,7 +181,9 @@ internal static class RuneJson
                 ?? new Dictionary<Extensible<AttributeName>, int>(0),
             Buff = infixUpgradeBuff.Map(static value => value.GetBuff()),
             SuffixName = suffix.Map(static value => value.GetStringRequired()),
-            Bonuses = bonuses.Map(static values => values.GetList(static value => value.GetStringRequired()))
+            Bonuses = bonuses.Map(
+                static values => values.GetList(static value => value.GetStringRequired())
+            )
         };
     }
 }

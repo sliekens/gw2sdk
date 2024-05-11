@@ -6,9 +6,7 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 internal static class ArmorSkinJson
 {
-    public static ArmorSkin GetArmorSkin(
-        this JsonElement json
-    )
+    public static ArmorSkin GetArmorSkin(this JsonElement json)
     {
         if (json.TryGetProperty("details", out var discriminator))
         {
@@ -124,8 +122,7 @@ internal static class ArmorSkinJson
             Flags = flags.Map(static values => values.GetSkinFlags()),
             Races = restrictions.Map(static values => values.GetRestrictions()),
             IconHref = icon.Map(static value => value.GetString()),
-            WeightClass =
-                weightClass.Map(static value => value.GetEnum<WeightClass>()),
+            WeightClass = weightClass.Map(static value => value.GetEnum<WeightClass>()),
             DyeSlots = dyeSlots.Map(static value => value.GetDyeSlotInfo())
         };
     }

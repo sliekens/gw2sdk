@@ -5,9 +5,7 @@ namespace GuildWars2.Items;
 
 internal static class RecipeSheetJson
 {
-    public static RecipeSheet GetRecipeSheet(
-        this JsonElement json
-    )
+    public static RecipeSheet GetRecipeSheet(this JsonElement json)
     {
         RequiredMember name = "name";
         OptionalMember description = "description";
@@ -128,15 +126,18 @@ internal static class RecipeSheetJson
             Rarity = rarity.Map(static value => value.GetEnum<Rarity>()),
             VendorValue = vendorValue.Map(static value => value.GetInt32()),
             GameTypes =
-                gameTypes.Map(static values => values.GetList(static value => value.GetEnum<GameType>()
-                    )
+                gameTypes.Map(
+                    static values => values.GetList(static value => value.GetEnum<GameType>())
                 ),
             Flags = flags.Map(static values => values.GetItemFlags()),
             Restrictions = restrictions.Map(static value => value.GetItemRestriction()),
             ChatLink = chatLink.Map(static value => value.GetStringRequired()),
             IconHref = icon.Map(static value => value.GetString()),
             RecipeId = recipeId.Map(static value => value.GetInt32()),
-            ExtraRecipeIds = extraRecipeIds.Map(static values => values.GetList(static value => value.GetInt32()))
+            ExtraRecipeIds =
+                extraRecipeIds.Map(
+                    static values => values.GetList(static value => value.GetInt32())
+                )
                 ?? Empty.ListOfInt32
         };
     }

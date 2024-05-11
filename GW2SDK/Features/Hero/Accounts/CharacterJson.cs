@@ -10,9 +10,7 @@ namespace GuildWars2.Hero.Accounts;
 
 internal static class CharacterJson
 {
-    public static Character GetCharacter(
-        this JsonElement json
-    )
+    public static Character GetCharacter(this JsonElement json)
     {
         RequiredMember name = "name";
         RequiredMember race = "race";
@@ -156,39 +154,46 @@ internal static class CharacterJson
             Flags = flags.Map(static values => values.GetCharacterFlags()),
             Level = level.Map(static value => value.GetInt32()),
             GuildId = guild.Map(static value => value.GetString()) ?? "",
-            Profession =
-                profession.Map(static value => value.GetEnum<ProfessionName>()),
+            Profession = profession.Map(static value => value.GetEnum<ProfessionName>()),
             Age = age.Map(static value => TimeSpan.FromSeconds(value.GetDouble())),
             LastModified = lastModified.Map(static value => value.GetDateTimeOffset()),
             Created = created.Map(static value => value.GetDateTimeOffset()),
             Deaths = deaths.Map(static value => value.GetInt32()),
             CraftingDisciplines =
-                crafting.Map(static values =>
-                        values.GetList(static value => value.GetCraftingDiscipline())
+                crafting.Map(
+                    static values => values.GetList(static value => value.GetCraftingDiscipline())
                 ),
             TitleId = title.Map(static value => value.GetInt32()),
-            Backstory = backstory.Map(static values => values.GetList(static value => value.GetStringRequired())),
+            Backstory =
+                backstory.Map(
+                    static values => values.GetList(static value => value.GetStringRequired())
+                ),
             WvwAbilities =
-                wvwAbilities.Map(static values => values.GetList(static value => value.GetWvwAbility())
+                wvwAbilities.Map(
+                    static values => values.GetList(static value => value.GetWvwAbility())
                 ),
             BuildTemplatesCount = buildTabsUnlocked.Map(static value => value.GetInt32()),
             ActiveBuildTemplateNumber = activeBuildTab.Map(static value => value.GetInt32()),
             BuildTemplates =
-                buildTabs.Map(static values => values.GetList(static value => value.GetBuildTemplate())
+                buildTabs.Map(
+                    static values => values.GetList(static value => value.GetBuildTemplate())
                 ),
             EquipmentTemplatesCount = equipmentTabsUnlocked.Map(static value => value.GetInt32()),
-            ActiveEquipmentTemplateNumber = activeEquipmentTab.Map(static value => value.GetInt32()),
+            ActiveEquipmentTemplateNumber =
+                activeEquipmentTab.Map(static value => value.GetInt32()),
             EquippedItems =
-                equippedItems.Map(static values => values.GetList(static value => value.GetEquipmentItem())
+                equippedItems.Map(
+                    static values => values.GetList(static value => value.GetEquipmentItem())
                 ),
             EquipmentTemplates =
-                equipmentTabs.Map(static values => values.GetList(static value => value.GetEquipmentTemplate()
-                    )
+                equipmentTabs.Map(
+                    static values => values.GetList(static value => value.GetEquipmentTemplate())
                 ),
-            Recipes = recipes.Map(static values => values.GetList(static value => value.GetInt32())),
+            Recipes =
+                recipes.Map(static values => values.GetList(static value => value.GetInt32())),
             Training =
-                training.Map(static values => values.GetList(static value => value.GetTrainingProgress()
-                    )
+                training.Map(
+                    static values => values.GetList(static value => value.GetTrainingProgress())
                 ),
             Bags = bags.Map(static values => values.GetList(static value => value.GetBag()))
         };

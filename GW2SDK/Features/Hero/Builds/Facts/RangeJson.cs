@@ -5,11 +5,7 @@ namespace GuildWars2.Hero.Builds.Facts;
 
 internal static class RangeJson
 {
-    public static Range GetRange(
-        this JsonElement json,
-        out int? requiresTrait,
-        out int? overrides
-    )
+    public static Range GetRange(this JsonElement json, out int? requiresTrait, out int? overrides)
     {
         requiresTrait = null;
         overrides = null;

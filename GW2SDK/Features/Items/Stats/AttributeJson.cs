@@ -6,9 +6,7 @@ namespace GuildWars2.Items.Stats;
 
 internal static class AttributeJson
 {
-    public static Attribute GetAttribute(
-        this JsonElement json
-    )
+    public static Attribute GetAttribute(this JsonElement json)
     {
         RequiredMember attribute = "attribute";
         RequiredMember multiplier = "multiplier";

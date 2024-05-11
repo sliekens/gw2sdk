@@ -1,4 +1,5 @@
-﻿using GuildWars2.Hero.Crafting.Daily.Http;
+﻿using GuildWars2.Http;
+using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Crafting.Daily;
 
@@ -23,12 +24,20 @@ public sealed class DailyCraftingClient
     /// maintain a conversion from the strings to the item IDs to get the item details.</remarks>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<string> Value, MessageContext Context)> GetDailyCraftableItems(
+    public async Task<(HashSet<string> Value, MessageContext Context)> GetDailyCraftableItems(
         CancellationToken cancellationToken = default
     )
     {
-        DailyCraftingRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/dailycrafting", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            return (value, response.Context);
+        }
     }
 
     #endregion
@@ -42,13 +51,21 @@ public sealed class DailyCraftingClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<string> Value, MessageContext Context)> GetDailyCraftedItems(
+    public async Task<(HashSet<string> Value, MessageContext Context)> GetDailyCraftedItems(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
     {
-        DailyCraftingOnCooldownRequest request = new() { AccessToken = accessToken };
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/account/dailycrafting", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            return (value, response.Context);
+        }
     }
 
     #endregion

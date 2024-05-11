@@ -69,8 +69,7 @@ internal static class ComboFinisherJson
             Text = text.Map(static value => value.GetStringRequired()),
             IconHref = icon.Map(static value => value.GetStringRequired()),
             Percent = percent.Map(static value => value.GetInt32()),
-            FinisherName =
-                finisherType.Map(static value => value.GetEnum<ComboFinisherName>())
+            FinisherName = finisherType.Map(static value => value.GetEnum<ComboFinisherName>())
         };
 
         static bool IsDefaultInt32(JsonProperty jsonProperty)

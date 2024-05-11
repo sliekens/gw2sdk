@@ -5,9 +5,7 @@ namespace GuildWars2.Exploration.Adventures;
 
 internal static class AdventureJson
 {
-    public static Adventure GetAdventure(
-        this JsonElement json
-    )
+    public static Adventure GetAdventure(this JsonElement json)
     {
         RequiredMember coordinates = "coord";
         RequiredMember id = "id";

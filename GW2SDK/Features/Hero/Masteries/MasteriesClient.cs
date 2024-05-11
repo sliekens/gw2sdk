@@ -1,4 +1,4 @@
-﻿using GuildWars2.Hero.Masteries.Http;
+﻿using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Masteries;
@@ -25,19 +25,25 @@ public sealed class MasteriesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<MasteryTrackProgress> Value, MessageContext Context)>
+    public async Task<(HashSet<MasteryTrackProgress> Value, MessageContext Context)>
         GetMasteryTrackProgress(
             string? accessToken,
             MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        MasteryProgressRequest request = new()
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/account/masteries", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            AccessToken = accessToken,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetMasteryTrackProgress());
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/account/masteries
@@ -50,18 +56,24 @@ public sealed class MasteriesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(MasteryPointsProgress Value, MessageContext Context)> GetMasteryPointsProgress(
-        string? accessToken,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    public async Task<(MasteryPointsProgress Value, MessageContext Context)>
+        GetMasteryPointsProgress(
+            string? accessToken,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        MasteryPointsProgressRequest request = new()
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/account/mastery/points", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            AccessToken = accessToken,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetMasteryPointsProgress();
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/account/mastery/points
@@ -73,29 +85,44 @@ public sealed class MasteriesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<MasteryTrack> Value, MessageContext Context)> GetMasteryTracks(
+    public async Task<(HashSet<MasteryTrack> Value, MessageContext Context)> GetMasteryTracks(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        MasteriesRequest request = new()
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/masteries", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetMasteryTrack());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the IDs of all mastery tracks.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetMasteryTracksIndex(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetMasteryTracksIndex(
         CancellationToken cancellationToken = default
     )
     {
-        MasteriesIndexRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/masteries", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a mastery track by its ID.</summary>
@@ -104,19 +131,26 @@ public sealed class MasteriesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(MasteryTrack Value, MessageContext Context)> GetMasteryTrackById(
+    public async Task<(MasteryTrack Value, MessageContext Context)> GetMasteryTrackById(
         int masteryTrackId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        MasteryByIdRequest request = new(masteryTrackId)
+        var query = new QueryBuilder();
+        query.AddId(masteryTrackId);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/masteries", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetMasteryTrack();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves mastery tracks by their IDs.</summary>
@@ -125,19 +159,26 @@ public sealed class MasteriesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<MasteryTrack> Value, MessageContext Context)> GetMasteryTracksByIds(
+    public async Task<(HashSet<MasteryTrack> Value, MessageContext Context)> GetMasteryTracksByIds(
         IEnumerable<int> masteryTrackIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        MasteriesByIdsRequest request = new(masteryTrackIds.ToList())
+        var query = new QueryBuilder();
+        query.AddIds(masteryTrackIds);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/masteries", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetMasteryTrack());
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/masteries

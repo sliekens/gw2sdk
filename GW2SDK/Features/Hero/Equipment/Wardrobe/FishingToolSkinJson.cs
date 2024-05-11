@@ -6,9 +6,7 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 internal static class FishingToolSkinJson
 {
-    public static FishingToolSkin GetFishingToolSkin(
-        this JsonElement json
-    )
+    public static FishingToolSkin GetFishingToolSkin(this JsonElement json)
     {
         RequiredMember name = "name";
         OptionalMember description = "description";

@@ -5,9 +5,7 @@ namespace GuildWars2.WizardsVault.Objectives;
 
 internal static class DailyObjectivesProgressJson
 {
-    public static DailyObjectivesProgress GetDailyObjectivesProgress(
-        this JsonElement json
-    )
+    public static DailyObjectivesProgress GetDailyObjectivesProgress(this JsonElement json)
     {
         RequiredMember metaProgressCurrent = "meta_progress_current";
         RequiredMember metaProgressComplete = "meta_progress_complete";
@@ -55,8 +53,8 @@ internal static class DailyObjectivesProgressJson
             RewardItemId = metaRewardItemId.Map(static value => value.GetInt32()),
             RewardAcclaim = metaRewardAstral.Map(static value => value.GetInt32()),
             Claimed = metaRewardClaimed.Map(static value => value.GetBoolean()),
-            Objectives = objectives.Map(static values => values.GetList(static value => value.GetObjectiveProgress()
-                )
+            Objectives = objectives.Map(
+                static values => values.GetList(static value => value.GetObjectiveProgress())
             )
         };
     }

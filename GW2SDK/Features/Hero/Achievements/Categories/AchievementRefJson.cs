@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Achievements.Categories;
 
 internal static class AchievementRefJson
 {
-    public static AchievementRef GetAchievementRef(
-        this JsonElement json
-    )
+    public static AchievementRef GetAchievementRef(this JsonElement json)
     {
         RequiredMember id = "id";
         OptionalMember requiredAccess = "required_access";

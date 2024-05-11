@@ -1,10 +1,8 @@
-﻿using GuildWars2.Json;
+﻿using GuildWars2.Http;
+using GuildWars2.Json;
 using GuildWars2.WizardsVault.AstralRewards;
-using GuildWars2.WizardsVault.AstralRewards.Http;
 using GuildWars2.WizardsVault.Objectives;
-using GuildWars2.WizardsVault.Objectives.Http;
 using GuildWars2.WizardsVault.Seasons;
-using GuildWars2.WizardsVault.Seasons.Http;
 
 namespace GuildWars2.WizardsVault;
 
@@ -29,18 +27,24 @@ public sealed class WizardsVaultClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(Season Value, MessageContext Context)> GetSeason(
+    public async Task<(Season Value, MessageContext Context)> GetSeason(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        SeasonRequest request = new()
+        var query = new QueryBuilder();
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/wizardsvault", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSeason();
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/wizardsvault
@@ -53,19 +57,25 @@ public sealed class WizardsVaultClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<PurchasedAstralReward> Value, MessageContext Context)>
+    public async Task<(HashSet<PurchasedAstralReward> Value, MessageContext Context)>
         GetPurchasedAstralRewards(
             string? accessToken,
             MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        PurchasedAstralRewardsRequest request = new()
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/account/wizardsvault/listings", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            AccessToken = accessToken,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetPurchasedAstralReward());
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/account/wizardsvault/listings
@@ -78,18 +88,24 @@ public sealed class WizardsVaultClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(DailyObjectivesProgress Value, MessageContext Context)> GetDailyObjectivesProgress(
-        string? accessToken,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    public async Task<(DailyObjectivesProgress Value, MessageContext Context)>
+        GetDailyObjectivesProgress(
+            string? accessToken,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        DailyObjectivesProgressRequest request = new()
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/account/wizardsvault/daily", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            AccessToken = accessToken,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetDailyObjectivesProgress();
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/account/wizardsvault/daily
@@ -102,19 +118,24 @@ public sealed class WizardsVaultClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(WeeklyObjectivesProgress Value, MessageContext Context)>
+    public async Task<(WeeklyObjectivesProgress Value, MessageContext Context)>
         GetWeeklyObjectivesProgress(
             string? accessToken,
             MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        WeeklyObjectivesProgressRequest request = new()
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/account/wizardsvault/weekly", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            AccessToken = accessToken,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetWeeklyObjectivesProgress();
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/account/wizardsvault/weekly
@@ -127,19 +148,24 @@ public sealed class WizardsVaultClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(SpecialObjectivesProgress Value, MessageContext Context)>
+    public async Task<(SpecialObjectivesProgress Value, MessageContext Context)>
         GetSpecialObjectivesProgress(
             string? accessToken,
             MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        SpecialObjectivesProgressRequest request = new()
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/account/wizardsvault/special", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            AccessToken = accessToken,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSpecialObjectivesProgress();
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/account/wizardsvault/weekly
@@ -151,29 +177,44 @@ public sealed class WizardsVaultClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<AstralReward> Value, MessageContext Context)> GetAstralRewards(
+    public async Task<(HashSet<AstralReward> Value, MessageContext Context)> GetAstralRewards(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        AstralRewardsRequest request = new()
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/wizardsvault/listings", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetAstralReward());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the IDs of all rewards.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetAstralRewardsIndex(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetAstralRewardsIndex(
         CancellationToken cancellationToken = default
     )
     {
-        AstralRewardsIndexRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/wizardsvault/listings", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a reward by its ID.</summary>
@@ -182,19 +223,26 @@ public sealed class WizardsVaultClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(AstralReward Value, MessageContext Context)> GetAstralRewardById(
+    public async Task<(AstralReward Value, MessageContext Context)> GetAstralRewardById(
         int astralRewardId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        AstralRewardByIdRequest request = new(astralRewardId)
+        var query = new QueryBuilder();
+        query.AddId(astralRewardId);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/wizardsvault/listings", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetAstralReward();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves rewards by their IDs.</summary>
@@ -203,19 +251,26 @@ public sealed class WizardsVaultClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<AstralReward> Value, MessageContext Context)> GetAstralRewardsByIds(
+    public async Task<(HashSet<AstralReward> Value, MessageContext Context)> GetAstralRewardsByIds(
         IEnumerable<int> astralRewardIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        AstralRewardsByIdsRequest request = new(astralRewardIds.ToList())
+        var query = new QueryBuilder();
+        query.AddIds(astralRewardIds);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/wizardsvault/listings", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetAstralReward());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of rewards.</summary>
@@ -225,7 +280,7 @@ public sealed class WizardsVaultClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<AstralReward> Value, MessageContext Context)> GetAstralRewardsByPage(
+    public async Task<(HashSet<AstralReward> Value, MessageContext Context)> GetAstralRewardsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -233,13 +288,19 @@ public sealed class WizardsVaultClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        AstralRewardsByPageRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/wizardsvault/listings", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetAstralReward());
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/wizardsvault/listings
@@ -251,29 +312,44 @@ public sealed class WizardsVaultClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Objective> Value, MessageContext Context)> GetObjectives(
+    public async Task<(HashSet<Objective> Value, MessageContext Context)> GetObjectives(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        ObjectivesRequest request = new()
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/wizardsvault/objectives", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetObjective());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the IDs of all objectives.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetObjectivesIndex(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetObjectivesIndex(
         CancellationToken cancellationToken = default
     )
     {
-        ObjectivesIndexRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/wizardsvault/objectives", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a reward by its ID.</summary>
@@ -282,19 +358,26 @@ public sealed class WizardsVaultClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(Objective Value, MessageContext Context)> GetObjectiveById(
+    public async Task<(Objective Value, MessageContext Context)> GetObjectiveById(
         int objectiveId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        ObjectiveByIdRequest request = new(objectiveId)
+        var query = new QueryBuilder();
+        query.AddId(objectiveId);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/wizardsvault/objectives", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetObjective();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves objectives by their IDs.</summary>
@@ -303,19 +386,26 @@ public sealed class WizardsVaultClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Objective> Value, MessageContext Context)> GetObjectivesByIds(
+    public async Task<(HashSet<Objective> Value, MessageContext Context)> GetObjectivesByIds(
         IEnumerable<int> objectiveIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        ObjectivesByIdsRequest request = new(objectiveIds.ToList())
+        var query = new QueryBuilder();
+        query.AddIds(objectiveIds);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/wizardsvault/objectives", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetObjective());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of objectives.</summary>
@@ -325,7 +415,7 @@ public sealed class WizardsVaultClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Objective> Value, MessageContext Context)> GetObjectivesByPage(
+    public async Task<(HashSet<Objective> Value, MessageContext Context)> GetObjectivesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -333,13 +423,19 @@ public sealed class WizardsVaultClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        ObjectivesByPageRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/wizardsvault/objectives", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetObjective());
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/wizardsvault/objectives

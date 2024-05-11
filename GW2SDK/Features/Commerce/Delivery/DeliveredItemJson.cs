@@ -5,9 +5,7 @@ namespace GuildWars2.Commerce.Delivery;
 
 internal static class DeliveredItemJson
 {
-    public static DeliveredItem GetDeliveredItem(
-        this JsonElement json
-    )
+    public static DeliveredItem GetDeliveredItem(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember count = "count";

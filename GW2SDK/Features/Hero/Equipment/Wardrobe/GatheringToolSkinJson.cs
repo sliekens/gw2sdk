@@ -6,9 +6,7 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 internal static class GatheringToolSkinJson
 {
-    public static GatheringToolSkin GetGatheringToolSkin(
-        this JsonElement json
-    )
+    public static GatheringToolSkin GetGatheringToolSkin(this JsonElement json)
     {
         if (json.TryGetProperty("details", out var discriminator))
         {

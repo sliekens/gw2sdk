@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 internal static class DyeSlotInfoJson
 {
-    public static DyeSlotInfo GetDyeSlotInfo(
-        this JsonElement json
-    )
+    public static DyeSlotInfo GetDyeSlotInfo(this JsonElement json)
     {
         RequiredMember @default = "default";
         OptionalMember asuraFemale = "AsuraFemale";
@@ -104,9 +102,7 @@ internal static class DyeSlotInfoJson
             // The dye slot arrays can contain Null to represent the default color, so this is ugly
             // Perhaps there is a better way to model it with a Null Object pattern?
             return values.GetList(
-                static value => value.ValueKind == JsonValueKind.Null
-                    ? null
-                    : value.GetDyeSlot()
+                static value => value.ValueKind == JsonValueKind.Null ? null : value.GetDyeSlot()
             );
         }
     }

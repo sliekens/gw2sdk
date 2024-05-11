@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.StoryJournal.BackgroundStories;
 
 internal static class BackgroundStoryQuestionJson
 {
-    public static BackgroundStoryQuestion GetBackgroundStoryQuestion(
-        this JsonElement json
-    )
+    public static BackgroundStoryQuestion GetBackgroundStoryQuestion(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember title = "title";
@@ -57,16 +55,18 @@ internal static class BackgroundStoryQuestionJson
             Id = id.Map(static value => value.GetInt32()),
             Title = title.Map(static value => value.GetStringRequired()),
             Description = description.Map(static value => value.GetStringRequired()),
-            AnswerIds = answers.Map(static values => values.GetList(static value => value.GetStringRequired())),
+            AnswerIds =
+                answers.Map(
+                    static values => values.GetList(static value => value.GetStringRequired())
+                ),
             Order = order.Map(static value => value.GetInt32()),
             Professions =
-                professions.Map(static values =>
-                        values.GetList(static value => value.GetEnum<ProfessionName>()
-                        )
+                professions.Map(
+                    static values => values.GetList(static value => value.GetEnum<ProfessionName>())
                 )
                 ?? GetValues<ProfessionName>(),
-            Races = races.Map(static values => values.GetList(static value => value.GetEnum<RaceName>()
-                    )
+            Races = races.Map(
+                    static values => values.GetList(static value => value.GetEnum<RaceName>())
                 )
                 ?? GetValues<RaceName>()
         };

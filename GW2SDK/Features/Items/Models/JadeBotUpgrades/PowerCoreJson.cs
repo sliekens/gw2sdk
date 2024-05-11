@@ -5,9 +5,7 @@ namespace GuildWars2.Items;
 
 internal static class PowerCoreJson
 {
-    public static PowerCore GetPowerCore(
-        this JsonElement json
-    )
+    public static PowerCore GetPowerCore(this JsonElement json)
     {
         RequiredMember name = "name";
         OptionalMember description = "description";
@@ -90,8 +88,8 @@ internal static class PowerCoreJson
             Rarity = rarity.Map(static value => value.GetEnum<Rarity>()),
             VendorValue = vendorValue.Map(static value => value.GetInt32()),
             GameTypes =
-                gameTypes.Map(static values => values.GetList(static value => value.GetEnum<GameType>()
-                    )
+                gameTypes.Map(
+                    static values => values.GetList(static value => value.GetEnum<GameType>())
                 ),
             Flags = flags.Map(static values => values.GetItemFlags()),
             Restrictions = restrictions.Map(static value => value.GetItemRestriction()),

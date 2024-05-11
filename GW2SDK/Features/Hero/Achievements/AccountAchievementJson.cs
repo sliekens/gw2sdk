@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Achievements;
 
 internal static class AccountAchievementJson
 {
-    public static AccountAchievement GetAccountAchievement(
-        this JsonElement json
-    )
+    public static AccountAchievement GetAccountAchievement(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember current = "current";

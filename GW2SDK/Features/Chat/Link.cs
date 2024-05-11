@@ -11,25 +11,25 @@ public abstract record Link
     internal static Span<byte> GetBytes(string chatCode) => GetBytes(chatCode.AsSpan());
 
     internal static Span<byte> GetBytes(ReadOnlySpan<char> chatLink)
-	{
-		if (chatLink.IsEmpty || chatLink[0] != '[')
-		{
-			throw new FormatException("Invalid chat link format. Expected '['.");
-		}
-
-		chatLink = chatLink[1..];
-		if (chatLink.IsEmpty || chatLink[0] != '&')
-		{
-			throw new FormatException("Invalid chat link format. Expected '&'.");
+    {
+        if (chatLink.IsEmpty || chatLink[0] != '[')
+        {
+            throw new FormatException("Invalid chat link format. Expected '['.");
         }
 
-		chatLink = chatLink[1..];
-		if (chatLink.IsEmpty || chatLink[^1] != ']')
-		{
-			throw new FormatException("Invalid chat link format. Expected ']'.");
+        chatLink = chatLink[1..];
+        if (chatLink.IsEmpty || chatLink[0] != '&')
+        {
+            throw new FormatException("Invalid chat link format. Expected '&'.");
         }
 
-		chatLink = chatLink[..^1];
-		return Convert.FromBase64String(chatLink.ToString());
-	}
+        chatLink = chatLink[1..];
+        if (chatLink.IsEmpty || chatLink[^1] != ']')
+        {
+            throw new FormatException("Invalid chat link format. Expected ']'.");
+        }
+
+        chatLink = chatLink[..^1];
+        return Convert.FromBase64String(chatLink.ToString());
+    }
 }

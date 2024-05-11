@@ -6,9 +6,7 @@ namespace GuildWars2.Hero.Inventories;
 
 internal static class ItemSlotJson
 {
-    public static ItemSlot? GetItemSlot(
-        this JsonElement json
-    )
+    public static ItemSlot? GetItemSlot(this JsonElement json)
     {
         // Empty slots are represented as null -- but maybe we should use a Null Object pattern here
         if (json.ValueKind == JsonValueKind.Null)
@@ -81,10 +79,13 @@ internal static class ItemSlotJson
         }
 
         int? suffixItemId = null, secondarySuffixItemId = null;
-        if (upgrades.Map(static values => values.GetList(static value => value.GetInt32())) is { } ids)
+        if (upgrades.Map(static values => values.GetList(static value => value.GetInt32())) is
+            {
+            } ids)
         {
-            var indices =
-                upgradeSlotIndices.Map(static values => values.GetList(static value => value.GetInt32()))!;
+            var indices = upgradeSlotIndices.Map(
+                static values => values.GetList(static value => value.GetInt32())
+            )!;
             for (var i = 0; i < ids.Count; i++)
             {
                 var upgradeId = ids[i];
@@ -116,7 +117,8 @@ internal static class ItemSlotJson
                 infusions.Map(static values => values.GetList(static value => value.GetInt32()))
                 ?? Empty.ListOfInt32,
             DyeColorIds =
-                dyes.Map(static values => values.GetList(static value => value.GetInt32())) ?? Empty.ListOfInt32,
+                dyes.Map(static values => values.GetList(static value => value.GetInt32()))
+                ?? Empty.ListOfInt32,
             Binding = binding.Map(static value => value.GetEnum<ItemBinding>()),
             BoundTo = boundTo.Map(static value => value.GetString()) ?? "",
             Stats = stats.Map(static value => value.GetSelectedAttributeCombination())

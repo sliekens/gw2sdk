@@ -63,8 +63,7 @@ internal static class DyeColorJson
 
         // The API puts all hues, materials, and color sets into the same array,
         // which is uncomfortable, so split them into properties
-        var (hue, material, set) =
-            categories.Map(static value => value.GetCategories());
+        var (hue, material, set) = categories.Map(static value => value.GetCategories());
 
         // the first element is the hue, second is material, third is color set
         return new DyeColor

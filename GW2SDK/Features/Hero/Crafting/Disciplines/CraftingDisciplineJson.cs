@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Crafting.Disciplines;
 
 internal static class CraftingDisciplineJson
 {
-    public static CraftingDiscipline GetCraftingDiscipline(
-        this JsonElement json
-    )
+    public static CraftingDiscipline GetCraftingDiscipline(this JsonElement json)
     {
         RequiredMember discipline = "discipline";
         RequiredMember rating = "rating";
@@ -36,8 +34,7 @@ internal static class CraftingDisciplineJson
         return new CraftingDiscipline
         {
             Discipline =
-                discipline.Map(static value => value.GetEnum<CraftingDisciplineName>()
-                ),
+                discipline.Map(static value => value.GetEnum<CraftingDisciplineName>()),
             Rating = rating.Map(static value => value.GetInt32()),
             Active = active.Map(static value => value.GetBoolean())
         };

@@ -1,4 +1,5 @@
-﻿using GuildWars2.Pve.WorldBosses.Http;
+﻿using GuildWars2.Http;
+using GuildWars2.Json;
 
 namespace GuildWars2.Pve.WorldBosses;
 
@@ -19,12 +20,20 @@ public sealed class WorldBossesClient
     /// <summary>Retrieves the IDs of all world bosses.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<string> Value, MessageContext Context)> GetWorldBosses(
+    public async Task<(HashSet<string> Value, MessageContext Context)> GetWorldBosses(
         CancellationToken cancellationToken = default
     )
     {
-        WorldBossesRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/worldbosses", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the IDs of all world bosses that have been defeated since the last server reset on the account
@@ -32,12 +41,20 @@ public sealed class WorldBossesClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<string> Value, MessageContext Context)> GetDefeatedWorldBosses(
+    public async Task<(HashSet<string> Value, MessageContext Context)> GetDefeatedWorldBosses(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
     {
-        DefeatedWorldBossesRequest request = new() { AccessToken = accessToken };
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/account/worldbosses", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            return (value, response.Context);
+        }
     }
 }

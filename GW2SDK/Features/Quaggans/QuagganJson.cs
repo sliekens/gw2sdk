@@ -5,9 +5,7 @@ namespace GuildWars2.Quaggans;
 
 internal static class QuagganJson
 {
-    public static Quaggan GetQuaggan(
-        this JsonElement json
-    )
+    public static Quaggan GetQuaggan(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember url = "url";

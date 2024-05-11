@@ -6,9 +6,7 @@ namespace GuildWars2.Mumble;
 
 internal static class IdentityJson
 {
-    public static Identity GetIdentity(
-        this JsonElement json
-    )
+    public static Identity GetIdentity(this JsonElement json)
     {
         RequiredMember name = "name";
         RequiredMember profession = "profession";
@@ -77,7 +75,8 @@ internal static class IdentityJson
         if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
         {
             // The 'map' and 'map_id' seem to be redundant, but check my assumptions...
-            if (map.Map(static value => value.GetInt32()) != mapId.Map(static value => value.GetInt32()))
+            if (map.Map(static value => value.GetInt32())
+                != mapId.Map(static value => value.GetInt32()))
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember("map"));
             }

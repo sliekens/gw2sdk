@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Equipment.Miniatures;
 
 internal static class MiniatureJson
 {
-    public static Miniature GetMiniature(
-        this JsonElement json
-    )
+    public static Miniature GetMiniature(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";

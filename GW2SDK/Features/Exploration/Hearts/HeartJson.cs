@@ -52,7 +52,8 @@ internal static class HeartJson
             Level = level.Map(static value => value.GetInt32()),
             Coordinates = coordinates.Map(static value => value.GetCoordinateF()),
             Boundaries =
-                boundaries.Map(static values => values.GetList(static value => value.GetCoordinateF())
+                boundaries.Map(
+                    static values => values.GetList(static value => value.GetCoordinateF())
                 ),
             ChatLink = chatLink.Map(static value => value.GetStringRequired())
         };

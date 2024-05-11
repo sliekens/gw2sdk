@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Equipment;
 
 internal static class AttributesJson
 {
-    public static Dictionary<AttributeName, int> GetAttributes(
-        this JsonElement json
-    )
+    public static Dictionary<AttributeName, int> GetAttributes(this JsonElement json)
     {
         var result = new Dictionary<AttributeName, int>(4);
         foreach (var member in json.EnumerateObject())

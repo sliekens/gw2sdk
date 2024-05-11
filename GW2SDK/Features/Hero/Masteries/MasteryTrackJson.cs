@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Masteries;
 
 internal static class MasteryTrackJson
 {
-    public static MasteryTrack GetMasteryTrack(
-        this JsonElement json
-    )
+    public static MasteryTrack GetMasteryTrack(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -61,7 +59,8 @@ internal static class MasteryTrackJson
             Order = order.Map(static value => value.GetInt32()),
             BackgroundHref = background.Map(static value => value.GetStringRequired()),
             Region = region.Map(static value => value.GetEnum<MasteryRegionName>()),
-            Masteries = levels.Map(static values => values.GetList(static value => value.GetMastery())
+            Masteries = levels.Map(
+                static values => values.GetList(static value => value.GetMastery())
             )
         };
     }

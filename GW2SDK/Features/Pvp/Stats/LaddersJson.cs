@@ -5,9 +5,7 @@ namespace GuildWars2.Pvp.Stats;
 
 internal static class LaddersJson
 {
-    public static Ladders GetLadders(
-        this JsonElement json
-    )
+    public static Ladders GetLadders(this JsonElement json)
     {
         OptionalMember none = "none";
         OptionalMember unranked = "unranked";

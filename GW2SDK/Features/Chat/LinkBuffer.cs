@@ -61,7 +61,6 @@ internal ref struct LinkBuffer(Span<byte> buffer)
 #if NET
         return Wrapped(Convert.ToBase64String(Buffer[..length]));
 #else
-
         // Unfortunately there is no Convert.ToBase64String overload that takes a Span<byte> in older .NET,
         // but we can use ArrayPool to avoid allocating a new array
         var arr = ArrayPool<byte>.Shared.Rent(length);

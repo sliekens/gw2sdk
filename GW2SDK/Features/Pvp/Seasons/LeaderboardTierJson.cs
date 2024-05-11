@@ -5,9 +5,7 @@ namespace GuildWars2.Pvp.Seasons;
 
 internal static class LeaderboardTierJson
 {
-    public static LeaderboardTier GetLeaderboardTier(
-        this JsonElement json
-    )
+    public static LeaderboardTier GetLeaderboardTier(this JsonElement json)
     {
         OptionalMember color = "color";
         NullableMember type = "type";

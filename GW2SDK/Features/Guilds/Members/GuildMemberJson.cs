@@ -5,9 +5,7 @@ namespace GuildWars2.Guilds.Members;
 
 internal static class GuildMemberJson
 {
-    public static GuildMember GetGuildMember(
-        this JsonElement json
-    )
+    public static GuildMember GetGuildMember(this JsonElement json)
     {
         RequiredMember name = "name";
         RequiredMember rank = "rank";

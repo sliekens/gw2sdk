@@ -29,8 +29,7 @@ internal static class RaidJson
         return new Raid
         {
             Id = id.Map(static value => value.GetStringRequired()),
-            Wings = wings.Map(static values => values.GetList(static value => value.GetRaidWing())
-            )
+            Wings = wings.Map(static values => values.GetList(static value => value.GetRaidWing()))
         };
     }
 }

@@ -5,9 +5,7 @@ namespace GuildWars2.Guilds.Emblems;
 
 internal static class GuildEmblemJson
 {
-    public static GuildEmblem GetGuildEmblem(
-        this JsonElement json
-    )
+    public static GuildEmblem GetGuildEmblem(this JsonElement json)
     {
         RequiredMember background = "background";
         RequiredMember foreground = "foreground";
@@ -35,10 +33,8 @@ internal static class GuildEmblemJson
 
         return new GuildEmblem
         {
-            Background =
-                background.Map(static value => value.GetGuildEmblemBackground()),
-            Foreground =
-                foreground.Map(static value => value.GetGuildEmblemForeground()),
+            Background = background.Map(static value => value.GetGuildEmblemBackground()),
+            Foreground = foreground.Map(static value => value.GetGuildEmblemForeground()),
             Flags = flags.Map(static values => values.GetGuildEmblemFlags())
         };
     }

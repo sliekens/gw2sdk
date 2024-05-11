@@ -6,9 +6,7 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 internal static class DaggerSkinJson
 {
-    public static DaggerSkin GetDaggerSkin(
-        this JsonElement json
-    )
+    public static DaggerSkin GetDaggerSkin(this JsonElement json)
     {
         RequiredMember name = "name";
         OptionalMember description = "description";

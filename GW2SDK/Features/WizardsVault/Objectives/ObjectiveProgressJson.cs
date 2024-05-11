@@ -5,9 +5,7 @@ namespace GuildWars2.WizardsVault.Objectives;
 
 internal static class ObjectiveProgressJson
 {
-    public static ObjectiveProgress GetObjectiveProgress(
-        this JsonElement json
-    )
+    public static ObjectiveProgress GetObjectiveProgress(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember title = "title";

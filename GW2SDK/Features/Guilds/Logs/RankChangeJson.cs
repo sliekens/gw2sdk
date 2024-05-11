@@ -5,9 +5,7 @@ namespace GuildWars2.Guilds.Logs;
 
 internal static class RankChangeJson
 {
-    public static RankChange GetRankChange(
-        this JsonElement json
-    )
+    public static RankChange GetRankChange(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember time = "time";

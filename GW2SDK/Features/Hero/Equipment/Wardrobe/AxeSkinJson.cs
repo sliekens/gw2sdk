@@ -6,9 +6,7 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 internal static class AxeSkinJson
 {
-    public static AxeSkin GetAxeSkin(
-        this JsonElement json
-    )
+    public static AxeSkin GetAxeSkin(this JsonElement json)
     {
         RequiredMember name = "name";
         OptionalMember description = "description";

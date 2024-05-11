@@ -5,9 +5,7 @@ namespace GuildWars2.Commerce.Transactions;
 
 internal static class TransactionJson
 {
-    public static Transaction GetTransaction(
-        this JsonElement json
-    )
+    public static Transaction GetTransaction(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember itemId = "item_id";

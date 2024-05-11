@@ -5,9 +5,7 @@ namespace GuildWars2.Pve.SuperAdventureBox;
 
 internal static class SuperAdventureBoxZoneJson
 {
-    public static SuperAdventureBoxZone GetSuperAdventureBoxZone(
-        this JsonElement json
-    )
+    public static SuperAdventureBoxZone GetSuperAdventureBoxZone(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember mode = "mode";
@@ -41,7 +39,8 @@ internal static class SuperAdventureBoxZoneJson
         return new SuperAdventureBoxZone
         {
             Id = id.Map(static value => value.GetInt32()),
-            Mode = mode.Map(static value =>
+            Mode = mode.Map(
+                static value =>
                     value.ValueEquals("infantile") // Infantile was renamed to Exploration
                         ? SuperAdventureBoxMode.Exploration
                         : value.GetEnum<SuperAdventureBoxMode>()

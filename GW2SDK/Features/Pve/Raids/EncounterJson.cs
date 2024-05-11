@@ -5,9 +5,7 @@ namespace GuildWars2.Pve.Raids;
 
 internal static class EncounterJson
 {
-    public static Encounter GetEncounter(
-        this JsonElement json
-    )
+    public static Encounter GetEncounter(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember type = "type";

@@ -5,11 +5,7 @@ namespace GuildWars2.Hero.Builds.Facts;
 
 internal static class TimeJson
 {
-    public static Time GetTime(
-        this JsonElement json,
-        out int? requiresTrait,
-        out int? overrides
-    )
+    public static Time GetTime(this JsonElement json, out int? requiresTrait, out int? overrides)
     {
         requiresTrait = null;
         overrides = null;

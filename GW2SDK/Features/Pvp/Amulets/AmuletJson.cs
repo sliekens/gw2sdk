@@ -6,9 +6,7 @@ namespace GuildWars2.Pvp.Amulets;
 
 internal static class AmuletJson
 {
-    public static Amulet GetAmulet(
-        this JsonElement json
-    )
+    public static Amulet GetAmulet(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";

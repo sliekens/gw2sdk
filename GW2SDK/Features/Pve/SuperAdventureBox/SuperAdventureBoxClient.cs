@@ -1,5 +1,5 @@
-﻿using GuildWars2.Json;
-using GuildWars2.Pve.SuperAdventureBox.Http;
+﻿using GuildWars2.Http;
+using GuildWars2.Json;
 
 namespace GuildWars2.Pve.SuperAdventureBox;
 
@@ -26,7 +26,7 @@ public sealed class SuperAdventureBoxClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(SuperAdventureBoxProgress Value, MessageContext Context)>
+    public async Task<(SuperAdventureBoxProgress Value, MessageContext Context)>
         GetSuperAdventureBoxProgress(
             string characterName,
             string? accessToken,
@@ -34,12 +34,17 @@ public sealed class SuperAdventureBoxClient
             CancellationToken cancellationToken = default
         )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        var request = new SuperAdventureBoxProgressRequest(characterName)
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet($"v2/characters/{characterName}/sab", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            AccessToken = accessToken,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSuperAdventureBoxProgress();
+            return (value, response.Context);
+        }
     }
 
     #endregion

@@ -5,9 +5,7 @@ namespace GuildWars2.Exploration.Sectors;
 
 internal static class SectorJson
 {
-    public static Sector GetSector(
-        this JsonElement json
-    )
+    public static Sector GetSector(this JsonElement json)
     {
         OptionalMember name = "name";
         RequiredMember level = "level";
@@ -54,7 +52,8 @@ internal static class SectorJson
             Level = level.Map(static value => value.GetInt32()),
             Coordinates = coordinates.Map(static value => value.GetCoordinateF()),
             Boundaries =
-                boundaries.Map(static values => values.GetList(static value => value.GetCoordinateF())
+                boundaries.Map(
+                    static values => values.GetList(static value => value.GetCoordinateF())
                 ),
             ChatLink = chatLink.Map(static value => value.GetStringRequired())
         };

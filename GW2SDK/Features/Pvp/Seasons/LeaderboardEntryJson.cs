@@ -5,9 +5,7 @@ namespace GuildWars2.Pvp.Seasons;
 
 internal static class LeaderboardEntryJson
 {
-    public static LeaderboardEntry GetLeaderboardEntry(
-        this JsonElement json
-    )
+    public static LeaderboardEntry GetLeaderboardEntry(this JsonElement json)
     {
         RequiredMember name = "name";
         OptionalMember guildId = "id";
@@ -61,8 +59,7 @@ internal static class LeaderboardEntryJson
             TeamId = teamId.Map(static value => value.GetInt32()),
             Rank = rank.Map(static value => value.GetInt32()),
             Date = date.Map(static value => value.GetDateTimeOffset()),
-            Scores = scores.Map(static values => values.GetList(static value => value.GetScore())
-            )
+            Scores = scores.Map(static values => values.GetList(static value => value.GetScore()))
         };
     }
 }

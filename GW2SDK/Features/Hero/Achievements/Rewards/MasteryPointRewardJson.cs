@@ -6,9 +6,7 @@ namespace GuildWars2.Hero.Achievements.Rewards;
 
 internal static class MasteryPointRewardJson
 {
-    public static MasteryPointReward GetMasteryPointReward(
-        this JsonElement json
-    )
+    public static MasteryPointReward GetMasteryPointReward(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember region = "region";

@@ -5,9 +5,7 @@ namespace GuildWars2.Guilds.Logs;
 
 internal static class TreasuryDepositJson
 {
-    public static TreasuryDeposit GetTreasuryDeposit(
-        this JsonElement json
-    )
+    public static TreasuryDeposit GetTreasuryDeposit(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember time = "time";

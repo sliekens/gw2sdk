@@ -131,15 +131,21 @@ internal static class HealSkillJson
             }
         }
 
-        var professionRestrictions = professions.Map(static values => values.GetList(static value => value.GetEnum<ProfessionName>())
+        var professionRestrictions = professions.Map(
+            static values => values.GetList(static value => value.GetEnum<ProfessionName>())
         );
         return new HealSkill
         {
             Id = id.Map(static value => value.GetInt32()),
             Name = name.Map(static value => value.GetStringRequired()),
-            Facts = facts.Map(static values => values.GetList(static value => value.GetFact(out _, out _))),
+            Facts =
+                facts.Map(
+                    static values => values.GetList(static value => value.GetFact(out _, out _))
+                ),
             TraitedFacts =
-                traitedFacts.Map(static values => values.GetList(static value => value.GetTraitedFact())),
+                traitedFacts.Map(
+                    static values => values.GetList(static value => value.GetTraitedFact())
+                ),
             Description = description.Map(static value => value.GetStringRequired()),
             IconHref = icon.Map(static value => value.GetString()) ?? "",
             WeaponType = weaponType.Map(static value => value.GetWeaponType()),
@@ -155,10 +161,13 @@ internal static class HealSkillJson
             SpecializationId = specialization.Map(static value => value.GetInt32()),
             ChatLink = chatLink.Map(static value => value.GetStringRequired()),
             Categories =
-                categories.Map(static values => values.GetList(static value => value.GetEnum<SkillCategoryName>())
+                categories.Map(
+                    static values =>
+                        values.GetList(static value => value.GetEnum<SkillCategoryName>())
                 )
                 ?? Empty.List<Extensible<SkillCategoryName>>(),
-            SubskillIds = subskills.Map(static values => values.GetList(static value => value.GetSubskill())),
+            SubskillIds =
+                subskills.Map(static values => values.GetList(static value => value.GetSubskill())),
             BundleSkillIds =
                 bundleSkills.Map(static values => values.GetList(static value => value.GetInt32())),
             Attunement = attunement.Map(static value => value.GetEnum<Attunement>()),

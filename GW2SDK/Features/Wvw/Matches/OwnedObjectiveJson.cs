@@ -1,13 +1,11 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Matches;
 
 internal static class OwnedObjectiveJson
 {
-    public static OwnedObjective GetOwnedObjective(
-        this JsonElement json
-    )
+    public static OwnedObjective GetOwnedObjective(this JsonElement json)
     {
         if (json.TryGetProperty("type", out var discriminator))
         {

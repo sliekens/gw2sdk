@@ -5,9 +5,7 @@ namespace GuildWars2.WizardsVault.AstralRewards;
 
 internal static class PurchasedAstralRewardJson
 {
-    public static PurchasedAstralReward GetPurchasedAstralReward(
-        this JsonElement json
-    )
+    public static PurchasedAstralReward GetPurchasedAstralReward(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember itemId = "item_id";

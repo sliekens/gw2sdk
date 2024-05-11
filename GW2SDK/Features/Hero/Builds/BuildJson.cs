@@ -58,9 +58,11 @@ internal static class BuildJson
 
         var (Specialization1, Specialization2, Specialization3) =
             specializations.Map(static values => values.GetSelectedSpecializations());
-        var legendIds = legends.Map(values => values.GetLegendIds(Specialization1, Specialization2, Specialization3)
+        var legendIds = legends.Map(
+            values => values.GetLegendIds(Specialization1, Specialization2, Specialization3)
         );
-        var aquaticLegendIds = aquaticLegends.Map(values => values.GetLegendIds(Specialization1, Specialization2, Specialization3)
+        var aquaticLegendIds = aquaticLegends.Map(
+            values => values.GetLegendIds(Specialization1, Specialization2, Specialization3)
         );
         return new Build
         {

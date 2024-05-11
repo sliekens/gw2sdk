@@ -1,4 +1,4 @@
-﻿using GuildWars2.Hero.Crafting.Disciplines.Http;
+﻿using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Crafting.Disciplines;
@@ -26,7 +26,7 @@ public sealed class CraftingDisciplinesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(LearnedCraftingDisciplines Value, MessageContext Context)>
+    public async Task<(LearnedCraftingDisciplines Value, MessageContext Context)>
         GetLearnedCraftingDisciplines(
             string characterName,
             string? accessToken,
@@ -34,12 +34,17 @@ public sealed class CraftingDisciplinesClient
             CancellationToken cancellationToken = default
         )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        LearnedCraftingDisciplinesRequest request = new(characterName)
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet($"v2/characters/{characterName}/crafting", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            AccessToken = accessToken
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetLearnedCraftingDisciplines();
+            return (value, response.Context);
+        }
     }
 
     #endregion

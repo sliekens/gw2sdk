@@ -6,9 +6,7 @@ namespace GuildWars2.Exploration;
 
 internal static class PointJson
 {
-    public static Point GetCoordinate(
-        this JsonElement json
-    )
+    public static Point GetCoordinate(this JsonElement json)
     {
         JsonElement x = default;
         JsonElement y = default;
@@ -34,9 +32,7 @@ internal static class PointJson
         return new Point(x.GetInt32(), y.GetInt32());
     }
 
-    public static PointF GetCoordinateF(
-        this JsonElement json
-    )
+    public static PointF GetCoordinateF(this JsonElement json)
     {
         JsonElement x = default;
         JsonElement y = default;

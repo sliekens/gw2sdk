@@ -5,9 +5,7 @@ namespace GuildWars2.Items;
 
 internal static class InfusionSlotUpgradePathJson
 {
-    public static InfusionSlotUpgradePath GetInfusionSlotUpgradePath(
-        this JsonElement json
-    )
+    public static InfusionSlotUpgradePath GetInfusionSlotUpgradePath(this JsonElement json)
     {
         RequiredMember upgrade = "upgrade";
         RequiredMember itemId = "item_id";
@@ -29,8 +27,7 @@ internal static class InfusionSlotUpgradePathJson
 
         return new InfusionSlotUpgradePath
         {
-            Upgrade = upgrade.Map(static value => value.GetEnum<InfusionSlotUpgradeKind>()
-            ),
+            Upgrade = upgrade.Map(static value => value.GetEnum<InfusionSlotUpgradeKind>()),
             ItemId = itemId.Map(static value => value.GetInt32())
         };
     }

@@ -6,9 +6,7 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 internal static class LoggingToolSkinJson
 {
-    public static LoggingToolSkin GetLoggingToolSkin(
-        this JsonElement json
-    )
+    public static LoggingToolSkin GetLoggingToolSkin(this JsonElement json)
     {
         RequiredMember name = "name";
         OptionalMember description = "description";

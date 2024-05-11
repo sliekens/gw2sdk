@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Builds;
 
 internal static class SkillBarJson
 {
-    public static SkillBar GetSkillBar(
-        this JsonElement json
-    )
+    public static SkillBar GetSkillBar(this JsonElement json)
     {
         NullableMember heal = "heal";
         RequiredMember utilities = "utilities";

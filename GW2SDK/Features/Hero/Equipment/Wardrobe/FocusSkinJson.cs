@@ -6,9 +6,7 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 internal static class FocusSkinJson
 {
-    public static FocusSkin GetFocusSkin(
-        this JsonElement json
-    )
+    public static FocusSkin GetFocusSkin(this JsonElement json)
     {
         RequiredMember name = "name";
         OptionalMember description = "description";

@@ -5,9 +5,7 @@ namespace GuildWars2.Pvp.Seasons;
 
 internal static class LeaderboardGroupJson
 {
-    public static LeaderboardGroup GetLeaderboardGroup(
-        this JsonElement json
-    )
+    public static LeaderboardGroup GetLeaderboardGroup(this JsonElement json)
     {
         OptionalMember ladder = "ladder";
         OptionalMember legendary = "legendary";

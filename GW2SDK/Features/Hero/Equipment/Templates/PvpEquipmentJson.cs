@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Equipment.Templates;
 
 internal static class PvpEquipmentJson
 {
-    public static PvpEquipment GetPvpEquipment(
-        this JsonElement json
-    )
+    public static PvpEquipment GetPvpEquipment(this JsonElement json)
     {
         NullableMember amulet = "amulet";
         NullableMember rune = "rune";
@@ -37,7 +35,9 @@ internal static class PvpEquipmentJson
         {
             AmuletId = amulet.Map(static value => value.GetInt32()),
             RuneId = rune.Map(static value => value.GetInt32()),
-            SigilIds = sigils.Map(static values => values.GetList(static value => value.GetNullableInt32()))
+            SigilIds = sigils.Map(
+                static values => values.GetList(static value => value.GetNullableInt32())
+            )
         };
     }
 }

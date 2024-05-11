@@ -1,5 +1,5 @@
 ﻿namespace GuildWars2.Items;
 
 /// <summary>Information about a longbow.</summary>
-[PublicAPI] 
+[PublicAPI]
 public sealed record Longbow : Weapon;

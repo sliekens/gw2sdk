@@ -6,9 +6,7 @@ namespace GuildWars2.Hero.Crafting.Recipes;
 
 internal static class GuildConsumableRecipeJson
 {
-    public static GuildConsumableRecipe GetGuildConsumableRecipe(
-        this JsonElement json
-    )
+    public static GuildConsumableRecipe GetGuildConsumableRecipe(this JsonElement json)
     {
         RequiredMember outputItemId = "output_item_id";
         RequiredMember outputItemCount = "output_item_count";
@@ -88,19 +86,21 @@ internal static class GuildConsumableRecipeJson
             OutputItemId = outputItemId.Map(static value => value.GetInt32()),
             OutputItemCount = outputItemCount.Map(static value => value.GetInt32()),
             MinRating = minRating.Map(static value => value.GetInt32()),
-            TimeToCraft = timeToCraft.Map(static value => TimeSpan.FromMilliseconds(value.GetDouble())),
+            TimeToCraft =
+                timeToCraft.Map(static value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines =
-                disciplines.Map(static values =>
-                        values.GetList(static value => value.GetEnum<CraftingDisciplineName>()
-                        )
+                disciplines.Map(
+                    static values =>
+                        values.GetList(static value => value.GetEnum<CraftingDisciplineName>())
                 ),
             Flags = flags.Map(static values => values.GetRecipeFlags()),
             Ingredients =
-                ingredients.Map(static values => values.GetList(static value => value.GetIngredient())
+                ingredients.Map(
+                    static values => values.GetList(static value => value.GetIngredient())
                 ),
             GuildIngredients =
-                guildIngredients.Map(static values => values.GetList(static value => value.GetGuildIngredient()
-                    )
+                guildIngredients.Map(
+                    static values => values.GetList(static value => value.GetGuildIngredient())
                 )
                 ?? Empty.List<GuildIngredient>(),
             OutputUpgradeId = outputUpgradeId.Map(static value => value.GetInt32()),

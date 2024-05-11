@@ -6,9 +6,7 @@ namespace GuildWars2.Items;
 
 internal static class BackpackJson
 {
-    public static Backpack GetBackpack(
-        this JsonElement json
-    )
+    public static Backpack GetBackpack(this JsonElement json)
     {
         RequiredMember name = "name";
         OptionalMember description = "description";
@@ -126,7 +124,8 @@ internal static class BackpackJson
                             {
                                 infixUpgradeBuff = infix;
                             }
-                            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
+                            else if (JsonOptions.MissingMemberBehavior
+                                == MissingMemberBehavior.Error)
                             {
                                 throw new InvalidOperationException(
                                     Strings.UnexpectedMember(infix.Name)
@@ -164,15 +163,16 @@ internal static class BackpackJson
             VendorValue = vendorValue.Map(static value => value.GetInt32()),
             DefaultSkinId = defaultSkin.Map(static value => value.GetInt32()),
             GameTypes =
-                gameTypes.Map(static values => values.GetList(static value => value.GetEnum<GameType>()
-                    )
+                gameTypes.Map(
+                    static values => values.GetList(static value => value.GetEnum<GameType>())
                 ),
             Flags = flags.Map(static values => values.GetItemFlags()),
             Restrictions = restrictions.Map(static value => value.GetItemRestriction()),
             ChatLink = chatLink.Map(static value => value.GetStringRequired()),
             IconHref = icon.Map(static value => value.GetString()),
             InfusionSlots =
-                infusionSlots.Map(static values => values.GetList(static value => value.GetInfusionSlot())
+                infusionSlots.Map(
+                    static values => values.GetList(static value => value.GetInfusionSlot())
                 ),
             AttributeAdjustment = attributeAdjustment.Map(static value => value.GetDouble()),
             AttributeCombinationId = infixUpgradeId.Map(static value => value.GetInt32()),
@@ -185,13 +185,15 @@ internal static class BackpackJson
                 statChoices.Map(static values => values.GetList(static value => value.GetInt32()))
                 ?? Empty.ListOfInt32,
             UpgradesInto =
-                upgradesInto.Map(static values =>
-                        values.GetList(static value => value.GetInfusionSlotUpgradePath()
-                        )
+                upgradesInto.Map(
+                    static values =>
+                        values.GetList(static value => value.GetInfusionSlotUpgradePath())
                 )
                 ?? Empty.List<InfusionSlotUpgradePath>(),
-            UpgradesFrom = upgradesFrom.Map(static values => values.GetList(static value => value.GetInfusionSlotUpgradeSource()
-                    )
+            UpgradesFrom =
+                upgradesFrom.Map(
+                    static values =>
+                        values.GetList(static value => value.GetInfusionSlotUpgradeSource())
                 )
                 ?? Empty.List<InfusionSlotUpgradeSource>()
         };

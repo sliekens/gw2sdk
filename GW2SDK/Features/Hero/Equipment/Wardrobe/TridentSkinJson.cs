@@ -6,9 +6,7 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 internal static class TridentSkinJson
 {
-    public static TridentSkin GetTridentSkin(
-        this JsonElement json
-    )
+    public static TridentSkin GetTridentSkin(this JsonElement json)
     {
         RequiredMember name = "name";
         OptionalMember description = "description";

@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Equipment.Outfits;
 
 internal static class OutfitJson
 {
-    public static Outfit GetOutfit(
-        this JsonElement json
-    )
+    public static Outfit GetOutfit(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -43,7 +41,8 @@ internal static class OutfitJson
             Id = id.Map(static value => value.GetInt32()),
             Name = name.Map(static value => value.GetStringRequired()),
             IconHref = icon.Map(static value => value.GetStringRequired()),
-            UnlockItemIds = unlockItems.Map(static values => values.GetList(static value => value.GetInt32()))
+            UnlockItemIds =
+                unlockItems.Map(static values => values.GetList(static value => value.GetInt32()))
         };
     }
 }

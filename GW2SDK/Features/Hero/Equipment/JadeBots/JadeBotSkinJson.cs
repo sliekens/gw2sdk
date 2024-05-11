@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Equipment.JadeBots;
 
 internal static class JadeBotSkinJson
 {
-    public static JadeBotSkin GetJadeBotSkin(
-        this JsonElement json
-    )
+    public static JadeBotSkin GetJadeBotSkin(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";

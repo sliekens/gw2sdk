@@ -6,9 +6,7 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 internal static class BackpackSkinJson
 {
-    public static BackpackSkin GetBackpackSkin(
-        this JsonElement json
-    )
+    public static BackpackSkin GetBackpackSkin(this JsonElement json)
     {
         RequiredMember name = "name";
         OptionalMember description = "description";

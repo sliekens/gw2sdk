@@ -5,9 +5,7 @@ namespace GuildWars2.Pvp.Standings;
 
 internal static class StandingJson
 {
-    public static Standing GetStanding(
-        this JsonElement json
-    )
+    public static Standing GetStanding(this JsonElement json)
     {
         RequiredMember seasonId = "season_id";
         RequiredMember current = "current";

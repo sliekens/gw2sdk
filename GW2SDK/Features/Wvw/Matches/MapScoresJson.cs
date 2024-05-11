@@ -6,9 +6,7 @@ namespace GuildWars2.Wvw.Matches;
 
 internal static class MapScoresJson
 {
-    public static MapScores GetMapScores(
-        this JsonElement json
-    )
+    public static MapScores GetMapScores(this JsonElement json)
     {
         RequiredMember type = "type";
         RequiredMember scores = "scores";

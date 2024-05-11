@@ -5,9 +5,7 @@ namespace GuildWars2.Pvp.MistChampions;
 
 internal static class MistChampionStatsJson
 {
-    public static MistChampionStats GetMistChampionStats(
-        this JsonElement json
-    )
+    public static MistChampionStats GetMistChampionStats(this JsonElement json)
     {
         RequiredMember offense = "offense";
         RequiredMember defense = "defense";

@@ -1,5 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
-using GuildWars2.Hero.Crafting.Recipes.Http;
+using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Crafting.Recipes;
@@ -27,13 +27,21 @@ public sealed class RecipesClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedRecipes(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedRecipes(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
     {
-        UnlockedRecipesRequest request = new() { AccessToken = accessToken };
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/account/recipes", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     #endregion
@@ -48,19 +56,24 @@ public sealed class RecipesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetLearnedRecipes(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetLearnedRecipes(
         string characterName,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        LearnedRecipesRequest request = new(characterName)
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet($"v2/characters/{characterName}/recipes", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            AccessToken = accessToken,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetLearnedRecipes();
+            return (value, response.Context);
+        }
     }
 
     #endregion
@@ -70,12 +83,20 @@ public sealed class RecipesClient
     /// <summary>Retrieves the IDs of all recipes.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetRecipesIndex(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetRecipesIndex(
         CancellationToken cancellationToken = default
     )
     {
-        RecipesIndexRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/recipes", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a recipe by its ID.</summary>
@@ -83,15 +104,24 @@ public sealed class RecipesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(Recipe Value, MessageContext Context)> GetRecipeById(
+    public async Task<(Recipe Value, MessageContext Context)> GetRecipeById(
         int recipeId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        RecipeByIdRequest request = new(recipeId);
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddId(recipeId);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/recipes", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetRecipe();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves recipes by their IDs.</summary>
@@ -100,15 +130,24 @@ public sealed class RecipesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Recipe> Value, MessageContext Context)> GetRecipesByIds(
+    public async Task<(HashSet<Recipe> Value, MessageContext Context)> GetRecipesByIds(
         IEnumerable<int> recipeIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        RecipesByIdsRequest request = new(recipeIds.ToList());
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddIds(recipeIds);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/recipes", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetRecipe());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of recipes.</summary>
@@ -117,19 +156,25 @@ public sealed class RecipesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Recipe> Value, MessageContext Context)> GetRecipesByPage(
+    public async Task<(HashSet<Recipe> Value, MessageContext Context)> GetRecipesByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        RecipesByPageRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/recipes", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetRecipe());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves recipes by their IDs by chunking requests and executing them in parallel. Supports more than 200
@@ -210,13 +255,26 @@ public sealed class RecipesClient
     /// <param name="ingredientItemId">The item ID of the ingredient.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetRecipesIndexByIngredientItemId(
-        int ingredientItemId,
-        CancellationToken cancellationToken = default
-    )
+    public async Task<(HashSet<int> Value, MessageContext Context)>
+        GetRecipesIndexByIngredientItemId(
+            int ingredientItemId,
+            CancellationToken cancellationToken = default
+        )
     {
-        RecipesIndexByIngredientItemIdRequest request = new(ingredientItemId);
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder { { "input", ingredientItemId } };
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet(
+            "v2/recipes/search",
+            query,
+            null
+        );
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves all recipes that require the specified ingredient.</summary>
@@ -224,15 +282,24 @@ public sealed class RecipesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Recipe> Value, MessageContext Context)> GetRecipesByIngredientItemId(
+    public async Task<(HashSet<Recipe> Value, MessageContext Context)> GetRecipesByIngredientItemId(
         int ingredientItemId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        RecipesByIngredientItemIdRequest request = new(ingredientItemId);
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder { { "input", ingredientItemId } };
+        query.AddAllIds();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/recipes/search", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetRecipe());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of recipes that require the specified ingredient.</summary>
@@ -242,33 +309,48 @@ public sealed class RecipesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Recipe> Value, MessageContext Context)> GetRecipesByIngredientItemIdByPage(
-        int ingredientItemId,
-        int pageIndex,
-        int? pageSize = default,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    public async Task<(HashSet<Recipe> Value, MessageContext Context)>
+        GetRecipesByIngredientItemIdByPage(
+            int ingredientItemId,
+            int pageIndex,
+            int? pageSize = default,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        RecipesByIngredientItemIdByPageRequest request = new(ingredientItemId, pageIndex)
+        var query = new QueryBuilder { { "input", ingredientItemId } };
+        query.AddPage(pageIndex, pageSize);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/recipes/search", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetRecipe());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the IDs of all recipes for creating the specified output item.</summary>
     /// <param name="outputItemId">The item ID of the created item.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetRecipesIndexByOutputItemId(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetRecipesIndexByOutputItemId(
         int outputItemId,
         CancellationToken cancellationToken = default
     )
     {
-        RecipesIndexByOutputItemIdRequest request = new(outputItemId);
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder { { "output", outputItemId } };
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/recipes/search", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves all recipes for creating the specified output item.</summary>
@@ -276,15 +358,24 @@ public sealed class RecipesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Recipe> Value, MessageContext Context)> GetRecipesByOutputItemId(
+    public async Task<(HashSet<Recipe> Value, MessageContext Context)> GetRecipesByOutputItemId(
         int outputItemId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        RecipesByOutputItemIdRequest request = new(outputItemId);
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder { { "output", outputItemId } };
+        query.AddAllIds();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/recipes/search", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetRecipe());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of recipes for creating the specified output item.</summary>
@@ -294,20 +385,27 @@ public sealed class RecipesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Recipe> Value, MessageContext Context)> GetRecipesByOutputItemIdByPage(
-        int outputItemId,
-        int pageIndex,
-        int? pageSize = default,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    public async Task<(HashSet<Recipe> Value, MessageContext Context)>
+        GetRecipesByOutputItemIdByPage(
+            int outputItemId,
+            int pageIndex,
+            int? pageSize = default,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        RecipesByOutputItemIdByPageRequest request = new(outputItemId, pageIndex)
+        var query = new QueryBuilder { { "output", outputItemId } };
+        query.AddPage(pageIndex, pageSize);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/recipes/search", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetRecipe());
+            return (value, response.Context);
+        }
     }
 
     #endregion

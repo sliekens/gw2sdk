@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Builds;
 
 internal static class SubskillJson
 {
-    public static Subskill GetSubskill(
-        this JsonElement json
-    )
+    public static Subskill GetSubskill(this JsonElement json)
     {
         RequiredMember id = "id";
         NullableMember attunement = "attunement";

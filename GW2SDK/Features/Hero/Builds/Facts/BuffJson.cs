@@ -5,11 +5,7 @@ namespace GuildWars2.Hero.Builds.Facts;
 
 internal static class BuffJson
 {
-    public static Buff GetBuff(
-        this JsonElement json,
-        out int? requiresTrait,
-        out int? overrides
-    )
+    public static Buff GetBuff(this JsonElement json, out int? requiresTrait, out int? overrides)
     {
         requiresTrait = null;
         overrides = null;

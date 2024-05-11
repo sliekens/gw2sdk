@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Equipment.Mounts;
 
 internal static class MountNameJson
 {
-    public static Extensible<MountName> GetMountName(
-        this JsonElement json
-    )
+    public static Extensible<MountName> GetMountName(this JsonElement json)
     {
         var text = json.GetStringRequired();
         return text switch

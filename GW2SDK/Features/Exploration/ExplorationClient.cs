@@ -1,11 +1,11 @@
 ﻿using GuildWars2.Exploration.Continents;
 using GuildWars2.Exploration.Floors;
 using GuildWars2.Exploration.Hearts;
-using GuildWars2.Exploration.Http;
 using GuildWars2.Exploration.Maps;
 using GuildWars2.Exploration.PointsOfInterest;
 using GuildWars2.Exploration.Regions;
 using GuildWars2.Exploration.Sectors;
+using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Exploration;
@@ -32,14 +32,26 @@ public sealed class ExplorationClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<string> Value, MessageContext Context)> GetCompletedHeroChallenges(
+    public async Task<(HashSet<string> Value, MessageContext Context)> GetCompletedHeroChallenges(
         string characterName,
         string? accessToken,
         CancellationToken cancellationToken = default
     )
     {
-        CompletedHeroChallengesRequest request = new(characterName) { AccessToken = accessToken };
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet(
+            $"v2/characters/{characterName}/heropoints",
+            query,
+            accessToken
+        );
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            return (value, response.Context);
+        }
     }
 
     #endregion
@@ -51,26 +63,44 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Continent> Value, MessageContext Context)> GetContinents(
+    public async Task<(HashSet<Continent> Value, MessageContext Context)> GetContinents(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        ContinentsRequest request = new() { Language = language };
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/continents", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetContinent());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the IDs of all continents.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetContinentsIndex(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetContinentsIndex(
         CancellationToken cancellationToken = default
     )
     {
-        ContinentsIndexRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/continents", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a continent by its ID.</summary>
@@ -79,16 +109,26 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(Continent Value, MessageContext Context)> GetContinentById(
+    public async Task<(Continent Value, MessageContext Context)> GetContinentById(
         int continentId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        ContinentByIdRequest request = new(continentId) { Language = language };
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddId(continentId);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/continents", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetContinent();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves continents by their IDs.</summary>
@@ -97,16 +137,26 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Continent> Value, MessageContext Context)> GetContinentsByIds(
+    public async Task<(HashSet<Continent> Value, MessageContext Context)> GetContinentsByIds(
         IEnumerable<int> continentIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        ContinentsByIdsRequest request = new(continentIds.ToList()) { Language = language };
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddIds(continentIds);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/continents", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetContinent());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of continents.</summary>
@@ -116,7 +166,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Continent> Value, MessageContext Context)> GetContinentsByPage(
+    public async Task<(HashSet<Continent> Value, MessageContext Context)> GetContinentsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -124,13 +174,19 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        ContinentsByPageRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/continents", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            Language = language
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetContinent());
+            return (value, response.Context);
+        }
     }
 
     #endregion
@@ -143,29 +199,47 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Floor> Value, MessageContext Context)> GetFloors(
+    public async Task<(HashSet<Floor> Value, MessageContext Context)> GetFloors(
         int continentId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        FloorsRequest request = new(continentId) { Language = language };
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet($"v2/continents/{continentId}/floors", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetFloor());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves all floor IDs of a continent.</summary>
     /// <param name="continentId">The continent ID.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetFloorsIndex(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetFloorsIndex(
         int continentId,
         CancellationToken cancellationToken = default
     )
     {
-        FloorsIndexRequest request = new(continentId);
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet($"v2/continents/{continentId}/floors", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a floor by its ID.</summary>
@@ -175,7 +249,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(Floor Value, MessageContext Context)> GetFloorById(
+    public async Task<(Floor Value, MessageContext Context)> GetFloorById(
         int continentId,
         int floorId,
         Language? language = default,
@@ -183,9 +257,19 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        FloorByIdRequest request = new(continentId, floorId) { Language = language };
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddId(floorId);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet($"v2/continents/{continentId}/floors", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetFloor();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves floors by their IDs.</summary>
@@ -195,7 +279,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Floor> Value, MessageContext Context)> GetFloorsByIds(
+    public async Task<(HashSet<Floor> Value, MessageContext Context)> GetFloorsByIds(
         int continentId,
         IEnumerable<int> floorIds,
         Language? language = default,
@@ -203,9 +287,20 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        FloorsByIdsRequest request = new(continentId, floorIds.ToList()) { Language = language };
-        return request.SendAsync(httpClient, cancellationToken);
+        string path = $"v2/continents/{continentId}/floors";
+        var query = new QueryBuilder();
+        query.AddIds(floorIds);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet(path, query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetFloor());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of floors.</summary>
@@ -216,7 +311,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Floor> Value, MessageContext Context)> GetFloorsByPage(
+    public async Task<(HashSet<Floor> Value, MessageContext Context)> GetFloorsByPage(
         int continentId,
         int pageIndex,
         int? pageSize = default,
@@ -225,13 +320,19 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        FloorsByPageRequest request = new(continentId, pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet($"v2/continents/{continentId}/floors", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            Language = language
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetFloor());
+            return (value, response.Context);
+        }
     }
 
     #endregion
@@ -245,7 +346,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Region> Value, MessageContext Context)> GetRegions(
+    public async Task<(HashSet<Region> Value, MessageContext Context)> GetRegions(
         int continentId,
         int floorId,
         Language? language = default,
@@ -253,9 +354,19 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        RegionsRequest request = new(continentId, floorId) { Language = language };
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetRegion());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the IDs of all regions on a floor.</summary>
@@ -263,14 +374,26 @@ public sealed class ExplorationClient
     /// <param name="floorId">The floor ID.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetRegionsIndex(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetRegionsIndex(
         int continentId,
         int floorId,
         CancellationToken cancellationToken = default
     )
     {
-        RegionsIndexRequest request = new(continentId, floorId);
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet(
+            $"v2/continents/{continentId}/floors/{floorId}/regions",
+            query,
+            null
+        );
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a region by its ID.</summary>
@@ -281,7 +404,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(Region Value, MessageContext Context)> GetRegionById(
+    public async Task<(Region Value, MessageContext Context)> GetRegionById(
         int continentId,
         int floorId,
         int regionId,
@@ -290,9 +413,19 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        RegionByIdRequest request = new(continentId, floorId, regionId) { Language = language };
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddId(regionId);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetRegion();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves regions by their IDs.</summary>
@@ -303,7 +436,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Region> Value, MessageContext Context)> GetRegionsByIds(
+    public async Task<(HashSet<Region> Value, MessageContext Context)> GetRegionsByIds(
         int continentId,
         int floorId,
         IEnumerable<int> regionIds,
@@ -312,12 +445,20 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        RegionsByIdsRequest request = new(continentId, floorId, regionIds.ToList())
+        string path = $"v2/continents/{continentId}/floors/{floorId}/regions";
+        var query = new QueryBuilder();
+        query.AddIds(regionIds);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet(path, query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetRegion());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of regions.</summary>
@@ -329,7 +470,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Region> Value, MessageContext Context)> GetRegionsByPage(
+    public async Task<(HashSet<Region> Value, MessageContext Context)> GetRegionsByPage(
         int continentId,
         int floorId,
         int pageIndex,
@@ -339,13 +480,19 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        RegionsByPageRequest request = new(continentId, floorId, pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            Language = language
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetRegion());
+            return (value, response.Context);
+        }
     }
 
     #endregion
@@ -360,7 +507,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Map> Value, MessageContext Context)> GetMaps(
+    public async Task<(HashSet<Map> Value, MessageContext Context)> GetMaps(
         int continentId,
         int floorId,
         int regionId,
@@ -369,9 +516,19 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        RegionalMapsRequest request = new(continentId, floorId, regionId) { Language = language };
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetMap());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the IDs of all maps in a region.</summary>
@@ -380,15 +537,27 @@ public sealed class ExplorationClient
     /// <param name="regionId">The region ID.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetMapsIndex(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetMapsIndex(
         int continentId,
         int floorId,
         int regionId,
         CancellationToken cancellationToken = default
     )
     {
-        RegionalMapsIndexRequest request = new(continentId, floorId, regionId);
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet(
+            $"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps",
+            query,
+            null
+        );
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a map by its ID.</summary>
@@ -400,7 +569,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(Map Value, MessageContext Context)> GetMapById(
+    public async Task<(Map Value, MessageContext Context)> GetMapById(
         int continentId,
         int floorId,
         int regionId,
@@ -410,12 +579,19 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        RegionalMapByIdRequest request = new(continentId, floorId, regionId, mapId)
+        var query = new QueryBuilder();
+        query.AddId(mapId);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetMap();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves maps by their IDs.</summary>
@@ -427,7 +603,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Map> Value, MessageContext Context)> GetMapsByIds(
+    public async Task<(HashSet<Map> Value, MessageContext Context)> GetMapsByIds(
         int continentId,
         int floorId,
         int regionId,
@@ -437,10 +613,20 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        RegionalMapsByIdsRequest request =
-            new(continentId, floorId, regionId, mapIds.ToList()) { Language = language };
-        return request.SendAsync(httpClient, cancellationToken);
+        string path = $"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps";
+        var query = new QueryBuilder();
+        query.AddIds(mapIds);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet(path, query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetMap());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of maps.</summary>
@@ -453,7 +639,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Map> Value, MessageContext Context)> GetMapsByPage(
+    public async Task<(HashSet<Map> Value, MessageContext Context)> GetMapsByPage(
         int continentId,
         int floorId,
         int regionId,
@@ -464,13 +650,19 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        RegionalMapsByPageRequest request = new(continentId, floorId, regionId, pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            Language = language
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetMap());
+            return (value, response.Context);
+        }
     }
 
     #endregion
@@ -486,7 +678,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<PointOfInterest> Value, MessageContext Context)> GetPointsOfInterest(
+    public async Task<(HashSet<PointOfInterest> Value, MessageContext Context)> GetPointsOfInterest(
         int continentId,
         int floorId,
         int regionId,
@@ -496,12 +688,20 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        PointsOfInterestRequest request = new(continentId, floorId, regionId, mapId)
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/pois", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetPointOfInterest());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the IDs of all points of interest on a map.</summary>
@@ -511,7 +711,7 @@ public sealed class ExplorationClient
     /// <param name="mapId">The map ID.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetPointsOfInterestIndex(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetPointsOfInterestIndex(
         int continentId,
         int floorId,
         int regionId,
@@ -519,8 +719,20 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        PointsOfInterestIndexRequest request = new(continentId, floorId, regionId, mapId);
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet(
+            $"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/pois",
+            query,
+            null
+        );
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a point of interest by its ID.</summary>
@@ -533,7 +745,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(PointOfInterest Value, MessageContext Context)> GetPointOfInterestById(
+    public async Task<(PointOfInterest Value, MessageContext Context)> GetPointOfInterestById(
         int continentId,
         int floorId,
         int regionId,
@@ -544,10 +756,23 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        PointOfInterestByIdRequest request =
-            new(continentId, floorId, regionId, mapId, pointOfInterestId) { Language = language };
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddId(pointOfInterestId);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet(
+            $"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/pois",
+            query,
+            null
+        );
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetPointOfInterest();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves points of interest by their IDs.</summary>
@@ -560,26 +785,33 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<PointOfInterest> Value, MessageContext Context)> GetPointsOfInterestByIds(
-        int continentId,
-        int floorId,
-        int regionId,
-        int mapId,
-        IEnumerable<int> pointOfInterestIds,
-        Language? language = default,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    public async Task<(HashSet<PointOfInterest> Value, MessageContext Context)>
+        GetPointsOfInterestByIds(
+            int continentId,
+            int floorId,
+            int regionId,
+            int mapId,
+            IEnumerable<int> pointOfInterestIds,
+            Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        PointsOfInterestByIdsRequest request = new(
-            continentId,
-            floorId,
-            regionId,
-            mapId,
-            pointOfInterestIds.ToList()
-        ) { Language = language };
-        return request.SendAsync(httpClient, cancellationToken);
+        string path = $"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/pois";
+        var query = new QueryBuilder();
+        query.AddIds(pointOfInterestIds);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet(path, query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetPointOfInterest());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of points of interest.</summary>
@@ -593,26 +825,33 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<PointOfInterest> Value, MessageContext Context)> GetPointsOfInterestByPage(
-        int continentId,
-        int floorId,
-        int regionId,
-        int mapId,
-        int pageIndex,
-        int? pageSize = default,
-        Language? language = default,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    public async Task<(HashSet<PointOfInterest> Value, MessageContext Context)>
+        GetPointsOfInterestByPage(
+            int continentId,
+            int floorId,
+            int regionId,
+            int mapId,
+            int pageIndex,
+            int? pageSize = default,
+            Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        PointsOfInterestByPageRequest request =
-            new(continentId, floorId, regionId, mapId, pageIndex)
-            {
-                PageSize = pageSize,
-                Language = language
-            };
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/pois", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetPointOfInterest());
+            return (value, response.Context);
+        }
     }
 
     #endregion
@@ -628,7 +867,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Heart> Value, MessageContext Context)> GetHearts(
+    public async Task<(HashSet<Heart> Value, MessageContext Context)> GetHearts(
         int continentId,
         int floorId,
         int regionId,
@@ -638,9 +877,18 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        HeartsRequest request = new(continentId, floorId, regionId, mapId) { Language = language };
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/tasks", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetHeart());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the IDs of all hearts on a map.</summary>
@@ -650,7 +898,7 @@ public sealed class ExplorationClient
     /// <param name="mapId">The map ID.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetHeartsIndex(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetHeartsIndex(
         int continentId,
         int floorId,
         int regionId,
@@ -658,8 +906,20 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        HeartsIndexRequest request = new(continentId, floorId, regionId, mapId);
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet(
+            $"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/tasks",
+            query,
+            null
+        );
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a heart by its ID.</summary>
@@ -672,7 +932,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(Heart Value, MessageContext Context)> GetHeartById(
+    public async Task<(Heart Value, MessageContext Context)> GetHeartById(
         int continentId,
         int floorId,
         int regionId,
@@ -683,10 +943,20 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        HeartByIdRequest request =
-            new(continentId, floorId, regionId, mapId, heartId) { Language = language };
-        return request.SendAsync(httpClient, cancellationToken);
+        var query =
+            new QueryBuilder();
+        query.AddId(heartId);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/tasks", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetHeart();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves hearts by their IDs.</summary>
@@ -699,7 +969,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Heart> Value, MessageContext Context)> GetHeartsByIds(
+    public async Task<(HashSet<Heart> Value, MessageContext Context)> GetHeartsByIds(
         int continentId,
         int floorId,
         int regionId,
@@ -710,10 +980,20 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        HeartsByIdsRequest request =
-            new(continentId, floorId, regionId, mapId, heartIds.ToList()) { Language = language };
-        return request.SendAsync(httpClient, cancellationToken);
+        string path = $"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/tasks";
+        var query = new QueryBuilder();
+        query.AddIds(heartIds);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet(path, query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetHeart());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of hearts.</summary>
@@ -727,7 +1007,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Heart> Value, MessageContext Context)> GetHeartsByPage(
+    public async Task<(HashSet<Heart> Value, MessageContext Context)> GetHeartsByPage(
         int continentId,
         int floorId,
         int regionId,
@@ -739,13 +1019,19 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        HeartsByPageRequest request = new(continentId, floorId, regionId, mapId, pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/tasks", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            Language = language
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetHeart());
+            return (value, response.Context);
+        }
     }
 
     #endregion
@@ -761,7 +1047,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Sector> Value, MessageContext Context)> GetSectors(
+    public async Task<(HashSet<Sector> Value, MessageContext Context)> GetSectors(
         int continentId,
         int floorId,
         int regionId,
@@ -771,9 +1057,18 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        SectorsRequest request = new(continentId, floorId, regionId, mapId) { Language = language };
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/sectors", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetSector());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the IDs of all sectors on a map.</summary>
@@ -783,7 +1078,7 @@ public sealed class ExplorationClient
     /// <param name="mapId">The map ID.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetSectorsIndex(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetSectorsIndex(
         int continentId,
         int floorId,
         int regionId,
@@ -791,8 +1086,20 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        SectorsIndexRequest request = new(continentId, floorId, regionId, mapId);
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet(
+            $"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/sectors",
+            query,
+            null
+        );
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a sector by its ID.</summary>
@@ -805,7 +1112,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(Sector Value, MessageContext Context)> GetSectorById(
+    public async Task<(Sector Value, MessageContext Context)> GetSectorById(
         int continentId,
         int floorId,
         int regionId,
@@ -816,10 +1123,20 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        SectorByIdRequest request =
-            new(continentId, floorId, regionId, mapId, sectorId) { Language = language };
-        return request.SendAsync(httpClient, cancellationToken);
+        var query =
+            new QueryBuilder();
+        query.AddId(sectorId);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/sectors", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSector();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves sectors by their IDs.</summary>
@@ -832,7 +1149,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Sector> Value, MessageContext Context)> GetSectorsByIds(
+    public async Task<(HashSet<Sector> Value, MessageContext Context)> GetSectorsByIds(
         int continentId,
         int floorId,
         int regionId,
@@ -843,10 +1160,20 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        SectorsByIdsRequest request =
-            new(continentId, floorId, regionId, mapId, sectorIds.ToList()) { Language = language };
-        return request.SendAsync(httpClient, cancellationToken);
+        string path = $"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/sectors";
+        var query = new QueryBuilder();
+        query.AddIds(sectorIds);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet(path, query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetSector());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of sectors.</summary>
@@ -860,7 +1187,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Sector> Value, MessageContext Context)> GetSectorsByPage(
+    public async Task<(HashSet<Sector> Value, MessageContext Context)> GetSectorsByPage(
         int continentId,
         int floorId,
         int regionId,
@@ -872,13 +1199,19 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        SectorsByPageRequest request = new(continentId, floorId, regionId, mapId, pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/sectors", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            Language = language
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetSector());
+            return (value, response.Context);
+        }
     }
 
     #endregion
@@ -890,26 +1223,44 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<MapSummary> Value, MessageContext Context)> GetMapSummaries(
+    public async Task<(HashSet<MapSummary> Value, MessageContext Context)> GetMapSummaries(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        MapSummariesRequest request = new() { Language = language };
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/maps", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetMapSummary());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the IDs of all maps.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetMapsIndex(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetMapsIndex(
         CancellationToken cancellationToken = default
     )
     {
-        MapSummariesIndexRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/maps", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the summary of a map by its ID.</summary>
@@ -918,16 +1269,26 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(MapSummary Value, MessageContext Context)> GetMapSummaryById(
+    public async Task<(MapSummary Value, MessageContext Context)> GetMapSummaryById(
         int mapId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        MapSummaryByIdRequest request = new(mapId) { Language = language };
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddId(mapId);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/maps", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetMapSummary();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the summary of maps by their IDs.</summary>
@@ -936,16 +1297,26 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<MapSummary> Value, MessageContext Context)> GetMapSummariesByIds(
+    public async Task<(HashSet<MapSummary> Value, MessageContext Context)> GetMapSummariesByIds(
         IEnumerable<int> mapIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        MapSummariesByIdsRequest request = new(mapIds.ToList()) { Language = language };
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddIds(mapIds);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/maps", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetMapSummary());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of map summaries.</summary>
@@ -955,7 +1326,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<MapSummary> Value, MessageContext Context)> GetMapSummariesByPage(
+    public async Task<(HashSet<MapSummary> Value, MessageContext Context)> GetMapSummariesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -963,13 +1334,19 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        MapSummariesByPageRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/maps", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            Language = language
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetMapSummary());
+            return (value, response.Context);
+        }
     }
 
     #endregion

@@ -5,9 +5,7 @@ namespace GuildWars2.WizardsVault.Objectives;
 
 internal static class ObjectiveJson
 {
-    public static Objective GetObjective(
-        this JsonElement json
-    )
+    public static Objective GetObjective(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember title = "title";

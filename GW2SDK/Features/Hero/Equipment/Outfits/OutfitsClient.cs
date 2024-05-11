@@ -1,4 +1,5 @@
-﻿using GuildWars2.Hero.Equipment.Outfits.Http;
+﻿using System.Globalization;
+using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Outfits;
@@ -24,13 +25,21 @@ public sealed class OutfitsClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedOutfits(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedOutfits(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
     {
-        UnlockedOutfitsRequest request = new() { AccessToken = accessToken };
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/account/outfits", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/account/outfits
@@ -42,29 +51,44 @@ public sealed class OutfitsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Outfit> Value, MessageContext Context)> GetOutfits(
+    public async Task<(HashSet<Outfit> Value, MessageContext Context)> GetOutfits(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        OutfitsRequest request = new()
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/outfits", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetOutfit());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the IDs of all outfits.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetOutfitsIndex(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetOutfitsIndex(
         CancellationToken cancellationToken = default
     )
     {
-        OutfitsIndexRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/outfits", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves an outfit by its ID.</summary>
@@ -73,19 +97,26 @@ public sealed class OutfitsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(Outfit Value, MessageContext Context)> GetOutfitById(
+    public async Task<(Outfit Value, MessageContext Context)> GetOutfitById(
         int outfitId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        OutfitByIdRequest request = new(outfitId)
+        var query = new QueryBuilder();
+        query.AddId(outfitId);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/outfits", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetOutfit();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves outfits by their IDs.</summary>
@@ -94,19 +125,26 @@ public sealed class OutfitsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Outfit> Value, MessageContext Context)> GetOutfitsByIds(
+    public async Task<(HashSet<Outfit> Value, MessageContext Context)> GetOutfitsByIds(
         IEnumerable<int> outfitIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        OutfitsByIdsRequest request = new(outfitIds.ToList())
+        var query = new QueryBuilder();
+        query.AddIds(outfitIds.Select(id => id.ToString(CultureInfo.InvariantCulture)));
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/outfits", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetOutfit());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of outfits.</summary>
@@ -116,7 +154,7 @@ public sealed class OutfitsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Outfit> Value, MessageContext Context)> GetOutfitsByPage(
+    public async Task<(HashSet<Outfit> Value, MessageContext Context)> GetOutfitsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -124,13 +162,19 @@ public sealed class OutfitsClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        OutfitsByPageRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/outfits", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetOutfit());
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/outfits

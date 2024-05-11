@@ -5,9 +5,7 @@ namespace GuildWars2.Items;
 
 internal static class GatheringToolJson
 {
-    public static GatheringTool GetGatheringTool(
-        this JsonElement json
-    )
+    public static GatheringTool GetGatheringTool(this JsonElement json)
     {
         if (json.TryGetProperty("details", out var discriminator))
         {
@@ -129,8 +127,8 @@ internal static class GatheringToolJson
             Rarity = rarity.Map(static value => value.GetEnum<Rarity>()),
             VendorValue = vendorValue.Map(static value => value.GetInt32()),
             GameTypes =
-                gameTypes.Map(static values => values.GetList(static value => value.GetEnum<GameType>()
-                    )
+                gameTypes.Map(
+                    static values => values.GetList(static value => value.GetEnum<GameType>())
                 ),
             Flags = flags.Map(static values => values.GetItemFlags()),
             Restrictions = restrictions.Map(static value => value.GetItemRestriction()),

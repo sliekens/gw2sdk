@@ -5,9 +5,7 @@ namespace GuildWars2.Wvw.Upgrades;
 
 internal static class ObjectiveUpgradeJson
 {
-    public static ObjectiveUpgrade GetObjectiveUpgrade(
-        this JsonElement json
-    )
+    public static ObjectiveUpgrade GetObjectiveUpgrade(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember tiers = "tiers";
@@ -31,7 +29,8 @@ internal static class ObjectiveUpgradeJson
         return new ObjectiveUpgrade
         {
             Id = id.Map(static value => value.GetInt32()),
-            Tiers = tiers.Map(static values => values.GetList(static value => value.GetUpgradeTier())
+            Tiers = tiers.Map(
+                static values => values.GetList(static value => value.GetUpgradeTier())
             )
         };
     }

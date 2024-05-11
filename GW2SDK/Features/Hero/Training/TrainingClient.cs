@@ -1,4 +1,4 @@
-﻿using GuildWars2.Hero.Training.Http;
+﻿using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Training;
@@ -25,19 +25,24 @@ public sealed class TrainingClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(CharacterTraining Value, MessageContext Context)> GetCharacterTraining(
+    public async Task<(CharacterTraining Value, MessageContext Context)> GetCharacterTraining(
         string characterName,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        CharacterTrainingRequest request = new(characterName)
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet($"v2/characters/{characterName}/training", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            AccessToken = accessToken
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetCharacterTraining();
+            return (value, response.Context);
+        }
     }
 
     #endregion
@@ -49,28 +54,44 @@ public sealed class TrainingClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Profession> Value, MessageContext Context)> GetProfessions(
+    public async Task<(HashSet<Profession> Value, MessageContext Context)> GetProfessions(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        ProfessionsRequest request = new()
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/professions", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetProfession());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the names of all professions.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Extensible<ProfessionName>> Value, MessageContext Context)>
+    public async Task<(HashSet<Extensible<ProfessionName>> Value, MessageContext Context)>
         GetProfessionNames(CancellationToken cancellationToken = default)
     {
-        ProfessionNamesRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/professions", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetEnum<ProfessionName>());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a profession by name.</summary>
@@ -79,19 +100,26 @@ public sealed class TrainingClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(Profession Value, MessageContext Context)> GetProfessionByName(
+    public async Task<(Profession Value, MessageContext Context)> GetProfessionByName(
         ProfessionName professionName,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        ProfessionByNameRequest request = new(professionName)
+        var query = new QueryBuilder();
+        query.AddId(professionName.ToString());
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/professions", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetProfession();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves professions by their name.</summary>
@@ -100,19 +128,26 @@ public sealed class TrainingClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Profession> Value, MessageContext Context)> GetProfessionsByNames(
+    public async Task<(HashSet<Profession> Value, MessageContext Context)> GetProfessionsByNames(
         IEnumerable<ProfessionName> professionNames,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        ProfessionsByNamesRequest request = new(professionNames.ToList())
+        var query = new QueryBuilder();
+        query.AddIds(professionNames.Select(value => value.ToString()));
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/professions", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetProfession());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of professions.</summary>
@@ -122,7 +157,7 @@ public sealed class TrainingClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Profession> Value, MessageContext Context)> GetProfessionsByPage(
+    public async Task<(HashSet<Profession> Value, MessageContext Context)> GetProfessionsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -130,13 +165,19 @@ public sealed class TrainingClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        ProfessionsByPageRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/professions", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetProfession());
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/professions

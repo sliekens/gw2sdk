@@ -5,9 +5,7 @@ namespace GuildWars2.Metadata;
 
 internal static class ApiVersionJson
 {
-    public static ApiVersion GetApiVersion(
-        this JsonElement json
-    )
+    public static ApiVersion GetApiVersion(this JsonElement json)
     {
         RequiredMember languages = "langs";
         RequiredMember routes = "routes";
@@ -36,11 +34,14 @@ internal static class ApiVersionJson
         return new ApiVersion
         {
             Languages =
-                languages.Map(static values => values.GetList(static value => value.GetStringRequired())),
-            Routes =
-                routes.Map(static values => values.GetList(static value => value.GetRoute())
+                languages.Map(
+                    static values => values.GetList(static value => value.GetStringRequired())
                 ),
-            SchemaVersions = schemaVersions.Map(static values => values.GetList(static value => value.GetSchema())
+            Routes =
+                routes.Map(static values => values.GetList(static value => value.GetRoute())),
+            SchemaVersions =
+                schemaVersions.Map(
+                    static values => values.GetList(static value => value.GetSchema())
                 )
                 ?? Empty.List<Schema>()
         };

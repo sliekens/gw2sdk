@@ -1,4 +1,4 @@
-﻿using GuildWars2.Authorization.Http;
+﻿using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Authorization;
@@ -22,15 +22,23 @@ public sealed class TokenClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(TokenInfo Value, MessageContext Context)> GetTokenInfo(
+    public async Task<(TokenInfo Value, MessageContext Context)> GetTokenInfo(
         string accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        TokenInfoRequest request = new(accessToken);
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/tokeninfo", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetTokenInfo();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Creates a new access token with the specified permissions, expiration and URL restrictions. If the parent
@@ -54,7 +62,7 @@ public sealed class TokenClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(CreatedSubtoken Value, MessageContext Context)> CreateSubtoken(
+    public async Task<(CreatedSubtoken Value, MessageContext Context)> CreateSubtoken(
         string accessToken,
         IEnumerable<Permission>? permissions = null,
         DateTimeOffset? absoluteExpirationDate = null,
@@ -63,13 +71,31 @@ public sealed class TokenClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        CreateSubtokenRequest request = new(accessToken)
+        var query = new QueryBuilder();
+        if (permissions is not null)
         {
-            Permissions = permissions?.ToList(),
-            AbsoluteExpirationDate = absoluteExpirationDate,
-            AllowedUrls = allowedUrls?.ToList(),
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            query.Add("permissions", string.Join(",", permissions).ToLowerInvariant());
+        }
+
+        if (absoluteExpirationDate.HasValue)
+        {
+            query.Add("expire", absoluteExpirationDate.Value.ToUniversalTime().ToString("s"));
+        }
+
+        if (allowedUrls is not null)
+        {
+            query.Add("urls", string.Join(",", allowedUrls));
+        }
+
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/createsubtoken", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetCreatedSubtoken();
+            return (value, response.Context);
+        }
     }
 }

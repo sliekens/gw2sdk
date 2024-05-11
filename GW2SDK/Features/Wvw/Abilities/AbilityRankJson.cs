@@ -5,9 +5,7 @@ namespace GuildWars2.Wvw.Abilities;
 
 internal static class AbilityRankJson
 {
-    public static AbilityRank GetAbilityRank(
-        this JsonElement json
-    )
+    public static AbilityRank GetAbilityRank(this JsonElement json)
     {
         RequiredMember cost = "cost";
         RequiredMember effect = "effect";

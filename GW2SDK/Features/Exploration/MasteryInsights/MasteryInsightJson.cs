@@ -6,9 +6,7 @@ namespace GuildWars2.Exploration.MasteryInsights;
 
 internal static class MasteryInsightJson
 {
-    public static MasteryInsight GetMasteryInsight(
-        this JsonElement json
-    )
+    public static MasteryInsight GetMasteryInsight(this JsonElement json)
     {
         RequiredMember coordinates = "coord";
         RequiredMember id = "id";

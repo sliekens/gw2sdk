@@ -5,9 +5,7 @@ namespace GuildWars2.Guilds.Teams;
 
 internal static class GuildTeamJson
 {
-    public static GuildTeam GetGuildTeam(
-        this JsonElement json
-    )
+    public static GuildTeam GetGuildTeam(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember members = "members";
@@ -62,16 +60,16 @@ internal static class GuildTeamJson
         {
             Id = id.Map(static value => value.GetInt32()),
             Members =
-                members.Map(static values => values.GetList(static value => value.GetGuildTeamMember()
-                    )
+                members.Map(
+                    static values => values.GetList(static value => value.GetGuildTeamMember())
                 ),
             Name = name.Map(static value => value.GetStringRequired()),
             State = state.Map(static value => value.GetEnum<GuildTeamState>()),
             Aggregate = aggregate.Map(static value => value.GetResults()),
             Ladders = ladders.Map(static value => value.GetLadders()),
-            Games = games.Map(static values => values.GetList(static value => value.GetGame())
-            ),
-            Seasons = seasons.Map(static values => values.GetList(static value => value.GetSeason())
+            Games = games.Map(static values => values.GetList(static value => value.GetGame())),
+            Seasons = seasons.Map(
+                    static values => values.GetList(static value => value.GetSeason())
                 )
                 ?? Empty.List<Season>()
         };

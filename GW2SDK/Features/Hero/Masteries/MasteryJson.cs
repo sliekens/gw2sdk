@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Masteries;
 
 internal static class MasteryJson
 {
-    public static Mastery GetMastery(
-        this JsonElement json
-    )
+    public static Mastery GetMastery(this JsonElement json)
     {
         RequiredMember name = "name";
         RequiredMember description = "description";

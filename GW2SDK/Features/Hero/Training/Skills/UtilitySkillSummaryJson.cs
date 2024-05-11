@@ -6,9 +6,7 @@ namespace GuildWars2.Hero.Training.Skills;
 
 internal static class UtilitySkillSummaryJson
 {
-    public static UtilitySkillSummary GetUtilitySkillSummary(
-        this JsonElement json
-    )
+    public static UtilitySkillSummary GetUtilitySkillSummary(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember slot = "slot";

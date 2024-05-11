@@ -6,9 +6,7 @@ namespace GuildWars2.Hero.Training.Skills;
 
 internal static class HealingSkillSummaryJson
 {
-    public static HealingSkillSummary GetHealingSkillSummary(
-        this JsonElement json
-    )
+    public static HealingSkillSummary GetHealingSkillSummary(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember slot = "slot";

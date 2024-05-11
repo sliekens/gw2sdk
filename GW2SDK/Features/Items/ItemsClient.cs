@@ -1,7 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
-using GuildWars2.Items.Http;
+using GuildWars2.Http;
 using GuildWars2.Items.Stats;
-using GuildWars2.Items.Stats.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Items;
@@ -25,12 +24,20 @@ public sealed class ItemsClient
     /// <summary>Retrieves the IDs of all items.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetItemsIndex(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetItemsIndex(
         CancellationToken cancellationToken = default
     )
     {
-        var request = new ItemsIndexRequest();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/items", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves an item by its ID.</summary>
@@ -39,19 +46,26 @@ public sealed class ItemsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(Item Value, MessageContext Context)> GetItemById(
+    public async Task<(Item Value, MessageContext Context)> GetItemById(
         int itemId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        ItemByIdRequest request = new(itemId)
+        var query = new QueryBuilder();
+        query.AddId(itemId);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/items", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetItem();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves items by their IDs.</summary>
@@ -61,19 +75,26 @@ public sealed class ItemsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Item> Value, MessageContext Context)> GetItemsByIds(
+    public async Task<(HashSet<Item> Value, MessageContext Context)> GetItemsByIds(
         IEnumerable<int> itemIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        ItemsByIdsRequest request = new(itemIds.ToList())
+        var query = new QueryBuilder();
+        query.AddIds(itemIds);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/items", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetItem());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of items.</summary>
@@ -83,7 +104,7 @@ public sealed class ItemsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Item> Value, MessageContext Context)> GetItemsByPage(
+    public async Task<(HashSet<Item> Value, MessageContext Context)> GetItemsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -91,18 +112,22 @@ public sealed class ItemsClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        ItemsByPageRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/items", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            Language = language
-        };
-
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetItem());
+            return (value, response.Context);
+        }
     }
 
-    /// <summary>Retrieves items by their IDs by chunking requests and executing them in parallel. Supports more than
-    /// 200 IDs.</summary>
+    /// <summary>Retrieves items by their IDs by chunking requests and executing them in parallel. Supports more than 200 IDs.</summary>
     /// <param name="itemIds">The item IDs.</param>
     /// <param name="language">The language to use for descriptions.</param>
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
@@ -187,12 +212,20 @@ public sealed class ItemsClient
     /// <summary>Retrieves the IDs of all attribute combinations.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetAttributeCombinationsIndex(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetAttributeCombinationsIndex(
         CancellationToken cancellationToken = default
     )
     {
-        AttributeCombinationsIndexRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/itemstats", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves all attribute combinations.</summary>
@@ -200,19 +233,27 @@ public sealed class ItemsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<AttributeCombination> Value, MessageContext Context)>
+    public async Task<(HashSet<AttributeCombination> Value, MessageContext Context)>
         GetAttributeCombinations(
             Language? language = default,
             MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        AttributeCombinationsRequest request = new()
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/itemstats", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetAttributeCombination());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves an attribute combination by its ID.</summary>
@@ -221,19 +262,27 @@ public sealed class ItemsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(AttributeCombination Value, MessageContext Context)> GetAttributeCombinationById(
-        int attributeCombinationId,
-        Language? language = default,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    public async Task<(AttributeCombination Value, MessageContext Context)>
+        GetAttributeCombinationById(
+            int attributeCombinationId,
+            Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        AttributeCombinationByIdRequest request = new(attributeCombinationId)
+        var query = new QueryBuilder();
+        query.AddId(attributeCombinationId);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/itemstats", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetAttributeCombination();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves attribute combinations by their IDs.</summary>
@@ -242,7 +291,7 @@ public sealed class ItemsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<AttributeCombination> Value, MessageContext Context)>
+    public async Task<(HashSet<AttributeCombination> Value, MessageContext Context)>
         GetAttributeCombinationsByIds(
             IEnumerable<int> attributeCombinationIds,
             Language? language = default,
@@ -250,13 +299,20 @@ public sealed class ItemsClient
             CancellationToken cancellationToken = default
         )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        AttributeCombinationsByIdsRequest request = new(attributeCombinationIds.ToList())
+        var query = new QueryBuilder();
+        query.AddIds(attributeCombinationIds);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/itemstats", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language
-        };
-
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetAttributeCombination());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of attribute combinations.</summary>
@@ -266,7 +322,7 @@ public sealed class ItemsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<AttributeCombination> Value, MessageContext Context)>
+    public async Task<(HashSet<AttributeCombination> Value, MessageContext Context)>
         GetAttributeCombinationByPage(
             int pageIndex,
             int? pageSize = default,
@@ -275,13 +331,20 @@ public sealed class ItemsClient
             CancellationToken cancellationToken = default
         )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        AttributeCombinationsByPageRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/itemstats", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetAttributeCombination());
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/itemstats

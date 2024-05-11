@@ -81,14 +81,15 @@ internal static class TraitJson
             Slot = slot.Map(static value => value.GetEnum<TraitSlot>()),
             IconHref = icon.Map(static value => value.GetStringRequired()),
             SpezializationId = specialization.Map(static value => value.GetInt32()),
-            Facts = facts.Map(static values => values.GetList(static value => value.GetFact( out _, out _)
-                )
-            ),
-            TraitedFacts =
-                traitedFacts.Map(static values => values.GetList(static value => value.GetTraitedFact())
+            Facts =
+                facts.Map(
+                    static values => values.GetList(static value => value.GetFact(out _, out _))
                 ),
-            Skills = skills.Map(static values => values.GetList(static value => value.GetSkill())
-            )
+            TraitedFacts =
+                traitedFacts.Map(
+                    static values => values.GetList(static value => value.GetTraitedFact())
+                ),
+            Skills = skills.Map(static values => values.GetList(static value => value.GetSkill()))
         };
     }
 }

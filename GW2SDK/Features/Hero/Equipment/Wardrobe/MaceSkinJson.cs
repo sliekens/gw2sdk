@@ -6,9 +6,7 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 internal static class MaceSkinJson
 {
-    public static MaceSkin GetMaceSkin(
-        this JsonElement json
-    )
+    public static MaceSkin GetMaceSkin(this JsonElement json)
     {
         RequiredMember name = "name";
         OptionalMember description = "description";

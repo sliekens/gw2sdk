@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Accounts;
 
 internal static class AccountSummaryJson
 {
-    public static AccountSummary GetAccountSummary(
-        this JsonElement json
-    )
+    public static AccountSummary GetAccountSummary(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -99,13 +97,18 @@ internal static class AccountSummaryJson
             Age = age.Map(static value => TimeSpan.FromSeconds(value.GetDouble())),
             LastModified = lastModified.Map(static value => value.GetDateTimeOffset()),
             WorldId = world.Map(static value => value.GetInt32()),
-            GuildIds = guilds.Map(static values => values.GetList(static value => value.GetStringRequired())),
+            GuildIds =
+                guilds.Map(
+                    static values => values.GetList(static value => value.GetStringRequired())
+                ),
             LeaderOfGuildIds =
-                guildLeader.Map(static values => values.GetList(static value => value.GetStringRequired())),
+                guildLeader.Map(
+                    static values => values.GetList(static value => value.GetStringRequired())
+                ),
             Created = created.Map(static value => value.GetDateTimeOffset()),
             Access =
-                access.Map(static values => values.GetList(static value => value.GetEnum<ProductName>()
-                    )
+                access.Map(
+                    static values => values.GetList(static value => value.GetEnum<ProductName>())
                 ),
             Commander = commander.Map(static value => value.GetBoolean()),
             FractalLevel = fractalLevel.Map(static value => value.GetInt32()),

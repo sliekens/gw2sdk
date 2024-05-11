@@ -6,9 +6,7 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 internal static class MiningToolSkinJson
 {
-    public static MiningToolSkin GetMiningToolSkin(
-        this JsonElement json
-    )
+    public static MiningToolSkin GetMiningToolSkin(this JsonElement json)
     {
         RequiredMember name = "name";
         OptionalMember description = "description";

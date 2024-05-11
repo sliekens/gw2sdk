@@ -6,9 +6,7 @@ namespace GuildWars2.Hero.Crafting.Recipes;
 
 internal static class HeadgearRecipeJson
 {
-    public static HeadgearRecipe GetHeadgearRecipe(
-        this JsonElement json
-    )
+    public static HeadgearRecipe GetHeadgearRecipe(this JsonElement json)
     {
         RequiredMember outputItemId = "output_item_id";
         RequiredMember outputItemCount = "output_item_count";
@@ -78,15 +76,17 @@ internal static class HeadgearRecipeJson
             OutputItemId = outputItemId.Map(static value => value.GetInt32()),
             OutputItemCount = outputItemCount.Map(static value => value.GetInt32()),
             MinRating = minRating.Map(static value => value.GetInt32()),
-            TimeToCraft = timeToCraft.Map(static value => TimeSpan.FromMilliseconds(value.GetDouble())),
+            TimeToCraft =
+                timeToCraft.Map(static value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines =
-                disciplines.Map(static values =>
-                        values.GetList(static value => value.GetEnum<CraftingDisciplineName>()
-                        )
+                disciplines.Map(
+                    static values =>
+                        values.GetList(static value => value.GetEnum<CraftingDisciplineName>())
                 ),
             Flags = flags.Map(static values => values.GetRecipeFlags()),
             Ingredients =
-                ingredients.Map(static values => values.GetList(static value => value.GetIngredient())
+                ingredients.Map(
+                    static values => values.GetList(static value => value.GetIngredient())
                 ),
             ChatLink = chatLink.Map(static value => value.GetStringRequired())
         };

@@ -5,9 +5,7 @@ namespace GuildWars2.Pvp.Seasons;
 
 internal static class LeaderboardScoringJson
 {
-    public static LeaderboardScoring GetLeaderboardScoring(
-        this JsonElement json
-    )
+    public static LeaderboardScoring GetLeaderboardScoring(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember type = "type";

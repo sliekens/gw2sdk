@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Equipment.Finishers;
 
 internal static class UnlockedFinisherJson
 {
-    public static UnlockedFinisher GetUnlockedFinisher(
-        this JsonElement json
-    )
+    public static UnlockedFinisher GetUnlockedFinisher(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember permanent = "permanent";

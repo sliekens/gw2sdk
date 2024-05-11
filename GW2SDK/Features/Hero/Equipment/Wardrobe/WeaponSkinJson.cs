@@ -6,9 +6,7 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 internal static class WeaponSkinJson
 {
-    public static WeaponSkin GetWeaponSkin(
-        this JsonElement json
-    )
+    public static WeaponSkin GetWeaponSkin(this JsonElement json)
     {
         if (json.TryGetProperty("details", out var discriminator))
         {

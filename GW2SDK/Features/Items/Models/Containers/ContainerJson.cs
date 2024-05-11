@@ -5,9 +5,7 @@ namespace GuildWars2.Items;
 
 internal static class ContainerJson
 {
-    public static Container GetContainer(
-        this JsonElement json
-    )
+    public static Container GetContainer(this JsonElement json)
     {
         if (json.TryGetProperty("details", out var discriminator))
         {
@@ -126,8 +124,8 @@ internal static class ContainerJson
             Rarity = rarity.Map(static value => value.GetEnum<Rarity>()),
             VendorValue = vendorValue.Map(static value => value.GetInt32()),
             GameTypes =
-                gameTypes.Map(static values => values.GetList(static value => value.GetEnum<GameType>()
-                    )
+                gameTypes.Map(
+                    static values => values.GetList(static value => value.GetEnum<GameType>())
                 ),
             Flags = flags.Map(static values => values.GetItemFlags()),
             Restrictions = restrictions.Map(static value => value.GetItemRestriction()),

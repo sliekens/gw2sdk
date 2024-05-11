@@ -5,9 +5,7 @@ namespace GuildWars2.Guilds.Upgrades;
 
 internal static class BankBagJson
 {
-    public static BankBag GetBankBag(
-        this JsonElement json
-    )
+    public static BankBag GetBankBag(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -91,10 +89,13 @@ internal static class BankBagJson
             IconHref = icon.Map(static value => value.GetStringRequired()),
             RequiredLevel = requiredLevel.Map(static value => value.GetInt32()),
             Experience = experience.Map(static value => value.GetInt32()),
-            Prerequisites = prerequisites.Map(static values => values.GetList(static value => value.GetInt32())),
+            Prerequisites =
+                prerequisites.Map(
+                    static values => values.GetList(static value => value.GetInt32())
+                ),
             Costs =
-                costs.Map(static values => values.GetList(static value => value.GetGuildUpgradeCost()
-                    )
+                costs.Map(
+                    static values => values.GetList(static value => value.GetGuildUpgradeCost())
                 ),
             MaxItems = maxItems.Map(static value => value.GetInt32()),
             MaxCoins = maxCoins.Map(static value => value.GetInt32())

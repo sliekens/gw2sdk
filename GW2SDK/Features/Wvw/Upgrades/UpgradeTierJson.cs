@@ -5,9 +5,7 @@ namespace GuildWars2.Wvw.Upgrades;
 
 internal static class UpgradeTierJson
 {
-    public static UpgradeTier GetUpgradeTier(
-        this JsonElement json
-    )
+    public static UpgradeTier GetUpgradeTier(this JsonElement json)
     {
         RequiredMember name = "name";
         RequiredMember yaksRequired = "yaks_required";
@@ -37,7 +35,8 @@ internal static class UpgradeTierJson
         {
             Name = name.Map(static value => value.GetStringRequired()),
             YaksRequired = yaksRequired.Map(static value => value.GetInt32()),
-            Upgrades = upgrades.Map(static values => values.GetList(static value => value.GetUpgrade())
+            Upgrades = upgrades.Map(
+                static values => values.GetList(static value => value.GetUpgrade())
             )
         };
     }

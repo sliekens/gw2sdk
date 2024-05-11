@@ -59,8 +59,7 @@ internal static class RankJson
             IconHref = icon.Map(static value => value.GetStringRequired()),
             MinRank = minRank.Map(static value => value.GetInt32()),
             MaxRank = maxRank.Map(static value => value.GetInt32()),
-            Levels = levels.Map(static values => values.GetList(static value => value.GetLevel())
-            )
+            Levels = levels.Map(static values => values.GetList(static value => value.GetLevel()))
         };
     }
 }

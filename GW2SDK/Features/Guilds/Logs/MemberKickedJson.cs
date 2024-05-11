@@ -5,9 +5,7 @@ namespace GuildWars2.Guilds.Logs;
 
 internal static class MemberKickedJson
 {
-    public static MemberKicked GetMemberKicked(
-        this JsonElement json
-    )
+    public static MemberKicked GetMemberKicked(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember time = "time";

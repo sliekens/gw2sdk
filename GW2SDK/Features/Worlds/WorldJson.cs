@@ -34,8 +34,7 @@ internal static class WorldJson
         {
             Id = id.Map(static value => value.GetInt32()),
             Name = name.Map(static value => value.GetStringRequired()),
-            Population = population.Map(static value => value.GetEnum<WorldPopulation>()
-            )
+            Population = population.Map(static value => value.GetEnum<WorldPopulation>())
         };
     }
 }

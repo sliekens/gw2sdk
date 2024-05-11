@@ -1,8 +1,8 @@
 ﻿using System.Runtime.CompilerServices;
 using GuildWars2.Hero.Achievements.Categories;
 using GuildWars2.Hero.Achievements.Groups;
-using GuildWars2.Hero.Achievements.Http;
 using GuildWars2.Hero.Achievements.Titles;
+using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Achievements;
@@ -28,13 +28,21 @@ public sealed class AchievementsClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedTitles(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedTitles(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
     {
-        UnlockedTitlesRequest request = new() { AccessToken = accessToken };
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/account/titles", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/account/titles
@@ -44,12 +52,20 @@ public sealed class AchievementsClient
     /// <summary>Retrieves the IDs of all achievements.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetAchievementsIndex(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetAchievementsIndex(
         CancellationToken cancellationToken = default
     )
     {
-        AchievementsIndexRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/achievements", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves an achievement by its ID.</summary>
@@ -58,19 +74,26 @@ public sealed class AchievementsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(Achievement Value, MessageContext Context)> GetAchievementById(
+    public async Task<(Achievement Value, MessageContext Context)> GetAchievementById(
         int achievementId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        AchievementByIdRequest request = new(achievementId)
+        var query = new QueryBuilder();
+        query.AddId(achievementId);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/achievements", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetAchievement();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves achievements by their IDs.</summary>
@@ -80,19 +103,26 @@ public sealed class AchievementsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Achievement> Value, MessageContext Context)> GetAchievementsByIds(
+    public async Task<(HashSet<Achievement> Value, MessageContext Context)> GetAchievementsByIds(
         IEnumerable<int> achievementIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        AchievementsByIdsRequest request = new(achievementIds.ToList())
+        var query = new QueryBuilder();
+        query.AddIds(achievementIds);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/achievements", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetAchievement());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of achievements.</summary>
@@ -102,7 +132,7 @@ public sealed class AchievementsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Achievement> Value, MessageContext Context)> GetAchievementsByPage(
+    public async Task<(HashSet<Achievement> Value, MessageContext Context)> GetAchievementsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -110,13 +140,19 @@ public sealed class AchievementsClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        AchievementsByPageRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/achievements", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetAchievement());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves achievements by their IDs by chunking requests and executing them in parallel. Supports more than
@@ -209,19 +245,25 @@ public sealed class AchievementsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(AccountAchievement Value, MessageContext Context)> GetAccountAchievementById(
+    public async Task<(AccountAchievement Value, MessageContext Context)> GetAccountAchievementById(
         int achievementId,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        AccountAchievementByIdRequest request = new(achievementId)
+        var query = new QueryBuilder();
+        query.AddId(achievementId);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/account/achievements", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            AccessToken = accessToken,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetAccountAchievement();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves achievement progress on the account by their IDs. This endpoint is only accessible with a valid
@@ -231,7 +273,7 @@ public sealed class AchievementsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<AccountAchievement> Value, MessageContext Context)>
+    public async Task<(HashSet<AccountAchievement> Value, MessageContext Context)>
         GetAccountAchievementsByIds(
             IEnumerable<int> achievementIds,
             string? accessToken,
@@ -239,12 +281,19 @@ public sealed class AchievementsClient
             CancellationToken cancellationToken = default
         )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        AccountAchievementsByIdsRequest request = new(achievementIds.ToList())
+        var query = new QueryBuilder();
+        query.AddIds(achievementIds);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/account/achievements", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            AccessToken = accessToken,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetAccountAchievement());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves all achievement progress on the account. This endpoint is only accessible with a valid access token</summary>
@@ -252,18 +301,26 @@ public sealed class AchievementsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<AccountAchievement> Value, MessageContext Context)> GetAccountAchievements(
-        string? accessToken,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    public async Task<(HashSet<AccountAchievement> Value, MessageContext Context)>
+        GetAccountAchievements(
+            string? accessToken,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        AccountAchievementsRequest request = new()
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/account/achievements", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            AccessToken = accessToken,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetAccountAchievement());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of achievement progress on the account. This endpoint is only accessible with a valid access
@@ -274,7 +331,7 @@ public sealed class AchievementsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<AccountAchievement> Value, MessageContext Context)>
+    public async Task<(HashSet<AccountAchievement> Value, MessageContext Context)>
         GetAccountAchievementsByPage(
             int pageIndex,
             int? pageSize,
@@ -283,13 +340,19 @@ public sealed class AchievementsClient
             CancellationToken cancellationToken = default
         )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        AccountAchievementsByPageRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/account/achievements", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            AccessToken = accessToken,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetAccountAchievement());
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/account/achievements
@@ -301,30 +364,46 @@ public sealed class AchievementsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<AchievementCategory> Value, MessageContext Context)>
+    public async Task<(HashSet<AchievementCategory> Value, MessageContext Context)>
         GetAchievementCategories(
             Language? language = default,
             MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        AchievementCategoriesRequest request = new()
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/achievements/categories", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetAchievementCategory());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the IDs of all achievement categories.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetAchievementCategoriesIndex(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetAchievementCategoriesIndex(
         CancellationToken cancellationToken = default
     )
     {
-        AchievementCategoriesIndexRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/achievements/categories", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves an achievement category by its ID.</summary>
@@ -333,19 +412,27 @@ public sealed class AchievementsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(AchievementCategory Value, MessageContext Context)> GetAchievementCategoryById(
-        int achievementCategoryId,
-        Language? language = default,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    public async Task<(AchievementCategory Value, MessageContext Context)>
+        GetAchievementCategoryById(
+            int achievementCategoryId,
+            Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        AchievementCategoryByIdRequest request = new(achievementCategoryId)
+        var query = new QueryBuilder();
+        query.AddId(achievementCategoryId);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/achievements/categories", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetAchievementCategory();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves achievement categories by their IDs.</summary>
@@ -354,7 +441,7 @@ public sealed class AchievementsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<AchievementCategory> Value, MessageContext Context)>
+    public async Task<(HashSet<AchievementCategory> Value, MessageContext Context)>
         GetAchievementCategoriesByIds(
             IEnumerable<int> achievementCategoryIds,
             Language? language = default,
@@ -362,12 +449,20 @@ public sealed class AchievementsClient
             CancellationToken cancellationToken = default
         )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        AchievementCategoriesByIdsRequest request = new(achievementCategoryIds.ToList())
+        var query = new QueryBuilder();
+        query.AddIds(achievementCategoryIds);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/achievements/categories", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetAchievementCategory());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of achievement categories.</summary>
@@ -377,7 +472,7 @@ public sealed class AchievementsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<AchievementCategory> Value, MessageContext Context)>
+    public async Task<(HashSet<AchievementCategory> Value, MessageContext Context)>
         GetAchievementCategoriesByPage(
             int pageIndex,
             int? pageSize = default,
@@ -386,13 +481,20 @@ public sealed class AchievementsClient
             CancellationToken cancellationToken = default
         )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        AchievementCategoriesByPageRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/achievements/categories", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetAchievementCategory());
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/achievements/categories
@@ -404,29 +506,46 @@ public sealed class AchievementsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<AchievementGroup> Value, MessageContext Context)> GetAchievementGroups(
-        Language? language = default,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    public async Task<(HashSet<AchievementGroup> Value, MessageContext Context)>
+        GetAchievementGroups(
+            Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        AchievementGroupsRequest request = new()
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/achievements/groups", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetAchievementGroup());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the IDs of all achievement groups.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<string> Value, MessageContext Context)> GetAchievementGroupsIndex(
+    public async Task<(HashSet<string> Value, MessageContext Context)> GetAchievementGroupsIndex(
         CancellationToken cancellationToken = default
     )
     {
-        AchievementGroupsIndexRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/achievements/groups", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves an achievement group by its ID.</summary>
@@ -435,19 +554,26 @@ public sealed class AchievementsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(AchievementGroup Value, MessageContext Context)> GetAchievementGroupById(
+    public async Task<(AchievementGroup Value, MessageContext Context)> GetAchievementGroupById(
         string achievementGroupId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        AchievementGroupByIdRequest request = new(achievementGroupId)
+        var query = new QueryBuilder();
+        query.AddId(achievementGroupId);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/achievements/groups", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetAchievementGroup();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves achievement groups by their IDs.</summary>
@@ -456,7 +582,7 @@ public sealed class AchievementsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<AchievementGroup> Value, MessageContext Context)>
+    public async Task<(HashSet<AchievementGroup> Value, MessageContext Context)>
         GetAchievementGroupsByIds(
             IEnumerable<string> achievementGroupIds,
             Language? language = default,
@@ -464,12 +590,20 @@ public sealed class AchievementsClient
             CancellationToken cancellationToken = default
         )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        AchievementGroupsByIdsRequest request = new(achievementGroupIds.ToList())
+        var query = new QueryBuilder();
+        query.AddIds(achievementGroupIds);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/achievements/groups", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetAchievementGroup());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of achievement groups.</summary>
@@ -479,7 +613,7 @@ public sealed class AchievementsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<AchievementGroup> Value, MessageContext Context)>
+    public async Task<(HashSet<AchievementGroup> Value, MessageContext Context)>
         GetAchievementGroupsByPage(
             int pageIndex,
             int? pageSize = default,
@@ -488,13 +622,20 @@ public sealed class AchievementsClient
             CancellationToken cancellationToken = default
         )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        AchievementGroupsByPageRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/achievements/groups", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetAchievementGroup());
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/achievements/groups
@@ -506,29 +647,44 @@ public sealed class AchievementsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Title> Value, MessageContext Context)> GetTitles(
+    public async Task<(HashSet<Title> Value, MessageContext Context)> GetTitles(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        TitlesRequest request = new()
+        var query = new QueryBuilder();
+        query.AddAllIds();
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/titles", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetTitle());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the IDs of all titles.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetTitlesIndex(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetTitlesIndex(
         CancellationToken cancellationToken = default
     )
     {
-        TitlesIndexRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/titles", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a title by its ID.</summary>
@@ -537,19 +693,26 @@ public sealed class AchievementsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(Title Value, MessageContext Context)> GetTitleById(
+    public async Task<(Title Value, MessageContext Context)> GetTitleById(
         int titleId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        TitleByIdRequest request = new(titleId)
+        var query = new QueryBuilder();
+        query.AddId(titleId);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/titles", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetTitle();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves titles by their IDs.</summary>
@@ -558,19 +721,26 @@ public sealed class AchievementsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Title> Value, MessageContext Context)> GetTitlesByIds(
+    public async Task<(HashSet<Title> Value, MessageContext Context)> GetTitlesByIds(
         IEnumerable<int> titleIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        TitlesByIdsRequest request = new(titleIds.ToList())
+        var query = new QueryBuilder();
+        query.AddIds(titleIds);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/titles", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetTitle());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of titles.</summary>
@@ -580,7 +750,7 @@ public sealed class AchievementsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Title> Value, MessageContext Context)> GetTitlesByPage(
+    public async Task<(HashSet<Title> Value, MessageContext Context)> GetTitlesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -588,13 +758,19 @@ public sealed class AchievementsClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        TitlesByPageRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddLanguage(language);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/titles", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            Language = language,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetTitle());
+            return (value, response.Context);
+        }
     }
 
     #endregion v2/titles

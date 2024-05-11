@@ -6,4 +6,9 @@ namespace GuildWars2.Chat;
 /// <param name="MasterTrait">The second trait.</param>
 /// <param name="GrandmasterTrait">The third trait.</param>
 [PublicAPI]
-public record struct Specialization(int Id, SelectedTrait AdeptTrait, SelectedTrait MasterTrait, SelectedTrait GrandmasterTrait);
+public record struct Specialization(
+    int Id,
+    SelectedTrait AdeptTrait,
+    SelectedTrait MasterTrait,
+    SelectedTrait GrandmasterTrait
+);

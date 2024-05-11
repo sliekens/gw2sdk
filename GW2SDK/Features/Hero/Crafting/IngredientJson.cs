@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Crafting;
 
 internal static class IngredientJson
 {
-    public static Ingredient GetIngredient(
-        this JsonElement json
-    )
+    public static Ingredient GetIngredient(this JsonElement json)
     {
         RequiredMember type = "type";
         RequiredMember id = "id";

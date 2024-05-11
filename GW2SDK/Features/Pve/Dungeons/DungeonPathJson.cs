@@ -5,9 +5,7 @@ namespace GuildWars2.Pve.Dungeons;
 
 internal static class DungeonPathJson
 {
-    public static DungeonPath GetDungeonPath(
-        this JsonElement json
-    )
+    public static DungeonPath GetDungeonPath(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember kind = "type";

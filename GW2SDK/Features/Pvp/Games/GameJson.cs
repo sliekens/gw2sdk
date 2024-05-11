@@ -80,8 +80,7 @@ internal static class GameJson
             Ended = ended.Map(static value => value.GetDateTimeOffset()),
             Result = result.Map(static value => value.GetEnum<PvpResult>()),
             Team = team.Map(static value => value.GetEnum<PvpTeamColor>()),
-            Profession =
-                profession.Map(static value => value.GetEnum<ProfessionName>()),
+            Profession = profession.Map(static value => value.GetEnum<ProfessionName>()),
             RatingType = ratingType.Map(static value => value.GetRatingType()),
             RatingChange = ratingChange.Map(static value => value.GetInt32()),
             SeasonId = seasonId.Map(static value => value.GetString()),

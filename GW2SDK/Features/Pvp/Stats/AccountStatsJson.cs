@@ -6,9 +6,7 @@ namespace GuildWars2.Pvp.Stats;
 
 internal static class AccountStatsJson
 {
-    public static AccountStats GetAccountStats(
-        this JsonElement json
-    )
+    public static AccountStats GetAccountStats(this JsonElement json)
     {
         RequiredMember pvpRank = "pvp_rank";
         RequiredMember pvpRankPoints = "pvp_rank_points";
@@ -55,12 +53,20 @@ internal static class AccountStatsJson
             PvpRankPoints = pvpRankPoints.Map(static value => value.GetInt32()),
             PvpRankRollovers = pvpRankRollovers.Map(static value => value.GetInt32()),
             Aggregate = aggregate.Map(static value => value.GetResults()),
-            Professions = professions.Map(static value => value.EnumerateObject()
-                    .ToDictionary(
-                        pair => (ProfessionName)Enum.Parse(typeof(ProfessionName), pair.Name, true),
-                        pair => pair.Value.GetResults()
-                    )
-            ),
+            Professions =
+                professions.Map(
+                    static value =>
+                        value.EnumerateObject()
+                            .ToDictionary(
+                                pair =>
+                                    (ProfessionName)Enum.Parse(
+                                        typeof(ProfessionName),
+                                        pair.Name,
+                                        true
+                                    ),
+                                pair => pair.Value.GetResults()
+                            )
+                ),
             Ladders = ladders.Map(static value => value.GetLadders())
         };
     }

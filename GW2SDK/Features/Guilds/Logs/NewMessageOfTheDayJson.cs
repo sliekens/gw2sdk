@@ -5,9 +5,7 @@ namespace GuildWars2.Guilds.Logs;
 
 internal static class NewMessageOfTheDayJson
 {
-    public static NewMessageOfTheDay GetNewMessageOfTheDay(
-        this JsonElement json
-    )
+    public static NewMessageOfTheDay GetNewMessageOfTheDay(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember time = "time";

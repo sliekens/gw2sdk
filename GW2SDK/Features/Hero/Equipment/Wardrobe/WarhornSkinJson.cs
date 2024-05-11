@@ -6,9 +6,7 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 internal static class WarhornSkinJson
 {
-    public static WarhornSkin GetWarhornSkin(
-        this JsonElement json
-    )
+    public static WarhornSkin GetWarhornSkin(this JsonElement json)
     {
         RequiredMember name = "name";
         OptionalMember description = "description";

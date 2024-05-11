@@ -120,7 +120,7 @@ internal static class ItemJson
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
         }
-        
+
         return new Item
         {
             Id = id.Map(static value => value.GetInt32()),
@@ -130,8 +130,8 @@ internal static class ItemJson
             Rarity = rarity.Map(static value => value.GetEnum<Rarity>()),
             VendorValue = vendorValue.Map(static value => value.GetInt32()),
             GameTypes =
-                gameTypes.Map(static values => values.GetList(static value => value.GetEnum<GameType>()
-                    )
+                gameTypes.Map(
+                    static values => values.GetList(static value => value.GetEnum<GameType>())
                 ),
             Flags = flags.Map(static values => values.GetItemFlags()),
             Restrictions = restrictions.Map(static value => value.GetItemRestriction()),

@@ -5,9 +5,7 @@ namespace GuildWars2.Pvp.MistChampions;
 
 internal static class MistChampionSkinJson
 {
-    public static MistChampionSkin GetMistChampionSkin(
-        this JsonElement json
-    )
+    public static MistChampionSkin GetMistChampionSkin(this JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -49,7 +47,8 @@ internal static class MistChampionSkinJson
             Name = name.Map(static value => value.GetStringRequired()),
             IconHref = icon.Map(static value => value.GetStringRequired()),
             Default = @default.Map(static value => value.GetBoolean()),
-            UnlockItemIds = unlockItems.Map(static values => values.GetList(static value => value.GetInt32()))
+            UnlockItemIds =
+                unlockItems.Map(static values => values.GetList(static value => value.GetInt32()))
         };
     }
 }

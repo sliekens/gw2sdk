@@ -1,10 +1,10 @@
 ﻿using System.Runtime.CompilerServices;
 using GuildWars2.Commerce.Delivery;
 using GuildWars2.Commerce.Exchange;
-using GuildWars2.Commerce.Http;
 using GuildWars2.Commerce.Listings;
 using GuildWars2.Commerce.Prices;
 using GuildWars2.Commerce.Transactions;
+using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Commerce;
@@ -31,18 +31,23 @@ public sealed class CommerceClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(DeliveryBox Value, MessageContext Context)> GetDeliveryBox(
+    public async Task<(DeliveryBox Value, MessageContext Context)> GetDeliveryBox(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        DeliveryRequest request = new()
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/commerce/delivery", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            AccessToken = accessToken,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetDeliveryBox();
+            return (value, response.Context);
+        }
     }
 
     #endregion
@@ -52,12 +57,20 @@ public sealed class CommerceClient
     /// <summary>Retrieves the item IDs of all items with listings on the trading post.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetItemPricesIndex(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetItemPricesIndex(
         CancellationToken cancellationToken = default
     )
     {
-        ItemPricesIndexRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/commerce/prices", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the best price for an item by its ID.</summary>
@@ -65,15 +78,24 @@ public sealed class CommerceClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(ItemPrice Value, MessageContext Context)> GetItemPriceById(
+    public async Task<(ItemPrice Value, MessageContext Context)> GetItemPriceById(
         int itemId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        ItemPriceByIdRequest request = new(itemId);
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddId(itemId);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/commerce/prices", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetItemPrice();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the best price for items by their IDs.</summary>
@@ -82,15 +104,24 @@ public sealed class CommerceClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<ItemPrice> Value, MessageContext Context)> GetItemPricesByIds(
+    public async Task<(HashSet<ItemPrice> Value, MessageContext Context)> GetItemPricesByIds(
         IEnumerable<int> itemIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        ItemPricesByIdsRequest request = new(itemIds.ToList());
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddIds(itemIds);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/commerce/prices", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetItemPrice());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the best price for items by their IDs by chunking requests and executing them in parallel. Supports
@@ -170,12 +201,20 @@ public sealed class CommerceClient
     /// <summary>Retrieves the item IDs of all items with listings on the trading post.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<int> Value, MessageContext Context)> GetOrderBooksIndex(
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetOrderBooksIndex(
         CancellationToken cancellationToken = default
     )
     {
-        OrderBooksIndexRequest request = new();
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/commerce/listings", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the demand and supply of an item by its ID.</summary>
@@ -183,15 +222,24 @@ public sealed class CommerceClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(OrderBook Value, MessageContext Context)> GetOrderBookById(
+    public async Task<(OrderBook Value, MessageContext Context)> GetOrderBookById(
         int itemId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        OrderBookByIdRequest request = new(itemId);
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddId(itemId);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/commerce/listings", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetOrderBook();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the demand and supply of items by their IDs.</summary>
@@ -200,15 +248,24 @@ public sealed class CommerceClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<OrderBook> Value, MessageContext Context)> GetOrderBooksByIds(
+    public async Task<(HashSet<OrderBook> Value, MessageContext Context)> GetOrderBooksByIds(
         IEnumerable<int> itemIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        OrderBooksByIdsRequest request = new(itemIds.ToList());
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder();
+        query.AddIds(itemIds);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/commerce/listings", query, null);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetOrderBook());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the demand and supply of items by their IDs by chunking requests and executing them in parallel.
@@ -290,15 +347,27 @@ public sealed class CommerceClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(GemsToGold Value, MessageContext Context)> ExchangeGemsToGold(
+    public async Task<(GemsToGold Value, MessageContext Context)> ExchangeGemsToGold(
         int gems,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        GemsToGoldRequest request = new(gems);
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder { { "quantity", gems } };
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet(
+            "v2/commerce/exchange/gems",
+            query,
+            null
+        );
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetGemsToGold();
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves the current exchange rate of gold to gems.</summary>
@@ -306,15 +375,27 @@ public sealed class CommerceClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(GoldToGems Value, MessageContext Context)> ExchangeGoldToGems(
+    public async Task<(GoldToGems Value, MessageContext Context)> ExchangeGoldToGems(
         Coin gold,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        GoldToGemsRequest request = new(gold);
-        return request.SendAsync(httpClient, cancellationToken);
+        var query = new QueryBuilder { { "quantity", gold } };
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet(
+            "v2/commerce/exchange/coins",
+            query,
+            null
+        );
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetGoldToGems();
+            return (value, response.Context);
+        }
     }
 
     #endregion
@@ -329,7 +410,7 @@ public sealed class CommerceClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Order> Value, MessageContext Context)> GetBuyOrders(
+    public async Task<(HashSet<Order> Value, MessageContext Context)> GetBuyOrders(
         int pageIndex,
         int? pageSize,
         string? accessToken,
@@ -337,13 +418,18 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        BuyOrdersRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/commerce/transactions/current/buys", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            AccessToken = accessToken
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetOrder());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of current sell orders on the account. This endpoint is only accessible with a valid access
@@ -354,7 +440,7 @@ public sealed class CommerceClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Order> Value, MessageContext Context)> GetSellOrders(
+    public async Task<(HashSet<Order> Value, MessageContext Context)> GetSellOrders(
         int pageIndex,
         int? pageSize,
         string? accessToken,
@@ -362,13 +448,18 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        SellOrdersRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/commerce/transactions/current/sells", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            AccessToken = accessToken,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetOrder());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of completed purchases on the account. This endpoint is only accessible with a valid access
@@ -379,7 +470,7 @@ public sealed class CommerceClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Transaction> Value, MessageContext Context)> GetPurchases(
+    public async Task<(HashSet<Transaction> Value, MessageContext Context)> GetPurchases(
         int pageIndex,
         int? pageSize,
         string? accessToken,
@@ -387,13 +478,18 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        PurchasesRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/commerce/transactions/history/buys", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            AccessToken = accessToken,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetTransaction());
+            return (value, response.Context);
+        }
     }
 
     /// <summary>Retrieves a page of completed sales on the account. This endpoint is only accessible with a valid access
@@ -404,7 +500,7 @@ public sealed class CommerceClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Transaction> Value, MessageContext Context)> GetSales(
+    public async Task<(HashSet<Transaction> Value, MessageContext Context)> GetSales(
         int pageIndex,
         int? pageSize,
         string? accessToken,
@@ -412,13 +508,18 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-        SalesRequest request = new(pageIndex)
+        var query = new QueryBuilder();
+        query.AddPage(pageIndex, pageSize);
+        query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = Request.HttpGet("v2/commerce/transactions/history/sells", query, accessToken);
+        var response = await Response.Json(httpClient, request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
         {
-            PageSize = pageSize,
-            AccessToken = accessToken,
-        };
-        return request.SendAsync(httpClient, cancellationToken);
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetTransaction());
+            return (value, response.Context);
+        }
     }
 
     #endregion

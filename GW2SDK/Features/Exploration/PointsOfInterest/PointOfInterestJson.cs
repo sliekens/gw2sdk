@@ -5,9 +5,7 @@ namespace GuildWars2.Exploration.PointsOfInterest;
 
 internal static class PointOfInterestJson
 {
-    public static PointOfInterest GetPointOfInterest(
-        this JsonElement json
-    )
+    public static PointOfInterest GetPointOfInterest(this JsonElement json)
     {
         if (json.TryGetProperty("type", out var discriminator))
         {

@@ -6,9 +6,7 @@ namespace GuildWars2.Hero.Equipment.Templates;
 
 internal static class EquipmentItemJson
 {
-    public static EquipmentItem GetEquipmentItem(
-        this JsonElement json
-    )
+    public static EquipmentItem GetEquipmentItem(this JsonElement json)
     {
         RequiredMember id = "id";
         NullableMember count = "count";
@@ -80,7 +78,9 @@ internal static class EquipmentItemJson
         }
 
         int? suffixItemId = null, secondarySuffixItemId = null;
-        if (upgrades.Map(static values => values.GetList(static value => value.GetInt32())) is { } ids)
+        if (upgrades.Map(static values => values.GetList(static value => value.GetInt32())) is
+            {
+            } ids)
         {
             for (var i = 0; i < ids.Count; i++)
             {
@@ -112,17 +112,19 @@ internal static class EquipmentItemJson
                 infusions.Map(static values => values.GetList(static value => value.GetInt32()))
                 ?? Empty.ListOfInt32,
             SkinId = skin.Map(static value => value.GetInt32()),
-            Stats =
-                stats.Map(static value => value.GetSelectedAttributeCombination()),
+            Stats = stats.Map(static value => value.GetSelectedAttributeCombination()),
             Binding = binding.Map(static value => value.GetEnum<ItemBinding>()),
             BoundTo = boundTo.Map(static value => value.GetString()) ?? "",
-            Location = location.Map(static value => value.GetEnum<EquipmentLocation>()
-            ),
+            Location = location.Map(static value => value.GetEnum<EquipmentLocation>()),
             TemplateNumbers =
-                tabs.Map(static values => values.GetList(static value => value.GetInt32())) ?? Empty.ListOfInt32,
+                tabs.Map(static values => values.GetList(static value => value.GetInt32()))
+                ?? Empty.ListOfInt32,
             DyeColorIds =
-                dyes.Map(static values => values.GetList(static value => value.GetNullableInt32() ?? DyeColor.DyeRemoverId
-                    )
+                dyes.Map(
+                    static values =>
+                        values.GetList(
+                            static value => value.GetNullableInt32() ?? DyeColor.DyeRemoverId
+                        )
                 )
                 ?? Empty.ListOfInt32
         };

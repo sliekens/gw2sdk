@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Wallet;
 
 internal static class CurrencyAmountJson
 {
-    public static CurrencyAmount GetCurrencyAmount(
-        this JsonElement json
-    )
+    public static CurrencyAmount GetCurrencyAmount(this JsonElement json)
     {
         RequiredMember currencyId = "id";
         RequiredMember amount = "value";

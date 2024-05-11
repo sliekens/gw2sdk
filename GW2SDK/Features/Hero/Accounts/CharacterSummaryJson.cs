@@ -5,9 +5,7 @@ namespace GuildWars2.Hero.Accounts;
 
 internal static class CharacterSummaryJson
 {
-    public static CharacterSummary GetCharacterSummary(
-        this JsonElement json
-    )
+    public static CharacterSummary GetCharacterSummary(this JsonElement json)
     {
         RequiredMember name = "name";
         RequiredMember race = "race";
@@ -80,8 +78,7 @@ internal static class CharacterSummaryJson
             BodyType = gender.Map(static value => value.GetEnum<BodyType>()),
             Level = level.Map(static value => value.GetInt32()),
             GuildId = guild.Map(static value => value.GetString()) ?? "",
-            Profession =
-                profession.Map(static value => value.GetEnum<ProfessionName>()),
+            Profession = profession.Map(static value => value.GetEnum<ProfessionName>()),
             Age = age.Map(static value => TimeSpan.FromSeconds(value.GetDouble())),
             LastModified = lastModified.Map(static value => value.GetDateTimeOffset()),
             Created = created.Map(static value => value.GetDateTimeOffset()),

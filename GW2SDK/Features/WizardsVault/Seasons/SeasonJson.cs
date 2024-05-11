@@ -5,9 +5,7 @@ namespace GuildWars2.WizardsVault.Seasons;
 
 internal static class SeasonJson
 {
-    public static Season GetSeason(
-        this JsonElement json
-    )
+    public static Season GetSeason(this JsonElement json)
     {
         RequiredMember title = "title";
         RequiredMember start = "start";
@@ -48,8 +46,10 @@ internal static class SeasonJson
             Title = title.Map(static value => value.GetStringRequired()),
             Start = start.Map(static value => value.GetDateTimeOffset()),
             End = end.Map(static value => value.GetDateTimeOffset()),
-            AstralRewardIds = listings.Map(static values => values.GetSet(static value => value.GetInt32())),
-            ObjectiveIds = objectives.Map(static values => values.GetSet(static value => value.GetInt32()))
+            AstralRewardIds =
+                listings.Map(static values => values.GetSet(static value => value.GetInt32())),
+            ObjectiveIds =
+                objectives.Map(static values => values.GetSet(static value => value.GetInt32()))
         };
     }
 }
