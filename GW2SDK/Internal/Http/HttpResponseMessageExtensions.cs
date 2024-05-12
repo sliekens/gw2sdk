@@ -17,11 +17,8 @@ internal static class HttpResponseMessageExtensions
                 $"Expected a JSON response (application/json) but received '{instance.Headers.ContentType}'."
             );
         }
-#if NET
+
         var content = await instance.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
-#else
-        var content = await instance.ReadAsStreamAsync().ConfigureAwait(false);
-#endif
         if (instance.Headers.ContentEncoding.LastOrDefault() == "gzip")
         {
             content = new GZipStream(content, CompressionMode.Decompress, false);
@@ -100,4 +97,15 @@ internal static class HttpResponseMessageExtensions
                 break;
         }
     }
+#if !NET
+
+    // Overload which takes a CancellationToken is unavailable in older versions of .NET
+    private static Task<Stream> ReadAsStreamAsync(
+        this HttpContent instance,
+        CancellationToken cancellationToken
+    ) =>
+        cancellationToken.IsCancellationRequested
+            ? Task.FromCanceled<Stream>(cancellationToken)
+            : instance.ReadAsStreamAsync();
+#endif
 }
