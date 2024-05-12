@@ -1,5 +1,5 @@
 ﻿using System.Net.Http.Headers;
-using GuildWars2.Http.Headers;
+using GuildWars2.Http.WebLinks;
 using static GuildWars2.Http.Gw2ResponseHeaderName;
 
 namespace GuildWars2.Http;

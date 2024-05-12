@@ -1,6 +1,6 @@
-﻿using GuildWars2.Http.Headers;
+﻿using GuildWars2.Http.WebLinks;
 
-namespace GuildWars2.Tests.Http.Headers;
+namespace GuildWars2.Tests.Http.WebLinks;
 
 public class LinkHeaderTest
 {
