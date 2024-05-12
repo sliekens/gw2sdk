@@ -30,11 +30,10 @@ public sealed class WardrobeClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/account/skins", query, accessToken);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/account/skins", accessToken);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -53,11 +52,10 @@ public sealed class WardrobeClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/skins", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/skins");
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -78,13 +76,12 @@ public sealed class WardrobeClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddId(skinId);
-        query.AddLanguage(language);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/skins", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/skins");
+        requestBuilder.Query.AddId(skinId);
+        requestBuilder.Query.AddLanguage(language);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -107,13 +104,12 @@ public sealed class WardrobeClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddIds(skinIds);
-        query.AddLanguage(language);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/skins", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/skins");
+        requestBuilder.Query.AddIds(skinIds);
+        requestBuilder.Query.AddLanguage(language);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -137,13 +133,12 @@ public sealed class WardrobeClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddPage(pageIndex, pageSize);
-        query.AddLanguage(language);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/skins", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/skins");
+        requestBuilder.Query.AddPage(pageIndex, pageSize);
+        requestBuilder.Query.AddLanguage(language);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;

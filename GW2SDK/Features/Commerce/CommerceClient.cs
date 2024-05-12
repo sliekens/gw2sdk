@@ -37,11 +37,10 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/commerce/delivery", query, accessToken);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/commerce/delivery", accessToken);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -61,11 +60,10 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/commerce/prices", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/commerce/prices");
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -84,12 +82,11 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddId(itemId);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/commerce/prices", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/commerce/prices");
+        requestBuilder.Query.AddId(itemId);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -110,12 +107,11 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddIds(itemIds);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/commerce/prices", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/commerce/prices");
+        requestBuilder.Query.AddIds(itemIds);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -205,11 +201,10 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/commerce/listings", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/commerce/listings");
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -228,12 +223,11 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddId(itemId);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/commerce/listings", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/commerce/listings");
+        requestBuilder.Query.AddId(itemId);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -254,12 +248,11 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddIds(itemIds);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/commerce/listings", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/commerce/listings");
+        requestBuilder.Query.AddIds(itemIds);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -353,13 +346,10 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder { { "quantity", gems } };
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet(
-            "v2/commerce/exchange/gems",
-            query,
-            null
-        );
+        var requestBuilder = RequestBuilder.HttpGet("v2/commerce/exchange/gems");
+        requestBuilder.Query.Add("quantity", gems);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
         var response = await Response.Json(httpClient, request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -381,13 +371,10 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder { { "quantity", gold } };
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet(
-            "v2/commerce/exchange/coins",
-            query,
-            null
-        );
+        var requestBuilder = RequestBuilder.HttpGet("v2/commerce/exchange/coins");
+        requestBuilder.Query.Add("quantity", gold);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
         var response = await Response.Json(httpClient, request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -418,12 +405,11 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddPage(pageIndex, pageSize);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/commerce/transactions/current/buys", query, accessToken);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/commerce/transactions/current/buys", accessToken);
+        requestBuilder.Query.AddPage(pageIndex, pageSize);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -448,12 +434,11 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddPage(pageIndex, pageSize);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/commerce/transactions/current/sells", query, accessToken);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/commerce/transactions/current/sells", accessToken);
+        requestBuilder.Query.AddPage(pageIndex, pageSize);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -478,12 +463,11 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddPage(pageIndex, pageSize);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/commerce/transactions/history/buys", query, accessToken);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/commerce/transactions/history/buys", accessToken);
+        requestBuilder.Query.AddPage(pageIndex, pageSize);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -508,12 +492,11 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddPage(pageIndex, pageSize);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/commerce/transactions/history/sells", query, accessToken);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/commerce/transactions/history/sells", accessToken);
+        requestBuilder.Query.AddPage(pageIndex, pageSize);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;

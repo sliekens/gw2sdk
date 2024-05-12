@@ -31,11 +31,10 @@ public sealed class AccountClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/account", query, accessToken);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/account", accessToken);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -60,11 +59,10 @@ public sealed class AccountClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/account/progression", query, accessToken);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/account/progression", accessToken);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -89,11 +87,10 @@ public sealed class AccountClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/account/luck", query, accessToken);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/account/luck", accessToken);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -120,11 +117,10 @@ public sealed class AccountClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet($"v2/characters/{characterName}/core", query, accessToken);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet($"v2/characters/{characterName}/core", accessToken);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -147,11 +143,10 @@ public sealed class AccountClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/characters", query, accessToken);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/characters", accessToken);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
@@ -173,12 +168,11 @@ public sealed class AccountClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddId(characterName);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/characters", query, accessToken);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/characters", accessToken);
+        requestBuilder.Query.AddId(characterName);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -199,12 +193,11 @@ public sealed class AccountClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddAllIds();
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/characters", query, accessToken);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/characters", accessToken);
+        requestBuilder.Query.AddAllIds();
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;

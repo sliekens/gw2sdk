@@ -30,11 +30,10 @@ public sealed class MetadataClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet($"{version}.json", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet($"{version}.json");
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;

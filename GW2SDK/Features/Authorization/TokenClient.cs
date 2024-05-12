@@ -28,11 +28,10 @@ public sealed class TokenClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/tokeninfo", query, accessToken);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/tokeninfo", accessToken);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -71,26 +70,25 @@ public sealed class TokenClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
+        var requestBuilder = RequestBuilder.HttpGet("v2/createsubtoken", accessToken);
         if (permissions is not null)
         {
-            query.Add("permissions", string.Join(",", permissions).ToLowerInvariant());
+            requestBuilder.Query.Add("permissions", string.Join(",", permissions).ToLowerInvariant());
         }
 
         if (absoluteExpirationDate.HasValue)
         {
-            query.Add("expire", absoluteExpirationDate.Value.ToUniversalTime().ToString("s"));
+            requestBuilder.Query.Add("expire", absoluteExpirationDate.Value.ToUniversalTime().ToString("s"));
         }
 
         if (allowedUrls is not null)
         {
-            query.Add("urls", string.Join(",", allowedUrls));
+            requestBuilder.Query.Add("urls", string.Join(",", allowedUrls));
         }
 
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/createsubtoken", query, accessToken);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;

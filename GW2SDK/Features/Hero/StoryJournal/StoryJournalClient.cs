@@ -36,11 +36,10 @@ public sealed class StoryJournalClient
             CancellationToken cancellationToken = default
         )
     {
-        var query = new QueryBuilder();
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet($"v2/characters/{characterName}/backstory", query, accessToken);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet($"v2/characters/{characterName}/backstory", accessToken);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -67,11 +66,10 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet($"v2/characters/{characterName}/quests", query, accessToken);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet($"v2/characters/{characterName}/quests", accessToken);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -95,20 +93,16 @@ public sealed class StoryJournalClient
             CancellationToken cancellationToken = default
         )
     {
-        var query = new QueryBuilder();
-        query.AddAllIds();
-        query.AddLanguage(language);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/backstory/questions", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/backstory/questions");
+        requestBuilder.Query.AddAllIds();
+        requestBuilder.Query.AddLanguage(language);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
-                response.Json.RootElement.GetSet(
-                    static entry => entry.GetBackgroundStoryQuestion()
-                );
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetBackgroundStoryQuestion());
             return (value, response.Context);
         }
     }
@@ -119,11 +113,10 @@ public sealed class StoryJournalClient
     public async Task<(HashSet<int> Value, MessageContext Context)>
         GetBackgroundStoryQuestionsIndex(CancellationToken cancellationToken = default)
     {
-        var query = new QueryBuilder();
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/backstory/questions", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/backstory/questions");
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -145,13 +138,12 @@ public sealed class StoryJournalClient
             CancellationToken cancellationToken = default
         )
     {
-        var query = new QueryBuilder();
-        query.AddId(questionId);
-        query.AddLanguage(language);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/backstory/questions", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/backstory/questions");
+        requestBuilder.Query.AddId(questionId);
+        requestBuilder.Query.AddLanguage(language);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -174,20 +166,16 @@ public sealed class StoryJournalClient
             CancellationToken cancellationToken = default
         )
     {
-        var query = new QueryBuilder();
-        query.AddIds(questionIds);
-        query.AddLanguage(language);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/backstory/questions", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/backstory/questions");
+        requestBuilder.Query.AddIds(questionIds);
+        requestBuilder.Query.AddLanguage(language);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
-                response.Json.RootElement.GetSet(
-                    static entry => entry.GetBackgroundStoryQuestion()
-                );
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetBackgroundStoryQuestion());
             return (value, response.Context);
         }
     }
@@ -208,20 +196,16 @@ public sealed class StoryJournalClient
             CancellationToken cancellationToken = default
         )
     {
-        var query = new QueryBuilder();
-        query.AddPage(pageIndex, pageSize);
-        query.AddLanguage(language);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/backstory/questions", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/backstory/questions");
+        requestBuilder.Query.AddPage(pageIndex, pageSize);
+        requestBuilder.Query.AddLanguage(language);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
-                response.Json.RootElement.GetSet(
-                    static entry => entry.GetBackgroundStoryQuestion()
-                );
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetBackgroundStoryQuestion());
             return (value, response.Context);
         }
     }
@@ -242,18 +226,16 @@ public sealed class StoryJournalClient
             CancellationToken cancellationToken = default
         )
     {
-        var query = new QueryBuilder();
-        query.AddAllIds();
-        query.AddLanguage(language);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/backstory/answers", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/backstory/answers");
+        requestBuilder.Query.AddAllIds();
+        requestBuilder.Query.AddLanguage(language);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
-                response.Json.RootElement.GetSet(static entry => entry.GetBackgroundStoryAnswer());
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetBackgroundStoryAnswer());
             return (value, response.Context);
         }
     }
@@ -264,11 +246,10 @@ public sealed class StoryJournalClient
     public async Task<(HashSet<string> Value, MessageContext Context)>
         GetBackgroundStoryAnswersIndex(CancellationToken cancellationToken = default)
     {
-        var query = new QueryBuilder();
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/backstory/answers", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/backstory/answers");
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
@@ -290,13 +271,12 @@ public sealed class StoryJournalClient
             CancellationToken cancellationToken = default
         )
     {
-        var query = new QueryBuilder();
-        query.AddId(answerId);
-        query.AddLanguage(language);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/backstory/answers", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/backstory/answers");
+        requestBuilder.Query.AddId(answerId);
+        requestBuilder.Query.AddLanguage(language);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -319,18 +299,16 @@ public sealed class StoryJournalClient
             CancellationToken cancellationToken = default
         )
     {
-        var query = new QueryBuilder();
-        query.AddIds(answerIds);
-        query.AddLanguage(language);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/backstory/answers", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/backstory/answers");
+        requestBuilder.Query.AddIds(answerIds);
+        requestBuilder.Query.AddLanguage(language);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
-                response.Json.RootElement.GetSet(static entry => entry.GetBackgroundStoryAnswer());
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetBackgroundStoryAnswer());
             return (value, response.Context);
         }
     }
@@ -351,18 +329,16 @@ public sealed class StoryJournalClient
             CancellationToken cancellationToken = default
         )
     {
-        var query = new QueryBuilder();
-        query.AddPage(pageIndex, pageSize);
-        query.AddLanguage(language);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/backstory/answers", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/backstory/answers");
+        requestBuilder.Query.AddPage(pageIndex, pageSize);
+        requestBuilder.Query.AddLanguage(language);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
-                response.Json.RootElement.GetSet(static entry => entry.GetBackgroundStoryAnswer());
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetBackgroundStoryAnswer());
             return (value, response.Context);
         }
     }
@@ -382,13 +358,12 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddAllIds();
-        query.AddLanguage(language);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/stories", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/stories");
+        requestBuilder.Query.AddAllIds();
+        requestBuilder.Query.AddLanguage(language);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -404,11 +379,10 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/stories", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/stories");
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -429,13 +403,12 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddId(storyId);
-        query.AddLanguage(language);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/stories", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/stories");
+        requestBuilder.Query.AddId(storyId);
+        requestBuilder.Query.AddLanguage(language);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -457,13 +430,12 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddIds(storyIds);
-        query.AddLanguage(language);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/stories", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/stories");
+        requestBuilder.Query.AddIds(storyIds);
+        requestBuilder.Query.AddLanguage(language);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -487,13 +459,12 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddPage(pageIndex, pageSize);
-        query.AddLanguage(language);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/stories", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/stories");
+        requestBuilder.Query.AddPage(pageIndex, pageSize);
+        requestBuilder.Query.AddLanguage(language);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -517,13 +488,12 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddAllIds();
-        query.AddLanguage(language);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/stories/seasons", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/stories/seasons");
+        requestBuilder.Query.AddAllIds();
+        requestBuilder.Query.AddLanguage(language);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -539,11 +509,10 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/stories/seasons", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/stories/seasons");
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
@@ -564,13 +533,12 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddId(storylineId);
-        query.AddLanguage(language);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/stories/seasons", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/stories/seasons");
+        requestBuilder.Query.AddId(storylineId);
+        requestBuilder.Query.AddLanguage(language);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -592,13 +560,12 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddIds(storylineIds);
-        query.AddLanguage(language);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/stories/seasons", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/stories/seasons");
+        requestBuilder.Query.AddIds(storylineIds);
+        requestBuilder.Query.AddLanguage(language);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -622,13 +589,12 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddPage(pageIndex, pageSize);
-        query.AddLanguage(language);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/stories/seasons", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/stories/seasons");
+        requestBuilder.Query.AddPage(pageIndex, pageSize);
+        requestBuilder.Query.AddLanguage(language);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -652,13 +618,12 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddAllIds();
-        query.AddLanguage(language);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/quests", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/quests");
+        requestBuilder.Query.AddAllIds();
+        requestBuilder.Query.AddLanguage(language);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -674,11 +639,10 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/quests", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/quests");
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -699,13 +663,12 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddId(storyStepId);
-        query.AddLanguage(language);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/quests", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/quests");
+        requestBuilder.Query.AddId(storyStepId);
+        requestBuilder.Query.AddLanguage(language);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -727,13 +690,12 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddIds(storyStepIds);
-        query.AddLanguage(language);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/quests", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/quests");
+        requestBuilder.Query.AddIds(storyStepIds);
+        requestBuilder.Query.AddLanguage(language);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -757,13 +719,12 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddPage(pageIndex, pageSize);
-        query.AddLanguage(language);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/quests", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/quests");
+        requestBuilder.Query.AddPage(pageIndex, pageSize);
+        requestBuilder.Query.AddLanguage(language);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;

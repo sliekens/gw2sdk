@@ -32,11 +32,10 @@ public sealed class RecipesClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/account/recipes", query, accessToken);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/account/recipes", accessToken);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -63,11 +62,10 @@ public sealed class RecipesClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet($"v2/characters/{characterName}/recipes", query, accessToken);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet($"v2/characters/{characterName}/recipes", accessToken);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -87,11 +85,10 @@ public sealed class RecipesClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/recipes", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/recipes");
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -110,12 +107,11 @@ public sealed class RecipesClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddId(recipeId);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/recipes", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/recipes");
+        requestBuilder.Query.AddId(recipeId);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -136,12 +132,11 @@ public sealed class RecipesClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddIds(recipeIds);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/recipes", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/recipes");
+        requestBuilder.Query.AddIds(recipeIds);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -163,12 +158,11 @@ public sealed class RecipesClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder();
-        query.AddPage(pageIndex, pageSize);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/recipes", query, null);
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var requestBuilder = RequestBuilder.HttpGet("v2/recipes");
+        requestBuilder.Query.AddPage(pageIndex, pageSize);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -261,13 +255,10 @@ public sealed class RecipesClient
             CancellationToken cancellationToken = default
         )
     {
-        var query = new QueryBuilder { { "input", ingredientItemId } };
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet(
-            "v2/recipes/search",
-            query,
-            null
-        );
+        var requestBuilder = RequestBuilder.HttpGet("v2/recipes/search");
+        requestBuilder.Query.Add("input", ingredientItemId);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
         var response = await Response.Json(httpClient, request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -288,10 +279,11 @@ public sealed class RecipesClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder { { "input", ingredientItemId } };
-        query.AddAllIds();
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/recipes/search", query, null);
+        var requestBuilder = RequestBuilder.HttpGet("v2/recipes/search");
+        requestBuilder.Query.Add("input", ingredientItemId);
+        requestBuilder.Query.AddAllIds();
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
         var response = await Response.Json(httpClient, request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -318,10 +310,11 @@ public sealed class RecipesClient
             CancellationToken cancellationToken = default
         )
     {
-        var query = new QueryBuilder { { "input", ingredientItemId } };
-        query.AddPage(pageIndex, pageSize);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/recipes/search", query, null);
+        var requestBuilder = RequestBuilder.HttpGet("v2/recipes/search");
+        requestBuilder.Query.Add("input", ingredientItemId);
+        requestBuilder.Query.AddPage(pageIndex, pageSize);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
         var response = await Response.Json(httpClient, request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -341,9 +334,10 @@ public sealed class RecipesClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder { { "output", outputItemId } };
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/recipes/search", query, null);
+        var requestBuilder = RequestBuilder.HttpGet("v2/recipes/search");
+        requestBuilder.Query.Add("output", outputItemId);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
         var response = await Response.Json(httpClient, request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -364,10 +358,11 @@ public sealed class RecipesClient
         CancellationToken cancellationToken = default
     )
     {
-        var query = new QueryBuilder { { "output", outputItemId } };
-        query.AddAllIds();
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/recipes/search", query, null);
+        var requestBuilder = RequestBuilder.HttpGet("v2/recipes/search");
+        requestBuilder.Query.Add("output", outputItemId);
+        requestBuilder.Query.AddAllIds();
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
         var response = await Response.Json(httpClient, request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -394,10 +389,11 @@ public sealed class RecipesClient
             CancellationToken cancellationToken = default
         )
     {
-        var query = new QueryBuilder { { "output", outputItemId } };
-        query.AddPage(pageIndex, pageSize);
-        query.AddSchemaVersion(SchemaVersion.Recommended);
-        var request = Request.HttpGet("v2/recipes/search", query, null);
+        var requestBuilder = RequestBuilder.HttpGet("v2/recipes/search");
+        requestBuilder.Query.Add("output", outputItemId);
+        requestBuilder.Query.AddPage(pageIndex, pageSize);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
         var response = await Response.Json(httpClient, request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
