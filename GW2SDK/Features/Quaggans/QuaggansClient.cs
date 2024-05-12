@@ -1,4 +1,5 @@
-﻿using GuildWars2.Http;
+﻿using System.Text.Json;
+using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Quaggans;
@@ -30,8 +31,7 @@ public sealed class QuaggansClient
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken)
-            .ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -50,7 +50,7 @@ public sealed class QuaggansClient
         var requestBuilder = RequestBuilder.HttpGet("v2/quaggans");
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
@@ -73,7 +73,7 @@ public sealed class QuaggansClient
         requestBuilder.Query.AddId(quagganId);
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -97,7 +97,7 @@ public sealed class QuaggansClient
         requestBuilder.Query.AddIds(quagganIds);
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -123,7 +123,7 @@ public sealed class QuaggansClient
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;

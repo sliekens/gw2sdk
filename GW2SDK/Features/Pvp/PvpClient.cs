@@ -1,4 +1,5 @@
-﻿using GuildWars2.Http;
+﻿using System.Text.Json;
+using GuildWars2.Http;
 using GuildWars2.Json;
 using GuildWars2.Pvp.Amulets;
 using GuildWars2.Pvp.Games;
@@ -38,7 +39,7 @@ public sealed class PvpClient
         var requestBuilder = RequestBuilder.HttpGet($"v2/pvp/seasons/{seasonId}/leaderboards");
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
@@ -64,7 +65,7 @@ public sealed class PvpClient
         var requestBuilder = RequestBuilder.HttpGet($"v2/pvp/seasons/{seasonId}/leaderboards/{boardId}");
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
@@ -100,7 +101,7 @@ public sealed class PvpClient
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -128,7 +129,7 @@ public sealed class PvpClient
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/standings", accessToken);
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -156,7 +157,7 @@ public sealed class PvpClient
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/stats", accessToken);
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -182,7 +183,7 @@ public sealed class PvpClient
         var requestBuilder = RequestBuilder.HttpGet("v2/account/pvp/heroes", accessToken);
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -209,7 +210,7 @@ public sealed class PvpClient
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -228,7 +229,7 @@ public sealed class PvpClient
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/amulets");
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -254,7 +255,7 @@ public sealed class PvpClient
         requestBuilder.Query.AddLanguage(language);
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -281,7 +282,7 @@ public sealed class PvpClient
         requestBuilder.Query.AddLanguage(language);
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -310,7 +311,7 @@ public sealed class PvpClient
         requestBuilder.Query.AddLanguage(language);
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -339,7 +340,7 @@ public sealed class PvpClient
         requestBuilder.Query.AddLanguage(language);
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -358,7 +359,7 @@ public sealed class PvpClient
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/heroes");
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
@@ -384,7 +385,7 @@ public sealed class PvpClient
         requestBuilder.Query.AddLanguage(language);
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -411,7 +412,7 @@ public sealed class PvpClient
         requestBuilder.Query.AddLanguage(language);
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -440,7 +441,7 @@ public sealed class PvpClient
         requestBuilder.Query.AddLanguage(language);
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -469,7 +470,7 @@ public sealed class PvpClient
         requestBuilder.Query.AddLanguage(language);
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -488,7 +489,7 @@ public sealed class PvpClient
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/ranks");
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -514,7 +515,7 @@ public sealed class PvpClient
         requestBuilder.Query.AddLanguage(language);
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -541,7 +542,7 @@ public sealed class PvpClient
         requestBuilder.Query.AddLanguage(language);
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -570,7 +571,7 @@ public sealed class PvpClient
         requestBuilder.Query.AddLanguage(language);
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -599,7 +600,7 @@ public sealed class PvpClient
         requestBuilder.Query.AddLanguage(language);
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -618,7 +619,7 @@ public sealed class PvpClient
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/seasons");
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
@@ -644,7 +645,7 @@ public sealed class PvpClient
         requestBuilder.Query.AddLanguage(language);
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -671,7 +672,7 @@ public sealed class PvpClient
         requestBuilder.Query.AddLanguage(language);
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -700,7 +701,7 @@ public sealed class PvpClient
         requestBuilder.Query.AddLanguage(language);
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -729,7 +730,7 @@ public sealed class PvpClient
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -753,7 +754,7 @@ public sealed class PvpClient
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/games", accessToken);
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -779,7 +780,7 @@ public sealed class PvpClient
         requestBuilder.Query.AddId(gameId);
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -805,7 +806,7 @@ public sealed class PvpClient
         requestBuilder.Query.AddIds(gameIds);
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -833,7 +834,7 @@ public sealed class PvpClient
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;

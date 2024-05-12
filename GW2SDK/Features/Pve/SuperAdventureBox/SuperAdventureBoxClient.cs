@@ -1,4 +1,5 @@
-﻿using GuildWars2.Http;
+﻿using System.Text.Json;
+using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Pve.SuperAdventureBox;
@@ -37,7 +38,7 @@ public sealed class SuperAdventureBoxClient
         var requestBuilder = RequestBuilder.HttpGet($"v2/characters/{characterName}/sab", accessToken);
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;

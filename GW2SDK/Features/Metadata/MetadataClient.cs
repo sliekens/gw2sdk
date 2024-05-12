@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Text.Json;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -33,7 +34,7 @@ public sealed class MetadataClient
         var requestBuilder = RequestBuilder.HttpGet($"{version}.json");
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await Response.Json(httpClient, request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
