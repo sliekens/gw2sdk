@@ -11,6 +11,12 @@ internal static class HttpResponseMessageExtensions
     )
     {
         if (instance == null) throw new ArgumentNullException(nameof(instance));
+        if (instance.Headers.ContentType?.MediaType != "application/json")
+        {
+            throw new UnsupportedMediaTypeException(
+                $"Expected a JSON response (application/json) but received '{instance.Headers.ContentType}'."
+            );
+        }
 #if NET
         var content = await instance.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
 #else
