@@ -5,10 +5,12 @@ using GuildWars2.Exploration.Maps;
 
 namespace GuildWars2.Wvw.Objectives;
 
-/// <summary>Information about an objective in World vs. World: camps, towers, keeps etc.</summary>
+/// <summary>Information about an objective in World vs. World. This class is the base type. Cast objects of this type to a
+/// more specific type to access more properties.</summary>
 [PublicAPI]
+[Inheritable]
 [DataTransferObject]
-public sealed record Objective
+public record Objective
 {
     /// <summary>The objective ID.</summary>
     public required string Id { get; init; }
@@ -18,9 +20,6 @@ public sealed record Objective
 
     /// <summary>The ID of the map sector that contains the objective.</summary>
     public required int SectorId { get; init; }
-
-    /// <summary>The kind of the objective.</summary>
-    public required Extensible<ObjectiveKind> Kind { get; init; }
 
     /// <summary>The map kind of the map that contains the objective.</summary>
     public required Extensible<MapKind> MapKind { get; init; }

@@ -20,7 +20,6 @@ public class Objectives
             {
                 Assert.NotEmpty(entry.Id);
                 Assert.NotEmpty(entry.Name);
-                Assert.True(entry.Kind.IsDefined());
                 Assert.True(entry.SectorId > 0);
                 Assert.True(entry.MapId > 0);
                 Assert.True(entry.MapKind.IsDefined());

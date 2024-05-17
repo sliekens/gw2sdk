@@ -4,53 +4,28 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Objectives;
 
-internal static class ObjectiveJson
+internal static class RuinsJson
 {
-    public static Objective GetObjective(this JsonElement json)
+    public static Ruins GetRuins(this JsonElement json)
     {
-        if (json.TryGetProperty("type", out var discriminator))
-        {
-            switch (discriminator.GetString())
-            {
-                case "Camp":
-                    return json.GetCamp();
-                case "Castle":
-                    return json.GetCastle();
-                case "Keep":
-                    return json.GetKeep();
-                case "Mercenary":
-                    return json.GetMercenary();
-                case "Resource":
-                    return json.GetResource();
-                case "Ruins":
-                    return json.GetRuins();
-                case "Spawn":
-                    return json.GetSpawn();
-                case "Tower":
-                    return json.GetTower();
-            }
-        }
-
         RequiredMember id = "id";
         RequiredMember name = "name";
         RequiredMember sectorId = "sector_id";
         RequiredMember mapType = "map_type";
         RequiredMember mapId = "map_id";
-        NullableMember upgradeId = "upgrade_id";
         NullableMember coordinates = "coord";
         NullableMember labelCoordinates = "label_coord";
-        OptionalMember marker = "marker";
+        RequiredMember marker = "marker";
         RequiredMember chatLink = "chat_link";
 
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {
-                if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error
-                    && !member.Value.ValueEquals("Generic"))
+                if (!member.Value.ValueEquals("Ruins"))
                 {
                     throw new InvalidOperationException(
-                        Strings.UnexpectedDiscriminator(member.Value.GetString())
+                        Strings.InvalidDiscriminator(member.Value.GetString())
                     );
                 }
             }
@@ -74,10 +49,6 @@ internal static class ObjectiveJson
             {
                 mapId = member;
             }
-            else if (upgradeId.Match(member))
-            {
-                upgradeId = member;
-            }
             else if (coordinates.Match(member))
             {
                 coordinates = member;
@@ -95,20 +66,19 @@ internal static class ObjectiveJson
                 chatLink = member;
             }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
-
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
         }
 
-        return new Objective
+        return new Ruins
         {
             Id = id.Map(static value => value.GetStringRequired()),
             Name = name.Map(static value => value.GetStringRequired()),
             SectorId = sectorId.Map(static value => value.GetInt32()),
             MapKind = mapType.Map(static value => value.GetEnum<MapKind>()),
             MapId = mapId.Map(static value => value.GetInt32()),
-            UpgradeId = upgradeId.Map(static value => value.GetInt32()),
+            UpgradeId = null,
             Coordinates = coordinates.Map(static value => value.GetCoordinate3()),
             LabelCoordinates = labelCoordinates.Map(static value => value.GetCoordinateF()),
             MarkerIconHref = marker.Map(static value => value.GetString()) ?? "",

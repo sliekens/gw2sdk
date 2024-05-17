@@ -4,33 +4,10 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Objectives;
 
-internal static class ObjectiveJson
+internal static class TowerJson
 {
-    public static Objective GetObjective(this JsonElement json)
+    public static Tower GetTower(this JsonElement json)
     {
-        if (json.TryGetProperty("type", out var discriminator))
-        {
-            switch (discriminator.GetString())
-            {
-                case "Camp":
-                    return json.GetCamp();
-                case "Castle":
-                    return json.GetCastle();
-                case "Keep":
-                    return json.GetKeep();
-                case "Mercenary":
-                    return json.GetMercenary();
-                case "Resource":
-                    return json.GetResource();
-                case "Ruins":
-                    return json.GetRuins();
-                case "Spawn":
-                    return json.GetSpawn();
-                case "Tower":
-                    return json.GetTower();
-            }
-        }
-
         RequiredMember id = "id";
         RequiredMember name = "name";
         RequiredMember sectorId = "sector_id";
@@ -46,11 +23,10 @@ internal static class ObjectiveJson
         {
             if (member.NameEquals("type"))
             {
-                if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error
-                    && !member.Value.ValueEquals("Generic"))
+                if (!member.Value.ValueEquals("Tower"))
                 {
                     throw new InvalidOperationException(
-                        Strings.UnexpectedDiscriminator(member.Value.GetString())
+                        Strings.InvalidDiscriminator(member.Value.GetString())
                     );
                 }
             }
@@ -95,13 +71,12 @@ internal static class ObjectiveJson
                 chatLink = member;
             }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
-
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
         }
 
-        return new Objective
+        return new Tower
         {
             Id = id.Map(static value => value.GetStringRequired()),
             Name = name.Map(static value => value.GetStringRequired()),
