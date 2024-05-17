@@ -466,6 +466,35 @@ public sealed class BuildsClient
         }
     }
 
+    /// <summary>Retrieves a page of specializations.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public async Task<(HashSet<Specialization> Value, MessageContext Context)> GetSpecializationsByPage(
+        int pageIndex,
+        int? pageSize = default,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var requestBuilder = RequestBuilder.HttpGet("v2/specializations");
+        requestBuilder.Query.AddPage(pageIndex, pageSize);
+        requestBuilder.Query.AddLanguage(language);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetSpecialization());
+            return (value, response.Context);
+        }
+    }
+
     #endregion v2/specializations
 
     #region v2/traits
