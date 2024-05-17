@@ -40,7 +40,7 @@ Throttling is a technique that limits the rate at which you make requests to the
 
 ## What happens if you hit the API rate limits?
 
-If you hit the API rate limits, you will receive a `TooManyRequestsException`
+If you hit the API rate limits, you will receive a `BadResponseException` with a message saying "too many requests" and its `StatusCode` property set to `429`.
 
 This means that you have exceeded your allowed number of requests. You should temporarily stop making any further requests. Unfortunately, there is no way to know exactly how many requests are available to you at any given time, so you will have to guess based on your previous usage patterns.
 
