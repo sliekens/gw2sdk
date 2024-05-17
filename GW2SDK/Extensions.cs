@@ -27,8 +27,11 @@ public static class Extensions
     /// <typeparam name="T">The type of the value returned by the original task.</typeparam>
     /// <param name="task">The original task, which returns a tuple of the value and also the message context.</param>
     /// <returns>A new task that returns only the value.</returns>
-    public static Task<T> ValueOnly<T>(this Task<(T, MessageContext)> task) =>
-        task.ContinueWith(t => t.Result.Item1);
+    public static async Task<T> ValueOnly<T>(this Task<(T, MessageContext)> task)
+    {
+        var (value, _) = await task.ConfigureAwait(false);
+        return value;
+    }
 
     /// <summary>Returns a new IAsyncEnumerable that only returns the value of the original IAsyncEnumerable, discarding the
     /// message context.</summary>
