@@ -8,7 +8,7 @@ public class GuildById
     public async Task Can_be_found()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var guild = Composer.Resolve<TestGuild>();
+        var guild = TestConfiguration.TestGuild;
 
         var (actual, context) = await sut.Guilds.GetGuildById(guild.Id, null);
 
@@ -29,8 +29,8 @@ public class GuildById
     public async Task Can_be_found_when_authenticated()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = Composer.Resolve<ApiKey>();
-        var guild = Composer.Resolve<TestGuild>();
+        var accessToken = TestConfiguration.ApiKey;
+        var guild = TestConfiguration.TestGuild;
 
         var (actual, context) = await sut.Guilds.GetGuildById(guild.Id, accessToken.Key);
 

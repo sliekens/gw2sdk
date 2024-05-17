@@ -10,7 +10,7 @@ public class CharactersByNames
         var sut = Composer.Resolve<Gw2Client>();
         var character = TestConfiguration.TestCharacter;
         var character2 = TestConfiguration.TestCharacter2;
-        var accessToken = Composer.Resolve<ApiKey>();
+        var accessToken = TestConfiguration.ApiKey;
 
         var (actual, _) =
             await sut.Hero.Account.GetCharactersByNames([character.Name, character2.Name], accessToken.Key);

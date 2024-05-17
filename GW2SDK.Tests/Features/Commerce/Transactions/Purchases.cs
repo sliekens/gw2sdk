@@ -7,7 +7,7 @@ public class Purchases
     [Fact]
     public async Task Purchase_history_can_be_filtered_by_page()
     {
-        var accessToken = Composer.Resolve<ApiKey>();
+        var accessToken = TestConfiguration.ApiKey;
         var sut = Composer.Resolve<Gw2Client>();
 
         var (purchases, context) = await sut.Commerce.GetPurchases(0, 200, accessToken.Key);

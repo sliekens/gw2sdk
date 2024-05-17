@@ -8,7 +8,7 @@ public class UnlockedSkins
     public async Task Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = Composer.Resolve<ApiKey>();
+        var accessToken = TestConfiguration.ApiKey;
 
         var (actual, _) = await sut.Hero.Equipment.Wardrobe.GetUnlockedSkins(accessToken.Key);
 

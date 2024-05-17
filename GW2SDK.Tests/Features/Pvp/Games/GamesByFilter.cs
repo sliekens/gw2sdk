@@ -8,7 +8,7 @@ public class GamesByFilter
     public async Task Can_be_filtered_by_id()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = Composer.Resolve<ApiKey>();
+        var accessToken = TestConfiguration.ApiKey;
 
         // No way other way to get a game ID than to list them all first
         var ids = await sut.Pvp.GetGamesIndex(accessToken.Key).ValueOnly();

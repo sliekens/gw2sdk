@@ -8,8 +8,8 @@ public class EquipmentTemplate
     public async Task Can_be_found()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var character = Composer.Resolve<TestCharacter>();
-        var accessToken = Composer.Resolve<ApiKey>();
+        var character = TestConfiguration.TestCharacter;
+        var accessToken = TestConfiguration.ApiKey;
 
         const int tab = 1;
         var (actual, _) =

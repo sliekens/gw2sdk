@@ -8,7 +8,7 @@ public class DailyRecipes
     public async Task Can_be_found()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = Composer.Resolve<ApiKey>();
+        var accessToken = TestConfiguration.ApiKey;
 
         // This is not resistant to recipes being added to the game, so not great :)
         // For now I'll just maintain this by hand...

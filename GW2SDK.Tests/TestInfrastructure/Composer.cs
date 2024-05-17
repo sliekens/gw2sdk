@@ -8,31 +8,6 @@ public static class Composer
 
     private static object GetService(Type serviceType)
     {
-        if (serviceType == typeof(TestCharacter))
-        {
-            return TestConfiguration.TestCharacter;
-        }
-
-        if (serviceType == typeof(TestGuild))
-        {
-            return TestConfiguration.TestGuild;
-        }
-
-        if (serviceType == typeof(TestGuildLeader))
-        {
-            return TestConfiguration.TestGuildLeader;
-        }
-
-        if (serviceType == typeof(ApiKeyBasic))
-        {
-            return TestConfiguration.ApiKeyBasic;
-        }
-
-        if (serviceType == typeof(ApiKey))
-        {
-            return TestConfiguration.ApiKey;
-        }
-
         if (serviceType == typeof(Gw2Client))
         {
             return new Gw2Client(Resolve<HttpClient>());

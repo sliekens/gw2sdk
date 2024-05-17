@@ -7,7 +7,7 @@ public class Sales
     [Fact]
     public async Task Sales_history_can_be_filtered_by_page()
     {
-        var accessToken = Composer.Resolve<ApiKey>();
+        var accessToken = TestConfiguration.ApiKey;
         var sut = Composer.Resolve<Gw2Client>();
 
         var (sales, context) = await sut.Commerce.GetSales(0, 200, accessToken.Key);

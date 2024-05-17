@@ -8,8 +8,8 @@ public class ActiveBuild
     public async Task Can_be_found()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var character = Composer.Resolve<TestCharacter>();
-        var accessToken = Composer.Resolve<ApiKey>();
+        var character = TestConfiguration.TestCharacter;
+        var accessToken = TestConfiguration.ApiKey;
 
         var (actual, _) = await sut.Hero.Builds.GetActiveBuild(character.Name, accessToken.Key);
 

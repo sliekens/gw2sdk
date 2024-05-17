@@ -9,7 +9,7 @@ public class SubtokenInfo
     public async Task Subtoken_has_info()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = Composer.Resolve<ApiKey>();
+        var accessToken = TestConfiguration.ApiKey;
 
         #region Create a new subtoken
 

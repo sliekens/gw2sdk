@@ -8,7 +8,7 @@ public class Luck
     public async Task Can_be_found()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = Composer.Resolve<ApiKey>();
+        var accessToken = TestConfiguration.ApiKey;
 
         var (actual, _) = await sut.Hero.Account.GetLuck(accessToken.Key);
 

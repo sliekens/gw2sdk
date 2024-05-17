@@ -8,7 +8,7 @@ public class StoredBuildsByNumbers
     public async Task Can_be_filtered_by_id()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = Composer.Resolve<ApiKey>();
+        var accessToken = TestConfiguration.ApiKey;
 
         HashSet<int> slotNumbers =
         [

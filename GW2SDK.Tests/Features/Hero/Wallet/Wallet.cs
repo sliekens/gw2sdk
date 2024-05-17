@@ -8,7 +8,7 @@ public class Wallet
     public async Task Can_be_found()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = Composer.Resolve<ApiKey>();
+        var accessToken = TestConfiguration.ApiKey;
         var (actual, _) = await sut.Hero.Wallet.GetWallet(accessToken.Key);
         var coins = actual.Single(currency => currency.CurrencyId == 1);
         Coin coinsAmount = coins.Amount;

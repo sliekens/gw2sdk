@@ -7,7 +7,7 @@ public class DeliveryBox
     [Fact]
     public async Task Can_be_found()
     {
-        var accessToken = Composer.Resolve<ApiKey>();
+        var accessToken = TestConfiguration.ApiKey;
         var sut = Composer.Resolve<Gw2Client>();
 
         var (deliveryBox, context) = await sut.Commerce.GetDeliveryBox(accessToken.Key);

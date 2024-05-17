@@ -8,7 +8,7 @@ public class CompletedPaths
     public async Task Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = Composer.Resolve<ApiKey>();
+        var accessToken = TestConfiguration.ApiKey;
 
         // Completed paths reset every day, play some dungeons to test this properly
         var (actual, _) = await sut.Pve.Dungeons.GetCompletedPaths(accessToken.Key);

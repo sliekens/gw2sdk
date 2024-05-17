@@ -8,7 +8,7 @@ public class GuildTeams
     public async Task Can_be_found()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var guildLeader = Composer.Resolve<TestGuildLeader>();
+        var guildLeader = TestConfiguration.TestGuildLeader;
 
         var (account, _) = await sut.Hero.Account.GetSummary(guildLeader.Token);
         foreach (var guildId in account.LeaderOfGuildIds!)
