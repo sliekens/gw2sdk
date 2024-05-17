@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-using GuildWars2.Http;
+﻿using GuildWars2.Http;
 using GuildWars2.Json;
 using GuildWars2.Wvw.Abilities;
 using GuildWars2.Wvw.Matches;

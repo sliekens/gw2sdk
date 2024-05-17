@@ -1,5 +1,4 @@
 ﻿using System.Runtime.CompilerServices;
-using System.Text.Json;
 using GuildWars2.Http;
 using GuildWars2.Json;
 

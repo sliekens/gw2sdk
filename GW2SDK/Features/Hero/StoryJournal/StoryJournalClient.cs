@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-using GuildWars2.Hero.StoryJournal.BackgroundStories;
+﻿using GuildWars2.Hero.StoryJournal.BackgroundStories;
 using GuildWars2.Hero.StoryJournal.Stories;
 using GuildWars2.Http;
 using GuildWars2.Json;

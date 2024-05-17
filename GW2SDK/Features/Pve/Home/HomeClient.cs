@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-using GuildWars2.Http;
+﻿using GuildWars2.Http;
 using GuildWars2.Json;
 using GuildWars2.Pve.Home.Cats;
 using GuildWars2.Pve.Home.Nodes;

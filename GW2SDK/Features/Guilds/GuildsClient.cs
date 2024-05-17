@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-using GuildWars2.Guilds.Bank;
+﻿using GuildWars2.Guilds.Bank;
 using GuildWars2.Guilds.Emblems;
 using GuildWars2.Guilds.Logs;
 using GuildWars2.Guilds.Members;
