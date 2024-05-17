@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-using GuildWars2.Http;
+﻿using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Accounts;
@@ -35,7 +34,8 @@ public sealed class AccountClient
         var requestBuilder = RequestBuilder.HttpGet("v2/account", accessToken);
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -63,7 +63,8 @@ public sealed class AccountClient
         var requestBuilder = RequestBuilder.HttpGet("v2/account/progression", accessToken);
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -91,7 +92,8 @@ public sealed class AccountClient
         var requestBuilder = RequestBuilder.HttpGet("v2/account/luck", accessToken);
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -118,10 +120,14 @@ public sealed class AccountClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/characters/{characterName}/core", accessToken);
+        var requestBuilder = RequestBuilder.HttpGet(
+            $"v2/characters/{characterName}/core",
+            accessToken
+        );
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -147,7 +153,8 @@ public sealed class AccountClient
         var requestBuilder = RequestBuilder.HttpGet("v2/characters", accessToken);
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
@@ -173,11 +180,40 @@ public sealed class AccountClient
         requestBuilder.Query.AddId(characterName);
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value = response.Json.RootElement.GetCharacter();
+            return (value, response.Context);
+        }
+    }
+
+    /// <summary>Retrieves the details of characters that belongs to the account associated with the access token. This
+    /// endpoint is only accessible with a valid access token.</summary>
+    /// <param name="characterNames">Character names that belongs to the account associated with the access token.</param>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public async Task<(HashSet<Character> Value, MessageContext Context)> GetCharactersByNames(
+        IEnumerable<string> characterNames,
+        string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var requestBuilder = RequestBuilder.HttpGet("v2/characters", accessToken);
+        requestBuilder.Query.AddIds(characterNames);
+        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
+        var request = requestBuilder.Build();
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetCharacter());
             return (value, response.Context);
         }
     }
@@ -198,7 +234,8 @@ public sealed class AccountClient
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;

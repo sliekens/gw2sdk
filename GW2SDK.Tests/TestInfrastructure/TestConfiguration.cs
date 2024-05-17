@@ -47,6 +47,24 @@ public static class TestConfiguration
             )
         };
 
+    public static TestCharacter TestCharacter2 =>
+        new()
+        {
+            Name =
+                Configuration["Character2:Name"]
+                ?? throw new InvalidOperationException("Missing Character2:Name."),
+            Race = (RaceName)Enum.Parse(
+                typeof(RaceName),
+                Configuration["Character2:Race"]
+                ?? throw new InvalidOperationException("Missing Character2:Race.")
+            ),
+            Profession = (ProfessionName)Enum.Parse(
+                typeof(ProfessionName),
+                Configuration["Character2:Profession"]
+                ?? throw new InvalidOperationException("Missing Character2:Profession.")
+            )
+        };
+
     public static TestGuild TestGuild =>
         new()
         {
