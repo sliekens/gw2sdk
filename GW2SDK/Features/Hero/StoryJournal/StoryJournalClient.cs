@@ -56,13 +56,11 @@ public sealed class StoryJournalClient
     /// access token. This endpoint is only accessible with a valid access token.</summary>
     /// <param name="characterName">A character name that belongs to the account associated with the access token.</param>
     /// <param name="accessToken">An API key or subtoken.</param>
-    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public async Task<(HashSet<int> Value, MessageContext Context)> GetCompletedStorySteps(
         string characterName,
         string? accessToken,
-        MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
