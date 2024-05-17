@@ -302,7 +302,7 @@
       "gw2sdk": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.NET.ILLink.Tasks": "[8.0.3, )",
+          "Microsoft.NET.ILLink.Tasks": "[8.0.5, )",
           "Microsoft.NETFramework.ReferenceAssemblies": "[1.0.3, )",
           "MinVer": "[5.0.0, )",
           "PolySharp": "[1.14.1, )",
@@ -346,9 +346,9 @@
       },
       "Microsoft.NET.ILLink.Tasks": {
         "type": "CentralTransitive",
-        "requested": "[8.0.3, )",
-        "resolved": "8.0.3",
-        "contentHash": "0kwNg0LBIvVTx9A2mo9Mnw4wLGtaeQgjSz5P13bOOwdWPPLe9HzI+XTkwiMhS7iQCM6X4LAbFR76xScaMw0MrA=="
+        "requested": "[8.0.5, )",
+        "resolved": "8.0.5",
+        "contentHash": "4ISW1Ndgz86FkIbu5rVlMqhhtojdy5rUlxC/N+9kPh9qbYcvHiCvYbHKzAPVIx9OPYIjT9trXt7JI42Y5Ukq6A=="
       },
       "Microsoft.NETFramework.ReferenceAssemblies": {
         "type": "CentralTransitive",
