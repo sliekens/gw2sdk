@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Guilds.Emblems;
 using GuildWars2.Json;
 
@@ -8,14 +8,14 @@ internal static class GuildJson
 {
     public static Guild GetGuild(this JsonElement json)
     {
-        RequiredMember level = "level";
-        RequiredMember motd = "motd";
-        RequiredMember influence = "influence";
-        RequiredMember aetherium = "aetherium";
-        RequiredMember resonance = "resonance";
-        RequiredMember favor = "favor";
-        RequiredMember memberCount = "member_count";
-        RequiredMember memberCapacity = "member_capacity";
+        NullableMember level = "level";
+        OptionalMember motd = "motd";
+        NullableMember influence = "influence";
+        NullableMember aetherium = "aetherium";
+        NullableMember resonance = "resonance";
+        NullableMember favor = "favor";
+        NullableMember memberCount = "member_count";
+        NullableMember memberCapacity = "member_capacity";
         RequiredMember id = "id";
         RequiredMember name = "name";
         RequiredMember tag = "tag";
