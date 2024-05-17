@@ -16,37 +16,44 @@ internal static class HttpClientExtensions
                 cancellationToken
             )
             .ConfigureAwait(false);
-        if (response.IsSuccessStatusCode)
+        try
         {
-            // Do not dispose this JsonDocument, transfer ownership to the caller
-            var json = await response.Content.ReadAsJsonDocumentAsync(cancellationToken)
-                .ConfigureAwait(false);
-            return (json, new MessageContext(response));
-        }
-
-        var reason = response.ReasonPhrase;
-        if (response.Content.Headers.ContentType?.MediaType == "application/json")
-        {
-            using var json = await response.Content.ReadAsJsonDocumentAsync(cancellationToken)
-                .ConfigureAwait(false);
-            if (json.RootElement.TryGetProperty("text", out var text))
+            if (response.IsSuccessStatusCode)
             {
-                reason = text.GetString();
+                var json = await response.Content.ReadAsJsonDocumentAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                return (json, new MessageContext(response));
             }
+
+            // Do not dispose this JsonDocument, transfer ownership to the caller
+            var reason = response.ReasonPhrase;
+            if (response.Content.Headers.ContentType?.MediaType == "application/json")
+            {
+                using var json = await response.Content.ReadAsJsonDocumentAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                if (json.RootElement.TryGetProperty("text", out var text))
+                {
+                    reason = text.GetString();
+                }
+            }
+
+#if NET
+            throw new BadResponseException(reason, null, response.StatusCode);
+#else
+            throw new BadResponseException(reason);
+#endif
         }
-
-        Exception exception = response.StatusCode switch
+        catch (JsonException jsonException)
         {
-            >= InternalServerError => new ServerProblemException(response.StatusCode, reason),
-            TooManyRequests => new TooManyRequestsException(reason),
-            NotFound => new ResourceNotFoundException(reason),
-            BadRequest => new ArgumentException(reason),
-            Unauthorized or Forbidden => new UnauthorizedOperationException(reason),
-            _ => new HttpRequestException(reason)
-        };
-
-        exception.Data["RequestUri"] = response.RequestMessage?.RequestUri?.ToString();
-
-        throw exception;
+#if NET
+            throw new BadResponseException(
+                "Failed to parse the response.",
+                jsonException,
+                response.StatusCode
+            );
+#else
+            throw new BadResponseException("Failed to parse the response.", jsonException);
+#endif
+        }
     }
 }
