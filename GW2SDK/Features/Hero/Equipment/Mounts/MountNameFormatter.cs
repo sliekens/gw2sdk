@@ -8,19 +8,19 @@ public static class MountNameFormatter
     /// <param name="mountName">Self-explanatory.</param>
     /// <returns>The mount name formatted as a string.</returns>
     /// <exception cref="NotSupportedException">Could not format that mount name.</exception>
-    public static string FormatMountName(MountName mountName) =>
-        mountName switch
+    public static string FormatMountName(Extensible<MountName> mountName) =>
+        mountName.ToString() switch
         {
-            MountName.Griffon => "griffon",
-            MountName.Jackal => "jackal",
-            MountName.Raptor => "raptor",
-            MountName.RollerBeetle => "roller_beetle",
-            MountName.Skimmer => "skimmer",
-            MountName.Skyscale => "skyscale",
-            MountName.Springer => "springer",
-            MountName.Warclaw => "warclaw",
-            MountName.Skiff => "skiff",
-            MountName.SiegeTurtle => "turtle",
-            _ => throw new NotSupportedException("Could not format mount name.")
+            "Griffon" => "griffon",
+            "Jackal" => "jackal",
+            "Raptor" => "raptor",
+            "RollerBeetle" => "roller_beetle",
+            "Skimmer" => "skimmer",
+            "Skyscale" => "skyscale",
+            "Springer" => "springer",
+            "Warclaw" => "warclaw",
+            "Skiff" => "skiff",
+            "SiegeTurtle" => "turtle",
+            _ => mountName.ToString()
         };
 }
