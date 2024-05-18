@@ -9,12 +9,16 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MostVersatileMaterials;
-using MostVersatileMaterials.Logging;
 using Spectre.Console;
 
+// This example retrieves all item ingredients that are used in crafting,
+// sorted by how many recipes require the material
 var builder = Host.CreateApplicationBuilder(args);
+
+// The console is used for user interactions, not for logging
+// Redirect logs to the 'Output' window in Visual Studio
 builder.Logging.ClearProviders();
-builder.Logging.AddProvider(new AnsiConsoleLoggerProvider());
+builder.Logging.AddDebug();
 
 var gw2ClientBuilder = builder.Services.AddHttpClient<Gw2Client>(
     static client =>
@@ -46,7 +50,7 @@ try
                 // Fetch all recipes
                 var recipesProgress = ctx.AddTask("Fetching recipes");
                 var recipes = await gw2.Hero.Crafting.Recipes
-                    .GetRecipesBulk(progress: new ConsoleProgressUpdater(recipesProgress))
+                    .GetRecipesBulk(progress: new ProgressTaskUpdater(recipesProgress))
                     .Select(result => result.Value)
                     .ToListAsync();
 
@@ -61,7 +65,7 @@ try
                 var inputItems = await gw2.Items
                     .GetItemsBulk(
                         inputItemIds,
-                        progress: new ConsoleProgressUpdater(inputItemsProgress)
+                        progress: new ProgressTaskUpdater(inputItemsProgress)
                     )
                     .ValueOnly()
                     .ToDictionaryAsync(item => item.Id);
@@ -73,7 +77,7 @@ try
                     select recipe.OutputItemId).ToHashSet();
                 var outputItems = await gw2.Items.GetItemsBulk(
                         outputItemIds,
-                        progress: new ConsoleProgressUpdater(outputItemsProgress)
+                        progress: new ProgressTaskUpdater(outputItemsProgress)
                     )
                     .ValueOnly()
                     .ToDictionaryAsync(item => item.Id);
