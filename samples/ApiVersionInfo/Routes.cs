@@ -81,11 +81,8 @@ internal static class Routes
         "/v2/wvw/matches/stats", "/v2/wvw/objectives",
         "/v2/wvw/ranks", "/v2/wvw/upgrades",
         "/v2/wizardsvault/listings", "/v2/account/wizardsvault/listings",
-        "/v2/wizardsvault/objectives"
-
-        //"/v2/account/wizardsvault/daily",
-        //"/v2/account/wizardsvault/special",
-        //"/v2/account/wizardsvault/weekly",
+        "/v2/wizardsvault/objectives", "/v2/account/wizardsvault/daily",
+        "/v2/account/wizardsvault/special", "/v2/account/wizardsvault/weekly"
     ];
 
     public static bool IsSupported(Route route) => Supported.Contains(route.Path);
