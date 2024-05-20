@@ -14,15 +14,16 @@ Alternatively you can use the command palette (Ctrl+Shift+P) and do _> Dev Conta
 
 You can ignore this if you use the dev container. Otherwise install the software from the following sections.
 
-- [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
-- [.NET 6 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
+- Visual Studio 2022 (17.9+), Visual Studio Code or Rider
+- [.NET 8.0.300 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) to build and run the solution
 - Windows
-  - [.NET Framework 4.8.1 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net481)
+  - [.NET Framework 4.8.1 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net481) to run .NET Framework tests
 - Mac/Linux
-  - [Mono 6.12](https://www.mono-project.com/download/stable/) (Mac/Linux/Windows)
-- Visual Studio 2022 (17.9+), Code or Rider
+  - [Mono 6.12](https://www.mono-project.com/download/stable/) to run .NET Framework tests
 
-To use Visual Studio 2022 effectively, you also need to install the .NET Framework 4.8 Developer pack. This is not actually required to compile the code, but Visual Studio itself will refuse to load the project without it.
+You can skip .NET Framework tests by running `dotnet test -f net8.0` instead of `dotnet test`.
+
+To use Visual Studio 2022 effectively, you need to install the .NET Framework 4.8 Developer pack. This is not actually required to compile the code or run the tests, but Visual Studio itself will refuse to load the project without it.
 
 ## Optional Windows dependencies
 
