@@ -20,7 +20,7 @@ You can ignore this if you use the dev container. Otherwise install the software
   - [.NET Framework 4.8.1 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net481)
 - Mac/Linux
   - [Mono 6.12](https://www.mono-project.com/download/stable/) (Mac/Linux/Windows)
-- Visual Studio 2022 (17.7+), Code or Rider
+- Visual Studio 2022 (17.9+), Code or Rider
 
 To use Visual Studio 2022 effectively, you also need to install the .NET Framework 4.8 Developer pack. This is not actually required to compile the code, but Visual Studio itself will refuse to load the project without it.
 
