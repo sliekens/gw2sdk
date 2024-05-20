@@ -40,6 +40,9 @@ public sealed record BuildTemplateLink : Link
     /// <summary>The third kind of weapon used in this build.</summary>
     public WeaponType Weapon3 { get; init; }
 
+    /// <summary>The skill IDs of weapon skill overrides.</summary>
+    public int[] SkillOverrides { get; init; } = [];
+
     /// <summary>Gets the build represented by this chat link.</summary>
     /// <param name="gw2Client">An API client to fetch the build.</param>
     /// <param name="language">The language to use for descriptions.</param>
@@ -275,7 +278,12 @@ public sealed record BuildTemplateLink : Link
             buffer.WriteUInt8(0);
         }
 
-        buffer.WriteUInt8(0); // skill overrides
+        buffer.WriteUInt8((byte)SkillOverrides.Length);
+        for (var index = 0; index < (byte)SkillOverrides.Length; index++)
+        {
+            var skillOverride = SkillOverrides[index];
+            buffer.WriteInt32(skillOverride);
+        }
 
         return buffer.ToString();
 
@@ -436,6 +444,7 @@ public sealed record BuildTemplateLink : Link
         var weapon1 = WeaponType.None;
         var weapon2 = WeaponType.None;
         var weapon3 = WeaponType.None;
+        int[]? skillOverrides = null;
         if (!buffer.EndOfFile)
         {
             var weaponCount = buffer.ReadUInt8();
@@ -457,11 +466,11 @@ public sealed record BuildTemplateLink : Link
                 }
             }
 
-            var skillOverrides = buffer.ReadUInt8();
-            for (var i = 0; i < skillOverrides; i++)
+            var skillOverridesCount = buffer.ReadUInt8();
+            for (var i = 0; i < skillOverridesCount; i++)
             {
-                // TODO: add support for skill overrides (weapon)
-                buffer.Padding(4);
+                skillOverrides ??= new int[skillOverridesCount];
+                skillOverrides[i] = buffer.ReadInt32();
             }
         }
 
@@ -490,7 +499,8 @@ public sealed record BuildTemplateLink : Link
             Legends = legends,
             Weapon1 = weapon1,
             Weapon2 = weapon2,
-            Weapon3 = weapon3
+            Weapon3 = weapon3,
+            SkillOverrides = skillOverrides ?? []
         };
 
         static ProfessionName Profession(int professionId)

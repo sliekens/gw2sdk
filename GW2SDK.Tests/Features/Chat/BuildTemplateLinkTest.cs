@@ -12,7 +12,6 @@ public class BuildTemplateLinkTest
         ProfessionName.Engineer
     )]
 
-    // [InlineData("[&DQQeOSA/Nzp5AAAApQEAALUAAACsAQAALhYAACcAAAAAAAAAAAAAAAAAAAA=]", ProfessionName.Ranger)]
     [InlineData(
         "[&DQQAAAAAAAB5AHkAAAAAAAAAAAAAAAAAAAAAAAEAAQAAAAAAAAAAAAAAAAABIwAA]",
         ProfessionName.Ranger
@@ -24,6 +23,10 @@ public class BuildTemplateLinkTest
     [InlineData(
         "[&DQkOHQMmPyrcEdwRBhIGEisSKxLUEdQRyhHKEQUEBAIrEtQRBhIGEisS1BEDawA1AAUAAA==]",
         ProfessionName.Revenant
+    )]
+    [InlineData(
+        "[&DQQAAAAAAAB5AHkAAAAAAAAAAAAAAAAAAAAAAAEAAQAAAAAAAAAAAAAAAAACMwAjAATo9gAAm/YAAN32AABn9wAA]",
+        ProfessionName.Ranger
     )]
     public async Task Can_marshal_build_template_links(
         string chatLink,
