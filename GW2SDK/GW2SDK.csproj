@@ -66,7 +66,6 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.ILLink.Tasks" />
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" />
     <PackageReference Include="MinVer" />
     <PackageReference Include="PolySharp" />
     <PackageReference Include="System.Text.Json" />
