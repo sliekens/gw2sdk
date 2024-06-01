@@ -3,10 +3,10 @@
 public static class Composer
 {
     public static T Resolve<T>() =>
-        (T)GetService(typeof(T))
+        (T?)GetService(typeof(T))
         ?? throw new InvalidOperationException($"Unable to compose type '{typeof(T)}'");
 
-    private static object GetService(Type serviceType)
+    private static object? GetService(Type serviceType)
     {
         if (serviceType == typeof(Gw2Client))
         {

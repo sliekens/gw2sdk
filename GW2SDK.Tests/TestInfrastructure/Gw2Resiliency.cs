@@ -63,7 +63,7 @@ public static class Gw2Resiliency
 
     // Helper method to get the "text" property from the API response
     // because the status code is not always enough to determine the error
-    private static async Task<string> GetText(Outcome<HttpResponseMessage> attempt)
+    private static async Task<string?> GetText(Outcome<HttpResponseMessage> attempt)
     {
         if (attempt.Result is null)
         {
