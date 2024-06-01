@@ -21,9 +21,7 @@ internal static class BackpackSkinJson
             {
                 if (!member.Value.ValueEquals("Back"))
                 {
-                    throw new InvalidOperationException(
-                        Strings.InvalidDiscriminator(member.Value.GetString())
-                    );
+                    ThrowHelper.ThrowInvalidDiscriminator(member.Value.GetString());
                 }
             }
             else if (name.Match(member))
@@ -56,7 +54,7 @@ internal static class BackpackSkinJson
             }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                ThrowHelper.ThrowUnexpectedMember(member.Name);
             }
         }
 

@@ -38,7 +38,7 @@ internal static class TitleJson
                     continue;
                 }
 
-                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                ThrowHelper.ThrowUnexpectedMember(member.Name);
             }
         }
 

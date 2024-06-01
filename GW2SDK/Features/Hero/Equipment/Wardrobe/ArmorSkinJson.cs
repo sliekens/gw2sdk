@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Items;
 using GuildWars2.Json;
 
@@ -47,9 +47,7 @@ internal static class ArmorSkinJson
             {
                 if (!member.Value.ValueEquals("Armor"))
                 {
-                    throw new InvalidOperationException(
-                        Strings.InvalidDiscriminator(member.Value.GetString())
-                    );
+                    ThrowHelper.ThrowInvalidDiscriminator(member.Value.GetString());
                 }
             }
             else if (name.Match(member))
@@ -88,9 +86,7 @@ internal static class ArmorSkinJson
                     {
                         if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException(
-                                Strings.UnexpectedDiscriminator(detail.Value.GetString())
-                            );
+                            ThrowHelper.ThrowUnexpectedDiscriminator(detail.Value.GetString());
                         }
                     }
                     else if (weightClass.Match(detail))
@@ -103,13 +99,13 @@ internal static class ArmorSkinJson
                     }
                     else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                     {
-                        throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
+                        ThrowHelper.ThrowUnexpectedMember(detail.Name);
                     }
                 }
             }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                ThrowHelper.ThrowUnexpectedMember(member.Name);
             }
         }
 

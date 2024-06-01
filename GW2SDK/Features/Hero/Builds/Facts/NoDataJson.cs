@@ -23,9 +23,7 @@ internal static class NoDataJson
             {
                 if (!member.Value.ValueEquals("NoData"))
                 {
-                    throw new InvalidOperationException(
-                        Strings.InvalidDiscriminator(member.Value.GetString())
-                    );
+                    ThrowHelper.ThrowInvalidDiscriminator(member.Value.GetString());
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -46,7 +44,7 @@ internal static class NoDataJson
             }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                ThrowHelper.ThrowUnexpectedMember(member.Name);
             }
         }
 

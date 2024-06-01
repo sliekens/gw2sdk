@@ -72,9 +72,7 @@ internal static class FactJson
             {
                 if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException(
-                        Strings.UnexpectedDiscriminator(member.Value.GetString())
-                    );
+                    ThrowHelper.ThrowUnexpectedDiscriminator(member.Value.GetString());
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -95,7 +93,7 @@ internal static class FactJson
             }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                ThrowHelper.ThrowUnexpectedMember(member.Name);
             }
         }
 

@@ -19,9 +19,7 @@ internal static class ProfessionSkillSummaryJson
             {
                 if (!member.Value.ValueEquals("Profession"))
                 {
-                    throw new InvalidOperationException(
-                        Strings.InvalidDiscriminator(member.Value.GetString())
-                    );
+                    ThrowHelper.ThrowInvalidDiscriminator(member.Value.GetString());
                 }
             }
             else if (id.Match(member))
@@ -42,7 +40,7 @@ internal static class ProfessionSkillSummaryJson
             }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                ThrowHelper.ThrowUnexpectedMember(member.Name);
             }
         }
 

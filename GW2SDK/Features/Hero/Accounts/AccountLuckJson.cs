@@ -17,9 +17,7 @@ internal static class AccountLuckJson
             }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(
-                    Strings.UnexpectedArrayLength(json.GetArrayLength())
-                );
+                ThrowHelper.ThrowUnexpectedArrayLength(json.GetArrayLength());
             }
         }
 
@@ -39,9 +37,7 @@ internal static class AccountLuckJson
             {
                 if (!member.Value.ValueEquals("luck"))
                 {
-                    throw new InvalidOperationException(
-                        Strings.InvalidDiscriminator(member.Value.GetString())
-                    );
+                    ThrowHelper.ThrowInvalidDiscriminator(member.Value.GetString());
                 }
             }
             else if (value.Match(member))
@@ -50,7 +46,7 @@ internal static class AccountLuckJson
             }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                ThrowHelper.ThrowUnexpectedMember(member.Name);
             }
         }
 

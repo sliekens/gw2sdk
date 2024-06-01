@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Builds;
@@ -29,9 +29,7 @@ internal static class TraitIdsJson
             }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(
-                    Strings.UnexpectedArrayLength(json.GetArrayLength())
-                );
+                ThrowHelper.ThrowUnexpectedArrayLength(json.GetArrayLength());
             }
         }
 

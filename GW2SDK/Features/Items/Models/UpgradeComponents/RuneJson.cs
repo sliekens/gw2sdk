@@ -33,9 +33,7 @@ internal static class RuneJson
             {
                 if (!member.Value.ValueEquals("UpgradeComponent"))
                 {
-                    throw new InvalidOperationException(
-                        Strings.InvalidDiscriminator(member.Value.GetString())
-                    );
+                    ThrowHelper.ThrowInvalidDiscriminator(member.Value.GetString());
                 }
             }
             else if (name.Match(member))
@@ -92,9 +90,7 @@ internal static class RuneJson
                         if (!detail.Value.ValueEquals("Rune")
                             && !detail.Value.ValueEquals("Default"))
                         {
-                            throw new InvalidOperationException(
-                                Strings.InvalidDiscriminator(detail.Value.GetString())
-                            );
+                            ThrowHelper.ThrowInvalidDiscriminator(detail.Value.GetString());
                         }
                     }
                     else if (upgradeComponentFlags.Match(detail))
@@ -128,9 +124,7 @@ internal static class RuneJson
                             else if (JsonOptions.MissingMemberBehavior
                                 == MissingMemberBehavior.Error)
                             {
-                                throw new InvalidOperationException(
-                                    Strings.UnexpectedMember(infix.Name)
-                                );
+                                ThrowHelper.ThrowUnexpectedMember(infix.Name);
                             }
                         }
                     }
@@ -144,13 +138,13 @@ internal static class RuneJson
                     }
                     else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                     {
-                        throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
+                        ThrowHelper.ThrowUnexpectedMember(detail.Name);
                     }
                 }
             }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                ThrowHelper.ThrowUnexpectedMember(member.Name);
             }
         }
 

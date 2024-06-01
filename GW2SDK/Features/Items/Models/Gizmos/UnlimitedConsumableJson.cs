@@ -24,9 +24,7 @@ internal static class UnlimitedConsumableJson
             {
                 if (!member.Value.ValueEquals("Gizmo"))
                 {
-                    throw new InvalidOperationException(
-                        Strings.InvalidDiscriminator(member.Value.GetString())
-                    );
+                    ThrowHelper.ThrowInvalidDiscriminator(member.Value.GetString());
                 }
             }
             else if (name.Match(member))
@@ -81,20 +79,18 @@ internal static class UnlimitedConsumableJson
                     {
                         if (!detail.Value.ValueEquals("UnlimitedConsumable"))
                         {
-                            throw new InvalidOperationException(
-                                Strings.InvalidDiscriminator(detail.Value.GetString())
-                            );
+                            ThrowHelper.ThrowInvalidDiscriminator(detail.Value.GetString());
                         }
                     }
                     else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                     {
-                        throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
+                        ThrowHelper.ThrowUnexpectedMember(detail.Name);
                     }
                 }
             }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                ThrowHelper.ThrowUnexpectedMember(member.Name);
             }
         }
 

@@ -23,9 +23,7 @@ internal static class LeggingsRecipeJson
             {
                 if (!member.Value.ValueEquals("Leggings"))
                 {
-                    throw new InvalidOperationException(
-                        Strings.InvalidDiscriminator(member.Value.GetString())
-                    );
+                    ThrowHelper.ThrowInvalidDiscriminator(member.Value.GetString());
                 }
             }
             else if (outputItemId.Match(member))
@@ -66,7 +64,7 @@ internal static class LeggingsRecipeJson
             }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                ThrowHelper.ThrowUnexpectedMember(member.Name);
             }
         }
 

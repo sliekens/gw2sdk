@@ -23,9 +23,7 @@ internal static class ShouldersSkinJson
             {
                 if (!member.Value.ValueEquals("Armor"))
                 {
-                    throw new InvalidOperationException(
-                        Strings.InvalidDiscriminator(member.Value.GetString())
-                    );
+                    ThrowHelper.ThrowInvalidDiscriminator(member.Value.GetString());
                 }
             }
             else if (name.Match(member))
@@ -64,9 +62,7 @@ internal static class ShouldersSkinJson
                     {
                         if (!detail.Value.ValueEquals("Shoulders"))
                         {
-                            throw new InvalidOperationException(
-                                Strings.InvalidDiscriminator(detail.Value.GetString())
-                            );
+                            ThrowHelper.ThrowInvalidDiscriminator(detail.Value.GetString());
                         }
                     }
                     else if (weightClass.Match(detail))
@@ -79,13 +75,13 @@ internal static class ShouldersSkinJson
                     }
                     else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                     {
-                        throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
+                        ThrowHelper.ThrowUnexpectedMember(detail.Name);
                     }
                 }
             }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                ThrowHelper.ThrowUnexpectedMember(member.Name);
             }
         }
 

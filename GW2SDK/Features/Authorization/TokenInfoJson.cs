@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Authorization;
@@ -27,9 +27,7 @@ internal static class TokenInfoJson
             {
                 if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException(
-                        Strings.UnexpectedDiscriminator(member.Value.GetString())
-                    );
+                    ThrowHelper.ThrowUnexpectedDiscriminator(member.Value.GetString());
                 }
             }
             else if (id.Match(member))
@@ -46,7 +44,7 @@ internal static class TokenInfoJson
             }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                ThrowHelper.ThrowUnexpectedMember(member.Name);
             }
         }
 

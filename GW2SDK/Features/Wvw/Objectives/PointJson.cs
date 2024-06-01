@@ -24,9 +24,7 @@ internal static class PointJson
             }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(
-                    Strings.UnexpectedArrayLength(json.GetArrayLength())
-                );
+                ThrowHelper.ThrowUnexpectedArrayLength(json.GetArrayLength());
             }
         }
 
@@ -55,9 +53,7 @@ internal static class PointJson
             }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(
-                    Strings.UnexpectedArrayLength(json.GetArrayLength())
-                );
+                ThrowHelper.ThrowUnexpectedArrayLength(json.GetArrayLength());
             }
         }
 

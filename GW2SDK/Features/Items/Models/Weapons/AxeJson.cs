@@ -38,9 +38,7 @@ internal static class AxeJson
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(
-                        Strings.InvalidDiscriminator(member.Value.GetString())
-                    );
+                    ThrowHelper.ThrowInvalidDiscriminator(member.Value.GetString());
                 }
             }
             else if (name.Match(member))
@@ -99,9 +97,7 @@ internal static class AxeJson
                     {
                         if (!detail.Value.ValueEquals("Axe"))
                         {
-                            throw new InvalidOperationException(
-                                Strings.InvalidDiscriminator(detail.Value.GetString())
-                            );
+                            ThrowHelper.ThrowInvalidDiscriminator(detail.Value.GetString());
                         }
                     }
                     else if (damageType.Match(detail))
@@ -151,9 +147,7 @@ internal static class AxeJson
                             else if (JsonOptions.MissingMemberBehavior
                                 == MissingMemberBehavior.Error)
                             {
-                                throw new InvalidOperationException(
-                                    Strings.UnexpectedMember(infix.Name)
-                                );
+                                ThrowHelper.ThrowUnexpectedMember(infix.Name);
                             }
                         }
                     }
@@ -167,13 +161,13 @@ internal static class AxeJson
                     }
                     else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                     {
-                        throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
+                        ThrowHelper.ThrowUnexpectedMember(detail.Name);
                     }
                 }
             }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                ThrowHelper.ThrowUnexpectedMember(member.Name);
             }
         }
 

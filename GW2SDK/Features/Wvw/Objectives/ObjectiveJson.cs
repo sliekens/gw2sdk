@@ -49,9 +49,7 @@ internal static class ObjectiveJson
                 if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error
                     && !member.Value.ValueEquals("Generic"))
                 {
-                    throw new InvalidOperationException(
-                        Strings.UnexpectedDiscriminator(member.Value.GetString())
-                    );
+                    ThrowHelper.ThrowUnexpectedDiscriminator(member.Value.GetString());
                 }
             }
             else if (id.Match(member))
@@ -97,7 +95,7 @@ internal static class ObjectiveJson
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
 
             {
-                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                ThrowHelper.ThrowUnexpectedMember(member.Name);
             }
         }
 

@@ -34,9 +34,7 @@ internal static class RingJson
             {
                 if (!member.Value.ValueEquals("Trinket"))
                 {
-                    throw new InvalidOperationException(
-                        Strings.InvalidDiscriminator(member.Value.GetString())
-                    );
+                    ThrowHelper.ThrowInvalidDiscriminator(member.Value.GetString());
                 }
             }
             else if (name.Match(member))
@@ -99,9 +97,7 @@ internal static class RingJson
                     {
                         if (!detail.Value.ValueEquals("Ring"))
                         {
-                            throw new InvalidOperationException(
-                                Strings.InvalidDiscriminator(detail.Value.GetString())
-                            );
+                            ThrowHelper.ThrowInvalidDiscriminator(detail.Value.GetString());
                         }
                     }
                     else if (infusionSlots.Match(detail))
@@ -131,9 +127,7 @@ internal static class RingJson
                             else if (JsonOptions.MissingMemberBehavior
                                 == MissingMemberBehavior.Error)
                             {
-                                throw new InvalidOperationException(
-                                    Strings.UnexpectedMember(infix.Name)
-                                );
+                                ThrowHelper.ThrowUnexpectedMember(infix.Name);
                             }
                         }
                     }
@@ -147,13 +141,13 @@ internal static class RingJson
                     }
                     else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                     {
-                        throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
+                        ThrowHelper.ThrowUnexpectedMember(detail.Name);
                     }
                 }
             }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                ThrowHelper.ThrowUnexpectedMember(member.Name);
             }
         }
 

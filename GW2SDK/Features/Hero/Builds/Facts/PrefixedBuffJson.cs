@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Builds.Facts;
@@ -29,9 +29,7 @@ internal static class PrefixedBuffJson
             {
                 if (!member.Value.ValueEquals("PrefixedBuff"))
                 {
-                    throw new InvalidOperationException(
-                        Strings.InvalidDiscriminator(member.Value.GetString())
-                    );
+                    ThrowHelper.ThrowInvalidDiscriminator(member.Value.GetString());
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -84,15 +82,13 @@ internal static class PrefixedBuffJson
                     }
                     else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                     {
-                        throw new InvalidOperationException(
-                            Strings.UnexpectedMember(prefixMember.Name)
-                        );
+                        ThrowHelper.ThrowUnexpectedMember(prefixMember.Name);
                     }
                 }
             }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                ThrowHelper.ThrowUnexpectedMember(member.Name);
             }
         }
 

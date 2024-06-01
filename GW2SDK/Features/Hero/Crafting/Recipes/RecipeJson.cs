@@ -134,9 +134,7 @@ internal static class RecipeJson
             {
                 if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException(
-                        Strings.UnexpectedDiscriminator(member.Value.GetString())
-                    );
+                    ThrowHelper.ThrowUnexpectedDiscriminator(member.Value.GetString());
                 }
             }
             else if (outputItemId.Match(member))
@@ -177,7 +175,7 @@ internal static class RecipeJson
             }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                ThrowHelper.ThrowUnexpectedMember(member.Name);
             }
         }
 

@@ -23,9 +23,7 @@ internal static class InsigniaRecipeJson
             {
                 if (!member.Value.ValueEquals("Insignia"))
                 {
-                    throw new InvalidOperationException(
-                        Strings.InvalidDiscriminator(member.Value.GetString())
-                    );
+                    ThrowHelper.ThrowInvalidDiscriminator(member.Value.GetString());
                 }
             }
             else if (outputItemId.Match(member))
@@ -66,7 +64,7 @@ internal static class InsigniaRecipeJson
             }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                ThrowHelper.ThrowUnexpectedMember(member.Name);
             }
         }
 

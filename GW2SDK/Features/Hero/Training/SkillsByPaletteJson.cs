@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Training;
@@ -35,9 +35,7 @@ internal static class SkillsByPaletteJson
                 }
                 else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException(
-                        Strings.UnexpectedArrayLength(entry.GetArrayLength())
-                    );
+                    ThrowHelper.ThrowUnexpectedArrayLength(entry.GetArrayLength());
                 }
             }
 

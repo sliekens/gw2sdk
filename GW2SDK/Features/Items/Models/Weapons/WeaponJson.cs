@@ -94,9 +94,7 @@ internal static class WeaponJson
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(
-                        Strings.InvalidDiscriminator(member.Value.GetString())
-                    );
+                    ThrowHelper.ThrowInvalidDiscriminator(member.Value.GetString());
                 }
             }
             else if (name.Match(member))
@@ -155,9 +153,7 @@ internal static class WeaponJson
                     {
                         if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException(
-                                Strings.UnexpectedDiscriminator(detail.Value.GetString())
-                            );
+                            ThrowHelper.ThrowUnexpectedDiscriminator(detail.Value.GetString());
                         }
                     }
                     else if (damageType.Match(detail))
@@ -207,9 +203,7 @@ internal static class WeaponJson
                             else if (JsonOptions.MissingMemberBehavior
                                 == MissingMemberBehavior.Error)
                             {
-                                throw new InvalidOperationException(
-                                    Strings.UnexpectedMember(infix.Name)
-                                );
+                                ThrowHelper.ThrowUnexpectedMember(infix.Name);
                             }
                         }
                     }
@@ -223,13 +217,13 @@ internal static class WeaponJson
                     }
                     else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                     {
-                        throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
+                        ThrowHelper.ThrowUnexpectedMember(detail.Name);
                     }
                 }
             }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                ThrowHelper.ThrowUnexpectedMember(member.Name);
             }
         }
 

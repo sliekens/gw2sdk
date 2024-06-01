@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Items;
@@ -66,9 +66,7 @@ internal static class ItemJson
             {
                 if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException(
-                        Strings.UnexpectedDiscriminator(member.Value.GetString())
-                    );
+                    ThrowHelper.ThrowUnexpectedDiscriminator(member.Value.GetString());
                 }
             }
             else if (name.Match(member))
@@ -117,7 +115,7 @@ internal static class ItemJson
             }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                ThrowHelper.ThrowUnexpectedMember(member.Name);
             }
         }
 

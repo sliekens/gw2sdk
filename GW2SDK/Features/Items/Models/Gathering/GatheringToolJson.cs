@@ -44,9 +44,7 @@ internal static class GatheringToolJson
             {
                 if (!member.Value.ValueEquals("Gathering"))
                 {
-                    throw new InvalidOperationException(
-                        Strings.InvalidDiscriminator(member.Value.GetString())
-                    );
+                    ThrowHelper.ThrowInvalidDiscriminator(member.Value.GetString());
                 }
             }
             else if (name.Match(member))
@@ -101,20 +99,18 @@ internal static class GatheringToolJson
                     {
                         if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException(
-                                Strings.UnexpectedDiscriminator(detail.Value.GetString())
-                            );
+                            ThrowHelper.ThrowUnexpectedDiscriminator(detail.Value.GetString());
                         }
                     }
                     else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                     {
-                        throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
+                        ThrowHelper.ThrowUnexpectedMember(detail.Name);
                     }
                 }
             }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                ThrowHelper.ThrowUnexpectedMember(member.Name);
             }
         }
 

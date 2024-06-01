@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Hero;
 using GuildWars2.Json;
 
@@ -68,17 +68,17 @@ internal static class IdentityJson
             }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                ThrowHelper.ThrowUnexpectedMember(member.Name);
             }
         }
 
+        var mapIdInt32 = mapId.Map(static value => value.GetInt32());
         if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
         {
-            // The 'map' and 'map_id' seem to be redundant, but check my assumptions...
-            if (map.Map(static value => value.GetInt32())
-                != mapId.Map(static value => value.GetInt32()))
+            // The 'map_id' and 'map' seem to be redundant, but check my assumptions...
+            if (mapIdInt32 != map.Map(static value => value.GetInt32()))
             {
-                throw new InvalidOperationException(Strings.UnexpectedMember("map"));
+                ThrowHelper.ThrowUnexpectedMember("map");
             }
         }
 
@@ -88,7 +88,7 @@ internal static class IdentityJson
             Profession = profession.Map(static value => (ProfessionName)value.GetInt32()),
             SpecializationId = specializationId.Map(static value => value.GetInt32()),
             Race = race.Map(static value => (RaceName)(value.GetInt32() + 1)),
-            MapId = mapId.Map(static value => value.GetInt32()),
+            MapId = mapIdInt32,
             WorldId = worldId.Map(static value => value.GetInt64()),
             TeamColorId = teamColorId.Map(static value => value.GetInt32()),
             Commander = commander.Map(static value => value.GetBoolean()),

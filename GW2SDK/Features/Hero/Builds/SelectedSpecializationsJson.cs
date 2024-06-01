@@ -28,9 +28,7 @@ internal static class SelectedSpecializationsJson
             }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(
-                    Strings.UnexpectedArrayLength(json.GetArrayLength())
-                );
+                ThrowHelper.ThrowUnexpectedArrayLength(json.GetArrayLength());
             }
         }
 

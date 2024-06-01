@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Items;
 using GuildWars2.Json;
 
@@ -39,9 +39,7 @@ internal static class GatheringToolSkinJson
             {
                 if (!member.Value.ValueEquals("Gathering"))
                 {
-                    throw new InvalidOperationException(
-                        Strings.InvalidDiscriminator(member.Value.GetString())
-                    );
+                    ThrowHelper.ThrowInvalidDiscriminator(member.Value.GetString());
                 }
             }
             else if (name.Match(member))
@@ -78,8 +76,8 @@ internal static class GatheringToolSkinJson
                 {
                     if (detail.NameEquals("type"))
                     {
-                        // Almost certainly a mistake in the API/game so let's not introduce a skin type for bair/lure
-                        // https://api.guildwars2.comv2/skins/10440
+                        // Almost certainly a mistake in the API/game so let's not introduce a skin type for bait/lure
+                        // https://api.guildwars2.com/v2/skins/10440
                         // [&CsgoAAA=]
                         var discriminatorValue = detail.Value.GetString();
                         if (discriminatorValue is "Bait" or "Lure")
@@ -89,20 +87,18 @@ internal static class GatheringToolSkinJson
 
                         if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException(
-                                Strings.UnexpectedDiscriminator(discriminatorValue)
-                            );
+                            ThrowHelper.ThrowUnexpectedDiscriminator(discriminatorValue);
                         }
                     }
                     else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                     {
-                        throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
+                        ThrowHelper.ThrowUnexpectedMember(detail.Name);
                     }
                 }
             }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                ThrowHelper.ThrowUnexpectedMember(member.Name);
             }
         }
 

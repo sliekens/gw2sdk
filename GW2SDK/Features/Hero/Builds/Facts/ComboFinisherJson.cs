@@ -25,9 +25,7 @@ internal static class ComboFinisherJson
             {
                 if (!member.Value.ValueEquals("ComboFinisher"))
                 {
-                    throw new InvalidOperationException(
-                        Strings.InvalidDiscriminator(member.Value.GetString())
-                    );
+                    ThrowHelper.ThrowInvalidDiscriminator(member.Value.GetString());
                 }
             }
             else if (member.NameEquals("chance") && IsDefaultInt32(member))
@@ -60,7 +58,7 @@ internal static class ComboFinisherJson
             }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                ThrowHelper.ThrowUnexpectedMember(member.Name);
             }
         }
 

@@ -25,9 +25,7 @@ internal static class TrophyJson
                 // Key acts as a Trophy, and there is only one (Florid Bouquet), so treat it as a Trophy
                 if (!member.Value.ValueEquals("Trophy") && !member.Value.ValueEquals("Key"))
                 {
-                    throw new InvalidOperationException(
-                        Strings.InvalidDiscriminator(member.Value.GetString())
-                    );
+                    ThrowHelper.ThrowInvalidDiscriminator(member.Value.GetString());
                 }
             }
             else if (name.Match(member))
@@ -76,7 +74,7 @@ internal static class TrophyJson
             }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                ThrowHelper.ThrowUnexpectedMember(member.Name);
             }
         }
 

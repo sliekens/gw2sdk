@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Hero.Equipment;
 using GuildWars2.Json;
 
@@ -74,7 +74,7 @@ internal static class ItemSlotJson
             }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                ThrowHelper.ThrowUnexpectedMember(member.Name);
             }
         }
 
@@ -98,9 +98,8 @@ internal static class ItemSlotJson
                         secondarySuffixItemId = upgradeId;
                         break;
                     default:
-                        throw new InvalidOperationException(
-                            Strings.UnexpectedArrayLength(ids.Count)
-                        );
+                        ThrowHelper.ThrowUnexpectedArrayLength(ids.Count);
+                        break;
                 }
             }
         }
