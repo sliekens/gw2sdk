@@ -15,7 +15,7 @@ public class BulkRequest(string requestUri)
     {
         QueryBuilder search = new()
         {
-            { "ids", Ids },
+            { "ids", string.Join(",", Ids) },
             { "v", "3" }
         };
 

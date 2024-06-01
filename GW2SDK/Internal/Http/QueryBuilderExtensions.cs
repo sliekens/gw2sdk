@@ -1,8 +1,10 @@
-﻿namespace GuildWars2.Http;
+﻿using static System.Globalization.NumberFormatInfo;
+
+namespace GuildWars2.Http;
 
 internal static class QueryBuilderExtensions
 {
-    public static void AddLanguage(this QueryBuilder query, Language? language)
+    internal static void AddLanguage(this QueryBuilder query, Language? language)
     {
         if (language is not null)
         {
@@ -10,22 +12,22 @@ internal static class QueryBuilderExtensions
         }
     }
 
-    public static void AddSchemaVersion(this QueryBuilder query, SchemaVersion version) =>
+    internal static void AddSchemaVersion(this QueryBuilder query, SchemaVersion version) =>
         query.Add("v", version);
 
-    public static void AddId(this QueryBuilder query, string id) => query.Add("id", id);
+    internal static void AddId(this QueryBuilder query, string id) => query.Add("id", id);
 
-    public static void AddId(this QueryBuilder query, int id) => query.Add("id", id);
+    internal static void AddId(this QueryBuilder query, int id) => query.Add("id", id);
 
-    public static void AddIds(this QueryBuilder query, IEnumerable<int> ids) =>
-        query.Add("ids", ids);
+    internal static void AddIds(this QueryBuilder query, IEnumerable<int> ids) =>
+        query.Add("ids", string.Join(",", ids));
 
-    public static void AddIds(this QueryBuilder query, IEnumerable<string> ids) =>
-        query.Add("ids", ids);
+    internal static void AddIds(this QueryBuilder query, IEnumerable<string> ids) =>
+        query.Add("ids", ids.ToCsv());
 
-    public static void AddAllIds(this QueryBuilder query) => query.Add("ids", "all");
+    internal static void AddAllIds(this QueryBuilder query) => query.Add("ids", "all");
 
-    public static void AddPage(this QueryBuilder query, int pageIndex, int? pageSize)
+    internal static void AddPage(this QueryBuilder query, int pageIndex, int? pageSize)
     {
         query.Add("page", pageIndex);
         if (pageSize.HasValue)
@@ -33,4 +35,7 @@ internal static class QueryBuilderExtensions
             query.Add("page_size", pageSize.Value);
         }
     }
+
+    internal static void Add(this QueryBuilder query, string key, int value) =>
+        query.Add(key, value.ToString(InvariantInfo));
 }

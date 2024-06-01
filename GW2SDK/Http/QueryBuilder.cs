@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Diagnostics;
-using static System.Globalization.NumberFormatInfo;
 using Argument = System.Collections.Generic.KeyValuePair<string, string>;
 
 namespace GuildWars2.Http;
@@ -27,22 +26,6 @@ public sealed class QueryBuilder : IEnumerable
         // Length of '?key=value' (or '&key=value')
         queryLength += key.Length + value.Length + 2;
     }
-
-    /// <summary>Adds an argument with the specified key and value to the <see cref="QueryBuilder" />.</summary>
-    /// <param name="key">The key of the argument.</param>
-    /// <param name="value">The value of the argument.</param>
-    public void Add(string key, int value) => Add(key, ToString(value));
-
-    /// <summary>Adds an argument with the specified key and values to the <see cref="QueryBuilder" />.</summary>
-    /// <param name="key">The key of the argument.</param>
-    /// <param name="values">The values of the argument.</param>
-    public void Add(string key, IEnumerable<string> values) =>
-        Add(key, values.Select(value => value).ToCsv());
-
-    /// <summary>Adds an argument with the specified key and values to the <see cref="QueryBuilder" />.</summary>
-    /// <param name="key">The key of the argument.</param>
-    /// <param name="values">The values of the argument.</param>
-    public void Add(string key, IEnumerable<int> values) => Add(key, ToString(values).ToCsv());
 
     /// <summary>Builds the query string from the arguments in the <see cref="QueryBuilder" />.</summary>
     /// <returns>The built query string.</returns>
@@ -96,10 +79,7 @@ public sealed class QueryBuilder : IEnumerable
 #endif
     }
 
-    private static string ToString(int value) => value.ToString(InvariantInfo);
-
-    private static IEnumerable<string> ToString(IEnumerable<int> values) => values.Select(ToString);
-
+   
     /// <inheritdoc />
     public override string ToString() => Build();
 }

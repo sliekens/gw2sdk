@@ -15,7 +15,7 @@ public class QueryBuilderTest
     }
 
     [Fact]
-    public void Value_type_can_be_string()
+    public void Build_query_with_one_key()
     {
         var sut = new QueryBuilder { { "key", "value" } };
 
@@ -25,17 +25,7 @@ public class QueryBuilderTest
     }
 
     [Fact]
-    public void Value_type_can_be_int()
-    {
-        var sut = new QueryBuilder { { "key", 42 } };
-
-        var actual = sut.Build();
-
-        Assert.Equal("?key=42", actual);
-    }
-
-    [Fact]
-    public void Multiple_arguments_are_delimited_by_ampersand()
+    public void Build_query_with_multiple_keys()
     {
         var sut = new QueryBuilder
         {
@@ -50,7 +40,7 @@ public class QueryBuilderTest
     }
 
     [Fact]
-    public void Keys_can_have_multiple_occurrences()
+    public void Build_query_with_repeating_keys()
     {
         var sut = new QueryBuilder
         {
@@ -62,45 +52,5 @@ public class QueryBuilderTest
         var actual = sut.Build();
 
         Assert.Equal("?key=first&key=second&key=third", actual);
-    }
-
-    [Fact]
-    public void String_collections_are_converted_to_csv()
-    {
-        var sut = new QueryBuilder
-        {
-            {
-                "key", new[]
-                {
-                    "first",
-                    "second",
-                    "third"
-                }
-            }
-        };
-
-        var actual = sut.Build();
-
-        Assert.Equal("?key=first,second,third", actual);
-    }
-
-    [Fact]
-    public void Int_collections_are_converted_to_csv()
-    {
-        var sut = new QueryBuilder
-        {
-            {
-                "key", new[]
-                {
-                    1,
-                    2,
-                    3
-                }
-            }
-        };
-
-        var actual = sut.Build();
-
-        Assert.Equal("?key=1,2,3", actual);
     }
 }
