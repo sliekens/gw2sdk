@@ -99,7 +99,7 @@ internal static class ContainerJson
                             && !detail.Value.ValueEquals("Default"))
                         {
                             throw new InvalidOperationException(
-                                Strings.UnexpectedDiscriminator(member.Value.GetString())
+                                Strings.UnexpectedDiscriminator(detail.Value.GetString())
                             );
                         }
                     }
