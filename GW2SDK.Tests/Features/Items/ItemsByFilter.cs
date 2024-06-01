@@ -15,7 +15,7 @@ public class ItemsByFilter
             56
         ];
 
-        var (actual, context) = await sut.Items.GetItemsByIds(null!);
+        var (actual, context) = await sut.Items.GetItemsByIds(ids);
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);
