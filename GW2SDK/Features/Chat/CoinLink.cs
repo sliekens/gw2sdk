@@ -30,7 +30,7 @@ public sealed record CoinLink : Link
         var buffer = new LinkBuffer(bytes);
         if (buffer.ReadUInt8() != LinkHeader.Coin)
         {
-            throw new ArgumentException("Expected a coin chat link.", nameof(chatLink));
+            ThrowHelper.ThrowBadArgument("Expected a coin chat link.", nameof(chatLink));
         }
 
         var coins = buffer.ReadInt32();

@@ -30,7 +30,7 @@ public sealed record RecipeLink : Link
         var buffer = new LinkBuffer(bytes);
         if (buffer.ReadUInt8() != LinkHeader.Recipe)
         {
-            throw new ArgumentException("Expected a recipe chat link.", nameof(chatLink));
+            ThrowHelper.ThrowBadArgument("Expected a recipe chat link.", nameof(chatLink));
         }
 
         var recipeId = buffer.ReadInt32();

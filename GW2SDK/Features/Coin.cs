@@ -51,9 +51,13 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
             return 1;
         }
 
-        return obj is Coin other
-            ? CompareTo(other)
-            : throw new ArgumentException($"Object must be of type {nameof(Coin)}", nameof(obj));
+        if (obj is not Coin other)
+        {
+            ThrowHelper.ThrowBadArgument($"Object must be of type {nameof(Coin)}", nameof(obj));
+            other = default;
+        }
+
+        return CompareTo(other);
     }
 
     /// <summary>Compares the current instance with another <see cref="Coin" /> value.</summary>

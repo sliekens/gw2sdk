@@ -45,25 +45,17 @@ public static class BulkQuery
         var keysList = keys.ToList();
         if (keysList.Count == 0)
         {
-            throw new ArgumentException("The keys collection cannot be empty.", nameof(keys));
+            ThrowHelper.ThrowBadArgument("The keys collection cannot be empty.", nameof(keys));
         }
 
         if (chunkSize is < 1 or > 200)
         {
-            throw new ArgumentOutOfRangeException(
-                nameof(chunkSize),
-                chunkSize,
-                "The chunk size must be a number between 1 and 200."
-            );
+            ThrowHelper.ThrowArgumentOutOfRange("The chunk size must be a number between 1 and 200.", chunkSize);
         }
 
         if (degreeOfParallelism < 1)
         {
-            throw new ArgumentOutOfRangeException(
-                nameof(degreeOfParallelism),
-                degreeOfParallelism,
-                "The degree of parallelism must be at least 1."
-            );
+            ThrowHelper.ThrowArgumentOutOfRange("The degree of parallelism must be at least 1.", degreeOfParallelism);
         }
 
         var resultCount = 0;

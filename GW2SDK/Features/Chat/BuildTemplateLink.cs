@@ -362,7 +362,7 @@ public sealed record BuildTemplateLink : Link
         var buffer = new LinkBuffer(bytes);
         if (buffer.ReadUInt8() != LinkHeader.BuildTemplate)
         {
-            throw new ArgumentException("Expected a build template chat link.", nameof(chatLink));
+            ThrowHelper.ThrowBadArgument("Expected a build template chat link.", nameof(chatLink));
         }
 
         var profession = buffer.ReadUInt8();

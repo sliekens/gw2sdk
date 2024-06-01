@@ -30,7 +30,7 @@ public sealed record AchievementLink : Link
         var buffer = new LinkBuffer(bytes);
         if (buffer.ReadUInt8() != LinkHeader.Achievement)
         {
-            throw new ArgumentException("Expected an achievement chat link.", nameof(chatLink));
+            ThrowHelper.ThrowBadArgument("Expected an achievement chat link.", nameof(chatLink));
         }
 
         var achievementId = buffer.ReadInt32();

@@ -7,8 +7,8 @@
 public sealed class LinkHeader(IEnumerable<LinkValue> links)
 {
     /// <summary>Gets the web links.</summary>
-    public IReadOnlyCollection<LinkValue> Links { get; } = links?.ToList().AsReadOnly()
-        ?? throw new ArgumentNullException(nameof(links));
+    public IReadOnlyCollection<LinkValue> Links { get; } =
+        Ensure.NotNull(links).ToList().AsReadOnly();
 
     /// <summary>Parses a Link header value.</summary>
     /// <param name="input">The Link header value to parse.</param>

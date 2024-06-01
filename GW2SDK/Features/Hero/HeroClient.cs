@@ -26,7 +26,8 @@ public sealed class HeroClient
     /// <param name="httpClient">The HTTP client used for making API requests.</param>
     public HeroClient(HttpClient httpClient)
     {
-        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        ThrowHelper.ThrowIfNull(httpClient);
+        this.httpClient = httpClient;
         this.httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 

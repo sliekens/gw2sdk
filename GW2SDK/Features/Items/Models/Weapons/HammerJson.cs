@@ -147,7 +147,7 @@ internal static class HammerJson
                             else if (JsonOptions.MissingMemberBehavior
                                 == MissingMemberBehavior.Error)
                             {
-                                ThrowHelper.UnexpectedMember(infix.Name);
+                                ThrowHelper.ThrowUnexpectedMember(infix.Name);
                             }
                         }
                     }
@@ -161,13 +161,13 @@ internal static class HammerJson
                     }
                     else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
                     {
-                        ThrowHelper.UnexpectedMember(detail.Name);
+                        ThrowHelper.ThrowUnexpectedMember(detail.Name);
                     }
                 }
             }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
-                ThrowHelper.UnexpectedMember(member.Name);
+                ThrowHelper.ThrowUnexpectedMember(member.Name);
             }
         }
 

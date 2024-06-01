@@ -27,7 +27,8 @@ public sealed class Gw2Client
     /// <param name="httpClient">The HTTP client used for making API requests.</param>
     public Gw2Client(HttpClient httpClient)
     {
-        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        ThrowHelper.ThrowIfNull(httpClient);
+        this.httpClient = httpClient;
         this.httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 

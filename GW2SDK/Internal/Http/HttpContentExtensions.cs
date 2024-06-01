@@ -10,7 +10,7 @@ internal static class HttpContentExtensions
         CancellationToken cancellationToken
     )
     {
-        if (instance == null) throw new ArgumentNullException(nameof(instance));
+        ThrowHelper.ThrowIfNull(instance);
         if (instance.Headers.ContentType?.MediaType != "application/json")
         {
             throw new JsonException($"Expected a JSON response (application/json) but received '{instance.Headers.ContentType}'.");

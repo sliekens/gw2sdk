@@ -30,7 +30,7 @@ public sealed record TranslationLink : Link
         var buffer = new LinkBuffer(bytes);
         if (buffer.ReadUInt8() != LinkHeader.Translation)
         {
-            throw new ArgumentException("Expected a translation chat link.", nameof(chatLink));
+            ThrowHelper.ThrowBadArgument("Expected a translation chat link.", nameof(chatLink));
         }
 
         var translationId = buffer.ReadInt32();

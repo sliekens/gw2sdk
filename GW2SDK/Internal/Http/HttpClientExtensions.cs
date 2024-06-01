@@ -37,23 +37,18 @@ internal static class HttpClientExtensions
                 }
             }
 
-#if NET
-            throw new BadResponseException(reason, null, response.StatusCode);
-#else
-            throw new BadResponseException(reason);
-#endif
+            ThrowHelper.ThrowBadResponse(reason, response.StatusCode);
         }
         catch (JsonException jsonException)
         {
-#if NET
-            throw new BadResponseException(
+            ThrowHelper.ThrowBadResponse(
                 "Failed to parse the response.",
                 jsonException,
                 response.StatusCode
             );
-#else
-            throw new BadResponseException("Failed to parse the response.", jsonException);
-#endif
         }
+
+        // Fix CS0161, a return is needed even though this code is unreachable
+        return default;
     }
 }

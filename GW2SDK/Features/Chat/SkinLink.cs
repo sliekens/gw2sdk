@@ -30,7 +30,7 @@ public sealed record SkinLink : Link
         var buffer = new LinkBuffer(bytes);
         if (buffer.ReadUInt8() != LinkHeader.Skin)
         {
-            throw new ArgumentException("Expected a skin chat link.", nameof(chatLink));
+            ThrowHelper.ThrowBadArgument("Expected a skin chat link.", nameof(chatLink));
         }
 
         var skinId = buffer.ReadInt32();

@@ -35,12 +35,12 @@ public sealed class Language
     {
         if (string.IsNullOrWhiteSpace(alpha2Code))
         {
-            throw new ArgumentException("Value cannot be null or whitespace.", nameof(alpha2Code));
+            ThrowHelper.ThrowBadArgument("Value cannot be null or whitespace.", nameof(alpha2Code));
         }
 
         if (!Alpha2Pattern.IsMatch(alpha2Code))
         {
-            throw new ArgumentException("Value must be a two-letter code.", nameof(alpha2Code));
+            ThrowHelper.ThrowBadArgument("Value must be a two-letter code.", nameof(alpha2Code));
         }
 
         Alpha2Code = alpha2Code.ToLowerInvariant();

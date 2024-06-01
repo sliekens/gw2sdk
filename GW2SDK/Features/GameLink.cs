@@ -82,7 +82,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable
     {
         if (disposed)
         {
-            throw new ObjectDisposedException(nameof(GameLink));
+            ThrowHelper.ThrowObjectDisposed(this);
         }
 
         // Ensure no duplicate subscriptions
@@ -114,7 +114,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable
     {
         if (disposed)
         {
-            throw new ObjectDisposedException(nameof(GameLink));
+            ThrowHelper.ThrowObjectDisposed(this);
         }
 
         return mumbleLink.GetValue<GameTick>();

@@ -95,7 +95,7 @@ public sealed class SchemaVersion
     {
         if (IsNullOrWhiteSpace(version))
         {
-            throw new ArgumentException("Value cannot be null or whitespace.", nameof(version));
+            ThrowHelper.ThrowBadArgument("Value cannot be null or whitespace.", nameof(version));
         }
 
         Version = version;

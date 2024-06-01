@@ -14,19 +14,19 @@ public abstract record Link
     {
         if (chatLink.IsEmpty || chatLink[0] != '[')
         {
-            throw new FormatException("Invalid chat link format. Expected '['.");
+            ThrowHelper.ThrowInvalidFormat("Invalid chat link format. Expected '['.");
         }
 
         chatLink = chatLink[1..];
         if (chatLink.IsEmpty || chatLink[0] != '&')
         {
-            throw new FormatException("Invalid chat link format. Expected '&'.");
+            ThrowHelper.ThrowInvalidFormat("Invalid chat link format. Expected '&'.");
         }
 
         chatLink = chatLink[1..];
         if (chatLink.IsEmpty || chatLink[^1] != ']')
         {
-            throw new FormatException("Invalid chat link format. Expected ']'.");
+            ThrowHelper.ThrowInvalidFormat("Invalid chat link format. Expected ']'.");
         }
 
         chatLink = chatLink[..^1];

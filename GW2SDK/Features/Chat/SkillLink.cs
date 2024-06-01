@@ -30,7 +30,7 @@ public sealed record SkillLink : Link
         var buffer = new LinkBuffer(bytes);
         if (buffer.ReadUInt8() != LinkHeader.Skill)
         {
-            throw new ArgumentException("Expected a skill chat link.", nameof(chatLink));
+            ThrowHelper.ThrowBadArgument("Expected a skill chat link.", nameof(chatLink));
         }
 
         var skillId = buffer.ReadInt32();

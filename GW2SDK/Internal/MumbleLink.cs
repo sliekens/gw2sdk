@@ -69,7 +69,7 @@ internal sealed class MumbleLink : IDisposable
     {
         if (disposed)
         {
-            throw new ObjectDisposedException(nameof(MumbleLink));
+            ThrowHelper.ThrowObjectDisposed(this);
         }
 
         var success = false;

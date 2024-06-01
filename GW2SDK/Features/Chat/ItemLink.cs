@@ -77,7 +77,7 @@ public sealed record ItemLink : Link
         var buffer = new LinkBuffer(bytes);
         if (buffer.ReadUInt8() != LinkHeader.Item)
         {
-            throw new ArgumentException("Expected an item chat link.", nameof(chatLink));
+            ThrowHelper.ThrowBadArgument("Expected an item chat link.", nameof(chatLink));
         }
 
         var count = buffer.ReadUInt8();

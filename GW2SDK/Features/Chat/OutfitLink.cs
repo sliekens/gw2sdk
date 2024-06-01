@@ -30,7 +30,7 @@ public sealed record OutfitLink : Link
         var buffer = new LinkBuffer(bytes);
         if (buffer.ReadUInt8() != LinkHeader.Outfit)
         {
-            throw new ArgumentException("Expected an outfit chat link.", nameof(chatLink));
+            ThrowHelper.ThrowBadArgument("Expected an outfit chat link.", nameof(chatLink));
         }
 
         var outfitId = buffer.ReadInt32();

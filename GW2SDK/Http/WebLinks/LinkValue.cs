@@ -12,12 +12,12 @@ public sealed class LinkValue
     {
         if (string.IsNullOrWhiteSpace(target))
         {
-            throw new ArgumentException("Value cannot be null or whitespace.", nameof(target));
+            ThrowHelper.ThrowBadArgument("Value cannot be null or whitespace.", nameof(target));
         }
 
         if (string.IsNullOrWhiteSpace(relationType))
         {
-            throw new ArgumentException(
+            ThrowHelper.ThrowBadArgument(
                 "Value cannot be null or whitespace.",
                 nameof(relationType)
             );

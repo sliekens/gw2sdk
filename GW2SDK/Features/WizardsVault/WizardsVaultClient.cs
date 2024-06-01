@@ -16,7 +16,8 @@ public sealed class WizardsVaultClient
     /// <param name="httpClient">The HTTP client used for making API requests.</param>
     public WizardsVaultClient(HttpClient httpClient)
     {
-        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        ThrowHelper.ThrowIfNull(httpClient);
+        this.httpClient = httpClient;
         httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 

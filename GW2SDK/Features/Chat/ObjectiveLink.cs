@@ -36,7 +36,7 @@ public sealed record ObjectiveLink : Link
         var buffer = new LinkBuffer(bytes);
         if (buffer.ReadUInt8() != LinkHeader.WvWObjective)
         {
-            throw new ArgumentException("Expected a WvW objective chat link.", nameof(chatLink));
+            ThrowHelper.ThrowBadArgument("Expected a WvW objective chat link.", nameof(chatLink));
         }
 
         var objectiveId = buffer.ReadUInt24();

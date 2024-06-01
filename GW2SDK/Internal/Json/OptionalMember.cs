@@ -40,14 +40,10 @@ internal readonly ref struct OptionalMember
         }
         catch (Exception reason)
         {
-            throw new InvalidOperationException($"Value for '{Name}' is incompatible.", reason)
-            {
-                Data =
-                {
-                    ["ValueKind"] = member.Value.ValueKind.ToString(),
-                    ["Value"] = member.Value.GetRawText()
-                }
-            };
+            JsonThrowHelper.ThrowIncompatibleValue(Name, reason, member);
         }
+
+        // Fix CS0161, a return is needed even though this code is unreachable
+        return default;
     }
 }
