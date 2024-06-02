@@ -1,13 +1,14 @@
 ﻿using System.Runtime.Versioning;
 using GuildWars2.Hero.Equipment.Mounts;
 using GuildWars2.Mumble;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Mumble;
 
+[SupportedOSPlatform("windows")]
 public class GameLinkTest
 {
-    [MumbleLinkFact]
-    [SupportedOSPlatform("windows")]
+    [OSPlatformFact("windows")]
     public void Name_can_be_read_from_Mumble_link()
     {
         using var sut = GameLink.Open();
@@ -17,8 +18,7 @@ public class GameLinkTest
         Assert.Equal("Guild Wars 2", actual.Name);
     }
 
-    [MumbleLinkFact]
-    [SupportedOSPlatform("windows")]
+    [OSPlatformFact("windows")]
     public async Task The_link_is_self_updating()
     {
         using var sut = GameLink.Open();
@@ -45,8 +45,7 @@ public class GameLinkTest
         Assert.True(actual.Last.UiTick > actual.First.UiTick, "GameLink should be self-updating");
     }
 
-    [MumbleLinkFact]
-    [SupportedOSPlatform("windows")]
+    [OSPlatformFact("windows")]
     public void The_link_provides_context()
     {
         using var sut = GameLink.Open();
@@ -66,8 +65,7 @@ public class GameLinkTest
         Assert.Equal(0, server.Port);
     }
 
-    [MumbleLinkFact]
-    [SupportedOSPlatform("windows")]
+    [OSPlatformFact("windows")]
     public void The_link_provides_identity()
     {
         using var sut = GameLink.Open();
