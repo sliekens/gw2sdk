@@ -6,7 +6,8 @@ public sealed class OSPlatformFactAttribute : FactAttribute
 {
     public OSPlatformFactAttribute(string platformName)
     {
-        if (!RuntimeInformation.IsOSPlatform(OSPlatform.Create(platformName)))
+        var platform = OSPlatform.Create(platformName.ToUpperInvariant());
+        if (!RuntimeInformation.IsOSPlatform(platform))
         {
             Skip = $"Test requires {platformName}";
         }
