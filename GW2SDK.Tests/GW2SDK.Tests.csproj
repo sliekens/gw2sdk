@@ -51,4 +51,11 @@
     </None>
   </ItemGroup>
 
+  <!-- Reference assemblies that are not included by default in .NET Framework -->
+  <ItemGroup Condition="'$(TargetFramework)' == 'net481'">
+    <Reference Include="System.Web" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Features\Items\MissingMembers\" />
+  </ItemGroup>
 </Project>

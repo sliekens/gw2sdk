@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Tests.TestInfrastructure;
 
-public static class FlatFileReader
+public static class JsonLinesReader
 {
     public static IEnumerable<string> Read(string path)
     {
@@ -19,7 +19,7 @@ public static class FlatFileReader
             : File.Open(path, FileMode.Open, FileAccess.Read, FileShare.None);
 
         using var stringReader = new StreamReader(file);
-        while (stringReader.ReadLine() is { } line)
+        while (stringReader.ReadLine() is { Length: > 0 } line)
         {
             yield return line;
         }
