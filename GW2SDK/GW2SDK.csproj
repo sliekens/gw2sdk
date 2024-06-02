@@ -16,12 +16,6 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
-  <!-- Polyfills -->
-  <PropertyGroup>
-    <!-- Add support for OSPlatform attributes (net5.0+) -->
-    <PolySharpIncludeRuntimeSupportedAttributes>true</PolySharpIncludeRuntimeSupportedAttributes>
-  </PropertyGroup>
-
   <!-- NuGet properties -->
   <PropertyGroup>
     <PackageId>GW2SDK</PackageId>
@@ -82,10 +76,6 @@
     <PackageReference Include="System.Runtime.InteropServices.RuntimeInformation" />
   </ItemGroup>
 
-  <ItemGroup>
-    <InternalsVisibleTo Include="$(AssemblyName).Tests" />
-  </ItemGroup>
-  
   <Target Name="LinkPackageReleaseNotes" AfterTargets="MinVer">
     <PropertyGroup>
       <PackageReleaseNotes>https://github.com/sliekens/gw2sdk/releases/tag/$(MinVerTagPrefix)$(Version)</PackageReleaseNotes>

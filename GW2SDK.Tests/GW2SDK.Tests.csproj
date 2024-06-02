@@ -23,6 +23,10 @@
     <PackageReference Include="Microsoft.Extensions.Http" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="Polly.Core" />
+    <PackageReference Include="PolySharp">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="System.Interactive" />
     <PackageReference Include="System.Linq.Async" />
     <PackageReference Include="xunit" />

@@ -15,4 +15,10 @@
   <ItemGroup>
     <SourceRoot Include="$(MSBuildThisFileDirectory)/" />
   </ItemGroup>
+
+  <!-- Polyfills -->
+  <PropertyGroup>
+    <!-- Add support for OSPlatform attributes (net5.0+) -->
+    <PolySharpIncludeRuntimeSupportedAttributes>true</PolySharpIncludeRuntimeSupportedAttributes>
+  </PropertyGroup>
 </Project>
