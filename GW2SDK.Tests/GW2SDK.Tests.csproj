@@ -59,7 +59,4 @@
   <ItemGroup Condition="'$(TargetFramework)' == 'net481'">
     <Reference Include="System.Web" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Features\Items\MissingMembers\" />
-  </ItemGroup>
 </Project>
