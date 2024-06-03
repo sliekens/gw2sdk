@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Chat;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Crafting.Recipes;
 
@@ -36,6 +37,9 @@ public class Recipes
             var chatLink = actual.GetChatLink();
             Assert.Equal(actual.Id, chatLink.RecipeId);
             Assert.Equal(actual.ChatLink, chatLink.ToString());
+
+            var chatLinkRoundtrip = RecipeLink.Parse(chatLink.ToString());
+            Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
         }
     }
 }

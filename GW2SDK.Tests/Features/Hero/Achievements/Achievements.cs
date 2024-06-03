@@ -1,4 +1,5 @@
-﻿using GuildWars2.Hero.Achievements;
+﻿using GuildWars2.Chat;
+using GuildWars2.Hero.Achievements;
 using GuildWars2.Hero.Achievements.Rewards;
 using GuildWars2.Tests.TestInfrastructure;
 
@@ -66,6 +67,9 @@ public class Achievements
 
             var chatLink = actual.GetChatLink();
             Assert.Equal(actual.Id, chatLink.AchievementId);
+
+            var chatLinkRoundtrip = AchievementLink.Parse(chatLink.ToString());
+            Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using GuildWars2.Chat;
 using GuildWars2.Exploration.PointsOfInterest;
 using GuildWars2.Tests.TestInfrastructure;
 
@@ -61,6 +62,9 @@ public class Floors
                             var chatLink = poi.GetChatLink();
                             Assert.Equal(poiId, chatLink.PointOfInterestId);
                             Assert.Equal(poi.ChatLink, chatLink.ToString());
+
+                            var chatLinkRoundtrip = PointOfInterestLink.Parse(chatLink.ToString());
+                            Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
                         }
 
                         foreach (var (heartId, heart) in map.Hearts)

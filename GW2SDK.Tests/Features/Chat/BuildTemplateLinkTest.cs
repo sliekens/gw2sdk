@@ -42,5 +42,8 @@ public class BuildTemplateLinkTest
         Assert.Equal(professionName, build.Profession);
         Assert.Equal(professionName, sut.Profession);
         Assert.Equal(chatLink, actual);
+
+        var chatLinkRoundtrip = BuildTemplateLink.Parse(sut.ToString());
+        Assert.Equal(chatLink, chatLinkRoundtrip.ToString());
     }
 }

@@ -1,4 +1,5 @@
-﻿using GuildWars2.Items;
+﻿using GuildWars2.Chat;
+using GuildWars2.Items;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Items;
@@ -16,8 +17,6 @@ public class Items
         await foreach (var (actual, context) in sut.Items.GetItemsBulk())
         {
             Assert.NotNull(context);
-            var chatLink = actual.GetChatLink();
-            Assert.Equal(actual.ChatLink, chatLink.ToString());
 
             Assert.True(actual.Id >= 1);
             Assert.True(actual.Rarity.IsDefined());
@@ -45,8 +44,6 @@ public class Items
                         case RecipeSheet recipe:
                             Assert.True(recipe.Id > 0);
                             Assert.NotNull(recipe.ExtraRecipeIds);
-                            var recipeLink = recipe.GetRecipeChatLink();
-                            Assert.Equal(recipe.RecipeId, recipeLink.RecipeId);
                             foreach (var (extraRecipeId, extraRecipeLink) in
                                 recipe.ExtraRecipeIds.Zip(
                                     recipe.GetExtraRecipeChatLinks(),
@@ -56,6 +53,12 @@ public class Items
                             {
                                 Assert.Equal(extraRecipeId, extraRecipeLink.RecipeId);
                             }
+
+                            var recipeLink = recipe.GetRecipeChatLink();
+                            Assert.Equal(recipe.RecipeId, recipeLink.RecipeId);
+
+                            var recipeLinkRoundtrip = RecipeLink.Parse(recipeLink.ToString());
+                            Assert.Equal(recipeLink.ToString(), recipeLinkRoundtrip.ToString());
 
                             break;
                     }
@@ -214,6 +217,13 @@ public class Items
                     );
                     break;
             }
+
+            var chatLink = actual.GetChatLink();
+            Assert.Equal(actual.ChatLink, chatLink.ToString());
+            Assert.Equal(actual.Id, chatLink.ItemId);
+
+            var chatLinkRoundtrip = ItemLink.Parse(chatLink.ToString());
+            Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
         }
     }
 }

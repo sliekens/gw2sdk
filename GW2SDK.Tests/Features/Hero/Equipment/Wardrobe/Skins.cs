@@ -1,4 +1,5 @@
-﻿using GuildWars2.Hero.Equipment.Wardrobe;
+﻿using GuildWars2.Chat;
+using GuildWars2.Hero.Equipment.Wardrobe;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Wardrobe;
@@ -16,12 +17,9 @@ public class Skins
         await foreach (var (actual, context) in sut.Hero.Equipment.Wardrobe.GetSkinsBulk())
         {
             Assert.NotNull(context);
-            var link = actual.GetChatLink();
-
             Assert.True(actual.Id > 0);
             Assert.NotEmpty(actual.Races);
             Assert.All(actual.Races, race => Assert.True(race.IsDefined()));
-            Assert.Equal(actual.Id, link.SkinId);
             Assert.True(actual.Rarity.IsDefined());
 
             if (actual is ArmorSkin armor)
@@ -153,6 +151,12 @@ public class Skins
             {
                 Assert.True(weapon.DamageType.IsDefined());
             }
+
+            var chatLink = actual.GetChatLink();
+            Assert.Equal(actual.Id, chatLink.SkinId);
+
+            var chatLinkRoundtrip = SkinLink.Parse(chatLink.ToString());
+            Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
         }
     }
 }

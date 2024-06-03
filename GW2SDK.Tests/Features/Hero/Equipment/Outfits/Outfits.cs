@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Chat;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Outfits;
 
@@ -25,6 +26,9 @@ public class Outfits
 
                 var chatLink = entry.GetChatLink();
                 Assert.Equal(entry.Id, chatLink.OutfitId);
+
+                var chatLinkRoundtrip = OutfitLink.Parse(chatLink.ToString());
+                Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
             }
         );
     }

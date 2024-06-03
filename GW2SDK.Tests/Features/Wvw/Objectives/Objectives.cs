@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Chat;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Wvw.Objectives;
 
@@ -29,6 +30,9 @@ public class Objectives
                 Assert.Equal(entry.ChatLink, chatLink.ToString());
                 Assert.Equal(entry.MapId, chatLink.MapId);
                 Assert.Equal(entry.Id, $"{chatLink.MapId}-{chatLink.ObjectiveId}");
+
+                var chatLinkRoundtrip = ObjectiveLink.Parse(chatLink.ToString());
+                Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
             }
         );
     }

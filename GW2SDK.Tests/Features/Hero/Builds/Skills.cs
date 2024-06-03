@@ -1,4 +1,5 @@
-﻿using GuildWars2.Hero;
+﻿using GuildWars2.Chat;
+using GuildWars2.Hero;
 using GuildWars2.Hero.Builds;
 using GuildWars2.Hero.Builds.Facts;
 using GuildWars2.Hero.Builds.Skills;
@@ -25,9 +26,6 @@ public class Skills
             {
                 Assert.True(skill.Id > 0);
                 Assert.Empty(skill.SkillFlags.Other);
-
-                var chatLink = skill.GetChatLink();
-                Assert.Equal(skill.Id, chatLink.SkillId);
 
                 if (skill is ActionSkill action)
                 {
@@ -392,6 +390,13 @@ public class Skills
                         }
                     );
                 }
+
+                var chatLink = skill.GetChatLink();
+                Assert.Equal(skill.Id, chatLink.SkillId);
+                Assert.Equal(skill.ChatLink, chatLink.ToString());
+
+                var chatLinkRoundtrip = SkillLink.Parse(chatLink.ToString());
+                Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
             }
         );
     }
