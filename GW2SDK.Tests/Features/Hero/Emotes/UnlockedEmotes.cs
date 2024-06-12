@@ -20,14 +20,19 @@ public class UnlockedEmotes
                 chest,
                 new[]
                 {
-                    "Shiverplus",
-                    "Stretch",
+                    "Bless",
                     "geargrind",
+                    "Heroic",
+                    "Paper",
                     "playdead",
+                    "Rock",
                     "rockout",
+                    "Scissors",
                     "shiver",
+                    "Shiverplus",
                     "shuffle",
-                    "step"
+                    "step",
+                    "Stretch"
                 }
             )
         );
