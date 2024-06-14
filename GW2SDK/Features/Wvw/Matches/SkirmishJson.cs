@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Matches;
@@ -9,7 +9,7 @@ internal static class SkirmishJson
     {
         RequiredMember id = "id";
         RequiredMember scores = "scores";
-        RequiredMember mapScores = "map_scores";
+        OptionalMember mapScores = "map_scores";
 
         foreach (var member in json.EnumerateObject())
         {
@@ -36,8 +36,9 @@ internal static class SkirmishJson
             Id = id.Map(static value => value.GetInt32()),
             Scores = scores.Map(static value => value.GetDistribution()),
             MapScores = mapScores.Map(
-                static values => values.GetList(static value => value.GetMapScores())
-            )
+                    static values => values.GetList(static value => value.GetMapScores())
+                )
+                ?? []
         };
     }
 }
