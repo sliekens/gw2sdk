@@ -36,7 +36,6 @@ public sealed class WizardsVaultClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/wizardsvault");
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -65,7 +64,6 @@ public sealed class WizardsVaultClient
         )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/wizardsvault/listings", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -94,7 +92,6 @@ public sealed class WizardsVaultClient
         )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/wizardsvault/daily", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -123,7 +120,6 @@ public sealed class WizardsVaultClient
         )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/wizardsvault/weekly", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -152,7 +148,6 @@ public sealed class WizardsVaultClient
         )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/wizardsvault/special", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -181,7 +176,6 @@ public sealed class WizardsVaultClient
         var requestBuilder = RequestBuilder.HttpGet("v2/wizardsvault/listings");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -200,7 +194,6 @@ public sealed class WizardsVaultClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/wizardsvault/listings");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -226,7 +219,6 @@ public sealed class WizardsVaultClient
         var requestBuilder = RequestBuilder.HttpGet("v2/wizardsvault/listings");
         requestBuilder.Query.AddId(astralRewardId);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -253,7 +245,6 @@ public sealed class WizardsVaultClient
         var requestBuilder = RequestBuilder.HttpGet("v2/wizardsvault/listings");
         requestBuilder.Query.AddIds(astralRewardIds);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -282,7 +273,6 @@ public sealed class WizardsVaultClient
         var requestBuilder = RequestBuilder.HttpGet("v2/wizardsvault/listings");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -311,7 +301,6 @@ public sealed class WizardsVaultClient
         var requestBuilder = RequestBuilder.HttpGet("v2/wizardsvault/objectives");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -330,7 +319,6 @@ public sealed class WizardsVaultClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/wizardsvault/objectives");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -356,7 +344,6 @@ public sealed class WizardsVaultClient
         var requestBuilder = RequestBuilder.HttpGet("v2/wizardsvault/objectives");
         requestBuilder.Query.AddId(objectiveId);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -383,7 +370,6 @@ public sealed class WizardsVaultClient
         var requestBuilder = RequestBuilder.HttpGet("v2/wizardsvault/objectives");
         requestBuilder.Query.AddIds(objectiveIds);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -412,7 +398,6 @@ public sealed class WizardsVaultClient
         var requestBuilder = RequestBuilder.HttpGet("v2/wizardsvault/objectives");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)

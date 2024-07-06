@@ -32,7 +32,6 @@ public sealed class InventoryClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/inventory", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -61,7 +60,6 @@ public sealed class InventoryClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet($"v2/characters/{characterName}/inventory", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)

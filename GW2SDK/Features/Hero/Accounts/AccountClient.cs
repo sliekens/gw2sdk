@@ -33,7 +33,6 @@ public sealed class AccountClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
@@ -62,7 +61,6 @@ public sealed class AccountClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/progression", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
@@ -91,7 +89,6 @@ public sealed class AccountClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/luck", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
@@ -125,7 +122,6 @@ public sealed class AccountClient
             $"v2/characters/{characterName}/core",
             accessToken
         );
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
@@ -152,7 +148,6 @@ public sealed class AccountClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/characters", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
@@ -179,7 +174,6 @@ public sealed class AccountClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/characters", accessToken);
         requestBuilder.Query.AddId(characterName);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
@@ -207,7 +201,6 @@ public sealed class AccountClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/characters", accessToken);
         requestBuilder.Query.AddIds(characterNames);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
@@ -233,7 +226,6 @@ public sealed class AccountClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/characters", accessToken);
         requestBuilder.Query.AddAllIds();
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);

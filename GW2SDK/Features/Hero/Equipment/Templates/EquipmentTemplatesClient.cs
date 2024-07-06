@@ -35,7 +35,6 @@ public sealed class EquipmentTemplatesClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet($"v2/characters/{characterName}/equipment", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -65,7 +64,6 @@ public sealed class EquipmentTemplatesClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/legendaryarmory", accessToken);
         requestBuilder.Query.AddAllIds();
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -95,7 +93,6 @@ public sealed class EquipmentTemplatesClient
         )
     {
         var requestBuilder = RequestBuilder.HttpGet($"v2/characters/{characterName}/equipmenttabs", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -122,7 +119,6 @@ public sealed class EquipmentTemplatesClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet($"v2/characters/{characterName}/equipmenttabs/{templateNumber}", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -151,7 +147,6 @@ public sealed class EquipmentTemplatesClient
         // There is no ids=all support, but page=0 works
         var requestBuilder = RequestBuilder.HttpGet($"v2/characters/{characterName}/equipmenttabs", accessToken);
         requestBuilder.Query.AddPage(0, null);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -178,7 +173,6 @@ public sealed class EquipmentTemplatesClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet($"v2/characters/{characterName}/equipmenttabs/active", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -204,7 +198,6 @@ public sealed class EquipmentTemplatesClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/legendaryarmory");
         requestBuilder.Query.AddAllIds();
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -223,7 +216,6 @@ public sealed class EquipmentTemplatesClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/legendaryarmory");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -246,7 +238,6 @@ public sealed class EquipmentTemplatesClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/legendaryarmory");
         requestBuilder.Query.AddId(legendaryItemId);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -272,7 +263,6 @@ public sealed class EquipmentTemplatesClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/legendaryarmory");
         requestBuilder.Query.AddIds(legendaryItemIds);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -299,7 +289,6 @@ public sealed class EquipmentTemplatesClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/legendaryarmory");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)

@@ -36,7 +36,6 @@ public sealed class SuperAdventureBoxClient
         )
     {
         var requestBuilder = RequestBuilder.HttpGet($"v2/characters/{characterName}/sab", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)

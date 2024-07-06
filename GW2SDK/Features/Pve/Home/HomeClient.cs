@@ -33,7 +33,6 @@ public sealed class HomeClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/home/cats", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -58,7 +57,6 @@ public sealed class HomeClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/home/nodes", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -83,7 +81,6 @@ public sealed class HomeClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/home/cats");
         requestBuilder.Query.AddAllIds();
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -102,7 +99,6 @@ public sealed class HomeClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/home/cats");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -125,7 +121,6 @@ public sealed class HomeClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/home/cats");
         requestBuilder.Query.AddId(catId);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -149,7 +144,6 @@ public sealed class HomeClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/home/cats");
         requestBuilder.Query.AddIds(catIds);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -175,7 +169,6 @@ public sealed class HomeClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/home/cats");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -201,7 +194,6 @@ public sealed class HomeClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/home/nodes");
         requestBuilder.Query.AddAllIds();
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -220,7 +212,6 @@ public sealed class HomeClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/home/nodes");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -243,7 +234,6 @@ public sealed class HomeClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/home/nodes");
         requestBuilder.Query.AddId(nodeId);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -267,7 +257,6 @@ public sealed class HomeClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/home/nodes");
         requestBuilder.Query.AddIds(nodeIds);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -293,7 +282,6 @@ public sealed class HomeClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/home/nodes");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)

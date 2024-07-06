@@ -30,7 +30,6 @@ public sealed class ItemsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/items");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -56,7 +55,6 @@ public sealed class ItemsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/items");
         requestBuilder.Query.AddId(itemId);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -84,7 +82,6 @@ public sealed class ItemsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/items");
         requestBuilder.Query.AddIds(itemIds);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -113,7 +110,6 @@ public sealed class ItemsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/items");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -214,7 +210,6 @@ public sealed class ItemsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/itemstats");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -239,7 +234,6 @@ public sealed class ItemsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/itemstats");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -267,7 +261,6 @@ public sealed class ItemsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/itemstats");
         requestBuilder.Query.AddId(attributeCombinationId);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -295,7 +288,6 @@ public sealed class ItemsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/itemstats");
         requestBuilder.Query.AddIds(attributeCombinationIds);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -325,7 +317,6 @@ public sealed class ItemsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/itemstats");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)

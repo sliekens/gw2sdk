@@ -31,7 +31,6 @@ public sealed class DungeonsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/dungeons", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -53,7 +52,6 @@ public sealed class DungeonsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/dungeons");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -76,7 +74,6 @@ public sealed class DungeonsClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/dungeons");
         requestBuilder.Query.AddId(dungeonId);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -100,7 +97,6 @@ public sealed class DungeonsClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/dungeons");
         requestBuilder.Query.AddIds(dungeonIds);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -126,7 +122,6 @@ public sealed class DungeonsClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/dungeons");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -148,7 +143,6 @@ public sealed class DungeonsClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/dungeons");
         requestBuilder.Query.AddAllIds();
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)

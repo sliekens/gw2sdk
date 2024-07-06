@@ -38,7 +38,6 @@ public sealed class StoryJournalClient
         )
     {
         var requestBuilder = RequestBuilder.HttpGet($"v2/characters/{characterName}/backstory", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -66,7 +65,6 @@ public sealed class StoryJournalClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet($"v2/characters/{characterName}/quests", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -95,7 +93,6 @@ public sealed class StoryJournalClient
         var requestBuilder = RequestBuilder.HttpGet("v2/backstory/questions");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -113,7 +110,6 @@ public sealed class StoryJournalClient
         GetBackgroundStoryQuestionsIndex(CancellationToken cancellationToken = default)
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/backstory/questions");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -140,7 +136,6 @@ public sealed class StoryJournalClient
         var requestBuilder = RequestBuilder.HttpGet("v2/backstory/questions");
         requestBuilder.Query.AddId(questionId);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -168,7 +163,6 @@ public sealed class StoryJournalClient
         var requestBuilder = RequestBuilder.HttpGet("v2/backstory/questions");
         requestBuilder.Query.AddIds(questionIds);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -198,7 +192,6 @@ public sealed class StoryJournalClient
         var requestBuilder = RequestBuilder.HttpGet("v2/backstory/questions");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -228,7 +221,6 @@ public sealed class StoryJournalClient
         var requestBuilder = RequestBuilder.HttpGet("v2/backstory/answers");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -246,7 +238,6 @@ public sealed class StoryJournalClient
         GetBackgroundStoryAnswersIndex(CancellationToken cancellationToken = default)
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/backstory/answers");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -273,7 +264,6 @@ public sealed class StoryJournalClient
         var requestBuilder = RequestBuilder.HttpGet("v2/backstory/answers");
         requestBuilder.Query.AddId(answerId);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -301,7 +291,6 @@ public sealed class StoryJournalClient
         var requestBuilder = RequestBuilder.HttpGet("v2/backstory/answers");
         requestBuilder.Query.AddIds(answerIds);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -331,7 +320,6 @@ public sealed class StoryJournalClient
         var requestBuilder = RequestBuilder.HttpGet("v2/backstory/answers");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -360,7 +348,6 @@ public sealed class StoryJournalClient
         var requestBuilder = RequestBuilder.HttpGet("v2/stories");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -379,7 +366,6 @@ public sealed class StoryJournalClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/stories");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -405,7 +391,6 @@ public sealed class StoryJournalClient
         var requestBuilder = RequestBuilder.HttpGet("v2/stories");
         requestBuilder.Query.AddId(storyId);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -432,7 +417,6 @@ public sealed class StoryJournalClient
         var requestBuilder = RequestBuilder.HttpGet("v2/stories");
         requestBuilder.Query.AddIds(storyIds);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -461,7 +445,6 @@ public sealed class StoryJournalClient
         var requestBuilder = RequestBuilder.HttpGet("v2/stories");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -490,7 +473,6 @@ public sealed class StoryJournalClient
         var requestBuilder = RequestBuilder.HttpGet("v2/stories/seasons");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -509,7 +491,6 @@ public sealed class StoryJournalClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/stories/seasons");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -535,7 +516,6 @@ public sealed class StoryJournalClient
         var requestBuilder = RequestBuilder.HttpGet("v2/stories/seasons");
         requestBuilder.Query.AddId(storylineId);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -562,7 +542,6 @@ public sealed class StoryJournalClient
         var requestBuilder = RequestBuilder.HttpGet("v2/stories/seasons");
         requestBuilder.Query.AddIds(storylineIds);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -591,7 +570,6 @@ public sealed class StoryJournalClient
         var requestBuilder = RequestBuilder.HttpGet("v2/stories/seasons");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -620,7 +598,6 @@ public sealed class StoryJournalClient
         var requestBuilder = RequestBuilder.HttpGet("v2/quests");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -639,7 +616,6 @@ public sealed class StoryJournalClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/quests");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -665,7 +641,6 @@ public sealed class StoryJournalClient
         var requestBuilder = RequestBuilder.HttpGet("v2/quests");
         requestBuilder.Query.AddId(storyStepId);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -692,7 +667,6 @@ public sealed class StoryJournalClient
         var requestBuilder = RequestBuilder.HttpGet("v2/quests");
         requestBuilder.Query.AddIds(storyStepIds);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -721,7 +695,6 @@ public sealed class StoryJournalClient
         var requestBuilder = RequestBuilder.HttpGet("v2/quests");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)

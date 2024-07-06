@@ -31,7 +31,6 @@ public sealed class MiniaturesClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/minis", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -59,7 +58,6 @@ public sealed class MiniaturesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/minis");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -78,7 +76,6 @@ public sealed class MiniaturesClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/minis");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -104,7 +101,6 @@ public sealed class MiniaturesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/minis");
         requestBuilder.Query.AddId(miniatureId);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -131,7 +127,6 @@ public sealed class MiniaturesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/minis");
         requestBuilder.Query.AddIds(miniatureIds);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -160,7 +155,6 @@ public sealed class MiniaturesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/minis");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)

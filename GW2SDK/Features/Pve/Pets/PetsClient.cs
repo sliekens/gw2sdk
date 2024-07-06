@@ -32,7 +32,6 @@ public sealed class PetsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/pets");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -51,7 +50,6 @@ public sealed class PetsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/pets");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -77,7 +75,6 @@ public sealed class PetsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/pets");
         requestBuilder.Query.AddId(petId);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -104,7 +101,6 @@ public sealed class PetsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/pets");
         requestBuilder.Query.AddIds(petIds);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -133,7 +129,6 @@ public sealed class PetsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/pets");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)

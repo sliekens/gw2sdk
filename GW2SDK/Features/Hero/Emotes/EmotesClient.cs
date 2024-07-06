@@ -31,7 +31,6 @@ public sealed class EmotesClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/emotes", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -56,7 +55,6 @@ public sealed class EmotesClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/emotes");
         requestBuilder.Query.AddAllIds();
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -75,7 +73,6 @@ public sealed class EmotesClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/emotes");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -98,7 +95,6 @@ public sealed class EmotesClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/emotes");
         requestBuilder.Query.AddId(emoteId);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -122,7 +118,6 @@ public sealed class EmotesClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/emotes");
         requestBuilder.Query.AddIds(emoteIds);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -148,7 +143,6 @@ public sealed class EmotesClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/emotes");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)

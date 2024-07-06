@@ -29,7 +29,6 @@ public sealed class MountsClient
         GetUnlockedMounts(string? accessToken, CancellationToken cancellationToken = default)
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/mounts/types", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
@@ -51,7 +50,6 @@ public sealed class MountsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/mounts/skins", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
@@ -80,7 +78,6 @@ public sealed class MountsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/mounts/types");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
@@ -100,7 +97,6 @@ public sealed class MountsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/mounts/types");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
@@ -127,7 +123,6 @@ public sealed class MountsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/mounts/types");
         requestBuilder.Query.AddId(MountNameFormatter.FormatMountName(mountName.ToString()));
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
@@ -174,7 +169,6 @@ public sealed class MountsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/mounts/types");
         requestBuilder.Query.AddIds(mountNames.Select(MountNameFormatter.FormatMountName));
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
@@ -204,7 +198,6 @@ public sealed class MountsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/mounts/types");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
@@ -234,7 +227,6 @@ public sealed class MountsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/mounts/skins");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
@@ -254,7 +246,6 @@ public sealed class MountsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/mounts/skins");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
@@ -281,7 +272,6 @@ public sealed class MountsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/mounts/skins");
         requestBuilder.Query.AddId(mountSkinId);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
@@ -309,7 +299,6 @@ public sealed class MountsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/mounts/skins");
         requestBuilder.Query.AddIds(mountSkinIds);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
@@ -339,7 +328,6 @@ public sealed class MountsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/mounts/skins");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);

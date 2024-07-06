@@ -37,7 +37,6 @@ public sealed class TrainingClient
             $"v2/characters/{characterName}/training",
             accessToken
         );
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
@@ -67,7 +66,6 @@ public sealed class TrainingClient
         var requestBuilder = RequestBuilder.HttpGet("v2/professions");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
@@ -86,7 +84,6 @@ public sealed class TrainingClient
         GetProfessionNames(CancellationToken cancellationToken = default)
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/professions");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
@@ -114,7 +111,6 @@ public sealed class TrainingClient
         var requestBuilder = RequestBuilder.HttpGet("v2/professions");
         requestBuilder.Query.AddId(professionName.ToString());
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
@@ -161,7 +157,6 @@ public sealed class TrainingClient
         var requestBuilder = RequestBuilder.HttpGet("v2/professions");
         requestBuilder.Query.AddIds(professionNames.Select(value => value.ToString()));
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
@@ -191,7 +186,6 @@ public sealed class TrainingClient
         var requestBuilder = RequestBuilder.HttpGet("v2/professions");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);

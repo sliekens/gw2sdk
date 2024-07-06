@@ -37,7 +37,6 @@ public sealed class PvpClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet($"v2/pvp/seasons/{seasonId}/leaderboards");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -63,7 +62,6 @@ public sealed class PvpClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet($"v2/pvp/seasons/{seasonId}/leaderboards/{boardId}");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -99,7 +97,6 @@ public sealed class PvpClient
     {
         var requestBuilder = RequestBuilder.HttpGet($"v2/pvp/seasons/{seasonId}/leaderboards/{boardId}/{region}");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -127,7 +124,6 @@ public sealed class PvpClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/standings", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -155,7 +151,6 @@ public sealed class PvpClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/stats", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -181,7 +176,6 @@ public sealed class PvpClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/pvp/heroes", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -208,7 +202,6 @@ public sealed class PvpClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/amulets");
         requestBuilder.Query.AddAllIds();
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -227,7 +220,6 @@ public sealed class PvpClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/amulets");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -253,7 +245,6 @@ public sealed class PvpClient
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/amulets");
         requestBuilder.Query.AddId(amuletId);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -280,7 +271,6 @@ public sealed class PvpClient
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/amulets");
         requestBuilder.Query.AddIds(amuletIds);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -309,7 +299,6 @@ public sealed class PvpClient
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/amulets");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -338,7 +327,6 @@ public sealed class PvpClient
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/heroes");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -357,7 +345,6 @@ public sealed class PvpClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/heroes");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -383,7 +370,6 @@ public sealed class PvpClient
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/heroes");
         requestBuilder.Query.AddId(mistChampionId);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -410,7 +396,6 @@ public sealed class PvpClient
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/heroes");
         requestBuilder.Query.AddIds(mistChampionIds);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -439,7 +424,6 @@ public sealed class PvpClient
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/heroes");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -468,7 +452,6 @@ public sealed class PvpClient
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/ranks");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -487,7 +470,6 @@ public sealed class PvpClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/ranks");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -513,7 +495,6 @@ public sealed class PvpClient
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/ranks");
         requestBuilder.Query.AddId(rankId);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -540,7 +521,6 @@ public sealed class PvpClient
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/ranks");
         requestBuilder.Query.AddIds(rankIds);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -569,7 +549,6 @@ public sealed class PvpClient
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/ranks");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -598,7 +577,6 @@ public sealed class PvpClient
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/seasons");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -617,7 +595,6 @@ public sealed class PvpClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/seasons");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -643,7 +620,6 @@ public sealed class PvpClient
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/seasons");
         requestBuilder.Query.AddId(seasonId);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -670,7 +646,6 @@ public sealed class PvpClient
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/seasons");
         requestBuilder.Query.AddIds(seasonIds);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -699,7 +674,6 @@ public sealed class PvpClient
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/seasons");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -728,7 +702,6 @@ public sealed class PvpClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/games", accessToken);
         requestBuilder.Query.AddAllIds();
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -752,7 +725,6 @@ public sealed class PvpClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/games", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -778,7 +750,6 @@ public sealed class PvpClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/games", accessToken);
         requestBuilder.Query.AddId(gameId);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -804,7 +775,6 @@ public sealed class PvpClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/games", accessToken);
         requestBuilder.Query.AddIds(gameIds);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -832,7 +802,6 @@ public sealed class PvpClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/games", accessToken);
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)

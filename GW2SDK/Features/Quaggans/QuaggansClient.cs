@@ -29,7 +29,6 @@ public sealed class QuaggansClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/quaggans");
         requestBuilder.Query.AddAllIds();
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -48,7 +47,6 @@ public sealed class QuaggansClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/quaggans");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -71,7 +69,6 @@ public sealed class QuaggansClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/quaggans");
         requestBuilder.Query.AddId(quagganId);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -95,7 +92,6 @@ public sealed class QuaggansClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/quaggans");
         requestBuilder.Query.AddIds(quagganIds);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -121,7 +117,6 @@ public sealed class QuaggansClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/quaggans");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)

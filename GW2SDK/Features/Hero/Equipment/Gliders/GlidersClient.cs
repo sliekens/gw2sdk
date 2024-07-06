@@ -31,7 +31,6 @@ public sealed class GlidersClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/gliders", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -59,7 +58,6 @@ public sealed class GlidersClient
         var requestBuilder = RequestBuilder.HttpGet("v2/gliders");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -78,7 +76,6 @@ public sealed class GlidersClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/gliders");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -104,7 +101,6 @@ public sealed class GlidersClient
         var requestBuilder = RequestBuilder.HttpGet("v2/gliders");
         requestBuilder.Query.AddId(gliderSkinId);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -131,7 +127,6 @@ public sealed class GlidersClient
         var requestBuilder = RequestBuilder.HttpGet("v2/gliders");
         requestBuilder.Query.AddIds(gliderSkinIds);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -160,7 +155,6 @@ public sealed class GlidersClient
         var requestBuilder = RequestBuilder.HttpGet("v2/gliders");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)

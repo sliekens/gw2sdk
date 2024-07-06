@@ -33,7 +33,6 @@ public sealed class WalletClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/wallet", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -62,7 +61,6 @@ public sealed class WalletClient
         var requestBuilder = RequestBuilder.HttpGet("v2/currencies");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -81,7 +79,6 @@ public sealed class WalletClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/currencies");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -107,7 +104,6 @@ public sealed class WalletClient
         var requestBuilder = RequestBuilder.HttpGet("v2/currencies");
         requestBuilder.Query.AddId(currencyId);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -134,7 +130,6 @@ public sealed class WalletClient
         var requestBuilder = RequestBuilder.HttpGet("v2/currencies");
         requestBuilder.Query.AddIds(currencyIds);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -163,7 +158,6 @@ public sealed class WalletClient
         var requestBuilder = RequestBuilder.HttpGet("v2/currencies");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)

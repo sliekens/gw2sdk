@@ -29,7 +29,6 @@ public sealed class FilesClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/files");
         requestBuilder.Query.AddAllIds();
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -48,7 +47,6 @@ public sealed class FilesClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/files");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -71,7 +69,6 @@ public sealed class FilesClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/files");
         requestBuilder.Query.AddId(fileId);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -95,7 +92,6 @@ public sealed class FilesClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/files");
         requestBuilder.Query.AddIds(fileIds);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -121,7 +117,6 @@ public sealed class FilesClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/files");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)

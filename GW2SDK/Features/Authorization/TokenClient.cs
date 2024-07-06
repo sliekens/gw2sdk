@@ -30,7 +30,6 @@ public sealed class TokenClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/tokeninfo", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -87,7 +86,6 @@ public sealed class TokenClient
             requestBuilder.Query.Add("urls", string.Join(",", allowedUrls));
         }
 
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)

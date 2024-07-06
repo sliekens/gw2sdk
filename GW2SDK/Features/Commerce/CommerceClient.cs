@@ -39,7 +39,6 @@ public sealed class CommerceClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/commerce/delivery", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -62,7 +61,6 @@ public sealed class CommerceClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/commerce/prices");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -85,7 +83,6 @@ public sealed class CommerceClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/commerce/prices");
         requestBuilder.Query.AddId(itemId);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -110,7 +107,6 @@ public sealed class CommerceClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/commerce/prices");
         requestBuilder.Query.AddIds(itemIds);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -203,7 +199,6 @@ public sealed class CommerceClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/commerce/listings");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -226,7 +221,6 @@ public sealed class CommerceClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/commerce/listings");
         requestBuilder.Query.AddId(itemId);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -251,7 +245,6 @@ public sealed class CommerceClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/commerce/listings");
         requestBuilder.Query.AddIds(itemIds);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -349,7 +342,6 @@ public sealed class CommerceClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/commerce/exchange/gems");
         requestBuilder.Query.Add("quantity", gems);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -373,7 +365,6 @@ public sealed class CommerceClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/commerce/exchange/coins");
         requestBuilder.Query.Add("quantity", gold);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -406,7 +397,6 @@ public sealed class CommerceClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/commerce/transactions/current/buys", accessToken);
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -435,7 +425,6 @@ public sealed class CommerceClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/commerce/transactions/current/sells", accessToken);
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -464,7 +453,6 @@ public sealed class CommerceClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/commerce/transactions/history/buys", accessToken);
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -493,7 +481,6 @@ public sealed class CommerceClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/commerce/transactions/history/sells", accessToken);
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)

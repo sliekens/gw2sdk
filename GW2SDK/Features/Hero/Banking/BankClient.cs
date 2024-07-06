@@ -32,7 +32,6 @@ public sealed class BankClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/bank", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -59,7 +58,6 @@ public sealed class BankClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/materials", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -89,7 +87,6 @@ public sealed class BankClient
         var requestBuilder = RequestBuilder.HttpGet("v2/materials");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -108,7 +105,6 @@ public sealed class BankClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/materials");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -134,7 +130,6 @@ public sealed class BankClient
         var requestBuilder = RequestBuilder.HttpGet("v2/materials");
         requestBuilder.Query.AddId(materialCategoryId);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -163,7 +158,6 @@ public sealed class BankClient
         var requestBuilder = RequestBuilder.HttpGet("v2/materials");
         requestBuilder.Query.AddIds(materialCategoryIds);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -193,7 +187,6 @@ public sealed class BankClient
         var requestBuilder = RequestBuilder.HttpGet("v2/materials");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)

@@ -36,7 +36,6 @@ public sealed class CraftingDisciplinesClient
         )
     {
         var requestBuilder = RequestBuilder.HttpGet($"v2/characters/{characterName}/crafting", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)

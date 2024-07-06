@@ -12,9 +12,6 @@ internal static class QueryBuilderExtensions
         }
     }
 
-    internal static void AddSchemaVersion(this QueryBuilder query, SchemaVersion version) =>
-        query.Add("v", version);
-
     internal static void AddId(this QueryBuilder query, string id) => query.Add("id", id);
 
     internal static void AddId(this QueryBuilder query, int id) => query.Add("id", id);

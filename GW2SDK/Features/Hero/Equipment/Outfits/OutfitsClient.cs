@@ -32,7 +32,6 @@ public sealed class OutfitsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/outfits", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -60,7 +59,6 @@ public sealed class OutfitsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/outfits");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -79,7 +77,6 @@ public sealed class OutfitsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/outfits");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -105,7 +102,6 @@ public sealed class OutfitsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/outfits");
         requestBuilder.Query.AddId(outfitId);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -132,7 +128,6 @@ public sealed class OutfitsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/outfits");
         requestBuilder.Query.AddIds(outfitIds.Select(id => id.ToString(CultureInfo.InvariantCulture)));
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -161,7 +156,6 @@ public sealed class OutfitsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/outfits");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)

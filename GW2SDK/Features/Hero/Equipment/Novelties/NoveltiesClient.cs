@@ -31,7 +31,6 @@ public sealed class NoveltiesClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/novelties", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -59,7 +58,6 @@ public sealed class NoveltiesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/novelties");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -78,7 +76,6 @@ public sealed class NoveltiesClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/novelties");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -104,7 +101,6 @@ public sealed class NoveltiesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/novelties");
         requestBuilder.Query.AddId(noveltyId);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -131,7 +127,6 @@ public sealed class NoveltiesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/novelties");
         requestBuilder.Query.AddIds(noveltyIds);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -160,7 +155,6 @@ public sealed class NoveltiesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/novelties");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)

@@ -32,7 +32,6 @@ public sealed class WardrobeClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/skins", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -54,7 +53,6 @@ public sealed class WardrobeClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/skins");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -80,7 +78,6 @@ public sealed class WardrobeClient
         var requestBuilder = RequestBuilder.HttpGet("v2/skins");
         requestBuilder.Query.AddId(skinId);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -108,7 +105,6 @@ public sealed class WardrobeClient
         var requestBuilder = RequestBuilder.HttpGet("v2/skins");
         requestBuilder.Query.AddIds(skinIds);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -137,7 +133,6 @@ public sealed class WardrobeClient
         var requestBuilder = RequestBuilder.HttpGet("v2/skins");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)

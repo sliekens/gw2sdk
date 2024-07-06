@@ -31,7 +31,6 @@ public sealed class SkiffsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/skiffs", accessToken);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -59,7 +58,6 @@ public sealed class SkiffsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/skiffs");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -78,7 +76,6 @@ public sealed class SkiffsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/skiffs");
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -104,7 +101,6 @@ public sealed class SkiffsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/skiffs");
         requestBuilder.Query.AddId(skiffSkinId);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -131,7 +127,6 @@ public sealed class SkiffsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/skiffs");
         requestBuilder.Query.AddIds(skiffSkinIds);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
@@ -160,7 +155,6 @@ public sealed class SkiffsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/skiffs");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        requestBuilder.Query.AddSchemaVersion(SchemaVersion.Recommended);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
         using (response.Json)
