@@ -20,12 +20,12 @@ internal static class HttpClientExtensions
         {
             if (response.IsSuccessStatusCode)
             {
+                // Do not dispose this JsonDocument, transfer ownership to the caller
                 var json = await response.Content.ReadAsJsonDocumentAsync(cancellationToken)
                     .ConfigureAwait(false);
                 return (json, new MessageContext(response));
             }
 
-            // Do not dispose this JsonDocument, transfer ownership to the caller
             var reason = response.ReasonPhrase;
             if (response.Content.Headers.ContentType?.MediaType == "application/json")
             {
