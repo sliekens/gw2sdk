@@ -2,7 +2,7 @@
   "name": "GW2SDK",
   "image": "ghcr.io/sliekens/gw2sdk/devcontainer",
   "initializeCommand": "docker pull ghcr.io/sliekens/gw2sdk/devcontainer",
-  "onCreateCommand": "sudo chown -R vscode:vscode /home/vscode/.nuget",
+  "onCreateCommand": "sudo chown -R vscode:vscode /home/vscode/{.nuget,.microsoft}",
   "postCreateCommand": {
     "alias ll": "echo \"alias ll='ls -lah'\" >> ~/.bashrc",
     "alias jb": "echo \"alias jb='dotnet jb'\" >> ~/.bashrc",
