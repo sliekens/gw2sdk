@@ -1,0 +1,16 @@
+{
+  "name": "GW2SDK",
+  "image": "mcr.microsoft.com/devcontainers/dotnet",
+  "features": {
+    "ghcr.io/devcontainers/features/dotnet:2": {
+      "version": "8.0.303"
+    },
+    "./mono": {},
+    "ghcr.io/devcontainers/features/powershell:1": {}
+  },
+  "containerEnv": {
+    "DOTNET_NOLOGO": "true",
+    "DOTNET_CLI_TELEMETRY_OPTOUT": "true",
+    "DOTNET_HTTPREPL_TELEMETRY_OPTOUT": "true"
+  }
+}
