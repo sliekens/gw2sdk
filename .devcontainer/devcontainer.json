@@ -6,9 +6,8 @@
   },
   "features": {
     "ghcr.io/devcontainers/features/dotnet:2": {
-      "version": "8.0.301",
-      "additionalVersions": "",
-      "dotnetRuntimeVersions": "7.0"
+      "version": "8.0.303",
+      "additionalVersions": ""
     },
     "./mono": {},
     "ghcr.io/devcontainers/features/powershell:1": {}
