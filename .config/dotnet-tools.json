@@ -10,7 +10,7 @@
       "rollForward": false
     },
     "microsoft.dotnet-httprepl": {
-      "version": "7.0.0",
+      "version": "8.0.0-preview.23564.1",
       "commands": [
         "httprepl"
       ],
