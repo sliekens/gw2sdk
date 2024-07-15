@@ -1,11 +1,11 @@
 {
   "name": "GW2SDK",
   "image": "ghcr.io/sliekens/gw2sdk/devcontainer",
+  "initializeCommand": "docker pull ghcr.io/sliekens/gw2sdk/devcontainer",
   "onCreateCommand": "sudo chown -R vscode:vscode /home/vscode/.nuget",
   "postCreateCommand": {
     "alias ll": "echo \"alias ll='ls -lah'\" >> ~/.bashrc",
     "alias jb": "echo \"alias jb='dotnet jb'\" >> ~/.bashrc",
-    "alias vuepress": "echo \"alias vuepress='npx vuepress'\" >> ~/.bashrc",
     "alias httprepl": "echo \"alias httprepl='dotnet httprepl https://api.guildwars2.com'\" >> ~/.bashrc"
   },
   "postStartCommand": {
