@@ -28,7 +28,7 @@ public sealed class WvwClient
         httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    #region v2/wvw/wvwguilds
+    #region v2/wvw/guilds
 
     /// <summary>Retrieves WvW guilds by region.</summary>
     /// <param name="region">The world region (NA or EU).</param>
@@ -47,7 +47,7 @@ public sealed class WvwClient
             WorldRegion.Europe => "eu",
             _ => region.ToString()
         };
-        var requestBuilder = RequestBuilder.HttpGet($"v2/wvw/wvwguilds/{id}");
+        var requestBuilder = RequestBuilder.HttpGet($"v2/wvw/guilds/{id}");
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
@@ -62,7 +62,7 @@ public sealed class WvwClient
                         ShardId = map.Value
                     }
                 );
-            return ([..value], response.Context);
+            return ([.. value], response.Context);
         }
     }
 

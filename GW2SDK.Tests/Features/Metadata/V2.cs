@@ -117,7 +117,7 @@ public class V2
             "/v2/wvw/ranks", "/v2/wvw/rewardtracks",
             "/v2/wvw/timers", "/v2/wvw/timers/lockout",
             "/v2/wvw/timers/teamAssignment", "/v2/wvw/upgrades",
-            "/v2/wvw/wvwguilds", "/v2/wvw/wvwguilds/:region"
+            "/v2/wvw/guilds", "/v2/wvw/guilds/:region"
         ];
 
         Assert.All(
