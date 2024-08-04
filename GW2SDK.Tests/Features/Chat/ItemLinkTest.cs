@@ -25,7 +25,36 @@ public class ItemLinkTest
         Assert.Equal(itemId, sut.ItemId);
         Assert.Equal(count, sut.Count);
         Assert.Equal(skinId, sut.SkinId);
+        if (skinId.HasValue)
+        {
+            var skinLink = sut.GetSkinLink();
+            Assert.Equal(skinId, skinLink?.SkinId);
+        }
+        else
+        {
+            Assert.Null(sut.GetSkinLink());
+        }
+
         Assert.Equal(suffixItemId, sut.SuffixItemId);
+        if (suffixItemId.HasValue)
+        {
+            var suffixLink = sut.GetSuffixItemLink();
+            Assert.Equal(suffixItemId, suffixLink?.ItemId);
+        }
+        else
+        {
+            Assert.Null(sut.GetSuffixItemLink());
+        }
+
         Assert.Equal(secondarySuffixItemId, sut.SecondarySuffixItemId);
+        if (secondarySuffixItemId.HasValue)
+        {
+            var secondarySuffixLink = sut.GetSecondarySuffixItemLink();
+            Assert.Equal(secondarySuffixItemId, secondarySuffixLink?.ItemId);
+        }
+        else
+        {
+            Assert.Null(sut.GetSecondarySuffixItemLink());
+        }
     }
 }
