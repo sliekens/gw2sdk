@@ -88,8 +88,16 @@ public sealed class SchemaVersion
     /// </remarks>
     public static readonly SchemaVersion V20220323 = new("2022-03-23T19:00:00.000Z");
 
+    /// <summary>Represents the schema version "2024-07-20T01:00:00.000Z".</summary>
+    /// <remarks>
+    ///     <list type="bullet">
+    ///         <item>Add wvw <c>team_id</c> to <c>/v2/account</c> to show world restructuring team id and move wvw fields into <c>wvw</c>.</item>
+    ///     </list>
+    /// </remarks>
+    public static readonly SchemaVersion V20240720 = new("2024-07-20T01:00:00.000Z");
+
     /// <summary>The schema version that GW2SDK is optimized for.</summary>
-    public static readonly SchemaVersion Recommended = V20220323;
+    public static readonly SchemaVersion Recommended = V20240720;
 
     private SchemaVersion(string version)
     {

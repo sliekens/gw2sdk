@@ -49,8 +49,8 @@ public sealed record AccountSummary
     /// scope.</summary>
     public required int? MonthlyAchievementPoints { get; init; }
 
-    /// <summary>The account's personal World vs. World rank. Requires the 'progression' scope.</summary>
-    public required int? WvwRank { get; init; }
+    /// <summary>The account's WvW team and personal rank.</summary>
+    public required AccountWvwSummary Wvw { get; init; }
 
     /// <summary>The count of unlocked build storage slots. Requires the 'builds' scope.</summary>
     public required int? BuildStorageSlots { get; init; }

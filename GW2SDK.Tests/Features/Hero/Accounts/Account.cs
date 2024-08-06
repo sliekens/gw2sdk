@@ -28,7 +28,8 @@ public class Account
         Assert.Null(actual.FractalLevel);
         Assert.Null(actual.DailyAchievementPoints);
         Assert.Null(actual.MonthlyAchievementPoints);
-        Assert.Null(actual.WvwRank);
+        Assert.NotNull(actual.Wvw);
+        Assert.Null(actual.Wvw.Rank);
     }
 
     [Fact]
@@ -55,6 +56,7 @@ public class Account
         Assert.NotNull(actual.FractalLevel);
         Assert.NotNull(actual.DailyAchievementPoints);
         Assert.NotNull(actual.MonthlyAchievementPoints);
-        Assert.NotNull(actual.WvwRank);
+        Assert.NotNull(actual.Wvw);
+        Assert.NotNull(actual.Wvw.Rank);
     }
 }

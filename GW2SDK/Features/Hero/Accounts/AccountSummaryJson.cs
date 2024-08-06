@@ -20,7 +20,7 @@ internal static class AccountSummaryJson
         NullableMember fractalLevel = "fractal_level";
         NullableMember dailyAp = "daily_ap";
         NullableMember monthlyAp = "monthly_ap";
-        NullableMember wvwRank = "wvw_rank";
+        RequiredMember wvw = "wvw";
         NullableMember buildStorageSlots = "build_storage_slots";
         foreach (var member in json.EnumerateObject())
         {
@@ -76,9 +76,9 @@ internal static class AccountSummaryJson
             {
                 monthlyAp = member;
             }
-            else if (wvwRank.Match(member))
+            else if (wvw.Match(member))
             {
-                wvwRank = member;
+                wvw = member;
             }
             else if (buildStorageSlots.Match(member))
             {
@@ -114,7 +114,7 @@ internal static class AccountSummaryJson
             FractalLevel = fractalLevel.Map(static value => value.GetInt32()),
             DailyAchievementPoints = dailyAp.Map(static value => value.GetInt32()),
             MonthlyAchievementPoints = monthlyAp.Map(static value => value.GetInt32()),
-            WvwRank = wvwRank.Map(static value => value.GetInt32()),
+            Wvw = wvw.Map(static value => value.GetAccountWvwSummary()),
             BuildStorageSlots = buildStorageSlots.Map(static value => value.GetInt32())
         };
     }
