@@ -59,7 +59,7 @@ public sealed class WvwClient
                     map => new WvwGuild
                     {
                         Name = map.Key,
-                        ShardId = map.Value
+                        TeamId = map.Value
                     }
                 );
             return ([.. value], response.Context);

@@ -21,7 +21,7 @@ public class WvwGuilds
             entry =>
             {
                 Assert.NotNull(entry.Name);
-                Assert.NotEmpty(entry.ShardId);
+                Assert.NotEmpty(entry.TeamId);
             }
         );
     }

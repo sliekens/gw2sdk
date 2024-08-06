@@ -8,6 +8,6 @@ public sealed record WvwGuild
     /// <summary>The guild's name.</summary>
     public required string Name { get; init; }
 
-    /// <summary>The guild's shard ID. Guilds with the same shard ID play for the same team.</summary>
-    public required string ShardId { get; init; }
+    /// <summary>The guild's WvW team ID.</summary>
+    public required string TeamId { get; init; }
 }
