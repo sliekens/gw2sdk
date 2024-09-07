@@ -25,6 +25,7 @@ public class UnlockedEmotes
                     "Heroic",
                     "Paper",
                     "playdead",
+                    "Possessed",
                     "Rock",
                     "rockout",
                     "Scissors",
@@ -32,7 +33,7 @@ public class UnlockedEmotes
                     "Shiverplus",
                     "shuffle",
                     "step",
-                    "Stretch"
+                    "Stretch",
                 }
             )
         );
