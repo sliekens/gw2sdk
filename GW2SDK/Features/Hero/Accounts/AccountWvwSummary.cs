@@ -6,8 +6,8 @@
 public sealed record AccountWvwSummary
 {
     /// <summary>The player's World vs. World team ID.</summary>
-    public int? TeamId { get; init; }
+    public required int? TeamId { get; init; }
 
     /// <summary>The account's personal World vs. World rank. Requires the 'progression' scope.</summary>
-    public int? Rank { get; init; }
+    public required int? Rank { get; init; }
 }
