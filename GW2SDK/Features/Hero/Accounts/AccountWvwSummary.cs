@@ -1,6 +1,8 @@
 ﻿namespace GuildWars2.Hero.Accounts;
 
 /// <summary>Information about a player account's World vs. World team and rank.</summary>
+[PublicAPI]
+[DataTransferObject]
 public sealed record AccountWvwSummary
 {
     /// <summary>The player's World vs. World team ID.</summary>
