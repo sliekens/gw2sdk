@@ -11,7 +11,8 @@ public class UpgradesByFilter
 
         HashSet<int> ids =
         [
-            1, 3,
+            1,
+            3,
             4
         ];
 

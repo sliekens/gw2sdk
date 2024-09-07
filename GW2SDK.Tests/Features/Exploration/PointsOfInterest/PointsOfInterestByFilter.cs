@@ -15,7 +15,8 @@ public class PointsOfInterestByFilter
         const int mapId = 26;
         HashSet<int> ids =
         [
-            554, 555,
+            554,
+            555,
             556
         ];
 

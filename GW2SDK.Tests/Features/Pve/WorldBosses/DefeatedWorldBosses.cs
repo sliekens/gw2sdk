@@ -15,13 +15,20 @@ public class DefeatedWorldBosses
 
         HashSet<string> expected =
         [
-            "admiral_taidha_covington", "claw_of_jormag",
-            "drakkar", "fire_elemental",
-            "great_jungle_wurm", "inquest_golem_mark_ii",
-            "karka_queen", "megadestroyer",
-            "modniir_ulgoth", "shadow_behemoth",
-            "svanir_shaman_chief", "tequatl_the_sunless",
-            "the_shatterer", "triple_trouble_wurm"
+            "admiral_taidha_covington",
+            "claw_of_jormag",
+            "drakkar",
+            "fire_elemental",
+            "great_jungle_wurm",
+            "inquest_golem_mark_ii",
+            "karka_queen",
+            "megadestroyer",
+            "modniir_ulgoth",
+            "shadow_behemoth",
+            "svanir_shaman_chief",
+            "tequatl_the_sunless",
+            "the_shatterer",
+            "triple_trouble_wurm"
         ];
 
         // The best we can do is verify that there are no unexpected bosses

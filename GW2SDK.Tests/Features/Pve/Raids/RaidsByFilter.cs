@@ -11,7 +11,8 @@ public class RaidsByFilter
 
         HashSet<string> ids =
         [
-            "forsaken_thicket", "bastion_of_the_penitent",
+            "forsaken_thicket",
+            "bastion_of_the_penitent",
             "hall_of_chains"
         ];
 

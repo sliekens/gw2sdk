@@ -79,7 +79,7 @@ public sealed class QueryBuilder : IEnumerable
 #endif
     }
 
-   
+
     /// <inheritdoc />
     public override string ToString() => Build();
 }

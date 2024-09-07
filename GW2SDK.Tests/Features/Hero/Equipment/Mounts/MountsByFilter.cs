@@ -12,7 +12,8 @@ public class MountsByFilter
 
         HashSet<MountName> names =
         [
-            MountName.Raptor, MountName.Jackal,
+            MountName.Raptor,
+            MountName.Jackal,
             MountName.Skimmer
         ];
 

@@ -11,7 +11,8 @@ public class MaterialCategoriesByFilter
 
         HashSet<int> ids =
         [
-            5, 6,
+            5,
+            6,
             29
         ];
 

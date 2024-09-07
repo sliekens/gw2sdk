@@ -11,7 +11,8 @@ public class GliderSkinsByFilter
 
         HashSet<int> ids =
         [
-            1, 38,
+            1,
+            38,
             74
         ];
 

@@ -11,7 +11,8 @@ public class JadeBotSkinsByFilter
 
         HashSet<int> ids =
         [
-            3, 4,
+            3,
+            4,
             5
         ];
 

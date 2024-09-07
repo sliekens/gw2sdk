@@ -12,7 +12,8 @@ public class RacesByFilter
 
         HashSet<RaceName> names =
         [
-            RaceName.Asura, RaceName.Charr,
+            RaceName.Asura,
+            RaceName.Charr,
             RaceName.Norn
         ];
 

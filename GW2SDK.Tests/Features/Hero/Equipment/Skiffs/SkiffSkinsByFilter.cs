@@ -11,7 +11,8 @@ public class SkiffSkinsByFilter
 
         HashSet<int> ids =
         [
-            410, 413,
+            410,
+            413,
             420
         ];
 

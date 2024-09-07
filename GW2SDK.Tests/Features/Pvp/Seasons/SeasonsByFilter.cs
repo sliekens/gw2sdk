@@ -11,7 +11,8 @@ public class SeasonsByFilter
 
         HashSet<string> ids =
         [
-            "44B85826-B5ED-4890-8C77-82DDF9F2CF2B", "95D5B290-798A-421E-A919-1C2A75F74B72",
+            "44B85826-B5ED-4890-8C77-82DDF9F2CF2B",
+            "95D5B290-798A-421E-A919-1C2A75F74B72",
             "D1777261-555B-4B72-A27E-BDC96EC393D5"
         ];
 

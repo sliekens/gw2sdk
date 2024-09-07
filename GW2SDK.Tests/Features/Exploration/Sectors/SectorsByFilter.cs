@@ -15,7 +15,8 @@ public class SectorsByFilter
         const int mapId = 26;
         HashSet<int> ids =
         [
-            513, 514,
+            513,
+            514,
             515
         ];
 

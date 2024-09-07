@@ -1,4 +1,4 @@
-using System.Drawing;
+﻿using System.Drawing;
 using System.Numerics;
 using System.Text.Json;
 using GuildWars2.Json;

@@ -11,7 +11,8 @@ public class FilesByFilter
 
         HashSet<string> ids =
         [
-            "map_complete", "map_vendor_ecto",
+            "map_complete",
+            "map_vendor_ecto",
             "map_stairs_up"
         ];
 

@@ -14,7 +14,8 @@ public class MapsByFilter
         const int regionId = 1;
         HashSet<int> ids =
         [
-            26, 27,
+            26,
+            27,
             28
         ];
 

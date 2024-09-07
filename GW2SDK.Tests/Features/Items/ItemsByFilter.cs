@@ -11,7 +11,8 @@ public class ItemsByFilter
 
         HashSet<int> ids =
         [
-            24, 46,
+            24,
+            46,
             56
         ];
 

@@ -10,7 +10,8 @@ public class NodesByFilter
         var sut = Composer.Resolve<Gw2Client>();
         HashSet<string> ids =
         [
-            "garden_plot_01", "garden_plot_02",
+            "garden_plot_01",
+            "garden_plot_02",
             "garden_plot_03"
         ];
 

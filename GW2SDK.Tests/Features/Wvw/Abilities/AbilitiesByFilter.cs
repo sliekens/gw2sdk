@@ -11,7 +11,8 @@ public class AbilitiesByFilter
 
         HashSet<int> ids =
         [
-            2, 3,
+            2,
+            3,
             4
         ];
 

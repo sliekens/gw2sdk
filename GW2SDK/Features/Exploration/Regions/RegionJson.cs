@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Exploration.Maps;
 using GuildWars2.Json;
 

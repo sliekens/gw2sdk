@@ -11,7 +11,8 @@ public class RanksByFilter
 
         HashSet<int> ids =
         [
-            4, 8,
+            4,
+            8,
             9
         ];
 

@@ -11,7 +11,8 @@ public class MapChestsByFilter
 
         HashSet<string> ids =
         [
-            "auric_basin_heros_choice_chest", "crystal_oasis_heros_choice_chest",
+            "auric_basin_heros_choice_chest",
+            "crystal_oasis_heros_choice_chest",
             "domain_of_vabbi_heros_choice_chest"
         ];
 

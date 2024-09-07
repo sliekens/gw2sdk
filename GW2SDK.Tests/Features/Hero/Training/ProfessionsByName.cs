@@ -12,7 +12,8 @@ public class ProfessionsByName
 
         HashSet<ProfessionName> names =
         [
-            ProfessionName.Mesmer, ProfessionName.Necromancer,
+            ProfessionName.Mesmer,
+            ProfessionName.Necromancer,
             ProfessionName.Revenant
         ];
 

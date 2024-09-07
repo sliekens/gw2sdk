@@ -15,7 +15,8 @@ public class HeartsByFilter
         const int mapId = 26;
         HashSet<int> ids =
         [
-            1, 2,
+            1,
+            2,
             3
         ];
 

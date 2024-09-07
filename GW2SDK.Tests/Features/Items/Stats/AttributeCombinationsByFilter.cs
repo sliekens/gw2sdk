@@ -11,7 +11,8 @@ public class AttributeCombinationsByFilter
 
         HashSet<int> ids =
         [
-            161, 559,
+            161,
+            559,
             1566
         ];
 

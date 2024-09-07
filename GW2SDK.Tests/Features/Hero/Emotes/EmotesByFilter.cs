@@ -11,7 +11,8 @@ public class EmotesByFilter
 
         HashSet<string> ids =
         [
-            "geargrind", "playdead",
+            "geargrind",
+            "playdead",
             "rockout"
         ];
 

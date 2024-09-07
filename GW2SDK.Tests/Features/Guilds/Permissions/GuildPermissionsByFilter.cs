@@ -11,7 +11,8 @@ public class GuildPermissionsByFilter
 
         HashSet<string> ids =
         [
-            "StartingRole", "DepositCoinsTrove",
+            "StartingRole",
+            "DepositCoinsTrove",
             "WithdrawCoinsTrove"
         ];
 

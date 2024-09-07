@@ -1,4 +1,4 @@
-namespace GuildWars2.Hero.Accounts;
+﻿namespace GuildWars2.Hero.Accounts;
 
 /// <summary>Information about a player account's World vs. World team and rank.</summary>
 public sealed record AccountWvwSummary

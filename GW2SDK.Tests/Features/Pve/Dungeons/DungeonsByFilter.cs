@@ -11,7 +11,8 @@ public class DungeonsByFilter
 
         HashSet<string> ids =
         [
-            "twilight_arbor", "sorrows_embrace",
+            "twilight_arbor",
+            "sorrows_embrace",
             "citadel_of_flame"
         ];
 

@@ -26,7 +26,8 @@ public class SubtokenInfo
 
         List<string> urls =
         [
-            "/v2/tokeninfo", "/v2/account",
+            "/v2/tokeninfo",
+            "/v2/account",
             "/v2/characters/My Cool Character"
         ];
 

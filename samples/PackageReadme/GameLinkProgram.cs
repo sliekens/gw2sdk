@@ -28,10 +28,10 @@ internal class GameLinkProgram
         // For example, at most once every second
         // Default: no limit, every change in the game state will be available immediately
         var refreshInterval = TimeSpan.FromSeconds(1);
-        
+
         // Open the game link with the chosen refresh interval
         var gameLink = GameLink.Open(refreshInterval);
-        
+
         // Subscribe to the game link to start receiving game state updates
         var subscription = gameLink.Subscribe(
             tick =>

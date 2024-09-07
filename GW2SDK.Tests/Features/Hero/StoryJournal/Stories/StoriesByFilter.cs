@@ -11,7 +11,8 @@ public class StoriesByFilter
 
         HashSet<int> ids =
         [
-            9, 10,
+            9,
+            10,
             11
         ];
 

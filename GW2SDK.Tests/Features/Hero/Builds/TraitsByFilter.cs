@@ -11,7 +11,8 @@ public class TraitsByFilter
 
         HashSet<int> ids =
         [
-            214, 221,
+            214,
+            221,
             222
         ];
 

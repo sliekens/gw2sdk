@@ -103,7 +103,6 @@ public class Skills
 
                             break;
                         case SlotSkill slotSkill:
-                        {
                             if (slotSkill.ToolbeltSkillId.HasValue)
                             {
                                 Assert.Single(
@@ -170,9 +169,7 @@ public class Skills
                             }
 
                             break;
-                        }
                         case ProfessionSkill professionSkill:
-                        {
                             if (professionSkill.Attunement.HasValue)
                             {
                                 Assert.Single(
@@ -197,7 +194,6 @@ public class Skills
                             }
 
                             break;
-                        }
                     }
                 }
                 else

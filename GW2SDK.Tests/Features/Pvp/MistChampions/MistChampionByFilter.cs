@@ -12,7 +12,8 @@ public class MistChampionByFilter
 
         HashSet<string> ids =
         [
-            "115C140F-C2F5-40EB-8EA2-C3773F2AE468", "B7EA9889-5F16-4636-9705-4FCAF8B39ECD",
+            "115C140F-C2F5-40EB-8EA2-C3773F2AE468",
+            "B7EA9889-5F16-4636-9705-4FCAF8B39ECD",
             "BEA79596-CA8B-4D46-9B9C-EA1B606BCF42"
         ];
 

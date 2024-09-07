@@ -11,7 +11,8 @@ public class MapSummariesByFilter
 
         HashSet<int> ids =
         [
-            15, 17,
+            15,
+            17,
             18
         ];
 

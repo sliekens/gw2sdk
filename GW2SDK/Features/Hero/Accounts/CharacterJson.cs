@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Hero.Builds;
 using GuildWars2.Hero.Crafting.Disciplines;
 using GuildWars2.Hero.Equipment.Templates;

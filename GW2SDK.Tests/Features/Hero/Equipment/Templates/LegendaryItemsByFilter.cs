@@ -11,7 +11,8 @@ public class LegendaryItemsByFilter
 
         HashSet<int> ids =
         [
-            83162, 93105,
+            83162,
+            93105,
             80111
         ];
 

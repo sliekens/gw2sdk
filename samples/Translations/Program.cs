@@ -30,8 +30,10 @@ Console.WriteLine();
 // See the default set of supported languages
 HashSet<Language> languages =
 [
-    Language.English, Language.German,
-    Language.French, Language.Spanish,
+    Language.English,
+    Language.German,
+    Language.French,
+    Language.Spanish,
     Language.Chinese
 ];
 

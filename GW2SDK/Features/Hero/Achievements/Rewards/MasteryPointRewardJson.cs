@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Hero.Masteries;
 using GuildWars2.Json;
 

@@ -11,7 +11,8 @@ public class GuildUpgradesByFilter
 
         HashSet<int> ids =
         [
-            260, 630,
+            260,
+            630,
             167
         ];
 

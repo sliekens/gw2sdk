@@ -11,7 +11,8 @@ public class BackgroundStoryQuestionsByFilter
 
         HashSet<int> ids =
         [
-            7, 10,
+            7,
+            10,
             11
         ];
 

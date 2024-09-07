@@ -12,7 +12,8 @@ public class FloorsByFilter
         const int continentId = 1;
         HashSet<int> ids =
         [
-            0, 1,
+            0,
+            1,
             2
         ];
 

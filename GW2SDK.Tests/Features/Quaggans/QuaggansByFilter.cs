@@ -11,7 +11,8 @@ public class QuaggansByFilter
 
         HashSet<string> ids =
         [
-            "404", "aloha",
+            "404",
+            "aloha",
             "attack"
         ];
 

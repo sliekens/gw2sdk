@@ -11,7 +11,8 @@ public class LegendsByFilter
 
         HashSet<string> ids =
         [
-            "Legend1", "Legend3",
+            "Legend1",
+            "Legend3",
             "Legend5"
         ];
 

@@ -12,7 +12,8 @@ public class AccountAchievementsByFilter
 
         HashSet<int> ids =
         [
-            1, 2,
+            1,
+            2,
             3
         ];
 

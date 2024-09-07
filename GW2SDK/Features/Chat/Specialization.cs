@@ -1,4 +1,4 @@
-namespace GuildWars2.Chat;
+﻿namespace GuildWars2.Chat;
 
 /// <summary>Information about selected specialization and traits.</summary>
 /// <param name="Id">The specialization ID.</param>

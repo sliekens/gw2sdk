@@ -11,7 +11,8 @@ public class ObjectivesByFilter
 
         HashSet<string> ids =
         [
-            "1099-99", "1143-99",
+            "1099-99",
+            "1143-99",
             "1102-99"
         ];
 

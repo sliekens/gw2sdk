@@ -12,7 +12,8 @@ public class StoredBuildsByNumbers
 
         HashSet<int> slotNumbers =
         [
-            2, 3,
+            2,
+            3,
             4
         ];
         ;

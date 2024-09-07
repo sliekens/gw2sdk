@@ -11,7 +11,8 @@ public class SkillsByFilter
 
         HashSet<int> ids =
         [
-            1110, 12693,
+            1110,
+            12693,
             39222
         ];
 
