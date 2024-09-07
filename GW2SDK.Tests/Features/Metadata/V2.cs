@@ -28,6 +28,8 @@ public class V2
                 );
             }
         );
+
+        // curl -s https://api.guildwars2.com/v2.json?v=latest | jq '.routes[].path' | sort | awk '{print $0 ","}'
         HashSet<string> routes =
         [
             "/v2/account",
@@ -43,6 +45,9 @@ public class V2
             "/v2/account/home",
             "/v2/account/home/cats",
             "/v2/account/home/nodes",
+            "/v2/account/homestead",
+            "/v2/account/homestead/decorations",
+            "/v2/account/homestead/glyphs",
             "/v2/account/inventory",
             "/v2/account/jadebots",
             "/v2/account/legendaryarmory",
@@ -136,6 +141,12 @@ public class V2
             "/v2/home",
             "/v2/home/cats",
             "/v2/home/nodes",
+            "/v2/homestead",
+            "/v2/homestead",
+            "/v2/homestead/decorations",
+            "/v2/homestead/decorations/categories",
+            "/v2/homestead/decorations/categories/:id",
+            "/v2/homestead/glyphs",
             "/v2/items",
             "/v2/itemstats",
             "/v2/jadebots",
@@ -188,6 +199,8 @@ public class V2
             "/v2/worldbosses",
             "/v2/worlds",
             "/v2/wvw/abilities",
+            "/v2/wvw/guilds",
+            "/v2/wvw/guilds/:region",
             "/v2/wvw/matches",
             "/v2/wvw/matches/overview",
             "/v2/wvw/matches/scores",
@@ -202,8 +215,6 @@ public class V2
             "/v2/wvw/timers/lockout",
             "/v2/wvw/timers/teamAssignment",
             "/v2/wvw/upgrades",
-            "/v2/wvw/guilds",
-            "/v2/wvw/guilds/:region"
         ];
 
         Assert.All(
