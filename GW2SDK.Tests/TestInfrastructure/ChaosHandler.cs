@@ -19,6 +19,7 @@ internal class ChaosHandler : DelegatingHandler
                     """;
                 return new HttpResponseMessage(HttpStatusCode.InternalServerError)
                 {
+                    Headers = { { "Server", "InMemory" } },
                     Content = new StringContent(json, Encoding.UTF8, "application/json")
                 };
             }
