@@ -23,6 +23,7 @@ public class DefeatedWorldBosses
             "inquest_golem_mark_ii",
             "karka_queen",
             "megadestroyer",
+            "mists_and_monsters_titans",
             "modniir_ulgoth",
             "shadow_behemoth",
             "svanir_shaman_chief",
