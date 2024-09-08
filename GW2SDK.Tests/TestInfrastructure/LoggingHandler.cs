@@ -14,15 +14,21 @@ internal class LoggingHandler(ITestOutputHelper output) : DelegatingHandler
             output.WriteLine($"{header.Key}: {string.Join(", ", header.Value)}");
         }
 
-        output.WriteLine("");
+        if (request.Content is not null)
+        {
+            foreach (var header in request.Content.Headers)
+            {
+                output.WriteLine($"{header.Key}: {string.Join(", ", header.Value)}");
+            }
+        }
+
         output.WriteLine("");
 
-        if (request.Content != null)
+        if (request.Content is not null)
         {
             output.WriteLine(await request.Content.ReadAsStringAsync());
             output.WriteLine("");
         }
-
 
         var response = await base.SendAsync(request, cancellationToken);
 
@@ -32,9 +38,17 @@ internal class LoggingHandler(ITestOutputHelper output) : DelegatingHandler
             output.WriteLine($"{header.Key}: {string.Join(", ", header.Value)}");
         }
 
+        if (response.Content is not null)
+        {
+            foreach (var header in response.Content.Headers)
+            {
+                output.WriteLine($"{header.Key}: {string.Join(", ", header.Value)}");
+            }
+        }
+
         output.WriteLine("");
-        output.WriteLine("");
-        if (response.Content != null)
+
+        if (response.Content is not null)
         {
             if (response.Content.Headers.ContentEncoding.LastOrDefault() == "gzip")
             {
@@ -54,9 +68,10 @@ internal class LoggingHandler(ITestOutputHelper output) : DelegatingHandler
             {
                 output.WriteLine(await response.Content.ReadAsStringAsync());
             }
+
+            output.WriteLine("");
         }
 
-        output.WriteLine("");
         return response;
     }
 }
