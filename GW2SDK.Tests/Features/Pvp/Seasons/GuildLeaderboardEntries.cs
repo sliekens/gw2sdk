@@ -1,15 +1,24 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
+using Xunit.Abstractions;
 
 namespace GuildWars2.Tests.Features.Pvp.Seasons;
 
-public class GuildLeaderboardEntries
+public class GuildLeaderboardEntries(ITestOutputHelper outputHelper)
 {
     [Theory]
     [InlineData("2B2E80D3-0A74-424F-B0EA-E221500B323C", "guild", "eu")]
     [InlineData("2B2E80D3-0A74-424F-B0EA-E221500B323C", "guild", "na")]
     public async Task Can_be_found(string seasonId, string boardId, string regionId)
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        var sut = new Gw2Client(
+            new HttpClient(
+                new LoggingHandler(outputHelper)
+                {
+                    InnerHandler = Composer.Resolve<HttpMessageHandler>()
+                },
+                disposeHandler: false
+            )
+        );
 
         var (actual, context) =
             await sut.Pvp.GetLeaderboardEntries(seasonId, boardId, regionId, 0, 200);

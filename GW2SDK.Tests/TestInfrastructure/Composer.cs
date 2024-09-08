@@ -43,16 +43,24 @@ public static class Composer
             return HttpClient();
         }
 
+        if (serviceType == typeof(HttpMessageHandler))
+        {
+            return HttpMessageHandler();
+        }
+
         return null;
 
-        static HttpClient HttpClient()
+        static HttpMessageHandler HttpMessageHandler()
         {
-            var handler = new SchemaVersionHandler
+            return new SchemaVersionHandler
             {
                 InnerHandler = ResilientHttpHandler
             };
+        }
 
-            return new HttpClient(handler, disposeHandler: false)
+        static HttpClient HttpClient()
+        {
+            return new HttpClient(HttpMessageHandler(), disposeHandler: false)
             {
                 Timeout = TimeSpan.FromMinutes(5)
             };
