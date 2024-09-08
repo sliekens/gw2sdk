@@ -7,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 var services = new ServiceCollection();
 var httpClientBuilder = services.AddHttpClient<Gw2Client>();
 httpClientBuilder.AddStandardResilienceHandler();
-httpClientBuilder.AddStandardHedgingHandler();
 var gw2Client = services.BuildServiceProvider().GetRequiredService<Gw2Client>();
 
 await foreach (var recipe in gw2Client.Hero.Crafting.Recipes.GetRecipesBulk().ValueOnly())

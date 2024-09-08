@@ -30,7 +30,6 @@ var gw2ClientBuilder = builder.Services.AddHttpClient<Gw2Client>(
 );
 
 gw2ClientBuilder.AddStandardResilienceHandler();
-gw2ClientBuilder.AddStandardHedgingHandler();
 
 var app = builder.Build();
 try
