@@ -24,7 +24,13 @@ public static class Composer
         PrimaryHttpHandler = new HttpClientHandler { MaxConnectionsPerServer = 20 };
 #endif
 
-        ResilientHttpHandler = new ResilienceHandler(PrimaryHttpHandler);
+        ResilientHttpHandler = new ResilienceHandler(new LoggingHandler
+        {
+            InnerHandler = new ChaosHandler
+            {
+                InnerHandler = PrimaryHttpHandler
+            }
+        });
     }
 
     public static T Resolve<T>() =>

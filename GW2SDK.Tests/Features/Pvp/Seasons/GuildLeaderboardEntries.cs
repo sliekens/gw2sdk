@@ -10,15 +10,8 @@ public class GuildLeaderboardEntries(ITestOutputHelper outputHelper)
     [InlineData("2B2E80D3-0A74-424F-B0EA-E221500B323C", "guild", "na")]
     public async Task Can_be_found(string seasonId, string boardId, string regionId)
     {
-        var sut = new Gw2Client(
-            new HttpClient(
-                new LoggingHandler(outputHelper)
-                {
-                    InnerHandler = Composer.Resolve<HttpMessageHandler>()
-                },
-                disposeHandler: false
-            )
-        );
+        LoggingHandler.Output.Value = outputHelper;
+        var sut = Composer.Resolve<Gw2Client>();
 
         var (actual, context) =
             await sut.Pvp.GetLeaderboardEntries(seasonId, boardId, regionId, 0, 200);
