@@ -2,8 +2,6 @@
 
 The entry point for API access is `GuildWars2.Gw2Client`. From there you can use IntelliSense to discover resources. The class consists of logical groups containing related sets of APIs. For example, all APIs pertaining to the trading post are grouped into `Gw2Client.Commerce` and all APIs pertaining to items are grouped into `Gw2Client.Items`.
 
-> [!Video https://www.youtube.com/embed/_beHV1rfq0M]
-
 The `Gw2Client` has a single dependency on `System.Net.Http.HttpClient` which you must provide from your application code.
 
 The query methods on the `Gw2Client` return `Task` objects that you can use to await the result. The result is a tuple which contains 2 items:
@@ -84,7 +82,6 @@ This sample illustrates the following concepts:
 2. How to use the `Id` property to access the item details API with `GetItemById`
 
 For simplicity, `GetItemById` is called inside the loop, which is not recommended. Instead, you should use batching to get multiple items in a single request. For example, you could use `GetItemsBulk` to create a local copy of all items, and then use that copy to cross-reference item prices.
-
 
 [!code-csharp[](../../samples/BasicUsage/Program.cs)]
 
