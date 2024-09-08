@@ -52,17 +52,29 @@ internal class LoggingHandler(ITestOutputHelper output) : DelegatingHandler
         {
             if (response.Content.Headers.ContentEncoding.LastOrDefault() == "gzip")
             {
-                // For some reason, can't get repeatable reads with ReadAsStreamAsync here
-                var content = await response.Content.ReadAsByteArrayAsync();
-                using var decompressed = new GZipStream(new MemoryStream(content), CompressionMode.Decompress, leaveOpen: true);
-                using var reader = new StreamReader(decompressed);
-                var text = await reader.ReadToEndAsync();
-                if (text.Length > 1024)
-                {
-                    text = text.Substring(0, 1024) + "...";
-                }
+                // IMPORTANT: buffer the Content to make ReadAsStreamAsync return a rewindable MemoryStream
+                await response.Content.LoadIntoBufferAsync();
 
-                output.WriteLine(text);
+                // ALSO IMPORTANT: do not dispose the MemoryStream because subsequent ReadAsStreamAsync calls return the same instance
+                var content = await response.Content.ReadAsStreamAsync();
+
+                try
+                {
+                    using var decompressed = new GZipStream(content, CompressionMode.Decompress, leaveOpen: true);
+                    using var reader = new StreamReader(decompressed);
+                    var text = await reader.ReadToEndAsync();
+                    if (text.Length > 1024)
+                    {
+                        text = text.Substring(0, 1024) + "...";
+                    }
+
+                    output.WriteLine(text);
+                }
+                finally
+                {
+                    // ALSO IMPORTANT: rewind the stream for subsequent reads
+                    content.Position = 0;
+                }
             }
             else
             {
