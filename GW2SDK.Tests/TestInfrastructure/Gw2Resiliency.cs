@@ -44,8 +44,7 @@ public static class Gw2Resiliency
             { Result.StatusCode: TooManyRequests } => true,
             { Result.StatusCode: InternalServerError } => true,
             { Result.StatusCode: BadGateway } => true,
-            { Result.StatusCode: ServiceUnavailable } when await GetText(attempt.Outcome) == "API not active" => false,
-            { Result.StatusCode: ServiceUnavailable } => true,
+            { Result.StatusCode: ServiceUnavailable } => await GetText(attempt.Outcome) != "API not active",
             { Result.StatusCode: GatewayTimeout } => true,
 
             // Sometimes the API returns weird data, also treat as internal errors
@@ -69,8 +68,7 @@ public static class Gw2Resiliency
             { Result.StatusCode: TooManyRequests } => true,
             { Result.StatusCode: InternalServerError } => true,
             { Result.StatusCode: BadGateway } => true,
-            { Result.StatusCode: ServiceUnavailable } when await GetText(attempt.Outcome) == "API not active" => false,
-            { Result.StatusCode: ServiceUnavailable } => true,
+            { Result.StatusCode: ServiceUnavailable } => await GetText(attempt.Outcome) != "API not active",
             { Result.StatusCode: GatewayTimeout } => true,
 
             // Sometimes the API returns weird data, also treat as internal errors
