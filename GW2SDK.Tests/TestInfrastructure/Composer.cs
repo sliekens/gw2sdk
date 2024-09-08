@@ -1,4 +1,8 @@
-﻿namespace GuildWars2.Tests.TestInfrastructure;
+﻿using Microsoft.Extensions.Http.Resilience;
+using Polly;
+using Polly.Simmy;
+
+namespace GuildWars2.Tests.TestInfrastructure;
 
 public static class Composer
 {
@@ -18,19 +22,32 @@ public static class Composer
 
             // Creating a new connection shouldn't take more than 10 seconds
             ConnectTimeout = TimeSpan.FromSeconds(10),
-            PooledConnectionLifetime = TimeSpan.FromMinutes(5)
+            PooledConnectionLifetime = TimeSpan.FromMinutes(15)
         };
 #else
         PrimaryHttpHandler = new HttpClientHandler { MaxConnectionsPerServer = 20 };
 #endif
 
-        ResilientHttpHandler = new ResilienceHandler(new LoggingHandler
+        var resiliencePipeline = new ResiliencePipelineBuilder<HttpResponseMessage>()
+            .AddTimeout(Gw2Resiliency.TotalTimeoutStrategy)
+            .AddRetry(Gw2Resiliency.RetryStrategy)
+            .AddCircuitBreaker(Gw2Resiliency.CircuitBreakerStrategy)
+            .AddHedging(Gw2Resiliency.HedgingStrategy)
+            .AddTimeout(Gw2Resiliency.AttemptTimeoutStrategy)
+            .Build();
+
+#pragma warning disable EXTEXP0001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+        ResilientHttpHandler = new ResilienceHandler(resiliencePipeline)
         {
-            InnerHandler = new ChaosHandler
+            InnerHandler = new LoggingHandler
             {
-                InnerHandler = PrimaryHttpHandler
+                InnerHandler = new ChaosHandler
+                {
+                    InnerHandler = PrimaryHttpHandler
+                }
             }
-        });
+        };
+#pragma warning restore EXTEXP0001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
     }
 
     public static T Resolve<T>() =>

@@ -7,12 +7,12 @@ Problems may arise from creating `new HttpClient()` instances with its parameter
 
 To counter these issues, Microsoft recommends doing one of two things:
 
-1. Either use a _long-lived_ client and set `PooledConnectionLifetime` to a reasonable value (e.g. 2 minutes)
+1. Either use a _long-lived_ client and set `PooledConnectionLifetime` to a reasonable value (e.g. 15 minutes)
 2. Or obtain _short-lived_ clients from `IHttpClientFactory` which manages the lifetime of the underlying connections for you
 
 ## Example: using a long-lived client
 
-In this example, a _long-lived_ client is created with a `PooledConnectionLifetime` of 2 minutes. The client is created once and reused for the lifetime of the application.
+In this example, a _long-lived_ client is created with a `PooledConnectionLifetime` of 15 minutes. The client is created once and reused for the lifetime of the application.
 
 > [!WARNING]
 > This solution is unavailable for .NET Framework, the `SocketsHttpHandler` only exists for .NET Core and .NET 5+.
@@ -22,7 +22,7 @@ This is a simpler way to safely use `HttpClient` compared to using `Microsoft.Ex
 ``` csharp
 var handler = new SocketsHttpHandler
 {
-    PooledConnectionLifetime = TimeSpan.FromMinutes(2)
+    PooledConnectionLifetime = TimeSpan.FromMinutes(15)
 };
 var sharedClient = new HttpClient(handler);
 ```
@@ -30,42 +30,38 @@ var sharedClient = new HttpClient(handler);
 > [!NOTE]
 > The shared `HttpClient` is never disposed in this case, which is on purpose. It's intended to stay alive for the lifetime of the application.
 
-To use Polly with this simplified usage pattern, you would need to create a custom `DelegatingHandler` that contains a `ResiliencePipeline` and then use that in the `HttpClient` constructor.
+To use Polly with this simplified usage pattern, see [Resilience with static clients](https://learn.microsoft.com/en-us/dotnet/fundamentals/networking/http/httpclient-guidelines#resilience-with-static-clients) for the recommended approach.
+
+Here is an example of how to configure Polly with a static client:
+
+(You can find the `Gw2Resiliency` code in the samples directory.)
 
 ``` csharp
+using System;
+using System.Net.Http;
+using Microsoft.Extensions.Http;
+using Microsoft.Extensions.Http.Resilience;
+using Polly;
 
-var handler = new SocketsHttpHandler
+var resiliencePipeline = new ResiliencePipelineBuilder<HttpResponseMessage>()
+    .AddTimeout(Gw2Resiliency.TotalTimeoutStrategy) // configure the total timeout for the entire request, including retries
+    .AddRetry(Gw2Resiliency.RetryStrategy) // configure delayed retries for  failed requests
+    .AddCircuitBreaker(Gw2Resiliency.CircuitBreakerStrategy) // configure blocking requests after too many failures
+    .AddHedging(Gw2Resiliency.HedgingStrategy) // configure hedging for slow requests and for certain errors
+    .AddTimeout(Gw2Resiliency.AttemptTimeoutStrategy); // configure the timeout for each individual request attempt
+    .Build();
+
+var primaryHandler = new SocketsHttpHandler
 {
-    PooledConnectionLifetime = TimeSpan.FromMinutes(2)
+    PooledConnectionLifetime = TimeSpan.FromMinutes(15)
 };
 
-var resilienceHandler = new ResilienceHandler(handler);
-var sharedClient = new HttpClient(resilienceHandler);
-
-public class ResilienceHandler : DelegatingHandler
+var resilienceHandler = new ResilienceHandler(resiliencePipeline)
 {
-    private readonly ResiliencePipeline<HttpResponseMessage> resiliencePipeline =
-        new ResiliencePipelineBuilder<HttpResponseMessage>()
-            .AddRetry(Gw2Resiliency.RetryStrategy)
-            .AddHedging(Gw2Resiliency.HedgingStrategy)
-            .Build();
+    InnerHandler = primaryHandler,
+};
 
-    public ResilienceHandler(HttpMessageHandler innerHandler)
-        : base(innerHandler)
-    {
-    }
-
-    protected override async Task<HttpResponseMessage> SendAsync(
-        HttpRequestMessage request,
-        CancellationToken cancellationToken
-    )
-    {
-        return await resiliencePipeline.ExecuteAsync(
-            async cancellationToken => await base.SendAsync(request, cancellationToken),
-            cancellationToken
-        );
-    }
-}
+var httpClient = new HttpClient(resilienceHandler);
 ```
 
 ## Example: using Microsoft.Extensions.Http to manage the connection lifetime

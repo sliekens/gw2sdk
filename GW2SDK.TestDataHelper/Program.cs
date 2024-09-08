@@ -27,7 +27,7 @@ var httpClientBuilder = appBuilder.Services.AddHttpClient<Gw2Client>(
         {
             // Creating a new connection shouldn't take more than 10 seconds
             ConnectTimeout = TimeSpan.FromSeconds(10),
-            PooledConnectionLifetime = TimeSpan.FromMinutes(5),
+            PooledConnectionLifetime = TimeSpan.FromMinutes(15),
             MaxConnectionsPerServer = 1000
         }
     );
@@ -38,11 +38,14 @@ httpClientBuilder.AddTypedClient<JsonAchievementService>()
     .AddTypedClient<JsonSkinService>();
 
 httpClientBuilder.AddResilienceHandler(
-    "api.guildwars2.com",
+    "Gw2Resiliency",
     resiliencePipelineBuilder =>
     {
-        resiliencePipelineBuilder.AddRetry(Gw2Resiliency.RetryStrategy);
-        resiliencePipelineBuilder.AddHedging(Gw2Resiliency.HedgingStrategy);
+        resiliencePipelineBuilder.AddTimeout(Gw2Resiliency.TotalTimeoutStrategy)
+            .AddRetry(Gw2Resiliency.RetryStrategy)
+            .AddCircuitBreaker(Gw2Resiliency.CircuitBreakerStrategy)
+            .AddHedging(Gw2Resiliency.HedgingStrategy)
+            .AddTimeout(Gw2Resiliency.AttemptTimeoutStrategy);
     }
 );
 

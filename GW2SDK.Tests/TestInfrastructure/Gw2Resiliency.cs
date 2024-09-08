@@ -1,7 +1,9 @@
 ﻿using System.Text.Json;
 using Polly;
+using Polly.CircuitBreaker;
 using Polly.Hedging;
 using Polly.Retry;
+using Polly.Timeout;
 using static System.Net.HttpStatusCode;
 
 #if NETFRAMEWORK
@@ -13,26 +15,69 @@ namespace GuildWars2.Tests.TestInfrastructure;
 // Static class to hold the resiliency strategies
 // 
 // Usage:
-//  resiliencePipelineBuilder.AddRetry(Gw2Resiliency.RetryStrategy);
-//  resiliencePipelineBuilder.AddHedging(Gw2Resiliency.HedgingStrategy);
+//  resiliencePipelineBuilder.AddTimeout(Gw2Resiliency.TotalTimeoutStrategy)
+//      .AddRetry(Gw2Resiliency.RetryStrategy)
+//      .AddCircuitBreaker(Gw2Resiliency.CircuitBreakerStrategy)
+//      .AddHedging(Gw2Resiliency.HedgingStrategy)
+//      .AddTimeout(Gw2Resiliency.AttemptTimeoutStrategy)
 public static class Gw2Resiliency
 {
+    public static readonly TimeoutStrategyOptions TotalTimeoutStrategy = new()
+    {
+        Timeout = TimeSpan.FromMinutes(3)
+    };
+
     // The API can return errors which can be fixed by a delayed retry
     public static readonly RetryStrategyOptions<HttpResponseMessage> RetryStrategy = new()
     {
-        MaxRetryAttempts = 100,
-        Delay = TimeSpan.FromSeconds(30),
+        MaxRetryAttempts = 10,
+        Delay = TimeSpan.FromSeconds(10),
         BackoffType = DelayBackoffType.Constant,
         UseJitter = true,
-        ShouldHandle = async attempt => attempt.Outcome switch
+        ShouldHandle = static async attempt => attempt.Outcome switch
         {
-            // Retry on too many requests
+            { Exception: OperationCanceledException } => !attempt.Context.CancellationToken.IsCancellationRequested,
+            { Exception: HttpRequestException } => true,
+            { Exception: TimeoutRejectedException } => true,
+            { Exception: BrokenCircuitException } => true,
+            { Result.StatusCode: RequestTimeout } => true,
             { Result.StatusCode: TooManyRequests } => true,
+            { Result.StatusCode: InternalServerError } => true,
+            { Result.StatusCode: BadGateway } => true,
+            { Result.StatusCode: ServiceUnavailable } when await GetText(attempt.Outcome) == "API not active" => false,
+            { Result.StatusCode: ServiceUnavailable } => true,
+            { Result.StatusCode: GatewayTimeout } => true,
 
-            // Retry on Service Unavailable just once
-            // because we don't know if it's intentional or due to technical difficulties
-            { Result.StatusCode: ServiceUnavailable } => attempt.AttemptNumber == 0
-                && await GetText(attempt.Outcome) != "API not active",
+            // Sometimes the API returns weird data, also treat as internal errors
+            { Result.IsSuccessStatusCode: false } => await GetText(attempt.Outcome) is "endpoint requires authentication"
+                or "unknown error"
+                or "ErrBadData"
+                or "ErrTimeout",
+
+            _ => false
+        }
+    };
+
+    public static readonly CircuitBreakerStrategyOptions<HttpResponseMessage> CircuitBreakerStrategy = new()
+    {
+        ShouldHandle = static async attempt => attempt.Outcome switch
+        {
+            { Exception: OperationCanceledException } => !attempt.Context.CancellationToken.IsCancellationRequested,
+            { Exception: HttpRequestException } => true,
+            { Exception: TimeoutRejectedException } => true,
+            { Result.StatusCode: RequestTimeout } => true,
+            { Result.StatusCode: TooManyRequests } => true,
+            { Result.StatusCode: InternalServerError } => true,
+            { Result.StatusCode: BadGateway } => true,
+            { Result.StatusCode: ServiceUnavailable } when await GetText(attempt.Outcome) == "API not active" => false,
+            { Result.StatusCode: ServiceUnavailable } => true,
+            { Result.StatusCode: GatewayTimeout } => true,
+
+            // Sometimes the API returns weird data, also treat as internal errors
+            { Result.IsSuccessStatusCode: false } => await GetText(attempt.Outcome) is "endpoint requires authentication"
+                or "unknown error"
+                or "ErrBadData"
+                or "ErrTimeout",
 
             _ => false
         }
@@ -43,22 +88,30 @@ public static class Gw2Resiliency
     public static readonly HedgingStrategyOptions<HttpResponseMessage> HedgingStrategy = new()
     {
         // If no response is received within 10 seconds, start a second request (without cancelling the first one.)
-        // As soon as either request completes, the other one is cancelled.
+        // As soon as either request completes successfully, the other one is cancelled.
         Delay = TimeSpan.FromSeconds(10),
-        MaxHedgedAttempts = 10,
-        ShouldHandle = async attempt => attempt.Outcome switch
-        {
-            { Result.IsSuccessStatusCode: true } => false,
 
-            // The following statuses are considered retryable without a back-off delay
-            { Result.StatusCode: InternalServerError or BadGateway or GatewayTimeout } => true,
+        // Additionally, hedge certain errors which might succeed on a second attempt without waiting
+        ShouldHandle = static async attempt => attempt.Outcome switch
+        {
+            { Result.StatusCode: RequestTimeout } => true,
+            { Result.StatusCode: InternalServerError } => true,
+            { Result.StatusCode: BadGateway } => true,
+            { Result.StatusCode: GatewayTimeout } => true,
 
             // Sometimes the API returns weird data, also treat as internal errors
-            _ => await GetText(attempt.Outcome) is "endpoint requires authentication"
+            { Result.IsSuccessStatusCode: false } => await GetText(attempt.Outcome) is "endpoint requires authentication"
                 or "unknown error"
                 or "ErrBadData"
-                or "ErrTimeout"
+                or "ErrTimeout",
+
+            _ => false
         }
+    };
+
+    public static readonly TimeoutStrategyOptions AttemptTimeoutStrategy = new()
+    {
+        Timeout = TimeSpan.FromSeconds(30)
     };
 
     // Helper method to get the "text" property from the API response
@@ -75,10 +128,10 @@ public static class Gw2Resiliency
             return null;
         }
 
-        // IMPORTANT: buffer the content so it can be read multiple times if needed
+        // IMPORTANT: buffer the Content to make ReadAsStreamAsync return a rewindable MemoryStream
         await attempt.Result.Content.LoadIntoBufferAsync();
 
-        // ALSO IMPORTANT: do not dispose the content stream
+        // ALSO IMPORTANT: do not dispose the MemoryStream because subsequent ReadAsStreamAsync calls return the same instance
         var content = await attempt.Result.Content.ReadAsStreamAsync();
         try
         {
@@ -87,6 +140,7 @@ public static class Gw2Resiliency
         }
         finally
         {
+            // ALSO IMPORTANT: rewind the stream for subsequent reads
             content.Position = 0;
         }
     }
