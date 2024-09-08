@@ -1,6 +1,7 @@
 ﻿using GuildWars2.Guilds.Logs;
 using GuildWars2.Http;
 using GuildWars2.Tests.TestInfrastructure;
+using Polly.Timeout;
 
 namespace GuildWars2.Tests.Features.Guilds;
 
@@ -74,7 +75,6 @@ public class GuildLog
             if (error is not null) break;
         }
 
-        var badResponse = Assert.IsType<BadResponseException>(error);
-        Assert.True(badResponse.Message is "Gateway Time-out" or "Bad Gateway");
+        Assert.IsType<TimeoutRejectedException>(error);
     }
 }
