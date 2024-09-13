@@ -6,7 +6,6 @@
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <noWarn>1591</noWarn>
         <RootNamespace>GuildWars2.TestDataHelper</RootNamespace>
-        <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
     <ItemGroup>

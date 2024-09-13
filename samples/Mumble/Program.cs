@@ -1,5 +1,4 @@
-﻿using System;
-using GuildWars2;
+﻿using GuildWars2;
 using GuildWars2.Mumble;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

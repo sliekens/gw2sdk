@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Http.Resilience;
 using Polly;
-using Polly.Simmy;
 
 namespace GuildWars2.Tests.TestInfrastructure;
 

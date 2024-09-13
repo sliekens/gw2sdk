@@ -1,8 +1,4 @@
-﻿using System;
-using System.Net.Http;
-using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Text.Json;
 using GuildWars2;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

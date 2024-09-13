@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using GuildWars2.Metadata;
+﻿using GuildWars2.Metadata;
 using Spectre.Console;
 using Spectre.Console.Rendering;
 

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using GuildWars2.Hero.Crafting.Recipes;
+﻿using GuildWars2.Hero.Crafting.Recipes;
 using GuildWars2.Items;
 
 namespace MostVersatileMaterials;

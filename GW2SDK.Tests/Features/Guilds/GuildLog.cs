@@ -1,5 +1,4 @@
 ﻿using GuildWars2.Guilds.Logs;
-using GuildWars2.Http;
 using GuildWars2.Tests.TestInfrastructure;
 using Polly.Timeout;
 

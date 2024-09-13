@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading;
-using GuildWars2;
+﻿using GuildWars2;
 using GuildWars2.Hero.Crafting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

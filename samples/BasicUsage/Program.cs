@@ -1,6 +1,4 @@
-﻿using System;
-using System.Net.Http;
-using GuildWars2;
+﻿using GuildWars2;
 
 // Create a Gw2Client which requires an HttpClient
 using var httpClient = new HttpClient();

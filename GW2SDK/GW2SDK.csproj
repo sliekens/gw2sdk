@@ -9,7 +9,6 @@
     <TargetFrameworks>$(TargetFrameworks);net8.0</TargetFrameworks>
     <IsAotCompatible>$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net6.0'))</IsAotCompatible>
     <RootNamespace>GuildWars2</RootNamespace>
-    <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyTitle>GW2 Client SDK</AssemblyTitle>
     <Product>GW2SDK</Product>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -59,6 +58,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Using Include="JetBrains.Annotations" />
+    <Using Include="GuildWars2.Annotations" />
+    <Using Include="System.Net.Http.HttpMethod" Static="True" />
+    <Using Include="System.Net.HttpStatusCode" Static="True" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MinVer">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -71,9 +77,10 @@
   </ItemGroup>
 
   <!-- Reference assemblies that are not included by default in .NET Framework -->
-  <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
-    <Reference Include="System.Net.Http" />
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <PackageReference Include="System.Runtime.InteropServices.RuntimeInformation" />
+    <Reference Include="System.Net.Http" />
+    <Using Include="System.Net.Http"  />
   </ItemGroup>
 
   <Target Name="LinkPackageReleaseNotes" AfterTargets="MinVer">
