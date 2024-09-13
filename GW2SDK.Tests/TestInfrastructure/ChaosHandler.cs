@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace GuildWars2.Tests.TestInfrastructure;
@@ -15,12 +16,21 @@ internal class ChaosHandler : DelegatingHandler
             if (Random.Next(3) == 1)
             {
                 var json = /*lang=json,strict*/ """
-                        {"text": "unknown error"}
+                    {"text":"unknown error"}
                     """;
                 return new HttpResponseMessage(HttpStatusCode.InternalServerError)
                 {
-                    Headers = { { "Server", "InMemory" } },
+                    Headers =
+                    {
+                        Connection = { "keep-alive" },
+                        Date = DateTimeOffset.UtcNow ,
+                        Server = { ProductInfoHeaderValue.Parse("InMemory") }
+
+                    },
                     Content = new StringContent(json, Encoding.UTF8, "application/json")
+                    {
+                        Headers = { ContentLength = json.Length }
+                    }
                 };
             }
         }
