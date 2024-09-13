@@ -56,7 +56,7 @@
   </ItemGroup>
 
   <!-- Reference assemblies that are not included by default in .NET Framework -->
-  <ItemGroup Condition="'$(TargetFramework)' == 'net481'">
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <Reference Include="System.Web" />
   </ItemGroup>
 </Project>
