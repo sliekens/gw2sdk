@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Http.Resilience;
+﻿using System.Net.Http.Headers;
+using System.Runtime.InteropServices;
+using Microsoft.Extensions.Http.Resilience;
 using Polly;
 
 namespace GuildWars2.Tests.TestInfrastructure;
@@ -84,7 +86,11 @@ public static class Composer
         {
             return new HttpClient(HttpMessageHandler(), disposeHandler: false)
             {
-                Timeout = TimeSpan.FromMinutes(5)
+                Timeout = TimeSpan.FromMinutes(5),
+                DefaultRequestHeaders =
+                {
+                    UserAgent = { ProductInfoHeaderValue.Parse($"{typeof(HttpClient).FullName}/{Environment.Version}") }
+                }
             };
         }
     }
