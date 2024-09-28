@@ -50,6 +50,7 @@ public static class Gw2Resiliency
             // Sometimes the API returns weird data, also treat as internal errors
             { Result.IsSuccessStatusCode: false, Result.Content.Headers.ContentLength: 0 } => true,
             { Result.IsSuccessStatusCode: false } => await GetText(attempt.Outcome) is "endpoint requires authentication"
+                or "unknown error"
                 or "ErrBadData"
                 or "ErrTimeout",
 
@@ -74,6 +75,7 @@ public static class Gw2Resiliency
             // Sometimes the API returns weird data, also treat as internal errors
             { Result.IsSuccessStatusCode: false, Result.Content.Headers.ContentLength: 0 } => true,
             { Result.IsSuccessStatusCode: false } => await GetText(attempt.Outcome) is "endpoint requires authentication"
+                or "unknown error"
                 or "ErrBadData"
                 or "ErrTimeout",
 
@@ -100,6 +102,7 @@ public static class Gw2Resiliency
             // Sometimes the API returns weird data, also treat as internal errors
             { Result.IsSuccessStatusCode: false, Result.Content.Headers.ContentLength: 0 } => true,
             { Result.IsSuccessStatusCode: false } => await GetText(attempt.Outcome) is "endpoint requires authentication"
+                or "unknown error"
                 or "ErrBadData"
                 or "ErrTimeout",
 
