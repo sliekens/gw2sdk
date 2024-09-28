@@ -45,7 +45,16 @@ public class Floors
                     foreach (var (mapId, map) in region.Maps)
                     {
                         Assert.Equal(mapId, map.Id);
-                        Assert.NotEmpty(map.Name);
+                        if (map.Id == 1150)
+                        {
+                            // Unnamed Salvation Pass (Public) map
+                            Assert.Empty(map.Name);
+                        }
+                        else
+                        {
+                            Assert.NotEmpty(map.Name);
+                        }
+
                         Assert.True(map.MinLevel >= 0);
                         Assert.True(map.MaxLevel >= map.MinLevel);
                         Assert.Contains(map.DefaultFloor, floorIds);

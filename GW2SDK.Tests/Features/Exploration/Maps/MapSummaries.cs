@@ -22,7 +22,7 @@ public class MapSummaries
                 Assert.True(entry.Id > 0);
                 if (entry.Id == 1150)
                 {
-                    // Unknown map
+                    // Unnamed Salvation Pass (Public) map
                     Assert.Empty(entry.Name);
                 }
                 else
