@@ -20,7 +20,16 @@ public class MapSummaries
             entry =>
             {
                 Assert.True(entry.Id > 0);
-                Assert.NotEmpty(entry.Name);
+                if (entry.Id == 1150)
+                {
+                    // Unknown map
+                    Assert.Empty(entry.Name);
+                }
+                else
+                {
+                    Assert.NotEmpty(entry.Name);
+                }
+
                 Assert.True(entry.MinLevel >= 0);
                 Assert.True(entry.MaxLevel >= entry.MinLevel);
                 Assert.True(entry.Kind.IsDefined());

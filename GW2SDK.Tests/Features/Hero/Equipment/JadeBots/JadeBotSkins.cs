@@ -21,7 +21,7 @@ public class JadeBotSkins
                 Assert.True(entry.Id > 0);
                 Assert.NotEmpty(entry.Name);
 
-                // Missing descriptionfor Roundtail Dragon
+                // Missing description for Roundtail Dragon
                 if (entry.Id == 6)
                 {
                     Assert.Empty(entry.Description);
