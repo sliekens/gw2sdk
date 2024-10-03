@@ -10,7 +10,7 @@ internal static class InviteDeclinedJson
         RequiredMember id = "id";
         RequiredMember time = "time";
         RequiredMember user = "user";
-        RequiredMember declinedBy = "declined_by";
+        OptionalMember declinedBy = "declined_by";
 
         foreach (var member in json.EnumerateObject())
         {
@@ -48,7 +48,7 @@ internal static class InviteDeclinedJson
             Id = id.Map(static value => value.GetInt32()),
             Time = time.Map(static value => value.GetDateTimeOffset()),
             User = user.Map(static value => value.GetStringRequired()),
-            DeclinedBy = declinedBy.Map(static value => value.GetStringRequired())
+            DeclinedBy = declinedBy.Map(static value => value.GetString()) ?? ""
         };
     }
 }

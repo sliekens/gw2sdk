@@ -9,5 +9,6 @@ public sealed record InviteDeclined : GuildLogEntry
     public required string User { get; init; }
 
     /// <summary>The ID of the user who declined the invite.</summary>
+    /// <remarks>Can be empty.</remarks>
     public required string DeclinedBy { get; init; }
 }
