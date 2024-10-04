@@ -325,6 +325,7 @@ public sealed record BuildTemplateLink : Link
 
         static byte Weapon(WeaponType weapon)
         {
+            // TODO: add spear (terrestrial)
             return weapon switch
             {
                 WeaponType.Axe => 0x05,
@@ -557,6 +558,7 @@ public sealed record BuildTemplateLink : Link
 
         static WeaponType Weapon(int weaponId)
         {
+            // TODO: add spear (terrestrial)
             return weaponId switch
             {
                 0x05 => WeaponType.Axe,
