@@ -7,7 +7,7 @@ public enum Rarity
     /// <summary>Gray items.</summary>
     Junk = 1,
 
-    /// <summary>white items.</summary>
+    /// <summary>White items.</summary>
     Basic,
 
     /// <summary>Blue items.</summary>
