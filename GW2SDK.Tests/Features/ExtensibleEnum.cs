@@ -1,4 +1,5 @@
-﻿using GuildWars2.Items;
+﻿using GuildWars2.Hero.Accounts;
+using GuildWars2.Items;
 
 namespace GuildWars2.Tests.Features;
 
@@ -15,6 +16,13 @@ public class ExtensibleEnum
     public void Indicates_when_enum_name_is_not_defined()
     {
         var extensible = new Extensible<Rarity>("Mythical");
+        Assert.False(extensible.IsDefined());
+    }
+
+    [Fact]
+    public void Indicates_when_enum_name_is_not_defined_when_enum_has_a_default_value()
+    {
+        var extensible = new Extensible<ProductName>("GuildWars3");
         Assert.False(extensible.IsDefined());
     }
 
@@ -96,6 +104,14 @@ public class ExtensibleEnum
     public void Converts_unknown_names_to_null()
     {
         var extensible = new Extensible<Rarity>("Mythical");
+        var actual = extensible.ToEnum();
+        Assert.Null(actual);
+    }
+
+    [Fact]
+    public void Converts_unknown_names_to_null_when_enum_has_a_default_value()
+    {
+        var extensible = new Extensible<ProductName>("GuildWars3");
         var actual = extensible.ToEnum();
         Assert.Null(actual);
     }

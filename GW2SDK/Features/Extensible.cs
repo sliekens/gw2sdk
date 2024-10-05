@@ -12,31 +12,26 @@ public struct Extensible<TEnum>(string Name) where TEnum : struct, Enum
     /// <returns><c>true</c> if the name is defined in the enum; otherwise, <c>false</c>.</returns>
     public bool IsDefined()
     {
-        if (Enum.TryParse<TEnum>(Name, true, out var value))
+        if (Name is null)
         {
-            return true;
+            return Enum.IsDefined(typeof(TEnum), 0);
         }
 
-        if (Enum.IsDefined(typeof(TEnum), 0))
-        {
-            return true;
-        }
-
-        return false;
+        return Enum.TryParse<TEnum>(Name, true, out var _);
     }
 
     /// <summary>Converts the current name to the corresponding enum value.</summary>
     /// <value>The corresponding enum value if the conversion is successful; otherwise, <c>null</c>.</value>
     public TEnum? ToEnum()
     {
+        if (Name is null)
+        {
+            return Enum.IsDefined(typeof(TEnum), 0) ? default(TEnum) : null;
+        }
+
         if (Enum.TryParse<TEnum>(Name, true, out var value))
         {
             return value;
-        }
-
-        if (Enum.IsDefined(typeof(TEnum), 0))
-        {
-            return default(TEnum);
         }
 
         return null;
