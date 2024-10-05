@@ -20,6 +20,7 @@ internal static class Routes
         "/v2/account/home",
         "/v2/account/home/cats",
         "/v2/account/home/nodes",
+        "/v2/account/homestead/decorations",
         "/v2/account/inventory",
         "/v2/account/jadebots",
         "/v2/account/legendaryarmory",
