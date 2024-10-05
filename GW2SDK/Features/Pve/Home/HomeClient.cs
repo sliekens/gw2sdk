@@ -1,11 +1,13 @@
-﻿using GuildWars2.Http;
+﻿using System.Runtime.CompilerServices;
+using GuildWars2.Http;
 using GuildWars2.Json;
 using GuildWars2.Pve.Home.Cats;
+using GuildWars2.Pve.Home.Decorations;
 using GuildWars2.Pve.Home.Nodes;
 
 namespace GuildWars2.Pve.Home;
 
-/// <summary>Provides query methods for unlocked Home nodes and cats.</summary>
+/// <summary>Provides query methods for home instances and homesteads.</summary>
 [PublicAPI]
 public sealed class HomeClient
 {
@@ -67,6 +69,30 @@ public sealed class HomeClient
     }
 
     #endregion v2/account/home/nodes
+
+    #region v2/account/homestead
+
+    /// <summary>Retrieves the homestead decorations unlocked on the account associated with the access token. This endpoint is only
+    /// accessible with a valid access token.</summary>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public async Task<(HashSet<UnlockedDecoration> Value, MessageContext Context)> GetUnlockedDecorations(
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var requestBuilder = RequestBuilder.HttpGet("v2/account/homestead/decorations", accessToken);
+        var request = requestBuilder.Build();
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetUnlockedDecoration());
+            return (value, response.Context);
+        }
+    }
+
+    #endregion v2/account/homestead
 
     #region v2/home/cats
 
@@ -293,4 +319,308 @@ public sealed class HomeClient
     }
 
     #endregion v2/home/nodes
+
+    #region v2/homestead/decorations
+
+    /// <summary>Retrieves the IDs of all homemestead decorations.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetDecorationsIndex(
+        CancellationToken cancellationToken = default
+    )
+    {
+        var requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations");
+        var request = requestBuilder.Build();
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
+    }
+
+    /// <summary>Retrieves a homestead decoration by its ID.</summary>
+    /// <param name="decorationId">The decoration ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public async Task<(Decoration Value, MessageContext Context)> GetDecorationById(
+        int decorationId,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations");
+        requestBuilder.Query.AddId(decorationId);
+        requestBuilder.Query.AddLanguage(language);
+        var request = requestBuilder.Build();
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetDecoration();
+            return (value, response.Context);
+        }
+    }
+
+    /// <summary>Retrieves homestead decorations by their IDs.</summary>
+    /// <param name="decorationIds">The decoration IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public async Task<(HashSet<Decoration> Value, MessageContext Context)> GetDecorationsByIds(
+        IEnumerable<int> decorationIds,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations");
+        requestBuilder.Query.AddIds(decorationIds);
+        requestBuilder.Query.AddLanguage(language);
+        var request = requestBuilder.Build();
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetDecoration());
+            return (value, response.Context);
+        }
+    }
+
+    /// <summary>Retrieves a page of homestead decorations.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public async Task<(HashSet<Decoration> Value, MessageContext Context)> GetDecorationsByPage(
+        int pageIndex,
+        int? pageSize,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations");
+        requestBuilder.Query.AddPage(pageIndex, pageSize);
+        requestBuilder.Query.AddLanguage(language);
+        var request = requestBuilder.Build();
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetDecoration());
+            return (value, response.Context);
+        }
+    }
+
+    /// <summary>Retrieves homestead decorations by their IDs by chunking requests and executing them in parallel. Supports more than 200 IDs.</summary>
+    /// <param name="decorationIds">The decoration IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="degreeOfParallelism">The maximum number of chunks to request in parallel.</param>
+    /// <param name="chunkSize">How many IDs to request per chunk.</param>
+    /// <param name="progress">A progress report provider.</param>
+    /// <param name="cancellationToken">A token to cancel the request(s).</param>
+    /// <returns>A task that represents the API request(s).</returns>
+    public IAsyncEnumerable<(Decoration Value, MessageContext Context)> GetDecorationsBulk(
+        IEnumerable<int> decorationIds,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,
+        int chunkSize = BulkQuery.DefaultChunkSize,
+        IProgress<BulkProgress>? progress = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return BulkQuery.QueryAsync(
+            decorationIds,
+            GetChunk,
+            degreeOfParallelism,
+            chunkSize,
+            progress,
+            cancellationToken
+        );
+
+        // ReSharper disable once VariableHidesOuterVariable (intended, believe it or not)
+        async Task<IReadOnlyCollection<(Decoration, MessageContext)>> GetChunk(
+            IEnumerable<int> chunk,
+            CancellationToken cancellationToken
+        )
+        {
+            var (values, context) = await GetDecorationsByIds(
+                    chunk,
+                    language,
+                    missingMemberBehavior,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            return values.Select(value => (value, context)).ToList();
+        }
+    }
+
+    /// <summary>Retrieves all homestead decorations by chunking requests and executing them in parallel.</summary>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="degreeOfParallelism">The maximum number of chunks to request in parallel.</param>
+    /// <param name="chunkSize">How many IDs to request per chunk.</param>
+    /// <param name="progress">A progress report provider.</param>
+    /// <param name="cancellationToken">A token to cancel the request(s).</param>
+    /// <returns>A task that represents the API request(s).</returns>
+    public async IAsyncEnumerable<(Decoration Value, MessageContext Context)> GetDecorationsBulk(
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,
+        int chunkSize = BulkQuery.DefaultChunkSize,
+        IProgress<BulkProgress>? progress = default,
+        [EnumeratorCancellation] CancellationToken cancellationToken = default
+    )
+    {
+        var (value, _) = await GetDecorationsIndex(cancellationToken).ConfigureAwait(false);
+        var producer = GetDecorationsBulk(
+            value,
+            language,
+            missingMemberBehavior,
+            degreeOfParallelism,
+            chunkSize,
+            progress,
+            cancellationToken
+        );
+        await foreach (var decoration in producer.ConfigureAwait(false))
+        {
+            yield return decoration;
+        }
+    }
+
+    #endregion v2/homestead/decorations
+
+    #region v2/homestead/decorations/categories
+
+    /// <summary>Retrieves all homestead decoration categories.</summary>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public async Task<(HashSet<DecorationCategory> Value, MessageContext Context)> GetDecorationCategories(
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations/categories");
+        requestBuilder.Query.AddAllIds();
+        requestBuilder.Query.AddLanguage(language);
+        var request = requestBuilder.Build();
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetDecorationCategory());
+            return (value, response.Context);
+        }
+    }
+
+    /// <summary>Retrieves the IDs of all homestead decoration categories.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public async Task<(HashSet<int> Value, MessageContext Context)> GetDecorationCategoriesIndex(
+        CancellationToken cancellationToken = default
+    )
+    {
+        var requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations/categories");
+        var request = requestBuilder.Build();
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            return (value, response.Context);
+        }
+    }
+
+    /// <summary>Retrieves a homestead decoration category by its ID.</summary>
+    /// <param name="categoryId">The category ID.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public async Task<(DecorationCategory Value, MessageContext Context)> GetDecorationCategoryById(
+        int categoryId,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations/categories");
+        requestBuilder.Query.AddId(categoryId);
+        requestBuilder.Query.AddLanguage(language);
+        var request = requestBuilder.Build();
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetDecorationCategory();
+            return (value, response.Context);
+        }
+    }
+
+    /// <summary>Retrieves homestead decoration categories by their IDs.</summary>
+    /// <param name="categoryIds">The category IDs.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public async Task<(HashSet<DecorationCategory> Value, MessageContext Context)> GetDecorationCategoriesByIds(
+        IEnumerable<int> categoryIds,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations/categories");
+        requestBuilder.Query.AddIds(categoryIds);
+        requestBuilder.Query.AddLanguage(language);
+        var request = requestBuilder.Build();
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetDecorationCategory());
+            return (value, response.Context);
+        }
+    }
+
+    /// <summary>Retrieves a page of homestead decoration categories.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="language">The language to use for descriptions.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public async Task<(HashSet<DecorationCategory> Value, MessageContext Context)> GetDecorationCategoriesByPage(
+        int pageIndex,
+        int? pageSize,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations/categories");
+        requestBuilder.Query.AddPage(pageIndex, pageSize);
+        requestBuilder.Query.AddLanguage(language);
+        var request = requestBuilder.Build();
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetDecorationCategory());
+            return (value, response.Context);
+        }
+    }
+
+    #endregion v2/homestead/decorations/categories
 }

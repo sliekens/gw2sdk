@@ -101,6 +101,8 @@ internal static class Routes
         "/v2/home",
         "/v2/home/cats",
         "/v2/home/nodes",
+        "/v2/homestead/decorations",
+        "/v2/homestead/decorations/categories",
         "/v2/items",
         "/v2/itemstats",
         "/v2/jadebots",

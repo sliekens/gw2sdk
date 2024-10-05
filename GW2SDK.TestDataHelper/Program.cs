@@ -35,7 +35,8 @@ var httpClientBuilder = appBuilder.Services.AddHttpClient<Gw2Client>(
 httpClientBuilder.AddTypedClient<JsonAchievementService>()
     .AddTypedClient<JsonItemService>()
     .AddTypedClient<JsonRecipeService>()
-    .AddTypedClient<JsonSkinService>();
+    .AddTypedClient<JsonSkinService>()
+    .AddTypedClient<JsonDecorationsService>();
 
 httpClientBuilder.AddResilienceHandler(
     "Gw2Resiliency",
@@ -98,6 +99,17 @@ try
                 {
                     var service = app.Services.GetRequiredService<JsonSkinService>();
                     var documents = await service.GetAllJsonSkins(new ProgressAdapter(skins));
+                    foreach (var document in documents)
+                    {
+                        await file.WriteLineAsync(document);
+                    }
+                }
+
+                var decorations = ctx.AddTask("Downloading decorations.");
+                await using (var file = CreateTextCompressed(Path.Combine(outDir, "decorations.json.gz")))
+                {
+                    var service = app.Services.GetRequiredService<JsonDecorationsService>();
+                    var documents = await service.GetAllJsonDecorations(new ProgressAdapter(decorations));
                     foreach (var document in documents)
                     {
                         await file.WriteLineAsync(document);
