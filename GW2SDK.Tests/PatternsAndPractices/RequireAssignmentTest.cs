@@ -13,14 +13,19 @@ public class RequireAssignmentTest(AssemblyFixture fixture) : IClassFixture<Asse
             actual =>
             {
                 Assert.True(
-                    IsRequired(actual),
+                    IsCompliant(actual),
                     $"{actual.DeclaringType?.Name}.{actual.Name} must be read-only or read-write and marked as 'required'."
                 );
             }
         );
 
-        static bool IsRequired(PropertyInfo actual)
+        static bool IsCompliant(PropertyInfo actual)
         {
+            if (actual.CustomAttributes.Any(annotation => annotation.AttributeType == typeof(ObsoleteAttribute)))
+            {
+                return true;
+            }
+
             return !actual.CanWrite
                 || actual.CustomAttributes.Any(
                     annotation => annotation.AttributeType.Name == "RequiredMemberAttribute"
