@@ -9,6 +9,7 @@ using GuildWars2.Wvw.Matches.Scores;
 using GuildWars2.Wvw.Matches.Stats;
 using GuildWars2.Wvw.Objectives;
 using GuildWars2.Wvw.Ranks;
+using GuildWars2.Wvw.Timers;
 using GuildWars2.Wvw.Upgrades;
 
 namespace GuildWars2.Wvw;
@@ -1184,4 +1185,44 @@ public sealed class WvwClient
     }
 
     #endregion
+
+    #region v2/wvw/timers
+
+    /// <summary>Retrieves the WvW lockout timer.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public async Task<(WvwTimer Value, MessageContext Context)> GetLockoutTimer(
+        CancellationToken cancellationToken = default
+    )
+    {
+        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/timers/lockout");
+        var request = requestBuilder.Build();
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetWvwTimer();
+            return (value, response.Context);
+        }
+    }
+
+    /// <summary>Retrieves the WvW team assignment timer.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public async Task<(WvwTimer Value, MessageContext Context)> GetTeamAssignmentTimer(
+        CancellationToken cancellationToken = default
+    )
+    {
+        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/timers/teamAssignment");
+        var request = requestBuilder.Build();
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetWvwTimer();
+            return (value, response.Context);
+        }
+    }
+
+    #endregion v2/wvw/timers
 }
