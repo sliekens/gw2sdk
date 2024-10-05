@@ -23,5 +23,11 @@ public enum ProductName
     PathOfFire,
 
     /// <summary>The End of Dragons (EoD) expansion.</summary>
-    EndOfDragons
+    EndOfDragons,
+
+    /// <summary>The Secrets of the Obscure (SotO) expansion.</summary>
+    SecretsOfTheObscure,
+
+    /// <summary>The Janthir Wilds (JW) expansion.</summary>
+    JanthirWilds
 }
