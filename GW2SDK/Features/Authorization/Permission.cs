@@ -32,5 +32,8 @@ public enum Permission
     Wallet,
 
     /// <summary>Grants access to the trading post information.</summary>
-    TradingPost
+    TradingPost,
+
+    /// <summary>Grants access to the WvW guild information.</summary>
+    Wvw
 }
