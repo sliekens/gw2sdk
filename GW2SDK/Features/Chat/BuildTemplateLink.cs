@@ -252,26 +252,20 @@ public sealed record BuildTemplateLink : Link
         if (Weapon3 != WeaponType.None)
         {
             buffer.WriteUInt8(3);
-            buffer.WriteUInt8(Weapon(Weapon1));
-            buffer.Padding(1);
-            buffer.WriteUInt8(Weapon(Weapon2));
-            buffer.Padding(1);
-            buffer.WriteUInt8(Weapon(Weapon3));
-            buffer.Padding(1);
+            buffer.WriteUInt16(Weapon(Weapon1));
+            buffer.WriteUInt16(Weapon(Weapon2));
+            buffer.WriteUInt16(Weapon(Weapon3));
         }
         else if (Weapon2 != WeaponType.None)
         {
             buffer.WriteUInt8(2);
-            buffer.WriteUInt8(Weapon(Weapon1));
-            buffer.Padding(1);
-            buffer.WriteUInt8(Weapon(Weapon2));
-            buffer.Padding(1);
+            buffer.WriteUInt16(Weapon(Weapon1));
+            buffer.WriteUInt16(Weapon(Weapon2));
         }
         else if (Weapon1 != WeaponType.None)
         {
             buffer.WriteUInt8(1);
-            buffer.WriteUInt8(Weapon(Weapon1));
-            buffer.Padding(1);
+            buffer.WriteUInt16(Weapon(Weapon1));
         }
         else
         {
@@ -323,27 +317,27 @@ public sealed record BuildTemplateLink : Link
                 | ((byte)grandmasterTrait << 4));
         }
 
-        static byte Weapon(WeaponType weapon)
+        static ushort Weapon(WeaponType weapon)
         {
-            // TODO: add spear (terrestrial)
             return weapon switch
             {
-                WeaponType.Axe => 0x05,
-                WeaponType.Longbow => 0x23,
-                WeaponType.Dagger => 0x2f,
-                WeaponType.Focus => 0x31,
-                WeaponType.Greatsword => 0x32,
-                WeaponType.Hammer => 0x33,
-                WeaponType.Mace => 0x35,
-                WeaponType.Pistol => 0x36,
-                WeaponType.Rifle => 0x55,
-                WeaponType.Scepter => 0x56,
-                WeaponType.Shield => 0x57,
-                WeaponType.Staff => 0x59,
-                WeaponType.Sword => 0x5a,
-                WeaponType.Torch => 0x66,
-                WeaponType.Warhorn => 0x67,
-                WeaponType.Shortbow => 0x6b,
+                WeaponType.Axe => 0x0005,
+                WeaponType.Longbow => 0x0023,
+                WeaponType.Dagger => 0x002f,
+                WeaponType.Focus => 0x0031,
+                WeaponType.Greatsword => 0x0032,
+                WeaponType.Hammer => 0x0033,
+                WeaponType.Mace => 0x0035,
+                WeaponType.Pistol => 0x0036,
+                WeaponType.Rifle => 0x0055,
+                WeaponType.Scepter => 0x0056,
+                WeaponType.Shield => 0x0057,
+                WeaponType.Staff => 0x0059,
+                WeaponType.Sword => 0x005a,
+                WeaponType.Torch => 0x0066,
+                WeaponType.Warhorn => 0x0067,
+                WeaponType.Shortbow => 0x006b,
+                WeaponType.Spear => 0x0109,
                 _ => 0
             };
         }
@@ -451,8 +445,7 @@ public sealed record BuildTemplateLink : Link
             var weaponCount = buffer.ReadUInt8();
             for (var i = 0; i < weaponCount; i++)
             {
-                var weapon = buffer.ReadUInt8();
-                buffer.Padding(1);
+                var weapon = buffer.ReadUInt16();
                 if (weapon1 == WeaponType.None)
                 {
                     weapon1 = Weapon(weapon);
@@ -558,25 +551,25 @@ public sealed record BuildTemplateLink : Link
 
         static WeaponType Weapon(int weaponId)
         {
-            // TODO: add spear (terrestrial)
             return weaponId switch
             {
-                0x05 => WeaponType.Axe,
-                0x23 => WeaponType.Longbow,
-                0x2f => WeaponType.Dagger,
-                0x31 => WeaponType.Focus,
-                0x32 => WeaponType.Greatsword,
-                0x33 => WeaponType.Hammer,
-                0x35 => WeaponType.Mace,
-                0x36 => WeaponType.Pistol,
-                0x55 => WeaponType.Rifle,
-                0x56 => WeaponType.Scepter,
-                0x57 => WeaponType.Shield,
-                0x59 => WeaponType.Staff,
-                0x5a => WeaponType.Sword,
-                0x66 => WeaponType.Torch,
-                0x67 => WeaponType.Warhorn,
-                0x6b => WeaponType.Shortbow,
+                0x0005 => WeaponType.Axe,
+                0x0023 => WeaponType.Longbow,
+                0x002f => WeaponType.Dagger,
+                0x0031 => WeaponType.Focus,
+                0x0032 => WeaponType.Greatsword,
+                0x0033 => WeaponType.Hammer,
+                0x0035 => WeaponType.Mace,
+                0x0036 => WeaponType.Pistol,
+                0x0055 => WeaponType.Rifle,
+                0x0056 => WeaponType.Scepter,
+                0x0057 => WeaponType.Shield,
+                0x0059 => WeaponType.Staff,
+                0x005a => WeaponType.Sword,
+                0x0066 => WeaponType.Torch,
+                0x0067 => WeaponType.Warhorn,
+                0x006b => WeaponType.Shortbow,
+                0x0109 => WeaponType.Spear,
                 _ => WeaponType.None
             };
         }

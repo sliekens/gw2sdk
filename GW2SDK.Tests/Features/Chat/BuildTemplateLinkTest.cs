@@ -28,6 +28,10 @@ public class BuildTemplateLinkTest
         "[&DQQAAAAAAAB5AHkAAAAAAAAAAAAAAAAAAAAAAAEAAQAAAAAAAAAAAAAAAAACMwAjAATo9gAAm/YAAN32AABn9wAA]",
         ProfessionName.Ranger
     )]
+    [InlineData(
+        "[&DQMGNyY5RioqDw0bhgCGAAsbBwEOGxobCRuJAQAAAAAAAAAAAAAAAAAAAAACNgAJAQA=]",
+        ProfessionName.Engineer
+    )]
     public async Task Can_marshal_build_template_links(
         string chatLink,
         ProfessionName professionName
