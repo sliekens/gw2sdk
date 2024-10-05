@@ -44,6 +44,7 @@ internal static class Routes
         "/v2/account/titles",
         "/v2/account/wallet",
         "/v2/account/worldbosses",
+        "/v2/account/wvw",
         "/v2/achievements",
         "/v2/achievements/categories",
         "/v2/achievements/groups",

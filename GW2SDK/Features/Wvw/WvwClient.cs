@@ -28,6 +28,30 @@ public sealed class WvwClient
         httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
+    #region v2/account/wvw
+
+    /// <summary>Retrieves the WvW guild associated with the account. This endpoint is only accessible with a valid access
+    /// token.</summary>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public async Task<(AccountWvwGuild Value, MessageContext Context)> GetAccountWvwGuild(
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var requestBuilder = RequestBuilder.HttpGet("v2/account/wvw", accessToken);
+        var request = requestBuilder.Build();
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetAccountWvwGuild();
+            return (value, response.Context);
+        }
+    }
+
+    #endregion v2/account/wvw
+
     #region v2/wvw/guilds
 
     /// <summary>Retrieves WvW guilds by region.</summary>
