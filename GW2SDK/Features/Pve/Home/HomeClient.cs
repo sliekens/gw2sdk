@@ -70,7 +70,7 @@ public sealed class HomeClient
 
     #endregion v2/account/home/nodes
 
-    #region v2/account/homestead
+    #region v2/account/homestead/decorations
 
     /// <summary>Retrieves the homestead decorations unlocked on the account associated with the access token. This endpoint is only
     /// accessible with a valid access token.</summary>
@@ -92,7 +92,31 @@ public sealed class HomeClient
         }
     }
 
-    #endregion v2/account/homestead
+    #endregion v2/account/homestead/decorations
+
+    #region v2/account/homestead/glyphs
+
+    /// <summary>Retrieves the IDs of homestead glyphs equipped on the account associated with the access token. This
+    /// endpoint is only accessible with a valid access token.</summary>
+    /// <param name="accessToken">An API key or subtoken.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public async Task<(HashSet<string> Value, MessageContext Context)> GetEquippedGlyphs(
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var requestBuilder = RequestBuilder.HttpGet("v2/account/homestead/glyphs", accessToken);
+        var request = requestBuilder.Build();
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            return (value, response.Context);
+        }
+    }
+
+    #endregion v2/account/homestead/glyphs
 
     #region v2/home/cats
 
@@ -623,4 +647,117 @@ public sealed class HomeClient
     }
 
     #endregion v2/homestead/decorations/categories
+
+    #region v2/homestead/glyphs
+
+    /// <summary>Retrieves all homestead glyphs.</summary>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public async Task<(HashSet<Glyph> Value, MessageContext Context)> GetGlyphs(
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var requestBuilder = RequestBuilder.HttpGet("v2/homestead/glyphs");
+        requestBuilder.Query.AddAllIds();
+        var request = requestBuilder.Build();
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetGlyph());
+            return (value, response.Context);
+        }
+    }
+
+    /// <summary>Retrieves the IDs of all homestead glyphs.</summary>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public async Task<(HashSet<string> Value, MessageContext Context)> GetGlyphsIndex(
+        CancellationToken cancellationToken = default
+    )
+    {
+        var requestBuilder = RequestBuilder.HttpGet("v2/homestead/glyphs");
+        var request = requestBuilder.Build();
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        using (response.Json)
+        {
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            return (value, response.Context);
+        }
+    }
+
+    /// <summary>Retrieves a homestead glyph by its ID.</summary>
+    /// <param name="glyphId">The glyph ID.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public async Task<(Glyph Value, MessageContext Context)> GetGlyphById(
+        string glyphId,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var requestBuilder = RequestBuilder.HttpGet("v2/homestead/glyphs");
+        requestBuilder.Query.AddId(glyphId);
+        var request = requestBuilder.Build();
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetGlyph();
+            return (value, response.Context);
+        }
+    }
+
+    /// <summary>Retrieves homestead glyphs by their IDs.</summary>
+    /// <param name="glyphIds">The glyph IDs.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public async Task<(HashSet<Glyph> Value, MessageContext Context)> GetGlyphsByIds(
+        IEnumerable<string> glyphIds,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var requestBuilder = RequestBuilder.HttpGet("v2/homestead/glyphs");
+        requestBuilder.Query.AddIds(glyphIds);
+        var request = requestBuilder.Build();
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetGlyph());
+            return (value, response.Context);
+        }
+    }
+
+    /// <summary>Retrieves a page of homestead glyphs.</summary>
+    /// <param name="pageIndex">How many pages to skip. The first page starts at 0.</param>
+    /// <param name="pageSize">How many entries to take.</param>
+    /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
+    /// <param name="cancellationToken">A token to cancel the request.</param>
+    /// <returns>A task that represents the API request.</returns>
+    public async Task<(HashSet<Glyph> Value, MessageContext Context)> GetGlyphsByPage(
+        int pageIndex,
+        int? pageSize,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var requestBuilder = RequestBuilder.HttpGet("v2/homestead/glyphs");
+        requestBuilder.Query.AddPage(pageIndex, pageSize);
+        var request = requestBuilder.Build();
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        using (response.Json)
+        {
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetSet(static entry => entry.GetGlyph());
+            return (value, response.Context);
+        }
+    }
+
+    #endregion v2/homestead/glyphs
 }
