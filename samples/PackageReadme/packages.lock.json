@@ -4,9 +4,9 @@
     "net8.0": {
       "Microsoft.Build.CopyOnWrite": {
         "type": "Direct",
-        "requested": "[1.0.315, )",
-        "resolved": "1.0.315",
-        "contentHash": "z0WkyvnBFWCzgLJ1ORD9t6R5nvQSlTl7ernOPq2a6bdfJEGWRQbgiew4TFD18hQjBE8JGRDtWAkFDzhkRK8LNg=="
+        "requested": "[1.0.322, )",
+        "resolved": "1.0.322",
+        "contentHash": "Er5Ku4HJNDdRJD6qmV/Zposwvikvof37h6cFHNZ0Vmz1g+esSLKXd79g6fdJpfoNuOzl8w/q6vSpD3M3zihmAQ=="
       },
       "System.Reactive": {
         "type": "Direct",
@@ -14,25 +14,17 @@
         "resolved": "6.0.1",
         "contentHash": "rHaWtKDwCi9qJ3ObKo8LHPMuuwv33YbmQi7TcUK1C264V3MFnOr5Im7QgCTdLniztP3GJyeiSg5x8NqYJFqRmg=="
       },
-      "System.Text.Encodings.Web": {
-        "type": "Transitive",
-        "resolved": "8.0.0",
-        "contentHash": "yev/k9GHAEGx2Rg3/tU6MQh4HGBXJs70y7j1LaM1i/ER9po+6nnQ6RRqTJn1E7Xu0fbIFK80Nh5EoODxrbxwBQ=="
-      },
       "gw2sdk": {
         "type": "Project",
         "dependencies": {
-          "System.Text.Json": "[8.0.4, )"
+          "System.Text.Json": "[8.0.5, )"
         }
       },
       "System.Text.Json": {
         "type": "CentralTransitive",
-        "requested": "[8.0.4, )",
-        "resolved": "8.0.4",
-        "contentHash": "bAkhgDJ88XTsqczoxEMliSrpijKZHhbJQldhAmObj/RbrN3sU5dcokuXmWJWsdQAhiMJ9bTayWsL1C9fbbCRhw==",
-        "dependencies": {
-          "System.Text.Encodings.Web": "8.0.0"
-        }
+        "requested": "[8.0.5, )",
+        "resolved": "8.0.5",
+        "contentHash": "0f1B50Ss7rqxXiaBJyzUu9bWFOO2/zSlifZ/UNMdiIpDYe4cY4LQQicP4nirK1OS31I43rn062UIJ1Q9bpmHpg=="
       }
     }
   }
