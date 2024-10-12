@@ -11,8 +11,8 @@ public sealed record GuildUpgradeActivity : GuildLogEntry
     /// <summary>The action performed.</summary>
     public required Extensible<GuildUpgradeAction> Action { get; init; }
 
-    /// <summary>The guild upgrade ID.</summary>
-    public required int UpgradeId { get; init; }
+    /// <summary>If present, the guild upgrade ID.</summary>
+    public required int? UpgradeId { get; init; }
 
     /// <summary>If present, the recipe ID of the Scribe recipe for the upgrade.</summary>
     public required int? RecipeId { get; init; }
