@@ -11,7 +11,7 @@ internal static class GuildUpgradeActivityJson
         RequiredMember time = "time";
         OptionalMember user = "user";
         RequiredMember action = "action";
-        NullableMember upgradeId = "upgrade_id";
+        OptionalMember upgradeId = "upgrade_id";
         NullableMember recipeId = "recipe_id";
         NullableMember itemId = "item_id";
         NullableMember count = "count";
