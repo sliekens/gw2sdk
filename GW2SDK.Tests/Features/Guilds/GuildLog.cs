@@ -1,14 +1,15 @@
 ﻿using GuildWars2.Guilds.Logs;
 using GuildWars2.Tests.TestInfrastructure;
-using Polly.Timeout;
+using Xunit.Abstractions;
 
 namespace GuildWars2.Tests.Features.Guilds;
 
-public class GuildLog
+public class GuildLog(ITestOutputHelper outputHelper)
 {
     [Fact]
     public async Task Can_be_found()
     {
+        LoggingHandler.Output.Value = outputHelper;
         var sut = Composer.Resolve<Gw2Client>();
         var guildLeader = TestConfiguration.TestGuildLeader;
 

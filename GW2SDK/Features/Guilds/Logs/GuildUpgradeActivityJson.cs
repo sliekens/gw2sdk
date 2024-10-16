@@ -68,7 +68,7 @@ internal static class GuildUpgradeActivityJson
             Id = id.Map(static value => value.GetInt32()),
             Time = time.Map(static value => value.GetDateTimeOffset()),
             User = user.Map(static value => value.GetString()) ?? "",
-            Action = action.Map(static value => value.GetEnum<GuildUpgradeAction>()),
+            Action = action.Map(static value => value.ValueEquals("complete") ? GuildUpgradeAction.Completed : value.GetEnum<GuildUpgradeAction>()),
             UpgradeId = upgradeId.Map(static value => value.GetInt32()),
             RecipeId = recipeId.Map(static value => value.GetInt32()),
             ItemId = itemId.Map(static value => value.GetInt32()),
