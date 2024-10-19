@@ -5,15 +5,10 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <StartupObject>PackageReadme.GameLinkProgram</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Reactive" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\GW2SDK\GW2SDK.csproj" />
+    <ProjectReference Include="..\..\..\GW2SDK\GW2SDK.csproj" />
   </ItemGroup>
 
 </Project>

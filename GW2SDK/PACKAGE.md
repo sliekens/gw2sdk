@@ -1,6 +1,9 @@
 ## About
 
-GW2SDK provides classes for interacting with the Guild Wars 2 API and game client. This package enables you to fetch information about the game, the player's account, PvP seasons, WvW matches and the in-game economy. It also provides realtime information from the game client such as the player's current character and the current map.
+GW2SDK provides classes for interacting with the Guild Wars 2 API and game client.
+This package enables you to fetch information about the game, the player's account,
+PvP seasons, WvW matches and the in-game economy. It also provides realtime information
+from the game client such as the player's current character and the current map.
 
 ## Key features
 
@@ -9,17 +12,19 @@ GW2SDK provides classes for interacting with the Guild Wars 2 API and game clien
 
 ## How to use
 
-You can use the `Gw2Client` for many different purposes, such as fetching the current prices of all tradable items in the game, or the `GameLink` to receive realtime information from the game client. Below are some examples of how to use the `Gw2Client` and `GameLink` to fetch information about the game and the player's account.
+API access using `Gw2Client`:
 
 ``` csharp
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GuildWars2;
+using GuildWars2.Commerce.Prices;
+using GuildWars2.Items;
 
-namespace PackageReadme;
+namespace PackageReadme.Gw2ClientProgram;
 
-internal class Gw2ClientProgram
+internal class Program
 {
     public static async Task Main(string[] args)
     {
@@ -27,54 +32,43 @@ internal class Gw2ClientProgram
         using var httpClient = new HttpClient();
         var gw2 = new Gw2Client(httpClient);
 
-        // Print a table header
-        PrintTableHeader();
-
         // Fetch the current prices of all items
         await foreach (var itemPrice in gw2.Commerce.GetItemPricesBulk().ValueOnly())
         {
-            // The item price contains the item's ID, which can be used to fetch the item's name
+            // The item price contains the item's ID, which can be used to fetch
+            // the item's name
             var item = await gw2.Items.GetItemById(itemPrice.Id).ValueOnly();
 
             // Print the item's name and its current highest buyer and lowest seller
-            PrintTableRow(item.Name, itemPrice.BestBid, itemPrice.BestAsk);
-        }
-
-        void PrintTableHeader()
-        {
-            /*
-            ================================================================================================================================================================
-            | Item                                               | Highest buyer                                      | Lowest seller                                      |
-            ================================================================================================================================================================
-             */
-            Console.WriteLine(new string('=', 160));
-            Console.WriteLine($"| {"Item",-50} | {"Highest buyer",-50} | {"Lowest seller",-50} |");
-            Console.WriteLine(new string('=', 160));
-        }
-
-        void PrintTableRow(string item, Coin highestBuyer, Coin lowestSeller)
-        {
-            /*
-             | <item>                                             | <highestBuyer>                                     | <lowestSeller>                                     |
-             */
-            Console.WriteLine($"| {item,-50} | {highestBuyer,-50} | {lowestSeller,-50} |");
+            PrintItem(item, itemPrice);
         }
     }
+
+    private static void PrintItem(Item item, ItemPrice price)
+    {
+        Console.WriteLine($"{"Item",-15}: {item.Name}");
+        Console.WriteLine($"{"Highest buyer",-15}: {price.BestBid}");
+        Console.WriteLine($"{"Lowest seller",-15}: {price.BestAsk}");
+        Console.WriteLine($"{"Bid-ask spread",-15}: {price.BidAskSpread}");
+        Console.WriteLine();
+    }
 }
+
 ```
 
-The `GameLink` can be used to receive realtime information from the game client. Below is an example of how to use the `GameLink` to receive information about the player's current character and the current map.
+Game client access using `GameLink`:
+
+(This example also requires the System.Reactive package to be installed.)
 
 ``` csharp
 using System;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GuildWars2;
 
-namespace PackageReadme;
+namespace PackageReadme.GameLinkProgram;
 
-internal class GameLinkProgram
+internal class Program
 {
     public static async Task Main(string[] args)
     {
@@ -84,16 +78,19 @@ internal class GameLinkProgram
             return;
         }
 
-        Console.WriteLine("GameLink is starting! (Ensure the game is running and that you are loaded into a map.)");
+        Console.WriteLine("GameLink is starting! (Ensure the game is running"
+            + " and that you are loaded into a map.)");
 
-        // Pre-fetch all maps from the API, they are used to display the player's current map
+        // Pre-fetch all maps from the API, they are used to display the player's
+        // current map
         using var http = new HttpClient();
         var gw2 = new Gw2Client(http);
         var maps = await gw2.Exploration.GetMapSummaries()
             .AsDictionary(map => map.Id)
             .ValueOnly();
 
-        // Choose an interval to indicate how often you want to receive fresh data from the game
+        // Choose an interval to indicate how often you want to receive fresh data
+        // from the game
         // For example, at most once every second
         // Default: no limit, every change in the game state will be available immediately
         var refreshInterval = TimeSpan.FromSeconds(1);
@@ -105,13 +102,16 @@ internal class GameLinkProgram
         var subscription = gameLink.Subscribe(
             tick =>
             {
-                // Each 'tick' contains information about the player's character and actions, among other things
+                // Each 'tick' contains information about the player's character
+                // and actions, among other things
                 var player = tick.GetIdentity();
 
-                // The identity can be missing due to JSON errors, always check for null
+                // The identity can be missing due to JSON errors, always check
+                // for null
                 if (player != null)
                 {
-                    // Use the player's map ID to find the map name in the pre-fetched list of maps
+                    // Use the player's map ID to find the map name in the
+                    // pre-fetched list of maps
                     var map = maps[player.MapId];
 
                     // Print the player's name and current map
@@ -132,6 +132,7 @@ internal class GameLinkProgram
         gameLink.Dispose();
     }
 }
+
 ```
 
 ## Additional documentation
@@ -141,5 +142,7 @@ internal class GameLinkProgram
 
 ## Feedback & contributing
 
-GW2SDK is released as open source under the MIT license. You are welcome to create an issue if you find something is missing or broken, or a discussion for other feedback, questions or ideas.
-Check out the GitHub [page](https://github.com/sliekens/gw2sdk) to find more ways to contribute.
+GW2SDK is released as open source under the MIT license. You are welcome to create
+an issue if you find something is missing or broken, or a discussion for other
+feedback, questions or ideas. Check out the GitHub [page](https://github.com/sliekens/gw2sdk)
+to find more ways to contribute.

@@ -3,9 +3,9 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using GuildWars2;
 
-namespace PackageReadme;
+namespace PackageReadme.GameLinkProgram;
 
-internal class GameLinkProgram
+internal class Program
 {
     public static async Task Main(string[] args)
     {
@@ -15,16 +15,19 @@ internal class GameLinkProgram
             return;
         }
 
-        Console.WriteLine("GameLink is starting! (Ensure the game is running and that you are loaded into a map.)");
+        Console.WriteLine("GameLink is starting! (Ensure the game is running"
+            + " and that you are loaded into a map.)");
 
-        // Pre-fetch all maps from the API, they are used to display the player's current map
+        // Pre-fetch all maps from the API, they are used to display the player's
+        // current map
         using var http = new HttpClient();
         var gw2 = new Gw2Client(http);
         var maps = await gw2.Exploration.GetMapSummaries()
-            .AsDictionary(static map => map.Id)
+            .AsDictionary(map => map.Id)
             .ValueOnly();
 
-        // Choose an interval to indicate how often you want to receive fresh data from the game
+        // Choose an interval to indicate how often you want to receive fresh data
+        // from the game
         // For example, at most once every second
         // Default: no limit, every change in the game state will be available immediately
         var refreshInterval = TimeSpan.FromSeconds(1);
@@ -36,13 +39,16 @@ internal class GameLinkProgram
         var subscription = gameLink.Subscribe(
             tick =>
             {
-                // Each 'tick' contains information about the player's character and actions, among other things
+                // Each 'tick' contains information about the player's character
+                // and actions, among other things
                 var player = tick.GetIdentity();
 
-                // The identity can be missing due to JSON errors, always check for null
+                // The identity can be missing due to JSON errors, always check
+                // for null
                 if (player != null)
                 {
-                    // Use the player's map ID to find the map name in the pre-fetched list of maps
+                    // Use the player's map ID to find the map name in the
+                    // pre-fetched list of maps
                     var map = maps[player.MapId];
 
                     // Print the player's name and current map
