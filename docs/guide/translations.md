@@ -1,6 +1,6 @@
 # Translations
 
-Some data contains localized text. Pass a `Language` object when fetching data to choose the language.
+Some API methods return localized data, and you can pass a `Language` object to control the language of the text returned by the API. English is used if you don't specify any language, or if the specified language is not supported.
 
 Currently the supported languages are:
 
@@ -10,14 +10,14 @@ Currently the supported languages are:
 - French
 - Chinese
 
-English is used if you don't specify any language, or if the specified language is not supported. Let's have a [discussion] if you think `CurrentUICulture` should always be used by default.
+In .NET, you typically set `CultureInfo.CurrentUICulture` to the user's preferred language. However, GW2SDK does not use this setting. Instead, you should pass a `Language` object to the API methods that support it. You can use the `Language.CurrentUICulture` static property to get the current UI culture as a `Language` object.
 
 [!code-csharp[](../../samples/Translations/Program.cs)]
 
 Output
 
 ``` text
-Preferred language
+CurrentUICulture (German)
 * Greif
 * Schakal
 * Raptor
@@ -83,7 +83,7 @@ Chinese
 * 乌龟
 * 战爪
 
-Korean (unsupported)
+Japanese
 * Griffon
 * Jackal
 * Raptor
@@ -95,5 +95,3 @@ Korean (unsupported)
 * Warclaw
 
 ```
-
-[discussion]:https://github.com/sliekens/gw2sdk/discussions/new/choose
