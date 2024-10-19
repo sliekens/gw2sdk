@@ -18,8 +18,10 @@ items:
   - name: Game Link
     href: game-link.md
 - name: Error handling
-  href: usage-limits.md
+  href: exception-handling.md
   items:
+  - name: Exception handling
+    href: exception-handling.md
   - name: API Usage limits
     href: usage-limits.md
   - name: Resiliency with Polly
