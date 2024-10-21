@@ -11,8 +11,8 @@ public class MarkupTextConverterTest
         var gw2 = Composer.Resolve<Gw2Client>();
         var item = await gw2.Items.GetItemById(97418).ValueOnly();
 
-        var lexer = new MarkupLexer(item.Description);
-        var parser = new MarkupParser(lexer.Tokenize());
+        var lexer = new MarkupLexer();
+        var parser = new MarkupParser(lexer.Tokenize(item.Description));
         var converter = new MarkupTextConverter();
 
         var actual = converter.Convert(parser.Parse());

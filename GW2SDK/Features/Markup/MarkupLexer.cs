@@ -5,7 +5,7 @@ namespace GuildWars2.Markup;
 /// Represents a lexer for tokenizing markup input.
 /// </summary>
 [PublicAPI]
-public sealed class MarkupLexer(string input)
+public sealed class MarkupLexer
 {
     private static readonly char[] EqualSign = ['='];
 
@@ -14,47 +14,31 @@ public sealed class MarkupLexer(string input)
         "br"
     };
 
-    private int position;
-
-    private char Current => position >= input.Length ? '\0' : input[position];
-
-    private void Advance() => position++;
-
-    private string ReadUntil(char c)
-    {
-        var start = position;
-        while (Current != c && position < input.Length)
-        {
-            Advance();
-        }
-
-        return input.Substring(start, position - start);
-    }
-
     /// <summary>
     /// Tokenizes the input string into a sequence of tokens.
     /// </summary>
     /// <returns>
     /// An <see cref="IEnumerable{Token}"/> representing the sequence of tokens parsed from the input string.
     /// </returns>
-    public IEnumerable<MarkupToken> Tokenize()
+    public IEnumerable<MarkupToken> Tokenize(string input)
     {
-        while (position < input.Length)
+        var scanner = new Scanner(input);
+        while (scanner.CanAdvance)
         {
-            if (Current == '<')
+            if (scanner.Current == '<')
             {
-                Advance();
-                if (Current == '/')
+                scanner.Advance();
+                if (scanner.Current == '/')
                 {
-                    Advance();
-                    var tagName = ReadUntil('>');
-                    Advance();
+                    scanner.Advance();
+                    var tagName = scanner.ReadUntil('>');
+                    scanner.Advance();
                     yield return new MarkupToken(MarkupTokenType.TagClose, tagName);
                 }
                 else
                 {
-                    var tagName = ReadUntil('>');
-                    Advance();
+                    var tagName = scanner.ReadUntil('>');
+                    scanner.Advance();
                     if (VoidElements.Contains(tagName))
                     {
                         yield return new MarkupToken(MarkupTokenType.TagVoid, tagName);
@@ -73,7 +57,7 @@ public sealed class MarkupLexer(string input)
             }
             else
             {
-                var text = ReadUntil('<');
+                var text = scanner.ReadUntil('<');
                 yield return new MarkupToken(MarkupTokenType.Text, text);
             }
         }

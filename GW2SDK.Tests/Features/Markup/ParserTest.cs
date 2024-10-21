@@ -8,8 +8,8 @@ public class MarkupParserTest
     public void Ignores_invalid_tags()
     {
         var input = "5 <REDACTED> Dye kits";
-        var lexer = new MarkupLexer(input);
-        var parser = new MarkupParser(lexer.Tokenize());
+        var lexer = new MarkupLexer();
+        var parser = new MarkupParser(lexer.Tokenize(input));
 
         var actual = parser.Parse();
 
