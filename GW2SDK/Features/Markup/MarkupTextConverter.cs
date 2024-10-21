@@ -1,7 +1,6 @@
 ﻿using System.Text;
-using GuildWars2.Markup;
 
-namespace GuildWars2.Features.Markup;
+namespace GuildWars2.Markup;
 
 /// <summary>
 /// Provides functionality to convert a <see cref="RootNode"/> to a string representation.
