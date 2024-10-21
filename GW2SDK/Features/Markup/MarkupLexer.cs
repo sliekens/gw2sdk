@@ -37,18 +37,6 @@ public sealed class MarkupLexer(string input)
     /// <returns>
     /// An <see cref="IEnumerable{Token}"/> representing the sequence of tokens parsed from the input string.
     /// </returns>
-    /// <remarks>
-    /// This method processes the input string character by character, identifying and yielding tokens based on the following rules:
-    /// <list type="bullet">
-    /// <item>
-    /// <description>If the current character is '&lt;', it checks if the next character is '/' to identify a closing tag. Otherwise, it processes the tag name and determines if it is a void element, a tag with an attribute, or a regular tag.</description>
-    /// </item>
-    /// <item>
-    /// <description>If the current character is not '&lt;', it reads until the next '&lt;' character to capture text content.</description>
-    /// </item>
-    /// </list>
-    /// The method yields tokens of various types such as <see cref="MarkupTokenType.TagClose"/>, <see cref="MarkupTokenType.TagVoid"/>, <see cref="MarkupTokenType.TagStart"/>, <see cref="MarkupTokenType.TagValue"/>, <see cref="MarkupTokenType.Text"/>, and <see cref="MarkupTokenType.End"/>.
-    /// </remarks>
     public IEnumerable<MarkupToken> Tokenize()
     {
         while (position < input.Length)
