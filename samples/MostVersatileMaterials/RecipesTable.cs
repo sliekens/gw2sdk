@@ -1,4 +1,6 @@
-﻿using GuildWars2.Items;
+﻿using GuildWars2.Features.Markup;
+using GuildWars2.Items;
+using GuildWars2.Markup;
 using Spectre.Console;
 using Spectre.Console.Rendering;
 
@@ -6,6 +8,8 @@ namespace MostVersatileMaterials;
 
 public class RecipesTable : IRenderable
 {
+    private static readonly MarkupTextConverter TextConverter = new();
+
     private readonly Table table = new Table().AddColumn("Recipe").AddColumn("Description");
 
     public Measurement Measure(RenderOptions options, int maxWidth) =>
@@ -14,6 +18,11 @@ public class RecipesTable : IRenderable
     public IEnumerable<Segment> Render(RenderOptions options, int maxWidth) =>
         ((IRenderable)table).Render(options, maxWidth);
 
-    public void AddRow(Item item) =>
-        table.AddRow(item.Name.EscapeMarkup(), item.Description.EscapeMarkup());
+    public void AddRow(Item item)
+    {
+        var lexer = new MarkupLexer(item.Description);
+        var parser = new MarkupParser(lexer.Tokenize());
+        var description = TextConverter.Convert(parser.Parse());
+        table.AddRow(item.Name.EscapeMarkup(), description.EscapeMarkup());
+    }
 }
