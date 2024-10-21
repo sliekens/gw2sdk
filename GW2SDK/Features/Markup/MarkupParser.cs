@@ -6,25 +6,19 @@ namespace GuildWars2.Markup;
 /// Represents a parser that converts a sequence of tokens into a hierarchical node structure.
 /// </summary>
 [PublicAPI]
-public sealed class MarkupParser(IEnumerable<MarkupToken> input)
+public sealed class MarkupParser
 {
-    private readonly List<MarkupToken> tokens = input.ToList();
-
-    private int position;
-
-    private void Advance() => position++;
-    private MarkupToken? Current => position < tokens.Count ? tokens[position] : null;
-
     /// <summary>
     /// Parses a sequence of tokens into a hierarchical node structure.
     /// </summary>
     /// <returns>The root node of the parsed structure.</returns>
-    public RootNode Parse()
+    public RootNode Parse(IEnumerable<MarkupToken> input)
     {
+        var iterator = new MarkupTokenIterator(input);
         var root = new RootNode();
-        while (Current?.Type != MarkupTokenType.End)
+        while (iterator.Current is { Type: not MarkupTokenType.End })
         {
-            var node = ParseNode();
+            var node = ParseNode(iterator);
             if (node is not null)
             {
                 root.Children.Add(node);
@@ -34,27 +28,27 @@ public sealed class MarkupParser(IEnumerable<MarkupToken> input)
         return root;
     }
 
-    private MarkupNode? ParseNode()
+    private static MarkupNode? ParseNode(MarkupTokenIterator iterator)
     {
-        switch (Current?.Type)
+        switch (iterator.Current?.Type)
         {
             case MarkupTokenType.Text:
-                return ParseTextNode();
+                return ParseTextNode(iterator);
             case MarkupTokenType.TagStart:
-                return ParseTagNode();
+                return ParseTagNode(iterator);
             case MarkupTokenType.TagVoid:
-                return ParseVoidNode();
+                return ParseVoidNode(iterator);
             default:
-                Advance();
+                iterator.Advance();
                 return null;
         };
     }
 
-    private MarkupNode? ParseVoidNode()
+    private static MarkupNode? ParseVoidNode(MarkupTokenIterator iterator)
     {
-        Debug.Assert(Current?.Type == MarkupTokenType.TagVoid);
-        var tagName = Current!.Value;
-        Advance();
+        Debug.Assert(iterator.Current?.Type == MarkupTokenType.TagVoid);
+        var tagName = iterator.Current!.Value;
+        iterator.Advance();
 
         if (string.Equals(tagName, "br", StringComparison.OrdinalIgnoreCase))
         {
@@ -64,34 +58,34 @@ public sealed class MarkupParser(IEnumerable<MarkupToken> input)
         return null;
     }
 
-    private MarkupNode? ParseTagNode()
+    private static MarkupNode? ParseTagNode(MarkupTokenIterator iterator)
     {
-        Debug.Assert(Current?.Type == MarkupTokenType.TagStart);
-        var tagName = Current!.Value;
-        Advance();
+        Debug.Assert(iterator.Current?.Type == MarkupTokenType.TagStart);
+        var tagName = iterator.Current!.Value;
+        iterator.Advance();
 
         if (string.Equals(tagName, "c", StringComparison.OrdinalIgnoreCase))
         {
             var color = "";
-            if (Current?.Type == MarkupTokenType.TagValue)
+            if (iterator.Current?.Type == MarkupTokenType.TagValue)
             {
-                color = Current.Value;
-                Advance();
+                color = iterator.Current.Value;
+                iterator.Advance();
             }
 
             var coloredText = new ColoredTextNode(color);
-            while (Current?.Type != MarkupTokenType.TagClose && Current?.Type != MarkupTokenType.End)
+            while (iterator.Current?.Type != MarkupTokenType.TagClose && iterator.Current?.Type != MarkupTokenType.End)
             {
-                var node = ParseNode();
+                var node = ParseNode(iterator);
                 if (node is not null)
                 {
                     coloredText.Children.Add(node);
                 }
             }
 
-            if (Current?.Type == MarkupTokenType.TagClose)
+            if (iterator.Current?.Type == MarkupTokenType.TagClose)
             {
-                Advance();
+                iterator.Advance();
             }
 
             return coloredText;
@@ -100,11 +94,11 @@ public sealed class MarkupParser(IEnumerable<MarkupToken> input)
         return null;
     }
 
-    private MarkupNode? ParseTextNode()
+    private static MarkupNode? ParseTextNode(MarkupTokenIterator iterator)
     {
-        Debug.Assert(Current?.Type == MarkupTokenType.Text);
-        var text = Current!.Value;
-        Advance();
+        Debug.Assert(iterator.Current?.Type == MarkupTokenType.Text);
+        var text = iterator.Current!.Value;
+        iterator.Advance();
         return new TextNode(text);
     }
 }

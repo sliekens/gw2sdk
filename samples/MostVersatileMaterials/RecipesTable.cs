@@ -20,8 +20,8 @@ public class RecipesTable : IRenderable
     public void AddRow(Item item)
     {
         var lexer = new MarkupLexer();
-        var parser = new MarkupParser(lexer.Tokenize(item.Description));
-        var description = TextConverter.Convert(parser.Parse());
+        var parser = new MarkupParser();
+        var description = TextConverter.Convert(parser.Parse(lexer.Tokenize(item.Description)));
         table.AddRow(item.Name.EscapeMarkup(), description.EscapeMarkup());
     }
 }

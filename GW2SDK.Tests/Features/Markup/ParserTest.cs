@@ -9,9 +9,9 @@ public class MarkupParserTest
     {
         var input = "5 <REDACTED> Dye kits";
         var lexer = new MarkupLexer();
-        var parser = new MarkupParser(lexer.Tokenize(input));
+        var parser = new MarkupParser();
 
-        var actual = parser.Parse();
+        var actual = parser.Parse(lexer.Tokenize(input));
 
         Assert.NotNull(actual);
         Assert.Collection(actual.Children,

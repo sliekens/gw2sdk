@@ -12,10 +12,10 @@ public class MarkupTextConverterTest
         var item = await gw2.Items.GetItemById(97418).ValueOnly();
 
         var lexer = new MarkupLexer();
-        var parser = new MarkupParser(lexer.Tokenize(item.Description));
+        var parser = new MarkupParser();
         var converter = new MarkupTextConverter();
 
-        var actual = converter.Convert(parser.Parse());
+        var actual = converter.Convert(parser.Parse(lexer.Tokenize(item.Description)));
 
         Assert.Equal(
             """
