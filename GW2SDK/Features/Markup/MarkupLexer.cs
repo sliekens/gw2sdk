@@ -1,4 +1,4 @@
-
+﻿
 namespace GuildWars2.Markup;
 
 /// <summary>

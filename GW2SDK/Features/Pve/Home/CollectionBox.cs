@@ -1,4 +1,4 @@
-namespace GuildWars2.Pve.Home;
+﻿namespace GuildWars2.Pve.Home;
 
 /// <summary>The homestead collection boxes.</summary>
 [PublicAPI]

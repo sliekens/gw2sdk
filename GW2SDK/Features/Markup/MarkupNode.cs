@@ -1,4 +1,4 @@
-namespace GuildWars2.Markup;
+﻿namespace GuildWars2.Markup;
 
 /// <summary>
 /// Represents a node in the markup structure.

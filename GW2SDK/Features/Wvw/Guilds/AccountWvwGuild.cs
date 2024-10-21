@@ -1,4 +1,4 @@
-namespace GuildWars2.Wvw.Guilds;
+﻿namespace GuildWars2.Wvw.Guilds;
 
 /// <summary>Information about a player account's World vs. World guild.</summary>
 [PublicAPI]
