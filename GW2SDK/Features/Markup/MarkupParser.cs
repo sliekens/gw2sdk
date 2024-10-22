@@ -66,20 +66,28 @@ public sealed class MarkupParser
 
         if (string.Equals(tagName, "c", StringComparison.OrdinalIgnoreCase))
         {
-            var color = "";
-            if (iterator.Current?.Type == MarkupTokenType.TagValue)
+            // Sometimes, the color tag is not closed correctly.
+            // Then the <c> tag should be treated as TagClose.
+            // e.g. <c=@reminder>Some text<c>
+            if (iterator.Current?.Type != MarkupTokenType.TagValue)
             {
-                color = iterator.Current.Value;
-                iterator.Advance();
+                return new ColoredTextNode("");
             }
 
-            var coloredText = new ColoredTextNode(color);
+            var node = new ColoredTextNode(iterator.Current.Value);
+            iterator.Advance();
             while (iterator.Current?.Type != MarkupTokenType.TagClose && iterator.Current?.Type != MarkupTokenType.End)
             {
-                var node = ParseNode(iterator);
-                if (node is not null)
+                var nextChild = ParseNode(iterator);
+                if (nextChild is ColoredTextNode { Color: "" })
                 {
-                    coloredText.Children.Add(node);
+                    // Treat the <c> tag as TagClose if the color tag is not closed correctly.
+                    return node;
+                }
+
+                if (nextChild is not null)
+                {
+                    node.Children.Add(nextChild);
                 }
             }
 
@@ -88,7 +96,7 @@ public sealed class MarkupParser
                 iterator.Advance();
             }
 
-            return coloredText;
+            return node;
         }
 
         return null;
