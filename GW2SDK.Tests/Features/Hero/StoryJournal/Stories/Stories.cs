@@ -19,6 +19,19 @@ public class Stories
             entry =>
             {
                 Assert.True(entry.Id > 0);
+                Assert.NotEmpty(entry.StorylineId);
+                Assert.NotEmpty(entry.Name);
+                Assert.NotNull(entry.Description);
+                Assert.NotNull(entry.Timeline);
+                Assert.True(entry.Level > 0);
+                Assert.NotEmpty(entry.Races);
+                Assert.True(entry.Order >= 0);
+                Assert.NotNull(entry.Chapters);
+                Assert.All(entry.Chapters, chapter =>
+                {
+                    Assert.NotEmpty(chapter.Name);
+                });
+                Assert.Empty(entry.Flags.Other);
             }
         );
     }
