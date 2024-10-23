@@ -40,7 +40,7 @@ public sealed class MarkupLexer
                     var tagName = scanner.ReadUntil('>');
                     scanner.Advance();
 
-                    // Self-closing tags like <br /> are not valid, ignore them
+                    // Self-closing tags like <br /> are not valid, ignore the trailing slash
                     if (tagName.EndsWith("/"))
                     {
                         tagName = tagName[..^1];
