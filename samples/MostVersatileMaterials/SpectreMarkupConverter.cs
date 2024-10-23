@@ -16,6 +16,7 @@ public class SpectreMarkupConverter
 
         return builder.ToString();
     }
+
     private string ConvertNode(MarkupNode node)
     {
         switch (node)
@@ -58,5 +59,4 @@ public class SpectreMarkupConverter
                 return "";
         }
     }
-
 }

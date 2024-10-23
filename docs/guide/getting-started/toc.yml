@@ -4,5 +4,7 @@
   href: authentication.md
 - name: Translations
   href: translations.md
+- name: Formatted text
+  href: formatted-text.md
 - name: Game Link
   href: game-link.md
