@@ -7,8 +7,6 @@ namespace MostVersatileMaterials;
 
 public class RecipesTable : IRenderable
 {
-    private static readonly MarkupTextConverter TextConverter = new();
-
     private readonly Table table = new Table().AddColumn("Recipe").AddColumn("Description");
 
     public Measurement Measure(RenderOptions options, int maxWidth) =>
@@ -21,7 +19,10 @@ public class RecipesTable : IRenderable
     {
         var lexer = new MarkupLexer();
         var parser = new MarkupParser();
-        var description = TextConverter.Convert(parser.Parse(lexer.Tokenize(item.Description)));
+        var converter = new MarkupTextConverter();
+        var tokens = lexer.Tokenize(item.Description);
+        var syntax = parser.Parse(tokens);
+        var description = converter.Convert(syntax);
         table.AddRow(item.Name.EscapeMarkup(), description.EscapeMarkup());
     }
 }
