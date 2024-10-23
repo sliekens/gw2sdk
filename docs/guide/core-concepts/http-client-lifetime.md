@@ -70,7 +70,7 @@ You already saw an example of this on the previous page about resiliency with Po
 
 In this example, a _short-lived_ client is obtained using `Microsoft.Extensions.Http`. The HTTP client factory manages the lifetime of the underlying connections for us. Disposing the `HttpClient` will not close the underlying connections, but it will make the connection available for reuse.
 
-[!code-csharp[](../../samples/HttpClientFactoryUsage/Program.cs)]
+[!code-csharp[](~/samples/HttpClientFactoryUsage/Program.cs)]
 
 ## Additional resources
 

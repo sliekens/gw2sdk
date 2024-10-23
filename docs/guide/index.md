@@ -1,3 +1,3 @@
 ---
-redirect_url: introduction.html
+redirect_url: overview
 ---

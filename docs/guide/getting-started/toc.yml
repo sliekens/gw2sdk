@@ -1,0 +1,8 @@
+- name: Basic usage
+  href: usage.md
+- name: Authentication
+  href: authentication.md
+- name: Translations
+  href: translations.md
+- name: Game Link
+  href: game-link.md

@@ -12,7 +12,7 @@ Currently the supported languages are:
 
 In .NET, you typically set `CultureInfo.CurrentUICulture` to the user's preferred language. However, GW2SDK does not use this setting. Instead, you should pass a `Language` object to the API methods that support it. You can use the `Language.CurrentUICulture` static property to get the current UI culture as a `Language` object.
 
-[!code-csharp[](../../samples/Translations/Program.cs)]
+[!code-csharp[](~/samples/Translations/Program.cs)]
 
 Output
 

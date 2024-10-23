@@ -33,7 +33,7 @@ The example uses `Microsoft.Extensions.Http.Resilience` but it's not a requireme
 
 Tweak the `Gw2Resiliency` options as needed.
 
-[!code-csharp[](../../samples/PollyUsage/Program.cs)]
+[!code-csharp[](~/samples/PollyUsage/Program.cs)]
 
 ## Additional resources
 

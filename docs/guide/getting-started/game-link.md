@@ -93,7 +93,7 @@ It illustrates the following concepts:
 - How to use the `Gw2Client` to query the API for the map and specialization names
 - How to check if the player is in combat, typing, looking at the map, etc.
 
-[!code-csharp[](../../samples/Mumble/Program.cs)]
+[!code-csharp[](~/samples/Mumble/Program.cs)]
 
 Example output:
 

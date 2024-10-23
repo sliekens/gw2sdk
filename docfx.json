@@ -26,24 +26,8 @@
       {
         "src": "docs",
         "files": [
-          "index.md",
-          "toc.yml"
-        ]
-      },
-      {
-        "src": "docs/guide",
-        "dest": "guide",
-        "files": [
-          "**.md",
-          "**/toc.yml"
-        ]
-      },
-      {
-        "src": "docs/api",
-        "dest": "api",
-        "files": [
-          "**.yml",
-          "index.md"
+          "**/*.yml",
+          "**/*.md"
         ]
       }
     ],
@@ -62,17 +46,18 @@
     "disableGitFeatures": false,
     "template": [
       "default",
-      "docs/templates/singulinkfx"
+      "modern",
+      "docs/template"
     ],
     "globalMetadata": {
       "_appTitle": "GW2SDK",
       "_appName": "GW2SDK",
       "_appLogoPath": "images/logo-50x50.png",
       "_appFaviconPath": "images/logo-50x50.png",
-      "_appFooter": "Built with docfx, theme created by Singulink",
       "_copyrightFooter": "© Steven Liekens. All rights reserved.",
       "_enableSearch": true,
-      "_enableNewTab": true
+      "_enableNewTab": true,
+      "_disableBreadcrumb": true
     }
   }
 }

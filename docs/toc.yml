@@ -1,8 +1,7 @@
-items:
-- name: Getting started
+# https://dotnet.github.io/docfx/docs/table-of-contents.html#navigation-bar
+- name: Usage guide
   href: guide/
 - name: API browser
   href: api/
-  homepage: api/index.md
-- name: GitHub
-  href: https://github.com/sliekens/gw2sdk
+- name: Feedback
+  href: feedback.md

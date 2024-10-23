@@ -1,34 +1,6 @@
-items:
-- name: Introduction
-  href: introduction.md
-  items:
-  - name: Introduction
-    href: introduction.md
-  - name: Installation
-    href: installation.md
-- name: Usage examples
-  href: usage.md
-  items:
-  - name: Basic usage
-    href: usage.md
-  - name: Authentication
-    href: authentication.md
-  - name: Translations
-    href: translations.md
-  - name: Game Link
-    href: game-link.md
-- name: Error handling
-  href: exception-handling.md
-  items:
-  - name: Exception handling
-    href: exception-handling.md
-  - name: API Usage limits
-    href: usage-limits.md
-  - name: Resiliency with Polly
-    href: resiliency.md
-  - name: HttpClient lifetime
-    href: http-client-lifetime.md
-  - name: MissingMemberBehavior
-    href: missing-member-behavior.md
-- name: Feedback
-  href: feedback.md
+- name: Overview
+  href: overview/toc.yml
+- name: Getting started
+  href: getting-started/toc.yml
+- name: Core concepts
+  href: core-concepts/toc.yml

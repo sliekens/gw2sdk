@@ -164,7 +164,7 @@ This sample illustrates the following concepts:
 (For simplicity, `GetItemById` is called inside the loop, but it is not recommended
 as it is an example of N+1 selects.)
 
-[!code-csharp[](../../samples/BasicUsage/Program.cs)]
+[!code-csharp[](~/samples/BasicUsage/Program.cs)]
 
 Output
 
