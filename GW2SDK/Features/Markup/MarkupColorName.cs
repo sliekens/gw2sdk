@@ -4,7 +4,7 @@ namespace GuildWars2.Markup;
 
 /// <summary>The color names used in markup.</summary>
 [PublicAPI]
-public class MarkupColorName
+public static class MarkupColorName
 {
     /// <summary>The color for flavor text.</summary>
     public static string Flavor => "@flavor";
