@@ -21,7 +21,8 @@ To give feedback:
 
 ## Features
 
-The SDK provides an interface to the Guild Wars 2 API and game client. It is designed to be easy to use and to provide a high level of performance.
+The SDK provides an interface to the Guild Wars 2 API and game client. It is designed
+to be easy to use and to provide a high level of performance.
 
 It provides the following features and benefits:
 
@@ -47,23 +48,28 @@ GW2SDK is compiled for .NET Standard 2.0 so it supports a wide range of platform
 - Universal Windows Platform 10.0.16299+
 - Unity 2018.1+
 
-Retrieving information from the game client is only supported on Windows due to the use of named memory-mapped files. It might work in Wine, but it has not been tested.
-
+Retrieving information from the game client is only supported on Windows due to
+the use of named memory-mapped files. It might work in Wine, but it has not been
+tested.
 
 ## Contributing
 
-You are welcome to create an [issue][new-issue] if you find something is missing or broken, or a [discussion][new-discussion] for other feedback, questions or ideas.
+You are welcome to create an [issue][new-issue] if you find something is missing
+or broken, or a [discussion][new-discussion] for other feedback, questions or ideas.
 
 You are also welcome to propose changes directly with a pull request.
 
 - Small changes can be made with the free [github.dev] editor.
 - A Dev Container definition is provided for larger changes.
 
-The [wiki] contains information for contributors. The _docs_ directory contains user-facing articles which are used to build the [documentation] site.
+The [wiki] contains information for contributors. The _docs_ directory contains
+user-facing articles which are used to build the [documentation] site.
 
 [![Open in GitHub Codespaces][codespaces-badge]](https://codespaces.new/sliekens/gw2sdk)
 
-(Light usage of Codespaces is [free]*, up to around 60 hours per month if you choose the lightest machine and don't exceed 15GB disk usage. This codespace weighs around 2.84GB.)
+(Light usage of Codespaces is [free]*, up to around 60 hours per month if you choose
+the lightest machine and don't exceed 15GB disk usage. This codespace weighs around
+2.84GB.)
 
 ## Additional resources
 
@@ -71,7 +77,8 @@ The [wiki] contains information for contributors. The _docs_ directory contains 
 - [Guild Wars 2 wiki: API][api] contains API endpoint documentation
 - [Guild Wars 2 wiki: chat link format][chatlinks] contains the format of chat links
 - <https://api.guildwars2.com/v2> contains an overview of API endpoints
-- <https://api.guildwars2.com/v2.json?v=latest> contains API endpoints, schema versions and changelog in machine-readable format
+- <https://api.guildwars2.com/v2.json?v=latest> contains API endpoints, schema versions
+  and changelog in machine-readable format
 
 [//]:# (add links to the section below)
 [actions]:https://github.com/sliekens/gw2sdk/actions?query=workflow%3A%22Continuous+Integration%22
@@ -83,14 +90,14 @@ The [wiki] contains information for contributors. The _docs_ directory contains 
 [codespaces-badge]:https://github.com/codespaces/badge.svg
 [free]:https://docs.github.com/en/billing/managing-billing-for-github-codespaces/about-billing-for-github-codespaces#monthly-included-storage-and-core-hours-for-personal-accounts
 [github.dev]:https://github.dev/sliekens/gw2sdk
-[installation]:https://sliekens.github.io/gw2sdk/guide/installation
-[introduction]:https://sliekens.github.io/gw2sdk/guide/introduction
+[installation]:https://sliekens.github.io/gw2sdk/guide/overview/installation
+[introduction]:https://sliekens.github.io/gw2sdk/guide/overview/introduction
 [api-docs]:https://sliekens.github.io/gw2sdk/api/GuildWars2.html
 [new-discussion]:https://github.com/sliekens/gw2sdk/discussions/new/choose
 [new-issue]:https://github.com/sliekens/gw2sdk/issues/new
 [nuget-vpre-badge]:https://img.shields.io/nuget/vpre/GW2SDK
 [nuget]:https://www.nuget.org/packages/GW2SDK/
-[usage]:https://sliekens.github.io/gw2sdk/guide/usage
+[usage]:https://sliekens.github.io/gw2sdk/guide/getting-started/usage
 [documentation]:https://sliekens.github.io/gw2sdk/
 [wiki]:https://github.com/sliekens/gw2sdk/wiki
 [applications]:https://account.arena.net/applications
