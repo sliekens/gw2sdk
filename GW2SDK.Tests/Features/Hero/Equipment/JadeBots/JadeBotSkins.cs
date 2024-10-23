@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.Features.Markup;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.JadeBots;
 
@@ -29,6 +30,7 @@ public class JadeBotSkins
                 else
                 {
                     Assert.NotEmpty(entry.Description);
+                    MarkupSyntaxValidator.Validate(entry.Description);
                 }
 
                 Assert.True(entry.UnlockItemId > 0);

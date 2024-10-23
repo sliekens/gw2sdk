@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.Features.Markup;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Builds;
 
@@ -21,6 +22,7 @@ public class Traits
                 Assert.True(trait.Order >= 0);
                 Assert.NotEmpty(trait.Name);
                 Assert.NotNull(trait.Description);
+                MarkupSyntaxValidator.Validate(trait.Description);
                 Assert.True(trait.Slot.IsDefined());
             }
         );

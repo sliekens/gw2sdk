@@ -1,5 +1,6 @@
 ﻿using GuildWars2.Chat;
 using GuildWars2.Hero.Equipment.Wardrobe;
+using GuildWars2.Tests.Features.Markup;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Wardrobe;
@@ -18,6 +19,9 @@ public class Skins
         {
             Assert.NotNull(context);
             Assert.True(actual.Id > 0);
+            Assert.NotNull(actual.Name);
+            Assert.NotNull(actual.Description);
+            MarkupSyntaxValidator.Validate(actual.Description);
             Assert.NotEmpty(actual.Races);
             Assert.All(actual.Races, race => Assert.True(race.IsDefined()));
             Assert.True(actual.Rarity.IsDefined());

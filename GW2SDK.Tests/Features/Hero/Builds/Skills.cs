@@ -3,6 +3,7 @@ using GuildWars2.Hero;
 using GuildWars2.Hero.Builds;
 using GuildWars2.Hero.Builds.Facts;
 using GuildWars2.Hero.Builds.Skills;
+using GuildWars2.Tests.Features.Markup;
 using GuildWars2.Tests.TestInfrastructure;
 using Range = GuildWars2.Hero.Builds.Facts.Range;
 
@@ -31,6 +32,7 @@ public class Skills
                 {
                     Assert.NotEmpty(action.Name);
                     Assert.NotEmpty(action.Description);
+                    MarkupSyntaxValidator.Validate(action.Description);
                     Assert.NotEmpty(action.IconHref);
                     Assert.NotEmpty(action.Professions);
                     Assert.All(
@@ -200,6 +202,7 @@ public class Skills
                 {
                     Assert.NotNull(skill.Name);
                     Assert.NotNull(skill.Description);
+                    MarkupSyntaxValidator.Validate(skill.Description);
                     Assert.NotNull(skill.IconHref);
                 }
 
@@ -210,6 +213,7 @@ public class Skills
                         fact =>
                         {
                             Assert.NotNull(fact.Text);
+                            MarkupSyntaxValidator.Validate(fact.Text);
                             Assert.NotEmpty(fact.IconHref);
 
                             switch (fact)
@@ -243,6 +247,7 @@ public class Skills
                                 case Buff buff:
                                     Assert.NotEmpty(buff.Status);
                                     Assert.NotNull(buff.Description);
+                                    MarkupSyntaxValidator.Validate(buff.Description);
 
                                     if (buff.ApplyCount.HasValue)
                                     {
@@ -303,6 +308,7 @@ public class Skills
                         {
                             Assert.True(fact.RequiresTrait > 0);
                             Assert.NotNull(fact.Fact.Text);
+                            MarkupSyntaxValidator.Validate(fact.Fact.Text);
                             Assert.NotEmpty(fact.Fact.IconHref);
                             switch (fact.Fact)
                             {
@@ -335,6 +341,7 @@ public class Skills
                                 case Buff buff:
                                     Assert.NotNull(buff.Status);
                                     Assert.NotNull(buff.Description);
+                                    MarkupSyntaxValidator.Validate(buff.Description);
 
                                     if (buff.ApplyCount.HasValue)
                                     {

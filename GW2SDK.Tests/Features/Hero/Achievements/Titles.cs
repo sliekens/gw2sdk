@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.Features.Markup;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Achievements;
 
@@ -20,6 +21,7 @@ public class Titles
             {
                 Assert.True(entry.Id >= 1);
                 Assert.NotEmpty(entry.Name);
+                MarkupSyntaxValidator.Validate(entry.Name);
                 if (entry.AchievementPointsRequired.HasValue)
                 {
                     Assert.InRange(entry.AchievementPointsRequired.Value, 1, 100000);

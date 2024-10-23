@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.Features.Markup;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Gliders;
 
@@ -24,6 +25,7 @@ public class GliderSkins
                 Assert.NotEmpty(entry.IconHref);
                 Assert.NotEmpty(entry.Name);
                 Assert.NotNull(entry.Description);
+                MarkupSyntaxValidator.Validate(entry.Description);
                 Assert.NotNull(entry.DefaultDyeColorIds);
             }
         );

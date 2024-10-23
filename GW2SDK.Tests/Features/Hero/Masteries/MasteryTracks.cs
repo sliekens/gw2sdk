@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Hero.Masteries;
+using GuildWars2.Tests.Features.Markup;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Masteries;
@@ -30,7 +31,9 @@ public class MasteryTracks
                     {
                         Assert.NotEmpty(level.Name);
                         Assert.NotEmpty(level.Description);
+                        MarkupSyntaxValidator.Validate(level.Description);
                         Assert.NotEmpty(level.Instruction);
+                        MarkupSyntaxValidator.Validate(level.Instruction);
                         Assert.NotEmpty(level.IconHref);
                         Assert.True(level.PointCost > 0);
                         Assert.True(level.ExperienceCost > 0);

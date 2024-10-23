@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.Features.Markup;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.StoryJournal.BackgroundStories;
 
@@ -21,6 +22,7 @@ public class BackgroundStoryAnswers
                 Assert.NotNull(answer.Title);
                 Assert.NotEmpty(answer.Description);
                 Assert.NotEmpty(answer.Journal);
+                MarkupSyntaxValidator.Validate(answer.Journal);
                 Assert.InRange(answer.QuestionId, 1, 999);
             }
         );

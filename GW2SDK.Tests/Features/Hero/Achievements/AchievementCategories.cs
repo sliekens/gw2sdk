@@ -19,6 +19,8 @@ public class AchievementCategories
             entry =>
             {
                 Assert.True(entry.Id > 0);
+                Assert.NotEmpty(entry.Name);
+                Assert.NotNull(entry.Description);
                 Assert.True(entry.Order >= 0);
                 Assert.NotEmpty(entry.IconHref);
                 Assert.NotNull(entry.Achievements);

@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.Features.Markup;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Finishers;
 
@@ -20,6 +21,7 @@ public class Finishers
             {
                 Assert.True(entry.Id > 0);
                 Assert.NotNull(entry.LockedText);
+                MarkupSyntaxValidator.Validate(entry.LockedText);
                 Assert.NotNull(entry.UnlockItemIds);
                 Assert.All(entry.UnlockItemIds, id => Assert.True(id > 0));
                 Assert.True(entry.Order >= 0);

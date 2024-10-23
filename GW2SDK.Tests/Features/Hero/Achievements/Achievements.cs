@@ -1,6 +1,7 @@
 ﻿using GuildWars2.Chat;
 using GuildWars2.Hero.Achievements;
 using GuildWars2.Hero.Achievements.Rewards;
+using GuildWars2.Tests.Features.Markup;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Achievements;
@@ -21,7 +22,9 @@ public class Achievements
             Assert.True(actual.Id > 0);
             Assert.NotEmpty(actual.Name);
             Assert.NotNull(actual.Description);
+            MarkupSyntaxValidator.Validate(actual.Description);
             Assert.NotNull(actual.Requirement);
+            MarkupSyntaxValidator.Validate(actual.Requirement);
             Assert.NotNull(actual.LockedText);
             Assert.NotNull(actual.Flags);
             Assert.Empty(actual.Flags.Other);
