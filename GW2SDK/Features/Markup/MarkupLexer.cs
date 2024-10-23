@@ -39,6 +39,16 @@ public sealed class MarkupLexer
                 {
                     var tagName = scanner.ReadUntil('>');
                     scanner.Advance();
+
+                    // Self-closing tags like <br /> are not valid, ignore them
+                    if (tagName.EndsWith("/"))
+                    {
+                        tagName = tagName[..^1];
+                    }
+
+                    // Also ignore any meaningless whitespace in the tag name
+                    tagName = tagName.Trim();
+
                     if (VoidElements.Contains(tagName))
                     {
                         yield return new MarkupToken(MarkupTokenType.TagVoid, tagName);
@@ -55,9 +65,14 @@ public sealed class MarkupLexer
                     }
                 }
             }
+            else if (scanner.Current == '\n')
+            {
+                scanner.Advance();
+                yield return new MarkupToken(MarkupTokenType.LineBreak, "");
+            }
             else
             {
-                var text = scanner.ReadUntil('<');
+                var text = scanner.ReadUntilAny('<', '\n');
                 yield return new MarkupToken(MarkupTokenType.Text, text);
             }
         }

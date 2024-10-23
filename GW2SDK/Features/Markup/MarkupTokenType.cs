@@ -20,6 +20,11 @@ public enum MarkupTokenType
     Text,
 
     /// <summary>
+    /// Represents a line break token.
+    /// </summary>
+    LineBreak,
+
+    /// <summary>
     /// Represents the start of a tag.
     /// </summary>
     TagStart,

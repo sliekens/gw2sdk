@@ -19,6 +19,17 @@ internal class Scanner(string input)
             Advance();
         }
 
-        return input.Substring(start, position - start);
+        return input[start..position];
+    }
+
+    public string ReadUntilAny(params char[] chars)
+    {
+        var start = position;
+        while (!chars.Contains(Current) && CanAdvance)
+        {
+            Advance();
+        }
+
+        return input[start..position];
     }
 }

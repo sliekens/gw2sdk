@@ -33,7 +33,12 @@ public sealed class MarkupParser
         switch (iterator.Current?.Type)
         {
             case MarkupTokenType.Text:
-                return ParseTextNode(iterator);
+                var text = iterator.Current.Value;
+                iterator.Advance();
+                return new TextNode(text);
+            case MarkupTokenType.LineBreak:
+                iterator.Advance();
+                return new LineBreakNode();
             case MarkupTokenType.TagStart:
                 return ParseTagNode(iterator);
             case MarkupTokenType.TagVoid:
@@ -100,13 +105,5 @@ public sealed class MarkupParser
         }
 
         return null;
-    }
-
-    private static MarkupNode? ParseTextNode(MarkupTokenIterator iterator)
-    {
-        Debug.Assert(iterator.Current?.Type == MarkupTokenType.Text);
-        var text = iterator.Current!.Value;
-        iterator.Advance();
-        return new TextNode(text);
     }
 }
