@@ -18,15 +18,7 @@ public sealed class MarkupTextConverter
         var builder = new StringBuilder();
         foreach (var node in root.Children)
         {
-            switch (node)
-            {
-                case TextNode text:
-                    builder.Append(text.Text);
-                    break;
-                case LineBreakNode _:
-                    builder.AppendLine();
-                    break;
-            }
+            builder.Append(ConvertNode(node));
         }
 
         return builder.ToString();
