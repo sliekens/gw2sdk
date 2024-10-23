@@ -1,4 +1,4 @@
-using static System.StringComparison;
+﻿using static System.StringComparison;
 
 namespace GuildWars2.Markup;
 

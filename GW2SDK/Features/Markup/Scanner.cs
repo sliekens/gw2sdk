@@ -1,4 +1,4 @@
-
+﻿
 namespace GuildWars2.Markup;
 
 internal class Scanner(string input)

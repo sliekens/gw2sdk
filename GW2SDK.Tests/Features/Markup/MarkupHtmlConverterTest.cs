@@ -1,4 +1,4 @@
-using GuildWars2.Markup;
+﻿using GuildWars2.Markup;
 
 namespace GuildWars2.Tests.Features.Markup;
 
