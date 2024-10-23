@@ -22,12 +22,12 @@ public class SpectreMarkupConverter
         switch (node)
         {
             case TextNode text:
-                return text.Text;
+                return Markup.Escape(text.Text);
             case LineBreakNode:
                 return Environment.NewLine;
             case ColoredTextNode coloredText:
-                var content = string.Concat(coloredText.Children.Select(ConvertNode)).EscapeMarkup();
-                if (coloredText.Color.StartsWith("#"))
+                var content = string.Concat(coloredText.Children.Select(ConvertNode));
+                if (coloredText.Color.StartsWith("#", StringComparison.Ordinal))
                 {
                     return $"[${coloredText.Color}]{content}[/]";
                 }
