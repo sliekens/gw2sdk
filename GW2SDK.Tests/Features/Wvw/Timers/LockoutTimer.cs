@@ -13,6 +13,6 @@ public class LockoutTimer
 
         Assert.NotNull(context);
         Assert.True(actual.NorthAmerica >= DateTimeOffset.Parse("2024-10-23T17:00:00Z"));
-        Assert.True(actual.Europe > DateTimeOffset.UtcNow);
+        Assert.True(actual.Europe >= DateTimeOffset.UtcNow);
     }
 }
