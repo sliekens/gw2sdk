@@ -19,10 +19,10 @@ public class RecipesTable : IRenderable
     {
         var lexer = new MarkupLexer();
         var parser = new MarkupParser();
-        var converter = new MarkupTextConverter();
+        var converter = new SpectreMarkupConverter();
         var tokens = lexer.Tokenize(item.Description);
         var syntax = parser.Parse(tokens);
         var description = converter.Convert(syntax);
-        table.AddRow(item.Name.EscapeMarkup(), description.EscapeMarkup());
+        table.AddRow(item.Name.EscapeMarkup(), description);
     }
 }

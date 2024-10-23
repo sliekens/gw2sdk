@@ -15,7 +15,7 @@ public class ItemCard(HttpClient httpClient)
 
         var lexer = new MarkupLexer();
         var parser = new MarkupParser();
-        var converter = new MarkupTextConverter();
+        var converter = new SpectreMarkupConverter();
         var tokens = lexer.Tokenize(item.Description);
         var syntax = parser.Parse(tokens);
         var description = converter.Convert(syntax);
@@ -23,7 +23,7 @@ public class ItemCard(HttpClient httpClient)
         itemTable.AddRow(
             new CanvasImage(ingredientIcon).MaxWidth(32),
             new Markup(item.Name.EscapeMarkup()),
-            new Markup(description.EscapeMarkup())
+            new Markup(description)
         );
 
         AnsiConsole.Write(itemTable);
