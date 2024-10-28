@@ -1188,7 +1188,7 @@ public sealed class WvwClient
 
     #region v2/wvw/timers
 
-    /// <summary>Retrieves the WvW lockout timer.</summary>
+    /// <summary>Retrieves the timer for the current WvW guild selection lockout.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public async Task<(WvwTimer Value, MessageContext Context)> GetLockoutTimer(
@@ -1206,7 +1206,7 @@ public sealed class WvwClient
         }
     }
 
-    /// <summary>Retrieves the WvW team assignment timer.</summary>
+    /// <summary>Retrieves the timer for the current WvW team assignment.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
     public async Task<(WvwTimer Value, MessageContext Context)> GetTeamAssignmentTimer(
