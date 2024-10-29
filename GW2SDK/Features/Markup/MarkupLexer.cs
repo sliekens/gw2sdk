@@ -28,50 +28,52 @@ public sealed class MarkupLexer
         // TAG_VOID = "<" TAG_NAME ">"
         // TAG_NAME = 1*ALPHA
         // TAG_VALUE = 1*VCHAR; except ">"
-        var scanner = new Scanner(input);
+        var memory = input.AsMemory();
+        var position = 0;
         var state = MarkupLexerState.Text;
-        var start = scanner.Position;
-        while (scanner.CanAdvance)
+        var start = 0;
+        while (position < memory.Length)
         {
+            var current = memory.Span[position];
             switch (state)
             {
                 case MarkupLexerState.Text:
-                    if (scanner.Current == '<')
+                    if (current == '<')
                     {
-                        if (scanner.Position > start)
+                        if (position > start)
                         {
-                            yield return new MarkupToken(MarkupTokenType.Text, input[start..scanner.Position]);
+                            yield return new MarkupToken(MarkupTokenType.Text, memory.Span[start..position].ToString());
                         }
 
                         state = MarkupLexerState.TagOpen;
-                        start = scanner.Position + 1;
+                        start = position + 1;
                     }
-                    else if (scanner.Current == '\n')
+                    else if (current == '\n')
                     {
-                        if (scanner.Position > start)
+                        if (position > start)
                         {
-                            yield return new MarkupToken(MarkupTokenType.Text, input[start..scanner.Position]);
+                            yield return new MarkupToken(MarkupTokenType.Text, memory.Span[start..position].ToString());
                         }
 
                         yield return new MarkupToken(MarkupTokenType.LineBreak, "");
                         state = MarkupLexerState.Text;
-                        start = scanner.Position + 1;
+                        start = position + 1;
                     }
 
                     break;
 
                 case MarkupLexerState.TagOpen:
-                    if (scanner.Current == '/')
+                    if (current == '/')
                     {
-                        if (scanner.Position == start)
+                        if (position == start)
                         {
                             state = MarkupLexerState.TagClose;
-                            start = scanner.Position + 1;
+                            start = position + 1;
                         }
-                        else if (scanner.Peek() == '>')
+                        else if (position + 1 < memory.Length && memory.Span[position + 1] == '>')
                         {
                             // Ignore the '/' in '/>'
-                            var tagName = input[start..scanner.Position].Trim();
+                            var tagName = memory.Span[start..position].Trim().ToString();
                             if (VoidElements.Contains(tagName))
                             {
                                 yield return new MarkupToken(MarkupTokenType.TagVoid, tagName);
@@ -82,25 +84,25 @@ public sealed class MarkupLexer
                             }
 
                             state = MarkupLexerState.Text;
-                            start = scanner.Position + 2;
+                            start = position + 2;
                         }
                         else
                         {
                             // Invalid tag
                             state = MarkupLexerState.Text;
-                            start = scanner.Position + 1;
+                            start = position + 1;
                         }
                     }
-                    else if (scanner.Current == '=')
+                    else if (current == '=')
                     {
-                        var tagName = input[start..scanner.Position].Trim();
+                        var tagName = memory.Span[start..position].Trim().ToString();
                         yield return new MarkupToken(MarkupTokenType.TagStart, tagName);
                         state = MarkupLexerState.TagValue;
-                        start = scanner.Position + 1;
+                        start = position + 1;
                     }
-                    else if (scanner.Current == '>')
+                    else if (current == '>')
                     {
-                        var tagName = input[start..scanner.Position].Trim();
+                        var tagName = memory.Span[start..position].Trim().ToString();
                         if (VoidElements.Contains(tagName))
                         {
                             yield return new MarkupToken(MarkupTokenType.TagVoid, tagName);
@@ -111,40 +113,40 @@ public sealed class MarkupLexer
                         }
 
                         state = MarkupLexerState.Text;
-                        start = scanner.Position + 1;
+                        start = position + 1;
                     }
 
                     break;
 
                 case MarkupLexerState.TagValue:
-                    if (scanner.Current == '>')
+                    if (current == '>')
                     {
-                        var tagValue = input[start..scanner.Position].Trim();
+                        var tagValue = memory.Span[start..position].Trim().ToString();
                         yield return new MarkupToken(MarkupTokenType.TagValue, tagValue);
                         state = MarkupLexerState.Text;
-                        start = scanner.Position + 1;
+                        start = position + 1;
                     }
 
                     break;
 
                 case MarkupLexerState.TagClose:
-                    if (scanner.Current == '>')
+                    if (current == '>')
                     {
-                        var tagName = input[start..scanner.Position].Trim();
+                        var tagName = memory.Span[start..position].Trim().ToString();
                         yield return new MarkupToken(MarkupTokenType.TagClose, tagName);
                         state = MarkupLexerState.Text;
-                        start = scanner.Position + 1;
+                        start = position + 1;
                     }
 
                     break;
             }
 
-            scanner.Advance();
+            position++;
         }
 
-        if (scanner.Position > start)
+        if (position > start)
         {
-            yield return new MarkupToken(MarkupTokenType.Text, input[start..scanner.Position]);
+            yield return new MarkupToken(MarkupTokenType.Text, memory.Span[start..position].ToString());
         }
 
         yield return new MarkupToken(MarkupTokenType.End, "");
