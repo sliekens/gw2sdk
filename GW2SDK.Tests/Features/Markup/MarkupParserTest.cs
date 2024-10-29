@@ -10,8 +10,8 @@ public class MarkupParserTest
         var input = "5 <REDACTED> Dye kits";
         var lexer = new MarkupLexer();
         var parser = new MarkupParser();
-
-        var actual = parser.Parse(lexer.Tokenize(input));
+        var tokens = lexer.Tokenize(input);
+        var actual = parser.Parse(tokens);
 
         Assert.NotNull(actual);
         Assert.Collection(actual.Children,
@@ -33,7 +33,8 @@ public class MarkupParserTest
         var input = "<c=@reminder>This coat hides leg armor.<c>";
         var lexer = new MarkupLexer();
         var parser = new MarkupParser();
-        var actual = parser.Parse(lexer.Tokenize(input));
+        var tokens = lexer.Tokenize(input);
+        var actual = parser.Parse(tokens);
 
         Assert.NotNull(actual);
         Assert.Collection(actual.Children,
@@ -50,5 +51,34 @@ public class MarkupParserTest
                 );
             }
           );
+    }
+
+    [Fact]
+    public void Keeps_trailing_newline()
+    {
+        var input = "<c=@flavor>A gift given in gratitude from the leaders of Tyria.</c>\n";
+        var lexer = new MarkupLexer();
+        var parser = new MarkupParser();
+        var tokens = lexer.Tokenize(input);
+        var actual = parser.Parse(tokens);
+
+        Assert.NotNull(actual);
+        Assert.Collection(actual.Children,
+            node =>
+            {
+                var coloredText = Assert.IsType<ColoredTextNode>(node);
+                Assert.Equal("@flavor", coloredText.Color);
+                Assert.Collection(coloredText.Children,
+                    node =>
+                    {
+                        var text = Assert.IsType<TextNode>(node);
+                        Assert.Equal("A gift given in gratitude from the leaders of Tyria.", text.Text);
+                    }
+                );
+            },
+            node =>
+            {
+                var lineBreak = Assert.IsType<LineBreakNode>(node);
+            });
     }
 }

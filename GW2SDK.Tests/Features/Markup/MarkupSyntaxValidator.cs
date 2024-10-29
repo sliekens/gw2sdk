@@ -38,7 +38,7 @@ public static class MarkupSyntaxValidator
 
     private static void ValidateTextNode(TextNode text)
     {
-        Assert.Matches("[a-zA-Z0-9. \n]+", text.Text);
+        Assert.Matches("[a-zA-Z0-9 .]+", text.Text);
     }
 
     private static void ValidateColoredTextNode(ColoredTextNode coloredText)
