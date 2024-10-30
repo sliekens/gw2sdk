@@ -1,12 +1,15 @@
-﻿using System.Text.Json;
+﻿using System.Text.Encodings.Web;
+using System.Text.Json;
 
 namespace GuildWars2.TestDataHelper;
 
 internal static class JsonDocumentEx
 {
-    private static readonly JsonWriterOptions WithoutIndented = new() { Indented = false };
+    // UnsafeRelaxedJsonEscaping is used to preserve special characters in the output
+    // Otherwise, they would be escaped as \uXXXX sequences which is a safety measure for web content but not necessary for test data
+    private static readonly JsonWriterOptions WithoutIndented = new() { Indented = false, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
 
-    private static readonly JsonWriterOptions WithIndented = new() { Indented = true };
+    private static readonly JsonWriterOptions WithIndented = new() { Indented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
 
     internal static JsonDocument Indent(this JsonDocument json, bool indent = true)
     {
