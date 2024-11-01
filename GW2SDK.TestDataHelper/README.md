@@ -1,16 +1,18 @@
 # Test Data Helper
 
-This utility gets JSON from the GW2 API and writes it to disk.
+This utility gets JSON from the GW2 API and writes it to disk in the
+[JSON Lines](https://jsonlines.org/) format.
 
 Usage example
 
 ```sh
-dotnet run --out-dir ./data --indented
+dotnet run --out-dir ./data
 ```
 
 ## Why?
 
-Many integration tests depend on real API data. This tool can be used to make an offline copy of that data.
+Many integration tests depend on real API data. This tool can be used to make an
+offline copy of that data, to avoid problems with API rate limits during testing.
 
 ```sh
 # Run in GW2SDK.TestDataHelper
@@ -18,14 +20,4 @@ dotnet run --out-dir ../GW2SDK.Tests/Data
 
 # Run in GW2SDK.Tests
 dotnet test --filter Feature=Colors
-```
-
-## File Format
-
-The output files contain JSON, but there's a twist. These aren't JSON arrays. Instead, each JSON object is separated by a line break. This format makes parsing slightly more efficient.
-
-```json
-{"id":1,"name":"Dye Remover","base_rgb":[128,26,26],"cloth":{"brightness":15,"contrast":1.25,"hue":38,"saturation":0.28125,"lightness":1.44531,"rgb":[124,108,83]},"leather":{"brightness":-8,"contrast":1,"hue":34,"saturation":0.3125,"lightness":1.09375,"rgb":[65,49,29]},"metal":{"brightness":5,"contrast":1.05469,"hue":38,"saturation":0.101563,"lightness":1.36719,"rgb":[96,91,83]},"fur":{"brightness":15,"contrast":1.25,"hue":38,"saturation":0.28125,"lightness":1.44531,"rgb":[124,108,83]},"categories":[]}
-{"id":2,"name":"Black","base_rgb":[128,26,26],"cloth":{"brightness":-13,"contrast":1,"hue":275,"saturation":0.0234375,"lightness":1.09375,"rgb":[37,35,38]},"leather":{"brightness":-13,"contrast":1,"hue":275,"saturation":0.0234375,"lightness":1.09375,"rgb":[37,35,38]},"metal":{"brightness":-13,"contrast":1,"hue":275,"saturation":0.0234375,"lightness":1.09375,"rgb":[37,35,38]},"fur":{"brightness":-13,"contrast":1,"hue":275,"saturation":0.0234375,"lightness":1.09375,"rgb":[37,35,38]},"item":20358,"categories":["Gray","Metal","Rare"]}
-{"id":3,"name":"Chalk","base_rgb":[128,26,26],"cloth":{"brightness":12,"contrast":1.13281,"hue":5,"saturation":0.0234375,"lightness":1.25,"rgb":[95,92,92]},"leather":{"brightness":12,"contrast":1.13281,"hue":5,"saturation":0.0234375,"lightness":1.25,"rgb":[95,92,92]},"metal":{"brightness":10,"contrast":1.28906,"hue":5,"saturation":0.0234375,"lightness":1.36719,"rgb":[84,81,81]},"fur":{"brightness":12,"contrast":1.13281,"hue":5,"saturation":0.0234375,"lightness":1.25,"rgb":[95,92,92]},"item":20360,"categories":["Gray","Metal","Uncommon"]}
 ```

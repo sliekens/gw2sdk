@@ -13,7 +13,7 @@ public class Skins
         // The JsonLinesHttpMessageHandler simulates the behavior of the real API
         // because bulk enumeration quickly exhausts the API rate limit
         using var httpClient =
-            new HttpClient(new JsonLinesHttpMessageHandler("Data/skins.json.gz"));
+            new HttpClient(new JsonLinesHttpMessageHandler("Data/skins.jsonl.gz"));
         var sut = new Gw2Client(httpClient);
         await foreach (var (actual, context) in sut.Hero.Equipment.Wardrobe.GetSkinsBulk())
         {

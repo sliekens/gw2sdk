@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Text;
+using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Web;
 
@@ -7,9 +8,13 @@ namespace GuildWars2.Tests.TestInfrastructure;
 
 internal class JsonLinesHttpMessageHandler(string path) : HttpMessageHandler
 {
-    private readonly Dictionary<int, JsonNode> Entries = JsonLinesReader.Read(path)
-        .Select(json => JsonNode.Parse(json)!)
-        .ToDictionary(node => node["id"]!.GetValue<int>());
+    private readonly Dictionary<int, JsonElement> Entries = JsonLinesReader.Read(path)
+        .Select(json =>
+        {
+            using var document = JsonDocument.Parse(json);
+            return document.RootElement.Clone();
+        })
+        .ToDictionary(node => node.GetProperty("id").GetInt32());
 
     protected override Task<HttpResponseMessage> SendAsync(
         HttpRequestMessage request,
@@ -32,7 +37,7 @@ internal class JsonLinesHttpMessageHandler(string path) : HttpMessageHandler
             {
                 if (Entries.TryGetValue(key, out var entry))
                 {
-                    results.Add(entry.DeepClone());
+                    results.Add(entry);
                 }
             }
         }

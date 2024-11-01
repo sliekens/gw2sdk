@@ -43,9 +43,8 @@ public class JsonRecipeService(HttpClient http)
         {
             var request = new BulkRequest("/v2/recipes") { Ids = chunk.ToList() };
             var json = await request.SendAsync(http, cancellationToken);
-            return json.Indent(false)
-                .RootElement.EnumerateArray()
-                .Select(item => (item.GetProperty("id").GetInt32(), item.ToString()))
+            return json.RootElement.EnumerateArray()
+                .Select(item => (item.GetProperty("id").GetInt32(), item.ToJsonLine()))
                 .ToList();
         }
     }

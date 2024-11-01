@@ -60,7 +60,7 @@ try
             {
                 var achievements = ctx.AddTask("Downloading achievements.");
                 await using (var file =
-                    CreateTextCompressed(Path.Combine(outDir, "achievements.json.gz")))
+                    CreateTextCompressed(Path.Combine(outDir, "achievements.jsonl.gz")))
                 {
                     var service = app.Services.GetRequiredService<JsonAchievementService>();
                     var documents =
@@ -72,7 +72,7 @@ try
                 }
 
                 var items = ctx.AddTask("Downloading items.");
-                await using (var file = CreateTextCompressed(Path.Combine(outDir, "items.json.gz")))
+                await using (var file = CreateTextCompressed(Path.Combine(outDir, "items.jsonl.gz")))
                 {
                     var service = app.Services.GetRequiredService<JsonItemService>();
                     var documents = await service.GetAllJsonItems(new ProgressAdapter(items));
@@ -84,7 +84,7 @@ try
 
                 var recipes = ctx.AddTask("Downloading recipes.");
                 await using (var file =
-                    CreateTextCompressed(Path.Combine(outDir, "recipes.json.gz")))
+                    CreateTextCompressed(Path.Combine(outDir, "recipes.jsonl.gz")))
                 {
                     var service = app.Services.GetRequiredService<JsonRecipeService>();
                     var documents = await service.GetAllJsonRecipes(new ProgressAdapter(recipes));
@@ -95,7 +95,7 @@ try
                 }
 
                 var skins = ctx.AddTask("Downloading skins.");
-                await using (var file = CreateTextCompressed(Path.Combine(outDir, "skins.json.gz")))
+                await using (var file = CreateTextCompressed(Path.Combine(outDir, "skins.jsonl.gz")))
                 {
                     var service = app.Services.GetRequiredService<JsonSkinService>();
                     var documents = await service.GetAllJsonSkins(new ProgressAdapter(skins));
@@ -106,7 +106,7 @@ try
                 }
 
                 var decorations = ctx.AddTask("Downloading decorations.");
-                await using (var file = CreateTextCompressed(Path.Combine(outDir, "decorations.json.gz")))
+                await using (var file = CreateTextCompressed(Path.Combine(outDir, "decorations.jsonl.gz")))
                 {
                     var service = app.Services.GetRequiredService<JsonDecorationsService>();
                     var documents = await service.GetAllJsonDecorations(new ProgressAdapter(decorations));

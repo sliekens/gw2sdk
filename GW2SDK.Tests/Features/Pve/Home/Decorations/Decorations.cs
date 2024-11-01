@@ -12,7 +12,7 @@ public class Decorations
         // The JsonLinesHttpMessageHandler simulates the behavior of the real API
         // because bulk enumeration quickly exhausts the API rate limit
         using var httpClient =
-            new HttpClient(new JsonLinesHttpMessageHandler("Data/decorations.json.gz"));
+            new HttpClient(new JsonLinesHttpMessageHandler("Data/decorations.jsonl.gz"));
         var sut = new Gw2Client(httpClient);
         await foreach (var (actual, context) in sut.Pve.Home.GetDecorationsBulk())
         {
