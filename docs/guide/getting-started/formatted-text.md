@@ -9,7 +9,7 @@ For example:
 ```text
 Double-click to apply to an unused infusion slot. Adds a festive glow.
 <c=@Warning>Warning!</c>
-<c=@Flavor>Captain's Council recommends avoiding direct contact with this substance.</c>"
+<c=@Flavor>Captain's Council recommends avoiding direct contact with this substance.</c>
 ```
 
 Which is rendered as:

@@ -17,7 +17,7 @@ host.Services.AddHttpClient<Gw2Client>();
 host.Logging.AddSimpleConsole(
     options =>
     {
-        options.SingleLine = true;
+        options.SingleLine = false;
         options.TimestampFormat = "HH:mm:ss.fff ";
         options.UseUtcTimestamp = true;
     }
@@ -118,7 +118,13 @@ void OnNext(GameTick gameTick)
     {
         var transport = gameTick.Context.IsMounted ? gameTick.Context.Mount.ToString() : "foot";
         logger.LogInformation(
-            "[{UiTick}] {Name}, {Title} ({Specialization}) is on {Transport} in {Map} ({Type}), Position: {{ Latitude = {X}, Longitude = {Z}, Elevation = {Y} }}",
+            """
+            [{UiTick}] {Name}, {Title} ({Specialization}) is on {Transport}
+            Map       : {Map} ({Type})
+            Latitude  : {X}
+            Longitude : {Z}
+            Elevation : {Y}
+            """,
             gameTick.UiTick,
             identity.Name,
             title,

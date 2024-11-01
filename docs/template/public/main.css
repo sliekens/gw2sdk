@@ -1,0 +1,4 @@
+div.content {
+    max-width: 80ch;
+    word-wrap: break-word;
+}

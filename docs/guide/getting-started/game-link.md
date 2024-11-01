@@ -1,8 +1,18 @@
 # Game link
 
-The entry point for accessing game client information is `GuildWars2.GameLink`. This class implements `IObservable` so you should be familiar with the publisher-subscriber model. I recommend to use the Reactive Extensions ([System.Reactive][Rx]) library to subscribe to the GameLink. Rx is a powerful library that makes it easy to work with asynchronous data streams.
+The entry point for accessing game client information is `GuildWars2.GameLink`.
+This class implements `IObservable` so you should be familiar with the
+publisher-subscriber model. I recommend to use the Reactive Extensions
+([System.Reactive][Rx]) library to subscribe to the GameLink. Rx is a powerful
+library that makes it easy to work with asynchronous data streams.
 
-To use the GameLink, pass an observer to `GameLink.Subscribe()`. An observer is a class that implements `IObserver<GameTick>`, or an `Action<GameTick>` when using Rx. The GameLink will then start pushing GameTicks to the observer (with configurable intervals). Each GameTick corresponds to a single update from the game client and it's usually updated on every frame. You can use `GameLink.Open(TimeSpan)` with a refresh interval of your choice if you need less frequent updates.
+To use the GameLink, pass an observer to `GameLink.Subscribe()`. An observer is
+a class that implements `IObserver<GameTick>`, or an `Action<GameTick>` when
+using Rx. The GameLink will then start pushing GameTicks to the observer (with
+configurable intervals). Each GameTick corresponds to a single update from the
+game client and it's usually updated on every frame. You can use
+`GameLink.Open(TimeSpan)` with a refresh interval of your choice if you need less
+frequent updates.
 
 The game client (Gw2-64.exe) must be running for the GameLink to work.
 
@@ -35,11 +45,14 @@ Last but not least, some metadata about the game.
 - whether the chat box has focus
 - the server IP address that the client connects to (same as typing /ip in the game)
 
-Technically, the game writes this information to a memory-mapped file on every frame, which we then read on a configureable refresh interval. The GameLink is not a hack or a cheat. It's a supported feature of the game client.
+Technically, the game writes this information to a memory-mapped file on every frame,
+which we then read on a configureable refresh interval. The GameLink is not a hack
+or a cheat. It's a supported feature of the game client.
 
 ## Basic usage
 
-The general usage pattern is to open the GameLink, subscribe to it, and then wait for updates.
+The general usage pattern is to open the GameLink, subscribe to it, and then wait
+for updates.
 
 ``` csharp
 using System;
@@ -67,7 +80,9 @@ gameLink.Subscribe(
 
 ## Multiple game clients
 
-The default name of the memory-mapped file is `MumbleLink` but it can be changed with a command line flag, which is useful if you need to run multiple game clients and use the GameLink with each running instance.
+The default name of the memory-mapped file is `MumbleLink` but it can be changed
+with a command line flag, which is useful if you need to run multiple game clients
+and use the GameLink with each running instance.
 
 ``` cmd
 gw2-64.exe -mumble OtherLink
@@ -89,7 +104,8 @@ It illustrates the following concepts:
 
 - How to check if the GameLink is supported on the current platform
 - How to subscribe to the `GameLink` with Rx
-- How to use the `GameTick` properties to get the player's current map and specialization name
+- How to use the `GameTick` properties to get the player's current map and
+  specialization name
 - How to use the `Gw2Client` to query the API for the map and specialization names
 - How to check if the player is in combat, typing, looking at the map, etc.
 
@@ -98,48 +114,298 @@ It illustrates the following concepts:
 Example output:
 
 ``` text
-09:59:47.657 info: System.Net.Http.HttpClient.Gw2Client.LogicalHandler[100] Start processing HTTP request GET https://api.guildwars2.com/v2/maps?ids=all&v=2022-03-23T19:00:00.000Z
-09:59:47.703 info: System.Net.Http.HttpClient.Gw2Client.ClientHandler[100] Sending HTTP request GET https://api.guildwars2.com/v2/maps?ids=all&v=2022-03-23T19:00:00.000Z
-09:59:47.958 info: System.Net.Http.HttpClient.Gw2Client.ClientHandler[101] Received HTTP response headers after 250.0283ms - 200
-09:59:47.959 info: System.Net.Http.HttpClient.Gw2Client.LogicalHandler[101] End processing HTTP request after 317.3058ms - 200
-09:59:48.061 info: System.Net.Http.HttpClient.Gw2Client.LogicalHandler[100] Start processing HTTP request GET https://api.guildwars2.com/v2/specializations?ids=all&v=2022-03-23T19:00:00.000Z
-09:59:48.061 info: System.Net.Http.HttpClient.Gw2Client.ClientHandler[100] Sending HTTP request GET https://api.guildwars2.com/v2/specializations?ids=all&v=2022-03-23T19:00:00.000Z
-09:59:48.101 info: System.Net.Http.HttpClient.Gw2Client.ClientHandler[101] Received HTTP response headers after 39.319ms - 200
-09:59:48.101 info: System.Net.Http.HttpClient.Gw2Client.LogicalHandler[101] End processing HTTP request after 39.5207ms - 200
-09:59:48.136 info: GuildWars2.GameLink[0] [58914] Invert Control, the Human Engineer (Mechanist) is on Skyscale in Arborstone (PublicMini), Position: { Latitude = -856.519, Longitude = 570.44257, Elevation = 28.097889 }
-09:59:48.151 info: Microsoft.Hosting.Lifetime[0] Application started. Press Ctrl+C to shut down.
-09:59:48.151 info: Microsoft.Hosting.Lifetime[0] Hosting environment: Production
-09:59:48.151 info: Microsoft.Hosting.Lifetime[0] Content root path: X:\src\GW2SDK
-09:59:49.116 info: GuildWars2.GameLink[0] [58975] Invert Control, the Human Engineer (Mechanist) is on Skyscale in Arborstone (PublicMini), Position: { Latitude = -856.519, Longitude = 570.44257, Elevation = 28.097889 }
-09:59:50.114 info: GuildWars2.GameLink[0] [59034] Invert Control, the Human Engineer (Mechanist) is on Skyscale in Arborstone (PublicMini), Position: { Latitude = -856.519, Longitude = 570.44257, Elevation = 28.097889 }
-09:59:51.113 info: GuildWars2.GameLink[0] [59097] Invert Control, the Human Engineer (Mechanist) is on Skyscale in Arborstone (PublicMini), Position: { Latitude = -856.519, Longitude = 570.44257, Elevation = 28.097889 }
-09:59:52.123 info: GuildWars2.GameLink[0] [59160] Invert Control, the Human Engineer (Mechanist) is on Skyscale in Arborstone (PublicMini), Position: { Latitude = -856.519, Longitude = 570.44257, Elevation = 28.097889 }
-09:59:53.118 info: GuildWars2.GameLink[0] [59226] Invert Control, the Human Engineer (Mechanist) is on Skyscale in Arborstone (PublicMini), Position: { Latitude = -854.0615, Longitude = 568.6599, Elevation = 27.56997 }
-09:59:54.117 info: GuildWars2.GameLink[0] [59278] Invert Control, the Human Engineer (Mechanist) is on foot in Arborstone (PublicMini), Position: { Latitude = -844.7674, Longitude = 561.7398, Elevation = 22.347445 }
-09:59:55.125 info: GuildWars2.GameLink[0] [59333] Invert Control, the Human Engineer (Mechanist) is on foot in Arborstone (PublicMini), Position: { Latitude = -838.48975, Longitude = 556.62787, Elevation = 9.980106 }
-09:59:56.117 info: GuildWars2.GameLink[0] [59399] Invert Control, the Human Engineer (Mechanist) is on foot in Arborstone (PublicMini), Position: { Latitude = -833.0732, Longitude = 549.5106, Elevation = 2.9267163 }
-09:59:57.127 info: GuildWars2.GameLink[0] [59464] Invert Control, the Human Engineer (Mechanist) is on foot in Arborstone (PublicMini), Position: { Latitude = -826.98865, Longitude = 541.961, Elevation = 2.0309002 }
-09:59:58.126 info: GuildWars2.GameLink[0] [59521] Invert Control, the Human Engineer (Mechanist) is on foot in Arborstone (PublicMini), Position: { Latitude = -820.667, Longitude = 535.5705, Elevation = 2.1029532 }
-09:59:59.119 info: GuildWars2.GameLink[0] [59581] Invert Control, the Human Engineer (Mechanist) is on RollerBeetle in Arborstone (PublicMini), Position: { Latitude = -831.20386, Longitude = 537.6345, Elevation = 1.891227 }
-10:00:00.114 info: GuildWars2.GameLink[0] [59650] Invert Control, the Human Engineer (Mechanist) is on RollerBeetle in Arborstone (PublicMini), Position: { Latitude = -852.5697, Longitude = 552.98627, Elevation = -0.5047009 }
-10:00:01.114 info: GuildWars2.GameLink[0] [59725] Invert Control, the Human Engineer (Mechanist) is on RollerBeetle in Arborstone (PublicMini), Position: { Latitude = -880.77545, Longitude = 582.04364, Elevation = 12.155696 }
-10:00:02.124 info: GuildWars2.GameLink[0] [59808] Invert Control, the Human Engineer (Mechanist) is on RollerBeetle in Arborstone (PublicMini), Position: { Latitude = -912.4395, Longitude = 612.05066, Elevation = 11.06934 }
-10:00:03.123 info: GuildWars2.GameLink[0] [59886] Invert Control, the Human Engineer (Mechanist) is on foot in Arborstone (PublicMini), Position: { Latitude = -934.91766, Longitude = 633.8974, Elevation = 14.476834 }
-10:00:04.114 info: GuildWars2.GameLink[0] [59980] Invert Control, the Human Engineer (Mechanist) is looking at the map
-10:00:05.129 info: GuildWars2.GameLink[0] [60122] Invert Control, the Human Engineer (Mechanist) is looking at the map
-10:00:06.129 info: GuildWars2.GameLink[0] [60263] Invert Control, the Human Engineer (Mechanist) is looking at the map
-10:00:07.118 info: GuildWars2.GameLink[0] [60394] Invert Control, the Human Engineer (Mechanist) is looking at the map
-10:00:08.127 info: GuildWars2.GameLink[0] [60504] Invert Control, the Human Engineer (Mechanist) is typing
-10:00:09.126 info: GuildWars2.GameLink[0] [60619] Invert Control, the Human Engineer (Mechanist) is typing
-10:00:10.119 info: GuildWars2.GameLink[0] [60732] Invert Control, the Human Engineer (Mechanist) is typing
-10:00:11.118 info: GuildWars2.GameLink[0] [60846] Invert Control, the Human Engineer (Mechanist) is typing
-10:00:12.114 info: GuildWars2.GameLink[0] [60956] Invert Control, the Human Engineer (Mechanist) is typing
-10:00:13.127 info: GuildWars2.GameLink[0] [61072] Invert Control, the Human Engineer (Mechanist) is typing
-10:00:14.124 info: GuildWars2.GameLink[0] [61182] Invert Control, the Human Engineer (Mechanist) is typing
-10:00:15.126 info: GuildWars2.GameLink[0] [61289] Invert Control, the Human Engineer (Mechanist) is afk
-10:00:16.119 info: GuildWars2.GameLink[0] [61398] Invert Control, the Human Engineer (Mechanist) is afk
-10:00:17.117 info: GuildWars2.GameLink[0] [61511] Invert Control, the Human Engineer (Mechanist) is afk
-10:00:17.536 info: Microsoft.Hosting.Lifetime[0] Application is shutting down...
+18:35:23.275 info: System.Net.Http.HttpClient.Gw2Client.LogicalHandler[100]
+      Start processing HTTP request GET https://api.guildwars2.com/v2/maps?v=2024-07-20T01:00:00.000Z&ids=all
+18:35:23.327 info: System.Net.Http.HttpClient.Gw2Client.ClientHandler[100]
+      Sending HTTP request GET https://api.guildwars2.com/v2/maps?v=2024-07-20T01:00:00.000Z&ids=all
+18:35:23.714 info: System.Net.Http.HttpClient.Gw2Client.ClientHandler[101]
+      Received HTTP response headers after 376.1521ms - 200
+18:35:23.715 info: System.Net.Http.HttpClient.Gw2Client.LogicalHandler[101]
+      End processing HTTP request after 462.5584ms - 200
+18:35:23.807 info: System.Net.Http.HttpClient.Gw2Client.LogicalHandler[100]
+      Start processing HTTP request GET https://api.guildwars2.com/v2/specializations?v=2024-07-20T01:00:00.000Z&ids=all
+18:35:23.807 info: System.Net.Http.HttpClient.Gw2Client.ClientHandler[100]
+      Sending HTTP request GET https://api.guildwars2.com/v2/specializations?v=2024-07-20T01:00:00.000Z&ids=all
+18:35:23.847 info: System.Net.Http.HttpClient.Gw2Client.ClientHandler[101]
+      Received HTTP response headers after 40.0665ms - 200
+18:35:23.847 info: System.Net.Http.HttpClient.Gw2Client.LogicalHandler[101]
+      End processing HTTP request after 40.2671ms - 200
+18:35:23.915 info: GuildWars2.GameLink[0]
+      [3488] Invert Control, the Human Engineer (Mechanist) is on Raptor
+      Map       : Hearth's Glow (Instance)
+      Latitude  : -33.8534
+      Longitude : -49.47576
+      Elevation : 13.945048
+18:35:23.929 info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+18:35:23.929 info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+18:35:23.929 info: Microsoft.Hosting.Lifetime[0]
+      Content root path: X:\src\gw2sdk
+18:35:24.908 info: GuildWars2.GameLink[0]
+      [3609] Invert Control, the Human Engineer (Mechanist) is on Raptor
+      Map       : Hearth's Glow (Instance)
+      Latitude  : -46.651352
+      Longitude : -29.516237
+      Elevation : 17.691519
+18:35:25.876 info: GuildWars2.GameLink[0]
+      [3714] Invert Control, the Human Engineer (Mechanist) is on Raptor
+      Map       : Hearth's Glow (Instance)
+      Latitude  : -57.658558
+      Longitude : -6.914744
+      Elevation : 14.740211
+18:35:26.869 info: GuildWars2.GameLink[0]
+      [3845] Invert Control, the Human Engineer (Mechanist) is on Raptor
+      Map       : Hearth's Glow (Instance)
+      Latitude  : -62.316986
+      Longitude : 7.527554
+      Elevation : 14.1446085
+18:35:27.881 info: GuildWars2.GameLink[0]
+      [3963] Invert Control, the Human Engineer (Mechanist) is on Raptor
+      Map       : Hearth's Glow (Instance)
+      Latitude  : -64.49885
+      Longitude : 21.395458
+      Elevation : 13.836236
+18:35:28.873 info: GuildWars2.GameLink[0]
+      [4091] Invert Control, the Human Engineer (Mechanist) is on Raptor
+      Map       : Hearth's Glow (Instance)
+      Latitude  : -64.9567
+      Longitude : 35.947556
+      Elevation : 15.052669
+18:35:29.884 info: GuildWars2.GameLink[0]
+      [4219] Invert Control, the Human Engineer (Mechanist) is on Griffon
+      Map       : Hearth's Glow (Instance)
+      Latitude  : -62.35296
+      Longitude : 48.556736
+      Elevation : 17.96384
+18:35:30.875 info: GuildWars2.GameLink[0]
+      [4294] Invert Control, the Human Engineer (Mechanist) is on Griffon
+      Map       : Hearth's Glow (Instance)
+      Latitude  : -46.91702
+      Longitude : 49.754066
+      Elevation : 15.200244
+18:35:31.888 info: GuildWars2.GameLink[0]
+      [4367] Invert Control, the Human Engineer (Mechanist) is on Griffon
+      Map       : Hearth's Glow (Instance)
+      Latitude  : -41.02358
+      Longitude : 38.50398
+      Elevation : 15.194383
+18:35:32.883 info: GuildWars2.GameLink[0]
+      [4436] Invert Control, the Human Engineer (Mechanist) is on foot
+      Map       : Hearth's Glow (Instance)
+      Latitude  : -31.513483
+      Longitude : 32.636326
+      Elevation : 18.421219
+18:35:33.878 info: GuildWars2.GameLink[0]
+      [4511] Invert Control, the Human Engineer (Mechanist) is on RollerBeetle
+      Map       : Hearth's Glow (Instance)
+      Latitude  : -21.3906
+      Longitude : 29.216703
+      Elevation : 15.269578
+18:35:34.870 info: GuildWars2.GameLink[0]
+      [4584] Invert Control, the Human Engineer (Mechanist) is on RollerBeetle
+      Map       : Hearth's Glow (Instance)
+      Latitude  : 4.274415
+      Longitude : 23.628635
+      Elevation : 15.269595
+18:35:35.884 info: GuildWars2.GameLink[0]
+      [4651] Invert Control, the Human Engineer (Mechanist) is on RollerBeetle
+      Map       : Hearth's Glow (Instance)
+      Latitude  : 46.92945
+      Longitude : 14.538852
+      Elevation : 15.195555
+18:35:36.878 info: GuildWars2.GameLink[0]
+      [4711] Invert Control, the Human Engineer (Mechanist) is on RollerBeetle
+      Map       : Hearth's Glow (Instance)
+      Latitude  : 91.49019
+      Longitude : 7.5282254
+      Elevation : 15.2694645
+18:35:37.871 info: GuildWars2.GameLink[0]
+      [4772] Invert Control, the Human Engineer (Mechanist) is on RollerBeetle
+      Map       : Hearth's Glow (Instance)
+      Latitude  : 135.37587
+      Longitude : 0.5434828
+      Elevation : 15.196241
+18:35:38.883 info: GuildWars2.GameLink[0]
+      [4844] Invert Control, the Human Engineer (Mechanist) is on RollerBeetle
+      Map       : Hearth's Glow (Instance)
+      Latitude  : 179.20514
+      Longitude : -2.1454942
+      Elevation : 15.224134
+18:35:39.874 info: GuildWars2.GameLink[0]
+      [4936] Invert Control, the Human Engineer (Mechanist) is on RollerBeetle
+      Map       : Hearth's Glow (Instance)
+      Latitude  : 222.37964
+      Longitude : -3.9784033
+      Elevation : 15.2230835
+18:35:40.885 info: GuildWars2.GameLink[0]
+      [5057] Invert Control, the Human Engineer (Mechanist) is on RollerBeetle
+      Map       : Hearth's Glow (Instance)
+      Latitude  : 264.95358
+      Longitude : -5.361451
+      Elevation : 15.26961
+18:35:41.878 info: GuildWars2.GameLink[0]
+      [5194] Invert Control, the Human Engineer (Mechanist) is on RollerBeetle
+      Map       : Hearth's Glow (Instance)
+      Latitude  : 306.87436
+      Longitude : -6.74818
+      Elevation : 15.196122
+18:35:42.873 info: GuildWars2.GameLink[0]
+      [5291] Invert Control, the Human Engineer (Mechanist) is on foot
+      Map       : Hearth's Glow (Instance)
+      Latitude  : 318.6937
+      Longitude : -7.420908
+      Elevation : 15.234914
+18:35:43.882 info: GuildWars2.GameLink[0]
+      [5414] Invert Control, the Human Engineer (Mechanist) is on foot
+      Map       : Hearth's Glow (Instance)
+      Latitude  : 318.6937
+      Longitude : -7.420908
+      Elevation : 15.234914
+18:35:44.880 info: GuildWars2.GameLink[0]
+      [5560] Invert Control, the Human Engineer (Mechanist) is on foot
+      Map       : Hearth's Glow (Instance)
+      Latitude  : 318.6937
+      Longitude : -7.420908
+      Elevation : 15.234914
+18:35:45.874 info: GuildWars2.GameLink[0]
+      [5624] Invert Control, the Human Engineer (Mechanist) is on foot
+      Map       : Hearth's Glow (Instance)
+      Latitude  : 318.6937
+      Longitude : -7.420908
+      Elevation : 15.234914
+18:35:52.881 info: GuildWars2.GameLink[0]
+      [5670] Invert Control, the Human Engineer (Mechanist) is on foot
+      Map       : Divinity's Reach (Public)
+      Latitude  : -307.03738
+      Longitude : 61.644375
+      Elevation : 60.82651
+18:35:53.878 info: GuildWars2.GameLink[0]
+      [5726] Invert Control, the Human Engineer (Mechanist) is on foot
+      Map       : Divinity's Reach (Public)
+      Latitude  : -307.03738
+      Longitude : 61.644375
+      Elevation : 60.82651
+18:35:54.873 info: GuildWars2.GameLink[0]
+      [5781] Invert Control, the Human Engineer (Mechanist) is looking at the map
+18:35:55.883 info: GuildWars2.GameLink[0]
+      [5864] Invert Control, the Human Engineer (Mechanist) is looking at the map
+18:35:56.880 info: GuildWars2.GameLink[0]
+      [5952] Invert Control, the Human Engineer (Mechanist) is looking at the map
+18:35:57.875 info: GuildWars2.GameLink[0]
+      [6033] Invert Control, the Human Engineer (Mechanist) is looking at the map
+18:35:58.872 info: GuildWars2.GameLink[0]
+      [6107] Invert Control, the Human Engineer (Mechanist) is looking at the map
+18:35:59.869 info: GuildWars2.GameLink[0]
+      [6189] Invert Control, the Human Engineer (Mechanist) is looking at the map
+18:36:00.882 info: GuildWars2.GameLink[0]
+      [6276] Invert Control, the Human Engineer (Mechanist) is looking at the map
+18:36:01.878 info: GuildWars2.GameLink[0]
+      [6328] Invert Control, the Human Engineer (Mechanist) is looking at the map
+18:36:07.877 info: GuildWars2.GameLink[0]
+      [6356] Invert Control, the Human Engineer (Mechanist) is on foot
+      Map       : Queensdale (Public)
+      Latitude  : -165.02733
+      Longitude : 72.124
+      Elevation : 3.0515137
+18:36:08.885 info: GuildWars2.GameLink[0]
+      [6429] Invert Control, the Human Engineer (Mechanist) is on foot
+      Map       : Queensdale (Public)
+      Latitude  : -165.02733
+      Longitude : 72.124
+      Elevation : 3.0515137
+18:36:09.883 info: GuildWars2.GameLink[0]
+      [6487] Invert Control, the Human Engineer (Mechanist) is on foot
+      Map       : Queensdale (Public)
+      Latitude  : -169.45564
+      Longitude : 68.11285
+      Elevation : 2.6663609
+18:36:10.874 info: GuildWars2.GameLink[0]
+      [6564] Invert Control, the Human Engineer (Mechanist) is on foot
+      Map       : Queensdale (Public)
+      Latitude  : -174.86848
+      Longitude : 60.60133
+      Elevation : 2.1442716
+18:36:11.882 info: GuildWars2.GameLink[0]
+      [6658] Invert Control, the Human Engineer (Mechanist) is on foot
+      Map       : Queensdale (Public)
+      Latitude  : -181.90218
+      Longitude : 54.47012
+      Elevation : 1.3165135
+18:36:12.874 info: GuildWars2.GameLink[0]
+      [6767] Invert Control, the Human Engineer (Mechanist) is on foot
+      Map       : Queensdale (Public)
+      Latitude  : -188.92157
+      Longitude : 48.604156
+      Elevation : -0.5576468
+18:36:13.873 info: GuildWars2.GameLink[0]
+      [6877] Invert Control, the Human Engineer (Mechanist) is on foot
+      Map       : Queensdale (Public)
+      Latitude  : -197.05478
+      Longitude : 44.036755
+      Elevation : -0.67757004
+18:36:14.880 info: GuildWars2.GameLink[0]
+      [6952] Invert Control, the Human Engineer (Mechanist) is on foot
+      Map       : Queensdale (Public)
+      Latitude  : -205.50684
+      Longitude : 40.087452
+      Elevation : -0.6779618
+18:36:15.879 info: GuildWars2.GameLink[0]
+      [7016] Invert Control, the Human Engineer (Mechanist) is on foot
+      Map       : Queensdale (Public)
+      Latitude  : -215.0471
+      Longitude : 36.672283
+      Elevation : -0.68073654
+18:36:16.883 info: GuildWars2.GameLink[0]
+      [7091] Invert Control, the Human Engineer (Mechanist) is in combat
+18:36:17.880 info: GuildWars2.GameLink[0]
+      [7178] Invert Control, the Human Engineer (Mechanist) is in combat
+18:36:18.869 info: GuildWars2.GameLink[0]
+      [7263] Invert Control, the Human Engineer (Mechanist) is in combat
+18:36:19.878 info: GuildWars2.GameLink[0]
+      [7344] Invert Control, the Human Engineer (Mechanist) is on foot
+      Map       : Queensdale (Public)
+      Latitude  : -234.5483
+      Longitude : 29.191357
+      Elevation : -0.68667835
+18:36:20.871 info: GuildWars2.GameLink[0]
+      [7440] Invert Control, the Human Engineer (Mechanist) is on foot
+      Map       : Queensdale (Public)
+      Latitude  : -242.35175
+      Longitude : 24.066732
+      Elevation : -0.66047573
+18:36:21.881 info: GuildWars2.GameLink[0]
+      [7535] Invert Control, the Human Engineer (Mechanist) is on foot
+      Map       : Queensdale (Public)
+      Latitude  : -250.22687
+      Longitude : 19.07481
+      Elevation : -0.67880875
+18:36:22.880 info: GuildWars2.GameLink[0]
+      [7633] Invert Control, the Human Engineer (Mechanist) is in combat
+18:36:23.875 info: GuildWars2.GameLink[0]
+      [7733] Invert Control, the Human Engineer (Mechanist) is in combat
+18:36:24.879 info: GuildWars2.GameLink[0]
+      [7835] Invert Control, the Human Engineer (Mechanist) is in combat
+18:36:25.874 info: GuildWars2.GameLink[0]
+      [7937] Invert Control, the Human Engineer (Mechanist) is in combat
+18:36:26.882 info: GuildWars2.GameLink[0]
+      [8021] Invert Control, the Human Engineer (Mechanist) is in combat
+18:36:27.887 info: GuildWars2.GameLink[0]
+      [8100] Invert Control, the Human Engineer (Mechanist) is in combat
+18:36:28.869 info: GuildWars2.GameLink[0]
+      [8165] Invert Control, the Human Engineer (Mechanist) is on foot
+      Map       : Queensdale (Public)
+      Latitude  : -270.60995
+      Longitude : 22.80896
+      Elevation : -0.23545928
+18:36:29.883 info: GuildWars2.GameLink[0]
+      [8243] Invert Control, the Human Engineer (Mechanist) is on foot
+      Map       : Queensdale (Public)
+      Latitude  : -270.60995
+      Longitude : 22.80896
+      Elevation : -0.23545928
+18:36:30.701 info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
 ```
 
 [race]:https://wiki.guildwars2.com/wiki/Playable_races
