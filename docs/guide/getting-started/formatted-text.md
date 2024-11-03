@@ -27,6 +27,11 @@ it to other formats:
 - `MarkupTextConverter` converts formatted text to plain text, stripping all formatting.
 - `MarkupHtmlConverter` converts formatted text to HTML, preserving the formatting.
 
+A convenient `MarkupConverter` class is provided to work with both formatters.
+
+Alternatively, you can build a custom formatter for your UI framework using the
+`MarkupLexer` and `MarkupParser` classes.
+
 ### Converting formatted text to plain text
 
 ```csharp
