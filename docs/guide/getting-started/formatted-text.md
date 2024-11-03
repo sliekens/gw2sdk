@@ -15,8 +15,8 @@ Double-click to apply to an unused infusion slot. Adds a festive glow.
 Which is rendered as:
 
 > Double-click to apply to an unused infusion slot. Adds a festive glow.  
-> <span style="color: red">Warning!</span>  
-> <span style="color: lightblue">Captain's Council recommends avoiding direct
+> <span style="color: #ff0000">Warning!</span>  
+> <span style="color: #99dddd">Captain's Council recommends avoiding direct
 contact with this substance.</span>
 
 ## Converting formatted text to other formats
@@ -30,59 +30,76 @@ it to other formats:
 ### Converting formatted text to plain text
 
 ```csharp
-var lexer = new MarkupLexer();
-var parser = new MarkupParser();
-var converter = new MarkupTextConverter();
+using GuildWars2.Markup;
 
 var input = "Double-click to apply to an unused infusion slot. Adds a festive glow."
     + "\n<c=@Warning>Warning!</c>"
     + "\n<c=@Flavor>Captain's Council recommends avoiding direct contact with this"
     + " substance.</c>";
-var tokens = lexer.Tokenize(input);
-var syntax = parser.Parse(tokens);
-var actual = converter.Convert(syntax);
-Console.WriteLine(actual);
+
+var plainText = MarkupConverter.ToPlainText(input);
+Console.WriteLine(plainText);
 ```
 
 Output:
 
 ```text
-Double-click to apply to an unused infusion slot. Adds a festive glow
+Double-click to apply to an unused infusion slot. Adds a festive glow.
 Warning!
-Captain's Council recommends avoiding direct contact with this substance.
+Captain's Council recommends avoiding direct contact with this substance
 ```
 
 ### Converting formatted text to HTML
 
 ```csharp
-var lexer = new MarkupLexer();
-var parser = new MarkupParser();
-var converter = new MarkupHtmlConverter();
-
 var input = "Double-click to apply to an unused infusion slot. Adds a festive glow."
     + "\n<c=@Warning>Warning!</c>"
     + "\n<c=@Flavor>Captain's Council recommends avoiding direct contact with this"
     + " substance.</c>";
-var tokens = lexer.Tokenize(input);
-var syntax = parser.Parse(tokens);
-var actual = converter.Convert(syntax);
-Console.WriteLine(actual);
+
+var html = MarkupConverter.ToHtml(input);
+Console.WriteLine(html);
 ```
 
 Output:
 
 ```html
 Double-click to apply to an unused infusion slot. Adds a festive glow.<br>
-<span style="color: #ED0002">Warning!</span><br><span style="color: #9BE8E4">Captain's
+<span style="color: #ff0000">Warning!</span><br><span style="color: #99dddd">Captain's
 Council recommends avoiding direct contact with this substance.</span>
 ```
 
+#### Overriding default colors
+
+Optionally, you can override the default colors. Start by cloning the default
+color map, and then modify the values:
+
+```csharp
+var input = "Double-click to apply to an unused infusion slot. Adds a festive glow."
+    + "\n<c=@Warning>Warning!</c>"
+    + "\n<c=@Flavor>Captain's Council recommends avoiding direct contact with this"
+    + " substance.</c>";
+
+var colorMap = new Dictionary<string, string>(MarkupColorName.DefaultColorMap)
+{
+    [MarkupColorName.Flavor] = "hotpink"
+};
+
+var html = MarkupConverter.ToHtml(input, colorMap);
+Console.WriteLine(html);
+```
+
+Output (rendered in HTML):
+
+> Double-click to apply to an unused infusion slot. Adds a festive glow.<br>
+<span style="color: #ff0000">Warning!</span><br><span style="color: hotpink">
+Captain's Council recommends avoiding direct contact with this substance.</span>
+
 ### Building a custom formatter
 
-Depending on your UI framework, you may want to build a custom formatter to convert
-the game's markup language to your UI framework's text formatting. You can use the
-`MarkupLexer` and `MarkupParser` to tokenize and parse the markup language, and then
-convert the syntax tree to your desired format.
+You may want to build a custom formatter for your UI framework if it can't render
+HTML. You can use the `MarkupLexer` and `MarkupParser` to tokenize and parse the
+markup language, and then convert the syntax tree to the desired format.
 
 For example, to convert the markup language to the markup language used by
 [Spectre.Console](https://spectreconsole.net/markup):
@@ -118,60 +135,81 @@ public class SpectreMarkupConverter
     private string ConvertNode(MarkupNode node)
     {
         // MarkupNode is the base type for all nodes in the syntax tree.
-        // Use pattern matching to convert each type of node to the desired format.
-        switch (node)
+        // Use a switch statement to convert each type of node to the desired format.
+        // You could also use pattern matching with C# 9.
+        switch (node.Type)
         {
             // TextNode is just a plain text node, no formatting.
-            case TextNode text:
+            case MarkupNodeType.Text:
+                var text = (TextNode)node;
                 return Markup.Escape(text.Text);
 
             // LineBreakNode represents a line break, covers both \n and <br>
-            case LineBreakNode:
+            case MarkupNodeType.LineBreak:
                 return Environment.NewLine;
             
-            // ColoredTextNode represents text with a color like <c=#FF000>text</c>
-            // or <c=@Warning>text</c>
-            case ColoredTextNode coloredText:
-                var content = string.Concat(coloredText.Children.Select(ConvertNode));
+            // ColoredTextNode represents text with a color like <c=#ff000>text</c>
+            // or <c=@warning>text</c>
+            case MarkupNodeType.ColoredText:
+                var coloredText = (ColoredTextNode)node;
+                var builder = new StringBuilder();
+                foreach (var child in coloredText.Children)
+                {
+                    builder.Append(ConvertNode(child));
+                }
+
+                var content = builder.ToString();
                 if (coloredText.Color.StartsWith("#", StringComparison.Ordinal))
                 {
-                    return $"[${coloredText.Color}]{content}[/]";
+                    var colorCode = coloredText.Color;
+                    return $"[{colorCode}]{content}[/]";
                 }
-                else if (string.Equals(coloredText.Color, MarkupColorName.Flavor,
-                    StringComparison.OrdinalIgnoreCase))
+                else if (ColorMap.TryGetValue(coloredText.Color, out var colorCode))
                 {
-                    return $"[#9BE8E4]{content}[/]";
-                }
-                else if (string.Equals(coloredText.Color, MarkupColorName.Reminder,
-                    StringComparison.OrdinalIgnoreCase))
-                {
-                    return $"[#B0B0B0]{content}[/]";
-                }
-                else if (string.Equals(coloredText.Color, MarkupColorName.AbilityType,
-                    StringComparison.OrdinalIgnoreCase))
-                {
-                    return $"[#FFEC8C]{content}[/]";
-                }
-                else if (string.Equals(coloredText.Color, MarkupColorName.Warning,
-                    StringComparison.OrdinalIgnoreCase))
-                {
-                    return $"[#ED0002]{content}[/]";
-                }
-                else if (string.Equals(coloredText.Color, MarkupColorName.Task,
-                    StringComparison.OrdinalIgnoreCase))
-                {
-                    return $"[#FFC957]{content}[/]";
+                    return $"[{colorCode}]{content}[/]";
                 }
                 else
                 {
                     return content;
                 }
+
             default:
                 return "";
         }
     }
+
+    // A map of color names to hexadecimal RGB values.
+    // Note that the color names are case-insensitive.
+    private static readonly IReadOnlyDictionary<string, string> ColorMap
+        = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+        {
+            [MarkupColorName.Flavor] = "#99dddd",
+            [MarkupColorName.Reminder] = "#aaaaaa",
+            [MarkupColorName.AbilityType] = "#ffee88",
+            [MarkupColorName.Warning] = "#ff0000",
+            [MarkupColorName.Task] = "#ffcc55",
+        };
 }
 
+```
+
+Usage:
+
+```csharp
+// Set up the lexer, parser, and converter.
+var lexer = new MarkupLexer();
+var parser = new MarkupParser();
+var converter = new SpectreMarkupConverter();
+
+// Tokenize the input
+var input = "... (markup text)";
+var tokens = lexer.Tokenize(input);
+
+// Convert the tokens to a syntax tree
+var syntax = parser.Parse(tokens);
+
+// Convert the syntax tree to the desired format
+var output = converter.Convert(syntax);
 ```
 
 ## Language reference
@@ -181,11 +219,11 @@ The markup language is quite simple, it only supports a few tags:
 - `c`: Changes the color of the text. The color is specified by a color name or
   a hexadecimal RGB value.
   For example, `<c=@Warning>Warning!</c>` renders as:
-  > <span style="color: red">Warning!</span>
+  > <span style="color: #ff0000">Warning!</span>
   >
   A hexadecimal RGB value can be used instead of a color name. For example,
-  `<c=#F8C56E>Attention</c>` renders as:
-  > <span style="color: #F8C56E">Attention</span>
+  `<c=#f8c56e>Attention</c>` renders as:
+  > <span style="color: #f8c56e">Attention</span>
   >
 - `br`: Inserts a line break. For example, `Line 1<br>Line 2` renders as:
   > Line 1  
@@ -201,7 +239,7 @@ Tags and attributes
 
 - HTML supports tags with attributes like `<span style="color: red">text</span>`.
 - GW2 uses a simplified tag system with a single attribute name and value.
-  For example, `<c=@Warning>text</c>`.
+  For example, `<c=@warning>text</c>`.
 
 Whitespace
 

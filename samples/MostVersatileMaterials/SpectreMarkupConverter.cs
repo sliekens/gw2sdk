@@ -19,44 +19,50 @@ public class SpectreMarkupConverter
 
     private string ConvertNode(MarkupNode node)
     {
-        switch (node)
+        switch (node.Type)
         {
-            case TextNode text:
+            case MarkupNodeType.Text:
+                var text = (TextNode)node;
                 return Markup.Escape(text.Text);
-            case LineBreakNode:
+
+            case MarkupNodeType.LineBreak:
                 return Environment.NewLine;
-            case ColoredTextNode coloredText:
-                var content = string.Concat(coloredText.Children.Select(ConvertNode));
+
+            case MarkupNodeType.ColoredText:
+                var coloredText = (ColoredTextNode)node;
+                var builder = new StringBuilder();
+                foreach (var child in coloredText.Children)
+                {
+                    builder.Append(ConvertNode(child));
+                }
+
+                var content = builder.ToString();
                 if (coloredText.Color.StartsWith("#", StringComparison.Ordinal))
                 {
-                    return $"[${coloredText.Color}]{content}[/]";
+                    var colorCode = coloredText.Color;
+                    return $"[{colorCode}]{content}[/]";
                 }
-                else if (string.Equals(coloredText.Color, MarkupColorName.Flavor, StringComparison.OrdinalIgnoreCase))
+                else if (ColorMap.TryGetValue(coloredText.Color, out var colorCode))
                 {
-                    return $"[#9BE8E4]{content}[/]";
-                }
-                else if (string.Equals(coloredText.Color, MarkupColorName.Reminder, StringComparison.OrdinalIgnoreCase))
-                {
-                    return $"[#B0B0B0]{content}[/]";
-                }
-                else if (string.Equals(coloredText.Color, MarkupColorName.AbilityType, StringComparison.OrdinalIgnoreCase))
-                {
-                    return $"[#FFEC8C]{content}[/]";
-                }
-                else if (string.Equals(coloredText.Color, MarkupColorName.Warning, StringComparison.OrdinalIgnoreCase))
-                {
-                    return $"[#ED0002]{content}[/]";
-                }
-                else if (string.Equals(coloredText.Color, MarkupColorName.Task, StringComparison.OrdinalIgnoreCase))
-                {
-                    return $"[#FFC957]{content}[/]";
+                    return $"[{colorCode}]{content}[/]";
                 }
                 else
                 {
                     return content;
                 }
+
             default:
                 return "";
         }
     }
+
+    private static readonly IReadOnlyDictionary<string, string> ColorMap
+        = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+        {
+            [MarkupColorName.Flavor] = "#99dddd",
+            [MarkupColorName.Reminder] = "#aaaaaa",
+            [MarkupColorName.AbilityType] = "#ffee88",
+            [MarkupColorName.Warning] = "#ff0000",
+            [MarkupColorName.Task] = "#ffcc55",
+        };
 }

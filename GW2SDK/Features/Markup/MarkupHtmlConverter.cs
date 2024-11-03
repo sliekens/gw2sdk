@@ -9,22 +9,41 @@ namespace GuildWars2.Markup;
 public sealed class MarkupHtmlConverter
 {
     /// <summary>
-    /// Converts a <see cref="RootNode"/> to its HTML representation.
+    /// Converts a <see cref="RootNode"/> to its HTML representation using the <see cref="MarkupColorName.DefaultColorMap"/>.
     /// </summary>
-    /// <param name="root">The root node containing nodes to be converted.</param>
-    /// <returns>A string representation of the nodes within the root node.</returns>
+    /// <param name="root">The root node of the markup syntax tree to convert.</param>
+    /// <returns>A string containing the HTML representation of the markup syntax tree.</returns>
     public string Convert(RootNode root)
     {
+        return Convert(root, MarkupColorName.DefaultColorMap);
+    }
+
+    /// <summary>Converts a <see cref="RootNode"/> and its children to an HTML string representation using a custom color map.</summary>
+    /// <param name="root">The root node of the markup syntax tree to convert.</param>
+    /// <param name="colorMap">A dictionary mapping color names to their corresponding HTML color codes.</param>
+    /// <returns>A string containing the HTML representation of the markup syntax tree.</returns>
+    public string Convert(RootNode root, IReadOnlyDictionary<string, string>? colorMap)
+    {
+        if (colorMap == null)
+        {
+            colorMap = MarkupColorName.DefaultColorMap;
+        }
+        else if (colorMap != MarkupColorName.DefaultColorMap)
+        {
+            // Ensure the key comparison is case-insensitive
+            colorMap = colorMap.ToDictionary(pair => pair.Key, pair => pair.Value, StringComparer.OrdinalIgnoreCase);
+        }
+
         var builder = new StringBuilder();
         foreach (var node in root.Children)
         {
-            builder.Append(ConvertNode(node));
+            builder.Append(ConvertNode(node, colorMap));
         }
 
         return builder.ToString();
     }
 
-    private string ConvertNode(MarkupNode node)
+    private string ConvertNode(MarkupNode node, IReadOnlyDictionary<string, string> colorMap)
     {
         switch (node)
         {
@@ -33,30 +52,20 @@ public sealed class MarkupHtmlConverter
             case LineBreakNode:
                 return "<br>";
             case ColoredTextNode coloredText:
-                var content = string.Concat(coloredText.Children.Select(ConvertNode));
+                var builder = new StringBuilder();
+                foreach (var child in coloredText.Children)
+                {
+                    builder.Append(ConvertNode(child, colorMap));
+                }
+
+                var content = builder.ToString();
                 if (coloredText.Color.StartsWith("#"))
                 {
                     return $"<span style=\"color: {coloredText.Color}\">{content}</span>";
                 }
-                else if (string.Equals(coloredText.Color, MarkupColorName.Flavor, StringComparison.OrdinalIgnoreCase))
+                else if (colorMap.TryGetValue(coloredText.Color, out var color))
                 {
-                    return $"<span style=\"color: #9BE8E4\">{content}</span>";
-                }
-                else if (string.Equals(coloredText.Color, MarkupColorName.Reminder, StringComparison.OrdinalIgnoreCase))
-                {
-                    return $"<span style=\"color: #B0B0B0\">{content}</span>";
-                }
-                else if (string.Equals(coloredText.Color, MarkupColorName.AbilityType, StringComparison.OrdinalIgnoreCase))
-                {
-                    return $"<span style=\"color: #FFEC8C\">{content}</span>";
-                }
-                else if (string.Equals(coloredText.Color, MarkupColorName.Warning, StringComparison.OrdinalIgnoreCase))
-                {
-                    return $"<span style=\"color: #ED0002\">{content}</span>";
-                }
-                else if (string.Equals(coloredText.Color, MarkupColorName.Task, StringComparison.OrdinalIgnoreCase))
-                {
-                    return $"<span style=\"color: #FFC957\">{content}</span>";
+                    return $"<span style=\"color: {color}\">{content}</span>";
                 }
                 else
                 {
