@@ -21,6 +21,8 @@ internal static class GuildLogEntryJson
                     return json.GetMemberJoined();
                 case "kick":
                     return json.GetMemberKicked();
+                case "mission":
+                    return json.GetGuildMission();
                 case "motd":
                     return json.GetNewMessageOfTheDay();
                 case "rank_change":

@@ -36,6 +36,19 @@ public class GuildLog(ITestOutputHelper outputHelper)
                         case InfluenceActivity influenceActivity:
                             Assert.True(influenceActivity.Activity.IsDefined());
                             break;
+                        case GuildMission guildMissionActivity:
+                            Assert.True(guildMissionActivity.State.IsDefined());
+                            if (guildMissionActivity.State == GuildMissionState.Start)
+                            {
+                                Assert.NotEmpty(guildMissionActivity.User);
+                            }
+                            else
+                            {
+                                Assert.Empty(guildMissionActivity.User);
+                            }
+
+                            Assert.Equal(0, guildMissionActivity.Influence);
+                            break;
                     }
                 }
             );
