@@ -121,6 +121,7 @@ try
 catch (Exception crash)
 {
     AnsiConsole.WriteException(crash);
+    Environment.Exit(1);
 }
 
 static StreamWriter CreateTextCompressed(string path)
