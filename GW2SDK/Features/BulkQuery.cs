@@ -77,6 +77,9 @@ public static class BulkQuery
             yield break;
         }
 
+        // The SemaphoreSlim might be disposed before the tasks are completed
+        // DisposeSensor is used to detect if the SemaphoreSlim has been disposed
+        using DisposeSensor disposeSensor = new();
         using SemaphoreSlim limiter = new(degreeOfParallelism);
         var chunks = Chunk(keysList, chunkSize);
         var tasks = chunks.Select(
@@ -89,7 +92,10 @@ public static class BulkQuery
                     }
                     finally
                     {
-                        limiter.Release();
+                        if (!disposeSensor.Disposed)
+                        {
+                            limiter.Release();
+                        }
                     }
                 }
             )
@@ -112,5 +118,11 @@ public static class BulkQuery
                 yield return index.GetRange(offset, Math.Min(size, index.Count - offset));
             }
         }
+    }
+
+    private sealed class DisposeSensor : IDisposable
+    {
+        public bool Disposed { get; private set; }
+        public void Dispose() => Disposed = true;
     }
 }
