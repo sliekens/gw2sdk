@@ -1,10 +1,12 @@
-﻿using System.Reflection;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 
 namespace GuildWars2;
 
 /// <summary>The base type for flags objects.</summary>
 [PublicAPI]
 [DataTransferObject]
+[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
 public abstract record Flags
 {
     /// <summary>Other undocumented flags. If you find out what they mean, please open an issue or a pull request.</summary>
