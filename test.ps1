@@ -3,7 +3,7 @@ Remove-Item -ErrorAction Ignore -Recurse GW2SDK.Tests/TestResults/*
 
 # Run tests with coverage, additional arguments are passed on to dotnet test
 # e.g. ./test.sh --filter Colors
-# e.g. ./test.sh --framework net8.0
+# e.g. ./test.sh --framework net9.0
 dotnet test --collect:"XPlat Code Coverage" --settings coverlet.runsettings $args
 
 # Remove reports from previous runs

@@ -1,24 +1,24 @@
 {
   "version": 2,
   "dependencies": {
-    "net8.0": {
+    "net9.0": {
       "Microsoft.Build.CopyOnWrite": {
         "type": "Direct",
-        "requested": "[1.0.322, )",
-        "resolved": "1.0.322",
-        "contentHash": "Er5Ku4HJNDdRJD6qmV/Zposwvikvof37h6cFHNZ0Vmz1g+esSLKXd79g6fdJpfoNuOzl8w/q6vSpD3M3zihmAQ=="
+        "requested": "[1.0.334, )",
+        "resolved": "1.0.334",
+        "contentHash": "Bi/e5guuwmyPL7Kp1G+PbcDvZFKsZxuHmc39IpYHAhWOvV8I/uIHPwAZ++Fa8k/w6pEqPdHCIrxSCelMNmu0dQ=="
       },
       "gw2sdk": {
         "type": "Project",
         "dependencies": {
-          "System.Text.Json": "[8.0.5, )"
+          "System.Text.Json": "[9.0.0, )"
         }
       },
       "System.Text.Json": {
         "type": "CentralTransitive",
-        "requested": "[8.0.5, )",
-        "resolved": "8.0.5",
-        "contentHash": "0f1B50Ss7rqxXiaBJyzUu9bWFOO2/zSlifZ/UNMdiIpDYe4cY4LQQicP4nirK1OS31I43rn062UIJ1Q9bpmHpg=="
+        "requested": "[9.0.0, )",
+        "resolved": "9.0.0",
+        "contentHash": "js7+qAu/9mQvnhA4EfGMZNEzXtJCDxgkgj8ohuxq/Qxv+R56G+ljefhiJHOxTNiw54q8vmABCWUwkMulNdlZ4A=="
       }
     }
   }
