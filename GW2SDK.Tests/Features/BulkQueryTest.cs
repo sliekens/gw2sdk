@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Tests.Features;
+namespace GuildWars2.Tests.Features;
 
 public class BulkQueryTest
 {
@@ -7,7 +7,7 @@ public class BulkQueryTest
     [InlineData(150, 200)]
     public async Task Can_be_cancelled(int resultTotal, int chunkSize)
     {
-        // Ensuyre cancellation works in both scenarios where the query is chunked or not
+        // Ensure cancellation works in both scenarios where the query is chunked or not
         CancellationTokenSource cancellationTokenSource = new();
 
         static Task<IReadOnlyCollection<StubRecord>> GetChunk(
