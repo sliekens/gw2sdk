@@ -7,7 +7,7 @@
     <TargetFrameworks>$(TargetFrameworks);net462</TargetFrameworks>
     <TargetFrameworks>$(TargetFrameworks);net6.0</TargetFrameworks>
     <TargetFrameworks>$(TargetFrameworks);net8.0</TargetFrameworks>
-    <IsAotCompatible>$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net6.0'))</IsAotCompatible>
+    <IsAotCompatible>$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))</IsAotCompatible>
     <RootNamespace>GuildWars2</RootNamespace>
     <AssemblyTitle>GW2 Client SDK</AssemblyTitle>
     <Product>GW2SDK</Product>
