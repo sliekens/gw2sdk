@@ -10,10 +10,9 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.Extensions.Hosting" />
-        <PackageReference Include="Microsoft.Extensions.Http.Resilience"  />
-        <PackageReference Include="Polly.Core"  />
+        <PackageReference Include="Microsoft.Extensions.Http.Resilience" />
+        <PackageReference Include="Polly.Core" />
         <PackageReference Include="Spectre.Console" />
-        <PackageReference Include="Spectre.Console.ImageSharp" />
     </ItemGroup>
 
     <ItemGroup>
