@@ -218,18 +218,6 @@
         "resolved": "1.0.322",
         "contentHash": "Er5Ku4HJNDdRJD6qmV/Zposwvikvof37h6cFHNZ0Vmz1g+esSLKXd79g6fdJpfoNuOzl8w/q6vSpD3M3zihmAQ=="
       },
-      "Microsoft.NET.ILLink.Analyzers": {
-        "type": "Direct",
-        "requested": "[7.0.100-1.23401.1, )",
-        "resolved": "7.0.100-1.23401.1",
-        "contentHash": "XirkjOLc5Vc3HsXRc2Z6ZbQv6l0RvWgJa/31w7XqZ914MoSi3H3OCNRMWFw7H2EYfsnKbokFfhCcysAmUcEOgw=="
-      },
-      "Microsoft.NET.ILLink.Tasks": {
-        "type": "Direct",
-        "requested": "[7.0.100-1.23401.1, )",
-        "resolved": "7.0.100-1.23401.1",
-        "contentHash": "mI6vCdPEhluLtMn/GV0texEWg5oAPQWCCE4LWspM+Bmy75Nd4EQsziQXrdOFqNeSBQMrxDX9C/O5Xi3kpKSMIw=="
-      },
       "MinVer": {
         "type": "Direct",
         "requested": "[6.0.0, )",
