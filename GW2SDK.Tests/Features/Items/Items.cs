@@ -243,23 +243,9 @@ public class Items
         await foreach (var original in sut.Items.GetItemsBulk().ValueOnly())
         {
             var json = JsonSerializer.Serialize(original);
-            Assert.NotNull(json);
-
-            var actual = JsonSerializer.Deserialize<Item>(json);
-            Assert.NotNull(actual);
-            Assert.IsType(original.GetType(), actual);
-
-            // Assert.Equal(original.Id, actual.Id);
-            // Assert.Equal(original.Name, actual.Name);
-            // Assert.Equal(original.Description, actual.Description);
-            // Assert.Equal(original.Level, actual.Level);
-            // Assert.Equal(original.Rarity, actual.Rarity);
-            // Assert.Equal(original.VendorValue, actual.VendorValue);
-            // Assert.Equal(original.GameTypes, actual.GameTypes);
-            // Assert.Equal(original.Flags, actual.Flags);
-            // Assert.Equal(original.Restrictions, actual.Restrictions);
-            // Assert.Equal(original.ChatLink, actual.ChatLink);
-            // Assert.Equal(original.IconHref, actual.IconHref);
+            var roundTrip = JsonSerializer.Deserialize<Item>(json);
+            Assert.IsType(original.GetType(), roundTrip);
+            Assert.Equal(original, roundTrip);
         }
     }
 }

@@ -17,12 +17,40 @@ public sealed record RecipeSheet : Unlocker
     /// variants.</remarks>
     public required IReadOnlyCollection<int> ExtraRecipeIds { get; init; }
 
+    /// <inheritdoc />
+    public bool Equals(RecipeSheet? other)
+    {
+        return ReferenceEquals(this, other)
+            || (base.Equals(other)
+                && RecipeId == other.RecipeId
+                && ExtraRecipeIds.SequenceEqual(other.ExtraRecipeIds));
+    }
+
     /// <summary>Gets a chat link object for this recipe.</summary>
     /// <returns>The chat link as an object.</returns>
-    public RecipeLink GetRecipeChatLink() => new() { RecipeId = RecipeId };
+    public RecipeLink GetRecipeChatLink()
+    {
+        return new RecipeLink { RecipeId = RecipeId };
+    }
 
     /// <summary>Gets chat link objects for the extra recipes.</summary>
     /// <returns>The chat links as objects.</returns>
-    public IEnumerable<RecipeLink> GetExtraRecipeChatLinks() =>
-        ExtraRecipeIds.Select(recipeId => new RecipeLink { RecipeId = recipeId });
+    public IEnumerable<RecipeLink> GetExtraRecipeChatLinks()
+    {
+        return ExtraRecipeIds.Select(recipeId => new RecipeLink { RecipeId = recipeId });
+    }
+
+    /// <inheritdoc />
+    public override int GetHashCode()
+    {
+        var hash = new HashCode();
+        hash.Add(base.GetHashCode());
+        hash.Add(RecipeId);
+        foreach (var recipeId in ExtraRecipeIds)
+        {
+            hash.Add(recipeId);
+        }
+
+        return hash.ToHashCode();
+    }
 }

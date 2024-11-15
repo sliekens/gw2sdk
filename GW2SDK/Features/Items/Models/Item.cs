@@ -9,7 +9,7 @@ namespace GuildWars2.Items;
 [Inheritable]
 [DataTransferObject]
 [JsonPolymorphic]
-[JsonDerivedType(typeof(Item), "base")]
+[JsonDerivedType(typeof(Item), "item")]
 [JsonDerivedType(typeof(CraftingMaterial), "crafting-material")]
 [JsonDerivedType(typeof(JadeTechModule), "jade-tech-module")]
 [JsonDerivedType(typeof(PowerCore), "power-core")]
@@ -142,10 +142,29 @@ public record Item
     /// <summary>The URL of the item icon.</summary>
     public required string? IconHref { get; init; }
 
+    /// <inheritdoc />
+    public virtual bool Equals(Item? other)
+    {
+        return ReferenceEquals(this, other)
+            || (other is not null
+                && Id == other.Id
+                && Name == other.Name
+                && Description == other.Description
+                && Level == other.Level
+                && Rarity == other.Rarity
+                && VendorValue == other.VendorValue
+                && Flags == other.Flags
+                && Restrictions.Equals(other.Restrictions)
+                && ChatLink == other.ChatLink
+                && IconHref == other.IconHref
+                && GameTypes.SequenceEqual(other.GameTypes));
+    }
+
     /// <summary>Gets a chat link object for this item.</summary>
     /// <returns>The chat link as an object.</returns>
-    public ItemLink GetChatLink() =>
-        new()
+    public ItemLink GetChatLink()
+    {
+        return new ItemLink
         {
             ItemId = Id,
             Count = 1,
@@ -153,4 +172,27 @@ public record Item
             SuffixItemId = null,
             SecondarySuffixItemId = null
         };
+    }
+
+    /// <inheritdoc />
+    public override int GetHashCode()
+    {
+        var hash = new HashCode();
+        hash.Add(Id);
+        hash.Add(Name);
+        hash.Add(Description);
+        hash.Add(Level);
+        hash.Add(Rarity);
+        hash.Add(VendorValue);
+        hash.Add(Flags);
+        hash.Add(Restrictions);
+        hash.Add(ChatLink);
+        hash.Add(IconHref);
+        foreach (var gameType in GameTypes)
+        {
+            hash.Add(gameType);
+        }
+
+        return hash.ToHashCode();
+    }
 }

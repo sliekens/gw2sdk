@@ -1,7 +1,6 @@
-using Microsoft.CodeAnalysis;
+﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
-using System.Diagnostics;
 using System.Text;
 
 namespace GW2SDK.Generators;
@@ -9,39 +8,21 @@ namespace GW2SDK.Generators;
 [Generator]
 public class EnumJsonConverterGenerator : ISourceGenerator
 {
-    public EnumJsonConverterGenerator()
-    {
-        Debugger.Launch();
-    }
-
     public void Initialize(GeneratorInitializationContext context)
     {
-        Debugger.Launch();
         context.RegisterForSyntaxNotifications(() => new EnumSyntaxReceiver());
     }
 
     public void Execute(GeneratorExecutionContext context)
     {
-        Debugger.Launch();
         if (context.SyntaxReceiver is not EnumSyntaxReceiver receiver)
+        {
             return;
+        }
 
         var enums = receiver.EnumDeclarations;
 
-        var sourceBuilder = new StringBuilder("""
-            using System;
-            using System.Text.Json;
-            using System.Text.Json.Serialization;
-
-            namespace GuildWars2;
-
-            public static class EnumJsonConverters
-            {
-                public static void RegisterConverters(JsonSerializerOptions options)
-                {
-
-            """);
-
+        var registrations = new StringBuilder();
         foreach (var enumDeclaration in enums)
         {
             var enumName = enumDeclaration.Identifier.Text;
@@ -57,30 +38,27 @@ public class EnumJsonConverterGenerator : ISourceGenerator
             {
                 fullyQualifiedEnumName = $"{namespaceName}.{enumName}";
             }
-            sourceBuilder.AppendLine($@"
-            options.Converters.Add(new ExtensibleEnumJsonConverter<{fullyQualifiedEnumName}>());
-");
+
+            if (fullyQualifiedEnumName.StartsWith("GuildWars2", StringComparison.Ordinal))
+            {
+                registrations.AppendLine($"        Register<{fullyQualifiedEnumName}>();");
+            }
         }
 
-        sourceBuilder.Append("""
-
-                }
-            }
-
-            public class ExtensibleEnumJsonConverter<TEnum> : JsonConverter<Extensible<TEnum>> where TEnum : struct, Enum
+        var sourceBuilder = new StringBuilder($$"""
+            namespace GuildWars2;
+            
+            public partial class ExtensibleEnumJsonConverterFactory
             {
-                public override Extensible<TEnum> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+                private static partial void RegisterEnums()
                 {
-                    var name = reader.GetString();
-                    return new Extensible<TEnum>(name!);
-                }
-
-                public override void Write(Utf8JsonWriter writer, Extensible<TEnum> value, JsonSerializerOptions options)
-                {
-                    writer.WriteStringValue(value.ToString());
+            {{registrations}}
+                    static void Register<TEnum>() where TEnum : struct, Enum
+                    {
+                        Converters[typeof(TEnum)] = new ExtensibleEnumJsonConverter<TEnum>();
+                    }
                 }
             }
-
             """);
 
         context.AddSource("EnumJsonConverters.g.cs", SourceText.From(sourceBuilder.ToString(), Encoding.UTF8));
@@ -88,13 +66,13 @@ public class EnumJsonConverterGenerator : ISourceGenerator
 
     private string GetNamespace(EnumDeclarationSyntax enumDeclaration)
     {
-        var namespaceDeclaration = enumDeclaration.Ancestors().OfType<NamespaceDeclarationSyntax>().FirstOrDefault();
+        var namespaceDeclaration = enumDeclaration.Ancestors().OfType<FileScopedNamespaceDeclarationSyntax>().FirstOrDefault();
         return namespaceDeclaration?.Name.ToString() ?? string.Empty;
     }
 
     private class EnumSyntaxReceiver : ISyntaxReceiver
     {
-        public List<EnumDeclarationSyntax> EnumDeclarations { get; } = new List<EnumDeclarationSyntax>();
+        public List<EnumDeclarationSyntax> EnumDeclarations { get; } = [];
 
         public void OnVisitSyntaxNode(SyntaxNode syntaxNode)
         {

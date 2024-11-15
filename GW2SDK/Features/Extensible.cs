@@ -7,7 +7,7 @@ namespace GuildWars2;
 /// <typeparam name="TEnum">The type of the enum.</typeparam>
 [PublicAPI]
 [DebuggerDisplay("{ToString(),nq}")]
-[JsonConverter(typeof(ExtensibleEnumJsonConverter))]
+[JsonConverter(typeof(ExtensibleEnumJsonConverterFactory))]
 public struct Extensible<TEnum>(string Name) where TEnum : struct, Enum
 {
     /// <summary>Determines whether the current name is defined in the enum.</summary>

@@ -32,4 +32,46 @@ public record Trinket : Item
     /// <summary>The IDs of the attribute combinations that can be chosen for the item. This property is only used for items
     /// with selectable stats.</summary>
     public required IReadOnlyList<int> StatChoices { get; init; }
+
+    /// <inheritdoc />
+    public virtual bool Equals(Trinket? other)
+    {
+        return ReferenceEquals(this, other)
+            || (base.Equals(other)
+                && Math.Abs(AttributeAdjustment - other.AttributeAdjustment) < 0.001d
+                && AttributeCombinationId == other.AttributeCombinationId
+                && Buff == other.Buff
+                && SuffixItemId == other.SuffixItemId
+                && InfusionSlots.SequenceEqual(other.InfusionSlots)
+                && Attributes.SequenceEqual(other.Attributes)
+                && StatChoices.SequenceEqual(other.StatChoices));
+    }
+
+    /// <inheritdoc />
+    public override int GetHashCode()
+    {
+        var hash = new HashCode();
+        hash.Add(base.GetHashCode());
+        hash.Add(AttributeAdjustment);
+        hash.Add(AttributeCombinationId);
+        hash.Add(Buff);
+        hash.Add(SuffixItemId);
+        foreach (var slot in InfusionSlots)
+        {
+            hash.Add(slot);
+        }
+
+        foreach (var attribute in Attributes)
+        {
+            hash.Add(attribute.Key);
+            hash.Add(attribute.Value);
+        }
+
+        foreach (var statChoice in StatChoices)
+        {
+            hash.Add(statChoice);
+        }
+
+        return hash.ToHashCode();
+    }
 }

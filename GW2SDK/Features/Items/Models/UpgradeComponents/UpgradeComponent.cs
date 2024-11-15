@@ -31,4 +31,38 @@ public record UpgradeComponent : Item
     /// <summary>The suffix which is applied to the item name when this upgrade is applied.</summary>
     /// <remarks>The suffix is not applied to items when <see cref="ItemFlags.HideSuffix" /> is set.</remarks>
     public required string SuffixName { get; init; }
+
+    /// <inheritdoc />
+    public virtual bool Equals(UpgradeComponent? other)
+    {
+        return ReferenceEquals(this, other)
+            || (base.Equals(other)
+                && UpgradeComponentFlags.Equals(other.UpgradeComponentFlags)
+                && InfusionUpgradeFlags.Equals(other.InfusionUpgradeFlags)
+                && Math.Abs(AttributeAdjustment - other.AttributeAdjustment) < 0.001d
+                && AttributeCombinationId == other.AttributeCombinationId
+                && Buff == other.Buff
+                && SuffixName == other.SuffixName
+                && Attributes.SequenceEqual(other.Attributes));
+    }
+
+    /// <inheritdoc />
+    public override int GetHashCode()
+    {
+        var hash = new HashCode();
+        hash.Add(base.GetHashCode());
+        hash.Add(UpgradeComponentFlags);
+        hash.Add(InfusionUpgradeFlags);
+        hash.Add(AttributeAdjustment);
+        hash.Add(AttributeCombinationId);
+        hash.Add(Buff);
+        hash.Add(SuffixName);
+        foreach (var attribute in Attributes)
+        {
+            hash.Add(attribute.Key);
+            hash.Add(attribute.Value);
+        }
+
+        return hash.ToHashCode();
+    }
 }

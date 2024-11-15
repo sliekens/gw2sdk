@@ -154,11 +154,6 @@
           "System.Threading.Tasks.Extensions": "4.5.4"
         }
       },
-      "Microsoft.Bcl.HashCode": {
-        "type": "Transitive",
-        "resolved": "1.1.1",
-        "contentHash": "MalY0Y/uM/LjXtHfX/26l2VtN4LDNZ2OE3aumNOHDLsT4fNYy2hiHXI4CXCqKpNUNm7iJ2brrc4J89UdaL56FA=="
-      },
       "Microsoft.Bcl.TimeProvider": {
         "type": "Transitive",
         "resolved": "8.0.1",
@@ -635,9 +630,16 @@
       "gw2sdk": {
         "type": "Project",
         "dependencies": {
+          "Microsoft.Bcl.HashCode": "[6.0.0, )",
           "System.Runtime.InteropServices.RuntimeInformation": "[4.3.0, )",
           "System.Text.Json": "[9.0.0, )"
         }
+      },
+      "Microsoft.Bcl.HashCode": {
+        "type": "CentralTransitive",
+        "requested": "[6.0.0, )",
+        "resolved": "6.0.0",
+        "contentHash": "GI4jcoi6eC9ZhNOQylIBaWOQjyGaR8T6N3tC1u8p3EXfndLCVNNWa+Zp+ocjvvS3kNBN09Zma2HXL0ezO0dRfw=="
       },
       "System.Runtime.InteropServices.RuntimeInformation": {
         "type": "CentralTransitive",
