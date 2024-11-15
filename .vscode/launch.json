@@ -1,6 +1,11 @@
 {
   "configurations": [
     {
+      "name": ".NET Core Attach",
+      "type": "coreclr",
+      "request": "attach"
+    },
+    {
       "name": "TestDataHelper",
       "type": "dotnet",
       "request": "launch",

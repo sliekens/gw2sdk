@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLinkProgram", "samples\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gw2ClientProgram", "samples\PackageReadme\Gw2ClientProgram\Gw2ClientProgram.csproj", "{637E73C7-324B-4D60-89EB-CE36C1F56BC8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GW2SDK.Generators", "GW2SDK.Generators\GW2SDK.Generators.csproj", "{B1C6A9A2-AD1F-46DB-8EC7-D1C003A33A80}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +99,10 @@ Global
 		{637E73C7-324B-4D60-89EB-CE36C1F56BC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{637E73C7-324B-4D60-89EB-CE36C1F56BC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{637E73C7-324B-4D60-89EB-CE36C1F56BC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1C6A9A2-AD1F-46DB-8EC7-D1C003A33A80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1C6A9A2-AD1F-46DB-8EC7-D1C003A33A80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1C6A9A2-AD1F-46DB-8EC7-D1C003A33A80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1C6A9A2-AD1F-46DB-8EC7-D1C003A33A80}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

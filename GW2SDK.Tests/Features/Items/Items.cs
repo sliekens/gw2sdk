@@ -1,4 +1,5 @@
-﻿using GuildWars2.Chat;
+﻿using System.Text.Json;
+using GuildWars2.Chat;
 using GuildWars2.Items;
 using GuildWars2.Tests.Features.Markup;
 using GuildWars2.Tests.TestInfrastructure;
@@ -228,6 +229,37 @@ public class Items
 
             var chatLinkRoundtrip = ItemLink.Parse(chatLink.ToString());
             Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
+        }
+    }
+
+    [Fact]
+    public async Task Can_be_serialized()
+    {
+        // The JsonLinesHttpMessageHandler simulates the behavior of the real API
+        // because bulk enumeration quickly exhausts the API rate limit
+        using var httpClient =
+            new HttpClient(new JsonLinesHttpMessageHandler("Data/items.jsonl.gz"));
+        var sut = new Gw2Client(httpClient);
+        await foreach (var original in sut.Items.GetItemsBulk().ValueOnly())
+        {
+            var json = JsonSerializer.Serialize(original);
+            Assert.NotNull(json);
+
+            var actual = JsonSerializer.Deserialize<Item>(json);
+            Assert.NotNull(actual);
+            Assert.IsType(original.GetType(), actual);
+
+            // Assert.Equal(original.Id, actual.Id);
+            // Assert.Equal(original.Name, actual.Name);
+            // Assert.Equal(original.Description, actual.Description);
+            // Assert.Equal(original.Level, actual.Level);
+            // Assert.Equal(original.Rarity, actual.Rarity);
+            // Assert.Equal(original.VendorValue, actual.VendorValue);
+            // Assert.Equal(original.GameTypes, actual.GameTypes);
+            // Assert.Equal(original.Flags, actual.Flags);
+            // Assert.Equal(original.Restrictions, actual.Restrictions);
+            // Assert.Equal(original.ChatLink, actual.ChatLink);
+            // Assert.Equal(original.IconHref, actual.IconHref);
         }
     }
 }
