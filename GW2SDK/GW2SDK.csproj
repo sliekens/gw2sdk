@@ -65,6 +65,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="../GW2SDK.Generators/GW2SDK.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MinVer">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -80,7 +84,12 @@
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <PackageReference Include="System.Runtime.InteropServices.RuntimeInformation" />
     <Reference Include="System.Net.Http" />
-    <Using Include="System.Net.Http"  />
+    <Using Include="System.Net.Http" />
+    <PackageReference Include="Microsoft.Bcl.HashCode" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="Microsoft.Bcl.HashCode" />
   </ItemGroup>
 
   <Target Name="LinkPackageReleaseNotes" AfterTargets="MinVer">

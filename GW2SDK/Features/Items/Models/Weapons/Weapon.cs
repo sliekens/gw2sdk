@@ -54,4 +54,58 @@ public record Weapon : Item
     /// <summary>The IDs of the attribute combinations that can be chosen for the item. This property is only used for items
     /// with selectable stats.</summary>
     public required IReadOnlyList<int> StatChoices { get; init; }
+
+    /// <inheritdoc />
+    public virtual bool Equals(Weapon? other)
+    {
+        return ReferenceEquals(this, other)
+            || (base.Equals(other)
+                && DefaultSkinId == other.DefaultSkinId
+                && DamageType.Equals(other.DamageType)
+                && MinPower == other.MinPower
+                && MaxPower == other.MaxPower
+                && Defense == other.Defense
+                && Math.Abs(AttributeAdjustment - other.AttributeAdjustment) < 0.001d
+                && AttributeCombinationId == other.AttributeCombinationId
+                && Buff == other.Buff
+                && SuffixItemId == other.SuffixItemId
+                && SecondarySuffixItemId == other.SecondarySuffixItemId
+                && Attributes.SequenceEqual(other.Attributes)
+                && InfusionSlots.SequenceEqual(other.InfusionSlots)
+                && StatChoices.SequenceEqual(other.StatChoices));
+    }
+
+    /// <inheritdoc />
+    public override int GetHashCode()
+    {
+        var hash = new HashCode();
+        hash.Add(base.GetHashCode());
+        hash.Add(DefaultSkinId);
+        hash.Add(DamageType);
+        hash.Add(MinPower);
+        hash.Add(MaxPower);
+        hash.Add(Defense);
+        hash.Add(AttributeAdjustment);
+        hash.Add(AttributeCombinationId);
+        hash.Add(Buff);
+        hash.Add(SuffixItemId);
+        hash.Add(SecondarySuffixItemId);
+        foreach (var attribute in Attributes)
+        {
+            hash.Add(attribute.Key);
+            hash.Add(attribute.Value);
+        }
+
+        foreach (var slot in InfusionSlots)
+        {
+            hash.Add(slot);
+        }
+
+        foreach (var stat in StatChoices)
+        {
+            hash.Add(stat);
+        }
+
+        return hash.ToHashCode();
+    }
 }

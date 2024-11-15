@@ -1,4 +1,5 @@
-﻿using GuildWars2.Chat;
+﻿using System.Text.Json;
+using GuildWars2.Chat;
 using GuildWars2.Items;
 using GuildWars2.Tests.Features.Markup;
 using GuildWars2.Tests.TestInfrastructure;
@@ -228,6 +229,23 @@ public class Items
 
             var chatLinkRoundtrip = ItemLink.Parse(chatLink.ToString());
             Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
+        }
+    }
+
+    [Fact]
+    public async Task Can_be_serialized()
+    {
+        // The JsonLinesHttpMessageHandler simulates the behavior of the real API
+        // because bulk enumeration quickly exhausts the API rate limit
+        using var httpClient =
+            new HttpClient(new JsonLinesHttpMessageHandler("Data/items.jsonl.gz"));
+        var sut = new Gw2Client(httpClient);
+        await foreach (var original in sut.Items.GetItemsBulk().ValueOnly())
+        {
+            var json = JsonSerializer.Serialize(original);
+            var roundTrip = JsonSerializer.Deserialize<Item>(json);
+            Assert.IsType(original.GetType(), roundTrip);
+            Assert.Equal(original, roundTrip);
         }
     }
 }

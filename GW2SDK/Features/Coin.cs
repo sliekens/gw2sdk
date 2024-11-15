@@ -1,4 +1,5 @@
-﻿using GuildWars2.Chat;
+﻿using System.Text.Json.Serialization;
+using GuildWars2.Chat;
 #if !NET
 using System.Text;
 #endif
@@ -7,6 +8,7 @@ namespace GuildWars2;
 
 /// <summary>Represents an amount of coins and provides methods to compare and convert coins to other formats.</summary>
 [PublicAPI]
+[JsonConverter(typeof(CoinJsonConverter))]
 public readonly record struct Coin : IComparable, IComparable<Coin>
 {
     /// <summary>Represents zero coins.</summary>

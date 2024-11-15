@@ -1,4 +1,5 @@
-﻿using GuildWars2.Chat;
+﻿using System.Text.Json.Serialization;
+using GuildWars2.Chat;
 
 namespace GuildWars2.Items;
 
@@ -7,6 +8,103 @@ namespace GuildWars2.Items;
 [PublicAPI]
 [Inheritable]
 [DataTransferObject]
+[JsonPolymorphic]
+[JsonDerivedType(typeof(Item), "item")]
+[JsonDerivedType(typeof(CraftingMaterial), "crafting-material")]
+[JsonDerivedType(typeof(JadeTechModule), "jade-tech-module")]
+[JsonDerivedType(typeof(PowerCore), "power-core")]
+[JsonDerivedType(typeof(Bag), "bag")]
+[JsonDerivedType(typeof(Relic), "relic")]
+[JsonDerivedType(typeof(Miniature), "miniature")]
+[JsonDerivedType(typeof(Trophy), "trophy")]
+[JsonDerivedType(typeof(Backpack), "back")]
+[JsonDerivedType(typeof(SalvageTool), "salvage-tool")]
+[JsonDerivedType(typeof(Container), "container")]
+[JsonDerivedType(typeof(ImmediateContainer), "immediate-container")]
+[JsonDerivedType(typeof(BlackLionChest), "black-lion-chest")]
+[JsonDerivedType(typeof(GiftBox), "gift-box")]
+[JsonDerivedType(typeof(UpgradeComponent), "upgrade-component")]
+[JsonDerivedType(typeof(Sigil), "sigil")]
+[JsonDerivedType(typeof(Gem), "gem")]
+[JsonDerivedType(typeof(Rune), "rune")]
+[JsonDerivedType(typeof(Trinket), "trinket")]
+[JsonDerivedType(typeof(Ring), "ring")]
+[JsonDerivedType(typeof(Amulet), "amulet")]
+[JsonDerivedType(typeof(Accessory), "accessory")]
+[JsonDerivedType(typeof(Armor), "armor")]
+[JsonDerivedType(typeof(Helm), "helm")]
+[JsonDerivedType(typeof(HelmAquatic), "helm-aquatic")]
+[JsonDerivedType(typeof(Shoulders), "shoulders")]
+[JsonDerivedType(typeof(Coat), "coat")]
+[JsonDerivedType(typeof(Gloves), "gloves")]
+[JsonDerivedType(typeof(Leggings), "leggings")]
+[JsonDerivedType(typeof(Boots), "boots")]
+[JsonDerivedType(typeof(Weapon), "weapon")]
+[JsonDerivedType(typeof(Greatsword), "greatsword")]
+[JsonDerivedType(typeof(Torch), "torch")]
+[JsonDerivedType(typeof(Staff), "staff")]
+[JsonDerivedType(typeof(HarpoonGun), "harpoon-gun")]
+[JsonDerivedType(typeof(Longbow), "longbow")]
+[JsonDerivedType(typeof(Shortbow), "shortbow")]
+[JsonDerivedType(typeof(SmallBundle), "small-bundle")]
+[JsonDerivedType(typeof(LargeBundle), "large-bundle")]
+[JsonDerivedType(typeof(Pistol), "pistol")]
+[JsonDerivedType(typeof(Mace), "mace")]
+[JsonDerivedType(typeof(Rifle), "rifle")]
+[JsonDerivedType(typeof(Spear), "spear")]
+[JsonDerivedType(typeof(Dagger), "dagger")]
+[JsonDerivedType(typeof(Scepter), "scepter")]
+[JsonDerivedType(typeof(Sword), "sword")]
+[JsonDerivedType(typeof(Trident), "trident")]
+[JsonDerivedType(typeof(Hammer), "hammer")]
+[JsonDerivedType(typeof(Warhorn), "warhorn")]
+[JsonDerivedType(typeof(Focus), "focus")]
+[JsonDerivedType(typeof(Toy), "toy")]
+[JsonDerivedType(typeof(ToyTwoHanded), "toy-two-handed")]
+[JsonDerivedType(typeof(Axe), "axe")]
+[JsonDerivedType(typeof(Shield), "shield")]
+[JsonDerivedType(typeof(GatheringTool), "gathering-tool")]
+[JsonDerivedType(typeof(Lure), "lure")]
+[JsonDerivedType(typeof(Bait), "bait")]
+[JsonDerivedType(typeof(MiningPick), "mining-pick")]
+[JsonDerivedType(typeof(HarvestingSickle), "harvesting-sickle")]
+[JsonDerivedType(typeof(LoggingAxe), "logging-axe")]
+[JsonDerivedType(typeof(Gizmo), "gizmo")]
+[JsonDerivedType(typeof(BlackLionChestKey), "black-lion-chest-key")]
+[JsonDerivedType(typeof(UnlimitedConsumable), "unlimited-consumable")]
+[JsonDerivedType(typeof(RentableContractNpc), "rentable-contract-npc")]
+[JsonDerivedType(typeof(Consumable), "consumable")]
+[JsonDerivedType(typeof(Food), "food")]
+[JsonDerivedType(typeof(Utility), "utility")]
+[JsonDerivedType(typeof(Transmutation), "transmutation")]
+[JsonDerivedType(typeof(GenericConsumable), "generic-consumable")]
+[JsonDerivedType(typeof(Currency), "currency")]
+[JsonDerivedType(typeof(Booze), "booze")]
+[JsonDerivedType(typeof(ContractNpc), "contract-npc")]
+[JsonDerivedType(typeof(MountLicense), "mount-license")]
+[JsonDerivedType(typeof(UpgradeExtractor), "upgrade-extractor")]
+[JsonDerivedType(typeof(Service), "service")]
+[JsonDerivedType(typeof(RandomUnlocker), "random-unlocker")]
+[JsonDerivedType(typeof(HalloweenConsumable), "halloween-consumable")]
+[JsonDerivedType(typeof(TeleportToFriend), "teleport-to-friend")]
+[JsonDerivedType(typeof(AppearanceChanger), "appearance-changer")]
+[JsonDerivedType(typeof(Unlocker), "unlocker")]
+[JsonDerivedType(typeof(RecipeSheet), "recipe-sheet")]
+[JsonDerivedType(typeof(BankTabExpansion), "bank-tab-expansion")]
+[JsonDerivedType(typeof(BagSlotExpansion), "bag-slot-expansion")]
+[JsonDerivedType(typeof(EquipmentTemplateExpansion), "equipment-template-expansion")]
+[JsonDerivedType(typeof(BuildTemplateExpansion), "build-template-expansion")]
+[JsonDerivedType(typeof(BuildStorageExpansion), "build-storage-expansion")]
+[JsonDerivedType(typeof(Dye), "dye")]
+[JsonDerivedType(typeof(StorageExpander), "storage-expander")]
+[JsonDerivedType(typeof(ContentUnlocker), "content-unlocker")]
+[JsonDerivedType(typeof(OutfitUnlocker), "outfit-unlocker")]
+[JsonDerivedType(typeof(GliderSkinUnlocker), "glider-skin-unlocker")]
+[JsonDerivedType(typeof(MountSkinUnlocker), "mount-skin-unlocker")]
+[JsonDerivedType(typeof(MiniatureUnlocker), "miniature-unlocker")]
+[JsonDerivedType(typeof(SharedInventorySlot), "shared-inventory-slot")]
+[JsonDerivedType(typeof(MistChampionSkinUnlocker), "mist-champion-skin-unlocker")]
+[JsonDerivedType(typeof(JadeBotSkinUnlocker), "jade-bot-skin-unlocker")]
 public record Item
 {
     /// <summary>The item ID.</summary>
@@ -44,10 +142,29 @@ public record Item
     /// <summary>The URL of the item icon.</summary>
     public required string? IconHref { get; init; }
 
+    /// <inheritdoc />
+    public virtual bool Equals(Item? other)
+    {
+        return ReferenceEquals(this, other)
+            || (other is not null
+                && Id == other.Id
+                && Name == other.Name
+                && Description == other.Description
+                && Level == other.Level
+                && Rarity == other.Rarity
+                && VendorValue == other.VendorValue
+                && Flags == other.Flags
+                && Restrictions.Equals(other.Restrictions)
+                && ChatLink == other.ChatLink
+                && IconHref == other.IconHref
+                && GameTypes.SequenceEqual(other.GameTypes));
+    }
+
     /// <summary>Gets a chat link object for this item.</summary>
     /// <returns>The chat link as an object.</returns>
-    public ItemLink GetChatLink() =>
-        new()
+    public ItemLink GetChatLink()
+    {
+        return new ItemLink
         {
             ItemId = Id,
             Count = 1,
@@ -55,4 +172,27 @@ public record Item
             SuffixItemId = null,
             SecondarySuffixItemId = null
         };
+    }
+
+    /// <inheritdoc />
+    public override int GetHashCode()
+    {
+        var hash = new HashCode();
+        hash.Add(Id);
+        hash.Add(Name);
+        hash.Add(Description);
+        hash.Add(Level);
+        hash.Add(Rarity);
+        hash.Add(VendorValue);
+        hash.Add(Flags);
+        hash.Add(Restrictions);
+        hash.Add(ChatLink);
+        hash.Add(IconHref);
+        foreach (var gameType in GameTypes)
+        {
+            hash.Add(gameType);
+        }
+
+        return hash.ToHashCode();
+    }
 }
