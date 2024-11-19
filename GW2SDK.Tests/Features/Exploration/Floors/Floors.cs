@@ -31,16 +31,9 @@ public class Floors
                 foreach (var (regionId, region) in entry.Regions)
                 {
                     Assert.Equal(regionId, region.Id);
-                    if (continentId == 2 && entry.Id == 60 && regionId == 50)
-                    {
-                        // Convergences region name is empty
-                        Assert.Empty(region.Name);
-                    }
-                    else
-                    {
-                        Assert.NotEmpty(region.Name);
-                    }
 
+                    // Convergences and Mists Vault region names are empty
+                    Assert.NotNull(region.Name);
                     Assert.NotEmpty(region.Maps);
                     foreach (var (mapId, map) in region.Maps)
                     {
