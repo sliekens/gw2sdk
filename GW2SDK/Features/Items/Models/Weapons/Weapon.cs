@@ -1,4 +1,5 @@
-﻿using GuildWars2.Hero;
+﻿using System.Text.Json.Serialization;
+using GuildWars2.Hero;
 
 namespace GuildWars2.Items;
 
@@ -6,6 +7,7 @@ namespace GuildWars2.Items;
 /// more specific type to access more properties.</summary>
 [PublicAPI]
 [Inheritable]
+[JsonConverter(typeof(WeaponJsonConverter))]
 public record Weapon : Item
 {
     /// <summary>The default skin ID for the weapon. This skin can be unlocked in the wardrobe by binding the item.</summary>

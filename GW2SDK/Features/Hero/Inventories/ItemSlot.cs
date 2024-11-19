@@ -1,4 +1,5 @@
-﻿using GuildWars2.Chat;
+﻿using System.Text.Json.Serialization;
+using GuildWars2.Chat;
 using GuildWars2.Hero.Equipment;
 
 namespace GuildWars2.Hero.Inventories;
@@ -6,6 +7,7 @@ namespace GuildWars2.Hero.Inventories;
 /// <summary>Information about an item slot in the inventory or bank.</summary>
 [PublicAPI]
 [DataTransferObject]
+[JsonConverter(typeof(ItemSlotJsonConverter))]
 public sealed record ItemSlot
 {
     /// <summary>The ID of the item in this slot.</summary>

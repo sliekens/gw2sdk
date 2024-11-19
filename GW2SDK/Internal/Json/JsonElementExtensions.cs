@@ -4,6 +4,9 @@ namespace GuildWars2.Json;
 
 internal static class JsonElementExtensions
 {
+    internal static T? GetNullable<T>(this JsonElement json, Func<JsonElement, T?> transform) where T : class =>
+        json.ValueKind == JsonValueKind.Null ? null : transform(json);
+
     internal static int? GetNullableInt32(this JsonElement json) =>
         json.ValueKind == JsonValueKind.Null ? null : json.GetInt32();
 

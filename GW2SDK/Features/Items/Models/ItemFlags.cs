@@ -1,7 +1,10 @@
-﻿namespace GuildWars2.Items;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Items;
 
 /// <summary>Modifiers for items.</summary>
 [PublicAPI]
+[JsonConverter(typeof(ItemFlagsJsonConverter))]
 public sealed record ItemFlags : Flags
 {
     /// <summary>Whether the item becomes account bound when used.</summary>

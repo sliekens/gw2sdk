@@ -1,7 +1,10 @@
-﻿namespace GuildWars2.Items;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Items;
 
 /// <summary>Information about a rune, which is used to upgrade armor.</summary>
 [PublicAPI]
+[JsonConverter(typeof(RuneJsonConverter))]
 public sealed record Rune : UpgradeComponent
 {
     /// <summary>The bonuses provided by this rune.</summary>

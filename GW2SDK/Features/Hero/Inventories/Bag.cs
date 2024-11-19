@@ -1,8 +1,11 @@
-﻿namespace GuildWars2.Hero.Inventories;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Hero.Inventories;
 
 /// <summary>Information about an equipped bag.</summary>
 [PublicAPI]
 [DataTransferObject]
+[JsonConverter(typeof(BagJsonConverter))]
 public sealed record Bag
 {
     /// <summary>The current bag's item ID.</summary>

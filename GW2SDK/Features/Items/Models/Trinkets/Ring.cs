@@ -1,7 +1,10 @@
-﻿namespace GuildWars2.Items;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Items;
 
 /// <summary>Information about a ring.</summary>
 [PublicAPI]
+[JsonConverter(typeof(RingJsonConverter))]
 public sealed record Ring : Trinket
 {
     /// <summary>If the current ring can be infused or attuned, this collection contains the IDs of the infused/attuned

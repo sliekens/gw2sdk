@@ -1,7 +1,10 @@
-﻿namespace GuildWars2.Items;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Items;
 
 /// <summary>Information about a tool which can be used to salvage items.</summary>
 [PublicAPI]
+[JsonConverter(typeof(SalvageToolJsonConverter))]
 public sealed record SalvageTool : Item
 {
     /// <summary>The number of charges the tool has. Each use of the tool consumes 1 charge.</summary>

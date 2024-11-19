@@ -1,8 +1,11 @@
-﻿namespace GuildWars2.Items;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Items;
 
 /// <summary>Information about a buff, which is a passive effect that enhances your stats or abilities.</summary>
 [PublicAPI]
 [DataTransferObject]
+[JsonConverter(typeof(BuffJsonConverter))]
 public sealed record Buff
 {
     /// <summary>The skill ID associated with the buff. It is always a passive skill which grants the passive effect to the

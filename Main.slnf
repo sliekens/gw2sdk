@@ -1,0 +1,10 @@
+{
+  "solution": {
+    "path": "gw2sdk.sln",
+    "projects": [
+      "GW2SDK.Generators\\GW2SDK.Generators.csproj",
+      "GW2SDK.Tests\\GW2SDK.Tests.csproj",
+      "GW2SDK\\GW2SDK.csproj"
+    ]
+  }
+}
