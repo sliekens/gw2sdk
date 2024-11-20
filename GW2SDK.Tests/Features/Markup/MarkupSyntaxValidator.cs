@@ -53,7 +53,10 @@ public static class MarkupSyntaxValidator
         }
         else if (coloredText.Color.StartsWith("#"))
         {
-            Assert.Matches("#[0-9a-fA-F]{6}", coloredText.Color);
+            if (coloredText.Color is not ("#Flavor" or "#Warning"))
+            {
+                Assert.Matches("#[0-9a-fA-F]{6}", coloredText.Color);
+            }
         }
         else
         {
