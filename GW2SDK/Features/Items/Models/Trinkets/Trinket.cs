@@ -1,4 +1,5 @@
-﻿using GuildWars2.Hero;
+﻿using System.Text.Json.Serialization;
+using GuildWars2.Hero;
 
 namespace GuildWars2.Items;
 
@@ -6,6 +7,7 @@ namespace GuildWars2.Items;
 /// specific type to access more properties.</summary>
 [PublicAPI]
 [Inheritable]
+[JsonConverter(typeof(TrinketJsonConverter))]
 public record Trinket : Item
 {
     /// <summary>The infusion slots of the trinket (only available on ascended and legendary items).</summary>

@@ -1,10 +1,12 @@
 ﻿using GuildWars2.Hero;
+using System.Text.Json.Serialization;
 
 namespace GuildWars2.Items;
 
 /// <summary>Information about an upgrade component.</summary>
 [PublicAPI]
 [Inheritable]
+[JsonConverter(typeof(UpgradeComponentJsonConverter))]
 public record UpgradeComponent : Item
 {
     /// <summary>Flags that indicate which types of items are compatible with the upgrade.</summary>

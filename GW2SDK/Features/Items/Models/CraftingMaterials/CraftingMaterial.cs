@@ -1,7 +1,10 @@
-﻿namespace GuildWars2.Items;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Items;
 
 /// <summary>Information about a crafting material.</summary>
 [PublicAPI]
+[JsonConverter(typeof(CraftingMaterialJsonConverter))]
 public sealed record CraftingMaterial : Item
 {
     /// <summary>If the current material is used in a Mystic Forge recipe to infuse equipment, this collection contains the IDs

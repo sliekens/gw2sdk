@@ -1,7 +1,10 @@
-﻿namespace GuildWars2.Items;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Items;
 
 /// <summary>Modifiers for infusion slots.</summary>
 [PublicAPI]
+[JsonConverter(typeof(InfusionSlotFlagsJsonConverter))]
 public sealed record InfusionSlotFlags : Flags
 {
     /// <summary>Whether enchrichment can be used in the slot.</summary>

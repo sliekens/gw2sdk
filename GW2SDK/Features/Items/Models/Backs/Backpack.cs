@@ -1,9 +1,11 @@
-﻿using GuildWars2.Hero;
+﻿using System.Text.Json.Serialization;
+using GuildWars2.Hero;
 
 namespace GuildWars2.Items;
 
 /// <summary>Information about a back item.</summary>
 [PublicAPI]
+[JsonConverter(typeof(BackpackJsonConverter))]
 public sealed record Backpack : Item
 {
     /// <summary>The default skin ID for the back item. This skin can be unlocked in the wardrobe by binding the item.</summary>

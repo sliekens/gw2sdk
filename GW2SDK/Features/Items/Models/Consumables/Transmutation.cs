@@ -1,10 +1,12 @@
-﻿using GuildWars2.Chat;
+﻿using System.Text.Json.Serialization;
+using GuildWars2.Chat;
 
 namespace GuildWars2.Items;
 
 /// <summary>Information about a transmutation consumable, which unlocks an equipment skin upon receipt. The item can be
 /// consumed to change the appearance of one item without costing a transmutation charge.</summary>
 [PublicAPI]
+[JsonConverter(typeof(TransmutationJsonConverter))]
 public sealed record Transmutation : Consumable
 {
     /// <summary>The IDs of the equipment skins that are unlocked when this item is received.</summary>
