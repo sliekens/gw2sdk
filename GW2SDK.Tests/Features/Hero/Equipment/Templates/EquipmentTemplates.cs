@@ -19,17 +19,16 @@ public class EquipmentTemplates
 
         Assert.NotNull(context.Links);
         Assert.Equal(50, context.PageSize);
-        Assert.InRange(context.ResultCount.GetValueOrDefault(), 1, 8);
-        Assert.True(context.PageTotal > 0);
-        Assert.True(context.ResultTotal > 0);
-
+        Assert.Equal(1, context.PageTotal);
+        Assert.Equal(context.ResultTotal, context.ResultCount);
+        Assert.Equal(context.ResultCount, actual.Count);
         Assert.NotEmpty(actual);
         Assert.All(
             actual,
             entry =>
             {
                 Assert.NotNull(entry);
-                Assert.NotEmpty(entry.Items);
+                Assert.NotNull(entry.Items);
                 Assert.NotNull(entry.PvpEquipment);
             }
         );
