@@ -15,7 +15,16 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
     public static readonly Coin Zero = 0;
 
     /// <summary>Gets the total value in copper coins.</summary>
-    public readonly int Amount;
+    public int Amount { get; }
+
+    /// <summary>The amount of gold coins.</summary>
+    public int Gold => Amount / 1_00_00;
+
+    /// <summary>The amount of silver coins.</summary>
+    public int Silver => (Amount % 1_00_00) / 1_00;
+
+    /// <summary>The amount of copper coins.</summary>
+    public int Copper => Amount % 1_00;
 
     /// <summary>Initializes a new instance of the <see cref="Coin" /> struct with the specified amount of gold, silver, and
     /// copper coins.</summary>
@@ -167,41 +176,35 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
             return "⸻";
         }
 
-        var copper = Amount;
-        var gold = copper / 1_00_00;
-        copper %= 1_00_00;
-        var silver = copper / 1_00;
-        copper %= 1_00;
-
         string? formattedGold = null;
         string? formattedSilver = null;
         string? formattedCopper = null;
         var length = 0;
-        if (gold != 0)
+        if (Gold != 0)
         {
-            formattedGold = $"{gold:N0} gold";
+            formattedGold = $"{Gold:N0} gold";
             length += formattedGold.Length;
         }
 
-        if (silver != 0)
+        if (Silver != 0)
         {
             if (length > 0)
             {
                 length += 2;
             }
 
-            formattedSilver = $"{silver:N0} silver";
+            formattedSilver = $"{Silver:N0} silver";
             length += formattedSilver.Length;
         }
 
-        if (copper != 0)
+        if (Copper != 0)
         {
             if (length > 0)
             {
                 length += 2;
             }
 
-            formattedCopper = $"{copper:N0} copper";
+            formattedCopper = $"{Copper:N0} copper";
             length += formattedCopper.Length;
         }
 
