@@ -15,7 +15,8 @@ Alternatively you can use the command palette (Ctrl+Shift+P) and do _> Dev Conta
 You can ignore this if you use the dev container. Otherwise install the software from the following sections.
 
 - Visual Studio 2022 (17.9+), Visual Studio Code or Rider
-- [.NET 9.0.100 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) to build and run the solution
+- [.NET 9.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) to build and run the solution
+  - (Check `global.json` for the exact version needed)
 - Windows
   - [.NET Framework 4.8.1 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net481) to run .NET Framework tests
 - Mac/Linux
