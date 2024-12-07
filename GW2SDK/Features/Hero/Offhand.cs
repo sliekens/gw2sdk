@@ -9,15 +9,15 @@ namespace GuildWars2.Hero;
 [JsonConverter(typeof(OffhandJsonConverter))]
 public enum Offhand
 {
-    /// <summary>Nothing in the offhand (empty).</summary>
+    /// <summary>The skill is selected when there is no other skill in the same palette for the current offhand weapon.</summary>
     None,
 
-    /// <summary>Nothing in the offhand (empty).</summary>
+    /// <summary>The skill is selected when the offhand is empty.</summary>
     Nothing,
 
-    /// <summary>A dagger in the offhand.</summary>
+    /// <summary>The skill is selected when a dagger is equipped in the offhand.</summary>
     Dagger,
 
-    /// <summary>A pistol in the offhand.</summary>
+    /// <summary>The skill is selected when a pistol is equipped in the offhand.</summary>
     Pistol
 }
