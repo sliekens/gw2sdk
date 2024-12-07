@@ -1,7 +1,10 @@
-﻿namespace GuildWars2.Hero.Builds;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Hero.Builds;
 
 /// <summary>The weapon types.</summary>
 [PublicAPI]
+[JsonConverter(typeof(WeaponTypeJsonConverter))]
 public enum WeaponType
 {
     /// <summary>No weapon type.</summary>

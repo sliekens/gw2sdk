@@ -1,7 +1,10 @@
-﻿namespace GuildWars2.Items;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Items;
 
 /// <summary>The types of infusion slot upgrades.</summary>
 [PublicAPI]
+[JsonConverter(typeof(InfusionSlotUpgradeKindJsonConverter))]
 public enum InfusionSlotUpgradeKind
 {
     /// <summary>Attunement is a process where an ascended ring is upgraded in the Mystic Forge to gain one extra infusion

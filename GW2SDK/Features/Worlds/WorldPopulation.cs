@@ -1,7 +1,10 @@
-﻿namespace GuildWars2.Worlds;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Worlds;
 
 /// <summary>The population levels of a world in Guild Wars 2.</summary>
 [PublicAPI]
+[JsonConverter(typeof(WorldPopulationJsonConverter))]
 public enum WorldPopulation
 {
     /// <summary>A world with a low population.</summary>

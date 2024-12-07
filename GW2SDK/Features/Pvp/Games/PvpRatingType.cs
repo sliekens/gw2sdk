@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace GuildWars2.Pvp.Games;
 
 /// <summary>The PvP game rating types. Player skill is rated differently for each game type.</summary>
 [PublicAPI]
 [DefaultValue(None)]
+[JsonConverter(typeof(PvpRatingTypeJsonConverter))]
 public enum PvpRatingType
 {
     /// <summary>An unrated game.</summary>

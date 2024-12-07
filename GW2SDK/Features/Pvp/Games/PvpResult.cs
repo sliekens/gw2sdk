@@ -1,7 +1,10 @@
-﻿namespace GuildWars2.Pvp.Games;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Pvp.Games;
 
 /// <summary>The result of a PvP match.</summary>
 [PublicAPI]
+[JsonConverter(typeof(PvpResultJsonConverter))]
 public enum PvpResult
 {
     /// <summary>Your team won.</summary>

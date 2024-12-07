@@ -1,7 +1,10 @@
-﻿namespace GuildWars2.Guilds.Logs;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Guilds.Logs;
 
 /// <summary>The guild upgrade actions.</summary>
 [PublicAPI]
+[JsonConverter(typeof(GuildUpgradeActionJsonConverter))]
 public enum GuildUpgradeAction
 {
     /// <summary>The upgrade was queued for processing.</summary>

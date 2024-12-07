@@ -1,7 +1,10 @@
-﻿namespace GuildWars2.Hero.Equipment.Templates;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Hero.Equipment.Templates;
 
 /// <summary>The equipment slots in which an item can be equipped.</summary>
 [PublicAPI]
+[JsonConverter(typeof(EquipmentSlotJsonConverter))]
 public enum EquipmentSlot
 {
     /// <summary>The first accessory slot.</summary>

@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace GuildWars2.Exploration.Maps;
 
 /// <summary>The kind of maps in Guild Wars 2.</summary>
 [PublicAPI]
 [DefaultValue(Unknown)]
+[JsonConverter(typeof(MapKindJsonConverter))]
 public enum MapKind
 {
     /// <summary>An unknown map kind.</summary>

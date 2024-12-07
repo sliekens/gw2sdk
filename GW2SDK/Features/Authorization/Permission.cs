@@ -1,7 +1,10 @@
-﻿namespace GuildWars2.Authorization;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Authorization;
 
 /// <summary>Represents the permissions available for Guild Wars 2 authorization.</summary>
 [PublicAPI]
+[JsonConverter(typeof(PermissionJsonConverter))]
 public enum Permission
 {
     /// <summary>Grants access to the account information.</summary>

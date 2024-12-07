@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace GuildWars2.Hero.Equipment.Dyes;
 
 /// <summary>The color sets by which dyes are grouped.</summary>
 [PublicAPI]
 [DefaultValue(Unspecified)]
+[JsonConverter(typeof(ColorSetJsonConverter))]
 public enum ColorSet
 {
     /// <summary>Dye remover.</summary>

@@ -1,7 +1,10 @@
-﻿namespace GuildWars2.Pvp.Games;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Pvp.Games;
 
 /// <summary>The PvP team colors.</summary>
 [PublicAPI]
+[JsonConverter(typeof(PvpTeamColorJsonConverter))]
 public enum PvpTeamColor
 {
     /// <summary>The red team.</summary>

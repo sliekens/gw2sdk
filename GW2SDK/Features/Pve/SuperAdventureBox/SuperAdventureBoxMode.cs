@@ -1,7 +1,10 @@
-﻿namespace GuildWars2.Pve.SuperAdventureBox;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Pve.SuperAdventureBox;
 
 /// <summary>The difficulty modes of Super Adventure Box zones.</summary>
 [PublicAPI]
+[JsonConverter(typeof(SuperAdventureBoxModeJsonConverter))]
 public enum SuperAdventureBoxMode
 {
     /// <summary>The easiest difficulty mode.</summary>

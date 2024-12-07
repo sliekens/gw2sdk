@@ -1,7 +1,10 @@
-﻿namespace GuildWars2.Hero;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Hero;
 
 /// <summary>The playable races.</summary>
 [PublicAPI]
+[JsonConverter(typeof(RaceNameJsonConverter))]
 public enum RaceName
 {
     /// <summary>These alchemagical inventors may be short in stature, but they're intellectual giants. Among the asura, it's

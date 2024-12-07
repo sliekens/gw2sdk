@@ -1,7 +1,10 @@
+﻿using System.Text.Json.Serialization;
+
 namespace GuildWars2.Guilds.Logs;
 
 /// <summary>The guild mission state transitions.</summary>
 [PublicAPI]
+[JsonConverter(typeof(GuildMissionStateJsonConverter))]
 public enum GuildMissionState
 {
     /// <summary>Logged when the mission starts.</summary>

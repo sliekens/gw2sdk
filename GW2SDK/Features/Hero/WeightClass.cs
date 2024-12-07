@@ -1,7 +1,10 @@
-﻿namespace GuildWars2.Hero;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Hero;
 
 /// <summary>The weight classes of armor.</summary>
 [PublicAPI]
+[JsonConverter(typeof(WeightClassJsonConverter))]
 public enum WeightClass
 {
     /// <summary>Clothing can be worn by any profession.</summary>

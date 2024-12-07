@@ -1,7 +1,10 @@
-﻿namespace GuildWars2.Hero.Builds.Facts;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Hero.Builds.Facts;
 
 /// <summary>The combo finisher that is applied by a skill.</summary>
 [PublicAPI]
+[JsonConverter(typeof(ComboFinisherNameJsonConverter))]
 public enum ComboFinisherName
 {
     /// <summary>Blast finishers creates area effects.</summary>

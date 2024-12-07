@@ -1,7 +1,10 @@
-﻿namespace GuildWars2.Hero.Equipment.Mounts;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Hero.Equipment.Mounts;
 
 /// <summary>The mount types.</summary>
 [PublicAPI]
+[JsonConverter(typeof(MountNameJsonConverter))]
 public enum MountName
 {
     /// <summary>Swift, strong, and agile, raptors are stalwart explorers and great companions for exploring the far reaches of

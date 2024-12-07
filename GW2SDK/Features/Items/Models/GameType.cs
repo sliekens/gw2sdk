@@ -1,7 +1,10 @@
-﻿namespace GuildWars2.Items;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Items;
 
 /// <summary>The game types where items can be used.</summary>
 [PublicAPI]
+[JsonConverter(typeof(GameTypeJsonConverter))]
 public enum GameType
 {
     /// <summary>Usable in activities.</summary>

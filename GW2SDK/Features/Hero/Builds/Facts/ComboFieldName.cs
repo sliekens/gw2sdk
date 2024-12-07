@@ -1,7 +1,10 @@
-﻿namespace GuildWars2.Hero.Builds.Facts;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Hero.Builds.Facts;
 
 /// <summary>The combo field (area effect) that is created by a skill.</summary>
 [PublicAPI]
+[JsonConverter(typeof(ComboFieldNameJsonConverter))]
 public enum ComboFieldName
 {
     /// <summary>Dark fields whose combos cause Blindness or Life Stealing.</summary>

@@ -1,7 +1,10 @@
-﻿namespace GuildWars2.Guilds.Logs;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Guilds.Logs;
 
 /// <summary>The kinds of changes to guild influence.</summary>
 [PublicAPI]
+[JsonConverter(typeof(InfluenceActivityKindJsonConverter))]
 public enum InfluenceActivityKind
 {
     /// <summary>A guild member gifted influence to the guild.</summary>

@@ -1,7 +1,10 @@
-﻿namespace GuildWars2.Mumble;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Mumble;
 
 /// <summary>The map types.</summary>
 [PublicAPI]
+[JsonConverter(typeof(MapTypeJsonConverter))]
 public enum MapType : uint
 {
     // Keep the enum values in sync with the enum from the game, provided below.

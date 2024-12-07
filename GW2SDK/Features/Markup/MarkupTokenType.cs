@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace GuildWars2.Markup;
 
@@ -7,6 +8,7 @@ namespace GuildWars2.Markup;
 /// </summary>
 [PublicAPI]
 [DefaultValue(None)]
+[JsonConverter(typeof(MarkupTokenTypeJsonConverter))]
 public enum MarkupTokenType
 {
     /// <summary>

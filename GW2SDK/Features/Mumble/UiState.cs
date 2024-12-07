@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace GuildWars2.Mumble;
 
@@ -6,6 +7,7 @@ namespace GuildWars2.Mumble;
 [PublicAPI]
 [Flags]
 [DefaultValue(None)]
+[JsonConverter(typeof(UiStateJsonConverter))]
 public enum UiState : uint
 {
     /// <summary>No flags are set.</summary>

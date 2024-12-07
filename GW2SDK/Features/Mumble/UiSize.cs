@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace GuildWars2.Mumble;
 
 /// <summary>The user interface size choices provided by the game client.</summary>
 [PublicAPI]
 [DefaultValue(Small)]
+[JsonConverter(typeof(UiSizeJsonConverter))]
 public enum UiSize
 {
     /// <summary>Smallest user interface size.</summary>

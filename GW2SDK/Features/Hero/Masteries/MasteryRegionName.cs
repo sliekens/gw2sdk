@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace GuildWars2.Hero.Masteries;
 
 /// <summary>The mastery regions.</summary>
 [PublicAPI]
 [DefaultValue(Unknown)]
+[JsonConverter(typeof(MasteryRegionNameJsonConverter))]
 public enum MasteryRegionName
 {
     /// <summary>Unknown mastery point region.</summary>

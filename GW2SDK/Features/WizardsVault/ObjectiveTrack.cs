@@ -1,7 +1,10 @@
-﻿namespace GuildWars2.WizardsVault;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.WizardsVault;
 
 /// <summary>The Wizard's Vault objective tracks.</summary>
 [PublicAPI]
+[JsonConverter(typeof(ObjectiveTrackJsonConverter))]
 public enum ObjectiveTrack
 {
     /// <summary>PvE objectives such as completing events.</summary>

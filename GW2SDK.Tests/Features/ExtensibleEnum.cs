@@ -1,4 +1,5 @@
-﻿using GuildWars2.Hero.Accounts;
+﻿using System.Text.Json;
+using GuildWars2.Hero.Accounts;
 using GuildWars2.Items;
 
 namespace GuildWars2.Tests.Features;
@@ -114,5 +115,22 @@ public class ExtensibleEnum
         var extensible = new Extensible<ProductName>("GuildWars3");
         var actual = extensible.ToEnum();
         Assert.Null(actual);
+    }
+
+    [Fact]
+    public void Has_json_conversion()
+    {
+        Extensible<ProductName> extensible = ProductName.GuildWars2;
+        var json = JsonSerializer.Serialize(extensible);
+        var actual = JsonSerializer.Deserialize<Extensible<ProductName>>(json);
+        Assert.Equal(extensible, actual);
+    }
+    [Fact]
+    public void Has_json_conversion_for_undefined_values()
+    {
+        Extensible<ProductName> extensible = "GuildWars3";
+        var json = JsonSerializer.Serialize(extensible);
+        var actual = JsonSerializer.Deserialize<Extensible<ProductName>>(json);
+        Assert.Equal(extensible, actual);
     }
 }

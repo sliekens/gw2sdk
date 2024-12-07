@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace GuildWars2.Chat;
 
 /// <summary>Represents a selected trait.</summary>
 [PublicAPI]
 [DefaultValue(None)]
+[JsonConverter(typeof(SelectedTraitJsonConverter))]
 public enum SelectedTrait
 {
     // THE VALUES OF THIS ENUM ARE USED IN THE BINARY FORMAT OF THE LINK

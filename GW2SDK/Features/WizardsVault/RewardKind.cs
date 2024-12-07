@@ -1,7 +1,10 @@
-﻿namespace GuildWars2.WizardsVault;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.WizardsVault;
 
 /// <summary>The kind of rewards available in the Wizard's Vault.</summary>
 [PublicAPI]
+[JsonConverter(typeof(RewardKindJsonConverter))]
 public enum RewardKind
 {
     /// <summary>Seasonal rewards such as crafting materials, gold, mystic coins and legendary starter kits. The rewards are

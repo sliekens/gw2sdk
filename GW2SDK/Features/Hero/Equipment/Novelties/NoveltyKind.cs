@@ -1,7 +1,10 @@
-﻿namespace GuildWars2.Hero.Equipment.Novelties;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Hero.Equipment.Novelties;
 
 /// <summary>The novelty kinds.</summary>
 [PublicAPI]
+[JsonConverter(typeof(NoveltyKindJsonConverter))]
 public enum NoveltyKind
 {
     /// <summary>Makes the character sit on a chair.</summary>

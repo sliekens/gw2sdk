@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace GuildWars2.Wvw;
 
 /// <summary>The team colors in World vs. World.</summary>
 [PublicAPI]
 [DefaultValue(Neutral)]
+[JsonConverter(typeof(TeamColorJsonConverter))]
 public enum TeamColor
 {
     /// <summary>The neutral color (white) for objectives that are not controlled by any team.</summary>

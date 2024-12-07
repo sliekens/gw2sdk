@@ -1,7 +1,10 @@
-﻿namespace GuildWars2.Hero;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Hero;
 
 /// <summary>The attunement of an Elementalist.</summary>
 [PublicAPI]
+[JsonConverter(typeof(AttunementJsonConverter))]
 public enum Attunement
 {
     /// <summary>Attunement to Earth.</summary>

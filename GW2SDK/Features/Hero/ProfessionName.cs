@@ -1,7 +1,10 @@
-﻿namespace GuildWars2.Hero;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Hero;
 
 /// <summary>The playable professions.</summary>
 [PublicAPI]
+[JsonConverter(typeof(ProfessionNameJsonConverter))]
 public enum ProfessionName
 {
     /// <summary>Guardian uses heavy armor and focuses on defensive magic.</summary>

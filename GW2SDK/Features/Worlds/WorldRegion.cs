@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace GuildWars2.Worlds;
 
 /// <summary>The world region where a world is located.</summary>
 [PublicAPI]
 [DefaultValue(None)]
+[JsonConverter(typeof(WorldRegionJsonConverter))]
 public enum WorldRegion
 {
     /// <summary>The world region is missing or unknown.</summary>

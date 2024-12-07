@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace GuildWars2.Hero.Accounts;
 
 /// <summary>The names of Guild Wars 2 products.</summary>
 [PublicAPI]
 [DefaultValue(None)]
+[JsonConverter(typeof(ProductNameJsonConverter))]
 public enum ProductName
 {
     /// <summary>Nothing. Zero, zilch, zip, nada, nothing.</summary>

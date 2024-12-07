@@ -1,8 +1,11 @@
-﻿namespace GuildWars2.Hero.Builds;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Hero.Builds;
 
 /// <summary>Skills with similar behaviors are grouped into one of these categories. Many traits affect all skills in a
 /// certain category.</summary>
 [PublicAPI]
+[JsonConverter(typeof(SkillCategoryNameJsonConverter))]
 public enum SkillCategoryName
 {
     /// <summary> Elementalist utility skills. Non-elemental magical energy sources of critical damage.</summary>

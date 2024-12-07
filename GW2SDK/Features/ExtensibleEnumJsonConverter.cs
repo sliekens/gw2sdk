@@ -7,13 +7,19 @@ namespace GuildWars2;
 /// A JSON converter for the Extensible struct with a specific enum type.
 /// </summary>
 /// <typeparam name="TEnum">The type of the enum.</typeparam>
-internal class ExtensibleEnumJsonConverter<TEnum> : JsonConverter<Extensible<TEnum>> where TEnum : struct, Enum
+internal class ExtensibleEnumJsonConverter<TEnum>
+    : JsonConverter<Extensible<TEnum>> where TEnum : struct, Enum
 {
     /// <inheritdoc />
     public override Extensible<TEnum> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         var name = reader.GetString();
-        return new Extensible<TEnum>(name!);
+        if (name is null)
+        {
+            ThrowHelper.ThrowInvalidOperationException("Expected a string but got null.");
+        }
+
+        return new Extensible<TEnum>(name);
     }
 
     /// <inheritdoc />
@@ -26,7 +32,12 @@ internal class ExtensibleEnumJsonConverter<TEnum> : JsonConverter<Extensible<TEn
     public override Extensible<TEnum> ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         var name = reader.GetString();
-        return new Extensible<TEnum>(name!);
+        if (name is null)
+        {
+            ThrowHelper.ThrowInvalidOperationException("Expected a string but got null.");
+        }
+
+        return new Extensible<TEnum>(name);
     }
 
     /// <inheritdoc />
