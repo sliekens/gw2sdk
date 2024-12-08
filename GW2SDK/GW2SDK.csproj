@@ -15,21 +15,29 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
-  <!-- NuGet properties -->
+  <!-- MinVer -->
   <PropertyGroup>
-    <PackageId>GW2SDK</PackageId>
-    <Authors>Steven Liekens</Authors>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <PackageReadmeFile>PACKAGE.md</PackageReadmeFile>
     <MinVerTagPrefix>v</MinVerTagPrefix>
     <MinVerMinimumMajorMinor>2.0</MinVerMinimumMajorMinor>
     <MinVerDefaultPreReleaseIdentifiers>preview.0</MinVerDefaultPreReleaseIdentifiers>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageTags>Guild Wars;gw;gw2;gw2api;gw2client;tp;tradingpost;trading post;mumble;mumblelink;arenanet;anet;api</PackageTags>
-    <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
 
+  <!-- NuGet pack -->
+  <PropertyGroup>
+    <PackageId>GW2SDK</PackageId>
+    <Authors>sliekens</Authors>
+    <Title>Guild Wars 2 SDK</Title>
+    <Description>A .NET code library for interacting with the Guild Wars 2 API and game client.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageReadmeFile>PACKAGE.md</PackageReadmeFile>
+    <PackageTags>Guild Wars;gw;gw2;gw2api;gw2client;tp;tradingpost;trading post;mumble;mumblelink;arenanet;anet;api</PackageTags>
+    <PackageReleaseNotes>https://github.com/sliekens/gw2sdk/releases</PackageReleaseNotes>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+  </PropertyGroup>
+
+  <!-- Package validation -->
   <PropertyGroup>
     <EnablePackageValidation>true</EnablePackageValidation>
     <PackageValidationBaselineVersion>1.4.1</PackageValidationBaselineVersion>
