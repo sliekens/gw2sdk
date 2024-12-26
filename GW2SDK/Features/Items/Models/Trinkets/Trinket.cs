@@ -8,7 +8,7 @@ namespace GuildWars2.Items;
 [PublicAPI]
 [Inheritable]
 [JsonConverter(typeof(TrinketJsonConverter))]
-public record Trinket : Item
+public record Trinket : Item, ICombatEquipment, IUpgradable
 {
     /// <summary>The infusion slots of the trinket (only available on ascended and legendary items).</summary>
     public required IReadOnlyList<InfusionSlot> InfusionSlots { get; init; }
@@ -30,6 +30,8 @@ public record Trinket : Item
 
     /// <summary>The ID of the upgrade component in the upgrade slot, if any.</summary>
     public required int? SuffixItemId { get; init; }
+
+    int? IUpgradable.SecondarySuffixItemId => null;
 
     /// <summary>The IDs of the attribute combinations that can be chosen for the item. This property is only used for items
     /// with selectable stats.</summary>

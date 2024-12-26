@@ -7,7 +7,7 @@ namespace GuildWars2.Items;
 [PublicAPI]
 [Inheritable]
 [JsonConverter(typeof(UpgradeComponentJsonConverter))]
-public record UpgradeComponent : Item
+public record UpgradeComponent : Item, ICombatEquipment
 {
     /// <summary>Flags that indicate which types of items are compatible with the upgrade.</summary>
     public required UpgradeComponentFlags UpgradeComponentFlags { get; init; }
@@ -23,6 +23,8 @@ public record UpgradeComponent : Item
     /// <summary>The ID of the item's attribute combination, used for items with fixed stats. This property is not used for
     /// items with selectable stats.</summary>
     public required int? AttributeCombinationId { get; init; }
+
+    IReadOnlyList<int> ICombatEquipment.StatChoices { get; } = Empty.ListOfInt32;
 
     /// <summary>The effective stats of the item.</summary>
     public required IDictionary<Extensible<AttributeName>, int> Attributes { get; init; }

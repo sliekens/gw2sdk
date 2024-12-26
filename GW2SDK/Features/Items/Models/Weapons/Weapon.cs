@@ -8,7 +8,7 @@ namespace GuildWars2.Items;
 [PublicAPI]
 [Inheritable]
 [JsonConverter(typeof(WeaponJsonConverter))]
-public record Weapon : Item
+public record Weapon : Item, ICombatEquipment, IUpgradable
 {
     /// <summary>The default skin ID for the weapon. This skin can be unlocked in the wardrobe by binding the item.</summary>
     public required int DefaultSkinId { get; init; }
@@ -29,7 +29,7 @@ public record Weapon : Item
     /// attribute, which reduces incoming strike damage.</summary>
     public required int Defense { get; init; }
 
-    /// <summary>The infusion slots of the armor (only available on ascended and legendary items).</summary>
+    /// <summary>The infusion slots of the weapon (only available on ascended and legendary items).</summary>
     public required IReadOnlyList<InfusionSlot> InfusionSlots { get; init; }
 
     /// <summary>The Attribute Adjustment factor. To calculate the final item stats of the item, multiply this value with an

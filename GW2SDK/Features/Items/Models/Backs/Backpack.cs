@@ -6,7 +6,7 @@ namespace GuildWars2.Items;
 /// <summary>Information about a back item.</summary>
 [PublicAPI]
 [JsonConverter(typeof(BackpackJsonConverter))]
-public sealed record Backpack : Item
+public sealed record Backpack : Item, ICombatEquipment, IUpgradable, IInfused, IInfusable
 {
     /// <summary>The default skin ID for the back item. This skin can be unlocked in the wardrobe by binding the item.</summary>
     public required int DefaultSkinId { get; init; }
@@ -32,12 +32,14 @@ public sealed record Backpack : Item
     /// <summary>The ID of the upgrade component in the upgrade slot, if any.</summary>
     public required int? SuffixItemId { get; init; }
 
+    int? IUpgradable.SecondarySuffixItemId => null;
+
     /// <summary>The IDs of the attribute combinations that can be chosen for the item. This property is only used for items
     /// with selectable stats.</summary>
     public required IReadOnlyList<int> StatChoices { get; init; }
 
-    /// <summary>If the current back item can be infused, this collection contains the IDs of the infused variations of the
-    /// back item. Each item in the collection represents a possible upgrade path.</summary>
+    /// <summary>If the current back item can be infused in the Mystic Forge, this collection contains the IDs of the infused variations of the
+    /// back item. Each item in the collection represents a different recipe.</summary>
     public required IReadOnlyCollection<InfusionSlotUpgradePath> UpgradesInto { get; init; }
 
     /// <summary>If the current back item is infused, this collection contains the IDs of possible source items.</summary>

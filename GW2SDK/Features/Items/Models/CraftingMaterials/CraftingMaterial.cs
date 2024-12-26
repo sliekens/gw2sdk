@@ -5,10 +5,10 @@ namespace GuildWars2.Items;
 /// <summary>Information about a crafting material.</summary>
 [PublicAPI]
 [JsonConverter(typeof(CraftingMaterialJsonConverter))]
-public sealed record CraftingMaterial : Item
+public sealed record CraftingMaterial : Item, IInfusable
 {
-    /// <summary>If the current material is used in a Mystic Forge recipe to infuse equipment, this collection contains the IDs
-    /// of the infused items. Each item in the collection represents a possible upgrade path.</summary>
+    /// <summary>If the current crafting material is used in the Mystic Forge to infuse or attune equipment, this collection contains the IDs
+    /// of the infused (or attuned) items. Each item in the collection represents a different recipe.</summary>
     public required IReadOnlyCollection<InfusionSlotUpgradePath> UpgradesInto { get; init; }
 
     /// <inheritdoc />

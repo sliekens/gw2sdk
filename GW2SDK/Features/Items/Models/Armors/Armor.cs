@@ -8,7 +8,7 @@ namespace GuildWars2.Items;
 [PublicAPI]
 [Inheritable]
 [JsonConverter(typeof(ArmorJsonConverter))]
-public record Armor : Item
+public record Armor : Item, ICombatEquipment, IUpgradable
 {
     /// <summary>The default skin ID for the armor. This skin can be unlocked in the wardrobe by binding the item.</summary>
     public required int DefaultSkinId { get; init; }
@@ -40,6 +40,8 @@ public record Armor : Item
 
     /// <summary>The ID of the upgrade component in the upgrade slot, if any.</summary>
     public required int? SuffixItemId { get; init; }
+
+    int? IUpgradable.SecondarySuffixItemId => null;
 
     /// <summary>The IDs of the attribute combinations that can be chosen for the item. This property is only used for items
     /// with selectable stats.</summary>
