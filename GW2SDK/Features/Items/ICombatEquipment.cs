@@ -3,6 +3,7 @@ using GuildWars2.Hero;
 namespace GuildWars2.Items;
 
 /// <summary>The interface for items that can be equipped to increase the player's combat attributes.</summary>
+[PublicAPI]
 public interface ICombatEquipment
 {
     /// <summary>The Attribute Adjustment factor. To calculate the final item stats of the item, multiply this value with an

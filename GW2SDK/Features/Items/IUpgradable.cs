@@ -1,6 +1,7 @@
 namespace GuildWars2.Items;
 
 /// <summary>The interface for items with upgrade or infusion slots.</summary>
+[PublicAPI]
 public interface IUpgradable
 {
     /// <summary>The ID of the upgrade component in the upgrade slot, if any.</summary>
