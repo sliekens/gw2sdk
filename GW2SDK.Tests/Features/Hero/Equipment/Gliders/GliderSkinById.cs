@@ -11,7 +11,7 @@ public class GliderSkinById
 
         const int id = 58;
 
-        var (actual, context) = await sut.Hero.Equipment.Gliders.GetGliderSkinById(id);
+        var (actual, context) = await sut.Hero.Equipment.Gliders.GetGliderSkinById(id, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

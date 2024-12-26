@@ -9,7 +9,7 @@ public class MatchesScoresIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Wvw.GetMatchesScoresIndex();
+        var (actual, context) = await sut.Wvw.GetMatchesScoresIndex(TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

@@ -10,7 +10,7 @@ public class SharedInventory
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Hero.Inventory.GetSharedInventory(accessToken.Key);
+        var (actual, _) = await sut.Hero.Inventory.GetSharedInventory(accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual.Items);
         Assert.All(

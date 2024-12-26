@@ -16,7 +16,7 @@ public class WorldsByFilter
             1003
         ];
 
-        var (actual, context) = await sut.Worlds.GetWorldsByIds(ids);
+        var (actual, context) = await sut.Worlds.GetWorldsByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

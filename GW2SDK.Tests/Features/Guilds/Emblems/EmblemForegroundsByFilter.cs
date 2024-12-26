@@ -16,7 +16,7 @@ public class EmblemForegroundsByFilter
             3
         ];
 
-        var (actual, context) = await sut.Guilds.GetEmblemForegroundsByIds(ids);
+        var (actual, context) = await sut.Guilds.GetEmblemForegroundsByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

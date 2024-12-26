@@ -16,7 +16,7 @@ public class UpgradesByFilter
             4
         ];
 
-        var (actual, context) = await sut.Wvw.GetUpgradesByIds(ids);
+        var (actual, context) = await sut.Wvw.GetUpgradesByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

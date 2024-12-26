@@ -16,7 +16,7 @@ public class MatchesStatsByFilter
             "1-3"
         ];
 
-        var (actual, context) = await sut.Wvw.GetMatchesStatsByIds(ids);
+        var (actual, context) = await sut.Wvw.GetMatchesStatsByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

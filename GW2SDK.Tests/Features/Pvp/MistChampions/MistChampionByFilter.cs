@@ -17,7 +17,7 @@ public class MistChampionByFilter
             "BEA79596-CA8B-4D46-9B9C-EA1B606BCF42"
         ];
 
-        var (actual, context) = await sut.Pvp.GetMistChampionsByIds(ids);
+        var (actual, context) = await sut.Pvp.GetMistChampionsByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

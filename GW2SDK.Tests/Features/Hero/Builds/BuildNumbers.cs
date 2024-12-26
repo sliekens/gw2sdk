@@ -12,7 +12,7 @@ public class BuildNumbers
         var accessToken = TestConfiguration.ApiKey;
 
         var (actual, context) =
-            await sut.Hero.Builds.GetBuildNumbers(character.Name, accessToken.Key);
+            await sut.Hero.Builds.GetBuildNumbers(character.Name, accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

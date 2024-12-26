@@ -20,7 +20,8 @@ public class HeartById
             floorId,
             regionId,
             mapId,
-            heartId
+            heartId,
+            cancellationToken: TestContext.Current.CancellationToken
         );
 
         Assert.NotNull(context);

@@ -9,7 +9,7 @@ public class PetsIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Pve.Pets.GetPetsIndex();
+        var (actual, context) = await sut.Pve.Pets.GetPetsIndex(TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

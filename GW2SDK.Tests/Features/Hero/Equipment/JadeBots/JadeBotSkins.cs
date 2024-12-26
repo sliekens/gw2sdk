@@ -10,7 +10,7 @@ public class JadeBotSkins
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.Equipment.JadeBots.GetJadeBotSkins();
+        var (actual, context) = await sut.Hero.Equipment.JadeBots.GetJadeBotSkins(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

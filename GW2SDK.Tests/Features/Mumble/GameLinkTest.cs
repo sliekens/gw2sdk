@@ -1,16 +1,16 @@
 ﻿using System.Runtime.Versioning;
 using GuildWars2.Hero.Equipment.Mounts;
 using GuildWars2.Mumble;
-using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Mumble;
 
-[SupportedOSPlatform("windows")]
 public class GameLinkTest
 {
-    [OSPlatformFact("windows")]
+    [Fact]
+    [SupportedOSPlatform("windows")]
     public void Name_can_be_read_from_Mumble_link()
     {
+        Assert.SkipUnless(GameLink.IsSupported(), "Test requires Windows");
         using var sut = GameLink.Open();
 
         var actual = sut.GetSnapshot();
@@ -18,9 +18,11 @@ public class GameLinkTest
         Assert.Equal("Guild Wars 2", actual.Name);
     }
 
-    [OSPlatformFact("windows")]
+    [Fact]
+    [SupportedOSPlatform("windows")]
     public async Task The_link_is_self_updating()
     {
+        Assert.SkipUnless(GameLink.IsSupported(), "Test requires Windows");
         using var sut = GameLink.Open();
 
         using CancellationTokenSource cts = new(TimeSpan.FromSeconds(3));
@@ -45,9 +47,11 @@ public class GameLinkTest
         Assert.True(actual.Last.UiTick > actual.First.UiTick, "GameLink should be self-updating");
     }
 
-    [OSPlatformFact("windows")]
+    [Fact]
+    [SupportedOSPlatform("windows")]
     public void The_link_provides_context()
     {
+        Assert.SkipUnless(GameLink.IsSupported(), "Test requires Windows");
         using var sut = GameLink.Open();
 
         var gameTick = sut.GetSnapshot();
@@ -65,9 +69,11 @@ public class GameLinkTest
         Assert.Equal(0, server.Port);
     }
 
-    [OSPlatformFact("windows")]
+    [Fact]
+    [SupportedOSPlatform("windows")]
     public void The_link_provides_identity()
     {
+        Assert.SkipUnless(GameLink.IsSupported(), "Test requires Windows");
         using var sut = GameLink.Open();
 
         var actual = sut.GetSnapshot().GetIdentity();

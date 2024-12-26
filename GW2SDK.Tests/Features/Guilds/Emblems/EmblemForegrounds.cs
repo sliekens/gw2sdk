@@ -9,7 +9,7 @@ public class EmblemForegrounds
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Guilds.GetEmblemForegrounds();
+        var (actual, context) = await sut.Guilds.GetEmblemForegrounds(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

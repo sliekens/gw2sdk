@@ -9,7 +9,7 @@ public class FinishersIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.Equipment.Finishers.GetFinishersIndex();
+        var (actual, context) = await sut.Hero.Equipment.Finishers.GetFinishersIndex(TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

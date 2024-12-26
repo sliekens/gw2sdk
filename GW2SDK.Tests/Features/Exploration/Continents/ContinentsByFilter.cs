@@ -11,7 +11,7 @@ public class ContinentsByFilter
 
         HashSet<int> ids = [1, 2];
 
-        var (actual, context) = await sut.Exploration.GetContinentsByIds(ids);
+        var (actual, context) = await sut.Exploration.GetContinentsByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.Equal(ids.Count, context.ResultTotal);

@@ -16,7 +16,7 @@ public class RanksByFilter
             9
         ];
 
-        var (actual, context) = await sut.Pvp.GetRanksByIds(ids);
+        var (actual, context) = await sut.Pvp.GetRanksByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

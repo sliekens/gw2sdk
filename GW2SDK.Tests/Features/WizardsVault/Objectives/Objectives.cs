@@ -9,7 +9,7 @@ public class Objectives
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.WizardsVault.GetObjectives();
+        var (actual, context) = await sut.WizardsVault.GetObjectives(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

@@ -11,7 +11,7 @@ public class ItemPriceById
 
         const int id = 24;
 
-        var (actual, context) = await sut.Commerce.GetItemPriceById(id);
+        var (actual, context) = await sut.Commerce.GetItemPriceById(id, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

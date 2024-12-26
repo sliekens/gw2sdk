@@ -14,7 +14,8 @@ public class ActiveEquipmentTemplate
         var (actual, _) =
             await sut.Hero.Equipment.Templates.GetActiveEquipmentTemplate(
                 character.Name,
-                accessToken.Key
+                accessToken.Key,
+                cancellationToken: TestContext.Current.CancellationToken
             );
 
         Assert.NotNull(actual);

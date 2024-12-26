@@ -13,7 +13,7 @@ public class HeartsIndex
         var sut = Composer.Resolve<Gw2Client>();
 
         var (actual, context) =
-            await sut.Exploration.GetHeartsIndex(continentId, floorId, regionId, mapId);
+            await sut.Exploration.GetHeartsIndex(continentId, floorId, regionId, mapId, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

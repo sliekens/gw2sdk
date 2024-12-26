@@ -9,7 +9,7 @@ public class Ranks
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Pvp.GetRanks();
+        var (actual, context) = await sut.Pvp.GetRanks(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

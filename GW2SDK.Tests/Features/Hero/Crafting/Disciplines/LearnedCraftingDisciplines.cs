@@ -14,7 +14,8 @@ public class LearnedCraftingDisciplines
         var (actual, _) =
             await sut.Hero.Crafting.Disciplines.GetLearnedCraftingDisciplines(
                 character.Name,
-                accessToken.Key
+                accessToken.Key,
+                cancellationToken: TestContext.Current.CancellationToken
             );
 
         Assert.NotEmpty(actual.Disciplines);

@@ -10,7 +10,7 @@ public class MatchesStatsByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
-        var (actual, context) = await sut.Wvw.GetMatchesStatsByPage(0, pageSize);
+        var (actual, context) = await sut.Wvw.GetMatchesStatsByPage(0, pageSize, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);

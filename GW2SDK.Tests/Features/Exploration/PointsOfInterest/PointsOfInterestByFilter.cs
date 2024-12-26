@@ -25,7 +25,8 @@ public class PointsOfInterestByFilter
             floorId,
             regionId,
             mapId,
-            ids
+            ids,
+            cancellationToken: TestContext.Current.CancellationToken
         );
 
         Assert.Equal(ids.Count, context.ResultCount);

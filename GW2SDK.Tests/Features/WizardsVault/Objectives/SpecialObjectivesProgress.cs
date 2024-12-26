@@ -11,7 +11,7 @@ public class SpecialObjectivesProgress
         var accessToken = TestConfiguration.ApiKey;
 
         var (actual, context) =
-            await sut.WizardsVault.GetSpecialObjectivesProgress(accessToken.Key);
+            await sut.WizardsVault.GetSpecialObjectivesProgress(accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(context);
         Assert.NotEmpty(actual.Objectives);

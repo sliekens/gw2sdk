@@ -11,7 +11,7 @@ public class ObjectiveById
 
         const string id = "1099-99";
 
-        var (actual, context) = await sut.Wvw.GetObjectiveById(id);
+        var (actual, context) = await sut.Wvw.GetObjectiveById(id, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

@@ -11,7 +11,7 @@ public class GlyphById
 
         const string id = "leatherworker_logging";
 
-        var (actual, context) = await sut.Pve.Home.GetGlyphById(id);
+        var (actual, context) = await sut.Pve.Home.GetGlyphById(id, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

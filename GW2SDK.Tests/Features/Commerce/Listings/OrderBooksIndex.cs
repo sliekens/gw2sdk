@@ -9,7 +9,7 @@ public class OrderBooksIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Commerce.GetOrderBooksIndex();
+        var (actual, context) = await sut.Commerce.GetOrderBooksIndex(TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

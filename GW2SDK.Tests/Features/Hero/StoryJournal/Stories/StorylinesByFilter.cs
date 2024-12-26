@@ -16,7 +16,7 @@ public class StorylinesByFilter
             "215AAA0F-CDAC-4F93-86DA-C155A99B5784"
         ];
 
-        var (actual, context) = await sut.Hero.StoryJournal.GetStorylinesByIds(ids);
+        var (actual, context) = await sut.Hero.StoryJournal.GetStorylinesByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

@@ -20,7 +20,8 @@ public class HeartsByPage
             regionId,
             mapId,
             0,
-            pageSize
+            pageSize,
+            cancellationToken: TestContext.Current.CancellationToken
         );
 
         Assert.NotNull(context.Links);

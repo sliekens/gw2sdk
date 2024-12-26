@@ -14,7 +14,8 @@ public class EquipmentTemplateNumbers
         var (actual, context) =
             await sut.Hero.Equipment.Templates.GetEquipmentTemplateNumbers(
                 character.Name,
-                accessToken.Key
+                accessToken.Key,
+                cancellationToken: TestContext.Current.CancellationToken
             );
 
         Assert.NotEmpty(actual);

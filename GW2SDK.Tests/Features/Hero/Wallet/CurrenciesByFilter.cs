@@ -16,7 +16,7 @@ public class CurrenciesByFilter
             3
         ];
 
-        var (actual, context) = await sut.Hero.Wallet.GetCurrenciesByIds(ids);
+        var (actual, context) = await sut.Hero.Wallet.GetCurrenciesByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

@@ -13,7 +13,7 @@ public class SectorsIndex
         var sut = Composer.Resolve<Gw2Client>();
 
         var (actual, context) =
-            await sut.Exploration.GetSectorsIndex(continentId, floorId, regionId, mapId);
+            await sut.Exploration.GetSectorsIndex(continentId, floorId, regionId, mapId, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

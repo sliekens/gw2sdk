@@ -9,7 +9,7 @@ public class Races
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.Races.GetRaces();
+        var (actual, context) = await sut.Hero.Races.GetRaces(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultTotal, actual.Count);
     }

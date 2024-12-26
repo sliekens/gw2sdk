@@ -15,7 +15,7 @@ public class CatsByFilter
             3
         ];
 
-        var (actual, context) = await sut.Pve.Home.GetCatsByIds(ids);
+        var (actual, context) = await sut.Pve.Home.GetCatsByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

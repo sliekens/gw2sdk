@@ -16,7 +16,7 @@ public class NoveltiesByFilter
             3
         ];
 
-        var (actual, context) = await sut.Hero.Equipment.Novelties.GetNoveltiesByIds(ids);
+        var (actual, context) = await sut.Hero.Equipment.Novelties.GetNoveltiesByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

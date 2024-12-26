@@ -4,11 +4,11 @@
         <OutputType>Exe</OutputType>
         <TargetFramework>net9.0</TargetFramework>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-        <noWarn>1591</noWarn>
+        <NoWarn>$(NoWarn);CS1591</NoWarn>
         <RootNamespace>GuildWars2.TestDataHelper</RootNamespace>
     </PropertyGroup>
 
-    <ItemGroup>
+  <ItemGroup>
         <PackageReference Include="Microsoft.Extensions.Hosting" />
         <PackageReference Include="Microsoft.Extensions.Http.Resilience" />
         <PackageReference Include="Polly.Core" />

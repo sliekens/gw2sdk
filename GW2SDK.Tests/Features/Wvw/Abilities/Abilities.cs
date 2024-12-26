@@ -9,7 +9,7 @@ public class Abilities
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Wvw.GetAbilities();
+        var (actual, context) = await sut.Wvw.GetAbilities(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

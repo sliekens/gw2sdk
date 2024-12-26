@@ -9,7 +9,7 @@ public class AmuletsIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Pvp.GetAmuletsIndex();
+        var (actual, context) = await sut.Pvp.GetAmuletsIndex(TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

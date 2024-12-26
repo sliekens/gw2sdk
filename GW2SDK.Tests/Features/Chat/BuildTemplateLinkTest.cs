@@ -41,7 +41,7 @@ public class BuildTemplateLinkTest
 
         var sut = BuildTemplateLink.Parse(chatLink);
         var actual = sut.ToString();
-        var build = await sut.GetBuild(gw2);
+        var build = await sut.GetBuild(gw2, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(professionName, build.Profession);
         Assert.Equal(professionName, sut.Profession);

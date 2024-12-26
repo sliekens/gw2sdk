@@ -10,7 +10,7 @@ public class UnlockedMounts
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Hero.Equipment.Mounts.GetUnlockedMounts(accessToken.Key);
+        var (actual, _) = await sut.Hero.Equipment.Mounts.GetUnlockedMounts(accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);
         Assert.All(

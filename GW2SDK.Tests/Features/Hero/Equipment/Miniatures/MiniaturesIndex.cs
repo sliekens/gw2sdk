@@ -9,7 +9,7 @@ public class MiniaturesIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.Equipment.Miniatures.GetMiniaturesIndex();
+        var (actual, context) = await sut.Hero.Equipment.Miniatures.GetMiniaturesIndex(TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

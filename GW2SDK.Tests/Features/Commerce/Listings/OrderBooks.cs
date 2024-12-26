@@ -14,7 +14,7 @@ public class OrderBooks
         // This code will actually try to fetch more than 600 entries
         //  but the extra requests will be cancelled when this test completes
         await foreach (var (actual, context) in sut.Commerce
-            .GetOrderBooksBulk(degreeOfParallelism: 3)
+            .GetOrderBooksBulk(degreeOfParallelism: 3, cancellationToken: TestContext.Current.CancellationToken)
             .Take(600))
         {
             Assert.NotNull(context);

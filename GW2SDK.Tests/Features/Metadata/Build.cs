@@ -15,7 +15,11 @@ public class Build
 
         // The API has been stuck on build 115267 since at least 2021-05-27
         using var http = Composer.Resolve<HttpClient>();
+#if NET
+        var actual = await http.GetStringAsync(builder.Uri, TestContext.Current.CancellationToken);
+#else
         var actual = await http.GetStringAsync(builder.Uri);
+#endif
         Assert.Contains("115267", actual);
     }
 
@@ -27,7 +31,7 @@ public class Build
         // So in a sense, this is the "official" way to find the current build
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, _) = await sut.Metadata.GetBuild();
+        var (actual, _) = await sut.Metadata.GetBuild(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.True(actual.Id > 115267);
     }

@@ -11,7 +11,7 @@ public class ActiveBuild
         var character = TestConfiguration.TestCharacter;
         var accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Hero.Builds.GetActiveBuild(character.Name, accessToken.Key);
+        var (actual, _) = await sut.Hero.Builds.GetActiveBuild(character.Name, accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(actual);
         Assert.NotNull(actual.Build);

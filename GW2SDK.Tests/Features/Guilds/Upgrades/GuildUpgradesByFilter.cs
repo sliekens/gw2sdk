@@ -16,7 +16,7 @@ public class GuildUpgradesByFilter
             167
         ];
 
-        var (actual, context) = await sut.Guilds.GetGuildUpgradesByIds(ids);
+        var (actual, context) = await sut.Guilds.GetGuildUpgradesByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

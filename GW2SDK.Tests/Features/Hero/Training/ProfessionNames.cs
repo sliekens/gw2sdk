@@ -10,7 +10,7 @@ public class ProfessionNames
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, _) = await sut.Hero.Training.GetProfessionNames();
+        var (actual, _) = await sut.Hero.Training.GetProfessionNames(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(Enum.GetNames(typeof(ProfessionName)).Length, actual.Count);
         Assert.All(actual, name => Assert.True(name.IsDefined()));

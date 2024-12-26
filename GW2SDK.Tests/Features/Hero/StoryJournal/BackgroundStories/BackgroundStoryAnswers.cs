@@ -10,7 +10,7 @@ public class BackgroundStoryAnswers
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.StoryJournal.GetBackgroundStoryAnswers();
+        var (actual, context) = await sut.Hero.StoryJournal.GetBackgroundStoryAnswers(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultTotal, actual.Count);
 

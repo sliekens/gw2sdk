@@ -11,7 +11,7 @@ public class AchievementCategoryById
 
         const int id = 1;
 
-        var (actual, context) = await sut.Hero.Achievements.GetAchievementCategoryById(id);
+        var (actual, context) = await sut.Hero.Achievements.GetAchievementCategoryById(id, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

@@ -9,7 +9,7 @@ public class MatchesStats
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Wvw.GetMatchesStats();
+        var (actual, context) = await sut.Wvw.GetMatchesStats(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

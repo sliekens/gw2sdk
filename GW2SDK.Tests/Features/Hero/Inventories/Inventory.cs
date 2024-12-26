@@ -11,7 +11,7 @@ public class Inventory
         var character = TestConfiguration.TestCharacter;
         var accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Hero.Inventory.GetInventory(character.Name, accessToken.Key);
+        var (actual, _) = await sut.Hero.Inventory.GetInventory(character.Name, accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(actual);
         Assert.NotEmpty(actual.Bags);

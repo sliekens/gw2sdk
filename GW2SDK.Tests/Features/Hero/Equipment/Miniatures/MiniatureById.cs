@@ -11,7 +11,7 @@ public class MiniatureById
 
         const int id = 1;
 
-        var (actual, context) = await sut.Hero.Equipment.Miniatures.GetMiniatureById(id);
+        var (actual, context) = await sut.Hero.Equipment.Miniatures.GetMiniatureById(id, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

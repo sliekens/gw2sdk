@@ -9,7 +9,7 @@ public class Legends
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.Builds.GetLegends();
+        var (actual, context) = await sut.Hero.Builds.GetLegends(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

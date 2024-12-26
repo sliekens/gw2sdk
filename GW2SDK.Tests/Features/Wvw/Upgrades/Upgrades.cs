@@ -9,7 +9,7 @@ public class Upgrades
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Wvw.GetUpgrades();
+        var (actual, context) = await sut.Wvw.GetUpgrades(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

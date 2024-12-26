@@ -9,7 +9,7 @@ public class MistChampionsIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Pvp.GetMistChampionsIndex();
+        var (actual, context) = await sut.Pvp.GetMistChampionsIndex(TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

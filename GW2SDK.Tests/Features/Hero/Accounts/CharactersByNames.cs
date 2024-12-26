@@ -13,7 +13,7 @@ public class CharactersByNames
         var accessToken = TestConfiguration.ApiKey;
 
         var (actual, _) =
-            await sut.Hero.Account.GetCharactersByNames([character.Name, character2.Name], accessToken.Key);
+            await sut.Hero.Account.GetCharactersByNames([character.Name, character2.Name], accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Collection(actual,
             entry =>

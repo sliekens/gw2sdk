@@ -11,7 +11,7 @@ public class MatchScoresById
 
         const string id = "1-1";
 
-        var (actual, context) = await sut.Wvw.GetMatchScoresById(id);
+        var (actual, context) = await sut.Wvw.GetMatchScoresById(id, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

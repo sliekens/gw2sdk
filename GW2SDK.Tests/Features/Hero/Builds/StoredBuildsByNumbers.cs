@@ -18,7 +18,7 @@ public class StoredBuildsByNumbers
         ];
         ;
 
-        var (actual, _) = await sut.Hero.Builds.GetStoredBuilds(slotNumbers, accessToken.Key);
+        var (actual, _) = await sut.Hero.Builds.GetStoredBuilds(slotNumbers, accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);
         Assert.All(

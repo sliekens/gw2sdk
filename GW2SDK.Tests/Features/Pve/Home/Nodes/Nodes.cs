@@ -9,7 +9,7 @@ public class Nodes
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Pve.Home.GetNodes();
+        var (actual, context) = await sut.Pve.Home.GetNodes(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultTotal, actual.Count);

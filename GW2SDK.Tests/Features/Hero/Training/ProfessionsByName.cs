@@ -17,7 +17,7 @@ public class ProfessionsByName
             ProfessionName.Revenant
         ];
 
-        var (actual, _) = await sut.Hero.Training.GetProfessionsByNames(names);
+        var (actual, _) = await sut.Hero.Training.GetProfessionsByNames(names, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Collection(
             names,

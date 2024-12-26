@@ -11,7 +11,7 @@ public class RecipesIndexByIngredient
 
         const int visionCrystalItemId = 46746;
         var (actual, context) =
-            await sut.Hero.Crafting.Recipes.GetRecipesIndexByIngredientItemId(visionCrystalItemId);
+            await sut.Hero.Crafting.Recipes.GetRecipesIndexByIngredientItemId(visionCrystalItemId, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

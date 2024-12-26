@@ -10,7 +10,7 @@ public class Luck
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Hero.Account.GetLuck(accessToken.Key);
+        var (actual, _) = await sut.Hero.Account.GetLuck(accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.True(actual.Luck > 0, "You have no luck today.");
         Assert.Equal(300, actual.MagicFind);

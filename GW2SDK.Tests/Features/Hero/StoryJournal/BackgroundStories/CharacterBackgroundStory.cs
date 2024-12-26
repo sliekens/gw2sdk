@@ -13,7 +13,8 @@ public class CharacterBackgroundStory
 
         var (actual, _) = await sut.Hero.StoryJournal.GetCharacterBackgroundStory(
             character.Name,
-            accessToken.Key
+            accessToken.Key,
+            cancellationToken: TestContext.Current.CancellationToken
         );
 
         Assert.NotNull(actual);

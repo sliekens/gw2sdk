@@ -9,7 +9,7 @@ public class Raids
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Pve.Raids.GetRaids();
+        var (actual, context) = await sut.Pve.Raids.GetRaids(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

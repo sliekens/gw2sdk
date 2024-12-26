@@ -16,7 +16,7 @@ public class AchievementGroupsByFilter
             "B42E2379-9599-46CA-9D4A-40A27E192BBE"
         ];
 
-        var (actual, context) = await sut.Hero.Achievements.GetAchievementGroupsByIds(ids);
+        var (actual, context) = await sut.Hero.Achievements.GetAchievementGroupsByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

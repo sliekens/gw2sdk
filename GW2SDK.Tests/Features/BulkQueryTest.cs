@@ -1,4 +1,4 @@
-namespace GuildWars2.Tests.Features;
+﻿namespace GuildWars2.Tests.Features;
 
 public class BulkQueryTest
 {
@@ -67,7 +67,9 @@ public class BulkQueryTest
             return Task.FromResult(result);
         }
 
-        var actual = await BulkQuery.QueryAsync(index, GetChunk).ToListAsync();
+        var actual = await BulkQuery
+            .QueryAsync(index, GetChunk, cancellationToken: TestContext.Current.CancellationToken)
+            .ToListAsync(TestContext.Current.CancellationToken);
 
         Assert.Equal(index.Count, actual.Count);
         Assert.All(index, id => Assert.Contains(actual, record => record.Id == id));
@@ -93,7 +95,9 @@ public class BulkQueryTest
             return Task.FromResult(result);
         }
 
-        var actual = await BulkQuery.QueryAsync(index, GetChunk).ToListAsync();
+        var actual = await BulkQuery
+            .QueryAsync(index, GetChunk, cancellationToken: TestContext.Current.CancellationToken)
+            .ToListAsync(TestContext.Current.CancellationToken);
 
         Assert.Equal(index.Count, actual.Count);
         Assert.All(index, id => Assert.Contains(actual, record => record.Id == id));

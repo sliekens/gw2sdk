@@ -10,7 +10,7 @@ public class Finishers
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.Equipment.Finishers.GetFinishers();
+        var (actual, context) = await sut.Hero.Equipment.Finishers.GetFinishers(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

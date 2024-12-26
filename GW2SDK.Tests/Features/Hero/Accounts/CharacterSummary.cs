@@ -12,7 +12,7 @@ public class CharacterSummary
         var accessToken = TestConfiguration.ApiKey;
 
         var (actual, _) =
-            await sut.Hero.Account.GetCharacterSummary(character.Name, accessToken.Key);
+            await sut.Hero.Account.GetCharacterSummary(character.Name, accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(character.Name, actual.Name);
         Assert.Equal(character.Race, actual.Race);

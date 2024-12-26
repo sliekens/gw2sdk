@@ -10,7 +10,7 @@ public class SellOrders
         var accessToken = TestConfiguration.ApiKey;
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (offers, context) = await sut.Commerce.GetSellOrders(0, 200, accessToken.Key);
+        var (offers, context) = await sut.Commerce.GetSellOrders(0, 200, accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
 
         // Step through with debugger to see if the values reflect your in-game transactions
         Assert.NotNull(context);

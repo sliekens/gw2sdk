@@ -9,7 +9,7 @@ public class GlyphsIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Pve.Home.GetGlyphsIndex();
+        var (actual, context) = await sut.Pve.Home.GetGlyphsIndex(TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

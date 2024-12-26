@@ -11,7 +11,7 @@ public class UnlockedJadeBotSkins
         var accessToken = TestConfiguration.ApiKey;
 
         var (actual, _) =
-            await sut.Hero.Equipment.JadeBots.GetUnlockedJadeBotSkins(accessToken.Key);
+            await sut.Hero.Equipment.JadeBots.GetUnlockedJadeBotSkins(accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(actual);
     }

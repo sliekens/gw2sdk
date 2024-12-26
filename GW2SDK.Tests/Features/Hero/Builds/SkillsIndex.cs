@@ -9,7 +9,7 @@ public class SkillsIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.Builds.GetSkillsIndex();
+        var (actual, context) = await sut.Hero.Builds.GetSkillsIndex(TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

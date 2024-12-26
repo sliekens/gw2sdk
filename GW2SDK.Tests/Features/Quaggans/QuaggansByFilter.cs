@@ -16,7 +16,7 @@ public class QuaggansByFilter
             "attack"
         ];
 
-        var (actual, context) = await sut.Quaggans.GetQuaggansByIds(ids);
+        var (actual, context) = await sut.Quaggans.GetQuaggansByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

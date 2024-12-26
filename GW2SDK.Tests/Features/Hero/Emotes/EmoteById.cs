@@ -11,7 +11,7 @@ public class EmoteById
 
         const string id = "rockout";
 
-        var (actual, context) = await sut.Hero.Emotes.GetEmoteById(id);
+        var (actual, context) = await sut.Hero.Emotes.GetEmoteById(id, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

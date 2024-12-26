@@ -10,7 +10,7 @@ public class MaterialStorage
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Hero.Bank.GetMaterialStorage(accessToken.Key);
+        var (actual, _) = await sut.Hero.Bank.GetMaterialStorage(accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual.Materials);
         Assert.All(

@@ -14,7 +14,7 @@ public class RecipesByIngredient
 
         const int visionCrystal = 46746;
         var (actual, context) =
-            await sut.Hero.Crafting.Recipes.GetRecipesByIngredientItemId(visionCrystal);
+            await sut.Hero.Crafting.Recipes.GetRecipesByIngredientItemId(visionCrystal, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotInRange(actual.Count, 0, 200); // Greater than 200
         Assert.Equal(context.ResultCount, actual.Count);

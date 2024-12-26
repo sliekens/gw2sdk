@@ -11,7 +11,7 @@ public class Regions
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Exploration.GetRegions(continentId, floorId);
+        var (actual, context) = await sut.Exploration.GetRegions(continentId, floorId, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

@@ -18,7 +18,7 @@ public class RegionsByFilter
             3
         ];
 
-        var (actual, context) = await sut.Exploration.GetRegionsByIds(continentId, floorId, ids);
+        var (actual, context) = await sut.Exploration.GetRegionsByIds(continentId, floorId, ids, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

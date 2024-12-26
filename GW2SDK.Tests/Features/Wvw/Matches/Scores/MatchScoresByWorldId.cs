@@ -11,7 +11,7 @@ public class MatchScoresByWorldId
 
         const int worldId = 2006;
 
-        var (actual, _) = await sut.Wvw.GetMatchScoresByWorldId(worldId);
+        var (actual, _) = await sut.Wvw.GetMatchScoresByWorldId(worldId, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(actual);
     }

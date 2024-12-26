@@ -11,7 +11,7 @@ public class FileById
 
         const string id = "map_vendor_ecto";
 
-        var (actual, context) = await sut.Files.GetFileById(id);
+        var (actual, context) = await sut.Files.GetFileById(id, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

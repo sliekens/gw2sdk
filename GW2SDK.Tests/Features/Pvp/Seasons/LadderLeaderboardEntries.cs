@@ -12,7 +12,7 @@ public class LadderLeaderboardEntries
         var sut = Composer.Resolve<Gw2Client>();
 
         var (actual, context) =
-            await sut.Pvp.GetLeaderboardEntries(seasonId, boardId, regionId, 0, 200);
+            await sut.Pvp.GetLeaderboardEntries(seasonId, boardId, regionId, 0, 200, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

@@ -11,7 +11,7 @@ public class JadeBotSkinById
 
         const int id = 2;
 
-        var (actual, context) = await sut.Hero.Equipment.JadeBots.GetJadeBotSkinById(id);
+        var (actual, context) = await sut.Hero.Equipment.JadeBots.GetJadeBotSkinById(id, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

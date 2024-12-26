@@ -9,7 +9,7 @@ public class Dungeons
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Pve.Dungeons.GetDungeons();
+        var (actual, context) = await sut.Pve.Dungeons.GetDungeons(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

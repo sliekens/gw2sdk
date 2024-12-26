@@ -18,7 +18,8 @@ public class MapsByPage
             floorId,
             regionId,
             0,
-            pageSize
+            pageSize,
+            cancellationToken: TestContext.Current.CancellationToken
         );
 
         Assert.NotNull(context.Links);

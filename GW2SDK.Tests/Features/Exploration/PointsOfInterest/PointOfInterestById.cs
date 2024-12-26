@@ -20,7 +20,8 @@ public class PointOfInterestById
             floorId,
             regionId,
             mapId,
-            pointOfInterestId
+            pointOfInterestId,
+            cancellationToken: TestContext.Current.CancellationToken
         );
 
         Assert.NotNull(context);

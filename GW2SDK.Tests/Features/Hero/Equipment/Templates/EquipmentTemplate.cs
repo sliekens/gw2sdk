@@ -16,7 +16,8 @@ public class EquipmentTemplate
             await sut.Hero.Equipment.Templates.GetEquipmentTemplate(
                 character.Name,
                 tab,
-                accessToken.Key
+                accessToken.Key,
+                cancellationToken: TestContext.Current.CancellationToken
             );
 
         Assert.NotNull(actual);

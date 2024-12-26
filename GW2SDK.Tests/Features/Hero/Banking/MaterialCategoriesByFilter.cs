@@ -16,7 +16,7 @@ public class MaterialCategoriesByFilter
             29
         ];
 
-        var (actual, context) = await sut.Hero.Bank.GetMaterialCategoriesByIds(ids);
+        var (actual, context) = await sut.Hero.Bank.GetMaterialCategoriesByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

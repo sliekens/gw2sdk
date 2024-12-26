@@ -11,7 +11,7 @@ public class DefeatedWorldBosses
         var accessToken = TestConfiguration.ApiKey;
 
         // Resets each day, not easy to prove it works
-        var (actual, _) = await sut.Pve.WorldBosses.GetDefeatedWorldBosses(accessToken.Key);
+        var (actual, _) = await sut.Pve.WorldBosses.GetDefeatedWorldBosses(accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
 
         HashSet<string> expected =
         [

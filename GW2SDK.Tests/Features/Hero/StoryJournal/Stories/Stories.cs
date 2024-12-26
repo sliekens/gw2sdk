@@ -9,7 +9,7 @@ public class Stories
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.StoryJournal.GetStories();
+        var (actual, context) = await sut.Hero.StoryJournal.GetStories(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

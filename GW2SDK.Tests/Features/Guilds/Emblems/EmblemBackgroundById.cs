@@ -11,7 +11,7 @@ public class EmblemBackgroundById
 
         const int id = 1;
 
-        var (actual, context) = await sut.Guilds.GetEmblemBackgroundById(id);
+        var (actual, context) = await sut.Guilds.GetEmblemBackgroundById(id, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

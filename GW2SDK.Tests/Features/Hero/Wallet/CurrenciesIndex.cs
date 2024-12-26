@@ -9,7 +9,7 @@ public class CurrenciesIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.Wallet.GetCurrenciesIndex();
+        var (actual, context) = await sut.Hero.Wallet.GetCurrenciesIndex(TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

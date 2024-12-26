@@ -16,7 +16,7 @@ public class BackgroundStoryAnswersByFilter
             "7-55"
         ];
 
-        var (actual, context) = await sut.Hero.StoryJournal.GetBackgroundStoryAnswersByIds(ids);
+        var (actual, context) = await sut.Hero.StoryJournal.GetBackgroundStoryAnswersByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

@@ -9,7 +9,7 @@ public class EmblemBackgroundsIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Guilds.GetEmblemBackgroundsIndex();
+        var (actual, context) = await sut.Guilds.GetEmblemBackgroundsIndex(TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

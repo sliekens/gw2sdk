@@ -9,7 +9,7 @@ public class MaterialCategories
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.Bank.GetMaterialCategories();
+        var (actual, context) = await sut.Hero.Bank.GetMaterialCategories(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

@@ -12,7 +12,7 @@ public class AccountAchievementsByPage
 
         const int pageSize = 3;
         var (actual, context) =
-            await sut.Hero.Achievements.GetAccountAchievementsByPage(0, pageSize, accessToken.Key);
+            await sut.Hero.Achievements.GetAccountAchievementsByPage(0, pageSize, accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);

@@ -15,7 +15,7 @@ public class DecorationCategoriesByFilter
             3
         ];
 
-        var (actual, context) = await sut.Pve.Home.GetDecorationCategoriesByIds(ids);
+        var (actual, context) = await sut.Pve.Home.GetDecorationCategoriesByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

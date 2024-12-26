@@ -16,7 +16,7 @@ public class MapChestsByFilter
             "domain_of_vabbi_heros_choice_chest"
         ];
 
-        var (actual, context) = await sut.Pve.MapChests.GetMapChestsByIds(ids);
+        var (actual, context) = await sut.Pve.MapChests.GetMapChestsByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

@@ -11,7 +11,7 @@ public class CatById
 
         const int id = 20;
 
-        var (actual, context) = await sut.Pve.Home.GetCatById(id);
+        var (actual, context) = await sut.Pve.Home.GetCatById(id, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

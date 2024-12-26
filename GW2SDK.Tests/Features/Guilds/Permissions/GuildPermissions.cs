@@ -9,7 +9,7 @@ public class GuildPermissions
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Guilds.GetGuildPermissions();
+        var (actual, context) = await sut.Guilds.GetGuildPermissions(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

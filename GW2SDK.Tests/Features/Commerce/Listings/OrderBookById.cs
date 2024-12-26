@@ -11,7 +11,7 @@ public class OrderBookById
 
         const int id = 24;
 
-        var (actual, context) = await sut.Commerce.GetOrderBookById(id);
+        var (actual, context) = await sut.Commerce.GetOrderBookById(id, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

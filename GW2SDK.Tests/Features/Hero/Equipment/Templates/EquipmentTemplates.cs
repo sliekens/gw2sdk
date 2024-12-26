@@ -14,7 +14,8 @@ public class EquipmentTemplates
         var (actual, context) =
             await sut.Hero.Equipment.Templates.GetEquipmentTemplates(
                 character.Name,
-                accessToken.Key
+                accessToken.Key,
+                cancellationToken: TestContext.Current.CancellationToken
             );
 
         Assert.NotNull(context.Links);

@@ -12,7 +12,7 @@ public class Decorations
         using var httpClient =
             new HttpClient(new JsonLinesHttpMessageHandler("Data/decorations.jsonl.gz"));
         var sut = new Gw2Client(httpClient);
-        await foreach (var (actual, context) in sut.Pve.Home.GetDecorationsBulk())
+        await foreach (var (actual, context) in sut.Pve.Home.GetDecorationsBulk(cancellationToken: TestContext.Current.CancellationToken))
         {
             Assert.NotNull(context);
             Assert.True(actual.Id > 0);

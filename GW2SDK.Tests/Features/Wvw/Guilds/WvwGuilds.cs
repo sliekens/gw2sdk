@@ -12,7 +12,7 @@ public class WvwGuilds
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Wvw.GetWvwGuilds(region);
+        var (actual, context) = await sut.Wvw.GetWvwGuilds(region, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(context);
         Assert.NotEmpty(actual);

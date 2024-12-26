@@ -10,7 +10,7 @@ public class Professions
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, _) = await sut.Hero.Training.GetProfessions();
+        var (actual, _) = await sut.Hero.Training.GetProfessions(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(Enum.GetNames(typeof(ProfessionName)).Length, actual.Count);
 

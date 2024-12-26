@@ -16,7 +16,7 @@ public class FilesByFilter
             "map_stairs_up"
         ];
 
-        var (actual, context) = await sut.Files.GetFilesByIds(ids);
+        var (actual, context) = await sut.Files.GetFilesByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

@@ -11,7 +11,7 @@ public class Account
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = TestConfiguration.ApiKeyBasic;
 
-        var (actual, _) = await sut.Hero.Account.GetSummary(accessToken.Key);
+        var (actual, _) = await sut.Hero.Account.GetSummary(accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual.DisplayName);
         Assert.NotEmpty(actual.Access);
@@ -38,7 +38,7 @@ public class Account
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Hero.Account.GetSummary(accessToken.Key);
+        var (actual, _) = await sut.Hero.Account.GetSummary(accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual.DisplayName);
         Assert.NotEmpty(actual.Access);

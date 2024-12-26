@@ -11,7 +11,7 @@ public class UnlockedMiniatures
         var accessToken = TestConfiguration.ApiKey;
 
         var (actual, _) =
-            await sut.Hero.Equipment.Miniatures.GetUnlockedMiniatures(accessToken.Key);
+            await sut.Hero.Equipment.Miniatures.GetUnlockedMiniatures(accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);
     }

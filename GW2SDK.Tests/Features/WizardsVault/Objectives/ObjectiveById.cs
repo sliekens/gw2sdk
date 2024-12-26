@@ -11,7 +11,7 @@ public class ObjectiveById
 
         const int id = 1;
 
-        var (actual, context) = await sut.WizardsVault.GetObjectiveById(id);
+        var (actual, context) = await sut.WizardsVault.GetObjectiveById(id, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

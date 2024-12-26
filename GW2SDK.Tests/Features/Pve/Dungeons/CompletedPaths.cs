@@ -11,7 +11,7 @@ public class CompletedPaths
         var accessToken = TestConfiguration.ApiKey;
 
         // Completed paths reset every day, play some dungeons to test this properly
-        var (actual, _) = await sut.Pve.Dungeons.GetCompletedPaths(accessToken.Key);
+        var (actual, _) = await sut.Pve.Dungeons.GetCompletedPaths(accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.All(actual, entry => Assert.Contains(entry, ReferenceData.Paths));
     }

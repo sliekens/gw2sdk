@@ -16,7 +16,7 @@ public class TraitsByFilter
             222
         ];
 
-        var (actual, context) = await sut.Hero.Builds.GetTraitsByIds(ids);
+        var (actual, context) = await sut.Hero.Builds.GetTraitsByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

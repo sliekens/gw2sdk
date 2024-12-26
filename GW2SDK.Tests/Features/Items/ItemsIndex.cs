@@ -9,7 +9,7 @@ public class ItemsIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Items.GetItemsIndex();
+        var (actual, context) = await sut.Items.GetItemsIndex(TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

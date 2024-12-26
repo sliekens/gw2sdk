@@ -12,7 +12,7 @@ public class Build
         var accessToken = TestConfiguration.ApiKey;
 
         const int tab = 1;
-        var (actual, _) = await sut.Hero.Builds.GetBuild(tab, character.Name, accessToken.Key);
+        var (actual, _) = await sut.Hero.Builds.GetBuild(tab, character.Name, accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(actual);
         Assert.NotNull(actual.Build);

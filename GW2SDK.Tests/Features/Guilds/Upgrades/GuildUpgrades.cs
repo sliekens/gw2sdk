@@ -10,7 +10,7 @@ public class GuildUpgrades
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Guilds.GetGuildUpgrades();
+        var (actual, context) = await sut.Guilds.GetGuildUpgrades(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

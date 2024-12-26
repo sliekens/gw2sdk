@@ -11,7 +11,7 @@ public class RecipesIndexByOutputItem
 
         const int ironIngotItemId = 19683;
         var (actual, context) =
-            await sut.Hero.Crafting.Recipes.GetRecipesIndexByOutputItemId(ironIngotItemId);
+            await sut.Hero.Crafting.Recipes.GetRecipesIndexByOutputItemId(ironIngotItemId, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

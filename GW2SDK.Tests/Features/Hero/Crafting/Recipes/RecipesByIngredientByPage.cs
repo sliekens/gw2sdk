@@ -15,7 +15,8 @@ public class RecipesByIngredientByPage
             await sut.Hero.Crafting.Recipes.GetRecipesByIngredientItemIdByPage(
                 visionCrystal,
                 0,
-                pageSize
+                pageSize,
+                cancellationToken: TestContext.Current.CancellationToken
             );
 
         Assert.NotNull(context.Links);

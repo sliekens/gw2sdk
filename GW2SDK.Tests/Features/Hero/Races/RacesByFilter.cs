@@ -17,7 +17,7 @@ public class RacesByFilter
             RaceName.Norn
         ];
 
-        var (actual, context) = await sut.Hero.Races.GetRacesByNames(names);
+        var (actual, context) = await sut.Hero.Races.GetRacesByNames(names, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(names.Count, context.ResultCount);
         Assert.True(context.ResultTotal > names.Count);

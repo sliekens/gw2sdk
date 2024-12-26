@@ -9,7 +9,7 @@ public class NoveltiesIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.Equipment.Novelties.GetNoveltiesIndex();
+        var (actual, context) = await sut.Hero.Equipment.Novelties.GetNoveltiesIndex(TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

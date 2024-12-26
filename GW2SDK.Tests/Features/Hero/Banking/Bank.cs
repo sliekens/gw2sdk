@@ -10,7 +10,7 @@ public class Bank
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Hero.Bank.GetBank(accessToken.Key);
+        var (actual, _) = await sut.Hero.Bank.GetBank(accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual.Items);
         Assert.Equal(0, actual.Items.Count % 30);

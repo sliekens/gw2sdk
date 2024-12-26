@@ -9,7 +9,7 @@ public class AstralRewards
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.WizardsVault.GetAstralRewards();
+        var (actual, context) = await sut.WizardsVault.GetAstralRewards(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

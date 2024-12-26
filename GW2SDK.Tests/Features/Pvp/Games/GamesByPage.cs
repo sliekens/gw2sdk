@@ -11,7 +11,7 @@ public class GamesByPage
         var accessToken = TestConfiguration.ApiKey;
 
         const int pageSize = 3;
-        var (actual, context) = await sut.Pvp.GetGamesByPage(0, pageSize, accessToken.Key);
+        var (actual, context) = await sut.Pvp.GetGamesByPage(0, pageSize, accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);

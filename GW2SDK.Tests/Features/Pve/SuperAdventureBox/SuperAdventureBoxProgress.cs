@@ -13,7 +13,8 @@ public class SuperAdventureBoxProgress
 
         var (actual, _) = await sut.Pve.SuperAdventureBox.GetSuperAdventureBoxProgress(
             character.Name,
-            accessToken.Key
+            accessToken.Key,
+            cancellationToken: TestContext.Current.CancellationToken
         );
 
         Assert.NotEmpty(actual.Zones);

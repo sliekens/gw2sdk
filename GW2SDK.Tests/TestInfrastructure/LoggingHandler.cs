@@ -1,5 +1,4 @@
 ﻿using System.IO.Compression;
-using Xunit.Abstractions;
 
 namespace GuildWars2.Tests.TestInfrastructure;
 

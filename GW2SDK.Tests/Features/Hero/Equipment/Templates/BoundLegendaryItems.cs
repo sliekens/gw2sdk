@@ -11,7 +11,7 @@ public class BoundLegendaryItems
         var accessToken = TestConfiguration.ApiKey;
 
         var (actual, _) =
-            await sut.Hero.Equipment.Templates.GetBoundLegendaryItems(accessToken.Key);
+            await sut.Hero.Equipment.Templates.GetBoundLegendaryItems(accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);
     }

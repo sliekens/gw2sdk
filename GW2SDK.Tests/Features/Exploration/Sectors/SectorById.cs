@@ -20,7 +20,8 @@ public class SectorById
             floorId,
             regionId,
             mapId,
-            sectorId
+            sectorId,
+            cancellationToken: TestContext.Current.CancellationToken
         );
 
         Assert.NotNull(context);

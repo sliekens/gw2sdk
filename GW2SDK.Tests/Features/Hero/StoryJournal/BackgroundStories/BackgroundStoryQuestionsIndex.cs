@@ -9,7 +9,7 @@ public class BackgroundStoryQuestionsIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.StoryJournal.GetBackgroundStoryQuestionsIndex();
+        var (actual, context) = await sut.Hero.StoryJournal.GetBackgroundStoryQuestionsIndex(TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

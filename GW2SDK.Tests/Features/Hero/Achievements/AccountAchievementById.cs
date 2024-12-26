@@ -13,7 +13,7 @@ public class AccountAchievementById
         const int id = 1;
 
         var (actual, context) =
-            await sut.Hero.Achievements.GetAccountAchievementById(id, accessToken.Key);
+            await sut.Hero.Achievements.GetAccountAchievementById(id, accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

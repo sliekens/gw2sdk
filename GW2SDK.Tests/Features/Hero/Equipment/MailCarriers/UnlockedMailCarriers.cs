@@ -11,11 +11,11 @@ public class UnlockedMailCarriers
         var accessToken = TestConfiguration.ApiKey;
 
         var (actual, _) =
-            await sut.Hero.Equipment.MailCarriers.GetUnlockedMailCarriers(accessToken.Key);
+            await sut.Hero.Equipment.MailCarriers.GetUnlockedMailCarriers(accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);
 
-        var (carriers, _) = await sut.Hero.Equipment.MailCarriers.GetMailCarriersByIds(actual);
+        var (carriers, _) = await sut.Hero.Equipment.MailCarriers.GetMailCarriersByIds(actual, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(actual.Count, carriers.Count);
         Assert.All(carriers, carrier => Assert.Contains(carrier.Id, actual));

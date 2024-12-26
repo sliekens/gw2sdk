@@ -9,7 +9,7 @@ public class UpgradesIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Wvw.GetUpgradesIndex();
+        var (actual, context) = await sut.Wvw.GetUpgradesIndex(TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

@@ -9,7 +9,7 @@ public class MailCarriers
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.Equipment.MailCarriers.GetMailCarriers();
+        var (actual, context) = await sut.Hero.Equipment.MailCarriers.GetMailCarriers(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultTotal, actual.Count);
         Assert.All(

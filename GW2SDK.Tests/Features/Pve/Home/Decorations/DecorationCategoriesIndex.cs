@@ -9,7 +9,7 @@ public class DecorationCategoriesIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Pve.Home.GetDecorationCategoriesIndex();
+        var (actual, context) = await sut.Pve.Home.GetDecorationCategoriesIndex(TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

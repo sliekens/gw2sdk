@@ -15,7 +15,7 @@ public class FloorById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Exploration.GetFloorById(continentId, floorId);
+        var (actual, context) = await sut.Exploration.GetFloorById(continentId, floorId, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(context);
         Assert.Equal(floorId, actual.Id);

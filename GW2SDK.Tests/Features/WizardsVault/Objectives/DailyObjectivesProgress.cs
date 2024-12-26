@@ -10,7 +10,7 @@ public class DailyObjectivesProgress
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = TestConfiguration.ApiKey;
 
-        var (actual, context) = await sut.WizardsVault.GetDailyObjectivesProgress(accessToken.Key);
+        var (actual, context) = await sut.WizardsVault.GetDailyObjectivesProgress(accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.True(actual.RewardItemId > 0);
         Assert.True(actual.RewardAcclaim > 0);

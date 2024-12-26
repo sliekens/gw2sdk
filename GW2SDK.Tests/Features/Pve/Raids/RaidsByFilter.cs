@@ -16,7 +16,7 @@ public class RaidsByFilter
             "hall_of_chains"
         ];
 
-        var (actual, context) = await sut.Pve.Raids.GetRaidsByIds(ids);
+        var (actual, context) = await sut.Pve.Raids.GetRaidsByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

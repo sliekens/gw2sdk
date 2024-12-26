@@ -16,7 +16,7 @@ public class RecipesByFilter
             3
         ];
 
-        var (actual, context) = await sut.Hero.Crafting.Recipes.GetRecipesByIds(ids);
+        var (actual, context) = await sut.Hero.Crafting.Recipes.GetRecipesByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

@@ -10,7 +10,7 @@ public class UnlockedDecorations
         var sut = Composer.Resolve<Gw2Client>();
         var token = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Pve.Home.GetUnlockedDecorations(token.Key);
+        var (actual, _) = await sut.Pve.Home.GetUnlockedDecorations(token.Key, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);
         Assert.All(actual, entry =>

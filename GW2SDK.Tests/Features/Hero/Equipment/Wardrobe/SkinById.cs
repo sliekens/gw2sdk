@@ -11,7 +11,7 @@ public class SkinById
 
         const int id = 1;
 
-        var (actual, context) = await sut.Hero.Equipment.Wardrobe.GetSkinById(id);
+        var (actual, context) = await sut.Hero.Equipment.Wardrobe.GetSkinById(id, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

@@ -1,6 +1,5 @@
 ﻿using GuildWars2.Guilds.Logs;
 using GuildWars2.Tests.TestInfrastructure;
-using Xunit.Abstractions;
 
 namespace GuildWars2.Tests.Features.Guilds;
 
@@ -13,10 +12,10 @@ public class GuildLog(ITestOutputHelper outputHelper)
         var sut = Composer.Resolve<Gw2Client>();
         var guildLeader = TestConfiguration.TestGuildLeader;
 
-        var (account, _) = await sut.Hero.Account.GetSummary(guildLeader.Token);
+        var (account, _) = await sut.Hero.Account.GetSummary(guildLeader.Token, cancellationToken: TestContext.Current.CancellationToken);
         foreach (var guildId in account.LeaderOfGuildIds!)
         {
-            var (actual, _) = await sut.Guilds.GetGuildLog(guildId, guildLeader.Token);
+            var (actual, _) = await sut.Guilds.GetGuildLog(guildId, guildLeader.Token, cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.NotEmpty(actual);
             Assert.All(
@@ -60,7 +59,8 @@ public class GuildLog(ITestOutputHelper outputHelper)
                 var (range, _) = await sut.Guilds.GetGuildLog(
                     guildId,
                     skipToken,
-                    guildLeader.Token
+                    guildLeader.Token,
+                    cancellationToken: TestContext.Current.CancellationToken
                 );
                 Assert.True(range.Count >= 3);
                 Assert.All(range, log => Assert.True(log.Id > skipToken));

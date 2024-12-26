@@ -10,7 +10,7 @@ public class CharacterNames
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = TestConfiguration.ApiKey;
 
-        var (actual, context) = await sut.Hero.Account.GetCharactersIndex(accessToken.Key);
+        var (actual, context) = await sut.Hero.Account.GetCharactersIndex(accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

@@ -9,7 +9,7 @@ public class StoryStepsIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.StoryJournal.GetStoryStepsIndex();
+        var (actual, context) = await sut.Hero.StoryJournal.GetStoryStepsIndex(TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

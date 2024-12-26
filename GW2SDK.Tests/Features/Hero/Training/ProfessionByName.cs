@@ -12,7 +12,7 @@ public class ProfessionByName
 
         const ProfessionName name = ProfessionName.Engineer;
 
-        var (actual, _) = await sut.Hero.Training.GetProfessionByName(name);
+        var (actual, _) = await sut.Hero.Training.GetProfessionByName(name, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(name, actual.Id);
     }

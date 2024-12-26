@@ -35,16 +35,17 @@ public class SubtokenInfo
             accessToken.Key,
             subtokenPermissions,
             expiresAt,
-            urls
+            urls,
+            cancellationToken: TestContext.Current.CancellationToken
         );
 
         #endregion
 
         // BUG: /v2/tokeninfo sometimes fails with "Invalid access token" for recently created subtokens
         // I guess this is a clock synchronization problem, because adding a delay works
-        await Task.Delay(3000);
+        await Task.Delay(3000, TestContext.Current.CancellationToken);
 
-        var (actual, _) = await sut.Tokens.GetTokenInfo(createdSubtoken.Subtoken);
+        var (actual, _) = await sut.Tokens.GetTokenInfo(createdSubtoken.Subtoken, cancellationToken: TestContext.Current.CancellationToken);
 
         var subtoken = Assert.IsType<GuildWars2.Authorization.SubtokenInfo>(actual);
 

@@ -11,10 +11,10 @@ public class GamesByFilter
         var accessToken = TestConfiguration.ApiKey;
 
         // No way other way to get a game ID than to list them all first
-        var ids = await sut.Pvp.GetGamesIndex(accessToken.Key).ValueOnly();
+        var ids = await sut.Pvp.GetGamesIndex(accessToken.Key, cancellationToken: TestContext.Current.CancellationToken).ValueOnly();
 
         // Now that we have game IDs, we can get the games
-        var (actual, context) = await sut.Pvp.GetGamesByIds(ids, accessToken.Key);
+        var (actual, context) = await sut.Pvp.GetGamesByIds(ids, accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.Equal(ids.Count, context.ResultTotal);

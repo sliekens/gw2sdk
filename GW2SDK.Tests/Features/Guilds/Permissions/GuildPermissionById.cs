@@ -11,7 +11,7 @@ public class GuildPermissionById
 
         const string id = "StartingRole";
 
-        var (actual, context) = await sut.Guilds.GetGuildPermissionById(id);
+        var (actual, context) = await sut.Guilds.GetGuildPermissionById(id, cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
