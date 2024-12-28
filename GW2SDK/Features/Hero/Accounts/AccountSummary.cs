@@ -50,13 +50,20 @@ public sealed record AccountSummary
     public required int? MonthlyAchievementPoints { get; init; }
 
     /// <summary>The account's personal World vs. World rank. Requires the 'progression' scope.</summary>
-    [Obsolete("Property 'WvwRank' was moved to 'Wvw.Rank'. The old property is only kept for backwards compatibility. The old property is now an alias for the new property and might be removed in the future.")]
+    [Obsolete(
+        "Property 'WvwRank' was moved to 'Wvw.Rank'. The old property is only kept for backwards compatibility. The old property is now an alias for the new property and might be removed in the future."
+    )]
     public int? WvwRank
     {
         get => Wvw.Rank;
-        init => Wvw = Wvw is not null
-            ? Wvw with { Rank = value }
-            : new AccountWvwSummary { Rank = value, TeamId = null };
+        init =>
+            Wvw = Wvw is not null
+                ? Wvw with { Rank = value }
+                : new AccountWvwSummary
+                {
+                    Rank = value,
+                    TeamId = null
+                };
     }
 
     /// <summary>The account's WvW team and personal rank.</summary>

@@ -32,7 +32,8 @@ public sealed class EmotesClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/emotes", accessToken);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
@@ -56,7 +57,8 @@ public sealed class EmotesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/emotes");
         requestBuilder.Query.AddAllIds();
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -74,7 +76,8 @@ public sealed class EmotesClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/emotes");
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
@@ -96,7 +99,8 @@ public sealed class EmotesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/emotes");
         requestBuilder.Query.AddId(emoteId);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -119,7 +123,8 @@ public sealed class EmotesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/emotes");
         requestBuilder.Query.AddIds(emoteIds);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -144,7 +149,8 @@ public sealed class EmotesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/emotes");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;

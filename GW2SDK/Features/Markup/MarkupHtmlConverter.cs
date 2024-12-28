@@ -2,15 +2,12 @@
 
 namespace GuildWars2.Markup;
 
-/// <summary>
-/// Provides functionality to convert a <see cref="RootNode"/> to its HTML representation.
-/// </summary>
+/// <summary>Provides functionality to convert a <see cref="RootNode" /> to its HTML representation.</summary>
 [PublicAPI]
 public sealed class MarkupHtmlConverter
 {
-    /// <summary>
-    /// Converts a <see cref="RootNode"/> to its HTML representation using the <see cref="MarkupColorName.DefaultColorMap"/>.
-    /// </summary>
+    /// <summary>Converts a <see cref="RootNode" /> to its HTML representation using the
+    /// <see cref="MarkupColorName.DefaultColorMap" />.</summary>
     /// <param name="root">The root node of the markup syntax tree to convert.</param>
     /// <returns>A string containing the HTML representation of the markup syntax tree.</returns>
     public string Convert(RootNode root)
@@ -18,7 +15,7 @@ public sealed class MarkupHtmlConverter
         return Convert(root, MarkupColorName.DefaultColorMap);
     }
 
-    /// <summary>Converts a <see cref="RootNode"/> and its children to an HTML string representation using a custom color map.</summary>
+    /// <summary>Converts a <see cref="RootNode" /> and its children to an HTML string representation using a custom color map.</summary>
     /// <param name="root">The root node of the markup syntax tree to convert.</param>
     /// <param name="colorMap">A dictionary mapping color names to their corresponding HTML color codes.</param>
     /// <returns>A string containing the HTML representation of the markup syntax tree.</returns>
@@ -31,7 +28,11 @@ public sealed class MarkupHtmlConverter
         else if (colorMap != MarkupColorName.DefaultColorMap)
         {
             // Ensure the key comparison is case-insensitive
-            colorMap = colorMap.ToDictionary(pair => pair.Key, pair => pair.Value, StringComparer.OrdinalIgnoreCase);
+            colorMap = colorMap.ToDictionary(
+                pair => pair.Key,
+                pair => pair.Value,
+                StringComparer.OrdinalIgnoreCase
+            );
         }
 
         var builder = new StringBuilder();
@@ -63,14 +64,13 @@ public sealed class MarkupHtmlConverter
                 {
                     return $"<span style=\"color: {coloredText.Color}\">{content}</span>";
                 }
-                else if (colorMap.TryGetValue(coloredText.Color, out var color))
+
+                if (colorMap.TryGetValue(coloredText.Color, out var color))
                 {
                     return $"<span style=\"color: {color}\">{content}</span>";
                 }
-                else
-                {
-                    return content;
-                }
+
+                return content;
             default:
                 return "";
         }

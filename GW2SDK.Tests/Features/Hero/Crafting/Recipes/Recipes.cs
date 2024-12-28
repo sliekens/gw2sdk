@@ -13,7 +13,9 @@ public class Recipes
         using var httpClient =
             new HttpClient(new JsonLinesHttpMessageHandler("Data/recipes.jsonl.gz"));
         var sut = new Gw2Client(httpClient);
-        await foreach (var (actual, context) in sut.Hero.Crafting.Recipes.GetRecipesBulk(cancellationToken: TestContext.Current.CancellationToken))
+        await foreach (var (actual, context) in sut.Hero.Crafting.Recipes.GetRecipesBulk(
+                cancellationToken: TestContext.Current.CancellationToken
+            ))
         {
             Assert.NotNull(context);
             Assert.True(actual.Id > 0);

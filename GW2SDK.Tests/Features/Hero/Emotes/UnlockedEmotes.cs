@@ -10,7 +10,10 @@ public class UnlockedEmotes
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Hero.Emotes.GetUnlockedEmotes(accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, _) = await sut.Hero.Emotes.GetUnlockedEmotes(
+            accessToken.Key,
+            TestContext.Current.CancellationToken
+        );
 
         // Can be empty if you haven't unlocked any emotes
         // The best we can do is verify that there are no unexpected emotes
@@ -33,7 +36,7 @@ public class UnlockedEmotes
                     "Shiverplus",
                     "shuffle",
                     "step",
-                    "Stretch",
+                    "Stretch"
                 }
             )
         );

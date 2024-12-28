@@ -45,8 +45,9 @@ public sealed record ItemSlot
 
     /// <summary>Gets a chat link object for this item slot.</summary>
     /// <returns>The chat link as an object.</returns>
-    public ItemLink GetChatLink() =>
-        new()
+    public ItemLink GetChatLink()
+    {
+        return new ItemLink
         {
             ItemId = Id,
             Count = Count,
@@ -54,4 +55,5 @@ public sealed record ItemSlot
             SuffixItemId = SuffixItemId,
             SecondarySuffixItemId = SecondarySuffixItemId
         };
+    }
 }

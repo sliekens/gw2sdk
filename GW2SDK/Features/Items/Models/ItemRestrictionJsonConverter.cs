@@ -7,13 +7,21 @@ namespace GuildWars2.Items;
 
 internal sealed class ItemRestrictionJsonConverter : JsonConverter<ItemRestriction>
 {
-    public override ItemRestriction Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override ItemRestriction Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
-        using JsonDocument json = JsonDocument.ParseValue(ref reader);
+        using var json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
-    public override void Write(Utf8JsonWriter writer, ItemRestriction value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        ItemRestriction value,
+        JsonSerializerOptions options
+    )
     {
         Write(writer, value);
     }
@@ -22,10 +30,16 @@ internal sealed class ItemRestrictionJsonConverter : JsonConverter<ItemRestricti
     {
         return new ItemRestriction
         {
-            Races = value.GetProperty("races").GetSet(static value => value.GetEnum<RaceName>()),
-            Professions = value.GetProperty("professions").GetSet(static value => value.GetEnum<ProfessionName>()),
-            BodyTypes = value.GetProperty("body_types").GetSet(static value => value.GetEnum<BodyType>()),
-            Other = value.GetProperty("other").GetList(static value => value.GetStringRequired())
+            Races =
+                value.GetProperty("races").GetSet(static value => value.GetEnum<RaceName>()),
+            Professions =
+                value.GetProperty("professions")
+                    .GetSet(static value => value.GetEnum<ProfessionName>()),
+            BodyTypes =
+                value.GetProperty("body_types")
+                    .GetSet(static value => value.GetEnum<BodyType>()),
+            Other = value.GetProperty("other")
+                .GetList(static value => value.GetStringRequired())
         };
     }
 

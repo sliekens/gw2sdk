@@ -35,5 +35,8 @@ public sealed class LinkValue
 
     /// <summary>Returns the link value as a string.</summary>
     /// <returns>A string that represents the current object.</returns>
-    public override string ToString() => $"<{Target}>; rel={RelationType}";
+    public override string ToString()
+    {
+        return $"<{Target}>; rel={RelationType}";
+    }
 }

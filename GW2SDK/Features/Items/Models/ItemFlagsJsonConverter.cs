@@ -6,13 +6,21 @@ namespace GuildWars2.Items;
 
 internal class ItemFlagsJsonConverter : JsonConverter<ItemFlags>
 {
-    public override ItemFlags? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override ItemFlags? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
-        using JsonDocument json = JsonDocument.ParseValue(ref reader);
+        using var json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
-    public override void Write(Utf8JsonWriter writer, ItemFlags value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        ItemFlags value,
+        JsonSerializerOptions options
+    )
     {
         Write(writer, value);
     }

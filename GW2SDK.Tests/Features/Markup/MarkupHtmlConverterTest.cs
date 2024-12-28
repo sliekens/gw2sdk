@@ -7,7 +7,8 @@ public class MarkupHtmlConverterTest
     [Fact]
     public void Converts_color_tags_to_span_elements()
     {
-        var input = "This is <c=@flavor>flavor</c> text and this is <c=#ff0000>inline styled</c> text.";
+        var input =
+            "This is <c=@flavor>flavor</c> text and this is <c=#ff0000>inline styled</c> text.";
 
         var actual = MarkupConverter.ToHtml(input);
 
@@ -24,10 +25,7 @@ public class MarkupHtmlConverterTest
 
         var actual = MarkupConverter.ToHtml(input);
 
-        Assert.Equal(
-            "Line 1.<br>Line 2.<br>Line 3.<br>Line 4.",
-            actual
-        );
+        Assert.Equal("Line 1.<br>Line 2.<br>Line 3.<br>Line 4.", actual);
     }
 
     [Fact]
@@ -37,9 +35,6 @@ public class MarkupHtmlConverterTest
 
         var actual = MarkupConverter.ToHtml(input);
 
-        Assert.Equal(
-            "Line 1.<br>Line 2.<br>Line 3.<br>Line 4.",
-            actual
-        );
+        Assert.Equal("Line 1.<br>Line 2.<br>Line 3.<br>Line 4.", actual);
     }
 }

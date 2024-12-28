@@ -2,15 +2,11 @@
 
 namespace GuildWars2.Markup;
 
-/// <summary>
-/// Represents a parser that converts a sequence of tokens into a hierarchical node structure.
-/// </summary>
+/// <summary>Represents a parser that converts a sequence of tokens into a hierarchical node structure.</summary>
 [PublicAPI]
 public sealed class MarkupParser
 {
-    /// <summary>
-    /// Parses a sequence of tokens into a hierarchical node structure.
-    /// </summary>
+    /// <summary>Parses a sequence of tokens into a hierarchical node structure.</summary>
     /// <returns>The root node of the parsed structure.</returns>
     public RootNode Parse(IEnumerable<MarkupToken> input)
     {
@@ -46,7 +42,9 @@ public sealed class MarkupParser
             default:
                 iterator.Advance();
                 return null;
-        };
+        }
+
+        ;
     }
 
     private static MarkupNode? ParseVoidNode(MarkupTokenIterator iterator)
@@ -81,7 +79,8 @@ public sealed class MarkupParser
 
             var node = new ColoredTextNode(iterator.Current.Value);
             iterator.Advance();
-            while (iterator.Current?.Type != MarkupTokenType.TagClose && iterator.Current?.Type != MarkupTokenType.End)
+            while (iterator.Current?.Type != MarkupTokenType.TagClose
+                && iterator.Current?.Type != MarkupTokenType.End)
             {
                 var nextChild = ParseNode(iterator);
                 if (nextChild is ColoredTextNode { Color: "" })

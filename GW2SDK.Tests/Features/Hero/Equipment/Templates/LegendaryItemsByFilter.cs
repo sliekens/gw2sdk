@@ -11,12 +11,14 @@ public class LegendaryItemsByFilter
 
         HashSet<int> ids =
         [
-            83162,
-            93105,
+            83162, 93105,
             80111
         ];
 
-        var (actual, context) = await sut.Hero.Equipment.Templates.GetLegendaryItemsByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Hero.Equipment.Templates.GetLegendaryItemsByIds(
+            ids,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

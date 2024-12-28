@@ -1,4 +1,3 @@
-
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using GuildWars2.Json;
@@ -9,13 +8,21 @@ internal sealed class MiniatureJsonConverter : JsonConverter<Miniature>
 {
     public const string DiscriminatorValue = "miniature";
 
-    public override Miniature? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override Miniature? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         using var json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
-    public override void Write(Utf8JsonWriter writer, Miniature value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        Miniature value,
+        JsonSerializerOptions options
+    )
     {
         Write(writer, value);
     }
@@ -24,7 +31,9 @@ internal sealed class MiniatureJsonConverter : JsonConverter<Miniature>
     {
         if (!json.GetProperty(ItemJsonConverter.DiscriminatorName).ValueEquals(DiscriminatorValue))
         {
-            ThrowHelper.ThrowInvalidDiscriminator(json.GetProperty(ItemJsonConverter.DiscriminatorName).GetString());
+            ThrowHelper.ThrowInvalidDiscriminator(
+                json.GetProperty(ItemJsonConverter.DiscriminatorName).GetString()
+            );
         }
 
         return new Miniature
@@ -35,7 +44,8 @@ internal sealed class MiniatureJsonConverter : JsonConverter<Miniature>
             Level = json.GetProperty("level").GetInt32(),
             Rarity = json.GetProperty("rarity").GetEnum<Rarity>(),
             VendorValue = json.GetProperty("vendor_value").GetInt32(),
-            GameTypes = json.GetProperty("game_types").GetList(static value => value.GetEnum<GameType>()),
+            GameTypes =
+                json.GetProperty("game_types").GetList(static value => value.GetEnum<GameType>()),
             Flags = ItemFlagsJsonConverter.Read(json.GetProperty("flags")),
             Restrictions = ItemRestrictionJsonConverter.Read(json.GetProperty("restrictions")),
             ChatLink = json.GetProperty("chat_link").GetStringRequired(),

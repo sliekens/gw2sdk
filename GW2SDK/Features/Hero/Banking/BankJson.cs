@@ -6,6 +6,8 @@ namespace GuildWars2.Hero.Banking;
 
 internal static class BankJson
 {
-    public static Bank GetBank(this JsonElement json) =>
-        new() { Items = json.GetList(static value => value.GetItemSlot()) };
+    public static Bank GetBank(this JsonElement json)
+    {
+        return new Bank { Items = json.GetList(static value => value.GetItemSlot()) };
+    }
 }

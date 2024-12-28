@@ -14,7 +14,8 @@ public class MarkupParserTest
         var actual = parser.Parse(tokens);
 
         Assert.NotNull(actual);
-        Assert.Collection(actual.Children,
+        Assert.Collection(
+            actual.Children,
             node =>
             {
                 var text = Assert.IsType<TextNode>(node);
@@ -24,7 +25,8 @@ public class MarkupParserTest
             {
                 var text = Assert.IsType<TextNode>(node);
                 Assert.Equal(" Dye kits", text.Text);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -37,12 +39,14 @@ public class MarkupParserTest
         var actual = parser.Parse(tokens);
 
         Assert.NotNull(actual);
-        Assert.Collection(actual.Children,
+        Assert.Collection(
+            actual.Children,
             node =>
             {
                 var coloredText = Assert.IsType<ColoredTextNode>(node);
                 Assert.Equal("@reminder", coloredText.Color);
-                Assert.Collection(coloredText.Children,
+                Assert.Collection(
+                    coloredText.Children,
                     node =>
                     {
                         var text = Assert.IsType<TextNode>(node);
@@ -50,7 +54,7 @@ public class MarkupParserTest
                     }
                 );
             }
-          );
+        );
     }
 
     [Fact]
@@ -63,22 +67,28 @@ public class MarkupParserTest
         var actual = parser.Parse(tokens);
 
         Assert.NotNull(actual);
-        Assert.Collection(actual.Children,
+        Assert.Collection(
+            actual.Children,
             node =>
             {
                 var coloredText = Assert.IsType<ColoredTextNode>(node);
                 Assert.Equal("@flavor", coloredText.Color);
-                Assert.Collection(coloredText.Children,
+                Assert.Collection(
+                    coloredText.Children,
                     node =>
                     {
                         var text = Assert.IsType<TextNode>(node);
-                        Assert.Equal("A gift given in gratitude from the leaders of Tyria.", text.Text);
+                        Assert.Equal(
+                            "A gift given in gratitude from the leaders of Tyria.",
+                            text.Text
+                        );
                     }
                 );
             },
             node =>
             {
                 var lineBreak = Assert.IsType<LineBreakNode>(node);
-            });
+            }
+        );
     }
 }

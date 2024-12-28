@@ -29,7 +29,11 @@ public class GameLinkTest
 
         sut.Subscribe(actual);
 
-        await actual.WaitHandle.WaitAsync(TimeSpan.FromSeconds(3), TimeProvider.System, TestContext.Current.CancellationToken);
+        await actual.WaitHandle.WaitAsync(
+            TimeSpan.FromSeconds(3),
+            TimeProvider.System,
+            TestContext.Current.CancellationToken
+        );
         Assert.True(
             actual.Last.UiTick != actual.First.UiTick,
             "GameLink should not re-publish the same tick twice"

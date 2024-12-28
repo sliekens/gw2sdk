@@ -9,7 +9,9 @@ public class MapChests
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Pve.MapChests.GetMapChests(cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Pve.MapChests.GetMapChests(
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

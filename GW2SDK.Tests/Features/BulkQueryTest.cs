@@ -90,8 +90,7 @@ public class BulkQueryTest
             cancellationToken.ThrowIfCancellationRequested();
             var keys = chunk.ToList();
             Assert.Equal(index, keys);
-            IReadOnlyCollection<StubRecord>
-                result = keys.Select(id => new StubRecord(id)).ToList();
+            IReadOnlyCollection<StubRecord> result = keys.Select(id => new StubRecord(id)).ToList();
             return Task.FromResult(result);
         }
 

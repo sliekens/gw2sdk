@@ -34,11 +34,21 @@ internal class Program
             {
                 // Scroll down to see the Gw2Resiliency class which holds the resiliency strategies
                 resiliencePipelineBuilder
-                    .AddTimeout(Gw2Resiliency.TotalTimeoutStrategy) // configure the total timeout for the entire request, including retries
-                    .AddRetry(Gw2Resiliency.RetryStrategy) // configure delayed retries for  failed requests
-                    .AddCircuitBreaker(Gw2Resiliency.CircuitBreakerStrategy) // configure blocking requests after too many failures
-                    .AddHedging(Gw2Resiliency.HedgingStrategy) // configure hedging for slow requests and for certain errors
-                    .AddTimeout(Gw2Resiliency.AttemptTimeoutStrategy); // configure the timeout for each individual request attempt
+                    .AddTimeout(
+                        Gw2Resiliency.TotalTimeoutStrategy
+                    ) // configure the total timeout for the entire request, including retries
+                    .AddRetry(
+                        Gw2Resiliency.RetryStrategy
+                    ) // configure delayed retries for  failed requests
+                    .AddCircuitBreaker(
+                        Gw2Resiliency.CircuitBreakerStrategy
+                    ) // configure blocking requests after too many failures
+                    .AddHedging(
+                        Gw2Resiliency.HedgingStrategy
+                    ) // configure hedging for slow requests and for certain errors
+                    .AddTimeout(
+                        Gw2Resiliency.AttemptTimeoutStrategy
+                    ); // configure the timeout for each individual request attempt
             }
         );
 
@@ -80,7 +90,6 @@ internal class Program
     }
 }
 
-
 // Static class to hold the resiliency strategies
 // 
 // Usage:
@@ -105,7 +114,8 @@ public static class Gw2Resiliency
         UseJitter = true,
         ShouldHandle = static async attempt => attempt.Outcome switch
         {
-            { Exception: OperationCanceledException } => !attempt.Context.CancellationToken.IsCancellationRequested,
+            { Exception: OperationCanceledException } => !attempt.Context.CancellationToken
+                .IsCancellationRequested,
             { Exception: HttpRequestException } => true,
             { Exception: TimeoutRejectedException } => true,
             { Exception: BrokenCircuitException } => true,
@@ -113,12 +123,14 @@ public static class Gw2Resiliency
             { Result.StatusCode: TooManyRequests } => true,
             { Result.StatusCode: InternalServerError } => true,
             { Result.StatusCode: BadGateway } => true,
-            { Result.StatusCode: ServiceUnavailable } => await GetText(attempt.Outcome) != "API not active",
+            { Result.StatusCode: ServiceUnavailable } => await GetText(attempt.Outcome)
+                != "API not active",
             { Result.StatusCode: GatewayTimeout } => true,
 
             // Sometimes the API returns weird data, also treat as internal errors
             { Result.IsSuccessStatusCode: false, Result.Content.Headers.ContentLength: 0 } => true,
-            { Result.IsSuccessStatusCode: false } => await GetText(attempt.Outcome) is "endpoint requires authentication"
+            { Result.IsSuccessStatusCode: false } => await GetText(attempt.Outcome) is
+                "endpoint requires authentication"
                 or "unknown error"
                 or "ErrBadData"
                 or "ErrTimeout",
@@ -127,30 +139,36 @@ public static class Gw2Resiliency
         }
     };
 
-    public static readonly CircuitBreakerStrategyOptions<HttpResponseMessage> CircuitBreakerStrategy = new()
-    {
-        ShouldHandle = static async attempt => attempt.Outcome switch
+    public static readonly CircuitBreakerStrategyOptions<HttpResponseMessage>
+        CircuitBreakerStrategy = new()
         {
-            { Exception: OperationCanceledException } => !attempt.Context.CancellationToken.IsCancellationRequested,
-            { Exception: HttpRequestException } => true,
-            { Exception: TimeoutRejectedException } => true,
-            { Result.StatusCode: RequestTimeout } => true,
-            { Result.StatusCode: TooManyRequests } => true,
-            { Result.StatusCode: InternalServerError } => true,
-            { Result.StatusCode: BadGateway } => true,
-            { Result.StatusCode: ServiceUnavailable } => await GetText(attempt.Outcome) != "API not active",
-            { Result.StatusCode: GatewayTimeout } => true,
+            ShouldHandle = static async attempt => attempt.Outcome switch
+            {
+                { Exception: OperationCanceledException } => !attempt.Context.CancellationToken
+                    .IsCancellationRequested,
+                { Exception: HttpRequestException } => true,
+                { Exception: TimeoutRejectedException } => true,
+                { Result.StatusCode: RequestTimeout } => true,
+                { Result.StatusCode: TooManyRequests } => true,
+                { Result.StatusCode: InternalServerError } => true,
+                { Result.StatusCode: BadGateway } => true,
+                { Result.StatusCode: ServiceUnavailable } => await GetText(attempt.Outcome)
+                    != "API not active",
+                { Result.StatusCode: GatewayTimeout } => true,
 
-            // Sometimes the API returns weird data, also treat as internal errors
-            { Result.IsSuccessStatusCode: false, Result.Content.Headers.ContentLength: 0 } => true,
-            { Result.IsSuccessStatusCode: false } => await GetText(attempt.Outcome) is "endpoint requires authentication"
-                or "unknown error"
-                or "ErrBadData"
-                or "ErrTimeout",
+                // Sometimes the API returns weird data, also treat as internal errors
+                {
+                    Result.IsSuccessStatusCode: false, Result.Content.Headers.ContentLength: 0
+                } => true,
+                { Result.IsSuccessStatusCode: false } => await GetText(attempt.Outcome) is
+                    "endpoint requires authentication"
+                    or "unknown error"
+                    or "ErrBadData"
+                    or "ErrTimeout",
 
-            _ => false
-        }
-    };
+                _ => false
+            }
+        };
 
     // The API can be slow or misbehave,
     // Use a hedging strategy to perform immediate retries
@@ -170,7 +188,8 @@ public static class Gw2Resiliency
 
             // Sometimes the API returns weird data, also treat as internal errors
             { Result.IsSuccessStatusCode: false, Result.Content.Headers.ContentLength: 0 } => true,
-            { Result.IsSuccessStatusCode: false } => await GetText(attempt.Outcome) is "endpoint requires authentication"
+            { Result.IsSuccessStatusCode: false } => await GetText(attempt.Outcome) is
+                "endpoint requires authentication"
                 or "unknown error"
                 or "ErrBadData"
                 or "ErrTimeout",

@@ -11,8 +11,11 @@ public class LearnedRecipes
         var character = TestConfiguration.TestCharacter;
         var accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) =
-            await sut.Hero.Crafting.Recipes.GetLearnedRecipes(character.Name, accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, _) = await sut.Hero.Crafting.Recipes.GetLearnedRecipes(
+            character.Name,
+            accessToken.Key,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotEmpty(actual);
         Assert.All(actual, id => Assert.NotEqual(0, id));

@@ -10,7 +10,10 @@ public class ReceivedMapChests
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Pve.MapChests.GetReceivedMapChests(accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, _) = await sut.Pve.MapChests.GetReceivedMapChests(
+            accessToken.Key,
+            TestContext.Current.CancellationToken
+        );
 
         // Can be empty if you haven't done any map metas today
         // The best we can do is verify that there are no unexpected map chests

@@ -11,7 +11,10 @@ public class ExchangeGoldToGems
 
         Coin coins = new(100, 0, 0);
 
-        var (actual, context) = await sut.Commerce.ExchangeGoldToGems(coins, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Commerce.ExchangeGoldToGems(
+            coins,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotNull(context);
         Assert.True(actual.Gems > 0, "100 gold should be worth some gems.");

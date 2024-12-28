@@ -99,13 +99,15 @@ public sealed class RacesClient
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
-    ) =>
-        GetRacesByNames(
+    )
+    {
+        return GetRacesByNames(
             raceNames.Select(raceName => (Extensible<RaceName>)raceName),
             language,
             missingMemberBehavior,
             cancellationToken
         );
+    }
 
     /// <summary>Retrieves races by their name.</summary>
     /// <param name="raceNames">The race names.</param>

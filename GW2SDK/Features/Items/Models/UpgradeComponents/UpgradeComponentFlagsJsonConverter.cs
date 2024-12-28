@@ -6,13 +6,21 @@ namespace GuildWars2.Items;
 
 internal class UpgradeComponentFlagsJsonConverter : JsonConverter<UpgradeComponentFlags>
 {
-    public override UpgradeComponentFlags? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override UpgradeComponentFlags? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
-        using JsonDocument json = JsonDocument.ParseValue(ref reader);
+        using var json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
-    public override void Write(Utf8JsonWriter writer, UpgradeComponentFlags value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        UpgradeComponentFlags value,
+        JsonSerializerOptions options
+    )
     {
         Write(writer, value);
     }
@@ -80,6 +88,7 @@ internal class UpgradeComponentFlagsJsonConverter : JsonConverter<UpgradeCompone
         {
             writer.WriteStringValue(other);
         }
+
         writer.WriteEndArray();
         writer.WriteEndObject();
     }

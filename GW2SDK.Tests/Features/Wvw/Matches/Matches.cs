@@ -10,7 +10,8 @@ public class Matches
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Wvw.GetMatches(cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) =
+            await sut.Wvw.GetMatches(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
@@ -57,7 +58,9 @@ public class Matches
                                 Assert.NotEmpty(objective.Id);
                                 Assert.True(objective.LastFlipped > DateTimeOffset.MinValue);
                                 Assert.True(objective.Owner.IsDefined());
-                                if (objective is not OwnedSpawn and not OwnedMercenary and not OwnedRuins)
+                                if (objective is not OwnedSpawn
+                                    and not OwnedMercenary
+                                    and not OwnedRuins)
                                 {
                                     Assert.True(objective.PointsCapture > 0);
                                     Assert.True(objective.PointsTick > 0);

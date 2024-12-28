@@ -9,7 +9,8 @@ public class FilesIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Files.GetFilesIndex(TestContext.Current.CancellationToken);
+        var (actual, context) =
+            await sut.Files.GetFilesIndex(TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

@@ -11,12 +11,11 @@ public class CharacterEquipment
         var character = TestConfiguration.TestCharacter;
         var accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) =
-            await sut.Hero.Equipment.Templates.GetCharacterEquipment(
-                character.Name,
-                accessToken.Key,
-                cancellationToken: TestContext.Current.CancellationToken
-            );
+        var (actual, _) = await sut.Hero.Equipment.Templates.GetCharacterEquipment(
+            character.Name,
+            accessToken.Key,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotNull(actual);
     }

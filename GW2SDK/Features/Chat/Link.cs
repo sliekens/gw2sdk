@@ -11,7 +11,10 @@ public abstract record Link
     /// <returns>The chat link text.</returns>
     public abstract override string ToString();
 
-    internal static Span<byte> GetBytes(string chatCode) => GetBytes(chatCode.AsSpan());
+    internal static Span<byte> GetBytes(string chatCode)
+    {
+        return GetBytes(chatCode.AsSpan());
+    }
 
     internal static Span<byte> GetBytes(ReadOnlySpan<char> chatLink)
     {

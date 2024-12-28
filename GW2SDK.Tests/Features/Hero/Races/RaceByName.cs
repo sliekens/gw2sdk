@@ -12,7 +12,10 @@ public class RaceByName
 
         const RaceName name = RaceName.Human;
 
-        var (actual, _) = await sut.Hero.Races.GetRaceByName(name, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, _) = await sut.Hero.Races.GetRaceByName(
+            name,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.Equal(name, actual.Id);
     }

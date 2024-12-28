@@ -1,5 +1,4 @@
 ﻿using System.Net.Http.Headers;
-using System.Runtime.InteropServices;
 using Microsoft.Extensions.Http.Resilience;
 using Polly;
 
@@ -8,6 +7,7 @@ namespace GuildWars2.Tests.TestInfrastructure;
 public static class Composer
 {
     private static readonly HttpMessageHandler PrimaryHttpHandler;
+
     private static readonly HttpMessageHandler ResilientHttpHandler;
 
     static Composer()
@@ -42,18 +42,17 @@ public static class Composer
         {
             InnerHandler = new LoggingHandler
             {
-                InnerHandler = new ChaosHandler
-                {
-                    InnerHandler = PrimaryHttpHandler
-                }
+                InnerHandler = new ChaosHandler { InnerHandler = PrimaryHttpHandler }
             }
         };
 #pragma warning restore EXTEXP0001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
     }
 
-    public static T Resolve<T>() =>
-        (T?)GetService(typeof(T))
-        ?? throw new InvalidOperationException($"Unable to compose type '{typeof(T)}'");
+    public static T Resolve<T>()
+    {
+        return (T?)GetService(typeof(T))
+            ?? throw new InvalidOperationException($"Unable to compose type '{typeof(T)}'");
+    }
 
     private static object? GetService(Type serviceType)
     {
@@ -76,20 +75,22 @@ public static class Composer
 
         static HttpMessageHandler HttpMessageHandler()
         {
-            return new SchemaVersionHandler
-            {
-                InnerHandler = ResilientHttpHandler
-            };
+            return new SchemaVersionHandler { InnerHandler = ResilientHttpHandler };
         }
 
         static HttpClient HttpClient()
         {
-            return new HttpClient(HttpMessageHandler(), disposeHandler: false)
+            return new HttpClient(HttpMessageHandler(), false)
             {
                 Timeout = TimeSpan.FromMinutes(5),
                 DefaultRequestHeaders =
                 {
-                    UserAgent = { ProductInfoHeaderValue.Parse($"{typeof(HttpClient).FullName}/{Environment.Version}") }
+                    UserAgent =
+                    {
+                        ProductInfoHeaderValue.Parse(
+                            $"{typeof(HttpClient).FullName}/{Environment.Version}"
+                        )
+                    }
                 }
             };
         }

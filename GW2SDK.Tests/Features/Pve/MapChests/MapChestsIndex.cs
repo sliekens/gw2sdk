@@ -9,7 +9,8 @@ public class MapChestsIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Pve.MapChests.GetMapChestsIndex(TestContext.Current.CancellationToken);
+        var (actual, context) =
+            await sut.Pve.MapChests.GetMapChestsIndex(TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

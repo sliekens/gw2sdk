@@ -26,6 +26,34 @@ public sealed record Backpack : Item, ICombatEquipment, IUpgradable, IInfused, I
     /// <summary>The effect which is applied to the player when the item is equipped.</summary>
     public required Buff? Buff { get; init; }
 
+    /// <summary>The IDs of the attribute combinations that can be chosen for the item. This property is only used for items
+    /// with selectable stats.</summary>
+    public required IReadOnlyList<int> StatChoices { get; init; }
+
+    /// <inheritdoc />
+    public bool Equals(Backpack? other)
+    {
+        return ReferenceEquals(this, other)
+            || (base.Equals(other)
+                && DefaultSkinId == other.DefaultSkinId
+                && Math.Abs(AttributeAdjustment - other.AttributeAdjustment) < 0.001d
+                && AttributeCombinationId == other.AttributeCombinationId
+                && Buff == other.Buff
+                && SuffixItemId == other.SuffixItemId
+                && InfusionSlots.SequenceEqual(other.InfusionSlots)
+                && Attributes.SequenceEqual(other.Attributes, AttributesComparer.Instance)
+                && StatChoices.SequenceEqual(other.StatChoices)
+                && UpgradesInto.SequenceEqual(other.UpgradesInto)
+                && UpgradesFrom.SequenceEqual(other.UpgradesFrom));
+    }
+
+    /// <summary>If the current back item can be infused in the Mystic Forge, this collection contains the IDs of the infused
+    /// variations of the back item. Each item in the collection represents a different recipe.</summary>
+    public required IReadOnlyCollection<InfusionSlotUpgradePath> UpgradesInto { get; init; }
+
+    /// <summary>If the current back item is infused, this collection contains the IDs of possible source items.</summary>
+    public required IReadOnlyCollection<InfusionSlotUpgradeSource> UpgradesFrom { get; init; }
+
     /// <summary>The ID of the upgrade component in the upgrade slot, if any.</summary>
     public required int? SuffixItemId { get; init; }
 
@@ -56,34 +84,6 @@ public sealed record Backpack : Item, ICombatEquipment, IUpgradable, IInfused, I
 
     /// <summary>The number of infusion slots available on the back item.</summary>
     public int InfusionSlotCount => InfusionSlots.Count;
-
-    /// <summary>The IDs of the attribute combinations that can be chosen for the item. This property is only used for items
-    /// with selectable stats.</summary>
-    public required IReadOnlyList<int> StatChoices { get; init; }
-
-    /// <summary>If the current back item can be infused in the Mystic Forge, this collection contains the IDs of the infused variations of the
-    /// back item. Each item in the collection represents a different recipe.</summary>
-    public required IReadOnlyCollection<InfusionSlotUpgradePath> UpgradesInto { get; init; }
-
-    /// <summary>If the current back item is infused, this collection contains the IDs of possible source items.</summary>
-    public required IReadOnlyCollection<InfusionSlotUpgradeSource> UpgradesFrom { get; init; }
-
-    /// <inheritdoc />
-    public bool Equals(Backpack? other)
-    {
-        return ReferenceEquals(this, other)
-            || (base.Equals(other)
-                && DefaultSkinId == other.DefaultSkinId
-                && Math.Abs(AttributeAdjustment - other.AttributeAdjustment) < 0.001d
-                && AttributeCombinationId == other.AttributeCombinationId
-                && Buff == other.Buff
-                && SuffixItemId == other.SuffixItemId
-                && InfusionSlots.SequenceEqual(other.InfusionSlots)
-                && Attributes.SequenceEqual(other.Attributes, AttributesComparer.Instance)
-                && StatChoices.SequenceEqual(other.StatChoices)
-                && UpgradesInto.SequenceEqual(other.UpgradesInto)
-                && UpgradesFrom.SequenceEqual(other.UpgradesFrom));
-    }
 
     /// <inheritdoc />
     public override int GetHashCode()

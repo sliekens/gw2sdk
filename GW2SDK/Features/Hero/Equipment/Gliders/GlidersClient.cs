@@ -32,7 +32,8 @@ public sealed class GlidersClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/gliders", accessToken);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -59,7 +60,8 @@ public sealed class GlidersClient
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -77,7 +79,8 @@ public sealed class GlidersClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/gliders");
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -102,7 +105,8 @@ public sealed class GlidersClient
         requestBuilder.Query.AddId(gliderSkinId);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -128,7 +132,8 @@ public sealed class GlidersClient
         requestBuilder.Query.AddIds(gliderSkinIds);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -156,7 +161,8 @@ public sealed class GlidersClient
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;

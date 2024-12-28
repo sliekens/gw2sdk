@@ -13,6 +13,7 @@ internal readonly ref struct OptionalMember
     {
         this.name = name;
     }
+
     private OptionalMember(JsonProperty member)
     {
         this.member = member;
@@ -20,12 +21,20 @@ internal readonly ref struct OptionalMember
 
     public string Name => name ?? member.Name;
 
-    public static implicit operator OptionalMember(string name) => new(name);
+    public static implicit operator OptionalMember(string name)
+    {
+        return new OptionalMember(name);
+    }
 
-    public static implicit operator OptionalMember(JsonProperty member) => new(member);
+    public static implicit operator OptionalMember(JsonProperty member)
+    {
+        return new OptionalMember(member);
+    }
 
-    public bool Match(JsonProperty property) =>
-        member.Value.ValueKind == Undefined && property.NameEquals(name);
+    public bool Match(JsonProperty property)
+    {
+        return member.Value.ValueKind == Undefined && property.NameEquals(name);
+    }
 
     public TValue? Map<TValue>(Func<JsonElement, TValue> transform)
     {

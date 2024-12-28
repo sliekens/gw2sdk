@@ -11,12 +11,14 @@ public class BackgroundStoryQuestionsByFilter
 
         HashSet<int> ids =
         [
-            7,
-            10,
+            7, 10,
             11
         ];
 
-        var (actual, context) = await sut.Hero.StoryJournal.GetBackgroundStoryQuestionsByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Hero.StoryJournal.GetBackgroundStoryQuestionsByIds(
+            ids,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

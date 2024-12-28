@@ -26,8 +26,7 @@ public class SubtokenInfo
 
         List<string> urls =
         [
-            "/v2/tokeninfo",
-            "/v2/account",
+            "/v2/tokeninfo", "/v2/account",
             "/v2/characters/My Cool Character"
         ];
 
@@ -45,7 +44,10 @@ public class SubtokenInfo
         // I guess this is a clock synchronization problem, because adding a delay works
         await Task.Delay(3000, TestContext.Current.CancellationToken);
 
-        var (actual, _) = await sut.Tokens.GetTokenInfo(createdSubtoken.Subtoken, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, _) = await sut.Tokens.GetTokenInfo(
+            createdSubtoken.Subtoken,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         var subtoken = Assert.IsType<GuildWars2.Authorization.SubtokenInfo>(actual);
 

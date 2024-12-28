@@ -10,7 +10,10 @@ public class CompletedEncounters
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Pve.Raids.GetCompletedEncounters(accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, _) = await sut.Pve.Raids.GetCompletedEncounters(
+            accessToken.Key,
+            TestContext.Current.CancellationToken
+        );
 
         // Can be empty if you haven't done any raids this week
         // The best we can do is verify that there are no unexpected encounters

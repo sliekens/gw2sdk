@@ -10,7 +10,10 @@ public class AccountWvwGuild
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Wvw.GetAccountWvwGuild(accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, _) = await sut.Wvw.GetAccountWvwGuild(
+            accessToken.Key,
+            TestContext.Current.CancellationToken
+        );
 
         Assert.True(actual.TeamId > 0);
         Assert.NotEmpty(actual.GuildId!);

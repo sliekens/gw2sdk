@@ -9,11 +9,13 @@ namespace GuildWars2.Tests.TestInfrastructure;
 internal class JsonLinesHttpMessageHandler(string path) : HttpMessageHandler
 {
     private readonly Dictionary<int, JsonElement> Entries = JsonLinesReader.Read(path)
-        .Select(json =>
-        {
-            using var document = JsonDocument.Parse(json);
-            return document.RootElement.Clone();
-        })
+        .Select(
+            json =>
+            {
+                using var document = JsonDocument.Parse(json);
+                return document.RootElement.Clone();
+            }
+        )
         .ToDictionary(node => node.GetProperty("id").GetInt32());
 
     protected override Task<HttpResponseMessage> SendAsync(

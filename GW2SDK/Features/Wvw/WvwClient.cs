@@ -43,7 +43,8 @@ public sealed class WvwClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/wvw", accessToken);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetAccountWvwGuild();

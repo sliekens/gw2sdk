@@ -35,7 +35,8 @@ public sealed class WorldsClient
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -53,7 +54,8 @@ public sealed class WorldsClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/worlds");
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -78,7 +80,8 @@ public sealed class WorldsClient
         requestBuilder.Query.AddId(worldId);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -104,7 +107,8 @@ public sealed class WorldsClient
         requestBuilder.Query.AddIds(worldIds);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -132,7 +136,8 @@ public sealed class WorldsClient
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;

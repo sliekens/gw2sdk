@@ -9,7 +9,8 @@ public class Amulets
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Pvp.GetAmulets(cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) =
+            await sut.Pvp.GetAmulets(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

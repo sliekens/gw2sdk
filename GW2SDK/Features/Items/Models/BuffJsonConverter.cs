@@ -1,4 +1,3 @@
-
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using GuildWars2.Json;
@@ -7,7 +6,11 @@ namespace GuildWars2.Items;
 
 internal sealed class BuffJsonConverter : JsonConverter<Buff>
 {
-    public override Buff? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override Buff? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         using var json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);

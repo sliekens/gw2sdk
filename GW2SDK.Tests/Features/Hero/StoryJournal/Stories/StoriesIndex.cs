@@ -9,7 +9,8 @@ public class StoriesIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.StoryJournal.GetStoriesIndex(TestContext.Current.CancellationToken);
+        var (actual, context) =
+            await sut.Hero.StoryJournal.GetStoriesIndex(TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

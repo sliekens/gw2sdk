@@ -11,7 +11,10 @@ public class RankById
 
         const int id = 105;
 
-        var (actual, context) = await sut.Wvw.GetRankById(id, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Wvw.GetRankById(
+            id,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

@@ -10,7 +10,9 @@ public class Outfits
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.Equipment.Outfits.GetOutfits(cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Hero.Equipment.Outfits.GetOutfits(
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

@@ -11,12 +11,14 @@ public class MailCarriersByFilter
 
         HashSet<int> ids =
         [
-            1,
-            2,
+            1, 2,
             3
         ];
 
-        var (actual, context) = await sut.Hero.Equipment.MailCarriers.GetMailCarriersByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Hero.Equipment.MailCarriers.GetMailCarriersByIds(
+            ids,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

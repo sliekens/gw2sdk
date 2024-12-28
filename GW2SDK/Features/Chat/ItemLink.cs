@@ -18,24 +18,36 @@ public sealed record ItemLink : Link
     /// <remarks>Only valid for weapons, armor, back items and trinkets.</remarks>
     public int? SuffixItemId { get; init; }
 
-    /// <summary>The item ID of the second upgrade component if the item is upgraded, or <c>null</c> if the second upgrade slot is empty.</summary>
+    /// <summary>The item ID of the second upgrade component if the item is upgraded, or <c>null</c> if the second upgrade slot
+    /// is empty.</summary>
     /// <remarks>Only valid for two-handed weapons.</remarks>
     public int? SecondarySuffixItemId { get; init; }
 
     /// <summary>Gets the skin chat link if the item is transmuted, or <c>null</c> if the default skin is applied.</summary>
     /// <remarks>Only valid for weapons, armor and back items.</remarks>
     /// <returns>The chat link as an object.</returns>
-    public SkinLink? GetSkinLink() => SkinId is null ? null : new SkinLink { SkinId = SkinId.Value };
+    public SkinLink? GetSkinLink()
+    {
+        return SkinId is null ? null : new SkinLink { SkinId = SkinId.Value };
+    }
 
     /// <summary>Gets the item chat link for the upgrade component, or <c>null</c> if the upgrade slot is empty.</summary>
     /// <remarks>Only valid for weapons, armor, back items and trinkets.</remarks>
     /// <returns>The chat link as an object.</returns>
-    public ItemLink? GetSuffixItemLink() => SuffixItemId is null ? null : new ItemLink() { ItemId = SuffixItemId.Value };
+    public ItemLink? GetSuffixItemLink()
+    {
+        return SuffixItemId is null ? null : new ItemLink { ItemId = SuffixItemId.Value };
+    }
 
     /// <summary>Gets the item chat link for the second upgrade component, or <c>null</c> if the second upgrade slot is empty.</summary>
     /// <remarks>Only valid for two-handed weapons.</remarks>
     /// <returns>The chat link as an object.</returns>
-    public ItemLink? GetSecondarySuffixItemLink() => SecondarySuffixItemId is null ? null : new ItemLink { ItemId = SecondarySuffixItemId.Value };
+    public ItemLink? GetSecondarySuffixItemLink()
+    {
+        return SecondarySuffixItemId is null
+            ? null
+            : new ItemLink { ItemId = SecondarySuffixItemId.Value };
+    }
 
     /// <inheritdoc />
     public override string ToString()
@@ -81,7 +93,10 @@ public sealed record ItemLink : Link
     /// <summary>Converts a chat link code to a chat link object.</summary>
     /// <param name="chatLink">The chat link text.</param>
     /// <returns>The chat link as an object.</returns>
-    public static ItemLink Parse(string chatLink) => Parse(chatLink.AsSpan());
+    public static ItemLink Parse(string chatLink)
+    {
+        return Parse(chatLink.AsSpan());
+    }
 
     /// <summary>Converts a chat link code to a chat link object.</summary>
     /// <param name="chatLink">The chat link text.</param>

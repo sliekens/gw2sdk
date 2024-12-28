@@ -11,7 +11,10 @@ public class NodeById
 
         const string id = "bauble_gathering_system";
 
-        var (actual, context) = await sut.Pve.Home.GetNodeById(id, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Pve.Home.GetNodeById(
+            id,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

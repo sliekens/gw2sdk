@@ -34,9 +34,13 @@ public sealed class EquipmentTemplatesClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/characters/{characterName}/equipment", accessToken);
+        var requestBuilder = RequestBuilder.HttpGet(
+            $"v2/characters/{characterName}/equipment",
+            accessToken
+        );
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -65,11 +69,13 @@ public sealed class EquipmentTemplatesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/account/legendaryarmory", accessToken);
         requestBuilder.Query.AddAllIds();
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetBoundLegendaryItem());
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetBoundLegendaryItem());
             return (value, response.Context);
         }
     }
@@ -92,9 +98,13 @@ public sealed class EquipmentTemplatesClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/characters/{characterName}/equipmenttabs", accessToken);
+        var requestBuilder = RequestBuilder.HttpGet(
+            $"v2/characters/{characterName}/equipmenttabs",
+            accessToken
+        );
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetList(static entry => entry.GetInt32());
@@ -118,9 +128,13 @@ public sealed class EquipmentTemplatesClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/characters/{characterName}/equipmenttabs/{templateNumber}", accessToken);
+        var requestBuilder = RequestBuilder.HttpGet(
+            $"v2/characters/{characterName}/equipmenttabs/{templateNumber}",
+            accessToken
+        );
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -145,14 +159,19 @@ public sealed class EquipmentTemplatesClient
         )
     {
         // There is no ids=all support, but page=0 works
-        var requestBuilder = RequestBuilder.HttpGet($"v2/characters/{characterName}/equipmenttabs", accessToken);
+        var requestBuilder = RequestBuilder.HttpGet(
+            $"v2/characters/{characterName}/equipmenttabs",
+            accessToken
+        );
         requestBuilder.Query.AddPage(0, null);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetEquipmentTemplate());
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetEquipmentTemplate());
             return (value, response.Context);
         }
     }
@@ -172,9 +191,13 @@ public sealed class EquipmentTemplatesClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/characters/{characterName}/equipmenttabs/active", accessToken);
+        var requestBuilder = RequestBuilder.HttpGet(
+            $"v2/characters/{characterName}/equipmenttabs/active",
+            accessToken
+        );
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -199,7 +222,8 @@ public sealed class EquipmentTemplatesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/legendaryarmory");
         requestBuilder.Query.AddAllIds();
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -217,7 +241,8 @@ public sealed class EquipmentTemplatesClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/legendaryarmory");
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -239,7 +264,8 @@ public sealed class EquipmentTemplatesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/legendaryarmory");
         requestBuilder.Query.AddId(legendaryItemId);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -264,7 +290,8 @@ public sealed class EquipmentTemplatesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/legendaryarmory");
         requestBuilder.Query.AddIds(legendaryItemIds);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -290,7 +317,8 @@ public sealed class EquipmentTemplatesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/legendaryarmory");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;

@@ -4,20 +4,27 @@ namespace GuildWars2.Json;
 
 internal static class JsonElementExtensions
 {
-    internal static T? GetNullable<T>(this JsonElement json, Func<JsonElement, T?> transform) where T : class =>
-        json.ValueKind == JsonValueKind.Null ? null : transform(json);
+    internal static T? GetNullable<T>(this JsonElement json, Func<JsonElement, T?> transform)
+        where T : class
+    {
+        return json.ValueKind == JsonValueKind.Null ? null : transform(json);
+    }
 
-    internal static int? GetNullableInt32(this JsonElement json) =>
-        json.ValueKind == JsonValueKind.Null ? null : json.GetInt32();
+    internal static int? GetNullableInt32(this JsonElement json)
+    {
+        return json.ValueKind == JsonValueKind.Null ? null : json.GetInt32();
+    }
 
     /// <summary>Returns a string, or throws if the element is null or not a string.</summary>
     /// <param name="json">A String value.</param>
     /// <returns>The value of the JSON element as a non-null string (can be empty).</returns>
-    internal static string GetStringRequired(this JsonElement json) =>
-        json.GetString()
-        ?? throw new InvalidOperationException(
-            $"The requested operation requires an element of type 'String', but the target element has type '{json.ValueKind}'."
-        );
+    internal static string GetStringRequired(this JsonElement json)
+    {
+        return json.GetString()
+            ?? throw new InvalidOperationException(
+                $"The requested operation requires an element of type 'String', but the target element has type '{json.ValueKind}'."
+            );
+    }
 
     /// <summary>Converts a JSON array to a list.</summary>
     /// <typeparam name="TValue">The type of values in the list.</typeparam>
@@ -95,6 +102,8 @@ internal static class JsonElementExtensions
     }
 
     internal static Extensible<TEnum> GetEnum<TEnum>(this JsonElement json)
-        where TEnum : struct, Enum =>
-        new(json.GetStringRequired());
+        where TEnum : struct, Enum
+    {
+        return new Extensible<TEnum>(json.GetStringRequired());
+    }
 }

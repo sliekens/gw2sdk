@@ -4,7 +4,7 @@ namespace GuildWars2.Items;
 [PublicAPI]
 public interface IInfusable
 {
-    /// <summary>If the current item is used in the Mystic Forge to infuse (or attune) equipment, this collection contains the IDs
-    /// of the infused (or attuned) items. Each item in the collection represents a different recipe.</summary>
+    /// <summary>If the current item is used in the Mystic Forge to infuse (or attune) equipment, this collection contains the
+    /// IDs of the infused (or attuned) items. Each item in the collection represents a different recipe.</summary>
     IReadOnlyCollection<InfusionSlotUpgradePath> UpgradesInto { get; }
 }

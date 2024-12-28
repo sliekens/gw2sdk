@@ -9,5 +9,4 @@ internal static class JsonOptions
         get => MissingMemberBehaviorContext.Value;
         set => MissingMemberBehaviorContext.Value = value;
     }
-
 }

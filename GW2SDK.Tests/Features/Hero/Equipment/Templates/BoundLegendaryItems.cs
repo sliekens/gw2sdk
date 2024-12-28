@@ -10,8 +10,10 @@ public class BoundLegendaryItems
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) =
-            await sut.Hero.Equipment.Templates.GetBoundLegendaryItems(accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, _) = await sut.Hero.Equipment.Templates.GetBoundLegendaryItems(
+            accessToken.Key,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotEmpty(actual);
     }

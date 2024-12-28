@@ -43,6 +43,52 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
     }
 
     /// <inheritdoc />
+    public async ValueTask DisposeAsync()
+    {
+        if (disposed)
+        {
+            return;
+        }
+
+#if NET
+        await timer.DisposeAsync();
+#else
+        using ManualResetEventSlim callbacksFinished = new(false);
+        if (timer.Dispose(callbacksFinished.WaitHandle))
+        {
+            var tcs = new TaskCompletionSource<bool>();
+            ThreadPool.QueueUserWorkItem(
+                state =>
+                {
+                    var (waitHandle, taskCompletionSource) =
+                        ((WaitHandle, TaskCompletionSource<bool>))state;
+                    try
+                    {
+                        waitHandle.WaitOne();
+                        taskCompletionSource.SetResult(true);
+                    }
+                    catch (Exception error)
+                    {
+                        taskCompletionSource.SetException(error);
+                    }
+                },
+                (callbacksFinished.WaitHandle, tcs)
+            );
+
+            await tcs.Task.ConfigureAwait(false);
+        }
+#endif
+
+        foreach (var subscriber in subscribers)
+        {
+            subscriber.OnCompleted();
+        }
+
+        mumbleLink.Dispose();
+        disposed = true;
+    }
+
+    /// <inheritdoc />
     public void Dispose()
     {
         if (disposed)
@@ -73,51 +119,6 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
             // Set flag to prevent reusing a disposed instance
             disposed = true;
         }
-    }
-
-    /// <inheritdoc />
-    public async ValueTask DisposeAsync()
-    {
-        if (disposed)
-        {
-            return;
-        }
-
-#if NET
-        await timer.DisposeAsync();
-#else
-        using ManualResetEventSlim callbacksFinished = new(false);
-        if (timer.Dispose(callbacksFinished.WaitHandle))
-        {
-            var tcs = new TaskCompletionSource<bool>();
-            ThreadPool.QueueUserWorkItem(
-                state =>
-                {
-                    var (waitHandle, taskCompletionSource) = ((WaitHandle, TaskCompletionSource<bool>))state;
-                    try
-                    {
-                        waitHandle.WaitOne();
-                        taskCompletionSource.SetResult(true);
-                    }
-                    catch (Exception error)
-                    {
-                        taskCompletionSource.SetException(error);
-                    }
-                },
-                (callbacksFinished.WaitHandle, tcs)
-            );
-
-            await tcs.Task.ConfigureAwait(false);
-        }
-#endif
-
-        foreach (var subscriber in subscribers)
-        {
-            subscriber.OnCompleted();
-        }
-
-        mumbleLink.Dispose();
-        disposed = true;
     }
 
     /// <summary>Subscribes an observer to receive realtime game state updates.</summary>
@@ -241,7 +242,10 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
     /// <summary>Checks if the GameLink is supported on the current platform.</summary>
     /// <returns><c>true</c> if the GameLink is supported on the current platform; otherwise, <c>false</c>.</returns>
     [SupportedOSPlatformGuard("windows")]
-    public static bool IsSupported() => RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+    public static bool IsSupported()
+    {
+        return RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+    }
 
     /// <summary>Opens a GameLink instance with the specified refresh interval and name.</summary>
     /// <param name="refreshInterval">The interval at which to poll for changes to the shared memory.</param>
@@ -263,6 +267,9 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
     private class Subscription(GameLink producer, IObserver<GameTick> observer) : IDisposable
     {
         /// <summary>Disposes the subscription and removes the observer from the subscribers list.</summary>
-        public void Dispose() => producer.subscribers.Remove(observer);
+        public void Dispose()
+        {
+            producer.subscribers.Remove(observer);
+        }
     }
 }

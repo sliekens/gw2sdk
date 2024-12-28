@@ -11,7 +11,10 @@ public class SkiffSkinById
 
         const int id = 410;
 
-        var (actual, context) = await sut.Hero.Equipment.Skiffs.GetSkiffSkinById(id, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Hero.Equipment.Skiffs.GetSkiffSkinById(
+            id,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

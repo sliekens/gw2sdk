@@ -11,11 +11,15 @@ internal sealed class RouteTable(RouteOptions routeOptions) : IRenderable
         .AddColumn("Localization")
         .MinimalBorder();
 
-    public Measurement Measure(RenderOptions options, int maxWidth) =>
-        ((IRenderable)table).Measure(options, maxWidth);
+    public Measurement Measure(RenderOptions options, int maxWidth)
+    {
+        return ((IRenderable)table).Measure(options, maxWidth);
+    }
 
-    public IEnumerable<Segment> Render(RenderOptions options, int maxWidth) =>
-        ((IRenderable)table).Render(options, maxWidth);
+    public IEnumerable<Segment> Render(RenderOptions options, int maxWidth)
+    {
+        return ((IRenderable)table).Render(options, maxWidth);
+    }
 
     public void AddRoute(Route route, IReadOnlyCollection<string> languages)
     {

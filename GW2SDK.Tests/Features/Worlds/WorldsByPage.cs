@@ -10,7 +10,11 @@ public sealed class WorldsByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
-        var (actual, context) = await sut.Worlds.GetWorldsByPage(0, pageSize, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Worlds.GetWorldsByPage(
+            0,
+            pageSize,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);

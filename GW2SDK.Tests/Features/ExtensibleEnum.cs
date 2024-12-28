@@ -125,6 +125,7 @@ public class ExtensibleEnum
         var actual = JsonSerializer.Deserialize<Extensible<ProductName>>(json);
         Assert.Equal(extensible, actual);
     }
+
     [Fact]
     public void Has_json_conversion_for_undefined_values()
     {

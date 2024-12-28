@@ -10,8 +10,10 @@ public class SpecialObjectivesProgress
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = TestConfiguration.ApiKey;
 
-        var (actual, context) =
-            await sut.WizardsVault.GetSpecialObjectivesProgress(accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.WizardsVault.GetSpecialObjectivesProgress(
+            accessToken.Key,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotNull(context);
         Assert.NotEmpty(actual.Objectives);

@@ -1,13 +1,14 @@
 ﻿using GuildWars2;
-using GuildWars2.Exploration.Maps;
-using GuildWars2.Hero.Builds;
-using GuildWars2.Hero.Equipment.Dyes;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace Mumble;
 
-public sealed class DataService(ILogger<DataService> logger, Gw2Client gw2Client, ReferenceData referenceData) : IHostedService
+public sealed class DataService(
+    ILogger<DataService> logger,
+    Gw2Client gw2Client,
+    ReferenceData referenceData
+) : IHostedService
 {
     public async Task StartAsync(CancellationToken cancellationToken)
     {
@@ -27,7 +28,11 @@ public sealed class DataService(ILogger<DataService> logger, Gw2Client gw2Client
         {
             if (!referenceData.TryAddSpecialization(specialization))
             {
-                logger.LogWarning("Specialization {Name} ({Id}) could not be added.", specialization.Name, specialization.Id);
+                logger.LogWarning(
+                    "Specialization {Name} ({Id}) could not be added.",
+                    specialization.Name,
+                    specialization.Id
+                );
             }
         }
 

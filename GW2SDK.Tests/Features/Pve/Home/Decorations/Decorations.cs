@@ -12,13 +12,36 @@ public class Decorations
         using var httpClient =
             new HttpClient(new JsonLinesHttpMessageHandler("Data/decorations.jsonl.gz"));
         var sut = new Gw2Client(httpClient);
-        await foreach (var (actual, context) in sut.Pve.Home.GetDecorationsBulk(cancellationToken: TestContext.Current.CancellationToken))
+        await foreach (var (actual, context) in sut.Pve.Home.GetDecorationsBulk(
+                cancellationToken: TestContext.Current.CancellationToken
+            ))
         {
             Assert.NotNull(context);
             Assert.True(actual.Id > 0);
             Assert.NotEmpty(actual.Name);
             Assert.NotNull(actual.Description);
-            if (actual.Id is 13 or 28 or 73 or 161 or 170 or 379 or 396 or 435 or 438 or 458 or 496 or 499 or 528 or 574 or 593 or 599 or 617 or 624 or 631 or 677 or 714 or 741) // Some SAB decorations are not linked to its category
+            if (actual.Id is 13
+                or 28
+                or 73
+                or 161
+                or 170
+                or 379
+                or 396
+                or 435
+                or 438
+                or 458
+                or 496
+                or 499
+                or 528
+                or 574
+                or 593
+                or 599
+                or 617
+                or 624
+                or 631
+                or 677
+                or 714
+                or 741) // Some SAB decorations are not linked to its category
             {
                 Assert.Empty(actual.CategoryIds);
             }

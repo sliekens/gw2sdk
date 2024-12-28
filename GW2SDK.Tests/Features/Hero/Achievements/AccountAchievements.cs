@@ -10,7 +10,10 @@ public class AccountAchievements
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = TestConfiguration.ApiKey;
 
-        var (actual, context) = await sut.Hero.Achievements.GetAccountAchievements(accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Hero.Achievements.GetAccountAchievements(
+            accessToken.Key,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

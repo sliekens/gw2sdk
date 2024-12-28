@@ -10,7 +10,10 @@ public class Games
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = TestConfiguration.ApiKey;
 
-        var (actual, context) = await sut.Pvp.GetGames(accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Pvp.GetGames(
+            accessToken.Key,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

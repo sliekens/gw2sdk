@@ -7,5 +7,8 @@ internal static class Empty
 
     public static readonly IReadOnlyList<int> ListOfInt32 = Array.Empty<int>();
 
-    public static IReadOnlyList<T> List<T>() => Array.Empty<T>();
+    public static IReadOnlyList<T> List<T>()
+    {
+        return Array.Empty<T>();
+    }
 }

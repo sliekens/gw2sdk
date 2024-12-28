@@ -21,12 +21,20 @@ internal readonly ref struct RequiredMember
 
     public string Name => name ?? member.Name;
 
-    public static implicit operator RequiredMember(string name) => new(name);
+    public static implicit operator RequiredMember(string name)
+    {
+        return new RequiredMember(name);
+    }
 
-    public static implicit operator RequiredMember(JsonProperty member) => new(member);
+    public static implicit operator RequiredMember(JsonProperty member)
+    {
+        return new RequiredMember(member);
+    }
 
-    public bool Match(JsonProperty property) =>
-        member.Value.ValueKind == Undefined && property.NameEquals(name);
+    public bool Match(JsonProperty property)
+    {
+        return member.Value.ValueKind == Undefined && property.NameEquals(name);
+    }
 
     public TValue Map<TValue>(Func<JsonElement, TValue> transform)
     {

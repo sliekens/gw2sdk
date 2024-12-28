@@ -10,7 +10,10 @@ public class UnlockedCats
         var sut = Composer.Resolve<Gw2Client>();
         var token = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Pve.Home.GetUnlockedCats(token.Key, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, _) = await sut.Pve.Home.GetUnlockedCats(
+            token.Key,
+            TestContext.Current.CancellationToken
+        );
 
         Assert.NotEmpty(actual);
         Assert.All(actual, id => Assert.True(id > 0));

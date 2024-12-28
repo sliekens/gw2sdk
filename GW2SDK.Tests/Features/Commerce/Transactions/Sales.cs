@@ -10,7 +10,12 @@ public class Sales
         var accessToken = TestConfiguration.ApiKey;
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (sales, context) = await sut.Commerce.GetSales(0, 200, accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
+        var (sales, context) = await sut.Commerce.GetSales(
+            0,
+            200,
+            accessToken.Key,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         // Step through with debugger to see if the values reflect your in-game transactions
         Assert.NotNull(context);

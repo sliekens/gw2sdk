@@ -46,10 +46,12 @@ public record Objective
 
     /// <summary>Gets a chat link object for this objective.</summary>
     /// <returns>The chat link as an object.</returns>
-    public ObjectiveLink GetChatLink() =>
-        new()
+    public ObjectiveLink GetChatLink()
+    {
+        return new ObjectiveLink
         {
             ObjectiveId = int.Parse(Id.Split('-')[1]),
             MapId = MapId
         };
+    }
 }

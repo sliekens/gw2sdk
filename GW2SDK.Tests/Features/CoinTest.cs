@@ -37,7 +37,12 @@ public class CoinTest
     [InlineData(1_00_01, 1, 0, 1)]
     [InlineData(1_01_01, 1, 1, 1)]
     [InlineData(99_99_99, 99, 99, 99)]
-    public void Coins_can_be_represented_in_gold_silver_and_copper(int amount, int gold, int silver, int copper)
+    public void Coins_can_be_represented_in_gold_silver_and_copper(
+        int amount,
+        int gold,
+        int silver,
+        int copper
+    )
     {
         Coin sut = amount;
         Assert.Equal(gold, sut.Gold);

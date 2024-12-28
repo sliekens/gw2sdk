@@ -35,9 +35,13 @@ public sealed class SuperAdventureBoxClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/characters/{characterName}/sab", accessToken);
+        var requestBuilder = RequestBuilder.HttpGet(
+            $"v2/characters/{characterName}/sab",
+            accessToken
+        );
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;

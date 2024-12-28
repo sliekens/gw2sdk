@@ -10,7 +10,10 @@ public class MasteryTrackProgress
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Hero.Masteries.GetMasteryTrackProgress(accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, _) = await sut.Hero.Masteries.GetMasteryTrackProgress(
+            accessToken.Key,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotEmpty(actual);
         Assert.All(

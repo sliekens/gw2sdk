@@ -72,7 +72,8 @@ try
                 }
 
                 var items = ctx.AddTask("Downloading items.");
-                await using (var file = CreateTextCompressed(Path.Combine(outDir, "items.jsonl.gz")))
+                await using (var
+                    file = CreateTextCompressed(Path.Combine(outDir, "items.jsonl.gz")))
                 {
                     var service = app.Services.GetRequiredService<JsonItemService>();
                     var documents = await service.GetAllJsonItems(new ProgressAdapter(items));
@@ -95,7 +96,8 @@ try
                 }
 
                 var skins = ctx.AddTask("Downloading skins.");
-                await using (var file = CreateTextCompressed(Path.Combine(outDir, "skins.jsonl.gz")))
+                await using (var
+                    file = CreateTextCompressed(Path.Combine(outDir, "skins.jsonl.gz")))
                 {
                     var service = app.Services.GetRequiredService<JsonSkinService>();
                     var documents = await service.GetAllJsonSkins(new ProgressAdapter(skins));
@@ -106,10 +108,12 @@ try
                 }
 
                 var decorations = ctx.AddTask("Downloading decorations.");
-                await using (var file = CreateTextCompressed(Path.Combine(outDir, "decorations.jsonl.gz")))
+                await using (var file =
+                    CreateTextCompressed(Path.Combine(outDir, "decorations.jsonl.gz")))
                 {
                     var service = app.Services.GetRequiredService<JsonDecorationsService>();
-                    var documents = await service.GetAllJsonDecorations(new ProgressAdapter(decorations));
+                    var documents =
+                        await service.GetAllJsonDecorations(new ProgressAdapter(decorations));
                     foreach (var document in documents)
                     {
                         await file.WriteLineAsync(document);

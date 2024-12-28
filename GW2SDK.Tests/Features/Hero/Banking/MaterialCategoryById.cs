@@ -11,7 +11,10 @@ public class MaterialCategoryById
 
         const int id = 5;
 
-        var (actual, context) = await sut.Hero.Bank.GetMaterialCategoryById(id, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Hero.Bank.GetMaterialCategoryById(
+            id,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

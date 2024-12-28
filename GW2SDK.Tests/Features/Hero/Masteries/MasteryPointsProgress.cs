@@ -11,7 +11,10 @@ public class MasteryPointsProgress
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Hero.Masteries.GetMasteryPointsProgress(accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, _) = await sut.Hero.Masteries.GetMasteryPointsProgress(
+            accessToken.Key,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotNull(actual);
         Assert.Equal(actual.Unlocked.Count, actual.Totals.Sum(total => total.Earned));

@@ -12,8 +12,13 @@ public class MapById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
-            await sut.Exploration.GetMapById(continentId, floorId, regionId, mapId, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Exploration.GetMapById(
+            continentId,
+            floorId,
+            regionId,
+            mapId,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotNull(context);
         Assert.Equal(mapId, actual.Id);

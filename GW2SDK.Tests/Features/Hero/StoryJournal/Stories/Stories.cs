@@ -9,7 +9,9 @@ public class Stories
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.StoryJournal.GetStories(cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Hero.StoryJournal.GetStories(
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
@@ -27,10 +29,13 @@ public class Stories
                 Assert.NotEmpty(entry.Races);
                 Assert.True(entry.Order >= 0);
                 Assert.NotNull(entry.Chapters);
-                Assert.All(entry.Chapters, chapter =>
-                {
-                    Assert.NotEmpty(chapter.Name);
-                });
+                Assert.All(
+                    entry.Chapters,
+                    chapter =>
+                    {
+                        Assert.NotEmpty(chapter.Name);
+                    }
+                );
                 Assert.Empty(entry.Flags.Other);
             }
         );

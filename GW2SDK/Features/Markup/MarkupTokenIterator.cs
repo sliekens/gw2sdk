@@ -8,5 +8,8 @@ internal class MarkupTokenIterator(IEnumerable<MarkupToken> input)
 
     public MarkupToken? Current => position < tokens.Count ? tokens[position] : null;
 
-    public void Advance() => position++;
+    public void Advance()
+    {
+        position++;
+    }
 }

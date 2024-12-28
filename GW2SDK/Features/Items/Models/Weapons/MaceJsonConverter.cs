@@ -14,7 +14,11 @@ internal sealed class MaceJsonConverter : JsonConverter<Mace>
         return typeof(Mace).IsAssignableFrom(typeToConvert);
     }
 
-    public override Mace Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override Mace Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         using var json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
@@ -27,14 +31,20 @@ internal sealed class MaceJsonConverter : JsonConverter<Mace>
 
     public static Mace Read(JsonElement json)
     {
-        if (!json.GetProperty(ItemJsonConverter.DiscriminatorName).ValueEquals(WeaponJsonConverter.DiscriminatorValue))
+        if (!json.GetProperty(ItemJsonConverter.DiscriminatorName)
+            .ValueEquals(WeaponJsonConverter.DiscriminatorValue))
         {
-            ThrowHelper.ThrowInvalidDiscriminator(json.GetProperty(ItemJsonConverter.DiscriminatorName).GetString());
+            ThrowHelper.ThrowInvalidDiscriminator(
+                json.GetProperty(ItemJsonConverter.DiscriminatorName).GetString()
+            );
         }
 
-        if (!json.GetProperty(WeaponJsonConverter.DiscriminatorName).ValueEquals(DiscriminatorValue))
+        if (!json.GetProperty(WeaponJsonConverter.DiscriminatorName)
+            .ValueEquals(DiscriminatorValue))
         {
-            ThrowHelper.ThrowInvalidDiscriminator(json.GetProperty(WeaponJsonConverter.DiscriminatorName).GetString());
+            ThrowHelper.ThrowInvalidDiscriminator(
+                json.GetProperty(WeaponJsonConverter.DiscriminatorName).GetString()
+            );
         }
 
         return new Mace
@@ -45,7 +55,8 @@ internal sealed class MaceJsonConverter : JsonConverter<Mace>
             Level = json.GetProperty("level").GetInt32(),
             Rarity = json.GetProperty("rarity").GetEnum<Rarity>(),
             VendorValue = json.GetProperty("vendor_value").GetInt32(),
-            GameTypes = json.GetProperty("game_types").GetList(static value => value.GetEnum<GameType>()),
+            GameTypes =
+                json.GetProperty("game_types").GetList(static value => value.GetEnum<GameType>()),
             Flags = ItemFlagsJsonConverter.Read(json.GetProperty("flags")),
             Restrictions = ItemRestrictionJsonConverter.Read(json.GetProperty("restrictions")),
             ChatLink = json.GetProperty("chat_link").GetStringRequired(),
@@ -55,13 +66,14 @@ internal sealed class MaceJsonConverter : JsonConverter<Mace>
             MinPower = json.GetProperty("min_power").GetInt32(),
             MaxPower = json.GetProperty("max_power").GetInt32(),
             Defense = json.GetProperty("defense").GetInt32(),
-            InfusionSlots = json.GetProperty("infusion_slots").GetList(InfusionSlotJsonConverter.Read),
+            InfusionSlots = json.GetProperty("infusion_slots")
+                .GetList(InfusionSlotJsonConverter.Read),
             AttributeAdjustment = json.GetProperty("attribute_adjustment").GetDouble(),
-            AttributeCombinationId = json.GetProperty("attribute_combination_id").GetNullableInt32(),
-            Attributes = json.GetProperty("attributes").GetMap(
-                key => new Extensible<AttributeName>(key),
-                value => value.GetInt32()
-            ),
+            AttributeCombinationId =
+                json.GetProperty("attribute_combination_id").GetNullableInt32(),
+            Attributes =
+                json.GetProperty("attributes")
+                    .GetMap(key => new Extensible<AttributeName>(key), value => value.GetInt32()),
             Buff = json.GetProperty("buff").GetNullable(BuffJsonConverter.Read),
             SuffixItemId = json.GetProperty("suffix_item_id").GetNullableInt32(),
             SecondarySuffixItemId = json.GetProperty("secondary_suffix_item_id").GetNullableInt32(),
@@ -72,7 +84,10 @@ internal sealed class MaceJsonConverter : JsonConverter<Mace>
     public static void Write(Utf8JsonWriter writer, Mace value)
     {
         writer.WriteStartObject();
-        writer.WriteString(ItemJsonConverter.DiscriminatorName, WeaponJsonConverter.DiscriminatorValue);
+        writer.WriteString(
+            ItemJsonConverter.DiscriminatorName,
+            WeaponJsonConverter.DiscriminatorValue
+        );
         writer.WriteString(WeaponJsonConverter.DiscriminatorName, DiscriminatorValue);
         ItemJsonConverter.WriteCommonProperties(writer, value);
         WeaponJsonConverter.WriteCommonProperties(writer, value);

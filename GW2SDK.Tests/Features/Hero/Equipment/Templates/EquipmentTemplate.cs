@@ -12,13 +12,12 @@ public class EquipmentTemplate
         var accessToken = TestConfiguration.ApiKey;
 
         const int tab = 1;
-        var (actual, _) =
-            await sut.Hero.Equipment.Templates.GetEquipmentTemplate(
-                character.Name,
-                tab,
-                accessToken.Key,
-                cancellationToken: TestContext.Current.CancellationToken
-            );
+        var (actual, _) = await sut.Hero.Equipment.Templates.GetEquipmentTemplate(
+            character.Name,
+            tab,
+            accessToken.Key,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotNull(actual);
         Assert.NotEmpty(actual.Items);

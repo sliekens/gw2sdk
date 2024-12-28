@@ -9,7 +9,8 @@ public class EmotesIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.Emotes.GetEmotesIndex(TestContext.Current.CancellationToken);
+        var (actual, context) =
+            await sut.Hero.Emotes.GetEmotesIndex(TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

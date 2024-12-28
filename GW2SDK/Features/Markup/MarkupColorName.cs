@@ -6,6 +6,27 @@ namespace GuildWars2.Markup;
 [PublicAPI]
 public static class MarkupColorName
 {
+    /// <summary>A dictionary that maps color names to their corresponding hex color codes, based on colors picked from the
+    /// game.</summary>
+    /// <remarks>The dictionary is case-insensitive and contains the following default mappings:
+    /// <list type="bullet"><item><term>@abilitytype</term><description>#ffee88 (light yellow)</description></item>
+    ///     <item><term>@flavor</term><description>#99dddd (aqua)</description></item>
+    ///     <item><term>@reminder</term><description>#aaaaaa (gray)</description></item>
+    ///     <item><term>@task</term><description>#ffcc55 (gold)</description></item>
+    ///     <item><term>@warning</term><description>#ff0000 (red)</description></item></list>
+    /// </remarks>
+    public static readonly IReadOnlyDictionary<string, string> DefaultColorMap =
+        new ReadOnlyDictionary<string, string>(
+            new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+            {
+                [AbilityType] = "#ffee88",
+                [Flavor] = "#99eedd",
+                [Reminder] = "#aaaaaa",
+                [Task] = "#ffcc55",
+                [Warning] = "#ff0000"
+            }
+        );
+
     /// <summary>The color for flavor text. Color used in game: Aqua.</summary>
     public static string Flavor => "@flavor";
 
@@ -20,29 +41,6 @@ public static class MarkupColorName
 
     /// <summary>The color for task text. Color used in game: Gold.</summary>
     public static string Task => "@task";
-
-    /// <summary>
-    /// A dictionary that maps color names to their corresponding hex color codes, based on colors picked from the game.
-    /// </summary>
-    /// <remarks>
-    /// The dictionary is case-insensitive and contains the following default mappings:
-    /// <list type="bullet">
-    /// <item><term>@abilitytype</term><description>#ffee88 (light yellow)</description></item>
-    /// <item><term>@flavor</term><description>#99dddd (aqua)</description></item>
-    /// <item><term>@reminder</term><description>#aaaaaa (gray)</description></item>
-    /// <item><term>@task</term><description>#ffcc55 (gold)</description></item>
-    /// <item><term>@warning</term><description>#ff0000 (red)</description></item>
-    /// </list>
-    /// </remarks>
-    public static readonly IReadOnlyDictionary<string, string> DefaultColorMap =
-        new ReadOnlyDictionary<string, string>(new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-        {
-            [AbilityType] = "#ffee88",
-            [Flavor] = "#99eedd",
-            [Reminder] = "#aaaaaa",
-            [Task] = "#ffcc55",
-            [Warning] = "#ff0000"
-        });
 
     /// <summary>Determines whether the specified color name is defined.</summary>
     /// <remarks>The name should include the leading '@' symbol, e.g. '@flavor'.</remarks>

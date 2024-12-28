@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace GuildWars2.Markup;
 
 /// <summary>Provides functionality to convert markup strings to other formats.</summary>
@@ -29,7 +27,8 @@ public static class MarkupConverter
         return TextConverter.Convert(rootNode);
     }
 
-    /// <summary>Converts a markup string to a string with HTML formatting using the <see cref="MarkupColorName.DefaultColorMap"/>.</summary>
+    /// <summary>Converts a markup string to a string with HTML formatting using the
+    /// <see cref="MarkupColorName.DefaultColorMap" />.</summary>
     /// <param name="markup">The markup string to convert.</param>
     /// <returns>The HTML string.</returns>
     public static string ToHtml(string markup)

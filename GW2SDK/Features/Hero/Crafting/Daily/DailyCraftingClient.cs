@@ -31,7 +31,8 @@ public sealed class DailyCraftingClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/dailycrafting");
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
@@ -57,7 +58,8 @@ public sealed class DailyCraftingClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/dailycrafting", accessToken);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());

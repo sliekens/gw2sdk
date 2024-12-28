@@ -39,9 +39,13 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/characters/{characterName}/heropoints", accessToken);
+        var requestBuilder = RequestBuilder.HttpGet(
+            $"v2/characters/{characterName}/heropoints",
+            accessToken
+        );
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
@@ -68,7 +72,8 @@ public sealed class ExplorationClient
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -86,7 +91,8 @@ public sealed class ExplorationClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/continents");
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -111,7 +117,8 @@ public sealed class ExplorationClient
         requestBuilder.Query.AddId(continentId);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -137,7 +144,8 @@ public sealed class ExplorationClient
         requestBuilder.Query.AddIds(continentIds);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -165,7 +173,8 @@ public sealed class ExplorationClient
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -195,7 +204,8 @@ public sealed class ExplorationClient
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -215,7 +225,8 @@ public sealed class ExplorationClient
     {
         var requestBuilder = RequestBuilder.HttpGet($"v2/continents/{continentId}/floors");
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -242,7 +253,8 @@ public sealed class ExplorationClient
         requestBuilder.Query.AddId(floorId);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -270,7 +282,8 @@ public sealed class ExplorationClient
         requestBuilder.Query.AddIds(floorIds);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -300,7 +313,8 @@ public sealed class ExplorationClient
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -328,11 +342,13 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions");
+        var requestBuilder =
+            RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -352,9 +368,11 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions");
+        var requestBuilder =
+            RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions");
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -379,11 +397,13 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions");
+        var requestBuilder =
+            RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions");
         requestBuilder.Query.AddId(regionId);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -409,11 +429,13 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions");
+        var requestBuilder =
+            RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions");
         requestBuilder.Query.AddIds(regionIds);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -441,11 +463,13 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions");
+        var requestBuilder =
+            RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -475,11 +499,14 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps");
+        var requestBuilder = RequestBuilder.HttpGet(
+            $"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps"
+        );
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -501,9 +528,12 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps");
+        var requestBuilder = RequestBuilder.HttpGet(
+            $"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps"
+        );
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -530,11 +560,14 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps");
+        var requestBuilder = RequestBuilder.HttpGet(
+            $"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps"
+        );
         requestBuilder.Query.AddId(mapId);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -562,11 +595,14 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps");
+        var requestBuilder = RequestBuilder.HttpGet(
+            $"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps"
+        );
         requestBuilder.Query.AddIds(mapIds);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -596,11 +632,14 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps");
+        var requestBuilder = RequestBuilder.HttpGet(
+            $"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps"
+        );
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -632,15 +671,19 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/pois");
+        var requestBuilder = RequestBuilder.HttpGet(
+            $"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/pois"
+        );
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetPointOfInterest());
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetPointOfInterest());
             return (value, response.Context);
         }
     }
@@ -660,9 +703,12 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/pois");
+        var requestBuilder = RequestBuilder.HttpGet(
+            $"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/pois"
+        );
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -691,11 +737,14 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/pois");
+        var requestBuilder = RequestBuilder.HttpGet(
+            $"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/pois"
+        );
         requestBuilder.Query.AddId(pointOfInterestId);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -726,15 +775,19 @@ public sealed class ExplorationClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/pois");
+        var requestBuilder = RequestBuilder.HttpGet(
+            $"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/pois"
+        );
         requestBuilder.Query.AddIds(pointOfInterestIds);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetPointOfInterest());
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetPointOfInterest());
             return (value, response.Context);
         }
     }
@@ -763,15 +816,19 @@ public sealed class ExplorationClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/pois");
+        var requestBuilder = RequestBuilder.HttpGet(
+            $"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/pois"
+        );
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetPointOfInterest());
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetPointOfInterest());
             return (value, response.Context);
         }
     }
@@ -799,11 +856,14 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/tasks");
+        var requestBuilder = RequestBuilder.HttpGet(
+            $"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/tasks"
+        );
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -827,9 +887,12 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/tasks");
+        var requestBuilder = RequestBuilder.HttpGet(
+            $"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/tasks"
+        );
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -858,11 +921,14 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/tasks");
+        var requestBuilder = RequestBuilder.HttpGet(
+            $"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/tasks"
+        );
         requestBuilder.Query.AddId(heartId);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -892,11 +958,14 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/tasks");
+        var requestBuilder = RequestBuilder.HttpGet(
+            $"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/tasks"
+        );
         requestBuilder.Query.AddIds(heartIds);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -928,11 +997,14 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/tasks");
+        var requestBuilder = RequestBuilder.HttpGet(
+            $"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/tasks"
+        );
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -964,11 +1036,14 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/sectors");
+        var requestBuilder = RequestBuilder.HttpGet(
+            $"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/sectors"
+        );
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -992,9 +1067,12 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/sectors");
+        var requestBuilder = RequestBuilder.HttpGet(
+            $"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/sectors"
+        );
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -1023,11 +1101,14 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/sectors");
+        var requestBuilder = RequestBuilder.HttpGet(
+            $"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/sectors"
+        );
         requestBuilder.Query.AddId(sectorId);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -1057,11 +1138,14 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/sectors");
+        var requestBuilder = RequestBuilder.HttpGet(
+            $"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/sectors"
+        );
         requestBuilder.Query.AddIds(sectorIds);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -1093,11 +1177,14 @@ public sealed class ExplorationClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/sectors");
+        var requestBuilder = RequestBuilder.HttpGet(
+            $"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/sectors"
+        );
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -1125,7 +1212,8 @@ public sealed class ExplorationClient
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -1143,7 +1231,8 @@ public sealed class ExplorationClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/maps");
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -1168,7 +1257,8 @@ public sealed class ExplorationClient
         requestBuilder.Query.AddId(mapId);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -1194,7 +1284,8 @@ public sealed class ExplorationClient
         requestBuilder.Query.AddIds(mapIds);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -1222,7 +1313,8 @@ public sealed class ExplorationClient
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;

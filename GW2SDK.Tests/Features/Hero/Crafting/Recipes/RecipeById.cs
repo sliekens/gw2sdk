@@ -11,7 +11,10 @@ public class RecipeById
 
         const int id = 1;
 
-        var (actual, context) = await sut.Hero.Crafting.Recipes.GetRecipeById(id, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Hero.Crafting.Recipes.GetRecipeById(
+            id,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

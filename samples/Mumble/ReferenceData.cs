@@ -8,13 +8,13 @@ namespace Mumble;
 
 public sealed class ReferenceData
 {
+    private readonly ConcurrentDictionary<int, DyeColor> colors = new();
+
     private readonly ConcurrentDictionary<int, MapSummary> maps = new();
 
     private readonly ConcurrentDictionary<int, Specialization> specializations = new();
 
-    private readonly ConcurrentDictionary<int, DyeColor> colors = new();
-
-    private readonly ConcurrentDictionary<int, World> worlds= new();
+    private readonly ConcurrentDictionary<int, World> worlds = new();
 
     public IReadOnlyDictionary<int, MapSummary> Maps => maps.AsReadOnly();
 
@@ -22,7 +22,7 @@ public sealed class ReferenceData
 
     public IReadOnlyDictionary<int, DyeColor> Colors => colors.AsReadOnly();
 
-    public IReadOnlyDictionary<int, World> Worlds=> worlds.AsReadOnly();
+    public IReadOnlyDictionary<int, World> Worlds => worlds.AsReadOnly();
 
     public bool TryAddMap(MapSummary map)
     {

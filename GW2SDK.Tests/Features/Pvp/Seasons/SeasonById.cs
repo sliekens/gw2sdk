@@ -11,7 +11,10 @@ public class SeasonById
 
         const string id = "2B2E80D3-0A74-424F-B0EA-E221500B323C";
 
-        var (actual, context) = await sut.Pvp.GetSeasonById(id, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Pvp.GetSeasonById(
+            id,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

@@ -23,8 +23,13 @@ internal sealed class RequestBuilder(HttpMethod method, string path, string? acc
         return message;
     }
 
-    public static RequestBuilder HttpGet(string path, string? accessToken = null) =>
-        new(Get, path, accessToken);
+    public static RequestBuilder HttpGet(string path, string? accessToken = null)
+    {
+        return new RequestBuilder(Get, path, accessToken);
+    }
 
-    public override string ToString() => path + Query;
+    public override string ToString()
+    {
+        return path + Query;
+    }
 }

@@ -11,12 +11,11 @@ public class EquipmentTemplateNumbers
         var character = TestConfiguration.TestCharacter;
         var accessToken = TestConfiguration.ApiKey;
 
-        var (actual, context) =
-            await sut.Hero.Equipment.Templates.GetEquipmentTemplateNumbers(
-                character.Name,
-                accessToken.Key,
-                cancellationToken: TestContext.Current.CancellationToken
-            );
+        var (actual, context) = await sut.Hero.Equipment.Templates.GetEquipmentTemplateNumbers(
+            character.Name,
+            accessToken.Key,
+            TestContext.Current.CancellationToken
+        );
 
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

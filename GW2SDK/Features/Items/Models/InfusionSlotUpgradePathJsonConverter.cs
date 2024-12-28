@@ -6,13 +6,21 @@ namespace GuildWars2.Items;
 
 internal class InfusionSlotUpgradePathJsonConverter : JsonConverter<InfusionSlotUpgradePath>
 {
-    public override InfusionSlotUpgradePath? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override InfusionSlotUpgradePath? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
-        using JsonDocument json = JsonDocument.ParseValue(ref reader);
+        using var json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
-    public override void Write(Utf8JsonWriter writer, InfusionSlotUpgradePath value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        InfusionSlotUpgradePath value,
+        JsonSerializerOptions options
+    )
     {
         Write(writer, value);
     }

@@ -26,8 +26,10 @@ public class DesignedForInheritanceTest(AssemblyFixture fixture) : IClassFixture
                     return;
                 }
 
-                if (type.GetCustomAttributes()
-                    .Any(att => att.GetType().Name == "InheritableAttribute"))
+                if (Enumerable.Any(
+                        type.GetCustomAttributes(),
+                        att => att.GetType().Name == "InheritableAttribute"
+                    ))
                 {
                     return;
                 }

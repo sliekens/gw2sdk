@@ -12,7 +12,10 @@ public class MapChestById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Pve.MapChests.GetMapChestById(id, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Pve.MapChests.GetMapChestById(
+            id,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

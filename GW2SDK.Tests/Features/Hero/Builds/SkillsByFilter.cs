@@ -11,12 +11,14 @@ public class SkillsByFilter
 
         HashSet<int> ids =
         [
-            1110,
-            12693,
+            1110, 12693,
             39222
         ];
 
-        var (actual, context) = await sut.Hero.Builds.GetSkillsByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Hero.Builds.GetSkillsByIds(
+            ids,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

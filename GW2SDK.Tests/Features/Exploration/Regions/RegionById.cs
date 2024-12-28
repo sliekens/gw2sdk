@@ -12,7 +12,12 @@ public class RegionById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Exploration.GetRegionById(continentId, floorId, regionId, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Exploration.GetRegionById(
+            continentId,
+            floorId,
+            regionId,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotNull(context);
         Assert.Equal(regionId, actual.Id);

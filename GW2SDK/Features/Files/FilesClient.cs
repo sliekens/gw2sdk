@@ -30,7 +30,8 @@ public sealed class FilesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/files");
         requestBuilder.Query.AddAllIds();
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -48,7 +49,8 @@ public sealed class FilesClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/files");
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
@@ -70,7 +72,8 @@ public sealed class FilesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/files");
         requestBuilder.Query.AddId(fileId);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -93,7 +96,8 @@ public sealed class FilesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/files");
         requestBuilder.Query.AddIds(fileIds);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -118,7 +122,8 @@ public sealed class FilesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/files");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;

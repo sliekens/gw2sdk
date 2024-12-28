@@ -11,7 +11,10 @@ public class AchievementGroupById
 
         const string id = "A4ED8379-5B6B-4ECC-B6E1-70C350C902D2";
 
-        var (actual, context) = await sut.Hero.Achievements.GetAchievementGroupById(id, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Hero.Achievements.GetAchievementGroupById(
+            id,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

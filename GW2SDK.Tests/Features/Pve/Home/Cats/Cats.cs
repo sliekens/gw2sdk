@@ -9,7 +9,8 @@ public class Cats
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Pve.Home.GetCats(cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) =
+            await sut.Pve.Home.GetCats(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultTotal, actual.Count);

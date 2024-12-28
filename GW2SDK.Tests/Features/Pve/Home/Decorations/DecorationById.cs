@@ -11,7 +11,10 @@ public class DecorationById
 
         const int id = 133;
 
-        var (actual, context) = await sut.Pve.Home.GetDecorationById(id, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Pve.Home.GetDecorationById(
+            id,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

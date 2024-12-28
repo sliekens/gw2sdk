@@ -9,7 +9,9 @@ public class AttributeCombinations
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Items.GetAttributeCombinations(cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Items.GetAttributeCombinations(
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.Equal(context.ResultTotal, actual.Count);
     }

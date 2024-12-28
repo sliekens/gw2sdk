@@ -50,12 +50,18 @@ public static class BulkQuery
 
         if (chunkSize is < 1 or > 200)
         {
-            ThrowHelper.ThrowArgumentOutOfRange("The chunk size must be a number between 1 and 200.", chunkSize);
+            ThrowHelper.ThrowArgumentOutOfRange(
+                "The chunk size must be a number between 1 and 200.",
+                chunkSize
+            );
         }
 
         if (degreeOfParallelism < 1)
         {
-            ThrowHelper.ThrowArgumentOutOfRange("The degree of parallelism must be at least 1.", degreeOfParallelism);
+            ThrowHelper.ThrowArgumentOutOfRange(
+                "The degree of parallelism must be at least 1.",
+                degreeOfParallelism
+            );
         }
 
         var resultCount = 0;
@@ -123,6 +129,10 @@ public static class BulkQuery
     private sealed class DisposeSensor : IDisposable
     {
         public bool Disposed { get; private set; }
-        public void Dispose() => Disposed = true;
+
+        public void Dispose()
+        {
+            Disposed = true;
+        }
     }
 }

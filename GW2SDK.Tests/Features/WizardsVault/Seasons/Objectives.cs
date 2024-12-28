@@ -9,7 +9,10 @@ public class Season
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.WizardsVault.GetSeason(cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) =
+            await sut.WizardsVault.GetSeason(
+                cancellationToken: TestContext.Current.CancellationToken
+            );
 
         Assert.NotNull(context);
         Assert.NotEmpty(actual.Title);

@@ -11,7 +11,10 @@ public class GuildUpgradeById
 
         const int id = 43;
 
-        var (actual, context) = await sut.Guilds.GetGuildUpgradeById(id, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Guilds.GetGuildUpgradeById(
+            id,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

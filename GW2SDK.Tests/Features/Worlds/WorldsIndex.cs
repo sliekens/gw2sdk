@@ -9,7 +9,8 @@ public class WorldsIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Worlds.GetWorldsIndex(TestContext.Current.CancellationToken);
+        var (actual, context) =
+            await sut.Worlds.GetWorldsIndex(TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

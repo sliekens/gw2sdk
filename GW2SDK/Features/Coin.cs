@@ -14,18 +14,6 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
     /// <summary>Represents zero coins.</summary>
     public static readonly Coin Zero = 0;
 
-    /// <summary>Gets the total value in copper coins.</summary>
-    public int Amount { get; }
-
-    /// <summary>The amount of gold coins.</summary>
-    public int Gold => Amount / 1_00_00;
-
-    /// <summary>The amount of silver coins.</summary>
-    public int Silver => (Amount % 1_00_00) / 1_00;
-
-    /// <summary>The amount of copper coins.</summary>
-    public int Copper => Amount % 1_00;
-
     /// <summary>Initializes a new instance of the <see cref="Coin" /> struct with the specified amount of gold, silver, and
     /// copper coins.</summary>
     /// <param name="gold">The amount of gold coins.</param>
@@ -52,6 +40,18 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
         Amount = amount;
     }
 
+    /// <summary>Gets the total value in copper coins.</summary>
+    public int Amount { get; }
+
+    /// <summary>The amount of gold coins.</summary>
+    public int Gold => Amount / 1_00_00;
+
+    /// <summary>The amount of silver coins.</summary>
+    public int Silver => Amount % 1_00_00 / 1_00;
+
+    /// <summary>The amount of copper coins.</summary>
+    public int Copper => Amount % 1_00;
+
     /// <summary>Compares the current instance with another object.</summary>
     /// <param name="obj">The object to compare with.</param>
     /// <returns>A value indicating the relative order of the objects being compared.</returns>
@@ -74,97 +74,148 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
     /// <summary>Compares the current instance with another <see cref="Coin" /> value.</summary>
     /// <param name="other">The <see cref="Coin" /> value to compare with.</param>
     /// <returns>A value indicating the relative order of the objects being compared.</returns>
-    public int CompareTo(Coin other) => Amount.CompareTo(other.Amount);
+    public int CompareTo(Coin other)
+    {
+        return Amount.CompareTo(other.Amount);
+    }
 
     /// <summary>Determines whether one <see cref="Coin" /> value is less than another.</summary>
     /// <param name="left">The first <see cref="Coin" /> value to compare.</param>
     /// <param name="right">The second <see cref="Coin" /> value to compare.</param>
     /// <returns><c>true</c> if <paramref name="left" /> is less than <paramref name="right" />; otherwise, <c>false</c>.</returns>
-    public static bool operator <(Coin left, Coin right) => left.CompareTo(right) < 0;
+    public static bool operator <(Coin left, Coin right)
+    {
+        return left.CompareTo(right) < 0;
+    }
 
     /// <summary>Determines whether one <see cref="Coin" /> value is greater than another.</summary>
     /// <param name="left">The first <see cref="Coin" /> value to compare.</param>
     /// <param name="right">The second <see cref="Coin" /> value to compare.</param>
     /// <returns><c>true</c> if <paramref name="left" /> is greater than <paramref name="right" />; otherwise, <c>false</c>.</returns>
-    public static bool operator >(Coin left, Coin right) => left.CompareTo(right) > 0;
+    public static bool operator >(Coin left, Coin right)
+    {
+        return left.CompareTo(right) > 0;
+    }
 
     /// <summary>Determines whether one <see cref="Coin" /> value is less than or equal to another.</summary>
     /// <param name="left">The first <see cref="Coin" /> value to compare.</param>
     /// <param name="right">The second <see cref="Coin" /> value to compare.</param>
     /// <returns><c>true</c> if <paramref name="left" /> is less than or equal to <paramref name="right" />; otherwise,
     /// <c>false</c>.</returns>
-    public static bool operator <=(Coin left, Coin right) => left.CompareTo(right) <= 0;
+    public static bool operator <=(Coin left, Coin right)
+    {
+        return left.CompareTo(right) <= 0;
+    }
 
     /// <summary>Determines whether one <see cref="Coin" /> value is greater than or equal to another.</summary>
     /// <param name="left">The first <see cref="Coin" /> value to compare.</param>
     /// <param name="right">The second <see cref="Coin" /> value to compare.</param>
     /// <returns><c>true</c> if <paramref name="left" /> is greater than or equal to <paramref name="right" />; otherwise,
     /// <c>false</c>.</returns>
-    public static bool operator >=(Coin left, Coin right) => left.CompareTo(right) >= 0;
+    public static bool operator >=(Coin left, Coin right)
+    {
+        return left.CompareTo(right) >= 0;
+    }
 
     /// <summary>Returns the current instance of <see cref="Coin" />.</summary>
     /// <param name="coin">The <see cref="Coin" /> value.</param>
     /// <returns>The current instance of <see cref="Coin" />.</returns>
-    public static Coin operator +(Coin coin) => new(coin.Amount);
+    public static Coin operator +(Coin coin)
+    {
+        return new Coin(coin.Amount);
+    }
 
     /// <summary>Returns the negation of the current instance of <see cref="Coin" />.</summary>
     /// <param name="coin">The <see cref="Coin" /> value.</param>
     /// <returns>The negation of the current instance of <see cref="Coin" />.</returns>
-    public static Coin operator -(Coin coin) => new(-coin.Amount);
+    public static Coin operator -(Coin coin)
+    {
+        return new Coin(-coin.Amount);
+    }
 
     /// <summary>Increments the current instance of <see cref="Coin" /> by 1.</summary>
     /// <param name="coin">The <see cref="Coin" /> value.</param>
     /// <returns>The incremented <see cref="Coin" /> value.</returns>
-    public static Coin operator ++(Coin coin) => new(coin.Amount + 1);
+    public static Coin operator ++(Coin coin)
+    {
+        return new Coin(coin.Amount + 1);
+    }
 
     /// <summary>Decrements the current instance of <see cref="Coin" /> by 1.</summary>
     /// <param name="coin">The <see cref="Coin" /> value.</param>
     /// <returns>The decremented <see cref="Coin" /> value.</returns>
-    public static Coin operator --(Coin coin) => new(coin.Amount - 1);
+    public static Coin operator --(Coin coin)
+    {
+        return new Coin(coin.Amount - 1);
+    }
 
     /// <summary>Adds two <see cref="Coin" /> values.</summary>
     /// <param name="left">The first <see cref="Coin" /> value.</param>
     /// <param name="right">The second <see cref="Coin" /> value.</param>
     /// <returns>The sum of the two <see cref="Coin" /> values.</returns>
-    public static Coin operator +(Coin left, Coin right) => new(left.Amount + right.Amount);
+    public static Coin operator +(Coin left, Coin right)
+    {
+        return new Coin(left.Amount + right.Amount);
+    }
 
     /// <summary>Subtracts two <see cref="Coin" /> values.</summary>
     /// <param name="left">The first <see cref="Coin" /> value.</param>
     /// <param name="right">The second <see cref="Coin" /> value.</param>
     /// <returns>The difference between the two <see cref="Coin" /> values.</returns>
-    public static Coin operator -(Coin left, Coin right) => new(left.Amount - right.Amount);
+    public static Coin operator -(Coin left, Coin right)
+    {
+        return new Coin(left.Amount - right.Amount);
+    }
 
     /// <summary>Multiplies two <see cref="Coin" /> values.</summary>
     /// <param name="left">The first <see cref="Coin" /> value.</param>
     /// <param name="right">The second <see cref="Coin" /> value.</param>
     /// <returns>The product of the two <see cref="Coin" /> values.</returns>
-    public static Coin operator *(Coin left, Coin right) => new(left.Amount * right.Amount);
+    public static Coin operator *(Coin left, Coin right)
+    {
+        return new Coin(left.Amount * right.Amount);
+    }
 
     /// <summary>Divides two <see cref="Coin" /> values.</summary>
     /// <param name="left">The first <see cref="Coin" /> value.</param>
     /// <param name="right">The second <see cref="Coin" /> value.</param>
     /// <returns>The quotient of the two <see cref="Coin" /> values.</returns>
-    public static Coin operator /(Coin left, Coin right) => new(left.Amount / right.Amount);
+    public static Coin operator /(Coin left, Coin right)
+    {
+        return new Coin(left.Amount / right.Amount);
+    }
 
     /// <summary>Computes the remainder of dividing two <see cref="Coin" /> values.</summary>
     /// <param name="left">The first <see cref="Coin" /> value.</param>
     /// <param name="right">The second <see cref="Coin" /> value.</param>
     /// <returns>The remainder of dividing the two <see cref="Coin" /> values.</returns>
-    public static Coin operator %(Coin left, Coin right) => new(left.Amount % right.Amount);
+    public static Coin operator %(Coin left, Coin right)
+    {
+        return new Coin(left.Amount % right.Amount);
+    }
 
     /// <summary>Implicitly converts a <see cref="Coin" /> value to an <see cref="int" /> value.</summary>
     /// <param name="coin">The <see cref="Coin" /> value.</param>
     /// <returns>The <see cref="int" /> value representing the amount of coins.</returns>
-    public static implicit operator int(Coin coin) => coin.Amount;
+    public static implicit operator int(Coin coin)
+    {
+        return coin.Amount;
+    }
 
     /// <summary>Implicitly converts an <see cref="int" /> value to a <see cref="Coin" /> value.</summary>
     /// <param name="quantity">The <see cref="int" /> value representing the amount of coins.</param>
     /// <returns>The <see cref="Coin" /> value.</returns>
-    public static implicit operator Coin(int quantity) => new(quantity);
+    public static implicit operator Coin(int quantity)
+    {
+        return new Coin(quantity);
+    }
 
     /// <summary>Gets the chat link representation of the current instance of <see cref="Coin" />.</summary>
     /// <returns>The chat link representation of the current instance of <see cref="Coin" />.</returns>
-    public CoinLink GetChatLink() => new() { Coins = this };
+    public CoinLink GetChatLink()
+    {
+        return new CoinLink { Coins = this };
+    }
 
     /// <summary>Gets the string representation of the <see cref="Coin" /> value.</summary>
     /// <returns>Returns the current <see cref="Coin" /> value formatted for display, (for example) 12 gold, 34 silver, 56

@@ -11,12 +11,14 @@ public class DungeonsByFilter
 
         HashSet<string> ids =
         [
-            "twilight_arbor",
-            "sorrows_embrace",
+            "twilight_arbor", "sorrows_embrace",
             "citadel_of_flame"
         ];
 
-        var (actual, context) = await sut.Pve.Dungeons.GetDungeonsByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Pve.Dungeons.GetDungeonsByIds(
+            ids,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

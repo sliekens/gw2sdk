@@ -1,4 +1,3 @@
-
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using GuildWars2.Json;
@@ -7,13 +6,21 @@ namespace GuildWars2.Items;
 
 internal sealed class InfusionSlotJsonConverter : JsonConverter<InfusionSlot>
 {
-    public override InfusionSlot? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override InfusionSlot? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         using var json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
-    public override void Write(Utf8JsonWriter writer, InfusionSlot value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        InfusionSlot value,
+        JsonSerializerOptions options
+    )
     {
         Write(writer, value);
     }

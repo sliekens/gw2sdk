@@ -31,7 +31,8 @@ public sealed class TokenClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/tokeninfo", accessToken);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -73,12 +74,18 @@ public sealed class TokenClient
         var requestBuilder = RequestBuilder.HttpGet("v2/createsubtoken", accessToken);
         if (permissions is not null)
         {
-            requestBuilder.Query.Add("permissions", string.Join(",", permissions).ToLowerInvariant());
+            requestBuilder.Query.Add(
+                "permissions",
+                string.Join(",", permissions).ToLowerInvariant()
+            );
         }
 
         if (absoluteExpirationDate.HasValue)
         {
-            requestBuilder.Query.Add("expire", absoluteExpirationDate.Value.ToUniversalTime().ToString("s"));
+            requestBuilder.Query.Add(
+                "expire",
+                absoluteExpirationDate.Value.ToUniversalTime().ToString("s")
+            );
         }
 
         if (allowedUrls is not null)
@@ -87,7 +94,8 @@ public sealed class TokenClient
         }
 
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;

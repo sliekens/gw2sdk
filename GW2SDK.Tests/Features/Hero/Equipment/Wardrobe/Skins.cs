@@ -15,7 +15,9 @@ public class Skins
         using var httpClient =
             new HttpClient(new JsonLinesHttpMessageHandler("Data/skins.jsonl.gz"));
         var sut = new Gw2Client(httpClient);
-        await foreach (var (actual, context) in sut.Hero.Equipment.Wardrobe.GetSkinsBulk(cancellationToken: TestContext.Current.CancellationToken))
+        await foreach (var (actual, context) in sut.Hero.Equipment.Wardrobe.GetSkinsBulk(
+                cancellationToken: TestContext.Current.CancellationToken
+            ))
         {
             Assert.NotNull(context);
             Assert.True(actual.Id > 0);

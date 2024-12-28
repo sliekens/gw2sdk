@@ -10,30 +10,40 @@ namespace GuildWars2;
 internal static class ThrowHelper
 {
     [DoesNotReturn]
-    internal static void ThrowInvalidOperationException(string? message) =>
+    internal static void ThrowInvalidOperationException(string? message)
+    {
         throw new InvalidOperationException(message);
+    }
 
     [DoesNotReturn]
-    internal static void ThrowUnexpectedMember(string memberName) =>
+    internal static void ThrowUnexpectedMember(string memberName)
+    {
         ThrowInvalidOperationException($"Unexpected member '{memberName}'.");
+    }
 
     [DoesNotReturn]
-    internal static void ThrowUnexpectedArrayLength(int length) =>
+    internal static void ThrowUnexpectedArrayLength(int length)
+    {
         ThrowInvalidOperationException($"Unexpected array length [{length}].");
+    }
 
     [DoesNotReturn]
-    internal static void ThrowUnexpectedDiscriminator(string? discriminatorValue) =>
-        ThrowInvalidOperationException(
-            $"Unexpected discriminator value '{discriminatorValue}'."
-        );
+    internal static void ThrowUnexpectedDiscriminator(string? discriminatorValue)
+    {
+        ThrowInvalidOperationException($"Unexpected discriminator value '{discriminatorValue}'.");
+    }
 
     [DoesNotReturn]
-    internal static void ThrowInvalidDiscriminator(string? discriminatorValue) =>
+    internal static void ThrowInvalidDiscriminator(string? discriminatorValue)
+    {
         ThrowInvalidOperationException($"Invalid discriminator value '{discriminatorValue}'.");
+    }
 
     [DoesNotReturn]
-    internal static void ThrowArgumentNull(string? paramName) =>
+    internal static void ThrowArgumentNull(string? paramName)
+    {
         throw new ArgumentNullException(paramName);
+    }
 
     public static void ThrowIfNull(
         [System.Diagnostics.CodeAnalysis.NotNull] object? argument,
@@ -47,21 +57,30 @@ internal static class ThrowHelper
     }
 
     [DoesNotReturn]
-    internal static void ThrowBadArgument(string? message, string? paramName) =>
+    internal static void ThrowBadArgument(string? message, string? paramName)
+    {
         throw new ArgumentException(message, paramName);
+    }
 
     internal static void ThrowArgumentOutOfRange(
         string? message,
         object argument,
         [CallerArgumentExpression("argument")] string? paramName = null
-    ) =>
+    )
+    {
         throw new ArgumentOutOfRangeException(paramName, argument, message);
+    }
 
-    internal static void ThrowInvalidFormat(string? message) => throw new FormatException(message);
+    internal static void ThrowInvalidFormat(string? message)
+    {
+        throw new FormatException(message);
+    }
 
     [DoesNotReturn]
-    internal static void ThrowObjectDisposed(object? instance) =>
+    internal static void ThrowObjectDisposed(object? instance)
+    {
         throw new ObjectDisposedException(instance?.GetType().FullName);
+    }
 
     [DoesNotReturn]
     public static void ThrowBadResponse(string? message, HttpStatusCode? statusCode)

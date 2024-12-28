@@ -14,13 +14,17 @@ public class MapsByFilter
         const int regionId = 1;
         HashSet<int> ids =
         [
-            26,
-            27,
+            26, 27,
             28
         ];
 
-        var (actual, context) =
-            await sut.Exploration.GetMapsByIds(continentId, floorId, regionId, ids, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Exploration.GetMapsByIds(
+            continentId,
+            floorId,
+            regionId,
+            ids,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

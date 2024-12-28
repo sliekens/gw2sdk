@@ -8,13 +8,21 @@ internal sealed class CraftingMaterialJsonConverter : JsonConverter<CraftingMate
 {
     public const string DiscriminatorValue = "crafting_material";
 
-    public override CraftingMaterial? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override CraftingMaterial? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         using var json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
-    public override void Write(Utf8JsonWriter writer, CraftingMaterial value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        CraftingMaterial value,
+        JsonSerializerOptions options
+    )
     {
         Write(writer, value);
     }
@@ -23,7 +31,9 @@ internal sealed class CraftingMaterialJsonConverter : JsonConverter<CraftingMate
     {
         if (!json.GetProperty(ItemJsonConverter.DiscriminatorName).ValueEquals(DiscriminatorValue))
         {
-            ThrowHelper.ThrowInvalidDiscriminator(json.GetProperty(ItemJsonConverter.DiscriminatorName).GetString());
+            ThrowHelper.ThrowInvalidDiscriminator(
+                json.GetProperty(ItemJsonConverter.DiscriminatorName).GetString()
+            );
         }
 
         return new CraftingMaterial
@@ -34,12 +44,14 @@ internal sealed class CraftingMaterialJsonConverter : JsonConverter<CraftingMate
             Level = json.GetProperty("level").GetInt32(),
             Rarity = json.GetProperty("rarity").GetEnum<Rarity>(),
             VendorValue = json.GetProperty("vendor_value").GetInt32(),
-            GameTypes = json.GetProperty("game_types").GetList(static value => value.GetEnum<GameType>()),
+            GameTypes =
+                json.GetProperty("game_types").GetList(static value => value.GetEnum<GameType>()),
             Flags = ItemFlagsJsonConverter.Read(json.GetProperty("flags")),
             Restrictions = ItemRestrictionJsonConverter.Read(json.GetProperty("restrictions")),
             ChatLink = json.GetProperty("chat_link").GetStringRequired(),
             IconHref = json.GetProperty("icon").GetString(),
-            UpgradesInto = json.GetProperty("upgrades_into").GetList(static value => InfusionSlotUpgradePathJsonConverter.Read(value))
+            UpgradesInto = json.GetProperty("upgrades_into")
+                .GetList(static value => InfusionSlotUpgradePathJsonConverter.Read(value))
         };
     }
 

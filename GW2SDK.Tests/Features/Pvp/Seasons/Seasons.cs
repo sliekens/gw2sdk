@@ -9,7 +9,8 @@ public class Seasons
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Pvp.GetSeasons(cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) =
+            await sut.Pvp.GetSeasons(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

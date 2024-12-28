@@ -7,6 +7,7 @@ namespace GuildWars2.Items;
 internal sealed class GatheringToolJsonConverter : JsonConverter<GatheringTool>
 {
     public const string DiscriminatorValue = "gathering_tool";
+
     public const string DiscriminatorName = "$gathering_tool_type";
 
     public override bool CanConvert(Type typeToConvert)
@@ -14,13 +15,21 @@ internal sealed class GatheringToolJsonConverter : JsonConverter<GatheringTool>
         return typeof(GatheringTool).IsAssignableFrom(typeToConvert);
     }
 
-    public override GatheringTool Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override GatheringTool Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         using var json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
-    public override void Write(Utf8JsonWriter writer, GatheringTool value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        GatheringTool value,
+        JsonSerializerOptions options
+    )
     {
         Write(writer, value);
     }
@@ -29,7 +38,9 @@ internal sealed class GatheringToolJsonConverter : JsonConverter<GatheringTool>
     {
         if (!json.GetProperty(ItemJsonConverter.DiscriminatorName).ValueEquals(DiscriminatorValue))
         {
-            ThrowHelper.ThrowInvalidDiscriminator(json.GetProperty(ItemJsonConverter.DiscriminatorName).GetString());
+            ThrowHelper.ThrowInvalidDiscriminator(
+                json.GetProperty(ItemJsonConverter.DiscriminatorName).GetString()
+            );
         }
 
         if (json.TryGetProperty(DiscriminatorName, out var discriminator))
@@ -57,7 +68,8 @@ internal sealed class GatheringToolJsonConverter : JsonConverter<GatheringTool>
             Level = json.GetProperty("level").GetInt32(),
             Rarity = json.GetProperty("rarity").GetEnum<Rarity>(),
             VendorValue = json.GetProperty("vendor_value").GetInt32(),
-            GameTypes = json.GetProperty("game_types").GetList(static value => value.GetEnum<GameType>()),
+            GameTypes =
+                json.GetProperty("game_types").GetList(static value => value.GetEnum<GameType>()),
             Flags = ItemFlagsJsonConverter.Read(json.GetProperty("flags")),
             Restrictions = ItemRestrictionJsonConverter.Read(json.GetProperty("restrictions")),
             ChatLink = json.GetProperty("chat_link").GetStringRequired(),

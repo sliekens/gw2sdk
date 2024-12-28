@@ -11,12 +11,14 @@ public class ObjectivesByFilter
 
         HashSet<string> ids =
         [
-            "1099-99",
-            "1143-99",
+            "1099-99", "1143-99",
             "1102-99"
         ];
 
-        var (actual, context) = await sut.Wvw.GetObjectivesByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Wvw.GetObjectivesByIds(
+            ids,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

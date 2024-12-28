@@ -12,13 +12,16 @@ public class StoredBuildsByNumbers
 
         HashSet<int> slotNumbers =
         [
-            2,
-            3,
+            2, 3,
             4
         ];
         ;
 
-        var (actual, _) = await sut.Hero.Builds.GetStoredBuilds(slotNumbers, accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, _) = await sut.Hero.Builds.GetStoredBuilds(
+            slotNumbers,
+            accessToken.Key,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotEmpty(actual);
         Assert.All(

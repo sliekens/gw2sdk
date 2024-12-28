@@ -9,7 +9,8 @@ public class MountNames
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, _) = await sut.Hero.Equipment.Mounts.GetMountNames(cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, _) =
+            await sut.Hero.Equipment.Mounts.GetMountNames(TestContext.Current.CancellationToken);
 
         Assert.All(
             actual,

@@ -13,7 +13,9 @@ internal static class HttpContentExtensions
         ThrowHelper.ThrowIfNull(instance);
         if (instance.Headers.ContentType?.MediaType != "application/json")
         {
-            throw new JsonException($"Expected a JSON response (application/json) but received '{instance.Headers.ContentType}'.");
+            throw new JsonException(
+                $"Expected a JSON response (application/json) but received '{instance.Headers.ContentType}'."
+            );
         }
 
         var content = await instance.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
@@ -39,9 +41,11 @@ internal static class HttpContentExtensions
     private static Task<Stream> ReadAsStreamAsync(
         this HttpContent instance,
         CancellationToken cancellationToken
-    ) =>
-        cancellationToken.IsCancellationRequested
+    )
+    {
+        return cancellationToken.IsCancellationRequested
             ? Task.FromCanceled<Stream>(cancellationToken)
             : instance.ReadAsStreamAsync();
+    }
 #endif
 }

@@ -11,8 +11,12 @@ public class RecipesByOutputItemByPage
 
         const int ironIngot = 19683;
         const int pageSize = 3;
-        var (actual, context) =
-            await sut.Hero.Crafting.Recipes.GetRecipesByOutputItemIdByPage(ironIngot, 0, pageSize, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Hero.Crafting.Recipes.GetRecipesByOutputItemIdByPage(
+            ironIngot,
+            0,
+            pageSize,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         const int ironIngotRecipe = 19;
         Assert.NotNull(context.Links);

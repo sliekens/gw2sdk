@@ -57,7 +57,9 @@ internal sealed class RuneJsonConverter : JsonConverter<Rune>
             ChatLink = json.GetProperty("chat_link").GetStringRequired(),
             IconHref = json.GetProperty("icon").GetString(),
             UpgradeComponentFlags =
-                UpgradeComponentFlagsJsonConverter.Read(json.GetProperty("upgrade_component_flags")),
+                UpgradeComponentFlagsJsonConverter.Read(
+                    json.GetProperty("upgrade_component_flags")
+                ),
             InfusionUpgradeFlags =
                 InfusionSlotFlagsJsonConverter.Read(json.GetProperty("infusion_upgrade_flags")),
             AttributeAdjustment = json.GetProperty("attribute_adjustment").GetDouble(),

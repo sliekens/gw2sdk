@@ -11,24 +11,20 @@ public class DefeatedWorldBosses
         var accessToken = TestConfiguration.ApiKey;
 
         // Resets each day, not easy to prove it works
-        var (actual, _) = await sut.Pve.WorldBosses.GetDefeatedWorldBosses(accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, _) = await sut.Pve.WorldBosses.GetDefeatedWorldBosses(
+            accessToken.Key,
+            TestContext.Current.CancellationToken
+        );
 
         HashSet<string> expected =
         [
-            "admiral_taidha_covington",
-            "claw_of_jormag",
-            "drakkar",
-            "fire_elemental",
-            "great_jungle_wurm",
-            "inquest_golem_mark_ii",
-            "karka_queen",
-            "megadestroyer",
-            "mists_and_monsters_titans",
-            "modniir_ulgoth",
-            "shadow_behemoth",
-            "svanir_shaman_chief",
-            "tequatl_the_sunless",
-            "the_shatterer",
+            "admiral_taidha_covington", "claw_of_jormag",
+            "drakkar", "fire_elemental",
+            "great_jungle_wurm", "inquest_golem_mark_ii",
+            "karka_queen", "megadestroyer",
+            "mists_and_monsters_titans", "modniir_ulgoth",
+            "shadow_behemoth", "svanir_shaman_chief",
+            "tequatl_the_sunless", "the_shatterer",
             "triple_trouble_wurm"
         ];
 

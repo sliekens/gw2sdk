@@ -32,5 +32,8 @@ public record EquipmentSkin
 
     /// <summary>Gets a chat link object for this skin.</summary>
     /// <returns>The chat link as an object.</returns>
-    public SkinLink GetChatLink() => new() { SkinId = Id };
+    public SkinLink GetChatLink()
+    {
+        return new SkinLink { SkinId = Id };
+    }
 }

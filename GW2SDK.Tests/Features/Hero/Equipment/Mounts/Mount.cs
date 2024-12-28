@@ -12,7 +12,10 @@ public class Mount
 
         const MountName name = MountName.Skyscale;
 
-        var (actual, _) = await sut.Hero.Equipment.Mounts.GetMountByName(name, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, _) = await sut.Hero.Equipment.Mounts.GetMountByName(
+            name,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.Equal(name, actual.Id);
     }

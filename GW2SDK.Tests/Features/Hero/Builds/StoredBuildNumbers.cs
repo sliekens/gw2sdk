@@ -10,7 +10,10 @@ public class StoredBuildNumbers
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = TestConfiguration.ApiKey;
 
-        var (actual, context) = await sut.Hero.Builds.GetStoredBuildNumbers(accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Hero.Builds.GetStoredBuildNumbers(
+            accessToken.Key,
+            TestContext.Current.CancellationToken
+        );
 
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

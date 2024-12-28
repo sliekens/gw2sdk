@@ -12,12 +12,14 @@ public class RacesByFilter
 
         HashSet<RaceName> names =
         [
-            RaceName.Asura,
-            RaceName.Charr,
+            RaceName.Asura, RaceName.Charr,
             RaceName.Norn
         ];
 
-        var (actual, context) = await sut.Hero.Races.GetRacesByNames(names, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Hero.Races.GetRacesByNames(
+            names,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.Equal(names.Count, context.ResultCount);
         Assert.True(context.ResultTotal > names.Count);

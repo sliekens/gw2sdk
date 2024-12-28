@@ -133,13 +133,15 @@ public sealed class TrainingClient
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
-    ) =>
-        GetProfessionsByNames(
+    )
+    {
+        return GetProfessionsByNames(
             professionNames.Select(professionName => (Extensible<ProfessionName>)professionName),
             language,
             missingMemberBehavior,
             cancellationToken
         );
+    }
 
     /// <summary>Retrieves professions by their name.</summary>
     /// <param name="professionNames">The profession names.</param>

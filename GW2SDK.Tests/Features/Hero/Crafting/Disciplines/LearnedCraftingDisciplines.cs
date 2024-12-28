@@ -11,12 +11,11 @@ public class LearnedCraftingDisciplines
         var character = TestConfiguration.TestCharacter;
         var accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) =
-            await sut.Hero.Crafting.Disciplines.GetLearnedCraftingDisciplines(
-                character.Name,
-                accessToken.Key,
-                cancellationToken: TestContext.Current.CancellationToken
-            );
+        var (actual, _) = await sut.Hero.Crafting.Disciplines.GetLearnedCraftingDisciplines(
+            character.Name,
+            accessToken.Key,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotEmpty(actual.Disciplines);
         Assert.All(actual.Disciplines, entry => Assert.True(entry.Discipline.IsDefined()));

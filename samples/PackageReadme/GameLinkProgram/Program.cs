@@ -15,16 +15,16 @@ internal class Program
             return;
         }
 
-        Console.WriteLine("GameLink is starting! (Ensure the game is running"
-            + " and that you are loaded into a map.)");
+        Console.WriteLine(
+            "GameLink is starting! (Ensure the game is running"
+            + " and that you are loaded into a map.)"
+        );
 
         // Pre-fetch all maps from the API, they are used to display the player's
         // current map
         using var http = new HttpClient();
         var gw2 = new Gw2Client(http);
-        var maps = await gw2.Exploration.GetMapSummaries()
-            .AsDictionary(map => map.Id)
-            .ValueOnly();
+        var maps = await gw2.Exploration.GetMapSummaries().AsDictionary(map => map.Id).ValueOnly();
 
         // Choose an interval to indicate how often you want to receive fresh data
         // from the game

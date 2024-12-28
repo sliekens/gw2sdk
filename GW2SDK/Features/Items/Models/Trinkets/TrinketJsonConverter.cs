@@ -16,7 +16,11 @@ internal sealed class TrinketJsonConverter : JsonConverter<Trinket>
         return typeof(Trinket).IsAssignableFrom(typeToConvert);
     }
 
-    public override Trinket Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override Trinket Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         using var json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
@@ -31,7 +35,9 @@ internal sealed class TrinketJsonConverter : JsonConverter<Trinket>
     {
         if (!json.GetProperty(ItemJsonConverter.DiscriminatorName).ValueEquals(DiscriminatorValue))
         {
-            ThrowHelper.ThrowInvalidDiscriminator(json.GetProperty(ItemJsonConverter.DiscriminatorName).GetString());
+            ThrowHelper.ThrowInvalidDiscriminator(
+                json.GetProperty(ItemJsonConverter.DiscriminatorName).GetString()
+            );
         }
 
         if (json.TryGetProperty(DiscriminatorName, out var discriminator))
@@ -55,18 +61,23 @@ internal sealed class TrinketJsonConverter : JsonConverter<Trinket>
             Level = json.GetProperty("level").GetInt32(),
             Rarity = json.GetProperty("rarity").GetEnum<Rarity>(),
             VendorValue = json.GetProperty("vendor_value").GetInt32(),
-            GameTypes = json.GetProperty("game_types").GetList(static value => value.GetEnum<GameType>()),
+            GameTypes =
+                json.GetProperty("game_types").GetList(static value => value.GetEnum<GameType>()),
             Flags = ItemFlagsJsonConverter.Read(json.GetProperty("flags")),
             Restrictions = ItemRestrictionJsonConverter.Read(json.GetProperty("restrictions")),
             ChatLink = json.GetProperty("chat_link").GetStringRequired(),
             IconHref = json.GetProperty("icon").GetString(),
-            InfusionSlots = json.GetProperty("infusion_slots").GetList(InfusionSlotJsonConverter.Read),
+            InfusionSlots = json.GetProperty("infusion_slots")
+                .GetList(InfusionSlotJsonConverter.Read),
             AttributeAdjustment = json.GetProperty("attribute_adjustment").GetDouble(),
-            AttributeCombinationId = json.GetProperty("attribute_combination_id").GetNullableInt32(),
-            Attributes = json.GetProperty("attributes").GetMap(
-                static name => new Extensible<AttributeName>(name),
-                static value => value.GetInt32()
-            ),
+            AttributeCombinationId =
+                json.GetProperty("attribute_combination_id").GetNullableInt32(),
+            Attributes =
+                json.GetProperty("attributes")
+                    .GetMap(
+                        static name => new Extensible<AttributeName>(name),
+                        static value => value.GetInt32()
+                    ),
             Buff = json.GetProperty("buff").GetNullable(BuffJsonConverter.Read),
             SuffixItemId = json.GetProperty("suffix_item_id").GetNullableInt32(),
             StatChoices = json.GetProperty("stat_choices").GetList(value => value.GetInt32())
@@ -105,6 +116,7 @@ internal sealed class TrinketJsonConverter : JsonConverter<Trinket>
         {
             InfusionSlotJsonConverter.Write(writer, slot);
         }
+
         writer.WriteEndArray();
 
         writer.WriteNumber("attribute_adjustment", value.AttributeAdjustment);
@@ -152,6 +164,7 @@ internal sealed class TrinketJsonConverter : JsonConverter<Trinket>
         {
             writer.WriteNumberValue(statChoice);
         }
+
         writer.WriteEndArray();
     }
 }

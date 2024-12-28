@@ -11,7 +11,10 @@ public class BackgroundStoryAnswerById
 
         const string id = "7-53";
 
-        var (actual, context) = await sut.Hero.StoryJournal.GetBackgroundStoryAnswerById(id, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Hero.StoryJournal.GetBackgroundStoryAnswerById(
+            id,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

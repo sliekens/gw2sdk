@@ -12,12 +12,14 @@ public class ProfessionsByName
 
         HashSet<ProfessionName> names =
         [
-            ProfessionName.Mesmer,
-            ProfessionName.Necromancer,
+            ProfessionName.Mesmer, ProfessionName.Necromancer,
             ProfessionName.Revenant
         ];
 
-        var (actual, _) = await sut.Hero.Training.GetProfessionsByNames(names, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, _) = await sut.Hero.Training.GetProfessionsByNames(
+            names,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.Collection(
             names,

@@ -2,15 +2,20 @@
 
 namespace GuildWars2.Items;
 
-internal sealed class AttributesComparer : EqualityComparer<KeyValuePair<Extensible<AttributeName>, int>>
+internal sealed class
+    AttributesComparer : EqualityComparer<KeyValuePair<Extensible<AttributeName>, int>>
 {
     private AttributesComparer()
     {
     }
 
-    public static EqualityComparer<KeyValuePair<Extensible<AttributeName>, int>> Instance { get; } = new AttributesComparer();
+    public static EqualityComparer<KeyValuePair<Extensible<AttributeName>, int>> Instance { get; } =
+        new AttributesComparer();
 
-    public override bool Equals(KeyValuePair<Extensible<AttributeName>, int> x, KeyValuePair<Extensible<AttributeName>, int> y)
+    public override bool Equals(
+        KeyValuePair<Extensible<AttributeName>, int> x,
+        KeyValuePair<Extensible<AttributeName>, int> y
+    )
     {
         return x.Key == y.Key && x.Value == y.Value;
     }

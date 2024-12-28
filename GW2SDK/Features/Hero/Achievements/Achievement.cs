@@ -63,5 +63,8 @@ public record Achievement
 
     /// <summary>Gets a chat link object for this achievement.</summary>
     /// <returns>The chat link as an object.</returns>
-    public AchievementLink GetChatLink() => new() { AchievementId = Id };
+    public AchievementLink GetChatLink()
+    {
+        return new AchievementLink { AchievementId = Id };
+    }
 }

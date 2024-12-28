@@ -10,6 +10,9 @@ public class AssemblyFixture
     public IEnumerable<Type> DataTransferObjects =>
         Assembly.DefinedTypes.Where(type => WithAttribute(type, "DataTransferObjectAttribute"));
 
-    private static bool WithAttribute(MemberInfo type, string attributeName) =>
-        type.GetCustomAttributes().Any(attribute => attribute.GetType().Name == attributeName);
+    private static bool WithAttribute(MemberInfo type, string attributeName)
+    {
+        return type.GetCustomAttributes()
+            .Any(attribute => attribute.GetType().Name == attributeName);
+    }
 }

@@ -11,12 +11,14 @@ public class GuildUpgradesByFilter
 
         HashSet<int> ids =
         [
-            260,
-            630,
+            260, 630,
             167
         ];
 
-        var (actual, context) = await sut.Guilds.GetGuildUpgradesByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Guilds.GetGuildUpgradesByIds(
+            ids,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

@@ -6,6 +6,16 @@ namespace MostVersatileMaterials;
 
 public class SpectreMarkupConverter
 {
+    private static readonly IReadOnlyDictionary<string, string> ColorMap =
+        new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+        {
+            [MarkupColorName.Flavor] = "#99dddd",
+            [MarkupColorName.Reminder] = "#aaaaaa",
+            [MarkupColorName.AbilityType] = "#ffee88",
+            [MarkupColorName.Warning] = "#ff0000",
+            [MarkupColorName.Task] = "#ffcc55"
+        };
+
     public string Convert(RootNode root)
     {
         var builder = new StringBuilder();
@@ -55,14 +65,4 @@ public class SpectreMarkupConverter
                 return "";
         }
     }
-
-    private static readonly IReadOnlyDictionary<string, string> ColorMap
-        = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-        {
-            [MarkupColorName.Flavor] = "#99dddd",
-            [MarkupColorName.Reminder] = "#aaaaaa",
-            [MarkupColorName.AbilityType] = "#ffee88",
-            [MarkupColorName.Warning] = "#ff0000",
-            [MarkupColorName.Task] = "#ffcc55",
-        };
 }

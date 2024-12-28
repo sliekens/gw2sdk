@@ -12,8 +12,13 @@ public class PointsOfInterest
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
-            await sut.Exploration.GetPointsOfInterest(continentId, floorId, regionId, mapId, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Exploration.GetPointsOfInterest(
+            continentId,
+            floorId,
+            regionId,
+            mapId,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

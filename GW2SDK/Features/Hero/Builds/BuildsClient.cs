@@ -33,7 +33,8 @@ public sealed class BuildsClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/buildstorage", accessToken);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetList(static entry => entry.GetInt32());
@@ -58,7 +59,8 @@ public sealed class BuildsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/account/buildstorage", accessToken);
         requestBuilder.Query.AddId(storageNumber);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -82,7 +84,8 @@ public sealed class BuildsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/account/buildstorage", accessToken);
         requestBuilder.Query.AddAllIds();
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -108,7 +111,8 @@ public sealed class BuildsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/account/buildstorage", accessToken);
         requestBuilder.Query.AddIds(storageNumbers);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -134,9 +138,13 @@ public sealed class BuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/characters/{characterName}/buildtabs", accessToken);
+        var requestBuilder = RequestBuilder.HttpGet(
+            $"v2/characters/{characterName}/buildtabs",
+            accessToken
+        );
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -160,9 +168,13 @@ public sealed class BuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/characters/{characterName}/buildtabs/{templateNumber}", accessToken);
+        var requestBuilder = RequestBuilder.HttpGet(
+            $"v2/characters/{characterName}/buildtabs/{templateNumber}",
+            accessToken
+        );
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -186,10 +198,14 @@ public sealed class BuildsClient
     )
     {
         // There is no ids=all support, but page=0 works
-        var requestBuilder = RequestBuilder.HttpGet($"v2/characters/{characterName}/buildtabs", accessToken);
+        var requestBuilder = RequestBuilder.HttpGet(
+            $"v2/characters/{characterName}/buildtabs",
+            accessToken
+        );
         requestBuilder.Query.AddPage(0, null);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -213,9 +229,13 @@ public sealed class BuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/characters/{characterName}/buildtabs/active", accessToken);
+        var requestBuilder = RequestBuilder.HttpGet(
+            $"v2/characters/{characterName}/buildtabs/active",
+            accessToken
+        );
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -243,7 +263,8 @@ public sealed class BuildsClient
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -261,7 +282,8 @@ public sealed class BuildsClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/skills");
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -286,7 +308,8 @@ public sealed class BuildsClient
         requestBuilder.Query.AddId(skillId);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -313,7 +336,8 @@ public sealed class BuildsClient
         requestBuilder.Query.AddIds(skillIds);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -341,7 +365,8 @@ public sealed class BuildsClient
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -369,7 +394,8 @@ public sealed class BuildsClient
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -387,7 +413,8 @@ public sealed class BuildsClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/specializations");
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -412,7 +439,8 @@ public sealed class BuildsClient
         requestBuilder.Query.AddId(specializationId);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -440,7 +468,8 @@ public sealed class BuildsClient
         requestBuilder.Query.AddIds(specializationIds);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -456,19 +485,21 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Specialization> Value, MessageContext Context)> GetSpecializationsByPage(
-        int pageIndex,
-        int? pageSize = default,
-        Language? language = default,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    public async Task<(HashSet<Specialization> Value, MessageContext Context)>
+        GetSpecializationsByPage(
+            int pageIndex,
+            int? pageSize = default,
+            Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/specializations");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -496,7 +527,8 @@ public sealed class BuildsClient
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -514,7 +546,8 @@ public sealed class BuildsClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/traits");
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -539,7 +572,8 @@ public sealed class BuildsClient
         requestBuilder.Query.AddId(traitId);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -566,7 +600,8 @@ public sealed class BuildsClient
         requestBuilder.Query.AddIds(traitIds);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -594,7 +629,8 @@ public sealed class BuildsClient
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -616,7 +652,8 @@ public sealed class BuildsClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/legends");
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
@@ -638,7 +675,8 @@ public sealed class BuildsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/legends");
         requestBuilder.Query.AddId(legendId);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -661,7 +699,8 @@ public sealed class BuildsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/legends");
         requestBuilder.Query.AddIds(legendIds);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -686,7 +725,8 @@ public sealed class BuildsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/legends");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -707,7 +747,8 @@ public sealed class BuildsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/legends");
         requestBuilder.Query.AddAllIds();
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;

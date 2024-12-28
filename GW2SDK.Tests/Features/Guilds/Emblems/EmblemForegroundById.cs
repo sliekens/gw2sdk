@@ -11,7 +11,10 @@ public class EmblemForegroundById
 
         const int id = 1;
 
-        var (actual, context) = await sut.Guilds.GetEmblemForegroundById(id, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Guilds.GetEmblemForegroundById(
+            id,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

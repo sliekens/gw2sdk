@@ -27,10 +27,10 @@ public sealed record ItemRestriction
         if (ReferenceEquals(this, other)) return true;
         if (other is null) return false;
 
-        return Races.SequenceEqual(other.Races) &&
-            Professions.SequenceEqual(other.Professions) &&
-            BodyTypes.SequenceEqual(other.BodyTypes) &&
-            Other.SequenceEqual(other.Other);
+        return Races.SequenceEqual(other.Races)
+            && Professions.SequenceEqual(other.Professions)
+            && BodyTypes.SequenceEqual(other.BodyTypes)
+            && Other.SequenceEqual(other.Other);
     }
 
     /// <inheritdoc />

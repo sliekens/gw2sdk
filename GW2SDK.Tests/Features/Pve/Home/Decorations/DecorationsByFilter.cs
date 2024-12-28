@@ -10,12 +10,14 @@ public class DecorationsByFilter
         var sut = Composer.Resolve<Gw2Client>();
         HashSet<int> ids =
         [
-            2,
-            4,
+            2, 4,
             7
         ];
 
-        var (actual, context) = await sut.Pve.Home.GetDecorationsByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Pve.Home.GetDecorationsByIds(
+            ids,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

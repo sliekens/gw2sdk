@@ -14,7 +14,7 @@ public class CompletedStorySteps
         var (actual, _) = await sut.Hero.StoryJournal.GetCompletedStorySteps(
             character.Name,
             accessToken.Key,
-            cancellationToken: TestContext.Current.CancellationToken
+            TestContext.Current.CancellationToken
         );
 
         Assert.NotEmpty(actual);

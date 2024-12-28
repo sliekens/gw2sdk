@@ -11,12 +11,14 @@ public class MapSummariesByFilter
 
         HashSet<int> ids =
         [
-            15,
-            17,
+            15, 17,
             18
         ];
 
-        var (actual, context) = await sut.Exploration.GetMapSummariesByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Exploration.GetMapSummariesByIds(
+            ids,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

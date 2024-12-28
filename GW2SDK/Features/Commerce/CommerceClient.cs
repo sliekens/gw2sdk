@@ -40,7 +40,8 @@ public sealed class CommerceClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/commerce/delivery", accessToken);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -62,7 +63,8 @@ public sealed class CommerceClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/commerce/prices");
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -84,7 +86,8 @@ public sealed class CommerceClient
         var requestBuilder = RequestBuilder.HttpGet("v2/commerce/prices");
         requestBuilder.Query.AddId(itemId);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -108,7 +111,8 @@ public sealed class CommerceClient
         var requestBuilder = RequestBuilder.HttpGet("v2/commerce/prices");
         requestBuilder.Query.AddIds(itemIds);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -200,7 +204,8 @@ public sealed class CommerceClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/commerce/listings");
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -222,7 +227,8 @@ public sealed class CommerceClient
         var requestBuilder = RequestBuilder.HttpGet("v2/commerce/listings");
         requestBuilder.Query.AddId(itemId);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -246,7 +252,8 @@ public sealed class CommerceClient
         var requestBuilder = RequestBuilder.HttpGet("v2/commerce/listings");
         requestBuilder.Query.AddIds(itemIds);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -343,7 +350,8 @@ public sealed class CommerceClient
         var requestBuilder = RequestBuilder.HttpGet("v2/commerce/exchange/gems");
         requestBuilder.Query.Add("quantity", gems);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -366,7 +374,8 @@ public sealed class CommerceClient
         var requestBuilder = RequestBuilder.HttpGet("v2/commerce/exchange/coins");
         requestBuilder.Query.Add("quantity", gold);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -395,10 +404,14 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/commerce/transactions/current/buys", accessToken);
+        var requestBuilder = RequestBuilder.HttpGet(
+            "v2/commerce/transactions/current/buys",
+            accessToken
+        );
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -423,10 +436,14 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/commerce/transactions/current/sells", accessToken);
+        var requestBuilder = RequestBuilder.HttpGet(
+            "v2/commerce/transactions/current/sells",
+            accessToken
+        );
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -451,10 +468,14 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/commerce/transactions/history/buys", accessToken);
+        var requestBuilder = RequestBuilder.HttpGet(
+            "v2/commerce/transactions/history/buys",
+            accessToken
+        );
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -479,10 +500,14 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/commerce/transactions/history/sells", accessToken);
+        var requestBuilder = RequestBuilder.HttpGet(
+            "v2/commerce/transactions/history/sells",
+            accessToken
+        );
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;

@@ -11,7 +11,12 @@ public class FloorsByPage
 
         const int continentId = 1;
         const int pageSize = 3;
-        var (actual, context) = await sut.Exploration.GetFloorsByPage(continentId, 0, pageSize, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Exploration.GetFloorsByPage(
+            continentId,
+            0,
+            pageSize,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);

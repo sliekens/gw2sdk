@@ -14,7 +14,10 @@ public sealed class QueryBuilder : IEnumerable
 
     private int queryLength;
 
-    IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)arguments).GetEnumerator();
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return ((IEnumerable)arguments).GetEnumerator();
+    }
 
     /// <summary>Adds an argument with the specified key and value to the <see cref="QueryBuilder" />.</summary>
     /// <param name="key">The key of the argument.</param>
@@ -79,9 +82,11 @@ public sealed class QueryBuilder : IEnumerable
 #endif
     }
 
-
     /// <inheritdoc />
-    public override string ToString() => Build();
+    public override string ToString()
+    {
+        return Build();
+    }
 }
 
 #if !NET

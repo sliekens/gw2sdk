@@ -16,13 +16,21 @@ internal sealed class UpgradeComponentJsonConverter : JsonConverter<UpgradeCompo
         return typeof(UpgradeComponent).IsAssignableFrom(typeToConvert);
     }
 
-    public override UpgradeComponent Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override UpgradeComponent Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         using var json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
-    public override void Write(Utf8JsonWriter writer, UpgradeComponent value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        UpgradeComponent value,
+        JsonSerializerOptions options
+    )
     {
         Write(writer, value);
     }
@@ -31,7 +39,9 @@ internal sealed class UpgradeComponentJsonConverter : JsonConverter<UpgradeCompo
     {
         if (!json.GetProperty(ItemJsonConverter.DiscriminatorName).ValueEquals(DiscriminatorValue))
         {
-            ThrowHelper.ThrowInvalidDiscriminator(json.GetProperty(ItemJsonConverter.DiscriminatorName).GetString());
+            ThrowHelper.ThrowInvalidDiscriminator(
+                json.GetProperty(ItemJsonConverter.DiscriminatorName).GetString()
+            );
         }
 
         if (json.TryGetProperty(DiscriminatorName, out var discriminator))
@@ -55,19 +65,27 @@ internal sealed class UpgradeComponentJsonConverter : JsonConverter<UpgradeCompo
             Level = json.GetProperty("level").GetInt32(),
             Rarity = json.GetProperty("rarity").GetEnum<Rarity>(),
             VendorValue = json.GetProperty("vendor_value").GetInt32(),
-            GameTypes = json.GetProperty("game_types").GetList(static value => value.GetEnum<GameType>()),
+            GameTypes =
+                json.GetProperty("game_types").GetList(static value => value.GetEnum<GameType>()),
             Flags = ItemFlagsJsonConverter.Read(json.GetProperty("flags")),
             Restrictions = ItemRestrictionJsonConverter.Read(json.GetProperty("restrictions")),
             ChatLink = json.GetProperty("chat_link").GetStringRequired(),
             IconHref = json.GetProperty("icon").GetString(),
-            UpgradeComponentFlags = UpgradeComponentFlagsJsonConverter.Read(json.GetProperty("upgrade_component_flags")),
-            InfusionUpgradeFlags = InfusionSlotFlagsJsonConverter.Read(json.GetProperty("infusion_upgrade_flags")),
+            UpgradeComponentFlags =
+                UpgradeComponentFlagsJsonConverter.Read(
+                    json.GetProperty("upgrade_component_flags")
+                ),
+            InfusionUpgradeFlags =
+                InfusionSlotFlagsJsonConverter.Read(json.GetProperty("infusion_upgrade_flags")),
             AttributeAdjustment = json.GetProperty("attribute_adjustment").GetDouble(),
-            AttributeCombinationId = json.GetProperty("attribute_combination_id").GetNullableInt32(),
-            Attributes = json.GetProperty("attributes").GetMap(
-                static name => new Extensible<AttributeName>(name),
-                static value => value.GetInt32()
-            ),
+            AttributeCombinationId =
+                json.GetProperty("attribute_combination_id").GetNullableInt32(),
+            Attributes =
+                json.GetProperty("attributes")
+                    .GetMap(
+                        static name => new Extensible<AttributeName>(name),
+                        static value => value.GetInt32()
+                    ),
             Buff = json.GetProperty("buff").GetNullable(BuffJsonConverter.Read),
             SuffixName = json.GetProperty("suffix").GetStringRequired()
         };

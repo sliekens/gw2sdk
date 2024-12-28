@@ -8,8 +8,9 @@ public static class MountNameFormatter
     /// <param name="mountName">Self-explanatory.</param>
     /// <returns>The mount name formatted as a string.</returns>
     /// <exception cref="NotSupportedException">Could not format that mount name.</exception>
-    public static string FormatMountName(Extensible<MountName> mountName) =>
-        mountName.ToString() switch
+    public static string FormatMountName(Extensible<MountName> mountName)
+    {
+        return mountName.ToString() switch
         {
             "Griffon" => "griffon",
             "Jackal" => "jackal",
@@ -23,4 +24,5 @@ public static class MountNameFormatter
             "SiegeTurtle" => "turtle",
             _ => mountName.ToString()
         };
+    }
 }

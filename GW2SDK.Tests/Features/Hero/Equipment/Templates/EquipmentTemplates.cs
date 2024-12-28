@@ -11,12 +11,11 @@ public class EquipmentTemplates
         var character = TestConfiguration.TestCharacter;
         var accessToken = TestConfiguration.ApiKey;
 
-        var (actual, context) =
-            await sut.Hero.Equipment.Templates.GetEquipmentTemplates(
-                character.Name,
-                accessToken.Key,
-                cancellationToken: TestContext.Current.CancellationToken
-            );
+        var (actual, context) = await sut.Hero.Equipment.Templates.GetEquipmentTemplates(
+            character.Name,
+            accessToken.Key,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotNull(context.Links);
         Assert.Equal(50, context.PageSize);

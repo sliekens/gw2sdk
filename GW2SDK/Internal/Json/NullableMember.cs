@@ -13,6 +13,7 @@ internal readonly ref struct NullableMember
     {
         this.name = name;
     }
+
     private NullableMember(JsonProperty member)
     {
         this.member = member;
@@ -20,12 +21,20 @@ internal readonly ref struct NullableMember
 
     public string Name => name ?? member.Name;
 
-    public static implicit operator NullableMember(string name) => new(name);
+    public static implicit operator NullableMember(string name)
+    {
+        return new NullableMember(name);
+    }
 
-    public static implicit operator NullableMember(JsonProperty member) => new(member);
+    public static implicit operator NullableMember(JsonProperty member)
+    {
+        return new NullableMember(member);
+    }
 
-    public bool Match(JsonProperty property) =>
-        member.Value.ValueKind == Undefined && property.NameEquals(name);
+    public bool Match(JsonProperty property)
+    {
+        return member.Value.ValueKind == Undefined && property.NameEquals(name);
+    }
 
     public TValue? Map<TValue>(Func<JsonElement, TValue> transform) where TValue : struct
     {

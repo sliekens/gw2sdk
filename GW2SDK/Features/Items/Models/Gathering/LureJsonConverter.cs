@@ -23,8 +23,10 @@ internal sealed class LureJsonConverter : JsonConverter<Lure>
         return Read(json.RootElement);
     }
 
-    public override void Write(Utf8JsonWriter writer, Lure value, JsonSerializerOptions options) =>
+    public override void Write(Utf8JsonWriter writer, Lure value, JsonSerializerOptions options)
+    {
         Write(writer, value);
+    }
 
     public static Lure Read(JsonElement json)
     {
@@ -36,7 +38,8 @@ internal sealed class LureJsonConverter : JsonConverter<Lure>
             );
         }
 
-        if (!json.GetProperty(GatheringToolJsonConverter.DiscriminatorName).ValueEquals(DiscriminatorValue))
+        if (!json.GetProperty(GatheringToolJsonConverter.DiscriminatorName)
+            .ValueEquals(DiscriminatorValue))
         {
             ThrowHelper.ThrowInvalidDiscriminator(
                 json.GetProperty(GatheringToolJsonConverter.DiscriminatorName).GetString()
@@ -51,7 +54,8 @@ internal sealed class LureJsonConverter : JsonConverter<Lure>
             Level = json.GetProperty("level").GetInt32(),
             Rarity = json.GetProperty("rarity").GetEnum<Rarity>(),
             VendorValue = json.GetProperty("vendor_value").GetInt32(),
-            GameTypes = json.GetProperty("game_types").GetList(static value => value.GetEnum<GameType>()),
+            GameTypes =
+                json.GetProperty("game_types").GetList(static value => value.GetEnum<GameType>()),
             Flags = ItemFlagsJsonConverter.Read(json.GetProperty("flags")),
             Restrictions = ItemRestrictionJsonConverter.Read(json.GetProperty("restrictions")),
             ChatLink = json.GetProperty("chat_link").GetStringRequired(),
@@ -62,7 +66,10 @@ internal sealed class LureJsonConverter : JsonConverter<Lure>
     public static void Write(Utf8JsonWriter writer, Lure value)
     {
         writer.WriteStartObject();
-        writer.WriteString(ItemJsonConverter.DiscriminatorName, GatheringToolJsonConverter.DiscriminatorValue);
+        writer.WriteString(
+            ItemJsonConverter.DiscriminatorName,
+            GatheringToolJsonConverter.DiscriminatorValue
+        );
         writer.WriteString(GatheringToolJsonConverter.DiscriminatorName, DiscriminatorValue);
         GatheringToolJsonConverter.WriteCommonProperties(writer, value);
         writer.WriteEndObject();

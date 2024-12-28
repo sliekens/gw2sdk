@@ -11,7 +11,10 @@ public class QuagganById
 
         const string id = "present";
 
-        var (actual, context) = await sut.Quaggans.GetQuagganById(id, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Quaggans.GetQuagganById(
+            id,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

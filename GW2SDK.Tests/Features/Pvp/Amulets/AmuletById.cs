@@ -11,7 +11,10 @@ public class AmuletById
 
         const int id = 4;
 
-        var (actual, context) = await sut.Pvp.GetAmuletById(id, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Pvp.GetAmuletById(
+            id,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

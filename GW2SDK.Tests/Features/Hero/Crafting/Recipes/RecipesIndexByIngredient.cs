@@ -10,8 +10,10 @@ public class RecipesIndexByIngredient
         var sut = Composer.Resolve<Gw2Client>();
 
         const int visionCrystalItemId = 46746;
-        var (actual, context) =
-            await sut.Hero.Crafting.Recipes.GetRecipesIndexByIngredientItemId(visionCrystalItemId, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Hero.Crafting.Recipes.GetRecipesIndexByIngredientItemId(
+            visionCrystalItemId,
+            TestContext.Current.CancellationToken
+        );
 
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

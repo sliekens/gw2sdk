@@ -11,7 +11,10 @@ public class ItemById
 
         const int id = 24;
 
-        var (actual, context) = await sut.Items.GetItemById(id, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Items.GetItemById(
+            id,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

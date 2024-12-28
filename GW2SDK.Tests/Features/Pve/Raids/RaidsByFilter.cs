@@ -11,12 +11,14 @@ public class RaidsByFilter
 
         HashSet<string> ids =
         [
-            "forsaken_thicket",
-            "bastion_of_the_penitent",
+            "forsaken_thicket", "bastion_of_the_penitent",
             "hall_of_chains"
         ];
 
-        var (actual, context) = await sut.Pve.Raids.GetRaidsByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Pve.Raids.GetRaidsByIds(
+            ids,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

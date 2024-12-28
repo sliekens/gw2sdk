@@ -11,7 +11,10 @@ public class AttributeCombinationById
 
         const int id = 559;
 
-        var (actual, context) = await sut.Items.GetAttributeCombinationById(id, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Items.GetAttributeCombinationById(
+            id,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

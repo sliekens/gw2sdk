@@ -11,12 +11,14 @@ public class JadeBotSkinsByFilter
 
         HashSet<int> ids =
         [
-            3,
-            4,
+            3, 4,
             5
         ];
 
-        var (actual, context) = await sut.Hero.Equipment.JadeBots.GetJadeBotSkinsByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Hero.Equipment.JadeBots.GetJadeBotSkinsByIds(
+            ids,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

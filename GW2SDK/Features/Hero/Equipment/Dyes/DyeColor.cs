@@ -46,6 +46,8 @@ public sealed record DyeColor
 
     /// <summary>Gets a chat link object for this item.</summary>
     /// <returns>The chat link as an object.</returns>
-    public ItemLink? GetChatLink() =>
-        ItemId.HasValue ? new ItemLink { ItemId = ItemId.Value } : null;
+    public ItemLink? GetChatLink()
+    {
+        return ItemId.HasValue ? new ItemLink { ItemId = ItemId.Value } : null;
+    }
 }

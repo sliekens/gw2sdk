@@ -10,7 +10,10 @@ public class UnlockedMountSkins
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Hero.Equipment.Mounts.GetUnlockedMountSkins(accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, _) = await sut.Hero.Equipment.Mounts.GetUnlockedMountSkins(
+            accessToken.Key,
+            TestContext.Current.CancellationToken
+        );
 
         Assert.NotEmpty(actual);
     }

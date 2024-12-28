@@ -10,7 +10,10 @@ public class UnlockedHeroes
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Pvp.GetUnlockedMistChampions(accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, _) = await sut.Pvp.GetUnlockedMistChampions(
+            accessToken.Key,
+            TestContext.Current.CancellationToken
+        );
 
         Assert.NotEmpty(actual);
         Assert.All(actual, id => Assert.NotEqual(0, id));

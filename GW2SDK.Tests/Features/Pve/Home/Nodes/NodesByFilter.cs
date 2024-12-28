@@ -10,12 +10,14 @@ public class NodesByFilter
         var sut = Composer.Resolve<Gw2Client>();
         HashSet<string> ids =
         [
-            "garden_plot_01",
-            "garden_plot_02",
+            "garden_plot_01", "garden_plot_02",
             "garden_plot_03"
         ];
 
-        var (actual, context) = await sut.Pve.Home.GetNodesByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Pve.Home.GetNodesByIds(
+            ids,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

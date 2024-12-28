@@ -12,12 +12,15 @@ public class FloorsByFilter
         const int continentId = 1;
         HashSet<int> ids =
         [
-            0,
-            1,
+            0, 1,
             2
         ];
 
-        var (actual, context) = await sut.Exploration.GetFloorsByIds(continentId, ids, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Exploration.GetFloorsByIds(
+            continentId,
+            ids,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

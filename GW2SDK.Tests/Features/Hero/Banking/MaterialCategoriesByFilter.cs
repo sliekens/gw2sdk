@@ -11,12 +11,14 @@ public class MaterialCategoriesByFilter
 
         HashSet<int> ids =
         [
-            5,
-            6,
+            5, 6,
             29
         ];
 
-        var (actual, context) = await sut.Hero.Bank.GetMaterialCategoriesByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Hero.Bank.GetMaterialCategoriesByIds(
+            ids,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

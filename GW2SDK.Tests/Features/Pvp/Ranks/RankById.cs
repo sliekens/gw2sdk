@@ -11,7 +11,10 @@ public class RankById
 
         const int id = 4;
 
-        var (actual, context) = await sut.Pvp.GetRankById(id, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Pvp.GetRankById(
+            id,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

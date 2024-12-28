@@ -10,17 +10,23 @@ public class JsonConverterTest(AssemblyFixture fixture) : IClassFixture<Assembly
     {
         // Get all enum types in the assembly
         var enumTypes = fixture.Assembly.GetTypes()
-            .Where(t => t is { IsEnum: true, IsPublic: true, Namespace: not null } && t.Namespace.StartsWith("GuildWars2"));
+            .Where(
+                t => t is { IsEnum: true, IsPublic: true, Namespace: not null }
+                    && t.Namespace.StartsWith("GuildWars2")
+            );
 
-        Assert.All(enumTypes,
+        Assert.All(
+            enumTypes,
             enumType =>
             {
-                var hasJsonConverterAttribute =
-                    enumType.GetCustomAttributes(typeof(JsonConverterAttribute), false).Any();
+                var hasJsonConverterAttribute = enumType
+                    .GetCustomAttributes(typeof(JsonConverterAttribute), false)
+                    .Any();
                 Assert.True(
                     hasJsonConverterAttribute,
                     $"Enum {enumType.Name} does not have a JsonConverterAttribute."
                 );
-            });
+            }
+        );
     }
 }

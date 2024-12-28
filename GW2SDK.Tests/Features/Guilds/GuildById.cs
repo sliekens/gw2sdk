@@ -10,7 +10,11 @@ public class GuildById
         var sut = Composer.Resolve<Gw2Client>();
         var guild = TestConfiguration.TestGuild;
 
-        var (actual, context) = await sut.Guilds.GetGuildById(guild.Id, null, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Guilds.GetGuildById(
+            guild.Id,
+            null,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotNull(context);
         Assert.Equal(guild.Id, actual.Id);
@@ -24,7 +28,6 @@ public class GuildById
         Assert.Null(actual.MemberCount);
     }
 
-
     [Fact]
     public async Task Can_be_found_when_authenticated()
     {
@@ -32,7 +35,11 @@ public class GuildById
         var accessToken = TestConfiguration.ApiKey;
         var guild = TestConfiguration.TestGuild;
 
-        var (actual, context) = await sut.Guilds.GetGuildById(guild.Id, accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Guilds.GetGuildById(
+            guild.Id,
+            accessToken.Key,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotNull(context);
         Assert.Equal(guild.Id, actual.Id);

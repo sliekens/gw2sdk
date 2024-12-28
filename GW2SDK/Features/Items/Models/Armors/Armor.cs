@@ -1,5 +1,5 @@
-﻿using GuildWars2.Hero;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
+using GuildWars2.Hero;
 
 namespace GuildWars2.Items;
 
@@ -35,6 +35,27 @@ public record Armor : Item, ICombatEquipment, IUpgradable
     /// <summary>The effect which is applied to the player when the item is equipped.</summary>
     public required Buff? Buff { get; init; }
 
+    /// <summary>The IDs of the attribute combinations that can be chosen for the item. This property is only used for items
+    /// with selectable stats.</summary>
+    public required IReadOnlyList<int> StatChoices { get; init; }
+
+    /// <inheritdoc />
+    public virtual bool Equals(Armor? other)
+    {
+        return ReferenceEquals(this, other)
+            || (base.Equals(other)
+                && DefaultSkinId == other.DefaultSkinId
+                && WeightClass == other.WeightClass
+                && Defense == other.Defense
+                && Math.Abs(AttributeAdjustment - other.AttributeAdjustment) < 0.001d
+                && AttributeCombinationId == other.AttributeCombinationId
+                && Buff == other.Buff
+                && SuffixItemId == other.SuffixItemId
+                && InfusionSlots.SequenceEqual(other.InfusionSlots)
+                && Attributes.SequenceEqual(other.Attributes, AttributesComparer.Instance)
+                && StatChoices.SequenceEqual(other.StatChoices));
+    }
+
     /// <summary>The ID of the upgrade component in the upgrade slot, if any.</summary>
     public required int? SuffixItemId { get; init; }
 
@@ -61,27 +82,6 @@ public record Armor : Item, ICombatEquipment, IUpgradable
 
     /// <summary>The number of infusion slots available on the armor item.</summary>
     public virtual int InfusionSlotCount => InfusionSlots.Count;
-
-    /// <summary>The IDs of the attribute combinations that can be chosen for the item. This property is only used for items
-    /// with selectable stats.</summary>
-    public required IReadOnlyList<int> StatChoices { get; init; }
-
-    /// <inheritdoc />
-    public virtual bool Equals(Armor? other)
-    {
-        return ReferenceEquals(this, other)
-            || (base.Equals(other)
-                && DefaultSkinId == other.DefaultSkinId
-                && WeightClass == other.WeightClass
-                && Defense == other.Defense
-                && Math.Abs(AttributeAdjustment - other.AttributeAdjustment) < 0.001d
-                && AttributeCombinationId == other.AttributeCombinationId
-                && Buff == other.Buff
-                && SuffixItemId == other.SuffixItemId
-                && InfusionSlots.SequenceEqual(other.InfusionSlots)
-                && Attributes.SequenceEqual(other.Attributes, AttributesComparer.Instance)
-                && StatChoices.SequenceEqual(other.StatChoices));
-    }
 
     /// <inheritdoc />
     public override int GetHashCode()

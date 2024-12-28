@@ -8,12 +8,18 @@ namespace GuildWars2.Json;
 internal static class JsonThrowHelper
 {
     [DoesNotReturn]
-    internal static void ThrowMissingValue(string name) =>
+    internal static void ThrowMissingValue(string name)
+    {
         throw new InvalidOperationException($"Missing value for '{name}'.");
+    }
 
     [DoesNotReturn]
-    internal static void
-        ThrowIncompatibleValue(string name, Exception innerException, JsonProperty member) =>
+    internal static void ThrowIncompatibleValue(
+        string name,
+        Exception innerException,
+        JsonProperty member
+    )
+    {
         throw new InvalidOperationException($"Value for '{name}' is incompatible.", innerException)
         {
             Data =
@@ -22,4 +28,5 @@ internal static class JsonThrowHelper
                 ["Value"] = member.Value.GetRawText()
             }
         };
+    }
 }

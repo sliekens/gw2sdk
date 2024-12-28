@@ -47,6 +47,30 @@ public record Weapon : Item, ICombatEquipment, IUpgradable
     /// <summary>The effect which is applied to the player when the item is equipped.</summary>
     public required Buff? Buff { get; init; }
 
+    /// <summary>The IDs of the attribute combinations that can be chosen for the item. This property is only used for items
+    /// with selectable stats.</summary>
+    public required IReadOnlyList<int> StatChoices { get; init; }
+
+    /// <inheritdoc />
+    public virtual bool Equals(Weapon? other)
+    {
+        return ReferenceEquals(this, other)
+            || (base.Equals(other)
+                && DefaultSkinId == other.DefaultSkinId
+                && DamageType.Equals(other.DamageType)
+                && MinPower == other.MinPower
+                && MaxPower == other.MaxPower
+                && Defense == other.Defense
+                && Math.Abs(AttributeAdjustment - other.AttributeAdjustment) < 0.001d
+                && AttributeCombinationId == other.AttributeCombinationId
+                && Buff == other.Buff
+                && SuffixItemId == other.SuffixItemId
+                && SecondarySuffixItemId == other.SecondarySuffixItemId
+                && Attributes.SequenceEqual(other.Attributes, AttributesComparer.Instance)
+                && InfusionSlots.SequenceEqual(other.InfusionSlots)
+                && StatChoices.SequenceEqual(other.StatChoices));
+    }
+
     /// <summary>The ID of the upgrade component in the upgrade slot, if any.</summary>
     public required int? SuffixItemId { get; init; }
 
@@ -76,30 +100,6 @@ public record Weapon : Item, ICombatEquipment, IUpgradable
 
     /// <summary>The number of infusion slots available on the weapon.</summary>
     public virtual int InfusionSlotCount => InfusionSlots.Count;
-
-    /// <summary>The IDs of the attribute combinations that can be chosen for the item. This property is only used for items
-    /// with selectable stats.</summary>
-    public required IReadOnlyList<int> StatChoices { get; init; }
-
-    /// <inheritdoc />
-    public virtual bool Equals(Weapon? other)
-    {
-        return ReferenceEquals(this, other)
-            || (base.Equals(other)
-                && DefaultSkinId == other.DefaultSkinId
-                && DamageType.Equals(other.DamageType)
-                && MinPower == other.MinPower
-                && MaxPower == other.MaxPower
-                && Defense == other.Defense
-                && Math.Abs(AttributeAdjustment - other.AttributeAdjustment) < 0.001d
-                && AttributeCombinationId == other.AttributeCombinationId
-                && Buff == other.Buff
-                && SuffixItemId == other.SuffixItemId
-                && SecondarySuffixItemId == other.SecondarySuffixItemId
-                && Attributes.SequenceEqual(other.Attributes, AttributesComparer.Instance)
-                && InfusionSlots.SequenceEqual(other.InfusionSlots)
-                && StatChoices.SequenceEqual(other.StatChoices));
-    }
 
     /// <inheritdoc />
     public override int GetHashCode()

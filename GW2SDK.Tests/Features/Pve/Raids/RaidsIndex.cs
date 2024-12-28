@@ -9,7 +9,8 @@ public class RaidsIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Pve.Raids.GetRaidsIndex(TestContext.Current.CancellationToken);
+        var (actual, context) =
+            await sut.Pve.Raids.GetRaidsIndex(TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

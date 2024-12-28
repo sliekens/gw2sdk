@@ -36,7 +36,8 @@ public sealed class HomeClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/home/cats", accessToken);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -60,7 +61,8 @@ public sealed class HomeClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/home/nodes", accessToken);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
@@ -72,22 +74,25 @@ public sealed class HomeClient
 
     #region v2/account/homestead/decorations
 
-    /// <summary>Retrieves the homestead decorations unlocked on the account associated with the access token. This endpoint is only
-    /// accessible with a valid access token.</summary>
+    /// <summary>Retrieves the homestead decorations unlocked on the account associated with the access token. This endpoint is
+    /// only accessible with a valid access token.</summary>
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<UnlockedDecoration> Value, MessageContext Context)> GetUnlockedDecorations(
-        string? accessToken,
-        CancellationToken cancellationToken = default
-    )
+    public async Task<(HashSet<UnlockedDecoration> Value, MessageContext Context)>
+        GetUnlockedDecorations(string? accessToken, CancellationToken cancellationToken = default)
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/account/homestead/decorations", accessToken);
+        var requestBuilder = RequestBuilder.HttpGet(
+            "v2/account/homestead/decorations",
+            accessToken
+        );
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetUnlockedDecoration());
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetUnlockedDecoration());
             return (value, response.Context);
         }
     }
@@ -96,8 +101,8 @@ public sealed class HomeClient
 
     #region v2/account/homestead/glyphs
 
-    /// <summary>Retrieves the IDs of homestead glyphs equipped on the account associated with the access token. This
-    /// endpoint is only accessible with a valid access token.</summary>
+    /// <summary>Retrieves the IDs of homestead glyphs equipped on the account associated with the access token. This endpoint
+    /// is only accessible with a valid access token.</summary>
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
@@ -108,7 +113,8 @@ public sealed class HomeClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/homestead/glyphs", accessToken);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
@@ -132,7 +138,8 @@ public sealed class HomeClient
         var requestBuilder = RequestBuilder.HttpGet("v2/home/cats");
         requestBuilder.Query.AddAllIds();
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -150,7 +157,8 @@ public sealed class HomeClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/home/cats");
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -172,7 +180,8 @@ public sealed class HomeClient
         var requestBuilder = RequestBuilder.HttpGet("v2/home/cats");
         requestBuilder.Query.AddId(catId);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -195,7 +204,8 @@ public sealed class HomeClient
         var requestBuilder = RequestBuilder.HttpGet("v2/home/cats");
         requestBuilder.Query.AddIds(catIds);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -220,7 +230,8 @@ public sealed class HomeClient
         var requestBuilder = RequestBuilder.HttpGet("v2/home/cats");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -245,7 +256,8 @@ public sealed class HomeClient
         var requestBuilder = RequestBuilder.HttpGet("v2/home/nodes");
         requestBuilder.Query.AddAllIds();
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -263,7 +275,8 @@ public sealed class HomeClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/home/nodes");
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
@@ -285,7 +298,8 @@ public sealed class HomeClient
         var requestBuilder = RequestBuilder.HttpGet("v2/home/nodes");
         requestBuilder.Query.AddId(nodeId);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -308,7 +322,8 @@ public sealed class HomeClient
         var requestBuilder = RequestBuilder.HttpGet("v2/home/nodes");
         requestBuilder.Query.AddIds(nodeIds);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -333,7 +348,8 @@ public sealed class HomeClient
         var requestBuilder = RequestBuilder.HttpGet("v2/home/nodes");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -355,7 +371,8 @@ public sealed class HomeClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations");
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -380,7 +397,8 @@ public sealed class HomeClient
         requestBuilder.Query.AddId(decorationId);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -406,7 +424,8 @@ public sealed class HomeClient
         requestBuilder.Query.AddIds(decorationIds);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -434,7 +453,8 @@ public sealed class HomeClient
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -443,7 +463,8 @@ public sealed class HomeClient
         }
     }
 
-    /// <summary>Retrieves homestead decorations by their IDs by chunking requests and executing them in parallel. Supports more than 200 IDs.</summary>
+    /// <summary>Retrieves homestead decorations by their IDs by chunking requests and executing them in parallel. Supports
+    /// more than 200 IDs.</summary>
     /// <param name="decorationIds">The decoration IDs.</param>
     /// <param name="language">The language to use for descriptions.</param>
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
@@ -530,21 +551,24 @@ public sealed class HomeClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<DecorationCategory> Value, MessageContext Context)> GetDecorationCategories(
-        Language? language = default,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    public async Task<(HashSet<DecorationCategory> Value, MessageContext Context)>
+        GetDecorationCategories(
+            Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations/categories");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetDecorationCategory());
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetDecorationCategory());
             return (value, response.Context);
         }
     }
@@ -558,7 +582,8 @@ public sealed class HomeClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations/categories");
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
@@ -583,7 +608,8 @@ public sealed class HomeClient
         requestBuilder.Query.AddId(categoryId);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -598,22 +624,25 @@ public sealed class HomeClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<DecorationCategory> Value, MessageContext Context)> GetDecorationCategoriesByIds(
-        IEnumerable<int> categoryIds,
-        Language? language = default,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    public async Task<(HashSet<DecorationCategory> Value, MessageContext Context)>
+        GetDecorationCategoriesByIds(
+            IEnumerable<int> categoryIds,
+            Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations/categories");
         requestBuilder.Query.AddIds(categoryIds);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetDecorationCategory());
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetDecorationCategory());
             return (value, response.Context);
         }
     }
@@ -625,23 +654,26 @@ public sealed class HomeClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<DecorationCategory> Value, MessageContext Context)> GetDecorationCategoriesByPage(
-        int pageIndex,
-        int? pageSize,
-        Language? language = default,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
+    public async Task<(HashSet<DecorationCategory> Value, MessageContext Context)>
+        GetDecorationCategoriesByPage(
+            int pageIndex,
+            int? pageSize,
+            Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations/categories");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetDecorationCategory());
+            var value =
+                response.Json.RootElement.GetSet(static entry => entry.GetDecorationCategory());
             return (value, response.Context);
         }
     }
@@ -662,7 +694,8 @@ public sealed class HomeClient
         var requestBuilder = RequestBuilder.HttpGet("v2/homestead/glyphs");
         requestBuilder.Query.AddAllIds();
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -680,7 +713,8 @@ public sealed class HomeClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/homestead/glyphs");
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
@@ -702,7 +736,8 @@ public sealed class HomeClient
         var requestBuilder = RequestBuilder.HttpGet("v2/homestead/glyphs");
         requestBuilder.Query.AddId(glyphId);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -725,7 +760,8 @@ public sealed class HomeClient
         var requestBuilder = RequestBuilder.HttpGet("v2/homestead/glyphs");
         requestBuilder.Query.AddIds(glyphIds);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
@@ -750,7 +786,8 @@ public sealed class HomeClient
         var requestBuilder = RequestBuilder.HttpGet("v2/homestead/glyphs");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+            .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;

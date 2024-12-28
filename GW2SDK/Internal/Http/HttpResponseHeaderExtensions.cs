@@ -6,17 +6,25 @@ namespace GuildWars2.Http;
 
 internal static class HttpResponseHeaderExtensions
 {
-    public static int? GetResultCount(this HttpResponseHeaders instance) =>
-        instance.GetInt32(ResultCount);
+    public static int? GetResultCount(this HttpResponseHeaders instance)
+    {
+        return instance.GetInt32(ResultCount);
+    }
 
-    public static int? GetResultTotal(this HttpResponseHeaders instance) =>
-        instance.GetInt32(ResultTotal);
+    public static int? GetResultTotal(this HttpResponseHeaders instance)
+    {
+        return instance.GetInt32(ResultTotal);
+    }
 
-    public static int? GetPageSize(this HttpResponseHeaders instance) =>
-        instance.GetInt32(PageSize);
+    public static int? GetPageSize(this HttpResponseHeaders instance)
+    {
+        return instance.GetInt32(PageSize);
+    }
 
-    public static int? GetPageTotal(this HttpResponseHeaders instance) =>
-        instance.GetInt32(PageTotal);
+    public static int? GetPageTotal(this HttpResponseHeaders instance)
+    {
+        return instance.GetInt32(PageTotal);
+    }
 
     public static Link? GetLink(this HttpResponseHeaders instance)
     {

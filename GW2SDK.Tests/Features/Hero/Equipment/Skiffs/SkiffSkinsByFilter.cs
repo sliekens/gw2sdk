@@ -11,12 +11,14 @@ public class SkiffSkinsByFilter
 
         HashSet<int> ids =
         [
-            410,
-            413,
+            410, 413,
             420
         ];
 
-        var (actual, context) = await sut.Hero.Equipment.Skiffs.GetSkiffSkinsByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Hero.Equipment.Skiffs.GetSkiffSkinsByIds(
+            ids,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

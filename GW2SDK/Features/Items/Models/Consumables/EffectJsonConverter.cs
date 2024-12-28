@@ -11,7 +11,11 @@ internal sealed class EffectJsonConverter : JsonConverter<Effect>
         return typeof(Effect).IsAssignableFrom(typeToConvert);
     }
 
-    public override Effect Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override Effect Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         using var json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);

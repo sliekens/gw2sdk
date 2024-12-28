@@ -11,12 +11,14 @@ public class RanksByFilter
 
         HashSet<int> ids =
         [
-            4,
-            8,
+            4, 8,
             9
         ];
 
-        var (actual, context) = await sut.Pvp.GetRanksByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Pvp.GetRanksByIds(
+            ids,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

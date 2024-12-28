@@ -5,8 +5,9 @@ namespace MostVersatileMaterials;
 
 public static class ItemPicker
 {
-    public static Item Prompt(IReadOnlyList<(Item item, int count)> ingredients) =>
-        AnsiConsole.Prompt(
+    public static Item Prompt(IReadOnlyList<(Item item, int count)> ingredients)
+    {
+        return AnsiConsole.Prompt(
                 new SelectionPrompt<(Item, int)>()
                     .Title("Pick an ingredient to see the available recipes")
                     .MoreChoicesText("Scroll down for less commonly used ingredients")
@@ -15,4 +16,5 @@ public static class ItemPicker
                     .PageSize(20)
             )
             .Item1;
+    }
 }

@@ -44,5 +44,8 @@ public record Recipe
 
     /// <summary>Gets a chat link object for this recipe.</summary>
     /// <returns>The chat link as an object.</returns>
-    public RecipeLink GetChatLink() => new() { RecipeId = Id };
+    public RecipeLink GetChatLink()
+    {
+        return new RecipeLink { RecipeId = Id };
+    }
 }

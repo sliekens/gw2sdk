@@ -10,12 +10,14 @@ public class CatsByFilter
         var sut = Composer.Resolve<Gw2Client>();
         HashSet<int> ids =
         [
-            1,
-            2,
+            1, 2,
             3
         ];
 
-        var (actual, context) = await sut.Pve.Home.GetCatsByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Pve.Home.GetCatsByIds(
+            ids,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

@@ -11,7 +11,6 @@ public class BuildTemplateLinkTest
         "[&DQMGOyYvRh4qDyoPhgCGABoblQEQGwcBCRuJAQAAAAAAAAAAAAAAAAAAAAACVQAzAAA=]",
         ProfessionName.Engineer
     )]
-
     [InlineData(
         "[&DQQAAAAAAAB5AHkAAAAAAAAAAAAAAAAAAAAAAAEAAQAAAAAAAAAAAAAAAAABIwAA]",
         ProfessionName.Ranger
@@ -41,7 +40,10 @@ public class BuildTemplateLinkTest
 
         var sut = BuildTemplateLink.Parse(chatLink);
         var actual = sut.ToString();
-        var build = await sut.GetBuild(gw2, cancellationToken: TestContext.Current.CancellationToken);
+        var build = await sut.GetBuild(
+            gw2,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.Equal(professionName, build.Profession);
         Assert.Equal(professionName, sut.Profession);

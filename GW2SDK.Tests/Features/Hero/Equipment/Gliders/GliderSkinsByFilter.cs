@@ -11,12 +11,14 @@ public class GliderSkinsByFilter
 
         HashSet<int> ids =
         [
-            1,
-            38,
+            1, 38,
             74
         ];
 
-        var (actual, context) = await sut.Hero.Equipment.Gliders.GetGliderSkinsByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Hero.Equipment.Gliders.GetGliderSkinsByIds(
+            ids,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

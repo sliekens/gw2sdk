@@ -7,6 +7,7 @@ namespace GuildWars2.Items;
 internal sealed class ItemJsonConverter : JsonConverter<Item>
 {
     public const string DiscriminatorName = "$type";
+
     public const string DiscriminatorValue = "item";
 
     public override bool CanConvert(Type typeToConvert)
@@ -14,7 +15,11 @@ internal sealed class ItemJsonConverter : JsonConverter<Item>
         return typeof(Item).IsAssignableFrom(typeToConvert);
     }
 
-    public override Item Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override Item Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         using var json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
@@ -76,7 +81,8 @@ internal sealed class ItemJsonConverter : JsonConverter<Item>
             Level = json.GetProperty("level").GetInt32(),
             Rarity = json.GetProperty("rarity").GetEnum<Rarity>(),
             VendorValue = json.GetProperty("vendor_value").GetInt32(),
-            GameTypes = json.GetProperty("game_types").GetList(static value => value.GetEnum<GameType>()),
+            GameTypes =
+                json.GetProperty("game_types").GetList(static value => value.GetEnum<GameType>()),
             Flags = ItemFlagsJsonConverter.Read(json.GetProperty("flags")),
             Restrictions = ItemRestrictionJsonConverter.Read(json.GetProperty("restrictions")),
             ChatLink = json.GetProperty("chat_link").GetStringRequired(),

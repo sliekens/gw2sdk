@@ -11,12 +11,14 @@ public class QuaggansByFilter
 
         HashSet<string> ids =
         [
-            "404",
-            "aloha",
+            "404", "aloha",
             "attack"
         ];
 
-        var (actual, context) = await sut.Quaggans.GetQuaggansByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Quaggans.GetQuaggansByIds(
+            ids,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

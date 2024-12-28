@@ -11,7 +11,8 @@ namespace Mumble;
 public sealed class GameListener(
     ILogger<GameListener> logger,
     GameLink gameLink,
-    ReferenceData referenceData) : BackgroundService
+    ReferenceData referenceData
+) : BackgroundService
 {
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
@@ -38,7 +39,10 @@ public sealed class GameListener(
         }
 
         var currentSpecialization = "none";
-        if (referenceData.Specializations.TryGetValue(identity.SpecializationId, out var specialization))
+        if (referenceData.Specializations.TryGetValue(
+                identity.SpecializationId,
+                out var specialization
+            ))
         {
             currentSpecialization = specialization.Name;
         }
@@ -69,7 +73,10 @@ public sealed class GameListener(
 
         Print("Build", gameTick.Context.BuildId.ToString("N0"));
         Print("Process", gameTick.Context.ProcessId.ToString("N0"));
-        Print("World", $"{currentWorld} (Language: {world?.Language.CultureInfo.DisplayName} Region: {world?.Region}, Population: {world?.Population}, ID: {identity.WorldId})");
+        Print(
+            "World",
+            $"{currentWorld} (Language: {world?.Language.CultureInfo.DisplayName} Region: {world?.Region}, Population: {world?.Population}, ID: {identity.WorldId})"
+        );
         Print("Server IP", gameTick.Context.ServerAddress.Address);
         Print("Shard ID", gameTick.Context.ShardId.ToString("X8"));
         Print("Name", identity.Name);
@@ -80,26 +87,62 @@ public sealed class GameListener(
         Print("Instance", gameTick.Context.Instance.ToString("X8"));
         Print("Current mount", gameTick.Context.Mount);
         Print("UI Size", identity.UiSize);
-        Print("Compass dimensions", $"Width = {gameTick.Context.CompassWidth:N0} Height = {gameTick.Context.CompassHeight:N0}");
-        Print("Compass can rotate", gameTick.Context.UiState.HasFlag(UiState.DoesCompassHaveRotationEnabled));
-        Print("Compass docked top-right", gameTick.Context.UiState.HasFlag(UiState.IsCompassTopRight));
+        Print(
+            "Compass dimensions",
+            $"Width = {gameTick.Context.CompassWidth:N0} Height = {gameTick.Context.CompassHeight:N0}"
+        );
+        Print(
+            "Compass can rotate",
+            gameTick.Context.UiState.HasFlag(UiState.DoesCompassHaveRotationEnabled)
+        );
+        Print(
+            "Compass docked top-right",
+            gameTick.Context.UiState.HasFlag(UiState.IsCompassTopRight)
+        );
         Print("Compass/world map scale", gameTick.Context.MapScale.ToString("N"));
         Print("World map is open", gameTick.Context.UiState.HasFlag(UiState.IsMapOpen));
-        Print("Player is in PvP game type", gameTick.Context.UiState.HasFlag(UiState.IsInCompetitiveGameMode));
+        Print(
+            "Player is in PvP game type",
+            gameTick.Context.UiState.HasFlag(UiState.IsInCompetitiveGameMode)
+        );
         Print("Team color", currentTeamColor);
         Print("Player is in combat", gameTick.Context.UiState.HasFlag(UiState.IsInCombat));
         Print("Player is squad leader", identity.Commander);
         Print("Textbox has focus", gameTick.Context.UiState.HasFlag(UiState.TextboxHasFocus));
         Print("Game has focus", gameTick.Context.UiState.HasFlag(UiState.GameHasFocus));
         Print("Field of View", identity.FieldOfView);
-        Print("Map Center", $"X = {gameTick.Context.MapCenterX,10:N} Y = {gameTick.Context.MapCenterY,10:N}");
-        Print("Player Coordinates", $"X = {gameTick.Context.PlayerX,10:N} Y = {gameTick.Context.PlayerY,10:N}");
-        Print("Avatar Coordinates", $"X = {gameTick.AvatarPosition.X,10:N} Y = {gameTick.AvatarPosition.Y,10:N} Z = {gameTick.AvatarPosition.Z,10:N}");
-        Print("Avatar Orientation", $"X = {gameTick.AvatarFront.X,10:N} Y = {gameTick.AvatarFront.Y,10:N} Z = {gameTick.AvatarFront.Z,10:N}");
-        Print("Avatar Top", $"X = {gameTick.AvatarTop.X,10:N} Y = {gameTick.AvatarTop.Y,10:N} Z = {gameTick.AvatarTop.Z,10:N}");
-        Print("Camera Coordinates", $"X = {gameTick.CameraPosition.X,10:N} Y = {gameTick.CameraPosition.Y,10:N} Z = {gameTick.CameraPosition.Z,10:N}");
-        Print("Camera Orientation", $"X = {gameTick.CameraFront.X,10:N} Y = {gameTick.CameraFront.Y,10:N} Z = {gameTick.CameraFront.Z,10:N}");
-        Print("Camera Top", $"X = {gameTick.CameraTop.X,10:N} Y = {gameTick.CameraTop.Y,10:N} Z = {gameTick.CameraTop.Z,10:N}");
+        Print(
+            "Map Center",
+            $"X = {gameTick.Context.MapCenterX,10:N} Y = {gameTick.Context.MapCenterY,10:N}"
+        );
+        Print(
+            "Player Coordinates",
+            $"X = {gameTick.Context.PlayerX,10:N} Y = {gameTick.Context.PlayerY,10:N}"
+        );
+        Print(
+            "Avatar Coordinates",
+            $"X = {gameTick.AvatarPosition.X,10:N} Y = {gameTick.AvatarPosition.Y,10:N} Z = {gameTick.AvatarPosition.Z,10:N}"
+        );
+        Print(
+            "Avatar Orientation",
+            $"X = {gameTick.AvatarFront.X,10:N} Y = {gameTick.AvatarFront.Y,10:N} Z = {gameTick.AvatarFront.Z,10:N}"
+        );
+        Print(
+            "Avatar Top",
+            $"X = {gameTick.AvatarTop.X,10:N} Y = {gameTick.AvatarTop.Y,10:N} Z = {gameTick.AvatarTop.Z,10:N}"
+        );
+        Print(
+            "Camera Coordinates",
+            $"X = {gameTick.CameraPosition.X,10:N} Y = {gameTick.CameraPosition.Y,10:N} Z = {gameTick.CameraPosition.Z,10:N}"
+        );
+        Print(
+            "Camera Orientation",
+            $"X = {gameTick.CameraFront.X,10:N} Y = {gameTick.CameraFront.Y,10:N} Z = {gameTick.CameraFront.Z,10:N}"
+        );
+        Print(
+            "Camera Top",
+            $"X = {gameTick.CameraTop.X,10:N} Y = {gameTick.CameraTop.Y,10:N} Z = {gameTick.CameraTop.Z,10:N}"
+        );
         Print("Tick", gameTick.UiTick.ToString("N0"));
     }
 

@@ -9,7 +9,8 @@ public class TeamAssignmentTimer
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Wvw.GetTeamAssignmentTimer(cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) =
+            await sut.Wvw.GetTeamAssignmentTimer(TestContext.Current.CancellationToken);
 
         Assert.NotNull(context);
         Assert.True(actual.NorthAmerica > DateTimeOffset.UtcNow);

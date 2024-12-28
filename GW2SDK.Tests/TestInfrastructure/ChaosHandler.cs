@@ -8,7 +8,10 @@ internal class ChaosHandler : DelegatingHandler
 {
     private static readonly Random Random = new();
 
-    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+    protected override async Task<HttpResponseMessage> SendAsync(
+        HttpRequestMessage request,
+        CancellationToken cancellationToken
+    )
     {
         if (request.RequestUri!.Host == "api.guildwars2.com")
         {
@@ -16,16 +19,15 @@ internal class ChaosHandler : DelegatingHandler
             if (Random.Next(3) == 1)
             {
                 var json = /*lang=json,strict*/ """
-                    {"text":"unknown error"}
-                    """;
+                                                {"text":"unknown error"}
+                                                """;
                 return new HttpResponseMessage(HttpStatusCode.InternalServerError)
                 {
                     Headers =
                     {
                         Connection = { "keep-alive" },
-                        Date = DateTimeOffset.UtcNow ,
+                        Date = DateTimeOffset.UtcNow,
                         Server = { ProductInfoHeaderValue.Parse("InMemory") }
-
                     },
                     Content = new StringContent(json, Encoding.UTF8, "application/json")
                     {
@@ -34,6 +36,7 @@ internal class ChaosHandler : DelegatingHandler
                 };
             }
         }
+
         return await base.SendAsync(request, cancellationToken);
     }
 }

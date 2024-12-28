@@ -9,7 +9,8 @@ public class LockoutTimer
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Wvw.GetLockoutTimer(cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) =
+            await sut.Wvw.GetLockoutTimer(TestContext.Current.CancellationToken);
 
         Assert.NotNull(context);
         Assert.True(actual.NorthAmerica >= DateTimeOffset.Parse("2024-10-23T17:00:00Z"));

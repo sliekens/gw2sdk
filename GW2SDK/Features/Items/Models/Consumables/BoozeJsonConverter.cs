@@ -13,7 +13,11 @@ internal sealed class BoozeJsonConverter : JsonConverter<Booze>
         return typeof(Booze).IsAssignableFrom(typeToConvert);
     }
 
-    public override Booze Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override Booze Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         using var json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
@@ -26,14 +30,20 @@ internal sealed class BoozeJsonConverter : JsonConverter<Booze>
 
     public static Booze Read(JsonElement json)
     {
-        if (!json.GetProperty(ItemJsonConverter.DiscriminatorName).ValueEquals(ConsumableJsonConverter.DiscriminatorValue))
+        if (!json.GetProperty(ItemJsonConverter.DiscriminatorName)
+            .ValueEquals(ConsumableJsonConverter.DiscriminatorValue))
         {
-            ThrowHelper.ThrowInvalidDiscriminator(json.GetProperty(ItemJsonConverter.DiscriminatorName).GetString());
+            ThrowHelper.ThrowInvalidDiscriminator(
+                json.GetProperty(ItemJsonConverter.DiscriminatorName).GetString()
+            );
         }
 
-        if (!json.GetProperty(ConsumableJsonConverter.DiscriminatorName).ValueEquals(DiscriminatorValue))
+        if (!json.GetProperty(ConsumableJsonConverter.DiscriminatorName)
+            .ValueEquals(DiscriminatorValue))
         {
-            ThrowHelper.ThrowInvalidDiscriminator(json.GetProperty(ConsumableJsonConverter.DiscriminatorName).GetString());
+            ThrowHelper.ThrowInvalidDiscriminator(
+                json.GetProperty(ConsumableJsonConverter.DiscriminatorName).GetString()
+            );
         }
 
         return new Booze
@@ -44,7 +54,8 @@ internal sealed class BoozeJsonConverter : JsonConverter<Booze>
             Level = json.GetProperty("level").GetInt32(),
             Rarity = json.GetProperty("rarity").GetEnum<Rarity>(),
             VendorValue = json.GetProperty("vendor_value").GetInt32(),
-            GameTypes = json.GetProperty("game_types").GetList(static value => value.GetEnum<GameType>()),
+            GameTypes =
+                json.GetProperty("game_types").GetList(static value => value.GetEnum<GameType>()),
             Flags = ItemFlagsJsonConverter.Read(json.GetProperty("flags")),
             Restrictions = ItemRestrictionJsonConverter.Read(json.GetProperty("restrictions")),
             ChatLink = json.GetProperty("chat_link").GetStringRequired(),
@@ -55,7 +66,10 @@ internal sealed class BoozeJsonConverter : JsonConverter<Booze>
     public static void Write(Utf8JsonWriter writer, Booze value)
     {
         writer.WriteStartObject();
-        writer.WriteString(ItemJsonConverter.DiscriminatorName, ConsumableJsonConverter.DiscriminatorValue);
+        writer.WriteString(
+            ItemJsonConverter.DiscriminatorName,
+            ConsumableJsonConverter.DiscriminatorValue
+        );
         writer.WriteString(ConsumableJsonConverter.DiscriminatorName, DiscriminatorValue);
         ItemJsonConverter.WriteCommonProperties(writer, value);
         writer.WriteEndObject();

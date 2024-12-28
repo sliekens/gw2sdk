@@ -11,12 +11,14 @@ public class EmotesByFilter
 
         HashSet<string> ids =
         [
-            "geargrind",
-            "playdead",
+            "geargrind", "playdead",
             "rockout"
         ];
 
-        var (actual, context) = await sut.Hero.Emotes.GetEmotesByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Hero.Emotes.GetEmotesByIds(
+            ids,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

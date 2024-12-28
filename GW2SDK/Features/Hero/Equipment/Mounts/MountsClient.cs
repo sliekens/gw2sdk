@@ -145,13 +145,15 @@ public sealed class MountsClient
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
-    ) =>
-        GetMountsByNames(
+    )
+    {
+        return GetMountsByNames(
             mountNames.Select(mountName => (Extensible<MountName>)mountName),
             language,
             missingMemberBehavior,
             cancellationToken
         );
+    }
 
     /// <summary>Retrieves mounts by their names.</summary>
     /// <param name="mountNames">The mount names.</param>

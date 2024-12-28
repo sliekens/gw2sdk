@@ -48,12 +48,14 @@ public sealed record EquipmentItem
 
     /// <summary>Gets a chat link object for this item.</summary>
     /// <returns>The chat link as an object.</returns>
-    public ItemLink GetChatLink() =>
-        new()
+    public ItemLink GetChatLink()
+    {
+        return new ItemLink
         {
             ItemId = Id,
             SkinId = SkinId,
             SuffixItemId = SuffixItemId,
             SecondarySuffixItemId = SecondarySuffixItemId
         };
+    }
 }

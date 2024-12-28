@@ -25,7 +25,10 @@ public sealed record ObjectiveLink : Link
     /// <summary>Converts a chat link code to a chat link object.</summary>
     /// <param name="chatLink">The chat link text.</param>
     /// <returns>The chat link as an object.</returns>
-    public static ObjectiveLink Parse(string chatLink) => Parse(chatLink.AsSpan());
+    public static ObjectiveLink Parse(string chatLink)
+    {
+        return Parse(chatLink.AsSpan());
+    }
 
     /// <summary>Converts a chat link code to a chat link object.</summary>
     /// <param name="chatLink">The chat link text.</param>

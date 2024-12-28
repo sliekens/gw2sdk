@@ -48,7 +48,10 @@ public static class MarkupSyntaxValidator
         {
             if (coloredText.Color != "@warn")
             {
-                Assert.True(MarkupColorName.IsDefined(coloredText.Color), $"Unexpected color name: {coloredText.Color}.");
+                Assert.True(
+                    MarkupColorName.IsDefined(coloredText.Color),
+                    $"Unexpected color name: {coloredText.Color}."
+                );
             }
         }
         else if (coloredText.Color.StartsWith("#"))

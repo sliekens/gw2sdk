@@ -11,8 +11,11 @@ public class CompletedHeroChallenges
         var character = TestConfiguration.TestCharacter;
         var accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) =
-            await sut.Exploration.GetCompletedHeroChallenges(character.Name, accessToken.Key, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, _) = await sut.Exploration.GetCompletedHeroChallenges(
+            character.Name,
+            accessToken.Key,
+            TestContext.Current.CancellationToken
+        );
 
         // BUG: currently this data is unavailable :(
         // Change this back to Assert.NotEmpty once fixed

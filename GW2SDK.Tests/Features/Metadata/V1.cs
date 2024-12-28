@@ -9,7 +9,10 @@ public class V1
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, _) = await sut.Metadata.GetApiVersion("v1", cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, _) = await sut.Metadata.GetApiVersion(
+            "v1",
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.All(
             actual.Languages,

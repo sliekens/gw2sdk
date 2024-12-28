@@ -10,7 +10,11 @@ public class GliderSkinsByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
-        var (actual, context) = await sut.Hero.Equipment.Gliders.GetGliderSkinsByPage(0, pageSize, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Hero.Equipment.Gliders.GetGliderSkinsByPage(
+            0,
+            pageSize,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);

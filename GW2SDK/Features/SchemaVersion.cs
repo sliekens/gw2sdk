@@ -91,7 +91,8 @@ public sealed class SchemaVersion
     /// <summary>Represents the schema version "2024-07-20T01:00:00.000Z".</summary>
     /// <remarks>
     ///     <list type="bullet">
-    ///         <item>Add wvw <c>team_id</c> to <c>/v2/account</c> to show world restructuring team id and move wvw fields into <c>wvw</c>.</item>
+    ///         <item>Add wvw <c>team_id</c> to <c>/v2/account</c> to show world restructuring team id and move wvw fields into
+    /// <c>wvw</c>.</item>
     ///     </list>
     /// </remarks>
     public static readonly SchemaVersion V20240720 = new("2024-07-20T01:00:00.000Z");
@@ -114,10 +115,16 @@ public sealed class SchemaVersion
 
     /// <summary>Returns the string representation of the schema version.</summary>
     /// <returns>The schema version string.</returns>
-    public override string ToString() => Version;
+    public override string ToString()
+    {
+        return Version;
+    }
 
     /// <summary>Implicitly converts a SchemaVersion instance to a string.</summary>
     /// <param name="instance">The SchemaVersion instance.</param>
     /// <returns>The schema version string.</returns>
-    public static implicit operator string(SchemaVersion instance) => instance.Version;
+    public static implicit operator string(SchemaVersion instance)
+    {
+        return instance.Version;
+    }
 }

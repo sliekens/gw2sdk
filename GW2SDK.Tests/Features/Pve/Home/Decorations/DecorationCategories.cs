@@ -1,6 +1,4 @@
-﻿using GuildWars2.Chat;
-using GuildWars2.Hero.Equipment.Wardrobe;
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pve.Home.Decorations;
 
@@ -11,7 +9,9 @@ public class DecorationCategories
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Pve.Home.GetDecorationCategories(cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Pve.Home.GetDecorationCategories(
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultTotal, actual.Count);

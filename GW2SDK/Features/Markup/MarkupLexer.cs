@@ -1,23 +1,14 @@
-﻿
-namespace GuildWars2.Markup;
+﻿namespace GuildWars2.Markup;
 
-/// <summary>
-/// Represents a lexer for tokenizing markup input.
-/// </summary>
+/// <summary>Represents a lexer for tokenizing markup input.</summary>
 [PublicAPI]
 public sealed class MarkupLexer
 {
-    private static readonly HashSet<string> VoidElements = new(StringComparer.OrdinalIgnoreCase)
-    {
-        "br"
-    };
+    private static readonly HashSet<string> VoidElements =
+        new(StringComparer.OrdinalIgnoreCase) { "br" };
 
-    /// <summary>
-    /// Tokenizes the input string into a sequence of tokens.
-    /// </summary>
-    /// <returns>
-    /// An <see cref="IEnumerable{Token}"/> representing the sequence of tokens parsed from the input string.
-    /// </returns>
+    /// <summary>Tokenizes the input string into a sequence of tokens.</summary>
+    /// <returns>An <see cref="IEnumerable{Token}" /> representing the sequence of tokens parsed from the input string.</returns>
     public IEnumerable<MarkupToken> Tokenize(string input)
     {
         // The language can be very roughly described by the following grammar:
@@ -42,7 +33,10 @@ public sealed class MarkupLexer
                     {
                         if (position > start)
                         {
-                            yield return new MarkupToken(MarkupTokenType.Text, memory.Span[start..position].ToString());
+                            yield return new MarkupToken(
+                                MarkupTokenType.Text,
+                                memory.Span[start..position].ToString()
+                            );
                         }
 
                         state = MarkupLexerState.TagOpen;
@@ -52,7 +46,10 @@ public sealed class MarkupLexer
                     {
                         if (position > start)
                         {
-                            yield return new MarkupToken(MarkupTokenType.Text, memory.Span[start..position].ToString());
+                            yield return new MarkupToken(
+                                MarkupTokenType.Text,
+                                memory.Span[start..position].ToString()
+                            );
                         }
 
                         yield return new MarkupToken(MarkupTokenType.LineBreak, "");
@@ -146,7 +143,10 @@ public sealed class MarkupLexer
 
         if (position > start)
         {
-            yield return new MarkupToken(MarkupTokenType.Text, memory.Span[start..position].ToString());
+            yield return new MarkupToken(
+                MarkupTokenType.Text,
+                memory.Span[start..position].ToString()
+            );
         }
 
         yield return new MarkupToken(MarkupTokenType.End, "");

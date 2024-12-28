@@ -5,7 +5,11 @@ namespace GuildWars2;
 
 internal sealed class CoinJsonConverter : JsonConverter<Coin>
 {
-    public override Coin Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override Coin Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         var amount = reader.GetInt32();
         return new Coin(amount);

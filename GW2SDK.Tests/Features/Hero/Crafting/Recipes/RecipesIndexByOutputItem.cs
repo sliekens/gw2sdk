@@ -10,8 +10,10 @@ public class RecipesIndexByOutputItem
         var sut = Composer.Resolve<Gw2Client>();
 
         const int ironIngotItemId = 19683;
-        var (actual, context) =
-            await sut.Hero.Crafting.Recipes.GetRecipesIndexByOutputItemId(ironIngotItemId, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Hero.Crafting.Recipes.GetRecipesIndexByOutputItemId(
+            ironIngotItemId,
+            TestContext.Current.CancellationToken
+        );
 
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

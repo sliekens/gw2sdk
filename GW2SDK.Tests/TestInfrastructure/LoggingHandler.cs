@@ -6,9 +6,14 @@ internal class LoggingHandler : DelegatingHandler
 {
     public static AsyncLocal<ITestOutputHelper> Output { get; } = new();
 
-    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+    protected override async Task<HttpResponseMessage> SendAsync(
+        HttpRequestMessage request,
+        CancellationToken cancellationToken
+    )
     {
-        Output.Value?.WriteLine($"{request.Method} {request.RequestUri!.PathAndQuery} HTTP/{request.Version}");
+        Output.Value?.WriteLine(
+            $"{request.Method} {request.RequestUri!.PathAndQuery} HTTP/{request.Version}"
+        );
         foreach (var header in request.Headers)
         {
             Output.Value?.WriteLine($"{header.Key}: {string.Join(", ", header.Value)}");
@@ -32,7 +37,9 @@ internal class LoggingHandler : DelegatingHandler
 
         var response = await base.SendAsync(request, cancellationToken);
 
-        Output.Value?.WriteLine($"HTTP/{response.Version} {(int)response.StatusCode} {response.ReasonPhrase}");
+        Output.Value?.WriteLine(
+            $"HTTP/{response.Version} {(int)response.StatusCode} {response.ReasonPhrase}"
+        );
         foreach (var header in response.Headers)
         {
             Output.Value?.WriteLine($"{header.Key}: {string.Join(", ", header.Value)}");
@@ -60,7 +67,11 @@ internal class LoggingHandler : DelegatingHandler
 
                 try
                 {
-                    using var decompressed = new GZipStream(content, CompressionMode.Decompress, leaveOpen: true);
+                    using var decompressed = new GZipStream(
+                        content,
+                        CompressionMode.Decompress,
+                        true
+                    );
                     using var reader = new StreamReader(decompressed);
                     var text = await reader.ReadToEndAsync();
                     if (text.Length > 1024)

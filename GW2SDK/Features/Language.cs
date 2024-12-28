@@ -58,5 +58,8 @@ public sealed class Language
 
     /// <summary>Gets the string representation of the language.</summary>
     /// <returns>The alpha-2 code representing the language.</returns>
-    public override string ToString() => Alpha2Code;
+    public override string ToString()
+    {
+        return Alpha2Code;
+    }
 }

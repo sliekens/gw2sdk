@@ -24,10 +24,12 @@ public sealed record AstralReward
 
     /// <summary>Gets an item chat link object for this astral reward.</summary>
     /// <returns>The chat link as an object.</returns>
-    public ItemLink GetChatLink() =>
-        new()
+    public ItemLink GetChatLink()
+    {
+        return new ItemLink
         {
             ItemId = ItemId,
             Count = ItemCount
         };
+    }
 }

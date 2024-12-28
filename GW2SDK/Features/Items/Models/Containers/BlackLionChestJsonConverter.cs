@@ -8,27 +8,41 @@ internal sealed class BlackLionChestJsonConverter : JsonConverter<BlackLionChest
 {
     public const string DiscriminatorValue = "black_lion_chest";
 
-    public override BlackLionChest? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override BlackLionChest? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         using var json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
-    public override void Write(Utf8JsonWriter writer, BlackLionChest value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        BlackLionChest value,
+        JsonSerializerOptions options
+    )
     {
         Write(writer, value);
     }
 
     public static BlackLionChest Read(JsonElement json)
     {
-        if (!json.GetProperty(ItemJsonConverter.DiscriminatorName).ValueEquals(ContainerJsonConverter.DiscriminatorValue))
+        if (!json.GetProperty(ItemJsonConverter.DiscriminatorName)
+            .ValueEquals(ContainerJsonConverter.DiscriminatorValue))
         {
-            ThrowHelper.ThrowInvalidDiscriminator(json.GetProperty(ItemJsonConverter.DiscriminatorName).GetString());
+            ThrowHelper.ThrowInvalidDiscriminator(
+                json.GetProperty(ItemJsonConverter.DiscriminatorName).GetString()
+            );
         }
 
-        if (!json.GetProperty(ContainerJsonConverter.DiscriminatorName).ValueEquals(DiscriminatorValue))
+        if (!json.GetProperty(ContainerJsonConverter.DiscriminatorName)
+            .ValueEquals(DiscriminatorValue))
         {
-            ThrowHelper.ThrowInvalidDiscriminator(json.GetProperty(ContainerJsonConverter.DiscriminatorName).GetString());
+            ThrowHelper.ThrowInvalidDiscriminator(
+                json.GetProperty(ContainerJsonConverter.DiscriminatorName).GetString()
+            );
         }
 
         return new BlackLionChest
@@ -39,18 +53,22 @@ internal sealed class BlackLionChestJsonConverter : JsonConverter<BlackLionChest
             Level = json.GetProperty("level").GetInt32(),
             Rarity = json.GetProperty("rarity").GetEnum<Rarity>(),
             VendorValue = json.GetProperty("vendor_value").GetInt32(),
-            GameTypes = json.GetProperty("game_types").GetList(static value => value.GetEnum<GameType>()),
+            GameTypes =
+                json.GetProperty("game_types").GetList(static value => value.GetEnum<GameType>()),
             Flags = ItemFlagsJsonConverter.Read(json.GetProperty("flags")),
             Restrictions = ItemRestrictionJsonConverter.Read(json.GetProperty("restrictions")),
             ChatLink = json.GetProperty("chat_link").GetStringRequired(),
-            IconHref = json.GetProperty("icon").GetString(),
+            IconHref = json.GetProperty("icon").GetString()
         };
     }
 
     public static void Write(Utf8JsonWriter writer, BlackLionChest value)
     {
         writer.WriteStartObject();
-        writer.WriteString(ItemJsonConverter.DiscriminatorName, ContainerJsonConverter.DiscriminatorValue);
+        writer.WriteString(
+            ItemJsonConverter.DiscriminatorName,
+            ContainerJsonConverter.DiscriminatorValue
+        );
         writer.WriteString(ContainerJsonConverter.DiscriminatorName, DiscriminatorValue);
         ItemJsonConverter.WriteCommonProperties(writer, value);
         writer.WriteEndObject();

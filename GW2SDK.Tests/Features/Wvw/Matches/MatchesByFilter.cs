@@ -11,12 +11,14 @@ public class MatchesByFilter
 
         HashSet<string> ids =
         [
-            "1-1",
-            "1-2",
+            "1-1", "1-2",
             "1-3"
         ];
 
-        var (actual, context) = await sut.Wvw.GetMatchesByIds(ids, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Wvw.GetMatchesByIds(
+            ids,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);

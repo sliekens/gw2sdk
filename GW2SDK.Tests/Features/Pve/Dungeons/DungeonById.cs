@@ -11,7 +11,10 @@ public class DungeonById
 
         const string id = "citadel_of_flame";
 
-        var (actual, context) = await sut.Pve.Dungeons.GetDungeonById(id, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Pve.Dungeons.GetDungeonById(
+            id,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

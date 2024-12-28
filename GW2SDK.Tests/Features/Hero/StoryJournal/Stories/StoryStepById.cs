@@ -11,7 +11,10 @@ public class StoryStepById
 
         const int id = 15;
 
-        var (actual, context) = await sut.Hero.StoryJournal.GetStoryStepById(id, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, context) = await sut.Hero.StoryJournal.GetStoryStepById(
+            id,
+            cancellationToken: TestContext.Current.CancellationToken
+        );
 
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

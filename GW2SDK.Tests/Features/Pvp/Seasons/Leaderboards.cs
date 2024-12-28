@@ -11,7 +11,10 @@ public class Leaderboards
 
         const string id = "2B2E80D3-0A74-424F-B0EA-E221500B323C";
 
-        var (actual, _) = await sut.Pvp.GetLeaderboardIds(id, cancellationToken: TestContext.Current.CancellationToken);
+        var (actual, _) = await sut.Pvp.GetLeaderboardIds(
+            id,
+            TestContext.Current.CancellationToken
+        );
 
         var expected = new HashSet<string>
         {
