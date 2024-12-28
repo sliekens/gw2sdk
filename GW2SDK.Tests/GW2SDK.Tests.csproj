@@ -8,7 +8,8 @@
     <RootNamespace>GuildWars2.Tests</RootNamespace>
     <IsPackable>false</IsPackable>
     <OutputType>Exe</OutputType>
-    <RuntimeIdentifiers>win-x64;linux-x64</RuntimeIdentifiers>
+    <RuntimeIdentifiers>win-x86;win-x64;linux-x64</RuntimeIdentifiers>
+    <UseCurrentRuntimeIdentifier>false</UseCurrentRuntimeIdentifier>
   </PropertyGroup>
 
   <ItemGroup>
