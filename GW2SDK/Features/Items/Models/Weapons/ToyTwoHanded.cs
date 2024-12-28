@@ -7,4 +7,8 @@ namespace GuildWars2.Items;
 /// summon a bundle with the same functionality.</remarks>
 [PublicAPI]
 [JsonConverter(typeof(ToyTwoHandedJsonConverter))]
-public sealed record ToyTwoHanded : Weapon;
+public sealed record ToyTwoHanded : Weapon
+{
+    /// <inheritdoc />
+    public override bool TwoHanded => true;
+}

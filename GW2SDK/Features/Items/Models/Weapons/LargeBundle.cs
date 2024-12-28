@@ -6,4 +6,8 @@ namespace GuildWars2.Items;
 /// Bundles are acquired by picking them up in the open world, summoned by using a gizmo or obtained from NPCs.</summary>
 [PublicAPI]
 [JsonConverter(typeof(LargeBundleJsonConverter))]
-public sealed record LargeBundle : Weapon;
+public sealed record LargeBundle : Weapon
+{
+    /// <inheritdoc />
+    public override bool TwoHanded => true;
+}

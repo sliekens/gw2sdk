@@ -5,4 +5,8 @@ namespace GuildWars2.Items;
 /// <summary>Information about a longbow.</summary>
 [PublicAPI]
 [JsonConverter(typeof(LongbowJsonConverter))]
-public sealed record Longbow : Weapon;
+public sealed record Longbow : Weapon
+{
+    /// <inheritdoc />
+    public override bool TwoHanded => true;
+}

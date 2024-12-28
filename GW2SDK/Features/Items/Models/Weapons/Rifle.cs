@@ -5,4 +5,8 @@ namespace GuildWars2.Items;
 /// <summary>Information about a rifle.</summary>
 [PublicAPI]
 [JsonConverter(typeof(RifleJsonConverter))]
-public sealed record Rifle : Weapon;
+public sealed record Rifle : Weapon
+{
+    /// <inheritdoc />
+    public override bool TwoHanded => true;
+}
