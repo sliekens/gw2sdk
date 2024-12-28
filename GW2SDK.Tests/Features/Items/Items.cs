@@ -223,6 +223,22 @@ public class Items
                     break;
             }
 
+            if (actual is IUpgradable upgradable)
+            {
+                Assert.Equal(upgradable.UpgradeSlotCount, upgradable.UpgradeSlots.Count);
+                if (upgradable.UpgradeSlotCount > 0)
+                {
+                    Assert.Equal(upgradable.SuffixItemId, upgradable.UpgradeSlots[0]);
+                }
+
+                if (upgradable.UpgradeSlotCount > 1)
+                {
+                    Assert.Equal(upgradable.SecondarySuffixItemId, upgradable.UpgradeSlots[1]);
+                }
+
+                Assert.Equal(upgradable.InfusionSlotCount, upgradable.InfusionSlots.Count);
+            }
+
             var chatLink = actual.GetChatLink();
             Assert.Equal(actual.ChatLink, chatLink.ToString());
             Assert.Equal(actual.Id, chatLink.ItemId);

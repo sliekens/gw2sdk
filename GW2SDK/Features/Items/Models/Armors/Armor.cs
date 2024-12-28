@@ -20,9 +20,6 @@ public record Armor : Item, ICombatEquipment, IUpgradable
     /// reduces incoming strike damage.</summary>
     public required int Defense { get; init; }
 
-    /// <summary>The infusion slots of the armor (only available on ascended and legendary items).</summary>
-    public required IReadOnlyList<InfusionSlot> InfusionSlots { get; init; }
-
     /// <summary>The Attribute Adjustment factor. To calculate the final item stats of the item, multiply this value with an
     /// attribute's multiplier, then add the result to the attribute's base value.</summary>
     /// <remarks>The formula is: attribute_adjustment * multiplier + value.</remarks>
@@ -43,9 +40,13 @@ public record Armor : Item, ICombatEquipment, IUpgradable
 
     int? IUpgradable.SecondarySuffixItemId => null;
 
-    /// <summary>The IDs of the attribute combinations that can be chosen for the item. This property is only used for items
-    /// with selectable stats.</summary>
-    public required IReadOnlyList<int> StatChoices { get; init; }
+    /// <summary>The upgrade slots of the armor.</summary>
+    public IReadOnlyList<int?> UpgradeSlots =>
+        this switch
+        {
+            _ when Flags.NotUpgradeable => Empty.List<int?>(),
+            _ => [SuffixItemId]
+        };
 
     /// <summary>The number of upgrade slots available on the armor item.</summary>
     public virtual int UpgradeSlotCount =>
@@ -55,8 +56,15 @@ public record Armor : Item, ICombatEquipment, IUpgradable
             _ => 1
         };
 
+    /// <summary>The infusion slots of the armor (only available on ascended and legendary items).</summary>
+    public required IReadOnlyList<InfusionSlot> InfusionSlots { get; init; }
+
     /// <summary>The number of infusion slots available on the armor item.</summary>
     public virtual int InfusionSlotCount => InfusionSlots.Count;
+
+    /// <summary>The IDs of the attribute combinations that can be chosen for the item. This property is only used for items
+    /// with selectable stats.</summary>
+    public required IReadOnlyList<int> StatChoices { get; init; }
 
     /// <inheritdoc />
     public virtual bool Equals(Armor? other)

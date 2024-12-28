@@ -29,8 +29,8 @@ public record Weapon : Item, ICombatEquipment, IUpgradable
     /// attribute, which reduces incoming strike damage.</summary>
     public required int Defense { get; init; }
 
-    /// <summary>The infusion slots of the weapon (only available on ascended and legendary items).</summary>
-    public required IReadOnlyList<InfusionSlot> InfusionSlots { get; init; }
+    /// <summary>Indicates whether the weapon is two-handed and can have a secondary suffix item.</summary>
+    public virtual bool TwoHanded => false;
 
     /// <summary>The Attribute Adjustment factor. To calculate the final item stats of the item, multiply this value with an
     /// attribute's multiplier, then add the result to the attribute's base value.</summary>
@@ -53,12 +53,14 @@ public record Weapon : Item, ICombatEquipment, IUpgradable
     /// <summary>The ID of the upgrade component in the second upgrade slot (two-handed weapons only), if any.</summary>
     public required int? SecondarySuffixItemId { get; init; }
 
-    /// <summary>The IDs of the attribute combinations that can be chosen for the item. This property is only used for items
-    /// with selectable stats.</summary>
-    public required IReadOnlyList<int> StatChoices { get; init; }
-
-    /// <summary>Indicates whether the weapon is two-handed and can have a secondary suffix item.</summary>
-    public virtual bool TwoHanded => false;
+    /// <summary>The upgrade slots of the weapon.</summary>
+    public IReadOnlyList<int?> UpgradeSlots =>
+        this switch
+        {
+            _ when Flags.NotUpgradeable => [],
+            _ when !TwoHanded => [SuffixItemId],
+            _ => [SuffixItemId, SecondarySuffixItemId]
+        };
 
     /// <summary>The number of upgrade slots available on the weapon.</summary>
     public virtual int UpgradeSlotCount =>
@@ -69,8 +71,15 @@ public record Weapon : Item, ICombatEquipment, IUpgradable
             _ => 1
         };
 
+    /// <summary>The infusion slots of the weapon (only available on ascended and legendary items).</summary>
+    public required IReadOnlyList<InfusionSlot> InfusionSlots { get; init; }
+
     /// <summary>The number of infusion slots available on the weapon.</summary>
     public virtual int InfusionSlotCount => InfusionSlots.Count;
+
+    /// <summary>The IDs of the attribute combinations that can be chosen for the item. This property is only used for items
+    /// with selectable stats.</summary>
+    public required IReadOnlyList<int> StatChoices { get; init; }
 
     /// <inheritdoc />
     public virtual bool Equals(Weapon? other)

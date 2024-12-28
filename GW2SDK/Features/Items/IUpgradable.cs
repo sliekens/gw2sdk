@@ -10,6 +10,9 @@ public interface IUpgradable
     /// <summary>The ID of the upgrade component in the second upgrade slot (two-handed weapons only), if any.</summary>
     int? SecondarySuffixItemId { get; }
 
+    /// <summary>The upgrade slots of the item.</summary>
+    IReadOnlyList<int?> UpgradeSlots { get; }
+
     /// <summary>The number of upgrade slots available on the item.</summary>
     int UpgradeSlotCount { get; }
 
