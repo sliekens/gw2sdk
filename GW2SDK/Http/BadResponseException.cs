@@ -37,7 +37,7 @@ public sealed class BadResponseException : HttpRequestException
     public BadResponseException(
         string? message,
         Exception? innerException,
-        HttpStatusCode? statusCode
+        System.Net.HttpStatusCode? statusCode
     )
         : base(message, innerException, statusCode)
     {
