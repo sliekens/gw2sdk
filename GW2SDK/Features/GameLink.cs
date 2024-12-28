@@ -6,7 +6,7 @@ namespace GuildWars2;
 
 /// <summary>Represents a link to the game client that provides realtime game state updates.</summary>
 [PublicAPI]
-public sealed class GameLink : IObservable<GameTick>, IDisposable
+public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposable
 {
     /// <summary>The smallest allowed polling interval.</summary>
     public static readonly TimeSpan MinimumRefreshInterval = TimeSpan.FromMilliseconds(1);
@@ -42,7 +42,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable
         );
     }
 
-    /// <summary>Disposes the <see cref="GameLink" /> instance and releases any resources used.</summary>
+    /// <inheritdoc />
     public void Dispose()
     {
         if (disposed)
@@ -73,6 +73,51 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable
             // Set flag to prevent reusing a disposed instance
             disposed = true;
         }
+    }
+
+    /// <inheritdoc />
+    public async ValueTask DisposeAsync()
+    {
+        if (disposed)
+        {
+            return;
+        }
+
+#if NET
+        await timer.DisposeAsync();
+#else
+        using ManualResetEventSlim callbacksFinished = new(false);
+        if (timer.Dispose(callbacksFinished.WaitHandle))
+        {
+            var tcs = new TaskCompletionSource<bool>();
+            ThreadPool.QueueUserWorkItem(
+                state =>
+                {
+                    var (waitHandle, taskCompletionSource) = ((WaitHandle, TaskCompletionSource<bool>))state;
+                    try
+                    {
+                        waitHandle.WaitOne();
+                        taskCompletionSource.SetResult(true);
+                    }
+                    catch (Exception error)
+                    {
+                        taskCompletionSource.SetException(error);
+                    }
+                },
+                (callbacksFinished.WaitHandle, tcs)
+            );
+
+            await tcs.Task.ConfigureAwait(false);
+        }
+#endif
+
+        foreach (var subscriber in subscribers)
+        {
+            subscriber.OnCompleted();
+        }
+
+        mumbleLink.Dispose();
+        disposed = true;
     }
 
     /// <summary>Subscribes an observer to receive realtime game state updates.</summary>

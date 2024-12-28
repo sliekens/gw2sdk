@@ -4,7 +4,7 @@ namespace GuildWars2.Tests.Features.Mumble;
 
 public class GameLinkTestObserver : IObserver<GameTick>
 {
-    private readonly AutoResetEvent are = new(false);
+    private readonly TaskCompletionSource<bool> tcs = new();
 
     public Exception? Error { get; private set; }
 
@@ -12,14 +12,17 @@ public class GameLinkTestObserver : IObserver<GameTick>
 
     public GameTick Last { get; private set; }
 
-    public WaitHandle WaitHandle => are;
+    public Task WaitHandle => tcs.Task;
 
-    public void OnCompleted() => are.Set();
+    public void OnCompleted()
+    {
+        tcs.TrySetResult(true);
+    }
 
-    public void OnError(Exception? error)
+    public void OnError(Exception error)
     {
         Error = error;
-        are.Set();
+        tcs.TrySetException(error);
     }
 
     public void OnNext(GameTick value)
@@ -27,11 +30,12 @@ public class GameLinkTestObserver : IObserver<GameTick>
         if (First.UiTick == 0)
         {
             First = value;
+            Last = value;
         }
-        else if (value.UiTick > First.UiTick)
+        else if (value.UiTick != First.UiTick)
         {
             Last = value;
-            are.Set();
+            tcs.TrySetResult(true);
         }
     }
 }

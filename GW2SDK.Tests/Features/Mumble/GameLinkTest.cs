@@ -20,26 +20,20 @@ public class GameLinkTest
 
     [Fact]
     [SupportedOSPlatform("windows")]
-    public void The_link_is_self_updating()
+    public async Task The_link_is_self_updating()
     {
         Assert.SkipUnless(GameLink.IsSupported(), "Test requires Windows");
-        using var sut = GameLink.Open();
+        await using var sut = GameLink.Open();
 
         GameLinkTestObserver actual = new();
 
         sut.Subscribe(actual);
 
-        if (actual.WaitHandle.WaitOne(30000))
-        {
-            Assert.True(
-                actual.Last.UiTick != actual.First.UiTick,
-                "GameLink should not re-publish the same tick twice"
-            );
-        }
-        else
-        {
-            Assert.Fail("GameLink should push updates to subscribers. This test only works if you are in a map, not in a loading screen etc.");
-        }
+        await actual.WaitHandle.WaitAsync(TimeSpan.FromSeconds(3), TimeProvider.System, TestContext.Current.CancellationToken);
+        Assert.True(
+            actual.Last.UiTick != actual.First.UiTick,
+            "GameLink should not re-publish the same tick twice"
+        );
     }
 
     [Fact]
