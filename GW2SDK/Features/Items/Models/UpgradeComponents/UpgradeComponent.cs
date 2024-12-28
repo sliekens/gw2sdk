@@ -47,7 +47,7 @@ public record UpgradeComponent : Item, ICombatEquipment
                 && AttributeCombinationId == other.AttributeCombinationId
                 && Buff == other.Buff
                 && SuffixName == other.SuffixName
-                && Attributes.SequenceEqual(other.Attributes));
+                && Attributes.SequenceEqual(other.Attributes, AttributesComparer.Instance));
     }
 
     /// <inheritdoc />

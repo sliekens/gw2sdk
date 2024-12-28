@@ -57,6 +57,22 @@ public record Weapon : Item, ICombatEquipment, IUpgradable
     /// with selectable stats.</summary>
     public required IReadOnlyList<int> StatChoices { get; init; }
 
+    /// <summary>Indicates whether the weapon is two-handed and can have a secondary suffix item.</summary>
+    public virtual bool TwoHanded => false;
+
+    /// <summary>The number of upgrade slots available on the weapon.</summary>
+    public virtual int UpgradeSlotCount =>
+        this switch
+        {
+            { Flags.NotUpgradeable: true } => 0,
+            { TwoHanded: false } => 1,
+            { TwoHanded: true } => 2,
+            _ => 0
+        };
+
+    /// <summary>The number of infusion slots available on the weapon.</summary>
+    public virtual int InfusionSlotCount => InfusionSlots.Count;
+
     /// <inheritdoc />
     public virtual bool Equals(Weapon? other)
     {
@@ -72,7 +88,7 @@ public record Weapon : Item, ICombatEquipment, IUpgradable
                 && Buff == other.Buff
                 && SuffixItemId == other.SuffixItemId
                 && SecondarySuffixItemId == other.SecondarySuffixItemId
-                && Attributes.SequenceEqual(other.Attributes)
+                && Attributes.SequenceEqual(other.Attributes, AttributesComparer.Instance)
                 && InfusionSlots.SequenceEqual(other.InfusionSlots)
                 && StatChoices.SequenceEqual(other.StatChoices));
     }

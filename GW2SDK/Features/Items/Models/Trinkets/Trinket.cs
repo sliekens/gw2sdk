@@ -47,7 +47,7 @@ public record Trinket : Item, ICombatEquipment, IUpgradable
                 && Buff == other.Buff
                 && SuffixItemId == other.SuffixItemId
                 && InfusionSlots.SequenceEqual(other.InfusionSlots)
-                && Attributes.SequenceEqual(other.Attributes)
+                && Attributes.SequenceEqual(other.Attributes, AttributesComparer.Instance)
                 && StatChoices.SequenceEqual(other.StatChoices));
     }
 
