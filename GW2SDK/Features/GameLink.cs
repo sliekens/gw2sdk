@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using GuildWars2.Mumble;
 
@@ -59,13 +58,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable
         // When Dispose returns false, it means Dispose was called twice, so do nothing
         if (timer.Dispose(callbacksFinished.WaitHandle))
         {
-            // Give the timer 10s to finish all callbacks
-            // This is a very generous timeout, it should never take this long
-            // If it does, it's likely due to a deadlock in the callbacks
-            if (!callbacksFinished.WaitHandle.WaitOne(10_000))
-            {
-                Debug.WriteLine("Timed out waiting for timer callbacks to finish, possibly due to a deathlock.");
-            }
+            callbacksFinished.WaitHandle.WaitOne();
 
             // Notify subscribers that there will be no more updates
             foreach (var subscriber in subscribers)
