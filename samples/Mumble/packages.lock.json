@@ -52,6 +52,12 @@
           "Microsoft.Extensions.Options": "9.0.0"
         }
       },
+      "Pastel": {
+        "type": "Direct",
+        "requested": "[6.0.1, )",
+        "resolved": "6.0.1",
+        "contentHash": "7naIbEgNzZnorWWIfI0rsC4GUtw/Yjqt+Kd28e8xpzfsaismJ02WF4vG/USDbmJQkBMWPsNPM+KUxNlUiGad+w=="
+      },
       "System.Reactive": {
         "type": "Direct",
         "requested": "[6.0.1, )",

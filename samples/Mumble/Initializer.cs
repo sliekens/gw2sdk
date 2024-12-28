@@ -10,6 +10,7 @@ internal static class Initializer
     internal static void Initialize()
     {
         Console.OutputEncoding = Encoding.UTF8;
+        Console.CursorVisible = false;
         CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en");
         CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo("en");
     }

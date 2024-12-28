@@ -76,6 +76,7 @@ the lightest machine and don't exceed 15GB disk usage. This codespace weighs aro
 - [Codecov][codecov] contains test coverage reports
 - [Guild Wars 2 wiki: API][api] contains API endpoint documentation
 - [Guild Wars 2 wiki: chat link format][chatlinks] contains the format of chat links
+- [Guild Wars 2 wiki: MumbleLink format][mumblelink] contains the format of the MumbleLink structure
 - <https://api.guildwars2.com/v2> contains an overview of API endpoints
 - <https://api.guildwars2.com/v2.json?v=latest> contains API endpoints, schema versions
   and changelog in machine-readable format
@@ -93,6 +94,7 @@ the lightest machine and don't exceed 15GB disk usage. This codespace weighs aro
 [installation]:https://sliekens.github.io/gw2sdk/guide/overview/installation
 [introduction]:https://sliekens.github.io/gw2sdk/guide/overview/introduction
 [api-docs]:https://sliekens.github.io/gw2sdk/api/GuildWars2.html
+[mumblelink]:https://wiki.guildwars2.com/wiki/API:MumbleLink
 [new-discussion]:https://github.com/sliekens/gw2sdk/discussions/new/choose
 [new-issue]:https://github.com/sliekens/gw2sdk/issues/new
 [nuget-vpre-badge]:https://img.shields.io/nuget/vpre/GW2SDK
