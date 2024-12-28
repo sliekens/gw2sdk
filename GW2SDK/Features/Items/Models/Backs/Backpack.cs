@@ -38,6 +38,20 @@ public sealed record Backpack : Item, ICombatEquipment, IUpgradable, IInfused, I
     /// with selectable stats.</summary>
     public required IReadOnlyList<int> StatChoices { get; init; }
 
+    /// <summary>The number of upgrade slots available on the back item.</summary>
+    public int UpgradeSlotCount =>
+        this switch
+        {
+            _ when Flags.NotUpgradeable => 0,
+            _ when Rarity == Items.Rarity.Ascended => 0,
+            _ when Rarity == Items.Rarity.Legendary => 0,
+            _ => 1
+        };
+
+
+    /// <summary>The number of infusion slots available on the back item.</summary>
+    public int InfusionSlotCount => InfusionSlots.Count;
+
     /// <summary>If the current back item can be infused in the Mystic Forge, this collection contains the IDs of the infused variations of the
     /// back item. Each item in the collection represents a different recipe.</summary>
     public required IReadOnlyCollection<InfusionSlotUpgradePath> UpgradesInto { get; init; }

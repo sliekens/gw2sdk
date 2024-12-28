@@ -64,10 +64,9 @@ public record Weapon : Item, ICombatEquipment, IUpgradable
     public virtual int UpgradeSlotCount =>
         this switch
         {
-            { Flags.NotUpgradeable: true } => 0,
-            { TwoHanded: false } => 1,
-            { TwoHanded: true } => 2,
-            _ => 0
+            _ when Flags.NotUpgradeable => 0,
+            _ when TwoHanded => 2,
+            _ => 1
         };
 
     /// <summary>The number of infusion slots available on the weapon.</summary>

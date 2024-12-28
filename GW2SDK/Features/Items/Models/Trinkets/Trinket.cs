@@ -37,6 +37,19 @@ public record Trinket : Item, ICombatEquipment, IUpgradable
     /// with selectable stats.</summary>
     public required IReadOnlyList<int> StatChoices { get; init; }
 
+    /// <summary>The number of upgrade slots available on the trinket.</summary>
+    public virtual int UpgradeSlotCount =>
+        this switch
+        {
+            _ when Flags.NotUpgradeable => 0,
+            _ when Rarity == Items.Rarity.Ascended => 0,
+            _ when Rarity == Items.Rarity.Legendary => 0,
+            _ => 1
+        };
+
+    /// <summary>The number of infusion slots available on the trinket.</summary>
+    public virtual int InfusionSlotCount => InfusionSlots.Count;
+
     /// <inheritdoc />
     public virtual bool Equals(Trinket? other)
     {
