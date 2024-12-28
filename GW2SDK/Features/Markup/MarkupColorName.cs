@@ -38,7 +38,7 @@ public static class MarkupColorName
         new ReadOnlyDictionary<string, string>(new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
         {
             [AbilityType] = "#ffee88",
-            [Flavor] = "#99dddd",
+            [Flavor] = "#99eedd",
             [Reminder] = "#aaaaaa",
             [Task] = "#ffcc55",
             [Warning] = "#ff0000"
