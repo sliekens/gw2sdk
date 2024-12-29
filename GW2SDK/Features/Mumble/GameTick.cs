@@ -21,15 +21,17 @@ public readonly record struct GameTick
     /// always incrementing.</remarks>
     public readonly uint UiTick;
 
-    /// <summary>Avatar position is the position of the player in the coordinate system of the map. X is measured along the
+    /// <summary>Avatar position is the position of the player in the map coordinate system. X is measured along the
     /// east-west axis, Y measures elevation, Z is measured along the north-south axis.</summary>
-    /// <remarks>While the game uses inches as unit, mumble uses meters.</remarks>
+    /// <remarks>The values are in meters and must be converted to inches to use them like other coordinates in the game.</remarks>
     public readonly Vector3 AvatarPosition;
 
     /// <summary>Unit vector pointing out of the avatar's eyes aka "At"-vector.</summary>
+    /// <remarks>The values are in meters and must be converted to inches to use them like other coordinates in the game.</remarks>
     public readonly Vector3 AvatarFront;
 
     /// <summary>Unit vector pointing out of the top of the avatar's head aka "Up"-vector (here Top points straight up</summary>
+    /// <remarks>The values are in meters and must be converted to inches to use them like other coordinates in the game.</remarks>
     public readonly Vector3 AvatarTop;
 
     /// <summary>The name of the game.</summary>
@@ -37,12 +39,15 @@ public readonly record struct GameTick
     public readonly string Name;
 
     /// <summary>Same as <see cref="AvatarPosition" /> but for the camera.</summary>
+    /// <remarks>The values are in meters and must be converted to inches to use them like other coordinates in the game.</remarks>
     public readonly Vector3 CameraPosition;
 
     /// <summary>Same as <see cref="AvatarFront" /> but for the camera.</summary>
+    /// <remarks>The values are in meters and must be converted to inches to use them like other coordinates in the game.</remarks>
     public readonly Vector3 CameraFront;
 
     /// <summary>Same as <see cref="AvatarTop" /> but for the camera.</summary>
+    /// <remarks>The values are in meters and must be converted to inches to use them like other coordinates in the game.</remarks>
     public readonly Vector3 CameraTop;
 
     /// <summary>A free-text field which uniquely identifies the player. The Guild Wars 2 client stores JSON in this field. Use

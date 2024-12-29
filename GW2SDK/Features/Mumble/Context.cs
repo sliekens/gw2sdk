@@ -41,16 +41,20 @@ public readonly record struct Context
     /// <summary>The compass rotation in radians.</summary>
     public readonly float CompassRotation;
 
-    /// <summary>The player's current X position in the continent coordinate system.</summary>
+    /// <summary>The player's current X position in the continent coordinate system (inches).</summary>
+    /// <remarks>This value can change by player movement. The value is not updated in competitive game types.</remarks>
     public readonly float PlayerX;
 
-    /// <summary>The player's current Y position in the continent coordinate system.</summary>
+    /// <summary>The player's current Y position in the continent coordinate system (inches).</summary>
+    /// <remarks>This value can change by player movement. The value is not updated in competitive game types.</remarks>
     public readonly float PlayerY;
 
-    /// <summary>The X position of the center of the player's current map in the continent coordinate system.</summary>
+    /// <summary>The current X position of the center of the world map or compass in the continent coordinate system (inches).</summary>
+    /// <remarks>This value can change by player movement as the compass is centered on the player, or by interacting with the compass or world map to zoom and pan. The value is not updated in competitive game types</remarks>
     public readonly float MapCenterX;
 
-    /// <summary>The Y position of the center of the player's current map in the continent coordinate system.</summary>
+    /// <summary>The current Y position of the center of the world map or compass in the continent coordinate system (inches).</summary>
+    /// <remarks>This value can change by player movement as the compass is centered on the player, or by interacting with the compass or world map to zoom and pan. The value is not updated in competitive game types</remarks>
     public readonly float MapCenterY;
 
     /// <summary>The zoom level of the world map when the map is open, or the compass otherwise.</summary>
