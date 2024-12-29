@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Collections.Concurrent;
+using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using GuildWars2.Mumble;
 
@@ -15,7 +16,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
     private readonly MumbleLink mumbleLink;
 
     /// <summary>A list of observers who want to receive realtime game state.</summary>
-    private readonly List<IObserver<GameTick>> subscribers = [];
+    private readonly ConcurrentDictionary<IObserver<GameTick>, Subscription> subscribers = new();
 
     /// <summary>A Timer is used to poll for changes to the shared memory as there is no push mechanism.</summary>
     private readonly Timer timer;
@@ -79,7 +80,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
         }
 #endif
 
-        foreach (var subscriber in subscribers)
+        foreach (var subscriber in subscribers.Keys)
         {
             subscriber.OnCompleted();
         }
@@ -107,7 +108,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
             callbacksFinished.WaitHandle.WaitOne();
 
             // Notify subscribers that there will be no more updates
-            foreach (var subscriber in subscribers)
+            foreach (var subscriber in subscribers.Keys)
             {
                 subscriber.OnCompleted();
             }
@@ -132,26 +133,27 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
         }
 
         // Ensure no duplicate subscriptions
-        if (!subscribers.Contains(observer))
-        {
-            // Send an immediate snapshot to new subscribers
-            try
+        return subscribers.GetOrAdd(
+            observer,
+            sub =>
             {
-                var tick = GetSnapshot();
-                if (tick.UiTick > 0)
+                try
                 {
-                    observer.OnNext(tick);
+                    var tick = GetSnapshot();
+                    if (tick.UiTick > 0)
+                    {
+                        sub.OnNext(tick);
+                    }
                 }
 
-                subscribers.Add(observer);
-            }
-            catch (Exception oops)
-            {
-                observer.OnError(oops);
-            }
-        }
+                catch (Exception oops)
+                {
+                    sub.OnError(oops);
+                }
 
-        return new Subscription(this, observer);
+                return new Subscription(this, sub);
+            }
+        );
     }
 
     /// <summary>Gets a snapshot of the current game state.</summary>
@@ -185,7 +187,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
             catch (Exception reason)
             {
                 // Notify every observer that there has been an internal error
-                foreach (var subscriber in subscribers.ToList())
+                foreach (var subscriber in subscribers.Keys.ToList())
                 {
                     try
                     {
@@ -207,7 +209,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
             if (tick.UiTick > 0 && tick.UiTick != lastTick)
             {
                 lastTick = tick.UiTick;
-                foreach (var subscriber in subscribers.ToList())
+                foreach (var subscriber in subscribers.Keys.ToList())
                 {
                     try
                     {
@@ -227,7 +229,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
                         }
                         finally
                         {
-                            subscribers.Remove(subscriber);
+                            subscribers.TryRemove(subscriber, out _);
                         }
                     }
                 }
@@ -269,7 +271,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
         /// <summary>Disposes the subscription and removes the observer from the subscribers list.</summary>
         public void Dispose()
         {
-            producer.subscribers.Remove(observer);
+            producer.subscribers.TryRemove(observer, out _);
         }
     }
 }
