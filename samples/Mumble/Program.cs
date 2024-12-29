@@ -11,9 +11,17 @@ if (!GameLink.IsSupported())
     );
 }
 
-// Initialize the shared memory link with a refresh interval of your choice
-// GameLink implements IAsyncDisposable, so you can use it in an async using statement
-var refreshInterval = GameLink.MinimumRefreshInterval;
+// Choose an interval to indicate how often you want to
+//   receive fresh data from the game.
+// For example, at most once every second.
+// Default: no limit, every change in the game state
+//   will be available immediately.
+TimeSpan refreshInterval = GameLink.MinimumRefreshInterval;
+
+// Open the game link with the chosen refresh interval.
+// GameLink implements IDiposable and IAsyncDisposable,
+//  make sure it is disposed one way or another,
+//  e.g. by 'using' or 'await using'.
 await using var gameLink = GameLink.Open(refreshInterval);
 
 // Setup dependency injection and logging
@@ -33,4 +41,6 @@ host.Logging.AddSimpleConsole(
 );
 
 var app = host.Build();
+
+// Start the services and wait until Ctrl+C is pressed
 await app.RunAsync();

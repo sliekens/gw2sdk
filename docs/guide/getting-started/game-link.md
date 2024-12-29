@@ -136,40 +136,56 @@ The example consists of a few classes:
 ### Example output
 
 ``` text
-Build                          : 172,493
-Process                        : 49,752
-World                          : Ring of Fire (Language: English, Region: Europe, Population: High, ID: 2005)
-Server IP                      : 3.77.138.137
+⭑⭑⭑ Technical Information ⭑⭑⭑
+Build ID                       : 172,493
+Process ID                     : 43,212
+World ID                       : 2005 (Ring of Fire)
+World population               : High
+World region                   : Europe
+World language                 : English
 Shard ID                       : 000007D5
+Instance                       : 00000000
+Server IP                      : 3.77.138.137
+Tick                           : 667,962
+
+⭑⭑⭑ User Interface ⭑⭑⭑
+UI size                        : Normal
+Game has focus                 : ❌
+Textbox has focus              : ❌
+
+⭑⭑⭑ Character Information ⭑⭑⭑
 Name                           : Invert Control
 Race                           : Human
 Profession                     : Engineer
-Specialization                 : Holosmith (ID: 57)
-Map                            : Gilded Hollow (Instance, ID: 1121)
-Instance                       : 00000000
-Current mount                  :
-UI Size                        : Normal
-Compass dimensions             : Width = 362 Height = 170
-Compass can rotate             : ❌
-Compass docked top-right       : ❌
-Compass/world map scale        : 1.000
-World map is open              : ❌
-Player is in PvP game type     : ❌
+Specialization                 : Mechanist (ID: 70)
+Squad leader                   : ❌
+In combat                      : ❌
+Current mount                  : Griffon
+
+⭑⭑⭑ Competitive Games ⭑⭑⭑
+Competitive game type          : ❌
 Team color                     : none
-Player is in combat            : ❌
-Player is squad leader         : ❌
-Textbox has focus              : ❌
-Game has focus                 : ❌
-Field of View                  : 0.646
-Map Center                     : X = 35,824.773 Y = 33,211.641
-Player Coordinates             : X = 35,824.773 Y = 33,211.641
-Avatar Coordinates             : X =    -87.311 Y =     61.660 Z =    -36.357
-Avatar Orientation             : X =      0.238 Y =      0.000 Z =     -0.971
-Avatar Top                     : X =      0.000 Y =      0.000 Z =      0.000
-Camera Coordinates             : X =    -90.676 Y =     70.302 Z =    -22.400
-Camera Orientation             : X =      0.224 Y =     -0.335 Z =     -0.915
-Camera Top                     : X =      0.000 Y =      0.000 Z =      0.000
-Tick                           : 150,712
+
+⭑⭑⭑ World Map Coordinates ⭑⭑⭑
+Compass location               : bottom-right
+Compass dimensions             : Width = 362 Height = 361
+Compass orientation            : static
+World map is open              : ❌
+Compass/world map scale        : 1.000
+Map center                     : X = 35,973.246 Y = 33,210.469
+Player position                : X = 35,973.246 Y = 33,210.469
+
+⭑⭑⭑ Positional Information ⭑⭑⭑
+Map ID                         : 1121 (Gilded Hollow, Instance)
+Avatar position                : X =      3.198 Y =     61.329 Z =    -35.641
+Avatar orientation             : X =      0.006 Y =      0.000 Z =      1.000
+Avatar top                     : X =      0.000 Y =      0.000 Z =      0.000
+
+⭑⭑⭑ Camera Information ⭑⭑⭑
+Field of fiew                  : 1.065
+Camera coordinates             : X =      3.290 Y =     68.311 Z =    -50.490
+Camera orientation             : X =     -0.006 Y =     -0.225 Z =      0.974
+Camera top                     : X =      0.000 Y =      0.000 Z =      0.000
 ```
 
 [race]:https://wiki.guildwars2.com/wiki/Playable_races
