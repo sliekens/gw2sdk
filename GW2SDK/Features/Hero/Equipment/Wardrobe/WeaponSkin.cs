@@ -1,10 +1,12 @@
-﻿using GuildWars2.Items;
+﻿using System.Text.Json.Serialization;
+using GuildWars2.Items;
 
 namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 /// <summary>Information about a weapon skin.</summary>
 [PublicAPI]
 [Inheritable]
+[JsonConverter(typeof(WeaponSkinJsonConverter))]
 public record WeaponSkin : EquipmentSkin
 {
     /// <summary>The damage type of the weapon skin.</summary>

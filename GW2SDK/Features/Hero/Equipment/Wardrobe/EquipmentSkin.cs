@@ -1,4 +1,5 @@
-﻿using GuildWars2.Chat;
+﻿using System.Text.Json.Serialization;
+using GuildWars2.Chat;
 using GuildWars2.Items;
 
 namespace GuildWars2.Hero.Equipment.Wardrobe;
@@ -7,6 +8,7 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 [PublicAPI]
 [Inheritable]
 [DataTransferObject]
+[JsonConverter(typeof(EquipmentSkinJsonConverter))]
 public record EquipmentSkin
 {
     /// <summary>The skin ID.</summary>
@@ -35,5 +37,25 @@ public record EquipmentSkin
     public SkinLink GetChatLink()
     {
         return new SkinLink { SkinId = Id };
+    }
+
+    /// <inheritdoc />
+    public virtual bool Equals(EquipmentSkin? other)
+    {
+        if (other is null) return false;
+        if (ReferenceEquals(this, other)) return true;
+        return Id == other.Id
+            && Name == other.Name
+            && Description == other.Description
+            && Flags.Equals(other.Flags)
+            && Races.SequenceEqual(other.Races)
+            && Rarity.Equals(other.Rarity)
+            && IconHref == other.IconHref;
+    }
+
+    /// <inheritdoc />
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Id, Name, Description, Flags, Races, Rarity, IconHref);
     }
 }

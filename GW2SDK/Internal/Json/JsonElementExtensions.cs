@@ -46,6 +46,14 @@ internal static class JsonElementExtensions
         return values;
     }
 
+    internal static List<TValue>? GetNullableList<TValue>(
+        this JsonElement json,
+        Func<JsonElement, TValue> transform
+    )
+    {
+        return json.ValueKind == JsonValueKind.Null ? null : json.GetList(transform);
+    }
+
     /// <summary>Converts a JSON array to a set.</summary>
     /// <typeparam name="TValue">The type of values in the set.</typeparam>
     /// <param name="json">The array element.</param>
