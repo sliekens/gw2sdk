@@ -1,4 +1,6 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using System.Text.Json;
+using GuildWars2.Hero.Equipment.Finishers;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Finishers;
 
@@ -29,6 +31,10 @@ public class UnlockedFinishers
                 {
                     Assert.True(entry.Quantity >= 0);
                 }
+
+                var json = JsonSerializer.Serialize(entry);
+                var roundTrip = JsonSerializer.Deserialize<UnlockedFinisher>(json);
+                Assert.Equal(entry, roundTrip);
             }
         );
     }
