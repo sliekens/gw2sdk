@@ -1,4 +1,7 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using System.Text.Json;
+using GuildWars2.Hero.Crafting.Recipes;
+using GuildWars2.Hero.Equipment.Dyes;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Dyes;
 
@@ -39,6 +42,11 @@ public class Colors
                     var link = color.GetChatLink();
                     Assert.Equal(color.ItemId, link?.ItemId);
                 }
+
+                var json = JsonSerializer.Serialize(color);
+                var roundTrip = JsonSerializer.Deserialize<DyeColor>(json);
+                Assert.IsType(color.GetType(), roundTrip);
+                Assert.Equal(color, roundTrip);
             }
         );
     }
