@@ -1,20 +1,41 @@
 version: 2
-registries:
-  nuget-feed-nuget-pkg-github-com-stevenliekens-index-json:
-    type: nuget-feed
-    url: https://nuget.pkg.github.com/stevenliekens/index.json
-    username: Dependabot
-    password: "${{secrets.NUGET_FEED_NUGET_PKG_GITHUB_COM_STEVENLIEKENS_INDEX_JSON_PASSWORD}}"
-
 updates:
-- package-ecosystem: nuget
-  directory: "/"
-  schedule:
-    interval: daily
-    time: "04:00"
-  registries:
-  - nuget-feed-nuget-pkg-github-com-stevenliekens-index-json
-  # Disable pull requests until they finally support lockfiles
-  # https://github.com/dependabot/dependabot-core/pull/6031
-  open-pull-requests-limit: 0
-
+  - package-ecosystem: nuget
+    directory: /
+    schedule:
+      interval: daily
+    groups:
+      microsoft:
+        applies-to: version-updates
+        patterns:
+          - "Microsoft.*"
+          - "System.*"
+        update-types:
+          - minor
+          - patch
+      xunit:
+        applies-to: version-updates
+        patterns:
+          - "xunit.*"
+        update-types:
+          - minor
+          - patch
+      spectre:
+        applies-to: version-updates
+        patterns:
+          - "Spectre.*"
+        update-types:
+          - minor
+          - patch
+  - package-ecosystem: dotnet-sdk
+    directory: /
+    schedule:
+      interval: daily
+  - package-ecosystem: devcontainers
+    directory: /
+    schedule:
+      interval: daily
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: daily
