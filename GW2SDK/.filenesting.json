@@ -6,6 +6,9 @@
         "add": {
           "Json.cs": [
             ".cs"
+          ],
+          "JsonConverter.cs": [
+            ".cs"
           ]
         }
       }

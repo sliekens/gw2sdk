@@ -1,5 +1,8 @@
-﻿namespace GuildWars2.Hero.Crafting.Recipes;
+﻿using System.Text.Json.Serialization;
 
-/// <summary>Information about a recipe for crafting a pair of gloves.</summary>
+namespace GuildWars2.Hero.Crafting.Recipes;
+
+/// <summary>Information about a recipe for crafting gloves.</summary>
 [PublicAPI]
+[JsonConverter(typeof(GlovesRecipeJsonConverter))]
 public sealed record GlovesRecipe : Recipe;

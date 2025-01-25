@@ -1,5 +1,8 @@
-﻿namespace GuildWars2.Hero.Crafting.Recipes;
+﻿using System.Text.Json.Serialization;
 
-/// <summary>Information about a recipe for crafting an armor insignia.</summary>
+namespace GuildWars2.Hero.Crafting.Recipes;
+
+/// <summary>Information about a recipe for crafting insignias used in armor crafting.</summary>
 [PublicAPI]
+[JsonConverter(typeof(InsigniaRecipeJsonConverter))]
 public sealed record InsigniaRecipe : Recipe;

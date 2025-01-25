@@ -1,7 +1,12 @@
-﻿namespace GuildWars2.Hero.Crafting.Recipes;
+﻿using System.Text.Json;
+using System.Text.Json.Serialization;
+using GuildWars2.Json;
+
+namespace GuildWars2.Hero.Crafting.Recipes;
 
 /// <summary>Modifiers for crafting recipes.</summary>
 [PublicAPI]
+[JsonConverter(typeof(RecipeFlagsJsonConverter))]
 public sealed record RecipeFlags : Flags
 {
     /// <summary>Whether the recipe is automatically learned when the player reaches the required discipline level.</summary>

@@ -1,4 +1,6 @@
-﻿using GuildWars2.Chat;
+﻿using System.Text.Json;
+using GuildWars2.Chat;
+using GuildWars2.Hero.Crafting.Recipes;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Crafting.Recipes;
@@ -42,6 +44,25 @@ public class Recipes
 
             var chatLinkRoundtrip = RecipeLink.Parse(chatLink.ToString());
             Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
+        }
+    }
+
+    [Fact]
+    public async Task Can_be_serialized()
+    {
+        // The JsonLinesHttpMessageHandler simulates the behavior of the real API
+        // because bulk enumeration quickly exhausts the API rate limit
+        using var httpClient =
+            new HttpClient(new JsonLinesHttpMessageHandler("Data/recipes.jsonl.gz"));
+        var sut = new Gw2Client(httpClient);
+        await foreach (var original in sut.Hero.Crafting.Recipes
+            .GetRecipesBulk(cancellationToken: TestContext.Current.CancellationToken)
+            .ValueOnly(TestContext.Current.CancellationToken))
+        {
+            var json = JsonSerializer.Serialize(original);
+            var roundTrip = JsonSerializer.Deserialize<Recipe>(json);
+            Assert.IsType(original.GetType(), roundTrip);
+            Assert.Equal(original, roundTrip);
         }
     }
 }
