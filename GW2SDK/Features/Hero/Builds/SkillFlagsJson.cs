@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using GuildWars2.Collections;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Builds;
@@ -9,7 +10,7 @@ internal static class SkillFlagsJson
     {
         var groundTargeted = false;
         var noUnderwater = false;
-        List<string>? others = null;
+        ValueList<string> others = [];
         foreach (var entry in json.EnumerateArray())
         {
             if (entry.ValueEquals("GroundTargeted"))
@@ -22,7 +23,6 @@ internal static class SkillFlagsJson
             }
             else
             {
-                others ??= [];
                 others.Add(entry.GetStringRequired());
             }
         }
@@ -31,7 +31,7 @@ internal static class SkillFlagsJson
         {
             GroundTargeted = groundTargeted,
             NoUnderwater = noUnderwater,
-            Other = others ?? Empty.ListOfString
+            Other = others
         };
     }
 }

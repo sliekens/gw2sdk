@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using GuildWars2.Collections;
 using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Emblems;
@@ -9,7 +10,7 @@ internal static class GuildEmblemFlagsJson
     {
         var flipBackgroundHorizontal = false;
         var flipBackgroundVertical = false;
-        List<string>? others = null;
+        ValueList<string> others = [];
         foreach (var entry in json.EnumerateArray())
         {
             if (entry.ValueEquals("FlipBackgroundHorizontal"))
@@ -20,10 +21,8 @@ internal static class GuildEmblemFlagsJson
             {
                 flipBackgroundVertical = true;
             }
-
             else
             {
-                others ??= [];
                 others.Add(entry.GetStringRequired());
             }
         }
@@ -32,7 +31,7 @@ internal static class GuildEmblemFlagsJson
         {
             FlipBackgroundHorizontal = flipBackgroundHorizontal,
             FlipBackgroundVertical = flipBackgroundVertical,
-            Other = others ?? Empty.ListOfString
+            Other = others
         };
     }
 }

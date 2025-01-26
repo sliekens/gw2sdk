@@ -179,19 +179,19 @@ internal static class BackpackJson
             SuffixItemId = suffixItemId.Map(static value => value.GetInt32()),
             StatChoices =
                 statChoices.Map(static values => values.GetList(static value => value.GetInt32()))
-                ?? Empty.ListOfInt32,
+                ?? [],
             UpgradesInto =
                 upgradesInto.Map(
                     static values =>
                         values.GetList(static value => value.GetInfusionSlotUpgradePath())
                 )
-                ?? Empty.List<InfusionSlotUpgradePath>(),
+                ?? [],
             UpgradesFrom =
                 upgradesFrom.Map(
                     static values =>
                         values.GetList(static value => value.GetInfusionSlotUpgradeSource())
                 )
-                ?? Empty.List<InfusionSlotUpgradeSource>()
+                ?? []
         };
     }
 }

@@ -109,7 +109,7 @@ internal static class EquipmentItemJson
             SecondarySuffixItemId = secondarySuffixItemId,
             InfusionItemIds =
                 infusions.Map(static values => values.GetList(static value => value.GetInt32()))
-                ?? Empty.ListOfInt32,
+                ?? [],
             SkinId = skin.Map(static value => value.GetInt32()),
             Stats = stats.Map(static value => value.GetSelectedAttributeCombination()),
             Binding = binding.Map(static value => value.GetEnum<ItemBinding>()),
@@ -117,7 +117,7 @@ internal static class EquipmentItemJson
             Location = location.Map(static value => value.GetEnum<EquipmentLocation>()),
             TemplateNumbers =
                 tabs.Map(static values => values.GetList(static value => value.GetInt32()))
-                ?? Empty.ListOfInt32,
+                ?? [],
             DyeColorIds =
                 dyes.Map(
                     static values =>
@@ -125,7 +125,7 @@ internal static class EquipmentItemJson
                             static value => value.GetNullableInt32() ?? DyeColor.DyeRemoverId
                         )
                 )
-                ?? Empty.ListOfInt32
+                ?? []
         };
     }
 }

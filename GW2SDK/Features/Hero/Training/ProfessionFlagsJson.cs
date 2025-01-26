@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using GuildWars2.Collections;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Training;
@@ -9,7 +10,7 @@ internal static class ProfessionFlagsJson
     {
         var noWeaponSwap = false;
         var noRacialSkills = false;
-        List<string>? others = null;
+        ValueList<string> others = [];
         foreach (var entry in json.EnumerateArray())
         {
             if (entry.ValueEquals("NoWeaponSwap"))
@@ -23,7 +24,6 @@ internal static class ProfessionFlagsJson
 
             else
             {
-                others ??= [];
                 others.Add(entry.GetStringRequired());
             }
         }
@@ -32,7 +32,7 @@ internal static class ProfessionFlagsJson
         {
             NoWeaponSwap = noWeaponSwap,
             NoRacialSkills = noRacialSkills,
-            Other = others ?? Empty.ListOfString
+            Other = others
         };
     }
 }

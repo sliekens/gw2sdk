@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using GuildWars2.Collections;
 using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Seasons;
@@ -10,7 +11,7 @@ internal static class DivisionFlagsJson
         var canLosePoints = false;
         var canLoseTiers = false;
         var repeatable = false;
-        List<string>? others = null;
+        ValueList<string> others = [];
         foreach (var entry in json.EnumerateArray())
         {
             if (entry.ValueEquals("CanLosePoints"))
@@ -27,7 +28,6 @@ internal static class DivisionFlagsJson
             }
             else
             {
-                others ??= [];
                 others.Add(entry.GetStringRequired());
             }
         }
@@ -37,7 +37,7 @@ internal static class DivisionFlagsJson
             CanLosePoints = canLosePoints,
             CanLoseTiers = canLoseTiers,
             Repeatable = repeatable,
-            Other = others ?? Empty.ListOfString
+            Other = others
         };
     }
 }

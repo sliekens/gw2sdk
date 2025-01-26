@@ -100,7 +100,7 @@ internal static class GuildConsumableRecipeJson
                 guildIngredients.Map(
                     static values => values.GetList(static value => value.GetGuildIngredient())
                 )
-                ?? Empty.List<GuildIngredient>(),
+                ?? [],
             OutputUpgradeId = outputUpgradeId.Map(static value => value.GetInt32()),
             ChatLink = chatLink.Map(static value => value.GetStringRequired())
         };

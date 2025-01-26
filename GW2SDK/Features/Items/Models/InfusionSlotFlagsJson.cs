@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using GuildWars2.Collections;
 using GuildWars2.Json;
 
 namespace GuildWars2.Items;
@@ -9,7 +10,7 @@ internal static class InfusionSlotFlagsJson
     {
         var enrichment = false;
         var infusion = false;
-        List<string>? others = null;
+        ValueList<string> others = [];
         foreach (var entry in json.EnumerateArray())
         {
             if (entry.ValueEquals("Enrichment"))
@@ -23,7 +24,6 @@ internal static class InfusionSlotFlagsJson
 
             else
             {
-                others ??= [];
                 others.Add(entry.GetStringRequired());
             }
         }
@@ -32,7 +32,7 @@ internal static class InfusionSlotFlagsJson
         {
             Enrichment = enrichment,
             Infusion = infusion,
-            Other = others ?? Empty.ListOfString
+            Other = others
         };
     }
 }

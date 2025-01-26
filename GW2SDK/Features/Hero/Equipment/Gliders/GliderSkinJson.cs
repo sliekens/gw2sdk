@@ -56,7 +56,7 @@ internal static class GliderSkinJson
             Id = id.Map(static value => value.GetInt32()),
             UnlockItemIds =
                 unlockItems.Map(static values => values.GetList(static value => value.GetInt32()))
-                ?? Empty.ListOfInt32,
+                ?? [],
             Order = order.Map(static value => value.GetInt32()),
             IconHref = icon.Map(static value => value.GetStringRequired()),
             Name = name.Map(static value => value.GetStringRequired()),

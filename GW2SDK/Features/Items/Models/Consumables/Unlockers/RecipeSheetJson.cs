@@ -132,7 +132,7 @@ internal static class RecipeSheetJson
                 extraRecipeIds.Map(
                     static values => values.GetList(static value => value.GetInt32())
                 )
-                ?? Empty.ListOfInt32
+                ?? []
         };
     }
 }

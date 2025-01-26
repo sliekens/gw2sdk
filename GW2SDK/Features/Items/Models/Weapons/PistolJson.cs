@@ -199,7 +199,7 @@ internal static class PistolJson
             AttributeAdjustment = attributeAdjustment.Map(static value => value.GetDouble()),
             StatChoices =
                 statChoices.Map(static values => values.GetList(static value => value.GetInt32()))
-                ?? Empty.ListOfInt32,
+                ?? [],
             AttributeCombinationId = infixUpgradeId.Map(static value => value.GetInt32()),
             Attributes =
                 infixUpgradeAttributes.Map(static values => values.GetAttributes())

@@ -103,7 +103,7 @@ internal static class CraftingMaterialJson
                     static values =>
                         values.GetList(static value => value.GetInfusionSlotUpgradePath())
                 )
-                ?? Empty.List<InfusionSlotUpgradePath>()
+                ?? []
         };
     }
 }

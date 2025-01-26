@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using GuildWars2.Collections;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Accounts;
@@ -8,7 +9,7 @@ internal static class CharacterFlagsJson
     public static CharacterFlags GetCharacterFlags(this JsonElement json)
     {
         var beta = false;
-        List<string>? others = null;
+        ValueList<string> others = [];
         foreach (var entry in json.EnumerateArray())
         {
             if (entry.ValueEquals("Beta"))
@@ -17,7 +18,6 @@ internal static class CharacterFlagsJson
             }
             else
             {
-                others ??= [];
                 others.Add(entry.GetStringRequired());
             }
         }
@@ -25,7 +25,7 @@ internal static class CharacterFlagsJson
         return new CharacterFlags
         {
             Beta = beta,
-            Other = others ?? Empty.ListOfString
+            Other = others
         };
     }
 }

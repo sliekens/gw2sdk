@@ -108,7 +108,7 @@ internal static class AchievementJson
                 ),
             Prerequisites =
                 prerequisites.Map(static values => values.GetList(static value => value.GetInt32()))
-                ?? Empty.ListOfInt32,
+                ?? [],
             Rewards =
                 rewards.Map(
                     static values => values.GetList(static value => value.GetAchievementReward())

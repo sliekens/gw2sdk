@@ -1,6 +1,4 @@
-﻿using System.Text.Json;
-using System.Text.Json.Serialization;
-using GuildWars2.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace GuildWars2.Hero.Crafting.Recipes;
 

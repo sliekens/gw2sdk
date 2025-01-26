@@ -138,7 +138,7 @@ internal static class MonsterSkillJson
                     static values =>
                         values.GetList(static value => value.GetEnum<SkillCategoryName>())
                 )
-                ?? Empty.List<Extensible<SkillCategoryName>>()
+                ?? []
         };
     }
 }

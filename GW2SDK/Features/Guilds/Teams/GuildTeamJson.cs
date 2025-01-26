@@ -71,7 +71,7 @@ internal static class GuildTeamJson
             Seasons = seasons.Map(
                     static values => values.GetList(static value => value.GetSeason())
                 )
-                ?? Empty.List<Season>()
+                ?? []
         };
     }
 }

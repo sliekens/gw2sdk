@@ -174,7 +174,7 @@ internal static class RingJson
             AttributeAdjustment = attributeAdjustment.Map(static value => value.GetDouble()),
             StatChoices =
                 statChoices.Map(static values => values.GetList(static value => value.GetInt32()))
-                ?? Empty.ListOfInt32,
+                ?? [],
             AttributeCombinationId = infixUpgradeId.Map(static value => value.GetInt32()),
             Attributes =
                 infixUpgradeAttributes.Map(static values => values.GetAttributes())
@@ -186,13 +186,13 @@ internal static class RingJson
                     static values =>
                         values.GetList(static value => value.GetInfusionSlotUpgradePath())
                 )
-                ?? Empty.List<InfusionSlotUpgradePath>(),
+                ?? [],
             UpgradesFrom =
                 upgradesFrom.Map(
                     static values =>
                         values.GetList(static value => value.GetInfusionSlotUpgradeSource())
                 )
-                ?? Empty.List<InfusionSlotUpgradeSource>()
+                ?? []
         };
     }
 }

@@ -43,7 +43,7 @@ internal static class ApiVersionJson
                 schemaVersions.Map(
                     static values => values.GetList(static value => value.GetSchema())
                 )
-                ?? Empty.List<Schema>()
+                ?? []
         };
     }
 }

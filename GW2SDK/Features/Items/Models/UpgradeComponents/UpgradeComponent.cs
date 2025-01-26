@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using GuildWars2.Collections;
 using GuildWars2.Hero;
 
 namespace GuildWars2.Items;
@@ -28,7 +29,7 @@ public record UpgradeComponent : Item, ICombatEquipment
     /// items with selectable stats.</summary>
     public required int? AttributeCombinationId { get; init; }
 
-    IReadOnlyList<int> ICombatEquipment.StatChoices { get; } = Empty.ListOfInt32;
+    IReadOnlyList<int> ICombatEquipment.StatChoices { get; } = (ValueList<int>)[];
 
     /// <summary>The effective stats of the item.</summary>
     public required IDictionary<Extensible<AttributeName>, int> Attributes { get; init; }

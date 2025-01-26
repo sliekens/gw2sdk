@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using GuildWars2.Collections;
 using GuildWars2.Hero;
 using GuildWars2.Hero.Accounts;
 using GuildWars2.Hero.Races;
@@ -16,7 +17,7 @@ internal static class ItemRestrictionJson
         List<Extensible<RaceName>>? races = null;
         List<Extensible<ProfessionName>>? professions = null;
         List<Extensible<BodyType>>? bodyTypes = null;
-        List<string>? other = null;
+        ValueList<string> other = [];
         foreach (var entry in json.EnumerateArray())
         {
             if (entry.ValueEquals(nameof(Asura)))
@@ -109,7 +110,6 @@ internal static class ItemRestrictionJson
                 var restriction = entry.GetString();
                 if (!string.IsNullOrEmpty(restriction))
                 {
-                    other ??= [];
                     other.Add(restriction!);
                 }
             }
@@ -120,7 +120,7 @@ internal static class ItemRestrictionJson
             Races = races ?? Race.AllRaces,
             Professions = professions ?? Profession.AllProfessions,
             BodyTypes = Character.AllBodyTypes,
-            Other = other ?? Empty.ListOfString
+            Other = other
         };
     }
 }

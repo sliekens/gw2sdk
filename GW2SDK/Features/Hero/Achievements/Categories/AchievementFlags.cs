@@ -1,9 +1,19 @@
-﻿namespace GuildWars2.Hero.Achievements.Categories;
+﻿using GuildWars2.Collections;
+
+namespace GuildWars2.Hero.Achievements.Categories;
 
 /// <summary>Modifiers for achievements.</summary>
 [PublicAPI]
 public sealed record AchievementFlags : Flags
 {
+    /// <summary>No modifiers.</summary>
+    public static AchievementFlags None { get; } = new()
+    {
+        SpecialEvent = false,
+        PvE = false,
+        Other = new ValueList<string>(0),
+    };
+
     /// <summary>The achievement is related to a festival celebration.</summary>
     public required bool SpecialEvent { get; init; }
 

@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using GuildWars2.Collections;
 using GuildWars2.Hero;
 
 namespace GuildWars2.Items;
@@ -65,8 +66,8 @@ public record Armor : Item, ICombatEquipment, IUpgradable
     public IReadOnlyList<int?> UpgradeSlots =>
         this switch
         {
-            _ when Flags.NotUpgradeable => Empty.List<int?>(),
-            _ => [SuffixItemId]
+            _ when Flags.NotUpgradeable => (ValueList<int?>)[],
+            _ => (ValueList<int?>)[SuffixItemId]
         };
 
     /// <summary>The number of upgrade slots available on the armor item.</summary>

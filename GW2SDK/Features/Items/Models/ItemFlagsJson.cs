@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using GuildWars2.Collections;
 using GuildWars2.Json;
 
 namespace GuildWars2.Items;
@@ -24,7 +25,7 @@ internal static class ItemFlagsJson
         var soulBindOnUse = false;
         var tonic = false;
         var unique = false;
-        List<string>? others = null;
+        ValueList<string> others = [];
         foreach (var entry in json.EnumerateArray())
         {
             if (entry.ValueEquals("AccountBindOnUse"))
@@ -97,7 +98,6 @@ internal static class ItemFlagsJson
             }
             else
             {
-                others ??= [];
                 others.Add(entry.GetStringRequired());
             }
         }
@@ -121,7 +121,7 @@ internal static class ItemFlagsJson
             Soulbound = soulbindOnAcquire,
             Tonic = tonic,
             Unique = unique,
-            Other = others ?? Empty.ListOfString
+            Other = others
         };
     }
 }

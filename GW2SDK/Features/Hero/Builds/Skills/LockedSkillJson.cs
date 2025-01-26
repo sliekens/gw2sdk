@@ -138,7 +138,7 @@ internal static class LockedSkillJson
                     static values =>
                         values.GetList(static value => value.GetEnum<SkillCategoryName>())
                 )
-                ?? Empty.List<Extensible<SkillCategoryName>>()
+                ?? []
         };
     }
 }

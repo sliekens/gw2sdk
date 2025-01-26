@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using GuildWars2.Collections;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Wardrobe;
@@ -11,7 +12,7 @@ internal static class SkinFlagsJson
         var noCost = false;
         var overrideRarity = false;
         var showInWardrobe = false;
-        List<string>? others = null;
+        ValueList<string> others = [];
         foreach (var entry in json.EnumerateArray())
         {
             if (entry.ValueEquals("HideIfLocked"))
@@ -32,7 +33,6 @@ internal static class SkinFlagsJson
             }
             else
             {
-                others ??= [];
                 others.Add(entry.GetStringRequired());
             }
         }
@@ -43,7 +43,7 @@ internal static class SkinFlagsJson
             NoCost = noCost,
             OverrideRarity = overrideRarity,
             ShowInWardrobe = showInWardrobe,
-            Other = others ?? Empty.ListOfString
+            Other = others
         };
     }
 }

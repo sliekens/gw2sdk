@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using GuildWars2.Collections;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Achievements.Categories;
@@ -40,12 +41,7 @@ internal static class AchievementRefJson
         {
             Id = id.Map(static value => value.GetInt32()),
             Flags = flags.Map(static values => values.GetAchievementFlags())
-                ?? new AchievementFlags
-                {
-                    SpecialEvent = false,
-                    PvE = false,
-                    Other = Empty.ListOfString
-                },
+                ?? AchievementFlags.None,
             Level = level.Map(static value => value.GetLevelRequirement())
         };
     }

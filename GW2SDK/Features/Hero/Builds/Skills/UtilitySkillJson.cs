@@ -163,7 +163,7 @@ internal static class UtilitySkillJson
                     static values =>
                         values.GetList(static value => value.GetEnum<SkillCategoryName>())
                 )
-                ?? Empty.List<Extensible<SkillCategoryName>>(),
+                ?? [],
             SubskillIds =
                 subskills.Map(static values => values.GetList(static value => value.GetSubskill())),
             BundleSkillIds =
