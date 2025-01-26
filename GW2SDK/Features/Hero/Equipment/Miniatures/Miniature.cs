@@ -1,8 +1,11 @@
-﻿namespace GuildWars2.Hero.Equipment.Miniatures;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Hero.Equipment.Miniatures;
 
 /// <summary>Information about a miniature.</summary>
 [PublicAPI]
 [DataTransferObject]
+[JsonConverter(typeof(MiniatureJsonConverter))]
 public sealed record Miniature
 {
     /// <summary>The miniature ID.</summary>

@@ -1,4 +1,6 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using System.Text.Json;
+using GuildWars2.Hero.Equipment.Miniatures;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Miniatures;
 
@@ -26,6 +28,10 @@ public class Miniatures
                 Assert.NotEmpty(entry.IconHref);
                 Assert.True(entry.Order >= 0);
                 Assert.True(entry.ItemId >= 0);
+
+                var json = JsonSerializer.Serialize(entry);
+                var roundtrip = JsonSerializer.Deserialize<Miniature>(json);
+                Assert.Equal(entry, roundtrip);
             }
         );
     }
