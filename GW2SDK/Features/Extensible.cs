@@ -8,7 +8,8 @@ namespace GuildWars2;
 [PublicAPI]
 [DebuggerDisplay("{ToString(),nq}")]
 [JsonConverter(typeof(ExtensibleEnumJsonConverterFactory))]
-public struct Extensible<TEnum>(string Name) where TEnum : struct, Enum
+public struct Extensible<TEnum>(string Name) : IComparable<Extensible<TEnum>>, IComparable
+    where TEnum : struct, Enum
 {
     /// <summary>Determines whether the current name is defined in the enum.</summary>
     /// <returns><c>true</c> if the name is defined in the enum; otherwise, <c>false</c>.</returns>
@@ -45,6 +46,21 @@ public struct Extensible<TEnum>(string Name) where TEnum : struct, Enum
     public bool Equals(Extensible<TEnum> other)
     {
         return string.Equals(ToString(), other.ToString(), StringComparison.OrdinalIgnoreCase);
+    }
+
+    /// <inheritdoc />
+    public int CompareTo(Extensible<TEnum> other)
+    {
+        return string.Compare(ToString(), other.ToString(), StringComparison.OrdinalIgnoreCase);
+    }
+
+    /// <inheritdoc />
+    public int CompareTo(object? obj)
+    {
+        if (obj is null) return 1;
+        return obj is Extensible<TEnum> other
+            ? CompareTo(other)
+            : throw new ArgumentException($"Object must be of type {nameof(Extensible<TEnum>)}");
     }
 
     /// <inheritdoc />
