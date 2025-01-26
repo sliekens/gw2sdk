@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using GuildWars2.Collections;
 using GuildWars2.Hero.Races;
 
 namespace GuildWars2.Hero.Equipment.Wardrobe;
@@ -7,7 +8,7 @@ internal static class RestrictionsJson
 {
     public static IReadOnlyList<Extensible<RaceName>> GetRestrictions(this JsonElement json)
     {
-        List<Extensible<RaceName>>? races = null;
+        ValueList<Extensible<RaceName>>? races = null;
         foreach (var entry in json.EnumerateArray())
         {
             if (entry.ValueEquals(nameof(RaceName.Asura)))

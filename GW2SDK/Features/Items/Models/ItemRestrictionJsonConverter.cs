@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 using GuildWars2.Hero;
 using GuildWars2.Json;
@@ -31,13 +31,13 @@ internal sealed class ItemRestrictionJsonConverter : JsonConverter<ItemRestricti
         return new ItemRestriction
         {
             Races =
-                value.GetProperty("races").GetSet(static value => value.GetEnum<RaceName>()),
+                value.GetProperty("races").GetList(static value => value.GetEnum<RaceName>()),
             Professions =
                 value.GetProperty("professions")
-                    .GetSet(static value => value.GetEnum<ProfessionName>()),
+                    .GetList(static value => value.GetEnum<ProfessionName>()),
             BodyTypes =
                 value.GetProperty("body_types")
-                    .GetSet(static value => value.GetEnum<BodyType>()),
+                    .GetList(static value => value.GetEnum<BodyType>()),
             Other = value.GetProperty("other")
                 .GetList(static value => value.GetStringRequired())
         };

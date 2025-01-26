@@ -1,4 +1,5 @@
-﻿using static GuildWars2.Hero.RaceName;
+﻿using GuildWars2.Collections;
+using static GuildWars2.Hero.RaceName;
 
 namespace GuildWars2.Hero.Races;
 
@@ -9,14 +10,14 @@ public sealed record Race
 {
     /// <summary>The names of all races.</summary>
     public static readonly IReadOnlyList<Extensible<RaceName>> AllRaces =
-        new List<Extensible<RaceName>>
+        new ValueList<Extensible<RaceName>>
         {
             Asura,
             Charr,
             Human,
             Norn,
             Sylvari
-        }.AsReadOnly();
+        };
 
     /// <summary>The race ID.</summary>
     public required Extensible<RaceName> Id { get; init; }

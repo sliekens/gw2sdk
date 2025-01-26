@@ -1,4 +1,5 @@
-﻿using GuildWars2.Hero.Builds;
+﻿using GuildWars2.Collections;
+using GuildWars2.Hero.Builds;
 using static GuildWars2.Hero.ProfessionName;
 
 namespace GuildWars2.Hero.Training;
@@ -10,7 +11,7 @@ public sealed record Profession
 {
     /// <summary>The names of all professions.</summary>
     public static readonly IReadOnlyList<Extensible<ProfessionName>> AllProfessions =
-        new List<Extensible<ProfessionName>>
+        new ValueList<Extensible<ProfessionName>>
         {
             Elementalist,
             Engineer,
@@ -21,7 +22,7 @@ public sealed record Profession
             Revenant,
             Thief,
             Warrior
-        }.AsReadOnly();
+        };
 
     /// <summary>The profession ID.</summary>
     public required Extensible<ProfessionName> Id { get; init; }

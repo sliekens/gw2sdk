@@ -1,4 +1,5 @@
-﻿using GuildWars2.Hero.Builds;
+﻿using GuildWars2.Collections;
+using GuildWars2.Hero.Builds;
 using GuildWars2.Hero.Crafting.Disciplines;
 using GuildWars2.Hero.Equipment.Templates;
 using GuildWars2.Hero.Inventories;
@@ -14,11 +15,11 @@ public sealed record Character
 {
     /// <summary>The names of all body types.</summary>
     public static readonly IReadOnlyList<Extensible<BodyType>> AllBodyTypes =
-        new List<Extensible<BodyType>>
+        new ValueList<Extensible<BodyType>>
         {
             Female,
             Male
-        }.AsReadOnly();
+        };
 
     /// <summary>The name of the current character.</summary>
     /// <remarks>This can be changed later with a Black Lion contract.</remarks>

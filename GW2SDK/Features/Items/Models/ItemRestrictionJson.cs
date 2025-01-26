@@ -14,9 +14,9 @@ internal static class ItemRestrictionJson
 {
     public static ItemRestriction GetItemRestriction(this JsonElement json)
     {
-        List<Extensible<RaceName>>? races = null;
-        List<Extensible<ProfessionName>>? professions = null;
-        List<Extensible<BodyType>>? bodyTypes = null;
+        ValueList<Extensible<RaceName>>? races = null;
+        ValueList<Extensible<ProfessionName>>? professions = null;
+        ValueList<Extensible<BodyType>>? bodyTypes = null;
         ValueList<string> other = [];
         foreach (var entry in json.EnumerateArray())
         {

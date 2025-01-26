@@ -1,9 +1,11 @@
-﻿namespace GuildWars2.Hero.Accounts;
+﻿using GuildWars2.Collections;
+
+namespace GuildWars2.Hero.Accounts;
 
 internal static class MagicFindThresholds
 {
     /// <summary>The amount of luck required for each level of Magic Find from 1 to 300.</summary>
-    public static readonly IReadOnlyList<int> LevelThresholds = new List<int>(300)
+    public static readonly IReadOnlyList<int> LevelThresholds = new ValueList<int>(300)
     {
         100,
         100,
@@ -224,5 +226,5 @@ internal static class MagicFindThresholds
         29580,
         29940,
         30000
-    }.AsReadOnly();
+    };
 }
