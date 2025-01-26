@@ -1,4 +1,6 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using System.Text.Json;
+using GuildWars2.Hero.Equipment.MailCarriers;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.MailCarriers;
 
@@ -32,6 +34,10 @@ public class MailCarriers
                 Assert.InRange(mailCarrier.Order, 0, 1000);
                 Assert.NotEmpty(mailCarrier.IconHref);
                 Assert.NotEmpty(mailCarrier.Name);
+
+                var json = JsonSerializer.Serialize(mailCarrier);
+                var roundtrip = JsonSerializer.Deserialize<MailCarrier>(json);
+                Assert.Equal(mailCarrier, roundtrip);
             }
         );
     }

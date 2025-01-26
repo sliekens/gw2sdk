@@ -1,8 +1,11 @@
-﻿namespace GuildWars2.Hero.Equipment.MailCarriers;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Hero.Equipment.MailCarriers;
 
 /// <summary>Information about a mail carrier.</summary>
 [PublicAPI]
 [DataTransferObject]
+[JsonConverter(typeof(MailCarrierJsonConverter))]
 public sealed record MailCarrier
 {
     /// <summary>The mail carrier ID.</summary>
