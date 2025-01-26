@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using GuildWars2.Collections;
 
 namespace GuildWars2.Json;
 
@@ -31,12 +32,12 @@ internal static class JsonElementExtensions
     /// <param name="json">The array element.</param>
     /// <param name="transform">A function that converts each item in the array to its destination type.</param>
     /// <returns>A list containing the converted results.</returns>
-    internal static List<TValue> GetList<TValue>(
+    internal static ValueList<TValue> GetList<TValue>(
         this JsonElement json,
         Func<JsonElement, TValue> transform
     )
     {
-        var values = new List<TValue>(json.GetArrayLength());
+        var values = new ValueList<TValue>(json.GetArrayLength());
         var enumerator = json.EnumerateArray();
         while (enumerator.MoveNext())
         {
@@ -46,7 +47,7 @@ internal static class JsonElementExtensions
         return values;
     }
 
-    internal static List<TValue>? GetNullableList<TValue>(
+    internal static ValueList<TValue>? GetNullableList<TValue>(
         this JsonElement json,
         Func<JsonElement, TValue> transform
     )
@@ -59,15 +60,15 @@ internal static class JsonElementExtensions
     /// <param name="json">The array element.</param>
     /// <param name="transform">A function that converts each item in the array to its destination type.</param>
     /// <returns>A set containing the converted results.</returns>
-    internal static HashSet<TValue> GetSet<TValue>(
+    internal static ValueHashSet<TValue> GetSet<TValue>(
         this JsonElement json,
         Func<JsonElement, TValue> transform
     )
     {
 #if NET
-        var values = new HashSet<TValue>(json.GetArrayLength());
+        var values = new ValueHashSet<TValue>(json.GetArrayLength());
 #else
-        var values = new HashSet<TValue>();
+        var values = new ValueHashSet<TValue>();
 #endif
         var enumerator = json.EnumerateArray();
         while (enumerator.MoveNext())
@@ -78,12 +79,12 @@ internal static class JsonElementExtensions
         return values;
     }
 
-    internal static Dictionary<string, TValue> GetMap<TValue>(
+    internal static ValueDictionary<string, TValue> GetMap<TValue>(
         this JsonElement json,
         Func<JsonElement, TValue> transform
     )
     {
-        var values = new Dictionary<string, TValue>();
+        var values = new ValueDictionary<string, TValue>();
         var enumerator = json.EnumerateObject();
         while (enumerator.MoveNext())
         {
@@ -93,13 +94,13 @@ internal static class JsonElementExtensions
         return values;
     }
 
-    internal static Dictionary<TKey, TValue> GetMap<TKey, TValue>(
+    internal static ValueDictionary<TKey, TValue> GetMap<TKey, TValue>(
         this JsonElement json,
         Func<string, TKey> keySelector,
         Func<JsonElement, TValue> resultSelector
     ) where TKey : notnull
     {
-        var values = new Dictionary<TKey, TValue>();
+        var values = new ValueDictionary<TKey, TValue>();
         var enumerator = json.EnumerateObject();
         while (enumerator.MoveNext())
         {

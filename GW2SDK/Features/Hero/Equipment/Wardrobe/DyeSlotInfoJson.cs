@@ -95,7 +95,7 @@ internal static class DyeSlotInfoJson
             SylvariMale = sylvariMale.Map(GetDyeSlots)
         };
 
-        static List<DyeSlot?> GetDyeSlots(JsonElement values)
+        static IReadOnlyList<DyeSlot?> GetDyeSlots(JsonElement values)
         {
             // The dye slot arrays can contain Null to represent the default color, so this is ugly
             // Perhaps there is a better way to model it with a Null Object pattern?
