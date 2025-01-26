@@ -1,8 +1,11 @@
-﻿namespace GuildWars2.Hero.Equipment.Mounts;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Hero.Equipment.Mounts;
 
 /// <summary>Information about a mount.</summary>
 [PublicAPI]
 [DataTransferObject]
+[JsonConverter(typeof(MountJsonConverter))]
 public sealed record Mount
 {
     /// <summary>The mount ID.</summary>

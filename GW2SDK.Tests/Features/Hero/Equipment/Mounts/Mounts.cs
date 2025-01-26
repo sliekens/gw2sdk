@@ -1,4 +1,6 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using System.Text.Json;
+using GuildWars2.Hero.Equipment.Mounts;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Mounts;
 
@@ -30,6 +32,10 @@ public class Mounts
                         Assert.True(skill.Id > 0);
                         Assert.True(skill.Slot.IsDefined());
                     });
+
+                var json = JsonSerializer.Serialize(entry);
+                var roundtrip = JsonSerializer.Deserialize<Mount>(json);
+                Assert.Equal(entry, roundtrip);
             }
         );
     }

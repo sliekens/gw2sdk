@@ -1,10 +1,12 @@
-﻿using GuildWars2.Hero.Builds;
+﻿using System.Text.Json.Serialization;
+using GuildWars2.Hero.Builds;
 
 namespace GuildWars2.Hero.Equipment.Mounts;
 
 /// <summary>A reference to a skill.</summary>
 [PublicAPI]
 [DataTransferObject]
+[JsonConverter(typeof(SkillReferenceJsonConverter))]
 public sealed record SkillReference
 {
     /// <summary>The skill ID.</summary>
