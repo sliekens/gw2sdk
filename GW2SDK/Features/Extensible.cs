@@ -8,7 +8,8 @@ namespace GuildWars2;
 [PublicAPI]
 [DebuggerDisplay("{ToString(),nq}")]
 [JsonConverter(typeof(ExtensibleEnumJsonConverterFactory))]
-public struct Extensible<TEnum>(string Name) : IComparable<Extensible<TEnum>>, IComparable
+public struct Extensible<TEnum>(string Name)
+    : IComparable<Extensible<TEnum>>, IComparable, IEquatable<Extensible<TEnum>>
     where TEnum : struct, Enum
 {
     /// <summary>Determines whether the current name is defined in the enum.</summary>
