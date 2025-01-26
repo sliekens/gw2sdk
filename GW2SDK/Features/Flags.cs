@@ -17,11 +17,7 @@ public abstract record Flags
     {
         if (ReferenceEquals(this, other)) return true;
         if (other is null) return false;
-
-        if (!Other.SequenceEqual(other.Other))
-        {
-            return false;
-        }
+        if (GetType() != other.GetType()) return false;
 
         var flags = GetType()
             .GetProperties(BindingFlags.Public | BindingFlags.Instance)
@@ -30,7 +26,7 @@ public abstract record Flags
 
         var left = flags.Select(property => (bool?)property.GetValue(this));
         var right = flags.Select(property => (bool?)property.GetValue(other));
-        return left.SequenceEqual(right);
+        return left.SequenceEqual(right) && Other.SequenceEqual(other.Other);
     }
 
     /// <inheritdoc />
@@ -43,6 +39,11 @@ public abstract record Flags
             .Select(property => property.GetValue(this));
 
         foreach (var flag in flags)
+        {
+            hash.Add(flag);
+        }
+
+        foreach (var flag in Other)
         {
             hash.Add(flag);
         }
