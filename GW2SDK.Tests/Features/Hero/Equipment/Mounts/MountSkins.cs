@@ -14,6 +14,21 @@ public class MountSkins
         );
 
         Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, entry => Assert.True(entry.Mount.IsDefined()));
+        Assert.All(actual, entry =>
+            {
+                Assert.True(entry.Id > 0);
+                Assert.NotEmpty(entry.Name);
+                Assert.NotEmpty(entry.IconHref);
+                Assert.NotEmpty(entry.DyeSlots);
+                Assert.All(entry.DyeSlots,
+                    slot =>
+                    {
+                        Assert.True(slot.Material.IsDefined());
+                        Assert.True(slot.ColorId > 0);
+                    });
+
+                Assert.True(entry.Mount.IsDefined());
+            }
+        );
     }
 }

@@ -9,16 +9,27 @@ public class Mounts
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, _) = await sut.Hero.Equipment.Mounts.GetMounts(
+        var (actual, context) = await sut.Hero.Equipment.Mounts.GetMounts(
             cancellationToken: TestContext.Current.CancellationToken
         );
 
+        Assert.Equal(context.ResultTotal, actual.Count);
         Assert.All(
             actual,
-            mount =>
+            entry =>
             {
-                Assert.True(mount.Id.IsDefined());
-                Assert.NotEmpty(mount.Name);
+                Assert.True(entry.Id.IsDefined());
+                Assert.NotEmpty(entry.Name);
+                Assert.True(entry.DefaultSkinId > 0);
+                Assert.NotNull(entry.SkinIds);
+                Assert.All(entry.SkinIds, id => Assert.True(id > 0));
+                Assert.NotNull(entry.Skills);
+                Assert.All(entry.Skills,
+                    skill =>
+                    {
+                        Assert.True(skill.Id > 0);
+                        Assert.True(skill.Slot.IsDefined());
+                    });
             }
         );
     }

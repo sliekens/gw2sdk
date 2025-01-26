@@ -3,7 +3,7 @@ using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Mounts;
 
-public class Mount
+public class MountByName
 {
     [Fact]
     public async Task Can_be_found_by_name()
