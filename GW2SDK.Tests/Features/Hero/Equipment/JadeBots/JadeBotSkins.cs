@@ -1,4 +1,6 @@
-﻿using GuildWars2.Tests.Features.Markup;
+﻿using System.Text.Json;
+using GuildWars2.Hero.Equipment.JadeBots;
+using GuildWars2.Tests.Features.Markup;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.JadeBots;
@@ -37,6 +39,10 @@ public class JadeBotSkins
                 }
 
                 Assert.True(entry.UnlockItemId > 0);
+
+                var json = JsonSerializer.Serialize(entry);
+                var roundtrip = JsonSerializer.Deserialize<JadeBotSkin>(json);
+                Assert.Equal(entry, roundtrip);
             }
         );
     }
