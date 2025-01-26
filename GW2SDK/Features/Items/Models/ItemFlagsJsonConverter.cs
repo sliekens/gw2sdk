@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 using GuildWars2.Json;
 
@@ -70,8 +70,7 @@ internal class ItemFlagsJsonConverter : JsonConverter<ItemFlags>
         writer.WriteBoolean("soulbound", value.Soulbound);
         writer.WriteBoolean("tonic", value.Tonic);
         writer.WriteBoolean("unique", value.Unique);
-        writer.WritePropertyName("other");
-        writer.WriteStartArray();
+        writer.WriteStartArray("other");
         foreach (var other in value.Other)
         {
             writer.WriteStringValue(other);

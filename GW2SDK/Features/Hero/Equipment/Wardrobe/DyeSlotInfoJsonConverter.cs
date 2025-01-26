@@ -55,8 +55,7 @@ internal sealed class DyeSlotInfoJsonConverter : JsonConverter<DyeSlotInfo>
     public static void Write(Utf8JsonWriter writer, DyeSlotInfo value)
     {
         writer.WriteStartObject();
-        writer.WritePropertyName("default");
-        writer.WriteStartArray();
+        writer.WriteStartArray("default");
         foreach (var slot in value.Default)
         {
             if (slot is not null)

@@ -217,8 +217,7 @@ internal sealed class WeaponJsonConverter : JsonConverter<Weapon>
         writer.WriteNumber("min_power", value.MinPower);
         writer.WriteNumber("max_power", value.MaxPower);
         writer.WriteNumber("defense", value.Defense);
-        writer.WritePropertyName("infusion_slots");
-        writer.WriteStartArray();
+        writer.WriteStartArray("infusion_slots");
         foreach (var slot in value.InfusionSlots)
         {
             InfusionSlotJsonConverter.Write(writer, slot);
@@ -235,8 +234,7 @@ internal sealed class WeaponJsonConverter : JsonConverter<Weapon>
             writer.WriteNull("attribute_combination_id");
         }
 
-        writer.WritePropertyName("attributes");
-        writer.WriteStartObject();
+        writer.WriteStartObject("attributes");
         foreach (var attribute in value.Attributes)
         {
             writer.WritePropertyName(attribute.Key.ToString());
@@ -272,8 +270,7 @@ internal sealed class WeaponJsonConverter : JsonConverter<Weapon>
             writer.WriteNull("secondary_suffix_item_id");
         }
 
-        writer.WritePropertyName("stat_choices");
-        writer.WriteStartArray();
+        writer.WriteStartArray("stat_choices");
         foreach (var stat in value.StatChoices)
         {
             writer.WriteNumberValue(stat);

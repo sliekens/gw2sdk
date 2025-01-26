@@ -60,8 +60,7 @@ internal sealed class CraftingMaterialJsonConverter : JsonConverter<CraftingMate
         writer.WriteStartObject();
         writer.WriteString(ItemJsonConverter.DiscriminatorName, DiscriminatorValue);
         ItemJsonConverter.WriteCommonProperties(writer, value);
-        writer.WritePropertyName("upgrades_into");
-        writer.WriteStartArray();
+        writer.WriteStartArray("upgrades_into");
         foreach (var upgrade in value.UpgradesInto)
         {
             InfusionSlotUpgradePathJsonConverter.Write(writer, upgrade);

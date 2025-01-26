@@ -162,8 +162,7 @@ internal sealed class ItemJsonConverter : JsonConverter<Item>
         writer.WriteNumber("level", value.Level);
         writer.WriteString("rarity", value.Rarity.ToString());
         writer.WriteNumber("vendor_value", value.VendorValue);
-        writer.WritePropertyName("game_types");
-        writer.WriteStartArray();
+        writer.WriteStartArray("game_types");
         foreach (var gameType in value.GameTypes)
         {
             writer.WriteStringValue(gameType.ToString());

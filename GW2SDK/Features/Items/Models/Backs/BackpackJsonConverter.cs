@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 using GuildWars2.Hero;
 using GuildWars2.Json;
@@ -78,8 +78,7 @@ internal sealed class BackpackJsonConverter : JsonConverter<Backpack>
         ItemJsonConverter.WriteCommonProperties(writer, value);
         writer.WriteNumber("default_skin_id", value.DefaultSkinId);
 
-        writer.WritePropertyName("infusion_slots");
-        writer.WriteStartArray();
+        writer.WriteStartArray("infusion_slots");
         foreach (var slot in value.InfusionSlots)
         {
             InfusionSlotJsonConverter.Write(writer, slot);
@@ -97,8 +96,7 @@ internal sealed class BackpackJsonConverter : JsonConverter<Backpack>
             writer.WriteNull("attribute_combination_id");
         }
 
-        writer.WritePropertyName("attributes");
-        writer.WriteStartObject();
+        writer.WriteStartObject("attributes");
         foreach (var attribute in value.Attributes)
         {
             writer.WriteNumber(attribute.Key.ToString(), attribute.Value);
@@ -124,8 +122,7 @@ internal sealed class BackpackJsonConverter : JsonConverter<Backpack>
             writer.WriteNull("suffix_item_id");
         }
 
-        writer.WritePropertyName("stat_choices");
-        writer.WriteStartArray();
+        writer.WriteStartArray("stat_choices");
         foreach (var statChoice in value.StatChoices)
         {
             writer.WriteNumberValue(statChoice);
@@ -133,8 +130,7 @@ internal sealed class BackpackJsonConverter : JsonConverter<Backpack>
 
         writer.WriteEndArray();
 
-        writer.WritePropertyName("upgrades_into");
-        writer.WriteStartArray();
+        writer.WriteStartArray("upgrades_into");
         foreach (var upgrade in value.UpgradesInto)
         {
             InfusionSlotUpgradePathJsonConverter.Write(writer, upgrade);
@@ -142,8 +138,7 @@ internal sealed class BackpackJsonConverter : JsonConverter<Backpack>
 
         writer.WriteEndArray();
 
-        writer.WritePropertyName("upgrades_from");
-        writer.WriteStartArray();
+        writer.WriteStartArray("upgrades_from");
         foreach (var source in value.UpgradesFrom)
         {
             InfusionSlotUpgradeSourceJsonConverter.Write(writer, source);

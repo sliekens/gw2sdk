@@ -48,8 +48,7 @@ internal sealed class GuildConsumableRecipeJsonConverter : JsonConverter<GuildCo
         writer.WriteStartObject();
         writer.WriteString(RecipeJsonConverter.DiscriminatorName, DiscriminatorValue);
         RecipeJsonConverter.WriteCommonProperties(writer, value);
-        writer.WritePropertyName("guild_ingredients");
-        writer.WriteStartArray();
+        writer.WriteStartArray("guild_ingredients");
         foreach (var guildIngredient in value.GuildIngredients)
         {
             GuildIngredientJsonConverter.Write(writer, guildIngredient);

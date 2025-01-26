@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 using GuildWars2.Json;
 
@@ -92,8 +92,7 @@ internal sealed class RecipeSheetJsonConverter : JsonConverter<RecipeSheet>
         writer.WriteString(UnlockerJsonConverter.DiscriminatorName, DiscriminatorValue);
         ItemJsonConverter.WriteCommonProperties(writer, value);
         writer.WriteNumber("recipe_id", value.RecipeId);
-        writer.WritePropertyName("extra_recipe_ids");
-        writer.WriteStartArray();
+        writer.WriteStartArray("extra_recipe_ids");
         foreach (var id in value.ExtraRecipeIds)
         {
             writer.WriteNumberValue(id);

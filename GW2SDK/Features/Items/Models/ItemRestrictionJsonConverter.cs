@@ -46,16 +46,14 @@ internal sealed class ItemRestrictionJsonConverter : JsonConverter<ItemRestricti
     public static void Write(Utf8JsonWriter writer, ItemRestriction value)
     {
         writer.WriteStartObject();
-        writer.WritePropertyName("races");
-        writer.WriteStartArray();
+        writer.WriteStartArray("races");
         foreach (var race in value.Races)
         {
             writer.WriteStringValue(race.ToString());
         }
 
         writer.WriteEndArray();
-        writer.WritePropertyName("professions");
-        writer.WriteStartArray();
+        writer.WriteStartArray("professions");
         foreach (var profession in value.Professions)
         {
             writer.WriteStringValue(profession.ToString());
@@ -63,8 +61,7 @@ internal sealed class ItemRestrictionJsonConverter : JsonConverter<ItemRestricti
 
         writer.WriteEndArray();
 
-        writer.WritePropertyName("body_types");
-        writer.WriteStartArray();
+        writer.WriteStartArray("body_types");
         foreach (var bodyType in value.BodyTypes)
         {
             writer.WriteStringValue(bodyType.ToString());
@@ -72,8 +69,7 @@ internal sealed class ItemRestrictionJsonConverter : JsonConverter<ItemRestricti
 
         writer.WriteEndArray();
 
-        writer.WritePropertyName("other");
-        writer.WriteStartArray();
+        writer.WriteStartArray("other");
         foreach (var other in value.Other)
         {
             writer.WriteStringValue(other);

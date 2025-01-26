@@ -338,8 +338,7 @@ internal sealed class RecipeJsonConverter : JsonConverter<Recipe>
         writer.WriteNumber("output_item_count", value.OutputItemCount);
         writer.WriteNumber("min_rating", value.MinRating);
         writer.WriteNumber("time_to_craft_ms", value.TimeToCraft.TotalMilliseconds);
-        writer.WritePropertyName("disciplines");
-        writer.WriteStartArray();
+        writer.WriteStartArray("disciplines");
         foreach (var discipline in value.Disciplines)
         {
             writer.WriteStringValue(discipline.ToString());
@@ -347,8 +346,7 @@ internal sealed class RecipeJsonConverter : JsonConverter<Recipe>
         writer.WriteEndArray();
         writer.WritePropertyName("flags");
         RecipeFlagsJsonConverter.Write(writer, value.Flags);
-        writer.WritePropertyName("ingredients");
-        writer.WriteStartArray();
+        writer.WriteStartArray("ingredients");
         foreach (var ingredient in value.Ingredients)
         {
             IngredientJsonConverter.Write(writer, ingredient);

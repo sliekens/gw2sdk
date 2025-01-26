@@ -40,8 +40,7 @@ internal sealed class InfusionSlotFlagsJsonConverter : JsonConverter<InfusionSlo
         writer.WriteStartObject();
         writer.WriteBoolean("enrichment", value.Enrichment);
         writer.WriteBoolean("infusion", value.Infusion);
-        writer.WritePropertyName("other");
-        writer.WriteStartArray();
+        writer.WriteStartArray("other");
         foreach (var other in value.Other)
         {
             writer.WriteStringValue(other);

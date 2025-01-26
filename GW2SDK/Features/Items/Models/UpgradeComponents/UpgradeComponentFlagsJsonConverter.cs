@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 using GuildWars2.Json;
 
@@ -82,8 +82,7 @@ internal class UpgradeComponentFlagsJsonConverter : JsonConverter<UpgradeCompone
         writer.WriteBoolean("trident", value.Trident);
         writer.WriteBoolean("trinket", value.Trinket);
         writer.WriteBoolean("warhorn", value.Warhorn);
-        writer.WritePropertyName("other");
-        writer.WriteStartArray();
+        writer.WriteStartArray("other");
         foreach (var other in value.Other)
         {
             writer.WriteStringValue(other);

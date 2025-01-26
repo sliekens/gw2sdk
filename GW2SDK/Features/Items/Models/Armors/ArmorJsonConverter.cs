@@ -136,8 +136,7 @@ internal sealed class ArmorJsonConverter : JsonConverter<Armor>
         writer.WriteNumber("default_skin_id", value.DefaultSkinId);
         writer.WriteString("weight_class", value.WeightClass.ToString());
         writer.WriteNumber("defense", value.Defense);
-        writer.WritePropertyName("infusion_slots");
-        writer.WriteStartArray();
+        writer.WriteStartArray("infusion_slots");
         foreach (var slot in value.InfusionSlots)
         {
             InfusionSlotJsonConverter.Write(writer, slot);
@@ -154,8 +153,7 @@ internal sealed class ArmorJsonConverter : JsonConverter<Armor>
             writer.WriteNull("attribute_combination_id");
         }
 
-        writer.WritePropertyName("attributes");
-        writer.WriteStartObject();
+        writer.WriteStartObject("attributes");
         foreach (var attribute in value.Attributes)
         {
             writer.WriteNumber(attribute.Key.ToString(), attribute.Value);
@@ -181,8 +179,7 @@ internal sealed class ArmorJsonConverter : JsonConverter<Armor>
             writer.WriteNull("suffix_item_id");
         }
 
-        writer.WritePropertyName("stat_choices");
-        writer.WriteStartArray();
+        writer.WriteStartArray("stat_choices");
         foreach (var statChoice in value.StatChoices)
         {
             writer.WriteNumberValue(statChoice);

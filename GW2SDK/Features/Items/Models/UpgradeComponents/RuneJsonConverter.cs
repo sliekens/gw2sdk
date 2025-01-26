@@ -90,8 +90,7 @@ internal sealed class RuneJsonConverter : JsonConverter<Rune>
 
         if (value.Bonuses is not null)
         {
-            writer.WritePropertyName("bonuses");
-            writer.WriteStartArray();
+            writer.WriteStartArray("bonuses");
             foreach (var bonus in value.Bonuses)
             {
                 writer.WriteStringValue(bonus);

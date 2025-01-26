@@ -134,8 +134,7 @@ internal sealed class UpgradeComponentJsonConverter : JsonConverter<UpgradeCompo
             writer.WriteNull("attribute_combination_id");
         }
 
-        writer.WritePropertyName("attributes");
-        writer.WriteStartObject();
+        writer.WriteStartObject("attributes");
         foreach (var attribute in value.Attributes)
         {
             writer.WriteNumber(attribute.Key.ToString(), attribute.Value);

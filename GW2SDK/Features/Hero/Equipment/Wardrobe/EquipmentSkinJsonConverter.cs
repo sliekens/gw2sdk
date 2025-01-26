@@ -96,8 +96,7 @@ internal sealed class EquipmentSkinJsonConverter : JsonConverter<EquipmentSkin>
         writer.WriteString("description", value.Description);
         writer.WritePropertyName("flags");
         SkinFlagsJsonConverter.Write(writer, value.Flags);
-        writer.WritePropertyName("races");
-        writer.WriteStartArray();
+        writer.WriteStartArray("races");
         foreach (var race in value.Races)
         {
             writer.WriteStringValue(race.ToString());

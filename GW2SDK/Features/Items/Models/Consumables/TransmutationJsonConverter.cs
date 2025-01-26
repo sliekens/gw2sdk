@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 using GuildWars2.Json;
 
@@ -77,8 +77,7 @@ internal sealed class TransmutationJsonConverter : JsonConverter<Transmutation>
         );
         writer.WriteString(ConsumableJsonConverter.DiscriminatorName, DiscriminatorValue);
         ItemJsonConverter.WriteCommonProperties(writer, value);
-        writer.WritePropertyName("skin_ids");
-        writer.WriteStartArray();
+        writer.WriteStartArray("skin_ids");
         foreach (var id in value.SkinIds)
         {
             writer.WriteNumberValue(id);

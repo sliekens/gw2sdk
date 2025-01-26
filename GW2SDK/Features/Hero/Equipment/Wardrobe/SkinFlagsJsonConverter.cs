@@ -44,8 +44,7 @@ internal class SkinFlagsJsonConverter : JsonConverter<SkinFlags>
         writer.WriteBoolean("no_cost", value.NoCost);
         writer.WriteBoolean("override_rarity", value.OverrideRarity);
         writer.WriteBoolean("show_in_wardrobe", value.ShowInWardrobe);
-        writer.WritePropertyName("other");
-        writer.WriteStartArray();
+        writer.WriteStartArray("other");
         foreach (var other in value.Other)
         {
             writer.WriteStringValue(other);

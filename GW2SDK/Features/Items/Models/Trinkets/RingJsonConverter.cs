@@ -88,8 +88,7 @@ internal sealed class RingJsonConverter : JsonConverter<Ring>
         writer.WriteString(TrinketJsonConverter.DiscriminatorName, DiscriminatorValue);
         TrinketJsonConverter.WriteCommonProperties(writer, value);
 
-        writer.WritePropertyName("upgrades_into");
-        writer.WriteStartArray();
+        writer.WriteStartArray("upgrades_into");
         foreach (var upgrade in value.UpgradesInto)
         {
             InfusionSlotUpgradePathJsonConverter.Write(writer, upgrade);
@@ -97,8 +96,7 @@ internal sealed class RingJsonConverter : JsonConverter<Ring>
 
         writer.WriteEndArray();
 
-        writer.WritePropertyName("upgrades_from");
-        writer.WriteStartArray();
+        writer.WriteStartArray("upgrades_from");
         foreach (var source in value.UpgradesFrom)
         {
             InfusionSlotUpgradeSourceJsonConverter.Write(writer, source);
