@@ -45,7 +45,7 @@ internal static class StorylineJson
             // TODO: should have been IReadOnlyList<int>
             StoryIds = stories.Map(
                 static values => values.GetList(static value => value.GetInt32())
-            ).ToList()
+            )
         };
     }
 }
