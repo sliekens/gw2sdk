@@ -98,8 +98,7 @@ internal static class CraftingMaterialJson
             Restrictions = restrictions.Map(static value => value.GetItemRestriction()),
             ChatLink = chatLink.Map(static value => value.GetStringRequired()),
             IconHref = icon.Map(static value => value.GetString()),
-            UpgradesInto =
-                upgradesInto.Map(
+            UpgradesInto = upgradesInto.Map(
                     static values =>
                         values.GetList(static value => value.GetInfusionSlotUpgradePath())
                 )

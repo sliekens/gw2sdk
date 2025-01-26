@@ -1,13 +1,14 @@
 ﻿using System.Text.Json;
+using GuildWars2.Collections;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment;
 
 internal static class AttributesJson
 {
-    public static Dictionary<AttributeName, int> GetAttributes(this JsonElement json)
+    public static ValueDictionary<AttributeName, int> GetAttributes(this JsonElement json)
     {
-        var result = new Dictionary<AttributeName, int>(4);
+        var result = new ValueDictionary<AttributeName, int>(4);
         foreach (var member in json.EnumerateObject())
         {
             // Somemetimes the old attribute names (or partial names) are used in the API

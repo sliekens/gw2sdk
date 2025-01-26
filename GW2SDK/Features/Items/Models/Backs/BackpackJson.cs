@@ -172,9 +172,7 @@ internal static class BackpackJson
                 ),
             AttributeAdjustment = attributeAdjustment.Map(static value => value.GetDouble()),
             AttributeCombinationId = infixUpgradeId.Map(static value => value.GetInt32()),
-            Attributes =
-                infixUpgradeAttributes.Map(static values => values.GetAttributes())
-                ?? new Dictionary<Extensible<AttributeName>, int>(0),
+            Attributes = infixUpgradeAttributes.Map(static values => values.GetAttributes()) ?? [],
             Buff = infixUpgradeBuff.Map(static value => value.GetBuff()),
             SuffixItemId = suffixItemId.Map(static value => value.GetInt32()),
             StatChoices =
@@ -186,8 +184,7 @@ internal static class BackpackJson
                         values.GetList(static value => value.GetInfusionSlotUpgradePath())
                 )
                 ?? [],
-            UpgradesFrom =
-                upgradesFrom.Map(
+            UpgradesFrom = upgradesFrom.Map(
                     static values =>
                         values.GetList(static value => value.GetInfusionSlotUpgradeSource())
                 )

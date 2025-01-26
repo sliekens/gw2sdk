@@ -29,7 +29,7 @@ public record UpgradeComponent : Item, ICombatEquipment
     /// items with selectable stats.</summary>
     public required int? AttributeCombinationId { get; init; }
 
-    IReadOnlyList<int> ICombatEquipment.StatChoices { get; } = (ValueList<int>)[];
+    IReadOnlyList<int> ICombatEquipment.StatChoices { get; } = (ValueList<int>) [];
 
     /// <summary>The effective stats of the item.</summary>
     public required IDictionary<Extensible<AttributeName>, int> Attributes { get; init; }

@@ -176,9 +176,7 @@ internal static class RingJson
                 statChoices.Map(static values => values.GetList(static value => value.GetInt32()))
                 ?? [],
             AttributeCombinationId = infixUpgradeId.Map(static value => value.GetInt32()),
-            Attributes =
-                infixUpgradeAttributes.Map(static values => values.GetAttributes())
-                ?? new Dictionary<Extensible<AttributeName>, int>(0),
+            Attributes = infixUpgradeAttributes.Map(static values => values.GetAttributes()) ?? [],
             Buff = infixUpgradeBuff.Map(static value => value.GetBuff()),
             SuffixItemId = suffixItemId.Map(static value => value.GetInt32()),
             UpgradesInto =
@@ -187,8 +185,7 @@ internal static class RingJson
                         values.GetList(static value => value.GetInfusionSlotUpgradePath())
                 )
                 ?? [],
-            UpgradesFrom =
-                upgradesFrom.Map(
+            UpgradesFrom = upgradesFrom.Map(
                     static values =>
                         values.GetList(static value => value.GetInfusionSlotUpgradeSource())
                 )

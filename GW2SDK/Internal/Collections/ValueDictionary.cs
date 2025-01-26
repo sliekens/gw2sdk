@@ -14,8 +14,28 @@ internal sealed class ValueDictionary<TKey, TValue> : Dictionary<TKey, TValue>,
     {
     }
 
+    public ValueDictionary(IEqualityComparer<TKey>? comparer)
+        : base(comparer)
+    {
+    }
+
+    public ValueDictionary(int capacity)
+        : base(capacity)
+    {
+    }
+
+    public ValueDictionary(int capacity, IEqualityComparer<TKey>? comparer)
+        : base(capacity, comparer)
+    {
+    }
+
     public ValueDictionary(IDictionary<TKey, TValue> dictionary)
         : base(dictionary)
+    {
+    }
+
+    public ValueDictionary(IDictionary<TKey, TValue> dictionary, IEqualityComparer<TKey>? comparer)
+        : base(dictionary, comparer)
     {
     }
 
@@ -24,6 +44,18 @@ internal sealed class ValueDictionary<TKey, TValue> : Dictionary<TKey, TValue>,
         : base(collection)
 #else
         : base(collection.ToDictionary(pair => pair.Key, pair => pair.Value))
+#endif
+    {
+    }
+
+    public ValueDictionary(
+        IEnumerable<KeyValuePair<TKey, TValue>> collection,
+        IEqualityComparer<TKey>? comparer
+    )
+#if NET
+        : base(collection, comparer)
+#else
+        : base(collection.ToDictionary(pair => pair.Key, pair => pair.Value), comparer)
 #endif
     {
     }

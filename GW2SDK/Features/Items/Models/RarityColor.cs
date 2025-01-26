@@ -31,5 +31,4 @@ public static class RarityColor
 
     /// <summary>Purple items</summary>
     public static readonly Color Legendary = Color.FromArgb(0x99, 0x33, 0xFF);
-
 }

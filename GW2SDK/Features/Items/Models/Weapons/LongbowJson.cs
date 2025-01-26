@@ -201,9 +201,7 @@ internal static class LongbowJson
                 statChoices.Map(static values => values.GetList(static value => value.GetInt32()))
                 ?? [],
             AttributeCombinationId = infixUpgradeId.Map(static value => value.GetInt32()),
-            Attributes =
-                infixUpgradeAttributes.Map(static values => values.GetAttributes())
-                ?? new Dictionary<Extensible<AttributeName>, int>(0),
+            Attributes = infixUpgradeAttributes.Map(static values => values.GetAttributes()) ?? [],
             Buff = infixUpgradeBuff.Map(static value => value.GetBuff()),
             SuffixItemId = suffixItemId.Map(static value => value.GetInt32()),
             SecondarySuffixItemId = secondarySuffixItemId.Map(static value => value.GetInt32())
