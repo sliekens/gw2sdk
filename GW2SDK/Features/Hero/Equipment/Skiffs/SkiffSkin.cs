@@ -1,8 +1,11 @@
-﻿namespace GuildWars2.Hero.Equipment.Skiffs;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Hero.Equipment.Skiffs;
 
 /// <summary>Information about a skiff skin.</summary>
 [PublicAPI]
 [DataTransferObject]
+[JsonConverter(typeof(SkiffSkinJsonConverter))]
 public sealed record SkiffSkin
 {
     /// <summary>The skiff skin ID.</summary>
