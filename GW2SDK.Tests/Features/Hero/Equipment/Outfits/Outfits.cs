@@ -1,4 +1,6 @@
-﻿using GuildWars2.Chat;
+﻿using System.Text.Json;
+using GuildWars2.Chat;
+using GuildWars2.Hero.Equipment.Outfits;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Outfits;
@@ -31,6 +33,10 @@ public class Outfits
 
                 var chatLinkRoundtrip = OutfitLink.Parse(chatLink.ToString());
                 Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
+
+                var json = JsonSerializer.Serialize(entry);
+                var roundtrip = JsonSerializer.Deserialize<Outfit>(json);
+                Assert.Equal(entry, roundtrip);
             }
         );
     }
