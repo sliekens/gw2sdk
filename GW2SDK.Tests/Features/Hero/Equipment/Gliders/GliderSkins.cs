@@ -1,4 +1,6 @@
-﻿using GuildWars2.Tests.Features.Markup;
+﻿using System.Text.Json;
+using GuildWars2.Hero.Equipment.Gliders;
+using GuildWars2.Tests.Features.Markup;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Gliders;
@@ -29,6 +31,10 @@ public class GliderSkins
                 Assert.NotNull(entry.Description);
                 MarkupSyntaxValidator.Validate(entry.Description);
                 Assert.NotNull(entry.DefaultDyeColorIds);
+
+                var json = JsonSerializer.Serialize(entry);
+                var roundTrip = JsonSerializer.Deserialize<GliderSkin>(json);
+                Assert.Equal(entry, roundTrip);
             }
         );
     }
