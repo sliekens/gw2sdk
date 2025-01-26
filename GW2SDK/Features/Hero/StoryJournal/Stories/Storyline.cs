@@ -14,6 +14,7 @@ public sealed record Storyline
     /// <summary>The display order of the storyline in the story journal.</summary>
     public required int Order { get; init; }
 
+    // TODO: should have been IReadOnlyList<int>
     /// <summary>The IDs of the stories that belong to this storyline.</summary>
     public required List<int> StoryIds { get; init; }
 }
