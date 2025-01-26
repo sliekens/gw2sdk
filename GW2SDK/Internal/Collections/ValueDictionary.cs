@@ -1,9 +1,12 @@
-﻿namespace GuildWars2.Collections;
+﻿using System.Diagnostics;
+
+namespace GuildWars2.Collections;
 
 // WARNING: adding items to the dictionary changes its hash code,
 // DO NOT use this type in dictionaries or hash sets.
 // I would have liked to use ImmutableDictionary instead, but it's
 // unavailable in .NET Standard 2.0.
+[DebuggerDisplay("Count = {Count}")]
 internal sealed class ValueDictionary<TKey, TValue> : Dictionary<TKey, TValue>,
     IEquatable<ValueDictionary<TKey, TValue>> where TKey : notnull
 {
