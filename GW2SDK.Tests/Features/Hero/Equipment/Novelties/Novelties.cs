@@ -1,4 +1,6 @@
-﻿using GuildWars2.Tests.Features.Markup;
+﻿using System.Text.Json;
+using GuildWars2.Hero.Equipment.Novelties;
+using GuildWars2.Tests.Features.Markup;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Novelties;
@@ -28,6 +30,10 @@ public class Novelties
                 Assert.NotEmpty(entry.IconHref);
                 Assert.True(entry.Slot.IsDefined());
                 Assert.NotEmpty(entry.UnlockItemIds);
+
+                var json = JsonSerializer.Serialize(entry);
+                var roundtrip = JsonSerializer.Deserialize<Novelty>(json);
+                Assert.Equal(entry, roundtrip);
             }
         );
     }

@@ -1,8 +1,11 @@
-﻿namespace GuildWars2.Hero.Equipment.Novelties;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Hero.Equipment.Novelties;
 
 /// <summary>Information about a novelty.</summary>
 [PublicAPI]
 [DataTransferObject]
+[JsonConverter(typeof(NoveltyJsonConverter))]
 public sealed record Novelty
 {
     /// <summary>The novelty ID.</summary>
