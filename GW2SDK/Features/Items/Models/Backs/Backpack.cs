@@ -30,23 +30,6 @@ public sealed record Backpack : Item, ICombatEquipment, IUpgradable, IInfused, I
     /// with selectable stats.</summary>
     public required IReadOnlyList<int> StatChoices { get; init; }
 
-    /// <inheritdoc />
-    public bool Equals(Backpack? other)
-    {
-        return ReferenceEquals(this, other)
-            || (base.Equals(other)
-                && DefaultSkinId == other.DefaultSkinId
-                && Math.Abs(AttributeAdjustment - other.AttributeAdjustment) < 0.001d
-                && AttributeCombinationId == other.AttributeCombinationId
-                && Buff == other.Buff
-                && SuffixItemId == other.SuffixItemId
-                && InfusionSlots.SequenceEqual(other.InfusionSlots)
-                && Attributes.SequenceEqual(other.Attributes, AttributesComparer.Instance)
-                && StatChoices.SequenceEqual(other.StatChoices)
-                && UpgradesInto.SequenceEqual(other.UpgradesInto)
-                && UpgradesFrom.SequenceEqual(other.UpgradesFrom));
-    }
-
     /// <summary>If the current back item can be infused in the Mystic Forge, this collection contains the IDs of the infused
     /// variations of the back item. Each item in the collection represents a different recipe.</summary>
     public required IReadOnlyCollection<InfusionSlotUpgradePath> UpgradesInto { get; init; }
@@ -84,43 +67,4 @@ public sealed record Backpack : Item, ICombatEquipment, IUpgradable, IInfused, I
 
     /// <summary>The number of infusion slots available on the back item.</summary>
     public int InfusionSlotCount => InfusionSlots.Count;
-
-    /// <inheritdoc />
-    public override int GetHashCode()
-    {
-        var hash = new HashCode();
-        hash.Add(base.GetHashCode());
-        hash.Add(DefaultSkinId);
-        hash.Add(AttributeAdjustment);
-        hash.Add(AttributeCombinationId);
-        hash.Add(Buff);
-        hash.Add(SuffixItemId);
-        foreach (var slot in InfusionSlots)
-        {
-            hash.Add(slot);
-        }
-
-        foreach (var attribute in Attributes)
-        {
-            hash.Add(attribute.Key);
-            hash.Add(attribute.Value);
-        }
-
-        foreach (var statChoice in StatChoices)
-        {
-            hash.Add(statChoice);
-        }
-
-        foreach (var upgrade in UpgradesInto)
-        {
-            hash.Add(upgrade);
-        }
-
-        foreach (var source in UpgradesFrom)
-        {
-            hash.Add(source);
-        }
-
-        return hash.ToHashCode();
-    }
 }

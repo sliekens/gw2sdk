@@ -36,38 +36,4 @@ public record UpgradeComponent : Item, ICombatEquipment
 
     /// <summary>The effect which is applied to the player when the item is equipped.</summary>
     public required Buff? Buff { get; init; }
-
-    /// <inheritdoc />
-    public virtual bool Equals(UpgradeComponent? other)
-    {
-        return ReferenceEquals(this, other)
-            || (base.Equals(other)
-                && UpgradeComponentFlags.Equals(other.UpgradeComponentFlags)
-                && InfusionUpgradeFlags.Equals(other.InfusionUpgradeFlags)
-                && Math.Abs(AttributeAdjustment - other.AttributeAdjustment) < 0.001d
-                && AttributeCombinationId == other.AttributeCombinationId
-                && Buff == other.Buff
-                && SuffixName == other.SuffixName
-                && Attributes.SequenceEqual(other.Attributes, AttributesComparer.Instance));
-    }
-
-    /// <inheritdoc />
-    public override int GetHashCode()
-    {
-        var hash = new HashCode();
-        hash.Add(base.GetHashCode());
-        hash.Add(UpgradeComponentFlags);
-        hash.Add(InfusionUpgradeFlags);
-        hash.Add(AttributeAdjustment);
-        hash.Add(AttributeCombinationId);
-        hash.Add(Buff);
-        hash.Add(SuffixName);
-        foreach (var attribute in Attributes)
-        {
-            hash.Add(attribute.Key);
-            hash.Add(attribute.Value);
-        }
-
-        return hash.ToHashCode();
-    }
 }

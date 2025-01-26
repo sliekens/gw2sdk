@@ -38,24 +38,4 @@ public record EquipmentSkin
     {
         return new SkinLink { SkinId = Id };
     }
-
-    /// <inheritdoc />
-    public virtual bool Equals(EquipmentSkin? other)
-    {
-        if (other is null) return false;
-        if (ReferenceEquals(this, other)) return true;
-        return Id == other.Id
-            && Name == other.Name
-            && Description == other.Description
-            && Flags.Equals(other.Flags)
-            && Races.SequenceEqual(other.Races)
-            && Rarity.Equals(other.Rarity)
-            && IconHref == other.IconHref;
-    }
-
-    /// <inheritdoc />
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(Id, Name, Description, Flags, Races, Rarity, IconHref);
-    }
 }

@@ -51,26 +51,6 @@ public record Weapon : Item, ICombatEquipment, IUpgradable
     /// with selectable stats.</summary>
     public required IReadOnlyList<int> StatChoices { get; init; }
 
-    /// <inheritdoc />
-    public virtual bool Equals(Weapon? other)
-    {
-        return ReferenceEquals(this, other)
-            || (base.Equals(other)
-                && DefaultSkinId == other.DefaultSkinId
-                && DamageType.Equals(other.DamageType)
-                && MinPower == other.MinPower
-                && MaxPower == other.MaxPower
-                && Defense == other.Defense
-                && Math.Abs(AttributeAdjustment - other.AttributeAdjustment) < 0.001d
-                && AttributeCombinationId == other.AttributeCombinationId
-                && Buff == other.Buff
-                && SuffixItemId == other.SuffixItemId
-                && SecondarySuffixItemId == other.SecondarySuffixItemId
-                && Attributes.SequenceEqual(other.Attributes, AttributesComparer.Instance)
-                && InfusionSlots.SequenceEqual(other.InfusionSlots)
-                && StatChoices.SequenceEqual(other.StatChoices));
-    }
-
     /// <summary>The ID of the upgrade component in the upgrade slot, if any.</summary>
     public required int? SuffixItemId { get; init; }
 
@@ -100,38 +80,4 @@ public record Weapon : Item, ICombatEquipment, IUpgradable
 
     /// <summary>The number of infusion slots available on the weapon.</summary>
     public virtual int InfusionSlotCount => InfusionSlots.Count;
-
-    /// <inheritdoc />
-    public override int GetHashCode()
-    {
-        var hash = new HashCode();
-        hash.Add(base.GetHashCode());
-        hash.Add(DefaultSkinId);
-        hash.Add(DamageType);
-        hash.Add(MinPower);
-        hash.Add(MaxPower);
-        hash.Add(Defense);
-        hash.Add(AttributeAdjustment);
-        hash.Add(AttributeCombinationId);
-        hash.Add(Buff);
-        hash.Add(SuffixItemId);
-        hash.Add(SecondarySuffixItemId);
-        foreach (var attribute in Attributes)
-        {
-            hash.Add(attribute.Key);
-            hash.Add(attribute.Value);
-        }
-
-        foreach (var slot in InfusionSlots)
-        {
-            hash.Add(slot);
-        }
-
-        foreach (var stat in StatChoices)
-        {
-            hash.Add(stat);
-        }
-
-        return hash.ToHashCode();
-    }
 }

@@ -50,44 +50,4 @@ public record Recipe
     {
         return new RecipeLink { RecipeId = Id };
     }
-
-    /// <inheritdoc />
-    public virtual bool Equals(Recipe? other)
-    {
-        if (other is null) return false;
-        if (ReferenceEquals(this, other)) return true;
-        return Id == other.Id
-            && OutputItemId == other.OutputItemId
-            && OutputItemCount == other.OutputItemCount
-            && MinRating == other.MinRating
-            && TimeToCraft.Equals(other.TimeToCraft)
-            && Disciplines.SequenceEqual(other.Disciplines)
-            && Flags.Equals(other.Flags)
-            && Ingredients.SequenceEqual(other.Ingredients)
-            && ChatLink == other.ChatLink;
-    }
-
-    /// <inheritdoc />
-    public override int GetHashCode()
-    {
-        var hashCode = new HashCode();
-        hashCode.Add(Id);
-        hashCode.Add(OutputItemId);
-        hashCode.Add(OutputItemCount);
-        hashCode.Add(MinRating);
-        hashCode.Add(TimeToCraft);
-        foreach (var discipline in Disciplines)
-        {
-            hashCode.Add(discipline);
-        }
-
-        hashCode.Add(Flags);
-        foreach (var ingredient in Ingredients)
-        {
-            hashCode.Add(ingredient);
-        }
-
-        hashCode.Add(ChatLink);
-        return hashCode.ToHashCode();
-    }
 }

@@ -29,32 +29,4 @@ public sealed record GliderSkin
 
     /// <summary>The color IDs of the dyes applied by default.</summary>
     public required IReadOnlyList<int> DefaultDyeColorIds { get; init; }
-
-    /// <inheritdoc />
-    public bool Equals(GliderSkin? other)
-    {
-        if (other is null) return false;
-        if (ReferenceEquals(this, other)) return true;
-        return Id == other.Id
-            && UnlockItemIds.SequenceEqual(other.UnlockItemIds)
-            && Order == other.Order
-            && IconHref == other.IconHref
-            && Name == other.Name
-            && Description == other.Description
-            && DefaultDyeColorIds.SequenceEqual(other.DefaultDyeColorIds);
-    }
-
-    /// <inheritdoc />
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(
-            Id,
-            UnlockItemIds,
-            Order,
-            IconHref,
-            Name,
-            Description,
-            DefaultDyeColorIds
-        );
-    }
 }

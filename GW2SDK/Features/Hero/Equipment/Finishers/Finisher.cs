@@ -25,23 +25,4 @@ public sealed record Finisher
 
     /// <summary>The name of the finisher.</summary>
     public required string Name { get; init; }
-
-    /// <inheritdoc />
-    public bool Equals(Finisher? other)
-    {
-        if (other is null) return false;
-        if (ReferenceEquals(this, other)) return true;
-        return Id == other.Id
-            && LockedText == other.LockedText
-            && UnlockItemIds.SequenceEqual(other.UnlockItemIds)
-            && Order == other.Order
-            && IconHref == other.IconHref
-            && Name == other.Name;
-    }
-
-    /// <inheritdoc />
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(Id, LockedText, UnlockItemIds, Order, IconHref, Name);
-    }
 }
