@@ -1,11 +1,10 @@
 ﻿using System.Text.Json;
-using GuildWars2.Hero;
 using GuildWars2.Hero.Equipment.Templates;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Templates;
 
-public class CharacterEquipmentByName
+public class EquipmentTemplateByName
 {
     [Fact]
     public async Task Can_be_found()
@@ -14,19 +13,24 @@ public class CharacterEquipmentByName
         var character = TestConfiguration.TestCharacter;
         var accessToken = TestConfiguration.ApiKey;
 
-        var (actual, context) = await sut.Hero.Equipment.Templates.GetCharacterEquipment(
+        const int tab = 1;
+        var (actual, context) = await sut.Hero.Equipment.Templates.GetEquipmentTemplate(
             character.Name,
+            tab,
             accessToken.Key,
             cancellationToken: TestContext.Current.CancellationToken
         );
 
         Assert.NotNull(context);
-        Assert.NotNull(actual);
-        Assert.NotNull(actual.Items);
+        Assert.True(actual.TabNumber > 0);
+        Assert.NotEmpty(actual.Name);
+        Assert.NotEmpty(actual.Items);
         Assert.All(actual.Items, EquipmentItemValidation.Validate);
+        Assert.NotNull(actual.PvpEquipment);
+        PvpEquipmentValidation.Validate(actual.PvpEquipment);
 
         var json = JsonSerializer.Serialize(actual);
-        var roundtrip = JsonSerializer.Deserialize<CharacterEquipment>(json);
+        var roundtrip = JsonSerializer.Deserialize<EquipmentTemplate>(json);
         Assert.Equal(actual, roundtrip);
     }
 }

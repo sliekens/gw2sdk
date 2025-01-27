@@ -1,4 +1,6 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using System.Text.Json;
+using GuildWars2.Hero.Equipment.Templates;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Templates;
 
@@ -21,6 +23,10 @@ public class LegendaryItems
             {
                 Assert.True(entry.Id > 0);
                 Assert.True(entry.MaxCount > 0);
+
+                var json = JsonSerializer.Serialize(entry);
+                var roundtrip = JsonSerializer.Deserialize<LegendaryItem>(json);
+                Assert.Equal(entry, roundtrip);
             }
         );
     }

@@ -115,4 +115,14 @@ internal static class JsonElementExtensions
     {
         return new Extensible<TEnum>(json.GetStringRequired());
     }
+
+    internal static Extensible<TEnum>? GetNullableEnum<TEnum>(this JsonElement json)
+        where TEnum : struct, Enum
+    {
+        return json.ValueKind switch
+        {
+            JsonValueKind.Null => null as Extensible<TEnum>?,
+            _ => json.GetEnum<TEnum>()
+        };
+    }
 }
