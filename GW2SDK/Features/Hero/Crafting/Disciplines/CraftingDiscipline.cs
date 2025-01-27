@@ -1,7 +1,11 @@
-﻿namespace GuildWars2.Hero.Crafting.Disciplines;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Hero.Crafting.Disciplines;
 
 /// <summary>Information about a character's crafting discipline.</summary>
 [PublicAPI]
+[DataTransferObject]
+[JsonConverter(typeof(CraftingDisciplineJsonConverter))]
 public sealed record CraftingDiscipline
 {
     /// <summary>The name of the current crafting discipline.</summary>
