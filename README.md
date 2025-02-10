@@ -71,6 +71,14 @@ user-facing articles which are used to build the [documentation] site.
 the lightest machine and don't exceed 15GB disk usage. This codespace weighs around
 2.84GB.)
 
+## Open in Gitpod
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/sliekens/gw2sdk)
+
+
+###  Open in Codeanywhere
+
+ [![Open in Codeanywhere](https://codeanywhere.com/img/open-in-codeanywhere-btn.svg)](https://app.codeanywhere.com/#https://github.com/sliekens/gw2sdk)
+
 ## Additional resources
 
 - [Codecov][codecov] contains test coverage reports
