@@ -63,7 +63,7 @@ internal static class FactJson
             return json.GetPercentage(out requiresTrait, out overrides);
         }
 
-        RequiredMember text = "text";
+        OptionalMember text = "text";
         RequiredMember icon = "icon";
 
         foreach (var member in json.EnumerateObject())
@@ -99,7 +99,7 @@ internal static class FactJson
 
         return new Fact
         {
-            Text = text.Map(static value => value.GetStringRequired()),
+            Text = text.Map(static value => value.GetString()) ?? "",
             IconHref = icon.Map(static value => value.GetStringRequired())
         };
     }
