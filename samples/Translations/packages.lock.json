@@ -11,14 +11,14 @@
       "gw2sdk": {
         "type": "Project",
         "dependencies": {
-          "System.Text.Json": "[9.0.1, )"
+          "System.Text.Json": "[9.0.2, )"
         }
       },
       "System.Text.Json": {
         "type": "CentralTransitive",
-        "requested": "[9.0.1, )",
-        "resolved": "9.0.1",
-        "contentHash": "eqWHDZqYPv1PvuvoIIx5pF74plL3iEOZOl/0kQP+Y0TEbtgNnM2W6k8h8EPYs+LTJZsXuWa92n5W5sHTWvE3VA=="
+        "requested": "[9.0.2, )",
+        "resolved": "9.0.2",
+        "contentHash": "4TY2Yokh5Xp8XHFhsY9y84yokS7B0rhkaZCXuRiKppIiKwPVH4lVSFD9EEFzRpXdBM5ZeZXD43tc2vB6njEwwQ=="
       }
     }
   }
