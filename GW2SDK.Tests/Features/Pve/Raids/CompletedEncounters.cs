@@ -19,8 +19,8 @@ public class CompletedEncounters
         // The best we can do is verify that there are no unexpected encounters
         Assert.All(
             actual,
-            chest => Assert.Contains(
-                chest,
+            encounter => Assert.Contains(
+                encounter,
                 new[]
                 {
                     // W1-W3 "forsaken_thicket"
@@ -57,7 +57,13 @@ public class CompletedEncounters
                     "gate",
                     "adina",
                     "sabir",
-                    "qadim_the_peerless"
+                    "qadim_the_peerless",
+
+                    // W8 "mount_balrior"
+                    "camp",
+                    "greer",
+                    "decima",
+                    "ura"
                 }
             )
         );
