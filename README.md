@@ -54,16 +54,19 @@ tested.
 
 ## Contributing
 
+The [wiki] contains information for contributors. The _docs_ directory contains
+user-facing articles which are used to build the [documentation] site.
+
 You are welcome to create an [issue][new-issue] if you find something is missing
 or broken, or a [discussion][new-discussion] for other feedback, questions or ideas.
 
 You are also welcome to propose changes directly with a pull request.
 
-- Small changes can be made with the free [github.dev] editor.
+- Small changes can be made with the free [github.dev] editor or the cloud editors
+  below.
 - A Dev Container definition is provided for larger changes.
-
-The [wiki] contains information for contributors. The _docs_ directory contains
-user-facing articles which are used to build the [documentation] site.
+  GitHub Codespaces and Codeanywhere can use this definition to create a development
+  environment in your browser. Gitpod does not seem to support Dev Containers yet.
 
 [![Open in GitHub Codespaces][codespaces-badge]](https://codespaces.new/sliekens/gw2sdk)
 
@@ -71,20 +74,17 @@ user-facing articles which are used to build the [documentation] site.
 the lightest machine and don't exceed 15GB disk usage. This codespace weighs around
 2.84GB.)
 
-## Open in Gitpod
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/sliekens/gw2sdk)
+[![Open in Codeanywhere][codeanywhere-badge]](https://app.codeanywhere.com/#https://github.com/sliekens/gw2sdk)
 
-
-###  Open in Codeanywhere
-
- [![Open in Codeanywhere](https://codeanywhere.com/img/open-in-codeanywhere-btn.svg)](https://app.codeanywhere.com/#https://github.com/sliekens/gw2sdk)
+[![Open in Gitpod][gitpod-badge]](https://gitpod.io/#https://github.com/sliekens/gw2sdk)
 
 ## Additional resources
 
 - [Codecov][codecov] contains test coverage reports
 - [Guild Wars 2 wiki: API][api] contains API endpoint documentation
 - [Guild Wars 2 wiki: chat link format][chatlinks] contains the format of chat links
-- [Guild Wars 2 wiki: MumbleLink format][mumblelink] contains the format of the MumbleLink structure
+- [Guild Wars 2 wiki: MumbleLink format][mumblelink] contains the format of the
+  MumbleLink structure
 - <https://api.guildwars2.com/v2> contains an overview of API endpoints
 - <https://api.guildwars2.com/v2.json?v=latest> contains API endpoints, schema versions
   and changelog in machine-readable format
@@ -96,6 +96,8 @@ the lightest machine and don't exceed 15GB disk usage. This codespace weighs aro
 [ci-badge]:https://github.com/sliekens/gw2sdk/actions/workflows/ci.yml/badge.svg
 [codecov-badge]:https://codecov.io/gh/sliekens/gw2sdk/branch/main/graph/badge.svg?token=2ZTDBRWWLR
 [codecov]:https://codecov.io/gh/sliekens/gw2sdk
+[gitpod-badge]:https://gitpod.io/button/open-in-gitpod.svg
+[codeanywhere-badge]:https://codeanywhere.com/img/open-in-codeanywhere-btn.svg
 [codespaces-badge]:https://github.com/codespaces/badge.svg
 [free]:https://docs.github.com/en/billing/managing-billing-for-github-codespaces/about-billing-for-github-codespaces#monthly-included-storage-and-core-hours-for-personal-accounts
 [github.dev]:https://github.dev/sliekens/gw2sdk
