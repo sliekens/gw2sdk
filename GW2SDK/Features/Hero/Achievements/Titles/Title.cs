@@ -1,8 +1,11 @@
-﻿namespace GuildWars2.Hero.Achievements.Titles;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Hero.Achievements.Titles;
 
 /// <summary>Information about a title which can be obtained from achievements.</summary>
 [PublicAPI]
 [DataTransferObject]
+[JsonConverter(typeof(TitleJsonConverter))]
 public sealed record Title
 {
     /// <summary>The title ID.</summary>

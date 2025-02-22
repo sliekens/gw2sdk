@@ -1,8 +1,11 @@
-﻿namespace GuildWars2.Hero.Achievements.Categories;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Hero.Achievements.Categories;
 
 /// <summary>A reference to an achievement.</summary>
 [PublicAPI]
 [DataTransferObject]
+[JsonConverter(typeof(AchievementRefJsonConverter))]
 public sealed record AchievementRef
 {
     /// <summary>The achievement ID.</summary>

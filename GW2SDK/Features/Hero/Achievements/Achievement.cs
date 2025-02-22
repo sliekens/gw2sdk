@@ -1,6 +1,7 @@
 ﻿using GuildWars2.Chat;
 using GuildWars2.Hero.Achievements.Bits;
 using GuildWars2.Hero.Achievements.Rewards;
+using System.Text.Json.Serialization;
 
 namespace GuildWars2.Hero.Achievements;
 
@@ -8,6 +9,7 @@ namespace GuildWars2.Hero.Achievements;
 [PublicAPI]
 [Inheritable]
 [DataTransferObject]
+[JsonConverter(typeof(AchievementJsonConverter))]
 public record Achievement
 {
     /// <summary>The achievement ID.</summary>

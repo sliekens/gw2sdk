@@ -1,4 +1,5 @@
-﻿using GuildWars2.Chat;
+﻿using System.Text.Json;
+using GuildWars2.Chat;
 using GuildWars2.Hero.Achievements;
 using GuildWars2.Hero.Achievements.Rewards;
 using GuildWars2.Tests.Features.Markup;
@@ -75,6 +76,10 @@ public class Achievements
 
             var chatLinkRoundtrip = AchievementLink.Parse(chatLink.ToString());
             Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
+
+            var json = JsonSerializer.Serialize(actual);
+            var roundTrip = JsonSerializer.Deserialize<Achievement>(json);
+            Assert.Equal(actual, roundTrip);
         }
     }
 }

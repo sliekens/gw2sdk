@@ -1,8 +1,11 @@
-﻿namespace GuildWars2.Hero.Achievements;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Hero.Achievements;
 
 /// <summary>Information about achievement progress made on the account.</summary>
 [PublicAPI]
 [DataTransferObject]
+[JsonConverter(typeof(AccountAchievementJsonConverter))]
 public sealed record AccountAchievement
 {
     /// <summary>The achievement ID.</summary>

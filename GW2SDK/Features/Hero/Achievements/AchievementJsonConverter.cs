@@ -1,0 +1,144 @@
+﻿using System.Text.Json;
+using System.Text.Json.Serialization;
+using GuildWars2.Json;
+
+namespace GuildWars2.Hero.Achievements;
+
+internal sealed class AchievementJsonConverter : JsonConverter<Achievement>
+{
+    public const string DiscriminatorName = "$type";
+
+    public const string DiscriminatorValue = "achievement";
+
+    public override bool CanConvert(Type typeToConvert)
+    {
+        return typeof(Achievement).IsAssignableFrom(typeToConvert);
+    }
+
+    public override Achievement Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        using var json = JsonDocument.ParseValue(ref reader);
+        return Read(json.RootElement);
+    }
+
+    public override void Write(Utf8JsonWriter writer, Achievement value, JsonSerializerOptions options)
+    {
+        Write(writer, value);
+    }
+
+    public static Achievement Read(JsonElement json)
+    {
+        if (json.TryGetProperty(DiscriminatorName, out var discriminator))
+        {
+            switch (discriminator.GetString())
+            {
+                case CollectionAchievementJsonConverter.DiscriminatorValue:
+                    return CollectionAchievementJsonConverter.Read(json);
+            }
+        }
+
+        return new Achievement
+        {
+            Id = json.GetProperty("id").GetInt32(),
+            Name = json.GetProperty("name").GetStringRequired(),
+            IconHref = json.GetProperty("icon").GetStringRequired(),
+            Description = json.GetProperty("description").GetStringRequired(),
+            Requirement = json.GetProperty("requirement").GetStringRequired(),
+            LockedText = json.GetProperty("locked_text").GetStringRequired(),
+            Flags = AchievementFlagsJsonConverter.Read(json.GetProperty("flags")),
+            Tiers = json.GetProperty("tiers").GetList(AchievementTierJsonConverter.Read),
+            Rewards = json.GetProperty("rewards").GetNullableList(AchievementRewardJsonConverter.Read),
+            Bits = json.GetProperty("bits").GetNullableList(AchievementBitJsonConverter.Read),
+            Prerequisites = json.GetProperty("prerequisites").GetList(prerequisite => prerequisite.GetInt32()),
+            PointCap = json.GetProperty("point_cap").GetNullableInt32()
+        };
+    }
+
+    public static void Write(Utf8JsonWriter writer, Achievement value)
+    {
+        switch (value)
+        {
+            case CollectionAchievement collectionAchievement:
+                CollectionAchievementJsonConverter.Write(writer, collectionAchievement);
+                break;
+            default:
+                writer.WriteStartObject();
+                writer.WriteString(DiscriminatorName, DiscriminatorValue);
+                WriteCommonProperties(writer, value);
+                writer.WriteEndObject();
+                break;
+        }
+    }
+
+    public static void WriteCommonProperties(Utf8JsonWriter writer, Achievement value)
+    {
+        writer.WriteNumber("id", value.Id);
+        writer.WriteString("name", value.Name);
+        writer.WriteString("icon", value.IconHref);
+        writer.WriteString("description", value.Description);
+        writer.WriteString("requirement", value.Requirement);
+        writer.WriteString("locked_text", value.LockedText);
+        writer.WritePropertyName("flags");
+        AchievementFlagsJsonConverter.Write(writer, value.Flags);
+        writer.WritePropertyName("tiers");
+        writer.WriteStartArray();
+        foreach (var tier in value.Tiers)
+        {
+            AchievementTierJsonConverter.Write(writer, tier);
+        }
+        writer.WriteEndArray();
+        writer.WritePropertyName("rewards");
+        if (value.Rewards != null)
+        {
+            writer.WriteStartArray();
+            foreach (var reward in value.Rewards)
+            {
+                AchievementRewardJsonConverter.Write(writer, reward);
+            }
+            writer.WriteEndArray();
+        }
+        else
+        {
+            writer.WriteNullValue();
+        }
+
+        writer.WritePropertyName("bits");
+        if (value.Bits != null)
+        {
+            writer.WriteStartArray();
+            foreach (var bit in value.Bits)
+            {
+                AchievementBitJsonConverter.Write(writer, bit);
+            }
+            writer.WriteEndArray();
+        }
+        else
+        {
+            writer.WriteNullValue();
+        }
+
+        writer.WritePropertyName("prerequisites");
+        writer.WriteStartArray();
+        foreach (var prerequisite in value.Prerequisites)
+        {
+            writer.WriteNumberValue(prerequisite);
+        }
+        writer.WriteEndArray();
+
+        writer.WritePropertyName("point_cap");
+        if (value.PointCap.HasValue)
+        {
+            writer.WriteNumberValue(value.PointCap.Value);
+        }
+        else
+        {
+            writer.WriteNullValue();
+        }
+    }
+}
+
+

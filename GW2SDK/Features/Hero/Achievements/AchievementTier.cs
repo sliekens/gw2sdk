@@ -1,8 +1,11 @@
-﻿namespace GuildWars2.Hero.Achievements;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Hero.Achievements;
 
 /// <summary>Information about an achievement tier.</summary>
 [PublicAPI]
 [DataTransferObject]
+[JsonConverter(typeof(AchievementTierJsonConverter))]
 public sealed record AchievementTier
 {
     /// <summary>The amount of progress needed to complete this tier. Context is required to understand this number. For

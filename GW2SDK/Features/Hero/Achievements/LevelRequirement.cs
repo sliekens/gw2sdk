@@ -1,8 +1,11 @@
-﻿namespace GuildWars2.Hero.Achievements;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Hero.Achievements;
 
 /// <summary>Describes minimum/maximum levels for achievements.</summary>
 [PublicAPI]
 [DataTransferObject]
+[JsonConverter(typeof(LevelRequirementJsonConverter))]
 public sealed record LevelRequirement
 {
     /// <summary>The minimum level required to access this achievement.</summary>

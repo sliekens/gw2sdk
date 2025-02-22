@@ -1,4 +1,6 @@
-﻿using GuildWars2.Tests.Features.Markup;
+﻿using System.Text.Json;
+using GuildWars2.Hero.Achievements.Titles;
+using GuildWars2.Tests.Features.Markup;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Achievements;
@@ -32,6 +34,10 @@ public class Titles
                 {
                     Assert.NotEmpty(entry.Achievements!);
                 }
+
+                var json = JsonSerializer.Serialize(entry);
+                var roundTrip = JsonSerializer.Deserialize<Title>(json);
+                Assert.Equal(entry, roundTrip);
             }
         );
     }
