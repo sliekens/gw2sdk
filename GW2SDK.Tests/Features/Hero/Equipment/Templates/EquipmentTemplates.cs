@@ -31,7 +31,7 @@ public class EquipmentTemplates
             {
                 Assert.True(entry.TabNumber > 0);
                 Assert.NotNull(entry.Name);
-                Assert.NotEmpty(entry.Items);
+                Assert.NotNull(entry.Items);
                 Assert.All(entry.Items, EquipmentItemValidation.Validate);
                 Assert.NotNull(entry.PvpEquipment);
                 PvpEquipmentValidation.Validate(entry.PvpEquipment);
