@@ -84,7 +84,7 @@ public sealed class TokenClient
         {
             requestBuilder.Query.Add(
                 "expire",
-                absoluteExpirationDate.Value.ToUniversalTime().ToString("s")
+                absoluteExpirationDate.Value.ToUniversalTime().ToString("u")
             );
         }
 
