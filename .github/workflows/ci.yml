@@ -43,7 +43,7 @@ jobs:
         run: dotnet run --configuration ${{ env.build-configuration }}  --project GW2SDK.TestDataHelper -- GW2SDK.Tests/Data
 
       - name: Test
-        run: dotnet test --framework $DOTNET_TEST_TFM --collect:"XPlat Code Coverage" --settings coverlet.runsettings --no-restore
+        run: dotnet exec GW2SDK.Tests/bin/${{ env.build-configuration }}/$DOTNET_TEST_TFM/GW2SDK.Tests.dll --coverage --coverage-settings GW2SDK.Tests/coverage.settings --coverage-output coverage.xml
         env:
           ApiKeyBasic: ${{ secrets.API_TOKEN_BASIC }}
           ApiKey: ${{ secrets.API_TOKEN_FULL }}
