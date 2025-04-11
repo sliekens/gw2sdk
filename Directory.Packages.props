@@ -22,9 +22,9 @@
     <PackageVersion Include="Pastel" Version="6.0.1" />
     <PackageVersion Include="Polly.Core" Version="8.5.2" />
     <PackageVersion Include="PolySharp" Version="1.15.0" />
-    <PackageVersion Include="SixLabors.ImageSharp" Version="3.1.6" />
-    <PackageVersion Include="Spectre.Console" Version="0.49.1" />
-    <PackageVersion Include="Spectre.Console.ImageSharp" Version="0.49.1" />
+    <PackageVersion Include="SixLabors.ImageSharp" Version="3.1.7" />
+    <PackageVersion Include="Spectre.Console" Version="0.50.0" />
+    <PackageVersion Include="Spectre.Console.ImageSharp" Version="0.50.0" />
     <PackageVersion Include="System.Interactive" Version="6.0.1" />
     <PackageVersion Include="System.Linq.Async" Version="6.0.1" />
     <PackageVersion Include="System.Reactive" Version="6.0.1" />
