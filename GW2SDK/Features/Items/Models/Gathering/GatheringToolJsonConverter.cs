@@ -57,6 +57,8 @@ internal sealed class GatheringToolJsonConverter : JsonConverter<GatheringTool>
                     return BaitJsonConverter.Read(json);
                 case LureJsonConverter.DiscriminatorValue:
                     return LureJsonConverter.Read(json);
+                case FishingRodJsonConverter.DiscriminatorValue:
+                    return FishingRodJsonConverter.Read(json);
             }
         }
 
@@ -95,6 +97,9 @@ internal sealed class GatheringToolJsonConverter : JsonConverter<GatheringTool>
                 break;
             case Lure lure:
                 LureJsonConverter.Write(writer, lure);
+                break;
+            case FishingRod fishingRod:
+                FishingRodJsonConverter.Write(writer, fishingRod);
                 break;
             default:
                 writer.WriteStartObject();

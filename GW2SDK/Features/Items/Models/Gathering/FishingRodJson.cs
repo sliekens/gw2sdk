@@ -1,34 +1,12 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-internal static class GatheringToolJson
+internal static class FishingRodJson
 {
-    public static GatheringTool GetGatheringTool(this JsonElement json)
+    public static FishingRod GetFishingRod(this JsonElement json)
     {
-        if (json.TryGetProperty("details", out var discriminator))
-        {
-            if (discriminator.TryGetProperty("type", out var subtype))
-            {
-                switch (subtype.GetString())
-                {
-                    case "Bait":
-                        return json.GetBait();
-                    case "Fishing":
-                        return json.GetFishingRod();
-                    case "Foraging":
-                        return json.GetHarvestingSickle();
-                    case "Logging":
-                        return json.GetLoggingAxe();
-                    case "Lure":
-                        return json.GetLure();
-                    case "Mining":
-                        return json.GetMiningPick();
-                }
-            }
-        }
-
         RequiredMember name = "name";
         OptionalMember description = "description";
         RequiredMember level = "level";
@@ -99,9 +77,9 @@ internal static class GatheringToolJson
                 {
                     if (detail.NameEquals("type"))
                     {
-                        if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
+                        if (!detail.Value.ValueEquals("Fishing"))
                         {
-                            ThrowHelper.ThrowUnexpectedDiscriminator(detail.Value.GetString());
+                            ThrowHelper.ThrowInvalidDiscriminator(detail.Value.GetString());
                         }
                     }
                     else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
@@ -116,7 +94,7 @@ internal static class GatheringToolJson
             }
         }
 
-        return new GatheringTool
+        return new FishingRod
         {
             Id = id.Map(static value => value.GetInt32()),
             Name = name.Map(static value => value.GetStringRequired()),
