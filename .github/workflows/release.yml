@@ -39,9 +39,6 @@ jobs:
           ApiKey: ${{ secrets.API_TOKEN_FULL }}
           GuildLeader__Token: ${{ secrets.API_TOKEN_GUILD_LEADER }}
 
-      - name: Build
-        run: dotnet build --configuration ${{ env.build-configuration }} --no-restore
-
       - name: Create packages
         run: dotnet pack GW2SDK --configuration ${{ env.build-configuration }} --no-build --output artifacts
 
