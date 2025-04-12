@@ -19,6 +19,7 @@ internal static class AchievementFlagsJson
         var repeatable = false;
         var requiresUnlock = false;
         var weekly = false;
+        var monthly = false;
         ValueList<string> others = [];
         foreach (var entry in json.EnumerateArray())
         {
@@ -66,6 +67,10 @@ internal static class AchievementFlagsJson
             {
                 weekly = true;
             }
+            else if (entry.ValueEquals("Monthly"))
+            {
+                monthly = true;
+            }
             else
             {
                 others.Add(entry.GetStringRequired());
@@ -85,6 +90,7 @@ internal static class AchievementFlagsJson
             Repeatable = repeatable,
             RequiresUnlock = requiresUnlock,
             Weekly = weekly,
+            Monthly = monthly,
             Other = others
         };
     }

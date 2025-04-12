@@ -41,4 +41,8 @@ public sealed record AchievementFlags : Flags
 
     /// <summary>The achievement progress is reset every week on Monday at 7:30am UTC.</summary>
     public required bool Weekly { get; init; }
+
+    /// <summary>The achievement progress is reset on the last day of the month at midnight UTC.</summary>
+    /// <remarks>Monthly was an achievement category, removed in 2015.</remarks>
+    public required bool Monthly { get; init; }
 }

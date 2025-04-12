@@ -27,20 +27,91 @@ internal sealed class AchievementFlagsJsonConverter : JsonConverter<AchievementF
 
     public static AchievementFlags Read(JsonElement json)
     {
+        bool categoryDisplay = false;
+        bool daily = false;
+        bool hidden = false;
+        bool ignoreNearlyComplete = false;
+        bool moveToTop = false;
+        bool pvp = false;
+        bool repairOnLogin = false;
+        bool repeatable = false;
+        bool requiresUnlock = false;
+        bool permanent = false;
+        bool weekly = false;
+        bool monthly = false;
+        List<string> other = [];
+
+        foreach (var property in json.EnumerateObject())
+        {
+            if (property.NameEquals("category_display"))
+            {
+                categoryDisplay = property.Value.GetBoolean();
+            }
+            else if (property.NameEquals("daily"))
+            {
+                daily = property.Value.GetBoolean();
+            }
+            else if (property.NameEquals("hidden"))
+            {
+                hidden = property.Value.GetBoolean();
+            }
+            else if (property.NameEquals("ignore_nearly_complete"))
+            {
+                ignoreNearlyComplete = property.Value.GetBoolean();
+            }
+            else if (property.NameEquals("move_to_top"))
+            {
+                moveToTop = property.Value.GetBoolean();
+            }
+            else if (property.NameEquals("pvp"))
+            {
+                pvp = property.Value.GetBoolean();
+            }
+            else if (property.NameEquals("repair_on_login"))
+            {
+                repairOnLogin = property.Value.GetBoolean();
+            }
+            else if (property.NameEquals("repeatable"))
+            {
+                repeatable = property.Value.GetBoolean();
+            }
+            else if (property.NameEquals("requires_unlock"))
+            {
+                requiresUnlock = property.Value.GetBoolean();
+            }
+            else if (property.NameEquals("permanent"))
+            {
+                permanent = property.Value.GetBoolean();
+            }
+            else if (property.NameEquals("weekly"))
+            {
+                weekly = property.Value.GetBoolean();
+            }
+            else if (property.NameEquals("monthly"))
+            {
+                monthly = property.Value.GetBoolean();
+            }
+            else if (property.NameEquals("other"))
+            {
+                other = property.Value.GetList(static value => value.GetStringRequired());
+            }
+        }
+
         return new AchievementFlags
         {
-            CategoryDisplay = json.GetProperty("category_display").GetBoolean(),
-            Daily = json.GetProperty("daily").GetBoolean(),
-            Hidden = json.GetProperty("hidden").GetBoolean(),
-            IgnoreNearlyComplete = json.GetProperty("ignore_nearly_complete").GetBoolean(),
-            MoveToTop = json.GetProperty("move_to_top").GetBoolean(),
-            Pvp = json.GetProperty("pvp").GetBoolean(),
-            RepairOnLogin = json.GetProperty("repair_on_login").GetBoolean(),
-            Repeatable = json.GetProperty("repeatable").GetBoolean(),
-            RequiresUnlock = json.GetProperty("requires_unlock").GetBoolean(),
-            Permanent = json.GetProperty("permanent").GetBoolean(),
-            Weekly = json.GetProperty("weekly").GetBoolean(),
-            Other = json.GetProperty("other").GetList(static value => value.GetStringRequired())
+            CategoryDisplay = categoryDisplay,
+            Daily = daily,
+            Hidden = hidden,
+            IgnoreNearlyComplete = ignoreNearlyComplete,
+            MoveToTop = moveToTop,
+            Pvp = pvp,
+            RepairOnLogin = repairOnLogin,
+            Repeatable = repeatable,
+            RequiresUnlock = requiresUnlock,
+            Permanent = permanent,
+            Weekly = weekly,
+            Monthly = monthly,
+            Other = other
         };
     }
 
@@ -58,6 +129,7 @@ internal sealed class AchievementFlagsJsonConverter : JsonConverter<AchievementF
         writer.WriteBoolean("requires_unlock", value.RequiresUnlock);
         writer.WriteBoolean("permanent", value.Permanent);
         writer.WriteBoolean("weekly", value.Weekly);
+        writer.WriteBoolean("monthly", value.Monthly);
         writer.WriteStartArray("other");
         foreach (var other in value.Other)
         {
