@@ -9,7 +9,6 @@ rm -r GW2SDK.Tests/TestResults/* || true
 dotnet run --project GW2SDK.Tests --framework net9.0 -- \
     --coverage \
     --coverage-settings GW2SDK.Tests/coverage.settings \
-    --coverage-output-format xml \
     --coverage-output coverage.xml \
     "$@"
 
