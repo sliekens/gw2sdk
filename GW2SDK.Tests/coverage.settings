@@ -1,12 +1,23 @@
-﻿<Configuration>
-  <Include>[GW2SDK]*</Include> <!-- [Assembly-Filter]Type-Filter -->
-  <Exclude>[GW2SDK]JetBrains.Annotations.*</Exclude>
-  <ExcludeByAttribute>Obsolete,GeneratedCodeAttribute,CompilerGeneratedAttribute</ExcludeByAttribute>
-  <ExcludeByFile>**/*.generated.cs,**/*.g.cs</ExcludeByFile>
-  <SingleHit>false</SingleHit>
-  <DeterministicReport>true</DeterministicReport>
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+  <CodeCoverage>
+    <AttributeFilters>
+      <ExcludeAttributes>
+        <Attribute>^System\.ObsoleteAttribute$</Attribute>
+        <Attribute>^System\.CodeDom\.Compiler\.GeneratedCodeAttribute$</Attribute>
+      </ExcludeAttributes>
+    </AttributeFilters>
 
-  <!-- UseSourceLink generates results with filename=https://raw.githubusercontent.com/etc instead of local file paths,
-        which makes report generation super slow and network intensive. -->
-  <UseSourceLink>false</UseSourceLink> 
+    <Sources>
+      <Exclude>
+        <Source>.*Jetbrains\\Annotations\.cs</Source>
+        <Source>.*\.generated\.cs</Source>
+        <Source>.*\.g\.cs</Source>
+      </Exclude>
+    </Sources>
+
+    <EnableStaticManagedInstrumentation>False</EnableStaticManagedInstrumentation>
+    <EnableDynamicManagedInstrumentation>True</EnableDynamicManagedInstrumentation>
+    <DeterministicReport>True</DeterministicReport>
+  </CodeCoverage>
 </Configuration>
