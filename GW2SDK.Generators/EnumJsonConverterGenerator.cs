@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections.Immutable;
+using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
@@ -6,25 +7,35 @@ using Microsoft.CodeAnalysis.Text;
 namespace GW2SDK.Generators;
 
 [Generator]
-public class EnumJsonConverterGenerator : ISourceGenerator
+public class EnumJsonConverterGenerator : IIncrementalGenerator
 {
-    public void Initialize(GeneratorInitializationContext context)
+    public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-        context.RegisterForSyntaxNotifications(() => new EnumSyntaxReceiver());
+        // Register for enum declarations
+        var enumDeclarations = context.SyntaxProvider
+            .CreateSyntaxProvider(
+                predicate: static (s, _) => s is EnumDeclarationSyntax,
+                transform: static (ctx, _) => (EnumDeclarationSyntax)ctx.Node)
+            .Where(enumDecl => enumDecl is not null);
+
+        // Combine the enum declarations with the compilation
+        var compilationAndEnums = context.CompilationProvider.Combine(enumDeclarations.Collect());
+
+        // Generate source based on the inputs
+        context.RegisterSourceOutput(compilationAndEnums,
+            (spc, source) => Execute(source.Left, source.Right, spc));
     }
 
-    public void Execute(GeneratorExecutionContext context)
+    private void Execute(
+        Compilation compilation,
+        ImmutableArray<EnumDeclarationSyntax> enumDeclarations,
+        SourceProductionContext context)
     {
-        if (context.SyntaxReceiver is not EnumSyntaxReceiver receiver)
-        {
-            return;
-        }
-
         var enumTypes = new List<string>();
 
-        foreach (var enumDeclaration in receiver.EnumDeclarations)
+        foreach (var enumDeclaration in enumDeclarations)
         {
-            var model = context.Compilation.GetSemanticModel(enumDeclaration.SyntaxTree);
+            var model = compilation.GetSemanticModel(enumDeclaration.SyntaxTree);
             var enumSymbol = model.GetDeclaredSymbol(enumDeclaration);
             if (enumSymbol is not INamedTypeSymbol namedTypeSymbol)
             {
@@ -173,18 +184,5 @@ public class EnumJsonConverterGenerator : ISourceGenerator
                      }
                  }
                  """;
-    }
-
-    private class EnumSyntaxReceiver : ISyntaxReceiver
-    {
-        public List<EnumDeclarationSyntax> EnumDeclarations { get; } = [];
-
-        public void OnVisitSyntaxNode(SyntaxNode syntaxNode)
-        {
-            if (syntaxNode is EnumDeclarationSyntax enumDeclaration)
-            {
-                EnumDeclarations.Add(enumDeclaration);
-            }
-        }
     }
 }
