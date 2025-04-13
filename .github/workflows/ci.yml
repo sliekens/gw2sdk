@@ -55,32 +55,38 @@ jobs:
             --no-build
             --coverage
             --coverage-settings GW2SDK.Tests/coverage.settings
-            --coverage-output coverage.xml
+            --coverage-output $GITHUB_WORKSPACE/coverage.xml
         env:
           ApiKeyBasic: ${{ secrets.API_TOKEN_BASIC }}
           ApiKey: ${{ secrets.API_TOKEN_FULL }}
           GuildLeader__Token: ${{ secrets.API_TOKEN_GUILD_LEADER }}
-
-      - name: Pack artifacts
-        run: dotnet pack GW2SDK --configuration ${{ env.build-configuration }} --no-build --output artifacts
-
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: packages
-          path: artifacts
-
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-
+            
       - name: Upload test data on failure
         uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: test-data
           path: GW2SDK.Tests/Data
+
+      - name: Upload coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: artifacts/coverage
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Pack artifacts
+        run: dotnet pack GW2SDK --configuration ${{ env.build-configuration }} --no-build --output artifacts/packages
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: packages
+          path: artifacts/packages
 
   deploy-to-github-packages:
     name: Deploy to GitHub Packages
