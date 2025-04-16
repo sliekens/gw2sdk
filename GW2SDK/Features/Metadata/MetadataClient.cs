@@ -47,52 +47,20 @@ public sealed class MetadataClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    [SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Public API")]
     public async Task<(Build Value, MessageContext Context)> GetBuild(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        // The /v2/build API has been stuck on build 115267 since at least 2021-05-27
-        // A undocumented API is used to find the current build
-        // The same API is used by the Guild Wars 2 launcher to check for updates
-        // So in a sense, this is the "official" way to find the current build
-        var (value, context) = await Latest("http://assetcdn.101.ArenaNetworks.com/latest/101")
+        var requestBuilder = RequestBuilder.HttpGet("v2/build");
+        var request = requestBuilder.Build();
+        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
-        if (value is null)
+        using (response.Json)
         {
-            (value, context) = await Latest("http://assetcdn.101.ArenaNetworks.com/latest64/101")
-                .ConfigureAwait(false);
-        }
-
-        return (value ?? throw new InvalidOperationException("Missing value."), context);
-
-        async Task<(Build? Value, MessageContext Context)> Latest(string url)
-        {
-            using var request = new HttpRequestMessage(Get, url);
-            using var response = await httpClient.SendAsync(
-                    request,
-                    HttpCompletionOption.ResponseHeadersRead,
-                    cancellationToken
-                )
-                .ConfigureAwait(false);
-            if (!response.IsSuccessStatusCode)
-            {
-                return (null, new MessageContext(response));
-            }
-
-#if NET
-            var latest = await response.Content.ReadAsStringAsync(cancellationToken)
-                .ConfigureAwait(false);
-#else
-            var latest = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-#endif
-            var text = latest[..latest.IndexOf(' ')];
-            var build = new Build
-            {
-                Id = int.Parse(text, NumberStyles.None, NumberFormatInfo.InvariantInfo)
-            };
-            return (build, new MessageContext(response));
+            JsonOptions.MissingMemberBehavior = missingMemberBehavior;
+            var value = response.Json.RootElement.GetBuild();
+            return (value, response.Context);
         }
     }
 }
