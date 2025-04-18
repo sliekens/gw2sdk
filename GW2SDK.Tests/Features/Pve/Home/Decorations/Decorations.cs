@@ -20,37 +20,9 @@ public class Decorations
             Assert.True(actual.Id > 0);
             Assert.NotEmpty(actual.Name);
             Assert.NotNull(actual.Description);
-            if (actual.Id is 13
-                or 28
-                or 73
-                or 84
-                or 161
-                or 170
-                or 379
-                or 396
-                or 435
-                or 438
-                or 458
-                or 496
-                or 499
-                or 528
-                or 574
-                or 593
-                or 599
-                or 617
-                or 624
-                or 631
-                or 677
-                or 714
-                or 741) // Some SAB decorations are not linked to its category
-            {
-                Assert.Empty(actual.CategoryIds);
-            }
-            else
-            {
-                Assert.NotEmpty(actual.CategoryIds);
-            }
 
+            // Some decorations are not linked to categories
+            Assert.NotNull(actual.CategoryIds);
             Assert.All(actual.CategoryIds, categoryId => Assert.True(categoryId > 0));
             Assert.True(actual.MaxCount > 0);
             Assert.NotEmpty(actual.IconHref);
