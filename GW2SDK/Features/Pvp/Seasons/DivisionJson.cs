@@ -53,8 +53,8 @@ internal static class DivisionJson
             LargeIconHref = largeIcon.Map(static value => value.GetStringRequired()),
             SmallIconHref = smallIcon.Map(static value => value.GetStringRequired()),
             PipIconHref = pipIcon.Map(static value => value.GetStringRequired()),
-            Tiers = tiers.Map(
-                static values => values.GetList(static value => value.GetDivisionTier())
+            Tiers = tiers.Map(static values =>
+                values.GetList(static value => value.GetDivisionTier())
             )
         };
     }

@@ -19,7 +19,11 @@ internal sealed class MasteryPointRewardJsonConverter : JsonConverter<MasteryPoi
         return Read(json.RootElement);
     }
 
-    public override void Write(Utf8JsonWriter writer, MasteryPointReward value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        MasteryPointReward value,
+        JsonSerializerOptions options
+    )
     {
         Write(writer, value);
     }

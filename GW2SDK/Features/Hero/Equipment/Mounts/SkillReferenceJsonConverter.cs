@@ -6,7 +6,11 @@ namespace GuildWars2.Hero.Equipment.Mounts;
 
 internal sealed class SkillReferenceJsonConverter : JsonConverter<SkillReference>
 {
-    public override SkillReference? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override SkillReference? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         using var json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
@@ -21,7 +25,11 @@ internal sealed class SkillReferenceJsonConverter : JsonConverter<SkillReference
         };
     }
 
-    public override void Write(Utf8JsonWriter writer, SkillReference value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        SkillReference value,
+        JsonSerializerOptions options
+    )
     {
         Write(writer, value);
     }

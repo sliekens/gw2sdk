@@ -35,8 +35,8 @@ internal static class PvpEquipmentJson
         {
             AmuletId = amulet.Map(static value => value.GetInt32()),
             RuneId = rune.Map(static value => value.GetInt32()),
-            SigilIds = sigils.Map(
-                static values => values.GetList(static value => value.GetNullableInt32())
+            SigilIds = sigils.Map(static values =>
+                values.GetList(static value => value.GetNullableInt32())
             )
         };
     }

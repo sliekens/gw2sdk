@@ -24,8 +24,7 @@ public class IndexModel(ILogger<IndexModel> logger, QuaggansClient quaggans) : P
         logger.LogInformation("Retrieving the Quaggans.");
         var (found, context) = await quaggans.GetQuaggans();
         Refreshed = context.Date;
-        Quaggans = found.Select(
-            (quaggan, index) => new QuagganViewModel
+        Quaggans = found.Select((quaggan, index) => new QuagganViewModel
             {
                 Active = index == 0,
                 Id = quaggan.Id,

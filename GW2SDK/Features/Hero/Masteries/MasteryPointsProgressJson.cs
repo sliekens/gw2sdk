@@ -29,12 +29,11 @@ internal static class MasteryPointsProgressJson
         return new MasteryPointsProgress
         {
             Totals =
-                totals.Map(
-                    static values =>
-                        values.GetList(static value => value.GetMasteryPointsTotal())
+                totals.Map(static values =>
+                    values.GetList(static value => value.GetMasteryPointsTotal())
                 ),
-            Unlocked = unlocked.Map(
-                static values => values.GetList(static value => value.GetInt32())
+            Unlocked = unlocked.Map(static values =>
+                values.GetList(static value => value.GetInt32())
             )
         };
     }

@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-using GuildWars2.Hero.Crafting.Recipes;
 using GuildWars2.Hero.Equipment.Dyes;
 using GuildWars2.Tests.TestInfrastructure;
 

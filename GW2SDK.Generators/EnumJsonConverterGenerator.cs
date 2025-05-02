@@ -12,24 +12,27 @@ public class EnumJsonConverterGenerator : IIncrementalGenerator
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
         // Register for enum declarations
-        var enumDeclarations = context.SyntaxProvider
-            .CreateSyntaxProvider(
-                predicate: static (s, _) => s is EnumDeclarationSyntax,
-                transform: static (ctx, _) => (EnumDeclarationSyntax)ctx.Node)
+        var enumDeclarations = context.SyntaxProvider.CreateSyntaxProvider(
+                static (s, _) => s is EnumDeclarationSyntax,
+                static (ctx, _) => (EnumDeclarationSyntax)ctx.Node
+            )
             .Where(enumDecl => enumDecl is not null);
 
         // Combine the enum declarations with the compilation
         var compilationAndEnums = context.CompilationProvider.Combine(enumDeclarations.Collect());
 
         // Generate source based on the inputs
-        context.RegisterSourceOutput(compilationAndEnums,
-            (spc, source) => Execute(source.Left, source.Right, spc));
+        context.RegisterSourceOutput(
+            compilationAndEnums,
+            (spc, source) => Execute(source.Left, source.Right, spc)
+        );
     }
 
     private void Execute(
         Compilation compilation,
         ImmutableArray<EnumDeclarationSyntax> enumDeclarations,
-        SourceProductionContext context)
+        SourceProductionContext context
+    )
     {
         var enumTypes = new List<string>();
 
@@ -87,7 +90,7 @@ public class EnumJsonConverterGenerator : IIncrementalGenerator
         {
             readCases.AppendLine(
                 $$"""
-                  
+
                          if (reader.ValueTextEquals(nameof({{enumName}}.{{value}})))
                          {
                              return {{enumName}}.{{value}};
@@ -122,7 +125,7 @@ public class EnumJsonConverterGenerator : IIncrementalGenerator
                          {{readCases}}
                          throw new JsonException();
                      }
-                 
+
                      public override void Write(Utf8JsonWriter writer, {{enumName}} value, JsonSerializerOptions options)
                      {
                          writer.WriteStringValue(value switch
@@ -169,10 +172,10 @@ public class EnumJsonConverterGenerator : IIncrementalGenerator
                          {
                              return false;
                          }
-                 
+
                          return typeToConvert.GetGenericTypeDefinition() == typeof(Extensible<>);
                      }
-                 
+
                      public override JsonConverter? CreateConverter(
                          Type typeToConvert,
                          JsonSerializerOptions options

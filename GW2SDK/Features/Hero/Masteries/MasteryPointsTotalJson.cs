@@ -33,8 +33,7 @@ internal static class MasteryPointsTotalJson
 
         return new MasteryPointsTotal
         {
-            Region = region.Map(
-                static value =>
+            Region = region.Map(static value =>
                 {
                     // For some reason the API now returns story journal names instead of the region names as it was originally designed
                     // As a workaround, map the story journal names to the region names

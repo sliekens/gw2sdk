@@ -59,11 +59,11 @@ internal static class AchievementCategoryJson
             Order = order.Map(static value => value.GetInt32()),
             IconHref = icon.Map(static value => value.GetStringRequired()),
             Achievements =
-                achievements.Map(
-                    static values => values.GetList(static value => value.GetAchievementRef())
+                achievements.Map(static values =>
+                    values.GetList(static value => value.GetAchievementRef())
                 ),
-            Tomorrow = tomorrow.Map(
-                static values => values.GetList(static value => value.GetAchievementRef())
+            Tomorrow = tomorrow.Map(static values =>
+                values.GetList(static value => value.GetAchievementRef())
             )
         };
     }

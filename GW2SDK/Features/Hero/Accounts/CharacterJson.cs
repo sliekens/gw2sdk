@@ -160,40 +160,40 @@ internal static class CharacterJson
             Created = created.Map(static value => value.GetDateTimeOffset()),
             Deaths = deaths.Map(static value => value.GetInt32()),
             CraftingDisciplines =
-                crafting.Map(
-                    static values => values.GetList(static value => value.GetCraftingDiscipline())
+                crafting.Map(static values =>
+                    values.GetList(static value => value.GetCraftingDiscipline())
                 ),
             TitleId = title.Map(static value => value.GetInt32()),
             Backstory =
-                backstory.Map(
-                    static values => values.GetList(static value => value.GetStringRequired())
+                backstory.Map(static values =>
+                    values.GetList(static value => value.GetStringRequired())
                 ),
             WvwAbilities =
-                wvwAbilities.Map(
-                    static values => values.GetList(static value => value.GetWvwAbility())
+                wvwAbilities.Map(static values =>
+                    values.GetList(static value => value.GetWvwAbility())
                 ),
             BuildTemplatesCount = buildTabsUnlocked.Map(static value => value.GetInt32()),
             ActiveBuildTemplateNumber = activeBuildTab.Map(static value => value.GetInt32()),
             BuildTemplates =
-                buildTabs.Map(
-                    static values => values.GetList(static value => value.GetBuildTemplate())
+                buildTabs.Map(static values =>
+                    values.GetList(static value => value.GetBuildTemplate())
                 ),
             EquipmentTemplatesCount = equipmentTabsUnlocked.Map(static value => value.GetInt32()),
             ActiveEquipmentTemplateNumber =
                 activeEquipmentTab.Map(static value => value.GetInt32()),
             EquippedItems =
-                equippedItems.Map(
-                    static values => values.GetList(static value => value.GetEquipmentItem())
+                equippedItems.Map(static values =>
+                    values.GetList(static value => value.GetEquipmentItem())
                 ),
             EquipmentTemplates =
-                equipmentTabs.Map(
-                    static values => values.GetList(static value => value.GetEquipmentTemplate())
+                equipmentTabs.Map(static values =>
+                    values.GetList(static value => value.GetEquipmentTemplate())
                 ),
             Recipes =
                 recipes.Map(static values => values.GetList(static value => value.GetInt32())),
             Training =
-                training.Map(
-                    static values => values.GetList(static value => value.GetTrainingProgress())
+                training.Map(static values =>
+                    values.GetList(static value => value.GetTrainingProgress())
                 ),
             Bags = bags.Map(static values => values.GetList(static value => value.GetBag()))
         };

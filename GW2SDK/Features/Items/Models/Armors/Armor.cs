@@ -49,7 +49,7 @@ public record Armor : Item, ICombatEquipment, IUpgradable
     public IReadOnlyList<int?> UpgradeSlots =>
         this switch
         {
-            _ when Flags.NotUpgradeable => (ValueList<int?>) [],
+            _ when Flags.NotUpgradeable => [],
             _ => (ValueList<int?>) [SuffixItemId]
         };
 

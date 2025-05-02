@@ -17,7 +17,11 @@ internal sealed class ItemRewardJsonConverter : JsonConverter<ItemReward>
         return Read(json.RootElement);
     }
 
-    public override void Write(Utf8JsonWriter writer, ItemReward value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        ItemReward value,
+        JsonSerializerOptions options
+    )
     {
         Write(writer, value);
     }

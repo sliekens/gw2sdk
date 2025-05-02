@@ -88,8 +88,7 @@ public static class BulkQuery
         using DisposeSensor disposeSensor = new();
         using SemaphoreSlim limiter = new(degreeOfParallelism);
         var chunks = Chunk(keysList, chunkSize);
-        var tasks = chunks.Select(
-                async chunk =>
+        var tasks = chunks.Select(async chunk =>
                 {
                     await limiter.WaitAsync(cancellationToken).ConfigureAwait(false);
                     try

@@ -16,7 +16,11 @@ internal sealed class AchievementRefJsonConverter : JsonConverter<AchievementRef
         return Read(json.RootElement);
     }
 
-    public override void Write(Utf8JsonWriter writer, AchievementRef value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        AchievementRef value,
+        JsonSerializerOptions options
+    )
     {
         Write(writer, value);
     }
@@ -46,7 +50,7 @@ internal sealed class AchievementRefJsonConverter : JsonConverter<AchievementRef
         {
             writer.WriteNullValue();
         }
+
         writer.WriteEndObject();
     }
 }
-

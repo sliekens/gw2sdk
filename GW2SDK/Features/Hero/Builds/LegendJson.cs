@@ -53,8 +53,8 @@ internal static class LegendJson
             Swap = swap.Map(static value => value.GetInt32()),
             Heal = heal.Map(static value => value.GetInt32()),
             Elite = elite.Map(static value => value.GetInt32()),
-            Utilities = utilities.Map(
-                static values => values.GetList(static value => value.GetInt32())
+            Utilities = utilities.Map(static values =>
+                values.GetList(static value => value.GetInt32())
             )
         };
     }

@@ -6,13 +6,21 @@ namespace GuildWars2.Hero.Crafting;
 
 internal sealed class IngredientJsonConverter : JsonConverter<Ingredient>
 {
-    public override Ingredient Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override Ingredient Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         using var json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
-    public override void Write(Utf8JsonWriter writer, Ingredient value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        Ingredient value,
+        JsonSerializerOptions options
+    )
     {
         Write(writer, value);
     }

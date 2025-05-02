@@ -9,8 +9,7 @@ namespace GuildWars2.Tests.TestInfrastructure;
 internal class JsonLinesHttpMessageHandler(string path) : HttpMessageHandler
 {
     private readonly Dictionary<int, JsonElement> Entries = JsonLinesReader.Read(path)
-        .Select(
-            json =>
+        .Select(json =>
             {
                 using var document = JsonDocument.Parse(json);
                 return document.RootElement.Clone();

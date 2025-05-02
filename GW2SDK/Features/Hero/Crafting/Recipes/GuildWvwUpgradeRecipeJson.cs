@@ -82,14 +82,13 @@ internal static class GuildWvwUpgradeRecipeJson
             TimeToCraft =
                 timeToCraft.Map(static value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines =
-                disciplines.Map(
-                    static values =>
-                        values.GetList(static value => value.GetEnum<CraftingDisciplineName>())
+                disciplines.Map(static values =>
+                    values.GetList(static value => value.GetEnum<CraftingDisciplineName>())
                 ),
             Flags = flags.Map(static values => values.GetRecipeFlags()),
             Ingredients =
-                ingredients.Map(
-                    static values => values.GetList(static value => value.GetIngredient())
+                ingredients.Map(static values =>
+                    values.GetList(static value => value.GetIngredient())
                 ),
             OutputUpgradeId = outputUpgradeId.Map(static value => value.GetInt32()),
             ChatLink = chatLink.Map(static value => value.GetStringRequired())

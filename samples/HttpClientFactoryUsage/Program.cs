@@ -13,8 +13,7 @@ var appBuilder = Host.CreateApplicationBuilder(args);
 appBuilder.Services.AddHttpClient<Gw2Client>();
 
 // Configure logging
-appBuilder.Logging.AddSimpleConsole(
-    options =>
+appBuilder.Logging.AddSimpleConsole(options =>
     {
         options.ColorBehavior = LoggerColorBehavior.Enabled;
         options.SingleLine = true;

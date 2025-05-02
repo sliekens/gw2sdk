@@ -35,8 +35,8 @@ internal static class UpgradeTierJson
         {
             Name = name.Map(static value => value.GetStringRequired()),
             YaksRequired = yaksRequired.Map(static value => value.GetInt32()),
-            Upgrades = upgrades.Map(
-                static values => values.GetList(static value => value.GetUpgrade())
+            Upgrades = upgrades.Map(static values =>
+                values.GetList(static value => value.GetUpgrade())
             )
         };
     }

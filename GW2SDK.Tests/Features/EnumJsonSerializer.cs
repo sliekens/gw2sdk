@@ -17,8 +17,7 @@ public class EnumJsonSerializer
     [Fact]
     public void Throws_for_undefined_values()
     {
-        Assert.Throws<ArgumentOutOfRangeException>(
-            () =>
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
                 var product = (ProductName)69;
                 _ = JsonSerializer.Serialize(product);

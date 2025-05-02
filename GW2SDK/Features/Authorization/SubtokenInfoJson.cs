@@ -57,14 +57,13 @@ internal static class SubtokenInfoJson
             Id = id.Map(static value => value.GetStringRequired()),
             Name = name.Map(static value => value.GetStringRequired()),
             Permissions =
-                permissions.Map(
-                    static values => values.GetList(static value => value.GetEnum<Permission>())
+                permissions.Map(static values =>
+                    values.GetList(static value => value.GetEnum<Permission>())
                 ),
             ExpiresAt = expiresAt.Map(static value => value.GetDateTimeOffset()),
             IssuedAt = issuedAt.Map(static value => value.GetDateTimeOffset()),
-            Urls = urls.Map(
-                static values => values.GetList(
-                    static value => new Uri(value.GetStringRequired(), UriKind.Relative)
+            Urls = urls.Map(static values => values.GetList(static value =>
+                    new Uri(value.GetStringRequired(), UriKind.Relative)
                 )
             )
         };

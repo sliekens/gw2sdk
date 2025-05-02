@@ -33,7 +33,7 @@ internal sealed class ValueHashSet<T> : HashSet<T>, IEquatable<ValueHashSet<T>>
 
     public override bool Equals(object? obj)
     {
-        return ReferenceEquals(this, obj) || obj is ValueHashSet<T> other && Equals(other);
+        return ReferenceEquals(this, obj) || (obj is ValueHashSet<T> other && Equals(other));
     }
 
     public override int GetHashCode()

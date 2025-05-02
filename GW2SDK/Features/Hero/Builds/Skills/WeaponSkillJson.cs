@@ -133,20 +133,20 @@ internal static class WeaponSkillJson
             }
         }
 
-        var professionRestrictions = professions.Map(
-            static values => values.GetList(static value => value.GetEnum<ProfessionName>())
+        var professionRestrictions = professions.Map(static values =>
+            values.GetList(static value => value.GetEnum<ProfessionName>())
         );
         return new WeaponSkill
         {
             Id = id.Map(static value => value.GetInt32()),
             Name = name.Map(static value => value.GetStringRequired()),
             Facts =
-                facts.Map(
-                    static values => values.GetList(static value => value.GetFact(out _, out _))
+                facts.Map(static values =>
+                    values.GetList(static value => value.GetFact(out _, out _))
                 ),
             TraitedFacts =
-                traitedFacts.Map(
-                    static values => values.GetList(static value => value.GetTraitedFact())
+                traitedFacts.Map(static values =>
+                    values.GetList(static value => value.GetTraitedFact())
                 ),
             Description = description.Map(static value => value.GetStringRequired()),
             IconHref = icon.Map(static value => value.GetString()) ?? "",
@@ -165,9 +165,8 @@ internal static class WeaponSkillJson
             SpecializationId = specialization.Map(static value => value.GetInt32()),
             ChatLink = chatLink.Map(static value => value.GetStringRequired()),
             Categories =
-                categories.Map(
-                    static values =>
-                        values.GetList(static value => value.GetEnum<SkillCategoryName>())
+                categories.Map(static values =>
+                    values.GetList(static value => value.GetEnum<SkillCategoryName>())
                 )
                 ?? [],
             Cost = cost.Map(static value => value.GetInt32()),

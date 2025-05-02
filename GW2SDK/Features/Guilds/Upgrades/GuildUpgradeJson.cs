@@ -107,11 +107,10 @@ internal static class GuildUpgradeJson
             RequiredLevel = requiredLevel.Map(static value => value.GetInt32()),
             Experience = experience.Map(static value => value.GetInt32()),
             Prerequisites =
-                prerequisites.Map(
-                    static values => values.GetList(static value => value.GetInt32())
+                prerequisites.Map(static values => values.GetList(static value => value.GetInt32())
                 ),
-            Costs = costs.Map(
-                static values => values.GetList(static value => value.GetGuildUpgradeCost())
+            Costs = costs.Map(static values =>
+                values.GetList(static value => value.GetGuildUpgradeCost())
             )
         };
     }

@@ -16,7 +16,11 @@ internal sealed class AchievementGroupJsonConverter : JsonConverter<AchievementG
         return Read(json.RootElement);
     }
 
-    public override void Write(Utf8JsonWriter writer, AchievementGroup value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        AchievementGroup value,
+        JsonSerializerOptions options
+    )
     {
         Write(writer, value);
     }
@@ -46,8 +50,8 @@ internal sealed class AchievementGroupJsonConverter : JsonConverter<AchievementG
         {
             writer.WriteNumberValue(category);
         }
+
         writer.WriteEndArray();
         writer.WriteEndObject();
     }
 }
-

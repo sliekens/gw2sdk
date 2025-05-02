@@ -6,7 +6,11 @@ namespace GuildWars2.Hero.Equipment.Mounts;
 
 internal sealed class MountSkinJsonConverter : JsonConverter<MountSkin>
 {
-    public override MountSkin Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override MountSkin Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         using var jsonDocument = JsonDocument.ParseValue(ref reader);
         return Read(jsonDocument.RootElement);
@@ -24,7 +28,11 @@ internal sealed class MountSkinJsonConverter : JsonConverter<MountSkin>
         };
     }
 
-    public override void Write(Utf8JsonWriter writer, MountSkin value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        MountSkin value,
+        JsonSerializerOptions options
+    )
     {
         writer.WriteStartObject();
         writer.WriteNumber("id", value.Id);

@@ -6,7 +6,11 @@ namespace GuildWars2.Hero.Equipment.Miniatures;
 
 internal sealed class MiniatureJsonConverter : JsonConverter<Miniature>
 {
-    public override Miniature? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override Miniature? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         using var json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
@@ -25,7 +29,11 @@ internal sealed class MiniatureJsonConverter : JsonConverter<Miniature>
         };
     }
 
-    public override void Write(Utf8JsonWriter writer, Miniature value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        Miniature value,
+        JsonSerializerOptions options
+    )
     {
         writer.WriteStartObject();
         writer.WriteNumber("id", value.Id);

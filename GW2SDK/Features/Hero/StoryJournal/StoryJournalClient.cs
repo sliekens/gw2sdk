@@ -108,8 +108,7 @@ public sealed class StoryJournalClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value =
-                response.Json.RootElement.GetSet(
-                    static entry => entry.GetBackgroundStoryQuestion()
+                response.Json.RootElement.GetSet(static entry => entry.GetBackgroundStoryQuestion()
                 );
             return (value, response.Context);
         }
@@ -184,8 +183,7 @@ public sealed class StoryJournalClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value =
-                response.Json.RootElement.GetSet(
-                    static entry => entry.GetBackgroundStoryQuestion()
+                response.Json.RootElement.GetSet(static entry => entry.GetBackgroundStoryQuestion()
                 );
             return (value, response.Context);
         }
@@ -217,8 +215,7 @@ public sealed class StoryJournalClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value =
-                response.Json.RootElement.GetSet(
-                    static entry => entry.GetBackgroundStoryQuestion()
+                response.Json.RootElement.GetSet(static entry => entry.GetBackgroundStoryQuestion()
                 );
             return (value, response.Context);
         }

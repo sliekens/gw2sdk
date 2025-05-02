@@ -15,7 +15,11 @@ internal sealed class LevelRequirementJsonConverter : JsonConverter<LevelRequire
         return Read(json.RootElement);
     }
 
-    public override void Write(Utf8JsonWriter writer, LevelRequirement value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        LevelRequirement value,
+        JsonSerializerOptions options
+    )
     {
         Write(writer, value);
     }
@@ -37,5 +41,3 @@ internal sealed class LevelRequirementJsonConverter : JsonConverter<LevelRequire
         writer.WriteEndObject();
     }
 }
-
-

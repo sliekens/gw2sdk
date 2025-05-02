@@ -65,8 +65,7 @@ internal static class SeasonJson
             Active = active.Map(static value => value.GetBoolean()),
             Divisions =
                 divisions.Map(static values => values.GetList(static value => value.GetDivision())),
-            Ranks = ranks.Map(
-                static values => values.GetList(static value => value.GetSkillBadge())
+            Ranks = ranks.Map(static values => values.GetList(static value => value.GetSkillBadge())
             ),
             Leaderboards = leaderboards.Map(static value => value.GetLeaderboardGroup())
         };

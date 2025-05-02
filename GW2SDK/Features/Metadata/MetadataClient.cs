@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
-using GuildWars2.Http;
+﻿using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Metadata;

@@ -26,10 +26,8 @@ public class DesignedForInheritanceTest(AssemblyFixture fixture) : IClassFixture
                     return;
                 }
 
-                if (Enumerable.Any(
-                        type.GetCustomAttributes(),
-                        att => att.GetType().Name == "InheritableAttribute"
-                    ))
+                if (type.GetCustomAttributes()
+                    .Any(att => att.GetType().Name == "InheritableAttribute"))
                 {
                     return;
                 }
@@ -45,9 +43,8 @@ public class DesignedForInheritanceTest(AssemblyFixture fixture) : IClassFixture
     public void Every_exported_class_with_InheritableAttribute_has_a_subtype()
     {
         var classes = fixture.Assembly.ExportedTypes.Where(type => type.IsClass).ToList();
-        var inheritableClasses = classes.Where(
-                type => type.GetCustomAttributes()
-                    .Any(att => att.GetType().Name == "InheritableAttribute")
+        var inheritableClasses = classes.Where(type =>
+                type.GetCustomAttributes().Any(att => att.GetType().Name == "InheritableAttribute")
             )
             .ToList();
         Assert.All(

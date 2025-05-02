@@ -23,8 +23,8 @@ internal static class SpecialObjectivesProgressJson
 
         return new SpecialObjectivesProgress
         {
-            Objectives = objectives.Map(
-                static values => values.GetList(static value => value.GetObjectiveProgress())
+            Objectives = objectives.Map(static values =>
+                values.GetList(static value => value.GetObjectiveProgress())
             )
         };
     }

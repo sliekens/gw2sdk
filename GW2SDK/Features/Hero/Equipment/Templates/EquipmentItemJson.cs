@@ -117,11 +117,9 @@ internal static class EquipmentItemJson
             Location = location.Map(static value => value.GetEnum<EquipmentLocation>()),
             TemplateNumbers =
                 tabs.Map(static values => values.GetList(static value => value.GetInt32())) ?? [],
-            DyeColorIds = dyes.Map(
-                    static values =>
-                        values.GetList(
-                            static value => value.GetNullableInt32() ?? DyeColor.DyeRemoverId
-                        )
+            DyeColorIds = dyes.Map(static values =>
+                    values.GetList(static value => value.GetNullableInt32() ?? DyeColor.DyeRemoverId
+                    )
                 )
                 ?? []
         };

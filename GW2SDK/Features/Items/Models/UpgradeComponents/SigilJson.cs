@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-using GuildWars2.Hero;
 using GuildWars2.Json;
 
 namespace GuildWars2.Items;
@@ -152,8 +151,8 @@ internal static class SigilJson
             Rarity = rarity.Map(static value => value.GetEnum<Rarity>()),
             VendorValue = vendorValue.Map(static value => value.GetInt32()),
             GameTypes =
-                gameTypes.Map(
-                    static values => values.GetList(static value => value.GetEnum<GameType>())
+                gameTypes.Map(static values =>
+                    values.GetList(static value => value.GetEnum<GameType>())
                 ),
             Flags = flags.Map(static values => values.GetItemFlags()),
             Restrictions = restrictions.Map(static value => value.GetItemRestriction()),

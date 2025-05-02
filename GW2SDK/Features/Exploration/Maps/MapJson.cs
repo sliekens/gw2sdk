@@ -109,37 +109,30 @@ internal static class MapJson
             ContinentRectangle =
                 continentRectangle.Map(static value => value.GetContinentRectangle()),
             PointsOfInterest =
-                pointsOfInterest.Map(
-                    static value =>
-                        value.GetMap(static entry => entry.GetPointOfInterest())
-                            .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
+                pointsOfInterest.Map(static value =>
+                    value.GetMap(static entry => entry.GetPointOfInterest())
+                        .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
                 ),
             GodShrines =
-                godShrines.Map(
-                    static values => values.GetList(static value => value.GetGodShrine())
+                godShrines.Map(static values => values.GetList(static value => value.GetGodShrine())
                 ),
             Hearts =
-                tasks.Map(
-                    static value =>
-                        value.GetMap(static entry => entry.GetHeart())
-                            .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
+                tasks.Map(static value => value.GetMap(static entry => entry.GetHeart())
+                    .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
                 ),
             HeroChallenges =
-                skillChallenges.Map(
-                    static values => values.GetList(static value => value.GetHeroChallenge())
+                skillChallenges.Map(static values =>
+                    values.GetList(static value => value.GetHeroChallenge())
                 ),
             Sectors =
-                sectors.Map(
-                    static value =>
-                        value.GetMap(static entry => entry.GetSector())
-                            .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
+                sectors.Map(static value => value.GetMap(static entry => entry.GetSector())
+                    .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
                 ),
             Adventures =
-                adventures.Map(
-                    static values => values.GetList(static value => value.GetAdventure())
+                adventures.Map(static values => values.GetList(static value => value.GetAdventure())
                 ),
-            MasteryInsights = masteryPoints.Map(
-                static values => values.GetList(static value => value.GetMasteryInsight())
+            MasteryInsights = masteryPoints.Map(static values =>
+                values.GetList(static value => value.GetMasteryInsight())
             )
         };
     }

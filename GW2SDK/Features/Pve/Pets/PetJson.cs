@@ -47,8 +47,7 @@ internal static class PetJson
             Name = name.Map(static value => value.GetStringRequired()),
             Description = description.Map(static value => value.GetStringRequired()),
             IconHref = icon.Map(static value => value.GetStringRequired()),
-            Skills = skills.Map(
-                static values => values.GetList(static value => value.GetPetSkill())
+            Skills = skills.Map(static values => values.GetList(static value => value.GetPetSkill())
             )
         };
     }

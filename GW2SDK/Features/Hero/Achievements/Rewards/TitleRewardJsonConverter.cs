@@ -17,17 +17,18 @@ internal sealed class TitleRewardJsonConverter : JsonConverter<TitleReward>
         return Read(json.RootElement);
     }
 
-    public override void Write(Utf8JsonWriter writer, TitleReward value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        TitleReward value,
+        JsonSerializerOptions options
+    )
     {
         Write(writer, value);
     }
 
     public static TitleReward Read(JsonElement json)
     {
-        return new TitleReward
-        {
-            Id = json.GetProperty("id").GetInt32()
-        };
+        return new TitleReward { Id = json.GetProperty("id").GetInt32() };
     }
 
     public static void Write(Utf8JsonWriter writer, TitleReward value)

@@ -65,8 +65,8 @@ internal static class MistChampionJson
             Stats = stats.Map(static value => value.GetMistChampionStats()),
             OverlayImageHref = overlay.Map(static value => value.GetStringRequired()),
             UnderlayImageHref = underlay.Map(static value => value.GetStringRequired()),
-            Skins = skins.Map(
-                static values => values.GetList(static value => value.GetMistChampionSkin())
+            Skins = skins.Map(static values =>
+                values.GetList(static value => value.GetMistChampionSkin())
             )
         };
     }

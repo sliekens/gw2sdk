@@ -47,8 +47,8 @@ internal static class MountJson
             Name = name.Map(static value => value.GetStringRequired()),
             DefaultSkinId = defaultSkin.Map(static value => value.GetInt32()),
             SkinIds = skins.Map(static values => values.GetList(static value => value.GetInt32())),
-            Skills = skills.Map(
-                static values => values.GetList(static value => value.GetSkillReference())
+            Skills = skills.Map(static values =>
+                values.GetList(static value => value.GetSkillReference())
             )
         };
     }

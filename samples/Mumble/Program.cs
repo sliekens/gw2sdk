@@ -16,7 +16,7 @@ if (!GameLink.IsSupported())
 // For example, at most once every second.
 // Default: no limit, every change in the game state
 //   will be available immediately.
-TimeSpan refreshInterval = GameLink.MinimumRefreshInterval;
+var refreshInterval = GameLink.MinimumRefreshInterval;
 
 // Open the game link with the chosen refresh interval.
 // GameLink implements IDiposable and IAsyncDisposable,
@@ -31,8 +31,7 @@ host.Services.AddHttpClient<Gw2Client>();
 host.Services.AddHostedService<DataService>();
 host.Services.AddHostedService<GameListener>();
 host.Services.AddSingleton<ReferenceData>();
-host.Logging.AddSimpleConsole(
-    options =>
+host.Logging.AddSimpleConsole(options =>
     {
         options.SingleLine = true;
         options.TimestampFormat = "HH:mm:ss.fff ";

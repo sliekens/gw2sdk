@@ -65,16 +65,16 @@ internal sealed class ValueDictionary<TKey, TValue> : Dictionary<TKey, TValue>,
         if (other is null) return false;
         if (ReferenceEquals(this, other)) return true;
         return Count == other.Count
-            && this.All(
-                pair => other.TryGetValue(pair.Key, out var otherValue)
-                    && EqualityComparer<TValue>.Default.Equals(pair.Value, otherValue)
+            && this.All(pair =>
+                other.TryGetValue(pair.Key, out var otherValue)
+                && EqualityComparer<TValue>.Default.Equals(pair.Value, otherValue)
             );
     }
 
     public override bool Equals(object? obj)
     {
         return ReferenceEquals(this, obj)
-            || obj is ValueDictionary<TKey, TValue> other && Equals(other);
+            || (obj is ValueDictionary<TKey, TValue> other && Equals(other));
     }
 
     public override int GetHashCode()

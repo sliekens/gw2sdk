@@ -20,12 +20,14 @@ public class LearnedCraftingDisciplinesByName
         );
 
         Assert.NotNull(context);
-        Assert.All(actual.Disciplines,
+        Assert.All(
+            actual.Disciplines,
             entry =>
             {
                 Assert.True(entry.Discipline.IsDefined());
                 Assert.True(entry.Rating > 0);
-            });
+            }
+        );
 
         var json = JsonSerializer.Serialize(actual);
         var roundtrip = JsonSerializer.Deserialize<LearnedCraftingDisciplines>(json);

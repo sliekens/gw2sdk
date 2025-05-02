@@ -50,7 +50,7 @@ public sealed class QueryBuilder : IEnumerable
                 {
                     var delimiter = position == 0 ? '?' : '&';
                     buffer[position++] = delimiter;
-                   
+
                     key.CopyTo(buffer[position..]);
                     position += key.Length;
 

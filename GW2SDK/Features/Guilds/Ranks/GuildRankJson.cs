@@ -41,8 +41,8 @@ internal static class GuildRankJson
             Id = id.Map(static value => value.GetStringRequired()),
             Order = order.Map(static value => value.GetInt32()),
             Permissions =
-                permissions.Map(
-                    static values => values.GetList(static value => value.GetStringRequired())
+                permissions.Map(static values =>
+                    values.GetList(static value => value.GetStringRequired())
                 ),
             IconHref = iconHref.Map(static value => value.GetStringRequired())
         };

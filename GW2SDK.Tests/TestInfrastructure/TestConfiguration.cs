@@ -81,6 +81,8 @@ public static class TestConfiguration
         new()
         {
             Token = Configuration["GuildLeader:Token"]
-                ?? throw new InvalidOperationException("Missing GuildLeader:Token.")
+                ?? throw new InvalidOperationException(
+                    "$XunitDynamicSkip$Missing GuildLeader:Token."
+                )
         };
 }

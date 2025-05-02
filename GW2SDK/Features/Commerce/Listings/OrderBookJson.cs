@@ -35,11 +35,10 @@ internal static class OrderBookJson
         {
             Id = id.Map(static value => value.GetInt32()),
             Demand =
-                demand.Map(
-                    static values => values.GetList(static value => value.GetOrderBookLine())
+                demand.Map(static values => values.GetList(static value => value.GetOrderBookLine())
                 ),
-            Supply = supply.Map(
-                static values => values.GetList(static value => value.GetOrderBookLine())
+            Supply = supply.Map(static values =>
+                values.GetList(static value => value.GetOrderBookLine())
             )
         };
     }

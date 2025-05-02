@@ -50,11 +50,13 @@ public readonly record struct Context
     public readonly float PlayerY;
 
     /// <summary>The current X position of the center of the world map or compass in the continent coordinate system (inches).</summary>
-    /// <remarks>This value can change by player movement as the compass is centered on the player, or by interacting with the compass or world map to zoom and pan. The value is not updated in competitive game types</remarks>
+    /// <remarks>This value can change by player movement as the compass is centered on the player, or by interacting with the
+    /// compass or world map to zoom and pan. The value is not updated in competitive game types</remarks>
     public readonly float MapCenterX;
 
     /// <summary>The current Y position of the center of the world map or compass in the continent coordinate system (inches).</summary>
-    /// <remarks>This value can change by player movement as the compass is centered on the player, or by interacting with the compass or world map to zoom and pan. The value is not updated in competitive game types</remarks>
+    /// <remarks>This value can change by player movement as the compass is centered on the player, or by interacting with the
+    /// compass or world map to zoom and pan. The value is not updated in competitive game types</remarks>
     public readonly float MapCenterY;
 
     /// <summary>The zoom level of the world map when the map is open, or the compass otherwise.</summary>

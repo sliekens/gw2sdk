@@ -6,7 +6,11 @@ namespace GuildWars2.Hero.Equipment.Mounts;
 
 internal sealed class MountJsonConverter : JsonConverter<Mount>
 {
-    public override Mount? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override Mount? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         using var json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);

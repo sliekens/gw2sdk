@@ -25,7 +25,11 @@ internal sealed class AchievementBitJsonConverter : JsonConverter<AchievementBit
         return Read(json.RootElement);
     }
 
-    public override void Write(Utf8JsonWriter writer, AchievementBit value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        AchievementBit value,
+        JsonSerializerOptions options
+    )
     {
         Write(writer, value);
     }

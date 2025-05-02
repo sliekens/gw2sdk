@@ -29,8 +29,8 @@ internal static class DungeonJson
         return new Dungeon
         {
             Id = id.Map(static value => value.GetStringRequired()),
-            Paths = paths.Map(
-                static values => values.GetList(static value => value.GetDungeonPath())
+            Paths = paths.Map(static values =>
+                values.GetList(static value => value.GetDungeonPath())
             )
         };
     }

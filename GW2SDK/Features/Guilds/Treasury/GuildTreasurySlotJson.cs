@@ -35,8 +35,8 @@ internal static class GuildTreasurySlotJson
         {
             ItemId = itemId.Map(static value => value.GetInt32()),
             Count = count.Map(static value => value.GetInt32()),
-            CountNeededForUpgrades = countNeededForUpgrade.Map(
-                static values => values.GetList(static value => value.GetCountNeededForUpgrade())
+            CountNeededForUpgrades = countNeededForUpgrade.Map(static values =>
+                values.GetList(static value => value.GetCountNeededForUpgrade())
             )
         };
     }

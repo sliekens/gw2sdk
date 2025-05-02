@@ -79,17 +79,18 @@ internal static class ProfessionJson
             IconHref = icon.Map(static value => value.GetStringRequired()),
             BigIconHref = iconBig.Map(static value => value.GetStringRequired()),
             SpecializationIds =
-                specializations.Map(
-                    static values => values.GetList(static value => value.GetInt32())
+                specializations.Map(static values =>
+                    values.GetList(static value => value.GetInt32())
                 ),
             Weapons =
-                weapons.Map(
-                    static value => value.GetMap(GetWeaponType, item => item.GetWeaponProficiency())
+                weapons.Map(static value => value.GetMap(
+                        GetWeaponType,
+                        item => item.GetWeaponProficiency()
+                    )
                 ),
             Flags = flags.Map(static values => values.GetProfessionFlags()),
             Skills =
-                skills.Map(
-                    static values => values.GetList(static value => value.GetSkillSummary())
+                skills.Map(static values => values.GetList(static value => value.GetSkillSummary())
                 ),
             Training =
                 training.Map(static values => values.GetList(static value => value.GetTraining())),

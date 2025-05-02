@@ -27,8 +27,11 @@ internal sealed class TitleJsonConverter : JsonConverter<Title>
         {
             Id = json.GetProperty("id").GetInt32(),
             Name = json.GetProperty("name").GetStringRequired(),
-            Achievements = json.GetProperty("achievements").GetNullableList(achievement => achievement.GetInt32()),
-            AchievementPointsRequired = json.GetProperty("achievement_points_required").GetNullableInt32()
+            Achievements =
+                json.GetProperty("achievements")
+                    .GetNullableList(achievement => achievement.GetInt32()),
+            AchievementPointsRequired =
+                json.GetProperty("achievement_points_required").GetNullableInt32()
         };
     }
 
@@ -45,6 +48,7 @@ internal sealed class TitleJsonConverter : JsonConverter<Title>
             {
                 writer.WriteNumberValue(achievement);
             }
+
             writer.WriteEndArray();
         }
         else
@@ -61,9 +65,7 @@ internal sealed class TitleJsonConverter : JsonConverter<Title>
         {
             writer.WriteNullValue();
         }
+
         writer.WriteEndObject();
     }
 }
-
-
-

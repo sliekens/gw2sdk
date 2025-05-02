@@ -32,8 +32,7 @@ public class BulkQueryTest
             chunkSize: chunkSize,
             cancellationToken: cancellationTokenSource.Token
         );
-        var reason = await Assert.ThrowsAsync<OperationCanceledException>(
-            async () =>
+        var reason = await Assert.ThrowsAsync<OperationCanceledException>(async () =>
             {
                 await foreach (var _ in producer.WithCancellation(cancellationTokenSource.Token))
                 {

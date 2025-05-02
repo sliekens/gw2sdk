@@ -35,8 +35,8 @@ internal static class AttributeCombinationJson
         {
             Id = id.Map(static value => value.GetInt32()),
             Name = name.Map(static value => value.GetStringRequired()),
-            Attributes = attributes.Map(
-                static values => values.GetList(static value => value.GetAttribute())
+            Attributes = attributes.Map(static values =>
+                values.GetList(static value => value.GetAttribute())
             )
         };
     }

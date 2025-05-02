@@ -34,6 +34,7 @@ internal sealed class RecipeFlagsJsonConverter : JsonConverter<RecipeFlags>
             Other = json.GetProperty("other").GetList(static value => value.GetStringRequired())
         };
     }
+
     public static void Write(Utf8JsonWriter writer, RecipeFlags value)
     {
         writer.WriteStartObject();
@@ -44,6 +45,7 @@ internal sealed class RecipeFlagsJsonConverter : JsonConverter<RecipeFlags>
         {
             writer.WriteStringValue(other);
         }
+
         writer.WriteEndArray();
         writer.WriteEndObject();
     }

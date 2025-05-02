@@ -59,8 +59,8 @@ internal static class MasteryTrackJson
             Order = order.Map(static value => value.GetInt32()),
             BackgroundHref = background.Map(static value => value.GetStringRequired()),
             Region = region.Map(static value => value.GetEnum<MasteryRegionName>()),
-            Masteries = levels.Map(
-                static values => values.GetList(static value => value.GetMastery())
+            Masteries = levels.Map(static values =>
+                values.GetList(static value => value.GetMastery())
             )
         };
     }

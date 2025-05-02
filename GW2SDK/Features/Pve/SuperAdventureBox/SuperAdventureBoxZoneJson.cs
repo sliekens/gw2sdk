@@ -39,11 +39,10 @@ internal static class SuperAdventureBoxZoneJson
         return new SuperAdventureBoxZone
         {
             Id = id.Map(static value => value.GetInt32()),
-            Mode = mode.Map(
-                static value =>
-                    value.ValueEquals("infantile") // Infantile was renamed to Exploration
-                        ? SuperAdventureBoxMode.Exploration
-                        : value.GetEnum<SuperAdventureBoxMode>()
+            Mode = mode.Map(static value =>
+                value.ValueEquals("infantile") // Infantile was renamed to Exploration
+                    ? SuperAdventureBoxMode.Exploration
+                    : value.GetEnum<SuperAdventureBoxMode>()
             ),
             World = world.Map(static value => value.GetInt32()),
             Zone = zone.Map(static value => value.GetInt32())

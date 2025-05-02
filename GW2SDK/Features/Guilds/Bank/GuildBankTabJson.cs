@@ -47,8 +47,8 @@ internal static class GuildBankTabJson
             Size = size.Map(static value => value.GetInt32()),
             Coins = coins.Map(static value => value.GetInt32()),
             Note = note.Map(static value => value.GetString()) ?? "",
-            Inventory = inventory.Map(
-                static values => values.GetList(static value => value.GetGuildBankSlot())
+            Inventory = inventory.Map(static values =>
+                values.GetList(static value => value.GetGuildBankSlot())
             )
         };
     }

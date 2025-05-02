@@ -47,8 +47,9 @@ internal static class StoryStepJson
             Name = name.Map(static value => value.GetStringRequired()),
             Level = level.Map(static value => value.GetInt32()),
             StoryId = story.Map(static value => value.GetInt32()),
-            Objectives =
-                goals.Map(static values => values.GetList(static value => value.GetObjective()))
+            Objectives = goals.Map(static values =>
+                values.GetList(static value => value.GetObjective())
+            )
         };
     }
 }

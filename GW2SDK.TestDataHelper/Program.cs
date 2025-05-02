@@ -16,14 +16,12 @@ var appBuilder = Host.CreateApplicationBuilder(args);
 
 appBuilder.Logging.ClearProviders();
 
-var httpClientBuilder = appBuilder.Services.AddHttpClient<Gw2Client>(
-        static httpClient =>
+var httpClientBuilder = appBuilder.Services.AddHttpClient<Gw2Client>(static httpClient =>
         {
             httpClient.Timeout = TimeSpan.FromSeconds(600);
         }
     )
-    .ConfigurePrimaryHttpMessageHandler(
-        () => new SocketsHttpHandler
+    .ConfigurePrimaryHttpMessageHandler(() => new SocketsHttpHandler
         {
             // Creating a new connection shouldn't take more than 10 seconds
             ConnectTimeout = TimeSpan.FromSeconds(10),
@@ -55,8 +53,7 @@ var app = appBuilder.Build();
 try
 {
     await AnsiConsole.Progress()
-        .StartAsync(
-            async ctx =>
+        .StartAsync(async ctx =>
             {
                 var achievements = ctx.AddTask("Downloading achievements.");
                 await using (var file =

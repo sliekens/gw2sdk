@@ -6,7 +6,11 @@ namespace GuildWars2.Hero.Equipment.Skiffs;
 
 internal sealed class SkiffSkinJsonConverter : JsonConverter<SkiffSkin>
 {
-    public override SkiffSkin? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override SkiffSkin? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         using var json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
@@ -23,7 +27,11 @@ internal sealed class SkiffSkinJsonConverter : JsonConverter<SkiffSkin>
         };
     }
 
-    public override void Write(Utf8JsonWriter writer, SkiffSkin value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        SkiffSkin value,
+        JsonSerializerOptions options
+    )
     {
         writer.WriteStartObject();
         writer.WriteNumber("id", value.Id);
@@ -34,6 +42,7 @@ internal sealed class SkiffSkinJsonConverter : JsonConverter<SkiffSkin>
         {
             DyeSlotJsonConverter.Write(writer, dyeSlot);
         }
+
         writer.WriteEndArray();
         writer.WriteEndObject();
     }

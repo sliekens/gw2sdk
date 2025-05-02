@@ -16,7 +16,11 @@ internal sealed class AchievementCategoryJsonConverter : JsonConverter<Achieveme
         return Read(json.RootElement);
     }
 
-    public override void Write(Utf8JsonWriter writer, AchievementCategory value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        AchievementCategory value,
+        JsonSerializerOptions options
+    )
     {
         Write(writer, value);
     }
@@ -30,8 +34,10 @@ internal sealed class AchievementCategoryJsonConverter : JsonConverter<Achieveme
             Description = json.GetProperty("description").GetStringRequired(),
             Order = json.GetProperty("order").GetInt32(),
             IconHref = json.GetProperty("icon").GetStringRequired(),
-            Achievements = json.GetProperty("achievements").GetList(AchievementRefJsonConverter.Read),
-            Tomorrow = json.GetProperty("tomorrow").GetNullableList(AchievementRefJsonConverter.Read)
+            Achievements = json.GetProperty("achievements")
+                .GetList(AchievementRefJsonConverter.Read),
+            Tomorrow = json.GetProperty("tomorrow")
+                .GetNullableList(AchievementRefJsonConverter.Read)
         };
     }
 
@@ -49,6 +55,7 @@ internal sealed class AchievementCategoryJsonConverter : JsonConverter<Achieveme
         {
             AchievementRefJsonConverter.Write(writer, achievement);
         }
+
         writer.WriteEndArray();
         writer.WritePropertyName("tomorrow");
         if (value.Tomorrow != null)
@@ -58,6 +65,7 @@ internal sealed class AchievementCategoryJsonConverter : JsonConverter<Achieveme
             {
                 AchievementRefJsonConverter.Write(writer, achievement);
             }
+
             writer.WriteEndArray();
         }
         else
@@ -68,4 +76,3 @@ internal sealed class AchievementCategoryJsonConverter : JsonConverter<Achieveme
         writer.WriteEndObject();
     }
 }
-

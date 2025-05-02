@@ -23,8 +23,8 @@ internal static class LearnedCraftingDisciplinesJson
 
         return new LearnedCraftingDisciplines
         {
-            Disciplines = crafting.Map(
-                static values => values.GetList(static value => value.GetCraftingDiscipline())
+            Disciplines = crafting.Map(static values =>
+                values.GetList(static value => value.GetCraftingDiscipline())
             )
         };
     }

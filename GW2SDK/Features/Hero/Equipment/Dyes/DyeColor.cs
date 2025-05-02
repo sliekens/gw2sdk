@@ -58,7 +58,11 @@ public sealed record DyeColor
 
 internal sealed class DyeColorJsonConverter : JsonConverter<DyeColor>
 {
-    public override DyeColor? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override DyeColor? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         using var document = JsonDocument.ParseValue(ref reader);
         var json = document.RootElement;

@@ -29,8 +29,8 @@ internal static class EmblemForegroundJson
         return new EmblemForeground
         {
             Id = id.Map(static value => value.GetInt32()),
-            Layers = layers.Map(
-                static values => values.GetList(static value => value.GetStringRequired())
+            Layers = layers.Map(static values =>
+                values.GetList(static value => value.GetStringRequired())
             )
         };
     }

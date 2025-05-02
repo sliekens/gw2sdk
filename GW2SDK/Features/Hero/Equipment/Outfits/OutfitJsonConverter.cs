@@ -6,7 +6,11 @@ namespace GuildWars2.Hero.Equipment.Outfits;
 
 internal sealed class OutfitJsonConverter : JsonConverter<Outfit>
 {
-    public override Outfit Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override Outfit Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         using var jsonDocument = JsonDocument.ParseValue(ref reader);
         return Read(jsonDocument.RootElement);

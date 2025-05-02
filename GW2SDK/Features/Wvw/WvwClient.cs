@@ -81,8 +81,7 @@ public sealed class WvwClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value = response.Json.RootElement.GetMap(static value => value.GetStringRequired())
-                .Select(
-                    map => new WvwGuild
+                .Select(map => new WvwGuild
                     {
                         Name = map.Key,
                         TeamId = map.Value

@@ -181,7 +181,10 @@ internal sealed class WeaponSkinJsonConverter : JsonConverter<WeaponSkin>
                 break;
             default:
                 writer.WriteStartObject();
-                writer.WriteString(EquipmentSkinJsonConverter.DiscriminatorName, DiscriminatorValue);
+                writer.WriteString(
+                    EquipmentSkinJsonConverter.DiscriminatorName,
+                    DiscriminatorValue
+                );
                 WriteCommonProperties(writer, value);
                 writer.WriteEndObject();
                 break;

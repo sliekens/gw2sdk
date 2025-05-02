@@ -21,16 +21,16 @@ public class RequireAssignmentTest(AssemblyFixture fixture) : IClassFixture<Asse
 
         static bool IsCompliant(PropertyInfo actual)
         {
-            if (actual.CustomAttributes.Any(
-                    annotation => annotation.AttributeType == typeof(ObsoleteAttribute)
+            if (actual.CustomAttributes.Any(annotation =>
+                    annotation.AttributeType == typeof(ObsoleteAttribute)
                 ))
             {
                 return true;
             }
 
             return !actual.CanWrite
-                || actual.CustomAttributes.Any(
-                    annotation => annotation.AttributeType.Name == "RequiredMemberAttribute"
+                || actual.CustomAttributes.Any(annotation =>
+                    annotation.AttributeType.Name == "RequiredMemberAttribute"
                 );
         }
     }

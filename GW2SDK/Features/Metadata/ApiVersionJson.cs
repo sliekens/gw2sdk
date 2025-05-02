@@ -34,14 +34,13 @@ internal static class ApiVersionJson
         return new ApiVersion
         {
             Languages =
-                languages.Map(
-                    static values => values.GetList(static value => value.GetStringRequired())
+                languages.Map(static values =>
+                    values.GetList(static value => value.GetStringRequired())
                 ),
             Routes =
                 routes.Map(static values => values.GetList(static value => value.GetRoute())),
-            SchemaVersions =
-                schemaVersions.Map(
-                    static values => values.GetList(static value => value.GetSchema())
+            SchemaVersions = schemaVersions.Map(static values =>
+                    values.GetList(static value => value.GetSchema())
                 )
                 ?? []
         };

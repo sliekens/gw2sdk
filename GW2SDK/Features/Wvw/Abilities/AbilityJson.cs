@@ -47,8 +47,8 @@ internal static class AbilityJson
             Name = name.Map(static value => value.GetStringRequired()),
             Description = description.Map(static value => value.GetStringRequired()),
             IconHref = icon.Map(static value => value.GetStringRequired()),
-            Ranks = ranks.Map(
-                static values => values.GetList(static value => value.GetAbilityRank())
+            Ranks = ranks.Map(static values =>
+                values.GetList(static value => value.GetAbilityRank())
             )
         };
     }

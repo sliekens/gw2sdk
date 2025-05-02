@@ -25,7 +25,11 @@ internal sealed class AchievementRewardJsonConverter : JsonConverter<Achievement
         return Read(json.RootElement);
     }
 
-    public override void Write(Utf8JsonWriter writer, AchievementReward value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        AchievementReward value,
+        JsonSerializerOptions options
+    )
     {
         Write(writer, value);
     }

@@ -47,8 +47,7 @@ internal static class MatchScoresJson
             Scores = scores.Map(static value => value.GetDistribution()),
             VictoryPoints = victoryPoints.Map(static value => value.GetDistribution()),
             Skirmishes =
-                skirmishes.Map(
-                    static values => values.GetList(static value => value.GetSkirmish())
+                skirmishes.Map(static values => values.GetList(static value => value.GetSkirmish())
                 ),
             Maps = maps.Map(static values => values.GetList(static value => value.GetMapSummary()))
         };

@@ -17,17 +17,18 @@ internal sealed class CoinsRewardJsonConverter : JsonConverter<CoinsReward>
         return Read(json.RootElement);
     }
 
-    public override void Write(Utf8JsonWriter writer, CoinsReward value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        CoinsReward value,
+        JsonSerializerOptions options
+    )
     {
         Write(writer, value);
     }
 
     public static CoinsReward Read(JsonElement json)
     {
-        return new CoinsReward
-        {
-            Coins = json.GetProperty("coins").GetInt32()
-        };
+        return new CoinsReward { Coins = json.GetProperty("coins").GetInt32() };
     }
 
     public static void Write(Utf8JsonWriter writer, CoinsReward value)

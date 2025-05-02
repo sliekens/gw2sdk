@@ -75,8 +75,7 @@ internal static class StoryJson
             Timeline = timeline.Map(static value => value.GetStringRequired()),
             Level = level.Map(static value => value.GetInt32()),
             Races =
-                races.Map(
-                    static values => values.GetList(static value => value.GetEnum<RaceName>())
+                races.Map(static values => values.GetList(static value => value.GetEnum<RaceName>())
                 )
                 ?? GetValues<RaceName>(),
             Order = order.Map(static value => value.GetInt32()),

@@ -25,7 +25,11 @@ internal sealed class AchievementJsonConverter : JsonConverter<Achievement>
         return Read(json.RootElement);
     }
 
-    public override void Write(Utf8JsonWriter writer, Achievement value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        Achievement value,
+        JsonSerializerOptions options
+    )
     {
         Write(writer, value);
     }
@@ -51,9 +55,11 @@ internal sealed class AchievementJsonConverter : JsonConverter<Achievement>
             LockedText = json.GetProperty("locked_text").GetStringRequired(),
             Flags = AchievementFlagsJsonConverter.Read(json.GetProperty("flags")),
             Tiers = json.GetProperty("tiers").GetList(AchievementTierJsonConverter.Read),
-            Rewards = json.GetProperty("rewards").GetNullableList(AchievementRewardJsonConverter.Read),
+            Rewards = json.GetProperty("rewards")
+                .GetNullableList(AchievementRewardJsonConverter.Read),
             Bits = json.GetProperty("bits").GetNullableList(AchievementBitJsonConverter.Read),
-            Prerequisites = json.GetProperty("prerequisites").GetList(prerequisite => prerequisite.GetInt32()),
+            Prerequisites =
+                json.GetProperty("prerequisites").GetList(prerequisite => prerequisite.GetInt32()),
             PointCap = json.GetProperty("point_cap").GetNullableInt32()
         };
     }
@@ -90,6 +96,7 @@ internal sealed class AchievementJsonConverter : JsonConverter<Achievement>
         {
             AchievementTierJsonConverter.Write(writer, tier);
         }
+
         writer.WriteEndArray();
         writer.WritePropertyName("rewards");
         if (value.Rewards != null)
@@ -99,6 +106,7 @@ internal sealed class AchievementJsonConverter : JsonConverter<Achievement>
             {
                 AchievementRewardJsonConverter.Write(writer, reward);
             }
+
             writer.WriteEndArray();
         }
         else
@@ -114,6 +122,7 @@ internal sealed class AchievementJsonConverter : JsonConverter<Achievement>
             {
                 AchievementBitJsonConverter.Write(writer, bit);
             }
+
             writer.WriteEndArray();
         }
         else
@@ -127,6 +136,7 @@ internal sealed class AchievementJsonConverter : JsonConverter<Achievement>
         {
             writer.WriteNumberValue(prerequisite);
         }
+
         writer.WriteEndArray();
 
         writer.WritePropertyName("point_cap");
@@ -140,5 +150,3 @@ internal sealed class AchievementJsonConverter : JsonConverter<Achievement>
         }
     }
 }
-
-

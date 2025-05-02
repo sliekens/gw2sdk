@@ -19,8 +19,7 @@ internal class Program
     {
         var appBuilder = Host.CreateApplicationBuilder(args);
 
-        var httpClientBuilder = appBuilder.Services.AddHttpClient<Gw2Client>(
-            static httpClient =>
+        var httpClientBuilder = appBuilder.Services.AddHttpClient<Gw2Client>(static httpClient =>
             {
                 // The default request timeout is 100 seconds, after which OperationCanceledException is thrown
                 // Consider using a Polly timeout strategy instead, and set the HttpClient.Timeout to InfiniteTimeSpan

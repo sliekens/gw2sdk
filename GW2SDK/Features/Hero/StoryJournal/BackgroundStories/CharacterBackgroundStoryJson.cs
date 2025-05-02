@@ -23,8 +23,8 @@ internal static class CharacterBackgroundStoryJson
 
         return new CharacterBackgroundStory
         {
-            AnswerIds = backstory.Map(
-                static values => values.GetList(static value => value.GetStringRequired())
+            AnswerIds = backstory.Map(static values =>
+                values.GetList(static value => value.GetStringRequired())
             )
         };
     }

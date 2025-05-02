@@ -41,8 +41,8 @@ internal static class TrainingJson
             Id = id.Map(static value => value.GetInt32()),
             Category = category.Map(static value => value.GetEnum<TrainingCategory>()),
             Name = name.Map(static value => value.GetStringRequired()),
-            Track = track.Map(
-                static values => values.GetList(static value => value.GetTrainingObjective())
+            Track = track.Map(static values =>
+                values.GetList(static value => value.GetTrainingObjective())
             )
         };
     }

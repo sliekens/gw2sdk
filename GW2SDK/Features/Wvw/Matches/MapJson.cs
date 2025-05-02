@@ -60,8 +60,8 @@ internal static class MapJson
             Bonuses =
                 bonuses.Map(static values => values.GetList(static value => value.GetBonus())),
             Objectives =
-                objectives.Map(
-                    static values => values.GetList(static value => value.GetOwnedObjective())
+                objectives.Map(static values =>
+                    values.GetList(static value => value.GetOwnedObjective())
                 ),
             Deaths = deaths.Map(static value => value.GetDistribution()),
             Kills = kills.Map(static value => value.GetDistribution())

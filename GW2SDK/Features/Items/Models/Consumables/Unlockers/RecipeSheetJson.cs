@@ -120,8 +120,8 @@ internal static class RecipeSheetJson
             Rarity = rarity.Map(static value => value.GetEnum<Rarity>()),
             VendorValue = vendorValue.Map(static value => value.GetInt32()),
             GameTypes =
-                gameTypes.Map(
-                    static values => values.GetList(static value => value.GetEnum<GameType>())
+                gameTypes.Map(static values =>
+                    values.GetList(static value => value.GetEnum<GameType>())
                 ),
             Flags = flags.Map(static values => values.GetItemFlags()),
             Restrictions = restrictions.Map(static value => value.GetItemRestriction()),
@@ -129,8 +129,7 @@ internal static class RecipeSheetJson
             IconHref = icon.Map(static value => value.GetString()),
             RecipeId = recipeId.Map(static value => value.GetInt32()),
             ExtraRecipeIds =
-                extraRecipeIds.Map(
-                    static values => values.GetList(static value => value.GetInt32())
+                extraRecipeIds.Map(static values => values.GetList(static value => value.GetInt32())
                 )
                 ?? []
         };

@@ -9,22 +9,33 @@ internal sealed class GuildWvwUpgradeRecipeJsonConverter : JsonConverter<GuildWv
 {
     public const string DiscriminatorValue = "guild_consumable_wvw_recipe";
 
-    public override GuildWvwUpgradeRecipe Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override GuildWvwUpgradeRecipe Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         using var json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
-    public override void Write(Utf8JsonWriter writer, GuildWvwUpgradeRecipe value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        GuildWvwUpgradeRecipe value,
+        JsonSerializerOptions options
+    )
     {
         Write(writer, value);
     }
 
     public static GuildWvwUpgradeRecipe Read(JsonElement json)
     {
-        if (!json.GetProperty(RecipeJsonConverter.DiscriminatorName).ValueEquals(DiscriminatorValue))
+        if (!json.GetProperty(RecipeJsonConverter.DiscriminatorName)
+            .ValueEquals(DiscriminatorValue))
         {
-            ThrowHelper.ThrowInvalidDiscriminator(json.GetProperty(RecipeJsonConverter.DiscriminatorName).GetString());
+            ThrowHelper.ThrowInvalidDiscriminator(
+                json.GetProperty(RecipeJsonConverter.DiscriminatorName).GetString()
+            );
         }
 
         return new GuildWvwUpgradeRecipe
@@ -33,12 +44,15 @@ internal sealed class GuildWvwUpgradeRecipeJsonConverter : JsonConverter<GuildWv
             OutputItemId = json.GetProperty("output_item_id").GetInt32(),
             OutputItemCount = json.GetProperty("output_item_count").GetInt32(),
             MinRating = json.GetProperty("min_rating").GetInt32(),
-            TimeToCraft = TimeSpan.FromMilliseconds(json.GetProperty("time_to_craft_ms").GetDouble()),
-            Disciplines = json.GetProperty("disciplines").GetList(static value => value.GetEnum<CraftingDisciplineName>()),
+            TimeToCraft =
+                TimeSpan.FromMilliseconds(json.GetProperty("time_to_craft_ms").GetDouble()),
+            Disciplines =
+                json.GetProperty("disciplines")
+                    .GetList(static value => value.GetEnum<CraftingDisciplineName>()),
             Flags = RecipeFlagsJsonConverter.Read(json.GetProperty("flags")),
             Ingredients = json.GetProperty("ingredients").GetList(IngredientJsonConverter.Read),
             ChatLink = json.GetProperty("chat_link").GetStringRequired(),
-            OutputUpgradeId = json.GetProperty("output_upgrade_id").GetNullableInt32(),
+            OutputUpgradeId = json.GetProperty("output_upgrade_id").GetNullableInt32()
         };
     }
 
@@ -59,4 +73,3 @@ internal sealed class GuildWvwUpgradeRecipeJsonConverter : JsonConverter<GuildWv
         writer.WriteEndObject();
     }
 }
-

@@ -18,7 +18,11 @@ internal sealed class CollectionAchievementJsonConverter : JsonConverter<Collect
         return Read(json.RootElement);
     }
 
-    public override void Write(Utf8JsonWriter writer, CollectionAchievement value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        CollectionAchievement value,
+        JsonSerializerOptions options
+    )
     {
         Write(writer, value);
     }
@@ -35,9 +39,11 @@ internal sealed class CollectionAchievementJsonConverter : JsonConverter<Collect
             LockedText = json.GetProperty("locked_text").GetStringRequired(),
             Flags = AchievementFlagsJsonConverter.Read(json.GetProperty("flags")),
             Tiers = json.GetProperty("tiers").GetList(AchievementTierJsonConverter.Read),
-            Rewards = json.GetProperty("rewards").GetNullableList(AchievementRewardJsonConverter.Read),
+            Rewards = json.GetProperty("rewards")
+                .GetNullableList(AchievementRewardJsonConverter.Read),
             Bits = json.GetProperty("bits").GetNullableList(AchievementBitJsonConverter.Read),
-            Prerequisites = json.GetProperty("prerequisites").GetList(prerequisite => prerequisite.GetInt32()),
+            Prerequisites =
+                json.GetProperty("prerequisites").GetList(prerequisite => prerequisite.GetInt32()),
             PointCap = json.GetProperty("point_cap").GetNullableInt32()
         };
     }
@@ -50,5 +56,3 @@ internal sealed class CollectionAchievementJsonConverter : JsonConverter<Collect
         writer.WriteEndObject();
     }
 }
-
-

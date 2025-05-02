@@ -6,11 +6,16 @@ namespace GuildWars2.Hero.Equipment.Novelties;
 
 internal sealed class NoveltyJsonConverter : JsonConverter<Novelty>
 {
-    public override Novelty? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override Novelty? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         using var json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
+
     public static Novelty? Read(JsonElement json)
     {
         return new Novelty
@@ -23,6 +28,7 @@ internal sealed class NoveltyJsonConverter : JsonConverter<Novelty>
             UnlockItemIds = json.GetProperty("unlock_item_ids").GetList(entry => entry.GetInt32())
         };
     }
+
     public override void Write(Utf8JsonWriter writer, Novelty value, JsonSerializerOptions options)
     {
         writer.WriteStartObject();
@@ -36,6 +42,7 @@ internal sealed class NoveltyJsonConverter : JsonConverter<Novelty>
         {
             writer.WriteNumberValue(unlockItemId);
         }
+
         writer.WriteEndArray();
         writer.WriteEndObject();
     }

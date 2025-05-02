@@ -23,8 +23,8 @@ internal static class CharacterEquipmentJson
 
         return new CharacterEquipment
         {
-            Items = items.Map(
-                static values => values.GetList(static value => value.GetEquipmentItem())
+            Items = items.Map(static values =>
+                values.GetList(static value => value.GetEquipmentItem())
             )
         };
     }

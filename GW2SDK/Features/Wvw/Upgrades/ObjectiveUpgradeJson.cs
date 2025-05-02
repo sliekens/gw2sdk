@@ -29,8 +29,8 @@ internal static class ObjectiveUpgradeJson
         return new ObjectiveUpgrade
         {
             Id = id.Map(static value => value.GetInt32()),
-            Tiers = tiers.Map(
-                static values => values.GetList(static value => value.GetUpgradeTier())
+            Tiers = tiers.Map(static values =>
+                values.GetList(static value => value.GetUpgradeTier())
             )
         };
     }

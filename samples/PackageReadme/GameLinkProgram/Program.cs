@@ -34,8 +34,7 @@ internal class Program
         );
 
         // Subscribe to the game link to start receiving game state updates.
-        var subscription = gameLink.Subscribe(
-            gameTick =>
+        var subscription = gameLink.Subscribe(gameTick =>
             {
                 // Each 'tick' contains information about the player's character
                 // and actions, among other things.
@@ -46,27 +45,41 @@ internal class Program
                 if (player is not null)
                 {
                     Console.WriteLine($"{player.Name} is ready to go!");
-                    Console.WriteLine($"Race              : {
-                        player.Race
-                    }");
-                    Console.WriteLine($"Profession        : {
-                        player.Profession
-                    }");
-                    Console.WriteLine($"Specialization ID : {
-                        player.SpecializationId
-                    }");
-                    Console.WriteLine($"Squad leader      : {
-                        player.Commander
-                    }");
-                    Console.WriteLine($"In combat         : {
-                        gameTick.Context.UiState.HasFlag(UiState.IsInCombat)
-                    }");
-                    Console.WriteLine($"Current mount     : {
-                        gameTick.Context.Mount
-                    }");
-                    Console.WriteLine($"Tick              : {
-                        gameTick.UiTick
-                    }");
+                    Console.WriteLine(
+                        $"Race              : {
+                            player.Race
+                        }"
+                    );
+                    Console.WriteLine(
+                        $"Profession        : {
+                            player.Profession
+                        }"
+                    );
+                    Console.WriteLine(
+                        $"Specialization ID : {
+                            player.SpecializationId
+                        }"
+                    );
+                    Console.WriteLine(
+                        $"Squad leader      : {
+                            player.Commander
+                        }"
+                    );
+                    Console.WriteLine(
+                        $"In combat         : {
+                            gameTick.Context.UiState.HasFlag(UiState.IsInCombat)
+                        }"
+                    );
+                    Console.WriteLine(
+                        $"Current mount     : {
+                            gameTick.Context.Mount
+                        }"
+                    );
+                    Console.WriteLine(
+                        $"Tick              : {
+                            gameTick.UiTick
+                        }"
+                    );
                 }
 
                 Console.WriteLine();

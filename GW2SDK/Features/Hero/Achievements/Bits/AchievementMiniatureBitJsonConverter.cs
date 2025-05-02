@@ -17,17 +17,18 @@ internal sealed class AchievementMiniatureBitJsonConverter : JsonConverter<Achie
         return Read(json.RootElement);
     }
 
-    public override void Write(Utf8JsonWriter writer, AchievementMiniatureBit value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        AchievementMiniatureBit value,
+        JsonSerializerOptions options
+    )
     {
         Write(writer, value);
     }
 
     public static AchievementMiniatureBit Read(JsonElement json)
     {
-        return new AchievementMiniatureBit
-        {
-            Id = json.GetProperty("id").GetInt32()
-        };
+        return new AchievementMiniatureBit { Id = json.GetProperty("id").GetInt32() };
     }
 
     public static void Write(Utf8JsonWriter writer, AchievementMiniatureBit value)

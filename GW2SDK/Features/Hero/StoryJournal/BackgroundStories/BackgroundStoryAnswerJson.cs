@@ -58,12 +58,12 @@ internal static class BackgroundStoryAnswerJson
             Journal = journal.Map(static value => value.GetStringRequired()),
             QuestionId = question.Map(static value => value.GetInt32()),
             Professions =
-                professions.Map(
-                    static values => values.GetList(static value => value.GetEnum<ProfessionName>())
+                professions.Map(static values =>
+                    values.GetList(static value => value.GetEnum<ProfessionName>())
                 )
                 ?? GetValues<ProfessionName>(),
-            Races = races.Map(
-                    static values => values.GetList(static value => value.GetEnum<RaceName>())
+            Races = races.Map(static values =>
+                    values.GetList(static value => value.GetEnum<RaceName>())
                 )
                 ?? GetValues<RaceName>()
         };

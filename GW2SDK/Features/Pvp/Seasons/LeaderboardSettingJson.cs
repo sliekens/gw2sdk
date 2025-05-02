@@ -39,8 +39,8 @@ internal static class LeaderboardSettingJson
         {
             Name = name.Map(static value => value.GetStringRequired()),
             ScoringId = scoring.Map(static value => value.GetStringRequired()),
-            Tiers = tiers.Map(
-                static values => values.GetList(static value => value.GetLeaderboardTier())
+            Tiers = tiers.Map(static values =>
+                values.GetList(static value => value.GetLeaderboardTier())
             )
         };
     }

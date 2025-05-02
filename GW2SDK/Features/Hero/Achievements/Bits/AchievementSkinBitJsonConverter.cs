@@ -17,17 +17,18 @@ internal sealed class AchievementSkinBitJsonConverter : JsonConverter<Achievemen
         return Read(json.RootElement);
     }
 
-    public override void Write(Utf8JsonWriter writer, AchievementSkinBit value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        AchievementSkinBit value,
+        JsonSerializerOptions options
+    )
     {
         Write(writer, value);
     }
 
     public static AchievementSkinBit Read(JsonElement json)
     {
-        return new AchievementSkinBit
-        {
-            Id = json.GetProperty("id").GetInt32()
-        };
+        return new AchievementSkinBit { Id = json.GetProperty("id").GetInt32() };
     }
 
     public static void Write(Utf8JsonWriter writer, AchievementSkinBit value)

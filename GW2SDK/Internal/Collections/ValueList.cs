@@ -32,7 +32,7 @@ internal sealed class ValueList<T> : List<T>, IEquatable<ValueList<T>>
 
     public override bool Equals(object? obj)
     {
-        return ReferenceEquals(this, obj) || obj is ValueList<T> other && Equals(other);
+        return ReferenceEquals(this, obj) || (obj is ValueList<T> other && Equals(other));
     }
 
     public override int GetHashCode()

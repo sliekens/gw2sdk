@@ -23,8 +23,8 @@ internal static class CharacterTrainingJson
 
         return new CharacterTraining
         {
-            Training = training.Map(
-                static values => values.GetList(static value => value.GetTrainingProgress())
+            Training = training.Map(static values =>
+                values.GetList(static value => value.GetTrainingProgress())
             )
         };
     }

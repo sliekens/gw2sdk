@@ -29,8 +29,8 @@ internal static class DeliveryBoxJson
         return new DeliveryBox
         {
             Coins = coins.Map(static value => value.GetInt32()),
-            Items = items.Map(
-                static values => values.GetList(static value => value.GetDeliveredItem())
+            Items = items.Map(static values =>
+                values.GetList(static value => value.GetDeliveredItem())
             )
         };
     }

@@ -15,8 +15,7 @@ var builder = Host.CreateApplicationBuilder(args);
 builder.Logging.ClearProviders();
 builder.Logging.AddDebug();
 
-var gw2ClientBuilder = builder.Services.AddHttpClient<Gw2Client>(
-    static client =>
+var gw2ClientBuilder = builder.Services.AddHttpClient<Gw2Client>(static client =>
     {
         client.BaseAddress = BaseAddress.DefaultUri;
         client.Timeout =
@@ -38,8 +37,7 @@ try
             new RemainingTimeColumn(),
             new SpinnerColumn()
         )
-        .StartAsync(
-            async ctx =>
+        .StartAsync(async ctx =>
             {
                 // Fetch all recipes
                 var recipesProgress = ctx.AddTask("Fetching recipes");
@@ -121,8 +119,7 @@ try
 
         var recipesTable = new RecipesTable();
         AnsiConsole.Live(recipesTable)
-            .Start(
-                live =>
+            .Start(live =>
                 {
                     foreach (var recipe in outputsByIngredient[ingredient.Id])
                     {

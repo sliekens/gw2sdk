@@ -41,8 +41,8 @@ internal static class SkiffSkinJson
             Id = id.Map(static value => value.GetInt32()),
             Name = name.Map(static value => value.GetStringRequired()),
             IconHref = icon.Map(static value => value.GetStringRequired()),
-            DyeSlots = dyeSlots.Map(
-                static value => value.GetList(static value => value.GetDyeSlot())
+            DyeSlots = dyeSlots.Map(static value =>
+                value.GetList(static value => value.GetDyeSlot())
             )
         };
     }

@@ -23,7 +23,11 @@ internal sealed class FishingRodJsonConverter : JsonConverter<FishingRod>
         return Read(json.RootElement);
     }
 
-    public override void Write(Utf8JsonWriter writer, FishingRod value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        FishingRod value,
+        JsonSerializerOptions options
+    )
     {
         Write(writer, value);
     }

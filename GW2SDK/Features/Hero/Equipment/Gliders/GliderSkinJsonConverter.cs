@@ -6,7 +6,11 @@ namespace GuildWars2.Hero.Equipment.Gliders;
 
 internal sealed class GliderSkinJsonConverter : JsonConverter<GliderSkin>
 {
-    public override GliderSkin? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override GliderSkin? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         using var document = JsonDocument.ParseValue(ref reader);
         return Read(document.RootElement);
@@ -22,11 +26,16 @@ internal sealed class GliderSkinJsonConverter : JsonConverter<GliderSkin>
             IconHref = json.GetProperty("icon").GetStringRequired(),
             Name = json.GetProperty("name").GetStringRequired(),
             Description = json.GetProperty("description").GetStringRequired(),
-            DefaultDyeColorIds = json.GetProperty("default_dye_color_ids").GetList(item => item.GetInt32())
+            DefaultDyeColorIds =
+                json.GetProperty("default_dye_color_ids").GetList(item => item.GetInt32())
         };
     }
 
-    public override void Write(Utf8JsonWriter writer, GliderSkin value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        GliderSkin value,
+        JsonSerializerOptions options
+    )
     {
         writer.WriteStartObject();
         writer.WriteNumber("id", value.Id);

@@ -53,8 +53,8 @@ internal static class SkillBadgeJson
             IconHref = icon.Map(static value => value.GetStringRequired()),
             Overlay = overlay.Map(static value => value.GetStringRequired()),
             SmallOverlay = smallOverlay.Map(static value => value.GetStringRequired()),
-            Tiers = tiers.Map(
-                static values => values.GetList(static value => value.GetSkillBadgeTier())
+            Tiers = tiers.Map(static values =>
+                values.GetList(static value => value.GetSkillBadgeTier())
             )
         };
     }

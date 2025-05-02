@@ -56,17 +56,17 @@ internal static class BackgroundStoryQuestionJson
             Title = title.Map(static value => value.GetStringRequired()),
             Description = description.Map(static value => value.GetStringRequired()),
             AnswerIds =
-                answers.Map(
-                    static values => values.GetList(static value => value.GetStringRequired())
+                answers.Map(static values =>
+                    values.GetList(static value => value.GetStringRequired())
                 ),
             Order = order.Map(static value => value.GetInt32()),
             Professions =
-                professions.Map(
-                    static values => values.GetList(static value => value.GetEnum<ProfessionName>())
+                professions.Map(static values =>
+                    values.GetList(static value => value.GetEnum<ProfessionName>())
                 )
                 ?? GetValues<ProfessionName>(),
-            Races = races.Map(
-                    static values => values.GetList(static value => value.GetEnum<RaceName>())
+            Races = races.Map(static values =>
+                    values.GetList(static value => value.GetEnum<RaceName>())
                 )
                 ?? GetValues<RaceName>()
         };

@@ -26,12 +26,14 @@ public class Mounts
                 Assert.NotNull(entry.SkinIds);
                 Assert.All(entry.SkinIds, id => Assert.True(id > 0));
                 Assert.NotNull(entry.Skills);
-                Assert.All(entry.Skills,
+                Assert.All(
+                    entry.Skills,
                     skill =>
                     {
                         Assert.True(skill.Id > 0);
                         Assert.True(skill.Slot.IsDefined());
-                    });
+                    }
+                );
 
                 var json = JsonSerializer.Serialize(entry);
                 var roundtrip = JsonSerializer.Deserialize<Mount>(json);

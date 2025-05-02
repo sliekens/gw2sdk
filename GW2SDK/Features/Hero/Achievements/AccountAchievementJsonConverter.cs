@@ -16,7 +16,11 @@ internal sealed class AccountAchievementJsonConverter : JsonConverter<AccountAch
         return Read(json.RootElement);
     }
 
-    public override void Write(Utf8JsonWriter writer, AccountAchievement value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        AccountAchievement value,
+        JsonSerializerOptions options
+    )
     {
         Write(writer, value);
     }
@@ -47,6 +51,7 @@ internal sealed class AccountAchievementJsonConverter : JsonConverter<AccountAch
             {
                 writer.WriteNumberValue(bit);
             }
+
             writer.WriteEndArray();
         }
         else
@@ -62,6 +67,3 @@ internal sealed class AccountAchievementJsonConverter : JsonConverter<AccountAch
         writer.WriteEndObject();
     }
 }
-
-
-

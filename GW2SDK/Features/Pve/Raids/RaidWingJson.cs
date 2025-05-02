@@ -29,8 +29,8 @@ internal static class RaidWingJson
         return new RaidWing
         {
             Id = id.Map(static value => value.GetStringRequired()),
-            Encounters = events.Map(
-                static values => values.GetList(static value => value.GetEncounter())
+            Encounters = events.Map(static values =>
+                values.GetList(static value => value.GetEncounter())
             )
         };
     }

@@ -47,8 +47,8 @@ internal static class EquipmentTemplateJson
         {
             TabNumber = tab.Map(static value => value.GetInt32()),
             Name = name.Map(static value => value.GetStringRequired()),
-            Items = equipment.Map(
-                static values => values.GetList(static value => value.GetEquipmentItem())
+            Items = equipment.Map(static values =>
+                values.GetList(static value => value.GetEquipmentItem())
             ),
             PvpEquipment = pvpEquipment.Map(static value => value.GetPvpEquipment())
         };

@@ -16,17 +16,17 @@ internal sealed class RecipeJsonConverter : JsonConverter<Recipe>
         return typeof(Recipe).IsAssignableFrom(typeToConvert);
     }
 
-    public override Recipe Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override Recipe Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         using var json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
-    public override void Write(
-        Utf8JsonWriter writer,
-        Recipe value,
-        JsonSerializerOptions options
-    )
+    public override void Write(Utf8JsonWriter writer, Recipe value, JsonSerializerOptions options)
     {
         Write(writer, value);
     }
@@ -160,7 +160,6 @@ internal sealed class RecipeJsonConverter : JsonConverter<Recipe>
             ChatLink = json.GetProperty("chat_link").GetStringRequired()
         };
     }
-
 
     public static void Write(Utf8JsonWriter writer, Recipe value)
     {
@@ -343,6 +342,7 @@ internal sealed class RecipeJsonConverter : JsonConverter<Recipe>
         {
             writer.WriteStringValue(discipline.ToString());
         }
+
         writer.WriteEndArray();
         writer.WritePropertyName("flags");
         RecipeFlagsJsonConverter.Write(writer, value.Flags);
@@ -351,6 +351,7 @@ internal sealed class RecipeJsonConverter : JsonConverter<Recipe>
         {
             IngredientJsonConverter.Write(writer, ingredient);
         }
+
         writer.WriteEndArray();
         writer.WriteString("chat_link", value.ChatLink);
     }

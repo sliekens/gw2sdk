@@ -22,10 +22,8 @@ public class DesignedForClientCodeTest(AssemblyFixture fixture) : IClassFixture<
             visible,
             type =>
             {
-                if (Enumerable.Any(
-                        type.GetCustomAttributes(),
-                        att => att.GetType().Name == "PublicAPIAttribute"
-                    ))
+                if (type.GetCustomAttributes()
+                    .Any(att => att.GetType().Name == "PublicAPIAttribute"))
                 {
                     return;
                 }
@@ -45,10 +43,8 @@ public class DesignedForClientCodeTest(AssemblyFixture fixture) : IClassFixture<
             invisible,
             type =>
             {
-                if (Enumerable.Any(
-                        type.GetCustomAttributes(),
-                        att => att.GetType().Name == "PublicAPIAttribute"
-                    ))
+                if (type.GetCustomAttributes()
+                    .Any(att => att.GetType().Name == "PublicAPIAttribute"))
                 {
                     throw new ApplicationException(
                         $"Type '{type}' is invisible to client code, make it public or remove [PublicAPI]."

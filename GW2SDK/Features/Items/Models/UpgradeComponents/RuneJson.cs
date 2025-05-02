@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-using GuildWars2.Hero;
 using GuildWars2.Json;
 
 namespace GuildWars2.Items;
@@ -157,8 +156,8 @@ internal static class RuneJson
             Rarity = rarity.Map(static value => value.GetEnum<Rarity>()),
             VendorValue = vendorValue.Map(static value => value.GetInt32()),
             GameTypes =
-                gameTypes.Map(
-                    static values => values.GetList(static value => value.GetEnum<GameType>())
+                gameTypes.Map(static values =>
+                    values.GetList(static value => value.GetEnum<GameType>())
                 ),
             Flags = flags.Map(static values => values.GetItemFlags()),
             Restrictions = restrictions.Map(static value => value.GetItemRestriction()),
@@ -173,8 +172,8 @@ internal static class RuneJson
             Attributes = infixUpgradeAttributes.Map(static values => values.GetAttributes()) ?? [],
             Buff = infixUpgradeBuff.Map(static value => value.GetBuff()),
             SuffixName = suffix.Map(static value => value.GetStringRequired()),
-            Bonuses = bonuses.Map(
-                static values => values.GetList(static value => value.GetStringRequired())
+            Bonuses = bonuses.Map(static values =>
+                values.GetList(static value => value.GetStringRequired())
             )
         };
     }

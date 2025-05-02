@@ -21,8 +21,8 @@ public readonly record struct GameTick
     /// always incrementing.</remarks>
     public readonly uint UiTick;
 
-    /// <summary>Avatar position is the position of the player in the map coordinate system. X is measured along the
-    /// east-west axis, Y measures elevation, Z is measured along the north-south axis.</summary>
+    /// <summary>Avatar position is the position of the player in the map coordinate system. X is measured along the east-west
+    /// axis, Y measures elevation, Z is measured along the north-south axis.</summary>
     /// <remarks>The values are in meters and must be converted to inches to use them like other coordinates in the game.</remarks>
     public readonly Vector3 AvatarPosition;
 
