@@ -27,7 +27,11 @@ internal sealed class ValueHashSet<T> : HashSet<T>, IEquatable<ValueHashSet<T>>
 
     public bool Equals(ValueHashSet<T>? other)
     {
-        if (other is null) return false;
+        if (other is null)
+        {
+            return false;
+        }
+
         return ReferenceEquals(this, other) || SetEquals(other);
     }
 

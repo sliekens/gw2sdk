@@ -74,7 +74,10 @@ internal static class HttpResponseHeaderExtensions
         {
             foreach (var value in values)
             {
-                if (int.TryParse(value, out var int32)) return int32;
+                if (int.TryParse(value, out var int32))
+                {
+                    return int32;
+                }
             }
         }
 

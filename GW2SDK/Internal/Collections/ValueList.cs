@@ -25,8 +25,16 @@ internal sealed class ValueList<T> : List<T>, IEquatable<ValueList<T>>
 
     public bool Equals(ValueList<T>? other)
     {
-        if (other is null) return false;
-        if (ReferenceEquals(this, other)) return true;
+        if (other is null)
+        {
+            return false;
+        }
+
+        if (ReferenceEquals(this, other))
+        {
+            return true;
+        }
+
         return Count == other.Count && this.SequenceEqual(other);
     }
 

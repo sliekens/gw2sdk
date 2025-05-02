@@ -15,9 +15,20 @@ public abstract record Flags
     /// <inheritdoc />
     public virtual bool Equals(Flags? other)
     {
-        if (ReferenceEquals(this, other)) return true;
-        if (other is null) return false;
-        if (GetType() != other.GetType()) return false;
+        if (ReferenceEquals(this, other))
+        {
+            return true;
+        }
+
+        if (other is null)
+        {
+            return false;
+        }
+
+        if (GetType() != other.GetType())
+        {
+            return false;
+        }
 
         var flags = GetType()
             .GetProperties(BindingFlags.Public | BindingFlags.Instance)

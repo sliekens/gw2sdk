@@ -62,8 +62,16 @@ internal sealed class ValueDictionary<TKey, TValue> : Dictionary<TKey, TValue>,
 
     public bool Equals(ValueDictionary<TKey, TValue>? other)
     {
-        if (other is null) return false;
-        if (ReferenceEquals(this, other)) return true;
+        if (other is null)
+        {
+            return false;
+        }
+
+        if (ReferenceEquals(this, other))
+        {
+            return true;
+        }
+
         return Count == other.Count
             && this.All(pair =>
                 other.TryGetValue(pair.Key, out var otherValue)
