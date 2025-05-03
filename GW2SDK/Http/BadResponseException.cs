@@ -43,5 +43,21 @@ public sealed class BadResponseException : HttpRequestException
         : base(message, innerException, statusCode)
     {
     }
+
+    /// <summary>Initializes a new instance of the <see cref="BadResponseException" /> class with a specific message an inner
+    /// exception, and an HTTP status code and an <see cref="HttpRequestError" />.</summary>
+    /// <param name="httpRequestError">The <see cref="HttpRequestError" /> that caused the exception.</param>
+    /// <param name="message">A message that describes the current exception.</param>
+    /// <param name="inner">The inner exception.</param>
+    /// <param name="statusCode">The HTTP status code.</param>
+    public BadResponseException(
+        HttpRequestError httpRequestError,
+        string? message = null,
+        Exception? inner = null,
+        HttpStatusCode? statusCode = null
+    )
+        : base(httpRequestError, message, inner, statusCode)
+    {
+    }
 #endif
 }

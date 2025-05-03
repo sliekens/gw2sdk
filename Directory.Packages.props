@@ -8,7 +8,8 @@
   <ItemGroup>
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
     <PackageVersion Include="Microsoft.Bcl.HashCode" Version="6.0.0" />
-    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="[4.12.0]" /> <!-- 4.13 breaks docfx -->
+    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="[4.12.0]" />
+    <!-- 4.13 breaks docfx -->
     <PackageVersion Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="9.0.4" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="9.0.4" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.UserSecrets" Version="9.0.4" />
@@ -21,6 +22,10 @@
     <PackageVersion Include="Pastel" Version="6.0.1" />
     <PackageVersion Include="Polly.Core" Version="8.5.2" />
     <PackageVersion Include="PolySharp" Version="1.15.0" />
+    <PackageVersion Include="Roslynator.Analyzers" Version="4.13.1">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageVersion>
     <PackageVersion Include="SixLabors.ImageSharp" Version="3.1.8" />
     <PackageVersion Include="Spectre.Console" Version="0.50.0" />
     <PackageVersion Include="Spectre.Console.ImageSharp" Version="0.50.0" />
