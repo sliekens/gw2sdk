@@ -18,12 +18,12 @@ public sealed record ColorInfo
     /// <summary>The hue in the HSL colorspace.</summary>
     public required int Hue { get; init; }
 
-    /// The saturation in the HSL colorspace.
+    /// <summary>The saturation in the HSL colorspace.</summary>
     public required double Saturation { get; init; }
 
-    /// The lightness in the HSL colorspace.
+    /// <summary>The lightness in the HSL colorspace.</summary>
     public required double Lightness { get; init; }
 
-    /// The precalculated RGB value.
+    /// <summary>The precalculated RGB value.</summary>
     public required Color Rgb { get; init; }
 }

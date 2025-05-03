@@ -21,13 +21,17 @@ public sealed record Identity
     /// <summary>The current character's race.</summary>
     public required RaceName Race { get; init; }
 
-    /// The ID of the current character's map.
+    /// <summary>The ID of the current character's map.</summary>
     public required int MapId { get; init; }
 
+    /// <summary>
     /// The ID of the current character's world.
+    /// </summary>
     public required long WorldId { get; init; }
 
+    /// <summary>
     /// The current character's team color. It is the ID of a dye color that can be resolved from the API. 0 means neutral / white.
+    /// </summary>
     public required int TeamColorId { get; init; }
 
     /// <summary>Indicates whether the player is currently the leader of a squad.</summary>

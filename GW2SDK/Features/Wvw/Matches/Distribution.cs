@@ -8,9 +8,9 @@ public sealed record Distribution
     /// <summary>The amount of points the red team has.</summary>
     public required int Red { get; init; }
 
-    /// The amount of points the blue team has.
+    /// <summary>The amount of points the blue team has.</summary>
     public required int Blue { get; init; }
 
-    /// The amount of points the green team has.
+    /// <summary>The amount of points the green team has.</summary>
     public required int Green { get; init; }
 }

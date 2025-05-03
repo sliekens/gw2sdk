@@ -17,7 +17,7 @@ public sealed record SkillBadge
     /// <summary>The URL of the badge's large overlay image.</summary>
     public required string Overlay { get; init; }
 
-    /// The URL of the badge's small overlay image.
+    /// <summary>The URL of the badge's small overlay image.</summary>
     public required string SmallOverlay { get; init; }
 
     /// <summary>The badge's tiers.</summary>

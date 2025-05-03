@@ -139,6 +139,7 @@ internal sealed class ItemCanBeNullAttribute : Attribute;
 )]
 internal sealed class StringFormatMethodAttribute : Attribute
 {
+    /// <summary>🤔</summary>
     /// <param name="formatParameterName">Specifies which parameter of an annotated method should be treated as the format
     /// string.</param>
     public StringFormatMethodAttribute([NotNull] string formatParameterName)
@@ -765,7 +766,7 @@ internal sealed class PathReferenceAttribute : Attribute
     {
     }
 
-    public PathReferenceAttribute([NotNull] [PathReference] string basePath)
+    public PathReferenceAttribute([NotNull][PathReference] string basePath)
     {
         BasePath = basePath;
     }
