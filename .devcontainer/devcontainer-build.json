@@ -3,7 +3,7 @@
   "image": "mcr.microsoft.com/devcontainers/base",
   "features": {
     "ghcr.io/devcontainers/features/dotnet:2": {
-      "version": "9.0.200",
+      "version": "9.0.300",
       "additionalVersions": "9.0.203"
     },
     "./mono": {},
