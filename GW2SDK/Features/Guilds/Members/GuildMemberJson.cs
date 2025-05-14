@@ -9,6 +9,7 @@ internal static class GuildMemberJson
     {
         RequiredMember name = "name";
         RequiredMember rank = "rank";
+        RequiredMember wvwMember = "wvw_member";
         NullableMember joined = "joined";
 
         foreach (var member in json.EnumerateObject())
@@ -25,6 +26,10 @@ internal static class GuildMemberJson
             {
                 joined = member;
             }
+            else if (wvwMember.Match(member))
+            {
+                wvwMember = member;
+            }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 ThrowHelper.ThrowUnexpectedMember(member.Name);
@@ -35,7 +40,8 @@ internal static class GuildMemberJson
         {
             Name = name.Map(static value => value.GetStringRequired()),
             Rank = rank.Map(static value => value.GetStringRequired()),
-            Joined = joined.Map(static value => value.GetDateTimeOffset())
+            Joined = joined.Map(static value => value.GetDateTimeOffset()),
+            WvwMember = wvwMember.Map(static value => value.GetBoolean()),
         };
     }
 }
