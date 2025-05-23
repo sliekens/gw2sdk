@@ -34,10 +34,18 @@ public sealed record Profession
     public required int Code { get; init; }
 
     /// <summary>The URL of the small profession icon.</summary>
+    [Obsolete("Use IconUrl instead.")]
     public required string IconHref { get; init; }
 
     /// <summary>The URL of the large profession icon.</summary>
+    [Obsolete("Use BigIconUrl instead.")]
     public required string BigIconHref { get; init; }
+
+    /// <summary>The URL of the small profession icon.</summary>
+    public required Uri IconUrl { get; init; }
+
+    /// <summary>The URL of the large profession icon.</summary>
+    public required Uri BigIconUrl { get; init; }
 
     /// <summary>The IDs of the specializations that belong to this profession.</summary>
     public required IReadOnlyList<int> SpecializationIds { get; init; }

@@ -22,7 +22,7 @@ public class MountSkins
             {
                 Assert.True(entry.Id > 0);
                 Assert.NotEmpty(entry.Name);
-                Assert.NotEmpty(entry.IconHref);
+                Assert.True(entry.IconUrl is not null && entry.IconUrl.IsAbsoluteUri);
                 Assert.NotEmpty(entry.DyeSlots);
                 Assert.All(
                     entry.DyeSlots,

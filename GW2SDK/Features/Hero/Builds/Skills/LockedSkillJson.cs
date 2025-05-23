@@ -107,6 +107,7 @@ internal static class LockedSkillJson
         var professionRestrictions = professions.Map(static values =>
             values.GetList(static value => value.GetEnum<ProfessionName>())
         );
+        var iconString = icon.Map(static value => value.GetString()) ?? "";
         return new LockedSkill
         {
             Id = id.Map(static value => value.GetInt32()),
@@ -120,7 +121,10 @@ internal static class LockedSkillJson
                     values.GetList(static value => value.GetTraitedFact())
                 ),
             Description = description.Map(static value => value.GetStringRequired()),
-            IconHref = icon.Map(static value => value.GetString()) ?? "",
+#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
+            IconHref = iconString,
+#pragma warning restore CS0618
+            IconUrl = string.IsNullOrEmpty(iconString) ? null : new Uri(iconString),
             WeaponType = weaponType.Map(static value => value.GetWeaponType()),
             Professions =
                 professionRestrictions.Count > 0

@@ -12,7 +12,11 @@ public sealed record MistChampionSkin
     public required string Name { get; init; }
 
     /// <summary>The URL of the skin icon.</summary>
+    [Obsolete("Use IconUrl instead.")]
     public required string IconHref { get; init; }
+
+    /// <summary>The URL of the skin icon as a Uri.</summary>
+    public required Uri IconUrl { get; init; }
 
     /// <summary>Indicates whether this is the default skin for the associated Mist Champion.</summary>
     public required bool Default { get; init; }

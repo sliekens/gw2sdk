@@ -23,10 +23,10 @@ public class Specializations
                 Assert.True(specialization.Profession.IsDefined());
                 Assert.NotEmpty(specialization.MinorTraitIds);
                 Assert.NotEmpty(specialization.MajorTraitIds);
-                Assert.NotEmpty(specialization.IconHref);
-                Assert.NotEmpty(specialization.IconHref);
-                Assert.NotNull(specialization.ProfessionBigIconHref);
-                Assert.NotNull(specialization.ProfessionIconHref);
+                Assert.True(specialization.IconUrl.IsAbsoluteUri);
+                Assert.True(specialization.BackgroundUrl.IsAbsoluteUri);
+                Assert.True(specialization.ProfessionBigIconUrl == null || specialization.ProfessionBigIconUrl.IsAbsoluteUri);
+                Assert.True(specialization.ProfessionIconUrl == null || specialization.ProfessionIconUrl.IsAbsoluteUri);
             }
         );
     }

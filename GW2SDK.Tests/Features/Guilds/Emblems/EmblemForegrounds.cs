@@ -21,8 +21,8 @@ public class EmblemForegrounds
             emblem =>
             {
                 Assert.True(emblem.Id > 0);
-                Assert.NotEmpty(emblem.Layers);
-                Assert.All(emblem.Layers, Assert.NotEmpty);
+                Assert.NotEmpty(emblem.LayerUrls);
+                Assert.All(emblem.LayerUrls, url => Assert.True(url.IsAbsoluteUri));
             }
         );
     }

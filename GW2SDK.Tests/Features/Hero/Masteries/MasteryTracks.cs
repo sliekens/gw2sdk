@@ -36,7 +36,7 @@ public class MasteryTracks
                         MarkupSyntaxValidator.Validate(level.Description);
                         Assert.NotEmpty(level.Instruction);
                         MarkupSyntaxValidator.Validate(level.Instruction);
-                        Assert.NotEmpty(level.IconHref);
+                        Assert.True(level.IconUrl is null || level.IconUrl.IsAbsoluteUri);
                         Assert.True(level.PointCost > 0);
                         Assert.True(level.ExperienceCost > 0);
                     }

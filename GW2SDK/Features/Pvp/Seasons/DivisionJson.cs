@@ -46,16 +46,24 @@ internal static class DivisionJson
             }
         }
 
+        var largeIconString = largeIcon.Map(static value => value.GetStringRequired());
+        var smallIconString = smallIcon.Map(static value => value.GetStringRequired());
+        var pipIconString = pipIcon.Map(static value => value.GetStringRequired());
+#pragma warning disable CS0618
         return new Division
         {
             Name = name.Map(static value => value.GetStringRequired()),
             Flags = flags.Map(static values => values.GetDivisionFlags()),
-            LargeIconHref = largeIcon.Map(static value => value.GetStringRequired()),
-            SmallIconHref = smallIcon.Map(static value => value.GetStringRequired()),
-            PipIconHref = pipIcon.Map(static value => value.GetStringRequired()),
+            LargeIconHref = largeIconString,
+            LargeIconUrl = new Uri(largeIconString),
+            SmallIconHref = smallIconString,
+            SmallIconUrl = new Uri(smallIconString),
+            PipIconHref = pipIconString,
+            PipIconUrl = new Uri(pipIconString),
             Tiers = tiers.Map(static values =>
                 values.GetList(static value => value.GetDivisionTier())
             )
         };
+#pragma warning restore CS0618
     }
 }

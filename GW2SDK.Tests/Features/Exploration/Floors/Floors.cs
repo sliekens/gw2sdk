@@ -61,7 +61,7 @@ public class Floors
                             Assert.NotEmpty(poi.ChatLink);
                             if (poi is RequiresUnlockPointOfInterest locked)
                             {
-                                Assert.NotEmpty(locked.IconHref);
+                                Assert.True(locked.IconUrl.IsAbsoluteUri);
                             }
 
                             var chatLink = poi.GetChatLink();
@@ -143,8 +143,8 @@ public class Floors
                             Assert.Contains(godShrine.PointOfInterestId, map.PointsOfInterest.Keys);
                             Assert.NotEmpty(godShrine.Name);
                             Assert.NotEmpty(godShrine.NameContested);
-                            Assert.NotEmpty(godShrine.IconHref);
-                            Assert.NotEmpty(godShrine.IconContestedHref);
+                            Assert.NotNull(godShrine.IconUrl);
+                            Assert.NotNull(godShrine.IconContestedUrl);
                             Assert.NotEqual(PointF.Empty, godShrine.Coordinates);
 
                             var link = godShrine.GetChatLink();

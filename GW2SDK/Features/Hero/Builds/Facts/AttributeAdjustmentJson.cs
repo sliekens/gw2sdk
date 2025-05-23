@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Builds.Facts;
@@ -63,10 +64,14 @@ internal static class AttributeAdjustmentJson
             }
         }
 
+        var iconString = icon.Map(static value => value.GetStringRequired());
         return new AttributeAdjustment
         {
             Text = text.Map(static value => value.GetString()) ?? "",
-            IconHref = icon.Map(static value => value.GetStringRequired()),
+#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
+            IconHref = iconString,
+#pragma warning restore CS0618
+            IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
             Value = adjustment.Map(static value => value.GetInt32()),
             Target = target.Map(static value => value.GetAttributeName()),
             HitCount = hitCount.Map(static value => value.GetInt32())

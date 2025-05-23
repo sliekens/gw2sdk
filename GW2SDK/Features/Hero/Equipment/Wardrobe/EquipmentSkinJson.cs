@@ -73,6 +73,7 @@ internal static class EquipmentSkinJson
             }
         }
 
+        var iconString = icon.Map(static value => value.GetString()) ?? "";
         return new EquipmentSkin
         {
             Id = id.Map(static value => value.GetInt32()),
@@ -81,7 +82,11 @@ internal static class EquipmentSkinJson
             Rarity = rarity.Map(static value => value.GetEnum<Rarity>()),
             Flags = flags.Map(static values => values.GetSkinFlags()),
             Races = restrictions.Map(static values => values.GetRestrictions()),
-            IconHref = icon.Map(static value => value.GetString())
+#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
+            IconHref = iconString,
+#pragma warning restore CS0618
+            IconUrl = string.IsNullOrEmpty(iconString) ? null : new Uri(iconString)
         };
     }
 }
+

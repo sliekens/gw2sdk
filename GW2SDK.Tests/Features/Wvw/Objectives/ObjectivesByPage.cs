@@ -23,5 +23,6 @@ public class ObjectivesByPage
         Assert.True(context.ResultTotal > 0);
         Assert.Equal(pageSize, actual.Count);
         Assert.All(actual, Assert.NotNull);
+        Assert.All(actual, entry => Assert.True(entry.MarkerIconUrl is null or { IsAbsoluteUri: true }));
     }
 }

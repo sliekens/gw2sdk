@@ -74,7 +74,10 @@ internal static class ClaimableJson
             Name = name.Map(static value => value.GetStringRequired()),
             Description = description.Map(static value => value.GetStringRequired()),
             BuildTime = buildTime.Map(static value => TimeSpan.FromMinutes(value.GetDouble())),
+#pragma warning disable CS0618 // IconHref is obsolete
             IconHref = icon.Map(static value => value.GetStringRequired()),
+#pragma warning restore CS0618
+            IconUrl = icon.Map(static value => new Uri(value.GetStringRequired())),
             RequiredLevel = requiredLevel.Map(static value => value.GetInt32()),
             Experience = experience.Map(static value => value.GetInt32()),
             Prerequisites =

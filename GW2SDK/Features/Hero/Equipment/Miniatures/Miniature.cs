@@ -18,7 +18,11 @@ public sealed record Miniature
     public required string LockedText { get; init; }
 
     /// <summary>The URL of the miniature icon.</summary>
+    [Obsolete("Use IconUrl instead.")]
     public required string IconHref { get; init; }
+
+    /// <summary>The URL of the miniature icon.</summary>
+    public required Uri IconUrl { get; init; }
 
     /// <summary>The display order of the miniature in the equipment panel.</summary>
     public required int Order { get; init; }

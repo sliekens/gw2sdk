@@ -97,6 +97,7 @@ internal static class SkillJson
             }
         }
 
+        var iconString = icon.Map(static value => value.GetString()) ?? "";
         return new Skill
         {
             Id = id.Map(static value => value.GetInt32()),
@@ -110,7 +111,10 @@ internal static class SkillJson
                     values.GetList(static value => value.GetTraitedFact())
                 ),
             Description = description.Map(static value => value.GetStringRequired()),
-            IconHref = icon.Map(static value => value.GetString()) ?? "",
+#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
+            IconHref = iconString,
+#pragma warning restore CS0618
+            IconUrl = string.IsNullOrEmpty(iconString) ? null : new Uri(iconString),
             SkillFlags = flags.Map(static value => value.GetSkillFlags()),
             ChatLink = chatLink.Map(static value => value.GetStringRequired()),
             Categories = categories.Map(static values =>

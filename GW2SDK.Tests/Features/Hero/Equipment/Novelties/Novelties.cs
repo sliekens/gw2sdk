@@ -27,7 +27,7 @@ public class Novelties
                 Assert.NotEmpty(entry.Name);
                 Assert.NotNull(entry.Description);
                 MarkupSyntaxValidator.Validate(entry.Description);
-                Assert.NotEmpty(entry.IconHref);
+                Assert.True(entry.IconUrl.IsAbsoluteUri);
                 Assert.True(entry.Slot.IsDefined());
                 Assert.NotEmpty(entry.UnlockItemIds);
 

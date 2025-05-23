@@ -41,14 +41,17 @@ internal static class PetJson
             }
         }
 
+        string iconString = icon.Map(static value => value.GetStringRequired());
         return new Pet
         {
             Id = id.Map(static value => value.GetInt32()),
             Name = name.Map(static value => value.GetStringRequired()),
             Description = description.Map(static value => value.GetStringRequired()),
-            IconHref = icon.Map(static value => value.GetStringRequired()),
-            Skills = skills.Map(static values => values.GetList(static value => value.GetPetSkill())
-            )
+#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
+            IconHref = iconString,
+#pragma warning restore CS0618
+            IconUrl = new Uri(iconString),
+            Skills = skills.Map(static values => values.GetList(static value => value.GetPetSkill()))
         };
     }
 }

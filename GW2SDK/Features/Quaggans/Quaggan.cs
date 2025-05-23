@@ -9,5 +9,9 @@ public sealed record Quaggan
     public required string Id { get; init; }
 
     /// <summary>The quaggan's picture URL.</summary>
+    [Obsolete("Use ImageUrl instead.")]
     public required string ImageHref { get; init; }
+
+    /// <summary>The quaggan's picture URL.</summary>
+    public required Uri ImageUrl { get; init; }
 }

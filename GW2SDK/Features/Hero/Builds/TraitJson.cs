@@ -71,6 +71,8 @@ internal static class TraitJson
             }
         }
 
+        var iconString = icon.Map(static value => value.GetStringRequired());
+#pragma warning disable CS0618
         return new Trait
         {
             Id = id.Map(static value => value.GetInt32()),
@@ -79,7 +81,8 @@ internal static class TraitJson
             Name = name.Map(static value => value.GetStringRequired()),
             Description = description.Map(static value => value.GetString()) ?? "",
             Slot = slot.Map(static value => value.GetEnum<TraitSlot>()),
-            IconHref = icon.Map(static value => value.GetStringRequired()),
+            IconHref = iconString,
+            IconUrl = new Uri(iconString),
             SpezializationId = specialization.Map(static value => value.GetInt32()),
             Facts =
                 facts.Map(static values =>
@@ -91,5 +94,6 @@ internal static class TraitJson
                 ),
             Skills = skills.Map(static values => values.GetList(static value => value.GetSkill()))
         };
+#pragma warning restore CS0618
     }
 }

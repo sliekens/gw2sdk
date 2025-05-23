@@ -27,13 +27,17 @@ internal sealed class AchievementCategoryJsonConverter : JsonConverter<Achieveme
 
     public static AchievementCategory Read(JsonElement json)
     {
+        var iconString = json.GetProperty("icon").GetStringRequired();
         return new AchievementCategory
         {
             Id = json.GetProperty("id").GetInt32(),
             Name = json.GetProperty("name").GetStringRequired(),
             Description = json.GetProperty("description").GetStringRequired(),
             Order = json.GetProperty("order").GetInt32(),
-            IconHref = json.GetProperty("icon").GetStringRequired(),
+#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
+            IconHref = iconString,
+#pragma warning restore CS0618
+            IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
             Achievements = json.GetProperty("achievements")
                 .GetList(AchievementRefJsonConverter.Read),
             Tomorrow = json.GetProperty("tomorrow")
@@ -48,7 +52,7 @@ internal sealed class AchievementCategoryJsonConverter : JsonConverter<Achieveme
         writer.WriteString("name", value.Name);
         writer.WriteString("description", value.Description);
         writer.WriteNumber("order", value.Order);
-        writer.WriteString("icon", value.IconHref);
+        writer.WriteString("icon", value.IconUrl?.ToString());
         writer.WritePropertyName("achievements");
         writer.WriteStartArray();
         foreach (var achievement in value.Achievements)

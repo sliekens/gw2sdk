@@ -24,7 +24,8 @@ public class SkiffSkins
             {
                 Assert.True(entry.Id > 0);
                 Assert.NotEmpty(entry.Name);
-                Assert.NotEmpty(entry.IconHref);
+                Assert.NotNull(entry.IconUrl);
+                Assert.True(entry.IconUrl == null || entry.IconUrl.IsAbsoluteUri || entry.IconUrl.IsWellFormedOriginalString());
                 Assert.NotNull(entry.DyeSlots);
                 Assert.All(
                     entry.DyeSlots,

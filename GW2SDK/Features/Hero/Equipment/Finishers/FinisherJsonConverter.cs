@@ -18,13 +18,17 @@ internal sealed class FinisherJsonConverter : JsonConverter<Finisher>
 
     public static Finisher? Read(JsonElement json)
     {
+        var iconString = json.GetProperty("icon").GetStringRequired();
         return new Finisher
         {
             Id = json.GetProperty("id").GetInt32(),
             LockedText = json.GetProperty("locked_text").GetStringRequired(),
             UnlockItemIds = json.GetProperty("unlock_item_ids").GetList(item => item.GetInt32()),
             Order = json.GetProperty("order").GetInt32(),
-            IconHref = json.GetProperty("icon").GetStringRequired(),
+#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
+            IconHref = iconString,
+#pragma warning restore CS0618
+            IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
             Name = json.GetProperty("name").GetStringRequired()
         };
     }
@@ -39,11 +43,9 @@ internal sealed class FinisherJsonConverter : JsonConverter<Finisher>
         {
             writer.WriteNumberValue(element);
         }
-
         writer.WriteEndArray();
-
         writer.WriteNumber("order", value.Order);
-        writer.WriteString("icon", value.IconHref);
+        writer.WriteString("icon", value.IconUrl.ToString());
         writer.WriteString("name", value.Name);
         writer.WriteEndObject();
     }

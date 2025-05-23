@@ -71,6 +71,11 @@ internal static class SpecializationJson
             }
         }
 
+        var iconString = icon.Map(static value => value.GetStringRequired());
+        var backgroundString = background.Map(static value => value.GetStringRequired());
+        var professionBigIconString = professionIconBig.Map(static value => value.GetString()) ?? "";
+        var professionIconString = professionIcon.Map(static value => value.GetString()) ?? "";
+#pragma warning disable CS0618
         return new Specialization
         {
             Id = id.Map(static value => value.GetInt32()),
@@ -82,10 +87,15 @@ internal static class SpecializationJson
             MajorTraitIds =
                 majorTraits.Map(static values => values.GetList(static value => value.GetInt32())),
             WeaponTraitId = weaponTrait.Map(static value => value.GetInt32()),
-            IconHref = icon.Map(static value => value.GetStringRequired()),
-            BackgroundHref = background.Map(static value => value.GetStringRequired()),
-            ProfessionBigIconHref = professionIconBig.Map(static value => value.GetString()) ?? "",
-            ProfessionIconHref = professionIcon.Map(static value => value.GetString()) ?? ""
+            IconHref = iconString,
+            IconUrl = new Uri(iconString),
+            BackgroundHref = backgroundString,
+            BackgroundUrl = new Uri(backgroundString),
+            ProfessionBigIconHref = professionBigIconString,
+            ProfessionBigIconUrl = string.IsNullOrEmpty(professionBigIconString) ? null : new Uri(professionBigIconString),
+            ProfessionIconHref = professionIconString,
+            ProfessionIconUrl = string.IsNullOrEmpty(professionIconString) ? null : new Uri(professionIconString)
         };
+#pragma warning restore CS0618
     }
 }

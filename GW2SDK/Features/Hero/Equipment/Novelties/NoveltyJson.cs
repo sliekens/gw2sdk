@@ -46,12 +46,17 @@ internal static class NoveltyJson
             }
         }
 
+        var iconString = icon.Map(static value => value.GetStringRequired());
+
         return new Novelty
         {
             Id = id.Map(static value => value.GetInt32()),
             Name = name.Map(static value => value.GetStringRequired()),
             Description = description.Map(static value => value.GetString()) ?? "",
-            IconHref = icon.Map(static value => value.GetStringRequired()),
+#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
+            IconHref = iconString,
+#pragma warning restore CS0618
+            IconUrl = new Uri(iconString),
             Slot = slot.Map(static value => value.GetEnum<NoveltyKind>()),
             UnlockItemIds =
                 unlockItems.Map(static values => values.GetList(static value => value.GetInt32()))

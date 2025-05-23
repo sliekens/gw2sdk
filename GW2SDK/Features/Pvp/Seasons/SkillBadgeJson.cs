@@ -46,13 +46,21 @@ internal static class SkillBadgeJson
             }
         }
 
+        string iconString = icon.Map(static value => value.GetStringRequired());
+        string overlayString = overlay.Map(static value => value.GetStringRequired());
+        string smallOverlayString = smallOverlay.Map(static value => value.GetStringRequired());
         return new SkillBadge
         {
             Name = name.Map(static value => value.GetStringRequired()),
             Description = description.Map(static value => value.GetStringRequired()),
-            IconHref = icon.Map(static value => value.GetStringRequired()),
-            Overlay = overlay.Map(static value => value.GetStringRequired()),
-            SmallOverlay = smallOverlay.Map(static value => value.GetStringRequired()),
+#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
+            IconHref = iconString,
+            IconUrl = new Uri(iconString),
+            Overlay = overlayString,
+            OverlayUrl = new Uri(overlayString),
+            SmallOverlay = smallOverlayString,
+            SmallOverlayUrl = new Uri(smallOverlayString),
+#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             Tiers = tiers.Map(static values =>
                 values.GetList(static value => value.GetSkillBadgeTier())
             )

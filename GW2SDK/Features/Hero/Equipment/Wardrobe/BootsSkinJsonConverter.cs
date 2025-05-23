@@ -46,6 +46,7 @@ internal sealed class BootsSkinJsonConverter : JsonConverter<BootsSkin>
             );
         }
 
+        var iconString = json.GetProperty("icon").GetString() ?? "";
         return new BootsSkin
         {
             Id = json.GetProperty("id").GetInt32(),
@@ -54,7 +55,10 @@ internal sealed class BootsSkinJsonConverter : JsonConverter<BootsSkin>
             Flags = SkinFlagsJsonConverter.Read(json.GetProperty("flags")),
             Races = json.GetProperty("races").GetList(static value => value.GetEnum<RaceName>()),
             Rarity = json.GetProperty("rarity").GetEnum<Rarity>(),
-            IconHref = json.GetProperty("icon").GetString(),
+#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
+            IconHref = iconString,
+#pragma warning restore CS0618
+            IconUrl = string.IsNullOrEmpty(iconString) ? null : new Uri(iconString),
             WeightClass = json.GetProperty("weight_class").GetEnum<WeightClass>(),
             DyeSlots = json.GetProperty("dye_slots").GetNullable(DyeSlotInfoJsonConverter.Read)
         };

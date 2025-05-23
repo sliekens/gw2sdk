@@ -45,11 +45,15 @@ internal sealed class AchievementJsonConverter : JsonConverter<Achievement>
             }
         }
 
+        var iconString = json.GetProperty("icon").GetString() ?? "";
         return new Achievement
         {
             Id = json.GetProperty("id").GetInt32(),
             Name = json.GetProperty("name").GetStringRequired(),
-            IconHref = json.GetProperty("icon").GetStringRequired(),
+#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
+            IconHref = iconString,
+#pragma warning restore CS0618
+            IconUrl = !string.IsNullOrEmpty(iconString) ? new Uri(iconString, UriKind.RelativeOrAbsolute) : null,
             Description = json.GetProperty("description").GetStringRequired(),
             Requirement = json.GetProperty("requirement").GetStringRequired(),
             LockedText = json.GetProperty("locked_text").GetStringRequired(),
@@ -84,7 +88,7 @@ internal sealed class AchievementJsonConverter : JsonConverter<Achievement>
     {
         writer.WriteNumber("id", value.Id);
         writer.WriteString("name", value.Name);
-        writer.WriteString("icon", value.IconHref);
+        writer.WriteString("icon", value.IconUrl?.ToString());
         writer.WriteString("description", value.Description);
         writer.WriteString("requirement", value.Requirement);
         writer.WriteString("locked_text", value.LockedText);

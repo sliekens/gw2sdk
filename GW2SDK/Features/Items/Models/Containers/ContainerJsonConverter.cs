@@ -56,6 +56,7 @@ internal sealed class ContainerJsonConverter : JsonConverter<Container>
             }
         }
 
+        var iconString = json.GetProperty("icon").GetString();
         return new Container
         {
             Id = json.GetProperty("id").GetInt32(),
@@ -69,7 +70,10 @@ internal sealed class ContainerJsonConverter : JsonConverter<Container>
             Flags = ItemFlagsJsonConverter.Read(json.GetProperty("flags")),
             Restrictions = ItemRestrictionJsonConverter.Read(json.GetProperty("restrictions")),
             ChatLink = json.GetProperty("chat_link").GetStringRequired(),
-            IconHref = json.GetProperty("icon").GetString()
+#pragma warning disable CS0618 // Suppress obsolete warning
+            IconHref = iconString,
+#pragma warning restore CS0618
+            IconUrl = !string.IsNullOrEmpty(iconString) ? new Uri(iconString) : null
         };
     }
 

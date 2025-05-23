@@ -15,7 +15,11 @@ public sealed record Rank
     public required string Name { get; init; }
 
     /// <summary>The URL of the rank icon.</summary>
+    [Obsolete("Use IconUrl instead.")]
     public required string IconHref { get; init; }
+
+    /// <summary>The URL of the rank icon as a Uri.</summary>
+    public required Uri IconUrl { get; init; }
 
     /// <summary>The current rank starts at this rank level.</summary>
     public required int MinRank { get; init; }

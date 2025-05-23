@@ -38,7 +38,11 @@ public record Objective
     public required PointF? LabelCoordinates { get; init; }
 
     /// <summary>The URL of the objective's icon.</summary>
+    [Obsolete("Use MarkerIconUrl instead.")]
     public required string MarkerIconHref { get; init; }
+
+    /// <summary>The URL of the objective's icon.</summary>
+    public required Uri? MarkerIconUrl { get; init; }
 
     /// <summary>The chat code of the objective. This can be used to link the objective in the chat, but also in guild or squad
     /// messages.</summary>

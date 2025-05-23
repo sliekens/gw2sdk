@@ -18,12 +18,16 @@ internal sealed class MailCarrierJsonConverter : JsonConverter<MailCarrier>
 
     public static MailCarrier? Read(JsonElement json)
     {
+        var iconString = json.GetProperty("icon").GetStringRequired();
         return new MailCarrier
         {
             Id = json.GetProperty("id").GetInt32(),
             UnlockItemIds = json.GetProperty("unlock_item_ids").GetList(entry => entry.GetInt32()),
             Order = json.GetProperty("order").GetInt32(),
-            IconHref = json.GetProperty("icon").GetStringRequired(),
+#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
+            IconHref = iconString,
+#pragma warning restore CS0618
+            IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
             Name = json.GetProperty("name").GetStringRequired(),
             Flags = MailCarrierFlagsJsonConverter.Read(json.GetProperty("flags"))
         };
@@ -45,7 +49,7 @@ internal sealed class MailCarrierJsonConverter : JsonConverter<MailCarrier>
 
         writer.WriteEndArray();
         writer.WriteNumber("order", value.Order);
-        writer.WriteString("icon", value.IconHref);
+        writer.WriteString("icon", value.IconUrl.ToString());
         writer.WriteString("name", value.Name);
         writer.WritePropertyName("flags");
         MailCarrierFlagsJsonConverter.Write(writer, value.Flags);

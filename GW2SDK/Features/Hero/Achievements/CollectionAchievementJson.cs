@@ -83,10 +83,14 @@ internal static class CollectionAchievementJson
             }
         }
 
+        var iconString = icon.Map(static value => value.GetString()) ?? "";
         return new CollectionAchievement
         {
             Id = id.Map(static value => value.GetInt32()),
-            IconHref = icon.Map(static value => value.GetString()) ?? "",
+#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
+            IconHref = iconString,
+#pragma warning restore CS0618
+            IconUrl = !string.IsNullOrEmpty(iconString) ? new Uri(iconString, UriKind.RelativeOrAbsolute) : null,
             Name = name.Map(static value => value.GetStringRequired()),
             Description = description.Map(static value => value.GetStringRequired()),
             Requirement = requirement.Map(static value => value.GetStringRequired()),

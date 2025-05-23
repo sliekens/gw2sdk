@@ -23,12 +23,19 @@ public sealed class LinkValue
             );
         }
 
+#pragma warning disable CS0618 // Suppress obsolete warning
         Target = target;
+#pragma warning restore CS0618
+        TargetUrl = new Uri(target, UriKind.RelativeOrAbsolute);
         RelationType = relationType;
     }
 
-    /// <summary>The target URI.</summary>
+    /// <summary>The target URI as a string. Use TargetUrl instead.</summary>
+    [Obsolete("Use TargetUrl instead.")]
     public string Target { get; }
+
+    /// <summary>The target URI.</summary>
+    public Uri TargetUrl { get; }
 
     /// <summary>The link's relation type.</summary>
     public string RelationType { get; }
@@ -37,6 +44,6 @@ public sealed class LinkValue
     /// <returns>A string that represents the current object.</returns>
     public override string ToString()
     {
-        return $"<{Target}>; rel={RelationType}";
+        return $"<{TargetUrl}>; rel={RelationType}";
     }
 }

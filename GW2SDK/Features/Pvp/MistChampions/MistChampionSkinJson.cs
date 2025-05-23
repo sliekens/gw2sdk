@@ -41,14 +41,17 @@ internal static class MistChampionSkinJson
             }
         }
 
+        string iconString = icon.Map(static value => value.GetStringRequired());
         return new MistChampionSkin
         {
             Id = id.Map(static value => value.GetInt32()),
             Name = name.Map(static value => value.GetStringRequired()),
-            IconHref = icon.Map(static value => value.GetStringRequired()),
+#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
+            IconHref = iconString,
+#pragma warning restore CS0618
+            IconUrl = new Uri(iconString),
             Default = @default.Map(static value => value.GetBoolean()),
-            UnlockItemIds =
-                unlockItems.Map(static values => values.GetList(static value => value.GetInt32()))
+            UnlockItemIds = unlockItems.Map(static values => values.GetList(static value => value.GetInt32()))
         };
     }
 }

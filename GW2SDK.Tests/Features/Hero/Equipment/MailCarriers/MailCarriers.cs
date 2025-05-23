@@ -32,7 +32,7 @@ public class MailCarriers
                 }
 
                 Assert.InRange(mailCarrier.Order, 0, 1000);
-                Assert.NotEmpty(mailCarrier.IconHref);
+                Assert.True(mailCarrier.IconUrl is null || mailCarrier.IconUrl.IsAbsoluteUri);
                 Assert.NotEmpty(mailCarrier.Name);
 
                 var json = JsonSerializer.Serialize(mailCarrier);

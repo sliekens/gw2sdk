@@ -31,11 +31,16 @@ internal static class UpgradeJson
             }
         }
 
+        var iconString = icon.Map(static value => value.GetStringRequired());
+        
         return new Upgrade
         {
             Name = name.Map(static value => value.GetStringRequired()),
             Description = description.Map(static value => value.GetStringRequired()),
-            IconHref = icon.Map(static value => value.GetStringRequired())
+#pragma warning disable CS0618 // Suppress obsolete warning
+            IconHref = iconString,
+#pragma warning restore CS0618
+            IconUrl = new Uri(iconString)
         };
     }
 }

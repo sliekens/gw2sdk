@@ -18,12 +18,16 @@ internal sealed class GliderSkinJsonConverter : JsonConverter<GliderSkin>
 
     public static GliderSkin? Read(JsonElement json)
     {
+        var iconString = json.GetProperty("icon").GetStringRequired();
         return new GliderSkin
         {
             Id = json.GetProperty("id").GetInt32(),
             UnlockItemIds = json.GetProperty("unlock_item_ids").GetList(item => item.GetInt32()),
             Order = json.GetProperty("order").GetInt32(),
-            IconHref = json.GetProperty("icon").GetStringRequired(),
+#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
+            IconHref = iconString,
+#pragma warning restore CS0618
+            IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
             Name = json.GetProperty("name").GetStringRequired(),
             Description = json.GetProperty("description").GetStringRequired(),
             DefaultDyeColorIds =
@@ -47,7 +51,7 @@ internal sealed class GliderSkinJsonConverter : JsonConverter<GliderSkin>
 
         writer.WriteEndArray();
         writer.WriteNumber("order", value.Order);
-        writer.WriteString("icon", value.IconHref);
+        writer.WriteString("icon", value.IconUrl.ToString());
         writer.WriteString("name", value.Name);
         writer.WriteString("description", value.Description);
         writer.WriteStartArray("default_dye_color_ids");

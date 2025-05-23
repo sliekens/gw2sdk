@@ -71,13 +71,19 @@ internal static class ProfessionJson
             }
         }
 
+        var iconString = icon.Map(static value => value.GetStringRequired());
+        var iconBigString = iconBig.Map(static value => value.GetStringRequired());
         return new Profession
         {
             Id = id.Map(static value => value.GetEnum<ProfessionName>()),
             Name = name.Map(static value => value.GetStringRequired()),
             Code = code.Map(static value => value.GetInt32()),
-            IconHref = icon.Map(static value => value.GetStringRequired()),
-            BigIconHref = iconBig.Map(static value => value.GetStringRequired()),
+#pragma warning disable CS0618 // Suppress obsolete warning for IconHref/BigIconHref assignment
+            IconHref = iconString,
+            BigIconHref = iconBigString,
+#pragma warning restore CS0618
+            IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
+            BigIconUrl = new Uri(iconBigString, UriKind.RelativeOrAbsolute),
             SpecializationIds =
                 specializations.Map(static values =>
                     values.GetList(static value => value.GetInt32())

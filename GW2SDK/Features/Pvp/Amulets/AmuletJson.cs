@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System;
+using System.Text.Json;
 using GuildWars2.Hero.Equipment;
 using GuildWars2.Json;
 
@@ -37,11 +38,15 @@ internal static class AmuletJson
             }
         }
 
+        string iconString = icon.Map(static value => value.GetStringRequired());
         return new Amulet
         {
             Id = id.Map(static value => value.GetInt32()),
             Name = name.Map(static value => value.GetStringRequired()),
-            IconHref = icon.Map(static value => value.GetStringRequired()),
+#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
+            IconHref = iconString,
+#pragma warning restore CS0618
+            IconUrl = new Uri(iconString),
             Attributes = attributes.Map(static value => value.GetAttributes())
         };
     }

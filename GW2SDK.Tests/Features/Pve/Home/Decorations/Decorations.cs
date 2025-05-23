@@ -25,7 +25,7 @@ public class Decorations
             Assert.NotNull(actual.CategoryIds);
             Assert.All(actual.CategoryIds, categoryId => Assert.True(categoryId > 0));
             Assert.True(actual.MaxCount > 0);
-            Assert.NotEmpty(actual.IconHref);
+            Assert.True(actual.IconUrl is null || actual.IconUrl.IsAbsoluteUri);
         }
     }
 }

@@ -21,7 +21,11 @@ public sealed record Finisher
     public required int Order { get; init; }
 
     /// <summary>The URL of the finisher icon.</summary>
+    [Obsolete("Use IconUrl instead.")]
     public required string IconHref { get; init; }
+
+    /// <summary>The URL of the finisher icon.</summary>
+    public required Uri IconUrl { get; init; }
 
     /// <summary>The name of the finisher.</summary>
     public required string Name { get; init; }

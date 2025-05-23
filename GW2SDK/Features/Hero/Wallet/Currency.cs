@@ -18,5 +18,9 @@ public sealed record Currency
     public required int Order { get; init; }
 
     /// <summary>The URL of the currency icon.</summary>
+    [Obsolete("Use IconUrl instead.")]
     public required string IconHref { get; init; }
+
+    /// <summary>The URL of the currency icon.</summary>
+    public required Uri IconUrl { get; init; }
 }

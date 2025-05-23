@@ -23,7 +23,7 @@ public class LinkHeaderTest
         static void IsLink(LinkValue actual, string relationType, string target)
         {
             Assert.Equal(relationType, actual.RelationType);
-            Assert.Equal(target, actual.Target);
+            Assert.Equal(target, actual.TargetUrl.ToString());
         }
     }
 

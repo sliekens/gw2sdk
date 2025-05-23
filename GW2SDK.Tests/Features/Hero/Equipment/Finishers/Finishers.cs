@@ -29,7 +29,8 @@ public class Finishers
                 Assert.NotNull(entry.UnlockItemIds);
                 Assert.All(entry.UnlockItemIds, id => Assert.True(id > 0));
                 Assert.True(entry.Order >= 0);
-                Assert.NotEmpty(entry.IconHref);
+                Assert.NotNull(entry.IconUrl);
+                Assert.True(entry.IconUrl.IsAbsoluteUri || entry.IconUrl.IsWellFormedOriginalString());
                 Assert.NotEmpty(entry.Name);
 
                 var json = JsonSerializer.Serialize(entry);

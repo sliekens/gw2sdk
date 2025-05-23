@@ -36,7 +36,7 @@ public class Skills
                     Assert.NotEmpty(action.Name);
                     Assert.NotEmpty(action.Description);
                     MarkupSyntaxValidator.Validate(action.Description);
-                    Assert.NotEmpty(action.IconHref);
+                    Assert.True(action.IconUrl is null or { IsAbsoluteUri: true });
                     Assert.NotEmpty(action.Professions);
                     Assert.All(
                         action.Professions,
@@ -206,7 +206,7 @@ public class Skills
                     Assert.NotNull(skill.Name);
                     Assert.NotNull(skill.Description);
                     MarkupSyntaxValidator.Validate(skill.Description);
-                    Assert.NotNull(skill.IconHref);
+                    Assert.True(skill.IconUrl is null or { IsAbsoluteUri: true });
                 }
 
                 if (skill.Facts is not null)
@@ -217,7 +217,7 @@ public class Skills
                         {
                             Assert.NotNull(fact.Text);
                             MarkupSyntaxValidator.Validate(fact.Text);
-                            Assert.NotEmpty(fact.IconHref);
+                            Assert.True(fact.IconUrl is null or { IsAbsoluteUri: true });
 
                             switch (fact)
                             {
@@ -312,7 +312,7 @@ public class Skills
                             Assert.True(fact.RequiresTrait > 0);
                             Assert.NotNull(fact.Fact.Text);
                             MarkupSyntaxValidator.Validate(fact.Fact.Text);
-                            Assert.NotEmpty(fact.Fact.IconHref);
+                            Assert.True(fact.Fact.IconUrl is null or { IsAbsoluteUri: true });
                             switch (fact.Fact)
                             {
                                 case AttributeAdjustment attributeAdjustment:

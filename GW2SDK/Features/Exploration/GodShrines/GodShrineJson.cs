@@ -57,8 +57,12 @@ internal static class GodShrineJson
             NameContested = nameContested.Map(static value => value.GetStringRequired()),
             PointOfInterestId = pointOfInterestId.Map(static value => value.GetInt32()),
             Coordinates = coordinates.Map(static value => value.GetCoordinateF()),
+            #pragma warning disable CS0618 // Suppress obsolete warning
             IconHref = icon.Map(static value => value.GetStringRequired()),
-            IconContestedHref = iconContested.Map(static value => value.GetStringRequired())
+            IconContestedHref = iconContested.Map(static value => value.GetStringRequired()),
+            #pragma warning restore CS0618
+            IconUrl = icon.Map(static value => new Uri(value.GetStringRequired())),
+            IconContestedUrl = iconContested.Map(static value => new Uri(value.GetStringRequired()))
         };
     }
 }

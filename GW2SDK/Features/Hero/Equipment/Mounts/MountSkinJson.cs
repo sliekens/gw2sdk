@@ -41,11 +41,15 @@ internal static class MountSkinJson
             }
         }
 
+        var iconString = icon.Map(static value => value.GetStringRequired());
         return new MountSkin
         {
             Id = id.Map(static value => value.GetInt32()),
             Name = name.Map(static value => value.GetStringRequired()),
-            IconHref = icon.Map(static value => value.GetStringRequired()),
+#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
+            IconHref = iconString,
+#pragma warning restore CS0618
+            IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
             DyeSlots =
                 dyeSlots.Map(static values => values.GetList(static value => value.GetDyeSlot())),
             Mount = mount.Map(static value => value.GetMountName())

@@ -25,7 +25,7 @@ public class Miniatures
             {
                 Assert.True(entry.Id > 0);
                 Assert.NotEmpty(entry.Name);
-                Assert.NotEmpty(entry.IconHref);
+                Assert.True(entry.IconUrl is null || entry.IconUrl.IsAbsoluteUri);
                 Assert.True(entry.Order >= 0);
                 Assert.True(entry.ItemId >= 0);
 

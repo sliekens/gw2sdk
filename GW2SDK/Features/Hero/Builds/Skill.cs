@@ -27,7 +27,11 @@ public record Skill
     public required string Description { get; init; }
 
     /// <summary>The URL of the skill icon.</summary>
+    [Obsolete("Use IconUrl instead.")]
     public required string IconHref { get; init; }
+
+    /// <summary>The URL of the skill icon.</summary>
+    public required Uri? IconUrl { get; init; }
 
     /// <summary>The chat code of the skill. This can be used to link the skill in the chat, but also in guild or squad
     /// messages.</summary>

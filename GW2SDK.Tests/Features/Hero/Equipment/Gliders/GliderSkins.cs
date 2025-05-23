@@ -26,7 +26,7 @@ public class GliderSkins
                 Assert.True(entry.Id > 0);
                 Assert.NotNull(entry.UnlockItemIds);
                 Assert.True(entry.Order >= 0);
-                Assert.NotEmpty(entry.IconHref);
+                Assert.True(entry.IconUrl.IsAbsoluteUri);
                 Assert.NotEmpty(entry.Name);
                 Assert.NotNull(entry.Description);
                 MarkupSyntaxValidator.Validate(entry.Description);

@@ -41,13 +41,17 @@ internal static class CurrencyJson
             }
         }
 
+        var iconString = icon.Map(static value => value.GetStringRequired());
         return new Currency
         {
             Id = id.Map(static value => value.GetInt32()),
             Name = name.Map(static value => value.GetStringRequired()),
             Description = description.Map(static value => value.GetStringRequired()),
             Order = order.Map(static value => value.GetInt32()),
-            IconHref = icon.Map(static value => value.GetStringRequired())
+#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
+            IconHref = iconString,
+#pragma warning restore CS0618
+            IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute)
         };
     }
 }

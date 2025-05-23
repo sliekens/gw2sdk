@@ -22,8 +22,8 @@ public class Professions
             {
                 Assert.True(profession.Id.IsDefined());
                 Assert.NotEmpty(profession.Name);
-                Assert.NotEmpty(profession.IconHref);
-                Assert.NotEmpty(profession.BigIconHref);
+                Assert.True(profession.IconUrl is null || profession.IconUrl.IsAbsoluteUri);
+                Assert.True(profession.BigIconUrl is null || profession.BigIconUrl.IsAbsoluteUri);
             }
         );
     }

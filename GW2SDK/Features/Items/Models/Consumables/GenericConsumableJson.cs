@@ -131,6 +131,7 @@ internal static class GenericConsumableJson
             }
         }
 
+        var iconString = icon.Map(static value => value.GetString());
         return new GenericConsumable
         {
             Id = id.Map(static value => value.GetInt32()),
@@ -146,7 +147,10 @@ internal static class GenericConsumableJson
             Flags = flags.Map(static values => values.GetItemFlags()),
             Restrictions = restrictions.Map(static value => value.GetItemRestriction()),
             ChatLink = chatLink.Map(static value => value.GetStringRequired()),
-            IconHref = icon.Map(static value => value.GetString()),
+#pragma warning disable CS0618 // Suppress obsolete warning
+            IconHref = iconString,
+#pragma warning restore CS0618
+            IconUrl = !string.IsNullOrEmpty(iconString) ? new Uri(iconString) : null,
             Effect = hasEffect
                 ? new Effect
                 {
@@ -156,7 +160,14 @@ internal static class GenericConsumableJson
                         duration.Map(static value => TimeSpan.FromMilliseconds(value.GetDouble()))
                         ?? TimeSpan.Zero,
                     ApplyCount = applyCount.Map(static value => value.GetInt32()) ?? 0,
-                    IconHref = effectIcon.Map(static value => value.GetString()) ?? ""
+#pragma warning disable CS0618 // Suppress obsolete warning
+                    IconHref = effectIcon.Map(static value => value.GetString()) ?? "",
+#pragma warning restore CS0618
+                    IconUrl = effectIcon.Map(static value =>
+                    {
+                        var href = value.GetString();
+                        return !string.IsNullOrEmpty(href) ? new Uri(href) : null;
+                    })
                 }
                 : default,
             GuildUpgradeId = guildUpgradeId.Map(static value => value.GetInt32())

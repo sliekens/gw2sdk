@@ -5,5 +5,9 @@
 public sealed record RequiresUnlockPointOfInterest : PointOfInterest
 {
     /// <summary>The URL of the point of interest icon.</summary>
+    [Obsolete("Use IconUrl instead.")]
     public required string IconHref { get; init; }
+
+    /// <summary>The URL of the point of interest icon.</summary>
+    public required Uri IconUrl { get; init; }
 }

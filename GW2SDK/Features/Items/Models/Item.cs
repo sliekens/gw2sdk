@@ -44,7 +44,11 @@ public record Item
     public required string ChatLink { get; init; }
 
     /// <summary>The URL of the item icon.</summary>
+    [Obsolete("Use IconUrl instead.")]
     public required string? IconHref { get; init; }
+    
+    /// <summary>The URL of the item icon.</summary>
+    public required Uri? IconUrl { get; init; }
 
     /// <summary>Gets a chat link object for this item.</summary>
     /// <returns>The chat link as an object.</returns>

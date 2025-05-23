@@ -54,6 +54,8 @@ internal static class RequiresUnlockPointOfInterestJson
             }
         }
 
+        var iconString = icon.Map(static value => value.GetStringRequired());
+#pragma warning disable CS0618
         return new RequiresUnlockPointOfInterest
         {
             Id = id.Map(static value => value.GetInt32()),
@@ -61,7 +63,9 @@ internal static class RequiresUnlockPointOfInterestJson
             Floor = floor.Map(static value => value.GetInt32()),
             Coordinates = coordinates.Map(static value => value.GetCoordinateF()),
             ChatLink = chatLink.Map(static value => value.GetStringRequired()),
-            IconHref = icon.Map(static value => value.GetStringRequired())
+            IconHref = iconString,
+            IconUrl = new Uri(iconString)
         };
+#pragma warning restore CS0618
     }
 }

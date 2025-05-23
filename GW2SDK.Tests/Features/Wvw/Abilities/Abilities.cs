@@ -22,7 +22,10 @@ public class Abilities
                 Assert.True(entry.Id > 0);
                 Assert.NotEmpty(entry.Name);
                 Assert.NotEmpty(entry.Description);
+#pragma warning disable CS0618 // IconHref is obsolete
                 Assert.NotEmpty(entry.IconHref);
+#pragma warning restore CS0618
+                Assert.True(entry.IconUrl.IsAbsoluteUri);
                 Assert.NotEmpty(entry.Ranks);
             }
         );

@@ -46,6 +46,7 @@ internal static class DecorationJson
             }
         }
 
+        var iconString = icon.Map(static value => value.GetStringRequired());
         return new Decoration
         {
             Id = id.Map(static value => value.GetInt32()),
@@ -53,7 +54,10 @@ internal static class DecorationJson
             Description = description.Map(static value => value.GetStringRequired()),
             CategoryIds = categories.Map(static value => value.GetList(item => item.GetInt32())),
             MaxCount = maxCount.Map(static value => value.GetInt32()),
-            IconHref = icon.Map(static value => value.GetStringRequired())
+#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
+            IconHref = iconString,
+#pragma warning restore CS0618
+            IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute)
         };
     }
 }

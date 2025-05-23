@@ -36,6 +36,7 @@ internal static class GuildRankJson
             }
         }
 
+        var iconString = iconHref.Map(static value => value.GetStringRequired());
         return new GuildRank
         {
             Id = id.Map(static value => value.GetStringRequired()),
@@ -44,7 +45,10 @@ internal static class GuildRankJson
                 permissions.Map(static values =>
                     values.GetList(static value => value.GetStringRequired())
                 ),
-            IconHref = iconHref.Map(static value => value.GetStringRequired())
+#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
+            IconHref = iconString,
+#pragma warning restore CS0618
+            IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute)
         };
     }
 }

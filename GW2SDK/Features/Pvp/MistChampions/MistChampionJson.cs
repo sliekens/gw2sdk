@@ -56,6 +56,9 @@ internal static class MistChampionJson
             }
         }
 
+        var overlayString = overlay.Map(static value => value.GetStringRequired());
+        var underlayString = underlay.Map(static value => value.GetStringRequired());
+#pragma warning disable CS0618
         return new MistChampion
         {
             Id = id.Map(static value => value.GetStringRequired()),
@@ -63,11 +66,14 @@ internal static class MistChampionJson
             Description = description.Map(static value => value.GetStringRequired()),
             Type = type.Map(static value => value.GetStringRequired()),
             Stats = stats.Map(static value => value.GetMistChampionStats()),
-            OverlayImageHref = overlay.Map(static value => value.GetStringRequired()),
-            UnderlayImageHref = underlay.Map(static value => value.GetStringRequired()),
+            OverlayImageHref = overlayString,
+            OverlayImageUrl = new Uri(overlayString),
+            UnderlayImageHref = underlayString,
+            UnderlayImageUrl = new Uri(underlayString),
             Skins = skins.Map(static values =>
                 values.GetList(static value => value.GetMistChampionSkin())
             )
         };
+#pragma warning restore CS0618
     }
 }

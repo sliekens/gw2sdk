@@ -45,6 +45,7 @@ internal sealed class ShouldersJsonConverter : JsonConverter<Shoulders>
             );
         }
 
+        var iconString = json.GetProperty("icon").GetString();
         return new Shoulders
         {
             Id = json.GetProperty("id").GetInt32(),
@@ -58,7 +59,10 @@ internal sealed class ShouldersJsonConverter : JsonConverter<Shoulders>
             Flags = ItemFlagsJsonConverter.Read(json.GetProperty("flags")),
             Restrictions = ItemRestrictionJsonConverter.Read(json.GetProperty("restrictions")),
             ChatLink = json.GetProperty("chat_link").GetStringRequired(),
-            IconHref = json.GetProperty("icon").GetString(),
+#pragma warning disable CS0618 // Suppress obsolete warning
+            IconHref = iconString,
+#pragma warning restore CS0618
+            IconUrl = !string.IsNullOrEmpty(iconString) ? new Uri(iconString) : null,
             DefaultSkinId = json.GetProperty("default_skin_id").GetInt32(),
             WeightClass = json.GetProperty("weight_class").GetEnum<WeightClass>(),
             Defense = json.GetProperty("defense").GetInt32(),

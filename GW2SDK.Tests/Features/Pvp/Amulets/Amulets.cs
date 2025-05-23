@@ -21,7 +21,7 @@ public class Amulets
             {
                 Assert.True(entry.Id > 0);
                 Assert.NotEmpty(entry.Name);
-                Assert.NotEmpty(entry.IconHref);
+                Assert.NotNull(entry.IconUrl);
                 Assert.NotEmpty(entry.Attributes);
             }
         );

@@ -25,6 +25,7 @@ public class Objectives
                 Assert.True(entry.SectorId > 0);
                 Assert.True(entry.MapId > 0);
                 Assert.True(entry.MapKind.IsDefined());
+                Assert.True(entry.MarkerIconUrl is null or { IsAbsoluteUri: true });
 
                 var chatLink = entry.GetChatLink();
                 Assert.NotEmpty(entry.ChatLink);

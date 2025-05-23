@@ -22,7 +22,8 @@ public class Quaggans
             entry =>
             {
                 Assert.NotEmpty(entry.Id);
-                Assert.True(Uri.IsWellFormedUriString(entry.ImageHref, UriKind.Absolute));
+                Assert.NotNull(entry.ImageUrl);
+                Assert.True(entry.ImageUrl.IsAbsoluteUri);
             }
         );
     }

@@ -62,10 +62,14 @@ internal static class ComboFinisherJson
             }
         }
 
+        var iconString = icon.Map(static value => value.GetStringRequired());
         return new ComboFinisher
         {
             Text = text.Map(static value => value.GetStringRequired()),
-            IconHref = icon.Map(static value => value.GetStringRequired()),
+#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
+            IconHref = iconString,
+#pragma warning restore CS0618
+            IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
             Percent = percent.Map(static value => value.GetInt32()),
             FinisherName = finisherType.Map(static value => value.GetEnum<ComboFinisherName>())
         };

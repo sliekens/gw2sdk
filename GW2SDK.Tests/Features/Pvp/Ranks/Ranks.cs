@@ -21,7 +21,8 @@ public class Ranks
             {
                 Assert.True(entry.Id > 0);
                 Assert.NotEmpty(entry.Name);
-                Assert.NotEmpty(entry.IconHref);
+                Assert.NotNull(entry.IconUrl);
+                // Assert.NotEmpty(entry.IconHref); // Obsolete, replaced by IconUrl
                 Assert.NotEmpty(entry.Levels);
             }
         );

@@ -20,7 +20,8 @@ public class Files
             entry =>
             {
                 Assert.NotEmpty(entry.Id);
-                Assert.NotEmpty(entry.IconHref);
+                Assert.NotNull(entry.IconUrl);
+                Assert.True(entry.IconUrl!.IsAbsoluteUri);
             }
         );
     }

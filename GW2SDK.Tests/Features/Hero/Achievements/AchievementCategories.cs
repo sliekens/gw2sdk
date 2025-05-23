@@ -27,7 +27,11 @@ public class AchievementCategories
                 Assert.NotEmpty(entry.Name);
                 Assert.NotNull(entry.Description);
                 Assert.True(entry.Order >= 0);
+#pragma warning disable CS0618 // Suppress obsolete warning for IconHref
                 Assert.NotEmpty(entry.IconHref);
+#pragma warning restore CS0618
+                Assert.NotNull(entry.IconUrl);
+                Assert.True(entry.IconUrl!.IsAbsoluteUri);
                 Assert.NotNull(entry.Achievements);
 
                 Assert.All(

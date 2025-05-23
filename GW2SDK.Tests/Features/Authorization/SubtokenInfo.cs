@@ -24,10 +24,11 @@ public class SubtokenInfo
             DateTimeOffset.FromUnixTimeSeconds(DateTimeOffset.UtcNow.ToUnixTimeSeconds());
         var expiresAt = notBefore.AddDays(1);
 
-        List<string> urls =
+        List<Uri> urls =
         [
-            "/v2/tokeninfo", "/v2/account",
-            "/v2/characters/My Cool Character"
+            new Uri("/v2/tokeninfo", UriKind.Relative),
+            new Uri("/v2/account", UriKind.Relative),
+            new Uri("/v2/characters/My Cool Character", UriKind.Relative)
         ];
 
         var (createdSubtoken, context) = await sut.Tokens.CreateSubtoken(
@@ -66,7 +67,7 @@ public class SubtokenInfo
         Assert.Equal(expiresAt, subtoken.ExpiresAt);
 
         Assert.Equal(
-            urls,
+            urls.Select(u => Uri.UnescapeDataString(u.ToString())).ToList(),
             subtoken.Urls?.Select(url => Uri.UnescapeDataString(url.ToString())).ToList()
         );
     }

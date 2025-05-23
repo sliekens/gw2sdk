@@ -15,7 +15,11 @@ public sealed record Pet
     public required string Description { get; init; }
 
     /// <summary>The URL of the pet icon.</summary>
+    [Obsolete("Use IconUrl instead.")]
     public required string IconHref { get; init; }
+
+    /// <summary>The URL of the pet icon as a Uri.</summary>
+    public required Uri IconUrl { get; init; }
 
     /// <summary>The pet skills.</summary>
     public required IReadOnlyList<PetSkill> Skills { get; init; }

@@ -22,7 +22,11 @@ public sealed record AchievementCategory
     public required int Order { get; init; }
 
     /// <summary>The URL of the category icon as it appears in the achievement panel.</summary>
+    [Obsolete("Use IconUrl instead.")]
     public required string IconHref { get; init; }
+
+    /// <summary>The URL of the category icon as it appears in the achievement panel.</summary>
+    public required Uri IconUrl { get; init; }
 
     /// <summary>The achievements in this category.</summary>
     /// <remarks>Can be empty.</remarks>

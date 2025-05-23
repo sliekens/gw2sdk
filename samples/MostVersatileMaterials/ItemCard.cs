@@ -8,7 +8,7 @@ public class ItemCard(HttpClient httpClient)
 {
     public async Task Show(Item item)
     {
-        await using var ingredientIcon = await httpClient.GetStreamAsync(item.IconHref!);
+        await using var ingredientIcon = await httpClient.GetStreamAsync(item.IconUrl);
         var itemTable = new Table().AddColumn("Icon")
             .AddColumn("Ingredient")
             .AddColumn("Description");

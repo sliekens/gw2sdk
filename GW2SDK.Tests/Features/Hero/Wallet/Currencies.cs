@@ -32,7 +32,7 @@ public class Currencies
                 }
 
                 Assert.InRange(currency.Order, 1, 1000);
-                Assert.NotEmpty(currency.IconHref);
+                Assert.True(currency.IconUrl is null || currency.IconUrl.IsAbsoluteUri);
             }
         );
     }

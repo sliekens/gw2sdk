@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 using GuildWars2.Json;
 
@@ -28,14 +28,22 @@ internal sealed class EffectJsonConverter : JsonConverter<Effect>
 
     public static Effect Read(JsonElement json)
     {
+        var iconString = json.GetProperty("icon").GetString()
+            ?? json.GetProperty("icon_href").GetString()
+            ?? "";
+#pragma warning disable CS0618 // Suppress obsolete warning
         return new Effect
         {
             Name = json.GetProperty("name").GetStringRequired(),
             Description = json.GetProperty("description").GetStringRequired(),
             Duration = TimeSpan.Parse(json.GetProperty("duration").GetStringRequired()),
             ApplyCount = json.GetProperty("apply_count").GetInt32(),
-            IconHref = json.GetProperty("icon_href").GetStringRequired()
+#pragma warning disable CS0618 // Suppress obsolete warning
+            IconHref = iconString,
+#pragma warning restore CS0618
+            IconUrl = !string.IsNullOrEmpty(iconString) ? new Uri(iconString) : null
         };
+#pragma warning restore CS0618
     }
 
     public static void Write(Utf8JsonWriter writer, Effect value)
@@ -45,7 +53,7 @@ internal sealed class EffectJsonConverter : JsonConverter<Effect>
         writer.WriteString("description", value.Description);
         writer.WriteString("duration", value.Duration.ToString());
         writer.WriteNumber("apply_count", value.ApplyCount);
-        writer.WriteString("icon_href", value.IconHref);
+        writer.WriteString("icon", value.IconUrl?.ToString());
         writer.WriteEndObject();
     }
 }

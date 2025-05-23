@@ -25,7 +25,7 @@ public class GuildUpgrades
                 Assert.True(entry.Id > 0);
                 Assert.NotNull(entry.Name);
                 Assert.NotNull(entry.Description);
-                Assert.NotEmpty(entry.IconHref);
+                Assert.True(entry.IconUrl.IsAbsoluteUri);
                 Assert.NotNull(entry.Costs);
                 if (entry is BankBag bankBag)
                 {

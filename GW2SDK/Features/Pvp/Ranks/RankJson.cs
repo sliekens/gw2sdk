@@ -51,12 +51,16 @@ internal static class RankJson
             }
         }
 
+        string iconString = icon.Map(static value => value.GetStringRequired());
         return new Rank
         {
             Id = id.Map(static value => value.GetInt32()),
             FinisherId = finisherId.Map(static value => value.GetInt32()),
             Name = name.Map(static value => value.GetStringRequired()),
-            IconHref = icon.Map(static value => value.GetStringRequired()),
+#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
+            IconHref = iconString,
+#pragma warning restore CS0618
+            IconUrl = new Uri(iconString),
             MinRank = minRank.Map(static value => value.GetInt32()),
             MaxRank = maxRank.Map(static value => value.GetInt32()),
             Levels = levels.Map(static values => values.GetList(static value => value.GetLevel()))

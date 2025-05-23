@@ -52,6 +52,7 @@ internal sealed class EquipmentSkinJsonConverter : JsonConverter<EquipmentSkin>
             }
         }
 
+        var iconString = json.GetProperty("icon").GetString();
         return new EquipmentSkin
         {
             Id = json.GetProperty("id").GetInt32(),
@@ -60,7 +61,10 @@ internal sealed class EquipmentSkinJsonConverter : JsonConverter<EquipmentSkin>
             Flags = SkinFlagsJsonConverter.Read(json.GetProperty("flags")),
             Races = json.GetProperty("races").GetList(static value => value.GetEnum<RaceName>()),
             Rarity = json.GetProperty("rarity").GetEnum<Rarity>(),
-            IconHref = json.GetProperty("icon").GetString()
+#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
+            IconHref = iconString,
+#pragma warning restore CS0618
+            IconUrl = string.IsNullOrEmpty(iconString) ? null : new Uri(iconString)
         };
     }
 
@@ -104,6 +108,6 @@ internal sealed class EquipmentSkinJsonConverter : JsonConverter<EquipmentSkin>
 
         writer.WriteEndArray();
         writer.WriteString("rarity", value.Rarity.ToString());
-        writer.WriteString("icon", value.IconHref);
+        writer.WriteString("icon", value.IconUrl?.ToString());
     }
 }

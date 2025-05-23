@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Builds.Facts;
@@ -49,10 +50,14 @@ internal static class RangeJson
             }
         }
 
+        var iconString = icon.Map(static value => value.GetStringRequired());
         return new Range
         {
             Text = text.Map(static value => value.GetStringRequired()),
-            IconHref = icon.Map(static value => value.GetStringRequired()),
+#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
+            IconHref = iconString,
+#pragma warning restore CS0618
+            IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
             Distance = range.Map(static value => value.GetInt32())
         };
     }

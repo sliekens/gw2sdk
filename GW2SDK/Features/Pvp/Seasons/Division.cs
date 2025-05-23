@@ -15,13 +15,22 @@ public sealed record Division
     public required DivisionFlags Flags { get; init; }
 
     /// <summary>The URL of the large division icon.</summary>
+    [Obsolete("Use LargeIconUrl instead.")]
     public required string LargeIconHref { get; init; }
+    /// <summary>The URL of the large division icon.</summary>
+    public required Uri LargeIconUrl { get; init; }
 
     /// <summary>The URL of the small division icon.</summary>
+    [Obsolete("Use SmallIconUrl instead.")]
     public required string SmallIconHref { get; init; }
+    /// <summary>The URL of the small division icon.</summary>
+    public required Uri SmallIconUrl { get; init; }
 
     /// <summary>The URL of the pip icon.</summary>
+    [Obsolete("Use PipIconUrl instead.")]
     public required string PipIconHref { get; init; }
+    /// <summary>The URL of the pip icon.</summary>
+    public required Uri PipIconUrl { get; init; }
 
     /// <summary>The division's tiers.</summary>
     public required IReadOnlyList<DivisionTier> Tiers { get; init; }

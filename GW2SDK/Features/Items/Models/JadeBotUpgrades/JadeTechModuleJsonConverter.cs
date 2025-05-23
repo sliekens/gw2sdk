@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 using GuildWars2.Json;
 
@@ -36,6 +36,7 @@ internal sealed class JadeTechModuleJsonConverter : JsonConverter<JadeTechModule
             );
         }
 
+        var iconString = json.GetProperty("icon").GetString();
         return new JadeTechModule
         {
             Id = json.GetProperty("id").GetInt32(),
@@ -49,7 +50,10 @@ internal sealed class JadeTechModuleJsonConverter : JsonConverter<JadeTechModule
             Flags = ItemFlagsJsonConverter.Read(json.GetProperty("flags")),
             Restrictions = ItemRestrictionJsonConverter.Read(json.GetProperty("restrictions")),
             ChatLink = json.GetProperty("chat_link").GetStringRequired(),
-            IconHref = json.GetProperty("icon").GetString()
+#pragma warning disable CS0618 // Suppress obsolete warning
+            IconHref = iconString,
+#pragma warning restore CS0618
+            IconUrl = !string.IsNullOrEmpty(iconString) ? new Uri(iconString) : null
         };
     }
 

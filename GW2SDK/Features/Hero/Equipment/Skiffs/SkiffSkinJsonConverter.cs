@@ -18,11 +18,15 @@ internal sealed class SkiffSkinJsonConverter : JsonConverter<SkiffSkin>
 
     public static SkiffSkin Read(JsonElement json)
     {
+        var iconString = json.GetProperty("icon").GetStringRequired();
         return new SkiffSkin
         {
             Id = json.GetProperty("id").GetInt32(),
             Name = json.GetProperty("name").GetStringRequired(),
-            IconHref = json.GetProperty("icon").GetStringRequired(),
+#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
+            IconHref = iconString,
+#pragma warning restore CS0618
+            IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
             DyeSlots = json.GetProperty("dye_slots").GetList(DyeSlotJsonConverter.Read)!
         };
     }
@@ -36,7 +40,7 @@ internal sealed class SkiffSkinJsonConverter : JsonConverter<SkiffSkin>
         writer.WriteStartObject();
         writer.WriteNumber("id", value.Id);
         writer.WriteString("name", value.Name);
-        writer.WriteString("icon", value.IconHref);
+        writer.WriteString("icon", value.IconUrl.ToString());
         writer.WriteStartArray("dye_slots");
         foreach (var dyeSlot in value.DyeSlots)
         {
