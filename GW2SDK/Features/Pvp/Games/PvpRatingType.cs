@@ -21,11 +21,14 @@ public enum PvpRatingType
     /// <summary>A ranked game with 3 players per team.</summary>
     Ranked3v3,
 
+    /// <summary>A ranked Push game.</summary>
+    RankedPush,
+
     /// <summary>An unranked game.</summary>
     Unranked,
 
     /// <summary>A placement game for a new PvP season.</summary>
     /// <remarks>The player skill rating is reset at the beginning of each season and 10 placement rounds must be played to
     /// obtain a new rating.</remarks>
-    Placeholder
+    Placeholder,
 }

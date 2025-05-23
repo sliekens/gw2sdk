@@ -14,6 +14,7 @@ internal static class PvpRatingTypeJson
             "Ranked" => PvpRatingType.Ranked,
             "2v2Ranked" => PvpRatingType.Ranked2v2,
             "3v3Ranked" => PvpRatingType.Ranked3v3,
+            "CtFRanked" => PvpRatingType.RankedPush,
             "Unranked" => PvpRatingType.Unranked,
             "Placeholder" => PvpRatingType.Placeholder,
             _ => new Extensible<PvpRatingType>(text)
