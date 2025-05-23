@@ -24,7 +24,7 @@ public static class Gw2Resiliency
 {
     public static readonly TimeoutStrategyOptions TotalTimeoutStrategy = new()
     {
-        Timeout = TimeSpan.FromMinutes(3)
+        Timeout = TimeSpan.FromMinutes(5)
     };
 
     // The API can return errors which can be fixed by a delayed retry
@@ -122,7 +122,7 @@ public static class Gw2Resiliency
 
     public static readonly TimeoutStrategyOptions AttemptTimeoutStrategy = new()
     {
-        Timeout = TimeSpan.FromSeconds(30)
+        Timeout = TimeSpan.FromSeconds(100)
     };
 
     // Helper method to get the "text" property from the API response
