@@ -20,6 +20,9 @@ public sealed record Ladders
     /// <summary>Statistics for ranked games (3v3).</summary>
     public required Results? Ranked3v3 { get; init; }
 
+    /// <summary>Statistics for ranked games (Push).</summary>
+    public required Results? PushRanked { get; init; }
+
     /// <summary>Statistics for custom solo arenas.</summary>
     public required Results? SoloArenaRated { get; init; }
 

@@ -12,6 +12,7 @@ internal static class LaddersJson
         OptionalMember ranked = "ranked";
         OptionalMember ranked2v2 = "2v2ranked";
         OptionalMember ranked3v3 = "3v3ranked";
+        OptionalMember rankedPush = "ctfranked";
         OptionalMember soloArenaRated = "soloarenarated";
         OptionalMember teamArenaRated = "teamarenarated";
 
@@ -37,6 +38,10 @@ internal static class LaddersJson
             {
                 ranked3v3 = member;
             }
+            else if (rankedPush.Match(member))
+            {
+                rankedPush = member;
+            }
             else if (soloArenaRated.Match(member))
             {
                 soloArenaRated = member;
@@ -58,6 +63,7 @@ internal static class LaddersJson
             Ranked = ranked.Map(static value => value.GetResults()),
             Ranked2v2 = ranked2v2.Map(static value => value.GetResults()),
             Ranked3v3 = ranked3v3.Map(static value => value.GetResults()),
+            PushRanked = rankedPush.Map(static value => value.GetResults()),
             SoloArenaRated = soloArenaRated.Map(static value => value.GetResults()),
             TeamArenaRated = teamArenaRated.Map(static value => value.GetResults())
         };
