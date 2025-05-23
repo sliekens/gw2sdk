@@ -58,7 +58,7 @@
   <!-- Package validation -->
   <PropertyGroup>
     <EnablePackageValidation>true</EnablePackageValidation>
-    <PackageValidationBaselineVersion>2.2.1</PackageValidationBaselineVersion>
+    <PackageValidationBaselineVersion>2.3.2</PackageValidationBaselineVersion>
   </PropertyGroup>
 
   <ItemGroup>
