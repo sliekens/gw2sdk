@@ -37,4 +37,20 @@ public readonly record struct Hyperlink
 
     /// <summary>Gets a value indicating whether the hyperlink is empty.</summary>
     public bool IsEmpty => Uri is null;
+
+    /// <summary>Deconstructs the hyperlink into its Url string.</summary>
+    /// <param name="url">The URL string.</param>
+    public void Deconstruct(out string url)
+    {
+#pragma warning disable CS0618 // Suppress obsolete warning for Url property
+        url = Url;
+#pragma warning restore CS0618
+    }
+
+    /// <summary>Deconstructs the hyperlink into its Uri.</summary>
+    /// <param name="uri">The Uri object.</param>
+    public void Deconstruct(out Uri? uri)
+    {
+        uri = Uri;
+    }
 }
