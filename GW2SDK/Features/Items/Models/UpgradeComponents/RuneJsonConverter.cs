@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
+using GuildWars2.Collections;
 using GuildWars2.Hero;
 using GuildWars2.Json;
 
@@ -78,7 +79,11 @@ internal sealed class RuneJsonConverter : JsonConverter<Rune>
             Buff = json.GetProperty("buff").GetNullable(BuffJsonConverter.Read),
             SuffixName = json.GetProperty("suffix").GetStringRequired(),
             Bonuses = json.GetProperty("bonuses")
-                .GetNullable(static value => value.GetList(entry => entry.GetStringRequired()))
+                .GetNullable(static value => value.GetList(entry => entry.GetStringRequired())),
+            UpgradesInto =
+                json.TryGetProperty("upgrades_into", out JsonElement found)
+                    ? found.GetList(InfusionSlotUpgradePathJsonConverter.Read)
+                    : new ValueList<InfusionSlotUpgradePath>()
         };
     }
 

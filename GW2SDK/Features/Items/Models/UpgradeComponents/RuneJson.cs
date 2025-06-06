@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using GuildWars2.Collections;
 using GuildWars2.Json;
 
 namespace GuildWars2.Items;
@@ -178,7 +179,8 @@ internal static class RuneJson
             SuffixName = suffix.Map(static value => value.GetStringRequired()),
             Bonuses = bonuses.Map(static values =>
                 values.GetList(static value => value.GetStringRequired())
-            )
+            ),
+            UpgradesInto = new ValueList<InfusionSlotUpgradePath>()
         };
     }
 }

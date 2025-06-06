@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using GuildWars2.Collections;
 using GuildWars2.Json;
 
 namespace GuildWars2.Items;
@@ -83,6 +84,7 @@ internal static class UpgradeComponentJson
         OptionalMember infixUpgradeAttributes = "attributes";
         OptionalMember infixUpgradeBuff = "buff";
         RequiredMember suffix = "suffix";
+        OptionalMember upgradesInto = "upgrades_into";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
@@ -135,6 +137,10 @@ internal static class UpgradeComponentJson
             else if (icon.Match(member))
             {
                 icon = member;
+            }
+            else if (upgradesInto.Match(member))
+            {
+                upgradesInto = member;
             }
             else if (member.NameEquals("details"))
             {
@@ -227,7 +233,12 @@ internal static class UpgradeComponentJson
             AttributeCombinationId = infixUpgradeId.Map(static value => value.GetInt32()),
             Attributes = infixUpgradeAttributes.Map(static values => values.GetAttributes()) ?? [],
             Buff = infixUpgradeBuff.Map(static value => value.GetBuff()),
-            SuffixName = suffix.Map(static value => value.GetStringRequired())
+            SuffixName = suffix.Map(static value => value.GetStringRequired()),
+            UpgradesInto =
+                upgradesInto.Map(static values =>
+                    values.GetList(static value => value.GetInfusionSlotUpgradePath())
+                )
+                ?? new ValueList<InfusionSlotUpgradePath>(),
         };
     }
 }

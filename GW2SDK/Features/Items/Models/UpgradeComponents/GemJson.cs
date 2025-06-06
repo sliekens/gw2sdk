@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using GuildWars2.Collections;
 using GuildWars2.Json;
 
 namespace GuildWars2.Items;
@@ -168,7 +169,8 @@ internal static class GemJson
             AttributeCombinationId = infixUpgradeId.Map(static value => value.GetInt32()),
             Attributes = infixUpgradeAttributes.Map(static values => values.GetAttributes()) ?? [],
             Buff = infixUpgradeBuff.Map(static value => value.GetBuff()),
-            SuffixName = suffix.Map(static value => value.GetStringRequired())
+            SuffixName = suffix.Map(static value => value.GetStringRequired()),
+            UpgradesInto = new ValueList<InfusionSlotUpgradePath>()
         };
     }
 }

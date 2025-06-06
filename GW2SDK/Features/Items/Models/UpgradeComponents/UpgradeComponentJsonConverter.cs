@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
+using GuildWars2.Collections;
 using GuildWars2.Hero;
 using GuildWars2.Json;
 
@@ -91,7 +92,11 @@ internal sealed class UpgradeComponentJsonConverter : JsonConverter<UpgradeCompo
                         static value => value.GetInt32()
                     ),
             Buff = json.GetProperty("buff").GetNullable(BuffJsonConverter.Read),
-            SuffixName = json.GetProperty("suffix").GetStringRequired()
+            SuffixName = json.GetProperty("suffix").GetStringRequired(),
+            UpgradesInto =
+                json.TryGetProperty("upgrades_into", out JsonElement found)
+                    ? found.GetList(InfusionSlotUpgradePathJsonConverter.Read)
+                    : new ValueList<InfusionSlotUpgradePath>()
         };
     }
 
@@ -157,5 +162,13 @@ internal sealed class UpgradeComponentJsonConverter : JsonConverter<UpgradeCompo
         }
 
         writer.WriteString("suffix", value.SuffixName);
+
+        writer.WriteStartArray("upgrades_into");
+        foreach (var upgrade in value.UpgradesInto)
+        {
+            InfusionSlotUpgradePathJsonConverter.Write(writer, upgrade);
+        }
+
+        writer.WriteEndArray();
     }
 }

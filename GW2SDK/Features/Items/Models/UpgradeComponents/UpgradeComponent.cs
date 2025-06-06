@@ -1,6 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using GuildWars2.Collections;
 using GuildWars2.Hero;
+using System.Collections.Generic;
 
 namespace GuildWars2.Items;
 
@@ -8,7 +9,7 @@ namespace GuildWars2.Items;
 [PublicAPI]
 [Inheritable]
 [JsonConverter(typeof(UpgradeComponentJsonConverter))]
-public record UpgradeComponent : Item, ICombatEquipment
+public record UpgradeComponent : Item, ICombatEquipment, IInfusable
 {
     /// <summary>Flags that indicate which types of items are compatible with the upgrade.</summary>
     public required UpgradeComponentFlags UpgradeComponentFlags { get; init; }
@@ -36,4 +37,8 @@ public record UpgradeComponent : Item, ICombatEquipment
 
     /// <summary>The effect which is applied to the player when the item is equipped.</summary>
     public required Buff? Buff { get; init; }
+
+    /// <summary>If the current upgrade component is used in the Mystic Forge to infuse or attune equipment, this collection
+    /// contains the IDs of the infused (or attuned) items. Each item in the collection represents a different recipe.</summary>
+    public required IReadOnlyCollection<InfusionSlotUpgradePath> UpgradesInto { get; init; }
 }
