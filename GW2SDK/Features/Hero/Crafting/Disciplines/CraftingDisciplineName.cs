@@ -32,5 +32,8 @@ public enum CraftingDisciplineName
     Tailor,
 
     /// <summary>The Weaponsmith crafting discipline.</summary>
-    Weaponsmith
+    Weaponsmith,
+
+    /// <summary>The Homesteader crafting discipline.</summary>
+    Homesteader
 }
