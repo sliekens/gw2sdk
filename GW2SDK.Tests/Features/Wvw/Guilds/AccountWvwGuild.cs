@@ -15,7 +15,11 @@ public class AccountWvwGuild
             TestContext.Current.CancellationToken
         );
 
-        Assert.True(actual.TeamId > 0);
+        if (actual.TeamId.HasValue)
+        {
+            Assert.True(actual.TeamId > 0);
+        }
+
         Assert.NotEmpty(actual.GuildId!);
     }
 }
