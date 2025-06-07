@@ -28,9 +28,16 @@ internal sealed class EffectJsonConverter : JsonConverter<Effect>
 
     public static Effect Read(JsonElement json)
     {
-        var iconString = json.GetProperty("icon").GetString()
-            ?? json.GetProperty("icon_href").GetString()
-            ?? "";
+        string iconString = "";
+        if (json.TryGetProperty("icon", out var iconElement))
+        {
+            iconString = iconElement.GetString() ?? "";
+        }
+        else if (json.TryGetProperty("icon_href", out iconElement))
+        {
+            iconString = iconElement.GetString() ?? "";
+        }
+
 #pragma warning disable CS0618 // Suppress obsolete warning
         return new Effect
         {
