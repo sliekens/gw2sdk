@@ -9,6 +9,7 @@ namespace GuildWars2.Collections;
 /// <remarks>
 /// Adding items to the dictionary changes its hash code. <b>Do not</b> use this type in dictionaries or hash sets.
 /// </remarks>
+[PublicAPI]
 [DebuggerDisplay("Count = {Count}")]
 // Deriving from ImmutableDictionary would be preferable, but it is unavailable in .NET Standard 2.0.
 public sealed class ValueDictionary<TKey, TValue> : Dictionary<TKey, TValue>,
