@@ -9,8 +9,8 @@ internal static class SeasonJson
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
-        RequiredMember start = "start";
-        RequiredMember end = "end";
+        OptionalMember start = "start";
+        OptionalMember end = "end";
         RequiredMember active = "active";
         RequiredMember divisions = "divisions";
         OptionalMember ranks = "ranks";
