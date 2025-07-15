@@ -10,13 +10,13 @@
     <PackageVersion Include="Microsoft.Bcl.HashCode" Version="6.0.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="[4.12.0]" />
     <!-- 4.13 breaks docfx -->
-    <PackageVersion Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="9.0.4" />
-    <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="9.0.4" />
-    <PackageVersion Include="Microsoft.Extensions.Configuration.UserSecrets" Version="9.0.4" />
-    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="9.0.4" />
-    <PackageVersion Include="Microsoft.Extensions.Http" Version="9.0.4" />
-    <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="9.4.0" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.UserSecrets" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.Extensions.Http" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="9.7.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
     <PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="17.14.2" />
     <PackageVersion Include="MinVer" Version="6.0.0" />
     <PackageVersion Include="Pastel" Version="6.0.1" />
@@ -29,11 +29,11 @@
     <PackageVersion Include="SixLabors.ImageSharp" Version="3.1.8" />
     <PackageVersion Include="Spectre.Console" Version="0.50.0" />
     <PackageVersion Include="Spectre.Console.ImageSharp" Version="0.50.0" />
-    <PackageVersion Include="System.Interactive" Version="6.0.1" />
-    <PackageVersion Include="System.Linq.Async" Version="6.0.1" />
+    <PackageVersion Include="System.Interactive" Version="6.0.3" />
+    <PackageVersion Include="System.Linq.Async" Version="6.0.3" />
     <PackageVersion Include="System.Reactive" Version="6.0.1" />
     <PackageVersion Include="System.Runtime.InteropServices.RuntimeInformation" Version="4.3.0" />
-    <PackageVersion Include="System.Text.Json" Version="9.0.4" />
+    <PackageVersion Include="System.Text.Json" Version="9.0.7" />
     <PackageVersion Include="xunit" Version="2.9.2" />
     <PackageVersion Include="xunit.analyzers" Version="1.21.0" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.0" />
