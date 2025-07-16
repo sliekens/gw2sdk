@@ -1,25 +1,15 @@
-﻿using GuildWars2.Http;
-using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pve.SuperAdventureBox;
 
 public class SuperAdventureBoxProgress
 {
     [Fact]
-    public async Task ErrInternal()
-    {
-        var reason = await Assert.ThrowsAsync<BadResponseException>(Can_be_found);
-
-        Assert.Equal("ErrInternal", reason.Message);
-    }
-
-    [Fact(Skip = "ErrInternal")]
     public async Task Can_be_found()
     {
         var sut = Composer.Resolve<Gw2Client>();
         var character = TestConfiguration.TestCharacter;
         var accessToken = TestConfiguration.ApiKey;
-
 
         var (actual, _) = await sut.Pve.SuperAdventureBox.GetSuperAdventureBoxProgress(
             character.Name,
