@@ -5,6 +5,7 @@ using GuildWars2.Files;
 using GuildWars2.Guilds;
 using GuildWars2.Hero;
 using GuildWars2.Items;
+using GuildWars2.Logos;
 using GuildWars2.Metadata;
 using GuildWars2.Pve;
 using GuildWars2.Pvp;
@@ -49,6 +50,9 @@ public sealed class Gw2Client
 
     /// <inheritdoc cref="ItemsClient" />
     public ItemsClient Items => new(httpClient);
+
+    /// <inheritdoc cref="LogosClient" />
+    public LogosClient Logos => new(httpClient);
 
     /// <inheritdoc cref="MetadataClient" />
     public MetadataClient Metadata => new(httpClient);

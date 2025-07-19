@@ -95,6 +95,7 @@ public class V2
             "/v2/homestead/glyphs", "/v2/items",
             "/v2/itemstats", "/v2/jadebots",
             "/v2/legendaryarmory", "/v2/legends",
+            "/v2/logos",
             "/v2/mailcarriers", "/v2/mapchests",
             "/v2/maps", "/v2/masteries",
             "/v2/materials", "/v2/minis",
