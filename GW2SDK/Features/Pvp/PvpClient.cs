@@ -211,6 +211,7 @@ public sealed class PvpClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/pvp/amulets");
         requestBuilder.Query.AddAllIds();
+        requestBuilder.Query.AddLanguage(language);
         var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
