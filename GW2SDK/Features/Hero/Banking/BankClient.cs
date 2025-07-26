@@ -43,7 +43,7 @@ public sealed class BankClient
         }
     }
 
-    #endregion
+    #endregion v2/account/bank
 
     #region v2/account/materials
 
@@ -70,7 +70,7 @@ public sealed class BankClient
         }
     }
 
-    #endregion
+    #endregion v2/account/materials
 
     #region v2/materials
 
@@ -207,5 +207,5 @@ public sealed class BankClient
         }
     }
 
-    #endregion
+    #endregion v2/materials
 }

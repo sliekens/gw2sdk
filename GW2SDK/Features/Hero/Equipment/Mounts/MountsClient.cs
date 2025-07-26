@@ -60,7 +60,7 @@ public sealed class MountsClient
         }
     }
 
-    #endregion
+    #endregion v2/account/mounts
 
     #region v2/mounts/types
 
@@ -211,7 +211,7 @@ public sealed class MountsClient
         }
     }
 
-    #endregion
+    #endregion v2/mounts/types
 
     #region v2/mounts/skins
 
@@ -341,5 +341,5 @@ public sealed class MountsClient
         }
     }
 
-    #endregion
+    #endregion v2/mounts/skins
 }

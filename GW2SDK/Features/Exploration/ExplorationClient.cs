@@ -53,7 +53,7 @@ public sealed class ExplorationClient
         }
     }
 
-    #endregion
+    #endregion v2/characters/:id/heropoints
 
     #region v2/continents
 
@@ -183,7 +183,7 @@ public sealed class ExplorationClient
         }
     }
 
-    #endregion
+    #endregion v2/continents
 
     #region v2/continents/:id/floors
 
@@ -323,7 +323,7 @@ public sealed class ExplorationClient
         }
     }
 
-    #endregion
+    #endregion v2/continents/:id/floors
 
     #region v2/continents/:id/floors/:floor/regions
 
@@ -478,7 +478,7 @@ public sealed class ExplorationClient
         }
     }
 
-    #endregion
+    #endregion v2/continents/:id/floors/:floor/regions
 
     #region v2/continents/:id/floors/:floor/regions/:region/maps
 
@@ -648,7 +648,7 @@ public sealed class ExplorationClient
         }
     }
 
-    #endregion
+    #endregion v2/continents/:id/floors/:floor/regions/:region/maps
 
     #region v2/continents/:id/floors/:floor/regions/:region/maps/:map/pois
 
@@ -833,7 +833,7 @@ public sealed class ExplorationClient
         }
     }
 
-    #endregion
+    #endregion v2/continents/:id/floors/:floor/regions/:region/maps/:map/pois
 
     #region v2/continents/:id/floors/:floor/regions/:region/maps/:map/tasks
 
@@ -1013,7 +1013,7 @@ public sealed class ExplorationClient
         }
     }
 
-    #endregion
+    #endregion v2/continents/:id/floors/:floor/regions/:region/maps/:map/tasks
 
     #region v2/continents/:id/floors/:floor/regions/:region/maps/:map/sectors
 
@@ -1193,7 +1193,7 @@ public sealed class ExplorationClient
         }
     }
 
-    #endregion
+    #endregion v2/continents/:id/floors/:floor/regions/:region/maps/:map/sectors
 
     #region v2/maps
 
@@ -1323,5 +1323,5 @@ public sealed class ExplorationClient
         }
     }
 
-    #endregion
+    #endregion v2/maps
 }

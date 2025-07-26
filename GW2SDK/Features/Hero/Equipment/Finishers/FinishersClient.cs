@@ -46,7 +46,7 @@ public sealed class FinishersClient
         }
     }
 
-    #endregion
+    #endregion v2/account/finishers
 
     #region v2/finishers
 
@@ -176,5 +176,5 @@ public sealed class FinishersClient
         }
     }
 
-    #endregion
+    #endregion v2/finishers
 }

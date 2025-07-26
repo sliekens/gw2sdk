@@ -50,5 +50,5 @@ public sealed class SuperAdventureBoxClient
         }
     }
 
-    #endregion
+    #endregion v2/characters/:id/sab
 }

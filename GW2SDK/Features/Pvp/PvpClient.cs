@@ -47,7 +47,7 @@ public sealed class PvpClient
         }
     }
 
-    #endregion
+    #endregion v2/pvp/seasons/:id/leaderboards
 
     #region v2/pvp/seasons/:id/leaderboards/:board
 
@@ -74,7 +74,7 @@ public sealed class PvpClient
         }
     }
 
-    #endregion
+    #endregion v2/pvp/seasons/:id/leaderboards/:board
 
     #region v2/pvp/seasons/:id/leaderboards/:board/:region
 
@@ -113,7 +113,7 @@ public sealed class PvpClient
         }
     }
 
-    #endregion
+    #endregion v2/pvp/seasons/:id/leaderboards/:board/:region
 
     #region v2/pvp/standings
 
@@ -141,7 +141,7 @@ public sealed class PvpClient
         }
     }
 
-    #endregion
+    #endregion v2/pvp/standings
 
     #region v2/pvp/stats
 
@@ -169,7 +169,7 @@ public sealed class PvpClient
         }
     }
 
-    #endregion
+    #endregion v2/pvp/stats
 
     #region v2/account/pvp/heroes
 
@@ -323,7 +323,7 @@ public sealed class PvpClient
         }
     }
 
-    #endregion
+    #endregion v2/pvp/amulets
 
     #region v2/pvp/heroes
 
@@ -453,7 +453,7 @@ public sealed class PvpClient
         }
     }
 
-    #endregion
+    #endregion v2/pvp/heroes
 
     #region v2/pvp/ranks
 
@@ -583,7 +583,7 @@ public sealed class PvpClient
         }
     }
 
-    #endregion
+    #endregion v2/pvp/ranks
 
     #region v2/pvp/seasons
 
@@ -713,7 +713,7 @@ public sealed class PvpClient
         }
     }
 
-    #endregion
+    #endregion v2/pvp/seasons
 
     #region v2/pvp/games
 
@@ -846,5 +846,5 @@ public sealed class PvpClient
         }
     }
 
-    #endregion
+    #endregion v2/pvp/games
 }

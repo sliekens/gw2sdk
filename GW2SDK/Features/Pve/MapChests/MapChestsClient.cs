@@ -41,7 +41,7 @@ public sealed class MapChestsClient
         }
     }
 
-    #endregion
+    #endregion v2/account/mapchests
 
     #region v2/mapchests
 
@@ -159,5 +159,5 @@ public sealed class MapChestsClient
         }
     }
 
-    #endregion
+    #endregion v2/mapchests
 }

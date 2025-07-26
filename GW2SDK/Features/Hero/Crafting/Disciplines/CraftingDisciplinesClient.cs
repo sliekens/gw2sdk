@@ -50,5 +50,5 @@ public sealed class CraftingDisciplinesClient
         }
     }
 
-    #endregion
+    #endregion v2/characters/:id/crafting
 }

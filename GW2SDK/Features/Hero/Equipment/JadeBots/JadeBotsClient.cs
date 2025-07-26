@@ -41,7 +41,7 @@ public sealed class JadeBotsClient
         }
     }
 
-    #endregion
+    #endregion v2/account/jadebots
 
     #region v2/jadebots
 
@@ -171,5 +171,5 @@ public sealed class JadeBotsClient
         }
     }
 
-    #endregion
+    #endregion v2/jadebots
 }

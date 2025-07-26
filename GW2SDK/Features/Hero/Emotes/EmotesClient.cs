@@ -41,7 +41,7 @@ public sealed class EmotesClient
         }
     }
 
-    #endregion
+    #endregion v2/account/emotes
 
     #region v2/emotes
 
@@ -159,5 +159,5 @@ public sealed class EmotesClient
         }
     }
 
-    #endregion
+    #endregion v2/emotes
 }

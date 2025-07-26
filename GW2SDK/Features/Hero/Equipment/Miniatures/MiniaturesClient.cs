@@ -41,7 +41,7 @@ public sealed class MiniaturesClient
         }
     }
 
-    #endregion
+    #endregion v2/account/minis
 
     #region v2/minis
 
@@ -171,5 +171,5 @@ public sealed class MiniaturesClient
         }
     }
 
-    #endregion
+    #endregion v2/minis
 }

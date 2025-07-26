@@ -44,7 +44,7 @@ public sealed class WalletClient
         }
     }
 
-    #endregion
+    #endregion v2/account/wallet
 
     #region v2/currencies
 
@@ -174,5 +174,5 @@ public sealed class WalletClient
         }
     }
 
-    #endregion
+    #endregion v2/currencies
 }

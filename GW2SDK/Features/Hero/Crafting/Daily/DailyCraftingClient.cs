@@ -40,7 +40,7 @@ public sealed class DailyCraftingClient
         }
     }
 
-    #endregion
+    #endregion v2/dailycrafting
 
     #region v2/account/dailycrafting
 
@@ -67,5 +67,5 @@ public sealed class DailyCraftingClient
         }
     }
 
-    #endregion
+    #endregion v2/account/dailycrafting
 }

@@ -82,16 +82,16 @@ public sealed class WvwClient
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value = response.Json.RootElement.GetMap(static value => value.GetStringRequired())
                 .Select(map => new WvwGuild
-                    {
-                        Name = map.Key,
-                        TeamId = map.Value
-                    }
+                {
+                    Name = map.Key,
+                    TeamId = map.Value
+                }
                 );
             return ([.. value], response.Context);
         }
     }
 
-    #endregion
+    #endregion v2/wvw/guilds
 
     #region v2/wvw/abilities
 
@@ -221,7 +221,7 @@ public sealed class WvwClient
         }
     }
 
-    #endregion
+    #endregion v2/wvw/abilities
 
     #region v2/wvw/objectives
 
@@ -351,7 +351,7 @@ public sealed class WvwClient
         }
     }
 
-    #endregion
+    #endregion v2/wvw/objectives
 
     #region v2/wvw/ranks
 
@@ -481,7 +481,7 @@ public sealed class WvwClient
         }
     }
 
-    #endregion
+    #endregion v2/wvw/ranks
 
     #region v2/wvw/upgrades
 
@@ -614,7 +614,7 @@ public sealed class WvwClient
         }
     }
 
-    #endregion
+    #endregion v2/wvw/upgrades
 
     #region v2/wvw/matches
 
@@ -756,7 +756,7 @@ public sealed class WvwClient
         }
     }
 
-    #endregion
+    #endregion v2/wvw/matches
 
     #region v2/wvw/matches/overview
 
@@ -900,7 +900,7 @@ public sealed class WvwClient
         }
     }
 
-    #endregion
+    #endregion v2/wvw/matches/overview
 
     #region v2/wvw/matches/scores
 
@@ -1042,7 +1042,7 @@ public sealed class WvwClient
         }
     }
 
-    #endregion
+    #endregion v2/wvw/matches/scores
 
     #region v2/wvw/matches/stats
 
@@ -1184,7 +1184,7 @@ public sealed class WvwClient
         }
     }
 
-    #endregion
+    #endregion v2/wvw/matches/stats
 
     #region v2/wvw/timers
 

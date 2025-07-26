@@ -44,7 +44,7 @@ public sealed class RecipesClient
         }
     }
 
-    #endregion
+    #endregion v2/account/recipes
 
     #region v2/characters/:id/recipes
 
@@ -78,7 +78,7 @@ public sealed class RecipesClient
         }
     }
 
-    #endregion
+    #endregion v2/characters/:id/recipes
 
     #region v2/recipes
 
@@ -245,7 +245,7 @@ public sealed class RecipesClient
         }
     }
 
-    #endregion
+    #endregion v2/recipes
 
     #region v2/recipes/search
 
@@ -402,5 +402,5 @@ public sealed class RecipesClient
         }
     }
 
-    #endregion
+    #endregion v2/recipes/search
 }

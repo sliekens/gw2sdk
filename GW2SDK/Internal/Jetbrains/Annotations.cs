@@ -1291,7 +1291,7 @@ internal sealed class AspTypePropertyAttribute : Attribute
     public bool CreateConstructorReferences { get; }
 }
 
-#endregion
+#endregion ASP.NET
 
 #region ASP.NET MVC
 
@@ -1560,7 +1560,7 @@ internal sealed class AspMvcViewComponentViewAttribute : Attribute;
 [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Property)]
 internal sealed class AspMvcActionSelectorAttribute : Attribute;
 
-#endregion
+#endregion ASP.NET MVC
 
 #region ASP.NET Routing
 
@@ -1687,7 +1687,7 @@ internal sealed class AspMinimalApiImplicitEndpointDeclarationAttribute : Attrib
     public string QueryParameters { get; set; }
 }
 
-#endregion
+#endregion ASP.NET Routing
 
 #region Razor
 
@@ -1800,7 +1800,7 @@ internal sealed class RazorWriteMethodAttribute : Attribute;
 [AttributeUsage(AttributeTargets.Parameter)]
 internal sealed class RazorWriteMethodParameterAttribute : Attribute;
 
-#endregion
+#endregion Razor
 
 #region XAML
 
@@ -1837,7 +1837,7 @@ internal sealed class XamlOneWayBindingModeByDefaultAttribute : Attribute;
 [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
 internal sealed class XamlTwoWayBindingModeByDefaultAttribute : Attribute;
 
-#endregion
+#endregion XAML
 
 #region Unit Testing
 
@@ -1890,4 +1890,4 @@ internal sealed class TestSubjectAttribute : Attribute
 [AttributeUsage(AttributeTargets.GenericParameter)]
 internal sealed class MeansTestSubjectAttribute : Attribute;
 
-#endregion
+#endregion Unit Testing

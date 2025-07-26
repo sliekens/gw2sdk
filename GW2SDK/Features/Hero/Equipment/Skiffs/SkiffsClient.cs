@@ -41,7 +41,7 @@ public sealed class SkiffsClient
         }
     }
 
-    #endregion
+    #endregion v2/account/skiffs
 
     #region v2/skiffs
 
@@ -171,5 +171,5 @@ public sealed class SkiffsClient
         }
     }
 
-    #endregion
+    #endregion v2/skiffs
 }

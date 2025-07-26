@@ -52,7 +52,7 @@ public sealed class StoryJournalClient
         }
     }
 
-    #endregion
+    #endregion v2/characters/:id/backstory
 
     #region v2/characters/:id/quests
 
@@ -221,7 +221,7 @@ public sealed class StoryJournalClient
         }
     }
 
-    #endregion
+    #endregion v2/backstory/questions
 
     #region v2/backstory/answers
 
@@ -357,7 +357,7 @@ public sealed class StoryJournalClient
         }
     }
 
-    #endregion
+    #endregion v2/backstory/answers
 
     #region v2/stories
 
@@ -487,7 +487,7 @@ public sealed class StoryJournalClient
         }
     }
 
-    #endregion
+    #endregion v2/stories
 
     #region v2/stories/seasons
 
@@ -617,7 +617,7 @@ public sealed class StoryJournalClient
         }
     }
 
-    #endregion
+    #endregion v2/stories/seasons
 
     #region v2/quests
 

@@ -48,7 +48,7 @@ public sealed class TrainingClient
         }
     }
 
-    #endregion
+    #endregion v2/characters/:id/training
 
     #region v2/professions
 

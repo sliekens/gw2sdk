@@ -146,5 +146,5 @@ public sealed class WorldsClient
         }
     }
 
-    #endregion
+    #endregion v2/worlds
 }

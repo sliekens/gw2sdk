@@ -50,7 +50,7 @@ public sealed class CommerceClient
         }
     }
 
-    #endregion
+    #endregion v2/commerce/delivery
 
     #region v2/commerce/prices
 
@@ -191,7 +191,7 @@ public sealed class CommerceClient
         }
     }
 
-    #endregion
+    #endregion v2/commerce/prices
 
     #region v2/commerce/listings
 
@@ -332,7 +332,7 @@ public sealed class CommerceClient
         }
     }
 
-    #endregion
+    #endregion v2/commerce/listings
 
     #region v2/commerce/exchange
 
@@ -384,7 +384,7 @@ public sealed class CommerceClient
         }
     }
 
-    #endregion
+    #endregion v2/commerce/exchange
 
     #region v2/commerce/transactions
 
@@ -516,5 +516,5 @@ public sealed class CommerceClient
         }
     }
 
-    #endregion
+    #endregion v2/commerce/transactions
 }

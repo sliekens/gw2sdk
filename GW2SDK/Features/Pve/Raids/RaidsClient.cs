@@ -41,7 +41,7 @@ public sealed class RaidsClient
         }
     }
 
-    #endregion
+    #endregion v2/account/raids
 
     #region v2/raids
 
@@ -159,5 +159,5 @@ public sealed class RaidsClient
         }
     }
 
-    #endregion
+    #endregion v2/raids
 }

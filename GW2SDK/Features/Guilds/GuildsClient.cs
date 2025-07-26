@@ -470,7 +470,7 @@ public sealed class GuildsClient
         }
     }
 
-    #endregion
+    #endregion v2/emblem/foregrounds
 
     #region v2/emblem/backgrounds
 
@@ -594,7 +594,7 @@ public sealed class GuildsClient
         }
     }
 
-    #endregion
+    #endregion v2/emblem/backgrounds
 
     #region v2/guild/permissions
 

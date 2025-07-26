@@ -41,7 +41,7 @@ public sealed class DyesClient
         }
     }
 
-    #endregion
+    #endregion v2/account/dyes
 
     #region v2/colors
 
@@ -171,5 +171,5 @@ public sealed class DyesClient
         }
     }
 
-    #endregion
+    #endregion v2/colors
 }

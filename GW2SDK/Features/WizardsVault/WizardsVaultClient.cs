@@ -167,7 +167,7 @@ public sealed class WizardsVaultClient
         }
     }
 
-    #endregion v2/account/wizardsvault/weekly
+    #endregion v2/account/wizardsvault/special
 
     #region v2/wizardsvault/listings
 

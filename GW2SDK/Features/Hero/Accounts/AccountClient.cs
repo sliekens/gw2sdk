@@ -44,7 +44,7 @@ public sealed class AccountClient
         }
     }
 
-    #endregion
+    #endregion v2/account
 
     #region v2/account/progression
 
@@ -72,7 +72,7 @@ public sealed class AccountClient
         }
     }
 
-    #endregion
+    #endregion v2/account/progression
 
     #region v2/account/luck
 
@@ -100,7 +100,7 @@ public sealed class AccountClient
         }
     }
 
-    #endregion
+    #endregion v2/account/luck
 
     #region v2/characters/:id/core
 
@@ -133,7 +133,7 @@ public sealed class AccountClient
         }
     }
 
-    #endregion
+    #endregion v2/characters/:id/core
 
     #region v2/characters
 
@@ -237,5 +237,5 @@ public sealed class AccountClient
         }
     }
 
-    #endregion
+    #endregion v2/characters
 }
