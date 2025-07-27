@@ -25,7 +25,7 @@ public sealed record AccountLuck
                     return level;
                 }
 
-                level += 1;
+                level++;
                 luckLeft -= threshold;
             }
 
