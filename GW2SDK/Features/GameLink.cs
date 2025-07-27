@@ -52,7 +52,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
         }
 
 #if NET
-        await timer.DisposeAsync();
+        await timer.DisposeAsync().ConfigureAwait(false);
 #else
         using ManualResetEventSlim callbacksFinished = new(false);
         if (timer.Dispose(callbacksFinished.WaitHandle))
