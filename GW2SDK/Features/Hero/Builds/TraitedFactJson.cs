@@ -10,7 +10,7 @@ internal static class TraitedFactJson
         return new TraitedFact
         {
             Fact = fact,
-            RequiresTrait = requiresTrait.GetValueOrDefault(),
+            RequiresTrait = requiresTrait ?? default,
             Overrides = overrides
         };
     }

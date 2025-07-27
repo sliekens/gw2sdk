@@ -57,7 +57,7 @@ public class SubtokenInfo
 
         Assert.True(
             subtokenPermissions.SetEquals(
-                subtoken.Permissions.Select(p => p.ToEnum().GetValueOrDefault())
+                subtoken.Permissions.Select(p => p.ToEnum() ?? default)
             )
         );
 

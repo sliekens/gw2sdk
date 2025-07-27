@@ -212,16 +212,16 @@ public sealed record BuildTemplateLink : Link
         buffer.WriteUInt8(Traits(Specialization2));
         buffer.WriteUInt8(SpecializationId(Specialization3));
         buffer.WriteUInt8(Traits(Specialization3));
-        buffer.WriteUInt16((ushort)Skills.Heal.GetValueOrDefault());
-        buffer.WriteUInt16((ushort)AquaticSkills.Heal.GetValueOrDefault());
-        buffer.WriteUInt16((ushort)Skills.Utility1.GetValueOrDefault());
-        buffer.WriteUInt16((ushort)AquaticSkills.Utility1.GetValueOrDefault());
-        buffer.WriteUInt16((ushort)Skills.Utility2.GetValueOrDefault());
-        buffer.WriteUInt16((ushort)AquaticSkills.Utility2.GetValueOrDefault());
-        buffer.WriteUInt16((ushort)Skills.Utility3.GetValueOrDefault());
-        buffer.WriteUInt16((ushort)AquaticSkills.Utility3.GetValueOrDefault());
-        buffer.WriteUInt16((ushort)Skills.Elite.GetValueOrDefault());
-        buffer.WriteUInt16((ushort)AquaticSkills.Elite.GetValueOrDefault());
+        buffer.WriteUInt16((ushort)(Skills.Heal ?? default));
+        buffer.WriteUInt16((ushort)(AquaticSkills.Heal ?? default));
+        buffer.WriteUInt16((ushort)(Skills.Utility1 ?? default));
+        buffer.WriteUInt16((ushort)(AquaticSkills.Utility1 ?? default));
+        buffer.WriteUInt16((ushort)(Skills.Utility2 ?? default));
+        buffer.WriteUInt16((ushort)(AquaticSkills.Utility2 ?? default));
+        buffer.WriteUInt16((ushort)(Skills.Utility3 ?? default));
+        buffer.WriteUInt16((ushort)(AquaticSkills.Utility3 ?? default));
+        buffer.WriteUInt16((ushort)(Skills.Elite ?? default));
+        buffer.WriteUInt16((ushort)(AquaticSkills.Elite ?? default));
         if (this.Profession == ProfessionName.Ranger)
         {
             buffer.WriteUInt8((byte)(Pets?.Terrestrial1 ?? 0));

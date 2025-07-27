@@ -58,8 +58,8 @@ internal static class AccountAchievementJson
             Max = max.Map(static value => value.GetInt32()),
             Done = done.Map(static value => value.GetBoolean()),
             Bits = bits.Map(static values => values.GetList(static value => value.GetInt32())),
-            Repeated = repeated.Map(static value => value.GetInt32()).GetValueOrDefault(),
-            Unlocked = unlocked.Map(static value => value.GetBoolean()).GetValueOrDefault(true)
+            Repeated = repeated.Map(static value => value.GetInt32()) ?? default,
+            Unlocked = unlocked.Map(static value => value.GetBoolean()) ?? true
         };
     }
 }
