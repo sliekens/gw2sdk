@@ -6,7 +6,7 @@ public sealed class LinkValue
 {
     /// <summary>Creates an instance of <see cref="LinkValue" />.</summary>
     /// <param name="target">The link target.</param>
-    /// <param name="relationType"></param>
+    /// <param name="relationType">The type of relationship the link represents.</param>
     /// <exception cref="ArgumentException"></exception>
     public LinkValue(string target, string relationType)
     {

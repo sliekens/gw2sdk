@@ -15,17 +15,13 @@ namespace GuildWars2.Collections;
 // Deriving from ImmutableHashSet would be preferable, but it is unavailable in .NET Standard 2.0.
 public sealed class ValueHashSet<T> : HashSet<T>, IEquatable<ValueHashSet<T>>
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ValueHashSet{T}"/> class that is empty.
-    /// </summary>
+    /// <summary>Initializes a new instance of the <see cref="ValueHashSet{T}"/> class that is empty.</summary>
     public ValueHashSet()
     {
     }
 
 #if NET
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ValueHashSet{T}"/> class that is empty and has the specified initial capacity.
-    /// </summary>
+    /// <summary>Initializes a new instance of the <see cref="ValueHashSet{T}"/> class that is empty and has the specified initial capacity.</summary>
     /// <param name="capacity">The number of elements that the new set can initially store.</param>
     public ValueHashSet(int capacity)
         : base(capacity)
@@ -33,18 +29,14 @@ public sealed class ValueHashSet<T> : HashSet<T>, IEquatable<ValueHashSet<T>>
     }
 #endif
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ValueHashSet{T}"/> class that contains elements copied from the specified collection.
-    /// </summary>
+    /// <summary>Initializes a new instance of the <see cref="ValueHashSet{T}"/> class that contains elements copied from the specified collection.</summary>
     /// <param name="collection">The collection whose elements are copied to the new set.</param>
     public ValueHashSet(IEnumerable<T> collection)
         : base(collection)
     {
     }
 
-    /// <summary>
-    /// Determines whether the current <see cref="ValueHashSet{T}"/> is equal to another <see cref="ValueHashSet{T}"/> based on value semantics.
-    /// </summary>
+    /// <summary>Determines whether the current <see cref="ValueHashSet{T}"/> is equal to another <see cref="ValueHashSet{T}"/> based on value semantics.</summary>
     /// <param name="other">The other <see cref="ValueHashSet{T}"/> to compare with this instance.</param>
     /// <returns><c>true</c> if the sets are equal by value; otherwise, <c>false</c>.</returns>
     public bool Equals(ValueHashSet<T>? other)
@@ -63,9 +55,7 @@ public sealed class ValueHashSet<T> : HashSet<T>, IEquatable<ValueHashSet<T>>
         return ReferenceEquals(this, obj) || (obj is ValueHashSet<T> other && Equals(other));
     }
 
-    /// <summary>
-    /// Returns a hash code based on the values of the items in the set.
-    /// </summary>
+    /// <summary>Returns a hash code based on the values of the items in the set.</summary>
     /// <returns>A hash code for the current object.</returns>
     public override int GetHashCode()
     {
@@ -78,9 +68,7 @@ public sealed class ValueHashSet<T> : HashSet<T>, IEquatable<ValueHashSet<T>>
         return hash.ToHashCode();
     }
 
-    /// <summary>
-    /// Determines whether two <see cref="ValueHashSet{T}"/> instances are equal by value.
-    /// </summary>
+    /// <summary>Determines whether two <see cref="ValueHashSet{T}"/> instances are equal by value.</summary>
     /// <param name="left">The first <see cref="ValueHashSet{T}"/> to compare.</param>
     /// <param name="right">The second <see cref="ValueHashSet{T}"/> to compare.</param>
     /// <returns><c>true</c> if the sets are equal by value; otherwise, <c>false</c>.</returns>
@@ -89,9 +77,7 @@ public sealed class ValueHashSet<T> : HashSet<T>, IEquatable<ValueHashSet<T>>
         return Equals(left, right);
     }
 
-    /// <summary>
-    /// Determines whether two <see cref="ValueHashSet{T}"/> instances are not equal by value.
-    /// </summary>
+    /// <summary>Determines whether two <see cref="ValueHashSet{T}"/> instances are not equal by value.</summary>
     /// <param name="left">The first <see cref="ValueHashSet{T}"/> to compare.</param>
     /// <param name="right">The second <see cref="ValueHashSet{T}"/> to compare.</param>
     /// <returns><c>true</c> if the sets are not equal by value; otherwise, <c>false</c>.</returns>

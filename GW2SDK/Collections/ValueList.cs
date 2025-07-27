@@ -15,34 +15,26 @@ namespace GuildWars2.Collections;
 // Deriving from ImmutableList would be preferable, but it is unavailable in .NET Standard 2.0.
 public sealed class ValueList<T> : List<T>, IEquatable<ValueList<T>>
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ValueList{T}"/> class that is empty.
-    /// </summary>
+    /// <summary>Initializes a new instance of the <see cref="ValueList{T}"/> class that is empty.</summary>
     public ValueList()
     {
     }
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ValueList{T}"/> class that is empty and has the specified initial capacity.
-    /// </summary>
+    /// <summary>Initializes a new instance of the <see cref="ValueList{T}"/> class that is empty and has the specified initial capacity.</summary>
     /// <param name="capacity">The number of elements that the new list can initially store.</param>
     public ValueList(int capacity)
         : base(capacity)
     {
     }
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ValueList{T}"/> class that contains elements copied from the specified collection.
-    /// </summary>
+    /// <summary>Initializes a new instance of the <see cref="ValueList{T}"/> class that contains elements copied from the specified collection.</summary>
     /// <param name="collection">The collection whose elements are copied to the new list.</param>
     public ValueList(IEnumerable<T> collection)
         : base(collection)
     {
     }
 
-    /// <summary>
-    /// Determines whether the current <see cref="ValueList{T}"/> is equal to another <see cref="ValueList{T}"/> based on value semantics.
-    /// </summary>
+    /// <summary>Determines whether the current <see cref="ValueList{T}"/> is equal to another <see cref="ValueList{T}"/> based on value semantics.</summary>
     /// <param name="other">The other <see cref="ValueList{T}"/> to compare with this instance.</param>
     /// <returns><c>true</c> if the lists are equal by value; otherwise, <c>false</c>.</returns>
     public bool Equals(ValueList<T>? other)
@@ -66,9 +58,7 @@ public sealed class ValueList<T> : List<T>, IEquatable<ValueList<T>>
         return ReferenceEquals(this, obj) || (obj is ValueList<T> other && Equals(other));
     }
 
-    /// <summary>
-    /// Returns a hash code based on the values of the items in the list.
-    /// </summary>
+    /// <summary>Returns a hash code based on the values of the items in the list.</summary>
     /// <returns>A hash code for the current object.</returns>
     public override int GetHashCode()
     {
@@ -81,9 +71,7 @@ public sealed class ValueList<T> : List<T>, IEquatable<ValueList<T>>
         return hash.ToHashCode();
     }
 
-    /// <summary>
-    /// Determines whether two <see cref="ValueList{T}"/> instances are equal by value.
-    /// </summary>
+    /// <summary>Determines whether two <see cref="ValueList{T}"/> instances are equal by value.</summary>
     /// <param name="left">The first <see cref="ValueList{T}"/> to compare.</param>
     /// <param name="right">The second <see cref="ValueList{T}"/> to compare.</param>
     /// <returns><c>true</c> if the lists are equal by value; otherwise, <c>false</c>.</returns>
@@ -92,9 +80,7 @@ public sealed class ValueList<T> : List<T>, IEquatable<ValueList<T>>
         return Equals(left, right);
     }
 
-    /// <summary>
-    /// Determines whether two <see cref="ValueList{T}"/> instances are not equal by value.
-    /// </summary>
+    /// <summary>Determines whether two <see cref="ValueList{T}"/> instances are not equal by value.</summary>
     /// <param name="left">The first <see cref="ValueList{T}"/> to compare.</param>
     /// <param name="right">The second <see cref="ValueList{T}"/> to compare.</param>
     /// <returns><c>true</c> if the lists are not equal by value; otherwise, <c>false</c>.</returns>

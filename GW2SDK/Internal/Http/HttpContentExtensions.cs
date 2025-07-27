@@ -37,7 +37,12 @@ internal static class HttpContentExtensions
 
 #if !NET
 
-    // Overload which takes a CancellationToken is unavailable in older versions of .NET
+    /// <summary>Provides an overload of <see cref="ReadAsStreamAsync"/> that accepts a <see cref="CancellationToken"/>.</summary>
+    /// <param name="instance">The HTTP content instance to read from.</param>
+    /// <param name="cancellationToken">A token to monitor for cancellation requests.</param>
+    /// <remarks>
+    /// This overload is provided for compatibility with older versions of .NET where the native method does not accept a <see cref="CancellationToken"/>.
+    /// </remarks>
     private static Task<Stream> ReadAsStreamAsync(
         this HttpContent instance,
         CancellationToken cancellationToken

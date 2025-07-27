@@ -535,7 +535,7 @@ public sealed class StoryJournalClient
     }
 
     /// <summary>Retrieves a storyline by its ID.</summary>
-    /// <param name="storylineId"></param>
+    /// <param name="storylineId">The storyline ID.</param>
     /// <param name="language">The language to use for descriptions.</param>
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
@@ -562,7 +562,7 @@ public sealed class StoryJournalClient
     }
 
     /// <summary>Retrieves storylines by their IDs.</summary>
-    /// <param name="storylineIds"></param>
+    /// <param name="storylineIds">The storyline IDs.</param>
     /// <param name="language">The language to use for descriptions.</param>
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
@@ -665,7 +665,7 @@ public sealed class StoryJournalClient
     }
 
     /// <summary>Retrieves a story step by its ID.</summary>
-    /// <param name="storyStepId"></param>
+    /// <param name="storyStepId">The story step ID.</param>
     /// <param name="language">The language to use for descriptions.</param>
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>

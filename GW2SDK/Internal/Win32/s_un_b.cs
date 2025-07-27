@@ -3,9 +3,10 @@
 // ReSharper disable InconsistentNaming // because this is based on operating system APIs
 namespace GuildWars2.Win32;
 
+/// <summary>Union</summary>
 [StructLayout(LayoutKind.Sequential)]
 [UsedImplicitly(ImplicitUseTargetFlags.Members)]
-internal readonly struct s_un_b // union
+internal readonly struct s_un_b
 {
     internal readonly byte s_b1;
 
