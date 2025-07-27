@@ -5,7 +5,7 @@ namespace GuildWars2.Commerce.Delivery;
 
 internal static class DeliveryBoxJson
 {
-    public static DeliveryBox GetDeliveryBox(this JsonElement json)
+    public static DeliveryBox GetDeliveryBox(this in JsonElement json)
     {
         RequiredMember coins = "coins";
         RequiredMember items = "items";
@@ -28,9 +28,9 @@ internal static class DeliveryBoxJson
 
         return new DeliveryBox
         {
-            Coins = coins.Map(static value => value.GetInt32()),
-            Items = items.Map(static values =>
-                values.GetList(static value => value.GetDeliveredItem())
+            Coins = coins.Map(static (in JsonElement value) => value.GetInt32()),
+            Items = items.Map(static (in JsonElement values) =>
+                values.GetList(static (in JsonElement value) => value.GetDeliveredItem())
             )
         };
     }

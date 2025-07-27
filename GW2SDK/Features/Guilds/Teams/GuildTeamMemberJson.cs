@@ -5,7 +5,7 @@ namespace GuildWars2.Guilds.Teams;
 
 internal static class GuildTeamMemberJson
 {
-    public static GuildTeamMember GetGuildTeamMember(this JsonElement json)
+    public static GuildTeamMember GetGuildTeamMember(this in JsonElement json)
     {
         RequiredMember name = "name";
         RequiredMember role = "role";
@@ -28,8 +28,8 @@ internal static class GuildTeamMemberJson
 
         return new GuildTeamMember
         {
-            Name = name.Map(static value => value.GetStringRequired()),
-            Role = role.Map(static value => value.GetEnum<GuildTeamRole>())
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Role = role.Map(static (in JsonElement value) => value.GetEnum<GuildTeamRole>())
         };
     }
 }

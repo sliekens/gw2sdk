@@ -16,14 +16,14 @@ internal sealed class MountJsonConverter : JsonConverter<Mount>
         return Read(json.RootElement);
     }
 
-    public static Mount? Read(JsonElement json)
+    public static Mount? Read(in JsonElement json)
     {
         return new Mount
         {
             Id = new Extensible<MountName>(json.GetProperty("id").GetStringRequired()),
             Name = json.GetProperty("name").GetStringRequired(),
             DefaultSkinId = json.GetProperty("default_skin_id").GetInt32(),
-            SkinIds = json.GetProperty("skin_ids").GetList(entry => entry.GetInt32()),
+            SkinIds = json.GetProperty("skin_ids").GetList(static (in JsonElement entry) => entry.GetInt32()),
             Skills = json.GetProperty("skills").GetList(SkillReferenceJsonConverter.Read)
         };
     }

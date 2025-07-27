@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Training.Objectives;
 
 internal static class SkillObjectiveJson
 {
-    public static SkillObjective GetSkillObjective(this JsonElement json)
+    public static SkillObjective GetSkillObjective(this in JsonElement json)
     {
         RequiredMember cost = "cost";
         RequiredMember skillId = "skill_id";
@@ -34,8 +34,8 @@ internal static class SkillObjectiveJson
 
         return new SkillObjective
         {
-            Cost = cost.Map(static value => value.GetInt32()),
-            SkillId = skillId.Map(static value => value.GetInt32())
+            Cost = cost.Map(static (in JsonElement value) => value.GetInt32()),
+            SkillId = skillId.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

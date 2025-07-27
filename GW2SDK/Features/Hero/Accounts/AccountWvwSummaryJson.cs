@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Accounts;
 
 internal static class AccountWvwSummaryJson
 {
-    public static AccountWvwSummary GetAccountWvwSummary(this JsonElement json)
+    public static AccountWvwSummary GetAccountWvwSummary(this in JsonElement json)
     {
         NullableMember teamId = "team_id";
         NullableMember rank = "rank";
@@ -28,12 +28,12 @@ internal static class AccountWvwSummaryJson
 
         return new AccountWvwSummary
         {
-            TeamId = teamId.Map(static value => value.GetInt32()) switch
+            TeamId = teamId.Map(static (in JsonElement value) => value.GetInt32()) switch
             {
                 var id when id == 0 => null,
                 var id => id
             },
-            Rank = rank.Map(static value => value.GetInt32())
+            Rank = rank.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

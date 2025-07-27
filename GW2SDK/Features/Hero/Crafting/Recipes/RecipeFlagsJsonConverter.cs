@@ -25,13 +25,13 @@ internal sealed class RecipeFlagsJsonConverter : JsonConverter<RecipeFlags>
         Write(writer, value);
     }
 
-    public static RecipeFlags Read(JsonElement json)
+    public static RecipeFlags Read(in JsonElement json)
     {
         return new RecipeFlags
         {
             AutoLearned = json.GetProperty("auto_learned").GetBoolean(),
             LearnedFromItem = json.GetProperty("learned_from_item").GetBoolean(),
-            Other = json.GetProperty("other").GetList(static value => value.GetStringRequired())
+            Other = json.GetProperty("other").GetList(static (in JsonElement value) => value.GetStringRequired())
         };
     }
 

@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Equipment.Finishers;
 
 internal static class FinisherJson
 {
-    public static Finisher GetFinisher(this JsonElement json)
+    public static Finisher GetFinisher(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember unlockDetails = "unlock_details";
@@ -46,19 +46,19 @@ internal static class FinisherJson
             }
         }
 
-        var iconString = icon.Map(static value => value.GetStringRequired());
+        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new Finisher
         {
-            Id = id.Map(static value => value.GetInt32()),
-            LockedText = unlockDetails.Map(static value => value.GetStringRequired()),
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            LockedText = unlockDetails.Map(static (in JsonElement value) => value.GetStringRequired()),
             UnlockItemIds =
-                unlockItems.Map(static values => values.GetList(static value => value.GetInt32())),
-            Order = order.Map(static value => value.GetInt32()),
+                unlockItems.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32())),
+            Order = order.Map(static (in JsonElement value) => value.GetInt32()),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
-            Name = name.Map(static value => value.GetStringRequired())
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired())
         };
     }
 }

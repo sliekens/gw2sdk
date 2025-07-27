@@ -5,7 +5,7 @@ namespace GuildWars2.Guilds.Logs;
 
 internal static class GuildBankActivityJson
 {
-    public static GuildBankActivity GetGuildBankActivity(this JsonElement json)
+    public static GuildBankActivity GetGuildBankActivity(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember time = "time";
@@ -60,13 +60,13 @@ internal static class GuildBankActivityJson
 
         return new GuildBankActivity
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Time = time.Map(static value => value.GetDateTimeOffset()),
-            User = user.Map(static value => value.GetStringRequired()),
-            Operation = operation.Map(static value => value.GetEnum<GuildBankOperationKind>()),
-            ItemId = itemId.Map(static value => value.GetInt32()),
-            Count = count.Map(static value => value.GetInt32()),
-            Coins = coins.Map(static value => value.GetInt32())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Time = time.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
+            User = user.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Operation = operation.Map(static (in JsonElement value) => value.GetEnum<GuildBankOperationKind>()),
+            ItemId = itemId.Map(static (in JsonElement value) => value.GetInt32()),
+            Count = count.Map(static (in JsonElement value) => value.GetInt32()),
+            Coins = coins.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

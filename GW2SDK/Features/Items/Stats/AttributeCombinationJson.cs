@@ -5,7 +5,7 @@ namespace GuildWars2.Items.Stats;
 
 internal static class AttributeCombinationJson
 {
-    public static AttributeCombination GetAttributeCombination(this JsonElement json)
+    public static AttributeCombination GetAttributeCombination(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -33,10 +33,10 @@ internal static class AttributeCombinationJson
 
         return new AttributeCombination
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Name = name.Map(static value => value.GetStringRequired()),
-            Attributes = attributes.Map(static values =>
-                values.GetList(static value => value.GetAttribute())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Attributes = attributes.Map(static (in JsonElement values) =>
+                values.GetList(static (in JsonElement value) => value.GetAttribute())
             )
         };
     }

@@ -6,7 +6,7 @@ namespace GuildWars2.Wvw.Matches.Stats;
 
 internal static class MapSummaryJson
 {
-    public static MapSummary GetMapSummary(this JsonElement json)
+    public static MapSummary GetMapSummary(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember type = "type";
@@ -39,10 +39,10 @@ internal static class MapSummaryJson
 
         return new MapSummary
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Kind = type.Map(static value => value.GetEnum<MapKind>()),
-            Deaths = deaths.Map(static value => value.GetDistribution()),
-            Kills = kills.Map(static value => value.GetDistribution())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Kind = type.Map(static (in JsonElement value) => value.GetEnum<MapKind>()),
+            Deaths = deaths.Map(static (in JsonElement value) => value.GetDistribution()),
+            Kills = kills.Map(static (in JsonElement value) => value.GetDistribution())
         };
     }
 }

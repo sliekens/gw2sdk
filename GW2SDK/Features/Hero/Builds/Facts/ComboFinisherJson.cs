@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Builds.Facts;
 internal static class ComboFinisherJson
 {
     public static ComboFinisher GetComboFinisher(
-        this JsonElement json,
+        this in JsonElement json,
         out int? requiresTrait,
         out int? overrides
     )
@@ -62,19 +62,19 @@ internal static class ComboFinisherJson
             }
         }
 
-        var iconString = icon.Map(static value => value.GetStringRequired());
+        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new ComboFinisher
         {
-            Text = text.Map(static value => value.GetStringRequired()),
+            Text = text.Map(static (in JsonElement value) => value.GetStringRequired()),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
-            Percent = percent.Map(static value => value.GetInt32()),
-            FinisherName = finisherType.Map(static value => value.GetEnum<ComboFinisherName>())
+            Percent = percent.Map(static (in JsonElement value) => value.GetInt32()),
+            FinisherName = finisherType.Map(static (in JsonElement value) => value.GetEnum<ComboFinisherName>())
         };
 
-        static bool IsDefaultInt32(JsonProperty jsonProperty)
+        static bool IsDefaultInt32(in JsonProperty jsonProperty)
         {
             return jsonProperty.Value.ValueKind == JsonValueKind.Number
                 && jsonProperty.Value.TryGetInt32(out var value)

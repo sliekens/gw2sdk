@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Equipment;
 internal static class SelectedAttributeCombinationJson
 {
     public static SelectedAttributeCombination GetSelectedAttributeCombination(
-        this JsonElement json
+        this in JsonElement json
     )
     {
         RequiredMember id = "id";
@@ -29,8 +29,8 @@ internal static class SelectedAttributeCombinationJson
 
         return new SelectedAttributeCombination
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Attributes = attributes.Map(static value => value.GetAttributes())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Attributes = attributes.Map(static (in JsonElement value) => value.GetAttributes())
         };
     }
 }

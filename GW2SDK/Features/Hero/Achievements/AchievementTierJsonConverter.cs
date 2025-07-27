@@ -24,7 +24,7 @@ internal sealed class AchievementTierJsonConverter : JsonConverter<AchievementTi
         Write(writer, value);
     }
 
-    public static AchievementTier Read(JsonElement json)
+    public static AchievementTier Read(in JsonElement json)
     {
         return new AchievementTier
         {

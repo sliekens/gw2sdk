@@ -5,7 +5,7 @@ namespace GuildWars2.Pve.Home.Decorations;
 
 internal static class GlyphJson
 {
-    public static Glyph GetGlyph(this JsonElement json)
+    public static Glyph GetGlyph(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember itemId = "item_id";
@@ -33,9 +33,9 @@ internal static class GlyphJson
 
         return new Glyph
         {
-            Id = id.Map(static value => value.GetStringRequired()),
-            ItemId = itemId.Map(static value => value.GetInt32()),
-            Slot = slot.Map(static value => value.GetEnum<CollectionBox>())
+            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
+            ItemId = itemId.Map(static (in JsonElement value) => value.GetInt32()),
+            Slot = slot.Map(static (in JsonElement value) => value.GetEnum<CollectionBox>())
         };
     }
 }

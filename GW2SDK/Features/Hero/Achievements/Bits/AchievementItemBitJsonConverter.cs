@@ -26,7 +26,7 @@ internal sealed class AchievementItemBitJsonConverter : JsonConverter<Achievemen
         Write(writer, value);
     }
 
-    public static AchievementItemBit Read(JsonElement json)
+    public static AchievementItemBit Read(in JsonElement json)
     {
         return new AchievementItemBit { Id = json.GetProperty("id").GetInt32() };
     }

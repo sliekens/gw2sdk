@@ -28,7 +28,7 @@ internal sealed class ServiceJsonConverter : JsonConverter<Service>
         Write(writer, value);
     }
 
-    public static Service Read(JsonElement json)
+    public static Service Read(in JsonElement json)
     {
         if (!json.GetProperty(ItemJsonConverter.DiscriminatorName)
             .ValueEquals(ConsumableJsonConverter.DiscriminatorValue))
@@ -56,7 +56,7 @@ internal sealed class ServiceJsonConverter : JsonConverter<Service>
             Rarity = json.GetProperty("rarity").GetEnum<Rarity>(),
             VendorValue = json.GetProperty("vendor_value").GetInt32(),
             GameTypes =
-                json.GetProperty("game_types").GetList(static value => value.GetEnum<GameType>()),
+                json.GetProperty("game_types").GetList(static (in JsonElement value) => value.GetEnum<GameType>()),
             Flags = ItemFlagsJsonConverter.Read(json.GetProperty("flags")),
             Restrictions = ItemRestrictionJsonConverter.Read(json.GetProperty("restrictions")),
             ChatLink = json.GetProperty("chat_link").GetStringRequired(),

@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Achievements;
 
 internal static class LevelRequirementJson
 {
-    public static LevelRequirement GetLevelRequirement(this JsonElement json)
+    public static LevelRequirement GetLevelRequirement(this in JsonElement json)
     {
         JsonElement min = default;
         JsonElement max = default;

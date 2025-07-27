@@ -17,7 +17,7 @@ internal sealed class
         return Read(json.RootElement);
     }
 
-    public static LearnedCraftingDisciplines Read(JsonElement json)
+    public static LearnedCraftingDisciplines Read(in JsonElement json)
     {
         return new LearnedCraftingDisciplines
         {

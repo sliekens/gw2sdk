@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Equipment.MailCarriers;
 
 internal static class MailCarrierFlagsJson
 {
-    public static MailCarrierFlags GetMailCarrierFlags(this JsonElement json)
+    public static MailCarrierFlags GetMailCarrierFlags(this in JsonElement json)
     {
         var @default = false;
         ValueList<string> others = [];

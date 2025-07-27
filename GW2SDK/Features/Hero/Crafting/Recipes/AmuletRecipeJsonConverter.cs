@@ -28,7 +28,7 @@ internal sealed class AmuletRecipeJsonConverter : JsonConverter<AmuletRecipe>
         Write(writer, value);
     }
 
-    public static AmuletRecipe Read(JsonElement json)
+    public static AmuletRecipe Read(in JsonElement json)
     {
         if (!json.GetProperty(RecipeJsonConverter.DiscriminatorName)
             .ValueEquals(DiscriminatorValue))
@@ -48,7 +48,7 @@ internal sealed class AmuletRecipeJsonConverter : JsonConverter<AmuletRecipe>
                 TimeSpan.FromMilliseconds(json.GetProperty("time_to_craft_ms").GetDouble()),
             Disciplines =
                 json.GetProperty("disciplines")
-                    .GetList(static value => value.GetEnum<CraftingDisciplineName>()),
+                    .GetList(static (in JsonElement value) => value.GetEnum<CraftingDisciplineName>()),
             Flags = RecipeFlagsJsonConverter.Read(json.GetProperty("flags")),
             Ingredients = json.GetProperty("ingredients").GetList(IngredientJsonConverter.Read),
             ChatLink = json.GetProperty("chat_link").GetStringRequired()

@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Achievements;
 
 internal static class AchievementRewardJson
 {
-    public static AchievementReward GetAchievementReward(this JsonElement json)
+    public static AchievementReward GetAchievementReward(this in JsonElement json)
     {
         if (json.TryGetProperty("type", out var discriminator))
         {

@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Achievements;
 
 internal static class AccountAchievementJson
 {
-    public static AccountAchievement GetAccountAchievement(this JsonElement json)
+    public static AccountAchievement GetAccountAchievement(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember current = "current";
@@ -53,13 +53,13 @@ internal static class AccountAchievementJson
 
         return new AccountAchievement
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Current = current.Map(static value => value.GetInt32()),
-            Max = max.Map(static value => value.GetInt32()),
-            Done = done.Map(static value => value.GetBoolean()),
-            Bits = bits.Map(static values => values.GetList(static value => value.GetInt32())),
-            Repeated = repeated.Map(static value => value.GetInt32()) ?? default,
-            Unlocked = unlocked.Map(static value => value.GetBoolean()) ?? true
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Current = current.Map(static (in JsonElement value) => value.GetInt32()),
+            Max = max.Map(static (in JsonElement value) => value.GetInt32()),
+            Done = done.Map(static (in JsonElement value) => value.GetBoolean()),
+            Bits = bits.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32())),
+            Repeated = repeated.Map(static (in JsonElement value) => value.GetInt32()) ?? default,
+            Unlocked = unlocked.Map(static (in JsonElement value) => value.GetBoolean()) ?? true
         };
     }
 }

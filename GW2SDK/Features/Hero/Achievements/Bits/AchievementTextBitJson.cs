@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Achievements.Bits;
 
 internal static class AchievementTextBitJson
 {
-    public static AchievementTextBit GetAchievementTextBit(this JsonElement json)
+    public static AchievementTextBit GetAchievementTextBit(this in JsonElement json)
     {
         RequiredMember text = "text";
         foreach (var member in json.EnumerateObject())
@@ -29,7 +29,7 @@ internal static class AchievementTextBitJson
 
         return new AchievementTextBit
         {
-            Text = text.Map(static value => value.GetStringRequired())
+            Text = text.Map(static (in JsonElement value) => value.GetStringRequired())
         };
     }
 }

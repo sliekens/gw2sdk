@@ -27,7 +27,7 @@ public sealed record SkinLink : Link
     /// <summary>Converts a chat link code to a chat link object.</summary>
     /// <param name="chatLink">The chat link text.</param>
     /// <returns>The chat link as an object.</returns>
-    public static SkinLink Parse(ReadOnlySpan<char> chatLink)
+    public static SkinLink Parse(in ReadOnlySpan<char> chatLink)
     {
         var bytes = GetBytes(chatLink);
         var buffer = new LinkBuffer(bytes);

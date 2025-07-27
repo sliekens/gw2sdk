@@ -35,7 +35,7 @@ internal sealed class EquipmentSkinJsonConverter : JsonConverter<EquipmentSkin>
         Write(writer, value);
     }
 
-    public static EquipmentSkin Read(JsonElement json)
+    public static EquipmentSkin Read(in JsonElement json)
     {
         if (json.TryGetProperty(DiscriminatorName, out var discriminator))
         {
@@ -59,7 +59,7 @@ internal sealed class EquipmentSkinJsonConverter : JsonConverter<EquipmentSkin>
             Name = json.GetProperty("name").GetStringRequired(),
             Description = json.GetProperty("description").GetStringRequired(),
             Flags = SkinFlagsJsonConverter.Read(json.GetProperty("flags")),
-            Races = json.GetProperty("races").GetList(static value => value.GetEnum<RaceName>()),
+            Races = json.GetProperty("races").GetList(static (in JsonElement value) => value.GetEnum<RaceName>()),
             Rarity = json.GetProperty("rarity").GetEnum<Rarity>(),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,

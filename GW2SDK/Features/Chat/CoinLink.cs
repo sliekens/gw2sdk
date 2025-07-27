@@ -27,7 +27,7 @@ public sealed record CoinLink : Link
     /// <summary>Converts a chat link code to a chat link object.</summary>
     /// <param name="chatLink">The chat link text.</param>
     /// <returns>The chat link as an object.</returns>
-    public static CoinLink Parse(ReadOnlySpan<char> chatLink)
+    public static CoinLink Parse(in ReadOnlySpan<char> chatLink)
     {
         var bytes = GetBytes(chatLink);
         var buffer = new LinkBuffer(bytes);

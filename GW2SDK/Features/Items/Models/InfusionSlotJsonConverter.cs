@@ -25,7 +25,7 @@ internal sealed class InfusionSlotJsonConverter : JsonConverter<InfusionSlot>
         Write(writer, value);
     }
 
-    public static InfusionSlot Read(JsonElement json)
+    public static InfusionSlot Read(in JsonElement json)
     {
         return new InfusionSlot
         {

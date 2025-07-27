@@ -5,7 +5,7 @@ namespace GuildWars2.Pve.Home.Decorations;
 
 internal static class DecorationCategoryJson
 {
-    public static DecorationCategory GetDecorationCategory(this JsonElement json)
+    public static DecorationCategory GetDecorationCategory(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -28,8 +28,8 @@ internal static class DecorationCategoryJson
 
         return new DecorationCategory
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Name = name.Map(static value => value.GetStringRequired())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired())
         };
     }
 }

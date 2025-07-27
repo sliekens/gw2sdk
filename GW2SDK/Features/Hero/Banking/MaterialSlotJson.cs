@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Banking;
 
 internal static class MaterialSlotJson
 {
-    public static MaterialSlot GetMaterialSlot(this JsonElement json)
+    public static MaterialSlot GetMaterialSlot(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember category = "category";
@@ -38,10 +38,10 @@ internal static class MaterialSlotJson
 
         return new MaterialSlot
         {
-            ItemId = id.Map(static value => value.GetInt32()),
-            CategoryId = category.Map(static value => value.GetInt32()),
-            Binding = binding.Map(static value => value.GetEnum<ItemBinding>()),
-            Count = count.Map(static value => value.GetInt32())
+            ItemId = id.Map(static (in JsonElement value) => value.GetInt32()),
+            CategoryId = category.Map(static (in JsonElement value) => value.GetInt32()),
+            Binding = binding.Map(static (in JsonElement value) => value.GetEnum<ItemBinding>()),
+            Count = count.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

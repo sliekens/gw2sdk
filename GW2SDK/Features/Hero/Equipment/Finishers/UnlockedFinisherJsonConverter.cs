@@ -16,7 +16,7 @@ internal sealed class UnlockedFinisherJsonConverter : JsonConverter<UnlockedFini
         return Read(document.RootElement);
     }
 
-    public static UnlockedFinisher? Read(JsonElement json)
+    public static UnlockedFinisher? Read(in JsonElement json)
     {
         return new UnlockedFinisher
         {

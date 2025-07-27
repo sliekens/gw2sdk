@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.StoryJournal.Stories;
 
 internal static class ChapterJson
 {
-    public static Chapter GetChapter(this JsonElement json)
+    public static Chapter GetChapter(this in JsonElement json)
     {
         RequiredMember name = "name";
 
@@ -21,6 +21,6 @@ internal static class ChapterJson
             }
         }
 
-        return new Chapter { Name = name.Map(static value => value.GetStringRequired()) };
+        return new Chapter { Name = name.Map(static (in JsonElement value) => value.GetStringRequired()) };
     }
 }

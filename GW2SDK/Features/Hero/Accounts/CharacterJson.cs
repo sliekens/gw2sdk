@@ -10,7 +10,7 @@ namespace GuildWars2.Hero.Accounts;
 
 internal static class CharacterJson
 {
-    public static Character GetCharacter(this JsonElement json)
+    public static Character GetCharacter(this in JsonElement json)
     {
         RequiredMember name = "name";
         RequiredMember race = "race";
@@ -148,54 +148,54 @@ internal static class CharacterJson
 
         return new Character
         {
-            Name = name.Map(static value => value.GetStringRequired()),
-            Race = race.Map(static value => value.GetEnum<RaceName>()),
-            BodyType = gender.Map(static value => value.GetEnum<BodyType>()),
-            Flags = flags.Map(static values => values.GetCharacterFlags()),
-            Level = level.Map(static value => value.GetInt32()),
-            GuildId = guild.Map(static value => value.GetString()) ?? "",
-            Profession = profession.Map(static value => value.GetEnum<ProfessionName>()),
-            Age = age.Map(static value => TimeSpan.FromSeconds(value.GetDouble())),
-            LastModified = lastModified.Map(static value => value.GetDateTimeOffset()),
-            Created = created.Map(static value => value.GetDateTimeOffset()),
-            Deaths = deaths.Map(static value => value.GetInt32()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Race = race.Map(static (in JsonElement value) => value.GetEnum<RaceName>()),
+            BodyType = gender.Map(static (in JsonElement value) => value.GetEnum<BodyType>()),
+            Flags = flags.Map(static (in JsonElement values) => values.GetCharacterFlags()),
+            Level = level.Map(static (in JsonElement value) => value.GetInt32()),
+            GuildId = guild.Map(static (in JsonElement value) => value.GetString()) ?? "",
+            Profession = profession.Map(static (in JsonElement value) => value.GetEnum<ProfessionName>()),
+            Age = age.Map(static (in JsonElement value) => TimeSpan.FromSeconds(value.GetDouble())),
+            LastModified = lastModified.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
+            Created = created.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
+            Deaths = deaths.Map(static (in JsonElement value) => value.GetInt32()),
             CraftingDisciplines =
-                crafting.Map(static values =>
-                    values.GetList(static value => value.GetCraftingDiscipline())
+                crafting.Map(static (in JsonElement values) =>
+                    values.GetList(static (in JsonElement value) => value.GetCraftingDiscipline())
                 ),
-            TitleId = title.Map(static value => value.GetInt32()),
+            TitleId = title.Map(static (in JsonElement value) => value.GetInt32()),
             Backstory =
-                backstory.Map(static values =>
-                    values.GetList(static value => value.GetStringRequired())
+                backstory.Map(static (in JsonElement values) =>
+                    values.GetList(static (in JsonElement value) => value.GetStringRequired())
                 ),
             WvwAbilities =
-                wvwAbilities.Map(static values =>
-                    values.GetList(static value => value.GetWvwAbility())
+                wvwAbilities.Map(static (in JsonElement values) =>
+                    values.GetList(static (in JsonElement value) => value.GetWvwAbility())
                 ),
-            BuildTemplatesCount = buildTabsUnlocked.Map(static value => value.GetInt32()),
-            ActiveBuildTemplateNumber = activeBuildTab.Map(static value => value.GetInt32()),
+            BuildTemplatesCount = buildTabsUnlocked.Map(static (in JsonElement value) => value.GetInt32()),
+            ActiveBuildTemplateNumber = activeBuildTab.Map(static (in JsonElement value) => value.GetInt32()),
             BuildTemplates =
-                buildTabs.Map(static values =>
-                    values.GetList(static value => value.GetBuildTemplate())
+                buildTabs.Map(static (in JsonElement values) =>
+                    values.GetList(static (in JsonElement value) => value.GetBuildTemplate())
                 ),
-            EquipmentTemplatesCount = equipmentTabsUnlocked.Map(static value => value.GetInt32()),
+            EquipmentTemplatesCount = equipmentTabsUnlocked.Map(static (in JsonElement value) => value.GetInt32()),
             ActiveEquipmentTemplateNumber =
-                activeEquipmentTab.Map(static value => value.GetInt32()),
+                activeEquipmentTab.Map(static (in JsonElement value) => value.GetInt32()),
             EquippedItems =
-                equippedItems.Map(static values =>
-                    values.GetList(static value => value.GetEquipmentItem())
+                equippedItems.Map(static (in JsonElement values) =>
+                    values.GetList(static (in JsonElement value) => value.GetEquipmentItem())
                 ),
             EquipmentTemplates =
-                equipmentTabs.Map(static values =>
-                    values.GetList(static value => value.GetEquipmentTemplate())
+                equipmentTabs.Map(static (in JsonElement values) =>
+                    values.GetList(static (in JsonElement value) => value.GetEquipmentTemplate())
                 ),
             Recipes =
-                recipes.Map(static values => values.GetList(static value => value.GetInt32())),
+                recipes.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32())),
             Training =
-                training.Map(static values =>
-                    values.GetList(static value => value.GetTrainingProgress())
+                training.Map(static (in JsonElement values) =>
+                    values.GetList(static (in JsonElement value) => value.GetTrainingProgress())
                 ),
-            Bags = bags.Map(static values => values.GetList(static value => value.GetBag()))
+            Bags = bags.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetBag()))
         };
     }
 }

@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Equipment.Outfits;
 
 internal static class OutfitJson
 {
-    public static Outfit GetOutfit(this JsonElement json)
+    public static Outfit GetOutfit(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -36,17 +36,17 @@ internal static class OutfitJson
             }
         }
 
-        var iconString = icon.Map(static value => value.GetStringRequired());
+        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new Outfit
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Name = name.Map(static value => value.GetStringRequired()),
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
             UnlockItemIds =
-                unlockItems.Map(static values => values.GetList(static value => value.GetInt32()))
+                unlockItems.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32()))
         };
     }
 }

@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Achievements.Rewards;
 
 internal static class MasteryPointRewardJson
 {
-    public static MasteryPointReward GetMasteryPointReward(this JsonElement json)
+    public static MasteryPointReward GetMasteryPointReward(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember region = "region";
@@ -35,8 +35,8 @@ internal static class MasteryPointRewardJson
 
         return new MasteryPointReward
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Region = region.Map(static value => value.GetEnum<MasteryRegionName>())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Region = region.Map(static (in JsonElement value) => value.GetEnum<MasteryRegionName>())
         };
     }
 }

@@ -1,4 +1,5 @@
-﻿using GuildWars2.Http;
+﻿using System.Text.Json;
+using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Finishers;
@@ -41,7 +42,7 @@ public sealed class FinishersClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value =
-                response.Json.RootElement.GetSet(static entry => entry.GetUnlockedFinisher());
+                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetUnlockedFinisher());
             return (value, response.Context);
         }
     }
@@ -70,7 +71,7 @@ public sealed class FinishersClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetFinisher());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetFinisher());
             return (value, response.Context);
         }
     }
@@ -88,7 +89,7 @@ public sealed class FinishersClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -142,7 +143,7 @@ public sealed class FinishersClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetFinisher());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetFinisher());
             return (value, response.Context);
         }
     }
@@ -171,7 +172,7 @@ public sealed class FinishersClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetFinisher());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetFinisher());
             return (value, response.Context);
         }
     }

@@ -5,7 +5,7 @@ namespace GuildWars2.Pve.Home.Decorations;
 
 internal static class UnlockedDecorationJson
 {
-    public static UnlockedDecoration GetUnlockedDecoration(this JsonElement json)
+    public static UnlockedDecoration GetUnlockedDecoration(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember count = "count";
@@ -28,8 +28,8 @@ internal static class UnlockedDecorationJson
 
         return new UnlockedDecoration
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Count = count.Map(static value => value.GetInt32())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Count = count.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

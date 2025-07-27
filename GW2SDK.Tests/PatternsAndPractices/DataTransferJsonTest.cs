@@ -39,7 +39,7 @@ public class DataTransferJsonTest(AssemblyFixture fixture) : IClassFixture<Assem
                         );
 
                         var parameters = info.GetParameters();
-                        Assert.Equal(typeof(JsonElement), parameters[0].ParameterType);
+                        Assert.Equal(typeof(JsonElement).MakeByRefType(), parameters[0].ParameterType);
                         Assert.Equal(dto.Namespace, info.DeclaringType.Namespace);
                     }
                 );

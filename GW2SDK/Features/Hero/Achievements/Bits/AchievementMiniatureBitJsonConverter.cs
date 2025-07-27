@@ -26,7 +26,7 @@ internal sealed class AchievementMiniatureBitJsonConverter : JsonConverter<Achie
         Write(writer, value);
     }
 
-    public static AchievementMiniatureBit Read(JsonElement json)
+    public static AchievementMiniatureBit Read(in JsonElement json)
     {
         return new AchievementMiniatureBit { Id = json.GetProperty("id").GetInt32() };
     }

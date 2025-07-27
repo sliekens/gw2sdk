@@ -24,7 +24,7 @@ internal sealed class LevelRequirementJsonConverter : JsonConverter<LevelRequire
         Write(writer, value);
     }
 
-    public static LevelRequirement Read(JsonElement json)
+    public static LevelRequirement Read(in JsonElement json)
     {
         return new LevelRequirement
         {

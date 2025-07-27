@@ -5,7 +5,7 @@ namespace GuildWars2.Wvw.Abilities;
 
 internal static class AbilityJson
 {
-    public static Ability GetAbility(this JsonElement json)
+    public static Ability GetAbility(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -43,15 +43,15 @@ internal static class AbilityJson
 
         return new Ability
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Name = name.Map(static value => value.GetStringRequired()),
-            Description = description.Map(static value => value.GetStringRequired()),
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Description = description.Map(static (in JsonElement value) => value.GetStringRequired()),
 #pragma warning disable CS0618 // IconHref is obsolete
-            IconHref = icon.Map(static value => value.GetStringRequired()),
+            IconHref = icon.Map(static (in JsonElement value) => value.GetStringRequired()),
 #pragma warning restore CS0618
-            IconUrl = icon.Map(static value => new Uri(value.GetStringRequired())),
-            Ranks = ranks.Map(static values =>
-                values.GetList(static value => value.GetAbilityRank())
+            IconUrl = icon.Map(static (in JsonElement value) => new Uri(value.GetStringRequired())),
+            Ranks = ranks.Map(static (in JsonElement values) =>
+                values.GetList(static (in JsonElement value) => value.GetAbilityRank())
             )
         };
     }

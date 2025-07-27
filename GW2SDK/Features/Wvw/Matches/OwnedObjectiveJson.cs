@@ -5,7 +5,7 @@ namespace GuildWars2.Wvw.Matches;
 
 internal static class OwnedObjectiveJson
 {
-    public static OwnedObjective GetOwnedObjective(this JsonElement json)
+    public static OwnedObjective GetOwnedObjective(this in JsonElement json)
     {
         if (json.TryGetProperty("type", out var discriminator))
         {
@@ -71,11 +71,11 @@ internal static class OwnedObjectiveJson
 
         return new OwnedObjective
         {
-            Id = id.Map(static value => value.GetStringRequired()),
-            Owner = owner.Map(static value => value.GetEnum<TeamColor>()),
-            LastFlipped = lastFlipped.Map(static value => value.GetDateTimeOffset()),
-            PointsTick = pointsTick.Map(static value => value.GetInt32()),
-            PointsCapture = pointsCapture.Map(static value => value.GetInt32())
+            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Owner = owner.Map(static (in JsonElement value) => value.GetEnum<TeamColor>()),
+            LastFlipped = lastFlipped.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
+            PointsTick = pointsTick.Map(static (in JsonElement value) => value.GetInt32()),
+            PointsCapture = pointsCapture.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

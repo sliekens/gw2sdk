@@ -25,7 +25,7 @@ internal sealed class DyeSlotInfoJsonConverter : JsonConverter<DyeSlotInfo>
         Write(writer, value);
     }
 
-    public static DyeSlotInfo Read(JsonElement json)
+    public static DyeSlotInfo Read(in JsonElement json)
     {
         return new DyeSlotInfo
         {

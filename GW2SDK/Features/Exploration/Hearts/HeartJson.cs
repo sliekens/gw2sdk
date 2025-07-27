@@ -5,7 +5,7 @@ namespace GuildWars2.Exploration.Hearts;
 
 internal static class HeartJson
 {
-    public static Heart GetHeart(this JsonElement json)
+    public static Heart GetHeart(this in JsonElement json)
     {
         RequiredMember objective = "objective";
         RequiredMember level = "level";
@@ -47,15 +47,15 @@ internal static class HeartJson
 
         return new Heart
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Objective = objective.Map(static value => value.GetStringRequired()),
-            Level = level.Map(static value => value.GetInt32()),
-            Coordinates = coordinates.Map(static value => value.GetCoordinateF()),
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Objective = objective.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Level = level.Map(static (in JsonElement value) => value.GetInt32()),
+            Coordinates = coordinates.Map(static (in JsonElement value) => value.GetCoordinateF()),
             Boundaries =
-                boundaries.Map(static values =>
-                    values.GetList(static value => value.GetCoordinateF())
+                boundaries.Map(static (in JsonElement values) =>
+                    values.GetList(static (in JsonElement value) => value.GetCoordinateF())
                 ),
-            ChatLink = chatLink.Map(static value => value.GetStringRequired())
+            ChatLink = chatLink.Map(static (in JsonElement value) => value.GetStringRequired())
         };
     }
 }

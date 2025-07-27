@@ -5,7 +5,7 @@ namespace GuildWars2.Pve.Pets;
 
 internal static class PetSkillJson
 {
-    public static PetSkill GetPetSkill(this JsonElement json)
+    public static PetSkill GetPetSkill(this in JsonElement json)
     {
         RequiredMember id = "id";
 
@@ -21,6 +21,6 @@ internal static class PetSkillJson
             }
         }
 
-        return new PetSkill { Id = id.Map(static value => value.GetInt32()) };
+        return new PetSkill { Id = id.Map(static (in JsonElement value) => value.GetInt32()) };
     }
 }

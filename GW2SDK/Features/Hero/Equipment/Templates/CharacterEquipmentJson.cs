@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Equipment.Templates;
 
 internal static class CharacterEquipmentJson
 {
-    public static CharacterEquipment GetCharacterEquipment(this JsonElement json)
+    public static CharacterEquipment GetCharacterEquipment(this in JsonElement json)
     {
         RequiredMember items = "equipment";
 
@@ -23,8 +23,8 @@ internal static class CharacterEquipmentJson
 
         return new CharacterEquipment
         {
-            Items = items.Map(static values =>
-                values.GetList(static value => value.GetEquipmentItem())
+            Items = items.Map(static (in JsonElement values) =>
+                values.GetList(static (in JsonElement value) => value.GetEquipmentItem())
             )
         };
     }

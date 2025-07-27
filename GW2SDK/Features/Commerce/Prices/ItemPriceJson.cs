@@ -5,7 +5,7 @@ namespace GuildWars2.Commerce.Prices;
 
 internal static class ItemPriceJson
 {
-    public static ItemPrice GetItemPrice(this JsonElement json)
+    public static ItemPrice GetItemPrice(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember whitelisted = "whitelisted";
@@ -68,12 +68,12 @@ internal static class ItemPriceJson
 
         return new ItemPrice
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Whitelisted = whitelisted.Map(static value => value.GetBoolean()),
-            TotalDemand = demand.Map(static value => value.GetInt32()),
-            TotalSupply = supply.Map(static value => value.GetInt32()),
-            BestBid = bestBid.Map(static value => value.GetInt32()),
-            BestAsk = bestAsk.Map(static value => value.GetInt32())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Whitelisted = whitelisted.Map(static (in JsonElement value) => value.GetBoolean()),
+            TotalDemand = demand.Map(static (in JsonElement value) => value.GetInt32()),
+            TotalSupply = supply.Map(static (in JsonElement value) => value.GetInt32()),
+            BestBid = bestBid.Map(static (in JsonElement value) => value.GetInt32()),
+            BestAsk = bestAsk.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

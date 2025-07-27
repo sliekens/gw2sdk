@@ -5,7 +5,7 @@ namespace GuildWars2.Guilds.Bank;
 
 internal static class GuildBankTabJson
 {
-    public static GuildBankTab GetGuildBankTab(this JsonElement json)
+    public static GuildBankTab GetGuildBankTab(this in JsonElement json)
     {
         RequiredMember upgradeId = "upgrade_id";
         RequiredMember size = "size";
@@ -43,12 +43,12 @@ internal static class GuildBankTabJson
 
         return new GuildBankTab
         {
-            UpgradeId = upgradeId.Map(static value => value.GetInt32()),
-            Size = size.Map(static value => value.GetInt32()),
-            Coins = coins.Map(static value => value.GetInt32()),
-            Note = note.Map(static value => value.GetString()) ?? "",
-            Inventory = inventory.Map(static values =>
-                values.GetList(static value => value.GetGuildBankSlot())
+            UpgradeId = upgradeId.Map(static (in JsonElement value) => value.GetInt32()),
+            Size = size.Map(static (in JsonElement value) => value.GetInt32()),
+            Coins = coins.Map(static (in JsonElement value) => value.GetInt32()),
+            Note = note.Map(static (in JsonElement value) => value.GetString()) ?? "",
+            Inventory = inventory.Map(static (in JsonElement values) =>
+                values.GetList(static (in JsonElement value) => value.GetGuildBankSlot())
             )
         };
     }

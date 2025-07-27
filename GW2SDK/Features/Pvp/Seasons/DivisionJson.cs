@@ -5,7 +5,7 @@ namespace GuildWars2.Pvp.Seasons;
 
 internal static class DivisionJson
 {
-    public static Division GetDivision(this JsonElement json)
+    public static Division GetDivision(this in JsonElement json)
     {
         RequiredMember name = "name";
         RequiredMember flags = "flags";
@@ -46,22 +46,22 @@ internal static class DivisionJson
             }
         }
 
-        var largeIconString = largeIcon.Map(static value => value.GetStringRequired());
-        var smallIconString = smallIcon.Map(static value => value.GetStringRequired());
-        var pipIconString = pipIcon.Map(static value => value.GetStringRequired());
+        var largeIconString = largeIcon.Map(static (in JsonElement value) => value.GetStringRequired());
+        var smallIconString = smallIcon.Map(static (in JsonElement value) => value.GetStringRequired());
+        var pipIconString = pipIcon.Map(static (in JsonElement value) => value.GetStringRequired());
 #pragma warning disable CS0618
         return new Division
         {
-            Name = name.Map(static value => value.GetStringRequired()),
-            Flags = flags.Map(static values => values.GetDivisionFlags()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Flags = flags.Map(static (in JsonElement values) => values.GetDivisionFlags()),
             LargeIconHref = largeIconString,
             LargeIconUrl = new Uri(largeIconString),
             SmallIconHref = smallIconString,
             SmallIconUrl = new Uri(smallIconString),
             PipIconHref = pipIconString,
             PipIconUrl = new Uri(pipIconString),
-            Tiers = tiers.Map(static values =>
-                values.GetList(static value => value.GetDivisionTier())
+            Tiers = tiers.Map(static (in JsonElement values) =>
+                values.GetList(static (in JsonElement value) => value.GetDivisionTier())
             )
         };
 #pragma warning restore CS0618

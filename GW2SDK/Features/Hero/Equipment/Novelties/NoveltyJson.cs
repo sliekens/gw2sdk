@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Equipment.Novelties;
 
 internal static class NoveltyJson
 {
-    public static Novelty GetNovelty(this JsonElement json)
+    public static Novelty GetNovelty(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -46,20 +46,20 @@ internal static class NoveltyJson
             }
         }
 
-        var iconString = icon.Map(static value => value.GetStringRequired());
+        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
 
         return new Novelty
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Name = name.Map(static value => value.GetStringRequired()),
-            Description = description.Map(static value => value.GetString()) ?? "",
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Description = description.Map(static (in JsonElement value) => value.GetString()) ?? "",
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = new Uri(iconString),
-            Slot = slot.Map(static value => value.GetEnum<NoveltyKind>()),
+            Slot = slot.Map(static (in JsonElement value) => value.GetEnum<NoveltyKind>()),
             UnlockItemIds =
-                unlockItems.Map(static values => values.GetList(static value => value.GetInt32()))
+                unlockItems.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32()))
         };
     }
 }

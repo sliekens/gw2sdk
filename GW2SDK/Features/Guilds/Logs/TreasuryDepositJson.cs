@@ -5,7 +5,7 @@ namespace GuildWars2.Guilds.Logs;
 
 internal static class TreasuryDepositJson
 {
-    public static TreasuryDeposit GetTreasuryDeposit(this JsonElement json)
+    public static TreasuryDeposit GetTreasuryDeposit(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember time = "time";
@@ -50,11 +50,11 @@ internal static class TreasuryDepositJson
 
         return new TreasuryDeposit
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Time = time.Map(static value => value.GetDateTimeOffset()),
-            User = user.Map(static value => value.GetStringRequired()),
-            ItemId = itemId.Map(static value => value.GetInt32()),
-            Count = count.Map(static value => value.GetInt32())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Time = time.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
+            User = user.Map(static (in JsonElement value) => value.GetStringRequired()),
+            ItemId = itemId.Map(static (in JsonElement value) => value.GetInt32()),
+            Count = count.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

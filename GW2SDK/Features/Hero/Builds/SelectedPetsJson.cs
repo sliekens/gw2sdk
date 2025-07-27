@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Builds;
 
 internal static class SelectedPetsJson
 {
-    public static SelectedPets GetSelectedPets(this JsonElement json)
+    public static SelectedPets GetSelectedPets(this in JsonElement json)
     {
         RequiredMember terrestrial = "terrestrial";
         RequiredMember aquatic = "aquatic";
@@ -26,8 +26,8 @@ internal static class SelectedPetsJson
             }
         }
 
-        var (terrestrial1, terrestrial2) = terrestrial.Map(static values => values.GetPetIds());
-        var (aquatic1, aquatic2) = aquatic.Map(static values => values.GetPetIds());
+        var (terrestrial1, terrestrial2) = terrestrial.Map(static (in JsonElement values) => values.GetPetIds());
+        var (aquatic1, aquatic2) = aquatic.Map(static (in JsonElement values) => values.GetPetIds());
         return new SelectedPets
         {
             Terrestrial1 = terrestrial1,

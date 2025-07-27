@@ -5,7 +5,7 @@ namespace GuildWars2.Items;
 
 internal static class BuffJson
 {
-    public static Buff GetBuff(this JsonElement json)
+    public static Buff GetBuff(this in JsonElement json)
     {
         RequiredMember skillId = "skill_id";
         OptionalMember description = "description";
@@ -27,8 +27,8 @@ internal static class BuffJson
 
         return new Buff
         {
-            SkillId = skillId.Map(static value => value.GetInt32()),
-            Description = description.Map(static value => value.GetString()) ?? ""
+            SkillId = skillId.Map(static (in JsonElement value) => value.GetInt32()),
+            Description = description.Map(static (in JsonElement value) => value.GetString()) ?? ""
         };
     }
 }

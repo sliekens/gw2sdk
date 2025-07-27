@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Accounts;
 
 internal static class ProgressionJson
 {
-    public static Progression GetProgression(this JsonElement json)
+    public static Progression GetProgression(this in JsonElement json)
     {
         RequiredMember progressId = "id";
         RequiredMember progress = "value";
@@ -28,8 +28,8 @@ internal static class ProgressionJson
 
         return new Progression
         {
-            Id = progressId.Map(static value => value.GetStringRequired()),
-            Value = progress.Map(static value => value.GetInt32())
+            Id = progressId.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Value = progress.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

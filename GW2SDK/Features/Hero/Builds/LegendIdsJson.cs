@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Builds;
 internal static class LegendIdsJson
 {
     public static (string? LegendId1, string? LegendId2) GetLegendIds(
-        this JsonElement json,
+        this in JsonElement json,
         SelectedSpecialization? specialization1,
         SelectedSpecialization? specialization2,
         SelectedSpecialization? specialization3
@@ -33,7 +33,7 @@ internal static class LegendIdsJson
 
         return (Legend(first), Legend(second));
 
-        string? Legend(JsonElement value)
+        string? Legend(in JsonElement value)
         {
             return value.GetString() switch
             {

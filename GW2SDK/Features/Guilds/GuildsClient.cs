@@ -1,4 +1,5 @@
-﻿using GuildWars2.Guilds.Bank;
+﻿using System.Text.Json;
+using GuildWars2.Guilds.Bank;
 using GuildWars2.Guilds.Emblems;
 using GuildWars2.Guilds.Logs;
 using GuildWars2.Guilds.Members;
@@ -47,7 +48,7 @@ public sealed class GuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -108,7 +109,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetList(static entry => entry.GetGuildRank());
+            var value = response.Json.RootElement.GetList(static (in JsonElement entry) => entry.GetGuildRank());
             return (value, response.Context);
         }
     }
@@ -138,7 +139,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetList(static entry => entry.GetGuildMember());
+            var value = response.Json.RootElement.GetList(static (in JsonElement entry) => entry.GetGuildMember());
             return (value, response.Context);
         }
     }
@@ -168,7 +169,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetList(static entry => entry.GetGuildTeam());
+            var value = response.Json.RootElement.GetList(static (in JsonElement entry) => entry.GetGuildTeam());
             return (value, response.Context);
         }
     }
@@ -199,7 +200,7 @@ public sealed class GuildsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value =
-                response.Json.RootElement.GetList(static entry => entry.GetGuildTreasurySlot());
+                response.Json.RootElement.GetList(static (in JsonElement entry) => entry.GetGuildTreasurySlot());
             return (value, response.Context);
         }
     }
@@ -229,7 +230,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetList(static entry => entry.GetGuildBankTab());
+            var value = response.Json.RootElement.GetList(static (in JsonElement entry) => entry.GetGuildBankTab());
             return (value, response.Context);
         }
     }
@@ -260,7 +261,7 @@ public sealed class GuildsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value =
-                response.Json.RootElement.GetList(static entry => entry.GetGuildStorageSlot());
+                response.Json.RootElement.GetList(static (in JsonElement entry) => entry.GetGuildStorageSlot());
             return (value, response.Context);
         }
     }
@@ -287,7 +288,7 @@ public sealed class GuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -307,7 +308,7 @@ public sealed class GuildsClient
         string guildId,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
+        in CancellationToken cancellationToken = default
     )
     {
         return GetGuildLog(guildId, null, accessToken, missingMemberBehavior, cancellationToken);
@@ -341,7 +342,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetList(static entry => entry.GetGuildLogEntry());
+            var value = response.Json.RootElement.GetList(static (in JsonElement entry) => entry.GetGuildLogEntry());
             return (value, response.Context);
         }
     }
@@ -369,7 +370,7 @@ public sealed class GuildsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value =
-                response.Json.RootElement.GetSet(static entry => entry.GetEmblemForeground());
+                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEmblemForeground());
             return (value, response.Context);
         }
     }
@@ -387,7 +388,7 @@ public sealed class GuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -437,7 +438,7 @@ public sealed class GuildsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value =
-                response.Json.RootElement.GetSet(static entry => entry.GetEmblemForeground());
+                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEmblemForeground());
             return (value, response.Context);
         }
     }
@@ -465,7 +466,7 @@ public sealed class GuildsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value =
-                response.Json.RootElement.GetSet(static entry => entry.GetEmblemForeground());
+                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEmblemForeground());
             return (value, response.Context);
         }
     }
@@ -493,7 +494,7 @@ public sealed class GuildsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value =
-                response.Json.RootElement.GetSet(static entry => entry.GetEmblemBackground());
+                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEmblemBackground());
             return (value, response.Context);
         }
     }
@@ -511,7 +512,7 @@ public sealed class GuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -561,7 +562,7 @@ public sealed class GuildsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value =
-                response.Json.RootElement.GetSet(static entry => entry.GetEmblemBackground());
+                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEmblemBackground());
             return (value, response.Context);
         }
     }
@@ -589,7 +590,7 @@ public sealed class GuildsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value =
-                response.Json.RootElement.GetSet(static entry => entry.GetEmblemBackground());
+                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEmblemBackground());
             return (value, response.Context);
         }
     }
@@ -620,7 +621,7 @@ public sealed class GuildsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value =
-                response.Json.RootElement.GetSet(static entry => entry.GetGuildPermissionSummary());
+                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGuildPermissionSummary());
             return (value, response.Context);
         }
     }
@@ -638,7 +639,7 @@ public sealed class GuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -695,7 +696,7 @@ public sealed class GuildsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value =
-                response.Json.RootElement.GetSet(static entry => entry.GetGuildPermissionSummary());
+                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGuildPermissionSummary());
             return (value, response.Context);
         }
     }
@@ -726,7 +727,7 @@ public sealed class GuildsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value =
-                response.Json.RootElement.GetSet(static entry => entry.GetGuildPermissionSummary());
+                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGuildPermissionSummary());
             return (value, response.Context);
         }
     }
@@ -755,7 +756,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetGuildUpgrade());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGuildUpgrade());
             return (value, response.Context);
         }
     }
@@ -773,7 +774,7 @@ public sealed class GuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -827,7 +828,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetGuildUpgrade());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGuildUpgrade());
             return (value, response.Context);
         }
     }
@@ -856,7 +857,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetGuildUpgrade());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGuildUpgrade());
             return (value, response.Context);
         }
     }

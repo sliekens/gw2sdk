@@ -5,7 +5,7 @@ namespace GuildWars2.Guilds.Logs;
 
 internal static class GuildLogEntryJson
 {
-    public static GuildLogEntry GetGuildLogEntry(this JsonElement json)
+    public static GuildLogEntry GetGuildLogEntry(this in JsonElement json)
     {
         if (json.TryGetProperty("type", out var discriminator))
         {
@@ -64,8 +64,8 @@ internal static class GuildLogEntryJson
 
         return new GuildLogEntry
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Time = time.Map(static value => value.GetDateTimeOffset())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Time = time.Map(static (in JsonElement value) => value.GetDateTimeOffset())
         };
     }
 }

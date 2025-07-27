@@ -25,7 +25,7 @@ internal class UpgradeComponentFlagsJsonConverter : JsonConverter<UpgradeCompone
         Write(writer, value);
     }
 
-    public static UpgradeComponentFlags Read(JsonElement json)
+    public static UpgradeComponentFlags Read(in JsonElement json)
     {
         return new UpgradeComponentFlags
         {
@@ -52,7 +52,7 @@ internal class UpgradeComponentFlagsJsonConverter : JsonConverter<UpgradeCompone
             Trident = json.GetProperty("trident").GetBoolean(),
             Trinket = json.GetProperty("trinket").GetBoolean(),
             Warhorn = json.GetProperty("warhorn").GetBoolean(),
-            Other = json.GetProperty("other").GetList(static value => value.GetStringRequired())
+            Other = json.GetProperty("other").GetList(static (in JsonElement value) => value.GetStringRequired())
         };
     }
 

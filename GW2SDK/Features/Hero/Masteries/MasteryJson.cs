@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Masteries;
 
 internal static class MasteryJson
 {
-    public static Mastery GetMastery(this JsonElement json)
+    public static Mastery GetMastery(this in JsonElement json)
     {
         RequiredMember name = "name";
         RequiredMember description = "description";
@@ -46,18 +46,18 @@ internal static class MasteryJson
             }
         }
 
-        var iconString = icon.Map(static value => value.GetStringRequired());
+        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new Mastery
         {
-            Name = name.Map(static value => value.GetStringRequired()),
-            Description = description.Map(static value => value.GetStringRequired()),
-            Instruction = instruction.Map(static value => value.GetStringRequired()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Description = description.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Instruction = instruction.Map(static (in JsonElement value) => value.GetStringRequired()),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
-            PointCost = pointCost.Map(static value => value.GetInt32()),
-            ExperienceCost = experienceCost.Map(static value => value.GetInt32())
+            PointCost = pointCost.Map(static (in JsonElement value) => value.GetInt32()),
+            ExperienceCost = experienceCost.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

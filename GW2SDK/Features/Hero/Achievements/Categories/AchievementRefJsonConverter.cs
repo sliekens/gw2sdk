@@ -25,7 +25,7 @@ internal sealed class AchievementRefJsonConverter : JsonConverter<AchievementRef
         Write(writer, value);
     }
 
-    public static AchievementRef Read(JsonElement json)
+    public static AchievementRef Read(in JsonElement json)
     {
         return new AchievementRef
         {

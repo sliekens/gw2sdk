@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Emotes;
 
 internal static class EmoteJson
 {
-    public static Emote GetEmote(this JsonElement json)
+    public static Emote GetEmote(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember commands = "commands";
@@ -33,13 +33,13 @@ internal static class EmoteJson
 
         return new Emote
         {
-            Id = id.Map(static value => value.GetStringRequired()),
+            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
             Commands =
-                commands.Map(static values =>
-                    values.GetList(static value => value.GetStringRequired())
+                commands.Map(static (in JsonElement values) =>
+                    values.GetList(static (in JsonElement value) => value.GetStringRequired())
                 ),
             UnlockItemIds =
-                unlockItems.Map(static values => values.GetList(static value => value.GetInt32()))
+                unlockItems.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32()))
         };
     }
 }

@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Builds.Facts;
 internal static class AttributeConversionJson
 {
     public static AttributeConversion GetAttributeConversion(
-        this JsonElement json,
+        this in JsonElement json,
         out int? requiresTrait,
         out int? overrides
     )
@@ -61,17 +61,17 @@ internal static class AttributeConversionJson
             }
         }
 
-        var iconString = icon.Map(static value => value.GetString()) ?? "";
+        var iconString = icon.Map(static (in JsonElement value) => value.GetString()) ?? "";
         return new AttributeConversion
         {
-            Text = text.Map(static value => value.GetString()) ?? "",
+            Text = text.Map(static (in JsonElement value) => value.GetString()) ?? "",
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = !string.IsNullOrEmpty(iconString) ? new Uri(iconString, UriKind.RelativeOrAbsolute) : null,
-            Percent = percent.Map(static value => value.GetInt32()),
-            Source = source.Map(static value => value.GetAttributeName()),
-            Target = target.Map(static value => value.GetAttributeName())
+            Percent = percent.Map(static (in JsonElement value) => value.GetInt32()),
+            Source = source.Map(static (in JsonElement value) => value.GetAttributeName()),
+            Target = target.Map(static (in JsonElement value) => value.GetAttributeName())
         };
     }
 }

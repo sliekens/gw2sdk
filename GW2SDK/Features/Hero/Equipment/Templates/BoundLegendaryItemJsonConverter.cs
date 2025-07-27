@@ -15,7 +15,7 @@ internal sealed class BoundLegendaryItemJsonConverter : JsonConverter<BoundLegen
         return Read(json.RootElement);
     }
 
-    public static BoundLegendaryItem Read(JsonElement json)
+    public static BoundLegendaryItem Read(in JsonElement json)
     {
         return new BoundLegendaryItem
         {

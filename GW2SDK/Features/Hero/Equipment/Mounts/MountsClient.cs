@@ -1,4 +1,5 @@
-﻿using GuildWars2.Http;
+﻿using System.Text.Json;
+using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Mounts;
@@ -34,7 +35,7 @@ public sealed class MountsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetMountName());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMountName());
             return (value, response.Context);
         }
     }
@@ -55,7 +56,7 @@ public sealed class MountsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -84,7 +85,7 @@ public sealed class MountsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetMount());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMount());
             return (value, response.Context);
         }
     }
@@ -102,7 +103,7 @@ public sealed class MountsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetMountName());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMountName());
             return (value, response.Context);
         }
     }
@@ -144,7 +145,7 @@ public sealed class MountsClient
         IEnumerable<MountName> mountNames,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
+        in CancellationToken cancellationToken = default
     )
     {
         return GetMountsByNames(
@@ -177,7 +178,7 @@ public sealed class MountsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetMount());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMount());
             return (value, response.Context);
         }
     }
@@ -206,7 +207,7 @@ public sealed class MountsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetMount());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMount());
             return (value, response.Context);
         }
     }
@@ -235,7 +236,7 @@ public sealed class MountsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetMountSkin());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMountSkin());
             return (value, response.Context);
         }
     }
@@ -253,7 +254,7 @@ public sealed class MountsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -307,7 +308,7 @@ public sealed class MountsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetMountSkin());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMountSkin());
             return (value, response.Context);
         }
     }
@@ -336,7 +337,7 @@ public sealed class MountsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetMountSkin());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMountSkin());
             return (value, response.Context);
         }
     }

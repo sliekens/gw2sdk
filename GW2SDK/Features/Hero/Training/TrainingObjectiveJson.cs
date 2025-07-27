@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Training;
 
 internal static class TrainingObjectiveJson
 {
-    public static TrainingObjective GetTrainingObjective(this JsonElement json)
+    public static TrainingObjective GetTrainingObjective(this in JsonElement json)
     {
         if (json.TryGetProperty("type", out var discriminator))
         {
@@ -39,6 +39,6 @@ internal static class TrainingObjectiveJson
             }
         }
 
-        return new TrainingObjective { Cost = cost.Map(static value => value.GetInt32()) };
+        return new TrainingObjective { Cost = cost.Map(static (in JsonElement value) => value.GetInt32()) };
     }
 }

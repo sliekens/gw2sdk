@@ -25,12 +25,12 @@ internal sealed class MailCarrierFlagsJsonConverter : JsonConverter<MailCarrierF
         Write(writer, value);
     }
 
-    public static MailCarrierFlags Read(JsonElement json)
+    public static MailCarrierFlags Read(in JsonElement json)
     {
         return new MailCarrierFlags
         {
             Default = json.GetProperty("default").GetBoolean(),
-            Other = json.GetProperty("other").GetList(static value => value.GetStringRequired())
+            Other = json.GetProperty("other").GetList(static (in JsonElement value) => value.GetStringRequired())
         };
     }
 

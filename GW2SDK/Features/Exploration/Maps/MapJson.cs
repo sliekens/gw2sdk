@@ -12,7 +12,7 @@ namespace GuildWars2.Exploration.Maps;
 
 internal static class MapJson
 {
-    public static Map GetMap(this JsonElement json)
+    public static Map GetMap(this in JsonElement json)
     {
         RequiredMember name = "name";
         RequiredMember minLevel = "min_level";
@@ -99,40 +99,40 @@ internal static class MapJson
 
         return new Map
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Name = name.Map(static value => value.GetStringRequired()),
-            MinLevel = minLevel.Map(static value => value.GetInt32()),
-            MaxLevel = maxLevel.Map(static value => value.GetInt32()),
-            DefaultFloor = defaultFloor.Map(static value => value.GetInt32()),
-            LabelCoordinates = labelCoordinates.Map(static value => value.GetCoordinate()),
-            MapRectangle = mapRectangle.Map(static value => value.GetMapRectangle()),
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            MinLevel = minLevel.Map(static (in JsonElement value) => value.GetInt32()),
+            MaxLevel = maxLevel.Map(static (in JsonElement value) => value.GetInt32()),
+            DefaultFloor = defaultFloor.Map(static (in JsonElement value) => value.GetInt32()),
+            LabelCoordinates = labelCoordinates.Map(static (in JsonElement value) => value.GetCoordinate()),
+            MapRectangle = mapRectangle.Map(static (in JsonElement value) => value.GetMapRectangle()),
             ContinentRectangle =
-                continentRectangle.Map(static value => value.GetContinentRectangle()),
+                continentRectangle.Map(static (in JsonElement value) => value.GetContinentRectangle()),
             PointsOfInterest =
-                pointsOfInterest.Map(static value =>
-                    value.GetMap(static entry => entry.GetPointOfInterest())
+                pointsOfInterest.Map(static (in JsonElement value) =>
+                    value.GetMap(static (in JsonElement entry) => entry.GetPointOfInterest())
                         .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
                 ),
             GodShrines =
-                godShrines.Map(static values => values.GetList(static value => value.GetGodShrine())
+                godShrines.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetGodShrine())
                 ),
             Hearts =
-                tasks.Map(static value => value.GetMap(static entry => entry.GetHeart())
+                tasks.Map(static (in JsonElement value) => value.GetMap(static (in JsonElement entry) => entry.GetHeart())
                     .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
                 ),
             HeroChallenges =
-                skillChallenges.Map(static values =>
-                    values.GetList(static value => value.GetHeroChallenge())
+                skillChallenges.Map(static (in JsonElement values) =>
+                    values.GetList(static (in JsonElement value) => value.GetHeroChallenge())
                 ),
             Sectors =
-                sectors.Map(static value => value.GetMap(static entry => entry.GetSector())
+                sectors.Map(static (in JsonElement value) => value.GetMap(static (in JsonElement entry) => entry.GetSector())
                     .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
                 ),
             Adventures =
-                adventures.Map(static values => values.GetList(static value => value.GetAdventure())
+                adventures.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetAdventure())
                 ),
-            MasteryInsights = masteryPoints.Map(static values =>
-                values.GetList(static value => value.GetMasteryInsight())
+            MasteryInsights = masteryPoints.Map(static (in JsonElement values) =>
+                values.GetList(static (in JsonElement value) => value.GetMasteryInsight())
             )
         };
     }

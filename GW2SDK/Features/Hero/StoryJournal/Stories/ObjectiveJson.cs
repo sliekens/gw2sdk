@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.StoryJournal.Stories;
 
 internal static class ObjectiveJson
 {
-    public static Objective GetObjective(this JsonElement json)
+    public static Objective GetObjective(this in JsonElement json)
     {
         RequiredMember active = "active";
         RequiredMember complete = "complete";
@@ -28,8 +28,8 @@ internal static class ObjectiveJson
 
         return new Objective
         {
-            Active = active.Map(static value => value.GetStringRequired()),
-            Complete = complete.Map(static value => value.GetStringRequired())
+            Active = active.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Complete = complete.Map(static (in JsonElement value) => value.GetStringRequired())
         };
     }
 }

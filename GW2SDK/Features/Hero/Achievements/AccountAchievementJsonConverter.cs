@@ -25,12 +25,12 @@ internal sealed class AccountAchievementJsonConverter : JsonConverter<AccountAch
         Write(writer, value);
     }
 
-    public static AccountAchievement Read(JsonElement json)
+    public static AccountAchievement Read(in JsonElement json)
     {
         return new AccountAchievement
         {
             Id = json.GetProperty("id").GetInt32(),
-            Bits = json.GetProperty("bits").GetNullableList(bit => bit.GetInt32()),
+            Bits = json.GetProperty("bits").GetNullableList(static (in JsonElement bit) => bit.GetInt32()),
             Current = json.GetProperty("current").GetInt32(),
             Max = json.GetProperty("max").GetInt32(),
             Done = json.GetProperty("done").GetBoolean(),

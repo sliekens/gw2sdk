@@ -6,7 +6,7 @@ namespace GuildWars2.Items;
 
 internal static class ItemFlagsJson
 {
-    public static ItemFlags GetItemFlags(this JsonElement json)
+    public static ItemFlags GetItemFlags(this in JsonElement json)
     {
         var accountBindOnUse = false;
         var accountBound = false;

@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Equipment.Mounts;
 
 internal static class MountJson
 {
-    public static Mount GetMount(this JsonElement json)
+    public static Mount GetMount(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -43,12 +43,12 @@ internal static class MountJson
 
         return new Mount
         {
-            Id = id.Map(static value => value.GetMountName()),
-            Name = name.Map(static value => value.GetStringRequired()),
-            DefaultSkinId = defaultSkin.Map(static value => value.GetInt32()),
-            SkinIds = skins.Map(static values => values.GetList(static value => value.GetInt32())),
-            Skills = skills.Map(static values =>
-                values.GetList(static value => value.GetSkillReference())
+            Id = id.Map(static (in JsonElement value) => value.GetMountName()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            DefaultSkinId = defaultSkin.Map(static (in JsonElement value) => value.GetInt32()),
+            SkinIds = skins.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32())),
+            Skills = skills.Map(static (in JsonElement values) =>
+                values.GetList(static (in JsonElement value) => value.GetSkillReference())
             )
         };
     }

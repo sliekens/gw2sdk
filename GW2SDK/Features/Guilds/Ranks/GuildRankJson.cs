@@ -5,7 +5,7 @@ namespace GuildWars2.Guilds.Ranks;
 
 internal static class GuildRankJson
 {
-    public static GuildRank GetGuildRank(this JsonElement json)
+    public static GuildRank GetGuildRank(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember order = "order";
@@ -36,14 +36,14 @@ internal static class GuildRankJson
             }
         }
 
-        var iconString = iconHref.Map(static value => value.GetStringRequired());
+        var iconString = iconHref.Map(static (in JsonElement value) => value.GetStringRequired());
         return new GuildRank
         {
-            Id = id.Map(static value => value.GetStringRequired()),
-            Order = order.Map(static value => value.GetInt32()),
+            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Order = order.Map(static (in JsonElement value) => value.GetInt32()),
             Permissions =
-                permissions.Map(static values =>
-                    values.GetList(static value => value.GetStringRequired())
+                permissions.Map(static (in JsonElement values) =>
+                    values.GetList(static (in JsonElement value) => value.GetStringRequired())
                 ),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,

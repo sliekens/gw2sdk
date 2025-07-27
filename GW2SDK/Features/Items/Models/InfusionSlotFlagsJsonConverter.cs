@@ -25,13 +25,13 @@ internal sealed class InfusionSlotFlagsJsonConverter : JsonConverter<InfusionSlo
         Write(writer, value);
     }
 
-    public static InfusionSlotFlags Read(JsonElement json)
+    public static InfusionSlotFlags Read(in JsonElement json)
     {
         return new InfusionSlotFlags
         {
             Enrichment = json.GetProperty("enrichment").GetBoolean(),
             Infusion = json.GetProperty("infusion").GetBoolean(),
-            Other = json.GetProperty("other").GetList(static value => value.GetStringRequired())
+            Other = json.GetProperty("other").GetList(static (in JsonElement value) => value.GetStringRequired())
         };
     }
 

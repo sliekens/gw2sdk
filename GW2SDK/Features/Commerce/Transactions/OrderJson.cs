@@ -5,7 +5,7 @@ namespace GuildWars2.Commerce.Transactions;
 
 internal static class OrderJson
 {
-    public static Order GetOrder(this JsonElement json)
+    public static Order GetOrder(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember itemId = "item_id";
@@ -43,11 +43,11 @@ internal static class OrderJson
 
         return new Order
         {
-            Id = id.Map(static value => value.GetInt64()),
-            ItemId = itemId.Map(static value => value.GetInt32()),
-            UnitPrice = price.Map(static value => value.GetInt32()),
-            Quantity = quantity.Map(static value => value.GetInt32()),
-            Created = created.Map(static value => value.GetDateTimeOffset())
+            Id = id.Map(static (in JsonElement value) => value.GetInt64()),
+            ItemId = itemId.Map(static (in JsonElement value) => value.GetInt32()),
+            UnitPrice = price.Map(static (in JsonElement value) => value.GetInt32()),
+            Quantity = quantity.Map(static (in JsonElement value) => value.GetInt32()),
+            Created = created.Map(static (in JsonElement value) => value.GetDateTimeOffset())
         };
     }
 }

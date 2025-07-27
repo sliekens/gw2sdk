@@ -6,7 +6,7 @@ namespace GuildWars2.Exploration.Floors;
 
 internal static class FloorJson
 {
-    public static Floor GetFloor(this JsonElement json)
+    public static Floor GetFloor(this in JsonElement json)
     {
         RequiredMember textureDimensions = "texture_dims";
         OptionalMember clampedView = "clamped_view";
@@ -39,10 +39,10 @@ internal static class FloorJson
 
         return new Floor
         {
-            Id = id.Map(static value => value.GetInt32()),
-            TextureDimensions = textureDimensions.Map(static value => value.GetDimensions()),
-            ClampedView = clampedView.Map(static value => value.GetContinentRectangle()),
-            Regions = regions.Map(static value => value.GetMap(static entry => entry.GetRegion())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            TextureDimensions = textureDimensions.Map(static (in JsonElement value) => value.GetDimensions()),
+            ClampedView = clampedView.Map(static (in JsonElement value) => value.GetContinentRectangle()),
+            Regions = regions.Map(static (in JsonElement value) => value.GetMap(static (in JsonElement entry) => entry.GetRegion())
                 .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
             )
         };

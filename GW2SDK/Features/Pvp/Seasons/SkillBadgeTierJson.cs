@@ -5,7 +5,7 @@ namespace GuildWars2.Pvp.Seasons;
 
 internal static class SkillBadgeTierJson
 {
-    public static SkillBadgeTier GetSkillBadgeTier(this JsonElement json)
+    public static SkillBadgeTier GetSkillBadgeTier(this in JsonElement json)
     {
         RequiredMember rating = "rating";
 
@@ -21,6 +21,6 @@ internal static class SkillBadgeTierJson
             }
         }
 
-        return new SkillBadgeTier { Rating = rating.Map(static value => value.GetInt32()) };
+        return new SkillBadgeTier { Rating = rating.Map(static (in JsonElement value) => value.GetInt32()) };
     }
 }

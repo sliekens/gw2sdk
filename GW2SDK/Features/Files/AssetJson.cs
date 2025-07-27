@@ -5,7 +5,7 @@ namespace GuildWars2.Files;
 
 internal static class AssetJson
 {
-    public static Asset GetAsset(this JsonElement json)
+    public static Asset GetAsset(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember icon = "icon";
@@ -26,10 +26,10 @@ internal static class AssetJson
             }
         }
 
-        var iconString = icon.Map(static value => value.GetStringRequired());
+        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new Asset
         {
-            Id = id.Map(static value => value.GetStringRequired()),
+            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618

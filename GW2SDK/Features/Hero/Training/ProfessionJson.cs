@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Training;
 
 internal static class ProfessionJson
 {
-    public static Profession GetProfession(this JsonElement json)
+    public static Profession GetProfession(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -71,13 +71,13 @@ internal static class ProfessionJson
             }
         }
 
-        var iconString = icon.Map(static value => value.GetStringRequired());
-        var iconBigString = iconBig.Map(static value => value.GetStringRequired());
+        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        var iconBigString = iconBig.Map(static (in JsonElement value) => value.GetStringRequired());
         return new Profession
         {
-            Id = id.Map(static value => value.GetEnum<ProfessionName>()),
-            Name = name.Map(static value => value.GetStringRequired()),
-            Code = code.Map(static value => value.GetInt32()),
+            Id = id.Map(static (in JsonElement value) => value.GetEnum<ProfessionName>()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Code = code.Map(static (in JsonElement value) => value.GetInt32()),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref/BigIconHref assignment
             IconHref = iconString,
             BigIconHref = iconBigString,
@@ -85,22 +85,22 @@ internal static class ProfessionJson
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
             BigIconUrl = new Uri(iconBigString, UriKind.RelativeOrAbsolute),
             SpecializationIds =
-                specializations.Map(static values =>
-                    values.GetList(static value => value.GetInt32())
+                specializations.Map(static (in JsonElement values) =>
+                    values.GetList(static (in JsonElement value) => value.GetInt32())
                 ),
             Weapons =
-                weapons.Map(static value => value.GetMap(
+                weapons.Map(static (in JsonElement value) => value.GetMap(
                         GetWeaponType,
-                        item => item.GetWeaponProficiency()
+                        static (in JsonElement item) => item.GetWeaponProficiency()
                     )
                 ),
-            Flags = flags.Map(static values => values.GetProfessionFlags()),
+            Flags = flags.Map(static (in JsonElement values) => values.GetProfessionFlags()),
             Skills =
-                skills.Map(static values => values.GetList(static value => value.GetSkillSummary())
+                skills.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetSkillSummary())
                 ),
             Training =
-                training.Map(static values => values.GetList(static value => value.GetTraining())),
-            SkillsByPalette = skillsByPalette.Map(static value => value.GetSkillsByPalette())
+                training.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetTraining())),
+            SkillsByPalette = skillsByPalette.Map(static (in JsonElement value) => value.GetSkillsByPalette())
         };
 
         static Extensible<WeaponType> GetWeaponType(string text)

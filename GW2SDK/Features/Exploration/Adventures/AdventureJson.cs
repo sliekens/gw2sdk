@@ -5,7 +5,7 @@ namespace GuildWars2.Exploration.Adventures;
 
 internal static class AdventureJson
 {
-    public static Adventure GetAdventure(this JsonElement json)
+    public static Adventure GetAdventure(this in JsonElement json)
     {
         RequiredMember coordinates = "coord";
         RequiredMember id = "id";
@@ -37,10 +37,10 @@ internal static class AdventureJson
 
         return new Adventure
         {
-            Id = id.Map(static value => value.GetStringRequired()),
-            Coordinates = coordinates.Map(static value => value.GetCoordinateF()),
-            Name = name.Map(static value => value.GetStringRequired()),
-            Description = description.Map(static value => value.GetStringRequired())
+            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Coordinates = coordinates.Map(static (in JsonElement value) => value.GetCoordinateF()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Description = description.Map(static (in JsonElement value) => value.GetStringRequired())
         };
     }
 }

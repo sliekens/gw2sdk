@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Masteries;
 
 internal static class MasteryTrackProgressJson
 {
-    public static MasteryTrackProgress GetMasteryTrackProgress(this JsonElement json)
+    public static MasteryTrackProgress GetMasteryTrackProgress(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember level = "level";
@@ -28,8 +28,8 @@ internal static class MasteryTrackProgressJson
 
         return new MasteryTrackProgress
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Level = level.Map(static value => value.GetInt32())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Level = level.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

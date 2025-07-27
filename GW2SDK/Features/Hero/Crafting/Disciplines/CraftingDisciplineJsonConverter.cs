@@ -16,7 +16,7 @@ internal sealed class CraftingDisciplineJsonConverter : JsonConverter<CraftingDi
         return Read(json.RootElement);
     }
 
-    public static CraftingDiscipline Read(JsonElement json)
+    public static CraftingDiscipline Read(in JsonElement json)
     {
         return new CraftingDiscipline
         {

@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Builds;
 
 internal static class SelectedSpecializationJson
 {
-    public static SelectedSpecialization? GetSelectedSpecialization(this JsonElement json)
+    public static SelectedSpecialization? GetSelectedSpecialization(this in JsonElement json)
     {
         // The API returns "id": null if no specialization is selected, but treat it as required anyway
         RequiredMember id = "id";
@@ -34,10 +34,10 @@ internal static class SelectedSpecializationJson
             }
         }
 
-        var (adept, master, grandmaster) = traits.Map(static values => values.GetTraitIds());
+        var (adept, master, grandmaster) = traits.Map(static (in JsonElement values) => values.GetTraitIds());
         return new SelectedSpecialization
         {
-            Id = id.Map(static value => value.GetInt32()),
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
             AdeptTraitId = adept,
             MasterTraitId = master,
             GrandmasterTraitId = grandmaster

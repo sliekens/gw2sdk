@@ -5,7 +5,7 @@ namespace GuildWars2.Exploration.GodShrines;
 
 internal static class GodShrineJson
 {
-    public static GodShrine GetGodShrine(this JsonElement json)
+    public static GodShrine GetGodShrine(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -52,17 +52,17 @@ internal static class GodShrineJson
 
         return new GodShrine
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Name = name.Map(static value => value.GetStringRequired()),
-            NameContested = nameContested.Map(static value => value.GetStringRequired()),
-            PointOfInterestId = pointOfInterestId.Map(static value => value.GetInt32()),
-            Coordinates = coordinates.Map(static value => value.GetCoordinateF()),
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            NameContested = nameContested.Map(static (in JsonElement value) => value.GetStringRequired()),
+            PointOfInterestId = pointOfInterestId.Map(static (in JsonElement value) => value.GetInt32()),
+            Coordinates = coordinates.Map(static (in JsonElement value) => value.GetCoordinateF()),
 #pragma warning disable CS0618 // Suppress obsolete warning
-            IconHref = icon.Map(static value => value.GetStringRequired()),
-            IconContestedHref = iconContested.Map(static value => value.GetStringRequired()),
+            IconHref = icon.Map(static (in JsonElement value) => value.GetStringRequired()),
+            IconContestedHref = iconContested.Map(static (in JsonElement value) => value.GetStringRequired()),
 #pragma warning restore CS0618
-            IconUrl = icon.Map(static value => new Uri(value.GetStringRequired())),
-            IconContestedUrl = iconContested.Map(static value => new Uri(value.GetStringRequired()))
+            IconUrl = icon.Map(static (in JsonElement value) => new Uri(value.GetStringRequired())),
+            IconContestedUrl = iconContested.Map(static (in JsonElement value) => new Uri(value.GetStringRequired()))
         };
     }
 }

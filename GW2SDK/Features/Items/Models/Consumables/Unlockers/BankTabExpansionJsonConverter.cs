@@ -32,7 +32,7 @@ internal sealed class BankTabExpansionJsonConverter : JsonConverter<BankTabExpan
         Write(writer, value);
     }
 
-    public static BankTabExpansion Read(JsonElement json)
+    public static BankTabExpansion Read(in JsonElement json)
     {
         var iconString = json.GetProperty("icon").GetString();
         return new BankTabExpansion
@@ -44,7 +44,7 @@ internal sealed class BankTabExpansionJsonConverter : JsonConverter<BankTabExpan
             Rarity = json.GetProperty("rarity").GetEnum<Rarity>(),
             VendorValue = json.GetProperty("vendor_value").GetInt32(),
             GameTypes =
-                json.GetProperty("game_types").GetList(static value => value.GetEnum<GameType>()),
+                json.GetProperty("game_types").GetList(static (in JsonElement value) => value.GetEnum<GameType>()),
             Flags = ItemFlagsJsonConverter.Read(json.GetProperty("flags")),
             Restrictions = ItemRestrictionJsonConverter.Read(json.GetProperty("restrictions")),
             ChatLink = json.GetProperty("chat_link").GetStringRequired(),

@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Builds.Facts;
 
 internal static class BuffJson
 {
-    public static Buff GetBuff(this JsonElement json, out int? requiresTrait, out int? overrides)
+    public static Buff GetBuff(this in JsonElement json, out int? requiresTrait, out int? overrides)
     {
         requiresTrait = null;
         overrides = null;
@@ -64,18 +64,18 @@ internal static class BuffJson
             }
         }
 
-        var iconString = icon.Map(static value => value.GetStringRequired());
+        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new Buff
         {
-            Text = text.Map(static value => value.GetStringRequired()),
+            Text = text.Map(static (in JsonElement value) => value.GetStringRequired()),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
-            Duration = duration.Map(static value => TimeSpan.FromSeconds(value.GetDouble())),
-            Status = status.Map(static value => value.GetString()) ?? "",
-            Description = description.Map(static value => value.GetString()) ?? "",
-            ApplyCount = applyCount.Map(static value => value.GetInt32())
+            Duration = duration.Map(static (in JsonElement value) => TimeSpan.FromSeconds(value.GetDouble())),
+            Status = status.Map(static (in JsonElement value) => value.GetString()) ?? "",
+            Description = description.Map(static (in JsonElement value) => value.GetString()) ?? "",
+            ApplyCount = applyCount.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

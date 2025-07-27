@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using System.Text.Json;
 using GuildWars2.Commerce.Delivery;
 using GuildWars2.Commerce.Exchange;
 using GuildWars2.Commerce.Listings;
@@ -67,7 +68,7 @@ public sealed class CommerceClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -116,7 +117,7 @@ public sealed class CommerceClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetItemPrice());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetItemPrice());
             return (value, response.Context);
         }
     }
@@ -136,7 +137,7 @@ public sealed class CommerceClient
         int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,
         int chunkSize = BulkQuery.DefaultChunkSize,
         IProgress<BulkProgress>? progress = default,
-        CancellationToken cancellationToken = default
+        in CancellationToken cancellationToken = default
     )
     {
         return BulkQuery.QueryAsync(
@@ -208,7 +209,7 @@ public sealed class CommerceClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -257,7 +258,7 @@ public sealed class CommerceClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetOrderBook());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetOrderBook());
             return (value, response.Context);
         }
     }
@@ -277,7 +278,7 @@ public sealed class CommerceClient
         int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,
         int chunkSize = BulkQuery.DefaultChunkSize,
         IProgress<BulkProgress>? progress = default,
-        CancellationToken cancellationToken = default
+        in CancellationToken cancellationToken = default
     )
     {
         return BulkQuery.QueryAsync(
@@ -415,7 +416,7 @@ public sealed class CommerceClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetOrder());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetOrder());
             return (value, response.Context);
         }
     }
@@ -447,7 +448,7 @@ public sealed class CommerceClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetOrder());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetOrder());
             return (value, response.Context);
         }
     }
@@ -479,7 +480,7 @@ public sealed class CommerceClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetTransaction());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetTransaction());
             return (value, response.Context);
         }
     }
@@ -511,7 +512,7 @@ public sealed class CommerceClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetTransaction());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetTransaction());
             return (value, response.Context);
         }
     }

@@ -5,7 +5,7 @@ namespace GuildWars2.Pvp.Seasons;
 
 internal static class LeaderboardSettingJson
 {
-    public static LeaderboardSetting GetLeaderboardSetting(this JsonElement json)
+    public static LeaderboardSetting GetLeaderboardSetting(this in JsonElement json)
     {
         RequiredMember name = "name";
         RequiredMember scoring = "scoring";
@@ -37,10 +37,10 @@ internal static class LeaderboardSettingJson
 
         return new LeaderboardSetting
         {
-            Name = name.Map(static value => value.GetStringRequired()),
-            ScoringId = scoring.Map(static value => value.GetStringRequired()),
-            Tiers = tiers.Map(static values =>
-                values.GetList(static value => value.GetLeaderboardTier())
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            ScoringId = scoring.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Tiers = tiers.Map(static (in JsonElement values) =>
+                values.GetList(static (in JsonElement value) => value.GetLeaderboardTier())
             )
         };
     }

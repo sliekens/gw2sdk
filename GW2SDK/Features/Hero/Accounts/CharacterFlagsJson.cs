@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Accounts;
 
 internal static class CharacterFlagsJson
 {
-    public static CharacterFlags GetCharacterFlags(this JsonElement json)
+    public static CharacterFlags GetCharacterFlags(this in JsonElement json)
     {
         var beta = false;
         ValueList<string> others = [];

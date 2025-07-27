@@ -5,7 +5,7 @@ namespace GuildWars2.Pvp.Ranks;
 
 internal static class LevelJson
 {
-    public static Level GetLevel(this JsonElement json)
+    public static Level GetLevel(this in JsonElement json)
     {
         RequiredMember minLevel = "min_rank";
         RequiredMember maxLevel = "max_rank";
@@ -33,9 +33,9 @@ internal static class LevelJson
 
         return new Level
         {
-            MinRank = minLevel.Map(static value => value.GetInt32()),
-            MaxRank = maxLevel.Map(static value => value.GetInt32()),
-            Points = points.Map(static value => value.GetInt32())
+            MinRank = minLevel.Map(static (in JsonElement value) => value.GetInt32()),
+            MaxRank = maxLevel.Map(static (in JsonElement value) => value.GetInt32()),
+            Points = points.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

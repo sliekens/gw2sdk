@@ -5,7 +5,7 @@ namespace GuildWars2.Wvw.Matches;
 
 internal static class MatchJson
 {
-    public static Match GetMatch(this JsonElement json)
+    public static Match GetMatch(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember startTime = "start_time";
@@ -73,19 +73,19 @@ internal static class MatchJson
 
         return new Match
         {
-            Id = id.Map(static value => value.GetStringRequired()),
-            StartTime = startTime.Map(static value => value.GetDateTimeOffset()),
-            EndTime = endTime.Map(static value => value.GetDateTimeOffset()),
-            Scores = scores.Map(static value => value.GetDistribution()),
-            Worlds = worlds.Map(static value => value.GetWorlds()),
-            AllWorlds = allWorlds.Map(static value => value.GetAllWorlds()),
-            Deaths = deaths.Map(static value => value.GetDistribution()),
-            Kills = kills.Map(static value => value.GetDistribution()),
-            VictoryPoints = victoryPoints.Map(static value => value.GetDistribution()),
+            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
+            StartTime = startTime.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
+            EndTime = endTime.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
+            Scores = scores.Map(static (in JsonElement value) => value.GetDistribution()),
+            Worlds = worlds.Map(static (in JsonElement value) => value.GetWorlds()),
+            AllWorlds = allWorlds.Map(static (in JsonElement value) => value.GetAllWorlds()),
+            Deaths = deaths.Map(static (in JsonElement value) => value.GetDistribution()),
+            Kills = kills.Map(static (in JsonElement value) => value.GetDistribution()),
+            VictoryPoints = victoryPoints.Map(static (in JsonElement value) => value.GetDistribution()),
             Skirmishes =
-                skirmishes.Map(static values => values.GetList(static value => value.GetSkirmish())
+                skirmishes.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetSkirmish())
                 ),
-            Maps = maps.Map(static values => values.GetList(static value => value.GetMap()))
+            Maps = maps.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetMap()))
         };
     }
 }

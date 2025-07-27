@@ -16,14 +16,14 @@ internal sealed class FinisherJsonConverter : JsonConverter<Finisher>
         return Read(document.RootElement);
     }
 
-    public static Finisher? Read(JsonElement json)
+    public static Finisher? Read(in JsonElement json)
     {
         var iconString = json.GetProperty("icon").GetStringRequired();
         return new Finisher
         {
             Id = json.GetProperty("id").GetInt32(),
             LockedText = json.GetProperty("locked_text").GetStringRequired(),
-            UnlockItemIds = json.GetProperty("unlock_item_ids").GetList(item => item.GetInt32()),
+            UnlockItemIds = json.GetProperty("unlock_item_ids").GetList(static (in JsonElement value) => value.GetInt32()),
             Order = json.GetProperty("order").GetInt32(),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,

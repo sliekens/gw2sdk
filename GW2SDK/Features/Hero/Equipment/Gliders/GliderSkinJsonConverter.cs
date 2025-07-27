@@ -16,13 +16,13 @@ internal sealed class GliderSkinJsonConverter : JsonConverter<GliderSkin>
         return Read(document.RootElement);
     }
 
-    public static GliderSkin? Read(JsonElement json)
+    public static GliderSkin? Read(in JsonElement json)
     {
         var iconString = json.GetProperty("icon").GetStringRequired();
         return new GliderSkin
         {
             Id = json.GetProperty("id").GetInt32(),
-            UnlockItemIds = json.GetProperty("unlock_item_ids").GetList(item => item.GetInt32()),
+            UnlockItemIds = json.GetProperty("unlock_item_ids").GetList(static (in JsonElement item) => item.GetInt32()),
             Order = json.GetProperty("order").GetInt32(),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
@@ -31,7 +31,7 @@ internal sealed class GliderSkinJsonConverter : JsonConverter<GliderSkin>
             Name = json.GetProperty("name").GetStringRequired(),
             Description = json.GetProperty("description").GetStringRequired(),
             DefaultDyeColorIds =
-                json.GetProperty("default_dye_color_ids").GetList(item => item.GetInt32())
+                json.GetProperty("default_dye_color_ids").GetList(static (in JsonElement item) => item.GetInt32())
         };
     }
 

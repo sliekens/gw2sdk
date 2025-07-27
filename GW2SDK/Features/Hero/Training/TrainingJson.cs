@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Training;
 
 internal static class TrainingJson
 {
-    public static Training GetTraining(this JsonElement json)
+    public static Training GetTraining(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember category = "category";
@@ -38,11 +38,11 @@ internal static class TrainingJson
 
         return new Training
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Category = category.Map(static value => value.GetEnum<TrainingCategory>()),
-            Name = name.Map(static value => value.GetStringRequired()),
-            Track = track.Map(static values =>
-                values.GetList(static value => value.GetTrainingObjective())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Category = category.Map(static (in JsonElement value) => value.GetEnum<TrainingCategory>()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Track = track.Map(static (in JsonElement values) =>
+                values.GetList(static (in JsonElement value) => value.GetTrainingObjective())
             )
         };
     }

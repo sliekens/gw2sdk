@@ -5,7 +5,7 @@ namespace GuildWars2.Guilds.Upgrades;
 
 internal static class GuildUpgradeCollectibleCostJson
 {
-    public static GuildUpgradeCollectibleCost GetGuildUpgradeCollectibleCost(this JsonElement json)
+    public static GuildUpgradeCollectibleCost GetGuildUpgradeCollectibleCost(this in JsonElement json)
     {
         RequiredMember name = "name";
         RequiredMember count = "count";
@@ -40,9 +40,9 @@ internal static class GuildUpgradeCollectibleCostJson
 
         return new GuildUpgradeCollectibleCost
         {
-            Name = name.Map(static value => value.GetString()) ?? "",
-            ItemId = itemId.Map(static value => value.GetInt32()),
-            Count = count.Map(static value => value.GetInt32())
+            Name = name.Map(static (in JsonElement value) => value.GetString()) ?? "",
+            ItemId = itemId.Map(static (in JsonElement value) => value.GetInt32()),
+            Count = count.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

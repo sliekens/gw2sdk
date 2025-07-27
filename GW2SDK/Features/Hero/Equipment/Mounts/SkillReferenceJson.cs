@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Equipment.Mounts;
 
 internal static class SkillReferenceJson
 {
-    public static SkillReference GetSkillReference(this JsonElement json)
+    public static SkillReference GetSkillReference(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember slot = "slot";
@@ -29,8 +29,8 @@ internal static class SkillReferenceJson
 
         return new SkillReference
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Slot = slot.Map(static value => value.GetEnum<SkillSlot>())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Slot = slot.Map(static (in JsonElement value) => value.GetEnum<SkillSlot>())
         };
     }
 }

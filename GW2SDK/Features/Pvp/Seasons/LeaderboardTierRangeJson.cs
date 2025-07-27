@@ -5,7 +5,7 @@ namespace GuildWars2.Pvp.Seasons;
 
 internal static class LeaderboardTierRangeJson
 {
-    public static LeaderboardTierRange GetLeaderboardTierRange(this JsonElement json)
+    public static LeaderboardTierRange GetLeaderboardTierRange(this in JsonElement json)
     {
         JsonElement min = default;
         JsonElement max = default;

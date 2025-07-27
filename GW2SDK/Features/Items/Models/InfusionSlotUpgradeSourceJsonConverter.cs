@@ -26,7 +26,7 @@ internal sealed class
         Write(writer, value);
     }
 
-    public static InfusionSlotUpgradeSource Read(JsonElement value)
+    public static InfusionSlotUpgradeSource Read(in JsonElement value)
     {
         return new InfusionSlotUpgradeSource
         {

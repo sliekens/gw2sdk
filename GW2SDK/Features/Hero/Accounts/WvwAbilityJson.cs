@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Accounts;
 
 internal static class WvwAbilityJson
 {
-    public static WvwAbility GetWvwAbility(this JsonElement json)
+    public static WvwAbility GetWvwAbility(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember rank = "rank";
@@ -28,8 +28,8 @@ internal static class WvwAbilityJson
 
         return new WvwAbility
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Rank = rank.Map(static value => value.GetInt32())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Rank = rank.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

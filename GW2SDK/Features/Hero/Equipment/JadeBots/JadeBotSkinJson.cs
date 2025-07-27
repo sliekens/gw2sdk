@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Equipment.JadeBots;
 
 internal static class JadeBotSkinJson
 {
-    public static JadeBotSkin GetJadeBotSkin(this JsonElement json)
+    public static JadeBotSkin GetJadeBotSkin(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -38,10 +38,10 @@ internal static class JadeBotSkinJson
 
         return new JadeBotSkin
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Name = name.Map(static value => value.GetStringRequired()),
-            Description = description.Map(static value => value.GetStringRequired()),
-            UnlockItemId = unlockItem.Map(static value => value.GetInt32())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Description = description.Map(static (in JsonElement value) => value.GetStringRequired()),
+            UnlockItemId = unlockItem.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

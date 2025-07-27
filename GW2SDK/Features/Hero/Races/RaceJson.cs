@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Races;
 
 internal static class RaceJson
 {
-    public static Race GetRace(this JsonElement json)
+    public static Race GetRace(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -33,9 +33,9 @@ internal static class RaceJson
 
         return new Race
         {
-            Id = id.Map(static value => value.GetEnum<RaceName>()),
-            Name = name.Map(static value => value.GetStringRequired()),
-            SkillIds = skills.Map(static values => values.GetList(static value => value.GetInt32()))
+            Id = id.Map(static (in JsonElement value) => value.GetEnum<RaceName>()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            SkillIds = skills.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32()))
         };
     }
 }

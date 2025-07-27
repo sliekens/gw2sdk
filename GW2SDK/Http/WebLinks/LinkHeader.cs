@@ -24,7 +24,7 @@ public sealed class LinkHeader(IEnumerable<LinkValue> links)
 
         return new LinkHeader(items);
 
-        static LinkValue ParseLinkValue(ReadOnlySpan<char> input)
+        static LinkValue ParseLinkValue(in ReadOnlySpan<char> input)
         {
             string href = "", rel = "";
             var splitter = new CharSpanSplitter(input, ';');
@@ -43,14 +43,14 @@ public sealed class LinkHeader(IEnumerable<LinkValue> links)
 
             return new LinkValue(href, rel);
 
-            static string ParseUri(ReadOnlySpan<char> input)
+            static string ParseUri(in ReadOnlySpan<char> input)
             {
                 var startIndex = input.IndexOf('<') + 1;
                 var length = input.IndexOf('>') - startIndex;
                 return input.Slice(startIndex, length).ToString();
             }
 
-            static (string name, string value) ParseAttribute(ReadOnlySpan<char> input)
+            static (string name, string value) ParseAttribute(in ReadOnlySpan<char> input)
             {
                 var splitIndex = input.IndexOf('=');
                 var name = input[..splitIndex].Trim();

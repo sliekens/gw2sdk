@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Equipment.Dyes;
 
 internal static class ColorInfoJson
 {
-    public static ColorInfo GetColorInfo(this JsonElement json)
+    public static ColorInfo GetColorInfo(this in JsonElement json)
     {
         RequiredMember brightness = "brightness";
         RequiredMember contrast = "contrast";
@@ -48,12 +48,12 @@ internal static class ColorInfoJson
 
         return new ColorInfo
         {
-            Brightness = brightness.Map(static value => value.GetInt32()),
-            Contrast = contrast.Map(static value => value.GetDouble()),
-            Hue = hue.Map(static value => value.GetInt32()),
-            Saturation = saturation.Map(static value => value.GetDouble()),
-            Lightness = lightness.Map(static value => value.GetDouble()),
-            Rgb = rgb.Map(static value => value.GetColor())
+            Brightness = brightness.Map(static (in JsonElement value) => value.GetInt32()),
+            Contrast = contrast.Map(static (in JsonElement value) => value.GetDouble()),
+            Hue = hue.Map(static (in JsonElement value) => value.GetInt32()),
+            Saturation = saturation.Map(static (in JsonElement value) => value.GetDouble()),
+            Lightness = lightness.Map(static (in JsonElement value) => value.GetDouble()),
+            Rgb = rgb.Map(static (in JsonElement value) => value.GetColor())
         };
     }
 }

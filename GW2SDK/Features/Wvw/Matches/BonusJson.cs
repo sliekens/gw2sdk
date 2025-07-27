@@ -5,7 +5,7 @@ namespace GuildWars2.Wvw.Matches;
 
 internal static class BonusJson
 {
-    public static Bonus GetBonus(this JsonElement json)
+    public static Bonus GetBonus(this in JsonElement json)
     {
         RequiredMember type = "type";
         RequiredMember owner = "owner";
@@ -28,8 +28,8 @@ internal static class BonusJson
 
         return new Bonus
         {
-            Kind = type.Map(static value => value.GetEnum<BonusKind>()),
-            Owner = owner.Map(static value => value.GetEnum<TeamColor>())
+            Kind = type.Map(static (in JsonElement value) => value.GetEnum<BonusKind>()),
+            Owner = owner.Map(static (in JsonElement value) => value.GetEnum<TeamColor>())
         };
     }
 }

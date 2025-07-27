@@ -5,7 +5,7 @@ namespace GuildWars2.Guilds.Logs;
 
 internal static class MemberJoinedJson
 {
-    public static MemberJoined GetMemberJoined(this JsonElement json)
+    public static MemberJoined GetMemberJoined(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember time = "time";
@@ -40,9 +40,9 @@ internal static class MemberJoinedJson
 
         return new MemberJoined
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Time = time.Map(static value => value.GetDateTimeOffset()),
-            User = user.Map(static value => value.GetStringRequired())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Time = time.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
+            User = user.Map(static (in JsonElement value) => value.GetStringRequired())
         };
     }
 }

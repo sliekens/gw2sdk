@@ -5,7 +5,7 @@ namespace GuildWars2.Guilds.Members;
 
 internal static class GuildMemberJson
 {
-    public static GuildMember GetGuildMember(this JsonElement json)
+    public static GuildMember GetGuildMember(this in JsonElement json)
     {
         RequiredMember name = "name";
         RequiredMember rank = "rank";
@@ -38,10 +38,10 @@ internal static class GuildMemberJson
 
         return new GuildMember
         {
-            Name = name.Map(static value => value.GetStringRequired()),
-            Rank = rank.Map(static value => value.GetStringRequired()),
-            Joined = joined.Map(static value => value.GetDateTimeOffset()),
-            WvwMember = wvwMember.Map(static value => value.GetBoolean()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Rank = rank.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Joined = joined.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
+            WvwMember = wvwMember.Map(static (in JsonElement value) => value.GetBoolean()),
         };
     }
 }

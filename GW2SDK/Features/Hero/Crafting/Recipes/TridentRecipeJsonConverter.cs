@@ -28,7 +28,7 @@ internal sealed class TridentRecipeJsonConverter : JsonConverter<TridentRecipe>
         Write(writer, value);
     }
 
-    public static TridentRecipe Read(JsonElement json)
+    public static TridentRecipe Read(in JsonElement json)
     {
         if (!json.GetProperty(RecipeJsonConverter.DiscriminatorName)
             .ValueEquals(DiscriminatorValue))
@@ -48,7 +48,7 @@ internal sealed class TridentRecipeJsonConverter : JsonConverter<TridentRecipe>
                 TimeSpan.FromMilliseconds(json.GetProperty("time_to_craft_ms").GetDouble()),
             Disciplines =
                 json.GetProperty("disciplines")
-                    .GetList(static value => value.GetEnum<CraftingDisciplineName>()),
+                    .GetList(static (in JsonElement value) => value.GetEnum<CraftingDisciplineName>()),
             Flags = RecipeFlagsJsonConverter.Read(json.GetProperty("flags")),
             Ingredients = json.GetProperty("ingredients").GetList(IngredientJsonConverter.Read),
             ChatLink = json.GetProperty("chat_link").GetStringRequired()

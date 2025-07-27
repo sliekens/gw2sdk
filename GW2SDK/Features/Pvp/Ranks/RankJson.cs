@@ -5,7 +5,7 @@ namespace GuildWars2.Pvp.Ranks;
 
 internal static class RankJson
 {
-    public static Rank GetRank(this JsonElement json)
+    public static Rank GetRank(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember finisherId = "finisher_id";
@@ -51,19 +51,19 @@ internal static class RankJson
             }
         }
 
-        string iconString = icon.Map(static value => value.GetStringRequired());
+        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new Rank
         {
-            Id = id.Map(static value => value.GetInt32()),
-            FinisherId = finisherId.Map(static value => value.GetInt32()),
-            Name = name.Map(static value => value.GetStringRequired()),
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            FinisherId = finisherId.Map(static (in JsonElement value) => value.GetInt32()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = new Uri(iconString),
-            MinRank = minRank.Map(static value => value.GetInt32()),
-            MaxRank = maxRank.Map(static value => value.GetInt32()),
-            Levels = levels.Map(static values => values.GetList(static value => value.GetLevel()))
+            MinRank = minRank.Map(static (in JsonElement value) => value.GetInt32()),
+            MaxRank = maxRank.Map(static (in JsonElement value) => value.GetInt32()),
+            Levels = levels.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetLevel()))
         };
     }
 }

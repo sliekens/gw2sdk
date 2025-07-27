@@ -26,7 +26,7 @@ internal sealed class ItemRewardJsonConverter : JsonConverter<ItemReward>
         Write(writer, value);
     }
 
-    public static ItemReward Read(JsonElement json)
+    public static ItemReward Read(in JsonElement json)
     {
         return new ItemReward
         {

@@ -5,7 +5,7 @@ namespace GuildWars2.WizardsVault.Objectives;
 
 internal static class WeeklyObjectivesProgressJson
 {
-    public static WeeklyObjectivesProgress GetWeeklyObjectivesProgress(this JsonElement json)
+    public static WeeklyObjectivesProgress GetWeeklyObjectivesProgress(this in JsonElement json)
     {
         RequiredMember metaProgressCurrent = "meta_progress_current";
         RequiredMember metaProgressComplete = "meta_progress_complete";
@@ -48,13 +48,13 @@ internal static class WeeklyObjectivesProgressJson
 
         return new WeeklyObjectivesProgress
         {
-            Progress = metaProgressCurrent.Map(static value => value.GetInt32()),
-            Goal = metaProgressComplete.Map(static value => value.GetInt32()),
-            RewardItemId = metaRewardItemId.Map(static value => value.GetInt32()),
-            RewardAcclaim = metaRewardAstral.Map(static value => value.GetInt32()),
-            Claimed = metaRewardClaimed.Map(static value => value.GetBoolean()),
-            Objectives = objectives.Map(static values =>
-                values.GetList(static value => value.GetObjectiveProgress())
+            Progress = metaProgressCurrent.Map(static (in JsonElement value) => value.GetInt32()),
+            Goal = metaProgressComplete.Map(static (in JsonElement value) => value.GetInt32()),
+            RewardItemId = metaRewardItemId.Map(static (in JsonElement value) => value.GetInt32()),
+            RewardAcclaim = metaRewardAstral.Map(static (in JsonElement value) => value.GetInt32()),
+            Claimed = metaRewardClaimed.Map(static (in JsonElement value) => value.GetBoolean()),
+            Objectives = objectives.Map(static (in JsonElement values) =>
+                values.GetList(static (in JsonElement value) => value.GetObjectiveProgress())
             )
         };
     }

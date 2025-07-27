@@ -26,7 +26,7 @@ internal sealed class AchievementSkinBitJsonConverter : JsonConverter<Achievemen
         Write(writer, value);
     }
 
-    public static AchievementSkinBit Read(JsonElement json)
+    public static AchievementSkinBit Read(in JsonElement json)
     {
         return new AchievementSkinBit { Id = json.GetProperty("id").GetInt32() };
     }

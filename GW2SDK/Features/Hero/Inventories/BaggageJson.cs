@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Inventories;
 
 internal static class BaggageJson
 {
-    public static Baggage GetBaggage(this JsonElement json)
+    public static Baggage GetBaggage(this in JsonElement json)
     {
         RequiredMember bags = "bags";
 
@@ -23,7 +23,7 @@ internal static class BaggageJson
 
         return new Baggage
         {
-            Bags = bags.Map(static values => values.GetList(static value => value.GetBag()))
+            Bags = bags.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetBag()))
         };
     }
 }

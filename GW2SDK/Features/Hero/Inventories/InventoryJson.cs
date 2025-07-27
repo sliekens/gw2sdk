@@ -5,8 +5,8 @@ namespace GuildWars2.Hero.Inventories;
 
 internal static class InventoryJson
 {
-    public static Inventory GetInventory(this JsonElement json)
+    public static Inventory GetInventory(this in JsonElement json)
     {
-        return new Inventory { Items = json.GetList(static value => value.GetItemSlot()) };
+        return new Inventory { Items = json.GetList(static (in JsonElement value) => value.GetItemSlot()) };
     }
 }

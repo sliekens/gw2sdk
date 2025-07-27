@@ -5,7 +5,7 @@ namespace GuildWars2.Pve.Dungeons;
 
 internal static class DungeonJson
 {
-    public static Dungeon GetDungeon(this JsonElement json)
+    public static Dungeon GetDungeon(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember paths = "paths";
@@ -28,9 +28,9 @@ internal static class DungeonJson
 
         return new Dungeon
         {
-            Id = id.Map(static value => value.GetStringRequired()),
-            Paths = paths.Map(static values =>
-                values.GetList(static value => value.GetDungeonPath())
+            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Paths = paths.Map(static (in JsonElement values) =>
+                values.GetList(static (in JsonElement value) => value.GetDungeonPath())
             )
         };
     }

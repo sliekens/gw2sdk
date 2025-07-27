@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using System.Text.Json;
 using GuildWars2.Hero.Achievements.Categories;
 using GuildWars2.Hero.Achievements.Groups;
 using GuildWars2.Hero.Achievements.Titles;
@@ -40,7 +41,7 @@ public sealed class AchievementsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -62,7 +63,7 @@ public sealed class AchievementsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -117,7 +118,7 @@ public sealed class AchievementsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetAchievement());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAchievement());
             return (value, response.Context);
         }
     }
@@ -146,7 +147,7 @@ public sealed class AchievementsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetAchievement());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAchievement());
             return (value, response.Context);
         }
     }
@@ -168,7 +169,7 @@ public sealed class AchievementsClient
         int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,
         int chunkSize = BulkQuery.DefaultChunkSize,
         IProgress<BulkProgress>? progress = default,
-        CancellationToken cancellationToken = default
+        in CancellationToken cancellationToken = default
     )
     {
         return BulkQuery.QueryAsync(
@@ -285,7 +286,7 @@ public sealed class AchievementsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value =
-                response.Json.RootElement.GetSet(static entry => entry.GetAccountAchievement());
+                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAccountAchievement());
             return (value, response.Context);
         }
     }
@@ -311,7 +312,7 @@ public sealed class AchievementsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value =
-                response.Json.RootElement.GetSet(static entry => entry.GetAccountAchievement());
+                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAccountAchievement());
             return (value, response.Context);
         }
     }
@@ -342,7 +343,7 @@ public sealed class AchievementsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value =
-                response.Json.RootElement.GetSet(static entry => entry.GetAccountAchievement());
+                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAccountAchievement());
             return (value, response.Context);
         }
     }
@@ -373,7 +374,7 @@ public sealed class AchievementsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value =
-                response.Json.RootElement.GetSet(static entry => entry.GetAchievementCategory());
+                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAchievementCategory());
             return (value, response.Context);
         }
     }
@@ -391,7 +392,7 @@ public sealed class AchievementsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -448,7 +449,7 @@ public sealed class AchievementsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value =
-                response.Json.RootElement.GetSet(static entry => entry.GetAchievementCategory());
+                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAchievementCategory());
             return (value, response.Context);
         }
     }
@@ -479,7 +480,7 @@ public sealed class AchievementsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value =
-                response.Json.RootElement.GetSet(static entry => entry.GetAchievementCategory());
+                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAchievementCategory());
             return (value, response.Context);
         }
     }
@@ -510,7 +511,7 @@ public sealed class AchievementsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value =
-                response.Json.RootElement.GetSet(static entry => entry.GetAchievementGroup());
+                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAchievementGroup());
             return (value, response.Context);
         }
     }
@@ -528,7 +529,7 @@ public sealed class AchievementsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -584,7 +585,7 @@ public sealed class AchievementsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value =
-                response.Json.RootElement.GetSet(static entry => entry.GetAchievementGroup());
+                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAchievementGroup());
             return (value, response.Context);
         }
     }
@@ -615,7 +616,7 @@ public sealed class AchievementsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value =
-                response.Json.RootElement.GetSet(static entry => entry.GetAchievementGroup());
+                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAchievementGroup());
             return (value, response.Context);
         }
     }
@@ -644,7 +645,7 @@ public sealed class AchievementsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetTitle());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetTitle());
             return (value, response.Context);
         }
     }
@@ -662,7 +663,7 @@ public sealed class AchievementsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -716,7 +717,7 @@ public sealed class AchievementsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetTitle());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetTitle());
             return (value, response.Context);
         }
     }
@@ -745,7 +746,7 @@ public sealed class AchievementsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetTitle());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetTitle());
             return (value, response.Context);
         }
     }

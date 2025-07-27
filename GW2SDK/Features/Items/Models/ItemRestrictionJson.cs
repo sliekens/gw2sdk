@@ -12,7 +12,7 @@ namespace GuildWars2.Items;
 
 internal static class ItemRestrictionJson
 {
-    public static ItemRestriction GetItemRestriction(this JsonElement json)
+    public static ItemRestriction GetItemRestriction(this in JsonElement json)
     {
         ValueList<Extensible<RaceName>>? races = null;
         ValueList<Extensible<ProfessionName>>? professions = null;

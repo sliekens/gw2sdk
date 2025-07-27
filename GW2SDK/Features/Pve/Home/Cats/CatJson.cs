@@ -5,7 +5,7 @@ namespace GuildWars2.Pve.Home.Cats;
 
 internal static class CatJson
 {
-    public static Cat GetCat(this JsonElement json)
+    public static Cat GetCat(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember hint = "hint";
@@ -28,8 +28,8 @@ internal static class CatJson
 
         return new Cat
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Hint = hint.Map(static value => value.GetStringRequired())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Hint = hint.Map(static (in JsonElement value) => value.GetStringRequired())
         };
     }
 }

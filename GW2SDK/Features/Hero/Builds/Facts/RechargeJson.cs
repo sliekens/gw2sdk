@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Builds.Facts;
 internal static class RechargeJson
 {
     public static Recharge GetRecharge(
-        this JsonElement json,
+        this in JsonElement json,
         out int? requiresTrait,
         out int? overrides
     )
@@ -53,15 +53,15 @@ internal static class RechargeJson
             }
         }
 
-        var iconString = icon.Map(static value => value.GetStringRequired());
+        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new Recharge
         {
-            Text = text.Map(static value => value.GetStringRequired()),
+            Text = text.Map(static (in JsonElement value) => value.GetStringRequired()),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
-            Duration = recharge.Map(static value => TimeSpan.FromSeconds(value.GetDouble()))
+            Duration = recharge.Map(static (in JsonElement value) => TimeSpan.FromSeconds(value.GetDouble()))
         };
     }
 }

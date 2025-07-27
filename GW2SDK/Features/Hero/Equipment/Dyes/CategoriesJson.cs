@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Equipment.Dyes;
 internal static class CategoriesJson
 {
     public static (Extensible<Hue> hue, Extensible<Material> material, Extensible<ColorSet> set)
-        GetCategories(this JsonElement json)
+        GetCategories(this in JsonElement json)
     {
         if (json.GetArrayLength() == 0)
         {

@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Training;
 
 internal static class TrainingProgressJson
 {
-    public static TrainingProgress GetTrainingProgress(this JsonElement json)
+    public static TrainingProgress GetTrainingProgress(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember spent = "spent";
@@ -33,9 +33,9 @@ internal static class TrainingProgressJson
 
         return new TrainingProgress
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Spent = spent.Map(static value => value.GetInt32()),
-            Done = done.Map(static value => value.GetBoolean())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Spent = spent.Map(static (in JsonElement value) => value.GetInt32()),
+            Done = done.Map(static (in JsonElement value) => value.GetBoolean())
         };
     }
 }

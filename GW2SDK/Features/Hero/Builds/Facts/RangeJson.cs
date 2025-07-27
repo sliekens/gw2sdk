@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Builds.Facts;
 
 internal static class RangeJson
 {
-    public static Range GetRange(this JsonElement json, out int? requiresTrait, out int? overrides)
+    public static Range GetRange(this in JsonElement json, out int? requiresTrait, out int? overrides)
     {
         requiresTrait = null;
         overrides = null;
@@ -50,15 +50,15 @@ internal static class RangeJson
             }
         }
 
-        var iconString = icon.Map(static value => value.GetStringRequired());
+        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new Range
         {
-            Text = text.Map(static value => value.GetStringRequired()),
+            Text = text.Map(static (in JsonElement value) => value.GetStringRequired()),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
-            Distance = range.Map(static value => value.GetInt32())
+            Distance = range.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

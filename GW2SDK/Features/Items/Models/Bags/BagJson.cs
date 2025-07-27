@@ -5,7 +5,7 @@ namespace GuildWars2.Items;
 
 internal static class BagJson
 {
-    public static Bag GetBag(this JsonElement json)
+    public static Bag GetBag(this in JsonElement json)
     {
         RequiredMember name = "name";
         OptionalMember description = "description";
@@ -97,28 +97,28 @@ internal static class BagJson
             }
         }
 
-        var iconString = icon.Map(static value => value.GetString());
+        var iconString = icon.Map(static (in JsonElement value) => value.GetString());
         return new Bag
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Name = name.Map(static value => value.GetStringRequired()),
-            Description = description.Map(static value => value.GetString()) ?? "",
-            Level = level.Map(static value => value.GetInt32()),
-            Rarity = rarity.Map(static value => value.GetEnum<Rarity>()),
-            VendorValue = vendorValue.Map(static value => value.GetInt32()),
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Description = description.Map(static (in JsonElement value) => value.GetString()) ?? "",
+            Level = level.Map(static (in JsonElement value) => value.GetInt32()),
+            Rarity = rarity.Map(static (in JsonElement value) => value.GetEnum<Rarity>()),
+            VendorValue = vendorValue.Map(static (in JsonElement value) => value.GetInt32()),
             GameTypes =
-                gameTypes.Map(static values =>
-                    values.GetList(static value => value.GetEnum<GameType>())
+                gameTypes.Map(static (in JsonElement values) =>
+                    values.GetList(static (in JsonElement value) => value.GetEnum<GameType>())
                 ),
-            Flags = flags.Map(static values => values.GetItemFlags()),
-            Restrictions = restrictions.Map(static value => value.GetItemRestriction()),
-            ChatLink = chatLink.Map(static value => value.GetStringRequired()),
+            Flags = flags.Map(static (in JsonElement values) => values.GetItemFlags()),
+            Restrictions = restrictions.Map(static (in JsonElement value) => value.GetItemRestriction()),
+            ChatLink = chatLink.Map(static (in JsonElement value) => value.GetStringRequired()),
 #pragma warning disable CS0618 // Suppress obsolete warning
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = !string.IsNullOrEmpty(iconString) ? new Uri(iconString) : null,
-            NoSellOrSort = noSellOrSort.Map(static value => value.GetBoolean()),
-            Size = size.Map(static value => value.GetInt32())
+            NoSellOrSort = noSellOrSort.Map(static (in JsonElement value) => value.GetBoolean()),
+            Size = size.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

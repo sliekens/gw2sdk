@@ -5,7 +5,7 @@ namespace GuildWars2.Exploration.Maps;
 
 internal static class MapSummaryJson
 {
-    public static MapSummary GetMapSummary(this JsonElement json)
+    public static MapSummary GetMapSummary(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -82,20 +82,20 @@ internal static class MapSummaryJson
 
         return new MapSummary
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Name = name.Map(static value => value.GetStringRequired()),
-            MinLevel = minLevel.Map(static value => value.GetInt32()),
-            MaxLevel = maxLevel.Map(static value => value.GetInt32()),
-            DefaultFloor = defaultFloor.Map(static value => value.GetInt32()),
-            Kind = kind.Map(static value => value.GetEnum<MapKind>()),
-            Floors = floors.Map(static values => values.GetList(static value => value.GetInt32())),
-            RegionId = regionId.Map(static value => value.GetInt32()),
-            RegionName = regionName.Map(static value => value.GetString()) ?? "",
-            ContinentId = continentId.Map(static value => value.GetInt32()),
-            ContinentName = continentName.Map(static value => value.GetString()) ?? "",
-            MapRectangle = mapRectangle.Map(static value => value.GetMapRectangle()),
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            MinLevel = minLevel.Map(static (in JsonElement value) => value.GetInt32()),
+            MaxLevel = maxLevel.Map(static (in JsonElement value) => value.GetInt32()),
+            DefaultFloor = defaultFloor.Map(static (in JsonElement value) => value.GetInt32()),
+            Kind = kind.Map(static (in JsonElement value) => value.GetEnum<MapKind>()),
+            Floors = floors.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32())),
+            RegionId = regionId.Map(static (in JsonElement value) => value.GetInt32()),
+            RegionName = regionName.Map(static (in JsonElement value) => value.GetString()) ?? "",
+            ContinentId = continentId.Map(static (in JsonElement value) => value.GetInt32()),
+            ContinentName = continentName.Map(static (in JsonElement value) => value.GetString()) ?? "",
+            MapRectangle = mapRectangle.Map(static (in JsonElement value) => value.GetMapRectangle()),
             ContinentRectangle =
-                continentRectangle.Map(static value => value.GetContinentRectangle())
+                continentRectangle.Map(static (in JsonElement value) => value.GetContinentRectangle())
         };
     }
 }

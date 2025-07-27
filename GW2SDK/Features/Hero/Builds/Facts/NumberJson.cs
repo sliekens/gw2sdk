@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Builds.Facts;
 internal static class NumberJson
 {
     public static Number GetNumber(
-        this JsonElement json,
+        this in JsonElement json,
         out int? requiresTrait,
         out int? overrides
     )
@@ -53,15 +53,15 @@ internal static class NumberJson
             }
         }
 
-        var iconString = icon.Map(static value => value.GetStringRequired());
+        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new Number
         {
-            Text = text.Map(static value => value.GetString()) ?? "",
+            Text = text.Map(static (in JsonElement value) => value.GetString()) ?? "",
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
-            Value = number.Map(static value => value.GetInt32())
+            Value = number.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

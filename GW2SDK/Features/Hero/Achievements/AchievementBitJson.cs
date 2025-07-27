@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Achievements;
 
 internal static class AchievementBitJson
 {
-    public static AchievementBit GetAchievementBit(this JsonElement json)
+    public static AchievementBit GetAchievementBit(this in JsonElement json)
     {
         // BUG: some achievement bits don't have a type property, see https://github.com/arenanet/api-cdi/issues/670
         // Hopefully this will get fixed and then TryGetProperty can be replaced by GetProperty

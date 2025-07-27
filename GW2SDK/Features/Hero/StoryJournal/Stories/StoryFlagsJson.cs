@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.StoryJournal.Stories;
 
 internal static class StoryFlagsJson
 {
-    public static StoryFlags GetStoryFlags(this JsonElement json)
+    public static StoryFlags GetStoryFlags(this in JsonElement json)
     {
         var requiresUnlock = false;
         ValueList<string> others = [];

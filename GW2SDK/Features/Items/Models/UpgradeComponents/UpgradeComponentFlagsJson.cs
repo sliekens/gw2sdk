@@ -6,7 +6,7 @@ namespace GuildWars2.Items;
 
 internal static class UpgradeComponentFlagsJson
 {
-    public static UpgradeComponentFlags GetUpgradeComponentFlags(this JsonElement json)
+    public static UpgradeComponentFlags GetUpgradeComponentFlags(this in JsonElement json)
     {
         var heavyArmor = false;
         var mediumArmor = false;

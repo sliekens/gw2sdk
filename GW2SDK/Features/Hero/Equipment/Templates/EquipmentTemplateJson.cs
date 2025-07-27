@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Equipment.Templates;
 
 internal static class EquipmentTemplateJson
 {
-    public static EquipmentTemplate GetEquipmentTemplate(this JsonElement json)
+    public static EquipmentTemplate GetEquipmentTemplate(this in JsonElement json)
     {
         RequiredMember tab = "tab";
         RequiredMember name = "name";
@@ -45,12 +45,12 @@ internal static class EquipmentTemplateJson
 
         return new EquipmentTemplate
         {
-            TabNumber = tab.Map(static value => value.GetInt32()),
-            Name = name.Map(static value => value.GetStringRequired()),
-            Items = equipment.Map(static values =>
-                values.GetList(static value => value.GetEquipmentItem())
+            TabNumber = tab.Map(static (in JsonElement value) => value.GetInt32()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Items = equipment.Map(static (in JsonElement values) =>
+                values.GetList(static (in JsonElement value) => value.GetEquipmentItem())
             ),
-            PvpEquipment = pvpEquipment.Map(static value => value.GetPvpEquipment())
+            PvpEquipment = pvpEquipment.Map(static (in JsonElement value) => value.GetPvpEquipment())
         };
     }
 }

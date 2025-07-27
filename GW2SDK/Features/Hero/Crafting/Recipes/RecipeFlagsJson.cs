@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Crafting.Recipes;
 
 internal static class RecipeFlagsJson
 {
-    public static RecipeFlags GetRecipeFlags(this JsonElement json)
+    public static RecipeFlags GetRecipeFlags(this in JsonElement json)
     {
         var autoLearned = false;
         var learnedFromItem = false;

@@ -1,4 +1,5 @@
-﻿using GuildWars2.Http;
+﻿using System.Text.Json;
+using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Templates;
@@ -75,7 +76,7 @@ public sealed class EquipmentTemplatesClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value =
-                response.Json.RootElement.GetSet(static entry => entry.GetBoundLegendaryItem());
+                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetBoundLegendaryItem());
             return (value, response.Context);
         }
     }
@@ -107,7 +108,7 @@ public sealed class EquipmentTemplatesClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetList(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetList(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -171,7 +172,7 @@ public sealed class EquipmentTemplatesClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value =
-                response.Json.RootElement.GetSet(static entry => entry.GetEquipmentTemplate());
+                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEquipmentTemplate());
             return (value, response.Context);
         }
     }
@@ -227,7 +228,7 @@ public sealed class EquipmentTemplatesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetLegendaryItem());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetLegendaryItem());
             return (value, response.Context);
         }
     }
@@ -245,7 +246,7 @@ public sealed class EquipmentTemplatesClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -295,7 +296,7 @@ public sealed class EquipmentTemplatesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetLegendaryItem());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetLegendaryItem());
             return (value, response.Context);
         }
     }
@@ -322,7 +323,7 @@ public sealed class EquipmentTemplatesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetLegendaryItem());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetLegendaryItem());
             return (value, response.Context);
         }
     }

@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Training;
 
 internal static class SkillsByPaletteJson
 {
-    public static ValueDictionary<int, int> GetSkillsByPalette(this JsonElement json)
+    public static ValueDictionary<int, int> GetSkillsByPalette(this in JsonElement json)
     {
         // The json is an iterable of key-value pairs
         // e.g.

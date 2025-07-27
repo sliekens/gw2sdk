@@ -1,4 +1,5 @@
-﻿using GuildWars2.Http;
+﻿using System.Text.Json;
+using GuildWars2.Http;
 using GuildWars2.Json;
 using GuildWars2.Pvp.Amulets;
 using GuildWars2.Pvp.Games;
@@ -42,7 +43,7 @@ public sealed class PvpClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -69,7 +70,7 @@ public sealed class PvpClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -108,7 +109,7 @@ public sealed class PvpClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value =
-                response.Json.RootElement.GetSet(static entry => entry.GetLeaderboardEntry());
+                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetLeaderboardEntry());
             return (value, response.Context);
         }
     }
@@ -136,7 +137,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetStanding());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStanding());
             return (value, response.Context);
         }
     }
@@ -189,7 +190,7 @@ public sealed class PvpClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -218,7 +219,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetAmulet());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAmulet());
             return (value, response.Context);
         }
     }
@@ -236,7 +237,7 @@ public sealed class PvpClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -290,7 +291,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetAmulet());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAmulet());
             return (value, response.Context);
         }
     }
@@ -319,7 +320,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetAmulet());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAmulet());
             return (value, response.Context);
         }
     }
@@ -348,7 +349,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetMistChampion());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMistChampion());
             return (value, response.Context);
         }
     }
@@ -366,7 +367,7 @@ public sealed class PvpClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -420,7 +421,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetMistChampion());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMistChampion());
             return (value, response.Context);
         }
     }
@@ -449,7 +450,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetMistChampion());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMistChampion());
             return (value, response.Context);
         }
     }
@@ -478,7 +479,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetRank());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRank());
             return (value, response.Context);
         }
     }
@@ -496,7 +497,7 @@ public sealed class PvpClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -550,7 +551,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetRank());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRank());
             return (value, response.Context);
         }
     }
@@ -579,7 +580,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetRank());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRank());
             return (value, response.Context);
         }
     }
@@ -608,7 +609,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetSeason());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetSeason());
             return (value, response.Context);
         }
     }
@@ -626,7 +627,7 @@ public sealed class PvpClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -680,7 +681,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetSeason());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetSeason());
             return (value, response.Context);
         }
     }
@@ -709,7 +710,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetSeason());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetSeason());
             return (value, response.Context);
         }
     }
@@ -738,7 +739,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetGame());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGame());
             return (value, response.Context);
         }
     }
@@ -762,7 +763,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -814,7 +815,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetGame());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGame());
             return (value, response.Context);
         }
     }
@@ -842,7 +843,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetGame());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGame());
             return (value, response.Context);
         }
     }

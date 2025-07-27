@@ -28,7 +28,7 @@ internal sealed class MasteryPointRewardJsonConverter : JsonConverter<MasteryPoi
         Write(writer, value);
     }
 
-    public static MasteryPointReward Read(JsonElement json)
+    public static MasteryPointReward Read(in JsonElement json)
     {
         return new MasteryPointReward
         {

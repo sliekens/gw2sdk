@@ -26,7 +26,7 @@ internal sealed class EffectJsonConverter : JsonConverter<Effect>
         Write(writer, value);
     }
 
-    public static Effect Read(JsonElement json)
+    public static Effect Read(in JsonElement json)
     {
         string iconString = "";
         if (json.TryGetProperty("icon", out var iconElement))

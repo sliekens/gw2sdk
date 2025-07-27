@@ -5,7 +5,7 @@ namespace GuildWars2.Guilds.Logs;
 
 internal static class GuildUpgradeActivityJson
 {
-    public static GuildUpgradeActivity GetGuildUpgradeActivity(this JsonElement json)
+    public static GuildUpgradeActivity GetGuildUpgradeActivity(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember time = "time";
@@ -65,18 +65,18 @@ internal static class GuildUpgradeActivityJson
 
         return new GuildUpgradeActivity
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Time = time.Map(static value => value.GetDateTimeOffset()),
-            User = user.Map(static value => value.GetString()) ?? "",
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Time = time.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
+            User = user.Map(static (in JsonElement value) => value.GetString()) ?? "",
             Action =
-                action.Map(static value => value.ValueEquals("complete")
+                action.Map(static (in JsonElement value) => value.ValueEquals("complete")
                     ? GuildUpgradeAction.Completed
                     : value.GetEnum<GuildUpgradeAction>()
                 ),
-            UpgradeId = upgradeId.Map(static value => value.GetInt32()),
-            RecipeId = recipeId.Map(static value => value.GetInt32()),
-            ItemId = itemId.Map(static value => value.GetInt32()),
-            Count = count.Map(static value => value.GetInt32())
+            UpgradeId = upgradeId.Map(static (in JsonElement value) => value.GetInt32()),
+            RecipeId = recipeId.Map(static (in JsonElement value) => value.GetInt32()),
+            ItemId = itemId.Map(static (in JsonElement value) => value.GetInt32()),
+            Count = count.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

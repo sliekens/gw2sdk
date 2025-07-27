@@ -5,7 +5,7 @@ namespace GuildWars2.Pvp.Standings;
 
 internal static class BestStandingJson
 {
-    public static BestStanding GetBestStanding(this JsonElement json)
+    public static BestStanding GetBestStanding(this in JsonElement json)
     {
         RequiredMember totalPoints = "total_points";
         RequiredMember division = "division";
@@ -43,11 +43,11 @@ internal static class BestStandingJson
 
         return new BestStanding
         {
-            TotalPips = totalPoints.Map(static value => value.GetInt32()),
-            Division = division.Map(static value => value.GetInt32()),
-            Tier = tier.Map(static value => value.GetInt32()),
-            Pips = points.Map(static value => value.GetInt32()),
-            Repeats = repeats.Map(static value => value.GetInt32())
+            TotalPips = totalPoints.Map(static (in JsonElement value) => value.GetInt32()),
+            Division = division.Map(static (in JsonElement value) => value.GetInt32()),
+            Tier = tier.Map(static (in JsonElement value) => value.GetInt32()),
+            Pips = points.Map(static (in JsonElement value) => value.GetInt32()),
+            Repeats = repeats.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

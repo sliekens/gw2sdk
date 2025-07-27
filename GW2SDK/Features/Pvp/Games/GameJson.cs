@@ -6,7 +6,7 @@ namespace GuildWars2.Pvp.Games;
 
 internal static class GameJson
 {
-    public static Game GetGame(this JsonElement json)
+    public static Game GetGame(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember mapId = "map_id";
@@ -74,17 +74,17 @@ internal static class GameJson
 
         return new Game
         {
-            Id = id.Map(static value => value.GetStringRequired()),
-            MapId = mapId.Map(static value => value.GetInt32()),
-            Started = started.Map(static value => value.GetDateTimeOffset()),
-            Ended = ended.Map(static value => value.GetDateTimeOffset()),
-            Result = result.Map(static value => value.GetEnum<PvpResult>()),
-            Team = team.Map(static value => value.GetEnum<PvpTeamColor>()),
-            Profession = profession.Map(static value => value.GetEnum<ProfessionName>()),
-            RatingType = ratingType.Map(static value => value.GetRatingType()),
-            RatingChange = ratingChange.Map(static value => value.GetInt32()),
-            SeasonId = seasonId.Map(static value => value.GetString()),
-            Score = score.Map(static value => value.GetScore())
+            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
+            MapId = mapId.Map(static (in JsonElement value) => value.GetInt32()),
+            Started = started.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
+            Ended = ended.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
+            Result = result.Map(static (in JsonElement value) => value.GetEnum<PvpResult>()),
+            Team = team.Map(static (in JsonElement value) => value.GetEnum<PvpTeamColor>()),
+            Profession = profession.Map(static (in JsonElement value) => value.GetEnum<ProfessionName>()),
+            RatingType = ratingType.Map(static (in JsonElement value) => value.GetRatingType()),
+            RatingChange = ratingChange.Map(static (in JsonElement value) => value.GetInt32()),
+            SeasonId = seasonId.Map(static (in JsonElement value) => value.GetString()),
+            Score = score.Map(static (in JsonElement value) => value.GetScore())
         };
     }
 }

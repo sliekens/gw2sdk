@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Wallet;
 
 internal static class CurrencyJson
 {
-    public static Currency GetCurrency(this JsonElement json)
+    public static Currency GetCurrency(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -41,13 +41,13 @@ internal static class CurrencyJson
             }
         }
 
-        var iconString = icon.Map(static value => value.GetStringRequired());
+        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new Currency
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Name = name.Map(static value => value.GetStringRequired()),
-            Description = description.Map(static value => value.GetStringRequired()),
-            Order = order.Map(static value => value.GetInt32()),
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Description = description.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Order = order.Map(static (in JsonElement value) => value.GetInt32()),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618

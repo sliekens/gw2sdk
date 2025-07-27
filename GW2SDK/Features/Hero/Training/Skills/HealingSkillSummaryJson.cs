@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Training.Skills;
 
 internal static class HealingSkillSummaryJson
 {
-    public static HealingSkillSummary GetHealingSkillSummary(this JsonElement json)
+    public static HealingSkillSummary GetHealingSkillSummary(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember slot = "slot";
@@ -36,8 +36,8 @@ internal static class HealingSkillSummaryJson
 
         return new HealingSkillSummary
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Slot = slot.Map(static value => value.GetEnum<SkillSlot>())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Slot = slot.Map(static (in JsonElement value) => value.GetEnum<SkillSlot>())
         };
     }
 }

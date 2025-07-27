@@ -5,7 +5,7 @@ namespace GuildWars2.Pve.Raids;
 
 internal static class EncounterJson
 {
-    public static Encounter GetEncounter(this JsonElement json)
+    public static Encounter GetEncounter(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember type = "type";
@@ -28,8 +28,8 @@ internal static class EncounterJson
 
         return new Encounter
         {
-            Id = id.Map(static value => value.GetStringRequired()),
-            Kind = type.Map(static value => value.GetEnum<EncounterKind>())
+            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Kind = type.Map(static (in JsonElement value) => value.GetEnum<EncounterKind>())
         };
     }
 }

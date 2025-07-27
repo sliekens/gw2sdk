@@ -25,7 +25,7 @@ internal class InfusionSlotUpgradePathJsonConverter : JsonConverter<InfusionSlot
         Write(writer, value);
     }
 
-    public static InfusionSlotUpgradePath Read(JsonElement value)
+    public static InfusionSlotUpgradePath Read(in JsonElement value)
     {
         return new InfusionSlotUpgradePath
         {

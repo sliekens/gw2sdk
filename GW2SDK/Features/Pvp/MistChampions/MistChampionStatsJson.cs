@@ -5,7 +5,7 @@ namespace GuildWars2.Pvp.MistChampions;
 
 internal static class MistChampionStatsJson
 {
-    public static MistChampionStats GetMistChampionStats(this JsonElement json)
+    public static MistChampionStats GetMistChampionStats(this in JsonElement json)
     {
         RequiredMember offense = "offense";
         RequiredMember defense = "defense";
@@ -33,9 +33,9 @@ internal static class MistChampionStatsJson
 
         return new MistChampionStats
         {
-            Offense = offense.Map(static value => value.GetInt32()),
-            Defense = defense.Map(static value => value.GetInt32()),
-            Speed = speed.Map(static value => value.GetInt32())
+            Offense = offense.Map(static (in JsonElement value) => value.GetInt32()),
+            Defense = defense.Map(static (in JsonElement value) => value.GetInt32()),
+            Speed = speed.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

@@ -5,7 +5,7 @@ namespace GuildWars2.Guilds.Logs;
 
 internal static class NewMessageOfTheDayJson
 {
-    public static NewMessageOfTheDay GetNewMessageOfTheDay(this JsonElement json)
+    public static NewMessageOfTheDay GetNewMessageOfTheDay(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember time = "time";
@@ -45,10 +45,10 @@ internal static class NewMessageOfTheDayJson
 
         return new NewMessageOfTheDay
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Time = time.Map(static value => value.GetDateTimeOffset()),
-            User = user.Map(static value => value.GetStringRequired()),
-            MessageOfTheDay = motd.Map(static value => value.GetStringRequired())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Time = time.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
+            User = user.Map(static (in JsonElement value) => value.GetStringRequired()),
+            MessageOfTheDay = motd.Map(static (in JsonElement value) => value.GetStringRequired())
         };
     }
 }

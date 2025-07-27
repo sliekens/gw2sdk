@@ -16,7 +16,7 @@ internal sealed class NoveltyJsonConverter : JsonConverter<Novelty>
         return Read(json.RootElement);
     }
 
-    public static Novelty? Read(JsonElement json)
+    public static Novelty? Read(in JsonElement json)
     {
         var iconString = json.GetProperty("icon").GetStringRequired();
 
@@ -30,7 +30,7 @@ internal sealed class NoveltyJsonConverter : JsonConverter<Novelty>
 #pragma warning restore CS0618
             IconUrl = new Uri(iconString),
             Slot = json.GetProperty("slot").GetStringRequired(),
-            UnlockItemIds = json.GetProperty("unlock_item_ids").GetList(entry => entry.GetInt32())
+            UnlockItemIds = json.GetProperty("unlock_item_ids").GetList(static (in JsonElement entry) => entry.GetInt32())
         };
     }
 

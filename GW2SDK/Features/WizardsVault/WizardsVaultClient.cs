@@ -1,4 +1,5 @@
-﻿using GuildWars2.Http;
+﻿using System.Text.Json;
+using GuildWars2.Http;
 using GuildWars2.Json;
 using GuildWars2.WizardsVault.AstralRewards;
 using GuildWars2.WizardsVault.Objectives;
@@ -75,7 +76,7 @@ public sealed class WizardsVaultClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value =
-                response.Json.RootElement.GetSet(static entry => entry.GetPurchasedAstralReward());
+                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetPurchasedAstralReward());
             return (value, response.Context);
         }
     }
@@ -191,7 +192,7 @@ public sealed class WizardsVaultClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetAstralReward());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAstralReward());
             return (value, response.Context);
         }
     }
@@ -209,7 +210,7 @@ public sealed class WizardsVaultClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -263,7 +264,7 @@ public sealed class WizardsVaultClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetAstralReward());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAstralReward());
             return (value, response.Context);
         }
     }
@@ -292,7 +293,7 @@ public sealed class WizardsVaultClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetAstralReward());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAstralReward());
             return (value, response.Context);
         }
     }
@@ -321,7 +322,7 @@ public sealed class WizardsVaultClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetObjective());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetObjective());
             return (value, response.Context);
         }
     }
@@ -339,7 +340,7 @@ public sealed class WizardsVaultClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -393,7 +394,7 @@ public sealed class WizardsVaultClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetObjective());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetObjective());
             return (value, response.Context);
         }
     }
@@ -422,7 +423,7 @@ public sealed class WizardsVaultClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetObjective());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetObjective());
             return (value, response.Context);
         }
     }

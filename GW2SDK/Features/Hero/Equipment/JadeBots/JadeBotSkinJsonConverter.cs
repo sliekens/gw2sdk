@@ -16,7 +16,7 @@ internal sealed class JadeBotSkinJsonConverter : JsonConverter<JadeBotSkin>
         return Read(document.RootElement);
     }
 
-    public static JadeBotSkin? Read(JsonElement json)
+    public static JadeBotSkin? Read(in JsonElement json)
     {
         return new JadeBotSkin
         {

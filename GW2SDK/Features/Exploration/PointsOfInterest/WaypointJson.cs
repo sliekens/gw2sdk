@@ -5,7 +5,7 @@ namespace GuildWars2.Exploration.PointsOfInterest;
 
 internal static class WaypointJson
 {
-    public static Waypoint GetWaypoint(this JsonElement json)
+    public static Waypoint GetWaypoint(this in JsonElement json)
     {
         OptionalMember name = "name";
         RequiredMember floor = "floor";
@@ -49,11 +49,11 @@ internal static class WaypointJson
 
         return new Waypoint
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Name = name.Map(static value => value.GetString()) ?? "",
-            Floor = floor.Map(static value => value.GetInt32()),
-            Coordinates = coordinates.Map(static value => value.GetCoordinateF()),
-            ChatLink = chatLink.Map(static value => value.GetStringRequired())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Name = name.Map(static (in JsonElement value) => value.GetString()) ?? "",
+            Floor = floor.Map(static (in JsonElement value) => value.GetInt32()),
+            Coordinates = coordinates.Map(static (in JsonElement value) => value.GetCoordinateF()),
+            ChatLink = chatLink.Map(static (in JsonElement value) => value.GetStringRequired())
         };
     }
 }

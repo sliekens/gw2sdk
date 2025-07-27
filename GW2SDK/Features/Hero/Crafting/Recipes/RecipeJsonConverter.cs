@@ -31,7 +31,7 @@ internal sealed class RecipeJsonConverter : JsonConverter<Recipe>
         Write(writer, value);
     }
 
-    public static Recipe Read(JsonElement json)
+    public static Recipe Read(in JsonElement json)
     {
         if (json.TryGetProperty(DiscriminatorName, out var discriminator))
         {
@@ -154,7 +154,7 @@ internal sealed class RecipeJsonConverter : JsonConverter<Recipe>
                 TimeSpan.FromMilliseconds(json.GetProperty("time_to_craft_ms").GetDouble()),
             Disciplines =
                 json.GetProperty("disciplines")
-                    .GetList(static value => value.GetEnum<CraftingDisciplineName>()),
+                    .GetList(static (in JsonElement value) => value.GetEnum<CraftingDisciplineName>()),
             Flags = RecipeFlagsJsonConverter.Read(json.GetProperty("flags")),
             Ingredients = json.GetProperty("ingredients").GetList(IngredientJsonConverter.Read),
             ChatLink = json.GetProperty("chat_link").GetStringRequired()

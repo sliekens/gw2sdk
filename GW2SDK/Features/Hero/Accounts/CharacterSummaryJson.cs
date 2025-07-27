@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Accounts;
 
 internal static class CharacterSummaryJson
 {
-    public static CharacterSummary GetCharacterSummary(this JsonElement json)
+    public static CharacterSummary GetCharacterSummary(this in JsonElement json)
     {
         RequiredMember name = "name";
         RequiredMember race = "race";
@@ -73,17 +73,17 @@ internal static class CharacterSummaryJson
 
         return new CharacterSummary
         {
-            Name = name.Map(static value => value.GetStringRequired()),
-            Race = race.Map(static value => value.GetEnum<RaceName>()),
-            BodyType = gender.Map(static value => value.GetEnum<BodyType>()),
-            Level = level.Map(static value => value.GetInt32()),
-            GuildId = guild.Map(static value => value.GetString()) ?? "",
-            Profession = profession.Map(static value => value.GetEnum<ProfessionName>()),
-            Age = age.Map(static value => TimeSpan.FromSeconds(value.GetDouble())),
-            LastModified = lastModified.Map(static value => value.GetDateTimeOffset()),
-            Created = created.Map(static value => value.GetDateTimeOffset()),
-            Deaths = deaths.Map(static value => value.GetInt32()),
-            TitleId = title.Map(static value => value.GetInt32())
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Race = race.Map(static (in JsonElement value) => value.GetEnum<RaceName>()),
+            BodyType = gender.Map(static (in JsonElement value) => value.GetEnum<BodyType>()),
+            Level = level.Map(static (in JsonElement value) => value.GetInt32()),
+            GuildId = guild.Map(static (in JsonElement value) => value.GetString()) ?? "",
+            Profession = profession.Map(static (in JsonElement value) => value.GetEnum<ProfessionName>()),
+            Age = age.Map(static (in JsonElement value) => TimeSpan.FromSeconds(value.GetDouble())),
+            LastModified = lastModified.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
+            Created = created.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
+            Deaths = deaths.Map(static (in JsonElement value) => value.GetInt32()),
+            TitleId = title.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

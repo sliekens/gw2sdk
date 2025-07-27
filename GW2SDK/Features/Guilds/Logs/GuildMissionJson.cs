@@ -5,7 +5,7 @@ namespace GuildWars2.Guilds.Logs;
 
 internal static class GuildMissionJson
 {
-    public static GuildMission GetGuildMission(this JsonElement json)
+    public static GuildMission GetGuildMission(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember time = "time";
@@ -50,11 +50,11 @@ internal static class GuildMissionJson
 
         return new GuildMission
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Time = time.Map(static value => value.GetDateTimeOffset()),
-            User = user.Map(static value => value.GetString()) ?? "",
-            State = state.Map(static value => value.GetEnum<GuildMissionState>()),
-            Influence = influence.Map(static value => value.GetInt32())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Time = time.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
+            User = user.Map(static (in JsonElement value) => value.GetString()) ?? "",
+            State = state.Map(static (in JsonElement value) => value.GetEnum<GuildMissionState>()),
+            Influence = influence.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

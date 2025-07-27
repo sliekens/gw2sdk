@@ -1,4 +1,5 @@
-﻿using GuildWars2.Http;
+﻿using System.Text.Json;
+using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Builds;
@@ -37,7 +38,7 @@ public sealed class BuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetList(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetList(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -89,7 +90,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetList(static entry => entry.GetBuild());
+            var value = response.Json.RootElement.GetList(static (in JsonElement entry) => entry.GetBuild());
             return (value, response.Context);
         }
     }
@@ -116,7 +117,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetList(static entry => entry.GetBuild());
+            var value = response.Json.RootElement.GetList(static (in JsonElement entry) => entry.GetBuild());
             return (value, response.Context);
         }
     }
@@ -147,7 +148,7 @@ public sealed class BuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -209,7 +210,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetBuildTemplate());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetBuildTemplate());
             return (value, response.Context);
         }
     }
@@ -268,7 +269,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetSkill());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetSkill());
             return (value, response.Context);
         }
     }
@@ -286,7 +287,7 @@ public sealed class BuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -341,7 +342,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetSkill());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetSkill());
             return (value, response.Context);
         }
     }
@@ -370,7 +371,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetSkill());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetSkill());
             return (value, response.Context);
         }
     }
@@ -399,7 +400,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetSpecialization());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetSpecialization());
             return (value, response.Context);
         }
     }
@@ -417,7 +418,7 @@ public sealed class BuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -473,7 +474,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetSpecialization());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetSpecialization());
             return (value, response.Context);
         }
     }
@@ -503,7 +504,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetSpecialization());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetSpecialization());
             return (value, response.Context);
         }
     }
@@ -532,7 +533,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetTrait());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetTrait());
             return (value, response.Context);
         }
     }
@@ -550,7 +551,7 @@ public sealed class BuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -605,7 +606,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetTrait());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetTrait());
             return (value, response.Context);
         }
     }
@@ -634,7 +635,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetTrait());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetTrait());
             return (value, response.Context);
         }
     }
@@ -656,7 +657,7 @@ public sealed class BuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -704,7 +705,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetLegend());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetLegend());
             return (value, response.Context);
         }
     }
@@ -730,7 +731,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetLegend());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetLegend());
             return (value, response.Context);
         }
     }
@@ -752,7 +753,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetLegend());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetLegend());
             return (value, response.Context);
         }
     }

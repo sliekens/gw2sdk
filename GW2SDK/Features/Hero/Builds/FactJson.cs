@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Builds;
 
 internal static class FactJson
 {
-    public static Fact GetFact(this JsonElement json, out int? requiresTrait, out int? overrides)
+    public static Fact GetFact(this in JsonElement json, out int? requiresTrait, out int? overrides)
     {
         requiresTrait = null;
         overrides = null;
@@ -97,10 +97,10 @@ internal static class FactJson
             }
         }
 
-        var iconString = icon.Map(static value => value.GetStringRequired());
+        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new Fact
         {
-            Text = text.Map(static value => value.GetString()) ?? "",
+            Text = text.Map(static (in JsonElement value) => value.GetString()) ?? "",
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618

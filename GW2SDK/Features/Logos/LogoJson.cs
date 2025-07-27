@@ -5,7 +5,7 @@ namespace GuildWars2.Logos;
 
 internal static class LogoJson
 {
-    public static Logo GetLogo(this JsonElement json)
+    public static Logo GetLogo(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember url = "url";
@@ -28,8 +28,8 @@ internal static class LogoJson
 
         return new Logo
         {
-            Id = id.Map(static value => value.GetStringRequired()),
-            Url = new Uri(url.Map(static value => value.GetStringRequired()))
+            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Url = new Uri(url.Map(static (in JsonElement value) => value.GetStringRequired()))
         };
     }
 }

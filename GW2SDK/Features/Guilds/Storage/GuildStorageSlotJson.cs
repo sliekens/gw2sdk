@@ -5,7 +5,7 @@ namespace GuildWars2.Guilds.Storage;
 
 internal static class GuildStorageSlotJson
 {
-    public static GuildStorageSlot GetGuildStorageSlot(this JsonElement json)
+    public static GuildStorageSlot GetGuildStorageSlot(this in JsonElement json)
     {
         RequiredMember itemId = "id";
         RequiredMember count = "count";
@@ -28,8 +28,8 @@ internal static class GuildStorageSlotJson
 
         return new GuildStorageSlot
         {
-            ItemId = itemId.Map(static value => value.GetInt32()),
-            Count = count.Map(static value => value.GetInt32())
+            ItemId = itemId.Map(static (in JsonElement value) => value.GetInt32()),
+            Count = count.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

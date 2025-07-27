@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Accounts;
 
 internal static class AccountLuckJson
 {
-    public static AccountLuck GetAccountLuck(this JsonElement json)
+    public static AccountLuck GetAccountLuck(this in JsonElement json)
     {
         JsonElement luckObj = default;
 
@@ -50,6 +50,6 @@ internal static class AccountLuckJson
             }
         }
 
-        return new AccountLuck { Luck = value.Map(static luck => luck.GetInt32()) };
+        return new AccountLuck { Luck = value.Map(static (in JsonElement luck) => luck.GetInt32()) };
     }
 }

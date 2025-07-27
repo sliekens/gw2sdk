@@ -5,7 +5,7 @@ namespace GuildWars2.Guilds.Logs;
 
 internal static class RankChangeJson
 {
-    public static RankChange GetRankChange(this JsonElement json)
+    public static RankChange GetRankChange(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember time = "time";
@@ -55,12 +55,12 @@ internal static class RankChangeJson
 
         return new RankChange
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Time = time.Map(static value => value.GetDateTimeOffset()),
-            User = user.Map(static value => value.GetStringRequired()),
-            ChangedBy = changedBy.Map(static value => value.GetString()) ?? "",
-            OldRank = oldRank.Map(static value => value.GetStringRequired()),
-            NewRank = newRank.Map(static value => value.GetStringRequired())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Time = time.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
+            User = user.Map(static (in JsonElement value) => value.GetStringRequired()),
+            ChangedBy = changedBy.Map(static (in JsonElement value) => value.GetString()) ?? "",
+            OldRank = oldRank.Map(static (in JsonElement value) => value.GetStringRequired()),
+            NewRank = newRank.Map(static (in JsonElement value) => value.GetStringRequired())
         };
     }
 }

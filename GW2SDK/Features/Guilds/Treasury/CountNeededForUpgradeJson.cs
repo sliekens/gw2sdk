@@ -5,7 +5,7 @@ namespace GuildWars2.Guilds.Treasury;
 
 internal static class CountNeededForUpgradeJson
 {
-    public static CountNeededForUpgrade GetCountNeededForUpgrade(this JsonElement json)
+    public static CountNeededForUpgrade GetCountNeededForUpgrade(this in JsonElement json)
     {
         RequiredMember upgradeId = "upgrade_id";
         RequiredMember count = "count";
@@ -28,8 +28,8 @@ internal static class CountNeededForUpgradeJson
 
         return new CountNeededForUpgrade
         {
-            UpgradeId = upgradeId.Map(static value => value.GetInt32()),
-            Count = count.Map(static value => value.GetInt32())
+            UpgradeId = upgradeId.Map(static (in JsonElement value) => value.GetInt32()),
+            Count = count.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

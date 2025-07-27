@@ -5,7 +5,7 @@ namespace GuildWars2.Commerce.Listings;
 
 internal static class OrderBookJson
 {
-    public static OrderBook GetOrderBook(this JsonElement json)
+    public static OrderBook GetOrderBook(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember demand = "buys";
@@ -33,12 +33,12 @@ internal static class OrderBookJson
 
         return new OrderBook
         {
-            Id = id.Map(static value => value.GetInt32()),
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
             Demand =
-                demand.Map(static values => values.GetList(static value => value.GetOrderBookLine())
+                demand.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetOrderBookLine())
                 ),
-            Supply = supply.Map(static values =>
-                values.GetList(static value => value.GetOrderBookLine())
+            Supply = supply.Map(static (in JsonElement values) =>
+                values.GetList(static (in JsonElement value) => value.GetOrderBookLine())
             )
         };
     }

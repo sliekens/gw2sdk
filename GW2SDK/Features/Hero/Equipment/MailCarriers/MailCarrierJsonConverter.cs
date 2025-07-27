@@ -16,13 +16,13 @@ internal sealed class MailCarrierJsonConverter : JsonConverter<MailCarrier>
         return Read(document.RootElement);
     }
 
-    public static MailCarrier? Read(JsonElement json)
+    public static MailCarrier? Read(in JsonElement json)
     {
         var iconString = json.GetProperty("icon").GetStringRequired();
         return new MailCarrier
         {
             Id = json.GetProperty("id").GetInt32(),
-            UnlockItemIds = json.GetProperty("unlock_item_ids").GetList(entry => entry.GetInt32()),
+            UnlockItemIds = json.GetProperty("unlock_item_ids").GetList(static (in JsonElement entry) => entry.GetInt32()),
             Order = json.GetProperty("order").GetInt32(),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,

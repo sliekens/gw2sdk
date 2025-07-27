@@ -25,7 +25,7 @@ internal sealed class AchievementGroupJsonConverter : JsonConverter<AchievementG
         Write(writer, value);
     }
 
-    public static AchievementGroup Read(JsonElement json)
+    public static AchievementGroup Read(in JsonElement json)
     {
         return new AchievementGroup
         {
@@ -33,7 +33,7 @@ internal sealed class AchievementGroupJsonConverter : JsonConverter<AchievementG
             Name = json.GetProperty("name").GetStringRequired(),
             Description = json.GetProperty("description").GetStringRequired(),
             Order = json.GetProperty("order").GetInt32(),
-            Categories = json.GetProperty("categories").GetList(category => category.GetInt32())
+            Categories = json.GetProperty("categories").GetList(static (in JsonElement category) => category.GetInt32())
         };
     }
 

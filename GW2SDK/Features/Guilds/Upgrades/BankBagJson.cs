@@ -5,7 +5,7 @@ namespace GuildWars2.Guilds.Upgrades;
 
 internal static class BankBagJson
 {
-    public static BankBag GetBankBag(this JsonElement json)
+    public static BankBag GetBankBag(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -80,25 +80,25 @@ internal static class BankBagJson
 
         return new BankBag
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Name = name.Map(static value => value.GetStringRequired()),
-            Description = description.Map(static value => value.GetStringRequired()),
-            BuildTime = buildTime.Map(static value => TimeSpan.FromMinutes(value.GetDouble())),
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Description = description.Map(static (in JsonElement value) => value.GetStringRequired()),
+            BuildTime = buildTime.Map(static (in JsonElement value) => TimeSpan.FromMinutes(value.GetDouble())),
 #pragma warning disable CS0618 // IconHref is obsolete
-            IconHref = icon.Map(static value => value.GetStringRequired()),
+            IconHref = icon.Map(static (in JsonElement value) => value.GetStringRequired()),
 #pragma warning restore CS0618
-            IconUrl = icon.Map(static value => new Uri(value.GetStringRequired())),
-            RequiredLevel = requiredLevel.Map(static value => value.GetInt32()),
-            Experience = experience.Map(static value => value.GetInt32()),
+            IconUrl = icon.Map(static (in JsonElement value) => new Uri(value.GetStringRequired())),
+            RequiredLevel = requiredLevel.Map(static (in JsonElement value) => value.GetInt32()),
+            Experience = experience.Map(static (in JsonElement value) => value.GetInt32()),
             Prerequisites =
-                prerequisites.Map(static values => values.GetList(static value => value.GetInt32())
+                prerequisites.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32())
                 ),
             Costs =
-                costs.Map(static values =>
-                    values.GetList(static value => value.GetGuildUpgradeCost())
+                costs.Map(static (in JsonElement values) =>
+                    values.GetList(static (in JsonElement value) => value.GetGuildUpgradeCost())
                 ),
-            MaxItems = maxItems.Map(static value => value.GetInt32()),
-            MaxCoins = maxCoins.Map(static value => value.GetInt32())
+            MaxItems = maxItems.Map(static (in JsonElement value) => value.GetInt32()),
+            MaxCoins = maxCoins.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

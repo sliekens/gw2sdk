@@ -5,7 +5,7 @@ namespace GuildWars2.Wvw.Matches;
 
 internal static class OwnedRuinsJson
 {
-    public static OwnedRuins GetOwnedRuins(this JsonElement json)
+    public static OwnedRuins GetOwnedRuins(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember owner = "owner";
@@ -50,11 +50,11 @@ internal static class OwnedRuinsJson
 
         return new OwnedRuins
         {
-            Id = id.Map(static value => value.GetStringRequired()),
-            Owner = owner.Map(static value => value.GetEnum<TeamColor>()),
-            LastFlipped = lastFlipped.Map(static value => value.GetDateTimeOffset()),
-            PointsTick = pointsTick.Map(static value => value.GetInt32()),
-            PointsCapture = pointsCapture.Map(static value => value.GetInt32())
+            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Owner = owner.Map(static (in JsonElement value) => value.GetEnum<TeamColor>()),
+            LastFlipped = lastFlipped.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
+            PointsTick = pointsTick.Map(static (in JsonElement value) => value.GetInt32()),
+            PointsCapture = pointsCapture.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

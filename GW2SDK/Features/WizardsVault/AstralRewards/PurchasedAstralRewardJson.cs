@@ -5,7 +5,7 @@ namespace GuildWars2.WizardsVault.AstralRewards;
 
 internal static class PurchasedAstralRewardJson
 {
-    public static PurchasedAstralReward GetPurchasedAstralReward(this JsonElement json)
+    public static PurchasedAstralReward GetPurchasedAstralReward(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember itemId = "item_id";
@@ -53,13 +53,13 @@ internal static class PurchasedAstralRewardJson
 
         return new PurchasedAstralReward
         {
-            Id = id.Map(static value => value.GetInt32()),
-            ItemId = itemId.Map(static value => value.GetInt32()),
-            ItemCount = itemCount.Map(static value => value.GetInt32()),
-            Kind = type.Map(static value => value.GetEnum<RewardKind>()),
-            Cost = cost.Map(static value => value.GetInt32()),
-            Purchased = purchased.Map(static value => value.GetInt32()),
-            PurchaseLimit = purchaseLimit.Map(static value => value.GetInt32())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            ItemId = itemId.Map(static (in JsonElement value) => value.GetInt32()),
+            ItemCount = itemCount.Map(static (in JsonElement value) => value.GetInt32()),
+            Kind = type.Map(static (in JsonElement value) => value.GetEnum<RewardKind>()),
+            Cost = cost.Map(static (in JsonElement value) => value.GetInt32()),
+            Purchased = purchased.Map(static (in JsonElement value) => value.GetInt32()),
+            PurchaseLimit = purchaseLimit.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

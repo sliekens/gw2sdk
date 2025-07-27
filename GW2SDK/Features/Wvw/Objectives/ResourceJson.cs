@@ -6,7 +6,7 @@ namespace GuildWars2.Wvw.Objectives;
 
 internal static class ResourceJson
 {
-    public static Resource GetResource(this JsonElement json)
+    public static Resource GetResource(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -76,19 +76,19 @@ internal static class ResourceJson
 
         return new Resource
         {
-            Id = id.Map(static value => value.GetStringRequired()),
-            Name = name.Map(static value => value.GetStringRequired()),
-            SectorId = sectorId.Map(static value => value.GetInt32()),
-            MapKind = mapType.Map(static value => value.GetEnum<MapKind>()),
-            MapId = mapId.Map(static value => value.GetInt32()),
-            UpgradeId = upgradeId.Map(static value => value.GetInt32()),
-            Coordinates = coordinates.Map(static value => value.GetCoordinate3()),
-            LabelCoordinates = labelCoordinates.Map(static value => value.GetCoordinateF()),
+            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            SectorId = sectorId.Map(static (in JsonElement value) => value.GetInt32()),
+            MapKind = mapType.Map(static (in JsonElement value) => value.GetEnum<MapKind>()),
+            MapId = mapId.Map(static (in JsonElement value) => value.GetInt32()),
+            UpgradeId = upgradeId.Map(static (in JsonElement value) => value.GetInt32()),
+            Coordinates = coordinates.Map(static (in JsonElement value) => value.GetCoordinate3()),
+            LabelCoordinates = labelCoordinates.Map(static (in JsonElement value) => value.GetCoordinateF()),
 #pragma warning disable CS0618 // Suppress obsolete warning
-            MarkerIconHref = marker.Map(static value => value.GetString()) ?? "",
+            MarkerIconHref = marker.Map(static (in JsonElement value) => value.GetString()) ?? "",
 #pragma warning restore CS0618
-            MarkerIconUrl = marker.Map(static value => value.GetString() is { } url ? new Uri(url) : null),
-            ChatLink = chatLink.Map(static value => value.GetStringRequired())
+            MarkerIconUrl = marker.Map(static (in JsonElement value) => value.GetString() is { } url ? new Uri(url) : null),
+            ChatLink = chatLink.Map(static (in JsonElement value) => value.GetStringRequired())
         };
     }
 }

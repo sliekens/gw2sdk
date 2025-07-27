@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Equipment.Miniatures;
 
 internal static class MiniatureJson
 {
-    public static Miniature GetMiniature(this JsonElement json)
+    public static Miniature GetMiniature(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -46,18 +46,18 @@ internal static class MiniatureJson
             }
         }
 
-        var iconString = icon.Map(static value => value.GetStringRequired());
+        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new Miniature
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Name = name.Map(static value => value.GetStringRequired()),
-            LockedText = unlock.Map(static value => value.GetString()) ?? "",
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            LockedText = unlock.Map(static (in JsonElement value) => value.GetString()) ?? "",
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
-            Order = order.Map(static value => value.GetInt32()),
-            ItemId = itemId.Map(static value => value.GetInt32())
+            Order = order.Map(static (in JsonElement value) => value.GetInt32()),
+            ItemId = itemId.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

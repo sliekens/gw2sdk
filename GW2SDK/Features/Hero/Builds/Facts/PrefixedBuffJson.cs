@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Builds.Facts;
 internal static class PrefixedBuffJson
 {
     public static PrefixedBuff GetPrefixedBuff(
-        this JsonElement json,
+        this in JsonElement json,
         out int? requiresTrait,
         out int? overrides
     )
@@ -92,21 +92,21 @@ internal static class PrefixedBuffJson
             }
         }
 
-        var iconString = icon.Map(static value => value.GetString()) ?? "";
-        var prefixIconString = prefixIcon.Map(static value => value.GetString()) ?? "";
+        var iconString = icon.Map(static (in JsonElement value) => value.GetString()) ?? "";
+        var prefixIconString = prefixIcon.Map(static (in JsonElement value) => value.GetString()) ?? "";
 #pragma warning disable CS0618
         return new PrefixedBuff
         {
-            Precondition = prefixStatus.Map(static value => value.GetString()) ?? "",
+            Precondition = prefixStatus.Map(static (in JsonElement value) => value.GetString()) ?? "",
             PrefixIconHref = prefixIconString,
             PrefixIconUrl = !string.IsNullOrEmpty(prefixIconString) ? new Uri(prefixIconString, UriKind.RelativeOrAbsolute) : null!, // not null
-            Text = text.Map(static value => value.GetStringRequired()),
+            Text = text.Map(static (in JsonElement value) => value.GetStringRequired()),
             IconHref = iconString,
             IconUrl = !string.IsNullOrEmpty(iconString) ? new Uri(iconString, UriKind.RelativeOrAbsolute) : null!, // not null
-            Duration = duration.Map(static value => TimeSpan.FromSeconds(value.GetDouble())),
-            Status = status.Map(static value => value.GetString()) ?? "",
-            Description = description.Map(static value => value.GetString()) ?? "",
-            ApplyCount = applyCount.Map(static value => value.GetInt32())
+            Duration = duration.Map(static (in JsonElement value) => TimeSpan.FromSeconds(value.GetDouble())),
+            Status = status.Map(static (in JsonElement value) => value.GetString()) ?? "",
+            Description = description.Map(static (in JsonElement value) => value.GetString()) ?? "",
+            ApplyCount = applyCount.Map(static (in JsonElement value) => value.GetInt32())
         };
 #pragma warning restore CS0618
     }

@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Achievements.Titles;
 
 internal static class TitleJson
 {
-    public static Title GetTitle(this JsonElement json)
+    public static Title GetTitle(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -44,12 +44,12 @@ internal static class TitleJson
 
         return new Title
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Name = name.Map(static value => value.GetStringRequired()),
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
             Achievements =
-                achievements.Map(static values => values.GetList(static value => value.GetInt32())),
+                achievements.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32())),
             AchievementPointsRequired =
-                achievementPointsRequired.Map(static value => value.GetInt32())
+                achievementPointsRequired.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

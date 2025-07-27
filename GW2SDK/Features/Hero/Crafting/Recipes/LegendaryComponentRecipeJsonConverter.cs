@@ -29,7 +29,7 @@ internal sealed class
         Write(writer, value);
     }
 
-    public static LegendaryComponentRecipe Read(JsonElement json)
+    public static LegendaryComponentRecipe Read(in JsonElement json)
     {
         if (!json.GetProperty(RecipeJsonConverter.DiscriminatorName)
             .ValueEquals(DiscriminatorValue))
@@ -49,7 +49,7 @@ internal sealed class
                 TimeSpan.FromMilliseconds(json.GetProperty("time_to_craft_ms").GetDouble()),
             Disciplines =
                 json.GetProperty("disciplines")
-                    .GetList(static value => value.GetEnum<CraftingDisciplineName>()),
+                    .GetList(static (in JsonElement value) => value.GetEnum<CraftingDisciplineName>()),
             Flags = RecipeFlagsJsonConverter.Read(json.GetProperty("flags")),
             Ingredients = json.GetProperty("ingredients").GetList(IngredientJsonConverter.Read),
             ChatLink = json.GetProperty("chat_link").GetStringRequired()

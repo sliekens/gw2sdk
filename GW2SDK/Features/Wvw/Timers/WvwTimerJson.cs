@@ -5,7 +5,7 @@ namespace GuildWars2.Wvw.Timers;
 
 internal static class WvwTimerJson
 {
-    public static WvwTimer GetWvwTimer(this JsonElement json)
+    public static WvwTimer GetWvwTimer(this in JsonElement json)
     {
         RequiredMember na = "na";
         RequiredMember eu = "eu";
@@ -28,8 +28,8 @@ internal static class WvwTimerJson
 
         return new WvwTimer
         {
-            NorthAmerica = na.Map(static value => value.GetDateTimeOffset()),
-            Europe = eu.Map(static value => value.GetDateTimeOffset())
+            NorthAmerica = na.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
+            Europe = eu.Map(static (in JsonElement value) => value.GetDateTimeOffset())
         };
     }
 }

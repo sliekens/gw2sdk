@@ -25,7 +25,7 @@ internal sealed class IngredientJsonConverter : JsonConverter<Ingredient>
         Write(writer, value);
     }
 
-    public static Ingredient Read(JsonElement json)
+    public static Ingredient Read(in JsonElement json)
     {
         return new Ingredient
         {

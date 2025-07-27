@@ -34,7 +34,7 @@ internal sealed class AchievementJsonConverter : JsonConverter<Achievement>
         Write(writer, value);
     }
 
-    public static Achievement Read(JsonElement json)
+    public static Achievement Read(in JsonElement json)
     {
         if (json.TryGetProperty(DiscriminatorName, out var discriminator))
         {
@@ -63,7 +63,7 @@ internal sealed class AchievementJsonConverter : JsonConverter<Achievement>
                 .GetNullableList(AchievementRewardJsonConverter.Read),
             Bits = json.GetProperty("bits").GetNullableList(AchievementBitJsonConverter.Read),
             Prerequisites =
-                json.GetProperty("prerequisites").GetList(prerequisite => prerequisite.GetInt32()),
+                json.GetProperty("prerequisites").GetList(static (in JsonElement prerequisite) => prerequisite.GetInt32()),
             PointCap = json.GetProperty("point_cap").GetNullableInt32()
         };
     }

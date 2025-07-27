@@ -5,7 +5,7 @@ namespace GuildWars2.Pve.Home.Nodes;
 
 internal static class NodeJson
 {
-    public static Node GetNode(this JsonElement json)
+    public static Node GetNode(this in JsonElement json)
     {
         RequiredMember id = "id";
 
@@ -21,6 +21,6 @@ internal static class NodeJson
             }
         }
 
-        return new Node { Id = id.Map(static value => value.GetStringRequired()) };
+        return new Node { Id = id.Map(static (in JsonElement value) => value.GetStringRequired()) };
     }
 }

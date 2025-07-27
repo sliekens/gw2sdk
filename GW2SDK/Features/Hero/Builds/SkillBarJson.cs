@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Builds;
 
 internal static class SkillBarJson
 {
-    public static SkillBar GetSkillBar(this JsonElement json)
+    public static SkillBar GetSkillBar(this in JsonElement json)
     {
         NullableMember heal = "heal";
         RequiredMember utilities = "utilities";
@@ -31,14 +31,14 @@ internal static class SkillBarJson
             }
         }
 
-        var utilitySkills = utilities.Map(static values => values.GetUtilitySkillIds());
+        var utilitySkills = utilities.Map(static (in JsonElement values) => values.GetUtilitySkillIds());
         return new SkillBar
         {
-            HealSkillId = heal.Map(static value => value.GetInt32()),
+            HealSkillId = heal.Map(static (in JsonElement value) => value.GetInt32()),
             UtilitySkillId1 = utilitySkills.UtilitySkillId,
             UtilitySkillId2 = utilitySkills.UtilitySkillId2,
             UtilitySkillId3 = utilitySkills.UtilitySkillId3,
-            EliteSkillId = elite.Map(static value => value.GetInt32())
+            EliteSkillId = elite.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

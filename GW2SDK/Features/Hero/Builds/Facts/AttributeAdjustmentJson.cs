@@ -7,7 +7,7 @@ namespace GuildWars2.Hero.Builds.Facts;
 internal static class AttributeAdjustmentJson
 {
     public static AttributeAdjustment GetAttributeAdjustment(
-        this JsonElement json,
+        this in JsonElement json,
         out int? requiresTrait,
         out int? overrides
     )
@@ -64,17 +64,17 @@ internal static class AttributeAdjustmentJson
             }
         }
 
-        var iconString = icon.Map(static value => value.GetStringRequired());
+        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new AttributeAdjustment
         {
-            Text = text.Map(static value => value.GetString()) ?? "",
+            Text = text.Map(static (in JsonElement value) => value.GetString()) ?? "",
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
-            Value = adjustment.Map(static value => value.GetInt32()),
-            Target = target.Map(static value => value.GetAttributeName()),
-            HitCount = hitCount.Map(static value => value.GetInt32())
+            Value = adjustment.Map(static (in JsonElement value) => value.GetInt32()),
+            Target = target.Map(static (in JsonElement value) => value.GetAttributeName()),
+            HitCount = hitCount.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

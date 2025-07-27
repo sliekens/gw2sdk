@@ -17,7 +17,7 @@ internal sealed class
         return Read(json.RootElement);
     }
 
-    public static SelectedAttributeCombination Read(JsonElement json)
+    public static SelectedAttributeCombination Read(in JsonElement json)
     {
         return new SelectedAttributeCombination
         {
@@ -39,7 +39,7 @@ internal sealed class
                         nameof(AttributeName.AgonyResistance) => AttributeName.AgonyResistance,
                         _ => throw new JsonException()
                     },
-                    static value => value.GetInt32()
+                    static (in JsonElement value) => value.GetInt32()
                 )
         };
     }

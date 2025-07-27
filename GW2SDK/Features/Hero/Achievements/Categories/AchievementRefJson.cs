@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Achievements.Categories;
 
 internal static class AchievementRefJson
 {
-    public static AchievementRef GetAchievementRef(this JsonElement json)
+    public static AchievementRef GetAchievementRef(this in JsonElement json)
     {
         RequiredMember id = "id";
         OptionalMember requiredAccess = "required_access";
@@ -38,10 +38,10 @@ internal static class AchievementRefJson
 
         return new AchievementRef
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Flags = flags.Map(static values => values.GetAchievementFlags())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Flags = flags.Map(static (in JsonElement values) => values.GetAchievementFlags())
                 ?? AchievementFlags.None,
-            Level = level.Map(static value => value.GetLevelRequirement())
+            Level = level.Map(static (in JsonElement value) => value.GetLevelRequirement())
         };
     }
 }

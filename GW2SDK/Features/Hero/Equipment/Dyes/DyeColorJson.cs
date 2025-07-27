@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Equipment.Dyes;
 
 internal static class DyeColorJson
 {
-    public static DyeColor GetDyeColor(this JsonElement json)
+    public static DyeColor GetDyeColor(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -63,19 +63,19 @@ internal static class DyeColorJson
 
         // The API puts all hues, materials, and color sets into the same array,
         // which is uncomfortable, so split them into properties
-        var (hue, material, set) = categories.Map(static value => value.GetCategories());
+        var (hue, material, set) = categories.Map(static (in JsonElement value) => value.GetCategories());
 
         // the first element is the hue, second is material, third is color set
         return new DyeColor
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Name = name.Map(static value => value.GetStringRequired()),
-            BaseRgb = baseRgb.Map(static value => value.GetColor()),
-            Cloth = cloth.Map(static value => value.GetColorInfo()),
-            Leather = leather.Map(static value => value.GetColorInfo()),
-            Metal = metal.Map(static value => value.GetColorInfo()),
-            Fur = fur.Map(static value => value.GetColorInfo()),
-            ItemId = itemId.Map(static value => value.GetInt32()),
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            BaseRgb = baseRgb.Map(static (in JsonElement value) => value.GetColor()),
+            Cloth = cloth.Map(static (in JsonElement value) => value.GetColorInfo()),
+            Leather = leather.Map(static (in JsonElement value) => value.GetColorInfo()),
+            Metal = metal.Map(static (in JsonElement value) => value.GetColorInfo()),
+            Fur = fur.Map(static (in JsonElement value) => value.GetColorInfo()),
+            ItemId = itemId.Map(static (in JsonElement value) => value.GetInt32()),
             Hue = hue,
             Material = material,
             Set = set

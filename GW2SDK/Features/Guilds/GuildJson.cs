@@ -6,7 +6,7 @@ namespace GuildWars2.Guilds;
 
 internal static class GuildJson
 {
-    public static Guild GetGuild(this JsonElement json)
+    public static Guild GetGuild(this in JsonElement json)
     {
         NullableMember level = "level";
         OptionalMember motd = "motd";
@@ -79,18 +79,18 @@ internal static class GuildJson
 
         return new Guild
         {
-            Level = level.Map(static value => value.GetInt32()),
-            MessageOfTheDay = motd.Map(static value => value.GetStringRequired()),
-            Influence = influence.Map(static value => value.GetInt32()),
-            Aetherium = aetherium.Map(static value => value.GetInt32()),
-            Resonance = resonance.Map(static value => value.GetInt32()),
-            Favor = favor.Map(static value => value.GetInt32()),
-            MemberCount = memberCount.Map(static value => value.GetInt32()),
-            MemberCapacity = memberCapacity.Map(static value => value.GetInt32()),
-            Id = id.Map(static value => value.GetStringRequired()),
-            Name = name.Map(static value => value.GetStringRequired()),
-            Tag = tag.Map(static value => value.GetStringRequired()),
-            Emblem = emblem.Map(static value => value.GetGuildEmblem())
+            Level = level.Map(static (in JsonElement value) => value.GetInt32()),
+            MessageOfTheDay = motd.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Influence = influence.Map(static (in JsonElement value) => value.GetInt32()),
+            Aetherium = aetherium.Map(static (in JsonElement value) => value.GetInt32()),
+            Resonance = resonance.Map(static (in JsonElement value) => value.GetInt32()),
+            Favor = favor.Map(static (in JsonElement value) => value.GetInt32()),
+            MemberCount = memberCount.Map(static (in JsonElement value) => value.GetInt32()),
+            MemberCapacity = memberCapacity.Map(static (in JsonElement value) => value.GetInt32()),
+            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Tag = tag.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Emblem = emblem.Map(static (in JsonElement value) => value.GetGuildEmblem())
         };
     }
 }

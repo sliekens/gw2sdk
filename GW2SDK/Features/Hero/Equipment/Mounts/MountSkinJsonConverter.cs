@@ -16,7 +16,7 @@ internal sealed class MountSkinJsonConverter : JsonConverter<MountSkin>
         return Read(jsonDocument.RootElement);
     }
 
-    public static MountSkin Read(JsonElement root)
+    public static MountSkin Read(in JsonElement root)
     {
         var iconString = root.GetProperty("icon").GetStringRequired();
         return new MountSkin

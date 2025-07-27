@@ -5,7 +5,7 @@ namespace GuildWars2.Guilds.Teams;
 
 internal static class SeasonJson
 {
-    public static Season GetSeason(this JsonElement json)
+    public static Season GetSeason(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember wins = "wins";
@@ -38,10 +38,10 @@ internal static class SeasonJson
 
         return new Season
         {
-            Id = id.Map(static value => value.GetStringRequired()),
-            Wins = wins.Map(static value => value.GetInt32()),
-            Losses = losses.Map(static value => value.GetInt32()),
-            Rating = rating.Map(static value => value.GetInt32())
+            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Wins = wins.Map(static (in JsonElement value) => value.GetInt32()),
+            Losses = losses.Map(static (in JsonElement value) => value.GetInt32()),
+            Rating = rating.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

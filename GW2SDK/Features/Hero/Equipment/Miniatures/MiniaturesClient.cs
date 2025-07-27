@@ -1,4 +1,5 @@
-﻿using GuildWars2.Http;
+﻿using System.Text.Json;
+using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Miniatures;
@@ -36,7 +37,7 @@ public sealed class MiniaturesClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -65,7 +66,7 @@ public sealed class MiniaturesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetMiniature());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMiniature());
             return (value, response.Context);
         }
     }
@@ -83,7 +84,7 @@ public sealed class MiniaturesClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -137,7 +138,7 @@ public sealed class MiniaturesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetMiniature());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMiniature());
             return (value, response.Context);
         }
     }
@@ -166,7 +167,7 @@ public sealed class MiniaturesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetMiniature());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMiniature());
             return (value, response.Context);
         }
     }

@@ -5,7 +5,7 @@ namespace GuildWars2.Pvp.Seasons;
 
 internal static class ScoreJson
 {
-    public static Score GetScore(this JsonElement json)
+    public static Score GetScore(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember score = "value";
@@ -28,8 +28,8 @@ internal static class ScoreJson
 
         return new Score
         {
-            Id = id.Map(static value => value.GetStringRequired()),
-            Value = score.Map(static value => value.GetInt32())
+            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Value = score.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

@@ -6,7 +6,7 @@ namespace GuildWars2.Guilds.Emblems;
 
 internal static class GuildEmblemFlagsJson
 {
-    public static GuildEmblemFlags GetGuildEmblemFlags(this JsonElement json)
+    public static GuildEmblemFlags GetGuildEmblemFlags(this in JsonElement json)
     {
         var flipBackgroundHorizontal = false;
         var flipBackgroundVertical = false;

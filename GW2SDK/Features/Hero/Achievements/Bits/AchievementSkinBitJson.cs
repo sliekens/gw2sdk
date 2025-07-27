@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Achievements.Bits;
 
 internal static class AchievementSkinBitJson
 {
-    public static AchievementSkinBit GetAchievementSkinBit(this JsonElement json)
+    public static AchievementSkinBit GetAchievementSkinBit(this in JsonElement json)
     {
         RequiredMember id = "id";
         foreach (var member in json.EnumerateObject())
@@ -27,6 +27,6 @@ internal static class AchievementSkinBitJson
             }
         }
 
-        return new AchievementSkinBit { Id = id.Map(static value => value.GetInt32()) };
+        return new AchievementSkinBit { Id = id.Map(static (in JsonElement value) => value.GetInt32()) };
     }
 }

@@ -17,7 +17,7 @@ internal static class JsonThrowHelper
     internal static void ThrowIncompatibleValue(
         string name,
         Exception innerException,
-        JsonProperty member
+        in JsonProperty member
     )
     {
         throw new InvalidOperationException($"Value for '{name}' is incompatible.", innerException)

@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 internal static class SkinFlagsJson
 {
-    public static SkinFlags GetSkinFlags(this JsonElement json)
+    public static SkinFlags GetSkinFlags(this in JsonElement json)
     {
         var hideIfLocked = false;
         var noCost = false;

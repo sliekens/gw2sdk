@@ -6,7 +6,7 @@ namespace GuildWars2.Wvw.Matches;
 
 internal static class MapScoresJson
 {
-    public static MapScores GetMapScores(this JsonElement json)
+    public static MapScores GetMapScores(this in JsonElement json)
     {
         RequiredMember type = "type";
         RequiredMember scores = "scores";
@@ -29,8 +29,8 @@ internal static class MapScoresJson
 
         return new MapScores
         {
-            Kind = type.Map(static value => value.GetEnum<MapKind>()),
-            Scores = scores.Map(static value => value.GetDistribution())
+            Kind = type.Map(static (in JsonElement value) => value.GetEnum<MapKind>()),
+            Scores = scores.Map(static (in JsonElement value) => value.GetDistribution())
         };
     }
 }

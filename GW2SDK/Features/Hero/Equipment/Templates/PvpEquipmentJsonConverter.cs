@@ -16,14 +16,14 @@ internal sealed class PvpEquipmentJsonConverter : JsonConverter<PvpEquipment>
         return Read(json.RootElement);
     }
 
-    public static PvpEquipment Read(JsonElement json)
+    public static PvpEquipment Read(in JsonElement json)
     {
         return new PvpEquipment
         {
             AmuletId = json.GetProperty("amulet_id").GetNullableInt32(),
             RuneId = json.GetProperty("rune_id").GetNullableInt32(),
             SigilIds = json.GetProperty("sigil_ids")
-                .GetList(static value => value.GetNullableInt32())
+                .GetList(static (in JsonElement value) => value.GetNullableInt32())
         };
     }
 

@@ -5,7 +5,7 @@ namespace GuildWars2.Wvw.Ranks;
 
 internal static class RankJson
 {
-    public static Rank GetRank(this JsonElement json)
+    public static Rank GetRank(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember title = "title";
@@ -33,9 +33,9 @@ internal static class RankJson
 
         return new Rank
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Title = title.Map(static value => value.GetStringRequired()),
-            MinRank = minRank.Map(static value => value.GetInt32())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Title = title.Map(static (in JsonElement value) => value.GetStringRequired()),
+            MinRank = minRank.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

@@ -5,7 +5,7 @@ namespace GuildWars2.Commerce.Exchange;
 
 internal static class GemsToGoldJson
 {
-    public static GemsToGold GetGemsToGold(this JsonElement json)
+    public static GemsToGold GetGemsToGold(this in JsonElement json)
     {
         RequiredMember coinsPerGem = "coins_per_gem";
         RequiredMember quantity = "quantity";
@@ -27,8 +27,8 @@ internal static class GemsToGoldJson
 
         return new GemsToGold
         {
-            ExchangeRate = coinsPerGem.Map(static value => value.GetInt32()),
-            Gold = quantity.Map(static value => value.GetInt32())
+            ExchangeRate = coinsPerGem.Map(static (in JsonElement value) => value.GetInt32()),
+            Gold = quantity.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

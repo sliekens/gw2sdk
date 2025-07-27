@@ -6,7 +6,7 @@ namespace GuildWars2.Pvp.Stats;
 
 internal static class AccountStatsJson
 {
-    public static AccountStats GetAccountStats(this JsonElement json)
+    public static AccountStats GetAccountStats(this in JsonElement json)
     {
         RequiredMember pvpRank = "pvp_rank";
         RequiredMember pvpRankPoints = "pvp_rank_points";
@@ -49,18 +49,18 @@ internal static class AccountStatsJson
 
         return new AccountStats
         {
-            PvpRank = pvpRank.Map(static value => value.GetInt32()),
-            PvpRankPoints = pvpRankPoints.Map(static value => value.GetInt32()),
-            PvpRankRollovers = pvpRankRollovers.Map(static value => value.GetInt32()),
-            Aggregate = aggregate.Map(static value => value.GetResults()),
+            PvpRank = pvpRank.Map(static (in JsonElement value) => value.GetInt32()),
+            PvpRankPoints = pvpRankPoints.Map(static (in JsonElement value) => value.GetInt32()),
+            PvpRankRollovers = pvpRankRollovers.Map(static (in JsonElement value) => value.GetInt32()),
+            Aggregate = aggregate.Map(static (in JsonElement value) => value.GetResults()),
             Professions =
-                professions.Map(static value => value.EnumerateObject()
+                professions.Map(static (in JsonElement value) => value.EnumerateObject()
                     .ToDictionary(
                         pair => (ProfessionName)Enum.Parse(typeof(ProfessionName), pair.Name, true),
                         pair => pair.Value.GetResults()
                     )
                 ),
-            Ladders = ladders.Map(static value => value.GetLadders())
+            Ladders = ladders.Map(static (in JsonElement value) => value.GetLadders())
         };
     }
 }

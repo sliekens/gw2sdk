@@ -5,7 +5,7 @@ namespace GuildWars2.Pvp.Seasons;
 
 internal static class LeaderboardTierJson
 {
-    public static LeaderboardTier GetLeaderboardTier(this JsonElement json)
+    public static LeaderboardTier GetLeaderboardTier(this in JsonElement json)
     {
         OptionalMember color = "color";
         NullableMember type = "type";
@@ -38,10 +38,10 @@ internal static class LeaderboardTierJson
 
         return new LeaderboardTier
         {
-            Color = color.Map(static value => value.GetString()) ?? "",
-            Kind = type.Map(static value => value.GetEnum<LeaderboardTierKind>()),
-            Name = name.Map(static value => value.GetString()) ?? "",
-            Range = range.Map(static value => value.GetLeaderboardTierRange())
+            Color = color.Map(static (in JsonElement value) => value.GetString()) ?? "",
+            Kind = type.Map(static (in JsonElement value) => value.GetEnum<LeaderboardTierKind>()),
+            Name = name.Map(static (in JsonElement value) => value.GetString()) ?? "",
+            Range = range.Map(static (in JsonElement value) => value.GetLeaderboardTierRange())
         };
     }
 }

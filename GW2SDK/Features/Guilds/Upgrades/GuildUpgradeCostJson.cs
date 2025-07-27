@@ -5,7 +5,7 @@ namespace GuildWars2.Guilds.Upgrades;
 
 internal static class GuildUpgradeCostJson
 {
-    public static GuildUpgradeCost GetGuildUpgradeCost(this JsonElement json)
+    public static GuildUpgradeCost GetGuildUpgradeCost(this in JsonElement json)
     {
         if (json.TryGetProperty("type", out var discriminator))
         {

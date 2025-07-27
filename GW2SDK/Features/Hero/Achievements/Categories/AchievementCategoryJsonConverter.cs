@@ -25,7 +25,7 @@ internal sealed class AchievementCategoryJsonConverter : JsonConverter<Achieveme
         Write(writer, value);
     }
 
-    public static AchievementCategory Read(JsonElement json)
+    public static AchievementCategory Read(in JsonElement json)
     {
         var iconString = json.GetProperty("icon").GetStringRequired();
         return new AchievementCategory

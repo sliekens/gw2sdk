@@ -83,7 +83,7 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
     /// <param name="left">The first <see cref="Coin" /> value to compare.</param>
     /// <param name="right">The second <see cref="Coin" /> value to compare.</param>
     /// <returns><c>true</c> if <paramref name="left" /> is less than <paramref name="right" />; otherwise, <c>false</c>.</returns>
-    public static bool operator <(Coin left, Coin right)
+    public static bool operator <(in Coin left, in Coin right)
     {
         return left.CompareTo(right) < 0;
     }
@@ -92,7 +92,7 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
     /// <param name="left">The first <see cref="Coin" /> value to compare.</param>
     /// <param name="right">The second <see cref="Coin" /> value to compare.</param>
     /// <returns><c>true</c> if <paramref name="left" /> is greater than <paramref name="right" />; otherwise, <c>false</c>.</returns>
-    public static bool operator >(Coin left, Coin right)
+    public static bool operator >(in Coin left, in Coin right)
     {
         return left.CompareTo(right) > 0;
     }
@@ -102,7 +102,7 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
     /// <param name="right">The second <see cref="Coin" /> value to compare.</param>
     /// <returns><c>true</c> if <paramref name="left" /> is less than or equal to <paramref name="right" />; otherwise,
     /// <c>false</c>.</returns>
-    public static bool operator <=(Coin left, Coin right)
+    public static bool operator <=(in Coin left, in Coin right)
     {
         return left.CompareTo(right) <= 0;
     }
@@ -112,7 +112,7 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
     /// <param name="right">The second <see cref="Coin" /> value to compare.</param>
     /// <returns><c>true</c> if <paramref name="left" /> is greater than or equal to <paramref name="right" />; otherwise,
     /// <c>false</c>.</returns>
-    public static bool operator >=(Coin left, Coin right)
+    public static bool operator >=(in Coin left, in Coin right)
     {
         return left.CompareTo(right) >= 0;
     }
@@ -120,7 +120,7 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
     /// <summary>Returns the current instance of <see cref="Coin" />.</summary>
     /// <param name="coin">The <see cref="Coin" /> value.</param>
     /// <returns>The current instance of <see cref="Coin" />.</returns>
-    public static Coin operator +(Coin coin)
+    public static Coin operator +(in Coin coin)
     {
         return new Coin(coin.Amount);
     }
@@ -128,7 +128,7 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
     /// <summary>Returns the negation of the current instance of <see cref="Coin" />.</summary>
     /// <param name="coin">The <see cref="Coin" /> value.</param>
     /// <returns>The negation of the current instance of <see cref="Coin" />.</returns>
-    public static Coin operator -(Coin coin)
+    public static Coin operator -(in Coin coin)
     {
         return new Coin(-coin.Amount);
     }
@@ -136,7 +136,7 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
     /// <summary>Increments the current instance of <see cref="Coin" /> by 1.</summary>
     /// <param name="coin">The <see cref="Coin" /> value.</param>
     /// <returns>The incremented <see cref="Coin" /> value.</returns>
-    public static Coin operator ++(Coin coin)
+    public static Coin operator ++(in Coin coin)
     {
         return new Coin(coin.Amount + 1);
     }
@@ -144,7 +144,7 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
     /// <summary>Decrements the current instance of <see cref="Coin" /> by 1.</summary>
     /// <param name="coin">The <see cref="Coin" /> value.</param>
     /// <returns>The decremented <see cref="Coin" /> value.</returns>
-    public static Coin operator --(Coin coin)
+    public static Coin operator --(in Coin coin)
     {
         return new Coin(coin.Amount - 1);
     }
@@ -153,7 +153,7 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
     /// <param name="left">The first <see cref="Coin" /> value.</param>
     /// <param name="right">The second <see cref="Coin" /> value.</param>
     /// <returns>The sum of the two <see cref="Coin" /> values.</returns>
-    public static Coin operator +(Coin left, Coin right)
+    public static Coin operator +(in Coin left, in Coin right)
     {
         return new Coin(left.Amount + right.Amount);
     }
@@ -162,7 +162,7 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
     /// <param name="left">The first <see cref="Coin" /> value.</param>
     /// <param name="right">The second <see cref="Coin" /> value.</param>
     /// <returns>The difference between the two <see cref="Coin" /> values.</returns>
-    public static Coin operator -(Coin left, Coin right)
+    public static Coin operator -(in Coin left, in Coin right)
     {
         return new Coin(left.Amount - right.Amount);
     }
@@ -171,7 +171,7 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
     /// <param name="left">The first <see cref="Coin" /> value.</param>
     /// <param name="right">The second <see cref="Coin" /> value.</param>
     /// <returns>The product of the two <see cref="Coin" /> values.</returns>
-    public static Coin operator *(Coin left, Coin right)
+    public static Coin operator *(in Coin left, in Coin right)
     {
         return new Coin(left.Amount * right.Amount);
     }
@@ -180,7 +180,7 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
     /// <param name="left">The first <see cref="Coin" /> value.</param>
     /// <param name="right">The second <see cref="Coin" /> value.</param>
     /// <returns>The quotient of the two <see cref="Coin" /> values.</returns>
-    public static Coin operator /(Coin left, Coin right)
+    public static Coin operator /(in Coin left, in Coin right)
     {
         return new Coin(left.Amount / right.Amount);
     }
@@ -189,7 +189,7 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
     /// <param name="left">The first <see cref="Coin" /> value.</param>
     /// <param name="right">The second <see cref="Coin" /> value.</param>
     /// <returns>The remainder of dividing the two <see cref="Coin" /> values.</returns>
-    public static Coin operator %(Coin left, Coin right)
+    public static Coin operator %(in Coin left, in Coin right)
     {
         return new Coin(left.Amount % right.Amount);
     }
@@ -197,7 +197,7 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
     /// <summary>Implicitly converts a <see cref="Coin" /> value to an <see cref="int" /> value.</summary>
     /// <param name="coin">The <see cref="Coin" /> value.</param>
     /// <returns>The <see cref="int" /> value representing the amount of coins.</returns>
-    public static implicit operator int(Coin coin)
+    public static implicit operator int(in Coin coin)
     {
         return coin.Amount;
     }

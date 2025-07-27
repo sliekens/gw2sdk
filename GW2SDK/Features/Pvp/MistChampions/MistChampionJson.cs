@@ -5,7 +5,7 @@ namespace GuildWars2.Pvp.MistChampions;
 
 internal static class MistChampionJson
 {
-    public static MistChampion GetMistChampion(this JsonElement json)
+    public static MistChampion GetMistChampion(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -56,22 +56,22 @@ internal static class MistChampionJson
             }
         }
 
-        var overlayString = overlay.Map(static value => value.GetStringRequired());
-        var underlayString = underlay.Map(static value => value.GetStringRequired());
+        var overlayString = overlay.Map(static (in JsonElement value) => value.GetStringRequired());
+        var underlayString = underlay.Map(static (in JsonElement value) => value.GetStringRequired());
 #pragma warning disable CS0618
         return new MistChampion
         {
-            Id = id.Map(static value => value.GetStringRequired()),
-            Name = name.Map(static value => value.GetStringRequired()),
-            Description = description.Map(static value => value.GetStringRequired()),
-            Type = type.Map(static value => value.GetStringRequired()),
-            Stats = stats.Map(static value => value.GetMistChampionStats()),
+            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Description = description.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Type = type.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Stats = stats.Map(static (in JsonElement value) => value.GetMistChampionStats()),
             OverlayImageHref = overlayString,
             OverlayImageUrl = new Uri(overlayString),
             UnderlayImageHref = underlayString,
             UnderlayImageUrl = new Uri(underlayString),
-            Skins = skins.Map(static values =>
-                values.GetList(static value => value.GetMistChampionSkin())
+            Skins = skins.Map(static (in JsonElement values) =>
+                values.GetList(static (in JsonElement value) => value.GetMistChampionSkin())
             )
         };
 #pragma warning restore CS0618

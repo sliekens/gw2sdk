@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Builds;
 internal static class SelectedSpecializationsJson
 {
     public static (SelectedSpecialization? Specialization1, SelectedSpecialization? Specialization2,
-        SelectedSpecialization? Specialization3) GetSelectedSpecializations(this JsonElement json)
+        SelectedSpecialization? Specialization3) GetSelectedSpecializations(this in JsonElement json)
     {
         JsonElement first = default;
         JsonElement second = default;

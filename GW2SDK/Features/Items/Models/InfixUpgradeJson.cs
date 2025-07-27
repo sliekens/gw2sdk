@@ -8,7 +8,7 @@ namespace GuildWars2.Items;
 internal static class InfixUpgradeJson
 {
     public static ValueDictionary<Extensible<AttributeName>, int> GetAttributes(
-        this JsonElement json
+        this in JsonElement json
     )
     {
         var attributes = new ValueDictionary<Extensible<AttributeName>, int>(json.GetArrayLength());
@@ -32,8 +32,8 @@ internal static class InfixUpgradeJson
                 }
             }
 
-            var key = attribute.Map(static value => value.GetAttributeName());
-            var value = modifier.Map(static value => value.GetInt32());
+            var key = attribute.Map(static (in JsonElement value) => value.GetAttributeName());
+            var value = modifier.Map(static (in JsonElement value) => value.GetInt32());
             attributes.Add(key, value);
         }
 

@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Inventories;
 
 internal static class BagJson
 {
-    public static Bag? GetBag(this JsonElement json)
+    public static Bag? GetBag(this in JsonElement json)
     {
         // Empty slots are represented as null -- but maybe we should use a Null Object pattern here
         if (json.ValueKind == JsonValueKind.Null)
@@ -38,9 +38,9 @@ internal static class BagJson
 
         return new Bag
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Size = size.Map(static value => value.GetInt32()),
-            Inventory = inventory.Map(static value => value.GetInventory())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Size = size.Map(static (in JsonElement value) => value.GetInt32()),
+            Inventory = inventory.Map(static (in JsonElement value) => value.GetInventory())
         };
     }
 }

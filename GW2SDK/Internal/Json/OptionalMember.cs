@@ -14,6 +14,7 @@ internal readonly ref struct OptionalMember
         this.name = name;
     }
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Roslynator", "RCS1231:Make parameter ref read-only", Justification = "Makes this code unusable")]
     private OptionalMember(JsonProperty member)
     {
         this.member = member;
@@ -26,17 +27,18 @@ internal readonly ref struct OptionalMember
         return new OptionalMember(name);
     }
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Roslynator", "RCS1231:Make parameter ref read-only", Justification = "Makes this code unusable")]
     public static implicit operator OptionalMember(JsonProperty member)
     {
         return new OptionalMember(member);
     }
 
-    public bool Match(JsonProperty property)
+    public bool Match(in JsonProperty property)
     {
         return member.Value.ValueKind == Undefined && property.NameEquals(name);
     }
 
-    public TValue? Map<TValue>(Func<JsonElement, TValue> transform)
+    public TValue? Map<TValue>(JsonTransform<TValue> transform)
     {
         if (member.Value.ValueKind == Undefined || member.Value.ValueKind == Null)
         {

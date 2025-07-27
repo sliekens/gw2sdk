@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Equipment.Dyes;
 
 internal static class ColorJson
 {
-    public static Color GetColor(this JsonElement json)
+    public static Color GetColor(this in JsonElement json)
     {
         JsonElement red = default;
         JsonElement green = default;

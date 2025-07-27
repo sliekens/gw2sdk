@@ -5,7 +5,7 @@ namespace GuildWars2.Pve.Raids;
 
 internal static class RaidWingJson
 {
-    public static RaidWing GetRaidWing(this JsonElement json)
+    public static RaidWing GetRaidWing(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember events = "events";
@@ -28,9 +28,9 @@ internal static class RaidWingJson
 
         return new RaidWing
         {
-            Id = id.Map(static value => value.GetStringRequired()),
-            Encounters = events.Map(static values =>
-                values.GetList(static value => value.GetEncounter())
+            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Encounters = events.Map(static (in JsonElement values) =>
+                values.GetList(static (in JsonElement value) => value.GetEncounter())
             )
         };
     }

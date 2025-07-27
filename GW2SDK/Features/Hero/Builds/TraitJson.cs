@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Builds;
 
 internal static class TraitJson
 {
-    public static Trait GetTrait(this JsonElement json)
+    public static Trait GetTrait(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember tier = "tier";
@@ -71,28 +71,28 @@ internal static class TraitJson
             }
         }
 
-        var iconString = icon.Map(static value => value.GetStringRequired());
+        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
 #pragma warning disable CS0618
         return new Trait
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Tier = tier.Map(static value => value.GetInt32()),
-            Order = order.Map(static value => value.GetInt32()),
-            Name = name.Map(static value => value.GetStringRequired()),
-            Description = description.Map(static value => value.GetString()) ?? "",
-            Slot = slot.Map(static value => value.GetEnum<TraitSlot>()),
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Tier = tier.Map(static (in JsonElement value) => value.GetInt32()),
+            Order = order.Map(static (in JsonElement value) => value.GetInt32()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Description = description.Map(static (in JsonElement value) => value.GetString()) ?? "",
+            Slot = slot.Map(static (in JsonElement value) => value.GetEnum<TraitSlot>()),
             IconHref = iconString,
             IconUrl = new Uri(iconString),
-            SpezializationId = specialization.Map(static value => value.GetInt32()),
+            SpezializationId = specialization.Map(static (in JsonElement value) => value.GetInt32()),
             Facts =
-                facts.Map(static values =>
-                    values.GetList(static value => value.GetFact(out _, out _))
+                facts.Map(static (in JsonElement values) =>
+                    values.GetList(static (in JsonElement value) => value.GetFact(out _, out _))
                 ),
             TraitedFacts =
-                traitedFacts.Map(static values =>
-                    values.GetList(static value => value.GetTraitedFact())
+                traitedFacts.Map(static (in JsonElement values) =>
+                    values.GetList(static (in JsonElement value) => value.GetTraitedFact())
                 ),
-            Skills = skills.Map(static values => values.GetList(static value => value.GetSkill()))
+            Skills = skills.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetSkill()))
         };
 #pragma warning restore CS0618
     }

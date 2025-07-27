@@ -16,7 +16,7 @@ internal sealed class OutfitJsonConverter : JsonConverter<Outfit>
         return Read(jsonDocument.RootElement);
     }
 
-    public static Outfit Read(JsonElement json)
+    public static Outfit Read(in JsonElement json)
     {
         var iconString = json.GetProperty("icon").GetStringRequired();
         return new Outfit
@@ -27,7 +27,7 @@ internal sealed class OutfitJsonConverter : JsonConverter<Outfit>
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
-            UnlockItemIds = json.GetProperty("unlock_item_ids").GetList(entry => entry.GetInt32())
+            UnlockItemIds = json.GetProperty("unlock_item_ids").GetList(static (in JsonElement entry) => entry.GetInt32())
         };
     }
 

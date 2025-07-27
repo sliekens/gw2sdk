@@ -5,7 +5,7 @@ namespace GuildWars2.Wvw.Upgrades;
 
 internal static class UpgradeJson
 {
-    public static Upgrade GetUpgrade(this JsonElement json)
+    public static Upgrade GetUpgrade(this in JsonElement json)
     {
         RequiredMember name = "name";
         RequiredMember description = "description";
@@ -31,12 +31,12 @@ internal static class UpgradeJson
             }
         }
 
-        var iconString = icon.Map(static value => value.GetStringRequired());
+        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
 
         return new Upgrade
         {
-            Name = name.Map(static value => value.GetStringRequired()),
-            Description = description.Map(static value => value.GetStringRequired()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Description = description.Map(static (in JsonElement value) => value.GetStringRequired()),
 #pragma warning disable CS0618 // Suppress obsolete warning
             IconHref = iconString,
 #pragma warning restore CS0618

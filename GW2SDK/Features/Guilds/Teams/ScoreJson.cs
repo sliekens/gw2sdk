@@ -5,7 +5,7 @@ namespace GuildWars2.Guilds.Teams;
 
 internal static class ScoreJson
 {
-    public static Score GetScore(this JsonElement json)
+    public static Score GetScore(this in JsonElement json)
     {
         RequiredMember red = "red";
         RequiredMember blue = "blue";
@@ -28,8 +28,8 @@ internal static class ScoreJson
 
         return new Score
         {
-            Red = red.Map(static value => value.GetInt32()),
-            Blue = blue.Map(static value => value.GetInt32())
+            Red = red.Map(static (in JsonElement value) => value.GetInt32()),
+            Blue = blue.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

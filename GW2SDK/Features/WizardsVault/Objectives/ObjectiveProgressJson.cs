@@ -5,7 +5,7 @@ namespace GuildWars2.WizardsVault.Objectives;
 
 internal static class ObjectiveProgressJson
 {
-    public static ObjectiveProgress GetObjectiveProgress(this JsonElement json)
+    public static ObjectiveProgress GetObjectiveProgress(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember title = "title";
@@ -53,13 +53,13 @@ internal static class ObjectiveProgressJson
 
         return new ObjectiveProgress
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Title = title.Map(static value => value.GetStringRequired()),
-            Track = track.Map(static value => value.GetEnum<ObjectiveTrack>()),
-            RewardAcclaim = acclaim.Map(static value => value.GetInt32()),
-            Progress = progressCurrent.Map(static value => value.GetInt32()),
-            Goal = progressComplete.Map(static value => value.GetInt32()),
-            Claimed = claimed.Map(static value => value.GetBoolean())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Title = title.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Track = track.Map(static (in JsonElement value) => value.GetEnum<ObjectiveTrack>()),
+            RewardAcclaim = acclaim.Map(static (in JsonElement value) => value.GetInt32()),
+            Progress = progressCurrent.Map(static (in JsonElement value) => value.GetInt32()),
+            Goal = progressComplete.Map(static (in JsonElement value) => value.GetInt32()),
+            Claimed = claimed.Map(static (in JsonElement value) => value.GetBoolean())
         };
     }
 }

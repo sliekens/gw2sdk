@@ -1,4 +1,5 @@
-﻿using GuildWars2.Http;
+﻿using System.Text.Json;
+using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Training;
@@ -72,7 +73,7 @@ public sealed class TrainingClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetProfession());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetProfession());
             return (value, response.Context);
         }
     }
@@ -90,7 +91,7 @@ public sealed class TrainingClient
         using (response.Json)
         {
             var value =
-                response.Json.RootElement.GetSet(static entry => entry.GetEnum<ProfessionName>());
+                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEnum<ProfessionName>());
             return (value, response.Context);
         }
     }
@@ -132,7 +133,7 @@ public sealed class TrainingClient
         IEnumerable<ProfessionName> professionNames,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
+        in CancellationToken cancellationToken = default
     )
     {
         return GetProfessionsByNames(
@@ -165,7 +166,7 @@ public sealed class TrainingClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetProfession());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetProfession());
             return (value, response.Context);
         }
     }
@@ -194,7 +195,7 @@ public sealed class TrainingClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetProfession());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetProfession());
             return (value, response.Context);
         }
     }

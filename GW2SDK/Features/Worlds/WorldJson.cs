@@ -5,7 +5,7 @@ namespace GuildWars2.Worlds;
 
 internal static class WorldJson
 {
-    public static World GetWorld(this JsonElement json)
+    public static World GetWorld(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -32,9 +32,9 @@ internal static class WorldJson
 
         return new World
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Name = name.Map(static value => value.GetStringRequired()),
-            Population = population.Map(static value => value.GetEnum<WorldPopulation>())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Population = population.Map(static (in JsonElement value) => value.GetEnum<WorldPopulation>())
         };
     }
 }

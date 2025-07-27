@@ -5,7 +5,7 @@ namespace GuildWars2.Exploration.Continents;
 
 internal static class ContinentJson
 {
-    public static Continent GetContinent(this JsonElement json)
+    public static Continent GetContinent(this in JsonElement json)
     {
         RequiredMember name = "name";
         RequiredMember continentDimensions = "continent_dims";
@@ -47,12 +47,12 @@ internal static class ContinentJson
 
         return new Continent
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Name = name.Map(static value => value.GetStringRequired()),
-            ContinentDimensions = continentDimensions.Map(static value => value.GetDimensions()),
-            MinZoom = minZoom.Map(static value => value.GetInt32()),
-            MaxZoom = maxZoom.Map(static value => value.GetInt32()),
-            Floors = floors.Map(static values => values.GetList(static value => value.GetInt32()))
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            ContinentDimensions = continentDimensions.Map(static (in JsonElement value) => value.GetDimensions()),
+            MinZoom = minZoom.Map(static (in JsonElement value) => value.GetInt32()),
+            MaxZoom = maxZoom.Map(static (in JsonElement value) => value.GetInt32()),
+            Floors = floors.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32()))
         };
     }
 }

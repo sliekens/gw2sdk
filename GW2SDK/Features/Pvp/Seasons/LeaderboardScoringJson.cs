@@ -5,7 +5,7 @@ namespace GuildWars2.Pvp.Seasons;
 
 internal static class LeaderboardScoringJson
 {
-    public static LeaderboardScoring GetLeaderboardScoring(this JsonElement json)
+    public static LeaderboardScoring GetLeaderboardScoring(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember type = "type";
@@ -43,11 +43,11 @@ internal static class LeaderboardScoringJson
 
         return new LeaderboardScoring
         {
-            Id = id.Map(static value => value.GetStringRequired()),
-            Type = type.Map(static value => value.GetStringRequired()),
-            Description = description.Map(static value => value.GetStringRequired()),
-            Name = name.Map(static value => value.GetStringRequired()),
-            Ordering = ordering.Map(static value => value.GetStringRequired())
+            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Type = type.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Description = description.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Ordering = ordering.Map(static (in JsonElement value) => value.GetStringRequired())
         };
     }
 }

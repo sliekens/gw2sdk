@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using System.Text.Json;
 using GuildWars2.Http;
 using GuildWars2.Json;
 using GuildWars2.Pve.Home.Cats;
@@ -40,7 +41,7 @@ public sealed class HomeClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -65,7 +66,7 @@ public sealed class HomeClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -92,7 +93,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             var value =
-                response.Json.RootElement.GetSet(static entry => entry.GetUnlockedDecoration());
+                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetUnlockedDecoration());
             return (value, response.Context);
         }
     }
@@ -117,7 +118,7 @@ public sealed class HomeClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -143,7 +144,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetCat());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetCat());
             return (value, response.Context);
         }
     }
@@ -161,7 +162,7 @@ public sealed class HomeClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -209,7 +210,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetCat());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetCat());
             return (value, response.Context);
         }
     }
@@ -235,7 +236,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetCat());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetCat());
             return (value, response.Context);
         }
     }
@@ -261,7 +262,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetNode());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetNode());
             return (value, response.Context);
         }
     }
@@ -279,7 +280,7 @@ public sealed class HomeClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -327,7 +328,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetNode());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetNode());
             return (value, response.Context);
         }
     }
@@ -353,7 +354,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetNode());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetNode());
             return (value, response.Context);
         }
     }
@@ -375,7 +376,7 @@ public sealed class HomeClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -429,7 +430,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetDecoration());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetDecoration());
             return (value, response.Context);
         }
     }
@@ -458,7 +459,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetDecoration());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetDecoration());
             return (value, response.Context);
         }
     }
@@ -480,7 +481,7 @@ public sealed class HomeClient
         int degreeOfParallelism = BulkQuery.DefaultDegreeOfParallelism,
         int chunkSize = BulkQuery.DefaultChunkSize,
         IProgress<BulkProgress>? progress = default,
-        CancellationToken cancellationToken = default
+        in CancellationToken cancellationToken = default
     )
     {
         return BulkQuery.QueryAsync(
@@ -568,7 +569,7 @@ public sealed class HomeClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value =
-                response.Json.RootElement.GetSet(static entry => entry.GetDecorationCategory());
+                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetDecorationCategory());
             return (value, response.Context);
         }
     }
@@ -586,7 +587,7 @@ public sealed class HomeClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -642,7 +643,7 @@ public sealed class HomeClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value =
-                response.Json.RootElement.GetSet(static entry => entry.GetDecorationCategory());
+                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetDecorationCategory());
             return (value, response.Context);
         }
     }
@@ -673,7 +674,7 @@ public sealed class HomeClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value =
-                response.Json.RootElement.GetSet(static entry => entry.GetDecorationCategory());
+                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetDecorationCategory());
             return (value, response.Context);
         }
     }
@@ -699,7 +700,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetGlyph());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGlyph());
             return (value, response.Context);
         }
     }
@@ -717,7 +718,7 @@ public sealed class HomeClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -765,7 +766,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetGlyph());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGlyph());
             return (value, response.Context);
         }
     }
@@ -791,7 +792,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetGlyph());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGlyph());
             return (value, response.Context);
         }
     }

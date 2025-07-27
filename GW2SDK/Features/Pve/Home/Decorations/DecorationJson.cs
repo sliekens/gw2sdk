@@ -5,7 +5,7 @@ namespace GuildWars2.Pve.Home.Decorations;
 
 internal static class DecorationJson
 {
-    public static Decoration GetDecoration(this JsonElement json)
+    public static Decoration GetDecoration(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -46,14 +46,14 @@ internal static class DecorationJson
             }
         }
 
-        var iconString = icon.Map(static value => value.GetStringRequired());
+        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new Decoration
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Name = name.Map(static value => value.GetStringRequired()),
-            Description = description.Map(static value => value.GetStringRequired()),
-            CategoryIds = categories.Map(static value => value.GetList(item => item.GetInt32())),
-            MaxCount = maxCount.Map(static value => value.GetInt32()),
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Description = description.Map(static (in JsonElement value) => value.GetStringRequired()),
+            CategoryIds = categories.Map(static (in JsonElement value) => value.GetList(static (in JsonElement item) => item.GetInt32())),
+            MaxCount = maxCount.Map(static (in JsonElement value) => value.GetInt32()),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618

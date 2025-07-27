@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Inventories;
 
 internal static class ItemSlotJson
 {
-    public static ItemSlot? GetItemSlot(this JsonElement json)
+    public static ItemSlot? GetItemSlot(this in JsonElement json)
     {
         // Empty slots are represented as null -- but maybe we should use a Null Object pattern here
         if (json.ValueKind == JsonValueKind.Null)
@@ -79,12 +79,12 @@ internal static class ItemSlotJson
         }
 
         int? suffixItemId = null, secondarySuffixItemId = null;
-        if (upgrades.Map(static values => values.GetList(static value => value.GetInt32())) is
+        if (upgrades.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32())) is
             {
             } ids)
         {
-            var indices = upgradeSlotIndices.Map(static values =>
-                values.GetList(static value => value.GetInt32())
+            var indices = upgradeSlotIndices.Map(static (in JsonElement values) =>
+                values.GetList(static (in JsonElement value) => value.GetInt32())
             )!;
             for (var i = 0; i < ids.Count; i++)
             {
@@ -106,20 +106,20 @@ internal static class ItemSlotJson
 
         return new ItemSlot
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Count = count.Map(static value => value.GetInt32()),
-            Charges = charges.Map(static value => value.GetInt32()),
-            SkinId = skin.Map(static value => value.GetInt32()),
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Count = count.Map(static (in JsonElement value) => value.GetInt32()),
+            Charges = charges.Map(static (in JsonElement value) => value.GetInt32()),
+            SkinId = skin.Map(static (in JsonElement value) => value.GetInt32()),
             SuffixItemId = suffixItemId,
             SecondarySuffixItemId = secondarySuffixItemId,
             InfusionItemIds =
-                infusions.Map(static values => values.GetList(static value => value.GetInt32()))
+                infusions.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32()))
                 ?? [],
             DyeColorIds =
-                dyes.Map(static values => values.GetList(static value => value.GetInt32())) ?? [],
-            Binding = binding.Map(static value => value.GetEnum<ItemBinding>()),
-            BoundTo = boundTo.Map(static value => value.GetString()) ?? "",
-            Stats = stats.Map(static value => value.GetSelectedAttributeCombination())
+                dyes.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32())) ?? [],
+            Binding = binding.Map(static (in JsonElement value) => value.GetEnum<ItemBinding>()),
+            BoundTo = boundTo.Map(static (in JsonElement value) => value.GetString()) ?? "",
+            Stats = stats.Map(static (in JsonElement value) => value.GetSelectedAttributeCombination())
         };
     }
 }

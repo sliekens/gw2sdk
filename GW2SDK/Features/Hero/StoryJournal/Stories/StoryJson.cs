@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.StoryJournal.Stories;
 
 internal static class StoryJson
 {
-    public static Story GetStory(this JsonElement json)
+    public static Story GetStory(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember season = "season";
@@ -68,20 +68,20 @@ internal static class StoryJson
 
         return new Story
         {
-            Id = id.Map(static value => value.GetInt32()),
-            StorylineId = season.Map(static value => value.GetStringRequired()),
-            Name = name.Map(static value => value.GetStringRequired()),
-            Description = description.Map(static value => value.GetStringRequired()),
-            Timeline = timeline.Map(static value => value.GetStringRequired()),
-            Level = level.Map(static value => value.GetInt32()),
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            StorylineId = season.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Description = description.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Timeline = timeline.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Level = level.Map(static (in JsonElement value) => value.GetInt32()),
             Races =
-                races.Map(static values => values.GetList(static value => value.GetEnum<RaceName>())
+                races.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetEnum<RaceName>())
                 )
                 ?? GetValues<RaceName>(),
-            Order = order.Map(static value => value.GetInt32()),
+            Order = order.Map(static (in JsonElement value) => value.GetInt32()),
             Chapters =
-                chapters.Map(static values => values.GetList(static value => value.GetChapter())),
-            Flags = flags.Map(static values => values.GetStoryFlags()) ?? StoryFlags.None
+                chapters.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetChapter())),
+            Flags = flags.Map(static (in JsonElement values) => values.GetStoryFlags()) ?? StoryFlags.None
         };
 
         static List<Extensible<TEnum>> GetValues<TEnum>() where TEnum : struct, Enum

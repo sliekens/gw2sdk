@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 internal static class BootsSkinJson
 {
-    public static BootsSkin GetBootsSkin(this JsonElement json)
+    public static BootsSkin GetBootsSkin(this in JsonElement json)
     {
         RequiredMember name = "name";
         OptionalMember description = "description";
@@ -85,21 +85,21 @@ internal static class BootsSkinJson
             }
         }
 
-        var iconString = icon.Map(static value => value.GetString()) ?? "";
+        var iconString = icon.Map(static (in JsonElement value) => value.GetString()) ?? "";
         return new BootsSkin
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Name = name.Map(static value => value.GetStringRequired()),
-            Description = description.Map(static value => value.GetString()) ?? "",
-            Rarity = rarity.Map(static value => value.GetEnum<Rarity>()),
-            Flags = flags.Map(static values => values.GetSkinFlags()),
-            Races = restrictions.Map(static values => values.GetRestrictions()),
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Description = description.Map(static (in JsonElement value) => value.GetString()) ?? "",
+            Rarity = rarity.Map(static (in JsonElement value) => value.GetEnum<Rarity>()),
+            Flags = flags.Map(static (in JsonElement values) => values.GetSkinFlags()),
+            Races = restrictions.Map(static (in JsonElement values) => values.GetRestrictions()),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = string.IsNullOrEmpty(iconString) ? null : new Uri(iconString),
-            WeightClass = weightClass.Map(static value => value.GetEnum<WeightClass>()),
-            DyeSlots = dyeSlots.Map(static value => value.GetDyeSlotInfo())
+            WeightClass = weightClass.Map(static (in JsonElement value) => value.GetEnum<WeightClass>()),
+            DyeSlots = dyeSlots.Map(static (in JsonElement value) => value.GetDyeSlotInfo())
         };
     }
 }

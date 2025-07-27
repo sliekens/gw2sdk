@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Training.Skills;
 
 internal static class ProfessionSkillSummaryJson
 {
-    public static ProfessionSkillSummary GetProfessionSkillSummary(this JsonElement json)
+    public static ProfessionSkillSummary GetProfessionSkillSummary(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember slot = "slot";
@@ -46,10 +46,10 @@ internal static class ProfessionSkillSummaryJson
 
         return new ProfessionSkillSummary
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Slot = slot.Map(static value => value.GetEnum<SkillSlot>()),
-            Source = source.Map(static value => value.GetEnum<ProfessionName>()),
-            Attunement = attunement.Map(static value => value.GetEnum<Attunement>())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Slot = slot.Map(static (in JsonElement value) => value.GetEnum<SkillSlot>()),
+            Source = source.Map(static (in JsonElement value) => value.GetEnum<ProfessionName>()),
+            Attunement = attunement.Map(static (in JsonElement value) => value.GetEnum<Attunement>())
         };
     }
 }

@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Training;
 
 internal static class WeaponFlagsJson
 {
-    public static WeaponFlags GetWeaponFlags(this JsonElement json)
+    public static WeaponFlags GetWeaponFlags(this in JsonElement json)
     {
         var mainhand = false;
         var offhand = false;

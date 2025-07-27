@@ -1,4 +1,5 @@
-﻿using GuildWars2.Http;
+﻿using System.Text.Json;
+using GuildWars2.Http;
 using GuildWars2.Json;
 using GuildWars2.Worlds;
 using GuildWars2.Wvw.Abilities;
@@ -80,7 +81,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetMap(static value => value.GetStringRequired())
+            var value = response.Json.RootElement.GetMap(static (in JsonElement value) => value.GetStringRequired())
                 .Select(map => new WvwGuild
                 {
                     Name = map.Key,
@@ -115,7 +116,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetAbility());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAbility());
             return (value, response.Context);
         }
     }
@@ -133,7 +134,7 @@ public sealed class WvwClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -187,7 +188,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetAbility());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAbility());
             return (value, response.Context);
         }
     }
@@ -216,7 +217,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetAbility());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAbility());
             return (value, response.Context);
         }
     }
@@ -245,7 +246,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetObjective());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetObjective());
             return (value, response.Context);
         }
     }
@@ -263,7 +264,7 @@ public sealed class WvwClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -317,7 +318,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetObjective());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetObjective());
             return (value, response.Context);
         }
     }
@@ -346,7 +347,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetObjective());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetObjective());
             return (value, response.Context);
         }
     }
@@ -375,7 +376,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetRank());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRank());
             return (value, response.Context);
         }
     }
@@ -393,7 +394,7 @@ public sealed class WvwClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -447,7 +448,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetRank());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRank());
             return (value, response.Context);
         }
     }
@@ -476,7 +477,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetRank());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRank());
             return (value, response.Context);
         }
     }
@@ -506,7 +507,7 @@ public sealed class WvwClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value =
-                response.Json.RootElement.GetSet(static entry => entry.GetObjectiveUpgrade());
+                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetObjectiveUpgrade());
             return (value, response.Context);
         }
     }
@@ -524,7 +525,7 @@ public sealed class WvwClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -579,7 +580,7 @@ public sealed class WvwClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value =
-                response.Json.RootElement.GetSet(static entry => entry.GetObjectiveUpgrade());
+                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetObjectiveUpgrade());
             return (value, response.Context);
         }
     }
@@ -609,7 +610,7 @@ public sealed class WvwClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             var value =
-                response.Json.RootElement.GetSet(static entry => entry.GetObjectiveUpgrade());
+                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetObjectiveUpgrade());
             return (value, response.Context);
         }
     }
@@ -635,7 +636,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetMatch());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatch());
             return (value, response.Context);
         }
     }
@@ -653,7 +654,7 @@ public sealed class WvwClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -701,7 +702,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetMatch());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatch());
             return (value, response.Context);
         }
     }
@@ -727,7 +728,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetMatch());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatch());
             return (value, response.Context);
         }
     }
@@ -777,7 +778,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetMatchOverview());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatchOverview());
             return (value, response.Context);
         }
     }
@@ -795,7 +796,7 @@ public sealed class WvwClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -844,7 +845,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetMatchOverview());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatchOverview());
             return (value, response.Context);
         }
     }
@@ -871,7 +872,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetMatchOverview());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatchOverview());
             return (value, response.Context);
         }
     }
@@ -921,7 +922,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetMatchScores());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatchScores());
             return (value, response.Context);
         }
     }
@@ -939,7 +940,7 @@ public sealed class WvwClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -987,7 +988,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetMatchScores());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatchScores());
             return (value, response.Context);
         }
     }
@@ -1013,7 +1014,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetMatchScores());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatchScores());
             return (value, response.Context);
         }
     }
@@ -1063,7 +1064,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetMatchStats());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatchStats());
             return (value, response.Context);
         }
     }
@@ -1081,7 +1082,7 @@ public sealed class WvwClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -1129,7 +1130,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetMatchStats());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatchStats());
             return (value, response.Context);
         }
     }
@@ -1155,7 +1156,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetMatchStats());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatchStats());
             return (value, response.Context);
         }
     }

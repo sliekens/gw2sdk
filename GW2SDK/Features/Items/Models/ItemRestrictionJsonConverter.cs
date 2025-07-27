@@ -26,20 +26,20 @@ internal sealed class ItemRestrictionJsonConverter : JsonConverter<ItemRestricti
         Write(writer, value);
     }
 
-    public static ItemRestriction Read(JsonElement value)
+    public static ItemRestriction Read(in JsonElement value)
     {
         return new ItemRestriction
         {
             Races =
-                value.GetProperty("races").GetList(static value => value.GetEnum<RaceName>()),
+                value.GetProperty("races").GetList(static (in JsonElement value) => value.GetEnum<RaceName>()),
             Professions =
                 value.GetProperty("professions")
-                    .GetList(static value => value.GetEnum<ProfessionName>()),
+                    .GetList(static (in JsonElement value) => value.GetEnum<ProfessionName>()),
             BodyTypes =
                 value.GetProperty("body_types")
-                    .GetList(static value => value.GetEnum<BodyType>()),
+                    .GetList(static (in JsonElement value) => value.GetEnum<BodyType>()),
             Other = value.GetProperty("other")
-                .GetList(static value => value.GetStringRequired())
+                .GetList(static (in JsonElement value) => value.GetStringRequired())
         };
     }
 

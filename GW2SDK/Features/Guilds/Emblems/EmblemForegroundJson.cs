@@ -5,7 +5,7 @@ namespace GuildWars2.Guilds.Emblems;
 
 internal static class EmblemForegroundJson
 {
-    public static EmblemForeground GetEmblemForeground(this JsonElement json)
+    public static EmblemForeground GetEmblemForeground(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember layers = "layers";
@@ -28,14 +28,14 @@ internal static class EmblemForegroundJson
 
         return new EmblemForeground
         {
-            Id = id.Map(static value => value.GetInt32()),
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
 #pragma warning disable CS0618 // Suppress obsolete warning
-            Layers = layers.Map(static values =>
-                values.GetList(static value => value.GetStringRequired())
+            Layers = layers.Map(static (in JsonElement values) =>
+                values.GetList(static (in JsonElement value) => value.GetStringRequired())
             ),
 #pragma warning restore CS0618
-            LayerUrls = layers.Map(static values =>
-                values.GetList(static value => new Uri(value.GetStringRequired()))
+            LayerUrls = layers.Map(static (in JsonElement values) =>
+                values.GetList(static (in JsonElement value) => new Uri(value.GetStringRequired()))
             )
         };
     }

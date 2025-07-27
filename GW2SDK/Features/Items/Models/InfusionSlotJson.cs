@@ -5,7 +5,7 @@ namespace GuildWars2.Items;
 
 internal static class InfusionSlotJson
 {
-    public static InfusionSlot GetInfusionSlot(this JsonElement json)
+    public static InfusionSlot GetInfusionSlot(this in JsonElement json)
     {
         RequiredMember flags = "flags";
         NullableMember itemId = "item_id";
@@ -27,8 +27,8 @@ internal static class InfusionSlotJson
 
         return new InfusionSlot
         {
-            Flags = flags.Map(static values => values.GetInfusionSlotFlags()),
-            ItemId = itemId.Map(static value => value.GetInt32())
+            Flags = flags.Map(static (in JsonElement values) => values.GetInfusionSlotFlags()),
+            ItemId = itemId.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

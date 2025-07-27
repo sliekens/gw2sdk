@@ -5,7 +5,7 @@ namespace GuildWars2.Guilds.Bank;
 
 internal static class GuildBankSlotJson
 {
-    public static GuildBankSlot? GetGuildBankSlot(this JsonElement json)
+    public static GuildBankSlot? GetGuildBankSlot(this in JsonElement json)
     {
         if (json.ValueKind == JsonValueKind.Null)
         {
@@ -33,8 +33,8 @@ internal static class GuildBankSlotJson
 
         return new GuildBankSlot
         {
-            ItemId = itemId.Map(static value => value.GetInt32()),
-            Count = count.Map(static value => value.GetInt32())
+            ItemId = itemId.Map(static (in JsonElement value) => value.GetInt32()),
+            Count = count.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

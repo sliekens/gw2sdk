@@ -5,7 +5,7 @@ namespace GuildWars2.Guilds.Teams;
 
 internal static class LaddersJson
 {
-    public static Ladders GetLadders(this JsonElement json)
+    public static Ladders GetLadders(this in JsonElement json)
     {
         OptionalMember none = "none";
         OptionalMember unranked = "unranked";
@@ -53,13 +53,13 @@ internal static class LaddersJson
 
         return new Ladders
         {
-            None = none.Map(static value => value.GetResults()),
-            Unranked = unranked.Map(static value => value.GetResults()),
-            Ranked = ranked.Map(static value => value.GetResults()),
-            Ranked2v2 = ranked2v2.Map(static value => value.GetResults()),
-            Ranked3v3 = ranked3v3.Map(static value => value.GetResults()),
-            SoloArenaRated = soloArenaRated.Map(static value => value.GetResults()),
-            TeamArenaRated = teamArenaRated.Map(static value => value.GetResults())
+            None = none.Map(static (in JsonElement value) => value.GetResults()),
+            Unranked = unranked.Map(static (in JsonElement value) => value.GetResults()),
+            Ranked = ranked.Map(static (in JsonElement value) => value.GetResults()),
+            Ranked2v2 = ranked2v2.Map(static (in JsonElement value) => value.GetResults()),
+            Ranked3v3 = ranked3v3.Map(static (in JsonElement value) => value.GetResults()),
+            SoloArenaRated = soloArenaRated.Map(static (in JsonElement value) => value.GetResults()),
+            TeamArenaRated = teamArenaRated.Map(static (in JsonElement value) => value.GetResults())
         };
     }
 }

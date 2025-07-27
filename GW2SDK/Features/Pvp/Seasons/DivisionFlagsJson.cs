@@ -6,7 +6,7 @@ namespace GuildWars2.Pvp.Seasons;
 
 internal static class DivisionFlagsJson
 {
-    public static DivisionFlags GetDivisionFlags(this JsonElement json)
+    public static DivisionFlags GetDivisionFlags(this in JsonElement json)
     {
         var canLosePoints = false;
         var canLoseTiers = false;

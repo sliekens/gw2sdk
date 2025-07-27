@@ -5,7 +5,7 @@ namespace GuildWars2.Exploration.HeroChallenges;
 
 internal static class HeroChallengeJson
 {
-    public static HeroChallenge GetHeroChallenge(this JsonElement json)
+    public static HeroChallenge GetHeroChallenge(this in JsonElement json)
     {
         RequiredMember coordinates = "coord";
 
@@ -29,8 +29,8 @@ internal static class HeroChallengeJson
 
         return new HeroChallenge
         {
-            Id = id.Map(static value => value.GetString()) ?? "",
-            Coordinates = coordinates.Map(static value => value.GetCoordinateF())
+            Id = id.Map(static (in JsonElement value) => value.GetString()) ?? "",
+            Coordinates = coordinates.Map(static (in JsonElement value) => value.GetCoordinateF())
         };
     }
 }

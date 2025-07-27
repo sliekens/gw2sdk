@@ -5,7 +5,7 @@ namespace GuildWars2.Wvw.Abilities;
 
 internal static class AbilityRankJson
 {
-    public static AbilityRank GetAbilityRank(this JsonElement json)
+    public static AbilityRank GetAbilityRank(this in JsonElement json)
     {
         RequiredMember cost = "cost";
         RequiredMember effect = "effect";
@@ -28,8 +28,8 @@ internal static class AbilityRankJson
 
         return new AbilityRank
         {
-            Cost = cost.Map(static value => value.GetInt32()),
-            Effect = effect.Map(static value => value.GetStringRequired())
+            Cost = cost.Map(static (in JsonElement value) => value.GetInt32()),
+            Effect = effect.Map(static (in JsonElement value) => value.GetStringRequired())
         };
     }
 }

@@ -28,7 +28,7 @@ internal sealed class ShouldersJsonConverter : JsonConverter<Shoulders>
         Write(writer, value);
     }
 
-    public static Shoulders Read(JsonElement json)
+    public static Shoulders Read(in JsonElement json)
     {
         if (!json.GetProperty(ItemJsonConverter.DiscriminatorName)
             .ValueEquals(ArmorJsonConverter.DiscriminatorValue))
@@ -55,7 +55,7 @@ internal sealed class ShouldersJsonConverter : JsonConverter<Shoulders>
             Rarity = json.GetProperty("rarity").GetEnum<Rarity>(),
             VendorValue = json.GetProperty("vendor_value").GetInt32(),
             GameTypes =
-                json.GetProperty("game_types").GetList(static value => value.GetEnum<GameType>()),
+                json.GetProperty("game_types").GetList(static (in JsonElement value) => value.GetEnum<GameType>()),
             Flags = ItemFlagsJsonConverter.Read(json.GetProperty("flags")),
             Restrictions = ItemRestrictionJsonConverter.Read(json.GetProperty("restrictions")),
             ChatLink = json.GetProperty("chat_link").GetStringRequired(),
@@ -75,11 +75,11 @@ internal sealed class ShouldersJsonConverter : JsonConverter<Shoulders>
                 json.GetProperty("attributes")
                     .GetMap(
                         static name => new Extensible<AttributeName>(name),
-                        static value => value.GetInt32()
+                        static (in JsonElement value) => value.GetInt32()
                     ),
             Buff = json.GetProperty("buff").GetNullable(BuffJsonConverter.Read),
             SuffixItemId = json.GetProperty("suffix_item_id").GetNullableInt32(),
-            StatChoices = json.GetProperty("stat_choices").GetList(static value => value.GetInt32())
+            StatChoices = json.GetProperty("stat_choices").GetList(static (in JsonElement value) => value.GetInt32())
         };
     }
 

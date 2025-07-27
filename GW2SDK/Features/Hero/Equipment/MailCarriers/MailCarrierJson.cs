@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Equipment.MailCarriers;
 
 internal static class MailCarrierJson
 {
-    public static MailCarrier GetMailCarrier(this JsonElement json)
+    public static MailCarrier GetMailCarrier(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember unlockItems = "unlock_items";
@@ -46,19 +46,19 @@ internal static class MailCarrierJson
             }
         }
 
-        var iconString = icon.Map(static value => value.GetStringRequired());
+        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new MailCarrier
         {
-            Id = id.Map(static value => value.GetInt32()),
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
             UnlockItemIds =
-                unlockItems.Map(static values => values.GetList(static value => value.GetInt32())),
-            Order = order.Map(static value => value.GetInt32()),
+                unlockItems.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32())),
+            Order = order.Map(static (in JsonElement value) => value.GetInt32()),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
-            Name = name.Map(static value => value.GetStringRequired()),
-            Flags = flags.Map(static values => values.GetMailCarrierFlags())
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Flags = flags.Map(static (in JsonElement values) => values.GetMailCarrierFlags())
         };
     }
 }

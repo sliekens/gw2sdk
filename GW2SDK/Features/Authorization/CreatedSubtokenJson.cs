@@ -5,7 +5,7 @@ namespace GuildWars2.Authorization;
 
 internal static class CreatedSubtokenJson
 {
-    public static CreatedSubtoken GetCreatedSubtoken(this JsonElement json)
+    public static CreatedSubtoken GetCreatedSubtoken(this in JsonElement json)
     {
         RequiredMember subtoken = "subtoken";
 
@@ -23,7 +23,7 @@ internal static class CreatedSubtokenJson
 
         return new CreatedSubtoken
         {
-            Subtoken = subtoken.Map(static value => value.GetStringRequired())
+            Subtoken = subtoken.Map(static (in JsonElement value) => value.GetStringRequired())
         };
     }
 }

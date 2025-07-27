@@ -5,7 +5,7 @@ namespace GuildWars2.Wvw.Matches;
 
 internal static class OwnedCampJson
 {
-    public static OwnedCamp GetOwnedCamp(this JsonElement json)
+    public static OwnedCamp GetOwnedCamp(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember owner = "owner";
@@ -70,16 +70,16 @@ internal static class OwnedCampJson
 
         return new OwnedCamp
         {
-            Id = id.Map(static value => value.GetStringRequired()),
-            Owner = owner.Map(static value => value.GetEnum<TeamColor>()),
-            LastFlipped = lastFlipped.Map(static value => value.GetDateTimeOffset()),
-            PointsTick = pointsTick.Map(static value => value.GetInt32()),
-            PointsCapture = pointsCapture.Map(static value => value.GetInt32()),
-            ClaimedBy = claimedBy.Map(static value => value.GetString()) ?? "",
-            ClaimedAt = claimedAt.Map(static value => value.GetDateTimeOffset()),
-            YaksDelivered = yaksDelivered.Map(static value => value.GetInt32()),
+            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Owner = owner.Map(static (in JsonElement value) => value.GetEnum<TeamColor>()),
+            LastFlipped = lastFlipped.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
+            PointsTick = pointsTick.Map(static (in JsonElement value) => value.GetInt32()),
+            PointsCapture = pointsCapture.Map(static (in JsonElement value) => value.GetInt32()),
+            ClaimedBy = claimedBy.Map(static (in JsonElement value) => value.GetString()) ?? "",
+            ClaimedAt = claimedAt.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
+            YaksDelivered = yaksDelivered.Map(static (in JsonElement value) => value.GetInt32()),
             GuildUpgrades =
-                guildUpgrades.Map(static values => values.GetList(static value => value.GetInt32()))
+                guildUpgrades.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32()))
                 ?? []
         };
     }

@@ -21,7 +21,7 @@ internal sealed class BuffJsonConverter : JsonConverter<Buff>
         Write(writer, value);
     }
 
-    public static Buff Read(JsonElement json)
+    public static Buff Read(in JsonElement json)
     {
         return new Buff
         {

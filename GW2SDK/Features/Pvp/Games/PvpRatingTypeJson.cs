@@ -5,7 +5,7 @@ namespace GuildWars2.Pvp.Games;
 
 internal static class PvpRatingTypeJson
 {
-    public static Extensible<PvpRatingType> GetRatingType(this JsonElement json)
+    public static Extensible<PvpRatingType> GetRatingType(this in JsonElement json)
     {
         var text = json.GetStringRequired();
         return text switch

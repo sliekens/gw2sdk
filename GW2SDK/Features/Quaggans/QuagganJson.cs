@@ -5,7 +5,7 @@ namespace GuildWars2.Quaggans;
 
 internal static class QuagganJson
 {
-    public static Quaggan GetQuaggan(this JsonElement json)
+    public static Quaggan GetQuaggan(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember url = "url";
@@ -26,11 +26,11 @@ internal static class QuagganJson
             }
         }
 
-        var urlString = url.Map(static value => value.GetStringRequired());
+        var urlString = url.Map(static (in JsonElement value) => value.GetStringRequired());
 #pragma warning disable CS0618 // Suppress obsolete warning for ImageHref assignment
         return new Quaggan
         {
-            Id = id.Map(static value => value.GetStringRequired()),
+            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
             ImageHref = urlString,
             ImageUrl = new Uri(urlString)
         };

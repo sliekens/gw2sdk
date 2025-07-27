@@ -5,7 +5,7 @@ namespace GuildWars2.Metadata;
 
 internal static class BuildJson
 {
-    public static Build GetBuild(this JsonElement json)
+    public static Build GetBuild(this in JsonElement json)
     {
         RequiredMember id = "id";
 
@@ -21,6 +21,6 @@ internal static class BuildJson
             }
         }
 
-        return new Build { Id = id.Map(static value => value.GetInt32()) };
+        return new Build { Id = id.Map(static (in JsonElement value) => value.GetInt32()) };
     }
 }

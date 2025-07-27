@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Achievements;
 
 internal static class AchievementTierJson
 {
-    public static AchievementTier GetAchievementTier(this JsonElement json)
+    public static AchievementTier GetAchievementTier(this in JsonElement json)
     {
         RequiredMember count = "count";
         RequiredMember points = "points";
@@ -27,8 +27,8 @@ internal static class AchievementTierJson
 
         return new AchievementTier
         {
-            Count = count.Map(static value => value.GetInt32()),
-            Points = points.Map(static value => value.GetInt32())
+            Count = count.Map(static (in JsonElement value) => value.GetInt32()),
+            Points = points.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

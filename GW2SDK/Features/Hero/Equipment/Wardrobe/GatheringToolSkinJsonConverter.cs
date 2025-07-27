@@ -35,7 +35,7 @@ internal sealed class GatheringToolSkinJsonConverter : JsonConverter<GatheringTo
         Write(writer, value);
     }
 
-    public static GatheringToolSkin Read(JsonElement json)
+    public static GatheringToolSkin Read(in JsonElement json)
     {
         if (!json.GetProperty(EquipmentSkinJsonConverter.DiscriminatorName)
             .ValueEquals(DiscriminatorValue))
@@ -67,7 +67,7 @@ internal sealed class GatheringToolSkinJsonConverter : JsonConverter<GatheringTo
             Name = json.GetProperty("name").GetStringRequired(),
             Description = json.GetProperty("description").GetStringRequired(),
             Flags = SkinFlagsJsonConverter.Read(json.GetProperty("flags")),
-            Races = json.GetProperty("races").GetList(static value => value.GetEnum<RaceName>()),
+            Races = json.GetProperty("races").GetList(static (in JsonElement value) => value.GetEnum<RaceName>()),
             Rarity = json.GetProperty("rarity").GetEnum<Rarity>(),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,

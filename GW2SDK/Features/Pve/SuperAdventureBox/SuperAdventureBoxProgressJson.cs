@@ -5,7 +5,7 @@ namespace GuildWars2.Pve.SuperAdventureBox;
 
 internal static class SuperAdventureBoxProgressJson
 {
-    public static SuperAdventureBoxProgress GetSuperAdventureBoxProgress(this JsonElement json)
+    public static SuperAdventureBoxProgress GetSuperAdventureBoxProgress(this in JsonElement json)
     {
         RequiredMember zones = "zones";
         RequiredMember unlocks = "unlocks";
@@ -34,15 +34,15 @@ internal static class SuperAdventureBoxProgressJson
         return new SuperAdventureBoxProgress
         {
             Zones =
-                zones.Map(static values =>
-                    values.GetList(static value => value.GetSuperAdventureBoxZone())
+                zones.Map(static (in JsonElement values) =>
+                    values.GetList(static (in JsonElement value) => value.GetSuperAdventureBoxZone())
                 ),
             Unlocks =
-                unlocks.Map(static values =>
-                    values.GetList(static value => value.GetSuperAdventureBoxUpgrade())
+                unlocks.Map(static (in JsonElement values) =>
+                    values.GetList(static (in JsonElement value) => value.GetSuperAdventureBoxUpgrade())
                 ),
-            Songs = songs.Map(static values =>
-                values.GetList(static value => value.GetSuperAdventureBoxSong())
+            Songs = songs.Map(static (in JsonElement values) =>
+                values.GetList(static (in JsonElement value) => value.GetSuperAdventureBoxSong())
             )
         };
     }

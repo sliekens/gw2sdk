@@ -6,7 +6,7 @@ namespace GuildWars2.Exploration.MasteryInsights;
 
 internal static class MasteryInsightJson
 {
-    public static MasteryInsight GetMasteryInsight(this JsonElement json)
+    public static MasteryInsight GetMasteryInsight(this in JsonElement json)
     {
         RequiredMember coordinates = "coord";
         RequiredMember id = "id";
@@ -33,9 +33,9 @@ internal static class MasteryInsightJson
 
         return new MasteryInsight
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Coordinates = coordinates.Map(static value => value.GetCoordinateF()),
-            Region = region.Map(static value => value.GetEnum<MasteryRegionName>())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Coordinates = coordinates.Map(static (in JsonElement value) => value.GetCoordinateF()),
+            Region = region.Map(static (in JsonElement value) => value.GetEnum<MasteryRegionName>())
         };
     }
 }

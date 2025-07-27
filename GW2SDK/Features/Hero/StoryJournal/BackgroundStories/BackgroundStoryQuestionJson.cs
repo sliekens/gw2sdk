@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.StoryJournal.BackgroundStories;
 
 internal static class BackgroundStoryQuestionJson
 {
-    public static BackgroundStoryQuestion GetBackgroundStoryQuestion(this JsonElement json)
+    public static BackgroundStoryQuestion GetBackgroundStoryQuestion(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember title = "title";
@@ -52,21 +52,21 @@ internal static class BackgroundStoryQuestionJson
 
         return new BackgroundStoryQuestion
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Title = title.Map(static value => value.GetStringRequired()),
-            Description = description.Map(static value => value.GetStringRequired()),
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Title = title.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Description = description.Map(static (in JsonElement value) => value.GetStringRequired()),
             AnswerIds =
-                answers.Map(static values =>
-                    values.GetList(static value => value.GetStringRequired())
+                answers.Map(static (in JsonElement values) =>
+                    values.GetList(static (in JsonElement value) => value.GetStringRequired())
                 ),
-            Order = order.Map(static value => value.GetInt32()),
+            Order = order.Map(static (in JsonElement value) => value.GetInt32()),
             Professions =
-                professions.Map(static values =>
-                    values.GetList(static value => value.GetEnum<ProfessionName>())
+                professions.Map(static (in JsonElement values) =>
+                    values.GetList(static (in JsonElement value) => value.GetEnum<ProfessionName>())
                 )
                 ?? GetValues<ProfessionName>(),
-            Races = races.Map(static values =>
-                    values.GetList(static value => value.GetEnum<RaceName>())
+            Races = races.Map(static (in JsonElement values) =>
+                    values.GetList(static (in JsonElement value) => value.GetEnum<RaceName>())
                 )
                 ?? GetValues<RaceName>()
         };
@@ -74,7 +74,7 @@ internal static class BackgroundStoryQuestionJson
         static List<Extensible<TEnum>> GetValues<TEnum>() where TEnum : struct, Enum
         {
 #if NET
-            return [..Enum.GetValues<TEnum>()];
+            return [.. Enum.GetValues<TEnum>()];
 #else
             return [.. Enum.GetValues(typeof(TEnum)).Cast<TEnum>()];
 #endif

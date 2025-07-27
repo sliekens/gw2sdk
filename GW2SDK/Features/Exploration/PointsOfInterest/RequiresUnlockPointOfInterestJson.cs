@@ -6,7 +6,7 @@ namespace GuildWars2.Exploration.PointsOfInterest;
 internal static class RequiresUnlockPointOfInterestJson
 {
     public static RequiresUnlockPointOfInterest GetRequiresUnlockPointOfInterest(
-        this JsonElement json
+        this in JsonElement json
     )
     {
         OptionalMember name = "name";
@@ -54,15 +54,15 @@ internal static class RequiresUnlockPointOfInterestJson
             }
         }
 
-        var iconString = icon.Map(static value => value.GetStringRequired());
+        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
 #pragma warning disable CS0618
         return new RequiresUnlockPointOfInterest
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Name = name.Map(static value => value.GetString()) ?? "",
-            Floor = floor.Map(static value => value.GetInt32()),
-            Coordinates = coordinates.Map(static value => value.GetCoordinateF()),
-            ChatLink = chatLink.Map(static value => value.GetStringRequired()),
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Name = name.Map(static (in JsonElement value) => value.GetString()) ?? "",
+            Floor = floor.Map(static (in JsonElement value) => value.GetInt32()),
+            Coordinates = coordinates.Map(static (in JsonElement value) => value.GetCoordinateF()),
+            ChatLink = chatLink.Map(static (in JsonElement value) => value.GetStringRequired()),
             IconHref = iconString,
             IconUrl = new Uri(iconString)
         };

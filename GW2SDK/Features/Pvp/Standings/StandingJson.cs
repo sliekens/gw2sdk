@@ -5,7 +5,7 @@ namespace GuildWars2.Pvp.Standings;
 
 internal static class StandingJson
 {
-    public static Standing GetStanding(this JsonElement json)
+    public static Standing GetStanding(this in JsonElement json)
     {
         RequiredMember seasonId = "season_id";
         RequiredMember current = "current";
@@ -33,9 +33,9 @@ internal static class StandingJson
 
         return new Standing
         {
-            SeasonId = seasonId.Map(static value => value.GetStringRequired()),
-            Current = current.Map(static value => value.GetCurrentStanding()),
-            Best = best.Map(static value => value.GetBestStanding())
+            SeasonId = seasonId.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Current = current.Map(static (in JsonElement value) => value.GetCurrentStanding()),
+            Best = best.Map(static (in JsonElement value) => value.GetBestStanding())
         };
     }
 }

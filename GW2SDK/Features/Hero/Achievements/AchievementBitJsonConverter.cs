@@ -34,7 +34,7 @@ internal sealed class AchievementBitJsonConverter : JsonConverter<AchievementBit
         Write(writer, value);
     }
 
-    public static AchievementBit Read(JsonElement json)
+    public static AchievementBit Read(in JsonElement json)
     {
         if (json.TryGetProperty(DiscriminatorName, out var discriminator))
         {

@@ -6,7 +6,7 @@ namespace GuildWars2.Items;
 
 internal static class InfusionSlotFlagsJson
 {
-    public static InfusionSlotFlags GetInfusionSlotFlags(this JsonElement json)
+    public static InfusionSlotFlags GetInfusionSlotFlags(this in JsonElement json)
     {
         var enrichment = false;
         var infusion = false;

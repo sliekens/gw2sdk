@@ -24,7 +24,7 @@ internal sealed class GuildIngredientJsonConverter : JsonConverter<GuildIngredie
         Write(writer, value);
     }
 
-    public static GuildIngredient Read(JsonElement json)
+    public static GuildIngredient Read(in JsonElement json)
     {
         return new GuildIngredient
         {

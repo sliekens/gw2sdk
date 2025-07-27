@@ -5,7 +5,7 @@ namespace GuildWars2.Wvw.Guilds;
 
 internal static class AccountWvwGuildJson
 {
-    public static AccountWvwGuild GetAccountWvwGuild(this JsonElement json)
+    public static AccountWvwGuild GetAccountWvwGuild(this in JsonElement json)
     {
         NullableMember teamId = "team";
         OptionalMember guildId = "guild";
@@ -26,11 +26,11 @@ internal static class AccountWvwGuildJson
             }
         }
 
-        int? teamIdValue = teamId.Map(static value => value.GetInt32());
+        int? teamIdValue = teamId.Map(static (in JsonElement value) => value.GetInt32());
         return new AccountWvwGuild
         {
             TeamId = teamIdValue > 0 ? teamIdValue : null,
-            GuildId = guildId.Map(static value => value.GetString())
+            GuildId = guildId.Map(static (in JsonElement value) => value.GetString())
         };
     }
 }

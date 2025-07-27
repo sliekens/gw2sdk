@@ -5,13 +5,13 @@ namespace GuildWars2.Json;
 
 internal static class JsonElementExtensions
 {
-    internal static T? GetNullable<T>(this JsonElement json, Func<JsonElement, T?> transform)
+    internal static T? GetNullable<T>(this in JsonElement json, JsonTransformNullable<T> transform)
         where T : class
     {
         return json.ValueKind == JsonValueKind.Null ? null : transform(json);
     }
 
-    internal static int? GetNullableInt32(this JsonElement json)
+    internal static int? GetNullableInt32(this in JsonElement json)
     {
         return json.ValueKind == JsonValueKind.Null ? null : json.GetInt32();
     }
@@ -20,7 +20,7 @@ internal static class JsonElementExtensions
     /// <param name="json">A String value.</param>
     /// <returns>The value of the JSON element as a non-null string (can be empty).</returns>
     /// <exception cref="InvalidOperationException">Thrown if the element is null or not a string.</exception>
-    internal static string GetStringRequired(this JsonElement json)
+    internal static string GetStringRequired(this in JsonElement json)
     {
         return json.GetString()
             ?? throw new InvalidOperationException(
@@ -34,8 +34,8 @@ internal static class JsonElementExtensions
     /// <param name="transform">A function that converts each item in the array to its destination type.</param>
     /// <returns>A list containing the converted results.</returns>
     internal static ValueList<TValue> GetList<TValue>(
-        this JsonElement json,
-        Func<JsonElement, TValue> transform
+        this in JsonElement json,
+        JsonTransform<TValue> transform
     )
     {
         var values = new ValueList<TValue>(json.GetArrayLength());
@@ -49,8 +49,8 @@ internal static class JsonElementExtensions
     }
 
     internal static ValueList<TValue>? GetNullableList<TValue>(
-        this JsonElement json,
-        Func<JsonElement, TValue> transform
+        this in JsonElement json,
+        JsonTransform<TValue> transform
     )
     {
         return json.ValueKind == JsonValueKind.Null ? null : json.GetList(transform);
@@ -62,8 +62,8 @@ internal static class JsonElementExtensions
     /// <param name="transform">A function that converts each item in the array to its destination type.</param>
     /// <returns>A set containing the converted results.</returns>
     internal static ValueHashSet<TValue> GetSet<TValue>(
-        this JsonElement json,
-        Func<JsonElement, TValue> transform
+        this in JsonElement json,
+        JsonTransform<TValue> transform
     )
     {
 #if NET
@@ -81,8 +81,8 @@ internal static class JsonElementExtensions
     }
 
     internal static ValueDictionary<string, TValue> GetMap<TValue>(
-        this JsonElement json,
-        Func<JsonElement, TValue> transform
+        this in JsonElement json,
+        JsonTransform<TValue> transform
     )
     {
         var values = new ValueDictionary<string, TValue>();
@@ -96,9 +96,9 @@ internal static class JsonElementExtensions
     }
 
     internal static ValueDictionary<TKey, TValue> GetMap<TKey, TValue>(
-        this JsonElement json,
+        this in JsonElement json,
         Func<string, TKey> keySelector,
-        Func<JsonElement, TValue> resultSelector
+        JsonTransform<TValue> resultSelector
     ) where TKey : notnull
     {
         var values = new ValueDictionary<TKey, TValue>();
@@ -111,13 +111,13 @@ internal static class JsonElementExtensions
         return values;
     }
 
-    internal static Extensible<TEnum> GetEnum<TEnum>(this JsonElement json)
+    internal static Extensible<TEnum> GetEnum<TEnum>(this in JsonElement json)
         where TEnum : struct, Enum
     {
         return new Extensible<TEnum>(json.GetStringRequired());
     }
 
-    internal static Extensible<TEnum>? GetNullableEnum<TEnum>(this JsonElement json)
+    internal static Extensible<TEnum>? GetNullableEnum<TEnum>(this in JsonElement json)
         where TEnum : struct, Enum
     {
         return json.ValueKind switch

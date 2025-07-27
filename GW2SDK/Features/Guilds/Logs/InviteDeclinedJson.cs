@@ -5,7 +5,7 @@ namespace GuildWars2.Guilds.Logs;
 
 internal static class InviteDeclinedJson
 {
-    public static InviteDeclined GetInviteDeclined(this JsonElement json)
+    public static InviteDeclined GetInviteDeclined(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember time = "time";
@@ -45,10 +45,10 @@ internal static class InviteDeclinedJson
 
         return new InviteDeclined
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Time = time.Map(static value => value.GetDateTimeOffset()),
-            User = user.Map(static value => value.GetStringRequired()),
-            DeclinedBy = declinedBy.Map(static value => value.GetString()) ?? ""
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Time = time.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
+            User = user.Map(static (in JsonElement value) => value.GetStringRequired()),
+            DeclinedBy = declinedBy.Map(static (in JsonElement value) => value.GetString()) ?? ""
         };
     }
 }

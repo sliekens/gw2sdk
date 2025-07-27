@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Builds.Skills;
 
 internal static class ProfessionSkillJson
 {
-    public static ProfessionSkill GetProfessionSkill(this JsonElement json)
+    public static ProfessionSkill GetProfessionSkill(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -119,50 +119,50 @@ internal static class ProfessionSkillJson
             }
         }
 
-        var professionRestrictions = professions.Map(static values =>
-            values.GetList(static value => value.GetEnum<ProfessionName>())
+        var professionRestrictions = professions.Map(static (in JsonElement values) =>
+            values.GetList(static (in JsonElement value) => value.GetEnum<ProfessionName>())
         );
-        var iconString = icon.Map(static value => value.GetString()) ?? "";
+        var iconString = icon.Map(static (in JsonElement value) => value.GetString()) ?? "";
         return new ProfessionSkill
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Name = name.Map(static value => value.GetStringRequired()),
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
             Facts =
-                facts.Map(static values =>
-                    values.GetList(static value => value.GetFact(out _, out _))
+                facts.Map(static (in JsonElement values) =>
+                    values.GetList(static (in JsonElement value) => value.GetFact(out _, out _))
                 ),
             TraitedFacts =
-                traitedFacts.Map(static values =>
-                    values.GetList(static value => value.GetTraitedFact())
+                traitedFacts.Map(static (in JsonElement values) =>
+                    values.GetList(static (in JsonElement value) => value.GetTraitedFact())
                 ),
-            Description = description.Map(static value => value.GetStringRequired()),
+            Description = description.Map(static (in JsonElement value) => value.GetStringRequired()),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = string.IsNullOrEmpty(iconString) ? null : new Uri(iconString),
-            WeaponType = weaponType.Map(static value => value.GetWeaponType()),
+            WeaponType = weaponType.Map(static (in JsonElement value) => value.GetWeaponType()),
             Professions =
                 professionRestrictions.Count > 0
                     ? professionRestrictions
                     : Profession.AllProfessions,
-            Slot = slot.Map(static value => value.GetEnum<SkillSlot>()),
-            FlipSkillId = flipSkill.Map(static value => value.GetInt32()),
-            NextSkillId = nextChain.Map(static value => value.GetInt32()),
-            PreviousSkillId = prevChain.Map(static value => value.GetInt32()),
+            Slot = slot.Map(static (in JsonElement value) => value.GetEnum<SkillSlot>()),
+            FlipSkillId = flipSkill.Map(static (in JsonElement value) => value.GetInt32()),
+            NextSkillId = nextChain.Map(static (in JsonElement value) => value.GetInt32()),
+            PreviousSkillId = prevChain.Map(static (in JsonElement value) => value.GetInt32()),
             TransformSkills =
-                transformSkills.Map(static values =>
-                    values.GetList(static value => value.GetInt32())
+                transformSkills.Map(static (in JsonElement values) =>
+                    values.GetList(static (in JsonElement value) => value.GetInt32())
                 ),
-            SkillFlags = flags.Map(static value => value.GetSkillFlags()),
-            SpecializationId = specialization.Map(static value => value.GetInt32()),
-            ChatLink = chatLink.Map(static value => value.GetStringRequired()),
+            SkillFlags = flags.Map(static (in JsonElement value) => value.GetSkillFlags()),
+            SpecializationId = specialization.Map(static (in JsonElement value) => value.GetInt32()),
+            ChatLink = chatLink.Map(static (in JsonElement value) => value.GetStringRequired()),
             Categories =
-                categories.Map(static values =>
-                    values.GetList(static value => value.GetEnum<SkillCategoryName>())
+                categories.Map(static (in JsonElement values) =>
+                    values.GetList(static (in JsonElement value) => value.GetEnum<SkillCategoryName>())
                 )
                 ?? [],
-            Attunement = attunement.Map(static value => value.GetEnum<Attunement>()),
-            Cost = cost.Map(static value => value.GetInt32())
+            Attunement = attunement.Map(static (in JsonElement value) => value.GetEnum<Attunement>()),
+            Cost = cost.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

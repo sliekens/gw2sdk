@@ -5,7 +5,7 @@ namespace GuildWars2.Metadata;
 
 internal static class SchemaJson
 {
-    public static Schema GetSchema(this JsonElement jsonElement)
+    public static Schema GetSchema(this in JsonElement jsonElement)
     {
         RequiredMember version = "v";
 
@@ -29,8 +29,8 @@ internal static class SchemaJson
 
         return new Schema
         {
-            Version = version.Map(static value => value.GetStringRequired()),
-            Description = description.Map(static value => value.GetStringRequired())
+            Version = version.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Description = description.Map(static (in JsonElement value) => value.GetStringRequired())
         };
     }
 }

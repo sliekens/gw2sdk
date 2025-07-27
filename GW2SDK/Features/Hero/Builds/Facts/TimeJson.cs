@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Builds.Facts;
 
 internal static class TimeJson
 {
-    public static Time GetTime(this JsonElement json, out int? requiresTrait, out int? overrides)
+    public static Time GetTime(this in JsonElement json, out int? requiresTrait, out int? overrides)
     {
         requiresTrait = null;
         overrides = null;
@@ -49,15 +49,15 @@ internal static class TimeJson
             }
         }
 
-        var iconString = icon.Map(static value => value.GetStringRequired());
+        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new Time
         {
-            Text = text.Map(static value => value.GetStringRequired()),
+            Text = text.Map(static (in JsonElement value) => value.GetStringRequired()),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
-            Duration = duration.Map(static value => TimeSpan.FromSeconds(value.GetDouble()))
+            Duration = duration.Map(static (in JsonElement value) => TimeSpan.FromSeconds(value.GetDouble()))
         };
     }
 }

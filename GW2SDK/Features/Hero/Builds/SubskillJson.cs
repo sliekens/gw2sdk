@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Builds;
 
 internal static class SubskillJson
 {
-    public static Subskill GetSubskill(this JsonElement json)
+    public static Subskill GetSubskill(this in JsonElement json)
     {
         RequiredMember id = "id";
         NullableMember attunement = "attunement";
@@ -33,9 +33,9 @@ internal static class SubskillJson
 
         return new Subskill
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Attunement = attunement.Map(static value => value.GetEnum<Attunement>()),
-            Form = form.Map(static value => value.GetEnum<Transformation>())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Attunement = attunement.Map(static (in JsonElement value) => value.GetEnum<Attunement>()),
+            Form = form.Map(static (in JsonElement value) => value.GetEnum<Transformation>())
         };
     }
 }

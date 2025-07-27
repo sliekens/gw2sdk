@@ -5,7 +5,7 @@ namespace GuildWars2.Wvw.Matches;
 
 internal static class DistributionJson
 {
-    public static Distribution GetDistribution(this JsonElement json)
+    public static Distribution GetDistribution(this in JsonElement json)
     {
         RequiredMember red = "red";
         RequiredMember blue = "blue";
@@ -33,9 +33,9 @@ internal static class DistributionJson
 
         return new Distribution
         {
-            Red = red.Map(static value => value.GetInt32()),
-            Blue = blue.Map(static value => value.GetInt32()),
-            Green = green.Map(static value => value.GetInt32())
+            Red = red.Map(static (in JsonElement value) => value.GetInt32()),
+            Blue = blue.Map(static (in JsonElement value) => value.GetInt32()),
+            Green = green.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

@@ -16,7 +16,7 @@ internal sealed class ColorInfoJsonConverter : JsonConverter<ColorInfo>
         return Read(document.RootElement);
     }
 
-    public static ColorInfo Read(JsonElement json)
+    public static ColorInfo Read(in JsonElement json)
     {
         return new ColorInfo
         {

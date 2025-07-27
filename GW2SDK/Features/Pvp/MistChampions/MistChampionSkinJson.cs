@@ -5,7 +5,7 @@ namespace GuildWars2.Pvp.MistChampions;
 
 internal static class MistChampionSkinJson
 {
-    public static MistChampionSkin GetMistChampionSkin(this JsonElement json)
+    public static MistChampionSkin GetMistChampionSkin(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -41,17 +41,17 @@ internal static class MistChampionSkinJson
             }
         }
 
-        string iconString = icon.Map(static value => value.GetStringRequired());
+        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new MistChampionSkin
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Name = name.Map(static value => value.GetStringRequired()),
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = new Uri(iconString),
-            Default = @default.Map(static value => value.GetBoolean()),
-            UnlockItemIds = unlockItems.Map(static values => values.GetList(static value => value.GetInt32()))
+            Default = @default.Map(static (in JsonElement value) => value.GetBoolean()),
+            UnlockItemIds = unlockItems.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32()))
         };
     }
 }

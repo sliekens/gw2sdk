@@ -7,7 +7,7 @@ namespace GuildWars2.Pvp.Amulets;
 
 internal static class AmuletJson
 {
-    public static Amulet GetAmulet(this JsonElement json)
+    public static Amulet GetAmulet(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -38,16 +38,16 @@ internal static class AmuletJson
             }
         }
 
-        string iconString = icon.Map(static value => value.GetStringRequired());
+        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new Amulet
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Name = name.Map(static value => value.GetStringRequired()),
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = new Uri(iconString),
-            Attributes = attributes.Map(static value => value.GetAttributes())
+            Attributes = attributes.Map(static (in JsonElement value) => value.GetAttributes())
         };
     }
 }

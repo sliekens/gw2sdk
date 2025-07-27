@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Text.Json;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -37,7 +38,7 @@ public sealed class OutfitsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -66,7 +67,7 @@ public sealed class OutfitsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetOutfit());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetOutfit());
             return (value, response.Context);
         }
     }
@@ -84,7 +85,7 @@ public sealed class OutfitsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetInt32());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -140,7 +141,7 @@ public sealed class OutfitsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetOutfit());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetOutfit());
             return (value, response.Context);
         }
     }
@@ -169,7 +170,7 @@ public sealed class OutfitsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetOutfit());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetOutfit());
             return (value, response.Context);
         }
     }

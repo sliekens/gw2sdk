@@ -5,7 +5,7 @@ namespace GuildWars2.Exploration.PointsOfInterest;
 
 internal static class PointOfInterestJson
 {
-    public static PointOfInterest GetPointOfInterest(this JsonElement json)
+    public static PointOfInterest GetPointOfInterest(this in JsonElement json)
     {
         if (json.TryGetProperty("type", out var discriminator))
         {
@@ -64,11 +64,11 @@ internal static class PointOfInterestJson
 
         return new PointOfInterest
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Name = name.Map(static value => value.GetString()) ?? "",
-            Floor = floor.Map(static value => value.GetInt32()),
-            Coordinates = coordinates.Map(static value => value.GetCoordinateF()),
-            ChatLink = chatLink.Map(static value => value.GetStringRequired())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Name = name.Map(static (in JsonElement value) => value.GetString()) ?? "",
+            Floor = floor.Map(static (in JsonElement value) => value.GetInt32()),
+            Coordinates = coordinates.Map(static (in JsonElement value) => value.GetCoordinateF()),
+            ChatLink = chatLink.Map(static (in JsonElement value) => value.GetStringRequired())
         };
     }
 }

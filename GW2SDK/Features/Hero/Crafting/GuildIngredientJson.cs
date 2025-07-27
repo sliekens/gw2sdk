@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Crafting;
 
 internal static class GuildIngredientJson
 {
-    public static GuildIngredient GetGuildIngredient(this JsonElement json)
+    public static GuildIngredient GetGuildIngredient(this in JsonElement json)
     {
         RequiredMember upgradeId = "upgrade_id";
         RequiredMember count = "count";
@@ -27,8 +27,8 @@ internal static class GuildIngredientJson
 
         return new GuildIngredient
         {
-            UpgradeId = upgradeId.Map(static value => value.GetInt32()),
-            Count = count.Map(static value => value.GetInt32())
+            UpgradeId = upgradeId.Map(static (in JsonElement value) => value.GetInt32()),
+            Count = count.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

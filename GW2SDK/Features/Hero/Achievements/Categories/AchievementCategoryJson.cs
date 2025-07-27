@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Achievements.Categories;
 
 internal static class AchievementCategoryJson
 {
-    public static AchievementCategory GetAchievementCategory(this JsonElement json)
+    public static AchievementCategory GetAchievementCategory(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -51,23 +51,23 @@ internal static class AchievementCategoryJson
             }
         }
 
-        var iconString = icon.Map(static value => value.GetStringRequired());
+        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new AchievementCategory
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Name = name.Map(static value => value.GetStringRequired()),
-            Description = description.Map(static value => value.GetStringRequired()),
-            Order = order.Map(static value => value.GetInt32()),
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Description = description.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Order = order.Map(static (in JsonElement value) => value.GetInt32()),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
             Achievements =
-                achievements.Map(static values =>
-                    values.GetList(static value => value.GetAchievementRef())
+                achievements.Map(static (in JsonElement values) =>
+                    values.GetList(static (in JsonElement value) => value.GetAchievementRef())
                 ),
-            Tomorrow = tomorrow.Map(static values =>
-                values.GetList(static value => value.GetAchievementRef())
+            Tomorrow = tomorrow.Map(static (in JsonElement values) =>
+                values.GetList(static (in JsonElement value) => value.GetAchievementRef())
             )
         };
     }

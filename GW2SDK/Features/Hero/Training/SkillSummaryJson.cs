@@ -7,7 +7,7 @@ namespace GuildWars2.Hero.Training;
 
 internal static class SkillSummaryJson
 {
-    public static SkillSummary GetSkillSummary(this JsonElement json)
+    public static SkillSummary GetSkillSummary(this in JsonElement json)
     {
         if (json.TryGetProperty("type", out var discriminator))
         {
@@ -52,8 +52,8 @@ internal static class SkillSummaryJson
 
         return new SkillSummary
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Slot = slot.Map(static value => value.GetEnum<SkillSlot>())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Slot = slot.Map(static (in JsonElement value) => value.GetEnum<SkillSlot>())
         };
     }
 }

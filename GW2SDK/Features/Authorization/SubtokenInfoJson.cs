@@ -5,7 +5,7 @@ namespace GuildWars2.Authorization;
 
 internal static class SubtokenInfoJson
 {
-    public static SubtokenInfo GetSubtokenInfo(this JsonElement json)
+    public static SubtokenInfo GetSubtokenInfo(this in JsonElement json)
     {
         RequiredMember name = "name";
         RequiredMember id = "id";
@@ -54,15 +54,15 @@ internal static class SubtokenInfoJson
 
         return new SubtokenInfo
         {
-            Id = id.Map(static value => value.GetStringRequired()),
-            Name = name.Map(static value => value.GetStringRequired()),
+            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
             Permissions =
-                permissions.Map(static values =>
-                    values.GetList(static value => value.GetEnum<Permission>())
+                permissions.Map(static (in JsonElement values) =>
+                    values.GetList(static (in JsonElement value) => value.GetEnum<Permission>())
                 ),
-            ExpiresAt = expiresAt.Map(static value => value.GetDateTimeOffset()),
-            IssuedAt = issuedAt.Map(static value => value.GetDateTimeOffset()),
-            Urls = urls.Map(static values => values.GetList(static value =>
+            ExpiresAt = expiresAt.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
+            IssuedAt = issuedAt.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
+            Urls = urls.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) =>
                     new Uri(value.GetStringRequired(), UriKind.Relative)
                 )
             )

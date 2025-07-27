@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Masteries;
 
 internal static class MasteryPointsTotalJson
 {
-    public static MasteryPointsTotal GetMasteryPointsTotal(this JsonElement json)
+    public static MasteryPointsTotal GetMasteryPointsTotal(this in JsonElement json)
     {
         RequiredMember region = "region";
         RequiredMember spent = "spent";
@@ -33,7 +33,7 @@ internal static class MasteryPointsTotalJson
 
         return new MasteryPointsTotal
         {
-            Region = region.Map(static value =>
+            Region = region.Map(static (in JsonElement value) =>
                 {
                     // For some reason the API now returns story journal names instead of the region names as it was originally designed
                     // As a workaround, map the story journal names to the region names
@@ -71,8 +71,8 @@ internal static class MasteryPointsTotalJson
                     return value.GetEnum<MasteryRegionName>();
                 }
             ),
-            Spent = spent.Map(static value => value.GetInt32()),
-            Earned = earned.Map(static value => value.GetInt32())
+            Spent = spent.Map(static (in JsonElement value) => value.GetInt32()),
+            Earned = earned.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

@@ -15,7 +15,7 @@ internal sealed class LegendaryItemJsonConverter : JsonConverter<LegendaryItem>
         return Read(json.RootElement);
     }
 
-    public static LegendaryItem Read(JsonElement json)
+    public static LegendaryItem Read(in JsonElement json)
     {
         return new LegendaryItem
         {

@@ -5,7 +5,7 @@ namespace GuildWars2.Pve.Pets;
 
 internal static class PetJson
 {
-    public static Pet GetPet(this JsonElement json)
+    public static Pet GetPet(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -41,17 +41,17 @@ internal static class PetJson
             }
         }
 
-        string iconString = icon.Map(static value => value.GetStringRequired());
+        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new Pet
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Name = name.Map(static value => value.GetStringRequired()),
-            Description = description.Map(static value => value.GetStringRequired()),
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Description = description.Map(static (in JsonElement value) => value.GetStringRequired()),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = new Uri(iconString),
-            Skills = skills.Map(static values => values.GetList(static value => value.GetPetSkill()))
+            Skills = skills.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetPetSkill()))
         };
     }
 }

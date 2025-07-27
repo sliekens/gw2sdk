@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Builds;
 
 internal static class BuildJson
 {
-    public static Build GetBuild(this JsonElement json)
+    public static Build GetBuild(this in JsonElement json)
     {
         RequiredMember name = "name";
         RequiredMember profession = "profession";
@@ -57,23 +57,23 @@ internal static class BuildJson
         }
 
         var (Specialization1, Specialization2, Specialization3) =
-            specializations.Map(static values => values.GetSelectedSpecializations());
-        var legendIds = legends.Map(values =>
+            specializations.Map(static (in JsonElement values) => values.GetSelectedSpecializations());
+        var legendIds = legends.Map((in JsonElement values) =>
             values.GetLegendIds(Specialization1, Specialization2, Specialization3)
         );
-        var aquaticLegendIds = aquaticLegends.Map(values =>
+        var aquaticLegendIds = aquaticLegends.Map((in JsonElement values) =>
             values.GetLegendIds(Specialization1, Specialization2, Specialization3)
         );
         return new Build
         {
-            Name = name.Map(static value => value.GetStringRequired()),
-            Profession = profession.Map(static value => value.GetEnum<ProfessionName>()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Profession = profession.Map(static (in JsonElement value) => value.GetEnum<ProfessionName>()),
             Specialization1 = Specialization1,
             Specialization2 = Specialization2,
             Specialization3 = Specialization3,
-            Skills = skills.Map(static value => value.GetSkillBar()),
-            AquaticSkills = aquaticSkills.Map(static value => value.GetSkillBar()),
-            Pets = pets.Map(static value => value.GetSelectedPets()),
+            Skills = skills.Map(static (in JsonElement value) => value.GetSkillBar()),
+            AquaticSkills = aquaticSkills.Map(static (in JsonElement value) => value.GetSkillBar()),
+            Pets = pets.Map(static (in JsonElement value) => value.GetSelectedPets()),
             Legends = (legendIds, aquaticLegendIds) switch
             {
                 (not null, not null) => new SelectedLegends

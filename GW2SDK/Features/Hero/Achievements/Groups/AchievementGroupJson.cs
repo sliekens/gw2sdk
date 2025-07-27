@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Achievements.Groups;
 
 internal static class AchievementGroupJson
 {
-    public static AchievementGroup GetAchievementGroup(this JsonElement json)
+    public static AchievementGroup GetAchievementGroup(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -42,12 +42,12 @@ internal static class AchievementGroupJson
 
         return new AchievementGroup
         {
-            Id = id.Map(static value => value.GetStringRequired()),
-            Name = name.Map(static value => value.GetStringRequired()),
-            Description = description.Map(static value => value.GetStringRequired()),
-            Order = order.Map(static value => value.GetInt32()),
+            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Description = description.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Order = order.Map(static (in JsonElement value) => value.GetInt32()),
             Categories =
-                categories.Map(static values => values.GetList(static value => value.GetInt32()))
+                categories.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32()))
         };
     }
 }

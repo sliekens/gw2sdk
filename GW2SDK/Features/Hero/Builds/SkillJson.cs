@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Builds;
 
 internal static class SkillJson
 {
-    public static Skill GetSkill(this JsonElement json)
+    public static Skill GetSkill(this in JsonElement json)
     {
         // Unlike most models with a 'type' property, skills don't always have it
         if (json.TryGetProperty("type", out var type))
@@ -97,28 +97,28 @@ internal static class SkillJson
             }
         }
 
-        var iconString = icon.Map(static value => value.GetString()) ?? "";
+        var iconString = icon.Map(static (in JsonElement value) => value.GetString()) ?? "";
         return new Skill
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Name = name.Map(static value => value.GetStringRequired()),
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
             Facts =
-                facts.Map(static values =>
-                    values.GetList(static value => value.GetFact(out _, out _))
+                facts.Map(static (in JsonElement values) =>
+                    values.GetList(static (in JsonElement value) => value.GetFact(out _, out _))
                 ),
             TraitedFacts =
-                traitedFacts.Map(static values =>
-                    values.GetList(static value => value.GetTraitedFact())
+                traitedFacts.Map(static (in JsonElement values) =>
+                    values.GetList(static (in JsonElement value) => value.GetTraitedFact())
                 ),
-            Description = description.Map(static value => value.GetStringRequired()),
+            Description = description.Map(static (in JsonElement value) => value.GetStringRequired()),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = string.IsNullOrEmpty(iconString) ? null : new Uri(iconString),
-            SkillFlags = flags.Map(static value => value.GetSkillFlags()),
-            ChatLink = chatLink.Map(static value => value.GetStringRequired()),
-            Categories = categories.Map(static values =>
-                    values.GetList(static value => value.GetEnum<SkillCategoryName>())
+            SkillFlags = flags.Map(static (in JsonElement value) => value.GetSkillFlags()),
+            ChatLink = chatLink.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Categories = categories.Map(static (in JsonElement values) =>
+                    values.GetList(static (in JsonElement value) => value.GetEnum<SkillCategoryName>())
                 )
                 ?? []
         };

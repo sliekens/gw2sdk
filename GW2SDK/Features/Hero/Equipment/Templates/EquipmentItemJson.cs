@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Equipment.Templates;
 
 internal static class EquipmentItemJson
 {
-    public static EquipmentItem GetEquipmentItem(this JsonElement json)
+    public static EquipmentItem GetEquipmentItem(this in JsonElement json)
     {
         RequiredMember id = "id";
         NullableMember count = "count";
@@ -78,7 +78,7 @@ internal static class EquipmentItemJson
         }
 
         int? suffixItemId = null, secondarySuffixItemId = null;
-        if (upgrades.Map(static values => values.GetList(static value => value.GetInt32())) is
+        if (upgrades.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32())) is
             {
             } ids)
         {
@@ -102,23 +102,23 @@ internal static class EquipmentItemJson
 
         return new EquipmentItem
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Count = count.Map(static value => value.GetInt32()),
-            Slot = slot.Map(static value => value.GetEnum<EquipmentSlot>()),
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Count = count.Map(static (in JsonElement value) => value.GetInt32()),
+            Slot = slot.Map(static (in JsonElement value) => value.GetEnum<EquipmentSlot>()),
             SuffixItemId = suffixItemId,
             SecondarySuffixItemId = secondarySuffixItemId,
             InfusionItemIds =
-                infusions.Map(static values => values.GetList(static value => value.GetInt32()))
+                infusions.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32()))
                 ?? [],
-            SkinId = skin.Map(static value => value.GetInt32()),
-            Stats = stats.Map(static value => value.GetSelectedAttributeCombination()),
-            Binding = binding.Map(static value => value.GetEnum<ItemBinding>()),
-            BoundTo = boundTo.Map(static value => value.GetString()) ?? "",
-            Location = location.Map(static value => value.GetEnum<EquipmentLocation>()),
+            SkinId = skin.Map(static (in JsonElement value) => value.GetInt32()),
+            Stats = stats.Map(static (in JsonElement value) => value.GetSelectedAttributeCombination()),
+            Binding = binding.Map(static (in JsonElement value) => value.GetEnum<ItemBinding>()),
+            BoundTo = boundTo.Map(static (in JsonElement value) => value.GetString()) ?? "",
+            Location = location.Map(static (in JsonElement value) => value.GetEnum<EquipmentLocation>()),
             TemplateNumbers =
-                tabs.Map(static values => values.GetList(static value => value.GetInt32())) ?? [],
-            DyeColorIds = dyes.Map(static values =>
-                    values.GetList(static value => value.GetNullableInt32() ?? DyeColor.DyeRemoverId
+                tabs.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32())) ?? [],
+            DyeColorIds = dyes.Map(static (in JsonElement values) =>
+                    values.GetList(static (in JsonElement value) => value.GetNullableInt32() ?? DyeColor.DyeRemoverId
                     )
                 )
                 ?? []

@@ -5,7 +5,7 @@ namespace GuildWars2.Wvw.Matches.Overview;
 
 internal static class MatchOverviewJson
 {
-    public static MatchOverview GetMatchOverview(this JsonElement json)
+    public static MatchOverview GetMatchOverview(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember worlds = "worlds";
@@ -43,11 +43,11 @@ internal static class MatchOverviewJson
 
         return new MatchOverview
         {
-            Id = id.Map(static value => value.GetStringRequired()),
-            Worlds = worlds.Map(static value => value.GetWorlds()),
-            AllWorlds = allWorlds.Map(static value => value.GetAllWorlds()),
-            StartTime = startTime.Map(static value => value.GetDateTimeOffset()),
-            EndTime = endTime.Map(static value => value.GetDateTimeOffset())
+            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Worlds = worlds.Map(static (in JsonElement value) => value.GetWorlds()),
+            AllWorlds = allWorlds.Map(static (in JsonElement value) => value.GetAllWorlds()),
+            StartTime = startTime.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
+            EndTime = endTime.Map(static (in JsonElement value) => value.GetDateTimeOffset())
         };
     }
 }

@@ -5,7 +5,7 @@ namespace GuildWars2.WizardsVault.Objectives;
 
 internal static class ObjectiveJson
 {
-    public static Objective GetObjective(this JsonElement json)
+    public static Objective GetObjective(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember title = "title";
@@ -38,10 +38,10 @@ internal static class ObjectiveJson
 
         return new Objective
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Title = title.Map(static value => value.GetStringRequired()),
-            Track = track.Map(static value => value.GetEnum<ObjectiveTrack>()),
-            RewardAcclaim = acclaim.Map(static value => value.GetInt32())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Title = title.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Track = track.Map(static (in JsonElement value) => value.GetEnum<ObjectiveTrack>()),
+            RewardAcclaim = acclaim.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
 }

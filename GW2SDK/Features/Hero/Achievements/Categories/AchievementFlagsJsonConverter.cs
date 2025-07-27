@@ -25,13 +25,13 @@ internal sealed class AchievementFlagsJsonConverter : JsonConverter<AchievementF
         Write(writer, value);
     }
 
-    public static AchievementFlags Read(JsonElement json)
+    public static AchievementFlags Read(in JsonElement json)
     {
         return new AchievementFlags
         {
             SpecialEvent = json.GetProperty("special_event").GetBoolean(),
             PvE = json.GetProperty("pve").GetBoolean(),
-            Other = json.GetProperty("other").GetList(static value => value.GetStringRequired())
+            Other = json.GetProperty("other").GetList(static (in JsonElement value) => value.GetStringRequired())
         };
     }
 

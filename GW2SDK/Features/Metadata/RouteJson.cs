@@ -5,7 +5,7 @@ namespace GuildWars2.Metadata;
 
 internal static class RouteJson
 {
-    public static Route GetRoute(this JsonElement json)
+    public static Route GetRoute(this in JsonElement json)
     {
         RequiredMember path = "path";
         RequiredMember lang = "lang";
@@ -38,10 +38,10 @@ internal static class RouteJson
 
         return new Route
         {
-            Path = path.Map(static value => value.GetStringRequired()),
-            Multilingual = lang.Map(static value => value.GetBoolean()),
-            RequiresAuthorization = auth.Map(static value => value.GetBoolean()),
-            Active = active.Map(static value => value.GetBoolean())
+            Path = path.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Multilingual = lang.Map(static (in JsonElement value) => value.GetBoolean()),
+            RequiresAuthorization = auth.Map(static (in JsonElement value) => value.GetBoolean()),
+            Active = active.Map(static (in JsonElement value) => value.GetBoolean())
         };
     }
 }

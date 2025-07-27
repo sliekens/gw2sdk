@@ -16,7 +16,7 @@ internal sealed class EquipmentTemplateJsonConverter : JsonConverter<EquipmentTe
         return Read(json.RootElement);
     }
 
-    public static EquipmentTemplate Read(JsonElement json)
+    public static EquipmentTemplate Read(in JsonElement json)
     {
         return new EquipmentTemplate
         {

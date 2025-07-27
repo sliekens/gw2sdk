@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Achievements.Categories;
 
 internal static class AchievementFlagsJson
 {
-    public static AchievementFlags GetAchievementFlags(this JsonElement json)
+    public static AchievementFlags GetAchievementFlags(this in JsonElement json)
     {
         var specialEvent = false;
         var pve = false;

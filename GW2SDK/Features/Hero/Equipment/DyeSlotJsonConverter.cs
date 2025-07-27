@@ -21,7 +21,7 @@ internal sealed class DyeSlotJsonConverter : JsonConverter<DyeSlot>
         Write(writer, value);
     }
 
-    public static DyeSlot? Read(JsonElement json)
+    public static DyeSlot? Read(in JsonElement json)
     {
         if (json.ValueKind == JsonValueKind.Null)
         {

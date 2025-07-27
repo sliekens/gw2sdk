@@ -26,7 +26,7 @@ internal sealed class TitleRewardJsonConverter : JsonConverter<TitleReward>
         Write(writer, value);
     }
 
-    public static TitleReward Read(JsonElement json)
+    public static TitleReward Read(in JsonElement json)
     {
         return new TitleReward { Id = json.GetProperty("id").GetInt32() };
     }

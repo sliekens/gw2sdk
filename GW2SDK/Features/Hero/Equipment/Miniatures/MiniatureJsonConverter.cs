@@ -16,7 +16,7 @@ internal sealed class MiniatureJsonConverter : JsonConverter<Miniature>
         return Read(json.RootElement);
     }
 
-    public static Miniature? Read(JsonElement json)
+    public static Miniature? Read(in JsonElement json)
     {
         var iconString = json.GetProperty("icon").GetStringRequired();
         return new Miniature

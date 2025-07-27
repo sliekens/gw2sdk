@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Crafting.Recipes;
 
 internal static class RecipeJson
 {
-    public static Recipe GetRecipe(this JsonElement json)
+    public static Recipe GetRecipe(this in JsonElement json)
     {
         if (json.TryGetProperty("type", out var discriminator))
         {
@@ -181,22 +181,22 @@ internal static class RecipeJson
 
         return new Recipe
         {
-            Id = id.Map(static value => value.GetInt32()),
-            OutputItemId = outputItemId.Map(static value => value.GetInt32()),
-            OutputItemCount = outputItemCount.Map(static value => value.GetInt32()),
-            MinRating = minRating.Map(static value => value.GetInt32()),
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            OutputItemId = outputItemId.Map(static (in JsonElement value) => value.GetInt32()),
+            OutputItemCount = outputItemCount.Map(static (in JsonElement value) => value.GetInt32()),
+            MinRating = minRating.Map(static (in JsonElement value) => value.GetInt32()),
             TimeToCraft =
-                timeToCraft.Map(static value => TimeSpan.FromMilliseconds(value.GetDouble())),
+                timeToCraft.Map(static (in JsonElement value) => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines =
-                disciplines.Map(static values =>
-                    values.GetList(static value => value.GetEnum<CraftingDisciplineName>())
+                disciplines.Map(static (in JsonElement values) =>
+                    values.GetList(static (in JsonElement value) => value.GetEnum<CraftingDisciplineName>())
                 ),
-            Flags = flags.Map(static values => values.GetRecipeFlags()),
+            Flags = flags.Map(static (in JsonElement values) => values.GetRecipeFlags()),
             Ingredients =
-                ingredients.Map(static values =>
-                    values.GetList(static value => value.GetIngredient())
+                ingredients.Map(static (in JsonElement values) =>
+                    values.GetList(static (in JsonElement value) => value.GetIngredient())
                 ),
-            ChatLink = chatLink.Map(static value => value.GetStringRequired())
+            ChatLink = chatLink.Map(static (in JsonElement value) => value.GetStringRequired())
         };
     }
 }

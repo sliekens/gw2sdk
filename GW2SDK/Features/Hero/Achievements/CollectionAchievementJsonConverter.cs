@@ -27,7 +27,7 @@ internal sealed class CollectionAchievementJsonConverter : JsonConverter<Collect
         Write(writer, value);
     }
 
-    public static CollectionAchievement Read(JsonElement json)
+    public static CollectionAchievement Read(in JsonElement json)
     {
         var iconString = json.GetProperty("icon").GetString() ?? "";
         return new CollectionAchievement
@@ -47,7 +47,7 @@ internal sealed class CollectionAchievementJsonConverter : JsonConverter<Collect
                 .GetNullableList(AchievementRewardJsonConverter.Read),
             Bits = json.GetProperty("bits").GetNullableList(AchievementBitJsonConverter.Read),
             Prerequisites =
-                json.GetProperty("prerequisites").GetList(prerequisite => prerequisite.GetInt32()),
+                json.GetProperty("prerequisites").GetList(static (in JsonElement prerequisite) => prerequisite.GetInt32()),
             PointCap = json.GetProperty("point_cap").GetNullableInt32()
         };
     }

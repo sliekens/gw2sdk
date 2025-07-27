@@ -5,7 +5,7 @@ namespace GuildWars2.Pvp.Seasons;
 
 internal static class LeaderboardGroupJson
 {
-    public static LeaderboardGroup GetLeaderboardGroup(this JsonElement json)
+    public static LeaderboardGroup GetLeaderboardGroup(this in JsonElement json)
     {
         OptionalMember ladder = "ladder";
         OptionalMember legendary = "legendary";
@@ -33,9 +33,9 @@ internal static class LeaderboardGroupJson
 
         return new LeaderboardGroup
         {
-            Ladder = ladder.Map(static value => value.GetLeaderboard()),
-            Legendary = legendary.Map(static value => value.GetLeaderboard()),
-            Guild = guild.Map(static value => value.GetLeaderboard())
+            Ladder = ladder.Map(static (in JsonElement value) => value.GetLeaderboard()),
+            Legendary = legendary.Map(static (in JsonElement value) => value.GetLeaderboard()),
+            Guild = guild.Map(static (in JsonElement value) => value.GetLeaderboard())
         };
     }
 }

@@ -32,7 +32,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
     /// <summary>Initializes a new instance of the <see cref="GameLink" /> class.</summary>
     /// <param name="mumbleLink">The memory-mapped file used by the game client.</param>
     /// <param name="refreshInterval">The interval at which to poll for changes to the shared memory.</param>
-    private GameLink(MumbleLink mumbleLink, TimeSpan refreshInterval)
+    private GameLink(MumbleLink mumbleLink, in TimeSpan refreshInterval)
     {
         this.mumbleLink = mumbleLink;
         timer = new Timer(
@@ -255,7 +255,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
     /// <returns>A new instance of the <see cref="GameLink" /> class.</returns>
     /// <exception cref="PlatformNotSupportedException">Thrown if the current platform is not Windows.</exception>
     [SupportedOSPlatform("windows")]
-    public static GameLink Open(TimeSpan refreshInterval = default, string name = "MumbleLink")
+    public static GameLink Open(in TimeSpan refreshInterval = default, string name = "MumbleLink")
     {
         if (!IsSupported())
         {

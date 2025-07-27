@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Training;
 
 internal static class ProfessionFlagsJson
 {
-    public static ProfessionFlags GetProfessionFlags(this JsonElement json)
+    public static ProfessionFlags GetProfessionFlags(this in JsonElement json)
     {
         var noWeaponSwap = false;
         var noRacialSkills = false;

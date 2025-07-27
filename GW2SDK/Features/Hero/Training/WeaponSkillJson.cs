@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Training;
 
 internal static class WeaponSkillJson
 {
-    public static WeaponSkill GetWeaponSkill(this JsonElement json)
+    public static WeaponSkill GetWeaponSkill(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember slot = "slot";
@@ -39,10 +39,10 @@ internal static class WeaponSkillJson
 
         return new WeaponSkill
         {
-            Id = id.Map(static value => value.GetInt32()),
-            Slot = slot.Map(static value => value.GetEnum<SkillSlot>()),
-            Offhand = offhand.Map(static value => value.GetEnum<Offhand>()),
-            Attunement = attunement.Map(static value => value.GetEnum<Attunement>())
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Slot = slot.Map(static (in JsonElement value) => value.GetEnum<SkillSlot>()),
+            Offhand = offhand.Map(static (in JsonElement value) => value.GetEnum<Offhand>()),
+            Attunement = attunement.Map(static (in JsonElement value) => value.GetEnum<Attunement>())
         };
     }
 }

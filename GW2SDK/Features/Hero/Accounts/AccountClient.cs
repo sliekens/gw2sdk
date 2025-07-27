@@ -1,4 +1,5 @@
-﻿using GuildWars2.Http;
+﻿using System.Text.Json;
+using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Accounts;
@@ -67,7 +68,7 @@ public sealed class AccountClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetProgression());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetProgression());
             return (value, response.Context);
         }
     }
@@ -153,7 +154,7 @@ public sealed class AccountClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetStringRequired());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -207,7 +208,7 @@ public sealed class AccountClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetCharacter());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetCharacter());
             return (value, response.Context);
         }
     }
@@ -232,7 +233,7 @@ public sealed class AccountClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static entry => entry.GetCharacter());
+            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetCharacter());
             return (value, response.Context);
         }
     }

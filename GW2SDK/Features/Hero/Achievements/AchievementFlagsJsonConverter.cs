@@ -25,7 +25,7 @@ internal sealed class AchievementFlagsJsonConverter : JsonConverter<AchievementF
         Write(writer, value);
     }
 
-    public static AchievementFlags Read(JsonElement json)
+    public static AchievementFlags Read(in JsonElement json)
     {
         var categoryDisplay = false;
         var daily = false;
@@ -93,7 +93,7 @@ internal sealed class AchievementFlagsJsonConverter : JsonConverter<AchievementF
             }
             else if (property.NameEquals("other"))
             {
-                other = property.Value.GetList(static value => value.GetStringRequired());
+                other = property.Value.GetList(static (in JsonElement value) => value.GetStringRequired());
             }
         }
 
