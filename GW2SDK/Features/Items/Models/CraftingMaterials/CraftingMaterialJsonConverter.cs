@@ -55,7 +55,7 @@ internal sealed class CraftingMaterialJsonConverter : JsonConverter<CraftingMate
 #pragma warning restore CS0618
             IconUrl = !string.IsNullOrEmpty(iconString) ? new Uri(iconString) : null,
             UpgradesInto = json.GetProperty("upgrades_into")
-                .GetList(static value => InfusionSlotUpgradePathJsonConverter.Read(value))
+                .GetList(InfusionSlotUpgradePathJsonConverter.Read)
         };
     }
 
