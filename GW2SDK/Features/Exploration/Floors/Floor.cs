@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using GeoRegion = GuildWars2.Exploration.Regions.Region;
 
 namespace GuildWars2.Exploration.Floors;
 
@@ -21,5 +20,5 @@ public sealed record Floor
     public required Rectangle? ClampedView { get; init; }
 
     /// <summary>The regions that are available on this floor. The key is the region ID, the value is the region.</summary>
-    public required Dictionary<int, GeoRegion> Regions { get; init; }
+    public required Dictionary<int, Regions.Region> Regions { get; init; }
 }

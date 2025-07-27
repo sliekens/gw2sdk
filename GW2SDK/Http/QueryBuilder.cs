@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Diagnostics;
-using Argument = System.Collections.Generic.KeyValuePair<string, string>;
 
 namespace GuildWars2.Http;
 
@@ -10,7 +9,7 @@ namespace GuildWars2.Http;
 [DebuggerDisplay("{Build()}")]
 public sealed class QueryBuilder : IEnumerable
 {
-    private readonly List<Argument> arguments = [];
+    private readonly List<KeyValuePair<string, string>> arguments = [];
 
     private int queryLength;
 
@@ -24,7 +23,7 @@ public sealed class QueryBuilder : IEnumerable
     /// <param name="value">The value of the argument.</param>
     public void Add(string key, string value)
     {
-        arguments.Add(new Argument(key, value));
+        arguments.Add(new KeyValuePair<string, string>(key, value));
 
         // Length of '?key=value' (or '&key=value')
         queryLength += key.Length + value.Length + 2;
@@ -92,7 +91,7 @@ public sealed class QueryBuilder : IEnumerable
 #if !NET
 internal static class QueryBuilderHelper
 {
-    internal static void Deconstruct(this Argument instance, out string key, out string value)
+    internal static void Deconstruct(this KeyValuePair<string, string> instance, out string key, out string value)
     {
         key = instance.Key;
         value = instance.Value;
