@@ -8,27 +8,24 @@ internal static class ArmorJson
 {
     public static Armor GetArmor(this JsonElement json)
     {
-        if (json.TryGetProperty("details", out var discriminator))
+        if (json.TryGetProperty("details", out var discriminator) && discriminator.TryGetProperty("type", out var subtype))
         {
-            if (discriminator.TryGetProperty("type", out var subtype))
+            switch (subtype.GetString())
             {
-                switch (subtype.GetString())
-                {
-                    case "Boots":
-                        return json.GetBoots();
-                    case "Coat":
-                        return json.GetCoat();
-                    case "Gloves":
-                        return json.GetGloves();
-                    case "Helm":
-                        return json.GetHelm();
-                    case "HelmAquatic":
-                        return json.GetHelmAquatic();
-                    case "Leggings":
-                        return json.GetLeggings();
-                    case "Shoulders":
-                        return json.GetShoulders();
-                }
+                case "Boots":
+                    return json.GetBoots();
+                case "Coat":
+                    return json.GetCoat();
+                case "Gloves":
+                    return json.GetGloves();
+                case "Helm":
+                    return json.GetHelm();
+                case "HelmAquatic":
+                    return json.GetHelmAquatic();
+                case "Leggings":
+                    return json.GetLeggings();
+                case "Shoulders":
+                    return json.GetShoulders();
             }
         }
 

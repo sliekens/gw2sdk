@@ -7,19 +7,16 @@ internal static class TrinketJson
 {
     public static Trinket GetTrinket(this JsonElement json)
     {
-        if (json.TryGetProperty("details", out var discriminator))
+        if (json.TryGetProperty("details", out var discriminator) && discriminator.TryGetProperty("type", out var subtype))
         {
-            if (discriminator.TryGetProperty("type", out var subtype))
+            switch (subtype.GetString())
             {
-                switch (subtype.GetString())
-                {
-                    case "Accessory":
-                        return json.GetAccessory();
-                    case "Amulet":
-                        return json.GetAmulet();
-                    case "Ring":
-                        return json.GetRing();
-                }
+                case "Accessory":
+                    return json.GetAccessory();
+                case "Amulet":
+                    return json.GetAmulet();
+                case "Ring":
+                    return json.GetRing();
             }
         }
 

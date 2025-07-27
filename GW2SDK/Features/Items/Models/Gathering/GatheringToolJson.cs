@@ -7,25 +7,22 @@ internal static class GatheringToolJson
 {
     public static GatheringTool GetGatheringTool(this JsonElement json)
     {
-        if (json.TryGetProperty("details", out var discriminator))
+        if (json.TryGetProperty("details", out var discriminator) && discriminator.TryGetProperty("type", out var subtype))
         {
-            if (discriminator.TryGetProperty("type", out var subtype))
+            switch (subtype.GetString())
             {
-                switch (subtype.GetString())
-                {
-                    case "Bait":
-                        return json.GetBait();
-                    case "Fishing":
-                        return json.GetFishingRod();
-                    case "Foraging":
-                        return json.GetHarvestingSickle();
-                    case "Logging":
-                        return json.GetLoggingAxe();
-                    case "Lure":
-                        return json.GetLure();
-                    case "Mining":
-                        return json.GetMiningPick();
-                }
+                case "Bait":
+                    return json.GetBait();
+                case "Fishing":
+                    return json.GetFishingRod();
+                case "Foraging":
+                    return json.GetHarvestingSickle();
+                case "Logging":
+                    return json.GetLoggingAxe();
+                case "Lure":
+                    return json.GetLure();
+                case "Mining":
+                    return json.GetMiningPick();
             }
         }
 

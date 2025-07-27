@@ -8,59 +8,56 @@ internal static class WeaponSkinJson
 {
     public static WeaponSkin GetWeaponSkin(this JsonElement json)
     {
-        if (json.TryGetProperty("details", out var discriminator))
+        if (json.TryGetProperty("details", out var discriminator) && discriminator.TryGetProperty("type", out var subtype))
         {
-            if (discriminator.TryGetProperty("type", out var subtype))
+            switch (subtype.GetString())
             {
-                switch (subtype.GetString())
-                {
-                    case "Axe":
-                        return json.GetAxeSkin();
-                    case "Dagger":
-                        return json.GetDaggerSkin();
-                    case "Focus":
-                        return json.GetFocusSkin();
-                    case "Greatsword":
-                        return json.GetGreatswordSkin();
-                    case "Hammer":
-                        return json.GetHammerSkin();
-                    case "LargeBundle":
-                        return json.GetLargeBundleSkin();
-                    case "Longbow":
-                        return json.GetLongbowSkin();
-                    case "Mace":
-                        return json.GetMaceSkin();
-                    case "Pistol":
-                        return json.GetPistolSkin();
-                    case "Rifle":
-                        return json.GetRifleSkin();
-                    case "Scepter":
-                        return json.GetScepterSkin();
-                    case "Shield":
-                        return json.GetShieldSkin();
-                    case "Shortbow":
-                        return json.GetShortbowSkin();
-                    case "SmallBundle":
-                        return json.GetSmallBundleSkin();
-                    case "Spear":
-                        return json.GetSpearSkin();
-                    case "Speargun":
-                        return json.GetHarpoonGunSkin();
-                    case "Staff":
-                        return json.GetStaffSkin();
-                    case "Sword":
-                        return json.GetSwordSkin();
-                    case "Torch":
-                        return json.GetTorchSkin();
-                    case "Toy":
-                        return json.GetToySkin();
-                    case "ToyTwoHanded":
-                        return json.GetToyTwoHandedSkin();
-                    case "Trident":
-                        return json.GetTridentSkin();
-                    case "Warhorn":
-                        return json.GetWarhornSkin();
-                }
+                case "Axe":
+                    return json.GetAxeSkin();
+                case "Dagger":
+                    return json.GetDaggerSkin();
+                case "Focus":
+                    return json.GetFocusSkin();
+                case "Greatsword":
+                    return json.GetGreatswordSkin();
+                case "Hammer":
+                    return json.GetHammerSkin();
+                case "LargeBundle":
+                    return json.GetLargeBundleSkin();
+                case "Longbow":
+                    return json.GetLongbowSkin();
+                case "Mace":
+                    return json.GetMaceSkin();
+                case "Pistol":
+                    return json.GetPistolSkin();
+                case "Rifle":
+                    return json.GetRifleSkin();
+                case "Scepter":
+                    return json.GetScepterSkin();
+                case "Shield":
+                    return json.GetShieldSkin();
+                case "Shortbow":
+                    return json.GetShortbowSkin();
+                case "SmallBundle":
+                    return json.GetSmallBundleSkin();
+                case "Spear":
+                    return json.GetSpearSkin();
+                case "Speargun":
+                    return json.GetHarpoonGunSkin();
+                case "Staff":
+                    return json.GetStaffSkin();
+                case "Sword":
+                    return json.GetSwordSkin();
+                case "Torch":
+                    return json.GetTorchSkin();
+                case "Toy":
+                    return json.GetToySkin();
+                case "ToyTwoHanded":
+                    return json.GetToyTwoHandedSkin();
+                case "Trident":
+                    return json.GetTridentSkin();
+                case "Warhorn":
+                    return json.GetWarhornSkin();
             }
         }
 

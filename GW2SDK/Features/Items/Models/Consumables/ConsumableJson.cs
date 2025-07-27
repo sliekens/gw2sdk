@@ -7,43 +7,40 @@ internal static class ConsumableJson
 {
     public static Consumable GetConsumable(this JsonElement json)
     {
-        if (json.TryGetProperty("details", out var discriminator))
+        if (json.TryGetProperty("details", out var discriminator) && discriminator.TryGetProperty("type", out var subtype))
         {
-            if (discriminator.TryGetProperty("type", out var subtype))
+            switch (subtype.GetString())
             {
-                switch (subtype.GetString())
-                {
-                    case "AppearanceChange":
-                        return json.GetAppearanceChanger();
-                    case "Booze":
-                        return json.GetBooze();
-                    case "ContractNpc":
-                        return json.GetContractNpc();
-                    case "Currency":
-                        return json.GetCurrency();
-                    case "Food":
-                        return json.GetFood();
-                    case "Generic":
-                        return json.GetGenericConsumable();
-                    case "Halloween":
-                        return json.GetHalloweenConsumable();
-                    case "Immediate":
-                        return json.GetService();
-                    case "MountRandomUnlock":
-                        return json.GetMountLicense();
-                    case "RandomUnlock":
-                        return json.GetRandomUnlocker();
-                    case "TeleportToFriend":
-                        return json.GetTeleportToFriend();
-                    case "Transmutation":
-                        return json.GetTransmutation();
-                    case "Unlock":
-                        return json.GetUnlocker();
-                    case "UpgradeRemoval":
-                        return json.GetUpgradeExtractor();
-                    case "Utility":
-                        return json.GetUtility();
-                }
+                case "AppearanceChange":
+                    return json.GetAppearanceChanger();
+                case "Booze":
+                    return json.GetBooze();
+                case "ContractNpc":
+                    return json.GetContractNpc();
+                case "Currency":
+                    return json.GetCurrency();
+                case "Food":
+                    return json.GetFood();
+                case "Generic":
+                    return json.GetGenericConsumable();
+                case "Halloween":
+                    return json.GetHalloweenConsumable();
+                case "Immediate":
+                    return json.GetService();
+                case "MountRandomUnlock":
+                    return json.GetMountLicense();
+                case "RandomUnlock":
+                    return json.GetRandomUnlocker();
+                case "TeleportToFriend":
+                    return json.GetTeleportToFriend();
+                case "Transmutation":
+                    return json.GetTransmutation();
+                case "Unlock":
+                    return json.GetUnlocker();
+                case "UpgradeRemoval":
+                    return json.GetUpgradeExtractor();
+                case "Utility":
+                    return json.GetUtility();
             }
         }
 

@@ -48,21 +48,18 @@ internal static class UpgradeComponentJson
 
     public static UpgradeComponent GetUpgradeComponent(this JsonElement json)
     {
-        if (json.TryGetProperty("details", out var discriminator))
+        if (json.TryGetProperty("details", out var discriminator) && discriminator.TryGetProperty("type", out var subtype))
         {
-            if (discriminator.TryGetProperty("type", out var subtype))
+            switch (subtype.GetString())
             {
-                switch (subtype.GetString())
-                {
-                    case "Gem":
-                        return json.GetGem();
-                    case "Rune":
-                    case "Default" when json.IsPvpItem() && json.HasFlags(3):
-                        return json.GetRune();
-                    case "Sigil":
-                    case "Default" when json.IsPvpItem() && json.HasFlags(19):
-                        return json.GetSigil();
-                }
+                case "Gem":
+                    return json.GetGem();
+                case "Rune":
+                case "Default" when json.IsPvpItem() && json.HasFlags(3):
+                    return json.GetRune();
+                case "Sigil":
+                case "Default" when json.IsPvpItem() && json.HasFlags(19):
+                    return json.GetSigil();
             }
         }
 

@@ -7,19 +7,16 @@ internal static class GizmoJson
 {
     public static Gizmo GetGizmo(this JsonElement json)
     {
-        if (json.TryGetProperty("details", out var discriminator))
+        if (json.TryGetProperty("details", out var discriminator) && discriminator.TryGetProperty("type", out var subtype))
         {
-            if (discriminator.TryGetProperty("type", out var subtype))
+            switch (subtype.GetString())
             {
-                switch (subtype.GetString())
-                {
-                    case "ContainerKey":
-                        return json.GetBlackLionChestKey();
-                    case "RentableContractNpc":
-                        return json.GetRentableContractNpc();
-                    case "UnlimitedConsumable":
-                        return json.GetUnlimitedConsumable();
-                }
+                case "ContainerKey":
+                    return json.GetBlackLionChestKey();
+                case "RentableContractNpc":
+                    return json.GetRentableContractNpc();
+                case "UnlimitedConsumable":
+                    return json.GetUnlimitedConsumable();
             }
         }
 

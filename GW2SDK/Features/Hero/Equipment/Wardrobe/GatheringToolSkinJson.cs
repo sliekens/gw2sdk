@@ -8,21 +8,18 @@ internal static class GatheringToolSkinJson
 {
     public static GatheringToolSkin GetGatheringToolSkin(this JsonElement json)
     {
-        if (json.TryGetProperty("details", out var discriminator))
+        if (json.TryGetProperty("details", out var discriminator) && discriminator.TryGetProperty("type", out var subtype))
         {
-            if (discriminator.TryGetProperty("type", out var subtype))
+            switch (subtype.GetString())
             {
-                switch (subtype.GetString())
-                {
-                    case "Fishing":
-                        return json.GetFishingToolSkin();
-                    case "Foraging":
-                        return json.GetForagingToolSkin();
-                    case "Logging":
-                        return json.GetLoggingToolSkin();
-                    case "Mining":
-                        return json.GetMiningToolSkin();
-                }
+                case "Fishing":
+                    return json.GetFishingToolSkin();
+                case "Foraging":
+                    return json.GetForagingToolSkin();
+                case "Logging":
+                    return json.GetLoggingToolSkin();
+                case "Mining":
+                    return json.GetMiningToolSkin();
             }
         }
 

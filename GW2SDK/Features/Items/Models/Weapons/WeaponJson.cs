@@ -7,59 +7,56 @@ internal static class WeaponJson
 {
     public static Weapon GetWeapon(this JsonElement json)
     {
-        if (json.TryGetProperty("details", out var discriminator))
+        if (json.TryGetProperty("details", out var discriminator) && discriminator.TryGetProperty("type", out var subtype))
         {
-            if (discriminator.TryGetProperty("type", out var subtype))
+            switch (subtype.GetString())
             {
-                switch (subtype.GetString())
-                {
-                    case "Axe":
-                        return json.GetAxe();
-                    case "Dagger":
-                        return json.GetDagger();
-                    case "Focus":
-                        return json.GetFocus();
-                    case "Greatsword":
-                        return json.GetGreatsword();
-                    case "Hammer":
-                        return json.GetHammer();
-                    case "Harpoon":
-                        return json.GetSpear();
-                    case "LargeBundle":
-                        return json.GetLargeBundle();
-                    case "LongBow":
-                        return json.GetLongbow();
-                    case "Mace":
-                        return json.GetMace();
-                    case "Pistol":
-                        return json.GetPistol();
-                    case "Rifle":
-                        return json.GetRifle();
-                    case "Scepter":
-                        return json.GetScepter();
-                    case "Shield":
-                        return json.GetShield();
-                    case "ShortBow":
-                        return json.GetShortbow();
-                    case "SmallBundle":
-                        return json.GetSmallBundle();
-                    case "Speargun":
-                        return json.GetHarpoonGun();
-                    case "Staff":
-                        return json.GetStaff();
-                    case "Sword":
-                        return json.GetSword();
-                    case "Torch":
-                        return json.GetTorch();
-                    case "Toy":
-                        return json.GetToy();
-                    case "ToyTwoHanded":
-                        return json.GetToyTwoHanded();
-                    case "Trident":
-                        return json.GetTrident();
-                    case "Warhorn":
-                        return json.GetWarhorn();
-                }
+                case "Axe":
+                    return json.GetAxe();
+                case "Dagger":
+                    return json.GetDagger();
+                case "Focus":
+                    return json.GetFocus();
+                case "Greatsword":
+                    return json.GetGreatsword();
+                case "Hammer":
+                    return json.GetHammer();
+                case "Harpoon":
+                    return json.GetSpear();
+                case "LargeBundle":
+                    return json.GetLargeBundle();
+                case "LongBow":
+                    return json.GetLongbow();
+                case "Mace":
+                    return json.GetMace();
+                case "Pistol":
+                    return json.GetPistol();
+                case "Rifle":
+                    return json.GetRifle();
+                case "Scepter":
+                    return json.GetScepter();
+                case "Shield":
+                    return json.GetShield();
+                case "ShortBow":
+                    return json.GetShortbow();
+                case "SmallBundle":
+                    return json.GetSmallBundle();
+                case "Speargun":
+                    return json.GetHarpoonGun();
+                case "Staff":
+                    return json.GetStaff();
+                case "Sword":
+                    return json.GetSword();
+                case "Torch":
+                    return json.GetTorch();
+                case "Toy":
+                    return json.GetToy();
+                case "ToyTwoHanded":
+                    return json.GetToyTwoHanded();
+                case "Trident":
+                    return json.GetTrident();
+                case "Warhorn":
+                    return json.GetWarhorn();
             }
         }
 

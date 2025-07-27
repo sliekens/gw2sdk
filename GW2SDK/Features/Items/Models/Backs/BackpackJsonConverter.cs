@@ -26,12 +26,9 @@ internal sealed class BackpackJsonConverter : JsonConverter<Backpack>
 
     public static Backpack Read(JsonElement json)
     {
-        if (json.TryGetProperty(ItemJsonConverter.DiscriminatorName, out var discriminator))
+        if (json.TryGetProperty(ItemJsonConverter.DiscriminatorName, out var discriminator) && !discriminator.ValueEquals(DiscriminatorValue))
         {
-            if (!discriminator.ValueEquals(DiscriminatorValue))
-            {
-                ThrowHelper.ThrowInvalidDiscriminator(discriminator.GetString());
-            }
+            ThrowHelper.ThrowInvalidDiscriminator(discriminator.GetString());
         }
 
         var iconString = json.GetProperty("icon").GetString();

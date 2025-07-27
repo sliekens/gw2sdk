@@ -7,19 +7,16 @@ internal static class ContainerJson
 {
     public static Container GetContainer(this JsonElement json)
     {
-        if (json.TryGetProperty("details", out var discriminator))
+        if (json.TryGetProperty("details", out var discriminator) && discriminator.TryGetProperty("type", out var subtype))
         {
-            if (discriminator.TryGetProperty("type", out var subtype))
+            switch (subtype.GetString())
             {
-                switch (subtype.GetString())
-                {
-                    case "GiftBox":
-                        return json.GetGiftBox();
-                    case "Immediate":
-                        return json.GetImmediateContainer();
-                    case "OpenUI":
-                        return json.GetBlackLionChest();
-                }
+                case "GiftBox":
+                    return json.GetGiftBox();
+                case "Immediate":
+                    return json.GetImmediateContainer();
+                case "OpenUI":
+                    return json.GetBlackLionChest();
             }
         }
 

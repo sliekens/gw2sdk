@@ -7,45 +7,42 @@ internal static class UnlockerJson
 {
     public static Unlocker GetUnlocker(this JsonElement json)
     {
-        if (json.TryGetProperty("details", out var discriminator))
+        if (json.TryGetProperty("details", out var discriminator) && discriminator.TryGetProperty("unlock_type", out var subtype))
         {
-            if (discriminator.TryGetProperty("unlock_type", out var subtype))
+            switch (subtype.GetString())
             {
-                switch (subtype.GetString())
-                {
-                    case "BagSlot":
-                        return json.GetBagSlotExpansion();
-                    case "BankTab":
-                        return json.GetBankTabExpansion();
-                    case "BuildLibrarySlot":
-                        return json.GetBuildStorageExpansion();
-                    case "BuildLoadoutTab":
-                        return json.GetBuildTemplateExpansion();
-                    case "Champion":
-                        return json.GetMistChampionSkinUnlocker();
-                    case "CollectibleCapacity":
-                        return json.GetStorageExpander();
-                    case "Content":
-                        return json.GetContentUnlocker();
-                    case "CraftingRecipe":
-                        return json.GetRecipeSheet();
-                    case "Dye":
-                        return json.GetDye();
-                    case "GearLoadoutTab":
-                        return json.GetEquipmentTemplateExpansion();
-                    case "GliderSkin":
-                        return json.GetGliderSkinUnlocker();
-                    case "JadeBotSkin":
-                        return json.GetJadeBotSkinUnlocker();
-                    case "Minipet":
-                        return json.GetMiniatureUnlocker();
-                    case "Ms":
-                        return json.GetMountSkinUnlocker();
-                    case "Outfit":
-                        return json.GetOutfitUnlocker();
-                    case "SharedSlot":
-                        return json.GetSharedInventorySlot();
-                }
+                case "BagSlot":
+                    return json.GetBagSlotExpansion();
+                case "BankTab":
+                    return json.GetBankTabExpansion();
+                case "BuildLibrarySlot":
+                    return json.GetBuildStorageExpansion();
+                case "BuildLoadoutTab":
+                    return json.GetBuildTemplateExpansion();
+                case "Champion":
+                    return json.GetMistChampionSkinUnlocker();
+                case "CollectibleCapacity":
+                    return json.GetStorageExpander();
+                case "Content":
+                    return json.GetContentUnlocker();
+                case "CraftingRecipe":
+                    return json.GetRecipeSheet();
+                case "Dye":
+                    return json.GetDye();
+                case "GearLoadoutTab":
+                    return json.GetEquipmentTemplateExpansion();
+                case "GliderSkin":
+                    return json.GetGliderSkinUnlocker();
+                case "JadeBotSkin":
+                    return json.GetJadeBotSkinUnlocker();
+                case "Minipet":
+                    return json.GetMiniatureUnlocker();
+                case "Ms":
+                    return json.GetMountSkinUnlocker();
+                case "Outfit":
+                    return json.GetOutfitUnlocker();
+                case "SharedSlot":
+                    return json.GetSharedInventorySlot();
             }
         }
 
