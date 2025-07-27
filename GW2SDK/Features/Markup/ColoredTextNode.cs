@@ -1,6 +1,7 @@
 ﻿namespace GuildWars2.Markup;
 
 /// <summary>Represents a colored text node in the markup structure.</summary>
+/// <param name="color">The color of the text node.</param>
 [PublicAPI]
 public sealed class ColoredTextNode(string color) : MarkupNode
 {

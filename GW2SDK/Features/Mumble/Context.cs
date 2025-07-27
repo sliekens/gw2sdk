@@ -76,6 +76,7 @@ public readonly record struct Context
         new(serverAddress.sin_addr.s_un.s_addr, serverAddress.sin_port);
 
     /// <summary>The player's current mount.</summary>
+    /// <exception cref="NotSupportedException">Thrown when the current mount is not supported.</exception>
     public MountName? Mount =>
         MountIndex switch
         {

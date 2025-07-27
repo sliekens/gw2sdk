@@ -5,6 +5,7 @@ namespace GuildWars2;
 
 /// <summary>Represents an enum that can be extended with additional values.</summary>
 /// <typeparam name="TEnum">The type of the enum.</typeparam>
+/// <param name="Name">The name of the enum value.</param>
 [PublicAPI]
 [DebuggerDisplay("{ToString(),nq}")]
 [JsonConverter(typeof(ExtensibleEnumJsonConverterFactory))]

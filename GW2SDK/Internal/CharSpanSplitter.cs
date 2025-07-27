@@ -1,6 +1,8 @@
 ﻿namespace GuildWars2;
 
 /// <summary>A utility like String.Split, but for Spans. This should avoid allocations.</summary>
+/// <param name="value">The span to split.</param>
+/// <param name="separator">The character to split by.</param>
 internal ref struct CharSpanSplitter(ReadOnlySpan<char> value, char separator)
 {
     private ReadOnlySpan<char> value = value;

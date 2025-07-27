@@ -6,6 +6,8 @@ namespace GuildWars2.Collections;
 /// Represents a dictionary collection with value semantics, meaning two <see cref="ValueDictionary{TKey, TValue}"/> instances are considered equal if their contents are equal.
 /// Value equality is determined by the keys and values in the dictionary, not by reference.
 /// </summary>
+/// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
+/// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
 /// <remarks>
 /// Adding items to the dictionary changes its hash code. <b>Do not</b> use this type in dictionaries or hash sets.
 /// </remarks>
@@ -149,6 +151,8 @@ public sealed class ValueDictionary<TKey, TValue> : Dictionary<TKey, TValue>,
     /// <summary>
     /// Determines whether two <see cref="ValueDictionary{TKey, TValue}"/> instances are equal by value.
     /// </summary>
+    /// <param name="left">The first <see cref="ValueDictionary{TKey, TValue}"/> to compare.</param>
+    /// <param name="right">The second <see cref="ValueDictionary{TKey, TValue}"/> to compare.</param>
     public static bool operator ==(
         ValueDictionary<TKey, TValue>? left,
         ValueDictionary<TKey, TValue>? right
@@ -160,6 +164,8 @@ public sealed class ValueDictionary<TKey, TValue> : Dictionary<TKey, TValue>,
     /// <summary>
     /// Determines whether two <see cref="ValueDictionary{TKey, TValue}"/> instances are not equal by value.
     /// </summary>
+    /// <param name="left">The first <see cref="ValueDictionary{TKey, TValue}"/> to compare.</param>
+    /// <param name="right">The second <see cref="ValueDictionary{TKey, TValue}"/> to compare.</param>
     public static bool operator !=(
         ValueDictionary<TKey, TValue>? left,
         ValueDictionary<TKey, TValue>? right

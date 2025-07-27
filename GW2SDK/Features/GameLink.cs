@@ -253,6 +253,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
     /// <param name="refreshInterval">The interval at which to poll for changes to the shared memory.</param>
     /// <param name="name">The name of the memory-mapped file.</param>
     /// <returns>A new instance of the <see cref="GameLink" /> class.</returns>
+    /// <exception cref="PlatformNotSupportedException">Thrown if the current platform is not Windows.</exception>
     [SupportedOSPlatform("windows")]
     public static GameLink Open(TimeSpan refreshInterval = default, string name = "MumbleLink")
     {
@@ -266,6 +267,8 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
     }
 
     /// <summary>Represents a subscription to receive realtime game state updates.</summary>
+    /// <param name="producer">The <see cref="GameLink"/> instance producing game state updates.</param>
+    /// <param name="observer">The observer subscribing to game state updates.</param>
     private class Subscription(GameLink producer, IObserver<GameTick> observer) : IDisposable
     {
         /// <summary>Disposes the subscription and removes the observer from the subscribers list.</summary>

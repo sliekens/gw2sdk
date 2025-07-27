@@ -8,6 +8,7 @@ public sealed class MarkupLexer
         new(StringComparer.OrdinalIgnoreCase) { "br" };
 
     /// <summary>Tokenizes the input string into a sequence of tokens.</summary>
+    /// <param name="input">The markup input string to tokenize.</param>
     /// <returns>An <see cref="IEnumerable{Token}" /> representing the sequence of tokens parsed from the input string.</returns>
     public IEnumerable<MarkupToken> Tokenize(string input)
     {

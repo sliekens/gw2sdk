@@ -19,6 +19,7 @@ internal static class JsonElementExtensions
     /// <summary>Returns a string, or throws if the element is null or not a string.</summary>
     /// <param name="json">A String value.</param>
     /// <returns>The value of the JSON element as a non-null string (can be empty).</returns>
+    /// <exception cref="InvalidOperationException">Thrown if the element is null or not a string.</exception>
     internal static string GetStringRequired(this JsonElement json)
     {
         return json.GetString()

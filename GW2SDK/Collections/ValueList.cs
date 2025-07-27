@@ -6,6 +6,7 @@ namespace GuildWars2.Collections;
 /// Represents a list collection with value semantics, meaning two <see cref="ValueList{T}"/> instances are considered equal if their contents are equal.
 /// Value equality is determined by the sequence and values of the items in the collection, not by reference.
 /// </summary>
+/// <typeparam name="T">The type of elements in the list.</typeparam>
 /// <remarks>
 /// Adding items to the list changes its hash code. <b>Do not</b> use this type in dictionaries or hash sets.
 /// </remarks>
@@ -83,6 +84,9 @@ public sealed class ValueList<T> : List<T>, IEquatable<ValueList<T>>
     /// <summary>
     /// Determines whether two <see cref="ValueList{T}"/> instances are equal by value.
     /// </summary>
+    /// <param name="left">The first <see cref="ValueList{T}"/> to compare.</param>
+    /// <param name="right">The second <see cref="ValueList{T}"/> to compare.</param>
+    /// <returns><c>true</c> if the lists are equal by value; otherwise, <c>false</c>.</returns>
     public static bool operator ==(ValueList<T>? left, ValueList<T>? right)
     {
         return Equals(left, right);
@@ -91,6 +95,9 @@ public sealed class ValueList<T> : List<T>, IEquatable<ValueList<T>>
     /// <summary>
     /// Determines whether two <see cref="ValueList{T}"/> instances are not equal by value.
     /// </summary>
+    /// <param name="left">The first <see cref="ValueList{T}"/> to compare.</param>
+    /// <param name="right">The second <see cref="ValueList{T}"/> to compare.</param>
+    /// <returns><c>true</c> if the lists are not equal by value; otherwise, <c>false</c>.</returns>
     public static bool operator !=(ValueList<T>? left, ValueList<T>? right)
     {
         return !Equals(left, right);

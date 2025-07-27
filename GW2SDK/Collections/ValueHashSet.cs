@@ -6,6 +6,7 @@ namespace GuildWars2.Collections;
 /// Represents a set collection with value semantics, meaning two <see cref="ValueHashSet{T}"/> instances are considered equal if their contents are equal.
 /// Value equality is determined by the set of items in the collection, not by reference.
 /// </summary>
+/// <typeparam name="T">The type of elements in the set.</typeparam>
 /// <remarks>
 /// Adding items to the set changes its hash code. <b>Do not</b> use this type in dictionaries or hash sets.
 /// </remarks>
@@ -80,6 +81,9 @@ public sealed class ValueHashSet<T> : HashSet<T>, IEquatable<ValueHashSet<T>>
     /// <summary>
     /// Determines whether two <see cref="ValueHashSet{T}"/> instances are equal by value.
     /// </summary>
+    /// <param name="left">The first <see cref="ValueHashSet{T}"/> to compare.</param>
+    /// <param name="right">The second <see cref="ValueHashSet{T}"/> to compare.</param>
+    /// <returns><c>true</c> if the sets are equal by value; otherwise, <c>false</c>.</returns>
     public static bool operator ==(ValueHashSet<T>? left, ValueHashSet<T>? right)
     {
         return Equals(left, right);
@@ -88,6 +92,9 @@ public sealed class ValueHashSet<T> : HashSet<T>, IEquatable<ValueHashSet<T>>
     /// <summary>
     /// Determines whether two <see cref="ValueHashSet{T}"/> instances are not equal by value.
     /// </summary>
+    /// <param name="left">The first <see cref="ValueHashSet{T}"/> to compare.</param>
+    /// <param name="right">The second <see cref="ValueHashSet{T}"/> to compare.</param>
+    /// <returns><c>true</c> if the sets are not equal by value; otherwise, <c>false</c>.</returns>
     public static bool operator !=(ValueHashSet<T>? left, ValueHashSet<T>? right)
     {
         return !Equals(left, right);
