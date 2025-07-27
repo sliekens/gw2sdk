@@ -47,8 +47,8 @@ public sealed class QueryBuilder : IEnumerable
                 var position = 0;
                 foreach (var (key, value) in state)
                 {
-                    var delimiter = position == 0 ? '?' : '&';
-                    buffer[position++] = delimiter;
+                    buffer[position] = position == 0 ? '?' : '&';
+                    position++;
 
                     key.CopyTo(buffer[position..]);
                     position += key.Length;
@@ -65,8 +65,8 @@ public sealed class QueryBuilder : IEnumerable
         var position = 0;
         foreach (var (key, value) in arguments)
         {
-            var delimiter = position == 0 ? '?' : '&';
-            buffer[position++] = delimiter;
+            buffer[position] = position == 0 ? '?' : '&';
+            position++;
 
             key.AsSpan().CopyTo(buffer[position..]);
             position += key.Length;
