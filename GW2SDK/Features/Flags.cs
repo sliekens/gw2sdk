@@ -70,8 +70,7 @@ public abstract record Flags
             ", ",
             GetType()
                 .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                .Where(property => property.PropertyType == typeof(bool))
-                .Where(property => (bool?)property.GetValue(this) == true)
+                .Where(property => property.PropertyType == typeof(bool) && (bool?)property.GetValue(this) == true)
                 .Select(property => property.Name)
                 .Concat(Other)
                 .ToList()
