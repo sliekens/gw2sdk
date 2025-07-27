@@ -1,4 +1,4 @@
-namespace GuildWars2.Markup;
+﻿namespace GuildWars2.Markup;
 
 /// <summary>Provides functionality to convert markup strings to other formats.</summary>
 [PublicAPI]

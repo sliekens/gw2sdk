@@ -1,4 +1,4 @@
-using GuildWars2.Hero;
+﻿using GuildWars2.Hero;
 
 namespace GuildWars2.Items;
 

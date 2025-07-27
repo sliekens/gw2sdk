@@ -84,9 +84,9 @@ internal static class SpawnJson
             UpgradeId = upgradeId.Map(static value => value.GetInt32()),
             Coordinates = coordinates.Map(static value => value.GetCoordinate3()),
             LabelCoordinates = labelCoordinates.Map(static value => value.GetCoordinateF()),
-            #pragma warning disable CS0618 // Suppress obsolete warning
+#pragma warning disable CS0618 // Suppress obsolete warning
             MarkerIconHref = marker.Map(static value => value.GetString()) ?? "",
-            #pragma warning restore CS0618
+#pragma warning restore CS0618
             MarkerIconUrl = marker.Map(static value => value.GetString() is { } url ? new Uri(url) : null),
             ChatLink = chatLink.Map(static value => value.GetStringRequired())
         };

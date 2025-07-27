@@ -1,7 +1,7 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using GuildWars2.Collections;
 using GuildWars2.Hero;
-using System.Collections.Generic;
 
 namespace GuildWars2.Items;
 
@@ -30,7 +30,7 @@ public record UpgradeComponent : Item, ICombatEquipment, IInfusable
     /// items with selectable stats.</summary>
     public required int? AttributeCombinationId { get; init; }
 
-    IReadOnlyList<int> ICombatEquipment.StatChoices { get; } = (ValueList<int>) [];
+    IReadOnlyList<int> ICombatEquipment.StatChoices { get; } = (ValueList<int>)[];
 
     /// <summary>The effective stats of the item.</summary>
     public required IDictionary<Extensible<AttributeName>, int> Attributes { get; init; }

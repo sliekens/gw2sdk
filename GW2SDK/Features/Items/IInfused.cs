@@ -1,4 +1,4 @@
-namespace GuildWars2.Items;
+﻿namespace GuildWars2.Items;
 
 /// <summary>The interface for items with an extra infusion slot.</summary>
 [PublicAPI]

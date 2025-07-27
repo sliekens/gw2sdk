@@ -46,7 +46,7 @@ public record Item
     /// <summary>The URL of the item icon.</summary>
     [Obsolete("Use IconUrl instead.")]
     public required string? IconHref { get; init; }
-    
+
     /// <summary>The URL of the item icon.</summary>
     public required Uri? IconUrl { get; init; }
 

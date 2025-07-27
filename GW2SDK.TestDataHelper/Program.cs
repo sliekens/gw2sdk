@@ -22,12 +22,12 @@ var httpClientBuilder = appBuilder.Services.AddHttpClient<Gw2Client>(static http
         }
     )
     .ConfigurePrimaryHttpMessageHandler(() => new SocketsHttpHandler
-        {
-            // Creating a new connection shouldn't take more than 10 seconds
-            ConnectTimeout = TimeSpan.FromSeconds(10),
-            PooledConnectionLifetime = TimeSpan.FromMinutes(15),
-            MaxConnectionsPerServer = 1000
-        }
+    {
+        // Creating a new connection shouldn't take more than 10 seconds
+        ConnectTimeout = TimeSpan.FromSeconds(10),
+        PooledConnectionLifetime = TimeSpan.FromMinutes(15),
+        MaxConnectionsPerServer = 1000
+    }
     );
 
 httpClientBuilder.AddTypedClient<JsonAchievementService>()

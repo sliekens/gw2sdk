@@ -135,9 +135,9 @@ internal static class ItemJson
             Flags = flags.Map(static values => values.GetItemFlags()),
             Restrictions = restrictions.Map(static value => value.GetItemRestriction()),
             ChatLink = chatLink.Map(static value => value.GetStringRequired()),
-            #pragma warning disable CS0618 // Suppress obsolete warning
+#pragma warning disable CS0618 // Suppress obsolete warning
             IconHref = iconString,
-            #pragma warning restore CS0618
+#pragma warning restore CS0618
             IconUrl = !string.IsNullOrEmpty(iconString) ? new Uri(iconString) : null
         };
     }

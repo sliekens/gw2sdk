@@ -50,7 +50,7 @@ public record Armor : Item, ICombatEquipment, IUpgradable
         this switch
         {
             _ when Flags.NotUpgradeable => [],
-            _ => (ValueList<int?>) [SuffixItemId]
+            _ => (ValueList<int?>)[SuffixItemId]
         };
 
     /// <summary>The number of upgrade slots available on the armor item.</summary>

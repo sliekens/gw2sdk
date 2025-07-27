@@ -64,7 +64,8 @@ internal sealed class WarhornJsonConverter : JsonConverter<Warhorn>
 #pragma warning disable CS0618 // Suppress obsolete warning
             IconHref = iconString,
 #pragma warning restore CS0618
-            IconUrl = !string.IsNullOrEmpty(iconString) ? new Uri(iconString) : null,            DefaultSkinId = json.GetProperty("default_skin_id").GetInt32(),
+            IconUrl = !string.IsNullOrEmpty(iconString) ? new Uri(iconString) : null,
+            DefaultSkinId = json.GetProperty("default_skin_id").GetInt32(),
             DamageType = json.GetProperty("damage_type").GetEnum<DamageType>(),
             MinPower = json.GetProperty("min_power").GetInt32(),
             MaxPower = json.GetProperty("max_power").GetInt32(),

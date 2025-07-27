@@ -29,11 +29,11 @@ internal static class EmblemBackgroundJson
         return new EmblemBackground
         {
             Id = id.Map(static value => value.GetInt32()),
-            #pragma warning disable CS0618 // Suppress obsolete warning
+#pragma warning disable CS0618 // Suppress obsolete warning
             Layers = layers.Map(static values =>
                 values.GetList(static value => value.GetStringRequired())
             ),
-            #pragma warning restore CS0618
+#pragma warning restore CS0618
             LayerUrls = layers.Map(static values =>
                 values.GetList(static value => new Uri(value.GetStringRequired()))
             )

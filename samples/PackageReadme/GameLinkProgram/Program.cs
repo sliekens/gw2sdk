@@ -46,39 +46,25 @@ internal class Program
                 {
                     Console.WriteLine($"{player.Name} is ready to go!");
                     Console.WriteLine(
-                        $"Race              : {
-                            player.Race
-                        }"
+                        $"Race              : {player.Race}"
                     );
                     Console.WriteLine(
-                        $"Profession        : {
-                            player.Profession
-                        }"
+                        $"Profession        : {player.Profession}"
                     );
                     Console.WriteLine(
-                        $"Specialization ID : {
-                            player.SpecializationId
-                        }"
+                        $"Specialization ID : {player.SpecializationId}"
                     );
                     Console.WriteLine(
-                        $"Squad leader      : {
-                            player.Commander
-                        }"
+                        $"Squad leader      : {player.Commander}"
                     );
                     Console.WriteLine(
-                        $"In combat         : {
-                            gameTick.Context.UiState.HasFlag(UiState.IsInCombat)
-                        }"
+                        $"In combat         : {gameTick.Context.UiState.HasFlag(UiState.IsInCombat)}"
                     );
                     Console.WriteLine(
-                        $"Current mount     : {
-                            gameTick.Context.Mount
-                        }"
+                        $"Current mount     : {gameTick.Context.Mount}"
                     );
                     Console.WriteLine(
-                        $"Tick              : {
-                            gameTick.UiTick
-                        }"
+                        $"Tick              : {gameTick.UiTick}"
                     );
                 }
 

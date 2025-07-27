@@ -107,9 +107,9 @@ internal static class BundleSkillJson
         var professionRestrictions = professions.Map(static values =>
             values.GetList(static value => value.GetEnum<ProfessionName>())
         );
-        
+
         var iconString = icon.Map(static value => value.GetString()) ?? "";
-        
+
         return new BundleSkill
         {
             Id = id.Map(static value => value.GetInt32()),

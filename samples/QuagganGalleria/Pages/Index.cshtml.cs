@@ -25,11 +25,11 @@ public class IndexModel(ILogger<IndexModel> logger, QuaggansClient quaggans) : P
         var (found, context) = await quaggans.GetQuaggans();
         Refreshed = context.Date;
         Quaggans = found.Select((quaggan, index) => new QuagganViewModel
-            {
-                Active = index == 0,
-                Id = quaggan.Id,
-                ImageUrl = quaggan.ImageUrl
-            }
+        {
+            Active = index == 0,
+            Id = quaggan.Id,
+            ImageUrl = quaggan.ImageUrl
+        }
         );
     }
 }

@@ -1,4 +1,4 @@
-namespace GuildWars2.Guilds.Logs;
+﻿namespace GuildWars2.Guilds.Logs;
 
 /// <summary>A log entry about a started or ended guild mission.</summary>
 [PublicAPI]
