@@ -260,5 +260,6 @@ resharper_suggest_var_or_type_built_in_types_highlighting = hint
 resharper_suggest_var_or_type_elsewhere_highlighting = hint
 resharper_suggest_var_or_type_simple_types_highlighting = hint
 
-[*.{json,yml}]
-indent_size = 2
+# Do not pass non-read-only struct by read-only reference
+# Disabled: raises false positives in some cases like CancellationToken and TimeSpan
+dotnet_diagnostic.rcs1242.severity = none
