@@ -4,6 +4,15 @@
 [PublicAPI]
 public sealed class LinkValue
 {
+    /// <summary>
+    /// Workaround for Mono's UriKind.RelativeOrAbsolute behaving differently.
+    /// https://www.mono-project.com/docs/faq/known-issues/urikind-relativeorabsolute/
+    /// </summary>
+    private static readonly UriKind DotNetRelativeOrAbsolute = Type.GetType("Mono.Runtime") is null
+        ? UriKind.RelativeOrAbsolute
+        : (UriKind)300;
+
+
     /// <summary>Creates an instance of <see cref="LinkValue" />.</summary>
     /// <param name="target">The link target.</param>
     /// <param name="relationType">The type of relationship the link represents.</param>
@@ -26,7 +35,7 @@ public sealed class LinkValue
 #pragma warning disable CS0618 // Suppress obsolete warning
         Target = target;
 #pragma warning restore CS0618
-        TargetUrl = new Uri(target, UriKind.RelativeOrAbsolute);
+        TargetUrl = new Uri(target, DotNetRelativeOrAbsolute);
         RelationType = relationType;
     }
 
