@@ -51,7 +51,21 @@ internal sealed class AchievementBitJsonConverter : JsonConverter<AchievementBit
             }
         }
 
-        return new AchievementBit();
+        JsonElement text = default;
+        foreach (var member in json.EnumerateObject())
+        {
+            if (member.NameEquals("text"))
+            {
+                text = member.Value;
+            }
+        }
+
+        return new AchievementBit
+        {
+            Text = text.ValueKind == JsonValueKind.String
+                ? text.GetString() ?? ""
+                : ""
+        };
     }
 
     public static void Write(Utf8JsonWriter writer, AchievementBit value)
@@ -73,8 +87,14 @@ internal sealed class AchievementBitJsonConverter : JsonConverter<AchievementBit
             default:
                 writer.WriteStartObject();
                 writer.WriteString(DiscriminatorName, DiscriminatorValue);
+                WriteCommonProperties(writer, value);
                 writer.WriteEndObject();
                 break;
         }
+    }
+
+    public static void WriteCommonProperties(Utf8JsonWriter writer, AchievementBit value)
+    {
+        writer.WriteString("text", value.Text);
     }
 }

@@ -8,6 +8,7 @@ internal static class AchievementSkinBitJson
     public static AchievementSkinBit GetAchievementSkinBit(this in JsonElement json)
     {
         RequiredMember id = "id";
+        OptionalMember text = "text";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
@@ -21,12 +22,20 @@ internal static class AchievementSkinBitJson
             {
                 id = member;
             }
+            else if (text.Match(member))
+            {
+                text = member;
+            }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 ThrowHelper.ThrowUnexpectedMember(member.Name);
             }
         }
 
-        return new AchievementSkinBit { Id = id.Map(static (in JsonElement value) => value.GetInt32()) };
+        return new AchievementSkinBit
+        {
+            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Text = text.Map(static (in JsonElement value) => value.GetString()) ?? ""
+        };
     }
 }

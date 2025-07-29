@@ -29,14 +29,28 @@ internal sealed class AchievementTextBitJsonConverter : JsonConverter<Achievemen
 
     public static AchievementTextBit Read(in JsonElement json)
     {
-        return new AchievementTextBit { Text = json.GetProperty("text").GetStringRequired() };
+        JsonElement text = default;
+        foreach (var member in json.EnumerateObject())
+        {
+            if (member.NameEquals("text"))
+            {
+                text = member.Value;
+            }
+        }
+
+        return new AchievementTextBit
+        {
+            Text = text.ValueKind == JsonValueKind.String
+                ? text.GetString() ?? ""
+                : ""
+        };
     }
 
     public static void Write(Utf8JsonWriter writer, AchievementTextBit value)
     {
         writer.WriteStartObject();
         writer.WriteString(AchievementBitJsonConverter.DiscriminatorName, DiscriminatorValue);
-        writer.WriteString("text", value.Text);
+        AchievementBitJsonConverter.WriteCommonProperties(writer, value);
         writer.WriteEndObject();
     }
 }

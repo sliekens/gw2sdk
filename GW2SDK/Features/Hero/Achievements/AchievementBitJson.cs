@@ -25,15 +25,24 @@ internal static class AchievementBitJson
             }
         }
 
+        OptionalMember text = "text";
+
         // ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
         foreach (var member in json.EnumerateObject())
         {
-            if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
+            if (member.NameEquals("text"))
+            {
+                text = member;
+            }
+            else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 ThrowHelper.ThrowUnexpectedMember(member.Name);
             }
         }
 
-        return new AchievementBit();
+        return new AchievementBit
+        {
+            Text = text.Map(static (in JsonElement value) => value.GetString()) ?? ""
+        };
     }
 }

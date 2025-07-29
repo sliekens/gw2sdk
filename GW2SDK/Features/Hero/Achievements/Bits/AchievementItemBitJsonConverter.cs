@@ -28,13 +28,33 @@ internal sealed class AchievementItemBitJsonConverter : JsonConverter<Achievemen
 
     public static AchievementItemBit Read(in JsonElement json)
     {
-        return new AchievementItemBit { Id = json.GetProperty("id").GetInt32() };
+        JsonElement id = default, text = default;
+        foreach (var member in json.EnumerateObject())
+        {
+            if (member.NameEquals("id"))
+            {
+                id = member.Value;
+            }
+            else if (member.NameEquals("text"))
+            {
+                text = member.Value;
+            }
+        }
+
+        return new AchievementItemBit
+        {
+            Id = id.GetInt32(),
+            Text = text.ValueKind == JsonValueKind.String
+                ? text.GetString() ?? ""
+                : ""
+        };
     }
 
     public static void Write(Utf8JsonWriter writer, AchievementItemBit value)
     {
         writer.WriteStartObject();
         writer.WriteString(AchievementBitJsonConverter.DiscriminatorName, DiscriminatorValue);
+        AchievementBitJsonConverter.WriteCommonProperties(writer, value);
         writer.WriteNumber("id", value.Id);
         writer.WriteEndObject();
     }
