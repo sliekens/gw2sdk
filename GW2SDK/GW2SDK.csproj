@@ -51,14 +51,14 @@
   <!-- MinVer -->
   <PropertyGroup>
     <MinVerTagPrefix>v</MinVerTagPrefix>
-    <MinVerMinimumMajorMinor>2.4</MinVerMinimumMajorMinor>
+    <MinVerMinimumMajorMinor>2.6</MinVerMinimumMajorMinor>
     <MinVerDefaultPreReleaseIdentifiers>preview.0</MinVerDefaultPreReleaseIdentifiers>
   </PropertyGroup>
 
   <!-- Package validation -->
   <PropertyGroup>
     <EnablePackageValidation>true</EnablePackageValidation>
-    <PackageValidationBaselineVersion>2.4.0</PackageValidationBaselineVersion>
+    <PackageValidationBaselineVersion>2.5.2</PackageValidationBaselineVersion>
   </PropertyGroup>
 
   <ItemGroup>
