@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 using GuildWars2.Worlds;
@@ -81,14 +82,14 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetMap(static (in JsonElement value) => value.GetStringRequired())
+            ValueHashSet<WvwGuild> wvwGuilds = [.. response.Json.RootElement.GetMap(static (in JsonElement value) => value.GetStringRequired())
                 .Select(map => new WvwGuild
                 {
                     Name = map.Key,
                     TeamId = map.Value
-                }
-                );
-            return ([.. value], response.Context);
+                })];
+
+            return (wvwGuilds, response.Context);
         }
     }
 
