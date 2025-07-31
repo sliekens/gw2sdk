@@ -42,7 +42,7 @@ internal sealed class AchievementRefJsonConverter : JsonConverter<AchievementRef
         writer.WritePropertyName("flags");
         AchievementFlagsJsonConverter.Write(writer, value.Flags);
         writer.WritePropertyName("level");
-        if (value.Level != null)
+        if (value.Level is not null)
         {
             LevelRequirementJsonConverter.Write(writer, value.Level);
         }

@@ -103,7 +103,7 @@ internal sealed class AchievementJsonConverter : JsonConverter<Achievement>
 
         writer.WriteEndArray();
         writer.WritePropertyName("rewards");
-        if (value.Rewards != null)
+        if (value.Rewards is not null)
         {
             writer.WriteStartArray();
             foreach (var reward in value.Rewards)
@@ -119,7 +119,7 @@ internal sealed class AchievementJsonConverter : JsonConverter<Achievement>
         }
 
         writer.WritePropertyName("bits");
-        if (value.Bits != null)
+        if (value.Bits is not null)
         {
             writer.WriteStartArray();
             foreach (var bit in value.Bits)

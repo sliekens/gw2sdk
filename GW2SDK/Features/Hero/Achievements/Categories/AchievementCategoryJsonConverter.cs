@@ -62,7 +62,7 @@ internal sealed class AchievementCategoryJsonConverter : JsonConverter<Achieveme
 
         writer.WriteEndArray();
         writer.WritePropertyName("tomorrow");
-        if (value.Tomorrow != null)
+        if (value.Tomorrow is not null)
         {
             writer.WriteStartArray();
             foreach (var achievement in value.Tomorrow)
