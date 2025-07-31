@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using GuildWars2.Collections;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Crafting.Recipes;
@@ -21,6 +22,6 @@ internal static class LearnedRecipesJson
             }
         }
 
-        return [.. recipes.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32()))];
+        return recipes.Map(static (in JsonElement values) => values.GetSet(static (in JsonElement value) => value.GetInt32()));
     }
 }
