@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using GuildWars2.Hero.Races;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.StoryJournal.Stories;
@@ -77,20 +78,11 @@ internal static class StoryJson
             Races =
                 races.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetEnum<RaceName>())
                 )
-                ?? GetValues<RaceName>(),
+                ?? Race.AllRaces,
             Order = order.Map(static (in JsonElement value) => value.GetInt32()),
             Chapters =
                 chapters.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetChapter())),
             Flags = flags.Map(static (in JsonElement values) => values.GetStoryFlags()) ?? StoryFlags.None
         };
-
-        static List<Extensible<TEnum>> GetValues<TEnum>() where TEnum : struct, Enum
-        {
-#if NET
-            return [.. Enum.GetValues<TEnum>()];
-#else
-            return [.. Enum.GetValues(typeof(TEnum)).Cast<TEnum>()];
-#endif
-        }
     }
 }

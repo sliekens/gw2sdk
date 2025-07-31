@@ -1,4 +1,6 @@
 ﻿using System.Text.Json;
+using GuildWars2.Hero.Races;
+using GuildWars2.Hero.Training;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.StoryJournal.BackgroundStories;
@@ -64,20 +66,11 @@ internal static class BackgroundStoryQuestionJson
                 professions.Map(static (in JsonElement values) =>
                     values.GetList(static (in JsonElement value) => value.GetEnum<ProfessionName>())
                 )
-                ?? GetValues<ProfessionName>(),
+                ?? Profession.AllProfessions,
             Races = races.Map(static (in JsonElement values) =>
                     values.GetList(static (in JsonElement value) => value.GetEnum<RaceName>())
                 )
-                ?? GetValues<RaceName>()
+                ?? Race.AllRaces
         };
-
-        static List<Extensible<TEnum>> GetValues<TEnum>() where TEnum : struct, Enum
-        {
-#if NET
-            return [.. Enum.GetValues<TEnum>()];
-#else
-            return [.. Enum.GetValues(typeof(TEnum)).Cast<TEnum>()];
-#endif
-        }
     }
 }
