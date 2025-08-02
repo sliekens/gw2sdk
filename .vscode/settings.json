@@ -2,5 +2,7 @@
     "dotnet.defaultSolution": "gw2sdk.sln",
     "search.exclude": {
         "packages.lock.json": true
-    }
+    },
+    "dotnet.backgroundAnalysis.analyzerDiagnosticsScope": "fullSolution",
+    "dotnet.backgroundAnalysis.compilerDiagnosticsScope": "fullSolution"
 }
