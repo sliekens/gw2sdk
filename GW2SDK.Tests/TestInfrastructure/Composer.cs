@@ -8,14 +8,14 @@ namespace GuildWars2.Tests.TestInfrastructure;
 
 public static class Composer
 {
-    private static readonly HttpMessageHandler PrimaryHttpHandler;
+    private static readonly HttpMessageHandler PrimaryHttpHandler = CreatePrimaryHttpHandler();
 
-    private static readonly HttpMessageHandler ResilientHttpHandler;
+    private static readonly HttpMessageHandler ResilientHttpHandler = CreateResilientHttpHandler();
 
-    static Composer()
+    private static HttpMessageHandler CreatePrimaryHttpHandler()
     {
 #if NET
-        PrimaryHttpHandler = new SocketsHttpHandler
+        return new SocketsHttpHandler
         {
             // Limit the number of open connections
             //   because we have many tests trying to use the API concurrently,
@@ -28,9 +28,12 @@ public static class Composer
             PooledConnectionLifetime = TimeSpan.FromMinutes(15)
         };
 #else
-        PrimaryHttpHandler = new HttpClientHandler { MaxConnectionsPerServer = 20 };
+        return new HttpClientHandler { MaxConnectionsPerServer = 20 };
 #endif
+    }
 
+    private static HttpMessageHandler CreateResilientHttpHandler()
+    {
         var resiliencePipeline = new ResiliencePipelineBuilder<HttpResponseMessage>()
             .AddTimeout(Gw2Resiliency.TotalTimeoutStrategy)
             .AddRetry(Gw2Resiliency.RetryStrategy)
@@ -40,7 +43,7 @@ public static class Composer
             .Build();
 
 #pragma warning disable EXTEXP0001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
-        ResilientHttpHandler = new ResilienceHandler(resiliencePipeline)
+        return new ResilienceHandler(resiliencePipeline)
         {
             InnerHandler = new LoggingHandler
             {
