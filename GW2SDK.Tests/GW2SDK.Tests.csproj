@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFrameworks>net9.0;net481</TargetFrameworks>
     <UserSecretsId>a8ab34fc-ca23-453c-b913-59b025c2b48e</UserSecretsId>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
     <RootNamespace>GuildWars2.Tests</RootNamespace>
     <IsPackable>false</IsPackable>
