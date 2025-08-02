@@ -14,6 +14,8 @@ public class BulkRequest(string requestUri)
         CancellationToken cancellationToken
     )
     {
+        ArgumentNullException.ThrowIfNull(httpClient);
+
         QueryBuilder search = new()
         {
             { "ids", string.Join(",", Ids) },

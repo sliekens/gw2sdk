@@ -43,6 +43,9 @@ public static class BulkQuery
         [EnumeratorCancellation] CancellationToken cancellationToken = default
     )
     {
+        ThrowHelper.ThrowIfNull(keys);
+        ThrowHelper.ThrowIfNull(bulkRequest);
+
         var keysList = keys.ToList();
         if (keysList.Count == 0)
         {

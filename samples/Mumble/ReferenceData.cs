@@ -27,21 +27,25 @@ public sealed class ReferenceData
 
     public bool TryAddMap(MapSummary map)
     {
+        ArgumentNullException.ThrowIfNull(map);
         return maps.TryAdd(map.Id, map);
     }
 
     public bool TryAddSpecialization(Specialization specialization)
     {
+        ArgumentNullException.ThrowIfNull(specialization);
         return specializations.TryAdd(specialization.Id, specialization);
     }
 
     public bool TryAddColor(DyeColor color)
     {
+        ArgumentNullException.ThrowIfNull(color);
         return colors.TryAdd(color.Id, color);
     }
 
     public bool TryAddWorld(World world)
     {
+        ArgumentNullException.ThrowIfNull(world);
         return worlds.TryAdd(world.Id, world);
     }
 }

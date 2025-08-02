@@ -19,6 +19,7 @@ public static class Extensions
             Func<TValue, TKey> keySelector
         ) where TKey : notnull
     {
+        ThrowHelper.ThrowIfNull(instance);
         var (value, context) = await instance.ConfigureAwait(false);
         return (value.ToDictionary(keySelector), context);
     }
@@ -29,6 +30,7 @@ public static class Extensions
     /// <returns>A new task that returns only the value.</returns>
     public static async Task<T> ValueOnly<T>(this Task<(T, MessageContext)> task)
     {
+        ThrowHelper.ThrowIfNull(task);
         var (value, _) = await task.ConfigureAwait(false);
         return value;
     }

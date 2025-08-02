@@ -22,6 +22,8 @@ public class RecipesTable : IRenderable
 
     public void AddRow(Item item)
     {
+        ArgumentNullException.ThrowIfNull(item);
+
         var lexer = new MarkupLexer();
         var parser = new MarkupParser();
         var converter = new SpectreMarkupConverter();

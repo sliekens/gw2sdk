@@ -56,6 +56,8 @@ public sealed record BuildTemplateLink : Link
         CancellationToken cancellationToken = default
     )
     {
+        ThrowHelper.ThrowIfNull(gw2Client);
+
         var profession = await gw2Client.Hero.Training.GetProfessionByName(
                 Profession,
                 language,

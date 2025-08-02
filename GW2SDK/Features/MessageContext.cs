@@ -10,6 +10,8 @@ public sealed record MessageContext
     /// <param name="response">The HTTP response message.</param>
     public MessageContext(HttpResponseMessage response)
     {
+        ThrowHelper.ThrowIfNull(response);
+
         Date = response.Headers.Date ?? default;
         Expires = response.Content.Headers.Expires;
         LastModified = response.Content.Headers.LastModified;

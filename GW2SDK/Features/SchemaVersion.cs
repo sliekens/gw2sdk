@@ -125,6 +125,7 @@ public sealed class SchemaVersion
     /// <returns>The schema version string.</returns>
     public static implicit operator string(SchemaVersion instance)
     {
+        ThrowHelper.ThrowIfNull(instance);
         return instance.Version;
     }
 }

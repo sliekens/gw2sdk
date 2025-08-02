@@ -11,6 +11,8 @@ public sealed class MarkupTextConverter
     /// <returns>A string representation of the nodes within the root node.</returns>
     public string Convert(RootNode root)
     {
+        ThrowHelper.ThrowIfNull(root);
+
         StringBuilder builder = new();
         foreach (var node in root.Children)
         {

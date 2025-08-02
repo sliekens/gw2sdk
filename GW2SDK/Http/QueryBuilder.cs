@@ -23,6 +23,9 @@ public sealed class QueryBuilder : IEnumerable
     /// <param name="value">The value of the argument.</param>
     public void Add(string key, string value)
     {
+        ThrowHelper.ThrowIfNull(key);
+        ThrowHelper.ThrowIfNull(value);
+
         arguments.Add(new KeyValuePair<string, string>(key, value));
 
         // Length of '?key=value' (or '&key=value')

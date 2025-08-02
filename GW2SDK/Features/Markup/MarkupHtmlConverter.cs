@@ -21,6 +21,8 @@ public sealed class MarkupHtmlConverter
     /// <returns>A string containing the HTML representation of the markup syntax tree.</returns>
     public string Convert(RootNode root, IReadOnlyDictionary<string, string>? colorMap)
     {
+        ThrowHelper.ThrowIfNull(root);
+
         if (colorMap is null)
         {
             colorMap = MarkupColorName.DefaultColorMap;

@@ -20,6 +20,8 @@ public class SpectreMarkupConverter
 
     public string Convert(RootNode root)
     {
+        ArgumentNullException.ThrowIfNull(root);
+
         var builder = new StringBuilder();
         foreach (var node in root.Children)
         {
