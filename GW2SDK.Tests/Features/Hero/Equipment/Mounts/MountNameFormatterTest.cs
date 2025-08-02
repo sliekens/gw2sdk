@@ -5,7 +5,7 @@ namespace GuildWars2.Tests.Features.Hero.Equipment.Mounts;
 public class MountNameFormatterTest
 {
     [Fact]
-    public static void Mount_names_can_be_formatted_as_text()
+    public void Mount_names_can_be_formatted_as_text()
     {
 #if NET
         var mounts = Enum.GetValues<MountName>();
