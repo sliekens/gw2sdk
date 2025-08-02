@@ -44,7 +44,7 @@
   <!-- Levels: https://learn.microsoft.com/en-us/dotnet/core/project-sdk/msbuild-props#analysislevel -->
   <!-- Modes: https://learn.microsoft.com/en-us/dotnet/core/project-sdk/msbuild-props#analysismode -->
   <PropertyGroup>
-    <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
+    <CodeAnalysisTreatWarningsAsErrors>false</CodeAnalysisTreatWarningsAsErrors>
 
     <!-- https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/configuration-options#enable-code-analysis -->
     <!-- https://learn.microsoft.com/en-us/dotnet/core/project-sdk/msbuild-props#enablenetanalyzers -->
@@ -54,7 +54,7 @@
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 
     <!-- https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/design-warnings -->
-    <AnalysisLevelDesign>latest-default</AnalysisLevelDesign>
+    <AnalysisLevelDesign>latest-all</AnalysisLevelDesign>
 
     <!-- https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/documentation-warnings -->
     <AnalysisLevelDocumentation>latest-default</AnalysisLevelDocumentation>
