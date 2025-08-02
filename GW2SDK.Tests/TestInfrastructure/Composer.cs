@@ -12,9 +12,9 @@ public static class Composer
 
     private static readonly HttpMessageHandler ResilientHttpHandler = CreateResilientHttpHandler();
 
-    private static HttpMessageHandler CreatePrimaryHttpHandler()
-    {
 #if NET
+    private static SocketsHttpHandler CreatePrimaryHttpHandler()
+    {
         return new SocketsHttpHandler
         {
             // Limit the number of open connections
@@ -27,12 +27,15 @@ public static class Composer
             ConnectTimeout = TimeSpan.FromSeconds(10),
             PooledConnectionLifetime = TimeSpan.FromMinutes(15)
         };
-#else
-        return new HttpClientHandler { MaxConnectionsPerServer = 20 };
-#endif
     }
+#else
+    private static HttpClientHandler CreatePrimaryHttpHandler()
+    {
+        return new HttpClientHandler { MaxConnectionsPerServer = 20 };
+    }
+#endif
 
-    private static HttpMessageHandler CreateResilientHttpHandler()
+    private static ResilienceHandler CreateResilientHttpHandler()
     {
         var resiliencePipeline = new ResiliencePipelineBuilder<HttpResponseMessage>()
             .AddTimeout(Gw2Resiliency.TotalTimeoutStrategy)
