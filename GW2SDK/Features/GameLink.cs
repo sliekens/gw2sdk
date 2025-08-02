@@ -61,6 +61,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
         if (timer.Dispose(callbacksFinished.WaitHandle))
         {
             TaskCompletionSource<bool> tcs = new();
+#pragma warning disable CA1031 // Do not catch general exception types
             ThreadPool.QueueUserWorkItem(
                 state =>
                 {
@@ -78,6 +79,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
                 },
                 (callbacksFinished.WaitHandle, tcs)
             );
+#pragma warning restore CA1031 // Do not catch general exception types
 
             await tcs.Task.ConfigureAwait(false);
         }
@@ -140,6 +142,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
             observer,
             sub =>
             {
+#pragma warning disable CA1031 // Do not catch general exception types
                 try
                 {
                     var tick = GetSnapshot();
@@ -152,6 +155,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
                 {
                     sub.OnError(oops);
                 }
+#pragma warning restore CA1031 // Do not catch general exception types
 
                 return new Subscription(this, sub);
             }
@@ -182,6 +186,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
         try
         {
             GameTick tick;
+#pragma warning disable CA1031 // Do not catch general exception types
             try
             {
                 tick = GetSnapshot();
@@ -204,6 +209,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
                 subscribers.Clear();
                 return;
             }
+#pragma warning restore CA1031 // Do not catch general exception types
 
             // The timer can be faster than the refresh rate of the shared memory
             // so ensure that the UiTick has changed, to avoid sending duplicates
@@ -213,6 +219,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
                 lastTick = tick.UiTick;
                 foreach (var subscriber in subscribers.Keys.ToList())
                 {
+#pragma warning disable CA1031 // Do not catch general exception types
                     try
                     {
                         subscriber.OnNext(tick);
@@ -234,6 +241,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
                             subscribers.TryRemove(subscriber, out _);
                         }
                     }
+#pragma warning restore CA1031 // Do not catch general exception types
                 }
             }
         }

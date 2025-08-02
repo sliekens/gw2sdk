@@ -133,7 +133,9 @@ try
             );
     } while (AnsiConsole.Confirm("Do you want to choose again?"));
 }
+#pragma warning disable CA1031 // Do not catch general exception types
 catch (Exception exception)
 {
     AnsiConsole.WriteException(exception);
 }
+#pragma warning restore CA1031 // Do not catch general exception types

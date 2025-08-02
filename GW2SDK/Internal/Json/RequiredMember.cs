@@ -46,6 +46,7 @@ internal readonly ref struct RequiredMember
             JsonThrowHelper.ThrowMissingValue(Name);
         }
 
+#pragma warning disable CA1031 // Do not catch general exception types
         try
         {
             return transform(member.Value);
@@ -54,6 +55,7 @@ internal readonly ref struct RequiredMember
         {
             JsonThrowHelper.ThrowIncompatibleValue(Name, reason, member);
         }
+#pragma warning restore CA1031 // Do not catch general exception types
 
         // Fix CS0161, a return is needed even though this code is unreachable
         return default;
