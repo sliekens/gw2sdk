@@ -63,7 +63,7 @@
     <AnalysisLevelGlobalization>latest-default</AnalysisLevelGlobalization>
 
     <!-- https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/interoperability-warnings -->
-    <AnalysisLevelInteroperability>latest-default</AnalysisLevelInteroperability>
+    <AnalysisLevelInteroperability>latest-all</AnalysisLevelInteroperability>
 
     <!-- https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/maintainability-warnings -->
     <AnalysisLevelMaintainability>latest-default</AnalysisLevelMaintainability>
