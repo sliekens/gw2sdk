@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+
 using GuildWars2.Collections;
 
 namespace GuildWars2.Hero.Achievements.Categories;

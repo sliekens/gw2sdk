@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+
 using GuildWars2.Chat;
 using GuildWars2.Hero.Achievements.Bits;
 using GuildWars2.Hero.Achievements.Rewards;

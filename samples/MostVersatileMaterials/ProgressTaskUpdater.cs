@@ -1,4 +1,5 @@
 ﻿using GuildWars2;
+
 using Spectre.Console;
 
 namespace MostVersatileMaterials;

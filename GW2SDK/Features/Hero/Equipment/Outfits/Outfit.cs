@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+
 using GuildWars2.Chat;
 
 namespace GuildWars2.Hero.Equipment.Outfits;

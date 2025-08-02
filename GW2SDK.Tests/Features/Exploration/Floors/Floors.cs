@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+
 using GuildWars2.Chat;
 using GuildWars2.Exploration.PointsOfInterest;
 using GuildWars2.Tests.TestInfrastructure;

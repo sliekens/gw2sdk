@@ -1,11 +1,15 @@
 ﻿using System.IO.Compression;
 using System.Text;
+
 using GuildWars2;
 using GuildWars2.TestDataHelper;
+
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+
 using Polly;
+
 using Spectre.Console;
 
 var outDir = args[0];

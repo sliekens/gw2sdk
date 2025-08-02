@@ -1,4 +1,5 @@
 ﻿using GuildWars2;
+
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 

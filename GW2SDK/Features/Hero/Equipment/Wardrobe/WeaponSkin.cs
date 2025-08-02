@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+
 using GuildWars2.Items;
 
 namespace GuildWars2.Hero.Equipment.Wardrobe;

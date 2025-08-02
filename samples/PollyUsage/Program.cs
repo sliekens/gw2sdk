@@ -1,14 +1,18 @@
 ﻿using System.Text.Json;
+
 using GuildWars2;
+
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
+
 using Polly;
 using Polly.CircuitBreaker;
 using Polly.Hedging;
 using Polly.Retry;
 using Polly.Timeout;
+
 using static System.Net.HttpStatusCode;
 
 namespace PollyUsage;

@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+
 using GuildWars2.Hero.Achievements.Categories;
 using GuildWars2.Tests.TestInfrastructure;
 

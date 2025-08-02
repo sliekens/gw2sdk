@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Exploration.Maps;

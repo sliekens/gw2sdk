@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+
 using GuildWars2.Chat;
 using GuildWars2.Hero.Crafting.Recipes;
 using GuildWars2.Tests.TestInfrastructure;

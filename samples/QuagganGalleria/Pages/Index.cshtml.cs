@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Quaggans;
+
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace QuagganGalleria.Pages;

@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+
 using GuildWars2.Hero.Accounts;
 
 namespace GuildWars2.Tests.Features;

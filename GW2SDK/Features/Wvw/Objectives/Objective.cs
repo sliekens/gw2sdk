@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using System.Numerics;
+
 using GuildWars2.Chat;
 using GuildWars2.Exploration.Maps;
 

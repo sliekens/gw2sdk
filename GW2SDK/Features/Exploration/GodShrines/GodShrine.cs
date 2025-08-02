@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+
 using GuildWars2.Chat;
 
 namespace GuildWars2.Exploration.GodShrines;

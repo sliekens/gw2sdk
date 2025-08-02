@@ -1,8 +1,11 @@
 ﻿using System.Runtime.Versioning;
+
 using GuildWars2;
 using GuildWars2.Mumble;
+
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+
 using Pastel;
 
 namespace Mumble;

@@ -1,5 +1,7 @@
 ﻿using System.Text;
+
 using GuildWars2.Markup;
+
 using Spectre.Console;
 
 namespace MostVersatileMaterials;

@@ -1,10 +1,13 @@
 ﻿using System.Drawing;
+
 using GuildWars2;
 using GuildWars2.Hero.Equipment.Dyes;
+
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
+
 using Pastel;
 
 var appBuilder = Host.CreateApplicationBuilder(args);

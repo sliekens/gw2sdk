@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+
 using GuildWars2.Hero.Training.Objectives;
 using GuildWars2.Json;
 

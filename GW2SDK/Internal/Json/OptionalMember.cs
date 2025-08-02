@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+
 using static System.Text.Json.JsonValueKind;
 
 namespace GuildWars2.Json;

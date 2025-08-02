@@ -1,5 +1,6 @@
 ﻿using GuildWars2.Items;
 using GuildWars2.Markup;
+
 using Spectre.Console;
 using Spectre.Console.Rendering;
 

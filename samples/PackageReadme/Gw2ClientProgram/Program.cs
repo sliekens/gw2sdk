@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+
 using GuildWars2;
 using GuildWars2.Commerce.Prices;
 using GuildWars2.Items;

@@ -2,6 +2,7 @@
 // VS2022 has a built-in profiler (alt + F2), so I'm using that to see how the library performs 
 
 using GuildWars2;
+
 using Microsoft.Extensions.DependencyInjection;
 
 var services = new ServiceCollection();

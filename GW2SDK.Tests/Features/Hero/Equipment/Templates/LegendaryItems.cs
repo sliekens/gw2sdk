@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+
 using GuildWars2.Hero.Equipment.Templates;
 using GuildWars2.Tests.TestInfrastructure;
 

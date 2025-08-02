@@ -1,4 +1,5 @@
 ﻿using System.Collections.Concurrent;
+
 using GuildWars2.Exploration.Maps;
 using GuildWars2.Hero.Builds;
 using GuildWars2.Hero.Equipment.Dyes;

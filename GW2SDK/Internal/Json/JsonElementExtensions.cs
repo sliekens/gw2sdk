@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+
 using GuildWars2.Collections;
 
 namespace GuildWars2.Json;

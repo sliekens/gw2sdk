@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.Numerics;
 using System.Text.Json;
+
 using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Objectives;

@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
+
 using GuildWars2.Hero.Crafting.Disciplines;
 using GuildWars2.Json;
 

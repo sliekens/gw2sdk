@@ -5,6 +5,7 @@ using GuildWars2.Hero.Builds.Facts;
 using GuildWars2.Hero.Builds.Skills;
 using GuildWars2.Tests.Features.Markup;
 using GuildWars2.Tests.TestInfrastructure;
+
 using Range = GuildWars2.Hero.Builds.Facts.Range;
 
 namespace GuildWars2.Tests.Features.Hero.Builds;

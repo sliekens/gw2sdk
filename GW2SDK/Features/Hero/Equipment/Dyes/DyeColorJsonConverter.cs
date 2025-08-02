@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Dyes;

@@ -1,5 +1,6 @@
 ﻿using System.IO.Compression;
 using System.Text.Json;
+
 using GuildWars2.Http;
 
 namespace GuildWars2.TestDataHelper;

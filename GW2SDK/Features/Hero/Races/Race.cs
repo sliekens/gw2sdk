@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Collections;
+
 using static GuildWars2.Hero.RaceName;
 
 namespace GuildWars2.Hero.Races;

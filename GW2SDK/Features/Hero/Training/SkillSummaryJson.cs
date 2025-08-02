@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+
 using GuildWars2.Hero.Builds;
 using GuildWars2.Hero.Training.Skills;
 using GuildWars2.Json;

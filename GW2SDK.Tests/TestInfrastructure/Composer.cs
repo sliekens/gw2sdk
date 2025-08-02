@@ -1,5 +1,7 @@
 ﻿using System.Net.Http.Headers;
+
 using Microsoft.Extensions.Http.Resilience;
+
 using Polly;
 
 namespace GuildWars2.Tests.TestInfrastructure;

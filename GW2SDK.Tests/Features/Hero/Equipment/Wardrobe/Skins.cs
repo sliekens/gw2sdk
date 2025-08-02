@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+
 using GuildWars2.Chat;
 using GuildWars2.Hero.Equipment.Wardrobe;
 using GuildWars2.Tests.Features.Markup;

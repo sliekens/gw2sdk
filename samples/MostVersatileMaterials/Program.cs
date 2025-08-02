@@ -1,9 +1,12 @@
 ﻿using GuildWars2;
 using GuildWars2.Hero.Crafting;
+
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+
 using MostVersatileMaterials;
+
 using Spectre.Console;
 
 // This example retrieves all item ingredients that are used in crafting,

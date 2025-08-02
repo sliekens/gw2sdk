@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.PatternsAndPractices;

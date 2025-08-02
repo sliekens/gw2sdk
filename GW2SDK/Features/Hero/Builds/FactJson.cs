@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+
 using GuildWars2.Hero.Builds.Facts;
 using GuildWars2.Json;
 
