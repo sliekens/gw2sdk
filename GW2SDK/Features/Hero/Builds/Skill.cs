@@ -43,10 +43,12 @@ public record Skill
     /// <summary>Contains various modifiers that affect how skills behave.</summary>
     public required SkillFlags SkillFlags { get; init; }
 
+#pragma warning disable CA1024 // Use properties where appropriate
     /// <summary>Gets a chat link object for this skill.</summary>
     /// <returns>The chat link as an object.</returns>
     public SkillLink GetChatLink()
     {
         return new() { SkillId = Id };
     }
+#pragma warning restore CA1024 // Use properties where appropriate
 }

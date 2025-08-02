@@ -39,10 +39,12 @@ public sealed record GodShrine
     /// <summary>The map coordinates of the god shrine.</summary>
     public required PointF Coordinates { get; init; }
 
+#pragma warning disable CA1024 // Use properties where appropriate
     /// <summary>Gets a chat link object for this god shrine.</summary>
     /// <returns>The chat link as an object.</returns>
     public PointOfInterestLink GetChatLink()
     {
         return new() { PointOfInterestId = PointOfInterestId };
     }
+#pragma warning restore CA1024 // Use properties where appropriate
 }

@@ -22,6 +22,7 @@ public sealed record AstralReward
     /// <summary>The Astral Acclaim cost of the reward.</summary>
     public required int Cost { get; init; }
 
+#pragma warning disable CA1024 // Use properties where appropriate
     /// <summary>Gets an item chat link object for this astral reward.</summary>
     /// <returns>The chat link as an object.</returns>
     public ItemLink GetChatLink()
@@ -32,4 +33,5 @@ public sealed record AstralReward
             Count = ItemCount
         };
     }
+#pragma warning restore CA1024 // Use properties where appropriate
 }

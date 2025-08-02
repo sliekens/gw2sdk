@@ -22,10 +22,12 @@ public sealed record JadeBotSkin
     /// <summary>The ID of the item which grants this jade bot skin when consumed.</summary>
     public required int UnlockItemId { get; init; }
 
+#pragma warning disable CA1024 // Use properties where appropriate
     /// <summary>Gets a chat link object for this jade bot skin (unlock item).</summary>
     /// <returns>The chat link as an object.</returns>
     public ItemLink GetChatLink()
     {
         return new() { ItemId = UnlockItemId };
     }
+#pragma warning restore CA1024 // Use properties where appropriate
 }

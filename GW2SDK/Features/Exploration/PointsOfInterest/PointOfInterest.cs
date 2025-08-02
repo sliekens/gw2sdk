@@ -27,10 +27,12 @@ public record PointOfInterest
     /// or squad messages.</summary>
     public required string ChatLink { get; init; }
 
+#pragma warning disable CA1024 // Use properties where appropriate
     /// <summary>Gets a chat link object for this point of interest.</summary>
     /// <returns>The chat link as an object.</returns>
     public PointOfInterestLink GetChatLink()
     {
         return new() { PointOfInterestId = Id };
     }
+#pragma warning restore CA1024 // Use properties where appropriate
 }

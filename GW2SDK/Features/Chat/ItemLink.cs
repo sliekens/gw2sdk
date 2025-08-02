@@ -23,6 +23,7 @@ public sealed record ItemLink : Link
     /// <remarks>Only valid for two-handed weapons.</remarks>
     public int? SecondarySuffixItemId { get; init; }
 
+#pragma warning disable CA1024 // Use properties where appropriate
     /// <summary>Gets the skin chat link if the item is transmuted, or <c>null</c> if the default skin is applied.</summary>
     /// <remarks>Only valid for weapons, armor and back items.</remarks>
     /// <returns>The chat link as an object.</returns>
@@ -30,7 +31,9 @@ public sealed record ItemLink : Link
     {
         return SkinId is null ? null : new SkinLink { SkinId = SkinId.Value };
     }
+#pragma warning restore CA1024 // Use properties where appropriate
 
+#pragma warning disable CA1024 // Use properties where appropriate
     /// <summary>Gets the item chat link for the upgrade component, or <c>null</c> if the upgrade slot is empty.</summary>
     /// <remarks>Only valid for weapons, armor, back items and trinkets.</remarks>
     /// <returns>The chat link as an object.</returns>
@@ -38,7 +41,9 @@ public sealed record ItemLink : Link
     {
         return SuffixItemId is null ? null : new ItemLink { ItemId = SuffixItemId.Value };
     }
+#pragma warning restore CA1024 // Use properties where appropriate
 
+#pragma warning disable CA1024 // Use properties where appropriate
     /// <summary>Gets the item chat link for the second upgrade component, or <c>null</c> if the second upgrade slot is empty.</summary>
     /// <remarks>Only valid for two-handed weapons.</remarks>
     /// <returns>The chat link as an object.</returns>
@@ -48,6 +53,7 @@ public sealed record ItemLink : Link
             ? null
             : new ItemLink { ItemId = SecondarySuffixItemId.Value };
     }
+#pragma warning restore CA1024 // Use properties where appropriate
 
     /// <inheritdoc />
     public override string ToString()

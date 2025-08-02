@@ -20,6 +20,7 @@ public sealed record RecipeSheet : Unlocker
     /// variants.</remarks>
     public required IReadOnlyCollection<int> ExtraRecipeIds { get; init; }
 
+#pragma warning disable CA1024 // Use properties where appropriate
     /// <summary>Gets a chat link object for this recipe.</summary>
     /// <returns>The chat link as an object.</returns>
     public RecipeLink GetRecipeChatLink()
@@ -33,4 +34,5 @@ public sealed record RecipeSheet : Unlocker
     {
         return ExtraRecipeIds.Select(recipeId => new RecipeLink { RecipeId = recipeId });
     }
+#pragma warning restore CA1024 // Use properties where appropriate
 }

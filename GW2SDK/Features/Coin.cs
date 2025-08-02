@@ -295,12 +295,14 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
         return new(quantity);
     }
 
+#pragma warning disable CA1024 // Use properties where appropriate
     /// <summary>Gets the chat link representation of the current instance of <see cref="Coin" />.</summary>
     /// <returns>The chat link representation of the current instance of <see cref="Coin" />.</returns>
     public CoinLink GetChatLink()
     {
         return new() { Coins = this };
     }
+#pragma warning restore CA1024 // Use properties where appropriate
 
     /// <summary>Gets the string representation of the <see cref="Coin" /> value.</summary>
     /// <returns>Returns the current <see cref="Coin" /> value formatted for display, (for example) 12 gold, 34 silver, 56

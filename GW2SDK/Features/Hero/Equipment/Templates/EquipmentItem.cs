@@ -49,6 +49,7 @@ public sealed record EquipmentItem
     /// <summary>The color IDs of dyes applied to the item.</summary>
     public required IReadOnlyList<int> DyeColorIds { get; init; }
 
+#pragma warning disable CA1024 // Use properties where appropriate
     /// <summary>Gets a chat link object for this item.</summary>
     /// <returns>The chat link as an object.</returns>
     public ItemLink GetChatLink()
@@ -61,4 +62,5 @@ public sealed record EquipmentItem
             SecondarySuffixItemId = SecondarySuffixItemId
         };
     }
+#pragma warning restore CA1024 // Use properties where appropriate
 }

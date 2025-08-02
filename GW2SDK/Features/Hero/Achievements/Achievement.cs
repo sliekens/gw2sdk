@@ -69,10 +69,12 @@ public record Achievement
     /// <remarks> -1 for repeatable achievements that don't award points.</remarks>
     public required int? PointCap { get; init; }
 
+#pragma warning disable CA1024 // Use properties where appropriate
     /// <summary>Gets a chat link object for this achievement.</summary>
     /// <returns>The chat link as an object.</returns>
     public AchievementLink GetChatLink()
     {
         return new() { AchievementId = Id };
     }
+#pragma warning restore CA1024 // Use properties where appropriate
 }

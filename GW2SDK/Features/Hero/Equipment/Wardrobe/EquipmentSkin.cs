@@ -37,10 +37,12 @@ public record EquipmentSkin
     /// <summary>The URL of the skin icon.</summary>
     public required Uri? IconUrl { get; init; }
 
+#pragma warning disable CA1024 // Use properties where appropriate
     /// <summary>Gets a chat link object for this skin.</summary>
     /// <returns>The chat link as an object.</returns>
     public SkinLink GetChatLink()
     {
         return new() { SkinId = Id };
     }
+#pragma warning restore CA1024 // Use properties where appropriate
 }

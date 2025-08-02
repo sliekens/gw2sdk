@@ -34,6 +34,7 @@ public sealed record PurchasedAstralReward
     /// limit.</summary>
     public int? Available => PurchaseLimit - Purchased;
 
+#pragma warning disable CA1024 // Use properties where appropriate
     /// <summary>Gets an item chat link object for this astral reward.</summary>
     /// <returns>The chat link as an object.</returns>
     public ItemLink GetChatLink()
@@ -44,4 +45,5 @@ public sealed record PurchasedAstralReward
             Count = ItemCount
         };
     }
+#pragma warning restore CA1024 // Use properties where appropriate
 }

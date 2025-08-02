@@ -51,6 +51,7 @@ public record Item
     /// <summary>The URL of the item icon.</summary>
     public required Uri? IconUrl { get; init; }
 
+#pragma warning disable CA1024 // Use properties where appropriate
     /// <summary>Gets a chat link object for this item.</summary>
     /// <returns>The chat link as an object.</returns>
     public ItemLink GetChatLink()
@@ -64,4 +65,5 @@ public record Item
             SecondarySuffixItemId = null
         };
     }
+#pragma warning restore CA1024 // Use properties where appropriate
 }

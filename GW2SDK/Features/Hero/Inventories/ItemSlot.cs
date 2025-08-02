@@ -43,6 +43,7 @@ public sealed record ItemSlot
     /// <summary>The selected attribute combination for equipment with selectable stats.</summary>
     public required SelectedAttributeCombination? Stats { get; init; }
 
+#pragma warning disable CA1024 // Use properties where appropriate
     /// <summary>Gets a chat link object for this item slot.</summary>
     /// <returns>The chat link as an object.</returns>
     public ItemLink GetChatLink()
@@ -56,4 +57,5 @@ public sealed record ItemSlot
             SecondarySuffixItemId = SecondarySuffixItemId
         };
     }
+#pragma warning restore CA1024 // Use properties where appropriate
 }

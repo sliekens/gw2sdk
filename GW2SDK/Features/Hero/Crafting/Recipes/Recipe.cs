@@ -45,10 +45,12 @@ public record Recipe
     /// messages.</summary>
     public required string ChatLink { get; init; }
 
+#pragma warning disable CA1024 // Use properties where appropriate
     /// <summary>Gets a chat link object for this recipe.</summary>
     /// <returns>The chat link as an object.</returns>
     public RecipeLink GetChatLink()
     {
         return new() { RecipeId = Id };
     }
+#pragma warning restore CA1024 // Use properties where appropriate
 }

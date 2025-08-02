@@ -26,10 +26,12 @@ public sealed record Outfit
     /// <summary>The IDs of the items that unlock the outfit when consumed.</summary>
     public required IReadOnlyCollection<int> UnlockItemIds { get; init; }
 
+#pragma warning disable CA1024 // Use properties where appropriate
     /// <summary>Gets a chat link object for this outfit.</summary>
     /// <returns>The chat link as an object.</returns>
     public OutfitLink GetChatLink()
     {
         return new() { OutfitId = Id };
     }
+#pragma warning restore CA1024 // Use properties where appropriate
 }

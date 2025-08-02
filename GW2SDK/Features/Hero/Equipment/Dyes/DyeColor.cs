@@ -49,10 +49,12 @@ public sealed record DyeColor
     /// <summary>The set to which the dye belongs.</summary>
     public required Extensible<ColorSet> Set { get; init; }
 
+#pragma warning disable CA1024 // Use properties where appropriate
     /// <summary>Gets a chat link object for this item.</summary>
     /// <returns>The chat link as an object.</returns>
     public ItemLink? GetChatLink()
     {
         return ItemId.HasValue ? new ItemLink { ItemId = ItemId.Value } : null;
     }
+#pragma warning restore CA1024 // Use properties where appropriatem.Text.Json.Serialization;
 }
