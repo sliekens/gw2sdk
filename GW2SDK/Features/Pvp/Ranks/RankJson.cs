@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+
 using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Ranks;
@@ -51,7 +52,7 @@ internal static class RankJson
             }
         }
 
-        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new Rank
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),

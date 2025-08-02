@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+
 using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Seasons;
@@ -46,9 +47,9 @@ internal static class SkillBadgeJson
             }
         }
 
-        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
-        string overlayString = overlay.Map(static (in JsonElement value) => value.GetStringRequired());
-        string smallOverlayString = smallOverlay.Map(static (in JsonElement value) => value.GetStringRequired());
+        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        var overlayString = overlay.Map(static (in JsonElement value) => value.GetStringRequired());
+        var smallOverlayString = smallOverlay.Map(static (in JsonElement value) => value.GetStringRequired());
         return new SkillBadge
         {
             Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),

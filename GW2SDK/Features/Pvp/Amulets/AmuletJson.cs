@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.Json;
+
 using GuildWars2.Hero.Equipment;
 using GuildWars2.Json;
 
@@ -38,7 +39,7 @@ internal static class AmuletJson
             }
         }
 
-        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new Amulet
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),

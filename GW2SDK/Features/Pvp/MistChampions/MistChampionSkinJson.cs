@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+
 using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.MistChampions;
@@ -41,7 +42,7 @@ internal static class MistChampionSkinJson
             }
         }
 
-        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new MistChampionSkin
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),

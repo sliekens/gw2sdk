@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+
 using GuildWars2.Json;
 
 namespace GuildWars2.Wvw.Guilds;
@@ -26,7 +27,7 @@ internal static class AccountWvwGuildJson
             }
         }
 
-        int? teamIdValue = teamId.Map(static (in JsonElement value) => value.GetInt32());
+        var teamIdValue = teamId.Map(static (in JsonElement value) => value.GetInt32());
         return new AccountWvwGuild
         {
             TeamId = teamIdValue > 0 ? teamIdValue : null,

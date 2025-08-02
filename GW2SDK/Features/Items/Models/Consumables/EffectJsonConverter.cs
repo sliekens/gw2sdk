@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
+
 using GuildWars2.Json;
 
 namespace GuildWars2.Items;
@@ -28,7 +29,7 @@ internal sealed class EffectJsonConverter : JsonConverter<Effect>
 
     public static Effect Read(in JsonElement json)
     {
-        string iconString = "";
+        var iconString = "";
         if (json.TryGetProperty("icon", out var iconElement))
         {
             iconString = iconElement.GetString() ?? "";
