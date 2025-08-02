@@ -7,7 +7,7 @@ using GuildWars2.Worlds;
 
 namespace Mumble;
 
-public sealed class ReferenceData
+internal sealed class ReferenceData
 {
     private readonly ConcurrentDictionary<int, DyeColor> colors = new();
 

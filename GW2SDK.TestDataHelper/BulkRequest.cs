@@ -5,7 +5,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.TestDataHelper;
 
-public class BulkRequest(Uri requestUri)
+internal class BulkRequest(Uri requestUri)
 {
     public required IReadOnlyCollection<int> Ids { get; init; }
 

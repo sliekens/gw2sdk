@@ -2,7 +2,7 @@
 
 namespace GuildWars2.TestDataHelper;
 
-public class ProgressAdapter(ProgressTask progress) : IProgress<BulkProgress>
+internal class ProgressAdapter(ProgressTask progress) : IProgress<BulkProgress>
 {
     public void Report(BulkProgress value)
     {

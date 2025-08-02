@@ -5,7 +5,7 @@ using GuildWars2.Items;
 
 namespace MostVersatileMaterials;
 
-public class ReferenceData
+internal class ReferenceData
 {
     public required ReadOnlyCollection<Recipe> Recipes { get; init; }
 

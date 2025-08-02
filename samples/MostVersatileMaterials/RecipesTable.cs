@@ -6,7 +6,7 @@ using Spectre.Console.Rendering;
 
 namespace MostVersatileMaterials;
 
-public class RecipesTable : IRenderable
+internal class RecipesTable : IRenderable
 {
     private readonly Table table = new Table().AddColumn("Recipe").AddColumn("Description");
 

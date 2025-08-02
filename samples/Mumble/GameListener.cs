@@ -12,7 +12,7 @@ using Pastel;
 namespace Mumble;
 
 [SupportedOSPlatform("windows")]
-public sealed class GameListener(
+internal sealed class GameListener(
     ILogger<GameListener> logger,
     GameLink gameLink,
     ReferenceData referenceData

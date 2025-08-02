@@ -2,7 +2,7 @@
 
 namespace GuildWars2.TestDataHelper;
 
-public class JsonItemService(HttpClient http)
+internal class JsonItemService(HttpClient http)
 {
     public async Task<ISet<string>> GetAllJsonItems(IProgress<BulkProgress> progress)
     {

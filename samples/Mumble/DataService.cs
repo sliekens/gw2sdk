@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Mumble;
 
-public sealed class DataService(
+internal sealed class DataService(
     ILogger<DataService> logger,
     Gw2Client gw2Client,
     ReferenceData referenceData

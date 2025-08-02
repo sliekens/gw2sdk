@@ -2,7 +2,7 @@
 
 namespace GuildWars2.TestDataHelper;
 
-public class JsonDecorationsService(HttpClient http)
+internal class JsonDecorationsService(HttpClient http)
 {
     public async Task<ISet<string>> GetAllJsonDecorations(IProgress<BulkProgress> progress)
     {

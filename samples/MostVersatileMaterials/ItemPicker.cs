@@ -4,7 +4,7 @@ using Spectre.Console;
 
 namespace MostVersatileMaterials;
 
-public static class ItemPicker
+internal static class ItemPicker
 {
     public static Item Prompt(IReadOnlyList<(Item item, int count)> ingredients)
     {

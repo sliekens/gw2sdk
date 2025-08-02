@@ -2,7 +2,7 @@
 
 namespace GuildWars2.TestDataHelper;
 
-public class JsonSkinService(HttpClient http)
+internal class JsonSkinService(HttpClient http)
 {
     public async Task<ISet<string>> GetAllJsonSkins(IProgress<BulkProgress> progress)
     {

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ApiVersionInfo;
 
-public static class ConsoleInitializer
+internal static class ConsoleInitializer
 {
     [ModuleInitializer]
     internal static void Run()

@@ -5,7 +5,7 @@ using Spectre.Console;
 
 namespace MostVersatileMaterials;
 
-public class ItemCard(HttpClient httpClient)
+internal class ItemCard(HttpClient httpClient)
 {
     public async Task Show(Item item)
     {

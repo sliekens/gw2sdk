@@ -101,7 +101,7 @@ internal class Program
 //      .AddCircuitBreaker(Gw2Resiliency.CircuitBreakerStrategy)
 //      .AddHedging(Gw2Resiliency.HedgingStrategy)
 //      .AddTimeout(Gw2Resiliency.AttemptTimeoutStrategy)
-public static class Gw2Resiliency
+internal static class Gw2Resiliency
 {
     public static readonly TimeoutStrategyOptions TotalTimeoutStrategy = new()
     {
