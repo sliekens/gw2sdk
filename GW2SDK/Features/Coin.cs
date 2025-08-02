@@ -1,5 +1,7 @@
 ﻿using System.Text.Json.Serialization;
+
 using GuildWars2.Chat;
+
 #if !NET
 using System.Text;
 #endif
@@ -125,12 +127,26 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
         return new(coin.Amount);
     }
 
+    /// <summary>Returns the current instance of <see cref="Coin" />.</summary>
+    /// <returns>The current instance of <see cref="Coin" />.</returns>
+    public Coin Plus()
+    {
+        return new(Amount);
+    }
+
     /// <summary>Returns the negation of the current instance of <see cref="Coin" />.</summary>
     /// <param name="coin">The <see cref="Coin" /> value.</param>
     /// <returns>The negation of the current instance of <see cref="Coin" />.</returns>
     public static Coin operator -(in Coin coin)
     {
         return new(-coin.Amount);
+    }
+
+    /// <summary>Returns the negation of the current instance of <see cref="Coin" />.</summary>
+    /// <returns>The negated <see cref="Coin" /> value.</returns>
+    public Coin Negate()
+    {
+        return new(-Amount);
     }
 
     /// <summary>Increments the current instance of <see cref="Coin" /> by 1.</summary>
@@ -141,12 +157,26 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
         return new(coin.Amount + 1);
     }
 
+    /// <summary>Returns a new <see cref="Coin"/> value incremented by 1.</summary>
+    /// <returns>The incremented <see cref="Coin"/> value.</returns>
+    public Coin Increment()
+    {
+        return new(Amount + 1);
+    }
+
     /// <summary>Decrements the current instance of <see cref="Coin" /> by 1.</summary>
     /// <param name="coin">The <see cref="Coin" /> value.</param>
     /// <returns>The decremented <see cref="Coin" /> value.</returns>
     public static Coin operator --(in Coin coin)
     {
         return new(coin.Amount - 1);
+    }
+
+    /// <summary>Returns a new <see cref="Coin"/> value decremented by 1.</summary>
+    /// <returns>The decremented <see cref="Coin"/> value.</returns>
+    public Coin Decrement()
+    {
+        return new(Amount - 1);
     }
 
     /// <summary>Adds two <see cref="Coin" /> values.</summary>
@@ -158,6 +188,14 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
         return new(left.Amount + right.Amount);
     }
 
+    /// <summary>Returns the sum of this <see cref="Coin"/> and another <see cref="Coin"/>.</summary>
+    /// <param name="other">The <see cref="Coin"/> to add.</param>
+    /// <returns>The sum of the two <see cref="Coin"/> values.</returns>
+    public Coin Add(in Coin other)
+    {
+        return new(Amount + other.Amount);
+    }
+
     /// <summary>Subtracts two <see cref="Coin" /> values.</summary>
     /// <param name="left">The first <see cref="Coin" /> value.</param>
     /// <param name="right">The second <see cref="Coin" /> value.</param>
@@ -165,6 +203,14 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
     public static Coin operator -(in Coin left, in Coin right)
     {
         return new(left.Amount - right.Amount);
+    }
+
+    /// <summary>Returns the difference between this <see cref="Coin"/> and another <see cref="Coin"/>.</summary>
+    /// <param name="other">The <see cref="Coin"/> to subtract.</param>
+    /// <returns>The difference between the two <see cref="Coin"/> values.</returns>
+    public Coin Subtract(in Coin other)
+    {
+        return new(Amount - other.Amount);
     }
 
     /// <summary>Multiplies two <see cref="Coin" /> values.</summary>
@@ -176,6 +222,14 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
         return new(left.Amount * right.Amount);
     }
 
+    /// <summary>Returns the product of this <see cref="Coin"/> and another <see cref="Coin"/>.</summary>
+    /// <param name="other">The <see cref="Coin"/> to multiply by.</param>
+    /// <returns>The product of the two <see cref="Coin"/> values.</returns>
+    public Coin Multiply(in Coin other)
+    {
+        return new(Amount * other.Amount);
+    }
+
     /// <summary>Divides two <see cref="Coin" /> values.</summary>
     /// <param name="left">The first <see cref="Coin" /> value.</param>
     /// <param name="right">The second <see cref="Coin" /> value.</param>
@@ -183,6 +237,14 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
     public static Coin operator /(in Coin left, in Coin right)
     {
         return new(left.Amount / right.Amount);
+    }
+
+    /// <summary>Returns the quotient of this <see cref="Coin"/> and another <see cref="Coin"/>.</summary>
+    /// <param name="other">The <see cref="Coin"/> to divide by.</param>
+    /// <returns>The quotient of the two <see cref="Coin"/> values.</returns>
+    public Coin Divide(in Coin other)
+    {
+        return new(Amount / other.Amount);
     }
 
     /// <summary>Computes the remainder of dividing two <see cref="Coin" /> values.</summary>
@@ -194,6 +256,14 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
         return new(left.Amount % right.Amount);
     }
 
+    /// <summary>Returns the remainder of dividing this <see cref="Coin"/> by another <see cref="Coin"/>.</summary>
+    /// <param name="other">The <see cref="Coin"/> to divide by.</param>
+    /// <returns>The remainder of dividing the two <see cref="Coin"/> values.</returns>
+    public Coin Remainder(in Coin other)
+    {
+        return new(Amount % other.Amount);
+    }
+
     /// <summary>Implicitly converts a <see cref="Coin" /> value to an <see cref="int" /> value.</summary>
     /// <param name="coin">The <see cref="Coin" /> value.</param>
     /// <returns>The <see cref="int" /> value representing the amount of coins.</returns>
@@ -202,10 +272,25 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
         return coin.Amount;
     }
 
+    /// <summary>Converts this <see cref="Coin"/> value to an <see cref="int"/> that represents the amount of coins.</summary>
+    /// <returns>The <see cref="int"/> value representing the amount of coins.</returns>
+    public int ToInt32()
+    {
+        return Amount;
+    }
+
     /// <summary>Implicitly converts an <see cref="int" /> value to a <see cref="Coin" /> value.</summary>
     /// <param name="quantity">The <see cref="int" /> value representing the amount of coins.</param>
     /// <returns>The <see cref="Coin" /> value.</returns>
     public static implicit operator Coin(int quantity)
+    {
+        return new(quantity);
+    }
+
+    /// <summary>Creates a <see cref="Coin"/> value from an <see cref="int"/> value.</summary>
+    /// <param name="quantity">The <see cref="int"/> value representing the amount of coins.</param>
+    /// <returns>The <see cref="Coin"/> value.</returns>
+    public static Coin FromInt32(int quantity)
     {
         return new(quantity);
     }
