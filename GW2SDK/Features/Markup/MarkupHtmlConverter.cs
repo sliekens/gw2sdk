@@ -10,7 +10,7 @@ public sealed class MarkupHtmlConverter
     /// <see cref="MarkupColorName.DefaultColorMap" />.</summary>
     /// <param name="root">The root node of the markup syntax tree to convert.</param>
     /// <returns>A string containing the HTML representation of the markup syntax tree.</returns>
-    public string Convert(RootNode root)
+    public static string Convert(RootNode root)
     {
         return Convert(root, MarkupColorName.DefaultColorMap);
     }
@@ -19,7 +19,7 @@ public sealed class MarkupHtmlConverter
     /// <param name="root">The root node of the markup syntax tree to convert.</param>
     /// <param name="colorMap">A dictionary mapping color names to their corresponding HTML color codes.</param>
     /// <returns>A string containing the HTML representation of the markup syntax tree.</returns>
-    public string Convert(RootNode root, IReadOnlyDictionary<string, string>? colorMap)
+    public static string Convert(RootNode root, IReadOnlyDictionary<string, string>? colorMap)
     {
         ThrowHelper.ThrowIfNull(root);
 
@@ -40,13 +40,13 @@ public sealed class MarkupHtmlConverter
         StringBuilder builder = new();
         foreach (var node in root.Children)
         {
-            builder.Append(ConvertNode(node, colorMap));
+            builder.Append(MarkupHtmlConverter.ConvertNode(node, colorMap));
         }
 
         return builder.ToString();
     }
 
-    private string ConvertNode(MarkupNode node, IReadOnlyDictionary<string, string> colorMap)
+    private static string ConvertNode(MarkupNode node, IReadOnlyDictionary<string, string> colorMap)
     {
         switch (node)
         {
@@ -58,7 +58,7 @@ public sealed class MarkupHtmlConverter
                 StringBuilder builder = new();
                 foreach (var child in coloredText.Children)
                 {
-                    builder.Append(ConvertNode(child, colorMap));
+                    builder.Append(MarkupHtmlConverter.ConvertNode(child, colorMap));
                 }
 
                 var content = builder.ToString();

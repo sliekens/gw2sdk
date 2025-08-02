@@ -18,7 +18,7 @@ internal class SpectreMarkupConverter
             [MarkupColorName.Task] = "#ffcc55"
         };
 
-    public string Convert(RootNode root)
+    public static string Convert(RootNode root)
     {
         ArgumentNullException.ThrowIfNull(root);
 
@@ -31,7 +31,7 @@ internal class SpectreMarkupConverter
         return builder.ToString();
     }
 
-    private string ConvertNode(MarkupNode node)
+    private static string ConvertNode(MarkupNode node)
     {
         switch (node.Type)
         {

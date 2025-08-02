@@ -6,10 +6,8 @@ public static class MarkupSyntaxValidator
 {
     public static void Validate(string input)
     {
-        var lexer = new MarkupLexer();
-        var parser = new MarkupParser();
-        var tokens = lexer.Tokenize(input);
-        var syntax = parser.Parse(tokens);
+        var tokens = MarkupLexer.Tokenize(input);
+        var syntax = MarkupParser.Parse(tokens);
         Validate(syntax);
     }
 

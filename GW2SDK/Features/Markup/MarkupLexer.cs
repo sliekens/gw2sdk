@@ -10,7 +10,7 @@ public sealed class MarkupLexer
     /// <summary>Tokenizes the input string into a sequence of tokens.</summary>
     /// <param name="input">The markup input string to tokenize.</param>
     /// <returns>An <see cref="IEnumerable{Token}" /> representing the sequence of tokens parsed from the input string.</returns>
-    public IEnumerable<MarkupToken> Tokenize(string input)
+    public static IEnumerable<MarkupToken> Tokenize(string input)
     {
         // The language can be very roughly described by the following grammar:
         // MARKUP = *(TEXT / LF / TAG_OPEN / TAG_CLOSE / VOID_TAG)

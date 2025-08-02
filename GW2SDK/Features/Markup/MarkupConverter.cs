@@ -4,14 +4,6 @@
 [PublicAPI]
 public static class MarkupConverter
 {
-    private static readonly MarkupLexer Lexer = new();
-
-    private static readonly MarkupParser Parser = new();
-
-    private static readonly MarkupTextConverter TextConverter = new();
-
-    private static readonly MarkupHtmlConverter HtmlConverter = new();
-
     /// <summary>Converts a markup string to a string with all markup formatting removed.</summary>
     /// <param name="markup">The markup string to convert.</param>
     /// <returns>The text with all markup formatting removed.</returns>
@@ -22,9 +14,9 @@ public static class MarkupConverter
             return markup;
         }
 
-        var tokens = Lexer.Tokenize(markup);
-        var rootNode = Parser.Parse(tokens);
-        return TextConverter.Convert(rootNode);
+        var tokens = MarkupLexer.Tokenize(markup);
+        var rootNode = MarkupParser.Parse(tokens);
+        return MarkupTextConverter.Convert(rootNode);
     }
 
     /// <summary>Converts a markup string to a string with HTML formatting using the
@@ -38,9 +30,9 @@ public static class MarkupConverter
             return markup;
         }
 
-        var tokens = Lexer.Tokenize(markup);
-        var rootNode = Parser.Parse(tokens);
-        return HtmlConverter.Convert(rootNode);
+        var tokens = MarkupLexer.Tokenize(markup);
+        var rootNode = MarkupParser.Parse(tokens);
+        return MarkupHtmlConverter.Convert(rootNode);
     }
 
     /// <summary>Converts a markup string to a string with HTML formatting using a custom color map.</summary>
@@ -54,8 +46,8 @@ public static class MarkupConverter
             return markup;
         }
 
-        var tokens = Lexer.Tokenize(markup);
-        var rootNode = Parser.Parse(tokens);
-        return HtmlConverter.Convert(rootNode, colorMap);
+        var tokens = MarkupLexer.Tokenize(markup);
+        var rootNode = MarkupParser.Parse(tokens);
+        return MarkupHtmlConverter.Convert(rootNode, colorMap);
     }
 }

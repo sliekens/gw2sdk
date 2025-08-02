@@ -9,7 +9,7 @@ public sealed class MarkupTextConverter
     /// <summary>Converts a <see cref="RootNode" /> to a string representation.</summary>
     /// <param name="root">The root node containing nodes to be converted.</param>
     /// <returns>A string representation of the nodes within the root node.</returns>
-    public string Convert(RootNode root)
+    public static string Convert(RootNode root)
     {
         ThrowHelper.ThrowIfNull(root);
 
@@ -22,7 +22,7 @@ public sealed class MarkupTextConverter
         return builder.ToString();
     }
 
-    private string ConvertNode(MarkupNode node)
+    private static string ConvertNode(MarkupNode node)
     {
         switch (node)
         {

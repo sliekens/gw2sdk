@@ -9,7 +9,7 @@ public sealed class MarkupParser
     /// <summary>Parses a sequence of tokens into a hierarchical node structure.</summary>
     /// <param name="input">The sequence of markup tokens to parse.</param>
     /// <returns>The root node of the parsed structure.</returns>
-    public RootNode Parse(IEnumerable<MarkupToken> input)
+    public static RootNode Parse(IEnumerable<MarkupToken> input)
     {
         MarkupTokenIterator iterator = new(input);
         RootNode root = new();

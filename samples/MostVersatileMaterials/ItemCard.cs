@@ -19,9 +19,9 @@ internal class ItemCard(HttpClient httpClient)
         var lexer = new MarkupLexer();
         var parser = new MarkupParser();
         var converter = new SpectreMarkupConverter();
-        var tokens = lexer.Tokenize(item.Description);
-        var syntax = parser.Parse(tokens);
-        var description = converter.Convert(syntax);
+        var tokens = MarkupLexer.Tokenize(item.Description);
+        var syntax = MarkupParser.Parse(tokens);
+        var description = SpectreMarkupConverter.Convert(syntax);
 
         itemTable.AddRow(
             new CanvasImage(ingredientIcon).MaxWidth(32),

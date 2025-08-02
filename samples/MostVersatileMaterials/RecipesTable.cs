@@ -24,12 +24,9 @@ internal class RecipesTable : IRenderable
     {
         ArgumentNullException.ThrowIfNull(item);
 
-        var lexer = new MarkupLexer();
-        var parser = new MarkupParser();
-        var converter = new SpectreMarkupConverter();
-        var tokens = lexer.Tokenize(item.Description);
-        var syntax = parser.Parse(tokens);
-        var description = converter.Convert(syntax);
+        var tokens = MarkupLexer.Tokenize(item.Description);
+        var syntax = MarkupParser.Parse(tokens);
+        var description = SpectreMarkupConverter.Convert(syntax);
         table.AddRow(item.Name.EscapeMarkup(), description);
     }
 }

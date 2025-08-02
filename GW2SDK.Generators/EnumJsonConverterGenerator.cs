@@ -29,7 +29,7 @@ public class EnumJsonConverterGenerator : IIncrementalGenerator
         );
     }
 
-    private void Execute(
+    private static void Execute(
         Compilation compilation,
         ImmutableArray<EnumDeclarationSyntax> enumDeclarations,
         SourceProductionContext context
@@ -73,7 +73,7 @@ public class EnumJsonConverterGenerator : IIncrementalGenerator
         );
     }
 
-    private string GenerateEnumJsonConverter(
+    private static string GenerateEnumJsonConverter(
         string enumName,
         string namespaceName,
         INamedTypeSymbol enumSymbol
@@ -140,7 +140,7 @@ public class EnumJsonConverterGenerator : IIncrementalGenerator
                  """;
     }
 
-    private string GenerateExtensibleEnumJsonConverterFactory(List<string> enumTypes)
+    private static string GenerateExtensibleEnumJsonConverterFactory(List<string> enumTypes)
     {
         var cases = new StringBuilder();
         foreach (var enumType in enumTypes)

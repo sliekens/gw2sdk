@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Templates;
 
-internal class PvpEquipmentValidation
+internal static class PvpEquipmentValidation
 {
     public static void Validate(PvpEquipment pvpEquipment)
     {
