@@ -75,7 +75,7 @@
     <AnalysisLevelPerformance>latest-default</AnalysisLevelPerformance>
 
     <!-- https://learn.microsoft.com/en-us/dotnet/core/deploying/single-file/warnings/overview -->
-    <AnalysisLevelSingleFile>latest-default</AnalysisLevelSingleFile>
+    <AnalysisLevelSingleFile>latest-all</AnalysisLevelSingleFile>
 
     <!-- https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/reliability-warnings -->
     <AnalysisLevelReliability>latest-default</AnalysisLevelReliability>
