@@ -21,8 +21,11 @@ public class TokenInfo
         Assert.NotEmpty(apiKey.Id);
         Assert.NotEmpty(apiKey.Name);
 
+#if NET
+        var expectedPermissions = Enum.GetValues<Permission>().ToHashSet();
+#else
         var expectedPermissions = Enum.GetValues(typeof(Permission)).Cast<Permission>().ToHashSet();
-
+#endif
         Assert.Equal(
             expectedPermissions,
             apiKey.Permissions.Select(p => p.ToEnum() ?? default).ToHashSet()

@@ -14,7 +14,12 @@ public class SubtokenInfo
         #region Create a new subtoken
 
         var subtokenPermissions = new HashSet<Permission>();
+
+#if NET
+        foreach (var permission in Enum.GetValues<Permission>())
+#else
         foreach (Permission permission in Enum.GetValues(typeof(Permission)))
+#endif
         {
             subtokenPermissions.Add(permission);
         }

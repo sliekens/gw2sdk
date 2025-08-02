@@ -7,7 +7,11 @@ public class MountNameFormatterTest
     [Fact]
     public static void Mount_names_can_be_formatted_as_text()
     {
-        var mounts = (MountName[])Enum.GetValues(typeof(MountName));
+#if NET
+        var mounts = Enum.GetValues<MountName>();
+#else
+        var mounts = Enum.GetValues(typeof(MountName)).Cast<MountName>();
+#endif
 
         Assert.All(
             mounts,
