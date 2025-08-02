@@ -5,7 +5,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.TestDataHelper;
 
-public class BulkRequest(string requestUri)
+public class BulkRequest(Uri requestUri)
 {
     public required IReadOnlyCollection<int> Ids { get; init; }
 
@@ -22,7 +22,8 @@ public class BulkRequest(string requestUri)
             { "v", "3" }
         };
 
-        var message = new HttpRequestMessage(HttpMethod.Get, requestUri + search);
+        Uri location = new Uri(requestUri.ToString() + search.Build(), UriKind.Relative);
+        var message = new HttpRequestMessage(HttpMethod.Get, location);
         message.Headers.AcceptEncoding.ParseAdd("gzip");
 
         using var response = await httpClient.SendAsync(

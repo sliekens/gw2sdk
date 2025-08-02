@@ -41,7 +41,8 @@ public class JsonSkinService(HttpClient http)
             CancellationToken cancellationToken
         )
         {
-            var request = new BulkRequest("/v2/skins") { Ids = chunk.ToList() };
+            Uri resource = new Uri("/v2/skins", UriKind.Relative);
+            var request = new BulkRequest(resource) { Ids = chunk.ToList() };
             var json = await request.SendAsync(http, cancellationToken);
             return json.RootElement.EnumerateArray()
                 .Select(item => (item.GetProperty("id").GetInt32(), item.ToJsonLine()))
