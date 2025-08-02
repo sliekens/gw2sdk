@@ -28,7 +28,6 @@ internal sealed class AchievementMiniatureBitJsonConverter : JsonConverter<Achie
 
     public static AchievementMiniatureBit Read(in JsonElement json)
     {
-
         JsonElement id = default, text = default;
         foreach (var member in json.EnumerateObject())
         {

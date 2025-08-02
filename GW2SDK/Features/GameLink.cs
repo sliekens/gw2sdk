@@ -145,7 +145,6 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
                         sub.OnNext(tick);
                     }
                 }
-
                 catch (Exception oops)
                 {
                     sub.OnError(oops);

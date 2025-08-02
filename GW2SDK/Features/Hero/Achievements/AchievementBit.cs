@@ -10,7 +10,6 @@ namespace GuildWars2.Hero.Achievements;
 [JsonConverter(typeof(AchievementBitJsonConverter))]
 public record AchievementBit
 {
-
     /// <summary>Describes what the player needs to do to complete this bit. For example if it is an explorer achievement, this
     /// would contain the name of an area to discover.</summary>
     public required string Text { get; init; }

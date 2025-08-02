@@ -4,7 +4,6 @@ namespace GuildWars2.Http;
 
 internal sealed class RequestBuilder(HttpMethod method, string path, string? accessToken)
 {
-
 #pragma warning disable RCS1250 // Use implicit/explicit object creation
     /// <summary>The query builder for this request. The schema version is always added as the first query parameter.</summary>
     /// <remarks>

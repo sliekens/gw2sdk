@@ -44,8 +44,6 @@ public sealed class MarkupParser
                 iterator.Advance();
                 return null;
         }
-
-        ;
     }
 
     private static MarkupNode? ParseVoidNode(MarkupTokenIterator iterator)

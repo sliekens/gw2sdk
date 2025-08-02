@@ -21,7 +21,6 @@ internal static class InfusionSlotFlagsJson
             {
                 infusion = true;
             }
-
             else
             {
                 others.Add(entry.GetStringRequired());

@@ -21,7 +21,6 @@ internal static class ProfessionFlagsJson
             {
                 noRacialSkills = true;
             }
-
             else
             {
                 others.Add(entry.GetStringRequired());

@@ -12,7 +12,6 @@ public sealed class LinkValue
         ? UriKind.RelativeOrAbsolute
         : (UriKind)300;
 
-
     /// <summary>Creates an instance of <see cref="LinkValue" />.</summary>
     /// <param name="target">The link target.</param>
     /// <param name="relationType">The type of relationship the link represents.</param>

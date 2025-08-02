@@ -28,7 +28,6 @@ internal sealed class AchievementSkinBitJsonConverter : JsonConverter<Achievemen
 
     public static AchievementSkinBit Read(in JsonElement json)
     {
-
         JsonElement id = default, text = default;
         foreach (var member in json.EnumerateObject())
         {
