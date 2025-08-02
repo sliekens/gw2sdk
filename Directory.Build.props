@@ -87,6 +87,6 @@
     <AnalysisLevelStyle>latest-default</AnalysisLevelStyle>
 
     <!-- https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/usage-warnings -->
-    <AnalysisLevelUsage>latest-default</AnalysisLevelUsage>
+    <AnalysisLevelUsage>latest-all</AnalysisLevelUsage>
   </PropertyGroup>
 </Project>
