@@ -1,6 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+
 using GuildWars2.Mumble;
 
 namespace GuildWars2;
@@ -18,8 +19,10 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
     /// <summary>A list of observers who want to receive realtime game state.</summary>
     private readonly ConcurrentDictionary<IObserver<GameTick>, Subscription> subscribers = [];
 
+#pragma warning disable CA2213 // Timer is properly disposed in Dispose() and DisposeAsync() methods
     /// <summary>A Timer is used to poll for changes to the shared memory as there is no push mechanism.</summary>
     private readonly Timer timer;
+#pragma warning restore CA2213 // Timer is properly disposed in Dispose() and DisposeAsync() methods
 
     /// <summary>Flag indicating whether subscribers are being notified.</summary>
     private bool busy;
