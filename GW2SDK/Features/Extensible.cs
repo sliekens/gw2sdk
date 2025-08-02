@@ -159,11 +159,27 @@ public struct Extensible<TEnum>(string Name)
         return new(name);
     }
 
+    /// <summary>Converts a string to an instance of the Extensible enum class.</summary>
+    /// <param name="name">The name of the enum value.</param>
+    /// <returns>An instance of the Extensible enum class.</returns>
+    public static Extensible<TEnum> FromString(string name)
+    {
+        return new(name);
+    }
+
     /// <summary>Implicitly converts an enum to an instance of the Extensible enum class.</summary>
     /// <param name="name">The enum value.</param>
     /// <returns>An instance of the Extensible enum class.</returns>
     public static implicit operator Extensible<TEnum>(TEnum name)
     {
         return new(name.ToString());
+    }
+
+    /// <summary>Converts a value of type TEnum to an instance of Extensible&lt;TEnum&gt;.</summary>
+    /// <param name="value">The enum value.</param>
+    /// <returns>An instance of Extensible&lt;TEnum&gt;.</returns>
+    public static Extensible<TEnum> ToExtensible(TEnum value)
+    {
+        return new(value.ToString());
     }
 }
