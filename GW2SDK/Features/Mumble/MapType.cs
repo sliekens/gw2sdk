@@ -3,11 +3,12 @@ using System.Text.Json.Serialization;
 
 namespace GuildWars2.Mumble;
 
+#pragma warning disable CA1028 // Enum Storage should be Int32
+
 /// <summary>The map types.</summary>
 [PublicAPI]
 [DefaultValue(AutoRedirect)]
 [JsonConverter(typeof(MapTypeJsonConverter))]
-#pragma warning disable CA1028 // Enum Storage should be Int32
 public enum MapType : uint
 {
     // Keep the enum values in sync with the enum from the game, provided below.
