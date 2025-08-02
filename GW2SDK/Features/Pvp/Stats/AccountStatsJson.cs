@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+
 using GuildWars2.Hero;
 using GuildWars2.Json;
 
@@ -56,7 +57,11 @@ internal static class AccountStatsJson
             Professions =
                 professions.Map(static (in JsonElement value) => value.EnumerateObject()
                     .ToDictionary(
+#if NET
+                        pair => (ProfessionName)Enum.Parse<ProfessionName>(pair.Name, true),
+#else
                         pair => (ProfessionName)Enum.Parse(typeof(ProfessionName), pair.Name, true),
+#endif
                         pair => pair.Value.GetResults()
                     )
                 ),
