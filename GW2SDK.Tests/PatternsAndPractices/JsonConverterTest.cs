@@ -13,7 +13,7 @@ public class JsonConverterTest(AssemblyFixture fixture) : IClassFixture<Assembly
         var enumTypes = fixture.Assembly.GetTypes()
             .Where(t =>
                 t is { IsEnum: true, IsPublic: true, Namespace: not null }
-                && t.Namespace.StartsWith("GuildWars2")
+                && t.Namespace.StartsWith("GuildWars2", StringComparison.Ordinal)
             );
 
         Assert.All(

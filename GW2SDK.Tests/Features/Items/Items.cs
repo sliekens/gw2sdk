@@ -202,12 +202,19 @@ public class Items
                     // There is a workaround in place for PvP runes and sigils not being classified as such
                     if (upgradeComponent.GameTypes.Contains(GameType.Pvp))
                     {
+#if NET
+                        if (upgradeComponent.Name.Contains("Rune", StringComparison.Ordinal))
+#else
                         if (upgradeComponent.Name.Contains("Rune"))
+#endif
                         {
                             Assert.IsType<Rune>(upgradeComponent);
                         }
-
+#if NET
+                        if (upgradeComponent.Name.Contains("Sigil", StringComparison.Ordinal))
+#else
                         if (upgradeComponent.Name.Contains("Sigil"))
+#endif
                         {
                             Assert.IsType<Sigil>(upgradeComponent);
                         }

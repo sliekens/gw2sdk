@@ -16,7 +16,7 @@ public class DataTransferJsonTest(AssemblyFixture fixture) : IClassFixture<Assem
     public void JsonElement_conversions_are_extensions()
     {
         var candidates = fixture.Assembly.DefinedTypes
-            .Where(candidate => candidate.Name.EndsWith("Json"))
+            .Where(candidate => candidate.Name.EndsWith("Json", StringComparison.Ordinal))
             .SelectMany(reader => reader.GetMethods(DeclaredOnly | Public | NonPublic | Static))
             .ToList();
         Assert.All(

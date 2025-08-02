@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Globalization;
 using System.Numerics;
 
 using GuildWars2.Chat;
@@ -55,7 +56,7 @@ public record Objective
     {
         return new()
         {
-            ObjectiveId = int.Parse(Id.Split('-')[1]),
+            ObjectiveId = int.Parse(Id.Split('-')[1], CultureInfo.InvariantCulture),
             MapId = MapId
         };
     }

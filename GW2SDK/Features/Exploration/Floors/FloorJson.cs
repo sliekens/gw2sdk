@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Globalization;
+using System.Text.Json;
 
 using GuildWars2.Exploration.Regions;
 using GuildWars2.Json;
@@ -44,7 +45,7 @@ internal static class FloorJson
             TextureDimensions = textureDimensions.Map(static (in JsonElement value) => value.GetDimensions()),
             ClampedView = clampedView.Map(static (in JsonElement value) => value.GetContinentRectangle()),
             Regions = regions.Map(static (in JsonElement value) => value.GetMap(static (in JsonElement entry) => entry.GetRegion())
-                .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
+                .ToDictionary(kvp => int.Parse(kvp.Key, CultureInfo.InvariantCulture), kvp => kvp.Value)
             )
         };
     }

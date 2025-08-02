@@ -1,4 +1,4 @@
-﻿using static System.Globalization.NumberFormatInfo;
+﻿using System.Globalization;
 
 namespace GuildWars2.Http;
 
@@ -48,6 +48,6 @@ internal static class QueryBuilderExtensions
 
     internal static void Add(this QueryBuilder query, string key, int value)
     {
-        query.Add(key, value.ToString(InvariantInfo));
+        query.Add(key, value.ToString(CultureInfo.InvariantCulture));
     }
 }

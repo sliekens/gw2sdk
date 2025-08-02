@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Globalization;
+using System.Text.Json;
 
 using GuildWars2.Exploration.Maps;
 using GuildWars2.Json;
@@ -50,7 +51,7 @@ internal static class RegionJson
             ContinentRectangle =
                 continentRectangle.Map(static (in JsonElement value) => value.GetContinentRectangle()),
             Maps = maps.Map(static (in JsonElement value) => value.GetMap(static (in JsonElement entry) => entry.GetMap())
-                .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
+                .ToDictionary(kvp => int.Parse(kvp.Key, CultureInfo.InvariantCulture), kvp => kvp.Value)
             )
         };
     }

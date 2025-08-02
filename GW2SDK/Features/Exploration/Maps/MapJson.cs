@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Globalization;
+using System.Text.Json;
 
 using GuildWars2.Exploration.Adventures;
 using GuildWars2.Exploration.GodShrines;
@@ -112,14 +113,14 @@ internal static class MapJson
             PointsOfInterest =
                 pointsOfInterest.Map(static (in JsonElement value) =>
                     value.GetMap(static (in JsonElement entry) => entry.GetPointOfInterest())
-                        .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
+                        .ToDictionary(kvp => int.Parse(kvp.Key, CultureInfo.InvariantCulture), kvp => kvp.Value)
                 ),
             GodShrines =
                 godShrines.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetGodShrine())
                 ),
             Hearts =
                 tasks.Map(static (in JsonElement value) => value.GetMap(static (in JsonElement entry) => entry.GetHeart())
-                    .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
+                    .ToDictionary(kvp => int.Parse(kvp.Key, CultureInfo.InvariantCulture), kvp => kvp.Value)
                 ),
             HeroChallenges =
                 skillChallenges.Map(static (in JsonElement values) =>
@@ -127,7 +128,7 @@ internal static class MapJson
                 ),
             Sectors =
                 sectors.Map(static (in JsonElement value) => value.GetMap(static (in JsonElement entry) => entry.GetSector())
-                    .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
+                    .ToDictionary(kvp => int.Parse(kvp.Key, CultureInfo.InvariantCulture), kvp => kvp.Value)
                 ),
             Adventures =
                 adventures.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetAdventure())

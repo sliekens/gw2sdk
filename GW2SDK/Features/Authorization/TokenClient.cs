@@ -75,10 +75,12 @@ public sealed class TokenClient
         var requestBuilder = RequestBuilder.HttpGet("v2/createsubtoken", accessToken);
         if (permissions is not null)
         {
+#pragma warning disable CA1308 // Normalize strings to uppercase
             requestBuilder.Query.Add(
                 "permissions",
                 string.Join(",", permissions).ToLowerInvariant()
             );
+#pragma warning restore CA1308 // Normalize strings to uppercase
         }
 
         if (absoluteExpirationDate.HasValue)
@@ -138,10 +140,12 @@ public sealed class TokenClient
         var requestBuilder = RequestBuilder.HttpGet("v2/createsubtoken", accessToken);
         if (permissions is not null)
         {
+#pragma warning disable CA1308 // Normalize strings to uppercase
             requestBuilder.Query.Add(
                 "permissions",
                 string.Join(",", permissions).ToLowerInvariant()
             );
+#pragma warning restore CA1308 // Normalize strings to uppercase
         }
 
         if (absoluteExpirationDate.HasValue)

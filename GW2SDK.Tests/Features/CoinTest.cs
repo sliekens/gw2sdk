@@ -310,7 +310,7 @@ public class CoinTest
         }
 
         var reason = Assert.Throws<ArgumentException>("obj", CompareToString);
-        Assert.StartsWith("Object must be of type Coin", reason.Message);
+        Assert.StartsWith("Object must be of type Coin", reason.Message, StringComparison.Ordinal);
     }
 
     [Fact]

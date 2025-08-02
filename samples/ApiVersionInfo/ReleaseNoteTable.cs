@@ -1,4 +1,6 @@
-﻿using GuildWars2.Metadata;
+﻿using System.Globalization;
+
+using GuildWars2.Metadata;
 
 using Spectre.Console;
 using Spectre.Console.Rendering;
@@ -24,7 +26,8 @@ internal sealed class ReleaseNoteTable : IRenderable
 
     public void AddRow(Schema schemaVersion)
     {
-        var formatted = DateTimeOffset.Parse(schemaVersion.Version).ToString("D");
+        var formatted = DateTimeOffset.Parse(schemaVersion.Version, CultureInfo.InvariantCulture)
+            .ToString("D", CultureInfo.CurrentCulture);
         table.AddRow(formatted.EscapeMarkup(), schemaVersion.Description.EscapeMarkup());
     }
 }

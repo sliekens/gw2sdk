@@ -52,7 +52,7 @@ public class EnumJsonConverterGenerator : IIncrementalGenerator
             }
 
             var namespaceName = enumSymbol.ContainingNamespace.ToDisplayString();
-            if (!namespaceName.StartsWith("GuildWars2"))
+            if (!namespaceName.StartsWith("GuildWars2", StringComparison.Ordinal))
             {
                 continue;
             }

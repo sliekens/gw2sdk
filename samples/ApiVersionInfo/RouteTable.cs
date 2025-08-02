@@ -1,4 +1,6 @@
-﻿using GuildWars2.Metadata;
+﻿using System.Globalization;
+
+using GuildWars2.Metadata;
 
 using Spectre.Console;
 using Spectre.Console.Rendering;
@@ -44,7 +46,7 @@ internal sealed class RouteTable(RouteOptions routeOptions) : IRenderable
         };
 
         table.AddRow(
-            string.Format(pathTemplate, route.Path.EscapeMarkup()),
+            string.Format(CultureInfo.CurrentCulture, pathTemplate, route.Path.EscapeMarkup()),
             route.RequiresAuthorization ? "Access token" : "⸻",
             route.Multilingual ? string.Join(", ", languages) : "⸻"
         );

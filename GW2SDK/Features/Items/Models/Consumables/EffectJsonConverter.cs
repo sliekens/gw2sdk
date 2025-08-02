@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Globalization;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 using GuildWars2.Json;
@@ -44,7 +45,7 @@ internal sealed class EffectJsonConverter : JsonConverter<Effect>
         {
             Name = json.GetProperty("name").GetStringRequired(),
             Description = json.GetProperty("description").GetStringRequired(),
-            Duration = TimeSpan.Parse(json.GetProperty("duration").GetStringRequired()),
+            Duration = TimeSpan.Parse(json.GetProperty("duration").GetStringRequired(), CultureInfo.InvariantCulture),
             ApplyCount = json.GetProperty("apply_count").GetInt32(),
 #pragma warning disable CS0618 // Suppress obsolete warning
             IconHref = iconString,

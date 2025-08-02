@@ -17,7 +17,7 @@ public class DesignedForClientCodeTest(AssemblyFixture fixture) : IClassFixture<
          * Especially regarding how easily they can be replaced or evolved between versions.
          */
         var visible = fixture.Assembly.ExportedTypes
-            .Where(type => type.Namespace!.StartsWith("GuildWars2"))
+            .Where(type => type.Namespace!.StartsWith("GuildWars2", StringComparison.Ordinal))
             .ToList();
         Assert.All(
             visible,

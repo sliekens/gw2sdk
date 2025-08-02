@@ -1,4 +1,5 @@
-﻿using System.Runtime.Versioning;
+﻿using System.Globalization;
+using System.Runtime.Versioning;
 
 using GuildWars2;
 using GuildWars2.Mumble;
@@ -90,16 +91,16 @@ public sealed class GameListener(
         }
 
         PrintHeader("Technical Information");
-        Print("Build ID", gameTick.Context.BuildId.ToString("N0"));
-        Print("Process ID", gameTick.Context.ProcessId.ToString("N0"));
+        Print("Build ID", gameTick.Context.BuildId.ToString("N0", CultureInfo.CurrentCulture));
+        Print("Process ID", gameTick.Context.ProcessId.ToString("N0", CultureInfo.CurrentCulture));
         Print("World ID", $"{identity.WorldId} ({currentWorld})");
         Print("World population", world?.Population);
         Print("World region", world?.Region);
         Print("World language", world?.Language.CultureInfo.DisplayName);
-        Print("Shard ID", gameTick.Context.ShardId.ToString("X8"));
-        Print("Instance", gameTick.Context.Instance.ToString("X8"));
+        Print("Shard ID", gameTick.Context.ShardId.ToString("X8", CultureInfo.CurrentCulture));
+        Print("Instance", gameTick.Context.Instance.ToString("X8", CultureInfo.CurrentCulture));
         Print("Server IP", gameTick.Context.ServerAddress.Address);
-        Print("Tick", gameTick.UiTick.ToString("N0"));
+        Print("Tick", gameTick.UiTick.ToString("N0", CultureInfo.CurrentCulture));
         Console.WriteLine();
 
         PrintHeader("User Interface");
@@ -144,7 +145,7 @@ public sealed class GameListener(
                 : "static"
         );
         Print("World map is open", gameTick.Context.UiState.HasFlag(UiState.IsMapOpen));
-        Print("Compass/world map scale", gameTick.Context.MapScale.ToString("N"));
+        Print("Compass/world map scale", gameTick.Context.MapScale.ToString("N", CultureInfo.CurrentCulture));
         Print(
             "Map center",
             $"X = {gameTick.Context.MapCenterX,10:N} Y = {gameTick.Context.MapCenterY,10:N}"

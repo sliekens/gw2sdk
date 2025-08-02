@@ -60,7 +60,7 @@
     <AnalysisLevelDocumentation>latest-default</AnalysisLevelDocumentation>
 
     <!-- https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/globalization-warnings -->
-    <AnalysisLevelGlobalization>latest-default</AnalysisLevelGlobalization>
+    <AnalysisLevelGlobalization>latest-all</AnalysisLevelGlobalization>
 
     <!-- https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/interoperability-warnings -->
     <AnalysisLevelInteroperability>latest-all</AnalysisLevelInteroperability>

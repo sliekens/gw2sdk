@@ -43,7 +43,9 @@ public sealed class Language
             ThrowHelper.ThrowBadArgument("Value must be a two-letter code.", nameof(alpha2Code));
         }
 
+#pragma warning disable CA1308 // Normalize strings to uppercase
         Alpha2Code = alpha2Code.ToLowerInvariant();
+#pragma warning restore CA1308 // Normalize strings to uppercase
     }
 
     /// <summary>Gets the language associated with the current <see cref="CultureInfo" />.</summary>

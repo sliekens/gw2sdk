@@ -88,8 +88,8 @@ public class ExtensibleEnum
     [Fact]
     public void Does_case_insensitivate_equality_check()
     {
-        var left = new Extensible<Rarity>(nameof(Rarity.Legendary).ToLowerInvariant());
-        var right = new Extensible<Rarity>(nameof(Rarity.Legendary).ToUpperInvariant());
+        var left = new Extensible<Rarity>("legendary");
+        var right = new Extensible<Rarity>("LEGENDARY");
         Assert.True(left == right);
         Assert.True(right == left);
     }

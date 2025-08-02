@@ -33,10 +33,18 @@ internal class SchemaVersionHandler : DelegatingHandler
 
             // Don't use UriBuilder because it contains breaking changes between .NET Framework and .NET (Core)
             // A simple string replace will have to suffice
+#if NET
+            var requestUriWithLatestVersion = request.RequestUri.AbsoluteUri.Replace(
+                recommended,
+                "3",
+                StringComparison.Ordinal
+            );
+#else
             var requestUriWithLatestVersion = request.RequestUri.AbsoluteUri.Replace(
                 recommended,
                 "3"
             );
+#endif
 
             request.RequestUri = new Uri(requestUriWithLatestVersion, UriKind.Absolute);
         }
