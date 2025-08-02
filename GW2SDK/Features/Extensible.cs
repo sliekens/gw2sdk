@@ -151,6 +151,42 @@ public struct Extensible<TEnum>(string Name)
         return !left.Equals(right);
     }
 
+    /// <summary>Determines whether one Extensible object is less than another.</summary>
+    /// <param name="left">The first Extensible object to compare.</param>
+    /// <param name="right">The second Extensible object to compare.</param>
+    /// <returns><c>true</c> if left is less than right; otherwise, <c>false</c>.</returns>
+    public static bool operator <(Extensible<TEnum> left, Extensible<TEnum> right)
+    {
+        return left.CompareTo(right) < 0;
+    }
+
+    /// <summary>Determines whether one Extensible object is less than or equal to another.</summary>
+    /// <param name="left">The first Extensible object to compare.</param>
+    /// <param name="right">The second Extensible object to compare.</param>
+    /// <returns><c>true</c> if left is less than or equal to right; otherwise, <c>false</c>.</returns>
+    public static bool operator <=(Extensible<TEnum> left, Extensible<TEnum> right)
+    {
+        return left.CompareTo(right) <= 0;
+    }
+
+    /// <summary>Determines whether one Extensible object is greater than another.</summary>
+    /// <param name="left">The first Extensible object to compare.</param>
+    /// <param name="right">The second Extensible object to compare.</param>
+    /// <returns><c>true</c> if left is greater than right; otherwise, <c>false</c>.</returns>
+    public static bool operator >(Extensible<TEnum> left, Extensible<TEnum> right)
+    {
+        return left.CompareTo(right) > 0;
+    }
+
+    /// <summary>Determines whether one Extensible object is greater than or equal to another.</summary>
+    /// <param name="left">The first Extensible object to compare.</param>
+    /// <param name="right">The second Extensible object to compare.</param>
+    /// <returns><c>true</c> if left is greater than or equal to right; otherwise, <c>false</c>.</returns>
+    public static bool operator >=(Extensible<TEnum> left, Extensible<TEnum> right)
+    {
+        return left.CompareTo(right) >= 0;
+    }
+
     /// <summary>Implicitly converts a string to an instance of the Extensible enum class.</summary>
     /// <param name="name">The name of the enum value.</param>
     /// <returns>An instance of the Extensible enum class.</returns>
@@ -159,6 +195,7 @@ public struct Extensible<TEnum>(string Name)
         return new(name);
     }
 
+#pragma warning disable CA1000 // Do not declare static members on generic types
     /// <summary>Converts a string to an instance of the Extensible enum class.</summary>
     /// <param name="name">The name of the enum value.</param>
     /// <returns>An instance of the Extensible enum class.</returns>
@@ -166,6 +203,7 @@ public struct Extensible<TEnum>(string Name)
     {
         return new(name);
     }
+#pragma warning restore CA1000 // Do not declare static members on generic types
 
     /// <summary>Implicitly converts an enum to an instance of the Extensible enum class.</summary>
     /// <param name="name">The enum value.</param>
@@ -175,6 +213,7 @@ public struct Extensible<TEnum>(string Name)
         return new(name.ToString());
     }
 
+#pragma warning disable CA1000 // Do not declare static members on generic types
     /// <summary>Converts a value of type TEnum to an instance of Extensible&lt;TEnum&gt;.</summary>
     /// <param name="value">The enum value.</param>
     /// <returns>An instance of Extensible&lt;TEnum&gt;.</returns>
@@ -182,4 +221,5 @@ public struct Extensible<TEnum>(string Name)
     {
         return new(value.ToString());
     }
+#pragma warning restore CA1000 // Do not declare static members on generic types
 }
