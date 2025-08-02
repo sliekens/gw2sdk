@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Reflection;
+
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.PatternsAndPractices;
@@ -25,20 +26,20 @@ public class SensibleDefaultsTest(AssemblyFixture fixture) : IClassFixture<Assem
                 if (HasDefaultMember(type))
                 {
                     var annotation = type.GetCustomAttribute<DefaultValueAttribute>()
-                        ?? throw new ApplicationException(
+                        ?? throw new InvalidOperationException(
                             $"Enum '{type}' has an implicit default value, change its value or mark it as [DefaultValue]."
                         );
 
                     if (annotation.Value is null || annotation.Value.GetType() != type)
                     {
-                        throw new ApplicationException(
+                        throw new InvalidOperationException(
                             $"Enum '{type}' has a [DefaultValue] with an invalid type, use the enum's type."
                         );
                     }
 
                     if (!Enum.IsDefined(type, annotation.Value))
                     {
-                        throw new ApplicationException(
+                        throw new InvalidOperationException(
                             $"Enum '{type}' has a [DefaultValue] that does not exist, adjust or remove the attribute."
                         );
                     }

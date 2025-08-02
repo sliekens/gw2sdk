@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.PatternsAndPractices;
@@ -28,7 +29,7 @@ public class DesignedForClientCodeTest(AssemblyFixture fixture) : IClassFixture<
                     return;
                 }
 
-                throw new ApplicationException(
+                throw new InvalidOperationException(
                     $"Type '{type}' is visible to client code, make it internal or mark it as [PublicAPI]."
                 );
             }
@@ -46,7 +47,7 @@ public class DesignedForClientCodeTest(AssemblyFixture fixture) : IClassFixture<
                 if (type.GetCustomAttributes()
                     .Any(att => att.GetType().Name == "PublicAPIAttribute"))
                 {
-                    throw new ApplicationException(
+                    throw new InvalidOperationException(
                         $"Type '{type}' is invisible to client code, make it public or remove [PublicAPI]."
                     );
                 }

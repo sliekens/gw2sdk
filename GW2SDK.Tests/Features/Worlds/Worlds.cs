@@ -34,7 +34,7 @@ public class Worlds
                             Assert.Equal(1800, world.TransferFee);
                             break;
                         default:
-                            throw new Exception("Unexpected population type.");
+                            throw new InvalidOperationException("Unexpected population type.");
                     }
                 }
 

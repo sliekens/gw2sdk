@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.PatternsAndPractices;
@@ -32,7 +33,7 @@ public class DesignedForInheritanceTest(AssemblyFixture fixture) : IClassFixture
                     return;
                 }
 
-                throw new ApplicationException(
+                throw new InvalidOperationException(
                     $"Type '{type}' is not abstract nor sealed, check if it needs to be abstract or sealed or marked as [Inheritable]."
                 );
             }
@@ -54,7 +55,7 @@ public class DesignedForInheritanceTest(AssemblyFixture fixture) : IClassFixture
                 var subtypes = classes.Where(subtype => subtype.IsSubclassOf(type)).ToList();
                 if (subtypes.Count == 0)
                 {
-                    throw new ApplicationException(
+                    throw new InvalidOperationException(
                         $"Type '{type}' is marked as [Inheritable] but has no subtypes."
                     );
                 }
