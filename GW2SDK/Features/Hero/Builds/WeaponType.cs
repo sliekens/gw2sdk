@@ -1,14 +1,19 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace GuildWars2.Hero.Builds;
 
 /// <summary>The weapon types.</summary>
 [PublicAPI]
+[DefaultValue(None)]
 [JsonConverter(typeof(WeaponTypeJsonConverter))]
 public enum WeaponType
 {
+    /// <summary>No specific weapon type or unknown weapon type.</summary>
+    Unknown,
+
     /// <summary>No weapon type.</summary>
-    None = 1,
+    None,
 
     /// <summary>The dagger is a one-handed weapon that may also be wielded in the main hand and off-hand. Daggers are known
     /// for their fast and aggressive attacks.</summary>

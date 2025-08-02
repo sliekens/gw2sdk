@@ -1,14 +1,19 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace GuildWars2.Hero.Equipment.Templates;
 
 /// <summary>The location of an equipment item.</summary>
 [PublicAPI]
+[DefaultValue(None)]
 [JsonConverter(typeof(EquipmentLocationJsonConverter))]
 public enum EquipmentLocation
 {
+    /// <summary>No specific location or unknown location.</summary>
+    None,
+
     /// <summary>The item is equipped in the current active template.</summary>
-    Equipped = 1,
+    Equipped,
 
     /// <summary>The item is equipped in an inactive template.</summary>
     Armory,

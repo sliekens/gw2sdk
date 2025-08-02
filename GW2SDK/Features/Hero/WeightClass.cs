@@ -1,14 +1,19 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace GuildWars2.Hero;
 
 /// <summary>The weight classes of armor.</summary>
 [PublicAPI]
+[DefaultValue(None)]
 [JsonConverter(typeof(WeightClassJsonConverter))]
 public enum WeightClass
 {
+    /// <summary>No specific weight class or unknown weight class.</summary>
+    None,
+
     /// <summary>Clothing can be worn by any profession.</summary>
-    Clothing = 1,
+    Clothing,
 
     /// <summary>Light armor can be worn by the <see cref="ProfessionName.Elementalist" />,
     /// <see cref="ProfessionName.Mesmer" />, and <see cref="ProfessionName.Necromancer" /> professions.</summary>

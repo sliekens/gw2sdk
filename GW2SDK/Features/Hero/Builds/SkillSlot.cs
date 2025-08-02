@@ -1,14 +1,19 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace GuildWars2.Hero.Builds;
 
 /// <summary>The skill slots for abilities which can be activated by the player.</summary>
 [PublicAPI]
+[DefaultValue(None)]
 [JsonConverter(typeof(SkillSlotJsonConverter))]
 public enum SkillSlot
 {
+    /// <summary>No specific skill slot or unknown skill slot.</summary>
+    None,
+
     /// <summary>The first weapon skill. Granted by two-handed weapons or one-handed weapons in the main hand.</summary>
-    Weapon_1 = 1,
+    Weapon_1,
 
     /// <summary>The second weapon skill. Granted by two-handed weapons or one-handed weapons in the main hand.</summary>
     Weapon_2,

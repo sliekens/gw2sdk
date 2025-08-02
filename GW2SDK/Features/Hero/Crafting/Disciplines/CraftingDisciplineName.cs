@@ -1,14 +1,19 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace GuildWars2.Hero.Crafting.Disciplines;
 
 /// <summary>The different crafting disciplines in the game.</summary>
 [PublicAPI]
+[DefaultValue(None)]
 [JsonConverter(typeof(CraftingDisciplineNameJsonConverter))]
 public enum CraftingDisciplineName
 {
+    /// <summary>No specific crafting discipline or unknown crafting discipline.</summary>
+    None,
+
     /// <summary>The Armorsmith crafting discipline.</summary>
-    Armorsmith = 1,
+    Armorsmith,
 
     /// <summary>The Artificer crafting discipline.</summary>
     Artificer,

@@ -1,14 +1,19 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace GuildWars2.Pvp.Games;
 
 /// <summary>The result of a PvP match.</summary>
 [PublicAPI]
+[DefaultValue(None)]
 [JsonConverter(typeof(PvpResultJsonConverter))]
 public enum PvpResult
 {
+    /// <summary>No specific result or unknown result.</summary>
+    None,
+
     /// <summary>Your team won.</summary>
-    Victory = 1,
+    Victory,
 
     /// <summary>Your team lost.</summary>
     Defeat,

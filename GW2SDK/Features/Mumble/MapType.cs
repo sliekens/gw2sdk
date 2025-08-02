@@ -1,10 +1,13 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace GuildWars2.Mumble;
 
 /// <summary>The map types.</summary>
 [PublicAPI]
+[DefaultValue(AutoRedirect)]
 [JsonConverter(typeof(MapTypeJsonConverter))]
+#pragma warning disable CA1028 // Enum Storage should be Int32
 public enum MapType : uint
 {
     // Keep the enum values in sync with the enum from the game, provided below.
@@ -36,7 +39,8 @@ public enum MapType : uint
     //     MAP_TYPES
     // };
 
-    //AutoRedirect = 0,
+    /// <summary>Redirect (e.g., when you log in while in a PvP match).</summary>
+    AutoRedirect,
 
     //CharacterCreation = 1,
 

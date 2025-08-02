@@ -1,16 +1,21 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace GuildWars2.Hero;
 
 /// <summary>The playable races.</summary>
 [PublicAPI]
+[DefaultValue(None)]
 [JsonConverter(typeof(RaceNameJsonConverter))]
 public enum RaceName
 {
+    /// <summary>No specific race or unknown race.</summary>
+    None,
+
     /// <summary>These alchemagical inventors may be short in stature, but they're intellectual giants. Among the asura, it's
     /// not the strong who survive, but the clever. Other races believe they should rule by virtue of their power and strength,
     /// but they're deluding themselves. In due time, all will serve the asura.</summary>
-    Asura = 1,
+    Asura,
 
     /// <summary>The charr race was forged in the merciless crucible of war. It is all they know. War defines them, and their
     /// quest for dominion drives them ever onward. The weakling and the fool have no place among the charr. Victory is all

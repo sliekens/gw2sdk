@@ -1,14 +1,19 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace GuildWars2.Hero.Equipment.Novelties;
 
 /// <summary>The novelty kinds.</summary>
 [PublicAPI]
+[DefaultValue(None)]
 [JsonConverter(typeof(NoveltyKindJsonConverter))]
 public enum NoveltyKind
 {
+    /// <summary>No specific novelty kind or unknown novelty kind.</summary>
+    None,
+
     /// <summary>Makes the character sit on a chair.</summary>
-    Chair = 1,
+    Chair,
 
     /// <summary>Musical instruments.</summary>
     Music,

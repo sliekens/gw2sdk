@@ -1,15 +1,20 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace GuildWars2.Hero.Builds;
 
 /// <summary>Skills with similar behaviors are grouped into one of these categories. Many traits affect all skills in a
 /// certain category.</summary>
 [PublicAPI]
+[DefaultValue(None)]
 [JsonConverter(typeof(SkillCategoryNameJsonConverter))]
 public enum SkillCategoryName
 {
+    /// <summary>No specific skill category or unknown skill category.</summary>
+    None,
+
     /// <summary> Elementalist utility skills. Non-elemental magical energy sources of critical damage.</summary>
-    Arcane = 1,
+    Arcane,
 
     /// <summary>Warrior utility skills. Buffs for allies that can be picked up, moved and replanted.</summary>
     Banner,

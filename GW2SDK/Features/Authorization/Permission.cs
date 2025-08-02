@@ -1,14 +1,19 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace GuildWars2.Authorization;
 
 /// <summary>Represents the permissions available for Guild Wars 2 authorization.</summary>
 [PublicAPI]
 [JsonConverter(typeof(PermissionJsonConverter))]
+[DefaultValue(None)]
 public enum Permission
 {
+    /// <summary>No permissions granted.</summary>
+    None,
+
     /// <summary>Grants access to the account information.</summary>
-    Account = 1,
+    Account,
 
     /// <summary>Grants access to the builds information.</summary>
     Builds,

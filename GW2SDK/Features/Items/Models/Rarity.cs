@@ -1,14 +1,19 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace GuildWars2.Items;
 
 /// <summary>The item rarities.</summary>
 [PublicAPI]
+[DefaultValue(None)]
 [JsonConverter(typeof(RarityJsonConverter))]
 public enum Rarity
 {
+    /// <summary>No specific rarity or unknown rarity.</summary>
+    None,
+
     /// <summary>Gray items.</summary>
-    Junk = 1,
+    Junk,
 
     /// <summary>White items.</summary>
     Basic,

@@ -1,14 +1,19 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace GuildWars2.Items;
 
 /// <summary>The game types where items can be used.</summary>
 [PublicAPI]
+[DefaultValue(None)]
 [JsonConverter(typeof(GameTypeJsonConverter))]
 public enum GameType
 {
+    /// <summary>No specific game type or unknown game type.</summary>
+    None,
+
     /// <summary>Usable in activities.</summary>
-    Activity = 1,
+    Activity,
 
     /// <summary>Usable in dungeons.</summary>
     Dungeon,

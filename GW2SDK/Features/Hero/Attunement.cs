@@ -1,14 +1,19 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace GuildWars2.Hero;
 
 /// <summary>The attunement of an Elementalist.</summary>
 [PublicAPI]
+[DefaultValue(None)]
 [JsonConverter(typeof(AttunementJsonConverter))]
 public enum Attunement
 {
+    /// <summary>No specific attunement or unknown attunement.</summary>
+    None,
+
     /// <summary>Attunement to Earth.</summary>
-    Earth = 1,
+    Earth,
 
     /// <summary>Attunement to Water.</summary>
     Water,

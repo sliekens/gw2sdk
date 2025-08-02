@@ -1,14 +1,19 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace GuildWars2.Guilds.Logs;
 
 /// <summary>The guild upgrade actions.</summary>
 [PublicAPI]
+[DefaultValue(None)]
 [JsonConverter(typeof(GuildUpgradeActionJsonConverter))]
 public enum GuildUpgradeAction
 {
+    /// <summary>No specific action or unknown action.</summary>
+    None,
+
     /// <summary>The upgrade was queued for processing.</summary>
-    Queued = 1,
+    Queued,
 
     /// <summary>The upgrade was cancelled.</summary>
     Cancelled,

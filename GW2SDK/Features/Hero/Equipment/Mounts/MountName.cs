@@ -1,15 +1,20 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace GuildWars2.Hero.Equipment.Mounts;
 
 /// <summary>The mount types.</summary>
 [PublicAPI]
+[DefaultValue(None)]
 [JsonConverter(typeof(MountNameJsonConverter))]
 public enum MountName
 {
+    /// <summary>No specific mount or unknown mount.</summary>
+    None,
+
     /// <summary>Swift, strong, and agile, raptors are stalwart explorers and great companions for exploring the far reaches of
     /// the Crystal Desert.</summary>
-    Raptor = 1,
+    Raptor,
 
     /// <summary>Springers are bounding beasts whose powerful legs easily maneuver them through the craggy landscapes of the
     /// Desert Highlands and beyond.</summary>

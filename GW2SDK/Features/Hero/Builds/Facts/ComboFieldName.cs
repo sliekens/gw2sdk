@@ -1,14 +1,19 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace GuildWars2.Hero.Builds.Facts;
 
 /// <summary>The combo field (area effect) that is created by a skill.</summary>
 [PublicAPI]
+[DefaultValue(None)]
 [JsonConverter(typeof(ComboFieldNameJsonConverter))]
 public enum ComboFieldName
 {
+    /// <summary>No specific combo field or unknown combo field.</summary>
+    None,
+
     /// <summary>Dark fields whose combos cause Blindness or Life Stealing.</summary>
-    Dark = 1,
+    Dark,
 
     /// <summary>Ethereal fields whose combos apply Chaos Aura to allies and cause Confusion to foes.</summary>
     Ethereal,

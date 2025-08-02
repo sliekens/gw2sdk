@@ -1,14 +1,19 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace GuildWars2.Hero;
 
 /// <summary>The body types of characters.</summary>
 [PublicAPI]
+[DefaultValue(None)]
 [JsonConverter(typeof(BodyTypeJsonConverter))]
 public enum BodyType
 {
+    /// <summary>No specific body type or unknown body type.</summary>
+    None,
+
     /// <summary>Female body type.</summary>
-    Female = 1,
+    Female,
 
     /// <summary>Male body type.</summary>
     Male
