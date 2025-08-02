@@ -5,7 +5,7 @@ namespace GuildWars2;
 
 /// <summary>A JSON converter for the Extensible struct with a specific enum type.</summary>
 /// <typeparam name="TEnum">The type of the enum.</typeparam>
-internal class ExtensibleEnumJsonConverter<TEnum> : JsonConverter<Extensible<TEnum>>
+internal sealed class ExtensibleEnumJsonConverter<TEnum> : JsonConverter<Extensible<TEnum>>
     where TEnum : struct, Enum
 {
     /// <inheritdoc />

@@ -1,6 +1,6 @@
 ﻿namespace GuildWars2.Markup;
 
-internal class MarkupTokenIterator(IEnumerable<MarkupToken> input)
+internal sealed class MarkupTokenIterator(IEnumerable<MarkupToken> input)
 {
     private readonly List<MarkupToken> tokens = input.ToList();
 

@@ -5,7 +5,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Wardrobe;
 
-internal class SkinFlagsJsonConverter : JsonConverter<SkinFlags>
+internal sealed class SkinFlagsJsonConverter : JsonConverter<SkinFlags>
 {
     public override SkinFlags? Read(
         ref Utf8JsonReader reader,

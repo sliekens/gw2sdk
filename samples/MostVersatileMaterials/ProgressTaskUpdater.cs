@@ -4,7 +4,7 @@ using Spectre.Console;
 
 namespace MostVersatileMaterials;
 
-internal class ProgressTaskUpdater(ProgressTask progress) : IProgress<BulkProgress>
+internal sealed class ProgressTaskUpdater(ProgressTask progress) : IProgress<BulkProgress>
 {
     public void Report(BulkProgress value)
     {

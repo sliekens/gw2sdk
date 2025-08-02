@@ -8,7 +8,7 @@ namespace GameLinkProgram;
 
 #pragma warning disable CA1303 // Do not pass literals as localized parameters
 
-internal class Program
+internal sealed class Program
 {
     public static async Task Main(string[] args)
     {

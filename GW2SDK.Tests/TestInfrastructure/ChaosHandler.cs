@@ -6,7 +6,7 @@ namespace GuildWars2.Tests.TestInfrastructure;
 
 #pragma warning disable CA5394 // Do not use insecure randomness
 
-internal class ChaosHandler : DelegatingHandler
+internal sealed class ChaosHandler : DelegatingHandler
 {
     private static readonly Random Random = new();
 

@@ -2,7 +2,7 @@
 
 namespace GuildWars2.TestDataHelper;
 
-internal class JsonAchievementService(HttpClient http)
+internal sealed class JsonAchievementService(HttpClient http)
 {
     public async Task<ISet<string>> GetAllJsonAchievements(IProgress<BulkProgress> progress)
     {

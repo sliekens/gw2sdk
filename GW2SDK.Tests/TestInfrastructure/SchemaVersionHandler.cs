@@ -1,6 +1,6 @@
 ﻿namespace GuildWars2.Tests.TestInfrastructure;
 
-internal class SchemaVersionHandler : DelegatingHandler
+internal sealed class SchemaVersionHandler : DelegatingHandler
 {
     protected override Task<HttpResponseMessage> SendAsync(
         HttpRequestMessage request,

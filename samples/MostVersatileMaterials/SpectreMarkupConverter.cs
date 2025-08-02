@@ -6,7 +6,7 @@ using Spectre.Console;
 
 namespace MostVersatileMaterials;
 
-internal class SpectreMarkupConverter
+internal sealed class SpectreMarkupConverter
 {
     private static readonly IReadOnlyDictionary<string, string> ColorMap =
         new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)

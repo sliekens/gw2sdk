@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Tests.TestInfrastructure;
 
-internal class LoggingHandler : DelegatingHandler
+internal sealed class LoggingHandler : DelegatingHandler
 {
     public static AsyncLocal<ITestOutputHelper> Output { get; } = new();
 

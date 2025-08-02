@@ -8,7 +8,7 @@ using GuildWars2.Items;
 
 namespace Gw2ClientProgram;
 
-internal class Program
+internal sealed class Program
 {
     public static async Task Main(string[] args)
     {

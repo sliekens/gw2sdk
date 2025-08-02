@@ -5,7 +5,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-internal class UpgradeComponentFlagsJsonConverter : JsonConverter<UpgradeComponentFlags>
+internal sealed class UpgradeComponentFlagsJsonConverter : JsonConverter<UpgradeComponentFlags>
 {
     public override UpgradeComponentFlags? Read(
         ref Utf8JsonReader reader,

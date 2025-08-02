@@ -3,7 +3,7 @@ using GuildWars2.Hero.Equipment.Templates;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Templates;
 
-internal class EquipmentItemValidation
+internal sealed class EquipmentItemValidation
 {
     public static void Validate(EquipmentItem item)
     {

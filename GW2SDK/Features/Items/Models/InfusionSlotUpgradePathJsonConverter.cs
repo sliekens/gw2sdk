@@ -5,7 +5,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-internal class InfusionSlotUpgradePathJsonConverter : JsonConverter<InfusionSlotUpgradePath>
+internal sealed class InfusionSlotUpgradePathJsonConverter : JsonConverter<InfusionSlotUpgradePath>
 {
     public override InfusionSlotUpgradePath? Read(
         ref Utf8JsonReader reader,

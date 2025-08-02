@@ -5,7 +5,7 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-internal class ItemFlagsJsonConverter : JsonConverter<ItemFlags>
+internal sealed class ItemFlagsJsonConverter : JsonConverter<ItemFlags>
 {
     public override ItemFlags? Read(
         ref Utf8JsonReader reader,

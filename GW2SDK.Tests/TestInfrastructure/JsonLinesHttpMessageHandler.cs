@@ -6,7 +6,7 @@ using System.Web;
 
 namespace GuildWars2.Tests.TestInfrastructure;
 
-internal class JsonLinesHttpMessageHandler(string path) : HttpMessageHandler
+internal sealed class JsonLinesHttpMessageHandler(string path) : HttpMessageHandler
 {
     private readonly Dictionary<int, JsonElement> Entries = JsonLinesReader.Read(path)
         .Select(json =>
