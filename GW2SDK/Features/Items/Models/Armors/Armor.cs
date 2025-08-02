@@ -44,7 +44,9 @@ public record Armor : Item, ICombatEquipment, IUpgradable
     /// <summary>The ID of the upgrade component in the upgrade slot, if any.</summary>
     public required int? SuffixItemId { get; init; }
 
+#pragma warning disable CA1033 // Interface methods should be callable by child types
     int? IUpgradable.SecondarySuffixItemId => null;
+#pragma warning restore CA1033 // Interface methods should be callable by child types
 
     /// <summary>The upgrade slots of the armor.</summary>
     public IReadOnlyList<int?> UpgradeSlots =>
