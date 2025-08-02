@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Versioning;
+
 using GuildWars2.Hero.Equipment.Mounts;
 using GuildWars2.Mumble;
 
@@ -73,6 +74,10 @@ public class GameLinkTest
 
         Assert.NotNull(actual);
         Assert.NotEmpty(actual.Name);
+#if NET
+        Assert.True(Enum.IsDefined<UiSize>(actual.UiSize));
+#else
         Assert.True(Enum.IsDefined(typeof(UiSize), actual.UiSize));
+#endif
     }
 }

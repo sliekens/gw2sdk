@@ -50,7 +50,11 @@ internal class EquipmentItemValidation
                 item.Stats.Attributes,
                 attribute =>
                 {
+#if NET
+                    Assert.True(Enum.IsDefined<AttributeName>(attribute.Key));
+#else
                     Assert.True(Enum.IsDefined(typeof(AttributeName), attribute.Key));
+#endif
                     Assert.True(attribute.Value > 0);
                 }
             );
