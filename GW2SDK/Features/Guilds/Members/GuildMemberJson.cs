@@ -41,7 +41,7 @@ internal static class GuildMemberJson
             Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
             Rank = rank.Map(static (in JsonElement value) => value.GetStringRequired()),
             Joined = joined.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
-            WvwMember = wvwMember.Map(static (in JsonElement value) => value.GetBoolean()),
+            WvwMember = wvwMember.Map(static (in JsonElement value) => value.GetBoolean())
         };
     }
 }

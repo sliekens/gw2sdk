@@ -235,7 +235,7 @@ internal static class UpgradeComponentJson
                 upgradesInto.Map(static (in JsonElement values) =>
                     values.GetList(static (in JsonElement value) => value.GetInfusionSlotUpgradePath())
                 )
-                ?? new ValueList<InfusionSlotUpgradePath>(),
+                ?? new ValueList<InfusionSlotUpgradePath>()
         };
     }
 }

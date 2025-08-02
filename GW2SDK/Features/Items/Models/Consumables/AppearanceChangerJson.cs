@@ -113,7 +113,7 @@ internal static class AppearanceChangerJson
 #pragma warning disable CS0618 // Suppress obsolete warning
             IconHref = iconString,
 #pragma warning restore CS0618
-            IconUrl = !string.IsNullOrEmpty(iconString) ? new Uri(iconString) : null,
+            IconUrl = !string.IsNullOrEmpty(iconString) ? new Uri(iconString) : null
         };
     }
 }

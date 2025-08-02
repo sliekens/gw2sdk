@@ -30,5 +30,5 @@ public enum PvpRatingType
     Placeholder,
 
     /// <summary>A ranked Push game.</summary>
-    RankedPush,
+    RankedPush
 }
