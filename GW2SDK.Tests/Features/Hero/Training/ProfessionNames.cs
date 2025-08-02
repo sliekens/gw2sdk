@@ -13,7 +13,11 @@ public class ProfessionNames
         var (actual, _) =
             await sut.Hero.Training.GetProfessionNames(TestContext.Current.CancellationToken);
 
+#if NET
+        Assert.Equal(Enum.GetNames<ProfessionName>().Length, actual.Count);
+#else
         Assert.Equal(Enum.GetNames(typeof(ProfessionName)).Length, actual.Count);
+#endif
         Assert.All(actual, name => Assert.True(name.IsDefined()));
     }
 }
