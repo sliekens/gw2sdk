@@ -67,7 +67,7 @@
     <AnalysisLevelInteroperability>latest-all</AnalysisLevelInteroperability>
 
     <!-- https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/maintainability-warnings -->
-    <AnalysisLevelMaintainability>latest-default</AnalysisLevelMaintainability>
+    <AnalysisLevelMaintainability>latest-all</AnalysisLevelMaintainability>
 
     <!-- https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/naming-warnings -->
     <AnalysisLevelNaming>latest-default</AnalysisLevelNaming>
