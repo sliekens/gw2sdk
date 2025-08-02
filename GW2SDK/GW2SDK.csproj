@@ -13,6 +13,7 @@
     <Product>GW2SDK</Product>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
     <NoWarn>$(NoWarn);CS9042</NoWarn>
   </PropertyGroup>
 
