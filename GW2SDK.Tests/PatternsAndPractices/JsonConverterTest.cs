@@ -22,7 +22,7 @@ public class JsonConverterTest(AssemblyFixture fixture) : IClassFixture<Assembly
             {
                 var hasJsonConverterAttribute = enumType
                     .GetCustomAttributes(typeof(JsonConverterAttribute), false)
-                    .Any();
+                    .Length != 0;
                 Assert.True(
                     hasJsonConverterAttribute,
                     $"Enum {enumType.Name} does not have a JsonConverterAttribute."
