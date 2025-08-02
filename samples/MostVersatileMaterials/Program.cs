@@ -83,7 +83,7 @@ try
 
                 return new ReferenceData
                 {
-                    Recipes = recipes,
+                    Recipes = recipes.AsReadOnly(),
                     InputItems = inputItems,
                     OutputItems = outputItems
                 };
