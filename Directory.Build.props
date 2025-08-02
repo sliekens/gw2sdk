@@ -3,6 +3,7 @@
   <!-- Common project properties -->
   <PropertyGroup>
     <LangVersion>13.0</LangVersion>
+    <CLSCompliant>false</CLSCompliant>
     <Nullable>enable</Nullable>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
     <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>

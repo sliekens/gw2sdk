@@ -11,6 +11,7 @@ namespace GuildWars2.Mumble;
 [PublicAPI]
 [StructLayout(LayoutKind.Sequential)]
 [NoReorder]
+[CLSCompliant(false)]
 public readonly record struct Context
 {
     internal readonly sockaddr_in serverAddress;

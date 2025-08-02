@@ -1,3 +1,7 @@
 <Project>
-
+  <ItemGroup Condition="'$(CLSCompliant)' != ''">
+    <AssemblyAttribute Include="System.CLSCompliantAttribute">
+      <_Parameter1>$(CLSCompliant)</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
 </Project>

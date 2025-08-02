@@ -10,6 +10,7 @@ namespace GuildWars2.Mumble;
 [PublicAPI]
 [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
 [NoReorder]
+[CLSCompliant(false)]
 public readonly record struct GameTick
 {
     /// <summary>The version of the MumbleLink plugin. This is used to determine the layout of the data structure. You may also

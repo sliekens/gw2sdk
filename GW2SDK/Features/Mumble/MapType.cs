@@ -9,6 +9,7 @@ namespace GuildWars2.Mumble;
 [PublicAPI]
 [DefaultValue(AutoRedirect)]
 [JsonConverter(typeof(MapTypeJsonConverter))]
+[CLSCompliant(false)]
 public enum MapType : uint
 {
     // Keep the enum values in sync with the enum from the game, provided below.

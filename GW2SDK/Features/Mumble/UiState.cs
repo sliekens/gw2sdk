@@ -10,6 +10,7 @@ namespace GuildWars2.Mumble;
 [Flags]
 [DefaultValue(None)]
 [JsonConverter(typeof(UiStateJsonConverter))]
+[CLSCompliant(false)]
 public enum UiState : uint
 {
     /// <summary>No flags are set.</summary>
