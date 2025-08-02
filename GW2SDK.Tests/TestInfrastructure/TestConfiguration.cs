@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Hero;
+
 using Microsoft.Extensions.Configuration;
 
 namespace GuildWars2.Tests.TestInfrastructure;
@@ -35,6 +36,16 @@ public static class TestConfiguration
             Name =
                 Configuration["Character:Name"]
                 ?? throw new InvalidOperationException("Missing Character:Name."),
+#if NET
+            Race = Enum.Parse<RaceName>(
+                Configuration["Character:Race"]
+                ?? throw new InvalidOperationException("Missing Character:Race.")
+            ),
+            Profession = Enum.Parse<ProfessionName>(
+                Configuration["Character:Profession"]
+                ?? throw new InvalidOperationException("Missing Character:Profession.")
+            )
+#else
             Race = (RaceName)Enum.Parse(
                 typeof(RaceName),
                 Configuration["Character:Race"]
@@ -45,6 +56,7 @@ public static class TestConfiguration
                 Configuration["Character:Profession"]
                 ?? throw new InvalidOperationException("Missing Character:Profession.")
             )
+#endif
         };
 
     public static TestCharacter TestCharacter2 =>
@@ -53,6 +65,16 @@ public static class TestConfiguration
             Name =
                 Configuration["Character2:Name"]
                 ?? throw new InvalidOperationException("Missing Character2:Name."),
+#if NET
+            Race = Enum.Parse<RaceName>(
+                Configuration["Character2:Race"]
+                ?? throw new InvalidOperationException("Missing Character2:Race.")
+            ),
+            Profession = Enum.Parse<ProfessionName>(
+                Configuration["Character2:Profession"]
+                ?? throw new InvalidOperationException("Missing Character2:Profession.")
+            )
+#else
             Race = (RaceName)Enum.Parse(
                 typeof(RaceName),
                 Configuration["Character2:Race"]
@@ -63,6 +85,7 @@ public static class TestConfiguration
                 Configuration["Character2:Profession"]
                 ?? throw new InvalidOperationException("Missing Character2:Profession.")
             )
+#endif
         };
 
     public static TestGuild TestGuild =>
