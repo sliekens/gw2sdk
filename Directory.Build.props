@@ -81,7 +81,7 @@
     <AnalysisLevelReliability>latest-default</AnalysisLevelReliability>
 
     <!-- https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/security-warnings -->
-    <AnalysisLevelSecurity>latest-default</AnalysisLevelSecurity>
+    <AnalysisLevelSecurity>latest-all</AnalysisLevelSecurity>
 
     <!-- https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ -->
     <AnalysisLevelStyle>latest-default</AnalysisLevelStyle>
