@@ -27,7 +27,7 @@ internal class ItemFlagsJsonConverter : JsonConverter<ItemFlags>
 
     public static ItemFlags Read(in JsonElement json)
     {
-        return new ItemFlags
+        return new()
         {
             AccountBindOnUse = json.GetProperty("account_bind_on_use").GetBoolean(),
             AccountBound = json.GetProperty("account_bound").GetBoolean(),

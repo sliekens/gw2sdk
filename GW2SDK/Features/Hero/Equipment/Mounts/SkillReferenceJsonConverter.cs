@@ -18,7 +18,7 @@ internal sealed class SkillReferenceJsonConverter : JsonConverter<SkillReference
 
     public static SkillReference Read(in JsonElement json)
     {
-        return new SkillReference
+        return new()
         {
             Id = json.GetProperty("id").GetInt32(),
             Slot = json.GetProperty("slot").GetStringRequired()

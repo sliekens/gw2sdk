@@ -43,7 +43,7 @@ public abstract record Flags
     /// <inheritdoc />
     public override int GetHashCode()
     {
-        var hash = new HashCode();
+        HashCode hash = new();
         var flags = GetType()
             .GetProperties(BindingFlags.Public | BindingFlags.Instance)
             .Where(property => property.PropertyType == typeof(bool))

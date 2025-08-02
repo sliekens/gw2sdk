@@ -18,7 +18,7 @@ internal sealed class UnlockedFinisherJsonConverter : JsonConverter<UnlockedFini
 
     public static UnlockedFinisher? Read(in JsonElement json)
     {
-        return new UnlockedFinisher
+        return new()
         {
             Id = json.GetProperty("id").GetInt32(),
             Permanent = json.GetProperty("permanent").GetBoolean(),

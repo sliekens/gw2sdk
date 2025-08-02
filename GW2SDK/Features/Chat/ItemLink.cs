@@ -52,7 +52,7 @@ public sealed record ItemLink : Link
     /// <inheritdoc />
     public override string ToString()
     {
-        var buffer = new LinkBuffer(stackalloc byte[18]);
+        LinkBuffer buffer = new(stackalloc byte[18]);
         buffer.WriteUInt8(LinkHeader.Item);
         buffer.WriteUInt8(
             Count switch
@@ -104,7 +104,7 @@ public sealed record ItemLink : Link
     public static ItemLink Parse(in ReadOnlySpan<char> chatLink)
     {
         var bytes = GetBytes(chatLink);
-        var buffer = new LinkBuffer(bytes);
+        LinkBuffer buffer = new(bytes);
         if (buffer.ReadUInt8() != LinkHeader.Item)
         {
             ThrowHelper.ThrowBadArgument("Expected an item chat link.", nameof(chatLink));

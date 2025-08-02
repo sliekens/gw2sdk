@@ -47,7 +47,7 @@ public sealed record ItemSlot
     /// <returns>The chat link as an object.</returns>
     public ItemLink GetChatLink()
     {
-        return new ItemLink
+        return new()
         {
             ItemId = Id,
             Count = Count,

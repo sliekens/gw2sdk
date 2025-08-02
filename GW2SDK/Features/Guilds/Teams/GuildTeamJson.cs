@@ -70,7 +70,7 @@ internal static class GuildTeamJson
             Games = games.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetGame())),
             Seasons = seasons.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetSeason())
                 )
-                ?? []
+                ?? new Collections.ValueList<Season>()
         };
     }
 }

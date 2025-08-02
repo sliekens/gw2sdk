@@ -28,7 +28,7 @@ internal sealed class ItemRestrictionJsonConverter : JsonConverter<ItemRestricti
 
     public static ItemRestriction Read(in JsonElement value)
     {
-        return new ItemRestriction
+        return new()
         {
             Races =
                 value.GetProperty("races").GetList(static (in JsonElement value) => value.GetEnum<RaceName>()),

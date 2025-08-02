@@ -27,7 +27,7 @@ internal sealed class IngredientJsonConverter : JsonConverter<Ingredient>
 
     public static Ingredient Read(in JsonElement json)
     {
-        return new Ingredient
+        return new()
         {
             Kind = json.GetProperty("kind").GetEnum<IngredientKind>(),
             Id = json.GetProperty("id").GetInt32(),

@@ -38,7 +38,7 @@ public sealed record PurchasedAstralReward
     /// <returns>The chat link as an object.</returns>
     public ItemLink GetChatLink()
     {
-        return new ItemLink
+        return new()
         {
             ItemId = ItemId,
             Count = ItemCount

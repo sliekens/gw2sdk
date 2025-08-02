@@ -10,7 +10,7 @@ public sealed record AchievementLink : Link
     /// <inheritdoc />
     public override string ToString()
     {
-        var buffer = new LinkBuffer(stackalloc byte[5]);
+        LinkBuffer buffer = new(stackalloc byte[5]);
         buffer.WriteUInt8(LinkHeader.Achievement);
         buffer.WriteInt32(AchievementId);
         return buffer.ToString();
@@ -30,7 +30,7 @@ public sealed record AchievementLink : Link
     public static AchievementLink Parse(in ReadOnlySpan<char> chatLink)
     {
         var bytes = GetBytes(chatLink);
-        var buffer = new LinkBuffer(bytes);
+        LinkBuffer buffer = new(bytes);
         if (buffer.ReadUInt8() != LinkHeader.Achievement)
         {
             ThrowHelper.ThrowBadArgument("Expected an achievement chat link.", nameof(chatLink));

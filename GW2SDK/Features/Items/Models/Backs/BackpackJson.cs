@@ -175,21 +175,21 @@ internal static class BackpackJson
                 ),
             AttributeAdjustment = attributeAdjustment.Map(static (in JsonElement value) => value.GetDouble()),
             AttributeCombinationId = infixUpgradeId.Map(static (in JsonElement value) => value.GetInt32()),
-            Attributes = infixUpgradeAttributes.Map(static (in JsonElement values) => values.GetAttributes()) ?? [],
+            Attributes = infixUpgradeAttributes.Map(static (in JsonElement values) => values.GetAttributes()) ?? new Collections.ValueDictionary<Extensible<Hero.AttributeName>, int>(),
             Buff = infixUpgradeBuff.Map(static (in JsonElement value) => value.GetBuff()),
             SuffixItemId = suffixItemId.Map(static (in JsonElement value) => value.GetInt32()),
             StatChoices =
                 statChoices.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32()))
-                ?? [],
+                ?? new Collections.ValueList<int>(),
             UpgradesInto =
                 upgradesInto.Map(static (in JsonElement values) =>
                     values.GetList(static (in JsonElement value) => value.GetInfusionSlotUpgradePath())
                 )
-                ?? [],
+                ?? new Collections.ValueList<InfusionSlotUpgradePath>(),
             UpgradesFrom = upgradesFrom.Map(static (in JsonElement values) =>
                     values.GetList(static (in JsonElement value) => value.GetInfusionSlotUpgradeSource())
                 )
-                ?? []
+                ?? new Collections.ValueList<InfusionSlotUpgradeSource>()
         };
     }
 }

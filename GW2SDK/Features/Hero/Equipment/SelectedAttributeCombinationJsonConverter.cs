@@ -19,7 +19,7 @@ internal sealed class
 
     public static SelectedAttributeCombination Read(in JsonElement json)
     {
-        return new SelectedAttributeCombination
+        return new()
         {
             Id = json.GetProperty("id").GetInt32(),
             Attributes = json.GetProperty("attributes")

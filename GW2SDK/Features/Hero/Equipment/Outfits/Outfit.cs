@@ -29,6 +29,6 @@ public sealed record Outfit
     /// <returns>The chat link as an object.</returns>
     public OutfitLink GetChatLink()
     {
-        return new OutfitLink { OutfitId = Id };
+        return new() { OutfitId = Id };
     }
 }

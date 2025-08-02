@@ -30,7 +30,7 @@ internal sealed class MasteryPointRewardJsonConverter : JsonConverter<MasteryPoi
 
     public static MasteryPointReward Read(in JsonElement json)
     {
-        return new MasteryPointReward
+        return new()
         {
             Id = json.GetProperty("id").GetInt32(),
             Region = json.GetProperty("region").GetEnum<MasteryRegionName>()

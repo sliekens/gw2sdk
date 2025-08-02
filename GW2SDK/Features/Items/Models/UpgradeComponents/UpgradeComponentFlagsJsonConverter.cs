@@ -27,7 +27,7 @@ internal class UpgradeComponentFlagsJsonConverter : JsonConverter<UpgradeCompone
 
     public static UpgradeComponentFlags Read(in JsonElement json)
     {
-        return new UpgradeComponentFlags
+        return new()
         {
             HeavyArmor = json.GetProperty("heavy_armor").GetBoolean(),
             MediumArmor = json.GetProperty("medium_armor").GetBoolean(),

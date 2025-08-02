@@ -18,7 +18,7 @@ internal sealed class EquipmentTemplateJsonConverter : JsonConverter<EquipmentTe
 
     public static EquipmentTemplate Read(in JsonElement json)
     {
-        return new EquipmentTemplate
+        return new()
         {
             TabNumber = json.GetProperty("tab").GetInt32(),
             Name = json.GetProperty("name").GetStringRequired(),

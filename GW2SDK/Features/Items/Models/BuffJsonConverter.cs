@@ -23,7 +23,7 @@ internal sealed class BuffJsonConverter : JsonConverter<Buff>
 
     public static Buff Read(in JsonElement json)
     {
-        return new Buff
+        return new()
         {
             SkillId = json.GetProperty("skill_id").GetInt32(),
             Description = json.GetProperty("description").GetStringRequired()

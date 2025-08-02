@@ -174,7 +174,7 @@ internal static class RuneJson
                 infusionUpgradeFlags.Map(static (in JsonElement values) => values.GetInfusionSlotFlags()),
             AttributeAdjustment = attributeAdjustment.Map(static (in JsonElement value) => value.GetDouble()),
             AttributeCombinationId = infixUpgradeId.Map(static (in JsonElement value) => value.GetInt32()),
-            Attributes = infixUpgradeAttributes.Map(static (in JsonElement values) => values.GetAttributes()) ?? [],
+            Attributes = infixUpgradeAttributes.Map(static (in JsonElement values) => values.GetAttributes()) ?? new ValueDictionary<Extensible<Hero.AttributeName>, int>(),
             Buff = infixUpgradeBuff.Map(static (in JsonElement value) => value.GetBuff()),
             SuffixName = suffix.Map(static (in JsonElement value) => value.GetStringRequired()),
             Bonuses = bonuses.Map(static (in JsonElement values) =>

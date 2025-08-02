@@ -27,7 +27,7 @@ internal sealed class AchievementRefJsonConverter : JsonConverter<AchievementRef
 
     public static AchievementRef Read(in JsonElement json)
     {
-        return new AchievementRef
+        return new()
         {
             Id = json.GetProperty("id").GetInt32(),
             Flags = AchievementFlagsJsonConverter.Read(json.GetProperty("flags")),

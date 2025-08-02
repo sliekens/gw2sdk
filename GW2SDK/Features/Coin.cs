@@ -122,7 +122,7 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
     /// <returns>The current instance of <see cref="Coin" />.</returns>
     public static Coin operator +(in Coin coin)
     {
-        return new Coin(coin.Amount);
+        return new(coin.Amount);
     }
 
     /// <summary>Returns the negation of the current instance of <see cref="Coin" />.</summary>
@@ -130,7 +130,7 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
     /// <returns>The negation of the current instance of <see cref="Coin" />.</returns>
     public static Coin operator -(in Coin coin)
     {
-        return new Coin(-coin.Amount);
+        return new(-coin.Amount);
     }
 
     /// <summary>Increments the current instance of <see cref="Coin" /> by 1.</summary>
@@ -138,7 +138,7 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
     /// <returns>The incremented <see cref="Coin" /> value.</returns>
     public static Coin operator ++(in Coin coin)
     {
-        return new Coin(coin.Amount + 1);
+        return new(coin.Amount + 1);
     }
 
     /// <summary>Decrements the current instance of <see cref="Coin" /> by 1.</summary>
@@ -146,7 +146,7 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
     /// <returns>The decremented <see cref="Coin" /> value.</returns>
     public static Coin operator --(in Coin coin)
     {
-        return new Coin(coin.Amount - 1);
+        return new(coin.Amount - 1);
     }
 
     /// <summary>Adds two <see cref="Coin" /> values.</summary>
@@ -155,7 +155,7 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
     /// <returns>The sum of the two <see cref="Coin" /> values.</returns>
     public static Coin operator +(in Coin left, in Coin right)
     {
-        return new Coin(left.Amount + right.Amount);
+        return new(left.Amount + right.Amount);
     }
 
     /// <summary>Subtracts two <see cref="Coin" /> values.</summary>
@@ -164,7 +164,7 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
     /// <returns>The difference between the two <see cref="Coin" /> values.</returns>
     public static Coin operator -(in Coin left, in Coin right)
     {
-        return new Coin(left.Amount - right.Amount);
+        return new(left.Amount - right.Amount);
     }
 
     /// <summary>Multiplies two <see cref="Coin" /> values.</summary>
@@ -173,7 +173,7 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
     /// <returns>The product of the two <see cref="Coin" /> values.</returns>
     public static Coin operator *(in Coin left, in Coin right)
     {
-        return new Coin(left.Amount * right.Amount);
+        return new(left.Amount * right.Amount);
     }
 
     /// <summary>Divides two <see cref="Coin" /> values.</summary>
@@ -182,7 +182,7 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
     /// <returns>The quotient of the two <see cref="Coin" /> values.</returns>
     public static Coin operator /(in Coin left, in Coin right)
     {
-        return new Coin(left.Amount / right.Amount);
+        return new(left.Amount / right.Amount);
     }
 
     /// <summary>Computes the remainder of dividing two <see cref="Coin" /> values.</summary>
@@ -191,7 +191,7 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
     /// <returns>The remainder of dividing the two <see cref="Coin" /> values.</returns>
     public static Coin operator %(in Coin left, in Coin right)
     {
-        return new Coin(left.Amount % right.Amount);
+        return new(left.Amount % right.Amount);
     }
 
     /// <summary>Implicitly converts a <see cref="Coin" /> value to an <see cref="int" /> value.</summary>
@@ -207,14 +207,14 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
     /// <returns>The <see cref="Coin" /> value.</returns>
     public static implicit operator Coin(int quantity)
     {
-        return new Coin(quantity);
+        return new(quantity);
     }
 
     /// <summary>Gets the chat link representation of the current instance of <see cref="Coin" />.</summary>
     /// <returns>The chat link representation of the current instance of <see cref="Coin" />.</returns>
     public CoinLink GetChatLink()
     {
-        return new CoinLink { Coins = this };
+        return new() { Coins = this };
     }
 
     /// <summary>Gets the string representation of the <see cref="Coin" /> value.</summary>
@@ -298,7 +298,7 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
             }
         );
 #else
-        var str = new StringBuilder(length);
+        StringBuilder str = new(length);
         if (formattedGold is not null)
         {
             str.Append(formattedGold);

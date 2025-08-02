@@ -38,7 +38,7 @@ internal static class JsonElementExtensions
         JsonTransform<TValue> transform
     )
     {
-        var values = new ValueList<TValue>(json.GetArrayLength());
+        ValueList<TValue> values = new(json.GetArrayLength());
         var enumerator = json.EnumerateArray();
         while (enumerator.MoveNext())
         {
@@ -67,9 +67,9 @@ internal static class JsonElementExtensions
     )
     {
 #if NET
-        var values = new ValueHashSet<TValue>(json.GetArrayLength());
+        ValueHashSet<TValue> values = new(json.GetArrayLength());
 #else
-        var values = new ValueHashSet<TValue>();
+        ValueHashSet<TValue> values = [];
 #endif
         var enumerator = json.EnumerateArray();
         while (enumerator.MoveNext())
@@ -85,7 +85,7 @@ internal static class JsonElementExtensions
         JsonTransform<TValue> transform
     )
     {
-        var values = new ValueDictionary<string, TValue>();
+        ValueDictionary<string, TValue> values = [];
         var enumerator = json.EnumerateObject();
         while (enumerator.MoveNext())
         {
@@ -101,7 +101,7 @@ internal static class JsonElementExtensions
         JsonTransform<TValue> resultSelector
     ) where TKey : notnull
     {
-        var values = new ValueDictionary<TKey, TValue>();
+        ValueDictionary<TKey, TValue> values = [];
         var enumerator = json.EnumerateObject();
         while (enumerator.MoveNext())
         {
@@ -114,7 +114,7 @@ internal static class JsonElementExtensions
     internal static Extensible<TEnum> GetEnum<TEnum>(this in JsonElement json)
         where TEnum : struct, Enum
     {
-        return new Extensible<TEnum>(json.GetStringRequired());
+        return new(json.GetStringRequired());
     }
 
     internal static Extensible<TEnum>? GetNullableEnum<TEnum>(this in JsonElement json)

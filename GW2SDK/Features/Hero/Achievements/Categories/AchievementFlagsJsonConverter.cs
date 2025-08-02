@@ -27,7 +27,7 @@ internal sealed class AchievementFlagsJsonConverter : JsonConverter<AchievementF
 
     public static AchievementFlags Read(in JsonElement json)
     {
-        return new AchievementFlags
+        return new()
         {
             SpecialEvent = json.GetProperty("special_event").GetBoolean(),
             PvE = json.GetProperty("pve").GetBoolean(),

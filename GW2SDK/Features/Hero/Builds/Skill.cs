@@ -47,6 +47,6 @@ public record Skill
     /// <returns>The chat link as an object.</returns>
     public SkillLink GetChatLink()
     {
-        return new SkillLink { SkillId = Id };
+        return new() { SkillId = Id };
     }
 }

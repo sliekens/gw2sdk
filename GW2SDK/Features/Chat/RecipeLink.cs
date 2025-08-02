@@ -10,7 +10,7 @@ public sealed record RecipeLink : Link
     /// <inheritdoc />
     public override string ToString()
     {
-        var buffer = new LinkBuffer(stackalloc byte[5]);
+        LinkBuffer buffer = new(stackalloc byte[5]);
         buffer.WriteUInt8(LinkHeader.Recipe);
         buffer.WriteInt32(RecipeId);
         return buffer.ToString();
@@ -30,7 +30,7 @@ public sealed record RecipeLink : Link
     public static RecipeLink Parse(in ReadOnlySpan<char> chatLink)
     {
         var bytes = GetBytes(chatLink);
-        var buffer = new LinkBuffer(bytes);
+        LinkBuffer buffer = new(bytes);
         if (buffer.ReadUInt8() != LinkHeader.Recipe)
         {
             ThrowHelper.ThrowBadArgument("Expected a recipe chat link.", nameof(chatLink));

@@ -156,7 +156,7 @@ public struct Extensible<TEnum>(string Name)
     /// <returns>An instance of the Extensible enum class.</returns>
     public static implicit operator Extensible<TEnum>(string name)
     {
-        return new Extensible<TEnum>(name);
+        return new(name);
     }
 
     /// <summary>Implicitly converts an enum to an instance of the Extensible enum class.</summary>
@@ -164,6 +164,6 @@ public struct Extensible<TEnum>(string Name)
     /// <returns>An instance of the Extensible enum class.</returns>
     public static implicit operator Extensible<TEnum>(TEnum name)
     {
-        return new Extensible<TEnum>(name.ToString());
+        return new(name.ToString());
     }
 }

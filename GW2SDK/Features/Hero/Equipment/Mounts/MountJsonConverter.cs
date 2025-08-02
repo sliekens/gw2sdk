@@ -18,7 +18,7 @@ internal sealed class MountJsonConverter : JsonConverter<Mount>
 
     public static Mount? Read(in JsonElement json)
     {
-        return new Mount
+        return new()
         {
             Id = new Extensible<MountName>(json.GetProperty("id").GetStringRequired()),
             Name = json.GetProperty("name").GetStringRequired(),

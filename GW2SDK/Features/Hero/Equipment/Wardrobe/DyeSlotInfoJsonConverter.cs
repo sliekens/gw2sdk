@@ -27,7 +27,7 @@ internal sealed class DyeSlotInfoJsonConverter : JsonConverter<DyeSlotInfo>
 
     public static DyeSlotInfo Read(in JsonElement json)
     {
-        return new DyeSlotInfo
+        return new()
         {
             Default = json.GetProperty("default").GetList(DyeSlotJsonConverter.Read),
             AsuraFemale =

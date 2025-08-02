@@ -52,7 +52,7 @@ public record Objective
     /// <returns>The chat link as an object.</returns>
     public ObjectiveLink GetChatLink()
     {
-        return new ObjectiveLink
+        return new()
         {
             ObjectiveId = int.Parse(Id.Split('-')[1]),
             MapId = MapId

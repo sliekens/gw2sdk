@@ -54,7 +54,7 @@ public record Item
     /// <returns>The chat link as an object.</returns>
     public ItemLink GetChatLink()
     {
-        return new ItemLink
+        return new()
         {
             ItemId = Id,
             Count = 1,

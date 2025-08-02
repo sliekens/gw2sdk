@@ -37,7 +37,7 @@ internal static class SkirmishJson
             Scores = scores.Map(static (in JsonElement value) => value.GetDistribution()),
             MapScores =
                 mapScores.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetMapScores()))
-                ?? []
+                ?? new Collections.ValueList<MapScores>()
         };
     }
 }

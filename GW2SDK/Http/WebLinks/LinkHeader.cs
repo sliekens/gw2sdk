@@ -15,8 +15,8 @@ public sealed class LinkHeader(IEnumerable<LinkValue> links)
     /// <returns>A <see cref="LinkHeader" /> instance.</returns>
     public static LinkHeader Parse(string input)
     {
-        var splitter = new CharSpanSplitter(input.AsSpan(), ',');
-        var items = new List<LinkValue>();
+        CharSpanSplitter splitter = new(input.AsSpan(), ',');
+        List<LinkValue> items = [];
         while (splitter.MoveNext(out var result))
         {
             items.Add(ParseLinkValue(result));
@@ -27,7 +27,7 @@ public sealed class LinkHeader(IEnumerable<LinkValue> links)
         static LinkValue ParseLinkValue(in ReadOnlySpan<char> input)
         {
             string href = "", rel = "";
-            var splitter = new CharSpanSplitter(input, ';');
+            CharSpanSplitter splitter = new(input, ';');
             if (splitter.MoveNext(out var result))
             {
                 href = ParseUri(result);

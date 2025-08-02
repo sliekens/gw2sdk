@@ -26,7 +26,7 @@ internal sealed class LevelRequirementJsonConverter : JsonConverter<LevelRequire
 
     public static LevelRequirement Read(in JsonElement json)
     {
-        return new LevelRequirement
+        return new()
         {
             Min = json.GetProperty("min").GetInt32(),
             Max = json.GetProperty("max").GetInt32()

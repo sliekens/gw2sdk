@@ -16,7 +16,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
     private readonly MumbleLink mumbleLink;
 
     /// <summary>A list of observers who want to receive realtime game state.</summary>
-    private readonly ConcurrentDictionary<IObserver<GameTick>, Subscription> subscribers = new();
+    private readonly ConcurrentDictionary<IObserver<GameTick>, Subscription> subscribers = [];
 
     /// <summary>A Timer is used to poll for changes to the shared memory as there is no push mechanism.</summary>
     private readonly Timer timer;
@@ -57,7 +57,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
         using ManualResetEventSlim callbacksFinished = new(false);
         if (timer.Dispose(callbacksFinished.WaitHandle))
         {
-            var tcs = new TaskCompletionSource<bool>();
+            TaskCompletionSource<bool> tcs = new();
             ThreadPool.QueueUserWorkItem(
                 state =>
                 {

@@ -160,7 +160,7 @@ internal static class ProfessionSkillJson
                 categories.Map(static (in JsonElement values) =>
                     values.GetList(static (in JsonElement value) => value.GetEnum<SkillCategoryName>())
                 )
-                ?? [],
+                ?? new Collections.ValueList<Extensible<SkillCategoryName>>(),
             Attunement = attunement.Map(static (in JsonElement value) => value.GetEnum<Attunement>()),
             Cost = cost.Map(static (in JsonElement value) => value.GetInt32())
         };

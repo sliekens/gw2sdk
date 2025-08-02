@@ -10,7 +10,7 @@ public sealed record PointOfInterestLink : Link
     /// <inheritdoc />
     public override string ToString()
     {
-        var buffer = new LinkBuffer(stackalloc byte[5]);
+        LinkBuffer buffer = new(stackalloc byte[5]);
         buffer.WriteUInt8(LinkHeader.PointOfInterest);
         buffer.WriteInt32(PointOfInterestId);
         return buffer.ToString();
@@ -30,7 +30,7 @@ public sealed record PointOfInterestLink : Link
     public static PointOfInterestLink Parse(in ReadOnlySpan<char> chatLink)
     {
         var bytes = GetBytes(chatLink);
-        var buffer = new LinkBuffer(bytes);
+        LinkBuffer buffer = new(bytes);
         if (buffer.ReadUInt8() != LinkHeader.PointOfInterest)
         {
             ThrowHelper.ThrowBadArgument(

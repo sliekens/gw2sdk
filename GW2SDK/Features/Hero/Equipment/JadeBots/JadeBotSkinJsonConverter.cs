@@ -18,7 +18,7 @@ internal sealed class JadeBotSkinJsonConverter : JsonConverter<JadeBotSkin>
 
     public static JadeBotSkin? Read(in JsonElement json)
     {
-        return new JadeBotSkin
+        return new()
         {
             Id = json.GetProperty("id").GetInt32(),
             Name = json.GetProperty("name").GetStringRequired(),

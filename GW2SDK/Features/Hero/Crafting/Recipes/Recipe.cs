@@ -48,6 +48,6 @@ public record Recipe
     /// <returns>The chat link as an object.</returns>
     public RecipeLink GetChatLink()
     {
-        return new RecipeLink { RecipeId = Id };
+        return new() { RecipeId = Id };
     }
 }

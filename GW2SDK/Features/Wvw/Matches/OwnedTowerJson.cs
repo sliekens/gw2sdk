@@ -80,7 +80,7 @@ internal static class OwnedTowerJson
             YaksDelivered = yaksDelivered.Map(static (in JsonElement value) => value.GetInt32()),
             GuildUpgrades =
                 guildUpgrades.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32()))
-                ?? []
+                ?? new Collections.ValueList<int>()
         };
     }
 }

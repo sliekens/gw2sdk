@@ -11,8 +11,8 @@ public sealed class MarkupParser
     /// <returns>The root node of the parsed structure.</returns>
     public RootNode Parse(IEnumerable<MarkupToken> input)
     {
-        var iterator = new MarkupTokenIterator(input);
-        var root = new RootNode();
+        MarkupTokenIterator iterator = new(input);
+        RootNode root = new();
         while (iterator.Current is { Type: not MarkupTokenType.End })
         {
             var node = ParseNode(iterator);
@@ -78,7 +78,7 @@ public sealed class MarkupParser
                 return new ColoredTextNode("");
             }
 
-            var node = new ColoredTextNode(iterator.Current.Value);
+            ColoredTextNode node = new(iterator.Current.Value);
             iterator.Advance();
             while (iterator.Current?.Type != MarkupTokenType.TagClose
                 && iterator.Current?.Type != MarkupTokenType.End)

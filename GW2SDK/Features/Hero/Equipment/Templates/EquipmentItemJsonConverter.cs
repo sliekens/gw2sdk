@@ -18,7 +18,7 @@ internal sealed class EquipmentItemJsonConverter : JsonConverter<EquipmentItem>
 
     public static EquipmentItem Read(in JsonElement json)
     {
-        return new EquipmentItem
+        return new()
         {
             Id = json.GetProperty("id").GetInt32(),
             Count = json.GetProperty("count").GetNullableInt32(),

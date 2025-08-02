@@ -27,7 +27,7 @@ internal class SkinFlagsJsonConverter : JsonConverter<SkinFlags>
 
     public static SkinFlags Read(in JsonElement json)
     {
-        return new SkinFlags
+        return new()
         {
             HideIfLocked = json.GetProperty("hide_if_locked").GetBoolean(),
             NoCost = json.GetProperty("no_cost").GetBoolean(),

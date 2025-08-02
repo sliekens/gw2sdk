@@ -27,7 +27,7 @@ internal sealed class RecipeFlagsJsonConverter : JsonConverter<RecipeFlags>
 
     public static RecipeFlags Read(in JsonElement json)
     {
-        return new RecipeFlags
+        return new()
         {
             AutoLearned = json.GetProperty("auto_learned").GetBoolean(),
             LearnedFromItem = json.GetProperty("learned_from_item").GetBoolean(),

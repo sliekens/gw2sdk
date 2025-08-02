@@ -24,13 +24,13 @@ internal readonly ref struct OptionalMember
 
     public static implicit operator OptionalMember(string name)
     {
-        return new OptionalMember(name);
+        return new(name);
     }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Roslynator", "RCS1231:Make parameter ref read-only", Justification = "Makes this code unusable")]
     public static implicit operator OptionalMember(JsonProperty member)
     {
-        return new OptionalMember(member);
+        return new(member);
     }
 
     public bool Match(in JsonProperty property)

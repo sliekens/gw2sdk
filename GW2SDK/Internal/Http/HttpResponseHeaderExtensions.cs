@@ -41,7 +41,7 @@ internal static class HttpResponseHeaderExtensions
                 foreach (var link in header.Links)
                 {
 #pragma warning disable CS0618 // Suppress obsolete warning
-                    var href = new Hyperlink(link.Target);
+                    Hyperlink href = new(link.Target);
 #pragma warning restore CS0618
                     switch (link.RelationType)
                     {

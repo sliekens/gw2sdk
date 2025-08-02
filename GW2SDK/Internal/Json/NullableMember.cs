@@ -24,13 +24,13 @@ internal readonly ref struct NullableMember
 
     public static implicit operator NullableMember(string name)
     {
-        return new NullableMember(name);
+        return new(name);
     }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Roslynator", "RCS1231:Make parameter ref read-only", Justification = "Makes this code unusable")]
     public static implicit operator NullableMember(JsonProperty member)
     {
-        return new NullableMember(member);
+        return new(member);
     }
 
     public bool Match(in JsonProperty property)

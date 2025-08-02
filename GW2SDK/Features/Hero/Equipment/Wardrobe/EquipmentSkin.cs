@@ -40,6 +40,6 @@ public record EquipmentSkin
     /// <returns>The chat link as an object.</returns>
     public SkinLink GetChatLink()
     {
-        return new SkinLink { SkinId = Id };
+        return new() { SkinId = Id };
     }
 }

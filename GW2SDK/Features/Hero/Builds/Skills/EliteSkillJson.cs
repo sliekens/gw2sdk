@@ -175,7 +175,7 @@ internal static class EliteSkillJson
                 categories.Map(static (in JsonElement values) =>
                     values.GetList(static (in JsonElement value) => value.GetEnum<SkillCategoryName>())
                 )
-                ?? [],
+                ?? new Collections.ValueList<Extensible<SkillCategoryName>>(),
             SubskillIds =
                 subskills.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetSubskill())),
             BundleSkillIds =

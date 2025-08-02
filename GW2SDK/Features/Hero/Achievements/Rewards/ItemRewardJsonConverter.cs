@@ -28,7 +28,7 @@ internal sealed class ItemRewardJsonConverter : JsonConverter<ItemReward>
 
     public static ItemReward Read(in JsonElement json)
     {
-        return new ItemReward
+        return new()
         {
             Id = json.GetProperty("id").GetInt32(),
             Count = json.GetProperty("count").GetInt32()

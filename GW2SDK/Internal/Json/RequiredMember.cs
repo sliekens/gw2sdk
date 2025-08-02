@@ -24,13 +24,13 @@ internal readonly ref struct RequiredMember
 
     public static implicit operator RequiredMember(string name)
     {
-        return new RequiredMember(name);
+        return new(name);
     }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Roslynator", "RCS1231:Make parameter ref read-only", Justification = "Makes this code unusable")]
     public static implicit operator RequiredMember(JsonProperty member)
     {
-        return new RequiredMember(member);
+        return new(member);
     }
 
     public bool Match(in JsonProperty property)

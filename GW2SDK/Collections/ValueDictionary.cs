@@ -118,7 +118,7 @@ public sealed class ValueDictionary<TKey, TValue> : Dictionary<TKey, TValue>,
     /// <returns>A hash code for the current object.</returns>
     public override int GetHashCode()
     {
-        var hash = new HashCode();
+        HashCode hash = new();
         foreach (var kvp in this.OrderBy(kv => kv.Key))
         {
             hash.Add(kvp.Key);

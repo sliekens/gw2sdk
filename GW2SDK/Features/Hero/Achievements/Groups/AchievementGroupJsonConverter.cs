@@ -27,7 +27,7 @@ internal sealed class AchievementGroupJsonConverter : JsonConverter<AchievementG
 
     public static AchievementGroup Read(in JsonElement json)
     {
-        return new AchievementGroup
+        return new()
         {
             Id = json.GetProperty("id").GetStringRequired(),
             Name = json.GetProperty("name").GetStringRequired(),

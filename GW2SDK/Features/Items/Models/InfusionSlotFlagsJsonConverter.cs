@@ -27,7 +27,7 @@ internal sealed class InfusionSlotFlagsJsonConverter : JsonConverter<InfusionSlo
 
     public static InfusionSlotFlags Read(in JsonElement json)
     {
-        return new InfusionSlotFlags
+        return new()
         {
             Enrichment = json.GetProperty("enrichment").GetBoolean(),
             Infusion = json.GetProperty("infusion").GetBoolean(),

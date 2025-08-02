@@ -30,6 +30,6 @@ public record PointOfInterest
     /// <returns>The chat link as an object.</returns>
     public PointOfInterestLink GetChatLink()
     {
-        return new PointOfInterestLink { PointOfInterestId = Id };
+        return new() { PointOfInterestId = Id };
     }
 }

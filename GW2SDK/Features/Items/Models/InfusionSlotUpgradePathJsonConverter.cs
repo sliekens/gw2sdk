@@ -27,7 +27,7 @@ internal class InfusionSlotUpgradePathJsonConverter : JsonConverter<InfusionSlot
 
     public static InfusionSlotUpgradePath Read(in JsonElement value)
     {
-        return new InfusionSlotUpgradePath
+        return new()
         {
             Upgrade = value.GetProperty("upgrade").GetEnum<InfusionSlotUpgradeKind>(),
             ItemId = value.GetProperty("item_id").GetInt32()

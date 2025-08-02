@@ -23,7 +23,7 @@ public sealed record RecipeSheet : Unlocker
     /// <returns>The chat link as an object.</returns>
     public RecipeLink GetRecipeChatLink()
     {
-        return new RecipeLink { RecipeId = RecipeId };
+        return new() { RecipeId = RecipeId };
     }
 
     /// <summary>Gets chat link objects for the extra recipes.</summary>

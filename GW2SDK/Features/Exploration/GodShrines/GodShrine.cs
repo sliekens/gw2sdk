@@ -42,6 +42,6 @@ public sealed record GodShrine
     /// <returns>The chat link as an object.</returns>
     public PointOfInterestLink GetChatLink()
     {
-        return new PointOfInterestLink { PointOfInterestId = PointOfInterestId };
+        return new() { PointOfInterestId = PointOfInterestId };
     }
 }

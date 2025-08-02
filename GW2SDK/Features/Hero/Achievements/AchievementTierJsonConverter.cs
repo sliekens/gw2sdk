@@ -26,7 +26,7 @@ internal sealed class AchievementTierJsonConverter : JsonConverter<AchievementTi
 
     public static AchievementTier Read(in JsonElement json)
     {
-        return new AchievementTier
+        return new()
         {
             Count = json.GetProperty("count").GetInt32(),
             Points = json.GetProperty("points").GetInt32()

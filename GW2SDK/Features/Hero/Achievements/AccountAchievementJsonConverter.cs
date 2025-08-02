@@ -27,7 +27,7 @@ internal sealed class AccountAchievementJsonConverter : JsonConverter<AccountAch
 
     public static AccountAchievement Read(in JsonElement json)
     {
-        return new AccountAchievement
+        return new()
         {
             Id = json.GetProperty("id").GetInt32(),
             Bits = json.GetProperty("bits").GetNullableList(static (in JsonElement bit) => bit.GetInt32()),

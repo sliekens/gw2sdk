@@ -109,19 +109,19 @@ internal static class EquipmentItemJson
             SecondarySuffixItemId = secondarySuffixItemId,
             InfusionItemIds =
                 infusions.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32()))
-                ?? [],
+                ?? new Collections.ValueList<int>(),
             SkinId = skin.Map(static (in JsonElement value) => value.GetInt32()),
             Stats = stats.Map(static (in JsonElement value) => value.GetSelectedAttributeCombination()),
             Binding = binding.Map(static (in JsonElement value) => value.GetEnum<ItemBinding>()),
             BoundTo = boundTo.Map(static (in JsonElement value) => value.GetString()) ?? "",
             Location = location.Map(static (in JsonElement value) => value.GetEnum<EquipmentLocation>()),
             TemplateNumbers =
-                tabs.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32())) ?? [],
+                tabs.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32())) ?? new Collections.ValueList<int>(),
             DyeColorIds = dyes.Map(static (in JsonElement values) =>
                     values.GetList(static (in JsonElement value) => value.GetNullableInt32() ?? DyeColor.DyeRemoverId
                     )
                 )
-                ?? []
+                ?? new Collections.ValueList<int>()
         };
     }
 }

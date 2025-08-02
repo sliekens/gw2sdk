@@ -17,7 +17,7 @@ internal sealed class LegendaryItemJsonConverter : JsonConverter<LegendaryItem>
 
     public static LegendaryItem Read(in JsonElement json)
     {
-        return new LegendaryItem
+        return new()
         {
             Id = json.GetProperty("id").GetInt32(),
             MaxCount = json.GetProperty("max_count").GetInt32()

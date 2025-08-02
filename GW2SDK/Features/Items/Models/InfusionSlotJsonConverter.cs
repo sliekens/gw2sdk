@@ -27,7 +27,7 @@ internal sealed class InfusionSlotJsonConverter : JsonConverter<InfusionSlot>
 
     public static InfusionSlot Read(in JsonElement json)
     {
-        return new InfusionSlot
+        return new()
         {
             Flags = InfusionSlotFlagsJsonConverter.Read(json.GetProperty("flags")),
             ItemId = json.GetProperty("item_id").GetNullableInt32()

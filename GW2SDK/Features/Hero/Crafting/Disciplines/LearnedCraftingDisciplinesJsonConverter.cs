@@ -19,7 +19,7 @@ internal sealed class
 
     public static LearnedCraftingDisciplines Read(in JsonElement json)
     {
-        return new LearnedCraftingDisciplines
+        return new()
         {
             Disciplines = json.GetProperty("disciplines")
                 .GetList(CraftingDisciplineJsonConverter.Read)!

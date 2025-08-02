@@ -23,7 +23,7 @@ internal sealed class TitleJsonConverter : JsonConverter<Title>
 
     public static Title Read(in JsonElement json)
     {
-        return new Title
+        return new()
         {
             Id = json.GetProperty("id").GetInt32(),
             Name = json.GetProperty("name").GetStringRequired(),

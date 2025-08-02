@@ -26,7 +26,7 @@ internal sealed class GuildIngredientJsonConverter : JsonConverter<GuildIngredie
 
     public static GuildIngredient Read(in JsonElement json)
     {
-        return new GuildIngredient
+        return new()
         {
             UpgradeId = json.GetProperty("upgrade_id").GetInt32(),
             Count = json.GetProperty("count").GetInt32()

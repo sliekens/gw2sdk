@@ -72,6 +72,6 @@ public record Achievement
     /// <returns>The chat link as an object.</returns>
     public AchievementLink GetChatLink()
     {
-        return new AchievementLink { AchievementId = Id };
+        return new() { AchievementId = Id };
     }
 }

@@ -11,7 +11,7 @@ internal static class InfixUpgradeJson
         this in JsonElement json
     )
     {
-        var attributes = new ValueDictionary<Extensible<AttributeName>, int>(json.GetArrayLength());
+        ValueDictionary<Extensible<AttributeName>, int> attributes = new(json.GetArrayLength());
         foreach (var entry in json.EnumerateArray())
         {
             RequiredMember attribute = "attribute";

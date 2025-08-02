@@ -25,6 +25,6 @@ public sealed record JadeBotSkin
     /// <returns>The chat link as an object.</returns>
     public ItemLink GetChatLink()
     {
-        return new ItemLink { ItemId = UnlockItemId };
+        return new() { ItemId = UnlockItemId };
     }
 }

@@ -18,7 +18,7 @@ internal sealed class CraftingDisciplineJsonConverter : JsonConverter<CraftingDi
 
     public static CraftingDiscipline Read(in JsonElement json)
     {
-        return new CraftingDiscipline
+        return new()
         {
             Discipline = json.GetProperty("discipline").GetEnum<CraftingDisciplineName>(),
             Rating = json.GetProperty("rating").GetInt32(),

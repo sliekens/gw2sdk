@@ -13,7 +13,7 @@ public sealed record ObjectiveLink : Link
     /// <inheritdoc />
     public override string ToString()
     {
-        var buffer = new LinkBuffer(stackalloc byte[9]);
+        LinkBuffer buffer = new(stackalloc byte[9]);
         buffer.WriteUInt8(LinkHeader.WvWObjective);
         buffer.WriteUInt24(ObjectiveId);
         buffer.Padding(1);
@@ -36,7 +36,7 @@ public sealed record ObjectiveLink : Link
     public static ObjectiveLink Parse(in ReadOnlySpan<char> chatLink)
     {
         var bytes = GetBytes(chatLink);
-        var buffer = new LinkBuffer(bytes);
+        LinkBuffer buffer = new(bytes);
         if (buffer.ReadUInt8() != LinkHeader.WvWObjective)
         {
             ThrowHelper.ThrowBadArgument("Expected a WvW objective chat link.", nameof(chatLink));

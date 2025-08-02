@@ -18,7 +18,7 @@ internal sealed class PvpEquipmentJsonConverter : JsonConverter<PvpEquipment>
 
     public static PvpEquipment Read(in JsonElement json)
     {
-        return new PvpEquipment
+        return new()
         {
             AmuletId = json.GetProperty("amulet_id").GetNullableInt32(),
             RuneId = json.GetProperty("rune_id").GetNullableInt32(),

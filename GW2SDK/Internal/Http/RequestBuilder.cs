@@ -4,6 +4,8 @@ namespace GuildWars2.Http;
 
 internal sealed class RequestBuilder(HttpMethod method, string path, string? accessToken)
 {
+
+#pragma warning disable RCS1250 // Use implicit/explicit object creation
     /// <summary>The query builder for this request. The schema version is always added as the first query parameter.</summary>
     /// <remarks>
     /// The schema version contains a colon, which can cause <see cref="Uri"/> to treat it as a scheme separator.
@@ -12,13 +14,12 @@ internal sealed class RequestBuilder(HttpMethod method, string path, string? acc
     /// The bug occurs when a colon is found in a relative URI after 1024 other characters.
     /// </remarks>
     public QueryBuilder Query { get; } = new() { { "v", SchemaVersion.Recommended } };
-
-
+#pragma warning restore RCS1250 // Use implicit/explicit object creation
 
     public HttpRequestMessage Build()
     {
-        var location = new Uri(path + Query, UriKind.Relative);
-        var message = new HttpRequestMessage(method, location);
+        Uri location = new(path + Query, UriKind.Relative);
+        HttpRequestMessage message = new(method, location);
         message.Headers.AcceptEncoding.ParseAdd("gzip");
         if (!string.IsNullOrEmpty(accessToken))
         {
@@ -30,7 +31,7 @@ internal sealed class RequestBuilder(HttpMethod method, string path, string? acc
 
     public static RequestBuilder HttpGet(string path, string? accessToken = null)
     {
-        return new RequestBuilder(Get, path, accessToken);
+        return new(Get, path, accessToken);
     }
 
     public override string ToString()

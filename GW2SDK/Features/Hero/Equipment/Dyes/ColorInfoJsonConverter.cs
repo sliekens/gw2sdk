@@ -18,7 +18,7 @@ internal sealed class ColorInfoJsonConverter : JsonConverter<ColorInfo>
 
     public static ColorInfo Read(in JsonElement json)
     {
-        return new ColorInfo
+        return new()
         {
             Brightness = json.GetProperty("brightness").GetInt32(),
             Contrast = json.GetProperty("contrast").GetDouble(),

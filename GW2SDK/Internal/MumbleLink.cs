@@ -42,7 +42,7 @@ internal sealed class MumbleLink : IDisposable
     [SupportedOSPlatform("windows")]
     public static MumbleLink CreateOrOpen(string name)
     {
-        using var mutex = new Mutex(true, name + "_mutex", out var created);
+        using Mutex mutex = new(true, name + "_mutex", out var created);
         if (!created)
         {
             var acquired = mutex.WaitOne(TimeSpan.FromSeconds(5));

@@ -18,7 +18,7 @@ internal sealed class CharacterEquipmentJsonConverter : JsonConverter<CharacterE
 
     public static CharacterEquipment Read(in JsonElement json)
     {
-        return new CharacterEquipment
+        return new()
         {
             Items = json.GetProperty("items").GetList(EquipmentItemJsonConverter.Read)
         };

@@ -13,32 +13,32 @@ internal static class RestrictionsJson
         {
             if (entry.ValueEquals(nameof(RaceName.Asura)))
             {
-                races ??= [];
+                races ??= new ValueList<Extensible<RaceName>>();
                 races.Add(RaceName.Asura);
             }
             else if (entry.ValueEquals(nameof(RaceName.Charr)))
             {
-                races ??= [];
+                races ??= new ValueList<Extensible<RaceName>>();
                 races.Add(RaceName.Charr);
             }
             else if (entry.ValueEquals(nameof(RaceName.Human)))
             {
-                races ??= [];
+                races ??= new ValueList<Extensible<RaceName>>();
                 races.Add(RaceName.Human);
             }
             else if (entry.ValueEquals(nameof(RaceName.Norn)))
             {
-                races ??= [];
+                races ??= new ValueList<Extensible<RaceName>>();
                 races.Add(RaceName.Norn);
             }
             else if (entry.ValueEquals(nameof(RaceName.Sylvari)))
             {
-                races ??= [];
+                races ??= new ValueList<Extensible<RaceName>>();
                 races.Add(RaceName.Norn);
             }
             else if (entry.ValueEquals(nameof(RaceName.Sylvari)))
             {
-                races ??= [];
+                races ??= new ValueList<Extensible<RaceName>>();
                 races.Add(RaceName.Norn);
             }
             else
@@ -46,7 +46,7 @@ internal static class RestrictionsJson
                 var restriction = entry.GetString();
                 if (!string.IsNullOrEmpty(restriction))
                 {
-                    races ??= [];
+                    races ??= new ValueList<Extensible<RaceName>>();
                     races.Add(new Extensible<RaceName>(restriction!));
                 }
             }

@@ -42,7 +42,7 @@ internal static class ApiVersionJson
             SchemaVersions = schemaVersions.Map(static (in JsonElement values) =>
                     values.GetList(static (in JsonElement value) => value.GetSchema())
                 )
-                ?? []
+                ?? new Collections.ValueList<Schema>()
         };
     }
 }

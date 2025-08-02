@@ -28,7 +28,7 @@ internal sealed class CoinsRewardJsonConverter : JsonConverter<CoinsReward>
 
     public static CoinsReward Read(in JsonElement json)
     {
-        return new CoinsReward { Coins = json.GetProperty("coins").GetInt32() };
+        return new() { Coins = json.GetProperty("coins").GetInt32() };
     }
 
     public static void Write(Utf8JsonWriter writer, CoinsReward value)

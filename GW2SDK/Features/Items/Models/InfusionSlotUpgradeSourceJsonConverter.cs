@@ -28,7 +28,7 @@ internal sealed class
 
     public static InfusionSlotUpgradeSource Read(in JsonElement value)
     {
-        return new InfusionSlotUpgradeSource
+        return new()
         {
             Upgrade = value.GetProperty("upgrade").GetEnum<InfusionSlotUpgradeKind>(),
             ItemId = value.GetProperty("item_id").GetInt32()

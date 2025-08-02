@@ -105,7 +105,7 @@ internal static class CraftingMaterialJson
             UpgradesInto = upgradesInto.Map(static (in JsonElement values) =>
                     values.GetList(static (in JsonElement value) => value.GetInfusionSlotUpgradePath())
                 )
-                ?? []
+                ?? new Collections.ValueList<InfusionSlotUpgradePath>()
         };
     }
 }

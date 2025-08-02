@@ -64,7 +64,7 @@ public sealed record BuildTemplateLink : Link
             )
             .ValueOnly()
             .ConfigureAwait(false);
-        var specializations = new Dictionary<int, Hero.Builds.Specialization>();
+        Dictionary<int, Hero.Builds.Specialization> specializations = [];
         if (SelectedSpecializationIds().Any())
         {
             specializations = await gw2Client.Hero.Builds.GetSpecializationsByIds(
@@ -203,7 +203,7 @@ public sealed record BuildTemplateLink : Link
     /// <inheritdoc />
     public override string ToString()
     {
-        var buffer = new LinkBuffer(stackalloc byte[100]);
+        LinkBuffer buffer = new(stackalloc byte[100]);
         buffer.WriteUInt8(LinkHeader.BuildTemplate);
         buffer.WriteUInt8(Profession());
         buffer.WriteUInt8(SpecializationId(Specialization1));
@@ -357,7 +357,7 @@ public sealed record BuildTemplateLink : Link
     public static BuildTemplateLink Parse(in ReadOnlySpan<char> chatLink)
     {
         var bytes = GetBytes(chatLink);
-        var buffer = new LinkBuffer(bytes);
+        LinkBuffer buffer = new(bytes);
         if (buffer.ReadUInt8() != LinkHeader.BuildTemplate)
         {
             ThrowHelper.ThrowBadArgument("Expected a build template chat link.", nameof(chatLink));
