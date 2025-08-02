@@ -234,17 +234,16 @@ public sealed record BuildTemplateLink : Link
         }
         else if (this.Profession == ProfessionName.Revenant)
         {
-            var legends = Legends ?? throw new InvalidOperationException("Missing Legends");
-            buffer.WriteUInt8((byte)(legends.ActiveTerrestrialLegend ?? 0));
-            buffer.WriteUInt8((byte)(legends.InactiveTerrestrialLegend ?? 0));
-            buffer.WriteUInt8((byte)(legends.ActiveAquaticLegend ?? 0));
-            buffer.WriteUInt8((byte)(legends.InactiveAquaticLegend ?? 0));
-            buffer.WriteUInt16((ushort)(legends.InactiveTerrestrialSkills.Utility1 ?? 0));
-            buffer.WriteUInt16((ushort)(legends.InactiveTerrestrialSkills.Utility2 ?? 0));
-            buffer.WriteUInt16((ushort)(legends.InactiveTerrestrialSkills.Utility3 ?? 0));
-            buffer.WriteUInt16((ushort)(legends.InactiveAquaticSkills.Utility1 ?? 0));
-            buffer.WriteUInt16((ushort)(legends.InactiveAquaticSkills.Utility2 ?? 0));
-            buffer.WriteUInt16((ushort)(legends.InactiveAquaticSkills.Utility3 ?? 0));
+            buffer.WriteUInt8((byte)(Legends?.ActiveTerrestrialLegend ?? 0));
+            buffer.WriteUInt8((byte)(Legends?.InactiveTerrestrialLegend ?? 0));
+            buffer.WriteUInt8((byte)(Legends?.ActiveAquaticLegend ?? 0));
+            buffer.WriteUInt8((byte)(Legends?.InactiveAquaticLegend ?? 0));
+            buffer.WriteUInt16((ushort)(Legends?.InactiveTerrestrialSkills.Utility1 ?? 0));
+            buffer.WriteUInt16((ushort)(Legends?.InactiveTerrestrialSkills.Utility2 ?? 0));
+            buffer.WriteUInt16((ushort)(Legends?.InactiveTerrestrialSkills.Utility3 ?? 0));
+            buffer.WriteUInt16((ushort)(Legends?.InactiveAquaticSkills.Utility1 ?? 0));
+            buffer.WriteUInt16((ushort)(Legends?.InactiveAquaticSkills.Utility2 ?? 0));
+            buffer.WriteUInt16((ushort)(Legends?.InactiveAquaticSkills.Utility3 ?? 0));
         }
         else
         {
