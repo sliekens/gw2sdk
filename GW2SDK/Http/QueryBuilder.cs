@@ -7,15 +7,22 @@ namespace GuildWars2.Http;
 /// directly.</summary>
 [PublicAPI]
 [DebuggerDisplay("{Build()}")]
-public sealed class QueryBuilder : IEnumerable
+public sealed class QueryBuilder : IEnumerable<KeyValuePair<string, string>>
 {
     private readonly List<KeyValuePair<string, string>> arguments = [];
 
     private int queryLength;
 
+    /// <summary>Returns an enumerator that iterates through the collection of query arguments.</summary>
+    /// <returns>An enumerator for the query arguments.</returns>
+    public IEnumerator<KeyValuePair<string, string>> GetEnumerator()
+    {
+        return arguments.GetEnumerator();
+    }
+
     IEnumerator IEnumerable.GetEnumerator()
     {
-        return ((IEnumerable)arguments).GetEnumerator();
+        return GetEnumerator();
     }
 
     /// <summary>Adds an argument with the specified key and value to the <see cref="QueryBuilder" />.</summary>
