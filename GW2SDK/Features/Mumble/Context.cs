@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using System.Net;
 using System.Runtime.InteropServices;
 
 using GuildWars2.Hero.Equipment.Mounts;

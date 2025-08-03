@@ -69,6 +69,7 @@
   <ItemGroup>
     <Using Include="JetBrains.Annotations" />
     <Using Include="GuildWars2.Annotations" />
+    <Using Include="System.Net" />
     <Using Include="System.Net.Http.HttpMethod" Static="True" />
     <Using Include="System.Net.HttpStatusCode" Static="True" />
   </ItemGroup>

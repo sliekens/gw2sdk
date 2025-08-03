@@ -1,6 +1,4 @@
-﻿using System.Net;
-
-namespace GuildWars2.Http;
+﻿namespace GuildWars2.Http;
 
 /// <summary>Provides additional HTTP status codes which are missing in older .NET versions.</summary>
 #if NET

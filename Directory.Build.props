@@ -10,6 +10,12 @@
     <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
     <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+
+    <!-- Compiler does not report unused imports when XML doc comments are disabled -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+    <!-- CS1591 Missing XML comment for publicly visible type or member 'Type_or_Member' -->
+    <WarningsNotAsErrors>$(WarningsNotAsErrors);CS1591</WarningsNotAsErrors>
   </PropertyGroup>
 
   <!-- Generated file properties -->

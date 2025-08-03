@@ -1,8 +1,6 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 
-using GuildWars2.Json;
-
 namespace GuildWars2.Hero.Achievements.Bits;
 
 internal sealed class AchievementTextBitJsonConverter : JsonConverter<AchievementTextBit>
