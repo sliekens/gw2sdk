@@ -1,4 +1,4 @@
-﻿using System.Runtime.CompilerServices;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 
 using GuildWars2.Http;
@@ -37,7 +37,7 @@ public sealed class HomeClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/home/cats", accessToken);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -62,7 +62,7 @@ public sealed class HomeClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/home/nodes", accessToken);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -88,7 +88,7 @@ public sealed class HomeClient
             "v2/account/homestead/decorations",
             accessToken
         );
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -114,7 +114,7 @@ public sealed class HomeClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/homestead/glyphs", accessToken);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -139,7 +139,7 @@ public sealed class HomeClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/home/cats");
         requestBuilder.Query.AddAllIds();
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -158,7 +158,7 @@ public sealed class HomeClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/home/cats");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -181,7 +181,7 @@ public sealed class HomeClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/home/cats");
         requestBuilder.Query.AddId(catId);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -205,7 +205,7 @@ public sealed class HomeClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/home/cats");
         requestBuilder.Query.AddIds(catIds);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -231,7 +231,7 @@ public sealed class HomeClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/home/cats");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -257,7 +257,7 @@ public sealed class HomeClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/home/nodes");
         requestBuilder.Query.AddAllIds();
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -276,7 +276,7 @@ public sealed class HomeClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/home/nodes");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -299,7 +299,7 @@ public sealed class HomeClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/home/nodes");
         requestBuilder.Query.AddId(nodeId);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -323,7 +323,7 @@ public sealed class HomeClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/home/nodes");
         requestBuilder.Query.AddIds(nodeIds);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -349,7 +349,7 @@ public sealed class HomeClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/home/nodes");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -372,7 +372,7 @@ public sealed class HomeClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -398,7 +398,7 @@ public sealed class HomeClient
         var requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations");
         requestBuilder.Query.AddId(decorationId);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -425,7 +425,7 @@ public sealed class HomeClient
         var requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations");
         requestBuilder.Query.AddIds(decorationIds);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -454,7 +454,7 @@ public sealed class HomeClient
         var requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -563,7 +563,7 @@ public sealed class HomeClient
         var requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations/categories");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -583,7 +583,7 @@ public sealed class HomeClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations/categories");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -609,7 +609,7 @@ public sealed class HomeClient
         var requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations/categories");
         requestBuilder.Query.AddId(categoryId);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -637,7 +637,7 @@ public sealed class HomeClient
         var requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations/categories");
         requestBuilder.Query.AddIds(categoryIds);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -668,7 +668,7 @@ public sealed class HomeClient
         var requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations/categories");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -695,7 +695,7 @@ public sealed class HomeClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/homestead/glyphs");
         requestBuilder.Query.AddAllIds();
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -714,7 +714,7 @@ public sealed class HomeClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/homestead/glyphs");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -737,7 +737,7 @@ public sealed class HomeClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/homestead/glyphs");
         requestBuilder.Query.AddId(glyphId);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -761,7 +761,7 @@ public sealed class HomeClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/homestead/glyphs");
         requestBuilder.Query.AddIds(glyphIds);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -787,7 +787,7 @@ public sealed class HomeClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/homestead/glyphs");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)

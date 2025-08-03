@@ -1,4 +1,4 @@
-﻿using System.Runtime.CompilerServices;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 
 using GuildWars2.Hero.Achievements.Categories;
@@ -37,7 +37,7 @@ public sealed class AchievementsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/titles", accessToken);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -59,7 +59,7 @@ public sealed class AchievementsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/achievements");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -85,7 +85,7 @@ public sealed class AchievementsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/achievements");
         requestBuilder.Query.AddId(achievementId);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -113,7 +113,7 @@ public sealed class AchievementsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/achievements");
         requestBuilder.Query.AddIds(achievementIds);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -142,7 +142,7 @@ public sealed class AchievementsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/achievements");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -252,7 +252,7 @@ public sealed class AchievementsClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/achievements", accessToken);
         requestBuilder.Query.AddId(achievementId);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -280,7 +280,7 @@ public sealed class AchievementsClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/achievements", accessToken);
         requestBuilder.Query.AddIds(achievementIds);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -306,7 +306,7 @@ public sealed class AchievementsClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/achievements", accessToken);
         requestBuilder.Query.AddAllIds();
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -337,7 +337,7 @@ public sealed class AchievementsClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/achievements", accessToken);
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -368,7 +368,7 @@ public sealed class AchievementsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/achievements/categories");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -388,7 +388,7 @@ public sealed class AchievementsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/achievements/categories");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -415,7 +415,7 @@ public sealed class AchievementsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/achievements/categories");
         requestBuilder.Query.AddId(achievementCategoryId);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -443,7 +443,7 @@ public sealed class AchievementsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/achievements/categories");
         requestBuilder.Query.AddIds(achievementCategoryIds);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -474,7 +474,7 @@ public sealed class AchievementsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/achievements/categories");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -505,7 +505,7 @@ public sealed class AchievementsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/achievements/groups");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -525,7 +525,7 @@ public sealed class AchievementsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/achievements/groups");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -551,7 +551,7 @@ public sealed class AchievementsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/achievements/groups");
         requestBuilder.Query.AddId(achievementGroupId);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -579,7 +579,7 @@ public sealed class AchievementsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/achievements/groups");
         requestBuilder.Query.AddIds(achievementGroupIds);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -610,7 +610,7 @@ public sealed class AchievementsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/achievements/groups");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -640,7 +640,7 @@ public sealed class AchievementsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/titles");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -659,7 +659,7 @@ public sealed class AchievementsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/titles");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -685,7 +685,7 @@ public sealed class AchievementsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/titles");
         requestBuilder.Query.AddId(titleId);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -712,7 +712,7 @@ public sealed class AchievementsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/titles");
         requestBuilder.Query.AddIds(titleIds);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -741,7 +741,7 @@ public sealed class AchievementsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/titles");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)

@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Headers;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Net.Http.Headers;
 
 using Microsoft.Extensions.Http.Resilience;
 
@@ -45,7 +46,6 @@ public static class Composer
             .AddTimeout(Gw2Resiliency.AttemptTimeoutStrategy)
             .Build();
 
-#pragma warning disable EXTEXP0001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
         return new ResilienceHandler(resiliencePipeline)
         {
             InnerHandler = new LoggingHandler
@@ -62,6 +62,7 @@ public static class Composer
             ?? throw new InvalidOperationException($"Unable to compose type '{typeof(T)}'");
     }
 
+    [SuppressMessage("Reliability", "CA2000:Dispose objects before losing scope", Justification = "The allocating method does not have dispose ownership")]
     private static object? GetService(Type serviceType)
     {
         if (serviceType == typeof(Gw2Client))

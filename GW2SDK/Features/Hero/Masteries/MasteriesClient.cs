@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 
 using GuildWars2.Http;
 using GuildWars2.Json;
@@ -36,7 +36,7 @@ public sealed class MasteriesClient
         )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/masteries", accessToken);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -66,7 +66,7 @@ public sealed class MasteriesClient
         )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/mastery/points", accessToken);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -95,7 +95,7 @@ public sealed class MasteriesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/masteries");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -114,7 +114,7 @@ public sealed class MasteriesClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/masteries");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -140,7 +140,7 @@ public sealed class MasteriesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/masteries");
         requestBuilder.Query.AddId(masteryTrackId);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -167,7 +167,7 @@ public sealed class MasteriesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/masteries");
         requestBuilder.Query.AddIds(masteryTrackIds);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)

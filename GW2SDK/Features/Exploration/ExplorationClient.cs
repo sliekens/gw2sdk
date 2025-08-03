@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 
 using GuildWars2.Exploration.Continents;
 using GuildWars2.Exploration.Floors;
@@ -45,7 +45,7 @@ public sealed class ExplorationClient
             $"v2/characters/{characterName}/heropoints",
             accessToken
         );
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -73,7 +73,7 @@ public sealed class ExplorationClient
         var requestBuilder = RequestBuilder.HttpGet("v2/continents");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -92,7 +92,7 @@ public sealed class ExplorationClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/continents");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -118,7 +118,7 @@ public sealed class ExplorationClient
         var requestBuilder = RequestBuilder.HttpGet("v2/continents");
         requestBuilder.Query.AddId(continentId);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -145,7 +145,7 @@ public sealed class ExplorationClient
         var requestBuilder = RequestBuilder.HttpGet("v2/continents");
         requestBuilder.Query.AddIds(continentIds);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -174,7 +174,7 @@ public sealed class ExplorationClient
         var requestBuilder = RequestBuilder.HttpGet("v2/continents");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -205,7 +205,7 @@ public sealed class ExplorationClient
         var requestBuilder = RequestBuilder.HttpGet($"v2/continents/{continentId}/floors");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -226,7 +226,7 @@ public sealed class ExplorationClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet($"v2/continents/{continentId}/floors");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -254,7 +254,7 @@ public sealed class ExplorationClient
         var requestBuilder = RequestBuilder.HttpGet($"v2/continents/{continentId}/floors");
         requestBuilder.Query.AddId(floorId);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -283,7 +283,7 @@ public sealed class ExplorationClient
         var requestBuilder = RequestBuilder.HttpGet($"v2/continents/{continentId}/floors");
         requestBuilder.Query.AddIds(floorIds);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -314,7 +314,7 @@ public sealed class ExplorationClient
         var requestBuilder = RequestBuilder.HttpGet($"v2/continents/{continentId}/floors");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -348,7 +348,7 @@ public sealed class ExplorationClient
             RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -372,7 +372,7 @@ public sealed class ExplorationClient
     {
         var requestBuilder =
             RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -403,7 +403,7 @@ public sealed class ExplorationClient
             RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions");
         requestBuilder.Query.AddId(regionId);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -435,7 +435,7 @@ public sealed class ExplorationClient
             RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions");
         requestBuilder.Query.AddIds(regionIds);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -469,7 +469,7 @@ public sealed class ExplorationClient
             RequestBuilder.HttpGet($"v2/continents/{continentId}/floors/{floorId}/regions");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -506,7 +506,7 @@ public sealed class ExplorationClient
         );
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -533,7 +533,7 @@ public sealed class ExplorationClient
         var requestBuilder = RequestBuilder.HttpGet(
             $"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps"
         );
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -567,7 +567,7 @@ public sealed class ExplorationClient
         );
         requestBuilder.Query.AddId(mapId);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -602,7 +602,7 @@ public sealed class ExplorationClient
         );
         requestBuilder.Query.AddIds(mapIds);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -639,7 +639,7 @@ public sealed class ExplorationClient
         );
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -678,7 +678,7 @@ public sealed class ExplorationClient
         );
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -708,7 +708,7 @@ public sealed class ExplorationClient
         var requestBuilder = RequestBuilder.HttpGet(
             $"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/pois"
         );
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -744,7 +744,7 @@ public sealed class ExplorationClient
         );
         requestBuilder.Query.AddId(pointOfInterestId);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -782,7 +782,7 @@ public sealed class ExplorationClient
         );
         requestBuilder.Query.AddIds(pointOfInterestIds);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -823,7 +823,7 @@ public sealed class ExplorationClient
         );
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -863,7 +863,7 @@ public sealed class ExplorationClient
         );
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -892,7 +892,7 @@ public sealed class ExplorationClient
         var requestBuilder = RequestBuilder.HttpGet(
             $"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/tasks"
         );
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -928,7 +928,7 @@ public sealed class ExplorationClient
         );
         requestBuilder.Query.AddId(heartId);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -965,7 +965,7 @@ public sealed class ExplorationClient
         );
         requestBuilder.Query.AddIds(heartIds);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -1004,7 +1004,7 @@ public sealed class ExplorationClient
         );
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -1043,7 +1043,7 @@ public sealed class ExplorationClient
         );
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -1072,7 +1072,7 @@ public sealed class ExplorationClient
         var requestBuilder = RequestBuilder.HttpGet(
             $"v2/continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/sectors"
         );
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -1108,7 +1108,7 @@ public sealed class ExplorationClient
         );
         requestBuilder.Query.AddId(sectorId);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -1145,7 +1145,7 @@ public sealed class ExplorationClient
         );
         requestBuilder.Query.AddIds(sectorIds);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -1184,7 +1184,7 @@ public sealed class ExplorationClient
         );
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -1213,7 +1213,7 @@ public sealed class ExplorationClient
         var requestBuilder = RequestBuilder.HttpGet("v2/maps");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -1232,7 +1232,7 @@ public sealed class ExplorationClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/maps");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -1258,7 +1258,7 @@ public sealed class ExplorationClient
         var requestBuilder = RequestBuilder.HttpGet("v2/maps");
         requestBuilder.Query.AddId(mapId);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -1285,7 +1285,7 @@ public sealed class ExplorationClient
         var requestBuilder = RequestBuilder.HttpGet("v2/maps");
         requestBuilder.Query.AddIds(mapIds);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -1314,7 +1314,7 @@ public sealed class ExplorationClient
         var requestBuilder = RequestBuilder.HttpGet("v2/maps");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)

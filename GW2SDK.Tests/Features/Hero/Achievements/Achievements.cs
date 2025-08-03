@@ -15,8 +15,8 @@ public class Achievements
     {
         // The JsonLinesHttpMessageHandler simulates the behavior of the real API
         // because bulk enumeration quickly exhausts the API rate limit
-        using var httpClient =
-            new HttpClient(new JsonLinesHttpMessageHandler("Data/achievements.jsonl.gz"));
+        using var handler = new JsonLinesHttpMessageHandler("Data/achievements.jsonl.gz");
+        using var httpClient = new HttpClient(handler);
         var sut = new Gw2Client(httpClient);
         await foreach (var (actual, context) in sut.Hero.Achievements.GetAchievementsBulk(
                 cancellationToken: TestContext.Current.CancellationToken

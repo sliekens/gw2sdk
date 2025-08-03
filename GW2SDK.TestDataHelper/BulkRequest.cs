@@ -23,11 +23,11 @@ internal sealed class BulkRequest(Uri requestUri)
         };
 
         Uri location = new Uri(requestUri.ToString() + search.Build(), UriKind.Relative);
-        var message = new HttpRequestMessage(HttpMethod.Get, location);
-        message.Headers.AcceptEncoding.ParseAdd("gzip");
+        using var request = new HttpRequestMessage(HttpMethod.Get, location);
+        request.Headers.AcceptEncoding.ParseAdd("gzip");
 
         using var response = await httpClient.SendAsync(
-                message,
+                request,
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )

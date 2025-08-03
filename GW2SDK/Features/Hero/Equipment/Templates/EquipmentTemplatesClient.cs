@@ -40,7 +40,7 @@ public sealed class EquipmentTemplatesClient
             $"v2/characters/{characterName}/equipment",
             accessToken
         );
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -70,7 +70,7 @@ public sealed class EquipmentTemplatesClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/legendaryarmory", accessToken);
         requestBuilder.Query.AddAllIds();
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -104,7 +104,7 @@ public sealed class EquipmentTemplatesClient
             $"v2/characters/{characterName}/equipmenttabs",
             accessToken
         );
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -134,7 +134,7 @@ public sealed class EquipmentTemplatesClient
             $"v2/characters/{characterName}/equipmenttabs/{templateNumber}",
             accessToken
         );
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -166,7 +166,7 @@ public sealed class EquipmentTemplatesClient
             accessToken
         );
         requestBuilder.Query.AddPage(0, null);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -197,7 +197,7 @@ public sealed class EquipmentTemplatesClient
             $"v2/characters/{characterName}/equipmenttabs/active",
             accessToken
         );
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -223,7 +223,7 @@ public sealed class EquipmentTemplatesClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/legendaryarmory");
         requestBuilder.Query.AddAllIds();
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -242,7 +242,7 @@ public sealed class EquipmentTemplatesClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/legendaryarmory");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -265,7 +265,7 @@ public sealed class EquipmentTemplatesClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/legendaryarmory");
         requestBuilder.Query.AddId(legendaryItemId);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -291,7 +291,7 @@ public sealed class EquipmentTemplatesClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/legendaryarmory");
         requestBuilder.Query.AddIds(legendaryItemIds);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -318,7 +318,7 @@ public sealed class EquipmentTemplatesClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/legendaryarmory");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)

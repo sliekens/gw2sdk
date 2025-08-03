@@ -36,7 +36,7 @@ public sealed class RecipesClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/recipes", accessToken);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -69,7 +69,7 @@ public sealed class RecipesClient
             $"v2/characters/{characterName}/recipes",
             accessToken
         );
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -92,7 +92,7 @@ public sealed class RecipesClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/recipes");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -115,7 +115,7 @@ public sealed class RecipesClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/recipes");
         requestBuilder.Query.AddId(recipeId);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -140,7 +140,7 @@ public sealed class RecipesClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/recipes");
         requestBuilder.Query.AddIds(recipeIds);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -166,7 +166,7 @@ public sealed class RecipesClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/recipes");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -263,7 +263,7 @@ public sealed class RecipesClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/recipes/search");
         requestBuilder.Query.Add("input", ingredientItemId);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -287,7 +287,7 @@ public sealed class RecipesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/recipes/search");
         requestBuilder.Query.Add("input", ingredientItemId);
         requestBuilder.Query.AddAllIds();
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -317,7 +317,7 @@ public sealed class RecipesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/recipes/search");
         requestBuilder.Query.Add("input", ingredientItemId);
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -339,7 +339,7 @@ public sealed class RecipesClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/recipes/search");
         requestBuilder.Query.Add("output", outputItemId);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -363,7 +363,7 @@ public sealed class RecipesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/recipes/search");
         requestBuilder.Query.Add("output", outputItemId);
         requestBuilder.Query.AddAllIds();
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -393,7 +393,7 @@ public sealed class RecipesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/recipes/search");
         requestBuilder.Query.Add("output", outputItemId);
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)

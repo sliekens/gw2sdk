@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 
 using GuildWars2.Http;
 using GuildWars2.Json;
@@ -39,7 +39,7 @@ public sealed class TrainingClient
             $"v2/characters/{characterName}/training",
             accessToken
         );
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -68,7 +68,7 @@ public sealed class TrainingClient
         var requestBuilder = RequestBuilder.HttpGet("v2/professions");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -86,7 +86,7 @@ public sealed class TrainingClient
         GetProfessionNames(CancellationToken cancellationToken = default)
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/professions");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -113,7 +113,7 @@ public sealed class TrainingClient
         var requestBuilder = RequestBuilder.HttpGet("v2/professions");
         requestBuilder.Query.AddId(professionName.ToString());
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -161,7 +161,7 @@ public sealed class TrainingClient
         var requestBuilder = RequestBuilder.HttpGet("v2/professions");
         requestBuilder.Query.AddIds(professionNames.Select(value => value.ToString()));
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -190,7 +190,7 @@ public sealed class TrainingClient
         var requestBuilder = RequestBuilder.HttpGet("v2/professions");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)

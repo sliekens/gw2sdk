@@ -1,4 +1,4 @@
-﻿using GuildWars2.Http;
+using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Pve.SuperAdventureBox;
@@ -39,7 +39,7 @@ public sealed class SuperAdventureBoxClient
             $"v2/characters/{characterName}/sab",
             accessToken
         );
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)

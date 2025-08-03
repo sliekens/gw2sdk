@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 
 using GuildWars2.Collections;
 using GuildWars2.Http;
@@ -45,7 +45,7 @@ public sealed class WvwClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/wvw", accessToken);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -77,7 +77,7 @@ public sealed class WvwClient
             _ => region.ToString()
         };
         var requestBuilder = RequestBuilder.HttpGet($"v2/wvw/guilds/{id}");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -112,7 +112,7 @@ public sealed class WvwClient
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/abilities");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -131,7 +131,7 @@ public sealed class WvwClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/abilities");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -157,7 +157,7 @@ public sealed class WvwClient
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/abilities");
         requestBuilder.Query.AddId(abilityId);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -184,7 +184,7 @@ public sealed class WvwClient
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/abilities");
         requestBuilder.Query.AddIds(abilityIds);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -213,7 +213,7 @@ public sealed class WvwClient
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/abilities");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -242,7 +242,7 @@ public sealed class WvwClient
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/objectives");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -261,7 +261,7 @@ public sealed class WvwClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/objectives");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -287,7 +287,7 @@ public sealed class WvwClient
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/objectives");
         requestBuilder.Query.AddId(objectiveId);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -314,7 +314,7 @@ public sealed class WvwClient
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/objectives");
         requestBuilder.Query.AddIds(objectiveIds);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -343,7 +343,7 @@ public sealed class WvwClient
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/objectives");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -372,7 +372,7 @@ public sealed class WvwClient
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/ranks");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -391,7 +391,7 @@ public sealed class WvwClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/ranks");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -417,7 +417,7 @@ public sealed class WvwClient
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/ranks");
         requestBuilder.Query.AddId(rankId);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -444,7 +444,7 @@ public sealed class WvwClient
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/ranks");
         requestBuilder.Query.AddIds(rankIds);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -473,7 +473,7 @@ public sealed class WvwClient
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/ranks");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -502,7 +502,7 @@ public sealed class WvwClient
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/upgrades");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -522,7 +522,7 @@ public sealed class WvwClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/upgrades");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -548,7 +548,7 @@ public sealed class WvwClient
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/upgrades");
         requestBuilder.Query.AddId(upgradeId);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -575,7 +575,7 @@ public sealed class WvwClient
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/upgrades");
         requestBuilder.Query.AddIds(upgradeIds);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -605,7 +605,7 @@ public sealed class WvwClient
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/upgrades");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -632,7 +632,7 @@ public sealed class WvwClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches");
         requestBuilder.Query.AddAllIds();
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -651,7 +651,7 @@ public sealed class WvwClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -674,7 +674,7 @@ public sealed class WvwClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches");
         requestBuilder.Query.AddId(matchId);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -698,7 +698,7 @@ public sealed class WvwClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches");
         requestBuilder.Query.AddIds(matchIds);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -724,7 +724,7 @@ public sealed class WvwClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -748,7 +748,7 @@ public sealed class WvwClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches");
         requestBuilder.Query.Add("world", worldId);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -774,7 +774,7 @@ public sealed class WvwClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/overview");
         requestBuilder.Query.AddAllIds();
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -793,7 +793,7 @@ public sealed class WvwClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/overview");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -816,7 +816,7 @@ public sealed class WvwClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/overview");
         requestBuilder.Query.AddId(matchId);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -841,7 +841,7 @@ public sealed class WvwClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/overview");
         requestBuilder.Query.AddIds(matchIds);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -868,7 +868,7 @@ public sealed class WvwClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/overview");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -892,7 +892,7 @@ public sealed class WvwClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/overview");
         requestBuilder.Query.Add("world", worldId);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -918,7 +918,7 @@ public sealed class WvwClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/scores");
         requestBuilder.Query.AddAllIds();
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -937,7 +937,7 @@ public sealed class WvwClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/scores");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -960,7 +960,7 @@ public sealed class WvwClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/scores");
         requestBuilder.Query.AddId(matchId);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -984,7 +984,7 @@ public sealed class WvwClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/scores");
         requestBuilder.Query.AddIds(matchIds);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -1010,7 +1010,7 @@ public sealed class WvwClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/scores");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -1034,7 +1034,7 @@ public sealed class WvwClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/scores");
         requestBuilder.Query.Add("world", worldId);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -1060,7 +1060,7 @@ public sealed class WvwClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/stats");
         requestBuilder.Query.AddAllIds();
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -1079,7 +1079,7 @@ public sealed class WvwClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/stats");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -1102,7 +1102,7 @@ public sealed class WvwClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/stats");
         requestBuilder.Query.AddId(matchId);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -1126,7 +1126,7 @@ public sealed class WvwClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/stats");
         requestBuilder.Query.AddIds(matchIds);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -1152,7 +1152,7 @@ public sealed class WvwClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/stats");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -1176,7 +1176,7 @@ public sealed class WvwClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/stats");
         requestBuilder.Query.Add("world", worldId);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -1199,7 +1199,7 @@ public sealed class WvwClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/timers/lockout");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -1217,7 +1217,7 @@ public sealed class WvwClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/wvw/timers/teamAssignment");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)

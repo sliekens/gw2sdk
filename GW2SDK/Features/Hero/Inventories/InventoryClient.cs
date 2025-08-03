@@ -1,4 +1,4 @@
-﻿using GuildWars2.Http;
+using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Inventories;
@@ -32,7 +32,7 @@ public sealed class InventoryClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/inventory", accessToken);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -64,7 +64,7 @@ public sealed class InventoryClient
             $"v2/characters/{characterName}/inventory",
             accessToken
         );
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)

@@ -8,7 +8,7 @@ public class BulkQueryTest
     public async Task Can_be_cancelled(int resultTotal, int chunkSize)
     {
         // Ensure cancellation works in both scenarios where the query is chunked or not
-        CancellationTokenSource cancellationTokenSource = new();
+        using CancellationTokenSource cancellationTokenSource = new();
 
         static Task<IReadOnlyCollection<StubRecord>> GetChunk(
             IEnumerable<int> chunk,

@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using System.Text.Json;
 
 using GuildWars2.Http;
@@ -34,7 +34,7 @@ public sealed class OutfitsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/outfits", accessToken);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -62,7 +62,7 @@ public sealed class OutfitsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/outfits");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -81,7 +81,7 @@ public sealed class OutfitsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/outfits");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -107,7 +107,7 @@ public sealed class OutfitsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/outfits");
         requestBuilder.Query.AddId(outfitId);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -136,7 +136,7 @@ public sealed class OutfitsClient
             outfitIds.Select(id => id.ToString(CultureInfo.InvariantCulture))
         );
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -165,7 +165,7 @@ public sealed class OutfitsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/outfits");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)

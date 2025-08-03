@@ -1,4 +1,4 @@
-﻿using GuildWars2.Http;
+using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Authorization;
@@ -30,7 +30,7 @@ public sealed class TokenClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/tokeninfo", accessToken);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -96,7 +96,7 @@ public sealed class TokenClient
             requestBuilder.Query.Add("urls", string.Join(",", allowedUrls));
         }
 
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -161,7 +161,7 @@ public sealed class TokenClient
             requestBuilder.Query.Add("urls", string.Join(",", allowedUrls.Select(u => u.ToString())));
         }
 
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)

@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 
 using GuildWars2.Http;
 using GuildWars2.Json;
@@ -33,7 +33,7 @@ public sealed class NoveltiesClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/novelties", accessToken);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -61,7 +61,7 @@ public sealed class NoveltiesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/novelties");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -80,7 +80,7 @@ public sealed class NoveltiesClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/novelties");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -106,7 +106,7 @@ public sealed class NoveltiesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/novelties");
         requestBuilder.Query.AddId(noveltyId);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -133,7 +133,7 @@ public sealed class NoveltiesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/novelties");
         requestBuilder.Query.AddIds(noveltyIds);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -162,7 +162,7 @@ public sealed class NoveltiesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/novelties");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)

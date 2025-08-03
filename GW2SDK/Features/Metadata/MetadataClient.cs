@@ -1,4 +1,4 @@
-﻿using GuildWars2.Http;
+using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Metadata;
@@ -30,7 +30,7 @@ public sealed class MetadataClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet($"{version}.json");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -51,7 +51,7 @@ public sealed class MetadataClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/build");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)

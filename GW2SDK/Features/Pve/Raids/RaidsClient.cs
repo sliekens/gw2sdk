@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 
 using GuildWars2.Http;
 using GuildWars2.Json;
@@ -33,7 +33,7 @@ public sealed class RaidsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/raids", accessToken);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -55,7 +55,7 @@ public sealed class RaidsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/raids");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -78,7 +78,7 @@ public sealed class RaidsClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/raids");
         requestBuilder.Query.AddId(raidId);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -102,7 +102,7 @@ public sealed class RaidsClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/raids");
         requestBuilder.Query.AddIds(raidIds);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -128,7 +128,7 @@ public sealed class RaidsClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/raids");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -150,7 +150,7 @@ public sealed class RaidsClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/raids");
         requestBuilder.Query.AddAllIds();
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)

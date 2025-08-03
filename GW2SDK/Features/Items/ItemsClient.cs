@@ -1,4 +1,4 @@
-﻿using System.Runtime.CompilerServices;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 
 using GuildWars2.Http;
@@ -32,7 +32,7 @@ public sealed class ItemsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/items");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -58,7 +58,7 @@ public sealed class ItemsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/items");
         requestBuilder.Query.AddId(itemId);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -86,7 +86,7 @@ public sealed class ItemsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/items");
         requestBuilder.Query.AddIds(itemIds);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -115,7 +115,7 @@ public sealed class ItemsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/items");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -216,7 +216,7 @@ public sealed class ItemsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/itemstats");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -241,7 +241,7 @@ public sealed class ItemsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/itemstats");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -270,7 +270,7 @@ public sealed class ItemsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/itemstats");
         requestBuilder.Query.AddId(attributeCombinationId);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -298,7 +298,7 @@ public sealed class ItemsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/itemstats");
         requestBuilder.Query.AddIds(attributeCombinationIds);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -329,7 +329,7 @@ public sealed class ItemsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/itemstats");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)

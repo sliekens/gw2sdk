@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 
 using GuildWars2.Http;
 using GuildWars2.Json;
@@ -35,7 +35,7 @@ public sealed class AccountClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account", accessToken);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -63,7 +63,7 @@ public sealed class AccountClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/progression", accessToken);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -91,7 +91,7 @@ public sealed class AccountClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/luck", accessToken);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -124,7 +124,7 @@ public sealed class AccountClient
             $"v2/characters/{characterName}/core",
             accessToken
         );
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -150,7 +150,7 @@ public sealed class AccountClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/characters", accessToken);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -176,7 +176,7 @@ public sealed class AccountClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/characters", accessToken);
         requestBuilder.Query.AddId(characterName);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -203,7 +203,7 @@ public sealed class AccountClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/characters", accessToken);
         requestBuilder.Query.AddIds(characterNames);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -228,7 +228,7 @@ public sealed class AccountClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/characters", accessToken);
         requestBuilder.Query.AddAllIds();
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)

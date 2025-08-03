@@ -44,7 +44,7 @@ public sealed class GuildsClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/guild/search");
         requestBuilder.Query.Add("name", name);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -74,7 +74,7 @@ public sealed class GuildsClient
     {
         // Don't use 'id=' here, it results in a 404 even with a valid guild ID
         var requestBuilder = RequestBuilder.HttpGet($"v2/guild/{guildId}", accessToken);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -104,7 +104,7 @@ public sealed class GuildsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet($"v2/guild/{guildId}/ranks", accessToken);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -134,7 +134,7 @@ public sealed class GuildsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet($"v2/guild/{guildId}/members", accessToken);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -164,7 +164,7 @@ public sealed class GuildsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet($"v2/guild/{guildId}/teams", accessToken);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -194,7 +194,7 @@ public sealed class GuildsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet($"v2/guild/{guildId}/treasury", accessToken);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -225,7 +225,7 @@ public sealed class GuildsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet($"v2/guild/{guildId}/stash", accessToken);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -255,7 +255,7 @@ public sealed class GuildsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet($"v2/guild/{guildId}/storage", accessToken);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -284,7 +284,7 @@ public sealed class GuildsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet($"v2/guild/{guildId}/upgrades", accessToken);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -337,7 +337,7 @@ public sealed class GuildsClient
             requestBuilder.Query.Add("since", sinceLogId.Value);
         }
 
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -364,7 +364,7 @@ public sealed class GuildsClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/emblem/foregrounds");
         requestBuilder.Query.AddAllIds();
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -384,7 +384,7 @@ public sealed class GuildsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/emblem/foregrounds");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -407,7 +407,7 @@ public sealed class GuildsClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/emblem/foregrounds");
         requestBuilder.Query.AddId(emblemForegroundId);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -432,7 +432,7 @@ public sealed class GuildsClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/emblem/foregrounds");
         requestBuilder.Query.AddIds(emblemForegroundIds);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -460,7 +460,7 @@ public sealed class GuildsClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/emblem/foregrounds");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -488,7 +488,7 @@ public sealed class GuildsClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/emblem/backgrounds");
         requestBuilder.Query.AddAllIds();
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -508,7 +508,7 @@ public sealed class GuildsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/emblem/backgrounds");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -531,7 +531,7 @@ public sealed class GuildsClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/emblem/backgrounds");
         requestBuilder.Query.AddId(backgroundEmblemId);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -556,7 +556,7 @@ public sealed class GuildsClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/emblem/backgrounds");
         requestBuilder.Query.AddIds(backgroundEmblemIds);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -584,7 +584,7 @@ public sealed class GuildsClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/emblem/backgrounds");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -615,7 +615,7 @@ public sealed class GuildsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/guild/permissions");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -635,7 +635,7 @@ public sealed class GuildsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/guild/permissions");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -662,7 +662,7 @@ public sealed class GuildsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/guild/permissions");
         requestBuilder.Query.AddId(guildPermissionId);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -690,7 +690,7 @@ public sealed class GuildsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/guild/permissions");
         requestBuilder.Query.AddIds(guildPermissionIds);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -721,7 +721,7 @@ public sealed class GuildsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/guild/permissions");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -751,7 +751,7 @@ public sealed class GuildsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/guild/upgrades");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -770,7 +770,7 @@ public sealed class GuildsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/guild/upgrades");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -796,7 +796,7 @@ public sealed class GuildsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/guild/upgrades");
         requestBuilder.Query.AddId(guildUpgradeId);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -823,7 +823,7 @@ public sealed class GuildsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/guild/upgrades");
         requestBuilder.Query.AddIds(guildUpgradeIds);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -852,7 +852,7 @@ public sealed class GuildsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/guild/upgrades");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)

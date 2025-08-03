@@ -1,4 +1,4 @@
-﻿using System.Runtime.CompilerServices;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 
 using GuildWars2.Commerce.Delivery;
@@ -41,7 +41,7 @@ public sealed class CommerceClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/commerce/delivery", accessToken);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -64,7 +64,7 @@ public sealed class CommerceClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/commerce/prices");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -87,7 +87,7 @@ public sealed class CommerceClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/commerce/prices");
         requestBuilder.Query.AddId(itemId);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -112,7 +112,7 @@ public sealed class CommerceClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/commerce/prices");
         requestBuilder.Query.AddIds(itemIds);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -205,7 +205,7 @@ public sealed class CommerceClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/commerce/listings");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -228,7 +228,7 @@ public sealed class CommerceClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/commerce/listings");
         requestBuilder.Query.AddId(itemId);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -253,7 +253,7 @@ public sealed class CommerceClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/commerce/listings");
         requestBuilder.Query.AddIds(itemIds);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -351,7 +351,7 @@ public sealed class CommerceClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/commerce/exchange/gems");
         requestBuilder.Query.Add("quantity", gems);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -375,7 +375,7 @@ public sealed class CommerceClient
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/commerce/exchange/coins");
         requestBuilder.Query.Add("quantity", gold);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -411,7 +411,7 @@ public sealed class CommerceClient
             accessToken
         );
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -443,7 +443,7 @@ public sealed class CommerceClient
             accessToken
         );
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -475,7 +475,7 @@ public sealed class CommerceClient
             accessToken
         );
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -507,7 +507,7 @@ public sealed class CommerceClient
             accessToken
         );
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)

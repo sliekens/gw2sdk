@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 
 using GuildWars2.Http;
 using GuildWars2.Json;
@@ -33,7 +33,7 @@ public sealed class GlidersClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/gliders", accessToken);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -61,7 +61,7 @@ public sealed class GlidersClient
         var requestBuilder = RequestBuilder.HttpGet("v2/gliders");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -80,7 +80,7 @@ public sealed class GlidersClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/gliders");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -106,7 +106,7 @@ public sealed class GlidersClient
         var requestBuilder = RequestBuilder.HttpGet("v2/gliders");
         requestBuilder.Query.AddId(gliderSkinId);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -133,7 +133,7 @@ public sealed class GlidersClient
         var requestBuilder = RequestBuilder.HttpGet("v2/gliders");
         requestBuilder.Query.AddIds(gliderSkinIds);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -162,7 +162,7 @@ public sealed class GlidersClient
         var requestBuilder = RequestBuilder.HttpGet("v2/gliders");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)

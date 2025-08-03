@@ -21,7 +21,9 @@ internal static class HttpContentExtensions
         var content = await instance.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
         if (instance.Headers.ContentEncoding.LastOrDefault() == "gzip")
         {
+#pragma warning disable CA2000 // Dispose objects before losing scope
             content = new GZipStream(content, CompressionMode.Decompress, false);
+#pragma warning restore CA2000 // Dispose objects before losing scope
         }
 
 #if NET

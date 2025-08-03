@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 
 using GuildWars2.Http;
 using GuildWars2.Json;
@@ -32,7 +32,7 @@ public sealed class DailyCraftingClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/dailycrafting");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -59,7 +59,7 @@ public sealed class DailyCraftingClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/dailycrafting", accessToken);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)

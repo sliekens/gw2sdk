@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 
 using GuildWars2.Http;
 using GuildWars2.Json;
@@ -34,7 +34,7 @@ public sealed class BankClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/bank", accessToken);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -61,7 +61,7 @@ public sealed class BankClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/materials", accessToken);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -91,7 +91,7 @@ public sealed class BankClient
         var requestBuilder = RequestBuilder.HttpGet("v2/materials");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -111,7 +111,7 @@ public sealed class BankClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/materials");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -137,7 +137,7 @@ public sealed class BankClient
         var requestBuilder = RequestBuilder.HttpGet("v2/materials");
         requestBuilder.Query.AddId(materialCategoryId);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -166,7 +166,7 @@ public sealed class BankClient
         var requestBuilder = RequestBuilder.HttpGet("v2/materials");
         requestBuilder.Query.AddIds(materialCategoryIds);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -197,7 +197,7 @@ public sealed class BankClient
         var requestBuilder = RequestBuilder.HttpGet("v2/materials");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)

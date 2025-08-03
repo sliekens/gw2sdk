@@ -33,7 +33,7 @@ public sealed class DyesClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/dyes", accessToken);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -61,7 +61,7 @@ public sealed class DyesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/colors");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -80,7 +80,7 @@ public sealed class DyesClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/colors");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -106,7 +106,7 @@ public sealed class DyesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/colors");
         requestBuilder.Query.AddId(colorId);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -133,7 +133,7 @@ public sealed class DyesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/colors");
         requestBuilder.Query.AddIds(colorIds);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -162,7 +162,7 @@ public sealed class DyesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/colors");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)

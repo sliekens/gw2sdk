@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 
 using GuildWars2.Http;
 using GuildWars2.Json;
@@ -31,7 +31,7 @@ public sealed class MountsClient
         GetUnlockedMounts(string? accessToken, CancellationToken cancellationToken = default)
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/mounts/types", accessToken);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -52,7 +52,7 @@ public sealed class MountsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/mounts/skins", accessToken);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -80,7 +80,7 @@ public sealed class MountsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/mounts/types");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -99,7 +99,7 @@ public sealed class MountsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/mounts/types");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -125,7 +125,7 @@ public sealed class MountsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/mounts/types");
         requestBuilder.Query.AddId(MountNameFormatter.FormatMountName(mountName.ToString()));
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -173,7 +173,7 @@ public sealed class MountsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/mounts/types");
         requestBuilder.Query.AddIds(mountNames.Select(MountNameFormatter.FormatMountName));
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -202,7 +202,7 @@ public sealed class MountsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/mounts/types");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -231,7 +231,7 @@ public sealed class MountsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/mounts/skins");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -250,7 +250,7 @@ public sealed class MountsClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/mounts/skins");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -276,7 +276,7 @@ public sealed class MountsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/mounts/skins");
         requestBuilder.Query.AddId(mountSkinId);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -303,7 +303,7 @@ public sealed class MountsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/mounts/skins");
         requestBuilder.Query.AddIds(mountSkinIds);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -332,7 +332,7 @@ public sealed class MountsClient
         var requestBuilder = RequestBuilder.HttpGet("v2/mounts/skins");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)

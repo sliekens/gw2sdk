@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 
 using GuildWars2.Http;
 using GuildWars2.Json;
@@ -28,7 +28,7 @@ public sealed class WorldBossesClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/worldbosses");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -49,7 +49,7 @@ public sealed class WorldBossesClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/account/worldbosses", accessToken);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)

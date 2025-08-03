@@ -34,7 +34,7 @@ public sealed class RacesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/races");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -53,7 +53,7 @@ public sealed class RacesClient
     )
     {
         var requestBuilder = RequestBuilder.HttpGet("v2/races");
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -79,7 +79,7 @@ public sealed class RacesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/races");
         requestBuilder.Query.AddId(raceName.ToString());
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -127,7 +127,7 @@ public sealed class RacesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/races");
         requestBuilder.Query.AddIds(raceNames.Select(value => value.ToString()));
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
@@ -156,7 +156,7 @@ public sealed class RacesClient
         var requestBuilder = RequestBuilder.HttpGet("v2/races");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        var request = requestBuilder.Build();
+        using var request = requestBuilder.Build();
         var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)

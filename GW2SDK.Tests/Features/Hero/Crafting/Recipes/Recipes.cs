@@ -13,8 +13,8 @@ public class Recipes
     {
         // The JsonLinesHttpMessageHandler simulates the behavior of the real API
         // because bulk enumeration quickly exhausts the API rate limit
-        using var httpClient =
-            new HttpClient(new JsonLinesHttpMessageHandler("Data/recipes.jsonl.gz"));
+        using var handler = new JsonLinesHttpMessageHandler("Data/recipes.jsonl.gz");
+        using var httpClient = new HttpClient(handler);
         var sut = new Gw2Client(httpClient);
         await foreach (var (actual, context) in sut.Hero.Crafting.Recipes.GetRecipesBulk(
                 cancellationToken: TestContext.Current.CancellationToken
@@ -53,8 +53,8 @@ public class Recipes
     {
         // The JsonLinesHttpMessageHandler simulates the behavior of the real API
         // because bulk enumeration quickly exhausts the API rate limit
-        using var httpClient =
-            new HttpClient(new JsonLinesHttpMessageHandler("Data/recipes.jsonl.gz"));
+        using var handler = new JsonLinesHttpMessageHandler("Data/recipes.jsonl.gz");
+        using var httpClient = new HttpClient(handler);
         var sut = new Gw2Client(httpClient);
         await foreach (var original in sut.Hero.Crafting.Recipes
             .GetRecipesBulk(cancellationToken: TestContext.Current.CancellationToken)
