@@ -33,8 +33,8 @@ internal static class SelectedPetsJson
         {
             Terrestrial1 = terrestrial1,
             Terrestrial2 = terrestrial2,
-            Aquatic1 = terrestrial1,
-            Aquatic2 = terrestrial2
+            Aquatic1 = aquatic1,
+            Aquatic2 = aquatic2
         };
     }
 }
