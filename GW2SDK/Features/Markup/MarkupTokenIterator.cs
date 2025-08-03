@@ -2,7 +2,7 @@
 
 internal sealed class MarkupTokenIterator(IEnumerable<MarkupToken> input)
 {
-    private readonly List<MarkupToken> tokens = input.ToList();
+    private readonly List<MarkupToken> tokens = [.. input];
 
     private int position;
 

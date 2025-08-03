@@ -28,7 +28,7 @@ public class TokenInfo
 #endif
         Assert.Equal(
             expectedPermissions,
-            apiKey.Permissions.Select(p => p.ToEnum() ?? default).ToHashSet()
+            [.. apiKey.Permissions.Select(p => p.ToEnum() ?? default)]
         );
     }
 }

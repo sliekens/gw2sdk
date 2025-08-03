@@ -17,7 +17,7 @@ public class BulkQueryTest
         {
             cancellationToken.ThrowIfCancellationRequested();
             IReadOnlyCollection<StubRecord>
-                result = chunk.Select(id => new StubRecord(id)).ToList();
+                result = [.. chunk.Select(id => new StubRecord(id))];
             return Task.FromResult(result);
         }
 
@@ -64,7 +64,7 @@ public class BulkQueryTest
             cancellationToken.ThrowIfCancellationRequested();
             Assert.NotSame(index, chunk);
             IReadOnlyCollection<StubRecord>
-                result = chunk.Select(id => new StubRecord(id)).ToList();
+                result = [.. chunk.Select(id => new StubRecord(id))];
             return Task.FromResult(result);
         }
 
@@ -91,7 +91,7 @@ public class BulkQueryTest
             cancellationToken.ThrowIfCancellationRequested();
             var keys = chunk.ToList();
             Assert.Equal(index, keys);
-            IReadOnlyCollection<StubRecord> result = keys.Select(id => new StubRecord(id)).ToList();
+            IReadOnlyCollection<StubRecord> result = [.. keys.Select(id => new StubRecord(id))];
             return Task.FromResult(result);
         }
 

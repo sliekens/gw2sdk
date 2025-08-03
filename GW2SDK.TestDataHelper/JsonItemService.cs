@@ -42,11 +42,9 @@ internal sealed class JsonItemService(HttpClient http)
         )
         {
             Uri resource = new Uri("/v2/items", UriKind.Relative);
-            var request = new BulkRequest(resource) { Ids = chunk.ToList() };
+            var request = new BulkRequest(resource) { Ids = [.. chunk] };
             var json = await request.SendAsync(http, cancellationToken).ConfigureAwait(false);
-            return json.RootElement.EnumerateArray()
-                .Select(item => (item.GetProperty("id").GetInt32(), item.ToJsonLine()))
-                .ToList();
+            return [.. json.RootElement.EnumerateArray().Select(item => (item.GetProperty("id").GetInt32(), item.ToJsonLine()))];
         }
     }
 }

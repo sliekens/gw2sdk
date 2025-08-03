@@ -72,7 +72,7 @@ public class SubtokenInfo
         Assert.Equal(expiresAt, subtoken.ExpiresAt);
 
         Assert.Equal(
-            urls.Select(u => Uri.UnescapeDataString(u.ToString())).ToList(),
+            [.. urls.Select(u => Uri.UnescapeDataString(u.ToString()))],
             subtoken.Urls?.Select(url => Uri.UnescapeDataString(url.ToString())).ToList()
         );
     }
