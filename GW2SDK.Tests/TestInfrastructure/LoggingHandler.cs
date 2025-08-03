@@ -31,7 +31,7 @@ internal sealed class LoggingHandler : DelegatingHandler
 
         if (request.Content is not null)
         {
-            Output.Value?.WriteLine(await request.Content.ReadAsStringAsync().ConfigureAwait(false));
+            Output.Value?.WriteLine(await request.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false));
             Output.Value?.WriteLine("");
         }
 
@@ -60,10 +60,10 @@ internal sealed class LoggingHandler : DelegatingHandler
             if (response.Content.Headers.ContentEncoding.LastOrDefault() == "gzip")
             {
                 // IMPORTANT: buffer the Content to make ReadAsStreamAsync return a rewindable MemoryStream
-                await response.Content.LoadIntoBufferAsync().ConfigureAwait(false);
+                await response.Content.LoadIntoBufferAsync(cancellationToken).ConfigureAwait(false);
 
                 // ALSO IMPORTANT: do not dispose the MemoryStream because subsequent ReadAsStreamAsync calls return the same instance
-                var content = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+                var content = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
 
                 try
                 {
@@ -73,7 +73,7 @@ internal sealed class LoggingHandler : DelegatingHandler
                         true
                     );
                     using var reader = new StreamReader(decompressed);
-                    var text = await reader.ReadToEndAsync().ConfigureAwait(false);
+                    var text = await reader.ReadToEndAsync(cancellationToken).ConfigureAwait(false);
                     if (text.Length > 1024)
                     {
 #if NET
@@ -93,7 +93,7 @@ internal sealed class LoggingHandler : DelegatingHandler
             }
             else
             {
-                Output.Value?.WriteLine(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+                Output.Value?.WriteLine(await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false));
             }
 
             Output.Value?.WriteLine("");
