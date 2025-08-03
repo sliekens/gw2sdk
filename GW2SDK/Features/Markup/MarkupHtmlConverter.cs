@@ -40,7 +40,7 @@ public sealed class MarkupHtmlConverter
         StringBuilder builder = new();
         foreach (var node in root.Children)
         {
-            builder.Append(MarkupHtmlConverter.ConvertNode(node, colorMap));
+            builder.Append(ConvertNode(node, colorMap));
         }
 
         return builder.ToString();
@@ -58,11 +58,15 @@ public sealed class MarkupHtmlConverter
                 StringBuilder builder = new();
                 foreach (var child in coloredText.Children)
                 {
-                    builder.Append(MarkupHtmlConverter.ConvertNode(child, colorMap));
+                    builder.Append(ConvertNode(child, colorMap));
                 }
 
                 var content = builder.ToString();
+#if NET
                 if (coloredText.Color.StartsWith('#'))
+#else
+                if (coloredText.Color.StartsWith("#", StringComparison.Ordinal))
+#endif
                 {
                     return $"<span style=\"color: {coloredText.Color}\">{content}</span>";
                 }

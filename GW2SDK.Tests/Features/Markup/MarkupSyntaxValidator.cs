@@ -42,7 +42,11 @@ public static class MarkupSyntaxValidator
     private static void ValidateColoredTextNode(ColoredTextNode coloredText)
     {
         Assert.NotEmpty(coloredText.Color);
+#if NET
         if (coloredText.Color.StartsWith('@'))
+#else
+        if (coloredText.Color.StartsWith("@", StringComparison.Ordinal))
+#endif
         {
             if (coloredText.Color != "@warn")
             {
@@ -52,7 +56,11 @@ public static class MarkupSyntaxValidator
                 );
             }
         }
+#if NET
         else if (coloredText.Color.StartsWith('#'))
+#else
+        else if (coloredText.Color.StartsWith("#", StringComparison.Ordinal))
+#endif
         {
             if (coloredText.Color is not ("#Flavor" or "#Warning"))
             {
