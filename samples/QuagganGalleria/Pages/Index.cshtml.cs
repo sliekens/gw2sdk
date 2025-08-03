@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace QuagganGalleria.Pages;
 
-internal class QuagganViewModel
+internal sealed class QuagganViewModel
 {
     public bool Active { get; set; }
 
@@ -14,7 +14,7 @@ internal class QuagganViewModel
     public string Id { get; set; } = "";
 }
 
-internal class IndexModel(ILogger<IndexModel> logger, QuaggansClient quaggans) : PageModel
+internal sealed class IndexModel(ILogger<IndexModel> logger, QuaggansClient quaggans) : PageModel
 {
     public DateTimeOffset Refreshed { get; set; }
 
