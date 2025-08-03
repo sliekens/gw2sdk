@@ -46,4 +46,8 @@
     <!-- Add support for OSPlatform attributes (net5.0+) -->
     <PolySharpIncludeRuntimeSupportedAttributes>true</PolySharpIncludeRuntimeSupportedAttributes>
   </PropertyGroup>
+
+  <ItemGroup>
+    <GlobalAnalyzerConfigFiles Include ="$(MSBuildThisFileDirectory).roslynatorconfig" />
+  </ItemGroup>
 </Project>
