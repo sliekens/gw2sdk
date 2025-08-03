@@ -51,7 +51,7 @@ internal sealed class SpectreMarkupConverter
                 }
 
                 var content = builder.ToString();
-                if (coloredText.Color.StartsWith("#", StringComparison.Ordinal))
+                if (coloredText.Color.StartsWith('#'))
                 {
                     var colorCode = coloredText.Color;
                     return $"[{colorCode}]{content}[/]";
