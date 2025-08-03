@@ -29,55 +29,58 @@ internal sealed class Program
         // GameLink implements IDiposable and IAsyncDisposable,
         //  make sure it is disposed one way or another,
         //  e.g. by 'using' or 'await using'.
-        await using GameLink gameLink = GameLink.Open(refreshInterval);
+        GameLink gameLink = GameLink.Open(refreshInterval);
+        await using (gameLink.ConfigureAwait(false))
+        {
+            Console.WriteLine(
+                "GameLink is starting! (Ensure the game is running"
+                + " and that you are loaded into a map.)"
+            );
 
-        Console.WriteLine(
-            "GameLink is starting! (Ensure the game is running"
-            + " and that you are loaded into a map.)"
-        );
-
-        // Subscribe to the game link to start receiving game state updates.
-        IDisposable subscription = gameLink.Subscribe(gameTick =>
-            {
-                // Each 'tick' contains information about the player's character
-                // and actions, among other things.
-                Identity? player = gameTick.GetIdentity();
-
-                // The identity can be missing due to JSON errors,
-                // always check for null.
-                if (player is not null)
+            // Subscribe to the game link to start receiving game state updates.
+            IDisposable subscription = gameLink.Subscribe(gameTick =>
                 {
-                    Console.WriteLine($"{player.Name} is ready to go!");
-                    Console.WriteLine(
-                        $"Race              : {player.Race}"
-                    );
-                    Console.WriteLine(
-                        $"Profession        : {player.Profession}"
-                    );
-                    Console.WriteLine(
-                        $"Specialization ID : {player.SpecializationId}"
-                    );
-                    Console.WriteLine(
-                        $"Squad leader      : {player.Commander}"
-                    );
-                    Console.WriteLine(
-                        $"In combat         : {gameTick.Context.UiState.HasFlag(UiState.IsInCombat)}"
-                    );
-                    Console.WriteLine(
-                        $"Current mount     : {gameTick.Context.Mount}"
-                    );
-                    Console.WriteLine(
-                        $"Tick              : {gameTick.UiTick}"
-                    );
+                    // Each 'tick' contains information about the player's character
+                    // and actions, among other things.
+                    Identity? player = gameTick.GetIdentity();
+
+                    // The identity can be missing due to JSON errors,
+                    // always check for null.
+                    if (player is not null)
+                    {
+                        Console.WriteLine($"{player.Name} is ready to go!");
+                        Console.WriteLine(
+                            $"Race              : {player.Race}"
+                        );
+                        Console.WriteLine(
+                            $"Profession        : {player.Profession}"
+                        );
+                        Console.WriteLine(
+                            $"Specialization ID : {player.SpecializationId}"
+                        );
+                        Console.WriteLine(
+                            $"Squad leader      : {player.Commander}"
+                        );
+                        Console.WriteLine(
+                            $"In combat         : {gameTick.Context.UiState.HasFlag(UiState.IsInCombat)}"
+                        );
+                        Console.WriteLine(
+                            $"Current mount     : {gameTick.Context.Mount}"
+                        );
+                        Console.WriteLine(
+                            $"Tick              : {gameTick.UiTick}"
+                        );
+                    }
+
+                    Console.WriteLine();
                 }
+            );
 
-                Console.WriteLine();
-            }
-        );
+            // Wait for the user to press Enter.
+            Console.ReadLine();
 
-        // Wait for the user to press Enter.
-        Console.ReadLine();
+            subscription.Dispose();
+        }
 
-        subscription.Dispose();
     }
 }

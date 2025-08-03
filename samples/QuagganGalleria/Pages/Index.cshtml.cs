@@ -23,7 +23,7 @@ internal class IndexModel(ILogger<IndexModel> logger, QuaggansClient quaggans) :
     public async Task OnGet()
     {
         logger.LogInformation("Retrieving the Quaggans.");
-        (HashSet<Quaggan> found, MessageContext context) = await quaggans.GetQuaggans();
+        (HashSet<Quaggan> found, MessageContext context) = await quaggans.GetQuaggans().ConfigureAwait(false);
         Refreshed = context.Date;
         Quaggans = found.Select((quaggan, index) => new QuagganViewModel
         {

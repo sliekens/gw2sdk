@@ -10,25 +10,27 @@ internal sealed class ItemCard(HttpClient httpClient)
     public async Task Show(Item item)
     {
         ArgumentNullException.ThrowIfNull(item);
+        Stream ingredientIcon = await httpClient.GetStreamAsync(item.IconUrl).ConfigureAwait(false);
+        await using (ingredientIcon.ConfigureAwait(false))
+        {
+            Table itemTable = new Table().AddColumn("Icon")
+                .AddColumn("Ingredient")
+                .AddColumn("Description");
 
-        await using Stream ingredientIcon = await httpClient.GetStreamAsync(item.IconUrl);
-        Table itemTable = new Table().AddColumn("Icon")
-            .AddColumn("Ingredient")
-            .AddColumn("Description");
+            MarkupLexer lexer = new();
+            MarkupParser parser = new();
+            SpectreMarkupConverter converter = new();
+            IEnumerable<MarkupToken> tokens = MarkupLexer.Tokenize(item.Description);
+            RootNode syntax = MarkupParser.Parse(tokens);
+            string description = SpectreMarkupConverter.Convert(syntax);
 
-        MarkupLexer lexer = new();
-        MarkupParser parser = new();
-        SpectreMarkupConverter converter = new();
-        IEnumerable<MarkupToken> tokens = MarkupLexer.Tokenize(item.Description);
-        RootNode syntax = MarkupParser.Parse(tokens);
-        string description = SpectreMarkupConverter.Convert(syntax);
+            itemTable.AddRow(
+                new CanvasImage(ingredientIcon).MaxWidth(32),
+                new Markup(item.Name.EscapeMarkup()),
+                new Markup(description)
+            );
 
-        itemTable.AddRow(
-            new CanvasImage(ingredientIcon).MaxWidth(32),
-            new Markup(item.Name.EscapeMarkup()),
-            new Markup(description)
-        );
-
-        AnsiConsole.Write(itemTable);
+            AnsiConsole.Write(itemTable);
+        }
     }
 }

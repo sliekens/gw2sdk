@@ -19,7 +19,8 @@ internal sealed class DataService(
     {
         foreach (MapSummary map in await gw2Client.Exploration
             .GetMapSummaries(cancellationToken: cancellationToken)
-            .ValueOnly())
+            .ValueOnly()
+            .ConfigureAwait(false))
         {
             if (!referenceData.TryAddMap(map))
             {
@@ -29,7 +30,8 @@ internal sealed class DataService(
 
         foreach (Specialization specialization in await gw2Client.Hero.Builds
             .GetSpecializations(cancellationToken: cancellationToken)
-            .ValueOnly())
+            .ValueOnly()
+            .ConfigureAwait(false))
         {
             if (!referenceData.TryAddSpecialization(specialization))
             {
@@ -43,7 +45,8 @@ internal sealed class DataService(
 
         foreach (DyeColor color in await gw2Client.Hero.Equipment.Dyes
             .GetColors(cancellationToken: cancellationToken)
-            .ValueOnly())
+            .ValueOnly()
+            .ConfigureAwait(false))
         {
             if (!referenceData.TryAddColor(color))
             {
@@ -52,7 +55,8 @@ internal sealed class DataService(
         }
 
         foreach (World world in await gw2Client.Worlds.GetWorlds(cancellationToken: cancellationToken)
-            .ValueOnly())
+            .ValueOnly()
+            .ConfigureAwait(false))
         {
             if (!referenceData.TryAddWorld(world))
             {

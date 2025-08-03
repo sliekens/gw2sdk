@@ -24,24 +24,27 @@ TimeSpan refreshInterval = GameLink.MinimumRefreshInterval;
 // GameLink implements IDiposable and IAsyncDisposable,
 //  make sure it is disposed one way or another,
 //  e.g. by 'using' or 'await using'.
-await using GameLink gameLink = GameLink.Open(refreshInterval);
+GameLink gameLink = GameLink.Open(refreshInterval);
 
-// Setup dependency injection and logging
-HostApplicationBuilder host = Host.CreateApplicationBuilder(args);
-host.Services.AddSingleton(gameLink);
-host.Services.AddHttpClient<Gw2Client>();
-host.Services.AddHostedService<DataService>();
-host.Services.AddHostedService<GameListener>();
-host.Services.AddSingleton<ReferenceData>();
-host.Logging.AddSimpleConsole(options =>
-    {
-        options.SingleLine = true;
-        options.TimestampFormat = "HH:mm:ss.fff ";
-        options.UseUtcTimestamp = true;
-    }
-);
+await using (gameLink.ConfigureAwait(false))
+{
+    // Setup dependency injection and logging
+    HostApplicationBuilder host = Host.CreateApplicationBuilder(args);
+    host.Services.AddSingleton(gameLink);
+    host.Services.AddHttpClient<Gw2Client>();
+    host.Services.AddHostedService<DataService>();
+    host.Services.AddHostedService<GameListener>();
+    host.Services.AddSingleton<ReferenceData>();
+    host.Logging.AddSimpleConsole(options =>
+        {
+            options.SingleLine = true;
+            options.TimestampFormat = "HH:mm:ss.fff ";
+            options.UseUtcTimestamp = true;
+        }
+    );
 
-IHost app = host.Build();
+    IHost app = host.Build();
 
-// Start the services and wait until Ctrl+C is pressed
-await app.RunAsync();
+    // Start the services and wait until Ctrl+C is pressed
+    await app.RunAsync().ConfigureAwait(false);
+}

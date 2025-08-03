@@ -49,7 +49,8 @@ try
                 List<Recipe> recipes = await gw2.Hero.Crafting.Recipes
                     .GetRecipesBulk(progress: new ProgressTaskUpdater(recipesProgress))
                     .Select(result => result.Value)
-                    .ToListAsync();
+                    .ToListAsync()
+                    .ConfigureAwait(false);
 
                 // Fetch all input items
                 ProgressTask inputItemsProgress = ctx.AddTask("Fetching input items");
@@ -65,7 +66,8 @@ try
                         progress: new ProgressTaskUpdater(inputItemsProgress)
                     )
                     .ValueOnly()
-                    .ToDictionaryAsync(item => item.Id);
+                    .ToDictionaryAsync(item => item.Id)
+                    .ConfigureAwait(false);
 
                 // Fetch all output items
                 ProgressTask outputItemsProgress = ctx.AddTask("Fetching output items");
@@ -77,7 +79,8 @@ try
                         progress: new ProgressTaskUpdater(outputItemsProgress)
                     )
                     .ValueOnly()
-                    .ToDictionaryAsync(item => item.Id);
+                    .ToDictionaryAsync(item => item.Id)
+                    .ConfigureAwait(false);
 
                 // The progress bar doesn't reach 100% because the API doesn't return all output items (yeah, it's pretty broken)
                 // anyway, fake it until you make it
@@ -90,7 +93,8 @@ try
                     OutputItems = outputItems
                 };
             }
-        );
+        )
+        .ConfigureAwait(false);
 
     ILookup<int, Recipe> recipesByIngredient = (
         from recipe in referenceData.Recipes
@@ -120,7 +124,8 @@ try
 
         using HttpClient http = app.Services.GetRequiredService<HttpClient>();
         ItemCard card = new(http);
-        await card.Show(ingredient);
+        await card.Show(ingredient)
+        .ConfigureAwait(false);
 
         RecipesTable recipesTable = new();
         AnsiConsole.Live(recipesTable)
@@ -133,7 +138,8 @@ try
                     }
                 }
             );
-    } while (await AnsiConsole.ConfirmAsync("Do you want to choose again?"));
+    } while (await AnsiConsole.ConfirmAsync("Do you want to choose again?")
+    .ConfigureAwait(false));
 }
 #pragma warning disable CA1031 // Do not catch general exception types
 catch (Exception exception)
