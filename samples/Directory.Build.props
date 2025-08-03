@@ -5,4 +5,19 @@
     <!-- https://learn.microsoft.com/en-us/dotnet/core/compatibility/networking/9.0/query-redaction-events -->
     <RuntimeHostConfigurationOption Include="System.Net.Http.DisableUriRedaction" Value="true" />
   </ItemGroup>
+  
+  <PropertyGroup>
+    <AnalysisLevelDesign>latest-default</AnalysisLevelDesign>
+    <AnalysisLevelDocumentation>latest-default</AnalysisLevelDocumentation>
+    <AnalysisLevelGlobalization>latest-default</AnalysisLevelGlobalization>
+    <AnalysisLevelInteroperability>latest-default</AnalysisLevelInteroperability>
+    <AnalysisLevelMaintainability>latest-default</AnalysisLevelMaintainability>
+    <AnalysisLevelNaming>latest-default</AnalysisLevelNaming>
+    <AnalysisLevelPerformance>latest-default</AnalysisLevelPerformance>
+    <AnalysisLevelSingleFile>latest-default</AnalysisLevelSingleFile>
+    <AnalysisLevelReliability>latest-default</AnalysisLevelReliability>
+    <AnalysisLevelSecurity>latest-default</AnalysisLevelSecurity>
+    <AnalysisLevelStyle>latest-default</AnalysisLevelStyle>
+    <AnalysisLevelUsage>latest-default</AnalysisLevelUsage>
+  </PropertyGroup>
 </Project>
