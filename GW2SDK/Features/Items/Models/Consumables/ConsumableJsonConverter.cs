@@ -120,8 +120,8 @@ internal sealed class ConsumableJsonConverter : JsonConverter<Consumable>
             case UpgradeExtractor upgradeExtractor:
                 UpgradeExtractorJsonConverter.Write(writer, upgradeExtractor);
                 break;
-            case ContractNpc ContractNpc:
-                ContractNpcJsonConverter.Write(writer, ContractNpc);
+            case ContractNpc contractNpc:
+                ContractNpcJsonConverter.Write(writer, contractNpc);
                 break;
             case Currency currency:
                 CurrencyJsonConverter.Write(writer, currency);

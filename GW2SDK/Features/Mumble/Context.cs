@@ -13,7 +13,7 @@ namespace GuildWars2.Mumble;
 [CLSCompliant(false)]
 public readonly record struct Context
 {
-    internal readonly sockaddr_in serverAddress;
+    private readonly sockaddr_in serverAddress;
 
     /// <summary>The player's current map ID.</summary>
     public readonly uint MapId;

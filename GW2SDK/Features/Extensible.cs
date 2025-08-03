@@ -5,11 +5,11 @@ namespace GuildWars2;
 
 /// <summary>Represents an enum that can be extended with additional values.</summary>
 /// <typeparam name="TEnum">The type of the enum.</typeparam>
-/// <param name="Name">The name of the enum value.</param>
+/// <param name="name">The name of the enum value.</param>
 [PublicAPI]
 [DebuggerDisplay("{ToString(),nq}")]
 [JsonConverter(typeof(ExtensibleEnumJsonConverterFactory))]
-public readonly struct Extensible<TEnum>(string Name)
+public readonly struct Extensible<TEnum>(string name)
     : IComparable<Extensible<TEnum>>, IComparable, IEquatable<Extensible<TEnum>>
     where TEnum : struct, Enum
 {
@@ -17,24 +17,24 @@ public readonly struct Extensible<TEnum>(string Name)
     /// <returns><c>true</c> if the name is defined in the enum; otherwise, <c>false</c>.</returns>
     public bool IsDefined()
     {
-        if (Name is null)
+        if (name is null)
         {
             return Enum.IsDefined(typeof(TEnum), 0);
         }
 
-        return Enum.TryParse<TEnum>(Name, true, out _);
+        return Enum.TryParse<TEnum>(name, true, out _);
     }
 
     /// <summary>Converts the current name to the corresponding enum value.</summary>
     /// <value>The corresponding enum value if the conversion is successful; otherwise, <c>null</c>.</value>
     public TEnum? ToEnum()
     {
-        if (Name is null)
+        if (name is null)
         {
             return Enum.IsDefined(typeof(TEnum), 0) ? default(TEnum) : null;
         }
 
-        if (Enum.TryParse<TEnum>(Name, true, out TEnum value))
+        if (Enum.TryParse<TEnum>(name, true, out TEnum value))
         {
             return value;
         }
@@ -84,9 +84,9 @@ public readonly struct Extensible<TEnum>(string Name)
     /// <inheritdoc />
     public override readonly string ToString()
     {
-        if (Name is not null)
+        if (name is not null)
         {
-            return Name;
+            return name;
         }
 
         if (Enum.IsDefined(typeof(TEnum), 0))

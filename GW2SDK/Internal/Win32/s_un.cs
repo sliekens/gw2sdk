@@ -2,6 +2,8 @@
 
 namespace GuildWars2.Win32;
 
+#pragma warning disable IDE1006 // Naming Styles
+
 /// <summary>Union</summary>
 [StructLayout(LayoutKind.Explicit)]
 [UsedImplicitly(ImplicitUseTargetFlags.Members)]

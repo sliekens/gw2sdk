@@ -9,7 +9,7 @@ namespace GuildWars2.Tests.TestInfrastructure;
 
 internal sealed class JsonLinesHttpMessageHandler(string path) : HttpMessageHandler
 {
-    private readonly Dictionary<int, JsonElement> Entries = JsonLinesReader.Read(path)
+    private readonly Dictionary<int, JsonElement> entries = JsonLinesReader.Read(path)
         .Select(json =>
             {
                 using JsonDocument document = JsonDocument.Parse(json);
@@ -28,7 +28,7 @@ internal sealed class JsonLinesHttpMessageHandler(string path) : HttpMessageHand
         string? keys = query.Get("ids");
         if (keys is null)
         {
-            foreach (int key in Entries.Keys)
+            foreach (int key in entries.Keys)
             {
                 results.Add(key);
             }
@@ -37,7 +37,7 @@ internal sealed class JsonLinesHttpMessageHandler(string path) : HttpMessageHand
         {
             foreach (int key in keys.Split(',').Select(int.Parse))
             {
-                if (Entries.TryGetValue(key, out JsonElement entry))
+                if (entries.TryGetValue(key, out JsonElement entry))
                 {
                     results.Add(entry);
                 }

@@ -57,21 +57,21 @@ internal static class BuildJson
             }
         }
 
-        (SelectedSpecialization? Specialization1, SelectedSpecialization? Specialization2, SelectedSpecialization? Specialization3) =
+        (SelectedSpecialization? specialization1, SelectedSpecialization? specialization2, SelectedSpecialization? specialization3) =
             specializations.Map(static (in JsonElement values) => values.GetSelectedSpecializations());
         (string? LegendId1, string? LegendId2)? legendIds = legends.Map((in JsonElement values) =>
-            values.GetLegendIds(Specialization1, Specialization2, Specialization3)
+            values.GetLegendIds(specialization1, specialization2, specialization3)
         );
         (string? LegendId1, string? LegendId2)? aquaticLegendIds = aquaticLegends.Map((in JsonElement values) =>
-            values.GetLegendIds(Specialization1, Specialization2, Specialization3)
+            values.GetLegendIds(specialization1, specialization2, specialization3)
         );
         return new Build
         {
             Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
             Profession = profession.Map(static (in JsonElement value) => value.GetEnum<ProfessionName>()),
-            Specialization1 = Specialization1,
-            Specialization2 = Specialization2,
-            Specialization3 = Specialization3,
+            Specialization1 = specialization1,
+            Specialization2 = specialization2,
+            Specialization3 = specialization3,
             Skills = skills.Map(static (in JsonElement value) => value.GetSkillBar()),
             AquaticSkills = aquaticSkills.Map(static (in JsonElement value) => value.GetSkillBar()),
             Pets = pets.Map(static (in JsonElement value) => value.GetSelectedPets()),
