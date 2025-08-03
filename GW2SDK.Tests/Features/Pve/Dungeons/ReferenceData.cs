@@ -4,7 +4,7 @@ public static class ReferenceData
 {
     /// <summary>All known dungeon paths.</summary>
     public static readonly string[] Paths =
-    {
+    [
         "ac_story",
         "hodgins",
         "detha",
@@ -38,5 +38,5 @@ public static class ReferenceData
         "mursaat",
         "forgotten",
         "seer"
-    };
+    ];
 }
