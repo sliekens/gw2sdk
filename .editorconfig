@@ -1428,5 +1428,8 @@ dotnet_diagnostic.rcs9011.severity = warning
 # Avoid uninstantiated internal classes
 dotnet_diagnostic.ca1812.severity = none
 
+# Use conditional expression for return
+dotnet_diagnostic.ide0046.severity = suggestion
+
 # Namespace does not match folder structure
 dotnet_diagnostic.ide0130.severity = none
