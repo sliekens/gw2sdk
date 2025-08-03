@@ -56,6 +56,41 @@ public class GuildLog(ITestOutputHelper outputHelper)
 
                             Assert.Equal(0, guildMissionActivity.Influence);
                             break;
+                        case MemberInvited memberInvited:
+                            Assert.NotEmpty(memberInvited.User);
+                            Assert.NotEmpty(memberInvited.InvitedBy);
+                            break;
+                        case MemberJoined memberJoined:
+                            Assert.NotEmpty(memberJoined.User);
+                            break;
+                        case MemberKicked memberKicked:
+                            Assert.NotEmpty(memberKicked.User);
+                            Assert.NotEmpty(memberKicked.KickedBy);
+                            break;
+                        case InviteDeclined inviteDeclined:
+                            Assert.NotEmpty(inviteDeclined.User);
+                            Assert.NotEmpty(inviteDeclined.DeclinedBy);
+                            break;
+                        case RankChange rankChange:
+                            Assert.NotEmpty(rankChange.User);
+                            Assert.NotEmpty(rankChange.OldRank);
+                            Assert.NotEmpty(rankChange.NewRank);
+                            Assert.NotNull(rankChange.ChangedBy);
+                            break;
+                        case NewMessageOfTheDay newMessageOfTheDay:
+                            Assert.NotEmpty(newMessageOfTheDay.User);
+                            Assert.NotEmpty(newMessageOfTheDay.MessageOfTheDay);
+                            break;
+                        case TreasuryDeposit treasuryDeposit:
+                            Assert.NotEmpty(treasuryDeposit.User);
+                            Assert.True(treasuryDeposit.ItemId > 0);
+                            Assert.True(treasuryDeposit.Count > 0);
+                            break;
+                        default:
+                            Assert.Fail(
+                                $"Unexpected log entry type: {entry.GetType().Name}"
+                            );
+                            break;
                     }
                 }
             );

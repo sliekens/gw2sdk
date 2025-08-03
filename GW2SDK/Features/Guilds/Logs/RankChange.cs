@@ -15,5 +15,6 @@ public sealed record RankChange : GuildLogEntry
     public required string NewRank { get; init; }
 
     /// <summary>The ID of the user who performed the change.</summary>
+    /// <remarks>Can be empty if the change was made by the user themselves.</remarks>
     public required string ChangedBy { get; init; }
 }
