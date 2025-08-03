@@ -1431,5 +1431,8 @@ dotnet_diagnostic.ca1812.severity = none
 # Use conditional expression for return
 dotnet_diagnostic.ide0046.severity = suggestion
 
+# Use expression body for lambdas
+dotnet_diagnostic.ide0053.severity = suggestion
+
 # Namespace does not match folder structure
 dotnet_diagnostic.ide0130.severity = none
