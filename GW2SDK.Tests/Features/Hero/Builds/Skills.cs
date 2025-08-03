@@ -200,6 +200,26 @@ public class Skills
                             }
 
                             break;
+                        case BundleSkill bundleSkill:
+                            // Nothing to verify
+                            break;
+                        case ToolbeltSkill toolbeltSkill:
+                            // Nothing to verify
+                            break;
+                        case LockedSkill lockedSkill:
+                            // Nothing to verify
+                            break;
+                        case MonsterSkill monsterSkill:
+                            // Nothing to verify
+                            break;
+                        case PetSkill petSkill:
+                            // Nothing to verify
+                            break;
+                        default:
+                            Assert.Fail(
+                                $"Unexpected action skill type: {action.GetType().Name}"
+                            );
+                            break;
                     }
                 }
                 else
@@ -299,6 +319,26 @@ public class Skills
                                 case Time time:
                                     Assert.True(time.Duration >= TimeSpan.Zero);
                                     break;
+                                case Unblockable unblockable:
+                                    // Nothing to verify
+                                    break;
+                                case NoData noData:
+                                    // Nothing to verify
+                                    break;
+                                case StunBreak stunBreak:
+                                    // Nothing to verify
+                                    break;
+                                case Percentage percentage:
+                                    Assert.InRange(percentage.Percent, -75, 500);
+                                    break;
+                                case Fact baseFact:
+                                    // This handles the base Fact type - nothing specific to verify
+                                    break;
+                                default:
+                                    Assert.Fail(
+                                        $"Unexpected fact type: {fact.GetType().Name}"
+                                    );
+                                    break;
                             }
                         }
                     );
@@ -392,6 +432,20 @@ public class Skills
                                     break;
                                 case Time time:
                                     Assert.True(time.Duration >= TimeSpan.Zero);
+                                    break;
+                                case NoData noData:
+                                    // Nothing to verify
+                                    break;
+                                case Percentage percentage:
+                                    Assert.InRange(percentage.Percent, -75, 500);
+                                    break;
+                                case Fact baseFact:
+                                    // This handles the base Fact type - nothing specific to verify
+                                    break;
+                                default:
+                                    Assert.Fail(
+                                        $"Unexpected fact type: {fact.Fact.GetType().Name}"
+                                    );
                                     break;
                             }
                         }
