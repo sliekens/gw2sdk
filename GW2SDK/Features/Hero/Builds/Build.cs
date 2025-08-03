@@ -66,17 +66,17 @@ public sealed record Build
     /// <returns>The IDs of the selected traits.</returns>
     public IEnumerable<int> SelectedTraitIds()
     {
-        foreach (int id in Specialization1?.SelectedTraitIds() ?? Enumerable.Empty<int>())
+        foreach (int id in Specialization1?.SelectedTraitIds() ?? [])
         {
             yield return id;
         }
 
-        foreach (int id in Specialization2?.SelectedTraitIds() ?? Enumerable.Empty<int>())
+        foreach (int id in Specialization2?.SelectedTraitIds() ?? [])
         {
             yield return id;
         }
 
-        foreach (int id in Specialization3?.SelectedTraitIds() ?? Enumerable.Empty<int>())
+        foreach (int id in Specialization3?.SelectedTraitIds() ?? [])
         {
             yield return id;
         }

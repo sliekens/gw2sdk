@@ -11,7 +11,7 @@ internal ref struct CharSpanSplitter(ReadOnlySpan<char> value, char separator)
     {
         if (value == ReadOnlySpan<char>.Empty)
         {
-            result = ReadOnlySpan<char>.Empty;
+            result = [];
             return false;
         }
 
@@ -19,7 +19,7 @@ internal ref struct CharSpanSplitter(ReadOnlySpan<char> value, char separator)
         if (index == -1)
         {
             result = value;
-            value = ReadOnlySpan<char>.Empty;
+            value = [];
             return true;
         }
 

@@ -18,8 +18,7 @@ internal class IndexModel(ILogger<IndexModel> logger, QuaggansClient quaggans) :
 {
     public DateTimeOffset Refreshed { get; set; }
 
-    public IEnumerable<QuagganViewModel> Quaggans { get; set; } =
-        Enumerable.Empty<QuagganViewModel>();
+    public IEnumerable<QuagganViewModel> Quaggans { get; set; } = [];
 
     public async Task OnGet()
     {
