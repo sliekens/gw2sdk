@@ -47,7 +47,7 @@ internal static class ThrowHelper
 
     public static void ThrowIfNull(
         [System.Diagnostics.CodeAnalysis.NotNull] object? argument,
-        [CallerArgumentExpression("argument")] string? paramName = null
+        [CallerArgumentExpression(nameof(argument))] string? paramName = null
     )
     {
         if (argument is null)
@@ -65,7 +65,7 @@ internal static class ThrowHelper
     internal static void ThrowArgumentOutOfRange(
         string? message,
         object argument,
-        [CallerArgumentExpression("argument")] string? paramName = null
+        [CallerArgumentExpression(nameof(argument))] string? paramName = null
     )
     {
         throw new ArgumentOutOfRangeException(paramName, argument, message);
