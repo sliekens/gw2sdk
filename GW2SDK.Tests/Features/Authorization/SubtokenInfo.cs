@@ -14,9 +14,9 @@ public class SubtokenInfo
         #region Create a new subtoken
 
 #if NET
-        HashSet<Permission> subtokenPermissions = [.. Enum.GetValues<Permission>()];
+        HashSet<Permission> subtokenPermissions = [.. Enum.GetValues<Permission>().Where(p => p != Permission.None)];
 #else
-        HashSet<Permission> subtokenPermissions = [.. Enum.GetValues(typeof(Permission)).Cast<Permission>()];
+        HashSet<Permission> subtokenPermissions = [.. Enum.GetValues(typeof(Permission)).Cast<Permission>().Where(p => p != Permission.None)];
 #endif
         // API uses 1 second precision
         DateTimeOffset notBefore =
