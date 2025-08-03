@@ -8,8 +8,8 @@ namespace MostVersatileMaterials;
 
 internal sealed class SpectreMarkupConverter
 {
-    private static readonly IReadOnlyDictionary<string, string> ColorMap =
-        new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+    private static readonly Dictionary<string, string> ColorMap =
+        new(StringComparer.OrdinalIgnoreCase)
         {
             [MarkupColorName.Flavor] = "#99dddd",
             [MarkupColorName.Reminder] = "#aaaaaa",

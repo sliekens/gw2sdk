@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace GuildWars2.Markup;
 
@@ -46,6 +47,7 @@ public sealed class MarkupParser
         }
     }
 
+    [SuppressMessage("Performance", "CA1859:Use concrete types when possible for improved performance", Justification = "More node types may be added in the future.")]
     private static MarkupNode? ParseVoidNode(MarkupTokenIterator iterator)
     {
         Debug.Assert(iterator.Current?.Type == MarkupTokenType.TagVoid);
@@ -60,6 +62,7 @@ public sealed class MarkupParser
         return null;
     }
 
+    [SuppressMessage("Performance", "CA1859:Use concrete types when possible for improved performance", Justification = "More node types may be added in the future.")]
     private static MarkupNode? ParseTagNode(MarkupTokenIterator iterator)
     {
         Debug.Assert(iterator.Current?.Type == MarkupTokenType.TagStart);
