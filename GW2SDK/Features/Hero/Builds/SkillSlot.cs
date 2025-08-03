@@ -3,6 +3,10 @@ using System.Text.Json.Serialization;
 
 namespace GuildWars2.Hero.Builds;
 
+// The underscores are part of the API data so keeping them is necessary.
+
+#pragma warning disable CA1707 // Identifiers should not contain underscores
+
 /// <summary>The skill slots for abilities which can be activated by the player.</summary>
 [PublicAPI]
 [DefaultValue(None)]
