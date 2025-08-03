@@ -43,7 +43,7 @@ internal sealed class JsonDecorationsService(HttpClient http)
             CancellationToken cancellationToken
         )
         {
-            Uri resource = new("/v2/home/decorations", UriKind.Relative);
+            Uri resource = new("/v2/homestead/decorations", UriKind.Relative);
             BulkRequest request = new(resource) { Ids = [.. chunk] };
             JsonDocument json = await request.SendAsync(http, cancellationToken).ConfigureAwait(false);
             return [.. json.RootElement.EnumerateArray().Select(item => (item.GetProperty("id").GetInt32(), item.ToJsonLine()))];
