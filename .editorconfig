@@ -813,7 +813,8 @@ dotnet_diagnostic.rcs1018.severity = warning
 # Options: roslynator_accessibility_modifiers
 
 # Order modifiers
-dotnet_diagnostic.rcs1019.severity = warning
+# Disabled: handled by IDE0036
+dotnet_diagnostic.rcs1019.severity = none
 
 # Simplify Nullable<T> to T?
 dotnet_diagnostic.rcs1020.severity = warning
