@@ -40,8 +40,11 @@ public sealed record BuildTemplateLink : Link
     /// <summary>The third kind of weapon used in this build.</summary>
     public WeaponType Weapon3 { get; init; }
 
+#pragma warning disable CA1819 // Properties should not return arrays
+    // TODO: reconsider collection type
     /// <summary>The skill IDs of weapon skill overrides.</summary>
     public int[] SkillOverrides { get; init; } = [];
+#pragma warning restore CA1819 // Properties should not return arrays
 
     /// <summary>Gets the build represented by this chat link.</summary>
     /// <param name="gw2Client">An API client to fetch the build.</param>
