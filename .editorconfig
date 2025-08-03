@@ -1425,5 +1425,8 @@ dotnet_diagnostic.rcs9010.severity = warning
 # Specify ExportCodeFixProviderAttribute.Name
 dotnet_diagnostic.rcs9011.severity = warning
 
-
+# Avoid uninstantiated internal classes
 dotnet_diagnostic.ca1812.severity = none
+
+# Namespace does not match folder structure
+dotnet_diagnostic.ide0130.severity = none
