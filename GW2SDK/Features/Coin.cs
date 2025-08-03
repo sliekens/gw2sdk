@@ -59,7 +59,7 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
     /// <returns>A value indicating the relative order of the objects being compared.</returns>
     public int CompareTo(object? obj)
     {
-        if (ReferenceEquals(null, obj))
+        if (obj is null)
         {
             return 1;
         }
