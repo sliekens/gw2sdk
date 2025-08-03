@@ -44,6 +44,8 @@ internal static class UnlockerJson
                     return json.GetOutfitUnlocker();
                 case "SharedSlot":
                     return json.GetSharedInventorySlot();
+                default:
+                    break;
             }
         }
 

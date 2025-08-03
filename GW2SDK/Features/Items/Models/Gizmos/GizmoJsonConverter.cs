@@ -50,6 +50,8 @@ internal sealed class GizmoJsonConverter : JsonConverter<Gizmo>
                     return RentableContractNpcJsonConverter.Read(json);
                 case UnlimitedConsumableJsonConverter.DiscriminatorValue:
                     return UnlimitedConsumableJsonConverter.Read(json);
+                default:
+                    break;
             }
         }
 

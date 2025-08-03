@@ -78,6 +78,8 @@ internal sealed class ConsumableJsonConverter : JsonConverter<Consumable>
                     return ServiceJsonConverter.Read(json);
                 case RandomUnlockerJsonConverter.DiscriminatorValue:
                     return RandomUnlockerJsonConverter.Read(json);
+                default:
+                    break;
             }
         }
 

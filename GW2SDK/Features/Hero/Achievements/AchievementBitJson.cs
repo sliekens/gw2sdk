@@ -23,6 +23,8 @@ internal static class AchievementBitJson
                     return json.GetAchievementItemBit();
                 case "Skin":
                     return json.GetAchievementSkinBit();
+                default:
+                    break;
             }
         }
 

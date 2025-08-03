@@ -85,6 +85,8 @@ internal sealed class UnlockerJsonConverter : JsonConverter<Unlocker>
                     return StorageExpanderJsonConverter.Read(json);
                 case GliderSkinUnlockerJsonConverter.DiscriminatorValue:
                     return GliderSkinUnlockerJsonConverter.Read(json);
+                default:
+                    break;
             }
         }
 

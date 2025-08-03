@@ -16,6 +16,8 @@ internal static class TokenInfoJson
                     return json.GetApiKeyInfo();
                 case "Subtoken":
                     return json.GetSubtokenInfo();
+                default:
+                    break;
             }
         }
 

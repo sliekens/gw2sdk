@@ -51,6 +51,8 @@ internal sealed class TrinketJsonConverter : JsonConverter<Trinket>
                     return RingJsonConverter.Read(json);
                 case AccessoryJsonConverter.DiscriminatorValue:
                     return AccessoryJsonConverter.Read(json);
+                default:
+                    break;
             }
         }
 

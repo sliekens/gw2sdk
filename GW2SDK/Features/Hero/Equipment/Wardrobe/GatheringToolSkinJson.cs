@@ -21,6 +21,8 @@ internal static class GatheringToolSkinJson
                     return json.GetLoggingToolSkin();
                 case "Mining":
                     return json.GetMiningToolSkin();
+                default:
+                    break;
             }
         }
 

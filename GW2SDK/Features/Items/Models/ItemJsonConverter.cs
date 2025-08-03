@@ -71,6 +71,8 @@ internal sealed class ItemJsonConverter : JsonConverter<Item>
                     return UpgradeComponentJsonConverter.Read(json);
                 case GatheringToolJsonConverter.DiscriminatorValue:
                     return GatheringToolJsonConverter.Read(json);
+                default:
+                    break;
             }
         }
 

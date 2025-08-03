@@ -137,6 +137,8 @@ public sealed class MarkupLexer
                     }
 
                     break;
+                default:
+                    break;
             }
 
             position++;

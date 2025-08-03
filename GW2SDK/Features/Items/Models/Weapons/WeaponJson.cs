@@ -58,6 +58,8 @@ internal static class WeaponJson
                     return json.GetTrident();
                 case "Warhorn":
                     return json.GetWarhorn();
+                default:
+                    break;
             }
         }
 

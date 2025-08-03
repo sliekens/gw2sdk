@@ -60,6 +60,8 @@ internal sealed class GatheringToolJsonConverter : JsonConverter<GatheringTool>
                     return LureJsonConverter.Read(json);
                 case FishingRodJsonConverter.DiscriminatorValue:
                     return FishingRodJsonConverter.Read(json);
+                default:
+                    break;
             }
         }
 

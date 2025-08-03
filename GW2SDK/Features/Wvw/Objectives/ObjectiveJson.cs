@@ -29,6 +29,8 @@ internal static class ObjectiveJson
                     return json.GetSpawn();
                 case "Tower":
                     return json.GetTower();
+                default:
+                    break;
             }
         }
 

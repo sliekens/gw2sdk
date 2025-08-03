@@ -56,6 +56,8 @@ internal sealed class UpgradeComponentJsonConverter : JsonConverter<UpgradeCompo
                     return RuneJsonConverter.Read(json);
                 case SigilJsonConverter.DiscriminatorValue:
                     return SigilJsonConverter.Read(json);
+                default:
+                    break;
             }
         }
 

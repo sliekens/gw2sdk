@@ -20,6 +20,8 @@ internal static class PointOfInterestJson
                     return json.GetVista();
                 case "unlock":
                     return json.GetRequiresUnlockPointOfInterest();
+                default:
+                    break;
             }
         }
 

@@ -26,6 +26,8 @@ internal static class OwnedObjectiveJson
                     return json.GetOwnedSpawn();
                 case "Tower":
                     return json.GetOwnedTower();
+                default:
+                    break;
             }
         }
 

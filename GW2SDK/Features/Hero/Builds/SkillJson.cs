@@ -34,6 +34,8 @@ internal static class SkillJson
                     return json.GetUtilitySkill();
                 case "Weapon":
                     return json.GetWeaponSkill();
+                default:
+                    break;
             }
         }
 

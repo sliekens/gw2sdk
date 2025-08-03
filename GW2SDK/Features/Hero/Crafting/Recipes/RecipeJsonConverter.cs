@@ -142,6 +142,8 @@ internal sealed class RecipeJsonConverter : JsonConverter<Recipe>
                     return UpgradeComponentRecipeJsonConverter.Read(json);
                 case WarhornRecipeJsonConverter.DiscriminatorValue:
                     return WarhornRecipeJsonConverter.Read(json);
+                default:
+                    break;
             }
         }
 

@@ -54,6 +54,8 @@ internal static class FactJson
                     return json.GetTime(out requiresTrait, out overrides);
                 case "Unblockable":
                     return json.GetUnblockable(out requiresTrait, out overrides);
+                default:
+                    break;
             }
         }
 

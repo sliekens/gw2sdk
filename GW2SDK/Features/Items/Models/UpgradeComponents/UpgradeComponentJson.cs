@@ -61,6 +61,8 @@ internal static class UpgradeComponentJson
                 case "Sigil":
                 case "Default" when json.IsPvpItem() && json.HasFlags(19):
                     return json.GetSigil();
+                default:
+                    break;
             }
         }
 

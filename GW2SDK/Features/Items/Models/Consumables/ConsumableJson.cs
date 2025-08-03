@@ -42,6 +42,8 @@ internal static class ConsumableJson
                     return json.GetUpgradeExtractor();
                 case "Utility":
                     return json.GetUtility();
+                default:
+                    break;
             }
         }
 

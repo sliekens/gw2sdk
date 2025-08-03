@@ -27,6 +27,8 @@ internal static class ArmorSkinJson
                     return json.GetLeggingsSkin();
                 case "Shoulders":
                     return json.GetShouldersSkin();
+                default:
+                    break;
             }
         }
 

@@ -21,6 +21,8 @@ internal static class AchievementRewardJson
                     return json.GetMasteryPointReward();
                 case "Title":
                     return json.GetTitleReward();
+                default:
+                    break;
             }
         }
 

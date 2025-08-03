@@ -17,6 +17,8 @@ internal static class TrainingObjectiveJson
                     return json.GetSkillObjective();
                 case "Trait":
                     return json.GetTraitObjective();
+                default:
+                    break;
             }
         }
 

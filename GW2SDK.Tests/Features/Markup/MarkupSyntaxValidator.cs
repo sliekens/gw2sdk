@@ -29,7 +29,10 @@ public static class MarkupSyntaxValidator
             case ColoredTextNode coloredText:
                 ValidateColoredTextNode(coloredText);
                 break;
-            case LineBreakNode _:
+            case LineBreakNode:
+                break;
+            default:
+                Assert.Fail($"Unexpected node type: {node.GetType().Name}");
                 break;
         }
     }

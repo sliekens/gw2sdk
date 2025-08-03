@@ -62,6 +62,8 @@ internal static class HttpResponseHeaderExtensions
                         case "last" when last.IsEmpty:
                             last = href;
                             break;
+                        default:
+                            break;
                     }
                 }
             }

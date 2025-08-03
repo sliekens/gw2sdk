@@ -22,6 +22,8 @@ internal static class SkillSummaryJson
                     return json.GetUtilitySkillSummary();
                 case "Elite":
                     return json.GetEliteSkillSummary();
+                default:
+                    break;
             }
         }
 

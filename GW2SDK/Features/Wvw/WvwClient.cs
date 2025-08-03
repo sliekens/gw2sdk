@@ -74,7 +74,7 @@ public sealed class WvwClient
         {
             WorldRegion.NorthAmerica => "na",
             WorldRegion.Europe => "eu",
-            _ => region.ToString()
+            WorldRegion.None or _ => region.ToString(),
         };
         RequestBuilder requestBuilder = RequestBuilder.HttpGet($"v2/wvw/guilds/{id}");
         using HttpRequestMessage request = requestBuilder.Build();

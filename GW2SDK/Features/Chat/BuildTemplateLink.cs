@@ -129,21 +129,21 @@ public sealed record BuildTemplateLink : Link
                         SelectedTrait.Top => traits[0],
                         SelectedTrait.Middle => traits[1],
                         SelectedTrait.Bottom => traits[2],
-                        _ => null
+                        SelectedTrait.None or _ => null
                     },
                     MasterTraitId = master switch
                     {
                         SelectedTrait.Top => traits[3],
                         SelectedTrait.Middle => traits[4],
                         SelectedTrait.Bottom => traits[5],
-                        _ => null
+                        SelectedTrait.None or _ => null
                     },
                     GrandmasterTraitId = grandmaster switch
                     {
                         SelectedTrait.Top => traits[6],
                         SelectedTrait.Middle => traits[7],
                         SelectedTrait.Bottom => traits[8],
-                        _ => null
+                        SelectedTrait.None or _ => null
                     }
                 };
             }
@@ -299,7 +299,7 @@ public sealed record BuildTemplateLink : Link
                 ProfessionName.Mesmer => 7,
                 ProfessionName.Necromancer => 8,
                 ProfessionName.Revenant => 9,
-                _ => 0
+                ProfessionName.None or _ => 0
             };
         }
 
@@ -343,7 +343,9 @@ public sealed record BuildTemplateLink : Link
                 WeaponType.Warhorn => 0x0067,
                 WeaponType.Shortbow => 0x006b,
                 WeaponType.Spear => 0x0109,
-                _ => 0
+                WeaponType.Trident => 0,
+                WeaponType.HarpoonGun => 0,
+                WeaponType.None or WeaponType.Unknown or _ => 0
             };
         }
     }

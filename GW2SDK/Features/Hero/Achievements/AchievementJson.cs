@@ -14,6 +14,8 @@ internal static class AchievementJson
             {
                 case "ItemSet":
                     return json.GetCollectionAchievement();
+                default:
+                    break;
             }
         }
 

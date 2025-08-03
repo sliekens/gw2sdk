@@ -34,6 +34,8 @@ internal static class GuildLogEntryJson
                     return json.GetTreasuryDeposit();
                 case "upgrade":
                     return json.GetGuildUpgradeActivity();
+                default:
+                    break;
             }
         }
 

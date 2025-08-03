@@ -59,6 +59,8 @@ internal static class WeaponSkinJson
                     return json.GetTridentSkin();
                 case "Warhorn":
                     return json.GetWarhornSkin();
+                default:
+                    break;
             }
         }
 

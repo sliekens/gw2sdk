@@ -18,6 +18,8 @@ internal static class ContainerJson
                     return json.GetImmediateContainer();
                 case "OpenUI":
                     return json.GetBlackLionChest();
+                default:
+                    break;
             }
         }
 

@@ -20,6 +20,8 @@ internal static class GuildUpgradeCostJson
                     return json.GetGuildUpgradeCurrencyCost();
                 case "Item":
                     return json.GetGuildUpgradeItemCost();
+                default:
+                    break;
             }
         }
 

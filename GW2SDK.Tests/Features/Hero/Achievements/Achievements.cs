@@ -57,6 +57,11 @@ public class Achievements
                             case TitleReward titleReward:
                                 Assert.True(titleReward.Id > 0);
                                 break;
+                            default:
+                                Assert.Fail(
+                                    $"Unexpected reward type: {reward.GetType().Name}"
+                                );
+                                break;
                         }
                     }
                 );

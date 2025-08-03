@@ -41,6 +41,11 @@ public sealed class MarkupParser
                 return ParseTagNode(iterator);
             case MarkupTokenType.TagVoid:
                 return ParseVoidNode(iterator);
+            case MarkupTokenType.None:
+            case MarkupTokenType.TagValue:
+            case MarkupTokenType.TagClose:
+            case MarkupTokenType.End:
+            case null:
             default:
                 iterator.Advance();
                 return null;

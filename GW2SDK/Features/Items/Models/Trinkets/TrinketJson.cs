@@ -18,6 +18,8 @@ internal static class TrinketJson
                     return json.GetAmulet();
                 case "Ring":
                     return json.GetRing();
+                default:
+                    break;
             }
         }
 

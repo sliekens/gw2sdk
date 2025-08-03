@@ -47,6 +47,8 @@ internal static class ItemJson
                     return json.GetUpgradeComponent();
                 case "Weapon":
                     return json.GetWeapon();
+                default:
+                    break;
             }
         }
 

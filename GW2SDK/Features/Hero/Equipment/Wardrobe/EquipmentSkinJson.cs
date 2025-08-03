@@ -21,6 +21,8 @@ internal static class EquipmentSkinJson
                     return json.GetGatheringToolSkin();
                 case "Weapon":
                     return json.GetWeaponSkin();
+                default:
+                    break;
             }
         }
 

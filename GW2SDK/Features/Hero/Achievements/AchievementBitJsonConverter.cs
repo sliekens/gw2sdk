@@ -49,6 +49,8 @@ internal sealed class AchievementBitJsonConverter : JsonConverter<AchievementBit
                     return AchievementSkinBitJsonConverter.Read(json);
                 case AchievementTextBitJsonConverter.DiscriminatorValue:
                     return AchievementTextBitJsonConverter.Read(json);
+                default:
+                    break;
             }
         }
 

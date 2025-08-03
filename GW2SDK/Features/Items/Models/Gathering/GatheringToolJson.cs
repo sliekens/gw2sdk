@@ -24,6 +24,8 @@ internal static class GatheringToolJson
                     return json.GetLure();
                 case "Mining":
                     return json.GetMiningPick();
+                default:
+                    break;
             }
         }
 

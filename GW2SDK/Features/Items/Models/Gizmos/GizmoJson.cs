@@ -18,6 +18,8 @@ internal static class GizmoJson
                     return json.GetRentableContractNpc();
                 case "UnlimitedConsumable":
                     return json.GetUnlimitedConsumable();
+                default:
+                    break;
             }
         }
 

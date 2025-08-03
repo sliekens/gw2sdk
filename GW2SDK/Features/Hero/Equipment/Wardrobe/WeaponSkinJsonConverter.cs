@@ -91,6 +91,8 @@ internal sealed class WeaponSkinJsonConverter : JsonConverter<WeaponSkin>
                     return SwordSkinJsonConverter.Read(json);
                 case ToySkinJsonConverter.DiscriminatorValue:
                     return ToySkinJsonConverter.Read(json);
+                default:
+                    break;
             }
         }
 

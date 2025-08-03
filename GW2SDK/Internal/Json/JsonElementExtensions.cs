@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 
 using GuildWars2.Collections;
+using GuildWars2.Hero.Builds.Facts;
 
 namespace GuildWars2.Json;
 
@@ -124,6 +125,15 @@ internal static class JsonElementExtensions
         return json.ValueKind switch
         {
             JsonValueKind.Null => null as Extensible<TEnum>?,
+            JsonValueKind.String => json.GetEnum<TEnum>(),
+            JsonValueKind.Undefined or
+                JsonValueKind.Object or
+                JsonValueKind.Array or
+                JsonValueKind.Number or
+                JsonValueKind.True or
+                JsonValueKind.False => throw new InvalidOperationException(
+                $"The requested operation requires an element of type 'String', but the target element has type '{json.ValueKind}'."
+            ),
             _ => json.GetEnum<TEnum>()
         };
     }

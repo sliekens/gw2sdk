@@ -58,6 +58,8 @@ internal sealed class GatheringToolSkinJsonConverter : JsonConverter<GatheringTo
                     return LoggingToolSkinJsonConverter.Read(json);
                 case MiningToolSkinJsonConverter.DiscriminatorValue:
                     return MiningToolSkinJsonConverter.Read(json);
+                default:
+                    break;
             }
         }
 

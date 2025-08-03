@@ -415,10 +415,12 @@ dotnet_diagnostic.rcs1061.severity = warning
 dotnet_diagnostic.rcs1068.severity = warning
 
 # Remove unnecessary case label
-dotnet_diagnostic.rcs1069.severity = warning
+# Disabled: conflicts with IDE0010
+dotnet_diagnostic.rcs1069.severity = none
 
 # Remove redundant default switch section
-dotnet_diagnostic.rcs1070.severity = warning
+# Disabled: conflicts with IDE0010
+dotnet_diagnostic.rcs1070.severity = none
 
 # Remove redundant base constructor call
 dotnet_diagnostic.rcs1071.severity = warning

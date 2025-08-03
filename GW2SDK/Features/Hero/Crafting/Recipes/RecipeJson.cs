@@ -117,6 +117,8 @@ internal static class RecipeJson
                     return json.GetUpgradeComponentRecipe();
                 case "Warhorn":
                     return json.GetWarhornRecipe();
+                default:
+                    break;
             }
         }
 

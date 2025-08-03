@@ -54,6 +54,8 @@ internal sealed class ContainerJsonConverter : JsonConverter<Container>
                     return GiftBoxJsonConverter.Read(json);
                 case ImmediateContainerJsonConverter.DiscriminatorValue:
                     return ImmediateContainerJsonConverter.Read(json);
+                default:
+                    break;
             }
         }
 

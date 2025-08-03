@@ -64,6 +64,8 @@ internal sealed class ArmorSkinJsonConverter : JsonConverter<ArmorSkin>
                     return HelmSkinJsonConverter.Read(json);
                 case HelmAquaticSkinJsonConverter.DiscriminatorValue:
                     return HelmAquaticSkinJsonConverter.Read(json);
+                default:
+                    break;
             }
         }
 

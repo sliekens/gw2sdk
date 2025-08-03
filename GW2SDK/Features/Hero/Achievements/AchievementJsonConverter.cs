@@ -43,6 +43,8 @@ internal sealed class AchievementJsonConverter : JsonConverter<Achievement>
             {
                 case CollectionAchievementJsonConverter.DiscriminatorValue:
                     return CollectionAchievementJsonConverter.Read(json);
+                default:
+                    break;
             }
         }
 

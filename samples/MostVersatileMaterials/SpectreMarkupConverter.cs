@@ -65,6 +65,8 @@ internal sealed class SpectreMarkupConverter
                     return content;
                 }
 
+            case MarkupNodeType.None:
+            case MarkupNodeType.Root:
             default:
                 return "";
         }

@@ -49,6 +49,8 @@ internal sealed class AchievementRewardJsonConverter : JsonConverter<Achievement
                     return MasteryPointRewardJsonConverter.Read(json);
                 case TitleRewardJsonConverter.DiscriminatorValue:
                     return TitleRewardJsonConverter.Read(json);
+                default:
+                    break;
             }
         }
 

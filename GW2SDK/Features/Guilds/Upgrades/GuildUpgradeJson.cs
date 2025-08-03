@@ -34,6 +34,8 @@ internal static class GuildUpgradeJson
                     return json.GetQueue();
                 case "Unlock":
                     return json.GetUnlock();
+                default:
+                    break;
             }
         }
 

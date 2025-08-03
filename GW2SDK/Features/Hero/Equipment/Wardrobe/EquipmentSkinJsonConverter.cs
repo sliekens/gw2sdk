@@ -50,6 +50,8 @@ internal sealed class EquipmentSkinJsonConverter : JsonConverter<EquipmentSkin>
                     return GatheringToolSkinJsonConverter.Read(json);
                 case WeaponSkinJsonConverter.DiscriminatorValue:
                     return WeaponSkinJsonConverter.Read(json);
+                default:
+                    break;
             }
         }
 
