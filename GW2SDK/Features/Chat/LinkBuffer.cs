@@ -24,7 +24,7 @@ internal ref struct LinkBuffer(Span<byte> buffer)
         length += count;
     }
 
-    public bool EndOfFile => length >= Buffer.Length;
+    public readonly bool EndOfFile => length >= Buffer.Length;
 
     public byte ReadUInt8()
     {
@@ -75,7 +75,7 @@ internal ref struct LinkBuffer(Span<byte> buffer)
         Buffer[length++] = (byte)((value >> 24) & 0xFF);
     }
 
-    public override string ToString()
+    public override readonly string ToString()
     {
 #if NET
         return Wrapped(Convert.ToBase64String(Buffer[..length]));
