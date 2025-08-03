@@ -30,10 +30,9 @@ public abstract record Flags
             return false;
         }
 
-        List<PropertyInfo> flags = GetType()
+        List<PropertyInfo> flags = [.. GetType()
             .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-            .Where(property => property.PropertyType == typeof(bool))
-            .ToList();
+            .Where(property => property.PropertyType == typeof(bool))];
 
         IEnumerable<bool?> left = flags.Select(property => (bool?)property.GetValue(this));
         IEnumerable<bool?> right = flags.Select(property => (bool?)property.GetValue(other));

@@ -33,7 +33,7 @@ public class Floors
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
 
-        List<int> floorIds = actual.Select(f => f.Id).ToList();
+        List<int> floorIds = [.. actual.Select(f => f.Id)];
         Assert.NotEmpty(actual);
         Assert.All(
             actual,

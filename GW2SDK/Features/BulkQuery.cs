@@ -46,7 +46,7 @@ public static class BulkQuery
         ThrowHelper.ThrowIfNull(keys);
         ThrowHelper.ThrowIfNull(bulkRequest);
 
-        List<TKey> keysList = keys.ToList();
+        List<TKey> keysList = [.. keys];
         if (keysList.Count == 0)
         {
             ThrowHelper.ThrowBadArgument("The keys collection cannot be empty.", nameof(keys));
@@ -92,7 +92,7 @@ public static class BulkQuery
         using DisposeSensor disposeSensor = new();
         using SemaphoreSlim limiter = new(degreeOfParallelism);
         IEnumerable<List<TKey>> chunks = Chunk(keysList, chunkSize);
-        List<Task<IReadOnlyCollection<TValue>>> tasks = chunks.Select(async chunk =>
+        List<Task<IReadOnlyCollection<TValue>>> tasks = [.. chunks.Select(async chunk =>
                 {
                     await limiter.WaitAsync(cancellationToken).ConfigureAwait(false);
                     try
@@ -107,8 +107,7 @@ public static class BulkQuery
                         }
                     }
                 }
-            )
-            .ToList();
+            )];
         foreach (Task<Task<IReadOnlyCollection<TValue>>> bucket in tasks.Interleave())
         {
             Task<IReadOnlyCollection<TValue>> task = await bucket.ConfigureAwait(false);

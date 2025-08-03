@@ -79,12 +79,11 @@ public class EnumJsonConverterGenerator : IIncrementalGenerator
         INamedTypeSymbol enumSymbol
     )
     {
-        List<string> enumValues = enumSymbol.GetMembers()
+        List<string> enumValues = [.. enumSymbol.GetMembers()
             .Where(m => m.Kind == SymbolKind.Field)
             .OfType<IFieldSymbol>()
             .Where(f => f.ConstantValue != null)
-            .Select(f => f.Name)
-            .ToList();
+            .Select(f => f.Name)];
 
         StringBuilder readCases = new();
         foreach (string? value in enumValues)

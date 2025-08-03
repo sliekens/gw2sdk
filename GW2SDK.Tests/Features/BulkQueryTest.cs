@@ -21,7 +21,7 @@ public class BulkQueryTest
             return Task.FromResult(result);
         }
 
-        HashSet<int> index = Enumerable.Range(1, resultTotal).ToHashSet();
+        HashSet<int> index = [.. Enumerable.Range(1, resultTotal)];
 
         // Cancel after 107 records have been received (arbitrary positive number less than the total)
         const int cutoff = 107;
@@ -54,7 +54,7 @@ public class BulkQueryTest
     public async Task Large_queries_are_chunked()
     {
         // Simulate 1000 records
-        HashSet<int> index = Enumerable.Range(1, 1000).ToHashSet();
+        HashSet<int> index = [.. Enumerable.Range(1, 1000)];
 
         Task<IReadOnlyCollection<StubRecord>> GetChunk(
             IEnumerable<int> chunk,
@@ -81,7 +81,7 @@ public class BulkQueryTest
     public async Task Small_queries_are_not_chunked()
     {
         // Simulate 100 records
-        List<int> index = Enumerable.Range(1, 100).ToList();
+        List<int> index = [.. Enumerable.Range(1, 100)];
 
         Task<IReadOnlyCollection<StubRecord>> GetChunk(
             IEnumerable<int> chunk,
@@ -89,7 +89,7 @@ public class BulkQueryTest
         )
         {
             cancellationToken.ThrowIfCancellationRequested();
-            List<int> keys = chunk.ToList();
+            List<int> keys = [.. chunk];
             Assert.Equal(index, keys);
             IReadOnlyCollection<StubRecord> result = [.. keys.Select(id => new StubRecord(id))];
             return Task.FromResult(result);

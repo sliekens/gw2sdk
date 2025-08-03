@@ -18,7 +18,7 @@ public class SensibleDefaultsTest(AssemblyFixture fixture) : IClassFixture<Assem
          * => Sunday
          *
          */
-        List<Type> enums = fixture.Assembly.ExportedTypes.Where(type => type.IsEnum).ToList();
+        List<Type> enums = [.. fixture.Assembly.ExportedTypes.Where(type => type.IsEnum)];
         Assert.All(
             enums,
             type =>

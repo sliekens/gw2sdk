@@ -22,9 +22,9 @@ public class TokenInfo
         Assert.NotEmpty(apiKey.Name);
 
 #if NET
-        HashSet<Permission> expectedPermissions = Enum.GetValues<Permission>().ToHashSet();
+        HashSet<Permission> expectedPermissions = [.. Enum.GetValues<Permission>()];
 #else
-        HashSet<Permission> expectedPermissions = Enum.GetValues(typeof(Permission)).Cast<Permission>().ToHashSet();
+        HashSet<Permission> expectedPermissions = [.. Enum.GetValues(typeof(Permission)).Cast<Permission>()];
 #endif
         Assert.Equal(
             expectedPermissions,

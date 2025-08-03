@@ -6,7 +6,7 @@ internal static class InterleavedTask
     {
         // Found on https://devblogs.microsoft.com/pfxteam/processing-tasks-as-they-complete/
         // Thanks Stephen Toub!
-        List<Task<T>> inputTasks = tasks.ToList();
+        List<Task<T>> inputTasks = [.. tasks];
         TaskCompletionSource<Task<T>>[] buckets = new TaskCompletionSource<Task<T>>[inputTasks.Count];
         Task<Task<T>>[] results = new Task<Task<T>>[buckets.Length];
         for (int i = 0; i < buckets.Length; i++)

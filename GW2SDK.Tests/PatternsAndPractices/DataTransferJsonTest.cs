@@ -16,15 +16,14 @@ public class DataTransferJsonTest(AssemblyFixture fixture) : IClassFixture<Assem
     [Fact]
     public void JsonElement_conversions_are_extensions()
     {
-        List<MethodInfo> candidates = fixture.Assembly.DefinedTypes
+        List<MethodInfo> candidates = [.. fixture.Assembly.DefinedTypes
             .Where(candidate => candidate.Name.EndsWith("Json", StringComparison.Ordinal))
-            .SelectMany(reader => reader.GetMethods(DeclaredOnly | Public | NonPublic | Static))
-            .ToList();
+            .SelectMany(reader => reader.GetMethods(DeclaredOnly | Public | NonPublic | Static))];
         Assert.All(
             fixture.DataTransferObjects,
             dto =>
             {
-                List<MethodInfo> matches = candidates.Where(info => info.ReturnType == dto).ToList();
+                List<MethodInfo> matches = [.. candidates.Where(info => info.ReturnType == dto)];
                 Assert.All(
                     matches,
                     info =>
