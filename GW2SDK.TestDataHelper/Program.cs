@@ -104,7 +104,7 @@ try
                     ISet<string> documents = await service.GetAllJsonSkins(new ProgressAdapter(skins)).ConfigureAwait(false);
                     foreach (string document in documents)
                     {
-                        await recipesFile.WriteLineAsync(document).ConfigureAwait(false);
+                        await skinsFile.WriteLineAsync(document).ConfigureAwait(false);
                     }
                 }
 
