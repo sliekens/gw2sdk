@@ -75,7 +75,7 @@ dotnet_style_null_propagation = true:suggestion
 dotnet_style_object_initializer = true:suggestion
 dotnet_style_operator_placement_when_wrapping = beginning_of_line
 dotnet_style_prefer_auto_properties = true:suggestion
-dotnet_style_prefer_collection_expression = when_types_loosely_match:suggestion
+dotnet_style_prefer_collection_expression = when_types_exactly_match:suggestion
 dotnet_style_prefer_compound_assignment = true:suggestion
 dotnet_style_prefer_conditional_expression_over_assignment = true:suggestion
 dotnet_style_prefer_conditional_expression_over_return = true:suggestion
@@ -593,7 +593,7 @@ roslynator_use_block_body_when_expression_spans_over_multiple_lines = true # tru
 roslynator_use_collection_expression = true # true|false
 # Applicable to: rcs1014, rcs1250
 
-roslynator_use_var = when_type_is_obvious # always|never|when_type_is_obvious
+roslynator_use_var = never # always|never|when_type_is_obvious
 # Applicable to: rcs1264
 
 roslynator_use_var_instead_of_implicit_object_creation = false # true|false
@@ -1327,7 +1327,8 @@ dotnet_diagnostic.rcs1248.severity = warning
 dotnet_diagnostic.rcs1249.severity = warning
 
 # Use implicit/explicit object creation
-dotnet_diagnostic.rcs1250.severity = warning
+# Disabled: conflicts with IDE0028, this rule is too strict about collection expresions when type is not obvious
+dotnet_diagnostic.rcs1250.severity = none
 # Options: roslynator_object_creation_type_style, roslynator_use_collection_expression, roslynator_use_var_instead_of_implicit_object_creation
 
 # Remove unnecessary braces from record declaration

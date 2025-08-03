@@ -9,7 +9,7 @@ internal sealed class JsonAchievementService(HttpClient http)
     public async Task<ISet<string>> GetAllJsonAchievements(IProgress<BulkProgress> progress)
     {
         HashSet<int> ids = await GetAchievementIds().ConfigureAwait(false);
-        SortedDictionary<int, string> entries = new();
+        SortedDictionary<int, string> entries = [];
         await foreach ((int id, string entry) in GetJsonAchievementsByIds(ids, progress).ConfigureAwait(false))
         {
             entries[id] = entry;

@@ -178,20 +178,20 @@ internal static class RingJson
             AttributeAdjustment = attributeAdjustment.Map(static (in JsonElement value) => value.GetDouble()),
             StatChoices =
                 statChoices.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32()))
-                ?? new Collections.ValueList<int>(),
+                ?? [],
             AttributeCombinationId = infixUpgradeId.Map(static (in JsonElement value) => value.GetInt32()),
-            Attributes = infixUpgradeAttributes.Map(static (in JsonElement values) => values.GetAttributes()) ?? new Collections.ValueDictionary<Extensible<Hero.AttributeName>, int>(),
+            Attributes = infixUpgradeAttributes.Map(static (in JsonElement values) => values.GetAttributes()) ?? [],
             Buff = infixUpgradeBuff.Map(static (in JsonElement value) => value.GetBuff()),
             SuffixItemId = suffixItemId.Map(static (in JsonElement value) => value.GetInt32()),
             UpgradesInto =
                 upgradesInto.Map(static (in JsonElement values) =>
                     values.GetList(static (in JsonElement value) => value.GetInfusionSlotUpgradePath())
                 )
-                ?? new Collections.ValueList<InfusionSlotUpgradePath>(),
+                ?? [],
             UpgradesFrom = upgradesFrom.Map(static (in JsonElement values) =>
                     values.GetList(static (in JsonElement value) => value.GetInfusionSlotUpgradeSource())
                 )
-                ?? new Collections.ValueList<InfusionSlotUpgradeSource>()
+                ?? []
         };
     }
 }

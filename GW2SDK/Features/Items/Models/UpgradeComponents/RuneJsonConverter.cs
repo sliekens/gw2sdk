@@ -84,7 +84,7 @@ internal sealed class RuneJsonConverter : JsonConverter<Rune>
             UpgradesInto =
                 json.TryGetProperty("upgrades_into", out JsonElement found)
                     ? found.GetList(InfusionSlotUpgradePathJsonConverter.Read)
-                    : new ValueList<InfusionSlotUpgradePath>()
+                    : []
         };
     }
 

@@ -142,7 +142,7 @@ internal static class PetSkillJson
             Categories = categories.Map(static (in JsonElement values) =>
                     values.GetList(static (in JsonElement value) => value.GetEnum<SkillCategoryName>())
                 )
-                ?? new Collections.ValueList<Extensible<SkillCategoryName>>()
+                ?? []
         };
     }
 }

@@ -18,11 +18,11 @@ public class LeaderboardRegions
             TestContext.Current.CancellationToken
         );
 
-        HashSet<string> expected = new()
-        {
+        HashSet<string> expected =
+        [
             "eu",
             "na"
-        };
+        ];
 
         Assert.Equal(expected, actual);
     }

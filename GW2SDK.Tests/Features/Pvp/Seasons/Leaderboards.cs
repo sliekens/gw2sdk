@@ -16,11 +16,11 @@ public class Leaderboards
             TestContext.Current.CancellationToken
         );
 
-        HashSet<string> expected = new()
-        {
+        HashSet<string> expected =
+        [
             "guild",
             "legendary"
-        };
+        ];
 
         Assert.Equal(expected, actual);
     }

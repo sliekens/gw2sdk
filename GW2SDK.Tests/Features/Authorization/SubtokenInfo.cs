@@ -13,17 +13,11 @@ public class SubtokenInfo
 
         #region Create a new subtoken
 
-        HashSet<Permission> subtokenPermissions = new();
-
 #if NET
-        foreach (Permission permission in Enum.GetValues<Permission>())
+        HashSet<Permission> subtokenPermissions = [.. Enum.GetValues<Permission>()];
 #else
-        foreach (Permission permission in Enum.GetValues(typeof(Permission)))
+        HashSet<Permission> subtokenPermissions = [.. Enum.GetValues(typeof(Permission)).Cast<Permission>()];
 #endif
-        {
-            subtokenPermissions.Add(permission);
-        }
-
         // API uses 1 second precision
         DateTimeOffset notBefore =
             DateTimeOffset.FromUnixTimeSeconds(DateTimeOffset.UtcNow.ToUnixTimeSeconds());

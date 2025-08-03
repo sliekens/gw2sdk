@@ -24,87 +24,87 @@ internal static class ItemRestrictionJson
         {
             if (entry.ValueEquals(nameof(Asura)))
             {
-                races ??= new ValueList<Extensible<RaceName>>();
+                races ??= [];
                 races.Add(Asura);
             }
             else if (entry.ValueEquals(nameof(Charr)))
             {
-                races ??= new ValueList<Extensible<RaceName>>();
+                races ??= [];
                 races.Add(Charr);
             }
             else if (entry.ValueEquals(nameof(Human)))
             {
-                races ??= new ValueList<Extensible<RaceName>>();
+                races ??= [];
                 races.Add(Human);
             }
             else if (entry.ValueEquals(nameof(Norn)))
             {
-                races ??= new ValueList<Extensible<RaceName>>();
+                races ??= [];
                 races.Add(Norn);
             }
             else if (entry.ValueEquals(nameof(Sylvari)))
             {
-                races ??= new ValueList<Extensible<RaceName>>();
+                races ??= [];
                 races.Add(Norn);
             }
             else if (entry.ValueEquals(nameof(Sylvari)))
             {
-                races ??= new ValueList<Extensible<RaceName>>();
+                races ??= [];
                 races.Add(Norn);
             }
             else if (entry.ValueEquals(nameof(Elementalist)))
             {
-                professions ??= new ValueList<Extensible<ProfessionName>>();
+                professions ??= [];
                 professions.Add(Elementalist);
             }
             else if (entry.ValueEquals(nameof(Engineer)))
             {
-                professions ??= new ValueList<Extensible<ProfessionName>>();
+                professions ??= [];
                 professions.Add(Engineer);
             }
             else if (entry.ValueEquals(nameof(Guardian)))
             {
-                professions ??= new ValueList<Extensible<ProfessionName>>();
+                professions ??= [];
                 professions.Add(Guardian);
             }
             else if (entry.ValueEquals(nameof(Mesmer)))
             {
-                professions ??= new ValueList<Extensible<ProfessionName>>();
+                professions ??= [];
                 professions.Add(Mesmer);
             }
             else if (entry.ValueEquals(nameof(Necromancer)))
             {
-                professions ??= new ValueList<Extensible<ProfessionName>>();
+                professions ??= [];
                 professions.Add(Necromancer);
             }
             else if (entry.ValueEquals(nameof(Ranger)))
             {
-                professions ??= new ValueList<Extensible<ProfessionName>>();
+                professions ??= [];
                 professions.Add(Ranger);
             }
             else if (entry.ValueEquals(nameof(Revenant)))
             {
-                professions ??= new ValueList<Extensible<ProfessionName>>();
+                professions ??= [];
                 professions.Add(Revenant);
             }
             else if (entry.ValueEquals(nameof(Thief)))
             {
-                professions ??= new ValueList<Extensible<ProfessionName>>();
+                professions ??= [];
                 professions.Add(Thief);
             }
             else if (entry.ValueEquals(nameof(Warrior)))
             {
-                professions ??= new ValueList<Extensible<ProfessionName>>();
+                professions ??= [];
                 professions.Add(Warrior);
             }
             else if (entry.ValueEquals(nameof(Female)))
             {
-                bodyTypes ??= new ValueList<Extensible<BodyType>>();
+                bodyTypes ??= [];
                 bodyTypes.Add(Female);
             }
             else if (entry.ValueEquals(nameof(Male)))
             {
-                bodyTypes ??= new ValueList<Extensible<BodyType>>();
+                bodyTypes ??= [];
                 bodyTypes.Add(Male);
             }
             else

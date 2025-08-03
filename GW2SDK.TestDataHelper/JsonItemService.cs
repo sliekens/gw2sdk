@@ -9,7 +9,7 @@ internal sealed class JsonItemService(HttpClient http)
     public async Task<ISet<string>> GetAllJsonItems(IProgress<BulkProgress> progress)
     {
         HashSet<int> ids = await GetItemsIndex().ConfigureAwait(false);
-        SortedDictionary<int, string> entries = new();
+        SortedDictionary<int, string> entries = [];
         await foreach ((int id, string entry) in GetJsonItemsByIds(ids, progress).ConfigureAwait(false))
         {
             entries[id] = entry;

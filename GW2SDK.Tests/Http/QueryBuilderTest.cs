@@ -7,7 +7,7 @@ public class QueryBuilderTest
     [Fact]
     public void The_default_state_is_an_empty_query()
     {
-        QueryBuilder sut = new();
+        QueryBuilder sut = [];
 
         string actual = sut.Build();
 

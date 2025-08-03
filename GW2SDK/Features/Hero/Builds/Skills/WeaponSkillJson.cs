@@ -174,7 +174,7 @@ internal static class WeaponSkillJson
                 categories.Map(static (in JsonElement values) =>
                     values.GetList(static (in JsonElement value) => value.GetEnum<SkillCategoryName>())
                 )
-                ?? new Collections.ValueList<Extensible<SkillCategoryName>>(),
+                ?? [],
             Cost = cost.Map(static (in JsonElement value) => value.GetInt32()),
             Offhand = offhand.Map(static (in JsonElement value) => value.GetEnum<Offhand>()),
             Initiative = initiative.Map(static (in JsonElement value) => value.GetInt32())

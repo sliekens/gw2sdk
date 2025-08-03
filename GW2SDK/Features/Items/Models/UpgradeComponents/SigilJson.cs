@@ -170,7 +170,7 @@ internal static class SigilJson
                 infusionUpgradeFlags.Map(static (in JsonElement values) => values.GetInfusionSlotFlags()),
             AttributeAdjustment = attributeAdjustment.Map(static (in JsonElement value) => value.GetDouble()),
             AttributeCombinationId = infixUpgradeId.Map(static (in JsonElement value) => value.GetInt32()),
-            Attributes = infixUpgradeAttributes.Map(static (in JsonElement values) => values.GetAttributes()) ?? new ValueDictionary<Extensible<Hero.AttributeName>, int>(),
+            Attributes = infixUpgradeAttributes.Map(static (in JsonElement values) => values.GetAttributes()) ?? [],
             Buff = infixUpgradeBuff.Map(static (in JsonElement value) => value.GetBuff()),
             SuffixName = suffix.Map(static (in JsonElement value) => value.GetStringRequired()),
             UpgradesInto = new ValueList<InfusionSlotUpgradePath>()

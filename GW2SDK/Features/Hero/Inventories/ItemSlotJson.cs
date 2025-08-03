@@ -116,9 +116,9 @@ internal static class ItemSlotJson
             SecondarySuffixItemId = secondarySuffixItemId,
             InfusionItemIds =
                 infusions.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32()))
-                ?? new Collections.ValueList<int>(),
+                ?? [],
             DyeColorIds =
-                dyes.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32())) ?? new Collections.ValueList<int>(),
+                dyes.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32())) ?? [],
             Binding = binding.Map(static (in JsonElement value) => value.GetEnum<ItemBinding>()),
             BoundTo = boundTo.Map(static (in JsonElement value) => value.GetString()) ?? "",
             Stats = stats.Map(static (in JsonElement value) => value.GetSelectedAttributeCombination())

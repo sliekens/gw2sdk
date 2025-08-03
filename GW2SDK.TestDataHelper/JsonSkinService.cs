@@ -9,7 +9,7 @@ internal sealed class JsonSkinService(HttpClient http)
     public async Task<ISet<string>> GetAllJsonSkins(IProgress<BulkProgress> progress)
     {
         HashSet<int> ids = await GetSkinIds().ConfigureAwait(false);
-        SortedDictionary<int, string> entries = new();
+        SortedDictionary<int, string> entries = [];
         await foreach ((int id, string entry) in GetJsonSkinsByIds(ids, progress).ConfigureAwait(false))
         {
             entries[id] = entry;

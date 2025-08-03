@@ -23,7 +23,7 @@ internal sealed class JsonLinesHttpMessageHandler(string path) : HttpMessageHand
         CancellationToken cancellationToken
     )
     {
-        JsonArray results = new();
+        JsonArray results = [];
         NameValueCollection query = HttpUtility.ParseQueryString(request.RequestUri!.Query);
         string? keys = query.Get("ids");
         if (keys is null)

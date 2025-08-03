@@ -203,9 +203,9 @@ internal static class TorchJson
             AttributeAdjustment = attributeAdjustment.Map(static (in JsonElement value) => value.GetDouble()),
             StatChoices =
                 statChoices.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32()))
-                ?? new Collections.ValueList<int>(),
+                ?? [],
             AttributeCombinationId = infixUpgradeId.Map(static (in JsonElement value) => value.GetInt32()),
-            Attributes = infixUpgradeAttributes.Map(static (in JsonElement values) => values.GetAttributes()) ?? new Collections.ValueDictionary<Extensible<Hero.AttributeName>, int>(),
+            Attributes = infixUpgradeAttributes.Map(static (in JsonElement values) => values.GetAttributes()) ?? [],
             Buff = infixUpgradeBuff.Map(static (in JsonElement value) => value.GetBuff()),
             SuffixItemId = suffixItemId.Map(static (in JsonElement value) => value.GetInt32()),
             SecondarySuffixItemId = secondarySuffixItemId.Map(static (in JsonElement value) => value.GetInt32())

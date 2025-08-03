@@ -253,12 +253,12 @@ public class CoinTest
     {
         // This should test the generic IComparable<T> which prevents unnecessary boxing
         // although there is no way to test that directly
-        List<Coin> coins = new()
-        {
+        List<Coin> coins =
+        [
             10,
             5,
             20
-        };
+        ];
 
         coins.Sort();
 
@@ -274,12 +274,12 @@ public class CoinTest
     public void Coins_can_be_sorted_when_boxed()
     {
         // This tests the non-generic IComparable which is used in boxing scenarios
-        List<object> coins = new()
-        {
+        List<object> coins =
+        [
             new Coin(10),
             new Coin(5),
             new Coin(20)
-        };
+        ];
 
         coins.Sort();
 

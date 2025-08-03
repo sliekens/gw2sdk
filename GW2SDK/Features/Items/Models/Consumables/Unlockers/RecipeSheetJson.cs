@@ -136,7 +136,7 @@ internal static class RecipeSheetJson
             ExtraRecipeIds =
                 extraRecipeIds.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32())
                 )
-                ?? new Collections.ValueList<int>()
+                ?? []
         };
     }
 }

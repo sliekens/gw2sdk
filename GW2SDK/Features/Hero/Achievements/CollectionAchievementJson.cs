@@ -103,7 +103,7 @@ internal static class CollectionAchievementJson
                 ),
             Prerequisites =
                 prerequisites.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32()))
-                ?? new Collections.ValueList<int>(),
+                ?? [],
             Rewards =
                 rewards.Map(static (in JsonElement values) =>
                     values.GetList(static (in JsonElement value) => value.GetAchievementReward())
