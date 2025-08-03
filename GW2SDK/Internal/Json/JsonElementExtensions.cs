@@ -1,7 +1,6 @@
 ﻿using System.Text.Json;
 
 using GuildWars2.Collections;
-using GuildWars2.Hero.Builds.Facts;
 
 namespace GuildWars2.Json;
 
