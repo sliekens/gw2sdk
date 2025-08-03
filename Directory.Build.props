@@ -47,7 +47,15 @@
     <PolySharpIncludeRuntimeSupportedAttributes>true</PolySharpIncludeRuntimeSupportedAttributes>
   </PropertyGroup>
 
+<!-- Code analysis -->
+  <PropertyGroup>
+    <CodeAnalysisTreatWarningsAsErrors>false</CodeAnalysisTreatWarningsAsErrors>
+
+    <!-- https://learn.microsoft.com/en-us/dotnet/core/project-sdk/msbuild-props#enforcecodestyleinbuild -->
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+  </PropertyGroup>
+
   <ItemGroup>
-    <GlobalAnalyzerConfigFiles Include ="$(MSBuildThisFileDirectory).roslynatorconfig" />
+    <GlobalAnalyzerConfigFiles Include ="$(MSBuildThisFileDirectory)/analyzers/*" />
   </ItemGroup>
 </Project>
