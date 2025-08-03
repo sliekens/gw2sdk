@@ -8,7 +8,7 @@ internal sealed class JsonSkinService(HttpClient http)
     {
         var ids = await GetSkinIds().ConfigureAwait(false);
         var entries = new SortedDictionary<int, string>();
-        await foreach (var (id, entry) in GetJsonSkinsByIds(ids, progress))
+        await foreach (var (id, entry) in GetJsonSkinsByIds(ids, progress).ConfigureAwait(false))
         {
             entries[id] = entry;
         }
@@ -19,7 +19,7 @@ internal sealed class JsonSkinService(HttpClient http)
     private async Task<HashSet<int>> GetSkinIds()
     {
         var wardrobe = new WardrobeClient(http);
-        var (ids, _) = await wardrobe.GetSkinsIndex();
+        var (ids, _) = await wardrobe.GetSkinsIndex().ConfigureAwait(false);
         return ids;
     }
 
@@ -43,7 +43,7 @@ internal sealed class JsonSkinService(HttpClient http)
         {
             Uri resource = new Uri("/v2/skins", UriKind.Relative);
             var request = new BulkRequest(resource) { Ids = chunk.ToList() };
-            var json = await request.SendAsync(http, cancellationToken);
+            var json = await request.SendAsync(http, cancellationToken).ConfigureAwait(false);
             return json.RootElement.EnumerateArray()
                 .Select(item => (item.GetProperty("id").GetInt32(), item.ToJsonLine()))
                 .ToList();

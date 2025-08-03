@@ -142,13 +142,13 @@ public static class Gw2Resiliency
         }
 
         // IMPORTANT: buffer the Content to make ReadAsStreamAsync return a rewindable MemoryStream
-        await attempt.Result.Content.LoadIntoBufferAsync();
+        await attempt.Result.Content.LoadIntoBufferAsync().ConfigureAwait(false);
 
         // ALSO IMPORTANT: do not dispose the MemoryStream because subsequent ReadAsStreamAsync calls return the same instance
-        var content = await attempt.Result.Content.ReadAsStreamAsync();
+        var content = await attempt.Result.Content.ReadAsStreamAsync().ConfigureAwait(false);
         try
         {
-            using var json = await JsonDocument.ParseAsync(content);
+            using var json = await JsonDocument.ParseAsync(content).ConfigureAwait(false);
             return json.RootElement.TryGetProperty("text", out var text) ? text.GetString() : null;
         }
         finally

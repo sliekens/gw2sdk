@@ -8,7 +8,7 @@ internal sealed class JsonAchievementService(HttpClient http)
     {
         var ids = await GetAchievementIds().ConfigureAwait(false);
         var entries = new SortedDictionary<int, string>();
-        await foreach (var (id, entry) in GetJsonAchievementsByIds(ids, progress))
+        await foreach (var (id, entry) in GetJsonAchievementsByIds(ids, progress).ConfigureAwait(false))
         {
             entries[id] = entry;
         }
@@ -19,7 +19,7 @@ internal sealed class JsonAchievementService(HttpClient http)
     private async Task<HashSet<int>> GetAchievementIds()
     {
         var achievements = new AchievementsClient(http);
-        var (ids, _) = await achievements.GetAchievementsIndex();
+        var (ids, _) = await achievements.GetAchievementsIndex().ConfigureAwait(false);
         return ids;
     }
 
@@ -43,7 +43,7 @@ internal sealed class JsonAchievementService(HttpClient http)
         {
             Uri resource = new Uri("/v2/achievements", UriKind.Relative);
             var request = new BulkRequest(resource) { Ids = chunk.ToList() };
-            var json = await request.SendAsync(http, cancellationToken);
+            var json = await request.SendAsync(http, cancellationToken).ConfigureAwait(false);
             return json.RootElement.EnumerateArray()
                 .Select(item => (item.GetProperty("id").GetInt32(), item.ToJsonLine()))
                 .ToList();

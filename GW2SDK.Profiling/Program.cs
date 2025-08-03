@@ -10,7 +10,7 @@ var httpClientBuilder = services.AddHttpClient<Gw2Client>();
 httpClientBuilder.AddStandardResilienceHandler();
 var gw2Client = services.BuildServiceProvider().GetRequiredService<Gw2Client>();
 
-await foreach (var recipe in gw2Client.Hero.Crafting.Recipes.GetRecipesBulk().ValueOnly())
+await foreach (var recipe in gw2Client.Hero.Crafting.Recipes.GetRecipesBulk().ValueOnly().ConfigureAwait(false))
 {
     Console.WriteLine(recipe.Id);
 }
