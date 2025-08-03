@@ -79,7 +79,7 @@ internal sealed class LoggingHandler : DelegatingHandler
 #if NET
                         text = string.Concat(text.AsSpan(0, 1024), "...");
 #else
-                        text = text.Substring(0, 1024) + "...";
+                        text = text[..1024] + "...";
 #endif
                     }
 
