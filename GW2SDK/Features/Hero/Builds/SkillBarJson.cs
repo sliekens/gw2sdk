@@ -32,13 +32,13 @@ internal static class SkillBarJson
             }
         }
 
-        (int? UtilitySkillId, int? UtilitySkillId2, int? UtilitySkillId3) utilitySkills = utilities.Map(static (in JsonElement values) => values.GetUtilitySkillIds());
+        (int? UtilitySkillId, int? UtilitySkillId2, int? UtilitySkillId3) = utilities.Map(static (in JsonElement values) => values.GetUtilitySkillIds());
         return new SkillBar
         {
             HealSkillId = heal.Map(static (in JsonElement value) => value.GetInt32()),
-            UtilitySkillId1 = utilitySkills.UtilitySkillId,
-            UtilitySkillId2 = utilitySkills.UtilitySkillId2,
-            UtilitySkillId3 = utilitySkills.UtilitySkillId3,
+            UtilitySkillId1 = UtilitySkillId,
+            UtilitySkillId2 = UtilitySkillId2,
+            UtilitySkillId3 = UtilitySkillId3,
             EliteSkillId = elite.Map(static (in JsonElement value) => value.GetInt32())
         };
     }
