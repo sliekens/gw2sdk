@@ -10,7 +10,7 @@ public class RecipesIndexByIngredient
         var sut = Composer.Resolve<Gw2Client>();
 
         const int visionCrystalItemId = 46746;
-        var (actual, context) = await sut.Hero.Crafting.Recipes.GetRecipesIndexByIngredientItemId(
+        (HashSet<int> actual, MessageContext context) = await sut.Hero.Crafting.Recipes.GetRecipesIndexByIngredientItemId(
             visionCrystalItemId,
             TestContext.Current.CancellationToken
         );

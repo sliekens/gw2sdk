@@ -10,7 +10,7 @@ internal static class AccountLuckJson
     {
         JsonElement luckObj = default;
 
-        foreach (var entry in json.EnumerateArray())
+        foreach (JsonElement entry in json.EnumerateArray())
         {
             if (luckObj.ValueKind == JsonValueKind.Undefined)
             {
@@ -32,7 +32,7 @@ internal static class AccountLuckJson
         // id (string) – The string "luck".
         // value (number) – The amount of luck consumed
         RequiredMember value = "value";
-        foreach (var member in luckObj.EnumerateObject())
+        foreach (JsonProperty member in luckObj.EnumerateObject())
         {
             if (member.NameEquals("id"))
             {

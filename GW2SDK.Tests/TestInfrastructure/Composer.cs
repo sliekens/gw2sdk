@@ -38,7 +38,7 @@ public static class Composer
 
     private static ResilienceHandler CreateResilientHttpHandler()
     {
-        var resiliencePipeline = new ResiliencePipelineBuilder<HttpResponseMessage>()
+        ResiliencePipeline<HttpResponseMessage> resiliencePipeline = new ResiliencePipelineBuilder<HttpResponseMessage>()
             .AddTimeout(Gw2Resiliency.TotalTimeoutStrategy)
             .AddRetry(Gw2Resiliency.RetryStrategy)
             .AddCircuitBreaker(Gw2Resiliency.CircuitBreakerStrategy)

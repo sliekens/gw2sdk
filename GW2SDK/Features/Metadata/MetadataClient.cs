@@ -1,3 +1,5 @@
+using System.Text.Json;
+
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -29,14 +31,14 @@ public sealed class MetadataClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"{version}.json");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet($"{version}.json");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetApiVersion();
+            ApiVersion value = response.Json.RootElement.GetApiVersion();
             return (value, response.Context);
         }
     }
@@ -50,14 +52,14 @@ public sealed class MetadataClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/build");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/build");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetBuild();
+            Build value = response.Json.RootElement.GetBuild();
             return (value, response.Context);
         }
     }

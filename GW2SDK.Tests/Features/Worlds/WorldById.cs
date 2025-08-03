@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Worlds;
 
 namespace GuildWars2.Tests.Features.Worlds;
 
@@ -11,7 +12,7 @@ public class WorldById
 
         const int id = 1001;
 
-        var (actual, context) = await sut.Worlds.GetWorldById(
+        (World actual, MessageContext context) = await sut.Worlds.GetWorldById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

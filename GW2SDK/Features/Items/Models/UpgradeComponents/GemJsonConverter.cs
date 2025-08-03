@@ -17,7 +17,7 @@ internal sealed class GemJsonConverter : JsonConverter<Gem>
         JsonSerializerOptions options
     )
     {
-        using var json = JsonDocument.ParseValue(ref reader);
+        using JsonDocument json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
@@ -80,7 +80,7 @@ internal sealed class GemJsonConverter : JsonConverter<Gem>
             Buff = json.GetProperty("buff").GetNullable(BuffJsonConverter.Read),
             SuffixName = json.GetProperty("suffix").GetStringRequired(),
             UpgradesInto =
-                json.TryGetProperty("upgrades_into", out var found)
+                json.TryGetProperty("upgrades_into", out JsonElement found)
                     ? found.GetList(InfusionSlotUpgradePathJsonConverter.Read)
                     : new ValueList<InfusionSlotUpgradePath>()
         };

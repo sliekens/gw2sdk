@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pvp.Games;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pvp.Games;
 
@@ -8,17 +9,17 @@ public class GamesByFilter
     public async Task Can_be_filtered_by_id()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = TestConfiguration.ApiKey;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
         // No way other way to get a game ID than to list them all first
-        var ids = await sut.Pvp.GetGamesIndex(
+        HashSet<string> ids = await sut.Pvp.GetGamesIndex(
                 accessToken.Key,
                 cancellationToken: TestContext.Current.CancellationToken
             )
             .ValueOnly();
 
         // Now that we have game IDs, we can get the games
-        var (actual, context) = await sut.Pvp.GetGamesByIds(
+        (HashSet<Game> actual, MessageContext context) = await sut.Pvp.GetGamesByIds(
             ids,
             accessToken.Key,
             cancellationToken: TestContext.Current.CancellationToken

@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pve.Home.Decorations;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pve.Home.Decorations;
 
@@ -11,7 +12,7 @@ public class DecorationCategoryById
 
         const int id = 1;
 
-        var (actual, context) = await sut.Pve.Home.GetDecorationCategoryById(
+        (DecorationCategory actual, MessageContext context) = await sut.Pve.Home.GetDecorationCategoryById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

@@ -13,7 +13,7 @@ internal sealed class AchievementItemBitJsonConverter : JsonConverter<Achievemen
         JsonSerializerOptions options
     )
     {
-        using var json = JsonDocument.ParseValue(ref reader);
+        using JsonDocument json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
@@ -29,7 +29,7 @@ internal sealed class AchievementItemBitJsonConverter : JsonConverter<Achievemen
     public static AchievementItemBit Read(in JsonElement json)
     {
         JsonElement id = default, text = default;
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("id"))
             {

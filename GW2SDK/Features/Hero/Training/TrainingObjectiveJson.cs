@@ -9,7 +9,7 @@ internal static class TrainingObjectiveJson
 {
     public static TrainingObjective GetTrainingObjective(this in JsonElement json)
     {
-        if (json.TryGetProperty("type", out var discriminator))
+        if (json.TryGetProperty("type", out JsonElement discriminator))
         {
             switch (discriminator.GetString())
             {
@@ -21,7 +21,7 @@ internal static class TrainingObjectiveJson
         }
 
         RequiredMember cost = "cost";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

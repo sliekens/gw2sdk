@@ -13,7 +13,7 @@ internal static class ObjectiveJson
         RequiredMember track = "track";
         RequiredMember acclaim = "acclaim";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

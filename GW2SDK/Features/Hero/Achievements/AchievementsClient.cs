@@ -1,6 +1,7 @@
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 
+using GuildWars2.Collections;
 using GuildWars2.Hero.Achievements.Categories;
 using GuildWars2.Hero.Achievements.Groups;
 using GuildWars2.Hero.Achievements.Titles;
@@ -36,13 +37,13 @@ public sealed class AchievementsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/account/titles", accessToken);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/account/titles", accessToken);
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -58,13 +59,13 @@ public sealed class AchievementsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/achievements");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/achievements");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -82,16 +83,16 @@ public sealed class AchievementsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/achievements");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/achievements");
         requestBuilder.Query.AddId(achievementId);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetAchievement();
+            Achievement value = response.Json.RootElement.GetAchievement();
             return (value, response.Context);
         }
     }
@@ -110,16 +111,16 @@ public sealed class AchievementsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/achievements");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/achievements");
         requestBuilder.Query.AddIds(achievementIds);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAchievement());
+            ValueHashSet<Achievement> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAchievement());
             return (value, response.Context);
         }
     }
@@ -139,16 +140,16 @@ public sealed class AchievementsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/achievements");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/achievements");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAchievement());
+            ValueHashSet<Achievement> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAchievement());
             return (value, response.Context);
         }
     }
@@ -188,7 +189,7 @@ public sealed class AchievementsClient
             CancellationToken cancellationToken
         )
         {
-            var (values, context) = await GetAchievementsByIds(
+            (HashSet<Achievement> values, MessageContext context) = await GetAchievementsByIds(
                     chunk,
                     language,
                     missingMemberBehavior,
@@ -216,8 +217,8 @@ public sealed class AchievementsClient
         [EnumeratorCancellation] CancellationToken cancellationToken = default
     )
     {
-        var (value, _) = await GetAchievementsIndex(cancellationToken).ConfigureAwait(false);
-        var producer = GetAchievementsBulk(
+        (HashSet<int> value, _) = await GetAchievementsIndex(cancellationToken).ConfigureAwait(false);
+        IAsyncEnumerable<(Achievement Value, MessageContext Context)> producer = GetAchievementsBulk(
             value,
             language,
             missingMemberBehavior,
@@ -226,7 +227,7 @@ public sealed class AchievementsClient
             progress,
             cancellationToken
         );
-        await foreach (var achievement in producer.ConfigureAwait(false))
+        await foreach ((Achievement Value, MessageContext Context) achievement in producer.ConfigureAwait(false))
         {
             yield return achievement;
         }
@@ -250,15 +251,15 @@ public sealed class AchievementsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/account/achievements", accessToken);
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/account/achievements", accessToken);
         requestBuilder.Query.AddId(achievementId);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetAccountAchievement();
+            AccountAchievement value = response.Json.RootElement.GetAccountAchievement();
             return (value, response.Context);
         }
     }
@@ -278,15 +279,15 @@ public sealed class AchievementsClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/account/achievements", accessToken);
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/account/achievements", accessToken);
         requestBuilder.Query.AddIds(achievementIds);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
+            ValueHashSet<AccountAchievement> value =
                 response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAccountAchievement());
             return (value, response.Context);
         }
@@ -304,15 +305,15 @@ public sealed class AchievementsClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/account/achievements", accessToken);
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/account/achievements", accessToken);
         requestBuilder.Query.AddAllIds();
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
+            ValueHashSet<AccountAchievement> value =
                 response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAccountAchievement());
             return (value, response.Context);
         }
@@ -335,15 +336,15 @@ public sealed class AchievementsClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/account/achievements", accessToken);
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/account/achievements", accessToken);
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
+            ValueHashSet<AccountAchievement> value =
                 response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAccountAchievement());
             return (value, response.Context);
         }
@@ -365,16 +366,16 @@ public sealed class AchievementsClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/achievements/categories");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/achievements/categories");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
+            ValueHashSet<AchievementCategory> value =
                 response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAchievementCategory());
             return (value, response.Context);
         }
@@ -387,13 +388,13 @@ public sealed class AchievementsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/achievements/categories");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/achievements/categories");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -412,16 +413,16 @@ public sealed class AchievementsClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/achievements/categories");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/achievements/categories");
         requestBuilder.Query.AddId(achievementCategoryId);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetAchievementCategory();
+            AchievementCategory value = response.Json.RootElement.GetAchievementCategory();
             return (value, response.Context);
         }
     }
@@ -440,16 +441,16 @@ public sealed class AchievementsClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/achievements/categories");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/achievements/categories");
         requestBuilder.Query.AddIds(achievementCategoryIds);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
+            ValueHashSet<AchievementCategory> value =
                 response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAchievementCategory());
             return (value, response.Context);
         }
@@ -471,16 +472,16 @@ public sealed class AchievementsClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/achievements/categories");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/achievements/categories");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
+            ValueHashSet<AchievementCategory> value =
                 response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAchievementCategory());
             return (value, response.Context);
         }
@@ -502,16 +503,16 @@ public sealed class AchievementsClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/achievements/groups");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/achievements/groups");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
+            ValueHashSet<AchievementGroup> value =
                 response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAchievementGroup());
             return (value, response.Context);
         }
@@ -524,13 +525,13 @@ public sealed class AchievementsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/achievements/groups");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/achievements/groups");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
+            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -548,16 +549,16 @@ public sealed class AchievementsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/achievements/groups");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/achievements/groups");
         requestBuilder.Query.AddId(achievementGroupId);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetAchievementGroup();
+            AchievementGroup value = response.Json.RootElement.GetAchievementGroup();
             return (value, response.Context);
         }
     }
@@ -576,16 +577,16 @@ public sealed class AchievementsClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/achievements/groups");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/achievements/groups");
         requestBuilder.Query.AddIds(achievementGroupIds);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
+            ValueHashSet<AchievementGroup> value =
                 response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAchievementGroup());
             return (value, response.Context);
         }
@@ -607,16 +608,16 @@ public sealed class AchievementsClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/achievements/groups");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/achievements/groups");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
+            ValueHashSet<AchievementGroup> value =
                 response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAchievementGroup());
             return (value, response.Context);
         }
@@ -637,16 +638,16 @@ public sealed class AchievementsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/titles");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/titles");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetTitle());
+            ValueHashSet<Title> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetTitle());
             return (value, response.Context);
         }
     }
@@ -658,13 +659,13 @@ public sealed class AchievementsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/titles");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/titles");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -682,16 +683,16 @@ public sealed class AchievementsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/titles");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/titles");
         requestBuilder.Query.AddId(titleId);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetTitle();
+            Title value = response.Json.RootElement.GetTitle();
             return (value, response.Context);
         }
     }
@@ -709,16 +710,16 @@ public sealed class AchievementsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/titles");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/titles");
         requestBuilder.Query.AddIds(titleIds);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetTitle());
+            ValueHashSet<Title> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetTitle());
             return (value, response.Context);
         }
     }
@@ -738,16 +739,16 @@ public sealed class AchievementsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/titles");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/titles");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetTitle());
+            ValueHashSet<Title> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetTitle());
             return (value, response.Context);
         }
     }

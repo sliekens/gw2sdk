@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Quaggans;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Quaggans;
 
@@ -11,7 +12,7 @@ public class QuagganById
 
         const string id = "present";
 
-        var (actual, context) = await sut.Quaggans.GetQuagganById(
+        (Quaggan actual, MessageContext context) = await sut.Quaggans.GetQuagganById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

@@ -11,7 +11,7 @@ internal static class LogoJson
         RequiredMember id = "id";
         RequiredMember url = "url";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

@@ -19,7 +19,7 @@ internal sealed class EffectJsonConverter : JsonConverter<Effect>
         JsonSerializerOptions options
     )
     {
-        using var json = JsonDocument.ParseValue(ref reader);
+        using JsonDocument json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
@@ -31,7 +31,7 @@ internal sealed class EffectJsonConverter : JsonConverter<Effect>
     public static Effect Read(in JsonElement json)
     {
         var iconString = "";
-        if (json.TryGetProperty("icon", out var iconElement))
+        if (json.TryGetProperty("icon", out JsonElement iconElement))
         {
             iconString = iconElement.GetString() ?? "";
         }

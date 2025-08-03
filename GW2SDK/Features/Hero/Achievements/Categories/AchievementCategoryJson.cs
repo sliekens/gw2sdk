@@ -16,7 +16,7 @@ internal static class AchievementCategoryJson
         RequiredMember achievements = "achievements";
         OptionalMember tomorrow = "tomorrow";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

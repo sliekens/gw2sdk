@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Items;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Items;
 
@@ -10,7 +11,7 @@ public class ItemsByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
-        var (actual, context) = await sut.Items.GetItemsByPage(
+        (HashSet<Item> actual, MessageContext context) = await sut.Items.GetItemsByPage(
             0,
             pageSize,
             cancellationToken: TestContext.Current.CancellationToken

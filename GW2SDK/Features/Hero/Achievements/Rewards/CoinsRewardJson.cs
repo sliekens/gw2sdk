@@ -9,7 +9,7 @@ internal static class CoinsRewardJson
     public static CoinsReward GetCoinsReward(this in JsonElement json)
     {
         RequiredMember coins = "count";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

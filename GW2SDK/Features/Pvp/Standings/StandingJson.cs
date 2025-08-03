@@ -12,7 +12,7 @@ internal static class StandingJson
         RequiredMember current = "current";
         RequiredMember best = "best";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (seasonId.Match(member))
             {

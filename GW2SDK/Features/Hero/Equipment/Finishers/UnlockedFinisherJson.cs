@@ -12,7 +12,7 @@ internal static class UnlockedFinisherJson
         RequiredMember permanent = "permanent";
         NullableMember quantity = "quantity";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

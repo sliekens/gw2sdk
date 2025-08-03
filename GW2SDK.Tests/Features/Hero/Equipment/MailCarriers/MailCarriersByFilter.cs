@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Equipment.MailCarriers;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.MailCarriers;
 
@@ -15,7 +16,7 @@ public class MailCarriersByFilter
             3
         ];
 
-        var (actual, context) = await sut.Hero.Equipment.MailCarriers.GetMailCarriersByIds(
+        (HashSet<MailCarrier> actual, MessageContext context) = await sut.Hero.Equipment.MailCarriers.GetMailCarriersByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

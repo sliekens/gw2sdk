@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Quaggans;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Quaggans;
 
@@ -15,7 +16,7 @@ public class QuaggansByFilter
             "attack"
         ];
 
-        var (actual, context) = await sut.Quaggans.GetQuaggansByIds(
+        (HashSet<Quaggan> actual, MessageContext context) = await sut.Quaggans.GetQuaggansByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

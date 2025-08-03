@@ -23,7 +23,7 @@ internal sealed class SpectreMarkupConverter
         ArgumentNullException.ThrowIfNull(root);
 
         var builder = new StringBuilder();
-        foreach (var node in root.Children)
+        foreach (MarkupNode node in root.Children)
         {
             builder.Append(ConvertNode(node));
         }
@@ -45,7 +45,7 @@ internal sealed class SpectreMarkupConverter
             case MarkupNodeType.ColoredText:
                 var coloredText = (ColoredTextNode)node;
                 var builder = new StringBuilder();
-                foreach (var child in coloredText.Children)
+                foreach (MarkupNode child in coloredText.Children)
                 {
                     builder.Append(ConvertNode(child));
                 }

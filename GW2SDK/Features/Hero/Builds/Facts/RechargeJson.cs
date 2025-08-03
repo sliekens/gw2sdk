@@ -19,7 +19,7 @@ internal static class RechargeJson
         RequiredMember icon = "icon";
         RequiredMember recharge = "value";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

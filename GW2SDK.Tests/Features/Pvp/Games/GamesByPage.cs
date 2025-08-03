@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pvp.Games;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pvp.Games;
 
@@ -8,10 +9,10 @@ public class GamesByPage
     public async Task Can_be_filtered_by_page()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = TestConfiguration.ApiKey;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
         const int pageSize = 3;
-        var (actual, context) = await sut.Pvp.GetGamesByPage(
+        (HashSet<Game> actual, MessageContext context) = await sut.Pvp.GetGamesByPage(
             0,
             pageSize,
             accessToken.Key,

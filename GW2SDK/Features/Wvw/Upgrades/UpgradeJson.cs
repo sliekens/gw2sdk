@@ -12,7 +12,7 @@ internal static class UpgradeJson
         RequiredMember description = "description";
         RequiredMember icon = "icon";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (name.Match(member))
             {

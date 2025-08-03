@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Wvw.Ranks;
 
 namespace GuildWars2.Tests.Features.Wvw.Ranks;
 
@@ -9,7 +10,7 @@ public class Ranks
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<Rank> actual, MessageContext context) =
             await sut.Wvw.GetRanks(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);

@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pvp.MistChampions;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pvp.MistChampions;
 
@@ -10,7 +11,7 @@ public class MistChampionsByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
-        var (actual, context) = await sut.Pvp.GetMistChampionByPage(
+        (HashSet<MistChampion> actual, MessageContext context) = await sut.Pvp.GetMistChampionByPage(
             0,
             pageSize,
             cancellationToken: TestContext.Current.CancellationToken

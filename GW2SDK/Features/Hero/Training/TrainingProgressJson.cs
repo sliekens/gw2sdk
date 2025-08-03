@@ -12,7 +12,7 @@ internal static class TrainingProgressJson
         RequiredMember spent = "spent";
         RequiredMember done = "done";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

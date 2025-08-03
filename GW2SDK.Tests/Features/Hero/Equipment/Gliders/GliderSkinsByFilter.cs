@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Equipment.Gliders;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Gliders;
 
@@ -15,7 +16,7 @@ public class GliderSkinsByFilter
             74
         ];
 
-        var (actual, context) = await sut.Hero.Equipment.Gliders.GetGliderSkinsByIds(
+        (HashSet<GliderSkin> actual, MessageContext context) = await sut.Hero.Equipment.Gliders.GetGliderSkinsByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Chat;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Banking;
 
@@ -8,9 +9,9 @@ public class Bank
     public async Task Contents_can_be_found()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = TestConfiguration.ApiKey;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Hero.Bank.GetBank(
+        (GuildWars2.Hero.Banking.Bank actual, _) = await sut.Hero.Bank.GetBank(
             accessToken.Key,
             cancellationToken: TestContext.Current.CancellationToken
         );
@@ -26,7 +27,7 @@ public class Bank
                 {
                     Assert.True(slot.Id > 0);
                     Assert.True(slot.Count > 0);
-                    var chatLink = slot.GetChatLink();
+                    ItemLink chatLink = slot.GetChatLink();
                     Assert.Equal(slot.Count, chatLink.Count);
                     Assert.Equal(slot.SkinId, chatLink.SkinId);
                     Assert.Equal(slot.SuffixItemId, chatLink.SuffixItemId);

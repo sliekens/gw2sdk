@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.WizardsVault.Objectives;
 
 namespace GuildWars2.Tests.Features.WizardsVault.Objectives;
 
@@ -15,7 +16,7 @@ public class ObjectivesByFilter
             3
         ];
 
-        var (actual, context) = await sut.WizardsVault.GetObjectivesByIds(
+        (HashSet<Objective> actual, MessageContext context) = await sut.WizardsVault.GetObjectivesByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

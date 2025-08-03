@@ -13,7 +13,7 @@ internal sealed class DyeSlotInfoJsonConverter : JsonConverter<DyeSlotInfo>
         JsonSerializerOptions options
     )
     {
-        using var json = JsonDocument.ParseValue(ref reader);
+        using JsonDocument json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
@@ -57,7 +57,7 @@ internal sealed class DyeSlotInfoJsonConverter : JsonConverter<DyeSlotInfo>
     {
         writer.WriteStartObject();
         writer.WriteStartArray("default");
-        foreach (var slot in value.Default)
+        foreach (DyeSlot? slot in value.Default)
         {
             if (slot is not null)
             {
@@ -95,7 +95,7 @@ internal sealed class DyeSlotInfoJsonConverter : JsonConverter<DyeSlotInfo>
         if (list is not null)
         {
             writer.WriteStartArray();
-            foreach (var slot in list)
+            foreach (DyeSlot? slot in list)
             {
                 if (slot is not null)
                 {

@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Logos;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Logos;
 
@@ -11,7 +12,7 @@ public class LogoById
 
         const string id = "Guild-Wars-2-logo-en";
 
-        var (actual, context) = await sut.Logos.GetLogoById(
+        (Logo actual, MessageContext context) = await sut.Logos.GetLogoById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

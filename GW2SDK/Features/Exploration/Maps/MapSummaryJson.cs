@@ -21,7 +21,7 @@ internal static class MapSummaryJson
         OptionalMember continentName = "continent_name";
         RequiredMember mapRectangle = "map_rect";
         RequiredMember continentRectangle = "continent_rect";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Worlds;
 
 namespace GuildWars2.Tests.Features.Worlds;
 
@@ -15,7 +16,7 @@ public class WorldsByFilter
             1003
         ];
 
-        var (actual, context) = await sut.Worlds.GetWorldsByIds(
+        (HashSet<World> actual, MessageContext context) = await sut.Worlds.GetWorldsByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

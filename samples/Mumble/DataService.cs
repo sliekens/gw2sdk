@@ -1,4 +1,8 @@
 ﻿using GuildWars2;
+using GuildWars2.Exploration.Maps;
+using GuildWars2.Hero.Builds;
+using GuildWars2.Hero.Equipment.Dyes;
+using GuildWars2.Worlds;
 
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -13,7 +17,7 @@ internal sealed class DataService(
 {
     public async Task StartAsync(CancellationToken cancellationToken)
     {
-        foreach (var map in await gw2Client.Exploration
+        foreach (MapSummary map in await gw2Client.Exploration
             .GetMapSummaries(cancellationToken: cancellationToken)
             .ValueOnly())
         {
@@ -23,7 +27,7 @@ internal sealed class DataService(
             }
         }
 
-        foreach (var specialization in await gw2Client.Hero.Builds
+        foreach (Specialization specialization in await gw2Client.Hero.Builds
             .GetSpecializations(cancellationToken: cancellationToken)
             .ValueOnly())
         {
@@ -37,7 +41,7 @@ internal sealed class DataService(
             }
         }
 
-        foreach (var color in await gw2Client.Hero.Equipment.Dyes
+        foreach (DyeColor color in await gw2Client.Hero.Equipment.Dyes
             .GetColors(cancellationToken: cancellationToken)
             .ValueOnly())
         {
@@ -47,7 +51,7 @@ internal sealed class DataService(
             }
         }
 
-        foreach (var world in await gw2Client.Worlds.GetWorlds(cancellationToken: cancellationToken)
+        foreach (World world in await gw2Client.Worlds.GetWorlds(cancellationToken: cancellationToken)
             .ValueOnly())
         {
             if (!referenceData.TryAddWorld(world))

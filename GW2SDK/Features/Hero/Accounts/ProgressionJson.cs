@@ -11,7 +11,7 @@ internal static class ProgressionJson
         RequiredMember progressId = "id";
         RequiredMember progress = "value";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (progressId.Match(member))
             {

@@ -12,7 +12,7 @@ internal static class SkillReferenceJson
         RequiredMember id = "id";
         RequiredMember slot = "slot";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

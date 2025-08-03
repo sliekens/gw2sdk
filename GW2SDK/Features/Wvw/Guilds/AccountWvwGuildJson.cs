@@ -11,7 +11,7 @@ internal static class AccountWvwGuildJson
         NullableMember teamId = "team";
         OptionalMember guildId = "guild";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (teamId.Match(member))
             {

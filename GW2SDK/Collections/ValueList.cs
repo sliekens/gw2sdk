@@ -63,7 +63,7 @@ public sealed class ValueList<T> : List<T>, IEquatable<ValueList<T>>
     public override int GetHashCode()
     {
         HashCode hash = new();
-        foreach (var item in this)
+        foreach (T item in this)
         {
             hash.Add(item);
         }

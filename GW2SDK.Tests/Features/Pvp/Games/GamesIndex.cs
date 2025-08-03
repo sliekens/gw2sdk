@@ -8,9 +8,9 @@ public class GamesIndex
     public async Task Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = TestConfiguration.ApiKey;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
-        var (actual, context) = await sut.Pvp.GetGamesIndex(
+        (HashSet<string> actual, MessageContext context) = await sut.Pvp.GetGamesIndex(
             accessToken.Key,
             cancellationToken: TestContext.Current.CancellationToken
         );

@@ -21,7 +21,7 @@ internal sealed class ToyJsonConverter : JsonConverter<Toy>
         JsonSerializerOptions options
     )
     {
-        using var json = JsonDocument.ParseValue(ref reader);
+        using JsonDocument json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 

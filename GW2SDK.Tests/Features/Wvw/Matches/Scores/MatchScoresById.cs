@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Wvw.Matches.Scores;
 
 namespace GuildWars2.Tests.Features.Wvw.Matches.Scores;
 
@@ -11,7 +12,7 @@ public class MatchScoresById
 
         const string id = "1-1";
 
-        var (actual, context) = await sut.Wvw.GetMatchScoresById(
+        (MatchScores actual, MessageContext context) = await sut.Wvw.GetMatchScoresById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

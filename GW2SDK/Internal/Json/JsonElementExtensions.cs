@@ -40,7 +40,7 @@ internal static class JsonElementExtensions
     )
     {
         ValueList<TValue> values = new(json.GetArrayLength());
-        var enumerator = json.EnumerateArray();
+        JsonElement.ArrayEnumerator enumerator = json.EnumerateArray();
         while (enumerator.MoveNext())
         {
             values.Add(transform(enumerator.Current));
@@ -72,7 +72,7 @@ internal static class JsonElementExtensions
 #else
         ValueHashSet<TValue> values = [];
 #endif
-        var enumerator = json.EnumerateArray();
+        JsonElement.ArrayEnumerator enumerator = json.EnumerateArray();
         while (enumerator.MoveNext())
         {
             values.Add(transform(enumerator.Current));
@@ -87,7 +87,7 @@ internal static class JsonElementExtensions
     )
     {
         ValueDictionary<string, TValue> values = [];
-        var enumerator = json.EnumerateObject();
+        JsonElement.ObjectEnumerator enumerator = json.EnumerateObject();
         while (enumerator.MoveNext())
         {
             values[enumerator.Current.Name] = transform(enumerator.Current.Value);
@@ -103,7 +103,7 @@ internal static class JsonElementExtensions
     ) where TKey : notnull
     {
         ValueDictionary<TKey, TValue> values = [];
-        var enumerator = json.EnumerateObject();
+        JsonElement.ObjectEnumerator enumerator = json.EnumerateObject();
         while (enumerator.MoveNext())
         {
             values[keySelector(enumerator.Current.Name)] = resultSelector(enumerator.Current.Value);

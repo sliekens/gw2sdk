@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pvp.Seasons;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pvp.Seasons;
 
@@ -12,7 +13,7 @@ public class GuildLeaderboardEntries(ITestOutputHelper outputHelper)
         LoggingHandler.Output.Value = outputHelper;
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Pvp.GetLeaderboardEntries(
+        (HashSet<LeaderboardEntry> actual, MessageContext context) = await sut.Pvp.GetLeaderboardEntries(
             seasonId,
             boardId,
             regionId,

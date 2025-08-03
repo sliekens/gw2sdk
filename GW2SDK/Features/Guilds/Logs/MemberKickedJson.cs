@@ -13,7 +13,7 @@ internal static class MemberKickedJson
         RequiredMember user = "user";
         RequiredMember kickedBy = "kicked_by";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

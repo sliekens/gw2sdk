@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pve.Pets;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pve.Pets;
 
@@ -11,7 +12,7 @@ public class PetById
 
         const int id = 1;
 
-        var (actual, context) = await sut.Pve.Pets.GetPetById(
+        (Pet actual, MessageContext context) = await sut.Pve.Pets.GetPetById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

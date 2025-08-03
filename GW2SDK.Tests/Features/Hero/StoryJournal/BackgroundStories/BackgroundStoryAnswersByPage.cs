@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.StoryJournal.BackgroundStories;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.StoryJournal.BackgroundStories;
 
@@ -10,7 +11,7 @@ public class BackgroundStoryAnswersByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
-        var (actual, context) = await sut.Hero.StoryJournal.GetBackgroundStoryAnswersByPage(
+        (HashSet<BackgroundStoryAnswer> actual, MessageContext context) = await sut.Hero.StoryJournal.GetBackgroundStoryAnswersByPage(
             0,
             pageSize,
             cancellationToken: TestContext.Current.CancellationToken

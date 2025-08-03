@@ -8,9 +8,9 @@ public class WeeklyObjectivesProgress
     public async Task Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = TestConfiguration.ApiKey;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
-        var (actual, context) = await sut.WizardsVault.GetWeeklyObjectivesProgress(
+        (GuildWars2.WizardsVault.Objectives.WeeklyObjectivesProgress actual, MessageContext context) = await sut.WizardsVault.GetWeeklyObjectivesProgress(
             accessToken.Key,
             cancellationToken: TestContext.Current.CancellationToken
         );

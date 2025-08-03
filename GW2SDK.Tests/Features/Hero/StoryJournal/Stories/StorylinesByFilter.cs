@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.StoryJournal.Stories;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.StoryJournal.Stories;
 
@@ -15,7 +16,7 @@ public class StorylinesByFilter
             "215AAA0F-CDAC-4F93-86DA-C155A99B5784"
         ];
 
-        var (actual, context) = await sut.Hero.StoryJournal.GetStorylinesByIds(
+        (HashSet<Storyline> actual, MessageContext context) = await sut.Hero.StoryJournal.GetStorylinesByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

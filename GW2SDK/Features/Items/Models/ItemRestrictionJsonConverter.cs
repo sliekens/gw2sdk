@@ -14,7 +14,7 @@ internal sealed class ItemRestrictionJsonConverter : JsonConverter<ItemRestricti
         JsonSerializerOptions options
     )
     {
-        using var json = JsonDocument.ParseValue(ref reader);
+        using JsonDocument json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
@@ -48,14 +48,14 @@ internal sealed class ItemRestrictionJsonConverter : JsonConverter<ItemRestricti
     {
         writer.WriteStartObject();
         writer.WriteStartArray("races");
-        foreach (var race in value.Races)
+        foreach (Extensible<RaceName> race in value.Races)
         {
             writer.WriteStringValue(race.ToString());
         }
 
         writer.WriteEndArray();
         writer.WriteStartArray("professions");
-        foreach (var profession in value.Professions)
+        foreach (Extensible<ProfessionName> profession in value.Professions)
         {
             writer.WriteStringValue(profession.ToString());
         }
@@ -63,7 +63,7 @@ internal sealed class ItemRestrictionJsonConverter : JsonConverter<ItemRestricti
         writer.WriteEndArray();
 
         writer.WriteStartArray("body_types");
-        foreach (var bodyType in value.BodyTypes)
+        foreach (Extensible<BodyType> bodyType in value.BodyTypes)
         {
             writer.WriteStringValue(bodyType.ToString());
         }

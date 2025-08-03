@@ -8,9 +8,9 @@ public class AccountWvwGuild
     public async Task Can_be_found()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = TestConfiguration.ApiKey;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Wvw.GetAccountWvwGuild(
+        (GuildWars2.Wvw.Guilds.AccountWvwGuild actual, _) = await sut.Wvw.GetAccountWvwGuild(
             accessToken.Key,
             TestContext.Current.CancellationToken
         );

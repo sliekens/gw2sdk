@@ -8,7 +8,7 @@ internal static class GuildLogEntryJson
 {
     public static GuildLogEntry GetGuildLogEntry(this in JsonElement json)
     {
-        if (json.TryGetProperty("type", out var discriminator))
+        if (json.TryGetProperty("type", out JsonElement discriminator))
         {
             switch (discriminator.GetString())
             {
@@ -40,7 +40,7 @@ internal static class GuildLogEntryJson
         RequiredMember id = "id";
         RequiredMember time = "time";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

@@ -1,5 +1,6 @@
 using System.Text.Json;
 
+using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -35,14 +36,14 @@ public sealed class FinishersClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/account/finishers", accessToken);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/account/finishers", accessToken);
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
+            ValueHashSet<UnlockedFinisher> value =
                 response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetUnlockedFinisher());
             return (value, response.Context);
         }
@@ -63,16 +64,16 @@ public sealed class FinishersClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/finishers");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/finishers");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetFinisher());
+            ValueHashSet<Finisher> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetFinisher());
             return (value, response.Context);
         }
     }
@@ -84,13 +85,13 @@ public sealed class FinishersClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/finishers");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/finishers");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -108,16 +109,16 @@ public sealed class FinishersClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/finishers");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/finishers");
         requestBuilder.Query.AddId(finisherId);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetFinisher();
+            Finisher value = response.Json.RootElement.GetFinisher();
             return (value, response.Context);
         }
     }
@@ -135,16 +136,16 @@ public sealed class FinishersClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/finishers");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/finishers");
         requestBuilder.Query.AddIds(finisherIds);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetFinisher());
+            ValueHashSet<Finisher> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetFinisher());
             return (value, response.Context);
         }
     }
@@ -164,16 +165,16 @@ public sealed class FinishersClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/finishers");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/finishers");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetFinisher());
+            ValueHashSet<Finisher> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetFinisher());
             return (value, response.Context);
         }
     }

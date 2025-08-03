@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 
+using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -32,13 +33,13 @@ public sealed class EmotesClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/account/emotes", accessToken);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/account/emotes", accessToken);
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
+            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -56,15 +57,15 @@ public sealed class EmotesClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/emotes");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/emotes");
         requestBuilder.Query.AddAllIds();
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEmote());
+            ValueHashSet<Emote> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEmote());
             return (value, response.Context);
         }
     }
@@ -76,13 +77,13 @@ public sealed class EmotesClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/emotes");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/emotes");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
+            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -98,15 +99,15 @@ public sealed class EmotesClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/emotes");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/emotes");
         requestBuilder.Query.AddId(emoteId);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetEmote();
+            Emote value = response.Json.RootElement.GetEmote();
             return (value, response.Context);
         }
     }
@@ -122,15 +123,15 @@ public sealed class EmotesClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/emotes");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/emotes");
         requestBuilder.Query.AddIds(emoteIds);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEmote());
+            ValueHashSet<Emote> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEmote());
             return (value, response.Context);
         }
     }
@@ -148,15 +149,15 @@ public sealed class EmotesClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/emotes");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/emotes");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEmote());
+            ValueHashSet<Emote> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEmote());
             return (value, response.Context);
         }
     }

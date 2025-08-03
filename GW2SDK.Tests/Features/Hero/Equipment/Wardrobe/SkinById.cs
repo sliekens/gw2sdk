@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Equipment.Wardrobe;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Wardrobe;
 
@@ -11,7 +12,7 @@ public class SkinById
 
         const int id = 1;
 
-        var (actual, context) = await sut.Hero.Equipment.Wardrobe.GetSkinById(
+        (EquipmentSkin actual, MessageContext context) = await sut.Hero.Equipment.Wardrobe.GetSkinById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

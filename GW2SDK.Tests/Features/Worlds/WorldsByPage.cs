@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Worlds;
 
 namespace GuildWars2.Tests.Features.Worlds;
 
@@ -10,7 +11,7 @@ public sealed class WorldsByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
-        var (actual, context) = await sut.Worlds.GetWorldsByPage(
+        (HashSet<World> actual, MessageContext context) = await sut.Worlds.GetWorldsByPage(
             0,
             pageSize,
             cancellationToken: TestContext.Current.CancellationToken

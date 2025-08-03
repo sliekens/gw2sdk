@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Wvw.Objectives;
 
 namespace GuildWars2.Tests.Features.Wvw.Objectives;
 
@@ -10,7 +11,7 @@ public class ObjectivesByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
-        var (actual, context) = await sut.Wvw.GetObjectivesByPage(
+        (HashSet<Objective> actual, MessageContext context) = await sut.Wvw.GetObjectivesByPage(
             0,
             pageSize,
             cancellationToken: TestContext.Current.CancellationToken

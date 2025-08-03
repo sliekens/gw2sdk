@@ -18,14 +18,14 @@ public class SensibleDefaultsTest(AssemblyFixture fixture) : IClassFixture<Assem
          * => Sunday
          *
          */
-        var enums = fixture.Assembly.ExportedTypes.Where(type => type.IsEnum).ToList();
+        List<Type> enums = fixture.Assembly.ExportedTypes.Where(type => type.IsEnum).ToList();
         Assert.All(
             enums,
             type =>
             {
                 if (HasDefaultMember(type))
                 {
-                    var annotation = type.GetCustomAttribute<DefaultValueAttribute>()
+                    DefaultValueAttribute annotation = type.GetCustomAttribute<DefaultValueAttribute>()
                         ?? throw new InvalidOperationException(
                             $"Enum '{type}' has an implicit default value, change its value or mark it as [DefaultValue]."
                         );
@@ -49,7 +49,7 @@ public class SensibleDefaultsTest(AssemblyFixture fixture) : IClassFixture<Assem
 
         static bool HasDefaultMember(Type enumType)
         {
-            var underlyingType = Enum.GetUnderlyingType(enumType);
+            Type underlyingType = Enum.GetUnderlyingType(enumType);
             if (underlyingType == typeof(int))
             {
                 return Enum.IsDefined(enumType, 0);

@@ -13,7 +13,7 @@ internal static class StorylineJson
         RequiredMember order = "order";
         RequiredMember stories = "stories";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

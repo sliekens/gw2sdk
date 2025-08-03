@@ -12,7 +12,7 @@ internal static class RecipeFlagsJson
         var autoLearned = false;
         var learnedFromItem = false;
         ValueList<string> others = [];
-        foreach (var entry in json.EnumerateArray())
+        foreach (JsonElement entry in json.EnumerateArray())
         {
             if (entry.ValueEquals("AutoLearned"))
             {

@@ -102,7 +102,7 @@ public sealed class ValueDictionary<TKey, TValue> : Dictionary<TKey, TValue>,
 
         return Count == other.Count
             && this.All(pair =>
-                other.TryGetValue(pair.Key, out var otherValue)
+                other.TryGetValue(pair.Key, out TValue? otherValue)
                 && EqualityComparer<TValue>.Default.Equals(pair.Value, otherValue)
             );
     }
@@ -119,7 +119,7 @@ public sealed class ValueDictionary<TKey, TValue> : Dictionary<TKey, TValue>,
     public override int GetHashCode()
     {
         HashCode hash = new();
-        foreach (var kvp in this.OrderBy(kv => kv.Key))
+        foreach (KeyValuePair<TKey, TValue> kvp in this.OrderBy(kv => kv.Key))
         {
             hash.Add(kvp.Key);
             hash.Add(kvp.Value);

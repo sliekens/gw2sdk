@@ -12,7 +12,7 @@ public class Miniatures
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<Miniature> actual, MessageContext context) =
             await sut.Hero.Equipment.Miniatures.GetMiniatures(
                 cancellationToken: TestContext.Current.CancellationToken
             );

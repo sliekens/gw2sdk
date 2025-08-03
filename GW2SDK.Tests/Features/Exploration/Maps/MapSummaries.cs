@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 
+using GuildWars2.Exploration.Maps;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Exploration.Maps;
@@ -11,7 +12,7 @@ public class MapSummaries
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Exploration.GetMapSummaries(
+        (HashSet<MapSummary> actual, MessageContext context) = await sut.Exploration.GetMapSummaries(
             cancellationToken: TestContext.Current.CancellationToken
         );
 

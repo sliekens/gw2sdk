@@ -10,7 +10,7 @@ internal static class BuffJson
     {
         RequiredMember skillId = "skill_id";
         OptionalMember description = "description";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (skillId.Match(member))
             {

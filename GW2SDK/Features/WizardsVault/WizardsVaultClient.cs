@@ -1,5 +1,6 @@
 using System.Text.Json;
 
+using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 using GuildWars2.WizardsVault.AstralRewards;
@@ -36,15 +37,15 @@ public sealed class WizardsVaultClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wizardsvault");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wizardsvault");
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSeason();
+            Season value = response.Json.RootElement.GetSeason();
             return (value, response.Context);
         }
     }
@@ -66,17 +67,17 @@ public sealed class WizardsVaultClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet(
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet(
             "v2/account/wizardsvault/listings",
             accessToken
         );
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
+            ValueHashSet<PurchasedAstralReward> value =
                 response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetPurchasedAstralReward());
             return (value, response.Context);
         }
@@ -99,14 +100,14 @@ public sealed class WizardsVaultClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/account/wizardsvault/daily", accessToken);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/account/wizardsvault/daily", accessToken);
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetDailyObjectivesProgress();
+            DailyObjectivesProgress value = response.Json.RootElement.GetDailyObjectivesProgress();
             return (value, response.Context);
         }
     }
@@ -128,14 +129,14 @@ public sealed class WizardsVaultClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/account/wizardsvault/weekly", accessToken);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/account/wizardsvault/weekly", accessToken);
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetWeeklyObjectivesProgress();
+            WeeklyObjectivesProgress value = response.Json.RootElement.GetWeeklyObjectivesProgress();
             return (value, response.Context);
         }
     }
@@ -157,14 +158,14 @@ public sealed class WizardsVaultClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/account/wizardsvault/special", accessToken);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/account/wizardsvault/special", accessToken);
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSpecialObjectivesProgress();
+            SpecialObjectivesProgress value = response.Json.RootElement.GetSpecialObjectivesProgress();
             return (value, response.Context);
         }
     }
@@ -184,16 +185,16 @@ public sealed class WizardsVaultClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wizardsvault/listings");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wizardsvault/listings");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAstralReward());
+            ValueHashSet<AstralReward> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAstralReward());
             return (value, response.Context);
         }
     }
@@ -205,13 +206,13 @@ public sealed class WizardsVaultClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wizardsvault/listings");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wizardsvault/listings");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -229,16 +230,16 @@ public sealed class WizardsVaultClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wizardsvault/listings");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wizardsvault/listings");
         requestBuilder.Query.AddId(astralRewardId);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetAstralReward();
+            AstralReward value = response.Json.RootElement.GetAstralReward();
             return (value, response.Context);
         }
     }
@@ -256,16 +257,16 @@ public sealed class WizardsVaultClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wizardsvault/listings");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wizardsvault/listings");
         requestBuilder.Query.AddIds(astralRewardIds);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAstralReward());
+            ValueHashSet<AstralReward> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAstralReward());
             return (value, response.Context);
         }
     }
@@ -285,16 +286,16 @@ public sealed class WizardsVaultClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wizardsvault/listings");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wizardsvault/listings");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAstralReward());
+            ValueHashSet<AstralReward> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAstralReward());
             return (value, response.Context);
         }
     }
@@ -314,16 +315,16 @@ public sealed class WizardsVaultClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wizardsvault/objectives");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wizardsvault/objectives");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetObjective());
+            ValueHashSet<Objective> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetObjective());
             return (value, response.Context);
         }
     }
@@ -335,13 +336,13 @@ public sealed class WizardsVaultClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wizardsvault/objectives");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wizardsvault/objectives");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -359,16 +360,16 @@ public sealed class WizardsVaultClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wizardsvault/objectives");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wizardsvault/objectives");
         requestBuilder.Query.AddId(objectiveId);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetObjective();
+            Objective value = response.Json.RootElement.GetObjective();
             return (value, response.Context);
         }
     }
@@ -386,16 +387,16 @@ public sealed class WizardsVaultClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wizardsvault/objectives");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wizardsvault/objectives");
         requestBuilder.Query.AddIds(objectiveIds);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetObjective());
+            ValueHashSet<Objective> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetObjective());
             return (value, response.Context);
         }
     }
@@ -415,16 +416,16 @@ public sealed class WizardsVaultClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wizardsvault/objectives");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wizardsvault/objectives");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetObjective());
+            ValueHashSet<Objective> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetObjective());
             return (value, response.Context);
         }
     }

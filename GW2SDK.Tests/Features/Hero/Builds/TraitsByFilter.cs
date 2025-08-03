@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Builds;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Builds;
 
@@ -15,7 +16,7 @@ public class TraitsByFilter
             222
         ];
 
-        var (actual, context) = await sut.Hero.Builds.GetTraitsByIds(
+        (HashSet<Trait> actual, MessageContext context) = await sut.Hero.Builds.GetTraitsByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

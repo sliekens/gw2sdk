@@ -11,7 +11,7 @@ internal static class SuperAdventureBoxUpgradeJson
         RequiredMember id = "id";
         OptionalMember name = "name";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 
+using GuildWars2.Chat;
 using GuildWars2.Hero.Equipment.Dyes;
 using GuildWars2.Tests.TestInfrastructure;
 
@@ -12,7 +13,7 @@ public class Colors
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.Equipment.Dyes.GetColors(
+        (HashSet<DyeColor> actual, MessageContext context) = await sut.Hero.Equipment.Dyes.GetColors(
             cancellationToken: TestContext.Current.CancellationToken
         );
 
@@ -39,7 +40,7 @@ public class Colors
 
                 if (color.ItemId.HasValue)
                 {
-                    var link = color.GetChatLink();
+                    ItemLink? link = color.GetChatLink();
                     Assert.Equal(color.ItemId, link?.ItemId);
                 }
 

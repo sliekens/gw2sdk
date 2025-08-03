@@ -19,7 +19,7 @@ internal static class HealingAdjustJson
         RequiredMember icon = "icon";
         RequiredMember hitCount = "hit_count";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

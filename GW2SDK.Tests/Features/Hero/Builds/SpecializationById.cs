@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Builds;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Builds;
 
@@ -11,7 +12,7 @@ public class SpecializationById
 
         const int id = 1;
 
-        var (actual, context) = await sut.Hero.Builds.GetSpecializationById(
+        (Specialization actual, MessageContext context) = await sut.Hero.Builds.GetSpecializationById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

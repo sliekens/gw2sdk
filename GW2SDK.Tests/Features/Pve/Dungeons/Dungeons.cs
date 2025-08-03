@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pve.Dungeons;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pve.Dungeons;
 
@@ -9,7 +10,7 @@ public class Dungeons
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Pve.Dungeons.GetDungeons(
+        (HashSet<Dungeon> actual, MessageContext context) = await sut.Pve.Dungeons.GetDungeons(
             cancellationToken: TestContext.Current.CancellationToken
         );
 

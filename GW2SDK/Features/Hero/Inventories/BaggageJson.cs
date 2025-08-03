@@ -10,7 +10,7 @@ internal static class BaggageJson
     {
         RequiredMember bags = "bags";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (bags.Match(member))
             {

@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pvp.Ranks;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pvp.Ranks;
 
@@ -15,7 +16,7 @@ public class RanksByFilter
             9
         ];
 
-        var (actual, context) = await sut.Pvp.GetRanksByIds(
+        (HashSet<Rank> actual, MessageContext context) = await sut.Pvp.GetRanksByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Wvw.Upgrades;
 
 namespace GuildWars2.Tests.Features.Wvw.Upgrades;
 
@@ -9,7 +10,7 @@ public class Upgrades
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<ObjectiveUpgrade> actual, MessageContext context) =
             await sut.Wvw.GetUpgrades(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);

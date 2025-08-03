@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.Features.Markup;
+﻿using GuildWars2.Hero.Builds;
+using GuildWars2.Tests.Features.Markup;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Builds;
@@ -10,7 +11,7 @@ public class Traits
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<Trait> actual, MessageContext context) =
             await sut.Hero.Builds.GetTraits(
                 cancellationToken: TestContext.Current.CancellationToken
             );

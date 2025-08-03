@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Exploration.PointsOfInterest;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Exploration.PointsOfInterest;
 
@@ -14,7 +15,7 @@ public class PointsOfInterestByPage
         const int regionId = 1;
         const int mapId = 26;
         const int pageSize = 3;
-        var (actual, context) = await sut.Exploration.GetPointsOfInterestByPage(
+        (HashSet<PointOfInterest> actual, MessageContext context) = await sut.Exploration.GetPointsOfInterestByPage(
             continentId,
             floorId,
             regionId,

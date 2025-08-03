@@ -26,7 +26,7 @@ internal sealed class BulkRequest(Uri requestUri)
         using var request = new HttpRequestMessage(HttpMethod.Get, location);
         request.Headers.AcceptEncoding.ParseAdd("gzip");
 
-        using var response = await httpClient.SendAsync(
+        using HttpResponseMessage response = await httpClient.SendAsync(
                 request,
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
@@ -35,7 +35,7 @@ internal sealed class BulkRequest(Uri requestUri)
 
         response.EnsureSuccessStatusCode();
 
-        var content = await response.Content.ReadAsStreamAsync(cancellationToken)
+        Stream content = await response.Content.ReadAsStreamAsync(cancellationToken)
             .ConfigureAwait(false);
         content = new GZipStream(content, CompressionMode.Decompress);
         await using (content)

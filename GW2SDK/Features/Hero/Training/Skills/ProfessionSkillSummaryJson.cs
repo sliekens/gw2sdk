@@ -14,7 +14,7 @@ internal static class ProfessionSkillSummaryJson
         NullableMember source = "source";
         NullableMember attunement = "attunement";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

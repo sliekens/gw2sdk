@@ -10,7 +10,7 @@ internal static class AttributesJson
     public static ValueDictionary<AttributeName, int> GetAttributes(this in JsonElement json)
     {
         ValueDictionary<AttributeName, int> result = new(4);
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             // Somemetimes the old attribute names (or partial names) are used in the API
             if (member.NameEquals("Power"))

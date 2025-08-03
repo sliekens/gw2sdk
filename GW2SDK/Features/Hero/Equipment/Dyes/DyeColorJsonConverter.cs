@@ -14,8 +14,8 @@ internal sealed class DyeColorJsonConverter : JsonConverter<DyeColor>
         JsonSerializerOptions options
     )
     {
-        using var document = JsonDocument.ParseValue(ref reader);
-        var json = document.RootElement;
+        using JsonDocument document = JsonDocument.ParseValue(ref reader);
+        JsonElement json = document.RootElement;
         return new DyeColor
         {
             Id = json.GetProperty("id").GetInt32(),

@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Exploration.Sectors;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Exploration.Sectors;
 
@@ -15,7 +16,7 @@ public class SectorById
         const int mapId = 26;
         const int sectorId = 513;
 
-        var (actual, context) = await sut.Exploration.GetSectorById(
+        (Sector actual, MessageContext context) = await sut.Exploration.GetSectorById(
             continentId,
             floorId,
             regionId,

@@ -9,7 +9,7 @@ public class BackgroundStoryAnswersIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<string> actual, MessageContext context) =
             await sut.Hero.StoryJournal.GetBackgroundStoryAnswersIndex(
                 TestContext.Current.CancellationToken
             );

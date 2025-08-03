@@ -23,7 +23,7 @@ internal sealed class EquipmentSkinJsonConverter : JsonConverter<EquipmentSkin>
         JsonSerializerOptions options
     )
     {
-        using var json = JsonDocument.ParseValue(ref reader);
+        using JsonDocument json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
@@ -38,7 +38,7 @@ internal sealed class EquipmentSkinJsonConverter : JsonConverter<EquipmentSkin>
 
     public static EquipmentSkin Read(in JsonElement json)
     {
-        if (json.TryGetProperty(DiscriminatorName, out var discriminator))
+        if (json.TryGetProperty(DiscriminatorName, out JsonElement discriminator))
         {
             switch (discriminator.ToString())
             {
@@ -102,7 +102,7 @@ internal sealed class EquipmentSkinJsonConverter : JsonConverter<EquipmentSkin>
         writer.WritePropertyName("flags");
         SkinFlagsJsonConverter.Write(writer, value.Flags);
         writer.WriteStartArray("races");
-        foreach (var race in value.Races)
+        foreach (Extensible<RaceName> race in value.Races)
         {
             writer.WriteStringValue(race.ToString());
         }

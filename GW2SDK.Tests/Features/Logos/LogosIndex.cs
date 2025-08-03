@@ -9,7 +9,7 @@ public class LogosIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<string> actual, MessageContext context) =
             await sut.Logos.GetLogosIndex(TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);

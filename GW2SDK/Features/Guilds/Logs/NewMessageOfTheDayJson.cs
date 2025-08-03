@@ -13,7 +13,7 @@ internal static class NewMessageOfTheDayJson
         RequiredMember user = "user";
         RequiredMember motd = "motd";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

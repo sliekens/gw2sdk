@@ -13,7 +13,7 @@ internal sealed class JadeBotSkinJsonConverter : JsonConverter<JadeBotSkin>
         JsonSerializerOptions options
     )
     {
-        using var document = JsonDocument.ParseValue(ref reader);
+        using JsonDocument document = JsonDocument.ParseValue(ref reader);
         return Read(document.RootElement);
     }
 

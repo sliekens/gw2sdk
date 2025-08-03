@@ -20,7 +20,7 @@ internal static class MiniatureJson
         RequiredMember chatLink = "chat_link";
         OptionalMember icon = "icon";
         RequiredMember minipetId = "minipet_id";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {
@@ -75,7 +75,7 @@ internal static class MiniatureJson
             }
             else if (member.NameEquals("details"))
             {
-                foreach (var detail in member.Value.EnumerateObject())
+                foreach (JsonProperty detail in member.Value.EnumerateObject())
                 {
                     if (minipetId.Match(detail))
                     {

@@ -11,7 +11,7 @@ internal static class LeaderboardJson
         RequiredMember settings = "settings";
         RequiredMember scorings = "scorings";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (settings.Match(member))
             {

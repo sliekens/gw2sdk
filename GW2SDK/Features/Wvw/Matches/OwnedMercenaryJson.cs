@@ -14,7 +14,7 @@ internal static class OwnedMercenaryJson
         RequiredMember pointsTick = "points_tick";
         RequiredMember pointsCapture = "points_capture";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

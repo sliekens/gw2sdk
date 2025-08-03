@@ -9,7 +9,7 @@ public class WorldBosses
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<string> actual, MessageContext context) =
             await sut.Pve.WorldBosses.GetWorldBosses(TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);

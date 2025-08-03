@@ -24,7 +24,7 @@ internal static class PrefixedBuffJson
         RequiredMember prefixIcon = "icon";
         OptionalMember prefixStatus = "status";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {
@@ -67,7 +67,7 @@ internal static class PrefixedBuffJson
             }
             else if (member.NameEquals("prefix"))
             {
-                foreach (var prefixMember in member.Value.EnumerateObject())
+                foreach (JsonProperty prefixMember in member.Value.EnumerateObject())
                 {
                     if (prefixIcon.Match(prefixMember))
                     {

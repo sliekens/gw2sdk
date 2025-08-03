@@ -18,7 +18,7 @@ internal static class DyeColorJson
         NullableMember itemId = "item";
         RequiredMember categories = "categories";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {
@@ -64,7 +64,7 @@ internal static class DyeColorJson
 
         // The API puts all hues, materials, and color sets into the same array,
         // which is uncomfortable, so split them into properties
-        var (hue, material, set) = categories.Map(static (in JsonElement value) => value.GetCategories());
+        (Extensible<Hue> hue, Extensible<Material> material, Extensible<ColorSet> set) = categories.Map(static (in JsonElement value) => value.GetCategories());
 
         // the first element is the hue, second is material, third is color set
         return new DyeColor

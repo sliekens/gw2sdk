@@ -8,9 +8,9 @@ public class UnlockedNodes
     public async Task Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var token = TestConfiguration.ApiKey;
+        ApiKey token = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Pve.Home.GetUnlockedNodes(
+        (HashSet<string> actual, _) = await sut.Pve.Home.GetUnlockedNodes(
             token.Key,
             TestContext.Current.CancellationToken
         );

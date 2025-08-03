@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 
+using GuildWars2.Collections;
 using GuildWars2.Hero.StoryJournal.BackgroundStories;
 using GuildWars2.Hero.StoryJournal.Stories;
 using GuildWars2.Http;
@@ -39,17 +40,17 @@ public sealed class StoryJournalClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet(
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet(
             $"v2/characters/{characterName}/backstory",
             accessToken
         );
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetCharacterBackgroundStory();
+            CharacterBackgroundStory value = response.Json.RootElement.GetCharacterBackgroundStory();
             return (value, response.Context);
         }
     }
@@ -70,16 +71,16 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet(
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet(
             $"v2/characters/{characterName}/quests",
             accessToken
         );
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -100,16 +101,16 @@ public sealed class StoryJournalClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/backstory/questions");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/backstory/questions");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
+            ValueHashSet<BackgroundStoryQuestion> value =
                 response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetBackgroundStoryQuestion()
                 );
             return (value, response.Context);
@@ -122,13 +123,13 @@ public sealed class StoryJournalClient
     public async Task<(HashSet<int> Value, MessageContext Context)>
         GetBackgroundStoryQuestionsIndex(CancellationToken cancellationToken = default)
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/backstory/questions");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/backstory/questions");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -147,16 +148,16 @@ public sealed class StoryJournalClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/backstory/questions");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/backstory/questions");
         requestBuilder.Query.AddId(questionId);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetBackgroundStoryQuestion();
+            BackgroundStoryQuestion value = response.Json.RootElement.GetBackgroundStoryQuestion();
             return (value, response.Context);
         }
     }
@@ -175,16 +176,16 @@ public sealed class StoryJournalClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/backstory/questions");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/backstory/questions");
         requestBuilder.Query.AddIds(questionIds);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
+            ValueHashSet<BackgroundStoryQuestion> value =
                 response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetBackgroundStoryQuestion()
                 );
             return (value, response.Context);
@@ -207,16 +208,16 @@ public sealed class StoryJournalClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/backstory/questions");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/backstory/questions");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
+            ValueHashSet<BackgroundStoryQuestion> value =
                 response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetBackgroundStoryQuestion()
                 );
             return (value, response.Context);
@@ -239,16 +240,16 @@ public sealed class StoryJournalClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/backstory/answers");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/backstory/answers");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
+            ValueHashSet<BackgroundStoryAnswer> value =
                 response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetBackgroundStoryAnswer());
             return (value, response.Context);
         }
@@ -260,13 +261,13 @@ public sealed class StoryJournalClient
     public async Task<(HashSet<string> Value, MessageContext Context)>
         GetBackgroundStoryAnswersIndex(CancellationToken cancellationToken = default)
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/backstory/answers");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/backstory/answers");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
+            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -285,16 +286,16 @@ public sealed class StoryJournalClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/backstory/answers");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/backstory/answers");
         requestBuilder.Query.AddId(answerId);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetBackgroundStoryAnswer();
+            BackgroundStoryAnswer value = response.Json.RootElement.GetBackgroundStoryAnswer();
             return (value, response.Context);
         }
     }
@@ -313,16 +314,16 @@ public sealed class StoryJournalClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/backstory/answers");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/backstory/answers");
         requestBuilder.Query.AddIds(answerIds);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
+            ValueHashSet<BackgroundStoryAnswer> value =
                 response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetBackgroundStoryAnswer());
             return (value, response.Context);
         }
@@ -344,16 +345,16 @@ public sealed class StoryJournalClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/backstory/answers");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/backstory/answers");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
+            ValueHashSet<BackgroundStoryAnswer> value =
                 response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetBackgroundStoryAnswer());
             return (value, response.Context);
         }
@@ -374,16 +375,16 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/stories");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/stories");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStory());
+            ValueHashSet<Story> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStory());
             return (value, response.Context);
         }
     }
@@ -395,13 +396,13 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/stories");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/stories");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -419,16 +420,16 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/stories");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/stories");
         requestBuilder.Query.AddId(storyId);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetStory();
+            Story value = response.Json.RootElement.GetStory();
             return (value, response.Context);
         }
     }
@@ -446,16 +447,16 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/stories");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/stories");
         requestBuilder.Query.AddIds(storyIds);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStory());
+            ValueHashSet<Story> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStory());
             return (value, response.Context);
         }
     }
@@ -475,16 +476,16 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/stories");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/stories");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStory());
+            ValueHashSet<Story> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStory());
             return (value, response.Context);
         }
     }
@@ -504,16 +505,16 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/stories/seasons");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/stories/seasons");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStoryline());
+            ValueHashSet<Storyline> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStoryline());
             return (value, response.Context);
         }
     }
@@ -525,13 +526,13 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/stories/seasons");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/stories/seasons");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
+            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -549,16 +550,16 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/stories/seasons");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/stories/seasons");
         requestBuilder.Query.AddId(storylineId);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetStoryline();
+            Storyline value = response.Json.RootElement.GetStoryline();
             return (value, response.Context);
         }
     }
@@ -576,16 +577,16 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/stories/seasons");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/stories/seasons");
         requestBuilder.Query.AddIds(storylineIds);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStoryline());
+            ValueHashSet<Storyline> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStoryline());
             return (value, response.Context);
         }
     }
@@ -605,16 +606,16 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/stories/seasons");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/stories/seasons");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStoryline());
+            ValueHashSet<Storyline> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStoryline());
             return (value, response.Context);
         }
     }
@@ -634,16 +635,16 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/quests");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/quests");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStoryStep());
+            ValueHashSet<StoryStep> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStoryStep());
             return (value, response.Context);
         }
     }
@@ -655,13 +656,13 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/quests");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/quests");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -679,16 +680,16 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/quests");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/quests");
         requestBuilder.Query.AddId(storyStepId);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetStoryStep();
+            StoryStep value = response.Json.RootElement.GetStoryStep();
             return (value, response.Context);
         }
     }
@@ -706,16 +707,16 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/quests");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/quests");
         requestBuilder.Query.AddIds(storyStepIds);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStoryStep());
+            ValueHashSet<StoryStep> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStoryStep());
             return (value, response.Context);
         }
     }
@@ -735,16 +736,16 @@ public sealed class StoryJournalClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/quests");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/quests");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStoryStep());
+            ValueHashSet<StoryStep> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStoryStep());
             return (value, response.Context);
         }
     }

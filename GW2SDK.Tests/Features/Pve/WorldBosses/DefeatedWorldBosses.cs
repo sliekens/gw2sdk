@@ -8,10 +8,10 @@ public class DefeatedWorldBosses
     public async Task Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = TestConfiguration.ApiKey;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
         // Resets each day, not easy to prove it works
-        var (actual, _) = await sut.Pve.WorldBosses.GetDefeatedWorldBosses(
+        (HashSet<string> actual, _) = await sut.Pve.WorldBosses.GetDefeatedWorldBosses(
             accessToken.Key,
             TestContext.Current.CancellationToken
         );

@@ -13,7 +13,7 @@ public class JadeBotSkins
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<JadeBotSkin> actual, MessageContext context) =
             await sut.Hero.Equipment.JadeBots.GetJadeBotSkins(
                 cancellationToken: TestContext.Current.CancellationToken
             );

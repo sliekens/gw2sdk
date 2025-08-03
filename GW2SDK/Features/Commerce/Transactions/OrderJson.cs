@@ -14,7 +14,7 @@ internal static class OrderJson
         RequiredMember quantity = "quantity";
         RequiredMember created = "created";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

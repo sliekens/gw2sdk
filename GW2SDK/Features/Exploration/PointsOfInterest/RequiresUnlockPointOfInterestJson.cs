@@ -16,7 +16,7 @@ internal static class RequiresUnlockPointOfInterestJson
         RequiredMember id = "id";
         RequiredMember chatLink = "chat_link";
         RequiredMember icon = "icon";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

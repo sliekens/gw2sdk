@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.StoryJournal.Stories;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.StoryJournal.Stories;
 
@@ -11,7 +12,7 @@ public class StoryStepById
 
         const int id = 15;
 
-        var (actual, context) = await sut.Hero.StoryJournal.GetStoryStepById(
+        (StoryStep actual, MessageContext context) = await sut.Hero.StoryJournal.GetStoryStepById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

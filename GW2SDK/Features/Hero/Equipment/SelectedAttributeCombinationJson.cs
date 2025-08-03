@@ -12,7 +12,7 @@ internal static class SelectedAttributeCombinationJson
     {
         RequiredMember id = "id";
         RequiredMember attributes = "attributes";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

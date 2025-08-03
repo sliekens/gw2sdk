@@ -19,7 +19,7 @@ internal static class GuildWvwUpgradeRecipeJson
         NullableMember outputUpgradeId = "output_upgrade_id";
         RequiredMember id = "id";
         RequiredMember chatLink = "chat_link";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

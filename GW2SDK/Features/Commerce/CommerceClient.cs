@@ -1,6 +1,7 @@
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 
+using GuildWars2.Collections;
 using GuildWars2.Commerce.Delivery;
 using GuildWars2.Commerce.Exchange;
 using GuildWars2.Commerce.Listings;
@@ -40,14 +41,14 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/commerce/delivery", accessToken);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/commerce/delivery", accessToken);
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetDeliveryBox();
+            DeliveryBox value = response.Json.RootElement.GetDeliveryBox();
             return (value, response.Context);
         }
     }
@@ -63,13 +64,13 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/commerce/prices");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/commerce/prices");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -85,15 +86,15 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/commerce/prices");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/commerce/prices");
         requestBuilder.Query.AddId(itemId);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetItemPrice();
+            ItemPrice value = response.Json.RootElement.GetItemPrice();
             return (value, response.Context);
         }
     }
@@ -110,15 +111,15 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/commerce/prices");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/commerce/prices");
         requestBuilder.Query.AddIds(itemIds);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetItemPrice());
+            ValueHashSet<ItemPrice> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetItemPrice());
             return (value, response.Context);
         }
     }
@@ -156,7 +157,7 @@ public sealed class CommerceClient
             CancellationToken cancellationToken
         )
         {
-            var (values, context) =
+            (HashSet<ItemPrice> values, MessageContext context) =
                 await GetItemPricesByIds(chunk, missingMemberBehavior, cancellationToken)
                     .ConfigureAwait(false);
             return values.Select(value => (value, context)).ToList();
@@ -178,8 +179,8 @@ public sealed class CommerceClient
         [EnumeratorCancellation] CancellationToken cancellationToken = default
     )
     {
-        var (value, _) = await GetItemPricesIndex(cancellationToken).ConfigureAwait(false);
-        var producer = GetItemPricesBulk(
+        (HashSet<int> value, _) = await GetItemPricesIndex(cancellationToken).ConfigureAwait(false);
+        IAsyncEnumerable<(ItemPrice Value, MessageContext Context)> producer = GetItemPricesBulk(
             value,
             missingMemberBehavior,
             degreeOfParallelism,
@@ -187,7 +188,7 @@ public sealed class CommerceClient
             progress,
             cancellationToken
         );
-        await foreach (var itemPrice in producer.ConfigureAwait(false))
+        await foreach ((ItemPrice Value, MessageContext Context) itemPrice in producer.ConfigureAwait(false))
         {
             yield return itemPrice;
         }
@@ -204,13 +205,13 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/commerce/listings");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/commerce/listings");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -226,15 +227,15 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/commerce/listings");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/commerce/listings");
         requestBuilder.Query.AddId(itemId);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetOrderBook();
+            OrderBook value = response.Json.RootElement.GetOrderBook();
             return (value, response.Context);
         }
     }
@@ -251,15 +252,15 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/commerce/listings");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/commerce/listings");
         requestBuilder.Query.AddIds(itemIds);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetOrderBook());
+            ValueHashSet<OrderBook> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetOrderBook());
             return (value, response.Context);
         }
     }
@@ -297,7 +298,7 @@ public sealed class CommerceClient
             CancellationToken cancellationToken
         )
         {
-            var (values, context) =
+            (HashSet<OrderBook> values, MessageContext context) =
                 await GetOrderBooksByIds(chunk, missingMemberBehavior, cancellationToken)
                     .ConfigureAwait(false);
             return values.Select(value => (value, context)).ToList();
@@ -319,8 +320,8 @@ public sealed class CommerceClient
         [EnumeratorCancellation] CancellationToken cancellationToken = default
     )
     {
-        var (value, _) = await GetOrderBooksIndex(cancellationToken).ConfigureAwait(false);
-        var producer = GetOrderBooksBulk(
+        (HashSet<int> value, _) = await GetOrderBooksIndex(cancellationToken).ConfigureAwait(false);
+        IAsyncEnumerable<(OrderBook Value, MessageContext Context)> producer = GetOrderBooksBulk(
             value,
             missingMemberBehavior,
             degreeOfParallelism,
@@ -328,7 +329,7 @@ public sealed class CommerceClient
             progress,
             cancellationToken
         );
-        await foreach (var orderBook in producer.ConfigureAwait(false))
+        await foreach ((OrderBook Value, MessageContext Context) orderBook in producer.ConfigureAwait(false))
         {
             yield return orderBook;
         }
@@ -349,15 +350,15 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/commerce/exchange/gems");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/commerce/exchange/gems");
         requestBuilder.Query.Add("quantity", gems);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetGemsToGold();
+            GemsToGold value = response.Json.RootElement.GetGemsToGold();
             return (value, response.Context);
         }
     }
@@ -373,15 +374,15 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/commerce/exchange/coins");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/commerce/exchange/coins");
         requestBuilder.Query.Add("quantity", gold);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetGoldToGems();
+            GoldToGems value = response.Json.RootElement.GetGoldToGems();
             return (value, response.Context);
         }
     }
@@ -406,18 +407,18 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet(
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet(
             "v2/commerce/transactions/current/buys",
             accessToken
         );
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetOrder());
+            ValueHashSet<Order> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetOrder());
             return (value, response.Context);
         }
     }
@@ -438,18 +439,18 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet(
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet(
             "v2/commerce/transactions/current/sells",
             accessToken
         );
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetOrder());
+            ValueHashSet<Order> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetOrder());
             return (value, response.Context);
         }
     }
@@ -470,18 +471,18 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet(
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet(
             "v2/commerce/transactions/history/buys",
             accessToken
         );
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetTransaction());
+            ValueHashSet<Transaction> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetTransaction());
             return (value, response.Context);
         }
     }
@@ -502,18 +503,18 @@ public sealed class CommerceClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet(
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet(
             "v2/commerce/transactions/history/sells",
             accessToken
         );
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetTransaction());
+            ValueHashSet<Transaction> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetTransaction());
             return (value, response.Context);
         }
     }

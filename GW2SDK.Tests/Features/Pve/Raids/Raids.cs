@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pve.Raids;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pve.Raids;
 
@@ -9,7 +10,7 @@ public class Raids
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<Raid> actual, MessageContext context) =
             await sut.Pve.Raids.GetRaids(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);

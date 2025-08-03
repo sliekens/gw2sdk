@@ -17,7 +17,7 @@ internal static class BackgroundStoryAnswerJson
         RequiredMember question = "question";
         OptionalMember professions = "professions";
         OptionalMember races = "races";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

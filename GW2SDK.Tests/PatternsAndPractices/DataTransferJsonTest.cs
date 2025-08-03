@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 
 using GuildWars2.Tests.TestInfrastructure;
@@ -15,7 +16,7 @@ public class DataTransferJsonTest(AssemblyFixture fixture) : IClassFixture<Assem
     [Fact]
     public void JsonElement_conversions_are_extensions()
     {
-        var candidates = fixture.Assembly.DefinedTypes
+        List<MethodInfo> candidates = fixture.Assembly.DefinedTypes
             .Where(candidate => candidate.Name.EndsWith("Json", StringComparison.Ordinal))
             .SelectMany(reader => reader.GetMethods(DeclaredOnly | Public | NonPublic | Static))
             .ToList();
@@ -23,7 +24,7 @@ public class DataTransferJsonTest(AssemblyFixture fixture) : IClassFixture<Assem
             fixture.DataTransferObjects,
             dto =>
             {
-                var matches = candidates.Where(info => info.ReturnType == dto).ToList();
+                List<MethodInfo> matches = candidates.Where(info => info.ReturnType == dto).ToList();
                 Assert.All(
                     matches,
                     info =>
@@ -40,7 +41,7 @@ public class DataTransferJsonTest(AssemblyFixture fixture) : IClassFixture<Assem
                             $"{info.Name} must be an extension method."
                         );
 
-                        var parameters = info.GetParameters();
+                        ParameterInfo[] parameters = info.GetParameters();
                         Assert.Equal(typeof(JsonElement).MakeByRefType(), parameters[0].ParameterType);
                         Assert.Equal(dto.Namespace, info.DeclaringType.Namespace);
                     }

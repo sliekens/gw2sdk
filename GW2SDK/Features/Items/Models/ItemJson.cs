@@ -8,7 +8,7 @@ internal static class ItemJson
 {
     public static Item GetItem(this in JsonElement json)
     {
-        if (json.TryGetProperty("type", out var discriminator))
+        if (json.TryGetProperty("type", out JsonElement discriminator))
         {
             switch (discriminator.GetString())
             {
@@ -61,7 +61,7 @@ internal static class ItemJson
         RequiredMember id = "id";
         RequiredMember chatLink = "chat_link";
         OptionalMember icon = "icon";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

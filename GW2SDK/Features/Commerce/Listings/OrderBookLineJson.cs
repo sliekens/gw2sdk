@@ -12,7 +12,7 @@ internal static class OrderBookLineJson
         RequiredMember unitPrice = "unit_price";
         RequiredMember quantity = "quantity";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (listings.Match(member))
             {

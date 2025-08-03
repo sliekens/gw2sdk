@@ -1,5 +1,6 @@
 ﻿using GuildWars2.Chat;
 using GuildWars2.Hero;
+using GuildWars2.Hero.Builds;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Chat;
@@ -38,9 +39,9 @@ public class BuildTemplateLinkTest
     {
         var gw2 = Composer.Resolve<Gw2Client>();
 
-        var sut = BuildTemplateLink.Parse(chatLink);
+        BuildTemplateLink sut = BuildTemplateLink.Parse(chatLink);
         var actual = sut.ToString();
-        var build = await sut.GetBuild(
+        Build build = await sut.GetBuild(
             gw2,
             cancellationToken: TestContext.Current.CancellationToken
         );
@@ -49,7 +50,7 @@ public class BuildTemplateLinkTest
         Assert.Equal(professionName, sut.Profession);
         Assert.Equal(chatLink, actual);
 
-        var chatLinkRoundtrip = BuildTemplateLink.Parse(sut.ToString());
+        BuildTemplateLink chatLinkRoundtrip = BuildTemplateLink.Parse(sut.ToString());
         Assert.Equal(chatLink, chatLinkRoundtrip.ToString());
     }
 }

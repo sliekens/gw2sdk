@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Masteries;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Masteries;
 
@@ -15,7 +16,7 @@ public class MasteryTracksByFilter
             3
         ];
 
-        var (actual, context) = await sut.Hero.Masteries.GetMasteryTracksByIds(
+        (HashSet<MasteryTrack> actual, MessageContext context) = await sut.Hero.Masteries.GetMasteryTracksByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

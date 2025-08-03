@@ -21,7 +21,7 @@ internal static class AttributeAdjustmentJson
         NullableMember target = "target";
         NullableMember hitCount = "hit_count";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

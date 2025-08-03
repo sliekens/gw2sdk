@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Files;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Files;
 
@@ -11,7 +12,7 @@ public class FileById
 
         const string id = "map_vendor_ecto";
 
-        var (actual, context) = await sut.Files.GetFileById(
+        (Asset actual, MessageContext context) = await sut.Files.GetFileById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

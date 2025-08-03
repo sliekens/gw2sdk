@@ -11,16 +11,16 @@ internal sealed class ItemCard(HttpClient httpClient)
     {
         ArgumentNullException.ThrowIfNull(item);
 
-        await using var ingredientIcon = await httpClient.GetStreamAsync(item.IconUrl);
-        var itemTable = new Table().AddColumn("Icon")
+        await using Stream ingredientIcon = await httpClient.GetStreamAsync(item.IconUrl);
+        Table itemTable = new Table().AddColumn("Icon")
             .AddColumn("Ingredient")
             .AddColumn("Description");
 
         var lexer = new MarkupLexer();
         var parser = new MarkupParser();
         var converter = new SpectreMarkupConverter();
-        var tokens = MarkupLexer.Tokenize(item.Description);
-        var syntax = MarkupParser.Parse(tokens);
+        IEnumerable<MarkupToken> tokens = MarkupLexer.Tokenize(item.Description);
+        RootNode syntax = MarkupParser.Parse(tokens);
         var description = SpectreMarkupConverter.Convert(syntax);
 
         itemTable.AddRow(

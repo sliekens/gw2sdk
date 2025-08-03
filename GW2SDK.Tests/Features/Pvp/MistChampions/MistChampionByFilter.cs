@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pvp.MistChampions;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pvp.MistChampions;
 
@@ -16,7 +17,7 @@ public class MistChampionByFilter
             "BEA79596-CA8B-4D46-9B9C-EA1B606BCF42"
         ];
 
-        var (actual, context) = await sut.Pvp.GetMistChampionsByIds(
+        (HashSet<MistChampion> actual, MessageContext context) = await sut.Pvp.GetMistChampionsByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

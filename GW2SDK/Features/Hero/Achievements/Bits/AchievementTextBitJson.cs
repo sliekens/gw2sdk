@@ -9,7 +9,7 @@ internal static class AchievementTextBitJson
     public static AchievementTextBit GetAchievementTextBit(this in JsonElement json)
     {
         RequiredMember text = "text";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

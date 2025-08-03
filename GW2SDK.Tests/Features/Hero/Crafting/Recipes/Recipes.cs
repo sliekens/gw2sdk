@@ -16,7 +16,7 @@ public class Recipes
         using var handler = new JsonLinesHttpMessageHandler("Data/recipes.jsonl.gz");
         using var httpClient = new HttpClient(handler);
         var sut = new Gw2Client(httpClient);
-        await foreach (var (actual, context) in sut.Hero.Crafting.Recipes.GetRecipesBulk(
+        await foreach ((Recipe actual, MessageContext context) in sut.Hero.Crafting.Recipes.GetRecipesBulk(
                 cancellationToken: TestContext.Current.CancellationToken
             ))
         {
@@ -39,11 +39,11 @@ public class Recipes
                 }
             );
 
-            var chatLink = actual.GetChatLink();
+            RecipeLink chatLink = actual.GetChatLink();
             Assert.Equal(actual.Id, chatLink.RecipeId);
             Assert.Equal(actual.ChatLink, chatLink.ToString());
 
-            var chatLinkRoundtrip = RecipeLink.Parse(chatLink.ToString());
+            RecipeLink chatLinkRoundtrip = RecipeLink.Parse(chatLink.ToString());
             Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
         }
     }
@@ -56,7 +56,7 @@ public class Recipes
         using var handler = new JsonLinesHttpMessageHandler("Data/recipes.jsonl.gz");
         using var httpClient = new HttpClient(handler);
         var sut = new Gw2Client(httpClient);
-        await foreach (var original in sut.Hero.Crafting.Recipes
+        await foreach (Recipe original in sut.Hero.Crafting.Recipes
             .GetRecipesBulk(cancellationToken: TestContext.Current.CancellationToken)
             .ValueOnly(TestContext.Current.CancellationToken))
         {

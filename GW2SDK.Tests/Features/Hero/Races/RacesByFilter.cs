@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Hero;
+using GuildWars2.Hero.Races;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Races;
@@ -16,7 +17,7 @@ public class RacesByFilter
             RaceName.Norn
         ];
 
-        var (actual, context) = await sut.Hero.Races.GetRacesByNames(
+        (HashSet<Race> actual, MessageContext context) = await sut.Hero.Races.GetRacesByNames(
             names,
             cancellationToken: TestContext.Current.CancellationToken
         );

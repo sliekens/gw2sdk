@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.StoryJournal.Stories;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.StoryJournal.Stories;
 
@@ -11,7 +12,7 @@ public class StoryById
 
         const int id = 63;
 
-        var (actual, context) = await sut.Hero.StoryJournal.GetStoryById(
+        (Story actual, MessageContext context) = await sut.Hero.StoryJournal.GetStoryById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Guilds.Emblems;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Guilds.Emblems;
 
@@ -11,7 +12,7 @@ public class EmblemBackgroundById
 
         const int id = 1;
 
-        var (actual, context) = await sut.Guilds.GetEmblemBackgroundById(
+        (EmblemBackground actual, MessageContext context) = await sut.Guilds.GetEmblemBackgroundById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

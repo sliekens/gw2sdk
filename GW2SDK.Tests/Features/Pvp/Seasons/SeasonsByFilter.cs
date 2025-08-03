@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pvp.Seasons;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pvp.Seasons;
 
@@ -15,7 +16,7 @@ public class SeasonsByFilter
             "D1777261-555B-4B72-A27E-BDC96EC393D5"
         ];
 
-        var (actual, context) = await sut.Pvp.GetSeasonsByIds(
+        (HashSet<Season> actual, MessageContext context) = await sut.Pvp.GetSeasonsByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

@@ -20,7 +20,7 @@ internal static class ComboFinisherJson
         RequiredMember percent = "percent";
         RequiredMember finisherType = "finisher_type";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

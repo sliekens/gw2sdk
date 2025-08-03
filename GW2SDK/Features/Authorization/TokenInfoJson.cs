@@ -8,7 +8,7 @@ internal static class TokenInfoJson
 {
     public static TokenInfo GetTokenInfo(this in JsonElement json)
     {
-        if (json.TryGetProperty("type", out var discriminator))
+        if (json.TryGetProperty("type", out JsonElement discriminator))
         {
             switch (discriminator.GetString())
             {
@@ -22,7 +22,7 @@ internal static class TokenInfoJson
         RequiredMember name = "name";
         RequiredMember id = "id";
         RequiredMember permissions = "permissions";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

@@ -77,7 +77,7 @@ internal sealed class MumbleLink : IDisposable
         try
         {
             view.SafeMemoryMappedViewHandle.DangerousAddRef(ref success);
-            var location = view.SafeMemoryMappedViewHandle.DangerousGetHandle();
+            IntPtr location = view.SafeMemoryMappedViewHandle.DangerousGetHandle();
             return Marshal.PtrToStructure<T>(location);
         }
         finally

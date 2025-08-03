@@ -66,7 +66,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
             ThreadPool.QueueUserWorkItem(
                 state =>
                 {
-                    var (waitHandle, taskCompletionSource) =
+                    (WaitHandle waitHandle, TaskCompletionSource<bool> taskCompletionSource) =
                         ((WaitHandle, TaskCompletionSource<bool>))state;
                     try
                     {
@@ -86,7 +86,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
         }
 #endif
 
-        foreach (var subscriber in subscribers.Keys)
+        foreach (IObserver<GameTick>? subscriber in subscribers.Keys)
         {
             subscriber.OnCompleted();
         }
@@ -114,7 +114,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
             callbacksFinished.WaitHandle.WaitOne();
 
             // Notify subscribers that there will be no more updates
-            foreach (var subscriber in subscribers.Keys)
+            foreach (IObserver<GameTick>? subscriber in subscribers.Keys)
             {
                 subscriber.OnCompleted();
             }
@@ -146,7 +146,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
 #pragma warning disable CA1031 // Do not catch general exception types
                 try
                 {
-                    var tick = GetSnapshot();
+                    GameTick tick = GetSnapshot();
                     if (tick.UiTick > 0)
                     {
                         sub.OnNext(tick);
@@ -195,7 +195,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
             catch (Exception reason)
             {
                 // Notify every observer that there has been an internal error
-                foreach (var subscriber in subscribers.Keys.ToList())
+                foreach (IObserver<GameTick>? subscriber in subscribers.Keys.ToList())
                 {
                     try
                     {
@@ -218,7 +218,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
             if (tick.UiTick > 0 && tick.UiTick != lastTick)
             {
                 lastTick = tick.UiTick;
-                foreach (var subscriber in subscribers.Keys.ToList())
+                foreach (IObserver<GameTick>? subscriber in subscribers.Keys.ToList())
                 {
 #pragma warning disable CA1031 // Do not catch general exception types
                     try

@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pve.Home.Cats;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pve.Home.Cats;
 
@@ -9,7 +10,7 @@ public class Cats
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<Cat> actual, MessageContext context) =
             await sut.Pve.Home.GetCats(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);

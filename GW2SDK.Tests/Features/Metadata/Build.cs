@@ -9,7 +9,7 @@ public class Build
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, _) =
+        (GuildWars2.Metadata.Build actual, _) =
             await sut.Metadata.GetBuild(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.True(actual.Id > 115267);

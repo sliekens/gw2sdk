@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Files;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Files;
 
@@ -10,7 +11,7 @@ public class FilesByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
-        var (actual, context) = await sut.Files.GetFilesByPage(
+        (HashSet<Asset> actual, MessageContext context) = await sut.Files.GetFilesByPage(
             0,
             pageSize,
             cancellationToken: TestContext.Current.CancellationToken

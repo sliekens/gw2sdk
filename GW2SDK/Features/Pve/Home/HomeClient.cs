@@ -1,6 +1,7 @@
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 
+using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 using GuildWars2.Pve.Home.Cats;
@@ -36,13 +37,13 @@ public sealed class HomeClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/account/home/cats", accessToken);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/account/home/cats", accessToken);
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -61,13 +62,13 @@ public sealed class HomeClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/account/home/nodes", accessToken);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/account/home/nodes", accessToken);
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
+            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -84,16 +85,16 @@ public sealed class HomeClient
     public async Task<(HashSet<UnlockedDecoration> Value, MessageContext Context)>
         GetUnlockedDecorations(string? accessToken, CancellationToken cancellationToken = default)
     {
-        var requestBuilder = RequestBuilder.HttpGet(
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet(
             "v2/account/homestead/decorations",
             accessToken
         );
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value =
+            ValueHashSet<UnlockedDecoration> value =
                 response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetUnlockedDecoration());
             return (value, response.Context);
         }
@@ -113,13 +114,13 @@ public sealed class HomeClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/account/homestead/glyphs", accessToken);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/account/homestead/glyphs", accessToken);
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
+            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -137,15 +138,15 @@ public sealed class HomeClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/home/cats");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/home/cats");
         requestBuilder.Query.AddAllIds();
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetCat());
+            ValueHashSet<Cat> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetCat());
             return (value, response.Context);
         }
     }
@@ -157,13 +158,13 @@ public sealed class HomeClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/home/cats");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/home/cats");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -179,15 +180,15 @@ public sealed class HomeClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/home/cats");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/home/cats");
         requestBuilder.Query.AddId(catId);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetCat();
+            Cat value = response.Json.RootElement.GetCat();
             return (value, response.Context);
         }
     }
@@ -203,15 +204,15 @@ public sealed class HomeClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/home/cats");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/home/cats");
         requestBuilder.Query.AddIds(catIds);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetCat());
+            ValueHashSet<Cat> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetCat());
             return (value, response.Context);
         }
     }
@@ -229,15 +230,15 @@ public sealed class HomeClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/home/cats");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/home/cats");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetCat());
+            ValueHashSet<Cat> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetCat());
             return (value, response.Context);
         }
     }
@@ -255,15 +256,15 @@ public sealed class HomeClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/home/nodes");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/home/nodes");
         requestBuilder.Query.AddAllIds();
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetNode());
+            ValueHashSet<Node> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetNode());
             return (value, response.Context);
         }
     }
@@ -275,13 +276,13 @@ public sealed class HomeClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/home/nodes");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/home/nodes");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
+            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -297,15 +298,15 @@ public sealed class HomeClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/home/nodes");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/home/nodes");
         requestBuilder.Query.AddId(nodeId);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetNode();
+            Node value = response.Json.RootElement.GetNode();
             return (value, response.Context);
         }
     }
@@ -321,15 +322,15 @@ public sealed class HomeClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/home/nodes");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/home/nodes");
         requestBuilder.Query.AddIds(nodeIds);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetNode());
+            ValueHashSet<Node> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetNode());
             return (value, response.Context);
         }
     }
@@ -347,15 +348,15 @@ public sealed class HomeClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/home/nodes");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/home/nodes");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetNode());
+            ValueHashSet<Node> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetNode());
             return (value, response.Context);
         }
     }
@@ -371,13 +372,13 @@ public sealed class HomeClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -395,16 +396,16 @@ public sealed class HomeClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations");
         requestBuilder.Query.AddId(decorationId);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetDecoration();
+            Decoration value = response.Json.RootElement.GetDecoration();
             return (value, response.Context);
         }
     }
@@ -422,16 +423,16 @@ public sealed class HomeClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations");
         requestBuilder.Query.AddIds(decorationIds);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetDecoration());
+            ValueHashSet<Decoration> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetDecoration());
             return (value, response.Context);
         }
     }
@@ -451,16 +452,16 @@ public sealed class HomeClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetDecoration());
+            ValueHashSet<Decoration> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetDecoration());
             return (value, response.Context);
         }
     }
@@ -500,7 +501,7 @@ public sealed class HomeClient
             CancellationToken cancellationToken
         )
         {
-            var (values, context) = await GetDecorationsByIds(
+            (HashSet<Decoration> values, MessageContext context) = await GetDecorationsByIds(
                     chunk,
                     language,
                     missingMemberBehavior,
@@ -528,8 +529,8 @@ public sealed class HomeClient
         [EnumeratorCancellation] CancellationToken cancellationToken = default
     )
     {
-        var (value, _) = await GetDecorationsIndex(cancellationToken).ConfigureAwait(false);
-        var producer = GetDecorationsBulk(
+        (HashSet<int> value, _) = await GetDecorationsIndex(cancellationToken).ConfigureAwait(false);
+        IAsyncEnumerable<(Decoration Value, MessageContext Context)> producer = GetDecorationsBulk(
             value,
             language,
             missingMemberBehavior,
@@ -538,7 +539,7 @@ public sealed class HomeClient
             progress,
             cancellationToken
         );
-        await foreach (var decoration in producer.ConfigureAwait(false))
+        await foreach ((Decoration Value, MessageContext Context) decoration in producer.ConfigureAwait(false))
         {
             yield return decoration;
         }
@@ -560,16 +561,16 @@ public sealed class HomeClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations/categories");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations/categories");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
+            ValueHashSet<DecorationCategory> value =
                 response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetDecorationCategory());
             return (value, response.Context);
         }
@@ -582,13 +583,13 @@ public sealed class HomeClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations/categories");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations/categories");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -606,16 +607,16 @@ public sealed class HomeClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations/categories");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations/categories");
         requestBuilder.Query.AddId(categoryId);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetDecorationCategory();
+            DecorationCategory value = response.Json.RootElement.GetDecorationCategory();
             return (value, response.Context);
         }
     }
@@ -634,16 +635,16 @@ public sealed class HomeClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations/categories");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations/categories");
         requestBuilder.Query.AddIds(categoryIds);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
+            ValueHashSet<DecorationCategory> value =
                 response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetDecorationCategory());
             return (value, response.Context);
         }
@@ -665,16 +666,16 @@ public sealed class HomeClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations/categories");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/homestead/decorations/categories");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
+            ValueHashSet<DecorationCategory> value =
                 response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetDecorationCategory());
             return (value, response.Context);
         }
@@ -693,15 +694,15 @@ public sealed class HomeClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/homestead/glyphs");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/homestead/glyphs");
         requestBuilder.Query.AddAllIds();
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGlyph());
+            ValueHashSet<Glyph> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGlyph());
             return (value, response.Context);
         }
     }
@@ -713,13 +714,13 @@ public sealed class HomeClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/homestead/glyphs");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/homestead/glyphs");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
+            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -735,15 +736,15 @@ public sealed class HomeClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/homestead/glyphs");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/homestead/glyphs");
         requestBuilder.Query.AddId(glyphId);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetGlyph();
+            Glyph value = response.Json.RootElement.GetGlyph();
             return (value, response.Context);
         }
     }
@@ -759,15 +760,15 @@ public sealed class HomeClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/homestead/glyphs");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/homestead/glyphs");
         requestBuilder.Query.AddIds(glyphIds);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGlyph());
+            ValueHashSet<Glyph> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGlyph());
             return (value, response.Context);
         }
     }
@@ -785,15 +786,15 @@ public sealed class HomeClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/homestead/glyphs");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/homestead/glyphs");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGlyph());
+            ValueHashSet<Glyph> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGlyph());
             return (value, response.Context);
         }
     }

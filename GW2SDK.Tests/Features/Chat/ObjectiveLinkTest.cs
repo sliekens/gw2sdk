@@ -10,7 +10,7 @@ public class ObjectiveLinkTest
     [InlineData("[&DGcAAABgAAAA]", 96, 103)]
     public void Can_marshal_objective_links(string chatLink, int mapId, int objectiveId)
     {
-        var sut = ObjectiveLink.Parse(chatLink);
+        ObjectiveLink sut = ObjectiveLink.Parse(chatLink);
 
         var actual = sut.ToString();
 

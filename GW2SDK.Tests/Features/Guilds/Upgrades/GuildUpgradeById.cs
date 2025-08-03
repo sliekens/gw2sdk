@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Guilds.Upgrades;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Guilds.Upgrades;
 
@@ -11,7 +12,7 @@ public class GuildUpgradeById
 
         const int id = 43;
 
-        var (actual, context) = await sut.Guilds.GetGuildUpgradeById(
+        (GuildUpgrade actual, MessageContext context) = await sut.Guilds.GetGuildUpgradeById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

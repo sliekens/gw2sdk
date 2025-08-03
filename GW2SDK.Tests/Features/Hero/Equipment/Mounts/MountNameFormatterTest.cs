@@ -8,9 +8,9 @@ public class MountNameFormatterTest
     public void Mount_names_can_be_formatted_as_text()
     {
 #if NET
-        var mounts = Enum.GetValues<MountName>();
+        MountName[] mounts = Enum.GetValues<MountName>();
 #else
-        var mounts = Enum.GetValues(typeof(MountName)).Cast<MountName>();
+        IEnumerable<MountName> mounts = Enum.GetValues(typeof(MountName)).Cast<MountName>();
 #endif
 
         Assert.All(

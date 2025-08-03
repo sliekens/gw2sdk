@@ -13,7 +13,7 @@ public class Outfits
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.Equipment.Outfits.GetOutfits(
+        (HashSet<Outfit> actual, MessageContext context) = await sut.Hero.Equipment.Outfits.GetOutfits(
             cancellationToken: TestContext.Current.CancellationToken
         );
 
@@ -29,10 +29,10 @@ public class Outfits
                 Assert.True(entry.IconUrl is not null && entry.IconUrl.IsAbsoluteUri);
                 Assert.NotEmpty(entry.UnlockItemIds);
 
-                var chatLink = entry.GetChatLink();
+                OutfitLink chatLink = entry.GetChatLink();
                 Assert.Equal(entry.Id, chatLink.OutfitId);
 
-                var chatLinkRoundtrip = OutfitLink.Parse(chatLink.ToString());
+                OutfitLink chatLinkRoundtrip = OutfitLink.Parse(chatLink.ToString());
                 Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
 
                 var json = JsonSerializer.Serialize(entry);

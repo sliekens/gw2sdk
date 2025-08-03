@@ -16,7 +16,7 @@ internal sealed class RingJsonConverter : JsonConverter<Ring>
         JsonSerializerOptions options
     )
     {
-        using var json = JsonDocument.ParseValue(ref reader);
+        using JsonDocument json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
@@ -94,7 +94,7 @@ internal sealed class RingJsonConverter : JsonConverter<Ring>
         TrinketJsonConverter.WriteCommonProperties(writer, value);
 
         writer.WriteStartArray("upgrades_into");
-        foreach (var upgrade in value.UpgradesInto)
+        foreach (InfusionSlotUpgradePath upgrade in value.UpgradesInto)
         {
             InfusionSlotUpgradePathJsonConverter.Write(writer, upgrade);
         }
@@ -102,7 +102,7 @@ internal sealed class RingJsonConverter : JsonConverter<Ring>
         writer.WriteEndArray();
 
         writer.WriteStartArray("upgrades_from");
-        foreach (var source in value.UpgradesFrom)
+        foreach (InfusionSlotUpgradeSource source in value.UpgradesFrom)
         {
             InfusionSlotUpgradeSourceJsonConverter.Write(writer, source);
         }

@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Commerce.Listings;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Commerce.Listings;
 
@@ -15,7 +16,7 @@ public class OrderBooksByFilter
             35984
         ];
 
-        var (actual, context) = await sut.Commerce.GetOrderBooksByIds(
+        (HashSet<OrderBook> actual, MessageContext context) = await sut.Commerce.GetOrderBooksByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

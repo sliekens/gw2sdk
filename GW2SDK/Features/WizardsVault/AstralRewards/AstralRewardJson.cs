@@ -14,7 +14,7 @@ internal static class AstralRewardJson
         RequiredMember type = "type";
         RequiredMember cost = "cost";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

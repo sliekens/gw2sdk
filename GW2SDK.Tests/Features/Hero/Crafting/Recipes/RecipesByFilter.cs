@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Crafting.Recipes;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Crafting.Recipes;
 
@@ -15,7 +16,7 @@ public class RecipesByFilter
             3
         ];
 
-        var (actual, context) = await sut.Hero.Crafting.Recipes.GetRecipesByIds(
+        (HashSet<Recipe> actual, MessageContext context) = await sut.Hero.Crafting.Recipes.GetRecipesByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

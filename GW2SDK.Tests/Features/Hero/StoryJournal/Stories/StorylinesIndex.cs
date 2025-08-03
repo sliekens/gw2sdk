@@ -9,7 +9,7 @@ public class StorylinesIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<string> actual, MessageContext context) =
             await sut.Hero.StoryJournal.GetStorylinesIndex(TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);

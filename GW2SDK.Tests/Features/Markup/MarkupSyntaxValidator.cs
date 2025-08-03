@@ -6,14 +6,14 @@ public static class MarkupSyntaxValidator
 {
     public static void Validate(string input)
     {
-        var tokens = MarkupLexer.Tokenize(input);
-        var syntax = MarkupParser.Parse(tokens);
+        IEnumerable<MarkupToken> tokens = MarkupLexer.Tokenize(input);
+        RootNode syntax = MarkupParser.Parse(tokens);
         Validate(syntax);
     }
 
     private static void Validate(RootNode root)
     {
-        foreach (var node in root.Children)
+        foreach (MarkupNode? node in root.Children)
         {
             ValidateNode(node);
         }
@@ -76,7 +76,7 @@ public static class MarkupSyntaxValidator
             }
         }
 
-        foreach (var child in coloredText.Children)
+        foreach (MarkupNode? child in coloredText.Children)
         {
             ValidateNode(child);
         }

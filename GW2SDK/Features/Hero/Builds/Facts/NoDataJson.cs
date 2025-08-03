@@ -18,7 +18,7 @@ internal static class NoDataJson
         RequiredMember text = "text";
         RequiredMember icon = "icon";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

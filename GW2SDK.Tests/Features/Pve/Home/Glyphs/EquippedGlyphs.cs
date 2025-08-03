@@ -8,9 +8,9 @@ public class EquippedGlyphs
     public async Task Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var token = TestConfiguration.ApiKey;
+        ApiKey token = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Pve.Home.GetEquippedGlyphs(
+        (HashSet<string> actual, _) = await sut.Pve.Home.GetEquippedGlyphs(
             token.Key,
             TestContext.Current.CancellationToken
         );

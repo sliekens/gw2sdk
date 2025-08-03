@@ -12,7 +12,7 @@ public class LeaderboardRegions
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, _) = await sut.Pvp.GetLeaderboardRegions(
+        (HashSet<string> actual, _) = await sut.Pvp.GetLeaderboardRegions(
             seasonId,
             boardId,
             TestContext.Current.CancellationToken

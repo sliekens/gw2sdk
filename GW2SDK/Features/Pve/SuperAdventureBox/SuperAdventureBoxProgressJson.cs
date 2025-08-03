@@ -12,7 +12,7 @@ internal static class SuperAdventureBoxProgressJson
         RequiredMember unlocks = "unlocks";
         RequiredMember songs = "songs";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (zones.Match(member))
             {

@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Wvw.Abilities;
 
 namespace GuildWars2.Tests.Features.Wvw.Abilities;
 
@@ -11,7 +12,7 @@ public class AbilityById
 
         const int id = 26;
 
-        var (actual, context) = await sut.Wvw.GetAbilityById(
+        (Ability actual, MessageContext context) = await sut.Wvw.GetAbilityById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

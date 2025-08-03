@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.WizardsVault.AstralRewards;
 
 namespace GuildWars2.Tests.Features.WizardsVault.AstralRewards;
 
@@ -15,7 +16,7 @@ public class AstralRewardsByFilter
             3
         ];
 
-        var (actual, context) = await sut.WizardsVault.GetAstralRewardsByIds(
+        (HashSet<AstralReward> actual, MessageContext context) = await sut.WizardsVault.GetAstralRewardsByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

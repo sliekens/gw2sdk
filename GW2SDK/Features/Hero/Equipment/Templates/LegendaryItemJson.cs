@@ -11,7 +11,7 @@ internal static class LegendaryItemJson
         RequiredMember id = "id";
         RequiredMember maxCount = "max_count";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

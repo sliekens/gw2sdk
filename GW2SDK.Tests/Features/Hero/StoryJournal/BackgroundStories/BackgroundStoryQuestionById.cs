@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.StoryJournal.BackgroundStories;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.StoryJournal.BackgroundStories;
 
@@ -11,7 +12,7 @@ public class BackgroundStoryQuestionById
 
         const int id = 7;
 
-        var (actual, context) = await sut.Hero.StoryJournal.GetBackgroundStoryQuestionById(
+        (BackgroundStoryQuestion actual, MessageContext context) = await sut.Hero.StoryJournal.GetBackgroundStoryQuestionById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Wvw.Matches.Stats;
 
 namespace GuildWars2.Tests.Features.Wvw.Matches.Stats;
 
@@ -10,7 +11,7 @@ public class MatchesStatsByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
-        var (actual, context) = await sut.Wvw.GetMatchesStatsByPage(
+        (HashSet<MatchStats> actual, MessageContext context) = await sut.Wvw.GetMatchesStatsByPage(
             0,
             pageSize,
             cancellationToken: TestContext.Current.CancellationToken

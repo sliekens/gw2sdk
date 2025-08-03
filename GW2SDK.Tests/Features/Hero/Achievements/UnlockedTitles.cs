@@ -8,9 +8,9 @@ public class UnlockedTitles
     public async Task Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = TestConfiguration.ApiKey;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Hero.Achievements.GetUnlockedTitles(
+        (HashSet<int> actual, _) = await sut.Hero.Achievements.GetUnlockedTitles(
             accessToken.Key,
             TestContext.Current.CancellationToken
         );

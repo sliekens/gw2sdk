@@ -11,7 +11,7 @@ public class RegionsIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Exploration.GetRegionsIndex(
+        (HashSet<int> actual, MessageContext context) = await sut.Exploration.GetRegionsIndex(
             continentId,
             floorId,
             TestContext.Current.CancellationToken

@@ -15,7 +15,7 @@ internal static class RangeJson
         RequiredMember icon = "icon";
         RequiredMember range = "value";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

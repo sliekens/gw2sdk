@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Items.Stats;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Items.Stats;
 
@@ -11,7 +12,7 @@ public class AttributeCombinationById
 
         const int id = 559;
 
-        var (actual, context) = await sut.Items.GetAttributeCombinationById(
+        (AttributeCombination actual, MessageContext context) = await sut.Items.GetAttributeCombinationById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

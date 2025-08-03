@@ -1,5 +1,7 @@
 ﻿using GuildWars2;
 using GuildWars2.Hero.Crafting;
+using GuildWars2.Hero.Crafting.Recipes;
+using GuildWars2.Items;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -11,14 +13,14 @@ using Spectre.Console;
 
 // This example retrieves all item ingredients that are used in crafting,
 // sorted by how many recipes require the material
-var builder = Host.CreateApplicationBuilder(args);
+HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
 
 // The console is used for user interactions, not for logging
 // Redirect logs to the 'Output' window in Visual Studio
 builder.Logging.ClearProviders();
 builder.Logging.AddDebug();
 
-var gw2ClientBuilder = builder.Services.AddHttpClient<Gw2Client>(static client =>
+IHttpClientBuilder gw2ClientBuilder = builder.Services.AddHttpClient<Gw2Client>(static client =>
     {
         client.BaseAddress = BaseAddress.DefaultUri;
         client.Timeout =
@@ -28,11 +30,11 @@ var gw2ClientBuilder = builder.Services.AddHttpClient<Gw2Client>(static client =
 
 gw2ClientBuilder.AddStandardResilienceHandler();
 
-var app = builder.Build();
+IHost app = builder.Build();
 try
 {
     var gw2 = app.Services.GetRequiredService<Gw2Client>();
-    var referenceData = await AnsiConsole.Progress()
+    ReferenceData referenceData = await AnsiConsole.Progress()
         .Columns(
             new TaskDescriptionColumn(),
             new ProgressBarColumn(),
@@ -43,21 +45,21 @@ try
         .StartAsync(async ctx =>
             {
                 // Fetch all recipes
-                var recipesProgress = ctx.AddTask("Fetching recipes");
-                var recipes = await gw2.Hero.Crafting.Recipes
+                ProgressTask recipesProgress = ctx.AddTask("Fetching recipes");
+                List<Recipe> recipes = await gw2.Hero.Crafting.Recipes
                     .GetRecipesBulk(progress: new ProgressTaskUpdater(recipesProgress))
                     .Select(result => result.Value)
                     .ToListAsync();
 
                 // Fetch all input items
-                var inputItemsProgress = ctx.AddTask("Fetching input items");
-                var inputItemIds = (
+                ProgressTask inputItemsProgress = ctx.AddTask("Fetching input items");
+                HashSet<int> inputItemIds = (
                     from recipe in recipes
                     from ingredient in recipe.Ingredients
                     where ingredient.Kind == IngredientKind.Item
                     select ingredient.Id).ToHashSet();
 
-                var inputItems = await gw2.Items
+                Dictionary<int, Item> inputItems = await gw2.Items
                     .GetItemsBulk(
                         inputItemIds,
                         progress: new ProgressTaskUpdater(inputItemsProgress)
@@ -66,11 +68,11 @@ try
                     .ToDictionaryAsync(item => item.Id);
 
                 // Fetch all output items
-                var outputItemsProgress = ctx.AddTask("Fetching output items");
-                var outputItemIds = (
+                ProgressTask outputItemsProgress = ctx.AddTask("Fetching output items");
+                HashSet<int> outputItemIds = (
                     from recipe in recipes
                     select recipe.OutputItemId).ToHashSet();
-                var outputItems = await gw2.Items.GetItemsBulk(
+                Dictionary<int, Item> outputItems = await gw2.Items.GetItemsBulk(
                         outputItemIds,
                         progress: new ProgressTaskUpdater(outputItemsProgress)
                     )
@@ -90,19 +92,19 @@ try
             }
         );
 
-    var recipesByIngredient = (
+    ILookup<int, Recipe> recipesByIngredient = (
         from recipe in referenceData.Recipes
         from ingredient in recipe.Ingredients
         where ingredient.Kind == IngredientKind.Item
         select (ingredient.Id, recipe)).ToLookup(tuple => tuple.Id, tuple => tuple.recipe);
 
-    var itemsSortedByNumberOfRecipes = (
+    List<(Item, int count)> itemsSortedByNumberOfRecipes = (
         from recipes in recipesByIngredient
         let count = recipes.Count()
         orderby count descending
         select (referenceData.InputItems[recipes.Key], count)).ToList();
 
-    var outputsByIngredient = (
+    ILookup<int, Item> outputsByIngredient = (
         from recipes in recipesByIngredient
         from recipe in recipes
         let outputItem = referenceData.OutputItems.GetValueOrDefault(recipe.OutputItemId)
@@ -114,7 +116,7 @@ try
 
     do
     {
-        var ingredient = ItemPicker.Prompt(itemsSortedByNumberOfRecipes);
+        Item ingredient = ItemPicker.Prompt(itemsSortedByNumberOfRecipes);
 
         using var http = app.Services.GetRequiredService<HttpClient>();
         var card = new ItemCard(http);
@@ -124,7 +126,7 @@ try
         AnsiConsole.Live(recipesTable)
             .Start(live =>
                 {
-                    foreach (var recipe in outputsByIngredient[ingredient.Id])
+                    foreach (Item recipe in outputsByIngredient[ingredient.Id])
                     {
                         recipesTable.AddRow(recipe);
                         live.Refresh();

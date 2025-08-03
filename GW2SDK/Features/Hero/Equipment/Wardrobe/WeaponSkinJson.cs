@@ -9,7 +9,7 @@ internal static class WeaponSkinJson
 {
     public static WeaponSkin GetWeaponSkin(this in JsonElement json)
     {
-        if (json.TryGetProperty("details", out var discriminator) && discriminator.TryGetProperty("type", out var subtype))
+        if (json.TryGetProperty("details", out JsonElement discriminator) && discriminator.TryGetProperty("type", out JsonElement subtype))
         {
             switch (subtype.GetString())
             {
@@ -70,7 +70,7 @@ internal static class WeaponSkinJson
         RequiredMember id = "id";
         OptionalMember icon = "icon";
         RequiredMember damageType = "damage_type";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {
@@ -109,7 +109,7 @@ internal static class WeaponSkinJson
             }
             else if (member.NameEquals("details"))
             {
-                foreach (var detail in member.Value.EnumerateObject())
+                foreach (JsonProperty detail in member.Value.EnumerateObject())
                 {
                     if (detail.NameEquals("type"))
                     {

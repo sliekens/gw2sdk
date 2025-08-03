@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Wvw.Upgrades;
 
 namespace GuildWars2.Tests.Features.Wvw.Upgrades;
 
@@ -10,7 +11,7 @@ public class UpgradesByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
-        var (actual, context) = await sut.Wvw.GetUpgradesByPage(
+        (HashSet<ObjectiveUpgrade> actual, MessageContext context) = await sut.Wvw.GetUpgradesByPage(
             0,
             pageSize,
             cancellationToken: TestContext.Current.CancellationToken

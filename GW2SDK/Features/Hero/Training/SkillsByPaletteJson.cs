@@ -20,12 +20,12 @@ internal static class SkillsByPaletteJson
         // In JavaScript you could just do new Map([[1,12343],[2,12417]])
         // In C# there are no shortcuts
         ValueDictionary<int, int> map = new(json.GetArrayLength());
-        foreach (var entry in json.EnumerateArray())
+        foreach (JsonElement entry in json.EnumerateArray())
         {
             JsonElement left = default;
             JsonElement right = default;
 
-            foreach (var keyOrValue in entry.EnumerateArray())
+            foreach (JsonElement keyOrValue in entry.EnumerateArray())
             {
                 if (left.ValueKind == JsonValueKind.Undefined)
                 {

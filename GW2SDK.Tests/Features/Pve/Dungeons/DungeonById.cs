@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pve.Dungeons;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pve.Dungeons;
 
@@ -11,7 +12,7 @@ public class DungeonById
 
         const string id = "citadel_of_flame";
 
-        var (actual, context) = await sut.Pve.Dungeons.GetDungeonById(
+        (Dungeon actual, MessageContext context) = await sut.Pve.Dungeons.GetDungeonById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

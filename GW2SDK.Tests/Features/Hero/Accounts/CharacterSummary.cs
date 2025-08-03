@@ -8,10 +8,10 @@ public class CharacterSummary
     public async Task Can_be_found()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var character = TestConfiguration.TestCharacter;
-        var accessToken = TestConfiguration.ApiKey;
+        TestCharacter character = TestConfiguration.TestCharacter;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Hero.Account.GetCharacterSummary(
+        (GuildWars2.Hero.Accounts.CharacterSummary actual, _) = await sut.Hero.Account.GetCharacterSummary(
             character.Name,
             accessToken.Key,
             cancellationToken: TestContext.Current.CancellationToken

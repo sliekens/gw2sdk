@@ -8,10 +8,10 @@ public class SuperAdventureBoxProgress
     public async Task Can_be_found()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var character = TestConfiguration.TestCharacter;
-        var accessToken = TestConfiguration.ApiKey;
+        TestCharacter character = TestConfiguration.TestCharacter;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Pve.SuperAdventureBox.GetSuperAdventureBoxProgress(
+        (GuildWars2.Pve.SuperAdventureBox.SuperAdventureBoxProgress actual, _) = await sut.Pve.SuperAdventureBox.GetSuperAdventureBoxProgress(
             character.Name,
             accessToken.Key,
             cancellationToken: TestContext.Current.CancellationToken

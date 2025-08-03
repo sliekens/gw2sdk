@@ -21,7 +21,7 @@ internal static class RecipeSheetJson
         OptionalMember icon = "icon";
         RequiredMember recipeId = "recipe_id";
         OptionalMember extraRecipeIds = "extra_recipe_ids";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {
@@ -76,7 +76,7 @@ internal static class RecipeSheetJson
             }
             else if (member.NameEquals("details"))
             {
-                foreach (var detail in member.Value.EnumerateObject())
+                foreach (JsonProperty detail in member.Value.EnumerateObject())
                 {
                     if (detail.NameEquals("type"))
                     {

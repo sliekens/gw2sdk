@@ -12,7 +12,7 @@ internal static class RaceJson
         RequiredMember name = "name";
         RequiredMember skills = "skills";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

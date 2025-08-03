@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 
+using GuildWars2.Collections;
 using GuildWars2.Hero.Training;
 using GuildWars2.Json;
 
@@ -26,7 +27,7 @@ internal static class LockedSkillJson
         RequiredMember chatLink = "chat_link";
         OptionalMember categories = "categories";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {
@@ -105,7 +106,7 @@ internal static class LockedSkillJson
             }
         }
 
-        var professionRestrictions = professions.Map(static (in JsonElement values) =>
+        ValueList<Extensible<ProfessionName>> professionRestrictions = professions.Map(static (in JsonElement values) =>
             values.GetList(static (in JsonElement value) => value.GetEnum<ProfessionName>())
         );
         var iconString = icon.Map(static (in JsonElement value) => value.GetString()) ?? "";

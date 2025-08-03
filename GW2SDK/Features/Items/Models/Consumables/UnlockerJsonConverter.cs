@@ -22,7 +22,7 @@ internal sealed class UnlockerJsonConverter : JsonConverter<Unlocker>
         JsonSerializerOptions options
     )
     {
-        using var json = JsonDocument.ParseValue(ref reader);
+        using JsonDocument json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
@@ -49,7 +49,7 @@ internal sealed class UnlockerJsonConverter : JsonConverter<Unlocker>
             );
         }
 
-        if (json.TryGetProperty(DiscriminatorName, out var discriminator))
+        if (json.TryGetProperty(DiscriminatorName, out JsonElement discriminator))
         {
             switch (discriminator.GetString())
             {

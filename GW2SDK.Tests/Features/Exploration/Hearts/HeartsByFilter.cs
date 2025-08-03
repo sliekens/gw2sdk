@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Exploration.Hearts;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Exploration.Hearts;
 
@@ -19,7 +20,7 @@ public class HeartsByFilter
             3
         ];
 
-        var (actual, context) = await sut.Exploration.GetHeartsByIds(
+        (HashSet<Heart> actual, MessageContext context) = await sut.Exploration.GetHeartsByIds(
             continentId,
             floorId,
             regionId,

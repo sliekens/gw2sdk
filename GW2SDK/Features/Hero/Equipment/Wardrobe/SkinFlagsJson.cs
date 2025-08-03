@@ -14,7 +14,7 @@ internal static class SkinFlagsJson
         var overrideRarity = false;
         var showInWardrobe = false;
         ValueList<string> others = [];
-        foreach (var entry in json.EnumerateArray())
+        foreach (JsonElement entry in json.EnumerateArray())
         {
             if (entry.ValueEquals("HideIfLocked"))
             {

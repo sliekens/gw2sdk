@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Achievements.Groups;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Achievements;
 
@@ -15,7 +16,7 @@ public class AchievementGroupsByFilter
             "B42E2379-9599-46CA-9D4A-40A27E192BBE"
         ];
 
-        var (actual, context) = await sut.Hero.Achievements.GetAchievementGroupsByIds(
+        (HashSet<AchievementGroup> actual, MessageContext context) = await sut.Hero.Achievements.GetAchievementGroupsByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

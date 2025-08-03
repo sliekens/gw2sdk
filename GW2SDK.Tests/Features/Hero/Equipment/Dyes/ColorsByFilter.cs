@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Equipment.Dyes;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Dyes;
 
@@ -15,7 +16,7 @@ public class ColorsByFilter
             3
         ];
 
-        var (actual, context) = await sut.Hero.Equipment.Dyes.GetColorsByIds(
+        (HashSet<DyeColor> actual, MessageContext context) = await sut.Hero.Equipment.Dyes.GetColorsByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

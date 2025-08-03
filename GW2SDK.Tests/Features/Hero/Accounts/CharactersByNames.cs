@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Accounts;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Accounts;
 
@@ -8,11 +9,11 @@ public class CharactersByNames
     public async Task Can_be_found()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var character = TestConfiguration.TestCharacter;
-        var character2 = TestConfiguration.TestCharacter2;
-        var accessToken = TestConfiguration.ApiKey;
+        TestCharacter character = TestConfiguration.TestCharacter;
+        TestCharacter character2 = TestConfiguration.TestCharacter2;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Hero.Account.GetCharactersByNames(
+        (HashSet<Character> actual, _) = await sut.Hero.Account.GetCharactersByNames(
             [character.Name, character2.Name],
             accessToken.Key,
             cancellationToken: TestContext.Current.CancellationToken

@@ -30,13 +30,13 @@ public abstract record Flags
             return false;
         }
 
-        var flags = GetType()
+        List<PropertyInfo> flags = GetType()
             .GetProperties(BindingFlags.Public | BindingFlags.Instance)
             .Where(property => property.PropertyType == typeof(bool))
             .ToList();
 
-        var left = flags.Select(property => (bool?)property.GetValue(this));
-        var right = flags.Select(property => (bool?)property.GetValue(other));
+        IEnumerable<bool?> left = flags.Select(property => (bool?)property.GetValue(this));
+        IEnumerable<bool?> right = flags.Select(property => (bool?)property.GetValue(other));
         return left.SequenceEqual(right) && Other.SequenceEqual(other.Other);
     }
 
@@ -44,7 +44,7 @@ public abstract record Flags
     public override int GetHashCode()
     {
         HashCode hash = new();
-        var flags = GetType()
+        IEnumerable<bool?> flags = GetType()
             .GetProperties(BindingFlags.Public | BindingFlags.Instance)
             .Where(property => property.PropertyType == typeof(bool))
             .Select(property => (bool?)property.GetValue(this));

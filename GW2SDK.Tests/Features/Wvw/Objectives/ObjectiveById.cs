@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Wvw.Objectives;
 
 namespace GuildWars2.Tests.Features.Wvw.Objectives;
 
@@ -11,7 +12,7 @@ public class ObjectiveById
 
         const string id = "1099-99";
 
-        var (actual, context) = await sut.Wvw.GetObjectiveById(
+        (Objective actual, MessageContext context) = await sut.Wvw.GetObjectiveById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

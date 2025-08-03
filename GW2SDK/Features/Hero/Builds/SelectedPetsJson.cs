@@ -11,7 +11,7 @@ internal static class SelectedPetsJson
         RequiredMember terrestrial = "terrestrial";
         RequiredMember aquatic = "aquatic";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (terrestrial.Match(member))
             {

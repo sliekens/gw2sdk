@@ -13,7 +13,7 @@ internal static class GuildRankJson
         RequiredMember permissions = "permissions";
         RequiredMember iconHref = "icon";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

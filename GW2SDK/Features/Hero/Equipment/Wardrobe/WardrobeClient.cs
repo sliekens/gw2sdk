@@ -1,6 +1,7 @@
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 
+using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -33,13 +34,13 @@ public sealed class WardrobeClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/account/skins", accessToken);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/account/skins", accessToken);
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -55,13 +56,13 @@ public sealed class WardrobeClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/skins");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/skins");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -79,16 +80,16 @@ public sealed class WardrobeClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/skins");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/skins");
         requestBuilder.Query.AddId(skinId);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetEquipmentSkin();
+            EquipmentSkin value = response.Json.RootElement.GetEquipmentSkin();
             return (value, response.Context);
         }
     }
@@ -107,16 +108,16 @@ public sealed class WardrobeClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/skins");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/skins");
         requestBuilder.Query.AddIds(skinIds);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEquipmentSkin());
+            ValueHashSet<EquipmentSkin> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEquipmentSkin());
             return (value, response.Context);
         }
     }
@@ -136,16 +137,16 @@ public sealed class WardrobeClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/skins");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/skins");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEquipmentSkin());
+            ValueHashSet<EquipmentSkin> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEquipmentSkin());
             return (value, response.Context);
         }
     }
@@ -184,7 +185,7 @@ public sealed class WardrobeClient
             CancellationToken cancellationToken
         )
         {
-            var (values, context) = await GetSkinsByIds(
+            (HashSet<EquipmentSkin> values, MessageContext context) = await GetSkinsByIds(
                     chunk,
                     language,
                     missingMemberBehavior,
@@ -212,8 +213,8 @@ public sealed class WardrobeClient
         [EnumeratorCancellation] CancellationToken cancellationToken = default
     )
     {
-        var (value, _) = await GetSkinsIndex(cancellationToken).ConfigureAwait(false);
-        var producer = GetSkinsBulk(
+        (HashSet<int> value, _) = await GetSkinsIndex(cancellationToken).ConfigureAwait(false);
+        IAsyncEnumerable<(EquipmentSkin Value, MessageContext Context)> producer = GetSkinsBulk(
             value,
             language,
             missingMemberBehavior,
@@ -222,7 +223,7 @@ public sealed class WardrobeClient
             progress,
             cancellationToken
         );
-        await foreach (var skin in producer.ConfigureAwait(false))
+        await foreach ((EquipmentSkin Value, MessageContext Context) skin in producer.ConfigureAwait(false))
         {
             yield return skin;
         }

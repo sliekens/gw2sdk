@@ -11,7 +11,7 @@ internal static class CurrencyAmountJson
         RequiredMember currencyId = "id";
         RequiredMember amount = "value";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (currencyId.Match(member))
             {

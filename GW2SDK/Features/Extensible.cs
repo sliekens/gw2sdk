@@ -34,7 +34,7 @@ public struct Extensible<TEnum>(string Name)
             return Enum.IsDefined(typeof(TEnum), 0) ? default(TEnum) : null;
         }
 
-        if (Enum.TryParse<TEnum>(Name, true, out var value))
+        if (Enum.TryParse<TEnum>(Name, true, out TEnum value))
         {
             return value;
         }

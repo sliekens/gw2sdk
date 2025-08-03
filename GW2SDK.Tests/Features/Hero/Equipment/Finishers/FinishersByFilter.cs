@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Equipment.Finishers;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Finishers;
 
@@ -15,7 +16,7 @@ public class FinishersByFilter
             74
         ];
 
-        var (actual, context) = await sut.Hero.Equipment.Finishers.GetFinishersByIds(
+        (HashSet<Finisher> actual, MessageContext context) = await sut.Hero.Equipment.Finishers.GetFinishersByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

@@ -18,7 +18,7 @@ public class Achievements
         using var handler = new JsonLinesHttpMessageHandler("Data/achievements.jsonl.gz");
         using var httpClient = new HttpClient(handler);
         var sut = new Gw2Client(httpClient);
-        await foreach (var (actual, context) in sut.Hero.Achievements.GetAchievementsBulk(
+        await foreach ((Achievement actual, MessageContext context) in sut.Hero.Achievements.GetAchievementsBulk(
                 cancellationToken: TestContext.Current.CancellationToken
             ))
         {
@@ -72,10 +72,10 @@ public class Achievements
                 Assert.Equal(-1, actual.PointCap);
             }
 
-            var chatLink = actual.GetChatLink();
+            AchievementLink chatLink = actual.GetChatLink();
             Assert.Equal(actual.Id, chatLink.AchievementId);
 
-            var chatLinkRoundtrip = AchievementLink.Parse(chatLink.ToString());
+            AchievementLink chatLinkRoundtrip = AchievementLink.Parse(chatLink.ToString());
             Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
 
             var json = JsonSerializer.Serialize(actual);

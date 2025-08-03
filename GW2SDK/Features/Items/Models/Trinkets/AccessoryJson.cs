@@ -26,7 +26,7 @@ internal static class AccessoryJson
         OptionalMember infixUpgradeBuff = "buff";
         NullableMember suffixItemId = "suffix_item_id";
         OptionalMember statChoices = "stat_choices";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {
@@ -81,7 +81,7 @@ internal static class AccessoryJson
             }
             else if (member.NameEquals("details"))
             {
-                foreach (var detail in member.Value.EnumerateObject())
+                foreach (JsonProperty detail in member.Value.EnumerateObject())
                 {
                     if (detail.NameEquals("type"))
                     {
@@ -100,7 +100,7 @@ internal static class AccessoryJson
                     }
                     else if (detail.NameEquals("infix_upgrade"))
                     {
-                        foreach (var infix in detail.Value.EnumerateObject())
+                        foreach (JsonProperty infix in detail.Value.EnumerateObject())
                         {
                             if (infixUpgradeId.Match(infix))
                             {

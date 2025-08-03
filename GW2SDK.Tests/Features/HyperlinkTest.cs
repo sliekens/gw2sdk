@@ -12,7 +12,7 @@ public class HyperlinkTest
     [Fact]
     public void None_hyperlink_is_empty()
     {
-        var sut = Hyperlink.None;
+        Hyperlink sut = Hyperlink.None;
         Assert.True(sut.IsEmpty, "sut.IsEmpty");
     }
 

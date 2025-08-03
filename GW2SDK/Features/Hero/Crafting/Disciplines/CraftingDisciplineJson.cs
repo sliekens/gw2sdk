@@ -12,7 +12,7 @@ internal static class CraftingDisciplineJson
         RequiredMember rating = "rating";
         RequiredMember active = "active";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (discipline.Match(member))
             {

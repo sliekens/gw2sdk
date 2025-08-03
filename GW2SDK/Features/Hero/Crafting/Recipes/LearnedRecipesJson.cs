@@ -10,7 +10,7 @@ internal static class LearnedRecipesJson
     {
         RequiredMember recipes = "recipes";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (recipes.Match(member))
             {

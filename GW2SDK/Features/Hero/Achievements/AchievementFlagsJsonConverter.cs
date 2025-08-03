@@ -13,7 +13,7 @@ internal sealed class AchievementFlagsJsonConverter : JsonConverter<AchievementF
         JsonSerializerOptions options
     )
     {
-        using var json = JsonDocument.ParseValue(ref reader);
+        using JsonDocument json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
@@ -42,7 +42,7 @@ internal sealed class AchievementFlagsJsonConverter : JsonConverter<AchievementF
         var monthly = false;
         List<string> other = [];
 
-        foreach (var property in json.EnumerateObject())
+        foreach (JsonProperty property in json.EnumerateObject())
         {
             if (property.NameEquals("category_display"))
             {

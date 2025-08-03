@@ -20,7 +20,7 @@ internal static class MatchJson
         RequiredMember skirmishes = "skirmishes";
         RequiredMember maps = "maps";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

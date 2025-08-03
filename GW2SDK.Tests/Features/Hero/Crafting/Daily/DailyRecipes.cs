@@ -8,12 +8,12 @@ public class DailyRecipes
     public async Task Can_be_found()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = TestConfiguration.ApiKey;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
         // This is not resistant to recipes being added to the game, so not great :)
         // For now I'll just maintain this by hand...
         // no clue how this can be solved without re-implementing the call to /v2/dailycrafting in test code (which makes the test pointless)
-        var (dailyRecipes, _) =
+        (HashSet<string> dailyRecipes, _) =
             await sut.Hero.Crafting.Daily.GetDailyCraftableItems(
                 TestContext.Current.CancellationToken
             );
@@ -31,7 +31,7 @@ public class DailyRecipes
         );
 
         // Again this next method is not deterministic...
-        var (actual, _) = await sut.Hero.Crafting.Daily.GetDailyCraftedItems(
+        (HashSet<string> actual, _) = await sut.Hero.Crafting.Daily.GetDailyCraftedItems(
             accessToken.Key,
             TestContext.Current.CancellationToken
         );

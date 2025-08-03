@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Hero;
+using GuildWars2.Hero.Training;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Training;
@@ -10,7 +11,7 @@ public class Professions
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, _) = await sut.Hero.Training.GetProfessions(
+        (HashSet<Profession> actual, _) = await sut.Hero.Training.GetProfessions(
             cancellationToken: TestContext.Current.CancellationToken
         );
 #if NET

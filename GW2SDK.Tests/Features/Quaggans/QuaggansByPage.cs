@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Quaggans;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Quaggans;
 
@@ -10,7 +11,7 @@ public class QuaggansByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
-        var (actual, context) = await sut.Quaggans.GetQuaggansByPage(
+        (HashSet<Quaggan> actual, MessageContext context) = await sut.Quaggans.GetQuaggansByPage(
             0,
             pageSize,
             cancellationToken: TestContext.Current.CancellationToken

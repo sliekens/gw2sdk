@@ -12,7 +12,7 @@ internal static class RankJson
         RequiredMember title = "title";
         RequiredMember minRank = "min_rank";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

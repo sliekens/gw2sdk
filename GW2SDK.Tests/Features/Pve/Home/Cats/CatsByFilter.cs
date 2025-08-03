@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pve.Home.Cats;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pve.Home.Cats;
 
@@ -14,7 +15,7 @@ public class CatsByFilter
             3
         ];
 
-        var (actual, context) = await sut.Pve.Home.GetCatsByIds(
+        (HashSet<Cat> actual, MessageContext context) = await sut.Pve.Home.GetCatsByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

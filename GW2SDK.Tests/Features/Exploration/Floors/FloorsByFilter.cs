@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Exploration.Floors;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Exploration.Floors;
 
@@ -16,7 +17,7 @@ public class FloorsByFilter
             2
         ];
 
-        var (actual, context) = await sut.Exploration.GetFloorsByIds(
+        (HashSet<Floor> actual, MessageContext context) = await sut.Exploration.GetFloorsByIds(
             continentId,
             ids,
             cancellationToken: TestContext.Current.CancellationToken

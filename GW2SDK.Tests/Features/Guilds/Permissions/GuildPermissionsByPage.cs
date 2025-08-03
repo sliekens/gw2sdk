@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Guilds.Permissions;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Guilds.Permissions;
 
@@ -10,7 +11,7 @@ public class GuildPermissionsByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
-        var (actual, context) = await sut.Guilds.GetGuildPermissionsByPage(
+        (HashSet<GuildPermissionSummary> actual, MessageContext context) = await sut.Guilds.GetGuildPermissionsByPage(
             0,
             pageSize,
             cancellationToken: TestContext.Current.CancellationToken

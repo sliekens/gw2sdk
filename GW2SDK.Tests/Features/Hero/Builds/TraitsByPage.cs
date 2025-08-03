@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Builds;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Builds;
 
@@ -10,7 +11,7 @@ public class TraitsByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
-        var (actual, context) = await sut.Hero.Builds.GetTraitsByPage(
+        (HashSet<Trait> actual, MessageContext context) = await sut.Hero.Builds.GetTraitsByPage(
             0,
             pageSize,
             cancellationToken: TestContext.Current.CancellationToken

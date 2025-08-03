@@ -13,7 +13,7 @@ internal sealed class MountJsonConverter : JsonConverter<Mount>
         JsonSerializerOptions options
     )
     {
-        using var json = JsonDocument.ParseValue(ref reader);
+        using JsonDocument json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
@@ -43,7 +43,7 @@ internal sealed class MountJsonConverter : JsonConverter<Mount>
 
         writer.WriteEndArray();
         writer.WriteStartArray("skills");
-        foreach (var skill in value.Skills)
+        foreach (SkillReference skill in value.Skills)
         {
             SkillReferenceJsonConverter.Write(writer, skill);
         }

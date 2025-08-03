@@ -15,7 +15,7 @@ internal static class TransactionJson
         RequiredMember created = "created";
         RequiredMember purchased = "purchased";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

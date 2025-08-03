@@ -13,7 +13,7 @@ internal static class OutfitJson
         RequiredMember icon = "icon";
         RequiredMember unlockItems = "unlock_items";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

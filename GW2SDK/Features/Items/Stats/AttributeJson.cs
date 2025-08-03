@@ -13,7 +13,7 @@ internal static class AttributeJson
         RequiredMember multiplier = "multiplier";
         RequiredMember value = "value";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (attribute.Match(member))
             {

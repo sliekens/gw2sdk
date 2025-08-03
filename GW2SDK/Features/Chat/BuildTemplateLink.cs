@@ -1,5 +1,6 @@
 ﻿using GuildWars2.Hero;
 using GuildWars2.Hero.Builds;
+using GuildWars2.Hero.Training;
 
 namespace GuildWars2.Chat;
 
@@ -61,7 +62,7 @@ public sealed record BuildTemplateLink : Link
     {
         ThrowHelper.ThrowIfNull(gw2Client);
 
-        var profession = await gw2Client.Hero.Training.GetProfessionByName(
+        Profession? profession = await gw2Client.Hero.Training.GetProfessionByName(
                 Profession,
                 language,
                 missingMemberBehavior,
@@ -118,8 +119,8 @@ public sealed record BuildTemplateLink : Link
         {
             if (specialization.HasValue)
             {
-                var (id, adept, master, grandmaster) = specialization.Value;
-                var traits = specializations[id].MajorTraitIds;
+                (var id, SelectedTrait adept, SelectedTrait master, SelectedTrait grandmaster) = specialization.Value;
+                IReadOnlyList<int> traits = specializations[id].MajorTraitIds;
                 return new SelectedSpecialization
                 {
                     Id = id,
@@ -180,7 +181,7 @@ public sealed record BuildTemplateLink : Link
                 return null;
             }
 
-            var (legends, _) = await gw2Client.Hero.Builds
+            (Dictionary<int, Legend> legends, _) = await gw2Client.Hero.Builds
                 .GetLegends(missingMemberBehavior, cancellationToken)
                 .AsDictionary(static legend => legend.Code)
                 .ConfigureAwait(false);
@@ -195,7 +196,7 @@ public sealed record BuildTemplateLink : Link
 
             string? LegendByCode(int? code)
             {
-                if (code.HasValue && legends.TryGetValue(code.Value, out var legend))
+                if (code.HasValue && legends.TryGetValue(code.Value, out Legend? legend))
                 {
                     return legend.Id;
                 }
@@ -314,7 +315,7 @@ public sealed record BuildTemplateLink : Link
                 return 0;
             }
 
-            var (_, adeptTrait, masterTrait, grandmasterTrait) = specialization.Value;
+            (_, SelectedTrait adeptTrait, SelectedTrait masterTrait, SelectedTrait grandmasterTrait) = specialization.Value;
 
             return (byte)((byte)adeptTrait
                 | ((byte)masterTrait << 2)
@@ -360,7 +361,7 @@ public sealed record BuildTemplateLink : Link
     /// <returns>The chat link as an object.</returns>
     public static BuildTemplateLink Parse(in ReadOnlySpan<char> chatLink)
     {
-        var bytes = GetBytes(chatLink);
+        Span<byte> bytes = GetBytes(chatLink);
         LinkBuffer buffer = new(bytes);
         if (buffer.ReadUInt8() != LinkHeader.BuildTemplate)
         {

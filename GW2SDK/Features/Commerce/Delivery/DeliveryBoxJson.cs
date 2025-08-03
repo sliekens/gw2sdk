@@ -11,7 +11,7 @@ internal static class DeliveryBoxJson
         RequiredMember coins = "coins";
         RequiredMember items = "items";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (coins.Match(member))
             {

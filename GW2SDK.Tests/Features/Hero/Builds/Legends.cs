@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Builds;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Builds;
 
@@ -9,7 +10,7 @@ public class Legends
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<Legend> actual, MessageContext context) =
             await sut.Hero.Builds.GetLegends(
                 cancellationToken: TestContext.Current.CancellationToken
             );

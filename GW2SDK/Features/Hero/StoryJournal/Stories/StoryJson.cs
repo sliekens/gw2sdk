@@ -20,7 +20,7 @@ internal static class StoryJson
         RequiredMember chapters = "chapters";
         OptionalMember flags = "flags";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

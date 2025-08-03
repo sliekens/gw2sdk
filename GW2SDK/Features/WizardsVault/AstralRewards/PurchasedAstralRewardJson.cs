@@ -16,7 +16,7 @@ internal static class PurchasedAstralRewardJson
         NullableMember purchased = "purchased";
         NullableMember purchaseLimit = "purchase_limit";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

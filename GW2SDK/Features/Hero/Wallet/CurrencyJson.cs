@@ -14,7 +14,7 @@ internal static class CurrencyJson
         RequiredMember order = "order";
         RequiredMember icon = "icon";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

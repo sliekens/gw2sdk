@@ -9,7 +9,7 @@ internal static class ObjectiveJson
 {
     public static Objective GetObjective(this in JsonElement json)
     {
-        if (json.TryGetProperty("type", out var discriminator))
+        if (json.TryGetProperty("type", out JsonElement discriminator))
         {
             switch (discriminator.GetString())
             {
@@ -43,7 +43,7 @@ internal static class ObjectiveJson
         OptionalMember marker = "marker";
         RequiredMember chatLink = "chat_link";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

@@ -22,7 +22,7 @@ internal static class GuildJson
         RequiredMember tag = "tag";
         RequiredMember emblem = "emblem";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (level.Match(member))
             {

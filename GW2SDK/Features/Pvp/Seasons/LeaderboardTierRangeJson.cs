@@ -11,7 +11,7 @@ internal static class LeaderboardTierRangeJson
         JsonElement min = default;
         JsonElement max = default;
 
-        foreach (var member in json.EnumerateArray())
+        foreach (JsonElement member in json.EnumerateArray())
         {
             if (max.ValueKind == JsonValueKind.Undefined)
             {

@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pvp.Amulets;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pvp.Amulets;
 
@@ -15,7 +16,7 @@ public class AmuletsByFilter
             9
         ];
 
-        var (actual, context) = await sut.Pvp.GetAmuletsByIds(
+        (HashSet<Amulet> actual, MessageContext context) = await sut.Pvp.GetAmuletsByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

@@ -19,7 +19,7 @@ internal static class DistanceJson
         RequiredMember icon = "icon";
         RequiredMember distance = "distance";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

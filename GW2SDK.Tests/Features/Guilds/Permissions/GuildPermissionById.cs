@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Guilds.Permissions;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Guilds.Permissions;
 
@@ -11,7 +12,7 @@ public class GuildPermissionById
 
         const string id = "StartingRole";
 
-        var (actual, context) = await sut.Guilds.GetGuildPermissionById(
+        (GuildPermissionSummary actual, MessageContext context) = await sut.Guilds.GetGuildPermissionById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Wvw.Matches;
 
 namespace GuildWars2.Tests.Features.Wvw.Matches;
 
@@ -11,7 +12,7 @@ public class MatchById
 
         const string id = "1-1";
 
-        var (actual, context) = await sut.Wvw.GetMatchById(
+        (Match actual, MessageContext context) = await sut.Wvw.GetMatchById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

@@ -12,7 +12,7 @@ internal static class GuildEmblemFlagsJson
         var flipBackgroundHorizontal = false;
         var flipBackgroundVertical = false;
         ValueList<string> others = [];
-        foreach (var entry in json.EnumerateArray())
+        foreach (JsonElement entry in json.EnumerateArray())
         {
             if (entry.ValueEquals("FlipBackgroundHorizontal"))
             {

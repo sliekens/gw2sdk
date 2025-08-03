@@ -11,7 +11,7 @@ internal static class BonusJson
         RequiredMember type = "type";
         RequiredMember owner = "owner";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (type.Match(member))
             {

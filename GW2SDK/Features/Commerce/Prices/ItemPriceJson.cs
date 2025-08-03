@@ -15,7 +15,7 @@ internal static class ItemPriceJson
         RequiredMember supply = "quantity";
         RequiredMember bestAsk = "unit_price";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {
@@ -27,7 +27,7 @@ internal static class ItemPriceJson
             }
             else if (member.NameEquals("buys"))
             {
-                foreach (var buy in member.Value.EnumerateObject())
+                foreach (JsonProperty buy in member.Value.EnumerateObject())
                 {
                     if (demand.Match(buy))
                     {
@@ -45,7 +45,7 @@ internal static class ItemPriceJson
             }
             else if (member.NameEquals("sells"))
             {
-                foreach (var sell in member.Value.EnumerateObject())
+                foreach (JsonProperty sell in member.Value.EnumerateObject())
                 {
                     if (supply.Match(sell))
                     {

@@ -17,7 +17,7 @@ public class Skills
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<Skill> actual, MessageContext context) =
             await sut.Hero.Builds.GetSkills(
                 cancellationToken: TestContext.Current.CancellationToken
             );
@@ -398,11 +398,11 @@ public class Skills
                     );
                 }
 
-                var chatLink = skill.GetChatLink();
+                SkillLink chatLink = skill.GetChatLink();
                 Assert.Equal(skill.Id, chatLink.SkillId);
                 Assert.Equal(skill.ChatLink, chatLink.ToString());
 
-                var chatLinkRoundtrip = SkillLink.Parse(chatLink.ToString());
+                SkillLink chatLinkRoundtrip = SkillLink.Parse(chatLink.ToString());
                 Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
             }
         );

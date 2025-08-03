@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Emotes;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Emotes;
 
@@ -11,7 +12,7 @@ public class EmoteById
 
         const string id = "rockout";
 
-        var (actual, context) = await sut.Hero.Emotes.GetEmoteById(
+        (Emote actual, MessageContext context) = await sut.Hero.Emotes.GetEmoteById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

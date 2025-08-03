@@ -10,7 +10,7 @@ internal static class LearnedCraftingDisciplinesJson
     {
         RequiredMember crafting = "crafting";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (crafting.Match(member))
             {

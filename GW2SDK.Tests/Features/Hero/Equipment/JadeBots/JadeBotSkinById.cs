@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Equipment.JadeBots;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.JadeBots;
 
@@ -11,7 +12,7 @@ public class JadeBotSkinById
 
         const int id = 2;
 
-        var (actual, context) = await sut.Hero.Equipment.JadeBots.GetJadeBotSkinById(
+        (JadeBotSkin actual, MessageContext context) = await sut.Hero.Equipment.JadeBots.GetJadeBotSkinById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

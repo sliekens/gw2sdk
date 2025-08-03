@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 
+using GuildWars2.Collections;
 using GuildWars2.Guilds.Bank;
 using GuildWars2.Guilds.Emblems;
 using GuildWars2.Guilds.Logs;
@@ -42,14 +43,14 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/guild/search");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/guild/search");
         requestBuilder.Query.Add("name", name);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
+            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -73,14 +74,14 @@ public sealed class GuildsClient
     )
     {
         // Don't use 'id=' here, it results in a 404 even with a valid guild ID
-        var requestBuilder = RequestBuilder.HttpGet($"v2/guild/{guildId}", accessToken);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet($"v2/guild/{guildId}", accessToken);
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetGuild();
+            Guild value = response.Json.RootElement.GetGuild();
             return (value, response.Context);
         }
     }
@@ -103,14 +104,14 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/guild/{guildId}/ranks", accessToken);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet($"v2/guild/{guildId}/ranks", accessToken);
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetList(static (in JsonElement entry) => entry.GetGuildRank());
+            ValueList<GuildRank> value = response.Json.RootElement.GetList(static (in JsonElement entry) => entry.GetGuildRank());
             return (value, response.Context);
         }
     }
@@ -133,14 +134,14 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/guild/{guildId}/members", accessToken);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet($"v2/guild/{guildId}/members", accessToken);
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetList(static (in JsonElement entry) => entry.GetGuildMember());
+            ValueList<GuildMember> value = response.Json.RootElement.GetList(static (in JsonElement entry) => entry.GetGuildMember());
             return (value, response.Context);
         }
     }
@@ -163,14 +164,14 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/guild/{guildId}/teams", accessToken);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet($"v2/guild/{guildId}/teams", accessToken);
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetList(static (in JsonElement entry) => entry.GetGuildTeam());
+            ValueList<GuildTeam> value = response.Json.RootElement.GetList(static (in JsonElement entry) => entry.GetGuildTeam());
             return (value, response.Context);
         }
     }
@@ -193,14 +194,14 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/guild/{guildId}/treasury", accessToken);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet($"v2/guild/{guildId}/treasury", accessToken);
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
+            ValueList<GuildTreasurySlot> value =
                 response.Json.RootElement.GetList(static (in JsonElement entry) => entry.GetGuildTreasurySlot());
             return (value, response.Context);
         }
@@ -224,14 +225,14 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/guild/{guildId}/stash", accessToken);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet($"v2/guild/{guildId}/stash", accessToken);
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetList(static (in JsonElement entry) => entry.GetGuildBankTab());
+            ValueList<GuildBankTab> value = response.Json.RootElement.GetList(static (in JsonElement entry) => entry.GetGuildBankTab());
             return (value, response.Context);
         }
     }
@@ -254,14 +255,14 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/guild/{guildId}/storage", accessToken);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet($"v2/guild/{guildId}/storage", accessToken);
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
+            ValueList<GuildStorageSlot> value =
                 response.Json.RootElement.GetList(static (in JsonElement entry) => entry.GetGuildStorageSlot());
             return (value, response.Context);
         }
@@ -283,13 +284,13 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/guild/{guildId}/upgrades", accessToken);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet($"v2/guild/{guildId}/upgrades", accessToken);
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -331,19 +332,19 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet($"v2/guild/{guildId}/log", accessToken);
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet($"v2/guild/{guildId}/log", accessToken);
         if (sinceLogId.HasValue)
         {
             requestBuilder.Query.Add("since", sinceLogId.Value);
         }
 
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetList(static (in JsonElement entry) => entry.GetGuildLogEntry());
+            ValueList<GuildLogEntry> value = response.Json.RootElement.GetList(static (in JsonElement entry) => entry.GetGuildLogEntry());
             return (value, response.Context);
         }
     }
@@ -362,15 +363,15 @@ public sealed class GuildsClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/emblem/foregrounds");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/emblem/foregrounds");
         requestBuilder.Query.AddAllIds();
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
+            ValueHashSet<EmblemForeground> value =
                 response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEmblemForeground());
             return (value, response.Context);
         }
@@ -383,13 +384,13 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/emblem/foregrounds");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/emblem/foregrounds");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -405,15 +406,15 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/emblem/foregrounds");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/emblem/foregrounds");
         requestBuilder.Query.AddId(emblemForegroundId);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetEmblemForeground();
+            EmblemForeground value = response.Json.RootElement.GetEmblemForeground();
             return (value, response.Context);
         }
     }
@@ -430,15 +431,15 @@ public sealed class GuildsClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/emblem/foregrounds");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/emblem/foregrounds");
         requestBuilder.Query.AddIds(emblemForegroundIds);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
+            ValueHashSet<EmblemForeground> value =
                 response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEmblemForeground());
             return (value, response.Context);
         }
@@ -458,15 +459,15 @@ public sealed class GuildsClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/emblem/foregrounds");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/emblem/foregrounds");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
+            ValueHashSet<EmblemForeground> value =
                 response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEmblemForeground());
             return (value, response.Context);
         }
@@ -486,15 +487,15 @@ public sealed class GuildsClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/emblem/backgrounds");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/emblem/backgrounds");
         requestBuilder.Query.AddAllIds();
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
+            ValueHashSet<EmblemBackground> value =
                 response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEmblemBackground());
             return (value, response.Context);
         }
@@ -507,13 +508,13 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/emblem/backgrounds");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/emblem/backgrounds");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -529,15 +530,15 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/emblem/backgrounds");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/emblem/backgrounds");
         requestBuilder.Query.AddId(backgroundEmblemId);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetEmblemBackground();
+            EmblemBackground value = response.Json.RootElement.GetEmblemBackground();
             return (value, response.Context);
         }
     }
@@ -554,15 +555,15 @@ public sealed class GuildsClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/emblem/backgrounds");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/emblem/backgrounds");
         requestBuilder.Query.AddIds(backgroundEmblemIds);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
+            ValueHashSet<EmblemBackground> value =
                 response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEmblemBackground());
             return (value, response.Context);
         }
@@ -582,15 +583,15 @@ public sealed class GuildsClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/emblem/backgrounds");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/emblem/backgrounds");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
+            ValueHashSet<EmblemBackground> value =
                 response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEmblemBackground());
             return (value, response.Context);
         }
@@ -612,16 +613,16 @@ public sealed class GuildsClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/guild/permissions");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/guild/permissions");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
+            ValueHashSet<GuildPermissionSummary> value =
                 response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGuildPermissionSummary());
             return (value, response.Context);
         }
@@ -634,13 +635,13 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/guild/permissions");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/guild/permissions");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
+            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -659,16 +660,16 @@ public sealed class GuildsClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/guild/permissions");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/guild/permissions");
         requestBuilder.Query.AddId(guildPermissionId);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetGuildPermissionSummary();
+            GuildPermissionSummary value = response.Json.RootElement.GetGuildPermissionSummary();
             return (value, response.Context);
         }
     }
@@ -687,16 +688,16 @@ public sealed class GuildsClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/guild/permissions");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/guild/permissions");
         requestBuilder.Query.AddIds(guildPermissionIds);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
+            ValueHashSet<GuildPermissionSummary> value =
                 response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGuildPermissionSummary());
             return (value, response.Context);
         }
@@ -718,16 +719,16 @@ public sealed class GuildsClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/guild/permissions");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/guild/permissions");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
+            ValueHashSet<GuildPermissionSummary> value =
                 response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGuildPermissionSummary());
             return (value, response.Context);
         }
@@ -748,16 +749,16 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/guild/upgrades");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/guild/upgrades");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGuildUpgrade());
+            ValueHashSet<GuildUpgrade> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGuildUpgrade());
             return (value, response.Context);
         }
     }
@@ -769,13 +770,13 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/guild/upgrades");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/guild/upgrades");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -793,16 +794,16 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/guild/upgrades");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/guild/upgrades");
         requestBuilder.Query.AddId(guildUpgradeId);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetGuildUpgrade();
+            GuildUpgrade value = response.Json.RootElement.GetGuildUpgrade();
             return (value, response.Context);
         }
     }
@@ -820,16 +821,16 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/guild/upgrades");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/guild/upgrades");
         requestBuilder.Query.AddIds(guildUpgradeIds);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGuildUpgrade());
+            ValueHashSet<GuildUpgrade> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGuildUpgrade());
             return (value, response.Context);
         }
     }
@@ -849,16 +850,16 @@ public sealed class GuildsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/guild/upgrades");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/guild/upgrades");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGuildUpgrade());
+            ValueHashSet<GuildUpgrade> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGuildUpgrade());
             return (value, response.Context);
         }
     }

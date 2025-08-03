@@ -12,7 +12,7 @@ internal static class LeaderboardGroupJson
         OptionalMember legendary = "legendary";
         OptionalMember guild = "guild";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (ladder.Match(member))
             {

@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.WizardsVault.AstralRewards;
 
 namespace GuildWars2.Tests.Features.WizardsVault.AstralRewards;
 
@@ -10,7 +11,7 @@ public class AstralRewardsByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
-        var (actual, context) = await sut.WizardsVault.GetAstralRewardsByPage(
+        (HashSet<AstralReward> actual, MessageContext context) = await sut.WizardsVault.GetAstralRewardsByPage(
             0,
             pageSize,
             cancellationToken: TestContext.Current.CancellationToken

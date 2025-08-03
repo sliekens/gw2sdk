@@ -9,7 +9,7 @@ public class AchievementsIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<int> actual, MessageContext context) =
             await sut.Hero.Achievements.GetAchievementsIndex(TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);

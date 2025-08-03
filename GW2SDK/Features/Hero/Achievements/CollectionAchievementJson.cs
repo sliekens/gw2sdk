@@ -21,7 +21,7 @@ internal static class CollectionAchievementJson
         OptionalMember bits = "bits";
         NullableMember pointCap = "point_cap";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

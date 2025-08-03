@@ -16,7 +16,7 @@ internal static class FishingToolSkinJson
         RequiredMember restrictions = "restrictions";
         RequiredMember id = "id";
         OptionalMember icon = "icon";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {
@@ -55,7 +55,7 @@ internal static class FishingToolSkinJson
             }
             else if (member.NameEquals("details"))
             {
-                foreach (var detail in member.Value.EnumerateObject())
+                foreach (JsonProperty detail in member.Value.EnumerateObject())
                 {
                     if (detail.NameEquals("type"))
                     {

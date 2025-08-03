@@ -8,7 +8,7 @@ internal static class GuildUpgradeJson
 {
     public static GuildUpgrade GetGuildUpgrade(this in JsonElement json)
     {
-        if (json.TryGetProperty("type", out var discriminator))
+        if (json.TryGetProperty("type", out JsonElement discriminator))
         {
             switch (discriminator.GetString())
             {
@@ -47,7 +47,7 @@ internal static class GuildUpgradeJson
         RequiredMember prerequisites = "prerequisites";
         RequiredMember costs = "costs";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

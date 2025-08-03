@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Exploration.Continents;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Exploration.Continents;
 
@@ -11,7 +12,7 @@ public class ContinentsByFilter
 
         HashSet<int> ids = [1, 2];
 
-        var (actual, context) = await sut.Exploration.GetContinentsByIds(
+        (HashSet<Continent> actual, MessageContext context) = await sut.Exploration.GetContinentsByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

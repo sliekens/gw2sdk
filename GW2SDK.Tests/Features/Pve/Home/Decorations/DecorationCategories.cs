@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pve.Home.Decorations;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pve.Home.Decorations;
 
@@ -9,7 +10,7 @@ public class DecorationCategories
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Pve.Home.GetDecorationCategories(
+        (HashSet<DecorationCategory> actual, MessageContext context) = await sut.Pve.Home.GetDecorationCategories(
             cancellationToken: TestContext.Current.CancellationToken
         );
 

@@ -8,9 +8,9 @@ public class DailyObjectivesProgress
     public async Task Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = TestConfiguration.ApiKey;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
-        var (actual, context) = await sut.WizardsVault.GetDailyObjectivesProgress(
+        (GuildWars2.WizardsVault.Objectives.DailyObjectivesProgress actual, MessageContext context) = await sut.WizardsVault.GetDailyObjectivesProgress(
             accessToken.Key,
             cancellationToken: TestContext.Current.CancellationToken
         );

@@ -16,7 +16,7 @@ internal sealed class CoatJsonConverter : JsonConverter<Coat>
         JsonSerializerOptions options
     )
     {
-        using var json = JsonDocument.ParseValue(ref reader);
+        using JsonDocument json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 

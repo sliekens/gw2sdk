@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Commerce.Listings;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Commerce.Listings;
 
@@ -11,7 +12,7 @@ public class OrderBookById
 
         const int id = 24;
 
-        var (actual, context) = await sut.Commerce.GetOrderBookById(
+        (OrderBook actual, MessageContext context) = await sut.Commerce.GetOrderBookById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

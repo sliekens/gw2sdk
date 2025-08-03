@@ -12,7 +12,7 @@ internal static class WorldsJson
         RequiredMember blue = "blue";
         RequiredMember green = "green";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (red.Match(member))
             {

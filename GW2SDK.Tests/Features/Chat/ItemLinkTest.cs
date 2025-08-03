@@ -17,7 +17,7 @@ public class ItemLinkTest
         int? secondarySuffixItemId
     )
     {
-        var sut = ItemLink.Parse(chatLink);
+        ItemLink sut = ItemLink.Parse(chatLink);
 
         var actual = sut.ToString();
 
@@ -27,7 +27,7 @@ public class ItemLinkTest
         Assert.Equal(skinId, sut.SkinId);
         if (skinId.HasValue)
         {
-            var skinLink = sut.GetSkinLink();
+            SkinLink? skinLink = sut.GetSkinLink();
             Assert.Equal(skinId, skinLink?.SkinId);
         }
         else
@@ -38,7 +38,7 @@ public class ItemLinkTest
         Assert.Equal(suffixItemId, sut.SuffixItemId);
         if (suffixItemId.HasValue)
         {
-            var suffixLink = sut.GetSuffixItemLink();
+            ItemLink? suffixLink = sut.GetSuffixItemLink();
             Assert.Equal(suffixItemId, suffixLink?.ItemId);
         }
         else
@@ -49,7 +49,7 @@ public class ItemLinkTest
         Assert.Equal(secondarySuffixItemId, sut.SecondarySuffixItemId);
         if (secondarySuffixItemId.HasValue)
         {
-            var secondarySuffixLink = sut.GetSecondarySuffixItemLink();
+            ItemLink? secondarySuffixLink = sut.GetSecondarySuffixItemLink();
             Assert.Equal(secondarySuffixItemId, secondarySuffixLink?.ItemId);
         }
         else

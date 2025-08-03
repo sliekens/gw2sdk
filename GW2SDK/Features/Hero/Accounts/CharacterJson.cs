@@ -39,7 +39,7 @@ internal static class CharacterJson
         OptionalMember training = "training";
         OptionalMember bags = "bags";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (name.Match(member))
             {

@@ -12,7 +12,7 @@ internal static class RectangleJson
         JsonElement southWest = default;
         JsonElement northEast = default;
 
-        foreach (var entry in json.EnumerateArray())
+        foreach (JsonElement entry in json.EnumerateArray())
         {
             if (southWest.ValueKind == JsonValueKind.Undefined)
             {
@@ -28,8 +28,8 @@ internal static class RectangleJson
             }
         }
 
-        var sw = southWest.GetCoordinate();
-        var ne = northEast.GetCoordinate();
+        Point sw = southWest.GetCoordinate();
+        Point ne = northEast.GetCoordinate();
 
         return new Rectangle(
             sw.X, // The x-coordinate of the upper-left corner of the rectangle
@@ -44,7 +44,7 @@ internal static class RectangleJson
         JsonElement northWest = default;
         JsonElement southEast = default;
 
-        foreach (var entry in json.EnumerateArray())
+        foreach (JsonElement entry in json.EnumerateArray())
         {
             if (northWest.ValueKind == JsonValueKind.Undefined)
             {
@@ -60,8 +60,8 @@ internal static class RectangleJson
             }
         }
 
-        var nw = northWest.GetCoordinate();
-        var se = southEast.GetCoordinate();
+        Point nw = northWest.GetCoordinate();
+        Point se = southEast.GetCoordinate();
 
         return new Rectangle(
             nw.X, // The x-coordinate of the upper-left corner of the rectangle

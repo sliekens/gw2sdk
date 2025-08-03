@@ -17,7 +17,7 @@ internal sealed class RuneJsonConverter : JsonConverter<Rune>
         JsonSerializerOptions options
     )
     {
-        using var json = JsonDocument.ParseValue(ref reader);
+        using JsonDocument json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
@@ -82,7 +82,7 @@ internal sealed class RuneJsonConverter : JsonConverter<Rune>
             Bonuses = json.GetProperty("bonuses")
                 .GetNullable(static (in JsonElement value) => value.GetList(static (in JsonElement entry) => entry.GetStringRequired())),
             UpgradesInto =
-                json.TryGetProperty("upgrades_into", out var found)
+                json.TryGetProperty("upgrades_into", out JsonElement found)
                     ? found.GetList(InfusionSlotUpgradePathJsonConverter.Read)
                     : new ValueList<InfusionSlotUpgradePath>()
         };

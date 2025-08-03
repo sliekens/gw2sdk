@@ -1,4 +1,5 @@
-﻿using GuildWars2.Quaggans;
+﻿using GuildWars2;
+using GuildWars2.Quaggans;
 
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -23,7 +24,7 @@ internal class IndexModel(ILogger<IndexModel> logger, QuaggansClient quaggans) :
     public async Task OnGet()
     {
         logger.LogInformation("Retrieving the Quaggans.");
-        var (found, context) = await quaggans.GetQuaggans();
+        (HashSet<Quaggan> found, MessageContext context) = await quaggans.GetQuaggans();
         Refreshed = context.Date;
         Quaggans = found.Select((quaggan, index) => new QuagganViewModel
         {

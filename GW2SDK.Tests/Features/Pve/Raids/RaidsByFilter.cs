@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pve.Raids;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pve.Raids;
 
@@ -15,7 +16,7 @@ public class RaidsByFilter
             "hall_of_chains"
         ];
 
-        var (actual, context) = await sut.Pve.Raids.GetRaidsByIds(
+        (HashSet<Raid> actual, MessageContext context) = await sut.Pve.Raids.GetRaidsByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

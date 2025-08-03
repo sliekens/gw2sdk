@@ -18,7 +18,7 @@ internal static class LeggingsSkinJson
         OptionalMember icon = "icon";
         RequiredMember weightClass = "weight_class";
         OptionalMember dyeSlots = "dye_slots";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {
@@ -57,7 +57,7 @@ internal static class LeggingsSkinJson
             }
             else if (member.NameEquals("details"))
             {
-                foreach (var detail in member.Value.EnumerateObject())
+                foreach (JsonProperty detail in member.Value.EnumerateObject())
                 {
                     if (detail.NameEquals("type"))
                     {

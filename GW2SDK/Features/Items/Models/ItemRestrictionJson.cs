@@ -20,7 +20,7 @@ internal static class ItemRestrictionJson
         ValueList<Extensible<ProfessionName>>? professions = null;
         ValueList<Extensible<BodyType>>? bodyTypes = null;
         ValueList<string> other = [];
-        foreach (var entry in json.EnumerateArray())
+        foreach (JsonElement entry in json.EnumerateArray())
         {
             if (entry.ValueEquals(nameof(Asura)))
             {

@@ -9,7 +9,7 @@ public class LegendaryItemsIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<int> actual, MessageContext context) =
             await sut.Hero.Equipment.Templates.GetLegendaryItemsIndex(
                 TestContext.Current.CancellationToken
             );

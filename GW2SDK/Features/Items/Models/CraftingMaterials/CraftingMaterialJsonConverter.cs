@@ -15,7 +15,7 @@ internal sealed class CraftingMaterialJsonConverter : JsonConverter<CraftingMate
         JsonSerializerOptions options
     )
     {
-        using var json = JsonDocument.ParseValue(ref reader);
+        using JsonDocument json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
@@ -66,7 +66,7 @@ internal sealed class CraftingMaterialJsonConverter : JsonConverter<CraftingMate
         writer.WriteString(ItemJsonConverter.DiscriminatorName, DiscriminatorValue);
         ItemJsonConverter.WriteCommonProperties(writer, value);
         writer.WriteStartArray("upgrades_into");
-        foreach (var upgrade in value.UpgradesInto)
+        foreach (InfusionSlotUpgradePath? upgrade in value.UpgradesInto)
         {
             InfusionSlotUpgradePathJsonConverter.Write(writer, upgrade);
         }

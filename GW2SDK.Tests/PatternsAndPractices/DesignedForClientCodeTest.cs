@@ -16,7 +16,7 @@ public class DesignedForClientCodeTest(AssemblyFixture fixture) : IClassFixture<
          * Note that the goal is not to make every helper object internal, but to think carefully about their class design.
          * Especially regarding how easily they can be replaced or evolved between versions.
          */
-        var visible = fixture.Assembly.ExportedTypes
+        List<Type> visible = fixture.Assembly.ExportedTypes
             .Where(type => type.Namespace!.StartsWith("GuildWars2", StringComparison.Ordinal))
             .ToList();
         Assert.All(
@@ -39,7 +39,7 @@ public class DesignedForClientCodeTest(AssemblyFixture fixture) : IClassFixture<
     [Fact]
     public void Every_type_designed_for_client_code_is_visible()
     {
-        var invisible = fixture.Assembly.DefinedTypes.Where(type => type.IsNotPublic).ToList();
+        List<TypeInfo> invisible = fixture.Assembly.DefinedTypes.Where(type => type.IsNotPublic).ToList();
         Assert.All(
             invisible,
             type =>

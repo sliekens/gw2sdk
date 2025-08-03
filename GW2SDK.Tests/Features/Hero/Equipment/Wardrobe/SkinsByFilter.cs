@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Equipment.Wardrobe;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Wardrobe;
 
@@ -15,7 +16,7 @@ public class SkinsByFilter
             3
         ];
 
-        var (actual, context) = await sut.Hero.Equipment.Wardrobe.GetSkinsByIds(
+        (HashSet<EquipmentSkin> actual, MessageContext context) = await sut.Hero.Equipment.Wardrobe.GetSkinsByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

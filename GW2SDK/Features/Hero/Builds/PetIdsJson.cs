@@ -11,7 +11,7 @@ internal static class PetIdsJson
         JsonElement first = default;
         JsonElement second = default;
 
-        foreach (var entry in json.EnumerateArray())
+        foreach (JsonElement entry in json.EnumerateArray())
         {
             if (first.ValueKind == JsonValueKind.Undefined)
             {

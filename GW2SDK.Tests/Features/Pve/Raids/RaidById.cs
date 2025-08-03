@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pve.Raids;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pve.Raids;
 
@@ -11,7 +12,7 @@ public class RaidById
 
         const string id = "forsaken_thicket";
 
-        var (actual, context) = await sut.Pve.Raids.GetRaidById(
+        (Raid actual, MessageContext context) = await sut.Pve.Raids.GetRaidById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

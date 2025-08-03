@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Wvw.Matches.Scores;
 
 namespace GuildWars2.Tests.Features.Wvw.Matches.Scores;
 
@@ -11,7 +12,7 @@ public class MatchScoresByWorldId
 
         const int worldId = 2006;
 
-        var (actual, _) = await sut.Wvw.GetMatchScoresByWorldId(
+        (MatchScores actual, _) = await sut.Wvw.GetMatchScoresByWorldId(
             worldId,
             cancellationToken: TestContext.Current.CancellationToken
         );

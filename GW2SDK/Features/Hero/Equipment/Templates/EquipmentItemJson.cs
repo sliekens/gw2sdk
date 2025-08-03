@@ -22,7 +22,7 @@ internal static class EquipmentItemJson
         OptionalMember tabs = "tabs";
         OptionalMember dyes = "dyes";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

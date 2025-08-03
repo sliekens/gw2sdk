@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Logos;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Logos;
 
@@ -16,7 +17,7 @@ public class LogosByFilter
             "Guild-Wars-2-logo-de",
         ];
 
-        var (actual, context) = await sut.Logos.GetLogosByIds(
+        (HashSet<Logo> actual, MessageContext context) = await sut.Logos.GetLogosByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

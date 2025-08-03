@@ -12,7 +12,7 @@ internal static class ApiVersionJson
         RequiredMember routes = "routes";
         OptionalMember schemaVersions = "schema_versions";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (languages.Match(member))
             {

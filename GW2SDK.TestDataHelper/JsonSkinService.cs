@@ -1,4 +1,6 @@
-﻿using GuildWars2.Hero.Equipment.Wardrobe;
+﻿using System.Text.Json;
+
+using GuildWars2.Hero.Equipment.Wardrobe;
 
 namespace GuildWars2.TestDataHelper;
 
@@ -6,7 +8,7 @@ internal sealed class JsonSkinService(HttpClient http)
 {
     public async Task<ISet<string>> GetAllJsonSkins(IProgress<BulkProgress> progress)
     {
-        var ids = await GetSkinIds().ConfigureAwait(false);
+        HashSet<int> ids = await GetSkinIds().ConfigureAwait(false);
         var entries = new SortedDictionary<int, string>();
         await foreach (var (id, entry) in GetJsonSkinsByIds(ids, progress).ConfigureAwait(false))
         {
@@ -19,7 +21,7 @@ internal sealed class JsonSkinService(HttpClient http)
     private async Task<HashSet<int>> GetSkinIds()
     {
         var wardrobe = new WardrobeClient(http);
-        var (ids, _) = await wardrobe.GetSkinsIndex().ConfigureAwait(false);
+        (HashSet<int> ids, _) = await wardrobe.GetSkinsIndex().ConfigureAwait(false);
         return ids;
     }
 
@@ -43,7 +45,7 @@ internal sealed class JsonSkinService(HttpClient http)
         {
             Uri resource = new Uri("/v2/skins", UriKind.Relative);
             var request = new BulkRequest(resource) { Ids = [.. chunk] };
-            var json = await request.SendAsync(http, cancellationToken).ConfigureAwait(false);
+            JsonDocument json = await request.SendAsync(http, cancellationToken).ConfigureAwait(false);
             return [.. json.RootElement.EnumerateArray().Select(item => (item.GetProperty("id").GetInt32(), item.ToJsonLine()))];
         }
     }

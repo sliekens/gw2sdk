@@ -23,7 +23,7 @@ internal static class AccountSummaryJson
         NullableMember monthlyAp = "monthly_ap";
         RequiredMember wvw = "wvw";
         NullableMember buildStorageSlots = "build_storage_slots";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

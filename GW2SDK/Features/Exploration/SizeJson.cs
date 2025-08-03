@@ -12,7 +12,7 @@ internal static class SizeJson
         JsonElement width = default;
         JsonElement height = default;
 
-        foreach (var entry in json.EnumerateArray())
+        foreach (JsonElement entry in json.EnumerateArray())
         {
             if (width.ValueKind == JsonValueKind.Undefined)
             {

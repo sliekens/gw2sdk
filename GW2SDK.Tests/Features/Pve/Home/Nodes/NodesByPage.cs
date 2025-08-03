@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pve.Home.Nodes;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pve.Home.Nodes;
 
@@ -10,7 +11,7 @@ public class NodesByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
-        var (actual, context) = await sut.Pve.Home.GetNodesByPage(
+        (HashSet<Node> actual, MessageContext context) = await sut.Pve.Home.GetNodesByPage(
             0,
             pageSize,
             cancellationToken: TestContext.Current.CancellationToken

@@ -10,7 +10,7 @@ internal static class CharacterBackgroundStoryJson
     {
         RequiredMember backstory = "backstory";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (backstory.Match(member))
             {

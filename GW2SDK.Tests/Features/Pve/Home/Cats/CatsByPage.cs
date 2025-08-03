@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pve.Home.Cats;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pve.Home.Cats;
 
@@ -10,7 +11,7 @@ public class CatsByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
-        var (actual, context) = await sut.Pve.Home.GetCatsByPage(
+        (HashSet<Cat> actual, MessageContext context) = await sut.Pve.Home.GetCatsByPage(
             0,
             pageSize,
             cancellationToken: TestContext.Current.CancellationToken

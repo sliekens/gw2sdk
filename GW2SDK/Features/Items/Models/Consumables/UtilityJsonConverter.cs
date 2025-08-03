@@ -20,7 +20,7 @@ internal sealed class UtilityJsonConverter : JsonConverter<Utility>
         JsonSerializerOptions options
     )
     {
-        using var json = JsonDocument.ParseValue(ref reader);
+        using JsonDocument json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 

@@ -17,7 +17,7 @@ public class Items
         using var handler = new JsonLinesHttpMessageHandler("Data/items.jsonl.gz");
         using var httpClient = new HttpClient(handler);
         var sut = new Gw2Client(httpClient);
-        await foreach (var (actual, context) in sut.Items.GetItemsBulk(
+        await foreach ((Item actual, MessageContext context) in sut.Items.GetItemsBulk(
                 cancellationToken: TestContext.Current.CancellationToken
             ))
         {
@@ -52,7 +52,7 @@ public class Items
                         case RecipeSheet recipe:
                             Assert.True(recipe.Id > 0);
                             Assert.NotNull(recipe.ExtraRecipeIds);
-                            foreach (var (extraRecipeId, extraRecipeLink) in
+                            foreach ((var extraRecipeId, RecipeLink? extraRecipeLink) in
                                 recipe.ExtraRecipeIds.Zip(
                                     recipe.GetExtraRecipeChatLinks(),
                                     (extraRecipeId, extraRecipeLink) =>
@@ -62,10 +62,10 @@ public class Items
                                 Assert.Equal(extraRecipeId, extraRecipeLink.RecipeId);
                             }
 
-                            var recipeLink = recipe.GetRecipeChatLink();
+                            RecipeLink recipeLink = recipe.GetRecipeChatLink();
                             Assert.Equal(recipe.RecipeId, recipeLink.RecipeId);
 
-                            var recipeLinkRoundtrip = RecipeLink.Parse(recipeLink.ToString());
+                            RecipeLink recipeLinkRoundtrip = RecipeLink.Parse(recipeLink.ToString());
                             Assert.Equal(recipeLink.ToString(), recipeLinkRoundtrip.ToString());
 
                             break;
@@ -136,7 +136,7 @@ public class Items
                         Assert.True(armor.SuffixItemId.Value >= 1);
                     }
 
-                    foreach (var slot in armor.InfusionSlots)
+                    foreach (InfusionSlot? slot in armor.InfusionSlots)
                     {
                         Assert.NotNull(slot.Flags);
                         Assert.True(slot.Flags.Enrichment || slot.Flags.Infusion);
@@ -249,11 +249,11 @@ public class Items
                 Assert.Equal(upgradable.InfusionSlotCount, upgradable.InfusionSlots.Count);
             }
 
-            var chatLink = actual.GetChatLink();
+            ItemLink chatLink = actual.GetChatLink();
             Assert.Equal(actual.ChatLink, chatLink.ToString());
             Assert.Equal(actual.Id, chatLink.ItemId);
 
-            var chatLinkRoundtrip = ItemLink.Parse(chatLink.ToString());
+            ItemLink chatLinkRoundtrip = ItemLink.Parse(chatLink.ToString());
             Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
         }
     }
@@ -266,7 +266,7 @@ public class Items
         using var handler = new JsonLinesHttpMessageHandler("Data/items.jsonl.gz");
         using var httpClient = new HttpClient(handler);
         var sut = new Gw2Client(httpClient);
-        await foreach (var original in sut.Items
+        await foreach (Item original in sut.Items
             .GetItemsBulk(cancellationToken: TestContext.Current.CancellationToken)
             .ValueOnly(TestContext.Current.CancellationToken))
         {

@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Metadata;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Metadata;
 
@@ -9,7 +10,7 @@ public class V1
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, _) = await sut.Metadata.GetApiVersion(
+        (ApiVersion actual, _) = await sut.Metadata.GetApiVersion(
             "v1",
             cancellationToken: TestContext.Current.CancellationToken
         );

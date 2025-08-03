@@ -109,7 +109,7 @@ public sealed record ItemLink : Link
     /// <returns>The chat link as an object.</returns>
     public static ItemLink Parse(in ReadOnlySpan<char> chatLink)
     {
-        var bytes = GetBytes(chatLink);
+        Span<byte> bytes = GetBytes(chatLink);
         LinkBuffer buffer = new(bytes);
         if (buffer.ReadUInt8() != LinkHeader.Item)
         {

@@ -14,7 +14,7 @@ internal static class SeasonJson
         RequiredMember listings = "listings";
         RequiredMember objectives = "objectives";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (title.Match(member))
             {

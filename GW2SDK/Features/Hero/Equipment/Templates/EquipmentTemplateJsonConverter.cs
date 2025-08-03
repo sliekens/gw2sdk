@@ -13,7 +13,7 @@ internal sealed class EquipmentTemplateJsonConverter : JsonConverter<EquipmentTe
         JsonSerializerOptions options
     )
     {
-        using var json = JsonDocument.ParseValue(ref reader);
+        using JsonDocument json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
@@ -38,7 +38,7 @@ internal sealed class EquipmentTemplateJsonConverter : JsonConverter<EquipmentTe
         writer.WriteNumber("tab", value.TabNumber);
         writer.WriteString("name", value.Name);
         writer.WriteStartArray("equipment");
-        foreach (var item in value.Items)
+        foreach (EquipmentItem item in value.Items)
         {
             EquipmentItemJsonConverter.Write(writer, item);
         }

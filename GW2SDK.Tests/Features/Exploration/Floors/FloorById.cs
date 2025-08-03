@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Exploration.Floors;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Exploration.Floors;
 
@@ -15,7 +16,7 @@ public class FloorById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Exploration.GetFloorById(
+        (Floor actual, MessageContext context) = await sut.Exploration.GetFloorById(
             continentId,
             floorId,
             cancellationToken: TestContext.Current.CancellationToken

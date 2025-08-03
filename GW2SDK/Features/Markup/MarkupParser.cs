@@ -16,7 +16,7 @@ public sealed class MarkupParser
         RootNode root = new();
         while (iterator.Current is { Type: not MarkupTokenType.End })
         {
-            var node = ParseNode(iterator);
+            MarkupNode? node = ParseNode(iterator);
             if (node is not null)
             {
                 root.Children.Add(node);
@@ -84,7 +84,7 @@ public sealed class MarkupParser
             while (iterator.Current?.Type != MarkupTokenType.TagClose
                 && iterator.Current?.Type != MarkupTokenType.End)
             {
-                var nextChild = ParseNode(iterator);
+                MarkupNode? nextChild = ParseNode(iterator);
                 if (nextChild is ColoredTextNode { Color: "" })
                 {
                     // Treat the <c> tag as TagClose if the color tag is not closed correctly.

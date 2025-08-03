@@ -11,7 +11,7 @@ internal static class MasteryPointsProgressJson
         RequiredMember totals = "totals";
         RequiredMember unlocked = "unlocked";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (totals.Match(member))
             {

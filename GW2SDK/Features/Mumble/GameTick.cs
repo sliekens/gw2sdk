@@ -81,7 +81,7 @@ public readonly record struct GameTick
 
         try
         {
-            using var json = JsonDocument.Parse(Identity);
+            using JsonDocument json = JsonDocument.Parse(Identity);
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             return json.RootElement.GetIdentity();
         }

@@ -10,7 +10,7 @@ internal static class GoldToGemsJson
     {
         RequiredMember coinsPerGem = "coins_per_gem";
         RequiredMember quantity = "quantity";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (coinsPerGem.Match(member))
             {

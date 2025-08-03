@@ -9,9 +9,9 @@ public class TokenInfo
     public async Task Token_has_info()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = TestConfiguration.ApiKey;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Tokens.GetTokenInfo(
+        (GuildWars2.Authorization.TokenInfo actual, _) = await sut.Tokens.GetTokenInfo(
             accessToken.Key,
             cancellationToken: TestContext.Current.CancellationToken
         );
@@ -22,9 +22,9 @@ public class TokenInfo
         Assert.NotEmpty(apiKey.Name);
 
 #if NET
-        var expectedPermissions = Enum.GetValues<Permission>().ToHashSet();
+        HashSet<Permission> expectedPermissions = Enum.GetValues<Permission>().ToHashSet();
 #else
-        var expectedPermissions = Enum.GetValues(typeof(Permission)).Cast<Permission>().ToHashSet();
+        HashSet<Permission> expectedPermissions = Enum.GetValues(typeof(Permission)).Cast<Permission>().ToHashSet();
 #endif
         Assert.Equal(
             expectedPermissions,

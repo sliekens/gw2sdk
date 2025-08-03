@@ -14,8 +14,8 @@ public static class MarkupConverter
             return markup;
         }
 
-        var tokens = MarkupLexer.Tokenize(markup);
-        var rootNode = MarkupParser.Parse(tokens);
+        IEnumerable<MarkupToken> tokens = MarkupLexer.Tokenize(markup);
+        RootNode rootNode = MarkupParser.Parse(tokens);
         return MarkupTextConverter.Convert(rootNode);
     }
 
@@ -30,8 +30,8 @@ public static class MarkupConverter
             return markup;
         }
 
-        var tokens = MarkupLexer.Tokenize(markup);
-        var rootNode = MarkupParser.Parse(tokens);
+        IEnumerable<MarkupToken> tokens = MarkupLexer.Tokenize(markup);
+        RootNode rootNode = MarkupParser.Parse(tokens);
         return MarkupHtmlConverter.Convert(rootNode);
     }
 
@@ -46,8 +46,8 @@ public static class MarkupConverter
             return markup;
         }
 
-        var tokens = MarkupLexer.Tokenize(markup);
-        var rootNode = MarkupParser.Parse(tokens);
+        IEnumerable<MarkupToken> tokens = MarkupLexer.Tokenize(markup);
+        RootNode rootNode = MarkupParser.Parse(tokens);
         return MarkupHtmlConverter.Convert(rootNode, colorMap);
     }
 }

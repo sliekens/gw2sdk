@@ -9,7 +9,7 @@ public class ContinentsIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<int> actual, MessageContext context) =
             await sut.Exploration.GetContinentsIndex(TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);

@@ -14,7 +14,7 @@ internal static class MapSummaryJson
         RequiredMember deaths = "deaths";
         RequiredMember kills = "kills";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

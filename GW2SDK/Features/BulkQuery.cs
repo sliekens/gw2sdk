@@ -46,7 +46,7 @@ public static class BulkQuery
         ThrowHelper.ThrowIfNull(keys);
         ThrowHelper.ThrowIfNull(bulkRequest);
 
-        var keysList = keys.ToList();
+        List<TKey> keysList = keys.ToList();
         if (keysList.Count == 0)
         {
             ThrowHelper.ThrowBadArgument("The keys collection cannot be empty.", nameof(keys));
@@ -76,8 +76,8 @@ public static class BulkQuery
         // PERF: no need to create chunks if keys do not exceed the chunk size
         if (keysList.Count <= chunkSize)
         {
-            var result = await bulkRequest(keysList, cancellationToken).ConfigureAwait(false);
-            foreach (var value in result)
+            IReadOnlyCollection<TValue> result = await bulkRequest(keysList, cancellationToken).ConfigureAwait(false);
+            foreach (TValue value in result)
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 yield return value;
@@ -91,8 +91,8 @@ public static class BulkQuery
         // DisposeSensor is used to detect if the SemaphoreSlim has been disposed
         using DisposeSensor disposeSensor = new();
         using SemaphoreSlim limiter = new(degreeOfParallelism);
-        var chunks = Chunk(keysList, chunkSize);
-        var tasks = chunks.Select(async chunk =>
+        IEnumerable<List<TKey>> chunks = Chunk(keysList, chunkSize);
+        List<Task<IReadOnlyCollection<TValue>>> tasks = chunks.Select(async chunk =>
                 {
                     await limiter.WaitAsync(cancellationToken).ConfigureAwait(false);
                     try
@@ -109,11 +109,11 @@ public static class BulkQuery
                 }
             )
             .ToList();
-        foreach (var bucket in tasks.Interleave())
+        foreach (Task<Task<IReadOnlyCollection<TValue>>> bucket in tasks.Interleave())
         {
-            var task = await bucket.ConfigureAwait(false);
+            Task<IReadOnlyCollection<TValue>> task = await bucket.ConfigureAwait(false);
 #pragma warning disable CA1849 // Call async methods when in an async method
-            foreach (var value in task.Result)
+            foreach (TValue value in task.Result)
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 progress?.Report(new BulkProgress(resultTotal, ++resultCount));

@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pve.Home.Nodes;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pve.Home.Nodes;
 
@@ -11,7 +12,7 @@ public class NodeById
 
         const string id = "bauble_gathering_system";
 
-        var (actual, context) = await sut.Pve.Home.GetNodeById(
+        (Node actual, MessageContext context) = await sut.Pve.Home.GetNodeById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

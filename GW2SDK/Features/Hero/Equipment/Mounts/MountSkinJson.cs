@@ -14,7 +14,7 @@ internal static class MountSkinJson
         RequiredMember dyeSlots = "dye_slots";
         RequiredMember mount = "mount";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

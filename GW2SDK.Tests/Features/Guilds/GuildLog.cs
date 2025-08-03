@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Guilds.Logs;
+using GuildWars2.Hero.Accounts;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Guilds;
@@ -10,15 +11,15 @@ public class GuildLog(ITestOutputHelper outputHelper)
     {
         LoggingHandler.Output.Value = outputHelper;
         var sut = Composer.Resolve<Gw2Client>();
-        var guildLeader = TestConfiguration.TestGuildLeader;
+        TestGuildLeader guildLeader = TestConfiguration.TestGuildLeader;
 
-        var (account, _) = await sut.Hero.Account.GetSummary(
+        (AccountSummary account, _) = await sut.Hero.Account.GetSummary(
             guildLeader.Token,
             cancellationToken: TestContext.Current.CancellationToken
         );
         foreach (var guildId in account.LeaderOfGuildIds!)
         {
-            var (actual, _) = await sut.Guilds.GetGuildLog(
+            (List<GuildLogEntry> actual, _) = await sut.Guilds.GetGuildLog(
                 guildId,
                 guildLeader.Token,
                 cancellationToken: TestContext.Current.CancellationToken
@@ -63,7 +64,7 @@ public class GuildLog(ITestOutputHelper outputHelper)
             if (actual.Count > 3)
             {
                 var skipToken = actual[3].Id;
-                var (range, _) = await sut.Guilds.GetGuildLog(
+                (List<GuildLogEntry> range, _) = await sut.Guilds.GetGuildLog(
                     guildId,
                     skipToken,
                     guildLeader.Token,

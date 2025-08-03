@@ -10,8 +10,8 @@ public class MarkupParserTest
         var input = "5 <REDACTED> Dye kits";
         var lexer = new MarkupLexer();
         var parser = new MarkupParser();
-        var tokens = MarkupLexer.Tokenize(input);
-        var actual = MarkupParser.Parse(tokens);
+        IEnumerable<MarkupToken> tokens = MarkupLexer.Tokenize(input);
+        RootNode actual = MarkupParser.Parse(tokens);
 
         Assert.NotNull(actual);
         Assert.Collection(
@@ -35,8 +35,8 @@ public class MarkupParserTest
         var input = "<c=@reminder>This coat hides leg armor.<c>";
         var lexer = new MarkupLexer();
         var parser = new MarkupParser();
-        var tokens = MarkupLexer.Tokenize(input);
-        var actual = MarkupParser.Parse(tokens);
+        IEnumerable<MarkupToken> tokens = MarkupLexer.Tokenize(input);
+        RootNode actual = MarkupParser.Parse(tokens);
 
         Assert.NotNull(actual);
         Assert.Collection(
@@ -63,8 +63,8 @@ public class MarkupParserTest
         var input = "<c=@flavor>A gift given in gratitude from the leaders of Tyria.</c>\n";
         var lexer = new MarkupLexer();
         var parser = new MarkupParser();
-        var tokens = MarkupLexer.Tokenize(input);
-        var actual = MarkupParser.Parse(tokens);
+        IEnumerable<MarkupToken> tokens = MarkupLexer.Tokenize(input);
+        RootNode actual = MarkupParser.Parse(tokens);
 
         Assert.NotNull(actual);
         Assert.Collection(

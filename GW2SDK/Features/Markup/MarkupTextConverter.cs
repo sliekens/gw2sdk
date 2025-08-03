@@ -14,7 +14,7 @@ public sealed class MarkupTextConverter
         ThrowHelper.ThrowIfNull(root);
 
         StringBuilder builder = new();
-        foreach (var node in root.Children)
+        foreach (MarkupNode node in root.Children)
         {
             builder.Append(ConvertNode(node));
         }

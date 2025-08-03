@@ -11,7 +11,7 @@ public class FloorsIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Exploration.GetFloorsIndex(
+        (HashSet<int> actual, MessageContext context) = await sut.Exploration.GetFloorsIndex(
             continentId,
             TestContext.Current.CancellationToken
         );

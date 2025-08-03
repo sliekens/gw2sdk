@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Wvw.Matches;
 
 namespace GuildWars2.Tests.Features.Wvw.Matches;
 
@@ -15,7 +16,7 @@ public class MatchesByFilter
             "1-3"
         ];
 
-        var (actual, context) = await sut.Wvw.GetMatchesByIds(
+        (HashSet<Match> actual, MessageContext context) = await sut.Wvw.GetMatchesByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

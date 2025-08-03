@@ -8,9 +8,9 @@ public class StoredBuilds
     public async Task Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = TestConfiguration.ApiKey;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Hero.Builds.GetStoredBuilds(
+        (IReadOnlyList<GuildWars2.Hero.Builds.Build> actual, _) = await sut.Hero.Builds.GetStoredBuilds(
             accessToken.Key,
             cancellationToken: TestContext.Current.CancellationToken
         );

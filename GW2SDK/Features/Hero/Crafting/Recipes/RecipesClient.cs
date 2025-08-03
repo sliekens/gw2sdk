@@ -1,6 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using System.Text.Json;
 
+using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -35,13 +36,13 @@ public sealed class RecipesClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/account/recipes", accessToken);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/account/recipes", accessToken);
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -65,17 +66,17 @@ public sealed class RecipesClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet(
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet(
             $"v2/characters/{characterName}/recipes",
             accessToken
         );
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetLearnedRecipes();
+            HashSet<int> value = response.Json.RootElement.GetLearnedRecipes();
             return (value, response.Context);
         }
     }
@@ -91,13 +92,13 @@ public sealed class RecipesClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/recipes");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/recipes");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -113,15 +114,15 @@ public sealed class RecipesClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/recipes");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/recipes");
         requestBuilder.Query.AddId(recipeId);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetRecipe();
+            Recipe value = response.Json.RootElement.GetRecipe();
             return (value, response.Context);
         }
     }
@@ -138,15 +139,15 @@ public sealed class RecipesClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/recipes");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/recipes");
         requestBuilder.Query.AddIds(recipeIds);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRecipe());
+            ValueHashSet<Recipe> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRecipe());
             return (value, response.Context);
         }
     }
@@ -164,15 +165,15 @@ public sealed class RecipesClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/recipes");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/recipes");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRecipe());
+            ValueHashSet<Recipe> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRecipe());
             return (value, response.Context);
         }
     }
@@ -210,7 +211,7 @@ public sealed class RecipesClient
             CancellationToken cancellationToken
         )
         {
-            var (values, context) =
+            (HashSet<Recipe> values, MessageContext context) =
                 await GetRecipesByIds(chunk, missingMemberBehavior, cancellationToken)
                     .ConfigureAwait(false);
             return values.Select(value => (value, context)).ToList();
@@ -232,8 +233,8 @@ public sealed class RecipesClient
         [EnumeratorCancellation] CancellationToken cancellationToken = default
     )
     {
-        var (value, _) = await GetRecipesIndex(cancellationToken).ConfigureAwait(false);
-        var producer = GetRecipesBulk(
+        (HashSet<int> value, _) = await GetRecipesIndex(cancellationToken).ConfigureAwait(false);
+        IAsyncEnumerable<(Recipe Value, MessageContext Context)> producer = GetRecipesBulk(
             value,
             missingMemberBehavior,
             degreeOfParallelism,
@@ -241,7 +242,7 @@ public sealed class RecipesClient
             progress,
             cancellationToken
         );
-        await foreach (var recipe in producer.ConfigureAwait(false))
+        await foreach ((Recipe Value, MessageContext Context) recipe in producer.ConfigureAwait(false))
         {
             yield return recipe;
         }
@@ -261,14 +262,14 @@ public sealed class RecipesClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/recipes/search");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/recipes/search");
         requestBuilder.Query.Add("input", ingredientItemId);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -284,16 +285,16 @@ public sealed class RecipesClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/recipes/search");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/recipes/search");
         requestBuilder.Query.Add("input", ingredientItemId);
         requestBuilder.Query.AddAllIds();
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRecipe());
+            ValueHashSet<Recipe> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRecipe());
             return (value, response.Context);
         }
     }
@@ -314,16 +315,16 @@ public sealed class RecipesClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/recipes/search");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/recipes/search");
         requestBuilder.Query.Add("input", ingredientItemId);
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRecipe());
+            ValueHashSet<Recipe> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRecipe());
             return (value, response.Context);
         }
     }
@@ -337,14 +338,14 @@ public sealed class RecipesClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/recipes/search");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/recipes/search");
         requestBuilder.Query.Add("output", outputItemId);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -360,16 +361,16 @@ public sealed class RecipesClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/recipes/search");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/recipes/search");
         requestBuilder.Query.Add("output", outputItemId);
         requestBuilder.Query.AddAllIds();
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRecipe());
+            ValueHashSet<Recipe> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRecipe());
             return (value, response.Context);
         }
     }
@@ -390,16 +391,16 @@ public sealed class RecipesClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/recipes/search");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/recipes/search");
         requestBuilder.Query.Add("output", outputItemId);
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRecipe());
+            ValueHashSet<Recipe> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRecipe());
             return (value, response.Context);
         }
     }

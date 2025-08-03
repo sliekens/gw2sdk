@@ -14,7 +14,7 @@ internal static class ContinentJson
         RequiredMember maxZoom = "max_zoom";
         RequiredMember floors = "floors";
         RequiredMember id = "id";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (name.Match(member))
             {

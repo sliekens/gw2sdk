@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Exploration.Maps;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Exploration.Maps;
 
@@ -10,7 +11,7 @@ public class MapSummariesByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
-        var (actual, context) = await sut.Exploration.GetMapSummariesByPage(
+        (HashSet<MapSummary> actual, MessageContext context) = await sut.Exploration.GetMapSummariesByPage(
             0,
             pageSize,
             cancellationToken: TestContext.Current.CancellationToken

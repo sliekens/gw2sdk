@@ -10,7 +10,7 @@ internal static class RestrictionsJson
     public static IReadOnlyList<Extensible<RaceName>> GetRestrictions(this in JsonElement json)
     {
         ValueList<Extensible<RaceName>>? races = null;
-        foreach (var entry in json.EnumerateArray())
+        foreach (JsonElement entry in json.EnumerateArray())
         {
             if (entry.ValueEquals(nameof(RaceName.Asura)))
             {

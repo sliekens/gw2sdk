@@ -1,4 +1,6 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Chat;
+using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.WizardsVault.AstralRewards;
 
 namespace GuildWars2.Tests.Features.WizardsVault.AstralRewards;
 
@@ -9,7 +11,7 @@ public class AstralRewards
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.WizardsVault.GetAstralRewards(
+        (HashSet<AstralReward> actual, MessageContext context) = await sut.WizardsVault.GetAstralRewards(
             cancellationToken: TestContext.Current.CancellationToken
         );
 
@@ -26,7 +28,7 @@ public class AstralRewards
                 Assert.True(reward.Cost > 0);
                 Assert.True(reward.Kind.IsDefined());
 
-                var chatLink = reward.GetChatLink();
+                ItemLink chatLink = reward.GetChatLink();
                 Assert.Equal(reward.ItemId, chatLink.ItemId);
                 Assert.Equal(reward.ItemCount, chatLink.Count);
             }

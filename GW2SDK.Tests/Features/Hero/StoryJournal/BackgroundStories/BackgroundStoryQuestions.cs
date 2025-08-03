@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.StoryJournal.BackgroundStories;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.StoryJournal.BackgroundStories;
 
@@ -9,7 +10,7 @@ public class BackgroundStoryQuestions
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<BackgroundStoryQuestion> actual, MessageContext context) =
             await sut.Hero.StoryJournal.GetBackgroundStoryQuestions(
                 cancellationToken: TestContext.Current.CancellationToken
             );

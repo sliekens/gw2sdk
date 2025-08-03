@@ -11,7 +11,7 @@ internal static class StoryFlagsJson
     {
         var requiresUnlock = false;
         ValueList<string> others = [];
-        foreach (var entry in json.EnumerateArray())
+        foreach (JsonElement entry in json.EnumerateArray())
         {
             if (entry.ValueEquals("RequiresUnlock"))
             {

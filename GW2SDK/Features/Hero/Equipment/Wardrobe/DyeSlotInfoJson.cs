@@ -19,7 +19,7 @@ internal static class DyeSlotInfoJson
         OptionalMember nornMale = "NornMale";
         OptionalMember sylvariFemale = "SylvariFemale";
         OptionalMember sylvariMale = "SylvariMale";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (@default.Match(member))
             {
@@ -27,7 +27,7 @@ internal static class DyeSlotInfoJson
             }
             else if (member.NameEquals("overrides"))
             {
-                foreach (var @override in member.Value.EnumerateObject())
+                foreach (JsonProperty @override in member.Value.EnumerateObject())
                 {
                     if (asuraFemale.Match(@override))
                     {

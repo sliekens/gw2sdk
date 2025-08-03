@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Builds;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Builds;
 
@@ -15,7 +16,7 @@ public class SkillsByFilter
             39222
         ];
 
-        var (actual, context) = await sut.Hero.Builds.GetSkillsByIds(
+        (HashSet<Skill> actual, MessageContext context) = await sut.Hero.Builds.GetSkillsByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

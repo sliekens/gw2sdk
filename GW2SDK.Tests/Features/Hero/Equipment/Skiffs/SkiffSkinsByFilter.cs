@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Equipment.Skiffs;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Skiffs;
 
@@ -15,7 +16,7 @@ public class SkiffSkinsByFilter
             420
         ];
 
-        var (actual, context) = await sut.Hero.Equipment.Skiffs.GetSkiffSkinsByIds(
+        (HashSet<SkiffSkin> actual, MessageContext context) = await sut.Hero.Equipment.Skiffs.GetSkiffSkinsByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

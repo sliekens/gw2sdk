@@ -19,7 +19,7 @@ internal static class NumberJson
         RequiredMember icon = "icon";
         RequiredMember number = "value";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

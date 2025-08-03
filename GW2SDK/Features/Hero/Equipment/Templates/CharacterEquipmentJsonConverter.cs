@@ -13,7 +13,7 @@ internal sealed class CharacterEquipmentJsonConverter : JsonConverter<CharacterE
         JsonSerializerOptions options
     )
     {
-        using var jsonDocument = JsonDocument.ParseValue(ref reader);
+        using JsonDocument jsonDocument = JsonDocument.ParseValue(ref reader);
         return Read(jsonDocument.RootElement);
     }
 
@@ -33,7 +33,7 @@ internal sealed class CharacterEquipmentJsonConverter : JsonConverter<CharacterE
     {
         writer.WriteStartObject();
         writer.WriteStartArray("items");
-        foreach (var item in value.Items)
+        foreach (EquipmentItem item in value.Items)
         {
             EquipmentItemJsonConverter.Write(writer, item);
         }

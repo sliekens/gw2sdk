@@ -13,7 +13,7 @@ internal static class SuperAdventureBoxZoneJson
         RequiredMember world = "world";
         RequiredMember zone = "zone";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

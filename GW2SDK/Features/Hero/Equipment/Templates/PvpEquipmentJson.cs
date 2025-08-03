@@ -12,7 +12,7 @@ internal static class PvpEquipmentJson
         NullableMember rune = "rune";
         RequiredMember sigils = "sigils";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (amulet.Match(member))
             {

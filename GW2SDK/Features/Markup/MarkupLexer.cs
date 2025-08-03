@@ -20,7 +20,7 @@ public sealed class MarkupLexer
         // TAG_VOID = "<" TAG_NAME ">"
         // TAG_NAME = 1*ALPHA
         // TAG_VALUE = 1*VCHAR; except ">"
-        var memory = input.AsMemory();
+        ReadOnlyMemory<char> memory = input.AsMemory();
         var position = 0;
         var state = MarkupLexerState.Text;
         var start = 0;

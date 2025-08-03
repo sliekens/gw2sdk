@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Builds;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Builds;
 
@@ -9,7 +10,7 @@ public class Specializations
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.Builds.GetSpecializations(
+        (HashSet<Specialization> actual, MessageContext context) = await sut.Hero.Builds.GetSpecializations(
             cancellationToken: TestContext.Current.CancellationToken
         );
 

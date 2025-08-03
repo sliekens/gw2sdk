@@ -8,7 +8,7 @@ internal static class AchievementJson
 {
     public static Achievement GetAchievement(this in JsonElement json)
     {
-        if (json.TryGetProperty("type", out var discriminator))
+        if (json.TryGetProperty("type", out JsonElement discriminator))
         {
             switch (discriminator.GetString())
             {
@@ -30,7 +30,7 @@ internal static class AchievementJson
         OptionalMember bits = "bits";
         NullableMember pointCap = "point_cap";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

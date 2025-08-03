@@ -14,14 +14,14 @@ internal sealed class LoggingHandler : DelegatingHandler
         Output.Value?.WriteLine(
             $"{request.Method} {request.RequestUri!.PathAndQuery} HTTP/{request.Version}"
         );
-        foreach (var header in request.Headers)
+        foreach (KeyValuePair<string, IEnumerable<string>> header in request.Headers)
         {
             Output.Value?.WriteLine($"{header.Key}: {string.Join(", ", header.Value)}");
         }
 
         if (request.Content is not null)
         {
-            foreach (var header in request.Content.Headers)
+            foreach (KeyValuePair<string, IEnumerable<string>> header in request.Content.Headers)
             {
                 Output.Value?.WriteLine($"{header.Key}: {string.Join(", ", header.Value)}");
             }
@@ -35,19 +35,19 @@ internal sealed class LoggingHandler : DelegatingHandler
             Output.Value?.WriteLine("");
         }
 
-        var response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
+        HttpResponseMessage? response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
 
         Output.Value?.WriteLine(
             $"HTTP/{response.Version} {(int)response.StatusCode} {response.ReasonPhrase}"
         );
-        foreach (var header in response.Headers)
+        foreach (KeyValuePair<string, IEnumerable<string>> header in response.Headers)
         {
             Output.Value?.WriteLine($"{header.Key}: {string.Join(", ", header.Value)}");
         }
 
         if (response.Content is not null)
         {
-            foreach (var header in response.Content.Headers)
+            foreach (KeyValuePair<string, IEnumerable<string>> header in response.Content.Headers)
             {
                 Output.Value?.WriteLine($"{header.Key}: {string.Join(", ", header.Value)}");
             }
@@ -63,7 +63,7 @@ internal sealed class LoggingHandler : DelegatingHandler
                 await response.Content.LoadIntoBufferAsync(cancellationToken).ConfigureAwait(false);
 
                 // ALSO IMPORTANT: do not dispose the MemoryStream because subsequent ReadAsStreamAsync calls return the same instance
-                var content = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
+                Stream? content = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
 
                 try
                 {

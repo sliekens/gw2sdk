@@ -20,7 +20,7 @@ internal static class CharacterSummaryJson
         RequiredMember deaths = "deaths";
         NullableMember title = "title";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (name.Match(member))
             {

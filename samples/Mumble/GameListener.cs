@@ -2,7 +2,11 @@
 using System.Runtime.Versioning;
 
 using GuildWars2;
+using GuildWars2.Exploration.Maps;
+using GuildWars2.Hero.Builds;
+using GuildWars2.Hero.Equipment.Dyes;
 using GuildWars2.Mumble;
+using GuildWars2.Worlds;
 
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -40,7 +44,7 @@ internal sealed class GameListener(
     private void OnNext(GameTick gameTick)
     {
         // OnNext(GameTick) is executed whenever the game client updates the shared memory
-        var identity = gameTick.GetIdentity();
+        Identity? identity = gameTick.GetIdentity();
         if (identity is null)
         {
             // Identity might be null due to invalid JSON
@@ -51,26 +55,26 @@ internal sealed class GameListener(
         var currentSpecialization = "none";
         if (referenceData.Specializations.TryGetValue(
                 identity.SpecializationId,
-                out var specialization
+                out Specialization? specialization
             ))
         {
             currentSpecialization = specialization.Name;
         }
 
         var currentMap = "unknown";
-        if (referenceData.Maps.TryGetValue(identity.MapId, out var map))
+        if (referenceData.Maps.TryGetValue(identity.MapId, out MapSummary? map))
         {
             currentMap = map.Name;
         }
 
         var currentWorld = "unknown";
-        if (referenceData.Worlds.TryGetValue((int)identity.WorldId, out var world))
+        if (referenceData.Worlds.TryGetValue((int)identity.WorldId, out World? world))
         {
             currentWorld = world.Name;
         }
 
         var currentTeamColor = "none";
-        if (referenceData.Colors.TryGetValue(identity.TeamColorId, out var teamColor))
+        if (referenceData.Colors.TryGetValue(identity.TeamColorId, out DyeColor? teamColor))
         {
             currentTeamColor = "     ".PastelBg(teamColor.Cloth.Rgb);
         }

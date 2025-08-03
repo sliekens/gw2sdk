@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Exploration.Regions;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Exploration.Regions;
 
@@ -12,7 +13,7 @@ public class RegionsByPage
         const int continentId = 1;
         const int floorId = 1;
         const int pageSize = 3;
-        var (actual, context) = await sut.Exploration.GetRegionsByPage(
+        (HashSet<Region> actual, MessageContext context) = await sut.Exploration.GetRegionsByPage(
             continentId,
             floorId,
             0,

@@ -16,7 +16,7 @@ internal sealed class BackpackJsonConverter : JsonConverter<Backpack>
         JsonSerializerOptions options
     )
     {
-        using var json = JsonDocument.ParseValue(ref reader);
+        using JsonDocument json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
@@ -27,7 +27,7 @@ internal sealed class BackpackJsonConverter : JsonConverter<Backpack>
 
     public static Backpack Read(in JsonElement json)
     {
-        if (json.TryGetProperty(ItemJsonConverter.DiscriminatorName, out var discriminator) && !discriminator.ValueEquals(DiscriminatorValue))
+        if (json.TryGetProperty(ItemJsonConverter.DiscriminatorName, out JsonElement discriminator) && !discriminator.ValueEquals(DiscriminatorValue))
         {
             ThrowHelper.ThrowInvalidDiscriminator(discriminator.GetString());
         }
@@ -81,7 +81,7 @@ internal sealed class BackpackJsonConverter : JsonConverter<Backpack>
         writer.WriteNumber("default_skin_id", value.DefaultSkinId);
 
         writer.WriteStartArray("infusion_slots");
-        foreach (var slot in value.InfusionSlots)
+        foreach (InfusionSlot? slot in value.InfusionSlots)
         {
             InfusionSlotJsonConverter.Write(writer, slot);
         }
@@ -99,7 +99,7 @@ internal sealed class BackpackJsonConverter : JsonConverter<Backpack>
         }
 
         writer.WriteStartObject("attributes");
-        foreach (var attribute in value.Attributes)
+        foreach (KeyValuePair<Extensible<AttributeName>, int> attribute in value.Attributes)
         {
             writer.WriteNumber(attribute.Key.ToString(), attribute.Value);
         }
@@ -133,7 +133,7 @@ internal sealed class BackpackJsonConverter : JsonConverter<Backpack>
         writer.WriteEndArray();
 
         writer.WriteStartArray("upgrades_into");
-        foreach (var upgrade in value.UpgradesInto)
+        foreach (InfusionSlotUpgradePath? upgrade in value.UpgradesInto)
         {
             InfusionSlotUpgradePathJsonConverter.Write(writer, upgrade);
         }
@@ -141,7 +141,7 @@ internal sealed class BackpackJsonConverter : JsonConverter<Backpack>
         writer.WriteEndArray();
 
         writer.WriteStartArray("upgrades_from");
-        foreach (var source in value.UpgradesFrom)
+        foreach (InfusionSlotUpgradeSource? source in value.UpgradesFrom)
         {
             InfusionSlotUpgradeSourceJsonConverter.Write(writer, source);
         }

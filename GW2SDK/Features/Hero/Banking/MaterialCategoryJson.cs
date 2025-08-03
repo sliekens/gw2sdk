@@ -13,7 +13,7 @@ internal static class MaterialCategoryJson
         RequiredMember items = "items";
         RequiredMember order = "order";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

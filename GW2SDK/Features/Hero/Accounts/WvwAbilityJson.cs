@@ -11,7 +11,7 @@ internal static class WvwAbilityJson
         RequiredMember id = "id";
         RequiredMember rank = "rank";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

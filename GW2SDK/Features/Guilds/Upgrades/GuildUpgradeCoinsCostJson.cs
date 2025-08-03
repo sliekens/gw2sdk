@@ -10,7 +10,7 @@ internal static class GuildUpgradeCoinsCostJson
     {
         RequiredMember count = "count";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

@@ -20,7 +20,7 @@ public static class Extensions
         ) where TKey : notnull
     {
         ThrowHelper.ThrowIfNull(instance);
-        var (value, context) = await instance.ConfigureAwait(false);
+        (HashSet<TValue> value, MessageContext context) = await instance.ConfigureAwait(false);
         return (value.ToDictionary(keySelector), context);
     }
 
@@ -31,7 +31,7 @@ public static class Extensions
     public static async Task<T> ValueOnly<T>(this Task<(T, MessageContext)> task)
     {
         ThrowHelper.ThrowIfNull(task);
-        var (value, _) = await task.ConfigureAwait(false);
+        (T value, _) = await task.ConfigureAwait(false);
         return value;
     }
 
@@ -46,7 +46,7 @@ public static class Extensions
         [EnumeratorCancellation] CancellationToken cancellationToken = default
     )
     {
-        await foreach (var (value, _) in source.WithCancellation(cancellationToken)
+        await foreach ((T value, MessageContext _) in source.WithCancellation(cancellationToken)
             .ConfigureAwait(false))
         {
             yield return value;

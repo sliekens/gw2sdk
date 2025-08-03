@@ -20,7 +20,7 @@ internal static class DamageJson
         RequiredMember hitCount = "hit_count";
         RequiredMember damageMultiplier = "dmg_multiplier";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

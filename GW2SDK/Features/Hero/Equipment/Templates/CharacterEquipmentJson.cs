@@ -10,7 +10,7 @@ internal static class CharacterEquipmentJson
     {
         RequiredMember items = "equipment";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (items.Match(member))
             {

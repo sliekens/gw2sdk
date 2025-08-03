@@ -12,7 +12,7 @@ internal static class FactJson
         requiresTrait = null;
         overrides = null;
 
-        if (json.TryGetProperty("type", out var discriminator))
+        if (json.TryGetProperty("type", out JsonElement discriminator))
         {
             switch (discriminator.GetString())
             {
@@ -67,7 +67,7 @@ internal static class FactJson
         OptionalMember text = "text";
         RequiredMember icon = "icon";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

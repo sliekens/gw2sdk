@@ -16,7 +16,7 @@ internal static class CurrentStandingJson
         NullableMember rating = "rating";
         NullableMember decay = "decay";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (totalPoints.Match(member))
             {

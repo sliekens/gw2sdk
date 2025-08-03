@@ -8,9 +8,9 @@ public class UnlockedCats
     public async Task Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var token = TestConfiguration.ApiKey;
+        ApiKey token = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Pve.Home.GetUnlockedCats(
+        (HashSet<int> actual, _) = await sut.Pve.Home.GetUnlockedCats(
             token.Key,
             TestContext.Current.CancellationToken
         );

@@ -13,7 +13,7 @@ internal static class GuildMemberJson
         RequiredMember wvwMember = "wvw_member";
         NullableMember joined = "joined";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (name.Match(member))
             {

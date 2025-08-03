@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 
+using GuildWars2.Collections;
 using GuildWars2.Hero.Equipment;
 using GuildWars2.Json;
 
@@ -27,7 +28,7 @@ internal static class ItemSlotJson
         OptionalMember boundTo = "bound_to";
         OptionalMember stats = "stats";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {
@@ -84,7 +85,7 @@ internal static class ItemSlotJson
             {
             } ids)
         {
-            var indices = upgradeSlotIndices.Map(static (in JsonElement values) =>
+            ValueList<int>? indices = upgradeSlotIndices.Map(static (in JsonElement values) =>
                 values.GetList(static (in JsonElement value) => value.GetInt32())
             )!;
             for (var i = 0; i < ids.Count; i++)

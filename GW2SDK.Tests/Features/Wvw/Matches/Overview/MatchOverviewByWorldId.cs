@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Wvw.Matches.Overview;
 
 namespace GuildWars2.Tests.Features.Wvw.Matches.Overview;
 
@@ -13,7 +14,7 @@ public class MatchOverviewByWorldId
 
         // Can fail on a Friday after reset
         // ---> GuildWars2.Http.ResourceNotFoundException : world not currently in a match
-        var (actual, _) = await sut.Wvw.GetMatchOverviewByWorldId(
+        (MatchOverview actual, _) = await sut.Wvw.GetMatchOverviewByWorldId(
             worldId,
             cancellationToken: TestContext.Current.CancellationToken
         );

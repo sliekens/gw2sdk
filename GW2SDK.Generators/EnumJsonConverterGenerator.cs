@@ -13,14 +13,14 @@ public class EnumJsonConverterGenerator : IIncrementalGenerator
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
         // Register for enum declarations
-        var enumDeclarations = context.SyntaxProvider.CreateSyntaxProvider(
+        IncrementalValuesProvider<EnumDeclarationSyntax> enumDeclarations = context.SyntaxProvider.CreateSyntaxProvider(
                 static (s, _) => s is EnumDeclarationSyntax,
                 static (ctx, _) => (EnumDeclarationSyntax)ctx.Node
             )
             .Where(enumDecl => enumDecl is not null);
 
         // Combine the enum declarations with the compilation
-        var compilationAndEnums = context.CompilationProvider.Combine(enumDeclarations.Collect());
+        IncrementalValueProvider<(Compilation Left, ImmutableArray<EnumDeclarationSyntax> Right)> compilationAndEnums = context.CompilationProvider.Combine(enumDeclarations.Collect());
 
         // Generate source based on the inputs
         context.RegisterSourceOutput(
@@ -37,10 +37,10 @@ public class EnumJsonConverterGenerator : IIncrementalGenerator
     {
         var enumTypes = new List<string>();
 
-        foreach (var enumDeclaration in enumDeclarations)
+        foreach (EnumDeclarationSyntax? enumDeclaration in enumDeclarations)
         {
-            var model = compilation.GetSemanticModel(enumDeclaration.SyntaxTree);
-            var enumSymbol = model.GetDeclaredSymbol(enumDeclaration);
+            SemanticModel model = compilation.GetSemanticModel(enumDeclaration.SyntaxTree);
+            ISymbol? enumSymbol = model.GetDeclaredSymbol(enumDeclaration);
             if (enumSymbol is not INamedTypeSymbol namedTypeSymbol)
             {
                 continue;
@@ -79,7 +79,7 @@ public class EnumJsonConverterGenerator : IIncrementalGenerator
         INamedTypeSymbol enumSymbol
     )
     {
-        var enumValues = enumSymbol.GetMembers()
+        List<string> enumValues = enumSymbol.GetMembers()
             .Where(m => m.Kind == SymbolKind.Field)
             .OfType<IFieldSymbol>()
             .Where(f => f.ConstantValue != null)

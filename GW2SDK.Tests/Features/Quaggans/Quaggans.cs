@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Quaggans;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Quaggans;
 
@@ -9,7 +10,7 @@ public class Quaggans
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<Quaggan> actual, MessageContext context) =
             await sut.Quaggans.GetQuaggans(
                 cancellationToken: TestContext.Current.CancellationToken
             );

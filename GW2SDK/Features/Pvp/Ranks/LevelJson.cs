@@ -12,7 +12,7 @@ internal static class LevelJson
         RequiredMember maxLevel = "max_rank";
         RequiredMember points = "points";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (minLevel.Match(member))
             {

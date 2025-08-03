@@ -12,7 +12,7 @@ internal static class GuildEmblemJson
         RequiredMember foreground = "foreground";
         RequiredMember flags = "flags";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (background.Match(member))
             {

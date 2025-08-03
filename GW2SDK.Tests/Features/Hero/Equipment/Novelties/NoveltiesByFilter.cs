@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Equipment.Novelties;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Novelties;
 
@@ -15,7 +16,7 @@ public class NoveltiesByFilter
             3
         ];
 
-        var (actual, context) = await sut.Hero.Equipment.Novelties.GetNoveltiesByIds(
+        (HashSet<Novelty> actual, MessageContext context) = await sut.Hero.Equipment.Novelties.GetNoveltiesByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

@@ -12,7 +12,7 @@ public class MailCarriers
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<MailCarrier> actual, MessageContext context) =
             await sut.Hero.Equipment.MailCarriers.GetMailCarriers(
                 cancellationToken: TestContext.Current.CancellationToken
             );

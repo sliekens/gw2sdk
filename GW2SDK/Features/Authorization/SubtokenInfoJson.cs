@@ -14,7 +14,7 @@ internal static class SubtokenInfoJson
         RequiredMember expiresAt = "expires_at";
         RequiredMember issuedAt = "issued_at";
         OptionalMember urls = "urls";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

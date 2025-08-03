@@ -16,7 +16,7 @@ public class MountsByFilter
             MountName.Skimmer
         ];
 
-        var (actual, context) = await sut.Hero.Equipment.Mounts.GetMountsByNames(
+        (HashSet<Mount> actual, MessageContext context) = await sut.Hero.Equipment.Mounts.GetMountsByNames(
             names,
             cancellationToken: TestContext.Current.CancellationToken
         );

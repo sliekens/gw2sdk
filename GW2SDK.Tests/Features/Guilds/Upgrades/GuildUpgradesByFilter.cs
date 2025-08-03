@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Guilds.Upgrades;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Guilds.Upgrades;
 
@@ -15,7 +16,7 @@ public class GuildUpgradesByFilter
             167
         ];
 
-        var (actual, context) = await sut.Guilds.GetGuildUpgradesByIds(
+        (HashSet<GuildUpgrade> actual, MessageContext context) = await sut.Guilds.GetGuildUpgradesByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

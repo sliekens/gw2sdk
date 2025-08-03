@@ -14,7 +14,7 @@ internal static class SectorJson
         RequiredMember boundaries = "bounds";
         RequiredMember id = "id";
         RequiredMember chatLink = "chat_link";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (name.Match(member))
             {

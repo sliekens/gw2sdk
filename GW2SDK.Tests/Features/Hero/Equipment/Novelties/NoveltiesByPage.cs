@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Equipment.Novelties;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Novelties;
 
@@ -10,7 +11,7 @@ public class NoveltiesByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
-        var (actual, context) = await sut.Hero.Equipment.Novelties.GetNoveltiesByPage(
+        (HashSet<Novelty> actual, MessageContext context) = await sut.Hero.Equipment.Novelties.GetNoveltiesByPage(
             0,
             pageSize,
             cancellationToken: TestContext.Current.CancellationToken

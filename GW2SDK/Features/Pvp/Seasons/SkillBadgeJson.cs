@@ -15,7 +15,7 @@ internal static class SkillBadgeJson
         RequiredMember smallOverlay = "overlay_small";
         RequiredMember tiers = "tiers";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (name.Match(member))
             {

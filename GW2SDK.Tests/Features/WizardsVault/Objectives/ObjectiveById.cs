@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.WizardsVault.Objectives;
 
 namespace GuildWars2.Tests.Features.WizardsVault.Objectives;
 
@@ -11,7 +12,7 @@ public class ObjectiveById
 
         const int id = 1;
 
-        var (actual, context) = await sut.WizardsVault.GetObjectiveById(
+        (Objective actual, MessageContext context) = await sut.WizardsVault.GetObjectiveById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

@@ -10,7 +10,7 @@ using var httpClient = new HttpClient();
 var gw2 = new Gw2Client(httpClient);
 
 // Use the preferred language by passing 'Language.CurrentUICulture'
-var mounts = await gw2.Hero.Equipment.Mounts.GetMounts(Language.CurrentUICulture).ValueOnly();
+HashSet<Mount> mounts = await gw2.Hero.Equipment.Mounts.GetMounts(Language.CurrentUICulture).ValueOnly();
 PrintMountNames("CurrentUICulture (German)", mounts);
 
 // Alternatively you can force a specific language
@@ -37,7 +37,7 @@ PrintMountNames(Language.CurrentUICulture.CultureInfo.EnglishName, mounts);
 static void PrintMountNames(string language, IEnumerable<Mount> mounts)
 {
     Console.WriteLine(language);
-    foreach (var mount in mounts)
+    foreach (Mount mount in mounts)
     {
         Console.WriteLine("* {0}", mount.Name);
     }

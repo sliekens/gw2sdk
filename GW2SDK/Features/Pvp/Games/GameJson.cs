@@ -21,7 +21,7 @@ internal static class GameJson
         OptionalMember seasonId = "season";
         RequiredMember score = "scores";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

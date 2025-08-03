@@ -11,7 +11,7 @@ public class CoinLinkTest
     public void Can_marshal_coin_links(string chatLink, int amount)
     {
         var coins = new Coin(amount);
-        var sut = CoinLink.Parse(chatLink);
+        CoinLink sut = CoinLink.Parse(chatLink);
 
         var actual = sut.ToString();
 

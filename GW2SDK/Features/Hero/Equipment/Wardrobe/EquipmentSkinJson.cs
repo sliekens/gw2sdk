@@ -9,7 +9,7 @@ internal static class EquipmentSkinJson
 {
     public static EquipmentSkin GetEquipmentSkin(this in JsonElement json)
     {
-        if (json.TryGetProperty("type", out var discriminator))
+        if (json.TryGetProperty("type", out JsonElement discriminator))
         {
             switch (discriminator.GetString())
             {
@@ -31,7 +31,7 @@ internal static class EquipmentSkinJson
         RequiredMember restrictions = "restrictions";
         RequiredMember id = "id";
         OptionalMember icon = "icon";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

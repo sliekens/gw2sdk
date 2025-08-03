@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pvp.Seasons;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pvp.Seasons;
 
@@ -9,7 +10,7 @@ public class Seasons
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<Season> actual, MessageContext context) =
             await sut.Pvp.GetSeasons(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);

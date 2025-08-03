@@ -10,7 +10,7 @@ public class Worlds
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<World> actual, MessageContext context) =
             await sut.Worlds.GetWorlds(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);

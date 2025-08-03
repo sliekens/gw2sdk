@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Equipment.Gliders;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Gliders;
 
@@ -10,7 +11,7 @@ public class GliderSkinsByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
-        var (actual, context) = await sut.Hero.Equipment.Gliders.GetGliderSkinsByPage(
+        (HashSet<GliderSkin> actual, MessageContext context) = await sut.Hero.Equipment.Gliders.GetGliderSkinsByPage(
             0,
             pageSize,
             cancellationToken: TestContext.Current.CancellationToken

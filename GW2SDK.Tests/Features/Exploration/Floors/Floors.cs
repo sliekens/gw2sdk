@@ -1,7 +1,16 @@
 ﻿using System.Drawing;
 
 using GuildWars2.Chat;
+using GuildWars2.Exploration.Adventures;
+using GuildWars2.Exploration.Floors;
+using GuildWars2.Exploration.GodShrines;
+using GuildWars2.Exploration.Hearts;
+using GuildWars2.Exploration.HeroChallenges;
+using GuildWars2.Exploration.Maps;
+using GuildWars2.Exploration.MasteryInsights;
 using GuildWars2.Exploration.PointsOfInterest;
+using GuildWars2.Exploration.Regions;
+using GuildWars2.Exploration.Sectors;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Exploration.Floors;
@@ -15,7 +24,7 @@ public class Floors
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Exploration.GetFloors(
+        (HashSet<Floor> actual, MessageContext context) = await sut.Exploration.GetFloors(
             continentId,
             cancellationToken: TestContext.Current.CancellationToken
         );
@@ -23,7 +32,7 @@ public class Floors
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
 
-        var floorIds = actual.Select(f => f.Id).ToList();
+        List<int> floorIds = actual.Select(f => f.Id).ToList();
         Assert.NotEmpty(actual);
         Assert.All(
             actual,
@@ -32,14 +41,14 @@ public class Floors
                 Assert.NotEqual(Size.Empty, entry.TextureDimensions);
                 Assert.NotNull(entry.ClampedView);
                 Assert.NotNull(entry.Regions);
-                foreach (var (regionId, region) in entry.Regions)
+                foreach ((var regionId, Region region) in entry.Regions)
                 {
                     Assert.Equal(regionId, region.Id);
 
                     // Convergences and Mists Vault region names are empty
                     Assert.NotNull(region.Name);
                     Assert.NotEmpty(region.Maps);
-                    foreach (var (mapId, map) in region.Maps)
+                    foreach ((var mapId, Map map) in region.Maps)
                     {
                         Assert.Equal(mapId, map.Id);
                         if (map.Id == 1150)
@@ -55,7 +64,7 @@ public class Floors
                         Assert.True(map.MinLevel >= 0);
                         Assert.True(map.MaxLevel >= map.MinLevel);
                         Assert.Contains(map.DefaultFloor, floorIds);
-                        foreach (var (poiId, poi) in map.PointsOfInterest)
+                        foreach ((var poiId, PointOfInterest poi) in map.PointsOfInterest)
                         {
                             Assert.True(poi.Id > 0);
                             Assert.NotNull(poi.Name);
@@ -65,15 +74,15 @@ public class Floors
                                 Assert.True(locked.IconUrl.IsAbsoluteUri);
                             }
 
-                            var chatLink = poi.GetChatLink();
+                            PointOfInterestLink chatLink = poi.GetChatLink();
                             Assert.Equal(poiId, chatLink.PointOfInterestId);
                             Assert.Equal(poi.ChatLink, chatLink.ToString());
 
-                            var chatLinkRoundtrip = PointOfInterestLink.Parse(chatLink.ToString());
+                            PointOfInterestLink chatLinkRoundtrip = PointOfInterestLink.Parse(chatLink.ToString());
                             Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
                         }
 
-                        foreach (var (heartId, heart) in map.Hearts)
+                        foreach ((var heartId, Heart heart) in map.Hearts)
                         {
                             Assert.Equal(heartId, heart.Id);
                             Assert.NotEmpty(heart.Objective);
@@ -90,7 +99,7 @@ public class Floors
                             Assert.NotEmpty(heart.ChatLink);
                         }
 
-                        foreach (var heroChallenge in map.HeroChallenges)
+                        foreach (HeroChallenge heroChallenge in map.HeroChallenges)
                         {
                             if (regionId == 37)
                             {
@@ -105,7 +114,7 @@ public class Floors
                             Assert.NotEqual(PointF.Empty, heroChallenge.Coordinates);
                         }
 
-                        foreach (var (sectorId, sector) in map.Sectors)
+                        foreach ((var sectorId, Sector sector) in map.Sectors)
                         {
                             Assert.Equal(sectorId, sector.Id);
                             Assert.NotNull(sector.Name);
@@ -122,7 +131,7 @@ public class Floors
                             Assert.NotEmpty(sector.ChatLink);
                         }
 
-                        foreach (var adventure in map.Adventures)
+                        foreach (Adventure adventure in map.Adventures)
                         {
                             Assert.NotEmpty(adventure.Id);
                             Assert.NotEmpty(adventure.Name);
@@ -130,14 +139,14 @@ public class Floors
                             Assert.NotEqual(PointF.Empty, adventure.Coordinates);
                         }
 
-                        foreach (var masteryInsight in map.MasteryInsights)
+                        foreach (MasteryInsight masteryInsight in map.MasteryInsights)
                         {
                             Assert.True(masteryInsight.Id > 0);
                             Assert.True(masteryInsight.Region.IsDefined());
                             Assert.NotEqual(PointF.Empty, masteryInsight.Coordinates);
                         }
 
-                        foreach (var godShrine in map.GodShrines ?? [])
+                        foreach (GodShrine godShrine in map.GodShrines ?? [])
                         {
                             Assert.True(godShrine.Id > 0);
                             Assert.True(godShrine.PointOfInterestId > 0);
@@ -148,7 +157,7 @@ public class Floors
                             Assert.NotNull(godShrine.IconContestedUrl);
                             Assert.NotEqual(PointF.Empty, godShrine.Coordinates);
 
-                            var link = godShrine.GetChatLink();
+                            PointOfInterestLink link = godShrine.GetChatLink();
                             Assert.Equal(godShrine.PointOfInterestId, link.PointOfInterestId);
                         }
                     }

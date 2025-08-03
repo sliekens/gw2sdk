@@ -15,7 +15,7 @@ internal static class RegionJson
         RequiredMember continentRectangle = "continent_rect";
         RequiredMember maps = "maps";
         RequiredMember id = "id";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (name.Match(member))
             {

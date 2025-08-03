@@ -1,5 +1,6 @@
 ﻿using GuildWars2.Chat;
 using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Wvw.Objectives;
 
 namespace GuildWars2.Tests.Features.Wvw.Objectives;
 
@@ -10,7 +11,7 @@ public class Objectives
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<Objective> actual, MessageContext context) =
             await sut.Wvw.GetObjectives(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);
@@ -27,13 +28,13 @@ public class Objectives
                 Assert.True(entry.MapKind.IsDefined());
                 Assert.True(entry.MarkerIconUrl is null or { IsAbsoluteUri: true });
 
-                var chatLink = entry.GetChatLink();
+                ObjectiveLink chatLink = entry.GetChatLink();
                 Assert.NotEmpty(entry.ChatLink);
                 Assert.Equal(entry.ChatLink, chatLink.ToString());
                 Assert.Equal(entry.MapId, chatLink.MapId);
                 Assert.Equal(entry.Id, $"{chatLink.MapId}-{chatLink.ObjectiveId}");
 
-                var chatLinkRoundtrip = ObjectiveLink.Parse(chatLink.ToString());
+                ObjectiveLink chatLinkRoundtrip = ObjectiveLink.Parse(chatLink.ToString());
                 Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
             }
         );

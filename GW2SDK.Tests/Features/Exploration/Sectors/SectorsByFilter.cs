@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Exploration.Sectors;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Exploration.Sectors;
 
@@ -19,7 +20,7 @@ public class SectorsByFilter
             515
         ];
 
-        var (actual, context) = await sut.Exploration.GetSectorsByIds(
+        (HashSet<Sector> actual, MessageContext context) = await sut.Exploration.GetSectorsByIds(
             continentId,
             floorId,
             regionId,

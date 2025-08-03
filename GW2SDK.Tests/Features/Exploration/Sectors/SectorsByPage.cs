@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Exploration.Sectors;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Exploration.Sectors;
 
@@ -14,7 +15,7 @@ public class SectorsByPage
         const int regionId = 1;
         const int mapId = 26;
         const int pageSize = 3;
-        var (actual, context) = await sut.Exploration.GetSectorsByPage(
+        (HashSet<Sector> actual, MessageContext context) = await sut.Exploration.GetSectorsByPage(
             continentId,
             floorId,
             regionId,

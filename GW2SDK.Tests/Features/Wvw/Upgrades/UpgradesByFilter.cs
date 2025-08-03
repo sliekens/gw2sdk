@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Wvw.Upgrades;
 
 namespace GuildWars2.Tests.Features.Wvw.Upgrades;
 
@@ -15,7 +16,7 @@ public class UpgradesByFilter
             4
         ];
 
-        var (actual, context) = await sut.Wvw.GetUpgradesByIds(
+        (HashSet<ObjectiveUpgrade> actual, MessageContext context) = await sut.Wvw.GetUpgradesByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

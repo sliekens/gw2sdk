@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.StoryJournal.Stories;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.StoryJournal.Stories;
 
@@ -15,7 +16,7 @@ public class StoryStepsByFilter
             17
         ];
 
-        var (actual, context) = await sut.Hero.StoryJournal.GetStoryStepsByIds(
+        (HashSet<StoryStep> actual, MessageContext context) = await sut.Hero.StoryJournal.GetStoryStepsByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

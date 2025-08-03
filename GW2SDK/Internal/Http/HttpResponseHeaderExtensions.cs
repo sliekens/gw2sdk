@@ -35,12 +35,12 @@ internal static class HttpResponseHeaderExtensions
             self = Hyperlink.None,
             first = Hyperlink.None,
             last = Hyperlink.None;
-        if (instance.TryGetValues(Gw2ResponseHeaderName.Link, out var values))
+        if (instance.TryGetValues(Gw2ResponseHeaderName.Link, out IEnumerable<string>? values))
         {
             foreach (var value in values)
             {
-                var header = LinkHeader.Parse(value);
-                foreach (var link in header.Links)
+                LinkHeader header = LinkHeader.Parse(value);
+                foreach (LinkValue link in header.Links)
                 {
 #pragma warning disable CS0618 // Suppress obsolete warning
                     Hyperlink href = new(link.Target);
@@ -74,7 +74,7 @@ internal static class HttpResponseHeaderExtensions
 
     private static int? GetInt32(this HttpResponseHeaders instance, string headerName)
     {
-        if (instance.TryGetValues(headerName, out var values))
+        if (instance.TryGetValues(headerName, out IEnumerable<string>? values))
         {
             foreach (var value in values)
             {

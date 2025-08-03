@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Exploration.Maps;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Exploration.Maps;
 
@@ -13,7 +14,7 @@ public class MapsByPage
         const int floorId = 0;
         const int regionId = 1;
         const int pageSize = 3;
-        var (actual, context) = await sut.Exploration.GetMapsByPage(
+        (HashSet<Map> actual, MessageContext context) = await sut.Exploration.GetMapsByPage(
             continentId,
             floorId,
             regionId,

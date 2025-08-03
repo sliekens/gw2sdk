@@ -13,7 +13,7 @@ internal static class AchievementGroupJson
         RequiredMember description = "description";
         RequiredMember order = "order";
         RequiredMember categories = "categories";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

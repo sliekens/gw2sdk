@@ -11,10 +11,10 @@ public class ActiveEquipmentTemplate
     public async Task Can_be_found()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var character = TestConfiguration.TestCharacter;
-        var accessToken = TestConfiguration.ApiKey;
+        TestCharacter character = TestConfiguration.TestCharacter;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
-        var (actual, context) = await sut.Hero.Equipment.Templates.GetActiveEquipmentTemplate(
+        (EquipmentTemplate actual, MessageContext context) = await sut.Hero.Equipment.Templates.GetActiveEquipmentTemplate(
             character.Name,
             accessToken.Key,
             cancellationToken: TestContext.Current.CancellationToken

@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Masteries;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Masteries;
 
@@ -11,7 +12,7 @@ public class MasteryTrackById
 
         const int id = 1;
 
-        var (actual, context) = await sut.Hero.Masteries.GetMasteryTrackById(
+        (MasteryTrack actual, MessageContext context) = await sut.Hero.Masteries.GetMasteryTrackById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

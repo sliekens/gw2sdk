@@ -13,7 +13,7 @@ internal static class SeasonJson
         RequiredMember losses = "losses";
         RequiredMember rating = "rating";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

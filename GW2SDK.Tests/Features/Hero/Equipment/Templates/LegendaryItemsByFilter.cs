@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Equipment.Templates;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Templates;
 
@@ -15,7 +16,7 @@ public class LegendaryItemsByFilter
             80111
         ];
 
-        var (actual, context) = await sut.Hero.Equipment.Templates.GetLegendaryItemsByIds(
+        (HashSet<LegendaryItem> actual, MessageContext context) = await sut.Hero.Equipment.Templates.GetLegendaryItemsByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

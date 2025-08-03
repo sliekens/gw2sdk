@@ -17,7 +17,7 @@ internal static class BuildJson
         NullableMember legends = "legends";
         NullableMember aquaticLegends = "aquatic_legends";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (name.Match(member))
             {
@@ -57,12 +57,12 @@ internal static class BuildJson
             }
         }
 
-        var (Specialization1, Specialization2, Specialization3) =
+        (SelectedSpecialization? Specialization1, SelectedSpecialization? Specialization2, SelectedSpecialization? Specialization3) =
             specializations.Map(static (in JsonElement values) => values.GetSelectedSpecializations());
-        var legendIds = legends.Map((in JsonElement values) =>
+        (string? LegendId1, string? LegendId2)? legendIds = legends.Map((in JsonElement values) =>
             values.GetLegendIds(Specialization1, Specialization2, Specialization3)
         );
-        var aquaticLegendIds = aquaticLegends.Map((in JsonElement values) =>
+        (string? LegendId1, string? LegendId2)? aquaticLegendIds = aquaticLegends.Map((in JsonElement values) =>
             values.GetLegendIds(Specialization1, Specialization2, Specialization3)
         );
         return new Build

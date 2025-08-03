@@ -1,3 +1,5 @@
+using System.Text.Json;
+
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -35,17 +37,17 @@ public sealed class CraftingDisciplinesClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet(
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet(
             $"v2/characters/{characterName}/crafting",
             accessToken
         );
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetLearnedCraftingDisciplines();
+            LearnedCraftingDisciplines value = response.Json.RootElement.GetLearnedCraftingDisciplines();
             return (value, response.Context);
         }
     }

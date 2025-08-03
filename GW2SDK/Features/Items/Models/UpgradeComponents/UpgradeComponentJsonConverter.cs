@@ -24,7 +24,7 @@ internal sealed class UpgradeComponentJsonConverter : JsonConverter<UpgradeCompo
         JsonSerializerOptions options
     )
     {
-        using var json = JsonDocument.ParseValue(ref reader);
+        using JsonDocument json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
@@ -46,7 +46,7 @@ internal sealed class UpgradeComponentJsonConverter : JsonConverter<UpgradeCompo
             );
         }
 
-        if (json.TryGetProperty(DiscriminatorName, out var discriminator))
+        if (json.TryGetProperty(DiscriminatorName, out JsonElement discriminator))
         {
             switch (discriminator.GetString())
             {
@@ -95,7 +95,7 @@ internal sealed class UpgradeComponentJsonConverter : JsonConverter<UpgradeCompo
             Buff = json.GetProperty("buff").GetNullable(BuffJsonConverter.Read),
             SuffixName = json.GetProperty("suffix").GetStringRequired(),
             UpgradesInto =
-                json.TryGetProperty("upgrades_into", out var found)
+                json.TryGetProperty("upgrades_into", out JsonElement found)
                     ? found.GetList(InfusionSlotUpgradePathJsonConverter.Read)
                     : new ValueList<InfusionSlotUpgradePath>()
         };
@@ -145,7 +145,7 @@ internal sealed class UpgradeComponentJsonConverter : JsonConverter<UpgradeCompo
         }
 
         writer.WriteStartObject("attributes");
-        foreach (var attribute in value.Attributes)
+        foreach (KeyValuePair<Extensible<AttributeName>, int> attribute in value.Attributes)
         {
             writer.WriteNumber(attribute.Key.ToString(), attribute.Value);
         }
@@ -165,7 +165,7 @@ internal sealed class UpgradeComponentJsonConverter : JsonConverter<UpgradeCompo
         writer.WriteString("suffix", value.SuffixName);
 
         writer.WriteStartArray("upgrades_into");
-        foreach (var upgrade in value.UpgradesInto)
+        foreach (InfusionSlotUpgradePath upgrade in value.UpgradesInto)
         {
             InfusionSlotUpgradePathJsonConverter.Write(writer, upgrade);
         }

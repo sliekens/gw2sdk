@@ -15,7 +15,7 @@ internal static class DivisionJson
         RequiredMember pipIcon = "pip_icon";
         RequiredMember tiers = "tiers";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (name.Match(member))
             {

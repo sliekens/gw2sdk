@@ -15,7 +15,7 @@ internal static class GodShrineJson
         RequiredMember coordinates = "coord";
         RequiredMember icon = "icon";
         RequiredMember iconContested = "icon_contested";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

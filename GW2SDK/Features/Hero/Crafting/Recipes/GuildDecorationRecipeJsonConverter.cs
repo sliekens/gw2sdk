@@ -16,7 +16,7 @@ internal sealed class GuildDecorationRecipeJsonConverter : JsonConverter<GuildDe
         JsonSerializerOptions options
     )
     {
-        using var json = JsonDocument.ParseValue(ref reader);
+        using JsonDocument json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
@@ -65,7 +65,7 @@ internal sealed class GuildDecorationRecipeJsonConverter : JsonConverter<GuildDe
         writer.WriteString(RecipeJsonConverter.DiscriminatorName, DiscriminatorValue);
         RecipeJsonConverter.WriteCommonProperties(writer, value);
         writer.WriteStartArray("guild_ingredients");
-        foreach (var guildIngredient in value.GuildIngredients)
+        foreach (GuildIngredient? guildIngredient in value.GuildIngredients)
         {
             GuildIngredientJsonConverter.Write(writer, guildIngredient);
         }

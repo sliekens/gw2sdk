@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Guilds.Permissions;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Guilds.Permissions;
 
@@ -9,7 +10,7 @@ public class GuildPermissions
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Guilds.GetGuildPermissions(
+        (HashSet<GuildPermissionSummary> actual, MessageContext context) = await sut.Guilds.GetGuildPermissions(
             cancellationToken: TestContext.Current.CancellationToken
         );
 

@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Emotes;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Emotes;
 
@@ -9,7 +10,7 @@ public class Emotes
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<Emote> actual, MessageContext context) =
             await sut.Hero.Emotes.GetEmotes(
                 cancellationToken: TestContext.Current.CancellationToken
             );

@@ -11,7 +11,7 @@ internal static class DeliveredItemJson
         RequiredMember id = "id";
         RequiredMember count = "count";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

@@ -13,7 +13,7 @@ public class Titles
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.Achievements.GetTitles(
+        (HashSet<Title> actual, MessageContext context) = await sut.Hero.Achievements.GetTitles(
             cancellationToken: TestContext.Current.CancellationToken
         );
 

@@ -19,7 +19,7 @@ internal static class PercentageJson
         RequiredMember icon = "icon";
         RequiredMember percent = "percent";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

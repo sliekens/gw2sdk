@@ -12,7 +12,7 @@ internal static class SchemaJson
 
         RequiredMember description = "desc";
 
-        foreach (var member in jsonElement.EnumerateObject())
+        foreach (JsonProperty member in jsonElement.EnumerateObject())
         {
             if (version.Match(member))
             {

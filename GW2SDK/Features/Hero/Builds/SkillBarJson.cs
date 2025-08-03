@@ -12,7 +12,7 @@ internal static class SkillBarJson
         RequiredMember utilities = "utilities";
         NullableMember elite = "elite";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (heal.Match(member))
             {
@@ -32,7 +32,7 @@ internal static class SkillBarJson
             }
         }
 
-        var utilitySkills = utilities.Map(static (in JsonElement values) => values.GetUtilitySkillIds());
+        (int? UtilitySkillId, int? UtilitySkillId2, int? UtilitySkillId3) utilitySkills = utilities.Map(static (in JsonElement values) => values.GetUtilitySkillIds());
         return new SkillBar
         {
             HealSkillId = heal.Map(static (in JsonElement value) => value.GetInt32()),

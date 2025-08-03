@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Wvw.Abilities;
 
 namespace GuildWars2.Tests.Features.Wvw.Abilities;
 
@@ -9,7 +10,7 @@ public class Abilities
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<Ability> actual, MessageContext context) =
             await sut.Wvw.GetAbilities(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);

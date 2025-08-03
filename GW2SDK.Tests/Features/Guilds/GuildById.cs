@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Guilds;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Guilds;
 
@@ -8,9 +9,9 @@ public class GuildById
     public async Task Can_be_found()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var guild = TestConfiguration.TestGuild;
+        TestGuild guild = TestConfiguration.TestGuild;
 
-        var (actual, context) = await sut.Guilds.GetGuildById(
+        (Guild actual, MessageContext context) = await sut.Guilds.GetGuildById(
             guild.Id,
             null,
             cancellationToken: TestContext.Current.CancellationToken
@@ -32,10 +33,10 @@ public class GuildById
     public async Task Can_be_found_when_authenticated()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = TestConfiguration.ApiKey;
-        var guild = TestConfiguration.TestGuild;
+        ApiKey accessToken = TestConfiguration.ApiKey;
+        TestGuild guild = TestConfiguration.TestGuild;
 
-        var (actual, context) = await sut.Guilds.GetGuildById(
+        (Guild actual, MessageContext context) = await sut.Guilds.GetGuildById(
             guild.Id,
             accessToken.Key,
             cancellationToken: TestContext.Current.CancellationToken

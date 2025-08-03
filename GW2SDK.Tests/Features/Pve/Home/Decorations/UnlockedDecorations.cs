@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pve.Home.Decorations;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pve.Home.Decorations;
 
@@ -8,9 +9,9 @@ public class UnlockedDecorations
     public async Task Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var token = TestConfiguration.ApiKey;
+        ApiKey token = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Pve.Home.GetUnlockedDecorations(
+        (HashSet<UnlockedDecoration> actual, _) = await sut.Pve.Home.GetUnlockedDecorations(
             token.Key,
             TestContext.Current.CancellationToken
         );

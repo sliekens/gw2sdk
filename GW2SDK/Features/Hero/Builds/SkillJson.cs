@@ -10,7 +10,7 @@ internal static class SkillJson
     public static Skill GetSkill(this in JsonElement json)
     {
         // Unlike most models with a 'type' property, skills don't always have it
-        if (json.TryGetProperty("type", out var type))
+        if (json.TryGetProperty("type", out JsonElement type))
         {
             switch (type.GetString())
             {
@@ -47,7 +47,7 @@ internal static class SkillJson
         RequiredMember chatLink = "chat_link";
         OptionalMember categories = "categories";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

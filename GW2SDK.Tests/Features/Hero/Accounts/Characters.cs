@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Hero;
+using GuildWars2.Hero.Accounts;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Accounts;
@@ -9,9 +10,9 @@ public class Characters
     public async Task Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = TestConfiguration.ApiKey;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
-        var (actual, context) = await sut.Hero.Account.GetCharacters(
+        (HashSet<Character> actual, MessageContext context) = await sut.Hero.Account.GetCharacters(
             accessToken.Key,
             cancellationToken: TestContext.Current.CancellationToken
         );

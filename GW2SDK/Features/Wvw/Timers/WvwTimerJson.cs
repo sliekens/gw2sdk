@@ -11,7 +11,7 @@ internal static class WvwTimerJson
         RequiredMember na = "na";
         RequiredMember eu = "eu";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (na.Match(member))
             {

@@ -10,7 +10,7 @@ public class ProfessionNames
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, _) =
+        (HashSet<Extensible<ProfessionName>> actual, _) =
             await sut.Hero.Training.GetProfessionNames(TestContext.Current.CancellationToken);
 
 #if NET

@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Achievements;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Achievements;
 
@@ -10,7 +11,7 @@ public class AchievementsByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
-        var (actual, context) = await sut.Hero.Achievements.GetAchievementsByPage(
+        (HashSet<Achievement> actual, MessageContext context) = await sut.Hero.Achievements.GetAchievementsByPage(
             0,
             pageSize,
             cancellationToken: TestContext.Current.CancellationToken

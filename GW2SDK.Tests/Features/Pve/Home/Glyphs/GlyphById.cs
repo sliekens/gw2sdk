@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pve.Home.Decorations;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pve.Home.Glyphs;
 
@@ -11,7 +12,7 @@ public class GlyphById
 
         const string id = "leatherworker_logging";
 
-        var (actual, context) = await sut.Pve.Home.GetGlyphById(
+        (Glyph actual, MessageContext context) = await sut.Pve.Home.GetGlyphById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

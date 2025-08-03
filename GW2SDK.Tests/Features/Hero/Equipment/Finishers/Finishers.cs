@@ -13,7 +13,7 @@ public class Finishers
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.Equipment.Finishers.GetFinishers(
+        (HashSet<Finisher> actual, MessageContext context) = await sut.Hero.Equipment.Finishers.GetFinishers(
             cancellationToken: TestContext.Current.CancellationToken
         );
 

@@ -19,7 +19,7 @@ internal static class AttributeConversionJson
         RequiredMember percent = "percent";
         RequiredMember source = "source";
         RequiredMember target = "target";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

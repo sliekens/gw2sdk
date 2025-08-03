@@ -12,7 +12,7 @@ internal static class UpgradeTierJson
         RequiredMember yaksRequired = "yaks_required";
         RequiredMember upgrades = "upgrades";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (name.Match(member))
             {

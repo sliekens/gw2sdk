@@ -14,7 +14,7 @@ internal static class StoryStepJson
         RequiredMember goals = "goals";
         RequiredMember id = "id";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (name.Match(member))
             {

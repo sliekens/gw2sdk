@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Guilds.Permissions;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Guilds.Permissions;
 
@@ -15,7 +16,7 @@ public class GuildPermissionsByFilter
             "WithdrawCoinsTrove"
         ];
 
-        var (actual, context) = await sut.Guilds.GetGuildPermissionsByIds(
+        (HashSet<GuildPermissionSummary> actual, MessageContext context) = await sut.Guilds.GetGuildPermissionsByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

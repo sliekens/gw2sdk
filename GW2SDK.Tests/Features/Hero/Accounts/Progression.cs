@@ -9,9 +9,9 @@ public class Progression
     public async Task Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = TestConfiguration.ApiKey;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Hero.Account.GetProgression(
+        (HashSet<GuildWars2.Hero.Accounts.Progression> actual, _) = await sut.Hero.Account.GetProgression(
             accessToken.Key,
             cancellationToken: TestContext.Current.CancellationToken
         );

@@ -15,7 +15,7 @@ internal static class TimeJson
         RequiredMember icon = "icon";
         RequiredMember duration = "duration";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

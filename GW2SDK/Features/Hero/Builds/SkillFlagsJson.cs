@@ -12,7 +12,7 @@ internal static class SkillFlagsJson
         var groundTargeted = false;
         var noUnderwater = false;
         ValueList<string> others = [];
-        foreach (var entry in json.EnumerateArray())
+        foreach (JsonElement entry in json.EnumerateArray())
         {
             if (entry.ValueEquals("GroundTargeted"))
             {

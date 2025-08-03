@@ -20,7 +20,7 @@ internal static class BankBagJson
         RequiredMember maxCoins = "bag_max_coins";
         RequiredMember costs = "costs";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

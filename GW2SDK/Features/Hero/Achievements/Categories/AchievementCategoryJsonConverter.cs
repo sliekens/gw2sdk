@@ -13,7 +13,7 @@ internal sealed class AchievementCategoryJsonConverter : JsonConverter<Achieveme
         JsonSerializerOptions options
     )
     {
-        using var json = JsonDocument.ParseValue(ref reader);
+        using JsonDocument json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
@@ -56,7 +56,7 @@ internal sealed class AchievementCategoryJsonConverter : JsonConverter<Achieveme
         writer.WriteString("icon", value.IconUrl?.ToString());
         writer.WritePropertyName("achievements");
         writer.WriteStartArray();
-        foreach (var achievement in value.Achievements)
+        foreach (AchievementRef? achievement in value.Achievements)
         {
             AchievementRefJsonConverter.Write(writer, achievement);
         }
@@ -66,7 +66,7 @@ internal sealed class AchievementCategoryJsonConverter : JsonConverter<Achieveme
         if (value.Tomorrow is not null)
         {
             writer.WriteStartArray();
-            foreach (var achievement in value.Tomorrow)
+            foreach (AchievementRef? achievement in value.Tomorrow)
             {
                 AchievementRefJsonConverter.Write(writer, achievement);
             }

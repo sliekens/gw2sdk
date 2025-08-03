@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pvp.Seasons;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pvp.Seasons;
 
@@ -10,7 +11,7 @@ public class SeasonsByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
-        var (actual, context) = await sut.Pvp.GetSeasonsByPage(
+        (HashSet<Season> actual, MessageContext context) = await sut.Pvp.GetSeasonsByPage(
             0,
             pageSize,
             cancellationToken: TestContext.Current.CancellationToken

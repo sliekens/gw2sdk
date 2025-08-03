@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Wvw.Abilities;
 
 namespace GuildWars2.Tests.Features.Wvw.Abilities;
 
@@ -10,7 +11,7 @@ public class AbilitiesByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
-        var (actual, context) = await sut.Wvw.GetAbilitiesByPage(
+        (HashSet<Ability> actual, MessageContext context) = await sut.Wvw.GetAbilitiesByPage(
             0,
             pageSize,
             cancellationToken: TestContext.Current.CancellationToken

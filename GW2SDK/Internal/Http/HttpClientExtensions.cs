@@ -10,7 +10,7 @@ internal static class HttpClientExtensions
         CancellationToken cancellationToken
     )
     {
-        using var response = await httpClient.SendAsync(
+        using HttpResponseMessage? response = await httpClient.SendAsync(
                 request,
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
@@ -21,7 +21,7 @@ internal static class HttpClientExtensions
             if (response.IsSuccessStatusCode)
             {
                 // Do not dispose this JsonDocument, transfer ownership to the caller
-                var json = await response.Content.ReadAsJsonDocumentAsync(cancellationToken)
+                JsonDocument? json = await response.Content.ReadAsJsonDocumentAsync(cancellationToken)
                     .ConfigureAwait(false);
                 return (json, new MessageContext(response));
             }
@@ -29,9 +29,9 @@ internal static class HttpClientExtensions
             var reason = response.ReasonPhrase;
             if (response.Content.Headers.ContentType?.MediaType == "application/json")
             {
-                using var json = await response.Content.ReadAsJsonDocumentAsync(cancellationToken)
+                using JsonDocument? json = await response.Content.ReadAsJsonDocumentAsync(cancellationToken)
                     .ConfigureAwait(false);
-                if (json.RootElement.TryGetProperty("text", out var text))
+                if (json.RootElement.TryGetProperty("text", out JsonElement text))
                 {
                     reason = text.GetString();
                 }

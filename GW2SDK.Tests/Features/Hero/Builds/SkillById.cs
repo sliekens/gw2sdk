@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Builds;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Builds;
 
@@ -11,7 +12,7 @@ public class SkillById
 
         const int id = 61533;
 
-        var (actual, context) = await sut.Hero.Builds.GetSkillById(
+        (Skill actual, MessageContext context) = await sut.Hero.Builds.GetSkillById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

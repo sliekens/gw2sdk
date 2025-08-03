@@ -12,7 +12,7 @@ internal static class MistChampionStatsJson
         RequiredMember defense = "defense";
         RequiredMember speed = "speed";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (offense.Match(member))
             {

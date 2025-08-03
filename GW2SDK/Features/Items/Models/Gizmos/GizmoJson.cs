@@ -8,7 +8,7 @@ internal static class GizmoJson
 {
     public static Gizmo GetGizmo(this in JsonElement json)
     {
-        if (json.TryGetProperty("details", out var discriminator) && discriminator.TryGetProperty("type", out var subtype))
+        if (json.TryGetProperty("details", out JsonElement discriminator) && discriminator.TryGetProperty("type", out JsonElement subtype))
         {
             switch (subtype.GetString())
             {
@@ -33,7 +33,7 @@ internal static class GizmoJson
         RequiredMember chatLink = "chat_link";
         OptionalMember icon = "icon";
         NullableMember guildUpgradeId = "guild_upgrade_id";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {
@@ -88,7 +88,7 @@ internal static class GizmoJson
             }
             else if (member.NameEquals("details"))
             {
-                foreach (var detail in member.Value.EnumerateObject())
+                foreach (JsonProperty detail in member.Value.EnumerateObject())
                 {
                     if (detail.NameEquals("type"))
                     {

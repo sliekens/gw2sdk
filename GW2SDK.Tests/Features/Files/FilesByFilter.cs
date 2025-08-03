@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Files;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Files;
 
@@ -15,7 +16,7 @@ public class FilesByFilter
             "map_stairs_up"
         ];
 
-        var (actual, context) = await sut.Files.GetFilesByIds(
+        (HashSet<Asset> actual, MessageContext context) = await sut.Files.GetFilesByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

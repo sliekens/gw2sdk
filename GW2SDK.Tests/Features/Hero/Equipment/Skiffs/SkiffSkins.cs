@@ -12,7 +12,7 @@ public class SkiffSkins
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.Equipment.Skiffs.GetSkiffSkins(
+        (HashSet<SkiffSkin> actual, MessageContext context) = await sut.Hero.Equipment.Skiffs.GetSkiffSkins(
             cancellationToken: TestContext.Current.CancellationToken
         );
 

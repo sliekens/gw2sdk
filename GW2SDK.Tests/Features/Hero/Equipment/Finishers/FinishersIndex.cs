@@ -9,7 +9,7 @@ public class FinishersIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<int> actual, MessageContext context) =
             await sut.Hero.Equipment.Finishers.GetFinishersIndex(
                 TestContext.Current.CancellationToken
             );

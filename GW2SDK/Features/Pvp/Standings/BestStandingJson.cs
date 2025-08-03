@@ -14,7 +14,7 @@ internal static class BestStandingJson
         RequiredMember points = "points";
         RequiredMember repeats = "repeats";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (totalPoints.Match(member))
             {

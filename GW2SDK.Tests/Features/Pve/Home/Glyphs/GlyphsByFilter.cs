@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pve.Home.Decorations;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pve.Home.Glyphs;
 
@@ -14,7 +15,7 @@ public class GlyphsByFilter
             "unbound_mining"
         ];
 
-        var (actual, context) = await sut.Pve.Home.GetGlyphsByIds(
+        (HashSet<Glyph> actual, MessageContext context) = await sut.Pve.Home.GetGlyphsByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

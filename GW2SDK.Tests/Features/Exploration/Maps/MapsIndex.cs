@@ -12,7 +12,7 @@ public class MapsIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Exploration.GetMapsIndex(
+        (HashSet<int> actual, MessageContext context) = await sut.Exploration.GetMapsIndex(
             continentId,
             floorId,
             regionId,
@@ -29,7 +29,7 @@ public class MapsIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<int> actual, MessageContext context) =
             await sut.Exploration.GetMapsIndex(TestContext.Current.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);

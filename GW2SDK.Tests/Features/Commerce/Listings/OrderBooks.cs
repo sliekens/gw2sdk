@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Commerce.Listings;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Commerce.Listings;
 
@@ -13,7 +14,7 @@ public class OrderBooks
         //   but enumerating all entries is too expensive for a test
         // This code will actually try to fetch more than 600 entries
         //  but the extra requests will be cancelled when this test completes
-        await foreach (var (actual, context) in sut.Commerce.GetOrderBooksBulk(
+        await foreach ((OrderBook actual, MessageContext context) in sut.Commerce.GetOrderBooksBulk(
                 degreeOfParallelism: 3,
                 cancellationToken: TestContext.Current.CancellationToken
             )

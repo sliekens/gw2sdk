@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Commerce.Transactions;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Commerce.Transactions;
 
@@ -7,10 +8,10 @@ public class Sales
     [Fact]
     public async Task Sales_history_can_be_filtered_by_page()
     {
-        var accessToken = TestConfiguration.ApiKey;
+        ApiKey accessToken = TestConfiguration.ApiKey;
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (sales, context) = await sut.Commerce.GetSales(
+        (HashSet<Transaction> sales, MessageContext context) = await sut.Commerce.GetSales(
             0,
             200,
             accessToken.Key,

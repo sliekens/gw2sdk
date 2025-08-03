@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Commerce.Prices;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Commerce.Prices;
 
@@ -11,7 +12,7 @@ public class ItemPriceById
 
         const int id = 24;
 
-        var (actual, context) = await sut.Commerce.GetItemPriceById(
+        (ItemPrice actual, MessageContext context) = await sut.Commerce.GetItemPriceById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

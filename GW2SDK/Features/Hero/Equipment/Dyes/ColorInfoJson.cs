@@ -15,7 +15,7 @@ internal static class ColorInfoJson
         RequiredMember lightness = "lightness";
         RequiredMember rgb = "rgb";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (brightness.Match(member))
             {

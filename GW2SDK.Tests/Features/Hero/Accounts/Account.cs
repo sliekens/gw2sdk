@@ -9,9 +9,9 @@ public class Account
     public async Task Basic_summary_with_any_access_token()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = TestConfiguration.ApiKeyBasic;
+        ApiKeyBasic accessToken = TestConfiguration.ApiKeyBasic;
 
-        var (actual, _) = await sut.Hero.Account.GetSummary(
+        (AccountSummary actual, _) = await sut.Hero.Account.GetSummary(
             accessToken.Key,
             cancellationToken: TestContext.Current.CancellationToken
         );
@@ -39,9 +39,9 @@ public class Account
     public async Task Full_summary_with_high_trust_access_token()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = TestConfiguration.ApiKey;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Hero.Account.GetSummary(
+        (AccountSummary actual, _) = await sut.Hero.Account.GetSummary(
             accessToken.Key,
             cancellationToken: TestContext.Current.CancellationToken
         );

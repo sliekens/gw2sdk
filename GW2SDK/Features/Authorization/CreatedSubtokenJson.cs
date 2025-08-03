@@ -10,7 +10,7 @@ internal static class CreatedSubtokenJson
     {
         RequiredMember subtoken = "subtoken";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (subtoken.Match(member))
             {

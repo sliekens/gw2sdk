@@ -8,9 +8,9 @@ public class UnlockedRecipes
     public async Task Can_be_found()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = TestConfiguration.ApiKey;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Hero.Crafting.Recipes.GetUnlockedRecipes(
+        (HashSet<int> actual, _) = await sut.Hero.Crafting.Recipes.GetUnlockedRecipes(
             accessToken.Key,
             TestContext.Current.CancellationToken
         );

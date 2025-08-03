@@ -9,7 +9,7 @@ public class AchievementGroupsIndex
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<string> actual, MessageContext context) =
             await sut.Hero.Achievements.GetAchievementGroupsIndex(
                 TestContext.Current.CancellationToken
             );

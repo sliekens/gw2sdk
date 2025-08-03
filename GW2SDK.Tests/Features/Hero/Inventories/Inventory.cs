@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Inventories;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Inventories;
 
@@ -8,10 +9,10 @@ public class Inventory
     public async Task Can_be_found_by_character_name()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var character = TestConfiguration.TestCharacter;
-        var accessToken = TestConfiguration.ApiKey;
+        TestCharacter character = TestConfiguration.TestCharacter;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Hero.Inventory.GetInventory(
+        (Baggage actual, _) = await sut.Hero.Inventory.GetInventory(
             character.Name,
             accessToken.Key,
             cancellationToken: TestContext.Current.CancellationToken

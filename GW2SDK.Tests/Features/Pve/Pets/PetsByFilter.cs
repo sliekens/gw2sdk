@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pve.Pets;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pve.Pets;
 
@@ -15,7 +16,7 @@ public class PetsByFilter
             3
         ];
 
-        var (actual, context) = await sut.Pve.Pets.GetPetsByIds(
+        (HashSet<Pet> actual, MessageContext context) = await sut.Pve.Pets.GetPetsByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

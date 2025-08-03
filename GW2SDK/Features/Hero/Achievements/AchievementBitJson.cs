@@ -11,7 +11,7 @@ internal static class AchievementBitJson
     {
         // BUG: some achievement bits don't have a type property, see https://github.com/arenanet/api-cdi/issues/670
         // Hopefully this will get fixed and then TryGetProperty can be replaced by GetProperty
-        if (json.TryGetProperty("type", out var type))
+        if (json.TryGetProperty("type", out JsonElement type))
         {
             switch (type.GetString())
             {
@@ -29,7 +29,7 @@ internal static class AchievementBitJson
         OptionalMember text = "text";
 
         // ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("text"))
             {

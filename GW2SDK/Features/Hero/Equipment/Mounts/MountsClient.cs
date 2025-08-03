@@ -1,5 +1,6 @@
 using System.Text.Json;
 
+using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -30,13 +31,13 @@ public sealed class MountsClient
     public async Task<(HashSet<Extensible<MountName>> Value, MessageContext Context)>
         GetUnlockedMounts(string? accessToken, CancellationToken cancellationToken = default)
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/account/mounts/types", accessToken);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/account/mounts/types", accessToken);
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMountName());
+            ValueHashSet<Extensible<MountName>> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMountName());
             return (value, response.Context);
         }
     }
@@ -51,13 +52,13 @@ public sealed class MountsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/account/mounts/skins", accessToken);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/account/mounts/skins", accessToken);
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -77,16 +78,16 @@ public sealed class MountsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/mounts/types");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/mounts/types");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMount());
+            ValueHashSet<Mount> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMount());
             return (value, response.Context);
         }
     }
@@ -98,13 +99,13 @@ public sealed class MountsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/mounts/types");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/mounts/types");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMountName());
+            ValueHashSet<Extensible<MountName>> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMountName());
             return (value, response.Context);
         }
     }
@@ -122,16 +123,16 @@ public sealed class MountsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/mounts/types");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/mounts/types");
         requestBuilder.Query.AddId(MountNameFormatter.FormatMountName(mountName.ToString()));
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetMount();
+            Mount value = response.Json.RootElement.GetMount();
             return (value, response.Context);
         }
     }
@@ -170,16 +171,16 @@ public sealed class MountsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/mounts/types");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/mounts/types");
         requestBuilder.Query.AddIds(mountNames.Select(MountNameFormatter.FormatMountName));
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMount());
+            ValueHashSet<Mount> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMount());
             return (value, response.Context);
         }
     }
@@ -199,16 +200,16 @@ public sealed class MountsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/mounts/types");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/mounts/types");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMount());
+            ValueHashSet<Mount> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMount());
             return (value, response.Context);
         }
     }
@@ -228,16 +229,16 @@ public sealed class MountsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/mounts/skins");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/mounts/skins");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMountSkin());
+            ValueHashSet<MountSkin> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMountSkin());
             return (value, response.Context);
         }
     }
@@ -249,13 +250,13 @@ public sealed class MountsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/mounts/skins");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/mounts/skins");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -273,16 +274,16 @@ public sealed class MountsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/mounts/skins");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/mounts/skins");
         requestBuilder.Query.AddId(mountSkinId);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetMountSkin();
+            MountSkin value = response.Json.RootElement.GetMountSkin();
             return (value, response.Context);
         }
     }
@@ -300,16 +301,16 @@ public sealed class MountsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/mounts/skins");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/mounts/skins");
         requestBuilder.Query.AddIds(mountSkinIds);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMountSkin());
+            ValueHashSet<MountSkin> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMountSkin());
             return (value, response.Context);
         }
     }
@@ -329,16 +330,16 @@ public sealed class MountsClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/mounts/skins");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/mounts/skins");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMountSkin());
+            ValueHashSet<MountSkin> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMountSkin());
             return (value, response.Context);
         }
     }

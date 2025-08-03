@@ -12,7 +12,7 @@ internal static class GuildPermissionSummaryJson
         RequiredMember name = "name";
         RequiredMember description = "description";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

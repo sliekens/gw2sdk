@@ -15,7 +15,7 @@ internal static class MasteryJson
         RequiredMember pointCost = "point_cost";
         RequiredMember experienceCost = "exp_cost";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (name.Match(member))
             {

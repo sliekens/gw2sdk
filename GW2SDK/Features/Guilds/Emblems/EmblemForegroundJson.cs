@@ -11,7 +11,7 @@ internal static class EmblemForegroundJson
         RequiredMember id = "id";
         RequiredMember layers = "layers";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

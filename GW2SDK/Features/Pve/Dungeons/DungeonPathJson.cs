@@ -11,7 +11,7 @@ internal static class DungeonPathJson
         RequiredMember id = "id";
         RequiredMember kind = "type";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

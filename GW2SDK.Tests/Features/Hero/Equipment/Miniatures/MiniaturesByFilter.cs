@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Equipment.Miniatures;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Miniatures;
 
@@ -15,7 +16,7 @@ public class MiniaturesByFilter
             3
         ];
 
-        var (actual, context) = await sut.Hero.Equipment.Miniatures.GetMiniaturesByIds(
+        (HashSet<Miniature> actual, MessageContext context) = await sut.Hero.Equipment.Miniatures.GetMiniaturesByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

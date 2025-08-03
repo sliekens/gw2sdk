@@ -31,7 +31,7 @@ internal static class MapJson
         RequiredMember adventures = "adventures";
         RequiredMember id = "id";
         RequiredMember masteryPoints = "mastery_points";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (name.Match(member))
             {

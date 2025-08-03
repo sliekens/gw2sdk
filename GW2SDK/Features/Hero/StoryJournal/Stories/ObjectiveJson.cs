@@ -11,7 +11,7 @@ internal static class ObjectiveJson
         RequiredMember active = "active";
         RequiredMember complete = "complete";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (active.Match(member))
             {

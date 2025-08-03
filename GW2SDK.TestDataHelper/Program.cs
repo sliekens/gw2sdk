@@ -16,11 +16,11 @@ var outDir = args[0];
 
 Directory.CreateDirectory(outDir);
 
-var appBuilder = Host.CreateApplicationBuilder(args);
+HostApplicationBuilder appBuilder = Host.CreateApplicationBuilder(args);
 
 appBuilder.Logging.ClearProviders();
 
-var httpClientBuilder = appBuilder.Services.AddHttpClient<Gw2Client>(static httpClient =>
+IHttpClientBuilder httpClientBuilder = appBuilder.Services.AddHttpClient<Gw2Client>(static httpClient =>
         {
             httpClient.Timeout = TimeSpan.FromSeconds(600);
         }
@@ -52,19 +52,19 @@ httpClientBuilder.AddResilienceHandler(
     }
 );
 
-var app = appBuilder.Build();
+IHost app = appBuilder.Build();
 
 try
 {
     await AnsiConsole.Progress()
         .StartAsync(async ctx =>
             {
-                var achievements = ctx.AddTask("Downloading achievements.");
-                var achievementsFile = CreateTextCompressed(Path.Combine(outDir, "achievements.jsonl.gz"));
+                ProgressTask achievements = ctx.AddTask("Downloading achievements.");
+                StreamWriter achievementsFile = CreateTextCompressed(Path.Combine(outDir, "achievements.jsonl.gz"));
                 await using (achievementsFile.ConfigureAwait(false))
                 {
                     var service = app.Services.GetRequiredService<JsonAchievementService>();
-                    var documents =
+                    ISet<string> documents =
                         await service.GetAllJsonAchievements(new ProgressAdapter(achievements)).ConfigureAwait(false);
                     foreach (var document in documents)
                     {
@@ -72,48 +72,48 @@ try
                     }
                 }
 
-                var items = ctx.AddTask("Downloading items.");
-                var itemsFile = CreateTextCompressed(Path.Combine(outDir, "items.jsonl.gz"));
+                ProgressTask items = ctx.AddTask("Downloading items.");
+                StreamWriter itemsFile = CreateTextCompressed(Path.Combine(outDir, "items.jsonl.gz"));
                 await using (itemsFile.ConfigureAwait(false))
                 {
                     var service = app.Services.GetRequiredService<JsonItemService>();
-                    var documents = await service.GetAllJsonItems(new ProgressAdapter(items)).ConfigureAwait(false);
+                    ISet<string> documents = await service.GetAllJsonItems(new ProgressAdapter(items)).ConfigureAwait(false);
                     foreach (var document in documents)
                     {
                         await itemsFile.WriteLineAsync(document).ConfigureAwait(false);
                     }
                 }
 
-                var recipes = ctx.AddTask("Downloading recipes.");
-                var recipesFile = CreateTextCompressed(Path.Combine(outDir, "recipes.jsonl.gz"));
+                ProgressTask recipes = ctx.AddTask("Downloading recipes.");
+                StreamWriter recipesFile = CreateTextCompressed(Path.Combine(outDir, "recipes.jsonl.gz"));
                 await using (recipesFile.ConfigureAwait(false))
                 {
                     var service = app.Services.GetRequiredService<JsonRecipeService>();
-                    var documents = await service.GetAllJsonRecipes(new ProgressAdapter(recipes)).ConfigureAwait(false);
+                    ISet<string> documents = await service.GetAllJsonRecipes(new ProgressAdapter(recipes)).ConfigureAwait(false);
                     foreach (var document in documents)
                     {
                         await recipesFile.WriteLineAsync(document).ConfigureAwait(false);
                     }
                 }
 
-                var skins = ctx.AddTask("Downloading skins.");
-                var skinsFile = CreateTextCompressed(Path.Combine(outDir, "skins.jsonl.gz"));
+                ProgressTask skins = ctx.AddTask("Downloading skins.");
+                StreamWriter skinsFile = CreateTextCompressed(Path.Combine(outDir, "skins.jsonl.gz"));
                 await using (skinsFile.ConfigureAwait(false))
                 {
                     var service = app.Services.GetRequiredService<JsonSkinService>();
-                    var documents = await service.GetAllJsonSkins(new ProgressAdapter(skins)).ConfigureAwait(false);
+                    ISet<string> documents = await service.GetAllJsonSkins(new ProgressAdapter(skins)).ConfigureAwait(false);
                     foreach (var document in documents)
                     {
                         await recipesFile.WriteLineAsync(document).ConfigureAwait(false);
                     }
                 }
 
-                var decorations = ctx.AddTask("Downloading decorations.");
-                var decorationsFile = CreateTextCompressed(Path.Combine(outDir, "decorations.jsonl.gz"));
+                ProgressTask decorations = ctx.AddTask("Downloading decorations.");
+                StreamWriter decorationsFile = CreateTextCompressed(Path.Combine(outDir, "decorations.jsonl.gz"));
                 await using (decorationsFile.ConfigureAwait(false))
                 {
                     var service = app.Services.GetRequiredService<JsonDecorationsService>();
-                    var documents =
+                    ISet<string> documents =
                         await service.GetAllJsonDecorations(new ProgressAdapter(decorations)).ConfigureAwait(false);
                     foreach (var document in documents)
                     {

@@ -22,7 +22,7 @@ internal sealed class ContainerJsonConverter : JsonConverter<Container>
         JsonSerializerOptions options
     )
     {
-        using var json = JsonDocument.ParseValue(ref reader);
+        using JsonDocument json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
@@ -44,7 +44,7 @@ internal sealed class ContainerJsonConverter : JsonConverter<Container>
             );
         }
 
-        if (json.TryGetProperty(DiscriminatorName, out var discriminator))
+        if (json.TryGetProperty(DiscriminatorName, out JsonElement discriminator))
         {
             switch (discriminator.GetString())
             {

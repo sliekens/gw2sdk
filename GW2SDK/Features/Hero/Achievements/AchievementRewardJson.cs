@@ -9,7 +9,7 @@ internal static class AchievementRewardJson
 {
     public static AchievementReward GetAchievementReward(this in JsonElement json)
     {
-        if (json.TryGetProperty("type", out var discriminator))
+        if (json.TryGetProperty("type", out JsonElement discriminator))
         {
             switch (discriminator.GetString())
             {
@@ -25,7 +25,7 @@ internal static class AchievementRewardJson
         }
 
         // ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {

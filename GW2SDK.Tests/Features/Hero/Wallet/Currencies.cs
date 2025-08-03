@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Wallet;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Wallet;
 
@@ -9,7 +10,7 @@ public class Currencies
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.Wallet.GetCurrencies(
+        (HashSet<Currency> actual, MessageContext context) = await sut.Hero.Wallet.GetCurrencies(
             cancellationToken: TestContext.Current.CancellationToken
         );
 

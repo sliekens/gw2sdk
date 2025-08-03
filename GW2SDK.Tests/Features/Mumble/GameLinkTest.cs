@@ -1,4 +1,5 @@
-﻿using System.Runtime.Versioning;
+﻿using System.Net;
+using System.Runtime.Versioning;
 
 using GuildWars2.Hero.Equipment.Mounts;
 using GuildWars2.Mumble;
@@ -12,9 +13,9 @@ public class GameLinkTest
     public void Name_can_be_read_from_Mumble_link()
     {
         Assert.SkipUnless(GameLink.IsSupported(), "Test requires Windows");
-        using var sut = GameLink.Open();
+        using GameLink sut = GameLink.Open();
 
-        var actual = sut.GetSnapshot();
+        GameTick actual = sut.GetSnapshot();
 
         Assert.Equal("Guild Wars 2", actual.Name);
     }
@@ -24,7 +25,7 @@ public class GameLinkTest
     public async Task The_link_is_self_updating()
     {
         Assert.SkipUnless(GameLink.IsSupported(), "Test requires Windows");
-        await using var sut = GameLink.Open();
+        await using GameLink sut = GameLink.Open();
 
         GameLinkTestObserver actual = new();
 
@@ -46,12 +47,12 @@ public class GameLinkTest
     public void The_link_provides_context()
     {
         Assert.SkipUnless(GameLink.IsSupported(), "Test requires Windows");
-        using var sut = GameLink.Open();
+        using GameLink sut = GameLink.Open();
 
-        var gameTick = sut.GetSnapshot();
+        GameTick gameTick = sut.GetSnapshot();
         Assert.True(gameTick.Context.BuildId > 100_000, "Game build should be over 100,000");
 
-        var server = gameTick.Context.ServerAddress;
+        IPEndPoint server = gameTick.Context.ServerAddress;
         Assert.NotEmpty(server.ToString());
 
         if (gameTick.Context.IsMounted)
@@ -68,9 +69,9 @@ public class GameLinkTest
     public void The_link_provides_identity()
     {
         Assert.SkipUnless(GameLink.IsSupported(), "Test requires Windows");
-        using var sut = GameLink.Open();
+        using GameLink sut = GameLink.Open();
 
-        var actual = sut.GetSnapshot().GetIdentity();
+        Identity? actual = sut.GetSnapshot().GetIdentity();
 
         Assert.NotNull(actual);
         Assert.NotEmpty(actual.Name);

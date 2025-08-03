@@ -11,7 +11,7 @@ public class MasteryTracks
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.Masteries.GetMasteryTracks(
+        (HashSet<MasteryTrack> actual, MessageContext context) = await sut.Hero.Masteries.GetMasteryTracks(
             cancellationToken: TestContext.Current.CancellationToken
         );
 

@@ -12,7 +12,7 @@ internal static class MasteryPointsTotalJson
         RequiredMember spent = "spent";
         RequiredMember earned = "earned";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (region.Match(member))
             {

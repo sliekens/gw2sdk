@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Commerce.Prices;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Commerce.Prices;
 
@@ -15,7 +16,7 @@ public class ItemPricesByFilter
             35984
         ];
 
-        var (actual, context) = await sut.Commerce.GetItemPricesByIds(
+        (HashSet<ItemPrice> actual, MessageContext context) = await sut.Commerce.GetItemPricesByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

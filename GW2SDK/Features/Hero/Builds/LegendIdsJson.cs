@@ -16,7 +16,7 @@ internal static class LegendIdsJson
         JsonElement first = default;
         JsonElement second = default;
 
-        foreach (var entry in json.EnumerateArray())
+        foreach (JsonElement entry in json.EnumerateArray())
         {
             if (first.ValueKind == JsonValueKind.Undefined)
             {

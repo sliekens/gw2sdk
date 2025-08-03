@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Achievements;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Achievements;
 
@@ -11,7 +12,7 @@ public class AchievementById
 
         const int id = 1;
 
-        var (actual, context) = await sut.Hero.Achievements.GetAchievementById(
+        (Achievement actual, MessageContext context) = await sut.Hero.Achievements.GetAchievementById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

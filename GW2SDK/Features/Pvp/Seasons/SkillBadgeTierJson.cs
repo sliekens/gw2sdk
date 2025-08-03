@@ -10,7 +10,7 @@ internal static class SkillBadgeTierJson
     {
         RequiredMember rating = "rating";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (rating.Match(member))
             {

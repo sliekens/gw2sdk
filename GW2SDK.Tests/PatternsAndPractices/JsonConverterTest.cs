@@ -10,7 +10,7 @@ public class JsonConverterTest(AssemblyFixture fixture) : IClassFixture<Assembly
     public void AllEnumsShouldHaveJsonConverterAttribute()
     {
         // Get all enum types in the assembly
-        var enumTypes = fixture.Assembly.GetTypes()
+        IEnumerable<Type> enumTypes = fixture.Assembly.GetTypes()
             .Where(t =>
                 t is { IsEnum: true, IsPublic: true, Namespace: not null }
                 && t.Namespace.StartsWith("GuildWars2", StringComparison.Ordinal)

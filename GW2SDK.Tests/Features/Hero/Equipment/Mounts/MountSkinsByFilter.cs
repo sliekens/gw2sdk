@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Equipment.Mounts;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Mounts;
 
@@ -15,7 +16,7 @@ public class MountSkinsByFilter
             3
         ];
 
-        var (actual, context) = await sut.Hero.Equipment.Mounts.GetMountSkinsByIds(
+        (HashSet<MountSkin> actual, MessageContext context) = await sut.Hero.Equipment.Mounts.GetMountSkinsByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

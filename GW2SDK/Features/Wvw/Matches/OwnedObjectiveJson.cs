@@ -8,7 +8,7 @@ internal static class OwnedObjectiveJson
 {
     public static OwnedObjective GetOwnedObjective(this in JsonElement json)
     {
-        if (json.TryGetProperty("type", out var discriminator))
+        if (json.TryGetProperty("type", out JsonElement discriminator))
         {
             switch (discriminator.GetString())
             {
@@ -35,7 +35,7 @@ internal static class OwnedObjectiveJson
         RequiredMember pointsTick = "points_tick";
         RequiredMember pointsCapture = "points_capture";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

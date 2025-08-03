@@ -44,13 +44,13 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/account/wvw", accessToken);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/account/wvw", accessToken);
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetAccountWvwGuild();
+            AccountWvwGuild value = response.Json.RootElement.GetAccountWvwGuild();
             return (value, response.Context);
         }
     }
@@ -76,9 +76,9 @@ public sealed class WvwClient
             WorldRegion.Europe => "eu",
             _ => region.ToString()
         };
-        var requestBuilder = RequestBuilder.HttpGet($"v2/wvw/guilds/{id}");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet($"v2/wvw/guilds/{id}");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
@@ -109,16 +109,16 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/abilities");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/abilities");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAbility());
+            ValueHashSet<Ability> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAbility());
             return (value, response.Context);
         }
     }
@@ -130,13 +130,13 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/abilities");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/abilities");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -154,16 +154,16 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/abilities");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/abilities");
         requestBuilder.Query.AddId(abilityId);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetAbility();
+            Ability value = response.Json.RootElement.GetAbility();
             return (value, response.Context);
         }
     }
@@ -181,16 +181,16 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/abilities");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/abilities");
         requestBuilder.Query.AddIds(abilityIds);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAbility());
+            ValueHashSet<Ability> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAbility());
             return (value, response.Context);
         }
     }
@@ -210,16 +210,16 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/abilities");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/abilities");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAbility());
+            ValueHashSet<Ability> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAbility());
             return (value, response.Context);
         }
     }
@@ -239,16 +239,16 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/objectives");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/objectives");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetObjective());
+            ValueHashSet<Objective> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetObjective());
             return (value, response.Context);
         }
     }
@@ -260,13 +260,13 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/objectives");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/objectives");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
+            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -284,16 +284,16 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/objectives");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/objectives");
         requestBuilder.Query.AddId(objectiveId);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetObjective();
+            Objective value = response.Json.RootElement.GetObjective();
             return (value, response.Context);
         }
     }
@@ -311,16 +311,16 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/objectives");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/objectives");
         requestBuilder.Query.AddIds(objectiveIds);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetObjective());
+            ValueHashSet<Objective> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetObjective());
             return (value, response.Context);
         }
     }
@@ -340,16 +340,16 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/objectives");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/objectives");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetObjective());
+            ValueHashSet<Objective> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetObjective());
             return (value, response.Context);
         }
     }
@@ -369,16 +369,16 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/ranks");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/ranks");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRank());
+            ValueHashSet<Rank> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRank());
             return (value, response.Context);
         }
     }
@@ -390,13 +390,13 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/ranks");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/ranks");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -414,16 +414,16 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/ranks");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/ranks");
         requestBuilder.Query.AddId(rankId);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetRank();
+            Rank value = response.Json.RootElement.GetRank();
             return (value, response.Context);
         }
     }
@@ -441,16 +441,16 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/ranks");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/ranks");
         requestBuilder.Query.AddIds(rankIds);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRank());
+            ValueHashSet<Rank> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRank());
             return (value, response.Context);
         }
     }
@@ -470,16 +470,16 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/ranks");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/ranks");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRank());
+            ValueHashSet<Rank> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRank());
             return (value, response.Context);
         }
     }
@@ -499,16 +499,16 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/upgrades");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/upgrades");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
+            ValueHashSet<ObjectiveUpgrade> value =
                 response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetObjectiveUpgrade());
             return (value, response.Context);
         }
@@ -521,13 +521,13 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/upgrades");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/upgrades");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -545,16 +545,16 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/upgrades");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/upgrades");
         requestBuilder.Query.AddId(upgradeId);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetObjectiveUpgrade();
+            ObjectiveUpgrade value = response.Json.RootElement.GetObjectiveUpgrade();
             return (value, response.Context);
         }
     }
@@ -572,16 +572,16 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/upgrades");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/upgrades");
         requestBuilder.Query.AddIds(upgradeIds);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
+            ValueHashSet<ObjectiveUpgrade> value =
                 response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetObjectiveUpgrade());
             return (value, response.Context);
         }
@@ -602,16 +602,16 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/upgrades");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/upgrades");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value =
+            ValueHashSet<ObjectiveUpgrade> value =
                 response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetObjectiveUpgrade());
             return (value, response.Context);
         }
@@ -630,15 +630,15 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches");
         requestBuilder.Query.AddAllIds();
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatch());
+            ValueHashSet<Match> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatch());
             return (value, response.Context);
         }
     }
@@ -650,13 +650,13 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
+            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -672,15 +672,15 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches");
         requestBuilder.Query.AddId(matchId);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetMatch();
+            Match value = response.Json.RootElement.GetMatch();
             return (value, response.Context);
         }
     }
@@ -696,15 +696,15 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches");
         requestBuilder.Query.AddIds(matchIds);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatch());
+            ValueHashSet<Match> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatch());
             return (value, response.Context);
         }
     }
@@ -722,15 +722,15 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatch());
+            ValueHashSet<Match> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatch());
             return (value, response.Context);
         }
     }
@@ -746,15 +746,15 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches");
         requestBuilder.Query.Add("world", worldId);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetMatch();
+            Match value = response.Json.RootElement.GetMatch();
             return (value, response.Context);
         }
     }
@@ -772,15 +772,15 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/overview");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/overview");
         requestBuilder.Query.AddAllIds();
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatchOverview());
+            ValueHashSet<MatchOverview> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatchOverview());
             return (value, response.Context);
         }
     }
@@ -792,13 +792,13 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/overview");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/overview");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
+            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -814,15 +814,15 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/overview");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/overview");
         requestBuilder.Query.AddId(matchId);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetMatchOverview();
+            MatchOverview value = response.Json.RootElement.GetMatchOverview();
             return (value, response.Context);
         }
     }
@@ -839,15 +839,15 @@ public sealed class WvwClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/overview");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/overview");
         requestBuilder.Query.AddIds(matchIds);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatchOverview());
+            ValueHashSet<MatchOverview> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatchOverview());
             return (value, response.Context);
         }
     }
@@ -866,15 +866,15 @@ public sealed class WvwClient
             CancellationToken cancellationToken = default
         )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/overview");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/overview");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatchOverview());
+            ValueHashSet<MatchOverview> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatchOverview());
             return (value, response.Context);
         }
     }
@@ -890,15 +890,15 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/overview");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/overview");
         requestBuilder.Query.Add("world", worldId);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetMatchOverview();
+            MatchOverview value = response.Json.RootElement.GetMatchOverview();
             return (value, response.Context);
         }
     }
@@ -916,15 +916,15 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/scores");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/scores");
         requestBuilder.Query.AddAllIds();
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatchScores());
+            ValueHashSet<MatchScores> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatchScores());
             return (value, response.Context);
         }
     }
@@ -936,13 +936,13 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/scores");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/scores");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
+            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -958,15 +958,15 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/scores");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/scores");
         requestBuilder.Query.AddId(matchId);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetMatchScores();
+            MatchScores value = response.Json.RootElement.GetMatchScores();
             return (value, response.Context);
         }
     }
@@ -982,15 +982,15 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/scores");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/scores");
         requestBuilder.Query.AddIds(matchIds);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatchScores());
+            ValueHashSet<MatchScores> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatchScores());
             return (value, response.Context);
         }
     }
@@ -1008,15 +1008,15 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/scores");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/scores");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatchScores());
+            ValueHashSet<MatchScores> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatchScores());
             return (value, response.Context);
         }
     }
@@ -1032,15 +1032,15 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/scores");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/scores");
         requestBuilder.Query.Add("world", worldId);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetMatchScores();
+            MatchScores value = response.Json.RootElement.GetMatchScores();
             return (value, response.Context);
         }
     }
@@ -1058,15 +1058,15 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/stats");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/stats");
         requestBuilder.Query.AddAllIds();
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatchStats());
+            ValueHashSet<MatchStats> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatchStats());
             return (value, response.Context);
         }
     }
@@ -1078,13 +1078,13 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/stats");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/stats");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
+            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -1100,15 +1100,15 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/stats");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/stats");
         requestBuilder.Query.AddId(matchId);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetMatchStats();
+            MatchStats value = response.Json.RootElement.GetMatchStats();
             return (value, response.Context);
         }
     }
@@ -1124,15 +1124,15 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/stats");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/stats");
         requestBuilder.Query.AddIds(matchIds);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatchStats());
+            ValueHashSet<MatchStats> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatchStats());
             return (value, response.Context);
         }
     }
@@ -1150,15 +1150,15 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/stats");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/stats");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatchStats());
+            ValueHashSet<MatchStats> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMatchStats());
             return (value, response.Context);
         }
     }
@@ -1174,15 +1174,15 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/stats");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/matches/stats");
         requestBuilder.Query.Add("world", worldId);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetMatchStats();
+            MatchStats value = response.Json.RootElement.GetMatchStats();
             return (value, response.Context);
         }
     }
@@ -1198,13 +1198,13 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/timers/lockout");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/timers/lockout");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetWvwTimer();
+            WvwTimer value = response.Json.RootElement.GetWvwTimer();
             return (value, response.Context);
         }
     }
@@ -1216,13 +1216,13 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/wvw/timers/teamAssignment");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/wvw/timers/teamAssignment");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetWvwTimer();
+            WvwTimer value = response.Json.RootElement.GetWvwTimer();
             return (value, response.Context);
         }
     }

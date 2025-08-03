@@ -12,7 +12,7 @@ public class DesignedForInheritanceTest(AssemblyFixture fixture) : IClassFixture
         /*
          * The goal of this test is to ensure that all unsealed types are designed for inheritance.
          */
-        var classes = fixture.Assembly.ExportedTypes.Where(type => type.IsClass).ToList();
+        List<Type> classes = fixture.Assembly.ExportedTypes.Where(type => type.IsClass).ToList();
         Assert.All(
             classes,
             type =>
@@ -43,8 +43,8 @@ public class DesignedForInheritanceTest(AssemblyFixture fixture) : IClassFixture
     [Fact]
     public void Every_exported_class_with_InheritableAttribute_has_a_subtype()
     {
-        var classes = fixture.Assembly.ExportedTypes.Where(type => type.IsClass).ToList();
-        var inheritableClasses = classes.Where(type =>
+        List<Type> classes = fixture.Assembly.ExportedTypes.Where(type => type.IsClass).ToList();
+        List<Type> inheritableClasses = classes.Where(type =>
                 type.GetCustomAttributes().Any(att => att.GetType().Name == "InheritableAttribute")
             )
             .ToList();
@@ -52,7 +52,7 @@ public class DesignedForInheritanceTest(AssemblyFixture fixture) : IClassFixture
             inheritableClasses,
             type =>
             {
-                var subtypes = classes.Where(subtype => subtype.IsSubclassOf(type)).ToList();
+                List<Type> subtypes = classes.Where(subtype => subtype.IsSubclassOf(type)).ToList();
                 if (subtypes.Count == 0)
                 {
                     throw new InvalidOperationException(

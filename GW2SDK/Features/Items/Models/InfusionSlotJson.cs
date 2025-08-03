@@ -10,7 +10,7 @@ internal static class InfusionSlotJson
     {
         RequiredMember flags = "flags";
         NullableMember itemId = "item_id";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (flags.Match(member))
             {

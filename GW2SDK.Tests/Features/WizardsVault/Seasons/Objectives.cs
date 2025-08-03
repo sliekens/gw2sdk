@@ -9,7 +9,7 @@ public class Season
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (GuildWars2.WizardsVault.Seasons.Season actual, MessageContext context) =
             await sut.WizardsVault.GetSeason(
                 cancellationToken: TestContext.Current.CancellationToken
             );

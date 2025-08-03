@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Items.Stats;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Items.Stats;
 
@@ -15,7 +16,7 @@ public class AttributeCombinationsByFilter
             1566
         ];
 
-        var (actual, context) = await sut.Items.GetAttributeCombinationsByIds(
+        (HashSet<AttributeCombination> actual, MessageContext context) = await sut.Items.GetAttributeCombinationsByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

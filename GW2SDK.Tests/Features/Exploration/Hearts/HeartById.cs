@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Exploration.Hearts;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Exploration.Hearts;
 
@@ -15,7 +16,7 @@ public class HeartById
         const int mapId = 26;
         const int heartId = 2;
 
-        var (actual, context) = await sut.Exploration.GetHeartById(
+        (Heart actual, MessageContext context) = await sut.Exploration.GetHeartById(
             continentId,
             floorId,
             regionId,

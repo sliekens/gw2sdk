@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Equipment.MailCarriers;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.MailCarriers;
 
@@ -10,7 +11,7 @@ public class MailCarriersByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
-        var (actual, context) = await sut.Hero.Equipment.MailCarriers.GetMailCarriersByPage(
+        (HashSet<MailCarrier> actual, MessageContext context) = await sut.Hero.Equipment.MailCarriers.GetMailCarriersByPage(
             0,
             pageSize,
             cancellationToken: TestContext.Current.CancellationToken

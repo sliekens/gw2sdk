@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pve.MapChests;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pve.MapChests;
 
@@ -10,7 +11,7 @@ public class MapChestsByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
-        var (actual, context) = await sut.Pve.MapChests.GetMapChestsByPage(
+        (HashSet<MapChest> actual, MessageContext context) = await sut.Pve.MapChests.GetMapChestsByPage(
             0,
             pageSize,
             cancellationToken: TestContext.Current.CancellationToken

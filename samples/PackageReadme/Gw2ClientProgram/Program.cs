@@ -17,11 +17,11 @@ internal sealed class Program
         var gw2 = new Gw2Client(httpClient);
 
         // Fetch the current prices of all items
-        await foreach (var itemPrice in gw2.Commerce.GetItemPricesBulk().ValueOnly())
+        await foreach (ItemPrice itemPrice in gw2.Commerce.GetItemPricesBulk().ValueOnly())
         {
             // The item price contains the item's ID, which can be used to fetch
             // the item's name
-            var item = await gw2.Items.GetItemById(itemPrice.Id).ValueOnly();
+            Item item = await gw2.Items.GetItemById(itemPrice.Id).ValueOnly();
 
             // Print the item's name and its current highest buyer and lowest seller
             PrintItem(item, itemPrice);

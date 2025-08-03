@@ -13,7 +13,7 @@ internal sealed class MountSkinJsonConverter : JsonConverter<MountSkin>
         JsonSerializerOptions options
     )
     {
-        using var jsonDocument = JsonDocument.ParseValue(ref reader);
+        using JsonDocument jsonDocument = JsonDocument.ParseValue(ref reader);
         return Read(jsonDocument.RootElement);
     }
 
@@ -44,7 +44,7 @@ internal sealed class MountSkinJsonConverter : JsonConverter<MountSkin>
         writer.WriteString("name", value.Name);
         writer.WriteString("icon", value.IconUrl?.ToString());
         writer.WriteStartArray("dye_slots");
-        foreach (var dyeSlot in value.DyeSlots)
+        foreach (DyeSlot dyeSlot in value.DyeSlots)
         {
             DyeSlotJsonConverter.Write(writer, dyeSlot);
         }

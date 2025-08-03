@@ -10,7 +10,7 @@ public class TranslationLinkTest
     [InlineData("[&A/xSAAA=]", 21244)]
     public void Can_marshal_translation_links(string chatLink, int translationId)
     {
-        var sut = TranslationLink.Parse(chatLink);
+        TranslationLink sut = TranslationLink.Parse(chatLink);
 
         var actual = sut.ToString();
 

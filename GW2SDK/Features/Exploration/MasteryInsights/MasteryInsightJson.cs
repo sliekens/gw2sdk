@@ -12,7 +12,7 @@ internal static class MasteryInsightJson
         RequiredMember coordinates = "coord";
         RequiredMember id = "id";
         RequiredMember region = "region";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (coordinates.Match(member))
             {

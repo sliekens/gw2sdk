@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Crafting.Recipes;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Crafting.Recipes;
 
@@ -11,7 +12,7 @@ public class RecipesByOutputItemByPage
 
         const int ironIngot = 19683;
         const int pageSize = 3;
-        var (actual, context) = await sut.Hero.Crafting.Recipes.GetRecipesByOutputItemIdByPage(
+        (HashSet<Recipe> actual, MessageContext context) = await sut.Hero.Crafting.Recipes.GetRecipesByOutputItemIdByPage(
             ironIngot,
             0,
             pageSize,
@@ -24,7 +25,7 @@ public class RecipesByOutputItemByPage
         Assert.Equal(1, context.ResultCount);
         Assert.Equal(1, context.PageTotal);
         Assert.Equal(1, context.ResultTotal);
-        var found = Assert.Single(actual);
+        Recipe? found = Assert.Single(actual);
         Assert.Equal(ironIngotRecipe, found.Id);
     }
 }

@@ -12,7 +12,7 @@ public class Mounts
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.Equipment.Mounts.GetMounts(
+        (HashSet<Mount> actual, MessageContext context) = await sut.Hero.Equipment.Mounts.GetMounts(
             cancellationToken: TestContext.Current.CancellationToken
         );
 

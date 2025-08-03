@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Wvw.Matches.Overview;
 
 namespace GuildWars2.Tests.Features.Wvw.Matches.Overview;
 
@@ -9,7 +10,7 @@ public class MatchesOverview
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<MatchOverview> actual, MessageContext context) =
             await sut.Wvw.GetMatchesOverview(
                 cancellationToken: TestContext.Current.CancellationToken
             );

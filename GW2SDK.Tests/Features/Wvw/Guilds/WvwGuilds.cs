@@ -1,5 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 using GuildWars2.Worlds;
+using GuildWars2.Wvw.Guilds;
 
 namespace GuildWars2.Tests.Features.Wvw.Guilds;
 
@@ -12,7 +13,7 @@ public class WvwGuilds
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Wvw.GetWvwGuilds(
+        (HashSet<WvwGuild> actual, MessageContext context) = await sut.Wvw.GetWvwGuilds(
             region,
             cancellationToken: TestContext.Current.CancellationToken
         );

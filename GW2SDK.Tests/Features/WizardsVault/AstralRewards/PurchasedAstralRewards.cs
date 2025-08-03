@@ -1,4 +1,6 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Chat;
+using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.WizardsVault.AstralRewards;
 
 namespace GuildWars2.Tests.Features.WizardsVault.AstralRewards;
 
@@ -8,9 +10,9 @@ public class PurchasedAstralRewards
     public async Task Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = TestConfiguration.ApiKey;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
-        var (actual, context) = await sut.WizardsVault.GetPurchasedAstralRewards(
+        (HashSet<PurchasedAstralReward> actual, MessageContext context) = await sut.WizardsVault.GetPurchasedAstralRewards(
             accessToken.Key,
             cancellationToken: TestContext.Current.CancellationToken
         );
@@ -37,7 +39,7 @@ public class PurchasedAstralRewards
                     Assert.Null(reward.Purchased);
                 }
 
-                var chatLink = reward.GetChatLink();
+                ItemLink chatLink = reward.GetChatLink();
                 Assert.Equal(reward.ItemId, chatLink.ItemId);
                 Assert.Equal(reward.ItemCount, chatLink.Count);
             }

@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pve.Home.Decorations;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pve.Home.Decorations;
 
@@ -12,7 +13,7 @@ public class Decorations
         using var handler = new JsonLinesHttpMessageHandler("Data/decorations.jsonl.gz");
         using var httpClient = new HttpClient(handler);
         var sut = new Gw2Client(httpClient);
-        await foreach (var (actual, context) in sut.Pve.Home.GetDecorationsBulk(
+        await foreach ((Decoration actual, MessageContext context) in sut.Pve.Home.GetDecorationsBulk(
                 cancellationToken: TestContext.Current.CancellationToken
             ))
         {

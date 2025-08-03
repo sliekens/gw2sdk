@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Exploration.PointsOfInterest;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Exploration.PointsOfInterest;
 
@@ -12,7 +13,7 @@ public class PointsOfInterest
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Exploration.GetPointsOfInterest(
+        (HashSet<PointOfInterest> actual, MessageContext context) = await sut.Exploration.GetPointsOfInterest(
             continentId,
             floorId,
             regionId,

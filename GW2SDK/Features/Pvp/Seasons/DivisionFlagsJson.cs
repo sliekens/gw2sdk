@@ -13,7 +13,7 @@ internal static class DivisionFlagsJson
         var canLoseTiers = false;
         var repeatable = false;
         ValueList<string> others = [];
-        foreach (var entry in json.EnumerateArray())
+        foreach (JsonElement entry in json.EnumerateArray())
         {
             if (entry.ValueEquals("CanLosePoints"))
             {

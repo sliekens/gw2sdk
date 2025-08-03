@@ -14,7 +14,7 @@ internal sealed class SchemaVersionHandler : DelegatingHandler
         // - Rewrite the request to use the latest schema version
         if (request.RequestUri?.Host == BaseAddress.DefaultUri.Host)
         {
-            var recommended = SchemaVersion.Recommended;
+            SchemaVersion recommended = SchemaVersion.Recommended;
             var version = request.RequestUri.Query.IndexOf(
                 "v=" + recommended,
                 StringComparison.Ordinal

@@ -14,7 +14,7 @@ internal static class AmuletJson
         RequiredMember icon = "icon";
         RequiredMember attributes = "attributes";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

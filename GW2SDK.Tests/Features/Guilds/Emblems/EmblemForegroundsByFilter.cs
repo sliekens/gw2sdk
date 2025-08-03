@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Guilds.Emblems;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Guilds.Emblems;
 
@@ -15,7 +16,7 @@ public class EmblemForegroundsByFilter
             3
         ];
 
-        var (actual, context) = await sut.Guilds.GetEmblemForegroundsByIds(
+        (HashSet<EmblemForeground> actual, MessageContext context) = await sut.Guilds.GetEmblemForegroundsByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

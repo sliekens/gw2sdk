@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Collections.Specialized;
+using System.Net;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
@@ -11,7 +12,7 @@ internal sealed class JsonLinesHttpMessageHandler(string path) : HttpMessageHand
     private readonly Dictionary<int, JsonElement> Entries = JsonLinesReader.Read(path)
         .Select(json =>
             {
-                using var document = JsonDocument.Parse(json);
+                using JsonDocument document = JsonDocument.Parse(json);
                 return document.RootElement.Clone();
             }
         )
@@ -23,7 +24,7 @@ internal sealed class JsonLinesHttpMessageHandler(string path) : HttpMessageHand
     )
     {
         var results = new JsonArray();
-        var query = HttpUtility.ParseQueryString(request.RequestUri!.Query);
+        NameValueCollection query = HttpUtility.ParseQueryString(request.RequestUri!.Query);
         var keys = query.Get("ids");
         if (keys is null)
         {
@@ -36,7 +37,7 @@ internal sealed class JsonLinesHttpMessageHandler(string path) : HttpMessageHand
         {
             foreach (var key in keys.Split(',').Select(int.Parse))
             {
-                if (Entries.TryGetValue(key, out var entry))
+                if (Entries.TryGetValue(key, out JsonElement entry))
                 {
                     results.Add(entry);
                 }

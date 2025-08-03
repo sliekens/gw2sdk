@@ -8,7 +8,7 @@ public class StoredBuildsByNumbers
     public async Task Can_be_filtered_by_id()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = TestConfiguration.ApiKey;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
         HashSet<int> slotNumbers =
         [
@@ -17,7 +17,7 @@ public class StoredBuildsByNumbers
         ];
         ;
 
-        var (actual, _) = await sut.Hero.Builds.GetStoredBuilds(
+        (IReadOnlyList<GuildWars2.Hero.Builds.Build> actual, _) = await sut.Hero.Builds.GetStoredBuilds(
             slotNumbers,
             accessToken.Key,
             cancellationToken: TestContext.Current.CancellationToken

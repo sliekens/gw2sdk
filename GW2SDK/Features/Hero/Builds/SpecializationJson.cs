@@ -20,7 +20,7 @@ internal static class SpecializationJson
         OptionalMember professionIconBig = "profession_icon_big";
         OptionalMember professionIcon = "profession_icon";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

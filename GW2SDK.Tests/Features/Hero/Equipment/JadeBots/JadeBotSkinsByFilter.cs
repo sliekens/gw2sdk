@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Equipment.JadeBots;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.JadeBots;
 
@@ -15,7 +16,7 @@ public class JadeBotSkinsByFilter
             5
         ];
 
-        var (actual, context) = await sut.Hero.Equipment.JadeBots.GetJadeBotSkinsByIds(
+        (HashSet<JadeBotSkin> actual, MessageContext context) = await sut.Hero.Equipment.JadeBots.GetJadeBotSkinsByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

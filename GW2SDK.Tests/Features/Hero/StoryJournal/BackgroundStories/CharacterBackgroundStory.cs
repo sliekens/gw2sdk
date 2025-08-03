@@ -8,10 +8,10 @@ public class CharacterBackgroundStory
     public async Task Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var character = TestConfiguration.TestCharacter;
-        var accessToken = TestConfiguration.ApiKey;
+        TestCharacter character = TestConfiguration.TestCharacter;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Hero.StoryJournal.GetCharacterBackgroundStory(
+        (GuildWars2.Hero.StoryJournal.BackgroundStories.CharacterBackgroundStory actual, _) = await sut.Hero.StoryJournal.GetCharacterBackgroundStory(
             character.Name,
             accessToken.Key,
             cancellationToken: TestContext.Current.CancellationToken

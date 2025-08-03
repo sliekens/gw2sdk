@@ -22,7 +22,7 @@ internal sealed class ItemJsonConverter : JsonConverter<Item>
         JsonSerializerOptions options
     )
     {
-        using var json = JsonDocument.ParseValue(ref reader);
+        using JsonDocument json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
@@ -33,7 +33,7 @@ internal sealed class ItemJsonConverter : JsonConverter<Item>
 
     public static Item Read(in JsonElement json)
     {
-        if (json.TryGetProperty(DiscriminatorName, out var discriminator))
+        if (json.TryGetProperty(DiscriminatorName, out JsonElement discriminator))
         {
             switch (discriminator.GetString())
             {
@@ -168,7 +168,7 @@ internal sealed class ItemJsonConverter : JsonConverter<Item>
         writer.WriteString("rarity", value.Rarity.ToString());
         writer.WriteNumber("vendor_value", value.VendorValue);
         writer.WriteStartArray("game_types");
-        foreach (var gameType in value.GameTypes)
+        foreach (Extensible<GameType> gameType in value.GameTypes)
         {
             writer.WriteStringValue(gameType.ToString());
         }

@@ -12,7 +12,7 @@ public class AchievementCategories
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<AchievementCategory> actual, MessageContext context) =
             await sut.Hero.Achievements.GetAchievementCategories(
                 cancellationToken: TestContext.Current.CancellationToken
             );

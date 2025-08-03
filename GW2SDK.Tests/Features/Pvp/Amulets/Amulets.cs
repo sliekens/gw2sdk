@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pvp.Amulets;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pvp.Amulets;
 
@@ -9,7 +10,7 @@ public class Amulets
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<Amulet> actual, MessageContext context) =
             await sut.Pvp.GetAmulets(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);

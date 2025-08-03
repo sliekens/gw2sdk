@@ -10,7 +10,7 @@ public class Matches
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<Match> actual, MessageContext context) =
             await sut.Wvw.GetMatches(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);

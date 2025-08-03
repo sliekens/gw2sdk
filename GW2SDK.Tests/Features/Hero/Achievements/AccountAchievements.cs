@@ -11,9 +11,9 @@ public class AccountAchievements
     public async Task Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = TestConfiguration.ApiKey;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
-        var (actual, context) = await sut.Hero.Achievements.GetAccountAchievements(
+        (HashSet<AccountAchievement> actual, MessageContext context) = await sut.Hero.Achievements.GetAccountAchievements(
             accessToken.Key,
             cancellationToken: TestContext.Current.CancellationToken
         );

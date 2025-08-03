@@ -13,7 +13,7 @@ internal static class SelectedSpecializationsJson
         JsonElement second = default;
         JsonElement third = default;
 
-        foreach (var entry in json.EnumerateArray())
+        foreach (JsonElement entry in json.EnumerateArray())
         {
             if (first.ValueKind == JsonValueKind.Undefined)
             {

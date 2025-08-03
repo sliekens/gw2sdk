@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pvp.Games;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pvp.Games;
 
@@ -8,10 +9,10 @@ public class GameById
     public async Task Can_be_found()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = TestConfiguration.ApiKey;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
         // No way other way to get a game ID than to list them all first
-        var gamesIndex = await sut.Pvp.GetGamesIndex(
+        HashSet<string> gamesIndex = await sut.Pvp.GetGamesIndex(
                 accessToken.Key,
                 cancellationToken: TestContext.Current.CancellationToken
             )
@@ -19,7 +20,7 @@ public class GameById
         var gameId = gamesIndex.First();
 
         // Now that we have a game ID, we can get the game
-        var (actual, context) = await sut.Pvp.GetGameById(
+        (Game actual, MessageContext context) = await sut.Pvp.GetGameById(
             gameId,
             accessToken.Key,
             cancellationToken: TestContext.Current.CancellationToken

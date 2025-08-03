@@ -13,7 +13,7 @@ internal static class MemberInvitedJson
         RequiredMember user = "user";
         RequiredMember invitedBy = "invited_by";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Wvw.Ranks;
 
 namespace GuildWars2.Tests.Features.Wvw.Ranks;
 
@@ -11,7 +12,7 @@ public class RankById
 
         const int id = 105;
 
-        var (actual, context) = await sut.Wvw.GetRankById(
+        (Rank actual, MessageContext context) = await sut.Wvw.GetRankById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

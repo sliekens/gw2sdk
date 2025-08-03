@@ -23,7 +23,7 @@ internal sealed class WeaponJsonConverter : JsonConverter<Weapon>
         JsonSerializerOptions options
     )
     {
-        using var json = JsonDocument.ParseValue(ref reader);
+        using JsonDocument json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
@@ -41,7 +41,7 @@ internal sealed class WeaponJsonConverter : JsonConverter<Weapon>
             );
         }
 
-        if (json.TryGetProperty(DiscriminatorName, out var discriminator))
+        if (json.TryGetProperty(DiscriminatorName, out JsonElement discriminator))
         {
             switch (discriminator.GetString())
             {
@@ -223,7 +223,7 @@ internal sealed class WeaponJsonConverter : JsonConverter<Weapon>
         writer.WriteNumber("max_power", value.MaxPower);
         writer.WriteNumber("defense", value.Defense);
         writer.WriteStartArray("infusion_slots");
-        foreach (var slot in value.InfusionSlots)
+        foreach (InfusionSlot slot in value.InfusionSlots)
         {
             InfusionSlotJsonConverter.Write(writer, slot);
         }
@@ -240,7 +240,7 @@ internal sealed class WeaponJsonConverter : JsonConverter<Weapon>
         }
 
         writer.WriteStartObject("attributes");
-        foreach (var attribute in value.Attributes)
+        foreach (KeyValuePair<Extensible<AttributeName>, int> attribute in value.Attributes)
         {
             writer.WritePropertyName(attribute.Key.ToString());
             writer.WriteNumberValue(attribute.Value);

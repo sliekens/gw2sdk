@@ -8,10 +8,10 @@ public class CharacterTraining
     public async Task Can_be_found()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var character = TestConfiguration.TestCharacter;
-        var accessToken = TestConfiguration.ApiKey;
+        TestCharacter character = TestConfiguration.TestCharacter;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Hero.Training.GetCharacterTraining(
+        (GuildWars2.Hero.Training.CharacterTraining actual, _) = await sut.Hero.Training.GetCharacterTraining(
             character.Name,
             accessToken.Key,
             cancellationToken: TestContext.Current.CancellationToken

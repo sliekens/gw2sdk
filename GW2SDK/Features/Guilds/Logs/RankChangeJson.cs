@@ -15,7 +15,7 @@ internal static class RankChangeJson
         RequiredMember oldRank = "old_rank";
         RequiredMember newRank = "new_rank";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pvp.MistChampions;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pvp.MistChampions;
 
@@ -11,7 +12,7 @@ public class MistChampionById
 
         const string id = "115C140F-C2F5-40EB-8EA2-C3773F2AE468";
 
-        var (actual, context) = await sut.Pvp.GetMistChampionById(
+        (MistChampion actual, MessageContext context) = await sut.Pvp.GetMistChampionById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

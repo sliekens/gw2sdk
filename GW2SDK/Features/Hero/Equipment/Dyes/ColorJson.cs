@@ -13,7 +13,7 @@ internal static class ColorJson
         JsonElement green = default;
         JsonElement blue = default;
 
-        foreach (var entry in json.EnumerateArray())
+        foreach (JsonElement entry in json.EnumerateArray())
         {
             if (red.ValueKind == JsonValueKind.Undefined)
             {

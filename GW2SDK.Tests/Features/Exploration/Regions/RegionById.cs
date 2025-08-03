@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Exploration.Regions;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Exploration.Regions;
 
@@ -12,7 +13,7 @@ public class RegionById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Exploration.GetRegionById(
+        (Region actual, MessageContext context) = await sut.Exploration.GetRegionById(
             continentId,
             floorId,
             regionId,

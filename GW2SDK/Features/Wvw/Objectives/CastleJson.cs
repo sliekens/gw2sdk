@@ -20,7 +20,7 @@ internal static class CastleJson
         OptionalMember marker = "marker";
         RequiredMember chatLink = "chat_link";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

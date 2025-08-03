@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pvp.MistChampions;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pvp.MistChampions;
 
@@ -9,7 +10,7 @@ public class MistChampions
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<MistChampion> actual, MessageContext context) =
             await sut.Pvp.GetMistChampions(
                 cancellationToken: TestContext.Current.CancellationToken
             );

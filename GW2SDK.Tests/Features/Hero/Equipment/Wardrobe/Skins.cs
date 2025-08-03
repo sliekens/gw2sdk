@@ -18,7 +18,7 @@ public class Skins
         using var httpClient = new HttpClient(handler);
         var sut = new Gw2Client(httpClient);
 
-        await foreach (var (actual, context) in sut.Hero.Equipment.Wardrobe.GetSkinsBulk(
+        await foreach ((EquipmentSkin actual, MessageContext context) in sut.Hero.Equipment.Wardrobe.GetSkinsBulk(
                 cancellationToken: TestContext.Current.CancellationToken
             ))
         {
@@ -161,10 +161,10 @@ public class Skins
                 Assert.True(weapon.DamageType.IsDefined());
             }
 
-            var chatLink = actual.GetChatLink();
+            SkinLink chatLink = actual.GetChatLink();
             Assert.Equal(actual.Id, chatLink.SkinId);
 
-            var chatLinkRoundtrip = SkinLink.Parse(chatLink.ToString());
+            SkinLink chatLinkRoundtrip = SkinLink.Parse(chatLink.ToString());
             Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
         }
     }
@@ -177,7 +177,7 @@ public class Skins
         using var handler = new JsonLinesHttpMessageHandler("Data/skins.jsonl.gz");
         using var httpClient = new HttpClient(handler);
         var sut = new Gw2Client(httpClient);
-        await foreach (var original in sut.Hero.Equipment.Wardrobe
+        await foreach (EquipmentSkin original in sut.Hero.Equipment.Wardrobe
             .GetSkinsBulk(cancellationToken: TestContext.Current.CancellationToken)
             .ValueOnly(TestContext.Current.CancellationToken))
         {

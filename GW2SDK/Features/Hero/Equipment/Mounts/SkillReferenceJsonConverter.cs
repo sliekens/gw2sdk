@@ -13,7 +13,7 @@ internal sealed class SkillReferenceJsonConverter : JsonConverter<SkillReference
         JsonSerializerOptions options
     )
     {
-        using var json = JsonDocument.ParseValue(ref reader);
+        using JsonDocument json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 

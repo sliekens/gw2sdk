@@ -11,7 +11,7 @@ internal static class AccountWvwSummaryJson
         NullableMember teamId = "team_id";
         NullableMember rank = "rank";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (teamId.Match(member))
             {

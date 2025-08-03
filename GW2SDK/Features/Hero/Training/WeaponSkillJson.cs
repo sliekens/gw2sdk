@@ -14,7 +14,7 @@ internal static class WeaponSkillJson
         NullableMember offhand = "offhand";
         NullableMember attunement = "attunement";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

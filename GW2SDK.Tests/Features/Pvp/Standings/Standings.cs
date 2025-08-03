@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pvp.Standings;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pvp.Standings;
 
@@ -8,9 +9,9 @@ public class Standings
     public async Task Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = TestConfiguration.ApiKey;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Pvp.GetStandings(
+        (HashSet<Standing> actual, _) = await sut.Pvp.GetStandings(
             accessToken.Key,
             cancellationToken: TestContext.Current.CancellationToken
         );

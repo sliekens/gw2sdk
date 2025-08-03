@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Exploration.Regions;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Exploration.Regions;
 
@@ -17,7 +18,7 @@ public class RegionsByFilter
             3
         ];
 
-        var (actual, context) = await sut.Exploration.GetRegionsByIds(
+        (HashSet<Region> actual, MessageContext context) = await sut.Exploration.GetRegionsByIds(
             continentId,
             floorId,
             ids,

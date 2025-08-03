@@ -17,7 +17,7 @@ internal static class SeasonJson
         OptionalMember ranks = "ranks";
         RequiredMember leaderboards = "leaderboards";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

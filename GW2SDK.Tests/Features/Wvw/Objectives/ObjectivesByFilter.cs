@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Wvw.Objectives;
 
 namespace GuildWars2.Tests.Features.Wvw.Objectives;
 
@@ -15,7 +16,7 @@ public class ObjectivesByFilter
             "1102-99"
         ];
 
-        var (actual, context) = await sut.Wvw.GetObjectivesByIds(
+        (HashSet<Objective> actual, MessageContext context) = await sut.Wvw.GetObjectivesByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

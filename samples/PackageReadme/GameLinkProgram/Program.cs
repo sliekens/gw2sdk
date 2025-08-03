@@ -23,13 +23,13 @@ internal sealed class Program
         // For example, at most once every second.
         // Default: no limit, every change in the game state
         //   will be available immediately.
-        var refreshInterval = TimeSpan.FromSeconds(1);
+        TimeSpan refreshInterval = TimeSpan.FromSeconds(1);
 
         // Open the game link with the chosen refresh interval.
         // GameLink implements IDiposable and IAsyncDisposable,
         //  make sure it is disposed one way or another,
         //  e.g. by 'using' or 'await using'.
-        await using var gameLink = GameLink.Open(refreshInterval);
+        await using GameLink gameLink = GameLink.Open(refreshInterval);
 
         Console.WriteLine(
             "GameLink is starting! (Ensure the game is running"
@@ -37,11 +37,11 @@ internal sealed class Program
         );
 
         // Subscribe to the game link to start receiving game state updates.
-        var subscription = gameLink.Subscribe(gameTick =>
+        IDisposable subscription = gameLink.Subscribe(gameTick =>
             {
                 // Each 'tick' contains information about the player's character
                 // and actions, among other things.
-                var player = gameTick.GetIdentity();
+                Identity? player = gameTick.GetIdentity();
 
                 // The identity can be missing due to JSON errors,
                 // always check for null.

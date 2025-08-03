@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.StoryJournal.BackgroundStories;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.StoryJournal.BackgroundStories;
 
@@ -15,7 +16,7 @@ public class BackgroundStoryAnswersByFilter
             "7-55"
         ];
 
-        var (actual, context) = await sut.Hero.StoryJournal.GetBackgroundStoryAnswersByIds(
+        (HashSet<BackgroundStoryAnswer> actual, MessageContext context) = await sut.Hero.StoryJournal.GetBackgroundStoryAnswersByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

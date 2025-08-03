@@ -21,12 +21,12 @@ public class BulkQueryTest
             return Task.FromResult(result);
         }
 
-        var index = Enumerable.Range(1, resultTotal).ToHashSet();
+        HashSet<int> index = Enumerable.Range(1, resultTotal).ToHashSet();
 
         // Cancel after 107 records have been received (arbitrary positive number less than the total)
         const int cutoff = 107;
         var received = 0;
-        var producer = BulkQuery.QueryAsync(
+        IAsyncEnumerable<StubRecord> producer = BulkQuery.QueryAsync(
             index,
             GetChunk,
             chunkSize: chunkSize,
@@ -34,7 +34,7 @@ public class BulkQueryTest
         );
         var reason = await Assert.ThrowsAsync<OperationCanceledException>(async () =>
             {
-                await foreach (var _ in producer.WithCancellation(cancellationTokenSource.Token))
+                await foreach (StubRecord _ in producer.WithCancellation(cancellationTokenSource.Token))
                 {
                     if (++received == cutoff)
                     {
@@ -54,7 +54,7 @@ public class BulkQueryTest
     public async Task Large_queries_are_chunked()
     {
         // Simulate 1000 records
-        var index = Enumerable.Range(1, 1000).ToHashSet();
+        HashSet<int> index = Enumerable.Range(1, 1000).ToHashSet();
 
         Task<IReadOnlyCollection<StubRecord>> GetChunk(
             IEnumerable<int> chunk,
@@ -68,7 +68,7 @@ public class BulkQueryTest
             return Task.FromResult(result);
         }
 
-        var actual = await BulkQuery
+        List<StubRecord> actual = await BulkQuery
             .QueryAsync(index, GetChunk, cancellationToken: TestContext.Current.CancellationToken)
             .ToListAsync(TestContext.Current.CancellationToken);
 
@@ -81,7 +81,7 @@ public class BulkQueryTest
     public async Task Small_queries_are_not_chunked()
     {
         // Simulate 100 records
-        var index = Enumerable.Range(1, 100).ToList();
+        List<int> index = Enumerable.Range(1, 100).ToList();
 
         Task<IReadOnlyCollection<StubRecord>> GetChunk(
             IEnumerable<int> chunk,
@@ -89,13 +89,13 @@ public class BulkQueryTest
         )
         {
             cancellationToken.ThrowIfCancellationRequested();
-            var keys = chunk.ToList();
+            List<int> keys = chunk.ToList();
             Assert.Equal(index, keys);
             IReadOnlyCollection<StubRecord> result = [.. keys.Select(id => new StubRecord(id))];
             return Task.FromResult(result);
         }
 
-        var actual = await BulkQuery
+        List<StubRecord> actual = await BulkQuery
             .QueryAsync(index, GetChunk, cancellationToken: TestContext.Current.CancellationToken)
             .ToListAsync(TestContext.Current.CancellationToken);
 

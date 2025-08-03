@@ -18,7 +18,7 @@ internal static class HubJson
         RequiredMember prerequisites = "prerequisites";
         RequiredMember costs = "costs";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

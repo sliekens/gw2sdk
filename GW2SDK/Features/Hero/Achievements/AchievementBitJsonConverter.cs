@@ -22,7 +22,7 @@ internal sealed class AchievementBitJsonConverter : JsonConverter<AchievementBit
         JsonSerializerOptions options
     )
     {
-        using var json = JsonDocument.ParseValue(ref reader);
+        using JsonDocument json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
@@ -37,7 +37,7 @@ internal sealed class AchievementBitJsonConverter : JsonConverter<AchievementBit
 
     public static AchievementBit Read(in JsonElement json)
     {
-        if (json.TryGetProperty(DiscriminatorName, out var discriminator))
+        if (json.TryGetProperty(DiscriminatorName, out JsonElement discriminator))
         {
             switch (discriminator.GetString())
             {
@@ -53,7 +53,7 @@ internal sealed class AchievementBitJsonConverter : JsonConverter<AchievementBit
         }
 
         JsonElement text = default;
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("text"))
             {

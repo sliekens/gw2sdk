@@ -12,7 +12,7 @@ public class LegendaryItems
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<LegendaryItem> actual, MessageContext context) =
             await sut.Hero.Equipment.Templates.GetLegendaryItems(
                 cancellationToken: TestContext.Current.CancellationToken
             );

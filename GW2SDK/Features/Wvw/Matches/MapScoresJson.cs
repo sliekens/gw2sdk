@@ -12,7 +12,7 @@ internal static class MapScoresJson
         RequiredMember type = "type";
         RequiredMember scores = "scores";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (type.Match(member))
             {

@@ -16,7 +16,7 @@ internal static class LeaderboardEntryJson
         RequiredMember date = "date";
         RequiredMember scores = "scores";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (name.Match(member))
             {

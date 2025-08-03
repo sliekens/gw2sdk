@@ -12,7 +12,7 @@ internal static class WeaponProficiencyJson
         RequiredMember flags = "flags";
         RequiredMember skills = "skills";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (specialization.Match(member))
             {

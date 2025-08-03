@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Wvw.Timers;
 
 namespace GuildWars2.Tests.Features.Wvw.Timers;
 
@@ -9,7 +10,7 @@ public class TeamAssignmentTimer
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (WvwTimer actual, MessageContext context) =
             await sut.Wvw.GetTeamAssignmentTimer(TestContext.Current.CancellationToken);
 
         Assert.NotNull(context);

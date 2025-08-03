@@ -1,5 +1,6 @@
 using System.Text.Json;
 
+using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -35,17 +36,17 @@ public sealed class TrainingClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet(
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet(
             $"v2/characters/{characterName}/training",
             accessToken
         );
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetCharacterTraining();
+            CharacterTraining value = response.Json.RootElement.GetCharacterTraining();
             return (value, response.Context);
         }
     }
@@ -65,16 +66,16 @@ public sealed class TrainingClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/professions");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/professions");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetProfession());
+            ValueHashSet<Profession> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetProfession());
             return (value, response.Context);
         }
     }
@@ -85,13 +86,13 @@ public sealed class TrainingClient
     public async Task<(HashSet<Extensible<ProfessionName>> Value, MessageContext Context)>
         GetProfessionNames(CancellationToken cancellationToken = default)
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/professions");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/professions");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value =
+            ValueHashSet<Extensible<ProfessionName>> value =
                 response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEnum<ProfessionName>());
             return (value, response.Context);
         }
@@ -110,16 +111,16 @@ public sealed class TrainingClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/professions");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/professions");
         requestBuilder.Query.AddId(professionName.ToString());
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetProfession();
+            Profession value = response.Json.RootElement.GetProfession();
             return (value, response.Context);
         }
     }
@@ -158,16 +159,16 @@ public sealed class TrainingClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/professions");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/professions");
         requestBuilder.Query.AddIds(professionNames.Select(value => value.ToString()));
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetProfession());
+            ValueHashSet<Profession> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetProfession());
             return (value, response.Context);
         }
     }
@@ -187,16 +188,16 @@ public sealed class TrainingClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/professions");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/professions");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetProfession());
+            ValueHashSet<Profession> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetProfession());
             return (value, response.Context);
         }
     }

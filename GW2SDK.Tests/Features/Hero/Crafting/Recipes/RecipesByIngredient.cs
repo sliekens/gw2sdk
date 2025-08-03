@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Crafting.Recipes;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Crafting.Recipes;
 
@@ -13,7 +14,7 @@ public class RecipesByIngredient
         var sut = Composer.Resolve<Gw2Client>();
 
         const int visionCrystal = 46746;
-        var (actual, context) = await sut.Hero.Crafting.Recipes.GetRecipesByIngredientItemId(
+        (HashSet<Recipe> actual, MessageContext context) = await sut.Hero.Crafting.Recipes.GetRecipesByIngredientItemId(
             visionCrystal,
             cancellationToken: TestContext.Current.CancellationToken
         );

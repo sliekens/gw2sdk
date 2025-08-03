@@ -8,10 +8,10 @@ public class LearnedRecipes
     public async Task Can_be_found()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var character = TestConfiguration.TestCharacter;
-        var accessToken = TestConfiguration.ApiKey;
+        TestCharacter character = TestConfiguration.TestCharacter;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Hero.Crafting.Recipes.GetLearnedRecipes(
+        (HashSet<int> actual, _) = await sut.Hero.Crafting.Recipes.GetLearnedRecipes(
             character.Name,
             accessToken.Key,
             cancellationToken: TestContext.Current.CancellationToken

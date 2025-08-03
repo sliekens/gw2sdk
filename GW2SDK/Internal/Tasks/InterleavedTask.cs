@@ -6,7 +6,7 @@ internal static class InterleavedTask
     {
         // Found on https://devblogs.microsoft.com/pfxteam/processing-tasks-as-they-complete/
         // Thanks Stephen Toub!
-        var inputTasks = tasks.ToList();
+        List<Task<T>> inputTasks = tasks.ToList();
         var buckets = new TaskCompletionSource<Task<T>>[inputTasks.Count];
         var results = new Task<Task<T>>[buckets.Length];
         for (var i = 0; i < buckets.Length; i++)
@@ -16,7 +16,7 @@ internal static class InterleavedTask
         }
 
         var nextTaskIndex = -1;
-        foreach (var inputTask in inputTasks)
+        foreach (Task<T> inputTask in inputTasks)
         {
             inputTask.ContinueWith(
                 Continuation,
@@ -28,7 +28,7 @@ internal static class InterleavedTask
 
         void Continuation(Task<T> completed)
         {
-            var bucket = buckets[Interlocked.Increment(ref nextTaskIndex)];
+            TaskCompletionSource<Task<T>> bucket = buckets[Interlocked.Increment(ref nextTaskIndex)];
             bucket.TrySetResult(completed);
         }
 

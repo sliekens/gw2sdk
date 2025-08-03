@@ -13,7 +13,7 @@ internal static class AchievementRefJson
         OptionalMember flags = "flags";
         OptionalMember level = "level";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

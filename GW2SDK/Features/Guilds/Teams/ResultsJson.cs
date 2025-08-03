@@ -14,7 +14,7 @@ internal static class ResultsJson
         RequiredMember byes = "byes";
         RequiredMember forfeits = "forfeits";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (wins.Match(member))
             {

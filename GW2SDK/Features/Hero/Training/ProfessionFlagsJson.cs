@@ -12,7 +12,7 @@ internal static class ProfessionFlagsJson
         var noWeaponSwap = false;
         var noRacialSkills = false;
         ValueList<string> others = [];
-        foreach (var entry in json.EnumerateArray())
+        foreach (JsonElement entry in json.EnumerateArray())
         {
             if (entry.ValueEquals("NoWeaponSwap"))
             {

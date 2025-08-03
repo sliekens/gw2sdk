@@ -13,7 +13,7 @@ public class Novelties
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.Equipment.Novelties.GetNovelties(
+        (HashSet<Novelty> actual, MessageContext context) = await sut.Hero.Equipment.Novelties.GetNovelties(
             cancellationToken: TestContext.Current.CancellationToken
         );
 

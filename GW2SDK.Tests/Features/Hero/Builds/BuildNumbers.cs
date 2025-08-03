@@ -8,10 +8,10 @@ public class BuildNumbers
     public async Task Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var character = TestConfiguration.TestCharacter;
-        var accessToken = TestConfiguration.ApiKey;
+        TestCharacter character = TestConfiguration.TestCharacter;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
-        var (actual, context) = await sut.Hero.Builds.GetBuildNumbers(
+        (HashSet<int> actual, MessageContext context) = await sut.Hero.Builds.GetBuildNumbers(
             character.Name,
             accessToken.Key,
             TestContext.Current.CancellationToken

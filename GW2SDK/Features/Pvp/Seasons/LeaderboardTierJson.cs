@@ -13,7 +13,7 @@ internal static class LeaderboardTierJson
         OptionalMember name = "name";
         RequiredMember range = "range";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (color.Match(member))
             {

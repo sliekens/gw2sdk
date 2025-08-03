@@ -1,3 +1,5 @@
+using System.Text.Json;
+
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -29,14 +31,14 @@ public sealed class TokenClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/tokeninfo", accessToken);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/tokeninfo", accessToken);
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetTokenInfo();
+            TokenInfo value = response.Json.RootElement.GetTokenInfo();
             return (value, response.Context);
         }
     }
@@ -72,7 +74,7 @@ public sealed class TokenClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/createsubtoken", accessToken);
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/createsubtoken", accessToken);
         if (permissions is not null)
         {
 #pragma warning disable CA1308 // Normalize strings to uppercase
@@ -96,13 +98,13 @@ public sealed class TokenClient
             requestBuilder.Query.Add("urls", string.Join(",", allowedUrls));
         }
 
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetCreatedSubtoken();
+            CreatedSubtoken value = response.Json.RootElement.GetCreatedSubtoken();
             return (value, response.Context);
         }
     }
@@ -137,7 +139,7 @@ public sealed class TokenClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/createsubtoken", accessToken);
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/createsubtoken", accessToken);
         if (permissions is not null)
         {
 #pragma warning disable CA1308 // Normalize strings to uppercase
@@ -161,13 +163,13 @@ public sealed class TokenClient
             requestBuilder.Query.Add("urls", string.Join(",", allowedUrls.Select(u => u.ToString())));
         }
 
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetCreatedSubtoken();
+            CreatedSubtoken value = response.Json.RootElement.GetCreatedSubtoken();
             return (value, response.Context);
         }
     }

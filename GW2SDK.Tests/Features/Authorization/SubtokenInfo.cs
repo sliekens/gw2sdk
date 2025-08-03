@@ -9,14 +9,14 @@ public class SubtokenInfo
     public async Task Subtoken_has_info()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = TestConfiguration.ApiKey;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
         #region Create a new subtoken
 
         var subtokenPermissions = new HashSet<Permission>();
 
 #if NET
-        foreach (var permission in Enum.GetValues<Permission>())
+        foreach (Permission permission in Enum.GetValues<Permission>())
 #else
         foreach (Permission permission in Enum.GetValues(typeof(Permission)))
 #endif
@@ -25,9 +25,9 @@ public class SubtokenInfo
         }
 
         // API uses 1 second precision
-        var notBefore =
+        DateTimeOffset notBefore =
             DateTimeOffset.FromUnixTimeSeconds(DateTimeOffset.UtcNow.ToUnixTimeSeconds());
-        var expiresAt = notBefore.AddDays(1);
+        DateTimeOffset expiresAt = notBefore.AddDays(1);
 
         List<Uri> urls =
         [
@@ -36,7 +36,7 @@ public class SubtokenInfo
             new Uri("/v2/characters/My Cool Character", UriKind.Relative)
         ];
 
-        var (createdSubtoken, context) = await sut.Tokens.CreateSubtoken(
+        (CreatedSubtoken createdSubtoken, MessageContext context) = await sut.Tokens.CreateSubtoken(
             accessToken.Key,
             subtokenPermissions,
             expiresAt,
@@ -50,7 +50,7 @@ public class SubtokenInfo
         // I guess this is a clock synchronization problem, because adding a delay works
         await Task.Delay(3000, TestContext.Current.CancellationToken);
 
-        var (actual, _) = await sut.Tokens.GetTokenInfo(
+        (GuildWars2.Authorization.TokenInfo actual, _) = await sut.Tokens.GetTokenInfo(
             createdSubtoken.Subtoken,
             cancellationToken: TestContext.Current.CancellationToken
         );

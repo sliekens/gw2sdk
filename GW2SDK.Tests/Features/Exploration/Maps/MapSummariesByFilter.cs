@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Exploration.Maps;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Exploration.Maps;
 
@@ -15,7 +16,7 @@ public class MapSummariesByFilter
             18
         ];
 
-        var (actual, context) = await sut.Exploration.GetMapSummariesByIds(
+        (HashSet<MapSummary> actual, MessageContext context) = await sut.Exploration.GetMapSummariesByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

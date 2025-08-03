@@ -1,4 +1,6 @@
-﻿using GuildWars2.Items;
+﻿using System.Text.Json;
+
+using GuildWars2.Items;
 
 namespace GuildWars2.TestDataHelper;
 
@@ -6,7 +8,7 @@ internal sealed class JsonItemService(HttpClient http)
 {
     public async Task<ISet<string>> GetAllJsonItems(IProgress<BulkProgress> progress)
     {
-        var ids = await GetItemsIndex().ConfigureAwait(false);
+        HashSet<int> ids = await GetItemsIndex().ConfigureAwait(false);
         var entries = new SortedDictionary<int, string>();
         await foreach (var (id, entry) in GetJsonItemsByIds(ids, progress).ConfigureAwait(false))
         {
@@ -19,7 +21,7 @@ internal sealed class JsonItemService(HttpClient http)
     private async Task<HashSet<int>> GetItemsIndex()
     {
         var items = new ItemsClient(http);
-        var (ids, _) = await items.GetItemsIndex().ConfigureAwait(false);
+        (HashSet<int> ids, _) = await items.GetItemsIndex().ConfigureAwait(false);
         return ids;
     }
 
@@ -43,7 +45,7 @@ internal sealed class JsonItemService(HttpClient http)
         {
             Uri resource = new Uri("/v2/items", UriKind.Relative);
             var request = new BulkRequest(resource) { Ids = [.. chunk] };
-            var json = await request.SendAsync(http, cancellationToken).ConfigureAwait(false);
+            JsonDocument json = await request.SendAsync(http, cancellationToken).ConfigureAwait(false);
             return [.. json.RootElement.EnumerateArray().Select(item => (item.GetProperty("id").GetInt32(), item.ToJsonLine()))];
         }
     }

@@ -98,7 +98,7 @@ public class ExtensibleEnum
     public void Converts_names_to_enum()
     {
         var extensible = new Extensible<Rarity>(nameof(Rarity.Legendary));
-        var actual = extensible.ToEnum();
+        Rarity? actual = extensible.ToEnum();
         Assert.Equal(Rarity.Legendary, actual);
     }
 
@@ -106,7 +106,7 @@ public class ExtensibleEnum
     public void Converts_unknown_names_to_null()
     {
         var extensible = new Extensible<Rarity>("Mythical");
-        var actual = extensible.ToEnum();
+        Rarity? actual = extensible.ToEnum();
         Assert.Null(actual);
     }
 
@@ -114,7 +114,7 @@ public class ExtensibleEnum
     public void Converts_unknown_names_to_null_when_enum_has_a_default_value()
     {
         var extensible = new Extensible<ProductName>("GuildWars3");
-        var actual = extensible.ToEnum();
+        ProductName? actual = extensible.ToEnum();
         Assert.Null(actual);
     }
 

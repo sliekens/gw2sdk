@@ -13,7 +13,7 @@ internal static class JadeBotSkinJson
         RequiredMember description = "description";
         RequiredMember unlockItem = "unlock_item";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

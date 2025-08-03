@@ -16,7 +16,7 @@ internal static class MasteryTrackJson
         RequiredMember region = "region";
         RequiredMember levels = "levels";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

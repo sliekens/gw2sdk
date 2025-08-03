@@ -8,7 +8,7 @@ internal static class TrinketJson
 {
     public static Trinket GetTrinket(this in JsonElement json)
     {
-        if (json.TryGetProperty("details", out var discriminator) && discriminator.TryGetProperty("type", out var subtype))
+        if (json.TryGetProperty("details", out JsonElement discriminator) && discriminator.TryGetProperty("type", out JsonElement subtype))
         {
             switch (subtype.GetString())
             {
@@ -39,7 +39,7 @@ internal static class TrinketJson
         OptionalMember infixUpgradeBuff = "buff";
         NullableMember suffixItemId = "suffix_item_id";
         OptionalMember statChoices = "stat_choices";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {
@@ -94,7 +94,7 @@ internal static class TrinketJson
             }
             else if (member.NameEquals("details"))
             {
-                foreach (var detail in member.Value.EnumerateObject())
+                foreach (JsonProperty detail in member.Value.EnumerateObject())
                 {
                     if (detail.NameEquals("type"))
                     {
@@ -113,7 +113,7 @@ internal static class TrinketJson
                     }
                     else if (detail.NameEquals("infix_upgrade"))
                     {
-                        foreach (var infix in detail.Value.EnumerateObject())
+                        foreach (JsonProperty infix in detail.Value.EnumerateObject())
                         {
                             if (infixUpgradeId.Match(infix))
                             {

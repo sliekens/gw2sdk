@@ -12,7 +12,7 @@ internal static class GlyphJson
         RequiredMember itemId = "item_id";
         RequiredMember slot = "slot";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

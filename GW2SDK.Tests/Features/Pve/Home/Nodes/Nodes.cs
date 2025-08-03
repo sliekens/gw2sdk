@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pve.Home.Nodes;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pve.Home.Nodes;
 
@@ -9,7 +10,7 @@ public class Nodes
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<Node> actual, MessageContext context) =
             await sut.Pve.Home.GetNodes(cancellationToken: TestContext.Current.CancellationToken);
 
         Assert.NotEmpty(actual);

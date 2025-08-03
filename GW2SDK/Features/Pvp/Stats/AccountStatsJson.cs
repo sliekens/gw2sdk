@@ -16,7 +16,7 @@ internal static class AccountStatsJson
         RequiredMember professions = "professions";
         RequiredMember ladders = "ladders";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (pvpRank.Match(member))
             {

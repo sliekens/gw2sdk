@@ -16,7 +16,7 @@ internal static class RankJson
         RequiredMember maxRank = "max_rank";
         RequiredMember levels = "levels";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

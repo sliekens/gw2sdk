@@ -16,7 +16,7 @@ internal static class BackpackSkinJson
         RequiredMember restrictions = "restrictions";
         RequiredMember id = "id";
         OptionalMember icon = "icon";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

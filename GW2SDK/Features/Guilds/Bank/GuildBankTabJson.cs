@@ -14,7 +14,7 @@ internal static class GuildBankTabJson
         OptionalMember note = "note";
         RequiredMember inventory = "inventory";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (upgradeId.Match(member))
             {

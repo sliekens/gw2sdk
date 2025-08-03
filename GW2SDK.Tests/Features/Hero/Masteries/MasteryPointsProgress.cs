@@ -9,9 +9,9 @@ public class MasteryPointsProgress
     public async Task Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = TestConfiguration.ApiKey;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Hero.Masteries.GetMasteryPointsProgress(
+        (GuildWars2.Hero.Masteries.MasteryPointsProgress actual, _) = await sut.Hero.Masteries.GetMasteryPointsProgress(
             accessToken.Key,
             cancellationToken: TestContext.Current.CancellationToken
         );

@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 
+using GuildWars2.Exploration.Continents;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Exploration.Continents;
@@ -11,7 +12,7 @@ public class Continents
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Exploration.GetContinents(
+        (HashSet<Continent> actual, MessageContext context) = await sut.Exploration.GetContinents(
             cancellationToken: TestContext.Current.CancellationToken
         );
 

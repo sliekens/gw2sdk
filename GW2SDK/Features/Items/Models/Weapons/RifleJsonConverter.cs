@@ -21,7 +21,7 @@ internal sealed class RifleJsonConverter : JsonConverter<Rifle>
         JsonSerializerOptions options
     )
     {
-        using var json = JsonDocument.ParseValue(ref reader);
+        using JsonDocument json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 

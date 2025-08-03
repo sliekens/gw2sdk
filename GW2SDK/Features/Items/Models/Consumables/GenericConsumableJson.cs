@@ -27,7 +27,7 @@ internal static class GenericConsumableJson
         NullableMember guildUpgradeId = "guild_upgrade_id";
         var hasEffect = false;
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {
@@ -82,7 +82,7 @@ internal static class GenericConsumableJson
             }
             else if (member.NameEquals("details"))
             {
-                foreach (var detail in member.Value.EnumerateObject())
+                foreach (JsonProperty detail in member.Value.EnumerateObject())
                 {
                     if (detail.NameEquals("type"))
                     {

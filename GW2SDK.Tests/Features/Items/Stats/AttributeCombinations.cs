@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Items.Stats;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Items.Stats;
 
@@ -9,7 +10,7 @@ public class AttributeCombinations
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Items.GetAttributeCombinations(
+        (HashSet<AttributeCombination> actual, MessageContext context) = await sut.Items.GetAttributeCombinations(
             cancellationToken: TestContext.Current.CancellationToken
         );
 

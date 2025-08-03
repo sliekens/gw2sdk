@@ -10,7 +10,7 @@ internal static class CharacterTrainingJson
     {
         RequiredMember training = "training";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (training.Match(member))
             {

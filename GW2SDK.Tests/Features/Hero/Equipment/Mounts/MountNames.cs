@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Equipment.Mounts;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Mounts;
 
@@ -9,7 +10,7 @@ public class MountNames
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, _) =
+        (HashSet<Extensible<MountName>> actual, _) =
             await sut.Hero.Equipment.Mounts.GetMountNames(TestContext.Current.CancellationToken);
 
         Assert.All(

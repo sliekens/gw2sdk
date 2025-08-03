@@ -11,7 +11,7 @@ internal static class RaidWingJson
         RequiredMember id = "id";
         RequiredMember events = "events";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

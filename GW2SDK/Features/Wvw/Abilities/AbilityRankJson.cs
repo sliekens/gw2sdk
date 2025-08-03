@@ -11,7 +11,7 @@ internal static class AbilityRankJson
         RequiredMember cost = "cost";
         RequiredMember effect = "effect";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (cost.Match(member))
             {

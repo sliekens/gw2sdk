@@ -16,7 +16,7 @@ internal static class AccountAchievementJson
         NullableMember repeated = "repeated";
         NullableMember unlocked = "unlocked";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

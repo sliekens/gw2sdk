@@ -10,7 +10,7 @@ internal static class InfusionSlotUpgradeSourceJson
     {
         RequiredMember upgrade = "upgrade";
         RequiredMember itemId = "item_id";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (upgrade.Match(member))
             {

@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.WizardsVault.Objectives;
 
 namespace GuildWars2.Tests.Features.WizardsVault.Objectives;
 
@@ -9,7 +10,7 @@ public class Objectives
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.WizardsVault.GetObjectives(
+        (HashSet<Objective> actual, MessageContext context) = await sut.WizardsVault.GetObjectives(
             cancellationToken: TestContext.Current.CancellationToken
         );
 

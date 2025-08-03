@@ -10,7 +10,7 @@ internal static class DivisionTierJson
     {
         RequiredMember points = "points";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (points.Match(member))
             {

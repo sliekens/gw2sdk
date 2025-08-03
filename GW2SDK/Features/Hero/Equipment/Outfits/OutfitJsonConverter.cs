@@ -13,7 +13,7 @@ internal sealed class OutfitJsonConverter : JsonConverter<Outfit>
         JsonSerializerOptions options
     )
     {
-        using var jsonDocument = JsonDocument.ParseValue(ref reader);
+        using JsonDocument jsonDocument = JsonDocument.ParseValue(ref reader);
         return Read(jsonDocument.RootElement);
     }
 

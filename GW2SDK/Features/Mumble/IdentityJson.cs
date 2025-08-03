@@ -21,7 +21,7 @@ internal static class IdentityJson
         RequiredMember fieldOfView = "fov";
         RequiredMember uiSize = "uisz";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (name.Match(member))
             {

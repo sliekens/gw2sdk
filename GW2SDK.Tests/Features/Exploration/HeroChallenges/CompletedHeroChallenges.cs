@@ -8,10 +8,10 @@ public class CompletedHeroChallenges
     public async Task Can_be_found()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var character = TestConfiguration.TestCharacter;
-        var accessToken = TestConfiguration.ApiKey;
+        TestCharacter character = TestConfiguration.TestCharacter;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Exploration.GetCompletedHeroChallenges(
+        (HashSet<string> actual, _) = await sut.Exploration.GetCompletedHeroChallenges(
             character.Name,
             accessToken.Key,
             TestContext.Current.CancellationToken

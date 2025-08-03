@@ -16,7 +16,7 @@ internal static class GliderSkinJson
         RequiredMember description = "description";
         RequiredMember defaultDyes = "default_dyes";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

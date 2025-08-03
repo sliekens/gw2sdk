@@ -20,7 +20,7 @@ internal static class CraftingMaterialJson
         RequiredMember chatLink = "chat_link";
         OptionalMember icon = "icon";
         OptionalMember upgradesInto = "upgrades_into";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

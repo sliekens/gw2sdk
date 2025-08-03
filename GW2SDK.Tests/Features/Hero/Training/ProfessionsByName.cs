@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Hero;
+using GuildWars2.Hero.Training;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Training;
@@ -16,7 +17,7 @@ public class ProfessionsByName
             ProfessionName.Revenant
         ];
 
-        var (actual, _) = await sut.Hero.Training.GetProfessionsByNames(
+        (HashSet<Profession> actual, _) = await sut.Hero.Training.GetProfessionsByNames(
             names,
             cancellationToken: TestContext.Current.CancellationToken
         );

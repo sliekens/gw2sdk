@@ -12,7 +12,7 @@ internal static class LeaderboardSettingJson
         RequiredMember scoring = "scoring";
         RequiredMember tiers = "tiers";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (name.Match(member))
             {

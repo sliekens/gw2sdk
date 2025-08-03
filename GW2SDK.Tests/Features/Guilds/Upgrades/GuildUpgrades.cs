@@ -10,7 +10,7 @@ public class GuildUpgrades
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<GuildUpgrade> actual, MessageContext context) =
             await sut.Guilds.GetGuildUpgrades(
                 cancellationToken: TestContext.Current.CancellationToken
             );

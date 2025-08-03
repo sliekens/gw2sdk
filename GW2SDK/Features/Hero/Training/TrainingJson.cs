@@ -13,7 +13,7 @@ internal static class TrainingJson
         RequiredMember name = "name";
         RequiredMember track = "track";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

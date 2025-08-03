@@ -11,7 +11,7 @@ internal static class LevelRequirementJson
         JsonElement min = default;
         JsonElement max = default;
 
-        foreach (var entry in json.EnumerateArray())
+        foreach (JsonElement entry in json.EnumerateArray())
         {
             if (min.ValueKind == JsonValueKind.Undefined)
             {

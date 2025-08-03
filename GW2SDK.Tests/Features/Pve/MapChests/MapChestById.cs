@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pve.MapChests;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pve.MapChests;
 
@@ -12,7 +13,7 @@ public class MapChestById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Pve.MapChests.GetMapChestById(
+        (MapChest actual, MessageContext context) = await sut.Pve.MapChests.GetMapChestById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

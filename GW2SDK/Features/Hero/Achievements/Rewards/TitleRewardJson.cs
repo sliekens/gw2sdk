@@ -9,7 +9,7 @@ internal static class TitleRewardJson
     public static TitleReward GetTitleReward(this in JsonElement json)
     {
         RequiredMember id = "id";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

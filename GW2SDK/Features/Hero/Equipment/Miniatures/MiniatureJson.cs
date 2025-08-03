@@ -15,7 +15,7 @@ internal static class MiniatureJson
         RequiredMember order = "order";
         RequiredMember itemId = "item_id";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

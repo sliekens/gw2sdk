@@ -11,7 +11,7 @@ internal static class GuildEmblemForegroundJson
         RequiredMember id = "id";
         RequiredMember colors = "colors";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

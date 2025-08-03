@@ -18,7 +18,7 @@ internal static class OwnedKeepJson
         OptionalMember yaksDelivered = "yaks_delivered";
         OptionalMember guildUpgrades = "guild_upgrades";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

@@ -1,6 +1,8 @@
 ﻿using System.Text.Json;
 
 using GuildWars2;
+using GuildWars2.Commerce.Prices;
+using GuildWars2.Items;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -21,9 +23,9 @@ internal class Program
 {
     public static async Task Main(string[] args)
     {
-        var appBuilder = Host.CreateApplicationBuilder(args);
+        HostApplicationBuilder appBuilder = Host.CreateApplicationBuilder(args);
 
-        var httpClientBuilder = appBuilder.Services.AddHttpClient<Gw2Client>(static httpClient =>
+        IHttpClientBuilder httpClientBuilder = appBuilder.Services.AddHttpClient<Gw2Client>(static httpClient =>
             {
                 // The default request timeout is 100 seconds, after which OperationCanceledException is thrown
                 // Consider using a Polly timeout strategy instead, and set the HttpClient.Timeout to InfiniteTimeSpan
@@ -63,18 +65,18 @@ internal class Program
             LogLevel.Warning
         );
 
-        var app = appBuilder.Build();
+        IHost app = appBuilder.Build();
 
         var gw2 = app.Services.GetRequiredService<Gw2Client>();
 
         PrintHeader();
 
         // Get the trading post prices for all items in bulk
-        await foreach (var itemPrice in gw2.Commerce.GetItemPricesBulk().ValueOnly())
+        await foreach (ItemPrice itemPrice in gw2.Commerce.GetItemPricesBulk().ValueOnly())
         {
             // ItemPrice contains an Id, BestBid, and BestAsk
             // Use the ID to get the item name
-            var item = await gw2.Items.GetItemById(itemPrice.Id).ValueOnly();
+            Item item = await gw2.Items.GetItemById(itemPrice.Id).ValueOnly();
 
             PrintRow(item.Name, itemPrice.BestBid, itemPrice.BestAsk);
         }
@@ -224,11 +226,11 @@ internal static class Gw2Resiliency
         await attempt.Result.Content.LoadIntoBufferAsync();
 
         // ALSO IMPORTANT: do not dispose the MemoryStream because subsequent ReadAsStreamAsync calls return the same instance
-        var content = await attempt.Result.Content.ReadAsStreamAsync();
+        Stream content = await attempt.Result.Content.ReadAsStreamAsync();
         try
         {
-            using var json = await JsonDocument.ParseAsync(content);
-            return json.RootElement.TryGetProperty("text", out var text) ? text.GetString() : null;
+            using JsonDocument json = await JsonDocument.ParseAsync(content);
+            return json.RootElement.TryGetProperty("text", out JsonElement text) ? text.GetString() : null;
         }
         finally
         {

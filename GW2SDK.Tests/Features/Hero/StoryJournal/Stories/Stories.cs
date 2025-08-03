@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.StoryJournal.Stories;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.StoryJournal.Stories;
 
@@ -9,7 +10,7 @@ public class Stories
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Hero.StoryJournal.GetStories(
+        (HashSet<Story> actual, MessageContext context) = await sut.Hero.StoryJournal.GetStories(
             cancellationToken: TestContext.Current.CancellationToken
         );
 

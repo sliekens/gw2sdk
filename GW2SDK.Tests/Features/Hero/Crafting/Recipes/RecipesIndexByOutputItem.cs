@@ -10,7 +10,7 @@ public class RecipesIndexByOutputItem
         var sut = Composer.Resolve<Gw2Client>();
 
         const int ironIngotItemId = 19683;
-        var (actual, context) = await sut.Hero.Crafting.Recipes.GetRecipesIndexByOutputItemId(
+        (HashSet<int> actual, MessageContext context) = await sut.Hero.Crafting.Recipes.GetRecipesIndexByOutputItemId(
             ironIngotItemId,
             TestContext.Current.CancellationToken
         );

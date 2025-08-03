@@ -11,7 +11,7 @@ internal static class SuperAdventureBoxSongJson
         RequiredMember id = "id";
         RequiredMember name = "name";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

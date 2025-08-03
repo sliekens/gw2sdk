@@ -20,7 +20,7 @@ internal static class ProfessionJson
         RequiredMember skills = "skills";
         RequiredMember training = "training";
         RequiredMember skillsByPalette = "skills_by_palette";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

@@ -16,7 +16,7 @@ internal static class GuildBankActivityJson
         RequiredMember count = "count";
         RequiredMember coins = "coins";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

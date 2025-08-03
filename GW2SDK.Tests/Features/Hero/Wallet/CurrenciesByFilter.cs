@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Wallet;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Wallet;
 
@@ -15,7 +16,7 @@ public class CurrenciesByFilter
             3
         ];
 
-        var (actual, context) = await sut.Hero.Wallet.GetCurrenciesByIds(
+        (HashSet<Currency> actual, MessageContext context) = await sut.Hero.Wallet.GetCurrenciesByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

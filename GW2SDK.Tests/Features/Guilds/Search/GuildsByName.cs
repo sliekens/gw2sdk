@@ -9,7 +9,7 @@ public class GuildsByName
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, _) = await sut.Guilds.GetGuildsByName(
+        (HashSet<string> actual, _) = await sut.Guilds.GetGuildsByName(
             "ArenaNet",
             TestContext.Current.CancellationToken
         );

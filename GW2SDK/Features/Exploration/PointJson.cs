@@ -12,7 +12,7 @@ internal static class PointJson
         JsonElement x = default;
         JsonElement y = default;
 
-        foreach (var entry in json.EnumerateArray())
+        foreach (JsonElement entry in json.EnumerateArray())
         {
             if (x.ValueKind == JsonValueKind.Undefined)
             {
@@ -36,7 +36,7 @@ internal static class PointJson
         JsonElement x = default;
         JsonElement y = default;
 
-        foreach (var entry in json.EnumerateArray())
+        foreach (JsonElement entry in json.EnumerateArray())
         {
             if (x.ValueKind == JsonValueKind.Undefined)
             {

@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 
+using GuildWars2.Collections;
 using GuildWars2.Hero.Training;
 using GuildWars2.Json;
 
@@ -31,7 +32,7 @@ internal static class WeaponSkillJson
         NullableMember offhand = "dual_wield";
         NullableMember initiative = "initiative";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {
@@ -134,7 +135,7 @@ internal static class WeaponSkillJson
             }
         }
 
-        var professionRestrictions = professions.Map(static (in JsonElement values) =>
+        ValueList<Extensible<ProfessionName>> professionRestrictions = professions.Map(static (in JsonElement values) =>
             values.GetList(static (in JsonElement value) => value.GetEnum<ProfessionName>())
         );
         var iconString = icon.Map(static (in JsonElement value) => value.GetString()) ?? "";

@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Achievements;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Achievements;
 
@@ -8,11 +9,11 @@ public class AccountAchievementById
     public async Task Can_be_found()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = TestConfiguration.ApiKey;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
         const int id = 1;
 
-        var (actual, context) = await sut.Hero.Achievements.GetAccountAchievementById(
+        (AccountAchievement actual, MessageContext context) = await sut.Hero.Achievements.GetAccountAchievementById(
             id,
             accessToken.Key,
             cancellationToken: TestContext.Current.CancellationToken

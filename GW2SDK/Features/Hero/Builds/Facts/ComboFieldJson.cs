@@ -19,7 +19,7 @@ internal static class ComboFieldJson
         RequiredMember icon = "icon";
         RequiredMember fieldType = "field_type";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

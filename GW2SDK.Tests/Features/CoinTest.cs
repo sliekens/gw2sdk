@@ -1,5 +1,7 @@
 ﻿using System.Globalization;
 
+using GuildWars2.Chat;
+
 namespace GuildWars2.Tests.Features;
 
 public class CoinTest
@@ -148,7 +150,7 @@ public class CoinTest
         Coin one = 1;
         Coin two = 2;
 
-        var three = one + two;
+        Coin three = one + two;
 
         Assert.Equal(3, three.Amount);
     }
@@ -159,7 +161,7 @@ public class CoinTest
         Coin three = 3;
         Coin two = 2;
 
-        var one = three - two;
+        Coin one = three - two;
 
         Assert.Equal(1, one.Amount);
     }
@@ -170,7 +172,7 @@ public class CoinTest
         Coin two = 2;
         Coin three = 3;
 
-        var six = two * three;
+        Coin six = two * three;
 
         Assert.Equal(6, six.Amount);
     }
@@ -180,7 +182,7 @@ public class CoinTest
     {
         Coin sut = 1_00_00;
 
-        var actual = -sut;
+        Coin actual = -sut;
 
         Assert.Equal(-1_00_00, actual.Amount);
     }
@@ -191,7 +193,7 @@ public class CoinTest
         Coin six = 6;
         Coin three = 3;
 
-        var two = six / three;
+        Coin two = six / three;
 
         Assert.Equal(2, two.Amount);
     }
@@ -202,7 +204,7 @@ public class CoinTest
         Coin ten = 10;
         Coin three = 3;
 
-        var one = ten % three;
+        Coin one = ten % three;
 
         Assert.Equal(1, one.Amount);
     }
@@ -214,7 +216,7 @@ public class CoinTest
 
         void DivideByZero()
         {
-            var _ = dividend / Coin.Zero;
+            Coin _ = dividend / Coin.Zero;
         }
 
         Assert.Throws<DivideByZeroException>(DivideByZero);
@@ -292,7 +294,7 @@ public class CoinTest
     [Fact]
     public void Coins_can_be_sorted_after_null()
     {
-        var sut = Coin.Zero;
+        Coin sut = Coin.Zero;
 
         var actual = sut.CompareTo(null);
 
@@ -302,7 +304,7 @@ public class CoinTest
     [Fact]
     public void Coins_cannot_be_sorted_after_other_types()
     {
-        var sut = Coin.Zero;
+        Coin sut = Coin.Zero;
 
         void CompareToString()
         {
@@ -318,7 +320,7 @@ public class CoinTest
     {
         Coin sut = 1_00_00;
 
-        var actual = sut.GetChatLink();
+        CoinLink actual = sut.GetChatLink();
 
         Assert.Equal(sut.Amount, actual.Coins.Amount);
     }

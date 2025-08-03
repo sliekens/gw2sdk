@@ -11,7 +11,7 @@ internal static class WorldJson
         RequiredMember id = "id";
         RequiredMember name = "name";
         RequiredMember population = "population";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

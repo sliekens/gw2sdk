@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Commerce.Exchange;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Commerce.Exchange;
 
@@ -11,7 +12,7 @@ public class ExchangeGemsToGold
 
         const int gems = 800;
 
-        var (actual, context) = await sut.Commerce.ExchangeGemsToGold(
+        (GemsToGold actual, MessageContext context) = await sut.Commerce.ExchangeGemsToGold(
             gems,
             cancellationToken: TestContext.Current.CancellationToken
         );

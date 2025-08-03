@@ -12,7 +12,7 @@ internal static class GuildTreasurySlotJson
         RequiredMember count = "count";
         RequiredMember countNeededForUpgrade = "needed_by";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (itemId.Match(member))
             {

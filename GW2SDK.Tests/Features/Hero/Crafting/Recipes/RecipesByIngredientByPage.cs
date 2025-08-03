@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Crafting.Recipes;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Crafting.Recipes;
 
@@ -11,7 +12,7 @@ public class RecipesByIngredientByPage
 
         const int visionCrystal = 46746;
         const int pageSize = 3;
-        var (actual, context) = await sut.Hero.Crafting.Recipes.GetRecipesByIngredientItemIdByPage(
+        (HashSet<Recipe> actual, MessageContext context) = await sut.Hero.Crafting.Recipes.GetRecipesByIngredientItemIdByPage(
             visionCrystal,
             0,
             pageSize,

@@ -8,9 +8,9 @@ public class UnlockedEmotes
     public async Task Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = TestConfiguration.ApiKey;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Hero.Emotes.GetUnlockedEmotes(
+        (HashSet<string> actual, _) = await sut.Hero.Emotes.GetUnlockedEmotes(
             accessToken.Key,
             TestContext.Current.CancellationToken
         );

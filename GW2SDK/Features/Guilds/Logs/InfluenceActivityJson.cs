@@ -14,7 +14,7 @@ internal static class InfluenceActivityJson
         RequiredMember totalParticipants = "total_participants";
         RequiredMember participants = "participants";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {

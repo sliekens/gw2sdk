@@ -12,7 +12,7 @@ internal static class BuildTemplateJson
         RequiredMember isActive = "is_active";
         RequiredMember build = "build";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (tab.Match(member))
             {

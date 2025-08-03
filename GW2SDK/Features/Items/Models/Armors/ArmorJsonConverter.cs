@@ -23,7 +23,7 @@ internal sealed class ArmorJsonConverter : JsonConverter<Armor>
         JsonSerializerOptions options
     )
     {
-        using var json = JsonDocument.ParseValue(ref reader);
+        using JsonDocument json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
@@ -41,7 +41,7 @@ internal sealed class ArmorJsonConverter : JsonConverter<Armor>
             );
         }
 
-        if (json.TryGetProperty(DiscriminatorName, out var discriminator))
+        if (json.TryGetProperty(DiscriminatorName, out JsonElement discriminator))
         {
             switch (discriminator.GetString())
             {
@@ -142,7 +142,7 @@ internal sealed class ArmorJsonConverter : JsonConverter<Armor>
         writer.WriteString("weight_class", value.WeightClass.ToString());
         writer.WriteNumber("defense", value.Defense);
         writer.WriteStartArray("infusion_slots");
-        foreach (var slot in value.InfusionSlots)
+        foreach (InfusionSlot slot in value.InfusionSlots)
         {
             InfusionSlotJsonConverter.Write(writer, slot);
         }
@@ -159,7 +159,7 @@ internal sealed class ArmorJsonConverter : JsonConverter<Armor>
         }
 
         writer.WriteStartObject("attributes");
-        foreach (var attribute in value.Attributes)
+        foreach (KeyValuePair<Extensible<AttributeName>, int> attribute in value.Attributes)
         {
             writer.WriteNumber(attribute.Key.ToString(), attribute.Value);
         }

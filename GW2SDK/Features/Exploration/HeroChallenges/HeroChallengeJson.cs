@@ -12,7 +12,7 @@ internal static class HeroChallengeJson
 
         // The 'id' is missing from hero points in End of Dragon maps
         OptionalMember id = "id";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (coordinates.Match(member))
             {

@@ -8,11 +8,11 @@ public class StoredBuild
     public async Task Can_be_found()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = TestConfiguration.ApiKey;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
         const int slotNumber = 3;
 
-        var (actual, _) = await sut.Hero.Builds.GetStoredBuild(
+        (GuildWars2.Hero.Builds.Build actual, _) = await sut.Hero.Builds.GetStoredBuild(
             slotNumber,
             accessToken.Key,
             cancellationToken: TestContext.Current.CancellationToken

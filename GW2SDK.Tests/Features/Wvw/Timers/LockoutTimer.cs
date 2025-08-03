@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 
 using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Wvw.Timers;
 
 namespace GuildWars2.Tests.Features.Wvw.Timers;
 
@@ -11,7 +12,7 @@ public class LockoutTimer
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (WvwTimer actual, MessageContext context) =
             await sut.Wvw.GetLockoutTimer(TestContext.Current.CancellationToken);
 
         Assert.NotNull(context);

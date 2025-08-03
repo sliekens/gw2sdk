@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 
+using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -31,16 +32,16 @@ public sealed class RacesClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/races");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/races");
         requestBuilder.Query.AddAllIds();
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRace());
+            ValueHashSet<Race> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRace());
             return (value, response.Context);
         }
     }
@@ -52,13 +53,13 @@ public sealed class RacesClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/races");
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/races");
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEnum<RaceName>());
+            ValueHashSet<Extensible<RaceName>> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEnum<RaceName>());
             return (value, response.Context);
         }
     }
@@ -76,16 +77,16 @@ public sealed class RacesClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/races");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/races");
         requestBuilder.Query.AddId(raceName.ToString());
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetRace();
+            Race value = response.Json.RootElement.GetRace();
             return (value, response.Context);
         }
     }
@@ -124,16 +125,16 @@ public sealed class RacesClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/races");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/races");
         requestBuilder.Query.AddIds(raceNames.Select(value => value.ToString()));
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRace());
+            ValueHashSet<Race> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRace());
             return (value, response.Context);
         }
     }
@@ -153,16 +154,16 @@ public sealed class RacesClient
         CancellationToken cancellationToken = default
     )
     {
-        var requestBuilder = RequestBuilder.HttpGet("v2/races");
+        RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/races");
         requestBuilder.Query.AddPage(pageIndex, pageSize);
         requestBuilder.Query.AddLanguage(language);
-        using var request = requestBuilder.Build();
-        var response = await httpClient.AcceptJsonAsync(request, cancellationToken)
+        using HttpRequestMessage request = requestBuilder.Build();
+        (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)
             .ConfigureAwait(false);
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            var value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRace());
+            ValueHashSet<Race> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRace());
             return (value, response.Context);
         }
     }

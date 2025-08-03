@@ -60,7 +60,7 @@ public sealed class ValueHashSet<T> : HashSet<T>, IEquatable<ValueHashSet<T>>
     public override int GetHashCode()
     {
         HashCode hash = new();
-        foreach (var item in this)
+        foreach (T item in this)
         {
             hash.Add(item);
         }

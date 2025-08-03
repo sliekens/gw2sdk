@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Guilds.Emblems;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Guilds.Emblems;
 
@@ -9,7 +10,7 @@ public class EmblemForegrounds
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) = await sut.Guilds.GetEmblemForegrounds(
+        (HashSet<EmblemForeground> actual, MessageContext context) = await sut.Guilds.GetEmblemForegrounds(
             cancellationToken: TestContext.Current.CancellationToken
         );
 

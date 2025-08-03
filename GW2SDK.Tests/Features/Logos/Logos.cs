@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Logos;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Logos;
 
@@ -9,7 +10,7 @@ public class Logos
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var (actual, context) =
+        (HashSet<Logo> actual, MessageContext context) =
             await sut.Logos.GetLogos(
                 cancellationToken: TestContext.Current.CancellationToken
             );

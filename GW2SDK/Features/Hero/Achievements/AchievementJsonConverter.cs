@@ -22,7 +22,7 @@ internal sealed class AchievementJsonConverter : JsonConverter<Achievement>
         JsonSerializerOptions options
     )
     {
-        using var json = JsonDocument.ParseValue(ref reader);
+        using JsonDocument json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
@@ -37,7 +37,7 @@ internal sealed class AchievementJsonConverter : JsonConverter<Achievement>
 
     public static Achievement Read(in JsonElement json)
     {
-        if (json.TryGetProperty(DiscriminatorName, out var discriminator))
+        if (json.TryGetProperty(DiscriminatorName, out JsonElement discriminator))
         {
             switch (discriminator.GetString())
             {
@@ -97,7 +97,7 @@ internal sealed class AchievementJsonConverter : JsonConverter<Achievement>
         AchievementFlagsJsonConverter.Write(writer, value.Flags);
         writer.WritePropertyName("tiers");
         writer.WriteStartArray();
-        foreach (var tier in value.Tiers)
+        foreach (AchievementTier? tier in value.Tiers)
         {
             AchievementTierJsonConverter.Write(writer, tier);
         }
@@ -107,7 +107,7 @@ internal sealed class AchievementJsonConverter : JsonConverter<Achievement>
         if (value.Rewards is not null)
         {
             writer.WriteStartArray();
-            foreach (var reward in value.Rewards)
+            foreach (AchievementReward? reward in value.Rewards)
             {
                 AchievementRewardJsonConverter.Write(writer, reward);
             }
@@ -123,7 +123,7 @@ internal sealed class AchievementJsonConverter : JsonConverter<Achievement>
         if (value.Bits is not null)
         {
             writer.WriteStartArray();
-            foreach (var bit in value.Bits)
+            foreach (AchievementBit? bit in value.Bits)
             {
                 AchievementBitJsonConverter.Write(writer, bit);
             }

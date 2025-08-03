@@ -10,7 +10,7 @@ internal static class GuildIngredientJson
     {
         RequiredMember upgradeId = "upgrade_id";
         RequiredMember count = "count";
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (upgradeId.Match(member))
             {

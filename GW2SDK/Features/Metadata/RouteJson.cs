@@ -13,7 +13,7 @@ internal static class RouteJson
         OptionalMember auth = "auth";
         RequiredMember active = "active";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (path.Match(member))
             {

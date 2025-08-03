@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pve.MapChests;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pve.MapChests;
 
@@ -15,7 +16,7 @@ public class MapChestsByFilter
             "domain_of_vabbi_heros_choice_chest"
         ];
 
-        var (actual, context) = await sut.Pve.MapChests.GetMapChestsByIds(
+        (HashSet<MapChest> actual, MessageContext context) = await sut.Pve.MapChests.GetMapChestsByIds(
             ids,
             cancellationToken: TestContext.Current.CancellationToken
         );

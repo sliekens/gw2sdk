@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Hero.Equipment.MailCarriers;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.MailCarriers;
 
@@ -8,16 +9,16 @@ public class UnlockedMailCarriers
     public async Task Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var accessToken = TestConfiguration.ApiKey;
+        ApiKey accessToken = TestConfiguration.ApiKey;
 
-        var (actual, _) = await sut.Hero.Equipment.MailCarriers.GetUnlockedMailCarriers(
+        (HashSet<int> actual, _) = await sut.Hero.Equipment.MailCarriers.GetUnlockedMailCarriers(
             accessToken.Key,
             TestContext.Current.CancellationToken
         );
 
         Assert.NotEmpty(actual);
 
-        var (carriers, _) = await sut.Hero.Equipment.MailCarriers.GetMailCarriersByIds(
+        (HashSet<MailCarrier> carriers, _) = await sut.Hero.Equipment.MailCarriers.GetMailCarriersByIds(
             actual,
             cancellationToken: TestContext.Current.CancellationToken
         );

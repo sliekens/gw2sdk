@@ -11,7 +11,7 @@ internal static class ScoreJson
         RequiredMember red = "red";
         RequiredMember blue = "blue";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (red.Match(member))
             {

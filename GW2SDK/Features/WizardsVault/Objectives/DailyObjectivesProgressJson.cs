@@ -15,7 +15,7 @@ internal static class DailyObjectivesProgressJson
         RequiredMember metaRewardClaimed = "meta_reward_claimed";
         RequiredMember objectives = "objectives";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (metaProgressCurrent.Match(member))
             {

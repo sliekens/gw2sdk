@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pvp.Ranks;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pvp.Ranks;
 
@@ -10,7 +11,7 @@ public class RanksByPage
         var sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
-        var (actual, context) = await sut.Pvp.GetRanksByPage(
+        (HashSet<Rank> actual, MessageContext context) = await sut.Pvp.GetRanksByPage(
             0,
             pageSize,
             cancellationToken: TestContext.Current.CancellationToken

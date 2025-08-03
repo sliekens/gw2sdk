@@ -10,7 +10,7 @@ internal static class SpecialObjectivesProgressJson
     {
         RequiredMember objectives = "objectives";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (objectives.Match(member))
             {

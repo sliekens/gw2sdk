@@ -14,7 +14,7 @@ internal static class MatchOverviewJson
         RequiredMember startTime = "start_time";
         RequiredMember endTime = "end_time";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

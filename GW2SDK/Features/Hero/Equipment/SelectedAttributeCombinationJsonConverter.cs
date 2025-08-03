@@ -14,7 +14,7 @@ internal sealed class
         JsonSerializerOptions options
     )
     {
-        using var json = JsonDocument.ParseValue(ref reader);
+        using JsonDocument json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
@@ -59,7 +59,7 @@ internal sealed class
         writer.WriteStartObject();
         writer.WriteNumber("id", value.Id);
         writer.WriteStartObject("attributes");
-        foreach (var pair in value.Attributes)
+        foreach (KeyValuePair<AttributeName, int> pair in value.Attributes)
         {
             writer.WriteNumber(pair.Key.ToString(), pair.Value);
         }

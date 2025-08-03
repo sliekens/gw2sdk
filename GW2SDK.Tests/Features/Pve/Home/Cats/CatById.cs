@@ -1,4 +1,5 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Pve.Home.Cats;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pve.Home.Cats;
 
@@ -11,7 +12,7 @@ public class CatById
 
         const int id = 20;
 
-        var (actual, context) = await sut.Pve.Home.GetCatById(
+        (Cat actual, MessageContext context) = await sut.Pve.Home.GetCatById(
             id,
             cancellationToken: TestContext.Current.CancellationToken
         );

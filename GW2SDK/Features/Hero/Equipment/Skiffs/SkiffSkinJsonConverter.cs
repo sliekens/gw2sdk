@@ -13,7 +13,7 @@ internal sealed class SkiffSkinJsonConverter : JsonConverter<SkiffSkin>
         JsonSerializerOptions options
     )
     {
-        using var json = JsonDocument.ParseValue(ref reader);
+        using JsonDocument json = JsonDocument.ParseValue(ref reader);
         return Read(json.RootElement);
     }
 
@@ -43,7 +43,7 @@ internal sealed class SkiffSkinJsonConverter : JsonConverter<SkiffSkin>
         writer.WriteString("name", value.Name);
         writer.WriteString("icon", value.IconUrl.ToString());
         writer.WriteStartArray("dye_slots");
-        foreach (var dyeSlot in value.DyeSlots)
+        foreach (DyeSlot? dyeSlot in value.DyeSlots)
         {
             DyeSlotJsonConverter.Write(writer, dyeSlot);
         }

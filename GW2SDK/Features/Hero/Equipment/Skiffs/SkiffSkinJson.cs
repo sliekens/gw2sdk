@@ -13,7 +13,7 @@ internal static class SkiffSkinJson
         RequiredMember icon = "icon";
         RequiredMember dyeSlots = "dye_slots";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (id.Match(member))
             {

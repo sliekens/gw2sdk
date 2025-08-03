@@ -11,7 +11,7 @@ internal static class GuildStorageSlotJson
         RequiredMember itemId = "id";
         RequiredMember count = "count";
 
-        foreach (var member in json.EnumerateObject())
+        foreach (JsonProperty member in json.EnumerateObject())
         {
             if (itemId.Match(member))
             {

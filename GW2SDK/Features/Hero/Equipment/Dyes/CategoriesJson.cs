@@ -18,7 +18,7 @@ internal static class CategoriesJson
         JsonElement hue = default;
         JsonElement material = default;
         JsonElement set = default;
-        foreach (var entry in json.EnumerateArray())
+        foreach (JsonElement entry in json.EnumerateArray())
         {
             if (hue.ValueKind == JsonValueKind.Undefined)
             {

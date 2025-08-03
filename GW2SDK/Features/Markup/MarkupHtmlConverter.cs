@@ -38,7 +38,7 @@ public sealed class MarkupHtmlConverter
         }
 
         StringBuilder builder = new();
-        foreach (var node in root.Children)
+        foreach (MarkupNode node in root.Children)
         {
             builder.Append(ConvertNode(node, colorMap));
         }
@@ -56,7 +56,7 @@ public sealed class MarkupHtmlConverter
                 return "<br>";
             case ColoredTextNode coloredText:
                 StringBuilder builder = new();
-                foreach (var child in coloredText.Children)
+                foreach (MarkupNode child in coloredText.Children)
                 {
                     builder.Append(ConvertNode(child, colorMap));
                 }
