@@ -10,7 +10,7 @@ namespace GameLinkProgram;
 
 internal sealed class Program
 {
-    public static async Task Main(string[] args)
+    public static async Task Main()
     {
         if (!GameLink.IsSupported())
         {

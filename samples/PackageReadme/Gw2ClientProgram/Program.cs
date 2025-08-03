@@ -10,7 +10,7 @@ namespace Gw2ClientProgram;
 
 internal sealed class Program
 {
-    public static async Task Main(string[] args)
+    public static async Task Main()
     {
         // Create an instance of the Gw2Client, which depends on HttpClient
         using HttpClient httpClient = new();
