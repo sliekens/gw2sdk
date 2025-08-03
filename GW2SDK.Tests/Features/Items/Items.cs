@@ -49,25 +49,163 @@ public class Items
                         case Transmutation transmutation:
                             Assert.NotEmpty(transmutation.SkinIds);
                             break;
-                        case RecipeSheet recipe:
-                            Assert.True(recipe.Id > 0);
-                            Assert.NotNull(recipe.ExtraRecipeIds);
-                            foreach ((int extraRecipeId, RecipeLink? extraRecipeLink) in
-                                recipe.ExtraRecipeIds.Zip(
-                                    recipe.GetExtraRecipeChatLinks(),
-                                    (extraRecipeId, extraRecipeLink) =>
-                                        (extraRecipeId, extraRecipeLink)
-                                ))
+                        case GenericConsumable genericConsumable:
+                            if (genericConsumable.Effect is not null)
                             {
-                                Assert.Equal(extraRecipeId, extraRecipeLink.RecipeId);
+                                // Effect.Name and Description can be empty, but should not be null
+                                Assert.NotNull(genericConsumable.Effect.Name);
+                                Assert.NotNull(genericConsumable.Effect.Description);
+                                Assert.True(genericConsumable.Effect.Duration >= TimeSpan.Zero);
+                                Assert.True(genericConsumable.Effect.ApplyCount >= 0);
                             }
+                            if (genericConsumable.GuildUpgradeId.HasValue)
+                            {
+                                Assert.True(genericConsumable.GuildUpgradeId.Value > 0);
+                            }
+                            break;
+                        case Utility utility:
+                            if (utility.Effect is not null)
+                            {
+                                // Effect.Name and Description can be empty, but should not be null
+                                Assert.NotNull(utility.Effect.Name);
+                                Assert.NotNull(utility.Effect.Description);
+                                Assert.True(utility.Effect.Duration >= TimeSpan.Zero);
+                                Assert.True(utility.Effect.ApplyCount >= 0);
+                            }
+                            break;
+                        case Food food:
+                            if (food.Effect is not null)
+                            {
+                                // Effect.Name and Description can be empty, but should not be null
+                                Assert.NotNull(food.Effect.Name);
+                                Assert.NotNull(food.Effect.Description);
+                                Assert.True(food.Effect.Duration >= TimeSpan.Zero);
+                                Assert.True(food.Effect.ApplyCount >= 0);
+                            }
+                            break;
+                        case Service service:
+                            if (service.Effect is not null)
+                            {
+                                // Effect.Name and Description can be empty, but should not be null
+                                Assert.NotNull(service.Effect.Name);
+                                Assert.NotNull(service.Effect.Description);
+                                Assert.True(service.Effect.Duration >= TimeSpan.Zero);
+                                Assert.True(service.Effect.ApplyCount >= 0);
+                            }
+                            if (service.GuildUpgradeId.HasValue)
+                            {
+                                Assert.True(service.GuildUpgradeId.Value > 0);
+                            }
+                            break;
+                        case Booze booze:
+                            // Nothing specific to verify for Booze items
+                            break;
+                        case ContractNpc contractNpc:
+                            // Nothing specific to verify for ContractNpc items
+                            break;
+                        case HalloweenConsumable halloweenConsumable:
+                            // Nothing specific to verify for HalloweenConsumable items
+                            break;
+                        case MountLicense mountLicense:
+                            // Nothing specific to verify for MountLicense items
+                            break;
+                        case TeleportToFriend teleportToFriend:
+                            // Nothing specific to verify for TeleportToFriend items
+                            break;
+                        case Unlocker unlocker:
+                            switch (unlocker)
+                            {
+                                case RecipeSheet recipeSheet:
+                                    Assert.True(recipeSheet.RecipeId > 0);
+                                    Assert.NotNull(recipeSheet.ExtraRecipeIds);
+                                    foreach ((int extraRecipeId, RecipeLink? extraRecipeLink) in
+                                        recipeSheet.ExtraRecipeIds.Zip(
+                                            recipeSheet.GetExtraRecipeChatLinks(),
+                                            (extraRecipeId, extraRecipeLink) =>
+                                                (extraRecipeId, extraRecipeLink)
+                                        ))
+                                    {
+                                        Assert.Equal(extraRecipeId, extraRecipeLink.RecipeId);
+                                    }
 
-                            RecipeLink recipeLink = recipe.GetRecipeChatLink();
-                            Assert.Equal(recipe.RecipeId, recipeLink.RecipeId);
+                                    RecipeLink sheetRecipeLink = recipeSheet.GetRecipeChatLink();
+                                    Assert.Equal(recipeSheet.RecipeId, sheetRecipeLink.RecipeId);
 
-                            RecipeLink recipeLinkRoundtrip = RecipeLink.Parse(recipeLink.ToString());
-                            Assert.Equal(recipeLink.ToString(), recipeLinkRoundtrip.ToString());
-
+                                    RecipeLink sheetRecipeLinkRoundtrip = RecipeLink.Parse(sheetRecipeLink.ToString());
+                                    Assert.Equal(sheetRecipeLink.ToString(), sheetRecipeLinkRoundtrip.ToString());
+                                    break;
+                                case Dye dye:
+                                    Assert.True(dye.ColorId > 0);
+                                    break;
+                                case BagSlotExpansion bagSlotExpansion:
+                                    // Nothing specific to verify for BagSlotExpansion items
+                                    break;
+                                case BankTabExpansion bankTabExpansion:
+                                    // Nothing specific to verify for BankTabExpansion items
+                                    break;
+                                case BuildStorageExpansion buildStorageExpansion:
+                                    // Nothing specific to verify for BuildStorageExpansion items
+                                    break;
+                                case BuildTemplateExpansion buildTemplateExpansion:
+                                    // Nothing specific to verify for BuildTemplateExpansion items
+                                    break;
+                                case ContentUnlocker contentUnlocker:
+                                    // Nothing specific to verify for ContentUnlocker items
+                                    break;
+                                case EquipmentTemplateExpansion equipmentTemplateExpansion:
+                                    // Nothing specific to verify for EquipmentTemplateExpansion items
+                                    break;
+                                case GliderSkinUnlocker gliderSkinUnlocker:
+                                    // Nothing specific to verify for GliderSkinUnlocker items
+                                    break;
+                                case JadeBotSkinUnlocker jadeBotSkinUnlocker:
+                                    // Nothing specific to verify for JadeBotSkinUnlocker items
+                                    break;
+                                case MiniatureUnlocker miniatureUnlocker:
+                                    // Nothing specific to verify for MiniatureUnlocker items
+                                    break;
+                                case MistChampionSkinUnlocker mistChampionSkinUnlocker:
+                                    // Nothing specific to verify for MistChampionSkinUnlocker items
+                                    break;
+                                case MountSkinUnlocker mountSkinUnlocker:
+                                    // Nothing specific to verify for MountSkinUnlocker items
+                                    break;
+                                case OutfitUnlocker outfitUnlocker:
+                                    // Nothing specific to verify for OutfitUnlocker items
+                                    break;
+                                case SharedInventorySlot sharedInventorySlot:
+                                    // Nothing specific to verify for SharedInventorySlot items
+                                    break;
+                                case StorageExpander storageExpander:
+                                    // Nothing specific to verify for StorageExpander items
+                                    break;
+                                default:
+                                    // Only fail if this is actually a derived type we don't know about
+                                    if (unlocker.GetType() != typeof(Unlocker))
+                                    {
+                                        Assert.Fail(
+                                            $"Unexpected unlocker type: {unlocker.GetType().Name}"
+                                        );
+                                    }
+                                    break;
+                            }
+                            break;
+                        case UpgradeExtractor upgradeExtractor:
+                            // Nothing specific to verify for UpgradeExtractor items
+                            break;
+                        case Currency currency:
+                            // Nothing specific to verify for Currency items
+                            break;
+                        case AppearanceChanger appearanceChanger:
+                            // Nothing specific to verify for AppearanceChanger items
+                            break;
+                        case RandomUnlocker randomUnlocker:
+                            // Nothing specific to verify for RandomUnlocker items
+                            break;
+                        default:
+                            Assert.Fail(
+                                $"Unexpected consumable type: {consumable.GetType().Name}"
+                            );
                             break;
                     }
 
@@ -229,6 +367,110 @@ public class Items
                             Assert.True(source.ItemId > 0);
                             Assert.True(source.Upgrade.IsDefined());
                         }
+                    );
+                    break;
+                case Trophy trophy:
+                    // Nothing specific to verify for Trophy items
+                    break;
+                case Bag bag:
+                    Assert.True(bag.Size >= 0);
+                    // NoSellOrSort is a boolean, just verify it's not null
+                    break;
+                case Container container:
+                    switch (container)
+                    {
+                        case ImmediateContainer immediateContainer:
+                            // Nothing specific to verify for ImmediateContainer items
+                            break;
+                        case GiftBox giftBox:
+                            // Nothing specific to verify for GiftBox items
+                            break;
+                        case BlackLionChest blackLionChest:
+                            // Nothing specific to verify for BlackLionChest items
+                            break;
+                        default:
+                            // Only fail if this is actually a derived type we don't know about
+                            if (container.GetType() != typeof(Container))
+                            {
+                                Assert.Fail(
+                                    $"Unexpected container type: {container.GetType().Name}"
+                                );
+                            }
+                            break;
+                    }
+                    break;
+                case GatheringTool gatheringTool:
+                    switch (gatheringTool)
+                    {
+                        case FishingRod fishingRod:
+                            // Nothing specific to verify for FishingRod items
+                            break;
+                        case HarvestingSickle harvestingSickle:
+                            // Nothing specific to verify for HarvestingSickle items
+                            break;
+                        case LoggingAxe loggingAxe:
+                            // Nothing specific to verify for LoggingAxe items
+                            break;
+                        case MiningPick miningPick:
+                            // Nothing specific to verify for MiningPick items
+                            break;
+                        case Bait bait:
+                            // Nothing specific to verify for Bait items
+                            break;
+                        case Lure lure:
+                            // Nothing specific to verify for Lure items
+                            break;
+                        default:
+                            // Only fail if this is actually a derived type we don't know about
+                            if (gatheringTool.GetType() != typeof(GatheringTool))
+                            {
+                                Assert.Fail(
+                                    $"Unexpected gathering tool type: {gatheringTool.GetType().Name}"
+                                );
+                            }
+                            break;
+                    }
+                    break;
+                case Gizmo gizmo:
+                    switch (gizmo)
+                    {
+                        case BlackLionChestKey blackLionChestKey:
+                            // Nothing specific to verify for BlackLionChestKey items
+                            break;
+                        case RentableContractNpc rentableContractNpc:
+                            // Nothing specific to verify for RentableContractNpc items
+                            break;
+                        case UnlimitedConsumable unlimitedConsumable:
+                            // Nothing specific to verify for UnlimitedConsumable items
+                            break;
+                        default:
+                            // Base Gizmo case - validate common properties
+                            if (gizmo.GuildUpgradeId.HasValue)
+                            {
+                                Assert.True(gizmo.GuildUpgradeId.Value > 0);
+                            }
+                            // Only fail if this is actually a derived type we don't know about
+                            if (gizmo.GetType() != typeof(Gizmo))
+                            {
+                                Assert.Fail(
+                                    $"Unexpected gizmo type: {gizmo.GetType().Name}"
+                                );
+                            }
+                            break;
+                    }
+                    break;
+                case JadeTechModule jadeTechModule:
+                    // Nothing specific to verify for JadeTechModule items
+                    break;
+                case PowerCore powerCore:
+                    // Nothing specific to verify for PowerCore items
+                    break;
+                case Relic relic:
+                    // Nothing specific to verify for Relic items
+                    break;
+                default:
+                    Assert.Fail(
+                        $"Unexpected item type: {actual.GetType().Name}"
                     );
                     break;
             }
