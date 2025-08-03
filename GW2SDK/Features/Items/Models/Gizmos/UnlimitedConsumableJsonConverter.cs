@@ -45,7 +45,7 @@ internal sealed class UnlimitedConsumableJsonConverter : JsonConverter<Unlimited
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new UnlimitedConsumable
         {
             Id = json.GetProperty("id").GetInt32(),

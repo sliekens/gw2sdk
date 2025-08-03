@@ -9,8 +9,8 @@ internal static class ProfessionFlagsJson
 {
     public static ProfessionFlags GetProfessionFlags(this in JsonElement json)
     {
-        var noWeaponSwap = false;
-        var noRacialSkills = false;
+        bool noWeaponSwap = false;
+        bool noRacialSkills = false;
         ValueList<string> others = [];
         foreach (JsonElement entry in json.EnumerateArray())
         {

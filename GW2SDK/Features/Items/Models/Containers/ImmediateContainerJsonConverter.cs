@@ -46,7 +46,7 @@ internal sealed class ImmediateContainerJsonConverter : JsonConverter<ImmediateC
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new ImmediateContainer
         {
             Id = json.GetProperty("id").GetInt32(),

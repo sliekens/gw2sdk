@@ -51,7 +51,7 @@ internal sealed class RandomUnlockerJsonConverter : JsonConverter<RandomUnlocker
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new RandomUnlocker
         {
             Id = json.GetProperty("id").GetInt32(),

@@ -46,7 +46,7 @@ internal sealed class BlackLionChestJsonConverter : JsonConverter<BlackLionChest
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new BlackLionChest
         {
             Id = json.GetProperty("id").GetInt32(),

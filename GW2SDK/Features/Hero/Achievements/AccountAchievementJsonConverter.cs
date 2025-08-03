@@ -48,7 +48,7 @@ internal sealed class AccountAchievementJsonConverter : JsonConverter<AccountAch
         if (value.Bits is not null)
         {
             writer.WriteStartArray();
-            foreach (var bit in value.Bits)
+            foreach (int bit in value.Bits)
             {
                 writer.WriteNumberValue(bit);
             }

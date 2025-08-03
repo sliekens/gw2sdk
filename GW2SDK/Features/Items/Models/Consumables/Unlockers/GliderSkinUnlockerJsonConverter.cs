@@ -59,7 +59,7 @@ internal sealed class GliderSkinUnlockerJsonConverter : JsonConverter<GliderSkin
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new GliderSkinUnlocker
         {
             Id = json.GetProperty("id").GetInt32(),

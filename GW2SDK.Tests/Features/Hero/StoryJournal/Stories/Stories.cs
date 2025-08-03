@@ -8,7 +8,7 @@ public class Stories
     [Fact]
     public async Task Can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<Story> actual, MessageContext context) = await sut.Hero.StoryJournal.GetStories(
             cancellationToken: TestContext.Current.CancellationToken

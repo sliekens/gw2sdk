@@ -8,7 +8,7 @@ public class Upgrades
     [Fact]
     public async Task Can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<ObjectiveUpgrade> actual, MessageContext context) =
             await sut.Wvw.GetUpgrades(cancellationToken: TestContext.Current.CancellationToken);

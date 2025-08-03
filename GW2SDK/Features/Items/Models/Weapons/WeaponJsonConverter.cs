@@ -94,7 +94,7 @@ internal sealed class WeaponJsonConverter : JsonConverter<Weapon>
             }
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Weapon
         {
             Id = json.GetProperty("id").GetInt32(),
@@ -276,7 +276,7 @@ internal sealed class WeaponJsonConverter : JsonConverter<Weapon>
         }
 
         writer.WriteStartArray("stat_choices");
-        foreach (var stat in value.StatChoices)
+        foreach (int stat in value.StatChoices)
         {
             writer.WriteNumberValue(stat);
         }

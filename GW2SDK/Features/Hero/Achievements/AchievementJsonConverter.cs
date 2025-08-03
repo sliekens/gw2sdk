@@ -46,7 +46,7 @@ internal sealed class AchievementJsonConverter : JsonConverter<Achievement>
             }
         }
 
-        var iconString = json.GetProperty("icon").GetString() ?? "";
+        string iconString = json.GetProperty("icon").GetString() ?? "";
         return new Achievement
         {
             Id = json.GetProperty("id").GetInt32(),
@@ -137,7 +137,7 @@ internal sealed class AchievementJsonConverter : JsonConverter<Achievement>
 
         writer.WritePropertyName("prerequisites");
         writer.WriteStartArray();
-        foreach (var prerequisite in value.Prerequisites)
+        foreach (int prerequisite in value.Prerequisites)
         {
             writer.WriteNumberValue(prerequisite);
         }

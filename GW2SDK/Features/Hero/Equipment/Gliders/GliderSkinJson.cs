@@ -52,7 +52,7 @@ internal static class GliderSkinJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new GliderSkin
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),

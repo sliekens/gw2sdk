@@ -16,9 +16,9 @@ public sealed record AccountLuck
     {
         get
         {
-            var level = 0;
-            var luckLeft = Luck;
-            foreach (var threshold in MagicFindThresholds.LevelThresholds)
+            int level = 0;
+            int luckLeft = Luck;
+            foreach (int threshold in MagicFindThresholds.LevelThresholds)
             {
                 if (luckLeft < threshold)
                 {

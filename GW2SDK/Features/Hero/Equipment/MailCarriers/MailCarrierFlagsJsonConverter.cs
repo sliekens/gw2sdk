@@ -40,7 +40,7 @@ internal sealed class MailCarrierFlagsJsonConverter : JsonConverter<MailCarrierF
         writer.WriteStartObject();
         writer.WriteBoolean("default", value.Default);
         writer.WriteStartArray("other");
-        foreach (var other in value.Other)
+        foreach (string? other in value.Other)
         {
             writer.WriteStringValue(other);
         }

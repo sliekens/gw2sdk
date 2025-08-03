@@ -8,7 +8,7 @@ public class MaterialCategoryById
     [Fact]
     public async Task Can_be_found()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         const int id = 5;
 

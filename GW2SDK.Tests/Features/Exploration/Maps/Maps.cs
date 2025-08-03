@@ -11,7 +11,7 @@ public class Maps
     [InlineData(1, 0, 3)]
     public async Task Can_be_listed(int continentId, int floorId, int regionId)
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<Map> actual, MessageContext context) = await sut.Exploration.GetMaps(
             continentId,

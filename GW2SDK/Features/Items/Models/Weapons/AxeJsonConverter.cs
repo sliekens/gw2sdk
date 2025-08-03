@@ -48,7 +48,7 @@ internal sealed class AxeJsonConverter : JsonConverter<Axe>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Axe
         {
             Id = json.GetProperty("id").GetInt32(),

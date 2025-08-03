@@ -36,7 +36,7 @@ public sealed record OutfitLink : Link
             ThrowHelper.ThrowBadArgument("Expected an outfit chat link.", nameof(chatLink));
         }
 
-        var outfitId = buffer.ReadInt32();
+        int outfitId = buffer.ReadInt32();
         return new OutfitLink { OutfitId = outfitId };
     }
 }

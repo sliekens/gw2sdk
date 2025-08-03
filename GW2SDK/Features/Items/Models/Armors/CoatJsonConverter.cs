@@ -42,7 +42,7 @@ internal sealed class CoatJsonConverter : JsonConverter<Coat>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Coat
         {
             Id = json.GetProperty("id").GetInt32(),

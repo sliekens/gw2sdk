@@ -37,7 +37,7 @@ internal sealed class MiniatureJsonConverter : JsonConverter<Miniature>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Miniature
         {
             Id = json.GetProperty("id").GetInt32(),

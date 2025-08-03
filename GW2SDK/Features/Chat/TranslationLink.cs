@@ -36,7 +36,7 @@ public sealed record TranslationLink : Link
             ThrowHelper.ThrowBadArgument("Expected a translation chat link.", nameof(chatLink));
         }
 
-        var translationId = buffer.ReadInt32();
+        int translationId = buffer.ReadInt32();
         return new TranslationLink { TranslationId = translationId };
     }
 }

@@ -52,7 +52,7 @@ internal sealed class WarhornSkinJsonConverter : JsonConverter<WarhornSkin>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString() ?? "";
+        string iconString = json.GetProperty("icon").GetString() ?? "";
         return new WarhornSkin
         {
             Id = json.GetProperty("id").GetInt32(),

@@ -8,7 +8,7 @@ public class Specializations
     [Fact]
     public async Task Specializations_can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<Specialization> actual, MessageContext context) = await sut.Hero.Builds.GetSpecializations(
             cancellationToken: TestContext.Current.CancellationToken

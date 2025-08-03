@@ -171,7 +171,7 @@ internal static class RifleJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetString());
+        string? iconString = icon.Map(static (in JsonElement value) => value.GetString());
         return new Rifle
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),

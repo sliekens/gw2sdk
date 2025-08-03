@@ -39,7 +39,7 @@ public sealed record PointOfInterestLink : Link
             );
         }
 
-        var pointOfInterestId = buffer.ReadInt32();
+        int pointOfInterestId = buffer.ReadInt32();
         return new PointOfInterestLink { PointOfInterestId = pointOfInterestId };
     }
 }

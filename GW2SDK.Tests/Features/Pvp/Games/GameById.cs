@@ -8,7 +8,7 @@ public class GameById
     [Fact]
     public async Task Can_be_found()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
 
         // No way other way to get a game ID than to list them all first
@@ -17,7 +17,7 @@ public class GameById
                 cancellationToken: TestContext.Current.CancellationToken
             )
             .ValueOnly();
-        var gameId = gamesIndex.First();
+        string? gameId = gamesIndex.First();
 
         // Now that we have a game ID, we can get the game
         (Game actual, MessageContext context) = await sut.Pvp.GetGameById(

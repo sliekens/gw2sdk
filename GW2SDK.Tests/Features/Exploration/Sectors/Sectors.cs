@@ -11,7 +11,7 @@ public class Sectors
     [InlineData(1, 0, 1, 28)]
     public async Task Can_be_listed(int continentId, int floorId, int regionId, int mapId)
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<Sector> actual, MessageContext context) = await sut.Exploration.GetSectors(
             continentId,

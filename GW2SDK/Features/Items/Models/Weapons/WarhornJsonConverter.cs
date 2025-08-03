@@ -48,7 +48,7 @@ internal sealed class WarhornJsonConverter : JsonConverter<Warhorn>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Warhorn
         {
             Id = json.GetProperty("id").GetInt32(),

@@ -9,8 +9,8 @@ internal static class AchievementFlagsJson
 {
     public static AchievementFlags GetAchievementFlags(this in JsonElement json)
     {
-        var specialEvent = false;
-        var pve = false;
+        bool specialEvent = false;
+        bool pve = false;
         ValueList<string> others = [];
         foreach (JsonElement entry in json.EnumerateArray())
         {

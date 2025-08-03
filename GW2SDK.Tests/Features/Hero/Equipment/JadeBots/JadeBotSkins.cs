@@ -11,7 +11,7 @@ public class JadeBotSkins
     [Fact]
     public async Task Can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<JadeBotSkin> actual, MessageContext context) =
             await sut.Hero.Equipment.JadeBots.GetJadeBotSkins(
@@ -41,8 +41,8 @@ public class JadeBotSkins
 
                 Assert.True(entry.UnlockItemId > 0);
 
-                var json = JsonSerializer.Serialize(entry);
-                var roundtrip = JsonSerializer.Deserialize<JadeBotSkin>(json);
+                string json = JsonSerializer.Serialize(entry);
+                JadeBotSkin? roundtrip = JsonSerializer.Deserialize<JadeBotSkin>(json);
                 Assert.Equal(entry, roundtrip);
             }
         );

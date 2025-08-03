@@ -3,8 +3,8 @@ using GuildWars2.Commerce.Prices;
 using GuildWars2.Items;
 
 // Create a Gw2Client which requires an HttpClient
-using var httpClient = new HttpClient();
-var gw2 = new Gw2Client(httpClient);
+using HttpClient httpClient = new();
+Gw2Client gw2 = new(httpClient);
 
 // Get the trading post prices for all items in bulk
 await foreach (ItemPrice itemPrice in gw2.Commerce.GetItemPricesBulk().ValueOnly())

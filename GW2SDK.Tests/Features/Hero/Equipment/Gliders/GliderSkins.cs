@@ -11,7 +11,7 @@ public class GliderSkins
     [Fact]
     public async Task Can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<GliderSkin> actual, MessageContext context) = await sut.Hero.Equipment.Gliders.GetGliderSkins(
             cancellationToken: TestContext.Current.CancellationToken
@@ -33,8 +33,8 @@ public class GliderSkins
                 MarkupSyntaxValidator.Validate(entry.Description);
                 Assert.NotNull(entry.DefaultDyeColorIds);
 
-                var json = JsonSerializer.Serialize(entry);
-                var roundTrip = JsonSerializer.Deserialize<GliderSkin>(json);
+                string json = JsonSerializer.Serialize(entry);
+                GliderSkin? roundTrip = JsonSerializer.Deserialize<GliderSkin>(json);
                 Assert.Equal(entry, roundTrip);
             }
         );

@@ -48,7 +48,7 @@ internal sealed class MaceJsonConverter : JsonConverter<Mace>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Mace
         {
             Id = json.GetProperty("id").GetInt32(),

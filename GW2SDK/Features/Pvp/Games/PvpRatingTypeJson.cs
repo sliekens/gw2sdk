@@ -8,7 +8,7 @@ internal static class PvpRatingTypeJson
 {
     public static Extensible<PvpRatingType> GetRatingType(this in JsonElement json)
     {
-        var text = json.GetStringRequired();
+        string text = json.GetStringRequired();
         return text switch
         {
             "None" => PvpRatingType.None,

@@ -51,7 +51,7 @@ internal sealed class ContractNpcJsonConverter : JsonConverter<ContractNpc>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new ContractNpc
         {
             Id = json.GetProperty("id").GetInt32(),

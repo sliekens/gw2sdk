@@ -55,7 +55,7 @@ internal static class RequiresUnlockPointOfInterestJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
 #pragma warning disable CS0618
         return new RequiresUnlockPointOfInterest
         {

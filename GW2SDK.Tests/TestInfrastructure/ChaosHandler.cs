@@ -20,9 +20,9 @@ internal sealed class ChaosHandler : DelegatingHandler
             // 1 in 3 requests will fail
             if (Random.Next(3) == 1)
             {
-                var json = /*lang=json,strict*/ """
-                                                {"text":"unknown error"}
-                                                """;
+                string json = /*lang=json,strict*/ """
+                                                   {"text":"unknown error"}
+                                                   """;
                 return new HttpResponseMessage(HttpStatusCode.InternalServerError)
                 {
                     Headers =

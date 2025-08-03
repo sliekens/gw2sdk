@@ -10,7 +10,7 @@ public class Mounts
     [Fact]
     public async Task Can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<Mount> actual, MessageContext context) = await sut.Hero.Equipment.Mounts.GetMounts(
             cancellationToken: TestContext.Current.CancellationToken
@@ -36,8 +36,8 @@ public class Mounts
                     }
                 );
 
-                var json = JsonSerializer.Serialize(entry);
-                var roundtrip = JsonSerializer.Deserialize<Mount>(json);
+                string json = JsonSerializer.Serialize(entry);
+                Mount? roundtrip = JsonSerializer.Deserialize<Mount>(json);
                 Assert.Equal(entry, roundtrip);
             }
         );

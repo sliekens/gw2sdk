@@ -10,7 +10,7 @@ public class CharacterEquipmentByName
     [Fact]
     public async Task Can_be_found()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
         TestCharacter character = TestConfiguration.TestCharacter;
         ApiKey accessToken = TestConfiguration.ApiKey;
 
@@ -25,8 +25,8 @@ public class CharacterEquipmentByName
         Assert.NotNull(actual.Items);
         Assert.All(actual.Items, EquipmentItemValidation.Validate);
 
-        var json = JsonSerializer.Serialize(actual);
-        var roundtrip = JsonSerializer.Deserialize<CharacterEquipment>(json);
+        string json = JsonSerializer.Serialize(actual);
+        CharacterEquipment? roundtrip = JsonSerializer.Deserialize<CharacterEquipment>(json);
         Assert.Equal(actual, roundtrip);
     }
 }

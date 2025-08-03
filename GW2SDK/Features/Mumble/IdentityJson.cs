@@ -73,7 +73,7 @@ internal static class IdentityJson
             }
         }
 
-        var mapIdInt32 = mapId.Map(static (in JsonElement value) => value.GetInt32());
+        int mapIdInt32 = mapId.Map(static (in JsonElement value) => value.GetInt32());
         if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
         {
             // The 'map_id' and 'map' seem to be redundant, but check my assumptions...

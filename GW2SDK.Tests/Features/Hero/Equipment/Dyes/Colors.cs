@@ -11,7 +11,7 @@ public class Colors
     [Fact]
     public async Task Can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<DyeColor> actual, MessageContext context) = await sut.Hero.Equipment.Dyes.GetColors(
             cancellationToken: TestContext.Current.CancellationToken
@@ -44,8 +44,8 @@ public class Colors
                     Assert.Equal(color.ItemId, link?.ItemId);
                 }
 
-                var json = JsonSerializer.Serialize(color);
-                var roundTrip = JsonSerializer.Deserialize<DyeColor>(json);
+                string json = JsonSerializer.Serialize(color);
+                DyeColor? roundTrip = JsonSerializer.Deserialize<DyeColor>(json);
                 Assert.IsType(color.GetType(), roundTrip);
                 Assert.Equal(color, roundTrip);
             }

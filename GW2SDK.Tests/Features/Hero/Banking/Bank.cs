@@ -8,7 +8,7 @@ public class Bank
     [Fact]
     public async Task Contents_can_be_found()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
 
         (GuildWars2.Hero.Banking.Bank actual, _) = await sut.Hero.Bank.GetBank(

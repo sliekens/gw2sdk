@@ -15,7 +15,7 @@ internal ref struct CharSpanSplitter(ReadOnlySpan<char> value, char separator)
             return false;
         }
 
-        var index = value.IndexOf(separator);
+        int index = value.IndexOf(separator);
         if (index == -1)
         {
             result = value;

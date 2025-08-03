@@ -171,7 +171,7 @@ internal static class ScepterJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetString());
+        string? iconString = icon.Map(static (in JsonElement value) => value.GetString());
         return new Scepter
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),

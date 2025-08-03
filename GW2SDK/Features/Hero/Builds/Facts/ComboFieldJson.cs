@@ -54,7 +54,7 @@ internal static class ComboFieldJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new ComboField
         {
             Text = text.Map(static (in JsonElement value) => value.GetStringRequired()),

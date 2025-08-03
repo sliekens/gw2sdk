@@ -54,7 +54,7 @@ internal static class HealingAdjustJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new HealingAdjust
         {
             Text = text.Map(static (in JsonElement value) => value.GetStringRequired()),

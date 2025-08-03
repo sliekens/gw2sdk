@@ -7,7 +7,7 @@ public class UnlockedMountSkins
     [Fact]
     public async Task Unlocked_mount_skins_can_be_found()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
 
         (HashSet<int> actual, _) = await sut.Hero.Equipment.Mounts.GetUnlockedMountSkins(

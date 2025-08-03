@@ -47,9 +47,9 @@ internal static class DivisionJson
             }
         }
 
-        var largeIconString = largeIcon.Map(static (in JsonElement value) => value.GetStringRequired());
-        var smallIconString = smallIcon.Map(static (in JsonElement value) => value.GetStringRequired());
-        var pipIconString = pipIcon.Map(static (in JsonElement value) => value.GetStringRequired());
+        string largeIconString = largeIcon.Map(static (in JsonElement value) => value.GetStringRequired());
+        string smallIconString = smallIcon.Map(static (in JsonElement value) => value.GetStringRequired());
+        string pipIconString = pipIcon.Map(static (in JsonElement value) => value.GetStringRequired());
 #pragma warning disable CS0618
         return new Division
         {

@@ -112,7 +112,7 @@ internal static class RecipeSheetJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetString());
+        string? iconString = icon.Map(static (in JsonElement value) => value.GetString());
         return new RecipeSheet
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),

@@ -10,7 +10,7 @@ public class LadderLeaderboardEntries
     [InlineData("5DD4CF6F-C68B-47E2-8926-8A7D0AE78462", "ladder", "na")]
     public async Task Can_be_found(string seasonId, string boardId, string regionId)
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<LeaderboardEntry> actual, MessageContext context) = await sut.Pvp.GetLeaderboardEntries(
             seasonId,

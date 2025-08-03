@@ -6,7 +6,7 @@ internal static class TraitedFactJson
 {
     public static TraitedFact GetTraitedFact(this in JsonElement json)
     {
-        Fact fact = json.GetFact(out var requiresTrait, out var overrides);
+        Fact fact = json.GetFact(out int? requiresTrait, out int? overrides);
         return new TraitedFact
         {
             Fact = fact,

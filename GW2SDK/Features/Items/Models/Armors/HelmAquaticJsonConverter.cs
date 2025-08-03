@@ -46,7 +46,7 @@ internal sealed class HelmAquaticJsonConverter : JsonConverter<HelmAquatic>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new HelmAquatic
         {
             Id = json.GetProperty("id").GetInt32(),

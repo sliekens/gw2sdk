@@ -88,9 +88,9 @@ internal static class ItemSlotJson
             ValueList<int>? indices = upgradeSlotIndices.Map(static (in JsonElement values) =>
                 values.GetList(static (in JsonElement value) => value.GetInt32())
             )!;
-            for (var i = 0; i < ids.Count; i++)
+            for (int i = 0; i < ids.Count; i++)
             {
-                var upgradeId = ids[i];
+                int upgradeId = ids[i];
                 switch (indices[i])
                 {
                     case 0:

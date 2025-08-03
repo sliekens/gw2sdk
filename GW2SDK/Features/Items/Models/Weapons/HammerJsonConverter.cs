@@ -48,7 +48,7 @@ internal sealed class HammerJsonConverter : JsonConverter<Hammer>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Hammer
         {
             Id = json.GetProperty("id").GetInt32(),

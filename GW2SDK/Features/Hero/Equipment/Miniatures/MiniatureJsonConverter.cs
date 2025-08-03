@@ -19,7 +19,7 @@ internal sealed class MiniatureJsonConverter : JsonConverter<Miniature>
 
     public static Miniature? Read(in JsonElement json)
     {
-        var iconString = json.GetProperty("icon").GetStringRequired();
+        string iconString = json.GetProperty("icon").GetStringRequired();
         return new Miniature
         {
             Id = json.GetProperty("id").GetInt32(),

@@ -52,7 +52,7 @@ internal sealed class LargeBundleJsonConverter : JsonConverter<LargeBundle>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new LargeBundle
         {
             Id = json.GetProperty("id").GetInt32(),

@@ -8,7 +8,7 @@ public class CharactersByNames
     [Fact]
     public async Task Can_be_found()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
         TestCharacter character = TestConfiguration.TestCharacter;
         TestCharacter character2 = TestConfiguration.TestCharacter2;
         ApiKey accessToken = TestConfiguration.ApiKey;

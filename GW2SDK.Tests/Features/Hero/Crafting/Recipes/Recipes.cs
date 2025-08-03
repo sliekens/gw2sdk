@@ -13,9 +13,9 @@ public class Recipes
     {
         // The JsonLinesHttpMessageHandler simulates the behavior of the real API
         // because bulk enumeration quickly exhausts the API rate limit
-        using var handler = new JsonLinesHttpMessageHandler("Data/recipes.jsonl.gz");
-        using var httpClient = new HttpClient(handler);
-        var sut = new Gw2Client(httpClient);
+        using JsonLinesHttpMessageHandler handler = new("Data/recipes.jsonl.gz");
+        using HttpClient httpClient = new(handler);
+        Gw2Client sut = new(httpClient);
         await foreach ((Recipe actual, MessageContext context) in sut.Hero.Crafting.Recipes.GetRecipesBulk(
                 cancellationToken: TestContext.Current.CancellationToken
             ))
@@ -53,15 +53,15 @@ public class Recipes
     {
         // The JsonLinesHttpMessageHandler simulates the behavior of the real API
         // because bulk enumeration quickly exhausts the API rate limit
-        using var handler = new JsonLinesHttpMessageHandler("Data/recipes.jsonl.gz");
-        using var httpClient = new HttpClient(handler);
-        var sut = new Gw2Client(httpClient);
+        using JsonLinesHttpMessageHandler handler = new("Data/recipes.jsonl.gz");
+        using HttpClient httpClient = new(handler);
+        Gw2Client sut = new(httpClient);
         await foreach (Recipe original in sut.Hero.Crafting.Recipes
             .GetRecipesBulk(cancellationToken: TestContext.Current.CancellationToken)
             .ValueOnly(TestContext.Current.CancellationToken))
         {
-            var json = JsonSerializer.Serialize(original);
-            var roundTrip = JsonSerializer.Deserialize<Recipe>(json);
+            string json = JsonSerializer.Serialize(original);
+            Recipe? roundTrip = JsonSerializer.Deserialize<Recipe>(json);
             Assert.IsType(original.GetType(), roundTrip);
             Assert.Equal(original, roundTrip);
         }

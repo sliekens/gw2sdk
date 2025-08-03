@@ -8,12 +8,12 @@ public class SubtokenInfo
     [Fact]
     public async Task Subtoken_has_info()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
 
         #region Create a new subtoken
 
-        var subtokenPermissions = new HashSet<Permission>();
+        HashSet<Permission> subtokenPermissions = new();
 
 #if NET
         foreach (Permission permission in Enum.GetValues<Permission>())
@@ -31,9 +31,9 @@ public class SubtokenInfo
 
         List<Uri> urls =
         [
-            new Uri("/v2/tokeninfo", UriKind.Relative),
-            new Uri("/v2/account", UriKind.Relative),
-            new Uri("/v2/characters/My Cool Character", UriKind.Relative)
+            new("/v2/tokeninfo", UriKind.Relative),
+            new("/v2/account", UriKind.Relative),
+            new("/v2/characters/My Cool Character", UriKind.Relative)
         ];
 
         (CreatedSubtoken createdSubtoken, MessageContext context) = await sut.Tokens.CreateSubtoken(
@@ -55,7 +55,7 @@ public class SubtokenInfo
             cancellationToken: TestContext.Current.CancellationToken
         );
 
-        var subtoken = Assert.IsType<GuildWars2.Authorization.SubtokenInfo>(actual);
+        GuildWars2.Authorization.SubtokenInfo subtoken = Assert.IsType<GuildWars2.Authorization.SubtokenInfo>(actual);
 
         Assert.NotEmpty(subtoken.Id);
         Assert.NotEmpty(subtoken.Name);

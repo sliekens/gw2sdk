@@ -51,7 +51,7 @@ internal sealed class UpgradeExtractorJsonConverter : JsonConverter<UpgradeExtra
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new UpgradeExtractor
         {
             Id = json.GetProperty("id").GetInt32(),

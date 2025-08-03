@@ -62,7 +62,7 @@ internal static class AttributeConversionJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetString()) ?? "";
+        string iconString = icon.Map(static (in JsonElement value) => value.GetString()) ?? "";
         return new AttributeConversion
         {
             Text = text.Map(static (in JsonElement value) => value.GetString()) ?? "",

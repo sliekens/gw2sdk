@@ -8,7 +8,7 @@ public class Inventory
     [Fact]
     public async Task Can_be_found_by_character_name()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
         TestCharacter character = TestConfiguration.TestCharacter;
         ApiKey accessToken = TestConfiguration.ApiKey;
 

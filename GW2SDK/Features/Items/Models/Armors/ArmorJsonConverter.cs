@@ -62,7 +62,7 @@ internal sealed class ArmorJsonConverter : JsonConverter<Armor>
             }
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Armor
         {
             Id = json.GetProperty("id").GetInt32(),
@@ -185,7 +185,7 @@ internal sealed class ArmorJsonConverter : JsonConverter<Armor>
         }
 
         writer.WriteStartArray("stat_choices");
-        foreach (var statChoice in value.StatChoices)
+        foreach (int statChoice in value.StatChoices)
         {
             writer.WriteNumberValue(statChoice);
         }

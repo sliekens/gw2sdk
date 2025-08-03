@@ -45,7 +45,7 @@ internal sealed class TitleJsonConverter : JsonConverter<Title>
         if (value.Achievements is not null)
         {
             writer.WriteStartArray();
-            foreach (var achievement in value.Achievements)
+            foreach (int achievement in value.Achievements)
             {
                 writer.WriteNumberValue(achievement);
             }

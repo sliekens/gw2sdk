@@ -59,7 +59,7 @@ internal sealed class MountSkinUnlockerJsonConverter : JsonConverter<MountSkinUn
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new MountSkinUnlocker
         {
             Id = json.GetProperty("id").GetInt32(),

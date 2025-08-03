@@ -10,7 +10,7 @@ public class ContinentById
     [InlineData(2)]
     public async Task Can_be_found(int id)
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (Continent actual, MessageContext context) = await sut.Exploration.GetContinentById(
             id,

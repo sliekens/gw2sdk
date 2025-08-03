@@ -11,7 +11,7 @@ public class RecipesByIngredient
         // Normally the limit for ids=all is 200 items
         //   but that doesn't seem to apply for recipes search by input/output item
         // There are 800+ recipes that require a vision crystal
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         const int visionCrystal = 46746;
         (HashSet<Recipe> actual, MessageContext context) = await sut.Hero.Crafting.Recipes.GetRecipesByIngredientItemId(

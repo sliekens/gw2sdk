@@ -10,7 +10,7 @@ public class LeaderboardRegions
     [InlineData("5DD4CF6F-C68B-47E2-8926-8A7D0AE78462", "ladder")]
     public async Task Can_be_found(string seasonId, string boardId)
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<string> actual, _) = await sut.Pvp.GetLeaderboardRegions(
             seasonId,
@@ -18,7 +18,7 @@ public class LeaderboardRegions
             TestContext.Current.CancellationToken
         );
 
-        var expected = new HashSet<string>
+        HashSet<string> expected = new()
         {
             "eu",
             "na"

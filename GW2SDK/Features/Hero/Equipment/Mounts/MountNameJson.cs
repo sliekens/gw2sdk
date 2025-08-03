@@ -8,7 +8,7 @@ internal static class MountNameJson
 {
     public static Extensible<MountName> GetMountName(this in JsonElement json)
     {
-        var text = json.GetStringRequired();
+        string text = json.GetStringRequired();
         return text switch
         {
             "griffon" => MountName.Griffon,

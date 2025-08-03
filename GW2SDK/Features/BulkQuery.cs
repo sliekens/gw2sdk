@@ -68,8 +68,8 @@ public static class BulkQuery
             );
         }
 
-        var resultCount = 0;
-        var resultTotal = keysList.Count;
+        int resultCount = 0;
+        int resultTotal = keysList.Count;
 
         progress?.Report(new BulkProgress(resultTotal, resultCount));
 
@@ -124,7 +124,7 @@ public static class BulkQuery
 
         static IEnumerable<List<TKey>> Chunk(List<TKey> index, int size)
         {
-            for (var offset = 0; offset < index.Count; offset += size)
+            for (int offset = 0; offset < index.Count; offset += size)
             {
                 yield return index.GetRange(offset, Math.Min(size, index.Count - offset));
             }

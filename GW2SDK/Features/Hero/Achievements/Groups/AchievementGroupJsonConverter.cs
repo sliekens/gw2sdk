@@ -47,7 +47,7 @@ internal sealed class AchievementGroupJsonConverter : JsonConverter<AchievementG
         writer.WriteNumber("order", value.Order);
         writer.WritePropertyName("categories");
         writer.WriteStartArray();
-        foreach (var category in value.Categories)
+        foreach (int category in value.Categories)
         {
             writer.WriteNumberValue(category);
         }

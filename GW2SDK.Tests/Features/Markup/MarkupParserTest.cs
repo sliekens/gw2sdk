@@ -7,9 +7,9 @@ public class MarkupParserTest
     [Fact]
     public void Ignores_invalid_tags()
     {
-        var input = "5 <REDACTED> Dye kits";
-        var lexer = new MarkupLexer();
-        var parser = new MarkupParser();
+        string input = "5 <REDACTED> Dye kits";
+        MarkupLexer lexer = new();
+        MarkupParser parser = new();
         IEnumerable<MarkupToken> tokens = MarkupLexer.Tokenize(input);
         RootNode actual = MarkupParser.Parse(tokens);
 
@@ -18,12 +18,12 @@ public class MarkupParserTest
             actual.Children,
             node =>
             {
-                var text = Assert.IsType<TextNode>(node);
+                TextNode text = Assert.IsType<TextNode>(node);
                 Assert.Equal("5 ", text.Text);
             },
             node =>
             {
-                var text = Assert.IsType<TextNode>(node);
+                TextNode text = Assert.IsType<TextNode>(node);
                 Assert.Equal(" Dye kits", text.Text);
             }
         );
@@ -32,9 +32,9 @@ public class MarkupParserTest
     [Fact]
     public void Forgives_mismatched_tags()
     {
-        var input = "<c=@reminder>This coat hides leg armor.<c>";
-        var lexer = new MarkupLexer();
-        var parser = new MarkupParser();
+        string input = "<c=@reminder>This coat hides leg armor.<c>";
+        MarkupLexer lexer = new();
+        MarkupParser parser = new();
         IEnumerable<MarkupToken> tokens = MarkupLexer.Tokenize(input);
         RootNode actual = MarkupParser.Parse(tokens);
 
@@ -43,13 +43,13 @@ public class MarkupParserTest
             actual.Children,
             node =>
             {
-                var coloredText = Assert.IsType<ColoredTextNode>(node);
+                ColoredTextNode coloredText = Assert.IsType<ColoredTextNode>(node);
                 Assert.Equal("@reminder", coloredText.Color);
                 Assert.Collection(
                     coloredText.Children,
                     node =>
                     {
-                        var text = Assert.IsType<TextNode>(node);
+                        TextNode text = Assert.IsType<TextNode>(node);
                         Assert.Equal("This coat hides leg armor.", text.Text);
                     }
                 );
@@ -60,9 +60,9 @@ public class MarkupParserTest
     [Fact]
     public void Keeps_trailing_newline()
     {
-        var input = "<c=@flavor>A gift given in gratitude from the leaders of Tyria.</c>\n";
-        var lexer = new MarkupLexer();
-        var parser = new MarkupParser();
+        string input = "<c=@flavor>A gift given in gratitude from the leaders of Tyria.</c>\n";
+        MarkupLexer lexer = new();
+        MarkupParser parser = new();
         IEnumerable<MarkupToken> tokens = MarkupLexer.Tokenize(input);
         RootNode actual = MarkupParser.Parse(tokens);
 
@@ -71,13 +71,13 @@ public class MarkupParserTest
             actual.Children,
             node =>
             {
-                var coloredText = Assert.IsType<ColoredTextNode>(node);
+                ColoredTextNode coloredText = Assert.IsType<ColoredTextNode>(node);
                 Assert.Equal("@flavor", coloredText.Color);
                 Assert.Collection(
                     coloredText.Children,
                     node =>
                     {
-                        var text = Assert.IsType<TextNode>(node);
+                        TextNode text = Assert.IsType<TextNode>(node);
                         Assert.Equal(
                             "A gift given in gratitude from the leaders of Tyria.",
                             text.Text
@@ -87,7 +87,7 @@ public class MarkupParserTest
             },
             node =>
             {
-                var lineBreak = Assert.IsType<LineBreakNode>(node);
+                LineBreakNode lineBreak = Assert.IsType<LineBreakNode>(node);
             }
         );
     }

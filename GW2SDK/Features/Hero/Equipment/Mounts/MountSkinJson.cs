@@ -42,7 +42,7 @@ internal static class MountSkinJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new MountSkin
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),

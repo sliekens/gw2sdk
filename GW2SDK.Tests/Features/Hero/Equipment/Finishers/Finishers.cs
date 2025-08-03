@@ -11,7 +11,7 @@ public class Finishers
     [Fact]
     public async Task Can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<Finisher> actual, MessageContext context) = await sut.Hero.Equipment.Finishers.GetFinishers(
             cancellationToken: TestContext.Current.CancellationToken
@@ -34,8 +34,8 @@ public class Finishers
                 Assert.True(entry.IconUrl.IsAbsoluteUri || entry.IconUrl.IsWellFormedOriginalString());
                 Assert.NotEmpty(entry.Name);
 
-                var json = JsonSerializer.Serialize(entry);
-                var roundTrip = JsonSerializer.Deserialize<Finisher>(json);
+                string json = JsonSerializer.Serialize(entry);
+                Finisher? roundTrip = JsonSerializer.Deserialize<Finisher>(json);
                 Assert.Equal(entry, roundTrip);
             }
         );

@@ -61,7 +61,7 @@ public sealed class MarkupHtmlConverter
                     builder.Append(ConvertNode(child, colorMap));
                 }
 
-                var content = builder.ToString();
+                string content = builder.ToString();
 #if NET
                 if (coloredText.Color.StartsWith('#'))
 #else
@@ -71,7 +71,7 @@ public sealed class MarkupHtmlConverter
                     return $"<span style=\"color: {coloredText.Color}\">{content}</span>";
                 }
 
-                if (colorMap.TryGetValue(coloredText.Color, out var color))
+                if (colorMap.TryGetValue(coloredText.Color, out string? color))
                 {
                     return $"<span style=\"color: {color}\">{content}</span>";
                 }

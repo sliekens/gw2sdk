@@ -98,7 +98,7 @@ internal static class BagJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetString());
+        string? iconString = icon.Map(static (in JsonElement value) => value.GetString());
         return new Bag
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),

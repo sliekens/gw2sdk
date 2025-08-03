@@ -52,7 +52,7 @@ internal sealed class DaggerSkinJsonConverter : JsonConverter<DaggerSkin>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString() ?? "";
+        string iconString = json.GetProperty("icon").GetString() ?? "";
         return new DaggerSkin
         {
             Id = json.GetProperty("id").GetInt32(),

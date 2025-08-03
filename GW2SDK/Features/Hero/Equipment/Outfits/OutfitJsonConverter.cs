@@ -19,7 +19,7 @@ internal sealed class OutfitJsonConverter : JsonConverter<Outfit>
 
     public static Outfit Read(in JsonElement json)
     {
-        var iconString = json.GetProperty("icon").GetStringRequired();
+        string iconString = json.GetProperty("icon").GetStringRequired();
         return new Outfit
         {
             Id = json.GetProperty("id").GetInt32(),
@@ -39,7 +39,7 @@ internal sealed class OutfitJsonConverter : JsonConverter<Outfit>
         writer.WriteString("name", value.Name);
         writer.WriteString("icon", value.IconUrl.ToString());
         writer.WriteStartArray("unlock_item_ids");
-        foreach (var unlockItemId in value.UnlockItemIds)
+        foreach (int unlockItemId in value.UnlockItemIds)
         {
             writer.WriteNumberValue(unlockItemId);
         }

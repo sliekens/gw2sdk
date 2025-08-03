@@ -48,7 +48,7 @@ internal sealed class ToyJsonConverter : JsonConverter<Toy>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Toy
         {
             Id = json.GetProperty("id").GetInt32(),

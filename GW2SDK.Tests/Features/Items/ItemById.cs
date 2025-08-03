@@ -8,7 +8,7 @@ public class ItemById
     [Fact]
     public async Task An_item_can_be_found_by_id()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         const int id = 24;
 

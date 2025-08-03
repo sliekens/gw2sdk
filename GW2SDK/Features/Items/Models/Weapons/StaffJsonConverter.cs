@@ -48,7 +48,7 @@ internal sealed class StaffJsonConverter : JsonConverter<Staff>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Staff
         {
             Id = json.GetProperty("id").GetInt32(),

@@ -59,7 +59,7 @@ internal sealed class BagSlotExpansionJsonConverter : JsonConverter<BagSlotExpan
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new BagSlotExpansion
         {
             Id = json.GetProperty("id").GetInt32(),

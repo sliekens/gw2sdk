@@ -52,7 +52,7 @@ internal sealed class FishingToolSkinJsonConverter : JsonConverter<FishingToolSk
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString() ?? "";
+        string iconString = json.GetProperty("icon").GetString() ?? "";
         return new FishingToolSkin
         {
             Id = json.GetProperty("id").GetInt32(),

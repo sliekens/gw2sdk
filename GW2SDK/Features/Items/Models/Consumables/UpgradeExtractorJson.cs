@@ -95,7 +95,7 @@ internal static class UpgradeExtractorJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetString());
+        string? iconString = icon.Map(static (in JsonElement value) => value.GetString());
         return new UpgradeExtractor
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),

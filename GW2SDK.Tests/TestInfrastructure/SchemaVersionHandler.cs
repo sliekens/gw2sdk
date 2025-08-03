@@ -15,7 +15,7 @@ internal sealed class SchemaVersionHandler : DelegatingHandler
         if (request.RequestUri?.Host == BaseAddress.DefaultUri.Host)
         {
             SchemaVersion recommended = SchemaVersion.Recommended;
-            var version = request.RequestUri.Query.IndexOf(
+            int version = request.RequestUri.Query.IndexOf(
                 "v=" + recommended,
                 StringComparison.Ordinal
             );
@@ -34,13 +34,13 @@ internal sealed class SchemaVersionHandler : DelegatingHandler
             // Don't use UriBuilder because it contains breaking changes between .NET Framework and .NET (Core)
             // A simple string replace will have to suffice
 #if NET
-            var requestUriWithLatestVersion = request.RequestUri.AbsoluteUri.Replace(
+            string requestUriWithLatestVersion = request.RequestUri.AbsoluteUri.Replace(
                 recommended,
                 "3",
                 StringComparison.Ordinal
             );
 #else
-            var requestUriWithLatestVersion = request.RequestUri.AbsoluteUri.Replace(
+            string requestUriWithLatestVersion = request.RequestUri.AbsoluteUri.Replace(
                 recommended,
                 "3"
             );

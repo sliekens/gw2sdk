@@ -26,7 +26,7 @@ internal static class HttpClientExtensions
                 return (json, new MessageContext(response));
             }
 
-            var reason = response.ReasonPhrase;
+            string? reason = response.ReasonPhrase;
             if (response.Content.Headers.ContentType?.MediaType == "application/json")
             {
                 using JsonDocument? json = await response.Content.ReadAsJsonDocumentAsync(cancellationToken)

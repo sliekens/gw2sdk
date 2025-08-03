@@ -47,7 +47,7 @@ internal sealed class BootsSkinJsonConverter : JsonConverter<BootsSkin>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString() ?? "";
+        string iconString = json.GetProperty("icon").GetString() ?? "";
         return new BootsSkin
         {
             Id = json.GetProperty("id").GetInt32(),

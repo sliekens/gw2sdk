@@ -17,7 +17,7 @@ public class MountNameFormatterTest
             mounts,
             mountName =>
             {
-                var actual = MountNameFormatter.FormatMountName(mountName);
+                string actual = MountNameFormatter.FormatMountName(mountName);
                 Assert.NotEmpty(actual);
             }
         );

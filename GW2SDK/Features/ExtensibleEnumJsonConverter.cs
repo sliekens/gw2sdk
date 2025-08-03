@@ -15,7 +15,7 @@ internal sealed class ExtensibleEnumJsonConverter<TEnum> : JsonConverter<Extensi
         JsonSerializerOptions options
     )
     {
-        var name = reader.GetString();
+        string? name = reader.GetString();
         if (name is null)
         {
             ThrowHelper.ThrowInvalidOperationException("Expected a string but got null.");
@@ -41,7 +41,7 @@ internal sealed class ExtensibleEnumJsonConverter<TEnum> : JsonConverter<Extensi
         JsonSerializerOptions options
     )
     {
-        var name = reader.GetString();
+        string? name = reader.GetString();
         if (name is null)
         {
             ThrowHelper.ThrowInvalidOperationException("Expected a string but got null.");

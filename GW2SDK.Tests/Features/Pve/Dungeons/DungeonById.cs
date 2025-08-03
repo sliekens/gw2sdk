@@ -8,7 +8,7 @@ public class DungeonById
     [Fact]
     public async Task Can_be_found()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         const string id = "citadel_of_flame";
 

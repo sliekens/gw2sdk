@@ -77,7 +77,7 @@ internal static class GatheringToolSkinJson
                         // Almost certainly a mistake in the API/game so let's not introduce a skin type for bait/lure
                         // https://api.guildwars2.com/v2/skins/10440
                         // [&CsgoAAA=]
-                        var discriminatorValue = detail.Value.GetString();
+                        string? discriminatorValue = detail.Value.GetString();
                         if (discriminatorValue is "Bait" or "Lure")
                         {
                             break;
@@ -100,7 +100,7 @@ internal static class GatheringToolSkinJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetString()) ?? "";
+        string iconString = icon.Map(static (in JsonElement value) => value.GetString()) ?? "";
         return new GatheringToolSkin
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),

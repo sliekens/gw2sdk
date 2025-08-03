@@ -44,7 +44,7 @@ internal sealed class GemJsonConverter : JsonConverter<Gem>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Gem
         {
             Id = json.GetProperty("id").GetInt32(),

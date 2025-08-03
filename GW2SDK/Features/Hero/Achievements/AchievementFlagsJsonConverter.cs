@@ -28,18 +28,18 @@ internal sealed class AchievementFlagsJsonConverter : JsonConverter<AchievementF
 
     public static AchievementFlags Read(in JsonElement json)
     {
-        var categoryDisplay = false;
-        var daily = false;
-        var hidden = false;
-        var ignoreNearlyComplete = false;
-        var moveToTop = false;
-        var pvp = false;
-        var repairOnLogin = false;
-        var repeatable = false;
-        var requiresUnlock = false;
-        var permanent = false;
-        var weekly = false;
-        var monthly = false;
+        bool categoryDisplay = false;
+        bool daily = false;
+        bool hidden = false;
+        bool ignoreNearlyComplete = false;
+        bool moveToTop = false;
+        bool pvp = false;
+        bool repairOnLogin = false;
+        bool repeatable = false;
+        bool requiresUnlock = false;
+        bool permanent = false;
+        bool weekly = false;
+        bool monthly = false;
         List<string> other = [];
 
         foreach (JsonProperty property in json.EnumerateObject())
@@ -132,7 +132,7 @@ internal sealed class AchievementFlagsJsonConverter : JsonConverter<AchievementF
         writer.WriteBoolean("weekly", value.Weekly);
         writer.WriteBoolean("monthly", value.Monthly);
         writer.WriteStartArray("other");
-        foreach (var other in value.Other)
+        foreach (string other in value.Other)
         {
             writer.WriteStringValue(other);
         }

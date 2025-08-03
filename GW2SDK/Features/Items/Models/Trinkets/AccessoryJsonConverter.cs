@@ -47,7 +47,7 @@ internal sealed class AccessoryJsonConverter : JsonConverter<Accessory>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Accessory
         {
             Id = json.GetProperty("id").GetInt32(),

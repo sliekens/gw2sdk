@@ -36,7 +36,7 @@ public sealed record SkillLink : Link
             ThrowHelper.ThrowBadArgument("Expected a skill chat link.", nameof(chatLink));
         }
 
-        var skillId = buffer.ReadInt32();
+        int skillId = buffer.ReadInt32();
         return new SkillLink { SkillId = skillId };
     }
 }

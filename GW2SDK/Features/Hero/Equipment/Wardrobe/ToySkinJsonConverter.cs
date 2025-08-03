@@ -48,7 +48,7 @@ internal sealed class ToySkinJsonConverter : JsonConverter<ToySkin>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString() ?? "";
+        string iconString = json.GetProperty("icon").GetString() ?? "";
         return new ToySkin
         {
             Id = json.GetProperty("id").GetInt32(),

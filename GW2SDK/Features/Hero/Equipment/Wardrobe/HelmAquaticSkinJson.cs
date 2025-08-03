@@ -86,7 +86,7 @@ internal static class HelmAquaticSkinJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetString()) ?? "";
+        string iconString = icon.Map(static (in JsonElement value) => value.GetString()) ?? "";
         return new HelmAquaticSkin
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),

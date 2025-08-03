@@ -6,8 +6,8 @@ using GuildWars2.Hero.Equipment.Mounts;
 // For demonstration, pretend the user has selected German as the preferred language
 CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo("de");
 
-using var httpClient = new HttpClient();
-var gw2 = new Gw2Client(httpClient);
+using HttpClient httpClient = new();
+Gw2Client gw2 = new(httpClient);
 
 // Use the preferred language by passing 'Language.CurrentUICulture'
 HashSet<Mount> mounts = await gw2.Hero.Equipment.Mounts.GetMounts(Language.CurrentUICulture).ValueOnly();

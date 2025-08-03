@@ -48,7 +48,7 @@ internal sealed class LongbowJsonConverter : JsonConverter<Longbow>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Longbow
         {
             Id = json.GetProperty("id").GetInt32(),

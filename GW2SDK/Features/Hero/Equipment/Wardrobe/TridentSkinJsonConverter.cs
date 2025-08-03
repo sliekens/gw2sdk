@@ -52,7 +52,7 @@ internal sealed class TridentSkinJsonConverter : JsonConverter<TridentSkin>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString() ?? "";
+        string iconString = json.GetProperty("icon").GetString() ?? "";
         return new TridentSkin
         {
             Id = json.GetProperty("id").GetInt32(),

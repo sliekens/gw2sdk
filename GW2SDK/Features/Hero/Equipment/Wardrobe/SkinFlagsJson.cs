@@ -9,10 +9,10 @@ internal static class SkinFlagsJson
 {
     public static SkinFlags GetSkinFlags(this in JsonElement json)
     {
-        var hideIfLocked = false;
-        var noCost = false;
-        var overrideRarity = false;
-        var showInWardrobe = false;
+        bool hideIfLocked = false;
+        bool noCost = false;
+        bool overrideRarity = false;
+        bool showInWardrobe = false;
         ValueList<string> others = [];
         foreach (JsonElement entry in json.EnumerateArray())
         {

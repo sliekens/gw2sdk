@@ -33,7 +33,7 @@ internal sealed class RelicJsonConverter : JsonConverter<Relic>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Relic
         {
             Id = json.GetProperty("id").GetInt32(),

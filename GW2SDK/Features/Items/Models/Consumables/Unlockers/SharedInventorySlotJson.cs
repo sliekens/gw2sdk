@@ -102,7 +102,7 @@ internal static class SharedInventorySlotJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetString());
+        string? iconString = icon.Map(static (in JsonElement value) => value.GetString());
         return new SharedInventorySlot
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),

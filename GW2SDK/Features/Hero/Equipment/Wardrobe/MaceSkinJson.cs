@@ -81,7 +81,7 @@ internal static class MaceSkinJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetString()) ?? "";
+        string iconString = icon.Map(static (in JsonElement value) => value.GetString()) ?? "";
         return new MaceSkin
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),

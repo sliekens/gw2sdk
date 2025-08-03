@@ -52,7 +52,7 @@ internal sealed class FocusSkinJsonConverter : JsonConverter<FocusSkin>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString() ?? "";
+        string iconString = json.GetProperty("icon").GetString() ?? "";
         return new FocusSkin
         {
             Id = json.GetProperty("id").GetInt32(),

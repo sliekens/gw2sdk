@@ -9,14 +9,14 @@ public class GuildRanks
     [Fact]
     public async Task Can_be_found()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
         TestGuildLeader guildLeader = TestConfiguration.TestGuildLeader;
 
         (AccountSummary account, _) = await sut.Hero.Account.GetSummary(
             guildLeader.Token,
             cancellationToken: TestContext.Current.CancellationToken
         );
-        foreach (var guildId in account.LeaderOfGuildIds!)
+        foreach (string? guildId in account.LeaderOfGuildIds!)
         {
             (List<GuildRank> actual, _) = await sut.Guilds.GetGuildRanks(
                 guildId,

@@ -12,7 +12,7 @@ using Polly;
 
 using Spectre.Console;
 
-var outDir = args[0];
+string outDir = args[0];
 
 Directory.CreateDirectory(outDir);
 
@@ -63,10 +63,10 @@ try
                 StreamWriter achievementsFile = CreateTextCompressed(Path.Combine(outDir, "achievements.jsonl.gz"));
                 await using (achievementsFile.ConfigureAwait(false))
                 {
-                    var service = app.Services.GetRequiredService<JsonAchievementService>();
+                    JsonAchievementService service = app.Services.GetRequiredService<JsonAchievementService>();
                     ISet<string> documents =
                         await service.GetAllJsonAchievements(new ProgressAdapter(achievements)).ConfigureAwait(false);
-                    foreach (var document in documents)
+                    foreach (string document in documents)
                     {
                         await achievementsFile.WriteLineAsync(document).ConfigureAwait(false);
                     }
@@ -76,9 +76,9 @@ try
                 StreamWriter itemsFile = CreateTextCompressed(Path.Combine(outDir, "items.jsonl.gz"));
                 await using (itemsFile.ConfigureAwait(false))
                 {
-                    var service = app.Services.GetRequiredService<JsonItemService>();
+                    JsonItemService service = app.Services.GetRequiredService<JsonItemService>();
                     ISet<string> documents = await service.GetAllJsonItems(new ProgressAdapter(items)).ConfigureAwait(false);
-                    foreach (var document in documents)
+                    foreach (string document in documents)
                     {
                         await itemsFile.WriteLineAsync(document).ConfigureAwait(false);
                     }
@@ -88,9 +88,9 @@ try
                 StreamWriter recipesFile = CreateTextCompressed(Path.Combine(outDir, "recipes.jsonl.gz"));
                 await using (recipesFile.ConfigureAwait(false))
                 {
-                    var service = app.Services.GetRequiredService<JsonRecipeService>();
+                    JsonRecipeService service = app.Services.GetRequiredService<JsonRecipeService>();
                     ISet<string> documents = await service.GetAllJsonRecipes(new ProgressAdapter(recipes)).ConfigureAwait(false);
-                    foreach (var document in documents)
+                    foreach (string document in documents)
                     {
                         await recipesFile.WriteLineAsync(document).ConfigureAwait(false);
                     }
@@ -100,9 +100,9 @@ try
                 StreamWriter skinsFile = CreateTextCompressed(Path.Combine(outDir, "skins.jsonl.gz"));
                 await using (skinsFile.ConfigureAwait(false))
                 {
-                    var service = app.Services.GetRequiredService<JsonSkinService>();
+                    JsonSkinService service = app.Services.GetRequiredService<JsonSkinService>();
                     ISet<string> documents = await service.GetAllJsonSkins(new ProgressAdapter(skins)).ConfigureAwait(false);
-                    foreach (var document in documents)
+                    foreach (string document in documents)
                     {
                         await recipesFile.WriteLineAsync(document).ConfigureAwait(false);
                     }
@@ -112,10 +112,10 @@ try
                 StreamWriter decorationsFile = CreateTextCompressed(Path.Combine(outDir, "decorations.jsonl.gz"));
                 await using (decorationsFile.ConfigureAwait(false))
                 {
-                    var service = app.Services.GetRequiredService<JsonDecorationsService>();
+                    JsonDecorationsService service = app.Services.GetRequiredService<JsonDecorationsService>();
                     ISet<string> documents =
                         await service.GetAllJsonDecorations(new ProgressAdapter(decorations)).ConfigureAwait(false);
-                    foreach (var document in documents)
+                    foreach (string document in documents)
                     {
                         await decorationsFile.WriteLineAsync(document).ConfigureAwait(false);
                     }

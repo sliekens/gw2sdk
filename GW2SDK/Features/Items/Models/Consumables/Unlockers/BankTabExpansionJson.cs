@@ -102,7 +102,7 @@ internal static class BankTabExpansionJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetString());
+        string? iconString = icon.Map(static (in JsonElement value) => value.GetString());
         return new BankTabExpansion
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),

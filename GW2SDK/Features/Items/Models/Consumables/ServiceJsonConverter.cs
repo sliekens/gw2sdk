@@ -47,7 +47,7 @@ internal sealed class ServiceJsonConverter : JsonConverter<Service>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Service
         {
             Id = json.GetProperty("id").GetInt32(),

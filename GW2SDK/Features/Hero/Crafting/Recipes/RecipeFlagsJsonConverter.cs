@@ -42,7 +42,7 @@ internal sealed class RecipeFlagsJsonConverter : JsonConverter<RecipeFlags>
         writer.WriteBoolean("auto_learned", value.AutoLearned);
         writer.WriteBoolean("learned_from_item", value.LearnedFromItem);
         writer.WriteStartArray("other");
-        foreach (var other in value.Other)
+        foreach (string other in value.Other)
         {
             writer.WriteStringValue(other);
         }

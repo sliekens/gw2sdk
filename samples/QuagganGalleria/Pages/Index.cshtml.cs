@@ -9,7 +9,7 @@ internal class QuagganViewModel
 {
     public bool Active { get; set; }
 
-    public Uri ImageUrl { get; set; } = new Uri("about:blank");
+    public Uri ImageUrl { get; set; } = new("about:blank");
 
     public string Id { get; set; } = "";
 }

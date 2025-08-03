@@ -9,7 +9,7 @@ internal static class CharacterFlagsJson
 {
     public static CharacterFlags GetCharacterFlags(this in JsonElement json)
     {
-        var beta = false;
+        bool beta = false;
         ValueList<string> others = [];
         foreach (JsonElement entry in json.EnumerateArray())
         {

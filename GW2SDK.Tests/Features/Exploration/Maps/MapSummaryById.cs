@@ -11,7 +11,7 @@ public class MapSummaryById
     [InlineData(18)]
     public async Task Can_be_found(int id)
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (MapSummary actual, MessageContext context) = await sut.Exploration.GetMapSummaryById(
             id,

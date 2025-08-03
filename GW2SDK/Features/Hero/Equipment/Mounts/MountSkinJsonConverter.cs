@@ -19,7 +19,7 @@ internal sealed class MountSkinJsonConverter : JsonConverter<MountSkin>
 
     public static MountSkin Read(in JsonElement root)
     {
-        var iconString = root.GetProperty("icon").GetStringRequired();
+        string iconString = root.GetProperty("icon").GetStringRequired();
         return new MountSkin
         {
             Id = root.GetProperty("id").GetInt32(),

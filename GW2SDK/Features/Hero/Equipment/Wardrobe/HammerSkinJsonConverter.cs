@@ -52,7 +52,7 @@ internal sealed class HammerSkinJsonConverter : JsonConverter<HammerSkin>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString() ?? "";
+        string iconString = json.GetProperty("icon").GetString() ?? "";
         return new HammerSkin
         {
             Id = json.GetProperty("id").GetInt32(),

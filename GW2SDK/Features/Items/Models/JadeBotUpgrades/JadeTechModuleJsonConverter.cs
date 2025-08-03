@@ -37,7 +37,7 @@ internal sealed class JadeTechModuleJsonConverter : JsonConverter<JadeTechModule
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new JadeTechModule
         {
             Id = json.GetProperty("id").GetInt32(),

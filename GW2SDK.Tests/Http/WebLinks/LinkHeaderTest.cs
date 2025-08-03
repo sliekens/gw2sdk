@@ -34,7 +34,7 @@ public class LinkHeaderTest
             "</v2/colors?page=117&page_size=5>; rel=previous, </v2/colors?page=119&page_size=5>; rel=next, </v2/colors?page=118&page_size=5>; rel=self, </v2/colors?page=0&page_size=5>; rel=first, </v2/colors?page=119&page_size=5>; rel=last";
         LinkHeader sut = LinkHeader.Parse(input);
 
-        var actual = sut.ToString();
+        string actual = sut.ToString();
 
         Assert.Equal(input, actual);
     }

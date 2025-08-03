@@ -81,7 +81,7 @@ internal static class RifleSkinJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetString()) ?? "";
+        string iconString = icon.Map(static (in JsonElement value) => value.GetString()) ?? "";
         return new RifleSkin
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),

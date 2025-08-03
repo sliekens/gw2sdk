@@ -24,7 +24,7 @@ internal static class FoodJson
         OptionalMember effectName = "name";
         OptionalMember effectIcon = "icon";
         OptionalMember effectDescription = "description";
-        var hasEffect = false;
+        bool hasEffect = false;
 
         foreach (JsonProperty member in json.EnumerateObject())
         {
@@ -127,7 +127,7 @@ internal static class FoodJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetString());
+        string? iconString = icon.Map(static (in JsonElement value) => value.GetString());
         return new Food
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),
@@ -161,7 +161,7 @@ internal static class FoodJson
 #pragma warning restore CS0618
                     IconUrl = effectIcon.Map(static (in JsonElement value) =>
                     {
-                        var href = value.GetString();
+                        string? href = value.GetString();
                         return !string.IsNullOrEmpty(href) ? new Uri(href) : null;
                     })
                 }

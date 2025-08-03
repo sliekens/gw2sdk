@@ -51,7 +51,7 @@ internal sealed class MiningPickJsonConverter : JsonConverter<MiningPick>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new MiningPick
         {
             Id = json.GetProperty("id").GetInt32(),

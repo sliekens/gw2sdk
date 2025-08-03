@@ -79,7 +79,7 @@ internal static class TrophyJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetString());
+        string? iconString = icon.Map(static (in JsonElement value) => value.GetString());
         return new Trophy
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),

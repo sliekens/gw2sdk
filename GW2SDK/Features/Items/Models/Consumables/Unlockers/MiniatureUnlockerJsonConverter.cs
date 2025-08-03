@@ -59,7 +59,7 @@ internal sealed class MiniatureUnlockerJsonConverter : JsonConverter<MiniatureUn
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new MiniatureUnlocker
         {
             Id = json.GetProperty("id").GetInt32(),

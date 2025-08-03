@@ -54,8 +54,8 @@ public sealed class QueryBuilder : IEnumerable<KeyValuePair<string, string>>
             arguments,
             static (buffer, state) =>
             {
-                var position = 0;
-                foreach (var (key, value) in state)
+                int position = 0;
+                foreach ((string key, string value) in state)
                 {
                     buffer[position] = position == 0 ? '?' : '&';
                     position++;
@@ -72,8 +72,8 @@ public sealed class QueryBuilder : IEnumerable<KeyValuePair<string, string>>
         );
 #else
         Span<char> buffer = stackalloc char[queryLength];
-        var position = 0;
-        foreach (var (key, value) in arguments)
+        int position = 0;
+        foreach ((string key, string value) in arguments)
         {
             buffer[position] = position == 0 ? '?' : '&';
             position++;

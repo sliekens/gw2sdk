@@ -51,7 +51,7 @@ internal sealed class GenericConsumableJsonConverter : JsonConverter<GenericCons
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new GenericConsumable
         {
             Id = json.GetProperty("id").GetInt32(),

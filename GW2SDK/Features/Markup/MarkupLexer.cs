@@ -21,12 +21,12 @@ public sealed class MarkupLexer
         // TAG_NAME = 1*ALPHA
         // TAG_VALUE = 1*VCHAR; except ">"
         ReadOnlyMemory<char> memory = input.AsMemory();
-        var position = 0;
-        var state = MarkupLexerState.Text;
-        var start = 0;
+        int position = 0;
+        MarkupLexerState state = MarkupLexerState.Text;
+        int start = 0;
         while (position < memory.Length)
         {
-            var current = memory.Span[position];
+            char current = memory.Span[position];
             switch (state)
             {
                 case MarkupLexerState.Text:
@@ -71,7 +71,7 @@ public sealed class MarkupLexer
                         else if (position + 1 < memory.Length && memory.Span[position + 1] == '>')
                         {
                             // Ignore the '/' in '/>'
-                            var tagName = memory.Span[start..position].Trim().ToString();
+                            string tagName = memory.Span[start..position].Trim().ToString();
                             if (VoidElements.Contains(tagName))
                             {
                                 yield return new MarkupToken(MarkupTokenType.TagVoid, tagName);
@@ -93,14 +93,14 @@ public sealed class MarkupLexer
                     }
                     else if (current == '=')
                     {
-                        var tagName = memory.Span[start..position].Trim().ToString();
+                        string tagName = memory.Span[start..position].Trim().ToString();
                         yield return new MarkupToken(MarkupTokenType.TagStart, tagName);
                         state = MarkupLexerState.TagValue;
                         start = position + 1;
                     }
                     else if (current == '>')
                     {
-                        var tagName = memory.Span[start..position].Trim().ToString();
+                        string tagName = memory.Span[start..position].Trim().ToString();
                         if (VoidElements.Contains(tagName))
                         {
                             yield return new MarkupToken(MarkupTokenType.TagVoid, tagName);
@@ -119,7 +119,7 @@ public sealed class MarkupLexer
                 case MarkupLexerState.TagValue:
                     if (current == '>')
                     {
-                        var tagValue = memory.Span[start..position].Trim().ToString();
+                        string tagValue = memory.Span[start..position].Trim().ToString();
                         yield return new MarkupToken(MarkupTokenType.TagValue, tagValue);
                         state = MarkupLexerState.Text;
                         start = position + 1;
@@ -130,7 +130,7 @@ public sealed class MarkupLexer
                 case MarkupLexerState.TagClose:
                     if (current == '>')
                     {
-                        var tagName = memory.Span[start..position].Trim().ToString();
+                        string tagName = memory.Span[start..position].Trim().ToString();
                         yield return new MarkupToken(MarkupTokenType.TagClose, tagName);
                         state = MarkupLexerState.Text;
                         start = position + 1;

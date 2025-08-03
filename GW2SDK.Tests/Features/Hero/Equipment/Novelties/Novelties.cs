@@ -11,7 +11,7 @@ public class Novelties
     [Fact]
     public async Task Can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<Novelty> actual, MessageContext context) = await sut.Hero.Equipment.Novelties.GetNovelties(
             cancellationToken: TestContext.Current.CancellationToken
@@ -32,8 +32,8 @@ public class Novelties
                 Assert.True(entry.Slot.IsDefined());
                 Assert.NotEmpty(entry.UnlockItemIds);
 
-                var json = JsonSerializer.Serialize(entry);
-                var roundtrip = JsonSerializer.Deserialize<Novelty>(json);
+                string json = JsonSerializer.Serialize(entry);
+                Novelty? roundtrip = JsonSerializer.Deserialize<Novelty>(json);
                 Assert.Equal(entry, roundtrip);
             }
         );

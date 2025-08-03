@@ -61,7 +61,7 @@ internal sealed class PvpEquipmentJsonConverter : JsonConverter<PvpEquipment>
         }
 
         writer.WriteStartArray("sigil_ids");
-        foreach (var sigilId in value.SigilIds)
+        foreach (int? sigilId in value.SigilIds)
         {
             if (sigilId.HasValue)
             {

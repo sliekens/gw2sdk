@@ -7,7 +7,7 @@ public class UnlockedColors
     [Fact]
     public async Task Can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
 
         (HashSet<int> actual, _) = await sut.Hero.Equipment.Dyes.GetUnlockedColors(

@@ -28,7 +28,7 @@ internal sealed class AchievementCategoryJsonConverter : JsonConverter<Achieveme
 
     public static AchievementCategory Read(in JsonElement json)
     {
-        var iconString = json.GetProperty("icon").GetStringRequired();
+        string iconString = json.GetProperty("icon").GetStringRequired();
         return new AchievementCategory
         {
             Id = json.GetProperty("id").GetInt32(),

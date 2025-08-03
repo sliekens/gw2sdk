@@ -63,7 +63,7 @@ internal static class ComboFinisherJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new ComboFinisher
         {
             Text = text.Map(static (in JsonElement value) => value.GetStringRequired()),
@@ -78,7 +78,7 @@ internal static class ComboFinisherJson
         static bool IsDefaultInt32(in JsonProperty jsonProperty)
         {
             return jsonProperty.Value.ValueKind == JsonValueKind.Number
-                && jsonProperty.Value.TryGetInt32(out var value)
+                && jsonProperty.Value.TryGetInt32(out int value)
                 && value == 0;
         }
     }

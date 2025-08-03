@@ -48,7 +48,7 @@ internal sealed class SpearJsonConverter : JsonConverter<Spear>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Spear
         {
             Id = json.GetProperty("id").GetInt32(),

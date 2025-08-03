@@ -59,7 +59,7 @@ internal sealed class BuildStorageExpansionJsonConverter : JsonConverter<BuildSt
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new BuildStorageExpansion
         {
             Id = json.GetProperty("id").GetInt32(),

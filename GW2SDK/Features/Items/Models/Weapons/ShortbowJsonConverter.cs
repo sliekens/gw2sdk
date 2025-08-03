@@ -48,7 +48,7 @@ internal sealed class ShortbowJsonConverter : JsonConverter<Shortbow>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Shortbow
         {
             Id = json.GetProperty("id").GetInt32(),

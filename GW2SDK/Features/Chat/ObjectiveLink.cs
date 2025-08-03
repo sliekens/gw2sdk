@@ -42,10 +42,10 @@ public sealed record ObjectiveLink : Link
             ThrowHelper.ThrowBadArgument("Expected a WvW objective chat link.", nameof(chatLink));
         }
 
-        var objectiveId = buffer.ReadUInt24();
+        int objectiveId = buffer.ReadUInt24();
         buffer.Padding(1);
 
-        var mapId = buffer.ReadUInt24();
+        int mapId = buffer.ReadUInt24();
         buffer.Padding(1);
 
         return new ObjectiveLink

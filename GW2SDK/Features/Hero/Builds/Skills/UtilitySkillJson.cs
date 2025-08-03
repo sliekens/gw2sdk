@@ -134,7 +134,7 @@ internal static class UtilitySkillJson
         ValueList<Extensible<ProfessionName>> professionRestrictions = professions.Map(static (in JsonElement values) =>
             values.GetList(static (in JsonElement value) => value.GetEnum<ProfessionName>())
         );
-        var iconString = icon.Map(static (in JsonElement value) => value.GetString()) ?? "";
+        string iconString = icon.Map(static (in JsonElement value) => value.GetString()) ?? "";
         return new UtilitySkill
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),

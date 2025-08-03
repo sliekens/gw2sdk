@@ -52,7 +52,7 @@ internal sealed class SwordSkinJsonConverter : JsonConverter<SwordSkin>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString() ?? "";
+        string iconString = json.GetProperty("icon").GetString() ?? "";
         return new SwordSkin
         {
             Id = json.GetProperty("id").GetInt32(),

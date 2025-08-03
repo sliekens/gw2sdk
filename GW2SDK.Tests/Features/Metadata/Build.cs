@@ -7,7 +7,7 @@ public class Build
     [Fact]
     public async Task Current_build_can_be_found()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (GuildWars2.Metadata.Build actual, _) =
             await sut.Metadata.GetBuild(cancellationToken: TestContext.Current.CancellationToken);

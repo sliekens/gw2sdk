@@ -48,7 +48,7 @@ internal sealed class ScepterJsonConverter : JsonConverter<Scepter>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Scepter
         {
             Id = json.GetProperty("id").GetInt32(),

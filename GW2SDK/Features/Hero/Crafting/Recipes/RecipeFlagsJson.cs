@@ -9,8 +9,8 @@ internal static class RecipeFlagsJson
 {
     public static RecipeFlags GetRecipeFlags(this in JsonElement json)
     {
-        var autoLearned = false;
-        var learnedFromItem = false;
+        bool autoLearned = false;
+        bool learnedFromItem = false;
         ValueList<string> others = [];
         foreach (JsonElement entry in json.EnumerateArray())
         {

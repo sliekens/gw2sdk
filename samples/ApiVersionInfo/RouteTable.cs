@@ -36,7 +36,7 @@ internal sealed class RouteTable(RouteOptions routeOptions) : IRenderable
             return;
         }
 
-        var pathTemplate = route.Active switch
+        string pathTemplate = route.Active switch
         {
             false => ":no_entry: [dim bold]{0}[/]",
             true when Routes.IsObsolete(route) => ":sauropod: [dim]{0}[/]",

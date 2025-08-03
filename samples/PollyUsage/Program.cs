@@ -67,7 +67,7 @@ internal class Program
 
         IHost app = appBuilder.Build();
 
-        var gw2 = app.Services.GetRequiredService<Gw2Client>();
+        Gw2Client gw2 = app.Services.GetRequiredService<Gw2Client>();
 
         PrintHeader();
 

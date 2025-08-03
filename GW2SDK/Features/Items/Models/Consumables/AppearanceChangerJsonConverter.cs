@@ -51,7 +51,7 @@ internal sealed class AppearanceChangerJsonConverter : JsonConverter<AppearanceC
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new AppearanceChanger
         {
             Id = json.GetProperty("id").GetInt32(),

@@ -51,7 +51,7 @@ internal sealed class HalloweenConsumableJsonConverter : JsonConverter<Halloween
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new HalloweenConsumable
         {
             Id = json.GetProperty("id").GetInt32(),

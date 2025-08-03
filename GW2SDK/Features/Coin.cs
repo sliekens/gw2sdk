@@ -317,7 +317,7 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
         string? formattedGold = null;
         string? formattedSilver = null;
         string? formattedCopper = null;
-        var length = 0;
+        int length = 0;
         if (Gold != 0)
         {
             formattedGold = $"{Gold:N0} gold";
@@ -352,7 +352,7 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
             (formattedGold, formattedSilver, formattedCopper),
             (buffer, state) =>
             {
-                var pos = 0;
+                int pos = 0;
 
                 if (state.formattedGold is not null)
                 {

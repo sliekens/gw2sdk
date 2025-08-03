@@ -52,7 +52,7 @@ internal sealed class MiningToolSkinJsonConverter : JsonConverter<MiningToolSkin
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString() ?? "";
+        string iconString = json.GetProperty("icon").GetString() ?? "";
         return new MiningToolSkin
         {
             Id = json.GetProperty("id").GetInt32(),

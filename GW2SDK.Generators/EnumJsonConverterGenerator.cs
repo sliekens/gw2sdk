@@ -35,7 +35,7 @@ public class EnumJsonConverterGenerator : IIncrementalGenerator
         SourceProductionContext context
     )
     {
-        var enumTypes = new List<string>();
+        List<string> enumTypes = [];
 
         foreach (EnumDeclarationSyntax? enumDeclaration in enumDeclarations)
         {
@@ -51,22 +51,22 @@ public class EnumJsonConverterGenerator : IIncrementalGenerator
                 continue;
             }
 
-            var namespaceName = enumSymbol.ContainingNamespace.ToDisplayString();
+            string namespaceName = enumSymbol.ContainingNamespace.ToDisplayString();
             if (!namespaceName.StartsWith("GuildWars2", StringComparison.Ordinal))
             {
                 continue;
             }
 
-            var enumName = enumSymbol.Name;
+            string enumName = enumSymbol.Name;
             enumTypes.Add($"{namespaceName}.{enumName}");
-            var source = GenerateEnumJsonConverter(enumName, namespaceName, namedTypeSymbol);
+            string source = GenerateEnumJsonConverter(enumName, namespaceName, namedTypeSymbol);
             context.AddSource(
                 $"{namespaceName}.{enumName}JsonConverter.g.cs",
                 SourceText.From(source, Encoding.UTF8)
             );
         }
 
-        var factorySource = GenerateExtensibleEnumJsonConverterFactory(enumTypes);
+        string factorySource = GenerateExtensibleEnumJsonConverterFactory(enumTypes);
         context.AddSource(
             "GuildWars2.ExtensibleEnumJsonConverterFactory.g.cs",
             SourceText.From(factorySource, Encoding.UTF8)
@@ -86,8 +86,8 @@ public class EnumJsonConverterGenerator : IIncrementalGenerator
             .Select(f => f.Name)
             .ToList();
 
-        var readCases = new StringBuilder();
-        foreach (var value in enumValues)
+        StringBuilder readCases = new();
+        foreach (string? value in enumValues)
         {
             readCases.AppendLine(
                 $$"""
@@ -100,8 +100,8 @@ public class EnumJsonConverterGenerator : IIncrementalGenerator
             );
         }
 
-        var writeCases = new StringBuilder();
-        foreach (var value in enumValues)
+        StringBuilder writeCases = new();
+        foreach (string? value in enumValues)
         {
             writeCases.AppendLine(
                 $"""
@@ -142,8 +142,8 @@ public class EnumJsonConverterGenerator : IIncrementalGenerator
 
     private static string GenerateExtensibleEnumJsonConverterFactory(List<string> enumTypes)
     {
-        var cases = new StringBuilder();
-        foreach (var enumType in enumTypes)
+        StringBuilder cases = new();
+        foreach (string? enumType in enumTypes)
         {
             cases.AppendLine(
                 $$"""

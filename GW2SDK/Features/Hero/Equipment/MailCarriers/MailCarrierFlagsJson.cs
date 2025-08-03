@@ -9,7 +9,7 @@ internal static class MailCarrierFlagsJson
 {
     public static MailCarrierFlags GetMailCarrierFlags(this in JsonElement json)
     {
-        var @default = false;
+        bool @default = false;
         ValueList<string> others = [];
         foreach (JsonElement entry in json.EnumerateArray())
         {

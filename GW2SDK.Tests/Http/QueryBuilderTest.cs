@@ -7,9 +7,9 @@ public class QueryBuilderTest
     [Fact]
     public void The_default_state_is_an_empty_query()
     {
-        var sut = new QueryBuilder();
+        QueryBuilder sut = new();
 
-        var actual = sut.Build();
+        string actual = sut.Build();
 
         Assert.Equal("", actual);
     }
@@ -17,9 +17,9 @@ public class QueryBuilderTest
     [Fact]
     public void Build_query_with_one_key()
     {
-        var sut = new QueryBuilder { { "key", "value" } };
+        QueryBuilder sut = new() { { "key", "value" } };
 
-        var actual = sut.Build();
+        string actual = sut.Build();
 
         Assert.Equal("?key=value", actual);
     }
@@ -27,14 +27,14 @@ public class QueryBuilderTest
     [Fact]
     public void Build_query_with_multiple_keys()
     {
-        var sut = new QueryBuilder
+        QueryBuilder sut = new()
         {
             { "key1", "first" },
             { "key2", "second" },
             { "key3", "third" }
         };
 
-        var actual = sut.Build();
+        string actual = sut.Build();
 
         Assert.Equal("?key1=first&key2=second&key3=third", actual);
     }
@@ -42,14 +42,14 @@ public class QueryBuilderTest
     [Fact]
     public void Build_query_with_repeating_keys()
     {
-        var sut = new QueryBuilder
+        QueryBuilder sut = new()
         {
             { "key", "first" },
             { "key", "second" },
             { "key", "third" }
         };
 
-        var actual = sut.Build();
+        string actual = sut.Build();
 
         Assert.Equal("?key=first&key=second&key=third", actual);
     }

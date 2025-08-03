@@ -42,7 +42,7 @@ internal sealed class AchievementFlagsJsonConverter : JsonConverter<AchievementF
         writer.WriteBoolean("special_event", value.SpecialEvent);
         writer.WriteBoolean("pve", value.PvE);
         writer.WriteStartArray("other");
-        foreach (var other in value.Other)
+        foreach (string? other in value.Other)
         {
             writer.WriteStringValue(other);
         }

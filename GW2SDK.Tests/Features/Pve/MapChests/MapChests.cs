@@ -8,7 +8,7 @@ public class MapChests
     [Fact]
     public async Task Can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<MapChest> actual, MessageContext context) = await sut.Pve.MapChests.GetMapChests(
             cancellationToken: TestContext.Current.CancellationToken

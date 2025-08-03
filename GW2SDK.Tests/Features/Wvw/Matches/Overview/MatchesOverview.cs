@@ -8,7 +8,7 @@ public class MatchesOverview
     [Fact]
     public async Task Can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<MatchOverview> actual, MessageContext context) =
             await sut.Wvw.GetMatchesOverview(

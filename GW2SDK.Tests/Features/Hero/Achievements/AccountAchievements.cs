@@ -10,7 +10,7 @@ public class AccountAchievements
     [Fact]
     public async Task Can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
 
         (HashSet<AccountAchievement> actual, MessageContext context) = await sut.Hero.Achievements.GetAccountAchievements(
@@ -30,8 +30,8 @@ public class AccountAchievements
                 Assert.True(achievement.Max >= 0);
                 Assert.True(achievement.Repeated >= 0);
 
-                var json = JsonSerializer.Serialize(achievement);
-                var roundTrip = JsonSerializer.Deserialize<AccountAchievement>(json);
+                string json = JsonSerializer.Serialize(achievement);
+                AccountAchievement? roundTrip = JsonSerializer.Deserialize<AccountAchievement>(json);
                 Assert.Equal(achievement, roundTrip);
             }
         );

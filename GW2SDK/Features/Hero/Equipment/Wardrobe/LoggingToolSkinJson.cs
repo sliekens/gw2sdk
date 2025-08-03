@@ -76,7 +76,7 @@ internal static class LoggingToolSkinJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetString()) ?? "";
+        string iconString = icon.Map(static (in JsonElement value) => value.GetString()) ?? "";
         return new LoggingToolSkin
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),

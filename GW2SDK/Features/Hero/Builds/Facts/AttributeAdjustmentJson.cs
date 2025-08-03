@@ -64,7 +64,7 @@ internal static class AttributeAdjustmentJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new AttributeAdjustment
         {
             Text = text.Map(static (in JsonElement value) => value.GetString()) ?? "",

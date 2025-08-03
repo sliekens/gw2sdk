@@ -102,7 +102,7 @@ internal static class BuildTemplateExpansionJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetString());
+        string? iconString = icon.Map(static (in JsonElement value) => value.GetString());
         return new BuildTemplateExpansion
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),

@@ -43,7 +43,7 @@ internal sealed class AmuletJsonConverter : JsonConverter<Amulet>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Amulet
         {
             Id = json.GetProperty("id").GetInt32(),

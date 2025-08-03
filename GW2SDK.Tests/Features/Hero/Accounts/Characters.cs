@@ -9,7 +9,7 @@ public class Characters
     [Fact]
     public async Task Can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
 
         (HashSet<Character> actual, MessageContext context) = await sut.Hero.Account.GetCharacters(

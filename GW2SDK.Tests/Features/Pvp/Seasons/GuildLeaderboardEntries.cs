@@ -11,7 +11,7 @@ public class GuildLeaderboardEntries(ITestOutputHelper outputHelper)
     public async Task Can_be_found(string seasonId, string boardId, string regionId)
     {
         LoggingHandler.Output.Value = outputHelper;
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<LeaderboardEntry> actual, MessageContext context) = await sut.Pvp.GetLeaderboardEntries(
             seasonId,

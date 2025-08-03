@@ -48,7 +48,7 @@ internal sealed class TridentJsonConverter : JsonConverter<Trident>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Trident
         {
             Id = json.GetProperty("id").GetInt32(),

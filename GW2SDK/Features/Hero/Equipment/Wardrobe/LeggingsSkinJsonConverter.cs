@@ -47,7 +47,7 @@ internal sealed class LeggingsSkinJsonConverter : JsonConverter<LeggingsSkin>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString() ?? "";
+        string iconString = json.GetProperty("icon").GetString() ?? "";
         return new LeggingsSkin
         {
             Id = json.GetProperty("id").GetInt32(),

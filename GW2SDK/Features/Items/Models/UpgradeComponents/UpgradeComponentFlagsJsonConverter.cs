@@ -84,7 +84,7 @@ internal sealed class UpgradeComponentFlagsJsonConverter : JsonConverter<Upgrade
         writer.WriteBoolean("trinket", value.Trinket);
         writer.WriteBoolean("warhorn", value.Warhorn);
         writer.WriteStartArray("other");
-        foreach (var other in value.Other)
+        foreach (string other in value.Other)
         {
             writer.WriteStringValue(other);
         }

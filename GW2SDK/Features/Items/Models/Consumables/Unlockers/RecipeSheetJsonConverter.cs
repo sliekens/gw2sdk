@@ -59,7 +59,7 @@ internal sealed class RecipeSheetJsonConverter : JsonConverter<RecipeSheet>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new RecipeSheet
         {
             Id = json.GetProperty("id").GetInt32(),
@@ -98,7 +98,7 @@ internal sealed class RecipeSheetJsonConverter : JsonConverter<RecipeSheet>
         ItemJsonConverter.WriteCommonProperties(writer, value);
         writer.WriteNumber("recipe_id", value.RecipeId);
         writer.WriteStartArray("extra_recipe_ids");
-        foreach (var id in value.ExtraRecipeIds)
+        foreach (int id in value.ExtraRecipeIds)
         {
             writer.WriteNumberValue(id);
         }

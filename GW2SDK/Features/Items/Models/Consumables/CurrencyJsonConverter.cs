@@ -47,7 +47,7 @@ internal sealed class CurrencyJsonConverter : JsonConverter<Currency>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Currency
         {
             Id = json.GetProperty("id").GetInt32(),

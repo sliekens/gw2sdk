@@ -44,7 +44,7 @@ internal sealed class RuneJsonConverter : JsonConverter<Rune>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Rune
         {
             Id = json.GetProperty("id").GetInt32(),
@@ -101,7 +101,7 @@ internal sealed class RuneJsonConverter : JsonConverter<Rune>
         if (value.Bonuses is not null)
         {
             writer.WriteStartArray("bonuses");
-            foreach (var bonus in value.Bonuses)
+            foreach (string bonus in value.Bonuses)
             {
                 writer.WriteStringValue(bonus);
             }

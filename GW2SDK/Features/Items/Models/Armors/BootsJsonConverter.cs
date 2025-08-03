@@ -42,7 +42,7 @@ internal sealed class BootsJsonConverter : JsonConverter<Boots>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Boots
         {
             Id = json.GetProperty("id").GetInt32(),

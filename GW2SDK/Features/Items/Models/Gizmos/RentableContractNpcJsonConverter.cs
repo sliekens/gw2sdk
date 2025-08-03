@@ -45,7 +45,7 @@ internal sealed class RentableContractNpcJsonConverter : JsonConverter<RentableC
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new RentableContractNpc
         {
             Id = json.GetProperty("id").GetInt32(),

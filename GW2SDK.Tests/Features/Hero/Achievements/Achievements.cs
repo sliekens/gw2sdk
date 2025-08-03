@@ -15,9 +15,9 @@ public class Achievements
     {
         // The JsonLinesHttpMessageHandler simulates the behavior of the real API
         // because bulk enumeration quickly exhausts the API rate limit
-        using var handler = new JsonLinesHttpMessageHandler("Data/achievements.jsonl.gz");
-        using var httpClient = new HttpClient(handler);
-        var sut = new Gw2Client(httpClient);
+        using JsonLinesHttpMessageHandler handler = new("Data/achievements.jsonl.gz");
+        using HttpClient httpClient = new(handler);
+        Gw2Client sut = new(httpClient);
         await foreach ((Achievement actual, MessageContext context) in sut.Hero.Achievements.GetAchievementsBulk(
                 cancellationToken: TestContext.Current.CancellationToken
             ))
@@ -78,8 +78,8 @@ public class Achievements
             AchievementLink chatLinkRoundtrip = AchievementLink.Parse(chatLink.ToString());
             Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
 
-            var json = JsonSerializer.Serialize(actual);
-            var roundTrip = JsonSerializer.Deserialize<Achievement>(json);
+            string json = JsonSerializer.Serialize(actual);
+            Achievement? roundTrip = JsonSerializer.Deserialize<Achievement>(json);
             Assert.Equal(actual, roundTrip);
         }
     }

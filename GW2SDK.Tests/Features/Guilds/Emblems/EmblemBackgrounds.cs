@@ -8,7 +8,7 @@ public class EmblemBackgrounds
     [Fact]
     public async Task Can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<EmblemBackground> actual, MessageContext context) = await sut.Guilds.GetEmblemBackgrounds(
             cancellationToken: TestContext.Current.CancellationToken

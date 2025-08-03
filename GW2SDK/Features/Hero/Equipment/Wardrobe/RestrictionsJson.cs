@@ -44,7 +44,7 @@ internal static class RestrictionsJson
             }
             else
             {
-                var restriction = entry.GetString();
+                string? restriction = entry.GetString();
                 if (!string.IsNullOrEmpty(restriction))
                 {
                     races ??= new ValueList<Extensible<RaceName>>();

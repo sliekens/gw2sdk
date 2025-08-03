@@ -48,7 +48,7 @@ internal sealed class AxeSkinJsonConverter : JsonConverter<AxeSkin>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString() ?? "";
+        string iconString = json.GetProperty("icon").GetString() ?? "";
         return new AxeSkin
         {
             Id = json.GetProperty("id").GetInt32(),

@@ -81,7 +81,7 @@ internal static class SmallBundleSkinJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetString()) ?? "";
+        string iconString = icon.Map(static (in JsonElement value) => value.GetString()) ?? "";
         return new SmallBundleSkin
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),

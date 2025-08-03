@@ -43,7 +43,7 @@ internal sealed class HelmSkinJsonConverter : JsonConverter<HelmSkin>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString() ?? "";
+        string iconString = json.GetProperty("icon").GetString() ?? "";
         return new HelmSkin
         {
             Id = json.GetProperty("id").GetInt32(),

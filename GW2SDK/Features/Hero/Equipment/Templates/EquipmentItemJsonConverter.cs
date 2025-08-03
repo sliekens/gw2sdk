@@ -95,7 +95,7 @@ internal sealed class EquipmentItemJsonConverter : JsonConverter<EquipmentItem>
         }
 
         writer.WriteStartArray("infusion_item_ids");
-        foreach (var infusionItemId in value.InfusionItemIds)
+        foreach (int infusionItemId in value.InfusionItemIds)
         {
             writer.WriteNumberValue(infusionItemId);
         }
@@ -126,7 +126,7 @@ internal sealed class EquipmentItemJsonConverter : JsonConverter<EquipmentItem>
         writer.WriteString("location", value.Location.ToString());
 
         writer.WriteStartArray("template_numbers");
-        foreach (var templateNumber in value.TemplateNumbers)
+        foreach (int templateNumber in value.TemplateNumbers)
         {
             writer.WriteNumberValue(templateNumber);
         }
@@ -134,7 +134,7 @@ internal sealed class EquipmentItemJsonConverter : JsonConverter<EquipmentItem>
         writer.WriteEndArray();
 
         writer.WriteStartArray("dye_color_ids");
-        foreach (var dyeColorId in value.DyeColorIds)
+        foreach (int dyeColorId in value.DyeColorIds)
         {
             writer.WriteNumberValue(dyeColorId);
         }

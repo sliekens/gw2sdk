@@ -9,7 +9,7 @@ public class ProfessionByName
     [Fact]
     public async Task Can_be_found()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         const ProfessionName name = ProfessionName.Engineer;
 

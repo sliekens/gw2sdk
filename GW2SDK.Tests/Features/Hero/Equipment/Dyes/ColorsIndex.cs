@@ -7,7 +7,7 @@ public class ColorsIndex
     [Fact]
     public async Task Can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<int> actual, MessageContext context) =
             await sut.Hero.Equipment.Dyes.GetColorsIndex(TestContext.Current.CancellationToken);

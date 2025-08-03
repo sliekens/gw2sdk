@@ -33,7 +33,7 @@ internal sealed class TrophyJsonConverter : JsonConverter<Trophy>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Trophy
         {
             Id = json.GetProperty("id").GetInt32(),

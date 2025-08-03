@@ -8,7 +8,7 @@ public class ItemPrices
     [Fact]
     public async Task Can_be_enumerated()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         // You wouldn't want to use Take() in production code
         //   but enumerating all entries is too expensive for a test

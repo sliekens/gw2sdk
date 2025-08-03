@@ -7,7 +7,7 @@ public class SharedInventory
     [Fact]
     public async Task Can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
 
         (GuildWars2.Hero.Inventories.Inventory actual, _) = await sut.Hero.Inventory.GetSharedInventory(

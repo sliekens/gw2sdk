@@ -273,7 +273,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
             throw new PlatformNotSupportedException("Link is only supported on Windows.");
         }
 
-        var link = MumbleLink.CreateOrOpen(name);
+        MumbleLink link = MumbleLink.CreateOrOpen(name);
         return new GameLink(link, refreshInterval);
     }
 

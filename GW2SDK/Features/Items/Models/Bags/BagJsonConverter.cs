@@ -33,7 +33,7 @@ internal sealed class BagJsonConverter : JsonConverter<Bag>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Bag
         {
             Id = json.GetProperty("id").GetInt32(),

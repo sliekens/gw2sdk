@@ -9,8 +9,8 @@ internal static class GuildEmblemFlagsJson
 {
     public static GuildEmblemFlags GetGuildEmblemFlags(this in JsonElement json)
     {
-        var flipBackgroundHorizontal = false;
-        var flipBackgroundVertical = false;
+        bool flipBackgroundHorizontal = false;
+        bool flipBackgroundVertical = false;
         ValueList<string> others = [];
         foreach (JsonElement entry in json.EnumerateArray())
         {

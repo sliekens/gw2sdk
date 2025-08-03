@@ -59,7 +59,7 @@ internal sealed class OutfitUnlockerJsonConverter : JsonConverter<OutfitUnlocker
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new OutfitUnlocker
         {
             Id = json.GetProperty("id").GetInt32(),

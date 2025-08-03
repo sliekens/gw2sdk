@@ -37,7 +37,7 @@ internal static class GuildRankJson
             }
         }
 
-        var iconString = iconHref.Map(static (in JsonElement value) => value.GetStringRequired());
+        string iconString = iconHref.Map(static (in JsonElement value) => value.GetStringRequired());
         return new GuildRank
         {
             Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),

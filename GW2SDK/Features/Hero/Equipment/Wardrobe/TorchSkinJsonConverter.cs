@@ -52,7 +52,7 @@ internal sealed class TorchSkinJsonConverter : JsonConverter<TorchSkin>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString() ?? "";
+        string iconString = json.GetProperty("icon").GetString() ?? "";
         return new TorchSkin
         {
             Id = json.GetProperty("id").GetInt32(),

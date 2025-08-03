@@ -42,7 +42,7 @@ internal sealed class GiftBoxJsonConverter : JsonConverter<GiftBox>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new GiftBox
         {
             Id = json.GetProperty("id").GetInt32(),

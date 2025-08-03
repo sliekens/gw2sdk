@@ -9,7 +9,7 @@ public class BuyOrders
     public async Task Current_bids_can_be_filtered_by_page()
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<Order> bids, MessageContext context) = await sut.Commerce.GetBuyOrders(
             0,

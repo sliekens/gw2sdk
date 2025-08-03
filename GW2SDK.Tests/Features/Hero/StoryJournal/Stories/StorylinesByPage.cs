@@ -8,7 +8,7 @@ public class StorylinesByPage
     [Fact]
     public async Task Can_be_filtered_by_page()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
         (HashSet<Storyline> actual, MessageContext context) = await sut.Hero.StoryJournal.GetStorylinesByPage(

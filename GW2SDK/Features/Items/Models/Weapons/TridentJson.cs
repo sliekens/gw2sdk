@@ -171,7 +171,7 @@ internal static class TridentJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetString());
+        string? iconString = icon.Map(static (in JsonElement value) => value.GetString());
         return new Trident
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),

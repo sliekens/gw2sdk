@@ -49,12 +49,12 @@ public abstract record Flags
             .Where(property => property.PropertyType == typeof(bool))
             .Select(property => (bool?)property.GetValue(this));
 
-        foreach (var flag in flags)
+        foreach (bool? flag in flags)
         {
             hash.Add(flag);
         }
 
-        foreach (var flag in Other)
+        foreach (string? flag in Other)
         {
             hash.Add(flag);
         }
@@ -66,7 +66,7 @@ public abstract record Flags
     /// <returns>A string that represents the enabled flags.</returns>
     public sealed override string ToString()
     {
-        var flags = string.Join(
+        string flags = string.Join(
             ", ",
             GetType()
                 .GetProperties(BindingFlags.Public | BindingFlags.Instance)

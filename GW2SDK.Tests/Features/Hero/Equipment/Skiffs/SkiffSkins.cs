@@ -10,7 +10,7 @@ public class SkiffSkins
     [Fact]
     public async Task Can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<SkiffSkin> actual, MessageContext context) = await sut.Hero.Equipment.Skiffs.GetSkiffSkins(
             cancellationToken: TestContext.Current.CancellationToken
@@ -37,8 +37,8 @@ public class SkiffSkins
                     }
                 );
 
-                var json = JsonSerializer.Serialize(entry);
-                var roundtrip = JsonSerializer.Deserialize<SkiffSkin>(json);
+                string json = JsonSerializer.Serialize(entry);
+                SkiffSkin? roundtrip = JsonSerializer.Deserialize<SkiffSkin>(json);
                 Assert.Equal(entry, roundtrip);
             }
         );

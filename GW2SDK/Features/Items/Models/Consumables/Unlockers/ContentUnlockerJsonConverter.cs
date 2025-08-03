@@ -59,7 +59,7 @@ internal sealed class ContentUnlockerJsonConverter : JsonConverter<ContentUnlock
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new ContentUnlocker
         {
             Id = json.GetProperty("id").GetInt32(),

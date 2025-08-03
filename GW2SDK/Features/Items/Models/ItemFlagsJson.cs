@@ -9,23 +9,23 @@ internal static class ItemFlagsJson
 {
     public static ItemFlags GetItemFlags(this in JsonElement json)
     {
-        var accountBindOnUse = false;
-        var accountBound = false;
-        var attuned = false;
-        var bulkConsume = false;
-        var deleteWarning = false;
-        var hideSuffix = false;
-        var infused = false;
-        var monsterOnly = false;
-        var noMysticForge = false;
-        var noSalvage = false;
-        var noSell = false;
-        var notUpgradeable = false;
-        var noUnderwater = false;
-        var soulbindOnAcquire = false;
-        var soulBindOnUse = false;
-        var tonic = false;
-        var unique = false;
+        bool accountBindOnUse = false;
+        bool accountBound = false;
+        bool attuned = false;
+        bool bulkConsume = false;
+        bool deleteWarning = false;
+        bool hideSuffix = false;
+        bool infused = false;
+        bool monsterOnly = false;
+        bool noMysticForge = false;
+        bool noSalvage = false;
+        bool noSell = false;
+        bool notUpgradeable = false;
+        bool noUnderwater = false;
+        bool soulbindOnAcquire = false;
+        bool soulBindOnUse = false;
+        bool tonic = false;
+        bool unique = false;
         ValueList<string> others = [];
         foreach (JsonElement entry in json.EnumerateArray())
         {

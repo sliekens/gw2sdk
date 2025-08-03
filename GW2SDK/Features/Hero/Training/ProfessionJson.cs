@@ -72,8 +72,8 @@ internal static class ProfessionJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
-        var iconBigString = iconBig.Map(static (in JsonElement value) => value.GetStringRequired());
+        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        string iconBigString = iconBig.Map(static (in JsonElement value) => value.GetStringRequired());
         return new Profession
         {
             Id = id.Map(static (in JsonElement value) => value.GetEnum<ProfessionName>()),

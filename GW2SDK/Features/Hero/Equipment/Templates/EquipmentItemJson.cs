@@ -83,9 +83,9 @@ internal static class EquipmentItemJson
             {
             } ids)
         {
-            for (var i = 0; i < ids.Count; i++)
+            for (int i = 0; i < ids.Count; i++)
             {
-                var upgradeId = ids[i];
+                int upgradeId = ids[i];
                 switch (i)
                 {
                     case 0:

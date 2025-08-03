@@ -8,7 +8,7 @@ public class UnlockedDecorations
     [Fact]
     public async Task Can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey token = TestConfiguration.ApiKey;
 
         (HashSet<UnlockedDecoration> actual, _) = await sut.Pve.Home.GetUnlockedDecorations(

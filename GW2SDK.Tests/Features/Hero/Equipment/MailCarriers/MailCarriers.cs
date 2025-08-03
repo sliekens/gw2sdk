@@ -10,7 +10,7 @@ public class MailCarriers
     [Fact]
     public async Task Can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<MailCarrier> actual, MessageContext context) =
             await sut.Hero.Equipment.MailCarriers.GetMailCarriers(
@@ -36,8 +36,8 @@ public class MailCarriers
                 Assert.True(mailCarrier.IconUrl is null || mailCarrier.IconUrl.IsAbsoluteUri);
                 Assert.NotEmpty(mailCarrier.Name);
 
-                var json = JsonSerializer.Serialize(mailCarrier);
-                var roundtrip = JsonSerializer.Deserialize<MailCarrier>(json);
+                string json = JsonSerializer.Serialize(mailCarrier);
+                MailCarrier? roundtrip = JsonSerializer.Deserialize<MailCarrier>(json);
                 Assert.Equal(mailCarrier, roundtrip);
             }
         );

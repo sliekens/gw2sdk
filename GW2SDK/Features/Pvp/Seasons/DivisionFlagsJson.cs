@@ -9,9 +9,9 @@ internal static class DivisionFlagsJson
 {
     public static DivisionFlags GetDivisionFlags(this in JsonElement json)
     {
-        var canLosePoints = false;
-        var canLoseTiers = false;
-        var repeatable = false;
+        bool canLosePoints = false;
+        bool canLoseTiers = false;
+        bool repeatable = false;
         ValueList<string> others = [];
         foreach (JsonElement entry in json.EnumerateArray())
         {

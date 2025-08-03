@@ -53,7 +53,7 @@ internal sealed class EquipmentSkinJsonConverter : JsonConverter<EquipmentSkin>
             }
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new EquipmentSkin
         {
             Id = json.GetProperty("id").GetInt32(),

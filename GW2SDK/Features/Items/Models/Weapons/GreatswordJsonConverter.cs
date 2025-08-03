@@ -52,7 +52,7 @@ internal sealed class GreatswordJsonConverter : JsonConverter<Greatsword>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Greatsword
         {
             Id = json.GetProperty("id").GetInt32(),

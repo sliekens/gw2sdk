@@ -19,7 +19,7 @@ internal sealed class MailCarrierJsonConverter : JsonConverter<MailCarrier>
 
     public static MailCarrier? Read(in JsonElement json)
     {
-        var iconString = json.GetProperty("icon").GetStringRequired();
+        string iconString = json.GetProperty("icon").GetStringRequired();
         return new MailCarrier
         {
             Id = json.GetProperty("id").GetInt32(),
@@ -43,7 +43,7 @@ internal sealed class MailCarrierJsonConverter : JsonConverter<MailCarrier>
         writer.WriteStartObject();
         writer.WriteNumber("id", value.Id);
         writer.WriteStartArray("unlock_item_ids");
-        foreach (var itemId in value.UnlockItemIds)
+        foreach (int itemId in value.UnlockItemIds)
         {
             writer.WriteNumberValue(itemId);
         }

@@ -37,7 +37,7 @@ internal sealed class PowerCoreJsonConverter : JsonConverter<PowerCore>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new PowerCore
         {
             Id = json.GetProperty("id").GetInt32(),

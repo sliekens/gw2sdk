@@ -36,7 +36,7 @@ public sealed record CoinLink : Link
             ThrowHelper.ThrowBadArgument("Expected a coin chat link.", nameof(chatLink));
         }
 
-        var coins = buffer.ReadInt32();
+        int coins = buffer.ReadInt32();
         return new CoinLink { Coins = coins };
     }
 }

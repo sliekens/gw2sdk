@@ -52,7 +52,7 @@ internal sealed class StaffSkinJsonConverter : JsonConverter<StaffSkin>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString() ?? "";
+        string iconString = json.GetProperty("icon").GetString() ?? "";
         return new StaffSkin
         {
             Id = json.GetProperty("id").GetInt32(),

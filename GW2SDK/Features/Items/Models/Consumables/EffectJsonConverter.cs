@@ -30,7 +30,7 @@ internal sealed class EffectJsonConverter : JsonConverter<Effect>
 
     public static Effect Read(in JsonElement json)
     {
-        var iconString = "";
+        string iconString = "";
         if (json.TryGetProperty("icon", out JsonElement iconElement))
         {
             iconString = iconElement.GetString() ?? "";

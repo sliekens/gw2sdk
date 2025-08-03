@@ -37,7 +37,7 @@ internal sealed class CraftingMaterialJsonConverter : JsonConverter<CraftingMate
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new CraftingMaterial
         {
             Id = json.GetProperty("id").GetInt32(),

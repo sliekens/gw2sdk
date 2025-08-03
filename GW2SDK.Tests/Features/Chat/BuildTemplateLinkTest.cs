@@ -37,10 +37,10 @@ public class BuildTemplateLinkTest
         ProfessionName professionName
     )
     {
-        var gw2 = Composer.Resolve<Gw2Client>();
+        Gw2Client gw2 = Composer.Resolve<Gw2Client>();
 
         BuildTemplateLink sut = BuildTemplateLink.Parse(chatLink);
-        var actual = sut.ToString();
+        string actual = sut.ToString();
         Build build = await sut.GetBuild(
             gw2,
             cancellationToken: TestContext.Current.CancellationToken

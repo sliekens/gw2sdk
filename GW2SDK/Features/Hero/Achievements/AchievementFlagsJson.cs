@@ -9,18 +9,18 @@ internal static class AchievementFlagsJson
 {
     public static AchievementFlags GetAchievementFlags(this in JsonElement json)
     {
-        var categoryDisplay = false;
-        var daily = false;
-        var hidden = false;
-        var ignoreNearlyComplete = false;
-        var moveToTop = false;
-        var permanent = false;
-        var pvp = false;
-        var repairOnLogin = false;
-        var repeatable = false;
-        var requiresUnlock = false;
-        var weekly = false;
-        var monthly = false;
+        bool categoryDisplay = false;
+        bool daily = false;
+        bool hidden = false;
+        bool ignoreNearlyComplete = false;
+        bool moveToTop = false;
+        bool permanent = false;
+        bool pvp = false;
+        bool repairOnLogin = false;
+        bool repeatable = false;
+        bool requiresUnlock = false;
+        bool weekly = false;
+        bool monthly = false;
         ValueList<string> others = [];
         foreach (JsonElement entry in json.EnumerateArray())
         {

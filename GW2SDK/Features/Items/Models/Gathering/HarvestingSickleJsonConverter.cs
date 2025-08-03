@@ -51,7 +51,7 @@ internal sealed class HarvestingSickleJsonConverter : JsonConverter<HarvestingSi
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new HarvestingSickle
         {
             Id = json.GetProperty("id").GetInt32(),

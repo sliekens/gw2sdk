@@ -7,7 +7,7 @@ public class RecipesIndexByOutputItem
     [Fact]
     public async Task Can_be_found()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         const int ironIngotItemId = 19683;
         (HashSet<int> actual, MessageContext context) = await sut.Hero.Crafting.Recipes.GetRecipesIndexByOutputItemId(

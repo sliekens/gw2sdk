@@ -39,7 +39,7 @@ internal sealed class BackpackSkinJsonConverter : JsonConverter<BackpackSkin>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString() ?? "";
+        string iconString = json.GetProperty("icon").GetString() ?? "";
         return new BackpackSkin
         {
             Id = json.GetProperty("id").GetInt32(),

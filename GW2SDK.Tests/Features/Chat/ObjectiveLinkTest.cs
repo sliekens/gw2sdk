@@ -12,7 +12,7 @@ public class ObjectiveLinkTest
     {
         ObjectiveLink sut = ObjectiveLink.Parse(chatLink);
 
-        var actual = sut.ToString();
+        string actual = sut.ToString();
 
         Assert.Equal(chatLink, actual);
         Assert.Equal(mapId, sut.MapId);

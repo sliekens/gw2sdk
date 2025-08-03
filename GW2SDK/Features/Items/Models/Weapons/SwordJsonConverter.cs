@@ -48,7 +48,7 @@ internal sealed class SwordJsonConverter : JsonConverter<Sword>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Sword
         {
             Id = json.GetProperty("id").GetInt32(),

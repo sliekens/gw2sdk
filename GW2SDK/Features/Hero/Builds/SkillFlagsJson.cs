@@ -9,8 +9,8 @@ internal static class SkillFlagsJson
 {
     public static SkillFlags GetSkillFlags(this in JsonElement json)
     {
-        var groundTargeted = false;
-        var noUnderwater = false;
+        bool groundTargeted = false;
+        bool noUnderwater = false;
         ValueList<string> others = [];
         foreach (JsonElement entry in json.EnumerateArray())
         {

@@ -36,7 +36,7 @@ public sealed record SkinLink : Link
             ThrowHelper.ThrowBadArgument("Expected a skin chat link.", nameof(chatLink));
         }
 
-        var skinId = buffer.ReadInt32();
+        int skinId = buffer.ReadInt32();
         return new SkinLink { SkinId = skinId };
     }
 }

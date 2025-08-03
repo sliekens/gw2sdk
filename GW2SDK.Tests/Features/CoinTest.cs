@@ -27,7 +27,7 @@ public class CoinTest
 
         Coin sut = amount;
 
-        var actual = sut.ToString();
+        string actual = sut.ToString();
 
         Assert.Equal(expected, actual);
     }
@@ -109,7 +109,7 @@ public class CoinTest
     {
         Coin sut = new(12, 00);
 
-        var actual = sut.Amount;
+        int actual = sut.Amount;
 
         Assert.Equal(1200, actual);
     }
@@ -119,7 +119,7 @@ public class CoinTest
     {
         Coin sut = new(12, 00, 00);
 
-        var actual = sut.Amount;
+        int actual = sut.Amount;
 
         Assert.Equal(12_00_00, actual);
     }
@@ -253,7 +253,7 @@ public class CoinTest
     {
         // This should test the generic IComparable<T> which prevents unnecessary boxing
         // although there is no way to test that directly
-        var coins = new List<Coin>
+        List<Coin> coins = new()
         {
             10,
             5,
@@ -274,7 +274,7 @@ public class CoinTest
     public void Coins_can_be_sorted_when_boxed()
     {
         // This tests the non-generic IComparable which is used in boxing scenarios
-        var coins = new List<object>
+        List<object> coins = new()
         {
             new Coin(10),
             new Coin(5),
@@ -296,7 +296,7 @@ public class CoinTest
     {
         Coin sut = Coin.Zero;
 
-        var actual = sut.CompareTo(null);
+        int actual = sut.CompareTo(null);
 
         Assert.Equal(1, actual);
     }
@@ -308,10 +308,10 @@ public class CoinTest
 
         void CompareToString()
         {
-            var _ = sut.CompareTo("0");
+            int _ = sut.CompareTo("0");
         }
 
-        var reason = Assert.Throws<ArgumentException>("obj", CompareToString);
+        ArgumentException reason = Assert.Throws<ArgumentException>("obj", CompareToString);
         Assert.StartsWith("Object must be of type Coin", reason.Message, StringComparison.Ordinal);
     }
 

@@ -36,7 +36,7 @@ public sealed record AchievementLink : Link
             ThrowHelper.ThrowBadArgument("Expected an achievement chat link.", nameof(chatLink));
         }
 
-        var achievementId = buffer.ReadInt32();
+        int achievementId = buffer.ReadInt32();
         return new AchievementLink { AchievementId = achievementId };
     }
 }

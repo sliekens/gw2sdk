@@ -19,7 +19,7 @@ public class ItemLinkTest
     {
         ItemLink sut = ItemLink.Parse(chatLink);
 
-        var actual = sut.ToString();
+        string actual = sut.ToString();
 
         Assert.Equal(chatLink, actual);
         Assert.Equal(itemId, sut.ItemId);

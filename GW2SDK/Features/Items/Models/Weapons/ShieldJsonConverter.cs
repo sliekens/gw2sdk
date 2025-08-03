@@ -48,7 +48,7 @@ internal sealed class ShieldJsonConverter : JsonConverter<Shield>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Shield
         {
             Id = json.GetProperty("id").GetInt32(),

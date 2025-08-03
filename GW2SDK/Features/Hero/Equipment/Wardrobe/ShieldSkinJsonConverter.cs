@@ -52,7 +52,7 @@ internal sealed class ShieldSkinJsonConverter : JsonConverter<ShieldSkin>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString() ?? "";
+        string iconString = json.GetProperty("icon").GetString() ?? "";
         return new ShieldSkin
         {
             Id = json.GetProperty("id").GetInt32(),

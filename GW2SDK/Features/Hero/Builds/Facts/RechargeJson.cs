@@ -54,7 +54,7 @@ internal static class RechargeJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new Recharge
         {
             Text = text.Map(static (in JsonElement value) => value.GetStringRequired()),

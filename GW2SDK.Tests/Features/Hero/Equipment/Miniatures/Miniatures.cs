@@ -10,7 +10,7 @@ public class Miniatures
     [Fact]
     public async Task Can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<Miniature> actual, MessageContext context) =
             await sut.Hero.Equipment.Miniatures.GetMiniatures(
@@ -30,8 +30,8 @@ public class Miniatures
                 Assert.True(entry.Order >= 0);
                 Assert.True(entry.ItemId >= 0);
 
-                var json = JsonSerializer.Serialize(entry);
-                var roundtrip = JsonSerializer.Deserialize<Miniature>(json);
+                string json = JsonSerializer.Serialize(entry);
+                Miniature? roundtrip = JsonSerializer.Deserialize<Miniature>(json);
                 Assert.Equal(entry, roundtrip);
             }
         );

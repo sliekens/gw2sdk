@@ -59,7 +59,7 @@ internal sealed class BuildTemplateExpansionJsonConverter : JsonConverter<BuildT
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new BuildTemplateExpansion
         {
             Id = json.GetProperty("id").GetInt32(),

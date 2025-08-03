@@ -52,7 +52,7 @@ internal sealed class LongbowSkinJsonConverter : JsonConverter<LongbowSkin>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString() ?? "";
+        string iconString = json.GetProperty("icon").GetString() ?? "";
         return new LongbowSkin
         {
             Id = json.GetProperty("id").GetInt32(),

@@ -51,7 +51,7 @@ internal sealed class TransmutationJsonConverter : JsonConverter<Transmutation>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Transmutation
         {
             Id = json.GetProperty("id").GetInt32(),
@@ -83,7 +83,7 @@ internal sealed class TransmutationJsonConverter : JsonConverter<Transmutation>
         writer.WriteString(ConsumableJsonConverter.DiscriminatorName, DiscriminatorValue);
         ItemJsonConverter.WriteCommonProperties(writer, value);
         writer.WriteStartArray("skin_ids");
-        foreach (var id in value.SkinIds)
+        foreach (int id in value.SkinIds)
         {
             writer.WriteNumberValue(id);
         }

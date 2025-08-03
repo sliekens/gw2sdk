@@ -27,8 +27,8 @@ internal static class SelectedPetsJson
             }
         }
 
-        var (terrestrial1, terrestrial2) = terrestrial.Map(static (in JsonElement values) => values.GetPetIds());
-        var (aquatic1, aquatic2) = aquatic.Map(static (in JsonElement values) => values.GetPetIds());
+        (int? terrestrial1, int? terrestrial2) = terrestrial.Map(static (in JsonElement values) => values.GetPetIds());
+        (int? aquatic1, int? aquatic2) = aquatic.Map(static (in JsonElement values) => values.GetPetIds());
         return new SelectedPets
         {
             Terrestrial1 = terrestrial1,

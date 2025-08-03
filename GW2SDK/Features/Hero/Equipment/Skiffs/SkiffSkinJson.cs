@@ -37,7 +37,7 @@ internal static class SkiffSkinJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new SkiffSkin
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),

@@ -70,7 +70,7 @@ public sealed class WvwClient
         CancellationToken cancellationToken = default
     )
     {
-        var id = region switch
+        string id = region switch
         {
             WorldRegion.NorthAmerica => "na",
             WorldRegion.Europe => "eu",

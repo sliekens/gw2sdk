@@ -8,7 +8,7 @@ public class AchievementGroupsByPage
     [Fact]
     public async Task Can_be_found()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
         (HashSet<AchievementGroup> actual, MessageContext context) = await sut.Hero.Achievements.GetAchievementGroupsByPage(

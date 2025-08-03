@@ -10,7 +10,7 @@ public class AchievementCategories
     [Fact]
     public async Task Can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<AchievementCategory> actual, MessageContext context) =
             await sut.Hero.Achievements.GetAchievementCategories(
@@ -68,8 +68,8 @@ public class AchievementCategories
                     );
                 }
 
-                var json = JsonSerializer.Serialize(entry);
-                var roundTrip = JsonSerializer.Deserialize<AchievementCategory>(json);
+                string json = JsonSerializer.Serialize(entry);
+                AchievementCategory? roundTrip = JsonSerializer.Deserialize<AchievementCategory>(json);
                 Assert.Equal(entry, roundTrip);
             }
         );

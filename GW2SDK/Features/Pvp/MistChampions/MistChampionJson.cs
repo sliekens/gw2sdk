@@ -57,8 +57,8 @@ internal static class MistChampionJson
             }
         }
 
-        var overlayString = overlay.Map(static (in JsonElement value) => value.GetStringRequired());
-        var underlayString = underlay.Map(static (in JsonElement value) => value.GetStringRequired());
+        string overlayString = overlay.Map(static (in JsonElement value) => value.GetStringRequired());
+        string underlayString = underlay.Map(static (in JsonElement value) => value.GetStringRequired());
 #pragma warning disable CS0618
         return new MistChampion
         {

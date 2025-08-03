@@ -10,7 +10,7 @@ public class LegendaryLeaderboardEntries
     [InlineData("2B2E80D3-0A74-424F-B0EA-E221500B323C", "legendary", "na")]
     public async Task Can_be_found(string seasonId, string boardId, string regionId)
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<LeaderboardEntry> actual, MessageContext context) = await sut.Pvp.GetLeaderboardEntries(
             seasonId,

@@ -7,7 +7,7 @@ public class SpecialObjectivesProgress
     [Fact]
     public async Task Can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
 
         (GuildWars2.WizardsVault.Objectives.SpecialObjectivesProgress actual, MessageContext context) = await sut.WizardsVault.GetSpecialObjectivesProgress(

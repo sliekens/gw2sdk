@@ -94,7 +94,7 @@ internal sealed class WeaponSkinJsonConverter : JsonConverter<WeaponSkin>
             }
         }
 
-        var iconString = json.GetProperty("icon").GetString() ?? "";
+        string iconString = json.GetProperty("icon").GetString() ?? "";
         return new WeaponSkin
         {
             Id = json.GetProperty("id").GetInt32(),

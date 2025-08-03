@@ -9,8 +9,8 @@ internal static class InfusionSlotFlagsJson
 {
     public static InfusionSlotFlags GetInfusionSlotFlags(this in JsonElement json)
     {
-        var enrichment = false;
-        var infusion = false;
+        bool enrichment = false;
+        bool infusion = false;
         ValueList<string> others = [];
         foreach (JsonElement entry in json.EnumerateArray())
         {

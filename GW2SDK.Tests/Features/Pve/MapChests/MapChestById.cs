@@ -11,7 +11,7 @@ public class MapChestById
     [InlineData("domain_of_vabbi_heros_choice_chest")]
     public async Task Can_be_found(string id)
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (MapChest actual, MessageContext context) = await sut.Pve.MapChests.GetMapChestById(
             id,

@@ -8,7 +8,7 @@ public class MountByName
     [Fact]
     public async Task Can_be_found_by_name()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         const MountName name = MountName.Skyscale;
 

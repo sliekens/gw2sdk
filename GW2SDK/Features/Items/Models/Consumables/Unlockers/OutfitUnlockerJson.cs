@@ -102,7 +102,7 @@ internal static class OutfitUnlockerJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetString());
+        string? iconString = icon.Map(static (in JsonElement value) => value.GetString());
         return new OutfitUnlocker
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),

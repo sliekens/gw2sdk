@@ -13,8 +13,8 @@ internal sealed class Program
     public static async Task Main(string[] args)
     {
         // Create an instance of the Gw2Client, which depends on HttpClient
-        using var httpClient = new HttpClient();
-        var gw2 = new Gw2Client(httpClient);
+        using HttpClient httpClient = new();
+        Gw2Client gw2 = new(httpClient);
 
         // Fetch the current prices of all items
         await foreach (ItemPrice itemPrice in gw2.Commerce.GetItemPricesBulk().ValueOnly())

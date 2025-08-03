@@ -37,7 +37,7 @@ internal sealed class SalvageToolJsonConverter : JsonConverter<SalvageTool>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new SalvageTool
         {
             Id = json.GetProperty("id").GetInt32(),

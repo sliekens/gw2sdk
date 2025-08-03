@@ -8,7 +8,7 @@ public class Account
     [Fact]
     public async Task Basic_summary_with_any_access_token()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKeyBasic accessToken = TestConfiguration.ApiKeyBasic;
 
         (AccountSummary actual, _) = await sut.Hero.Account.GetSummary(
@@ -38,7 +38,7 @@ public class Account
     [Fact]
     public async Task Full_summary_with_high_trust_access_token()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
 
         (AccountSummary actual, _) = await sut.Hero.Account.GetSummary(

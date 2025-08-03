@@ -19,7 +19,7 @@ internal sealed class GliderSkinJsonConverter : JsonConverter<GliderSkin>
 
     public static GliderSkin? Read(in JsonElement json)
     {
-        var iconString = json.GetProperty("icon").GetStringRequired();
+        string iconString = json.GetProperty("icon").GetStringRequired();
         return new GliderSkin
         {
             Id = json.GetProperty("id").GetInt32(),
@@ -45,7 +45,7 @@ internal sealed class GliderSkinJsonConverter : JsonConverter<GliderSkin>
         writer.WriteStartObject();
         writer.WriteNumber("id", value.Id);
         writer.WriteStartArray("unlock_item_ids");
-        foreach (var element in value.UnlockItemIds)
+        foreach (int element in value.UnlockItemIds)
         {
             writer.WriteNumberValue(element);
         }
@@ -56,7 +56,7 @@ internal sealed class GliderSkinJsonConverter : JsonConverter<GliderSkin>
         writer.WriteString("name", value.Name);
         writer.WriteString("description", value.Description);
         writer.WriteStartArray("default_dye_color_ids");
-        foreach (var element in value.DefaultDyeColorIds)
+        foreach (int element in value.DefaultDyeColorIds)
         {
             writer.WriteNumberValue(element);
         }

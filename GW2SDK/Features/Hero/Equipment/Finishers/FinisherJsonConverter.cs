@@ -19,7 +19,7 @@ internal sealed class FinisherJsonConverter : JsonConverter<Finisher>
 
     public static Finisher? Read(in JsonElement json)
     {
-        var iconString = json.GetProperty("icon").GetStringRequired();
+        string iconString = json.GetProperty("icon").GetStringRequired();
         return new Finisher
         {
             Id = json.GetProperty("id").GetInt32(),
@@ -40,7 +40,7 @@ internal sealed class FinisherJsonConverter : JsonConverter<Finisher>
         writer.WriteNumber("id", value.Id);
         writer.WriteString("locked_text", value.LockedText);
         writer.WriteStartArray("unlock_item_ids");
-        foreach (var element in value.UnlockItemIds)
+        foreach (int element in value.UnlockItemIds)
         {
             writer.WriteNumberValue(element);
         }

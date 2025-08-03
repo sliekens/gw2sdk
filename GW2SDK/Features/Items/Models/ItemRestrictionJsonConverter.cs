@@ -71,7 +71,7 @@ internal sealed class ItemRestrictionJsonConverter : JsonConverter<ItemRestricti
         writer.WriteEndArray();
 
         writer.WriteStartArray("other");
-        foreach (var other in value.Other)
+        foreach (string? other in value.Other)
         {
             writer.WriteStringValue(other);
         }

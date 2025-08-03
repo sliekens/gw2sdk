@@ -47,7 +47,7 @@ internal sealed class LureJsonConverter : JsonConverter<Lure>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Lure
         {
             Id = json.GetProperty("id").GetInt32(),

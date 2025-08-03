@@ -52,7 +52,7 @@ internal sealed class LoggingToolSkinJsonConverter : JsonConverter<LoggingToolSk
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString() ?? "";
+        string iconString = json.GetProperty("icon").GetString() ?? "";
         return new LoggingToolSkin
         {
             Id = json.GetProperty("id").GetInt32(),

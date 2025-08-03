@@ -48,7 +48,7 @@ internal sealed class DaggerJsonConverter : JsonConverter<Dagger>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Dagger
         {
             Id = json.GetProperty("id").GetInt32(),

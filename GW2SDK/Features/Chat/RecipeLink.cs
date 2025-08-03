@@ -36,7 +36,7 @@ public sealed record RecipeLink : Link
             ThrowHelper.ThrowBadArgument("Expected a recipe chat link.", nameof(chatLink));
         }
 
-        var recipeId = buffer.ReadInt32();
+        int recipeId = buffer.ReadInt32();
         return new RecipeLink { RecipeId = recipeId };
     }
 }

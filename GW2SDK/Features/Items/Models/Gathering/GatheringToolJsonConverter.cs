@@ -63,7 +63,7 @@ internal sealed class GatheringToolJsonConverter : JsonConverter<GatheringTool>
             }
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new GatheringTool
         {
             Id = json.GetProperty("id").GetInt32(),

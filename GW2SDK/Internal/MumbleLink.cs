@@ -43,10 +43,10 @@ internal sealed class MumbleLink : IDisposable
     [SupportedOSPlatform("windows")]
     public static MumbleLink CreateOrOpen(string name)
     {
-        using Mutex mutex = new(true, name + "_mutex", out var created);
+        using Mutex mutex = new(true, name + "_mutex", out bool created);
         if (!created)
         {
-            var acquired = mutex.WaitOne(TimeSpan.FromSeconds(5));
+            bool acquired = mutex.WaitOne(TimeSpan.FromSeconds(5));
             if (!acquired)
             {
                 throw new TimeoutException(
@@ -73,7 +73,7 @@ internal sealed class MumbleLink : IDisposable
             ThrowHelper.ThrowObjectDisposed(this);
         }
 
-        var success = false;
+        bool success = false;
         try
         {
             view.SafeMemoryMappedViewHandle.DangerousAddRef(ref success);

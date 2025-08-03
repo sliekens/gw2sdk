@@ -26,7 +26,7 @@ appBuilder.Logging.AddSimpleConsole(options =>
 IHost app = appBuilder.Build();
 
 // Obtain a Gw2Client from the service provider, which uses the HTTP client factory
-var gw2 = app.Services.GetRequiredService<Gw2Client>();
+Gw2Client gw2 = app.Services.GetRequiredService<Gw2Client>();
 
 // Some demo code to print dye colors, using Pastel to colorize the console output
 foreach (DyeColor dye in await gw2.Hero.Equipment.Dyes.GetColors().ValueOnly())

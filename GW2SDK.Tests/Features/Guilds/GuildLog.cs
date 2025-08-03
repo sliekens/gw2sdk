@@ -10,14 +10,14 @@ public class GuildLog(ITestOutputHelper outputHelper)
     public async Task Can_be_found()
     {
         LoggingHandler.Output.Value = outputHelper;
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
         TestGuildLeader guildLeader = TestConfiguration.TestGuildLeader;
 
         (AccountSummary account, _) = await sut.Hero.Account.GetSummary(
             guildLeader.Token,
             cancellationToken: TestContext.Current.CancellationToken
         );
-        foreach (var guildId in account.LeaderOfGuildIds!)
+        foreach (string? guildId in account.LeaderOfGuildIds!)
         {
             (List<GuildLogEntry> actual, _) = await sut.Guilds.GetGuildLog(
                 guildId,
@@ -63,7 +63,7 @@ public class GuildLog(ITestOutputHelper outputHelper)
             // While we are here, check the ability to use a log ID as a skip token
             if (actual.Count > 3)
             {
-                var skipToken = actual[3].Id;
+                int skipToken = actual[3].Id;
                 (List<GuildLogEntry> range, _) = await sut.Guilds.GetGuildLog(
                     guildId,
                     skipToken,

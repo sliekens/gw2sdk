@@ -52,7 +52,7 @@ internal sealed class ScepterSkinJsonConverter : JsonConverter<ScepterSkin>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString() ?? "";
+        string iconString = json.GetProperty("icon").GetString() ?? "";
         return new ScepterSkin
         {
             Id = json.GetProperty("id").GetInt32(),

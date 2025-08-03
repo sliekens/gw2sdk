@@ -54,7 +54,7 @@ internal static class NumberJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new Number
         {
             Text = text.Map(static (in JsonElement value) => value.GetString()) ?? "",

@@ -48,7 +48,7 @@ internal sealed class FocusJsonConverter : JsonConverter<Focus>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Focus
         {
             Id = json.GetProperty("id").GetInt32(),

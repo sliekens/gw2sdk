@@ -33,7 +33,7 @@ public sealed class LinkHeader(IEnumerable<LinkValue> links)
                 href = ParseUri(result);
                 while (splitter.MoveNext(out result))
                 {
-                    var (name, value) = ParseAttribute(result);
+                    (string name, string value) = ParseAttribute(result);
                     if (name == "rel")
                     {
                         rel = value;
@@ -45,14 +45,14 @@ public sealed class LinkHeader(IEnumerable<LinkValue> links)
 
             static string ParseUri(in ReadOnlySpan<char> input)
             {
-                var startIndex = input.IndexOf('<') + 1;
-                var length = input.IndexOf('>') - startIndex;
+                int startIndex = input.IndexOf('<') + 1;
+                int length = input.IndexOf('>') - startIndex;
                 return input.Slice(startIndex, length).ToString();
             }
 
             static (string name, string value) ParseAttribute(in ReadOnlySpan<char> input)
             {
-                var splitIndex = input.IndexOf('=');
+                int splitIndex = input.IndexOf('=');
                 ReadOnlySpan<char> name = input[..splitIndex].Trim();
                 ReadOnlySpan<char> value = input[(splitIndex + 1)..].Trim();
                 return (name: name.ToString(), value.ToString());

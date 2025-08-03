@@ -35,7 +35,7 @@ internal sealed class BankTabExpansionJsonConverter : JsonConverter<BankTabExpan
 
     public static BankTabExpansion Read(in JsonElement json)
     {
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new BankTabExpansion
         {
             Id = json.GetProperty("id").GetInt32(),

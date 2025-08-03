@@ -51,7 +51,7 @@ internal sealed class LoggingAxeJsonConverter : JsonConverter<LoggingAxe>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new LoggingAxe
         {
             Id = json.GetProperty("id").GetInt32(),

@@ -25,14 +25,14 @@ public class BulkQueryTest
 
         // Cancel after 107 records have been received (arbitrary positive number less than the total)
         const int cutoff = 107;
-        var received = 0;
+        int received = 0;
         IAsyncEnumerable<StubRecord> producer = BulkQuery.QueryAsync(
             index,
             GetChunk,
             chunkSize: chunkSize,
             cancellationToken: cancellationTokenSource.Token
         );
-        var reason = await Assert.ThrowsAsync<OperationCanceledException>(async () =>
+        OperationCanceledException reason = await Assert.ThrowsAsync<OperationCanceledException>(async () =>
             {
                 await foreach (StubRecord _ in producer.WithCancellation(cancellationTokenSource.Token))
                 {

@@ -11,7 +11,7 @@ public class Titles
     [Fact]
     public async Task Titles_can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<Title> actual, MessageContext context) = await sut.Hero.Achievements.GetTitles(
             cancellationToken: TestContext.Current.CancellationToken
@@ -42,8 +42,8 @@ public class Titles
                     Assert.NotEmpty(entry.Achievements!);
                 }
 
-                var json = JsonSerializer.Serialize(entry);
-                var roundTrip = JsonSerializer.Deserialize<Title>(json);
+                string json = JsonSerializer.Serialize(entry);
+                Title? roundTrip = JsonSerializer.Deserialize<Title>(json);
                 Assert.Equal(entry, roundTrip);
             }
         );

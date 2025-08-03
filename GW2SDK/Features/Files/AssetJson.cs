@@ -27,7 +27,7 @@ internal static class AssetJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new Asset
         {
             Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),

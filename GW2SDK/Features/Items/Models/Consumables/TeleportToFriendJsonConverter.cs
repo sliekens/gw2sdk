@@ -51,7 +51,7 @@ internal sealed class TeleportToFriendJsonConverter : JsonConverter<TeleportToFr
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new TeleportToFriend
         {
             Id = json.GetProperty("id").GetInt32(),

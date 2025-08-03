@@ -7,7 +7,7 @@ public class ReceivedMapChests
     [Fact]
     public async Task Can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
 
         (HashSet<string> actual, _) = await sut.Pve.MapChests.GetReceivedMapChests(

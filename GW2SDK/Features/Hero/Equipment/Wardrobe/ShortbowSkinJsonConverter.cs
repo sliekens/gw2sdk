@@ -52,7 +52,7 @@ internal sealed class ShortbowSkinJsonConverter : JsonConverter<ShortbowSkin>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString() ?? "";
+        string iconString = json.GetProperty("icon").GetString() ?? "";
         return new ShortbowSkin
         {
             Id = json.GetProperty("id").GetInt32(),

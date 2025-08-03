@@ -19,7 +19,7 @@ internal sealed class NoveltyJsonConverter : JsonConverter<Novelty>
 
     public static Novelty? Read(in JsonElement json)
     {
-        var iconString = json.GetProperty("icon").GetStringRequired();
+        string iconString = json.GetProperty("icon").GetStringRequired();
 
         return new Novelty
         {
@@ -44,7 +44,7 @@ internal sealed class NoveltyJsonConverter : JsonConverter<Novelty>
         writer.WriteString("icon", value.IconUrl.ToString());
         writer.WriteString("slot", value.Slot.ToString());
         writer.WriteStartArray("unlock_item_ids");
-        foreach (var unlockItemId in value.UnlockItemIds)
+        foreach (int unlockItemId in value.UnlockItemIds)
         {
             writer.WriteNumberValue(unlockItemId);
         }

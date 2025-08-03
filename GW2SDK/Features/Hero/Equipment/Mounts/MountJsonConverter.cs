@@ -36,7 +36,7 @@ internal sealed class MountJsonConverter : JsonConverter<Mount>
         writer.WriteString("name", value.Name);
         writer.WriteNumber("default_skin_id", value.DefaultSkinId);
         writer.WriteStartArray("skin_ids");
-        foreach (var skinId in value.SkinIds)
+        foreach (int skinId in value.SkinIds)
         {
             writer.WriteNumberValue(skinId);
         }

@@ -32,7 +32,7 @@ internal static class UpgradeJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
 
         return new Upgrade
         {

@@ -12,7 +12,7 @@ public class TranslationLinkTest
     {
         TranslationLink sut = TranslationLink.Parse(chatLink);
 
-        var actual = sut.ToString();
+        string actual = sut.ToString();
 
         Assert.Equal(chatLink, actual);
         Assert.Equal(translationId, sut.TranslationId);

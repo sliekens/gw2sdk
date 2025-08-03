@@ -31,7 +31,7 @@ public sealed class MarkupParser
         switch (iterator.Current?.Type)
         {
             case MarkupTokenType.Text:
-                var text = iterator.Current.Value;
+                string text = iterator.Current.Value;
                 iterator.Advance();
                 return new TextNode(text);
             case MarkupTokenType.LineBreak:
@@ -51,7 +51,7 @@ public sealed class MarkupParser
     private static MarkupNode? ParseVoidNode(MarkupTokenIterator iterator)
     {
         Debug.Assert(iterator.Current?.Type == MarkupTokenType.TagVoid);
-        var tagName = iterator.Current!.Value;
+        string tagName = iterator.Current!.Value;
         iterator.Advance();
 
         if (string.Equals(tagName, "br", StringComparison.OrdinalIgnoreCase))
@@ -66,7 +66,7 @@ public sealed class MarkupParser
     private static MarkupNode? ParseTagNode(MarkupTokenIterator iterator)
     {
         Debug.Assert(iterator.Current?.Type == MarkupTokenType.TagStart);
-        var tagName = iterator.Current!.Value;
+        string tagName = iterator.Current!.Value;
         iterator.Advance();
 
         if (string.Equals(tagName, "c", StringComparison.OrdinalIgnoreCase))

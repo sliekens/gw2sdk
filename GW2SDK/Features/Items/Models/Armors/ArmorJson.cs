@@ -178,7 +178,7 @@ internal static class ArmorJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetString());
+        string? iconString = icon.Map(static (in JsonElement value) => value.GetString());
         return new Armor
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),

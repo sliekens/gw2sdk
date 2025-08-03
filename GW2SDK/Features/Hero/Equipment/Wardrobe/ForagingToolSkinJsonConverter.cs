@@ -52,7 +52,7 @@ internal sealed class ForagingToolSkinJsonConverter : JsonConverter<ForagingTool
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString() ?? "";
+        string iconString = json.GetProperty("icon").GetString() ?? "";
         return new ForagingToolSkin
         {
             Id = json.GetProperty("id").GetInt32(),

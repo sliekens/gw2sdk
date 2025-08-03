@@ -110,7 +110,7 @@ internal static class BundleSkillJson
             values.GetList(static (in JsonElement value) => value.GetEnum<ProfessionName>())
         );
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetString()) ?? "";
+        string iconString = icon.Map(static (in JsonElement value) => value.GetString()) ?? "";
 
         return new BundleSkill
         {

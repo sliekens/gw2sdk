@@ -32,7 +32,7 @@ internal sealed class BackpackJsonConverter : JsonConverter<Backpack>
             ThrowHelper.ThrowInvalidDiscriminator(discriminator.GetString());
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Backpack
         {
             Id = json.GetProperty("id").GetInt32(),
@@ -125,7 +125,7 @@ internal sealed class BackpackJsonConverter : JsonConverter<Backpack>
         }
 
         writer.WriteStartArray("stat_choices");
-        foreach (var statChoice in value.StatChoices)
+        foreach (int statChoice in value.StatChoices)
         {
             writer.WriteNumberValue(statChoice);
         }

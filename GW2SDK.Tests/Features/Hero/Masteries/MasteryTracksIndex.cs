@@ -7,7 +7,7 @@ public class MasteryTracksIndex
     [Fact]
     public async Task Masteries_index_Can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<int> actual, MessageContext context) =
             await sut.Hero.Masteries.GetMasteryTracksIndex(TestContext.Current.CancellationToken);

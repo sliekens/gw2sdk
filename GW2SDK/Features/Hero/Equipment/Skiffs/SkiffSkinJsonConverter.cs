@@ -19,7 +19,7 @@ internal sealed class SkiffSkinJsonConverter : JsonConverter<SkiffSkin>
 
     public static SkiffSkin Read(in JsonElement json)
     {
-        var iconString = json.GetProperty("icon").GetStringRequired();
+        string iconString = json.GetProperty("icon").GetStringRequired();
         return new SkiffSkin
         {
             Id = json.GetProperty("id").GetInt32(),

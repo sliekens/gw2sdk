@@ -8,7 +8,7 @@ public class V2
     [Fact]
     public async Task Has_api_metadata()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (ApiVersion actual, _) =
             await sut.Metadata.GetApiVersion(

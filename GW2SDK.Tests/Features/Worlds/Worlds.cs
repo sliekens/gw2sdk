@@ -8,7 +8,7 @@ public class Worlds
     [Fact]
     public async Task Can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<World> actual, MessageContext context) =
             await sut.Worlds.GetWorlds(cancellationToken: TestContext.Current.CancellationToken);

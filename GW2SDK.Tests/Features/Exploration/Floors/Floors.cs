@@ -9,9 +9,10 @@ using GuildWars2.Exploration.HeroChallenges;
 using GuildWars2.Exploration.Maps;
 using GuildWars2.Exploration.MasteryInsights;
 using GuildWars2.Exploration.PointsOfInterest;
-using GuildWars2.Exploration.Regions;
 using GuildWars2.Exploration.Sectors;
 using GuildWars2.Tests.TestInfrastructure;
+
+using Region = GuildWars2.Exploration.Regions.Region;
 
 namespace GuildWars2.Tests.Features.Exploration.Floors;
 
@@ -22,7 +23,7 @@ public class Floors
     [InlineData(2)]
     public async Task Can_be_listed(int continentId)
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<Floor> actual, MessageContext context) = await sut.Exploration.GetFloors(
             continentId,
@@ -41,14 +42,14 @@ public class Floors
                 Assert.NotEqual(Size.Empty, entry.TextureDimensions);
                 Assert.NotNull(entry.ClampedView);
                 Assert.NotNull(entry.Regions);
-                foreach ((var regionId, Region region) in entry.Regions)
+                foreach ((int regionId, Region region) in entry.Regions)
                 {
                     Assert.Equal(regionId, region.Id);
 
                     // Convergences and Mists Vault region names are empty
                     Assert.NotNull(region.Name);
                     Assert.NotEmpty(region.Maps);
-                    foreach ((var mapId, Map map) in region.Maps)
+                    foreach ((int mapId, Map map) in region.Maps)
                     {
                         Assert.Equal(mapId, map.Id);
                         if (map.Id == 1150)
@@ -64,7 +65,7 @@ public class Floors
                         Assert.True(map.MinLevel >= 0);
                         Assert.True(map.MaxLevel >= map.MinLevel);
                         Assert.Contains(map.DefaultFloor, floorIds);
-                        foreach ((var poiId, PointOfInterest poi) in map.PointsOfInterest)
+                        foreach ((int poiId, PointOfInterest poi) in map.PointsOfInterest)
                         {
                             Assert.True(poi.Id > 0);
                             Assert.NotNull(poi.Name);
@@ -82,7 +83,7 @@ public class Floors
                             Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
                         }
 
-                        foreach ((var heartId, Heart heart) in map.Hearts)
+                        foreach ((int heartId, Heart heart) in map.Hearts)
                         {
                             Assert.Equal(heartId, heart.Id);
                             Assert.NotEmpty(heart.Objective);
@@ -114,7 +115,7 @@ public class Floors
                             Assert.NotEqual(PointF.Empty, heroChallenge.Coordinates);
                         }
 
-                        foreach ((var sectorId, Sector sector) in map.Sectors)
+                        foreach ((int sectorId, Sector sector) in map.Sectors)
                         {
                             Assert.Equal(sectorId, sector.Id);
                             Assert.NotNull(sector.Name);

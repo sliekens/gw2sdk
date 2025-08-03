@@ -51,7 +51,7 @@ internal sealed class MountLicenseJsonConverter : JsonConverter<MountLicense>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new MountLicense
         {
             Id = json.GetProperty("id").GetInt32(),

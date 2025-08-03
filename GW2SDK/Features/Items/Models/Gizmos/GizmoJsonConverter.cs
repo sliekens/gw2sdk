@@ -53,7 +53,7 @@ internal sealed class GizmoJsonConverter : JsonConverter<Gizmo>
             }
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Gizmo
         {
             Id = json.GetProperty("id").GetInt32(),

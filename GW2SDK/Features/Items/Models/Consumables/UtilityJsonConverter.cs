@@ -47,7 +47,7 @@ internal sealed class UtilityJsonConverter : JsonConverter<Utility>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Utility
         {
             Id = json.GetProperty("id").GetInt32(),

@@ -48,7 +48,7 @@ internal sealed class MaceSkinJsonConverter : JsonConverter<MaceSkin>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString() ?? "";
+        string iconString = json.GetProperty("icon").GetString() ?? "";
         return new MaceSkin
         {
             Id = json.GetProperty("id").GetInt32(),

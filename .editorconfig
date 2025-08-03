@@ -103,9 +103,9 @@ dotnet_style_allow_statement_immediately_after_block_experimental = true:silent
 [*.cs]
 
 # var preferences
-csharp_style_var_for_built_in_types = true:silent
-csharp_style_var_when_type_is_apparent = true:silent
-csharp_style_var_elsewhere = false:silent
+csharp_style_var_for_built_in_types = false:suggestion
+csharp_style_var_when_type_is_apparent = false:suggestion
+csharp_style_var_elsewhere = false:suggestion
 
 # Expression-bodied members
 csharp_style_expression_bodied_accessors = true:silent
@@ -477,9 +477,9 @@ resharper_arrange_type_member_modifiers_highlighting = hint
 resharper_arrange_type_modifiers_highlighting = hint
 resharper_is_expression_always_true_highlighting = none
 resharper_redundant_base_qualifier_highlighting = warning
-resharper_suggest_var_or_type_built_in_types_highlighting = hint
-resharper_suggest_var_or_type_elsewhere_highlighting = hint
-resharper_suggest_var_or_type_simple_types_highlighting = hint
+resharper_suggest_var_or_type_built_in_types_highlighting = warning
+resharper_suggest_var_or_type_elsewhere_highlighting = warning
+resharper_suggest_var_or_type_simple_types_highlighting = warning
 
 # Roslynator diagnostics options
 roslynator_accessibility_modifiers = explicit # explicit|implicit
@@ -1375,7 +1375,7 @@ dotnet_diagnostic.rcs1262.severity = warning
 dotnet_diagnostic.rcs1263.severity = warning
 
 # Use 'var' or explicit type
-# Disabled: already handled by csharp_style_var_for_built_in_types, csharp_style_var_when_type_is_apparent, csharp_style_var_elsewhere
+# Disabled: already handled by ide0007, ide0008
 dotnet_diagnostic.rcs1264.severity = none
 # Options: roslynator_use_var
 

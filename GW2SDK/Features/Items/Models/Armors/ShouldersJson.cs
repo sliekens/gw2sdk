@@ -157,7 +157,7 @@ internal static class ShouldersJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetString());
+        string? iconString = icon.Map(static (in JsonElement value) => value.GetString());
         return new Shoulders
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),

@@ -33,7 +33,7 @@ gw2ClientBuilder.AddStandardResilienceHandler();
 IHost app = builder.Build();
 try
 {
-    var gw2 = app.Services.GetRequiredService<Gw2Client>();
+    Gw2Client gw2 = app.Services.GetRequiredService<Gw2Client>();
     ReferenceData referenceData = await AnsiConsole.Progress()
         .Columns(
             new TaskDescriptionColumn(),
@@ -118,11 +118,11 @@ try
     {
         Item ingredient = ItemPicker.Prompt(itemsSortedByNumberOfRecipes);
 
-        using var http = app.Services.GetRequiredService<HttpClient>();
-        var card = new ItemCard(http);
+        using HttpClient http = app.Services.GetRequiredService<HttpClient>();
+        ItemCard card = new(http);
         await card.Show(ingredient);
 
-        var recipesTable = new RecipesTable();
+        RecipesTable recipesTable = new();
         AnsiConsole.Live(recipesTable)
             .Start(live =>
                 {

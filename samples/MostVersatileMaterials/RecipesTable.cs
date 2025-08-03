@@ -26,7 +26,7 @@ internal sealed class RecipesTable : IRenderable
 
         IEnumerable<MarkupToken> tokens = MarkupLexer.Tokenize(item.Description);
         RootNode syntax = MarkupParser.Parse(tokens);
-        var description = SpectreMarkupConverter.Convert(syntax);
+        string description = SpectreMarkupConverter.Convert(syntax);
         table.AddRow(item.Name.EscapeMarkup(), description);
     }
 }

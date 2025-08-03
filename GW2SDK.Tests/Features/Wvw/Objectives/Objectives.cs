@@ -9,7 +9,7 @@ public class Objectives
     [Fact]
     public async Task Can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<Objective> actual, MessageContext context) =
             await sut.Wvw.GetObjectives(cancellationToken: TestContext.Current.CancellationToken);

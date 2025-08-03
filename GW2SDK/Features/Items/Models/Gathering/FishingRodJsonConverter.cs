@@ -51,7 +51,7 @@ internal sealed class FishingRodJsonConverter : JsonConverter<FishingRod>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new FishingRod
         {
             Id = json.GetProperty("id").GetInt32(),

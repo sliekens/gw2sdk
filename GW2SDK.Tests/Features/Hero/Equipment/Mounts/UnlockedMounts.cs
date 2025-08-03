@@ -8,7 +8,7 @@ public class UnlockedMounts
     [Fact]
     public async Task Unlocked_mounts_can_be_found()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
 
         (HashSet<Extensible<MountName>> actual, _) = await sut.Hero.Equipment.Mounts.GetUnlockedMounts(

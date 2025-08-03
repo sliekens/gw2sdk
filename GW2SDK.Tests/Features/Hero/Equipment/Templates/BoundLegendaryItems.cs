@@ -10,7 +10,7 @@ public class BoundLegendaryItems
     [Fact]
     public async Task Can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
 
         (HashSet<BoundLegendaryItem> actual, MessageContext context) = await sut.Hero.Equipment.Templates.GetBoundLegendaryItems(
@@ -27,8 +27,8 @@ public class BoundLegendaryItems
                 Assert.True(entry.Id > 0);
                 Assert.True(entry.Count > 0);
 
-                var json = JsonSerializer.Serialize(entry);
-                var roundtrip = JsonSerializer.Deserialize<BoundLegendaryItem>(json);
+                string json = JsonSerializer.Serialize(entry);
+                BoundLegendaryItem? roundtrip = JsonSerializer.Deserialize<BoundLegendaryItem>(json);
                 Assert.Equal(entry, roundtrip);
             }
         );

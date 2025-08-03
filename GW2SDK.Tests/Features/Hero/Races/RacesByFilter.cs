@@ -9,7 +9,7 @@ public class RacesByFilter
     [Fact]
     public async Task Can_be_filtered_by_name()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         HashSet<RaceName> names =
         [

@@ -10,7 +10,7 @@ public class UnlockedFinishers
     [Fact]
     public async Task Can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
 
         (HashSet<UnlockedFinisher> actual, _) = await sut.Hero.Equipment.Finishers.GetUnlockedFinishers(
@@ -33,8 +33,8 @@ public class UnlockedFinishers
                     Assert.True(entry.Quantity >= 0);
                 }
 
-                var json = JsonSerializer.Serialize(entry);
-                var roundTrip = JsonSerializer.Deserialize<UnlockedFinisher>(json);
+                string json = JsonSerializer.Serialize(entry);
+                UnlockedFinisher? roundTrip = JsonSerializer.Deserialize<UnlockedFinisher>(json);
                 Assert.Equal(entry, roundTrip);
             }
         );

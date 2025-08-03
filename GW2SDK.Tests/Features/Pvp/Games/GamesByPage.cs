@@ -8,7 +8,7 @@ public class GamesByPage
     [Fact]
     public async Task Can_be_filtered_by_page()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
 
         const int pageSize = 3;

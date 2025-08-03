@@ -47,9 +47,9 @@ internal static class SkillBadgeJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
-        var overlayString = overlay.Map(static (in JsonElement value) => value.GetStringRequired());
-        var smallOverlayString = smallOverlay.Map(static (in JsonElement value) => value.GetStringRequired());
+        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        string overlayString = overlay.Map(static (in JsonElement value) => value.GetStringRequired());
+        string smallOverlayString = smallOverlay.Map(static (in JsonElement value) => value.GetStringRequired());
         return new SkillBadge
         {
             Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),

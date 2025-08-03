@@ -59,7 +59,7 @@ internal sealed class JadeBotSkinUnlockerJsonConverter : JsonConverter<JadeBotSk
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new JadeBotSkinUnlocker
         {
             Id = json.GetProperty("id").GetInt32(),

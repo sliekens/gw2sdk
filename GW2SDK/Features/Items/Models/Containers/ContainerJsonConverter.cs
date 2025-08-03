@@ -57,7 +57,7 @@ internal sealed class ContainerJsonConverter : JsonConverter<Container>
             }
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Container
         {
             Id = json.GetProperty("id").GetInt32(),

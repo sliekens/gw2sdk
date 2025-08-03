@@ -7,7 +7,7 @@ public class Season
     [Fact]
     public async Task Can_be_found()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (GuildWars2.WizardsVault.Seasons.Season actual, MessageContext context) =
             await sut.WizardsVault.GetSeason(

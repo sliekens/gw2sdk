@@ -22,7 +22,7 @@ internal sealed class SpectreMarkupConverter
     {
         ArgumentNullException.ThrowIfNull(root);
 
-        var builder = new StringBuilder();
+        StringBuilder builder = new();
         foreach (MarkupNode node in root.Children)
         {
             builder.Append(ConvertNode(node));
@@ -36,27 +36,27 @@ internal sealed class SpectreMarkupConverter
         switch (node.Type)
         {
             case MarkupNodeType.Text:
-                var text = (TextNode)node;
+                TextNode text = (TextNode)node;
                 return Markup.Escape(text.Text);
 
             case MarkupNodeType.LineBreak:
                 return Environment.NewLine;
 
             case MarkupNodeType.ColoredText:
-                var coloredText = (ColoredTextNode)node;
-                var builder = new StringBuilder();
+                ColoredTextNode coloredText = (ColoredTextNode)node;
+                StringBuilder builder = new();
                 foreach (MarkupNode child in coloredText.Children)
                 {
                     builder.Append(ConvertNode(child));
                 }
 
-                var content = builder.ToString();
+                string content = builder.ToString();
                 if (coloredText.Color.StartsWith('#'))
                 {
-                    var colorCode = coloredText.Color;
+                    string colorCode = coloredText.Color;
                     return $"[{colorCode}]{content}[/]";
                 }
-                else if (ColorMap.TryGetValue(coloredText.Color, out var colorCode))
+                else if (ColorMap.TryGetValue(coloredText.Color, out string? colorCode))
                 {
                     return $"[{colorCode}]{content}[/]";
                 }

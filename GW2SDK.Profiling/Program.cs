@@ -6,10 +6,10 @@ using GuildWars2.Hero.Crafting.Recipes;
 
 using Microsoft.Extensions.DependencyInjection;
 
-var services = new ServiceCollection();
+ServiceCollection services = new();
 IHttpClientBuilder httpClientBuilder = services.AddHttpClient<Gw2Client>();
 httpClientBuilder.AddStandardResilienceHandler();
-var gw2Client = services.BuildServiceProvider().GetRequiredService<Gw2Client>();
+Gw2Client gw2Client = services.BuildServiceProvider().GetRequiredService<Gw2Client>();
 
 await foreach (Recipe recipe in gw2Client.Hero.Crafting.Recipes.GetRecipesBulk().ValueOnly().ConfigureAwait(false))
 {

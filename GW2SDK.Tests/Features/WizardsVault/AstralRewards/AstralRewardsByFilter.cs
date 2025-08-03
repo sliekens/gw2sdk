@@ -8,7 +8,7 @@ public class AstralRewardsByFilter
     [Fact]
     public async Task Can_be_filtered_by_id()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         HashSet<int> ids =
         [

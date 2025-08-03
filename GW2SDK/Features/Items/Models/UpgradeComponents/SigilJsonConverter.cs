@@ -44,7 +44,7 @@ internal sealed class SigilJsonConverter : JsonConverter<Sigil>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Sigil
         {
             Id = json.GetProperty("id").GetInt32(),

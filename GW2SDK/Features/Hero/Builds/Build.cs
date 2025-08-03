@@ -66,17 +66,17 @@ public sealed record Build
     /// <returns>The IDs of the selected traits.</returns>
     public IEnumerable<int> SelectedTraitIds()
     {
-        foreach (var id in Specialization1?.SelectedTraitIds() ?? Enumerable.Empty<int>())
+        foreach (int id in Specialization1?.SelectedTraitIds() ?? Enumerable.Empty<int>())
         {
             yield return id;
         }
 
-        foreach (var id in Specialization2?.SelectedTraitIds() ?? Enumerable.Empty<int>())
+        foreach (int id in Specialization2?.SelectedTraitIds() ?? Enumerable.Empty<int>())
         {
             yield return id;
         }
 
-        foreach (var id in Specialization3?.SelectedTraitIds() ?? Enumerable.Empty<int>())
+        foreach (int id in Specialization3?.SelectedTraitIds() ?? Enumerable.Empty<int>())
         {
             yield return id;
         }
@@ -86,12 +86,12 @@ public sealed record Build
     /// <returns>The IDs of the selected skills.</returns>
     public IEnumerable<int> SelectedSkillIds()
     {
-        foreach (var id in Skills.SelectedSkillIds())
+        foreach (int id in Skills.SelectedSkillIds())
         {
             yield return id;
         }
 
-        foreach (var id in AquaticSkills.SelectedSkillIds())
+        foreach (int id in AquaticSkills.SelectedSkillIds())
         {
             yield return id;
         }

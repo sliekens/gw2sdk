@@ -8,7 +8,7 @@ public class EmblemBackgroundsByPage
     [Fact]
     public async Task Background_emblems_can_be_filtered_by_page()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         const int pageSize = 3;
         (HashSet<EmblemBackground> actual, MessageContext context) = await sut.Guilds.GetEmblemBackgroundsByPage(

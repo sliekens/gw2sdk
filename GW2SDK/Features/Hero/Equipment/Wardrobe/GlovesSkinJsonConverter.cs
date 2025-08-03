@@ -47,7 +47,7 @@ internal sealed class GlovesSkinJsonConverter : JsonConverter<GlovesSkin>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString() ?? "";
+        string iconString = json.GetProperty("icon").GetString() ?? "";
         return new GlovesSkin
         {
             Id = json.GetProperty("id").GetInt32(),

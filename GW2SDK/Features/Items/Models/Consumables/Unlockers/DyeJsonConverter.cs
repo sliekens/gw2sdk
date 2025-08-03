@@ -55,7 +55,7 @@ internal sealed class DyeJsonConverter : JsonConverter<Dye>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Dye
         {
             Id = json.GetProperty("id").GetInt32(),

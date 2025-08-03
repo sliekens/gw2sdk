@@ -47,7 +47,7 @@ internal static class NoveltyJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
 
         return new Novelty
         {

@@ -71,7 +71,7 @@ public sealed record ItemLink : Link
 
         buffer.WriteUInt24(ItemId);
 
-        var flagsAddress = buffer.Skip();
+        int flagsAddress = buffer.Skip();
         if (SkinId.HasValue)
         {
             buffer.Buffer[flagsAddress] |= 0b1000_0000;
@@ -116,11 +116,11 @@ public sealed record ItemLink : Link
             ThrowHelper.ThrowBadArgument("Expected an item chat link.", nameof(chatLink));
         }
 
-        var count = buffer.ReadUInt8();
+        byte count = buffer.ReadUInt8();
 
-        var itemId = buffer.ReadUInt24();
+        int itemId = buffer.ReadUInt24();
 
-        var flags = buffer.ReadUInt8();
+        byte flags = buffer.ReadUInt8();
 
         int? skinId = default;
         if ((flags & 0b1000_0000) != 0)

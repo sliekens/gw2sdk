@@ -26,7 +26,7 @@ internal sealed class ReleaseNoteTable : IRenderable
 
     public void AddRow(Schema schemaVersion)
     {
-        var formatted = DateTimeOffset.Parse(schemaVersion.Version, CultureInfo.InvariantCulture)
+        string formatted = DateTimeOffset.Parse(schemaVersion.Version, CultureInfo.InvariantCulture)
             .ToString("D", CultureInfo.CurrentCulture);
         table.AddRow(formatted.EscapeMarkup(), schemaVersion.Description.EscapeMarkup());
     }

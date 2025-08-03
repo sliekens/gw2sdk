@@ -10,7 +10,7 @@ public class MountSkins
     [Fact]
     public async Task Mount_skins_can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<MountSkin> actual, MessageContext context) = await sut.Hero.Equipment.Mounts.GetMountSkins(
             cancellationToken: TestContext.Current.CancellationToken
@@ -36,8 +36,8 @@ public class MountSkins
 
                 Assert.True(entry.Mount.IsDefined());
 
-                var json = JsonSerializer.Serialize(entry);
-                var roundtrip = JsonSerializer.Deserialize<MountSkin>(json);
+                string json = JsonSerializer.Serialize(entry);
+                MountSkin? roundtrip = JsonSerializer.Deserialize<MountSkin>(json);
                 Assert.Equal(entry, roundtrip);
             }
         );

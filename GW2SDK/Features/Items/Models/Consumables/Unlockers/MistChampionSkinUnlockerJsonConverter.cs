@@ -60,7 +60,7 @@ internal sealed class
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new MistChampionSkinUnlocker
         {
             Id = json.GetProperty("id").GetInt32(),

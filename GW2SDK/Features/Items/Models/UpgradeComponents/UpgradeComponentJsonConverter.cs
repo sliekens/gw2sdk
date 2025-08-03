@@ -59,7 +59,7 @@ internal sealed class UpgradeComponentJsonConverter : JsonConverter<UpgradeCompo
             }
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new UpgradeComponent
         {
             Id = json.GetProperty("id").GetInt32(),

@@ -203,7 +203,7 @@ internal static class UpgradeComponentJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetString());
+        string? iconString = icon.Map(static (in JsonElement value) => value.GetString());
         return new UpgradeComponent
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),

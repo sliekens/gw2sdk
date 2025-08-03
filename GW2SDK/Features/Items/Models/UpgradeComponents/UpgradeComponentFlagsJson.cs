@@ -9,29 +9,29 @@ internal static class UpgradeComponentFlagsJson
 {
     public static UpgradeComponentFlags GetUpgradeComponentFlags(this in JsonElement json)
     {
-        var heavyArmor = false;
-        var mediumArmor = false;
-        var lightArmor = false;
-        var axe = false;
-        var dagger = false;
-        var focus = false;
-        var greatsword = false;
-        var hammer = false;
-        var harpoon = false;
-        var longbow = false;
-        var mace = false;
-        var pistol = false;
-        var rifle = false;
-        var scepter = false;
-        var shield = false;
-        var shortbow = false;
-        var speargun = false;
-        var staff = false;
-        var sword = false;
-        var torch = false;
-        var trident = false;
-        var trinket = false;
-        var warhorn = false;
+        bool heavyArmor = false;
+        bool mediumArmor = false;
+        bool lightArmor = false;
+        bool axe = false;
+        bool dagger = false;
+        bool focus = false;
+        bool greatsword = false;
+        bool hammer = false;
+        bool harpoon = false;
+        bool longbow = false;
+        bool mace = false;
+        bool pistol = false;
+        bool rifle = false;
+        bool scepter = false;
+        bool shield = false;
+        bool shortbow = false;
+        bool speargun = false;
+        bool staff = false;
+        bool sword = false;
+        bool torch = false;
+        bool trident = false;
+        bool trinket = false;
+        bool warhorn = false;
         ValueList<string> others = [];
         foreach (JsonElement entry in json.EnumerateArray())
         {

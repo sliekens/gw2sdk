@@ -72,10 +72,10 @@ internal static class SpecializationJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
-        var backgroundString = background.Map(static (in JsonElement value) => value.GetStringRequired());
-        var professionBigIconString = professionIconBig.Map(static (in JsonElement value) => value.GetString()) ?? "";
-        var professionIconString = professionIcon.Map(static (in JsonElement value) => value.GetString()) ?? "";
+        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        string backgroundString = background.Map(static (in JsonElement value) => value.GetStringRequired());
+        string professionBigIconString = professionIconBig.Map(static (in JsonElement value) => value.GetString()) ?? "";
+        string professionIconString = professionIcon.Map(static (in JsonElement value) => value.GetString()) ?? "";
 #pragma warning disable CS0618
         return new Specialization
         {

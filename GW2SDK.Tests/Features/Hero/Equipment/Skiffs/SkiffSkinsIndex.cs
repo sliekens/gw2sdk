@@ -7,7 +7,7 @@ public class SkiffSkinsIndex
     [Fact]
     public async Task Can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<int> actual, MessageContext context) =
             await sut.Hero.Equipment.Skiffs.GetSkiffSkinsIndex(

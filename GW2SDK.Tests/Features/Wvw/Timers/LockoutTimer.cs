@@ -10,7 +10,7 @@ public class LockoutTimer
     [Fact]
     public async Task Can_be_found()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (WvwTimer actual, MessageContext context) =
             await sut.Wvw.GetLockoutTimer(TestContext.Current.CancellationToken);

@@ -55,7 +55,7 @@ internal static class PercentageJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new Percentage
         {
             Text = text.Map(static (in JsonElement value) => value.GetStringRequired()),

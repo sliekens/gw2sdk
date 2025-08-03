@@ -10,7 +10,7 @@ public class EquipmentTemplates
     [Fact]
     public async Task Can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
         TestCharacter character = TestConfiguration.TestCharacter;
         ApiKey accessToken = TestConfiguration.ApiKey;
 
@@ -37,8 +37,8 @@ public class EquipmentTemplates
                 Assert.NotNull(entry.PvpEquipment);
                 PvpEquipmentValidation.Validate(entry.PvpEquipment);
 
-                var json = JsonSerializer.Serialize(entry);
-                var roundtrip = JsonSerializer.Deserialize<EquipmentTemplate>(json);
+                string json = JsonSerializer.Serialize(entry);
+                EquipmentTemplate? roundtrip = JsonSerializer.Deserialize<EquipmentTemplate>(json);
                 Assert.Equal(entry, roundtrip);
             }
         );

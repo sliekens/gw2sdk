@@ -11,7 +11,7 @@ public class RegionById
     [InlineData(1, 0, 3)]
     public async Task Can_be_found(int continentId, int floorId, int regionId)
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (Region actual, MessageContext context) = await sut.Exploration.GetRegionById(
             continentId,

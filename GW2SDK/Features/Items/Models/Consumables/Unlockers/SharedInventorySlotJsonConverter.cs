@@ -59,7 +59,7 @@ internal sealed class SharedInventorySlotJsonConverter : JsonConverter<SharedInv
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new SharedInventorySlot
         {
             Id = json.GetProperty("id").GetInt32(),

@@ -16,12 +16,12 @@ internal sealed class ItemCard(HttpClient httpClient)
             .AddColumn("Ingredient")
             .AddColumn("Description");
 
-        var lexer = new MarkupLexer();
-        var parser = new MarkupParser();
-        var converter = new SpectreMarkupConverter();
+        MarkupLexer lexer = new();
+        MarkupParser parser = new();
+        SpectreMarkupConverter converter = new();
         IEnumerable<MarkupToken> tokens = MarkupLexer.Tokenize(item.Description);
         RootNode syntax = MarkupParser.Parse(tokens);
-        var description = SpectreMarkupConverter.Convert(syntax);
+        string description = SpectreMarkupConverter.Convert(syntax);
 
         itemTable.AddRow(
             new CanvasImage(ingredientIcon).MaxWidth(32),

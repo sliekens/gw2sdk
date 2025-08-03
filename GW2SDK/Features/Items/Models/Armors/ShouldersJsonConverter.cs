@@ -46,7 +46,7 @@ internal sealed class ShouldersJsonConverter : JsonConverter<Shoulders>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Shoulders
         {
             Id = json.GetProperty("id").GetInt32(),

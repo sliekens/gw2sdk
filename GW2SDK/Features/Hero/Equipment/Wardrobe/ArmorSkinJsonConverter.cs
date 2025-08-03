@@ -67,7 +67,7 @@ internal sealed class ArmorSkinJsonConverter : JsonConverter<ArmorSkin>
             }
         }
 
-        var iconString = json.GetProperty("icon").GetString() ?? "";
+        string iconString = json.GetProperty("icon").GetString() ?? "";
         return new ArmorSkin
         {
             Id = json.GetProperty("id").GetInt32(),

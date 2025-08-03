@@ -8,7 +8,7 @@ public class FileById
     [Fact]
     public async Task Can_be_found()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         const string id = "map_vendor_ecto";
 

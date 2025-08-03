@@ -72,7 +72,7 @@ internal sealed class ItemFlagsJsonConverter : JsonConverter<ItemFlags>
         writer.WriteBoolean("tonic", value.Tonic);
         writer.WriteBoolean("unique", value.Unique);
         writer.WriteStartArray("other");
-        foreach (var other in value.Other)
+        foreach (string other in value.Other)
         {
             writer.WriteStringValue(other);
         }

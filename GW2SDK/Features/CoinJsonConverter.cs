@@ -11,7 +11,7 @@ internal sealed class CoinJsonConverter : JsonConverter<Coin>
         JsonSerializerOptions options
     )
     {
-        var amount = reader.GetInt32();
+        int amount = reader.GetInt32();
         return new Coin(amount);
     }
 

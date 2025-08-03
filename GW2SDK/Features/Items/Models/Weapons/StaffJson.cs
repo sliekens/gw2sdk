@@ -171,7 +171,7 @@ internal static class StaffJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetString());
+        string? iconString = icon.Map(static (in JsonElement value) => value.GetString());
         return new Staff
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),

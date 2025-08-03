@@ -171,7 +171,7 @@ internal static class LargeBundleJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetString());
+        string? iconString = icon.Map(static (in JsonElement value) => value.GetString());
         return new LargeBundle
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),

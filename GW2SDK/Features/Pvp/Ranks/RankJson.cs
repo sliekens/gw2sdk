@@ -52,7 +52,7 @@ internal static class RankJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new Rank
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),

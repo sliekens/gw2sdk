@@ -109,7 +109,7 @@ internal static class ItemRestrictionJson
             }
             else
             {
-                var restriction = entry.GetString();
+                string? restriction = entry.GetString();
                 if (!string.IsNullOrEmpty(restriction))
                 {
                     other.Add(restriction!);

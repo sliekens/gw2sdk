@@ -27,7 +27,7 @@ internal static class AccountWvwGuildJson
             }
         }
 
-        var teamIdValue = teamId.Map(static (in JsonElement value) => value.GetInt32());
+        int? teamIdValue = teamId.Map(static (in JsonElement value) => value.GetInt32());
         return new AccountWvwGuild
         {
             TeamId = teamIdValue > 0 ? teamIdValue : null,

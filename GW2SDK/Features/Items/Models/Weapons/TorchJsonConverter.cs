@@ -48,7 +48,7 @@ internal sealed class TorchJsonConverter : JsonConverter<Torch>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Torch
         {
             Id = json.GetProperty("id").GetInt32(),

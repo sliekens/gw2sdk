@@ -25,7 +25,7 @@ internal static class ServiceJson
         OptionalMember effectIcon = "icon";
         OptionalMember effectDescription = "description";
         NullableMember guildUpgradeId = "guild_upgrade_id";
-        var hasEffect = false;
+        bool hasEffect = false;
 
         foreach (JsonProperty member in json.EnumerateObject())
         {
@@ -132,7 +132,7 @@ internal static class ServiceJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetString());
+        string? iconString = icon.Map(static (in JsonElement value) => value.GetString());
         return new Service
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),
@@ -166,7 +166,7 @@ internal static class ServiceJson
 #pragma warning restore CS0618
                     IconUrl = effectIcon.Map(static (in JsonElement value) =>
                     {
-                        var href = value.GetString();
+                        string? href = value.GetString();
                         return !string.IsNullOrEmpty(href) ? new Uri(href) : null;
                     })
                 }

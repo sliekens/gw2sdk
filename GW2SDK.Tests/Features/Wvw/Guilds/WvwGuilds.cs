@@ -11,7 +11,7 @@ public class WvwGuilds
     [InlineData(WorldRegion.Europe)]
     public async Task Can_be_listed(WorldRegion region)
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<WvwGuild> actual, MessageContext context) = await sut.Wvw.GetWvwGuilds(
             region,

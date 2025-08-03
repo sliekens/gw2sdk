@@ -11,7 +11,7 @@ public class Outfits
     [Fact]
     public async Task Can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<Outfit> actual, MessageContext context) = await sut.Hero.Equipment.Outfits.GetOutfits(
             cancellationToken: TestContext.Current.CancellationToken
@@ -35,8 +35,8 @@ public class Outfits
                 OutfitLink chatLinkRoundtrip = OutfitLink.Parse(chatLink.ToString());
                 Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
 
-                var json = JsonSerializer.Serialize(entry);
-                var roundtrip = JsonSerializer.Deserialize<Outfit>(json);
+                string json = JsonSerializer.Serialize(entry);
+                Outfit? roundtrip = JsonSerializer.Deserialize<Outfit>(json);
                 Assert.Equal(entry, roundtrip);
             }
         );

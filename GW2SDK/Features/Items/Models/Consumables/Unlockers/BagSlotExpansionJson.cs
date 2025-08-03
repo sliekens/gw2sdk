@@ -102,7 +102,7 @@ internal static class BagSlotExpansionJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetString());
+        string? iconString = icon.Map(static (in JsonElement value) => value.GetString());
         return new BagSlotExpansion
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),

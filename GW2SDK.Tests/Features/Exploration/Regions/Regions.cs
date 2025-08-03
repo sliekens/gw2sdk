@@ -10,7 +10,7 @@ public class Regions
     [InlineData(2, 1)]
     public async Task Can_be_listed(int continentId, int floorId)
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<Region> actual, MessageContext context) = await sut.Exploration.GetRegions(
             continentId,

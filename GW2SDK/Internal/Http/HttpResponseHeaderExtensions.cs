@@ -37,7 +37,7 @@ internal static class HttpResponseHeaderExtensions
             last = Hyperlink.None;
         if (instance.TryGetValues(Gw2ResponseHeaderName.Link, out IEnumerable<string>? values))
         {
-            foreach (var value in values)
+            foreach (string? value in values)
             {
                 LinkHeader header = LinkHeader.Parse(value);
                 foreach (LinkValue link in header.Links)
@@ -76,9 +76,9 @@ internal static class HttpResponseHeaderExtensions
     {
         if (instance.TryGetValues(headerName, out IEnumerable<string>? values))
         {
-            foreach (var value in values)
+            foreach (string? value in values)
             {
-                if (int.TryParse(value, out var int32))
+                if (int.TryParse(value, out int int32))
                 {
                     return int32;
                 }

@@ -52,7 +52,7 @@ internal sealed class GameListener(
             return;
         }
 
-        var currentSpecialization = "none";
+        string currentSpecialization = "none";
         if (referenceData.Specializations.TryGetValue(
                 identity.SpecializationId,
                 out Specialization? specialization
@@ -61,19 +61,19 @@ internal sealed class GameListener(
             currentSpecialization = specialization.Name;
         }
 
-        var currentMap = "unknown";
+        string currentMap = "unknown";
         if (referenceData.Maps.TryGetValue(identity.MapId, out MapSummary? map))
         {
             currentMap = map.Name;
         }
 
-        var currentWorld = "unknown";
+        string currentWorld = "unknown";
         if (referenceData.Worlds.TryGetValue((int)identity.WorldId, out World? world))
         {
             currentWorld = world.Name;
         }
 
-        var currentTeamColor = "none";
+        string? currentTeamColor = "none";
         if (referenceData.Colors.TryGetValue(identity.TeamColorId, out DyeColor? teamColor))
         {
             currentTeamColor = "     ".PastelBg(teamColor.Cloth.Rgb);
@@ -211,7 +211,7 @@ internal sealed class GameListener(
 
     private static void PrintHeader(string header)
     {
-        var formatted = $"\u2b51\u2b51\u2b51 {header} \u2b51\u2b51\u2b51".Pastel("#FFD700")
+        string? formatted = $"\u2b51\u2b51\u2b51 {header} \u2b51\u2b51\u2b51".Pastel("#FFD700")
             .PastelBg("#00008B");
         Console.WriteLine(formatted);
     }
@@ -223,7 +223,7 @@ internal sealed class GameListener(
 
     private static void Print<T>(string name, T value)
     {
-        var formatted = $"{name,-30} : {value}";
+        string formatted = $"{name,-30} : {value}";
         Console.WriteLine(formatted.PadRight(Console.WindowWidth - 1));
     }
 }

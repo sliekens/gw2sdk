@@ -8,7 +8,7 @@ public class ExchangeGemsToGold
     [Fact]
     public async Task You_can_exchange_gems_for_gold()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         const int gems = 800;
 

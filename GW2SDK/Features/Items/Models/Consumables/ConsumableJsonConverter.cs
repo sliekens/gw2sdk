@@ -81,7 +81,7 @@ internal sealed class ConsumableJsonConverter : JsonConverter<Consumable>
             }
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Consumable
         {
             Id = json.GetProperty("id").GetInt32(),

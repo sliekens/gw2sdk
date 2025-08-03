@@ -7,7 +7,7 @@ public class EquipmentTemplateNumbers
     [Fact]
     public async Task Can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
         TestCharacter character = TestConfiguration.TestCharacter;
         ApiKey accessToken = TestConfiguration.ApiKey;
 

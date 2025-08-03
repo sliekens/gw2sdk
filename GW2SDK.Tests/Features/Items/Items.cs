@@ -14,9 +14,9 @@ public class Items
     {
         // The JsonLinesHttpMessageHandler simulates the behavior of the real API
         // because bulk enumeration quickly exhausts the API rate limit
-        using var handler = new JsonLinesHttpMessageHandler("Data/items.jsonl.gz");
-        using var httpClient = new HttpClient(handler);
-        var sut = new Gw2Client(httpClient);
+        using JsonLinesHttpMessageHandler handler = new("Data/items.jsonl.gz");
+        using HttpClient httpClient = new(handler);
+        Gw2Client sut = new(httpClient);
         await foreach ((Item actual, MessageContext context) in sut.Items.GetItemsBulk(
                 cancellationToken: TestContext.Current.CancellationToken
             ))
@@ -52,7 +52,7 @@ public class Items
                         case RecipeSheet recipe:
                             Assert.True(recipe.Id > 0);
                             Assert.NotNull(recipe.ExtraRecipeIds);
-                            foreach ((var extraRecipeId, RecipeLink? extraRecipeLink) in
+                            foreach ((int extraRecipeId, RecipeLink? extraRecipeLink) in
                                 recipe.ExtraRecipeIds.Zip(
                                     recipe.GetExtraRecipeChatLinks(),
                                     (extraRecipeId, extraRecipeLink) =>
@@ -263,15 +263,15 @@ public class Items
     {
         // The JsonLinesHttpMessageHandler simulates the behavior of the real API
         // because bulk enumeration quickly exhausts the API rate limit
-        using var handler = new JsonLinesHttpMessageHandler("Data/items.jsonl.gz");
-        using var httpClient = new HttpClient(handler);
-        var sut = new Gw2Client(httpClient);
+        using JsonLinesHttpMessageHandler handler = new("Data/items.jsonl.gz");
+        using HttpClient httpClient = new(handler);
+        Gw2Client sut = new(httpClient);
         await foreach (Item original in sut.Items
             .GetItemsBulk(cancellationToken: TestContext.Current.CancellationToken)
             .ValueOnly(TestContext.Current.CancellationToken))
         {
-            var json = JsonSerializer.Serialize(original);
-            var roundTrip = JsonSerializer.Deserialize<Item>(json);
+            string json = JsonSerializer.Serialize(original);
+            Item? roundTrip = JsonSerializer.Deserialize<Item>(json);
             Assert.IsType(original.GetType(), roundTrip);
             Assert.Equal(original, roundTrip);
         }

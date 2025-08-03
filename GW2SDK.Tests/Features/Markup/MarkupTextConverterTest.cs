@@ -7,7 +7,7 @@ public class MarkupTextConverterTest
     [Fact]
     public void Describe_End_of_Dragons_Launch_Supply_Drop_Requisition()
     {
-        var input = "Use this to sign your account up for weekly End of Dragons Launch Supply "
+        string input = "Use this to sign your account up for weekly End of Dragons Launch Supply "
             + "Drops. Receive the first drop immediately and three more between now and "
             + "March 21.<br><br>First Drop:<br>A Red Crane Weapon Choice, 5 Black Lion "
             + "Chest Keys, a Golden Black Lion Chest Key, and 5 <REDACTED> Dye Kits.<br>"
@@ -19,7 +19,7 @@ public class MarkupTextConverterTest
             + "Drop:<br>A Gold Essence Weapon Choice, 2 Guaranteed Wardrobe Unlocks, and "
             + "2 Black Lion Miniature Claim Tickets.";
 
-        var actual = MarkupConverter.ToPlainText(input);
+        string actual = MarkupConverter.ToPlainText(input);
 
         Assert.Equal(
             """

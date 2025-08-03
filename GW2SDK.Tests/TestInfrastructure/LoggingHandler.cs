@@ -67,13 +67,13 @@ internal sealed class LoggingHandler : DelegatingHandler
 
                 try
                 {
-                    using var decompressed = new GZipStream(
+                    using GZipStream decompressed = new(
                         content,
                         CompressionMode.Decompress,
                         true
                     );
-                    using var reader = new StreamReader(decompressed);
-                    var text = await reader.ReadToEndAsync(cancellationToken).ConfigureAwait(false);
+                    using StreamReader reader = new(decompressed);
+                    string? text = await reader.ReadToEndAsync(cancellationToken).ConfigureAwait(false);
                     if (text.Length > 1024)
                     {
 #if NET

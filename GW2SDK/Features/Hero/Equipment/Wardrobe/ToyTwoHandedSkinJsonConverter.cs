@@ -52,7 +52,7 @@ internal sealed class ToyTwoHandedSkinJsonConverter : JsonConverter<ToyTwoHanded
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString() ?? "";
+        string iconString = json.GetProperty("icon").GetString() ?? "";
         return new ToyTwoHandedSkin
         {
             Id = json.GetProperty("id").GetInt32(),

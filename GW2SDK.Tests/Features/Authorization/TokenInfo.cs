@@ -8,7 +8,7 @@ public class TokenInfo
     [Fact]
     public async Task Token_has_info()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
 
         (GuildWars2.Authorization.TokenInfo actual, _) = await sut.Tokens.GetTokenInfo(
@@ -16,7 +16,7 @@ public class TokenInfo
             cancellationToken: TestContext.Current.CancellationToken
         );
 
-        var apiKey = Assert.IsType<ApiKeyInfo>(actual);
+        ApiKeyInfo apiKey = Assert.IsType<ApiKeyInfo>(actual);
 
         Assert.NotEmpty(apiKey.Id);
         Assert.NotEmpty(apiKey.Name);

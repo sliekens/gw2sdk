@@ -18,7 +18,7 @@ public static class JsonLinesReader
             )
             : File.Open(path, FileMode.Open, FileAccess.Read, FileShare.None);
 
-        using var stringReader = new StreamReader(file);
+        using StreamReader stringReader = new(file);
         while (stringReader.ReadLine() is { Length: > 0 } line)
         {
             yield return line;

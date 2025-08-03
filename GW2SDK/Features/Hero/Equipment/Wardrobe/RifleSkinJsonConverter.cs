@@ -52,7 +52,7 @@ internal sealed class RifleSkinJsonConverter : JsonConverter<RifleSkin>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString() ?? "";
+        string iconString = json.GetProperty("icon").GetString() ?? "";
         return new RifleSkin
         {
             Id = json.GetProperty("id").GetInt32(),

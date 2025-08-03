@@ -10,7 +10,7 @@ public class LearnedCraftingDisciplinesByName
     [Fact]
     public async Task Can_be_found()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
         TestCharacter character = TestConfiguration.TestCharacter;
         ApiKey accessToken = TestConfiguration.ApiKey;
 
@@ -30,8 +30,8 @@ public class LearnedCraftingDisciplinesByName
             }
         );
 
-        var json = JsonSerializer.Serialize(actual);
-        var roundtrip = JsonSerializer.Deserialize<LearnedCraftingDisciplines>(json);
+        string json = JsonSerializer.Serialize(actual);
+        LearnedCraftingDisciplines? roundtrip = JsonSerializer.Deserialize<LearnedCraftingDisciplines>(json);
         Assert.Equal(actual, roundtrip);
     }
 }

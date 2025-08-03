@@ -9,7 +9,7 @@ public class AstralRewards
     [Fact]
     public async Task Can_be_listed()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<AstralReward> actual, MessageContext context) = await sut.WizardsVault.GetAstralRewards(
             cancellationToken: TestContext.Current.CancellationToken

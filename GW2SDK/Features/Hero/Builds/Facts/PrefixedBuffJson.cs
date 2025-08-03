@@ -93,8 +93,8 @@ internal static class PrefixedBuffJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetString()) ?? "";
-        var prefixIconString = prefixIcon.Map(static (in JsonElement value) => value.GetString()) ?? "";
+        string iconString = icon.Map(static (in JsonElement value) => value.GetString()) ?? "";
+        string prefixIconString = prefixIcon.Map(static (in JsonElement value) => value.GetString()) ?? "";
 #pragma warning disable CS0618
         return new PrefixedBuff
         {

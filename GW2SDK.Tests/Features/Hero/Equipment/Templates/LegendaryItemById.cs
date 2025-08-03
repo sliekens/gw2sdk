@@ -8,7 +8,7 @@ public class LegendaryItemById
     [Fact]
     public async Task Can_be_found_by_id()
     {
-        var sut = Composer.Resolve<Gw2Client>();
+        Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         const int id = 80111;
 

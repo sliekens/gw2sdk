@@ -52,7 +52,7 @@ internal sealed class HarpoonGunJsonConverter : JsonConverter<HarpoonGun>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new HarpoonGun
         {
             Id = json.GetProperty("id").GetInt32(),

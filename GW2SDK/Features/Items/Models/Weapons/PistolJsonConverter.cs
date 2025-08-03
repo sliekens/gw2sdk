@@ -48,7 +48,7 @@ internal sealed class PistolJsonConverter : JsonConverter<Pistol>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Pistol
         {
             Id = json.GetProperty("id").GetInt32(),

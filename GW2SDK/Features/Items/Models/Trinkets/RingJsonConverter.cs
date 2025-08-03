@@ -43,7 +43,7 @@ internal sealed class RingJsonConverter : JsonConverter<Ring>
             );
         }
 
-        var iconString = json.GetProperty("icon").GetString();
+        string? iconString = json.GetProperty("icon").GetString();
         return new Ring
         {
             Id = json.GetProperty("id").GetInt32(),

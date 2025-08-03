@@ -53,7 +53,7 @@ internal static class UnblockableJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new Unblockable
         {
             Text = text.Map(static (in JsonElement value) => value.GetStringRequired()),

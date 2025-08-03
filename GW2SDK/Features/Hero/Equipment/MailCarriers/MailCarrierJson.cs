@@ -47,7 +47,7 @@ internal static class MailCarrierJson
             }
         }
 
-        var iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
         return new MailCarrier
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),

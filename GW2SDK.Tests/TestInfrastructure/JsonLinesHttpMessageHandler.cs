@@ -23,19 +23,19 @@ internal sealed class JsonLinesHttpMessageHandler(string path) : HttpMessageHand
         CancellationToken cancellationToken
     )
     {
-        var results = new JsonArray();
+        JsonArray results = new();
         NameValueCollection query = HttpUtility.ParseQueryString(request.RequestUri!.Query);
-        var keys = query.Get("ids");
+        string? keys = query.Get("ids");
         if (keys is null)
         {
-            foreach (var key in Entries.Keys)
+            foreach (int key in Entries.Keys)
             {
                 results.Add(key);
             }
         }
         else
         {
-            foreach (var key in keys.Split(',').Select(int.Parse))
+            foreach (int key in keys.Split(',').Select(int.Parse))
             {
                 if (Entries.TryGetValue(key, out JsonElement entry))
                 {

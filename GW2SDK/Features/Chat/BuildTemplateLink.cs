@@ -119,7 +119,7 @@ public sealed record BuildTemplateLink : Link
         {
             if (specialization.HasValue)
             {
-                (var id, SelectedTrait adept, SelectedTrait master, SelectedTrait grandmaster) = specialization.Value;
+                (int id, SelectedTrait adept, SelectedTrait master, SelectedTrait grandmaster) = specialization.Value;
                 IReadOnlyList<int> traits = specializations[id].MajorTraitIds;
                 return new SelectedSpecialization
                 {
@@ -165,7 +165,7 @@ public sealed record BuildTemplateLink : Link
             int? SkillByPalette(int? paletteId)
             {
                 if (paletteId.HasValue
-                    && profession.SkillsByPalette.TryGetValue(paletteId.Value, out var skillId))
+                    && profession.SkillsByPalette.TryGetValue(paletteId.Value, out int skillId))
                 {
                     return skillId;
                 }
@@ -278,9 +278,9 @@ public sealed record BuildTemplateLink : Link
         }
 
         buffer.WriteUInt8((byte)SkillOverrides.Length);
-        for (var index = 0; index < (byte)SkillOverrides.Length; index++)
+        for (int index = 0; index < (byte)SkillOverrides.Length; index++)
         {
-            var skillOverride = SkillOverrides[index];
+            int skillOverride = SkillOverrides[index];
             buffer.WriteInt32(skillOverride);
         }
 
@@ -368,33 +368,33 @@ public sealed record BuildTemplateLink : Link
             ThrowHelper.ThrowBadArgument("Expected a build template chat link.", nameof(chatLink));
         }
 
-        var profession = buffer.ReadUInt8();
-        var specializationId1 = buffer.ReadUInt8();
-        var traits1 = buffer.ReadUInt8();
-        var specializationId2 = buffer.ReadUInt8();
-        var traits2 = buffer.ReadUInt8();
-        var specializationId3 = buffer.ReadUInt8();
-        var traits3 = buffer.ReadUInt8();
-        var healSkill = buffer.ReadUInt16();
-        var healAquaticSkill = buffer.ReadUInt16();
-        var utilitySkill1 = buffer.ReadUInt16();
-        var utilityAquaticSkill1 = buffer.ReadUInt16();
-        var utilitySkill2 = buffer.ReadUInt16();
-        var utilityAquaticSkill2 = buffer.ReadUInt16();
-        var utilitySkill3 = buffer.ReadUInt16();
-        var utilityAquaticSkill3 = buffer.ReadUInt16();
-        var eliteSkill = buffer.ReadUInt16();
-        var eliteAquaticSkill = buffer.ReadUInt16();
+        byte profession = buffer.ReadUInt8();
+        byte specializationId1 = buffer.ReadUInt8();
+        byte traits1 = buffer.ReadUInt8();
+        byte specializationId2 = buffer.ReadUInt8();
+        byte traits2 = buffer.ReadUInt8();
+        byte specializationId3 = buffer.ReadUInt8();
+        byte traits3 = buffer.ReadUInt8();
+        ushort healSkill = buffer.ReadUInt16();
+        ushort healAquaticSkill = buffer.ReadUInt16();
+        ushort utilitySkill1 = buffer.ReadUInt16();
+        ushort utilityAquaticSkill1 = buffer.ReadUInt16();
+        ushort utilitySkill2 = buffer.ReadUInt16();
+        ushort utilityAquaticSkill2 = buffer.ReadUInt16();
+        ushort utilitySkill3 = buffer.ReadUInt16();
+        ushort utilityAquaticSkill3 = buffer.ReadUInt16();
+        ushort eliteSkill = buffer.ReadUInt16();
+        ushort eliteAquaticSkill = buffer.ReadUInt16();
 
         // The next 16 bytes are used for profession-specific data
         SelectedPets? pets = null;
         Legends? legends = null;
         if (profession == 4) // Ranger
         {
-            var terrestrialPet1 = buffer.ReadUInt8();
-            var terrestrialPet2 = buffer.ReadUInt8();
-            var aquaticPet1 = buffer.ReadUInt8();
-            var aquaticPet2 = buffer.ReadUInt8();
+            byte terrestrialPet1 = buffer.ReadUInt8();
+            byte terrestrialPet2 = buffer.ReadUInt8();
+            byte aquaticPet1 = buffer.ReadUInt8();
+            byte aquaticPet2 = buffer.ReadUInt8();
             pets = new SelectedPets
             {
                 Terrestrial1 = NullIfZero(terrestrialPet1),
@@ -406,16 +406,16 @@ public sealed record BuildTemplateLink : Link
         }
         else if (profession == 9) // Revenant
         {
-            var activeTerrestrialLegend = buffer.ReadUInt8();
-            var inactiveTerrestrialLegend = buffer.ReadUInt8();
-            var activeAquaticLegend = buffer.ReadUInt8();
-            var inactiveAquaticLegend = buffer.ReadUInt8();
-            var inactiveTerrestrialUtilitySkill1 = buffer.ReadUInt16();
-            var inactiveTerrestrialUtilitySkill2 = buffer.ReadUInt16();
-            var inactiveTerrestrialUtilitySkill3 = buffer.ReadUInt16();
-            var inactiveAquaticUtilitySkill1 = buffer.ReadUInt16();
-            var inactiveAquaticUtilitySkill2 = buffer.ReadUInt16();
-            var inactiveAquaticUtilitySkill3 = buffer.ReadUInt16();
+            byte activeTerrestrialLegend = buffer.ReadUInt8();
+            byte inactiveTerrestrialLegend = buffer.ReadUInt8();
+            byte activeAquaticLegend = buffer.ReadUInt8();
+            byte inactiveAquaticLegend = buffer.ReadUInt8();
+            ushort inactiveTerrestrialUtilitySkill1 = buffer.ReadUInt16();
+            ushort inactiveTerrestrialUtilitySkill2 = buffer.ReadUInt16();
+            ushort inactiveTerrestrialUtilitySkill3 = buffer.ReadUInt16();
+            ushort inactiveAquaticUtilitySkill1 = buffer.ReadUInt16();
+            ushort inactiveAquaticUtilitySkill2 = buffer.ReadUInt16();
+            ushort inactiveAquaticUtilitySkill3 = buffer.ReadUInt16();
             legends = new Legends
             {
                 ActiveTerrestrialLegend = NullIfZero(activeTerrestrialLegend),
@@ -444,16 +444,16 @@ public sealed record BuildTemplateLink : Link
             buffer.Padding(16);
         }
 
-        var weapon1 = WeaponType.None;
-        var weapon2 = WeaponType.None;
-        var weapon3 = WeaponType.None;
+        WeaponType weapon1 = WeaponType.None;
+        WeaponType weapon2 = WeaponType.None;
+        WeaponType weapon3 = WeaponType.None;
         int[]? skillOverrides = null;
         if (!buffer.EndOfFile)
         {
-            var weaponCount = buffer.ReadUInt8();
-            for (var i = 0; i < weaponCount; i++)
+            byte weaponCount = buffer.ReadUInt8();
+            for (int i = 0; i < weaponCount; i++)
             {
-                var weapon = buffer.ReadUInt16();
+                ushort weapon = buffer.ReadUInt16();
                 if (weapon1 == WeaponType.None)
                 {
                     weapon1 = Weapon(weapon);
@@ -468,8 +468,8 @@ public sealed record BuildTemplateLink : Link
                 }
             }
 
-            var skillOverridesCount = buffer.ReadUInt8();
-            for (var i = 0; i < skillOverridesCount; i++)
+            byte skillOverridesCount = buffer.ReadUInt8();
+            for (int i = 0; i < skillOverridesCount; i++)
             {
                 skillOverrides ??= new int[skillOverridesCount];
                 skillOverrides[i] = buffer.ReadInt32();
@@ -529,9 +529,9 @@ public sealed record BuildTemplateLink : Link
                 return null;
             }
 
-            var adeptTrait = (SelectedTrait)(traits & 0b11);
-            var masterTrait = (SelectedTrait)((traits >> 2) & 0b11);
-            var grandmasterTrait = (SelectedTrait)((traits >> 4) & 0b11);
+            SelectedTrait adeptTrait = (SelectedTrait)(traits & 0b11);
+            SelectedTrait masterTrait = (SelectedTrait)((traits >> 2) & 0b11);
+            SelectedTrait grandmasterTrait = (SelectedTrait)((traits >> 4) & 0b11);
             return new Specialization(specializationId, adeptTrait, masterTrait, grandmasterTrait);
         }
 

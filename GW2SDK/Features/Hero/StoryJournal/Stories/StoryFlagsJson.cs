@@ -9,7 +9,7 @@ internal static class StoryFlagsJson
 {
     public static StoryFlags GetStoryFlags(this in JsonElement json)
     {
-        var requiresUnlock = false;
+        bool requiresUnlock = false;
         ValueList<string> others = [];
         foreach (JsonElement entry in json.EnumerateArray())
         {

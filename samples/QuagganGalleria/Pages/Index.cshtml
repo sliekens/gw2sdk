@@ -7,7 +7,7 @@
 <div class="text-center">
     <h1 class="display-4">Quaggans</h1>
     <div id="quaggans" class="carousel carousel-dark slide" data-bs-ride="carousel">
-        @foreach (var vm in Model.Quaggans)
+        @foreach (QuagganViewModel vm in Model.Quaggans)
         {
             <div class="carousel-item @(vm.Active ? "active" : null)">
                 <img src="@vm.ImageUrl" alt="@vm.Id" class="d-block w-100" />

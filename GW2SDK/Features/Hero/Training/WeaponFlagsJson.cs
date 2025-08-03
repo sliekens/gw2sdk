@@ -9,10 +9,10 @@ internal static class WeaponFlagsJson
 {
     public static WeaponFlags GetWeaponFlags(this in JsonElement json)
     {
-        var mainhand = false;
-        var offhand = false;
-        var twoHand = false;
-        var aquatic = false;
+        bool mainhand = false;
+        bool offhand = false;
+        bool twoHand = false;
+        bool aquatic = false;
         ValueList<string> others = [];
         foreach (JsonElement entry in json.EnumerateArray())
         {
