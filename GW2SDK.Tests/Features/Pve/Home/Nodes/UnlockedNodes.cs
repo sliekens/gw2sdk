@@ -16,6 +16,6 @@ public class UnlockedNodes
         );
 
         Assert.NotEmpty(actual);
-        Assert.All(actual, id => Assert.NotEmpty(id));
+        Assert.All(actual, Assert.NotEmpty);
     }
 }
