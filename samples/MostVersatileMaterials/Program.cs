@@ -131,7 +131,7 @@ try
                     }
                 }
             );
-    } while (AnsiConsole.Confirm("Do you want to choose again?"));
+    } while (await AnsiConsole.ConfirmAsync("Do you want to choose again?"));
 }
 #pragma warning disable CA1031 // Do not catch general exception types
 catch (Exception exception)

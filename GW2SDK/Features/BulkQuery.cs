@@ -112,12 +112,14 @@ public static class BulkQuery
         foreach (var bucket in tasks.Interleave())
         {
             var task = await bucket.ConfigureAwait(false);
+#pragma warning disable CA1849 // Call async methods when in an async method
             foreach (var value in task.Result)
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 progress?.Report(new BulkProgress(resultTotal, ++resultCount));
                 yield return value;
             }
+#pragma warning restore CA1849 // Call async methods when in an async method
         }
 
         static IEnumerable<List<TKey>> Chunk(List<TKey> index, int size)
