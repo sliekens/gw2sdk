@@ -24,16 +24,12 @@ public sealed class MarkupTextConverter
 
     private static string ConvertNode(MarkupNode node)
     {
-        switch (node)
+        return node switch
         {
-            case TextNode text:
-                return text.Text;
-            case LineBreakNode:
-                return Environment.NewLine;
-            case ColoredTextNode coloredText:
-                return string.Concat(coloredText.Children.Select(ConvertNode));
-            default:
-                return "";
-        }
+            TextNode text => text.Text,
+            LineBreakNode => Environment.NewLine,
+            ColoredTextNode coloredText => string.Concat(coloredText.Children.Select(ConvertNode)),
+            _ => "",
+        };
     }
 }
