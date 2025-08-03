@@ -172,7 +172,7 @@ public sealed class MountsClient
     )
     {
         RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/mounts/types");
-        requestBuilder.Query.AddIds(mountNames.Select(MountNameFormatter.FormatMountName));
+        requestBuilder.Query.AddIds(mountNames.Select(static name => MountNameFormatter.FormatMountName(name)));
         requestBuilder.Query.AddLanguage(language);
         using HttpRequestMessage request = requestBuilder.Build();
         (JsonDocument Json, MessageContext Context) response = await httpClient.AcceptJsonAsync(request, cancellationToken)

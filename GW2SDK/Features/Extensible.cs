@@ -9,7 +9,7 @@ namespace GuildWars2;
 [PublicAPI]
 [DebuggerDisplay("{ToString(),nq}")]
 [JsonConverter(typeof(ExtensibleEnumJsonConverterFactory))]
-public struct Extensible<TEnum>(string Name)
+public readonly struct Extensible<TEnum>(string Name)
     : IComparable<Extensible<TEnum>>, IComparable, IEquatable<Extensible<TEnum>>
     where TEnum : struct, Enum
 {
@@ -82,7 +82,7 @@ public struct Extensible<TEnum>(string Name)
     }
 
     /// <inheritdoc />
-    public override string ToString()
+    public override readonly string ToString()
     {
         if (Name is not null)
         {
@@ -101,7 +101,7 @@ public struct Extensible<TEnum>(string Name)
     /// <param name="left">The first Extensible object to compare.</param>
     /// <param name="right">The second Extensible object to compare.</param>
     /// <returns><c>true</c> if the two objects are equal; otherwise, <c>false</c>.</returns>
-    public static bool operator ==(Extensible<TEnum> left, Extensible<TEnum> right)
+    public static bool operator ==(in Extensible<TEnum> left, in Extensible<TEnum> right)
     {
         return left.Equals(right);
     }
@@ -110,7 +110,7 @@ public struct Extensible<TEnum>(string Name)
     /// <param name="left">The first Extensible object to compare.</param>
     /// <param name="right">The second Extensible object to compare.</param>
     /// <returns><c>true</c> if the two objects are not equal; otherwise, <c>false</c>.</returns>
-    public static bool operator !=(Extensible<TEnum> left, Extensible<TEnum> right)
+    public static bool operator !=(in Extensible<TEnum> left, in Extensible<TEnum> right)
     {
         return !left.Equals(right);
     }
@@ -119,7 +119,7 @@ public struct Extensible<TEnum>(string Name)
     /// <param name="left">The first Extensible object to compare.</param>
     /// <param name="right">The second Extensible object to compare.</param>
     /// <returns><c>true</c> if the two objects are equal; otherwise, <c>false</c>.</returns>
-    public static bool operator ==(Extensible<TEnum> left, TEnum right)
+    public static bool operator ==(in Extensible<TEnum> left, TEnum right)
     {
         return left.Equals(right);
     }
@@ -128,7 +128,7 @@ public struct Extensible<TEnum>(string Name)
     /// <param name="left">The first Extensible object to compare.</param>
     /// <param name="right">The second Extensible object to compare.</param>
     /// <returns><c>true</c> if the two objects are not equal; otherwise, <c>false</c>.</returns>
-    public static bool operator !=(Extensible<TEnum> left, TEnum right)
+    public static bool operator !=(in Extensible<TEnum> left, TEnum right)
     {
         return !left.Equals(right);
     }
@@ -137,7 +137,7 @@ public struct Extensible<TEnum>(string Name)
     /// <param name="left">The first Extensible object to compare.</param>
     /// <param name="right">The second Extensible object to compare.</param>
     /// <returns><c>true</c> if the two objects are equal; otherwise, <c>false</c>.</returns>
-    public static bool operator ==(Extensible<TEnum> left, string right)
+    public static bool operator ==(in Extensible<TEnum> left, string right)
     {
         return left.Equals(right);
     }
@@ -146,7 +146,7 @@ public struct Extensible<TEnum>(string Name)
     /// <param name="left">The first Extensible object to compare.</param>
     /// <param name="right">The second Extensible object to compare.</param>
     /// <returns><c>true</c> if the two objects are not equal; otherwise, <c>false</c>.</returns>
-    public static bool operator !=(Extensible<TEnum> left, string right)
+    public static bool operator !=(in Extensible<TEnum> left, string right)
     {
         return !left.Equals(right);
     }
@@ -155,7 +155,7 @@ public struct Extensible<TEnum>(string Name)
     /// <param name="left">The first Extensible object to compare.</param>
     /// <param name="right">The second Extensible object to compare.</param>
     /// <returns><c>true</c> if left is less than right; otherwise, <c>false</c>.</returns>
-    public static bool operator <(Extensible<TEnum> left, Extensible<TEnum> right)
+    public static bool operator <(in Extensible<TEnum> left, in Extensible<TEnum> right)
     {
         return left.CompareTo(right) < 0;
     }
@@ -164,7 +164,7 @@ public struct Extensible<TEnum>(string Name)
     /// <param name="left">The first Extensible object to compare.</param>
     /// <param name="right">The second Extensible object to compare.</param>
     /// <returns><c>true</c> if left is less than or equal to right; otherwise, <c>false</c>.</returns>
-    public static bool operator <=(Extensible<TEnum> left, Extensible<TEnum> right)
+    public static bool operator <=(in Extensible<TEnum> left, in Extensible<TEnum> right)
     {
         return left.CompareTo(right) <= 0;
     }
@@ -173,7 +173,7 @@ public struct Extensible<TEnum>(string Name)
     /// <param name="left">The first Extensible object to compare.</param>
     /// <param name="right">The second Extensible object to compare.</param>
     /// <returns><c>true</c> if left is greater than right; otherwise, <c>false</c>.</returns>
-    public static bool operator >(Extensible<TEnum> left, Extensible<TEnum> right)
+    public static bool operator >(in Extensible<TEnum> left, in Extensible<TEnum> right)
     {
         return left.CompareTo(right) > 0;
     }
@@ -182,7 +182,7 @@ public struct Extensible<TEnum>(string Name)
     /// <param name="left">The first Extensible object to compare.</param>
     /// <param name="right">The second Extensible object to compare.</param>
     /// <returns><c>true</c> if left is greater than or equal to right; otherwise, <c>false</c>.</returns>
-    public static bool operator >=(Extensible<TEnum> left, Extensible<TEnum> right)
+    public static bool operator >=(in Extensible<TEnum> left, in Extensible<TEnum> right)
     {
         return left.CompareTo(right) >= 0;
     }
