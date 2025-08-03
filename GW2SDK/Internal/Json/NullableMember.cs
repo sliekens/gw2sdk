@@ -41,7 +41,7 @@ internal readonly ref struct NullableMember
 
     public TValue? Map<TValue>(JsonTransformNullable<TValue> transform) where TValue : struct
     {
-        if (member.Value.ValueKind == Undefined || member.Value.ValueKind == Null)
+        if (member.Value.ValueKind is Null or Undefined)
         {
             return default;
         }

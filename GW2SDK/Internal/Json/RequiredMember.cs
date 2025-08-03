@@ -41,7 +41,7 @@ internal readonly ref struct RequiredMember
 
     public TValue Map<TValue>(JsonTransform<TValue> transform)
     {
-        if (member.Value.ValueKind == Undefined || member.Value.ValueKind == Null)
+        if (member.Value.ValueKind is Null or Undefined)
         {
             JsonThrowHelper.ThrowMissingValue(Name);
         }

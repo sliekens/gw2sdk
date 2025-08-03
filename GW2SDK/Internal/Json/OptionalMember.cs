@@ -41,7 +41,7 @@ internal readonly ref struct OptionalMember
 
     public TValue? Map<TValue>(JsonTransform<TValue> transform)
     {
-        if (member.Value.ValueKind == Undefined || member.Value.ValueKind == Null)
+        if (member.Value.ValueKind is Null or Undefined)
         {
             return default;
         }

@@ -86,8 +86,7 @@ public sealed class MarkupParser
 
             ColoredTextNode node = new(iterator.Current.Value);
             iterator.Advance();
-            while (iterator.Current?.Type != MarkupTokenType.TagClose
-                && iterator.Current?.Type != MarkupTokenType.End)
+            while (iterator.Current is { Type: not MarkupTokenType.TagClose and not MarkupTokenType.End })
             {
                 MarkupNode? nextChild = ParseNode(iterator);
                 if (nextChild is ColoredTextNode { Color: "" })
