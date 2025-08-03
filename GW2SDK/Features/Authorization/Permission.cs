@@ -3,6 +3,8 @@ using System.Text.Json.Serialization;
 
 namespace GuildWars2.Authorization;
 
+#pragma warning disable CA1711 // Identifiers should not have incorrect suffix
+
 /// <summary>Represents the permissions available for Guild Wars 2 authorization.</summary>
 [PublicAPI]
 [JsonConverter(typeof(PermissionJsonConverter))]

@@ -1,5 +1,9 @@
 ﻿namespace GuildWars2.Http;
 
+// TODO: consider renaming this class to fix the CA1711 warning
+
+#pragma warning disable CA1711 // Identifiers should not have incorrect suffix
+
 /// <summary>Provides additional HTTP status codes which are missing in older .NET versions.</summary>
 #if NET
 [Obsolete("Use System.Net.HttpStatusCode instead.")]

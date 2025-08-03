@@ -2,6 +2,10 @@
 
 namespace GuildWars2.Items.Stats;
 
+// TODO: reconsider naming, as this is not an attribute in the traditional sense
+
+#pragma warning disable CA1711 // Identifiers should not have incorrect suffix
+
 /// <summary>Information about an attribute like Power, to calculate the effective stats of an item.</summary>
 [PublicAPI]
 [DataTransferObject]
