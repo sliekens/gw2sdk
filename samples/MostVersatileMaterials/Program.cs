@@ -54,11 +54,11 @@ try
 
                 // Fetch all input items
                 ProgressTask inputItemsProgress = ctx.AddTask("Fetching input items");
-                HashSet<int> inputItemIds = [.. (
+                HashSet<int> inputItemIds = [..
                     from recipe in recipes
                     from ingredient in recipe.Ingredients
                     where ingredient.Kind == IngredientKind.Item
-                    select ingredient.Id)];
+                    select ingredient.Id];
 
                 Dictionary<int, Item> inputItems = await gw2.Items
                     .GetItemsBulk(
@@ -71,9 +71,9 @@ try
 
                 // Fetch all output items
                 ProgressTask outputItemsProgress = ctx.AddTask("Fetching output items");
-                HashSet<int> outputItemIds = [.. (
+                HashSet<int> outputItemIds = [..
                     from recipe in recipes
-                    select recipe.OutputItemId)];
+                    select recipe.OutputItemId];
                 Dictionary<int, Item> outputItems = await gw2.Items.GetItemsBulk(
                         outputItemIds,
                         progress: new ProgressTaskUpdater(outputItemsProgress)
@@ -102,11 +102,11 @@ try
         where ingredient.Kind == IngredientKind.Item
         select (ingredient.Id, recipe)).ToLookup(tuple => tuple.Id, tuple => tuple.recipe);
 
-    List<(Item, int count)> itemsSortedByNumberOfRecipes = [.. (
+    List<(Item, int count)> itemsSortedByNumberOfRecipes = [..
         from recipes in recipesByIngredient
         let count = recipes.Count()
         orderby count descending
-        select (referenceData.InputItems[recipes.Key], count))];
+        select (referenceData.InputItems[recipes.Key], count)];
 
     ILookup<int, Item> outputsByIngredient = (
         from recipes in recipesByIngredient
