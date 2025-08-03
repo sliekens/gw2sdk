@@ -23,9 +23,11 @@ public record PointOfInterest
     /// <summary>The map coordinates of the point of interest.</summary>
     public required PointF Coordinates { get; init; }
 
+#pragma warning disable CA1721 // Property names should not match get methods
     /// <summary>The chat code of the point of interest. This can be used to link the location in the chat, but also in guild
     /// or squad messages.</summary>
     public required string ChatLink { get; init; }
+#pragma warning restore CA1721 // Property names should not match get methods
 
 #pragma warning disable CA1024 // Use properties where appropriate
     /// <summary>Gets a chat link object for this point of interest.</summary>

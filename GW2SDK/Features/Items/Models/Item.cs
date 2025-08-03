@@ -41,8 +41,10 @@ public record Item
     /// <summary>The character restrictions for the item.</summary>
     public required ItemRestriction Restrictions { get; init; }
 
+#pragma warning disable CA1721 // Property names should not match get methods
     /// <summary>The chat code of the item. This can be used to link the item in the chat, but also in guild or squad messages.</summary>
     public required string ChatLink { get; init; }
+#pragma warning restore CA1721 // Property names should not match get methods
 
     /// <summary>The URL of the item icon.</summary>
     [Obsolete("Use IconUrl instead.")]

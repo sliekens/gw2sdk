@@ -46,9 +46,11 @@ public record Objective
     /// <summary>The URL of the objective's icon.</summary>
     public required Uri? MarkerIconUrl { get; init; }
 
+#pragma warning disable CA1721 // Property names should not match get methods
     /// <summary>The chat code of the objective. This can be used to link the objective in the chat, but also in guild or squad
     /// messages.</summary>
     public required string ChatLink { get; init; }
+#pragma warning restore CA1721 // Property names should not match get methods
 
     /// <summary>Gets a chat link object for this objective.</summary>
     /// <returns>The chat link as an object.</returns>

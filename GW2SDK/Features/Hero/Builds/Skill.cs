@@ -33,9 +33,11 @@ public record Skill
     /// <summary>The URL of the skill icon.</summary>
     public required Uri? IconUrl { get; init; }
 
+#pragma warning disable CA1721 // Property names should not match get methods
     /// <summary>The chat code of the skill. This can be used to link the skill in the chat, but also in guild or squad
     /// messages.</summary>
     public required string ChatLink { get; init; }
+#pragma warning restore CA1721 // Property names should not match get methods
 
     /// <summary>The skill category as displayed in the tooltip.</summary>
     public required IReadOnlyList<Extensible<SkillCategoryName>> Categories { get; init; }

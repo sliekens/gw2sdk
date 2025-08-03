@@ -41,9 +41,11 @@ public record Recipe
     /// <summary>The crafting ingredients required to craft the recipe.</summary>
     public required IReadOnlyList<Ingredient> Ingredients { get; init; }
 
+#pragma warning disable CA1721 // Property names should not match get methods
     /// <summary>The chat code of the recipe. This can be used to link the recipe in the chat, but also in guild or squad
     /// messages.</summary>
     public required string ChatLink { get; init; }
+#pragma warning restore CA1721 // Property names should not match get methods
 
 #pragma warning disable CA1024 // Use properties where appropriate
     /// <summary>Gets a chat link object for this recipe.</summary>
