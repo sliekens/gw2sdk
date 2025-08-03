@@ -5,7 +5,7 @@ using GuildWars2.Items;
 
 namespace GuildWars2.Tests.Features;
 
-public class ExtensibleEnum
+public class ExtensibleEnumTest
 {
     [Fact]
     public void Indicates_when_enum_name_is_defined()
