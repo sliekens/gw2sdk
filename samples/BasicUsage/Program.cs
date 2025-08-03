@@ -7,11 +7,11 @@ using HttpClient httpClient = new();
 Gw2Client gw2 = new(httpClient);
 
 // Get the trading post prices for all items in bulk
-await foreach (ItemPrice itemPrice in gw2.Commerce.GetItemPricesBulk().ValueOnly())
+await foreach (ItemPrice itemPrice in gw2.Commerce.GetItemPricesBulk().ValueOnly().ConfigureAwait(false))
 {
     // ItemPrice contains an item ID, BestBid, and BestAsk
     // Use the item ID to get the item details
-    Item item = await gw2.Items.GetItemById(itemPrice.Id).ValueOnly();
+    Item item = await gw2.Items.GetItemById(itemPrice.Id).ValueOnly().ConfigureAwait(false);
 
     PrintItem(item, itemPrice);
 }
