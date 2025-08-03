@@ -76,7 +76,11 @@ internal sealed class LoggingHandler : DelegatingHandler
                     var text = await reader.ReadToEndAsync();
                     if (text.Length > 1024)
                     {
+#if NET
+                        text = string.Concat(text.AsSpan(0, 1024), "...");
+#else
                         text = text.Substring(0, 1024) + "...";
+#endif
                     }
 
                     Output.Value?.WriteLine(text);
