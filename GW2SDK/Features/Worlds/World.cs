@@ -22,9 +22,12 @@ public sealed record World
     public int TransferFee =>
         Population.ToEnum() switch
         {
+            WorldPopulation.None => 0,
+            WorldPopulation.Low => 0,
             WorldPopulation.Medium => 500,
             WorldPopulation.High => 1000,
             WorldPopulation.VeryHigh => 1800,
+            WorldPopulation.Full => 0,
             _ => 0
         };
 

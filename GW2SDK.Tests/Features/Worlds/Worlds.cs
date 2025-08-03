@@ -24,6 +24,12 @@ public class Worlds
                 {
                     switch (world.Population.ToEnum())
                     {
+                        case WorldPopulation.None:
+                            Assert.Equal(0, world.TransferFee);
+                            break;
+                        case WorldPopulation.Low:
+                            Assert.Equal(0, world.TransferFee);
+                            break;
                         case WorldPopulation.Medium:
                             Assert.Equal(500, world.TransferFee);
                             break;
@@ -32,6 +38,11 @@ public class Worlds
                             break;
                         case WorldPopulation.VeryHigh:
                             Assert.Equal(1800, world.TransferFee);
+                            break;
+                        case WorldPopulation.Full:
+                            Assert.Equal(0, world.TransferFee);
+                            break;
+                        case null:
                             break;
                         default:
                             throw new InvalidOperationException("Unexpected population type.");
