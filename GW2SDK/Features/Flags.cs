@@ -47,7 +47,7 @@ public abstract record Flags
         var flags = GetType()
             .GetProperties(BindingFlags.Public | BindingFlags.Instance)
             .Where(property => property.PropertyType == typeof(bool))
-            .Select(property => property.GetValue(this));
+            .Select(property => (bool?)property.GetValue(this));
 
         foreach (var flag in flags)
         {
