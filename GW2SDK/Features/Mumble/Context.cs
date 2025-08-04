@@ -7,9 +7,7 @@ using GuildWars2.Win32;
 namespace GuildWars2.Mumble;
 
 /// <summary>Context information provided by the MumbleLink API.</summary>
-[PublicAPI]
 [StructLayout(LayoutKind.Sequential)]
-[NoReorder]
 [CLSCompliant(false)]
 public readonly record struct Context
 {

@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.WizardsVault.Objectives;
 
 /// <summary>Information about progress towards completing weekly Wizard's Vault objectives.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record WeeklyObjectivesProgress
 {

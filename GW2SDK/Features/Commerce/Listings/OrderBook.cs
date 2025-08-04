@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Commerce.Listings;
 
 /// <summary>Information about the current supply and demand for an item.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record OrderBook
 {

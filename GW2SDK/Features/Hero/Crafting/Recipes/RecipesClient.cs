@@ -9,7 +9,6 @@ namespace GuildWars2.Hero.Crafting.Recipes;
 
 /// <summary>Provides query methods for recipes, recipe search, recipes learned by characters and recipes unlocked
 /// account-wide.</summary>
-[PublicAPI]
 public sealed class RecipesClient
 {
     private readonly HttpClient httpClient;

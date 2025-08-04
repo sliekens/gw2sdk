@@ -8,7 +8,6 @@ namespace GuildWars2.Hero.Builds;
 
 /// <summary>Provides query methods for build templates, skills, specializations, traits, legends (Revenant) and builds in
 /// the build storage on the account.</summary>
-[PublicAPI]
 public sealed class BuildsClient
 {
     private readonly HttpClient httpClient;

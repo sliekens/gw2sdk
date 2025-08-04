@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.Emotes;
 
 /// <summary>Information about an emote.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Emote
 {

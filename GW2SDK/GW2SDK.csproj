@@ -25,7 +25,8 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIcon>icon.png</PackageIcon>
     <PackageReadmeFile>PACKAGE.md</PackageReadmeFile>
-    <PackageTags>Guild Wars;gw;gw2;gw2api;gw2client;tp;tradingpost;trading post;mumble;mumblelink;arenanet;anet;api</PackageTags>
+    <PackageTags>Guild Wars;gw;gw2;gw2api;gw2client;tp;tradingpost;trading
+      post;mumble;mumblelink;arenanet;anet;api</PackageTags>
     <PackageReleaseNotes>https://github.com/sliekens/gw2sdk/releases</PackageReleaseNotes>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
@@ -41,7 +42,8 @@
       </PropertyGroup>
     </When>
     <Otherwise>
-      <!-- Embed PDB files in the DLL, which is the only reliable solution because packages with standalone PDBs are not supported by SDK-style projects -->
+      <!-- Embed PDB files in the DLL, which is the only reliable solution because packages with
+      standalone PDBs are not supported by SDK-style projects -->
       <PropertyGroup>
         <DebugType>embedded</DebugType>
       </PropertyGroup>
@@ -67,7 +69,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="JetBrains.Annotations" />
     <Using Include="GuildWars2.Annotations" />
     <Using Include="System.Net" />
     <Using Include="System.Net.Http.HttpMethod" Static="True" />
@@ -75,7 +76,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../GW2SDK.Generators/GW2SDK.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="../GW2SDK.Generators/GW2SDK.Generators.csproj"
+      OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
   <ItemGroup>
@@ -108,7 +110,8 @@
 
   <Target Name="LinkPackageReleaseNotes" AfterTargets="MinVer">
     <PropertyGroup>
-      <PackageReleaseNotes>https://github.com/sliekens/gw2sdk/releases/tag/$(MinVerTagPrefix)$(Version)</PackageReleaseNotes>
+      <PackageReleaseNotes>
+        https://github.com/sliekens/gw2sdk/releases/tag/$(MinVerTagPrefix)$(Version)</PackageReleaseNotes>
     </PropertyGroup>
   </Target>
 

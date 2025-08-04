@@ -7,7 +7,6 @@ using GuildWars2.Json;
 namespace GuildWars2.Hero.Equipment.Finishers;
 
 /// <summary>Provides query methods for enemy finishers and unlocked finishers on the account.</summary>
-[PublicAPI]
 public sealed class FinishersClient
 {
     private readonly HttpClient httpClient;

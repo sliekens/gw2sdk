@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.StoryJournal.Stories;
 
 /// <summary>Information about an objective to complete in order to progress through a story step.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Objective
 {

@@ -4,7 +4,6 @@ using System.Diagnostics.CodeAnalysis;
 namespace GuildWars2.Markup;
 
 /// <summary>Represents a parser that converts a sequence of tokens into a hierarchical node structure.</summary>
-[PublicAPI]
 public sealed class MarkupParser
 {
     /// <summary>Parses a sequence of tokens into a hierarchical node structure.</summary>

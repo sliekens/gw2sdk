@@ -6,7 +6,6 @@ namespace GuildWars2.Hero.Builds;
 /// provide bonuses to damage and attributes. Some traits add new passive skills which are activated indirectly. For
 /// example, the Engineer trait "Grenadier" adds a passive skill "Lesser Grenade Barrage" that is activated when the player
 /// uses a heal skill.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Trait
 {

@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Guilds.Logs;
 
 /// <summary>The kinds of guild bank operations.</summary>
-[PublicAPI]
 [DefaultValue(None)]
 [JsonConverter(typeof(GuildBankOperationKindJsonConverter))]
 public enum GuildBankOperationKind

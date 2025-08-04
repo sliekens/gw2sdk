@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.StoryJournal.Stories;
 
 /// <summary>Information about a chapter of the personal story (My Story in the story journal).</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Chapter
 {

@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Guilds.Upgrades;
 
 /// <summary>Information about an upgrade that increases the guild vault's capacity.</summary>
-[PublicAPI]
 public sealed record BankBag : GuildUpgrade
 {
     /// <summary>The number of item slots that will be added to the guild vault.</summary>

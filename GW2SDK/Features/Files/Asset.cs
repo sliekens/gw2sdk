@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Files;
 
 /// <summary>Information about a file.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Asset
 {

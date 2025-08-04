@@ -2,7 +2,6 @@
 
 /// <summary>Information about an ability that can be trained in World vs. World by earning and spending World Experience
 /// (WXP).</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Ability
 {

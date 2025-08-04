@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Items;
 
 /// <summary>The item rarities.</summary>
-[PublicAPI]
 [DefaultValue(None)]
 [JsonConverter(typeof(RarityJsonConverter))]
 public enum Rarity

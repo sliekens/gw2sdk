@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.Banking;
 
 /// <summary>Information about a material category in material storage.</summary>
-[PublicAPI]
 public sealed record MaterialCategory
 {
     /// <summary>The category ID.</summary>

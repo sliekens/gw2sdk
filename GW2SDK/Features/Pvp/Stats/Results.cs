@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Pvp.Stats;
 
 /// <summary>Information about a player's results.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Results
 {

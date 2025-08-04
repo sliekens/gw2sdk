@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Quaggans;
 
 /// <summary>Information about a quaggan.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Quaggan
 {

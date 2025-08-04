@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Chat;
 
 /// <summary>Represents a skin chat link.</summary>
-[PublicAPI]
 public sealed record SkinLink : Link
 {
     /// <summary>The skin ID.</summary>

@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Guilds.Teams;
 
 /// <summary>Information about a guild PvP team.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record GuildTeam
 {

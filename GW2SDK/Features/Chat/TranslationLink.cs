@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Chat;
 
 /// <summary>Represents a translation chat link.</summary>
-[PublicAPI]
 public sealed record TranslationLink : Link
 {
     /// <summary>The translation ID.</summary>

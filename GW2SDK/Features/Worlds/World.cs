@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Worlds;
 
 /// <summary>Information about a world (AKA server).</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record World
 {

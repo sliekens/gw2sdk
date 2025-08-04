@@ -13,7 +13,6 @@ using GuildWars2.Json;
 namespace GuildWars2.Commerce;
 
 /// <summary>Provides query methods for Black Lion Trading Company services.</summary>
-[PublicAPI]
 public sealed class CommerceClient
 {
     private readonly HttpClient httpClient;

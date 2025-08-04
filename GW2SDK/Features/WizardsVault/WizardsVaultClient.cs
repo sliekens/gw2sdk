@@ -10,7 +10,6 @@ using GuildWars2.WizardsVault.Seasons;
 namespace GuildWars2.WizardsVault;
 
 /// <summary>Provides query methods for the Wizard's Vault (daily, weekly and special objectives and Astral Rewards).</summary>
-[PublicAPI]
 public sealed class WizardsVaultClient
 {
     private readonly HttpClient httpClient;

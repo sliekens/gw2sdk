@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.Wallet;
 
 /// <summary>Information about a currency in the account wallet.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Currency
 {

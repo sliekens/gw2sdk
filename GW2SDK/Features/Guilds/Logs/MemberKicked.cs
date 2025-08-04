@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Guilds.Logs;
 
 /// <summary>A log entry about a member being kicked from the guild.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record MemberKicked : GuildLogEntry
 {

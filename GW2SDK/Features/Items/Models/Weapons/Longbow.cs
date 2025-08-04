@@ -3,7 +3,6 @@
 namespace GuildWars2.Items;
 
 /// <summary>Information about a longbow.</summary>
-[PublicAPI]
 [JsonConverter(typeof(LongbowJsonConverter))]
 public sealed record Longbow : Weapon
 {

@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Pve.Raids;
 
 /// <summary>Information about a raid, which is instanced PvE content designed for squads of ten players.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Raid
 {

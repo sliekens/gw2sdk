@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.Builds.Facts;
 
 /// <summary>A boon, condition or effect applied (or removed) by the skill/trait.</summary>
-[PublicAPI]
 [Inheritable]
 public record Buff : Fact
 {

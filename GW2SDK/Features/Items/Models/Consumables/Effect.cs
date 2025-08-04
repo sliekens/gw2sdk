@@ -3,7 +3,6 @@
 namespace GuildWars2.Items;
 
 /// <summary>Information about an effect applied by a consumable.</summary>
-[PublicAPI]
 [DataTransferObject]
 [JsonConverter(typeof(EffectJsonConverter))]
 public sealed record Effect

@@ -3,7 +3,6 @@
 namespace GuildWars2;
 
 /// <summary>Represents a schema version of the Guild Wars 2 API.</summary>
-[PublicAPI]
 public sealed class SchemaVersion
 {
     /// <summary>Represents the schema version "2019-02-21T00:00:00.000Z".</summary>

@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Guilds.Logs;
 
 /// <summary>A log entry about a change in guild influence.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record InfluenceActivity : GuildLogEntry
 {

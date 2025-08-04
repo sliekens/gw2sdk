@@ -2,7 +2,6 @@
 
 /// <summary>The base type for skills which are activated by the player to perform an action. Cast objects of this type to
 /// a more specific type to access more properties.</summary>
-[PublicAPI]
 [Inheritable]
 [DataTransferObject]
 public record ActionSkill : Skill

@@ -7,7 +7,6 @@ using GuildWars2.Json;
 namespace GuildWars2.Hero.Accounts;
 
 /// <summary>Provides query methods for a player account and characters that belong to the account.</summary>
-[PublicAPI]
 public sealed class AccountClient
 {
     private readonly HttpClient httpClient;

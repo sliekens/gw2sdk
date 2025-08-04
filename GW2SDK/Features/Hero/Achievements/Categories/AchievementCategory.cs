@@ -3,7 +3,6 @@
 namespace GuildWars2.Hero.Achievements.Categories;
 
 /// <summary>Information about an achievement category.</summary>
-[PublicAPI]
 [DataTransferObject]
 [JsonConverter(typeof(AchievementCategoryJsonConverter))]
 public sealed record AchievementCategory

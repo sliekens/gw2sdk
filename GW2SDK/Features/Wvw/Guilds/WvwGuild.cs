@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Wvw.Guilds;
 
 /// <summary>Information about a guild in World vs. World.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record WvwGuild
 {

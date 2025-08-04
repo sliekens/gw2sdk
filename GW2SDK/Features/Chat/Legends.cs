@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Chat;
 
 /// <summary>Information about the selected legends for a Revenant build.</summary>
-[PublicAPI]
 public sealed record Legends
 {
     /// <summary>The code of the active legend, or <c>null</c> if no legend was selected.</summary>

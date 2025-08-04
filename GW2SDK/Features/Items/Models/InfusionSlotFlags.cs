@@ -3,7 +3,6 @@
 namespace GuildWars2.Items;
 
 /// <summary>Modifiers for infusion slots.</summary>
-[PublicAPI]
 [JsonConverter(typeof(InfusionSlotFlagsJsonConverter))]
 public sealed record InfusionSlotFlags : Flags
 {

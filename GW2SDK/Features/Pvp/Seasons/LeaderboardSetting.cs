@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Pvp.Seasons;
 
 /// <summary>Information about how to rank players or teams on a leaderboard.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record LeaderboardSetting
 {

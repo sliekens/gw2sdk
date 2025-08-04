@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.Builds;
 
 /// <summary>Information about selected skills in a build.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record SkillBar
 {

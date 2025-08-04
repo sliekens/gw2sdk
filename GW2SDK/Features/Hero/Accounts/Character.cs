@@ -10,7 +10,6 @@ using static GuildWars2.Hero.BodyType;
 namespace GuildWars2.Hero.Accounts;
 
 /// <summary>Information about a player character.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Character
 {

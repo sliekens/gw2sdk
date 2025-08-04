@@ -3,7 +3,6 @@
 /// <summary>Represents web links in Link header values.</summary>
 /// <remarks>The Link header is defined in RFC 8288: Web Linking.</remarks>
 /// <param name="links">The collection of web links.</param>
-[PublicAPI]
 public sealed class LinkHeader(IEnumerable<LinkValue> links)
 {
     /// <summary>Gets the web links.</summary>

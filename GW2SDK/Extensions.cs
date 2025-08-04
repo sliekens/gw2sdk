@@ -3,7 +3,6 @@
 namespace GuildWars2;
 
 /// <summary>Miscellaneous extension methods.</summary>
-[PublicAPI]
 public static class Extensions
 {
     /// <summary>Returns a new task that converts the <see cref="HashSet{T}" /> from the original task to a

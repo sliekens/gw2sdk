@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Pve.Pets;
 
 /// <summary>Information about a pet skill.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record PetSkill
 {

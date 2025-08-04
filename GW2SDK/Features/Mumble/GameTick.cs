@@ -7,9 +7,7 @@ using GuildWars2.Json;
 namespace GuildWars2.Mumble;
 
 /// <summary>Represents the game state at a specific point in time.</summary>
-[PublicAPI]
 [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
-[NoReorder]
 [CLSCompliant(false)]
 public readonly record struct GameTick
 {

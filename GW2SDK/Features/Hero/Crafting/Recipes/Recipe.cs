@@ -7,7 +7,6 @@ namespace GuildWars2.Hero.Crafting.Recipes;
 
 /// <summary>Information about a crafting recipe. This is the base type. Cast objects of this type to a more specific type
 /// to access more properties.</summary>
-[PublicAPI]
 [Inheritable]
 [DataTransferObject]
 [JsonConverter(typeof(RecipeJsonConverter))]

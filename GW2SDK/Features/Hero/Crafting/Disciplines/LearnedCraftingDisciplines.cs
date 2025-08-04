@@ -3,7 +3,6 @@
 namespace GuildWars2.Hero.Crafting.Disciplines;
 
 /// <summary>Information about the learned crafting disciplines of a character.</summary>
-[PublicAPI]
 [DataTransferObject]
 [JsonConverter(typeof(LearnedCraftingDisciplinesJsonConverter))]
 public sealed record LearnedCraftingDisciplines

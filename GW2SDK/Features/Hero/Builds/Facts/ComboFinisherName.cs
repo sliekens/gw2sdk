@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Hero.Builds.Facts;
 
 /// <summary>The combo finisher that is applied by a skill.</summary>
-[PublicAPI]
 [DefaultValue(None)]
 [JsonConverter(typeof(ComboFinisherNameJsonConverter))]
 public enum ComboFinisherName

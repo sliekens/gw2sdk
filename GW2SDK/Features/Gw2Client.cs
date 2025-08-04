@@ -19,7 +19,6 @@ namespace GuildWars2;
 /// <summary>Provides query methods for the Guild Wars 2 API. This class consists of logical groups containing related sets
 /// of APIs. For example, all APIs pertaining to the Hero panel are grouped into <see cref="Hero" /> and all APIs
 /// pertaining to the trading post are grouped into <see cref="Commerce" />.</summary>
-[PublicAPI]
 public sealed class Gw2Client
 {
     private readonly HttpClient httpClient;

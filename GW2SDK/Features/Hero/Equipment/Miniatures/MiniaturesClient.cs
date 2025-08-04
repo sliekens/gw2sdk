@@ -7,7 +7,6 @@ using GuildWars2.Json;
 namespace GuildWars2.Hero.Equipment.Miniatures;
 
 /// <summary>Provides query methods for miniatures and miniatures unlocked on the account.</summary>
-[PublicAPI]
 public sealed class MiniaturesClient
 {
     private readonly HttpClient httpClient;

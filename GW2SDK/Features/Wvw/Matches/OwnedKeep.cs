@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Wvw.Matches;
 
 /// <summary>Information about the ownership of a keep.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record OwnedKeep : OwnedObjective
 {

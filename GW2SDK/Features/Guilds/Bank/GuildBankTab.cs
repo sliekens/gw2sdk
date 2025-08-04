@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Guilds.Bank;
 
 /// <summary>Information about a section of the guild vault.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record GuildBankTab
 {

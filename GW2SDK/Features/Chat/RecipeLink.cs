@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Chat;
 
 /// <summary>Represents a recipe chat link.</summary>
-[PublicAPI]
 public sealed record RecipeLink : Link
 {
     /// <summary>The recipe ID.</summary>

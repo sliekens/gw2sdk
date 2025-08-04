@@ -6,7 +6,6 @@ using GuildWars2.Hero;
 namespace GuildWars2.Items;
 
 /// <summary>Information about an upgrade component.</summary>
-[PublicAPI]
 [Inheritable]
 [JsonConverter(typeof(UpgradeComponentJsonConverter))]
 public record UpgradeComponent : Item, ICombatEquipment, IInfusable

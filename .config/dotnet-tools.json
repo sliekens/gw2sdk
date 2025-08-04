@@ -2,13 +2,6 @@
   "version": 1,
   "isRoot": true,
   "tools": {
-    "jetbrains.resharper.globaltools": {
-      "version": "2025.1.4",
-      "commands": [
-        "jb"
-      ],
-      "rollForward": false
-    },
     "microsoft.dotnet-httprepl": {
       "version": "8.0.0",
       "commands": [

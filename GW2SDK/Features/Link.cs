@@ -6,7 +6,6 @@
 /// <param name="Last">The hyperlink to the last page.</param>
 /// <param name="Previous">The hyperlink to the previous page.</param>
 /// <param name="Next">The hyperlink to the next page.</param>
-[PublicAPI]
 public sealed record Link(
     Hyperlink First,
     Hyperlink Self,

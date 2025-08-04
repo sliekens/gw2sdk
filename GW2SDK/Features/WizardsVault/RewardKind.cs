@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.WizardsVault;
 
 /// <summary>The kind of rewards available in the Wizard's Vault.</summary>
-[PublicAPI]
 [DefaultValue(None)]
 [JsonConverter(typeof(RewardKindJsonConverter))]
 public enum RewardKind

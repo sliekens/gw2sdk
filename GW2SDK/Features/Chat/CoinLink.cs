@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Chat;
 
 /// <summary>Represents a coin chat link.</summary>
-[PublicAPI]
 public sealed record CoinLink : Link
 {
     /// <summary>The amount of coins.</summary>

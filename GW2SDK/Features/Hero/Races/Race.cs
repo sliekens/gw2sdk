@@ -5,7 +5,6 @@ using static GuildWars2.Hero.RaceName;
 namespace GuildWars2.Hero.Races;
 
 /// <summary>Information about one of the playable races.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Race
 {

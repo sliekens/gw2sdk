@@ -3,7 +3,6 @@
 namespace GuildWars2.Items;
 
 /// <summary>Information about a ring.</summary>
-[PublicAPI]
 [JsonConverter(typeof(RingJsonConverter))]
 public sealed record Ring : Trinket, IInfused, IInfusable
 {

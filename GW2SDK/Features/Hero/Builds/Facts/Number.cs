@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.Builds.Facts;
 
 /// <summary>Describes a number of something as referenced by the <see cref="Fact.Text" />.</summary>
-[PublicAPI]
 public sealed record Number : Fact
 {
     /// <summary>The number of something referenced by the <see cref="Fact.Text" />. For example, if the text is "Conditions

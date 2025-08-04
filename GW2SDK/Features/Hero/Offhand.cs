@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Hero;
 
 /// <summary>The offhands which may be required for a weapon skill.</summary>
-[PublicAPI]
 [DefaultValue(None)]
 [JsonConverter(typeof(OffhandJsonConverter))]
 public enum Offhand

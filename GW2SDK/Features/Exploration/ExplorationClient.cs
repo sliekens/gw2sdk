@@ -14,7 +14,6 @@ using GuildWars2.Json;
 namespace GuildWars2.Exploration;
 
 /// <summary>Provides query methods for maps and map features.</summary>
-[PublicAPI]
 public sealed class ExplorationClient
 {
     private readonly HttpClient httpClient;

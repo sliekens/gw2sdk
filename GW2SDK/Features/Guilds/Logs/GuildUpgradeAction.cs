@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Guilds.Logs;
 
 /// <summary>The guild upgrade actions.</summary>
-[PublicAPI]
 [DefaultValue(None)]
 [JsonConverter(typeof(GuildUpgradeActionJsonConverter))]
 public enum GuildUpgradeAction

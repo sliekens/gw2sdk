@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.Builds;
 
 /// <summary>An effect applied by the skill/trait.</summary>
-[PublicAPI]
 [Inheritable]
 [DataTransferObject]
 public record Fact

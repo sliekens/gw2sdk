@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Pve.Dungeons;
 
 /// <summary>Information about a path of a dungeon.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record DungeonPath
 {

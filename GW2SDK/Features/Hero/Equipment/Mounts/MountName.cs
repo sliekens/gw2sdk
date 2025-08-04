@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Hero.Equipment.Mounts;
 
 /// <summary>The mount types.</summary>
-[PublicAPI]
 [DefaultValue(None)]
 [JsonConverter(typeof(MountNameJsonConverter))]
 public enum MountName

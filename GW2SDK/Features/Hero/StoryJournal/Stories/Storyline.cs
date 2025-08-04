@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.StoryJournal.Stories;
 
 /// <summary>Information about a storyline, for example Living World Season 1.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Storyline
 {

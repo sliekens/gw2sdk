@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Guilds.Ranks;
 
 /// <summary>Information about a guild rank.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record GuildRank
 {

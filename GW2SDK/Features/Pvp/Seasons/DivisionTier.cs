@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Pvp.Seasons;
 
 /// <summary>Information about a tier within a division.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record DivisionTier
 {

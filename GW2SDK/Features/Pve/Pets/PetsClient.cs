@@ -7,7 +7,6 @@ using GuildWars2.Json;
 namespace GuildWars2.Pve.Pets;
 
 /// <summary>Provides query methods for Ranger pets.</summary>
-[PublicAPI]
 public sealed class PetsClient
 {
     private readonly HttpClient httpClient;

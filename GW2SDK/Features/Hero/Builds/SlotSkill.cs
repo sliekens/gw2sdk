@@ -2,7 +2,6 @@
 
 /// <summary>The base type for slot skills (heal, utility and elite skills) which are activated by the player to perform an
 /// action.</summary>
-[PublicAPI]
 [Inheritable]
 [DataTransferObject]
 public record SlotSkill : ActionSkill

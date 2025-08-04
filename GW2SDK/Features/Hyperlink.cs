@@ -3,7 +3,6 @@
 /// <summary>Represents a hyperlink.</summary>
 /// <remarks>Not meant to be used directly. A hyperlink is usually obtained from an API response. For example, to link to
 /// related resources.</remarks>
-[PublicAPI]
 public readonly record struct Hyperlink
 {
     /// <summary>Initializes a new instance of the <see cref="Hyperlink"/> struct.</summary>

@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Guilds.Upgrades;
 
 /// <summary>Information about an item cost for a guild upgrade.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record GuildUpgradeItemCost : GuildUpgradeCost
 {

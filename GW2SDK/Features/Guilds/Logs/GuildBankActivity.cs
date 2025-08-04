@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Guilds.Logs;
 
 /// <summary>A log entry about a guild vault transaction.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record GuildBankActivity : GuildLogEntry
 {

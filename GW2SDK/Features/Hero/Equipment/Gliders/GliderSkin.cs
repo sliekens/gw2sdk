@@ -3,7 +3,6 @@
 namespace GuildWars2.Hero.Equipment.Gliders;
 
 /// <summary>Information about a glider skin.</summary>
-[PublicAPI]
 [DataTransferObject]
 [JsonConverter(typeof(GliderSkinJsonConverter))]
 public sealed record GliderSkin

@@ -7,7 +7,6 @@ using GuildWars2.Hero.Achievements.Rewards;
 namespace GuildWars2.Hero.Achievements;
 
 /// <summary>Information about an achievement.</summary>
-[PublicAPI]
 [Inheritable]
 [DataTransferObject]
 [JsonConverter(typeof(AchievementJsonConverter))]

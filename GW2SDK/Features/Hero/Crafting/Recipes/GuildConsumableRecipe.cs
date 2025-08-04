@@ -3,7 +3,6 @@
 namespace GuildWars2.Hero.Crafting.Recipes;
 
 /// <summary>Information about a recipe for crafting a guild consumable, for example a banner.</summary>
-[PublicAPI]
 [JsonConverter(typeof(GuildConsumableRecipeJsonConverter))]
 public sealed record GuildConsumableRecipe : Recipe
 {

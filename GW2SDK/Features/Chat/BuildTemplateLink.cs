@@ -5,7 +5,6 @@ using GuildWars2.Hero.Training;
 namespace GuildWars2.Chat;
 
 /// <summary>Represents a build template chat link.</summary>
-[PublicAPI]
 public sealed record BuildTemplateLink : Link
 {
     /// <summary>The profession.</summary>

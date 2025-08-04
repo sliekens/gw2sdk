@@ -4,7 +4,6 @@ using GuildWars2.Hero.Equipment;
 namespace GuildWars2.Hero.Inventories;
 
 /// <summary>Information about an item slot in the inventory or bank.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record ItemSlot
 {

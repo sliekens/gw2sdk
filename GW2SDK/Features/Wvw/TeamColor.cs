@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Wvw;
 
 /// <summary>The team colors in World vs. World.</summary>
-[PublicAPI]
 [DefaultValue(Neutral)]
 [JsonConverter(typeof(TeamColorJsonConverter))]
 public enum TeamColor

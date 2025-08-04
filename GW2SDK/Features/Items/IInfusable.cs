@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Items;
 
 /// <summary>The interface for items that can be infused (or attuned) to add one extra infusion slot.</summary>
-[PublicAPI]
 public interface IInfusable
 {
     /// <summary>If the current item is used in the Mystic Forge to infuse (or attune) equipment, this collection contains the

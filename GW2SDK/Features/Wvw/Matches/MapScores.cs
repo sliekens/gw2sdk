@@ -3,7 +3,6 @@
 namespace GuildWars2.Wvw.Matches;
 
 /// <summary>Information about the scores of a map in a World vs. World match.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record MapScores
 {

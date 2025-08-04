@@ -3,6 +3,5 @@
 namespace GuildWars2.Hero.Crafting.Recipes;
 
 /// <summary>Information about a recipe for crafting a mace.</summary>
-[PublicAPI]
 [JsonConverter(typeof(MaceRecipeJsonConverter))]
 public sealed record MaceRecipe : Recipe;

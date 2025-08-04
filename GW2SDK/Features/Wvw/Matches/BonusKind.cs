@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Wvw.Matches;
 
 /// <summary>The bonus kinds.</summary>
-[PublicAPI]
 [DefaultValue(None)]
 [JsonConverter(typeof(BonusKindJsonConverter))]
 public enum BonusKind

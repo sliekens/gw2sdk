@@ -14,7 +14,6 @@ using GuildWars2.Pvp.Stats;
 namespace GuildWars2.Pvp;
 
 /// <summary>Provides query methods for PvP matches, seasons, rank, leaderboards, equipment and mist chanpions.</summary>
-[PublicAPI]
 public sealed class PvpClient
 {
     private readonly HttpClient httpClient;

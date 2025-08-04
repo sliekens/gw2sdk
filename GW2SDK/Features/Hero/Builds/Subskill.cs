@@ -2,7 +2,6 @@
 
 /// <summary>Information about skills which have alternate function under certain circumstances, but share the same
 /// cooldown with the main skill. For example Elementalist glyps have different effects based on the active attunement.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Subskill
 {

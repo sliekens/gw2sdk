@@ -6,7 +6,6 @@ using GuildWars2.Json;
 namespace GuildWars2.Metadata;
 
 /// <summary>Provides query methods for game metadata and API metadata.</summary>
-[PublicAPI]
 public sealed class MetadataClient
 {
     private readonly HttpClient httpClient;

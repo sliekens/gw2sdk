@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Pvp.Seasons;
 
 /// <summary>Modifiers for divisions.</summary>
-[PublicAPI]
 public sealed record DivisionFlags : Flags
 {
     /// <summary>Indicates whether you can lose pips in this division.</summary>

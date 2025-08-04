@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Hero.Equipment.Dyes;
 
 /// <summary>Information about how a dye color looks when applied to a material.</summary>
-[PublicAPI]
 [DataTransferObject]
 [JsonConverter(typeof(ColorInfoJsonConverter))]
 public sealed record ColorInfo

@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Items;
 
 /// <summary>The types of infusion slot upgrades.</summary>
-[PublicAPI]
 [DefaultValue(None)]
 [JsonConverter(typeof(InfusionSlotUpgradeKindJsonConverter))]
 public enum InfusionSlotUpgradeKind

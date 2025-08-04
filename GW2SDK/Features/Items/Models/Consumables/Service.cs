@@ -3,7 +3,6 @@
 namespace GuildWars2.Items;
 
 /// <summary>Information about a consumable which immediately takes effect upon receipt.</summary>
-[PublicAPI]
 [JsonConverter(typeof(ServiceJsonConverter))]
 public sealed record Service : Consumable
 {

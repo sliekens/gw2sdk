@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Pvp.Seasons;
 
 /// <summary>Information about the scores of a player or team on a leaderboard.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Score
 {

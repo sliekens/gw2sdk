@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.Crafting;
 
 /// <summary>Information about an ingredient required to craft an item.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Ingredient
 {

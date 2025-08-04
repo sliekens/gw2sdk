@@ -3,7 +3,6 @@
 namespace GuildWars2.Hero.Equipment;
 
 /// <summary>Information about an attributes combination for equipment with selectable stats.</summary>
-[PublicAPI]
 [DataTransferObject]
 [JsonConverter(typeof(SelectedAttributeCombinationJsonConverter))]
 public sealed record SelectedAttributeCombination

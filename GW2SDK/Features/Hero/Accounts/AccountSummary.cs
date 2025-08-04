@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.Accounts;
 
 /// <summary>Information about a player account.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record AccountSummary
 {

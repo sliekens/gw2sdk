@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.Training;
 
 /// <summary>Information about the number of hero points spent in a training track.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record TrainingProgress
 {

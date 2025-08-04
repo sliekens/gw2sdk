@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.Builds;
 
 /// <summary>A fact applied by the skill/trait when another trait is active.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record TraitedFact
 {

@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Pve.SuperAdventureBox;
 
 /// <summary>Information about a super adventure box upgrade.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record SuperAdventureBoxUpgrade
 {

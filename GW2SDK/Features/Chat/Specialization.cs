@@ -5,7 +5,6 @@
 /// <param name="AdeptTrait">The first trait.</param>
 /// <param name="MasterTrait">The second trait.</param>
 /// <param name="GrandmasterTrait">The third trait.</param>
-[PublicAPI]
 public record struct Specialization(
     int Id,
     SelectedTrait AdeptTrait,

@@ -7,7 +7,6 @@ using GuildWars2.Json;
 namespace GuildWars2.Hero.Crafting.Daily;
 
 /// <summary>Provides query methods for items which can be crafted once per day.</summary>
-[PublicAPI]
 public sealed class DailyCraftingClient
 {
     private readonly HttpClient httpClient;

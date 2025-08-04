@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Markup;
 
 /// <summary>Represents a lexer for tokenizing markup input.</summary>
-[PublicAPI]
 public sealed class MarkupLexer
 {
     private static readonly HashSet<string> VoidElements =

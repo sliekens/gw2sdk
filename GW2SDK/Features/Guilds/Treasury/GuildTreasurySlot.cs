@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Guilds.Treasury;
 
 /// <summary>Information about an item in the guild treasury.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record GuildTreasurySlot
 {

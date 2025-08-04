@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Http;
 
 /// <summary>Thrown when a server returns an unusable response.</summary>
-[PublicAPI]
 public sealed class BadResponseException : HttpRequestException
 {
     /// <summary>Initializes a new instance of the <see cref="BadResponseException" /> class.</summary>

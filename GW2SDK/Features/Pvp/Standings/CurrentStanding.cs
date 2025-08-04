@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Pvp.Standings;
 
 /// <summary>Information about the current division standing of the player in a PvP League season.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record CurrentStanding
 {

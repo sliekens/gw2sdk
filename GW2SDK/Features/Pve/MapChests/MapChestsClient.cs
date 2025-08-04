@@ -7,7 +7,6 @@ using GuildWars2.Json;
 namespace GuildWars2.Pve.MapChests;
 
 /// <summary>Provides query methods for daily map rewards.</summary>
-[PublicAPI]
 public sealed class MapChestsClient
 {
     private readonly HttpClient httpClient;

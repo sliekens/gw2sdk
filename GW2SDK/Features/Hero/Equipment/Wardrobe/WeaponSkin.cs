@@ -5,7 +5,6 @@ using GuildWars2.Items;
 namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 /// <summary>Information about a weapon skin.</summary>
-[PublicAPI]
 [Inheritable]
 [JsonConverter(typeof(WeaponSkinJsonConverter))]
 public record WeaponSkin : EquipmentSkin

@@ -6,7 +6,6 @@ using GuildWars2.Items;
 namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 /// <summary>Information about an equipment skin.</summary>
-[PublicAPI]
 [Inheritable]
 [DataTransferObject]
 [JsonConverter(typeof(EquipmentSkinJsonConverter))]

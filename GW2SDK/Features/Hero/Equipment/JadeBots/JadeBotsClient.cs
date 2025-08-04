@@ -7,7 +7,6 @@ using GuildWars2.Json;
 namespace GuildWars2.Hero.Equipment.JadeBots;
 
 /// <summary>Provides query methods for jade bot skins and skins unlocked on the account.</summary>
-[PublicAPI]
 public sealed class JadeBotsClient
 {
     private readonly HttpClient httpClient;

@@ -5,7 +5,6 @@ using GuildWars2.Hero;
 namespace GuildWars2.Items;
 
 /// <summary>Information about a back item.</summary>
-[PublicAPI]
 [JsonConverter(typeof(BackpackJsonConverter))]
 public sealed record Backpack : Item, ICombatEquipment, IUpgradable, IInfused, IInfusable
 {

@@ -3,7 +3,6 @@
 namespace GuildWars2.Hero.Training;
 
 /// <summary>Information about a weapon skill.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record WeaponSkill
 {

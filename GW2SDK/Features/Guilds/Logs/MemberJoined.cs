@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Guilds.Logs;
 
 /// <summary>A log entry about a member joining the guild.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record MemberJoined : GuildLogEntry
 {

@@ -8,7 +8,6 @@ namespace GuildWars2.Hero.Builds;
 #pragma warning disable CA1707 // Identifiers should not contain underscores
 
 /// <summary>The skill slots for abilities which can be activated by the player.</summary>
-[PublicAPI]
 [DefaultValue(None)]
 [JsonConverter(typeof(SkillSlotJsonConverter))]
 public enum SkillSlot

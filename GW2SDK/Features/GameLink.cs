@@ -7,7 +7,6 @@ using GuildWars2.Mumble;
 namespace GuildWars2;
 
 /// <summary>Represents a link to the game client that provides realtime game state updates.</summary>
-[PublicAPI]
 [CLSCompliant(false)]
 public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposable
 {

@@ -3,7 +3,6 @@
 namespace GuildWars2.Hero.Equipment.Finishers;
 
 /// <summary>Information about a finisher.</summary>
-[PublicAPI]
 [DataTransferObject]
 [JsonConverter(typeof(FinisherJsonConverter))]
 public sealed record Finisher

@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Guilds.Teams;
 
 /// <summary>Information about a game's score.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Score
 {

@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Wvw.Matches;
 
 /// <summary>Information about a skirmish.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Skirmish
 {

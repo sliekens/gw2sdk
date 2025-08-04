@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.Achievements.Rewards;
 
 /// <summary>A title reward for completing an achievement.</summary>
-[PublicAPI]
 public sealed record TitleReward : AchievementReward
 {
     /// <summary>The title ID of the reward.</summary>

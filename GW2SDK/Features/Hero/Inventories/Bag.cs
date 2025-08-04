@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.Inventories;
 
 /// <summary>Information about an equipped bag.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Bag
 {

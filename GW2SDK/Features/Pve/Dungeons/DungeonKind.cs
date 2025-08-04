@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Pve.Dungeons;
 
 /// <summary>The kind of paths in a dungeon.</summary>
-[PublicAPI]
 [DefaultValue(None)]
 [JsonConverter(typeof(DungeonKindJsonConverter))]
 public enum DungeonKind

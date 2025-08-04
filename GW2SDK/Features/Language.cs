@@ -4,7 +4,6 @@ using System.Text.RegularExpressions;
 namespace GuildWars2;
 
 /// <summary>Represents a language.</summary>
-[PublicAPI]
 public sealed class Language
 {
     private static readonly Regex Alpha2Pattern = new(

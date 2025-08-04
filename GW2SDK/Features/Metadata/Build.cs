@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Metadata;
 
 /// <summary>Information about the current build of the game client.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Build
 {

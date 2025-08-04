@@ -3,7 +3,6 @@
 namespace GuildWars2.Exploration.Hearts;
 
 /// <summary>Information about a renown heart, which is a task required for map completion.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Heart
 {

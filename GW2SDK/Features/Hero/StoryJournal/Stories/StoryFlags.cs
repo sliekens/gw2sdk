@@ -3,7 +3,6 @@
 namespace GuildWars2.Hero.StoryJournal.Stories;
 
 /// <summary>Modifiers for stories.</summary>
-[PublicAPI]
 public sealed record StoryFlags : Flags
 {
     /// <summary>No modifiers.</summary>

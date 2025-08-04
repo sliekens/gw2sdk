@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Guilds.Teams;
 
 /// <summary>Information about a guild team results in a PvP season.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Season
 {

@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 namespace GuildWars2;
 
 /// <summary>Describes the desired program behavior when a source JSON document does not exactly match the target CLR type.</summary>
-[PublicAPI]
 [DefaultValue(Error)]
 [JsonConverter(typeof(MissingMemberBehaviorJsonConverter))]
 public enum MissingMemberBehavior

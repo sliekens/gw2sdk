@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Pve.Raids;
 
 /// <summary>Information about a raid encounter.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Encounter
 {

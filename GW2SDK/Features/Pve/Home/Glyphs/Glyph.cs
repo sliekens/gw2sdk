@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Pve.Home.Decorations;
 
 /// <summary>Information about a homestead glyph.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Glyph
 {

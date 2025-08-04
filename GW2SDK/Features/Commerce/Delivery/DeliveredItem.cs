@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Commerce.Delivery;
 
 /// <summary>An item in the delivery box.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record DeliveredItem
 {

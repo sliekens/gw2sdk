@@ -5,7 +5,6 @@ namespace GuildWars2.Http;
 
 /// <summary>Used to build a query string, e.g. <c><![CDATA[ids=1,2,3&lang=fr&v=latest]]></c>. Not meant to be used
 /// directly.</summary>
-[PublicAPI]
 [DebuggerDisplay("{Build()}")]
 public sealed class QueryBuilder : IEnumerable<KeyValuePair<string, string>>
 {

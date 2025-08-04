@@ -4,7 +4,6 @@ using System.Reflection;
 namespace GuildWars2;
 
 /// <summary>The base type for flags objects.</summary>
-[PublicAPI]
 [DataTransferObject]
 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
 public abstract record Flags

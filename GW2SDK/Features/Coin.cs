@@ -9,7 +9,6 @@ using System.Text;
 namespace GuildWars2;
 
 /// <summary>Represents an amount of coins and provides methods to compare and convert coins to other formats.</summary>
-[PublicAPI]
 [JsonConverter(typeof(CoinJsonConverter))]
 public readonly record struct Coin : IComparable, IComparable<Coin>
 {

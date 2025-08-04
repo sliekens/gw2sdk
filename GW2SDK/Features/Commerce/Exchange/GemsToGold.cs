@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Commerce.Exchange;
 
 /// <summary>Information about the current exchange rate of gems to gold.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record GemsToGold
 {

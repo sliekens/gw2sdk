@@ -6,7 +6,6 @@ namespace GuildWars2.Items;
 
 /// <summary>Information about an item. This type is the base type for all items. Cast objects of this type to a more
 /// specific type to access more properties.</summary>
-[PublicAPI]
 [Inheritable]
 [DataTransferObject]
 [JsonConverter(typeof(ItemJsonConverter))]

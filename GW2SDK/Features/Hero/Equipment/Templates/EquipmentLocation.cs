@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Hero.Equipment.Templates;
 
 /// <summary>The location of an equipment item.</summary>
-[PublicAPI]
 [DefaultValue(None)]
 [JsonConverter(typeof(EquipmentLocationJsonConverter))]
 public enum EquipmentLocation

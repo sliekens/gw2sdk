@@ -7,7 +7,6 @@ using GuildWars2.Json;
 namespace GuildWars2.Hero.Equipment.Skiffs;
 
 /// <summary>Provides query methods for skiffs and skiffs unlocked on the account.</summary>
-[PublicAPI]
 public sealed class SkiffsClient
 {
     private readonly HttpClient httpClient;

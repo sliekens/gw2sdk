@@ -2,7 +2,6 @@
 
 /// <summary>Represents a text node in the markup structure.</summary>
 /// <param name="text">The text content of the node.</param>
-[PublicAPI]
 public sealed class TextNode(string text) : MarkupNode
 {
     /// <inheritdoc />

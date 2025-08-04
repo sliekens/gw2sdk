@@ -3,7 +3,6 @@
 namespace GuildWars2.Items;
 
 /// <summary>Information about a utility consumable, which typically grants an enhancement effect when consumed.</summary>
-[PublicAPI]
 [JsonConverter(typeof(UtilityJsonConverter))]
 public sealed record Utility : Consumable
 {

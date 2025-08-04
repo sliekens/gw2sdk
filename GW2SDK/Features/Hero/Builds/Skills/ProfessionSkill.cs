@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.Builds.Skills;
 
 /// <summary>Information about a skill belonging to a profession mechanic.</summary>
-[PublicAPI]
 public sealed record ProfessionSkill : ActionSkill
 {
     /// <summary>Used for Elementalist skills to indicate which attunement this skill is associated with.</summary>

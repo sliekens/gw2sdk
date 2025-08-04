@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Items;
 
 /// <summary>The type of damage dealt by a weapon. It is a purely visual effect and does not affect the damage calculation.</summary>
-[PublicAPI]
 [DefaultValue(Physical)]
 [JsonConverter(typeof(DamageTypeJsonConverter))]
 public enum DamageType

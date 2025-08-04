@@ -3,7 +3,6 @@
 namespace GuildWars2.Items;
 
 /// <summary>Information about a buff, which is a passive effect that enhances your stats or abilities.</summary>
-[PublicAPI]
 [DataTransferObject]
 [JsonConverter(typeof(BuffJsonConverter))]
 public sealed record Buff

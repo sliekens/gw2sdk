@@ -6,7 +6,6 @@ using GuildWars2.Chat;
 namespace GuildWars2.Hero.Equipment.Dyes;
 
 /// <summary>Information about a dye color.</summary>
-[PublicAPI]
 [DataTransferObject]
 [JsonConverter(typeof(DyeColorJsonConverter))]
 public sealed record DyeColor

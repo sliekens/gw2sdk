@@ -5,5 +5,4 @@
 #pragma warning disable CA1711 // Identifiers should not have incorrect suffix
 
 /// <summary>Information about the workshop restoration.</summary>
-[PublicAPI]
 public sealed record Queue : GuildUpgrade;

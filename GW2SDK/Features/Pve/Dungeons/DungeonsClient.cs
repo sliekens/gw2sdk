@@ -7,7 +7,6 @@ using GuildWars2.Json;
 namespace GuildWars2.Pve.Dungeons;
 
 /// <summary>Provides query methods for dungeons and completed dungeon paths.</summary>
-[PublicAPI]
 public sealed class DungeonsClient
 {
     private readonly HttpClient httpClient;

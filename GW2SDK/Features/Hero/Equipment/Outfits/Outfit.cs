@@ -5,7 +5,6 @@ using GuildWars2.Chat;
 namespace GuildWars2.Hero.Equipment.Outfits;
 
 /// <summary>Information about an outfit.</summary>
-[PublicAPI]
 [DataTransferObject]
 [JsonConverter(typeof(OutfitJsonConverter))]
 public sealed record Outfit

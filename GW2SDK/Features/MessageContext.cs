@@ -3,7 +3,6 @@
 namespace GuildWars2;
 
 /// <summary>Contains message metadata.</summary>
-[PublicAPI]
 public sealed record MessageContext
 {
     /// <summary>Initializes a new instance of the <see cref="MessageContext" /> class.</summary>

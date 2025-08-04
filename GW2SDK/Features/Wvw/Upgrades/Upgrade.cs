@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Wvw.Upgrades;
 
 /// <summary>Information about an upgrade effect provided by an upgrade tier.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Upgrade
 {

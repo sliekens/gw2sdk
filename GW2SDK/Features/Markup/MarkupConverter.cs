@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Markup;
 
 /// <summary>Provides functionality to convert markup strings to other formats.</summary>
-[PublicAPI]
 public static class MarkupConverter
 {
     /// <summary>Converts a markup string to a string with all markup formatting removed.</summary>

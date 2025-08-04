@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.Accounts;
 
 /// <summary>Information about purchased Fractal augmentations and luck on the account.</summary>
-[PublicAPI]
 public static class ProgressionKind
 {
     /// <summary>The account's Agony Impedance level. Each level grants +5 agony resistance.</summary>

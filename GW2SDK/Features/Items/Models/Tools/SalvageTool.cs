@@ -3,7 +3,6 @@
 namespace GuildWars2.Items;
 
 /// <summary>Information about a tool which can be used to salvage items.</summary>
-[PublicAPI]
 [JsonConverter(typeof(SalvageToolJsonConverter))]
 public sealed record SalvageTool : Item
 {

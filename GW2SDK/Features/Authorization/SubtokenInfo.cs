@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Authorization;
 
 /// <summary>Information about a subtoken.</summary>
-[PublicAPI]
 public sealed record SubtokenInfo : TokenInfo
 {
     /// <summary>The absolute expiration date of the subtoken.</summary>

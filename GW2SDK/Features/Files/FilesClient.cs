@@ -7,7 +7,6 @@ using GuildWars2.Json;
 namespace GuildWars2.Files;
 
 /// <summary>Provides query methods to retrieve assets (icons) from the Guild Wars 2 API.</summary>
-[PublicAPI]
 public sealed class FilesClient
 {
     private readonly HttpClient httpClient;

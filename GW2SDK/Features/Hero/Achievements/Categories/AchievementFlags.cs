@@ -5,7 +5,6 @@ using GuildWars2.Collections;
 namespace GuildWars2.Hero.Achievements.Categories;
 
 /// <summary>Modifiers for achievements.</summary>
-[PublicAPI]
 [JsonConverter(typeof(AchievementFlagsJsonConverter))]
 public sealed record AchievementFlags : Flags
 {

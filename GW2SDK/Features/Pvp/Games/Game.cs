@@ -3,7 +3,6 @@
 namespace GuildWars2.Pvp.Games;
 
 /// <summary>Information about a PvP game played on an account.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Game
 {

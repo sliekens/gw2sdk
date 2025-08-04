@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Metadata;
 
 /// <summary>Information about a schema version.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Schema
 {

@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Guilds.Upgrades;
 
 /// <summary>Information about a guild currency cost for a guild upgrade, for example Aetherium.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record GuildUpgradeCurrencyCost : GuildUpgradeCost
 {

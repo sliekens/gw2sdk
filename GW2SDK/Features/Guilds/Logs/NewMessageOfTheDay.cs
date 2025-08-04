@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Guilds.Logs;
 
 /// <summary>A log entry about a change in the guild message of the day.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record NewMessageOfTheDay : GuildLogEntry
 {

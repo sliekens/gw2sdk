@@ -18,7 +18,6 @@ namespace GuildWars2.Guilds;
 
 /// <summary>Provides query methods for guilds (permissions, ranks, members, teams, bank, upgrades, logs) and guild
 /// emblems.</summary>
-[PublicAPI]
 public sealed class GuildsClient
 {
     private readonly HttpClient httpClient;

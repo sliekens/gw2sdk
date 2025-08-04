@@ -3,7 +3,6 @@
 namespace GuildWars2.Hero.Equipment;
 
 /// <summary>Information about a dye slot of an equipment piece.</summary>
-[PublicAPI]
 [DataTransferObject]
 [JsonConverter(typeof(DyeSlotJsonConverter))]
 public sealed record DyeSlot

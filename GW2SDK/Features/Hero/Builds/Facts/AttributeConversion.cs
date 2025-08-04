@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.Builds.Facts;
 
 /// <summary>An attribute which is converted into another attribute by a trait.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record AttributeConversion : Fact
 {

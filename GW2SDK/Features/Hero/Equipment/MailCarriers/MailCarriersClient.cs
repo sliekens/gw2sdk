@@ -7,7 +7,6 @@ using GuildWars2.Json;
 namespace GuildWars2.Hero.Equipment.MailCarriers;
 
 /// <summary>Provides query methods for mail carriers and mail carriers unlocked on the account.</summary>
-[PublicAPI]
 public sealed class MailCarriersClient
 {
     private readonly HttpClient httpClient;

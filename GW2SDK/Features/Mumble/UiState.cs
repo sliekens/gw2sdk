@@ -6,7 +6,6 @@ namespace GuildWars2.Mumble;
 #pragma warning disable CA1028 // Enum Storage should be Int32
 
 /// <summary>The user interface states provided by the MumbleLink API as a flags enum.</summary>
-[PublicAPI]
 [Flags]
 [DefaultValue(None)]
 [JsonConverter(typeof(UiStateJsonConverter))]

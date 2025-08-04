@@ -2,7 +2,6 @@
 
 /// <summary>Information about the access token. This is a base type, derived types exist for API keys and subtokens. Cast
 /// objects of this type to a more specific type to access more properties.</summary>
-[PublicAPI]
 [Inheritable]
 [DataTransferObject]
 public record TokenInfo

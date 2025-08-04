@@ -3,7 +3,6 @@
 namespace GuildWars2.Mumble;
 
 /// <summary>Information about the player character's identity provided by the MumbleLink API.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Identity
 {

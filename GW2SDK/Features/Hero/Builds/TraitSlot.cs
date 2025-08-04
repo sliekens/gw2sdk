@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Hero.Builds;
 
 /// <summary>The trait slots.</summary>
-[PublicAPI]
 [DefaultValue(None)]
 [JsonConverter(typeof(TraitSlotJsonConverter))]
 public enum TraitSlot

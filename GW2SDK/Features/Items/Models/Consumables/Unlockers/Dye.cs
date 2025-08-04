@@ -3,7 +3,6 @@
 namespace GuildWars2.Items;
 
 /// <summary>Information about a dye which unlocks a color when consumed.</summary>
-[PublicAPI]
 [JsonConverter(typeof(DyeJsonConverter))]
 public sealed record Dye : Unlocker
 {

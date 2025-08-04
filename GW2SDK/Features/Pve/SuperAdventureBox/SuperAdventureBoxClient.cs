@@ -6,7 +6,6 @@ using GuildWars2.Json;
 namespace GuildWars2.Pve.SuperAdventureBox;
 
 /// <summary>Provides query methods for Super Adventure Box progress.</summary>
-[PublicAPI]
 public sealed class SuperAdventureBoxClient
 {
     private readonly HttpClient httpClient;

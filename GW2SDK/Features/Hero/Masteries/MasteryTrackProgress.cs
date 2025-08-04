@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.Masteries;
 
 /// <summary>Information about mastery track progress on the account.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record MasteryTrackProgress
 {

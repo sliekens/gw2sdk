@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Pve.Home.Decorations;
 
 /// <summary>Information about a decoration unlocked on the account.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record UnlockedDecoration
 {

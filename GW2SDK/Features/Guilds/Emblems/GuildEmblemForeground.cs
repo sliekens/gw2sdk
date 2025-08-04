@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Guilds.Emblems;
 
 /// <summary>Information about the guild's current emblem foreground.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record GuildEmblemForeground
 {

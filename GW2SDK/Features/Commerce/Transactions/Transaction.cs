@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Commerce.Transactions;
 
 /// <summary>Information about the completed transaction.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Transaction
 {

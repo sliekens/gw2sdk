@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Wvw.Ranks;
 
 /// <summary>Information about a World Rank.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Rank
 {

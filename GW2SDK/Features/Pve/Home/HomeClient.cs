@@ -11,7 +11,6 @@ using GuildWars2.Pve.Home.Nodes;
 namespace GuildWars2.Pve.Home;
 
 /// <summary>Provides query methods for home instances and homesteads.</summary>
-[PublicAPI]
 public sealed class HomeClient
 {
     private readonly HttpClient httpClient;

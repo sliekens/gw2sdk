@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Pve.Pets;
 
 /// <summary>Information about a ranger pet.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Pet
 {

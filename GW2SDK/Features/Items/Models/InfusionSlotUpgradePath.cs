@@ -3,7 +3,6 @@
 namespace GuildWars2.Items;
 
 /// <summary>Information about an upgraded item that gains an extra infusion slot.</summary>
-[PublicAPI]
 [DataTransferObject]
 [JsonConverter(typeof(InfusionSlotUpgradePathJsonConverter))]
 public sealed record InfusionSlotUpgradePath

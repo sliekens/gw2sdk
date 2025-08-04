@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Pvp.Seasons;
 
 /// <summary>Information about a leaderboard tier.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record LeaderboardTier
 {

@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Hero.Training;
 
 /// <summary>The categories of training.</summary>
-[PublicAPI]
 [DefaultValue(None)]
 [JsonConverter(typeof(TrainingCategoryJsonConverter))]
 public enum TrainingCategory

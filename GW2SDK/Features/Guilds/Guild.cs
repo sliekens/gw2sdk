@@ -3,7 +3,6 @@
 namespace GuildWars2.Guilds;
 
 /// <summary>Information about a guild.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Guild
 {

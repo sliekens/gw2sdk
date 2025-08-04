@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Pve.SuperAdventureBox;
 
 /// <summary>Information about the Super Adventure Box progress of a character.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record SuperAdventureBoxProgress
 {

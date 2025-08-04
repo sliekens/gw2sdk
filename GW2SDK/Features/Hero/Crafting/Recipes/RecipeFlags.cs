@@ -3,7 +3,6 @@
 namespace GuildWars2.Hero.Crafting.Recipes;
 
 /// <summary>Modifiers for crafting recipes.</summary>
-[PublicAPI]
 [JsonConverter(typeof(RecipeFlagsJsonConverter))]
 public sealed record RecipeFlags : Flags
 {

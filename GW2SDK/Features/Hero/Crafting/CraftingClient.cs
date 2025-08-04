@@ -6,7 +6,6 @@ namespace GuildWars2.Hero.Crafting;
 
 /// <summary>Provides query methods for APIs related to crafting. This class consists of logical groups containing related
 /// sets of APIs. For example, all APIs pertaining to recipes are grouped into <see cref="Recipes" />.</summary>
-[PublicAPI]
 public sealed class CraftingClient
 {
     private readonly HttpClient httpClient;

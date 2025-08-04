@@ -5,7 +5,6 @@
 namespace GuildWars2.Win32;
 
 [StructLayout(LayoutKind.Sequential, Size = 28)]
-[UsedImplicitly(ImplicitUseTargetFlags.Members)]
 internal readonly struct sockaddr_in
 {
     internal readonly short sin_family;

@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Wvw.Timers;
 
 /// <summary>Information about WvW lockout or team assignment dates.</summary>
-[PublicAPI]
 public sealed record WvwTimer
 {
     /// <summary>The date and time when the timer expires for the North American region.</summary>

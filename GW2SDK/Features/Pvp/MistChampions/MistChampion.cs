@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Pvp.MistChampions;
 
 /// <summary>Information about a Mist Champion.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record MistChampion
 {

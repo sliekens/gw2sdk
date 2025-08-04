@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.Masteries;
 
 /// <summary>Information about mastery points earned and spent in a region.</summary>
-[PublicAPI]
 public sealed record MasteryPointsTotal
 {
     /// <summary>The region corresponding to the mastery points.</summary>

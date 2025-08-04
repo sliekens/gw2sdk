@@ -3,7 +3,6 @@
 namespace GuildWars2.Hero.Crafting.Recipes;
 
 /// <summary>Information about a recipe for crafting a guild decoration.</summary>
-[PublicAPI]
 [JsonConverter(typeof(GuildDecorationRecipeJsonConverter))]
 public sealed record GuildDecorationRecipe : Recipe
 {

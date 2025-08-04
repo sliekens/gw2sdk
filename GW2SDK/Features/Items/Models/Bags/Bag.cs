@@ -3,7 +3,6 @@
 namespace GuildWars2.Items;
 
 /// <summary>Information about a bag.</summary>
-[PublicAPI]
 [JsonConverter(typeof(BagJsonConverter))]
 public sealed record Bag : Item
 {

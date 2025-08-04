@@ -2,7 +2,6 @@
 
 /// <summary>Information about a training objective such as a skill or trait. This type is the base type. Cast objects of
 /// this type to a more specific type to access more properties.</summary>
-[PublicAPI]
 [Inheritable]
 [DataTransferObject]
 public record TrainingObjective

@@ -3,6 +3,5 @@
 namespace GuildWars2.Hero.Crafting.Recipes;
 
 /// <summary>Information about a recipe for crafting a trident.</summary>
-[PublicAPI]
 [JsonConverter(typeof(TridentRecipeJsonConverter))]
 public sealed record TridentRecipe : Recipe;

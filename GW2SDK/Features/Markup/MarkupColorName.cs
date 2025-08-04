@@ -3,7 +3,6 @@
 namespace GuildWars2.Markup;
 
 /// <summary>The color names used in markup.</summary>
-[PublicAPI]
 public static class MarkupColorName
 {
     /// <summary>A dictionary that maps color names to their corresponding hex color codes, based on colors picked from the

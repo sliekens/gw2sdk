@@ -3,7 +3,6 @@
 namespace GuildWars2.Hero.Equipment.MailCarriers;
 
 /// <summary>Modifiers for mail carriers.</summary>
-[PublicAPI]
 [JsonConverter(typeof(MailCarrierFlagsJsonConverter))]
 public sealed record MailCarrierFlags : Flags
 {

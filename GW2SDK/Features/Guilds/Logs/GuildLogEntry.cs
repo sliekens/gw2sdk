@@ -2,7 +2,6 @@
 
 /// <summary>An entry in the guild's log, used for audit purposes. This class is the base type for all log entries. Cast
 /// objects of this type to a more specific type to access more properties.</summary>
-[PublicAPI]
 [DataTransferObject]
 [Inheritable]
 public record GuildLogEntry

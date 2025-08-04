@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Commerce.Transactions;
 
 /// <summary>Information about the current order.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Order
 {

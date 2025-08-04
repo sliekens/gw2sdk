@@ -7,7 +7,6 @@ using GuildWars2.Json;
 namespace GuildWars2.Hero.Equipment.Novelties;
 
 /// <summary>Provides query methods for novelties and novelties unlocked on the account.</summary>
-[PublicAPI]
 public sealed class NoveltiesClient
 {
     private readonly HttpClient httpClient;

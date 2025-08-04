@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.Builds;
 
 /// <summary>Information about a Revenant legend.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Legend
 {

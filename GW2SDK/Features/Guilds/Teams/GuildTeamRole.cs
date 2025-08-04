@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Guilds.Teams;
 
 /// <summary>The roles that a guild PvP team member can have.</summary>
-[PublicAPI]
 [DefaultValue(None)]
 [JsonConverter(typeof(GuildTeamRoleJsonConverter))]
 public enum GuildTeamRole

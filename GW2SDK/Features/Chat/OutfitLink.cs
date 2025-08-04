@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Chat;
 
 /// <summary>Represents an outfit chat link.</summary>
-[PublicAPI]
 public sealed record OutfitLink : Link
 {
     /// <summary>The outfit ID.</summary>

@@ -7,7 +7,6 @@ using GuildWars2.Json;
 namespace GuildWars2.Worlds;
 
 /// <summary>Provides query methods for World (servers).</summary>
-[PublicAPI]
 public sealed class WorldsClient
 {
     private readonly HttpClient httpClient;

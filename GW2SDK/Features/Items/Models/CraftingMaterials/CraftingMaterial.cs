@@ -3,7 +3,6 @@
 namespace GuildWars2.Items;
 
 /// <summary>Information about a crafting material.</summary>
-[PublicAPI]
 [JsonConverter(typeof(CraftingMaterialJsonConverter))]
 public sealed record CraftingMaterial : Item, IInfusable
 {

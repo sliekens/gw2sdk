@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.StoryJournal.BackgroundStories;
 
 /// <summary>Information about an answer to a background story question.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record BackgroundStoryAnswer
 {

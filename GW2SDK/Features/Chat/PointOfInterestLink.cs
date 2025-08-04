@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Chat;
 
 /// <summary>Represents a point of interest chat link.</summary>
-[PublicAPI]
 public sealed record PointOfInterestLink : Link
 {
     /// <summary>The point of interest ID.</summary>

@@ -7,7 +7,6 @@ using GuildWars2.Json;
 namespace GuildWars2.Pve.Raids;
 
 /// <summary>Provides query methods for raids and completed encounters.</summary>
-[PublicAPI]
 public sealed class RaidsClient
 {
     private readonly HttpClient httpClient;

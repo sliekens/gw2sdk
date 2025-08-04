@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.Builds.Facts;
 
 /// <summary>A combo finisher effect activated by the skill/trait.</summary>
-[PublicAPI]
 public sealed record ComboFinisher : Fact
 {
     /// <summary>The chance of activating the combo finisher effect. Expressed as a percentage, where 100 is 100% chance.</summary>

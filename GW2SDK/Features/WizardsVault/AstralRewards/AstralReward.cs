@@ -3,7 +3,6 @@
 namespace GuildWars2.WizardsVault.AstralRewards;
 
 /// <summary>Information about an astral reward.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record AstralReward
 {

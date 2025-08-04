@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Guilds.Emblems;
 
 /// <summary>Modifiers for guild emblems.</summary>
-[PublicAPI]
 public sealed record GuildEmblemFlags : Flags
 {
     /// <summary>The background image is flipped horizontally.</summary>

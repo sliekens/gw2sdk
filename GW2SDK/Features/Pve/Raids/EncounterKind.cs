@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Pve.Raids;
 
 /// <summary>The kind of raid encounters.</summary>
-[PublicAPI]
 [DefaultValue(None)]
 [JsonConverter(typeof(EncounterKindJsonConverter))]
 public enum EncounterKind

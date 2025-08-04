@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Markup;
 
 /// <summary>Represents a node in the markup structure.</summary>
-[PublicAPI]
 public abstract class MarkupNode
 {
     /// <summary>Gets the type of the node.</summary>

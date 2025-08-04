@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.Training;
 
 /// <summary>Modifiers for weapons.</summary>
-[PublicAPI]
 public sealed record WeaponFlags : Flags
 {
     /// <summary>Whether the weapon can be equipped in mainhand.</summary>

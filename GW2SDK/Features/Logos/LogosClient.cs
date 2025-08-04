@@ -7,7 +7,6 @@ using GuildWars2.Json;
 namespace GuildWars2.Logos;
 
 /// <summary>Provides query methods for logos.</summary>
-[PublicAPI]
 public sealed class LogosClient
 {
     private readonly HttpClient httpClient;

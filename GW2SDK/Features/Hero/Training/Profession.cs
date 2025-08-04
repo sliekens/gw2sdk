@@ -6,7 +6,6 @@ using static GuildWars2.Hero.ProfessionName;
 namespace GuildWars2.Hero.Training;
 
 /// <summary>Information about a profession.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Profession
 {

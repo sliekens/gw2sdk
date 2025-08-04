@@ -3,7 +3,6 @@
 namespace GuildWars2.Pvp.Stats;
 
 /// <summary>Information about the PvP statistics of the account.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record AccountStats
 {

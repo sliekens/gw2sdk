@@ -9,7 +9,6 @@ namespace GuildWars2.Wvw.Objectives;
 
 /// <summary>Information about an objective in World vs. World. This class is the base type. Cast objects of this type to a
 /// more specific type to access more properties.</summary>
-[PublicAPI]
 [Inheritable]
 [DataTransferObject]
 public record Objective

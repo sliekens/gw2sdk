@@ -7,7 +7,6 @@ using GuildWars2.Json;
 namespace GuildWars2.Hero.Banking;
 
 /// <summary>Provides query methods for the account bank and material storage.</summary>
-[PublicAPI]
 public sealed class BankClient
 {
     private readonly HttpClient httpClient;

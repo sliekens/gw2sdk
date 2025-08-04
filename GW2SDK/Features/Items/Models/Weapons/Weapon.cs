@@ -6,7 +6,6 @@ namespace GuildWars2.Items;
 
 /// <summary>Information about a weapon item. This type is the base type for all weapon. Cast objects of this type to a
 /// more specific type to access more properties.</summary>
-[PublicAPI]
 [Inheritable]
 [JsonConverter(typeof(WeaponJsonConverter))]
 public record Weapon : Item, ICombatEquipment, IUpgradable

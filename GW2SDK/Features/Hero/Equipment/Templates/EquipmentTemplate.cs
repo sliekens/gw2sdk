@@ -3,7 +3,6 @@
 namespace GuildWars2.Hero.Equipment.Templates;
 
 /// <summary>Information about an equipment tab on the character.</summary>
-[PublicAPI]
 [DataTransferObject]
 [JsonConverter(typeof(EquipmentTemplateJsonConverter))]
 public sealed record EquipmentTemplate

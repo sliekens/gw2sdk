@@ -3,7 +3,6 @@
 namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 /// <summary>Information about an armor skin.</summary>
-[PublicAPI]
 [Inheritable]
 [JsonConverter(typeof(ArmorSkinJsonConverter))]
 public record ArmorSkin : EquipmentSkin

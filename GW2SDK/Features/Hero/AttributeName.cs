@@ -5,7 +5,6 @@ namespace GuildWars2.Hero;
 
 /// <summary>The primary and secondary combat attributes which improve character (and pet) effectiveness in combat. Primary
 /// attributes have a base value of 1000 at level 80, while secondary attributes have a base value of 0.</summary>
-[PublicAPI]
 [DefaultValue(None)]
 [JsonConverter(typeof(AttributeNameJsonConverter))]
 public enum AttributeName

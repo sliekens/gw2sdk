@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Pve.Home.Decorations;
 
 /// <summary>Information about a homestead decoration.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Decoration
 {

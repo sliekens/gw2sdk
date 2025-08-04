@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Pvp.Seasons;
 
 /// <summary>Information about the minimum and maximum rank of a leaderboard tier.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record LeaderboardTierRange
 {

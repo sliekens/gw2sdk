@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Pvp.Seasons;
 
 /// <summary>Information about a player or team on the leaderboard for a PvP League season.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record LeaderboardEntry
 {

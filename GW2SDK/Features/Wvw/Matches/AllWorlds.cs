@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Wvw.Matches;
 
 /// <summary>Information about the worlds participating in a World vs. World match.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record AllWorlds
 {

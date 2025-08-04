@@ -7,7 +7,6 @@ using GuildWars2.Json;
 namespace GuildWars2.Hero.Races;
 
 /// <summary>Provides query method for playable races.</summary>
-[PublicAPI]
 public sealed class RacesClient
 {
     private readonly HttpClient httpClient;

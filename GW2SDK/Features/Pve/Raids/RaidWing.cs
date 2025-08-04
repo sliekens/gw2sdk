@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Pve.Raids;
 
 /// <summary>Information about a wing of a raid.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record RaidWing
 {

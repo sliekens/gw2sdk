@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Commerce.Listings;
 
 /// <summary>Information about a price level.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record OrderBookLine
 {

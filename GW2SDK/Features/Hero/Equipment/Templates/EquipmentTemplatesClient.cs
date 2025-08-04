@@ -7,7 +7,6 @@ using GuildWars2.Json;
 namespace GuildWars2.Hero.Equipment.Templates;
 
 /// <summary>Provides query methods for items equipped by a character and legendary items on the account.</summary>
-[PublicAPI]
 public sealed class EquipmentTemplatesClient
 {
     private readonly HttpClient httpClient;

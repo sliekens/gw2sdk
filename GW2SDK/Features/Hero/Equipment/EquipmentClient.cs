@@ -16,7 +16,6 @@ namespace GuildWars2.Hero.Equipment;
 /// <summary>Provides query methods for APIs related to equipment and cosmetic items. This class consists of logical groups
 /// containing related sets of APIs. For example, all APIs pertaining to equipment templates are grouped into
 /// <see cref="Templates" /> and all APIs pertaining to armor and weapon skins are grouped into <see cref="Wardrobe" />.</summary>
-[PublicAPI]
 public sealed class EquipmentClient
 {
     private readonly HttpClient httpClient;

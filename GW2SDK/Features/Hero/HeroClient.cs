@@ -17,7 +17,6 @@ namespace GuildWars2.Hero;
 /// <summary>Provides query methods for APIs related to the player account or character. This class consists of logical
 /// groups containing related sets of APIs. For example, all APIs pertaining to the achievements panel are grouped into
 /// <see cref="Achievements" /> and all APIs pertaining to crafting stations are grouped into <see cref="Crafting" />.</summary>
-[PublicAPI]
 public sealed class HeroClient
 {
     private readonly HttpClient httpClient;

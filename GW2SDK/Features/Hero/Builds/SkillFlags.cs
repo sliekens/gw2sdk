@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.Builds;
 
 /// <summary>Modifiers for skills.</summary>
-[PublicAPI]
 public sealed record SkillFlags : Flags
 {
     /// <summary>The skill is a ground targeting skill with a range indicator.</summary>

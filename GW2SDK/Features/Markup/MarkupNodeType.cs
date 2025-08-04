@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Markup;
 
 /// <summary>Represents the types of nodes that can be encountered in the markup lexer.</summary>
-[PublicAPI]
 [DefaultValue(None)]
 [JsonConverter(typeof(MarkupNodeTypeJsonConverter))]
 public enum MarkupNodeType

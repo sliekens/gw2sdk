@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.Training;
 
 /// <summary>Modifiers for professions.</summary>
-[PublicAPI]
 public sealed record ProfessionFlags : Flags
 {
     /// <summary>Whether the profession can swap weapons while in combat.</summary>

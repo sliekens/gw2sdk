@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Chat;
 
 /// <summary>Represents an achievement chat link.</summary>
-[PublicAPI]
 public sealed record AchievementLink : Link
 {
     /// <summary>The achievement ID.</summary>

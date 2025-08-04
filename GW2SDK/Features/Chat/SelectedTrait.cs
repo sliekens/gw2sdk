@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Chat;
 
 /// <summary>Represents a selected trait.</summary>
-[PublicAPI]
 [DefaultValue(None)]
 [JsonConverter(typeof(SelectedTraitJsonConverter))]
 public enum SelectedTrait

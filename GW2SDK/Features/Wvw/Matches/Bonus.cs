@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Wvw.Matches;
 
 /// <summary>Information about a map bonus in World vs. World.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Bonus
 {

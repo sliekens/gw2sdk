@@ -2,7 +2,6 @@
 
 /// <summary>Information about a training track, which consists of a list of training objectives which can be completed by
 /// spending hero points.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Training
 {

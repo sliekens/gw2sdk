@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.WizardsVault.Seasons;
 
 /// <summary>Information about a Wizard's Vault season.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Season
 {

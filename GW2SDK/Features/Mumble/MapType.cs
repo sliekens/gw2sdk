@@ -6,7 +6,6 @@ namespace GuildWars2.Mumble;
 #pragma warning disable CA1028 // Enum Storage should be Int32
 
 /// <summary>The map types.</summary>
-[PublicAPI]
 [DefaultValue(AutoRedirect)]
 [JsonConverter(typeof(MapTypeJsonConverter))]
 [CLSCompliant(false)]

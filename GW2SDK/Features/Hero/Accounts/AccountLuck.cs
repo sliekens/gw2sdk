@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.Accounts;
 
 /// <summary>Information about magic find from luck on the account.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record AccountLuck
 {

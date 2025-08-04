@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Hero.Equipment.Novelties;
 
 /// <summary>The novelty kinds.</summary>
-[PublicAPI]
 [DefaultValue(None)]
 [JsonConverter(typeof(NoveltyKindJsonConverter))]
 public enum NoveltyKind

@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.Builds;
 
 /// <summary>Information about the selected pets for a Ranger build.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record SelectedPets
 {

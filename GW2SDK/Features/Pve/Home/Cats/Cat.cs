@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Pve.Home.Cats;
 
 /// <summary>Information about a cat that can be added to the home instance.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Cat
 {

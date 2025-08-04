@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.Training;
 
 /// <summary>Information about a weapon that can be trained.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record WeaponProficiency
 {

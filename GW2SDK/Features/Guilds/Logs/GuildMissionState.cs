@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Guilds.Logs;
 
 /// <summary>The guild mission state transitions.</summary>
-[PublicAPI]
 [DefaultValue(None)]
 [JsonConverter(typeof(GuildMissionStateJsonConverter))]
 public enum GuildMissionState

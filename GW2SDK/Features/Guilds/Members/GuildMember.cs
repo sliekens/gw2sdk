@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Guilds.Members;
 
 /// <summary>Information about a member of a guild.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record GuildMember
 {

@@ -3,7 +3,6 @@
 namespace GuildWars2.Markup;
 
 /// <summary>Provides functionality to convert a <see cref="RootNode" /> to a string representation.</summary>
-[PublicAPI]
 public sealed class MarkupTextConverter
 {
     /// <summary>Converts a <see cref="RootNode" /> to a string representation.</summary>

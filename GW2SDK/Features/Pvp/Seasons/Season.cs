@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Pvp.Seasons;
 
 /// <summary>Information about a PvP season.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Season
 {

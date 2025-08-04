@@ -7,7 +7,6 @@ using GuildWars2.Json;
 namespace GuildWars2.Hero.Masteries;
 
 /// <summary>Provides query methods for masteries, mastery points and mastery progress on the account.</summary>
-[PublicAPI]
 public sealed class MasteriesClient
 {
     private readonly HttpClient httpClient;

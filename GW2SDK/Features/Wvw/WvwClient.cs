@@ -18,7 +18,6 @@ using GuildWars2.Wvw.Upgrades;
 namespace GuildWars2.Wvw;
 
 /// <summary>Provides query methods for WvW matches, objectives, abilities, ranks, and upgrades.</summary>
-[PublicAPI]
 public sealed class WvwClient
 {
     private readonly HttpClient httpClient;

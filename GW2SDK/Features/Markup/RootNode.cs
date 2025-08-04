@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Markup;
 
 /// <summary>Represents a root node in the markup structure.</summary>
-[PublicAPI]
 public sealed class RootNode : MarkupNode
 {
     /// <inheritdoc />

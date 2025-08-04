@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.Training;
 
 /// <summary>Information about the progress of a character's training.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record CharacterTraining
 {

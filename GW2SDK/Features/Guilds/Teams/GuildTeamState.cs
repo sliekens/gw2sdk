@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Guilds.Teams;
 
 /// <summary>The active state of a guild team.</summary>
-[PublicAPI]
 [DefaultValue(None)]
 [JsonConverter(typeof(GuildTeamStateJsonConverter))]
 public enum GuildTeamState

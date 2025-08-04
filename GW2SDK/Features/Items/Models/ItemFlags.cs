@@ -3,7 +3,6 @@
 namespace GuildWars2.Items;
 
 /// <summary>Modifiers for items.</summary>
-[PublicAPI]
 [JsonConverter(typeof(ItemFlagsJsonConverter))]
 public sealed record ItemFlags : Flags
 {

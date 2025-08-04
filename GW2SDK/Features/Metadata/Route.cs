@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Metadata;
 
 /// <summary>Information about a route in the API.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Route
 {

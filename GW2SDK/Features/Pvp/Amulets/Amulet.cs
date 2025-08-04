@@ -3,7 +3,6 @@
 namespace GuildWars2.Pvp.Amulets;
 
 /// <summary>Information about a PvP amulet, which replaces armor bonuses in PvP.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Amulet
 {

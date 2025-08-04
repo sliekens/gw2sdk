@@ -3,7 +3,6 @@
 namespace GuildWars2.Hero.Builds;
 
 /// <summary>Information about the skills and traits in the build.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Build
 {

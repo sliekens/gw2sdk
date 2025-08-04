@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Pve.Home;
 
 /// <summary>The homestead collection boxes.</summary>
-[PublicAPI]
 [DefaultValue(None)]
 [JsonConverter(typeof(CollectionBoxJsonConverter))]
 public enum CollectionBox

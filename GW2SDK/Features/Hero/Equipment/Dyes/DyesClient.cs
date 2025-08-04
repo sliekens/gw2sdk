@@ -7,7 +7,6 @@ using GuildWars2.Json;
 namespace GuildWars2.Hero.Equipment.Dyes;
 
 /// <summary>Provides query methods for dye colors and unlocked dyes.</summary>
-[PublicAPI]
 public sealed class DyesClient
 {
     private readonly HttpClient httpClient;

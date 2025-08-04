@@ -6,7 +6,6 @@ using GuildWars2.Json;
 namespace GuildWars2.Authorization;
 
 /// <summary>Provides query methods for access token introspection and subtoken creation.</summary>
-[PublicAPI]
 public sealed class TokenClient
 {
     private readonly HttpClient httpClient;

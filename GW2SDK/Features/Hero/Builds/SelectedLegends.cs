@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.Builds;
 
 /// <summary>Information about the selected legends for a Revenant build.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record SelectedLegends
 {

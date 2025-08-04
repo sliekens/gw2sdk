@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Hero.Crafting;
 
 /// <summary>The ingredient kinds used in crafting recipes.</summary>
-[PublicAPI]
 [DefaultValue(Item)]
 [JsonConverter(typeof(IngredientKindJsonConverter))]
 public enum IngredientKind

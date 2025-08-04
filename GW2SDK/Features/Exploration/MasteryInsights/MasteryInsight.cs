@@ -5,7 +5,6 @@ using GuildWars2.Hero.Masteries;
 namespace GuildWars2.Exploration.MasteryInsights;
 
 /// <summary>Information about a mastery insight location.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record MasteryInsight
 {

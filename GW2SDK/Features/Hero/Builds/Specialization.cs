@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.Builds;
 
 /// <summary>Information about a specialization or elite specialization.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Specialization
 {

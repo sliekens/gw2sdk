@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Pvp.Seasons;
 
 /// <summary>Information about a tier within a skill badge rank.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record SkillBadgeTier
 {

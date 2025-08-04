@@ -5,7 +5,6 @@ using GuildWars2.Chat;
 namespace GuildWars2.Items;
 
 /// <summary>Information about a recipe sheet which unlocks a recipe and possibly extra recipes when consumed.</summary>
-[PublicAPI]
 [JsonConverter(typeof(RecipeSheetJsonConverter))]
 public sealed record RecipeSheet : Unlocker
 {

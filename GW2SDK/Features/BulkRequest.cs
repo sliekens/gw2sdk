@@ -6,7 +6,6 @@
 /// <param name="keys">The keys for which to retrieve the values.</param>
 /// <param name="cancellationToken">A token to cancel the request.</param>
 /// <returns>The collection of values found.</returns>
-[PublicAPI]
 public delegate Task<IReadOnlyCollection<TValue>> BulkRequest<in TKey, TValue>(
     IEnumerable<TKey> keys,
     CancellationToken cancellationToken = default

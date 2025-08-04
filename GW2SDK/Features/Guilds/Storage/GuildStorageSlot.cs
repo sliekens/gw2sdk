@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Guilds.Storage;
 
 /// <summary>Information about an item in the guild storage.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record GuildStorageSlot
 {

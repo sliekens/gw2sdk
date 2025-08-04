@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.Builds.Facts;
 
 /// <summary>The distance of the skill/trait's effect, such as leap distance.</summary>
-[PublicAPI]
 public sealed record Distance : Fact
 {
     /// <summary>The distance expressed in inches.</summary>

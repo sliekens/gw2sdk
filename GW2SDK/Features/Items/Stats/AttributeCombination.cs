@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Items.Stats;
 
 /// <summary>Information about an item attribute combination like Soldier.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record AttributeCombination
 {

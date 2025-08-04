@@ -5,7 +5,6 @@ using GuildWars2.Chat;
 namespace GuildWars2.Hero.Equipment.JadeBots;
 
 /// <summary>Information about a jade bot skin.</summary>
-[PublicAPI]
 [DataTransferObject]
 [JsonConverter(typeof(JadeBotSkinJsonConverter))]
 public sealed record JadeBotSkin

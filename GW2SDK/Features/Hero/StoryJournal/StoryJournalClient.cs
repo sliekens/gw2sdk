@@ -9,7 +9,6 @@ using GuildWars2.Json;
 namespace GuildWars2.Hero.StoryJournal;
 
 /// <summary>Provides query methods for the story progress and the backstory of a character.</summary>
-[PublicAPI]
 public sealed class StoryJournalClient
 {
     private readonly HttpClient httpClient;

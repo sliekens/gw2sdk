@@ -5,7 +5,6 @@ using GuildWars2.Exploration.Maps;
 namespace GuildWars2.Exploration.Regions;
 
 /// <summary>Information about a region like Ascalon or Kryta.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Region
 {

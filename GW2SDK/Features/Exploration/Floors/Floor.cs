@@ -5,7 +5,6 @@ namespace GuildWars2.Exploration.Floors;
 /// <summary>Information about a floor. Each continent has several floors, which appear on the world map as pages with
 /// up/down arrows. Some floors are hidden. For example, Lion's Arch has 3 floors ingame, but 6 floors in the API.
 /// Unfortunately it's not possible to tell which floors are hidden.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Floor
 {

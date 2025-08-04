@@ -6,7 +6,6 @@ using GuildWars2.Json;
 namespace GuildWars2.Hero.Inventories;
 
 /// <summary>Provides query methods for bags and the shared inventory.</summary>
-[PublicAPI]
 public sealed class InventoryClient
 {
     private readonly HttpClient httpClient;

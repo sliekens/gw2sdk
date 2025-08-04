@@ -6,7 +6,6 @@ namespace GuildWars2.Win32;
 
 /// <summary>Union</summary>
 [StructLayout(LayoutKind.Explicit)]
-[UsedImplicitly(ImplicitUseTargetFlags.Members)]
 internal readonly struct s_un
 {
     [FieldOffset(0)]

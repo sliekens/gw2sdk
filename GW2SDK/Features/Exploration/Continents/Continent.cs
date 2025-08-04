@@ -3,7 +3,6 @@
 namespace GuildWars2.Exploration.Continents;
 
 /// <summary>Information about a continent like Tyria or the Mists.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Continent
 {

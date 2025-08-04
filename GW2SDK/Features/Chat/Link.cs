@@ -3,7 +3,6 @@
 namespace GuildWars2.Chat;
 
 /// <summary>The base type for chat links.</summary>
-[PublicAPI]
 [DebuggerDisplay("{ToString(),nq}")]
 public abstract record Link
 {

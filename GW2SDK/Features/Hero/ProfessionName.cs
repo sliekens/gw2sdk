@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Hero;
 
 /// <summary>The playable professions.</summary>
-[PublicAPI]
 [DefaultValue(None)]
 [JsonConverter(typeof(ProfessionNameJsonConverter))]
 public enum ProfessionName

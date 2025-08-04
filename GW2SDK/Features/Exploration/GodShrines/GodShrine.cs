@@ -6,7 +6,6 @@ namespace GuildWars2.Exploration.GodShrines;
 
 /// <summary>Information about a god shrine which are found in the Ruins of Orr, for example the Temple of Balthazar in the
 /// Straits of Devastation.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record GodShrine
 {

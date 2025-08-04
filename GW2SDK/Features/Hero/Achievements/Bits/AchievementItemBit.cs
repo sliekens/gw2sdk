@@ -3,7 +3,6 @@
 namespace GuildWars2.Hero.Achievements.Bits;
 
 /// <summary>Used in collection achievements to describe an item that needs to be obtained.</summary>
-[PublicAPI]
 [JsonConverter(typeof(AchievementItemBitJsonConverter))]
 public sealed record AchievementItemBit : AchievementBit
 {

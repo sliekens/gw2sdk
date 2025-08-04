@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.Builds.Skills;
 
 /// <summary>A weapon skill.</summary>
-[PublicAPI]
 public sealed record WeaponSkill : ActionSkill
 {
     /// <summary>Used for Elementalist skills to indicate which attunement this skill is associated with.</summary>

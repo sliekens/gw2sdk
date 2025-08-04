@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.Equipment.Finishers;
 
 /// <summary>Information about a finisher unlocked on the account.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record UnlockedFinisher
 {

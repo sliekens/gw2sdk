@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Guilds.Teams;
 
 /// <summary>Information about a guild's wins and losses per game mode.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Ladders
 {

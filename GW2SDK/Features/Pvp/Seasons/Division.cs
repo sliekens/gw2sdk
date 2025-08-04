@@ -4,7 +4,6 @@
 /// <remarks>In the first 4 seasons, division was an indication of player skill and used in the matchmaking algorithm. Only
 /// players within the same division could be matched together. As of season five, it is a purely reward-based system and
 /// it no longer plays a role in matchmaking.</remarks>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Division
 {

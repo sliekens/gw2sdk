@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Hero.Equipment.Dyes;
 
 /// <summary>The materials by which dyes are grouped.</summary>
-[PublicAPI]
 [DefaultValue(Unspecified)]
 [JsonConverter(typeof(MaterialJsonConverter))]
 public enum Material

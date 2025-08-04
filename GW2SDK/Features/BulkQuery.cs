@@ -5,7 +5,6 @@ using GuildWars2.Tasks;
 namespace GuildWars2;
 
 /// <summary>Provides a method to retrieve bulk data from the Guild Wars 2 API.</summary>
-[PublicAPI]
 public static class BulkQuery
 {
     /// <summary>The default chunk size is 200. This is the maximum number of keys that can be retrieved in a single query.</summary>

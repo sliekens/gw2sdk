@@ -3,7 +3,6 @@
 namespace GuildWars2.Items;
 
 /// <summary>Information about an infusion slot of an ascended or legendary item.</summary>
-[PublicAPI]
 [DataTransferObject]
 [JsonConverter(typeof(InfusionSlotJsonConverter))]
 public sealed record InfusionSlot

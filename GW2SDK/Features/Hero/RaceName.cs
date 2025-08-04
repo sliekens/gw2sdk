@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Hero;
 
 /// <summary>The playable races.</summary>
-[PublicAPI]
 [DefaultValue(None)]
 [JsonConverter(typeof(RaceNameJsonConverter))]
 public enum RaceName

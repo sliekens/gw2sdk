@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Hero;
 
 /// <summary>Represents the types of item binding in Guild Wars 2.</summary>
-[PublicAPI]
 [DefaultValue(None)]
 [JsonConverter(typeof(ItemBindingJsonConverter))]
 public enum ItemBinding

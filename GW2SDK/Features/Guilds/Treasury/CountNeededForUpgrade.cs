@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Guilds.Treasury;
 
 /// <summary>Information about an item needed for a guild upgrade.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record CountNeededForUpgrade
 {

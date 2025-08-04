@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Pvp.Seasons;
 
 /// <summary>Information about a skill badge and the minimum skill rating required to obtain it.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record SkillBadge
 {

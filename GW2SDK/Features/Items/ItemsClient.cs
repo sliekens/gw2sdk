@@ -9,7 +9,6 @@ using GuildWars2.Json;
 namespace GuildWars2.Items;
 
 /// <summary>Provides query methods for items and item stats.</summary>
-[PublicAPI]
 public sealed class ItemsClient
 {
     private readonly HttpClient httpClient;

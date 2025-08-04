@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Hero.Builds.Facts;
 
 /// <summary>The combo field (area effect) that is created by a skill.</summary>
-[PublicAPI]
 [DefaultValue(None)]
 [JsonConverter(typeof(ComboFieldNameJsonConverter))]
 public enum ComboFieldName

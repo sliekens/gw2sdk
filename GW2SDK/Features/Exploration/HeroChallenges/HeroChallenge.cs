@@ -3,7 +3,6 @@
 namespace GuildWars2.Exploration.HeroChallenges;
 
 /// <summary>Information about a hero skill point challenge</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record HeroChallenge
 {

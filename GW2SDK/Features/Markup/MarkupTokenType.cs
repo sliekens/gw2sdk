@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Markup;
 
 /// <summary>Represents the different types of tokens that can be encountered in the markup processing.</summary>
-[PublicAPI]
 [DefaultValue(None)]
 [JsonConverter(typeof(MarkupTokenTypeJsonConverter))]
 public enum MarkupTokenType

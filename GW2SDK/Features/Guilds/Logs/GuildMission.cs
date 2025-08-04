@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Guilds.Logs;
 
 /// <summary>A log entry about a started or ended guild mission.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record GuildMission : GuildLogEntry
 {

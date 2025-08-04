@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Hero.Builds;
 
 /// <summary>Information about a build template on the character.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record BuildTemplate
 {

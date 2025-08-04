@@ -3,7 +3,6 @@
 namespace GuildWars2.Items;
 
 /// <summary>Information about a generic consumable.</summary>
-[PublicAPI]
 [JsonConverter(typeof(GenericConsumableJsonConverter))]
 public sealed record GenericConsumable : Consumable
 {

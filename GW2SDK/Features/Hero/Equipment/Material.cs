@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Hero.Equipment;
 
 /// <summary>The material of an armor piece, which determines its appearance.</summary>
-[PublicAPI]
 [DefaultValue(None)]
 [JsonConverter(typeof(MaterialJsonConverter))]
 public enum Material

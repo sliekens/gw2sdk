@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Items;
 
 /// <summary>Modifiers for upgrade components.</summary>
-[PublicAPI]
 public sealed record UpgradeComponentFlags : Flags
 {
     /// <summary>Indicates if the upgrade component can be applied to Heavy Armor.</summary>

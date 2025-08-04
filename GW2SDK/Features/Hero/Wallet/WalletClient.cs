@@ -7,7 +7,6 @@ using GuildWars2.Json;
 namespace GuildWars2.Hero.Wallet;
 
 /// <summary>Provides query methods for currencies in the game and in the account wallet.</summary>
-[PublicAPI]
 public sealed class WalletClient
 {
     private readonly HttpClient httpClient;

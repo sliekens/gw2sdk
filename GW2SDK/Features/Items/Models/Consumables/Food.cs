@@ -3,7 +3,6 @@
 namespace GuildWars2.Items;
 
 /// <summary>Information about a food item, which typically grants a nourishment effect when consumed.</summary>
-[PublicAPI]
 [JsonConverter(typeof(FoodJsonConverter))]
 public sealed record Food : Consumable
 {

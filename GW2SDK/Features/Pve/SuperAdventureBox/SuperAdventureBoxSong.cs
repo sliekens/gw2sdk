@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Pve.SuperAdventureBox;
 
 /// <summary>Information about a Super Adventure Box song.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record SuperAdventureBoxSong
 {

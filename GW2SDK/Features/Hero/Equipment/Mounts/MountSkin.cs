@@ -3,7 +3,6 @@
 namespace GuildWars2.Hero.Equipment.Mounts;
 
 /// <summary>Information about a mount skin.</summary>
-[PublicAPI]
 [DataTransferObject]
 [JsonConverter(typeof(MountSkinJsonConverter))]
 public sealed record MountSkin

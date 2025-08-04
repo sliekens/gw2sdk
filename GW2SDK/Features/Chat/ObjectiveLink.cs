@@ -1,7 +1,6 @@
 ﻿namespace GuildWars2.Chat;
 
 /// <summary>Represents a WvW objective chat link.</summary>
-[PublicAPI]
 public sealed record ObjectiveLink : Link
 {
     /// <summary>The objective ID.</summary>

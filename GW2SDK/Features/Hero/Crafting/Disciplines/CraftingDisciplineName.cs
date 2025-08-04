@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Hero.Crafting.Disciplines;
 
 /// <summary>The different crafting disciplines in the game.</summary>
-[PublicAPI]
 [DefaultValue(None)]
 [JsonConverter(typeof(CraftingDisciplineNameJsonConverter))]
 public enum CraftingDisciplineName

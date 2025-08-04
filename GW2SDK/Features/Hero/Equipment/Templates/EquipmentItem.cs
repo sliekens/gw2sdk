@@ -5,7 +5,6 @@ using GuildWars2.Chat;
 namespace GuildWars2.Hero.Equipment.Templates;
 
 /// <summary>Information about a single item in the character's armory.</summary>
-[PublicAPI]
 [DataTransferObject]
 [JsonConverter(typeof(EquipmentItemJsonConverter))]
 public sealed record EquipmentItem

@@ -11,7 +11,6 @@ using GuildWars2.Exploration.Sectors;
 namespace GuildWars2.Exploration.Maps;
 
 /// <summary>Information about a map.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Map
 {

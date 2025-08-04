@@ -3,7 +3,6 @@
 namespace GuildWars2.Hero.Crafting.Recipes;
 
 /// <summary>Information about a recipe for crafting a guild WvW upgrade: schematics, blueprints, siege weapons.</summary>
-[PublicAPI]
 [JsonConverter(typeof(GuildWvwUpgradeRecipeJsonConverter))]
 public sealed record GuildWvwUpgradeRecipe : Recipe
 {

@@ -3,7 +3,6 @@
 namespace GuildWars2.Hero.Achievements;
 
 /// <summary>Modifiers for achievements.</summary>
-[PublicAPI]
 [JsonConverter(typeof(AchievementFlagsJsonConverter))]
 public sealed record AchievementFlags : Flags
 {

@@ -3,7 +3,6 @@
 namespace GuildWars2.Hero.Equipment.Novelties;
 
 /// <summary>Information about a novelty.</summary>
-[PublicAPI]
 [DataTransferObject]
 [JsonConverter(typeof(NoveltyJsonConverter))]
 public sealed record Novelty

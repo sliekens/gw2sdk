@@ -6,7 +6,6 @@ using GuildWars2.Json;
 namespace GuildWars2.Hero.Crafting.Disciplines;
 
 /// <summary>Provides query methods for learned crafting disciplines.</summary>
-[PublicAPI]
 public sealed class CraftingDisciplinesClient
 {
     private readonly HttpClient httpClient;

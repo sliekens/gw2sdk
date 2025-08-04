@@ -3,7 +3,6 @@
 namespace GuildWars2.Exploration.Sectors;
 
 /// <summary>Information about a map sector, also known as an area.</summary>
-[PublicAPI]
 [DataTransferObject]
 public sealed record Sector
 {

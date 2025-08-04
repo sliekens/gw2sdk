@@ -3,6 +3,5 @@
 namespace GuildWars2.Hero.Crafting.Recipes;
 
 /// <summary>Information about a recipe for crafting inscriptions used in weapon crafting.</summary>
-[PublicAPI]
 [JsonConverter(typeof(InscriptionRecipeJsonConverter))]
 public sealed record InscriptionRecipe : Recipe;
