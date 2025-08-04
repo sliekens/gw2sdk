@@ -49,6 +49,5 @@ The **GW2SDK** project has the following development dependencies:
 - **ReportGenerator** (dotnet reportgenerator) is used to generate a code coverage report locally (offline).
 - **Codecov** is used to generate an online code coverage report. It has features not found in ReportGenerator but it can't be used offline.
 - **PolySharp** is used to polyfill language features for older versions of .NET. For example it allows usage of nullable reference types in .NET Standard 2.0.
-- **ReSharper Command Line Tools** (dotnet jb) is used for code cleanup.
 - **HttpRepl** (dotnet httprepl) is used to explore the API.
 - **Docfx** is used to generate the user documentation.
