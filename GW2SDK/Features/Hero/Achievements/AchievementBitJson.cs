@@ -30,7 +30,6 @@ internal static class AchievementBitJson
 
         OptionalMember text = "text";
 
-        // ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
         foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("text"))

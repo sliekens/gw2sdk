@@ -182,7 +182,6 @@ public sealed class AchievementsClient
             cancellationToken
         );
 
-        // ReSharper disable once VariableHidesOuterVariable (intended, believe it or not)
         async Task<IReadOnlyCollection<(Achievement, MessageContext)>> GetChunk(
             IEnumerable<int> chunk,
             CancellationToken cancellationToken

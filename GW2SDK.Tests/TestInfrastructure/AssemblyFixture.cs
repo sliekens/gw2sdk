@@ -2,7 +2,6 @@
 
 namespace GuildWars2.Tests.TestInfrastructure;
 
-// ReSharper disable once ClassNeverInstantiated.Global
 public class AssemblyFixture
 {
     public Assembly Assembly { get; } = Assembly.Load("GW2SDK");

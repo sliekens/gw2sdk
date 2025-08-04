@@ -26,7 +26,6 @@ internal static class AchievementRewardJson
             }
         }
 
-        // ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
         foreach (JsonProperty member in json.EnumerateObject())
         {
             if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)

@@ -150,7 +150,6 @@ public sealed class CommerceClient
             cancellationToken
         );
 
-        // ReSharper disable once VariableHidesOuterVariable (intended, believe it or not)
         async Task<IReadOnlyCollection<(ItemPrice, MessageContext)>> GetChunk(
             IEnumerable<int> chunk,
             CancellationToken cancellationToken
@@ -291,7 +290,6 @@ public sealed class CommerceClient
             cancellationToken
         );
 
-        // ReSharper disable once VariableHidesOuterVariable (intended, believe it or not)
         async Task<IReadOnlyCollection<(OrderBook, MessageContext)>> GetChunk(
             IEnumerable<int> chunk,
             CancellationToken cancellationToken
