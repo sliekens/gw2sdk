@@ -1,6 +1,6 @@
 {
   "solution": {
-    "path": "gw2sdk.sln",
+    "path": "gw2sdk.slnx",
     "projects": [
       "GW2SDK.Generators\\GW2SDK.Generators.csproj",
       "GW2SDK.Tests\\GW2SDK.Tests.csproj",

@@ -1,0 +1,21 @@
+<Solution>
+  <Folder Name="/samples/">
+    <Project Path="samples/ApiVersionInfo/ApiVersionInfo.csproj" />
+    <Project Path="samples/BasicUsage/BasicUsage.csproj" />
+    <Project Path="samples/HttpClientFactoryUsage/HttpClientFactoryUsage.csproj" />
+    <Project Path="samples/MostVersatileMaterials/MostVersatileMaterials.csproj" />
+    <Project Path="samples/Mumble/Mumble.csproj" />
+    <Project Path="samples/PollyUsage/PollyUsage.csproj" />
+    <Project Path="samples/QuagganGalleria/QuagganGalleria.csproj" />
+    <Project Path="samples/Translations/Translations.csproj" />
+  </Folder>
+  <Folder Name="/samples/PackageReadme/">
+    <Project Path="samples/PackageReadme/GameLinkProgram/GameLinkProgram.csproj" />
+    <Project Path="samples/PackageReadme/Gw2ClientProgram/Gw2ClientProgram.csproj" />
+  </Folder>
+  <Project Path="GW2SDK.Generators/GW2SDK.Generators.csproj" />
+  <Project Path="GW2SDK.Profiling/GW2SDK.Profiling.csproj" />
+  <Project Path="GW2SDK.TestDataHelper/GW2SDK.TestDataHelper.csproj" />
+  <Project Path="GW2SDK.Tests/GW2SDK.Tests.csproj" />
+  <Project Path="GW2SDK/GW2SDK.csproj" />
+</Solution>
