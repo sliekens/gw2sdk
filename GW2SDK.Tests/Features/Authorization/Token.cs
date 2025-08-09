@@ -3,7 +3,7 @@ using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Authorization;
 
-public class TokenInfo
+public class Token
 {
     [Fact]
     public async Task Token_has_info()
@@ -11,7 +11,7 @@ public class TokenInfo
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
 
-        (GuildWars2.Authorization.TokenInfo actual, _) = await sut.Tokens.GetTokenInfo(
+        (TokenInfo actual, _) = await sut.Tokens.GetTokenInfo(
             accessToken.Key,
             cancellationToken: TestContext.Current.CancellationToken
         );
@@ -21,11 +21,7 @@ public class TokenInfo
         Assert.NotEmpty(apiKey.Id);
         Assert.NotEmpty(apiKey.Name);
 
-#if NET
-        HashSet<Permission> expectedPermissions = [.. Enum.GetValues<Permission>()];
-#else
-        HashSet<Permission> expectedPermissions = [.. Enum.GetValues(typeof(Permission)).Cast<Permission>()];
-#endif
+        HashSet<Extensible<Permission>> expectedPermissions = [.. TokenInfo.AllPermissions];
         Assert.Equal(
             expectedPermissions,
             [.. apiKey.Permissions.Select(p => p.ToEnum() ?? default)]

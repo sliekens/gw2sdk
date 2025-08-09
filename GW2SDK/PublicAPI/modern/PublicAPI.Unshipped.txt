@@ -83,3 +83,4 @@ static GuildWars2.Markup.MarkupHtmlConverter.Convert(GuildWars2.Markup.RootNode!
 static GuildWars2.Markup.MarkupLexer.Tokenize(string! input) -> System.Collections.Generic.IEnumerable<GuildWars2.Markup.MarkupToken!>!
 static GuildWars2.Markup.MarkupParser.Parse(System.Collections.Generic.IEnumerable<GuildWars2.Markup.MarkupToken!>! input) -> GuildWars2.Markup.RootNode!
 static GuildWars2.Markup.MarkupTextConverter.Convert(GuildWars2.Markup.RootNode! root) -> string!
+static readonly GuildWars2.Authorization.TokenInfo.AllPermissions -> GuildWars2.Collections.ValueList<GuildWars2.Extensible<GuildWars2.Authorization.Permission>>!

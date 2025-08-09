@@ -3,7 +3,7 @@ using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Authorization;
 
-public class SubtokenInfo
+public class Subtoken
 {
     [Fact]
     public async Task Subtoken_has_info()
@@ -44,12 +44,12 @@ public class SubtokenInfo
         // I guess this is a clock synchronization problem, because adding a delay works
         await Task.Delay(3000, TestContext.Current.CancellationToken);
 
-        (GuildWars2.Authorization.TokenInfo actual, _) = await sut.Tokens.GetTokenInfo(
+        (TokenInfo actual, _) = await sut.Tokens.GetTokenInfo(
             createdSubtoken.Subtoken,
             cancellationToken: TestContext.Current.CancellationToken
         );
 
-        GuildWars2.Authorization.SubtokenInfo subtoken = Assert.IsType<GuildWars2.Authorization.SubtokenInfo>(actual);
+        SubtokenInfo subtoken = Assert.IsType<SubtokenInfo>(actual);
 
         Assert.NotEmpty(subtoken.Id);
         Assert.NotEmpty(subtoken.Name);
