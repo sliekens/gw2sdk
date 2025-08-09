@@ -63,6 +63,16 @@
     <PackageValidationBaselineVersion>2.6.0</PackageValidationBaselineVersion>
   </PropertyGroup>
 
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETStandard' Or '$(TargetFrameworkIdentifier)' == '.NETFramework'">
+    <AdditionalFiles Include="PublicAPI/legacy/PublicAPI.Shipped.txt" />
+    <AdditionalFiles Include="PublicAPI/legacy/PublicAPI.Unshipped.txt" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">
+    <AdditionalFiles Include="PublicAPI/modern/PublicAPI.Shipped.txt" />
+    <AdditionalFiles Include="PublicAPI/modern/PublicAPI.Unshipped.txt" />
+  </ItemGroup>
+
   <ItemGroup>
     <None Include="PACKAGE.md" Pack="true" PackagePath="" />
     <None Include="icon.png" Pack="true" PackagePath="" />
@@ -81,6 +91,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="MinVer">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

@@ -1,5 +1,8 @@
 is_global = true
 
+# Remember to use WarningsAsErrors for error diagnostics
+# because 'error' severity is downgraded to 'warning' by CodeAnalysisTreatWarningsAsErrors = false
+
 # Roslynator diagnostics options
 roslynator_accessibility_modifiers = explicit # explicit|implicit
 # Applicable to: rcs1018

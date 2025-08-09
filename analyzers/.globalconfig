@@ -1,6 +1,9 @@
 # Copied from /usr/share/dotnet/sdk/9.0.303/Sdks/Microsoft.NET.Sdk/analyzers/build/config/analysislevel_10_all_warningaserror.globalconfig
 is_global = true
 
+# Remember to use WarningsAsErrors for error diagnostics
+# because 'error' severity is downgraded to 'warning' by CodeAnalysisTreatWarningsAsErrors = false
+
 # CA1000: Do not declare static members on generic types
 dotnet_diagnostic.CA1000.severity = warning
 

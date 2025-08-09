@@ -1,6 +1,9 @@
 # Copied from /usr/share/dotnet/sdk/9.0.303/Sdks/Microsoft.NET.Sdk/codestyle/cs/build/config/analysislevelstyle_all.globalconfig
 is_global = true
 
+# Remember to use WarningsAsErrors for error diagnostics
+# because 'error' severity is downgraded to 'warning' by CodeAnalysisTreatWarningsAsErrors = false
+
 # IDE0004: Remove Unnecessary Cast
 dotnet_diagnostic.IDE0004.severity = warning
 

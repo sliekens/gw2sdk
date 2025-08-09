@@ -50,6 +50,7 @@
 <!-- Code analysis -->
   <PropertyGroup>
     <CodeAnalysisTreatWarningsAsErrors>false</CodeAnalysisTreatWarningsAsErrors>
+    <WarningsAsErrors>RS0016;RS0017;RS0041</WarningsAsErrors>
 
     <!-- https://learn.microsoft.com/en-us/dotnet/core/project-sdk/msbuild-props#enforcecodestyleinbuild -->
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
