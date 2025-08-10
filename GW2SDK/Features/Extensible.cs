@@ -16,12 +16,18 @@ public readonly struct Extensible<TEnum>(string name)
     /// <returns><c>true</c> if the name is defined in the enum; otherwise, <c>false</c>.</returns>
     public bool IsDefined()
     {
-        if (name is null)
-        {
-            return Enum.IsDefined(typeof(TEnum), 0);
-        }
+        return name is null
+            ? HasDefaultValue()
+            : Enum.TryParse<TEnum>(name, true, out _);
+    }
 
-        return Enum.TryParse<TEnum>(name, true, out _);
+    private static bool HasDefaultValue()
+    {
+#if NET
+        return Enum.IsDefined(default(TEnum));
+#else
+        return Enum.IsDefined(typeof(TEnum), default(TEnum));
+#endif
     }
 
     /// <summary>Converts the current name to the corresponding enum value.</summary>
@@ -30,7 +36,7 @@ public readonly struct Extensible<TEnum>(string name)
     {
         if (name is null)
         {
-            return Enum.IsDefined(typeof(TEnum), 0) ? default(TEnum) : null;
+            return HasDefaultValue() ? default(TEnum) : null;
         }
 
         if (Enum.TryParse<TEnum>(name, true, out TEnum value))
@@ -83,17 +89,12 @@ public readonly struct Extensible<TEnum>(string name)
     /// <inheritdoc />
     public override readonly string ToString()
     {
-        if (name is not null)
+        return name switch
         {
-            return name;
-        }
-
-        if (Enum.IsDefined(typeof(TEnum), 0))
-        {
-            return default(TEnum)!.ToString();
-        }
-
-        return "";
+            not null => name,
+            null when HasDefaultValue() => default(TEnum)!.ToString(),
+            _ => ""
+        };
     }
 
     /// <summary>Determines whether two enums are equal.</summary>
