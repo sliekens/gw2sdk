@@ -71,7 +71,7 @@ public sealed partial class Language
     }
 
 #if NET
-    [GeneratedRegex("^[a-z]{2}$", RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.CultureInvariant)]
+    [GeneratedRegex("^[a-z]{2}$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)]
     private static partial Regex GetAlpha2Pattern();
 #endif
 }
