@@ -324,4 +324,15 @@ public class CoinTest
 
         Assert.Equal(sut.Amount, actual.Coins.Amount);
     }
+
+    [Fact]
+    public void Coins_can_be_json_serialized_roundtrip()
+    {
+        Coin sut = 1_00_00;
+
+        string json = System.Text.Json.JsonSerializer.Serialize(sut);
+        Coin actual = System.Text.Json.JsonSerializer.Deserialize<Coin>(json);
+
+        Assert.Equal(sut.Amount, actual.Amount);
+    }
 }
