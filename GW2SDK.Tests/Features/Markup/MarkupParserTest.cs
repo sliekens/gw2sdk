@@ -35,22 +35,12 @@ public class MarkupParserTest
         RootNode actual = MarkupParser.Parse(tokens);
 
         Assert.NotNull(actual);
-        Assert.Collection(
-            actual.Children,
-            node =>
-            {
-                ColoredTextNode coloredText = Assert.IsType<ColoredTextNode>(node);
-                Assert.Equal("@reminder", coloredText.Color);
-                Assert.Collection(
-                    coloredText.Children,
-                    node =>
-                    {
-                        TextNode text = Assert.IsType<TextNode>(node);
-                        Assert.Equal("This coat hides leg armor.", text.Text);
-                    }
-                );
-            }
-        );
+        MarkupNode firstChild = Assert.Single(actual.Children);
+        ColoredTextNode coloredText = Assert.IsType<ColoredTextNode>(firstChild);
+        Assert.Equal("@reminder", coloredText.Color);
+        MarkupNode coloredTextChild = Assert.Single(coloredText.Children);
+        TextNode text = Assert.IsType<TextNode>(coloredTextChild);
+        Assert.Equal("This coat hides leg armor.", text.Text);
     }
 
     [Fact]
@@ -67,16 +57,11 @@ public class MarkupParserTest
             {
                 ColoredTextNode coloredText = Assert.IsType<ColoredTextNode>(node);
                 Assert.Equal("@flavor", coloredText.Color);
-                Assert.Collection(
-                    coloredText.Children,
-                    node =>
-                    {
-                        TextNode text = Assert.IsType<TextNode>(node);
-                        Assert.Equal(
-                            "A gift given in gratitude from the leaders of Tyria.",
-                            text.Text
-                        );
-                    }
+                MarkupNode coloredTextChild = Assert.Single(coloredText.Children);
+                TextNode text = Assert.IsType<TextNode>(coloredTextChild);
+                Assert.Equal(
+                    "A gift given in gratitude from the leaders of Tyria.",
+                    text.Text
                 );
             },
             node =>
