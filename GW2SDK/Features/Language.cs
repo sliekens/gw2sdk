@@ -3,13 +3,19 @@ using System.Text.RegularExpressions;
 
 namespace GuildWars2;
 
+#pragma warning disable RCS1043 // Remove 'partial' modifier from type with a single part
+
 /// <summary>Represents a language.</summary>
-public sealed class Language
+public sealed partial class Language
 {
+#if NET
+    private static readonly Regex Alpha2Pattern = GetAlpha2Pattern();
+#else
     private static readonly Regex Alpha2Pattern = new(
         "^[a-z]{2}$",
         RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled
     );
+#endif
 
     /// <summary>Represents the English language.</summary>
     public static readonly Language English = new("en");
@@ -63,4 +69,9 @@ public sealed class Language
     {
         return Alpha2Code;
     }
+
+#if NET
+    [GeneratedRegex("^[a-z]{2}$", RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.CultureInvariant)]
+    private static partial Regex GetAlpha2Pattern();
+#endif
 }
