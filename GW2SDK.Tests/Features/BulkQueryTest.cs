@@ -38,9 +38,11 @@ public class BulkQueryTest
                 {
                     if (++received == cutoff)
                     {
-#pragma warning disable CA1849 // Call async methods when in an async method
+#if NET
+                        await cancellationTokenSource.CancelAsync().ConfigureAwait(false);
+#else
                         cancellationTokenSource.Cancel();
-#pragma warning restore CA1849 // Call async methods when in an async method
+#endif
                     }
                 }
             }
