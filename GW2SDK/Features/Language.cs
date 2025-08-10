@@ -8,14 +8,7 @@ namespace GuildWars2;
 /// <summary>Represents a language.</summary>
 public sealed partial class Language
 {
-#if NET
     private static readonly Regex Alpha2Pattern = GetAlpha2Pattern();
-#else
-    private static readonly Regex Alpha2Pattern = new(
-        "^[a-z]{2}$",
-        RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled
-    );
-#endif
 
     /// <summary>Represents the English language.</summary>
     public static readonly Language English = new("en");
@@ -73,5 +66,13 @@ public sealed partial class Language
 #if NET
     [GeneratedRegex("^[a-z]{2}$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)]
     private static partial Regex GetAlpha2Pattern();
+#else
+    private static Regex GetAlpha2Pattern()
+    {
+        return new Regex(
+            "^[a-z]{2}$",
+            RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled
+        );
+    }
 #endif
 }
