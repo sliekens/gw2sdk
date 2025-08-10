@@ -20,8 +20,7 @@
       "command": "dotnet",
       "args": [
         "format",
-        "${workspaceFolder}/gw2sdk.slnx",
-        "--verbosity=minimal"
+        "--verbosity=normal"
       ],
       "problemMatcher": []
     },
@@ -32,9 +31,8 @@
       "command": "dotnet",
       "args": [
         "format",
-        "${workspaceFolder}/gw2sdk.slnx",
-        "--include=${relativeFile}",
-        "--verbosity=minimal"
+        "--verbosity=normal",
+        "--include=${relativeFile}"
       ],
       "problemMatcher": []
     },
@@ -45,9 +43,8 @@
       "command": "dotnet",
       "args": [
         "format",
-        "${workspaceFolder}/gw2sdk.slnx",
-        "--include=${relativeFileDirname}/**/*",
-        "--verbosity=minimal"
+        "--verbosity=normal",
+        "--include=${relativeFileDirname}"
       ],
       "problemMatcher": []
     },
