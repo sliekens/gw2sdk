@@ -3,7 +3,9 @@
 namespace GuildWars2.Markup;
 
 /// <summary>Provides functionality to convert a <see cref="RootNode" /> to its HTML representation.</summary>
-public sealed class MarkupHtmlConverter
+/// <remarks>Initializes a new instance of the <see cref="MarkupHtmlConverter"/> class.</remarks>
+[method: Obsolete("MarkupHtmlConverter methods are now static. Use static methods instead.")]
+public sealed class MarkupHtmlConverter()
 {
     /// <summary>Converts a <see cref="RootNode" /> to its HTML representation using the
     /// <see cref="MarkupColorName.DefaultColorMap" />.</summary>

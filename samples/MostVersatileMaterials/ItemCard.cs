@@ -17,8 +17,6 @@ internal sealed class ItemCard(HttpClient httpClient)
                 .AddColumn("Ingredient")
                 .AddColumn("Description");
 
-            MarkupLexer lexer = new();
-            MarkupParser parser = new();
             SpectreMarkupConverter converter = new();
             IEnumerable<MarkupToken> tokens = MarkupLexer.Tokenize(item.Description);
             RootNode syntax = MarkupParser.Parse(tokens);

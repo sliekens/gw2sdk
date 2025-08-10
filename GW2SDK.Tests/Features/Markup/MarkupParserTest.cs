@@ -8,8 +8,6 @@ public class MarkupParserTest
     public void Ignores_invalid_tags()
     {
         string input = "5 <REDACTED> Dye kits";
-        MarkupLexer lexer = new();
-        MarkupParser parser = new();
         IEnumerable<MarkupToken> tokens = MarkupLexer.Tokenize(input);
         RootNode actual = MarkupParser.Parse(tokens);
 
@@ -33,8 +31,6 @@ public class MarkupParserTest
     public void Forgives_mismatched_tags()
     {
         string input = "<c=@reminder>This coat hides leg armor.<c>";
-        MarkupLexer lexer = new();
-        MarkupParser parser = new();
         IEnumerable<MarkupToken> tokens = MarkupLexer.Tokenize(input);
         RootNode actual = MarkupParser.Parse(tokens);
 
@@ -61,8 +57,6 @@ public class MarkupParserTest
     public void Keeps_trailing_newline()
     {
         string input = "<c=@flavor>A gift given in gratitude from the leaders of Tyria.</c>\n";
-        MarkupLexer lexer = new();
-        MarkupParser parser = new();
         IEnumerable<MarkupToken> tokens = MarkupLexer.Tokenize(input);
         RootNode actual = MarkupParser.Parse(tokens);
 
