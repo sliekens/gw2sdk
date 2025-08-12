@@ -30,7 +30,7 @@ public sealed class MarkupTextConverter()
             TextNode text => text.Text,
             LineBreakNode => Environment.NewLine,
             ColoredTextNode coloredText => string.Concat(coloredText.Children.Select(ConvertNode)),
-            _ => "",
+            _ => ""
         };
     }
 }
