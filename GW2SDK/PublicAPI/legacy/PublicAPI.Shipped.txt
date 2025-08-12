@@ -647,7 +647,6 @@ GuildWars2.Extensible<TEnum>.CompareTo(GuildWars2.Extensible<TEnum> other) -> in
 GuildWars2.Extensible<TEnum>.CompareTo(object? obj) -> int
 GuildWars2.Extensible<TEnum>.Equals(GuildWars2.Extensible<TEnum> other) -> bool
 GuildWars2.Extensible<TEnum>.Extensible() -> void
-GuildWars2.Extensible<TEnum>.Extensible(string! Name) -> void
 GuildWars2.Extensible<TEnum>.IsDefined() -> bool
 GuildWars2.Extensible<TEnum>.ToEnum() -> TEnum?
 GuildWars2.Extensions
@@ -4514,12 +4513,9 @@ GuildWars2.Markup.LineBreakNode.LineBreakNode() -> void
 GuildWars2.Markup.MarkupColorName
 GuildWars2.Markup.MarkupConverter
 GuildWars2.Markup.MarkupHtmlConverter
-GuildWars2.Markup.MarkupHtmlConverter.Convert(GuildWars2.Markup.RootNode! root) -> string!
-GuildWars2.Markup.MarkupHtmlConverter.Convert(GuildWars2.Markup.RootNode! root, System.Collections.Generic.IReadOnlyDictionary<string!, string!>? colorMap) -> string!
 GuildWars2.Markup.MarkupHtmlConverter.MarkupHtmlConverter() -> void
 GuildWars2.Markup.MarkupLexer
 GuildWars2.Markup.MarkupLexer.MarkupLexer() -> void
-GuildWars2.Markup.MarkupLexer.Tokenize(string! input) -> System.Collections.Generic.IEnumerable<GuildWars2.Markup.MarkupToken!>!
 GuildWars2.Markup.MarkupNode
 GuildWars2.Markup.MarkupNode.MarkupNode() -> void
 GuildWars2.Markup.MarkupNodeType
@@ -4530,9 +4526,7 @@ GuildWars2.Markup.MarkupNodeType.Root = 1 -> GuildWars2.Markup.MarkupNodeType
 GuildWars2.Markup.MarkupNodeType.Text = 2 -> GuildWars2.Markup.MarkupNodeType
 GuildWars2.Markup.MarkupParser
 GuildWars2.Markup.MarkupParser.MarkupParser() -> void
-GuildWars2.Markup.MarkupParser.Parse(System.Collections.Generic.IEnumerable<GuildWars2.Markup.MarkupToken!>! input) -> GuildWars2.Markup.RootNode!
 GuildWars2.Markup.MarkupTextConverter
-GuildWars2.Markup.MarkupTextConverter.Convert(GuildWars2.Markup.RootNode! root) -> string!
 GuildWars2.Markup.MarkupTextConverter.MarkupTextConverter() -> void
 GuildWars2.Markup.MarkupToken
 GuildWars2.Markup.MarkupToken.<Clone>$() -> GuildWars2.Markup.MarkupToken!
@@ -8456,12 +8450,6 @@ static GuildWars2.Exploration.Sectors.Sector.operator !=(GuildWars2.Exploration.
 static GuildWars2.Exploration.Sectors.Sector.operator ==(GuildWars2.Exploration.Sectors.Sector? left, GuildWars2.Exploration.Sectors.Sector? right) -> bool
 static GuildWars2.Extensible<TEnum>.implicit operator GuildWars2.Extensible<TEnum>(string! name) -> GuildWars2.Extensible<TEnum>
 static GuildWars2.Extensible<TEnum>.implicit operator GuildWars2.Extensible<TEnum>(TEnum name) -> GuildWars2.Extensible<TEnum>
-static GuildWars2.Extensible<TEnum>.operator !=(GuildWars2.Extensible<TEnum> left, GuildWars2.Extensible<TEnum> right) -> bool
-static GuildWars2.Extensible<TEnum>.operator !=(GuildWars2.Extensible<TEnum> left, string! right) -> bool
-static GuildWars2.Extensible<TEnum>.operator !=(GuildWars2.Extensible<TEnum> left, TEnum right) -> bool
-static GuildWars2.Extensible<TEnum>.operator ==(GuildWars2.Extensible<TEnum> left, GuildWars2.Extensible<TEnum> right) -> bool
-static GuildWars2.Extensible<TEnum>.operator ==(GuildWars2.Extensible<TEnum> left, string! right) -> bool
-static GuildWars2.Extensible<TEnum>.operator ==(GuildWars2.Extensible<TEnum> left, TEnum right) -> bool
 static GuildWars2.Extensions.AsDictionary<TKey, TValue>(this System.Threading.Tasks.Task<(System.Collections.Generic.HashSet<TValue>! Value, GuildWars2.MessageContext! Context)>! instance, System.Func<TValue, TKey>! keySelector) -> System.Threading.Tasks.Task<(System.Collections.Generic.Dictionary<TKey, TValue>! Value, GuildWars2.MessageContext! Context)>!
 static GuildWars2.Extensions.ValueOnly<T>(this System.Collections.Generic.IAsyncEnumerable<(T, GuildWars2.MessageContext!)>! source, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Collections.Generic.IAsyncEnumerable<T>!
 static GuildWars2.Extensions.ValueOnly<T>(this System.Threading.Tasks.Task<(T, GuildWars2.MessageContext!)>! task) -> System.Threading.Tasks.Task<T>!
@@ -8870,7 +8858,6 @@ static GuildWars2.Hero.Equipment.Miniatures.Miniature.operator !=(GuildWars2.Her
 static GuildWars2.Hero.Equipment.Miniatures.Miniature.operator ==(GuildWars2.Hero.Equipment.Miniatures.Miniature? left, GuildWars2.Hero.Equipment.Miniatures.Miniature? right) -> bool
 static GuildWars2.Hero.Equipment.Mounts.Mount.operator !=(GuildWars2.Hero.Equipment.Mounts.Mount? left, GuildWars2.Hero.Equipment.Mounts.Mount? right) -> bool
 static GuildWars2.Hero.Equipment.Mounts.Mount.operator ==(GuildWars2.Hero.Equipment.Mounts.Mount? left, GuildWars2.Hero.Equipment.Mounts.Mount? right) -> bool
-static GuildWars2.Hero.Equipment.Mounts.MountNameFormatter.FormatMountName(GuildWars2.Extensible<GuildWars2.Hero.Equipment.Mounts.MountName> mountName) -> string!
 static GuildWars2.Hero.Equipment.Mounts.MountSkin.operator !=(GuildWars2.Hero.Equipment.Mounts.MountSkin? left, GuildWars2.Hero.Equipment.Mounts.MountSkin? right) -> bool
 static GuildWars2.Hero.Equipment.Mounts.MountSkin.operator ==(GuildWars2.Hero.Equipment.Mounts.MountSkin? left, GuildWars2.Hero.Equipment.Mounts.MountSkin? right) -> bool
 static GuildWars2.Hero.Equipment.Mounts.SkillReference.operator !=(GuildWars2.Hero.Equipment.Mounts.SkillReference? left, GuildWars2.Hero.Equipment.Mounts.SkillReference? right) -> bool
@@ -9636,3 +9623,75 @@ virtual GuildWars2.Wvw.Objectives.Objective.PrintMembers(System.Text.StringBuild
 ~override GuildWars2.Mumble.Context.ToString() -> string
 ~override GuildWars2.Mumble.GameTick.Equals(object obj) -> bool
 ~override GuildWars2.Mumble.GameTick.ToString() -> string
+GuildWars2.Authorization.Permission.None = 0 -> GuildWars2.Authorization.Permission
+GuildWars2.Coin.Add(in GuildWars2.Coin other) -> GuildWars2.Coin
+GuildWars2.Coin.Decrement() -> GuildWars2.Coin
+GuildWars2.Coin.Divide(in GuildWars2.Coin other) -> GuildWars2.Coin
+GuildWars2.Coin.Increment() -> GuildWars2.Coin
+GuildWars2.Coin.Multiply(in GuildWars2.Coin other) -> GuildWars2.Coin
+GuildWars2.Coin.Negate() -> GuildWars2.Coin
+GuildWars2.Coin.Plus() -> GuildWars2.Coin
+GuildWars2.Coin.Remainder(in GuildWars2.Coin other) -> GuildWars2.Coin
+GuildWars2.Coin.Subtract(in GuildWars2.Coin other) -> GuildWars2.Coin
+GuildWars2.Coin.ToInt32() -> int
+GuildWars2.Extensible<TEnum>.Extensible(string! name) -> void
+GuildWars2.Guilds.Logs.GuildBankOperationKind.None = 0 -> GuildWars2.Guilds.Logs.GuildBankOperationKind
+GuildWars2.Guilds.Logs.GuildMissionState.None = 0 -> GuildWars2.Guilds.Logs.GuildMissionState
+GuildWars2.Guilds.Logs.GuildUpgradeAction.None = 0 -> GuildWars2.Guilds.Logs.GuildUpgradeAction
+GuildWars2.Guilds.Logs.InfluenceActivityKind.None = 0 -> GuildWars2.Guilds.Logs.InfluenceActivityKind
+GuildWars2.Guilds.Teams.GuildTeamRole.None = 0 -> GuildWars2.Guilds.Teams.GuildTeamRole
+GuildWars2.Guilds.Teams.GuildTeamState.None = 0 -> GuildWars2.Guilds.Teams.GuildTeamState
+GuildWars2.Hero.Attunement.None = 0 -> GuildWars2.Hero.Attunement
+GuildWars2.Hero.BodyType.None = 0 -> GuildWars2.Hero.BodyType
+GuildWars2.Hero.Builds.Facts.ComboFieldName.None = 0 -> GuildWars2.Hero.Builds.Facts.ComboFieldName
+GuildWars2.Hero.Builds.Facts.ComboFinisherName.None = 0 -> GuildWars2.Hero.Builds.Facts.ComboFinisherName
+GuildWars2.Hero.Builds.SkillCategoryName.None = 0 -> GuildWars2.Hero.Builds.SkillCategoryName
+GuildWars2.Hero.Builds.SkillSlot.None = 0 -> GuildWars2.Hero.Builds.SkillSlot
+GuildWars2.Hero.Builds.TraitSlot.None = 0 -> GuildWars2.Hero.Builds.TraitSlot
+GuildWars2.Hero.Builds.Transformation.None = 0 -> GuildWars2.Hero.Builds.Transformation
+GuildWars2.Hero.Builds.WeaponType.Unknown = 0 -> GuildWars2.Hero.Builds.WeaponType
+GuildWars2.Hero.Crafting.Disciplines.CraftingDisciplineName.None = 0 -> GuildWars2.Hero.Crafting.Disciplines.CraftingDisciplineName
+GuildWars2.Hero.Equipment.Material.None = 0 -> GuildWars2.Hero.Equipment.Material
+GuildWars2.Hero.Equipment.Mounts.MountName.None = 0 -> GuildWars2.Hero.Equipment.Mounts.MountName
+GuildWars2.Hero.Equipment.Novelties.NoveltyKind.None = 0 -> GuildWars2.Hero.Equipment.Novelties.NoveltyKind
+GuildWars2.Hero.Equipment.Templates.EquipmentLocation.None = 0 -> GuildWars2.Hero.Equipment.Templates.EquipmentLocation
+GuildWars2.Hero.Equipment.Templates.EquipmentSlot.None = 0 -> GuildWars2.Hero.Equipment.Templates.EquipmentSlot
+GuildWars2.Hero.ProfessionName.None = 0 -> GuildWars2.Hero.ProfessionName
+GuildWars2.Hero.RaceName.None = 0 -> GuildWars2.Hero.RaceName
+GuildWars2.Hero.Training.TrainingCategory.None = 0 -> GuildWars2.Hero.Training.TrainingCategory
+GuildWars2.Hero.WeightClass.None = 0 -> GuildWars2.Hero.WeightClass
+GuildWars2.Http.QueryBuilder.GetEnumerator() -> System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<string!, string!>>!
+GuildWars2.Items.GameType.None = 0 -> GuildWars2.Items.GameType
+GuildWars2.Items.InfusionSlotUpgradeKind.None = 0 -> GuildWars2.Items.InfusionSlotUpgradeKind
+GuildWars2.Items.Rarity.None = 0 -> GuildWars2.Items.Rarity
+GuildWars2.Mumble.MapType.AutoRedirect = 0 -> GuildWars2.Mumble.MapType
+GuildWars2.Pve.Dungeons.DungeonKind.None = 0 -> GuildWars2.Pve.Dungeons.DungeonKind
+GuildWars2.Pve.Home.CollectionBox.None = 0 -> GuildWars2.Pve.Home.CollectionBox
+GuildWars2.Pve.Raids.EncounterKind.None = 0 -> GuildWars2.Pve.Raids.EncounterKind
+GuildWars2.Pve.SuperAdventureBox.SuperAdventureBoxMode.None = 0 -> GuildWars2.Pve.SuperAdventureBox.SuperAdventureBoxMode
+GuildWars2.Pvp.Games.PvpResult.None = 0 -> GuildWars2.Pvp.Games.PvpResult
+GuildWars2.Pvp.Games.PvpTeamColor.None = 0 -> GuildWars2.Pvp.Games.PvpTeamColor
+GuildWars2.WizardsVault.ObjectiveTrack.None = 0 -> GuildWars2.WizardsVault.ObjectiveTrack
+GuildWars2.WizardsVault.RewardKind.None = 0 -> GuildWars2.WizardsVault.RewardKind
+GuildWars2.Worlds.WorldPopulation.None = 0 -> GuildWars2.Worlds.WorldPopulation
+GuildWars2.Wvw.Matches.BonusKind.None = 0 -> GuildWars2.Wvw.Matches.BonusKind
+static GuildWars2.Coin.FromInt32(int quantity) -> GuildWars2.Coin
+static GuildWars2.Extensible<TEnum>.FromString(string! name) -> GuildWars2.Extensible<TEnum>
+static GuildWars2.Extensible<TEnum>.operator !=(in GuildWars2.Extensible<TEnum> left, in GuildWars2.Extensible<TEnum> right) -> bool
+static GuildWars2.Extensible<TEnum>.operator !=(in GuildWars2.Extensible<TEnum> left, string! right) -> bool
+static GuildWars2.Extensible<TEnum>.operator !=(in GuildWars2.Extensible<TEnum> left, TEnum right) -> bool
+static GuildWars2.Extensible<TEnum>.operator <(in GuildWars2.Extensible<TEnum> left, in GuildWars2.Extensible<TEnum> right) -> bool
+static GuildWars2.Extensible<TEnum>.operator <=(in GuildWars2.Extensible<TEnum> left, in GuildWars2.Extensible<TEnum> right) -> bool
+static GuildWars2.Extensible<TEnum>.operator ==(in GuildWars2.Extensible<TEnum> left, in GuildWars2.Extensible<TEnum> right) -> bool
+static GuildWars2.Extensible<TEnum>.operator ==(in GuildWars2.Extensible<TEnum> left, string! right) -> bool
+static GuildWars2.Extensible<TEnum>.operator ==(in GuildWars2.Extensible<TEnum> left, TEnum right) -> bool
+static GuildWars2.Extensible<TEnum>.operator >(in GuildWars2.Extensible<TEnum> left, in GuildWars2.Extensible<TEnum> right) -> bool
+static GuildWars2.Extensible<TEnum>.operator >=(in GuildWars2.Extensible<TEnum> left, in GuildWars2.Extensible<TEnum> right) -> bool
+static GuildWars2.Extensible<TEnum>.ToExtensible(TEnum value) -> GuildWars2.Extensible<TEnum>
+static GuildWars2.Hero.Equipment.Mounts.MountNameFormatter.FormatMountName(in GuildWars2.Extensible<GuildWars2.Hero.Equipment.Mounts.MountName> mountName) -> string!
+static GuildWars2.Markup.MarkupHtmlConverter.Convert(GuildWars2.Markup.RootNode! root) -> string!
+static GuildWars2.Markup.MarkupHtmlConverter.Convert(GuildWars2.Markup.RootNode! root, System.Collections.Generic.IReadOnlyDictionary<string!, string!>? colorMap) -> string!
+static GuildWars2.Markup.MarkupLexer.Tokenize(string! input) -> System.Collections.Generic.IEnumerable<GuildWars2.Markup.MarkupToken!>!
+static GuildWars2.Markup.MarkupParser.Parse(System.Collections.Generic.IEnumerable<GuildWars2.Markup.MarkupToken!>! input) -> GuildWars2.Markup.RootNode!
+static GuildWars2.Markup.MarkupTextConverter.Convert(GuildWars2.Markup.RootNode! root) -> string!
+static readonly GuildWars2.Authorization.TokenInfo.AllPermissions -> GuildWars2.Collections.ValueList<GuildWars2.Extensible<GuildWars2.Authorization.Permission>>!
