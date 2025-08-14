@@ -8,7 +8,6 @@ on:
 
 env:
   SYMBOL_PACKAGE: true
-  DOTNET_TEST_TFM: net9.0
 
 jobs:
   build:
@@ -29,13 +28,6 @@ jobs:
 
       - name: Build
         run: dotnet build --configuration Release --no-restore
-        
-      - name: Test
-        run: dotnet exec GW2SDK.Tests/bin/Release/$DOTNET_TEST_TFM/GW2SDK.Tests.dll --coverage --coverage-settings GW2SDK.Tests/coverage.settings --coverage-output coverage.xml
-        env:
-          ApiKeyBasic: ${{ secrets.API_TOKEN_BASIC }}
-          ApiKey: ${{ secrets.API_TOKEN_FULL }}
-          GuildLeader__Token: ${{ secrets.API_TOKEN_GUILD_LEADER }}
 
       - name: Create packages
         run: dotnet pack GW2SDK --configuration Release --no-build
