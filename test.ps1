@@ -1,11 +1,11 @@
 # Remove results from previous runs
-Remove-Item -ErrorAction Ignore -Recurse GW2SDK.Tests/TestResults/*
+Remove-Item -ErrorAction Ignore -Recurse artifacts/bin/GW2SDK.Tests/debug_net9.0/TestResults/*
 
 # Run tests with coverage, additional arguments are passed on to dotnet test
-# e.g. ./test.sh --filter Colors
-dotnet run --project GW2SDK.Tests --framework net9.0 -- `
+# e.g. ./test.ps1 -- --filter-class *Colors
+dotnet run --project tests/GW2SDK.Tests --framework net9.0 -- `
     --coverage `
-    --coverage-settings GW2SDK.Tests/coverage.settings `
+    --coverage-settings tests/GW2SDK.Tests/coverage.settings `
     --coverage-output coverage.xml `
     @args
 

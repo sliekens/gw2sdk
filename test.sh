@@ -2,13 +2,13 @@
 set -e
 
 # Remove results from previous runs
-rm -r GW2SDK.Tests/TestResults/* || true
+rm -r artifacts/bin/GW2SDK.Tests/debug_net9.0/TestResults/* || true
 
 # Run tests with coverage, additional arguments are passed on to dotnet test
-# e.g. ./test.sh --filter Colors
+# e.g. ./test.sh -- --filter-class *Colors
 dotnet run --project GW2SDK.Tests --framework net9.0 -- \
     --coverage \
-    --coverage-settings GW2SDK.Tests/coverage.settings \
+    --coverage-settings tests/GW2SDK.Tests/coverage.settings \
     --coverage-output coverage.xml \
     "$@"
 
