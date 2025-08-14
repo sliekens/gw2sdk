@@ -37,21 +37,21 @@ jobs:
         run: dotnet restore --locked-mode
 
       - name: Build
-        run: dotnet build --configuration ${{ env.build-configuration }} --no-restore
+        run: dotnet build --configuration Release --no-restore
 
       - name: Update test data
         run:
           dotnet run --project GW2SDK.TestDataHelper
             --framework $DOTNET_TEST_TFM 
-            --configuration ${{ env.build-configuration }}
+            --configuration Release
             --no-build
-              -- GW2SDK.Tests/bin/${{ env.build-configuration }}/$DOTNET_TEST_TFM/Data
+              -- artifacts/bin/GW2SDK.Tests/release_$DOTNET_TEST_TFM/Data
 
       - name: Test
         run:
           dotnet run --project GW2SDK.Tests
             --framework $DOTNET_TEST_TFM
-            --configuration ${{ env.build-configuration }}
+            --configuration Release
             --no-build
             --coverage
             --coverage-settings GW2SDK.Tests/coverage.settings
@@ -66,7 +66,7 @@ jobs:
         if: failure()
         with:
           name: test-data
-          path: GW2SDK.Tests/Data
+          path: artifacts/bin/GW2SDK.Tests/release_$DOTNET_TEST_TFM/Data
 
       - name: Upload coverage
         uses: actions/upload-artifact@v4
@@ -79,14 +79,14 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
-      - name: Pack artifacts
-        run: dotnet pack GW2SDK --configuration ${{ env.build-configuration }} --no-build
+      - name: Create packages
+        run: dotnet pack GW2SDK --configuration Release --no-build
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: packages
-          path: artifacts/package/${{ env.build-configuration }} 
+          name: package
+          path: artifacts/package/
 
   deploy-to-github-packages:
     name: Deploy to GitHub Packages
@@ -98,8 +98,8 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          name: packages
+          name: package
           path: artifacts
 
       - name: Upload packages to GitHub Packages
-        run: dotnet nuget push artifacts/*.nupkg --source https://nuget.pkg.github.com/sliekens/index.json --api-key ${{secrets.GITHUB_TOKEN}} --skip-duplicate
+        run: dotnet nuget push artifacts/*/*.nupkg --source https://nuget.pkg.github.com/sliekens/index.json --api-key ${{secrets.GITHUB_TOKEN}} --skip-duplicate
