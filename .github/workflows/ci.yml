@@ -7,7 +7,7 @@ on:
   pull_request:
     branches: [main]
   schedule:
-    - cron: '45 18 * * *'
+    - cron: "45 18 * * *"
 
 concurrency:
   group: ci
@@ -40,27 +40,25 @@ jobs:
         run: dotnet build --configuration Release --no-restore
 
       - name: Update test data
-        run:
-          dotnet run --project GW2SDK.TestDataHelper
-            --framework $DOTNET_TEST_TFM 
-            --configuration Release
-            --no-build
-              -- artifacts/bin/GW2SDK.Tests/release_$DOTNET_TEST_TFM/Data
+        run: dotnet run --project src/GW2SDK.TestDataHelper
+          --framework $DOTNET_TEST_TFM
+          --configuration Release
+          --no-build
+          -- artifacts/bin/GW2SDK.Tests/release_$DOTNET_TEST_TFM/Data
 
       - name: Test
-        run:
-          dotnet run --project GW2SDK.Tests
-            --framework $DOTNET_TEST_TFM
-            --configuration Release
-            --no-build
-            --coverage
-            --coverage-settings GW2SDK.Tests/coverage.settings
-            --coverage-output $GITHUB_WORKSPACE/artifacts/coverage/coverage.xml
+        run: dotnet run --project GW2SDK.Tests
+          --framework $DOTNET_TEST_TFM
+          --configuration Release
+          --no-build
+          --coverage
+          --coverage-settings GW2SDK.Tests/coverage.settings
+          --coverage-output $GITHUB_WORKSPACE/artifacts/coverage/coverage.xml
         env:
           ApiKeyBasic: ${{ secrets.API_TOKEN_BASIC }}
           ApiKey: ${{ secrets.API_TOKEN_FULL }}
           GuildLeader__Token: ${{ secrets.API_TOKEN_GUILD_LEADER }}
-            
+
       - name: Upload test data on failure
         uses: actions/upload-artifact@v4
         if: failure()
