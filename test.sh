@@ -16,4 +16,4 @@ dotnet run --project GW2SDK.Tests --framework net9.0 -- \
 rm -r reports || true
 
 # Generate coverage report
-dotnet reportgenerator -reports:GW2SDK.Tests/bin/Debug/net9.0/TestResults/coverage.xml -targetdir:reports
+dotnet reportgenerator -reports:GW2SDK.Tests/bin/Debug/net9.0/TestResults/coverage.xml -targetdir:artifacts/

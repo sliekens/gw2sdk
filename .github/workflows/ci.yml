@@ -80,13 +80,13 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Pack artifacts
-        run: dotnet pack GW2SDK --configuration ${{ env.build-configuration }} --no-build --output artifacts/packages
+        run: dotnet pack GW2SDK --configuration ${{ env.build-configuration }} --no-build
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: packages
-          path: artifacts/packages
+          path: artifacts/package/${{ env.build-configuration }} 
 
   deploy-to-github-packages:
     name: Deploy to GitHub Packages

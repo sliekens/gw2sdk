@@ -13,4 +13,4 @@ dotnet run --project GW2SDK.Tests --framework net9.0 -- `
 Remove-Item -ErrorAction Ignore -Recurse reports
 
 # Generate coverage report
-dotnet reportgenerator -reports:GW2SDK.Tests/bin/Debug/net9.0/TestResults/coverage.xml -targetdir:reports
+dotnet reportgenerator -reports:artifacts/bin/GW2SDK.Tests/debug_net9.0/TestResults/coverage.xml -targetdir:artifacts/report

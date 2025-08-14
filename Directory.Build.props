@@ -2,6 +2,7 @@
 
   <!-- Common project properties -->
   <PropertyGroup>
+    <ArtifactsPath>$(MSBuildThisFileDirectory)artifacts</ArtifactsPath>
     <LangVersion>13.0</LangVersion>
     <CLSCompliant>false</CLSCompliant>
     <Nullable>enable</Nullable>

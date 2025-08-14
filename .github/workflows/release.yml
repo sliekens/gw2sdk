@@ -40,13 +40,13 @@ jobs:
           GuildLeader__Token: ${{ secrets.API_TOKEN_GUILD_LEADER }}
 
       - name: Create packages
-        run: dotnet pack GW2SDK --configuration ${{ env.build-configuration }} --no-build --output artifacts
+        run: dotnet pack GW2SDK --configuration ${{ env.build-configuration }} --no-build
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: packages
-          path: artifacts
+          path: artifacts/package/${{ env.build-configuration }}
 
   deploy-integration:
     name: Deploy to NuGet integration environment
