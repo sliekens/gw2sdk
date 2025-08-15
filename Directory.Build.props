@@ -48,7 +48,7 @@
     <PolySharpIncludeRuntimeSupportedAttributes>true</PolySharpIncludeRuntimeSupportedAttributes>
   </PropertyGroup>
 
-<!-- Code analysis -->
+  <!-- Code analysis -->
   <PropertyGroup>
     <CodeAnalysisTreatWarningsAsErrors>false</CodeAnalysisTreatWarningsAsErrors>
     <WarningsAsErrors>RS0016;RS0017;RS0041</WarningsAsErrors>
