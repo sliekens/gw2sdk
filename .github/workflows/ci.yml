@@ -78,7 +78,7 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Create packages
-        run: dotnet pack GW2SDK --configuration Release --no-build
+        run: dotnet pack src/GW2SDK --configuration Release --no-build
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
