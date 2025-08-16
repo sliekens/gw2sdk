@@ -54,6 +54,8 @@ jobs:
           --coverage
           --coverage-settings tests/GW2SDK.Tests/coverage.settings
           --coverage-output artifacts/coverage/coverage.xml
+          --no-ansi
+          --no-progress
         env:
           ApiKeyBasic: ${{ secrets.API_TOKEN_BASIC }}
           ApiKey: ${{ secrets.API_TOKEN_FULL }}
