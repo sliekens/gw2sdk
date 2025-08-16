@@ -53,7 +53,7 @@ jobs:
           --no-build
           --coverage
           --coverage-settings tests/GW2SDK.Tests/coverage.settings
-          --coverage-output artifacts/coverage/coverage.xml
+          --coverage-output coverage.xml
           -- 
             --no-ansi
             --no-progress
@@ -73,7 +73,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: coverage
-          path: artifacts/coverage
+          path: artifacts/bin/GW2SDK.Tests/release_$DOTNET_TEST_TFM/TestResults/coverage.xml
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
