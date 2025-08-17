@@ -36,7 +36,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: package
-          path: artifacts/package/
+          path: artifacts/package/release
 
   deploy-integration:
     name: Deploy to NuGet integration environment
@@ -49,10 +49,10 @@ jobs:
         uses: actions/download-artifact@v5
         with:
           name: package
-          path: artifacts
+          path: artifacts/package
 
       - name: Push package
-        run: dotnet nuget push artifacts/*/*.nupkg --source ${{ vars.NUGET_API_URL }} --api-key ${{ secrets.NUGET_API_KEY }}
+        run: dotnet nuget push artifacts/package/*.nupkg --source ${{ vars.NUGET_API_URL }} --api-key ${{ secrets.NUGET_API_KEY }}
 
   deploy:
     name: Deploy to NuGet
@@ -68,4 +68,4 @@ jobs:
           path: artifacts
 
       - name: Push package
-        run: dotnet nuget push artifacts/*/*.nupkg --source ${{ vars.NUGET_API_URL }} --api-key ${{ secrets.NUGET_API_KEY }}
+        run: dotnet nuget push artifacts/package/*.nupkg --source ${{ vars.NUGET_API_URL }} --api-key ${{ secrets.NUGET_API_KEY }}
