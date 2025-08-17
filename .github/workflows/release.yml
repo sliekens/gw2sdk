@@ -65,7 +65,7 @@ jobs:
         uses: actions/download-artifact@v5
         with:
           name: package
-          path: artifacts
+          path: artifacts/package
 
       - name: Push package
         run: dotnet nuget push artifacts/package/*.nupkg --source ${{ vars.NUGET_API_URL }} --api-key ${{ secrets.NUGET_API_KEY }}
