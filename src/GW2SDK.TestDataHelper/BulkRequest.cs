@@ -1,5 +1,4 @@
-﻿using System.IO.Compression;
-using System.Text.Json;
+﻿using System.Text.Json;
 
 using GuildWars2.Http;
 
@@ -35,13 +34,17 @@ internal sealed class BulkRequest(Uri requestUri)
 
         response.EnsureSuccessStatusCode();
 
-        Stream content = await response.Content.ReadAsStreamAsync(cancellationToken)
-            .ConfigureAwait(false);
-        content = new GZipStream(content, CompressionMode.Decompress);
-        await using (content)
+        if (response.Content.Headers.ContentType?.MediaType == "application/json")
         {
-            return await JsonDocument.ParseAsync(content, cancellationToken: cancellationToken)
+            return await response.Content.ReadAsJsonDocumentAsync(cancellationToken)
                 .ConfigureAwait(false);
         }
+
+        string responseBody = await response.Content.ReadAsDecodedStringAsync(cancellationToken)
+            .ConfigureAwait(false);
+
+        throw new InvalidOperationException(
+            $"Expected a JSON response (application/json) but received '{response.Content.Headers.ContentType}'. Response body: {responseBody}"
+        );
     }
 }
