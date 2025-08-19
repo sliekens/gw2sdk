@@ -125,7 +125,7 @@ try
 }
 catch (Exception crash)
 {
-    AnsiConsole.WriteException(crash);
+    LogError(crash);
     Environment.Exit(1);
     throw;
 }
@@ -136,4 +136,17 @@ static StreamWriter CreateTextCompressed(string path)
         new GZipStream(File.OpenWrite(path), CompressionMode.Compress),
         Encoding.UTF8
     );
+}
+
+static void LogError(Exception exception)
+{
+    try
+    {
+        AnsiConsole.WriteException(exception);
+    }
+    catch (IndexOutOfRangeException)
+    {
+        // This is a workaround for a bug in Spectre.Console that causes an IndexOutOfRangeException
+        Console.Error.WriteLine(exception);
+    }
 }
