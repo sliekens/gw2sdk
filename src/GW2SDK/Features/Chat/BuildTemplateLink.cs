@@ -344,7 +344,9 @@ public sealed record BuildTemplateLink : Link
                 WeaponType.Spear => 0x0109,
                 WeaponType.Trident => 0,
                 WeaponType.HarpoonGun => 0,
-                WeaponType.None or WeaponType.Unknown or _ => 0
+                WeaponType.LargeBundle => 0,
+                WeaponType.None or WeaponType.Nothing => 0,
+                WeaponType.Unknown or _ => 0
             };
         }
     }

@@ -84,5 +84,11 @@ public enum WeaponType
 
     /// <summary>The longbow is a two-handed weapon that is known for its long-range projectiles, wide area of effect abilities
     /// and strong control skills to keep foes away.</summary>
-    Longbow
+    Longbow,
+
+    /// <summary>A large bundle (two-handed), which is a weapon that replaces your skills when equipped.</summary>
+    LargeBundle,
+
+    /// <summary>Empty handed.</summary>
+    Nothing
 }

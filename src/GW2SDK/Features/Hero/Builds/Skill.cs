@@ -11,6 +11,7 @@ public record Skill
     public required int Id { get; init; }
 
     /// <summary>The name of the skill.</summary>
+    /// <remarks>Can be empty.</remarks>
     public required string Name { get; init; }
 
     /// <summary>The list of skill behaviors. For example, if the current skill is a ranged attack, this list will contain a
@@ -23,6 +24,7 @@ public record Skill
     public required IReadOnlyList<TraitedFact>? TraitedFacts { get; init; }
 
     /// <summary>The description as it appears in the tooltip of the skill.</summary>
+    /// <remarks>Can be empty.</remarks>
     public required string Description { get; init; }
 
     /// <summary>The URL of the skill icon.</summary>

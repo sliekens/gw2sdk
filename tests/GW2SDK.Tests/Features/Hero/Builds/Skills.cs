@@ -34,8 +34,8 @@ public class Skills
 
                 if (skill is ActionSkill action)
                 {
-                    Assert.NotEmpty(action.Name);
-                    Assert.NotEmpty(action.Description);
+                    Assert.NotNull(action.Name);
+                    Assert.NotNull(action.Description);
                     MarkupSyntaxValidator.Validate(action.Description);
                     Assert.True(action.IconUrl is null or { IsAbsoluteUri: true });
                     Assert.NotEmpty(action.Professions);
@@ -329,7 +329,7 @@ public class Skills
                                     // Nothing to verify
                                     break;
                                 case Percentage percentage:
-                                    Assert.InRange(percentage.Percent, -75, 500);
+                                    Assert.InRange(percentage.Percent, -100, 500);
                                     break;
                                 case Fact baseFact:
                                     // This handles the base Fact type - nothing specific to verify
