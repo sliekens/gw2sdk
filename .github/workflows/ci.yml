@@ -56,12 +56,10 @@ jobs:
         run: dotnet test
           --configuration Release
           --no-build
-          --
-            --coverage
-            --coverage-settings coverage.settings
-            --coverage-output coverage.xml
-            --no-ansi
-            --no-progress
+          --coverage
+          --coverage-settings tests/coverage.settings
+          --coverage-output coverage.xml
+          --no-ansi
         env:
           ApiKeyBasic: ${{ secrets.API_TOKEN_BASIC }}
           ApiKey: ${{ secrets.API_TOKEN_FULL }}

@@ -30,6 +30,11 @@ Multi-targeted .NET library. Targets: net9.0, net8.0, netstandard2.0, net462. Fa
 - Propose clearer rewrites for suboptimal code.
 - Consistency is a desired outcome, not a justification for keeping poor patterns.
 
+## Verifying changes
+- Run `dotnet build` to check for compilation or code analysis problems.
+- Use `dotnet test` to validate automated tests.
+- Tip: use `dotnet <command> --cli-schema` for command documentation.
+
 ## Conditional Compilation Examples
 
 Symbols: NET = net8+; NET9_0_OR_GREATER = net9+; NETFRAMEWORK = net462+; else = netstandard2.0.

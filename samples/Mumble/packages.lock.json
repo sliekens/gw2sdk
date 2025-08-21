@@ -288,10 +288,7 @@
         "contentHash": "gebRF3JLLJ76jz1CQpvwezNapZUjFq20JQsaGHzBH0DzlkHBLpdhwkOei9usiOkIGMwU/L0ALWpNe1JE+5/itw=="
       },
       "gw2sdk": {
-        "type": "Project",
-        "dependencies": {
-          "System.Text.Json": "[9.0.8, )"
-        }
+        "type": "Project"
       },
       "Microsoft.Extensions.Configuration.EnvironmentVariables": {
         "type": "CentralTransitive",
@@ -326,12 +323,6 @@
           "Microsoft.Extensions.FileProviders.Abstractions": "9.0.8",
           "Microsoft.Extensions.FileProviders.Physical": "9.0.8"
         }
-      },
-      "System.Text.Json": {
-        "type": "CentralTransitive",
-        "requested": "[9.0.8, )",
-        "resolved": "9.0.8",
-        "contentHash": "mIQir9jBqk0V7X0Nw5hzPJZC8DuGdf+2DS3jAVsr6rq5+/VyH5rza0XGcONJUWBrZ+G6BCwNyjWYd9lncBu48A=="
       }
     }
   }
