@@ -59,7 +59,7 @@ jobs:
           --coverage
           --coverage-settings tests/coverage.settings
           --coverage-output coverage.xml
-          --no-ansi
+          --no-progress
         env:
           ApiKeyBasic: ${{ secrets.API_TOKEN_BASIC }}
           ApiKey: ${{ secrets.API_TOKEN_FULL }}
