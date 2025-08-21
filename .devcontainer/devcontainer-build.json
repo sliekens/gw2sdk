@@ -4,7 +4,7 @@
   "features": {
     "ghcr.io/devcontainers/features/dotnet:2": {
       "version": "9.0.304",
-      "additionalVersions": "9.0.303"
+      "additionalVersions": "10.0"
     },
     "./mono": {},
     "ghcr.io/devcontainers/features/powershell:1": {}
