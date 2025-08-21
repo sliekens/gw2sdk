@@ -15,7 +15,6 @@ concurrency:
 
 env:
   SYMBOL_PACKAGE: false
-  DOTNET_TEST_TFM: net9.0
 
 jobs:
   build:
@@ -41,20 +40,26 @@ jobs:
 
       - name: Update test data
         run: dotnet run --project src/GW2SDK.TestDataHelper
-          --framework $DOTNET_TEST_TFM
           --configuration Release
           --no-build
-          -- artifacts/bin/GW2SDK.Tests/release_$DOTNET_TEST_TFM/Data
+          -- artifacts/Data
+
+      - name: Copy test data to all test directories
+        run: |
+          for d in artifacts/bin/GW2SDK.Tests/*; do
+            if [ -d "$d" ]; then
+              cp -rf artifacts/Data "$d/Data"
+            fi
+          done
 
       - name: Test
-        run: dotnet run --project tests/GW2SDK.Tests
-          --framework $DOTNET_TEST_TFM
+        run: dotnet test
           --configuration Release
           --no-build
-          --coverage
-          --coverage-settings tests/GW2SDK.Tests/coverage.settings
-          --coverage-output coverage.xml
-          -- 
+          --
+            --coverage
+            --coverage-settings coverage.settings
+            --coverage-output coverage.xml
             --no-ansi
             --no-progress
         env:
@@ -67,13 +72,13 @@ jobs:
         if: failure()
         with:
           name: test-data
-          path: artifacts/bin/GW2SDK.Tests/release_${{ env.DOTNET_TEST_TFM}}/Data
+          path: artifacts/Data
 
       - name: Upload coverage
         uses: actions/upload-artifact@v4
         with:
           name: coverage
-          path: artifacts/bin/GW2SDK.Tests/release_${{ env.DOTNET_TEST_TFM}}/TestResults/coverage.xml
+          path: artifacts/bin/GW2SDK.Tests/*/TestResults/coverage.xml
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
