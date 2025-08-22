@@ -54,9 +54,9 @@
       },
       "Pastel": {
         "type": "Direct",
-        "requested": "[6.0.1, )",
-        "resolved": "6.0.1",
-        "contentHash": "7naIbEgNzZnorWWIfI0rsC4GUtw/Yjqt+Kd28e8xpzfsaismJ02WF4vG/USDbmJQkBMWPsNPM+KUxNlUiGad+w=="
+        "requested": "[7.0.0, )",
+        "resolved": "7.0.0",
+        "contentHash": "g/3vT1ggvAvWq2bw9RagpyPYHnppKs+F4xw3P8cniSNRAUvtjO3/MHETTbzvXqGkZ18GoZA6xW5Zfh33jYiWLg=="
       },
       "Microsoft.Extensions.Configuration": {
         "type": "Transitive",

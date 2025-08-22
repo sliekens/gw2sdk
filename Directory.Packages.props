@@ -21,7 +21,7 @@
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
     <PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="17.14.2" />
     <PackageVersion Include="MinVer" Version="6.0.0" />
-    <PackageVersion Include="Pastel" Version="6.0.1" />
+    <PackageVersion Include="Pastel" Version="7.0.0" />
     <PackageVersion Include="Polly.Core" Version="8.6.2" />
     <PackageVersion Include="PolySharp" Version="1.15.0" />
     <PackageVersion Include="Roslynator.Analyzers" Version="4.14.0">
