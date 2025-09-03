@@ -17,7 +17,7 @@ public class Luck
             (AccountLuck actual, _) = await sut.Hero.Account.GetLuck(
                 accessToken.Key,
                 cancellationToken: TestContext.Current.CancellationToken
-            );
+            ).ConfigureAwait(true);
 
             Assert.True(actual.Luck > 0, "You have no luck today.");
             Assert.Equal(300, actual.MagicFind);
