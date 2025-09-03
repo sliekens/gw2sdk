@@ -24,5 +24,9 @@ public sealed record MountSkin
     public required IReadOnlyList<DyeSlot> DyeSlots { get; init; }
 
     /// <summary>The mount associated with the skin.</summary>
+    [Obsolete("Use MountId instead.")]
     public required Extensible<MountName> Mount { get; init; }
+
+    /// <summary>The unique identifier (GUID) of the mount associated with the skin.</summary>
+    public required Guid MountId { get; init; }
 }

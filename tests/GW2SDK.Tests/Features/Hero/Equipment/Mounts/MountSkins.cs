@@ -16,7 +16,9 @@ public class MountSkins
             cancellationToken: TestContext.Current.CancellationToken
         );
 
-        Assert.Equal(context.ResultTotal, actual.Count);
+        // https://github.com/gw2-api/issues/issues/134
+        Assert.Equal(context.ResultCount, actual.Count + 1);
+        Assert.Equal(context.ResultTotal, actual.Count + 1);
         Assert.All(
             actual,
             entry =>
@@ -34,7 +36,9 @@ public class MountSkins
                     }
                 );
 
+#pragma warning disable CS0618 // Type or member is obsolete
                 Assert.True(entry.Mount.IsDefined());
+#pragma warning restore CS0618 // Type or member is obsolete
 
                 string json = JsonSerializer.Serialize(entry);
                 MountSkin? roundtrip = JsonSerializer.Deserialize<MountSkin>(json);

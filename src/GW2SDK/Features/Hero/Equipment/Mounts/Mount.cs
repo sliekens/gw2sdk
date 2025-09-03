@@ -10,6 +10,9 @@ public sealed record Mount
     /// <summary>The mount ID.</summary>
     public required Extensible<MountName> Id { get; init; }
 
+    /// <summary>The unique identifier (GUID) of the mount.</summary>
+    public required Guid UId { get; init; }
+
     /// <summary>The mount name.</summary>
     public required string Name { get; init; }
 

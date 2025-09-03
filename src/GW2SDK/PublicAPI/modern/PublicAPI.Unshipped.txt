@@ -1,4 +1,8 @@
 #nullable enable
 GuildWars2.Hero.Builds.WeaponType.LargeBundle = 21 -> GuildWars2.Hero.Builds.WeaponType
 GuildWars2.Hero.Builds.WeaponType.Nothing = 22 -> GuildWars2.Hero.Builds.WeaponType
+GuildWars2.Hero.Equipment.Mounts.Mount.UId.get -> System.Guid
+GuildWars2.Hero.Equipment.Mounts.Mount.UId.init -> void
+GuildWars2.Hero.Equipment.Mounts.MountSkin.MountId.get -> System.Guid
+GuildWars2.Hero.Equipment.Mounts.MountSkin.MountId.init -> void
 static readonly GuildWars2.SchemaVersion.V20250829 -> GuildWars2.SchemaVersion!

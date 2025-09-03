@@ -19,9 +19,17 @@ internal sealed class MountJsonConverter : JsonConverter<Mount>
 
     public static Mount? Read(in JsonElement json)
     {
+        // Optional for backwards compatibility
+        Guid uid = Guid.Empty;
+        if (json.TryGetProperty("uid", out JsonElement guid))
+        {
+            uid = guid.GetGuid();
+        }
+
         return new()
         {
             Id = new Extensible<MountName>(json.GetProperty("id").GetStringRequired()),
+            UId = uid,
             Name = json.GetProperty("name").GetStringRequired(),
             DefaultSkinId = json.GetProperty("default_skin_id").GetInt32(),
             SkinIds = json.GetProperty("skin_ids").GetList(static (in JsonElement entry) => entry.GetInt32()),
@@ -33,6 +41,7 @@ internal sealed class MountJsonConverter : JsonConverter<Mount>
     {
         writer.WriteStartObject();
         writer.WriteString("id", value.Id.ToString());
+        writer.WriteString("uid", value.UId.ToString());
         writer.WriteString("name", value.Name);
         writer.WriteNumber("default_skin_id", value.DefaultSkinId);
         writer.WriteStartArray("skin_ids");

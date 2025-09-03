@@ -13,6 +13,7 @@ internal static class MountJson
         RequiredMember defaultSkin = "default_skin";
         RequiredMember skins = "skins";
         RequiredMember skills = "skills";
+        RequiredMember guid = "guid";
 
         foreach (JsonProperty member in json.EnumerateObject())
         {
@@ -36,6 +37,10 @@ internal static class MountJson
             {
                 skills = member;
             }
+            else if (guid.Match(member))
+            {
+                guid = member;
+            }
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 ThrowHelper.ThrowUnexpectedMember(member.Name);
@@ -45,6 +50,7 @@ internal static class MountJson
         return new Mount
         {
             Id = id.Map(static (in JsonElement value) => value.GetMountName()),
+            UId = guid.Map(static (in JsonElement value) => value.GetGuid()),
             Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
             DefaultSkinId = defaultSkin.Map(static (in JsonElement value) => value.GetInt32()),
             SkinIds = skins.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32())),

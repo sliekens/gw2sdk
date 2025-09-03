@@ -105,7 +105,7 @@ public sealed class SchemaVersion
     public static readonly SchemaVersion V20250829 = new("2025-08-29T01:00:00.000Z");
 
     /// <summary>The schema version that GW2SDK is optimized for.</summary>
-    public static readonly SchemaVersion Recommended = V20240720;
+    public static readonly SchemaVersion Recommended = V20250829;
 
     private SchemaVersion(string version)
     {
