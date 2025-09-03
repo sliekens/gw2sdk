@@ -1,3 +1,4 @@
 #nullable enable
 GuildWars2.Hero.Builds.WeaponType.LargeBundle = 21 -> GuildWars2.Hero.Builds.WeaponType
 GuildWars2.Hero.Builds.WeaponType.Nothing = 22 -> GuildWars2.Hero.Builds.WeaponType
+static readonly GuildWars2.SchemaVersion.V20250829 -> GuildWars2.SchemaVersion!

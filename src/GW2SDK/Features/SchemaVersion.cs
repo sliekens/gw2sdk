@@ -96,6 +96,14 @@ public sealed class SchemaVersion
     /// </remarks>
     public static readonly SchemaVersion V20240720 = new("2024-07-20T01:00:00.000Z");
 
+    /// <summary>Represents the schema version "2025-08-29T01:00:00.000Z".</summary>
+    /// <remarks>
+    ///    <list type="bullet">
+    ///       <item>Remove <c>mount</c> from <c>/v2/mounts/skins</c></item>
+    ///   </list>
+    /// </remarks>
+    public static readonly SchemaVersion V20250829 = new("2025-08-29T01:00:00.000Z");
+
     /// <summary>The schema version that GW2SDK is optimized for.</summary>
     public static readonly SchemaVersion Recommended = V20240720;
 
