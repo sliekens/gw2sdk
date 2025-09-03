@@ -151,7 +151,8 @@ public class V2
             v => Assert.Equal(SchemaVersion.V20210715, v.Version),
             v => Assert.Equal(SchemaVersion.V20220309, v.Version),
             v => Assert.Equal(SchemaVersion.V20220323, v.Version),
-            v => Assert.Equal(SchemaVersion.V20240720, v.Version)
+            v => Assert.Equal(SchemaVersion.V20240720, v.Version),
+            v => Assert.Equal(SchemaVersion.V20250829, v.Version)
         );
     }
 }
