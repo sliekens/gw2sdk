@@ -105,6 +105,7 @@ public static class Gw2Resiliency
         // Additionally, hedge certain errors which might succeed on a second attempt without waiting
         ShouldHandle = static async attempt => attempt.Outcome switch
         {
+            { Result.StatusCode: NotFound } => true,
             { Result.StatusCode: RequestTimeout } => true,
             { Result.StatusCode: InternalServerError } => true,
             { Result.StatusCode: BadGateway } => true,
