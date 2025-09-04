@@ -161,6 +161,9 @@ public class Items
                                 case JadeBotSkinUnlocker jadeBotSkinUnlocker:
                                     // Nothing specific to verify for JadeBotSkinUnlocker items
                                     break;
+                                case MagicDoorSkinUnlocker:
+                                    // Nothing specific to verify for MagicDoorSkinUnlocker items
+                                    break;
                                 case MiniatureUnlocker miniatureUnlocker:
                                     // Nothing specific to verify for MiniatureUnlocker items
                                     break;

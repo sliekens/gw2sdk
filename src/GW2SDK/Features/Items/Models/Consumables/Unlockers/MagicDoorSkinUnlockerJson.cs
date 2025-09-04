@@ -1,56 +1,13 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 
 using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-internal static class UnlockerJson
+internal static class MagicDoorSkinUnlockerJson
 {
-    public static Unlocker GetUnlocker(this in JsonElement json)
+    public static MagicDoorSkinUnlocker GetMagicDoorSkinUnlocker(this in JsonElement json)
     {
-        if (json.TryGetProperty("details", out JsonElement discriminator) && discriminator.TryGetProperty("unlock_type", out JsonElement subtype))
-        {
-            switch (subtype.GetString())
-            {
-                case "BagSlot":
-                    return json.GetBagSlotExpansion();
-                case "BankTab":
-                    return json.GetBankTabExpansion();
-                case "BuildLibrarySlot":
-                    return json.GetBuildStorageExpansion();
-                case "BuildLoadoutTab":
-                    return json.GetBuildTemplateExpansion();
-                case "Champion":
-                    return json.GetMistChampionSkinUnlocker();
-                case "CollectibleCapacity":
-                    return json.GetStorageExpander();
-                case "Content":
-                    return json.GetContentUnlocker();
-                case "CraftingRecipe":
-                    return json.GetRecipeSheet();
-                case "Dye":
-                    return json.GetDye();
-                case "GearLoadoutTab":
-                    return json.GetEquipmentTemplateExpansion();
-                case "GliderSkin":
-                    return json.GetGliderSkinUnlocker();
-                case "JadeBotSkin":
-                    return json.GetJadeBotSkinUnlocker();
-                case "MagicDoorSkin":
-                    return json.GetMagicDoorSkinUnlocker();
-                case "Minipet":
-                    return json.GetMiniatureUnlocker();
-                case "Ms":
-                    return json.GetMountSkinUnlocker();
-                case "Outfit":
-                    return json.GetOutfitUnlocker();
-                case "SharedSlot":
-                    return json.GetSharedInventorySlot();
-                default:
-                    break;
-            }
-        }
-
         RequiredMember name = "name";
         OptionalMember description = "description";
         RequiredMember level = "level";
@@ -128,9 +85,9 @@ internal static class UnlockerJson
                     }
                     else if (detail.NameEquals("unlock_type"))
                     {
-                        if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
+                        if (!detail.Value.ValueEquals("MagicDoorSkin"))
                         {
-                            ThrowHelper.ThrowUnexpectedDiscriminator(detail.Value.GetString());
+                            ThrowHelper.ThrowInvalidDiscriminator(detail.Value.GetString());
                         }
                     }
                     else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
@@ -146,7 +103,7 @@ internal static class UnlockerJson
         }
 
         string? iconString = icon.Map(static (in JsonElement value) => value.GetString());
-        return new Unlocker
+        return new MagicDoorSkinUnlocker
         {
             Id = id.Map(static (in JsonElement value) => value.GetInt32()),
             Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),

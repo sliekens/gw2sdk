@@ -67,8 +67,12 @@ internal sealed class UnlockerJsonConverter : JsonConverter<Unlocker>
                     return DyeJsonConverter.Read(json);
                 case EquipmentTemplateExpansionJsonConverter.DiscriminatorValue:
                     return EquipmentTemplateExpansionJsonConverter.Read(json);
+                case GliderSkinUnlockerJsonConverter.DiscriminatorValue:
+                    return GliderSkinUnlockerJsonConverter.Read(json);
                 case JadeBotSkinUnlockerJsonConverter.DiscriminatorValue:
                     return JadeBotSkinUnlockerJsonConverter.Read(json);
+                case MagicDoorSkinUnlockerJsonConverter.DiscriminatorValue:
+                    return MagicDoorSkinUnlockerJsonConverter.Read(json);
                 case MiniatureUnlockerJsonConverter.DiscriminatorValue:
                     return MiniatureUnlockerJsonConverter.Read(json);
                 case MistChampionSkinUnlockerJsonConverter.DiscriminatorValue:
@@ -83,8 +87,6 @@ internal sealed class UnlockerJsonConverter : JsonConverter<Unlocker>
                     return SharedInventorySlotJsonConverter.Read(json);
                 case StorageExpanderJsonConverter.DiscriminatorValue:
                     return StorageExpanderJsonConverter.Read(json);
-                case GliderSkinUnlockerJsonConverter.DiscriminatorValue:
-                    return GliderSkinUnlockerJsonConverter.Read(json);
                 default:
                     break;
             }
@@ -136,8 +138,14 @@ internal sealed class UnlockerJsonConverter : JsonConverter<Unlocker>
             case EquipmentTemplateExpansion equipmentTemplateExpansion:
                 EquipmentTemplateExpansionJsonConverter.Write(writer, equipmentTemplateExpansion);
                 break;
+            case GliderSkinUnlocker gliderSkinUnlocker:
+                GliderSkinUnlockerJsonConverter.Write(writer, gliderSkinUnlocker);
+                break;
             case JadeBotSkinUnlocker jadeBotSkinUnlocker:
                 JadeBotSkinUnlockerJsonConverter.Write(writer, jadeBotSkinUnlocker);
+                break;
+            case MagicDoorSkinUnlocker magicDoorSkinUnlocker:
+                MagicDoorSkinUnlockerJsonConverter.Write(writer, magicDoorSkinUnlocker);
                 break;
             case MiniatureUnlocker miniatureUnlocker:
                 MiniatureUnlockerJsonConverter.Write(writer, miniatureUnlocker);
@@ -159,9 +167,6 @@ internal sealed class UnlockerJsonConverter : JsonConverter<Unlocker>
                 break;
             case StorageExpander storageExpander:
                 StorageExpanderJsonConverter.Write(writer, storageExpander);
-                break;
-            case GliderSkinUnlocker gliderSkinUnlocker:
-                GliderSkinUnlockerJsonConverter.Write(writer, gliderSkinUnlocker);
                 break;
             default:
                 writer.WriteStartObject();
