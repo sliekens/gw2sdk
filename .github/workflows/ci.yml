@@ -48,7 +48,7 @@ jobs:
         run: |
           for d in artifacts/bin/GW2SDK.Tests/*; do
             if [ -d "$d" ]; then
-              cp -rf artifacts/Data "$d/Data"
+              cp -rf artifacts/Data/* "$d/Data"
             fi
           done
 
