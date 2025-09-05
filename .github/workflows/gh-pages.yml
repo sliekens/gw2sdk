@@ -7,7 +7,7 @@ on:
       - .github/workflows/gh-pages.yml
       - docfx.json
       - docs/**
-      - GW2SDK/**.cs
+      - src/**/*.cs
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:

@@ -3,7 +3,7 @@
     {
       "src": [
         {
-          "src": "GW2SDK",
+          "src": "src/GW2SDK",
           "files": [
             "GW2SDK.csproj"
           ]
