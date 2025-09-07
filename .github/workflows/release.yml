@@ -44,6 +44,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: nuget-integration
+      url: ${{ vars.NUGET_GALLERY_URL}}
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v5
@@ -60,6 +61,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: nuget
+      url: ${{ vars.NUGET_GALLERY_URL }}
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v5
