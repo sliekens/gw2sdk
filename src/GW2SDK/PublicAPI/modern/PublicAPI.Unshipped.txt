@@ -1,18 +1,1 @@
 #nullable enable
-GuildWars2.Hero.Builds.WeaponType.LargeBundle = 21 -> GuildWars2.Hero.Builds.WeaponType
-GuildWars2.Hero.Builds.WeaponType.Nothing = 22 -> GuildWars2.Hero.Builds.WeaponType
-GuildWars2.Hero.Equipment.Mounts.Mount.UId.get -> System.Guid
-GuildWars2.Hero.Equipment.Mounts.Mount.UId.init -> void
-GuildWars2.Hero.Equipment.Mounts.MountSkin.MountId.get -> System.Guid
-GuildWars2.Hero.Equipment.Mounts.MountSkin.MountId.init -> void
-GuildWars2.Items.MagicDoorSkinUnlocker
-GuildWars2.Items.MagicDoorSkinUnlocker.Equals(GuildWars2.Items.MagicDoorSkinUnlocker? other) -> bool
-GuildWars2.Items.MagicDoorSkinUnlocker.MagicDoorSkinUnlocker() -> void
-override GuildWars2.Items.MagicDoorSkinUnlocker.<Clone>$() -> GuildWars2.Items.MagicDoorSkinUnlocker!
-override GuildWars2.Items.MagicDoorSkinUnlocker.Equals(object? obj) -> bool
-override GuildWars2.Items.MagicDoorSkinUnlocker.GetHashCode() -> int
-override GuildWars2.Items.MagicDoorSkinUnlocker.ToString() -> string!
-override sealed GuildWars2.Items.MagicDoorSkinUnlocker.Equals(GuildWars2.Items.Unlocker? other) -> bool
-static GuildWars2.Items.MagicDoorSkinUnlocker.operator !=(GuildWars2.Items.MagicDoorSkinUnlocker? left, GuildWars2.Items.MagicDoorSkinUnlocker? right) -> bool
-static GuildWars2.Items.MagicDoorSkinUnlocker.operator ==(GuildWars2.Items.MagicDoorSkinUnlocker? left, GuildWars2.Items.MagicDoorSkinUnlocker? right) -> bool
-static readonly GuildWars2.SchemaVersion.V20250829 -> GuildWars2.SchemaVersion!

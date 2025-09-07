@@ -53,14 +53,14 @@
   <!-- MinVer -->
   <PropertyGroup>
     <MinVerTagPrefix>v</MinVerTagPrefix>
-    <MinVerMinimumMajorMinor>2.8</MinVerMinimumMajorMinor>
+    <MinVerMinimumMajorMinor>2.9</MinVerMinimumMajorMinor>
     <MinVerDefaultPreReleaseIdentifiers>preview.0</MinVerDefaultPreReleaseIdentifiers>
   </PropertyGroup>
 
   <!-- Package validation -->
   <PropertyGroup>
     <EnablePackageValidation>true</EnablePackageValidation>
-    <PackageValidationBaselineVersion>2.7.0</PackageValidationBaselineVersion>
+    <PackageValidationBaselineVersion>2.8.0</PackageValidationBaselineVersion>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETStandard' Or '$(TargetFrameworkIdentifier)' == '.NETFramework'">
