@@ -14,9 +14,8 @@ public class MountSkinsIndex
                 TestContext.Current.CancellationToken
             );
 
-        // https://github.com/gw2-api/issues/issues/134
-        Assert.Equal(context.ResultCount, actual.Count + 1);
-        Assert.Equal(context.ResultTotal, actual.Count + 1);
+        Assert.Equal(context.ResultCount, actual.Count);
+        Assert.Equal(context.ResultTotal, actual.Count);
         Assert.NotEmpty(actual);
     }
 }
