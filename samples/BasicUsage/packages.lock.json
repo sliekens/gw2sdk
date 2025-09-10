@@ -9,7 +9,16 @@
         "contentHash": "Bi/e5guuwmyPL7Kp1G+PbcDvZFKsZxuHmc39IpYHAhWOvV8I/uIHPwAZ++Fa8k/w6pEqPdHCIrxSCelMNmu0dQ=="
       },
       "gw2sdk": {
-        "type": "Project"
+        "type": "Project",
+        "dependencies": {
+          "System.Text.Json": "[9.0.8, )"
+        }
+      },
+      "System.Text.Json": {
+        "type": "CentralTransitive",
+        "requested": "[9.0.8, )",
+        "resolved": "9.0.8",
+        "contentHash": "mIQir9jBqk0V7X0Nw5hzPJZC8DuGdf+2DS3jAVsr6rq5+/VyH5rza0XGcONJUWBrZ+G6BCwNyjWYd9lncBu48A=="
       }
     }
   }
