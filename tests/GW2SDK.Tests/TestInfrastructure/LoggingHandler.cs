@@ -4,56 +4,57 @@ namespace GuildWars2.Tests.TestInfrastructure;
 
 internal sealed class LoggingHandler : DelegatingHandler
 {
-    public static AsyncLocal<ITestOutputHelper> Output { get; } = new();
-
     protected override async Task<HttpResponseMessage> SendAsync(
         HttpRequestMessage request,
         CancellationToken cancellationToken
     )
     {
-        Output.Value?.WriteLine(
+        ITestOutputHelper output = TestContext.Current.TestOutputHelper
+            ?? throw new InvalidOperationException("TestOutputHelper unavailable");
+
+        output.WriteLine(
             $"{request.Method} {request.RequestUri!.PathAndQuery} HTTP/{request.Version}"
         );
         foreach (KeyValuePair<string, IEnumerable<string>> header in request.Headers)
         {
-            Output.Value?.WriteLine($"{header.Key}: {string.Join(", ", header.Value)}");
+            output.WriteLine($"{header.Key}: {string.Join(", ", header.Value)}");
         }
 
         if (request.Content is not null)
         {
             foreach (KeyValuePair<string, IEnumerable<string>> header in request.Content.Headers)
             {
-                Output.Value?.WriteLine($"{header.Key}: {string.Join(", ", header.Value)}");
+                output.WriteLine($"{header.Key}: {string.Join(", ", header.Value)}");
             }
         }
 
-        Output.Value?.WriteLine("");
+        output.WriteLine("");
 
         if (request.Content is not null)
         {
-            Output.Value?.WriteLine(await request.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false));
-            Output.Value?.WriteLine("");
+            output.WriteLine(await request.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false));
+            output.WriteLine("");
         }
 
         HttpResponseMessage? response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
 
-        Output.Value?.WriteLine(
+        output.WriteLine(
             $"HTTP/{response.Version} {(int)response.StatusCode} {response.ReasonPhrase}"
         );
         foreach (KeyValuePair<string, IEnumerable<string>> header in response.Headers)
         {
-            Output.Value?.WriteLine($"{header.Key}: {string.Join(", ", header.Value)}");
+            output.WriteLine($"{header.Key}: {string.Join(", ", header.Value)}");
         }
 
         if (response.Content is not null)
         {
             foreach (KeyValuePair<string, IEnumerable<string>> header in response.Content.Headers)
             {
-                Output.Value?.WriteLine($"{header.Key}: {string.Join(", ", header.Value)}");
+                output.WriteLine($"{header.Key}: {string.Join(", ", header.Value)}");
             }
         }
 
-        Output.Value?.WriteLine("");
+        output.WriteLine("");
 
         if (response.Content is not null)
         {
@@ -83,7 +84,7 @@ internal sealed class LoggingHandler : DelegatingHandler
 #endif
                     }
 
-                    Output.Value?.WriteLine(text);
+                    output.WriteLine(text);
                 }
                 finally
                 {
@@ -93,10 +94,10 @@ internal sealed class LoggingHandler : DelegatingHandler
             }
             else
             {
-                Output.Value?.WriteLine(await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false));
+                output.WriteLine(await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false));
             }
 
-            Output.Value?.WriteLine("");
+            output.WriteLine("");
         }
 
         return response;

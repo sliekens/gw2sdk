@@ -4,12 +4,11 @@ using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Guilds;
 
-public class GuildLog(ITestOutputHelper outputHelper)
+public class GuildLog
 {
     [Fact]
     public async Task Can_be_found()
     {
-        LoggingHandler.Output.Value = outputHelper;
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         TestGuildLeader guildLeader = TestConfiguration.TestGuildLeader;
 
