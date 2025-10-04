@@ -3,7 +3,7 @@
   <!-- Common project properties -->
   <PropertyGroup>
     <ArtifactsPath>$(MSBuildThisFileDirectory)artifacts</ArtifactsPath>
-    <LangVersion>13.0</LangVersion>
+    <LangVersion>14.0</LangVersion>
     <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
     <CLSCompliant>false</CLSCompliant>
     <Nullable>enable</Nullable>
