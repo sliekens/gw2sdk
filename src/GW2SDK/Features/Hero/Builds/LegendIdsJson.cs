@@ -41,6 +41,7 @@ internal static class LegendIdsJson
                 // Normally, legends are represented as Legend1, Legend2, etc., or null if no legend is selected.
                 // Unfortunately, build template/storage APIs return meme values instead of legend IDs
                 // and null can also mean a Renegade or Vindicator legends was selected
+                // TODO: check if still needed after GW2 API changes
                 "Legend1" or "Fire" => "Legend1",        // Glint 
                 "Legend2" or "Water" => "Legend2",       // Shiro 
                 "Legend3" or "Air" => "Legend3",         // Jalis 
