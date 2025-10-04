@@ -96,34 +96,34 @@ internal static class AchievementJson
             }
         }
 
-        string iconString = icon.Map(static (in JsonElement value) => value.GetString()) ?? "";
+        string iconString = icon.Map(static (in value) => value.GetString()) ?? "";
         return new Achievement
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Id = id.Map(static (in value) => value.GetInt32()),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = !string.IsNullOrEmpty(iconString) ? new Uri(iconString, UriKind.RelativeOrAbsolute) : null,
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Description = description.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Requirement = requirement.Map(static (in JsonElement value) => value.GetStringRequired()),
-            LockedText = lockedText.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Flags = flags.Map(static (in JsonElement values) => values.GetAchievementFlags()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            Description = description.Map(static (in value) => value.GetStringRequired()),
+            Requirement = requirement.Map(static (in value) => value.GetStringRequired()),
+            LockedText = lockedText.Map(static (in value) => value.GetStringRequired()),
+            Flags = flags.Map(static (in values) => values.GetAchievementFlags()),
             Tiers =
-                tiers.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetAchievementTier())
+                tiers.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetAchievementTier())
                 ),
             Prerequisites =
-                prerequisites.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32()))
+                prerequisites.Map(static (in values) => values.GetList(static (in value) => value.GetInt32()))
                 ?? [],
             Rewards =
-                rewards.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetAchievementReward())
+                rewards.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetAchievementReward())
                 ),
-            Bits = bits.Map(static (in JsonElement values) =>
-                values.GetList(static (in JsonElement value) => value.GetAchievementBit())
+            Bits = bits.Map(static (in values) =>
+                values.GetList(static (in value) => value.GetAchievementBit())
             ),
-            PointCap = pointCap.Map(static (in JsonElement value) => value.GetInt32())
+            PointCap = pointCap.Map(static (in value) => value.GetInt32())
         };
     }
 }

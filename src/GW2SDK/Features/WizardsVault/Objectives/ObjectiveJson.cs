@@ -39,10 +39,10 @@ internal static class ObjectiveJson
 
         return new Objective
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Title = title.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Track = track.Map(static (in JsonElement value) => value.GetEnum<ObjectiveTrack>()),
-            RewardAcclaim = acclaim.Map(static (in JsonElement value) => value.GetInt32())
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Title = title.Map(static (in value) => value.GetStringRequired()),
+            Track = track.Map(static (in value) => value.GetEnum<ObjectiveTrack>()),
+            RewardAcclaim = acclaim.Map(static (in value) => value.GetInt32())
         };
     }
 }

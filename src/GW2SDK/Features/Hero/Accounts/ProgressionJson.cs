@@ -29,8 +29,8 @@ internal static class ProgressionJson
 
         return new Progression
         {
-            Id = progressId.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Value = progress.Map(static (in JsonElement value) => value.GetInt32())
+            Id = progressId.Map(static (in value) => value.GetStringRequired()),
+            Value = progress.Map(static (in value) => value.GetInt32())
         };
     }
 }

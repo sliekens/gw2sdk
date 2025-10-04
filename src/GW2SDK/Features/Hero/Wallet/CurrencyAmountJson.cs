@@ -29,8 +29,8 @@ internal static class CurrencyAmountJson
 
         return new CurrencyAmount
         {
-            CurrencyId = currencyId.Map(static (in JsonElement value) => value.GetInt32()),
-            Amount = amount.Map(static (in JsonElement value) => value.GetInt32())
+            CurrencyId = currencyId.Map(static (in value) => value.GetInt32()),
+            Amount = amount.Map(static (in value) => value.GetInt32())
         };
     }
 }

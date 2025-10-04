@@ -98,7 +98,7 @@ public sealed class BankClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             ValueHashSet<MaterialCategory> value =
-                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMaterialCategory());
+                response.Json.RootElement.GetSet(static (in entry) => entry.GetMaterialCategory());
             return (value, response.Context);
         }
     }
@@ -116,7 +116,7 @@ public sealed class BankClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -173,7 +173,7 @@ public sealed class BankClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             ValueHashSet<MaterialCategory> value =
-                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMaterialCategory());
+                response.Json.RootElement.GetSet(static (in entry) => entry.GetMaterialCategory());
             return (value, response.Context);
         }
     }
@@ -204,7 +204,7 @@ public sealed class BankClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             ValueHashSet<MaterialCategory> value =
-                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMaterialCategory());
+                response.Json.RootElement.GetSet(static (in entry) => entry.GetMaterialCategory());
             return (value, response.Context);
         }
     }

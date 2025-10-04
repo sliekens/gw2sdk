@@ -81,28 +81,28 @@ internal static class GuildConsumableRecipeJson
 
         return new GuildConsumableRecipe
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            OutputItemId = outputItemId.Map(static (in JsonElement value) => value.GetInt32()),
-            OutputItemCount = outputItemCount.Map(static (in JsonElement value) => value.GetInt32()),
-            MinRating = minRating.Map(static (in JsonElement value) => value.GetInt32()),
+            Id = id.Map(static (in value) => value.GetInt32()),
+            OutputItemId = outputItemId.Map(static (in value) => value.GetInt32()),
+            OutputItemCount = outputItemCount.Map(static (in value) => value.GetInt32()),
+            MinRating = minRating.Map(static (in value) => value.GetInt32()),
             TimeToCraft =
-                timeToCraft.Map(static (in JsonElement value) => TimeSpan.FromMilliseconds(value.GetDouble())),
+                timeToCraft.Map(static (in value) => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines =
-                disciplines.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetEnum<CraftingDisciplineName>())
+                disciplines.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetEnum<CraftingDisciplineName>())
                 ),
-            Flags = flags.Map(static (in JsonElement values) => values.GetRecipeFlags()),
+            Flags = flags.Map(static (in values) => values.GetRecipeFlags()),
             Ingredients =
-                ingredients.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetIngredient())
+                ingredients.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetIngredient())
                 ),
             GuildIngredients =
-                guildIngredients.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetGuildIngredient())
+                guildIngredients.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetGuildIngredient())
                 )
                 ?? [],
-            OutputUpgradeId = outputUpgradeId.Map(static (in JsonElement value) => value.GetInt32()),
-            ChatLink = chatLink.Map(static (in JsonElement value) => value.GetStringRequired())
+            OutputUpgradeId = outputUpgradeId.Map(static (in value) => value.GetInt32()),
+            ChatLink = chatLink.Map(static (in value) => value.GetStringRequired())
         };
     }
 }

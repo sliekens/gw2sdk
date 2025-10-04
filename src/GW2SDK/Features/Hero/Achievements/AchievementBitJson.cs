@@ -44,7 +44,7 @@ internal static class AchievementBitJson
 
         return new AchievementBit
         {
-            Text = text.Map(static (in JsonElement value) => value.GetString()) ?? ""
+            Text = text.Map(static (in value) => value.GetString()) ?? ""
         };
     }
 }

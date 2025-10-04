@@ -28,8 +28,8 @@ internal static class AchievementTierJson
 
         return new AchievementTier
         {
-            Count = count.Map(static (in JsonElement value) => value.GetInt32()),
-            Points = points.Map(static (in JsonElement value) => value.GetInt32())
+            Count = count.Map(static (in value) => value.GetInt32()),
+            Points = points.Map(static (in value) => value.GetInt32())
         };
     }
 }

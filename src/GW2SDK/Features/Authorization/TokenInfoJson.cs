@@ -53,10 +53,10 @@ internal static class TokenInfoJson
 
         return new TokenInfo
         {
-            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Permissions = permissions.Map(static (in JsonElement values) =>
-                values.GetList(static (in JsonElement value) => value.GetEnum<Permission>())
+            Id = id.Map(static (in value) => value.GetStringRequired()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            Permissions = permissions.Map(static (in values) =>
+                values.GetList(static (in value) => value.GetEnum<Permission>())
             )
         };
     }

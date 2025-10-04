@@ -42,7 +42,7 @@ public sealed class AchievementsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -64,7 +64,7 @@ public sealed class AchievementsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -119,7 +119,7 @@ public sealed class AchievementsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Achievement> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAchievement());
+            ValueHashSet<Achievement> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAchievement());
             return (value, response.Context);
         }
     }
@@ -148,7 +148,7 @@ public sealed class AchievementsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Achievement> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAchievement());
+            ValueHashSet<Achievement> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAchievement());
             return (value, response.Context);
         }
     }
@@ -286,7 +286,7 @@ public sealed class AchievementsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             ValueHashSet<AccountAchievement> value =
-                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAccountAchievement());
+                response.Json.RootElement.GetSet(static (in entry) => entry.GetAccountAchievement());
             return (value, response.Context);
         }
     }
@@ -312,7 +312,7 @@ public sealed class AchievementsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             ValueHashSet<AccountAchievement> value =
-                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAccountAchievement());
+                response.Json.RootElement.GetSet(static (in entry) => entry.GetAccountAchievement());
             return (value, response.Context);
         }
     }
@@ -343,7 +343,7 @@ public sealed class AchievementsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             ValueHashSet<AccountAchievement> value =
-                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAccountAchievement());
+                response.Json.RootElement.GetSet(static (in entry) => entry.GetAccountAchievement());
             return (value, response.Context);
         }
     }
@@ -374,7 +374,7 @@ public sealed class AchievementsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             ValueHashSet<AchievementCategory> value =
-                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAchievementCategory());
+                response.Json.RootElement.GetSet(static (in entry) => entry.GetAchievementCategory());
             return (value, response.Context);
         }
     }
@@ -392,7 +392,7 @@ public sealed class AchievementsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -449,7 +449,7 @@ public sealed class AchievementsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             ValueHashSet<AchievementCategory> value =
-                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAchievementCategory());
+                response.Json.RootElement.GetSet(static (in entry) => entry.GetAchievementCategory());
             return (value, response.Context);
         }
     }
@@ -480,7 +480,7 @@ public sealed class AchievementsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             ValueHashSet<AchievementCategory> value =
-                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAchievementCategory());
+                response.Json.RootElement.GetSet(static (in entry) => entry.GetAchievementCategory());
             return (value, response.Context);
         }
     }
@@ -511,7 +511,7 @@ public sealed class AchievementsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             ValueHashSet<AchievementGroup> value =
-                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAchievementGroup());
+                response.Json.RootElement.GetSet(static (in entry) => entry.GetAchievementGroup());
             return (value, response.Context);
         }
     }
@@ -529,7 +529,7 @@ public sealed class AchievementsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
+            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -585,7 +585,7 @@ public sealed class AchievementsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             ValueHashSet<AchievementGroup> value =
-                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAchievementGroup());
+                response.Json.RootElement.GetSet(static (in entry) => entry.GetAchievementGroup());
             return (value, response.Context);
         }
     }
@@ -616,7 +616,7 @@ public sealed class AchievementsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             ValueHashSet<AchievementGroup> value =
-                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAchievementGroup());
+                response.Json.RootElement.GetSet(static (in entry) => entry.GetAchievementGroup());
             return (value, response.Context);
         }
     }
@@ -645,7 +645,7 @@ public sealed class AchievementsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Title> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetTitle());
+            ValueHashSet<Title> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetTitle());
             return (value, response.Context);
         }
     }
@@ -663,7 +663,7 @@ public sealed class AchievementsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -717,7 +717,7 @@ public sealed class AchievementsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Title> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetTitle());
+            ValueHashSet<Title> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetTitle());
             return (value, response.Context);
         }
     }
@@ -746,7 +746,7 @@ public sealed class AchievementsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Title> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetTitle());
+            ValueHashSet<Title> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetTitle());
             return (value, response.Context);
         }
     }

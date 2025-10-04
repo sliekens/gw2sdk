@@ -35,9 +35,9 @@ internal static class AttributeJson
 
         return new Attribute
         {
-            Name = attribute.Map(static (in JsonElement value) => value.GetAttributeName()),
-            Multiplier = multiplier.Map(static (in JsonElement value) => value.GetDouble()),
-            Value = value.Map(static (in JsonElement value) => value.GetInt32())
+            Name = attribute.Map(static (in value) => value.GetAttributeName()),
+            Multiplier = multiplier.Map(static (in value) => value.GetDouble()),
+            Value = value.Map(static (in value) => value.GetInt32())
         };
     }
 }

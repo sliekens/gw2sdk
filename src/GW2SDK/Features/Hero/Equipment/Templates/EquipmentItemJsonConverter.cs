@@ -27,7 +27,7 @@ internal sealed class EquipmentItemJsonConverter : JsonConverter<EquipmentItem>
             SuffixItemId = json.GetProperty("suffix_item_id").GetNullableInt32(),
             SecondarySuffixItemId = json.GetProperty("secondary_suffix_item_id").GetNullableInt32(),
             InfusionItemIds =
-                json.GetProperty("infusion_item_ids").GetList(static (in JsonElement entry) => entry.GetInt32()),
+                json.GetProperty("infusion_item_ids").GetList(static (in entry) => entry.GetInt32()),
             SkinId = json.GetProperty("skin_id").GetNullableInt32(),
             Stats =
                 json.GetProperty("stats")
@@ -36,8 +36,8 @@ internal sealed class EquipmentItemJsonConverter : JsonConverter<EquipmentItem>
             BoundTo = json.GetProperty("bound_to").GetStringRequired(),
             Location = json.GetProperty("location").GetEnum<EquipmentLocation>(),
             TemplateNumbers =
-                json.GetProperty("template_numbers").GetList(static (in JsonElement entry) => entry.GetInt32()),
-            DyeColorIds = json.GetProperty("dye_color_ids").GetList(static (in JsonElement entry) => entry.GetInt32())
+                json.GetProperty("template_numbers").GetList(static (in entry) => entry.GetInt32()),
+            DyeColorIds = json.GetProperty("dye_color_ids").GetList(static (in entry) => entry.GetInt32())
         };
     }
 

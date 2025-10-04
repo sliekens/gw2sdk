@@ -34,9 +34,9 @@ internal static class TrainingProgressJson
 
         return new TrainingProgress
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Spent = spent.Map(static (in JsonElement value) => value.GetInt32()),
-            Done = done.Map(static (in JsonElement value) => value.GetBoolean())
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Spent = spent.Map(static (in value) => value.GetInt32()),
+            Done = done.Map(static (in value) => value.GetBoolean())
         };
     }
 }

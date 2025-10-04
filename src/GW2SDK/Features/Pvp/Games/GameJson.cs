@@ -75,17 +75,17 @@ internal static class GameJson
 
         return new Game
         {
-            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
-            MapId = mapId.Map(static (in JsonElement value) => value.GetInt32()),
-            Started = started.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
-            Ended = ended.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
-            Result = result.Map(static (in JsonElement value) => value.GetEnum<PvpResult>()),
-            Team = team.Map(static (in JsonElement value) => value.GetEnum<PvpTeamColor>()),
-            Profession = profession.Map(static (in JsonElement value) => value.GetEnum<ProfessionName>()),
-            RatingType = ratingType.Map(static (in JsonElement value) => value.GetRatingType()),
-            RatingChange = ratingChange.Map(static (in JsonElement value) => value.GetInt32()),
-            SeasonId = seasonId.Map(static (in JsonElement value) => value.GetString()),
-            Score = score.Map(static (in JsonElement value) => value.GetScore())
+            Id = id.Map(static (in value) => value.GetStringRequired()),
+            MapId = mapId.Map(static (in value) => value.GetInt32()),
+            Started = started.Map(static (in value) => value.GetDateTimeOffset()),
+            Ended = ended.Map(static (in value) => value.GetDateTimeOffset()),
+            Result = result.Map(static (in value) => value.GetEnum<PvpResult>()),
+            Team = team.Map(static (in value) => value.GetEnum<PvpTeamColor>()),
+            Profession = profession.Map(static (in value) => value.GetEnum<ProfessionName>()),
+            RatingType = ratingType.Map(static (in value) => value.GetRatingType()),
+            RatingChange = ratingChange.Map(static (in value) => value.GetInt32()),
+            SeasonId = seasonId.Map(static (in value) => value.GetString()),
+            Score = score.Map(static (in value) => value.GetScore())
         };
     }
 }

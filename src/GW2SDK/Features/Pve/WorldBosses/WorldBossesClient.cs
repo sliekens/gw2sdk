@@ -33,7 +33,7 @@ public sealed class WorldBossesClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
+            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -54,7 +54,7 @@ public sealed class WorldBossesClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
+            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }

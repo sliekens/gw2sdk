@@ -32,12 +32,12 @@ internal static class UpgradeJson
             }
         }
 
-        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        string iconString = icon.Map(static (in value) => value.GetStringRequired());
 
         return new Upgrade
         {
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Description = description.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            Description = description.Map(static (in value) => value.GetStringRequired()),
 #pragma warning disable CS0618 // Suppress obsolete warning
             IconHref = iconString,
 #pragma warning restore CS0618

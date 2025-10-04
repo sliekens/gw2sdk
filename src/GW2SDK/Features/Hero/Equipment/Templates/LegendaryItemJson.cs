@@ -29,8 +29,8 @@ internal static class LegendaryItemJson
 
         return new LegendaryItem
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            MaxCount = maxCount.Map(static (in JsonElement value) => value.GetInt32())
+            Id = id.Map(static (in value) => value.GetInt32()),
+            MaxCount = maxCount.Map(static (in value) => value.GetInt32())
         };
     }
 }

@@ -29,8 +29,8 @@ internal static class MasteryTrackProgressJson
 
         return new MasteryTrackProgress
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Level = level.Map(static (in JsonElement value) => value.GetInt32())
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Level = level.Map(static (in value) => value.GetInt32())
         };
     }
 }

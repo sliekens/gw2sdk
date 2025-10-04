@@ -44,11 +44,11 @@ internal static class BestStandingJson
 
         return new BestStanding
         {
-            TotalPips = totalPoints.Map(static (in JsonElement value) => value.GetInt32()),
-            Division = division.Map(static (in JsonElement value) => value.GetInt32()),
-            Tier = tier.Map(static (in JsonElement value) => value.GetInt32()),
-            Pips = points.Map(static (in JsonElement value) => value.GetInt32()),
-            Repeats = repeats.Map(static (in JsonElement value) => value.GetInt32())
+            TotalPips = totalPoints.Map(static (in value) => value.GetInt32()),
+            Division = division.Map(static (in value) => value.GetInt32()),
+            Tier = tier.Map(static (in value) => value.GetInt32()),
+            Pips = points.Map(static (in value) => value.GetInt32()),
+            Repeats = repeats.Map(static (in value) => value.GetInt32())
         };
     }
 }

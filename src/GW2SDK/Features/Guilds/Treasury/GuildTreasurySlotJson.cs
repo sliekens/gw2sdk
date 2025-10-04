@@ -34,10 +34,10 @@ internal static class GuildTreasurySlotJson
 
         return new GuildTreasurySlot
         {
-            ItemId = itemId.Map(static (in JsonElement value) => value.GetInt32()),
-            Count = count.Map(static (in JsonElement value) => value.GetInt32()),
-            CountNeededForUpgrades = countNeededForUpgrade.Map(static (in JsonElement values) =>
-                values.GetList(static (in JsonElement value) => value.GetCountNeededForUpgrade())
+            ItemId = itemId.Map(static (in value) => value.GetInt32()),
+            Count = count.Map(static (in value) => value.GetInt32()),
+            CountNeededForUpgrades = countNeededForUpgrade.Map(static (in values) =>
+                values.GetList(static (in value) => value.GetCountNeededForUpgrade())
             )
         };
     }

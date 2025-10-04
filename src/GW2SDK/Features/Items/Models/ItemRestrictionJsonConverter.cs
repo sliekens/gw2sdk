@@ -32,15 +32,15 @@ internal sealed class ItemRestrictionJsonConverter : JsonConverter<ItemRestricti
         return new()
         {
             Races =
-                value.GetProperty("races").GetList(static (in JsonElement value) => value.GetEnum<RaceName>()),
+                value.GetProperty("races").GetList(static (in value) => value.GetEnum<RaceName>()),
             Professions =
                 value.GetProperty("professions")
-                    .GetList(static (in JsonElement value) => value.GetEnum<ProfessionName>()),
+                    .GetList(static (in value) => value.GetEnum<ProfessionName>()),
             BodyTypes =
                 value.GetProperty("body_types")
-                    .GetList(static (in JsonElement value) => value.GetEnum<BodyType>()),
+                    .GetList(static (in value) => value.GetEnum<BodyType>()),
             Other = value.GetProperty("other")
-                .GetList(static (in JsonElement value) => value.GetStringRequired())
+                .GetList(static (in value) => value.GetStringRequired())
         };
     }
 

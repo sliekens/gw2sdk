@@ -24,7 +24,7 @@ internal static class CreatedSubtokenJson
 
         return new CreatedSubtoken
         {
-            Subtoken = subtoken.Map(static (in JsonElement value) => value.GetStringRequired())
+            Subtoken = subtoken.Map(static (in value) => value.GetStringRequired())
         };
     }
 }

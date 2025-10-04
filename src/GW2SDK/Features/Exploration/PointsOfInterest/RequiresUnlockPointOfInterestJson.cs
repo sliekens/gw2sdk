@@ -55,15 +55,15 @@ internal static class RequiresUnlockPointOfInterestJson
             }
         }
 
-        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        string iconString = icon.Map(static (in value) => value.GetStringRequired());
 #pragma warning disable CS0618
         return new RequiresUnlockPointOfInterest
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Name = name.Map(static (in JsonElement value) => value.GetString()) ?? "",
-            Floor = floor.Map(static (in JsonElement value) => value.GetInt32()),
-            Coordinates = coordinates.Map(static (in JsonElement value) => value.GetCoordinateF()),
-            ChatLink = chatLink.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Name = name.Map(static (in value) => value.GetString()) ?? "",
+            Floor = floor.Map(static (in value) => value.GetInt32()),
+            Coordinates = coordinates.Map(static (in value) => value.GetCoordinateF()),
+            ChatLink = chatLink.Map(static (in value) => value.GetStringRequired()),
             IconHref = iconString,
             IconUrl = new Uri(iconString)
         };

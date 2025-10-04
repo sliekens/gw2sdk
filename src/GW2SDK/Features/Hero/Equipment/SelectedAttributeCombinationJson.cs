@@ -30,8 +30,8 @@ internal static class SelectedAttributeCombinationJson
 
         return new SelectedAttributeCombination
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Attributes = attributes.Map(static (in JsonElement value) => value.GetAttributes())
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Attributes = attributes.Map(static (in value) => value.GetAttributes())
         };
     }
 }

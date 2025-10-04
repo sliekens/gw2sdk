@@ -71,21 +71,21 @@ internal static class ConsumableJson
 
         return new Consumable
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Description = description.Map(static (in JsonElement value) => value.GetStringRequired()),
-            BuildTime = buildTime.Map(static (in JsonElement value) => TimeSpan.FromMinutes(value.GetDouble())),
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            Description = description.Map(static (in value) => value.GetStringRequired()),
+            BuildTime = buildTime.Map(static (in value) => TimeSpan.FromMinutes(value.GetDouble())),
 #pragma warning disable CS0618 // IconHref is obsolete
-            IconHref = icon.Map(static (in JsonElement value) => value.GetStringRequired()),
+            IconHref = icon.Map(static (in value) => value.GetStringRequired()),
 #pragma warning restore CS0618
-            IconUrl = icon.Map(static (in JsonElement value) => new Uri(value.GetStringRequired())),
-            RequiredLevel = requiredLevel.Map(static (in JsonElement value) => value.GetInt32()),
-            Experience = experience.Map(static (in JsonElement value) => value.GetInt32()),
+            IconUrl = icon.Map(static (in value) => new Uri(value.GetStringRequired())),
+            RequiredLevel = requiredLevel.Map(static (in value) => value.GetInt32()),
+            Experience = experience.Map(static (in value) => value.GetInt32()),
             Prerequisites =
-                prerequisites.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32())
+                prerequisites.Map(static (in values) => values.GetList(static (in value) => value.GetInt32())
                 ),
-            Costs = costs.Map(static (in JsonElement values) =>
-                values.GetList(static (in JsonElement value) => value.GetGuildUpgradeCost())
+            Costs = costs.Map(static (in values) =>
+                values.GetList(static (in value) => value.GetGuildUpgradeCost())
             )
         };
     }

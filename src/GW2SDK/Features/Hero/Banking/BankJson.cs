@@ -9,6 +9,6 @@ internal static class BankJson
 {
     public static Bank GetBank(this in JsonElement json)
     {
-        return new() { Items = json.GetList(static (in JsonElement value) => value.GetItemSlot()) };
+        return new() { Items = json.GetList(static (in value) => value.GetItemSlot()) };
     }
 }

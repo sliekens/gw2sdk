@@ -44,12 +44,12 @@ internal static class StoryStepJson
 
         return new StoryStep
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Level = level.Map(static (in JsonElement value) => value.GetInt32()),
-            StoryId = story.Map(static (in JsonElement value) => value.GetInt32()),
-            Objectives = goals.Map(static (in JsonElement values) =>
-                values.GetList(static (in JsonElement value) => value.GetObjective())
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            Level = level.Map(static (in value) => value.GetInt32()),
+            StoryId = story.Map(static (in value) => value.GetInt32()),
+            Objectives = goals.Map(static (in values) =>
+                values.GetList(static (in value) => value.GetObjective())
             )
         };
     }

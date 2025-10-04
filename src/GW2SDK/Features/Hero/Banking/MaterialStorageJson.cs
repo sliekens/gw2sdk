@@ -10,7 +10,7 @@ internal static class MaterialStorageJson
     {
         return new()
         {
-            Materials = json.GetList(static (in JsonElement value) => value.GetMaterialSlot())
+            Materials = json.GetList(static (in value) => value.GetMaterialSlot())
         };
     }
 }

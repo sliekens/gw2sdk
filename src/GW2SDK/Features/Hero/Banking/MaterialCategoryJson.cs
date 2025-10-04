@@ -39,10 +39,10 @@ internal static class MaterialCategoryJson
 
         return new MaterialCategory
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Items = items.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32())),
-            Order = order.Map(static (in JsonElement value) => value.GetInt32())
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            Items = items.Map(static (in values) => values.GetList(static (in value) => value.GetInt32())),
+            Order = order.Map(static (in value) => value.GetInt32())
         };
     }
 }

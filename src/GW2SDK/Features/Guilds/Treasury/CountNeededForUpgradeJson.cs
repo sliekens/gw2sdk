@@ -29,8 +29,8 @@ internal static class CountNeededForUpgradeJson
 
         return new CountNeededForUpgrade
         {
-            UpgradeId = upgradeId.Map(static (in JsonElement value) => value.GetInt32()),
-            Count = count.Map(static (in JsonElement value) => value.GetInt32())
+            UpgradeId = upgradeId.Map(static (in value) => value.GetInt32()),
+            Count = count.Map(static (in value) => value.GetInt32())
         };
     }
 }

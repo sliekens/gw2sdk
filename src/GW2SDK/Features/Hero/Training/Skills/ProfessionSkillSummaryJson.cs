@@ -47,10 +47,10 @@ internal static class ProfessionSkillSummaryJson
 
         return new ProfessionSkillSummary
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Slot = slot.Map(static (in JsonElement value) => value.GetEnum<SkillSlot>()),
-            Source = source.Map(static (in JsonElement value) => value.GetEnum<ProfessionName>()),
-            Attunement = attunement.Map(static (in JsonElement value) => value.GetEnum<Attunement>())
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Slot = slot.Map(static (in value) => value.GetEnum<SkillSlot>()),
+            Source = source.Map(static (in value) => value.GetEnum<ProfessionName>()),
+            Attunement = attunement.Map(static (in value) => value.GetEnum<Attunement>())
         };
     }
 }

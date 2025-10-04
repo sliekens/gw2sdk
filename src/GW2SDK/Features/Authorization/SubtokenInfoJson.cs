@@ -55,15 +55,15 @@ internal static class SubtokenInfoJson
 
         return new SubtokenInfo
         {
-            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Id = id.Map(static (in value) => value.GetStringRequired()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
             Permissions =
-                permissions.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetEnum<Permission>())
+                permissions.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetEnum<Permission>())
                 ),
-            ExpiresAt = expiresAt.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
-            IssuedAt = issuedAt.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
-            Urls = urls.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) =>
+            ExpiresAt = expiresAt.Map(static (in value) => value.GetDateTimeOffset()),
+            IssuedAt = issuedAt.Map(static (in value) => value.GetDateTimeOffset()),
+            Urls = urls.Map(static (in values) => values.GetList(static (in value) =>
                     new Uri(value.GetStringRequired(), UriKind.Relative)
                 )
             )

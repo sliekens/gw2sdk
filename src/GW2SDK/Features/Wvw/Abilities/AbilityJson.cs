@@ -44,15 +44,15 @@ internal static class AbilityJson
 
         return new Ability
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Description = description.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            Description = description.Map(static (in value) => value.GetStringRequired()),
 #pragma warning disable CS0618 // IconHref is obsolete
-            IconHref = icon.Map(static (in JsonElement value) => value.GetStringRequired()),
+            IconHref = icon.Map(static (in value) => value.GetStringRequired()),
 #pragma warning restore CS0618
-            IconUrl = icon.Map(static (in JsonElement value) => new Uri(value.GetStringRequired())),
-            Ranks = ranks.Map(static (in JsonElement values) =>
-                values.GetList(static (in JsonElement value) => value.GetAbilityRank())
+            IconUrl = icon.Map(static (in value) => new Uri(value.GetStringRequired())),
+            Ranks = ranks.Map(static (in values) =>
+                values.GetList(static (in value) => value.GetAbilityRank())
             )
         };
     }

@@ -24,8 +24,8 @@ internal static class CharacterTrainingJson
 
         return new CharacterTraining
         {
-            Training = training.Map(static (in JsonElement values) =>
-                values.GetList(static (in JsonElement value) => value.GetTrainingProgress())
+            Training = training.Map(static (in values) =>
+                values.GetList(static (in value) => value.GetTrainingProgress())
             )
         };
     }

@@ -29,8 +29,8 @@ internal static class GuildEmblemBackgroundJson
 
         return new GuildEmblemBackground
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            ColorIds = colors.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32()))
+            Id = id.Map(static (in value) => value.GetInt32()),
+            ColorIds = colors.Map(static (in values) => values.GetList(static (in value) => value.GetInt32()))
         };
     }
 }

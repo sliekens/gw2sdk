@@ -44,13 +44,13 @@ internal static class MatchScoresJson
 
         return new MatchScores
         {
-            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Scores = scores.Map(static (in JsonElement value) => value.GetDistribution()),
-            VictoryPoints = victoryPoints.Map(static (in JsonElement value) => value.GetDistribution()),
+            Id = id.Map(static (in value) => value.GetStringRequired()),
+            Scores = scores.Map(static (in value) => value.GetDistribution()),
+            VictoryPoints = victoryPoints.Map(static (in value) => value.GetDistribution()),
             Skirmishes =
-                skirmishes.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetSkirmish())
+                skirmishes.Map(static (in values) => values.GetList(static (in value) => value.GetSkirmish())
                 ),
-            Maps = maps.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetMapSummary()))
+            Maps = maps.Map(static (in values) => values.GetList(static (in value) => value.GetMapSummary()))
         };
     }
 }

@@ -45,12 +45,12 @@ internal static class RegionJson
 
         return new Region
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            LabelCoordinates = labelCoordinates.Map(static (in JsonElement value) => value.GetCoordinate()),
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            LabelCoordinates = labelCoordinates.Map(static (in value) => value.GetCoordinate()),
             ContinentRectangle =
-                continentRectangle.Map(static (in JsonElement value) => value.GetContinentRectangle()),
-            Maps = maps.Map(static (in JsonElement value) => value.GetMap(static (in JsonElement entry) => entry.GetMap())
+                continentRectangle.Map(static (in value) => value.GetContinentRectangle()),
+            Maps = maps.Map(static (in value) => value.GetMap(static (in entry) => entry.GetMap())
                 .ToDictionary(kvp => int.Parse(kvp.Key, CultureInfo.InvariantCulture), kvp => kvp.Value)
             )
         };

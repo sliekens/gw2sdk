@@ -61,13 +61,13 @@ internal static class GuildBankActivityJson
 
         return new GuildBankActivity
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Time = time.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
-            User = user.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Operation = operation.Map(static (in JsonElement value) => value.GetEnum<GuildBankOperationKind>()),
-            ItemId = itemId.Map(static (in JsonElement value) => value.GetInt32()),
-            Count = count.Map(static (in JsonElement value) => value.GetInt32()),
-            Coins = coins.Map(static (in JsonElement value) => value.GetInt32())
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Time = time.Map(static (in value) => value.GetDateTimeOffset()),
+            User = user.Map(static (in value) => value.GetStringRequired()),
+            Operation = operation.Map(static (in value) => value.GetEnum<GuildBankOperationKind>()),
+            ItemId = itemId.Map(static (in value) => value.GetInt32()),
+            Count = count.Map(static (in value) => value.GetInt32()),
+            Coins = coins.Map(static (in value) => value.GetInt32())
         };
     }
 }

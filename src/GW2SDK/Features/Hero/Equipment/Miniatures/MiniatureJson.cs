@@ -47,18 +47,18 @@ internal static class MiniatureJson
             }
         }
 
-        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        string iconString = icon.Map(static (in value) => value.GetStringRequired());
         return new Miniature
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            LockedText = unlock.Map(static (in JsonElement value) => value.GetString()) ?? "",
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            LockedText = unlock.Map(static (in value) => value.GetString()) ?? "",
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
-            Order = order.Map(static (in JsonElement value) => value.GetInt32()),
-            ItemId = itemId.Map(static (in JsonElement value) => value.GetInt32())
+            Order = order.Map(static (in value) => value.GetInt32()),
+            ItemId = itemId.Map(static (in value) => value.GetInt32())
         };
     }
 }

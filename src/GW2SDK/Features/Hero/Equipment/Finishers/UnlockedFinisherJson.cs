@@ -34,9 +34,9 @@ internal static class UnlockedFinisherJson
 
         return new UnlockedFinisher
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Permanent = permanent.Map(static (in JsonElement value) => value.GetBoolean()),
-            Quantity = quantity.Map(static (in JsonElement value) => value.GetInt32())
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Permanent = permanent.Map(static (in value) => value.GetBoolean()),
+            Quantity = quantity.Map(static (in value) => value.GetInt32())
         };
     }
 }

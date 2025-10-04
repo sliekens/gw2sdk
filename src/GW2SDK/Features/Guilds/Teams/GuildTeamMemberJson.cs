@@ -29,8 +29,8 @@ internal static class GuildTeamMemberJson
 
         return new GuildTeamMember
         {
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Role = role.Map(static (in JsonElement value) => value.GetEnum<GuildTeamRole>())
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            Role = role.Map(static (in value) => value.GetEnum<GuildTeamRole>())
         };
     }
 }

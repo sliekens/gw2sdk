@@ -31,7 +31,7 @@ internal sealed class AccountAchievementJsonConverter : JsonConverter<AccountAch
         return new()
         {
             Id = json.GetProperty("id").GetInt32(),
-            Bits = json.GetProperty("bits").GetNullableList(static (in JsonElement bit) => bit.GetInt32()),
+            Bits = json.GetProperty("bits").GetNullableList(static (in bit) => bit.GetInt32()),
             Current = json.GetProperty("current").GetInt32(),
             Max = json.GetProperty("max").GetInt32(),
             Done = json.GetProperty("done").GetBoolean(),

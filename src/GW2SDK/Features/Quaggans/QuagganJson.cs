@@ -27,11 +27,11 @@ internal static class QuagganJson
             }
         }
 
-        string urlString = url.Map(static (in JsonElement value) => value.GetStringRequired());
+        string urlString = url.Map(static (in value) => value.GetStringRequired());
 #pragma warning disable CS0618 // Suppress obsolete warning for ImageHref assignment
         return new Quaggan
         {
-            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Id = id.Map(static (in value) => value.GetStringRequired()),
             ImageHref = urlString,
             ImageUrl = new Uri(urlString)
         };

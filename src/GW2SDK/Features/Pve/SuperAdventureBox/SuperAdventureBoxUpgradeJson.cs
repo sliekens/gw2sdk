@@ -29,8 +29,8 @@ internal static class SuperAdventureBoxUpgradeJson
 
         return new SuperAdventureBoxUpgrade
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Name = name.Map(static (in JsonElement value) => value.GetString()) ?? ""
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Name = name.Map(static (in value) => value.GetString()) ?? ""
         };
     }
 }

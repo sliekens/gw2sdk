@@ -29,8 +29,8 @@ internal static class LogoJson
 
         return new Logo
         {
-            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Url = new Uri(url.Map(static (in JsonElement value) => value.GetStringRequired()))
+            Id = id.Map(static (in value) => value.GetStringRequired()),
+            Url = new Uri(url.Map(static (in value) => value.GetStringRequired()))
         };
     }
 }

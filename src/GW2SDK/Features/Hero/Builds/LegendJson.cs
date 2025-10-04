@@ -49,13 +49,13 @@ internal static class LegendJson
 
         return new Legend
         {
-            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Code = code.Map(static (in JsonElement value) => value.GetInt32()),
-            Swap = swap.Map(static (in JsonElement value) => value.GetInt32()),
-            Heal = heal.Map(static (in JsonElement value) => value.GetInt32()),
-            Elite = elite.Map(static (in JsonElement value) => value.GetInt32()),
-            Utilities = utilities.Map(static (in JsonElement values) =>
-                values.GetList(static (in JsonElement value) => value.GetInt32())
+            Id = id.Map(static (in value) => value.GetStringRequired()),
+            Code = code.Map(static (in value) => value.GetInt32()),
+            Swap = swap.Map(static (in value) => value.GetInt32()),
+            Heal = heal.Map(static (in value) => value.GetInt32()),
+            Elite = elite.Map(static (in value) => value.GetInt32()),
+            Utilities = utilities.Map(static (in values) =>
+                values.GetList(static (in value) => value.GetInt32())
             )
         };
     }

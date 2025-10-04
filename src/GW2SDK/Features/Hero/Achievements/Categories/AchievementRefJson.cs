@@ -39,10 +39,10 @@ internal static class AchievementRefJson
 
         return new AchievementRef
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Flags = flags.Map(static (in JsonElement values) => values.GetAchievementFlags())
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Flags = flags.Map(static (in values) => values.GetAchievementFlags())
                 ?? AchievementFlags.None,
-            Level = level.Map(static (in JsonElement value) => value.GetLevelRequirement())
+            Level = level.Map(static (in value) => value.GetLevelRequirement())
         };
     }
 }

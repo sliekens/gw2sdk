@@ -32,7 +32,7 @@ internal sealed class RecipeFlagsJsonConverter : JsonConverter<RecipeFlags>
         {
             AutoLearned = json.GetProperty("auto_learned").GetBoolean(),
             LearnedFromItem = json.GetProperty("learned_from_item").GetBoolean(),
-            Other = json.GetProperty("other").GetList(static (in JsonElement value) => value.GetStringRequired())
+            Other = json.GetProperty("other").GetList(static (in value) => value.GetStringRequired())
         };
     }
 

@@ -32,7 +32,7 @@ internal sealed class InfusionSlotFlagsJsonConverter : JsonConverter<InfusionSlo
         {
             Enrichment = json.GetProperty("enrichment").GetBoolean(),
             Infusion = json.GetProperty("infusion").GetBoolean(),
-            Other = json.GetProperty("other").GetList(static (in JsonElement value) => value.GetStringRequired())
+            Other = json.GetProperty("other").GetList(static (in value) => value.GetStringRequired())
         };
     }
 

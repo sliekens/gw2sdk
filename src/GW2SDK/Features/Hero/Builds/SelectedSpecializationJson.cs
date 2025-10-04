@@ -35,10 +35,10 @@ internal static class SelectedSpecializationJson
             }
         }
 
-        (int? adept, int? master, int? grandmaster) = traits.Map(static (in JsonElement values) => values.GetTraitIds());
+        (int? adept, int? master, int? grandmaster) = traits.Map(static (in values) => values.GetTraitIds());
         return new SelectedSpecialization
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Id = id.Map(static (in value) => value.GetInt32()),
             AdeptTraitId = adept,
             MasterTraitId = master,
             GrandmasterTraitId = grandmaster

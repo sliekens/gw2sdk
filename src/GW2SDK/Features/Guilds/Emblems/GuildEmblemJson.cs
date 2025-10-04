@@ -34,9 +34,9 @@ internal static class GuildEmblemJson
 
         return new GuildEmblem
         {
-            Background = background.Map(static (in JsonElement value) => value.GetGuildEmblemBackground()),
-            Foreground = foreground.Map(static (in JsonElement value) => value.GetGuildEmblemForeground()),
-            Flags = flags.Map(static (in JsonElement values) => values.GetGuildEmblemFlags())
+            Background = background.Map(static (in value) => value.GetGuildEmblemBackground()),
+            Foreground = foreground.Map(static (in value) => value.GetGuildEmblemForeground()),
+            Flags = flags.Map(static (in values) => values.GetGuildEmblemFlags())
         };
     }
 }

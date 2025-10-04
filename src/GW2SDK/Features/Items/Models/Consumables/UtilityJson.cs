@@ -127,22 +127,22 @@ internal static class UtilityJson
             }
         }
 
-        string? iconString = icon.Map(static (in JsonElement value) => value.GetString());
+        string? iconString = icon.Map(static (in value) => value.GetString());
         return new Utility
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Description = description.Map(static (in JsonElement value) => value.GetString()) ?? "",
-            Level = level.Map(static (in JsonElement value) => value.GetInt32()),
-            Rarity = rarity.Map(static (in JsonElement value) => value.GetEnum<Rarity>()),
-            VendorValue = vendorValue.Map(static (in JsonElement value) => value.GetInt32()),
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            Description = description.Map(static (in value) => value.GetString()) ?? "",
+            Level = level.Map(static (in value) => value.GetInt32()),
+            Rarity = rarity.Map(static (in value) => value.GetEnum<Rarity>()),
+            VendorValue = vendorValue.Map(static (in value) => value.GetInt32()),
             GameTypes =
-                gameTypes.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetEnum<GameType>())
+                gameTypes.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetEnum<GameType>())
                 ),
-            Flags = flags.Map(static (in JsonElement values) => values.GetItemFlags()),
-            Restrictions = restrictions.Map(static (in JsonElement value) => value.GetItemRestriction()),
-            ChatLink = chatLink.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Flags = flags.Map(static (in values) => values.GetItemFlags()),
+            Restrictions = restrictions.Map(static (in value) => value.GetItemRestriction()),
+            ChatLink = chatLink.Map(static (in value) => value.GetStringRequired()),
 #pragma warning disable CS0618 // Suppress obsolete warning
             IconHref = iconString,
 #pragma warning restore CS0618
@@ -150,16 +150,16 @@ internal static class UtilityJson
             Effect = hasEffect
                 ? new Effect
                 {
-                    Name = effectName.Map(static (in JsonElement value) => value.GetString()) ?? "",
-                    Description = effectDescription.Map(static (in JsonElement value) => value.GetString()) ?? "",
+                    Name = effectName.Map(static (in value) => value.GetString()) ?? "",
+                    Description = effectDescription.Map(static (in value) => value.GetString()) ?? "",
                     Duration =
-                        duration.Map(static (in JsonElement value) => TimeSpan.FromMilliseconds(value.GetDouble()))
+                        duration.Map(static (in value) => TimeSpan.FromMilliseconds(value.GetDouble()))
                         ?? TimeSpan.Zero,
-                    ApplyCount = applyCount.Map(static (in JsonElement value) => value.GetInt32()) ?? 0,
+                    ApplyCount = applyCount.Map(static (in value) => value.GetInt32()) ?? 0,
 #pragma warning disable CS0618 // Suppress obsolete warning
-                    IconHref = effectIcon.Map(static (in JsonElement value) => value.GetString()) ?? "",
+                    IconHref = effectIcon.Map(static (in value) => value.GetString()) ?? "",
 #pragma warning restore CS0618
-                    IconUrl = effectIcon.Map(static (in JsonElement value) =>
+                    IconUrl = effectIcon.Map(static (in value) =>
                     {
                         string? href = value.GetString();
                         return !string.IsNullOrEmpty(href) ? new Uri(href) : null;

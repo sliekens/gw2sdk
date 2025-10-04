@@ -54,13 +54,13 @@ internal static class ObjectiveProgressJson
 
         return new ObjectiveProgress
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Title = title.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Track = track.Map(static (in JsonElement value) => value.GetEnum<ObjectiveTrack>()),
-            RewardAcclaim = acclaim.Map(static (in JsonElement value) => value.GetInt32()),
-            Progress = progressCurrent.Map(static (in JsonElement value) => value.GetInt32()),
-            Goal = progressComplete.Map(static (in JsonElement value) => value.GetInt32()),
-            Claimed = claimed.Map(static (in JsonElement value) => value.GetBoolean())
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Title = title.Map(static (in value) => value.GetStringRequired()),
+            Track = track.Map(static (in value) => value.GetEnum<ObjectiveTrack>()),
+            RewardAcclaim = acclaim.Map(static (in value) => value.GetInt32()),
+            Progress = progressCurrent.Map(static (in value) => value.GetInt32()),
+            Goal = progressComplete.Map(static (in value) => value.GetInt32()),
+            Claimed = claimed.Map(static (in value) => value.GetBoolean())
         };
     }
 }

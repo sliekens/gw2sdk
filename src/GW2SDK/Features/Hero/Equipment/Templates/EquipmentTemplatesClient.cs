@@ -77,7 +77,7 @@ public sealed class EquipmentTemplatesClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             ValueHashSet<BoundLegendaryItem> value =
-                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetBoundLegendaryItem());
+                response.Json.RootElement.GetSet(static (in entry) => entry.GetBoundLegendaryItem());
             return (value, response.Context);
         }
     }
@@ -109,7 +109,7 @@ public sealed class EquipmentTemplatesClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueList<int> value = response.Json.RootElement.GetList(static (in JsonElement entry) => entry.GetInt32());
+            ValueList<int> value = response.Json.RootElement.GetList(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -173,7 +173,7 @@ public sealed class EquipmentTemplatesClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             ValueHashSet<EquipmentTemplate> value =
-                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEquipmentTemplate());
+                response.Json.RootElement.GetSet(static (in entry) => entry.GetEquipmentTemplate());
             return (value, response.Context);
         }
     }
@@ -229,7 +229,7 @@ public sealed class EquipmentTemplatesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<LegendaryItem> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetLegendaryItem());
+            ValueHashSet<LegendaryItem> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLegendaryItem());
             return (value, response.Context);
         }
     }
@@ -247,7 +247,7 @@ public sealed class EquipmentTemplatesClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -297,7 +297,7 @@ public sealed class EquipmentTemplatesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<LegendaryItem> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetLegendaryItem());
+            ValueHashSet<LegendaryItem> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLegendaryItem());
             return (value, response.Context);
         }
     }
@@ -324,7 +324,7 @@ public sealed class EquipmentTemplatesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<LegendaryItem> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetLegendaryItem());
+            ValueHashSet<LegendaryItem> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLegendaryItem());
             return (value, response.Context);
         }
     }

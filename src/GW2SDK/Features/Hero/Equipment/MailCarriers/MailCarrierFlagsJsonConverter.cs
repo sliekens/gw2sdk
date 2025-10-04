@@ -31,7 +31,7 @@ internal sealed class MailCarrierFlagsJsonConverter : JsonConverter<MailCarrierF
         return new()
         {
             Default = json.GetProperty("default").GetBoolean(),
-            Other = json.GetProperty("other").GetList(static (in JsonElement value) => value.GetStringRequired())
+            Other = json.GetProperty("other").GetList(static (in value) => value.GetStringRequired())
         };
     }
 

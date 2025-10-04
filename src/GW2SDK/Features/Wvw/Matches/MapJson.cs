@@ -55,17 +55,17 @@ internal static class MapJson
 
         return new Map
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Kind = type.Map(static (in JsonElement value) => value.GetEnum<MapKind>()),
-            Scores = scores.Map(static (in JsonElement value) => value.GetDistribution()),
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Kind = type.Map(static (in value) => value.GetEnum<MapKind>()),
+            Scores = scores.Map(static (in value) => value.GetDistribution()),
             Bonuses =
-                bonuses.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetBonus())),
+                bonuses.Map(static (in values) => values.GetList(static (in value) => value.GetBonus())),
             Objectives =
-                objectives.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetOwnedObjective())
+                objectives.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetOwnedObjective())
                 ),
-            Deaths = deaths.Map(static (in JsonElement value) => value.GetDistribution()),
-            Kills = kills.Map(static (in JsonElement value) => value.GetDistribution())
+            Deaths = deaths.Map(static (in value) => value.GetDistribution()),
+            Kills = kills.Map(static (in value) => value.GetDistribution())
         };
     }
 }

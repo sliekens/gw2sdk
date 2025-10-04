@@ -34,9 +34,9 @@ internal static class SubskillJson
 
         return new Subskill
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Attunement = attunement.Map(static (in JsonElement value) => value.GetEnum<Attunement>()),
-            Form = form.Map(static (in JsonElement value) => value.GetEnum<Transformation>())
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Attunement = attunement.Map(static (in value) => value.GetEnum<Attunement>()),
+            Form = form.Map(static (in value) => value.GetEnum<Transformation>())
         };
     }
 }

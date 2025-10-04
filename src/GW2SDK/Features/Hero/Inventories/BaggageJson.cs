@@ -24,7 +24,7 @@ internal static class BaggageJson
 
         return new Baggage
         {
-            Bags = bags.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetBag()))
+            Bags = bags.Map(static (in values) => values.GetList(static (in value) => value.GetBag()))
         };
     }
 }

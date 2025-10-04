@@ -30,7 +30,7 @@ internal sealed class TitleJsonConverter : JsonConverter<Title>
             Name = json.GetProperty("name").GetStringRequired(),
             Achievements =
                 json.GetProperty("achievements")
-                    .GetNullableList(static (in JsonElement achievement) => achievement.GetInt32()),
+                    .GetNullableList(static (in achievement) => achievement.GetInt32()),
             AchievementPointsRequired =
                 json.GetProperty("achievement_points_required").GetNullableInt32()
         };

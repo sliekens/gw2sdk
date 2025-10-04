@@ -42,6 +42,6 @@ internal static class TrainingObjectiveJson
             }
         }
 
-        return new TrainingObjective { Cost = cost.Map(static (in JsonElement value) => value.GetInt32()) };
+        return new TrainingObjective { Cost = cost.Map(static (in value) => value.GetInt32()) };
     }
 }

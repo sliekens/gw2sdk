@@ -28,6 +28,6 @@ internal static class CoinsRewardJson
             }
         }
 
-        return new CoinsReward { Coins = coins.Map(static (in JsonElement value) => value.GetInt32()) };
+        return new CoinsReward { Coins = coins.Map(static (in value) => value.GetInt32()) };
     }
 }

@@ -65,18 +65,18 @@ internal static class BuffJson
             }
         }
 
-        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        string iconString = icon.Map(static (in value) => value.GetStringRequired());
         return new Buff
         {
-            Text = text.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Text = text.Map(static (in value) => value.GetStringRequired()),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
-            Duration = duration.Map(static (in JsonElement value) => TimeSpan.FromSeconds(value.GetDouble())),
-            Status = status.Map(static (in JsonElement value) => value.GetString()) ?? "",
-            Description = description.Map(static (in JsonElement value) => value.GetString()) ?? "",
-            ApplyCount = applyCount.Map(static (in JsonElement value) => value.GetInt32())
+            Duration = duration.Map(static (in value) => TimeSpan.FromSeconds(value.GetDouble())),
+            Status = status.Map(static (in value) => value.GetString()) ?? "",
+            Description = description.Map(static (in value) => value.GetString()) ?? "",
+            ApplyCount = applyCount.Map(static (in value) => value.GetInt32())
         };
     }
 }

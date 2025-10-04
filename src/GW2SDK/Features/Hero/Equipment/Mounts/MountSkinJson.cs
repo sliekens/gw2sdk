@@ -42,19 +42,19 @@ internal static class MountSkinJson
             }
         }
 
-        Guid mountId = mountGuid.Map(static (in JsonElement value) => value.GetGuid());
+        Guid mountId = mountGuid.Map(static (in value) => value.GetGuid());
 
-        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        string iconString = icon.Map(static (in value) => value.GetStringRequired());
         return new MountSkin
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
 #pragma warning disable CS0618 // Type or member is obsolete
             IconHref = iconString,
 #pragma warning restore CS0618 // Type or member is obsolete
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
             DyeSlots =
-                dyeSlots.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetDyeSlot())),
+                dyeSlots.Map(static (in values) => values.GetList(static (in value) => value.GetDyeSlot())),
 #pragma warning disable CS0618 // Type or member is obsolete
             Mount = mountId.ToString() switch
             {

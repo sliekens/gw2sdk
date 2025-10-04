@@ -29,8 +29,8 @@ internal static class EncounterJson
 
         return new Encounter
         {
-            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Kind = type.Map(static (in JsonElement value) => value.GetEnum<EncounterKind>())
+            Id = id.Map(static (in value) => value.GetStringRequired()),
+            Kind = type.Map(static (in value) => value.GetEnum<EncounterKind>())
         };
     }
 }

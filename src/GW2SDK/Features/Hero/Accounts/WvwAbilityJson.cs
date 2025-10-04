@@ -29,8 +29,8 @@ internal static class WvwAbilityJson
 
         return new WvwAbility
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Rank = rank.Map(static (in JsonElement value) => value.GetInt32())
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Rank = rank.Map(static (in value) => value.GetInt32())
         };
     }
 }

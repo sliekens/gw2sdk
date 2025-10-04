@@ -69,7 +69,7 @@ public sealed class AccountClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Progression> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetProgression());
+            ValueHashSet<Progression> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetProgression());
             return (value, response.Context);
         }
     }
@@ -155,7 +155,7 @@ public sealed class AccountClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
+            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -209,7 +209,7 @@ public sealed class AccountClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Character> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetCharacter());
+            ValueHashSet<Character> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCharacter());
             return (value, response.Context);
         }
     }
@@ -234,7 +234,7 @@ public sealed class AccountClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Character> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetCharacter());
+            ValueHashSet<Character> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCharacter());
             return (value, response.Context);
         }
     }

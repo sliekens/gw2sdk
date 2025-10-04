@@ -49,7 +49,7 @@ public sealed class GuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
+            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -110,7 +110,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueList<GuildRank> value = response.Json.RootElement.GetList(static (in JsonElement entry) => entry.GetGuildRank());
+            ValueList<GuildRank> value = response.Json.RootElement.GetList(static (in entry) => entry.GetGuildRank());
             return (value, response.Context);
         }
     }
@@ -140,7 +140,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueList<GuildMember> value = response.Json.RootElement.GetList(static (in JsonElement entry) => entry.GetGuildMember());
+            ValueList<GuildMember> value = response.Json.RootElement.GetList(static (in entry) => entry.GetGuildMember());
             return (value, response.Context);
         }
     }
@@ -170,7 +170,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueList<GuildTeam> value = response.Json.RootElement.GetList(static (in JsonElement entry) => entry.GetGuildTeam());
+            ValueList<GuildTeam> value = response.Json.RootElement.GetList(static (in entry) => entry.GetGuildTeam());
             return (value, response.Context);
         }
     }
@@ -201,7 +201,7 @@ public sealed class GuildsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             ValueList<GuildTreasurySlot> value =
-                response.Json.RootElement.GetList(static (in JsonElement entry) => entry.GetGuildTreasurySlot());
+                response.Json.RootElement.GetList(static (in entry) => entry.GetGuildTreasurySlot());
             return (value, response.Context);
         }
     }
@@ -231,7 +231,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueList<GuildBankTab> value = response.Json.RootElement.GetList(static (in JsonElement entry) => entry.GetGuildBankTab());
+            ValueList<GuildBankTab> value = response.Json.RootElement.GetList(static (in entry) => entry.GetGuildBankTab());
             return (value, response.Context);
         }
     }
@@ -262,7 +262,7 @@ public sealed class GuildsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             ValueList<GuildStorageSlot> value =
-                response.Json.RootElement.GetList(static (in JsonElement entry) => entry.GetGuildStorageSlot());
+                response.Json.RootElement.GetList(static (in entry) => entry.GetGuildStorageSlot());
             return (value, response.Context);
         }
     }
@@ -289,7 +289,7 @@ public sealed class GuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -343,7 +343,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueList<GuildLogEntry> value = response.Json.RootElement.GetList(static (in JsonElement entry) => entry.GetGuildLogEntry());
+            ValueList<GuildLogEntry> value = response.Json.RootElement.GetList(static (in entry) => entry.GetGuildLogEntry());
             return (value, response.Context);
         }
     }
@@ -371,7 +371,7 @@ public sealed class GuildsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             ValueHashSet<EmblemForeground> value =
-                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEmblemForeground());
+                response.Json.RootElement.GetSet(static (in entry) => entry.GetEmblemForeground());
             return (value, response.Context);
         }
     }
@@ -389,7 +389,7 @@ public sealed class GuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -439,7 +439,7 @@ public sealed class GuildsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             ValueHashSet<EmblemForeground> value =
-                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEmblemForeground());
+                response.Json.RootElement.GetSet(static (in entry) => entry.GetEmblemForeground());
             return (value, response.Context);
         }
     }
@@ -467,7 +467,7 @@ public sealed class GuildsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             ValueHashSet<EmblemForeground> value =
-                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEmblemForeground());
+                response.Json.RootElement.GetSet(static (in entry) => entry.GetEmblemForeground());
             return (value, response.Context);
         }
     }
@@ -495,7 +495,7 @@ public sealed class GuildsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             ValueHashSet<EmblemBackground> value =
-                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEmblemBackground());
+                response.Json.RootElement.GetSet(static (in entry) => entry.GetEmblemBackground());
             return (value, response.Context);
         }
     }
@@ -513,7 +513,7 @@ public sealed class GuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -563,7 +563,7 @@ public sealed class GuildsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             ValueHashSet<EmblemBackground> value =
-                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEmblemBackground());
+                response.Json.RootElement.GetSet(static (in entry) => entry.GetEmblemBackground());
             return (value, response.Context);
         }
     }
@@ -591,7 +591,7 @@ public sealed class GuildsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             ValueHashSet<EmblemBackground> value =
-                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEmblemBackground());
+                response.Json.RootElement.GetSet(static (in entry) => entry.GetEmblemBackground());
             return (value, response.Context);
         }
     }
@@ -622,7 +622,7 @@ public sealed class GuildsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             ValueHashSet<GuildPermissionSummary> value =
-                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGuildPermissionSummary());
+                response.Json.RootElement.GetSet(static (in entry) => entry.GetGuildPermissionSummary());
             return (value, response.Context);
         }
     }
@@ -640,7 +640,7 @@ public sealed class GuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
+            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -697,7 +697,7 @@ public sealed class GuildsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             ValueHashSet<GuildPermissionSummary> value =
-                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGuildPermissionSummary());
+                response.Json.RootElement.GetSet(static (in entry) => entry.GetGuildPermissionSummary());
             return (value, response.Context);
         }
     }
@@ -728,7 +728,7 @@ public sealed class GuildsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             ValueHashSet<GuildPermissionSummary> value =
-                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGuildPermissionSummary());
+                response.Json.RootElement.GetSet(static (in entry) => entry.GetGuildPermissionSummary());
             return (value, response.Context);
         }
     }
@@ -757,7 +757,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<GuildUpgrade> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGuildUpgrade());
+            ValueHashSet<GuildUpgrade> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGuildUpgrade());
             return (value, response.Context);
         }
     }
@@ -775,7 +775,7 @@ public sealed class GuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -829,7 +829,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<GuildUpgrade> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGuildUpgrade());
+            ValueHashSet<GuildUpgrade> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGuildUpgrade());
             return (value, response.Context);
         }
     }
@@ -858,7 +858,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<GuildUpgrade> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGuildUpgrade());
+            ValueHashSet<GuildUpgrade> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGuildUpgrade());
             return (value, response.Context);
         }
     }

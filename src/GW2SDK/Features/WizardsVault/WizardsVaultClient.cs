@@ -77,7 +77,7 @@ public sealed class WizardsVaultClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             ValueHashSet<PurchasedAstralReward> value =
-                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetPurchasedAstralReward());
+                response.Json.RootElement.GetSet(static (in entry) => entry.GetPurchasedAstralReward());
             return (value, response.Context);
         }
     }
@@ -193,7 +193,7 @@ public sealed class WizardsVaultClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<AstralReward> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAstralReward());
+            ValueHashSet<AstralReward> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAstralReward());
             return (value, response.Context);
         }
     }
@@ -211,7 +211,7 @@ public sealed class WizardsVaultClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -265,7 +265,7 @@ public sealed class WizardsVaultClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<AstralReward> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAstralReward());
+            ValueHashSet<AstralReward> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAstralReward());
             return (value, response.Context);
         }
     }
@@ -294,7 +294,7 @@ public sealed class WizardsVaultClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<AstralReward> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAstralReward());
+            ValueHashSet<AstralReward> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAstralReward());
             return (value, response.Context);
         }
     }
@@ -323,7 +323,7 @@ public sealed class WizardsVaultClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Objective> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetObjective());
+            ValueHashSet<Objective> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetObjective());
             return (value, response.Context);
         }
     }
@@ -341,7 +341,7 @@ public sealed class WizardsVaultClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -395,7 +395,7 @@ public sealed class WizardsVaultClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Objective> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetObjective());
+            ValueHashSet<Objective> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetObjective());
             return (value, response.Context);
         }
     }
@@ -424,7 +424,7 @@ public sealed class WizardsVaultClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Objective> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetObjective());
+            ValueHashSet<Objective> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetObjective());
             return (value, response.Context);
         }
     }

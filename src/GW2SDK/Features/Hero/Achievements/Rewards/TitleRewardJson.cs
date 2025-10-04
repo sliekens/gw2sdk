@@ -28,6 +28,6 @@ internal static class TitleRewardJson
             }
         }
 
-        return new TitleReward { Id = id.Map(static (in JsonElement value) => value.GetInt32()) };
+        return new TitleReward { Id = id.Map(static (in value) => value.GetInt32()) };
     }
 }

@@ -39,10 +39,10 @@ internal static class GuildMemberJson
 
         return new GuildMember
         {
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Rank = rank.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Joined = joined.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
-            WvwMember = wvwMember.Map(static (in JsonElement value) => value.GetBoolean())
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            Rank = rank.Map(static (in value) => value.GetStringRequired()),
+            Joined = joined.Map(static (in value) => value.GetDateTimeOffset()),
+            WvwMember = wvwMember.Map(static (in value) => value.GetBoolean())
         };
     }
 }

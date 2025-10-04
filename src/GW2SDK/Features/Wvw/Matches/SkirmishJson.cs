@@ -34,10 +34,10 @@ internal static class SkirmishJson
 
         return new Skirmish
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Scores = scores.Map(static (in JsonElement value) => value.GetDistribution()),
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Scores = scores.Map(static (in value) => value.GetDistribution()),
             MapScores =
-                mapScores.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetMapScores()))
+                mapScores.Map(static (in values) => values.GetList(static (in value) => value.GetMapScores()))
                 ?? []
         };
     }

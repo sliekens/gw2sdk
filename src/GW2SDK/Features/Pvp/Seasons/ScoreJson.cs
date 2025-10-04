@@ -29,8 +29,8 @@ internal static class ScoreJson
 
         return new Score
         {
-            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Value = score.Map(static (in JsonElement value) => value.GetInt32())
+            Id = id.Map(static (in value) => value.GetStringRequired()),
+            Value = score.Map(static (in value) => value.GetInt32())
         };
     }
 }

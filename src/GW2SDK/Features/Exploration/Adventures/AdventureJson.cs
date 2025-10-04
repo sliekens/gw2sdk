@@ -38,10 +38,10 @@ internal static class AdventureJson
 
         return new Adventure
         {
-            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Coordinates = coordinates.Map(static (in JsonElement value) => value.GetCoordinateF()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Description = description.Map(static (in JsonElement value) => value.GetStringRequired())
+            Id = id.Map(static (in value) => value.GetStringRequired()),
+            Coordinates = coordinates.Map(static (in value) => value.GetCoordinateF()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            Description = description.Map(static (in value) => value.GetStringRequired())
         };
     }
 }

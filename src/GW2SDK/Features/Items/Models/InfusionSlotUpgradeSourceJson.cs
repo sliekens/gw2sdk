@@ -28,8 +28,8 @@ internal static class InfusionSlotUpgradeSourceJson
 
         return new InfusionSlotUpgradeSource
         {
-            Upgrade = upgrade.Map(static (in JsonElement value) => value.GetEnum<InfusionSlotUpgradeKind>()),
-            ItemId = itemId.Map(static (in JsonElement value) => value.GetInt32())
+            Upgrade = upgrade.Map(static (in value) => value.GetEnum<InfusionSlotUpgradeKind>()),
+            ItemId = itemId.Map(static (in value) => value.GetInt32())
         };
     }
 }

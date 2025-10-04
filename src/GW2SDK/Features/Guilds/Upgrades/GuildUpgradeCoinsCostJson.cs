@@ -29,6 +29,6 @@ internal static class GuildUpgradeCoinsCostJson
             }
         }
 
-        return new GuildUpgradeCoinsCost { Coins = count.Map(static (in JsonElement value) => value.GetInt32()) };
+        return new GuildUpgradeCoinsCost { Coins = count.Map(static (in value) => value.GetInt32()) };
     }
 }

@@ -53,7 +53,7 @@ internal sealed class UpgradeComponentFlagsJsonConverter : JsonConverter<Upgrade
             Trident = json.GetProperty("trident").GetBoolean(),
             Trinket = json.GetProperty("trinket").GetBoolean(),
             Warhorn = json.GetProperty("warhorn").GetBoolean(),
-            Other = json.GetProperty("other").GetList(static (in JsonElement value) => value.GetStringRequired())
+            Other = json.GetProperty("other").GetList(static (in value) => value.GetStringRequired())
         };
     }
 

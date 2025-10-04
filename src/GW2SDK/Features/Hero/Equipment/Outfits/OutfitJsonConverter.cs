@@ -28,7 +28,7 @@ internal sealed class OutfitJsonConverter : JsonConverter<Outfit>
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
-            UnlockItemIds = json.GetProperty("unlock_item_ids").GetList(static (in JsonElement entry) => entry.GetInt32())
+            UnlockItemIds = json.GetProperty("unlock_item_ids").GetList(static (in entry) => entry.GetInt32())
         };
     }
 

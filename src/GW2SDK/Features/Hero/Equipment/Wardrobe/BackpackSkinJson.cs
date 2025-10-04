@@ -59,15 +59,15 @@ internal static class BackpackSkinJson
             }
         }
 
-        string iconString = icon.Map(static (in JsonElement value) => value.GetString()) ?? "";
+        string iconString = icon.Map(static (in value) => value.GetString()) ?? "";
         return new BackpackSkin
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Description = description.Map(static (in JsonElement value) => value.GetString()) ?? "",
-            Rarity = rarity.Map(static (in JsonElement value) => value.GetEnum<Rarity>()),
-            Flags = flags.Map(static (in JsonElement values) => values.GetSkinFlags()),
-            Races = restrictions.Map(static (in JsonElement values) => values.GetRestrictions()),
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            Description = description.Map(static (in value) => value.GetString()) ?? "",
+            Rarity = rarity.Map(static (in value) => value.GetEnum<Rarity>()),
+            Flags = flags.Map(static (in values) => values.GetSkinFlags()),
+            Races = restrictions.Map(static (in values) => values.GetRestrictions()),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618

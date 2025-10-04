@@ -69,7 +69,7 @@ public sealed class CommerceClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -118,7 +118,7 @@ public sealed class CommerceClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<ItemPrice> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetItemPrice());
+            ValueHashSet<ItemPrice> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetItemPrice());
             return (value, response.Context);
         }
     }
@@ -209,7 +209,7 @@ public sealed class CommerceClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -258,7 +258,7 @@ public sealed class CommerceClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<OrderBook> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetOrderBook());
+            ValueHashSet<OrderBook> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetOrderBook());
             return (value, response.Context);
         }
     }
@@ -415,7 +415,7 @@ public sealed class CommerceClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Order> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetOrder());
+            ValueHashSet<Order> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetOrder());
             return (value, response.Context);
         }
     }
@@ -447,7 +447,7 @@ public sealed class CommerceClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Order> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetOrder());
+            ValueHashSet<Order> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetOrder());
             return (value, response.Context);
         }
     }
@@ -479,7 +479,7 @@ public sealed class CommerceClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Transaction> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetTransaction());
+            ValueHashSet<Transaction> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetTransaction());
             return (value, response.Context);
         }
     }
@@ -511,7 +511,7 @@ public sealed class CommerceClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Transaction> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetTransaction());
+            ValueHashSet<Transaction> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetTransaction());
             return (value, response.Context);
         }
     }

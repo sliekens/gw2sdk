@@ -157,41 +157,41 @@ internal static class HelmJson
             }
         }
 
-        string? iconString = icon.Map(static (in JsonElement value) => value.GetString());
+        string? iconString = icon.Map(static (in value) => value.GetString());
         return new Helm
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Description = description.Map(static (in JsonElement value) => value.GetString()) ?? "",
-            Level = level.Map(static (in JsonElement value) => value.GetInt32()),
-            Rarity = rarity.Map(static (in JsonElement value) => value.GetEnum<Rarity>()),
-            VendorValue = vendorValue.Map(static (in JsonElement value) => value.GetInt32()),
-            DefaultSkinId = defaultSkin.Map(static (in JsonElement value) => value.GetInt32()),
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            Description = description.Map(static (in value) => value.GetString()) ?? "",
+            Level = level.Map(static (in value) => value.GetInt32()),
+            Rarity = rarity.Map(static (in value) => value.GetEnum<Rarity>()),
+            VendorValue = vendorValue.Map(static (in value) => value.GetInt32()),
+            DefaultSkinId = defaultSkin.Map(static (in value) => value.GetInt32()),
             GameTypes =
-                gameTypes.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetEnum<GameType>())
+                gameTypes.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetEnum<GameType>())
                 ),
-            Flags = flags.Map(static (in JsonElement values) => values.GetItemFlags()),
-            Restrictions = restrictions.Map(static (in JsonElement value) => value.GetItemRestriction()),
-            ChatLink = chatLink.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Flags = flags.Map(static (in values) => values.GetItemFlags()),
+            Restrictions = restrictions.Map(static (in value) => value.GetItemRestriction()),
+            ChatLink = chatLink.Map(static (in value) => value.GetStringRequired()),
 #pragma warning disable CS0618 // Suppress obsolete warning
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = !string.IsNullOrEmpty(iconString) ? new Uri(iconString) : null,
-            WeightClass = weightClass.Map(static (in JsonElement value) => value.GetEnum<WeightClass>()),
-            Defense = defense.Map(static (in JsonElement value) => value.GetInt32()),
+            WeightClass = weightClass.Map(static (in value) => value.GetEnum<WeightClass>()),
+            Defense = defense.Map(static (in value) => value.GetInt32()),
             InfusionSlots =
-                infusionSlots.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetInfusionSlot())
+                infusionSlots.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetInfusionSlot())
                 ),
-            AttributeAdjustment = attributeAdjustment.Map(static (in JsonElement value) => value.GetDouble()),
+            AttributeAdjustment = attributeAdjustment.Map(static (in value) => value.GetDouble()),
             StatChoices =
-                statChoices.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32()))
+                statChoices.Map(static (in values) => values.GetList(static (in value) => value.GetInt32()))
                 ?? [],
-            AttributeCombinationId = infixUpgradeId.Map(static (in JsonElement value) => value.GetInt32()),
-            Attributes = infixUpgradeAttributes.Map(static (in JsonElement values) => values.GetAttributes()) ?? [],
-            Buff = infixUpgradeBuff.Map(static (in JsonElement value) => value.GetBuff()),
-            SuffixItemId = suffixItemId.Map(static (in JsonElement value) => value.GetInt32())
+            AttributeCombinationId = infixUpgradeId.Map(static (in value) => value.GetInt32()),
+            Attributes = infixUpgradeAttributes.Map(static (in values) => values.GetAttributes()) ?? [],
+            Buff = infixUpgradeBuff.Map(static (in value) => value.GetBuff()),
+            SuffixItemId = suffixItemId.Map(static (in value) => value.GetInt32())
         };
     }
 }

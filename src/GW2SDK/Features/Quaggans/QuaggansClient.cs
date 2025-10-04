@@ -37,7 +37,7 @@ public sealed class QuaggansClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Quaggan> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetQuaggan());
+            ValueHashSet<Quaggan> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetQuaggan());
             return (value, response.Context);
         }
     }
@@ -55,7 +55,7 @@ public sealed class QuaggansClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
+            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -103,7 +103,7 @@ public sealed class QuaggansClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Quaggan> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetQuaggan());
+            ValueHashSet<Quaggan> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetQuaggan());
             return (value, response.Context);
         }
     }
@@ -129,7 +129,7 @@ public sealed class QuaggansClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Quaggan> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetQuaggan());
+            ValueHashSet<Quaggan> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetQuaggan());
             return (value, response.Context);
         }
     }

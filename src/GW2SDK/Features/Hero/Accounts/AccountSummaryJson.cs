@@ -93,30 +93,30 @@ internal static class AccountSummaryJson
 
         return new AccountSummary
         {
-            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
-            DisplayName = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Age = age.Map(static (in JsonElement value) => TimeSpan.FromSeconds(value.GetDouble())),
-            LastModified = lastModified.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
-            WorldId = world.Map(static (in JsonElement value) => value.GetInt32()),
+            Id = id.Map(static (in value) => value.GetStringRequired()),
+            DisplayName = name.Map(static (in value) => value.GetStringRequired()),
+            Age = age.Map(static (in value) => TimeSpan.FromSeconds(value.GetDouble())),
+            LastModified = lastModified.Map(static (in value) => value.GetDateTimeOffset()),
+            WorldId = world.Map(static (in value) => value.GetInt32()),
             GuildIds =
-                guilds.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetStringRequired())
+                guilds.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetStringRequired())
                 ),
             LeaderOfGuildIds =
-                guildLeader.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetStringRequired())
+                guildLeader.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetStringRequired())
                 ),
-            Created = created.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
+            Created = created.Map(static (in value) => value.GetDateTimeOffset()),
             Access =
-                access.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetEnum<ProductName>())
+                access.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetEnum<ProductName>())
                 ),
-            Commander = commander.Map(static (in JsonElement value) => value.GetBoolean()),
-            FractalLevel = fractalLevel.Map(static (in JsonElement value) => value.GetInt32()),
-            DailyAchievementPoints = dailyAp.Map(static (in JsonElement value) => value.GetInt32()),
-            MonthlyAchievementPoints = monthlyAp.Map(static (in JsonElement value) => value.GetInt32()),
-            Wvw = wvw.Map(static (in JsonElement value) => value.GetAccountWvwSummary()),
-            BuildStorageSlots = buildStorageSlots.Map(static (in JsonElement value) => value.GetInt32())
+            Commander = commander.Map(static (in value) => value.GetBoolean()),
+            FractalLevel = fractalLevel.Map(static (in value) => value.GetInt32()),
+            DailyAchievementPoints = dailyAp.Map(static (in value) => value.GetInt32()),
+            MonthlyAchievementPoints = monthlyAp.Map(static (in value) => value.GetInt32()),
+            Wvw = wvw.Map(static (in value) => value.GetAccountWvwSummary()),
+            BuildStorageSlots = buildStorageSlots.Map(static (in value) => value.GetInt32())
         };
     }
 }

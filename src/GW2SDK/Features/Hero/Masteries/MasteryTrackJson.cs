@@ -54,14 +54,14 @@ internal static class MasteryTrackJson
 
         return new MasteryTrack
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Requirement = requirement.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Order = order.Map(static (in JsonElement value) => value.GetInt32()),
-            BackgroundHref = background.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Region = region.Map(static (in JsonElement value) => value.GetEnum<MasteryRegionName>()),
-            Masteries = levels.Map(static (in JsonElement values) =>
-                values.GetList(static (in JsonElement value) => value.GetMastery())
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            Requirement = requirement.Map(static (in value) => value.GetStringRequired()),
+            Order = order.Map(static (in value) => value.GetInt32()),
+            BackgroundHref = background.Map(static (in value) => value.GetStringRequired()),
+            Region = region.Map(static (in value) => value.GetEnum<MasteryRegionName>()),
+            Masteries = levels.Map(static (in values) =>
+                values.GetList(static (in value) => value.GetMastery())
             )
         };
     }

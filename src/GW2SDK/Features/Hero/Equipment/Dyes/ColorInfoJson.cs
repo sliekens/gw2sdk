@@ -49,12 +49,12 @@ internal static class ColorInfoJson
 
         return new ColorInfo
         {
-            Brightness = brightness.Map(static (in JsonElement value) => value.GetInt32()),
-            Contrast = contrast.Map(static (in JsonElement value) => value.GetDouble()),
-            Hue = hue.Map(static (in JsonElement value) => value.GetInt32()),
-            Saturation = saturation.Map(static (in JsonElement value) => value.GetDouble()),
-            Lightness = lightness.Map(static (in JsonElement value) => value.GetDouble()),
-            Rgb = rgb.Map(static (in JsonElement value) => value.GetColor())
+            Brightness = brightness.Map(static (in value) => value.GetInt32()),
+            Contrast = contrast.Map(static (in value) => value.GetDouble()),
+            Hue = hue.Map(static (in value) => value.GetInt32()),
+            Saturation = saturation.Map(static (in value) => value.GetDouble()),
+            Lightness = lightness.Map(static (in value) => value.GetDouble()),
+            Rgb = rgb.Map(static (in value) => value.GetColor())
         };
     }
 }

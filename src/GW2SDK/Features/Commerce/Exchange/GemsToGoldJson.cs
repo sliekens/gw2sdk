@@ -28,8 +28,8 @@ internal static class GemsToGoldJson
 
         return new GemsToGold
         {
-            ExchangeRate = coinsPerGem.Map(static (in JsonElement value) => value.GetInt32()),
-            Gold = quantity.Map(static (in JsonElement value) => value.GetInt32())
+            ExchangeRate = coinsPerGem.Map(static (in value) => value.GetInt32()),
+            Gold = quantity.Map(static (in value) => value.GetInt32())
         };
     }
 }

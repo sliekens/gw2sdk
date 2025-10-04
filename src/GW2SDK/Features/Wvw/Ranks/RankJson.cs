@@ -34,9 +34,9 @@ internal static class RankJson
 
         return new Rank
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Title = title.Map(static (in JsonElement value) => value.GetStringRequired()),
-            MinRank = minRank.Map(static (in JsonElement value) => value.GetInt32())
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Title = title.Map(static (in value) => value.GetStringRequired()),
+            MinRank = minRank.Map(static (in value) => value.GetInt32())
         };
     }
 }

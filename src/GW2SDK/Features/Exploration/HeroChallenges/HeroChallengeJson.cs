@@ -30,8 +30,8 @@ internal static class HeroChallengeJson
 
         return new HeroChallenge
         {
-            Id = id.Map(static (in JsonElement value) => value.GetString()) ?? "",
-            Coordinates = coordinates.Map(static (in JsonElement value) => value.GetCoordinateF())
+            Id = id.Map(static (in value) => value.GetString()) ?? "",
+            Coordinates = coordinates.Map(static (in value) => value.GetCoordinateF())
         };
     }
 }

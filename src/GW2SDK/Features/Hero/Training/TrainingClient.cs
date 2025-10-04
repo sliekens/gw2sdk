@@ -74,7 +74,7 @@ public sealed class TrainingClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Profession> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetProfession());
+            ValueHashSet<Profession> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetProfession());
             return (value, response.Context);
         }
     }
@@ -92,7 +92,7 @@ public sealed class TrainingClient
         using (response.Json)
         {
             ValueHashSet<Extensible<ProfessionName>> value =
-                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEnum<ProfessionName>());
+                response.Json.RootElement.GetSet(static (in entry) => entry.GetEnum<ProfessionName>());
             return (value, response.Context);
         }
     }
@@ -167,7 +167,7 @@ public sealed class TrainingClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Profession> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetProfession());
+            ValueHashSet<Profession> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetProfession());
             return (value, response.Context);
         }
     }
@@ -196,7 +196,7 @@ public sealed class TrainingClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Profession> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetProfession());
+            ValueHashSet<Profession> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetProfession());
             return (value, response.Context);
         }
     }

@@ -48,15 +48,15 @@ internal static class SectorJson
 
         return new Sector
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Name = name.Map(static (in JsonElement value) => value.GetString()) ?? "",
-            Level = level.Map(static (in JsonElement value) => value.GetInt32()),
-            Coordinates = coordinates.Map(static (in JsonElement value) => value.GetCoordinateF()),
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Name = name.Map(static (in value) => value.GetString()) ?? "",
+            Level = level.Map(static (in value) => value.GetInt32()),
+            Coordinates = coordinates.Map(static (in value) => value.GetCoordinateF()),
             Boundaries =
-                boundaries.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetCoordinateF())
+                boundaries.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetCoordinateF())
                 ),
-            ChatLink = chatLink.Map(static (in JsonElement value) => value.GetStringRequired())
+            ChatLink = chatLink.Map(static (in value) => value.GetStringRequired())
         };
     }
 }

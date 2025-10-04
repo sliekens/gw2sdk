@@ -46,12 +46,12 @@ internal static class EquipmentTemplateJson
 
         return new EquipmentTemplate
         {
-            TabNumber = tab.Map(static (in JsonElement value) => value.GetInt32()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Items = equipment.Map(static (in JsonElement values) =>
-                values.GetList(static (in JsonElement value) => value.GetEquipmentItem())
+            TabNumber = tab.Map(static (in value) => value.GetInt32()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            Items = equipment.Map(static (in values) =>
+                values.GetList(static (in value) => value.GetEquipmentItem())
             ),
-            PvpEquipment = pvpEquipment.Map(static (in JsonElement value) => value.GetPvpEquipment())
+            PvpEquipment = pvpEquipment.Map(static (in value) => value.GetPvpEquipment())
         };
     }
 }

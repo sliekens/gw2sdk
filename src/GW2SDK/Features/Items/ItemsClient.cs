@@ -37,7 +37,7 @@ public sealed class ItemsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -92,7 +92,7 @@ public sealed class ItemsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Item> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetItem());
+            ValueHashSet<Item> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetItem());
             return (value, response.Context);
         }
     }
@@ -121,7 +121,7 @@ public sealed class ItemsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Item> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetItem());
+            ValueHashSet<Item> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetItem());
             return (value, response.Context);
         }
     }
@@ -220,7 +220,7 @@ public sealed class ItemsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -247,7 +247,7 @@ public sealed class ItemsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             ValueHashSet<AttributeCombination> value =
-                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAttributeCombination());
+                response.Json.RootElement.GetSet(static (in entry) => entry.GetAttributeCombination());
             return (value, response.Context);
         }
     }
@@ -304,7 +304,7 @@ public sealed class ItemsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             ValueHashSet<AttributeCombination> value =
-                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAttributeCombination());
+                response.Json.RootElement.GetSet(static (in entry) => entry.GetAttributeCombination());
             return (value, response.Context);
         }
     }
@@ -335,7 +335,7 @@ public sealed class ItemsClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             ValueHashSet<AttributeCombination> value =
-                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAttributeCombination());
+                response.Json.RootElement.GetSet(static (in entry) => entry.GetAttributeCombination());
             return (value, response.Context);
         }
     }

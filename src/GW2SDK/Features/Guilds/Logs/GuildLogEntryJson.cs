@@ -67,8 +67,8 @@ internal static class GuildLogEntryJson
 
         return new GuildLogEntry
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Time = time.Map(static (in JsonElement value) => value.GetDateTimeOffset())
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Time = time.Map(static (in value) => value.GetDateTimeOffset())
         };
     }
 }

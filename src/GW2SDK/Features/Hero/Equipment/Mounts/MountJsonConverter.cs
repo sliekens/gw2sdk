@@ -32,7 +32,7 @@ internal sealed class MountJsonConverter : JsonConverter<Mount>
             UId = uid,
             Name = json.GetProperty("name").GetStringRequired(),
             DefaultSkinId = json.GetProperty("default_skin_id").GetInt32(),
-            SkinIds = json.GetProperty("skin_ids").GetList(static (in JsonElement entry) => entry.GetInt32()),
+            SkinIds = json.GetProperty("skin_ids").GetList(static (in entry) => entry.GetInt32()),
             Skills = json.GetProperty("skills").GetList(SkillReferenceJsonConverter.Read)
         };
     }

@@ -33,8 +33,8 @@ internal static class InfixUpgradeJson
                 }
             }
 
-            Extensible<AttributeName> key = attribute.Map(static (in JsonElement value) => value.GetAttributeName());
-            int value = modifier.Map(static (in JsonElement value) => value.GetInt32());
+            Extensible<AttributeName> key = attribute.Map(static (in value) => value.GetAttributeName());
+            int value = modifier.Map(static (in value) => value.GetInt32());
             attributes.Add(key, value);
         }
 

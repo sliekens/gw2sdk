@@ -22,6 +22,6 @@ internal static class ChapterJson
             }
         }
 
-        return new Chapter { Name = name.Map(static (in JsonElement value) => value.GetStringRequired()) };
+        return new Chapter { Name = name.Map(static (in value) => value.GetStringRequired()) };
     }
 }

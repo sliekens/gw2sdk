@@ -29,8 +29,8 @@ internal static class ObjectiveJson
 
         return new Objective
         {
-            Active = active.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Complete = complete.Map(static (in JsonElement value) => value.GetStringRequired())
+            Active = active.Map(static (in value) => value.GetStringRequired()),
+            Complete = complete.Map(static (in value) => value.GetStringRequired())
         };
     }
 }

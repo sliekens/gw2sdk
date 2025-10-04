@@ -29,8 +29,8 @@ internal static class CatJson
 
         return new Cat
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Hint = hint.Map(static (in JsonElement value) => value.GetStringRequired())
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Hint = hint.Map(static (in value) => value.GetStringRequired())
         };
     }
 }

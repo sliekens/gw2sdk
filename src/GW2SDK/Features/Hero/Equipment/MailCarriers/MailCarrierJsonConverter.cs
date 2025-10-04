@@ -23,7 +23,7 @@ internal sealed class MailCarrierJsonConverter : JsonConverter<MailCarrier>
         return new MailCarrier
         {
             Id = json.GetProperty("id").GetInt32(),
-            UnlockItemIds = json.GetProperty("unlock_item_ids").GetList(static (in JsonElement entry) => entry.GetInt32()),
+            UnlockItemIds = json.GetProperty("unlock_item_ids").GetList(static (in entry) => entry.GetInt32()),
             Order = json.GetProperty("order").GetInt32(),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,

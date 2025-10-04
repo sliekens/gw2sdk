@@ -69,7 +69,7 @@ internal sealed class RecipeSheetJsonConverter : JsonConverter<RecipeSheet>
             Rarity = json.GetProperty("rarity").GetEnum<Rarity>(),
             VendorValue = json.GetProperty("vendor_value").GetInt32(),
             GameTypes =
-                json.GetProperty("game_types").GetList(static (in JsonElement value) => value.GetEnum<GameType>()),
+                json.GetProperty("game_types").GetList(static (in value) => value.GetEnum<GameType>()),
             Flags = ItemFlagsJsonConverter.Read(json.GetProperty("flags")),
             Restrictions = ItemRestrictionJsonConverter.Read(json.GetProperty("restrictions")),
             ChatLink = json.GetProperty("chat_link").GetStringRequired(),
@@ -79,7 +79,7 @@ internal sealed class RecipeSheetJsonConverter : JsonConverter<RecipeSheet>
             IconUrl = !string.IsNullOrEmpty(iconString) ? new Uri(iconString) : null,
             RecipeId = json.GetProperty("recipe_id").GetInt32(),
             ExtraRecipeIds = json.GetProperty("extra_recipe_ids")
-                .GetList(static (in JsonElement value) => value.GetInt32())
+                .GetList(static (in value) => value.GetInt32())
         };
     }
 

@@ -39,9 +39,9 @@ internal static class BagJson
 
         return new Bag
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Size = size.Map(static (in JsonElement value) => value.GetInt32()),
-            Inventory = inventory.Map(static (in JsonElement value) => value.GetInventory())
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Size = size.Map(static (in value) => value.GetInt32()),
+            Inventory = inventory.Map(static (in value) => value.GetInventory())
         };
     }
 }

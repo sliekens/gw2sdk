@@ -53,17 +53,17 @@ internal static class GodShrineJson
 
         return new GodShrine
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            NameContested = nameContested.Map(static (in JsonElement value) => value.GetStringRequired()),
-            PointOfInterestId = pointOfInterestId.Map(static (in JsonElement value) => value.GetInt32()),
-            Coordinates = coordinates.Map(static (in JsonElement value) => value.GetCoordinateF()),
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            NameContested = nameContested.Map(static (in value) => value.GetStringRequired()),
+            PointOfInterestId = pointOfInterestId.Map(static (in value) => value.GetInt32()),
+            Coordinates = coordinates.Map(static (in value) => value.GetCoordinateF()),
 #pragma warning disable CS0618 // Suppress obsolete warning
-            IconHref = icon.Map(static (in JsonElement value) => value.GetStringRequired()),
-            IconContestedHref = iconContested.Map(static (in JsonElement value) => value.GetStringRequired()),
+            IconHref = icon.Map(static (in value) => value.GetStringRequired()),
+            IconContestedHref = iconContested.Map(static (in value) => value.GetStringRequired()),
 #pragma warning restore CS0618
-            IconUrl = icon.Map(static (in JsonElement value) => new Uri(value.GetStringRequired())),
-            IconContestedUrl = iconContested.Map(static (in JsonElement value) => new Uri(value.GetStringRequired()))
+            IconUrl = icon.Map(static (in value) => new Uri(value.GetStringRequired())),
+            IconContestedUrl = iconContested.Map(static (in value) => new Uri(value.GetStringRequired()))
         };
     }
 }

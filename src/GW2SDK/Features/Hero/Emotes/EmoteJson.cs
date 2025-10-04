@@ -34,13 +34,13 @@ internal static class EmoteJson
 
         return new Emote
         {
-            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Id = id.Map(static (in value) => value.GetStringRequired()),
             Commands =
-                commands.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetStringRequired())
+                commands.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetStringRequired())
                 ),
             UnlockItemIds =
-                unlockItems.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32()))
+                unlockItems.Map(static (in values) => values.GetList(static (in value) => value.GetInt32()))
         };
     }
 }

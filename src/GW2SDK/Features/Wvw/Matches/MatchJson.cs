@@ -74,19 +74,19 @@ internal static class MatchJson
 
         return new Match
         {
-            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
-            StartTime = startTime.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
-            EndTime = endTime.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
-            Scores = scores.Map(static (in JsonElement value) => value.GetDistribution()),
-            Worlds = worlds.Map(static (in JsonElement value) => value.GetWorlds()),
-            AllWorlds = allWorlds.Map(static (in JsonElement value) => value.GetAllWorlds()),
-            Deaths = deaths.Map(static (in JsonElement value) => value.GetDistribution()),
-            Kills = kills.Map(static (in JsonElement value) => value.GetDistribution()),
-            VictoryPoints = victoryPoints.Map(static (in JsonElement value) => value.GetDistribution()),
+            Id = id.Map(static (in value) => value.GetStringRequired()),
+            StartTime = startTime.Map(static (in value) => value.GetDateTimeOffset()),
+            EndTime = endTime.Map(static (in value) => value.GetDateTimeOffset()),
+            Scores = scores.Map(static (in value) => value.GetDistribution()),
+            Worlds = worlds.Map(static (in value) => value.GetWorlds()),
+            AllWorlds = allWorlds.Map(static (in value) => value.GetAllWorlds()),
+            Deaths = deaths.Map(static (in value) => value.GetDistribution()),
+            Kills = kills.Map(static (in value) => value.GetDistribution()),
+            VictoryPoints = victoryPoints.Map(static (in value) => value.GetDistribution()),
             Skirmishes =
-                skirmishes.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetSkirmish())
+                skirmishes.Map(static (in values) => values.GetList(static (in value) => value.GetSkirmish())
                 ),
-            Maps = maps.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetMap()))
+            Maps = maps.Map(static (in values) => values.GetList(static (in value) => value.GetMap()))
         };
     }
 }

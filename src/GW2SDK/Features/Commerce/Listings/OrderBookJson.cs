@@ -34,12 +34,12 @@ internal static class OrderBookJson
 
         return new OrderBook
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Id = id.Map(static (in value) => value.GetInt32()),
             Demand =
-                demand.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetOrderBookLine())
+                demand.Map(static (in values) => values.GetList(static (in value) => value.GetOrderBookLine())
                 ),
-            Supply = supply.Map(static (in JsonElement values) =>
-                values.GetList(static (in JsonElement value) => value.GetOrderBookLine())
+            Supply = supply.Map(static (in values) =>
+                values.GetList(static (in value) => value.GetOrderBookLine())
             )
         };
     }

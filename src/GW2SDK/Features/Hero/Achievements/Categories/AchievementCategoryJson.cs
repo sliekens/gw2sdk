@@ -52,23 +52,23 @@ internal static class AchievementCategoryJson
             }
         }
 
-        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        string iconString = icon.Map(static (in value) => value.GetStringRequired());
         return new AchievementCategory
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Description = description.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Order = order.Map(static (in JsonElement value) => value.GetInt32()),
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            Description = description.Map(static (in value) => value.GetStringRequired()),
+            Order = order.Map(static (in value) => value.GetInt32()),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
             Achievements =
-                achievements.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetAchievementRef())
+                achievements.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetAchievementRef())
                 ),
-            Tomorrow = tomorrow.Map(static (in JsonElement values) =>
-                values.GetList(static (in JsonElement value) => value.GetAchievementRef())
+            Tomorrow = tomorrow.Map(static (in values) =>
+                values.GetList(static (in value) => value.GetAchievementRef())
             )
         };
     }

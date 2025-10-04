@@ -43,7 +43,7 @@ public sealed class FinishersClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             ValueHashSet<UnlockedFinisher> value =
-                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetUnlockedFinisher());
+                response.Json.RootElement.GetSet(static (in entry) => entry.GetUnlockedFinisher());
             return (value, response.Context);
         }
     }
@@ -72,7 +72,7 @@ public sealed class FinishersClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Finisher> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetFinisher());
+            ValueHashSet<Finisher> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetFinisher());
             return (value, response.Context);
         }
     }
@@ -90,7 +90,7 @@ public sealed class FinishersClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -144,7 +144,7 @@ public sealed class FinishersClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Finisher> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetFinisher());
+            ValueHashSet<Finisher> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetFinisher());
             return (value, response.Context);
         }
     }
@@ -173,7 +173,7 @@ public sealed class FinishersClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Finisher> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetFinisher());
+            ValueHashSet<Finisher> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetFinisher());
             return (value, response.Context);
         }
     }

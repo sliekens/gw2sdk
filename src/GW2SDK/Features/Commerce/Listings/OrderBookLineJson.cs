@@ -34,9 +34,9 @@ internal static class OrderBookLineJson
 
         return new OrderBookLine
         {
-            Listings = listings.Map(static (in JsonElement value) => value.GetInt32()),
-            UnitPrice = unitPrice.Map(static (in JsonElement value) => value.GetInt32()),
-            Quantity = quantity.Map(static (in JsonElement value) => value.GetInt32())
+            Listings = listings.Map(static (in value) => value.GetInt32()),
+            UnitPrice = unitPrice.Map(static (in value) => value.GetInt32()),
+            Quantity = quantity.Map(static (in value) => value.GetInt32())
         };
     }
 }

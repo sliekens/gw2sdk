@@ -39,10 +39,10 @@ internal static class JadeBotSkinJson
 
         return new JadeBotSkin
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Description = description.Map(static (in JsonElement value) => value.GetStringRequired()),
-            UnlockItemId = unlockItem.Map(static (in JsonElement value) => value.GetInt32())
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            Description = description.Map(static (in value) => value.GetStringRequired()),
+            UnlockItemId = unlockItem.Map(static (in value) => value.GetInt32())
         };
     }
 }

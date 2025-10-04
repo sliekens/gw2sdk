@@ -100,28 +100,28 @@ internal static class SkillJson
             }
         }
 
-        string iconString = icon.Map(static (in JsonElement value) => value.GetString()) ?? "";
+        string iconString = icon.Map(static (in value) => value.GetString()) ?? "";
         return new Skill
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
             Facts =
-                facts.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetFact(out _, out _))
+                facts.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetFact(out _, out _))
                 ),
             TraitedFacts =
-                traitedFacts.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetTraitedFact())
+                traitedFacts.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetTraitedFact())
                 ),
-            Description = description.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Description = description.Map(static (in value) => value.GetStringRequired()),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = string.IsNullOrEmpty(iconString) ? null : new Uri(iconString),
-            SkillFlags = flags.Map(static (in JsonElement value) => value.GetSkillFlags()),
-            ChatLink = chatLink.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Categories = categories.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetEnum<SkillCategoryName>())
+            SkillFlags = flags.Map(static (in value) => value.GetSkillFlags()),
+            ChatLink = chatLink.Map(static (in value) => value.GetStringRequired()),
+            Categories = categories.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetEnum<SkillCategoryName>())
                 )
                 ?? []
         };

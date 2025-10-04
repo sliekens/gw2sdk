@@ -22,6 +22,6 @@ internal static class NodeJson
             }
         }
 
-        return new Node { Id = id.Map(static (in JsonElement value) => value.GetStringRequired()) };
+        return new Node { Id = id.Map(static (in value) => value.GetStringRequired()) };
     }
 }

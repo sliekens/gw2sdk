@@ -30,7 +30,7 @@ internal static class AchievementTextBitJson
 
         return new AchievementTextBit
         {
-            Text = text.Map(static (in JsonElement value) => value.GetStringRequired())
+            Text = text.Map(static (in value) => value.GetStringRequired())
         };
     }
 }

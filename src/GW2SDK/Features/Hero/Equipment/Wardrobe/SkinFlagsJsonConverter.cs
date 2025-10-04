@@ -34,7 +34,7 @@ internal sealed class SkinFlagsJsonConverter : JsonConverter<SkinFlags>
             NoCost = json.GetProperty("no_cost").GetBoolean(),
             OverrideRarity = json.GetProperty("override_rarity").GetBoolean(),
             ShowInWardrobe = json.GetProperty("show_in_wardrobe").GetBoolean(),
-            Other = json.GetProperty("other").GetList(static (in JsonElement value) => value.GetStringRequired())
+            Other = json.GetProperty("other").GetList(static (in value) => value.GetStringRequired())
         };
     }
 

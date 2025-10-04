@@ -34,9 +34,9 @@ internal static class BuildTemplateJson
 
         return new BuildTemplate
         {
-            TabNumber = tab.Map(static (in JsonElement value) => value.GetInt32()),
-            IsActive = isActive.Map(static (in JsonElement value) => value.GetBoolean()),
-            Build = build.Map(static (in JsonElement value) => value.GetBuild())
+            TabNumber = tab.Map(static (in value) => value.GetInt32()),
+            IsActive = isActive.Map(static (in value) => value.GetBoolean()),
+            Build = build.Map(static (in value) => value.GetBuild())
         };
     }
 }

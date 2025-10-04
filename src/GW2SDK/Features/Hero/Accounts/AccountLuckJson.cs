@@ -51,6 +51,6 @@ internal static class AccountLuckJson
             }
         }
 
-        return new AccountLuck { Luck = value.Map(static (in JsonElement luck) => luck.GetInt32()) };
+        return new AccountLuck { Luck = value.Map(static (in luck) => luck.GetInt32()) };
     }
 }

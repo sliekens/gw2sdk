@@ -39,12 +39,12 @@ internal static class StorylineJson
 
         return new Storyline
         {
-            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Order = order.Map(static (in JsonElement value) => value.GetInt32()),
+            Id = id.Map(static (in value) => value.GetStringRequired()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            Order = order.Map(static (in value) => value.GetInt32()),
 
             // TODO: should have been IReadOnlyList<int>
-            StoryIds = stories.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32())
+            StoryIds = stories.Map(static (in values) => values.GetList(static (in value) => value.GetInt32())
             )
         };
     }

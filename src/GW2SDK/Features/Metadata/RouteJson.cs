@@ -39,10 +39,10 @@ internal static class RouteJson
 
         return new Route
         {
-            Path = path.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Multilingual = lang.Map(static (in JsonElement value) => value.GetBoolean()),
-            RequiresAuthorization = auth.Map(static (in JsonElement value) => value.GetBoolean()),
-            Active = active.Map(static (in JsonElement value) => value.GetBoolean())
+            Path = path.Map(static (in value) => value.GetStringRequired()),
+            Multilingual = lang.Map(static (in value) => value.GetBoolean()),
+            RequiresAuthorization = auth.Map(static (in value) => value.GetBoolean()),
+            Active = active.Map(static (in value) => value.GetBoolean())
         };
     }
 }

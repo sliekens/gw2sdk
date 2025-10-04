@@ -149,54 +149,54 @@ internal static class CharacterJson
 
         return new Character
         {
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Race = race.Map(static (in JsonElement value) => value.GetEnum<RaceName>()),
-            BodyType = gender.Map(static (in JsonElement value) => value.GetEnum<BodyType>()),
-            Flags = flags.Map(static (in JsonElement values) => values.GetCharacterFlags()),
-            Level = level.Map(static (in JsonElement value) => value.GetInt32()),
-            GuildId = guild.Map(static (in JsonElement value) => value.GetString()) ?? "",
-            Profession = profession.Map(static (in JsonElement value) => value.GetEnum<ProfessionName>()),
-            Age = age.Map(static (in JsonElement value) => TimeSpan.FromSeconds(value.GetDouble())),
-            LastModified = lastModified.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
-            Created = created.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
-            Deaths = deaths.Map(static (in JsonElement value) => value.GetInt32()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            Race = race.Map(static (in value) => value.GetEnum<RaceName>()),
+            BodyType = gender.Map(static (in value) => value.GetEnum<BodyType>()),
+            Flags = flags.Map(static (in values) => values.GetCharacterFlags()),
+            Level = level.Map(static (in value) => value.GetInt32()),
+            GuildId = guild.Map(static (in value) => value.GetString()) ?? "",
+            Profession = profession.Map(static (in value) => value.GetEnum<ProfessionName>()),
+            Age = age.Map(static (in value) => TimeSpan.FromSeconds(value.GetDouble())),
+            LastModified = lastModified.Map(static (in value) => value.GetDateTimeOffset()),
+            Created = created.Map(static (in value) => value.GetDateTimeOffset()),
+            Deaths = deaths.Map(static (in value) => value.GetInt32()),
             CraftingDisciplines =
-                crafting.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetCraftingDiscipline())
+                crafting.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetCraftingDiscipline())
                 ),
-            TitleId = title.Map(static (in JsonElement value) => value.GetInt32()),
+            TitleId = title.Map(static (in value) => value.GetInt32()),
             Backstory =
-                backstory.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetStringRequired())
+                backstory.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetStringRequired())
                 ),
             WvwAbilities =
-                wvwAbilities.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetWvwAbility())
+                wvwAbilities.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetWvwAbility())
                 ),
-            BuildTemplatesCount = buildTabsUnlocked.Map(static (in JsonElement value) => value.GetInt32()),
-            ActiveBuildTemplateNumber = activeBuildTab.Map(static (in JsonElement value) => value.GetInt32()),
+            BuildTemplatesCount = buildTabsUnlocked.Map(static (in value) => value.GetInt32()),
+            ActiveBuildTemplateNumber = activeBuildTab.Map(static (in value) => value.GetInt32()),
             BuildTemplates =
-                buildTabs.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetBuildTemplate())
+                buildTabs.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetBuildTemplate())
                 ),
-            EquipmentTemplatesCount = equipmentTabsUnlocked.Map(static (in JsonElement value) => value.GetInt32()),
+            EquipmentTemplatesCount = equipmentTabsUnlocked.Map(static (in value) => value.GetInt32()),
             ActiveEquipmentTemplateNumber =
-                activeEquipmentTab.Map(static (in JsonElement value) => value.GetInt32()),
+                activeEquipmentTab.Map(static (in value) => value.GetInt32()),
             EquippedItems =
-                equippedItems.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetEquipmentItem())
+                equippedItems.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetEquipmentItem())
                 ),
             EquipmentTemplates =
-                equipmentTabs.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetEquipmentTemplate())
+                equipmentTabs.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetEquipmentTemplate())
                 ),
             Recipes =
-                recipes.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32())),
+                recipes.Map(static (in values) => values.GetList(static (in value) => value.GetInt32())),
             Training =
-                training.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetTrainingProgress())
+                training.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetTrainingProgress())
                 ),
-            Bags = bags.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetBag()))
+            Bags = bags.Map(static (in values) => values.GetList(static (in value) => value.GetBag()))
         };
     }
 }

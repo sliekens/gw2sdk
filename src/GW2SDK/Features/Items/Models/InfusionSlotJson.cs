@@ -28,8 +28,8 @@ internal static class InfusionSlotJson
 
         return new InfusionSlot
         {
-            Flags = flags.Map(static (in JsonElement values) => values.GetInfusionSlotFlags()),
-            ItemId = itemId.Map(static (in JsonElement value) => value.GetInt32())
+            Flags = flags.Map(static (in values) => values.GetInfusionSlotFlags()),
+            ItemId = itemId.Map(static (in value) => value.GetInt32())
         };
     }
 }

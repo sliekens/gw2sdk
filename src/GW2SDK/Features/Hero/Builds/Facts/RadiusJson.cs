@@ -54,15 +54,15 @@ internal static class RadiusJson
             }
         }
 
-        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        string iconString = icon.Map(static (in value) => value.GetStringRequired());
         return new Radius
         {
-            Text = text.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Text = text.Map(static (in value) => value.GetStringRequired()),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
-            Distance = distance.Map(static (in JsonElement value) => value.GetInt32())
+            Distance = distance.Map(static (in value) => value.GetInt32())
         };
     }
 }

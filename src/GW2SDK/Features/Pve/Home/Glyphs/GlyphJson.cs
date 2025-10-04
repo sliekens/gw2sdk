@@ -34,9 +34,9 @@ internal static class GlyphJson
 
         return new Glyph
         {
-            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
-            ItemId = itemId.Map(static (in JsonElement value) => value.GetInt32()),
-            Slot = slot.Map(static (in JsonElement value) => value.GetEnum<CollectionBox>())
+            Id = id.Map(static (in value) => value.GetStringRequired()),
+            ItemId = itemId.Map(static (in value) => value.GetInt32()),
+            Slot = slot.Map(static (in value) => value.GetEnum<CollectionBox>())
         };
     }
 }

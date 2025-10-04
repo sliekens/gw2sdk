@@ -39,10 +39,10 @@ internal static class MatchStatsJson
 
         return new MatchStats
         {
-            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Deaths = deaths.Map(static (in JsonElement value) => value.GetDistribution()),
-            Kills = kills.Map(static (in JsonElement value) => value.GetDistribution()),
-            Maps = maps.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetMapSummary()))
+            Id = id.Map(static (in value) => value.GetStringRequired()),
+            Deaths = deaths.Map(static (in value) => value.GetDistribution()),
+            Kills = kills.Map(static (in value) => value.GetDistribution()),
+            Maps = maps.Map(static (in values) => values.GetList(static (in value) => value.GetMapSummary()))
         };
     }
 }

@@ -36,8 +36,8 @@ internal static class MasteryPointRewardJson
 
         return new MasteryPointReward
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Region = region.Map(static (in JsonElement value) => value.GetEnum<MasteryRegionName>())
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Region = region.Map(static (in value) => value.GetEnum<MasteryRegionName>())
         };
     }
 }

@@ -34,9 +34,9 @@ internal static class StandingJson
 
         return new Standing
         {
-            SeasonId = seasonId.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Current = current.Map(static (in JsonElement value) => value.GetCurrentStanding()),
-            Best = best.Map(static (in JsonElement value) => value.GetBestStanding())
+            SeasonId = seasonId.Map(static (in value) => value.GetStringRequired()),
+            Current = current.Map(static (in value) => value.GetCurrentStanding()),
+            Best = best.Map(static (in value) => value.GetBestStanding())
         };
     }
 }

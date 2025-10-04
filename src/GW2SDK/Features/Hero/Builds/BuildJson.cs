@@ -58,23 +58,23 @@ internal static class BuildJson
         }
 
         (SelectedSpecialization? specialization1, SelectedSpecialization? specialization2, SelectedSpecialization? specialization3) =
-            specializations.Map(static (in JsonElement values) => values.GetSelectedSpecializations());
-        (string? LegendId1, string? LegendId2)? legendIds = legends.Map((in JsonElement values) =>
+            specializations.Map(static (in values) => values.GetSelectedSpecializations());
+        (string? LegendId1, string? LegendId2)? legendIds = legends.Map((in values) =>
             values.GetLegendIds(specialization1, specialization2, specialization3)
         );
-        (string? LegendId1, string? LegendId2)? aquaticLegendIds = aquaticLegends.Map((in JsonElement values) =>
+        (string? LegendId1, string? LegendId2)? aquaticLegendIds = aquaticLegends.Map((in values) =>
             values.GetLegendIds(specialization1, specialization2, specialization3)
         );
         return new Build
         {
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Profession = profession.Map(static (in JsonElement value) => value.GetEnum<ProfessionName>()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            Profession = profession.Map(static (in value) => value.GetEnum<ProfessionName>()),
             Specialization1 = specialization1,
             Specialization2 = specialization2,
             Specialization3 = specialization3,
-            Skills = skills.Map(static (in JsonElement value) => value.GetSkillBar()),
-            AquaticSkills = aquaticSkills.Map(static (in JsonElement value) => value.GetSkillBar()),
-            Pets = pets.Map(static (in JsonElement value) => value.GetSelectedPets()),
+            Skills = skills.Map(static (in value) => value.GetSkillBar()),
+            AquaticSkills = aquaticSkills.Map(static (in value) => value.GetSkillBar()),
+            Pets = pets.Map(static (in value) => value.GetSelectedPets()),
             Legends = (legendIds, aquaticLegendIds) switch
             {
                 (not null, not null) => new SelectedLegends

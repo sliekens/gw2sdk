@@ -51,11 +51,11 @@ internal static class GuildMissionJson
 
         return new GuildMission
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Time = time.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
-            User = user.Map(static (in JsonElement value) => value.GetString()) ?? "",
-            State = state.Map(static (in JsonElement value) => value.GetEnum<GuildMissionState>()),
-            Influence = influence.Map(static (in JsonElement value) => value.GetInt32())
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Time = time.Map(static (in value) => value.GetDateTimeOffset()),
+            User = user.Map(static (in value) => value.GetString()) ?? "",
+            State = state.Map(static (in value) => value.GetEnum<GuildMissionState>()),
+            Influence = influence.Map(static (in value) => value.GetInt32())
         };
     }
 }

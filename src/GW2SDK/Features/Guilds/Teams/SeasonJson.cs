@@ -39,10 +39,10 @@ internal static class SeasonJson
 
         return new Season
         {
-            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Wins = wins.Map(static (in JsonElement value) => value.GetInt32()),
-            Losses = losses.Map(static (in JsonElement value) => value.GetInt32()),
-            Rating = rating.Map(static (in JsonElement value) => value.GetInt32())
+            Id = id.Map(static (in value) => value.GetStringRequired()),
+            Wins = wins.Map(static (in value) => value.GetInt32()),
+            Losses = losses.Map(static (in value) => value.GetInt32()),
+            Rating = rating.Map(static (in value) => value.GetInt32())
         };
     }
 }

@@ -83,20 +83,20 @@ internal static class MapSummaryJson
 
         return new MapSummary
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            MinLevel = minLevel.Map(static (in JsonElement value) => value.GetInt32()),
-            MaxLevel = maxLevel.Map(static (in JsonElement value) => value.GetInt32()),
-            DefaultFloor = defaultFloor.Map(static (in JsonElement value) => value.GetInt32()),
-            Kind = kind.Map(static (in JsonElement value) => value.GetEnum<MapKind>()),
-            Floors = floors.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32())),
-            RegionId = regionId.Map(static (in JsonElement value) => value.GetInt32()),
-            RegionName = regionName.Map(static (in JsonElement value) => value.GetString()) ?? "",
-            ContinentId = continentId.Map(static (in JsonElement value) => value.GetInt32()),
-            ContinentName = continentName.Map(static (in JsonElement value) => value.GetString()) ?? "",
-            MapRectangle = mapRectangle.Map(static (in JsonElement value) => value.GetMapRectangle()),
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            MinLevel = minLevel.Map(static (in value) => value.GetInt32()),
+            MaxLevel = maxLevel.Map(static (in value) => value.GetInt32()),
+            DefaultFloor = defaultFloor.Map(static (in value) => value.GetInt32()),
+            Kind = kind.Map(static (in value) => value.GetEnum<MapKind>()),
+            Floors = floors.Map(static (in values) => values.GetList(static (in value) => value.GetInt32())),
+            RegionId = regionId.Map(static (in value) => value.GetInt32()),
+            RegionName = regionName.Map(static (in value) => value.GetString()) ?? "",
+            ContinentId = continentId.Map(static (in value) => value.GetInt32()),
+            ContinentName = continentName.Map(static (in value) => value.GetString()) ?? "",
+            MapRectangle = mapRectangle.Map(static (in value) => value.GetMapRectangle()),
             ContinentRectangle =
-                continentRectangle.Map(static (in JsonElement value) => value.GetContinentRectangle())
+                continentRectangle.Map(static (in value) => value.GetContinentRectangle())
         };
     }
 }

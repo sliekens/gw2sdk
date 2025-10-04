@@ -49,13 +49,13 @@ internal static class MountJson
 
         return new Mount
         {
-            Id = id.Map(static (in JsonElement value) => value.GetMountName()),
-            UId = guid.Map(static (in JsonElement value) => value.GetGuid()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            DefaultSkinId = defaultSkin.Map(static (in JsonElement value) => value.GetInt32()),
-            SkinIds = skins.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32())),
-            Skills = skills.Map(static (in JsonElement values) =>
-                values.GetList(static (in JsonElement value) => value.GetSkillReference())
+            Id = id.Map(static (in value) => value.GetMountName()),
+            UId = guid.Map(static (in value) => value.GetGuid()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            DefaultSkinId = defaultSkin.Map(static (in value) => value.GetInt32()),
+            SkinIds = skins.Map(static (in values) => values.GetList(static (in value) => value.GetInt32())),
+            Skills = skills.Map(static (in values) =>
+                values.GetList(static (in value) => value.GetSkillReference())
             )
         };
     }

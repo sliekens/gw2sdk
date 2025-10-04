@@ -70,20 +70,20 @@ internal static class StoryJson
 
         return new Story
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            StorylineId = season.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Description = description.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Timeline = timeline.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Level = level.Map(static (in JsonElement value) => value.GetInt32()),
+            Id = id.Map(static (in value) => value.GetInt32()),
+            StorylineId = season.Map(static (in value) => value.GetStringRequired()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            Description = description.Map(static (in value) => value.GetStringRequired()),
+            Timeline = timeline.Map(static (in value) => value.GetStringRequired()),
+            Level = level.Map(static (in value) => value.GetInt32()),
             Races =
-                races.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetEnum<RaceName>())
+                races.Map(static (in values) => values.GetList(static (in value) => value.GetEnum<RaceName>())
                 )
                 ?? Race.AllRaces,
-            Order = order.Map(static (in JsonElement value) => value.GetInt32()),
+            Order = order.Map(static (in value) => value.GetInt32()),
             Chapters =
-                chapters.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetChapter())),
-            Flags = flags.Map(static (in JsonElement values) => values.GetStoryFlags()) ?? StoryFlags.None
+                chapters.Map(static (in values) => values.GetList(static (in value) => value.GetChapter())),
+            Flags = flags.Map(static (in values) => values.GetStoryFlags()) ?? StoryFlags.None
         };
     }
 }

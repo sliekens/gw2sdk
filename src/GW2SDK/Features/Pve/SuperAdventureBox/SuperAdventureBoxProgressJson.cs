@@ -35,15 +35,15 @@ internal static class SuperAdventureBoxProgressJson
         return new SuperAdventureBoxProgress
         {
             Zones =
-                zones.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetSuperAdventureBoxZone())
+                zones.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetSuperAdventureBoxZone())
                 ),
             Unlocks =
-                unlocks.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetSuperAdventureBoxUpgrade())
+                unlocks.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetSuperAdventureBoxUpgrade())
                 ),
-            Songs = songs.Map(static (in JsonElement values) =>
-                values.GetList(static (in JsonElement value) => value.GetSuperAdventureBoxSong())
+            Songs = songs.Map(static (in values) =>
+                values.GetList(static (in value) => value.GetSuperAdventureBoxSong())
             )
         };
     }

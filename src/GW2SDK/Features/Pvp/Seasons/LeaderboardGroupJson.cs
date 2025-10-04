@@ -34,9 +34,9 @@ internal static class LeaderboardGroupJson
 
         return new LeaderboardGroup
         {
-            Ladder = ladder.Map(static (in JsonElement value) => value.GetLeaderboard()),
-            Legendary = legendary.Map(static (in JsonElement value) => value.GetLeaderboard()),
-            Guild = guild.Map(static (in JsonElement value) => value.GetLeaderboard())
+            Ladder = ladder.Map(static (in value) => value.GetLeaderboard()),
+            Legendary = legendary.Map(static (in value) => value.GetLeaderboard()),
+            Guild = guild.Map(static (in value) => value.GetLeaderboard())
         };
     }
 }

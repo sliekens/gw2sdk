@@ -66,7 +66,7 @@ internal sealed class AchievementJsonConverter : JsonConverter<Achievement>
                 .GetNullableList(AchievementRewardJsonConverter.Read),
             Bits = json.GetProperty("bits").GetNullableList(AchievementBitJsonConverter.Read),
             Prerequisites =
-                json.GetProperty("prerequisites").GetList(static (in JsonElement prerequisite) => prerequisite.GetInt32()),
+                json.GetProperty("prerequisites").GetList(static (in prerequisite) => prerequisite.GetInt32()),
             PointCap = json.GetProperty("point_cap").GetNullableInt32()
         };
     }

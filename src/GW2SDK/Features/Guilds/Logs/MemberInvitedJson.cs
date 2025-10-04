@@ -46,10 +46,10 @@ internal static class MemberInvitedJson
 
         return new MemberInvited
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Time = time.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
-            User = user.Map(static (in JsonElement value) => value.GetStringRequired()),
-            InvitedBy = invitedBy.Map(static (in JsonElement value) => value.GetStringRequired())
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Time = time.Map(static (in value) => value.GetDateTimeOffset()),
+            User = user.Map(static (in value) => value.GetStringRequired()),
+            InvitedBy = invitedBy.Map(static (in value) => value.GetStringRequired())
         };
     }
 }

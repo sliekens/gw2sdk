@@ -44,7 +44,7 @@ public sealed class PvpClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
+            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -71,7 +71,7 @@ public sealed class PvpClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
+            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -110,7 +110,7 @@ public sealed class PvpClient
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
             ValueHashSet<LeaderboardEntry> value =
-                response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetLeaderboardEntry());
+                response.Json.RootElement.GetSet(static (in entry) => entry.GetLeaderboardEntry());
             return (value, response.Context);
         }
     }
@@ -138,7 +138,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Standing> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStanding());
+            ValueHashSet<Standing> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStanding());
             return (value, response.Context);
         }
     }
@@ -191,7 +191,7 @@ public sealed class PvpClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -220,7 +220,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Amulet> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAmulet());
+            ValueHashSet<Amulet> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAmulet());
             return (value, response.Context);
         }
     }
@@ -238,7 +238,7 @@ public sealed class PvpClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -292,7 +292,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Amulet> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAmulet());
+            ValueHashSet<Amulet> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAmulet());
             return (value, response.Context);
         }
     }
@@ -321,7 +321,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Amulet> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetAmulet());
+            ValueHashSet<Amulet> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAmulet());
             return (value, response.Context);
         }
     }
@@ -350,7 +350,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MistChampion> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMistChampion());
+            ValueHashSet<MistChampion> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMistChampion());
             return (value, response.Context);
         }
     }
@@ -368,7 +368,7 @@ public sealed class PvpClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
+            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -422,7 +422,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MistChampion> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMistChampion());
+            ValueHashSet<MistChampion> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMistChampion());
             return (value, response.Context);
         }
     }
@@ -451,7 +451,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MistChampion> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMistChampion());
+            ValueHashSet<MistChampion> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMistChampion());
             return (value, response.Context);
         }
     }
@@ -480,7 +480,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Rank> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRank());
+            ValueHashSet<Rank> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRank());
             return (value, response.Context);
         }
     }
@@ -498,7 +498,7 @@ public sealed class PvpClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -552,7 +552,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Rank> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRank());
+            ValueHashSet<Rank> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRank());
             return (value, response.Context);
         }
     }
@@ -581,7 +581,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Rank> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRank());
+            ValueHashSet<Rank> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRank());
             return (value, response.Context);
         }
     }
@@ -610,7 +610,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Season> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetSeason());
+            ValueHashSet<Season> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSeason());
             return (value, response.Context);
         }
     }
@@ -628,7 +628,7 @@ public sealed class PvpClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
+            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -682,7 +682,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Season> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetSeason());
+            ValueHashSet<Season> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSeason());
             return (value, response.Context);
         }
     }
@@ -711,7 +711,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Season> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetSeason());
+            ValueHashSet<Season> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSeason());
             return (value, response.Context);
         }
     }
@@ -740,7 +740,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Game> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGame());
+            ValueHashSet<Game> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGame());
             return (value, response.Context);
         }
     }
@@ -764,7 +764,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
+            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -816,7 +816,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Game> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGame());
+            ValueHashSet<Game> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGame());
             return (value, response.Context);
         }
     }
@@ -844,7 +844,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Game> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetGame());
+            ValueHashSet<Game> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGame());
             return (value, response.Context);
         }
     }

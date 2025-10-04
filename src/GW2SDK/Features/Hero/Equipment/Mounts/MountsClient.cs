@@ -36,7 +36,7 @@ public sealed class MountsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<Extensible<MountName>> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMountName());
+            ValueHashSet<Extensible<MountName>> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMountName());
             return (value, response.Context);
         }
     }
@@ -57,7 +57,7 @@ public sealed class MountsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -86,7 +86,7 @@ public sealed class MountsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Mount> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMount());
+            ValueHashSet<Mount> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMount());
             return (value, response.Context);
         }
     }
@@ -104,7 +104,7 @@ public sealed class MountsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<Extensible<MountName>> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMountName());
+            ValueHashSet<Extensible<MountName>> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMountName());
             return (value, response.Context);
         }
     }
@@ -179,7 +179,7 @@ public sealed class MountsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Mount> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMount());
+            ValueHashSet<Mount> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMount());
             return (value, response.Context);
         }
     }
@@ -208,7 +208,7 @@ public sealed class MountsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Mount> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMount());
+            ValueHashSet<Mount> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMount());
             return (value, response.Context);
         }
     }
@@ -237,7 +237,7 @@ public sealed class MountsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MountSkin> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMountSkin());
+            ValueHashSet<MountSkin> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMountSkin());
             return (value, response.Context);
         }
     }
@@ -255,7 +255,7 @@ public sealed class MountsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -309,7 +309,7 @@ public sealed class MountsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MountSkin> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMountSkin());
+            ValueHashSet<MountSkin> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMountSkin());
             return (value, response.Context);
         }
     }
@@ -338,7 +338,7 @@ public sealed class MountsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MountSkin> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMountSkin());
+            ValueHashSet<MountSkin> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMountSkin());
             return (value, response.Context);
         }
     }

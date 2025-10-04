@@ -41,9 +41,9 @@ internal static class GuildUpgradeCollectibleCostJson
 
         return new GuildUpgradeCollectibleCost
         {
-            Name = name.Map(static (in JsonElement value) => value.GetString()) ?? "",
-            ItemId = itemId.Map(static (in JsonElement value) => value.GetInt32()),
-            Count = count.Map(static (in JsonElement value) => value.GetInt32())
+            Name = name.Map(static (in value) => value.GetString()) ?? "",
+            ItemId = itemId.Map(static (in value) => value.GetInt32()),
+            Count = count.Map(static (in value) => value.GetInt32())
         };
     }
 }

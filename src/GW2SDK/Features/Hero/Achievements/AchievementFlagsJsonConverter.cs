@@ -94,7 +94,7 @@ internal sealed class AchievementFlagsJsonConverter : JsonConverter<AchievementF
             }
             else if (property.NameEquals("other"))
             {
-                other = property.Value.GetList(static (in JsonElement value) => value.GetStringRequired());
+                other = property.Value.GetList(static (in value) => value.GetStringRequired());
             }
         }
 

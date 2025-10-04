@@ -74,17 +74,17 @@ internal static class CharacterSummaryJson
 
         return new CharacterSummary
         {
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Race = race.Map(static (in JsonElement value) => value.GetEnum<RaceName>()),
-            BodyType = gender.Map(static (in JsonElement value) => value.GetEnum<BodyType>()),
-            Level = level.Map(static (in JsonElement value) => value.GetInt32()),
-            GuildId = guild.Map(static (in JsonElement value) => value.GetString()) ?? "",
-            Profession = profession.Map(static (in JsonElement value) => value.GetEnum<ProfessionName>()),
-            Age = age.Map(static (in JsonElement value) => TimeSpan.FromSeconds(value.GetDouble())),
-            LastModified = lastModified.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
-            Created = created.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
-            Deaths = deaths.Map(static (in JsonElement value) => value.GetInt32()),
-            TitleId = title.Map(static (in JsonElement value) => value.GetInt32())
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            Race = race.Map(static (in value) => value.GetEnum<RaceName>()),
+            BodyType = gender.Map(static (in value) => value.GetEnum<BodyType>()),
+            Level = level.Map(static (in value) => value.GetInt32()),
+            GuildId = guild.Map(static (in value) => value.GetString()) ?? "",
+            Profession = profession.Map(static (in value) => value.GetEnum<ProfessionName>()),
+            Age = age.Map(static (in value) => TimeSpan.FromSeconds(value.GetDouble())),
+            LastModified = lastModified.Map(static (in value) => value.GetDateTimeOffset()),
+            Created = created.Map(static (in value) => value.GetDateTimeOffset()),
+            Deaths = deaths.Map(static (in value) => value.GetInt32()),
+            TitleId = title.Map(static (in value) => value.GetInt32())
         };
     }
 }

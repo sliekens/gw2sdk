@@ -34,9 +34,9 @@ internal static class RaceJson
 
         return new Race
         {
-            Id = id.Map(static (in JsonElement value) => value.GetEnum<RaceName>()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            SkillIds = skills.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32()))
+            Id = id.Map(static (in value) => value.GetEnum<RaceName>()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            SkillIds = skills.Map(static (in values) => values.GetList(static (in value) => value.GetInt32()))
         };
     }
 }

@@ -34,7 +34,7 @@ internal sealed class AchievementGroupJsonConverter : JsonConverter<AchievementG
             Name = json.GetProperty("name").GetStringRequired(),
             Description = json.GetProperty("description").GetStringRequired(),
             Order = json.GetProperty("order").GetInt32(),
-            Categories = json.GetProperty("categories").GetList(static (in JsonElement category) => category.GetInt32())
+            Categories = json.GetProperty("categories").GetList(static (in category) => category.GetInt32())
         };
     }
 

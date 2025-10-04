@@ -29,8 +29,8 @@ internal static class DeliveredItemJson
 
         return new DeliveredItem
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Count = count.Map(static (in JsonElement value) => value.GetInt32())
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Count = count.Map(static (in value) => value.GetInt32())
         };
     }
 }

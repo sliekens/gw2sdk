@@ -47,22 +47,22 @@ internal static class DivisionJson
             }
         }
 
-        string largeIconString = largeIcon.Map(static (in JsonElement value) => value.GetStringRequired());
-        string smallIconString = smallIcon.Map(static (in JsonElement value) => value.GetStringRequired());
-        string pipIconString = pipIcon.Map(static (in JsonElement value) => value.GetStringRequired());
+        string largeIconString = largeIcon.Map(static (in value) => value.GetStringRequired());
+        string smallIconString = smallIcon.Map(static (in value) => value.GetStringRequired());
+        string pipIconString = pipIcon.Map(static (in value) => value.GetStringRequired());
 #pragma warning disable CS0618
         return new Division
         {
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Flags = flags.Map(static (in JsonElement values) => values.GetDivisionFlags()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            Flags = flags.Map(static (in values) => values.GetDivisionFlags()),
             LargeIconHref = largeIconString,
             LargeIconUrl = new Uri(largeIconString),
             SmallIconHref = smallIconString,
             SmallIconUrl = new Uri(smallIconString),
             PipIconHref = pipIconString,
             PipIconUrl = new Uri(pipIconString),
-            Tiers = tiers.Map(static (in JsonElement values) =>
-                values.GetList(static (in JsonElement value) => value.GetDivisionTier())
+            Tiers = tiers.Map(static (in values) =>
+                values.GetList(static (in value) => value.GetDivisionTier())
             )
         };
 #pragma warning restore CS0618

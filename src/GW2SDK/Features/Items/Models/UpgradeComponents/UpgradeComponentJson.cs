@@ -204,38 +204,38 @@ internal static class UpgradeComponentJson
             }
         }
 
-        string? iconString = icon.Map(static (in JsonElement value) => value.GetString());
+        string? iconString = icon.Map(static (in value) => value.GetString());
         return new UpgradeComponent
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Description = description.Map(static (in JsonElement value) => value.GetString()) ?? "",
-            Level = level.Map(static (in JsonElement value) => value.GetInt32()),
-            Rarity = rarity.Map(static (in JsonElement value) => value.GetEnum<Rarity>()),
-            VendorValue = vendorValue.Map(static (in JsonElement value) => value.GetInt32()),
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            Description = description.Map(static (in value) => value.GetString()) ?? "",
+            Level = level.Map(static (in value) => value.GetInt32()),
+            Rarity = rarity.Map(static (in value) => value.GetEnum<Rarity>()),
+            VendorValue = vendorValue.Map(static (in value) => value.GetInt32()),
             GameTypes =
-                gameTypes.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetEnum<GameType>())
+                gameTypes.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetEnum<GameType>())
                 ),
-            Flags = flags.Map(static (in JsonElement values) => values.GetItemFlags()),
-            Restrictions = restrictions.Map(static (in JsonElement value) => value.GetItemRestriction()),
-            ChatLink = chatLink.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Flags = flags.Map(static (in values) => values.GetItemFlags()),
+            Restrictions = restrictions.Map(static (in value) => value.GetItemRestriction()),
+            ChatLink = chatLink.Map(static (in value) => value.GetStringRequired()),
 #pragma warning disable CS0618 // Suppress obsolete warning
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = !string.IsNullOrEmpty(iconString) ? new Uri(iconString) : null,
             UpgradeComponentFlags =
-                upgradeComponentFlags.Map(static (in JsonElement values) => values.GetUpgradeComponentFlags()),
+                upgradeComponentFlags.Map(static (in values) => values.GetUpgradeComponentFlags()),
             InfusionUpgradeFlags =
-                infusionUpgradeFlags.Map(static (in JsonElement values) => values.GetInfusionSlotFlags()),
-            AttributeAdjustment = attributeAdjustment.Map(static (in JsonElement value) => value.GetDouble()),
-            AttributeCombinationId = infixUpgradeId.Map(static (in JsonElement value) => value.GetInt32()),
-            Attributes = infixUpgradeAttributes.Map(static (in JsonElement values) => values.GetAttributes()) ?? [],
-            Buff = infixUpgradeBuff.Map(static (in JsonElement value) => value.GetBuff()),
-            SuffixName = suffix.Map(static (in JsonElement value) => value.GetStringRequired()),
+                infusionUpgradeFlags.Map(static (in values) => values.GetInfusionSlotFlags()),
+            AttributeAdjustment = attributeAdjustment.Map(static (in value) => value.GetDouble()),
+            AttributeCombinationId = infixUpgradeId.Map(static (in value) => value.GetInt32()),
+            Attributes = infixUpgradeAttributes.Map(static (in values) => values.GetAttributes()) ?? [],
+            Buff = infixUpgradeBuff.Map(static (in value) => value.GetBuff()),
+            SuffixName = suffix.Map(static (in value) => value.GetStringRequired()),
             UpgradesInto =
-                upgradesInto.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetInfusionSlotUpgradePath())
+                upgradesInto.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetInfusionSlotUpgradePath())
                 )
                 ?? []
         };

@@ -29,8 +29,8 @@ internal static class WvwTimerJson
 
         return new WvwTimer
         {
-            NorthAmerica = na.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
-            Europe = eu.Map(static (in JsonElement value) => value.GetDateTimeOffset())
+            NorthAmerica = na.Map(static (in value) => value.GetDateTimeOffset()),
+            Europe = eu.Map(static (in value) => value.GetDateTimeOffset())
         };
     }
 }

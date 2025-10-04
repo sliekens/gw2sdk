@@ -50,12 +50,12 @@ internal static class AccountStatsJson
 
         return new AccountStats
         {
-            PvpRank = pvpRank.Map(static (in JsonElement value) => value.GetInt32()),
-            PvpRankPoints = pvpRankPoints.Map(static (in JsonElement value) => value.GetInt32()),
-            PvpRankRollovers = pvpRankRollovers.Map(static (in JsonElement value) => value.GetInt32()),
-            Aggregate = aggregate.Map(static (in JsonElement value) => value.GetResults()),
+            PvpRank = pvpRank.Map(static (in value) => value.GetInt32()),
+            PvpRankPoints = pvpRankPoints.Map(static (in value) => value.GetInt32()),
+            PvpRankRollovers = pvpRankRollovers.Map(static (in value) => value.GetInt32()),
+            Aggregate = aggregate.Map(static (in value) => value.GetResults()),
             Professions =
-                professions.Map(static (in JsonElement value) => value.EnumerateObject()
+                professions.Map(static (in value) => value.EnumerateObject()
                     .ToDictionary(
 #if NET
                         pair => Enum.Parse<ProfessionName>(pair.Name, true),
@@ -65,7 +65,7 @@ internal static class AccountStatsJson
                         pair => pair.Value.GetResults()
                     )
                 ),
-            Ladders = ladders.Map(static (in JsonElement value) => value.GetLadders())
+            Ladders = ladders.Map(static (in value) => value.GetLadders())
         };
     }
 }

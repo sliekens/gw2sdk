@@ -44,11 +44,11 @@ internal static class MatchOverviewJson
 
         return new MatchOverview
         {
-            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Worlds = worlds.Map(static (in JsonElement value) => value.GetWorlds()),
-            AllWorlds = allWorlds.Map(static (in JsonElement value) => value.GetAllWorlds()),
-            StartTime = startTime.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
-            EndTime = endTime.Map(static (in JsonElement value) => value.GetDateTimeOffset())
+            Id = id.Map(static (in value) => value.GetStringRequired()),
+            Worlds = worlds.Map(static (in value) => value.GetWorlds()),
+            AllWorlds = allWorlds.Map(static (in value) => value.GetAllWorlds()),
+            StartTime = startTime.Map(static (in value) => value.GetDateTimeOffset()),
+            EndTime = endTime.Map(static (in value) => value.GetDateTimeOffset())
         };
     }
 }

@@ -44,11 +44,11 @@ internal static class LeaderboardScoringJson
 
         return new LeaderboardScoring
         {
-            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Type = type.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Description = description.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Ordering = ordering.Map(static (in JsonElement value) => value.GetStringRequired())
+            Id = id.Map(static (in value) => value.GetStringRequired()),
+            Type = type.Map(static (in value) => value.GetStringRequired()),
+            Description = description.Map(static (in value) => value.GetStringRequired()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            Ordering = ordering.Map(static (in value) => value.GetStringRequired())
         };
     }
 }

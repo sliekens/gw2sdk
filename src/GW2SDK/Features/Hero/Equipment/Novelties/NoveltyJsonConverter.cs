@@ -31,7 +31,7 @@ internal sealed class NoveltyJsonConverter : JsonConverter<Novelty>
 #pragma warning restore CS0618
             IconUrl = new Uri(iconString),
             Slot = json.GetProperty("slot").GetStringRequired(),
-            UnlockItemIds = json.GetProperty("unlock_item_ids").GetList(static (in JsonElement entry) => entry.GetInt32())
+            UnlockItemIds = json.GetProperty("unlock_item_ids").GetList(static (in entry) => entry.GetInt32())
         };
     }
 

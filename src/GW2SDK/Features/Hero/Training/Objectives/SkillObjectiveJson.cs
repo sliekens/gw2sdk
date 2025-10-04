@@ -35,8 +35,8 @@ internal static class SkillObjectiveJson
 
         return new SkillObjective
         {
-            Cost = cost.Map(static (in JsonElement value) => value.GetInt32()),
-            SkillId = skillId.Map(static (in JsonElement value) => value.GetInt32())
+            Cost = cost.Map(static (in value) => value.GetInt32()),
+            SkillId = skillId.Map(static (in value) => value.GetInt32())
         };
     }
 }

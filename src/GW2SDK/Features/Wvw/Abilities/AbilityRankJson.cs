@@ -29,8 +29,8 @@ internal static class AbilityRankJson
 
         return new AbilityRank
         {
-            Cost = cost.Map(static (in JsonElement value) => value.GetInt32()),
-            Effect = effect.Map(static (in JsonElement value) => value.GetStringRequired())
+            Cost = cost.Map(static (in value) => value.GetInt32()),
+            Effect = effect.Map(static (in value) => value.GetStringRequired())
         };
     }
 }

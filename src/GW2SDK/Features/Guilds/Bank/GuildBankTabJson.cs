@@ -44,12 +44,12 @@ internal static class GuildBankTabJson
 
         return new GuildBankTab
         {
-            UpgradeId = upgradeId.Map(static (in JsonElement value) => value.GetInt32()),
-            Size = size.Map(static (in JsonElement value) => value.GetInt32()),
-            Coins = coins.Map(static (in JsonElement value) => value.GetInt32()),
-            Note = note.Map(static (in JsonElement value) => value.GetString()) ?? "",
-            Inventory = inventory.Map(static (in JsonElement values) =>
-                values.GetList(static (in JsonElement value) => value.GetGuildBankSlot())
+            UpgradeId = upgradeId.Map(static (in value) => value.GetInt32()),
+            Size = size.Map(static (in value) => value.GetInt32()),
+            Coins = coins.Map(static (in value) => value.GetInt32()),
+            Note = note.Map(static (in value) => value.GetString()) ?? "",
+            Inventory = inventory.Map(static (in values) =>
+                values.GetList(static (in value) => value.GetGuildBankSlot())
             )
         };
     }

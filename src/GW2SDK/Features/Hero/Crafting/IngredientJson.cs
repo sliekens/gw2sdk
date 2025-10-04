@@ -33,9 +33,9 @@ internal static class IngredientJson
 
         return new Ingredient
         {
-            Kind = type.Map(static (in JsonElement value) => value.GetEnum<IngredientKind>()),
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Count = count.Map(static (in JsonElement value) => value.GetInt32())
+            Kind = type.Map(static (in value) => value.GetEnum<IngredientKind>()),
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Count = count.Map(static (in value) => value.GetInt32())
         };
     }
 }

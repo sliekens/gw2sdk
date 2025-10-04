@@ -44,11 +44,11 @@ internal static class OrderJson
 
         return new Order
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt64()),
-            ItemId = itemId.Map(static (in JsonElement value) => value.GetInt32()),
-            UnitPrice = price.Map(static (in JsonElement value) => value.GetInt32()),
-            Quantity = quantity.Map(static (in JsonElement value) => value.GetInt32()),
-            Created = created.Map(static (in JsonElement value) => value.GetDateTimeOffset())
+            Id = id.Map(static (in value) => value.GetInt64()),
+            ItemId = itemId.Map(static (in value) => value.GetInt32()),
+            UnitPrice = price.Map(static (in value) => value.GetInt32()),
+            Quantity = quantity.Map(static (in value) => value.GetInt32()),
+            Created = created.Map(static (in value) => value.GetDateTimeOffset())
         };
     }
 }

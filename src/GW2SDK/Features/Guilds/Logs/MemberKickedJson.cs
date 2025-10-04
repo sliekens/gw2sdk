@@ -46,10 +46,10 @@ internal static class MemberKickedJson
 
         return new MemberKicked
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Time = time.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
-            User = user.Map(static (in JsonElement value) => value.GetStringRequired()),
-            KickedBy = kickedBy.Map(static (in JsonElement value) => value.GetStringRequired())
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Time = time.Map(static (in value) => value.GetDateTimeOffset()),
+            User = user.Map(static (in value) => value.GetStringRequired()),
+            KickedBy = kickedBy.Map(static (in value) => value.GetStringRequired())
         };
     }
 }

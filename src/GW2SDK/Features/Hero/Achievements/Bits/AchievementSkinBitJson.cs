@@ -35,8 +35,8 @@ internal static class AchievementSkinBitJson
 
         return new AchievementSkinBit
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Text = text.Map(static (in JsonElement value) => value.GetString()) ?? ""
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Text = text.Map(static (in value) => value.GetString()) ?? ""
         };
     }
 }

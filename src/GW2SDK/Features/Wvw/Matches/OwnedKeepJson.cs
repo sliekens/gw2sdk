@@ -71,16 +71,16 @@ internal static class OwnedKeepJson
 
         return new OwnedKeep
         {
-            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Owner = owner.Map(static (in JsonElement value) => value.GetEnum<TeamColor>()),
-            LastFlipped = lastFlipped.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
-            PointsTick = pointsTick.Map(static (in JsonElement value) => value.GetInt32()),
-            PointsCapture = pointsCapture.Map(static (in JsonElement value) => value.GetInt32()),
-            ClaimedBy = claimedBy.Map(static (in JsonElement value) => value.GetString()) ?? "",
-            ClaimedAt = claimedAt.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
-            YaksDelivered = yaksDelivered.Map(static (in JsonElement value) => value.GetInt32()),
+            Id = id.Map(static (in value) => value.GetStringRequired()),
+            Owner = owner.Map(static (in value) => value.GetEnum<TeamColor>()),
+            LastFlipped = lastFlipped.Map(static (in value) => value.GetDateTimeOffset()),
+            PointsTick = pointsTick.Map(static (in value) => value.GetInt32()),
+            PointsCapture = pointsCapture.Map(static (in value) => value.GetInt32()),
+            ClaimedBy = claimedBy.Map(static (in value) => value.GetString()) ?? "",
+            ClaimedAt = claimedAt.Map(static (in value) => value.GetDateTimeOffset()),
+            YaksDelivered = yaksDelivered.Map(static (in value) => value.GetInt32()),
             GuildUpgrades =
-                guildUpgrades.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32()))
+                guildUpgrades.Map(static (in values) => values.GetList(static (in value) => value.GetInt32()))
                 ?? []
         };
     }

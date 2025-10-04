@@ -49,7 +49,7 @@ internal sealed class SpearRecipeJsonConverter : JsonConverter<SpearRecipe>
                 TimeSpan.FromMilliseconds(json.GetProperty("time_to_craft_ms").GetDouble()),
             Disciplines =
                 json.GetProperty("disciplines")
-                    .GetList(static (in JsonElement value) => value.GetEnum<CraftingDisciplineName>()),
+                    .GetList(static (in value) => value.GetEnum<CraftingDisciplineName>()),
             Flags = RecipeFlagsJsonConverter.Read(json.GetProperty("flags")),
             Ingredients = json.GetProperty("ingredients").GetList(IngredientJsonConverter.Read),
             ChatLink = json.GetProperty("chat_link").GetStringRequired()

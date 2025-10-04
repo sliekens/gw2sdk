@@ -33,9 +33,9 @@ internal static class WorldJson
 
         return new World
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Population = population.Map(static (in JsonElement value) => value.GetEnum<WorldPopulation>())
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            Population = population.Map(static (in value) => value.GetEnum<WorldPopulation>())
         };
     }
 }

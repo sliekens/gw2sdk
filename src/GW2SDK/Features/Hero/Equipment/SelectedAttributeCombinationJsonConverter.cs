@@ -40,7 +40,7 @@ internal sealed class
                         nameof(AttributeName.AgonyResistance) => AttributeName.AgonyResistance,
                         _ => throw new JsonException()
                     },
-                    static (in JsonElement value) => value.GetInt32()
+                    static (in value) => value.GetInt32()
                 )
         };
     }

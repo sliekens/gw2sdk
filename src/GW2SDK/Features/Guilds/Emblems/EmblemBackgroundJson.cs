@@ -29,14 +29,14 @@ internal static class EmblemBackgroundJson
 
         return new EmblemBackground
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Id = id.Map(static (in value) => value.GetInt32()),
 #pragma warning disable CS0618 // Suppress obsolete warning
-            Layers = layers.Map(static (in JsonElement values) =>
-                values.GetList(static (in JsonElement value) => value.GetStringRequired())
+            Layers = layers.Map(static (in values) =>
+                values.GetList(static (in value) => value.GetStringRequired())
             ),
 #pragma warning restore CS0618
-            LayerUrls = layers.Map(static (in JsonElement values) =>
-                values.GetList(static (in JsonElement value) => new Uri(value.GetStringRequired()))
+            LayerUrls = layers.Map(static (in values) =>
+                values.GetList(static (in value) => new Uri(value.GetStringRequired()))
             )
         };
     }

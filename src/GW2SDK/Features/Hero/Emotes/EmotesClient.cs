@@ -38,7 +38,7 @@ public sealed class EmotesClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
+            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -64,7 +64,7 @@ public sealed class EmotesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Emote> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEmote());
+            ValueHashSet<Emote> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetEmote());
             return (value, response.Context);
         }
     }
@@ -82,7 +82,7 @@ public sealed class EmotesClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
+            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -130,7 +130,7 @@ public sealed class EmotesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Emote> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEmote());
+            ValueHashSet<Emote> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetEmote());
             return (value, response.Context);
         }
     }
@@ -156,7 +156,7 @@ public sealed class EmotesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Emote> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEmote());
+            ValueHashSet<Emote> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetEmote());
             return (value, response.Context);
         }
     }

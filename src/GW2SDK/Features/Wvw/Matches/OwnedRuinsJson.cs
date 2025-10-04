@@ -51,11 +51,11 @@ internal static class OwnedRuinsJson
 
         return new OwnedRuins
         {
-            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Owner = owner.Map(static (in JsonElement value) => value.GetEnum<TeamColor>()),
-            LastFlipped = lastFlipped.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
-            PointsTick = pointsTick.Map(static (in JsonElement value) => value.GetInt32()),
-            PointsCapture = pointsCapture.Map(static (in JsonElement value) => value.GetInt32())
+            Id = id.Map(static (in value) => value.GetStringRequired()),
+            Owner = owner.Map(static (in value) => value.GetEnum<TeamColor>()),
+            LastFlipped = lastFlipped.Map(static (in value) => value.GetDateTimeOffset()),
+            PointsTick = pointsTick.Map(static (in value) => value.GetInt32()),
+            PointsCapture = pointsCapture.Map(static (in value) => value.GetInt32())
         };
     }
 }

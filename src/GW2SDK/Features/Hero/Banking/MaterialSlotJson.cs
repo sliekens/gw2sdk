@@ -39,10 +39,10 @@ internal static class MaterialSlotJson
 
         return new MaterialSlot
         {
-            ItemId = id.Map(static (in JsonElement value) => value.GetInt32()),
-            CategoryId = category.Map(static (in JsonElement value) => value.GetInt32()),
-            Binding = binding.Map(static (in JsonElement value) => value.GetEnum<ItemBinding>()),
-            Count = count.Map(static (in JsonElement value) => value.GetInt32())
+            ItemId = id.Map(static (in value) => value.GetInt32()),
+            CategoryId = category.Map(static (in value) => value.GetInt32()),
+            Binding = binding.Map(static (in value) => value.GetEnum<ItemBinding>()),
+            Count = count.Map(static (in value) => value.GetInt32())
         };
     }
 }

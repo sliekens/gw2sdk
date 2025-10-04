@@ -22,6 +22,6 @@ internal static class SkillBadgeTierJson
             }
         }
 
-        return new SkillBadgeTier { Rating = rating.Map(static (in JsonElement value) => value.GetInt32()) };
+        return new SkillBadgeTier { Rating = rating.Map(static (in value) => value.GetInt32()) };
     }
 }

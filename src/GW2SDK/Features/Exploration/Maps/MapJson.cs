@@ -101,40 +101,40 @@ internal static class MapJson
 
         return new Map
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            MinLevel = minLevel.Map(static (in JsonElement value) => value.GetInt32()),
-            MaxLevel = maxLevel.Map(static (in JsonElement value) => value.GetInt32()),
-            DefaultFloor = defaultFloor.Map(static (in JsonElement value) => value.GetInt32()),
-            LabelCoordinates = labelCoordinates.Map(static (in JsonElement value) => value.GetCoordinate()),
-            MapRectangle = mapRectangle.Map(static (in JsonElement value) => value.GetMapRectangle()),
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            MinLevel = minLevel.Map(static (in value) => value.GetInt32()),
+            MaxLevel = maxLevel.Map(static (in value) => value.GetInt32()),
+            DefaultFloor = defaultFloor.Map(static (in value) => value.GetInt32()),
+            LabelCoordinates = labelCoordinates.Map(static (in value) => value.GetCoordinate()),
+            MapRectangle = mapRectangle.Map(static (in value) => value.GetMapRectangle()),
             ContinentRectangle =
-                continentRectangle.Map(static (in JsonElement value) => value.GetContinentRectangle()),
+                continentRectangle.Map(static (in value) => value.GetContinentRectangle()),
             PointsOfInterest =
-                pointsOfInterest.Map(static (in JsonElement value) =>
-                    value.GetMap(static (in JsonElement entry) => entry.GetPointOfInterest())
+                pointsOfInterest.Map(static (in value) =>
+                    value.GetMap(static (in entry) => entry.GetPointOfInterest())
                         .ToDictionary(kvp => int.Parse(kvp.Key, CultureInfo.InvariantCulture), kvp => kvp.Value)
                 ),
             GodShrines =
-                godShrines.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetGodShrine())
+                godShrines.Map(static (in values) => values.GetList(static (in value) => value.GetGodShrine())
                 ),
             Hearts =
-                tasks.Map(static (in JsonElement value) => value.GetMap(static (in JsonElement entry) => entry.GetHeart())
+                tasks.Map(static (in value) => value.GetMap(static (in entry) => entry.GetHeart())
                     .ToDictionary(kvp => int.Parse(kvp.Key, CultureInfo.InvariantCulture), kvp => kvp.Value)
                 ),
             HeroChallenges =
-                skillChallenges.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetHeroChallenge())
+                skillChallenges.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetHeroChallenge())
                 ),
             Sectors =
-                sectors.Map(static (in JsonElement value) => value.GetMap(static (in JsonElement entry) => entry.GetSector())
+                sectors.Map(static (in value) => value.GetMap(static (in entry) => entry.GetSector())
                     .ToDictionary(kvp => int.Parse(kvp.Key, CultureInfo.InvariantCulture), kvp => kvp.Value)
                 ),
             Adventures =
-                adventures.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetAdventure())
+                adventures.Map(static (in values) => values.GetList(static (in value) => value.GetAdventure())
                 ),
-            MasteryInsights = masteryPoints.Map(static (in JsonElement values) =>
-                values.GetList(static (in JsonElement value) => value.GetMasteryInsight())
+            MasteryInsights = masteryPoints.Map(static (in values) =>
+                values.GetList(static (in value) => value.GetMasteryInsight())
             )
         };
     }

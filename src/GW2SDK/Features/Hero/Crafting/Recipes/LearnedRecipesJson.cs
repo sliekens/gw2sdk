@@ -22,6 +22,6 @@ internal static class LearnedRecipesJson
             }
         }
 
-        return recipes.Map(static (in JsonElement values) => values.GetSet(static (in JsonElement value) => value.GetInt32()));
+        return recipes.Map(static (in values) => values.GetSet(static (in value) => value.GetInt32()));
     }
 }

@@ -30,8 +30,8 @@ internal static class SchemaJson
 
         return new Schema
         {
-            Version = version.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Description = description.Map(static (in JsonElement value) => value.GetStringRequired())
+            Version = version.Map(static (in value) => value.GetStringRequired()),
+            Description = description.Map(static (in value) => value.GetStringRequired())
         };
     }
 }

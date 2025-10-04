@@ -51,16 +51,16 @@ internal static class InfluenceActivityJson
 
         return new InfluenceActivity
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Time = time.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Time = time.Map(static (in value) => value.GetDateTimeOffset()),
             Activity =
-                activity.Map(static (in JsonElement value) => value.ValueEquals("daily_login")
+                activity.Map(static (in value) => value.ValueEquals("daily_login")
                     ? InfluenceActivityKind.DailyLogin
                     : value.GetEnum<InfluenceActivityKind>()
                 ),
-            TotalParticipants = totalParticipants.Map(static (in JsonElement value) => value.GetInt32()),
-            Participants = participants.Map(static (in JsonElement values) =>
-                values.GetList(static (in JsonElement value) => value.GetStringRequired())
+            TotalParticipants = totalParticipants.Map(static (in value) => value.GetInt32()),
+            Participants = participants.Map(static (in values) =>
+                values.GetList(static (in value) => value.GetStringRequired())
             )
         };
     }

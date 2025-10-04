@@ -29,8 +29,8 @@ internal static class SuperAdventureBoxSongJson
 
         return new SuperAdventureBoxSong
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired())
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Name = name.Map(static (in value) => value.GetStringRequired())
         };
     }
 }

@@ -22,6 +22,6 @@ internal static class MapChestJson
             }
         }
 
-        return new MapChest { Id = id.Map(static (in JsonElement value) => value.GetStringRequired()) };
+        return new MapChest { Id = id.Map(static (in value) => value.GetStringRequired()) };
     }
 }

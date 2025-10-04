@@ -34,9 +34,9 @@ internal static class DistributionJson
 
         return new Distribution
         {
-            Red = red.Map(static (in JsonElement value) => value.GetInt32()),
-            Blue = blue.Map(static (in JsonElement value) => value.GetInt32()),
-            Green = green.Map(static (in JsonElement value) => value.GetInt32())
+            Red = red.Map(static (in value) => value.GetInt32()),
+            Blue = blue.Map(static (in value) => value.GetInt32()),
+            Green = green.Map(static (in value) => value.GetInt32())
         };
     }
 }

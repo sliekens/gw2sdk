@@ -35,9 +35,9 @@ internal static class MapSummaryJson
 
         return new MapSummary
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Kind = type.Map(static (in JsonElement value) => value.GetEnum<MapKind>()),
-            Scores = scores.Map(static (in JsonElement value) => value.GetDistribution())
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Kind = type.Map(static (in value) => value.GetEnum<MapKind>()),
+            Scores = scores.Map(static (in value) => value.GetDistribution())
         };
     }
 }

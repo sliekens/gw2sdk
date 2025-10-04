@@ -35,9 +35,9 @@ internal static class CraftingDisciplineJson
         return new CraftingDiscipline
         {
             Discipline =
-                discipline.Map(static (in JsonElement value) => value.GetEnum<CraftingDisciplineName>()),
-            Rating = rating.Map(static (in JsonElement value) => value.GetInt32()),
-            Active = active.Map(static (in JsonElement value) => value.GetBoolean())
+                discipline.Map(static (in value) => value.GetEnum<CraftingDisciplineName>()),
+            Rating = rating.Map(static (in value) => value.GetInt32()),
+            Active = active.Map(static (in value) => value.GetBoolean())
         };
     }
 }

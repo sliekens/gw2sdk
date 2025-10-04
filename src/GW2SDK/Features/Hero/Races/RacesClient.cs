@@ -40,7 +40,7 @@ public sealed class RacesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Race> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRace());
+            ValueHashSet<Race> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRace());
             return (value, response.Context);
         }
     }
@@ -58,7 +58,7 @@ public sealed class RacesClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<Extensible<RaceName>> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetEnum<RaceName>());
+            ValueHashSet<Extensible<RaceName>> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetEnum<RaceName>());
             return (value, response.Context);
         }
     }
@@ -133,7 +133,7 @@ public sealed class RacesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Race> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRace());
+            ValueHashSet<Race> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRace());
             return (value, response.Context);
         }
     }
@@ -162,7 +162,7 @@ public sealed class RacesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Race> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetRace());
+            ValueHashSet<Race> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRace());
             return (value, response.Context);
         }
     }

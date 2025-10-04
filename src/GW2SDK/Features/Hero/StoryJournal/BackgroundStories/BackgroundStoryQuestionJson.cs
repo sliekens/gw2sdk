@@ -55,21 +55,21 @@ internal static class BackgroundStoryQuestionJson
 
         return new BackgroundStoryQuestion
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Title = title.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Description = description.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Title = title.Map(static (in value) => value.GetStringRequired()),
+            Description = description.Map(static (in value) => value.GetStringRequired()),
             AnswerIds =
-                answers.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetStringRequired())
+                answers.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetStringRequired())
                 ),
-            Order = order.Map(static (in JsonElement value) => value.GetInt32()),
+            Order = order.Map(static (in value) => value.GetInt32()),
             Professions =
-                professions.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetEnum<ProfessionName>())
+                professions.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetEnum<ProfessionName>())
                 )
                 ?? Profession.AllProfessions,
-            Races = races.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetEnum<RaceName>())
+            Races = races.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetEnum<RaceName>())
                 )
                 ?? Race.AllRaces
         };

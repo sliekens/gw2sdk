@@ -34,9 +34,9 @@ internal static class MistChampionStatsJson
 
         return new MistChampionStats
         {
-            Offense = offense.Map(static (in JsonElement value) => value.GetInt32()),
-            Defense = defense.Map(static (in JsonElement value) => value.GetInt32()),
-            Speed = speed.Map(static (in JsonElement value) => value.GetInt32())
+            Offense = offense.Map(static (in value) => value.GetInt32()),
+            Defense = defense.Map(static (in value) => value.GetInt32()),
+            Speed = speed.Map(static (in value) => value.GetInt32())
         };
     }
 }

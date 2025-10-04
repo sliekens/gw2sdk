@@ -69,12 +69,12 @@ internal static class ItemPriceJson
 
         return new ItemPrice
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Whitelisted = whitelisted.Map(static (in JsonElement value) => value.GetBoolean()),
-            TotalDemand = demand.Map(static (in JsonElement value) => value.GetInt32()),
-            TotalSupply = supply.Map(static (in JsonElement value) => value.GetInt32()),
-            BestBid = bestBid.Map(static (in JsonElement value) => value.GetInt32()),
-            BestAsk = bestAsk.Map(static (in JsonElement value) => value.GetInt32())
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Whitelisted = whitelisted.Map(static (in value) => value.GetBoolean()),
+            TotalDemand = demand.Map(static (in value) => value.GetInt32()),
+            TotalSupply = supply.Map(static (in value) => value.GetInt32()),
+            BestBid = bestBid.Map(static (in value) => value.GetInt32()),
+            BestAsk = bestAsk.Map(static (in value) => value.GetInt32())
         };
     }
 }

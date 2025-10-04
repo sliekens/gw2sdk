@@ -34,9 +34,9 @@ internal static class LevelJson
 
         return new Level
         {
-            MinRank = minLevel.Map(static (in JsonElement value) => value.GetInt32()),
-            MaxRank = maxLevel.Map(static (in JsonElement value) => value.GetInt32()),
-            Points = points.Map(static (in JsonElement value) => value.GetInt32())
+            MinRank = minLevel.Map(static (in value) => value.GetInt32()),
+            MaxRank = maxLevel.Map(static (in value) => value.GetInt32()),
+            Points = points.Map(static (in value) => value.GetInt32())
         };
     }
 }

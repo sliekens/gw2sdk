@@ -77,19 +77,19 @@ internal static class KeepJson
 
         return new Keep
         {
-            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            SectorId = sectorId.Map(static (in JsonElement value) => value.GetInt32()),
-            MapKind = mapType.Map(static (in JsonElement value) => value.GetEnum<MapKind>()),
-            MapId = mapId.Map(static (in JsonElement value) => value.GetInt32()),
-            UpgradeId = upgradeId.Map(static (in JsonElement value) => value.GetInt32()),
-            Coordinates = coordinates.Map(static (in JsonElement value) => value.GetCoordinate3()),
-            LabelCoordinates = labelCoordinates.Map(static (in JsonElement value) => value.GetCoordinateF()),
+            Id = id.Map(static (in value) => value.GetStringRequired()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            SectorId = sectorId.Map(static (in value) => value.GetInt32()),
+            MapKind = mapType.Map(static (in value) => value.GetEnum<MapKind>()),
+            MapId = mapId.Map(static (in value) => value.GetInt32()),
+            UpgradeId = upgradeId.Map(static (in value) => value.GetInt32()),
+            Coordinates = coordinates.Map(static (in value) => value.GetCoordinate3()),
+            LabelCoordinates = labelCoordinates.Map(static (in value) => value.GetCoordinateF()),
 #pragma warning disable CS0618 // Suppress obsolete warning
-            MarkerIconHref = marker.Map(static (in JsonElement value) => value.GetString()) ?? "",
+            MarkerIconHref = marker.Map(static (in value) => value.GetString()) ?? "",
 #pragma warning restore CS0618
-            MarkerIconUrl = marker.Map(static (in JsonElement value) => value.GetString() is { } url ? new Uri(url) : null),
-            ChatLink = chatLink.Map(static (in JsonElement value) => value.GetStringRequired())
+            MarkerIconUrl = marker.Map(static (in value) => value.GetString() is { } url ? new Uri(url) : null),
+            ChatLink = chatLink.Map(static (in value) => value.GetStringRequired())
         };
     }
 }

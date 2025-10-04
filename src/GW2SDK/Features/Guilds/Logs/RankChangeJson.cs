@@ -56,12 +56,12 @@ internal static class RankChangeJson
 
         return new RankChange
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Time = time.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
-            User = user.Map(static (in JsonElement value) => value.GetStringRequired()),
-            ChangedBy = changedBy.Map(static (in JsonElement value) => value.GetString()) ?? "",
-            OldRank = oldRank.Map(static (in JsonElement value) => value.GetStringRequired()),
-            NewRank = newRank.Map(static (in JsonElement value) => value.GetStringRequired())
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Time = time.Map(static (in value) => value.GetDateTimeOffset()),
+            User = user.Map(static (in value) => value.GetStringRequired()),
+            ChangedBy = changedBy.Map(static (in value) => value.GetString()) ?? "",
+            OldRank = oldRank.Map(static (in value) => value.GetStringRequired()),
+            NewRank = newRank.Map(static (in value) => value.GetStringRequired())
         };
     }
 }

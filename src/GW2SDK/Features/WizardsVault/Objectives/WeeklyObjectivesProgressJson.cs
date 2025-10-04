@@ -49,13 +49,13 @@ internal static class WeeklyObjectivesProgressJson
 
         return new WeeklyObjectivesProgress
         {
-            Progress = metaProgressCurrent.Map(static (in JsonElement value) => value.GetInt32()),
-            Goal = metaProgressComplete.Map(static (in JsonElement value) => value.GetInt32()),
-            RewardItemId = metaRewardItemId.Map(static (in JsonElement value) => value.GetInt32()),
-            RewardAcclaim = metaRewardAstral.Map(static (in JsonElement value) => value.GetInt32()),
-            Claimed = metaRewardClaimed.Map(static (in JsonElement value) => value.GetBoolean()),
-            Objectives = objectives.Map(static (in JsonElement values) =>
-                values.GetList(static (in JsonElement value) => value.GetObjectiveProgress())
+            Progress = metaProgressCurrent.Map(static (in value) => value.GetInt32()),
+            Goal = metaProgressComplete.Map(static (in value) => value.GetInt32()),
+            RewardItemId = metaRewardItemId.Map(static (in value) => value.GetInt32()),
+            RewardAcclaim = metaRewardAstral.Map(static (in value) => value.GetInt32()),
+            Claimed = metaRewardClaimed.Map(static (in value) => value.GetBoolean()),
+            Objectives = objectives.Map(static (in values) =>
+                values.GetList(static (in value) => value.GetObjectiveProgress())
             )
         };
     }

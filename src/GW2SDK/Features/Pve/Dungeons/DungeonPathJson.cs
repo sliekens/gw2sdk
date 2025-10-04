@@ -29,8 +29,8 @@ internal static class DungeonPathJson
 
         return new DungeonPath
         {
-            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Kind = kind.Map(static (in JsonElement value) => value.GetEnum<DungeonKind>())
+            Id = id.Map(static (in value) => value.GetStringRequired()),
+            Kind = kind.Map(static (in value) => value.GetEnum<DungeonKind>())
         };
     }
 }

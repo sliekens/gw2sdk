@@ -50,11 +50,11 @@ internal static class WaypointJson
 
         return new Waypoint
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Name = name.Map(static (in JsonElement value) => value.GetString()) ?? "",
-            Floor = floor.Map(static (in JsonElement value) => value.GetInt32()),
-            Coordinates = coordinates.Map(static (in JsonElement value) => value.GetCoordinateF()),
-            ChatLink = chatLink.Map(static (in JsonElement value) => value.GetStringRequired())
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Name = name.Map(static (in value) => value.GetString()) ?? "",
+            Floor = floor.Map(static (in value) => value.GetInt32()),
+            Coordinates = coordinates.Map(static (in value) => value.GetCoordinateF()),
+            ChatLink = chatLink.Map(static (in value) => value.GetStringRequired())
         };
     }
 }

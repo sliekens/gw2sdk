@@ -54,13 +54,13 @@ internal static class CurrentStandingJson
 
         return new CurrentStanding
         {
-            TotalPips = totalPoints.Map(static (in JsonElement value) => value.GetInt32()),
-            Division = division.Map(static (in JsonElement value) => value.GetInt32()),
-            Tier = tier.Map(static (in JsonElement value) => value.GetInt32()),
-            Pips = points.Map(static (in JsonElement value) => value.GetInt32()),
-            Repeats = repeats.Map(static (in JsonElement value) => value.GetInt32()),
-            Rating = rating.Map(static (in JsonElement value) => value.GetInt32()),
-            Decay = decay.Map(static (in JsonElement value) => value.GetInt32())
+            TotalPips = totalPoints.Map(static (in value) => value.GetInt32()),
+            Division = division.Map(static (in value) => value.GetInt32()),
+            Tier = tier.Map(static (in value) => value.GetInt32()),
+            Pips = points.Map(static (in value) => value.GetInt32()),
+            Repeats = repeats.Map(static (in value) => value.GetInt32()),
+            Rating = rating.Map(static (in value) => value.GetInt32()),
+            Decay = decay.Map(static (in value) => value.GetInt32())
         };
     }
 }

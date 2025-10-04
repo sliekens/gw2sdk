@@ -22,6 +22,6 @@ internal static class PetSkillJson
             }
         }
 
-        return new PetSkill { Id = id.Map(static (in JsonElement value) => value.GetInt32()) };
+        return new PetSkill { Id = id.Map(static (in value) => value.GetInt32()) };
     }
 }

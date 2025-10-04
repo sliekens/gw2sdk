@@ -57,22 +57,22 @@ internal static class MistChampionJson
             }
         }
 
-        string overlayString = overlay.Map(static (in JsonElement value) => value.GetStringRequired());
-        string underlayString = underlay.Map(static (in JsonElement value) => value.GetStringRequired());
+        string overlayString = overlay.Map(static (in value) => value.GetStringRequired());
+        string underlayString = underlay.Map(static (in value) => value.GetStringRequired());
 #pragma warning disable CS0618
         return new MistChampion
         {
-            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Description = description.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Type = type.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Stats = stats.Map(static (in JsonElement value) => value.GetMistChampionStats()),
+            Id = id.Map(static (in value) => value.GetStringRequired()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            Description = description.Map(static (in value) => value.GetStringRequired()),
+            Type = type.Map(static (in value) => value.GetStringRequired()),
+            Stats = stats.Map(static (in value) => value.GetMistChampionStats()),
             OverlayImageHref = overlayString,
             OverlayImageUrl = new Uri(overlayString),
             UnderlayImageHref = underlayString,
             UnderlayImageUrl = new Uri(underlayString),
-            Skins = skins.Map(static (in JsonElement values) =>
-                values.GetList(static (in JsonElement value) => value.GetMistChampionSkin())
+            Skins = skins.Map(static (in values) =>
+                values.GetList(static (in value) => value.GetMistChampionSkin())
             )
         };
 #pragma warning restore CS0618

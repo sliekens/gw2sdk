@@ -55,8 +55,8 @@ internal static class SkillSummaryJson
 
         return new SkillSummary
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Slot = slot.Map(static (in JsonElement value) => value.GetEnum<SkillSlot>())
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Slot = slot.Map(static (in value) => value.GetEnum<SkillSlot>())
         };
     }
 }

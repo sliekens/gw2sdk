@@ -54,13 +54,13 @@ internal static class AccountAchievementJson
 
         return new AccountAchievement
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Current = current.Map(static (in JsonElement value) => value.GetInt32()),
-            Max = max.Map(static (in JsonElement value) => value.GetInt32()),
-            Done = done.Map(static (in JsonElement value) => value.GetBoolean()),
-            Bits = bits.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32())),
-            Repeated = repeated.Map(static (in JsonElement value) => value.GetInt32()) ?? default,
-            Unlocked = unlocked.Map(static (in JsonElement value) => value.GetBoolean()) ?? true
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Current = current.Map(static (in value) => value.GetInt32()),
+            Max = max.Map(static (in value) => value.GetInt32()),
+            Done = done.Map(static (in value) => value.GetBoolean()),
+            Bits = bits.Map(static (in values) => values.GetList(static (in value) => value.GetInt32())),
+            Repeated = repeated.Map(static (in value) => value.GetInt32()) ?? default,
+            Unlocked = unlocked.Map(static (in value) => value.GetBoolean()) ?? true
         };
     }
 }

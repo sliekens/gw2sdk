@@ -29,12 +29,12 @@ internal static class AccountWvwSummaryJson
 
         return new AccountWvwSummary
         {
-            TeamId = teamId.Map(static (in JsonElement value) => value.GetInt32()) switch
+            TeamId = teamId.Map(static (in value) => value.GetInt32()) switch
             {
                 var id when id == 0 => null,
                 var id => id
             },
-            Rank = rank.Map(static (in JsonElement value) => value.GetInt32())
+            Rank = rank.Map(static (in value) => value.GetInt32())
         };
     }
 }

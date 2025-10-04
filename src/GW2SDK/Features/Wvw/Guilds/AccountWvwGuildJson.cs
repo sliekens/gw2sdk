@@ -27,11 +27,11 @@ internal static class AccountWvwGuildJson
             }
         }
 
-        int? teamIdValue = teamId.Map(static (in JsonElement value) => value.GetInt32());
+        int? teamIdValue = teamId.Map(static (in value) => value.GetInt32());
         return new AccountWvwGuild
         {
             TeamId = teamIdValue > 0 ? teamIdValue : null,
-            GuildId = guildId.Map(static (in JsonElement value) => value.GetString())
+            GuildId = guildId.Map(static (in value) => value.GetString())
         };
     }
 }

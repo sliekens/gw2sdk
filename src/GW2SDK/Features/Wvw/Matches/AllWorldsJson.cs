@@ -34,9 +34,9 @@ internal static class AllWorldsJson
 
         return new AllWorlds
         {
-            Red = red.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32())),
-            Blue = blue.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32())),
-            Green = green.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32()))
+            Red = red.Map(static (in values) => values.GetList(static (in value) => value.GetInt32())),
+            Blue = blue.Map(static (in values) => values.GetList(static (in value) => value.GetInt32())),
+            Green = green.Map(static (in values) => values.GetList(static (in value) => value.GetInt32()))
         };
     }
 }

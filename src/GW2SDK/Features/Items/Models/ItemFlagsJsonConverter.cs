@@ -47,7 +47,7 @@ internal sealed class ItemFlagsJsonConverter : JsonConverter<ItemFlags>
             Soulbound = json.GetProperty("soulbound").GetBoolean(),
             Tonic = json.GetProperty("tonic").GetBoolean(),
             Unique = json.GetProperty("unique").GetBoolean(),
-            Other = json.GetProperty("other").GetList(static (in JsonElement value) => value.GetStringRequired())
+            Other = json.GetProperty("other").GetList(static (in value) => value.GetStringRequired())
         };
     }
 

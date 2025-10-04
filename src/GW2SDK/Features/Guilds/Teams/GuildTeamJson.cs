@@ -59,17 +59,17 @@ internal static class GuildTeamJson
 
         return new GuildTeam
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Id = id.Map(static (in value) => value.GetInt32()),
             Members =
-                members.Map(static (in JsonElement values) =>
-                    values.GetList(static (in JsonElement value) => value.GetGuildTeamMember())
+                members.Map(static (in values) =>
+                    values.GetList(static (in value) => value.GetGuildTeamMember())
                 ),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            State = state.Map(static (in JsonElement value) => value.GetEnum<GuildTeamState>()),
-            Aggregate = aggregate.Map(static (in JsonElement value) => value.GetResults()),
-            Ladders = ladders.Map(static (in JsonElement value) => value.GetLadders()),
-            Games = games.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetGame())),
-            Seasons = seasons.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetSeason())
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            State = state.Map(static (in value) => value.GetEnum<GuildTeamState>()),
+            Aggregate = aggregate.Map(static (in value) => value.GetResults()),
+            Ladders = ladders.Map(static (in value) => value.GetLadders()),
+            Games = games.Map(static (in values) => values.GetList(static (in value) => value.GetGame())),
+            Seasons = seasons.Map(static (in values) => values.GetList(static (in value) => value.GetSeason())
                 )
                 ?? []
         };

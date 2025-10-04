@@ -73,11 +73,11 @@ internal static class IdentityJson
             }
         }
 
-        int mapIdInt32 = mapId.Map(static (in JsonElement value) => value.GetInt32());
+        int mapIdInt32 = mapId.Map(static (in value) => value.GetInt32());
         if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
         {
             // The 'map_id' and 'map' seem to be redundant, but check my assumptions...
-            if (mapIdInt32 != map.Map(static (in JsonElement value) => value.GetInt32()))
+            if (mapIdInt32 != map.Map(static (in value) => value.GetInt32()))
             {
                 ThrowHelper.ThrowUnexpectedMember("map");
             }
@@ -85,16 +85,16 @@ internal static class IdentityJson
 
         return new Identity
         {
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Profession = profession.Map(static (in JsonElement value) => (ProfessionName)value.GetInt32()),
-            SpecializationId = specializationId.Map(static (in JsonElement value) => value.GetInt32()),
-            Race = race.Map(static (in JsonElement value) => (RaceName)(value.GetInt32() + 1)),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            Profession = profession.Map(static (in value) => (ProfessionName)value.GetInt32()),
+            SpecializationId = specializationId.Map(static (in value) => value.GetInt32()),
+            Race = race.Map(static (in value) => (RaceName)(value.GetInt32() + 1)),
             MapId = mapIdInt32,
-            WorldId = worldId.Map(static (in JsonElement value) => value.GetInt64()),
-            TeamColorId = teamColorId.Map(static (in JsonElement value) => value.GetInt32()),
-            Commander = commander.Map(static (in JsonElement value) => value.GetBoolean()),
-            FieldOfView = fieldOfView.Map(static (in JsonElement value) => value.GetDouble()),
-            UiSize = uiSize.Map(static (in JsonElement value) => (UiSize)value.GetInt32())
+            WorldId = worldId.Map(static (in value) => value.GetInt64()),
+            TeamColorId = teamColorId.Map(static (in value) => value.GetInt32()),
+            Commander = commander.Map(static (in value) => value.GetBoolean()),
+            FieldOfView = fieldOfView.Map(static (in value) => value.GetDouble()),
+            UiSize = uiSize.Map(static (in value) => (UiSize)value.GetInt32())
         };
     }
 }

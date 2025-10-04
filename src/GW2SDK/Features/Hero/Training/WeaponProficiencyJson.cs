@@ -34,10 +34,10 @@ internal static class WeaponProficiencyJson
 
         return new WeaponProficiency
         {
-            RequiredSpecialization = specialization.Map(static (in JsonElement value) => value.GetInt32()),
-            Flags = flags.Map(static (in JsonElement values) => values.GetWeaponFlags()),
-            Skills = skills.Map(static (in JsonElement values) =>
-                values.GetList(static (in JsonElement value) => value.GetWeaponSkill())
+            RequiredSpecialization = specialization.Map(static (in value) => value.GetInt32()),
+            Flags = flags.Map(static (in values) => values.GetWeaponFlags()),
+            Skills = skills.Map(static (in values) =>
+                values.GetList(static (in value) => value.GetWeaponSkill())
             )
         };
     }

@@ -38,7 +38,7 @@ public sealed class DungeonsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
+            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -60,7 +60,7 @@ public sealed class DungeonsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
+            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -108,7 +108,7 @@ public sealed class DungeonsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Dungeon> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetDungeon());
+            ValueHashSet<Dungeon> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetDungeon());
             return (value, response.Context);
         }
     }
@@ -134,7 +134,7 @@ public sealed class DungeonsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Dungeon> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetDungeon());
+            ValueHashSet<Dungeon> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetDungeon());
             return (value, response.Context);
         }
     }
@@ -156,7 +156,7 @@ public sealed class DungeonsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Dungeon> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetDungeon());
+            ValueHashSet<Dungeon> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetDungeon());
             return (value, response.Context);
         }
     }

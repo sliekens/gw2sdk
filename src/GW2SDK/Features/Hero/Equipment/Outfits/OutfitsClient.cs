@@ -39,7 +39,7 @@ public sealed class OutfitsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -68,7 +68,7 @@ public sealed class OutfitsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Outfit> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetOutfit());
+            ValueHashSet<Outfit> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetOutfit());
             return (value, response.Context);
         }
     }
@@ -86,7 +86,7 @@ public sealed class OutfitsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -142,7 +142,7 @@ public sealed class OutfitsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Outfit> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetOutfit());
+            ValueHashSet<Outfit> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetOutfit());
             return (value, response.Context);
         }
     }
@@ -171,7 +171,7 @@ public sealed class OutfitsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Outfit> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetOutfit());
+            ValueHashSet<Outfit> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetOutfit());
             return (value, response.Context);
         }
     }

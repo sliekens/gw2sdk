@@ -100,7 +100,7 @@ internal static class DyeSlotInfoJson
         {
             // The dye slot arrays can contain Null to represent the default color, so this is ugly
             // Perhaps there is a better way to model it with a Null Object pattern?
-            return values.GetList(static (in JsonElement value) =>
+            return values.GetList(static (in value) =>
                 value.ValueKind == JsonValueKind.Null ? null : value.GetDyeSlot()
             );
         }

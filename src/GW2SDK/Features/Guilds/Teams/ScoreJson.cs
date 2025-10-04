@@ -29,8 +29,8 @@ internal static class ScoreJson
 
         return new Score
         {
-            Red = red.Map(static (in JsonElement value) => value.GetInt32()),
-            Blue = blue.Map(static (in JsonElement value) => value.GetInt32())
+            Red = red.Map(static (in value) => value.GetInt32()),
+            Blue = blue.Map(static (in value) => value.GetInt32())
         };
     }
 }

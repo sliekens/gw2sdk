@@ -55,15 +55,15 @@ internal static class PercentageJson
             }
         }
 
-        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        string iconString = icon.Map(static (in value) => value.GetStringRequired());
         return new Percentage
         {
-            Text = text.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Text = text.Map(static (in value) => value.GetStringRequired()),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
-            Percent = percent.Map(static (in JsonElement value) => value.GetDouble())
+            Percent = percent.Map(static (in value) => value.GetDouble())
         };
     }
 }

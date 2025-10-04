@@ -29,9 +29,9 @@ internal static class LeaderboardJson
 
         return new Leaderboard
         {
-            Settings = settings.Map(static (in JsonElement value) => value.GetLeaderboardSetting()),
-            Scorings = scorings.Map(static (in JsonElement values) =>
-                values.GetList(static (in JsonElement value) => value.GetLeaderboardScoring())
+            Settings = settings.Map(static (in value) => value.GetLeaderboardSetting()),
+            Scorings = scorings.Map(static (in values) =>
+                values.GetList(static (in value) => value.GetLeaderboardScoring())
             )
         };
     }

@@ -46,10 +46,10 @@ internal static class InviteDeclinedJson
 
         return new InviteDeclined
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Time = time.Map(static (in JsonElement value) => value.GetDateTimeOffset()),
-            User = user.Map(static (in JsonElement value) => value.GetStringRequired()),
-            DeclinedBy = declinedBy.Map(static (in JsonElement value) => value.GetString()) ?? ""
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Time = time.Map(static (in value) => value.GetDateTimeOffset()),
+            User = user.Map(static (in value) => value.GetStringRequired()),
+            DeclinedBy = declinedBy.Map(static (in value) => value.GetString()) ?? ""
         };
     }
 }

@@ -39,11 +39,11 @@ internal static class TrainingJson
 
         return new Training
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Category = category.Map(static (in JsonElement value) => value.GetEnum<TrainingCategory>()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Track = track.Map(static (in JsonElement values) =>
-                values.GetList(static (in JsonElement value) => value.GetTrainingObjective())
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Category = category.Map(static (in value) => value.GetEnum<TrainingCategory>()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            Track = track.Map(static (in values) =>
+                values.GetList(static (in value) => value.GetTrainingObjective())
             )
         };
     }

@@ -38,7 +38,7 @@ public sealed class JadeBotsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -67,7 +67,7 @@ public sealed class JadeBotsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<JadeBotSkin> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetJadeBotSkin());
+            ValueHashSet<JadeBotSkin> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetJadeBotSkin());
             return (value, response.Context);
         }
     }
@@ -85,7 +85,7 @@ public sealed class JadeBotsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -139,7 +139,7 @@ public sealed class JadeBotsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<JadeBotSkin> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetJadeBotSkin());
+            ValueHashSet<JadeBotSkin> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetJadeBotSkin());
             return (value, response.Context);
         }
     }
@@ -168,7 +168,7 @@ public sealed class JadeBotsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<JadeBotSkin> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetJadeBotSkin());
+            ValueHashSet<JadeBotSkin> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetJadeBotSkin());
             return (value, response.Context);
         }
     }

@@ -47,14 +47,14 @@ internal static class DecorationJson
             }
         }
 
-        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        string iconString = icon.Map(static (in value) => value.GetStringRequired());
         return new Decoration
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Description = description.Map(static (in JsonElement value) => value.GetStringRequired()),
-            CategoryIds = categories.Map(static (in JsonElement value) => value.GetList(static (in JsonElement item) => item.GetInt32())),
-            MaxCount = maxCount.Map(static (in JsonElement value) => value.GetInt32()),
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            Description = description.Map(static (in value) => value.GetStringRequired()),
+            CategoryIds = categories.Map(static (in value) => value.GetList(static (in item) => item.GetInt32())),
+            MaxCount = maxCount.Map(static (in value) => value.GetInt32()),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618

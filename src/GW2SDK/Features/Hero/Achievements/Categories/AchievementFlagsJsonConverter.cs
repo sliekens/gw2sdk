@@ -32,7 +32,7 @@ internal sealed class AchievementFlagsJsonConverter : JsonConverter<AchievementF
         {
             SpecialEvent = json.GetProperty("special_event").GetBoolean(),
             PvE = json.GetProperty("pve").GetBoolean(),
-            Other = json.GetProperty("other").GetList(static (in JsonElement value) => value.GetStringRequired())
+            Other = json.GetProperty("other").GetList(static (in value) => value.GetStringRequired())
         };
     }
 

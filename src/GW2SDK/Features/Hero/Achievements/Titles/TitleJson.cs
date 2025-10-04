@@ -45,12 +45,12 @@ internal static class TitleJson
 
         return new Title
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
             Achievements =
-                achievements.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32())),
+                achievements.Map(static (in values) => values.GetList(static (in value) => value.GetInt32())),
             AchievementPointsRequired =
-                achievementPointsRequired.Map(static (in JsonElement value) => value.GetInt32())
+                achievementPointsRequired.Map(static (in value) => value.GetInt32())
         };
     }
 }

@@ -80,18 +80,18 @@ internal static class GuildJson
 
         return new Guild
         {
-            Level = level.Map(static (in JsonElement value) => value.GetInt32()),
-            MessageOfTheDay = motd.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Influence = influence.Map(static (in JsonElement value) => value.GetInt32()),
-            Aetherium = aetherium.Map(static (in JsonElement value) => value.GetInt32()),
-            Resonance = resonance.Map(static (in JsonElement value) => value.GetInt32()),
-            Favor = favor.Map(static (in JsonElement value) => value.GetInt32()),
-            MemberCount = memberCount.Map(static (in JsonElement value) => value.GetInt32()),
-            MemberCapacity = memberCapacity.Map(static (in JsonElement value) => value.GetInt32()),
-            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Tag = tag.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Emblem = emblem.Map(static (in JsonElement value) => value.GetGuildEmblem())
+            Level = level.Map(static (in value) => value.GetInt32()),
+            MessageOfTheDay = motd.Map(static (in value) => value.GetStringRequired()),
+            Influence = influence.Map(static (in value) => value.GetInt32()),
+            Aetherium = aetherium.Map(static (in value) => value.GetInt32()),
+            Resonance = resonance.Map(static (in value) => value.GetInt32()),
+            Favor = favor.Map(static (in value) => value.GetInt32()),
+            MemberCount = memberCount.Map(static (in value) => value.GetInt32()),
+            MemberCapacity = memberCapacity.Map(static (in value) => value.GetInt32()),
+            Id = id.Map(static (in value) => value.GetStringRequired()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            Tag = tag.Map(static (in value) => value.GetStringRequired()),
+            Emblem = emblem.Map(static (in value) => value.GetGuildEmblem())
         };
     }
 }

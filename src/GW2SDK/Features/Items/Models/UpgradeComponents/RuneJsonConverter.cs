@@ -53,7 +53,7 @@ internal sealed class RuneJsonConverter : JsonConverter<Rune>
             Rarity = json.GetProperty("rarity").GetEnum<Rarity>(),
             VendorValue = json.GetProperty("vendor_value").GetInt32(),
             GameTypes =
-                json.GetProperty("game_types").GetList(static (in JsonElement value) => value.GetEnum<GameType>()),
+                json.GetProperty("game_types").GetList(static (in value) => value.GetEnum<GameType>()),
             Flags = ItemFlagsJsonConverter.Read(json.GetProperty("flags")),
             Restrictions = ItemRestrictionJsonConverter.Read(json.GetProperty("restrictions")),
             ChatLink = json.GetProperty("chat_link").GetStringRequired(),
@@ -74,12 +74,12 @@ internal sealed class RuneJsonConverter : JsonConverter<Rune>
                 json.GetProperty("attributes")
                     .GetMap(
                         static name => new Extensible<AttributeName>(name),
-                        static (in JsonElement value) => value.GetInt32()
+                        static (in value) => value.GetInt32()
                     ),
             Buff = json.GetProperty("buff").GetNullable(BuffJsonConverter.Read),
             SuffixName = json.GetProperty("suffix").GetStringRequired(),
             Bonuses = json.GetProperty("bonuses")
-                .GetNullable(static (in JsonElement value) => value.GetList(static (in JsonElement entry) => entry.GetStringRequired())),
+                .GetNullable(static (in value) => value.GetList(static (in entry) => entry.GetStringRequired())),
             UpgradesInto =
                 json.TryGetProperty("upgrades_into", out JsonElement found)
                     ? found.GetList(InfusionSlotUpgradePathJsonConverter.Read)

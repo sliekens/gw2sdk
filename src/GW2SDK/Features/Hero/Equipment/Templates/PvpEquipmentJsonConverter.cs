@@ -24,7 +24,7 @@ internal sealed class PvpEquipmentJsonConverter : JsonConverter<PvpEquipment>
             AmuletId = json.GetProperty("amulet_id").GetNullableInt32(),
             RuneId = json.GetProperty("rune_id").GetNullableInt32(),
             SigilIds = json.GetProperty("sigil_ids")
-                .GetList(static (in JsonElement value) => value.GetNullableInt32())
+                .GetList(static (in value) => value.GetNullableInt32())
         };
     }
 

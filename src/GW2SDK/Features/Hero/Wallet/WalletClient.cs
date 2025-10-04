@@ -41,7 +41,7 @@ public sealed class WalletClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<CurrencyAmount> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetCurrencyAmount());
+            ValueHashSet<CurrencyAmount> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCurrencyAmount());
             return (value, response.Context);
         }
     }
@@ -70,7 +70,7 @@ public sealed class WalletClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Currency> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetCurrency());
+            ValueHashSet<Currency> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCurrency());
             return (value, response.Context);
         }
     }
@@ -88,7 +88,7 @@ public sealed class WalletClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -142,7 +142,7 @@ public sealed class WalletClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Currency> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetCurrency());
+            ValueHashSet<Currency> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCurrency());
             return (value, response.Context);
         }
     }
@@ -171,7 +171,7 @@ public sealed class WalletClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Currency> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetCurrency());
+            ValueHashSet<Currency> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCurrency());
             return (value, response.Context);
         }
     }

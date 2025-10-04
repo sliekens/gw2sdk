@@ -39,10 +39,10 @@ internal static class LeaderboardTierJson
 
         return new LeaderboardTier
         {
-            Color = color.Map(static (in JsonElement value) => value.GetString()) ?? "",
-            Kind = type.Map(static (in JsonElement value) => value.GetEnum<LeaderboardTierKind>()),
-            Name = name.Map(static (in JsonElement value) => value.GetString()) ?? "",
-            Range = range.Map(static (in JsonElement value) => value.GetLeaderboardTierRange())
+            Color = color.Map(static (in value) => value.GetString()) ?? "",
+            Kind = type.Map(static (in value) => value.GetEnum<LeaderboardTierKind>()),
+            Name = name.Map(static (in value) => value.GetString()) ?? "",
+            Range = range.Map(static (in value) => value.GetLeaderboardTierRange())
         };
     }
 }

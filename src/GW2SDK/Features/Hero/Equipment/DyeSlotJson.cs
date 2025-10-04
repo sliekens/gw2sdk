@@ -28,8 +28,8 @@ internal static class DyeSlotJson
 
         return new DyeSlot
         {
-            ColorId = colorId.Map(static (in JsonElement value) => value.GetInt32()),
-            Material = material.Map(static (in JsonElement value) => value.GetEnum<Material>())
+            ColorId = colorId.Map(static (in value) => value.GetInt32()),
+            Material = material.Map(static (in value) => value.GetEnum<Material>())
         };
     }
 }

@@ -30,8 +30,8 @@ internal static class MapScoresJson
 
         return new MapScores
         {
-            Kind = type.Map(static (in JsonElement value) => value.GetEnum<MapKind>()),
-            Scores = scores.Map(static (in JsonElement value) => value.GetDistribution())
+            Kind = type.Map(static (in value) => value.GetEnum<MapKind>()),
+            Scores = scores.Map(static (in value) => value.GetDistribution())
         };
     }
 }

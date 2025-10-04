@@ -29,8 +29,8 @@ internal static class GuildStorageSlotJson
 
         return new GuildStorageSlot
         {
-            ItemId = itemId.Map(static (in JsonElement value) => value.GetInt32()),
-            Count = count.Map(static (in JsonElement value) => value.GetInt32())
+            ItemId = itemId.Map(static (in value) => value.GetInt32()),
+            Count = count.Map(static (in value) => value.GetInt32())
         };
     }
 }

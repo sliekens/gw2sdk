@@ -47,19 +47,19 @@ internal static class MailCarrierJson
             }
         }
 
-        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
+        string iconString = icon.Map(static (in value) => value.GetStringRequired());
         return new MailCarrier
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
+            Id = id.Map(static (in value) => value.GetInt32()),
             UnlockItemIds =
-                unlockItems.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32())),
-            Order = order.Map(static (in JsonElement value) => value.GetInt32()),
+                unlockItems.Map(static (in values) => values.GetList(static (in value) => value.GetInt32())),
+            Order = order.Map(static (in value) => value.GetInt32()),
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             IconHref = iconString,
 #pragma warning restore CS0618
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Flags = flags.Map(static (in JsonElement values) => values.GetMailCarrierFlags())
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            Flags = flags.Map(static (in values) => values.GetMailCarrierFlags())
         };
     }
 }

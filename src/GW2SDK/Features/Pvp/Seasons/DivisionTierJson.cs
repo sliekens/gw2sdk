@@ -22,6 +22,6 @@ internal static class DivisionTierJson
             }
         }
 
-        return new DivisionTier { Points = points.Map(static (in JsonElement value) => value.GetInt32()) };
+        return new DivisionTier { Points = points.Map(static (in value) => value.GetInt32()) };
     }
 }

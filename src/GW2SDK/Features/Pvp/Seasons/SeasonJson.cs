@@ -59,16 +59,16 @@ internal static class SeasonJson
 
         return new Season
         {
-            Id = id.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Start = start.Map(static (in JsonElement value) => value.GetDateTime()),
-            End = end.Map(static (in JsonElement value) => value.GetDateTime()),
-            Active = active.Map(static (in JsonElement value) => value.GetBoolean()),
+            Id = id.Map(static (in value) => value.GetStringRequired()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            Start = start.Map(static (in value) => value.GetDateTime()),
+            End = end.Map(static (in value) => value.GetDateTime()),
+            Active = active.Map(static (in value) => value.GetBoolean()),
             Divisions =
-                divisions.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetDivision())),
-            Ranks = ranks.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetSkillBadge())
+                divisions.Map(static (in values) => values.GetList(static (in value) => value.GetDivision())),
+            Ranks = ranks.Map(static (in values) => values.GetList(static (in value) => value.GetSkillBadge())
             ),
-            Leaderboards = leaderboards.Map(static (in JsonElement value) => value.GetLeaderboardGroup())
+            Leaderboards = leaderboards.Map(static (in value) => value.GetLeaderboardGroup())
         };
     }
 }

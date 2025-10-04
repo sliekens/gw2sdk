@@ -72,22 +72,22 @@ internal static class SpecializationJson
             }
         }
 
-        string iconString = icon.Map(static (in JsonElement value) => value.GetStringRequired());
-        string backgroundString = background.Map(static (in JsonElement value) => value.GetStringRequired());
-        string professionBigIconString = professionIconBig.Map(static (in JsonElement value) => value.GetString()) ?? "";
-        string professionIconString = professionIcon.Map(static (in JsonElement value) => value.GetString()) ?? "";
+        string iconString = icon.Map(static (in value) => value.GetStringRequired());
+        string backgroundString = background.Map(static (in value) => value.GetStringRequired());
+        string professionBigIconString = professionIconBig.Map(static (in value) => value.GetString()) ?? "";
+        string professionIconString = professionIcon.Map(static (in value) => value.GetString()) ?? "";
 #pragma warning disable CS0618
         return new Specialization
         {
-            Id = id.Map(static (in JsonElement value) => value.GetInt32()),
-            Name = name.Map(static (in JsonElement value) => value.GetStringRequired()),
-            Profession = profession.Map(static (in JsonElement value) => value.GetEnum<ProfessionName>()),
-            Elite = elite.Map(static (in JsonElement value) => value.GetBoolean()),
+            Id = id.Map(static (in value) => value.GetInt32()),
+            Name = name.Map(static (in value) => value.GetStringRequired()),
+            Profession = profession.Map(static (in value) => value.GetEnum<ProfessionName>()),
+            Elite = elite.Map(static (in value) => value.GetBoolean()),
             MinorTraitIds =
-                minorTraits.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32())),
+                minorTraits.Map(static (in values) => values.GetList(static (in value) => value.GetInt32())),
             MajorTraitIds =
-                majorTraits.Map(static (in JsonElement values) => values.GetList(static (in JsonElement value) => value.GetInt32())),
-            WeaponTraitId = weaponTrait.Map(static (in JsonElement value) => value.GetInt32()),
+                majorTraits.Map(static (in values) => values.GetList(static (in value) => value.GetInt32())),
+            WeaponTraitId = weaponTrait.Map(static (in value) => value.GetInt32()),
             IconHref = iconString,
             IconUrl = new Uri(iconString),
             BackgroundHref = backgroundString,

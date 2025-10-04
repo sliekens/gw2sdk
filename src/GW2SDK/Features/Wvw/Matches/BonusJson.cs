@@ -29,8 +29,8 @@ internal static class BonusJson
 
         return new Bonus
         {
-            Kind = type.Map(static (in JsonElement value) => value.GetEnum<BonusKind>()),
-            Owner = owner.Map(static (in JsonElement value) => value.GetEnum<TeamColor>())
+            Kind = type.Map(static (in value) => value.GetEnum<BonusKind>()),
+            Owner = owner.Map(static (in value) => value.GetEnum<TeamColor>())
         };
     }
 }

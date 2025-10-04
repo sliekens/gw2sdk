@@ -39,7 +39,7 @@ public sealed class BuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueList<int> value = response.Json.RootElement.GetList(static (in JsonElement entry) => entry.GetInt32());
+            ValueList<int> value = response.Json.RootElement.GetList(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -91,7 +91,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueList<Build> value = response.Json.RootElement.GetList(static (in JsonElement entry) => entry.GetBuild());
+            ValueList<Build> value = response.Json.RootElement.GetList(static (in entry) => entry.GetBuild());
             return (value, response.Context);
         }
     }
@@ -118,7 +118,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueList<Build> value = response.Json.RootElement.GetList(static (in JsonElement entry) => entry.GetBuild());
+            ValueList<Build> value = response.Json.RootElement.GetList(static (in entry) => entry.GetBuild());
             return (value, response.Context);
         }
     }
@@ -149,7 +149,7 @@ public sealed class BuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -211,7 +211,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<BuildTemplate> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetBuildTemplate());
+            ValueHashSet<BuildTemplate> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetBuildTemplate());
             return (value, response.Context);
         }
     }
@@ -270,7 +270,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Skill> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetSkill());
+            ValueHashSet<Skill> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSkill());
             return (value, response.Context);
         }
     }
@@ -288,7 +288,7 @@ public sealed class BuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -343,7 +343,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Skill> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetSkill());
+            ValueHashSet<Skill> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSkill());
             return (value, response.Context);
         }
     }
@@ -372,7 +372,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Skill> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetSkill());
+            ValueHashSet<Skill> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSkill());
             return (value, response.Context);
         }
     }
@@ -401,7 +401,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Specialization> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetSpecialization());
+            ValueHashSet<Specialization> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSpecialization());
             return (value, response.Context);
         }
     }
@@ -419,7 +419,7 @@ public sealed class BuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -475,7 +475,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Specialization> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetSpecialization());
+            ValueHashSet<Specialization> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSpecialization());
             return (value, response.Context);
         }
     }
@@ -505,7 +505,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Specialization> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetSpecialization());
+            ValueHashSet<Specialization> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSpecialization());
             return (value, response.Context);
         }
     }
@@ -534,7 +534,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Trait> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetTrait());
+            ValueHashSet<Trait> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetTrait());
             return (value, response.Context);
         }
     }
@@ -552,7 +552,7 @@ public sealed class BuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -607,7 +607,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Trait> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetTrait());
+            ValueHashSet<Trait> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetTrait());
             return (value, response.Context);
         }
     }
@@ -636,7 +636,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Trait> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetTrait());
+            ValueHashSet<Trait> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetTrait());
             return (value, response.Context);
         }
     }
@@ -658,7 +658,7 @@ public sealed class BuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetStringRequired());
+            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -706,7 +706,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Legend> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetLegend());
+            ValueHashSet<Legend> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLegend());
             return (value, response.Context);
         }
     }
@@ -732,7 +732,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Legend> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetLegend());
+            ValueHashSet<Legend> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLegend());
             return (value, response.Context);
         }
     }
@@ -754,7 +754,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Legend> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetLegend());
+            ValueHashSet<Legend> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLegend());
             return (value, response.Context);
         }
     }

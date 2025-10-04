@@ -38,7 +38,7 @@ public sealed class MailCarriersClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -67,7 +67,7 @@ public sealed class MailCarriersClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MailCarrier> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMailCarrier());
+            ValueHashSet<MailCarrier> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMailCarrier());
             return (value, response.Context);
         }
     }
@@ -85,7 +85,7 @@ public sealed class MailCarriersClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetInt32());
+            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -139,7 +139,7 @@ public sealed class MailCarriersClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MailCarrier> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMailCarrier());
+            ValueHashSet<MailCarrier> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMailCarrier());
             return (value, response.Context);
         }
     }
@@ -168,7 +168,7 @@ public sealed class MailCarriersClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MailCarrier> value = response.Json.RootElement.GetSet(static (in JsonElement entry) => entry.GetMailCarrier());
+            ValueHashSet<MailCarrier> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMailCarrier());
             return (value, response.Context);
         }
     }

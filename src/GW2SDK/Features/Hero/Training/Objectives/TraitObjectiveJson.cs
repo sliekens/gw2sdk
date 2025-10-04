@@ -35,8 +35,8 @@ internal static class TraitObjectiveJson
 
         return new TraitObjective
         {
-            Cost = cost.Map(static (in JsonElement value) => value.GetInt32()),
-            TraitId = traitId.Map(static (in JsonElement value) => value.GetInt32())
+            Cost = cost.Map(static (in value) => value.GetInt32()),
+            TraitId = traitId.Map(static (in value) => value.GetInt32())
         };
     }
 }
