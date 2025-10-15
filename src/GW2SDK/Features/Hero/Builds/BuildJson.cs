@@ -59,12 +59,8 @@ internal static class BuildJson
 
         (SelectedSpecialization? specialization1, SelectedSpecialization? specialization2, SelectedSpecialization? specialization3) =
             specializations.Map(static (in values) => values.GetSelectedSpecializations());
-        (string? LegendId1, string? LegendId2)? legendIds = legends.Map((in values) =>
-            values.GetLegendIds(specialization1, specialization2, specialization3)
-        );
-        (string? LegendId1, string? LegendId2)? aquaticLegendIds = aquaticLegends.Map((in values) =>
-            values.GetLegendIds(specialization1, specialization2, specialization3)
-        );
+        (string? LegendId1, string? LegendId2)? legendIds = legends.Map(static (in values) => values.GetLegendIds());
+        (string? LegendId1, string? LegendId2)? aquaticLegendIds = aquaticLegends.Map(static (in values) => values.GetLegendIds());
         return new Build
         {
             Name = name.Map(static (in value) => value.GetStringRequired()),
