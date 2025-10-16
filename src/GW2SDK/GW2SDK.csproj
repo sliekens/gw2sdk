@@ -108,11 +108,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="System.Text.Json" />
   </ItemGroup>
 
   <!-- Reference assemblies that are not included by default in .NET Framework -->
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
+    <PackageReference Include="System.Text.Json" VersionOverride="6.0.11" />
     <PackageReference Include="System.Runtime.InteropServices.RuntimeInformation" />
     <Reference Include="System.Net.Http" />
     <Using Include="System.Net.Http" />
@@ -120,6 +120,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="System.Text.Json" VersionOverride="6.0.11" />
     <PackageReference Include="Microsoft.Bcl.HashCode" />
   </ItemGroup>
 
