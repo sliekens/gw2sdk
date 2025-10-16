@@ -12,7 +12,15 @@
         "type": "Direct",
         "requested": "[0.50.0, )",
         "resolved": "0.50.0",
-        "contentHash": "gkwYncFqMjlPF6Yz8KeVsKWpdfv15sr6uKm+vXVa/8Q4tvx52LPzMQOO5m+bXwI3AGGFeY3cok3ZJbguYizswg=="
+        "contentHash": "gkwYncFqMjlPF6Yz8KeVsKWpdfv15sr6uKm+vXVa/8Q4tvx52LPzMQOO5m+bXwI3AGGFeY3cok3ZJbguYizswg==",
+        "dependencies": {
+          "System.Memory": "4.6.3"
+        }
+      },
+      "System.Memory": {
+        "type": "Transitive",
+        "resolved": "4.6.3",
+        "contentHash": "qdcDOgnFZY40+Q9876JUHnlHu7bosOHX8XISRoH94fwk6hgaeQGSgfZd8srWRZNt5bV9ZW2TljcegDNxsf+96A=="
       },
       "gw2sdk": {
         "type": "Project"
