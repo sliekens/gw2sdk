@@ -1,7 +1,14 @@
 <Project>
+
+  <!-- Workaround for https://github.com/dotnet/sdk/issues/51265 -->
+  <PropertyGroup>
+    <RestoreEnablePackagePruning Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework' "> false</RestoreEnablePackagePruning>
+  </PropertyGroup>
+
   <ItemGroup Condition="'$(CLSCompliant)' != ''">
     <AssemblyAttribute Include="System.CLSCompliantAttribute">
       <_Parameter1>$(CLSCompliant)</_Parameter1>
     </AssemblyAttribute>
   </ItemGroup>
+
 </Project>

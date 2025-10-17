@@ -3,8 +3,7 @@
   "image": "mcr.microsoft.com/devcontainers/base",
   "features": {
     "ghcr.io/devcontainers/features/dotnet:2": {
-      "version": "9.0.304",
-      "additionalVersions": "10.0"
+      "version": "10.0.100-rc.2.25502.107"
     },
     "./mono": {},
     "ghcr.io/devcontainers/features/powershell:1": {}
