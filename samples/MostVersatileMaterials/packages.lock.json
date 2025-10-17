@@ -71,18 +71,18 @@
       },
       "Spectre.Console": {
         "type": "Direct",
-        "requested": "[0.51.1, )",
-        "resolved": "0.51.1",
-        "contentHash": "84xNywgnaG8XgOypnZAL+EZUbhCGE0umj7fuMrSI6esdE74HYHRoeBioeMUJXPiCt7iBDKHLwiBcg0IliYIIxA=="
+        "requested": "[0.52.0, )",
+        "resolved": "0.52.0",
+        "contentHash": "bVe6b8mizSB4QAlfvKGWHIZbzpxtkCnK6taFUgrxbzPseiBNENi/36RTnKwqPJCHPimU5QG2vK6jd+JASQDugg=="
       },
       "Spectre.Console.ImageSharp": {
         "type": "Direct",
-        "requested": "[0.51.1, )",
-        "resolved": "0.51.1",
-        "contentHash": "G6v3T28Yfr9UiaWa/yNNvWbk6ZKfcZRR8xySyw8i9mN3jw5JbCjryrilfrcBeJjZR36x4zFAVObFTZaiJ9su1w==",
+        "requested": "[0.52.0, )",
+        "resolved": "0.52.0",
+        "contentHash": "+bbPZsjJN1OqjkxNyU4+TapPgGoNTNGwOJVSYQ1qzSjI05g59P2ROc70C0gbQFj2cMfftMJUTBjehW6S2pcfHQ==",
         "dependencies": {
           "SixLabors.ImageSharp": "3.1.11",
-          "Spectre.Console": "0.51.1"
+          "Spectre.Console": "0.52.0"
         }
       },
       "Microsoft.Extensions.AmbientMetadata.Application": {
