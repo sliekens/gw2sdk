@@ -110,18 +110,18 @@
     </PackageReference>
   </ItemGroup>
 
-  <!-- Reference assemblies that are not included by default in .NET Framework -->
-  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
+  <!-- Reference assemblies that are not included by default in .NET Framework / .NET Standard -->
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework' Or '$(TargetFrameworkIdentifier)' == '.NETStandard'">
+    <!-- VersionOverride is used instead of defining the version in Directory.Packages.props 
+         because otherwise CentralPackageTransitivePinningEnabled would override the version for all TFMs -->
     <PackageReference Include="System.Text.Json" VersionOverride="6.0.11" />
+    <PackageReference Include="Microsoft.Bcl.HashCode" VersionOverride="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <PackageReference Include="System.Runtime.InteropServices.RuntimeInformation" />
     <Reference Include="System.Net.Http" />
     <Using Include="System.Net.Http" />
-    <PackageReference Include="Microsoft.Bcl.HashCode" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-    <PackageReference Include="System.Text.Json" VersionOverride="6.0.11" />
-    <PackageReference Include="Microsoft.Bcl.HashCode" />
   </ItemGroup>
 
   <Target Name="LinkPackageReleaseNotes" AfterTargets="MinVer">
