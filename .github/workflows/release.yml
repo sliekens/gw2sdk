@@ -59,6 +59,7 @@ jobs:
         id: login
         with:
           user: ${{ secrets.NUGET_USER }}
+          token-service-url: ${{ vars.NUGET_TOKEN_SERVICE_URL }}
 
       - name: Push package
         run: dotnet nuget push artifacts/package/*.nupkg --source ${{ vars.NUGET_API_URL }} --api-key ${{steps.login.outputs.NUGET_API_KEY}}
@@ -84,6 +85,7 @@ jobs:
         id: login
         with:
           user: ${{ secrets.NUGET_USER }}
+          token-service-url: ${{ vars.NUGET_TOKEN_SERVICE_URL }}
 
       - name: Push package
         run: dotnet nuget push artifacts/package/*.nupkg --source ${{ vars.NUGET_API_URL }} --api-key ${{steps.login.outputs.NUGET_API_KEY}}
