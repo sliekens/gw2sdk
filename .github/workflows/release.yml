@@ -45,6 +45,8 @@ jobs:
     environment:
       name: nuget-integration
       url: ${{ vars.NUGET_GALLERY_URL}}
+    permissions:
+      id-token: write   # Required to request OIDC token for trusted publishing
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v5
@@ -52,8 +54,14 @@ jobs:
           name: package
           path: artifacts/package
 
+      - name: NuGet login
+        uses: NuGet/login@v1
+        id: login
+        with:
+          user: ${{ secrets.NUGET_USER }}
+
       - name: Push package
-        run: dotnet nuget push artifacts/package/*.nupkg --source ${{ vars.NUGET_API_URL }} --api-key ${{ secrets.NUGET_API_KEY }}
+        run: dotnet nuget push artifacts/package/*.nupkg --source ${{ vars.NUGET_API_URL }} --api-key ${{steps.login.outputs.NUGET_API_KEY}}
 
   deploy:
     name: Deploy to NuGet
@@ -62,6 +70,8 @@ jobs:
     environment:
       name: nuget
       url: ${{ vars.NUGET_GALLERY_URL }}
+    permissions:
+      id-token: write   # Required to request OIDC token for trusted publishing
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v5
@@ -69,5 +79,11 @@ jobs:
           name: package
           path: artifacts/package
 
+      - name: NuGet login
+        uses: NuGet/login@v1
+        id: login
+        with:
+          user: ${{ secrets.NUGET_USER }}
+
       - name: Push package
-        run: dotnet nuget push artifacts/package/*.nupkg --source ${{ vars.NUGET_API_URL }} --api-key ${{ secrets.NUGET_API_KEY }}
+        run: dotnet nuget push artifacts/package/*.nupkg --source ${{ vars.NUGET_API_URL }} --api-key ${{steps.login.outputs.NUGET_API_KEY}}
