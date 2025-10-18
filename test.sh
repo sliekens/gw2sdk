@@ -8,7 +8,7 @@ rm -r artifacts/bin/GW2SDK.Tests/debug_net10.0/TestResults/* || true
 # e.g. ./test.sh -- --filter-class *Colors
 dotnet run --project tests/GW2SDK.Tests --framework net10.0 -- \
     --coverage \
-    --coverage-settings tests/GW2SDK.Tests/coverage.settings \
+    --coverage-settings tests/coverage.settings \
     --coverage-output coverage.xml \
     "$@"
 

@@ -5,7 +5,7 @@ Remove-Item -ErrorAction Ignore -Recurse artifacts/bin/GW2SDK.Tests/debug_net10.
 # e.g. ./test.ps1 -- --filter-class *Colors
 dotnet run --project tests/GW2SDK.Tests --framework net10.0 -- `
     --coverage `
-    --coverage-settings tests/GW2SDK.Tests/coverage.settings `
+    --coverage-settings tests/coverage.settings `
     --coverage-output coverage.xml `
     @args
 

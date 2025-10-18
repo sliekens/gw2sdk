@@ -60,4 +60,10 @@
   <ItemGroup>
     <GlobalAnalyzerConfigFiles Include ="$(MSBuildThisFileDirectory)/analyzers/*" />
   </ItemGroup>
+
+  <!-- Testing -->
+  <PropertyGroup>
+    <!-- https://learn.microsoft.com/en-us/dotnet/core/testing/migrating-vstest-microsoft-testing-platform -->
+    <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
+  </PropertyGroup>
 </Project>
