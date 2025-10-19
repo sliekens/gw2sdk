@@ -2,7 +2,13 @@
   "name": "GW2SDK",
   "image": "ghcr.io/sliekens/gw2sdk/devcontainer",
   "features": {
-    "ghcr.io/devcontainers/features/powershell:1": {}
+    "ghcr.io/devcontainers/features/powershell:1": {},
+    "ghcr.io/jsburckhardt/devcontainer-features/opencode:1": {},
+    "ghcr.io/jsburckhardt/devcontainer-features/uv:1": {},
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "22",
+      "pnpmVersion": "none"
+    }
   },
   "onCreateCommand": "sudo chown -R vscode:vscode /home/vscode/.nuget /home/vscode/.microsoft",
   "postCreateCommand": {
@@ -10,6 +16,8 @@
     "alias httprepl": "echo \"alias httprepl='dotnet httprepl https://api.guildwars2.com'\" >> ~/.bashrc"
   },
   "postStartCommand": {
+    "speckit-cli": "uv tool install specify-cli --from git+https://github.com/github/spec-kit.git",
+    "copilot-cli": "npm install -g @github/copilot",
     "dotnet restore": "dotnet restore",
     "dotnet tool restore": "dotnet tool restore"
   },
