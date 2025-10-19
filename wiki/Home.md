@@ -7,3 +7,4 @@ Welcome to the wiki for contributors!
 - [[PC requirements]]
 - [[Solution layout]]
 - [[Configure API keys]]
+- [[Spec development]]
