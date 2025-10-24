@@ -1,18 +1,19 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
+
 namespace GuildWars2.Tests.Features.Guilds.Search;
 
 public class GuildsByName
 {
-    [Fact]
+
+    [Test]
+
     public async Task Is_not_empty()
     {
+
         Gw2Client sut = Composer.Resolve<Gw2Client>();
 
-        (HashSet<string> actual, _) = await sut.Guilds.GetGuildsByName(
-            "ArenaNet",
-            TestContext.Current.CancellationToken
-        );
+        (HashSet<string> actual, _) = await sut.Guilds.GetGuildsByName("ArenaNet", TestContext.Current!.CancellationToken);
 
         string? guild = Assert.Single(actual);
 

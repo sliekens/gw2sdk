@@ -1,24 +1,23 @@
 ﻿using GuildWars2.Exploration.Floors;
+
 using GuildWars2.Tests.TestInfrastructure;
+
 
 namespace GuildWars2.Tests.Features.Exploration.Floors;
 
 public class FloorsByPage
 {
-    [Fact]
+
+    [Test]
+
     public async Task Can_be_filtered_by_page()
     {
+
         Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         const int continentId = 1;
         const int pageSize = 3;
-        (HashSet<Floor> actual, MessageContext context) = await sut.Exploration.GetFloorsByPage(
-            continentId,
-            0,
-            pageSize,
-            cancellationToken: TestContext.Current.CancellationToken
-        );
-
+        (HashSet<Floor> actual, MessageContext context) = await sut.Exploration.GetFloorsByPage(continentId, 0, pageSize, cancellationToken: TestContext.Current!.CancellationToken);
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);
         Assert.Equal(pageSize, context.ResultCount);

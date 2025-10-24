@@ -2,63 +2,61 @@
 
 using GuildWars2.Tests.TestInfrastructure;
 
+
 namespace GuildWars2.Tests.PatternsAndPractices;
 
-public class DesignedForInheritanceTest(AssemblyFixture fixture) : IClassFixture<AssemblyFixture>
+[ClassDataSource<GuildWars2.Tests.TestInfrastructure.AssemblyFixture>(Shared = SharedType.PerClass)]
+
+public class DesignedForInheritanceTest(AssemblyFixture fixture)
 {
-    [Fact]
+
+    [Test]
+
     public void Every_exported_class_is_designed_for_inheritance_or_sealed()
     {
         /*
          * The goal of this test is to ensure that all unsealed types are designed for inheritance.
          */
+
         List<Type> classes = [.. fixture.Assembly.ExportedTypes.Where(type => type.IsClass)];
-        Assert.All(
-            classes,
-            type =>
+
+        Assert.All(classes, type =>
+        {
+            if (type.IsAbstract)
             {
-                if (type.IsAbstract)
-                {
-                    return;
-                }
-
-                if (type.IsSealed)
-                {
-                    return;
-                }
-
-                if (type.GetCustomAttributes()
-                    .Any(att => att.GetType().Name == "InheritableAttribute"))
-                {
-                    return;
-                }
-
-                throw new InvalidOperationException(
-                    $"Type '{type}' is not abstract nor sealed, check if it needs to be abstract or sealed or marked as [Inheritable]."
-                );
+                return;
             }
-        );
+
+            if (type.IsSealed)
+            {
+                return;
+            }
+
+            if (type.GetCustomAttributes().Any(att => att.GetType().Name == "InheritableAttribute"))
+            {
+                return;
+            }
+
+            throw new InvalidOperationException($"Type '{type}' is not abstract nor sealed, check if it needs to be abstract or sealed or marked as [Inheritable].");
+        });
     }
 
-    [Fact]
+    [Test]
+
     public void Every_exported_class_with_InheritableAttribute_has_a_subtype()
     {
+
         List<Type> classes = [.. fixture.Assembly.ExportedTypes.Where(type => type.IsClass)];
-        List<Type> inheritableClasses = [.. classes.Where(type =>
-                type.GetCustomAttributes().Any(att => att.GetType().Name == "InheritableAttribute")
-            )];
-        Assert.All(
-            inheritableClasses,
-            type =>
+
+        List<Type> inheritableClasses = [.. classes.Where(type => type.GetCustomAttributes().Any(att => att.GetType().Name == "InheritableAttribute"))];
+
+        Assert.All(inheritableClasses, type =>
+        {
+            List<Type> subtypes = [.. classes.Where(subtype => subtype.IsSubclassOf(type))];
+            if (subtypes.Count == 0)
             {
-                List<Type> subtypes = [.. classes.Where(subtype => subtype.IsSubclassOf(type))];
-                if (subtypes.Count == 0)
-                {
-                    throw new InvalidOperationException(
-                        $"Type '{type}' is marked as [Inheritable] but has no subtypes."
-                    );
-                }
+                throw new InvalidOperationException($"Type '{type}' is marked as [Inheritable] but has no subtypes.");
             }
-        );
+        });
     }
 }

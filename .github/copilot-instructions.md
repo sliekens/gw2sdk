@@ -22,7 +22,7 @@ Multi-targeted .NET library. Targets: net9.0, net8.0, netstandard2.0, net462. Fa
 - Avoid per-call / per-iteration allocations; use spans/pooling/stack allocation when it yields a clear benefit.
 - Serialization: `System.Text.Json`; follow existing converter patterns.
 - XML docs: one-line `<summary>` with standalone first sentence; `<remarks>` only when necessary.
-- Tests: xUnit, deterministic, allocation-aware; prefer data-driven theories when clearer.
+- Tests: TUnit, deterministic, allocation-aware; prefer data-driven theories when clearer.
 - No global usings beyond what already exists.
 
 ## Reviewing existing code

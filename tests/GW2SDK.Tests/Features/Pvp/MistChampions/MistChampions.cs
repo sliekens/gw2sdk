@@ -1,30 +1,32 @@
 ﻿using GuildWars2.Pvp.MistChampions;
+
 using GuildWars2.Tests.TestInfrastructure;
+
 
 namespace GuildWars2.Tests.Features.Pvp.MistChampions;
 
 public class MistChampions
 {
-    [Fact]
+
+    [Test]
+
     public async Task Can_be_listed()
     {
+
         Gw2Client sut = Composer.Resolve<Gw2Client>();
 
-        (HashSet<MistChampion> actual, MessageContext context) =
-            await sut.Pvp.GetMistChampions(
-                cancellationToken: TestContext.Current.CancellationToken
-            );
+        (HashSet<MistChampion> actual, MessageContext context) = await sut.Pvp.GetMistChampions(cancellationToken: TestContext.Current!.CancellationToken);
 
         Assert.NotEmpty(actual);
+
         Assert.Equal(context.ResultCount, actual.Count);
+
         Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(
-            actual,
-            entry =>
-            {
-                Assert.NotEmpty(entry.Id);
-                Assert.NotEmpty(entry.Name);
-            }
-        );
+
+        Assert.All(actual, entry =>
+        {
+            Assert.NotEmpty(entry.Id);
+            Assert.NotEmpty(entry.Name);
+        });
     }
 }

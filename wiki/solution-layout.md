@@ -44,7 +44,7 @@ can run offline. This approach is used to avoid hitting the API too much during
 testing, and to avoid having to mock the API. It can be executed with `pwsh
 Invoke-TestDataHelper.ps1` from the root of the repository.
 
-The **GW2SDK.Tests** project contains xUnit v3 tests for the main project. It
+The **GW2SDK.Tests** project contains TUnit tests for the main project. It
 contains mostly integrations tests which use the real API, one test per API
 endpoint. It contains relatively few unit tests, because the integration test
 usually covers all the logic. The **coverage.settings** file is used to
@@ -124,7 +124,7 @@ The **GW2SDK** project depends on the following projects:
 
 The **GW2SDK** project has the following development dependencies:
 
-- **xunit** is used for automated testing.
+- **TUnit** is used for automated testing.
 - **ReportGenerator** (dotnet reportgenerator) is used to generate a code
  coverage report locally (offline).
 - **Codecov** is used to generate an online code coverage report. It has

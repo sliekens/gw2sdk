@@ -1,30 +1,30 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
+
 namespace GuildWars2.Tests.Features.Hero.Banking;
 
 public class MaterialStorage
 {
-    [Fact]
+
+    [Test]
+
     public async Task Can_be_listed()
     {
+
         Gw2Client sut = Composer.Resolve<Gw2Client>();
+
         ApiKey accessToken = TestConfiguration.ApiKey;
 
-        (GuildWars2.Hero.Banking.MaterialStorage actual, _) = await sut.Hero.Bank.GetMaterialStorage(
-            accessToken.Key,
-            cancellationToken: TestContext.Current.CancellationToken
-        );
+        (GuildWars2.Hero.Banking.MaterialStorage actual, _) = await sut.Hero.Bank.GetMaterialStorage(accessToken.Key, cancellationToken: TestContext.Current!.CancellationToken);
 
         Assert.NotEmpty(actual.Materials);
-        Assert.All(
-            actual.Materials,
-            entry =>
-            {
-                Assert.True(entry.ItemId > 0);
-                Assert.True(entry.CategoryId > 0);
-                Assert.True(entry.Binding.IsDefined());
-                Assert.True(entry.Count >= 0);
-            }
-        );
+
+        Assert.All(actual.Materials, entry =>
+        {
+            Assert.True(entry.ItemId > 0);
+            Assert.True(entry.CategoryId > 0);
+            Assert.True(entry.Binding.IsDefined());
+            Assert.True(entry.Count >= 0);
+        });
     }
 }

@@ -1,464 +1,412 @@
 ﻿using GuildWars2.Chat;
+
 using GuildWars2.Hero;
+
 using GuildWars2.Hero.Builds;
+
 using GuildWars2.Hero.Builds.Facts;
+
 using GuildWars2.Hero.Builds.Skills;
+
 using GuildWars2.Tests.Features.Markup;
+
 using GuildWars2.Tests.TestInfrastructure;
 
 using Range = GuildWars2.Hero.Builds.Facts.Range;
+
 
 namespace GuildWars2.Tests.Features.Hero.Builds;
 
 public class Skills
 {
-    [Fact]
+
+    [Test]
+
     public async Task Can_be_listed()
     {
+
         Gw2Client sut = Composer.Resolve<Gw2Client>();
 
-        (HashSet<Skill> actual, MessageContext context) =
-            await sut.Hero.Builds.GetSkills(
-                cancellationToken: TestContext.Current.CancellationToken
-            );
+        (HashSet<Skill> actual, MessageContext context) = await sut.Hero.Builds.GetSkills(cancellationToken: TestContext.Current!.CancellationToken);
 
         Assert.Equal(context.ResultCount, actual.Count);
+
         Assert.Equal(context.ResultTotal, actual.Count);
+
         Assert.NotEmpty(actual);
-        Assert.All(
-            actual,
-            skill =>
+
+        Assert.All(actual, skill =>
+        {
+            Assert.True(skill.Id > 0);
+            Assert.Empty(skill.SkillFlags.Other);
+            if (skill is ActionSkill action)
             {
-                Assert.True(skill.Id > 0);
-                Assert.Empty(skill.SkillFlags.Other);
-
-                if (skill is ActionSkill action)
+                Assert.NotNull(action.Name);
+                Assert.NotNull(action.Description);
+                MarkupSyntaxValidator.Validate(action.Description);
+                Assert.True(action.IconUrl is null or { IsAbsoluteUri: true });
+                Assert.NotEmpty(action.Professions);
+                Assert.All(action.Professions, profession => Assert.True(profession.IsDefined()));
+                Assert.True(action.WeaponType.IsDefined());
+                Assert.True(action.Slot.IsDefined());
+                if (action.FlipSkillId.HasValue)
                 {
-                    Assert.NotNull(action.Name);
-                    Assert.NotNull(action.Description);
-                    MarkupSyntaxValidator.Validate(action.Description);
-                    Assert.True(action.IconUrl is null or { IsAbsoluteUri: true });
-                    Assert.NotEmpty(action.Professions);
-                    Assert.All(
-                        action.Professions,
-                        profession => Assert.True(profession.IsDefined())
-                    );
-                    Assert.True(action.WeaponType.IsDefined());
-                    Assert.True(action.Slot.IsDefined());
+                    Assert.True(action.FlipSkillId.Value > 0);
+                }
 
-                    if (action.FlipSkillId.HasValue)
-                    {
-                        Assert.True(action.FlipSkillId.Value > 0);
-                    }
+                if (action.NextSkillId.HasValue)
+                {
+                    Assert.True(action.NextSkillId.Value > 0);
+                }
 
-                    if (action.NextSkillId.HasValue)
-                    {
-                        Assert.True(action.NextSkillId.Value > 0);
-                    }
+                if (action.PreviousSkillId.HasValue)
+                {
+                    Assert.True(action.PreviousSkillId.Value > 0);
+                }
 
-                    if (action.PreviousSkillId.HasValue)
-                    {
-                        Assert.True(action.PreviousSkillId.Value > 0);
-                    }
+                if (action.SpecializationId.HasValue)
+                {
+                    Assert.True(action.SpecializationId.Value > 0);
+                }
 
-                    if (action.SpecializationId.HasValue)
-                    {
-                        Assert.True(action.SpecializationId.Value > 0);
-                    }
+                switch (action)
+                {
+                    case WeaponSkill weaponSkill:
+                        if (weaponSkill.Attunement.HasValue)
+                        {
+                            Assert.Single(weaponSkill.Professions, profession => profession == ProfessionName.Elementalist);
+                            Assert.True(weaponSkill.Attunement.Value.IsDefined());
+                        }
 
-                    switch (action)
-                    {
-                        case WeaponSkill weaponSkill:
-                            if (weaponSkill.Attunement.HasValue)
+                        if (weaponSkill.DualAttunement.HasValue)
+                        {
+                            Assert.Single(weaponSkill.Professions, profession => profession == ProfessionName.Elementalist);
+                            Assert.True(weaponSkill.DualAttunement.Value.IsDefined());
+                            Assert.True(weaponSkill.Attunement.HasValue);
+                        }
+
+                        if (weaponSkill.Cost.HasValue)
+                        {
+                            Assert.True(weaponSkill.Cost.Value > 0);
+                        }
+
+                        if (weaponSkill.Offhand.HasValue)
+                        {
+                            Assert.True(weaponSkill.Offhand.Value.IsDefined());
+                        }
+
+                        if (weaponSkill.Initiative.HasValue)
+                        {
+                            Assert.Single(weaponSkill.Professions, profession => profession == ProfessionName.Thief);
+                            Assert.True(weaponSkill.Initiative.Value > 0);
+                        }
+
+                        break;
+                    case SlotSkill slotSkill:
+                        if (slotSkill.ToolbeltSkillId.HasValue)
+                        {
+                            Assert.Single(slotSkill.Professions, profession => profession == ProfessionName.Engineer);
+                            Assert.True(slotSkill.ToolbeltSkillId.Value > 0);
+                        }
+
+                        if (slotSkill.Attunement.HasValue)
+                        {
+                            Assert.Single(slotSkill.Professions, profession => profession == ProfessionName.Elementalist);
+                            Assert.True(slotSkill.Attunement.Value.IsDefined());
+                        }
+
+                        if (slotSkill.Cost.HasValue)
+                        {
+                            Assert.True(slotSkill.Cost.Value > 0);
+                        }
+
+                        if (slotSkill.BundleSkillIds is not null)
+                        {
+                            Assert.All(slotSkill.BundleSkillIds, id => Assert.True(id > 0));
+                        }
+
+                        if (slotSkill.SubskillIds is not null)
+                        {
+                            Assert.NotEmpty(slotSkill.SubskillIds);
+                            Assert.All(slotSkill.SubskillIds, subskill =>
                             {
-                                Assert.Single(
-                                    weaponSkill.Professions,
-                                    profession => profession == ProfessionName.Elementalist
-                                );
-                                Assert.True(weaponSkill.Attunement.Value.IsDefined());
+                                Assert.True(subskill.Id > 0);
+                                if (subskill.Attunement.HasValue)
+                                {
+                                    Assert.Single(slotSkill.Professions, profession => profession == ProfessionName.Elementalist);
+                                    Assert.True(subskill.Attunement.Value.IsDefined());
+                                }
+
+                                if (subskill.Form.HasValue)
+                                {
+                                    Assert.Single(slotSkill.Professions, profession => profession == ProfessionName.Ranger);
+                                    Assert.True(subskill.Form.Value.IsDefined());
+                                }
+                            });
+                        }
+
+                        if (slotSkill is EliteSkill { TransformSkillIds: not null } elite)
+                        {
+                            Assert.NotEmpty(elite.TransformSkillIds);
+                            Assert.All(elite.TransformSkillIds, id => Assert.True(id > 0));
+                        }
+
+                        break;
+                    case ProfessionSkill professionSkill:
+                        if (professionSkill.Attunement.HasValue)
+                        {
+                            Assert.Single(professionSkill.Professions, profession => profession == ProfessionName.Elementalist);
+                            Assert.True(professionSkill.Attunement.Value.IsDefined());
+                        }
+
+                        if (professionSkill.Cost.HasValue)
+                        {
+                            Assert.True(professionSkill.Cost.Value > 0);
+                        }
+
+                        if (professionSkill.TransformSkills is not null)
+                        {
+                            Assert.NotEmpty(professionSkill.TransformSkills);
+                            Assert.All(professionSkill.TransformSkills, id => Assert.True(id > 0));
+                        }
+
+                        break;
+                    case BundleSkill bundleSkill:
+                        // Nothing to verify
+                        break;
+                    case ToolbeltSkill toolbeltSkill:
+                        // Nothing to verify
+                        break;
+                    case LockedSkill lockedSkill:
+                        // Nothing to verify
+                        break;
+                    case MonsterSkill monsterSkill:
+                        // Nothing to verify
+                        break;
+                    case PetSkill petSkill:
+                        // Nothing to verify
+                        break;
+                    default:
+                        Assert.Fail($"Unexpected action skill type: {action.GetType().Name}");
+                        break;
+                }
+            }
+            else
+            {
+                Assert.NotNull(skill.Name);
+                Assert.NotNull(skill.Description);
+                MarkupSyntaxValidator.Validate(skill.Description);
+                Assert.True(skill.IconUrl is null or { IsAbsoluteUri: true });
+            }
+
+            if (skill.Facts is not null)
+            {
+                Assert.All(skill.Facts, fact =>
+                {
+                    Assert.NotNull(fact.Text);
+                    MarkupSyntaxValidator.Validate(fact.Text);
+                    Assert.True(fact.IconUrl is null or { IsAbsoluteUri: true });
+                    switch (fact)
+                    {
+                        case AttributeAdjustment attributeAdjustment:
+                            if (attributeAdjustment.Target.HasValue)
+                            {
+                                Assert.True(attributeAdjustment.Target.Value.IsDefined());
                             }
 
-                            if (weaponSkill.DualAttunement.HasValue)
+                            if (attributeAdjustment.Value.HasValue)
                             {
-                                Assert.Single(
-                                    weaponSkill.Professions,
-                                    profession => profession == ProfessionName.Elementalist
-                                );
-                                Assert.True(weaponSkill.DualAttunement.Value.IsDefined());
-                                Assert.True(weaponSkill.Attunement.HasValue);
+                                Assert.True(attributeAdjustment.Value.Value > 0);
                             }
 
-                            if (weaponSkill.Cost.HasValue)
+                            if (attributeAdjustment.HitCount.HasValue)
                             {
-                                Assert.True(weaponSkill.Cost.Value > 0);
-                            }
-
-                            if (weaponSkill.Offhand.HasValue)
-                            {
-                                Assert.True(weaponSkill.Offhand.Value.IsDefined());
-                            }
-
-                            if (weaponSkill.Initiative.HasValue)
-                            {
-                                Assert.Single(
-                                    weaponSkill.Professions,
-                                    profession => profession == ProfessionName.Thief
-                                );
-                                Assert.True(weaponSkill.Initiative.Value > 0);
+                                Assert.True(attributeAdjustment.HitCount.Value > 0);
                             }
 
                             break;
-                        case SlotSkill slotSkill:
-                            if (slotSkill.ToolbeltSkillId.HasValue)
+                        case AttributeConversion attributeConversion:
+                            Assert.True(attributeConversion.Percent > 0);
+                            Assert.True(attributeConversion.Source.IsDefined());
+                            Assert.True(attributeConversion.Target.IsDefined());
+                            Assert.NotEqual(attributeConversion.Source, attributeConversion.Target);
+                            break;
+                        case Buff buff:
+                            Assert.NotEmpty(buff.Status);
+                            Assert.NotNull(buff.Description);
+                            MarkupSyntaxValidator.Validate(buff.Description);
+                            if (buff.ApplyCount.HasValue)
                             {
-                                Assert.Single(
-                                    slotSkill.Professions,
-                                    profession => profession == ProfessionName.Engineer
-                                );
-                                Assert.True(slotSkill.ToolbeltSkillId.Value > 0);
+                                Assert.True(buff.ApplyCount.Value >= 0);
                             }
 
-                            if (slotSkill.Attunement.HasValue)
+                            if (buff.Duration.HasValue)
                             {
-                                Assert.Single(
-                                    slotSkill.Professions,
-                                    profession => profession == ProfessionName.Elementalist
-                                );
-                                Assert.True(slotSkill.Attunement.Value.IsDefined());
-                            }
-
-                            if (slotSkill.Cost.HasValue)
-                            {
-                                Assert.True(slotSkill.Cost.Value > 0);
-                            }
-
-                            if (slotSkill.BundleSkillIds is not null)
-                            {
-                                Assert.All(slotSkill.BundleSkillIds, id => Assert.True(id > 0));
-                            }
-
-                            if (slotSkill.SubskillIds is not null)
-                            {
-                                Assert.NotEmpty(slotSkill.SubskillIds);
-                                Assert.All(
-                                    slotSkill.SubskillIds,
-                                    subskill =>
-                                    {
-                                        Assert.True(subskill.Id > 0);
-
-                                        if (subskill.Attunement.HasValue)
-                                        {
-                                            Assert.Single(
-                                                slotSkill.Professions,
-                                                profession =>
-                                                    profession == ProfessionName.Elementalist
-                                            );
-                                            Assert.True(subskill.Attunement.Value.IsDefined());
-                                        }
-
-                                        if (subskill.Form.HasValue)
-                                        {
-                                            Assert.Single(
-                                                slotSkill.Professions,
-                                                profession => profession == ProfessionName.Ranger
-                                            );
-                                            Assert.True(subskill.Form.Value.IsDefined());
-                                        }
-                                    }
-                                );
-                            }
-
-                            if (slotSkill is EliteSkill { TransformSkillIds: not null } elite)
-                            {
-                                Assert.NotEmpty(elite.TransformSkillIds);
-                                Assert.All(elite.TransformSkillIds, id => Assert.True(id > 0));
+                                Assert.True(buff.Duration.Value >= TimeSpan.Zero);
                             }
 
                             break;
-                        case ProfessionSkill professionSkill:
-                            if (professionSkill.Attunement.HasValue)
-                            {
-                                Assert.Single(
-                                    professionSkill.Professions,
-                                    profession => profession == ProfessionName.Elementalist
-                                );
-                                Assert.True(professionSkill.Attunement.Value.IsDefined());
-                            }
-
-                            if (professionSkill.Cost.HasValue)
-                            {
-                                Assert.True(professionSkill.Cost.Value > 0);
-                            }
-
-                            if (professionSkill.TransformSkills is not null)
-                            {
-                                Assert.NotEmpty(professionSkill.TransformSkills);
-                                Assert.All(
-                                    professionSkill.TransformSkills,
-                                    id => Assert.True(id > 0)
-                                );
-                            }
-
+                        case ComboField comboField:
+                            Assert.True(comboField.Field.IsDefined());
                             break;
-                        case BundleSkill bundleSkill:
+                        case ComboFinisher comboFinisher:
+                            Assert.True(comboFinisher.Percent > 0);
+                            Assert.True(comboFinisher.FinisherName.IsDefined());
+                            break;
+                        case Damage damage:
+                            Assert.True(damage.HitCount > 0);
+                            Assert.True(damage.DamageMultiplier > 0);
+                            break;
+                        case Distance distance:
+                            Assert.True(distance.Length >= 0);
+                            break;
+                        case Duration duration:
+                            Assert.True(duration.Length > TimeSpan.Zero);
+                            break;
+                        case HealingAdjust adjustment:
+                            Assert.True(adjustment.HitCount > 0);
+                            break;
+                        case Number number:
+                            Assert.True(number.Value >= 0);
+                            break;
+                        case Radius radius:
+                            Assert.True(radius.Distance > 0);
+                            break;
+                        case Range range:
+                            Assert.True(range.Distance > 0);
+                            break;
+                        case Recharge recharge:
+                            Assert.True(recharge.Duration > TimeSpan.Zero);
+                            break;
+                        case Time time:
+                            Assert.True(time.Duration >= TimeSpan.Zero);
+                            break;
+                        case Unblockable unblockable:
                             // Nothing to verify
                             break;
-                        case ToolbeltSkill toolbeltSkill:
+                        case NoData noData:
                             // Nothing to verify
                             break;
-                        case LockedSkill lockedSkill:
+                        case StunBreak stunBreak:
                             // Nothing to verify
                             break;
-                        case MonsterSkill monsterSkill:
-                            // Nothing to verify
+                        case Percentage percentage:
+                            Assert.InRange(percentage.Percent, -100, 500);
                             break;
-                        case PetSkill petSkill:
-                            // Nothing to verify
+                        case Fact baseFact:
+                            // This handles the base Fact type - nothing specific to verify
                             break;
                         default:
-                            Assert.Fail(
-                                $"Unexpected action skill type: {action.GetType().Name}"
-                            );
+                            Assert.Fail($"Unexpected fact type: {fact.GetType().Name}");
                             break;
                     }
-                }
-                else
-                {
-                    Assert.NotNull(skill.Name);
-                    Assert.NotNull(skill.Description);
-                    MarkupSyntaxValidator.Validate(skill.Description);
-                    Assert.True(skill.IconUrl is null or { IsAbsoluteUri: true });
-                }
-
-                if (skill.Facts is not null)
-                {
-                    Assert.All(
-                        skill.Facts,
-                        fact =>
-                        {
-                            Assert.NotNull(fact.Text);
-                            MarkupSyntaxValidator.Validate(fact.Text);
-                            Assert.True(fact.IconUrl is null or { IsAbsoluteUri: true });
-
-                            switch (fact)
-                            {
-                                case AttributeAdjustment attributeAdjustment:
-                                    if (attributeAdjustment.Target.HasValue)
-                                    {
-                                        Assert.True(attributeAdjustment.Target.Value.IsDefined());
-                                    }
-
-                                    if (attributeAdjustment.Value.HasValue)
-                                    {
-                                        Assert.True(attributeAdjustment.Value.Value > 0);
-                                    }
-
-                                    if (attributeAdjustment.HitCount.HasValue)
-                                    {
-                                        Assert.True(attributeAdjustment.HitCount.Value > 0);
-                                    }
-
-                                    break;
-                                case AttributeConversion attributeConversion:
-                                    Assert.True(attributeConversion.Percent > 0);
-                                    Assert.True(attributeConversion.Source.IsDefined());
-                                    Assert.True(attributeConversion.Target.IsDefined());
-                                    Assert.NotEqual(
-                                        attributeConversion.Source,
-                                        attributeConversion.Target
-                                    );
-                                    break;
-                                case Buff buff:
-                                    Assert.NotEmpty(buff.Status);
-                                    Assert.NotNull(buff.Description);
-                                    MarkupSyntaxValidator.Validate(buff.Description);
-
-                                    if (buff.ApplyCount.HasValue)
-                                    {
-                                        Assert.True(buff.ApplyCount.Value >= 0);
-                                    }
-
-                                    if (buff.Duration.HasValue)
-                                    {
-                                        Assert.True(buff.Duration.Value >= TimeSpan.Zero);
-                                    }
-
-                                    break;
-                                case ComboField comboField:
-                                    Assert.True(comboField.Field.IsDefined());
-                                    break;
-                                case ComboFinisher comboFinisher:
-                                    Assert.True(comboFinisher.Percent > 0);
-                                    Assert.True(comboFinisher.FinisherName.IsDefined());
-                                    break;
-                                case Damage damage:
-                                    Assert.True(damage.HitCount > 0);
-                                    Assert.True(damage.DamageMultiplier > 0);
-                                    break;
-                                case Distance distance:
-                                    Assert.True(distance.Length >= 0);
-                                    break;
-                                case Duration duration:
-                                    Assert.True(duration.Length > TimeSpan.Zero);
-                                    break;
-                                case HealingAdjust adjustment:
-                                    Assert.True(adjustment.HitCount > 0);
-                                    break;
-                                case Number number:
-                                    Assert.True(number.Value >= 0);
-                                    break;
-                                case Radius radius:
-                                    Assert.True(radius.Distance > 0);
-                                    break;
-                                case Range range:
-                                    Assert.True(range.Distance > 0);
-                                    break;
-                                case Recharge recharge:
-                                    Assert.True(recharge.Duration > TimeSpan.Zero);
-                                    break;
-                                case Time time:
-                                    Assert.True(time.Duration >= TimeSpan.Zero);
-                                    break;
-                                case Unblockable unblockable:
-                                    // Nothing to verify
-                                    break;
-                                case NoData noData:
-                                    // Nothing to verify
-                                    break;
-                                case StunBreak stunBreak:
-                                    // Nothing to verify
-                                    break;
-                                case Percentage percentage:
-                                    Assert.InRange(percentage.Percent, -100, 500);
-                                    break;
-                                case Fact baseFact:
-                                    // This handles the base Fact type - nothing specific to verify
-                                    break;
-                                default:
-                                    Assert.Fail(
-                                        $"Unexpected fact type: {fact.GetType().Name}"
-                                    );
-                                    break;
-                            }
-                        }
-                    );
-                }
-
-                if (skill.TraitedFacts is not null)
-                {
-                    Assert.All(
-                        skill.TraitedFacts,
-                        fact =>
-                        {
-                            Assert.True(fact.RequiresTrait > 0);
-                            Assert.NotNull(fact.Fact.Text);
-                            MarkupSyntaxValidator.Validate(fact.Fact.Text);
-                            Assert.True(fact.Fact.IconUrl is null or { IsAbsoluteUri: true });
-                            switch (fact.Fact)
-                            {
-                                case AttributeAdjustment attributeAdjustment:
-                                    if (attributeAdjustment.Target.HasValue)
-                                    {
-                                        Assert.True(attributeAdjustment.Target.Value.IsDefined());
-                                    }
-
-                                    if (attributeAdjustment.Value.HasValue)
-                                    {
-                                        Assert.True(attributeAdjustment.Value.Value > 0);
-                                    }
-
-                                    if (attributeAdjustment.HitCount.HasValue)
-                                    {
-                                        Assert.True(attributeAdjustment.HitCount.Value > 0);
-                                    }
-
-                                    break;
-                                case AttributeConversion attributeConversion:
-                                    Assert.True(attributeConversion.Percent > 0);
-                                    Assert.True(attributeConversion.Source.IsDefined());
-                                    Assert.True(attributeConversion.Target.IsDefined());
-                                    Assert.NotEqual(
-                                        attributeConversion.Source,
-                                        attributeConversion.Target
-                                    );
-                                    break;
-                                case Buff buff:
-                                    Assert.NotNull(buff.Status);
-                                    Assert.NotNull(buff.Description);
-                                    MarkupSyntaxValidator.Validate(buff.Description);
-
-                                    if (buff.ApplyCount.HasValue)
-                                    {
-                                        Assert.True(buff.ApplyCount.Value >= 0);
-                                    }
-
-                                    if (buff.Duration.HasValue)
-                                    {
-                                        Assert.True(buff.Duration.Value >= TimeSpan.Zero);
-                                    }
-
-                                    break;
-                                case ComboField comboField:
-                                    Assert.True(comboField.Field.IsDefined());
-                                    break;
-                                case ComboFinisher comboFinisher:
-                                    Assert.True(comboFinisher.Percent > 0);
-                                    Assert.True(comboFinisher.FinisherName.IsDefined());
-                                    break;
-                                case Damage damage:
-                                    Assert.True(damage.HitCount > 0);
-                                    Assert.True(damage.DamageMultiplier > 0);
-                                    break;
-                                case Distance distance:
-                                    Assert.True(distance.Length >= 0);
-                                    break;
-                                case Duration duration:
-                                    Assert.True(duration.Length > TimeSpan.Zero);
-                                    break;
-                                case HealingAdjust adjustment:
-                                    Assert.True(adjustment.HitCount > 0);
-                                    break;
-                                case Number number:
-                                    Assert.True(number.Value >= 0);
-                                    break;
-                                case Radius radius:
-                                    Assert.True(radius.Distance > 0);
-                                    break;
-                                case Range range:
-                                    Assert.True(range.Distance > 0);
-                                    break;
-                                case Recharge recharge:
-                                    Assert.True(recharge.Duration > TimeSpan.Zero);
-                                    break;
-                                case Time time:
-                                    Assert.True(time.Duration >= TimeSpan.Zero);
-                                    break;
-                                case NoData noData:
-                                    // Nothing to verify
-                                    break;
-                                case Percentage percentage:
-                                    Assert.InRange(percentage.Percent, -75, 500);
-                                    break;
-                                case Fact baseFact:
-                                    // This handles the base Fact type - nothing specific to verify
-                                    break;
-                                default:
-                                    Assert.Fail(
-                                        $"Unexpected fact type: {fact.Fact.GetType().Name}"
-                                    );
-                                    break;
-                            }
-                        }
-                    );
-                }
-
-                SkillLink chatLink = skill.GetChatLink();
-                Assert.Equal(skill.Id, chatLink.SkillId);
-                Assert.Equal(skill.ChatLink, chatLink.ToString());
-
-                SkillLink chatLinkRoundtrip = SkillLink.Parse(chatLink.ToString());
-                Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
+                });
             }
-        );
+
+            if (skill.TraitedFacts is not null)
+            {
+                Assert.All(skill.TraitedFacts, fact =>
+                {
+                    Assert.True(fact.RequiresTrait > 0);
+                    Assert.NotNull(fact.Fact.Text);
+                    MarkupSyntaxValidator.Validate(fact.Fact.Text);
+                    Assert.True(fact.Fact.IconUrl is null or { IsAbsoluteUri: true });
+                    switch (fact.Fact)
+                    {
+                        case AttributeAdjustment attributeAdjustment:
+                            if (attributeAdjustment.Target.HasValue)
+                            {
+                                Assert.True(attributeAdjustment.Target.Value.IsDefined());
+                            }
+
+                            if (attributeAdjustment.Value.HasValue)
+                            {
+                                Assert.True(attributeAdjustment.Value.Value > 0);
+                            }
+
+                            if (attributeAdjustment.HitCount.HasValue)
+                            {
+                                Assert.True(attributeAdjustment.HitCount.Value > 0);
+                            }
+
+                            break;
+                        case AttributeConversion attributeConversion:
+                            Assert.True(attributeConversion.Percent > 0);
+                            Assert.True(attributeConversion.Source.IsDefined());
+                            Assert.True(attributeConversion.Target.IsDefined());
+                            Assert.NotEqual(attributeConversion.Source, attributeConversion.Target);
+                            break;
+                        case Buff buff:
+                            Assert.NotNull(buff.Status);
+                            Assert.NotNull(buff.Description);
+                            MarkupSyntaxValidator.Validate(buff.Description);
+                            if (buff.ApplyCount.HasValue)
+                            {
+                                Assert.True(buff.ApplyCount.Value >= 0);
+                            }
+
+                            if (buff.Duration.HasValue)
+                            {
+                                Assert.True(buff.Duration.Value >= TimeSpan.Zero);
+                            }
+
+                            break;
+                        case ComboField comboField:
+                            Assert.True(comboField.Field.IsDefined());
+                            break;
+                        case ComboFinisher comboFinisher:
+                            Assert.True(comboFinisher.Percent > 0);
+                            Assert.True(comboFinisher.FinisherName.IsDefined());
+                            break;
+                        case Damage damage:
+                            Assert.True(damage.HitCount > 0);
+                            Assert.True(damage.DamageMultiplier > 0);
+                            break;
+                        case Distance distance:
+                            Assert.True(distance.Length >= 0);
+                            break;
+                        case Duration duration:
+                            Assert.True(duration.Length > TimeSpan.Zero);
+                            break;
+                        case HealingAdjust adjustment:
+                            Assert.True(adjustment.HitCount > 0);
+                            break;
+                        case Number number:
+                            Assert.True(number.Value >= 0);
+                            break;
+                        case Radius radius:
+                            Assert.True(radius.Distance > 0);
+                            break;
+                        case Range range:
+                            Assert.True(range.Distance > 0);
+                            break;
+                        case Recharge recharge:
+                            Assert.True(recharge.Duration > TimeSpan.Zero);
+                            break;
+                        case Time time:
+                            Assert.True(time.Duration >= TimeSpan.Zero);
+                            break;
+                        case NoData noData:
+                            // Nothing to verify
+                            break;
+                        case Percentage percentage:
+                            Assert.InRange(percentage.Percent, -75, 500);
+                            break;
+                        case Fact baseFact:
+                            // This handles the base Fact type - nothing specific to verify
+                            break;
+                        default:
+                            Assert.Fail($"Unexpected fact type: {fact.Fact.GetType().Name}");
+                            break;
+                    }
+                });
+            }
+
+            SkillLink chatLink = skill.GetChatLink();
+            Assert.Equal(skill.Id, chatLink.SkillId);
+            Assert.Equal(skill.ChatLink, chatLink.ToString());
+            SkillLink chatLinkRoundtrip = SkillLink.Parse(chatLink.ToString());
+            Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
+        });
     }
 }

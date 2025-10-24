@@ -13,10 +13,10 @@ updates:
         update-types:
           - minor
           - patch
-      xunit:
+      tunit:
         applies-to: version-updates
         patterns:
-          - "xunit.*"
+          - "tunit*"
         update-types:
           - minor
           - patch
