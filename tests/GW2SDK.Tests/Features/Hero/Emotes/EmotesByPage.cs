@@ -5,18 +5,12 @@ namespace GuildWars2.Tests.Features.Hero.Emotes;
 
 public class EmotesByPage
 {
-    [Fact]
+    [Test]
     public async Task Can_be_filtered_by_page()
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-
         const int pageSize = 3;
-        (HashSet<Emote> actual, MessageContext context) = await sut.Hero.Emotes.GetEmotesByPage(
-            0,
-            pageSize,
-            cancellationToken: TestContext.Current.CancellationToken
-        );
-
+        (HashSet<Emote> actual, MessageContext context) = await sut.Hero.Emotes.GetEmotesByPage(0, pageSize, cancellationToken: TestContext.Current!.CancellationToken);
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);
         Assert.Equal(pageSize, context.ResultCount);

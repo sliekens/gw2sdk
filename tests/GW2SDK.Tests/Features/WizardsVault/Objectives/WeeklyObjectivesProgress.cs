@@ -4,32 +4,24 @@ namespace GuildWars2.Tests.Features.WizardsVault.Objectives;
 
 public class WeeklyObjectivesProgress
 {
-    [Fact]
+    [Test]
     public async Task Can_be_listed()
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
-
-        (GuildWars2.WizardsVault.Objectives.WeeklyObjectivesProgress actual, MessageContext context) = await sut.WizardsVault.GetWeeklyObjectivesProgress(
-            accessToken.Key,
-            cancellationToken: TestContext.Current.CancellationToken
-        );
-
+        (GuildWars2.WizardsVault.Objectives.WeeklyObjectivesProgress actual, MessageContext context) = await sut.WizardsVault.GetWeeklyObjectivesProgress(accessToken.Key, cancellationToken: TestContext.Current!.CancellationToken);
         Assert.True(actual.RewardItemId > 0);
         Assert.True(actual.RewardAcclaim > 0);
         Assert.True(actual.Progress >= 0);
         Assert.True(actual.Goal >= 0);
         Assert.Equal(actual.Progress, actual.Objectives.Count(objective => objective.Claimed));
         Assert.NotEmpty(actual.Objectives);
-        Assert.All(
-            actual.Objectives,
-            objective =>
-            {
-                Assert.True(objective.Id > 0);
-                Assert.NotEmpty(objective.Title);
-                Assert.True(objective.Track.IsDefined());
-                Assert.True(objective.RewardAcclaim > 0);
-            }
-        );
+        Assert.All(actual.Objectives, objective =>
+        {
+            Assert.True(objective.Id > 0);
+            Assert.NotEmpty(objective.Title);
+            Assert.True(objective.Track.IsDefined());
+            Assert.True(objective.RewardAcclaim > 0);
+        });
     }
 }

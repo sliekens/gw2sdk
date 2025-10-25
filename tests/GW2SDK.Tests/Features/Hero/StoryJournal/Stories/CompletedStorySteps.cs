@@ -4,19 +4,13 @@ namespace GuildWars2.Tests.Features.Hero.StoryJournal.Stories;
 
 public class CompletedStorySteps
 {
-    [Fact]
+    [Test]
     public async Task Can_be_listed()
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         TestCharacter character = TestConfiguration.TestCharacter;
         ApiKey accessToken = TestConfiguration.ApiKey;
-
-        (HashSet<int> actual, _) = await sut.Hero.StoryJournal.GetCompletedStorySteps(
-            character.Name,
-            accessToken.Key,
-            TestContext.Current.CancellationToken
-        );
-
+        (HashSet<int> actual, _) = await sut.Hero.StoryJournal.GetCompletedStorySteps(character.Name, accessToken.Key, TestContext.Current!.CancellationToken);
         Assert.NotEmpty(actual);
     }
 }

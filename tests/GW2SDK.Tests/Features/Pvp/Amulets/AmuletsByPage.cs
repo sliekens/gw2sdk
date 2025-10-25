@@ -5,18 +5,12 @@ namespace GuildWars2.Tests.Features.Pvp.Amulets;
 
 public class AmuletsByPage
 {
-    [Fact]
+    [Test]
     public async Task Can_be_filtered_by_page()
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-
         const int pageSize = 3;
-        (HashSet<Amulet> actual, MessageContext context) = await sut.Pvp.GetAmuletsByPage(
-            0,
-            pageSize,
-            cancellationToken: TestContext.Current.CancellationToken
-        );
-
+        (HashSet<Amulet> actual, MessageContext context) = await sut.Pvp.GetAmuletsByPage(0, pageSize, cancellationToken: TestContext.Current!.CancellationToken);
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);
         Assert.Equal(pageSize, context.ResultCount);

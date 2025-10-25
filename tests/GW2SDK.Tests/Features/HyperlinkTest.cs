@@ -2,28 +2,28 @@
 
 public class HyperlinkTest
 {
-    [Fact]
+    [Test]
     public void Null_hyperlink_is_empty()
     {
         Hyperlink sut = new((Uri?)null);
         Assert.True(sut.IsEmpty, "sut.IsEmpty");
     }
 
-    [Fact]
+    [Test]
     public void None_hyperlink_is_empty()
     {
         Hyperlink sut = Hyperlink.None;
         Assert.True(sut.IsEmpty, "sut.IsEmpty");
     }
 
-    [Fact]
+    [Test]
     public void An_actual_hyperlink_is_not_empty()
     {
         Hyperlink sut = new(BaseAddress.DefaultUri);
         Assert.False(sut.IsEmpty, "sut.IsEmpty");
     }
 
-    [Fact]
+    [Test]
     public void Identitcal_hyperlinks_are_equal_by_contents()
     {
         Hyperlink left = new(BaseAddress.DefaultUri);
@@ -31,7 +31,7 @@ public class HyperlinkTest
         Assert.Equal(left, right);
     }
 
-    [Fact]
+    [Test]
     public void Identitcal_hyperlinks_are_equal_by_identity()
     {
         Hyperlink left = new(BaseAddress.DefaultUri);

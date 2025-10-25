@@ -5,19 +5,14 @@ namespace GuildWars2.Tests.Features.Exploration.Maps;
 
 public class MapSummaryById
 {
-    [Theory]
-    [InlineData(15)]
-    [InlineData(17)]
-    [InlineData(18)]
+    [Test]
+    [Arguments(15)]
+    [Arguments(17)]
+    [Arguments(18)]
     public async Task Can_be_found(int id)
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-
-        (MapSummary actual, MessageContext context) = await sut.Exploration.GetMapSummaryById(
-            id,
-            cancellationToken: TestContext.Current.CancellationToken
-        );
-
+        (MapSummary actual, MessageContext context) = await sut.Exploration.GetMapSummaryById(id, cancellationToken: TestContext.Current!.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }

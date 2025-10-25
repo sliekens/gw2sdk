@@ -5,15 +5,11 @@ namespace GuildWars2.Tests.Features.Items.Stats;
 
 public class AttributeCombinations
 {
-    [Fact]
+    [Test]
     public async Task Can_be_listed()
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-
-        (HashSet<AttributeCombination> actual, MessageContext context) = await sut.Items.GetAttributeCombinations(
-            cancellationToken: TestContext.Current.CancellationToken
-        );
-
+        (HashSet<AttributeCombination> actual, MessageContext context) = await sut.Items.GetAttributeCombinations(cancellationToken: TestContext.Current!.CancellationToken);
         Assert.Equal(context.ResultTotal, actual.Count);
     }
 }

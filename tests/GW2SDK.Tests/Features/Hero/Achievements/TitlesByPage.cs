@@ -5,18 +5,12 @@ namespace GuildWars2.Tests.Features.Hero.Achievements;
 
 public class TitlesByPage
 {
-    [Fact]
+    [Test]
     public async Task Can_be_found()
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-
         const int pageSize = 3;
-        (HashSet<Title> actual, MessageContext context) = await sut.Hero.Achievements.GetTitlesByPage(
-            0,
-            pageSize,
-            cancellationToken: TestContext.Current.CancellationToken
-        );
-
+        (HashSet<Title> actual, MessageContext context) = await sut.Hero.Achievements.GetTitlesByPage(0, pageSize, cancellationToken: TestContext.Current!.CancellationToken);
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);
         Assert.Equal(pageSize, context.ResultCount);

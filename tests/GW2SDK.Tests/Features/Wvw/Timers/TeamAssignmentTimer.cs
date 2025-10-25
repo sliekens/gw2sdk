@@ -5,14 +5,11 @@ namespace GuildWars2.Tests.Features.Wvw.Timers;
 
 public class TeamAssignmentTimer
 {
-    [Fact]
+    [Test]
     public async Task Can_be_found()
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-
-        (WvwTimer actual, MessageContext context) =
-            await sut.Wvw.GetTeamAssignmentTimer(TestContext.Current.CancellationToken);
-
+        (WvwTimer actual, MessageContext context) = await sut.Wvw.GetTeamAssignmentTimer(TestContext.Current!.CancellationToken);
         Assert.NotNull(context);
         Assert.True(actual.NorthAmerica > DateTimeOffset.UtcNow);
         Assert.True(actual.Europe > DateTimeOffset.UtcNow);

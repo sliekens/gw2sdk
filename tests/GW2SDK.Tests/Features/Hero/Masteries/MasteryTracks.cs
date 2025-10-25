@@ -6,42 +6,32 @@ namespace GuildWars2.Tests.Features.Hero.Masteries;
 
 public class MasteryTracks
 {
-    [Fact]
+    [Test]
     public async Task Can_be_listed()
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-
-        (HashSet<MasteryTrack> actual, MessageContext context) = await sut.Hero.Masteries.GetMasteryTracks(
-            cancellationToken: TestContext.Current.CancellationToken
-        );
-
+        (HashSet<MasteryTrack> actual, MessageContext context) = await sut.Hero.Masteries.GetMasteryTracks(cancellationToken: TestContext.Current!.CancellationToken);
         Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(
-            actual,
-            mastery =>
+        Assert.All(actual, mastery =>
+        {
+            Assert.True(mastery.Id > 0);
+            Assert.NotEmpty(mastery.Name);
+            Assert.NotNull(mastery.Requirement);
+            Assert.True(mastery.Order >= 0);
+            Assert.NotEmpty(mastery.BackgroundHref);
+            Assert.True(mastery.Region.IsDefined());
+            Assert.NotEqual(MasteryRegionName.Unknown, mastery.Region);
+            Assert.All(mastery.Masteries, level =>
             {
-                Assert.True(mastery.Id > 0);
-                Assert.NotEmpty(mastery.Name);
-                Assert.NotNull(mastery.Requirement);
-                Assert.True(mastery.Order >= 0);
-                Assert.NotEmpty(mastery.BackgroundHref);
-                Assert.True(mastery.Region.IsDefined());
-                Assert.NotEqual(MasteryRegionName.Unknown, mastery.Region);
-                Assert.All(
-                    mastery.Masteries,
-                    level =>
-                    {
-                        Assert.NotEmpty(level.Name);
-                        Assert.NotEmpty(level.Description);
-                        MarkupSyntaxValidator.Validate(level.Description);
-                        Assert.NotEmpty(level.Instruction);
-                        MarkupSyntaxValidator.Validate(level.Instruction);
-                        Assert.True(level.IconUrl is null || level.IconUrl.IsAbsoluteUri);
-                        Assert.True(level.PointCost > 0);
-                        Assert.True(level.ExperienceCost > 0);
-                    }
-                );
-            }
-        );
+                Assert.NotEmpty(level.Name);
+                Assert.NotEmpty(level.Description);
+                MarkupSyntaxValidator.Validate(level.Description);
+                Assert.NotEmpty(level.Instruction);
+                MarkupSyntaxValidator.Validate(level.Instruction);
+                Assert.True(level.IconUrl is null || level.IconUrl.IsAbsoluteUri);
+                Assert.True(level.PointCost > 0);
+                Assert.True(level.ExperienceCost > 0);
+            });
+        });
     }
 }

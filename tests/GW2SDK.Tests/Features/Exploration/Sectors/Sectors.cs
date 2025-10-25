@@ -5,22 +5,14 @@ namespace GuildWars2.Tests.Features.Exploration.Sectors;
 
 public class Sectors
 {
-    [Theory]
-    [InlineData(1, 0, 1, 26)]
-    [InlineData(1, 0, 1, 27)]
-    [InlineData(1, 0, 1, 28)]
+    [Test]
+    [Arguments(1, 0, 1, 26)]
+    [Arguments(1, 0, 1, 27)]
+    [Arguments(1, 0, 1, 28)]
     public async Task Can_be_listed(int continentId, int floorId, int regionId, int mapId)
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-
-        (HashSet<Sector> actual, MessageContext context) = await sut.Exploration.GetSectors(
-            continentId,
-            floorId,
-            regionId,
-            mapId,
-            cancellationToken: TestContext.Current.CancellationToken
-        );
-
+        (HashSet<Sector> actual, MessageContext context) = await sut.Exploration.GetSectors(continentId, floorId, regionId, mapId, cancellationToken: TestContext.Current!.CancellationToken);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
         Assert.NotEmpty(actual);

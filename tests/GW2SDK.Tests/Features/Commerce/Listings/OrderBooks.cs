@@ -5,20 +5,15 @@ namespace GuildWars2.Tests.Features.Commerce.Listings;
 
 public class OrderBooks
 {
-    [Fact]
+    [Test]
     public async Task Can_be_enumerated()
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-
         // You wouldn't want to use Take() in production code
         //   but enumerating all entries is too expensive for a test
         // This code will actually try to fetch more than 600 entries
         //  but the extra requests will be cancelled when this test completes
-        await foreach ((OrderBook actual, MessageContext context) in sut.Commerce.GetOrderBooksBulk(
-                degreeOfParallelism: 3,
-                cancellationToken: TestContext.Current.CancellationToken
-            )
-            .Take(600))
+        await foreach ((OrderBook actual, MessageContext context) in sut.Commerce.GetOrderBooksBulk(degreeOfParallelism: 3, cancellationToken: TestContext.Current!.CancellationToken).Take(600))
         {
             Assert.NotNull(context);
             Assert.True(actual.Id > 0);
@@ -31,15 +26,12 @@ public class OrderBooks
             {
                 Assert.True(actual.BestAsk > Coin.Zero);
                 Assert.NotEmpty(actual.Supply);
-                Assert.All(
-                    actual.Supply,
-                    line =>
-                    {
-                        Assert.True(line.UnitPrice > Coin.Zero);
-                        Assert.True(line.Quantity > 0);
-                        Assert.True(line.Listings > 0);
-                    }
-                );
+                Assert.All(actual.Supply, line =>
+                {
+                    Assert.True(line.UnitPrice > Coin.Zero);
+                    Assert.True(line.Quantity > 0);
+                    Assert.True(line.Listings > 0);
+                });
             }
 
             if (actual.TotalDemand == 0)
@@ -51,15 +43,12 @@ public class OrderBooks
             {
                 Assert.True(actual.BestBid > Coin.Zero);
                 Assert.NotEmpty(actual.Demand);
-                Assert.All(
-                    actual.Demand,
-                    line =>
-                    {
-                        Assert.True(line.UnitPrice > Coin.Zero);
-                        Assert.True(line.Quantity > 0);
-                        Assert.True(line.Listings > 0);
-                    }
-                );
+                Assert.All(actual.Demand, line =>
+                {
+                    Assert.True(line.UnitPrice > Coin.Zero);
+                    Assert.True(line.Quantity > 0);
+                    Assert.True(line.Listings > 0);
+                });
             }
 
             if (actual is { TotalDemand: 0 } or { TotalSupply: 0 })

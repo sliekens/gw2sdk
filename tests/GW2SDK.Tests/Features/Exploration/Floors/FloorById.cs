@@ -5,23 +5,17 @@ namespace GuildWars2.Tests.Features.Exploration.Floors;
 
 public class FloorById
 {
-    [Theory]
-    [InlineData(1, 0)]
-    [InlineData(1, 1)]
-    [InlineData(1, 2)]
-    [InlineData(2, 1)]
-    [InlineData(2, 3)]
-    [InlineData(2, 5)]
+    [Test]
+    [Arguments(1, 0)]
+    [Arguments(1, 1)]
+    [Arguments(1, 2)]
+    [Arguments(2, 1)]
+    [Arguments(2, 3)]
+    [Arguments(2, 5)]
     public async Task Can_be_found(int continentId, int floorId)
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-
-        (Floor actual, MessageContext context) = await sut.Exploration.GetFloorById(
-            continentId,
-            floorId,
-            cancellationToken: TestContext.Current.CancellationToken
-        );
-
+        (Floor actual, MessageContext context) = await sut.Exploration.GetFloorById(continentId, floorId, cancellationToken: TestContext.Current!.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(floorId, actual.Id);
     }

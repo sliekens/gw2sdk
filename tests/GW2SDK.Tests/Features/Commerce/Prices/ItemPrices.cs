@@ -5,20 +5,15 @@ namespace GuildWars2.Tests.Features.Commerce.Prices;
 
 public class ItemPrices
 {
-    [Fact]
+    [Test]
     public async Task Can_be_enumerated()
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-
         // You wouldn't want to use Take() in production code
         //   but enumerating all entries is too expensive for a test
         // This code will actually try to fetch more than 600 entries
         //  but the extra requests will be cancelled when this test completes
-        await foreach ((ItemPrice actual, MessageContext context) in sut.Commerce.GetItemPricesBulk(
-                degreeOfParallelism: 3,
-                cancellationToken: TestContext.Current.CancellationToken
-            )
-            .Take(600))
+        await foreach ((ItemPrice actual, MessageContext context) in sut.Commerce.GetItemPricesBulk(degreeOfParallelism: 3, cancellationToken: TestContext.Current!.CancellationToken).Take(600))
         {
             Assert.NotNull(context);
             Assert.True(actual.Id > 0);

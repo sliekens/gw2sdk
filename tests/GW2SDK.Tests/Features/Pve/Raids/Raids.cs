@@ -5,23 +5,17 @@ namespace GuildWars2.Tests.Features.Pve.Raids;
 
 public class Raids
 {
-    [Fact]
+    [Test]
     public async Task Can_be_listed()
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-
-        (HashSet<Raid> actual, MessageContext context) =
-            await sut.Pve.Raids.GetRaids(cancellationToken: TestContext.Current.CancellationToken);
-
+        (HashSet<Raid> actual, MessageContext context) = await sut.Pve.Raids.GetRaids(cancellationToken: TestContext.Current!.CancellationToken);
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(
-            actual,
-            entry =>
-            {
-                Assert.NotEmpty(entry.Id);
-            }
-        );
+        Assert.All(actual, entry =>
+        {
+            Assert.NotEmpty(entry.Id);
+        });
     }
 }

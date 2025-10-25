@@ -4,7 +4,7 @@ namespace GuildWars2.Tests.Features.Hero.Equipment.Mounts;
 
 public class MountNameFormatterTest
 {
-    [Fact]
+    [Test]
     public void Mount_names_can_be_formatted_as_text()
     {
 #if NET
@@ -12,14 +12,10 @@ public class MountNameFormatterTest
 #else
         IEnumerable<MountName> mounts = Enum.GetValues(typeof(MountName)).Cast<MountName>();
 #endif
-
-        Assert.All(
-            mounts,
-            mountName =>
-            {
-                string actual = MountNameFormatter.FormatMountName(mountName);
-                Assert.NotEmpty(actual);
-            }
-        );
+        Assert.All(mounts, mountName =>
+        {
+            string actual = MountNameFormatter.FormatMountName(mountName);
+            Assert.NotEmpty(actual);
+        });
     }
 }

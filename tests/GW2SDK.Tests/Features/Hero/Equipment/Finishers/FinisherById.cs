@@ -5,18 +5,12 @@ namespace GuildWars2.Tests.Features.Hero.Equipment.Finishers;
 
 public class FinisherById
 {
-    [Fact]
+    [Test]
     public async Task Can_be_found()
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-
         const int id = 58;
-
-        (Finisher actual, MessageContext context) = await sut.Hero.Equipment.Finishers.GetFinisherById(
-            id,
-            cancellationToken: TestContext.Current.CancellationToken
-        );
-
+        (Finisher actual, MessageContext context) = await sut.Hero.Equipment.Finishers.GetFinisherById(id, cancellationToken: TestContext.Current!.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }

@@ -7,19 +7,13 @@ namespace GuildWars2.Tests.Features.Hero.Equipment.Templates;
 
 public class ActiveEquipmentTemplate
 {
-    [Fact]
+    [Test]
     public async Task Can_be_found()
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         TestCharacter character = TestConfiguration.TestCharacter;
         ApiKey accessToken = TestConfiguration.ApiKey;
-
-        (EquipmentTemplate actual, MessageContext context) = await sut.Hero.Equipment.Templates.GetActiveEquipmentTemplate(
-            character.Name,
-            accessToken.Key,
-            cancellationToken: TestContext.Current.CancellationToken
-        );
-
+        (EquipmentTemplate actual, MessageContext context) = await sut.Hero.Equipment.Templates.GetActiveEquipmentTemplate(character.Name, accessToken.Key, cancellationToken: TestContext.Current!.CancellationToken);
         Assert.NotNull(context);
         Assert.NotNull(actual);
         Assert.True(actual.TabNumber > 0);
@@ -28,7 +22,6 @@ public class ActiveEquipmentTemplate
         Assert.All(actual.Items, EquipmentItemValidation.Validate);
         Assert.NotNull(actual.PvpEquipment);
         PvpEquipmentValidation.Validate(actual.PvpEquipment);
-
         string json = JsonSerializer.Serialize(actual);
         EquipmentTemplate? roundtrip = JsonSerializer.Deserialize<EquipmentTemplate>(json);
         Assert.Equal(actual, roundtrip);

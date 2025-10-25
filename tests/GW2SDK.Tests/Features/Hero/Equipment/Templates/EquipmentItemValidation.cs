@@ -51,7 +51,7 @@ internal sealed class EquipmentItemValidation
                 attribute =>
                 {
 #if NET
-                    Assert.True(Enum.IsDefined<AttributeName>(attribute.Key));
+                    Assert.True(Enum.IsDefined(attribute.Key));
 #else
                     Assert.True(Enum.IsDefined(typeof(AttributeName), attribute.Key));
 #endif

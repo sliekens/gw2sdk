@@ -9,7 +9,7 @@ namespace GuildWars2.Tests.Features.Hero.Equipment.Wardrobe;
 
 public class Skins
 {
-    [Fact]
+    [Test]
     public async Task Can_be_enumerated()
     {
         // The JsonLinesHttpMessageHandler simulates the behavior of the real API
@@ -17,10 +17,7 @@ public class Skins
         using JsonLinesHttpMessageHandler handler = new("Data/skins.jsonl.gz");
         using HttpClient httpClient = new(handler);
         Gw2Client sut = new(httpClient);
-
-        await foreach ((EquipmentSkin actual, MessageContext context) in sut.Hero.Equipment.Wardrobe.GetSkinsBulk(
-                cancellationToken: TestContext.Current.CancellationToken
-            ))
+        await foreach ((EquipmentSkin actual, MessageContext context) in sut.Hero.Equipment.Wardrobe.GetSkinsBulk(cancellationToken: TestContext.Current!.CancellationToken))
         {
             Assert.NotNull(context);
             Assert.True(actual.Id > 0);
@@ -30,131 +27,97 @@ public class Skins
             Assert.NotEmpty(actual.Races);
             Assert.All(actual.Races, race => Assert.True(race.IsDefined()));
             Assert.True(actual.Rarity.IsDefined());
-
             if (actual is ArmorSkin armor)
             {
                 Assert.True(armor.WeightClass.IsDefined());
-                Assert.All(
-                    armor.DyeSlots?.Default ?? [],
-                    slot =>
+                Assert.All(armor.DyeSlots?.Default ?? [], slot =>
+                {
+                    if (slot is not null)
                     {
-                        if (slot is not null)
-                        {
-                            Assert.True(slot.ColorId > 0);
-                            Assert.True(slot.Material.IsDefined());
-                        }
+                        Assert.True(slot.ColorId > 0);
+                        Assert.True(slot.Material.IsDefined());
                     }
-                );
-                Assert.All(
-                    armor.DyeSlots?.AsuraFemale ?? [],
-                    slot =>
+                });
+                Assert.All(armor.DyeSlots?.AsuraFemale ?? [], slot =>
+                {
+                    if (slot is not null)
                     {
-                        if (slot is not null)
-                        {
-                            Assert.True(slot.ColorId > 0);
-                            Assert.True(slot.Material.IsDefined());
-                        }
+                        Assert.True(slot.ColorId > 0);
+                        Assert.True(slot.Material.IsDefined());
                     }
-                );
-                Assert.All(
-                    armor.DyeSlots?.AsuraMale ?? [],
-                    slot =>
+                });
+                Assert.All(armor.DyeSlots?.AsuraMale ?? [], slot =>
+                {
+                    if (slot is not null)
                     {
-                        if (slot is not null)
-                        {
-                            Assert.True(slot.ColorId > 0);
-                            Assert.True(slot.Material.IsDefined());
-                        }
+                        Assert.True(slot.ColorId > 0);
+                        Assert.True(slot.Material.IsDefined());
                     }
-                );
-                Assert.All(
-                    armor.DyeSlots?.CharrFemale ?? [],
-                    slot =>
+                });
+                Assert.All(armor.DyeSlots?.CharrFemale ?? [], slot =>
+                {
+                    if (slot is not null)
                     {
-                        if (slot is not null)
-                        {
-                            Assert.True(slot.ColorId > 0);
-                            Assert.True(slot.Material.IsDefined());
-                        }
+                        Assert.True(slot.ColorId > 0);
+                        Assert.True(slot.Material.IsDefined());
                     }
-                );
-                Assert.All(
-                    armor.DyeSlots?.CharrMale ?? [],
-                    slot =>
+                });
+                Assert.All(armor.DyeSlots?.CharrMale ?? [], slot =>
+                {
+                    if (slot is not null)
                     {
-                        if (slot is not null)
-                        {
-                            Assert.True(slot.ColorId > 0);
-                            Assert.True(slot.Material.IsDefined());
-                        }
+                        Assert.True(slot.ColorId > 0);
+                        Assert.True(slot.Material.IsDefined());
                     }
-                );
-                Assert.All(
-                    armor.DyeSlots?.HumanFemale ?? [],
-                    slot =>
+                });
+                Assert.All(armor.DyeSlots?.HumanFemale ?? [], slot =>
+                {
+                    if (slot is not null)
                     {
-                        if (slot is not null)
-                        {
-                            Assert.True(slot.ColorId > 0);
-                            Assert.True(slot.Material.IsDefined());
-                        }
+                        Assert.True(slot.ColorId > 0);
+                        Assert.True(slot.Material.IsDefined());
                     }
-                );
-                Assert.All(
-                    armor.DyeSlots?.HumanMale ?? [],
-                    slot =>
+                });
+                Assert.All(armor.DyeSlots?.HumanMale ?? [], slot =>
+                {
+                    if (slot is not null)
                     {
-                        if (slot is not null)
-                        {
-                            Assert.True(slot.ColorId > 0);
-                            Assert.True(slot.Material.IsDefined());
-                        }
+                        Assert.True(slot.ColorId > 0);
+                        Assert.True(slot.Material.IsDefined());
                     }
-                );
-                Assert.All(
-                    armor.DyeSlots?.NornFemale ?? [],
-                    slot =>
+                });
+                Assert.All(armor.DyeSlots?.NornFemale ?? [], slot =>
+                {
+                    if (slot is not null)
                     {
-                        if (slot is not null)
-                        {
-                            Assert.True(slot.ColorId > 0);
-                            Assert.True(slot.Material.IsDefined());
-                        }
+                        Assert.True(slot.ColorId > 0);
+                        Assert.True(slot.Material.IsDefined());
                     }
-                );
-                Assert.All(
-                    armor.DyeSlots?.NornMale ?? [],
-                    slot =>
+                });
+                Assert.All(armor.DyeSlots?.NornMale ?? [], slot =>
+                {
+                    if (slot is not null)
                     {
-                        if (slot is not null)
-                        {
-                            Assert.True(slot.ColorId > 0);
-                            Assert.True(slot.Material.IsDefined());
-                        }
+                        Assert.True(slot.ColorId > 0);
+                        Assert.True(slot.Material.IsDefined());
                     }
-                );
-                Assert.All(
-                    armor.DyeSlots?.SylvariFemale ?? [],
-                    slot =>
+                });
+                Assert.All(armor.DyeSlots?.SylvariFemale ?? [], slot =>
+                {
+                    if (slot is not null)
                     {
-                        if (slot is not null)
-                        {
-                            Assert.True(slot.ColorId > 0);
-                            Assert.True(slot.Material.IsDefined());
-                        }
+                        Assert.True(slot.ColorId > 0);
+                        Assert.True(slot.Material.IsDefined());
                     }
-                );
-                Assert.All(
-                    armor.DyeSlots?.SylvariMale ?? [],
-                    slot =>
+                });
+                Assert.All(armor.DyeSlots?.SylvariMale ?? [], slot =>
+                {
+                    if (slot is not null)
                     {
-                        if (slot is not null)
-                        {
-                            Assert.True(slot.ColorId > 0);
-                            Assert.True(slot.Material.IsDefined());
-                        }
+                        Assert.True(slot.ColorId > 0);
+                        Assert.True(slot.Material.IsDefined());
                     }
-                );
+                });
             }
             else if (actual is WeaponSkin weapon)
             {
@@ -163,13 +126,12 @@ public class Skins
 
             SkinLink chatLink = actual.GetChatLink();
             Assert.Equal(actual.Id, chatLink.SkinId);
-
             SkinLink chatLinkRoundtrip = SkinLink.Parse(chatLink.ToString());
             Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
         }
     }
 
-    [Fact]
+    [Test]
     public async Task Can_be_serialized()
     {
         // The JsonLinesHttpMessageHandler simulates the behavior of the real API
@@ -177,9 +139,7 @@ public class Skins
         using JsonLinesHttpMessageHandler handler = new("Data/skins.jsonl.gz");
         using HttpClient httpClient = new(handler);
         Gw2Client sut = new(httpClient);
-        await foreach (EquipmentSkin original in sut.Hero.Equipment.Wardrobe
-            .GetSkinsBulk(cancellationToken: TestContext.Current.CancellationToken)
-            .ValueOnly(TestContext.Current.CancellationToken))
+        await foreach (EquipmentSkin original in sut.Hero.Equipment.Wardrobe.GetSkinsBulk(cancellationToken: TestContext.Current!.CancellationToken).ValueOnly(TestContext.Current!.CancellationToken))
         {
             string json = JsonSerializer.Serialize(original);
             EquipmentSkin? roundTrip = JsonSerializer.Deserialize<EquipmentSkin>(json);

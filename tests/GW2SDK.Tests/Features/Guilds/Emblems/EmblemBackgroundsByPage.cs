@@ -5,18 +5,12 @@ namespace GuildWars2.Tests.Features.Guilds.Emblems;
 
 public class EmblemBackgroundsByPage
 {
-    [Fact]
+    [Test]
     public async Task Background_emblems_can_be_filtered_by_page()
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-
         const int pageSize = 3;
-        (HashSet<EmblemBackground> actual, MessageContext context) = await sut.Guilds.GetEmblemBackgroundsByPage(
-            0,
-            pageSize,
-            cancellationToken: TestContext.Current.CancellationToken
-        );
-
+        (HashSet<EmblemBackground> actual, MessageContext context) = await sut.Guilds.GetEmblemBackgroundsByPage(0, pageSize, cancellationToken: TestContext.Current!.CancellationToken);
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);
         Assert.Equal(pageSize, context.ResultCount);

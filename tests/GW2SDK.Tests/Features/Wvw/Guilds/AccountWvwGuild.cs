@@ -4,17 +4,12 @@ namespace GuildWars2.Tests.Features.Wvw.Guilds;
 
 public class AccountWvwGuild
 {
-    [Fact]
+    [Test]
     public async Task Can_be_found()
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
-
-        (GuildWars2.Wvw.Guilds.AccountWvwGuild actual, _) = await sut.Wvw.GetAccountWvwGuild(
-            accessToken.Key,
-            TestContext.Current.CancellationToken
-        );
-
+        (GuildWars2.Wvw.Guilds.AccountWvwGuild actual, _) = await sut.Wvw.GetAccountWvwGuild(accessToken.Key, TestContext.Current!.CancellationToken);
         if (actual.TeamId.HasValue)
         {
             Assert.True(actual.TeamId > 0);

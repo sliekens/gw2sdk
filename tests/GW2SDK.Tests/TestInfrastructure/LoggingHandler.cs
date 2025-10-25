@@ -9,52 +9,49 @@ internal sealed class LoggingHandler : DelegatingHandler
         CancellationToken cancellationToken
     )
     {
-        ITestOutputHelper output = TestContext.Current.TestOutputHelper
-            ?? throw new InvalidOperationException("TestOutputHelper unavailable");
-
-        output.WriteLine(
+        Console.WriteLine(
             $"{request.Method} {request.RequestUri!.PathAndQuery} HTTP/{request.Version}"
         );
         foreach (KeyValuePair<string, IEnumerable<string>> header in request.Headers)
         {
-            output.WriteLine($"{header.Key}: {string.Join(", ", header.Value)}");
+            Console.WriteLine($"{header.Key}: {string.Join(", ", header.Value)}");
         }
 
         if (request.Content is not null)
         {
             foreach (KeyValuePair<string, IEnumerable<string>> header in request.Content.Headers)
             {
-                output.WriteLine($"{header.Key}: {string.Join(", ", header.Value)}");
+                Console.WriteLine($"{header.Key}: {string.Join(", ", header.Value)}");
             }
         }
 
-        output.WriteLine("");
+        Console.WriteLine("");
 
         if (request.Content is not null)
         {
-            output.WriteLine(await request.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false));
-            output.WriteLine("");
+            Console.WriteLine(await request.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false));
+            Console.WriteLine("");
         }
 
         HttpResponseMessage? response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
 
-        output.WriteLine(
+        Console.WriteLine(
             $"HTTP/{response.Version} {(int)response.StatusCode} {response.ReasonPhrase}"
         );
         foreach (KeyValuePair<string, IEnumerable<string>> header in response.Headers)
         {
-            output.WriteLine($"{header.Key}: {string.Join(", ", header.Value)}");
+            Console.WriteLine($"{header.Key}: {string.Join(", ", header.Value)}");
         }
 
         if (response.Content is not null)
         {
             foreach (KeyValuePair<string, IEnumerable<string>> header in response.Content.Headers)
             {
-                output.WriteLine($"{header.Key}: {string.Join(", ", header.Value)}");
+                Console.WriteLine($"{header.Key}: {string.Join(", ", header.Value)}");
             }
         }
 
-        output.WriteLine("");
+        Console.WriteLine("");
 
         if (response.Content is not null)
         {
@@ -84,7 +81,7 @@ internal sealed class LoggingHandler : DelegatingHandler
 #endif
                     }
 
-                    output.WriteLine(text);
+                    Console.WriteLine(text);
                 }
                 finally
                 {
@@ -94,10 +91,10 @@ internal sealed class LoggingHandler : DelegatingHandler
             }
             else
             {
-                output.WriteLine(await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false));
+                Console.WriteLine(await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false));
             }
 
-            output.WriteLine("");
+            Console.WriteLine("");
         }
 
         return response;

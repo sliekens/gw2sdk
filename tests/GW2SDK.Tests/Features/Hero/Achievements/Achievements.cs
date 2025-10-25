@@ -10,7 +10,7 @@ namespace GuildWars2.Tests.Features.Hero.Achievements;
 
 public class Achievements
 {
-    [Fact]
+    [Test]
     public async Task Can_be_enumerated()
     {
         // The JsonLinesHttpMessageHandler simulates the behavior of the real API
@@ -18,9 +18,7 @@ public class Achievements
         using JsonLinesHttpMessageHandler handler = new("Data/achievements.jsonl.gz");
         using HttpClient httpClient = new(handler);
         Gw2Client sut = new(httpClient);
-        await foreach ((Achievement actual, MessageContext context) in sut.Hero.Achievements.GetAchievementsBulk(
-                cancellationToken: TestContext.Current.CancellationToken
-            ))
+        await foreach ((Achievement actual, MessageContext context) in sut.Hero.Achievements.GetAchievementsBulk(cancellationToken: TestContext.Current!.CancellationToken))
         {
             Assert.NotNull(context);
             Assert.True(actual.Id > 0);
@@ -36,35 +34,30 @@ public class Achievements
             Assert.DoesNotContain(null, actual.Tiers);
             if (actual.Rewards is not null)
             {
-                Assert.All(
-                    actual.Rewards,
-                    reward =>
+                Assert.All(actual.Rewards, reward =>
+                {
+                    Assert.NotNull(reward);
+                    switch (reward)
                     {
-                        Assert.NotNull(reward);
-                        switch (reward)
-                        {
-                            case MasteryPointReward masteryPointReward:
-                                Assert.True(masteryPointReward.Id > 0);
-                                Assert.True(masteryPointReward.Region.IsDefined());
-                                break;
-                            case CoinsReward coinsReward:
-                                Assert.True(coinsReward.Coins > Coin.Zero);
-                                break;
-                            case ItemReward itemReward:
-                                Assert.True(itemReward.Id > 0);
-                                Assert.True(itemReward.Count > 0);
-                                break;
-                            case TitleReward titleReward:
-                                Assert.True(titleReward.Id > 0);
-                                break;
-                            default:
-                                Assert.Fail(
-                                    $"Unexpected reward type: {reward.GetType().Name}"
-                                );
-                                break;
-                        }
+                        case MasteryPointReward masteryPointReward:
+                            Assert.True(masteryPointReward.Id > 0);
+                            Assert.True(masteryPointReward.Region.IsDefined());
+                            break;
+                        case CoinsReward coinsReward:
+                            Assert.True(coinsReward.Coins > Coin.Zero);
+                            break;
+                        case ItemReward itemReward:
+                            Assert.True(itemReward.Id > 0);
+                            Assert.True(itemReward.Count > 0);
+                            break;
+                        case TitleReward titleReward:
+                            Assert.True(titleReward.Id > 0);
+                            break;
+                        default:
+                            Assert.Fail($"Unexpected reward type: {reward.GetType().Name}");
+                            break;
                     }
-                );
+                });
             }
 
             if (actual.Bits is not null)
@@ -79,10 +72,8 @@ public class Achievements
 
             AchievementLink chatLink = actual.GetChatLink();
             Assert.Equal(actual.Id, chatLink.AchievementId);
-
             AchievementLink chatLinkRoundtrip = AchievementLink.Parse(chatLink.ToString());
             Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
-
             string json = JsonSerializer.Serialize(actual);
             Achievement? roundTrip = JsonSerializer.Deserialize<Achievement>(json);
             Assert.Equal(actual, roundTrip);

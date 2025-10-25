@@ -5,21 +5,14 @@ namespace GuildWars2.Tests.Features.Exploration.Maps;
 
 public class Maps
 {
-    [Theory]
-    [InlineData(1, 0, 1)]
-    [InlineData(1, 0, 2)]
-    [InlineData(1, 0, 3)]
+    [Test]
+    [Arguments(1, 0, 1)]
+    [Arguments(1, 0, 2)]
+    [Arguments(1, 0, 3)]
     public async Task Can_be_listed(int continentId, int floorId, int regionId)
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-
-        (HashSet<Map> actual, MessageContext context) = await sut.Exploration.GetMaps(
-            continentId,
-            floorId,
-            regionId,
-            cancellationToken: TestContext.Current.CancellationToken
-        );
-
+        (HashSet<Map> actual, MessageContext context) = await sut.Exploration.GetMaps(continentId, floorId, regionId, cancellationToken: TestContext.Current!.CancellationToken);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
         Assert.NotEmpty(actual);

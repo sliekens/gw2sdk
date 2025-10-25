@@ -5,18 +5,12 @@ namespace GuildWars2.Tests.Features.Pve.Home.Nodes;
 
 public class NodeById
 {
-    [Fact]
+    [Test]
     public async Task Can_be_found()
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-
         const string id = "bauble_gathering_system";
-
-        (Node actual, MessageContext context) = await sut.Pve.Home.GetNodeById(
-            id,
-            cancellationToken: TestContext.Current.CancellationToken
-        );
-
+        (Node actual, MessageContext context) = await sut.Pve.Home.GetNodeById(id, cancellationToken: TestContext.Current!.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }

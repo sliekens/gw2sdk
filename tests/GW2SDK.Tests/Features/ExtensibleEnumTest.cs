@@ -7,49 +7,49 @@ namespace GuildWars2.Tests.Features;
 
 public class ExtensibleEnumTest
 {
-    [Fact]
+    [Test]
     public void Indicates_when_enum_name_is_defined()
     {
         Extensible<Rarity> extensible = new(nameof(Rarity.Legendary));
         Assert.True(extensible.IsDefined());
     }
 
-    [Fact]
+    [Test]
     public void Indicates_when_enum_name_is_not_defined()
     {
         Extensible<Rarity> extensible = new("Mythical");
         Assert.False(extensible.IsDefined());
     }
 
-    [Fact]
+    [Test]
     public void Indicates_when_enum_name_is_not_defined_when_enum_has_a_default_value()
     {
         Extensible<ProductName> extensible = new("GuildWars3");
         Assert.False(extensible.IsDefined());
     }
 
-    [Fact]
+    [Test]
     public void Returns_enum_name_as_string()
     {
         Extensible<Rarity> extensible = new(nameof(Rarity.Legendary));
         Assert.Equal(nameof(Rarity.Legendary), extensible.ToString());
     }
 
-    [Fact]
+    [Test]
     public void Implicitly_converts_enum_to_extensible_enum()
     {
         Extensible<Rarity> extensible = Rarity.Legendary;
         Assert.Equal(nameof(Rarity.Legendary), extensible.ToString());
     }
 
-    [Fact]
+    [Test]
     public void Implicitly_converts_string_to_extensible_enum()
     {
         Extensible<Rarity> extensible = nameof(Rarity.Legendary);
         Assert.Equal(nameof(Rarity.Legendary), extensible.ToString());
     }
 
-    [Fact]
+    [Test]
     public void Converts_default_to_default_enum_value()
     {
         Extensible<MissingMemberBehavior> extensible = default;
@@ -58,7 +58,7 @@ public class ExtensibleEnumTest
         Assert.Equal("Error", extensible.ToString());
     }
 
-    [Fact]
+    [Test]
     public void Indicates_when_value_equals_other_value()
     {
         Extensible<Rarity> left = new(nameof(Rarity.Legendary));
@@ -67,7 +67,7 @@ public class ExtensibleEnumTest
         Assert.True(right == left);
     }
 
-    [Fact]
+    [Test]
     public void Indicates_when_value_equals_enum_value()
     {
         Extensible<Rarity> left = new(nameof(Rarity.Legendary));
@@ -76,7 +76,7 @@ public class ExtensibleEnumTest
         Assert.True(right == left);
     }
 
-    [Fact]
+    [Test]
     public void Indicates_when_value_equals_string_value()
     {
         Extensible<Rarity> left = new(nameof(Rarity.Legendary));
@@ -85,7 +85,7 @@ public class ExtensibleEnumTest
         Assert.True(right == left);
     }
 
-    [Fact]
+    [Test]
     public void Does_case_insensitivate_equality_check()
     {
         Extensible<Rarity> left = new("legendary");
@@ -94,7 +94,7 @@ public class ExtensibleEnumTest
         Assert.True(right == left);
     }
 
-    [Fact]
+    [Test]
     public void Converts_names_to_enum()
     {
         Extensible<Rarity> extensible = new(nameof(Rarity.Legendary));
@@ -102,7 +102,7 @@ public class ExtensibleEnumTest
         Assert.Equal(Rarity.Legendary, actual);
     }
 
-    [Fact]
+    [Test]
     public void Converts_unknown_names_to_null()
     {
         Extensible<Rarity> extensible = new("Mythical");
@@ -110,7 +110,7 @@ public class ExtensibleEnumTest
         Assert.Null(actual);
     }
 
-    [Fact]
+    [Test]
     public void Converts_unknown_names_to_null_when_enum_has_a_default_value()
     {
         Extensible<ProductName> extensible = new("GuildWars3");
@@ -118,7 +118,7 @@ public class ExtensibleEnumTest
         Assert.Null(actual);
     }
 
-    [Fact]
+    [Test]
     public void Has_json_conversion()
     {
         Extensible<ProductName> extensible = ProductName.GuildWars2;
@@ -127,7 +127,7 @@ public class ExtensibleEnumTest
         Assert.Equal(extensible, actual);
     }
 
-    [Fact]
+    [Test]
     public void Has_json_conversion_for_undefined_values()
     {
         Extensible<ProductName> extensible = "GuildWars3";

@@ -9,7 +9,7 @@ namespace GuildWars2.Tests.Features.Items;
 
 public class Items
 {
-    [Fact]
+    [Test]
     public async Task Can_be_enumerated()
     {
         // The JsonLinesHttpMessageHandler simulates the behavior of the real API
@@ -17,12 +17,9 @@ public class Items
         using JsonLinesHttpMessageHandler handler = new("Data/items.jsonl.gz");
         using HttpClient httpClient = new(handler);
         Gw2Client sut = new(httpClient);
-        await foreach ((Item actual, MessageContext context) in sut.Items.GetItemsBulk(
-                cancellationToken: TestContext.Current.CancellationToken
-            ))
+        await foreach ((Item actual, MessageContext context) in sut.Items.GetItemsBulk(cancellationToken: TestContext.Current!.CancellationToken))
         {
             Assert.NotNull(context);
-
             Assert.True(actual.Id >= 1);
             Assert.NotNull(actual.Name);
             Assert.NotNull(actual.Description);
@@ -36,10 +33,7 @@ public class Items
             Assert.All(actual.Restrictions.Races, race => Assert.True(race.IsDefined()));
             Assert.NotEmpty(actual.Restrictions.Professions);
             Assert.Empty(actual.Restrictions.Other);
-            Assert.All(
-                actual.Restrictions.Professions,
-                profession => Assert.True(profession.IsDefined())
-            );
+            Assert.All(actual.Restrictions.Professions, profession => Assert.True(profession.IsDefined()));
             Assert.All(actual.GameTypes, gameType => Assert.True(gameType.IsDefined()));
             switch (actual)
             {
@@ -58,10 +52,12 @@ public class Items
                                 Assert.True(genericConsumable.Effect.Duration >= TimeSpan.Zero);
                                 Assert.True(genericConsumable.Effect.ApplyCount >= 0);
                             }
+
                             if (genericConsumable.GuildUpgradeId.HasValue)
                             {
                                 Assert.True(genericConsumable.GuildUpgradeId.Value > 0);
                             }
+
                             break;
                         case Utility utility:
                             if (utility.Effect is not null)
@@ -72,6 +68,7 @@ public class Items
                                 Assert.True(utility.Effect.Duration >= TimeSpan.Zero);
                                 Assert.True(utility.Effect.ApplyCount >= 0);
                             }
+
                             break;
                         case Food food:
                             if (food.Effect is not null)
@@ -82,6 +79,7 @@ public class Items
                                 Assert.True(food.Effect.Duration >= TimeSpan.Zero);
                                 Assert.True(food.Effect.ApplyCount >= 0);
                             }
+
                             break;
                         case Service service:
                             if (service.Effect is not null)
@@ -92,10 +90,12 @@ public class Items
                                 Assert.True(service.Effect.Duration >= TimeSpan.Zero);
                                 Assert.True(service.Effect.ApplyCount >= 0);
                             }
+
                             if (service.GuildUpgradeId.HasValue)
                             {
                                 Assert.True(service.GuildUpgradeId.Value > 0);
                             }
+
                             break;
                         case Booze booze:
                             // Nothing specific to verify for Booze items
@@ -118,19 +118,13 @@ public class Items
                                 case RecipeSheet recipeSheet:
                                     Assert.True(recipeSheet.RecipeId > 0);
                                     Assert.NotNull(recipeSheet.ExtraRecipeIds);
-                                    foreach ((int extraRecipeId, RecipeLink? extraRecipeLink) in
-                                        recipeSheet.ExtraRecipeIds.Zip(
-                                            recipeSheet.GetExtraRecipeChatLinks(),
-                                            (extraRecipeId, extraRecipeLink) =>
-                                                (extraRecipeId, extraRecipeLink)
-                                        ))
+                                    foreach ((int extraRecipeId, RecipeLink? extraRecipeLink) in recipeSheet.ExtraRecipeIds.Zip(recipeSheet.GetExtraRecipeChatLinks(), (extraRecipeId, extraRecipeLink) => (extraRecipeId, extraRecipeLink)))
                                     {
                                         Assert.Equal(extraRecipeId, extraRecipeLink.RecipeId);
                                     }
 
                                     RecipeLink sheetRecipeLink = recipeSheet.GetRecipeChatLink();
                                     Assert.Equal(recipeSheet.RecipeId, sheetRecipeLink.RecipeId);
-
                                     RecipeLink sheetRecipeLinkRoundtrip = RecipeLink.Parse(sheetRecipeLink.ToString());
                                     Assert.Equal(sheetRecipeLink.ToString(), sheetRecipeLinkRoundtrip.ToString());
                                     break;
@@ -186,12 +180,12 @@ public class Items
                                     // Only fail if this is actually a derived type we don't know about
                                     if (unlocker.GetType() != typeof(Unlocker))
                                     {
-                                        Assert.Fail(
-                                            $"Unexpected unlocker type: {unlocker.GetType().Name}"
-                                        );
+                                        Assert.Fail($"Unexpected unlocker type: {unlocker.GetType().Name}");
                                     }
+
                                     break;
                             }
+
                             break;
                         case UpgradeExtractor upgradeExtractor:
                             // Nothing specific to verify for UpgradeExtractor items
@@ -206,9 +200,7 @@ public class Items
                             // Nothing specific to verify for RandomUnlocker items
                             break;
                         default:
-                            Assert.Fail(
-                                $"Unexpected consumable type: {consumable.GetType().Name}"
-                            );
+                            Assert.Fail($"Unexpected consumable type: {consumable.GetType().Name}");
                             break;
                     }
 
@@ -249,24 +241,16 @@ public class Items
                         Assert.Empty(backItem.Attributes);
                     }
 
-                    Assert.All(
-                        backItem.UpgradesFrom,
-                        source =>
-                        {
-                            Assert.True(source.ItemId > 0);
-                            Assert.True(source.Upgrade.IsDefined());
-                        }
-                    );
-
-                    Assert.All(
-                        backItem.UpgradesInto,
-                        source =>
-                        {
-                            Assert.True(source.ItemId > 0);
-                            Assert.True(source.Upgrade.IsDefined());
-                        }
-                    );
-
+                    Assert.All(backItem.UpgradesFrom, source =>
+                    {
+                        Assert.True(source.ItemId > 0);
+                        Assert.True(source.Upgrade.IsDefined());
+                    });
+                    Assert.All(backItem.UpgradesInto, source =>
+                    {
+                        Assert.True(source.ItemId > 0);
+                        Assert.True(source.Upgrade.IsDefined());
+                    });
                     break;
                 case Armor armor:
                     Assert.True(armor.WeightClass.IsDefined());
@@ -310,23 +294,16 @@ public class Items
 
                     if (trinket is Ring ring)
                     {
-                        Assert.All(
-                            ring.UpgradesFrom,
-                            source =>
-                            {
-                                Assert.True(source.ItemId > 0);
-                                Assert.True(source.Upgrade.IsDefined());
-                            }
-                        );
-
-                        Assert.All(
-                            ring.UpgradesInto,
-                            source =>
-                            {
-                                Assert.True(source.ItemId > 0);
-                                Assert.True(source.Upgrade.IsDefined());
-                            }
-                        );
+                        Assert.All(ring.UpgradesFrom, source =>
+                        {
+                            Assert.True(source.ItemId > 0);
+                            Assert.True(source.Upgrade.IsDefined());
+                        });
+                        Assert.All(ring.UpgradesInto, source =>
+                        {
+                            Assert.True(source.ItemId > 0);
+                            Assert.True(source.Upgrade.IsDefined());
+                        });
                     }
 
                     break;
@@ -339,7 +316,6 @@ public class Items
                 case UpgradeComponent upgradeComponent:
                     Assert.Empty(upgradeComponent.UpgradeComponentFlags.Other);
                     Assert.Empty(upgradeComponent.InfusionUpgradeFlags.Other);
-
                     // There is a workaround in place for PvP runes and sigils not being classified as such
                     if (upgradeComponent.GameTypes.Contains(GameType.Pvp))
                     {
@@ -351,6 +327,7 @@ public class Items
                         {
                             Assert.IsType<Rune>(upgradeComponent);
                         }
+
 #if NET
                         if (upgradeComponent.Name.Contains("Sigil", StringComparison.Ordinal))
 #else
@@ -363,14 +340,11 @@ public class Items
 
                     break;
                 case CraftingMaterial craftingMaterial:
-                    Assert.All(
-                        craftingMaterial.UpgradesInto,
-                        source =>
-                        {
-                            Assert.True(source.ItemId > 0);
-                            Assert.True(source.Upgrade.IsDefined());
-                        }
-                    );
+                    Assert.All(craftingMaterial.UpgradesInto, source =>
+                    {
+                        Assert.True(source.ItemId > 0);
+                        Assert.True(source.Upgrade.IsDefined());
+                    });
                     break;
                 case Trophy trophy:
                     // Nothing specific to verify for Trophy items
@@ -395,12 +369,12 @@ public class Items
                             // Only fail if this is actually a derived type we don't know about
                             if (container.GetType() != typeof(Container))
                             {
-                                Assert.Fail(
-                                    $"Unexpected container type: {container.GetType().Name}"
-                                );
+                                Assert.Fail($"Unexpected container type: {container.GetType().Name}");
                             }
+
                             break;
                     }
+
                     break;
                 case GatheringTool gatheringTool:
                     switch (gatheringTool)
@@ -427,12 +401,12 @@ public class Items
                             // Only fail if this is actually a derived type we don't know about
                             if (gatheringTool.GetType() != typeof(GatheringTool))
                             {
-                                Assert.Fail(
-                                    $"Unexpected gathering tool type: {gatheringTool.GetType().Name}"
-                                );
+                                Assert.Fail($"Unexpected gathering tool type: {gatheringTool.GetType().Name}");
                             }
+
                             break;
                     }
+
                     break;
                 case Gizmo gizmo:
                     switch (gizmo)
@@ -452,15 +426,16 @@ public class Items
                             {
                                 Assert.True(gizmo.GuildUpgradeId.Value > 0);
                             }
+
                             // Only fail if this is actually a derived type we don't know about
                             if (gizmo.GetType() != typeof(Gizmo))
                             {
-                                Assert.Fail(
-                                    $"Unexpected gizmo type: {gizmo.GetType().Name}"
-                                );
+                                Assert.Fail($"Unexpected gizmo type: {gizmo.GetType().Name}");
                             }
+
                             break;
                     }
+
                     break;
                 case JadeTechModule jadeTechModule:
                     // Nothing specific to verify for JadeTechModule items
@@ -472,9 +447,7 @@ public class Items
                     // Nothing specific to verify for Relic items
                     break;
                 default:
-                    Assert.Fail(
-                        $"Unexpected item type: {actual.GetType().Name}"
-                    );
+                    Assert.Fail($"Unexpected item type: {actual.GetType().Name}");
                     break;
             }
 
@@ -497,13 +470,12 @@ public class Items
             ItemLink chatLink = actual.GetChatLink();
             Assert.Equal(actual.ChatLink, chatLink.ToString());
             Assert.Equal(actual.Id, chatLink.ItemId);
-
             ItemLink chatLinkRoundtrip = ItemLink.Parse(chatLink.ToString());
             Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
         }
     }
 
-    [Fact]
+    [Test]
     public async Task Can_be_serialized()
     {
         // The JsonLinesHttpMessageHandler simulates the behavior of the real API
@@ -511,9 +483,7 @@ public class Items
         using JsonLinesHttpMessageHandler handler = new("Data/items.jsonl.gz");
         using HttpClient httpClient = new(handler);
         Gw2Client sut = new(httpClient);
-        await foreach (Item original in sut.Items
-            .GetItemsBulk(cancellationToken: TestContext.Current.CancellationToken)
-            .ValueOnly(TestContext.Current.CancellationToken))
+        await foreach (Item original in sut.Items.GetItemsBulk(cancellationToken: TestContext.Current!.CancellationToken).ValueOnly(TestContext.Current!.CancellationToken))
         {
             string json = JsonSerializer.Serialize(original);
             Item? roundTrip = JsonSerializer.Deserialize<Item>(json);

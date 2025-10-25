@@ -4,17 +4,12 @@ namespace GuildWars2.Tests.Features.Hero.Crafting.Recipes;
 
 public class UnlockedRecipes
 {
-    [Fact]
+    [Test]
     public async Task Can_be_found()
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
-
-        (HashSet<int> actual, _) = await sut.Hero.Crafting.Recipes.GetUnlockedRecipes(
-            accessToken.Key,
-            TestContext.Current.CancellationToken
-        );
-
+        (HashSet<int> actual, _) = await sut.Hero.Crafting.Recipes.GetUnlockedRecipes(accessToken.Key, TestContext.Current!.CancellationToken);
         Assert.NotEmpty(actual);
         Assert.All(actual, id => Assert.True(id >= 0));
     }

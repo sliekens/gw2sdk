@@ -7,39 +7,28 @@ namespace GuildWars2.Tests.Features.Hero.Equipment.Mounts;
 
 public class Mounts
 {
-    [Fact]
+    [Test]
     public async Task Can_be_listed()
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-
-        (HashSet<Mount> actual, MessageContext context) = await sut.Hero.Equipment.Mounts.GetMounts(
-            cancellationToken: TestContext.Current.CancellationToken
-        );
-
+        (HashSet<Mount> actual, MessageContext context) = await sut.Hero.Equipment.Mounts.GetMounts(cancellationToken: TestContext.Current!.CancellationToken);
         Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(
-            actual,
-            entry =>
+        Assert.All(actual, entry =>
+        {
+            Assert.True(entry.Id.IsDefined());
+            Assert.NotEmpty(entry.Name);
+            Assert.True(entry.DefaultSkinId > 0);
+            Assert.NotNull(entry.SkinIds);
+            Assert.All(entry.SkinIds, id => Assert.True(id > 0));
+            Assert.NotNull(entry.Skills);
+            Assert.All(entry.Skills, skill =>
             {
-                Assert.True(entry.Id.IsDefined());
-                Assert.NotEmpty(entry.Name);
-                Assert.True(entry.DefaultSkinId > 0);
-                Assert.NotNull(entry.SkinIds);
-                Assert.All(entry.SkinIds, id => Assert.True(id > 0));
-                Assert.NotNull(entry.Skills);
-                Assert.All(
-                    entry.Skills,
-                    skill =>
-                    {
-                        Assert.True(skill.Id > 0);
-                        Assert.True(skill.Slot.IsDefined());
-                    }
-                );
-
-                string json = JsonSerializer.Serialize(entry);
-                Mount? roundtrip = JsonSerializer.Deserialize<Mount>(json);
-                Assert.Equal(entry, roundtrip);
-            }
-        );
+                Assert.True(skill.Id > 0);
+                Assert.True(skill.Slot.IsDefined());
+            });
+            string json = JsonSerializer.Serialize(entry);
+            Mount? roundtrip = JsonSerializer.Deserialize<Mount>(json);
+            Assert.Equal(entry, roundtrip);
+        });
     }
 }
