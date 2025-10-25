@@ -41,12 +41,6 @@
     <SourceRoot Include="$(MSBuildThisFileDirectory)/" />
   </ItemGroup>
 
-  <!-- Polyfills -->
-  <PropertyGroup>
-    <!-- Add support for OSPlatform attributes (net5.0+) -->
-    <PolySharpIncludeRuntimeSupportedAttributes>true</PolySharpIncludeRuntimeSupportedAttributes>
-  </PropertyGroup>
-
   <!-- Code analysis -->
   <PropertyGroup>
     <CodeAnalysisTreatWarningsAsErrors Condition="'$(ContinuousIntegrationBuild)' == 'true'">true</CodeAnalysisTreatWarningsAsErrors>

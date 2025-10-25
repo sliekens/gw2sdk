@@ -110,11 +110,11 @@
           "System.ValueTuple": "4.5.0"
         }
       },
-      "PolySharp": {
+      "Polyfill": {
         "type": "Direct",
-        "requested": "[1.15.0, )",
-        "resolved": "1.15.0",
-        "contentHash": "FbU0El+EEjdpuIX4iDbeS7ki1uzpJPx8vbqOzEtqnl1GZeAGJfq+jCbxeJL2y0EPnUNk8dRnnqR2xnYXg9Tf+g=="
+        "requested": "[8.9.0, )",
+        "resolved": "8.9.0",
+        "contentHash": "GykrwQWWpMbGesFL1jQ8kGyfL8mGdmT+tgO6Fv5cx/MsoFX/0sxDDyRKsp2goXWWA9jnB63UsDriBPIzF+pSRw=="
       },
       "System.Interactive": {
         "type": "Direct",
@@ -956,11 +956,11 @@
         "resolved": "8.6.4",
         "contentHash": "4AWqYnQ2TME0E+Mzovt1Uu+VyvpR84ymUldMcPw7Mbj799Phaag14CKrMtlJGx5jsvYP+S3oR1QmysgmXoD5cw=="
       },
-      "PolySharp": {
+      "Polyfill": {
         "type": "Direct",
-        "requested": "[1.15.0, )",
-        "resolved": "1.15.0",
-        "contentHash": "FbU0El+EEjdpuIX4iDbeS7ki1uzpJPx8vbqOzEtqnl1GZeAGJfq+jCbxeJL2y0EPnUNk8dRnnqR2xnYXg9Tf+g=="
+        "requested": "[8.9.0, )",
+        "resolved": "8.9.0",
+        "contentHash": "GykrwQWWpMbGesFL1jQ8kGyfL8mGdmT+tgO6Fv5cx/MsoFX/0sxDDyRKsp2goXWWA9jnB63UsDriBPIzF+pSRw=="
       },
       "System.Interactive": {
         "type": "Direct",

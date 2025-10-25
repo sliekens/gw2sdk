@@ -6,7 +6,7 @@ Multi-targeted .NET library. Targets: net9.0, net8.0, netstandard2.0, net462. Fa
 ## Core Rules
 - Adapt: ask for clarification; incorporate feedback.
 - Remain critical and objective, provide suggestions based in first principles.
-- Prefer latest C# features; PolySharp supplies missing constructs for older TFMs.
+- Prefer latest C# features; Pollyfill supplies missing constructs for older TFMs.
 - Cross-target: use `#if NET` (net8+), `#if NET9_0_OR_GREATER` only for net9-only features, `#if NETFRAMEWORK` only for APIs absent in .NET Standard. No runtime feature probes.
 - Public API stability: additive changes (extension methods) over breaking changes.
 - Dependencies: add only when explicitly requested.

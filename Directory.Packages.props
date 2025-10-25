@@ -22,7 +22,10 @@
     <PackageVersion Include="MinVer" Version="6.0.0" />
     <PackageVersion Include="Pastel" Version="7.0.0" />
     <PackageVersion Include="Polly.Core" Version="8.6.4" />
-    <PackageVersion Include="PolySharp" Version="1.15.0" />
+    <PackageVersion Include="Polyfill" Version="8.9.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageVersion>
     <PackageVersion Include="Roslynator.Analyzers" Version="4.14.1">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>

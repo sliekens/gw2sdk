@@ -23,9 +23,9 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" />
     <PackageReference Include="Polly.Core" />
-    <PackageReference Include="PolySharp">
-      <PrivateAssets>all</PrivateAssets>
+    <PackageReference Include="Polyfill">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="System.Interactive" />
     <PackageReference Include="xunit.analyzers">

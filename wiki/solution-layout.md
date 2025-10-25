@@ -129,7 +129,7 @@ The **GW2SDK** project has the following development dependencies:
  coverage report locally (offline).
 - **Codecov** is used to generate an online code coverage report. It has
  features not found in ReportGenerator but it can't be used offline.
-- **PolySharp** is used to polyfill language features for older versions of
+- **Polyfill** is used to polyfill language features for older versions of
  .NET. For example it allows usage of nullable reference types in .NET
  Standard 2.0.
 - **MinVer** is used to automatically generate the version number based on
