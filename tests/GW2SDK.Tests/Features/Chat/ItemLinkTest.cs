@@ -1,5 +1,7 @@
 ﻿using GuildWars2.Chat;
 
+using Assert = TUnit.Assertions.Assert;
+
 namespace GuildWars2.Tests.Features.Chat;
 
 public class ItemLinkTest
@@ -8,44 +10,44 @@ public class ItemLinkTest
     [Arguments("[&AgEAWgAA]", 23040, 1, null, null, null)]
     [Arguments("[&AvpJUgEA]", 86601, 250, null, null, null)]
     [Arguments("[&AgGoOQHA4AMAAMtlAQA=]", 80296, 1, 992, 91595, null)]
-    public void Can_marshal_item_links(string chatLink, int itemId, int count, int? skinId, int? suffixItemId, int? secondarySuffixItemId)
+    public async Task Can_marshal_item_links(string chatLink, int itemId, int count, int? skinId, int? suffixItemId, int? secondarySuffixItemId)
     {
         ItemLink sut = ItemLink.Parse(chatLink);
         string actual = sut.ToString();
-        Assert.Equal(chatLink, actual);
-        Assert.Equal(itemId, sut.ItemId);
-        Assert.Equal(count, sut.Count);
-        Assert.Equal(skinId, sut.SkinId);
+        await Assert.That(actual).IsEqualTo(chatLink);
+        await Assert.That(sut.ItemId).IsEqualTo(itemId);
+        await Assert.That(sut.Count).IsEqualTo(count);
+        await Assert.That(sut.SkinId).IsEqualTo(skinId);
         if (skinId.HasValue)
         {
             SkinLink? skinLink = sut.GetSkinLink();
-            Assert.Equal(skinId, skinLink?.SkinId);
+            await Assert.That(skinLink?.SkinId).IsEqualTo(skinId);
         }
         else
         {
-            Assert.Null(sut.GetSkinLink());
+            await Assert.That(sut.GetSkinLink()).IsNull();
         }
 
-        Assert.Equal(suffixItemId, sut.SuffixItemId);
+        await Assert.That(sut.SuffixItemId).IsEqualTo(suffixItemId);
         if (suffixItemId.HasValue)
         {
             ItemLink? suffixLink = sut.GetSuffixItemLink();
-            Assert.Equal(suffixItemId, suffixLink?.ItemId);
+            await Assert.That(suffixLink?.ItemId).IsEqualTo(suffixItemId);
         }
         else
         {
-            Assert.Null(sut.GetSuffixItemLink());
+            await Assert.That(sut.GetSuffixItemLink()).IsNull();
         }
 
-        Assert.Equal(secondarySuffixItemId, sut.SecondarySuffixItemId);
+        await Assert.That(sut.SecondarySuffixItemId).IsEqualTo(secondarySuffixItemId);
         if (secondarySuffixItemId.HasValue)
         {
             ItemLink? secondarySuffixLink = sut.GetSecondarySuffixItemLink();
-            Assert.Equal(secondarySuffixItemId, secondarySuffixLink?.ItemId);
+            await Assert.That(secondarySuffixLink?.ItemId).IsEqualTo(secondarySuffixItemId);
         }
         else
         {
-            Assert.Null(sut.GetSecondarySuffixItemLink());
+            await Assert.That(sut.GetSecondarySuffixItemLink()).IsNull();
         }
     }
 }
