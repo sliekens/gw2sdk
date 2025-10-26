@@ -1,59 +1,75 @@
 ﻿using GuildWars2.Markup;
 
+using Assert = TUnit.Assertions.Assert;
+
 namespace GuildWars2.Tests.Features.Markup;
 
 public class MarkupParserTest
 {
     [Test]
-    public void Ignores_invalid_tags()
+    public async Task Ignores_invalid_tags()
     {
         string input = "5 <REDACTED> Dye kits";
         IEnumerable<MarkupToken> tokens = MarkupLexer.Tokenize(input);
         RootNode actual = MarkupParser.Parse(tokens);
-        Assert.NotNull(actual);
-        Assert.Collection(actual.Children, node =>
-        {
-            TextNode text = Assert.IsType<TextNode>(node);
-            Assert.Equal("5 ", text.Text);
-        }, node =>
-        {
-            TextNode text = Assert.IsType<TextNode>(node);
-            Assert.Equal(" Dye kits", text.Text);
-        });
+        await Assert.That(actual)
+            .IsNotNull()
+            .And.Member(a => a.Children, a => a.HasCount(2));
+
+        await Assert.That(actual.Children.ElementAt(0))
+            .IsTypeOf<TextNode>()
+            .And.Member(n => n.Text, t => t.IsEqualTo("5 "));
+
+        await Assert.That(actual.Children.ElementAt(1))
+            .IsTypeOf<TextNode>()
+            .And.Member(n => n.Text, t => t.IsEqualTo(" Dye kits"));
     }
 
     [Test]
-    public void Forgives_mismatched_tags()
+    public async Task Forgives_mismatched_tags()
     {
         string input = "<c=@reminder>This coat hides leg armor.<c>";
         IEnumerable<MarkupToken> tokens = MarkupLexer.Tokenize(input);
         RootNode actual = MarkupParser.Parse(tokens);
-        Assert.NotNull(actual);
-        MarkupNode firstChild = Assert.Single(actual.Children);
-        ColoredTextNode coloredText = Assert.IsType<ColoredTextNode>(firstChild);
-        Assert.Equal("@reminder", coloredText.Color);
-        MarkupNode coloredTextChild = Assert.Single(coloredText.Children);
-        TextNode text = Assert.IsType<TextNode>(coloredTextChild);
-        Assert.Equal("This coat hides leg armor.", text.Text);
+        await Assert.That(actual).IsNotNull();
+
+        MarkupNode child = await Assert.That(actual.Children)
+            .HasSingleItem();
+
+        ColoredTextNode coloredText = await Assert.That(child)
+            .IsTypeOf<ColoredTextNode>()
+            .And.Member(n => n.Color, b => b.IsEqualTo("@reminder"))
+            .And.IsNotNull();
+
+        MarkupNode coloredTextChild = await Assert.That(coloredText.Children)
+            .HasSingleItem();
+
+        await Assert.That(coloredTextChild)
+            .IsTypeOf<TextNode>()
+            .And.Member(c => c.Text, d => d.IsEqualTo("This coat hides leg armor."));
     }
 
     [Test]
-    public void Keeps_trailing_newline()
+    public async Task Keeps_trailing_newline()
     {
         string input = "<c=@flavor>A gift given in gratitude from the leaders of Tyria.</c>\n";
         IEnumerable<MarkupToken> tokens = MarkupLexer.Tokenize(input);
         RootNode actual = MarkupParser.Parse(tokens);
-        Assert.NotNull(actual);
-        Assert.Collection(actual.Children, node =>
-        {
-            ColoredTextNode coloredText = Assert.IsType<ColoredTextNode>(node);
-            Assert.Equal("@flavor", coloredText.Color);
-            MarkupNode coloredTextChild = Assert.Single(coloredText.Children);
-            TextNode text = Assert.IsType<TextNode>(coloredTextChild);
-            Assert.Equal("A gift given in gratitude from the leaders of Tyria.", text.Text);
-        }, node =>
-        {
-            LineBreakNode lineBreak = Assert.IsType<LineBreakNode>(node);
-        });
+        await Assert.That(actual)
+            .IsNotNull()
+            .And.Member(a => a.Children, a => a.HasCount(2));
+
+        ColoredTextNode coloredText = await Assert.That(actual.Children.ElementAt(0))
+            .IsTypeOf<ColoredTextNode>()
+            .And.Member(n => n.Color, c => c.IsEqualTo("@flavor"))
+            .And.Member(n => n.Children, c => c.HasSingleItem())
+            .And.IsNotNull();
+
+        MarkupNode coloredTextChild = await Assert.That(coloredText.Children).HasSingleItem();
+        await Assert.That(coloredTextChild)
+            .IsTypeOf<TextNode>()
+            .And.Member(text => text.Text, text => text.IsEqualTo("A gift given in gratitude from the leaders of Tyria."));
+
+        await Assert.That(actual.Children.ElementAt(1)).IsTypeOf<LineBreakNode>();
     }
 }
