@@ -11,9 +11,14 @@ public class MountSkins
     public async Task Mount_skins_can_be_listed()
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-        (HashSet<MountSkin> actual, MessageContext context) = await sut.Hero.Equipment.Mounts.GetMountSkins(cancellationToken: TestContext.Current!.CancellationToken);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
+
+        (HashSet<MountSkin> actual, MessageContext context) = await sut.Hero.Equipment.Mounts.GetMountSkins(
+            cancellationToken: TestContext.Current!.CancellationToken
+        );
+
+        // https://github.com/gw2-api/issues/issues/134
+        Assert.Equal(context.ResultCount, actual.Count + 1);
+        Assert.Equal(context.ResultTotal, actual.Count + 1);
         Assert.All(actual, entry =>
         {
             Assert.True(entry.Id > 0);
@@ -26,7 +31,6 @@ public class MountSkins
                 Assert.True(slot.ColorId > 0);
             });
 #pragma warning disable CS0618 // Type or member is obsolete
-
             Assert.True(entry.Mount.IsDefined());
 #pragma warning restore CS0618 // Type or member is obsolete
 
