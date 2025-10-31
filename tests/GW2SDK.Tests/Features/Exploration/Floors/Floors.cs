@@ -89,7 +89,9 @@ public class Floors
 
                     foreach (HeroChallenge heroChallenge in map.HeroChallenges)
                     {
-                        if (regionId == 37)
+                        const int cantha = 37;
+                        const int castora = 58;
+                        if (regionId is cantha or castora)
                         {
                             //https://github.com/gw2-api/issues/issues/35
                             Assert.Empty(heroChallenge.Id);
