@@ -62,6 +62,18 @@ public sealed class SubtokenOptionsBuilder
         return this;
     }
 
+    /// <summary>Replaces the requested permissions.</summary>
+    /// <param name="values">The permissions to request.</param>
+    /// <returns>The current builder.</returns>
+    public SubtokenOptionsBuilder WithPermissions(IEnumerable<Extensible<Permission>> values)
+    {
+        ThrowHelper.ThrowIfNull(values);
+        List<Permission> permissionList = EnsurePermissions();
+        permissionList.Clear();
+        permissionList.AddRange(values.Select(v => v.ToEnum()).Where(p => p.HasValue).Select(p => p!.Value));
+        return this;
+    }
+
     /// <summary>Clears any requested allowed URLs.</summary>
     /// <returns>The current builder.</returns>
     public SubtokenOptionsBuilder ClearAllowedUrls()
