@@ -20,7 +20,16 @@ public class Subtoken
         DateTimeOffset notBefore = DateTimeOffset.FromUnixTimeSeconds(DateTimeOffset.UtcNow.ToUnixTimeSeconds());
         DateTimeOffset expiresAt = notBefore.AddDays(1);
         List<Uri> urls = [new("/v2/tokeninfo", UriKind.Relative), new("/v2/account", UriKind.Relative), new("/v2/characters/My Cool Character", UriKind.Relative)];
-        (CreatedSubtoken createdSubtoken, MessageContext context) = await sut.Tokens.CreateSubtoken(accessToken.Key, subtokenPermissions, expiresAt, urls, cancellationToken: TestContext.Current!.CancellationToken);
+
+        (CreatedSubtoken createdSubtoken, MessageContext context) = await sut.Tokens.CreateSubtoken(
+            accessToken.Key,
+            subtoken => subtoken
+                .WithPermissions(subtokenPermissions)
+                .WithAbsoluteExpiration(expiresAt)
+                .WithAllowedUrls(urls),
+            cancellationToken: TestContext.Current!.CancellationToken
+        );
+
         #endregion
         // BUG: /v2/tokeninfo sometimes fails with "Invalid access token" for recently created subtokens
         // I guess this is a clock synchronization problem, because adding a delay works
