@@ -8,6 +8,7 @@ using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Achievements;
 
+[ParallelLimiter<Sequentually>]
 public class Achievements
 {
     [Test]

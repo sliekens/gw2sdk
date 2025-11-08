@@ -7,6 +7,7 @@ using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Items;
 
+[ParallelLimiter<Sequentually>]
 public class Items
 {
     [Test]
