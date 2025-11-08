@@ -10,7 +10,8 @@ namespace GuildWars2.Tests.Features.Mumble;
 
 public class GameLinkTest
 {
-    private static void EnsureWindows()
+    [Before(Test)]
+    public void EnsureWindows()
     {
         if (!GameLink.IsSupported())
         {
@@ -22,7 +23,6 @@ public class GameLinkTest
     [SupportedOSPlatform("windows")]
     public void Name_can_be_read_from_Mumble_link()
     {
-        EnsureWindows();
         using GameLink sut = GameLink.Open();
         GameTick actual = sut.GetSnapshot();
         Assert.Equal("Guild Wars 2", actual.Name);
@@ -32,7 +32,6 @@ public class GameLinkTest
     [SupportedOSPlatform("windows")]
     public async Task The_link_is_self_updating()
     {
-        EnsureWindows();
         await using GameLink sut = GameLink.Open();
         GameLinkTestObserver actual = new();
         sut.Subscribe(actual);
@@ -44,7 +43,6 @@ public class GameLinkTest
     [SupportedOSPlatform("windows")]
     public void The_link_provides_context()
     {
-        EnsureWindows();
         using GameLink sut = GameLink.Open();
         GameTick gameTick = sut.GetSnapshot();
         Assert.True(gameTick.Context.BuildId > 100_000, "Game build should be over 100,000");
@@ -63,7 +61,6 @@ public class GameLinkTest
     [SupportedOSPlatform("windows")]
     public void The_link_provides_identity()
     {
-        EnsureWindows();
         using GameLink sut = GameLink.Open();
         Identity? actual = sut.GetSnapshot().GetIdentity();
         Assert.NotNull(actual);
