@@ -14,7 +14,7 @@ public class SectorsByFilter
         const int regionId = 1;
         const int mapId = 26;
         HashSet<int> ids = [513, 514, 515];
-        (HashSet<Sector> actual, MessageContext context) = await sut.Exploration.GetSectorsByIds(continentId, floorId, regionId, mapId, ids, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Sector> actual, MessageContext context) = await sut.Exploration.GetSectorsByIds(continentId, floorId, regionId, mapId, ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);
         Assert.Equal(ids.Count, actual.Count);

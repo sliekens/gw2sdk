@@ -10,7 +10,7 @@ public class GlyphsByPage
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int pageSize = 3;
-        (HashSet<Glyph> actual, MessageContext context) = await sut.Pve.Home.GetGlyphsByPage(0, pageSize, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Glyph> actual, MessageContext context) = await sut.Pve.Home.GetGlyphsByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);
         Assert.Equal(pageSize, context.ResultCount);

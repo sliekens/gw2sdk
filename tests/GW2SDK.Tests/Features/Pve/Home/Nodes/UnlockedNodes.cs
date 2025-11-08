@@ -9,7 +9,7 @@ public class UnlockedNodes
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey token = TestConfiguration.ApiKey;
-        (HashSet<string> actual, _) = await sut.Pve.Home.GetUnlockedNodes(token.Key, TestContext.Current!.CancellationToken);
+        (HashSet<string> actual, _) = await sut.Pve.Home.GetUnlockedNodes(token.Key, TestContext.Current!.Execution.CancellationToken);
         Assert.NotEmpty(actual);
         Assert.All(actual, Assert.NotEmpty);
     }

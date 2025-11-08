@@ -10,7 +10,7 @@ public class NoveltiesByPage
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int pageSize = 3;
-        (HashSet<Novelty> actual, MessageContext context) = await sut.Hero.Equipment.Novelties.GetNoveltiesByPage(0, pageSize, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Novelty> actual, MessageContext context) = await sut.Hero.Equipment.Novelties.GetNoveltiesByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);
         Assert.Equal(pageSize, context.ResultCount);

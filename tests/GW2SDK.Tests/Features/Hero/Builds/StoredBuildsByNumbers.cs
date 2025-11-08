@@ -11,7 +11,7 @@ public class StoredBuildsByNumbers
         ApiKey accessToken = TestConfiguration.ApiKey;
         HashSet<int> slotNumbers = [2, 3, 4];
         ;
-        (IReadOnlyList<GuildWars2.Hero.Builds.Build> actual, _) = await sut.Hero.Builds.GetStoredBuilds(slotNumbers, accessToken.Key, cancellationToken: TestContext.Current!.CancellationToken);
+        (IReadOnlyList<GuildWars2.Hero.Builds.Build> actual, _) = await sut.Hero.Builds.GetStoredBuilds(slotNumbers, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotEmpty(actual);
         Assert.All(actual, space =>
         {

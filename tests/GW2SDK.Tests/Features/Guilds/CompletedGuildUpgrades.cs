@@ -10,10 +10,10 @@ public class CompletedGuildUpgrades
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         TestGuildLeader guildLeader = TestConfiguration.TestGuildLeader;
-        (AccountSummary account, _) = await sut.Hero.Account.GetSummary(guildLeader.Token, cancellationToken: TestContext.Current!.CancellationToken);
+        (AccountSummary account, _) = await sut.Hero.Account.GetSummary(guildLeader.Token, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         foreach (string? guildId in account.LeaderOfGuildIds!)
         {
-            (HashSet<int> actual, _) = await sut.Guilds.GetCompletedGuildUpgrades(guildId, guildLeader.Token, TestContext.Current!.CancellationToken);
+            (HashSet<int> actual, _) = await sut.Guilds.GetCompletedGuildUpgrades(guildId, guildLeader.Token, TestContext.Current!.Execution.CancellationToken);
             Assert.NotEmpty(actual);
         }
     }

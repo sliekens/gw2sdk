@@ -12,7 +12,7 @@ public class MatchOverviewByWorldId
         const int worldId = 2006;
         // Can fail on a Friday after reset
         // ---> GuildWars2.Http.ResourceNotFoundException : world not currently in a match
-        (MatchOverview actual, _) = await sut.Wvw.GetMatchOverviewByWorldId(worldId, cancellationToken: TestContext.Current!.CancellationToken);
+        (MatchOverview actual, _) = await sut.Wvw.GetMatchOverviewByWorldId(worldId, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(actual);
     }
 }

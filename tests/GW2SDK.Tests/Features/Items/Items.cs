@@ -17,7 +17,7 @@ public class Items
         using JsonLinesHttpMessageHandler handler = new("Data/items.jsonl.gz");
         using HttpClient httpClient = new(handler);
         Gw2Client sut = new(httpClient);
-        await foreach ((Item actual, MessageContext context) in sut.Items.GetItemsBulk(cancellationToken: TestContext.Current!.CancellationToken))
+        await foreach ((Item actual, MessageContext context) in sut.Items.GetItemsBulk(cancellationToken: TestContext.Current!.Execution.CancellationToken))
         {
             Assert.NotNull(context);
             Assert.True(actual.Id >= 1);
@@ -483,7 +483,7 @@ public class Items
         using JsonLinesHttpMessageHandler handler = new("Data/items.jsonl.gz");
         using HttpClient httpClient = new(handler);
         Gw2Client sut = new(httpClient);
-        await foreach (Item original in sut.Items.GetItemsBulk(cancellationToken: TestContext.Current!.CancellationToken).ValueOnly(TestContext.Current!.CancellationToken))
+        await foreach (Item original in sut.Items.GetItemsBulk(cancellationToken: TestContext.Current!.Execution.CancellationToken).ValueOnly(TestContext.Current!.Execution.CancellationToken))
         {
             string json = JsonSerializer.Serialize(original);
             Item? roundTrip = JsonSerializer.Deserialize<Item>(json);

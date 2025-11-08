@@ -10,7 +10,7 @@ public class SkiffSkinsByFilter
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<int> ids = [410, 413, 420];
-        (HashSet<SkiffSkin> actual, MessageContext context) = await sut.Hero.Equipment.Skiffs.GetSkiffSkinsByIds(ids, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<SkiffSkin> actual, MessageContext context) = await sut.Hero.Equipment.Skiffs.GetSkiffSkinsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);
         Assert.Equal(ids.Count, actual.Count);

@@ -10,7 +10,7 @@ public class ObjectivesByFilter
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<string> ids = ["1099-99", "1143-99", "1102-99"];
-        (HashSet<Objective> actual, MessageContext context) = await sut.Wvw.GetObjectivesByIds(ids, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Objective> actual, MessageContext context) = await sut.Wvw.GetObjectivesByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);
         Assert.Equal(ids.Count, actual.Count);

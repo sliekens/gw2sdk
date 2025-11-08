@@ -14,7 +14,7 @@ public class EquipmentTemplateByName
         TestCharacter character = TestConfiguration.TestCharacter;
         ApiKey accessToken = TestConfiguration.ApiKey;
         const int tab = 1;
-        (EquipmentTemplate actual, MessageContext context) = await sut.Hero.Equipment.Templates.GetEquipmentTemplate(character.Name, tab, accessToken.Key, cancellationToken: TestContext.Current!.CancellationToken);
+        (EquipmentTemplate actual, MessageContext context) = await sut.Hero.Equipment.Templates.GetEquipmentTemplate(character.Name, tab, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.True(actual.TabNumber > 0);
         Assert.NotEmpty(actual.Name);

@@ -12,7 +12,7 @@ public class Titles
     public async Task Titles_can_be_listed()
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-        (HashSet<Title> actual, MessageContext context) = await sut.Hero.Achievements.GetTitles(cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Title> actual, MessageContext context) = await sut.Hero.Achievements.GetTitles(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
         Assert.NotEmpty(actual);

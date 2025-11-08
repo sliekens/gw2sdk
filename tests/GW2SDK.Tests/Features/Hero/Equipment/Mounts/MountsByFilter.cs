@@ -10,7 +10,7 @@ public class MountsByFilter
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<MountName> names = [MountName.Raptor, MountName.Jackal, MountName.Skimmer];
-        (HashSet<Mount> actual, MessageContext context) = await sut.Hero.Equipment.Mounts.GetMountsByNames(names, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Mount> actual, MessageContext context) = await sut.Hero.Equipment.Mounts.GetMountsByNames(names, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(names.Count, context.ResultCount);
         Assert.True(context.ResultTotal > names.Count);
         Assert.Equal(names.Count, actual.Count);

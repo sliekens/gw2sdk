@@ -10,7 +10,7 @@ public class GlyphById
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const string id = "leatherworker_logging";
-        (Glyph actual, MessageContext context) = await sut.Pve.Home.GetGlyphById(id, cancellationToken: TestContext.Current!.CancellationToken);
+        (Glyph actual, MessageContext context) = await sut.Pve.Home.GetGlyphById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }

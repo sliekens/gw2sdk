@@ -11,7 +11,7 @@ public class FloorsByPage
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int continentId = 1;
         const int pageSize = 3;
-        (HashSet<Floor> actual, MessageContext context) = await sut.Exploration.GetFloorsByPage(continentId, 0, pageSize, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Floor> actual, MessageContext context) = await sut.Exploration.GetFloorsByPage(continentId, 0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);
         Assert.Equal(pageSize, context.ResultCount);

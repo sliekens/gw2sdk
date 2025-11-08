@@ -14,7 +14,7 @@ public class SectorsByPage
         const int regionId = 1;
         const int mapId = 26;
         const int pageSize = 3;
-        (HashSet<Sector> actual, MessageContext context) = await sut.Exploration.GetSectorsByPage(continentId, floorId, regionId, mapId, 0, pageSize, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Sector> actual, MessageContext context) = await sut.Exploration.GetSectorsByPage(continentId, floorId, regionId, mapId, 0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);
         Assert.Equal(pageSize, context.ResultCount);

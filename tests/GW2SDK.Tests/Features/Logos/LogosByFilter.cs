@@ -10,7 +10,7 @@ public class LogosByFilter
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<string> ids = ["Guild-Wars-2-logo-en", "Guild-Wars-2-logo-es", "Guild-Wars-2-logo-de",];
-        (HashSet<Logo> actual, MessageContext context) = await sut.Logos.GetLogosByIds(ids, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Logo> actual, MessageContext context) = await sut.Logos.GetLogosByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);
         Assert.Equal(ids.Count, actual.Count);

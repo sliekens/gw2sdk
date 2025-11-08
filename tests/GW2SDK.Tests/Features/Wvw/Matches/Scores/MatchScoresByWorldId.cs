@@ -10,7 +10,7 @@ public class MatchScoresByWorldId
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int worldId = 2006;
-        (MatchScores actual, _) = await sut.Wvw.GetMatchScoresByWorldId(worldId, cancellationToken: TestContext.Current!.CancellationToken);
+        (MatchScores actual, _) = await sut.Wvw.GetMatchScoresByWorldId(worldId, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(actual);
     }
 }

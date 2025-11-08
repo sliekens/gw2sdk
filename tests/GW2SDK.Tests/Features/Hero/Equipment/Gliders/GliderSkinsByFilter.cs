@@ -10,7 +10,7 @@ public class GliderSkinsByFilter
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<int> ids = [1, 38, 74];
-        (HashSet<GliderSkin> actual, MessageContext context) = await sut.Hero.Equipment.Gliders.GetGliderSkinsByIds(ids, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<GliderSkin> actual, MessageContext context) = await sut.Hero.Equipment.Gliders.GetGliderSkinsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);
         Assert.Equal(ids.Count, actual.Count);

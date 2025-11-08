@@ -10,7 +10,7 @@ public class ContinentsByPage
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int pageSize = 3;
-        (HashSet<Continent> actual, MessageContext context) = await sut.Exploration.GetContinentsByPage(0, pageSize, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Continent> actual, MessageContext context) = await sut.Exploration.GetContinentsByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);
         Assert.Equal(2, context.ResultCount);

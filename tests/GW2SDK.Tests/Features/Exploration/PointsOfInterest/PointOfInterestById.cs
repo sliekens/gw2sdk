@@ -14,7 +14,7 @@ public class PointOfInterestById
         const int regionId = 1;
         const int mapId = 26;
         const int pointOfInterestId = 554;
-        (PointOfInterest actual, MessageContext context) = await sut.Exploration.GetPointOfInterestById(continentId, floorId, regionId, mapId, pointOfInterestId, cancellationToken: TestContext.Current!.CancellationToken);
+        (PointOfInterest actual, MessageContext context) = await sut.Exploration.GetPointOfInterestById(continentId, floorId, regionId, mapId, pointOfInterestId, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(pointOfInterestId, actual.Id);
         Assert.Equal("Leaning Grade", actual.Name);

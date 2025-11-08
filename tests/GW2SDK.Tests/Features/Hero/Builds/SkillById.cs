@@ -10,7 +10,7 @@ public class SkillById
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int id = 61533;
-        (Skill actual, MessageContext context) = await sut.Hero.Builds.GetSkillById(id, cancellationToken: TestContext.Current!.CancellationToken);
+        (Skill actual, MessageContext context) = await sut.Hero.Builds.GetSkillById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }

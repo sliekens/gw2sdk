@@ -9,7 +9,7 @@ public class UnlockedColors
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
-        (HashSet<int> actual, _) = await sut.Hero.Equipment.Dyes.GetUnlockedColors(accessToken.Key, TestContext.Current!.CancellationToken);
+        (HashSet<int> actual, _) = await sut.Hero.Equipment.Dyes.GetUnlockedColors(accessToken.Key, TestContext.Current!.Execution.CancellationToken);
         Assert.NotEmpty(actual);
         Assert.All(actual, id => Assert.NotEqual(0, id));
     }

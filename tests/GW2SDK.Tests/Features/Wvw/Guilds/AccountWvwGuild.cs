@@ -9,7 +9,7 @@ public class AccountWvwGuild
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
-        (GuildWars2.Wvw.Guilds.AccountWvwGuild actual, _) = await sut.Wvw.GetAccountWvwGuild(accessToken.Key, TestContext.Current!.CancellationToken);
+        (GuildWars2.Wvw.Guilds.AccountWvwGuild actual, _) = await sut.Wvw.GetAccountWvwGuild(accessToken.Key, TestContext.Current!.Execution.CancellationToken);
         if (actual.TeamId.HasValue)
         {
             Assert.True(actual.TeamId > 0);

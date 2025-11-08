@@ -11,7 +11,7 @@ public class ActiveBuild
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         TestCharacter character = TestConfiguration.TestCharacter;
         ApiKey accessToken = TestConfiguration.ApiKey;
-        (BuildTemplate actual, _) = await sut.Hero.Builds.GetActiveBuild(character.Name, accessToken.Key, cancellationToken: TestContext.Current!.CancellationToken);
+        (BuildTemplate actual, _) = await sut.Hero.Builds.GetActiveBuild(character.Name, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(actual);
         Assert.NotNull(actual.Build);
     }

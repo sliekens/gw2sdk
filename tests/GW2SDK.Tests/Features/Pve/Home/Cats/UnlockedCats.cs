@@ -9,7 +9,7 @@ public class UnlockedCats
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey token = TestConfiguration.ApiKey;
-        (HashSet<int> actual, _) = await sut.Pve.Home.GetUnlockedCats(token.Key, TestContext.Current!.CancellationToken);
+        (HashSet<int> actual, _) = await sut.Pve.Home.GetUnlockedCats(token.Key, TestContext.Current!.Execution.CancellationToken);
         Assert.NotEmpty(actual);
         Assert.All(actual, id => Assert.True(id > 0));
     }

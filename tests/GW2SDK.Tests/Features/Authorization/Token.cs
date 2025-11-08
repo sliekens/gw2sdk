@@ -12,7 +12,7 @@ public class Token
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
-        (TokenInfo actual, _) = await sut.Tokens.GetTokenInfo(accessToken.Key, cancellationToken: TestContext.Current!.CancellationToken);
+        (TokenInfo actual, _) = await sut.Tokens.GetTokenInfo(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         ApiKeyInfo apiKey = await Assert.That(actual).IsTypeOf<ApiKeyInfo>()
             .And.Member(key => key.Id, id => id.IsNotEmpty())
             .And.Member(key => key.Name, name => name.IsNotEmpty())

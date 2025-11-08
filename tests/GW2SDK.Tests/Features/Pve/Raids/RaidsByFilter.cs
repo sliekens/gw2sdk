@@ -10,7 +10,7 @@ public class RaidsByFilter
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<string> ids = ["forsaken_thicket", "bastion_of_the_penitent", "hall_of_chains"];
-        (HashSet<Raid> actual, MessageContext context) = await sut.Pve.Raids.GetRaidsByIds(ids, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Raid> actual, MessageContext context) = await sut.Pve.Raids.GetRaidsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);
         Assert.Equal(ids.Count, actual.Count);

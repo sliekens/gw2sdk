@@ -10,7 +10,7 @@ public class EmblemBackgroundById
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int id = 1;
-        (EmblemBackground actual, MessageContext context) = await sut.Guilds.GetEmblemBackgroundById(id, cancellationToken: TestContext.Current!.CancellationToken);
+        (EmblemBackground actual, MessageContext context) = await sut.Guilds.GetEmblemBackgroundById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }

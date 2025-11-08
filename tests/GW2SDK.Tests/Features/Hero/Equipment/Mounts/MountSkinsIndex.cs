@@ -11,7 +11,7 @@ public class MountSkinsIndex
 
         (HashSet<int> actual, MessageContext context) =
             await sut.Hero.Equipment.Mounts.GetMountSkinsIndex(
-                TestContext.Current!.CancellationToken
+                TestContext.Current!.Execution.CancellationToken
             );
 
         // https://github.com/gw2-api/issues/issues/134

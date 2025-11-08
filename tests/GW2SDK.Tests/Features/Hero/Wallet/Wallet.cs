@@ -10,7 +10,7 @@ public class Wallet
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
-        (HashSet<CurrencyAmount> actual, _) = await sut.Hero.Wallet.GetWallet(accessToken.Key, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<CurrencyAmount> actual, _) = await sut.Hero.Wallet.GetWallet(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         CurrencyAmount coins = actual.Single(currency => currency.CurrencyId == 1);
         Coin coinsAmount = coins.Amount;
         Assert.True(coinsAmount > 0);

@@ -9,7 +9,7 @@ public class V2
     public async Task Has_api_metadata()
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-        (ApiVersion actual, _) = await sut.Metadata.GetApiVersion(cancellationToken: TestContext.Current!.CancellationToken);
+        (ApiVersion actual, _) = await sut.Metadata.GetApiVersion(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.All(actual.Languages, language =>
         {
             Assert.Contains(language, new[] { "en", "es", "de", "fr", "zh" });

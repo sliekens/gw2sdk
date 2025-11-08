@@ -10,7 +10,7 @@ public class MatchesOverviewByFilter
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<string> ids = ["1-1", "1-2", "1-3"];
-        (HashSet<MatchOverview> actual, MessageContext context) = await sut.Wvw.GetMatchesOverviewByIds(ids, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<MatchOverview> actual, MessageContext context) = await sut.Wvw.GetMatchesOverviewByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);
         Assert.Equal(ids.Count, actual.Count);

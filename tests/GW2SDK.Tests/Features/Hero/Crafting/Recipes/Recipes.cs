@@ -16,7 +16,7 @@ public class Recipes
         using JsonLinesHttpMessageHandler handler = new("Data/recipes.jsonl.gz");
         using HttpClient httpClient = new(handler);
         Gw2Client sut = new(httpClient);
-        await foreach ((Recipe actual, MessageContext context) in sut.Hero.Crafting.Recipes.GetRecipesBulk(cancellationToken: TestContext.Current!.CancellationToken))
+        await foreach ((Recipe actual, MessageContext context) in sut.Hero.Crafting.Recipes.GetRecipesBulk(cancellationToken: TestContext.Current!.Execution.CancellationToken))
         {
             Assert.NotNull(context);
             Assert.True(actual.Id > 0);
@@ -48,7 +48,7 @@ public class Recipes
         using JsonLinesHttpMessageHandler handler = new("Data/recipes.jsonl.gz");
         using HttpClient httpClient = new(handler);
         Gw2Client sut = new(httpClient);
-        await foreach (Recipe original in sut.Hero.Crafting.Recipes.GetRecipesBulk(cancellationToken: TestContext.Current!.CancellationToken).ValueOnly(TestContext.Current!.CancellationToken))
+        await foreach (Recipe original in sut.Hero.Crafting.Recipes.GetRecipesBulk(cancellationToken: TestContext.Current!.Execution.CancellationToken).ValueOnly(TestContext.Current!.Execution.CancellationToken))
         {
             string json = JsonSerializer.Serialize(original);
             Recipe? roundTrip = JsonSerializer.Deserialize<Recipe>(json);

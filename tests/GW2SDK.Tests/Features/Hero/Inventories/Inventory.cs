@@ -11,7 +11,7 @@ public class Inventory
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         TestCharacter character = TestConfiguration.TestCharacter;
         ApiKey accessToken = TestConfiguration.ApiKey;
-        (Baggage actual, _) = await sut.Hero.Inventory.GetInventory(character.Name, accessToken.Key, cancellationToken: TestContext.Current!.CancellationToken);
+        (Baggage actual, _) = await sut.Hero.Inventory.GetInventory(character.Name, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(actual);
         Assert.NotEmpty(actual.Bags);
         Assert.All(actual.Bags, bag =>

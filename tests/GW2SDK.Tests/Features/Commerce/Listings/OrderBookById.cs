@@ -10,7 +10,7 @@ public class OrderBookById
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int id = 24;
-        (OrderBook actual, MessageContext context) = await sut.Commerce.GetOrderBookById(id, cancellationToken: TestContext.Current!.CancellationToken);
+        (OrderBook actual, MessageContext context) = await sut.Commerce.GetOrderBookById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }

@@ -10,7 +10,7 @@ public class AmuletsByFilter
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<int> ids = [4, 8, 9];
-        (HashSet<Amulet> actual, MessageContext context) = await sut.Pvp.GetAmuletsByIds(ids, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Amulet> actual, MessageContext context) = await sut.Pvp.GetAmuletsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);
         Assert.Equal(ids.Count, actual.Count);

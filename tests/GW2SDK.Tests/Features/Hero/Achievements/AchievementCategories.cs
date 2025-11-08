@@ -11,7 +11,7 @@ public class AchievementCategories
     public async Task Can_be_listed()
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-        (HashSet<AchievementCategory> actual, MessageContext context) = await sut.Hero.Achievements.GetAchievementCategories(cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<AchievementCategory> actual, MessageContext context) = await sut.Hero.Achievements.GetAchievementCategories(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
         Assert.NotEmpty(actual);

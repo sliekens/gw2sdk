@@ -52,7 +52,7 @@ public class BulkQueryTest
             return Task.FromResult(result);
         }
 
-        List<StubRecord> actual = await BulkQuery.QueryAsync(index, GetChunk, cancellationToken: TestContext.Current!.CancellationToken).ToListAsync(TestContext.Current!.CancellationToken);
+        List<StubRecord> actual = await BulkQuery.QueryAsync(index, GetChunk, cancellationToken: TestContext.Current!.Execution.CancellationToken).ToListAsync(TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(index.Count, actual.Count);
         Assert.All(index, id => Assert.Contains(actual, record => record.Id == id));
         Assert.All(actual, record => Assert.Contains(record.Id, index));
@@ -72,7 +72,7 @@ public class BulkQueryTest
             return Task.FromResult(result);
         }
 
-        List<StubRecord> actual = await BulkQuery.QueryAsync(index, GetChunk, cancellationToken: TestContext.Current!.CancellationToken).ToListAsync(TestContext.Current!.CancellationToken);
+        List<StubRecord> actual = await BulkQuery.QueryAsync(index, GetChunk, cancellationToken: TestContext.Current!.Execution.CancellationToken).ToListAsync(TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(index.Count, actual.Count);
         Assert.All(index, id => Assert.Contains(actual, record => record.Id == id));
         Assert.All(actual, record => Assert.Contains(record.Id, index));

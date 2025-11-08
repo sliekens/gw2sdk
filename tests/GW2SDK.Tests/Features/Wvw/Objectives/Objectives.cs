@@ -10,7 +10,7 @@ public class Objectives
     public async Task Can_be_listed()
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-        (HashSet<Objective> actual, MessageContext context) = await sut.Wvw.GetObjectives(cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Objective> actual, MessageContext context) = await sut.Wvw.GetObjectives(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

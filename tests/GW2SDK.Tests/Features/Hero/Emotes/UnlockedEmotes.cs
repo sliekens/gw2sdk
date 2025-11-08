@@ -9,7 +9,7 @@ public class UnlockedEmotes
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
-        (HashSet<string> actual, _) = await sut.Hero.Emotes.GetUnlockedEmotes(accessToken.Key, TestContext.Current!.CancellationToken);
+        (HashSet<string> actual, _) = await sut.Hero.Emotes.GetUnlockedEmotes(accessToken.Key, TestContext.Current!.Execution.CancellationToken);
         // Can be empty if you haven't unlocked any emotes
         // The best we can do is verify that there are no unexpected emotes
         Assert.All(actual, chest => Assert.Contains(chest, new[] { "Bless", "geargrind", "Heroic", "Paper", "playdead", "Possessed", "Rock", "rockout", "Scissors", "shiver", "Shiverplus", "shuffle", "step", "Stretch" }));

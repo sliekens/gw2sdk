@@ -10,7 +10,7 @@ public class GuildPermissionById
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const string id = "StartingRole";
-        (GuildPermissionSummary actual, MessageContext context) = await sut.Guilds.GetGuildPermissionById(id, cancellationToken: TestContext.Current!.CancellationToken);
+        (GuildPermissionSummary actual, MessageContext context) = await sut.Guilds.GetGuildPermissionById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }

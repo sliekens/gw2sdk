@@ -10,7 +10,7 @@ public class ItemPricesByFilter
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<int> ids = [24, 19699, 35984];
-        (HashSet<ItemPrice> actual, MessageContext context) = await sut.Commerce.GetItemPricesByIds(ids, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<ItemPrice> actual, MessageContext context) = await sut.Commerce.GetItemPricesByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);
         Assert.Equal(ids.Count, actual.Count);

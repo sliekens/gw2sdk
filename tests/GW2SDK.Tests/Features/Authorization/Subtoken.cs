@@ -29,14 +29,14 @@ public class Subtoken
                 .WithPermissions(TokenInfo.AllPermissions)
                 .WithAbsoluteExpiration(expiresAt)
                 .WithAllowedUrls(urls),
-            cancellationToken: TestContext.Current!.CancellationToken
+            cancellationToken: TestContext.Current!.Execution.CancellationToken
         );
 
         #endregion
         // BUG: /v2/tokeninfo sometimes fails with "Invalid access token" for recently created subtokens
         // I guess this is a clock synchronization problem, because adding a delay works
-        await Task.Delay(3000, TestContext.Current!.CancellationToken);
-        (TokenInfo actual, _) = await sut.Tokens.GetTokenInfo(createdSubtoken.Subtoken, cancellationToken: TestContext.Current!.CancellationToken);
+        await Task.Delay(3000, TestContext.Current!.Execution.CancellationToken);
+        (TokenInfo actual, _) = await sut.Tokens.GetTokenInfo(createdSubtoken.Subtoken, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         SubtokenInfo? subtoken = await Assert.That(actual).IsTypeOf<SubtokenInfo>();
         await Assert.That(subtoken).IsNotNull()
             .And.Member(subtoken => subtoken.Id, id => id.IsNotEmpty())

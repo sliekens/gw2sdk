@@ -9,7 +9,7 @@ public class RecipesIndexByIngredient
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int visionCrystalItemId = 46746;
-        (HashSet<int> actual, MessageContext context) = await sut.Hero.Crafting.Recipes.GetRecipesIndexByIngredientItemId(visionCrystalItemId, TestContext.Current!.CancellationToken);
+        (HashSet<int> actual, MessageContext context) = await sut.Hero.Crafting.Recipes.GetRecipesIndexByIngredientItemId(visionCrystalItemId, TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
         Assert.NotEmpty(actual);

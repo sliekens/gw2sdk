@@ -10,7 +10,7 @@ public class ItemsByFilter
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<int> ids = [24, 46, 56];
-        (HashSet<Item> actual, MessageContext context) = await sut.Items.GetItemsByIds(ids, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Item> actual, MessageContext context) = await sut.Items.GetItemsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);
         Assert.Equal(ids.Count, actual.Count);

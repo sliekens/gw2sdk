@@ -10,7 +10,7 @@ public class WorldsByPage
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int pageSize = 3;
-        (HashSet<World> actual, MessageContext context) = await sut.Worlds.GetWorldsByPage(0, pageSize, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<World> actual, MessageContext context) = await sut.Worlds.GetWorldsByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);
         Assert.Equal(pageSize, context.ResultCount);

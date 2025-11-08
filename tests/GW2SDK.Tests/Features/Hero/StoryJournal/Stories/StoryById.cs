@@ -10,7 +10,7 @@ public class StoryById
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int id = 63;
-        (Story actual, MessageContext context) = await sut.Hero.StoryJournal.GetStoryById(id, cancellationToken: TestContext.Current!.CancellationToken);
+        (Story actual, MessageContext context) = await sut.Hero.StoryJournal.GetStoryById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }

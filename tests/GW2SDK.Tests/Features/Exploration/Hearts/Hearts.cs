@@ -12,7 +12,7 @@ public class Hearts
     public async Task Can_be_listed(int continentId, int floorId, int regionId, int mapId)
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-        (HashSet<Heart> actual, MessageContext context) = await sut.Exploration.GetHearts(continentId, floorId, regionId, mapId, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Heart> actual, MessageContext context) = await sut.Exploration.GetHearts(continentId, floorId, regionId, mapId, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
         Assert.NotEmpty(actual);

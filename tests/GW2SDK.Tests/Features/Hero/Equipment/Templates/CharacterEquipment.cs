@@ -13,7 +13,7 @@ public class CharacterEquipmentByName
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         TestCharacter character = TestConfiguration.TestCharacter;
         ApiKey accessToken = TestConfiguration.ApiKey;
-        (CharacterEquipment actual, MessageContext context) = await sut.Hero.Equipment.Templates.GetCharacterEquipment(character.Name, accessToken.Key, cancellationToken: TestContext.Current!.CancellationToken);
+        (CharacterEquipment actual, MessageContext context) = await sut.Hero.Equipment.Templates.GetCharacterEquipment(character.Name, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.NotNull(actual);
         Assert.NotNull(actual.Items);

@@ -14,7 +14,7 @@ public class HeartById
         const int regionId = 1;
         const int mapId = 26;
         const int heartId = 2;
-        (Heart actual, MessageContext context) = await sut.Exploration.GetHeartById(continentId, floorId, regionId, mapId, heartId, cancellationToken: TestContext.Current!.CancellationToken);
+        (Heart actual, MessageContext context) = await sut.Exploration.GetHeartById(continentId, floorId, regionId, mapId, heartId, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(heartId, actual.Id);
     }

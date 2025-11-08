@@ -9,7 +9,7 @@ public class AccountStats
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
-        (GuildWars2.Pvp.Stats.AccountStats actual, _) = await sut.Pvp.GetStats(accessToken.Key, cancellationToken: TestContext.Current!.CancellationToken);
+        (GuildWars2.Pvp.Stats.AccountStats actual, _) = await sut.Pvp.GetStats(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(actual);
     }
 }

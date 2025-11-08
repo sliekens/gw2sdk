@@ -10,7 +10,7 @@ public class ExchangeGoldToGems
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         Coin coins = new(100, 0, 0);
-        (GoldToGems actual, MessageContext context) = await sut.Commerce.ExchangeGoldToGems(coins, cancellationToken: TestContext.Current!.CancellationToken);
+        (GoldToGems actual, MessageContext context) = await sut.Commerce.ExchangeGoldToGems(coins, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.True(actual.Gems > 0, "100 gold should be worth some gems.");
         Assert.True(actual.ExchangeRate > 0, "Gems can't be free.");

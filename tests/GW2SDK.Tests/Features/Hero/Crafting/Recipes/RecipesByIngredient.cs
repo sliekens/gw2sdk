@@ -13,7 +13,7 @@ public class RecipesByIngredient
         // There are 800+ recipes that require a vision crystal
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int visionCrystal = 46746;
-        (HashSet<Recipe> actual, MessageContext context) = await sut.Hero.Crafting.Recipes.GetRecipesByIngredientItemId(visionCrystal, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Recipe> actual, MessageContext context) = await sut.Hero.Crafting.Recipes.GetRecipesByIngredientItemId(visionCrystal, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotInRange(actual.Count, 0, 200); // Greater than 200
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

@@ -10,7 +10,7 @@ public class FileById
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const string id = "map_vendor_ecto";
-        (Asset actual, MessageContext context) = await sut.Files.GetFileById(id, cancellationToken: TestContext.Current!.CancellationToken);
+        (Asset actual, MessageContext context) = await sut.Files.GetFileById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }

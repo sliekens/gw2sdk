@@ -10,7 +10,7 @@ public class GuildById
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         TestGuild guild = TestConfiguration.TestGuild;
-        (Guild actual, MessageContext context) = await sut.Guilds.GetGuildById(guild.Id, null, cancellationToken: TestContext.Current!.CancellationToken);
+        (Guild actual, MessageContext context) = await sut.Guilds.GetGuildById(guild.Id, null, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(guild.Id, actual.Id);
         Assert.Null(actual.Level);
@@ -29,7 +29,7 @@ public class GuildById
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
         TestGuild guild = TestConfiguration.TestGuild;
-        (Guild actual, MessageContext context) = await sut.Guilds.GetGuildById(guild.Id, accessToken.Key, cancellationToken: TestContext.Current!.CancellationToken);
+        (Guild actual, MessageContext context) = await sut.Guilds.GetGuildById(guild.Id, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(guild.Id, actual.Id);
         Assert.NotNull(actual.Level);

@@ -24,7 +24,7 @@ public class Floors
     public async Task Can_be_listed(int continentId)
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-        (HashSet<Floor> actual, MessageContext context) = await sut.Exploration.GetFloors(continentId, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Floor> actual, MessageContext context) = await sut.Exploration.GetFloors(continentId, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
         List<int> floorIds = [.. actual.Select(f => f.Id)];

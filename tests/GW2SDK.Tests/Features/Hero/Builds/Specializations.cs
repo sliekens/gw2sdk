@@ -9,7 +9,7 @@ public class Specializations
     public async Task Specializations_can_be_listed()
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-        (HashSet<Specialization> actual, MessageContext context) = await sut.Hero.Builds.GetSpecializations(cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Specialization> actual, MessageContext context) = await sut.Hero.Builds.GetSpecializations(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(context.ResultTotal, actual.Count);
         Assert.All(actual, specialization =>
         {

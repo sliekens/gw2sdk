@@ -10,7 +10,7 @@ public class JadeBotSkinById
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int id = 2;
-        (JadeBotSkin actual, MessageContext context) = await sut.Hero.Equipment.JadeBots.GetJadeBotSkinById(id, cancellationToken: TestContext.Current!.CancellationToken);
+        (JadeBotSkin actual, MessageContext context) = await sut.Hero.Equipment.JadeBots.GetJadeBotSkinById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }

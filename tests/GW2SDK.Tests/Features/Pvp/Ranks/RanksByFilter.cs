@@ -10,7 +10,7 @@ public class RanksByFilter
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<int> ids = [4, 8, 9];
-        (HashSet<Rank> actual, MessageContext context) = await sut.Pvp.GetRanksByIds(ids, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Rank> actual, MessageContext context) = await sut.Pvp.GetRanksByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);
         Assert.Equal(ids.Count, actual.Count);

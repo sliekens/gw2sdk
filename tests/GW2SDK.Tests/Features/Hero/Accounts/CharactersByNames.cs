@@ -12,7 +12,7 @@ public class CharactersByNames
         TestCharacter character = TestConfiguration.TestCharacter;
         TestCharacter character2 = TestConfiguration.TestCharacter2;
         ApiKey accessToken = TestConfiguration.ApiKey;
-        (HashSet<Character> actual, _) = await sut.Hero.Account.GetCharactersByNames([character.Name, character2.Name], accessToken.Key, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Character> actual, _) = await sut.Hero.Account.GetCharactersByNames([character.Name, character2.Name], accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Collection(actual, entry =>
         {
             Assert.Equal(character.Name, entry.Name);

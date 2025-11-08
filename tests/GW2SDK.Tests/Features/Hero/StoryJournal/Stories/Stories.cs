@@ -9,7 +9,7 @@ public class Stories
     public async Task Can_be_listed()
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-        (HashSet<Story> actual, MessageContext context) = await sut.Hero.StoryJournal.GetStories(cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Story> actual, MessageContext context) = await sut.Hero.StoryJournal.GetStories(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

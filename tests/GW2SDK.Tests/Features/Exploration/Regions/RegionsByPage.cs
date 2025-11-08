@@ -12,7 +12,7 @@ public class RegionsByPage
         const int continentId = 1;
         const int floorId = 1;
         const int pageSize = 3;
-        (HashSet<Region> actual, MessageContext context) = await sut.Exploration.GetRegionsByPage(continentId, floorId, 0, pageSize, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Region> actual, MessageContext context) = await sut.Exploration.GetRegionsByPage(continentId, floorId, 0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);
         Assert.Equal(pageSize, context.ResultCount);

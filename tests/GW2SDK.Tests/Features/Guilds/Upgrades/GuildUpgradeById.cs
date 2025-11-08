@@ -10,7 +10,7 @@ public class GuildUpgradeById
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int id = 43;
-        (GuildUpgrade actual, MessageContext context) = await sut.Guilds.GetGuildUpgradeById(id, cancellationToken: TestContext.Current!.CancellationToken);
+        (GuildUpgrade actual, MessageContext context) = await sut.Guilds.GetGuildUpgradeById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }

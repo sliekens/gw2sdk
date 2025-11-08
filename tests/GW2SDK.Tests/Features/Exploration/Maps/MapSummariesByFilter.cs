@@ -10,7 +10,7 @@ public class MapSummariesByFilter
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<int> ids = [15, 17, 18];
-        (HashSet<MapSummary> actual, MessageContext context) = await sut.Exploration.GetMapSummariesByIds(ids, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<MapSummary> actual, MessageContext context) = await sut.Exploration.GetMapSummariesByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);
         Assert.Equal(ids.Count, actual.Count);

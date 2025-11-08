@@ -18,7 +18,7 @@ public class Achievements
         using JsonLinesHttpMessageHandler handler = new("Data/achievements.jsonl.gz");
         using HttpClient httpClient = new(handler);
         Gw2Client sut = new(httpClient);
-        await foreach ((Achievement actual, MessageContext context) in sut.Hero.Achievements.GetAchievementsBulk(cancellationToken: TestContext.Current!.CancellationToken))
+        await foreach ((Achievement actual, MessageContext context) in sut.Hero.Achievements.GetAchievementsBulk(cancellationToken: TestContext.Current!.Execution.CancellationToken))
         {
             Assert.NotNull(context);
             Assert.True(actual.Id > 0);

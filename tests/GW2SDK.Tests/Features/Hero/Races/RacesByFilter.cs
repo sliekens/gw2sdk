@@ -11,7 +11,7 @@ public class RacesByFilter
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<RaceName> names = [RaceName.Asura, RaceName.Charr, RaceName.Norn];
-        (HashSet<Race> actual, MessageContext context) = await sut.Hero.Races.GetRacesByNames(names, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Race> actual, MessageContext context) = await sut.Hero.Races.GetRacesByNames(names, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(names.Count, context.ResultCount);
         Assert.True(context.ResultTotal > names.Count);
         Assert.Equal(names.Count, actual.Count);

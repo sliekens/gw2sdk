@@ -11,7 +11,7 @@ public class Regions
     public async Task Can_be_listed(int continentId, int floorId)
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-        (HashSet<Region> actual, MessageContext context) = await sut.Exploration.GetRegions(continentId, floorId, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Region> actual, MessageContext context) = await sut.Exploration.GetRegions(continentId, floorId, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
         Assert.NotEmpty(actual);

@@ -10,7 +10,7 @@ public class SkiffSkinById
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int id = 410;
-        (SkiffSkin actual, MessageContext context) = await sut.Hero.Equipment.Skiffs.GetSkiffSkinById(id, cancellationToken: TestContext.Current!.CancellationToken);
+        (SkiffSkin actual, MessageContext context) = await sut.Hero.Equipment.Skiffs.GetSkiffSkinById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }

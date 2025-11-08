@@ -10,7 +10,7 @@ public class GlyphsByFilter
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<string> ids = ["leatherworker_logging", "watchknight_harvesting", "unbound_mining"];
-        (HashSet<Glyph> actual, MessageContext context) = await sut.Pve.Home.GetGlyphsByIds(ids, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Glyph> actual, MessageContext context) = await sut.Pve.Home.GetGlyphsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);
         Assert.Equal(ids.Count, actual.Count);

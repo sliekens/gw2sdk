@@ -10,7 +10,7 @@ public class ObjectivesByPage
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int pageSize = 3;
-        (HashSet<Objective> actual, MessageContext context) = await sut.Wvw.GetObjectivesByPage(0, pageSize, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Objective> actual, MessageContext context) = await sut.Wvw.GetObjectivesByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);
         Assert.Equal(pageSize, context.ResultCount);

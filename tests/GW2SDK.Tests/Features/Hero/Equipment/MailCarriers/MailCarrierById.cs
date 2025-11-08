@@ -10,7 +10,7 @@ public class MailCarrierById
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int id = 1;
-        (MailCarrier actual, MessageContext context) = await sut.Hero.Equipment.MailCarriers.GetMailCarrierById(id, cancellationToken: TestContext.Current!.CancellationToken);
+        (MailCarrier actual, MessageContext context) = await sut.Hero.Equipment.MailCarriers.GetMailCarrierById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }

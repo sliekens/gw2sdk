@@ -12,7 +12,7 @@ public class Maps
     public async Task Can_be_listed(int continentId, int floorId, int regionId)
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-        (HashSet<Map> actual, MessageContext context) = await sut.Exploration.GetMaps(continentId, floorId, regionId, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Map> actual, MessageContext context) = await sut.Exploration.GetMaps(continentId, floorId, regionId, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
         Assert.NotEmpty(actual);

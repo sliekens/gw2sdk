@@ -14,7 +14,7 @@ public class HeartsByPage
         const int regionId = 1;
         const int mapId = 26;
         const int pageSize = 3;
-        (HashSet<Heart> actual, MessageContext context) = await sut.Exploration.GetHeartsByPage(continentId, floorId, regionId, mapId, 0, pageSize, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Heart> actual, MessageContext context) = await sut.Exploration.GetHeartsByPage(continentId, floorId, regionId, mapId, 0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);
         Assert.Equal(pageSize, context.ResultCount);

@@ -11,10 +11,10 @@ public class GuildLog
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         TestGuildLeader guildLeader = TestConfiguration.TestGuildLeader;
-        (AccountSummary account, _) = await sut.Hero.Account.GetSummary(guildLeader.Token, cancellationToken: TestContext.Current!.CancellationToken);
+        (AccountSummary account, _) = await sut.Hero.Account.GetSummary(guildLeader.Token, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         foreach (string? guildId in account.LeaderOfGuildIds!)
         {
-            (List<GuildLogEntry> actual, _) = await sut.Guilds.GetGuildLog(guildId, guildLeader.Token, cancellationToken: TestContext.Current!.CancellationToken);
+            (List<GuildLogEntry> actual, _) = await sut.Guilds.GetGuildLog(guildId, guildLeader.Token, cancellationToken: TestContext.Current!.Execution.CancellationToken);
             Assert.NotEmpty(actual);
             Assert.All(actual, entry =>
             {
@@ -83,7 +83,7 @@ public class GuildLog
             if (actual.Count > 3)
             {
                 int skipToken = actual[3].Id;
-                (List<GuildLogEntry> range, _) = await sut.Guilds.GetGuildLog(guildId, skipToken, guildLeader.Token, cancellationToken: TestContext.Current!.CancellationToken);
+                (List<GuildLogEntry> range, _) = await sut.Guilds.GetGuildLog(guildId, skipToken, guildLeader.Token, cancellationToken: TestContext.Current!.Execution.CancellationToken);
                 Assert.True(range.Count >= 3);
                 Assert.All(range, log => Assert.True(log.Id > skipToken));
             }

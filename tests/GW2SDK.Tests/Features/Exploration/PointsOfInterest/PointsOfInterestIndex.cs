@@ -11,7 +11,7 @@ public class PointsOfInterestIndex
     public async Task Can_be_listed(int continentId, int floorId, int regionId, int mapId)
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-        (HashSet<int> actual, MessageContext context) = await sut.Exploration.GetPointsOfInterestIndex(continentId, floorId, regionId, mapId, TestContext.Current!.CancellationToken);
+        (HashSet<int> actual, MessageContext context) = await sut.Exploration.GetPointsOfInterestIndex(continentId, floorId, regionId, mapId, TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
         Assert.NotEmpty(actual);

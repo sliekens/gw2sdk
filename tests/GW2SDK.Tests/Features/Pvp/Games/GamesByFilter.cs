@@ -11,9 +11,9 @@ public class GamesByFilter
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
         // No way other way to get a game ID than to list them all first
-        HashSet<string> ids = await sut.Pvp.GetGamesIndex(accessToken.Key, cancellationToken: TestContext.Current!.CancellationToken).ValueOnly();
+        HashSet<string> ids = await sut.Pvp.GetGamesIndex(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken).ValueOnly();
         // Now that we have game IDs, we can get the games
-        (HashSet<Game> actual, MessageContext context) = await sut.Pvp.GetGamesByIds(ids, accessToken.Key, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Game> actual, MessageContext context) = await sut.Pvp.GetGamesByIds(ids, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.Equal(ids.Count, context.ResultTotal);
         Assert.Equal(ids.Count, actual.Count);

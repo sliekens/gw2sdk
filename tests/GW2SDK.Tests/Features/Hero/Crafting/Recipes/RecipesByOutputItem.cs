@@ -10,7 +10,7 @@ public class RecipesByOutputItem
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int ironIngot = 19683;
-        (HashSet<Recipe> actual, _) = await sut.Hero.Crafting.Recipes.GetRecipesByOutputItemId(ironIngot, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Recipe> actual, _) = await sut.Hero.Crafting.Recipes.GetRecipesByOutputItemId(ironIngot, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         const int ironIngotRecipe = 19;
         Assert.Contains(actual, recipe => recipe.Id == ironIngotRecipe);
     }

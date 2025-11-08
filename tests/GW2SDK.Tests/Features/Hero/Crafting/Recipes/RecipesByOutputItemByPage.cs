@@ -11,7 +11,7 @@ public class RecipesByOutputItemByPage
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int ironIngot = 19683;
         const int pageSize = 3;
-        (HashSet<Recipe> actual, MessageContext context) = await sut.Hero.Crafting.Recipes.GetRecipesByOutputItemIdByPage(ironIngot, 0, pageSize, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Recipe> actual, MessageContext context) = await sut.Hero.Crafting.Recipes.GetRecipesByOutputItemIdByPage(ironIngot, 0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         const int ironIngotRecipe = 19;
         Assert.NotNull(context.Links);
         Assert.Equal(pageSize, context.PageSize);

@@ -11,7 +11,7 @@ public class ProfessionByName
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const ProfessionName name = ProfessionName.Engineer;
-        (Profession actual, _) = await sut.Hero.Training.GetProfessionByName(name, cancellationToken: TestContext.Current!.CancellationToken);
+        (Profession actual, _) = await sut.Hero.Training.GetProfessionByName(name, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(name, actual.Id);
     }
 }

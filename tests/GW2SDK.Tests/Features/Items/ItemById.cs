@@ -10,7 +10,7 @@ public class ItemById
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int id = 24;
-        (Item actual, MessageContext context) = await sut.Items.GetItemById(id, cancellationToken: TestContext.Current!.CancellationToken);
+        (Item actual, MessageContext context) = await sut.Items.GetItemById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }

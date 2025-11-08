@@ -11,7 +11,7 @@ public class FloorsByFilter
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int continentId = 1;
         HashSet<int> ids = [0, 1, 2];
-        (HashSet<Floor> actual, MessageContext context) = await sut.Exploration.GetFloorsByIds(continentId, ids, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Floor> actual, MessageContext context) = await sut.Exploration.GetFloorsByIds(continentId, ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);
         Assert.Equal(ids.Count, actual.Count);

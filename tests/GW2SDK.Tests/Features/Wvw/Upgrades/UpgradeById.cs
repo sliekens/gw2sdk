@@ -10,7 +10,7 @@ public class UpgradeById
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int id = 57;
-        (ObjectiveUpgrade actual, MessageContext context) = await sut.Wvw.GetUpgradeById(id, cancellationToken: TestContext.Current!.CancellationToken);
+        (ObjectiveUpgrade actual, MessageContext context) = await sut.Wvw.GetUpgradeById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }

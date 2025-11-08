@@ -10,7 +10,7 @@ public class CharacterSummary
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         TestCharacter character = TestConfiguration.TestCharacter;
         ApiKey accessToken = TestConfiguration.ApiKey;
-        (GuildWars2.Hero.Accounts.CharacterSummary actual, _) = await sut.Hero.Account.GetCharacterSummary(character.Name, accessToken.Key, cancellationToken: TestContext.Current!.CancellationToken);
+        (GuildWars2.Hero.Accounts.CharacterSummary actual, _) = await sut.Hero.Account.GetCharacterSummary(character.Name, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(character.Name, actual.Name);
         Assert.Equal(character.Race, actual.Race);
         Assert.Equal(character.Profession, actual.Profession);

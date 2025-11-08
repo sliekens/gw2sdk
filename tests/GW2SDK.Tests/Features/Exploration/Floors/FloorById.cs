@@ -15,7 +15,7 @@ public class FloorById
     public async Task Can_be_found(int continentId, int floorId)
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-        (Floor actual, MessageContext context) = await sut.Exploration.GetFloorById(continentId, floorId, cancellationToken: TestContext.Current!.CancellationToken);
+        (Floor actual, MessageContext context) = await sut.Exploration.GetFloorById(continentId, floorId, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(floorId, actual.Id);
     }

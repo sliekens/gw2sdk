@@ -10,7 +10,7 @@ public class DecorationById
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int id = 133;
-        (Decoration actual, MessageContext context) = await sut.Pve.Home.GetDecorationById(id, cancellationToken: TestContext.Current!.CancellationToken);
+        (Decoration actual, MessageContext context) = await sut.Pve.Home.GetDecorationById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }

@@ -10,7 +10,7 @@ public class MiniatureById
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int id = 1;
-        (Miniature actual, MessageContext context) = await sut.Hero.Equipment.Miniatures.GetMiniatureById(id, cancellationToken: TestContext.Current!.CancellationToken);
+        (Miniature actual, MessageContext context) = await sut.Hero.Equipment.Miniatures.GetMiniatureById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }

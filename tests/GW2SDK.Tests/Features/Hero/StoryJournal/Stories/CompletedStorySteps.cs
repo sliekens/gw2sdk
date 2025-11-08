@@ -10,7 +10,7 @@ public class CompletedStorySteps
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         TestCharacter character = TestConfiguration.TestCharacter;
         ApiKey accessToken = TestConfiguration.ApiKey;
-        (HashSet<int> actual, _) = await sut.Hero.StoryJournal.GetCompletedStorySteps(character.Name, accessToken.Key, TestContext.Current!.CancellationToken);
+        (HashSet<int> actual, _) = await sut.Hero.StoryJournal.GetCompletedStorySteps(character.Name, accessToken.Key, TestContext.Current!.Execution.CancellationToken);
         Assert.NotEmpty(actual);
     }
 }

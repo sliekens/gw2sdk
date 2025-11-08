@@ -12,7 +12,7 @@ public class RegionById
     public async Task Can_be_found(int continentId, int floorId, int regionId)
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-        (Region actual, MessageContext context) = await sut.Exploration.GetRegionById(continentId, floorId, regionId, cancellationToken: TestContext.Current!.CancellationToken);
+        (Region actual, MessageContext context) = await sut.Exploration.GetRegionById(continentId, floorId, regionId, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(regionId, actual.Id);
     }

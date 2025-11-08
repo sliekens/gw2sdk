@@ -10,7 +10,7 @@ public class ItemPriceById
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int id = 24;
-        (ItemPrice actual, MessageContext context) = await sut.Commerce.GetItemPriceById(id, cancellationToken: TestContext.Current!.CancellationToken);
+        (ItemPrice actual, MessageContext context) = await sut.Commerce.GetItemPriceById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }

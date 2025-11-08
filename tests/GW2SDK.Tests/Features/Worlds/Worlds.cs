@@ -9,7 +9,7 @@ public class Worlds
     public async Task Can_be_listed()
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-        (HashSet<World> actual, MessageContext context) = await sut.Worlds.GetWorlds(cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<World> actual, MessageContext context) = await sut.Worlds.GetWorlds(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotEmpty(actual);
         Assert.All(actual, world =>
         {

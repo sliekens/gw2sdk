@@ -10,7 +10,7 @@ public class TraitsByFilter
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<int> ids = [214, 221, 222];
-        (HashSet<Trait> actual, MessageContext context) = await sut.Hero.Builds.GetTraitsByIds(ids, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Trait> actual, MessageContext context) = await sut.Hero.Builds.GetTraitsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);
         Assert.Equal(ids.Count, actual.Count);

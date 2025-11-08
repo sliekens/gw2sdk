@@ -14,7 +14,7 @@ public class PointsOfInterestByFilter
         const int regionId = 1;
         const int mapId = 26;
         HashSet<int> ids = [554, 555, 556];
-        (HashSet<PointOfInterest> actual, MessageContext context) = await sut.Exploration.GetPointsOfInterestByIds(continentId, floorId, regionId, mapId, ids, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<PointOfInterest> actual, MessageContext context) = await sut.Exploration.GetPointsOfInterestByIds(continentId, floorId, regionId, mapId, ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);
         Assert.Equal(ids.Count, actual.Count);

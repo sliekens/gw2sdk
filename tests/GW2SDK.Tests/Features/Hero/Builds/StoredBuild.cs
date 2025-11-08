@@ -10,7 +10,7 @@ public class StoredBuild
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
         const int slotNumber = 3;
-        (GuildWars2.Hero.Builds.Build actual, _) = await sut.Hero.Builds.GetStoredBuild(slotNumber, accessToken.Key, cancellationToken: TestContext.Current!.CancellationToken);
+        (GuildWars2.Hero.Builds.Build actual, _) = await sut.Hero.Builds.GetStoredBuild(slotNumber, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(actual);
         Assert.NotEmpty(actual.Name);
     }

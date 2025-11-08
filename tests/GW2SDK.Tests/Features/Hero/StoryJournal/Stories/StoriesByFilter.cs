@@ -10,7 +10,7 @@ public class StoriesByFilter
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<int> ids = [9, 10, 11];
-        (HashSet<Story> actual, MessageContext context) = await sut.Hero.StoryJournal.GetStoriesByIds(ids, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Story> actual, MessageContext context) = await sut.Hero.StoryJournal.GetStoriesByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);
         Assert.Equal(ids.Count, actual.Count);

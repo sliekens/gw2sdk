@@ -10,7 +10,7 @@ public class Account
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKeyBasic accessToken = TestConfiguration.ApiKeyBasic;
-        (AccountSummary actual, _) = await sut.Hero.Account.GetSummary(accessToken.Key, cancellationToken: TestContext.Current!.CancellationToken);
+        (AccountSummary actual, _) = await sut.Hero.Account.GetSummary(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotEmpty(actual.DisplayName);
         Assert.NotEmpty(actual.Access);
         Assert.All(actual.Access, product =>
@@ -32,7 +32,7 @@ public class Account
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
-        (AccountSummary actual, _) = await sut.Hero.Account.GetSummary(accessToken.Key, cancellationToken: TestContext.Current!.CancellationToken);
+        (AccountSummary actual, _) = await sut.Hero.Account.GetSummary(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotEmpty(actual.DisplayName);
         Assert.NotEmpty(actual.Access);
         Assert.All(actual.Access, product =>

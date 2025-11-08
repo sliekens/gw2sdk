@@ -10,7 +10,7 @@ public class ObjectiveById
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const string id = "1099-99";
-        (Objective actual, MessageContext context) = await sut.Wvw.GetObjectiveById(id, cancellationToken: TestContext.Current!.CancellationToken);
+        (Objective actual, MessageContext context) = await sut.Wvw.GetObjectiveById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }

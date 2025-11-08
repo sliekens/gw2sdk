@@ -11,10 +11,10 @@ public class GuildTeams
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         TestGuildLeader guildLeader = TestConfiguration.TestGuildLeader;
-        (AccountSummary account, _) = await sut.Hero.Account.GetSummary(guildLeader.Token, cancellationToken: TestContext.Current!.CancellationToken);
+        (AccountSummary account, _) = await sut.Hero.Account.GetSummary(guildLeader.Token, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         foreach (string guildId in account.LeaderOfGuildIds!)
         {
-            (List<GuildTeam> actual, _) = await sut.Guilds.GetGuildTeams(guildId, guildLeader.Token, cancellationToken: TestContext.Current!.CancellationToken);
+            (List<GuildTeam> actual, _) = await sut.Guilds.GetGuildTeams(guildId, guildLeader.Token, cancellationToken: TestContext.Current!.Execution.CancellationToken);
             Assert.NotNull(actual);
             Assert.All(actual, entry =>
             {

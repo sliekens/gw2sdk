@@ -10,7 +10,7 @@ public class DungeonById
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const string id = "citadel_of_flame";
-        (Dungeon actual, MessageContext context) = await sut.Pve.Dungeons.GetDungeonById(id, cancellationToken: TestContext.Current!.CancellationToken);
+        (Dungeon actual, MessageContext context) = await sut.Pve.Dungeons.GetDungeonById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }

@@ -12,7 +12,7 @@ public class WvwGuilds
     public async Task Can_be_listed(WorldRegion region)
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-        (HashSet<WvwGuild> actual, MessageContext context) = await sut.Wvw.GetWvwGuilds(region, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<WvwGuild> actual, MessageContext context) = await sut.Wvw.GetWvwGuilds(region, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.NotEmpty(actual);
         Assert.All(actual, entry =>

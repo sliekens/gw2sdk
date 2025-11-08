@@ -9,7 +9,7 @@ public class MaterialStorage
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
-        (GuildWars2.Hero.Banking.MaterialStorage actual, _) = await sut.Hero.Bank.GetMaterialStorage(accessToken.Key, cancellationToken: TestContext.Current!.CancellationToken);
+        (GuildWars2.Hero.Banking.MaterialStorage actual, _) = await sut.Hero.Bank.GetMaterialStorage(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotEmpty(actual.Materials);
         Assert.All(actual.Materials, entry =>
         {

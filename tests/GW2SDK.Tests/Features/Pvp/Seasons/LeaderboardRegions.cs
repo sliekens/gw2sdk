@@ -11,7 +11,7 @@ public class LeaderboardRegions
     public async Task Can_be_found(string seasonId, string boardId)
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-        (HashSet<string> actual, _) = await sut.Pvp.GetLeaderboardRegions(seasonId, boardId, TestContext.Current!.CancellationToken);
+        (HashSet<string> actual, _) = await sut.Pvp.GetLeaderboardRegions(seasonId, boardId, TestContext.Current!.Execution.CancellationToken);
         HashSet<string> expected = ["eu", "na"];
         Assert.Equal(expected, actual);
     }

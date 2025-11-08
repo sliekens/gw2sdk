@@ -9,7 +9,7 @@ public class MatchesOverview
     public async Task Can_be_listed()
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-        (HashSet<MatchOverview> actual, MessageContext context) = await sut.Wvw.GetMatchesOverview(cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<MatchOverview> actual, MessageContext context) = await sut.Wvw.GetMatchesOverview(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

@@ -10,7 +10,7 @@ public class AmuletById
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int id = 4;
-        (Amulet actual, MessageContext context) = await sut.Pvp.GetAmuletById(id, cancellationToken: TestContext.Current!.CancellationToken);
+        (Amulet actual, MessageContext context) = await sut.Pvp.GetAmuletById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }

@@ -11,7 +11,7 @@ public class MapsIndex
     public async Task Map_ids_in_a_region_can_be_listed(int continentId, int floorId, int regionId)
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-        (HashSet<int> actual, MessageContext context) = await sut.Exploration.GetMapsIndex(continentId, floorId, regionId, TestContext.Current!.CancellationToken);
+        (HashSet<int> actual, MessageContext context) = await sut.Exploration.GetMapsIndex(continentId, floorId, regionId, TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
         Assert.NotEmpty(actual);
@@ -21,7 +21,7 @@ public class MapsIndex
     public async Task All_map_ids_can_be_listed()
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-        (HashSet<int> actual, MessageContext context) = await sut.Exploration.GetMapsIndex(TestContext.Current!.CancellationToken);
+        (HashSet<int> actual, MessageContext context) = await sut.Exploration.GetMapsIndex(TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
         Assert.NotEmpty(actual);

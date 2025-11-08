@@ -9,7 +9,7 @@ public class RacesIndex
     public async Task Can_be_listed()
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-        (HashSet<Extensible<RaceName>> actual, MessageContext context) = await sut.Hero.Races.GetRacesIndex(TestContext.Current!.CancellationToken);
+        (HashSet<Extensible<RaceName>> actual, MessageContext context) = await sut.Hero.Races.GetRacesIndex(TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);
         Assert.NotEmpty(actual);

@@ -10,7 +10,7 @@ public class CompletedHeroChallenges
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         TestCharacter character = TestConfiguration.TestCharacter;
         ApiKey accessToken = TestConfiguration.ApiKey;
-        (HashSet<string> actual, _) = await sut.Exploration.GetCompletedHeroChallenges(character.Name, accessToken.Key, TestContext.Current!.CancellationToken);
+        (HashSet<string> actual, _) = await sut.Exploration.GetCompletedHeroChallenges(character.Name, accessToken.Key, TestContext.Current!.Execution.CancellationToken);
         // BUG: currently this data is unavailable :(
         // Change this back to Assert.NotEmpty once fixed
         // https://github.com/gw2-api/issues/issues/56

@@ -10,7 +10,7 @@ public class QuagganById
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const string id = "present";
-        (Quaggan actual, MessageContext context) = await sut.Quaggans.GetQuagganById(id, cancellationToken: TestContext.Current!.CancellationToken);
+        (Quaggan actual, MessageContext context) = await sut.Quaggans.GetQuagganById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }

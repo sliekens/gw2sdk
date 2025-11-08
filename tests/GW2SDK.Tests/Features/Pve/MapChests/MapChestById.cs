@@ -12,7 +12,7 @@ public class MapChestById
     public async Task Can_be_found(string id)
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-        (MapChest actual, MessageContext context) = await sut.Pve.MapChests.GetMapChestById(id, cancellationToken: TestContext.Current!.CancellationToken);
+        (MapChest actual, MessageContext context) = await sut.Pve.MapChests.GetMapChestById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }

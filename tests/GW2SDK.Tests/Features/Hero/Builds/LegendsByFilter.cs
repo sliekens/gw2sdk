@@ -10,7 +10,7 @@ public class LegendsByFilter
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<string> ids = ["Legend1", "Legend3", "Legend5"];
-        (HashSet<Legend> actual, MessageContext context) = await sut.Hero.Builds.GetLegendsByIds(ids, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Legend> actual, MessageContext context) = await sut.Hero.Builds.GetLegendsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);
         Assert.Equal(ids.Count, actual.Count);

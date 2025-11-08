@@ -17,7 +17,7 @@ public class Skins
         using JsonLinesHttpMessageHandler handler = new("Data/skins.jsonl.gz");
         using HttpClient httpClient = new(handler);
         Gw2Client sut = new(httpClient);
-        await foreach ((EquipmentSkin actual, MessageContext context) in sut.Hero.Equipment.Wardrobe.GetSkinsBulk(cancellationToken: TestContext.Current!.CancellationToken))
+        await foreach ((EquipmentSkin actual, MessageContext context) in sut.Hero.Equipment.Wardrobe.GetSkinsBulk(cancellationToken: TestContext.Current!.Execution.CancellationToken))
         {
             Assert.NotNull(context);
             Assert.True(actual.Id > 0);
@@ -139,7 +139,7 @@ public class Skins
         using JsonLinesHttpMessageHandler handler = new("Data/skins.jsonl.gz");
         using HttpClient httpClient = new(handler);
         Gw2Client sut = new(httpClient);
-        await foreach (EquipmentSkin original in sut.Hero.Equipment.Wardrobe.GetSkinsBulk(cancellationToken: TestContext.Current!.CancellationToken).ValueOnly(TestContext.Current!.CancellationToken))
+        await foreach (EquipmentSkin original in sut.Hero.Equipment.Wardrobe.GetSkinsBulk(cancellationToken: TestContext.Current!.Execution.CancellationToken).ValueOnly(TestContext.Current!.Execution.CancellationToken))
         {
             string json = JsonSerializer.Serialize(original);
             EquipmentSkin? roundTrip = JsonSerializer.Deserialize<EquipmentSkin>(json);

@@ -10,7 +10,7 @@ public class Traits
     public async Task Can_be_listed()
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-        (HashSet<Trait> actual, MessageContext context) = await sut.Hero.Builds.GetTraits(cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Trait> actual, MessageContext context) = await sut.Hero.Builds.GetTraits(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(context.ResultTotal, actual.Count);
         Assert.All(actual, trait =>
         {

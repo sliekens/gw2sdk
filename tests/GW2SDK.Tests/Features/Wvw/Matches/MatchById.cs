@@ -10,7 +10,7 @@ public class MatchById
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const string id = "1-1";
-        (Match actual, MessageContext context) = await sut.Wvw.GetMatchById(id, cancellationToken: TestContext.Current!.CancellationToken);
+        (Match actual, MessageContext context) = await sut.Wvw.GetMatchById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }

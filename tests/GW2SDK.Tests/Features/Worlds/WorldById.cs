@@ -10,7 +10,7 @@ public class WorldById
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int id = 1001;
-        (World actual, MessageContext context) = await sut.Worlds.GetWorldById(id, cancellationToken: TestContext.Current!.CancellationToken);
+        (World actual, MessageContext context) = await sut.Worlds.GetWorldById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }

@@ -12,7 +12,7 @@ public class Build
         TestCharacter character = TestConfiguration.TestCharacter;
         ApiKey accessToken = TestConfiguration.ApiKey;
         const int tab = 1;
-        (BuildTemplate actual, _) = await sut.Hero.Builds.GetBuild(tab, character.Name, accessToken.Key, cancellationToken: TestContext.Current!.CancellationToken);
+        (BuildTemplate actual, _) = await sut.Hero.Builds.GetBuild(tab, character.Name, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(actual);
         Assert.NotNull(actual.Build);
     }

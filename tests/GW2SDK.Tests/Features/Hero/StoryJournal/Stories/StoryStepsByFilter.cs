@@ -10,7 +10,7 @@ public class StoryStepsByFilter
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<int> ids = [15, 16, 17];
-        (HashSet<StoryStep> actual, MessageContext context) = await sut.Hero.StoryJournal.GetStoryStepsByIds(ids, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<StoryStep> actual, MessageContext context) = await sut.Hero.StoryJournal.GetStoryStepsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);
         Assert.Equal(ids.Count, actual.Count);

@@ -9,7 +9,7 @@ public class DeliveryBox
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-        (GuildWars2.Commerce.Delivery.DeliveryBox deliveryBox, MessageContext context) = await sut.Commerce.GetDeliveryBox(accessToken.Key, cancellationToken: TestContext.Current!.CancellationToken);
+        (GuildWars2.Commerce.Delivery.DeliveryBox deliveryBox, MessageContext context) = await sut.Commerce.GetDeliveryBox(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         // Step through with debugger to see if the values reflect your in-game delivery box
         Assert.NotNull(context);
         Assert.NotNull(deliveryBox);

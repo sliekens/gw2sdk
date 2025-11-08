@@ -9,7 +9,7 @@ public class Professions
     public async Task Can_be_listed()
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
-        (HashSet<Profession> actual, _) = await sut.Hero.Training.GetProfessions(cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Profession> actual, _) = await sut.Hero.Training.GetProfessions(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(Profession.AllProfessions.Count, actual.Count);
         Assert.All(actual, profession =>
         {

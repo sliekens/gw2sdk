@@ -10,7 +10,7 @@ public class QuaggansByFilter
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<string> ids = ["404", "aloha", "attack"];
-        (HashSet<Quaggan> actual, MessageContext context) = await sut.Quaggans.GetQuaggansByIds(ids, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Quaggan> actual, MessageContext context) = await sut.Quaggans.GetQuaggansByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);
         Assert.True(context.ResultTotal > ids.Count);
         Assert.Equal(ids.Count, actual.Count);

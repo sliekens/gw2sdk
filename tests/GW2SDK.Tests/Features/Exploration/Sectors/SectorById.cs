@@ -14,7 +14,7 @@ public class SectorById
         const int regionId = 1;
         const int mapId = 26;
         const int sectorId = 513;
-        (Sector actual, MessageContext context) = await sut.Exploration.GetSectorById(continentId, floorId, regionId, mapId, sectorId, cancellationToken: TestContext.Current!.CancellationToken);
+        (Sector actual, MessageContext context) = await sut.Exploration.GetSectorById(continentId, floorId, regionId, mapId, sectorId, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(sectorId, actual.Id);
     }

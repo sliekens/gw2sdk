@@ -13,7 +13,7 @@ public class Decorations
         using JsonLinesHttpMessageHandler handler = new("Data/decorations.jsonl.gz");
         using HttpClient httpClient = new(handler);
         Gw2Client sut = new(httpClient);
-        await foreach ((Decoration actual, MessageContext context) in sut.Pve.Home.GetDecorationsBulk(cancellationToken: TestContext.Current!.CancellationToken))
+        await foreach ((Decoration actual, MessageContext context) in sut.Pve.Home.GetDecorationsBulk(cancellationToken: TestContext.Current!.Execution.CancellationToken))
         {
             Assert.NotNull(context);
             Assert.True(actual.Id > 0);

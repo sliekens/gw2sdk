@@ -10,7 +10,7 @@ public class OutfitById
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int id = 1;
-        (Outfit actual, MessageContext context) = await sut.Hero.Equipment.Outfits.GetOutfitById(id, cancellationToken: TestContext.Current!.CancellationToken);
+        (Outfit actual, MessageContext context) = await sut.Hero.Equipment.Outfits.GetOutfitById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }

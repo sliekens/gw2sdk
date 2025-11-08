@@ -10,7 +10,7 @@ public class BackgroundStoryQuestionById
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int id = 7;
-        (BackgroundStoryQuestion actual, MessageContext context) = await sut.Hero.StoryJournal.GetBackgroundStoryQuestionById(id, cancellationToken: TestContext.Current!.CancellationToken);
+        (BackgroundStoryQuestion actual, MessageContext context) = await sut.Hero.StoryJournal.GetBackgroundStoryQuestionById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);
     }

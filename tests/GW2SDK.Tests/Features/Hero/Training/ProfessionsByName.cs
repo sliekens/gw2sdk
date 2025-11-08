@@ -11,7 +11,7 @@ public class ProfessionsByName
     {
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<ProfessionName> names = [ProfessionName.Mesmer, ProfessionName.Necromancer, ProfessionName.Revenant];
-        (HashSet<Profession> actual, _) = await sut.Hero.Training.GetProfessionsByNames(names, cancellationToken: TestContext.Current!.CancellationToken);
+        (HashSet<Profession> actual, _) = await sut.Hero.Training.GetProfessionsByNames(names, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Collection(names, first => Assert.Contains(actual, found => found.Id == first), second => Assert.Contains(actual, found => found.Id == second), third => Assert.Contains(actual, found => found.Id == third));
     }
 }

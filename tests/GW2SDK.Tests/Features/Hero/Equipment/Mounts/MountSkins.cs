@@ -13,7 +13,7 @@ public class MountSkins
         Gw2Client sut = Composer.Resolve<Gw2Client>();
 
         (HashSet<MountSkin> actual, MessageContext context) = await sut.Hero.Equipment.Mounts.GetMountSkins(
-            cancellationToken: TestContext.Current!.CancellationToken
+            cancellationToken: TestContext.Current!.Execution.CancellationToken
         );
 
         // https://github.com/gw2-api/issues/issues/134

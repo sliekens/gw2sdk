@@ -10,7 +10,7 @@ public class CharacterTraining
         Gw2Client sut = Composer.Resolve<Gw2Client>();
         TestCharacter character = TestConfiguration.TestCharacter;
         ApiKey accessToken = TestConfiguration.ApiKey;
-        (GuildWars2.Hero.Training.CharacterTraining actual, _) = await sut.Hero.Training.GetCharacterTraining(character.Name, accessToken.Key, cancellationToken: TestContext.Current!.CancellationToken);
+        (GuildWars2.Hero.Training.CharacterTraining actual, _) = await sut.Hero.Training.GetCharacterTraining(character.Name, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         // BUG: currently this data is unavailable :(
         // Change this back to Assert.NotEmpty once fixed
         // https://github.com/gw2-api/issues/issues/56
