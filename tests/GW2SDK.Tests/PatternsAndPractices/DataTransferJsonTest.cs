@@ -15,12 +15,12 @@ public class DataTransferJsonTest(AssemblyFixture fixture)
     // The premise is that every JSON conversion should be an extension method for JsonElement
     // e.g. JsonDocument.RootElement.GetSomeRecord()
     [Test]
-    public void JsonElement_conversions_are_extensions()
+    public async Task JsonElement_conversions_are_extensions()
     {
-        List<MethodInfo> candidates = [.. fixture.Assembly.DefinedTypes.Where(candidate => candidate.Name.EndsWith("Json", StringComparison.Ordinal)).SelectMany(reader => reader.GetMethods(DeclaredOnly | Public | NonPublic | Static))];
+        List<MethodInfo> staticMethods = [.. fixture.JsonElementReaderTypes.SelectMany(reader => reader.GetMethods(DeclaredOnly | Public | NonPublic | Static))];
         Assert.All(fixture.DataTransferObjects, dto =>
         {
-            List<MethodInfo> matches = [.. candidates.Where(info => info.ReturnType == dto)];
+            List<MethodInfo> matches = [.. staticMethods.Where(info => info.ReturnType == dto)];
             Assert.All(matches, info =>
             {
                 Assert.Equal("Get" + dto.Name, info.Name);
