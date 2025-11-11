@@ -10,15 +10,18 @@ namespace GuildWars2.Tests.TestInfrastructure;
 
 public static class TestConfiguration
 {
-    static TestConfiguration()
+    [Before(Assembly)]
+    public static void SetupTestConfiguration()
     {
-        Configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json")
+        Configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json")
             .AddUserSecrets(typeof(TestConfiguration).Assembly, true)
             .AddEnvironmentVariables()
             .Build();
     }
 
-    private static IConfigurationRoot Configuration { get; }
+    private static IConfigurationRoot Configuration { get; set; } = null!;
 
     public static ApiKeyBasic ApiKeyBasic =>
         new()
