@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Text.Json;
 
 using GuildWars2.Chat;
 
@@ -262,8 +263,13 @@ public class CoinTest
     public void Coins_can_be_json_serialized_roundtrip()
     {
         Coin sut = 1_00_00;
-        string json = System.Text.Json.JsonSerializer.Serialize(sut);
-        Coin actual = System.Text.Json.JsonSerializer.Deserialize<Coin>(json);
+#if NET7_0_OR_GREATER
+        string json = JsonSerializer.Serialize(sut, GuildWars2JsonContext.Default.Coin);
+        Coin actual = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.Coin)!;
+#else
+        string json = JsonSerializer.Serialize(sut);
+        Coin actual = JsonSerializer.Deserialize<Coin>(json)!;
+#endif
         Assert.Equal(sut.Amount, actual.Amount);
     }
 }
