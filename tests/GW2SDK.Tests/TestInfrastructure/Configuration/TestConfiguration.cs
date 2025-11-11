@@ -15,7 +15,7 @@ public static class TestConfiguration
     {
         Configuration = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json")
+            .AddJsonFile("testconfig.json")
             .AddUserSecrets(typeof(TestConfiguration).Assembly, true)
             .AddEnvironmentVariables()
             .Build();

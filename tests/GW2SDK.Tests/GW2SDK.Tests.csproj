@@ -40,7 +40,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="appsettings.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="testconfig.json" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Data/*" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
