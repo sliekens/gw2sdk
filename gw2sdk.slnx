@@ -20,6 +20,7 @@
     <Project Path="src/GW2SDK/GW2SDK.csproj" />
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="tests/GW2SDK.Tests.Generators/GW2SDK.Tests.Generators.csproj" />
     <Project Path="tests/GW2SDK.Tests/GW2SDK.Tests.csproj" />
   </Folder>
 </Solution>
