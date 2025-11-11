@@ -37,9 +37,9 @@
       },
       "Polyfill": {
         "type": "Direct",
-        "requested": "[8.9.1, )",
-        "resolved": "8.9.1",
-        "contentHash": "2Q0HvBFYU0bgBYQ8bBhoJHekHeyBic3AjWZqkSl9W3eoJdz/XO1HU01Ob3eoalYEf1UODnxpfqn0gj7mOFP92A=="
+        "requested": "[9.0.0-beta.24, )",
+        "resolved": "9.0.0-beta.24",
+        "contentHash": "Y6N+R+dKn1Fbid5rKcZxPBD30h7MI8bLPaO6YymaMDFz/yzVmvUOMjzm36AlXaXtjtqntbeHfJxSp8ftIvFIWQ=="
       },
       "Roslynator.Analyzers": {
         "type": "Direct",
@@ -167,9 +167,9 @@
       },
       "Polyfill": {
         "type": "Direct",
-        "requested": "[8.9.1, )",
-        "resolved": "8.9.1",
-        "contentHash": "2Q0HvBFYU0bgBYQ8bBhoJHekHeyBic3AjWZqkSl9W3eoJdz/XO1HU01Ob3eoalYEf1UODnxpfqn0gj7mOFP92A=="
+        "requested": "[9.0.0-beta.24, )",
+        "resolved": "9.0.0-beta.24",
+        "contentHash": "Y6N+R+dKn1Fbid5rKcZxPBD30h7MI8bLPaO6YymaMDFz/yzVmvUOMjzm36AlXaXtjtqntbeHfJxSp8ftIvFIWQ=="
       },
       "Roslynator.Analyzers": {
         "type": "Direct",
@@ -276,9 +276,9 @@
       },
       "Polyfill": {
         "type": "Direct",
-        "requested": "[8.9.1, )",
-        "resolved": "8.9.1",
-        "contentHash": "2Q0HvBFYU0bgBYQ8bBhoJHekHeyBic3AjWZqkSl9W3eoJdz/XO1HU01Ob3eoalYEf1UODnxpfqn0gj7mOFP92A=="
+        "requested": "[9.0.0-beta.24, )",
+        "resolved": "9.0.0-beta.24",
+        "contentHash": "Y6N+R+dKn1Fbid5rKcZxPBD30h7MI8bLPaO6YymaMDFz/yzVmvUOMjzm36AlXaXtjtqntbeHfJxSp8ftIvFIWQ=="
       },
       "Roslynator.Analyzers": {
         "type": "Direct",
@@ -314,9 +314,9 @@
       },
       "Polyfill": {
         "type": "Direct",
-        "requested": "[8.9.1, )",
-        "resolved": "8.9.1",
-        "contentHash": "2Q0HvBFYU0bgBYQ8bBhoJHekHeyBic3AjWZqkSl9W3eoJdz/XO1HU01Ob3eoalYEf1UODnxpfqn0gj7mOFP92A=="
+        "requested": "[9.0.0-beta.24, )",
+        "resolved": "9.0.0-beta.24",
+        "contentHash": "Y6N+R+dKn1Fbid5rKcZxPBD30h7MI8bLPaO6YymaMDFz/yzVmvUOMjzm36AlXaXtjtqntbeHfJxSp8ftIvFIWQ=="
       },
       "Roslynator.Analyzers": {
         "type": "Direct",
@@ -352,9 +352,9 @@
       },
       "Polyfill": {
         "type": "Direct",
-        "requested": "[8.9.1, )",
-        "resolved": "8.9.1",
-        "contentHash": "2Q0HvBFYU0bgBYQ8bBhoJHekHeyBic3AjWZqkSl9W3eoJdz/XO1HU01Ob3eoalYEf1UODnxpfqn0gj7mOFP92A=="
+        "requested": "[9.0.0-beta.24, )",
+        "resolved": "9.0.0-beta.24",
+        "contentHash": "Y6N+R+dKn1Fbid5rKcZxPBD30h7MI8bLPaO6YymaMDFz/yzVmvUOMjzm36AlXaXtjtqntbeHfJxSp8ftIvFIWQ=="
       },
       "Roslynator.Analyzers": {
         "type": "Direct",

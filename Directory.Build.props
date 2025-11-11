@@ -60,4 +60,10 @@
     <!-- https://learn.microsoft.com/en-us/dotnet/core/testing/migrating-vstest-microsoft-testing-platform -->
     <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
   </PropertyGroup>
+
+  <!-- Polyfill -->
+  <PropertyGroup>
+    <!-- https://github.com/SimonCropp/Polyfill/issues/379 -->
+    <PolyUseEmbeddedAttribute>true</PolyUseEmbeddedAttribute>
+  </PropertyGroup>
 </Project>
