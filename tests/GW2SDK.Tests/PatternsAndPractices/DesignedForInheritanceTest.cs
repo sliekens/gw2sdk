@@ -13,7 +13,7 @@ public class DesignedForInheritanceTest(AssemblyFixture fixture)
         /*
          * The goal of this test is to ensure that all unsealed types are designed for inheritance.
          */
-        List<Type> classes = [.. fixture.Assembly.ExportedTypes.Where(type => type.IsClass)];
+        IEnumerable<Type> classes = fixture.ExportedClasses;
         Assert.All(classes, type =>
         {
             if (type.IsAbstract)
@@ -38,8 +38,8 @@ public class DesignedForInheritanceTest(AssemblyFixture fixture)
     [Test]
     public void Every_exported_class_with_InheritableAttribute_has_a_subtype()
     {
-        List<Type> classes = [.. fixture.Assembly.ExportedTypes.Where(type => type.IsClass)];
-        List<Type> inheritableClasses = [.. classes.Where(type => type.GetCustomAttributes().Any(att => att.GetType().Name == "InheritableAttribute"))];
+        IEnumerable<Type> classes = fixture.ExportedClasses;
+        IEnumerable<Type> inheritableClasses = fixture.InheritableClasses;
         Assert.All(inheritableClasses, type =>
         {
             List<Type> subtypes = [.. classes.Where(subtype => subtype.IsSubclassOf(type))];
