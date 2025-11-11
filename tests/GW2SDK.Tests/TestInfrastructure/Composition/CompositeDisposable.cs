@@ -40,6 +40,9 @@ public sealed class CompositeDisposable : IDisposable
             disposable.Dispose();
         }
 
-        disposables.Clear();
+        while (disposables.TryTake(out IDisposable? _))
+        {
+            // Drain remaining references; ConcurrentBag may contain items added concurrently.
+        }
     }
 }
