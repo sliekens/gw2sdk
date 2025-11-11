@@ -1,16 +1,17 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 
 using GuildWars2.Hero.Equipment.Templates;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Templates;
 
-public class BoundLegendaryItems
+[ServiceDataSource]
+public class BoundLegendaryItems(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
         (HashSet<BoundLegendaryItem> actual, MessageContext context) = await sut.Hero.Equipment.Templates.GetBoundLegendaryItems(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);

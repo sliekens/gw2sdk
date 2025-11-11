@@ -1,14 +1,14 @@
-﻿using GuildWars2.Pve.Home.Cats;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Pve.Home.Cats;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Pve.Home.Cats;
 
-public class CatsByPage
+[ServiceDataSource]
+public class CatsByPage(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_filtered_by_page()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int pageSize = 3;
         (HashSet<Cat> actual, MessageContext context) = await sut.Pve.Home.GetCatsByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context.Links);

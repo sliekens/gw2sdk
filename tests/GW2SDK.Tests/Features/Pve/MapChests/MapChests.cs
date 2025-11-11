@@ -1,14 +1,14 @@
 ﻿using GuildWars2.Pve.MapChests;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Pve.MapChests;
 
-public class MapChests
+[ServiceDataSource]
+public class MapChests(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         (HashSet<MapChest> actual, MessageContext context) = await sut.Pve.MapChests.GetMapChests(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

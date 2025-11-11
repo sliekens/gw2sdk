@@ -1,15 +1,15 @@
 ﻿using GuildWars2.Hero;
 using GuildWars2.Hero.Races;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Races;
 
-public class RacesByFilter
+[ServiceDataSource]
+public class RacesByFilter(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_filtered_by_name()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<RaceName> names = [RaceName.Asura, RaceName.Charr, RaceName.Norn];
         (HashSet<Race> actual, MessageContext context) = await sut.Hero.Races.GetRacesByNames(names, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(names.Count, context.ResultCount);

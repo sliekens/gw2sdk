@@ -1,14 +1,14 @@
-﻿using GuildWars2.Commerce.Exchange;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Commerce.Exchange;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Commerce.Exchange;
 
-public class ExchangeGemsToGold
+[ServiceDataSource]
+public class ExchangeGemsToGold(Gw2Client sut)
 {
     [Test]
     public async Task You_can_exchange_gems_for_gold()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int gems = 800;
         (GemsToGold actual, MessageContext context) = await sut.Commerce.ExchangeGemsToGold(gems, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);

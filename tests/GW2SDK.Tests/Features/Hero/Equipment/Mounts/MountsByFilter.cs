@@ -1,14 +1,14 @@
-﻿using GuildWars2.Hero.Equipment.Mounts;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Hero.Equipment.Mounts;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Mounts;
 
-public class MountsByFilter
+[ServiceDataSource]
+public class MountsByFilter(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_filtered_by_name()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<MountName> names = [MountName.Raptor, MountName.Jackal, MountName.Skimmer];
         (HashSet<Mount> actual, MessageContext context) = await sut.Hero.Equipment.Mounts.GetMountsByNames(names, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(names.Count, context.ResultCount);

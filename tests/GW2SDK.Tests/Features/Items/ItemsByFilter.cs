@@ -1,14 +1,14 @@
-﻿using GuildWars2.Items;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Items;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Items;
 
-public class ItemsByFilter
+[ServiceDataSource]
+public class ItemsByFilter(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_filtered_by_id()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<int> ids = [24, 46, 56];
         (HashSet<Item> actual, MessageContext context) = await sut.Items.GetItemsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);

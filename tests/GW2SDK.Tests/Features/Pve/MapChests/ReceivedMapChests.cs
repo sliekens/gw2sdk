@@ -1,13 +1,14 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pve.MapChests;
 
-public class ReceivedMapChests
+[ServiceDataSource]
+public class ReceivedMapChests(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
         (HashSet<string> actual, _) = await sut.Pve.MapChests.GetReceivedMapChests(accessToken.Key, TestContext.Current!.Execution.CancellationToken);
         // Can be empty if you haven't done any map metas today

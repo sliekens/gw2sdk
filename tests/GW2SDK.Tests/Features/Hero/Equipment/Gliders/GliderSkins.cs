@@ -1,17 +1,17 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 
 using GuildWars2.Hero.Equipment.Gliders;
 using GuildWars2.Tests.Features.Markup;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Gliders;
 
-public class GliderSkins
+[ServiceDataSource]
+public class GliderSkins(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         (HashSet<GliderSkin> actual, MessageContext context) = await sut.Hero.Equipment.Gliders.GetGliderSkins(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

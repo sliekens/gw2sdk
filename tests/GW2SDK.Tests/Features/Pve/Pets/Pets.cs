@@ -1,14 +1,14 @@
-﻿using GuildWars2.Pve.Pets;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Pve.Pets;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Pve.Pets;
 
-public class Pets
+[ServiceDataSource]
+public class Pets(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         (HashSet<Pet> actual, MessageContext context) = await sut.Pve.Pets.GetPets(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

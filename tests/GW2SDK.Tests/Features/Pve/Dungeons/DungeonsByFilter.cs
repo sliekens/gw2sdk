@@ -1,14 +1,14 @@
-﻿using GuildWars2.Pve.Dungeons;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Pve.Dungeons;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Pve.Dungeons;
 
-public class DungeonsByFilter
+[ServiceDataSource]
+public class DungeonsByFilter(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_filtered_by_id()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<string> ids = ["twilight_arbor", "sorrows_embrace", "citadel_of_flame"];
         (HashSet<Dungeon> actual, MessageContext context) = await sut.Pve.Dungeons.GetDungeonsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);

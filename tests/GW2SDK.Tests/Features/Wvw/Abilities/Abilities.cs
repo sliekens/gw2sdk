@@ -1,14 +1,14 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.Wvw.Abilities;
 
 namespace GuildWars2.Tests.Features.Wvw.Abilities;
 
-public class Abilities
+[ServiceDataSource]
+public class Abilities(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         (HashSet<Ability> actual, MessageContext context) = await sut.Wvw.GetAbilities(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

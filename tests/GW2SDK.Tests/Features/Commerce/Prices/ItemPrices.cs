@@ -1,14 +1,14 @@
-﻿using GuildWars2.Commerce.Prices;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Commerce.Prices;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Commerce.Prices;
 
-public class ItemPrices
+[ServiceDataSource]
+public class ItemPrices(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_enumerated()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         // You wouldn't want to use Take() in production code
         //   but enumerating all entries is too expensive for a test
         // This code will actually try to fetch more than 600 entries

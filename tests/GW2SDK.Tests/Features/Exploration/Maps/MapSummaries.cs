@@ -1,16 +1,16 @@
 ﻿using System.Drawing;
 
 using GuildWars2.Exploration.Maps;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Exploration.Maps;
 
-public class MapSummaries
+[ServiceDataSource]
+public class MapSummaries(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         (HashSet<MapSummary> actual, MessageContext context) = await sut.Exploration.GetMapSummaries(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

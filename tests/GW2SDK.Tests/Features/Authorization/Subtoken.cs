@@ -1,16 +1,17 @@
 ﻿using GuildWars2.Authorization;
 using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 using Assert = TUnit.Assertions.Assert;
 
 namespace GuildWars2.Tests.Features.Authorization;
 
-public class Subtoken
+[ServiceDataSource]
+public class Subtoken(Gw2Client sut)
 {
     [Test]
     public async Task Subtoken_has_info()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
         #region Create a new subtoken
 

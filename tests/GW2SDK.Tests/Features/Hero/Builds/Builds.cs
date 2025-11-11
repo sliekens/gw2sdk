@@ -1,14 +1,15 @@
-﻿using GuildWars2.Hero.Builds;
+using GuildWars2.Hero.Builds;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Builds;
 
-public class Builds
+[ServiceDataSource]
+public class Builds(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         TestCharacter character = TestConfiguration.TestCharacter;
         ApiKey accessToken = TestConfiguration.ApiKey;
         (HashSet<BuildTemplate> actual, MessageContext context) = await sut.Hero.Builds.GetBuilds(character.Name, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);

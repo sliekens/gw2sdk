@@ -1,14 +1,14 @@
-﻿using GuildWars2.Hero.Equipment.Templates;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Hero.Equipment.Templates;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Templates;
 
-public class LegendaryItemsByFilter
+[ServiceDataSource]
+public class LegendaryItemsByFilter(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_filtered_by_id()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<int> ids = [83162, 93105, 80111];
         (HashSet<LegendaryItem> actual, MessageContext context) = await sut.Hero.Equipment.Templates.GetLegendaryItemsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);

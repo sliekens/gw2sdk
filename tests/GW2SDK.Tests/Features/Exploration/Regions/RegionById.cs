@@ -1,9 +1,10 @@
-﻿using GuildWars2.Exploration.Regions;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Exploration.Regions;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Exploration.Regions;
 
-public class RegionById
+[ServiceDataSource]
+public class RegionById(Gw2Client sut)
 {
     [Test]
     [Arguments(1, 0, 1)]
@@ -11,7 +12,6 @@ public class RegionById
     [Arguments(1, 0, 3)]
     public async Task Can_be_found(int continentId, int floorId, int regionId)
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         (Region actual, MessageContext context) = await sut.Exploration.GetRegionById(continentId, floorId, regionId, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(regionId, actual.Id);

@@ -1,14 +1,14 @@
 ﻿using GuildWars2.Hero.Emotes;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Emotes;
 
-public class EmotesByFilter
+[ServiceDataSource]
+public class EmotesByFilter(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_filtered_by_id()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<string> ids = ["geargrind", "playdead", "rockout"];
         (HashSet<Emote> actual, MessageContext context) = await sut.Hero.Emotes.GetEmotesByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);

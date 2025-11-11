@@ -1,14 +1,14 @@
-﻿using GuildWars2.Hero.Equipment.Wardrobe;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Hero.Equipment.Wardrobe;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Wardrobe;
 
-public class SkinsByFilter
+[ServiceDataSource]
+public class SkinsByFilter(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_filtered_by_id()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<int> ids = [1, 2, 3];
         (HashSet<EquipmentSkin> actual, MessageContext context) = await sut.Hero.Equipment.Wardrobe.GetSkinsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);

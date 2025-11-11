@@ -1,13 +1,14 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Emotes;
 
-public class UnlockedEmotes
+[ServiceDataSource]
+public class UnlockedEmotes(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
         (HashSet<string> actual, _) = await sut.Hero.Emotes.GetUnlockedEmotes(accessToken.Key, TestContext.Current!.Execution.CancellationToken);
         // Can be empty if you haven't unlocked any emotes

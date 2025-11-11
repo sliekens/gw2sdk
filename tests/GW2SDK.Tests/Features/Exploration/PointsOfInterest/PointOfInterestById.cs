@@ -1,14 +1,14 @@
-﻿using GuildWars2.Exploration.PointsOfInterest;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Exploration.PointsOfInterest;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Exploration.PointsOfInterest;
 
-public class PointOfInterestById
+[ServiceDataSource]
+public class PointOfInterestById(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_found()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int continentId = 1;
         const int floorId = 0;
         const int regionId = 1;

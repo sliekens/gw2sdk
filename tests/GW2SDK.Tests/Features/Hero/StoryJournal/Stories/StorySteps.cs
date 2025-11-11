@@ -1,14 +1,14 @@
 ﻿using GuildWars2.Hero.StoryJournal.Stories;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.StoryJournal.Stories;
 
-public class StorySteps
+[ServiceDataSource]
+public class StorySteps(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         (HashSet<StoryStep> actual, MessageContext context) = await sut.Hero.StoryJournal.GetStorySteps(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

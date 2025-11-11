@@ -1,16 +1,16 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 
 using GuildWars2.Hero.Equipment.MailCarriers;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.MailCarriers;
 
-public class MailCarriers
+[ServiceDataSource]
+public class MailCarriers(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         (HashSet<MailCarrier> actual, MessageContext context) = await sut.Hero.Equipment.MailCarriers.GetMailCarriers(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(context.ResultTotal, actual.Count);
         Assert.All(actual, mailCarrier =>

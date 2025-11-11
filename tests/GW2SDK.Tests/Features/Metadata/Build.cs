@@ -1,13 +1,13 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Metadata;
 
-public class Build
+[ServiceDataSource]
+public class Build(Gw2Client sut)
 {
     [Test]
     public async Task Current_build_can_be_found()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         (GuildWars2.Metadata.Build actual, _) = await sut.Metadata.GetBuild(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.True(actual.Id > 115267);
     }

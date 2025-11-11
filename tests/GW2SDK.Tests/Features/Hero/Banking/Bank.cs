@@ -1,14 +1,15 @@
-﻿using GuildWars2.Chat;
+using GuildWars2.Chat;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Banking;
 
-public class Bank
+[ServiceDataSource]
+public class Bank(Gw2Client sut)
 {
     [Test]
     public async Task Contents_can_be_found()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
         (GuildWars2.Hero.Banking.Bank actual, _) = await sut.Hero.Bank.GetBank(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotEmpty(actual.Items);

@@ -1,16 +1,17 @@
 ﻿using GuildWars2.Authorization;
 using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 using Assert = TUnit.Assertions.Assert;
 
 namespace GuildWars2.Tests.Features.Authorization;
 
-public class Token
+[ServiceDataSource]
+public class Token(Gw2Client sut)
 {
     [Test]
     public async Task Token_has_info()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
         (TokenInfo actual, _) = await sut.Tokens.GetTokenInfo(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         ApiKeyInfo apiKey = await Assert.That(actual).IsTypeOf<ApiKeyInfo>()

@@ -1,14 +1,14 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.Wvw.Abilities;
 
 namespace GuildWars2.Tests.Features.Wvw.Abilities;
 
-public class AbilitiesByFilter
+[ServiceDataSource]
+public class AbilitiesByFilter(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_filtered_by_id()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<int> ids = [2, 3, 4];
         (HashSet<Ability> actual, MessageContext context) = await sut.Wvw.GetAbilitiesByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);

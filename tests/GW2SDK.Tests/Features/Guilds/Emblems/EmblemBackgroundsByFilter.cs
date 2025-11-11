@@ -1,14 +1,14 @@
-﻿using GuildWars2.Guilds.Emblems;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Guilds.Emblems;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Guilds.Emblems;
 
-public class EmblemBackgroundsByFilter
+[ServiceDataSource]
+public class EmblemBackgroundsByFilter(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_filtered_by_id()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<int> ids = [1, 2, 3];
         (HashSet<EmblemBackground> actual, MessageContext context) = await sut.Guilds.GetEmblemBackgroundsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);

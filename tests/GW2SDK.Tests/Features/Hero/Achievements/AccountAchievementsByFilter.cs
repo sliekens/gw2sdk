@@ -1,14 +1,15 @@
-﻿using GuildWars2.Hero.Achievements;
+using GuildWars2.Hero.Achievements;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Achievements;
 
-public class AccountAchievementsByFilter
+[ServiceDataSource]
+public class AccountAchievementsByFilter(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_filtered_by_id()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
         HashSet<int> ids = [1, 2, 3];
         (HashSet<AccountAchievement> actual, MessageContext context) = await sut.Hero.Achievements.GetAccountAchievementsByIds(ids, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);

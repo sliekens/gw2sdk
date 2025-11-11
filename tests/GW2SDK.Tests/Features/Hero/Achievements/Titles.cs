@@ -2,16 +2,16 @@
 
 using GuildWars2.Hero.Achievements.Titles;
 using GuildWars2.Tests.Features.Markup;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Achievements;
 
-public class Titles
+[ServiceDataSource]
+public class Titles(Gw2Client sut)
 {
     [Test]
     public async Task Titles_can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         (HashSet<Title> actual, MessageContext context) = await sut.Hero.Achievements.GetTitles(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

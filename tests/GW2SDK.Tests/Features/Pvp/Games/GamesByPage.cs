@@ -1,14 +1,15 @@
-﻿using GuildWars2.Pvp.Games;
+using GuildWars2.Pvp.Games;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pvp.Games;
 
-public class GamesByPage
+[ServiceDataSource]
+public class GamesByPage(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_filtered_by_page()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
         const int pageSize = 3;
         (HashSet<Game> actual, MessageContext context) = await sut.Pvp.GetGamesByPage(0, pageSize, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);

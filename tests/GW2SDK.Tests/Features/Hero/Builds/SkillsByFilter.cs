@@ -1,14 +1,14 @@
-﻿using GuildWars2.Hero.Builds;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Hero.Builds;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Builds;
 
-public class SkillsByFilter
+[ServiceDataSource]
+public class SkillsByFilter(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_filtered_by_id()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<int> ids = [1110, 12693, 39222];
         (HashSet<Skill> actual, MessageContext context) = await sut.Hero.Builds.GetSkillsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);

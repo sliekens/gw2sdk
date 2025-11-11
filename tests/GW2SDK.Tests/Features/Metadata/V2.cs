@@ -1,14 +1,14 @@
 ﻿using GuildWars2.Metadata;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Metadata;
 
-public class V2
+[ServiceDataSource]
+public class V2(Gw2Client sut)
 {
     [Test]
     public async Task Has_api_metadata()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         (ApiVersion actual, _) = await sut.Metadata.GetApiVersion(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.All(actual.Languages, language =>
         {

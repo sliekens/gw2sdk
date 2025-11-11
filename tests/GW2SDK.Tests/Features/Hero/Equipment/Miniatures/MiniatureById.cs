@@ -1,14 +1,14 @@
-﻿using GuildWars2.Hero.Equipment.Miniatures;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Hero.Equipment.Miniatures;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Miniatures;
 
-public class MiniatureById
+[ServiceDataSource]
+public class MiniatureById(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_found()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int id = 1;
         (Miniature actual, MessageContext context) = await sut.Hero.Equipment.Miniatures.GetMiniatureById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);

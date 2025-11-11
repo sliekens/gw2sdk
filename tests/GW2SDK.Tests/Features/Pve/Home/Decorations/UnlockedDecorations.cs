@@ -1,14 +1,15 @@
-﻿using GuildWars2.Pve.Home.Decorations;
+using GuildWars2.Pve.Home.Decorations;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pve.Home.Decorations;
 
-public class UnlockedDecorations
+[ServiceDataSource]
+public class UnlockedDecorations(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey token = TestConfiguration.ApiKey;
         (HashSet<UnlockedDecoration> actual, _) = await sut.Pve.Home.GetUnlockedDecorations(token.Key, TestContext.Current!.Execution.CancellationToken);
         Assert.NotEmpty(actual);

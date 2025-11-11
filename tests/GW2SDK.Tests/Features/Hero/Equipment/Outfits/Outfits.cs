@@ -1,17 +1,17 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 
 using GuildWars2.Chat;
 using GuildWars2.Hero.Equipment.Outfits;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Outfits;
 
-public class Outfits
+[ServiceDataSource]
+public class Outfits(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         (HashSet<Outfit> actual, MessageContext context) = await sut.Hero.Equipment.Outfits.GetOutfits(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

@@ -1,14 +1,14 @@
 ﻿using GuildWars2.Guilds.Permissions;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Guilds.Permissions;
 
-public class GuildPermissionsByFilter
+[ServiceDataSource]
+public class GuildPermissionsByFilter(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_filtered_by_id()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<string> ids = ["StartingRole", "DepositCoinsTrove", "WithdrawCoinsTrove"];
         (HashSet<GuildPermissionSummary> actual, MessageContext context) = await sut.Guilds.GetGuildPermissionsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);

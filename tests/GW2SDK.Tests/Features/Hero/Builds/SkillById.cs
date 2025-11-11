@@ -1,14 +1,14 @@
-﻿using GuildWars2.Hero.Builds;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Hero.Builds;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Builds;
 
-public class SkillById
+[ServiceDataSource]
+public class SkillById(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_found()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int id = 61533;
         (Skill actual, MessageContext context) = await sut.Hero.Builds.GetSkillById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);

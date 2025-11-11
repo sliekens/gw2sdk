@@ -1,17 +1,16 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 
 using GuildWars2.Hero.Equipment.Mounts;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Mounts;
 
-public class MountSkins
+[ServiceDataSource]
+public class MountSkins(Gw2Client sut)
 {
     [Test]
     public async Task Mount_skins_can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
-
         (HashSet<MountSkin> actual, MessageContext context) = await sut.Hero.Equipment.Mounts.GetMountSkins(
             cancellationToken: TestContext.Current!.Execution.CancellationToken
         );

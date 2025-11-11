@@ -1,17 +1,17 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.Worlds;
 using GuildWars2.Wvw.Guilds;
 
 namespace GuildWars2.Tests.Features.Wvw.Guilds;
 
-public class WvwGuilds
+[ServiceDataSource]
+public class WvwGuilds(Gw2Client sut)
 {
     [Test]
     [Arguments(WorldRegion.NorthAmerica)]
     [Arguments(WorldRegion.Europe)]
     public async Task Can_be_listed(WorldRegion region)
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         (HashSet<WvwGuild> actual, MessageContext context) = await sut.Wvw.GetWvwGuilds(region, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.NotEmpty(actual);

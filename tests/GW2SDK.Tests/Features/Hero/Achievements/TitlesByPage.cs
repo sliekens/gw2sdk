@@ -1,14 +1,14 @@
-﻿using GuildWars2.Hero.Achievements.Titles;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Hero.Achievements.Titles;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Achievements;
 
-public class TitlesByPage
+[ServiceDataSource]
+public class TitlesByPage(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_found()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int pageSize = 3;
         (HashSet<Title> actual, MessageContext context) = await sut.Hero.Achievements.GetTitlesByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context.Links);

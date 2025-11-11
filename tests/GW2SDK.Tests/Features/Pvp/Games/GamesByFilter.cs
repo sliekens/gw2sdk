@@ -1,14 +1,15 @@
-﻿using GuildWars2.Pvp.Games;
+using GuildWars2.Pvp.Games;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pvp.Games;
 
-public class GamesByFilter
+[ServiceDataSource]
+public class GamesByFilter(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_filtered_by_id()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
         // No way other way to get a game ID than to list them all first
         HashSet<string> ids = await sut.Pvp.GetGamesIndex(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken).ValueOnly();

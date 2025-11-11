@@ -1,14 +1,14 @@
 ﻿using GuildWars2.Pvp.Amulets;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Pvp.Amulets;
 
-public class Amulets
+[ServiceDataSource]
+public class Amulets(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         (HashSet<Amulet> actual, MessageContext context) = await sut.Pvp.GetAmulets(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

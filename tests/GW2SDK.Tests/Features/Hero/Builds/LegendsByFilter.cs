@@ -1,14 +1,14 @@
 ﻿using GuildWars2.Hero.Builds;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Builds;
 
-public class LegendsByFilter
+[ServiceDataSource]
+public class LegendsByFilter(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_filtered_by_id()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<string> ids = ["Legend1", "Legend3", "Legend5"];
         (HashSet<Legend> actual, MessageContext context) = await sut.Hero.Builds.GetLegendsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);

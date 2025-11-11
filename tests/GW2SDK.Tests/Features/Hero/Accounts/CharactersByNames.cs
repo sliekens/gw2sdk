@@ -1,14 +1,15 @@
-﻿using GuildWars2.Hero.Accounts;
+using GuildWars2.Hero.Accounts;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Accounts;
 
-public class CharactersByNames
+[ServiceDataSource]
+public class CharactersByNames(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_found()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         TestCharacter character = TestConfiguration.TestCharacter;
         TestCharacter character2 = TestConfiguration.TestCharacter2;
         ApiKey accessToken = TestConfiguration.ApiKey;

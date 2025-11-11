@@ -1,14 +1,14 @@
 ﻿using GuildWars2.Exploration.Floors;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Exploration.Floors;
 
-public class FloorsByFilter
+[ServiceDataSource]
+public class FloorsByFilter(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_filtered_by_id()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int continentId = 1;
         HashSet<int> ids = [0, 1, 2];
         (HashSet<Floor> actual, MessageContext context) = await sut.Exploration.GetFloorsByIds(continentId, ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);

@@ -1,13 +1,14 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.WizardsVault.Objectives;
 
-public class WeeklyObjectivesProgress
+[ServiceDataSource]
+public class WeeklyObjectivesProgress(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
         (GuildWars2.WizardsVault.Objectives.WeeklyObjectivesProgress actual, MessageContext context) = await sut.WizardsVault.GetWeeklyObjectivesProgress(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.True(actual.RewardItemId > 0);

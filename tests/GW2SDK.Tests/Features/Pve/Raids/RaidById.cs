@@ -1,14 +1,14 @@
-﻿using GuildWars2.Pve.Raids;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Pve.Raids;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Pve.Raids;
 
-public class RaidById
+[ServiceDataSource]
+public class RaidById(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_found()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         const string id = "forsaken_thicket";
         (Raid actual, MessageContext context) = await sut.Pve.Raids.GetRaidById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);

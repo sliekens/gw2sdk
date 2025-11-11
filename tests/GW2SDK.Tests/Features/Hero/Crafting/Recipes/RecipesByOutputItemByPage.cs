@@ -1,14 +1,14 @@
 ﻿using GuildWars2.Hero.Crafting.Recipes;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Crafting.Recipes;
 
-public class RecipesByOutputItemByPage
+[ServiceDataSource]
+public class RecipesByOutputItemByPage(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_found()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int ironIngot = 19683;
         const int pageSize = 3;
         (HashSet<Recipe> actual, MessageContext context) = await sut.Hero.Crafting.Recipes.GetRecipesByOutputItemIdByPage(ironIngot, 0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);

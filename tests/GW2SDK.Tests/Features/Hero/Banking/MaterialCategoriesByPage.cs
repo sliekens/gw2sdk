@@ -1,14 +1,15 @@
 ﻿using GuildWars2.Hero.Banking;
 using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Banking;
 
-public class MaterialCategoriesByPage
+[ServiceDataSource]
+public class MaterialCategoriesByPage(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_filtered_by_page()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int pageSize = 3;
         (HashSet<MaterialCategory> actual, MessageContext context) = await sut.Hero.Bank.GetMaterialCategoriesByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context.Links);

@@ -1,14 +1,14 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
-using GuildWars2.Worlds;
+﻿using GuildWars2.Worlds;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Worlds;
 
-public class Worlds
+[ServiceDataSource]
+public class Worlds(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         (HashSet<World> actual, MessageContext context) = await sut.Worlds.GetWorlds(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotEmpty(actual);
         Assert.All(actual, world =>

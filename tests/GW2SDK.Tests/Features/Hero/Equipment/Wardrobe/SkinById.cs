@@ -1,14 +1,14 @@
-﻿using GuildWars2.Hero.Equipment.Wardrobe;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Hero.Equipment.Wardrobe;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Wardrobe;
 
-public class SkinById
+[ServiceDataSource]
+public class SkinById(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_found()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int id = 1;
         (EquipmentSkin actual, MessageContext context) = await sut.Hero.Equipment.Wardrobe.GetSkinById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);

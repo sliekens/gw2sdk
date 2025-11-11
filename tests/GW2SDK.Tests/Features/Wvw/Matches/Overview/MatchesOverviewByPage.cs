@@ -1,14 +1,14 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.Wvw.Matches.Overview;
 
 namespace GuildWars2.Tests.Features.Wvw.Matches.Overview;
 
-public class MatchesOverviewByPage
+[ServiceDataSource]
+public class MatchesOverviewByPage(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_filtered_by_page()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int pageSize = 3;
         (HashSet<MatchOverview> actual, MessageContext context) = await sut.Wvw.GetMatchesOverviewByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context.Links);

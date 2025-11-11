@@ -1,21 +1,21 @@
-﻿using GuildWars2.Chat;
+using GuildWars2.Chat;
 using GuildWars2.Hero;
 using GuildWars2.Hero.Builds;
 using GuildWars2.Hero.Builds.Facts;
 using GuildWars2.Hero.Builds.Skills;
 using GuildWars2.Tests.Features.Markup;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 using Range = GuildWars2.Hero.Builds.Facts.Range;
 
 namespace GuildWars2.Tests.Features.Hero.Builds;
 
-public class Skills
+[ServiceDataSource]
+public class Skills(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         (HashSet<Skill> actual, MessageContext context) = await sut.Hero.Builds.GetSkills(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

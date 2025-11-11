@@ -1,13 +1,14 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pve.Home.Cats;
 
-public class UnlockedCats
+[ServiceDataSource]
+public class UnlockedCats(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey token = TestConfiguration.ApiKey;
         (HashSet<int> actual, _) = await sut.Pve.Home.GetUnlockedCats(token.Key, TestContext.Current!.Execution.CancellationToken);
         Assert.NotEmpty(actual);

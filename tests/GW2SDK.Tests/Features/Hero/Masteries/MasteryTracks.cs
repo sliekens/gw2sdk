@@ -1,15 +1,15 @@
 ﻿using GuildWars2.Hero.Masteries;
 using GuildWars2.Tests.Features.Markup;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Masteries;
 
-public class MasteryTracks
+[ServiceDataSource]
+public class MasteryTracks(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         (HashSet<MasteryTrack> actual, MessageContext context) = await sut.Hero.Masteries.GetMasteryTracks(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(context.ResultTotal, actual.Count);
         Assert.All(actual, mastery =>

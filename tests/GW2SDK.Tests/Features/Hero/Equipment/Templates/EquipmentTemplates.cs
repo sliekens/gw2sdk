@@ -1,16 +1,17 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 
 using GuildWars2.Hero.Equipment.Templates;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Templates;
 
-public class EquipmentTemplates
+[ServiceDataSource]
+public class EquipmentTemplates(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         TestCharacter character = TestConfiguration.TestCharacter;
         ApiKey accessToken = TestConfiguration.ApiKey;
         (HashSet<EquipmentTemplate> actual, MessageContext context) = await sut.Hero.Equipment.Templates.GetEquipmentTemplates(character.Name, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);

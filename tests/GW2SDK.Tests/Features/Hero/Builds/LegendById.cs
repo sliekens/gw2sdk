@@ -1,9 +1,10 @@
-﻿using GuildWars2.Hero.Builds;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Hero.Builds;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Builds;
 
-public class LegendById
+[ServiceDataSource]
+public class LegendById(Gw2Client sut)
 {
     [Test]
     [Arguments("Legend1")]
@@ -11,7 +12,6 @@ public class LegendById
     [Arguments("Legend3")]
     public async Task Can_be_found(string id)
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         (Legend actual, MessageContext context) = await sut.Hero.Builds.GetLegendById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);
         Assert.Equal(id, actual.Id);

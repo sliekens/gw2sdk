@@ -2,15 +2,16 @@
 
 using GuildWars2.Hero.Crafting.Disciplines;
 using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Crafting.Disciplines;
 
-public class LearnedCraftingDisciplinesByName
+[ServiceDataSource]
+public class LearnedCraftingDisciplinesByName(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_found()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         TestCharacter character = TestConfiguration.TestCharacter;
         ApiKey accessToken = TestConfiguration.ApiKey;
         (LearnedCraftingDisciplines actual, MessageContext context) = await sut.Hero.Crafting.Disciplines.GetLearnedCraftingDisciplines(character.Name, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);

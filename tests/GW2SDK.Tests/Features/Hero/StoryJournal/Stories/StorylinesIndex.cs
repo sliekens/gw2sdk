@@ -1,13 +1,13 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+﻿using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.StoryJournal.Stories;
 
-public class StorylinesIndex
+[ServiceDataSource]
+public class StorylinesIndex(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         (HashSet<string> actual, MessageContext context) = await sut.Hero.StoryJournal.GetStorylinesIndex(TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

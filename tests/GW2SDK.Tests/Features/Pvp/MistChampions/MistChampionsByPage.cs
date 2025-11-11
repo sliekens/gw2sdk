@@ -1,14 +1,14 @@
-﻿using GuildWars2.Pvp.MistChampions;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Pvp.MistChampions;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Pvp.MistChampions;
 
-public class MistChampionsByPage
+[ServiceDataSource]
+public class MistChampionsByPage(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_filtered_by_page()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int pageSize = 3;
         (HashSet<MistChampion> actual, MessageContext context) = await sut.Pvp.GetMistChampionByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context.Links);

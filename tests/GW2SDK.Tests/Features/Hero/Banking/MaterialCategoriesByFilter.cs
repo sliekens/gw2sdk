@@ -1,14 +1,14 @@
-﻿using GuildWars2.Hero.Banking;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Hero.Banking;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Banking;
 
-public class MaterialCategoriesByFilter
+[ServiceDataSource]
+public class MaterialCategoriesByFilter(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_filtered_by_id()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<int> ids = [5, 6, 29];
         (HashSet<MaterialCategory> actual, MessageContext context) = await sut.Hero.Bank.GetMaterialCategoriesByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);

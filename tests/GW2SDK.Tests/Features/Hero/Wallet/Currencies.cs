@@ -1,14 +1,14 @@
-﻿using GuildWars2.Hero.Wallet;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Hero.Wallet;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Wallet;
 
-public class Currencies
+[ServiceDataSource]
+public class Currencies(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         (HashSet<Currency> actual, MessageContext context) = await sut.Hero.Wallet.GetCurrencies(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(context.ResultTotal, actual.Count);
         Assert.All(actual, currency =>

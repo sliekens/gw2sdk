@@ -1,14 +1,15 @@
 ﻿using GuildWars2.Hero.Accounts;
 using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Accounts;
 
-public class Account
+[ServiceDataSource]
+public class Account(Gw2Client sut)
 {
     [Test]
     public async Task Basic_summary_with_any_access_token()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKeyBasic accessToken = TestConfiguration.ApiKeyBasic;
         (AccountSummary actual, _) = await sut.Hero.Account.GetSummary(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotEmpty(actual.DisplayName);
@@ -30,7 +31,6 @@ public class Account
     [Test]
     public async Task Full_summary_with_high_trust_access_token()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
         (AccountSummary actual, _) = await sut.Hero.Account.GetSummary(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotEmpty(actual.DisplayName);

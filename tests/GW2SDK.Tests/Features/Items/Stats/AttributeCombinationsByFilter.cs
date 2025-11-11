@@ -1,14 +1,14 @@
 ﻿using GuildWars2.Items.Stats;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Items.Stats;
 
-public class AttributeCombinationsByFilter
+[ServiceDataSource]
+public class AttributeCombinationsByFilter(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_filtered_by_id()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<int> ids = [161, 559, 1566];
         (HashSet<AttributeCombination> actual, MessageContext context) = await sut.Items.GetAttributeCombinationsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);

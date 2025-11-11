@@ -1,16 +1,16 @@
 ﻿using System.Drawing;
 
 using GuildWars2.Exploration.Continents;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Exploration.Continents;
 
-public class Continents
+[ServiceDataSource]
+public class Continents(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         (HashSet<Continent> actual, MessageContext context) = await sut.Exploration.GetContinents(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

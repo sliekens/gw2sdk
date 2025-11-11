@@ -1,14 +1,14 @@
-﻿using GuildWars2.Guilds.Permissions;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Guilds.Permissions;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Guilds.Permissions;
 
-public class GuildPermissionsByPage
+[ServiceDataSource]
+public class GuildPermissionsByPage(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_filtered_by_page()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int pageSize = 3;
         (HashSet<GuildPermissionSummary> actual, MessageContext context) = await sut.Guilds.GetGuildPermissionsByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context.Links);

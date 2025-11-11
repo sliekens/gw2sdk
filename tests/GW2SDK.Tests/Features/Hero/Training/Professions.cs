@@ -1,14 +1,14 @@
-﻿using GuildWars2.Hero.Training;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Hero.Training;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Training;
 
-public class Professions
+[ServiceDataSource]
+public class Professions(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         (HashSet<Profession> actual, _) = await sut.Hero.Training.GetProfessions(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(Profession.AllProfessions.Count, actual.Count);
         Assert.All(actual, profession =>

@@ -1,9 +1,10 @@
 ﻿using GuildWars2.Hero.Crafting.Recipes;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Crafting.Recipes;
 
-public class RecipesByIngredient
+[ServiceDataSource]
+public class RecipesByIngredient(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_found()
@@ -11,7 +12,6 @@ public class RecipesByIngredient
         // Normally the limit for ids=all is 200 items
         //   but that doesn't seem to apply for recipes search by input/output item
         // There are 800+ recipes that require a vision crystal
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int visionCrystal = 46746;
         (HashSet<Recipe> actual, MessageContext context) = await sut.Hero.Crafting.Recipes.GetRecipesByIngredientItemId(visionCrystal, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotInRange(actual.Count, 0, 200); // Greater than 200

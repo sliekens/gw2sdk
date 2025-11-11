@@ -1,14 +1,14 @@
-﻿using GuildWars2.Hero.Equipment.Mounts;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Hero.Equipment.Mounts;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Mounts;
 
-public class MountSkinsByFilter
+[ServiceDataSource]
+public class MountSkinsByFilter(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_filtered_by_id()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<int> ids = [1, 2, 3];
         (HashSet<MountSkin> actual, MessageContext context) = await sut.Hero.Equipment.Mounts.GetMountSkinsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);

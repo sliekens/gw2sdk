@@ -1,14 +1,14 @@
 ﻿using GuildWars2.Exploration.Maps;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Exploration.Maps;
 
-public class MapSummariesByFilter
+[ServiceDataSource]
+public class MapSummariesByFilter(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_filtered_by_id()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<int> ids = [15, 17, 18];
         (HashSet<MapSummary> actual, MessageContext context) = await sut.Exploration.GetMapSummariesByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);

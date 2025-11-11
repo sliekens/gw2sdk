@@ -1,14 +1,14 @@
-﻿using GuildWars2.Quaggans;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Quaggans;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Quaggans;
 
-public class Quaggans
+[ServiceDataSource]
+public class Quaggans(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         (HashSet<Quaggan> actual, MessageContext context) = await sut.Quaggans.GetQuaggans(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

@@ -1,13 +1,14 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Wvw.Guilds;
 
-public class AccountWvwGuild
+[ServiceDataSource]
+public class AccountWvwGuild(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_found()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
         (GuildWars2.Wvw.Guilds.AccountWvwGuild actual, _) = await sut.Wvw.GetAccountWvwGuild(accessToken.Key, TestContext.Current!.Execution.CancellationToken);
         if (actual.TeamId.HasValue)

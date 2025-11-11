@@ -1,14 +1,15 @@
 ﻿using GuildWars2.Pvp.Games;
 using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Pvp.Games;
 
-public class Games
+[ServiceDataSource]
+public class Games(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
         (HashSet<Game> actual, MessageContext context) = await sut.Pvp.GetGames(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotEmpty(actual);

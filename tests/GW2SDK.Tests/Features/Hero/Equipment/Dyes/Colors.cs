@@ -1,17 +1,17 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 
 using GuildWars2.Chat;
 using GuildWars2.Hero.Equipment.Dyes;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Dyes;
 
-public class Colors
+[ServiceDataSource]
+public class Colors(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         (HashSet<DyeColor> actual, MessageContext context) = await sut.Hero.Equipment.Dyes.GetColors(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(context.ResultTotal, actual.Count);
         Assert.All(actual, color =>

@@ -1,13 +1,14 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pve.Raids;
 
-public class CompletedEncounters
+[ServiceDataSource]
+public class CompletedEncounters(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
         (HashSet<string> actual, _) = await sut.Pve.Raids.GetCompletedEncounters(accessToken.Key, TestContext.Current!.Execution.CancellationToken);
         // Can be empty if you haven't done any raids this week

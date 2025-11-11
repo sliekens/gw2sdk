@@ -1,14 +1,14 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.Wvw.Matches.Stats;
 
 namespace GuildWars2.Tests.Features.Wvw.Matches.Stats;
 
-public class MatchesStats
+[ServiceDataSource]
+public class MatchesStats(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         (HashSet<MatchStats> actual, MessageContext context) = await sut.Wvw.GetMatchesStats(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

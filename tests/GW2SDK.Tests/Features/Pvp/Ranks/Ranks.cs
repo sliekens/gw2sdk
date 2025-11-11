@@ -1,14 +1,14 @@
-﻿using GuildWars2.Pvp.Ranks;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Pvp.Ranks;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Pvp.Ranks;
 
-public class Ranks
+[ServiceDataSource]
+public class Ranks(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         (HashSet<Rank> actual, MessageContext context) = await sut.Pvp.GetRanks(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

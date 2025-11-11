@@ -1,13 +1,14 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Exploration.HeroChallenges;
 
-public class CompletedHeroChallenges
+[ServiceDataSource]
+public class CompletedHeroChallenges(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_found()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         TestCharacter character = TestConfiguration.TestCharacter;
         ApiKey accessToken = TestConfiguration.ApiKey;
         (HashSet<string> actual, _) = await sut.Exploration.GetCompletedHeroChallenges(character.Name, accessToken.Key, TestContext.Current!.Execution.CancellationToken);

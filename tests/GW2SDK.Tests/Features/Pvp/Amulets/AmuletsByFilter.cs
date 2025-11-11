@@ -1,14 +1,14 @@
 ﻿using GuildWars2.Pvp.Amulets;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Pvp.Amulets;
 
-public class AmuletsByFilter
+[ServiceDataSource]
+public class AmuletsByFilter(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_filtered_by_id()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<int> ids = [4, 8, 9];
         (HashSet<Amulet> actual, MessageContext context) = await sut.Pvp.GetAmuletsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);

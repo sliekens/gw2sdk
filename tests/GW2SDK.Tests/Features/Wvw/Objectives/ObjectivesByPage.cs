@@ -1,14 +1,14 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.Wvw.Objectives;
 
 namespace GuildWars2.Tests.Features.Wvw.Objectives;
 
-public class ObjectivesByPage
+[ServiceDataSource]
+public class ObjectivesByPage(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_filtered_by_page()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int pageSize = 3;
         (HashSet<Objective> actual, MessageContext context) = await sut.Wvw.GetObjectivesByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context.Links);

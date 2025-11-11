@@ -1,14 +1,14 @@
-﻿using GuildWars2.Pve.Dungeons;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Pve.Dungeons;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Pve.Dungeons;
 
-public class DungeonsByPage
+[ServiceDataSource]
+public class DungeonsByPage(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_filtered_by_page()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int pageSize = 3;
         (HashSet<Dungeon> actual, MessageContext context) = await sut.Pve.Dungeons.GetDungeonsByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context.Links);

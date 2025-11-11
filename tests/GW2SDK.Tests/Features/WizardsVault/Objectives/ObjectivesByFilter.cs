@@ -1,14 +1,14 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.WizardsVault.Objectives;
 
 namespace GuildWars2.Tests.Features.WizardsVault.Objectives;
 
-public class ObjectivesByFilter
+[ServiceDataSource]
+public class ObjectivesByFilter(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_filtered_by_id()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<int> ids = [1, 2, 3];
         (HashSet<Objective> actual, MessageContext context) = await sut.WizardsVault.GetObjectivesByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);

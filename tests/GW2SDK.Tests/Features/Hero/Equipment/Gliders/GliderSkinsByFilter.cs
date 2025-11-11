@@ -1,14 +1,14 @@
-﻿using GuildWars2.Hero.Equipment.Gliders;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Hero.Equipment.Gliders;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Gliders;
 
-public class GliderSkinsByFilter
+[ServiceDataSource]
+public class GliderSkinsByFilter(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_filtered_by_id()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<int> ids = [1, 38, 74];
         (HashSet<GliderSkin> actual, MessageContext context) = await sut.Hero.Equipment.Gliders.GetGliderSkinsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);

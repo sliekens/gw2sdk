@@ -1,14 +1,14 @@
-﻿using GuildWars2.Files;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Files;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Files;
 
-public class FilesByFilter
+[ServiceDataSource]
+public class FilesByFilter(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_filtered_by_id()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<string> ids = ["map_complete", "map_vendor_ecto", "map_stairs_up"];
         (HashSet<Asset> actual, MessageContext context) = await sut.Files.GetFilesByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);

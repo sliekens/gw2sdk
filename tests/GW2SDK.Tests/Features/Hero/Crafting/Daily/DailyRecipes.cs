@@ -1,13 +1,14 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Crafting.Daily;
 
-public class DailyRecipes
+[ServiceDataSource]
+public class DailyRecipes(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_found()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
         // This is not resistant to recipes being added to the game, so not great :)
         // For now I'll just maintain this by hand...

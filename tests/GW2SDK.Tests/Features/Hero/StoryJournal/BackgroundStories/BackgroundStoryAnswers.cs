@@ -1,15 +1,15 @@
-﻿using GuildWars2.Hero.StoryJournal.BackgroundStories;
+using GuildWars2.Hero.StoryJournal.BackgroundStories;
 using GuildWars2.Tests.Features.Markup;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.StoryJournal.BackgroundStories;
 
-public class BackgroundStoryAnswers
+[ServiceDataSource]
+public class BackgroundStoryAnswers(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         (HashSet<BackgroundStoryAnswer> actual, MessageContext context) = await sut.Hero.StoryJournal.GetBackgroundStoryAnswers(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(context.ResultTotal, actual.Count);
         Assert.All(actual, answer =>

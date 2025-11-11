@@ -1,15 +1,16 @@
 ﻿using GuildWars2.Hero;
 using GuildWars2.Hero.Accounts;
 using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Accounts;
 
-public class Characters
+[ServiceDataSource]
+public class Characters(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
         (HashSet<Character> actual, MessageContext context) = await sut.Hero.Account.GetCharacters(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(context.ResultCount, actual.Count);

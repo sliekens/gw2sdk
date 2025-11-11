@@ -1,14 +1,14 @@
-﻿using GuildWars2.Hero.StoryJournal.BackgroundStories;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Hero.StoryJournal.BackgroundStories;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.StoryJournal.BackgroundStories;
 
-public class BackgroundStoryAnswersByPage
+[ServiceDataSource]
+public class BackgroundStoryAnswersByPage(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_filtered_by_page()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int pageSize = 3;
         (HashSet<BackgroundStoryAnswer> actual, MessageContext context) = await sut.Hero.StoryJournal.GetBackgroundStoryAnswersByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context.Links);

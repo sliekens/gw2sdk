@@ -1,14 +1,15 @@
 ﻿using GuildWars2.Hero.Inventories;
 using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Inventories;
 
-public class Inventory
+[ServiceDataSource]
+public class Inventory(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_found_by_character_name()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         TestCharacter character = TestConfiguration.TestCharacter;
         ApiKey accessToken = TestConfiguration.ApiKey;
         (Baggage actual, _) = await sut.Hero.Inventory.GetInventory(character.Name, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);

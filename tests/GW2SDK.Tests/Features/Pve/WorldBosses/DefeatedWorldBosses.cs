@@ -1,13 +1,14 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
+using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pve.WorldBosses;
 
-public class DefeatedWorldBosses
+[ServiceDataSource]
+public class DefeatedWorldBosses(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         ApiKey accessToken = TestConfiguration.ApiKey;
         // Resets each day, not easy to prove it works
         (HashSet<string> actual, _) = await sut.Pve.WorldBosses.GetDefeatedWorldBosses(accessToken.Key, TestContext.Current!.Execution.CancellationToken);

@@ -1,14 +1,14 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.WizardsVault.Objectives;
 
 namespace GuildWars2.Tests.Features.WizardsVault.Objectives;
 
-public class Objectives
+[ServiceDataSource]
+public class Objectives(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         (HashSet<Objective> actual, MessageContext context) = await sut.WizardsVault.GetObjectives(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

@@ -1,14 +1,13 @@
-﻿using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Mounts;
 
-public class MountSkinsIndex
+[ServiceDataSource]
+public class MountSkinsIndex(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
-
         (HashSet<int> actual, MessageContext context) =
             await sut.Hero.Equipment.Mounts.GetMountSkinsIndex(
                 TestContext.Current!.Execution.CancellationToken

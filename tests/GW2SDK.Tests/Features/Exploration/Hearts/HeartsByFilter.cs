@@ -1,14 +1,14 @@
 ﻿using GuildWars2.Exploration.Hearts;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Exploration.Hearts;
 
-public class HeartsByFilter
+[ServiceDataSource]
+public class HeartsByFilter(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_filtered_by_id()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         const int continentId = 1;
         const int floorId = 0;
         const int regionId = 1;

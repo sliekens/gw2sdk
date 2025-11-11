@@ -1,14 +1,14 @@
-﻿using GuildWars2.Pve.Home.Decorations;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Pve.Home.Decorations;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Pve.Home.Glyphs;
 
-public class GlyphById
+[ServiceDataSource]
+public class GlyphById(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_found()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         const string id = "leatherworker_logging";
         (Glyph actual, MessageContext context) = await sut.Pve.Home.GetGlyphById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotNull(context);

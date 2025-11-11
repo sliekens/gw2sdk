@@ -13,7 +13,6 @@ internal static class HttpContentExtensions
         this HttpContent instance,
         CancellationToken cancellationToken)
     {
-
         return cancellationToken.IsCancellationRequested
             ? Task.FromCanceled(cancellationToken)
             : instance.LoadIntoBufferAsync();

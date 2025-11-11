@@ -1,14 +1,14 @@
-﻿using GuildWars2.Pve.Dungeons;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Pve.Dungeons;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Pve.Dungeons;
 
-public class Dungeons
+[ServiceDataSource]
+public class Dungeons(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         (HashSet<Dungeon> actual, MessageContext context) = await sut.Pve.Dungeons.GetDungeons(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);

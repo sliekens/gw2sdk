@@ -1,14 +1,14 @@
-﻿using GuildWars2.Hero.StoryJournal.BackgroundStories;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Hero.StoryJournal.BackgroundStories;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.StoryJournal.BackgroundStories;
 
-public class BackgroundStoryQuestionsByFilter
+[ServiceDataSource]
+public class BackgroundStoryQuestionsByFilter(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_filtered_by_id()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         HashSet<int> ids = [7, 10, 11];
         (HashSet<BackgroundStoryQuestion> actual, MessageContext context) = await sut.Hero.StoryJournal.GetBackgroundStoryQuestionsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(ids.Count, context.ResultCount);

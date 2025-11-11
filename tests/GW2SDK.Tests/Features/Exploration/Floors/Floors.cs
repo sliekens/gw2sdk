@@ -10,20 +10,20 @@ using GuildWars2.Exploration.Maps;
 using GuildWars2.Exploration.MasteryInsights;
 using GuildWars2.Exploration.PointsOfInterest;
 using GuildWars2.Exploration.Sectors;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 using Region = GuildWars2.Exploration.Regions.Region;
 
 namespace GuildWars2.Tests.Features.Exploration.Floors;
 
-public class Floors
+[ServiceDataSource]
+public class Floors(Gw2Client sut)
 {
     [Test]
     [Arguments(1)]
     [Arguments(2)]
     public async Task Can_be_listed(int continentId)
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         (HashSet<Floor> actual, MessageContext context) = await sut.Exploration.GetFloors(continentId, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.Equal(context.ResultCount, actual.Count);
         Assert.Equal(context.ResultTotal, actual.Count);

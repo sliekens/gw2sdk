@@ -1,15 +1,15 @@
-﻿using GuildWars2.Chat;
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Chat;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.WizardsVault.AstralRewards;
 
 namespace GuildWars2.Tests.Features.WizardsVault.AstralRewards;
 
-public class AstralRewards
+[ServiceDataSource]
+public class AstralRewards(Gw2Client sut)
 {
     [Test]
     public async Task Can_be_listed()
     {
-        Gw2Client sut = Composer.Resolve<Gw2Client>();
         (HashSet<AstralReward> actual, MessageContext context) = await sut.WizardsVault.GetAstralRewards(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         Assert.NotEmpty(actual);
         Assert.Equal(context.ResultCount, actual.Count);
