@@ -1,6 +1,7 @@
 ﻿using GuildWars2.Authorization;
 using GuildWars2.Tests.TestInfrastructure;
 using GuildWars2.Tests.TestInfrastructure.Composition;
+using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 using Assert = TUnit.Assertions.Assert;
 

@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Hero;
 
-namespace GuildWars2.Tests.TestInfrastructure;
+namespace GuildWars2.Tests.TestInfrastructure.Configuration;
 
 public sealed record TestCharacter
 {

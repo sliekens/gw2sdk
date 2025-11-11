@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 
 using TUnit.Core.Exceptions;
 
-namespace GuildWars2.Tests.TestInfrastructure;
+namespace GuildWars2.Tests.TestInfrastructure.Configuration;
 
 #pragma warning disable CA1065 // Do not raise exceptions in unexpected locations
 

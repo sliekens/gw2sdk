@@ -1,7 +1,7 @@
 ﻿using GuildWars2.Guilds.Storage;
 using GuildWars2.Hero.Accounts;
-using GuildWars2.Tests.TestInfrastructure;
 using GuildWars2.Tests.TestInfrastructure.Composition;
+using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Guilds;
 
