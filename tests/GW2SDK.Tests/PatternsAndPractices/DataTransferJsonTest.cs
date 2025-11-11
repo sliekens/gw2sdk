@@ -8,7 +8,7 @@ using static System.Reflection.BindingFlags;
 
 namespace GuildWars2.Tests.PatternsAndPractices;
 
-[ClassDataSource<AssemblyFixture>(Shared = SharedType.PerClass)]
+[ClassDataSource<AssemblyFixture>(Shared = SharedType.PerTestSession)]
 public class DataTransferJsonTest(AssemblyFixture fixture)
 {
     // Could use a better name

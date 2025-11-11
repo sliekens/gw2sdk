@@ -4,7 +4,7 @@ using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.PatternsAndPractices;
 
-[ClassDataSource<AssemblyFixture>(Shared = SharedType.PerClass)]
+[ClassDataSource<AssemblyFixture>(Shared = SharedType.PerTestSession)]
 public class ImmutableDataTest(AssemblyFixture fixture)
 {
     [Test]
