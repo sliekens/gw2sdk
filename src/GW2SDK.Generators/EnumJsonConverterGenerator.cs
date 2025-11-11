@@ -118,7 +118,7 @@ public class EnumJsonConverterGenerator : IIncrementalGenerator
 
                  namespace {{namespaceName}};
 
-                 internal sealed class {{enumName}}JsonConverter : JsonConverter<{{enumName}}>
+                 internal sealed partial class {{enumName}}JsonConverter : JsonConverter<{{enumName}}>
                  {
                      public override {{enumName}} Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
                      {
