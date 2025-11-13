@@ -175,7 +175,7 @@ public class EnumJsonConverterGenerator : IIncrementalGenerator
 
                  namespace GuildWars2;
 
-                 internal sealed class ExtensibleEnumJsonConverterFactory : JsonConverterFactory
+                 internal sealed partial class ExtensibleEnumJsonConverterFactory : JsonConverterFactory
                  {
                      public override bool CanConvert(Type typeToConvert)
                      {
