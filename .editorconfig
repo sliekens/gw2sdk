@@ -409,8 +409,12 @@ dotnet_naming_style.s_camelcase.required_suffix =
 dotnet_naming_style.s_camelcase.word_separator = 
 dotnet_naming_style.s_camelcase.capitalization = camel_case
 
-# Disable API compatibility analyzers for generated code
-[*.cs]
-dotnet_diagnostic.RS0016.severity = none
-dotnet_diagnostic.RS0041.severity = none
+[*]
+# RS0016: Add public types and members to the declared API
+dotnet_diagnostic.RS0016.severity = error
 
+# RS0036: Symbol '' is missing nullability annotations in the declared API
+dotnet_diagnostic.RS0036.severity = warning
+
+# RS0041: Public members should not use oblivious types
+dotnet_diagnostic.RS0041.severity = error

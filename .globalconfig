@@ -2194,7 +2194,7 @@ dotnet_diagnostic.rcs9011.severity = warning
 # because 'error' severity is downgraded to 'warning' by CodeAnalysisTreatWarningsAsErrors = false
 
 # RS0016: Add public types and members to the declared API
-dotnet_diagnostic.RS0016.severity = error
+dotnet_diagnostic.RS0016.severity = none
 
 # RS0017: Remove deleted types and members from the declared API
 dotnet_diagnostic.RS0017.severity = error
@@ -2202,8 +2202,11 @@ dotnet_diagnostic.RS0017.severity = error
 # RS0026: Do not add multiple public overloads with optional parameters
 dotnet_diagnostic.RS0026.severity = suggestion
 
+# RS0036: Symbol '' is missing nullability annotations in the declared API
+dotnet_diagnostic.RS0036.severity = none
+
 # RS0041: Public members should not use oblivious types
-dotnet_diagnostic.RS0041.severity = error
+dotnet_diagnostic.RS0041.severity = none
 
 # RS0051: Add internal types and members to the declared API
 dotnet_diagnostic.RS0051.severity = none
