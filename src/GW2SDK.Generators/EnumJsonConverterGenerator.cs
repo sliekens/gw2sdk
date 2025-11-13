@@ -141,12 +141,23 @@ public class EnumJsonConverterGenerator : IIncrementalGenerator
 
     private static string GenerateExtensibleEnumJsonConverterFactory(List<string> enumTypes)
     {
-        StringBuilder cases = new();
+        StringBuilder createCases = new();
+        StringBuilder canConvertCases = new();
         foreach (string? enumType in enumTypes)
         {
-            cases.AppendLine(
+            canConvertCases.AppendLine(
                 $$"""
-                          if (enumType == typeof({{enumType}}))
+                          if (typeToConvert == typeof(Extensible<{{enumType}}>))
+                          {
+                              return true;
+                          }
+
+                  """
+            );
+
+            createCases.AppendLine(
+                $$"""
+                          if (typeToConvert == typeof(Extensible<{{enumType}}>))
                           {
                               return new ExtensibleEnumJsonConverter<{{enumType}}>();
                           }
@@ -168,12 +179,8 @@ public class EnumJsonConverterGenerator : IIncrementalGenerator
                  {
                      public override bool CanConvert(Type typeToConvert)
                      {
-                         if (!typeToConvert.IsGenericType)
-                         {
-                             return false;
-                         }
-
-                         return typeToConvert.GetGenericTypeDefinition() == typeof(Extensible<>);
+                 {{canConvertCases}}
+                         return false;
                      }
 
                      public override JsonConverter? CreateConverter(
@@ -181,8 +188,7 @@ public class EnumJsonConverterGenerator : IIncrementalGenerator
                          JsonSerializerOptions options
                      )
                      {
-                         var enumType = typeToConvert.GetGenericArguments()[0];
-                 {{cases}}
+                 {{createCases}}
                          return null;
                      }
                  }
