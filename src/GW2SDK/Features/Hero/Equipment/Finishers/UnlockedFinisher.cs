@@ -1,7 +1,10 @@
-﻿namespace GuildWars2.Hero.Equipment.Finishers;
+﻿using System.Text.Json.Serialization;
+
+namespace GuildWars2.Hero.Equipment.Finishers;
 
 /// <summary>Information about a finisher unlocked on the account.</summary>
 [DataTransferObject]
+[JsonConverter(typeof(UnlockedFinisherJsonConverter))]
 public sealed record UnlockedFinisher
 {
     /// <summary>The finisher ID.</summary>
