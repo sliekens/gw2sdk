@@ -46,6 +46,9 @@ internal sealed class DataTransferObjectListGenerator : IIncrementalGenerator
         builder.AppendLine();
         builder.AppendLine("public partial class AssemblyFixture");
         builder.AppendLine("{");
+        builder.AppendLine("#if NET");
+        builder.AppendLine("    [global::System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(global::System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicProperties)]");
+        builder.AppendLine("#endif");
         builder.AppendLine("    public IEnumerable<Type> DataTransferObjects { get; } = new Type[]");
         builder.AppendLine("    {");
         bool first = true;
@@ -66,6 +69,9 @@ internal sealed class DataTransferObjectListGenerator : IIncrementalGenerator
         IEnumerable<INamedTypeSymbol> readers = EnumerateReaders(sdk.GlobalNamespace)
             .OrderBy(static s => s.ContainingNamespace.ToDisplayString())
             .ThenBy(static s => s.Name);
+        builder.AppendLine("#if NET");
+        builder.AppendLine("    [global::System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(global::System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicMethods | global::System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicMethods)]");
+        builder.AppendLine("#endif");
         builder.AppendLine("    public IEnumerable<System.Type> JsonElementReaderTypes { get; } = new System.Type[]");
         builder.AppendLine("    {");
         first = true;
