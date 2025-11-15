@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.Common;
 
 namespace GuildWars2.Tests.PatternsAndPractices;
 

@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 
-using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tests.Common;
 
 using static System.Reflection.BindingFlags;
 

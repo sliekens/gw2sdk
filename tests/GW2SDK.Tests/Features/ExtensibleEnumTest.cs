@@ -123,8 +123,8 @@ public class ExtensibleEnumTest
     {
         Extensible<ProductName> extensible = ProductName.GuildWars2;
 #if NET
-        string json = JsonSerializer.Serialize(extensible, GW2SDK.Tests.Common.TestJsonContext.Default.ExtensibleProductName);
-        Extensible<ProductName> actual = JsonSerializer.Deserialize(json, GW2SDK.Tests.Common.TestJsonContext.Default.ExtensibleProductName);
+        string json = JsonSerializer.Serialize(extensible, GuildWars2.Tests.Common.TestJsonContext.Default.ExtensibleProductName);
+        Extensible<ProductName> actual = JsonSerializer.Deserialize(json, GuildWars2.Tests.Common.TestJsonContext.Default.ExtensibleProductName);
 #else
         string json = JsonSerializer.Serialize(extensible);
         Extensible<ProductName> actual = JsonSerializer.Deserialize<Extensible<ProductName>>(json);
@@ -137,8 +137,8 @@ public class ExtensibleEnumTest
     {
         Extensible<ProductName> extensible = "GuildWars3";
 #if NET
-        string json = JsonSerializer.Serialize(extensible, GW2SDK.Tests.Common.TestJsonContext.Default.ExtensibleProductName);
-        Extensible<ProductName> actual = JsonSerializer.Deserialize(json, GW2SDK.Tests.Common.TestJsonContext.Default.ExtensibleProductName);
+        string json = JsonSerializer.Serialize(extensible, GuildWars2.Tests.Common.TestJsonContext.Default.ExtensibleProductName);
+        Extensible<ProductName> actual = JsonSerializer.Deserialize(json, GuildWars2.Tests.Common.TestJsonContext.Default.ExtensibleProductName);
 #else
         string json = JsonSerializer.Serialize(extensible);
         Extensible<ProductName> actual = JsonSerializer.Deserialize<Extensible<ProductName>>(json);
