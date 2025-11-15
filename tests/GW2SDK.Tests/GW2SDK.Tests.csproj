@@ -5,6 +5,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <TargetFrameworks>net10.0;net481</TargetFrameworks>
+    <JsonSerializerIsReflectionEnabledByDefault>false</JsonSerializerIsReflectionEnabledByDefault>
     <UserSecretsId>a8ab34fc-ca23-453c-b913-59b025c2b48e</UserSecretsId>
     <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
     <RootNamespace>GuildWars2.Tests</RootNamespace>
