@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+﻿// Removed unused reflection using after switching to generated metadata.
 
 using GuildWars2.Tests.Common;
 
@@ -10,18 +10,10 @@ public class RequireAssignmentTest(AssemblyFixture fixture)
     [Test]
     public void Data_transfer_object_members_are_required()
     {
-        Assert.All(fixture.DataTransferObjects.SelectMany(type => type.GetProperties()), actual =>
+        Assert.All(fixture.DataTransferObjectProperties, actual =>
         {
-            Assert.True(IsCompliant(actual), $"{actual.DeclaringType?.Name}.{actual.Name} must be read-only or read-write and marked as 'required'.");
+            bool compliant = actual.IsObsolete || !actual.HasSetter || actual.HasRequiredMemberAttribute;
+            Assert.True(compliant, $"{actual.DeclaringType}.{actual.Name} must be read-only or read-write and marked as 'required'.");
         });
-        static bool IsCompliant(PropertyInfo actual)
-        {
-            if (actual.CustomAttributes.Any(annotation => annotation.AttributeType == typeof(ObsoleteAttribute)))
-            {
-                return true;
-            }
-
-            return !actual.CanWrite || actual.CustomAttributes.Any(annotation => annotation.AttributeType.Name == "RequiredMemberAttribute");
-        }
     }
 }

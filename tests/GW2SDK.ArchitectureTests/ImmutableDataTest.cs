@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+﻿// Removed unused reflection using after switching to generated metadata.
 
 using GuildWars2.Tests.Common;
 
@@ -10,13 +10,9 @@ public class ImmutableDataTest(AssemblyFixture fixture)
     [Test]
     public void Data_objects_are_immutable()
     {
-        Assert.All(fixture.DataTransferObjects.SelectMany(type => type.GetProperties()), actual =>
+        Assert.All(fixture.DataTransferObjectProperties, actual =>
         {
-            Assert.True(IsReadOnly(actual), $"{actual.DeclaringType?.Name}.{actual.Name} must be read-only or init-only.");
+            Assert.True(!actual.HasSetter || actual.IsInitOnly, $"{actual.DeclaringType}.{actual.Name} must be read-only or init-only.");
         });
-        static bool IsReadOnly(PropertyInfo actual)
-        {
-            return !actual.CanWrite || actual.SetMethod!.ReturnParameter!.GetRequiredCustomModifiers().Any(modReq => modReq.Name == "IsExternalInit");
-        }
     }
 }
