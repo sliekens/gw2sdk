@@ -12,14 +12,20 @@ Create another test project when:
 
 All test projects MUST live under the `tests/` directory, sibling to `GW2SDK.Tests`. Name them with the `GW2SDK.` prefix for clarity (e.g. `GW2SDK.LoadTests`).
 
-## Quick start (template approach)
+## Quick start (template)
 
-If you have not already installed TUnit templates locally, they may already be installed historically. If not, you can still use the manual approach below. The template approach creates sample tests you can delete.
+Install the TUnit project templates if they are not already present locally. The template scaffolds a test project with example tests you can discard.
 
 ```bash
 # Install or update TUnit templates
 dotnet new install TUnit.Templates
 dotnet new TUnit --name GW2SDK.LoadTests --output tests/GW2SDK.LoadTests
+```
+
+The generated `.csproj` will include a concrete version for `TUnit` (for example `<PackageReference Include="TUnit" Version="1.1.10" />`). Delete the `Version` attribute so Central Package Management (CPM) supplies it. The line should look like:
+
+```xml
+<PackageReference Include="TUnit" />
 ```
 
 Then add the project to the solution and remove sample tests you do not need:
