@@ -4,6 +4,7 @@
     <TargetFrameworks>net10.0;net481</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <RootNamespace>GuildWars2.Tests.Common</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
