@@ -6,7 +6,7 @@ using GuildWars2.Tests.Common;
 
 using static System.Reflection.BindingFlags;
 
-namespace GuildWars2.Tests.PatternsAndPractices;
+namespace GuildWars2.ArchitectureTests;
 
 [ClassDataSource<AssemblyFixture>(Shared = SharedType.PerTestSession)]
 public class DataTransferJsonTest(AssemblyFixture fixture)

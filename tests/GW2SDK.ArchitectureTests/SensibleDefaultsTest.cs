@@ -3,7 +3,7 @@ using System.Reflection;
 
 using GuildWars2.Tests.Common;
 
-namespace GuildWars2.Tests.PatternsAndPractices;
+namespace GuildWars2.ArchitectureTests;
 
 [ClassDataSource<AssemblyFixture>(Shared = SharedType.PerTestSession)]
 public class SensibleDefaultsTest(AssemblyFixture fixture)
