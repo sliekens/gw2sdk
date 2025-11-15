@@ -2,7 +2,6 @@
 using System.Net;
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Nodes;
 using System.Web;
 
 namespace GuildWars2.Tests.TestInfrastructure;
@@ -23,15 +22,13 @@ internal sealed class JsonLinesHttpMessageHandler(string path) : HttpMessageHand
         CancellationToken cancellationToken
     )
     {
-        JsonArray results = [];
+        List<int> ids = [];
+        List<JsonElement> results = [];
         NameValueCollection query = HttpUtility.ParseQueryString(request.RequestUri!.Query);
         string? keys = query.Get("ids");
         if (keys is null)
         {
-            foreach (int key in entries.Keys)
-            {
-                results.Add(key);
-            }
+            ids = [.. entries.Keys];
         }
         else
         {
@@ -43,16 +40,32 @@ internal sealed class JsonLinesHttpMessageHandler(string path) : HttpMessageHand
                 }
             }
         }
-
-        return Task.FromResult(
-            new HttpResponseMessage(HttpStatusCode.OK)
+        // Serialize the heterogenous list: ints or JsonElements.
+        using MemoryStream buffer = new();
+        using (Utf8JsonWriter writer = new(buffer))
+        {
+            writer.WriteStartArray();
+            if (results.Count > 0)
             {
-                Content = new StringContent(
-                    results.ToString(),
-                    Encoding.UTF8,
-                    "application/json"
-                )
+                foreach (JsonElement result in results)
+                {
+                    result.WriteTo(writer);
+                }
             }
-        );
+            else
+            {
+                foreach (int id in ids)
+                {
+                    writer.WriteNumberValue(id);
+                }
+            }
+
+            writer.WriteEndArray();
+        }
+        string payload = Encoding.UTF8.GetString(buffer.ToArray());
+        return Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK)
+        {
+            Content = new StringContent(payload, Encoding.UTF8, "application/json")
+        });
     }
 }
