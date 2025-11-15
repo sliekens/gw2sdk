@@ -98,8 +98,8 @@ internal sealed class DtPropertyMetadataGenerator : IIncrementalGenerator
                 {
                     bool hasSetter = property.SetMethod is not null;
                     bool isInitOnly = property.SetMethod?.IsInitOnly == true;
-                    bool isObsolete = property.GetAttributes().Any(a => a.AttributeClass?.Name == "ObsoleteAttribute");
-                    bool hasRequired = property.GetAttributes().Any(a => a.AttributeClass?.Name == "RequiredMemberAttribute");
+                    bool isObsolete = IsObsolete(property);
+                    bool hasRequired = HasRequiredMember(property);
                     properties.Add(new PropertyMetadata
                     {
                         DeclaringType = declaringType,
@@ -112,6 +112,56 @@ internal sealed class DtPropertyMetadataGenerator : IIncrementalGenerator
                 }
             }
         }
+    }
+
+    private static bool IsObsolete(IPropertySymbol property)
+    {
+        foreach (AttributeData attribute in property.GetAttributes())
+        {
+            INamedTypeSymbol? attrClass = attribute.AttributeClass;
+            if (attrClass is null)
+            {
+                continue;
+            }
+            if (attrClass.Name == "ObsoleteAttribute")
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static bool HasRequiredMember(IPropertySymbol property)
+    {
+        // Prefer Roslyn's IsRequired when available.
+        bool isRequiredFlag = false;
+        try
+        {
+            if (property.IsRequired)
+            {
+                return true;
+            }
+        }
+        catch
+        {
+            // Older Roslyn may throw; ignore and fall back.
+            isRequiredFlag = false;
+        }
+
+        foreach (AttributeData attribute in property.GetAttributes())
+        {
+            INamedTypeSymbol? attrClass = attribute.AttributeClass;
+            if (attrClass is null)
+            {
+                continue;
+            }
+            string fullName = attrClass.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
+            if (fullName == "global::System.Runtime.CompilerServices.RequiredMemberAttribute" || attrClass.Name == "RequiredMemberAttribute")
+            {
+                return true;
+            }
+        }
+        return isRequiredFlag;
     }
 
     private static void EmitPlaceholder(SourceProductionContext context)
