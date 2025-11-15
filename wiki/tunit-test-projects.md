@@ -64,13 +64,14 @@ dotnet sln gw2sdk.slnx add tests/GW2SDK.LoadTests/GW2SDK.LoadTests.csproj
    ```bash
    cat > tests/GW2SDK.LoadTests/SampleTests.cs <<'EOF'
    namespace GuildWars2.Tests.Load;
-
+   
    public class SampleTests
    {
        [Test]
        public async Task Sanity()
        {
-           await Assert.That(true).IsTrue();
+           bool value = true;
+           await Assert.That(value).IsTrue();
        }
    }
    EOF
