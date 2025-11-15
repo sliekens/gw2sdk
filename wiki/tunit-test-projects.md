@@ -52,6 +52,10 @@ dotnet sln gw2sdk.slnx add tests/GW2SDK.LoadTests/GW2SDK.LoadTests.csproj
    ```bash
    dotnet add tests/GW2SDK.LoadTests/GW2SDK.LoadTests.csproj reference src/GW2SDK/GW2SDK.csproj
    ```
+   Add a project reference to the common test infrastructure:
+   ```bash
+   dotnet add tests/GW2SDK.LoadTests/GW2SDK.LoadTests.csproj reference tests/GW2SDK.Tests.Common/GW2SDK.Tests.Common.csproj
+   ```
 4. Add package reference to TUnit (the version is centrally managed; no explicit version here if Directory.Packages.props provides it):
    ```bash
    dotnet add tests/GW2SDK.LoadTests/GW2SDK.LoadTests.csproj package TUnit
@@ -78,7 +82,7 @@ dotnet sln gw2sdk.slnx add tests/GW2SDK.LoadTests/GW2SDK.LoadTests.csproj
    ```
 7. Run the tests:
    ```bash
-   dotnet run --project tests/GW2SDK.LoadTests/GW2SDK.LoadTests.csproj -- --filter Sanity
+   dotnet run --project tests/GW2SDK.LoadTests/GW2SDK.LoadTests.csproj
    ```
 
 ## Project file guidelines
