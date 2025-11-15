@@ -13,6 +13,6 @@
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="../../src/GW2SDK/GW2SDK.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="../GW2SDK/GW2SDK.csproj" ReferenceOutputAssembly="false" />
   </ItemGroup>
 </Project>

@@ -14,13 +14,13 @@
     <Project Path="samples/PackageReadme/Gw2ClientProgram/Gw2ClientProgram.csproj" />
   </Folder>
   <Folder Name="/src/">
-    <Project Path="src/GW2SDK.Generators/GW2SDK.Generators.csproj" />
-    <Project Path="src/GW2SDK.Profiling/GW2SDK.Profiling.csproj" />
-    <Project Path="src/GW2SDK.TestDataHelper/GW2SDK.TestDataHelper.csproj" />
     <Project Path="src/GW2SDK/GW2SDK.csproj" />
+    <Project Path="src/GW2SDK.Generators/GW2SDK.Generators.csproj" />
+    <Project Path="src/GW2SDK.Tests.Generators/GW2SDK.Tests.Generators.csproj" />
+    <Project Path="src/GW2SDK.TestDataHelper/GW2SDK.TestDataHelper.csproj" />
+    <Project Path="src/GW2SDK.Profiling/GW2SDK.Profiling.csproj" />
   </Folder>
   <Folder Name="/tests/">
-    <Project Path="tests/GW2SDK.Tests.Generators/GW2SDK.Tests.Generators.csproj" />
     <Project Path="tests/GW2SDK.Tests/GW2SDK.Tests.csproj" />
   </Folder>
 </Solution>
