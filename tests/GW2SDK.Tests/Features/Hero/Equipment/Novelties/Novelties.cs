@@ -25,8 +25,13 @@ public class Novelties(Gw2Client sut)
             Assert.True(entry.IconUrl.IsAbsoluteUri);
             Assert.True(entry.Slot.IsDefined());
             Assert.NotEmpty(entry.UnlockItemIds);
+#if NET
+            string json = JsonSerializer.Serialize(entry, GuildWars2JsonContext.Default.Novelty);
+            Novelty? roundtrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.Novelty);
+#else
             string json = JsonSerializer.Serialize(entry);
             Novelty? roundtrip = JsonSerializer.Deserialize<Novelty>(json);
+#endif
             Assert.Equal(entry, roundtrip);
         });
     }

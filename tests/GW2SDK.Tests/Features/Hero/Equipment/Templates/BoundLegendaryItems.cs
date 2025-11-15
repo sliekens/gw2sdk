@@ -20,8 +20,13 @@ public class BoundLegendaryItems(Gw2Client sut)
         {
             Assert.True(entry.Id > 0);
             Assert.True(entry.Count > 0);
+#if NET
+            string json = JsonSerializer.Serialize(entry, GuildWars2JsonContext.Default.BoundLegendaryItem);
+            BoundLegendaryItem? roundtrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.BoundLegendaryItem);
+#else
             string json = JsonSerializer.Serialize(entry);
             BoundLegendaryItem? roundtrip = JsonSerializer.Deserialize<BoundLegendaryItem>(json);
+#endif
             Assert.Equal(entry, roundtrip);
         });
     }

@@ -142,8 +142,13 @@ public class Skins
         Gw2Client sut = new(httpClient);
         await foreach (EquipmentSkin original in sut.Hero.Equipment.Wardrobe.GetSkinsBulk(cancellationToken: TestContext.Current!.Execution.CancellationToken).ValueOnly(TestContext.Current!.Execution.CancellationToken))
         {
+#if NET
+            string json = JsonSerializer.Serialize(original, GuildWars2JsonContext.Default.EquipmentSkin);
+            EquipmentSkin? roundTrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.EquipmentSkin);
+#else
             string json = JsonSerializer.Serialize(original);
             EquipmentSkin? roundTrip = JsonSerializer.Deserialize<EquipmentSkin>(json);
+#endif
             Assert.IsType(original.GetType(), roundTrip);
             Assert.Equal(original, roundTrip);
         }

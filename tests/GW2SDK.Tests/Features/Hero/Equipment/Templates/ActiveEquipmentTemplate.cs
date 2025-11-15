@@ -2,7 +2,6 @@ using System.Text.Json;
 
 using GuildWars2.Hero.Equipment.Templates;
 using GuildWars2.Tests.TestInfrastructure.Composition;
-using GuildWars2.Tests.TestInfrastructure;
 using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Templates;
@@ -24,8 +23,13 @@ public class ActiveEquipmentTemplate(Gw2Client sut)
         Assert.All(actual.Items, EquipmentItemValidation.Validate);
         Assert.NotNull(actual.PvpEquipment);
         PvpEquipmentValidation.Validate(actual.PvpEquipment);
+#if NET
+        string json = JsonSerializer.Serialize(actual, GuildWars2JsonContext.Default.EquipmentTemplate);
+        EquipmentTemplate? roundtrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.EquipmentTemplate);
+#else
         string json = JsonSerializer.Serialize(actual);
         EquipmentTemplate? roundtrip = JsonSerializer.Deserialize<EquipmentTemplate>(json);
+#endif
         Assert.Equal(actual, roundtrip);
     }
 }

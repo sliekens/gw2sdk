@@ -74,8 +74,13 @@ public class Achievements
             Assert.Equal(actual.Id, chatLink.AchievementId);
             AchievementLink chatLinkRoundtrip = AchievementLink.Parse(chatLink.ToString());
             Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
+#if NET
+            string json = JsonSerializer.Serialize(actual, GuildWars2JsonContext.Default.Achievement);
+            Achievement? roundTrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.Achievement);
+#else
             string json = JsonSerializer.Serialize(actual);
             Achievement? roundTrip = JsonSerializer.Deserialize<Achievement>(json);
+#endif
             Assert.Equal(actual, roundTrip);
         }
     }

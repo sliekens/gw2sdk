@@ -36,8 +36,13 @@ public class Titles(Gw2Client sut)
                 Assert.NotEmpty(entry.Achievements!);
             }
 
+#if NET
+            string json = JsonSerializer.Serialize(entry, GuildWars2JsonContext.Default.Title);
+            Title? roundTrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.Title);
+#else
             string json = JsonSerializer.Serialize(entry);
             Title? roundTrip = JsonSerializer.Deserialize<Title>(json);
+#endif
             Assert.Equal(entry, roundTrip);
         });
     }

@@ -28,8 +28,13 @@ public class MailCarriers(Gw2Client sut)
             Assert.InRange(mailCarrier.Order, 0, 1000);
             Assert.True(mailCarrier.IconUrl is null || mailCarrier.IconUrl.IsAbsoluteUri);
             Assert.NotEmpty(mailCarrier.Name);
+#if NET
+            string json = JsonSerializer.Serialize(mailCarrier, GuildWars2JsonContext.Default.MailCarrier);
+            MailCarrier? roundtrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.MailCarrier);
+#else
             string json = JsonSerializer.Serialize(mailCarrier);
             MailCarrier? roundtrip = JsonSerializer.Deserialize<MailCarrier>(json);
+#endif
             Assert.Equal(mailCarrier, roundtrip);
         });
     }

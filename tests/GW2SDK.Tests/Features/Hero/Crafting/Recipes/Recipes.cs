@@ -51,8 +51,13 @@ public class Recipes
         Gw2Client sut = new(httpClient);
         await foreach (Recipe original in sut.Hero.Crafting.Recipes.GetRecipesBulk(cancellationToken: TestContext.Current!.Execution.CancellationToken).ValueOnly(TestContext.Current!.Execution.CancellationToken))
         {
+#if NET
+            string json = JsonSerializer.Serialize(original, GuildWars2JsonContext.Default.Recipe);
+            Recipe? roundTrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.Recipe);
+#else
             string json = JsonSerializer.Serialize(original);
             Recipe? roundTrip = JsonSerializer.Deserialize<Recipe>(json);
+#endif
             Assert.IsType(original.GetType(), roundTrip);
             Assert.Equal(original, roundTrip);
         }

@@ -23,8 +23,13 @@ public class AccountAchievements(Gw2Client sut)
             Assert.True(achievement.Current >= 0);
             Assert.True(achievement.Max >= 0);
             Assert.True(achievement.Repeated >= 0);
+#if NET
+            string json = JsonSerializer.Serialize(achievement, GuildWars2JsonContext.Default.AccountAchievement);
+            AccountAchievement? roundTrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.AccountAchievement);
+#else
             string json = JsonSerializer.Serialize(achievement);
             AccountAchievement? roundTrip = JsonSerializer.Deserialize<AccountAchievement>(json);
+#endif
             Assert.Equal(achievement, roundTrip);
         });
     }

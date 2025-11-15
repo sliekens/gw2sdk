@@ -1,9 +1,16 @@
 ﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 
 using GuildWars2.Hero.Accounts;
 using GuildWars2.Items;
 
 namespace GuildWars2.Tests.Features;
+
+[JsonSerializable(typeof(Extensible<ProductName>))]
+[JsonSerializable(typeof(ProductName))]
+public partial class TestJsonContext : JsonSerializerContext
+{
+}
 
 public class ExtensibleEnumTest
 {
@@ -122,8 +129,13 @@ public class ExtensibleEnumTest
     public void Has_json_conversion()
     {
         Extensible<ProductName> extensible = ProductName.GuildWars2;
+#if NET
+        string json = JsonSerializer.Serialize(extensible, TestJsonContext.Default.ExtensibleProductName);
+        Extensible<ProductName> actual = JsonSerializer.Deserialize(json, TestJsonContext.Default.ExtensibleProductName);
+#else
         string json = JsonSerializer.Serialize(extensible);
         Extensible<ProductName> actual = JsonSerializer.Deserialize<Extensible<ProductName>>(json);
+#endif
         Assert.Equal(extensible, actual);
     }
 
@@ -131,8 +143,13 @@ public class ExtensibleEnumTest
     public void Has_json_conversion_for_undefined_values()
     {
         Extensible<ProductName> extensible = "GuildWars3";
+#if NET
+        string json = JsonSerializer.Serialize(extensible, TestJsonContext.Default.ExtensibleProductName);
+        Extensible<ProductName> actual = JsonSerializer.Deserialize(json, TestJsonContext.Default.ExtensibleProductName);
+#else
         string json = JsonSerializer.Serialize(extensible);
         Extensible<ProductName> actual = JsonSerializer.Deserialize<Extensible<ProductName>>(json);
+#endif
         Assert.Equal(extensible, actual);
     }
 }

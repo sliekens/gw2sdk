@@ -27,8 +27,15 @@ public class UnlockedFinishers(Gw2Client sut)
                 Assert.True(entry.Quantity >= 0);
             }
 
-            string json = JsonSerializer.Serialize(entry);
-            UnlockedFinisher? roundTrip = JsonSerializer.Deserialize<UnlockedFinisher>(json);
+            string json;
+            UnlockedFinisher? roundTrip;
+#if NET
+            json = JsonSerializer.Serialize(entry, GuildWars2JsonContext.Default.UnlockedFinisher);
+            roundTrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.UnlockedFinisher);
+#else
+            json = JsonSerializer.Serialize(entry);
+            roundTrip = JsonSerializer.Deserialize<UnlockedFinisher>(json);
+#endif
             Assert.Equal(entry, roundTrip);
         });
     }

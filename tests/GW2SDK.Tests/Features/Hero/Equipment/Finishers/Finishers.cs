@@ -27,8 +27,15 @@ public class Finishers(Gw2Client sut)
             Assert.NotNull(entry.IconUrl);
             Assert.True(entry.IconUrl.IsAbsoluteUri || entry.IconUrl.IsWellFormedOriginalString());
             Assert.NotEmpty(entry.Name);
-            string json = JsonSerializer.Serialize(entry);
-            Finisher? roundTrip = JsonSerializer.Deserialize<Finisher>(json);
+            string json;
+            Finisher? roundTrip;
+#if NET
+            json = JsonSerializer.Serialize(entry, GuildWars2JsonContext.Default.Finisher);
+            roundTrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.Finisher);
+#else
+            json = JsonSerializer.Serialize(entry);
+            roundTrip = JsonSerializer.Deserialize<Finisher>(json);
+#endif
             Assert.Equal(entry, roundTrip);
         });
     }

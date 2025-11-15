@@ -486,8 +486,13 @@ public class Items
         Gw2Client sut = new(httpClient);
         await foreach (Item original in sut.Items.GetItemsBulk(cancellationToken: TestContext.Current!.Execution.CancellationToken).ValueOnly(TestContext.Current!.Execution.CancellationToken))
         {
+#if NET
+            string json = JsonSerializer.Serialize(original, GuildWars2JsonContext.Default.Item);
+            Item? roundTrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.Item);
+#else
             string json = JsonSerializer.Serialize(original);
             Item? roundTrip = JsonSerializer.Deserialize<Item>(json);
+#endif
             Assert.IsType(original.GetType(), roundTrip);
             Assert.Equal(original, roundTrip);
         }

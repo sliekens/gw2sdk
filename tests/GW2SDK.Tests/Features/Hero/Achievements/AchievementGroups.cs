@@ -23,8 +23,15 @@ public class AchievementGroups(Gw2Client sut)
             Assert.True(entry.Order >= 0);
             Assert.NotEmpty(entry.Categories);
             Assert.All(entry.Categories, category => Assert.True(category > 0));
-            string json = JsonSerializer.Serialize(entry);
-            AchievementGroup? roundTrip = JsonSerializer.Deserialize<AchievementGroup>(json);
+            string json;
+            AchievementGroup? roundTrip;
+#if NET
+            json = JsonSerializer.Serialize(entry, GuildWars2JsonContext.Default.AchievementGroup);
+            roundTrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.AchievementGroup);
+#else
+            json = JsonSerializer.Serialize(entry);
+            roundTrip = JsonSerializer.Deserialize<AchievementGroup>(json);
+#endif
             Assert.Equal(entry, roundTrip);
         });
     }

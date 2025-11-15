@@ -10,8 +10,13 @@ public class EnumJsonSerializer
     public void Has_json_conversion()
     {
         ProductName product = ProductName.GuildWars2;
+#if NET
+        string json = JsonSerializer.Serialize(product, TestJsonContext.Default.ProductName);
+        ProductName actual = JsonSerializer.Deserialize(json, TestJsonContext.Default.ProductName);
+#else
         string json = JsonSerializer.Serialize(product);
         ProductName actual = JsonSerializer.Deserialize<ProductName>(json);
+#endif
         Assert.Equal(product, actual);
     }
 
@@ -21,7 +26,11 @@ public class EnumJsonSerializer
         Assert.Throws<ArgumentOutOfRangeException>(() =>
         {
             ProductName product = (ProductName)69;
+#if NET
+            _ = JsonSerializer.Serialize(product, TestJsonContext.Default.ProductName);
+#else
             _ = JsonSerializer.Serialize(product);
+#endif
         });
     }
 }

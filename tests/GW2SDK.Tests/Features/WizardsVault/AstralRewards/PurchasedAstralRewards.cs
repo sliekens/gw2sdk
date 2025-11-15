@@ -1,7 +1,7 @@
 using GuildWars2.Chat;
 using GuildWars2.Tests.TestInfrastructure.Composition;
-using GuildWars2.WizardsVault.AstralRewards;
 using GuildWars2.Tests.TestInfrastructure.Configuration;
+using GuildWars2.WizardsVault.AstralRewards;
 
 namespace GuildWars2.Tests.Features.WizardsVault.AstralRewards;
 

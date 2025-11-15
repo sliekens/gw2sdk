@@ -1,5 +1,4 @@
 ﻿using GuildWars2.Exploration.Floors;
-using GuildWars2.Tests.TestInfrastructure;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Exploration.Floors;

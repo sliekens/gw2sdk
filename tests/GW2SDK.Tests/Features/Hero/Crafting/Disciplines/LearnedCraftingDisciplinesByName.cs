@@ -21,8 +21,15 @@ public class LearnedCraftingDisciplinesByName(Gw2Client sut)
             Assert.True(entry.Discipline.IsDefined());
             Assert.True(entry.Rating > 0);
         });
-        string json = JsonSerializer.Serialize(actual);
-        LearnedCraftingDisciplines? roundtrip = JsonSerializer.Deserialize<LearnedCraftingDisciplines>(json);
+        string json;
+        LearnedCraftingDisciplines? roundtrip;
+#if NET
+        json = JsonSerializer.Serialize(actual, GuildWars2JsonContext.Default.LearnedCraftingDisciplines);
+        roundtrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.LearnedCraftingDisciplines);
+#else
+        json = JsonSerializer.Serialize(actual);
+        roundtrip = JsonSerializer.Deserialize<LearnedCraftingDisciplines>(json);
+#endif
         Assert.Equal(actual, roundtrip);
     }
 }

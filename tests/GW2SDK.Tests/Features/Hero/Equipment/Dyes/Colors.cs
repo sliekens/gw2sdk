@@ -36,8 +36,15 @@ public class Colors(Gw2Client sut)
                 Assert.Equal(color.ItemId, link?.ItemId);
             }
 
-            string json = JsonSerializer.Serialize(color);
-            DyeColor? roundTrip = JsonSerializer.Deserialize<DyeColor>(json);
+            string json;
+            DyeColor? roundTrip;
+#if NET
+            json = JsonSerializer.Serialize(color, GuildWars2JsonContext.Default.DyeColor);
+            roundTrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.DyeColor);
+#else
+            json = JsonSerializer.Serialize(color);
+            roundTrip = JsonSerializer.Deserialize<DyeColor>(json);
+#endif
             Assert.IsType(color.GetType(), roundTrip);
             Assert.Equal(color, roundTrip);
         });

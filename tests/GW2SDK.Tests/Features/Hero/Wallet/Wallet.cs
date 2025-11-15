@@ -1,5 +1,4 @@
 ﻿using GuildWars2.Hero.Wallet;
-using GuildWars2.Tests.TestInfrastructure;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.Tests.TestInfrastructure.Configuration;
 

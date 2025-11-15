@@ -26,8 +26,13 @@ public class GliderSkins(Gw2Client sut)
             Assert.NotNull(entry.Description);
             MarkupSyntaxValidator.Validate(entry.Description);
             Assert.NotNull(entry.DefaultDyeColorIds);
+#if NET
+            string json = JsonSerializer.Serialize(entry, GuildWars2JsonContext.Default.GliderSkin);
+            GliderSkin? roundTrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.GliderSkin);
+#else
             string json = JsonSerializer.Serialize(entry);
             GliderSkin? roundTrip = JsonSerializer.Deserialize<GliderSkin>(json);
+#endif
             Assert.Equal(entry, roundTrip);
         });
     }

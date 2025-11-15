@@ -1,5 +1,4 @@
 ﻿using GuildWars2.Guilds.Emblems;
-using GuildWars2.Tests.TestInfrastructure;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Guilds.Emblems;

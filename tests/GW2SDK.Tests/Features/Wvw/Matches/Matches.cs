@@ -1,5 +1,5 @@
-﻿using GuildWars2.Wvw.Matches;
-using GuildWars2.Tests.TestInfrastructure.Composition;
+﻿using GuildWars2.Tests.TestInfrastructure.Composition;
+using GuildWars2.Wvw.Matches;
 
 namespace GuildWars2.Tests.Features.Wvw.Matches;
 

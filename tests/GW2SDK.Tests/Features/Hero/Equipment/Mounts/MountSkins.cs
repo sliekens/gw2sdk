@@ -33,8 +33,13 @@ public class MountSkins(Gw2Client sut)
             Assert.True(entry.Mount.IsDefined());
 #pragma warning restore CS0618 // Type or member is obsolete
 
+#if NET
+            string json = JsonSerializer.Serialize(entry, GuildWars2JsonContext.Default.MountSkin);
+            MountSkin? roundtrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.MountSkin);
+#else
             string json = JsonSerializer.Serialize(entry);
             MountSkin? roundtrip = JsonSerializer.Deserialize<MountSkin>(json);
+#endif
             Assert.Equal(entry, roundtrip);
         });
     }

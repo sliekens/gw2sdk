@@ -54,8 +54,13 @@ public class AchievementCategories(Gw2Client sut)
                 });
             }
 
+#if NET
+            string json = JsonSerializer.Serialize(entry, GuildWars2JsonContext.Default.AchievementCategory);
+            AchievementCategory? roundTrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.AchievementCategory);
+#else
             string json = JsonSerializer.Serialize(entry);
             AchievementCategory? roundTrip = JsonSerializer.Deserialize<AchievementCategory>(json);
+#endif
             Assert.Equal(entry, roundTrip);
         });
     }
