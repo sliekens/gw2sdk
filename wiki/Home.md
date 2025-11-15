@@ -10,6 +10,7 @@ Welcome to the wiki for contributors!
 - [[Solution layout]]
 - [[Configure API keys]]
 - [[Spec development]]
+- [[TUnit test projects]]
 
 ### MSBuild Concepts
 

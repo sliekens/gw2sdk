@@ -24,6 +24,7 @@ Multi-targeted .NET library. Targets: net9.0, net8.0, netstandard2.0, net462. Fa
 - XML docs: one-line `<summary>` with standalone first sentence; `<remarks>` only when necessary.
 - Tests: xUnit, deterministic, allocation-aware; prefer data-driven theories when clearer.
 - No global usings beyond what already exists.
+- Do not add meta notes explaining removed/omitted content unless explicitly instructed; keep diffs and documentation focused on current state.
 
 ## Reviewing existing code
 - Use existing code as style guidance.
