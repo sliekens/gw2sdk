@@ -42,9 +42,13 @@ public class Subtoken(Gw2Client sut)
         await Assert.That(subtoken).IsNotNull()
             .And.Member(subtoken => subtoken.Id, id => id.IsNotEmpty())
             .And.Member(subtoken => subtoken.Name, name => name.IsNotEmpty())
-            .And.Member(subtoken => subtoken.Permissions, permissions => permissions.IsEquivalentTo(TokenInfo.AllPermissions))
+#pragma warning disable IL2026 // https://github.com/thomhurst/TUnit/issues/3851
+            .And.Member(subtoken => subtoken.Permissions, permissions => permissions.IsEquivalentTo(TokenInfo.AllPermissions, comparer: EqualityComparer<Extensible<Permission>>.Default))
+#pragma warning restore IL2026
             .And.Member(subtoken => subtoken.IssuedAt, issuedAt => issuedAt.IsBetween(notBefore.AddSeconds(-5), context.Date))
             .And.Member(subtoken => subtoken.ExpiresAt, expiry => expiry.IsEqualTo(expiresAt))
-            .And.Member(subtoken => subtoken.Urls!.Select(u => Uri.UnescapeDataString(u.ToString())), subtokenUrls => subtokenUrls.IsEquivalentTo(urls.Select(u => u.ToString())));
+#pragma warning disable IL2026 // https://github.com/thomhurst/TUnit/issues/3851
+            .And.Member(subtoken => subtoken.Urls!.Select(u => Uri.UnescapeDataString(u.ToString())), subtokenUrls => subtokenUrls.IsEquivalentTo(urls.Select(u => u.ToString()), comparer: EqualityComparer<string>.Default));
+#pragma warning restore IL2026
     }
 }

@@ -18,6 +18,8 @@ public class Token(Gw2Client sut)
             .And.Member(key => key.Id, id => id.IsNotEmpty())
             .And.Member(key => key.Name, name => name.IsNotEmpty())
             .And.IsNotNull();
-        await Assert.That(apiKey.Permissions).IsEquivalentTo(TokenInfo.AllPermissions);
+#pragma warning disable IL2026 // https://github.com/thomhurst/TUnit/issues/3851
+        await Assert.That(apiKey.Permissions).IsEquivalentTo(TokenInfo.AllPermissions, comparer: EqualityComparer<Extensible<Permission>>.Default);
+#pragma warning restore IL2026
     }
 }

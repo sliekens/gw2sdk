@@ -787,6 +787,12 @@
         "resolved": "1.0.334",
         "contentHash": "Bi/e5guuwmyPL7Kp1G+PbcDvZFKsZxuHmc39IpYHAhWOvV8I/uIHPwAZ++Fa8k/w6pEqPdHCIrxSCelMNmu0dQ=="
       },
+      "Microsoft.DotNet.ILCompiler": {
+        "type": "Direct",
+        "requested": "[10.0.0, )",
+        "resolved": "10.0.0",
+        "contentHash": "f9u8fMRROe2lS5MOOLutK6iSNTK9pC3kqd90FIn8Sk29fbZ0QDjZrBbwUkhouk/8dppC71SIEQaag0lGRTxvfA=="
+      },
       "Microsoft.Extensions.Configuration.EnvironmentVariables": {
         "type": "Direct",
         "requested": "[10.0.0, )",
@@ -845,6 +851,12 @@
           "Microsoft.Extensions.ObjectPool": "10.0.0",
           "Microsoft.Extensions.Resilience": "10.0.0"
         }
+      },
+      "Microsoft.NET.ILLink.Tasks": {
+        "type": "Direct",
+        "requested": "[10.0.0, )",
+        "resolved": "10.0.0",
+        "contentHash": "kICGrGYEzCNI3wPzfEXcwNHgTvlvVn9yJDhSdRK+oZQy4jvYH529u7O0xf5ocQKzOMjfS07+3z9PKRIjrFMJDA=="
       },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
@@ -1278,6 +1290,15 @@
       }
     },
     "net10.0/linux-x64": {
+      "Microsoft.DotNet.ILCompiler": {
+        "type": "Direct",
+        "requested": "[10.0.0, )",
+        "resolved": "10.0.0",
+        "contentHash": "f9u8fMRROe2lS5MOOLutK6iSNTK9pC3kqd90FIn8Sk29fbZ0QDjZrBbwUkhouk/8dppC71SIEQaag0lGRTxvfA==",
+        "dependencies": {
+          "runtime.linux-x64.Microsoft.DotNet.ILCompiler": "10.0.0"
+        }
+      },
       "Microsoft.Testing.Extensions.CodeCoverage": {
         "type": "Direct",
         "requested": "[18.1.0, )",
@@ -1288,9 +1309,23 @@
           "Microsoft.Extensions.DependencyModel": "6.0.2",
           "Microsoft.Testing.Platform": "2.0.0"
         }
+      },
+      "runtime.linux-x64.Microsoft.DotNet.ILCompiler": {
+        "type": "Transitive",
+        "resolved": "10.0.0",
+        "contentHash": "U8/8LXzurlGgIEmQLbk6mygKF/yJBN0P8ZxWkGHOAvOx0z7PUUE7a5kcKuGVfjKigD9wxJOli1cJIPW6r9/j3Q=="
       }
     },
     "net10.0/win-x64": {
+      "Microsoft.DotNet.ILCompiler": {
+        "type": "Direct",
+        "requested": "[10.0.0, )",
+        "resolved": "10.0.0",
+        "contentHash": "f9u8fMRROe2lS5MOOLutK6iSNTK9pC3kqd90FIn8Sk29fbZ0QDjZrBbwUkhouk/8dppC71SIEQaag0lGRTxvfA==",
+        "dependencies": {
+          "runtime.win-x64.Microsoft.DotNet.ILCompiler": "10.0.0"
+        }
+      },
       "Microsoft.Testing.Extensions.CodeCoverage": {
         "type": "Direct",
         "requested": "[18.1.0, )",
@@ -1301,9 +1336,23 @@
           "Microsoft.Extensions.DependencyModel": "6.0.2",
           "Microsoft.Testing.Platform": "2.0.0"
         }
+      },
+      "runtime.win-x64.Microsoft.DotNet.ILCompiler": {
+        "type": "Transitive",
+        "resolved": "10.0.0",
+        "contentHash": "4wCbtNJ1Ee3o4vYbTrYRr+CMmLcHn9FhHB2lnsFybL0Ak/iw/ntSVcA9f42YIIhL8bR/wKdod0+yhb8oNyrG0w=="
       }
     },
     "net10.0/win-x86": {
+      "Microsoft.DotNet.ILCompiler": {
+        "type": "Direct",
+        "requested": "[10.0.0, )",
+        "resolved": "10.0.0",
+        "contentHash": "f9u8fMRROe2lS5MOOLutK6iSNTK9pC3kqd90FIn8Sk29fbZ0QDjZrBbwUkhouk/8dppC71SIEQaag0lGRTxvfA==",
+        "dependencies": {
+          "runtime.win-x86.Microsoft.DotNet.ILCompiler": "10.0.0"
+        }
+      },
       "Microsoft.Testing.Extensions.CodeCoverage": {
         "type": "Direct",
         "requested": "[18.1.0, )",
@@ -1314,6 +1363,11 @@
           "Microsoft.Extensions.DependencyModel": "6.0.2",
           "Microsoft.Testing.Platform": "2.0.0"
         }
+      },
+      "runtime.win-x86.Microsoft.DotNet.ILCompiler": {
+        "type": "Transitive",
+        "resolved": "10.0.0",
+        "contentHash": "sJ2ax2ZgqVqbd1OB/AV9p2/1rAS1jwimJuGe+P84yXg4ICSrK1+uioVHSvf8TVyCu7ZTZX0MMEWsdpTqZUjDUA=="
       }
     }
   }
