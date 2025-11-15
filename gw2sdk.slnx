@@ -21,6 +21,7 @@
     <Project Path="src/GW2SDK.Profiling/GW2SDK.Profiling.csproj" />
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="tests/GW2SDK.ArchitectureTests/GW2SDK.ArchitectureTests.csproj" />
     <Project Path="tests/GW2SDK.Tests.Common/GW2SDK.Tests.Common.csproj" />
     <Project Path="tests/GW2SDK.Tests/GW2SDK.Tests.csproj" />
   </Folder>
