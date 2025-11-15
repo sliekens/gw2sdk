@@ -102,7 +102,10 @@
         "type": "Project"
       },
       "gw2sdk.tests.common": {
-        "type": "Project"
+        "type": "Project",
+        "dependencies": {
+          "GW2SDK": "[1.0.0, )"
+        }
       }
     }
   }

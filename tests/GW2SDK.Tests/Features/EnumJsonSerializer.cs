@@ -2,6 +2,7 @@
 
 using GuildWars2.Hero.Accounts;
 
+
 namespace GuildWars2.Tests.Features;
 
 public class EnumJsonSerializer
@@ -11,8 +12,8 @@ public class EnumJsonSerializer
     {
         ProductName product = ProductName.GuildWars2;
 #if NET
-        string json = JsonSerializer.Serialize(product, TestJsonContext.Default.ProductName);
-        ProductName actual = JsonSerializer.Deserialize(json, TestJsonContext.Default.ProductName);
+        string json = JsonSerializer.Serialize(product, GW2SDK.Tests.Common.TestJsonContext.Default.ProductName);
+        ProductName actual = JsonSerializer.Deserialize(json, GW2SDK.Tests.Common.TestJsonContext.Default.ProductName);
 #else
         string json = JsonSerializer.Serialize(product);
         ProductName actual = JsonSerializer.Deserialize<ProductName>(json);
@@ -27,7 +28,7 @@ public class EnumJsonSerializer
         {
             ProductName product = (ProductName)69;
 #if NET
-            _ = JsonSerializer.Serialize(product, TestJsonContext.Default.ProductName);
+            _ = JsonSerializer.Serialize(product, GW2SDK.Tests.Common.TestJsonContext.Default.ProductName);
 #else
             _ = JsonSerializer.Serialize(product);
 #endif

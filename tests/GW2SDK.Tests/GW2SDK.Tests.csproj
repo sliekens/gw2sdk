@@ -35,7 +35,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\GW2SDK\GW2SDK.csproj" />
-    <ProjectReference Include="..\..\src\GW2SDK.Tests.Generators\GW2SDK.Tests.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\GW2SDK.Tests.Common\GW2SDK.Tests.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>

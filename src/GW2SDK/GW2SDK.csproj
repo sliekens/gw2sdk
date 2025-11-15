@@ -93,10 +93,7 @@
   <!-- Allow test assemblies to access internal DTO types for source-generated lists -->
   <ItemGroup>
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-      <_Parameter1>GW2SDK.Tests</_Parameter1>
-    </AssemblyAttribute>
-    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-      <_Parameter1>GW2SDK.ArchitectureTests</_Parameter1>
+      <_Parameter1>GW2SDK.Tests.Common</_Parameter1>
     </AssemblyAttribute>
   </ItemGroup>
 

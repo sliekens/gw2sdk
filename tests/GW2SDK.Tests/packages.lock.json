@@ -715,6 +715,12 @@
           "System.Runtime.InteropServices.RuntimeInformation": "[4.3.0, )",
           "System.Text.Json": "[6.0.11, )"
         }
+      },
+      "gw2sdk.tests.common": {
+        "type": "Project",
+        "dependencies": {
+          "GW2SDK": "[1.0.0, )"
+        }
       }
     },
     ".NETFramework,Version=v4.8.1/linux-x64": {
@@ -1263,6 +1269,12 @@
       },
       "gw2sdk": {
         "type": "Project"
+      },
+      "gw2sdk.tests.common": {
+        "type": "Project",
+        "dependencies": {
+          "GW2SDK": "[1.0.0, )"
+        }
       }
     },
     "net10.0/linux-x64": {
