@@ -9,7 +9,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RootNamespace>GuildWars2.ArchitectureTests</RootNamespace>
-    <PublishAot>$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))</PublishAot>
+    <!-- https://github.com/microsoft/codecoverage/issues/196 -->
+    <!-- <PublishAot>$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))</PublishAot> -->
   </PropertyGroup>
 
   <ItemGroup>
