@@ -39,3 +39,12 @@ updates:
     directory: /
     schedule:
       interval: daily
+    groups:
+      official-actions:
+        applies-to: version-updates
+        patterns:
+          - "actions/*"
+        update-types:
+          - major
+          - minor
+          - patch
