@@ -66,14 +66,14 @@ jobs:
           GuildLeader__Token: ${{ secrets.API_TOKEN_GUILD_LEADER }}
 
       - name: Upload test data on failure
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: failure()
         with:
           name: test-data
           path: artifacts/Data
 
       - name: Upload coverage
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: coverage
           path: artifacts/bin/GW2SDK.Tests/*/TestResults/coverage.xml
@@ -87,7 +87,7 @@ jobs:
         run: dotnet pack src/GW2SDK --configuration Release --no-build
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: package
           path: artifacts/package/
@@ -100,7 +100,7 @@ jobs:
       name: github-packages
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: package
           path: artifacts
