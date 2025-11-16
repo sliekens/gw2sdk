@@ -13,13 +13,6 @@ updates:
         update-types:
           - minor
           - patch
-      xunit:
-        applies-to: version-updates
-        patterns:
-          - "xunit.*"
-        update-types:
-          - minor
-          - patch
       spectre:
         applies-to: version-updates
         patterns:
