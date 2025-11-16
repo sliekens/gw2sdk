@@ -20,7 +20,7 @@
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
     <PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="18.1.0" />
     <PackageVersion Include="MinVer" Version="6.0.0" />
-    <PackageVersion Include="Pastel" Version="7.0.0" />
+    <PackageVersion Include="Pastel" Version="7.0.1" />
     <PackageVersion Include="Polly.Core" Version="8.6.4" />
     <PackageVersion Include="Polyfill" Version="9.0.0-beta.24">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
