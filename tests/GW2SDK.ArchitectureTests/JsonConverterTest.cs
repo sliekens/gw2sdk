@@ -8,13 +8,16 @@ namespace GuildWars2.ArchitectureTests;
 public class JsonConverterTest(AssemblyFixture fixture)
 {
     [Test]
-    public void AllEnumsShouldHaveJsonConverterAttribute()
+    public async Task AllEnumsShouldHaveJsonConverterAttribute()
     {
         IEnumerable<Type> enumTypes = fixture.ExportedEnums.Where(t => t is { IsPublic: true, Namespace: not null } && t.Namespace.StartsWith("GuildWars2", StringComparison.Ordinal));
-        Assert.All(enumTypes, enumType =>
+        using (Assert.Multiple())
         {
-            bool hasJsonConverterAttribute = enumType.GetCustomAttributes(typeof(JsonConverterAttribute), false).Length != 0;
-            Assert.True(hasJsonConverterAttribute, $"Enum {enumType.Name} does not have a JsonConverterAttribute.");
-        });
+            foreach (Type enumType in enumTypes)
+            {
+                bool hasJsonConverterAttribute = enumType.GetCustomAttributes(typeof(JsonConverterAttribute), false).Length != 0;
+                await Assert.That(hasJsonConverterAttribute).IsTrue().Because($"Enum {enumType.Name} does not have a JsonConverterAttribute.");
+            }
+        }
     }
 }

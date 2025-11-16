@@ -8,12 +8,16 @@ namespace GuildWars2.ArchitectureTests;
 public class RequireAssignmentTest(AssemblyFixture fixture)
 {
     [Test]
-    public void Data_transfer_object_members_are_required()
+    public async Task Data_transfer_object_members_are_required()
     {
-        Assert.All(fixture.DataTransferObjectProperties, actual =>
+        using (Assert.Multiple())
         {
-            bool compliant = actual.IsObsolete || !actual.HasSetter || actual.HasRequiredMemberAttribute;
-            Assert.True(compliant, $"{actual.DeclaringType}.{actual.Name} must be read-only or read-write and marked as 'required'.");
-        });
+            foreach (AssemblyFixture.DtProperty actual in fixture.DataTransferObjectProperties)
+            {
+                bool compliant = actual.IsObsolete || !actual.HasSetter || actual.HasRequiredMemberAttribute;
+                await Assert.That(compliant).IsTrue()
+                    .Because($"{actual.DeclaringType}.{actual.Name} must be read-only or read-write and marked as 'required'.");
+            }
+        }
     }
 }

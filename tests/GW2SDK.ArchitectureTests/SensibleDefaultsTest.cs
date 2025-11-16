@@ -9,7 +9,7 @@ namespace GuildWars2.ArchitectureTests;
 public class SensibleDefaultsTest(AssemblyFixture fixture)
 {
     [Test]
-    public void Every_default_enum_member_is_intentional()
+    public async Task Every_default_enum_member_is_intentional()
     {
         /*
          * The goal of this test is to ensure that all enums have a sensible default value, or no default value.
@@ -20,22 +20,29 @@ public class SensibleDefaultsTest(AssemblyFixture fixture)
          *
          */
         IEnumerable<Type> enums = fixture.ExportedEnums;
-        Assert.All(enums, type =>
+        using (Assert.Multiple())
         {
-            if (HasDefaultMember(type))
+            foreach (Type type in enums)
             {
-                DefaultValueAttribute annotation = type.GetCustomAttribute<DefaultValueAttribute>() ?? throw new InvalidOperationException($"Enum '{type}' has an implicit default value, change its value or mark it as [DefaultValue].");
-                if (annotation.Value is null || annotation.Value.GetType() != type)
+                if (HasDefaultMember(type))
                 {
-                    throw new InvalidOperationException($"Enum '{type}' has a [DefaultValue] with an invalid type, use the enum's type.");
-                }
-
-                if (!Enum.IsDefined(type, annotation.Value))
-                {
-                    throw new InvalidOperationException($"Enum '{type}' has a [DefaultValue] that does not exist, adjust or remove the attribute.");
+                    DefaultValueAttribute? annotation = type.GetCustomAttribute<DefaultValueAttribute>();
+                    if (annotation is null)
+                    {
+                        Assert.Fail($"Enum '{type}' has an implicit default value, change its value or mark it as [DefaultValue].");
+                    }
+                    else if (annotation.Value is null || annotation.Value.GetType() != type)
+                    {
+                        Assert.Fail($"Enum '{type}' has a [DefaultValue] with an invalid type, use the enum's type.");
+                    }
+                    else if (!Enum.IsDefined(type, annotation.Value))
+                    {
+                        Assert.Fail($"Enum '{type}' has a [DefaultValue] that does not exist, adjust or remove the attribute.");
+                    }
                 }
             }
-        });
+        }
+
         static bool HasDefaultMember(Type enumType)
         {
             Type underlyingType = Enum.GetUnderlyingType(enumType);

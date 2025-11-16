@@ -8,45 +8,51 @@ namespace GuildWars2.ArchitectureTests;
 public class DesignedForInheritanceTest(AssemblyFixture fixture)
 {
     [Test]
-    public void Every_exported_class_is_designed_for_inheritance_or_sealed()
+    public async Task Every_exported_class_is_designed_for_inheritance_or_sealed()
     {
         /*
          * The goal of this test is to ensure that all unsealed types are designed for inheritance.
          */
         IEnumerable<Type> classes = fixture.ExportedClasses;
-        Assert.All(classes, type =>
+        using (Assert.Multiple())
         {
-            if (type.IsAbstract)
+            foreach (Type type in classes)
             {
-                return;
-            }
+                if (type.IsAbstract)
+                {
+                    continue;
+                }
 
-            if (type.IsSealed)
-            {
-                return;
-            }
+                if (type.IsSealed)
+                {
+                    continue;
+                }
 
-            if (type.GetCustomAttributes().Any(att => att.GetType().Name == "InheritableAttribute"))
-            {
-                return;
-            }
+                if (type.GetCustomAttributes().Any(att => att.GetType().Name == "InheritableAttribute"))
+                {
+                    continue;
+                }
 
-            throw new InvalidOperationException($"Type '{type}' is not abstract nor sealed, check if it needs to be abstract or sealed or marked as [Inheritable].");
-        });
+                Assert.Fail($"Type '{type}' is not abstract nor sealed, check if it needs to be abstract or sealed or marked as [Inheritable].");
+            }
+        }
     }
 
     [Test]
-    public void Every_exported_class_with_InheritableAttribute_has_a_subtype()
+    public async Task Every_exported_class_with_InheritableAttribute_has_a_subtype()
     {
         IEnumerable<Type> classes = fixture.ExportedClasses;
         IEnumerable<Type> inheritableClasses = fixture.InheritableClasses;
-        Assert.All(inheritableClasses, type =>
+        using (Assert.Multiple())
         {
-            List<Type> subtypes = [.. classes.Where(subtype => subtype.IsSubclassOf(type))];
-            if (subtypes.Count == 0)
+            foreach (Type type in inheritableClasses)
             {
-                throw new InvalidOperationException($"Type '{type}' is marked as [Inheritable] but has no subtypes.");
+                List<Type> subtypes = [.. classes.Where(subtype => subtype.IsSubclassOf(type))];
+                if (subtypes.Count == 0)
+                {
+                    Assert.Fail($"Type '{type}' is marked as [Inheritable] but has no subtypes.");
+                }
             }
-        });
+        }
     }
 }

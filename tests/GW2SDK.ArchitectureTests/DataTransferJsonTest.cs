@@ -15,19 +15,25 @@ public class DataTransferJsonTest(AssemblyFixture fixture)
     {
         List<AssemblyFixture.JsonReaderMethod> staticMethods =
             [.. fixture.JsonElementReaderMethods];
-        Assert.All(fixture.DataTransferObjects, dto =>
+        using (Assert.Multiple())
         {
-            List<AssemblyFixture.JsonReaderMethod> matches = [.. staticMethods.Where(m => m.ReturnType == dto)];
-            Assert.All(matches, m =>
+            foreach (Type dto in fixture.DataTransferObjects)
             {
-                Assert.Equal("Get" + dto.Name, m.Name);
-                Assert.Equal(dto.Name + "Json", m.DeclaringType.Name);
-                Assert.True(m.IsDeclaringTypeNotPublic, $"{m.Name} must be internal.");
-                Assert.True(m.IsExtensionMethod, $"{m.Name} must be an extension method.");
-                // Parameter type recorded without ref modifier; ensure it's JsonElement
-                Assert.Equal(typeof(JsonElement), m.FirstParameterType);
-                Assert.Equal(dto.Namespace, m.Namespace);
-            });
-        });
+                List<AssemblyFixture.JsonReaderMethod> matches = [.. staticMethods.Where(m => m.ReturnType == dto)];
+                using (Assert.Multiple())
+                {
+                    foreach (AssemblyFixture.JsonReaderMethod m in matches)
+                    {
+                        await Assert.That(m.Name).IsEqualTo("Get" + dto.Name);
+                        await Assert.That(m.DeclaringType.Name).IsEqualTo(dto.Name + "Json");
+                        await Assert.That(m.IsDeclaringTypeNotPublic).IsTrue().Because($"{m.Name} must be internal.");
+                        await Assert.That(m.IsExtensionMethod).IsTrue().Because($"{m.Name} must be an extension method.");
+                        // Parameter type recorded without ref modifier; ensure it's JsonElement
+                        await Assert.That(m.FirstParameterType).IsEqualTo(typeof(JsonElement));
+                        await Assert.That(m.Namespace).IsEqualTo(dto.Namespace);
+                    }
+                }
+            }
+        }
     }
 }

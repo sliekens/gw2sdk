@@ -1,6 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TUnitAssertionsImplicitUsings>false</TUnitAssertionsImplicitUsings>
     <EnableTUnitPolyfills>false</EnableTUnitPolyfills>
   </PropertyGroup>
   <PropertyGroup>
@@ -25,7 +24,6 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="TUnit" />
-    <PackageReference Include="xunit.v3.assert" />
   </ItemGroup>
 
 </Project>

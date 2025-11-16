@@ -8,11 +8,16 @@ namespace GuildWars2.ArchitectureTests;
 public class ImmutableDataTest(AssemblyFixture fixture)
 {
     [Test]
-    public void Data_objects_are_immutable()
+    public async Task Data_objects_are_immutable()
     {
-        Assert.All(fixture.DataTransferObjectProperties, actual =>
+        using (Assert.Multiple())
         {
-            Assert.True(!actual.HasSetter || actual.IsInitOnly, $"{actual.DeclaringType}.{actual.Name} must be read-only or init-only.");
-        });
+            foreach (AssemblyFixture.DtProperty actual in fixture.DataTransferObjectProperties)
+            {
+                bool compliant = !actual.HasSetter || actual.IsInitOnly;
+                await Assert.That(compliant).IsTrue()
+                    .Because($"{actual.DeclaringType}.{actual.Name} must be read-only or init-only.");
+            }
+        }
     }
 }
