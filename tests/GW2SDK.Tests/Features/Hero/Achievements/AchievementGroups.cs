@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 
 using GuildWars2.Hero.Achievements.Groups;
 using GuildWars2.Tests.TestInfrastructure.Composition;
@@ -12,17 +12,23 @@ public class AchievementGroups(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<AchievementGroup> actual, MessageContext context) = await sut.Hero.Achievements.GetAchievementGroups(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.NotEmpty(actual);
-        Assert.All(actual, entry =>
+        await Assert.That(context)
+            .Member(c => c.ResultCount, rc => rc.IsEqualTo(actual.Count))
+            .And.Member(c => c.ResultTotal, rt => rt.IsEqualTo(actual.Count));
+        await Assert.That(actual).IsNotEmpty();
+        foreach (AchievementGroup entry in actual)
         {
-            Assert.NotEmpty(entry.Id);
-            Assert.NotEmpty(entry.Name);
-            Assert.NotNull(entry.Description);
-            Assert.True(entry.Order >= 0);
-            Assert.NotEmpty(entry.Categories);
-            Assert.All(entry.Categories, category => Assert.True(category > 0));
+            await Assert.That(entry)
+                .Member(e => e.Id, id => id.IsNotEmpty())
+                .And.Member(e => e.Name, name => name.IsNotEmpty())
+                .And.Member(e => e.Description, desc => desc.IsNotNull())
+                .And.Member(e => e.Order, order => order.IsGreaterThanOrEqualTo(0))
+                .And.Member(e => e.Categories, cats => cats.IsNotEmpty());
+            foreach (int category in entry.Categories)
+            {
+                await Assert.That(category).IsGreaterThan(0);
+            }
+
             string json;
             AchievementGroup? roundTrip;
 #if NET
@@ -32,7 +38,7 @@ public class AchievementGroups(Gw2Client sut)
             json = JsonSerializer.Serialize(entry);
             roundTrip = JsonSerializer.Deserialize<AchievementGroup>(json);
 #endif
-            Assert.Equal(entry, roundTrip);
-        });
+            await Assert.That(roundTrip).IsEqualTo(entry);
+        }
     }
 }

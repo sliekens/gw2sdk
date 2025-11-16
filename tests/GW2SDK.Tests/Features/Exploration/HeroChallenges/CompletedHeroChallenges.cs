@@ -15,6 +15,6 @@ public class CompletedHeroChallenges(Gw2Client sut)
         // BUG: currently this data is unavailable :(
         // Change this back to Assert.NotEmpty once fixed
         // https://github.com/gw2-api/issues/issues/56
-        Assert.Empty(actual);
+        await Assert.That(actual).IsEmpty();
     }
 }

@@ -15,12 +15,12 @@ public class PointOfInterestById(Gw2Client sut)
         const int mapId = 26;
         const int pointOfInterestId = 554;
         (PointOfInterest actual, MessageContext context) = await sut.Exploration.GetPointOfInterestById(continentId, floorId, regionId, mapId, pointOfInterestId, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.Equal(pointOfInterestId, actual.Id);
-        Assert.Equal("Leaning Grade", actual.Name);
-        Assert.Equal(1, actual.Floor);
-        Assert.Equal(52657.7f, actual.Coordinates.X);
-        Assert.Equal(32978.8f, actual.Coordinates.Y);
-        Assert.Equal("[&BCoCAAA=]", actual.ChatLink);
+        await Assert.That(context).IsNotNull();
+        await Assert.That(actual.Id).IsEqualTo(pointOfInterestId);
+        await Assert.That(actual.Name).IsEqualTo("Leaning Grade");
+        await Assert.That(actual.Floor).IsEqualTo(1);
+        await Assert.That(actual.Coordinates.X).IsEqualTo(52657.7f);
+        await Assert.That(actual.Coordinates.Y).IsEqualTo(32978.8f);
+        await Assert.That(actual.ChatLink).IsEqualTo("[&BCoCAAA=]");
     }
 }

@@ -13,40 +13,46 @@ public class Colors(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<DyeColor> actual, MessageContext context) = await sut.Hero.Equipment.Dyes.GetColors(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, color =>
+        await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);
+
+        using (Assert.Multiple())
         {
-            Assert.True(color.Id > 0);
-            Assert.NotEmpty(color.Name);
-            Assert.False(color.BaseRgb.IsEmpty);
-            Assert.False(color.Cloth.Rgb.IsEmpty);
-            Assert.False(color.Leather.Rgb.IsEmpty);
-            Assert.False(color.Metal.Rgb.IsEmpty);
-            if (color.Fur is not null)
+            foreach (DyeColor color in actual)
             {
-                Assert.False(color.Fur.Rgb.IsEmpty);
-            }
+                await Assert.That(color.Id).IsGreaterThan(0);
+                await Assert.That(color.Name).IsNotEmpty();
+                await Assert.That(color.BaseRgb.IsEmpty).IsFalse();
+                await Assert.That(color.Cloth.Rgb.IsEmpty).IsFalse();
+                await Assert.That(color.Leather.Rgb.IsEmpty).IsFalse();
+                await Assert.That(color.Metal.Rgb.IsEmpty).IsFalse();
 
-            Assert.True(color.Hue.IsDefined());
-            Assert.True(color.Material.IsDefined());
-            Assert.True(color.Set.IsDefined());
-            if (color.ItemId.HasValue)
-            {
-                ItemLink? link = color.GetChatLink();
-                Assert.Equal(color.ItemId, link?.ItemId);
-            }
+                if (color.Fur is not null)
+                {
+                    await Assert.That(color.Fur.Rgb.IsEmpty).IsFalse();
+                }
 
-            string json;
-            DyeColor? roundTrip;
+                await Assert.That(color.Hue.IsDefined()).IsTrue();
+                await Assert.That(color.Material.IsDefined()).IsTrue();
+                await Assert.That(color.Set.IsDefined()).IsTrue();
+
+                if (color.ItemId.HasValue)
+                {
+                    ItemLink? link = color.GetChatLink();
+                    await Assert.That(link?.ItemId).IsEqualTo(color.ItemId);
+                }
+
+                string json;
+                DyeColor? roundTrip;
 #if NET
-            json = JsonSerializer.Serialize(color, Common.TestJsonContext.Default.DyeColor);
-            roundTrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.DyeColor);
+                json = JsonSerializer.Serialize(color, Common.TestJsonContext.Default.DyeColor);
+                roundTrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.DyeColor);
 #else
-            json = JsonSerializer.Serialize(color);
-            roundTrip = JsonSerializer.Deserialize<DyeColor>(json);
+                json = JsonSerializer.Serialize(color);
+                roundTrip = JsonSerializer.Deserialize<DyeColor>(json);
 #endif
-            Assert.IsType(color.GetType(), roundTrip);
-            Assert.Equal(color, roundTrip);
-        });
+                await Assert.That(roundTrip).IsTypeOf<DyeColor>();
+                await Assert.That(color).IsEqualTo(roundTrip);
+            }
+        }
     }
 }

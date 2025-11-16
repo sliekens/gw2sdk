@@ -15,14 +15,20 @@ public class ActiveEquipmentTemplate(Gw2Client sut)
         TestCharacter character = TestConfiguration.TestCharacter;
         ApiKey accessToken = TestConfiguration.ApiKey;
         (EquipmentTemplate actual, MessageContext context) = await sut.Hero.Equipment.Templates.GetActiveEquipmentTemplate(character.Name, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.NotNull(actual);
-        Assert.True(actual.TabNumber > 0);
-        Assert.NotEmpty(actual.Name);
-        Assert.NotEmpty(actual.Items);
-        Assert.All(actual.Items, EquipmentItemValidation.Validate);
-        Assert.NotNull(actual.PvpEquipment);
-        PvpEquipmentValidation.Validate(actual.PvpEquipment);
+        await Assert.That(context).IsNotNull();
+        await Assert.That(actual).IsNotNull()
+            .And.Member(a => a.TabNumber, tabNumber => tabNumber.IsGreaterThan(0))
+            .And.Member(a => a.Name, name => name.IsNotEmpty())
+            .And.Member(a => a.Items, items => items.IsNotEmpty());
+        using (Assert.Multiple())
+        {
+            foreach (EquipmentItem item in actual.Items)
+            {
+                await EquipmentItemValidation.Validate(item);
+            }
+        }
+        await Assert.That(actual.PvpEquipment).IsNotNull();
+        await PvpEquipmentValidation.Validate(actual.PvpEquipment);
 #if NET
         string json = JsonSerializer.Serialize(actual, Common.TestJsonContext.Default.EquipmentTemplate);
         EquipmentTemplate? roundtrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.EquipmentTemplate);
@@ -30,6 +36,6 @@ public class ActiveEquipmentTemplate(Gw2Client sut)
         string json = JsonSerializer.Serialize(actual);
         EquipmentTemplate? roundtrip = JsonSerializer.Deserialize<EquipmentTemplate>(json);
 #endif
-        Assert.Equal(actual, roundtrip);
+        await Assert.That(roundtrip).IsEqualTo(actual);
     }
 }

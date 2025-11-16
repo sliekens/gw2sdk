@@ -13,9 +13,15 @@ public class Hearts(Gw2Client sut)
     public async Task Can_be_listed(int continentId, int floorId, int regionId, int mapId)
     {
         (HashSet<Heart> actual, MessageContext context) = await sut.Exploration.GetHearts(continentId, floorId, regionId, mapId, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.NotEmpty(actual);
-        Assert.All(actual, Assert.NotNull);
+        await Assert.That(context.ResultCount).IsEqualTo(actual.Count);
+        await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);
+        await Assert.That(actual).IsNotEmpty();
+        using (Assert.Multiple())
+        {
+            foreach (Heart heart in actual)
+            {
+                await Assert.That(heart).IsNotNull();
+            }
+        }
     }
 }

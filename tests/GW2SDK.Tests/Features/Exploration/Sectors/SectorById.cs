@@ -1,4 +1,4 @@
-﻿using GuildWars2.Exploration.Sectors;
+using GuildWars2.Exploration.Sectors;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Exploration.Sectors;
@@ -15,7 +15,7 @@ public class SectorById(Gw2Client sut)
         const int mapId = 26;
         const int sectorId = 513;
         (Sector actual, MessageContext context) = await sut.Exploration.GetSectorById(continentId, floorId, regionId, mapId, sectorId, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.Equal(sectorId, actual.Id);
+        await Assert.That(context).IsNotNull();
+        await Assert.That(actual.Id).IsEqualTo(sectorId);
     }
 }

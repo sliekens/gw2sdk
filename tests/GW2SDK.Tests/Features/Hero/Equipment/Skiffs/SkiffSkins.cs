@@ -1,5 +1,6 @@
 using System.Text.Json;
 
+using GuildWars2.Hero.Equipment;
 using GuildWars2.Hero.Equipment.Skiffs;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 
@@ -12,29 +13,40 @@ public class SkiffSkins(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<SkiffSkin> actual, MessageContext context) = await sut.Hero.Equipment.Skiffs.GetSkiffSkins(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, entry =>
+        await Assert.That(actual).IsNotEmpty();
+        await Assert.That(context.ResultCount).IsEqualTo(actual.Count);
+        await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);
+
+        using (Assert.Multiple())
         {
-            Assert.True(entry.Id > 0);
-            Assert.NotEmpty(entry.Name);
-            Assert.NotNull(entry.IconUrl);
-            Assert.True(entry.IconUrl == null || entry.IconUrl.IsAbsoluteUri || entry.IconUrl.IsWellFormedOriginalString());
-            Assert.NotNull(entry.DyeSlots);
-            Assert.All(entry.DyeSlots, dyeSlot =>
+            foreach (SkiffSkin entry in actual)
             {
-                Assert.True(dyeSlot.Material.IsDefined());
-                Assert.True(dyeSlot.ColorId > 0);
-            });
+                await Assert.That(entry.Id).IsGreaterThan(0);
+                await Assert.That(entry.Name).IsNotEmpty();
+                await Assert.That(entry.IconUrl).IsNotNull();
+
+                if (entry.IconUrl is not null)
+                {
+                    await Assert.That(entry.IconUrl.IsAbsoluteUri || entry.IconUrl.IsWellFormedOriginalString()).IsTrue();
+                }
+
+                await Assert.That(entry.DyeSlots).IsNotNull();
+
+                foreach (DyeSlot dyeSlot in entry.DyeSlots)
+                {
+                    await Assert.That(dyeSlot.Material.IsDefined()).IsTrue();
+                    await Assert.That(dyeSlot.ColorId).IsGreaterThan(0);
+                }
+
 #if NET
-            string json = JsonSerializer.Serialize(entry, Common.TestJsonContext.Default.SkiffSkin);
-            SkiffSkin? roundtrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.SkiffSkin);
+                string json = JsonSerializer.Serialize(entry, Common.TestJsonContext.Default.SkiffSkin);
+                SkiffSkin? roundtrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.SkiffSkin);
 #else
-            string json = JsonSerializer.Serialize(entry);
-            SkiffSkin? roundtrip = JsonSerializer.Deserialize<SkiffSkin>(json);
+                string json = JsonSerializer.Serialize(entry);
+                SkiffSkin? roundtrip = JsonSerializer.Deserialize<SkiffSkin>(json);
 #endif
-            Assert.Equal(entry, roundtrip);
-        });
+                await Assert.That(entry).IsEqualTo(roundtrip);
+            }
+        }
     }
 }

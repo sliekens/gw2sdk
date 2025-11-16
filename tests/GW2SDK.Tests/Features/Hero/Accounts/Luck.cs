@@ -12,8 +12,8 @@ public class Luck(Gw2Client sut)
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
         (AccountLuck actual, _) = await sut.Hero.Account.GetLuck(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.True(actual.Luck > 0, "You have no luck today.");
-        Assert.Equal(300, actual.MagicFind);
-        Assert.True(actual.MagicFindWithoutLevelCap >= actual.MagicFind);
+        await Assert.That(actual.Luck > 0).IsTrue().Because("You have no luck today.");
+        await Assert.That(actual.MagicFind).IsEqualTo(300);
+        await Assert.That(actual.MagicFindWithoutLevelCap >= actual.MagicFind).IsTrue();
     }
 }

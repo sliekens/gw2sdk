@@ -12,6 +12,6 @@ public class CompletedStorySteps(Gw2Client sut)
         TestCharacter character = TestConfiguration.TestCharacter;
         ApiKey accessToken = TestConfiguration.ApiKey;
         (HashSet<int> actual, _) = await sut.Hero.StoryJournal.GetCompletedStorySteps(character.Name, accessToken.Key, TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
+        await Assert.That(actual).IsNotEmpty();
     }
 }

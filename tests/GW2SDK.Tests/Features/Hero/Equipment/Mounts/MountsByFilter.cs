@@ -11,9 +11,15 @@ public class MountsByFilter(Gw2Client sut)
     {
         HashSet<MountName> names = [MountName.Raptor, MountName.Jackal, MountName.Skimmer];
         (HashSet<Mount> actual, MessageContext context) = await sut.Hero.Equipment.Mounts.GetMountsByNames(names, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(names.Count, context.ResultCount);
-        Assert.True(context.ResultTotal > names.Count);
-        Assert.Equal(names.Count, actual.Count);
-        Assert.Collection(names, first => Assert.Contains(actual, found => found.Id == first), second => Assert.Contains(actual, found => found.Id == second), third => Assert.Contains(actual, found => found.Id == third));
+        await Assert.That(context.ResultCount).IsEqualTo(names.Count);
+        await Assert.That(context.ResultTotal).IsNotNull().And.IsGreaterThan(names.Count);
+        await Assert.That(actual.Count).IsEqualTo(names.Count);
+        using (Assert.Multiple())
+        {
+            foreach (MountName name in names)
+            {
+                await Assert.That(actual.Any(m => m.Id == name)).IsTrue();
+            }
+        }
     }
 }

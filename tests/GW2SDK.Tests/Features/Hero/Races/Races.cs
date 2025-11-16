@@ -1,4 +1,4 @@
-﻿using GuildWars2.Hero.Races;
+using GuildWars2.Hero.Races;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Races;
@@ -10,6 +10,6 @@ public class Races(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<Race> actual, MessageContext context) = await sut.Hero.Races.GetRaces(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(context.ResultTotal, actual.Count);
+        await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);
     }
 }

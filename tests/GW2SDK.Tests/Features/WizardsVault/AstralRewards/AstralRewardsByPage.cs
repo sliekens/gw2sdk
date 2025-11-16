@@ -11,12 +11,18 @@ public class AstralRewardsByPage(Gw2Client sut)
     {
         const int pageSize = 3;
         (HashSet<AstralReward> actual, MessageContext context) = await sut.WizardsVault.GetAstralRewardsByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context.Links);
-        Assert.Equal(pageSize, context.PageSize);
-        Assert.Equal(pageSize, context.ResultCount);
-        Assert.True(context.PageTotal > 0);
-        Assert.True(context.ResultTotal > 0);
-        Assert.Equal(pageSize, actual.Count);
-        Assert.All(actual, Assert.NotNull);
+        await Assert.That(actual).HasCount().EqualTo(pageSize);
+        using (Assert.Multiple())
+        {
+            await Assert.That(context.Links).IsNotNull();
+            await Assert.That(context).Member(c => c.PageSize, ps => ps.IsEqualTo(pageSize));
+            await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(pageSize));
+            await Assert.That(context.PageTotal!.Value).IsGreaterThan(0);
+            await Assert.That(context.ResultTotal!.Value).IsGreaterThan(0);
+            foreach (AstralReward entry in actual)
+            {
+                await Assert.That(entry).IsNotNull();
+            }
+        }
     }
 }

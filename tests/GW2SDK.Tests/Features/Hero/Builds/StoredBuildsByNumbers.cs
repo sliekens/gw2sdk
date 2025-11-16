@@ -13,10 +13,10 @@ public class StoredBuildsByNumbers(Gw2Client sut)
         HashSet<int> slotNumbers = [2, 3, 4];
         ;
         (IReadOnlyList<GuildWars2.Hero.Builds.Build> actual, _) = await sut.Hero.Builds.GetStoredBuilds(slotNumbers, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.All(actual, space =>
+        await Assert.That(actual).IsNotEmpty();
+        foreach (GuildWars2.Hero.Builds.Build space in actual)
         {
-            Assert.NotEmpty(space.Name);
-        });
+            await Assert.That(space.Name).IsNotEmpty();
+        }
     }
 }

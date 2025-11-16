@@ -1,4 +1,4 @@
-﻿using GuildWars2.Exploration.Continents;
+using GuildWars2.Exploration.Continents;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Exploration.Continents;
@@ -11,9 +11,15 @@ public class ContinentsByFilter(Gw2Client sut)
     {
         HashSet<int> ids = [1, 2];
         (HashSet<Continent> actual, MessageContext context) = await sut.Exploration.GetContinentsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(ids.Count, context.ResultCount);
-        Assert.Equal(ids.Count, context.ResultTotal);
-        Assert.Equal(ids.Count, actual.Count);
-        Assert.Collection(ids, first => Assert.Contains(actual, found => found.Id == first), second => Assert.Contains(actual, found => found.Id == second));
+        await Assert.That(context.ResultCount).IsEqualTo(ids.Count);
+        await Assert.That(context.ResultTotal).IsEqualTo(ids.Count);
+        await Assert.That(actual).HasCount().EqualTo(ids.Count);
+        using (Assert.Multiple())
+        {
+            foreach (int id in ids)
+            {
+                await Assert.That(actual).Contains(found => found.Id == id);
+            }
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿using GuildWars2.Pvp.Games;
+using GuildWars2.Pvp.Games;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.Tests.TestInfrastructure.Configuration;
 
@@ -16,7 +16,10 @@ public class GameById(Gw2Client sut)
         string? gameId = gamesIndex.First();
         // Now that we have a game ID, we can get the game
         (Game actual, MessageContext context) = await sut.Pvp.GetGameById(gameId, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.Equal(gameId, actual.Id);
+        using (Assert.Multiple())
+        {
+            await Assert.That(context).IsNotNull();
+            await Assert.That(actual.Id).IsEqualTo(gameId);
+        }
     }
 }

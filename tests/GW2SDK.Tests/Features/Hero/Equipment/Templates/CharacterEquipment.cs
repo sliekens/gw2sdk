@@ -15,10 +15,16 @@ public class CharacterEquipmentByName(Gw2Client sut)
         TestCharacter character = TestConfiguration.TestCharacter;
         ApiKey accessToken = TestConfiguration.ApiKey;
         (CharacterEquipment actual, MessageContext context) = await sut.Hero.Equipment.Templates.GetCharacterEquipment(character.Name, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.NotNull(actual);
-        Assert.NotNull(actual.Items);
-        Assert.All(actual.Items, EquipmentItemValidation.Validate);
+        await Assert.That(context).IsNotNull();
+        await Assert.That(actual).IsNotNull()
+            .And.Member(a => a.Items, items => items.IsNotNull());
+        using (Assert.Multiple())
+        {
+            foreach (EquipmentItem item in actual.Items)
+            {
+                await EquipmentItemValidation.Validate(item);
+            }
+        }
 #if NET
         string json = JsonSerializer.Serialize(actual, Common.TestJsonContext.Default.CharacterEquipment);
         CharacterEquipment? roundtrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.CharacterEquipment);
@@ -26,6 +32,6 @@ public class CharacterEquipmentByName(Gw2Client sut)
         string json = JsonSerializer.Serialize(actual);
         CharacterEquipment? roundtrip = JsonSerializer.Deserialize<CharacterEquipment>(json);
 #endif
-        Assert.Equal(actual, roundtrip);
+        await Assert.That(roundtrip).IsEqualTo(actual);
     }
 }

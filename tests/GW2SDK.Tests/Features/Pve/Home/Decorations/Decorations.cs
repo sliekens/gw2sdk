@@ -1,4 +1,4 @@
-﻿using GuildWars2.Pve.Home.Decorations;
+using GuildWars2.Pve.Home.Decorations;
 using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pve.Home.Decorations;
@@ -15,15 +15,18 @@ public class Decorations
         Gw2Client sut = new(httpClient);
         await foreach ((Decoration actual, MessageContext context) in sut.Pve.Home.GetDecorationsBulk(cancellationToken: TestContext.Current!.Execution.CancellationToken))
         {
-            Assert.NotNull(context);
-            Assert.True(actual.Id > 0);
-            Assert.NotEmpty(actual.Name);
-            Assert.NotNull(actual.Description);
+            await Assert.That(context).IsNotNull();
+            await Assert.That(actual.Id > 0).IsTrue();
+            await Assert.That(actual.Name).IsNotEmpty();
+            await Assert.That(actual.Description).IsNotNull();
             // Some decorations are not linked to categories
-            Assert.NotNull(actual.CategoryIds);
-            Assert.All(actual.CategoryIds, categoryId => Assert.True(categoryId > 0));
-            Assert.True(actual.MaxCount > 0);
-            Assert.True(actual.IconUrl is null || actual.IconUrl.IsAbsoluteUri);
+            await Assert.That(actual.CategoryIds).IsNotNull();
+            foreach (int categoryId in actual.CategoryIds)
+            {
+                await Assert.That(categoryId > 0).IsTrue();
+            }
+            await Assert.That(actual.MaxCount > 0).IsTrue();
+            await Assert.That(actual.IconUrl is null || actual.IconUrl.IsAbsoluteUri).IsTrue();
         }
     }
 }

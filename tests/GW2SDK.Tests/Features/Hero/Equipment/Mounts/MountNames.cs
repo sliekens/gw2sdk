@@ -10,9 +10,9 @@ public class MountNames(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<Extensible<MountName>> actual, _) = await sut.Hero.Equipment.Mounts.GetMountNames(TestContext.Current!.Execution.CancellationToken);
-        Assert.All(actual, entry =>
+        foreach (Extensible<MountName> entry in actual)
         {
-            Assert.True(entry.IsDefined());
-        });
+            await Assert.That(entry.IsDefined()).IsTrue();
+        }
     }
 }

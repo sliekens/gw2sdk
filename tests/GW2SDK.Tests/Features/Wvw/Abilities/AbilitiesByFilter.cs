@@ -11,9 +11,14 @@ public class AbilitiesByFilter(Gw2Client sut)
     {
         HashSet<int> ids = [2, 3, 4];
         (HashSet<Ability> actual, MessageContext context) = await sut.Wvw.GetAbilitiesByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(ids.Count, context.ResultCount);
-        Assert.True(context.ResultTotal > ids.Count);
-        Assert.Equal(ids.Count, actual.Count);
-        Assert.Collection(ids, first => Assert.Contains(actual, found => found.Id == first), second => Assert.Contains(actual, found => found.Id == second), third => Assert.Contains(actual, found => found.Id == third));
+        using (Assert.Multiple())
+        {
+            await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(ids.Count));
+            await Assert.That(context.ResultTotal > ids.Count).IsTrue();
+            await Assert.That(actual).HasCount(ids.Count);
+            await Assert.That(actual.ElementAt(0).Id).IsIn(ids);
+            await Assert.That(actual.ElementAt(1).Id).IsIn(ids);
+            await Assert.That(actual.ElementAt(2).Id).IsIn(ids);
+        }
     }
 }

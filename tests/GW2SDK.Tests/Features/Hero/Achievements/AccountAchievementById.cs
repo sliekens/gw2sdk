@@ -13,7 +13,7 @@ public class AccountAchievementById(Gw2Client sut)
         ApiKey accessToken = TestConfiguration.ApiKey;
         const int id = 1;
         (AccountAchievement actual, MessageContext context) = await sut.Hero.Achievements.GetAccountAchievementById(id, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.Equal(id, actual.Id);
+        await Assert.That(context).IsNotNull();
+        await Assert.That(actual.Id).IsEqualTo(id);
     }
 }

@@ -11,6 +11,6 @@ public class UnlockedSkiffSkins(Gw2Client sut)
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
         (HashSet<int> actual, _) = await sut.Hero.Equipment.Skiffs.GetUnlockedSkiffSkins(accessToken.Key, TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
+        await Assert.That(actual).IsNotEmpty();
     }
 }

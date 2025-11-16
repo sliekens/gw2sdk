@@ -11,9 +11,12 @@ public class AchievementGroupsByFilter(Gw2Client sut)
     {
         HashSet<string> ids = ["A4ED8379-5B6B-4ECC-B6E1-70C350C902D2", "56A82BB9-6B07-4AB0-89EE-E4A6D68F5C47", "B42E2379-9599-46CA-9D4A-40A27E192BBE"];
         (HashSet<AchievementGroup> actual, MessageContext context) = await sut.Hero.Achievements.GetAchievementGroupsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(ids.Count, context.ResultCount);
-        Assert.True(context.ResultTotal > ids.Count);
-        Assert.Equal(ids.Count, actual.Count);
-        Assert.Collection(ids, first => Assert.Contains(actual, found => found.Id == first), second => Assert.Contains(actual, found => found.Id == second), third => Assert.Contains(actual, found => found.Id == third));
+        await Assert.That(context.ResultCount).IsEqualTo(ids.Count);
+        await Assert.That(context.ResultTotal > ids.Count).IsTrue();
+        await Assert.That(actual.Count).IsEqualTo(ids.Count);
+        foreach (string id in ids)
+        {
+            await Assert.That(actual).Contains(found => found.Id == id);
+        }
     }
 }

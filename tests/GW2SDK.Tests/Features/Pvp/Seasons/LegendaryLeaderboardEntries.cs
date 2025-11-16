@@ -12,15 +12,18 @@ public class LegendaryLeaderboardEntries(Gw2Client sut)
     public async Task Can_be_found(string seasonId, string boardId, string regionId)
     {
         (HashSet<LeaderboardEntry> actual, MessageContext context) = await sut.Pvp.GetLeaderboardEntries(seasonId, boardId, regionId, 0, 200, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.NotNull(context.Links);
-        Assert.All(actual, entry =>
+        using (Assert.Multiple())
         {
-            Assert.Empty(entry.GuildId);
-            Assert.Empty(entry.TeamName);
-            Assert.Null(entry.TeamId);
-        });
+            await Assert.That(actual).IsNotEmpty();
+            await Assert.That(context).Member(c => c.ResultCount, m => m.IsEqualTo(actual.Count));
+            await Assert.That(context).Member(c => c.ResultTotal, m => m.IsEqualTo(actual.Count));
+            await Assert.That(context.Links).IsNotNull();
+            foreach (LeaderboardEntry entry in actual)
+            {
+                await Assert.That(entry.GuildId).IsEmpty();
+                await Assert.That(entry.TeamName).IsEmpty();
+                await Assert.That(entry.TeamId).IsNull();
+            }
+        }
     }
 }

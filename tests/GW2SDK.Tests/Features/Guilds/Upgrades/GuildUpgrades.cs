@@ -1,4 +1,4 @@
-﻿using GuildWars2.Guilds.Upgrades;
+using GuildWars2.Guilds.Upgrades;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Guilds.Upgrades;
@@ -10,21 +10,26 @@ public class GuildUpgrades(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<GuildUpgrade> actual, MessageContext context) = await sut.Guilds.GetGuildUpgrades(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, entry =>
+        await Assert.That(actual).IsNotEmpty();
+        await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(actual.Count))
+            .And.Member(c => c.ResultTotal, rt => rt.IsEqualTo(actual.Count));
+        using (Assert.Multiple())
         {
-            Assert.True(entry.Id > 0);
-            Assert.NotNull(entry.Name);
-            Assert.NotNull(entry.Description);
-            Assert.True(entry.IconUrl.IsAbsoluteUri);
-            Assert.NotNull(entry.Costs);
-            if (entry is BankBag bankBag)
+            foreach (GuildUpgrade entry in actual)
             {
-                Assert.True(bankBag.MaxItems > 0);
-                Assert.True(bankBag.MaxCoins > 0);
+                await Assert.That(entry)
+                    .Member(e => e.Id, m => m.IsGreaterThan(0))
+                    .And.Member(e => e.Name, m => m.IsNotNull())
+                    .And.Member(e => e.Description, m => m.IsNotNull())
+                    .And.Member(e => e.IconUrl.IsAbsoluteUri, m => m.IsTrue())
+                    .And.Member(e => e.Costs, m => m.IsNotNull());
+                if (entry is BankBag bankBag)
+                {
+                    await Assert.That(bankBag)
+                        .Member(b => b.MaxItems, m => m.IsGreaterThan(0))
+                        .And.Member(b => b.MaxCoins, m => m.IsGreaterThan(0));
+                }
             }
-        });
+        }
     }
 }

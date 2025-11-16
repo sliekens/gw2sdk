@@ -14,15 +14,16 @@ public class AccountAchievements(Gw2Client sut)
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
         (HashSet<AccountAchievement> actual, MessageContext context) = await sut.Hero.Achievements.GetAccountAchievements(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.NotEmpty(actual);
-        Assert.All(actual, achievement =>
+        await Assert.That(context.ResultCount).IsEqualTo(actual.Count);
+        await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);
+        await Assert.That(actual).IsNotEmpty();
+        foreach (AccountAchievement achievement in actual)
         {
-            Assert.True(achievement.Id > 0);
-            Assert.True(achievement.Current >= 0);
-            Assert.True(achievement.Max >= 0);
-            Assert.True(achievement.Repeated >= 0);
+            await Assert.That(achievement)
+                .Member(a => a.Id, id => id.IsGreaterThan(0))
+                .And.Member(a => a.Current, current => current.IsGreaterThanOrEqualTo(0))
+                .And.Member(a => a.Max, max => max.IsGreaterThanOrEqualTo(0))
+                .And.Member(a => a.Repeated, repeated => repeated.IsGreaterThanOrEqualTo(0));
 #if NET
             string json = JsonSerializer.Serialize(achievement, Common.TestJsonContext.Default.AccountAchievement);
             AccountAchievement? roundTrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.AccountAchievement);
@@ -30,7 +31,7 @@ public class AccountAchievements(Gw2Client sut)
             string json = JsonSerializer.Serialize(achievement);
             AccountAchievement? roundTrip = JsonSerializer.Deserialize<AccountAchievement>(json);
 #endif
-            Assert.Equal(achievement, roundTrip);
-        });
+            await Assert.That(roundTrip).IsEqualTo(achievement);
+        }
     }
 }

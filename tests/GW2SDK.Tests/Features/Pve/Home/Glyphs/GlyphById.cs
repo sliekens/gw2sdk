@@ -11,7 +11,7 @@ public class GlyphById(Gw2Client sut)
     {
         const string id = "leatherworker_logging";
         (Glyph actual, MessageContext context) = await sut.Pve.Home.GetGlyphById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.Equal(id, actual.Id);
+        await Assert.That(context).IsNotNull();
+        await Assert.That(actual.Id).IsEqualTo(id);
     }
 }

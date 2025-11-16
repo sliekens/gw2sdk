@@ -11,7 +11,7 @@ public class ObjectiveById(Gw2Client sut)
     {
         const string id = "1099-99";
         (Objective actual, MessageContext context) = await sut.Wvw.GetObjectiveById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.Equal(id, actual.Id);
+        await Assert.That(context).IsNotNull();
+        await Assert.That(actual.Id).IsEqualTo(id);
     }
 }

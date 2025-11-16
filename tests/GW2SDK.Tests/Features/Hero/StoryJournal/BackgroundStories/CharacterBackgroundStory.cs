@@ -12,7 +12,7 @@ public class CharacterBackgroundStory(Gw2Client sut)
         TestCharacter character = TestConfiguration.TestCharacter;
         ApiKey accessToken = TestConfiguration.ApiKey;
         (GuildWars2.Hero.StoryJournal.BackgroundStories.CharacterBackgroundStory actual, _) = await sut.Hero.StoryJournal.GetCharacterBackgroundStory(character.Name, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(actual);
-        Assert.NotEmpty(actual.AnswerIds);
+        await Assert.That(actual).IsNotNull();
+        await Assert.That(actual.AnswerIds).IsNotEmpty();
     }
 }

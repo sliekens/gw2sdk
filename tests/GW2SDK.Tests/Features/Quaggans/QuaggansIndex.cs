@@ -9,8 +9,11 @@ public class QuaggansIndex(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<string> actual, MessageContext context) = await sut.Quaggans.GetQuaggansIndex(TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.NotEmpty(actual);
+        using (Assert.Multiple())
+        {
+            await Assert.That(context).Member(c => c.ResultCount, c => c.IsEqualTo(actual.Count));
+            await Assert.That(context).Member(c => c.ResultTotal, c => c.IsEqualTo(actual.Count));
+            await Assert.That(actual).IsNotEmpty();
+        }
     }
 }

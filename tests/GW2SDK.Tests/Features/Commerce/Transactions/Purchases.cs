@@ -14,7 +14,7 @@ public class Purchases(Gw2Client sut)
 
         (HashSet<Transaction> purchases, MessageContext context) = await sut.Commerce.GetPurchases(0, 200, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         // Step through with debugger to see if the values reflect your in-game transactions
-        Assert.NotNull(context);
-        Assert.NotEmpty(purchases);
+        await Assert.That(context).IsNotNull();
+        await Assert.That(purchases).IsNotEmpty();
     }
 }

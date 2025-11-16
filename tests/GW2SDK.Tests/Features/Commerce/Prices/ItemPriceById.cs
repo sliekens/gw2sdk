@@ -11,7 +11,7 @@ public class ItemPriceById(Gw2Client sut)
     {
         const int id = 24;
         (ItemPrice actual, MessageContext context) = await sut.Commerce.GetItemPriceById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.Equal(id, actual.Id);
+        await Assert.That(context).IsNotNull();
+        await Assert.That(actual.Id).IsEqualTo(id);
     }
 }

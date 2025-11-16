@@ -13,12 +13,12 @@ public class WvwGuilds(Gw2Client sut)
     public async Task Can_be_listed(WorldRegion region)
     {
         (HashSet<WvwGuild> actual, MessageContext context) = await sut.Wvw.GetWvwGuilds(region, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.NotEmpty(actual);
-        Assert.All(actual, entry =>
+        await Assert.That(context).IsNotNull();
+        await Assert.That(actual).IsNotEmpty();
+        foreach (WvwGuild entry in actual)
         {
-            Assert.NotNull(entry.Name);
-            Assert.NotEmpty(entry.TeamId);
-        });
+            await Assert.That(entry.Name).IsNotNull();
+            await Assert.That(entry.TeamId).IsNotEmpty();
+        }
     }
 }

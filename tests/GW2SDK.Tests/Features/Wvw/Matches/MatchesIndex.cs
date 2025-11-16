@@ -9,8 +9,8 @@ public class MatchesIndex(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<string> actual, MessageContext context) = await sut.Wvw.GetMatchesIndex(TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.NotEmpty(actual);
+        await Assert.That(context).Member(c => c.ResultCount, m => m.IsEqualTo(actual.Count));
+        await Assert.That(context).Member(c => c.ResultTotal, m => m.IsEqualTo(actual.Count));
+        await Assert.That(actual).IsNotEmpty();
     }
 }

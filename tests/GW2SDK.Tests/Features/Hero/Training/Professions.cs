@@ -10,13 +10,13 @@ public class Professions(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<Profession> actual, _) = await sut.Hero.Training.GetProfessions(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(Profession.AllProfessions.Count, actual.Count);
-        Assert.All(actual, profession =>
+        await Assert.That(actual.Count).IsEqualTo(Profession.AllProfessions.Count);
+        foreach (Profession profession in actual)
         {
-            Assert.True(profession.Id.IsDefined());
-            Assert.NotEmpty(profession.Name);
-            Assert.True(profession.IconUrl is null || profession.IconUrl.IsAbsoluteUri);
-            Assert.True(profession.BigIconUrl is null || profession.BigIconUrl.IsAbsoluteUri);
-        });
+            await Assert.That(profession.Id.IsDefined()).IsTrue();
+            await Assert.That(profession.Name).IsNotEmpty();
+            await Assert.That(profession.IconUrl is null || profession.IconUrl.IsAbsoluteUri).IsTrue();
+            await Assert.That(profession.BigIconUrl is null || profession.BigIconUrl.IsAbsoluteUri).IsTrue();
+        }
     }
 }

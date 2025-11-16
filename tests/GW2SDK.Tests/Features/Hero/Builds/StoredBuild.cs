@@ -12,7 +12,7 @@ public class StoredBuild(Gw2Client sut)
         ApiKey accessToken = TestConfiguration.ApiKey;
         const int slotNumber = 3;
         (GuildWars2.Hero.Builds.Build actual, _) = await sut.Hero.Builds.GetStoredBuild(slotNumber, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(actual);
-        Assert.NotEmpty(actual.Name);
+        await Assert.That(actual).IsNotNull();
+        await Assert.That(actual.Name).IsNotEmpty();
     }
 }

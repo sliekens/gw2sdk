@@ -12,6 +12,8 @@ public class ProfessionsByName(Gw2Client sut)
     {
         HashSet<ProfessionName> names = [ProfessionName.Mesmer, ProfessionName.Necromancer, ProfessionName.Revenant];
         (HashSet<Profession> actual, _) = await sut.Hero.Training.GetProfessionsByNames(names, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.Collection(names, first => Assert.Contains(actual, found => found.Id == first), second => Assert.Contains(actual, found => found.Id == second), third => Assert.Contains(actual, found => found.Id == third));
+        await Assert.That(actual).Contains(found => found.Id == ProfessionName.Mesmer);
+        await Assert.That(actual).Contains(found => found.Id == ProfessionName.Necromancer);
+        await Assert.That(actual).Contains(found => found.Id == ProfessionName.Revenant);
     }
 }

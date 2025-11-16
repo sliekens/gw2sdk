@@ -1,4 +1,4 @@
-﻿using GuildWars2.Exploration.Hearts;
+using GuildWars2.Exploration.Hearts;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Exploration.Hearts;
@@ -15,7 +15,7 @@ public class HeartById(Gw2Client sut)
         const int mapId = 26;
         const int heartId = 2;
         (Heart actual, MessageContext context) = await sut.Exploration.GetHeartById(continentId, floorId, regionId, mapId, heartId, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.Equal(heartId, actual.Id);
+        await Assert.That(context).IsNotNull();
+        await Assert.That(actual.Id).IsEqualTo(heartId);
     }
 }

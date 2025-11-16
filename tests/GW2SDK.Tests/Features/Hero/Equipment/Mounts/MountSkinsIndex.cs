@@ -14,8 +14,8 @@ public class MountSkinsIndex(Gw2Client sut)
             );
 
         // https://github.com/gw2-api/issues/issues/134
-        Assert.Equal(context.ResultCount, actual.Count + 1);
-        Assert.Equal(context.ResultTotal, actual.Count + 1);
-        Assert.NotEmpty(actual);
+        await Assert.That(context).Member(c => c.ResultCount, resultCount => resultCount.IsEqualTo(actual.Count + 1))
+            .And.Member(c => c.ResultTotal, resultTotal => resultTotal.IsEqualTo(actual.Count + 1));
+        await Assert.That(actual).IsNotEmpty();
     }
 }

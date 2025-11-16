@@ -14,16 +14,16 @@ public class CharactersByNames(Gw2Client sut)
         TestCharacter character2 = TestConfiguration.TestCharacter2;
         ApiKey accessToken = TestConfiguration.ApiKey;
         (HashSet<Character> actual, _) = await sut.Hero.Account.GetCharactersByNames([character.Name, character2.Name], accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.Collection(actual, entry =>
-        {
-            Assert.Equal(character.Name, entry.Name);
-            Assert.Equal(character.Race, entry.Race);
-            Assert.Equal(character.Profession, entry.Profession);
-        }, entry =>
-        {
-            Assert.Equal(character2.Name, entry.Name);
-            Assert.Equal(character2.Race, entry.Race);
-            Assert.Equal(character2.Profession, entry.Profession);
-        });
+        await Assert.That(actual).HasCount(2);
+
+        await Assert.That(actual.ElementAt(0))
+            .Member(entry => entry.Name, name => name.IsEqualTo(character.Name))
+            .And.Member(entry => entry.Race, race => race.IsEqualTo(character.Race))
+            .And.Member(entry => entry.Profession, profession => profession.IsEqualTo(character.Profession));
+
+        await Assert.That(actual.ElementAt(1))
+            .Member(entry => entry.Name, name => name.IsEqualTo(character2.Name))
+            .And.Member(entry => entry.Race, race => race.IsEqualTo(character2.Race))
+            .And.Member(entry => entry.Profession, profession => profession.IsEqualTo(character2.Profession));
     }
 }

@@ -9,9 +9,12 @@ public class MistChampionById(Gw2Client sut)
     [Test]
     public async Task Can_be_found()
     {
-        const string id = "115C140F-C2F5-40EB-8EA2-C3773F2AE468";
-        (MistChampion actual, MessageContext context) = await sut.Pvp.GetMistChampionById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.Equal(id, actual.Id);
+        using (Assert.Multiple())
+        {
+            const string id = "115C140F-C2F5-40EB-8EA2-C3773F2AE468";
+            (MistChampion actual, MessageContext context) = await sut.Pvp.GetMistChampionById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+            await Assert.That(context).IsNotNull();
+            await Assert.That(actual.Id).IsEqualTo(id);
+        }
     }
 }

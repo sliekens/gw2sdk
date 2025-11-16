@@ -10,20 +10,22 @@ public class Abilities(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<Ability> actual, MessageContext context) = await sut.Wvw.GetAbilities(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, entry =>
+        await Assert.That(actual).IsNotEmpty();
+        await Assert.That(context).Member(c => c.ResultCount, m => m.IsEqualTo(actual.Count));
+        await Assert.That(context).Member(c => c.ResultTotal, m => m.IsEqualTo(actual.Count));
+        foreach (Ability entry in actual)
         {
-            Assert.True(entry.Id > 0);
-            Assert.NotEmpty(entry.Name);
-            Assert.NotEmpty(entry.Description);
+            await Assert.That(entry.Id > 0).IsTrue();
+            await Assert.That(entry)
+                .Member(e => e.Name, name => name.IsNotEmpty())
+                .And.Member(e => e.Description, desc => desc.IsNotEmpty());
 #pragma warning disable CS0618 // IconHref is obsolete
 
-            Assert.NotEmpty(entry.IconHref);
+            await Assert.That(entry.IconHref).IsNotEmpty();
 #pragma warning restore CS0618
-            Assert.True(entry.IconUrl.IsAbsoluteUri);
-            Assert.NotEmpty(entry.Ranks);
-        });
+            await Assert.That(entry)
+                .Member(e => e.IconUrl.IsAbsoluteUri, isAbsolute => isAbsolute.IsTrue())
+                .And.Member(e => e.Ranks, ranks => ranks.IsNotEmpty());
+        }
     }
 }

@@ -10,14 +10,17 @@ public class Logos(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<Logo> actual, MessageContext context) = await sut.Logos.GetLogos(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, entry =>
+        using (Assert.Multiple())
         {
-            Assert.NotEmpty(entry.Id);
-            Assert.NotNull(entry.Url);
-            Assert.True(entry.Url.IsAbsoluteUri);
-        });
+            await Assert.That(actual).IsNotEmpty();
+            await Assert.That(context).Member(c => c.ResultCount, c => c.IsEqualTo(actual.Count));
+            await Assert.That(context).Member(c => c.ResultTotal, c => c.IsEqualTo(actual.Count));
+            foreach (Logo entry in actual)
+            {
+                await Assert.That(entry.Id).IsNotEmpty();
+                await Assert.That(entry.Url).IsNotNull();
+                await Assert.That(entry.Url.IsAbsoluteUri).IsTrue();
+            }
+        }
     }
 }

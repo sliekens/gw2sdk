@@ -1,9 +1,7 @@
-﻿using GuildWars2.Chat;
+using GuildWars2.Chat;
 using GuildWars2.Hero;
 using GuildWars2.Hero.Builds;
 using GuildWars2.Tests.TestInfrastructure.Composition;
-
-using Assert = TUnit.Assertions.Assert;
 
 namespace GuildWars2.Tests.Features.Chat;
 

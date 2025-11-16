@@ -12,10 +12,10 @@ public class UnlockedMounts(Gw2Client sut)
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
         (HashSet<Extensible<MountName>> actual, _) = await sut.Hero.Equipment.Mounts.GetUnlockedMounts(accessToken.Key, TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.All(actual, entry =>
+        await Assert.That(actual).IsNotEmpty();
+        foreach (Extensible<MountName> entry in actual)
         {
-            Assert.True(entry.IsDefined());
-        });
+            await Assert.That(entry.IsDefined()).IsTrue();
+        }
     }
 }

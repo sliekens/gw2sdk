@@ -10,18 +10,18 @@ public class Dungeons(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<Dungeon> actual, MessageContext context) = await sut.Pve.Dungeons.GetDungeons(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, entry =>
+        await Assert.That(actual).IsNotEmpty();
+        await Assert.That(context).Member(c => c.ResultCount, m => m.IsEqualTo(actual.Count));
+        await Assert.That(context).Member(c => c.ResultTotal, m => m.IsEqualTo(actual.Count));
+        foreach (Dungeon entry in actual)
         {
-            Assert.NotEmpty(entry.Id);
-            Assert.NotEmpty(entry.Paths);
-            Assert.All(entry.Paths, path =>
+            await Assert.That(entry.Id).IsNotEmpty();
+            await Assert.That(entry.Paths).IsNotEmpty();
+            foreach (DungeonPath path in entry.Paths)
             {
-                Assert.NotEmpty(path.Id);
-                Assert.True(path.Kind.IsDefined());
-            });
-        });
+                await Assert.That(path.Id).IsNotEmpty();
+                await Assert.That(path.Kind.IsDefined()).IsTrue();
+            }
+        }
     }
 }

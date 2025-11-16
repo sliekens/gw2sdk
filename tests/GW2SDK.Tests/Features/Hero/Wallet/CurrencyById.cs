@@ -11,7 +11,7 @@ public class CurrencyById(Gw2Client sut)
     {
         const int id = 1;
         (Currency actual, MessageContext context) = await sut.Hero.Wallet.GetCurrencyById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.Equal(id, actual.Id);
+        await Assert.That(context).IsNotNull();
+        await Assert.That(actual.Id).IsEqualTo(id);
     }
 }

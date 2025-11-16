@@ -10,12 +10,12 @@ public class Nodes(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<Node> actual, MessageContext context) = await sut.Pve.Home.GetNodes(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, node =>
+        await Assert.That(actual).IsNotEmpty();
+        await Assert.That(context).Member(c => c.ResultTotal, m => m.IsEqualTo(actual.Count));
+        foreach (Node node in actual)
         {
-            Assert.NotNull(node);
-            Assert.NotEmpty(node.Id);
-        });
+            await Assert.That(node).IsNotNull();
+            await Assert.That(node.Id).IsNotEmpty();
+        }
     }
 }

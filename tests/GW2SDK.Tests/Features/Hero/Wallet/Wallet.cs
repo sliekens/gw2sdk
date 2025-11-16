@@ -14,6 +14,6 @@ public class Wallet(Gw2Client sut)
         (HashSet<CurrencyAmount> actual, _) = await sut.Hero.Wallet.GetWallet(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         CurrencyAmount coins = actual.Single(currency => currency.CurrencyId == 1);
         Coin coinsAmount = coins.Amount;
-        Assert.True(coinsAmount > 0);
+        await Assert.That(coinsAmount > 0).IsTrue();
     }
 }

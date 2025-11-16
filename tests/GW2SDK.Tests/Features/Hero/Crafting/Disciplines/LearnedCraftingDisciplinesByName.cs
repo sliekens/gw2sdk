@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 
 using GuildWars2.Hero.Crafting.Disciplines;
 using GuildWars2.Tests.TestInfrastructure.Composition;
@@ -15,12 +15,13 @@ public class LearnedCraftingDisciplinesByName(Gw2Client sut)
         TestCharacter character = TestConfiguration.TestCharacter;
         ApiKey accessToken = TestConfiguration.ApiKey;
         (LearnedCraftingDisciplines actual, MessageContext context) = await sut.Hero.Crafting.Disciplines.GetLearnedCraftingDisciplines(character.Name, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.All(actual.Disciplines, entry =>
+        await Assert.That(context).IsNotNull();
+        foreach (CraftingDiscipline entry in actual.Disciplines)
         {
-            Assert.True(entry.Discipline.IsDefined());
-            Assert.True(entry.Rating > 0);
-        });
+            await Assert.That(entry.Discipline.IsDefined()).IsTrue();
+            await Assert.That(entry.Rating).IsGreaterThan(0);
+        }
+
         string json;
         LearnedCraftingDisciplines? roundtrip;
 #if NET
@@ -30,6 +31,6 @@ public class LearnedCraftingDisciplinesByName(Gw2Client sut)
         json = JsonSerializer.Serialize(actual);
         roundtrip = JsonSerializer.Deserialize<LearnedCraftingDisciplines>(json);
 #endif
-        Assert.Equal(actual, roundtrip);
+        await Assert.That(roundtrip).IsEqualTo(actual);
     }
 }

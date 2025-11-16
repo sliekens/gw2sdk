@@ -17,41 +17,47 @@ public class Skills(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<Skill> actual, MessageContext context) = await sut.Hero.Builds.GetSkills(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.NotEmpty(actual);
-        Assert.All(actual, skill =>
+        await Assert.That(context.ResultCount).IsEqualTo(actual.Count);
+        await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);
+        await Assert.That(actual).IsNotEmpty();
+        foreach (Skill skill in actual)
         {
-            Assert.True(skill.Id > 0);
-            Assert.Empty(skill.SkillFlags.Other);
+            await Assert.That(skill.Id).IsGreaterThan(0);
+            await Assert.That(skill.SkillFlags.Other).IsEmpty();
             if (skill is ActionSkill action)
             {
-                Assert.NotNull(action.Name);
-                Assert.NotNull(action.Description);
+                await Assert.That(action)
+                    .Member(a => a.Name, m => m.IsNotNull())
+                    .And.Member(a => a.Description, m => m.IsNotNull());
                 MarkupSyntaxValidator.Validate(action.Description);
-                Assert.True(action.IconUrl is null or { IsAbsoluteUri: true });
-                Assert.NotEmpty(action.Professions);
-                Assert.All(action.Professions, profession => Assert.True(profession.IsDefined()));
-                Assert.True(action.WeaponType.IsDefined());
-                Assert.True(action.Slot.IsDefined());
+                await Assert.That(action.IconUrl is null or { IsAbsoluteUri: true }).IsTrue();
+                await Assert.That(action.Professions).IsNotEmpty();
+                foreach (Extensible<ProfessionName> profession in action.Professions)
+                {
+                    await Assert.That(profession.IsDefined()).IsTrue();
+                }
+
+                await Assert.That(action)
+                    .Member(a => a.WeaponType.IsDefined(), m => m.IsTrue())
+                    .And.Member(a => a.Slot.IsDefined(), m => m.IsTrue());
                 if (action.FlipSkillId.HasValue)
                 {
-                    Assert.True(action.FlipSkillId.Value > 0);
+                    await Assert.That(action.FlipSkillId.Value).IsGreaterThan(0);
                 }
 
                 if (action.NextSkillId.HasValue)
                 {
-                    Assert.True(action.NextSkillId.Value > 0);
+                    await Assert.That(action.NextSkillId.Value).IsGreaterThan(0);
                 }
 
                 if (action.PreviousSkillId.HasValue)
                 {
-                    Assert.True(action.PreviousSkillId.Value > 0);
+                    await Assert.That(action.PreviousSkillId.Value).IsGreaterThan(0);
                 }
 
                 if (action.SpecializationId.HasValue)
                 {
-                    Assert.True(action.SpecializationId.Value > 0);
+                    await Assert.That(action.SpecializationId.Value).IsGreaterThan(0);
                 }
 
                 switch (action)
@@ -59,100 +65,117 @@ public class Skills(Gw2Client sut)
                     case WeaponSkill weaponSkill:
                         if (weaponSkill.Attunement.HasValue)
                         {
-                            Assert.Single(weaponSkill.Professions, profession => profession == ProfessionName.Elementalist);
-                            Assert.True(weaponSkill.Attunement.Value.IsDefined());
+                            await Assert.That(weaponSkill)
+                                .Member(w => w.Professions.Count(profession => profession == ProfessionName.Elementalist), m => m.IsEqualTo(1))
+                                .And.Member(w => w.Attunement!.Value.IsDefined(), m => m.IsTrue());
                         }
 
                         if (weaponSkill.DualAttunement.HasValue)
                         {
-                            Assert.Single(weaponSkill.Professions, profession => profession == ProfessionName.Elementalist);
-                            Assert.True(weaponSkill.DualAttunement.Value.IsDefined());
-                            Assert.True(weaponSkill.Attunement.HasValue);
+                            await Assert.That(weaponSkill)
+                                .Member(w => w.Professions.Count(profession => profession == ProfessionName.Elementalist), m => m.IsEqualTo(1))
+                                .And.Member(w => w.DualAttunement!.Value.IsDefined(), m => m.IsTrue())
+                                .And.Member(w => w.Attunement.HasValue, m => m.IsTrue());
                         }
 
                         if (weaponSkill.Cost.HasValue)
                         {
-                            Assert.True(weaponSkill.Cost.Value > 0);
+                            await Assert.That(weaponSkill.Cost.Value).IsGreaterThan(0);
                         }
 
                         if (weaponSkill.Offhand.HasValue)
                         {
-                            Assert.True(weaponSkill.Offhand.Value.IsDefined());
+                            await Assert.That(weaponSkill.Offhand.Value.IsDefined()).IsTrue();
                         }
 
                         if (weaponSkill.Initiative.HasValue)
                         {
-                            Assert.Single(weaponSkill.Professions, profession => profession == ProfessionName.Thief);
-                            Assert.True(weaponSkill.Initiative.Value > 0);
+                            await Assert.That(weaponSkill)
+                                .Member(w => w.Professions.Count(profession => profession == ProfessionName.Thief), m => m.IsEqualTo(1))
+                                .And.Member(w => w.Initiative!.Value, m => m.IsGreaterThan(0));
                         }
 
                         break;
                     case SlotSkill slotSkill:
                         if (slotSkill.ToolbeltSkillId.HasValue)
                         {
-                            Assert.Single(slotSkill.Professions, profession => profession == ProfessionName.Engineer);
-                            Assert.True(slotSkill.ToolbeltSkillId.Value > 0);
+                            await Assert.That(slotSkill)
+                                .Member(s => s.Professions.Count(profession => profession == ProfessionName.Engineer), m => m.IsEqualTo(1))
+                                .And.Member(s => s.ToolbeltSkillId!.Value, m => m.IsGreaterThan(0));
                         }
 
                         if (slotSkill.Attunement.HasValue)
                         {
-                            Assert.Single(slotSkill.Professions, profession => profession == ProfessionName.Elementalist);
-                            Assert.True(slotSkill.Attunement.Value.IsDefined());
+                            await Assert.That(slotSkill)
+                                .Member(s => s.Professions.Count(profession => profession == ProfessionName.Elementalist), m => m.IsEqualTo(1))
+                                .And.Member(s => s.Attunement!.Value.IsDefined(), m => m.IsTrue());
                         }
 
                         if (slotSkill.Cost.HasValue)
                         {
-                            Assert.True(slotSkill.Cost.Value > 0);
+                            await Assert.That(slotSkill.Cost.Value).IsGreaterThan(0);
                         }
 
                         if (slotSkill.BundleSkillIds is not null)
                         {
-                            Assert.All(slotSkill.BundleSkillIds, id => Assert.True(id > 0));
+                            foreach (int id in slotSkill.BundleSkillIds)
+                            {
+                                await Assert.That(id).IsGreaterThan(0);
+                            }
                         }
 
                         if (slotSkill.SubskillIds is not null)
                         {
-                            Assert.NotEmpty(slotSkill.SubskillIds);
-                            Assert.All(slotSkill.SubskillIds, subskill =>
+                            await Assert.That(slotSkill.SubskillIds).IsNotEmpty();
+                            foreach (Subskill subskill in slotSkill.SubskillIds)
                             {
-                                Assert.True(subskill.Id > 0);
+                                await Assert.That(subskill.Id).IsGreaterThan(0);
                                 if (subskill.Attunement.HasValue)
                                 {
-                                    Assert.Single(slotSkill.Professions, profession => profession == ProfessionName.Elementalist);
-                                    Assert.True(subskill.Attunement.Value.IsDefined());
+                                    await Assert.That(slotSkill)
+                                        .Member(s => s.Professions.Count(profession => profession == ProfessionName.Elementalist), m => m.IsEqualTo(1))
+                                        .And.Member(s => subskill.Attunement!.Value.IsDefined(), m => m.IsTrue());
                                 }
 
                                 if (subskill.Form.HasValue)
                                 {
-                                    Assert.Single(slotSkill.Professions, profession => profession == ProfessionName.Ranger);
-                                    Assert.True(subskill.Form.Value.IsDefined());
+                                    await Assert.That(slotSkill)
+                                        .Member(s => s.Professions.Count(profession => profession == ProfessionName.Ranger), m => m.IsEqualTo(1))
+                                        .And.Member(s => subskill.Form!.Value.IsDefined(), m => m.IsTrue());
                                 }
-                            });
+                            }
                         }
 
                         if (slotSkill is EliteSkill { TransformSkillIds: not null } elite)
                         {
-                            Assert.NotEmpty(elite.TransformSkillIds);
-                            Assert.All(elite.TransformSkillIds, id => Assert.True(id > 0));
+                            await Assert.That(elite.TransformSkillIds).IsNotEmpty();
+                            foreach (int id in elite.TransformSkillIds)
+                            {
+                                await Assert.That(id).IsGreaterThan(0);
+                            }
                         }
 
                         break;
                     case ProfessionSkill professionSkill:
                         if (professionSkill.Attunement.HasValue)
                         {
-                            Assert.Single(professionSkill.Professions, profession => profession == ProfessionName.Elementalist);
-                            Assert.True(professionSkill.Attunement.Value.IsDefined());
+                            await Assert.That(professionSkill)
+                                .Member(p => p.Professions.Count(profession => profession == ProfessionName.Elementalist), m => m.IsEqualTo(1))
+                                .And.Member(p => p.Attunement!.Value.IsDefined(), m => m.IsTrue());
                         }
 
                         if (professionSkill.Cost.HasValue)
                         {
-                            Assert.True(professionSkill.Cost.Value > 0);
+                            await Assert.That(professionSkill.Cost.Value).IsGreaterThan(0);
                         }
 
                         if (professionSkill.TransformSkills is not null)
                         {
-                            Assert.NotEmpty(professionSkill.TransformSkills);
-                            Assert.All(professionSkill.TransformSkills, id => Assert.True(id > 0));
+                            await Assert.That(professionSkill.TransformSkills).IsNotEmpty();
+                            foreach (int id in professionSkill.TransformSkills)
+                            {
+                                await Assert.That(id).IsGreaterThan(0);
+                            }
                         }
 
                         break;
@@ -172,99 +195,102 @@ public class Skills(Gw2Client sut)
                         // Nothing to verify
                         break;
                     default:
-                        Assert.Fail($"Unexpected action skill type: {action.GetType().Name}");
-                        break;
+                        throw new TUnit.Assertions.Exceptions.AssertionException($"Unexpected action skill type: {action.GetType().Name}");
                 }
             }
             else
             {
-                Assert.NotNull(skill.Name);
-                Assert.NotNull(skill.Description);
+                await Assert.That(skill)
+                    .Member(s => s.Name, m => m.IsNotNull())
+                    .And.Member(s => s.Description, m => m.IsNotNull());
                 MarkupSyntaxValidator.Validate(skill.Description);
-                Assert.True(skill.IconUrl is null or { IsAbsoluteUri: true });
+                await Assert.That(skill.IconUrl is null or { IsAbsoluteUri: true }).IsTrue();
             }
 
             if (skill.Facts is not null)
             {
-                Assert.All(skill.Facts, fact =>
+                foreach (Fact fact in skill.Facts)
                 {
-                    Assert.NotNull(fact.Text);
+                    await Assert.That(fact)
+                        .Member(f => f.Text, m => m.IsNotNull());
                     MarkupSyntaxValidator.Validate(fact.Text);
-                    Assert.True(fact.IconUrl is null or { IsAbsoluteUri: true });
+                    await Assert.That(fact.IconUrl is null or { IsAbsoluteUri: true }).IsTrue();
                     switch (fact)
                     {
                         case AttributeAdjustment attributeAdjustment:
                             if (attributeAdjustment.Target.HasValue)
                             {
-                                Assert.True(attributeAdjustment.Target.Value.IsDefined());
+                                await Assert.That(attributeAdjustment.Target.Value.IsDefined()).IsTrue();
                             }
 
                             if (attributeAdjustment.Value.HasValue)
                             {
-                                Assert.True(attributeAdjustment.Value.Value > 0);
+                                await Assert.That(attributeAdjustment.Value.Value).IsGreaterThan(0);
                             }
 
                             if (attributeAdjustment.HitCount.HasValue)
                             {
-                                Assert.True(attributeAdjustment.HitCount.Value > 0);
+                                await Assert.That(attributeAdjustment.HitCount.Value).IsGreaterThan(0);
                             }
 
                             break;
                         case AttributeConversion attributeConversion:
-                            Assert.True(attributeConversion.Percent > 0);
-                            Assert.True(attributeConversion.Source.IsDefined());
-                            Assert.True(attributeConversion.Target.IsDefined());
-                            Assert.NotEqual(attributeConversion.Source, attributeConversion.Target);
+                            await Assert.That(attributeConversion)
+                                .Member(a => a.Percent, m => m.IsGreaterThan(0))
+                                .And.Member(a => a.Source.IsDefined(), m => m.IsTrue())
+                                .And.Member(a => a.Target.IsDefined(), m => m.IsTrue())
+                                .And.Member(a => a.Source, m => m.IsNotEqualTo(attributeConversion.Target));
                             break;
                         case Buff buff:
-                            Assert.NotEmpty(buff.Status);
-                            Assert.NotNull(buff.Description);
+                            await Assert.That(buff)
+                                .Member(b => b.Status, m => m.IsNotEmpty())
+                                .And.Member(b => b.Description, m => m.IsNotNull());
                             MarkupSyntaxValidator.Validate(buff.Description);
                             if (buff.ApplyCount.HasValue)
                             {
-                                Assert.True(buff.ApplyCount.Value >= 0);
+                                await Assert.That(buff.ApplyCount.Value).IsGreaterThanOrEqualTo(0);
                             }
 
                             if (buff.Duration.HasValue)
                             {
-                                Assert.True(buff.Duration.Value >= TimeSpan.Zero);
+                                await Assert.That(buff.Duration.Value).IsGreaterThanOrEqualTo(TimeSpan.Zero);
                             }
 
                             break;
                         case ComboField comboField:
-                            Assert.True(comboField.Field.IsDefined());
+                            await Assert.That(comboField.Field.IsDefined()).IsTrue();
                             break;
                         case ComboFinisher comboFinisher:
-                            Assert.True(comboFinisher.Percent > 0);
-                            Assert.True(comboFinisher.FinisherName.IsDefined());
+                            await Assert.That(comboFinisher.Percent).IsGreaterThan(0);
+                            await Assert.That(comboFinisher.FinisherName.IsDefined()).IsTrue();
                             break;
                         case Damage damage:
-                            Assert.True(damage.HitCount > 0);
-                            Assert.True(damage.DamageMultiplier > 0);
+                            await Assert.That(damage.HitCount).IsGreaterThan(0);
+                            await Assert.That(damage.DamageMultiplier).IsGreaterThan(0);
                             break;
                         case Distance distance:
-                            Assert.True(distance.Length >= 0);
+                            await Assert.That(distance.Length).IsGreaterThanOrEqualTo(0);
                             break;
                         case Duration duration:
-                            Assert.True(duration.Length > TimeSpan.Zero);
+                            await Assert.That(duration.Length).IsGreaterThan(TimeSpan.Zero);
                             break;
                         case HealingAdjust adjustment:
-                            Assert.True(adjustment.HitCount > 0);
+                            await Assert.That(adjustment.HitCount).IsGreaterThan(0);
                             break;
                         case Number number:
-                            Assert.True(number.Value >= 0);
+                            await Assert.That(number.Value).IsGreaterThanOrEqualTo(0);
                             break;
                         case Radius radius:
-                            Assert.True(radius.Distance > 0);
+                            await Assert.That(radius.Distance).IsGreaterThan(0);
                             break;
                         case Range range:
-                            Assert.True(range.Distance > 0);
+                            await Assert.That(range.Distance).IsGreaterThan(0);
                             break;
                         case Recharge recharge:
-                            Assert.True(recharge.Duration > TimeSpan.Zero);
+                            await Assert.That(recharge.Duration).IsGreaterThan(TimeSpan.Zero);
                             break;
                         case Time time:
-                            Assert.True(time.Duration >= TimeSpan.Zero);
+                            await Assert.That(time.Duration).IsGreaterThanOrEqualTo(TimeSpan.Zero);
                             break;
                         case Unblockable unblockable:
                             // Nothing to verify
@@ -276,122 +302,120 @@ public class Skills(Gw2Client sut)
                             // Nothing to verify
                             break;
                         case Percentage percentage:
-                            Assert.InRange(percentage.Percent, -100, 500);
+                            await Assert.That(percentage.Percent).IsGreaterThanOrEqualTo(-100).And.IsLessThanOrEqualTo(500);
                             break;
                         case Fact baseFact:
                             // This handles the base Fact type - nothing specific to verify
                             break;
                         default:
-                            Assert.Fail($"Unexpected fact type: {fact.GetType().Name}");
-                            break;
+                            throw new TUnit.Assertions.Exceptions.AssertionException($"Unexpected fact type: {fact.GetType().Name}");
                     }
-                });
+                }
             }
 
             if (skill.TraitedFacts is not null)
             {
-                Assert.All(skill.TraitedFacts, fact =>
+                foreach (TraitedFact fact in skill.TraitedFacts)
                 {
-                    Assert.True(fact.RequiresTrait > 0);
-                    Assert.NotNull(fact.Fact.Text);
+                    await Assert.That(fact.RequiresTrait).IsGreaterThan(0);
+                    await Assert.That(fact.Fact.Text).IsNotNull();
                     MarkupSyntaxValidator.Validate(fact.Fact.Text);
-                    Assert.True(fact.Fact.IconUrl is null or { IsAbsoluteUri: true });
+                    await Assert.That(fact.Fact.IconUrl is null or { IsAbsoluteUri: true }).IsTrue();
                     switch (fact.Fact)
                     {
                         case AttributeAdjustment attributeAdjustment:
                             if (attributeAdjustment.Target.HasValue)
                             {
-                                Assert.True(attributeAdjustment.Target.Value.IsDefined());
+                                await Assert.That(attributeAdjustment.Target.Value.IsDefined()).IsTrue();
                             }
 
                             if (attributeAdjustment.Value.HasValue)
                             {
-                                Assert.True(attributeAdjustment.Value.Value > 0);
+                                await Assert.That(attributeAdjustment.Value.Value).IsGreaterThan(0);
                             }
 
                             if (attributeAdjustment.HitCount.HasValue)
                             {
-                                Assert.True(attributeAdjustment.HitCount.Value > 0);
+                                await Assert.That(attributeAdjustment.HitCount.Value).IsGreaterThan(0);
                             }
 
                             break;
                         case AttributeConversion attributeConversion:
-                            Assert.True(attributeConversion.Percent > 0);
-                            Assert.True(attributeConversion.Source.IsDefined());
-                            Assert.True(attributeConversion.Target.IsDefined());
-                            Assert.NotEqual(attributeConversion.Source, attributeConversion.Target);
+                            await Assert.That(attributeConversion.Percent).IsGreaterThan(0);
+                            await Assert.That(attributeConversion.Source.IsDefined()).IsTrue();
+                            await Assert.That(attributeConversion.Target.IsDefined()).IsTrue();
+                            await Assert.That(attributeConversion.Source).IsNotEqualTo(attributeConversion.Target);
                             break;
                         case Buff buff:
-                            Assert.NotNull(buff.Status);
-                            Assert.NotNull(buff.Description);
+                            await Assert.That(buff.Status).IsNotNull();
+                            await Assert.That(buff.Description).IsNotNull();
                             MarkupSyntaxValidator.Validate(buff.Description);
                             if (buff.ApplyCount.HasValue)
                             {
-                                Assert.True(buff.ApplyCount.Value >= 0);
+                                await Assert.That(buff.ApplyCount.Value).IsGreaterThanOrEqualTo(0);
                             }
 
                             if (buff.Duration.HasValue)
                             {
-                                Assert.True(buff.Duration.Value >= TimeSpan.Zero);
+                                await Assert.That(buff.Duration.Value).IsGreaterThanOrEqualTo(TimeSpan.Zero);
                             }
 
                             break;
                         case ComboField comboField:
-                            Assert.True(comboField.Field.IsDefined());
+                            await Assert.That(comboField.Field.IsDefined()).IsTrue();
                             break;
                         case ComboFinisher comboFinisher:
-                            Assert.True(comboFinisher.Percent > 0);
-                            Assert.True(comboFinisher.FinisherName.IsDefined());
+                            await Assert.That(comboFinisher.Percent).IsGreaterThan(0);
+                            await Assert.That(comboFinisher.FinisherName.IsDefined()).IsTrue();
                             break;
                         case Damage damage:
-                            Assert.True(damage.HitCount > 0);
-                            Assert.True(damage.DamageMultiplier > 0);
+                            await Assert.That(damage.HitCount).IsGreaterThan(0);
+                            await Assert.That(damage.DamageMultiplier).IsGreaterThan(0);
                             break;
                         case Distance distance:
-                            Assert.True(distance.Length >= 0);
+                            await Assert.That(distance.Length).IsGreaterThanOrEqualTo(0);
                             break;
                         case Duration duration:
-                            Assert.True(duration.Length > TimeSpan.Zero);
+                            await Assert.That(duration.Length).IsGreaterThan(TimeSpan.Zero);
                             break;
                         case HealingAdjust adjustment:
-                            Assert.True(adjustment.HitCount > 0);
+                            await Assert.That(adjustment.HitCount).IsGreaterThan(0);
                             break;
                         case Number number:
-                            Assert.True(number.Value >= 0);
+                            await Assert.That(number.Value).IsGreaterThanOrEqualTo(0);
                             break;
                         case Radius radius:
-                            Assert.True(radius.Distance > 0);
+                            await Assert.That(radius.Distance).IsGreaterThan(0);
                             break;
                         case Range range:
-                            Assert.True(range.Distance > 0);
+                            await Assert.That(range.Distance).IsGreaterThan(0);
                             break;
                         case Recharge recharge:
-                            Assert.True(recharge.Duration > TimeSpan.Zero);
+                            await Assert.That(recharge.Duration).IsGreaterThan(TimeSpan.Zero);
                             break;
                         case Time time:
-                            Assert.True(time.Duration >= TimeSpan.Zero);
+                            await Assert.That(time.Duration).IsGreaterThanOrEqualTo(TimeSpan.Zero);
                             break;
                         case NoData noData:
                             // Nothing to verify
                             break;
                         case Percentage percentage:
-                            Assert.InRange(percentage.Percent, -75, 500);
+                            await Assert.That(percentage.Percent).IsGreaterThanOrEqualTo(-75).And.IsLessThanOrEqualTo(500);
                             break;
                         case Fact baseFact:
                             // This handles the base Fact type - nothing specific to verify
                             break;
                         default:
-                            Assert.Fail($"Unexpected fact type: {fact.Fact.GetType().Name}");
-                            break;
+                            throw new TUnit.Assertions.Exceptions.AssertionException($"Unexpected fact type: {fact.Fact.GetType().Name}");
                     }
-                });
+                }
             }
 
             SkillLink chatLink = skill.GetChatLink();
-            Assert.Equal(skill.Id, chatLink.SkillId);
-            Assert.Equal(skill.ChatLink, chatLink.ToString());
+            await Assert.That(chatLink.SkillId).IsEqualTo(skill.Id);
+            await Assert.That(skill.ChatLink).IsEqualTo(chatLink.ToString());
             SkillLink chatLinkRoundtrip = SkillLink.Parse(chatLink.ToString());
-            Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
-        });
+            await Assert.That(chatLinkRoundtrip.ToString()).IsEqualTo(chatLink.ToString());
+        }
     }
 }

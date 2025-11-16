@@ -11,14 +11,17 @@ public class SpecialObjectivesProgress(Gw2Client sut)
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
         (GuildWars2.WizardsVault.Objectives.SpecialObjectivesProgress actual, MessageContext context) = await sut.WizardsVault.GetSpecialObjectivesProgress(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.NotEmpty(actual.Objectives);
-        Assert.All(actual.Objectives, objective =>
+        using (Assert.Multiple())
         {
-            Assert.True(objective.Id > 0);
-            Assert.NotEmpty(objective.Title);
-            Assert.True(objective.Track.IsDefined());
-            Assert.True(objective.RewardAcclaim > 0);
-        });
+            await Assert.That(context).IsNotNull();
+            await Assert.That(actual.Objectives).IsNotEmpty();
+            foreach (GuildWars2.WizardsVault.Objectives.ObjectiveProgress objective in actual.Objectives)
+            {
+                await Assert.That(objective.Id).IsGreaterThan(0);
+                await Assert.That(objective.Title).IsNotEmpty();
+                await Assert.That(objective.Track.IsDefined()).IsTrue();
+                await Assert.That(objective.RewardAcclaim).IsGreaterThan(0);
+            }
+        }
     }
 }

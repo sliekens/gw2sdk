@@ -13,9 +13,12 @@ public class AccountAchievementsByFilter(Gw2Client sut)
         ApiKey accessToken = TestConfiguration.ApiKey;
         HashSet<int> ids = [1, 2, 3];
         (HashSet<AccountAchievement> actual, MessageContext context) = await sut.Hero.Achievements.GetAccountAchievementsByIds(ids, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(ids.Count, context.ResultCount);
-        Assert.True(context.ResultTotal > ids.Count);
-        Assert.Equal(ids.Count, actual.Count);
-        Assert.Collection(ids, first => Assert.Contains(actual, found => found.Id == first), second => Assert.Contains(actual, found => found.Id == second), third => Assert.Contains(actual, found => found.Id == third));
+        await Assert.That(context.ResultCount).IsEqualTo(ids.Count);
+        await Assert.That(context.ResultTotal > ids.Count).IsTrue();
+        await Assert.That(actual.Count).IsEqualTo(ids.Count);
+        foreach (int id in ids)
+        {
+            await Assert.That(actual).Contains(found => found.Id == id);
+        }
     }
 }

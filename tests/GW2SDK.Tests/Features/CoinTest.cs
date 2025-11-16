@@ -21,13 +21,13 @@ public class CoinTest
     [Arguments("1 gold, 2 silver, 3 copper", 1_02_03)]
     [Arguments("214,748 gold, 36 silver, 47 copper", int.MaxValue)]
     [Arguments("-214,748 gold, -36 silver, -48 copper", int.MinValue)]
-    public void Coins_are_formatted_for_humans(string expected, int amount)
+    public async Task Coins_are_formatted_for_humans(string expected, int amount)
     {
         // Number formatting depends on current culture
         CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
         Coin sut = amount;
         string actual = sut.ToString();
-        Assert.Equal(expected, actual);
+        await Assert.That(actual).IsEqualTo(expected);
     }
 
     [Test]
@@ -37,146 +37,146 @@ public class CoinTest
     [Arguments(1_00_01, 1, 0, 1)]
     [Arguments(1_01_01, 1, 1, 1)]
     [Arguments(99_99_99, 99, 99, 99)]
-    public void Coins_can_be_represented_in_gold_silver_and_copper(int amount, int gold, int silver, int copper)
+    public async Task Coins_can_be_represented_in_gold_silver_and_copper(int amount, int gold, int silver, int copper)
     {
         Coin sut = amount;
-        Assert.Equal(gold, sut.Gold);
-        Assert.Equal(silver, sut.Silver);
-        Assert.Equal(copper, sut.Copper);
+        await Assert.That(sut).Member(c => c.Gold, g => g.IsEqualTo(gold))
+            .And.Member(c => c.Silver, s => s.IsEqualTo(silver))
+            .And.Member(c => c.Copper, c => c.IsEqualTo(copper));
     }
 
     [Test]
-    public void Coins_can_be_equal()
+    public async Task Coins_can_be_equal()
     {
         Coin left = 10;
         Coin right = 10;
-        Assert.Equal(left, right);
+        await Assert.That(left).IsEqualTo(right);
         // Also make sure it works with boxing
-        Assert.True(Equals(left, right));
+        await Assert.That(Equals(left, right)).IsTrue();
         // Also check operators
-        Assert.True(left == right);
-        Assert.False(left != right);
+        await Assert.That(left == right).IsTrue();
+        await Assert.That(left != right).IsFalse();
     }
 
     [Test]
-    public void Coins_can_be_inequal()
+    public async Task Coins_can_be_inequal()
     {
         Coin left = 10;
         Coin right = 20;
-        Assert.NotEqual(left, right);
+        await Assert.That(left).IsNotEqualTo(right);
         // Also make sure it works with boxing
-        Assert.False(Equals(left, right));
+        await Assert.That(Equals(left, right)).IsFalse();
         // Also check operators
-        Assert.True(left != right);
-        Assert.False(left == right);
+        await Assert.That(left != right).IsTrue();
+        await Assert.That(left == right).IsFalse();
     }
 
     [Test]
-    public void Coins_can_be_compared()
+    public async Task Coins_can_be_compared()
     {
         Coin head = 1;
         Coin body = 1_00;
         Coin tail = 1_00_00;
-        Assert.Equal(0, head.CompareTo(new Coin(head.Amount)));
-        Assert.Equal(1, head.CompareTo(Coin.Zero));
-        Assert.Equal(-1, head.CompareTo(body));
-        Assert.Equal(0, body.CompareTo(new Coin(body.Amount)));
-        Assert.Equal(1, body.CompareTo(head));
-        Assert.Equal(-1, body.CompareTo(tail));
-        Assert.Equal(0, tail.CompareTo(new Coin(tail.Amount)));
-        Assert.Equal(1, tail.CompareTo(body));
-        Assert.Equal(-1, tail.CompareTo(new Coin(int.MaxValue)));
+        await Assert.That(head.CompareTo(new Coin(head.Amount))).IsEqualTo(0);
+        await Assert.That(head.CompareTo(Coin.Zero)).IsEqualTo(1);
+        await Assert.That(head.CompareTo(body)).IsEqualTo(-1);
+        await Assert.That(body.CompareTo(new Coin(body.Amount))).IsEqualTo(0);
+        await Assert.That(body.CompareTo(head)).IsEqualTo(1);
+        await Assert.That(body.CompareTo(tail)).IsEqualTo(-1);
+        await Assert.That(tail.CompareTo(new Coin(tail.Amount))).IsEqualTo(0);
+        await Assert.That(tail.CompareTo(body)).IsEqualTo(1);
+        await Assert.That(tail.CompareTo(new Coin(int.MaxValue))).IsEqualTo(-1);
     }
 
     [Test]
-    public void Coins_can_be_specified_in_silvers()
+    public async Task Coins_can_be_specified_in_silvers()
     {
         Coin sut = new(12, 00);
         int actual = sut.Amount;
-        Assert.Equal(1200, actual);
+        await Assert.That(actual).IsEqualTo(1200);
     }
 
     [Test]
-    public void Coins_can_be_specified_in_gold()
+    public async Task Coins_can_be_specified_in_gold()
     {
         Coin sut = new(12, 00, 00);
         int actual = sut.Amount;
-        Assert.Equal(12_00_00, actual);
+        await Assert.That(actual).IsEqualTo(12_00_00);
     }
 
     [Test]
-    public void Coins_can_be_greater_than()
+    public async Task Coins_can_be_greater_than()
     {
         Coin one = 1;
-        Assert.True(one > Coin.Zero);
-        Assert.True(one >= Coin.Zero);
-        Assert.True(one >= +one);
+        await Assert.That(one > Coin.Zero).IsTrue();
+        await Assert.That(one >= Coin.Zero).IsTrue();
+        await Assert.That(one >= +one).IsTrue();
     }
 
     [Test]
-    public void Coins_can_be_less_than()
+    public async Task Coins_can_be_less_than()
     {
         Coin one = 1;
-        Assert.True(Coin.Zero < one);
-        Assert.True(Coin.Zero <= one);
-        Assert.True(one <= +one);
+        await Assert.That(Coin.Zero < one).IsTrue();
+        await Assert.That(Coin.Zero <= one).IsTrue();
+        await Assert.That(one <= +one).IsTrue();
     }
 
     [Test]
-    public void Coins_can_be_added()
+    public async Task Coins_can_be_added()
     {
         Coin one = 1;
         Coin two = 2;
         Coin three = one + two;
-        Assert.Equal(3, three.Amount);
+        await Assert.That(three.Amount).IsEqualTo(3);
     }
 
     [Test]
-    public void Coins_can_be_subtracted()
+    public async Task Coins_can_be_subtracted()
     {
         Coin three = 3;
         Coin two = 2;
         Coin one = three - two;
-        Assert.Equal(1, one.Amount);
+        await Assert.That(one.Amount).IsEqualTo(1);
     }
 
     [Test]
-    public void Coins_can_be_multiplied()
+    public async Task Coins_can_be_multiplied()
     {
         Coin two = 2;
         Coin three = 3;
         Coin six = two * three;
-        Assert.Equal(6, six.Amount);
+        await Assert.That(six.Amount).IsEqualTo(6);
     }
 
     [Test]
-    public void Coins_can_be_negated()
+    public async Task Coins_can_be_negated()
     {
         Coin sut = 1_00_00;
         Coin actual = -sut;
-        Assert.Equal(-1_00_00, actual.Amount);
+        await Assert.That(actual.Amount).IsEqualTo(-1_00_00);
     }
 
     [Test]
-    public void Coins_can_be_divided()
+    public async Task Coins_can_be_divided()
     {
         Coin six = 6;
         Coin three = 3;
         Coin two = six / three;
-        Assert.Equal(2, two.Amount);
+        await Assert.That(two.Amount).IsEqualTo(2);
     }
 
     [Test]
-    public void Coins_can_be_moduloed()
+    public async Task Coins_can_be_moduloed()
     {
         Coin ten = 10;
         Coin three = 3;
         Coin one = ten % three;
-        Assert.Equal(1, one.Amount);
+        await Assert.That(one.Amount).IsEqualTo(1);
     }
 
     [Test]
-    public void Coins_cannot_be_divided_by_zero()
+    public async Task Coins_cannot_be_divided_by_zero()
     {
         Coin dividend = 1;
         void DivideByZero()
@@ -184,62 +184,69 @@ public class CoinTest
             Coin _ = dividend / Coin.Zero;
         }
 
-        Assert.Throws<DivideByZeroException>(DivideByZero);
+        await Assert.That(DivideByZero).Throws<DivideByZeroException>();
     }
 
     [Test]
-    public void Coins_can_be_incremented()
+    public async Task Coins_can_be_incremented()
     {
         Coin coin = 1;
         coin++;
-        Assert.Equal(2, coin.Amount);
+        await Assert.That(coin.Amount).IsEqualTo(2);
     }
 
     [Test]
-    public void Coins_can_be_decremented()
+    public async Task Coins_can_be_decremented()
     {
         Coin coin = 2;
         coin--;
-        Assert.Equal(1, coin.Amount);
+        await Assert.That(coin.Amount).IsEqualTo(1);
     }
 
     [Test]
-    public void Coins_can_be_assigned_to_int()
+    public async Task Coins_can_be_assigned_to_int()
     {
         Coin two = 2;
         int intTwo = two;
-        Assert.Equal(2, intTwo);
+        await Assert.That(intTwo).IsEqualTo(2);
     }
 
     [Test]
-    public void Coins_can_be_sorted()
+    public async Task Coins_can_be_sorted()
     {
         // This should test the generic IComparable<T> which prevents unnecessary boxing
         // although there is no way to test that directly
         List<Coin> coins = [10, 5, 20];
         coins.Sort();
-        Assert.Collection(coins, coin => Assert.Equal(5, coin.Amount), coin => Assert.Equal(10, coin.Amount), coin => Assert.Equal(20, coin.Amount));
+        await Assert.That(coins).HasCount().EqualTo(3);
+        await Assert.That(coins[0].Amount).IsEqualTo(5);
+        await Assert.That(coins[1].Amount).IsEqualTo(10);
+        await Assert.That(coins[2].Amount).IsEqualTo(20);
     }
 
     [Test]
-    public void Coins_can_be_sorted_when_boxed()
+    public async Task Coins_can_be_sorted_when_boxed()
     {
         // This tests the non-generic IComparable which is used in boxing scenarios
         List<object> coins = [new Coin(10), new Coin(5), new Coin(20)];
         coins.Sort();
-        Assert.Collection(coins.Cast<Coin>(), coin => Assert.Equal(5, coin.Amount), coin => Assert.Equal(10, coin.Amount), coin => Assert.Equal(20, coin.Amount));
+        List<Coin> coinList = [.. coins.Cast<Coin>()];
+        await Assert.That(coinList).HasCount().EqualTo(3);
+        await Assert.That(coinList[0].Amount).IsEqualTo(5);
+        await Assert.That(coinList[1].Amount).IsEqualTo(10);
+        await Assert.That(coinList[2].Amount).IsEqualTo(20);
     }
 
     [Test]
-    public void Coins_can_be_sorted_after_null()
+    public async Task Coins_can_be_sorted_after_null()
     {
         Coin sut = Coin.Zero;
         int actual = sut.CompareTo(null);
-        Assert.Equal(1, actual);
+        await Assert.That(actual).IsEqualTo(1);
     }
 
     [Test]
-    public void Coins_cannot_be_sorted_after_other_types()
+    public async Task Coins_cannot_be_sorted_after_other_types()
     {
         Coin sut = Coin.Zero;
         void CompareToString()
@@ -247,20 +254,19 @@ public class CoinTest
             int _ = sut.CompareTo("0");
         }
 
-        ArgumentException reason = Assert.Throws<ArgumentException>("obj", CompareToString);
-        Assert.StartsWith("Object must be of type Coin", reason.Message, StringComparison.Ordinal);
+        await Assert.That(CompareToString).Throws<ArgumentException>().WithParameterName("obj").And.Member(ex => ex.Message, m => m.StartsWith("Object must be of type Coin"));
     }
 
     [Test]
-    public void Coins_can_be_linked_in_chat()
+    public async Task Coins_can_be_linked_in_chat()
     {
         Coin sut = 1_00_00;
         CoinLink actual = sut.GetChatLink();
-        Assert.Equal(sut.Amount, actual.Coins.Amount);
+        await Assert.That(actual.Coins.Amount).IsEqualTo(sut.Amount);
     }
 
     [Test]
-    public void Coins_can_be_json_serialized_roundtrip()
+    public async Task Coins_can_be_json_serialized_roundtrip()
     {
         Coin sut = 1_00_00;
 #if NET7_0_OR_GREATER
@@ -270,6 +276,6 @@ public class CoinTest
         string json = JsonSerializer.Serialize(sut);
         Coin actual = JsonSerializer.Deserialize<Coin>(json)!;
 #endif
-        Assert.Equal(sut.Amount, actual.Amount);
+        await Assert.That(actual.Amount).IsEqualTo(sut.Amount);
     }
 }

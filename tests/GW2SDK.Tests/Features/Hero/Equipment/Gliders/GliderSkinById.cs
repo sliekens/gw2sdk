@@ -11,7 +11,7 @@ public class GliderSkinById(Gw2Client sut)
     {
         const int id = 58;
         (GliderSkin actual, MessageContext context) = await sut.Hero.Equipment.Gliders.GetGliderSkinById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.Equal(id, actual.Id);
+        await Assert.That(context).IsNotNull();
+        await Assert.That(actual.Id).IsEqualTo(id);
     }
 }

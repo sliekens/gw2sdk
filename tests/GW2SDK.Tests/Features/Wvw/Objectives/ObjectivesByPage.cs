@@ -11,13 +11,16 @@ public class ObjectivesByPage(Gw2Client sut)
     {
         const int pageSize = 3;
         (HashSet<Objective> actual, MessageContext context) = await sut.Wvw.GetObjectivesByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context.Links);
-        Assert.Equal(pageSize, context.PageSize);
-        Assert.Equal(pageSize, context.ResultCount);
-        Assert.True(context.PageTotal > 0);
-        Assert.True(context.ResultTotal > 0);
-        Assert.Equal(pageSize, actual.Count);
-        Assert.All(actual, Assert.NotNull);
-        Assert.All(actual, entry => Assert.True(entry.MarkerIconUrl is null or { IsAbsoluteUri: true }));
+        await Assert.That(context.Links).IsNotNull();
+        await Assert.That(context).Member(c => c.PageSize, m => m.IsEqualTo(pageSize));
+        await Assert.That(context).Member(c => c.ResultCount, m => m.IsEqualTo(pageSize));
+        await Assert.That(context.PageTotal > 0).IsTrue();
+        await Assert.That(context.ResultTotal > 0).IsTrue();
+        await Assert.That(actual).HasCount(pageSize);
+        foreach (Objective entry in actual)
+        {
+            await Assert.That(entry).IsNotNull();
+            await Assert.That(entry.MarkerIconUrl is null or { IsAbsoluteUri: true }).IsTrue();
+        }
     }
 }

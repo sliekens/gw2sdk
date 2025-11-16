@@ -1,4 +1,4 @@
-﻿using GuildWars2.Tests.TestInfrastructure.Composition;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Hero.Masteries;
@@ -11,11 +11,11 @@ public class MasteryTrackProgress(Gw2Client sut)
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
         (HashSet<GuildWars2.Hero.Masteries.MasteryTrackProgress> actual, _) = await sut.Hero.Masteries.GetMasteryTrackProgress(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.All(actual, progress =>
+        await Assert.That(actual).IsNotEmpty();
+        foreach (GuildWars2.Hero.Masteries.MasteryTrackProgress progress in actual)
         {
-            Assert.True(progress.Id > 0);
-            Assert.True(progress.Level > 0);
-        });
+            await Assert.That(progress.Id > 0).IsTrue();
+            await Assert.That(progress.Level > 0).IsTrue();
+        }
     }
 }

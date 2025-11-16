@@ -11,7 +11,10 @@ public class RankById(Gw2Client sut)
     {
         const int id = 4;
         (Rank actual, MessageContext context) = await sut.Pvp.GetRankById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.Equal(id, actual.Id);
+        using (Assert.Multiple())
+        {
+            await Assert.That(context).IsNotNull();
+            await Assert.That(actual.Id).IsEqualTo(id);
+        }
     }
 }

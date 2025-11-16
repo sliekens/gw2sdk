@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using System.Runtime.Versioning;
 
 using GuildWars2.Hero.Equipment.Mounts;
@@ -22,11 +22,11 @@ public class GameLinkTest
 
     [Test]
     [SupportedOSPlatform("windows")]
-    public void Name_can_be_read_from_Mumble_link()
+    public async Task Name_can_be_read_from_Mumble_link()
     {
         using GameLink sut = GameLink.Open();
         GameTick actual = sut.GetSnapshot();
-        Assert.Equal("Guild Wars 2", actual.Name);
+        await Assert.That(actual.Name).IsEqualTo("Guild Wars 2");
     }
 
     [Test]
@@ -37,39 +37,39 @@ public class GameLinkTest
         GameLinkTestObserver actual = new();
         sut.Subscribe(actual);
         await actual.WaitHandle.WaitAsync(TimeSpan.FromSeconds(3), TimeProvider.System, TestContext.Current!.Execution.CancellationToken);
-        Assert.True(actual.Last.UiTick != actual.First.UiTick, "GameLink should not re-publish the same tick twice");
+        await Assert.That(actual.Last.UiTick != actual.First.UiTick).IsTrue().Because("GameLink should not re-publish the same tick twice");
     }
 
     [Test]
     [SupportedOSPlatform("windows")]
-    public void The_link_provides_context()
+    public async Task The_link_provides_context()
     {
         using GameLink sut = GameLink.Open();
         GameTick gameTick = sut.GetSnapshot();
-        Assert.True(gameTick.Context.BuildId > 100_000, "Game build should be over 100,000");
+        await Assert.That(gameTick.Context.BuildId).IsGreaterThan((uint)100_000).Because("Game build should be over 100,000");
         IPEndPoint server = gameTick.Context.ServerAddress;
-        Assert.NotEmpty(server.ToString());
+        await Assert.That(server.ToString()).IsNotEmpty();
         if (gameTick.Context.IsMounted)
         {
-            Assert.True(Enum.IsDefined(typeof(MountName), gameTick.Context.Mount));
+            await Assert.That(Enum.IsDefined(typeof(MountName), gameTick.Context.Mount)).IsTrue();
         }
 
         // Port is not specified
-        Assert.Equal(0, server.Port);
+        await Assert.That(server.Port).IsEqualTo(0);
     }
 
     [Test]
     [SupportedOSPlatform("windows")]
-    public void The_link_provides_identity()
+    public async Task The_link_provides_identity()
     {
         using GameLink sut = GameLink.Open();
         Identity? actual = sut.GetSnapshot().GetIdentity();
-        Assert.NotNull(actual);
-        Assert.NotEmpty(actual.Name);
+        await Assert.That(actual).IsNotNull()
+            .And.Member(a => a.Name, m => m.IsNotEmpty());
 #if NET
-        Assert.True(Enum.IsDefined(actual.UiSize));
+        await Assert.That(Enum.IsDefined(actual!.UiSize)).IsTrue();
 #else
-        Assert.True(Enum.IsDefined(typeof(UiSize), actual.UiSize));
+        await TUnit.Assertions.Assert.That(Enum.IsDefined(typeof(UiSize), actual!.UiSize)).IsTrue();
 #endif
     }
 }

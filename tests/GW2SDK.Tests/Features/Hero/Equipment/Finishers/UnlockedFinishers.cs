@@ -14,17 +14,17 @@ public class UnlockedFinishers(Gw2Client sut)
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
         (HashSet<UnlockedFinisher> actual, _) = await sut.Hero.Equipment.Finishers.GetUnlockedFinishers(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.All(actual, entry =>
+        await Assert.That(actual).IsNotEmpty();
+        foreach (UnlockedFinisher entry in actual)
         {
-            Assert.True(entry.Id > 0);
+            await Assert.That(entry.Id > 0).IsTrue();
             if (entry.Permanent)
             {
-                Assert.Null(entry.Quantity);
+                await Assert.That(entry.Quantity).IsNull();
             }
             else
             {
-                Assert.True(entry.Quantity >= 0);
+                await Assert.That(entry.Quantity >= 0).IsTrue();
             }
 
             string json;
@@ -36,7 +36,7 @@ public class UnlockedFinishers(Gw2Client sut)
             json = JsonSerializer.Serialize(entry);
             roundTrip = JsonSerializer.Deserialize<UnlockedFinisher>(json);
 #endif
-            Assert.Equal(entry, roundTrip);
-        });
+            await Assert.That(roundTrip).IsEqualTo(entry);
+        }
     }
 }

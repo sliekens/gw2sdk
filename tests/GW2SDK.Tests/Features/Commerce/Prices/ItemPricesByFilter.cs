@@ -11,9 +11,15 @@ public class ItemPricesByFilter(Gw2Client sut)
     {
         HashSet<int> ids = [24, 19699, 35984];
         (HashSet<ItemPrice> actual, MessageContext context) = await sut.Commerce.GetItemPricesByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(ids.Count, context.ResultCount);
-        Assert.True(context.ResultTotal > ids.Count);
-        Assert.Equal(ids.Count, actual.Count);
-        Assert.Collection(ids, first => Assert.Contains(actual, found => found.Id == first), second => Assert.Contains(actual, found => found.Id == second), third => Assert.Contains(actual, found => found.Id == third));
+        await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(ids.Count))
+            .And.Member(c => c.ResultTotal, rt => rt.IsNotNull().And.IsGreaterThan(ids.Count));
+        await Assert.That(actual).HasCount().EqualTo(ids.Count);
+        using (Assert.Multiple())
+        {
+            foreach (int id in ids)
+            {
+                await Assert.That(actual).Contains(found => found.Id == id);
+            }
+        }
     }
 }

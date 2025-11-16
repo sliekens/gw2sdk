@@ -11,6 +11,6 @@ public class MatchByWorldId(Gw2Client sut)
     {
         const int worldId = 2006;
         (Match actual, _) = await sut.Wvw.GetMatchByWorldId(worldId, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(actual);
+        await Assert.That(actual).IsNotNull();
     }
 }

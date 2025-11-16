@@ -12,24 +12,33 @@ public class Miniatures(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<Miniature> actual, MessageContext context) = await sut.Hero.Equipment.Miniatures.GetMiniatures(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, entry =>
+        await Assert.That(actual).IsNotEmpty();
+        await Assert.That(context.ResultCount).IsEqualTo(actual.Count);
+        await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);
+
+        using (Assert.Multiple())
         {
-            Assert.True(entry.Id > 0);
-            Assert.NotEmpty(entry.Name);
-            Assert.True(entry.IconUrl is null || entry.IconUrl.IsAbsoluteUri);
-            Assert.True(entry.Order >= 0);
-            Assert.True(entry.ItemId >= 0);
+            foreach (Miniature entry in actual)
+            {
+                await Assert.That(entry.Id).IsGreaterThan(0);
+                await Assert.That(entry.Name).IsNotEmpty();
+
+                if (entry.IconUrl is not null)
+                {
+                    await Assert.That(entry.IconUrl.IsAbsoluteUri).IsTrue();
+                }
+
+                await Assert.That(entry.Order).IsGreaterThanOrEqualTo(0);
+                await Assert.That(entry.ItemId).IsGreaterThanOrEqualTo(0);
 #if NET
-            string json = JsonSerializer.Serialize(entry, Common.TestJsonContext.Default.Miniature);
-            Miniature? roundtrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.Miniature);
+                string json = JsonSerializer.Serialize(entry, Common.TestJsonContext.Default.Miniature);
+                Miniature? roundtrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.Miniature);
 #else
-            string json = JsonSerializer.Serialize(entry);
-            Miniature? roundtrip = JsonSerializer.Deserialize<Miniature>(json);
+                string json = JsonSerializer.Serialize(entry);
+                Miniature? roundtrip = JsonSerializer.Deserialize<Miniature>(json);
 #endif
-            Assert.Equal(entry, roundtrip);
-        });
+                await Assert.That(entry).IsEqualTo(roundtrip);
+            }
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿using GuildWars2.Guilds.Teams;
+using GuildWars2.Guilds.Teams;
 using GuildWars2.Hero.Accounts;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.Tests.TestInfrastructure.Configuration;
@@ -16,24 +16,30 @@ public class GuildTeams(Gw2Client sut)
         foreach (string guildId in account.LeaderOfGuildIds!)
         {
             (List<GuildTeam> actual, _) = await sut.Guilds.GetGuildTeams(guildId, guildLeader.Token, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-            Assert.NotNull(actual);
-            Assert.All(actual, entry =>
+            await Assert.That(actual).IsNotNull();
+            using (Assert.Multiple())
             {
-                Assert.True(entry.Id > 0);
-                Assert.True(entry.State.IsDefined());
-                Assert.NotEmpty(entry.Name);
-                Assert.All(entry.Members, member =>
+                foreach (GuildTeam entry in actual)
                 {
-                    Assert.NotEmpty(member.Name);
-                    Assert.True(member.Role.IsDefined());
-                });
-                Assert.All(entry.Games, game =>
-                {
-                    Assert.True(game.Result.IsDefined());
-                    Assert.True(game.Team.IsDefined());
-                    Assert.True(game.RatingType.IsDefined());
-                });
-            });
+                    await Assert.That(entry)
+                        .Member(e => e.Id, m => m.IsGreaterThan(0))
+                        .And.Member(e => e.State.IsDefined(), m => m.IsTrue())
+                        .And.Member(e => e.Name, m => m.IsNotEmpty());
+                    foreach (GuildTeamMember member in entry.Members)
+                    {
+                        await Assert.That(member)
+                            .Member(m => m.Name, n => n.IsNotEmpty())
+                            .And.Member(m => m.Role.IsDefined(), r => r.IsTrue());
+                    }
+                    foreach (Game game in entry.Games)
+                    {
+                        await Assert.That(game)
+                            .Member(g => g.Result.IsDefined(), r => r.IsTrue())
+                            .And.Member(g => g.Team.IsDefined(), t => t.IsTrue())
+                            .And.Member(g => g.RatingType.IsDefined(), rt => rt.IsTrue());
+                    }
+                }
+            }
         }
     }
 }

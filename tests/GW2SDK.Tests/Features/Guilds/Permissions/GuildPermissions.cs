@@ -1,4 +1,4 @@
-﻿using GuildWars2.Guilds.Permissions;
+using GuildWars2.Guilds.Permissions;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Guilds.Permissions;
@@ -10,14 +10,17 @@ public class GuildPermissions(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<GuildPermissionSummary> actual, MessageContext context) = await sut.Guilds.GetGuildPermissions(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, entry =>
+        await Assert.That(actual).IsNotEmpty();
+        await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(actual.Count))
+            .And.Member(c => c.ResultTotal, rt => rt.IsEqualTo(actual.Count));
+        using (Assert.Multiple())
         {
-            Assert.NotEmpty(entry.Id);
-            Assert.NotEmpty(entry.Name);
-            Assert.NotEmpty(entry.Description);
-        });
+            foreach (GuildPermissionSummary entry in actual)
+            {
+                await Assert.That(entry.Id).IsNotEmpty();
+                await Assert.That(entry.Name).IsNotEmpty();
+                await Assert.That(entry.Description).IsNotEmpty();
+            }
+        }
     }
 }

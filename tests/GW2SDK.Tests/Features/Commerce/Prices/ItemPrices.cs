@@ -15,33 +15,34 @@ public class ItemPrices(Gw2Client sut)
         //  but the extra requests will be cancelled when this test completes
         await foreach ((ItemPrice actual, MessageContext context) in sut.Commerce.GetItemPricesBulk(degreeOfParallelism: 3, cancellationToken: TestContext.Current!.Execution.CancellationToken).Take(600))
         {
-            Assert.NotNull(context);
-            Assert.True(actual.Id > 0);
+            await Assert.That(context).IsNotNull();
+            await Assert.That(actual.Id).IsGreaterThan(0);
             if (actual.TotalSupply == 0)
             {
-                Assert.True(actual.BestAsk == Coin.Zero);
+                await Assert.That(actual.BestAsk).IsEqualTo(Coin.Zero);
             }
             else
             {
-                Assert.True(actual.BestAsk > Coin.Zero);
+                await Assert.That(actual.BestAsk).IsGreaterThan(Coin.Zero);
             }
 
             if (actual.TotalDemand == 0)
             {
-                Assert.True(actual.BestBid == Coin.Zero);
+                await Assert.That(actual.BestBid).IsEqualTo(Coin.Zero);
             }
             else
             {
-                Assert.True(actual.BestBid > Coin.Zero);
+                await Assert.That(actual.BestBid).IsGreaterThan(Coin.Zero);
             }
 
             if (actual is { TotalDemand: 0 } or { TotalSupply: 0 })
             {
-                Assert.Equal(Coin.Zero, actual.BidAskSpread);
+                await Assert.That(actual.BidAskSpread).IsEqualTo(Coin.Zero);
             }
             else
             {
-                Assert.Equal(actual.BestAsk - actual.BestBid, actual.BidAskSpread);
+                Coin expectedSpread = actual.BestAsk - actual.BestBid;
+                await Assert.That(actual.BidAskSpread).IsEqualTo(expectedSpread);
             }
         }
     }

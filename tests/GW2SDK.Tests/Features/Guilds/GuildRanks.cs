@@ -1,4 +1,4 @@
-﻿using GuildWars2.Guilds.Ranks;
+using GuildWars2.Guilds.Ranks;
 using GuildWars2.Hero.Accounts;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.Tests.TestInfrastructure.Configuration;
@@ -16,7 +16,7 @@ public class GuildRanks(Gw2Client sut)
         foreach (string? guildId in account.LeaderOfGuildIds!)
         {
             (List<GuildRank> actual, _) = await sut.Guilds.GetGuildRanks(guildId, guildLeader.Token, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-            Assert.NotEmpty(actual);
+            await Assert.That(actual).IsNotEmpty();
         }
     }
 }

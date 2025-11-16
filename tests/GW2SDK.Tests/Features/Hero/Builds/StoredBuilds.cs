@@ -11,16 +11,16 @@ public class StoredBuilds(Gw2Client sut)
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
         (IReadOnlyList<GuildWars2.Hero.Builds.Build> actual, _) = await sut.Hero.Builds.GetStoredBuilds(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.All(actual, space =>
+        await Assert.That(actual).IsNotEmpty();
+        foreach (GuildWars2.Hero.Builds.Build space in actual)
         {
-            Assert.NotNull(space.Name);
-            Assert.True(space.Profession.IsDefined());
-            Assert.True(space.Specialization1?.Id is null or > 0);
-            Assert.True(space.Specialization2?.Id is null or > 0);
-            Assert.True(space.Specialization3?.Id is null or > 0);
-            Assert.NotNull(space.Skills);
-            Assert.NotNull(space.AquaticSkills);
-        });
+            await Assert.That(space.Name).IsNotNull();
+            await Assert.That(space.Profession.IsDefined()).IsTrue();
+            await Assert.That(space.Specialization1?.Id is null or > 0).IsTrue();
+            await Assert.That(space.Specialization2?.Id is null or > 0).IsTrue();
+            await Assert.That(space.Specialization3?.Id is null or > 0).IsTrue();
+            await Assert.That(space.Skills).IsNotNull();
+            await Assert.That(space.AquaticSkills).IsNotNull();
+        }
     }
 }

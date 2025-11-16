@@ -1,4 +1,4 @@
-﻿using GuildWars2.Hero.StoryJournal.Stories;
+using GuildWars2.Hero.StoryJournal.Stories;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.StoryJournal.Stories;
@@ -10,12 +10,15 @@ public class Storylines(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<Storyline> actual, MessageContext context) = await sut.Hero.StoryJournal.GetStorylines(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, entry =>
+        await Assert.That(actual).IsNotEmpty();
+        await Assert.That(context).Member(c => c.ResultCount, resultCount => resultCount.IsEqualTo(actual.Count))
+            .And.Member(c => c.ResultTotal, resultTotal => resultTotal.IsEqualTo(actual.Count));
+        using (Assert.Multiple())
         {
-            Assert.NotEmpty(entry.Id);
-        });
+            foreach (Storyline entry in actual)
+            {
+                await Assert.That(entry.Id).IsNotEmpty();
+            }
+        }
     }
 }

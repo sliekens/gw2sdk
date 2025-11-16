@@ -1,4 +1,4 @@
-﻿using GuildWars2.Pve.MapChests;
+using GuildWars2.Pve.MapChests;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Pve.MapChests;
@@ -10,12 +10,12 @@ public class MapChests(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<MapChest> actual, MessageContext context) = await sut.Pve.MapChests.GetMapChests(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, entry =>
+        await Assert.That(actual).IsNotEmpty();
+        await Assert.That(context).Member(c => c.ResultCount, m => m.IsEqualTo(actual.Count));
+        await Assert.That(context).Member(c => c.ResultTotal, m => m.IsEqualTo(actual.Count));
+        foreach (MapChest entry in actual)
         {
-            Assert.NotEmpty(entry.Id);
-        });
+            await Assert.That(entry.Id).IsNotEmpty();
+        }
     }
 }

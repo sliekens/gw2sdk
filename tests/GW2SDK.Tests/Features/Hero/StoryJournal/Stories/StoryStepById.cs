@@ -11,7 +11,7 @@ public class StoryStepById(Gw2Client sut)
     {
         const int id = 15;
         (StoryStep actual, MessageContext context) = await sut.Hero.StoryJournal.GetStoryStepById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.Equal(id, actual.Id);
+        await Assert.That(context).IsNotNull();
+        await Assert.That(actual.Id).IsEqualTo(id);
     }
 }

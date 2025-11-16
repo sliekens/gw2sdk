@@ -10,54 +10,57 @@ public class Seasons(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<Season> actual, MessageContext context) = await sut.Pvp.GetSeasons(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, entry =>
+        using (Assert.Multiple())
         {
-            Assert.NotEmpty(entry.Id);
-            Assert.NotEmpty(entry.Name);
-            if (entry.Leaderboards.Legendary is not null)
+            await Assert.That(actual).IsNotEmpty();
+            await Assert.That(context).Member(c => c.ResultCount, m => m.IsEqualTo(actual.Count));
+            await Assert.That(context).Member(c => c.ResultTotal, m => m.IsEqualTo(actual.Count));
+            foreach (Season entry in actual)
             {
-                Assert.Empty(entry.Leaderboards.Legendary.Settings.Name);
-                Assert.NotEmpty(entry.Leaderboards.Legendary.Settings.ScoringId);
-                Assert.All(entry.Leaderboards.Legendary.Settings.Tiers, tier =>
+                await Assert.That(entry.Id).IsNotEmpty();
+                await Assert.That(entry.Name).IsNotEmpty();
+                if (entry.Leaderboards.Legendary is not null)
                 {
-                    Assert.Empty(tier.Name);
-                    if (tier.Kind.HasValue)
+                    await Assert.That(entry.Leaderboards.Legendary.Settings.Name).IsEmpty();
+                    await Assert.That(entry.Leaderboards.Legendary.Settings.ScoringId).IsNotEmpty();
+                    foreach (LeaderboardTier tier in entry.Leaderboards.Legendary.Settings.Tiers)
                     {
-                        Assert.True(tier.Kind.Value.IsDefined());
+                        await Assert.That(tier.Name).IsEmpty();
+                        if (tier.Kind.HasValue)
+                        {
+                            await Assert.That(tier.Kind.Value.IsDefined()).IsTrue();
+                        }
                     }
-                });
-            }
+                }
 
-            if (entry.Leaderboards.Guild is not null)
-            {
-                Assert.Empty(entry.Leaderboards.Guild.Settings.Name);
-                Assert.NotEmpty(entry.Leaderboards.Guild.Settings.ScoringId);
-                Assert.All(entry.Leaderboards.Guild.Settings.Tiers, tier =>
+                if (entry.Leaderboards.Guild is not null)
                 {
-                    Assert.NotEmpty(tier.Name);
-                    if (tier.Kind.HasValue)
+                    await Assert.That(entry.Leaderboards.Guild.Settings.Name).IsEmpty();
+                    await Assert.That(entry.Leaderboards.Guild.Settings.ScoringId).IsNotEmpty();
+                    foreach (LeaderboardTier tier in entry.Leaderboards.Guild.Settings.Tiers)
                     {
-                        Assert.True(tier.Kind.Value.IsDefined());
+                        await Assert.That(tier.Name).IsNotEmpty();
+                        if (tier.Kind.HasValue)
+                        {
+                            await Assert.That(tier.Kind.Value.IsDefined()).IsTrue();
+                        }
                     }
-                });
-            }
+                }
 
-            if (entry.Leaderboards.Ladder is not null)
-            {
-                Assert.Empty(entry.Leaderboards.Ladder.Settings.Name);
-                Assert.NotEmpty(entry.Leaderboards.Ladder.Settings.ScoringId);
-                Assert.All(entry.Leaderboards.Ladder.Settings.Tiers, tier =>
+                if (entry.Leaderboards.Ladder is not null)
                 {
-                    Assert.Empty(tier.Name);
-                    if (tier.Kind.HasValue)
+                    await Assert.That(entry.Leaderboards.Ladder.Settings.Name).IsEmpty();
+                    await Assert.That(entry.Leaderboards.Ladder.Settings.ScoringId).IsNotEmpty();
+                    foreach (LeaderboardTier tier in entry.Leaderboards.Ladder.Settings.Tiers)
                     {
-                        Assert.True(tier.Kind.Value.IsDefined());
+                        await Assert.That(tier.Name).IsEmpty();
+                        if (tier.Kind.HasValue)
+                        {
+                            await Assert.That(tier.Kind.Value.IsDefined()).IsTrue();
+                        }
                     }
-                });
+                }
             }
-        });
+        }
     }
 }

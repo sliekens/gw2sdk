@@ -12,11 +12,11 @@ public class UnlockedDecorations(Gw2Client sut)
     {
         ApiKey token = TestConfiguration.ApiKey;
         (HashSet<UnlockedDecoration> actual, _) = await sut.Pve.Home.GetUnlockedDecorations(token.Key, TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.All(actual, entry =>
+        await Assert.That(actual).IsNotEmpty();
+        foreach (UnlockedDecoration entry in actual)
         {
-            Assert.True(entry.Id > 0);
-            Assert.True(entry.Count > 0);
-        });
+            await Assert.That(entry.Id > 0).IsTrue();
+            await Assert.That(entry.Count > 0).IsTrue();
+        }
     }
 }

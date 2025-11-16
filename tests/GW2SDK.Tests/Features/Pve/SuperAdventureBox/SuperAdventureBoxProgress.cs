@@ -1,4 +1,4 @@
-﻿using GuildWars2.Tests.TestInfrastructure.Composition;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Pve.SuperAdventureBox;
@@ -12,25 +12,27 @@ public class SuperAdventureBoxProgress(Gw2Client sut)
         TestCharacter character = TestConfiguration.TestCharacter;
         ApiKey accessToken = TestConfiguration.ApiKey;
         (GuildWars2.Pve.SuperAdventureBox.SuperAdventureBoxProgress actual, _) = await sut.Pve.SuperAdventureBox.GetSuperAdventureBoxProgress(character.Name, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual.Zones);
-        Assert.All(actual.Zones, zone =>
+        await Assert.That(actual.Zones).IsNotEmpty();
+        foreach (GuildWars2.Pve.SuperAdventureBox.SuperAdventureBoxZone zone in actual.Zones)
         {
-            Assert.True(zone.Id > 0);
-            Assert.True(zone.Mode.IsDefined());
-            Assert.True(zone.World > 0);
-            Assert.True(zone.Zone > 0);
-        });
-        Assert.NotEmpty(actual.Unlocks);
-        Assert.All(actual.Unlocks, upgrade =>
+            await Assert.That(zone.Id > 0).IsTrue();
+            await Assert.That(zone.Mode.IsDefined()).IsTrue();
+            await Assert.That(zone.World > 0).IsTrue();
+            await Assert.That(zone.Zone > 0).IsTrue();
+        }
+
+        await Assert.That(actual.Unlocks).IsNotEmpty();
+        foreach (GuildWars2.Pve.SuperAdventureBox.SuperAdventureBoxUpgrade upgrade in actual.Unlocks)
         {
-            Assert.True(upgrade.Id > 0);
-            Assert.NotNull(upgrade.Name);
-        });
-        Assert.NotEmpty(actual.Songs);
-        Assert.All(actual.Songs, song =>
+            await Assert.That(upgrade.Id > 0).IsTrue();
+            await Assert.That(upgrade.Name).IsNotNull();
+        }
+
+        await Assert.That(actual.Songs).IsNotEmpty();
+        foreach (GuildWars2.Pve.SuperAdventureBox.SuperAdventureBoxSong song in actual.Songs)
         {
-            Assert.True(song.Id > 0);
-            Assert.NotEmpty(song.Name);
-        });
+            await Assert.That(song.Id > 0).IsTrue();
+            await Assert.That(song.Name).IsNotEmpty();
+        }
     }
 }

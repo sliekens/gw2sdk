@@ -1,4 +1,4 @@
-﻿using GuildWars2.Pvp.Standings;
+using GuildWars2.Pvp.Standings;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.Tests.TestInfrastructure.Configuration;
 
@@ -12,6 +12,9 @@ public class Standings(Gw2Client sut)
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
         (HashSet<Standing> actual, _) = await sut.Pvp.GetStandings(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
+        using (Assert.Multiple())
+        {
+            await Assert.That(actual).IsNotEmpty();
+        }
     }
 }

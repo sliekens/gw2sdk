@@ -10,14 +10,17 @@ public class Quaggans(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<Quaggan> actual, MessageContext context) = await sut.Quaggans.GetQuaggans(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, entry =>
+        using (Assert.Multiple())
         {
-            Assert.NotEmpty(entry.Id);
-            Assert.NotNull(entry.ImageUrl);
-            Assert.True(entry.ImageUrl.IsAbsoluteUri);
-        });
+            await Assert.That(actual).IsNotEmpty();
+            await Assert.That(context).Member(c => c.ResultCount, c => c.IsEqualTo(actual.Count));
+            await Assert.That(context).Member(c => c.ResultTotal, c => c.IsEqualTo(actual.Count));
+            foreach (Quaggan entry in actual)
+            {
+                await Assert.That(entry.Id).IsNotEmpty();
+                await Assert.That(entry.ImageUrl).IsNotNull();
+                await Assert.That(entry.ImageUrl.IsAbsoluteUri).IsTrue();
+            }
+        }
     }
 }

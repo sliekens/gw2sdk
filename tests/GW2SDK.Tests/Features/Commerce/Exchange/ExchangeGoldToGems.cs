@@ -11,8 +11,8 @@ public class ExchangeGoldToGems(Gw2Client sut)
     {
         Coin coins = new(100, 0, 0);
         (GoldToGems actual, MessageContext context) = await sut.Commerce.ExchangeGoldToGems(coins, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.True(actual.Gems > 0, "100 gold should be worth some gems.");
-        Assert.True(actual.ExchangeRate > 0, "Gems can't be free.");
+        await Assert.That(context).IsNotNull();
+        await Assert.That(actual.Gems).IsGreaterThan(0).Because("100 gold should be worth some gems.");
+        await Assert.That(actual.ExchangeRate).IsGreaterThan(0).Because("Gems can't be free.");
     }
 }

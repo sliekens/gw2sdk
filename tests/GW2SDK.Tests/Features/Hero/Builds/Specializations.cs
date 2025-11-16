@@ -10,18 +10,18 @@ public class Specializations(Gw2Client sut)
     public async Task Specializations_can_be_listed()
     {
         (HashSet<Specialization> actual, MessageContext context) = await sut.Hero.Builds.GetSpecializations(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, specialization =>
+        await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);
+        foreach (Specialization specialization in actual)
         {
-            Assert.True(specialization.Id >= 1);
-            Assert.NotEmpty(specialization.Name);
-            Assert.True(specialization.Profession.IsDefined());
-            Assert.NotEmpty(specialization.MinorTraitIds);
-            Assert.NotEmpty(specialization.MajorTraitIds);
-            Assert.True(specialization.IconUrl.IsAbsoluteUri);
-            Assert.True(specialization.BackgroundUrl.IsAbsoluteUri);
-            Assert.True(specialization.ProfessionBigIconUrl == null || specialization.ProfessionBigIconUrl.IsAbsoluteUri);
-            Assert.True(specialization.ProfessionIconUrl == null || specialization.ProfessionIconUrl.IsAbsoluteUri);
-        });
+            await Assert.That(specialization.Id).IsGreaterThanOrEqualTo(1);
+            await Assert.That(specialization.Name).IsNotEmpty();
+            await Assert.That(specialization.Profession.IsDefined()).IsTrue();
+            await Assert.That(specialization.MinorTraitIds).IsNotEmpty();
+            await Assert.That(specialization.MajorTraitIds).IsNotEmpty();
+            await Assert.That(specialization.IconUrl.IsAbsoluteUri).IsTrue();
+            await Assert.That(specialization.BackgroundUrl.IsAbsoluteUri).IsTrue();
+            await Assert.That(specialization.ProfessionBigIconUrl == null || specialization.ProfessionBigIconUrl.IsAbsoluteUri).IsTrue();
+            await Assert.That(specialization.ProfessionIconUrl == null || specialization.ProfessionIconUrl.IsAbsoluteUri).IsTrue();
+        }
     }
 }

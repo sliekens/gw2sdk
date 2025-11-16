@@ -15,12 +15,18 @@ public class PointsOfInterestByPage(Gw2Client sut)
         const int mapId = 26;
         const int pageSize = 3;
         (HashSet<PointOfInterest> actual, MessageContext context) = await sut.Exploration.GetPointsOfInterestByPage(continentId, floorId, regionId, mapId, 0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context.Links);
-        Assert.Equal(pageSize, context.PageSize);
-        Assert.Equal(pageSize, context.ResultCount);
-        Assert.True(context.PageTotal > 0);
-        Assert.True(context.ResultTotal > 0);
-        Assert.Equal(pageSize, actual.Count);
-        Assert.All(actual, Assert.NotNull);
+        await Assert.That(context.Links).IsNotNull();
+        await Assert.That(context).Member(c => c.PageSize, ps => ps.IsEqualTo(pageSize))
+            .And.Member(c => c.ResultCount, rc => rc.IsEqualTo(pageSize))
+            .And.Member(c => c.PageTotal, pt => pt.IsNotNull().And.IsGreaterThan(0))
+            .And.Member(c => c.ResultTotal, rt => rt.IsNotNull().And.IsGreaterThan(0));
+        await Assert.That(actual).HasCount().EqualTo(pageSize);
+        using (Assert.Multiple())
+        {
+            foreach (PointOfInterest item in actual)
+            {
+                await Assert.That(item).IsNotNull();
+            }
+        }
     }
 }

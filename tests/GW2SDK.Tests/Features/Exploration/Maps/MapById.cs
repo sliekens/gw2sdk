@@ -1,4 +1,4 @@
-﻿using GuildWars2.Exploration.Maps;
+using GuildWars2.Exploration.Maps;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Exploration.Maps;
@@ -13,7 +13,7 @@ public class MapById(Gw2Client sut)
     public async Task Can_be_found(int continentId, int floorId, int regionId, int mapId)
     {
         (Map actual, MessageContext context) = await sut.Exploration.GetMapById(continentId, floorId, regionId, mapId, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.Equal(mapId, actual.Id);
+        await Assert.That(context).IsNotNull();
+        await Assert.That(actual.Id).IsEqualTo(mapId);
     }
 }

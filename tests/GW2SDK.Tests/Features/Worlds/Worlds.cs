@@ -1,4 +1,4 @@
-﻿using GuildWars2.Tests.TestInfrastructure.Composition;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.Worlds;
 
 namespace GuildWars2.Tests.Features.Worlds;
@@ -10,47 +10,50 @@ public class Worlds(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<World> actual, MessageContext context) = await sut.Worlds.GetWorlds(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.All(actual, world =>
+        await Assert.That(actual).IsNotEmpty();
+        using (Assert.Multiple())
         {
-            Assert.True(world.Id > 0);
-            Assert.NotEmpty(world.Name);
-            if (world.Population != WorldPopulation.Full)
+            foreach (World world in actual)
             {
-                switch (world.Population.ToEnum())
+                await Assert.That(world.Id).IsGreaterThan(0);
+                await Assert.That(world.Name).IsNotEmpty();
+                if (world.Population != WorldPopulation.Full)
                 {
-                    case WorldPopulation.None:
-                        Assert.Equal(0, world.TransferFee);
-                        break;
-                    case WorldPopulation.Low:
-                        Assert.Equal(0, world.TransferFee);
-                        break;
-                    case WorldPopulation.Medium:
-                        Assert.Equal(500, world.TransferFee);
-                        break;
-                    case WorldPopulation.High:
-                        Assert.Equal(1000, world.TransferFee);
-                        break;
-                    case WorldPopulation.VeryHigh:
-                        Assert.Equal(1800, world.TransferFee);
-                        break;
-                    case WorldPopulation.Full:
-                        Assert.Equal(0, world.TransferFee);
-                        break;
-                    case null:
-                        break;
-                    default:
-                        throw new InvalidOperationException("Unexpected population type.");
+                    switch (world.Population.ToEnum())
+                    {
+                        case WorldPopulation.None:
+                            await Assert.That(world.TransferFee).IsEqualTo(0);
+                            break;
+                        case WorldPopulation.Low:
+                            await Assert.That(world.TransferFee).IsEqualTo(0);
+                            break;
+                        case WorldPopulation.Medium:
+                            await Assert.That(world.TransferFee).IsEqualTo(500);
+                            break;
+                        case WorldPopulation.High:
+                            await Assert.That(world.TransferFee).IsEqualTo(1000);
+                            break;
+                        case WorldPopulation.VeryHigh:
+                            await Assert.That(world.TransferFee).IsEqualTo(1800);
+                            break;
+                        case WorldPopulation.Full:
+                            await Assert.That(world.TransferFee).IsEqualTo(0);
+                            break;
+                        case null:
+                            break;
+                        default:
+                            throw new InvalidOperationException("Unexpected population type.");
+                    }
+                }
+
+                await Assert.That(world.Region).IsNotEqualTo(WorldRegion.None);
+                if (world.Id >= 2100)
+                {
+                    await Assert.That(world.Language).IsNotEqualTo(Language.English);
                 }
             }
-
-            Assert.NotEqual(WorldRegion.None, world.Region);
-            if (world.Id >= 2100)
-            {
-                Assert.NotEqual(Language.English, world.Language);
-            }
-        });
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
+            await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(actual.Count));
+            await Assert.That(context).Member(c => c.ResultTotal, rt => rt.IsEqualTo(actual.Count));
+        }
     }
 }

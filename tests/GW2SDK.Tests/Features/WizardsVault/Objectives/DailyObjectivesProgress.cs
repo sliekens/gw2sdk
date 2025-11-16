@@ -11,18 +11,21 @@ public class DailyObjectivesProgress(Gw2Client sut)
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
         (GuildWars2.WizardsVault.Objectives.DailyObjectivesProgress actual, MessageContext context) = await sut.WizardsVault.GetDailyObjectivesProgress(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.True(actual.RewardItemId > 0);
-        Assert.True(actual.RewardAcclaim > 0);
-        Assert.True(actual.Progress >= 0);
-        Assert.True(actual.Goal >= 0);
-        Assert.Equal(actual.Progress, actual.Objectives.Count(objective => objective.Claimed));
-        Assert.NotEmpty(actual.Objectives);
-        Assert.All(actual.Objectives, objective =>
+        using (Assert.Multiple())
         {
-            Assert.True(objective.Id > 0);
-            Assert.NotEmpty(objective.Title);
-            Assert.True(objective.Track.IsDefined());
-            Assert.True(objective.RewardAcclaim > 0);
-        });
+            await Assert.That(actual.RewardItemId).IsGreaterThan(0);
+            await Assert.That(actual.RewardAcclaim).IsGreaterThan(0);
+            await Assert.That(actual.Progress).IsGreaterThanOrEqualTo(0);
+            await Assert.That(actual.Goal).IsGreaterThanOrEqualTo(0);
+            await Assert.That(actual.Objectives.Count(objective => objective.Claimed)).IsEqualTo(actual.Progress);
+            await Assert.That(actual.Objectives).IsNotEmpty();
+            foreach (GuildWars2.WizardsVault.Objectives.ObjectiveProgress objective in actual.Objectives)
+            {
+                await Assert.That(objective.Id).IsGreaterThan(0);
+                await Assert.That(objective.Title).IsNotEmpty();
+                await Assert.That(objective.Track.IsDefined()).IsTrue();
+                await Assert.That(objective.RewardAcclaim).IsGreaterThan(0);
+            }
+        }
     }
 }

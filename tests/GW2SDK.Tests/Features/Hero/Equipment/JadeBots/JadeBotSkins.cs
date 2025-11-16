@@ -13,25 +13,25 @@ public class JadeBotSkins(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<JadeBotSkin> actual, MessageContext context) = await sut.Hero.Equipment.JadeBots.GetJadeBotSkins(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, entry =>
+        await Assert.That(actual).IsNotEmpty();
+        await Assert.That(context.ResultCount).IsEqualTo(actual.Count);
+        await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);
+        foreach (JadeBotSkin entry in actual)
         {
-            Assert.True(entry.Id > 0);
-            Assert.NotEmpty(entry.Name);
+            await Assert.That(entry.Id).IsGreaterThan(0);
+            await Assert.That(entry.Name).IsNotEmpty();
             // Missing description for Roundtail Dragon
             if (entry.Id == 6)
             {
-                Assert.Empty(entry.Description);
+                await Assert.That(entry.Description).IsEmpty();
             }
             else
             {
-                Assert.NotEmpty(entry.Description);
+                await Assert.That(entry.Description).IsNotEmpty();
                 MarkupSyntaxValidator.Validate(entry.Description);
             }
 
-            Assert.True(entry.UnlockItemId > 0);
+            await Assert.That(entry.UnlockItemId).IsGreaterThan(0);
 #if NET
             string json = JsonSerializer.Serialize(entry, Common.TestJsonContext.Default.JadeBotSkin);
             JadeBotSkin? roundtrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.JadeBotSkin);
@@ -39,7 +39,7 @@ public class JadeBotSkins(Gw2Client sut)
             string json = JsonSerializer.Serialize(entry);
             JadeBotSkin? roundtrip = JsonSerializer.Deserialize<JadeBotSkin>(json);
 #endif
-            Assert.Equal(entry, roundtrip);
-        });
+            await Assert.That(roundtrip).IsEqualTo(entry);
+        }
     }
 }

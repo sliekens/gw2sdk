@@ -12,8 +12,8 @@ public class BuildNumbers(Gw2Client sut)
         TestCharacter character = TestConfiguration.TestCharacter;
         ApiKey accessToken = TestConfiguration.ApiKey;
         (HashSet<int> actual, MessageContext context) = await sut.Hero.Builds.GetBuildNumbers(character.Name, accessToken.Key, TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
+        await Assert.That(actual).IsNotEmpty();
+        await Assert.That(context.ResultCount).IsEqualTo(actual.Count);
+        await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);
     }
 }

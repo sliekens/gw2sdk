@@ -10,12 +10,12 @@ public class Glyphs(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<Glyph> actual, MessageContext context) = await sut.Pve.Home.GetGlyphs(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, glyph =>
+        await Assert.That(actual).IsNotEmpty();
+        await Assert.That(context).Member(c => c.ResultTotal, m => m.IsEqualTo(actual.Count));
+        foreach (Glyph glyph in actual)
         {
-            Assert.NotNull(glyph);
-            Assert.NotEmpty(glyph.Id);
-        });
+            await Assert.That(glyph).IsNotNull();
+            await Assert.That(glyph.Id).IsNotEmpty();
+        }
     }
 }

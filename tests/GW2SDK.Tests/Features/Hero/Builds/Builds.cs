@@ -13,16 +13,20 @@ public class Builds(Gw2Client sut)
         TestCharacter character = TestConfiguration.TestCharacter;
         ApiKey accessToken = TestConfiguration.ApiKey;
         (HashSet<BuildTemplate> actual, MessageContext context) = await sut.Hero.Builds.GetBuilds(character.Name, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context.Links);
-        Assert.Equal(50, context.PageSize);
-        Assert.Equal(1, context.PageTotal);
-        Assert.Equal(context.ResultTotal, context.ResultCount);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.NotEmpty(actual);
-        Assert.All(actual, entry =>
+        await Assert.That(context.Links).IsNotNull();
+        await Assert.That(context.PageSize).IsEqualTo(50);
+        await Assert.That(context.PageTotal).IsEqualTo(1);
+        await Assert.That(context.ResultTotal).IsEqualTo(context.ResultCount);
+        await Assert.That(context.ResultCount).IsEqualTo(actual.Count);
+        await Assert.That(actual).IsNotEmpty();
+
+        using (Assert.Multiple())
         {
-            Assert.NotNull(entry);
-            Assert.NotNull(entry.Build);
-        });
+            foreach (BuildTemplate entry in actual)
+            {
+                await Assert.That(entry).IsNotNull();
+                await Assert.That(entry.Build).IsNotNull();
+            }
+        }
     }
 }

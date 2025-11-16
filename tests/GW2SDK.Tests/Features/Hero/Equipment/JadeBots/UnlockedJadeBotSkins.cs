@@ -11,6 +11,6 @@ public class UnlockedJadeBotSkins(Gw2Client sut)
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
         (HashSet<int> actual, _) = await sut.Hero.Equipment.JadeBots.GetUnlockedJadeBotSkins(accessToken.Key, TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(actual);
+        await Assert.That(actual).IsNotNull();
     }
 }

@@ -1,4 +1,4 @@
-﻿using GuildWars2.Tests.TestInfrastructure.Composition;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Crafting.Recipes;
 
@@ -10,10 +10,10 @@ public class RecipesIndexByIngredient(Gw2Client sut)
     {
         const int visionCrystalItemId = 46746;
         (HashSet<int> actual, MessageContext context) = await sut.Hero.Crafting.Recipes.GetRecipesIndexByIngredientItemId(visionCrystalItemId, TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.NotEmpty(actual);
+        await Assert.That(context.ResultCount).IsEqualTo(actual.Count);
+        await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);
+        await Assert.That(actual).IsNotEmpty();
         const int oneOfTheExpectedRecipeIds = 12316;
-        Assert.Contains(oneOfTheExpectedRecipeIds, actual);
+        await Assert.That(actual).Contains(oneOfTheExpectedRecipeIds);
     }
 }

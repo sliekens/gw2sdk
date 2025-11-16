@@ -11,7 +11,10 @@ public class ObjectiveById(Gw2Client sut)
     {
         const int id = 1;
         (Objective actual, MessageContext context) = await sut.WizardsVault.GetObjectiveById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.Equal(id, actual.Id);
+        using (Assert.Multiple())
+        {
+            await Assert.That(context).IsNotNull();
+            await Assert.That(actual.Id).IsEqualTo(id);
+        }
     }
 }

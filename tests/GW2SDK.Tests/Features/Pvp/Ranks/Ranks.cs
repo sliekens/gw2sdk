@@ -10,16 +10,19 @@ public class Ranks(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<Rank> actual, MessageContext context) = await sut.Pvp.GetRanks(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, entry =>
+        using (Assert.Multiple())
         {
-            Assert.True(entry.Id > 0);
-            Assert.NotEmpty(entry.Name);
-            Assert.NotNull(entry.IconUrl);
-            // Assert.NotEmpty(entry.IconHref); // Obsolete, replaced by IconUrl
-            Assert.NotEmpty(entry.Levels);
-        });
+            await Assert.That(actual).IsNotEmpty();
+            await Assert.That(context).Member(c => c.ResultCount, m => m.IsEqualTo(actual.Count));
+            await Assert.That(context).Member(c => c.ResultTotal, m => m.IsEqualTo(actual.Count));
+            foreach (Rank entry in actual)
+            {
+                await Assert.That(entry.Id).IsGreaterThan(0);
+                await Assert.That(entry.Name).IsNotEmpty();
+                await Assert.That(entry.IconUrl).IsNotNull();
+                // Assert.NotEmpty(entry.IconHref); // Obsolete, replaced by IconUrl
+                await Assert.That(entry.Levels).IsNotEmpty();
+            }
+        }
     }
 }

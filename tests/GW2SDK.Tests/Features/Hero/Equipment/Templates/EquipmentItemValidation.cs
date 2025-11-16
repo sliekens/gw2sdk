@@ -1,93 +1,93 @@
-﻿using GuildWars2.Hero;
+using GuildWars2.Hero;
 using GuildWars2.Hero.Equipment.Templates;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Templates;
 
 internal sealed class EquipmentItemValidation
 {
-    public static void Validate(EquipmentItem item)
+    public static async Task Validate(EquipmentItem item)
     {
-        Assert.True(item.Id > 0);
+        await Assert.That(item.Id).IsGreaterThan(0);
         if (item.Count.HasValue)
         {
-            Assert.True(item.Count > 0);
+            await Assert.That(item.Count.Value).IsGreaterThan(0);
         }
 
         if (item.Slot.HasValue)
         {
-            Assert.True(item.Slot.Value.IsDefined());
+            await Assert.That(item.Slot.Value.IsDefined()).IsTrue();
         }
 
         if (item.SuffixItemId.HasValue)
         {
-            Assert.True(item.SuffixItemId > 0);
+            await Assert.That(item.SuffixItemId.Value).IsGreaterThan(0);
         }
 
         if (item.SecondarySuffixItemId.HasValue)
         {
-            Assert.True(item.SecondarySuffixItemId > 0);
+            await Assert.That(item.SecondarySuffixItemId.Value).IsGreaterThan(0);
         }
 
-        Assert.NotNull(item.InfusionItemIds);
-        Assert.All(
-            item.InfusionItemIds,
-            infusionItemId =>
+        await Assert.That(item.InfusionItemIds).IsNotNull();
+        using (Assert.Multiple())
+        {
+            foreach (int infusionItemId in item.InfusionItemIds)
             {
-                Assert.True(infusionItemId > 0);
+                await Assert.That(infusionItemId).IsGreaterThan(0);
             }
-        );
+        }
 
         if (item.SkinId.HasValue)
         {
-            Assert.True(item.SkinId > 0);
+            await Assert.That(item.SkinId.Value).IsGreaterThan(0);
         }
 
         if (item.Stats is not null)
         {
-            Assert.True(item.Stats.Id > 0);
-            Assert.NotEmpty(item.Stats.Attributes);
-            Assert.All(
-                item.Stats.Attributes,
-                attribute =>
+            await Assert.That(item.Stats.Id).IsGreaterThan(0);
+            await Assert.That(item.Stats.Attributes).IsNotEmpty();
+            using (Assert.Multiple())
+            {
+                foreach (KeyValuePair<AttributeName, int> attribute in item.Stats.Attributes)
                 {
 #if NET
-                    Assert.True(Enum.IsDefined(attribute.Key));
+                    await Assert.That(Enum.IsDefined(attribute.Key)).IsTrue();
 #else
-                    Assert.True(Enum.IsDefined(typeof(AttributeName), attribute.Key));
+                    await TUnit.Assertions.Assert.That(Enum.IsDefined(typeof(AttributeName), attribute.Key)).IsTrue();
 #endif
-                    Assert.True(attribute.Value > 0);
+                    await Assert.That(attribute.Value).IsGreaterThan(0);
                 }
-            );
+            }
         }
 
-        Assert.True(item.Binding.IsDefined());
+        await Assert.That(item.Binding.IsDefined()).IsTrue();
         if (item.Binding == ItemBinding.Character)
         {
-            Assert.NotEmpty(item.BoundTo);
+            await Assert.That(item.BoundTo).IsNotEmpty();
         }
         else
         {
-            Assert.NotNull(item.BoundTo);
+            await Assert.That(item.BoundTo).IsNotNull();
         }
 
-        Assert.True(item.Location.IsDefined());
+        await Assert.That(item.Location.IsDefined()).IsTrue();
 
-        Assert.NotNull(item.TemplateNumbers);
-        Assert.All(
-            item.TemplateNumbers,
-            template =>
+        await Assert.That(item.TemplateNumbers).IsNotNull();
+        using (Assert.Multiple())
+        {
+            foreach (int template in item.TemplateNumbers)
             {
-                Assert.True(template > 0);
+                await Assert.That(template).IsGreaterThan(0);
             }
-        );
+        }
 
-        Assert.NotNull(item.DyeColorIds);
-        Assert.All(
-            item.DyeColorIds,
-            dyeColorId =>
+        await Assert.That(item.DyeColorIds).IsNotNull();
+        using (Assert.Multiple())
+        {
+            foreach (int dyeColorId in item.DyeColorIds)
             {
-                Assert.True(dyeColorId > 0);
+                await Assert.That(dyeColorId).IsGreaterThan(0);
             }
-        );
+        }
     }
 }

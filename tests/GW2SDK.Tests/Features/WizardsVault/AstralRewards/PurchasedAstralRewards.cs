@@ -13,28 +13,31 @@ public class PurchasedAstralRewards(Gw2Client sut)
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
         (HashSet<PurchasedAstralReward> actual, MessageContext context) = await sut.WizardsVault.GetPurchasedAstralRewards(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.All(actual, reward =>
+        using (Assert.Multiple())
         {
-            Assert.True(reward.Id > 0);
-            Assert.True(reward.ItemId > 0);
-            Assert.True(reward.ItemCount > 0);
-            Assert.True(reward.Cost > 0);
-            Assert.True(reward.Kind.IsDefined());
-            if (reward.PurchaseLimit.HasValue)
+            await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(actual.Count));
+            foreach (PurchasedAstralReward reward in actual)
             {
-                Assert.NotNull(reward.Purchased);
-                Assert.True(reward.PurchaseLimit > 0);
-                Assert.InRange(reward.Purchased.Value, 0, reward.PurchaseLimit.Value);
-            }
-            else
-            {
-                Assert.Null(reward.Purchased);
-            }
+                await Assert.That(reward.Id).IsGreaterThan(0);
+                await Assert.That(reward.ItemId).IsGreaterThan(0);
+                await Assert.That(reward.ItemCount).IsGreaterThan(0);
+                await Assert.That(reward.Cost).IsGreaterThan(0);
+                await Assert.That(reward.Kind.IsDefined()).IsTrue();
+                if (reward.PurchaseLimit.HasValue)
+                {
+                    await Assert.That(reward.PurchaseLimit.Value).IsGreaterThan(0);
+                    int purchasedValue = await Assert.That(reward.Purchased).IsNotNull();
+                    await Assert.That(purchasedValue).IsBetween(0, reward.PurchaseLimit.Value);
+                }
+                else
+                {
+                    await Assert.That(reward.Purchased).IsNull();
+                }
 
-            ItemLink chatLink = reward.GetChatLink();
-            Assert.Equal(reward.ItemId, chatLink.ItemId);
-            Assert.Equal(reward.ItemCount, chatLink.Count);
-        });
+                ItemLink chatLink = reward.GetChatLink();
+                await Assert.That(chatLink.ItemId).IsEqualTo(reward.ItemId);
+                await Assert.That(chatLink.Count).IsEqualTo(reward.ItemCount);
+            }
+        }
     }
 }

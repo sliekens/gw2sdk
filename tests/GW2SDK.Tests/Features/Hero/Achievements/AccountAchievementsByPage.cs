@@ -1,4 +1,4 @@
-﻿using GuildWars2.Hero.Achievements;
+using GuildWars2.Hero.Achievements;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.Tests.TestInfrastructure.Configuration;
 
@@ -13,12 +13,15 @@ public class AccountAchievementsByPage(Gw2Client sut)
         ApiKey accessToken = TestConfiguration.ApiKey;
         const int pageSize = 3;
         (HashSet<AccountAchievement> actual, MessageContext context) = await sut.Hero.Achievements.GetAccountAchievementsByPage(0, pageSize, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context.Links);
-        Assert.Equal(pageSize, context.PageSize);
-        Assert.Equal(pageSize, context.ResultCount);
-        Assert.True(context.PageTotal > 0);
-        Assert.True(context.ResultTotal > 0);
-        Assert.Equal(pageSize, actual.Count);
-        Assert.All(actual, Assert.NotNull);
+        await Assert.That(context.Links).IsNotNull();
+        await Assert.That(context.PageSize).IsEqualTo(pageSize);
+        await Assert.That(context.ResultCount).IsEqualTo(pageSize);
+        await Assert.That(context.PageTotal!.Value).IsGreaterThan(0);
+        await Assert.That(context.ResultTotal!.Value).IsGreaterThan(0);
+        await Assert.That(actual.Count).IsEqualTo(pageSize);
+        foreach (AccountAchievement item in actual)
+        {
+            await Assert.That(item).IsNotNull();
+        }
     }
 }

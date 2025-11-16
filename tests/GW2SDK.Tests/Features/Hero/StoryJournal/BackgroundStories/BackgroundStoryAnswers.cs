@@ -11,15 +11,18 @@ public class BackgroundStoryAnswers(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<BackgroundStoryAnswer> actual, MessageContext context) = await sut.Hero.StoryJournal.GetBackgroundStoryAnswers(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, answer =>
+        await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);
+        using (Assert.Multiple())
         {
-            Assert.NotEmpty(answer.Id);
-            Assert.NotNull(answer.Title);
-            Assert.NotEmpty(answer.Description);
-            Assert.NotEmpty(answer.Journal);
-            MarkupSyntaxValidator.Validate(answer.Journal);
-            Assert.InRange(answer.QuestionId, 1, 999);
-        });
+            foreach (BackgroundStoryAnswer answer in actual)
+            {
+                await Assert.That(answer.Id).IsNotEmpty();
+                await Assert.That(answer.Title).IsNotNull();
+                await Assert.That(answer.Description).IsNotEmpty();
+                await Assert.That(answer.Journal).IsNotEmpty();
+                MarkupSyntaxValidator.Validate(answer.Journal);
+                await Assert.That(answer.QuestionId).IsBetween(1, 999);
+            }
+        }
     }
 }

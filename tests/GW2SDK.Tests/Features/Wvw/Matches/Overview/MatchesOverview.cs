@@ -10,14 +10,14 @@ public class MatchesOverview(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<MatchOverview> actual, MessageContext context) = await sut.Wvw.GetMatchesOverview(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, entry =>
+        await Assert.That(actual).IsNotEmpty();
+        await Assert.That(context).Member(c => c.ResultCount, m => m.IsEqualTo(actual.Count));
+        await Assert.That(context).Member(c => c.ResultTotal, m => m.IsEqualTo(actual.Count));
+        foreach (MatchOverview entry in actual)
         {
-            Assert.NotEmpty(entry.Id);
-            Assert.True(entry.StartTime > DateTimeOffset.MinValue);
-            Assert.True(entry.EndTime > entry.StartTime);
-        });
+            await Assert.That(entry.Id).IsNotEmpty();
+            await Assert.That(entry.StartTime > DateTimeOffset.MinValue).IsTrue();
+            await Assert.That(entry.EndTime > entry.StartTime).IsTrue();
+        }
     }
 }

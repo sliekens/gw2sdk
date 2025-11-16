@@ -13,7 +13,8 @@ public class DeliveryBox(Gw2Client sut)
 
         (GuildWars2.Commerce.Delivery.DeliveryBox deliveryBox, MessageContext context) = await sut.Commerce.GetDeliveryBox(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         // Step through with debugger to see if the values reflect your in-game delivery box
-        Assert.NotNull(context);
-        Assert.NotNull(deliveryBox);
+        await Assert.That(context).IsNotNull()
+            .And.IsTypeOf<MessageContext>();
+        await Assert.That(deliveryBox).IsNotNull();
     }
 }

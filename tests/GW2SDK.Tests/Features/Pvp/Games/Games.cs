@@ -1,4 +1,4 @@
-﻿using GuildWars2.Pvp.Games;
+using GuildWars2.Pvp.Games;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.Tests.TestInfrastructure.Configuration;
 
@@ -12,15 +12,18 @@ public class Games(Gw2Client sut)
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
         (HashSet<Game> actual, MessageContext context) = await sut.Pvp.GetGames(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, entry =>
+        using (Assert.Multiple())
         {
-            Assert.NotEmpty(entry.Id);
-            Assert.True(entry.RatingType.IsDefined());
-            Assert.True(entry.Result.IsDefined());
-            Assert.True(entry.Profession.IsDefined());
-        });
+            await Assert.That(actual).IsNotEmpty();
+            await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(actual.Count));
+            await Assert.That(context).Member(c => c.ResultTotal, rt => rt.IsEqualTo(actual.Count));
+            foreach (Game entry in actual)
+            {
+                await Assert.That(entry.Id).IsNotEmpty();
+                await Assert.That(entry.RatingType.IsDefined()).IsTrue();
+                await Assert.That(entry.Result.IsDefined()).IsTrue();
+                await Assert.That(entry.Profession.IsDefined()).IsTrue();
+            }
+        }
     }
 }

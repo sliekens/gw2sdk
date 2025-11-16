@@ -11,7 +11,7 @@ public class JadeBotSkinById(Gw2Client sut)
     {
         const int id = 2;
         (JadeBotSkin actual, MessageContext context) = await sut.Hero.Equipment.JadeBots.GetJadeBotSkinById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.Equal(id, actual.Id);
+        await Assert.That(context).IsNotNull();
+        await Assert.That(actual.Id).IsEqualTo(id);
     }
 }

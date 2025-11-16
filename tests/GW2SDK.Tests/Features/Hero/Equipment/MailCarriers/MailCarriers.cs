@@ -12,30 +12,40 @@ public class MailCarriers(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<MailCarrier> actual, MessageContext context) = await sut.Hero.Equipment.MailCarriers.GetMailCarriers(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, mailCarrier =>
-        {
-            Assert.True(mailCarrier.Id >= 1);
-            if (mailCarrier.Flags.Default)
-            {
-                Assert.Empty(mailCarrier.UnlockItemIds);
-            }
-            else
-            {
-                Assert.NotEmpty(mailCarrier.UnlockItemIds);
-            }
+        await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);
 
-            Assert.InRange(mailCarrier.Order, 0, 1000);
-            Assert.True(mailCarrier.IconUrl is null || mailCarrier.IconUrl.IsAbsoluteUri);
-            Assert.NotEmpty(mailCarrier.Name);
+        using (Assert.Multiple())
+        {
+            foreach (MailCarrier mailCarrier in actual)
+            {
+                await Assert.That(mailCarrier.Id).IsGreaterThanOrEqualTo(1);
+
+                if (mailCarrier.Flags.Default)
+                {
+                    await Assert.That(mailCarrier.UnlockItemIds).IsEmpty();
+                }
+                else
+                {
+                    await Assert.That(mailCarrier.UnlockItemIds).IsNotEmpty();
+                }
+
+                await Assert.That(mailCarrier.Order).IsGreaterThanOrEqualTo(0).And.IsLessThanOrEqualTo(1000);
+
+                if (mailCarrier.IconUrl is not null)
+                {
+                    await Assert.That(mailCarrier.IconUrl.IsAbsoluteUri).IsTrue();
+                }
+
+                await Assert.That(mailCarrier.Name).IsNotEmpty();
 #if NET
-            string json = JsonSerializer.Serialize(mailCarrier, Common.TestJsonContext.Default.MailCarrier);
-            MailCarrier? roundtrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.MailCarrier);
+                string json = JsonSerializer.Serialize(mailCarrier, Common.TestJsonContext.Default.MailCarrier);
+                MailCarrier? roundtrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.MailCarrier);
 #else
-            string json = JsonSerializer.Serialize(mailCarrier);
-            MailCarrier? roundtrip = JsonSerializer.Deserialize<MailCarrier>(json);
+                string json = JsonSerializer.Serialize(mailCarrier);
+                MailCarrier? roundtrip = JsonSerializer.Deserialize<MailCarrier>(json);
 #endif
-            Assert.Equal(mailCarrier, roundtrip);
-        });
+                await Assert.That(mailCarrier).IsEqualTo(roundtrip);
+            }
+        }
     }
 }

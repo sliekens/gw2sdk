@@ -1,6 +1,8 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 
 using GuildWars2.Chat;
+using GuildWars2.Hero.Crafting;
+using GuildWars2.Hero.Crafting.Disciplines;
 using GuildWars2.Hero.Crafting.Recipes;
 using GuildWars2.Tests.TestInfrastructure;
 
@@ -19,25 +21,30 @@ public class Recipes
         Gw2Client sut = new(httpClient);
         await foreach ((Recipe actual, MessageContext context) in sut.Hero.Crafting.Recipes.GetRecipesBulk(cancellationToken: TestContext.Current!.Execution.CancellationToken))
         {
-            Assert.NotNull(context);
-            Assert.True(actual.Id > 0);
-            Assert.True(actual.OutputItemId >= 1);
-            Assert.True(actual.OutputItemCount >= 1);
-            Assert.InRange(actual.MinRating, 0, 500);
-            Assert.True(actual.TimeToCraft.Ticks >= 1);
-            Assert.All(actual.Disciplines, discipline => Assert.True(discipline.IsDefined()));
-            Assert.Empty(actual.Flags.Other);
-            Assert.All(actual.Ingredients, ingredient =>
+            await Assert.That(context).IsNotNull();
+            await Assert.That(actual.Id).IsGreaterThan(0);
+            await Assert.That(actual.OutputItemId).IsGreaterThanOrEqualTo(1);
+            await Assert.That(actual.OutputItemCount).IsGreaterThanOrEqualTo(1);
+            await Assert.That(actual.MinRating).IsGreaterThanOrEqualTo(0).And.IsLessThanOrEqualTo(500);
+            await Assert.That(actual.TimeToCraft.Ticks).IsGreaterThanOrEqualTo(1);
+            foreach (Extensible<CraftingDisciplineName> discipline in actual.Disciplines)
             {
-                Assert.True(ingredient.Kind.IsDefined());
-                Assert.True(ingredient.Id > 0);
-                Assert.True(ingredient.Count > 0);
-            });
+                await Assert.That(discipline.IsDefined()).IsTrue();
+            }
+
+            await Assert.That(actual.Flags.Other).IsEmpty();
+            foreach (Ingredient ingredient in actual.Ingredients)
+            {
+                await Assert.That(ingredient.Kind.IsDefined()).IsTrue();
+                await Assert.That(ingredient.Id).IsGreaterThan(0);
+                await Assert.That(ingredient.Count).IsGreaterThan(0);
+            }
+
             RecipeLink chatLink = actual.GetChatLink();
-            Assert.Equal(actual.Id, chatLink.RecipeId);
-            Assert.Equal(actual.ChatLink, chatLink.ToString());
+            await Assert.That(chatLink.RecipeId).IsEqualTo(actual.Id);
+            await Assert.That(actual.ChatLink).IsEqualTo(chatLink.ToString());
             RecipeLink chatLinkRoundtrip = RecipeLink.Parse(chatLink.ToString());
-            Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
+            await Assert.That(chatLinkRoundtrip.ToString()).IsEqualTo(chatLink.ToString());
         }
     }
 
@@ -58,8 +65,8 @@ public class Recipes
             string json = JsonSerializer.Serialize(original);
             Recipe? roundTrip = JsonSerializer.Deserialize<Recipe>(json);
 #endif
-            Assert.IsType(original.GetType(), roundTrip);
-            Assert.Equal(original, roundTrip);
+            await Assert.That(roundTrip).IsTypeOf<Recipe>();
+            await Assert.That(roundTrip).IsEqualTo(original);
         }
     }
 }

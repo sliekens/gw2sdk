@@ -1,21 +1,24 @@
-﻿using GuildWars2.Hero.Equipment.Mounts;
+using GuildWars2.Hero.Equipment.Mounts;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Mounts;
 
 public class MountNameFormatterTest
 {
     [Test]
-    public void Mount_names_can_be_formatted_as_text()
+    public async Task Mount_names_can_be_formatted_as_text()
     {
 #if NET
         MountName[] mounts = Enum.GetValues<MountName>();
 #else
         IEnumerable<MountName> mounts = Enum.GetValues(typeof(MountName)).Cast<MountName>();
 #endif
-        Assert.All(mounts, mountName =>
+        using (Assert.Multiple())
         {
-            string actual = MountNameFormatter.FormatMountName(mountName);
-            Assert.NotEmpty(actual);
-        });
+            foreach (MountName mountName in mounts)
+            {
+                string actual = MountNameFormatter.FormatMountName(mountName);
+                await Assert.That(actual).IsNotEmpty();
+            }
+        }
     }
 }

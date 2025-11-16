@@ -11,16 +11,16 @@ public class Traits(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<Trait> actual, MessageContext context) = await sut.Hero.Builds.GetTraits(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, trait =>
+        await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);
+        foreach (Trait trait in actual)
         {
-            Assert.True(trait.Id >= 1);
-            Assert.InRange(trait.Tier, 0, 4);
-            Assert.True(trait.Order >= 0);
-            Assert.NotEmpty(trait.Name);
-            Assert.NotNull(trait.Description);
+            await Assert.That(trait.Id).IsGreaterThanOrEqualTo(1);
+            await Assert.That(trait.Tier).IsGreaterThanOrEqualTo(0).And.IsLessThanOrEqualTo(4);
+            await Assert.That(trait.Order).IsGreaterThanOrEqualTo(0);
+            await Assert.That(trait.Name).IsNotEmpty();
+            await Assert.That(trait.Description).IsNotNull();
             MarkupSyntaxValidator.Validate(trait.Description);
-            Assert.True(trait.Slot.IsDefined());
-        });
+            await Assert.That(trait.Slot.IsDefined()).IsTrue();
+        }
     }
 }

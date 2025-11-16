@@ -1,4 +1,4 @@
-﻿using GuildWars2.Exploration.Floors;
+using GuildWars2.Exploration.Floors;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Exploration.Floors;
@@ -16,7 +16,7 @@ public class FloorById(Gw2Client sut)
     public async Task Can_be_found(int continentId, int floorId)
     {
         (Floor actual, MessageContext context) = await sut.Exploration.GetFloorById(continentId, floorId, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.Equal(floorId, actual.Id);
+        await Assert.That(context).IsNotNull();
+        await Assert.That(actual.Id).IsEqualTo(floorId);
     }
 }

@@ -9,11 +9,14 @@ public class Season(Gw2Client sut)
     public async Task Can_be_found()
     {
         (GuildWars2.WizardsVault.Seasons.Season actual, MessageContext context) = await sut.WizardsVault.GetSeason(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.NotEmpty(actual.Title);
-        Assert.True(actual.Start <= DateTimeOffset.UtcNow);
-        Assert.True(actual.End > actual.Start);
-        Assert.NotEmpty(actual.AstralRewardIds);
-        Assert.NotEmpty(actual.ObjectiveIds);
+        using (Assert.Multiple())
+        {
+            await Assert.That(context).IsNotNull();
+            await Assert.That(actual.Title).IsNotEmpty();
+            await Assert.That(actual.Start <= DateTimeOffset.UtcNow).IsTrue();
+            await Assert.That(actual.End > actual.Start).IsTrue();
+            await Assert.That(actual.AstralRewardIds).IsNotEmpty();
+            await Assert.That(actual.ObjectiveIds).IsNotEmpty();
+        }
     }
 }

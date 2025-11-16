@@ -1,4 +1,4 @@
-﻿using GuildWars2.Files;
+using GuildWars2.Files;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Files;
@@ -11,7 +11,7 @@ public class FileById(Gw2Client sut)
     {
         const string id = "map_vendor_ecto";
         (Asset actual, MessageContext context) = await sut.Files.GetFileById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.Equal(id, actual.Id);
+        await Assert.That(context).IsNotNull();
+        await Assert.That(actual.Id).IsEqualTo(id);
     }
 }

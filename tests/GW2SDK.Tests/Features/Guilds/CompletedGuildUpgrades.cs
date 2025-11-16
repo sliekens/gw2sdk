@@ -15,7 +15,7 @@ public class CompletedGuildUpgrades(Gw2Client sut)
         foreach (string? guildId in account.LeaderOfGuildIds!)
         {
             (HashSet<int> actual, _) = await sut.Guilds.GetCompletedGuildUpgrades(guildId, guildLeader.Token, TestContext.Current!.Execution.CancellationToken);
-            Assert.NotEmpty(actual);
+            await Assert.That(actual).IsNotEmpty();
         }
     }
 }

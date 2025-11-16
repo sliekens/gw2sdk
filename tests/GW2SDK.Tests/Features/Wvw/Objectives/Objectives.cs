@@ -11,24 +11,24 @@ public class Objectives(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<Objective> actual, MessageContext context) = await sut.Wvw.GetObjectives(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, entry =>
+        await Assert.That(actual).IsNotEmpty();
+        await Assert.That(context).Member(c => c.ResultCount, m => m.IsEqualTo(actual.Count));
+        await Assert.That(context).Member(c => c.ResultTotal, m => m.IsEqualTo(actual.Count));
+        foreach (Objective entry in actual)
         {
-            Assert.NotEmpty(entry.Id);
-            Assert.NotEmpty(entry.Name);
-            Assert.True(entry.SectorId > 0);
-            Assert.True(entry.MapId > 0);
-            Assert.True(entry.MapKind.IsDefined());
-            Assert.True(entry.MarkerIconUrl is null or { IsAbsoluteUri: true });
+            await Assert.That(entry.Id).IsNotEmpty();
+            await Assert.That(entry.Name).IsNotEmpty();
+            await Assert.That(entry.SectorId > 0).IsTrue();
+            await Assert.That(entry.MapId > 0).IsTrue();
+            await Assert.That(entry.MapKind.IsDefined()).IsTrue();
+            await Assert.That(entry.MarkerIconUrl is null or { IsAbsoluteUri: true }).IsTrue();
             ObjectiveLink chatLink = entry.GetChatLink();
-            Assert.NotEmpty(entry.ChatLink);
-            Assert.Equal(entry.ChatLink, chatLink.ToString());
-            Assert.Equal(entry.MapId, chatLink.MapId);
-            Assert.Equal(entry.Id, $"{chatLink.MapId}-{chatLink.ObjectiveId}");
+            await Assert.That(entry.ChatLink).IsNotEmpty();
+            await Assert.That(chatLink.ToString()).IsEqualTo(entry.ChatLink);
+            await Assert.That(chatLink.MapId).IsEqualTo(entry.MapId);
+            await Assert.That($"{chatLink.MapId}-{chatLink.ObjectiveId}").IsEqualTo(entry.Id);
             ObjectiveLink chatLinkRoundtrip = ObjectiveLink.Parse(chatLink.ToString());
-            Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
-        });
+            await Assert.That(chatLinkRoundtrip.ToString()).IsEqualTo(chatLink.ToString());
+        }
     }
 }

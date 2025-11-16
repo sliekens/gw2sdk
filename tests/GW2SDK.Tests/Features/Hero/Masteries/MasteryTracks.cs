@@ -1,4 +1,4 @@
-﻿using GuildWars2.Hero.Masteries;
+using GuildWars2.Hero.Masteries;
 using GuildWars2.Tests.Features.Markup;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 
@@ -11,27 +11,27 @@ public class MasteryTracks(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<MasteryTrack> actual, MessageContext context) = await sut.Hero.Masteries.GetMasteryTracks(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, mastery =>
+        await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);
+        foreach (MasteryTrack mastery in actual)
         {
-            Assert.True(mastery.Id > 0);
-            Assert.NotEmpty(mastery.Name);
-            Assert.NotNull(mastery.Requirement);
-            Assert.True(mastery.Order >= 0);
-            Assert.NotEmpty(mastery.BackgroundHref);
-            Assert.True(mastery.Region.IsDefined());
-            Assert.NotEqual(MasteryRegionName.Unknown, mastery.Region);
-            Assert.All(mastery.Masteries, level =>
+            await Assert.That(mastery.Id).IsGreaterThan(0);
+            await Assert.That(mastery.Name).IsNotEmpty();
+            await Assert.That(mastery.Requirement).IsNotNull();
+            await Assert.That(mastery.Order).IsGreaterThanOrEqualTo(0);
+            await Assert.That(mastery.BackgroundHref).IsNotEmpty();
+            await Assert.That(mastery.Region.IsDefined()).IsTrue();
+            await Assert.That(mastery.Region).IsNotEqualTo(MasteryRegionName.Unknown);
+            foreach (Mastery level in mastery.Masteries)
             {
-                Assert.NotEmpty(level.Name);
-                Assert.NotEmpty(level.Description);
+                await Assert.That(level.Name).IsNotEmpty();
+                await Assert.That(level.Description).IsNotEmpty();
                 MarkupSyntaxValidator.Validate(level.Description);
-                Assert.NotEmpty(level.Instruction);
+                await Assert.That(level.Instruction).IsNotEmpty();
                 MarkupSyntaxValidator.Validate(level.Instruction);
-                Assert.True(level.IconUrl is null || level.IconUrl.IsAbsoluteUri);
-                Assert.True(level.PointCost > 0);
-                Assert.True(level.ExperienceCost > 0);
-            });
-        });
+                await Assert.That(level.IconUrl is null || level.IconUrl.IsAbsoluteUri).IsTrue();
+                await Assert.That(level.PointCost).IsGreaterThan(0);
+                await Assert.That(level.ExperienceCost).IsGreaterThan(0);
+            }
+        }
     }
 }

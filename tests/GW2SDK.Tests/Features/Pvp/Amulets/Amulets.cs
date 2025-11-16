@@ -1,4 +1,4 @@
-﻿using GuildWars2.Pvp.Amulets;
+using GuildWars2.Pvp.Amulets;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Pvp.Amulets;
@@ -10,15 +10,18 @@ public class Amulets(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<Amulet> actual, MessageContext context) = await sut.Pvp.GetAmulets(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, entry =>
+        using (Assert.Multiple())
         {
-            Assert.True(entry.Id > 0);
-            Assert.NotEmpty(entry.Name);
-            Assert.NotNull(entry.IconUrl);
-            Assert.NotEmpty(entry.Attributes);
-        });
+            await Assert.That(actual).IsNotEmpty();
+            await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(actual.Count));
+            await Assert.That(context).Member(c => c.ResultTotal, rt => rt.IsEqualTo(actual.Count));
+            foreach (Amulet entry in actual)
+            {
+                await Assert.That(entry.Id).IsGreaterThan(0);
+                await Assert.That(entry.Name).IsNotEmpty();
+                await Assert.That(entry.IconUrl).IsNotNull();
+                await Assert.That(entry.Attributes).IsNotEmpty();
+            }
+        }
     }
 }

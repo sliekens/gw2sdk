@@ -14,7 +14,7 @@ public class Build(Gw2Client sut)
         ApiKey accessToken = TestConfiguration.ApiKey;
         const int tab = 1;
         (BuildTemplate actual, _) = await sut.Hero.Builds.GetBuild(tab, character.Name, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(actual);
-        Assert.NotNull(actual.Build);
+        await Assert.That(actual).IsNotNull();
+        await Assert.That(actual.Build).IsNotNull();
     }
 }

@@ -9,8 +9,8 @@ public class ColorsIndex(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<int> actual, MessageContext context) = await sut.Hero.Equipment.Dyes.GetColorsIndex(TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.NotEmpty(actual);
+        await Assert.That(context.ResultCount).IsEqualTo(actual.Count);
+        await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);
+        await Assert.That(actual).IsNotEmpty();
     }
 }

@@ -1,4 +1,4 @@
-﻿using GuildWars2.Hero.Crafting.Recipes;
+using GuildWars2.Hero.Crafting.Recipes;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Crafting.Recipes;
@@ -14,9 +14,12 @@ public class RecipesByIngredient(Gw2Client sut)
         // There are 800+ recipes that require a vision crystal
         const int visionCrystal = 46746;
         (HashSet<Recipe> actual, MessageContext context) = await sut.Hero.Crafting.Recipes.GetRecipesByIngredientItemId(visionCrystal, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotInRange(actual.Count, 0, 200); // Greater than 200
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, recipe => Assert.Contains(recipe.Ingredients, ingredient => ingredient.Id == visionCrystal));
+        await Assert.That(actual.Count).IsGreaterThan(200);
+        await Assert.That(context.ResultCount).IsEqualTo(actual.Count);
+        await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);
+        foreach (Recipe recipe in actual)
+        {
+            await Assert.That(recipe.Ingredients).Contains(ingredient => ingredient.Id == visionCrystal);
+        }
     }
 }

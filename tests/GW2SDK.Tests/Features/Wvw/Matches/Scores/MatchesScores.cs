@@ -1,4 +1,5 @@
 using GuildWars2.Tests.TestInfrastructure.Composition;
+using GuildWars2.Wvw.Matches;
 using GuildWars2.Wvw.Matches.Scores;
 
 namespace GuildWars2.Tests.Features.Wvw.Matches.Scores;
@@ -10,25 +11,25 @@ public class MatchesScores(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<MatchScores> actual, MessageContext context) = await sut.Wvw.GetMatchesScores(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, entry =>
+        await Assert.That(actual).IsNotEmpty();
+        await Assert.That(context).Member(c => c.ResultCount, m => m.IsEqualTo(actual.Count));
+        await Assert.That(context).Member(c => c.ResultTotal, m => m.IsEqualTo(actual.Count));
+        foreach (MatchScores entry in actual)
         {
-            Assert.NotEmpty(entry.Id);
-            Assert.All(entry.Skirmishes, skirmish =>
+            await Assert.That(entry.Id).IsNotEmpty();
+            foreach (Skirmish skirmish in entry.Skirmishes)
             {
-                Assert.True(skirmish.Id > 0);
-                Assert.All(skirmish.MapScores, score =>
+                await Assert.That(skirmish.Id > 0).IsTrue();
+                foreach (MapScores score in skirmish.MapScores)
                 {
-                    Assert.True(score.Kind.IsDefined());
-                });
-            });
-            Assert.All(entry.Maps, map =>
+                    await Assert.That(score.Kind.IsDefined()).IsTrue();
+                }
+            }
+            foreach (MapSummary map in entry.Maps)
             {
-                Assert.True(map.Id > 0);
-                Assert.True(map.Kind.IsDefined());
-            });
-        });
+                await Assert.That(map.Id > 0).IsTrue();
+                await Assert.That(map.Kind.IsDefined()).IsTrue();
+            }
+        }
     }
 }

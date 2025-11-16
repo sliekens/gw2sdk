@@ -11,7 +11,7 @@ public class LegendaryItemById(Gw2Client sut)
     {
         const int id = 80111;
         (LegendaryItem actual, MessageContext context) = await sut.Hero.Equipment.Templates.GetLegendaryItemById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.Equal(id, actual.Id);
+        await Assert.That(context).IsNotNull();
+        await Assert.That(actual.Id).IsEqualTo(id);
     }
 }

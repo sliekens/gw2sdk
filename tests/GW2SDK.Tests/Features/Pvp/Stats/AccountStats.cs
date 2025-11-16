@@ -1,4 +1,4 @@
-﻿using GuildWars2.Tests.TestInfrastructure.Composition;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Pvp.Stats;
@@ -11,6 +11,9 @@ public class AccountStats(Gw2Client sut)
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
         (GuildWars2.Pvp.Stats.AccountStats actual, _) = await sut.Pvp.GetStats(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(actual);
+        using (Assert.Multiple())
+        {
+            await Assert.That(actual).IsNotNull();
+        }
     }
 }

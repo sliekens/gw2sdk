@@ -1,4 +1,4 @@
-﻿using GuildWars2.Pvp.Amulets;
+using GuildWars2.Pvp.Amulets;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Pvp.Amulets;
@@ -11,7 +11,10 @@ public class AmuletById(Gw2Client sut)
     {
         const int id = 4;
         (Amulet actual, MessageContext context) = await sut.Pvp.GetAmuletById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.Equal(id, actual.Id);
+        using (Assert.Multiple())
+        {
+            await Assert.That(context).IsNotNull();
+            await Assert.That(actual.Id).IsEqualTo(id);
+        }
     }
 }

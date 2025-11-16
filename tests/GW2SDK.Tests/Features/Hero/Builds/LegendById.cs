@@ -13,7 +13,7 @@ public class LegendById(Gw2Client sut)
     public async Task Can_be_found(string id)
     {
         (Legend actual, MessageContext context) = await sut.Hero.Builds.GetLegendById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.Equal(id, actual.Id);
+        await Assert.That(context).IsNotNull();
+        await Assert.That(actual.Id).IsEqualTo(id);
     }
 }

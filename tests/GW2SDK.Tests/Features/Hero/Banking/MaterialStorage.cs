@@ -1,3 +1,4 @@
+using GuildWars2.Hero.Banking;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.Tests.TestInfrastructure.Configuration;
 
@@ -11,13 +12,13 @@ public class MaterialStorage(Gw2Client sut)
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
         (GuildWars2.Hero.Banking.MaterialStorage actual, _) = await sut.Hero.Bank.GetMaterialStorage(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual.Materials);
-        Assert.All(actual.Materials, entry =>
+        await Assert.That(actual.Materials).IsNotEmpty();
+        foreach (MaterialSlot entry in actual.Materials)
         {
-            Assert.True(entry.ItemId > 0);
-            Assert.True(entry.CategoryId > 0);
-            Assert.True(entry.Binding.IsDefined());
-            Assert.True(entry.Count >= 0);
-        });
+            await Assert.That(entry.ItemId > 0).IsTrue();
+            await Assert.That(entry.CategoryId > 0).IsTrue();
+            await Assert.That(entry.Binding.IsDefined()).IsTrue();
+            await Assert.That(entry.Count >= 0).IsTrue();
+        }
     }
 }

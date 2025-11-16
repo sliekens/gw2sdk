@@ -11,7 +11,7 @@ public class PetById(Gw2Client sut)
     {
         const int id = 1;
         (Pet actual, MessageContext context) = await sut.Pve.Pets.GetPetById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.Equal(id, actual.Id);
+        await Assert.That(context).IsNotNull();
+        await Assert.That(actual.Id).IsEqualTo(id);
     }
 }

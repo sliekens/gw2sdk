@@ -13,7 +13,7 @@ public class ActiveBuild(Gw2Client sut)
         TestCharacter character = TestConfiguration.TestCharacter;
         ApiKey accessToken = TestConfiguration.ApiKey;
         (BuildTemplate actual, _) = await sut.Hero.Builds.GetActiveBuild(character.Name, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(actual);
-        Assert.NotNull(actual.Build);
+        await Assert.That(actual).IsNotNull();
+        await Assert.That(actual.Build).IsNotNull();
     }
 }

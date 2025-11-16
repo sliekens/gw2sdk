@@ -10,13 +10,16 @@ public class MistChampions(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<MistChampion> actual, MessageContext context) = await sut.Pvp.GetMistChampions(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, entry =>
+        using (Assert.Multiple())
         {
-            Assert.NotEmpty(entry.Id);
-            Assert.NotEmpty(entry.Name);
-        });
+            await Assert.That(actual).IsNotEmpty();
+            await Assert.That(context).Member(c => c.ResultCount, m => m.IsEqualTo(actual.Count));
+            await Assert.That(context).Member(c => c.ResultTotal, m => m.IsEqualTo(actual.Count));
+            foreach (MistChampion entry in actual)
+            {
+                await Assert.That(entry.Id).IsNotEmpty();
+                await Assert.That(entry.Name).IsNotEmpty();
+            }
+        }
     }
 }

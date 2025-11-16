@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+using System.Drawing;
 
 using GuildWars2.Chat;
 using GuildWars2.Exploration.Adventures;
@@ -25,129 +25,143 @@ public class Floors(Gw2Client sut)
     public async Task Can_be_listed(int continentId)
     {
         (HashSet<Floor> actual, MessageContext context) = await sut.Exploration.GetFloors(continentId, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
+        await Assert.That(context)
+            .Member(c => c.ResultCount, m => m.IsEqualTo(actual.Count))
+            .And.Member(c => c.ResultTotal, m => m.IsEqualTo(actual.Count));
         List<int> floorIds = [.. actual.Select(f => f.Id)];
-        Assert.NotEmpty(actual);
-        Assert.All(actual, entry =>
+        await Assert.That(actual).IsNotEmpty();
+        using (Assert.Multiple())
         {
-            Assert.NotEqual(Size.Empty, entry.TextureDimensions);
-            Assert.NotNull(entry.ClampedView);
-            Assert.NotNull(entry.Regions);
-            foreach ((int regionId, Region region) in entry.Regions)
+            foreach (Floor entry in actual)
             {
-                Assert.Equal(regionId, region.Id);
-                // Convergences and Mists Vault region names are empty
-                Assert.NotNull(region.Name);
-                Assert.NotEmpty(region.Maps);
-                foreach ((int mapId, Map map) in region.Maps)
+                await Assert.That(entry)
+                    .Member(e => e.TextureDimensions, m => m.IsNotEqualTo(Size.Empty))
+                    .And.Member(e => e.ClampedView, m => m.IsNotNull())
+                    .And.Member(e => e.Regions, m => m.IsNotNull());
+                foreach ((int regionId, Region region) in entry.Regions)
                 {
-                    Assert.Equal(mapId, map.Id);
-                    if (map.Id == 1150)
+                    await Assert.That(region.Id).IsEqualTo(regionId);
+                    // Convergences and Mists Vault region names are empty
+                    await Assert.That(region.Name).IsNotNull();
+                    await Assert.That(region.Maps).IsNotEmpty();
+                    foreach ((int mapId, Map map) in region.Maps)
                     {
-                        // Unnamed Salvation Pass (Public) map
-                        Assert.Empty(map.Name);
-                    }
-                    else
-                    {
-                        Assert.NotEmpty(map.Name);
-                    }
-
-                    Assert.True(map.MinLevel >= 0);
-                    Assert.True(map.MaxLevel >= map.MinLevel);
-                    Assert.Contains(map.DefaultFloor, floorIds);
-                    foreach ((int poiId, PointOfInterest poi) in map.PointsOfInterest)
-                    {
-                        Assert.True(poi.Id > 0);
-                        Assert.NotNull(poi.Name);
-                        Assert.NotEmpty(poi.ChatLink);
-                        if (poi is RequiresUnlockPointOfInterest locked)
+                        await Assert.That(map.Id).IsEqualTo(mapId);
+                        if (map.Id == 1150)
                         {
-                            Assert.True(locked.IconUrl.IsAbsoluteUri);
-                        }
-
-                        PointOfInterestLink chatLink = poi.GetChatLink();
-                        Assert.Equal(poiId, chatLink.PointOfInterestId);
-                        Assert.Equal(poi.ChatLink, chatLink.ToString());
-                        PointOfInterestLink chatLinkRoundtrip = PointOfInterestLink.Parse(chatLink.ToString());
-                        Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
-                    }
-
-                    foreach ((int heartId, Heart heart) in map.Hearts)
-                    {
-                        Assert.Equal(heartId, heart.Id);
-                        Assert.NotEmpty(heart.Objective);
-                        Assert.InRange(heart.Level, 1, 80);
-                        Assert.NotEqual(PointF.Empty, heart.Coordinates);
-                        Assert.NotEmpty(heart.Boundaries);
-                        Assert.All(heart.Boundaries, point =>
-                        {
-                            Assert.NotEqual(PointF.Empty, point);
-                        });
-                        Assert.NotEmpty(heart.ChatLink);
-                    }
-
-                    foreach (HeroChallenge heroChallenge in map.HeroChallenges)
-                    {
-                        const int cantha = 37;
-                        const int castora = 58;
-                        if (regionId is cantha or castora)
-                        {
-                            //https://github.com/gw2-api/issues/issues/35
-                            Assert.Empty(heroChallenge.Id);
+                            // Unnamed Salvation Pass (Public) map
+                            await Assert.That(map.Name).IsEmpty();
                         }
                         else
                         {
-                            Assert.NotEmpty(heroChallenge.Id);
+                            await Assert.That(map.Name).IsNotEmpty();
                         }
 
-                        Assert.NotEqual(PointF.Empty, heroChallenge.Coordinates);
-                    }
-
-                    foreach ((int sectorId, Sector sector) in map.Sectors)
-                    {
-                        Assert.Equal(sectorId, sector.Id);
-                        Assert.NotNull(sector.Name);
-                        Assert.InRange(sector.Level, 0, 80);
-                        Assert.NotEqual(PointF.Empty, sector.Coordinates);
-                        Assert.NotEmpty(sector.Boundaries);
-                        Assert.All(sector.Boundaries, point =>
+                        await Assert.That(map)
+                            .Member(m => m.MinLevel, m => m.IsGreaterThanOrEqualTo(0))
+                            .And.Member(m => m.MaxLevel, m => m.IsGreaterThanOrEqualTo(map.MinLevel));
+                        await Assert.That(floorIds).Contains(map.DefaultFloor);
+                        foreach ((int poiId, PointOfInterest poi) in map.PointsOfInterest)
                         {
-                            Assert.NotEqual(PointF.Empty, point);
-                        });
-                        Assert.NotEmpty(sector.ChatLink);
-                    }
+                            await Assert.That(poi)
+                                .Member(p => p.Id, m => m.IsGreaterThan(0))
+                                .And.Member(p => p.Name, m => m.IsNotNull())
+                                .And.Member(p => p.ChatLink, m => m.IsNotEmpty());
+                            if (poi is RequiresUnlockPointOfInterest locked)
+                            {
+                                await Assert.That(locked.IconUrl.IsAbsoluteUri).IsTrue();
+                            }
 
-                    foreach (Adventure adventure in map.Adventures)
-                    {
-                        Assert.NotEmpty(adventure.Id);
-                        Assert.NotEmpty(adventure.Name);
-                        Assert.NotEmpty(adventure.Description);
-                        Assert.NotEqual(PointF.Empty, adventure.Coordinates);
-                    }
+                            PointOfInterestLink chatLink = poi.GetChatLink();
+                            await Assert.That(chatLink)
+                                .Member(c => c.PointOfInterestId, m => m.IsEqualTo(poiId))
+                                .And.Member(c => c.ToString(), m => m.IsEqualTo(poi.ChatLink));
+                            PointOfInterestLink chatLinkRoundtrip = PointOfInterestLink.Parse(chatLink.ToString());
+                            await Assert.That(chatLinkRoundtrip.ToString()).IsEqualTo(chatLink.ToString());
+                        }
 
-                    foreach (MasteryInsight masteryInsight in map.MasteryInsights)
-                    {
-                        Assert.True(masteryInsight.Id > 0);
-                        Assert.True(masteryInsight.Region.IsDefined());
-                        Assert.NotEqual(PointF.Empty, masteryInsight.Coordinates);
-                    }
+                        foreach ((int heartId, Heart heart) in map.Hearts)
+                        {
+                            await Assert.That(heart)
+                                .Member(h => h.Id, m => m.IsEqualTo(heartId))
+                                .And.Member(h => h.Objective, m => m.IsNotEmpty())
+                                .And.Member(h => h.Level, m => m.IsBetween(1, 80))
+                                .And.Member(h => h.Coordinates, m => m.IsNotEqualTo(PointF.Empty))
+                                .And.Member(h => h.Boundaries, m => m.IsNotEmpty());
+                            foreach (PointF point in heart.Boundaries)
+                            {
+                                await Assert.That(point).IsNotEqualTo(PointF.Empty);
+                            }
+                            await Assert.That(heart.ChatLink).IsNotEmpty();
+                        }
 
-                    foreach (GodShrine godShrine in map.GodShrines ?? [])
-                    {
-                        Assert.True(godShrine.Id > 0);
-                        Assert.True(godShrine.PointOfInterestId > 0);
-                        Assert.Contains(godShrine.PointOfInterestId, map.PointsOfInterest.Keys);
-                        Assert.NotEmpty(godShrine.Name);
-                        Assert.NotEmpty(godShrine.NameContested);
-                        Assert.NotNull(godShrine.IconUrl);
-                        Assert.NotNull(godShrine.IconContestedUrl);
-                        Assert.NotEqual(PointF.Empty, godShrine.Coordinates);
-                        PointOfInterestLink link = godShrine.GetChatLink();
-                        Assert.Equal(godShrine.PointOfInterestId, link.PointOfInterestId);
+                        foreach (HeroChallenge heroChallenge in map.HeroChallenges)
+                        {
+                            const int cantha = 37;
+                            const int castora = 58;
+                            if (regionId is cantha or castora)
+                            {
+                                //https://github.com/gw2-api/issues/issues/35
+                                await Assert.That(heroChallenge.Id).IsEmpty();
+                            }
+                            else
+                            {
+                                await Assert.That(heroChallenge.Id).IsNotEmpty();
+                            }
+
+                            await Assert.That(heroChallenge.Coordinates).IsNotEqualTo(PointF.Empty);
+                        }
+
+                        foreach ((int sectorId, Sector sector) in map.Sectors)
+                        {
+                            await Assert.That(sector)
+                                .Member(s => s.Id, m => m.IsEqualTo(sectorId))
+                                .And.Member(s => s.Name, m => m.IsNotNull())
+                                .And.Member(s => s.Level, m => m.IsBetween(0, 80))
+                                .And.Member(s => s.Coordinates, m => m.IsNotEqualTo(PointF.Empty))
+                                .And.Member(s => s.Boundaries, m => m.IsNotEmpty());
+                            foreach (PointF point in sector.Boundaries)
+                            {
+                                await Assert.That(point).IsNotEqualTo(PointF.Empty);
+                            }
+                            await Assert.That(sector.ChatLink).IsNotEmpty();
+                        }
+
+                        foreach (Adventure adventure in map.Adventures)
+                        {
+                            await Assert.That(adventure)
+                                .Member(a => a.Id, m => m.IsNotEmpty())
+                                .And.Member(a => a.Name, m => m.IsNotEmpty())
+                                .And.Member(a => a.Description, m => m.IsNotEmpty())
+                                .And.Member(a => a.Coordinates, m => m.IsNotEqualTo(PointF.Empty));
+                        }
+
+                        foreach (MasteryInsight masteryInsight in map.MasteryInsights)
+                        {
+                            await Assert.That(masteryInsight)
+                                .Member(m => m.Id, m => m.IsGreaterThan(0))
+                                .And.Member(m => m.Region.IsDefined(), m => m.IsTrue())
+                                .And.Member(m => m.Coordinates, m => m.IsNotEqualTo(PointF.Empty));
+                        }
+
+                        foreach (GodShrine godShrine in map.GodShrines ?? [])
+                        {
+                            await Assert.That(godShrine)
+                                .Member(g => g.Id, m => m.IsGreaterThan(0))
+                                .And.Member(g => g.PointOfInterestId, m => m.IsGreaterThan(0));
+                            await Assert.That(map.PointsOfInterest.Keys).Contains(godShrine.PointOfInterestId);
+                            await Assert.That(godShrine)
+                                .Member(g => g.Name, m => m.IsNotEmpty())
+                                .And.Member(g => g.NameContested, m => m.IsNotEmpty())
+                                .And.Member(g => g.IconUrl, m => m.IsNotNull())
+                                .And.Member(g => g.IconContestedUrl, m => m.IsNotNull())
+                                .And.Member(g => g.Coordinates, m => m.IsNotEqualTo(PointF.Empty));
+                            PointOfInterestLink link = godShrine.GetChatLink();
+                            await Assert.That(link.PointOfInterestId).IsEqualTo(godShrine.PointOfInterestId);
+                        }
                     }
                 }
             }
-        });
+        }
     }
 }

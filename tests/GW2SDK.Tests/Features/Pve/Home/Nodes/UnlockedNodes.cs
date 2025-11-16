@@ -11,7 +11,13 @@ public class UnlockedNodes(Gw2Client sut)
     {
         ApiKey token = TestConfiguration.ApiKey;
         (HashSet<string> actual, _) = await sut.Pve.Home.GetUnlockedNodes(token.Key, TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.All(actual, Assert.NotEmpty);
+        await Assert.That(actual).IsNotEmpty();
+        using (Assert.Multiple())
+        {
+            foreach (string item in actual)
+            {
+                await Assert.That(item).IsNotEmpty();
+            }
+        }
     }
 }

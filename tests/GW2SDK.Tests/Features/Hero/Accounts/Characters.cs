@@ -1,5 +1,7 @@
-﻿using GuildWars2.Hero;
+using GuildWars2.Hero;
 using GuildWars2.Hero.Accounts;
+using GuildWars2.Hero.Builds;
+using GuildWars2.Hero.Crafting.Disciplines;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.Tests.TestInfrastructure.Configuration;
 
@@ -13,49 +15,64 @@ public class Characters(Gw2Client sut)
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
         (HashSet<Character> actual, MessageContext context) = await sut.Hero.Account.GetCharacters(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.NotEmpty(actual);
-        Assert.All(actual, entry =>
+        await Assert.That(context)
+            .Member(c => c.ResultCount, m => m.IsEqualTo(actual.Count))
+            .And.Member(c => c.ResultTotal, m => m.IsEqualTo(actual.Count));
+        await Assert.That(actual).IsNotEmpty();
+
+        using (Assert.Multiple())
         {
-            Assert.NotEmpty(entry.Name);
-            Assert.True(entry.Race.IsDefined());
-            Assert.True(entry.BodyType.IsDefined());
-            Assert.True(entry.Profession.IsDefined());
-            Assert.NotNull(entry.Flags);
-            Assert.True(entry.Level > 0);
-            Assert.True(entry.Age > TimeSpan.Zero);
-            Assert.True(entry.LastModified > DateTimeOffset.MinValue);
-            Assert.True(entry.Created > DateTimeOffset.MinValue);
-            Assert.NotNull(entry.CraftingDisciplines);
-            Assert.All(entry.CraftingDisciplines, discipline =>
+            foreach (Character entry in actual)
             {
-                Assert.True(discipline.Discipline.IsDefined());
-            });
-            Assert.NotNull(entry.Backstory);
-            Assert.NotNull(entry.WvwAbilities);
-            Assert.All(entry.WvwAbilities, ability =>
-            {
-                Assert.True(ability.Id > 0);
-            });
-            if (entry.BuildTemplates is not null)
-            {
-                Assert.All(entry.BuildTemplates, template =>
+                await Assert.That(entry)
+                    .Member(e => e.Name, m => m.IsNotEmpty())
+                    .And.Member(e => e.Race.IsDefined(), m => m.IsTrue())
+                    .And.Member(e => e.BodyType.IsDefined(), m => m.IsTrue())
+                    .And.Member(e => e.Profession.IsDefined(), m => m.IsTrue())
+                    .And.Member(e => e.Flags, m => m.IsNotNull())
+                    .And.Member(e => e.Level, m => m.IsGreaterThan(0))
+                    .And.Member(e => e.Age, m => m.IsGreaterThan(TimeSpan.Zero))
+                    .And.Member(e => e.LastModified, m => m.IsGreaterThan(DateTimeOffset.MinValue))
+                    .And.Member(e => e.Created, m => m.IsGreaterThan(DateTimeOffset.MinValue))
+                    .And.Member(e => e.CraftingDisciplines, m => m.IsNotNull());
+
+                foreach (CraftingDiscipline discipline in entry.CraftingDisciplines)
                 {
-                    Assert.NotNull(template.Build);
-                    Assert.NotNull(template.Build.Skills);
-                    Assert.NotNull(template.Build.AquaticSkills);
-                    Assert.Equal(entry.Profession, template.Build.Profession);
-                    if (template.Build.IsRangerBuild)
+                    await Assert.That(discipline.Discipline.IsDefined()).IsTrue();
+                }
+
+                await Assert.That(entry.Backstory).IsNotNull();
+                await Assert.That(entry.WvwAbilities).IsNotNull();
+
+                if (entry.WvwAbilities is not null)
+                {
+                    foreach (WvwAbility ability in entry.WvwAbilities)
                     {
-                        Assert.Equal(ProfessionName.Ranger, template.Build.Profession);
+                        await Assert.That(ability.Id).IsGreaterThan(0);
                     }
-                    else if (template.Build.IsRevenantBuild)
+                }
+
+                if (entry.BuildTemplates is not null)
+                {
+                    foreach (BuildTemplate template in entry.BuildTemplates)
                     {
-                        Assert.Equal(ProfessionName.Revenant, template.Build.Profession);
+                        await Assert.That(template.Build)
+                            .Member(b => b, m => m.IsNotNull())
+                            .And.Member(b => b.Skills, m => m.IsNotNull())
+                            .And.Member(b => b.AquaticSkills, m => m.IsNotNull())
+                            .And.Member(b => b.Profession, m => m.IsEqualTo(entry.Profession));
+
+                        if (template.Build.IsRangerBuild)
+                        {
+                            await Assert.That(template.Build.Profession).IsEqualTo(ProfessionName.Ranger);
+                        }
+                        else if (template.Build.IsRevenantBuild)
+                        {
+                            await Assert.That(template.Build.Profession).IsEqualTo(ProfessionName.Revenant);
+                        }
                     }
-                });
+                }
             }
-        });
+        }
     }
 }

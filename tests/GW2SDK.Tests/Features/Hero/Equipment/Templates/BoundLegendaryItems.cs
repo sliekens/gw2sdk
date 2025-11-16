@@ -14,12 +14,12 @@ public class BoundLegendaryItems(Gw2Client sut)
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
         (HashSet<BoundLegendaryItem> actual, MessageContext context) = await sut.Hero.Equipment.Templates.GetBoundLegendaryItems(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.NotEmpty(actual);
-        Assert.All(actual, entry =>
+        await Assert.That(context).IsNotNull();
+        await Assert.That(actual).IsNotEmpty();
+        foreach (BoundLegendaryItem entry in actual)
         {
-            Assert.True(entry.Id > 0);
-            Assert.True(entry.Count > 0);
+            await Assert.That(entry.Id > 0).IsTrue();
+            await Assert.That(entry.Count > 0).IsTrue();
 #if NET
             string json = JsonSerializer.Serialize(entry, Common.TestJsonContext.Default.BoundLegendaryItem);
             BoundLegendaryItem? roundtrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.BoundLegendaryItem);
@@ -27,7 +27,7 @@ public class BoundLegendaryItems(Gw2Client sut)
             string json = JsonSerializer.Serialize(entry);
             BoundLegendaryItem? roundtrip = JsonSerializer.Deserialize<BoundLegendaryItem>(json);
 #endif
-            Assert.Equal(entry, roundtrip);
-        });
+            await Assert.That(roundtrip).IsEqualTo(entry);
+        }
     }
 }

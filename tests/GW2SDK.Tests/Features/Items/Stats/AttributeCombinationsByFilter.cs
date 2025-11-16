@@ -1,4 +1,4 @@
-﻿using GuildWars2.Items.Stats;
+using GuildWars2.Items.Stats;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Items.Stats;
@@ -11,9 +11,14 @@ public class AttributeCombinationsByFilter(Gw2Client sut)
     {
         HashSet<int> ids = [161, 559, 1566];
         (HashSet<AttributeCombination> actual, MessageContext context) = await sut.Items.GetAttributeCombinationsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(ids.Count, context.ResultCount);
-        Assert.True(context.ResultTotal > ids.Count);
-        Assert.Equal(ids.Count, actual.Count);
-        Assert.Collection(ids, first => Assert.Contains(actual, found => found.Id == first), second => Assert.Contains(actual, found => found.Id == second), third => Assert.Contains(actual, found => found.Id == third));
+        await Assert.That(actual).HasCount().EqualTo(ids.Count);
+        using (Assert.Multiple())
+        {
+            await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(ids.Count));
+            await Assert.That(context.ResultTotal!.Value).IsGreaterThan(ids.Count);
+            await Assert.That(actual.ElementAt(0).Id).IsIn(ids);
+            await Assert.That(actual.ElementAt(1).Id).IsIn(ids);
+            await Assert.That(actual.ElementAt(2).Id).IsIn(ids);
+        }
     }
 }

@@ -10,13 +10,13 @@ public class DecorationCategories(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<DecorationCategory> actual, MessageContext context) = await sut.Pve.Home.GetDecorationCategories(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, category =>
+        await Assert.That(actual).IsNotEmpty();
+        await Assert.That(context).Member(c => c.ResultTotal, m => m.IsEqualTo(actual.Count));
+        foreach (DecorationCategory category in actual)
         {
-            Assert.NotNull(category);
-            Assert.True(category.Id > 0);
-            Assert.NotEmpty(category.Name);
-        });
+            await Assert.That(category).IsNotNull();
+            await Assert.That(category.Id > 0).IsTrue();
+            await Assert.That(category.Name).IsNotEmpty();
+        }
     }
 }

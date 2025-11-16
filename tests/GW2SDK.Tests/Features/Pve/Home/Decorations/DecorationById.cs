@@ -11,7 +11,7 @@ public class DecorationById(Gw2Client sut)
     {
         const int id = 133;
         (Decoration actual, MessageContext context) = await sut.Pve.Home.GetDecorationById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.Equal(id, actual.Id);
+        await Assert.That(context).IsNotNull();
+        await Assert.That(actual.Id).IsEqualTo(id);
     }
 }

@@ -12,9 +12,12 @@ public class UnlockedMailCarriers(Gw2Client sut)
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
         (HashSet<int> actual, _) = await sut.Hero.Equipment.MailCarriers.GetUnlockedMailCarriers(accessToken.Key, TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
+        await Assert.That(actual).IsNotEmpty();
         (HashSet<MailCarrier> carriers, _) = await sut.Hero.Equipment.MailCarriers.GetMailCarriersByIds(actual, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(actual.Count, carriers.Count);
-        Assert.All(carriers, carrier => Assert.Contains(carrier.Id, actual));
+        await Assert.That(carriers.Count).IsEqualTo(actual.Count);
+        foreach (MailCarrier carrier in carriers)
+        {
+            await Assert.That(actual).Contains(carrier.Id);
+        }
     }
 }

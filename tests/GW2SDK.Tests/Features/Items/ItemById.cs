@@ -11,7 +11,7 @@ public class ItemById(Gw2Client sut)
     {
         const int id = 24;
         (Item actual, MessageContext context) = await sut.Items.GetItemById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.Equal(id, actual.Id);
+        await Assert.That(context).IsNotNull();
+        await Assert.That(actual).Member(a => a.Id, idMember => idMember.IsEqualTo(id));
     }
 }

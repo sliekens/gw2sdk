@@ -12,8 +12,8 @@ public class HeartsIndex(Gw2Client sut)
     public async Task Can_be_listed(int continentId, int floorId, int regionId, int mapId)
     {
         (HashSet<int> actual, MessageContext context) = await sut.Exploration.GetHeartsIndex(continentId, floorId, regionId, mapId, TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.NotEmpty(actual);
+        await Assert.That(context.ResultCount).IsEqualTo(actual.Count);
+        await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);
+        await Assert.That(actual).IsNotEmpty();
     }
 }

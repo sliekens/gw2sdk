@@ -1,4 +1,4 @@
-﻿using GuildWars2.Tests.TestInfrastructure.Composition;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Hero.Achievements;
@@ -11,7 +11,10 @@ public class UnlockedTitles(Gw2Client sut)
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
         (HashSet<int> actual, _) = await sut.Hero.Achievements.GetUnlockedTitles(accessToken.Key, TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.All(actual, id => Assert.NotEqual(0, id));
+        await Assert.That(actual).IsNotEmpty();
+        foreach (int id in actual)
+        {
+            await Assert.That(id).IsNotEqualTo(0);
+        }
     }
 }

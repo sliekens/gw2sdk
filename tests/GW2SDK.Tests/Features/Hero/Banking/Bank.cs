@@ -1,4 +1,5 @@
 using GuildWars2.Chat;
+using GuildWars2.Hero.Inventories;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.Tests.TestInfrastructure.Configuration;
 
@@ -12,20 +13,20 @@ public class Bank(Gw2Client sut)
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
         (GuildWars2.Hero.Banking.Bank actual, _) = await sut.Hero.Bank.GetBank(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual.Items);
-        Assert.Equal(0, actual.Items.Count % 30);
-        Assert.All(actual.Items, slot =>
+        await Assert.That(actual.Items).IsNotEmpty();
+        await Assert.That(actual.Items.Count % 30).IsEqualTo(0);
+        foreach (ItemSlot? slot in actual.Items)
         {
             if (slot is not null)
             {
-                Assert.True(slot.Id > 0);
-                Assert.True(slot.Count > 0);
+                await Assert.That(slot.Id > 0).IsTrue();
+                await Assert.That(slot.Count > 0).IsTrue();
                 ItemLink chatLink = slot.GetChatLink();
-                Assert.Equal(slot.Count, chatLink.Count);
-                Assert.Equal(slot.SkinId, chatLink.SkinId);
-                Assert.Equal(slot.SuffixItemId, chatLink.SuffixItemId);
-                Assert.Equal(slot.SecondarySuffixItemId, chatLink.SecondarySuffixItemId);
+                await Assert.That(chatLink.Count).IsEqualTo(slot.Count);
+                await Assert.That(chatLink.SkinId).IsEqualTo(slot.SkinId);
+                await Assert.That(chatLink.SuffixItemId).IsEqualTo(slot.SuffixItemId);
+                await Assert.That(chatLink.SecondarySuffixItemId).IsEqualTo(slot.SecondarySuffixItemId);
             }
-        });
+        }
     }
 }

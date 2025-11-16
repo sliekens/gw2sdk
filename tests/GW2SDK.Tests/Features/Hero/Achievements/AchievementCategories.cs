@@ -12,46 +12,51 @@ public class AchievementCategories(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<AchievementCategory> actual, MessageContext context) = await sut.Hero.Achievements.GetAchievementCategories(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.NotEmpty(actual);
-        Assert.All(actual, entry =>
+        await Assert.That(context)
+            .Member(c => c.ResultCount, rc => rc.IsEqualTo(actual.Count))
+            .And.Member(c => c.ResultTotal, rt => rt.IsEqualTo(actual.Count));
+        await Assert.That(actual).IsNotEmpty();
+        foreach (AchievementCategory entry in actual)
         {
-            Assert.True(entry.Id > 0);
-            Assert.NotEmpty(entry.Name);
-            Assert.NotNull(entry.Description);
-            Assert.True(entry.Order >= 0);
+            await Assert.That(entry)
+                .Member(e => e.Id, m => m.IsGreaterThan(0))
+                .And.Member(e => e.Name, m => m.IsNotEmpty())
+                .And.Member(e => e.Description, m => m.IsNotNull())
+                .And.Member(e => e.Order, m => m.IsGreaterThanOrEqualTo(0));
 #pragma warning disable CS0618 // Suppress obsolete warning for IconHref
 
-            Assert.NotEmpty(entry.IconHref);
+            await Assert.That(entry.IconHref).IsNotEmpty();
 #pragma warning restore CS0618
-            Assert.NotNull(entry.IconUrl);
-            Assert.True(entry.IconUrl!.IsAbsoluteUri);
-            Assert.NotNull(entry.Achievements);
-            Assert.All(entry.Achievements, achievement =>
+            await Assert.That(entry.IconUrl).IsNotNull()
+                .And.Member(u => u.IsAbsoluteUri, m => m.IsTrue());
+            await Assert.That(entry.Achievements).IsNotNull();
+            foreach (AchievementRef achievement in entry.Achievements)
             {
-                Assert.True(achievement.Id > 0);
-                Assert.Empty(achievement.Flags.Other);
+                await Assert.That(achievement)
+                    .Member(a => a.Id, m => m.IsGreaterThan(0))
+                    .And.Member(a => a.Flags.Other, m => m.IsEmpty());
                 if (achievement.Level is not null)
                 {
-                    Assert.InRange(achievement.Level.Min, 1, 80);
-                    Assert.InRange(achievement.Level.Max, 1, 80);
-                    Assert.True(achievement.Level.Max >= achievement.Level.Min);
+                    await Assert.That(achievement.Level)
+                        .Member(l => l.Min, min => min.IsGreaterThanOrEqualTo(1).And.IsLessThanOrEqualTo(80))
+                        .And.Member(l => l.Max, max => max.IsGreaterThanOrEqualTo(1).And.IsLessThanOrEqualTo(80).And.IsGreaterThanOrEqualTo(achievement.Level.Min));
                 }
-            });
+            }
+
             if (entry.Tomorrow is not null)
             {
-                Assert.All(entry.Tomorrow, achievement =>
+                foreach (AchievementRef achievement in entry.Tomorrow)
                 {
-                    Assert.True(achievement.Id > 0);
-                    Assert.Empty(achievement.Flags.Other);
+                    await Assert.That(achievement)
+                        .Member(a => a.Id, id => id.IsGreaterThan(0))
+                        .And.Member(a => a.Flags.Other, other => other.IsEmpty());
                     if (achievement.Level is not null)
                     {
-                        Assert.InRange(achievement.Level.Min, 1, 80);
-                        Assert.InRange(achievement.Level.Max, 1, 80);
-                        Assert.True(achievement.Level.Max >= achievement.Level.Min);
+                        await Assert.That(achievement.Level)
+                            .Member(l => l.Min, min => min.IsGreaterThanOrEqualTo(1).And.IsLessThanOrEqualTo(80))
+                            .And.Member(l => l.Max, max => max.IsGreaterThanOrEqualTo(1).And.IsLessThanOrEqualTo(80).And.IsGreaterThanOrEqualTo(achievement.Level.Min));
                     }
-                });
+                }
             }
 
 #if NET
@@ -61,7 +66,7 @@ public class AchievementCategories(Gw2Client sut)
             string json = JsonSerializer.Serialize(entry);
             AchievementCategory? roundTrip = JsonSerializer.Deserialize<AchievementCategory>(json);
 #endif
-            Assert.Equal(entry, roundTrip);
-        });
+            await Assert.That(roundTrip).IsEqualTo(entry);
+        }
     }
 }

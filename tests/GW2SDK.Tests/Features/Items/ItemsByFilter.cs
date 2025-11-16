@@ -11,9 +11,11 @@ public class ItemsByFilter(Gw2Client sut)
     {
         HashSet<int> ids = [24, 46, 56];
         (HashSet<Item> actual, MessageContext context) = await sut.Items.GetItemsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(ids.Count, context.ResultCount);
-        Assert.True(context.ResultTotal > ids.Count);
-        Assert.Equal(ids.Count, actual.Count);
-        Assert.Collection(ids, first => Assert.Contains(actual, found => found.Id == first), second => Assert.Contains(actual, found => found.Id == second), third => Assert.Contains(actual, found => found.Id == third));
+        await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(ids.Count))
+            .And.Member(c => c.ResultTotal!.Value, rt => rt.IsGreaterThan(ids.Count));
+        await Assert.That(actual).HasCount().EqualTo(ids.Count)
+            .And.Any(item => item.Id == ids.ElementAt(0))
+            .And.Any(item => item.Id == ids.ElementAt(1))
+            .And.Any(item => item.Id == ids.ElementAt(2));
     }
 }

@@ -1,4 +1,4 @@
-﻿using GuildWars2.Hero;
+using GuildWars2.Hero;
 using GuildWars2.Hero.Races;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 
@@ -12,9 +12,12 @@ public class RacesByFilter(Gw2Client sut)
     {
         HashSet<RaceName> names = [RaceName.Asura, RaceName.Charr, RaceName.Norn];
         (HashSet<Race> actual, MessageContext context) = await sut.Hero.Races.GetRacesByNames(names, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(names.Count, context.ResultCount);
-        Assert.True(context.ResultTotal > names.Count);
-        Assert.Equal(names.Count, actual.Count);
-        Assert.Collection(names, first => Assert.Contains(actual, found => found.Id == first), second => Assert.Contains(actual, found => found.Id == second), third => Assert.Contains(actual, found => found.Id == third));
+        await Assert.That(context.ResultCount).IsEqualTo(names.Count);
+        await Assert.That(context.ResultTotal > names.Count).IsTrue();
+        await Assert.That(actual.Count).IsEqualTo(names.Count);
+        foreach (RaceName name in names)
+        {
+            await Assert.That(actual).Contains(found => found.Id == name);
+        }
     }
 }

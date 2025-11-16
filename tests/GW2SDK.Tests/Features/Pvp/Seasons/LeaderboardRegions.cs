@@ -13,6 +13,9 @@ public class LeaderboardRegions(Gw2Client sut)
     {
         (HashSet<string> actual, _) = await sut.Pvp.GetLeaderboardRegions(seasonId, boardId, TestContext.Current!.Execution.CancellationToken);
         HashSet<string> expected = ["eu", "na"];
-        Assert.Equal(expected, actual);
+        using (Assert.Multiple())
+        {
+            await Assert.That(actual).IsEquivalentTo(expected);
+        }
     }
 }

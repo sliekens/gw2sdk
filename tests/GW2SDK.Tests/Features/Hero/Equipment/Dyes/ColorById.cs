@@ -11,7 +11,7 @@ public class ColorById(Gw2Client sut)
     {
         const int id = 1;
         (DyeColor actual, MessageContext context) = await sut.Hero.Equipment.Dyes.GetColorById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.Equal(id, actual.Id);
+        await Assert.That(context).IsNotNull();
+        await Assert.That(actual.Id).IsEqualTo(id);
     }
 }

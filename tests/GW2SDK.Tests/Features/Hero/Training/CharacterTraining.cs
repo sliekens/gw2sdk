@@ -1,3 +1,4 @@
+using GuildWars2.Hero.Training;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.Tests.TestInfrastructure.Configuration;
 
@@ -15,8 +16,14 @@ public class CharacterTraining(Gw2Client sut)
         // BUG: currently this data is unavailable :(
         // Change this back to Assert.NotEmpty once fixed
         // https://github.com/gw2-api/issues/issues/56
-        Assert.Empty(actual.Training);
-        Assert.All(actual.Training, entry => Assert.NotEqual(0, entry.Spent));
-        Assert.All(actual.Training, entry => Assert.True(entry.Done));
+        await Assert.That(actual.Training).IsEmpty();
+        foreach (TrainingProgress entry in actual.Training)
+        {
+            await Assert.That(entry.Spent).IsNotEqualTo(0);
+        }
+        foreach (TrainingProgress entry in actual.Training)
+        {
+            await Assert.That(entry.Done).IsTrue();
+        }
     }
 }

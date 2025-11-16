@@ -1,4 +1,4 @@
-﻿using GuildWars2.Tests.TestInfrastructure.Composition;
+using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Hero.Emotes;
@@ -13,6 +13,9 @@ public class UnlockedEmotes(Gw2Client sut)
         (HashSet<string> actual, _) = await sut.Hero.Emotes.GetUnlockedEmotes(accessToken.Key, TestContext.Current!.Execution.CancellationToken);
         // Can be empty if you haven't unlocked any emotes
         // The best we can do is verify that there are no unexpected emotes
-        Assert.All(actual, chest => Assert.Contains(chest, new[] { "Bless", "geargrind", "Heroic", "Paper", "playdead", "Possessed", "Rock", "rockout", "Scissors", "shiver", "Shiverplus", "shuffle", "step", "Stretch" }));
+        foreach (string chest in actual)
+        {
+            await Assert.That(new[] { "Bless", "geargrind", "Heroic", "Paper", "playdead", "Possessed", "Rock", "rockout", "Scissors", "shiver", "Shiverplus", "shuffle", "step", "Stretch" }).Contains(chest);
+        }
     }
 }

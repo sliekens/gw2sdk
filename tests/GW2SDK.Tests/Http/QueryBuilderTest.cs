@@ -5,15 +5,15 @@ namespace GuildWars2.Tests.Http;
 public class QueryBuilderTest
 {
     [Test]
-    public void The_default_state_is_an_empty_query()
+    public async Task The_default_state_is_an_empty_query()
     {
         QueryBuilder sut = [];
         string actual = sut.Build();
-        Assert.Equal("", actual);
+        await Assert.That(actual).IsEmpty();
     }
 
     [Test]
-    public void Build_query_with_one_key()
+    public async Task Build_query_with_one_key()
     {
         QueryBuilder sut = new()
         {
@@ -23,11 +23,11 @@ public class QueryBuilderTest
             }
         };
         string actual = sut.Build();
-        Assert.Equal("?key=value", actual);
+        await Assert.That(actual).IsEqualTo("?key=value");
     }
 
     [Test]
-    public void Build_query_with_multiple_keys()
+    public async Task Build_query_with_multiple_keys()
     {
         QueryBuilder sut = new()
         {
@@ -45,11 +45,11 @@ public class QueryBuilderTest
             }
         };
         string actual = sut.Build();
-        Assert.Equal("?key1=first&key2=second&key3=third", actual);
+        await Assert.That(actual).IsEqualTo("?key1=first&key2=second&key3=third");
     }
 
     [Test]
-    public void Build_query_with_repeating_keys()
+    public async Task Build_query_with_repeating_keys()
     {
         QueryBuilder sut = new()
         {
@@ -67,6 +67,6 @@ public class QueryBuilderTest
             }
         };
         string actual = sut.Build();
-        Assert.Equal("?key=first&key=second&key=third", actual);
+        await Assert.That(actual).IsEqualTo("?key=first&key=second&key=third");
     }
 }

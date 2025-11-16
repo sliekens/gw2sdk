@@ -10,16 +10,17 @@ public class Pets(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<Pet> actual, MessageContext context) = await sut.Pve.Pets.GetPets(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, entry =>
+        await Assert.That(actual).IsNotEmpty();
+        await Assert.That(context).Member(c => c.ResultCount, m => m.IsEqualTo(actual.Count));
+        await Assert.That(context).Member(c => c.ResultTotal, m => m.IsEqualTo(actual.Count));
+        foreach (Pet entry in actual)
         {
-            Assert.True(entry.Id > 0);
-            Assert.NotEmpty(entry.Name);
-            Assert.NotEmpty(entry.Description);
-            Assert.NotNull(entry.IconUrl);
-            Assert.NotEmpty(entry.Skills);
-        });
+            await Assert.That(entry.Id > 0).IsTrue();
+            await Assert.That(entry)
+                .Member(e => e.Name, name => name.IsNotEmpty())
+                .And.Member(e => e.Description, desc => desc.IsNotEmpty())
+                .And.Member(e => e.IconUrl, url => url.IsNotNull())
+                .And.Member(e => e.Skills, skills => skills.IsNotEmpty());
+        }
     }
 }

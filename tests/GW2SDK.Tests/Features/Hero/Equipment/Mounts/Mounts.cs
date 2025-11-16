@@ -12,28 +12,40 @@ public class Mounts(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<Mount> actual, MessageContext context) = await sut.Hero.Equipment.Mounts.GetMounts(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, entry =>
+        await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);
+        using (Assert.Multiple())
         {
-            Assert.True(entry.Id.IsDefined());
-            Assert.NotEmpty(entry.Name);
-            Assert.True(entry.DefaultSkinId > 0);
-            Assert.NotNull(entry.SkinIds);
-            Assert.All(entry.SkinIds, id => Assert.True(id > 0));
-            Assert.NotNull(entry.Skills);
-            Assert.All(entry.Skills, skill =>
+            foreach (Mount entry in actual)
             {
-                Assert.True(skill.Id > 0);
-                Assert.True(skill.Slot.IsDefined());
-            });
+                await Assert.That(entry.Id.IsDefined()).IsTrue();
+                await Assert.That(entry.Name).IsNotEmpty();
+                await Assert.That(entry.DefaultSkinId).IsGreaterThan(0);
+                await Assert.That(entry.SkinIds).IsNotNull();
+                using (Assert.Multiple())
+                {
+                    foreach (int id in entry.SkinIds)
+                    {
+                        await Assert.That(id).IsGreaterThan(0);
+                    }
+                }
+                await Assert.That(entry.Skills).IsNotNull();
+                using (Assert.Multiple())
+                {
+                    foreach (SkillReference skill in entry.Skills)
+                    {
+                        await Assert.That(skill.Id).IsGreaterThan(0);
+                        await Assert.That(skill.Slot.IsDefined()).IsTrue();
+                    }
+                }
 #if NET
-            string json = JsonSerializer.Serialize(entry, Common.TestJsonContext.Default.Mount);
-            Mount? roundtrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.Mount);
+                string json = JsonSerializer.Serialize(entry, Common.TestJsonContext.Default.Mount);
+                Mount? roundtrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.Mount);
 #else
-            string json = JsonSerializer.Serialize(entry);
-            Mount? roundtrip = JsonSerializer.Deserialize<Mount>(json);
+                string json = JsonSerializer.Serialize(entry);
+                Mount? roundtrip = JsonSerializer.Deserialize<Mount>(json);
 #endif
-            Assert.Equal(entry, roundtrip);
-        });
+                await Assert.That(roundtrip).IsEqualTo(entry);
+            }
+        }
     }
 }

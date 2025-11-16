@@ -1,4 +1,4 @@
-﻿using GuildWars2.Exploration.Hearts;
+using GuildWars2.Exploration.Hearts;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Exploration.Hearts;
@@ -15,12 +15,18 @@ public class HeartsByPage(Gw2Client sut)
         const int mapId = 26;
         const int pageSize = 3;
         (HashSet<Heart> actual, MessageContext context) = await sut.Exploration.GetHeartsByPage(continentId, floorId, regionId, mapId, 0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context.Links);
-        Assert.Equal(pageSize, context.PageSize);
-        Assert.Equal(pageSize, context.ResultCount);
-        Assert.True(context.PageTotal > 0);
-        Assert.True(context.ResultTotal > 0);
-        Assert.Equal(pageSize, actual.Count);
-        Assert.All(actual, Assert.NotNull);
+        await Assert.That(context.Links).IsNotNull();
+        await Assert.That(context.PageSize).IsEqualTo(pageSize);
+        await Assert.That(context.ResultCount).IsEqualTo(pageSize);
+        await Assert.That(context).Member(c => c.PageTotal, pt => pt.IsNotNull().And.IsGreaterThan(0))
+            .And.Member(c => c.ResultTotal, rt => rt.IsNotNull().And.IsGreaterThan(0));
+        await Assert.That(actual).HasCount().EqualTo(pageSize);
+        using (Assert.Multiple())
+        {
+            foreach (Heart heart in actual)
+            {
+                await Assert.That(heart).IsNotNull();
+            }
+        }
     }
 }

@@ -1,6 +1,8 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 
 using GuildWars2.Chat;
+using GuildWars2.Hero;
+using GuildWars2.Hero.Equipment;
 using GuildWars2.Hero.Equipment.Wardrobe;
 using GuildWars2.Tests.Features.Markup;
 using GuildWars2.Tests.TestInfrastructure;
@@ -20,115 +22,118 @@ public class Skins
         Gw2Client sut = new(httpClient);
         await foreach ((EquipmentSkin actual, MessageContext context) in sut.Hero.Equipment.Wardrobe.GetSkinsBulk(cancellationToken: TestContext.Current!.Execution.CancellationToken))
         {
-            Assert.NotNull(context);
-            Assert.True(actual.Id > 0);
-            Assert.NotNull(actual.Name);
-            Assert.NotNull(actual.Description);
+            await Assert.That(context).IsNotNull();
+            await Assert.That(actual.Id > 0).IsTrue();
+            await Assert.That(actual.Name).IsNotNull();
+            await Assert.That(actual.Description).IsNotNull();
             MarkupSyntaxValidator.Validate(actual.Description);
-            Assert.NotEmpty(actual.Races);
-            Assert.All(actual.Races, race => Assert.True(race.IsDefined()));
-            Assert.True(actual.Rarity.IsDefined());
+            await Assert.That(actual.Races).IsNotEmpty();
+            foreach (Extensible<RaceName> race in actual.Races)
+            {
+                await Assert.That(race.IsDefined()).IsTrue();
+            }
+            await Assert.That(actual.Rarity.IsDefined()).IsTrue();
             if (actual is ArmorSkin armor)
             {
-                Assert.True(armor.WeightClass.IsDefined());
-                Assert.All(armor.DyeSlots?.Default ?? [], slot =>
+                await Assert.That(armor.WeightClass.IsDefined()).IsTrue();
+                foreach (DyeSlot? slot in armor.DyeSlots?.Default ?? [])
                 {
                     if (slot is not null)
                     {
-                        Assert.True(slot.ColorId > 0);
-                        Assert.True(slot.Material.IsDefined());
+                        await Assert.That(slot.ColorId > 0).IsTrue();
+                        await Assert.That(slot.Material.IsDefined()).IsTrue();
                     }
-                });
-                Assert.All(armor.DyeSlots?.AsuraFemale ?? [], slot =>
+                }
+                foreach (DyeSlot? slot in armor.DyeSlots?.AsuraFemale ?? [])
                 {
                     if (slot is not null)
                     {
-                        Assert.True(slot.ColorId > 0);
-                        Assert.True(slot.Material.IsDefined());
+                        await Assert.That(slot.ColorId > 0).IsTrue();
+                        await Assert.That(slot.Material.IsDefined()).IsTrue();
                     }
-                });
-                Assert.All(armor.DyeSlots?.AsuraMale ?? [], slot =>
+                }
+                foreach (DyeSlot? slot in armor.DyeSlots?.AsuraMale ?? [])
                 {
                     if (slot is not null)
                     {
-                        Assert.True(slot.ColorId > 0);
-                        Assert.True(slot.Material.IsDefined());
+                        await Assert.That(slot.ColorId > 0).IsTrue();
+                        await Assert.That(slot.Material.IsDefined()).IsTrue();
                     }
-                });
-                Assert.All(armor.DyeSlots?.CharrFemale ?? [], slot =>
+                }
+                foreach (DyeSlot? slot in armor.DyeSlots?.CharrFemale ?? [])
                 {
                     if (slot is not null)
                     {
-                        Assert.True(slot.ColorId > 0);
-                        Assert.True(slot.Material.IsDefined());
+                        await Assert.That(slot.ColorId > 0).IsTrue();
+                        await Assert.That(slot.Material.IsDefined()).IsTrue();
                     }
-                });
-                Assert.All(armor.DyeSlots?.CharrMale ?? [], slot =>
+                }
+                foreach (DyeSlot? slot in armor.DyeSlots?.CharrMale ?? [])
                 {
                     if (slot is not null)
                     {
-                        Assert.True(slot.ColorId > 0);
-                        Assert.True(slot.Material.IsDefined());
+                        await Assert.That(slot.ColorId > 0).IsTrue();
+                        await Assert.That(slot.Material.IsDefined()).IsTrue();
                     }
-                });
-                Assert.All(armor.DyeSlots?.HumanFemale ?? [], slot =>
+                }
+                foreach (DyeSlot? slot in armor.DyeSlots?.HumanFemale ?? [])
                 {
                     if (slot is not null)
                     {
-                        Assert.True(slot.ColorId > 0);
-                        Assert.True(slot.Material.IsDefined());
+                        await Assert.That(slot.ColorId > 0).IsTrue();
+                        await Assert.That(slot.Material.IsDefined()).IsTrue();
                     }
-                });
-                Assert.All(armor.DyeSlots?.HumanMale ?? [], slot =>
+                }
+                foreach (DyeSlot? slot in armor.DyeSlots?.HumanMale ?? [])
                 {
                     if (slot is not null)
                     {
-                        Assert.True(slot.ColorId > 0);
-                        Assert.True(slot.Material.IsDefined());
+                        await Assert.That(slot.ColorId > 0).IsTrue();
+                        await Assert.That(slot.Material.IsDefined()).IsTrue();
                     }
-                });
-                Assert.All(armor.DyeSlots?.NornFemale ?? [], slot =>
+                }
+                foreach (DyeSlot? slot in armor.DyeSlots?.NornFemale ?? [])
                 {
                     if (slot is not null)
                     {
-                        Assert.True(slot.ColorId > 0);
-                        Assert.True(slot.Material.IsDefined());
+                        await Assert.That(slot.ColorId > 0).IsTrue();
+                        await Assert.That(slot.Material.IsDefined()).IsTrue();
                     }
-                });
-                Assert.All(armor.DyeSlots?.NornMale ?? [], slot =>
+                }
+                foreach (DyeSlot? slot in armor.DyeSlots?.NornMale ?? [])
                 {
                     if (slot is not null)
                     {
-                        Assert.True(slot.ColorId > 0);
-                        Assert.True(slot.Material.IsDefined());
+                        await Assert.That(slot.ColorId > 0).IsTrue();
+                        await Assert.That(slot.Material.IsDefined()).IsTrue();
                     }
-                });
-                Assert.All(armor.DyeSlots?.SylvariFemale ?? [], slot =>
+                }
+                foreach (DyeSlot? slot in armor.DyeSlots?.SylvariFemale ?? [])
                 {
                     if (slot is not null)
                     {
-                        Assert.True(slot.ColorId > 0);
-                        Assert.True(slot.Material.IsDefined());
+                        await Assert.That(slot.ColorId > 0).IsTrue();
+                        await Assert.That(slot.Material.IsDefined()).IsTrue();
                     }
-                });
-                Assert.All(armor.DyeSlots?.SylvariMale ?? [], slot =>
+                }
+                foreach (DyeSlot? slot in armor.DyeSlots?.SylvariMale ?? [])
                 {
                     if (slot is not null)
                     {
-                        Assert.True(slot.ColorId > 0);
-                        Assert.True(slot.Material.IsDefined());
+                        await Assert.That(slot.ColorId > 0).IsTrue();
+                        await Assert.That(slot.Material.IsDefined()).IsTrue();
                     }
-                });
+                }
             }
             else if (actual is WeaponSkin weapon)
             {
-                Assert.True(weapon.DamageType.IsDefined());
+                await Assert.That(weapon.DamageType.IsDefined()).IsTrue();
             }
 
             SkinLink chatLink = actual.GetChatLink();
-            Assert.Equal(actual.Id, chatLink.SkinId);
+            await Assert.That(chatLink.SkinId).IsEqualTo(actual.Id);
             SkinLink chatLinkRoundtrip = SkinLink.Parse(chatLink.ToString());
-            Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
+            await Assert.That(chatLinkRoundtrip.ToString()).IsEqualTo(chatLink.ToString());
         }
     }
 
@@ -149,8 +154,10 @@ public class Skins
             string json = JsonSerializer.Serialize(original);
             EquipmentSkin? roundTrip = JsonSerializer.Deserialize<EquipmentSkin>(json);
 #endif
-            Assert.IsType(original.GetType(), roundTrip);
-            Assert.Equal(original, roundTrip);
+            await Assert.That(roundTrip).IsNotNull()
+                .And.IsOfType(original.GetType())
+                .And.IsEqualTo(original);
+            await Assert.That(roundTrip).IsEqualTo(original);
         }
     }
 }

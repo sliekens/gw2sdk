@@ -10,13 +10,17 @@ public class Legends(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<Legend> actual, MessageContext context) = await sut.Hero.Builds.GetLegends(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, entry =>
+        await Assert.That(actual).IsNotEmpty();
+        await Assert.That(context.ResultCount).IsEqualTo(actual.Count);
+        await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);
+
+        using (Assert.Multiple())
         {
-            Assert.NotEmpty(entry.Id);
-            Assert.True(entry.Code > 0);
-        });
+            foreach (Legend entry in actual)
+            {
+                await Assert.That(entry.Id).IsNotEmpty();
+                await Assert.That(entry.Code).IsGreaterThan(0);
+            }
+        }
     }
 }

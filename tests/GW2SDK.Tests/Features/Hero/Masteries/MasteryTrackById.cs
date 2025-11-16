@@ -11,7 +11,7 @@ public class MasteryTrackById(Gw2Client sut)
     {
         const int id = 1;
         (MasteryTrack actual, MessageContext context) = await sut.Hero.Masteries.GetMasteryTrackById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.Equal(id, actual.Id);
+        await Assert.That(context).IsNotNull();
+        await Assert.That(actual.Id).IsEqualTo(id);
     }
 }

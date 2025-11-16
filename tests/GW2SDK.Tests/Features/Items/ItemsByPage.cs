@@ -11,12 +11,12 @@ public class ItemsByPage(Gw2Client sut)
     {
         const int pageSize = 3;
         (HashSet<Item> actual, MessageContext context) = await sut.Items.GetItemsByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context.Links);
-        Assert.Equal(pageSize, context.PageSize);
-        Assert.Equal(pageSize, context.ResultCount);
-        Assert.True(context.PageTotal > 0);
-        Assert.True(context.ResultTotal > 0);
-        Assert.Equal(pageSize, actual.Count);
-        Assert.All(actual, Assert.NotNull);
+        await Assert.That(context).Member(c => c.Links!, l => l.IsNotNull())
+            .And.Member(c => c.PageSize, ps => ps.IsEqualTo(pageSize))
+            .And.Member(c => c.ResultCount, rc => rc.IsEqualTo(pageSize))
+            .And.Member(c => c.PageTotal!.Value, pt => pt.IsGreaterThan(0))
+            .And.Member(c => c.ResultTotal!.Value, rt => rt.IsGreaterThan(0));
+        await Assert.That(actual).HasCount().EqualTo(pageSize)
+            .And.All(item => item is not null);
     }
 }

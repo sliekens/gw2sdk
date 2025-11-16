@@ -1,4 +1,4 @@
-﻿using GuildWars2.Metadata;
+using GuildWars2.Metadata;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Metadata;
@@ -10,9 +10,12 @@ public class V1(Gw2Client sut)
     public async Task Has_api_metadata()
     {
         (ApiVersion actual, _) = await sut.Metadata.GetApiVersion("v1", cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.All(actual.Languages, language =>
+        using (Assert.Multiple())
         {
-            Assert.Contains(language, new[] { "en", "es", "de", "fr", "zh" });
-        });
+            foreach (string language in actual.Languages)
+            {
+                await Assert.That(new[] { "en", "es", "de", "fr", "zh" }).Contains(language);
+            }
+        }
     }
 }

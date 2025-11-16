@@ -13,26 +13,30 @@ public class Novelties(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<Novelty> actual, MessageContext context) = await sut.Hero.Equipment.Novelties.GetNovelties(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, entry =>
+        await Assert.That(actual).IsNotEmpty();
+        await Assert.That(context.ResultCount).IsEqualTo(actual.Count);
+        await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);
+
+        using (Assert.Multiple())
         {
-            Assert.True(entry.Id > 0);
-            Assert.NotEmpty(entry.Name);
-            Assert.NotNull(entry.Description);
-            MarkupSyntaxValidator.Validate(entry.Description);
-            Assert.True(entry.IconUrl.IsAbsoluteUri);
-            Assert.True(entry.Slot.IsDefined());
-            Assert.NotEmpty(entry.UnlockItemIds);
+            foreach (Novelty entry in actual)
+            {
+                await Assert.That(entry.Id).IsGreaterThan(0);
+                await Assert.That(entry.Name).IsNotEmpty();
+                await Assert.That(entry.Description).IsNotNull();
+                MarkupSyntaxValidator.Validate(entry.Description);
+                await Assert.That(entry.IconUrl.IsAbsoluteUri).IsTrue();
+                await Assert.That(entry.Slot.IsDefined()).IsTrue();
+                await Assert.That(entry.UnlockItemIds).IsNotEmpty();
 #if NET
-            string json = JsonSerializer.Serialize(entry, Common.TestJsonContext.Default.Novelty);
-            Novelty? roundtrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.Novelty);
+                string json = JsonSerializer.Serialize(entry, Common.TestJsonContext.Default.Novelty);
+                Novelty? roundtrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.Novelty);
 #else
-            string json = JsonSerializer.Serialize(entry);
-            Novelty? roundtrip = JsonSerializer.Deserialize<Novelty>(json);
+                string json = JsonSerializer.Serialize(entry);
+                Novelty? roundtrip = JsonSerializer.Deserialize<Novelty>(json);
 #endif
-            Assert.Equal(entry, roundtrip);
-        });
+                await Assert.That(entry).IsEqualTo(roundtrip);
+            }
+        }
     }
 }

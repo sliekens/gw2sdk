@@ -11,7 +11,7 @@ public class AchievementCategoryById(Gw2Client sut)
     {
         const int id = 1;
         (AchievementCategory actual, MessageContext context) = await sut.Hero.Achievements.GetAchievementCategoryById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.Equal(id, actual.Id);
+        await Assert.That(context).IsNotNull();
+        await Assert.That(actual.Id).IsEqualTo(id);
     }
 }

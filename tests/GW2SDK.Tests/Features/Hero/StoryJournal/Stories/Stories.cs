@@ -10,25 +10,31 @@ public class Stories(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<Story> actual, MessageContext context) = await sut.Hero.StoryJournal.GetStories(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, entry =>
+        await Assert.That(actual).IsNotEmpty();
+        await Assert.That(context).Member(c => c.ResultCount, resultCount => resultCount.IsEqualTo(actual.Count))
+            .And.Member(c => c.ResultTotal, resultTotal => resultTotal.IsEqualTo(actual.Count));
+        using (Assert.Multiple())
         {
-            Assert.True(entry.Id > 0);
-            Assert.NotEmpty(entry.StorylineId);
-            Assert.NotEmpty(entry.Name);
-            Assert.NotNull(entry.Description);
-            Assert.NotNull(entry.Timeline);
-            Assert.True(entry.Level > 0);
-            Assert.NotEmpty(entry.Races);
-            Assert.True(entry.Order >= 0);
-            Assert.NotNull(entry.Chapters);
-            Assert.All(entry.Chapters, chapter =>
+            foreach (Story entry in actual)
             {
-                Assert.NotEmpty(chapter.Name);
-            });
-            Assert.Empty(entry.Flags.Other);
-        });
+                await Assert.That(entry).Member(e => e.Id, id => id.IsGreaterThan(0))
+                    .And.Member(e => e.StorylineId, storylineId => storylineId.IsNotEmpty())
+                    .And.Member(e => e.Name, name => name.IsNotEmpty())
+                    .And.Member(e => e.Description, description => description.IsNotNull())
+                    .And.Member(e => e.Timeline, timeline => timeline.IsNotNull())
+                    .And.Member(e => e.Level, level => level.IsGreaterThan(0))
+                    .And.Member(e => e.Races, races => races.IsNotEmpty())
+                    .And.Member(e => e.Order, order => order.IsGreaterThanOrEqualTo(0))
+                    .And.Member(e => e.Chapters, chapters => chapters.IsNotNull());
+                using (Assert.Multiple())
+                {
+                    foreach (Chapter chapter in entry.Chapters)
+                    {
+                        await Assert.That(chapter.Name).IsNotEmpty();
+                    }
+                }
+                await Assert.That(entry.Flags.Other).IsEmpty();
+            }
+        }
     }
 }

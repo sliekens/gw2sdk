@@ -13,20 +13,24 @@ public class Finishers(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<Finisher> actual, MessageContext context) = await sut.Hero.Equipment.Finishers.GetFinishers(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, entry =>
+        await Assert.That(actual).IsNotEmpty();
+        await Assert.That(context.ResultCount).IsEqualTo(actual.Count);
+        await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);
+        foreach (Finisher entry in actual)
         {
-            Assert.True(entry.Id > 0);
-            Assert.NotNull(entry.LockedText);
+            await Assert.That(entry.Id).IsGreaterThan(0);
+            await Assert.That(entry.LockedText).IsNotNull();
             MarkupSyntaxValidator.Validate(entry.LockedText);
-            Assert.NotNull(entry.UnlockItemIds);
-            Assert.All(entry.UnlockItemIds, id => Assert.True(id > 0));
-            Assert.True(entry.Order >= 0);
-            Assert.NotNull(entry.IconUrl);
-            Assert.True(entry.IconUrl.IsAbsoluteUri || entry.IconUrl.IsWellFormedOriginalString());
-            Assert.NotEmpty(entry.Name);
+            await Assert.That(entry.UnlockItemIds).IsNotNull();
+            foreach (int id in entry.UnlockItemIds)
+            {
+                await Assert.That(id).IsGreaterThan(0);
+            }
+
+            await Assert.That(entry.Order).IsGreaterThanOrEqualTo(0);
+            await Assert.That(entry.IconUrl).IsNotNull();
+            await Assert.That(entry.IconUrl.IsAbsoluteUri || entry.IconUrl.IsWellFormedOriginalString()).IsTrue();
+            await Assert.That(entry.Name).IsNotEmpty();
             string json;
             Finisher? roundTrip;
 #if NET
@@ -36,7 +40,7 @@ public class Finishers(Gw2Client sut)
             json = JsonSerializer.Serialize(entry);
             roundTrip = JsonSerializer.Deserialize<Finisher>(json);
 #endif
-            Assert.Equal(entry, roundTrip);
-        });
+            await Assert.That(roundTrip).IsEqualTo(entry);
+        }
     }
 }

@@ -11,7 +11,7 @@ public class MatchById(Gw2Client sut)
     {
         const string id = "1-1";
         (Match actual, MessageContext context) = await sut.Wvw.GetMatchById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.Equal(id, actual.Id);
+        await Assert.That(context).IsNotNull();
+        await Assert.That(actual.Id).IsEqualTo(id);
     }
 }

@@ -11,7 +11,10 @@ public class UnlockedNovelties(Gw2Client sut)
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
         (HashSet<int> actual, _) = await sut.Hero.Equipment.Novelties.GetUnlockedNovelties(accessToken.Key, TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.All(actual, id => Assert.NotEqual(0, id));
+        await Assert.That(actual).IsNotEmpty();
+        foreach (int id in actual)
+        {
+            await Assert.That(id).IsNotEqualTo(0);
+        }
     }
 }

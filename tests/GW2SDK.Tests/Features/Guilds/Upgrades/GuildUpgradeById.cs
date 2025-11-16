@@ -1,4 +1,4 @@
-﻿using GuildWars2.Guilds.Upgrades;
+using GuildWars2.Guilds.Upgrades;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Guilds.Upgrades;
@@ -11,7 +11,7 @@ public class GuildUpgradeById(Gw2Client sut)
     {
         const int id = 43;
         (GuildUpgrade actual, MessageContext context) = await sut.Guilds.GetGuildUpgradeById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.Equal(id, actual.Id);
+        await Assert.That(context).IsNotNull();
+        await Assert.That(actual.Id).IsEqualTo(id);
     }
 }

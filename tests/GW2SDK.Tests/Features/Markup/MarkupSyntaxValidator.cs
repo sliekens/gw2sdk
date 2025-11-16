@@ -1,4 +1,4 @@
-﻿using GuildWars2.Markup;
+using GuildWars2.Markup;
 
 namespace GuildWars2.Tests.Features.Markup;
 
@@ -32,19 +32,24 @@ public static class MarkupSyntaxValidator
             case LineBreakNode:
                 break;
             default:
-                Assert.Fail($"Unexpected node type: {node.GetType().Name}");
-                break;
+                throw new InvalidOperationException($"Unexpected node type: {node.GetType().Name}");
         }
     }
 
     private static void ValidateTextNode(TextNode text)
     {
-        Assert.Matches("[a-zA-Z0-9 .]+", text.Text);
+        if (!System.Text.RegularExpressions.Regex.IsMatch(text.Text, "[a-zA-Z0-9 .]+"))
+        {
+            throw new InvalidOperationException($"Text node validation failed for: {text.Text}");
+        }
     }
 
     private static void ValidateColoredTextNode(ColoredTextNode coloredText)
     {
-        Assert.NotEmpty(coloredText.Color);
+        if (string.IsNullOrEmpty(coloredText.Color))
+        {
+            throw new InvalidOperationException("Color is empty");
+        }
 #if NET
         if (coloredText.Color.StartsWith('@'))
 #else
@@ -53,10 +58,10 @@ public static class MarkupSyntaxValidator
         {
             if (coloredText.Color != "@warn")
             {
-                Assert.True(
-                    MarkupColorName.IsDefined(coloredText.Color),
-                    $"Unexpected color name: {coloredText.Color}."
-                );
+                if (!MarkupColorName.IsDefined(coloredText.Color))
+                {
+                    throw new InvalidOperationException($"Unexpected color name: {coloredText.Color}.");
+                }
             }
         }
 #if NET
@@ -67,7 +72,10 @@ public static class MarkupSyntaxValidator
         {
             if (coloredText.Color is not ("#Flavor" or "#Warning"))
             {
-                Assert.Matches("#[0-9a-fA-F]{6}", coloredText.Color);
+                if (!System.Text.RegularExpressions.Regex.IsMatch(coloredText.Color, "#[0-9a-fA-F]{6}"))
+                {
+                    throw new InvalidOperationException($"Color validation failed for: {coloredText.Color}");
+                }
             }
         }
         else

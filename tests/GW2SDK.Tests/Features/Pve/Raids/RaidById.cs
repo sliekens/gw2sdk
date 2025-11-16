@@ -11,7 +11,7 @@ public class RaidById(Gw2Client sut)
     {
         const string id = "forsaken_thicket";
         (Raid actual, MessageContext context) = await sut.Pve.Raids.GetRaidById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.Equal(id, actual.Id);
+        await Assert.That(context).IsNotNull();
+        await Assert.That(actual.Id).IsEqualTo(id);
     }
 }

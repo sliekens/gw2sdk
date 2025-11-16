@@ -11,7 +11,7 @@ public class SkillById(Gw2Client sut)
     {
         const int id = 61533;
         (Skill actual, MessageContext context) = await sut.Hero.Builds.GetSkillById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.Equal(id, actual.Id);
+        await Assert.That(context).IsNotNull();
+        await Assert.That(actual.Id).IsEqualTo(id);
     }
 }

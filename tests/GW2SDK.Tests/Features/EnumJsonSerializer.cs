@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 
 using GuildWars2.Hero.Accounts;
 
@@ -8,7 +8,7 @@ namespace GuildWars2.Tests.Features;
 public class EnumJsonSerializer
 {
     [Test]
-    public void Has_json_conversion()
+    public async Task Has_json_conversion()
     {
         ProductName product = ProductName.GuildWars2;
 #if NET
@@ -18,13 +18,14 @@ public class EnumJsonSerializer
         string json = JsonSerializer.Serialize(product);
         ProductName actual = JsonSerializer.Deserialize<ProductName>(json);
 #endif
-        Assert.Equal(product, actual);
+        await Assert.That(actual).IsEqualTo(product);
     }
 
     [Test]
-    public void Throws_for_undefined_values()
+    public async Task Throws_for_undefined_values()
     {
-        Assert.Throws<ArgumentOutOfRangeException>(() =>
+        ArgumentOutOfRangeException? ex = await Assert.That(() =>
+
         {
             ProductName product = (ProductName)69;
 #if NET
@@ -32,6 +33,6 @@ public class EnumJsonSerializer
 #else
             _ = JsonSerializer.Serialize(product);
 #endif
-        });
+        }).Throws<ArgumentOutOfRangeException>();
     }
 }

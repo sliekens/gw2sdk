@@ -11,10 +11,10 @@ public class UnlockedGliderSkins(Gw2Client sut)
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
         (HashSet<int> actual, _) = await sut.Hero.Equipment.Gliders.GetUnlockedGliderSkins(accessToken.Key, TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.All(actual, entry =>
+        await Assert.That(actual).IsNotEmpty();
+        foreach (int entry in actual)
         {
-            Assert.True(entry > 0);
-        });
+            await Assert.That(entry > 0).IsTrue();
+        }
     }
 }

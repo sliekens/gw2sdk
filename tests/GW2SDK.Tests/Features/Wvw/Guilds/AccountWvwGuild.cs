@@ -13,9 +13,9 @@ public class AccountWvwGuild(Gw2Client sut)
         (GuildWars2.Wvw.Guilds.AccountWvwGuild actual, _) = await sut.Wvw.GetAccountWvwGuild(accessToken.Key, TestContext.Current!.Execution.CancellationToken);
         if (actual.TeamId.HasValue)
         {
-            Assert.True(actual.TeamId > 0);
+            await Assert.That(actual.TeamId > 0).IsTrue();
         }
 
-        Assert.NotEmpty(actual.GuildId!);
+        await Assert.That(actual.GuildId!).IsNotEmpty();
     }
 }

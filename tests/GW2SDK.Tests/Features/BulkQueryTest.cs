@@ -21,7 +21,7 @@ public class BulkQueryTest
         const int cutoff = 107;
         int received = 0;
         IAsyncEnumerable<StubRecord> producer = BulkQuery.QueryAsync(index, GetChunk, chunkSize: chunkSize, cancellationToken: cancellationTokenSource.Token);
-        OperationCanceledException reason = await Assert.ThrowsAsync<OperationCanceledException>(async () =>
+        OperationCanceledException? reason = await Assert.That(async () =>
         {
             await foreach (StubRecord _ in producer.WithCancellation(cancellationTokenSource.Token))
             {
@@ -34,9 +34,10 @@ public class BulkQueryTest
 #endif
                 }
             }
-        });
-        Assert.True(cancellationTokenSource.Token.Equals(reason.CancellationToken));
-        Assert.Equal(cutoff, received);
+        }).Throws<OperationCanceledException>();
+        await Assert.That(reason).IsNotNull()
+            .And.Member(r => r.CancellationToken, c => c.IsEqualTo(cancellationTokenSource.Token));
+        await Assert.That(received).IsEqualTo(cutoff);
     }
 
     [Test]
@@ -44,18 +45,25 @@ public class BulkQueryTest
     {
         // Simulate 1000 records
         HashSet<int> index = [.. Enumerable.Range(1, 1000)];
-        Task<IReadOnlyCollection<StubRecord>> GetChunk(IEnumerable<int> chunk, CancellationToken cancellationToken)
+        async Task<IReadOnlyCollection<StubRecord>> GetChunk(IEnumerable<int> chunk, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
-            Assert.NotSame(index, chunk);
-            IReadOnlyCollection<StubRecord> result = [.. chunk.Select(id => new StubRecord(id))];
-            return Task.FromResult(result);
+            IReadOnlyCollection<int> chunkList = [.. chunk];
+            await Assert.That(chunkList).IsNotSameReferenceAs(index);
+            IReadOnlyCollection<StubRecord> result = [.. chunkList.Select(id => new StubRecord(id))];
+            return result;
         }
 
         List<StubRecord> actual = await BulkQuery.QueryAsync(index, GetChunk, cancellationToken: TestContext.Current!.Execution.CancellationToken).ToListAsync(TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(index.Count, actual.Count);
-        Assert.All(index, id => Assert.Contains(actual, record => record.Id == id));
-        Assert.All(actual, record => Assert.Contains(record.Id, index));
+        await Assert.That(actual).HasCount().EqualTo(index.Count);
+        foreach (int id in index)
+        {
+            await Assert.That(actual).Contains(record => record.Id == id);
+        }
+        foreach (StubRecord record in actual)
+        {
+            await Assert.That(index).Contains(record.Id);
+        }
     }
 
     [Test]
@@ -63,18 +71,24 @@ public class BulkQueryTest
     {
         // Simulate 100 records
         List<int> index = [.. Enumerable.Range(1, 100)];
-        Task<IReadOnlyCollection<StubRecord>> GetChunk(IEnumerable<int> chunk, CancellationToken cancellationToken)
+        async Task<IReadOnlyCollection<StubRecord>> GetChunk(IEnumerable<int> chunk, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
             List<int> keys = [.. chunk];
-            Assert.Equal(index, keys);
+            await Assert.That(keys).IsEquivalentTo(index);
             IReadOnlyCollection<StubRecord> result = [.. keys.Select(id => new StubRecord(id))];
-            return Task.FromResult(result);
+            return result;
         }
 
         List<StubRecord> actual = await BulkQuery.QueryAsync(index, GetChunk, cancellationToken: TestContext.Current!.Execution.CancellationToken).ToListAsync(TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(index.Count, actual.Count);
-        Assert.All(index, id => Assert.Contains(actual, record => record.Id == id));
-        Assert.All(actual, record => Assert.Contains(record.Id, index));
+        await Assert.That(actual).HasCount().EqualTo(index.Count);
+        foreach (int id in index)
+        {
+            await Assert.That(actual).Contains(record => record.Id == id);
+        }
+        foreach (StubRecord record in actual)
+        {
+            await Assert.That(index).Contains(record.Id);
+        }
     }
 }

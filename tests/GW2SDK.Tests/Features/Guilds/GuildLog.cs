@@ -1,4 +1,4 @@
-﻿using GuildWars2.Guilds.Logs;
+using GuildWars2.Guilds.Logs;
 using GuildWars2.Hero.Accounts;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 using GuildWars2.Tests.TestInfrastructure.Configuration;
@@ -16,77 +16,92 @@ public class GuildLog(Gw2Client sut)
         foreach (string? guildId in account.LeaderOfGuildIds!)
         {
             (List<GuildLogEntry> actual, _) = await sut.Guilds.GetGuildLog(guildId, guildLeader.Token, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-            Assert.NotEmpty(actual);
-            Assert.All(actual, entry =>
+            await Assert.That(actual).IsNotEmpty();
+            using (Assert.Multiple())
             {
-                Assert.True(entry.Id > 0);
-                Assert.True(entry.Time > DateTimeOffset.MinValue);
-                switch (entry)
+                foreach (GuildLogEntry entry in actual)
                 {
-                    case GuildBankActivity guildBankActivity:
-                        Assert.True(guildBankActivity.Operation.IsDefined());
-                        break;
-                    case GuildUpgradeActivity guildUpgradeActivity:
-                        Assert.True(guildUpgradeActivity.Action.IsDefined());
-                        break;
-                    case InfluenceActivity influenceActivity:
-                        Assert.True(influenceActivity.Activity.IsDefined());
-                        break;
-                    case GuildMission guildMissionActivity:
-                        Assert.True(guildMissionActivity.State.IsDefined());
-                        if (guildMissionActivity.State == GuildMissionState.Start)
-                        {
-                            Assert.NotEmpty(guildMissionActivity.User);
-                        }
-                        else
-                        {
-                            Assert.Empty(guildMissionActivity.User);
-                        }
+                    await Assert.That(entry)
+                        .Member(e => e.Id, id => id.IsGreaterThan(0))
+                        .And.Member(e => e.Time, time => time.IsGreaterThan(DateTimeOffset.MinValue));
+                    switch (entry)
+                    {
+                        case GuildBankActivity guildBankActivity:
+                            await Assert.That(guildBankActivity.Operation.IsDefined()).IsTrue();
+                            break;
+                        case GuildUpgradeActivity guildUpgradeActivity:
+                            await Assert.That(guildUpgradeActivity.Action.IsDefined()).IsTrue();
+                            break;
+                        case InfluenceActivity influenceActivity:
+                            await Assert.That(influenceActivity.Activity.IsDefined()).IsTrue();
+                            break;
+                        case GuildMission guildMissionActivity:
+                            await Assert.That(guildMissionActivity.State.IsDefined()).IsTrue();
+                            if (guildMissionActivity.State == GuildMissionState.Start)
+                            {
+                                await Assert.That(guildMissionActivity.User).IsNotEmpty();
+                            }
+                            else
+                            {
+                                await Assert.That(guildMissionActivity.User).IsEmpty();
+                            }
 
-                        Assert.Equal(0, guildMissionActivity.Influence);
-                        break;
-                    case MemberInvited memberInvited:
-                        Assert.NotEmpty(memberInvited.User);
-                        Assert.NotEmpty(memberInvited.InvitedBy);
-                        break;
-                    case MemberJoined memberJoined:
-                        Assert.NotEmpty(memberJoined.User);
-                        break;
-                    case MemberKicked memberKicked:
-                        Assert.NotEmpty(memberKicked.User);
-                        Assert.NotEmpty(memberKicked.KickedBy);
-                        break;
-                    case InviteDeclined inviteDeclined:
-                        Assert.NotEmpty(inviteDeclined.User);
-                        Assert.NotEmpty(inviteDeclined.DeclinedBy);
-                        break;
-                    case RankChange rankChange:
-                        Assert.NotEmpty(rankChange.User);
-                        Assert.NotEmpty(rankChange.OldRank);
-                        Assert.NotEmpty(rankChange.NewRank);
-                        Assert.NotNull(rankChange.ChangedBy);
-                        break;
-                    case NewMessageOfTheDay newMessageOfTheDay:
-                        Assert.NotEmpty(newMessageOfTheDay.User);
-                        Assert.NotEmpty(newMessageOfTheDay.MessageOfTheDay);
-                        break;
-                    case TreasuryDeposit treasuryDeposit:
-                        Assert.NotEmpty(treasuryDeposit.User);
-                        Assert.True(treasuryDeposit.ItemId > 0);
-                        Assert.True(treasuryDeposit.Count > 0);
-                        break;
-                    default:
-                        Assert.Fail($"Unexpected log entry type: {entry.GetType().Name}");
-                        break;
+                            await Assert.That(guildMissionActivity.Influence).IsEqualTo(0);
+                            break;
+                        case MemberInvited memberInvited:
+                            await Assert.That(memberInvited)
+                                .Member(m => m.User, user => user.IsNotEmpty())
+                                .And.Member(m => m.InvitedBy, invitedBy => invitedBy.IsNotEmpty());
+                            break;
+                        case MemberJoined memberJoined:
+                            await Assert.That(memberJoined.User).IsNotEmpty();
+                            break;
+                        case MemberKicked memberKicked:
+                            await Assert.That(memberKicked)
+                                .Member(m => m.User, user => user.IsNotEmpty())
+                                .And.Member(m => m.KickedBy, kickedBy => kickedBy.IsNotEmpty());
+                            break;
+                        case InviteDeclined inviteDeclined:
+                            await Assert.That(inviteDeclined)
+                                .Member(i => i.User, user => user.IsNotEmpty())
+                                .And.Member(i => i.DeclinedBy, declinedBy => declinedBy.IsNotEmpty());
+                            break;
+                        case RankChange rankChange:
+                            await Assert.That(rankChange)
+                                .Member(r => r.User, user => user.IsNotEmpty())
+                                .And.Member(r => r.OldRank, oldRank => oldRank.IsNotEmpty())
+                                .And.Member(r => r.NewRank, newRank => newRank.IsNotEmpty())
+                                .And.Member(r => r.ChangedBy, changedBy => changedBy.IsNotNull());
+                            break;
+                        case NewMessageOfTheDay newMessageOfTheDay:
+                            await Assert.That(newMessageOfTheDay)
+                                .Member(n => n.User, user => user.IsNotEmpty())
+                                .And.Member(n => n.MessageOfTheDay, motd => motd.IsNotEmpty());
+                            break;
+                        case TreasuryDeposit treasuryDeposit:
+                            await Assert.That(treasuryDeposit)
+                                .Member(t => t.User, user => user.IsNotEmpty())
+                                .And.Member(t => t.ItemId, itemId => itemId.IsGreaterThan(0))
+                                .And.Member(t => t.Count, count => count.IsGreaterThan(0));
+                            break;
+                        default:
+                            throw new InvalidOperationException($"Unexpected log entry type: {entry.GetType().Name}");
+                    }
                 }
-            });
+            }
             // While we are here, check the ability to use a log ID as a skip token
             if (actual.Count > 3)
             {
                 int skipToken = actual[3].Id;
                 (List<GuildLogEntry> range, _) = await sut.Guilds.GetGuildLog(guildId, skipToken, guildLeader.Token, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-                Assert.True(range.Count >= 3);
-                Assert.All(range, log => Assert.True(log.Id > skipToken));
+                await Assert.That(range.Count).IsGreaterThanOrEqualTo(3);
+                using (Assert.Multiple())
+                {
+                    foreach (GuildLogEntry log in range)
+                    {
+                        await Assert.That(log.Id).IsGreaterThan(skipToken);
+                    }
+                }
             }
         }
     }

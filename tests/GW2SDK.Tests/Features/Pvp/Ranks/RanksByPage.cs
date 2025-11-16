@@ -11,12 +11,18 @@ public class RanksByPage(Gw2Client sut)
     {
         const int pageSize = 3;
         (HashSet<Rank> actual, MessageContext context) = await sut.Pvp.GetRanksByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context.Links);
-        Assert.Equal(pageSize, context.PageSize);
-        Assert.Equal(pageSize, context.ResultCount);
-        Assert.True(context.PageTotal > 0);
-        Assert.True(context.ResultTotal > 0);
-        Assert.Equal(pageSize, actual.Count);
-        Assert.All(actual, Assert.NotNull);
+        using (Assert.Multiple())
+        {
+            await Assert.That(context.Links).IsNotNull();
+            await Assert.That(context).Member(c => c.PageSize, m => m.IsEqualTo(pageSize));
+            await Assert.That(context).Member(c => c.ResultCount, m => m.IsEqualTo(pageSize));
+            await Assert.That(context.PageTotal!.Value).IsGreaterThan(0);
+            await Assert.That(context.ResultTotal!.Value).IsGreaterThan(0);
+            await Assert.That(actual).HasCount(pageSize);
+            foreach (Rank entry in actual)
+            {
+                await Assert.That(entry).IsNotNull();
+            }
+        }
     }
 }

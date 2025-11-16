@@ -11,7 +11,7 @@ public class BackgroundStoryAnswerById(Gw2Client sut)
     {
         const string id = "7-53";
         (BackgroundStoryAnswer actual, MessageContext context) = await sut.Hero.StoryJournal.GetBackgroundStoryAnswerById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.Equal(id, actual.Id);
+        await Assert.That(context).IsNotNull();
+        await Assert.That(actual.Id).IsEqualTo(id);
     }
 }

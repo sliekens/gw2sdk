@@ -1,4 +1,4 @@
-﻿using GuildWars2.Exploration.Continents;
+using GuildWars2.Exploration.Continents;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Exploration.Continents;
@@ -11,12 +11,18 @@ public class ContinentsByPage(Gw2Client sut)
     {
         const int pageSize = 3;
         (HashSet<Continent> actual, MessageContext context) = await sut.Exploration.GetContinentsByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context.Links);
-        Assert.Equal(pageSize, context.PageSize);
-        Assert.Equal(2, context.ResultCount);
-        Assert.True(context.PageTotal > 0);
-        Assert.True(context.ResultTotal > 0);
-        Assert.Equal(2, actual.Count);
-        Assert.All(actual, Assert.NotNull);
+        await Assert.That(context.Links).IsNotNull();
+        await Assert.That(context.PageSize).IsEqualTo(pageSize);
+        await Assert.That(context.ResultCount).IsEqualTo(2);
+        await Assert.That(context).Member(c => c.PageTotal, pt => pt.IsNotNull().And.IsGreaterThan(0))
+            .And.Member(c => c.ResultTotal, rt => rt.IsNotNull().And.IsGreaterThan(0));
+        await Assert.That(actual).HasCount().EqualTo(2);
+        using (Assert.Multiple())
+        {
+            foreach (Continent continent in actual)
+            {
+                await Assert.That(continent).IsNotNull();
+            }
+        }
     }
 }

@@ -10,12 +10,12 @@ public class Raids(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<Raid> actual, MessageContext context) = await sut.Pve.Raids.GetRaids(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, entry =>
+        await Assert.That(actual).IsNotEmpty();
+        await Assert.That(context).Member(c => c.ResultCount, m => m.IsEqualTo(actual.Count));
+        await Assert.That(context).Member(c => c.ResultTotal, m => m.IsEqualTo(actual.Count));
+        foreach (Raid entry in actual)
         {
-            Assert.NotEmpty(entry.Id);
-        });
+            await Assert.That(entry.Id).IsNotEmpty();
+        }
     }
 }

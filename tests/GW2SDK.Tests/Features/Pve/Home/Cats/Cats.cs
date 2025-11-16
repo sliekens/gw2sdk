@@ -10,13 +10,13 @@ public class Cats(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<Cat> actual, MessageContext context) = await sut.Pve.Home.GetCats(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, cat =>
+        await Assert.That(actual).IsNotEmpty();
+        await Assert.That(context).Member(c => c.ResultTotal, m => m.IsEqualTo(actual.Count));
+        foreach (Cat cat in actual)
         {
-            Assert.NotNull(cat);
-            Assert.True(cat.Id > 0);
-            Assert.NotEmpty(cat.Hint);
-        });
+            await Assert.That(cat).IsNotNull();
+            await Assert.That(cat.Id > 0).IsTrue();
+            await Assert.That(cat.Hint).IsNotEmpty();
+        }
     }
 }

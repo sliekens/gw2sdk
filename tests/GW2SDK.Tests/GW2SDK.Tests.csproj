@@ -1,10 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TUnitAssertionsImplicitUsings>false</TUnitAssertionsImplicitUsings>
-    <EnableTUnitPolyfills>false</EnableTUnitPolyfills>
-  </PropertyGroup>
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net10.0;net481</TargetFrameworks>
+    <EnableTUnitPolyfills>false</EnableTUnitPolyfills>
     <JsonSerializerIsReflectionEnabledByDefault>false</JsonSerializerIsReflectionEnabledByDefault>
     <!-- https://github.com/microsoft/codecoverage/issues/196 -->
     <!-- <PublishAot>$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))</PublishAot> -->
@@ -32,7 +29,6 @@
     </PackageReference>
     <PackageReference Include="System.Interactive" />
     <PackageReference Include="TUnit" />
-    <PackageReference Include="xunit.v3.assert" />
   </ItemGroup>
 
   <ItemGroup>

@@ -13,6 +13,6 @@ public class RaceByName(Gw2Client sut)
     {
         const RaceName name = RaceName.Human;
         (Race actual, _) = await sut.Hero.Races.GetRaceByName(name, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(name, actual.Id);
+        await Assert.That(actual.Id).IsEqualTo(name);
     }
 }

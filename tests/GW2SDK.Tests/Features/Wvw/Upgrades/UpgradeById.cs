@@ -11,7 +11,7 @@ public class UpgradeById(Gw2Client sut)
     {
         const int id = 57;
         (ObjectiveUpgrade actual, MessageContext context) = await sut.Wvw.GetUpgradeById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotNull(context);
-        Assert.Equal(id, actual.Id);
+        await Assert.That(context).IsNotNull();
+        await Assert.That(actual.Id).IsEqualTo(id);
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 
 using GuildWars2.Hero.Achievements.Titles;
 using GuildWars2.Tests.Features.Markup;
@@ -13,27 +13,27 @@ public class Titles(Gw2Client sut)
     public async Task Titles_can_be_listed()
     {
         (HashSet<Title> actual, MessageContext context) = await sut.Hero.Achievements.GetTitles(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.NotEmpty(actual);
-        Assert.All(actual, entry =>
+        await Assert.That(context.ResultCount).IsEqualTo(actual.Count);
+        await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);
+        await Assert.That(actual).IsNotEmpty();
+        foreach (Title entry in actual)
         {
             if (entry.Id == 273)
             {
                 // Invalid title?
-                return;
+                continue;
             }
 
-            Assert.True(entry.Id >= 1);
-            Assert.NotEmpty(entry.Name);
+            await Assert.That(entry.Id).IsGreaterThanOrEqualTo(1);
+            await Assert.That(entry.Name).IsNotEmpty();
             MarkupSyntaxValidator.Validate(entry.Name);
             if (entry.AchievementPointsRequired.HasValue)
             {
-                Assert.InRange(entry.AchievementPointsRequired.Value, 1, 100000);
+                await Assert.That(entry.AchievementPointsRequired.Value).IsGreaterThanOrEqualTo(1).And.IsLessThanOrEqualTo(100000);
             }
             else
             {
-                Assert.NotEmpty(entry.Achievements!);
+                await Assert.That(entry.Achievements!).IsNotEmpty();
             }
 
 #if NET
@@ -43,7 +43,7 @@ public class Titles(Gw2Client sut)
             string json = JsonSerializer.Serialize(entry);
             Title? roundTrip = JsonSerializer.Deserialize<Title>(json);
 #endif
-            Assert.Equal(entry, roundTrip);
-        });
+            await Assert.That(roundTrip).IsEqualTo(entry);
+        }
     }
 }

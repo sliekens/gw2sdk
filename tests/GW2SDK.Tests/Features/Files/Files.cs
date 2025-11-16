@@ -1,4 +1,4 @@
-﻿using GuildWars2.Files;
+using GuildWars2.Files;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Files;
@@ -10,14 +10,17 @@ public class Files(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<Asset> actual, MessageContext context) = await sut.Files.GetFiles(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.NotEmpty(actual);
-        Assert.All(actual, entry =>
+        await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(actual.Count))
+            .And.Member(c => c.ResultTotal, rt => rt.IsEqualTo(actual.Count));
+        await Assert.That(actual).IsNotEmpty();
+        using (Assert.Multiple())
         {
-            Assert.NotEmpty(entry.Id);
-            Assert.NotNull(entry.IconUrl);
-            Assert.True(entry.IconUrl!.IsAbsoluteUri);
-        });
+            foreach (Asset entry in actual)
+            {
+                await Assert.That(entry.Id).IsNotEmpty();
+                await Assert.That(entry.IconUrl).IsNotNull()
+                    .And.Member(u => u.IsAbsoluteUri, m => m.IsTrue());
+            }
+        }
     }
 }

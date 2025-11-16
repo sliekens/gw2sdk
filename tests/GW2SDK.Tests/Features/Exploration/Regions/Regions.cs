@@ -12,9 +12,15 @@ public class Regions(Gw2Client sut)
     public async Task Can_be_listed(int continentId, int floorId)
     {
         (HashSet<Region> actual, MessageContext context) = await sut.Exploration.GetRegions(continentId, floorId, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.NotEmpty(actual);
-        Assert.All(actual, Assert.NotNull);
+        await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(actual.Count))
+            .And.Member(c => c.ResultTotal, rt => rt.IsEqualTo(actual.Count));
+        await Assert.That(actual).IsNotEmpty();
+        using (Assert.Multiple())
+        {
+            foreach (Region item in actual)
+            {
+                await Assert.That(item).IsNotNull();
+            }
+        }
     }
 }

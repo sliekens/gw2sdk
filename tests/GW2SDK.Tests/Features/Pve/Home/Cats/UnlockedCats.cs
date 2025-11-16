@@ -11,7 +11,10 @@ public class UnlockedCats(Gw2Client sut)
     {
         ApiKey token = TestConfiguration.ApiKey;
         (HashSet<int> actual, _) = await sut.Pve.Home.GetUnlockedCats(token.Key, TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.All(actual, id => Assert.True(id > 0));
+        await Assert.That(actual).IsNotEmpty();
+        foreach (int id in actual)
+        {
+            await Assert.That(id > 0).IsTrue();
+        }
     }
 }

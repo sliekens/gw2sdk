@@ -11,19 +11,22 @@ public class AstralRewards(Gw2Client sut)
     public async Task Can_be_listed()
     {
         (HashSet<AstralReward> actual, MessageContext context) = await sut.WizardsVault.GetAstralRewards(cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        Assert.NotEmpty(actual);
-        Assert.Equal(context.ResultCount, actual.Count);
-        Assert.Equal(context.ResultTotal, actual.Count);
-        Assert.All(actual, reward =>
+        await Assert.That(actual).IsNotEmpty();
+        using (Assert.Multiple())
         {
-            Assert.True(reward.Id > 0);
-            Assert.True(reward.ItemId > 0);
-            Assert.True(reward.ItemCount > 0);
-            Assert.True(reward.Cost > 0);
-            Assert.True(reward.Kind.IsDefined());
-            ItemLink chatLink = reward.GetChatLink();
-            Assert.Equal(reward.ItemId, chatLink.ItemId);
-            Assert.Equal(reward.ItemCount, chatLink.Count);
-        });
+            await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(actual.Count));
+            await Assert.That(context).Member(c => c.ResultTotal, rt => rt.IsEqualTo(actual.Count));
+            foreach (AstralReward reward in actual)
+            {
+                await Assert.That(reward.Id).IsGreaterThan(0);
+                await Assert.That(reward.ItemId).IsGreaterThan(0);
+                await Assert.That(reward.ItemCount).IsGreaterThan(0);
+                await Assert.That(reward.Cost).IsGreaterThan(0);
+                await Assert.That(reward.Kind.IsDefined()).IsTrue();
+                ItemLink chatLink = reward.GetChatLink();
+                await Assert.That(chatLink.ItemId).IsEqualTo(reward.ItemId);
+                await Assert.That(chatLink.Count).IsEqualTo(reward.ItemCount);
+            }
+        }
     }
 }
