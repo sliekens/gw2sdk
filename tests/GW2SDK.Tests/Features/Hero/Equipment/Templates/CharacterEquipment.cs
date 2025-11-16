@@ -20,8 +20,8 @@ public class CharacterEquipmentByName(Gw2Client sut)
         Assert.NotNull(actual.Items);
         Assert.All(actual.Items, EquipmentItemValidation.Validate);
 #if NET
-        string json = JsonSerializer.Serialize(actual, GuildWars2JsonContext.Default.CharacterEquipment);
-        CharacterEquipment? roundtrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.CharacterEquipment);
+        string json = JsonSerializer.Serialize(actual, Common.TestJsonContext.Default.CharacterEquipment);
+        CharacterEquipment? roundtrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.CharacterEquipment);
 #else
         string json = JsonSerializer.Serialize(actual);
         CharacterEquipment? roundtrip = JsonSerializer.Deserialize<CharacterEquipment>(json);

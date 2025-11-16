@@ -29,8 +29,8 @@ public class MailCarriers(Gw2Client sut)
             Assert.True(mailCarrier.IconUrl is null || mailCarrier.IconUrl.IsAbsoluteUri);
             Assert.NotEmpty(mailCarrier.Name);
 #if NET
-            string json = JsonSerializer.Serialize(mailCarrier, GuildWars2JsonContext.Default.MailCarrier);
-            MailCarrier? roundtrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.MailCarrier);
+            string json = JsonSerializer.Serialize(mailCarrier, Common.TestJsonContext.Default.MailCarrier);
+            MailCarrier? roundtrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.MailCarrier);
 #else
             string json = JsonSerializer.Serialize(mailCarrier);
             MailCarrier? roundtrip = JsonSerializer.Deserialize<MailCarrier>(json);

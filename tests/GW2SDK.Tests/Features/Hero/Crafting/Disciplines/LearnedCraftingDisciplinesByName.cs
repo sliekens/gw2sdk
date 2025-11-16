@@ -24,8 +24,8 @@ public class LearnedCraftingDisciplinesByName(Gw2Client sut)
         string json;
         LearnedCraftingDisciplines? roundtrip;
 #if NET
-        json = JsonSerializer.Serialize(actual, GuildWars2JsonContext.Default.LearnedCraftingDisciplines);
-        roundtrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.LearnedCraftingDisciplines);
+        json = JsonSerializer.Serialize(actual, Common.TestJsonContext.Default.LearnedCraftingDisciplines);
+        roundtrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.LearnedCraftingDisciplines);
 #else
         json = JsonSerializer.Serialize(actual);
         roundtrip = JsonSerializer.Deserialize<LearnedCraftingDisciplines>(json);

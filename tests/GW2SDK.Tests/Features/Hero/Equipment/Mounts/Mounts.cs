@@ -27,8 +27,8 @@ public class Mounts(Gw2Client sut)
                 Assert.True(skill.Slot.IsDefined());
             });
 #if NET
-            string json = JsonSerializer.Serialize(entry, GuildWars2JsonContext.Default.Mount);
-            Mount? roundtrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.Mount);
+            string json = JsonSerializer.Serialize(entry, Common.TestJsonContext.Default.Mount);
+            Mount? roundtrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.Mount);
 #else
             string json = JsonSerializer.Serialize(entry);
             Mount? roundtrip = JsonSerializer.Deserialize<Mount>(json);

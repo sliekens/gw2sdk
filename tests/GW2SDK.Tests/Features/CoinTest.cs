@@ -264,8 +264,8 @@ public class CoinTest
     {
         Coin sut = 1_00_00;
 #if NET7_0_OR_GREATER
-        string json = JsonSerializer.Serialize(sut, GuildWars2JsonContext.Default.Coin);
-        Coin actual = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.Coin)!;
+        string json = JsonSerializer.Serialize(sut, Common.TestJsonContext.Default.Coin);
+        Coin actual = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.Coin)!;
 #else
         string json = JsonSerializer.Serialize(sut);
         Coin actual = JsonSerializer.Deserialize<Coin>(json)!;

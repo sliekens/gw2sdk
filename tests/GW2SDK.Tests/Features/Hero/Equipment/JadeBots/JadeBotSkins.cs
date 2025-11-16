@@ -33,8 +33,8 @@ public class JadeBotSkins(Gw2Client sut)
 
             Assert.True(entry.UnlockItemId > 0);
 #if NET
-            string json = JsonSerializer.Serialize(entry, GuildWars2JsonContext.Default.JadeBotSkin);
-            JadeBotSkin? roundtrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.JadeBotSkin);
+            string json = JsonSerializer.Serialize(entry, Common.TestJsonContext.Default.JadeBotSkin);
+            JadeBotSkin? roundtrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.JadeBotSkin);
 #else
             string json = JsonSerializer.Serialize(entry);
             JadeBotSkin? roundtrip = JsonSerializer.Deserialize<JadeBotSkin>(json);

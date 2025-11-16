@@ -143,8 +143,8 @@ public class Skins
         await foreach (EquipmentSkin original in sut.Hero.Equipment.Wardrobe.GetSkinsBulk(cancellationToken: TestContext.Current!.Execution.CancellationToken).ValueOnly(TestContext.Current!.Execution.CancellationToken))
         {
 #if NET
-            string json = JsonSerializer.Serialize(original, GuildWars2JsonContext.Default.EquipmentSkin);
-            EquipmentSkin? roundTrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.EquipmentSkin);
+            string json = JsonSerializer.Serialize(original, Common.TestJsonContext.Default.EquipmentSkin);
+            EquipmentSkin? roundTrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.EquipmentSkin);
 #else
             string json = JsonSerializer.Serialize(original);
             EquipmentSkin? roundTrip = JsonSerializer.Deserialize<EquipmentSkin>(json);

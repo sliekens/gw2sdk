@@ -28,8 +28,8 @@ public class SkiffSkins(Gw2Client sut)
                 Assert.True(dyeSlot.ColorId > 0);
             });
 #if NET
-            string json = JsonSerializer.Serialize(entry, GuildWars2JsonContext.Default.SkiffSkin);
-            SkiffSkin? roundtrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.SkiffSkin);
+            string json = JsonSerializer.Serialize(entry, Common.TestJsonContext.Default.SkiffSkin);
+            SkiffSkin? roundtrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.SkiffSkin);
 #else
             string json = JsonSerializer.Serialize(entry);
             SkiffSkin? roundtrip = JsonSerializer.Deserialize<SkiffSkin>(json);

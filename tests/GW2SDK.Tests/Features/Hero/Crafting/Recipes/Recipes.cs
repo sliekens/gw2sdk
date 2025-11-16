@@ -52,8 +52,8 @@ public class Recipes
         await foreach (Recipe original in sut.Hero.Crafting.Recipes.GetRecipesBulk(cancellationToken: TestContext.Current!.Execution.CancellationToken).ValueOnly(TestContext.Current!.Execution.CancellationToken))
         {
 #if NET
-            string json = JsonSerializer.Serialize(original, GuildWars2JsonContext.Default.Recipe);
-            Recipe? roundTrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.Recipe);
+            string json = JsonSerializer.Serialize(original, Common.TestJsonContext.Default.Recipe);
+            Recipe? roundTrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.Recipe);
 #else
             string json = JsonSerializer.Serialize(original);
             Recipe? roundTrip = JsonSerializer.Deserialize<Recipe>(json);

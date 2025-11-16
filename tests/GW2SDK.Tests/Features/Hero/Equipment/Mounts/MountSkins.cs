@@ -34,8 +34,8 @@ public class MountSkins(Gw2Client sut)
 #pragma warning restore CS0618 // Type or member is obsolete
 
 #if NET
-            string json = JsonSerializer.Serialize(entry, GuildWars2JsonContext.Default.MountSkin);
-            MountSkin? roundtrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.MountSkin);
+            string json = JsonSerializer.Serialize(entry, Common.TestJsonContext.Default.MountSkin);
+            MountSkin? roundtrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.MountSkin);
 #else
             string json = JsonSerializer.Serialize(entry);
             MountSkin? roundtrip = JsonSerializer.Deserialize<MountSkin>(json);

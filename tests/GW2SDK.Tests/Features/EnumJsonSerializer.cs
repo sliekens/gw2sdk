@@ -12,8 +12,8 @@ public class EnumJsonSerializer
     {
         ProductName product = ProductName.GuildWars2;
 #if NET
-        string json = JsonSerializer.Serialize(product, GuildWars2.Tests.Common.TestJsonContext.Default.ProductName);
-        ProductName actual = JsonSerializer.Deserialize(json, GuildWars2.Tests.Common.TestJsonContext.Default.ProductName);
+        string json = JsonSerializer.Serialize(product, Common.TestJsonContext.Default.ProductName);
+        ProductName actual = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.ProductName);
 #else
         string json = JsonSerializer.Serialize(product);
         ProductName actual = JsonSerializer.Deserialize<ProductName>(json);
@@ -28,7 +28,7 @@ public class EnumJsonSerializer
         {
             ProductName product = (ProductName)69;
 #if NET
-            _ = JsonSerializer.Serialize(product, GuildWars2.Tests.Common.TestJsonContext.Default.ProductName);
+            _ = JsonSerializer.Serialize(product, Common.TestJsonContext.Default.ProductName);
 #else
             _ = JsonSerializer.Serialize(product);
 #endif

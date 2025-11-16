@@ -30,8 +30,8 @@ public class Finishers(Gw2Client sut)
             string json;
             Finisher? roundTrip;
 #if NET
-            json = JsonSerializer.Serialize(entry, GuildWars2JsonContext.Default.Finisher);
-            roundTrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.Finisher);
+            json = JsonSerializer.Serialize(entry, Common.TestJsonContext.Default.Finisher);
+            roundTrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.Finisher);
 #else
             json = JsonSerializer.Serialize(entry);
             roundTrip = JsonSerializer.Deserialize<Finisher>(json);

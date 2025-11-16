@@ -39,8 +39,8 @@ public class Colors(Gw2Client sut)
             string json;
             DyeColor? roundTrip;
 #if NET
-            json = JsonSerializer.Serialize(color, GuildWars2JsonContext.Default.DyeColor);
-            roundTrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.DyeColor);
+            json = JsonSerializer.Serialize(color, Common.TestJsonContext.Default.DyeColor);
+            roundTrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.DyeColor);
 #else
             json = JsonSerializer.Serialize(color);
             roundTrip = JsonSerializer.Deserialize<DyeColor>(json);

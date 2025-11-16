@@ -26,8 +26,8 @@ public class AchievementGroups(Gw2Client sut)
             string json;
             AchievementGroup? roundTrip;
 #if NET
-            json = JsonSerializer.Serialize(entry, GuildWars2JsonContext.Default.AchievementGroup);
-            roundTrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.AchievementGroup);
+            json = JsonSerializer.Serialize(entry, Common.TestJsonContext.Default.AchievementGroup);
+            roundTrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.AchievementGroup);
 #else
             json = JsonSerializer.Serialize(entry);
             roundTrip = JsonSerializer.Deserialize<AchievementGroup>(json);

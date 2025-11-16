@@ -487,8 +487,8 @@ public class Items
         await foreach (Item original in sut.Items.GetItemsBulk(cancellationToken: TestContext.Current!.Execution.CancellationToken).ValueOnly(TestContext.Current!.Execution.CancellationToken))
         {
 #if NET
-            string json = JsonSerializer.Serialize(original, GuildWars2JsonContext.Default.Item);
-            Item? roundTrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.Item);
+            string json = JsonSerializer.Serialize(original, Common.TestJsonContext.Default.Item);
+            Item? roundTrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.Item);
 #else
             string json = JsonSerializer.Serialize(original);
             Item? roundTrip = JsonSerializer.Deserialize<Item>(json);

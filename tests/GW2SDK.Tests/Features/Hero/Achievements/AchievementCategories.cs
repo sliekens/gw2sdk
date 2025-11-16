@@ -55,8 +55,8 @@ public class AchievementCategories(Gw2Client sut)
             }
 
 #if NET
-            string json = JsonSerializer.Serialize(entry, GuildWars2JsonContext.Default.AchievementCategory);
-            AchievementCategory? roundTrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.AchievementCategory);
+            string json = JsonSerializer.Serialize(entry, Common.TestJsonContext.Default.AchievementCategory);
+            AchievementCategory? roundTrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.AchievementCategory);
 #else
             string json = JsonSerializer.Serialize(entry);
             AchievementCategory? roundTrip = JsonSerializer.Deserialize<AchievementCategory>(json);

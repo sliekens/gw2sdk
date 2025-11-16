@@ -27,8 +27,8 @@ public class Outfits(Gw2Client sut)
             OutfitLink chatLinkRoundtrip = OutfitLink.Parse(chatLink.ToString());
             Assert.Equal(chatLink.ToString(), chatLinkRoundtrip.ToString());
 #if NET
-            string json = JsonSerializer.Serialize(entry, GuildWars2JsonContext.Default.Outfit);
-            Outfit? roundtrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.Outfit);
+            string json = JsonSerializer.Serialize(entry, Common.TestJsonContext.Default.Outfit);
+            Outfit? roundtrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.Outfit);
 #else
             string json = JsonSerializer.Serialize(entry);
             Outfit? roundtrip = JsonSerializer.Deserialize<Outfit>(json);

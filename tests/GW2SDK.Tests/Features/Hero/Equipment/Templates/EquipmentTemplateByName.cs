@@ -24,8 +24,8 @@ public class EquipmentTemplateByName(Gw2Client sut)
         Assert.NotNull(actual.PvpEquipment);
         PvpEquipmentValidation.Validate(actual.PvpEquipment);
 #if NET
-        string json = JsonSerializer.Serialize(actual, GuildWars2JsonContext.Default.EquipmentTemplate);
-        EquipmentTemplate? roundtrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.EquipmentTemplate);
+        string json = JsonSerializer.Serialize(actual, Common.TestJsonContext.Default.EquipmentTemplate);
+        EquipmentTemplate? roundtrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.EquipmentTemplate);
 #else
         string json = JsonSerializer.Serialize(actual);
         EquipmentTemplate? roundtrip = JsonSerializer.Deserialize<EquipmentTemplate>(json);

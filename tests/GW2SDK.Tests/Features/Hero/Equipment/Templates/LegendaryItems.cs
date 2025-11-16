@@ -18,8 +18,8 @@ public class LegendaryItems(Gw2Client sut)
             Assert.True(entry.Id > 0);
             Assert.True(entry.MaxCount > 0);
 #if NET
-            string json = JsonSerializer.Serialize(entry, GuildWars2JsonContext.Default.LegendaryItem);
-            LegendaryItem? roundtrip = JsonSerializer.Deserialize(json, GuildWars2JsonContext.Default.LegendaryItem);
+            string json = JsonSerializer.Serialize(entry, Common.TestJsonContext.Default.LegendaryItem);
+            LegendaryItem? roundtrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.LegendaryItem);
 #else
             string json = JsonSerializer.Serialize(entry);
             LegendaryItem? roundtrip = JsonSerializer.Deserialize<LegendaryItem>(json);
