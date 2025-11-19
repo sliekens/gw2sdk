@@ -69,7 +69,7 @@ public class Floors(Gw2Client sut)
                                 .And.Member(p => p.ChatLink, m => m.IsNotEmpty());
                             if (poi is RequiresUnlockPointOfInterest locked)
                             {
-                                await Assert.That(locked.IconUrl.IsAbsoluteUri).IsTrue();
+                                await Assert.That(locked.IconUrl.IsAbsoluteUri).IsTrue().Because("Icon URL must be absolute to be a valid unlock indicator.");
                             }
 
                             PointOfInterestLink chatLink = poi.GetChatLink();
@@ -140,7 +140,7 @@ public class Floors(Gw2Client sut)
                         {
                             await Assert.That(masteryInsight)
                                 .Member(m => m.Id, m => m.IsGreaterThan(0))
-                                .And.Member(m => m.Region.IsDefined(), m => m.IsTrue())
+                                .And.Member(m => m.Region.IsDefined(), m => m.IsTrue().Because($"Region {masteryInsight.Region} must be defined."))
                                 .And.Member(m => m.Coordinates, m => m.IsNotEqualTo(PointF.Empty));
                         }
 
