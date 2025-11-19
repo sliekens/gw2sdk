@@ -21,7 +21,7 @@
       "commands": [
         "dotnet-outdated"
       ],
-      "rollForward": false
+      "rollForward": true
     },
     "docfx": {
       "version": "2.78.4",
