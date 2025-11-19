@@ -27,5 +27,11 @@ public enum MasteryRegionName
     Jade,
 
     /// <summary>Secrets of the Obscure masteries, gold.</summary>
-    Sky
+    Sky,
+
+    /// <summary>Janthir Wilds masteries, dark blue.</summary>
+    Wild,
+
+    /// <summary>Visions of Eternity masteries, orange.</summary>
+    Magic
 }
