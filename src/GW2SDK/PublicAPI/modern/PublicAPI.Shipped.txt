@@ -9715,3 +9715,21 @@ override sealed GuildWars2.Items.MagicDoorSkinUnlocker.Equals(GuildWars2.Items.U
 static GuildWars2.Items.MagicDoorSkinUnlocker.operator !=(GuildWars2.Items.MagicDoorSkinUnlocker? left, GuildWars2.Items.MagicDoorSkinUnlocker? right) -> bool
 static GuildWars2.Items.MagicDoorSkinUnlocker.operator ==(GuildWars2.Items.MagicDoorSkinUnlocker? left, GuildWars2.Items.MagicDoorSkinUnlocker? right) -> bool
 static readonly GuildWars2.SchemaVersion.V20250829 -> GuildWars2.SchemaVersion!
+GuildWars2.Authorization.SubtokenOptionsBuilder
+GuildWars2.Authorization.SubtokenOptionsBuilder.AbsoluteExpirationDate.get -> System.DateTimeOffset?
+GuildWars2.Authorization.SubtokenOptionsBuilder.AddAllowedUrl(string! url) -> GuildWars2.Authorization.SubtokenOptionsBuilder!
+GuildWars2.Authorization.SubtokenOptionsBuilder.AddAllowedUrl(System.Uri! url) -> GuildWars2.Authorization.SubtokenOptionsBuilder!
+GuildWars2.Authorization.SubtokenOptionsBuilder.AddPermission(GuildWars2.Authorization.Permission permission) -> GuildWars2.Authorization.SubtokenOptionsBuilder!
+GuildWars2.Authorization.SubtokenOptionsBuilder.AllowedUrls.get -> System.Collections.Generic.IReadOnlyList<System.Uri!>!
+GuildWars2.Authorization.SubtokenOptionsBuilder.ClearAllowedUrls() -> GuildWars2.Authorization.SubtokenOptionsBuilder!
+GuildWars2.Authorization.SubtokenOptionsBuilder.ClearPermissions() -> GuildWars2.Authorization.SubtokenOptionsBuilder!
+GuildWars2.Authorization.SubtokenOptionsBuilder.Permissions.get -> System.Collections.Generic.IReadOnlyList<GuildWars2.Authorization.Permission>!
+GuildWars2.Authorization.SubtokenOptionsBuilder.SubtokenOptionsBuilder() -> void
+GuildWars2.Authorization.SubtokenOptionsBuilder.WithAbsoluteExpiration(in System.DateTimeOffset? absoluteExpirationDate) -> GuildWars2.Authorization.SubtokenOptionsBuilder!
+GuildWars2.Authorization.SubtokenOptionsBuilder.WithAllowedUrls(System.Collections.Generic.IEnumerable<System.Uri!>! values) -> GuildWars2.Authorization.SubtokenOptionsBuilder!
+GuildWars2.Authorization.SubtokenOptionsBuilder.WithAllowedUrlStrings(System.Collections.Generic.IEnumerable<string!>! values) -> GuildWars2.Authorization.SubtokenOptionsBuilder!
+GuildWars2.Authorization.SubtokenOptionsBuilder.WithPermissions(System.Collections.Generic.IEnumerable<GuildWars2.Authorization.Permission>! values) -> GuildWars2.Authorization.SubtokenOptionsBuilder!
+GuildWars2.Authorization.SubtokenOptionsBuilder.WithPermissions(System.Collections.Generic.IEnumerable<GuildWars2.Extensible<GuildWars2.Authorization.Permission>>! values) -> GuildWars2.Authorization.SubtokenOptionsBuilder!
+GuildWars2.Authorization.TokenClient.CreateSubtoken(string! accessToken, System.Action<GuildWars2.Authorization.SubtokenOptionsBuilder!>! configureCallback, GuildWars2.MissingMemberBehavior missingMemberBehavior = GuildWars2.MissingMemberBehavior.Error, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<(GuildWars2.Authorization.CreatedSubtoken! Value, GuildWars2.MessageContext! Context)>!
+GuildWars2.Hero.Masteries.MasteryRegionName.Wild = 7 -> GuildWars2.Hero.Masteries.MasteryRegionName
+GuildWars2.Hero.Masteries.MasteryRegionName.Magic = 8 -> GuildWars2.Hero.Masteries.MasteryRegionName
