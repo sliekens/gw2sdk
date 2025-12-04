@@ -1,0 +1,23 @@
+{
+  "Configuration": {
+    "CoverageFileName": "coverage.xml",
+    "Format": "xml",
+    "DeterministicReport": true,
+    "CodeCoverage": {
+      "Attributes": {
+        "Exclude": [
+          "^System\\.ObsoleteAttribute$",
+          "^System\\.CodeDom\\.Compiler\\.GeneratedCodeAttribute$"
+        ]
+      },
+      "Sources": {
+        "Exclude": [
+          ".*\\.generated\\.cs",
+          ".*\\.g\\.cs"
+        ]
+      },
+      "EnableStaticManagedInstrumentation": false,
+      "EnableDynamicManagedInstrumentation": true
+    }
+  }
+}

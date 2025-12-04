@@ -56,9 +56,8 @@ jobs:
         run: dotnet test
           --configuration Release
           --no-build
+          --config-file tests/testconfig.json
           --coverage
-          --coverage-settings tests/coverage.settings
-          --coverage-output coverage.xml
           --no-progress
         env:
           ApiKeyBasic: ${{ secrets.API_TOKEN_BASIC }}

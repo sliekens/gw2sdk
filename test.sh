@@ -5,11 +5,10 @@ set -e
 rm -r artifacts/bin/GuildWars2.Tests/debug_net10.0/TestResults/* || true
 
 # Run tests with coverage, additional arguments are passed on to dotnet test
-# e.g. ./test.sh -- --filter-class *Colors
+# e.g. ./test.sh --treenode-filter */*/Colors*/*
 dotnet run --project tests/GuildWars2.Tests --framework net10.0 -- \
+    --config-file tests/testconfig.json \
     --coverage \
-    --coverage-settings tests/coverage.settings \
-    --coverage-output coverage.xml \
     "$@"
 
 # Remove reports from previous runs
