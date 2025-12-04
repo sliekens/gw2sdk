@@ -9,22 +9,31 @@ The solution is structured as follows:
 ├── src/
 │   ├── GuildWars2
 │   ├── GuildWars2.Generators
-│   └── GuildWars2.TestDataHelper
+│   ├── GuildWars2.Profiling
+│   ├── GuildWars2.TestDataHelper
+│   └── GuildWars2.Tests.Generators
 ├── tests/
-│   └── GuildWars2.Tests
+│   ├── GuildWars2.ArchitectureTests
+│   ├── GuildWars2.Tests
+│   └── GuildWars2.Tests.Common
 ├── wiki
 ├── docs
 ├── samples
 ├── .github
 ├── .vscode
 ├── .devcontainer
+├── .specify
 ├── global.json
 ├── Directory.Build.props
 ├── Directory.Build.targets
+├── Directory.Packages.props
 ├── .editorconfig
 ├── .gitattributes
 ├── .gitignore
 ├── Invoke-Api.ps1
+├── Invoke-TestDataHelper.ps1
+├── pack.ps1
+├── test.ps1
 ├── test.sh
 └── README.md
 ```
@@ -37,6 +46,12 @@ The **GuildWars2.Generators** project contains source generators which generate
 code for AOT compilation, eg. to generate JSON serialization code for enums.
 This is necessary because AOT compilation does not support reflection.
 
+The **GuildWars2.Profiling** project contains a console application used for
+performance profiling and benchmarking of the library.
+
+The **GuildWars2.Tests.Generators** project contains source generators used by
+the test projects to generate test infrastructure code.
+
 The **GuildWars2.TestDataHelper** project contains a console application which is
 used to cache API data. It is not a test project, but it is used to download
 JSON files from the API and save them to disk, so that the integration tests
@@ -44,12 +59,18 @@ can run offline. This approach is used to avoid hitting the API too much during
 testing, and to avoid having to mock the API. It can be executed with `pwsh
 Invoke-TestDataHelper.ps1` from the root of the repository.
 
-The **GuildWars2.Tests** project contains xUnit v3 tests for the main project. It
+The **GuildWars2.Tests** project contains TUnit tests for the main project. It
 contains mostly integrations tests which use the real API, one test per API
 endpoint. It contains relatively few unit tests, because the integration test
 usually covers all the logic. The **coverage.settings** file is used to
 configure what goes in the code coverage report. For example, generated code is
 excluded from the report.
+
+The **GuildWars2.ArchitectureTests** project contains TUnit tests that verify
+architectural constraints and design rules across the codebase.
+
+The **GuildWars2.Tests.Common** project contains shared test infrastructure and
+utilities used by multiple test projects.
 
 The **wiki** folder contains a copy of this wiki. I use the wiki to document
 the development process, and to keep track of the decisions I make. It is not
@@ -69,6 +90,10 @@ use the library. You can run them to see how the library works. Some samples
 like [Basic usage](https://sliekens.github.io/gw2sdk/guide/usage.html) are used
 in the user documentation.
 
+The **.specify** folder contains AI-assisted development configuration and
+prompts for the Specify tool, including constitutional AI guidelines and
+agent templates.
+
 The **.github** folder contains GitHub-specific files, such as the issue
 templates and the workflow definitions for GitHub Actions.
 
@@ -86,9 +111,10 @@ The **global.json** file is used to pin the version of the .NET SDK used to
 build the project. It is used to ensure that the build is consistent across
 contributors.
 
-The **Directory.Build.props** and **Directory.Build.targets** files are used to
-define common build settings for all projects in the solution, such as the C#
-language version.
+The **Directory.Build.props**, **Directory.Build.targets** and
+**Directory.Packages.props** files are used to define common build settings for
+all projects in the solution, such as the C# language version and centralized
+package version management.
 
 The **.editorconfig** file is used to define common editor settings for all
 projects in the solution, such as the indentation style. It is used to ensure
@@ -109,10 +135,21 @@ It accepts a path as the first argument like `pwsh Invoke-Api.ps1 v2/account`.
 It won't prompt you for your API key, instead it will re-use the key from the
 test project.
 
-The **test.sh** file is a helper script to run the tests. You can execute it
-with `./test.sh` from the root of the repository. It accepts the same arguments
-as `dotnet run` like `./test.sh -- --filter Account`. It will run the tests and it
-will generate a code coverage report in the **reports** folder.
+The **Invoke-TestDataHelper.ps1** file is a helper script to run the
+TestDataHelper console application. You can execute it with `pwsh
+Invoke-TestDataHelper.ps1` from the root of the repository. It is used to
+download and cache API data for offline testing.
+
+The **test.sh** and **test.ps1** files are helper scripts to run the tests. You
+can execute them with `./test.sh` or `pwsh test.ps1` from the root of the
+repository. They accept the same arguments as `dotnet test` like `./test.sh
+--treenode-filter */*/Colors*/*`. They will run the tests with code coverage
+enabled and generate a coverage report in the **artifacts/report** folder.
+
+The **pack.ps1** file is a helper script to pack the library for NuGet
+distribution. You can execute it with `pwsh pack.ps1` from the root of the
+repository. It builds the project in Release configuration and creates a NuGet
+package.
 
 ## Runtime dependencies
 
@@ -124,7 +161,7 @@ The **GuildWars2** project depends on the following projects:
 
 The **GuildWars2** project has the following development dependencies:
 
-- **xunit** is used for automated testing.
+- **TUnit** is used for automated testing.
 - **ReportGenerator** (dotnet reportgenerator) is used to generate a code
  coverage report locally (offline).
 - **Codecov** is used to generate an online code coverage report. It has
