@@ -35,7 +35,7 @@ Example migration (from deprecated pattern):
 
 | TargetFrameworkIdentifier | Typical TFMs (examples) | Notes |
 | ------------------------- | ----------------------- | ----- |
-| `.NETCoreApp`             | `net5.0`, `net6.0`, `net8.0`, `net9.0`, legacy `netcoreapp3.1` | Modern .NET (including .NET Core + .NET 5+) |
+| `.NETCoreApp`             | `net5.0`, `net6.0`, `net8.0`, `net9.0`, `net10.0`, legacy `netcoreapp3.1` | Modern .NET (including .NET Core + .NET 5+) |
 | `.NETStandard`            | `netstandard2.0`, `netstandard2.1` | API unification surface |
 | `.NETFramework` / `.NET Framework` | `net48`, `net481`, `net462`, `net35` | Full framework; some APIs only here |
 | `Silverlight`             | `sl4`, `sl5` | Deprecated ecosystem |
