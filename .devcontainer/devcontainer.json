@@ -31,7 +31,8 @@
       "extensions": [
         "ms-dotnettools.csdevkit",
         "editorconfig.editorconfig",
-        "github.vscode-github-actions"
+        "github.vscode-github-actions",
+        "bierner.github-markdown-preview"
       ]
     }
   }
