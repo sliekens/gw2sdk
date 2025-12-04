@@ -8,6 +8,7 @@ Welcome to the wiki for contributors!
 - [[Project goals]]
 - [[PC requirements]]
 - [[Solution layout]]
+- [[EditorConfig and GlobalConfig|editorconfig-and-globalconfig]]
 - [[Configure API keys]]
 - [[Spec development]]
 - [[TUnit test projects]]
