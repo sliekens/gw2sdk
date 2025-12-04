@@ -5,6 +5,7 @@
     <JsonSerializerIsReflectionEnabledByDefault>false</JsonSerializerIsReflectionEnabledByDefault>
     <!-- https://github.com/microsoft/codecoverage/issues/196 -->
     <!-- <PublishAot>$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))</PublishAot> -->
+    <IsAotCompatible>$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))</IsAotCompatible>
     <UserSecretsId>a8ab34fc-ca23-453c-b913-59b025c2b48e</UserSecretsId>
     <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
     <IsPackable>false</IsPackable>

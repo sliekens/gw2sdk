@@ -75,7 +75,7 @@ public class BulkQueryTest
         {
             cancellationToken.ThrowIfCancellationRequested();
             List<int> keys = [.. chunk];
-            await Assert.That(keys).IsEquivalentTo(index);
+            await Assert.That(keys).IsEquivalentTo(index, EqualityComparer<int>.Default);
             IReadOnlyCollection<StubRecord> result = [.. keys.Select(id => new StubRecord(id))];
             return result;
         }

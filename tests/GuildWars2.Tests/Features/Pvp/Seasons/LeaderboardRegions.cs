@@ -15,7 +15,7 @@ public class LeaderboardRegions(Gw2Client sut)
         HashSet<string> expected = ["eu", "na"];
         using (Assert.Multiple())
         {
-            await Assert.That(actual).IsEquivalentTo(expected);
+            await Assert.That(actual).IsEquivalentTo(expected, StringComparer.Ordinal);
         }
     }
 }

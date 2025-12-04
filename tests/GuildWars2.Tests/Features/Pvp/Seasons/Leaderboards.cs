@@ -13,7 +13,7 @@ public class Leaderboards(Gw2Client sut)
         HashSet<string> expected = ["guild", "legendary"];
         using (Assert.Multiple())
         {
-            await Assert.That(actual).IsEquivalentTo(expected);
+            await Assert.That(actual).IsEquivalentTo(expected, StringComparer.Ordinal);
         }
     }
 }

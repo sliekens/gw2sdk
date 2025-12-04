@@ -14,7 +14,8 @@ public class DailyRecipes(Gw2Client sut)
         // For now I'll just maintain this by hand...
         // no clue how this can be solved without re-implementing the call to /v2/dailycrafting in test code (which makes the test pointless)
         (HashSet<string> dailyRecipes, _) = await sut.Hero.Crafting.Daily.GetDailyCraftableItems(TestContext.Current!.Execution.CancellationToken);
-        await Assert.That(dailyRecipes).IsEquivalentTo(["charged_quartz_crystal", "glob_of_elder_spirit_residue", "lump_of_mithrilium", "spool_of_silk_weaving_thread", "spool_of_thick_elonian_cord"]);
+        HashSet<string> expected = ["charged_quartz_crystal", "glob_of_elder_spirit_residue", "lump_of_mithrilium", "spool_of_silk_weaving_thread", "spool_of_thick_elonian_cord"];
+        await Assert.That(dailyRecipes).IsEquivalentTo(expected, StringComparer.Ordinal);
         // Again this next method is not deterministic...
         (HashSet<string> actual, _) = await sut.Hero.Crafting.Daily.GetDailyCraftedItems(accessToken.Key, TestContext.Current!.Execution.CancellationToken);
         // The best we can do is verify that there are no unexpected recipes
