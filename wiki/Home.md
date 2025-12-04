@@ -4,7 +4,8 @@ Welcome to the contributor wiki for GW2SDK! This wiki contains documentation
 for developers who want to contribute to the project, understand its
 architecture, or set up their development environment.
 
-> **Note:** This wiki is for contributors. If you're looking for user
+> [!TIP]
+> This wiki is for contributors. If you're looking for user
 > documentation, see the [official documentation](https://sliekens.github.io/gw2sdk/).
 
 ## Getting Started
