@@ -11,7 +11,7 @@ public class LogosByPage(Gw2Client sut)
     {
         const int pageSize = 3;
         (HashSet<Logo> actual, MessageContext context) = await sut.Logos.GetLogosByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        await Assert.That(actual).HasCount().EqualTo(pageSize);
+        await Assert.That(actual).Count().IsEqualTo(pageSize);
         using (Assert.Multiple())
         {
             await Assert.That(context.Links).IsNotNull();

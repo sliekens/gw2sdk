@@ -1,4 +1,4 @@
-﻿using GuildWars2.Items;
+using GuildWars2.Items;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Items;
@@ -16,7 +16,7 @@ public class ItemsByPage(Gw2Client sut)
             .And.Member(c => c.ResultCount, rc => rc.IsEqualTo(pageSize))
             .And.Member(c => c.PageTotal!.Value, pt => pt.IsGreaterThan(0))
             .And.Member(c => c.ResultTotal!.Value, rt => rt.IsGreaterThan(0));
-        await Assert.That(actual).HasCount().EqualTo(pageSize)
-            .And.All(item => item is not null);
+        await Assert.That(actual).Count().IsEqualTo(pageSize);
+        await Assert.That(actual).All(item => item is not null);
     }
 }

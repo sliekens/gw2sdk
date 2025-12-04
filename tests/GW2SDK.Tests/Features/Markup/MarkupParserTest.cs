@@ -14,7 +14,7 @@ public class MarkupParserTest
         RootNode actual = MarkupParser.Parse(tokens);
         await Assert.That(actual)
             .IsNotNull()
-            .And.Member(a => a.Children, a => a.HasCount(2));
+            .And.Member(a => a.Children, a => a.Count().IsEqualTo(2));
 
         await Assert.That(actual.Children.ElementAt(0))
             .IsTypeOf<TextNode>()
@@ -57,7 +57,7 @@ public class MarkupParserTest
         RootNode actual = MarkupParser.Parse(tokens);
         await Assert.That(actual)
             .IsNotNull()
-            .And.Member(a => a.Children, a => a.HasCount(2));
+            .And.Member(a => a.Children, a => a.Count().IsEqualTo(2));
 
         ColoredTextNode coloredText = await Assert.That(actual.Children.ElementAt(0))
             .IsTypeOf<ColoredTextNode>()

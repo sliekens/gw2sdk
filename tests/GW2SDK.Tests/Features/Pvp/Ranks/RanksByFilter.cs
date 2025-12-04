@@ -15,7 +15,7 @@ public class RanksByFilter(Gw2Client sut)
         {
             await Assert.That(context).Member(c => c.ResultCount, m => m.IsEqualTo(ids.Count));
             await Assert.That(context.ResultTotal!.Value).IsGreaterThan(ids.Count);
-            await Assert.That(actual).HasCount(ids.Count);
+            await Assert.That(actual).Count().IsEqualTo(ids.Count);
             await Assert.That(actual.ElementAt(0).Id).IsIn(ids);
             await Assert.That(actual.ElementAt(1).Id).IsIn(ids);
             await Assert.That(actual.ElementAt(2).Id).IsIn(ids);

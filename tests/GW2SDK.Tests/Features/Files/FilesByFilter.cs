@@ -13,7 +13,7 @@ public class FilesByFilter(Gw2Client sut)
         (HashSet<Asset> actual, MessageContext context) = await sut.Files.GetFilesByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(ids.Count))
             .And.Member(c => c.ResultTotal, rt => rt.IsNotNull().And.IsGreaterThan(ids.Count));
-        await Assert.That(actual).HasCount().EqualTo(ids.Count);
+        await Assert.That(actual).Count().IsEqualTo(ids.Count);
         using (Assert.Multiple())
         {
             foreach (string id in ids)

@@ -11,7 +11,7 @@ public class LogosByFilter(Gw2Client sut)
     {
         HashSet<string> ids = ["Guild-Wars-2-logo-en", "Guild-Wars-2-logo-es", "Guild-Wars-2-logo-de",];
         (HashSet<Logo> actual, MessageContext context) = await sut.Logos.GetLogosByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        await Assert.That(actual).HasCount().EqualTo(ids.Count);
+        await Assert.That(actual).Count().IsEqualTo(ids.Count);
         using (Assert.Multiple())
         {
             await Assert.That(context).Member(c => c.ResultCount, c => c.IsEqualTo(ids.Count));

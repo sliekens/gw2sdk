@@ -20,7 +20,7 @@ public class HeartsByPage(Gw2Client sut)
         await Assert.That(context.ResultCount).IsEqualTo(pageSize);
         await Assert.That(context).Member(c => c.PageTotal, pt => pt.IsNotNull().And.IsGreaterThan(0))
             .And.Member(c => c.ResultTotal, rt => rt.IsNotNull().And.IsGreaterThan(0));
-        await Assert.That(actual).HasCount().EqualTo(pageSize);
+        await Assert.That(actual).Count().IsEqualTo(pageSize);
         using (Assert.Multiple())
         {
             foreach (Heart heart in actual)

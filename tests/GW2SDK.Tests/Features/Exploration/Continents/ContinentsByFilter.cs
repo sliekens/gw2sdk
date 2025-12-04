@@ -13,7 +13,7 @@ public class ContinentsByFilter(Gw2Client sut)
         (HashSet<Continent> actual, MessageContext context) = await sut.Exploration.GetContinentsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context.ResultCount).IsEqualTo(ids.Count);
         await Assert.That(context.ResultTotal).IsEqualTo(ids.Count);
-        await Assert.That(actual).HasCount().EqualTo(ids.Count);
+        await Assert.That(actual).Count().IsEqualTo(ids.Count);
         using (Assert.Multiple())
         {
             foreach (int id in ids)

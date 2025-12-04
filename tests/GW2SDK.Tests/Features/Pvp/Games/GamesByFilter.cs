@@ -19,7 +19,7 @@ public class GamesByFilter(Gw2Client sut)
         {
             await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(ids.Count));
             await Assert.That(context).Member(c => c.ResultTotal, rt => rt.IsEqualTo(ids.Count));
-            await Assert.That(actual).HasCount(ids.Count);
+            await Assert.That(actual).Count().IsEqualTo(ids.Count);
             foreach (string id in ids)
             {
                 await Assert.That(actual.Any(found => found.Id == id)).IsTrue();

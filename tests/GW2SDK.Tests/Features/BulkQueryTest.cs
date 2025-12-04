@@ -55,7 +55,7 @@ public class BulkQueryTest
         }
 
         List<StubRecord> actual = await BulkQuery.QueryAsync(index, GetChunk, cancellationToken: TestContext.Current!.Execution.CancellationToken).ToListAsync(TestContext.Current!.Execution.CancellationToken);
-        await Assert.That(actual).HasCount().EqualTo(index.Count);
+        await Assert.That(actual).Count().IsEqualTo(index.Count);
         foreach (int id in index)
         {
             await Assert.That(actual).Contains(record => record.Id == id);
@@ -81,7 +81,7 @@ public class BulkQueryTest
         }
 
         List<StubRecord> actual = await BulkQuery.QueryAsync(index, GetChunk, cancellationToken: TestContext.Current!.Execution.CancellationToken).ToListAsync(TestContext.Current!.Execution.CancellationToken);
-        await Assert.That(actual).HasCount().EqualTo(index.Count);
+        await Assert.That(actual).Count().IsEqualTo(index.Count);
         foreach (int id in index)
         {
             await Assert.That(actual).Contains(record => record.Id == id);

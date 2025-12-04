@@ -11,7 +11,7 @@ public class AstralRewardsByFilter(Gw2Client sut)
     {
         HashSet<int> ids = [1, 2, 3];
         (HashSet<AstralReward> actual, MessageContext context) = await sut.WizardsVault.GetAstralRewardsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        await Assert.That(actual).HasCount().EqualTo(ids.Count);
+        await Assert.That(actual).Count().IsEqualTo(ids.Count);
         using (Assert.Multiple())
         {
             await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(ids.Count));

@@ -218,7 +218,7 @@ public class CoinTest
         // although there is no way to test that directly
         List<Coin> coins = [10, 5, 20];
         coins.Sort();
-        await Assert.That(coins).HasCount().EqualTo(3);
+        await Assert.That(coins).Count().IsEqualTo(3);
         await Assert.That(coins[0].Amount).IsEqualTo(5);
         await Assert.That(coins[1].Amount).IsEqualTo(10);
         await Assert.That(coins[2].Amount).IsEqualTo(20);
@@ -231,7 +231,7 @@ public class CoinTest
         List<object> coins = [new Coin(10), new Coin(5), new Coin(20)];
         coins.Sort();
         List<Coin> coinList = [.. coins.Cast<Coin>()];
-        await Assert.That(coinList).HasCount().EqualTo(3);
+        await Assert.That(coinList).Count().IsEqualTo(3);
         await Assert.That(coinList[0].Amount).IsEqualTo(5);
         await Assert.That(coinList[1].Amount).IsEqualTo(10);
         await Assert.That(coinList[2].Amount).IsEqualTo(20);

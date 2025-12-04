@@ -11,7 +11,7 @@ public class QuaggansByFilter(Gw2Client sut)
     {
         HashSet<string> ids = ["404", "aloha", "attack"];
         (HashSet<Quaggan> actual, MessageContext context) = await sut.Quaggans.GetQuaggansByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        await Assert.That(actual).HasCount().EqualTo(ids.Count);
+        await Assert.That(actual).Count().IsEqualTo(ids.Count);
         using (Assert.Multiple())
         {
             await Assert.That(context).Member(c => c.ResultCount, c => c.IsEqualTo(ids.Count));

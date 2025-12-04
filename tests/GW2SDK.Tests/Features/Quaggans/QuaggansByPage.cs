@@ -11,7 +11,7 @@ public class QuaggansByPage(Gw2Client sut)
     {
         const int pageSize = 3;
         (HashSet<Quaggan> actual, MessageContext context) = await sut.Quaggans.GetQuaggansByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        await Assert.That(actual).HasCount().EqualTo(pageSize);
+        await Assert.That(actual).Count().IsEqualTo(pageSize);
         using (Assert.Multiple())
         {
             await Assert.That(context.Links).IsNotNull();

@@ -16,7 +16,7 @@ public class MapsByFilter(Gw2Client sut)
         (HashSet<Map> actual, MessageContext context) = await sut.Exploration.GetMapsByIds(continentId, floorId, regionId, ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(ids.Count))
             .And.Member(c => c.ResultTotal, rt => rt.IsNotNull().And.IsGreaterThan(ids.Count));
-        await Assert.That(actual).HasCount().EqualTo(ids.Count);
+        await Assert.That(actual).Count().IsEqualTo(ids.Count);
         using (Assert.Multiple())
         {
             foreach (int id in ids)

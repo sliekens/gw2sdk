@@ -10,7 +10,7 @@ public class LinkHeaderTest
         const string input = "</v2/colors?page=117&page_size=5>; rel=previous, </v2/colors?page=119&page_size=5>; rel=next, </v2/colors?page=118&page_size=5>; rel=self, </v2/colors?page=0&page_size=5>; rel=first, </v2/colors?page=119&page_size=5>; rel=last";
         LinkHeader actual = LinkHeader.Parse(input);
         List<LinkValue> links = [.. actual.Links];
-        await Assert.That(links).HasCount().EqualTo(5);
+        await Assert.That(links).Count().IsEqualTo(5);
         await Assert.That(links[0]).Member(l => l.RelationType, rt => rt.IsEqualTo("previous"))
             .And.Member(l => l.TargetUrl.ToString(), url => url.IsEqualTo("/v2/colors?page=117&page_size=5"));
         await Assert.That(links[1]).Member(l => l.RelationType, rt => rt.IsEqualTo("next"))

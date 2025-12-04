@@ -19,7 +19,7 @@ public class MapsByPage(Gw2Client sut)
             .And.Member(c => c.ResultCount, rc => rc.IsEqualTo(pageSize))
             .And.Member(c => c.PageTotal, pt => pt.IsNotNull().And.IsGreaterThan(0))
             .And.Member(c => c.ResultTotal, rt => rt.IsNotNull().And.IsGreaterThan(0));
-        await Assert.That(actual).HasCount().EqualTo(pageSize);
+        await Assert.That(actual).Count().IsEqualTo(pageSize);
         using (Assert.Multiple())
         {
             foreach (Map item in actual)

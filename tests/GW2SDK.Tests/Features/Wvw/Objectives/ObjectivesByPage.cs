@@ -16,7 +16,7 @@ public class ObjectivesByPage(Gw2Client sut)
         await Assert.That(context).Member(c => c.ResultCount, m => m.IsEqualTo(pageSize));
         await Assert.That(context.PageTotal > 0).IsTrue();
         await Assert.That(context.ResultTotal > 0).IsTrue();
-        await Assert.That(actual).HasCount(pageSize);
+        await Assert.That(actual).Count().IsEqualTo(pageSize);
         foreach (Objective entry in actual)
         {
             await Assert.That(entry).IsNotNull();

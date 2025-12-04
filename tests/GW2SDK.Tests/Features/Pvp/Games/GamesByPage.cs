@@ -20,7 +20,7 @@ public class GamesByPage(Gw2Client sut)
             await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(pageSize));
             await Assert.That(context.PageTotal!.Value).IsGreaterThan(0);
             await Assert.That(context.ResultTotal!.Value).IsGreaterThan(0);
-            await Assert.That(actual).HasCount(pageSize);
+            await Assert.That(actual).Count().IsEqualTo(pageSize);
             foreach (Game entry in actual)
             {
                 await Assert.That(entry).IsNotNull();

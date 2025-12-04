@@ -16,7 +16,7 @@ public class ContinentsByPage(Gw2Client sut)
         await Assert.That(context.ResultCount).IsEqualTo(2);
         await Assert.That(context).Member(c => c.PageTotal, pt => pt.IsNotNull().And.IsGreaterThan(0))
             .And.Member(c => c.ResultTotal, rt => rt.IsNotNull().And.IsGreaterThan(0));
-        await Assert.That(actual).HasCount().EqualTo(2);
+        await Assert.That(actual).Count().IsEqualTo(2);
         using (Assert.Multiple())
         {
             foreach (Continent continent in actual)

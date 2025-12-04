@@ -11,7 +11,7 @@ public class AstralRewardsByPage(Gw2Client sut)
     {
         const int pageSize = 3;
         (HashSet<AstralReward> actual, MessageContext context) = await sut.WizardsVault.GetAstralRewardsByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
-        await Assert.That(actual).HasCount().EqualTo(pageSize);
+        await Assert.That(actual).Count().IsEqualTo(pageSize);
         using (Assert.Multiple())
         {
             await Assert.That(context.Links).IsNotNull();

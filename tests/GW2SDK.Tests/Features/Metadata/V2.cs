@@ -26,7 +26,7 @@ public class V2(Gw2Client sut)
                 await Assert.That(routes).Contains(route.Path);
             }
         }
-        await Assert.That(actual.SchemaVersions).HasCount().EqualTo(13);
+        await Assert.That(actual.SchemaVersions).Count().IsEqualTo(13);
         using (Assert.Multiple())
         {
             await Assert.That(actual.SchemaVersions.ElementAt(0).Version).IsEqualTo(SchemaVersion.V20190221);
