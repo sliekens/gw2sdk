@@ -22,9 +22,11 @@ You can ignore this if you use the dev container. Otherwise install the software
 - Mac/Linux
   - [Mono 6.12](https://www.mono-project.com/download/stable/) to run .NET Framework tests
 
-You can skip .NET Framework tests by running `dotnet test -f net10.0` (specific TFM) instead of `dotnet test` (all TFMs).
+> [!TIP]
+> You can skip .NET Framework tests by running `dotnet test -f net10.0` (specific TFM) instead of `dotnet test` (all TFMs).
 
-To use Visual Studio 2022 effectively, you need to install the .NET Framework 4.8 Developer pack. This is not actually required to compile the code or run the tests, but Visual Studio itself will refuse to load the project without it.
+> [!NOTE]
+> To use Visual Studio 2022 effectively, you need to install the .NET Framework 4.8 Developer pack. This is not actually required to compile the code or run the tests, but Visual Studio itself will refuse to load the project without it.
 
 ## Optional Windows dependencies
 
