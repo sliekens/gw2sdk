@@ -1,4 +1,4 @@
-﻿<!--EXTERNAL_PROPERTIES: GITHUB_ACTIONS-->
+<!--EXTERNAL_PROPERTIES: GITHUB_ACTIONS-->
 <!--EXTERNAL_PROPERTIES: SYMBOL_PACKAGE-->
 <Project Sdk="Microsoft.NET.Sdk">
 
@@ -9,7 +9,6 @@
     <TargetFrameworks>$(TargetFrameworks);net9.0</TargetFrameworks>
     <TargetFrameworks>$(TargetFrameworks);net10.0</TargetFrameworks>
     <IsAotCompatible>$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))</IsAotCompatible>
-    <RootNamespace>GuildWars2</RootNamespace>
     <AssemblyTitle>GW2 Client SDK</AssemblyTitle>
     <Product>GW2SDK</Product>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -87,13 +86,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../GW2SDK.Generators/GW2SDK.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="../GuildWars2.Generators/GuildWars2.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
   <!-- Allow test assemblies to access internal DTO types for source-generated lists -->
   <ItemGroup>
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-      <_Parameter1>GW2SDK.Tests.Common</_Parameter1>
+      <_Parameter1>GuildWars2.Tests.Common</_Parameter1>
     </AssemblyAttribute>
   </ItemGroup>
 

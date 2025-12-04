@@ -5,7 +5,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 
-namespace GW2SDK.Generators;
+namespace GuildWars2.Generators;
 
 [Generator]
 public class EnumJsonConverterGenerator : IIncrementalGenerator

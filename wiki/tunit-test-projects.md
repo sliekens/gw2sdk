@@ -10,7 +10,7 @@ Create another test project when:
 - You want different target frameworks or runtime identifiers.
 - You need different dependencies/analyzers without polluting the main test project.
 
-All test projects MUST live under the `tests/` directory, sibling to `GW2SDK.Tests`. Name them with the `GW2SDK.` prefix for clarity (e.g. `GW2SDK.LoadTests`).
+All test projects MUST live under the `tests/` directory, sibling to `GuildWars2.Tests`. Name them with the `GuildWars2.` prefix for clarity (e.g. `GuildWars2.LoadTests`).
 
 ## Quick start (template)
 
@@ -19,7 +19,7 @@ Install the TUnit project templates if they are not already present locally. The
 ```bash
 # Install or update TUnit templates
 dotnet new install TUnit.Templates
-dotnet new TUnit --name GW2SDK.LoadTests --output tests/GW2SDK.LoadTests
+dotnet new TUnit --name GuildWars2.LoadTests --output tests/GuildWars2.LoadTests
 ```
 
 The generated `.csproj` will include a concrete version for `TUnit` (for example `<PackageReference Include="TUnit" Version="1.1.10" />`). Delete the `Version` attribute so Central Package Management (CPM) supplies it. The line should look like:
@@ -31,42 +31,42 @@ The generated `.csproj` will include a concrete version for `TUnit` (for example
 Then add the project to the solution and remove sample tests you do not need:
 
 ```bash
-dotnet sln gw2sdk.slnx add tests/GW2SDK.LoadTests/GW2SDK.LoadTests.csproj
+dotnet sln gw2sdk.slnx add tests/GuildWars2.LoadTests/GuildWars2.LoadTests.csproj
 ```
 
 ## Manual setup (preferred for consistency)
 
 1. Create the project (console template; TUnit replaces the entry point):
    ```bash
-   dotnet new console --name GW2SDK.LoadTests --output tests/GW2SDK.LoadTests
+   dotnet new console --name GuildWars2.LoadTests --output tests/GuildWars2.LoadTests
    ```
 2. Remove the generated `Program.cs` – TUnit will handle test host startup:
    ```bash
-   rm tests/GW2SDK.LoadTests/Program.cs
+   rm tests/GuildWars2.LoadTests/Program.cs
    ```
 3. Add the project to the solution:
    ```bash
-   dotnet sln gw2sdk.slnx add tests/GW2SDK.LoadTests/GW2SDK.LoadTests.csproj
+   dotnet sln gw2sdk.slnx add tests/GuildWars2.LoadTests/GuildWars2.LoadTests.csproj
    ```
    Add a project reference to the main SDK:
    ```bash
-   dotnet add tests/GW2SDK.LoadTests/GW2SDK.LoadTests.csproj reference src/GW2SDK/GW2SDK.csproj
+   dotnet add tests/GuildWars2.LoadTests/GuildWars2.LoadTests.csproj reference src/GuildWars2/GuildWars2.csproj
    ```
    Add a project reference to the common test infrastructure:
    ```bash
-   dotnet add tests/GW2SDK.LoadTests/GW2SDK.LoadTests.csproj reference tests/GW2SDK.Tests.Common/GW2SDK.Tests.Common.csproj
+   dotnet add tests/GuildWars2.LoadTests/GuildWars2.LoadTests.csproj reference tests/GuildWars2.Tests.Common/GuildWars2.Tests.Common.csproj
    ```
 4. Add package reference to TUnit (the version is centrally managed; no explicit version here if Directory.Packages.props provides it):
    ```bash
-   dotnet add tests/GW2SDK.LoadTests/GW2SDK.LoadTests.csproj package TUnit
+   dotnet add tests/GuildWars2.LoadTests/GuildWars2.LoadTests.csproj package TUnit
    ```
 5. (Optional) Add any additional packages required for the test category:
    ```bash
-   dotnet add tests/GW2SDK.LoadTests/GW2SDK.LoadTests.csproj package Microsoft.Testing.Extensions.CodeCoverage
+   dotnet add tests/GuildWars2.LoadTests/GuildWars2.LoadTests.csproj package Microsoft.Testing.Extensions.CodeCoverage
    ```
 6. Add a first test file:
    ```bash
-   cat > tests/GW2SDK.LoadTests/SampleTests.cs <<'EOF'
+   cat > tests/GuildWars2.LoadTests/SampleTests.cs <<'EOF'
    namespace GuildWars2.Tests.Load;
    
    public class SampleTests
@@ -82,7 +82,7 @@ dotnet sln gw2sdk.slnx add tests/GW2SDK.LoadTests/GW2SDK.LoadTests.csproj
    ```
 7. Run the tests:
    ```bash
-   dotnet run --project tests/GW2SDK.LoadTests/GW2SDK.LoadTests.csproj
+   dotnet run --project tests/GuildWars2.LoadTests/GuildWars2.LoadTests.csproj
    ```
 
 ## Project file guidelines
@@ -96,7 +96,6 @@ Minimal project file (multi-targeting optional). For most new test projects, tar
     <OutputType>Exe</OutputType>
    <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <RootNamespace>GuildWars2.Tests.Load</RootNamespace>
     <!-- Avoid automatic polyfill injection if managing manually -->
     <EnableTUnitPolyfills>false</EnableTUnitPolyfills>
   </PropertyGroup>
@@ -106,7 +105,7 @@ Minimal project file (multi-targeting optional). For most new test projects, tar
     <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="../../src/GW2SDK/GW2SDK.csproj" />
+    <ProjectReference Include="../../src/GuildWars2/GuildWars2.csproj" />
   </ItemGroup>
   <!-- .NET Framework specific references can be added conditionally -->
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
@@ -123,7 +122,7 @@ Notes:
 
 - Keep `OutputType` as `Exe`; TUnit uses a modern test host (do NOT add `Microsoft.NET.Test.Sdk`).
 - Do not add Coverlet packages (`coverlet.collector`, `coverlet.msbuild`). Use `Microsoft.Testing.Extensions.CodeCoverage`.
-- Use conditional `ItemGroup` for framework-specific references as demonstrated in `GW2SDK.Tests`.
+- Use conditional `ItemGroup` for framework-specific references as demonstrated in `GuildWars2.Tests`.
  - Use conditional `ItemGroup` for framework-specific references (e.g. `System.Linq.Async`) and add `Polyfill` when targeting .NET Framework to ensure language feature parity.
 
 ## Running tests
@@ -131,21 +130,21 @@ Notes:
 From repository root:
 
 ```bash
-dotnet run --project tests/GW2SDK.LoadTests -- --filter Load
-dotnet run --project tests/GW2SDK.LoadTests --configuration Release --coverage
-dotnet run --project tests/GW2SDK.LoadTests --configuration Release --report-trx
-dotnet run --project tests/GW2SDK.LoadTests --configuration Release --coverage --report-trx
+dotnet run --project tests/GuildWars2.LoadTests -- --filter Load
+dotnet run --project tests/GuildWars2.LoadTests --configuration Release --coverage
+dotnet run --project tests/GuildWars2.LoadTests --configuration Release --report-trx
+dotnet run --project tests/GuildWars2.LoadTests --configuration Release --coverage --report-trx
 ```
 
 ## Adding to the solution file manually
 
-If editing `gw2sdk.slnx` directly (XML format), add a `<Project Path="tests/GW2SDK.LoadTests/GW2SDK.LoadTests.csproj" />` under the `/tests/` folder entry. Example snippet:
+If editing `gw2sdk.slnx` directly (XML format), add a `<Project Path="tests/GuildWars2.LoadTests/GuildWars2.LoadTests.csproj" />` under the `/tests/` folder entry. Example snippet:
 
 ```xml
 <Folder Name="/tests/">
-  <Project Path="tests/GW2SDK.Tests.Generators/GW2SDK.Tests.Generators.csproj" />
-  <Project Path="tests/GW2SDK.Tests/GW2SDK.Tests.csproj" />
-  <Project Path="tests/GW2SDK.LoadTests/GW2SDK.LoadTests.csproj" />
+  <Project Path="tests/GuildWars2.Tests.Generators/GuildWars2.Tests.Generators.csproj" />
+  <Project Path="tests/GuildWars2.Tests/GuildWars2.Tests.csproj" />
+  <Project Path="tests/GuildWars2.LoadTests/GuildWars2.LoadTests.csproj" />
 </Folder>
 ```
 
@@ -173,7 +172,6 @@ The solution already configures central package management (`Directory.Packages.
 | Tests not discovered | Added `Microsoft.NET.Test.Sdk` | Remove the package; ensure `OutputType` is `Exe` |
 | Coverage missing | Used Coverlet packages | Remove Coverlet; run with `--coverage` flag |
 | Polyfill type conflicts | Overlapping polyfill providers | Set `<EnableTUnitPolyfills>false</EnableTUnitPolyfills>` and add a `Polyfill` package reference |
-| Namespace collisions | Forgot `RootNamespace` | Add `<RootNamespace>` matching folder purpose |
 
 ## Example minimal test
 

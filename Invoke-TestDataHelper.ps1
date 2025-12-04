@@ -1,2 +1,2 @@
 #!/usr/bin/env pwsh
-dotnet run -c Release --project src/GW2SDK.TestDataHelper/GW2SDK.TestDataHelper.csproj -- "$PSScriptRoot/tests/GW2SDK.Tests/Data"
+dotnet run -c Release --project src/GuildWars2.TestDataHelper/GuildWars2.TestDataHelper.csproj -- "$PSScriptRoot/tests/GuildWars2.Tests/Data"

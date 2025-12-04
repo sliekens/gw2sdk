@@ -14,7 +14,7 @@
         "resolved": "0.54.0",
         "contentHash": "StDXCFayfy0yB1xzUHT2tgEpV1/HFTiS4JgsAQS49EYTfMixSwwucaQs/bIOCwXjWwIQTMuxjUIxcB5XsJkFJA=="
       },
-      "gw2sdk": {
+      "GW2SDK": {
         "type": "Project"
       }
     }

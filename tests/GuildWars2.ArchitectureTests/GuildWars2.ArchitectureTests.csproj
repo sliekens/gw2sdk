@@ -7,14 +7,13 @@
     <TargetFrameworks>net10.0;net481</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <RootNamespace>GuildWars2.ArchitectureTests</RootNamespace>
     <!-- https://github.com/microsoft/codecoverage/issues/196 -->
     <!-- <PublishAot>$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))</PublishAot> -->
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\GW2SDK\GW2SDK.csproj" />
-    <ProjectReference Include="..\GW2SDK.Tests.Common\GW2SDK.Tests.Common.csproj" />
+    <ProjectReference Include="..\..\src\GuildWars2\GuildWars2.csproj" />
+    <ProjectReference Include="..\GuildWars2.Tests.Common\GuildWars2.Tests.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>

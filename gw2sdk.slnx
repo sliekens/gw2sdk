@@ -14,15 +14,15 @@
     <Project Path="samples/PackageReadme/Gw2ClientProgram/Gw2ClientProgram.csproj" />
   </Folder>
   <Folder Name="/src/">
-    <Project Path="src/GW2SDK/GW2SDK.csproj" />
-    <Project Path="src/GW2SDK.Generators/GW2SDK.Generators.csproj" />
-    <Project Path="src/GW2SDK.Tests.Generators/GW2SDK.Tests.Generators.csproj" />
-    <Project Path="src/GW2SDK.TestDataHelper/GW2SDK.TestDataHelper.csproj" />
-    <Project Path="src/GW2SDK.Profiling/GW2SDK.Profiling.csproj" />
+    <Project Path="src/GuildWars2/GuildWars2.csproj" />
+    <Project Path="src/GuildWars2.Generators/GuildWars2.Generators.csproj" />
+    <Project Path="src/GuildWars2.Tests.Generators/GuildWars2.Tests.Generators.csproj" />
+    <Project Path="src/GuildWars2.TestDataHelper/GuildWars2.TestDataHelper.csproj" />
+    <Project Path="src/GuildWars2.Profiling/GuildWars2.Profiling.csproj" />
   </Folder>
   <Folder Name="/tests/">
-    <Project Path="tests/GW2SDK.ArchitectureTests/GW2SDK.ArchitectureTests.csproj" />
-    <Project Path="tests/GW2SDK.Tests.Common/GW2SDK.Tests.Common.csproj" />
-    <Project Path="tests/GW2SDK.Tests/GW2SDK.Tests.csproj" />
+    <Project Path="tests/GuildWars2.ArchitectureTests/GuildWars2.ArchitectureTests.csproj" />
+    <Project Path="tests/GuildWars2.Tests.Common/GuildWars2.Tests.Common.csproj" />
+    <Project Path="tests/GuildWars2.Tests/GuildWars2.Tests.csproj" />
   </Folder>
 </Solution>

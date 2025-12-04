@@ -103,7 +103,7 @@
         "resolved": "4.5.0",
         "contentHash": "okurQJO6NRE/apDIP23ajJ0hpiNmJ+f0BwOlB/cSqTLQlw5upkf+5+96+iG2Jw40G1fCVCyPz/FhIABUjMR+RQ=="
       },
-      "gw2sdk": {
+      "GW2SDK": {
         "type": "Project",
         "dependencies": {
           "Microsoft.Bcl.HashCode": "[6.0.0, )",
@@ -119,7 +119,7 @@
         "resolved": "1.0.334",
         "contentHash": "Bi/e5guuwmyPL7Kp1G+PbcDvZFKsZxuHmc39IpYHAhWOvV8I/uIHPwAZ++Fa8k/w6pEqPdHCIrxSCelMNmu0dQ=="
       },
-      "gw2sdk": {
+      "GW2SDK": {
         "type": "Project"
       }
     }

@@ -7,11 +7,11 @@ The solution is structured as follows:
 ```text
 .
 ├── src/
-│   ├── GW2SDK
-│   ├── GW2SDK.Generators
-│   └── GW2SDK.TestDataHelper
+│   ├── GuildWars2
+│   ├── GuildWars2.Generators
+│   └── GuildWars2.TestDataHelper
 ├── tests/
-│   └── GW2SDK.Tests
+│   └── GuildWars2.Tests
 ├── wiki
 ├── docs
 ├── samples
@@ -29,22 +29,22 @@ The solution is structured as follows:
 └── README.md
 ```
 
-The main project is **GW2SDK**, which contains the core functionality of the
+The main project is **GuildWars2**, which contains the core functionality of the
 library. It is a .NET Standard 2.0 library, so it can be used nearly anywhere:
 .NET and .NET Core, .NET Framework, Mono, Xamarin, UWP and Unity.
 
-The **GW2SDK.Generators** project contains source generators which generate
+The **GuildWars2.Generators** project contains source generators which generate
 code for AOT compilation, eg. to generate JSON serialization code for enums.
 This is necessary because AOT compilation does not support reflection.
 
-The **GW2SDK.TestDataHelper** project contains a console application which is
+The **GuildWars2.TestDataHelper** project contains a console application which is
 used to cache API data. It is not a test project, but it is used to download
 JSON files from the API and save them to disk, so that the integration tests
 can run offline. This approach is used to avoid hitting the API too much during
 testing, and to avoid having to mock the API. It can be executed with `pwsh
 Invoke-TestDataHelper.ps1` from the root of the repository.
 
-The **GW2SDK.Tests** project contains xUnit v3 tests for the main project. It
+The **GuildWars2.Tests** project contains xUnit v3 tests for the main project. It
 contains mostly integrations tests which use the real API, one test per API
 endpoint. It contains relatively few unit tests, because the integration test
 usually covers all the logic. The **coverage.settings** file is used to
@@ -116,13 +116,13 @@ will generate a code coverage report in the **reports** folder.
 
 ## Runtime dependencies
 
-The **GW2SDK** project depends on the following projects:
+The **GuildWars2** project depends on the following projects:
 
 - **System.Text.Json** is used to parse JSON data.
 
 ## Development dependencies
 
-The **GW2SDK** project has the following development dependencies:
+The **GuildWars2** project has the following development dependencies:
 
 - **xunit** is used for automated testing.
 - **ReportGenerator** (dotnet reportgenerator) is used to generate a code

@@ -8,7 +8,7 @@
         "resolved": "1.0.334",
         "contentHash": "Bi/e5guuwmyPL7Kp1G+PbcDvZFKsZxuHmc39IpYHAhWOvV8I/uIHPwAZ++Fa8k/w6pEqPdHCIrxSCelMNmu0dQ=="
       },
-      "gw2sdk": {
+      "GW2SDK": {
         "type": "Project"
       }
     }

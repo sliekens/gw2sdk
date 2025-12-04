@@ -7,7 +7,6 @@
     <!-- <PublishAot>$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))</PublishAot> -->
     <UserSecretsId>a8ab34fc-ca23-453c-b913-59b025c2b48e</UserSecretsId>
     <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
-    <RootNamespace>GuildWars2.Tests</RootNamespace>
     <IsPackable>false</IsPackable>
     <OutputType>Exe</OutputType>
     <RuntimeIdentifiers>win-x86;win-x64;linux-x64</RuntimeIdentifiers>
@@ -32,8 +31,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\GW2SDK\GW2SDK.csproj" />
-    <ProjectReference Include="..\GW2SDK.Tests.Common\GW2SDK.Tests.Common.csproj" />
+    <ProjectReference Include="..\..\src\GuildWars2\GuildWars2.csproj" />
+    <ProjectReference Include="..\GuildWars2.Tests.Common\GuildWars2.Tests.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>

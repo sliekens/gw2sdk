@@ -3,9 +3,9 @@
     {
       "src": [
         {
-          "src": "src/GW2SDK",
+          "src": "src/GuildWars2",
           "files": [
-            "GW2SDK.csproj"
+            "GuildWars2.csproj"
           ]
         }
       ],

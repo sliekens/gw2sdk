@@ -1,7 +1,7 @@
 #!/usr/bin/env pwsh
 $endpoint = $args[0]
 
-$json = dotnet user-secrets list --json --project $PSScriptRoot/tests/GW2SDK.Tests
+$json = dotnet user-secrets list --json --project $PSScriptRoot/tests/GuildWars2.Tests
 $secrets = $json | % { $_ -replace '//(BEGIN|END)' } | ConvertFrom-Json
 $script = New-TemporaryFile
 

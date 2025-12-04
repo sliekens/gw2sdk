@@ -4,8 +4,8 @@
       "name": "TestDataHelper",
       "type": "dotnet",
       "request": "launch",
-      "projectPath": "${workspaceFolder}/GW2SDK.TestDataHelper/GW2SDK.TestDataHelper.csproj",
-      "launchConfigurationId": "TargetFramework=;GW2SDK.TestDataHelper",
+      "projectPath": "${workspaceFolder}/GuildWars2.TestDataHelper/GuildWars2.TestDataHelper.csproj",
+      "launchConfigurationId": "TargetFramework=;GuildWars2.TestDataHelper",
       "internalConsoleOptions": "neverOpen",
       "presentation": {
         "group": "helper"

@@ -4,7 +4,7 @@ param(
 )
 
 $packArgs = @(
-    'src/GW2SDK/GW2SDK.csproj',
+    'src/GuildWars2/GuildWars2.csproj',
     '-c',
     'Release'
 )

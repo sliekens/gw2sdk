@@ -17,8 +17,8 @@ Next add your keys to the test suite with the user-secrets tool.
 Open a terminal inside the Git root directory and type:
 
 ```sh
-dotnet user-secrets --project GW2SDK.Tests set ApiKeyBasic XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXXXXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
-dotnet user-secrets --project GW2SDK.Tests set ApiKey YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYYYYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY
+dotnet user-secrets --project GuildWars2.Tests set ApiKeyBasic XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXXXXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+dotnet user-secrets --project GuildWars2.Tests set ApiKey YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYYYYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY
 ```
 
 Visual Studio Code users can instead use the command palette (Ctrl+Shift+P or Cmd+Shift+P).

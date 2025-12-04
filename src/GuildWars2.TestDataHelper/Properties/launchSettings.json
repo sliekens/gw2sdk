@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "GW2SDK.TestDataHelper": {
+    "GuildWars2.TestDataHelper": {
       "commandName": "Project",
       "commandLineArgs": "data"
     }

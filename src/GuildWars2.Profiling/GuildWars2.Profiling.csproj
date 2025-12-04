@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GW2SDK\GW2SDK.csproj" />
+    <ProjectReference Include="..\GuildWars2\GuildWars2.csproj" />
   </ItemGroup>
 
 </Project>
