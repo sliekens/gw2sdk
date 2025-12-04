@@ -35,7 +35,7 @@ New to the project? Start here:
 
 ### MSBuild & Tooling
 
-- [[TargetFrameworkIdentifier|msbuild/TargetFrameworkIdentifier]] - Understanding target frameworks
+- [[TargetFrameworkIdentifier]] - Understanding target frameworks
 
 ## Quick Links
 
