@@ -1,4 +1,4 @@
-﻿using GuildWars2.Hero;
+using GuildWars2.Hero;
 
 using Microsoft.Extensions.Configuration;
 
@@ -15,7 +15,7 @@ public static class TestConfiguration
     {
         Configuration = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("testconfig.json")
+            .AddJsonFile("appsettings.json")
             .AddUserSecrets(typeof(TestConfiguration).Assembly, true)
             .AddEnvironmentVariables()
             .Build();
