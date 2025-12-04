@@ -15,7 +15,8 @@ The solution is structured as follows:
 ├── tests/
 │   ├── GuildWars2.ArchitectureTests
 │   ├── GuildWars2.Tests
-│   └── GuildWars2.Tests.Common
+│   ├── GuildWars2.Tests.Common
+│   └── testconfig.json
 ├── wiki
 ├── docs
 ├── samples
@@ -62,15 +63,16 @@ Invoke-TestDataHelper.ps1` from the root of the repository.
 The **GuildWars2.Tests** project contains TUnit tests for the main project. It
 contains mostly integrations tests which use the real API, one test per API
 endpoint. It contains relatively few unit tests, because the integration test
-usually covers all the logic. The **coverage.settings** file is used to
-configure what goes in the code coverage report. For example, generated code is
-excluded from the report.
+usually covers all the logic.
 
 The **GuildWars2.ArchitectureTests** project contains TUnit tests that verify
 architectural constraints and design rules across the codebase.
 
 The **GuildWars2.Tests.Common** project contains shared test infrastructure and
 utilities used by multiple test projects.
+
+The **testconfig.json** file is used to configure what goes in the code coverage report.
+For example, generated code is excluded from the report.
 
 The **wiki** folder contains a copy of this wiki. I use the wiki to document
 the development process, and to keep track of the decisions I make. It is not
