@@ -23,45 +23,43 @@ public static class TestConfiguration
 
     private static IConfigurationRoot Configuration { get; set; } = null!;
 
+    private static string GetRequired(string key)
+    {
+        string? value = Configuration[key];
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            throw new SkipTestException("Missing " + key + ".");
+        }
+        return value!;
+    }
+
     public static ApiKeyBasic ApiKeyBasic =>
         new()
         {
-            Key = Configuration["ApiKeyBasic"]
-                ?? throw new SkipTestException("Missing ApiKeyBasic.")
+            Key = GetRequired("ApiKeyBasic")
         };
 
     public static ApiKey ApiKey =>
         new()
         {
-            Key = Configuration["ApiKey"]
-                ?? throw new SkipTestException("Missing ApiKey.")
+            Key = GetRequired("ApiKey")
         };
 
     public static TestCharacter TestCharacter =>
         new()
         {
-            Name =
-                Configuration["Character:Name"]
-                ?? throw new SkipTestException("Missing Character:Name."),
+            Name = GetRequired("Character:Name"),
 #if NET
-            Race = Enum.Parse<RaceName>(
-                Configuration["Character:Race"]
-                ?? throw new SkipTestException("Missing Character:Race.")
-            ),
-            Profession = Enum.Parse<ProfessionName>(
-                Configuration["Character:Profession"]
-                ?? throw new SkipTestException("Missing Character:Profession.")
-            )
+            Race = Enum.Parse<RaceName>(GetRequired("Character:Race")),
+            Profession = Enum.Parse<ProfessionName>(GetRequired("Character:Profession"))
 #else
             Race = (RaceName)Enum.Parse(
                 typeof(RaceName),
-                Configuration["Character:Race"]
-                ?? throw new SkipTestException("Missing Character:Race.")
+                GetRequired("Character:Race")
             ),
             Profession = (ProfessionName)Enum.Parse(
                 typeof(ProfessionName),
-                Configuration["Character:Profession"]
-                ?? throw new SkipTestException("Missing Character:Profession.")
+                GetRequired("Character:Profession")
             )
 #endif
         };
@@ -69,28 +67,18 @@ public static class TestConfiguration
     public static TestCharacter TestCharacter2 =>
         new()
         {
-            Name =
-                Configuration["Character2:Name"]
-                ?? throw new SkipTestException("Missing Character2:Name."),
+            Name = GetRequired("Character2:Name"),
 #if NET
-            Race = Enum.Parse<RaceName>(
-                Configuration["Character2:Race"]
-                ?? throw new SkipTestException("Missing Character2:Race.")
-            ),
-            Profession = Enum.Parse<ProfessionName>(
-                Configuration["Character2:Profession"]
-                ?? throw new SkipTestException("Missing Character2:Profession.")
-            )
+            Race = Enum.Parse<RaceName>(GetRequired("Character2:Race")),
+            Profession = Enum.Parse<ProfessionName>(GetRequired("Character2:Profession"))
 #else
             Race = (RaceName)Enum.Parse(
                 typeof(RaceName),
-                Configuration["Character2:Race"]
-                ?? throw new SkipTestException("Missing Character2:Race.")
+                GetRequired("Character2:Race")
             ),
             Profession = (ProfessionName)Enum.Parse(
                 typeof(ProfessionName),
-                Configuration["Character2:Profession"]
-                ?? throw new SkipTestException("Missing Character2:Profession.")
+                GetRequired("Character2:Profession")
             )
 #endif
         };
@@ -98,19 +86,14 @@ public static class TestConfiguration
     public static TestGuild TestGuild =>
         new()
         {
-            Name =
-                Configuration["Guild:Name"]
-                ?? throw new SkipTestException("Missing Guild:Name."),
-            Tag = Configuration["Guild:Tag"]
-                ?? throw new SkipTestException("Missing Guild:Tag."),
-            Id = Configuration["Guild:Id"]
-                ?? throw new SkipTestException("Missing Guild:Id.")
+            Name = GetRequired("Guild:Name"),
+            Tag = GetRequired("Guild:Tag"),
+            Id = GetRequired("Guild:Id")
         };
 
     public static TestGuildLeader TestGuildLeader =>
         new()
         {
-            Token = Configuration["GuildLeader:Token"]
-                ?? throw new SkipTestException("Missing GuildLeader:Token.")
+            Token = GetRequired("GuildLeader:Token")
         };
 }

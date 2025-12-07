@@ -39,12 +39,14 @@ jobs:
         run: dotnet build --configuration Release --no-restore
 
       - name: Update test data
+        if: github.event_name != 'pull_request'
         run: dotnet run --project src/GuildWars2.TestDataHelper
           --configuration Release
           --no-build
           -- artifacts/Data
 
       - name: Copy test data to all test directories
+        if: github.event_name != 'pull_request'
         run: |
           for d in artifacts/bin/GuildWars2.Tests/*; do
             if [ -d "$d" ]; then
@@ -65,6 +67,7 @@ jobs:
           GuildLeader__Token: ${{ secrets.API_TOKEN_GUILD_LEADER }}
 
       - name: Upload test data on failure
+        if: github.event_name != 'pull_request'
         uses: actions/upload-artifact@v5
         if: failure()
         with:
@@ -78,14 +81,17 @@ jobs:
           path: artifacts/bin/GuildWars2.Tests/*/TestResults/coverage.xml
 
       - name: Upload coverage to Codecov
+        if: github.event_name != 'pull_request'
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Create packages
+        if: github.event_name != 'pull_request'
         run: dotnet pack src/GuildWars2 --configuration Release --no-build
 
       - name: Upload artifacts
+        if: github.event_name != 'pull_request'
         uses: actions/upload-artifact@v5
         with:
           name: package
@@ -95,6 +101,7 @@ jobs:
     name: Deploy to GitHub Packages
     needs: build
     runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request'
     environment:
       name: github-packages
     steps:
