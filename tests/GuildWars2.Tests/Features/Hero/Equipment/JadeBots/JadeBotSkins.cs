@@ -20,16 +20,8 @@ public class JadeBotSkins(Gw2Client sut)
         {
             await Assert.That(entry.Id).IsGreaterThan(0);
             await Assert.That(entry.Name).IsNotEmpty();
-            // Missing description for Roundtail Dragon
-            if (entry.Id == 6)
-            {
-                await Assert.That(entry.Description).IsEmpty();
-            }
-            else
-            {
-                await Assert.That(entry.Description).IsNotEmpty();
-                MarkupSyntaxValidator.Validate(entry.Description);
-            }
+            await Assert.That(entry.Description).IsNotEmpty();
+            MarkupSyntaxValidator.Validate(entry.Description);
 
             await Assert.That(entry.UnlockItemId).IsGreaterThan(0);
 #if NET
