@@ -112,9 +112,9 @@
       },
       "Polyfill": {
         "type": "Direct",
-        "requested": "[9.3.1, )",
-        "resolved": "9.3.1",
-        "contentHash": "toO7uqdXx7ns8NIWWR/ZSX3+Fyo3hDk16UjIC401uW9vxnzxWXLGSR6RlM3V2o0eHm+qMzKwo0wyEY2MyFGamQ=="
+        "requested": "[9.3.4, )",
+        "resolved": "9.3.4",
+        "contentHash": "zFuYW+R1FOUBqhe+Nipfj0RyJWSkCGJb1QMpZm6ucr7R1kTl5+d25D/1E3xdlz7PLFkgMFmOYahUhZvcgxjCcA=="
       },
       "System.Interactive": {
         "type": "Direct",
@@ -871,9 +871,9 @@
       },
       "Polyfill": {
         "type": "Direct",
-        "requested": "[9.3.1, )",
-        "resolved": "9.3.1",
-        "contentHash": "toO7uqdXx7ns8NIWWR/ZSX3+Fyo3hDk16UjIC401uW9vxnzxWXLGSR6RlM3V2o0eHm+qMzKwo0wyEY2MyFGamQ=="
+        "requested": "[9.3.4, )",
+        "resolved": "9.3.4",
+        "contentHash": "zFuYW+R1FOUBqhe+Nipfj0RyJWSkCGJb1QMpZm6ucr7R1kTl5+d25D/1E3xdlz7PLFkgMFmOYahUhZvcgxjCcA=="
       },
       "System.Interactive": {
         "type": "Direct",
