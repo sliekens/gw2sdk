@@ -10,7 +10,7 @@ on:
     - cron: "45 18 * * *"
 
 concurrency:
-  group: ci
+  group: ci-${{ github.event_name }}-${{ github.ref_name }}
   cancel-in-progress: true
 
 env:
@@ -67,9 +67,8 @@ jobs:
           GuildLeader__Token: ${{ secrets.API_TOKEN_GUILD_LEADER }}
 
       - name: Upload test data on failure
-        if: github.event_name != 'pull_request'
+        if: failure() && github.event_name != 'pull_request'
         uses: actions/upload-artifact@v5
-        if: failure()
         with:
           name: test-data
           path: artifacts/Data
