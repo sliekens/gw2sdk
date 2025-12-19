@@ -22,7 +22,7 @@
     <PackageVersion Include="MinVer" Version="6.0.0" />
     <PackageVersion Include="Pastel" Version="7.0.1" />
     <PackageVersion Include="Polly.Core" Version="8.6.5" />
-    <PackageVersion Include="Polyfill" Version="9.3.4">
+    <PackageVersion Include="Polyfill" Version="9.4.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageVersion>
