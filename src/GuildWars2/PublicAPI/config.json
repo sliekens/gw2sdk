@@ -1,0 +1,34 @@
+{
+  "TargetFrameworks": {
+    "netstandard2.0": {
+      "PublicAPI": {
+        "ShippedFilePath": "src/GuildWars2/PublicAPI/legacy/PublicAPI.Shipped.txt",
+        "UnshippedFilePath": "src/GuildWars2/PublicAPI/legacy/PublicAPI.Unshipped.txt"
+      }
+    },
+    "net462": {
+      "PublicAPI": {
+        "ShippedFilePath": "src/GuildWars2/PublicAPI/legacy/PublicAPI.Shipped.txt",
+        "UnshippedFilePath": "src/GuildWars2/PublicAPI/legacy/PublicAPI.Unshipped.txt"
+      }
+    },
+    "net8.0": {
+      "PublicAPI": {
+        "ShippedFilePath": "src/GuildWars2/PublicAPI/modern/PublicAPI.Shipped.txt",
+        "UnshippedFilePath": "src/GuildWars2/PublicAPI/modern/PublicAPI.Unshipped.txt"
+      }
+    },
+    "net9.0": {
+      "PublicAPI": {
+        "ShippedFilePath": "src/GuildWars2/PublicAPI/modern/PublicAPI.Shipped.txt",
+        "UnshippedFilePath": "src/GuildWars2/PublicAPI/modern/PublicAPI.Unshipped.txt"
+      }
+    },
+    "net10.0": {
+      "PublicAPI": {
+        "ShippedFilePath": "src/GuildWars2/PublicAPI/modern/PublicAPI.Shipped.txt",
+        "UnshippedFilePath": "src/GuildWars2/PublicAPI/modern/PublicAPI.Unshipped.txt"
+      }
+    }
+  }
+}
