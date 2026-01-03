@@ -54,9 +54,6 @@ internal static class NoveltyJson
             Id = id.Map(static (in value) => value.GetInt32()),
             Name = name.Map(static (in value) => value.GetStringRequired()),
             Description = description.Map(static (in value) => value.GetString()) ?? "",
-#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
-            IconHref = iconString,
-#pragma warning restore CS0618
             IconUrl = new Uri(iconString),
             Slot = slot.Map(static (in value) => value.GetEnum<NoveltyKind>()),
             UnlockItemIds =

@@ -19,10 +19,6 @@ public record GuildUpgrade
     public required TimeSpan BuildTime { get; init; }
 
     /// <summary>The URL of the guild upgrade icon.</summary>
-    [Obsolete("Use IconUrl instead.")]
-    public required string IconHref { get; init; }
-
-    /// <summary>The URL of the guild upgrade icon.</summary>
     public required Uri IconUrl { get; init; }
 
     /// <summary>The minimum guild level require to unlock the guild upgrade.</summary>

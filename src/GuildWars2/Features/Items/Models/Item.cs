@@ -46,10 +46,6 @@ public record Item
 #pragma warning restore CA1721 // Property names should not match get methods
 
     /// <summary>The URL of the item icon.</summary>
-    [Obsolete("Use IconUrl instead.")]
-    public required string? IconHref { get; init; }
-
-    /// <summary>The URL of the item icon.</summary>
     public required Uri? IconUrl { get; init; }
 
 #pragma warning disable CA1024 // Use properties where appropriate

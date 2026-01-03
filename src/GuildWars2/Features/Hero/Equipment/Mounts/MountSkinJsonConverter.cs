@@ -30,10 +30,7 @@ internal sealed class MountSkinJsonConverter : JsonConverter<MountSkin>
         return new MountSkin
         {
             Id = root.GetProperty("id").GetInt32(),
-            Name = root.GetProperty("name").GetStringRequired(),
-#pragma warning disable CS0618 // Type or member is obsolete
-            IconHref = iconString,
-#pragma warning restore CS0618 // Type or member is obsolete
+            Name = root.GetProperty("name").GetStringRequired(), // Type or member is obsolete
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
             DyeSlots = root.GetProperty("dye_slots").GetList(DyeSlotJsonConverter.Read)!,
 #pragma warning disable CS0618 // Type or member is obsolete

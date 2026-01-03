@@ -42,9 +42,6 @@ internal static class OutfitJson
         {
             Id = id.Map(static (in value) => value.GetInt32()),
             Name = name.Map(static (in value) => value.GetStringRequired()),
-#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
-            IconHref = iconString,
-#pragma warning restore CS0618
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
             UnlockItemIds =
                 unlockItems.Map(static (in values) => values.GetList(static (in value) => value.GetInt32()))

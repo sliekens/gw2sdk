@@ -13,10 +13,7 @@ public sealed record Amulet
     public required string Name { get; init; }
 
     /// <summary>The URL of the amulet icon.</summary>
-    [Obsolete("Use IconUrl instead.")]
-    public required string IconHref { get; init; }
 
-    /// <summary>The URL of the amulet icon as a Uri.</summary>
     public required Uri IconUrl { get; init; }
 
     /// <summary>The effective attributes of the amulet.</summary>

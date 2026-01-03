@@ -47,9 +47,6 @@ internal static class AbilityJson
             Id = id.Map(static (in value) => value.GetInt32()),
             Name = name.Map(static (in value) => value.GetStringRequired()),
             Description = description.Map(static (in value) => value.GetStringRequired()),
-#pragma warning disable CS0618 // IconHref is obsolete
-            IconHref = icon.Map(static (in value) => value.GetStringRequired()),
-#pragma warning restore CS0618
             IconUrl = icon.Map(static (in value) => new Uri(value.GetStringRequired())),
             Ranks = ranks.Map(static (in values) =>
                 values.GetList(static (in value) => value.GetAbilityRank())

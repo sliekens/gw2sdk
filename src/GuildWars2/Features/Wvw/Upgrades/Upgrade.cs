@@ -11,9 +11,5 @@ public sealed record Upgrade
     public required string Description { get; init; }
 
     /// <summary>The URL of the upgrade icon.</summary>
-    [Obsolete("Use IconUrl instead.")]
-    public required string IconHref { get; init; }
-
-    /// <summary>The URL of the upgrade icon.</summary>
     public required Uri IconUrl { get; init; }
 }

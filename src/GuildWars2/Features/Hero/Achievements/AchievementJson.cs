@@ -100,9 +100,6 @@ internal static class AchievementJson
         return new Achievement
         {
             Id = id.Map(static (in value) => value.GetInt32()),
-#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
-            IconHref = iconString,
-#pragma warning restore CS0618
             IconUrl = !string.IsNullOrEmpty(iconString) ? new Uri(iconString, UriKind.RelativeOrAbsolute) : null,
             Name = name.Map(static (in value) => value.GetStringRequired()),
             Description = description.Map(static (in value) => value.GetStringRequired()),

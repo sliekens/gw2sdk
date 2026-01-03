@@ -24,9 +24,6 @@ internal sealed class SkiffSkinJsonConverter : JsonConverter<SkiffSkin>
         {
             Id = json.GetProperty("id").GetInt32(),
             Name = json.GetProperty("name").GetStringRequired(),
-#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
-            IconHref = iconString,
-#pragma warning restore CS0618
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
             DyeSlots = json.GetProperty("dye_slots").GetList(DyeSlotJsonConverter.Read)!
         };

@@ -43,9 +43,6 @@ internal static class AmuletJson
         {
             Id = id.Map(static (in value) => value.GetInt32()),
             Name = name.Map(static (in value) => value.GetStringRequired()),
-#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
-            IconHref = iconString,
-#pragma warning restore CS0618
             IconUrl = new Uri(iconString),
             Attributes = attributes.Map(static (in value) => value.GetAttributes())
         };

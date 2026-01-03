@@ -30,11 +30,6 @@ internal static class EmblemForegroundJson
         return new EmblemForeground
         {
             Id = id.Map(static (in value) => value.GetInt32()),
-#pragma warning disable CS0618 // Suppress obsolete warning
-            Layers = layers.Map(static (in values) =>
-                values.GetList(static (in value) => value.GetStringRequired())
-            ),
-#pragma warning restore CS0618
             LayerUrls = layers.Map(static (in values) =>
                 values.GetList(static (in value) => new Uri(value.GetStringRequired()))
             )

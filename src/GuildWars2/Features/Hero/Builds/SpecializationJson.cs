@@ -76,7 +76,6 @@ internal static class SpecializationJson
         string backgroundString = background.Map(static (in value) => value.GetStringRequired());
         string professionBigIconString = professionIconBig.Map(static (in value) => value.GetString()) ?? "";
         string professionIconString = professionIcon.Map(static (in value) => value.GetString()) ?? "";
-#pragma warning disable CS0618
         return new Specialization
         {
             Id = id.Map(static (in value) => value.GetInt32()),
@@ -88,15 +87,10 @@ internal static class SpecializationJson
             MajorTraitIds =
                 majorTraits.Map(static (in values) => values.GetList(static (in value) => value.GetInt32())),
             WeaponTraitId = weaponTrait.Map(static (in value) => value.GetInt32()),
-            IconHref = iconString,
             IconUrl = new Uri(iconString),
-            BackgroundHref = backgroundString,
             BackgroundUrl = new Uri(backgroundString),
-            ProfessionBigIconHref = professionBigIconString,
             ProfessionBigIconUrl = string.IsNullOrEmpty(professionBigIconString) ? null : new Uri(professionBigIconString),
-            ProfessionIconHref = professionIconString,
             ProfessionIconUrl = string.IsNullOrEmpty(professionIconString) ? null : new Uri(professionIconString)
         };
-#pragma warning restore CS0618
     }
 }

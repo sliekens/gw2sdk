@@ -14,10 +14,6 @@ public sealed record Mastery
     public required string Instruction { get; init; }
 
     /// <summary>The URL of the mastery icon that appears in the masteries panel.</summary>
-    [Obsolete("Use IconUrl instead.")]
-    public required string IconHref { get; init; }
-
-    /// <summary>The URL of the mastery icon that appears in the masteries panel.</summary>
     public required Uri IconUrl { get; init; }
 
     /// <summary>The number of mastery points required to unlock the mastery.</summary>

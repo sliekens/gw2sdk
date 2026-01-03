@@ -8,9 +8,5 @@ public sealed record Asset
     public required string Id { get; init; }
 
     /// <summary>The file URL.</summary>
-    [Obsolete("Use IconUrl instead.")]
-    public required string IconHref { get; init; }
-
-    /// <summary>The file URL.</summary>
     public required Uri IconUrl { get; init; }
 }

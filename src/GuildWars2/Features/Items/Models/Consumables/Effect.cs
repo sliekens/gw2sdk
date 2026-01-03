@@ -20,9 +20,6 @@ public sealed record Effect
     public required int ApplyCount { get; init; }
 
     /// <summary>The URL of the effect icon.</summary>
-    [Obsolete("Use IconUrl instead.")]
-    public required string IconHref { get; init; }
 
-    /// <summary>The URL of the effect icon.</summary>
     public required Uri? IconUrl { get; init; }
 }

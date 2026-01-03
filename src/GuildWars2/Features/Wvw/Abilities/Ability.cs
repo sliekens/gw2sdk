@@ -15,10 +15,6 @@ public sealed record Ability
     public required string Description { get; init; }
 
     /// <summary>The URL of the ability icon.</summary>
-    [Obsolete("Use IconUrl instead.")]
-    public required string IconHref { get; init; }
-
-    /// <summary>The URL of the ability icon.</summary>
     public required Uri IconUrl { get; init; }
 
     /// <summary>The ranks of the ability, with costs and effects.</summary>

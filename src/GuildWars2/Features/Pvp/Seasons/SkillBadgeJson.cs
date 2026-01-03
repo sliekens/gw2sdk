@@ -54,14 +54,9 @@ internal static class SkillBadgeJson
         {
             Name = name.Map(static (in value) => value.GetStringRequired()),
             Description = description.Map(static (in value) => value.GetStringRequired()),
-#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
-            IconHref = iconString,
             IconUrl = new Uri(iconString),
-            Overlay = overlayString,
             OverlayUrl = new Uri(overlayString),
-            SmallOverlay = smallOverlayString,
             SmallOverlayUrl = new Uri(smallOverlayString),
-#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
             Tiers = tiers.Map(static (in values) =>
                 values.GetList(static (in value) => value.GetSkillBadgeTier())
             )

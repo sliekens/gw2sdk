@@ -47,9 +47,6 @@ internal sealed class BagJsonConverter : JsonConverter<Bag>
             Flags = ItemFlagsJsonConverter.Read(json.GetProperty("flags")),
             Restrictions = ItemRestrictionJsonConverter.Read(json.GetProperty("restrictions")),
             ChatLink = json.GetProperty("chat_link").GetStringRequired(),
-#pragma warning disable CS0618 // Suppress obsolete warning
-            IconHref = iconString,
-#pragma warning restore CS0618
             IconUrl = !string.IsNullOrEmpty(iconString) ? new Uri(iconString) : null,
             NoSellOrSort = json.GetProperty("no_sell_or_sort").GetBoolean(),
             Size = json.GetProperty("size").GetInt32()

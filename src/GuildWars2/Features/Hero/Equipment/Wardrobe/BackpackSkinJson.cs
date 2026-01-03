@@ -68,9 +68,6 @@ internal static class BackpackSkinJson
             Rarity = rarity.Map(static (in value) => value.GetEnum<Rarity>()),
             Flags = flags.Map(static (in values) => values.GetSkinFlags()),
             Races = restrictions.Map(static (in values) => values.GetRestrictions()),
-#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
-            IconHref = iconString,
-#pragma warning restore CS0618
             IconUrl = string.IsNullOrEmpty(iconString) ? null : new Uri(iconString)
         };
     }

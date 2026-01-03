@@ -21,9 +21,5 @@ public sealed record Decoration
     public required int MaxCount { get; init; }
 
     /// <summary>The decoration icon URL.</summary>
-    [Obsolete("Use IconUrl instead.")]
-    public required string IconHref { get; init; }
-
-    /// <summary>The decoration icon URL.</summary>
     public required Uri IconUrl { get; init; }
 }

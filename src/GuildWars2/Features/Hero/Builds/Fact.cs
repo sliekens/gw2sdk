@@ -9,9 +9,5 @@ public record Fact
     public required string Text { get; init; }
 
     /// <summary>The URL of the fact icon as it appears in the tooltip of the skill/trait.</summary>
-    [Obsolete("Use IconUrl instead.")]
-    public required string IconHref { get; init; }
-
-    /// <summary>The URL of the fact icon as it appears in the tooltip of the skill/trait.</summary>
     public required Uri? IconUrl { get; init; }
 }

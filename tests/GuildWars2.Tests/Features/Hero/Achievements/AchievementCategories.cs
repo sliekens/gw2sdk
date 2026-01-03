@@ -23,10 +23,6 @@ public class AchievementCategories(Gw2Client sut)
                 .And.Member(e => e.Name, m => m.IsNotEmpty())
                 .And.Member(e => e.Description, m => m.IsNotNull())
                 .And.Member(e => e.Order, m => m.IsGreaterThanOrEqualTo(0));
-#pragma warning disable CS0618 // Suppress obsolete warning for IconHref
-
-            await Assert.That(entry.IconHref).IsNotEmpty();
-#pragma warning restore CS0618
             await Assert.That(entry.IconUrl).IsNotNull()
                 .And.Member(u => u.IsAbsoluteUri, m => m.IsTrue());
             await Assert.That(entry.Achievements).IsNotNull();
