@@ -68,13 +68,13 @@ jobs:
 
       - name: Upload test data on failure
         if: failure() && github.event_name != 'pull_request'
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: test-data
           path: artifacts/Data
 
       - name: Upload coverage
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: coverage
           path: artifacts/bin/GuildWars2.Tests/*/TestResults/coverage.xml
@@ -91,7 +91,7 @@ jobs:
 
       - name: Upload artifacts
         if: github.event_name != 'pull_request'
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: package
           path: artifacts/package/
@@ -105,7 +105,7 @@ jobs:
       name: github-packages
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: package
           path: artifacts
