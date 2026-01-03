@@ -42,9 +42,7 @@ internal static class HttpResponseHeaderExtensions
                 LinkHeader header = LinkHeader.Parse(value);
                 foreach (LinkValue link in header.Links)
                 {
-#pragma warning disable CS0618 // Suppress obsolete warning
-                    Hyperlink href = new(link.Target);
-#pragma warning restore CS0618
+                    Hyperlink href = new(link.TargetUrl);
                     switch (link.RelationType)
                     {
                         case "previous" when previous.IsEmpty:

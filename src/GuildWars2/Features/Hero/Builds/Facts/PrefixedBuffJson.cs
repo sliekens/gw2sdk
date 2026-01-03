@@ -95,14 +95,11 @@ internal static class PrefixedBuffJson
 
         string iconString = icon.Map(static (in value) => value.GetString()) ?? "";
         string prefixIconString = prefixIcon.Map(static (in value) => value.GetString()) ?? "";
-#pragma warning disable CS0618
         return new PrefixedBuff
         {
             Precondition = prefixStatus.Map(static (in value) => value.GetString()) ?? "",
-            PrefixIconHref = prefixIconString,
             PrefixIconUrl = !string.IsNullOrEmpty(prefixIconString) ? new Uri(prefixIconString, UriKind.RelativeOrAbsolute) : null!, // not null
             Text = text.Map(static (in value) => value.GetStringRequired()),
-            IconHref = iconString,
             IconUrl = !string.IsNullOrEmpty(iconString) ? new Uri(iconString, UriKind.RelativeOrAbsolute) : null!, // not null
             Duration = duration.Map(static (in value) => TimeSpan.FromSeconds(value.GetDouble())),
             Status = status.Map(static (in value) => value.GetString()) ?? "",

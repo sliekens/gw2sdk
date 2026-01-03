@@ -22,14 +22,6 @@ public sealed record GodShrine
     public required string NameContested { get; init; }
 
     /// <summary>The URL of the god shrine icon when it is uncontested.</summary>
-    [Obsolete("Use IconUrl instead.")]
-    public required string IconHref { get; init; }
-
-    /// <summary>The URL of the god shrine icon when it is contested.</summary>
-    [Obsolete("Use IconContestedUrl instead.")]
-    public required string IconContestedHref { get; init; }
-
-    /// <summary>The URL of the god shrine icon when it is uncontested.</summary>
     public required Uri IconUrl { get; init; }
 
     /// <summary>The URL of the god shrine icon when it is contested.</summary>

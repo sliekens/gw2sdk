@@ -39,10 +39,6 @@ public record Objective
     public required PointF? LabelCoordinates { get; init; }
 
     /// <summary>The URL of the objective's icon.</summary>
-    [Obsolete("Use MarkerIconUrl instead.")]
-    public required string MarkerIconHref { get; init; }
-
-    /// <summary>The URL of the objective's icon.</summary>
     public required Uri? MarkerIconUrl { get; init; }
 
 #pragma warning disable CA1721 // Property names should not match get methods

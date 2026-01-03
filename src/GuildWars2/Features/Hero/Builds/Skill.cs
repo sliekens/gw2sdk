@@ -28,10 +28,7 @@ public record Skill
     public required string Description { get; init; }
 
     /// <summary>The URL of the skill icon.</summary>
-    [Obsolete("Use IconUrl instead.")]
-    public required string IconHref { get; init; }
 
-    /// <summary>The URL of the skill icon.</summary>
     public required Uri? IconUrl { get; init; }
 
 #pragma warning disable CA1721 // Property names should not match get methods

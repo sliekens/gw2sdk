@@ -25,9 +25,6 @@ internal sealed class MiniatureJsonConverter : JsonConverter<Miniature>
             Id = json.GetProperty("id").GetInt32(),
             Name = json.GetProperty("name").GetStringRequired(),
             LockedText = json.GetProperty("locked_text").GetStringRequired(),
-#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
-            IconHref = iconString,
-#pragma warning restore CS0618
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
             Order = json.GetProperty("order").GetInt32(),
             ItemId = json.GetProperty("item_id").GetInt32()

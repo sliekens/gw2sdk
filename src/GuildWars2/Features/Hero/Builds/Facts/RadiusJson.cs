@@ -58,9 +58,6 @@ internal static class RadiusJson
         return new Radius
         {
             Text = text.Map(static (in value) => value.GetStringRequired()),
-#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
-            IconHref = iconString,
-#pragma warning restore CS0618
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
             Distance = distance.Map(static (in value) => value.GetInt32())
         };

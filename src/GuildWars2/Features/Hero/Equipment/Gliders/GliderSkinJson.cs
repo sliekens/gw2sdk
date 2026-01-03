@@ -60,9 +60,6 @@ internal static class GliderSkinJson
                 unlockItems.Map(static (in values) => values.GetList(static (in value) => value.GetInt32()))
                 ?? [],
             Order = order.Map(static (in value) => value.GetInt32()),
-#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
-            IconHref = iconString,
-#pragma warning restore CS0618
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
             Name = name.Map(static (in value) => value.GetStringRequired()),
             Description = description.Map(static (in value) => value.GetStringRequired()),

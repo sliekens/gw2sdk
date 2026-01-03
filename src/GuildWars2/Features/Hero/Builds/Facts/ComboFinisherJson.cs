@@ -67,9 +67,6 @@ internal static class ComboFinisherJson
         return new ComboFinisher
         {
             Text = text.Map(static (in value) => value.GetStringRequired()),
-#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
-            IconHref = iconString,
-#pragma warning restore CS0618
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
             Percent = percent.Map(static (in value) => value.GetInt32()),
             FinisherName = finisherType.Map(static (in value) => value.GetEnum<ComboFinisherName>())

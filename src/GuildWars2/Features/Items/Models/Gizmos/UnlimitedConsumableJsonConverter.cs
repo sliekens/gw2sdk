@@ -59,9 +59,6 @@ internal sealed class UnlimitedConsumableJsonConverter : JsonConverter<Unlimited
             Flags = ItemFlagsJsonConverter.Read(json.GetProperty("flags")),
             Restrictions = ItemRestrictionJsonConverter.Read(json.GetProperty("restrictions")),
             ChatLink = json.GetProperty("chat_link").GetStringRequired(),
-#pragma warning disable CS0618 // Suppress obsolete warning
-            IconHref = iconString,
-#pragma warning restore CS0618
             IconUrl = !string.IsNullOrEmpty(iconString) ? new Uri(iconString) : null,
             GuildUpgradeId = json.GetProperty("guild_upgrade_id").GetNullableInt32()
         };

@@ -40,19 +40,14 @@ internal sealed class EffectJsonConverter : JsonConverter<Effect>
             iconString = iconElement.GetString() ?? "";
         }
 
-#pragma warning disable CS0618 // Suppress obsolete warning
         return new Effect
         {
             Name = json.GetProperty("name").GetStringRequired(),
             Description = json.GetProperty("description").GetStringRequired(),
             Duration = TimeSpan.Parse(json.GetProperty("duration").GetStringRequired(), CultureInfo.InvariantCulture),
             ApplyCount = json.GetProperty("apply_count").GetInt32(),
-#pragma warning disable CS0618 // Suppress obsolete warning
-            IconHref = iconString,
-#pragma warning restore CS0618
             IconUrl = !string.IsNullOrEmpty(iconString) ? new Uri(iconString) : null
         };
-#pragma warning restore CS0618
     }
 
     public static void Write(Utf8JsonWriter writer, Effect value)

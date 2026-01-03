@@ -14,9 +14,5 @@ public sealed record GuildRank
     public required IReadOnlyList<string> Permissions { get; init; }
 
     /// <summary>The URL of the rank icon.</summary>
-    [Obsolete("Use IconUrl instead.")]
-    public required string IconHref { get; init; }
-
-    /// <summary>The URL of the rank icon.</summary>
     public required Uri IconUrl { get; init; }
 }

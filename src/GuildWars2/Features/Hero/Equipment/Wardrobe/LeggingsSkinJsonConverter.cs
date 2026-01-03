@@ -56,9 +56,6 @@ internal sealed class LeggingsSkinJsonConverter : JsonConverter<LeggingsSkin>
             Flags = SkinFlagsJsonConverter.Read(json.GetProperty("flags")),
             Races = json.GetProperty("races").GetList(static (in value) => value.GetEnum<RaceName>()),
             Rarity = json.GetProperty("rarity").GetEnum<Rarity>(),
-#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
-            IconHref = iconString,
-#pragma warning restore CS0618
             IconUrl = string.IsNullOrEmpty(iconString) ? null : new Uri(iconString),
             WeightClass = json.GetProperty("weight_class").GetEnum<WeightClass>(),
             DyeSlots = json.GetProperty("dye_slots").GetNullable(DyeSlotInfoJsonConverter.Read)

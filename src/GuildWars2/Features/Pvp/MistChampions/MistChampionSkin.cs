@@ -10,10 +10,6 @@ public sealed record MistChampionSkin
     /// <summary>The skin name.</summary>
     public required string Name { get; init; }
 
-    /// <summary>The URL of the skin icon.</summary>
-    [Obsolete("Use IconUrl instead.")]
-    public required string IconHref { get; init; }
-
     /// <summary>The URL of the skin icon as a Uri.</summary>
     public required Uri IconUrl { get; init; }
 

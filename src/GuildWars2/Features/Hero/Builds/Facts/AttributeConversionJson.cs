@@ -66,9 +66,6 @@ internal static class AttributeConversionJson
         return new AttributeConversion
         {
             Text = text.Map(static (in value) => value.GetString()) ?? "",
-#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
-            IconHref = iconString,
-#pragma warning restore CS0618
             IconUrl = !string.IsNullOrEmpty(iconString) ? new Uri(iconString, UriKind.RelativeOrAbsolute) : null,
             Percent = percent.Map(static (in value) => value.GetInt32()),
             Source = source.Map(static (in value) => value.GetAttributeName()),

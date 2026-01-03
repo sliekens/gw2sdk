@@ -25,9 +25,6 @@ internal sealed class GliderSkinJsonConverter : JsonConverter<GliderSkin>
             Id = json.GetProperty("id").GetInt32(),
             UnlockItemIds = json.GetProperty("unlock_item_ids").GetList(static (in item) => item.GetInt32()),
             Order = json.GetProperty("order").GetInt32(),
-#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
-            IconHref = iconString,
-#pragma warning restore CS0618
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
             Name = json.GetProperty("name").GetStringRequired(),
             Description = json.GetProperty("description").GetStringRequired(),

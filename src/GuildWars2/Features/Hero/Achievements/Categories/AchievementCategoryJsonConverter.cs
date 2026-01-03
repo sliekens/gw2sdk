@@ -35,9 +35,6 @@ internal sealed class AchievementCategoryJsonConverter : JsonConverter<Achieveme
             Name = json.GetProperty("name").GetStringRequired(),
             Description = json.GetProperty("description").GetStringRequired(),
             Order = json.GetProperty("order").GetInt32(),
-#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
-            IconHref = iconString,
-#pragma warning restore CS0618
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
             Achievements = json.GetProperty("achievements")
                 .GetList(AchievementRefJsonConverter.Read),

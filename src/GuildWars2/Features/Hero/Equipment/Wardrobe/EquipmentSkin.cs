@@ -30,10 +30,6 @@ public record EquipmentSkin
     public required Extensible<Rarity> Rarity { get; init; }
 
     /// <summary>The URL of the skin icon.</summary>
-    [Obsolete("Use IconUrl instead.")]
-    public required string? IconHref { get; init; }
-
-    /// <summary>The URL of the skin icon.</summary>
     public required Uri? IconUrl { get; init; }
 
 #pragma warning disable CA1024 // Use properties where appropriate

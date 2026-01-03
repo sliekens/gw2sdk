@@ -148,9 +148,6 @@ internal static class GenericConsumableJson
             Flags = flags.Map(static (in values) => values.GetItemFlags()),
             Restrictions = restrictions.Map(static (in value) => value.GetItemRestriction()),
             ChatLink = chatLink.Map(static (in value) => value.GetStringRequired()),
-#pragma warning disable CS0618 // Suppress obsolete warning
-            IconHref = iconString,
-#pragma warning restore CS0618
             IconUrl = !string.IsNullOrEmpty(iconString) ? new Uri(iconString) : null,
             Effect = hasEffect
                 ? new Effect
@@ -161,9 +158,6 @@ internal static class GenericConsumableJson
                         duration.Map(static (in value) => TimeSpan.FromMilliseconds(value.GetDouble()))
                         ?? TimeSpan.Zero,
                     ApplyCount = applyCount.Map(static (in value) => value.GetInt32()) ?? 0,
-#pragma warning disable CS0618 // Suppress obsolete warning
-                    IconHref = effectIcon.Map(static (in value) => value.GetString()) ?? "",
-#pragma warning restore CS0618
                     IconUrl = effectIcon.Map(static (in value) =>
                     {
                         string? href = value.GetString();

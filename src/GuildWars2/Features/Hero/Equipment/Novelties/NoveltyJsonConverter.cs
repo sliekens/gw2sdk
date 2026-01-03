@@ -26,9 +26,6 @@ internal sealed class NoveltyJsonConverter : JsonConverter<Novelty>
             Id = json.GetProperty("id").GetInt32(),
             Name = json.GetProperty("name").GetStringRequired(),
             Description = json.GetProperty("description").GetStringRequired(),
-#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
-            IconHref = iconString,
-#pragma warning restore CS0618
             IconUrl = new Uri(iconString),
             Slot = json.GetProperty("slot").GetStringRequired(),
             UnlockItemIds = json.GetProperty("unlock_item_ids").GetList(static (in entry) => entry.GetInt32())

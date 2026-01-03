@@ -20,14 +20,8 @@ public sealed record MistChampion
     public required MistChampionStats Stats { get; init; }
 
     /// <summary>The URL of the Mist Champion's overlay image.</summary>
-    [Obsolete("Use OverlayImageUrl instead.")]
-    public required string OverlayImageHref { get; init; }
-    /// <summary>The URL of the Mist Champion's overlay image.</summary>
     public required Uri OverlayImageUrl { get; init; }
 
-    /// <summary>The URL of the Mist Champion's underlay image.</summary>
-    [Obsolete("Use UnderlayImageUrl instead.")]
-    public required string UnderlayImageHref { get; init; }
     /// <summary>The URL of the Mist Champion's underlay image.</summary>
     public required Uri UnderlayImageUrl { get; init; }
 

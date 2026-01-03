@@ -14,10 +14,6 @@ public sealed record SkiffSkin
     public required string Name { get; init; }
 
     /// <summary>The URL of the skiff skin icon.</summary>
-    [Obsolete("Use IconUrl instead.")]
-    public required string IconHref { get; init; }
-
-    /// <summary>The URL of the skiff skin icon.</summary>
     public required Uri IconUrl { get; init; }
 
     /// <summary>The dyes applied by default.</summary>

@@ -30,16 +30,9 @@ public sealed class LinkValue
             );
         }
 
-#pragma warning disable CS0618 // Suppress obsolete warning
-        Target = target;
-#pragma warning restore CS0618
         TargetUrl = new Uri(target, DotNetRelativeOrAbsolute);
         RelationType = relationType;
     }
-
-    /// <summary>The target URI as a string. Use TargetUrl instead.</summary>
-    [Obsolete("Use TargetUrl instead.")]
-    public string Target { get; }
 
     /// <summary>The target URI.</summary>
     public Uri TargetUrl { get; }

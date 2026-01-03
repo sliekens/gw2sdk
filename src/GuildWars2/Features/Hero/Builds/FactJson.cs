@@ -104,9 +104,6 @@ internal static class FactJson
         return new Fact
         {
             Text = text.Map(static (in value) => value.GetString()) ?? "",
-#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
-            IconHref = iconString,
-#pragma warning restore CS0618
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute)
         };
     }

@@ -457,12 +457,8 @@ GuildWars2.Exploration.GodShrines.GodShrine.Coordinates.init -> void
 GuildWars2.Exploration.GodShrines.GodShrine.Equals(GuildWars2.Exploration.GodShrines.GodShrine? other) -> bool
 GuildWars2.Exploration.GodShrines.GodShrine.GetChatLink() -> GuildWars2.Chat.PointOfInterestLink!
 GuildWars2.Exploration.GodShrines.GodShrine.GodShrine() -> void
-GuildWars2.Exploration.GodShrines.GodShrine.IconContestedHref.get -> string!
-GuildWars2.Exploration.GodShrines.GodShrine.IconContestedHref.init -> void
 GuildWars2.Exploration.GodShrines.GodShrine.IconContestedUrl.get -> System.Uri!
 GuildWars2.Exploration.GodShrines.GodShrine.IconContestedUrl.init -> void
-GuildWars2.Exploration.GodShrines.GodShrine.IconHref.get -> string!
-GuildWars2.Exploration.GodShrines.GodShrine.IconHref.init -> void
 GuildWars2.Exploration.GodShrines.GodShrine.IconUrl.get -> System.Uri!
 GuildWars2.Exploration.GodShrines.GodShrine.IconUrl.init -> void
 GuildWars2.Exploration.GodShrines.GodShrine.Id.get -> int
@@ -602,8 +598,6 @@ GuildWars2.Exploration.PointsOfInterest.PointOfInterest.PointOfInterest() -> voi
 GuildWars2.Exploration.PointsOfInterest.PointOfInterest.PointOfInterest(GuildWars2.Exploration.PointsOfInterest.PointOfInterest! original) -> void
 GuildWars2.Exploration.PointsOfInterest.RequiresUnlockPointOfInterest
 GuildWars2.Exploration.PointsOfInterest.RequiresUnlockPointOfInterest.Equals(GuildWars2.Exploration.PointsOfInterest.RequiresUnlockPointOfInterest? other) -> bool
-GuildWars2.Exploration.PointsOfInterest.RequiresUnlockPointOfInterest.IconHref.get -> string!
-GuildWars2.Exploration.PointsOfInterest.RequiresUnlockPointOfInterest.IconHref.init -> void
 GuildWars2.Exploration.PointsOfInterest.RequiresUnlockPointOfInterest.IconUrl.get -> System.Uri!
 GuildWars2.Exploration.PointsOfInterest.RequiresUnlockPointOfInterest.IconUrl.init -> void
 GuildWars2.Exploration.PointsOfInterest.RequiresUnlockPointOfInterest.RequiresUnlockPointOfInterest() -> void
@@ -655,8 +649,6 @@ GuildWars2.Files.Asset
 GuildWars2.Files.Asset.<Clone>$() -> GuildWars2.Files.Asset!
 GuildWars2.Files.Asset.Asset() -> void
 GuildWars2.Files.Asset.Equals(GuildWars2.Files.Asset? other) -> bool
-GuildWars2.Files.Asset.IconHref.get -> string!
-GuildWars2.Files.Asset.IconHref.init -> void
 GuildWars2.Files.Asset.IconUrl.get -> System.Uri!
 GuildWars2.Files.Asset.IconUrl.init -> void
 GuildWars2.Files.Asset.Id.get -> string!
@@ -706,8 +698,6 @@ GuildWars2.Guilds.Emblems.EmblemBackground.EmblemBackground() -> void
 GuildWars2.Guilds.Emblems.EmblemBackground.Equals(GuildWars2.Guilds.Emblems.EmblemBackground? other) -> bool
 GuildWars2.Guilds.Emblems.EmblemBackground.Id.get -> int
 GuildWars2.Guilds.Emblems.EmblemBackground.Id.init -> void
-GuildWars2.Guilds.Emblems.EmblemBackground.Layers.get -> System.Collections.Generic.IReadOnlyList<string!>!
-GuildWars2.Guilds.Emblems.EmblemBackground.Layers.init -> void
 GuildWars2.Guilds.Emblems.EmblemBackground.LayerUrls.get -> System.Collections.Generic.IReadOnlyList<System.Uri!>!
 GuildWars2.Guilds.Emblems.EmblemBackground.LayerUrls.init -> void
 GuildWars2.Guilds.Emblems.EmblemForeground
@@ -716,8 +706,6 @@ GuildWars2.Guilds.Emblems.EmblemForeground.EmblemForeground() -> void
 GuildWars2.Guilds.Emblems.EmblemForeground.Equals(GuildWars2.Guilds.Emblems.EmblemForeground? other) -> bool
 GuildWars2.Guilds.Emblems.EmblemForeground.Id.get -> int
 GuildWars2.Guilds.Emblems.EmblemForeground.Id.init -> void
-GuildWars2.Guilds.Emblems.EmblemForeground.Layers.get -> System.Collections.Generic.IReadOnlyList<string!>!
-GuildWars2.Guilds.Emblems.EmblemForeground.Layers.init -> void
 GuildWars2.Guilds.Emblems.EmblemForeground.LayerUrls.get -> System.Collections.Generic.IReadOnlyList<System.Uri!>!
 GuildWars2.Guilds.Emblems.EmblemForeground.LayerUrls.init -> void
 GuildWars2.Guilds.Emblems.GuildEmblem
@@ -962,8 +950,6 @@ GuildWars2.Guilds.Ranks.GuildRank
 GuildWars2.Guilds.Ranks.GuildRank.<Clone>$() -> GuildWars2.Guilds.Ranks.GuildRank!
 GuildWars2.Guilds.Ranks.GuildRank.Equals(GuildWars2.Guilds.Ranks.GuildRank? other) -> bool
 GuildWars2.Guilds.Ranks.GuildRank.GuildRank() -> void
-GuildWars2.Guilds.Ranks.GuildRank.IconHref.get -> string!
-GuildWars2.Guilds.Ranks.GuildRank.IconHref.init -> void
 GuildWars2.Guilds.Ranks.GuildRank.IconUrl.get -> System.Uri!
 GuildWars2.Guilds.Ranks.GuildRank.IconUrl.init -> void
 GuildWars2.Guilds.Ranks.GuildRank.Id.get -> string!
@@ -1146,8 +1132,6 @@ GuildWars2.Guilds.Upgrades.GuildUpgrade.Experience.get -> int
 GuildWars2.Guilds.Upgrades.GuildUpgrade.Experience.init -> void
 GuildWars2.Guilds.Upgrades.GuildUpgrade.GuildUpgrade() -> void
 GuildWars2.Guilds.Upgrades.GuildUpgrade.GuildUpgrade(GuildWars2.Guilds.Upgrades.GuildUpgrade! original) -> void
-GuildWars2.Guilds.Upgrades.GuildUpgrade.IconHref.get -> string!
-GuildWars2.Guilds.Upgrades.GuildUpgrade.IconHref.init -> void
 GuildWars2.Guilds.Upgrades.GuildUpgrade.IconUrl.get -> System.Uri!
 GuildWars2.Guilds.Upgrades.GuildUpgrade.IconUrl.init -> void
 GuildWars2.Guilds.Upgrades.GuildUpgrade.Id.get -> int
@@ -1418,8 +1402,6 @@ GuildWars2.Hero.Achievements.Achievement.Description.init -> void
 GuildWars2.Hero.Achievements.Achievement.Flags.get -> GuildWars2.Hero.Achievements.AchievementFlags!
 GuildWars2.Hero.Achievements.Achievement.Flags.init -> void
 GuildWars2.Hero.Achievements.Achievement.GetChatLink() -> GuildWars2.Chat.AchievementLink!
-GuildWars2.Hero.Achievements.Achievement.IconHref.get -> string!
-GuildWars2.Hero.Achievements.Achievement.IconHref.init -> void
 GuildWars2.Hero.Achievements.Achievement.IconUrl.get -> System.Uri?
 GuildWars2.Hero.Achievements.Achievement.IconUrl.init -> void
 GuildWars2.Hero.Achievements.Achievement.Id.get -> int
@@ -1535,8 +1517,6 @@ GuildWars2.Hero.Achievements.Categories.AchievementCategory.Achievements.init ->
 GuildWars2.Hero.Achievements.Categories.AchievementCategory.Description.get -> string!
 GuildWars2.Hero.Achievements.Categories.AchievementCategory.Description.init -> void
 GuildWars2.Hero.Achievements.Categories.AchievementCategory.Equals(GuildWars2.Hero.Achievements.Categories.AchievementCategory? other) -> bool
-GuildWars2.Hero.Achievements.Categories.AchievementCategory.IconHref.get -> string!
-GuildWars2.Hero.Achievements.Categories.AchievementCategory.IconHref.init -> void
 GuildWars2.Hero.Achievements.Categories.AchievementCategory.IconUrl.get -> System.Uri!
 GuildWars2.Hero.Achievements.Categories.AchievementCategory.IconUrl.init -> void
 GuildWars2.Hero.Achievements.Categories.AchievementCategory.Id.get -> int
@@ -1777,8 +1757,6 @@ GuildWars2.Hero.Builds.BuildTemplate.TabNumber.init -> void
 GuildWars2.Hero.Builds.Fact
 GuildWars2.Hero.Builds.Fact.Fact() -> void
 GuildWars2.Hero.Builds.Fact.Fact(GuildWars2.Hero.Builds.Fact! original) -> void
-GuildWars2.Hero.Builds.Fact.IconHref.get -> string!
-GuildWars2.Hero.Builds.Fact.IconHref.init -> void
 GuildWars2.Hero.Builds.Fact.IconUrl.get -> System.Uri?
 GuildWars2.Hero.Builds.Fact.IconUrl.init -> void
 GuildWars2.Hero.Builds.Fact.Text.get -> string!
@@ -1879,8 +1857,6 @@ GuildWars2.Hero.Builds.Facts.PrefixedBuff.Equals(GuildWars2.Hero.Builds.Facts.Pr
 GuildWars2.Hero.Builds.Facts.PrefixedBuff.Precondition.get -> string!
 GuildWars2.Hero.Builds.Facts.PrefixedBuff.Precondition.init -> void
 GuildWars2.Hero.Builds.Facts.PrefixedBuff.PrefixedBuff() -> void
-GuildWars2.Hero.Builds.Facts.PrefixedBuff.PrefixIconHref.get -> string!
-GuildWars2.Hero.Builds.Facts.PrefixedBuff.PrefixIconHref.init -> void
 GuildWars2.Hero.Builds.Facts.PrefixedBuff.PrefixIconUrl.get -> System.Uri!
 GuildWars2.Hero.Builds.Facts.PrefixedBuff.PrefixIconUrl.init -> void
 GuildWars2.Hero.Builds.Facts.Radius
@@ -1972,8 +1948,6 @@ GuildWars2.Hero.Builds.Skill.Description.init -> void
 GuildWars2.Hero.Builds.Skill.Facts.get -> System.Collections.Generic.IReadOnlyList<GuildWars2.Hero.Builds.Fact!>?
 GuildWars2.Hero.Builds.Skill.Facts.init -> void
 GuildWars2.Hero.Builds.Skill.GetChatLink() -> GuildWars2.Chat.SkillLink!
-GuildWars2.Hero.Builds.Skill.IconHref.get -> string!
-GuildWars2.Hero.Builds.Skill.IconHref.init -> void
 GuildWars2.Hero.Builds.Skill.IconUrl.get -> System.Uri?
 GuildWars2.Hero.Builds.Skill.IconUrl.init -> void
 GuildWars2.Hero.Builds.Skill.Id.get -> int
@@ -2140,15 +2114,11 @@ GuildWars2.Hero.Builds.SlotSkill.ToolbeltSkillId.get -> int?
 GuildWars2.Hero.Builds.SlotSkill.ToolbeltSkillId.init -> void
 GuildWars2.Hero.Builds.Specialization
 GuildWars2.Hero.Builds.Specialization.<Clone>$() -> GuildWars2.Hero.Builds.Specialization!
-GuildWars2.Hero.Builds.Specialization.BackgroundHref.get -> string!
-GuildWars2.Hero.Builds.Specialization.BackgroundHref.init -> void
 GuildWars2.Hero.Builds.Specialization.BackgroundUrl.get -> System.Uri!
 GuildWars2.Hero.Builds.Specialization.BackgroundUrl.init -> void
 GuildWars2.Hero.Builds.Specialization.Elite.get -> bool
 GuildWars2.Hero.Builds.Specialization.Elite.init -> void
 GuildWars2.Hero.Builds.Specialization.Equals(GuildWars2.Hero.Builds.Specialization? other) -> bool
-GuildWars2.Hero.Builds.Specialization.IconHref.get -> string!
-GuildWars2.Hero.Builds.Specialization.IconHref.init -> void
 GuildWars2.Hero.Builds.Specialization.IconUrl.get -> System.Uri!
 GuildWars2.Hero.Builds.Specialization.IconUrl.init -> void
 GuildWars2.Hero.Builds.Specialization.Id.get -> int
@@ -2161,12 +2131,8 @@ GuildWars2.Hero.Builds.Specialization.Name.get -> string!
 GuildWars2.Hero.Builds.Specialization.Name.init -> void
 GuildWars2.Hero.Builds.Specialization.Profession.get -> GuildWars2.Extensible<GuildWars2.Hero.ProfessionName>
 GuildWars2.Hero.Builds.Specialization.Profession.init -> void
-GuildWars2.Hero.Builds.Specialization.ProfessionBigIconHref.get -> string!
-GuildWars2.Hero.Builds.Specialization.ProfessionBigIconHref.init -> void
 GuildWars2.Hero.Builds.Specialization.ProfessionBigIconUrl.get -> System.Uri?
 GuildWars2.Hero.Builds.Specialization.ProfessionBigIconUrl.init -> void
-GuildWars2.Hero.Builds.Specialization.ProfessionIconHref.get -> string!
-GuildWars2.Hero.Builds.Specialization.ProfessionIconHref.init -> void
 GuildWars2.Hero.Builds.Specialization.ProfessionIconUrl.get -> System.Uri?
 GuildWars2.Hero.Builds.Specialization.ProfessionIconUrl.init -> void
 GuildWars2.Hero.Builds.Specialization.Specialization() -> void
@@ -2189,8 +2155,6 @@ GuildWars2.Hero.Builds.Trait.Description.init -> void
 GuildWars2.Hero.Builds.Trait.Equals(GuildWars2.Hero.Builds.Trait? other) -> bool
 GuildWars2.Hero.Builds.Trait.Facts.get -> System.Collections.Generic.IReadOnlyList<GuildWars2.Hero.Builds.Fact!>?
 GuildWars2.Hero.Builds.Trait.Facts.init -> void
-GuildWars2.Hero.Builds.Trait.IconHref.get -> string!
-GuildWars2.Hero.Builds.Trait.IconHref.init -> void
 GuildWars2.Hero.Builds.Trait.IconUrl.get -> System.Uri!
 GuildWars2.Hero.Builds.Trait.IconUrl.init -> void
 GuildWars2.Hero.Builds.Trait.Id.get -> int
@@ -2635,8 +2599,6 @@ GuildWars2.Hero.Equipment.Finishers.Finisher
 GuildWars2.Hero.Equipment.Finishers.Finisher.<Clone>$() -> GuildWars2.Hero.Equipment.Finishers.Finisher!
 GuildWars2.Hero.Equipment.Finishers.Finisher.Equals(GuildWars2.Hero.Equipment.Finishers.Finisher? other) -> bool
 GuildWars2.Hero.Equipment.Finishers.Finisher.Finisher() -> void
-GuildWars2.Hero.Equipment.Finishers.Finisher.IconHref.get -> string!
-GuildWars2.Hero.Equipment.Finishers.Finisher.IconHref.init -> void
 GuildWars2.Hero.Equipment.Finishers.Finisher.IconUrl.get -> System.Uri!
 GuildWars2.Hero.Equipment.Finishers.Finisher.IconUrl.init -> void
 GuildWars2.Hero.Equipment.Finishers.Finisher.Id.get -> int
@@ -2683,8 +2645,6 @@ GuildWars2.Hero.Equipment.Gliders.GliderSkin.Description.get -> string!
 GuildWars2.Hero.Equipment.Gliders.GliderSkin.Description.init -> void
 GuildWars2.Hero.Equipment.Gliders.GliderSkin.Equals(GuildWars2.Hero.Equipment.Gliders.GliderSkin? other) -> bool
 GuildWars2.Hero.Equipment.Gliders.GliderSkin.GliderSkin() -> void
-GuildWars2.Hero.Equipment.Gliders.GliderSkin.IconHref.get -> string!
-GuildWars2.Hero.Equipment.Gliders.GliderSkin.IconHref.init -> void
 GuildWars2.Hero.Equipment.Gliders.GliderSkin.IconUrl.get -> System.Uri!
 GuildWars2.Hero.Equipment.Gliders.GliderSkin.IconUrl.init -> void
 GuildWars2.Hero.Equipment.Gliders.GliderSkin.Id.get -> int
@@ -2721,8 +2681,6 @@ GuildWars2.Hero.Equipment.MailCarriers.MailCarrier.<Clone>$() -> GuildWars2.Hero
 GuildWars2.Hero.Equipment.MailCarriers.MailCarrier.Equals(GuildWars2.Hero.Equipment.MailCarriers.MailCarrier? other) -> bool
 GuildWars2.Hero.Equipment.MailCarriers.MailCarrier.Flags.get -> GuildWars2.Hero.Equipment.MailCarriers.MailCarrierFlags!
 GuildWars2.Hero.Equipment.MailCarriers.MailCarrier.Flags.init -> void
-GuildWars2.Hero.Equipment.MailCarriers.MailCarrier.IconHref.get -> string!
-GuildWars2.Hero.Equipment.MailCarriers.MailCarrier.IconHref.init -> void
 GuildWars2.Hero.Equipment.MailCarriers.MailCarrier.IconUrl.get -> System.Uri!
 GuildWars2.Hero.Equipment.MailCarriers.MailCarrier.IconUrl.init -> void
 GuildWars2.Hero.Equipment.MailCarriers.MailCarrier.Id.get -> int
@@ -2755,8 +2713,6 @@ GuildWars2.Hero.Equipment.Material.Metal = 3 -> GuildWars2.Hero.Equipment.Materi
 GuildWars2.Hero.Equipment.Miniatures.Miniature
 GuildWars2.Hero.Equipment.Miniatures.Miniature.<Clone>$() -> GuildWars2.Hero.Equipment.Miniatures.Miniature!
 GuildWars2.Hero.Equipment.Miniatures.Miniature.Equals(GuildWars2.Hero.Equipment.Miniatures.Miniature? other) -> bool
-GuildWars2.Hero.Equipment.Miniatures.Miniature.IconHref.get -> string!
-GuildWars2.Hero.Equipment.Miniatures.Miniature.IconHref.init -> void
 GuildWars2.Hero.Equipment.Miniatures.Miniature.IconUrl.get -> System.Uri!
 GuildWars2.Hero.Equipment.Miniatures.Miniature.IconUrl.init -> void
 GuildWars2.Hero.Equipment.Miniatures.Miniature.Id.get -> int
@@ -2824,8 +2780,6 @@ GuildWars2.Hero.Equipment.Mounts.MountSkin.<Clone>$() -> GuildWars2.Hero.Equipme
 GuildWars2.Hero.Equipment.Mounts.MountSkin.DyeSlots.get -> System.Collections.Generic.IReadOnlyList<GuildWars2.Hero.Equipment.DyeSlot!>!
 GuildWars2.Hero.Equipment.Mounts.MountSkin.DyeSlots.init -> void
 GuildWars2.Hero.Equipment.Mounts.MountSkin.Equals(GuildWars2.Hero.Equipment.Mounts.MountSkin? other) -> bool
-GuildWars2.Hero.Equipment.Mounts.MountSkin.IconHref.get -> string!
-GuildWars2.Hero.Equipment.Mounts.MountSkin.IconHref.init -> void
 GuildWars2.Hero.Equipment.Mounts.MountSkin.IconUrl.get -> System.Uri!
 GuildWars2.Hero.Equipment.Mounts.MountSkin.IconUrl.init -> void
 GuildWars2.Hero.Equipment.Mounts.MountSkin.Id.get -> int
@@ -2856,8 +2810,6 @@ GuildWars2.Hero.Equipment.Novelties.Novelty.<Clone>$() -> GuildWars2.Hero.Equipm
 GuildWars2.Hero.Equipment.Novelties.Novelty.Description.get -> string!
 GuildWars2.Hero.Equipment.Novelties.Novelty.Description.init -> void
 GuildWars2.Hero.Equipment.Novelties.Novelty.Equals(GuildWars2.Hero.Equipment.Novelties.Novelty? other) -> bool
-GuildWars2.Hero.Equipment.Novelties.Novelty.IconHref.get -> string!
-GuildWars2.Hero.Equipment.Novelties.Novelty.IconHref.init -> void
 GuildWars2.Hero.Equipment.Novelties.Novelty.IconUrl.get -> System.Uri!
 GuildWars2.Hero.Equipment.Novelties.Novelty.IconUrl.init -> void
 GuildWars2.Hero.Equipment.Novelties.Novelty.Id.get -> int
@@ -2879,8 +2831,6 @@ GuildWars2.Hero.Equipment.Outfits.Outfit
 GuildWars2.Hero.Equipment.Outfits.Outfit.<Clone>$() -> GuildWars2.Hero.Equipment.Outfits.Outfit!
 GuildWars2.Hero.Equipment.Outfits.Outfit.Equals(GuildWars2.Hero.Equipment.Outfits.Outfit? other) -> bool
 GuildWars2.Hero.Equipment.Outfits.Outfit.GetChatLink() -> GuildWars2.Chat.OutfitLink!
-GuildWars2.Hero.Equipment.Outfits.Outfit.IconHref.get -> string!
-GuildWars2.Hero.Equipment.Outfits.Outfit.IconHref.init -> void
 GuildWars2.Hero.Equipment.Outfits.Outfit.IconUrl.get -> System.Uri!
 GuildWars2.Hero.Equipment.Outfits.Outfit.IconUrl.init -> void
 GuildWars2.Hero.Equipment.Outfits.Outfit.Id.get -> int
@@ -2919,8 +2869,6 @@ GuildWars2.Hero.Equipment.Skiffs.SkiffSkin.<Clone>$() -> GuildWars2.Hero.Equipme
 GuildWars2.Hero.Equipment.Skiffs.SkiffSkin.DyeSlots.get -> System.Collections.Generic.IReadOnlyList<GuildWars2.Hero.Equipment.DyeSlot!>!
 GuildWars2.Hero.Equipment.Skiffs.SkiffSkin.DyeSlots.init -> void
 GuildWars2.Hero.Equipment.Skiffs.SkiffSkin.Equals(GuildWars2.Hero.Equipment.Skiffs.SkiffSkin? other) -> bool
-GuildWars2.Hero.Equipment.Skiffs.SkiffSkin.IconHref.get -> string!
-GuildWars2.Hero.Equipment.Skiffs.SkiffSkin.IconHref.init -> void
 GuildWars2.Hero.Equipment.Skiffs.SkiffSkin.IconUrl.get -> System.Uri!
 GuildWars2.Hero.Equipment.Skiffs.SkiffSkin.IconUrl.init -> void
 GuildWars2.Hero.Equipment.Skiffs.SkiffSkin.Id.get -> int
@@ -3107,8 +3055,6 @@ GuildWars2.Hero.Equipment.Wardrobe.EquipmentSkin.EquipmentSkin(GuildWars2.Hero.E
 GuildWars2.Hero.Equipment.Wardrobe.EquipmentSkin.Flags.get -> GuildWars2.Hero.Equipment.Wardrobe.SkinFlags!
 GuildWars2.Hero.Equipment.Wardrobe.EquipmentSkin.Flags.init -> void
 GuildWars2.Hero.Equipment.Wardrobe.EquipmentSkin.GetChatLink() -> GuildWars2.Chat.SkinLink!
-GuildWars2.Hero.Equipment.Wardrobe.EquipmentSkin.IconHref.get -> string?
-GuildWars2.Hero.Equipment.Wardrobe.EquipmentSkin.IconHref.init -> void
 GuildWars2.Hero.Equipment.Wardrobe.EquipmentSkin.IconUrl.get -> System.Uri?
 GuildWars2.Hero.Equipment.Wardrobe.EquipmentSkin.IconUrl.init -> void
 GuildWars2.Hero.Equipment.Wardrobe.EquipmentSkin.Id.get -> int
@@ -3324,8 +3270,6 @@ GuildWars2.Hero.Masteries.Mastery.Description.init -> void
 GuildWars2.Hero.Masteries.Mastery.Equals(GuildWars2.Hero.Masteries.Mastery? other) -> bool
 GuildWars2.Hero.Masteries.Mastery.ExperienceCost.get -> int
 GuildWars2.Hero.Masteries.Mastery.ExperienceCost.init -> void
-GuildWars2.Hero.Masteries.Mastery.IconHref.get -> string!
-GuildWars2.Hero.Masteries.Mastery.IconHref.init -> void
 GuildWars2.Hero.Masteries.Mastery.IconUrl.get -> System.Uri!
 GuildWars2.Hero.Masteries.Mastery.IconUrl.init -> void
 GuildWars2.Hero.Masteries.Mastery.Instruction.get -> string!
@@ -3364,8 +3308,6 @@ GuildWars2.Hero.Masteries.MasteryRegionName.Tyria = 1 -> GuildWars2.Hero.Masteri
 GuildWars2.Hero.Masteries.MasteryRegionName.Unknown = 0 -> GuildWars2.Hero.Masteries.MasteryRegionName
 GuildWars2.Hero.Masteries.MasteryTrack
 GuildWars2.Hero.Masteries.MasteryTrack.<Clone>$() -> GuildWars2.Hero.Masteries.MasteryTrack!
-GuildWars2.Hero.Masteries.MasteryTrack.BackgroundHref.get -> string!
-GuildWars2.Hero.Masteries.MasteryTrack.BackgroundHref.init -> void
 GuildWars2.Hero.Masteries.MasteryTrack.Equals(GuildWars2.Hero.Masteries.MasteryTrack? other) -> bool
 GuildWars2.Hero.Masteries.MasteryTrack.Id.get -> int
 GuildWars2.Hero.Masteries.MasteryTrack.Id.init -> void
@@ -3585,8 +3527,6 @@ GuildWars2.Hero.Training.Objectives.TraitObjective.TraitId.init -> void
 GuildWars2.Hero.Training.Objectives.TraitObjective.TraitObjective() -> void
 GuildWars2.Hero.Training.Profession
 GuildWars2.Hero.Training.Profession.<Clone>$() -> GuildWars2.Hero.Training.Profession!
-GuildWars2.Hero.Training.Profession.BigIconHref.get -> string!
-GuildWars2.Hero.Training.Profession.BigIconHref.init -> void
 GuildWars2.Hero.Training.Profession.BigIconUrl.get -> System.Uri!
 GuildWars2.Hero.Training.Profession.BigIconUrl.init -> void
 GuildWars2.Hero.Training.Profession.Code.get -> int
@@ -3594,8 +3534,6 @@ GuildWars2.Hero.Training.Profession.Code.init -> void
 GuildWars2.Hero.Training.Profession.Equals(GuildWars2.Hero.Training.Profession? other) -> bool
 GuildWars2.Hero.Training.Profession.Flags.get -> GuildWars2.Hero.Training.ProfessionFlags!
 GuildWars2.Hero.Training.Profession.Flags.init -> void
-GuildWars2.Hero.Training.Profession.IconHref.get -> string!
-GuildWars2.Hero.Training.Profession.IconHref.init -> void
 GuildWars2.Hero.Training.Profession.IconUrl.get -> System.Uri!
 GuildWars2.Hero.Training.Profession.IconUrl.init -> void
 GuildWars2.Hero.Training.Profession.Id.get -> GuildWars2.Extensible<GuildWars2.Hero.ProfessionName>
@@ -3722,8 +3660,6 @@ GuildWars2.Hero.Wallet.Currency.Currency() -> void
 GuildWars2.Hero.Wallet.Currency.Description.get -> string!
 GuildWars2.Hero.Wallet.Currency.Description.init -> void
 GuildWars2.Hero.Wallet.Currency.Equals(GuildWars2.Hero.Wallet.Currency? other) -> bool
-GuildWars2.Hero.Wallet.Currency.IconHref.get -> string!
-GuildWars2.Hero.Wallet.Currency.IconHref.init -> void
 GuildWars2.Hero.Wallet.Currency.IconUrl.get -> System.Uri!
 GuildWars2.Hero.Wallet.Currency.IconUrl.init -> void
 GuildWars2.Hero.Wallet.Currency.Id.get -> int
@@ -3770,20 +3706,15 @@ GuildWars2.Http.WebLinks.LinkHeader.Links.get -> System.Collections.Generic.IRea
 GuildWars2.Http.WebLinks.LinkValue
 GuildWars2.Http.WebLinks.LinkValue.LinkValue(string! target, string! relationType) -> void
 GuildWars2.Http.WebLinks.LinkValue.RelationType.get -> string!
-GuildWars2.Http.WebLinks.LinkValue.Target.get -> string!
 GuildWars2.Http.WebLinks.LinkValue.TargetUrl.get -> System.Uri!
 GuildWars2.Hyperlink
-GuildWars2.Hyperlink.Deconstruct(out string! url) -> void
 GuildWars2.Hyperlink.Deconstruct(out System.Uri? uri) -> void
 GuildWars2.Hyperlink.Equals(GuildWars2.Hyperlink other) -> bool
 GuildWars2.Hyperlink.Hyperlink() -> void
-GuildWars2.Hyperlink.Hyperlink(string! url) -> void
 GuildWars2.Hyperlink.Hyperlink(System.Uri? uri) -> void
 GuildWars2.Hyperlink.IsEmpty.get -> bool
 GuildWars2.Hyperlink.Uri.get -> System.Uri?
 GuildWars2.Hyperlink.Uri.init -> void
-GuildWars2.Hyperlink.Url.get -> string!
-GuildWars2.Hyperlink.Url.init -> void
 GuildWars2.Items.Accessory
 GuildWars2.Items.Accessory.Accessory() -> void
 GuildWars2.Items.Accessory.Equals(GuildWars2.Items.Accessory? other) -> bool
@@ -3935,8 +3866,6 @@ GuildWars2.Items.Effect.Duration.get -> System.TimeSpan
 GuildWars2.Items.Effect.Duration.init -> void
 GuildWars2.Items.Effect.Effect() -> void
 GuildWars2.Items.Effect.Equals(GuildWars2.Items.Effect? other) -> bool
-GuildWars2.Items.Effect.IconHref.get -> string!
-GuildWars2.Items.Effect.IconHref.init -> void
 GuildWars2.Items.Effect.IconUrl.get -> System.Uri?
 GuildWars2.Items.Effect.IconUrl.init -> void
 GuildWars2.Items.Effect.Name.get -> string!
@@ -4067,8 +3996,6 @@ GuildWars2.Items.Item.Flags.init -> void
 GuildWars2.Items.Item.GameTypes.get -> System.Collections.Generic.IReadOnlyCollection<GuildWars2.Extensible<GuildWars2.Items.GameType>>!
 GuildWars2.Items.Item.GameTypes.init -> void
 GuildWars2.Items.Item.GetChatLink() -> GuildWars2.Chat.ItemLink!
-GuildWars2.Items.Item.IconHref.get -> string?
-GuildWars2.Items.Item.IconHref.init -> void
 GuildWars2.Items.Item.IconUrl.get -> System.Uri?
 GuildWars2.Items.Item.IconUrl.init -> void
 GuildWars2.Items.Item.Id.get -> int
@@ -4718,8 +4645,6 @@ GuildWars2.Pve.Home.Decorations.Decoration.Decoration() -> void
 GuildWars2.Pve.Home.Decorations.Decoration.Description.get -> string!
 GuildWars2.Pve.Home.Decorations.Decoration.Description.init -> void
 GuildWars2.Pve.Home.Decorations.Decoration.Equals(GuildWars2.Pve.Home.Decorations.Decoration? other) -> bool
-GuildWars2.Pve.Home.Decorations.Decoration.IconHref.get -> string!
-GuildWars2.Pve.Home.Decorations.Decoration.IconHref.init -> void
 GuildWars2.Pve.Home.Decorations.Decoration.IconUrl.get -> System.Uri!
 GuildWars2.Pve.Home.Decorations.Decoration.IconUrl.init -> void
 GuildWars2.Pve.Home.Decorations.Decoration.Id.get -> int
@@ -4811,8 +4736,6 @@ GuildWars2.Pve.Pets.Pet.<Clone>$() -> GuildWars2.Pve.Pets.Pet!
 GuildWars2.Pve.Pets.Pet.Description.get -> string!
 GuildWars2.Pve.Pets.Pet.Description.init -> void
 GuildWars2.Pve.Pets.Pet.Equals(GuildWars2.Pve.Pets.Pet? other) -> bool
-GuildWars2.Pve.Pets.Pet.IconHref.get -> string!
-GuildWars2.Pve.Pets.Pet.IconHref.init -> void
 GuildWars2.Pve.Pets.Pet.IconUrl.get -> System.Uri!
 GuildWars2.Pve.Pets.Pet.IconUrl.init -> void
 GuildWars2.Pve.Pets.Pet.Id.get -> int
@@ -4934,8 +4857,6 @@ GuildWars2.Pvp.Amulets.Amulet.Amulet() -> void
 GuildWars2.Pvp.Amulets.Amulet.Attributes.get -> System.Collections.Generic.IDictionary<GuildWars2.Hero.AttributeName, int>!
 GuildWars2.Pvp.Amulets.Amulet.Attributes.init -> void
 GuildWars2.Pvp.Amulets.Amulet.Equals(GuildWars2.Pvp.Amulets.Amulet? other) -> bool
-GuildWars2.Pvp.Amulets.Amulet.IconHref.get -> string!
-GuildWars2.Pvp.Amulets.Amulet.IconHref.init -> void
 GuildWars2.Pvp.Amulets.Amulet.IconUrl.get -> System.Uri!
 GuildWars2.Pvp.Amulets.Amulet.IconUrl.init -> void
 GuildWars2.Pvp.Amulets.Amulet.Id.get -> int
@@ -5003,8 +4924,6 @@ GuildWars2.Pvp.MistChampions.MistChampion.Id.init -> void
 GuildWars2.Pvp.MistChampions.MistChampion.MistChampion() -> void
 GuildWars2.Pvp.MistChampions.MistChampion.Name.get -> string!
 GuildWars2.Pvp.MistChampions.MistChampion.Name.init -> void
-GuildWars2.Pvp.MistChampions.MistChampion.OverlayImageHref.get -> string!
-GuildWars2.Pvp.MistChampions.MistChampion.OverlayImageHref.init -> void
 GuildWars2.Pvp.MistChampions.MistChampion.OverlayImageUrl.get -> System.Uri!
 GuildWars2.Pvp.MistChampions.MistChampion.OverlayImageUrl.init -> void
 GuildWars2.Pvp.MistChampions.MistChampion.Skins.get -> System.Collections.Generic.IReadOnlyCollection<GuildWars2.Pvp.MistChampions.MistChampionSkin!>!
@@ -5013,8 +4932,6 @@ GuildWars2.Pvp.MistChampions.MistChampion.Stats.get -> GuildWars2.Pvp.MistChampi
 GuildWars2.Pvp.MistChampions.MistChampion.Stats.init -> void
 GuildWars2.Pvp.MistChampions.MistChampion.Type.get -> string!
 GuildWars2.Pvp.MistChampions.MistChampion.Type.init -> void
-GuildWars2.Pvp.MistChampions.MistChampion.UnderlayImageHref.get -> string!
-GuildWars2.Pvp.MistChampions.MistChampion.UnderlayImageHref.init -> void
 GuildWars2.Pvp.MistChampions.MistChampion.UnderlayImageUrl.get -> System.Uri!
 GuildWars2.Pvp.MistChampions.MistChampion.UnderlayImageUrl.init -> void
 GuildWars2.Pvp.MistChampions.MistChampionSkin
@@ -5022,8 +4939,6 @@ GuildWars2.Pvp.MistChampions.MistChampionSkin.<Clone>$() -> GuildWars2.Pvp.MistC
 GuildWars2.Pvp.MistChampions.MistChampionSkin.Default.get -> bool
 GuildWars2.Pvp.MistChampions.MistChampionSkin.Default.init -> void
 GuildWars2.Pvp.MistChampions.MistChampionSkin.Equals(GuildWars2.Pvp.MistChampions.MistChampionSkin? other) -> bool
-GuildWars2.Pvp.MistChampions.MistChampionSkin.IconHref.get -> string!
-GuildWars2.Pvp.MistChampions.MistChampionSkin.IconHref.init -> void
 GuildWars2.Pvp.MistChampions.MistChampionSkin.IconUrl.get -> System.Uri!
 GuildWars2.Pvp.MistChampions.MistChampionSkin.IconUrl.init -> void
 GuildWars2.Pvp.MistChampions.MistChampionSkin.Id.get -> int
@@ -5091,8 +5006,6 @@ GuildWars2.Pvp.Ranks.Rank.<Clone>$() -> GuildWars2.Pvp.Ranks.Rank!
 GuildWars2.Pvp.Ranks.Rank.Equals(GuildWars2.Pvp.Ranks.Rank? other) -> bool
 GuildWars2.Pvp.Ranks.Rank.FinisherId.get -> int
 GuildWars2.Pvp.Ranks.Rank.FinisherId.init -> void
-GuildWars2.Pvp.Ranks.Rank.IconHref.get -> string!
-GuildWars2.Pvp.Ranks.Rank.IconHref.init -> void
 GuildWars2.Pvp.Ranks.Rank.IconUrl.get -> System.Uri!
 GuildWars2.Pvp.Ranks.Rank.IconUrl.init -> void
 GuildWars2.Pvp.Ranks.Rank.Id.get -> int
@@ -5112,18 +5025,12 @@ GuildWars2.Pvp.Seasons.Division.Division() -> void
 GuildWars2.Pvp.Seasons.Division.Equals(GuildWars2.Pvp.Seasons.Division? other) -> bool
 GuildWars2.Pvp.Seasons.Division.Flags.get -> GuildWars2.Pvp.Seasons.DivisionFlags!
 GuildWars2.Pvp.Seasons.Division.Flags.init -> void
-GuildWars2.Pvp.Seasons.Division.LargeIconHref.get -> string!
-GuildWars2.Pvp.Seasons.Division.LargeIconHref.init -> void
 GuildWars2.Pvp.Seasons.Division.LargeIconUrl.get -> System.Uri!
 GuildWars2.Pvp.Seasons.Division.LargeIconUrl.init -> void
 GuildWars2.Pvp.Seasons.Division.Name.get -> string!
 GuildWars2.Pvp.Seasons.Division.Name.init -> void
-GuildWars2.Pvp.Seasons.Division.PipIconHref.get -> string!
-GuildWars2.Pvp.Seasons.Division.PipIconHref.init -> void
 GuildWars2.Pvp.Seasons.Division.PipIconUrl.get -> System.Uri!
 GuildWars2.Pvp.Seasons.Division.PipIconUrl.init -> void
-GuildWars2.Pvp.Seasons.Division.SmallIconHref.get -> string!
-GuildWars2.Pvp.Seasons.Division.SmallIconHref.init -> void
 GuildWars2.Pvp.Seasons.Division.SmallIconUrl.get -> System.Uri!
 GuildWars2.Pvp.Seasons.Division.SmallIconUrl.init -> void
 GuildWars2.Pvp.Seasons.Division.Tiers.get -> System.Collections.Generic.IReadOnlyList<GuildWars2.Pvp.Seasons.DivisionTier!>!
@@ -5258,19 +5165,13 @@ GuildWars2.Pvp.Seasons.SkillBadge.<Clone>$() -> GuildWars2.Pvp.Seasons.SkillBadg
 GuildWars2.Pvp.Seasons.SkillBadge.Description.get -> string!
 GuildWars2.Pvp.Seasons.SkillBadge.Description.init -> void
 GuildWars2.Pvp.Seasons.SkillBadge.Equals(GuildWars2.Pvp.Seasons.SkillBadge? other) -> bool
-GuildWars2.Pvp.Seasons.SkillBadge.IconHref.get -> string!
-GuildWars2.Pvp.Seasons.SkillBadge.IconHref.init -> void
 GuildWars2.Pvp.Seasons.SkillBadge.IconUrl.get -> System.Uri!
 GuildWars2.Pvp.Seasons.SkillBadge.IconUrl.init -> void
 GuildWars2.Pvp.Seasons.SkillBadge.Name.get -> string!
 GuildWars2.Pvp.Seasons.SkillBadge.Name.init -> void
-GuildWars2.Pvp.Seasons.SkillBadge.Overlay.get -> string!
-GuildWars2.Pvp.Seasons.SkillBadge.Overlay.init -> void
 GuildWars2.Pvp.Seasons.SkillBadge.OverlayUrl.get -> System.Uri!
 GuildWars2.Pvp.Seasons.SkillBadge.OverlayUrl.init -> void
 GuildWars2.Pvp.Seasons.SkillBadge.SkillBadge() -> void
-GuildWars2.Pvp.Seasons.SkillBadge.SmallOverlay.get -> string!
-GuildWars2.Pvp.Seasons.SkillBadge.SmallOverlay.init -> void
 GuildWars2.Pvp.Seasons.SkillBadge.SmallOverlayUrl.get -> System.Uri!
 GuildWars2.Pvp.Seasons.SkillBadge.SmallOverlayUrl.init -> void
 GuildWars2.Pvp.Seasons.SkillBadge.Tiers.get -> System.Collections.Generic.IReadOnlyList<GuildWars2.Pvp.Seasons.SkillBadgeTier!>!
@@ -5379,8 +5280,6 @@ GuildWars2.Quaggans.Quaggan.<Clone>$() -> GuildWars2.Quaggans.Quaggan!
 GuildWars2.Quaggans.Quaggan.Equals(GuildWars2.Quaggans.Quaggan? other) -> bool
 GuildWars2.Quaggans.Quaggan.Id.get -> string!
 GuildWars2.Quaggans.Quaggan.Id.init -> void
-GuildWars2.Quaggans.Quaggan.ImageHref.get -> string!
-GuildWars2.Quaggans.Quaggan.ImageHref.init -> void
 GuildWars2.Quaggans.Quaggan.ImageUrl.get -> System.Uri!
 GuildWars2.Quaggans.Quaggan.ImageUrl.init -> void
 GuildWars2.Quaggans.Quaggan.Quaggan() -> void
@@ -5571,8 +5470,6 @@ GuildWars2.Wvw.Abilities.Ability.Ability() -> void
 GuildWars2.Wvw.Abilities.Ability.Description.get -> string!
 GuildWars2.Wvw.Abilities.Ability.Description.init -> void
 GuildWars2.Wvw.Abilities.Ability.Equals(GuildWars2.Wvw.Abilities.Ability? other) -> bool
-GuildWars2.Wvw.Abilities.Ability.IconHref.get -> string!
-GuildWars2.Wvw.Abilities.Ability.IconHref.init -> void
 GuildWars2.Wvw.Abilities.Ability.IconUrl.get -> System.Uri!
 GuildWars2.Wvw.Abilities.Ability.IconUrl.init -> void
 GuildWars2.Wvw.Abilities.Ability.Id.get -> int
@@ -5861,8 +5758,6 @@ GuildWars2.Wvw.Objectives.Objective.MapId.get -> int
 GuildWars2.Wvw.Objectives.Objective.MapId.init -> void
 GuildWars2.Wvw.Objectives.Objective.MapKind.get -> GuildWars2.Extensible<GuildWars2.Exploration.Maps.MapKind>
 GuildWars2.Wvw.Objectives.Objective.MapKind.init -> void
-GuildWars2.Wvw.Objectives.Objective.MarkerIconHref.get -> string!
-GuildWars2.Wvw.Objectives.Objective.MarkerIconHref.init -> void
 GuildWars2.Wvw.Objectives.Objective.MarkerIconUrl.get -> System.Uri?
 GuildWars2.Wvw.Objectives.Objective.MarkerIconUrl.init -> void
 GuildWars2.Wvw.Objectives.Objective.Name.get -> string!
@@ -5921,8 +5816,6 @@ GuildWars2.Wvw.Upgrades.Upgrade.<Clone>$() -> GuildWars2.Wvw.Upgrades.Upgrade!
 GuildWars2.Wvw.Upgrades.Upgrade.Description.get -> string!
 GuildWars2.Wvw.Upgrades.Upgrade.Description.init -> void
 GuildWars2.Wvw.Upgrades.Upgrade.Equals(GuildWars2.Wvw.Upgrades.Upgrade? other) -> bool
-GuildWars2.Wvw.Upgrades.Upgrade.IconHref.get -> string!
-GuildWars2.Wvw.Upgrades.Upgrade.IconHref.init -> void
 GuildWars2.Wvw.Upgrades.Upgrade.IconUrl.get -> System.Uri!
 GuildWars2.Wvw.Upgrades.Upgrade.IconUrl.init -> void
 GuildWars2.Wvw.Upgrades.Upgrade.Name.get -> string!

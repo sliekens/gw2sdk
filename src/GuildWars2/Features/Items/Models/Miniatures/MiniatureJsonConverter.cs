@@ -51,9 +51,6 @@ internal sealed class MiniatureJsonConverter : JsonConverter<Miniature>
             Flags = ItemFlagsJsonConverter.Read(json.GetProperty("flags")),
             Restrictions = ItemRestrictionJsonConverter.Read(json.GetProperty("restrictions")),
             ChatLink = json.GetProperty("chat_link").GetStringRequired(),
-#pragma warning disable CS0618 // Suppress obsolete warning
-            IconHref = iconString,
-#pragma warning restore CS0618
             IconUrl = !string.IsNullOrEmpty(iconString) ? new Uri(iconString) : null,
             MiniatureId = json.GetProperty("miniature_id").GetInt32()
         };

@@ -8,9 +8,5 @@ public sealed record EmblemForeground
     public required int Id { get; init; }
 
     /// <summary>The image URLs of the foreground layers.</summary>
-    [Obsolete("Use LayerUrls instead.")]
-    public required IReadOnlyList<string> Layers { get; init; }
-
-    /// <summary>The image URLs of the foreground layers.</summary>
     public required IReadOnlyList<Uri> LayerUrls { get; init; }
 }

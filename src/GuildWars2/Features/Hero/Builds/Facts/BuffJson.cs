@@ -69,9 +69,6 @@ internal static class BuffJson
         return new Buff
         {
             Text = text.Map(static (in value) => value.GetStringRequired()),
-#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
-            IconHref = iconString,
-#pragma warning restore CS0618
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
             Duration = duration.Map(static (in value) => TimeSpan.FromSeconds(value.GetDouble())),
             Status = status.Map(static (in value) => value.GetString()) ?? "",

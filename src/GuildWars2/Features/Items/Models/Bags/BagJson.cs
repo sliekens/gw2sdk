@@ -114,9 +114,6 @@ internal static class BagJson
             Flags = flags.Map(static (in values) => values.GetItemFlags()),
             Restrictions = restrictions.Map(static (in value) => value.GetItemRestriction()),
             ChatLink = chatLink.Map(static (in value) => value.GetStringRequired()),
-#pragma warning disable CS0618 // Suppress obsolete warning
-            IconHref = iconString,
-#pragma warning restore CS0618
             IconUrl = !string.IsNullOrEmpty(iconString) ? new Uri(iconString) : null,
             NoSellOrSort = noSellOrSort.Map(static (in value) => value.GetBoolean()),
             Size = size.Map(static (in value) => value.GetInt32())

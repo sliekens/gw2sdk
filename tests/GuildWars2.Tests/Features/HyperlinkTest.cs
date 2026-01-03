@@ -5,7 +5,7 @@ public class HyperlinkTest
     [Test]
     public async Task Null_hyperlink_is_empty()
     {
-        Hyperlink sut = new((Uri?)null);
+        Hyperlink sut = new(null);
         await Assert.That(sut.IsEmpty).IsTrue().Because("sut.IsEmpty");
     }
 

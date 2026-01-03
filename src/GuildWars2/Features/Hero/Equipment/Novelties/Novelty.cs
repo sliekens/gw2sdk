@@ -17,10 +17,6 @@ public sealed record Novelty
     public required string Description { get; init; }
 
     /// <summary>The URL of the novelty icon.</summary>
-    [Obsolete("Use IconUrl instead.")]
-    public required string IconHref { get; init; }
-
-    /// <summary>The URL of the novelty icon.</summary>
     public required Uri IconUrl { get; init; }
 
     /// <summary>The slot occupied by the novelty.</summary>

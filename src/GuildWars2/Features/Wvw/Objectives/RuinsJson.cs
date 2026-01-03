@@ -80,9 +80,6 @@ internal static class RuinsJson
             UpgradeId = null,
             Coordinates = coordinates.Map(static (in value) => value.GetCoordinate3()),
             LabelCoordinates = labelCoordinates.Map(static (in value) => value.GetCoordinateF()),
-#pragma warning disable CS0618 // Suppress obsolete warning
-            MarkerIconHref = marker.Map(static (in value) => value.GetString()) ?? "",
-#pragma warning restore CS0618
             MarkerIconUrl = marker.Map(static (in value) => value.GetString() is { } url ? new Uri(url) : null),
             ChatLink = chatLink.Map(static (in value) => value.GetStringRequired())
         };

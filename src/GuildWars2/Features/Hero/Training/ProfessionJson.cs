@@ -79,10 +79,6 @@ internal static class ProfessionJson
             Id = id.Map(static (in value) => value.GetEnum<ProfessionName>()),
             Name = name.Map(static (in value) => value.GetStringRequired()),
             Code = code.Map(static (in value) => value.GetInt32()),
-#pragma warning disable CS0618 // Suppress obsolete warning for IconHref/BigIconHref assignment
-            IconHref = iconString,
-            BigIconHref = iconBigString,
-#pragma warning restore CS0618
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
             BigIconUrl = new Uri(iconBigString, UriKind.RelativeOrAbsolute),
             SpecializationIds =

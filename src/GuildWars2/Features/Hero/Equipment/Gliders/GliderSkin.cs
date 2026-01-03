@@ -17,10 +17,6 @@ public sealed record GliderSkin
     public required int Order { get; init; }
 
     /// <summary>The URL of the glider skin icon.</summary>
-    [Obsolete("Use IconUrl instead.")]
-    public required string IconHref { get; init; }
-
-    /// <summary>The URL of the glider skin icon.</summary>
     public required Uri IconUrl { get; init; }
 
     /// <summary>The name of the glider skin.</summary>

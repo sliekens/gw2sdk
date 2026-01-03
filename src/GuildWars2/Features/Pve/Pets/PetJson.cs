@@ -48,9 +48,6 @@ internal static class PetJson
             Id = id.Map(static (in value) => value.GetInt32()),
             Name = name.Map(static (in value) => value.GetStringRequired()),
             Description = description.Map(static (in value) => value.GetStringRequired()),
-#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
-            IconHref = iconString,
-#pragma warning restore CS0618
             IconUrl = new Uri(iconString),
             Skills = skills.Map(static (in values) => values.GetList(static (in value) => value.GetPetSkill()))
         };

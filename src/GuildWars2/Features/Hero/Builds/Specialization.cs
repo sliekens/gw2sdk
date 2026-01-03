@@ -27,28 +27,16 @@ public sealed record Specialization
     public required int? WeaponTraitId { get; init; }
 
     /// <summary>The URL of the specialization icon.</summary>
-    [Obsolete("Use IconUrl instead.")]
-    public required string IconHref { get; init; }
-    /// <summary>The URL of the specialization icon.</summary>
     public required Uri IconUrl { get; init; }
 
-    /// <summary>The URL of the background image for this specialization.</summary>
-    [Obsolete("Use BackgroundUrl instead.")]
-    public required string BackgroundHref { get; init; }
     /// <summary>The URL of the background image for this specialization.</summary>
     public required Uri BackgroundUrl { get; init; }
 
     /// <summary>The URL of the large profession icon.</summary>
     /// <remarks>Only <see cref="Elite" /> specializations have profession icons.</remarks>
-    [Obsolete("Use ProfessionBigIconUrl instead.")]
-    public required string ProfessionBigIconHref { get; init; }
-    /// <summary>The URL of the large profession icon.</summary>
     public required Uri? ProfessionBigIconUrl { get; init; }
 
     /// <summary>The URL of the small profession icon.</summary>
     /// <remarks>Only <see cref="Elite" /> specializations have profession icons.</remarks>
-    [Obsolete("Use ProfessionIconUrl instead.")]
-    public required string ProfessionIconHref { get; init; }
-    /// <summary>The URL of the small profession icon.</summary>
     public required Uri? ProfessionIconUrl { get; init; }
 }

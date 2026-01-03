@@ -19,11 +19,6 @@ public record Achievement
     public required string Name { get; init; }
 
     /// <summary>The URL of the achievement icon as it appears in the achievement panel.</summary>
-    /// <remarks>Can be empty when the achievement has the same icon as its category.</remarks>
-    [Obsolete("Use IconUrl instead.")]
-    public required string IconHref { get; init; }
-
-    /// <summary>The URL of the achievement icon as it appears in the achievement panel.</summary>
     /// <remarks>Can be null when the achievement has the same icon as its category.</remarks>
     public required Uri? IconUrl { get; init; }
 

@@ -16,10 +16,6 @@ public sealed record Outfit
     public required string Name { get; init; }
 
     /// <summary>The URL of the outfit icon.</summary>
-    [Obsolete("Use IconUrl instead.")]
-    public required string IconHref { get; init; }
-
-    /// <summary>The URL of the outfit icon.</summary>
     public required Uri IconUrl { get; init; }
 
     /// <summary>The IDs of the items that unlock the outfit when consumed.</summary>

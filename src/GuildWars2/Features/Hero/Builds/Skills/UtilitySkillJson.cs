@@ -148,9 +148,6 @@ internal static class UtilitySkillJson
                     values.GetList(static (in value) => value.GetTraitedFact())
                 ),
             Description = description.Map(static (in value) => value.GetStringRequired()),
-#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
-            IconHref = iconString,
-#pragma warning restore CS0618
             IconUrl = string.IsNullOrEmpty(iconString) ? null : new Uri(iconString),
             WeaponType = weaponType.Map(static (in value) => value.GetWeaponType()),
             Professions =

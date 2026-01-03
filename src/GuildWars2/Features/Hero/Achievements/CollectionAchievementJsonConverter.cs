@@ -35,9 +35,6 @@ internal sealed class CollectionAchievementJsonConverter : JsonConverter<Collect
         {
             Id = json.GetProperty("id").GetInt32(),
             Name = json.GetProperty("name").GetStringRequired(),
-#pragma warning disable CS0618 // Suppress obsolete warning for IconHref assignment
-            IconHref = iconString,
-#pragma warning restore CS0618
             IconUrl = !string.IsNullOrEmpty(iconString) ? new Uri(iconString, UriKind.RelativeOrAbsolute) : null,
             Description = json.GetProperty("description").GetStringRequired(),
             Requirement = json.GetProperty("requirement").GetStringRequired(),

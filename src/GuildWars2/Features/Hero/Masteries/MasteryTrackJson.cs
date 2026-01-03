@@ -53,20 +53,17 @@ internal static class MasteryTrackJson
         }
 
         string backgroundString = background.Map(static (in value) => value.GetStringRequired());
-#pragma warning disable CS0618 // Type or member is obsolete
         return new MasteryTrack
         {
             Id = id.Map(static (in value) => value.GetInt32()),
             Name = name.Map(static (in value) => value.GetStringRequired()),
             Requirement = requirement.Map(static (in value) => value.GetStringRequired()),
             Order = order.Map(static (in value) => value.GetInt32()),
-            BackgroundHref = backgroundString,
             BackgroundUrl = new Uri(backgroundString),
             Region = region.Map(static (in value) => value.GetEnum<MasteryRegionName>()),
             Masteries = levels.Map(static (in values) =>
                 values.GetList(static (in value) => value.GetMastery())
             )
         };
-#pragma warning restore CS0618 // Type or member is obsolete
     }
 }
